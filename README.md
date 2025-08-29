@@ -112,5 +112,3 @@ content. The world of _Our Golden Age_
 is at the end of time and space. It faces
 other issues. Like the dark forest and
 the heat death of the gods.
-
-##### 166
