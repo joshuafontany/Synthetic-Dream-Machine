@@ -1,7 +1,6 @@
 # Synthetic-Dream-Machine
 An archive of SDM RPG material (see Ultraviolet Grasslands / Vastlands by Luka Rejec)
 
-
 <!-- Vastlands Guidebook Page 166 -->
 
 ## L. 3RD PARTY LICENSE
