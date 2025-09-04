@@ -4,7 +4,7 @@
 
 **Synthetic Dream Machine SDM**
 
-Roleplaying At The End Of Time
+## Roleplaying At The End Of Time
 
 _Luka Rejec_
 
@@ -34,7 +34,9 @@ _A concrete pigeon._
 
 <!-- Vastlands Guidebook, Page 004 -->
 
-# THE VASTLANDS GUIDEBOOK
+## THE VASTLANDS GUIDEBOOK
+
+f
 
 **Vastlands Guidebook (VLG)**
 
@@ -78,7 +80,7 @@ The Vastlands made possible by the heroes of the [Stratometaship at the Wizardth
 
 <!-- Vastlands Guidebook, Page 005 -->
 
-# Contents
+## Contents
 
 - **Introduction** ............................................. 6
 - **Character Creation** ....................................... 10
@@ -180,7 +182,7 @@ You can get _**Our Golden Age**_ and the _**Ultraviolet Grasslands**_ in deadwoo
 
 <!-- Vastlands Guidebook, Page 007 -->
 
-##### PLAYER REFEREE RUNNER
+## PLAYER REFEREE RUNNER
 
 This guidebook is for everyone at the table: the player who referees the game and the players who run the characters. Have fun and enjoy playing together.
 
@@ -211,7 +213,7 @@ To remind everyone that the referee is also a player, they can get a different t
 
 <!-- Vastlands Guidebook, Page 008 -->
 
-**Given World**
+## **Given World**
 
 A world begins when it emerges from the mists of time. So it is with the civilizations of the Rainbowlands, marking their counts from when the Long Ago ended and the Now began. Perhaps gods or daemons imagine they recall earlier beginnings, but that is not the cosmos mankind believes it knows.
 
@@ -245,7 +247,8 @@ Grasslands so near to the little humans, the happy rats in the carcass of the gr
 
 <!-- Vastlands Guidebook, Page 009 -->
 
-**Origins of a Setting** The roots of the Given World are in the Rainbow Lands that grew collaboratively from the games I ran for the Golden Goats of Lausanne in the early to mid 2010s (thank you, good players, for those amazing adventures and delightful dinners). The published Vastlands are not quite the same as those in the long-ago games. They could not be. But, like all fine history, art, and wine, they rhyme.
+## **Origins of a Setting**
+The roots of the Given World are in the Rainbow Lands that grew collaboratively from the games I ran for the Golden Goats of Lausanne in the early to mid 2010s (thank you, good players, for those amazing adventures and delightful dinners). The published Vastlands are not quite the same as those in the long-ago games. They could not be. But, like all fine history, art, and wine, they rhyme.
 
 The world took further shape in the long strange _Ultraviolet Grasslands_ trip I wrote for and with the heroes of the stratometaship, the Patreon supporters who made this whole adventure possible. In 2019, with the help of roughly 2,000 backers we crowdfunded the hardcover first edition. In 2023, following fan feedback, the revised second edition saw the light of the Big and the Little Suns. _Our Golden Age_ and this Guidebook then followed over the last few years, with several detours along the way. Perhaps we shall revisit some of those abandoned routes in the future, perhaps not. Still, they were worth it in the end. Now, welcome, and off we go!
 

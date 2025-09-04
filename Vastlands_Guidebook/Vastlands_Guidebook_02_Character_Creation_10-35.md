@@ -20,7 +20,7 @@ Later, you can acquire other characters: pets, sidekicks, secondary PCs and more
 
 <!-- Vastlands Guidebook, Page 011 -->
 
-##### OUR SHADOWY COMPANIONS
+## OUR SHADOWY COMPANIONS
 
 A group of exemplary... er... example characters joins us to illustrate how the rules and procedures work.
 
@@ -31,6 +31,8 @@ The heroes sacrificed to the dice oracles are built using random rolls for abili
 **Noë**
 
 A wizard of the dark electronic arts. A scholar in search of the illsome mysteries of the never-mentioned war.
+|||||
+|---|---|---|---|
 |strength|0|charisma|5|
 |endurance|1|aura|4|
 |agility|2|thought|5|
@@ -38,6 +40,8 @@ A wizard of the dark electronic arts. A scholar in search of the illsome mysteri
 **Onion**
 
 A merchant and wide-ranging traveler. A trickster with a coin in every sock and a soothing lie for every ear.
+|||||
+|---|---|---|---|
 |strength|1|charisma|5|
 |endurance|0|aura|0|
 |agility|4|thought|3|
@@ -45,6 +49,8 @@ A merchant and wide-ranging traveler. A trickster with a coin in every sock and 
 **Safir**
 
 A fighter of the caravan-protecting sort. An exile from the Blue Lands with a bloodline prone to corruption.
+|||||
+|---|---|---|---|
 |strength|5|charisma|0|
 |endurance|4|aura|1|
 |agility|3|thought|2|
@@ -59,7 +65,7 @@ Hazeraiser (referee title)—open a travel portal for the heroes. Demand sacrifi
 
 <!-- Vastlands Guidebook, Page 012 -->
 
-#### ABILITY SCORES
+## ABILITY SCORES
 
 **Roll d100 once to generate abilities** (assign unlabeled scores)
 
@@ -187,36 +193,21 @@ _**Alternative Generation 2:**_ assign 7 points to your abilities as you like wi
 
 75 unflagging end 5 / 2 / 0 / 0 / 0 / 0 100 blessed 2 / 2 / 2 / 2 / 2 / 2
 
-**Static Abilities**
+### **Static Abilities**
 
-Resisting things. Body, matter, structure, form, persistence, courage, _ha_ .
+Resisting things. Body, matter, structure, form, persistence, courage, _ha_. The resolve and stamina to bear and withstand.
 
-The resolve and stamina to bear and withstand.
+- **Aura** is the mental ability of resilience in the face of fortune’s outrageous slings. It is not wisdom (that is a trait).
 
-- **Aura** is the mental ability of
+It may allow a character to use\ powers beyond mortal ken longer than usual.
 
-resilience in the face of fortune’s outrageous slings. It is not wisdom (that is a trait).
+- **Endurance** is the physical ability of resistance. How much pain and strain a character can take. How much staying power they have.
 
-It may allow a character to use
-powers beyond mortal ken
-longer than usual.
-- **Endurance** is the physical ability
+### **Active Abilities**
 
-of resistance.
+Doing things. Fire, drive, energy, vigor, thrust, movement, _ka_. The will and force to dominate and overcome.
 
-How much pain and strain a character can take. How much staying power they have.
-
-**Active Abilities**
-
-Doing things. Fire, drive, energy, vigor, thrust, movement, _ka_ .
-
-The will and force to dominate and overcome.
-
-- **Charisma** is the mental ability
-
-of divine fortune, luck and conviction.
-
-It lets a character get their way and win arguments through sheer force of personality.
+- **Charisma** is the mental ability of divine fortune, luck and conviction. It lets a character get their way and win arguments through sheer force of personality.
 
 - **Strength** is the physical ability
 of lifting bars, bending gates,
@@ -225,9 +216,8 @@ rocks, and climbing ladders.
 
 It also increases how much a character can carry.
 
-##### 13
-
-**Dynamic Abilities** Changing things. Psyche, intellect, change, dexterity, path, speed, _ba_ . The wit and flexibility to adapt and adjust.
+### **Dynamic Abilities**
+Changing things. Psyche, intellect, change, dexterity, path, speed, _ba_. The wit and flexibility to adapt and adjust.
 
 - **Thought** is the mental ability
 of absorbing, processing, and
@@ -236,17 +226,13 @@ It is not education (that is a trait).
 
 It also increases how many traits a PC can have.
 
-- **Agility** is the physical ability
-of speed and precision within
-the character’s environment.
-
-Dodging, aiming, manipulating, balancing, flexibility, and more. It provides a bonus to defense.
+- **Agility** is the physical ability of speed and precision within the character’s environment. Dodging, aiming, manipulating, balancing, flexibility, and more. It provides a bonus to defense.
 
 > [@Vastlands_Guidebook, _p._ _13_]
 
 <!-- Vastlands Guidebook, Page 014 -->
 
-#### BACKGROUND TRAIT
+## BACKGROUND TRAIT
 
 Traits are the innate acquired and inherited qualities and characteristics that make a character unique. This includes characteristics such as backgrounds, professions, mutations, downloaded skill packages, implanted prosthetics, corruptions, and memorized powers.
 
@@ -260,7 +246,8 @@ At level 1 you **start with three traits** .
 
 A level 0 character has two traits. Characters can choose to gain a new trait every time they level up.
 
-**Trait Skill Modifiers** Choose the same trait multiple times to increase its skill modifier.
+### **Trait Skill Modifiers**
+Choose the same trait multiple times to increase its skill modifier.
 
 **Skilled** +3 bonus to rolls good enough to make a living
 
@@ -334,7 +321,7 @@ A trait selected multiple times does not take up additional trait slots. Note a 
 
 <!-- Vastlands Guidebook, Page 016 -->
 
-#### PATH TRAIT
+## PATH TRAIT
 
 Paths are compilations of traits that create archetypal characters.
 
