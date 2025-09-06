@@ -39,7 +39,7 @@ When you need to go-go. Each speed die provides a +1 to chases and races. You ma
 
 You buy a **ticket for your week’s travel** in advance. Pricier tickets tend to give more dice. Choose dice types at purchase. Dice cannot be changed after your journey begins. All prices per caput.
 
-|Price|Type|Dice|Conveyances|
+|*Price*|**Type**|**Dice**|**Conveyances**|
 |---|---|---|---|
 |€0|[murder]hobo|no|how are you traveling?!|
 |€5|basic|1|coalem barge, shank’s mare, burdenbeast|
@@ -67,7 +67,7 @@ Upon the Given World most humans travel by walking, swimming, and flight, as the
 
 Some humans, dissatisfied with their basic design, use magical machines to carry cargo, venture into the void, or speed swifter than sound. Traditionalists harrumph at this hubris. Some barbarians, ignorant of the common panhumanity of sentience, enslave creatures to serve them. Beasts of burden, combat chargers, even domestic daemons.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Gore. A gruesome scene. Scattered on dawn's highway. An accident? [-1 aura and a burden of horror]|Accident. A collision, a road collapse? [-1d6 life and a random item is destroyed or save vs. serious injury]|Monster (L7, absorbing abomination). This thing ... was it ever human? [worth €1d6* x 100 as a trophy]|
 |2|Sore. The hard path. [-1 agility]|Injured. A bad sprain, a pulled muscle? [-1d3 life and -2 agility]|Infected. Stonefoot spores, feral land coral? [slowed, -3 agility, +2 endurance]|
@@ -86,7 +86,7 @@ True, it is tradition that all civilized humans are made with the right to freel
 
 Machine-made oldtech vehicles were long taboo, marked by the red octagon of agency and restricted to holy servants. Folk tales of foolish youths hacking red-coded vehicles to perform "joy coups" often end with corrective reformatting. Today, the lack of functioning oldtech is a bigger problem. Remaining mechanical vehicles are prized, pampered, and often prayed into full golemic sentience.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Bang! Blown tire, fractured casket, escaped spirit? [+1d4 days or -€1d100]|Bang, bang! Pot shots! Bandit ghosts? Monsters? Falschers? [-1d8-1 life and save or the vehicle is damaged]|Road Hunter (L9, mad autogolem). Steel, thunder, plasma lances. [trophy worth €1d6* x 1,000]|
 |2|Rattled. Shaken, battered, numbed. What terrible seats. [-1 endurance]|Cramped. Contorted, distorted, reshaped? [-2 strength or mutation]|Mind borrowed. Vehicle awakens with a copy of your ba. [uh, what the?]|
@@ -100,7 +100,7 @@ Public intersanctuary transport was a blessing given to approved managers and to
 
 Cheap, slow, and raucous, the public intersanctuary transport system even yet attracts some tourists.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Fight! Other travelers' fists fly. Bottles are drawn (L1, lubricated). [save or you, too]|Impact. Something (L7, scary) under the bus. [-1d4 life and a random item comes alive with an alien spirit]|Ambush. Falscher barbarians (L4, eerie) or electric nomads (L5, zapping). [your € or your priciest item or your life]|
 |2|Broken. Cubist chairs, cruel corridors. [-2 agility or strength]|Dead. Thankfully, insurance. But who pulled your plug? [+1 week and -€50]|Modified. A foreign subroutine in your soul? [+1 aura and a ticking trait]]|
@@ -129,7 +129,7 @@ Code daemons in your blood speak to the oldtech and announce you as a hereditary
 **Overcharge:** the healing oldtech deals damage instead.
 **Note:** you can only store this power in human tissue—in yourself (as a trait) or in a suitable anchor, such as the mummified hand of Dr. N. A. Vec.
 
-|#|1–4 CARGOSPACE (COMMON)|5–6 CARGOSPACE (RARE)|αΩ CARGOSPACE (AWAKE)|
+|*#*|**1–4 CARGOSPACE (COMMON)**|**5–6 CARGOSPACE (RARE)**|**αΩ CARGOSPACE (AWAKE)**|
 |---|---|---|---|
 |1|Nightmares. A thousand lifetimes of anguish and horror. [suffer 2 burdens]|Body stolen. Now a synthetic copy. [permanent: -1d3 life, +1 ability score]|Spiritwipe. You now need to eat souls to live. [you have no aura]|
 |2|More lives. You saw copies of yourself in the Long Ago. [+1d4 life]|Replaced. Died and swapped under warranty. [permanent: +1 life]|Hard rays. Glowing and translucent. [-2 physical, +1 mental ability scores]|
@@ -148,7 +148,7 @@ Many rightly humans fear the waters, for they represent that portion of the worl
 
 For the traveler, there certainly are differences. For one thing, reputable seafolk won't steal your body.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Flotsam. A dead bateau. Scattered wreckage. [-1 aura and a random item]|Hell gull. The bird mugged you! [lose random item or -1d6 life]|Castaway (L6, body-hopper). An ultra or a time-lost wanderer? [€5k bounty]]|
 |2|Seasick. The stomach rebels. [-1 endurance]|Seaworm (L2, unaesthetic). A nasty parasite. Remove it before it grows.|Great wave. A holy mountain shimmers behind. [-1 strength and endurance|
@@ -162,7 +162,7 @@ Traditional, god-fearing stories say humans are barred from the heavens. That de
 
 In any case, air travel is too expensive and dangerous for ordinary humans and the nobles and scions who may be expected to regularly fly like birds between one city and another cannot be expected to face the same barriers as the less divine orders of humanity.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Stuckforce! Detour to avoid the razor fields. [+1d6 days or save or crash]|Long Ago force bullet. [save or lose d6: (1–4) an item or (5–6) a limb]|Razorstorm. Long Long Ago forces whip the air. [save or crash and lose a thing]|
 |2|Blinded. By the unhazed light of the upper air. [burden lasts 1d6 days]|Mirrorforce. Shard seeks eye. [save or gain burden: all looks evil]|Devisions. Gremlins infest your optics. [-1 thought and burden: hallucinations]|
@@ -181,7 +181,7 @@ Modern, civilized humans do not travel to the stars, fast or slow. There is noth
 
 One thing is sure: humans exposed to the void, beyond the airs of the Given World, desiccate swiftly and totally. Rehydration is expensive (€1d6* x 200) and best performed in a registered meditechnical temple.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Hulk. A void vessel from Long Long ago, full of dehydrated protohumans. [enter: -1 endurance and horror]|Horror. We are so small. Nothing. [once: permanently lose -1 aura, after: gain burden of cosmic terror]|The Eater (L17, demilyst). It obliterates because it must. [treasures orbit its maw, to acquire one: save or dissolve]|
 |2|Cabin fever. There is nowhere to go. [save or lose 1 aura or thought]|War fever. The winds of limbo roar. [save or feel compelled to eat brains]|Gene memory. The shakes hit hard. [-2 agility and save: gain a psychic trait]|
@@ -197,7 +197,7 @@ The dullway protocol dismantles and reassembles travelers, with journey times an
 
 The Human Wellness Authority maintains that portal travel is completely safe. It claims side effects are very rare, mostly harmless, probably temporary, and the individual traveler's own fault. Nevertheless, most moderns fear this ancient technology, fearing it may steal their immortal motive sparks. This is not incorrect.
 
-|#|1–3 (COMMON)|4–5 (UNCOMMON)|6 (RARE)|
+|*#*|**1–3 (COMMON)**|**4–5 (UNCOMMON)**|**6 (RARE)**|
 |---|---|---|---|
 |1|Living tunnel. Wailing life-forms smeared into the length of the portal tunnel, enmeshed in its no-being. [save or they consume +1d6 days]|Human tunnel. Generations upon generations built into the walls of this ill reality. [save or join them for +1d4 weeks, then save or stay]|The Dull Worm (L15, waymaker). It connects because it can. [spend +1d4 weeks and 1 aura to find a new place; scavengers and terrors follow behind]|
 |2|Blanking. Some memories disappear. [save or they were important]|Seepage. Some of you is lost. [lose -1 thought or aura]|Stripped. Soul milled. [save or become a flesh golem without aura]|
