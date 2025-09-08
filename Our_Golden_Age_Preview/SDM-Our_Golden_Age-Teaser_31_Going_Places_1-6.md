@@ -94,6 +94,7 @@ Machine-made oldtech vehicles were long taboo, marked by the red octagon of agen
 |4|Numbed. Something that bothered you fades. [remove 1 mental burden]|Overcharged. Spirit fuel shouldn't cost this much! [+1 week or -€2d4* x 20]]|High. The fuel fumes? [burden of elevation and +1d4 life]|
 |5|Surprised. Living roadside attraction! [€1: gain +1d6 bonus life or an insight]|Hitchhiker. Strange roadside human. [1-in-6 actually a phylake (L6, judge)]|Restored motel. Not a mimic! [+1 day and -€1d6* x 10 to restore 2 attributes]|
 |6|Easy Ride. Share a hard discovery about you or your society. [-1d2 days]|Holy lubricants. Permanent vehicle bonus. Thanks, gas priests! [d6: (1–4) it gains +1d4 life, (5–6) it gains +1 level]|Wise golem. A mechanic and teacher. [repair one machine or an oldtech study opportunity]|
+
 ### BUS, GONDOLA, POD, RAIL, TUBE, OR WIRE
 
 Public intersanctuary transport was a blessing given to approved managers and tourists by the Good Gods in the Long Long Ago. Living buses and atom trains and wire golems and pod floaters and more they gifted the humans for their certified travel needs. Alas, time has had its way and now anyone with the cash to spare may board one of the public transporters, whether a holy fool or casteless feral or a fiscally fallen noble.
@@ -156,6 +157,7 @@ For the traveler, there certainly are differences. For one thing, reputable seaf
 |4|Fine dolls. Cetacean emissaries track your vessel. [+1 bonus charisma].|Whale killers. They sell mystery meat. [€5, restores 1 attribute]|Undines (L10, moody, pale). They hunt the killers. [trade truths for luck]|
 |5|Exercised. Ions in the air recharge you. [+1 bonus hero die]|Floating chest. Can it be that old? [random item but save or cursed]|Ghost ship. Looks seaworthy! [haunted but worth €1d4* x 1,000]|
 |6|Relaxed. The sea airs are medicinal [benefit from a long rest]|Soothed. Partake of leaked cetacean dreams [remove all mental burdens]|Contact. A cetacean speaks to you. [will teach friends aquatic traits]|
+
 ### THE AIRS: BLIMP, FLAPPER, PROPELLEUR, OR RUG
 
 Traditional, god-fearing stories say humans are barred from the heavens. That demons and deities claim those high places as their own. That nothing save thin air and dry decay await beyond the protective embrace of Mother Soil and the nurturing guidance of Father Rain. So many of these stories align that there are castes of scholars convinced they were constructed from a single template. This could not be, for it would imply some force or organization meddling with human myth on a grand scale!
@@ -189,6 +191,7 @@ One thing is sure: humans exposed to the void, beyond the airs of the Given Worl
 |4|Astral flora. A sargasso of space kelp. [+1d4 days to harvest nutrients]|Protogolem. Its suspended mind, still human? [-1d6 life to restart]|Shell people (L3, soil-hungry). Surfing the void. [suspicious, but will trade]|
 |5|Silence. No voices but your own. Share, bond, come together. [+1d4 life]|Ghosts. Voices from Long Ago. Follow them? [+2d4* days to reach source]|Another chariot. Exactly like yours. But abandoned. [duplicate an item]|
 |6|Perspective. We are so small. Specks of dust. [once: permanently gain +1 charisma, after: remove 1 burden]|Recrudescence. Humans were made for the war. [gain +1 strength and an innate aggressiveness]|Interloper (L6, giant). It looks human, but stands 9 feet tall and wields buildertech. [devil? angel?]|
+
 ### THE PORTALS: DULL, FAST, ONE, SLOW, OR WILD
 
 Portals have fascinated humans since prehistory. Some think them gifts from the Lords, others that they are the byproducts of ancient "Engineers." Many simply accept them as fundamental cosmic structures. These hard-coded passages between distinct locations form hub-and-spoke networks, with portal temples serving for central access.
