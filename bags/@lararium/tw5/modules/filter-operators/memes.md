@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 filter operator: memes — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ba"
-source-file = "packages/lararium-tw5/src/filters/memes.ts"
 source-symbol = "collectMemes registerMemes registerMemesSource"
 body-sha256 = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
 cacheable   = true

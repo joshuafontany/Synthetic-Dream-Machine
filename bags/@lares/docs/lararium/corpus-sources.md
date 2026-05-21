@@ -16,7 +16,6 @@ cacheable    = true
 retain       = true
 invariant    = true
 status-date  = "2026-04-30"
-source-file  = "packages/lararium-tw5/src/corpus-sources.ts"
 source-symbol = "CORPUS_SOURCES"
 ```
 

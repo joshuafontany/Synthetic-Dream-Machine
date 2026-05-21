@@ -13,7 +13,6 @@ manaoio       = 0.83
 role          = "canonical source copy: receipt authorization gate — checks a LarAuthReceipt scope set against a resource + ability pair"
 status-date   = "2026-04-30"
 heleuma       = "ka"
-source-file   = "packages/lararium-mesh/src/authority.ts"
 source-symbol = "receiptAllows"
 implements    = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]
 body-sha256 = "902384bddf7a2475d207b38cfe20e7268479741326db46c8a4ef252b747b4e97"

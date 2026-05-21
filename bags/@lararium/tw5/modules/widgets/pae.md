@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: pae — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/pae.ts"
 source-symbol = "PaeWidget"
 body-sha256 = "31c1258031922e15ce7d5ea2ba0336b074b728221e4c8708b30e3c1875bca392"
 cacheable   = true

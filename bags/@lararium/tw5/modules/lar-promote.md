@@ -11,7 +11,6 @@ mana          = 0.90
 role          = "heleuma ka: wiki-internal bag promotion library"
 status-date   = "2026-05-18"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/src/modules/lar-promote.ts"
 source-symbol = "*"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/modules/lar-promote"
 implements    = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]

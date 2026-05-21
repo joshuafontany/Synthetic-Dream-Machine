@@ -15,7 +15,6 @@ role          = "lararium auth provider taxonomy: providers, HTTP abilities, pri
 cacheable     = true
 retain        = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-mesh/src/authority.ts"
 source-symbol = "LarAuthProvider LarAuthAbility LarAuthPrincipal LarAuthScope LarAuthReceipt"
 ```
 

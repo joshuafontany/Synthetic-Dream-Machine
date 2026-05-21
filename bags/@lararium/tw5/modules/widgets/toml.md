@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: toml — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/toml.ts"
 source-symbol = "TomlWidget"
 body-sha256 = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a022"
 cacheable   = true

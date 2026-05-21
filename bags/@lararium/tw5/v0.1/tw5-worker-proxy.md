@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/tw5/v0.1/tw5-worker-proxy"
 file-path    = "bags/@lararium/tw5/v0.1/tw5-worker-proxy.md"
-source-file  = "packages/lararium-tw5/src/tw5-worker-proxy.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

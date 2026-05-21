@@ -8,7 +8,6 @@ confidence    = 0.88
 mana          = 0.88
 role          = "anchor: ~kau TW5 wikitext widget — heleuma ka"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/tiddlers/sigil-kau.tid"
 source-symbol = "~kau"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/widgets/kau"
 cacheable     = true

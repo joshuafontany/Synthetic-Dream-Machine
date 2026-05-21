@@ -332,7 +332,7 @@ export function createSyncWikiHandler(opts: WikiMintHandlerOptions): CommandHand
           }
 
           for (const title of staleTitles) {
-            await adaptor.deleteTitle(title);
+            await adaptor.deleteTiddler(title);
             fileRecordWrites++;
             fileChanged = true;
           }

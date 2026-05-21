@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/node/v0.1/lar-event-bus-impl"
 file-path    = "bags/@lararium/node/v0.1/lar-event-bus-impl.md"
-source-file  = "packages/lararium-node/src/lar-event-bus-impl.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

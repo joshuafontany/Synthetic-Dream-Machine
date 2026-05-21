@@ -9,4 +9,4 @@ type: text/vnd.tiddlywiki
 <!-- hoolele — unstructured escape hatch (Verse spawn); creates a NEW task tree root independent of the calling scope.
      The spawned task outlives its creator; never auto-cancelled; requires explicit Cancel() or timeout.
      Use only when work MUST complete regardless of parent scope. Prefer lele (\branch) for bounded side-work.
-     Stub — pono law spec pending. Concurrency runtime pending (async-first sprint). Grammar registration only. -->
+     Stub — pono law spec pending. Grammar and scanner wired. Verse concurrency runtime semantics pending (async-first sprint). -->

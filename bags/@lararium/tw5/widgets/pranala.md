@@ -8,7 +8,6 @@ confidence    = 0.88
 mana          = 0.88
 role          = "anchor: PranalaWidget — heleuma ka"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/src/widgets/pranala.ts"
 source-symbol = "PranalaWidget"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/widgets/pranala"
 body-sha256 = "c024548a4d09384a9d5df111d3b73b712a2951f3287975efd6140790e2a3ab3d"

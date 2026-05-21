@@ -480,12 +480,12 @@ This separation serves two purposes:
 | `\transclude` | `kahea` | inline | TW5 `{{Title}}` transclusion |
 | `\link` | `loulou` | inline | HTML anchor / TW5 `[[link]]` |
 | `\shadow` | `aka` | inline | TW5 shadow tiddler terminology |
-| `\if` | `wai` | block | universal conditional |
+| `\if` | `heihei` | block | universal conditional |
 | `\else` | `mukuwai` | inline | universal fallback |
 | `\elif` | `kahawai` | inline | universal branch |
 | `\for` | `huli` | block | universal for-each iteration |
 | `\sync` | `hui` | block | Verse `sync` keyword — 1:1 |
-| `\race` | `heihei` | block | Verse `race` keyword — 1:1 |
+| `\race` | `holo` | block | Verse `race` keyword — 1:1 |
 | `\rush` | `puka` | block | Verse `rush` keyword — 1:1 |
 | `\branch` | `lele` | inline | Verse `branch` keyword — 1:1 |
 | `\query` | `ui` | inline | filter result render surface |
@@ -559,27 +559,28 @@ hard-coding the URI inside the template.
 
 TW5 analogs: `<$list filter="..." limit="1">`, `<$reveal>`
 
-`wai` = water / conditional source. `mukuwai` = mouth of the water / fallback outflow. `[C]` operator-ratified.
+`heihei` = race, competition (conditional test; first filter-match wins). `[C]` operator-ratified.
+`mukuwai` = mouth of the water / fallback outflow. `[C]` operator-ratified.
 `kahawai` = branch-channel / else-if. `[C]` operator-ratified.
 
 ```
-<<~ wai [tag[lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant]] >>
+<<~ heihei [tag[lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant]] >>
   Renders only when the current meme carries the invariant tag.
-<<~/wai >>
+<<~/heihei >>
 
-<<~ wai [field:depth[0]] >>
+<<~ heihei [field:depth[0]] >>
   Renders when depth equals 0.
 <<~ mukuwai >>
   Renders when depth is NOT 0.
-<<~/wai >>
+<<~/heihei >>
 
-<<~ wai [tag[open-question]] >>
+<<~ heihei [tag[open-question]] >>
   Unresolved flow.
 <<~ kahawai [tag[ready-for-canon]] >>
   Ready for council.
 <<~ mukuwai >>
   Ordinary rest.
-<<~/wai >>
+<<~/heihei >>
 ```
 
 Filter expression evaluated against the current rendering context.
@@ -867,11 +868,11 @@ The render stack guard applies to `hui`/`heihei`/`puka` bodies.
 | Function definition | `\function name(p) = expr` | `<<~! helu name(p) = expr >>` or `<<~! \function name(p) = expr >>` | ◎ `[SC]` — alias registered |
 | Macro/procedure call | `<<macroName params>>` | `<<~ kahea name(key:val) >>` or `<<~ \transclude name >>` | ✓ parse layer — `SigilNode { sigilName:"kahea", attrs:{name,args} }`; wehe executor pending |
 | Context-set | `<$tiddler tiddler="X">` | `<<~ meme lar:///X >>` or `<<~ \tiddler lar:///X >>` | ◎ `[SC]` — alias registered |
-| Conditional | `<$list filter="..." limit="1">` | `<<~ wai filter >> ... <<~ mukuwai >> ... <<~/wai >>` | ◎ proposed `[C]` names |
+| Conditional | `<$list filter="..." limit="1">` | `<<~ heihei filter >> ... <<~ mukuwai >> ... <<~/heihei >>` | ◎ `[C]` names |
 | Iteration | `<$list filter="...">` | `<<~ huli filter as item >> ... <<~/huli>>` | ◎ proposed `[SC]` approved |
 | Variable set | `<$set name="v" value="x">` | `<<~! wehe v = "x" >>` (no-param wehe) | ◎ proposed |
 | Filter notation | `[tag[X]sort[title]]` | `<<~ hana x-tiddlywiki-filter >> ... <<~/hana >>` | ✓ current |
-| Filter in widgets | inline `filter="..."` | inline filter arg in `wai`/`huli`/`ui` | ◎ proposed |
+| Filter in widgets | inline `filter="..."` | inline filter arg in `heihei`/`huli`/`ui` | ◎ proposed |
 | Recursion guard | depth 8 | render stack `len >= 8` → stub | ◎ proposed |
 | Import | `\import [[FilterExpr]]` | `<<~ aka lar:///carrier >>` (shadow include) | ✓ current |
 | Widget definition | `\widget $name` | deferred — no widget layer yet | ⚠ deferred |
@@ -884,10 +885,10 @@ The render stack guard applies to `hui`/`heihei`/`puka` bodies.
 | Verse construct | Lararium analog | Status |
 |-----------------|----------------|--------|
 | `sync { a, b }` | `<<~ hui >> ... <<~/hui>>` | ◎ `[SC]` |
-| `race { a, b }` | `<<~ heihei >> ... <<~/heihei>>` | ◎ `[SC]` |
+| `race { a, b }` | `<<~ holo >> ... <<~/holo>>` | ◎ `[SC]` |
 | `rush { a, b }` | `<<~ puka >> ... <<~/puka>>` | ◎ `[SC]` |
 | `branch { expr }` | `<<~ lele lar:///uri >>` | ◎ `[SC]` |
-| `if` (failure-typed) | `<<~ wai filter >>` (non-empty = success) | ◎ `[C]` — note: Verse `if` semantics differ |
+| `if` (failure-typed) | `<<~ heihei filter >>` (non-empty = success) | ◎ `[C]` — note: Verse `if` semantics differ |
 | `for` loop | `<<~ huli filter as item >>` | ◎ `[SC]` |
 | `\procedure` | `<<~! wehe name(p) >>` or `<<~! \procedure name(p) >>` | ◎ `[SC]` |
 | `\function` (pure) | `<<~! helu name(p) = expr >>` | ◎ `[SC]` |

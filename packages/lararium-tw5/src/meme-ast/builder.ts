@@ -44,7 +44,7 @@ interface Frame {
 
 const CANONICAL_SIGILS = new Set([
   "ahu", "kahea-invoke", "pranala", "loulou", "aka", "kahea", "pono", "lele", "papalohe",
-  "wai", "mukuwai", "kahawai", "huli", "kumu", "kau", "waiho", "kukali", "toml",
+  "mukuwai", "kahawai", "huli", "kumu", "kau", "waiho", "kukali", "toml",
   "control-soh", "control-stx", "control-etx", "control-eot",
   "hana", "meme", "wehe", "helu", "kapu", "hui", "heihei", "puka", "ui",
 ]);

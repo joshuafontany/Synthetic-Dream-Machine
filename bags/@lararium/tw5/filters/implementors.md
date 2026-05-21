@@ -8,7 +8,6 @@ confidence    = 0.88
 mana          = 0.88
 role          = "anchor: registerImplementorsOperator — heleuma ka"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/src/filters/implementors.ts"
 source-symbol = "registerImplementors"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/filters/implementors"
 body-sha256 = "9ab080c221b2718c55b20fba140693f779c2e71e1392c0196316cd93773461d1"

@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: sigil — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/sigil.ts"
 source-symbol = "SigilWidget"
 body-sha256 = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec11"
 cacheable   = true

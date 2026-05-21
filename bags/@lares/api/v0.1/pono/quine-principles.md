@@ -231,7 +231,6 @@ link between the compiled artifact and its meme representation:
 ```toml
 # in the meme's TOML iam block:
 heleuma       = "ba"        # stage marker
-source-file   = "packages/lararium-tw5/src/filters/memes.ts"
 body-sha256   = "sha256:..."  # hash of the TypeScript source at time of meme capture
 ```
 

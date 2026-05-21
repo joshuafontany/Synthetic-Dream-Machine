@@ -16,7 +16,6 @@ cacheable     = true
 retain        = true
 invariant     = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-mesh/src/carrier.ts packages/lararium-mesh/src/pranala-parser.ts packages/lararium-mesh/src/meme-stream.ts"
 source-symbol = "OODA_GLYPHS CarrierRating CarrierShape CarrierRecord BUILTIN_AHU_OPEN BUILTIN_BLOCK_RE BUILTIN_INLINE_RE BUILTIN_PAPALOHE_RE MemeStreamEvent"
 ```
 

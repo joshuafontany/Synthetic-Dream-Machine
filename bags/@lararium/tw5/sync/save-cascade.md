@@ -15,7 +15,6 @@ role         = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor:
 cacheable    = true
 retain       = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-tw5/src/sync-adaptor.ts"
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
 ```
 

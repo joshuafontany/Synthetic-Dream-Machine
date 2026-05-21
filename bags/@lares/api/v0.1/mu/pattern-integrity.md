@@ -131,8 +131,8 @@ Applied to code: move logic from the external TypeScript layer into tiddlers.
 Each piece of logic moved reduces the "material" required to carry the pattern.
 
 **Measurement:** the Heleuma `body-sha256` anchor system tracks ephemeralization
-progress. A TypeScript file with a `heleuma = "ka/ba"` anchor and a matching `source-file`
-field in its meme MAY be a candidate for ephemeralization once the meme is stable.
+progress. A TypeScript file with a `heleuma = "ka/ba"` anchor and a `source-symbol`
+in its `#source` ahu MAY be a candidate for ephemeralization once the meme is stable.
 
 **Progression:**
 ```

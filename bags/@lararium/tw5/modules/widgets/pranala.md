@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: pranala — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/pranala.ts"
 source-symbol = "PranalaWidget"
 body-sha256 = "34f5ea4f58ba8153be0ffd6b4d06dc7611795e8d609afc78ed0f7fa8bc7a98c1"
 cacheable   = true

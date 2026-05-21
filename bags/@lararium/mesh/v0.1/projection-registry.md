@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/projection-registry"
 file-path    = "bags/@lararium/mesh/v0.1/projection-registry.md"
-source-file  = "packages/lararium-mesh/src/projection-registry.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

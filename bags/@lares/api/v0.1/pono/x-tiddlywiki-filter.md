@@ -91,11 +91,11 @@ See the full spec: `lar:///ha.ka.ba/@lares/api/v0.1/pono/wikitext-filter`
 
 Two ways to use this grammar in a carrier:
 
-**Inline** — inside `wai`, `huli`, or `ui` sigils, filter expressions are read
+**Inline** — inside `heihei`, `huli`, or `ui` sigils, filter expressions are read
 as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 
 ```text
-<<~ wai [tag[invariant]sort[title]] >>
+<<~ heihei [tag[invariant]sort[title]] >>
 <<~ huli [toml:tagspace[grammar]] as item >>
 <<~ ui [edge:family[control]role[implements]] >>
 ```

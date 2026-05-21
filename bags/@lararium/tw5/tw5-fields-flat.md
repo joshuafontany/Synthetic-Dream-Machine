@@ -4,7 +4,6 @@
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/tw5/tw5-fields-flat"
 file-path   = "bags/@lararium/tw5/tw5-fields-flat.md"
-source-file = "packages/lararium-tw5/src/tw5-fields-flat.ts"
 heleuma     = "ka"
 type        = "text/x-memetic-wikitext"
 register    = "CS"

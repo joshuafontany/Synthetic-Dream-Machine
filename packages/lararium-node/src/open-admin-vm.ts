@@ -74,8 +74,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   const adaptor = new IslandAdaptor(tw5, composite, ADMIN_BAG_ID);
 
   // Subscribe the adaptor to composite changes so admin tiddlers stream into
-  // the wiki. The adaptor's onUriChanged handles the inbound direction;
-  // saveTiddler handles outbound.
+  // the wiki. onUriChanged handles inbound; saveTiddler/deleteTiddler handle outbound.
   composite.addProjection(adaptor);
 
   // The admin doc is purely local — no remote Automerge sync peer to wait for.

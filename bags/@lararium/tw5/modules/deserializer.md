@@ -11,7 +11,6 @@ manaoio      = 0.82
 role         = "heleuma ka: TW5 tiddlerdeserializer for text/x-memetic-wikitext"
 status-date  = "2026-05-01"
 heleuma      = "ka"
-source-file  = "packages/lararium-tw5/src/deserializer.ts"
 source-symbol = "*"
 module-ref   = "lar:///ha.ka.ba/@lararium/tw5/modules/deserializer"
 implements   = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]

@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/tw5/v0.1/toml-ast"
 file-path    = "bags/@lararium/tw5/v0.1/toml-ast.md"
-source-file  = "packages/lararium-tw5/src/toml-ast.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

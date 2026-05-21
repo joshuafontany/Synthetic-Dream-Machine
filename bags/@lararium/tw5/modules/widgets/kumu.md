@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: kumu — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/kumu.ts"
 source-symbol = "KumuWidget"
 body-sha256 = "e75d894319cc697fb1bc9b63e515327e683f5c57f1b783652e5b3c9880b9a452"
 cacheable   = true

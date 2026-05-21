@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/vm-pool"
 file-path    = "bags/@lararium/mesh/v0.1/vm-pool.md"
-source-file  = "packages/lararium-mesh/src/vm-pool.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.78

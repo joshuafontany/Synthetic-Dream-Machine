@@ -11,7 +11,6 @@ manaoio      = 0.82
 role         = "heleuma ka: isomorphic memetic-wikitext AST parser bundle"
 status-date  = "2026-05-01"
 heleuma      = "ka"
-source-file  = "packages/lararium-tw5/src/meme-ast-entry.ts"
 source-symbol = "parseMemeText"
 module-ref   = "lar:///ha.ka.ba/@lares/docs/lararium/meme-ast"
 implements   = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]

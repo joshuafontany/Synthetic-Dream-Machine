@@ -16,7 +16,6 @@ cacheable     = true
 retain        = true
 invariant     = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-mesh/src/resolver.ts"
 source-symbol = "CAPS_FILE_ROOTS VIRTUAL_CAPS_ROOTS STABLE_TUPLE_ROOT"
 ```
 

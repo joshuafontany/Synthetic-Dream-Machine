@@ -278,8 +278,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   //
   // The bootstrap plugin is also pushed to preloadedTiddlers so TW5 boots with the
   // oracle tiddlers available as plugin shadows. The lararium-bootstrap-sync startup
-  // module (lararium-boot-shadows.json) promotes them to regular wiki tiddlers after
-  // the syncer initialises, causing each plugin to sync as one package to the CRDT.
+  // module (lararium-boot-shadows.json) promotes them to regular wiki tiddlers at boot.
   //
   // Social bags are writable so composite.put(record) routes to them by bag field.
   let bootstrapPlugin: Record<string, unknown> | null = null;
@@ -671,9 +670,8 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   }
 
   // Preload the social bootstrap plugin container.
-  // The lararium-bootstrap-sync startup module (lararium-boot-shadows.json) runs after
-  // the syncer initialises and promotes this plugin to a regular wiki tiddler, causing
-  // the syncer to save it as one package to the CRDT store.
+  // The lararium-bootstrap-sync startup module (lararium-boot-shadows.json) promotes
+  // this plugin to a regular wiki tiddler at boot, routing it to the CRDT store.
   if (bootstrapPlugin) preloadedTiddlers.push(bootstrapPlugin);
 
   await tw5.boot(coreBlob, preloadedTiddlers.length > 0 ? preloadedTiddlers : undefined);
@@ -705,7 +703,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   emit("corpus-ready");
 
   // ── 9. IslandAdaptor + N-accumulators — causal-island ↔ TW5 wiki bridge ────
-  // Adaptor: pre-sync buffer + non-CRDT immediate apply + outbound saveTiddler.
+  // Adaptor: pre-sync buffer + non-CRDT immediate apply + outbound saveTiddler/deleteTiddler.
   // Accumulators: one per bag in recipe — sibling projections; buffer crdt-remote
   // patches post-sync and drain them as one nalu per setInterval tick.
   // Priority order matches vmBagStack (lowest index = lowest priority read layer).

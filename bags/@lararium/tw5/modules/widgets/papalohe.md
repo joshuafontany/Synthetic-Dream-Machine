@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: papalohe — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/papalohe.ts"
 source-symbol = "PapaloheWidget"
 body-sha256 = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
 cacheable   = true

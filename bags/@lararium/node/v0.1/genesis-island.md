@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/node/v0.1/genesis-island"
 file-path    = "bags/@lararium/node/v0.1/genesis-island.md"
-source-file  = "packages/lararium-node/src/genesis-island.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

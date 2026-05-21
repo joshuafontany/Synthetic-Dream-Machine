@@ -8,5 +8,5 @@ type: text/vnd.tiddlywiki
 
 <!-- lele — structured fire-and-continue (Verse branch); child node in the task tree.
      Parent continues immediately; child bounded by enclosing function scope — auto-cancelled on scope exit.
-     Distinct from hoolele (\spawn): spawn exits the tree entirely. Concurrency runtime pending. Grammar registration only. -->
+     Distinct from hoolele (\spawn): spawn exits the tree entirely. Grammar and scanner wired. Verse concurrency runtime semantics pending (async-first sprint). -->
 

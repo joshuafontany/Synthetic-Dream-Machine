@@ -17,7 +17,6 @@ retain        = true
 invariant     = true
 status-date   = "2026-04-30"
 heleuma       = "ba"
-source-file   = "packages/lararium-mesh/src/causal-island.ts"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
 body-sha256 = "f9ed8276003e50678b775c174d2c439b43fbd5591845473751b9076ee4c1ebf5"
 ```

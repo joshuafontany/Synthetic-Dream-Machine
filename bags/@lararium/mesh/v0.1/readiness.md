@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/readiness"
 file-path    = "bags/@lararium/mesh/v0.1/readiness.md"
-source-file  = "packages/lararium-mesh/src/readiness.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

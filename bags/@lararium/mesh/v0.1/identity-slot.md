@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/identity-slot"
 file-path    = "bags/@lararium/mesh/v0.1/identity-slot.md"
-source-file  = "packages/lararium-mesh/src/identity-slot.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

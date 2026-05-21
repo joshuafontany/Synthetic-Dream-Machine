@@ -15,7 +15,6 @@ role          = "lararium-node host: lares/ walker, meme graph loader, interface
 cacheable     = true
 retain        = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-node/src/node-host.ts"
 source-symbol = "*"
 ```
 

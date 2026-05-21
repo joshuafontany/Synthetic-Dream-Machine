@@ -34,7 +34,7 @@ A heleuma-ka anchor exists outside the corpus **by current necessity, not by nat
 
 ✶ locate the compiled artifact and its extractable symbol; confirm it has a standalone function boundary.
 ⏿ orient: could this function be loaded from a corpus meme via `_bootModules()`? If yes, this is ka.
-◇ declare `heleuma = "ka"`, `source-file`, `source-symbol`; confirm the symbol is a standalone declaration.
+◇ declare `heleuma = "ka"`, `source-symbol`; confirm the symbol is a standalone declaration.
 ▶ write `#source` slot with the verbatim extracted function; close the quine record.
 ⤴ verify: `sync-heleuma` resolves the symbol, compares, reports clean; signal fields approach ceremony thresholds.
 ↺ the anchor lives. The soul moves. Ceremony awaits.
@@ -49,7 +49,6 @@ An implementing meme SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma       = "ka"
-source-file   = "<repo-relative path>"
 source-symbol = "<standalone function or export name>"
 ```
 

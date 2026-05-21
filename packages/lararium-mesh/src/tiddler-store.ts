@@ -49,7 +49,6 @@ export interface ITW5TiddlerInputFields {
   modified?: Date | string;
   creator?:  string;
   modifier?: string;
-  revision?: string;
   list?:     string | string[];
   [field: string]: unknown;
 }

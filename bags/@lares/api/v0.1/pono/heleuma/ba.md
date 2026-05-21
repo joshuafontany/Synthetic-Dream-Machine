@@ -53,8 +53,6 @@ heleuma = "ba"
 
 An implementing meme SHALL carry a `#source` slot with sufficient verbatim content that the artifact could be reconstructed from the meme alone (quine property). The standard for "sufficient" is: a reader with no access to the source repository can reconstruct the artifact from the `#source` slot and the `#contract` slot together.
 
-An implementing meme MAY declare `source-file` as a provenance pointer, but the meme SHALL NOT depend on it for completeness.
-
 An implementing meme MAY declare `source-symbol` when the source span has a clear boundary. When `source-symbol` is declared, the meme MAY also declare `body-sha256` — the SHA-256 hash of the `#source` slot's verbatim content — for drift detection at build time.
 
 An implementing meme SHALL NOT declare `body-sha256` without also declaring `source-symbol`.

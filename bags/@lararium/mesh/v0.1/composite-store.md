@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/composite-store"
 file-path    = "bags/@lararium/mesh/v0.1/composite-store.md"
-source-file  = "packages/lararium-mesh/src/composite-store.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

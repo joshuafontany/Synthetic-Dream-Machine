@@ -4,7 +4,6 @@
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/node/v0.1/handler-args"
 file-path   = "bags/@lararium/node/v0.1/handler-args.md"
-source-file = "packages/lararium-node/src/handler-args.ts"
 heleuma     = "ba"
 type        = "text/x-memetic-wikitext"
 register    = "CS"

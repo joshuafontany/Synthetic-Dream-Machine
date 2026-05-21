@@ -13,7 +13,6 @@ manaoio       = 0.85
 role          = "canonical source copy: Orichalcum ability implication — ordered capability lattice with relay-law exception (pull does not imply read)"
 status-date   = "2026-04-30"
 heleuma       = "ka"
-source-file   = "packages/lararium-mesh/src/causal-island.ts"
 source-symbol = "abilityImplies"
 implements    = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]
 body-sha256 = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"

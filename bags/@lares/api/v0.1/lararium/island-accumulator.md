@@ -13,7 +13,6 @@ manaoio     = 0.87
 role        = "frame-aligned CRDT patch buffer per bag — post-sync crdt-remote queue; drained by IslandAdaptor.flushAll()"
 cacheable   = true
 retain      = true
-source-file = "packages/lararium-mesh/src/island-accumulator.ts"
 docs        = "lar:///ha.ka.ba/@lares/docs/lararium/verse-mesh"
 ```
 

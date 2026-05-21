@@ -13,7 +13,6 @@ manaoio      = 0.82
 role         = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
 status-date   = "2026-04-30"
 heleuma       = "ha"
-source-file   = "packages/lararium-tw5/src/tw5-vm.ts"
 source-symbol = "_bootModules"
 implements    = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ha"]
 ```

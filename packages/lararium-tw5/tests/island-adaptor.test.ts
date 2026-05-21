@@ -302,12 +302,7 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     const orig = store.put.bind(store);
     store.put = async (rec, origin) => { puts.push(rec.tiddler.title); return orig(rec, origin); };
 
-    const done = new Promise<void>((resolve) => {
-      adaptor.saveTiddler(
-        { fields: { title: LAR_URI, text: "saved", bag: TARGET_BAG } },
-        (err) => { if (err) throw err; resolve(); },
-      );
-    });
+    const done = adaptor.saveTiddler({ fields: { title: LAR_URI, text: "saved", bag: TARGET_BAG } });
     await flush();
     await done;
 
@@ -319,16 +314,13 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { texts.push(typeof rec.tiddler.text === "string" ? rec.tiddler.text : ""); return orig(rec, o); };
 
-    const callbacks: Array<Promise<void>> = [];
-    for (const text of ["v1", "v2", "v3"]) {
-      callbacks.push(new Promise<void>((r) => {
-        adaptor.saveTiddler({ fields: { title: LAR_URI, text, bag: TARGET_BAG } }, (err) => { if (err) throw err; r(); });
-      }));
-    }
+    const saves = ["v1", "v2", "v3"].map((text) =>
+      adaptor.saveTiddler({ fields: { title: LAR_URI, text, bag: TARGET_BAG } }),
+    );
     await flush();
-    await Promise.all(callbacks);
+    await Promise.all(saves);
 
-    // Only the last value reaches the store — v1 and v2 were cancelled by the debounce
+    // Only the last value reaches the store — v1 and v2 were displaced by the debounce
     expect(texts).toEqual(["v3"]);
   });
 
@@ -337,49 +329,37 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
 
-    const done = new Promise<void>((resolve) => {
-      adaptor.saveTiddler(
-        { fields: { title: LAR_URI, text: "saved", bag: "lar:///ha.ka.ba/@lares" } },
-        (err) => { if (err) throw err; resolve(); },
-      );
-    });
+    const done = adaptor.saveTiddler({ fields: { title: LAR_URI, text: "saved", bag: "lar:///ha.ka.ba/@lares" } });
     await flush();
     await done;
 
-    // promote ceremony passes explicit bag → adaptor routes to that canonical bag, not targetBag
     expect(bags).toContain("lar:///ha.ka.ba/@lares");
   });
 
-  test("$:/temp/ title → skipped synchronously (no debounce timer)", async () => {
+  test("$:/temp/ title → skipped (no debounce timer)", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
 
-    await new Promise<void>((r) => {
-      adaptor.saveTiddler({ fields: { title: "$:/temp/x" } }, (err) => { if (err) throw err; r(); });
-    });
+    await adaptor.saveTiddler({ fields: { title: "$:/temp/x" } });
     expect(puts).toHaveLength(0);
   });
 
-  test("$:/ system title → skipped synchronously", async () => {
+  test("$:/ system title → skipped", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
 
-    await new Promise<void>((r) => {
-      adaptor.saveTiddler({ fields: { title: "$:/StoryList" } }, (err) => { if (err) throw err; r(); });
-    });
+    await adaptor.saveTiddler({ fields: { title: "$:/StoryList" } });
     expect(puts).toHaveLength(0);
   });
 
-  test("plain text title (no lar: prefix) → skipped synchronously", async () => {
+  test("plain text title (no lar: prefix) → skipped", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
 
-    await new Promise<void>((r) => {
-      adaptor.saveTiddler({ fields: { title: "Some Plain Tiddler" } }, (err) => { if (err) throw err; r(); });
-    });
+    await adaptor.saveTiddler({ fields: { title: "Some Plain Tiddler" } });
     expect(puts).toHaveLength(0);
   });
 });
@@ -397,9 +377,7 @@ describe("IslandAdaptor — outbound deleteTiddler", () => {
     const orig = store.tombstone.bind(store);
     store.tombstone = async (t, o) => { tombstones.push(t); return orig(t, o); };
 
-    await new Promise<void>((r) => {
-      adaptor.deleteTiddler(LAR_URI, (err) => { if (err) throw err; r(); });
-    });
+    await adaptor.deleteTiddler(LAR_URI);
     expect(tombstones).toContain(LAR_URI);
   });
 });
@@ -421,7 +399,7 @@ describe("IslandAdaptor — echo-loop guard", () => {
     store.put = async (rec, o) => { putCount++; return orig(rec, o); };
 
     // Five post-sync crdt-remote changes — adaptor passes (accumulator owns),
-    // so no saveTiddler round-trip fires. Verify zero outbound puts.
+    // so no outbound puts fire.
     for (let i = 0; i < 5; i++) adaptor.onUriChanged(liveChange(`lar:///t/${i}`, `v${i}`));
     expect(putCount).toBe(0);
   });

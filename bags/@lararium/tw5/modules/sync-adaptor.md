@@ -13,7 +13,6 @@ manaoio      = 0.83
 role         = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 status-date  = "2026-04-30"
 heleuma      = "ha"
-source-file  = "packages/lararium-tw5/src/sync-adaptor.ts"
 source-symbol = "_applyChange"
 implements   = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ha"]
 ```

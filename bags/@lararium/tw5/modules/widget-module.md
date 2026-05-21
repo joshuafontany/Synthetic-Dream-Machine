@@ -13,7 +13,6 @@ manaoio      = 0.81
 role         = "canonical source: TW5 widget module protocol — LARARIUM_WIDGETS_TIDDLER stub + prototype chain wiring"
 status-date  = "2026-04-30"
 heleuma      = true
-source-file  = "packages/lararium-tw5/src/tw5-widgets.ts"
 source-symbol = "createLarariumWidgets"
 ```
 

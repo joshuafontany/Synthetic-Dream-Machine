@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 filter operator: edge — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/filters/edge.ts"
 source-symbol = "registerEdge"
 body-sha256 = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c37"
 cacheable   = true

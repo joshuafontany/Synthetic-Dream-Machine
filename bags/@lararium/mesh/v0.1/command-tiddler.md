@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/command-tiddler"
 file-path    = "bags/@lararium/mesh/v0.1/command-tiddler.md"
-source-file  = "packages/lararium-mesh/src/command-tiddler.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.82

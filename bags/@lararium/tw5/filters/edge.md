@@ -8,7 +8,6 @@ confidence    = 0.88
 mana          = 0.88
 role          = "anchor: registerEdgeOperator — heleuma ka"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/src/filters/edge.ts"
 source-symbol = "registerEdgeOperator"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/filters/edge"
 body-sha256 = "345931be1ee68fb47617f6db9f999e6fffee4a8ead521139f67ed127a557fbc4"

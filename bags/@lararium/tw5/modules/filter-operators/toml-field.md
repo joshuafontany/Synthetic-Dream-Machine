@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 filter operator: toml-field — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/filters/toml-field.ts"
 source-symbol = "registerTomlField"
 body-sha256 = "cc83e7dcde3bedd78f80de35ab3b8adc8d25af6aa39d64afc348355138d957b5"
 cacheable   = true

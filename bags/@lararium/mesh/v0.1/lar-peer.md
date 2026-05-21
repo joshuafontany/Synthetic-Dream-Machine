@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/lar-peer"
 file-path    = "bags/@lararium/mesh/v0.1/lar-peer.md"
-source-file  = "packages/lararium-mesh/src/lar-peer.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.80

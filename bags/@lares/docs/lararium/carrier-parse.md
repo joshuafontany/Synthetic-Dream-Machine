@@ -13,7 +13,6 @@ manaoio       = 0.83
 role          = "canonical source copy: carrier ingress gate — text-in, CarrierRecord-out; validates shape, extracts metadata and implements bundle"
 status-date   = "2026-04-30"
 heleuma       = "ka"
-source-file   = "packages/lararium-mesh/src/carrier.ts"
 source-symbol = "parseCarrier"
 implements    = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]
 body-sha256 = "de5ced103cad1f1a5e414cabe57a2052578fa69e190baf2e2dc06fb458db9ceb"

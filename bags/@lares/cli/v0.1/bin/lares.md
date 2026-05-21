@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/cli/v0.1/bin/lares"
 file-path    = "bags/@lares/cli/v0.1/bin/lares.md"
-source-file  = "packages/lares-cli/src/bin/lares.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

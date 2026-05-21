@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: kau — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/kau.ts"
 source-symbol = "KauWidget"
 body-sha256 = "fe642b8721a69825fd3cf25d51db5b423b2acea3eb76e6fdf614b074259dd8e8"
 cacheable   = true

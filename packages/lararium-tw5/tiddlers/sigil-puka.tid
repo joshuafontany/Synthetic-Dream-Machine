@@ -9,5 +9,5 @@ type: text/vnd.tiddlywiki
 
 <!-- puka — selecting race (Verse rush); first branch wins, losers continue in background.
      Losers are cancelled by enclosing scope exit, NOT by the winner — distinct from holo (\race) which cancels immediately.
-     Concurrency runtime pending (async-first sprint). Grammar registration only. -->
+     Grammar and scanner wired. Verse concurrency runtime semantics pending (async-first sprint). -->
 

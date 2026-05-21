@@ -117,7 +117,7 @@ export function createPromoteHandler(opts: PromoteHandlerOptions): CommandHandle
       await targetAdaptor.saveRecord(toLarTiddlerRecord(nextRecord));
     }
     for (const title of result.tombstones) {
-      await sourceAdaptor.deleteTitle(title);
+      await sourceAdaptor.deleteTiddler(title);
     }
 
     return {

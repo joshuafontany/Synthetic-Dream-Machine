@@ -4,7 +4,6 @@
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/node/v0.1/node-vm-manager"
 file-path   = "bags/@lararium/node/v0.1/node-vm-manager.md"
-source-file = "packages/lararium-node/src/node-vm-manager.ts"
 type        = "text/x-memetic-wikitext"
 tagspace    = "lararium"
 register    = "CS"

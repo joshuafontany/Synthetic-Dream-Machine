@@ -15,7 +15,6 @@ role          = "TW5 widget registry: ten lararium widget types, widget tiddler 
 cacheable     = true
 retain        = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-tw5/src/tw5-widgets.ts packages/lararium-tw5/src/memetic-parser.ts"
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
 ```
 

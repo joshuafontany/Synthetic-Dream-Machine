@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 filter operator: implementors — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/filters/implementors.ts"
 source-symbol = "registerImplementors"
 body-sha256 = "281fba79de184bd211bec73fddb08dafad85527b4c64bd91ca70824b64fd1577"
 cacheable   = true

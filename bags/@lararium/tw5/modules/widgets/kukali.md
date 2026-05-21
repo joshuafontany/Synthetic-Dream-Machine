@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: kukali — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/kukali.ts"
 source-symbol = "KukaliWidget"
 body-sha256 = "25b731ca70383716143b2f99cbd668393b00b78eb23f0ea82974dea5f0105f27"
 cacheable   = true

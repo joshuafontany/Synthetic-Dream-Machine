@@ -12,4 +12,4 @@ type: text/vnd.tiddlywiki
      Grammar stub — pono law spec and Hawaiian proper name DEFERRED pending Visual Verse tick node
      confirmation (UE6 target ~2027). The nalu (wave) is the infrastructure concept below this;
      \tick is the grammar-layer hook INTO the nalu. See pono/nalu.md for the wave architecture.
-     Concurrency runtime pending (async-first sprint). Grammar registration only. -->
+     Grammar and scanner wired. Verse concurrency runtime semantics pending (async-first sprint). -->

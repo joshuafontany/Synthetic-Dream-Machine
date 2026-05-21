@@ -8,7 +8,6 @@ confidence    = 0.88
 mana          = 0.88
 role          = "anchor: registerTomlFieldOperator — heleuma ka"
 heleuma       = "ka"
-source-file   = "packages/lararium-tw5/src/filters/toml-field.ts"
 source-symbol = "registerTomlFieldOperator"
 module-ref    = "lar:///ha.ka.ba/@lararium/tw5/filters/toml-field"
 body-sha256 = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"

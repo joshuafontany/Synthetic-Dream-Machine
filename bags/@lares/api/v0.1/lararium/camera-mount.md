@@ -13,7 +13,6 @@ manaoio     = 0.84
 role        = "parse→widget→fakeDOM chain spec per camera — pairs with CameraRegistration for the full camera contract"
 cacheable   = true
 retain      = true
-source-file = "packages/lararium-tw5/src/tw5-vm.ts"
 docs        = "lar:///ha.ka.ba/@lares/docs/lararium/verse-mesh"
 ```
 

@@ -4,7 +4,6 @@
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/mesh/bag-stack-from-rec"
 file-path   = "bags/@lararium/mesh/bag-stack-from-rec.md"
-source-file = "packages/lararium-mesh/src/bag-stack-from-rec.ts"
 heleuma     = "ba"
 type        = "text/x-memetic-wikitext"
 register    = "CS"

@@ -15,7 +15,6 @@ role          = "MCP tool registry: ten tools + two prompts, OODA-HA phase map, 
 cacheable     = true
 retain        = true
 status-date   = "2026-04-30"
-source-file   = "packages/lararium-mcp/src/stdio.ts"
 source-symbol = "lararium-hud lararium-canvas lararium-read lararium-inspect lararium-query lararium-edges lararium-draft lararium-write lararium-fire lararium-receipt lararium-align lararium-explain_uri"
 ```
 

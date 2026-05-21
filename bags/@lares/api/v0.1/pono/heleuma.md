@@ -38,7 +38,7 @@ A heleuma does not mark failure. It marks a **named threshold crossing** — the
 
 ✶ detect compiled artifact — TypeScript module, runtime registration, or build asset outside lar:/// space
 ⏿ orient heleuma tier: ha (permanent structure), ka (promotion-eligible soul/fire), ba (path marker)
-◇ ha → declare source-file, no promotion fields; ka → declare source-file, source-symbol, body-sha256 (keyhive proof is layer 3, planned); ba → source slot sufficient
+◇ ha → no promotion fields; ka → declare source-symbol; body-sha256 optional (keyhive proof is layer 3, planned); ba → source slot sufficient
 ▶ pair artifact with API meme + doc meme; sync-heleuma.ts checks drift between #source slot and live TS
 ⤴ meme graph holds the rope; the artifact holds the anchor; drift surfaces as build warning
 ↺ confirm heleuma pair complete; drift check registered; promotion path declared or ruled inapplicable
@@ -51,8 +51,8 @@ A heleuma does not mark failure. It marks a **named threshold crossing** — the
 
 1. Every compiled-in artifact that cannot be a first-class `lar:` meme SHALL have a heleuma pair.
 2. The API meme SHALL carry the actual source in a `#source` slot and SHALL declare `heleuma = "ha"`, `"ka"`, or `"ba"` in `#iam`.
-3. **ha** — body/structure: permanent territory. SHALL declare `source-file`. SHALL NOT declare `body-sha256`.
-4. **ka** — soul/fire: promotion-eligible. SHALL declare `source-file` and `source-symbol`. MAY declare `body-sha256` (gate layer 2 — content integrity). Keyhive capability proof marks gate layer 3 (planned; not yet implemented).
+3. **ha** — body/structure: permanent territory. SHALL NOT declare `body-sha256`.
+4. **ka** — soul/fire: promotion-eligible. SHALL declare `source-symbol`. MAY declare `body-sha256` (gate layer 2 — content integrity). Keyhive capability proof marks gate layer 3 (planned; not yet implemented).
 5. **ba** — psyche/path: quine-only path marker. `#source` slot sufficient for reconstruction. MAY declare `source-symbol` when a clear symbol boundary exists. When `source-symbol` is declared, MAY declare `body-sha256` for build-time drift detection. SHALL NOT declare `body-sha256` without `source-symbol`.
 6. The doc meme SHALL explain why the artifact cannot be promoted and what preconditions would allow promotion (ka) or why promotion is not applicable (ha, ba).
 7. The build script `sync-heleuma.ts` SHALL detect drift between `#source` slot and the live TS source for ha/ka modes. Drift MUST surface as a build warning. Staleness does not block the build but MUST stay visible.

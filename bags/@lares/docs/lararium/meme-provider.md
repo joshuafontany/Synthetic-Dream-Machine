@@ -13,7 +13,6 @@ manaoio      = 0.82
 role         = "coalescing fan-out layer between Automerge DocHandle and typed projections — isomorphic, zero Automerge dep"
 cacheable    = true
 retain       = true
-source-file  = "packages/lararium-mesh/src/meme-provider.ts"
 body-sha256  = "0d482f4f018ba241ba5d582c02b282741306053d9a2fed9c8614bb7a0d6036b1"
 docs         = "lar:///ha.ka.ba/@lares/docs/lararium/meme-provider"
 ```

@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: lele — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/lele.ts"
 source-symbol = "LeleWidget"
 body-sha256 = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f1"
 cacheable   = true

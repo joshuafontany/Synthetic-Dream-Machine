@@ -9,5 +9,5 @@ type: text/vnd.tiddlywiki
 
 <!-- hui — await-all join node (Verse sync); fan-out then fan-in. All child flows must settle before containing flow resumes.
      Children cancelled if enclosing scope exits before all settle.
-     Concurrency runtime pending (async-first sprint). Grammar registration only. -->
+     Grammar and scanner wired. Verse concurrency runtime semantics pending (async-first sprint). -->
 

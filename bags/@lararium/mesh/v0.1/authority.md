@@ -4,7 +4,6 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/authority"
 file-path    = "bags/@lararium/mesh/v0.1/authority.md"
-source-file  = "packages/lararium-mesh/src/authority.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.80

@@ -8,7 +8,7 @@
  *
  * Responsibility split:
  *   IslandAdaptor — initial replay buffering + onSyncComplete batch flush
- *                   + non-CRDT immediate apply + outbound saveTiddler/deleteTiddler
+ *                   + non-CRDT immediate apply + outbound saveTiddler/deleteTiddler (async, no callbacks)
  *   IslandAccumulator — live crdt-remote buffering + frame-aligned drain
  *
  * Platform-agnostic: no requestAnimationFrame import. The render loop in

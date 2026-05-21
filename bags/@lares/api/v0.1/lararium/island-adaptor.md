@@ -13,7 +13,6 @@ manaoio     = 0.87
 role        = "causal-island ↔ TW5 wiki bridge — inbound pre-sync buffer + non-CRDT apply + outbound direct writes"
 cacheable   = true
 retain      = true
-source-file = "packages/lararium-tw5/src/island-adaptor.ts"
 docs        = "lar:///ha.ka.ba/@lares/docs/lararium/verse-mesh"
 ```
 

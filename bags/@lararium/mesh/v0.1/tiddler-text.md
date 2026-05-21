@@ -4,7 +4,6 @@
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/mesh/v0.1/tiddler-text"
 file-path   = "bags/@lararium/mesh/v0.1/tiddler-text.md"
-source-file = "packages/lararium-mesh/src/tiddler-text.ts"
 heleuma     = "ba"
 type        = "text/x-memetic-wikitext"
 register    = "CS"

@@ -5,7 +5,6 @@
 uri-path = "ha.ka.ba/@lararium/tw5/tiddler-fields"
 file-path = "bags/@lararium/tw5/tiddler-fields.md"
 type = "text/x-memetic-wikitext"
-source-file = "packages/lararium-tw5/src/types/tiddlywiki.d.ts"
 register = "CS"
 confidence = 0.93
 mana = 0.92

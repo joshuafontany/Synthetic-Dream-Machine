@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: dynamic — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/dynamic.ts"
 source-symbol = "DynamicWidget"
 body-sha256 = "0518ad22472bdea6dffd686dcd663ab93e9bbcecc3d69b54c8b49fba36aa2090"
 cacheable   = true

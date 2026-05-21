@@ -7,21 +7,19 @@
  *     inbound:  per-island pre-sync buffer → onSyncComplete() batch flush
  *               non-CRDT origins (tw-local echo, canon-hydrate, lares-command) apply immediately
  *               post-sync crdt-remote: returns — IslandAccumulator (separate MemeProjection) handles
- *     outbound: saveTiddler() → store.put() (direct, no syncer queue)
+ *     outbound: saveTiddler() → store.put() (direct)
  *               deleteTiddler() → store.tombstone() (direct)
  *
  *   IslandAccumulator (registered separately via addProjection)
  *     post-sync crdt-remote buffering → drained per rAF frame via flushAll()
  *
- * $tw.syncer does NOT run.  No tiddler in the plugin bundle carries
- * module-type:syncadaptor — $tw.syncadaptor stays undefined at boot.
  * IslandAdaptor wires directly: start() → store.addProjection() / store.subscribe().
  *
  * Preserved invariants:
  *   Echo-loop guard   — _applying Map<key, ChangeOrigin> suppresses outbound during inbound
  *                       key shapes: instanceId · islandId · `${instanceId}:cross-bag`
  *                                   `${instanceId}:acc` · `${instanceId}:child` · `changeset:${kind}`
- *   Canon guard       — lar:///ha.ka.ba/ namespace is read-only (saveTiddler rejects)
+ *   Canon guard       — lar:///ha.ka.ba/ namespace is read-only (saveTiddler skips)
  *   Temp guard        — $:/temp/* and $:/ never reach the store
  *   Draft suppression — "Draft of …" suppressed until M-E island
  *   Island isolation  — per-island buffer; each onSyncComplete() fires one wiki.transact()
@@ -88,10 +86,6 @@ function toTW5FieldStrings(
   return {};
 }
 
-/**
- * Normalise a TW5 saveTiddler argument to a flat Record<string, string>.
- * TW5 passes either a Tiddler instance (fields nested under .fields) or a plain object.
- */
 function extractFields(tw5: TW5Engine, tiddler: unknown): Record<string, string> {
   return toTW5FieldStrings(tw5, tiddler);
 }
@@ -140,9 +134,10 @@ export class IslandAdaptor implements MemeProjection {
   static readonly DEBOUNCE_MS = 400;
   private readonly _debounce = new Map<string, ReturnType<typeof setTimeout>>();
   private readonly _pending  = new Map<string, {
-    fields:   Record<string, string>;
-    callback: (err: Error | null, adaptorInfo: unknown, revision: string) => void;
-    origin:   ChangeOrigin;
+    fields:  Record<string, string>;
+    resolve: () => void;
+    reject:  (err: Error) => void;
+    origin:  ChangeOrigin;
   }>();
 
   private _unsubscribe: (() => void) | null = null;
@@ -331,39 +326,31 @@ export class IslandAdaptor implements MemeProjection {
    * Path H auto-split: if the body contains <<~ ahu blocks, splitBodyTiddler()
    * materialises child slot tiddlers in the bag (ONE parser, FOUR call sites law).
    */
-  saveTiddler(
-    tiddler:  unknown,
-    callback: (err: Error | null, adaptorInfo: unknown, revision: string) => void,
-  ): void {
-    if (this._isApplying()) { callback(null, {}, "0"); return; }
+  saveTiddler(tiddler: unknown): Promise<void> {
+    if (this._isApplying()) return Promise.resolve();
 
     const fields = extractFields(this.tw5, tiddler);
     const title  = fields["title"] ?? "";
 
-    if (isTemp(title) || isTW5System(title)) { callback(null, {}, "0"); return; }
-    if (isDraft(title))                      { callback(null, {}, "0"); return; }
-    if (!isMemeUri(title))                   { callback(null, {}, "0"); return; }
+    if (isTemp(title) || isTW5System(title)) return Promise.resolve();
+    if (isDraft(title))                      return Promise.resolve();
+    if (!isMemeUri(title))                   return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
     const existing = this._debounce.get(title);
     if (existing !== undefined) {
       clearTimeout(existing);
-      // Displaced write — fire its callback immediately so the caller is not left hanging.
-      this._pending.get(title)?.callback(null, {}, "0");
+      this._pending.get(title)?.resolve();
     }
-    this._pending.set(title, { fields, callback, origin });
-    this._debounce.set(title, setTimeout(() => this._flushPending(title), IslandAdaptor.DEBOUNCE_MS));
+    return new Promise<void>((resolve, reject) => {
+      this._pending.set(title, { fields, resolve, reject, origin });
+      this._debounce.set(title, setTimeout(() => this._flushPending(title), IslandAdaptor.DEBOUNCE_MS));
+    });
   }
 
   saveRecord(record: LarTiddlerRecord): Promise<void> {
-    const fields = toTW5FieldStrings(this.tw5, record.tiddler);
-    return new Promise((resolve, reject) => {
-      this.saveTiddler({ fields }, (err) => {
-        if (err) reject(err);
-        else resolve();
-      });
-    });
+    return this.saveTiddler({ fields: toTW5FieldStrings(this.tw5, record.tiddler) });
   }
 
   private _flushPending(title: string): void {
@@ -372,37 +359,22 @@ export class IslandAdaptor implements MemeProjection {
     this._pending.delete(title);
     if (!p) return;
     this._writeMeme(title, p.fields, p.origin)
-      .then(() => p.callback(null, {}, "0"))
-      .catch((err: Error) => p.callback(err, {}, "0"));
+      .then(p.resolve)
+      .catch(p.reject);
   }
 
-  deleteTiddler(
-    title:    string,
-    callback: (err: Error | null) => void,
-    _options?: unknown,
-  ): void {
-    if (this._isApplying())               { callback(null); return; }
-    if (isTemp(title) || isTW5System(title)) { callback(null); return; }
-    if (!isMemeUri(title))                { callback(null); return; }
+  deleteTiddler(title: string): Promise<void> {
+    if (this._isApplying())                  return Promise.resolve();
+    if (isTemp(title) || isTW5System(title)) return Promise.resolve();
+    if (!isMemeUri(title))                   return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
-    this.store.tombstone(title, origin)
-      .then(() => {
-        this._removeSlotChildren(title, origin);
-        callback(null);
-      })
-      .catch(callback);
-  }
-
-  deleteTitle(title: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.deleteTiddler(title, (err) => {
-        if (err) reject(err);
-        else resolve();
-      });
+    return this.store.tombstone(title, origin).then(() => {
+      this._removeSlotChildren(title, origin);
     });
   }
+
 
   // ---------------------------------------------------------------------------
   // Private helpers

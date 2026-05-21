@@ -11,7 +11,6 @@ manaoio      = 0.82
 role         = "heleuma ka: void-start operator identity tiddler builder"
 status-date  = "2026-05-04"
 heleuma      = "ka"
-source-file  = "packages/lararium-tw5/src/cold-boot-ceremony.ts"
 source-symbol = "*"
 module-ref   = "lar:///ha.ka.ba/@lararium/tw5/modules/cold-boot-ceremony"
 implements   = ["lar:///ha.ka.ba/@lares/api/v0.1/pono/heleuma/ka"]

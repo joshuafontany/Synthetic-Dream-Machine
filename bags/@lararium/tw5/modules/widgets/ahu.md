@@ -13,7 +13,6 @@ manaoio     = 0.66
 tagspace    = "lararium"
 role        = "TW5 widget: ahu — scaffolded by sync-heleuma --scan-decorators --commit"
 heleuma     = "ka"
-source-file = "packages/lararium-tw5/src/widgets/ahu.ts"
 source-symbol = "AhuWidget"
 body-sha256 = "12b3869aa70d01761a960fe2bc881fa66b007d8b6559676b0de68e85508f52fc"
 cacheable   = true
