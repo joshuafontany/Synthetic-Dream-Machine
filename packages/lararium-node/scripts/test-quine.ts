@@ -16,7 +16,7 @@
  * Or via:   pnpm --filter @lararium/node test:quine
  */
 
-import * as Automerge      from "@automerge/automerge";
+import { automergeLoad } from "@lararium/mesh";
 import { createHash }      from "crypto";
 import { readFileSync, existsSync } from "fs";
 import { join, dirname }   from "path";
@@ -48,7 +48,7 @@ async function main(): Promise<void> {
     );
   }
   const genesisBytes = new Uint8Array(readFileSync(GENESIS_BIN));
-  const doc          = Automerge.load<LarDoc>(genesisBytes);
+  const doc          = automergeLoad<LarDoc>(genesisBytes);
 
   const blobCount    = Object.keys(doc.blobs ?? {}).length;
   const tiddlerCount = Object.keys(doc.tiddlers ?? {}).length;

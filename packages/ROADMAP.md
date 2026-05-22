@@ -76,7 +76,7 @@ These planning docs follow one architectural law:
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
 | — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
 | 1 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
-| 2 | **S9 / lararium-browser** | ⬜ Next | Full browser vessel on the same operator-vessel contract: Automerge, IndexedDB, presence, optional OPFS. |
+| 2 | **S9 / lararium-browser** | ⬜ Active (S0 charter+deletion-map landed) | Full browser vessel, detached worker-authority pool. Charter: `bags/@lararium/browser/v0.1/pono-charter.md`. Sprint braid S0–S9 in `bags/@lararium/browser/v0.1/full-detached-worker-authority-pool-sprint.md`. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
@@ -172,7 +172,7 @@ Invariants:
 |---|---|---|
 | **Tier 2 aka preview** | ⬜ Deferred | Node-side OG metadata fetch → `thumbnail`/`og-title`/`og-description` fields. Home: `disk-projector.ts` or `og-metadata-fetcher.ts`. Design record at `bags/@lararium/tw5/sigil-aka.md`. |
 | **M / Dreamdeck-app** | ⬜ Queued | After admin ingress gate; picks up same-machine peer consolidation deferred from S6.C.5. |
-| **S9 / lararium-browser parity** | ⬜ Queued | Full browser vessel on the same operator-vessel contract: Automerge, IndexedDB, presence, optional OPFS. |
+| **S9 / lararium-browser** | ⬜ Active | See path S9 above. S0 landed. |
 | **S10 / dreamdeck-tldraw** | ⬜ Queued | tldraw shapes as `lar://` resource containers; edge types first-class. |
 | **S11 / dreamdeck-app** | ⬜ Queued | React shell; TW5 + canvas composition; no protocol logic in app layer. |
 | **W / CodeMirror 6 + Lezer + LSP** | ⬜ Downstream | After CLI/live wiki authoring stabilizes. |

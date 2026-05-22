@@ -1,4 +1,12 @@
 
+export {
+  load as automergeLoad,
+  save as automergeSave,
+  init as automergeInit,
+  change as automergeChange,
+  getHeads,
+} from "@automerge/automerge";
+export type { Heads, Doc as AutomergeDoc } from "@automerge/automerge";
 export * from "./base-doc.js";
 export * from "./authority.js";
 export * from "./resolver.js";
@@ -31,3 +39,5 @@ export * from "./job-tiddler.js";
 export * from "./bag-residency.js";
 export * from "./kumu-device.js";
 export { repoRoot } from "./repo-root.js";
+export * from "./browser-authority.js";
+export * from "./genesis-doc.js";

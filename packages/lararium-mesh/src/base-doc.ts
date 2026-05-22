@@ -61,13 +61,15 @@ export interface LarBlobEntry {
  *
  * `tiddlers` — mutable inside Automerge `handle.change()` callbacks; readonly elsewhere.
  * `blobs` — optional binary store; any bag may carry image/attachment blobs.
- * `systemTitles` — optional engine manifest; set once at genesis, read by VMs.
+ *
+ * @deprecated systemTitles — removed. Intent superseded by `wiki.isShadowTiddler()`
+ * at VM boot time; a pre-baked list risks silent drift on TW5 upgrades and the only
+ * consumer was a log line in genesis-artifact.ts.
  */
 export interface LarDoc {
   readonly schemaVersion: string;
   readonly tiddlers:      Record<string, LarTiddlerRecord>;
   readonly blobs?:        Record<string, LarBlobEntry>;
-  readonly systemTitles?: readonly string[];
 }
 
 /** Read the `text` field from a LarTiddlerRecord. Returns null when absent. */

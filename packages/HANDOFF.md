@@ -213,12 +213,18 @@ tiddler patch before the next promote ceremony.
 
 **Dependency graph now:**
 ```
-@lares/core         (no deps)
-@lararium/tw5       → @lares/core, @lararium/mesh
-@lararium/mesh      → @lares/core, @automerge/automerge-repo
-@lararium/node      → @lararium/tw5, @lararium/mesh
-@lares/cli          → @lararium/mesh
+@lares/core             (no deps)
+@lararium/mesh          → @lares/core, @automerge/automerge, @automerge/automerge-repo
+@lararium/tw5           → @lares/core, @lararium/mesh
+@lararium/node          → @lararium/tw5, @lararium/mesh
+@lararium/browser       → @lararium/mesh, @lararium/tw5     (in progress — S1 contract landed)
+@lares/cli              → @lararium/mesh
 ```
+
+Spine law: `@lararium/mesh` is the isomorphic spine for all concerns outside TW5 VMs.
+Automerge core lives in mesh. Vessels (`node`, `browser`) consume it from there — they do not
+add their own `@automerge/automerge` dep unless a platform-specific Automerge surface requires
+something mesh does not already re-export.
 
 **Updated:**
 - stale shared-types references removed from live source comments and meme docs

@@ -7,9 +7,9 @@ file-path    = "bags/@lararium/tw5/v0.1/tw5-browser-surface.md"
 source-file  = "packages/lararium-tw5/src/tw5-browser-surface.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
-confidence   = 0.50
-mana         = 0.50
-role         = "self-documentation: TODO describe tw5-browser-surface.ts"
+confidence   = 0.88
+mana         = 0.87
+role         = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
@@ -17,5 +17,38 @@ retain       = true
 <<~&#x0002;>>
 
 <<~ ahu #contract >>
-TODO: describe the load-bearing surface this file owns.
+
+## Contract
+
+`tw5-browser-surface.ts` is the **named adapter boundary** for the lararium-browser vessel.
+
+It carries all `HTMLElement`, `shadowRoot`, and `window.document` references that the
+TW5-to-browser projection requires. No other file in the browser vessel path may import
+these types without an explicit entry in `deletion-map.md`.
+
+**What it owns:**
+
+- `mountPanel(engine, container: HTMLElement)` — mounts a TW5 wiki into a host-owned DOM container. Currently uses `$:/core/ui/RootTemplate`; this body is **Quarantine** class pending S4/S8 rewrite to the Lararium root contract.
+- `setPalette(engine, paletteName)` — writes the active palette tiddler. No DOM dependency. **Constitutional** class; may migrate to `@lararium/browser` projection helpers.
+- `setBootSplash(engine, active)` — writes/deletes the boot-splash state tiddler. No DOM dependency. **Constitutional** class.
+
+**What it does NOT own:**
+
+- Worker authority boot or lifecycle.
+- Automerge or sync state.
+- Any TW5Engine state beyond reading `engine.$tw`.
+- Any seam that crosses the worker boundary.
+
+**RootTemplate status:**
+
+`mountPanel` currently transcluded `$:/core/ui/RootTemplate` because that was the established TW5 browser story river path. This represents the strongest remaining RootTemplate dependency in the stack. The S4/S8 sprints replace it with a Lararium-owned root/frame contract. Until then, the dependency stays here and nowhere else.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #deletion-map ? -> lar:///ha.ka.ba/@lararium/browser/v0.1/deletion-map family:reference role:adapter-registry >>
+
 <<~/ahu >>

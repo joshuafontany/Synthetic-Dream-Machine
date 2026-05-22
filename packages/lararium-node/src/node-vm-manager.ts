@@ -37,7 +37,8 @@
  * Meme doc: packages/lararium-node/memes/node-vm-manager.md
  */
 
-import * as Automerge from "@automerge/automerge";
+import { getHeads } from "@lararium/mesh";
+import type { Heads } from "@lararium/mesh";
 import { Worker }     from "worker_threads";
 import type { DocHandle, DocHandleChangePayload } from "@automerge/automerge-repo";
 import type { LarDoc } from "@lararium/mesh";
@@ -64,7 +65,7 @@ import type {
 
 export interface VmSnapshot {
   /** Automerge heads at snapshot capture time. CRDT remains authoritative. */
-  heads:      Automerge.Heads;
+  heads:      Heads;
   /** Materialized TW5 tiddler view from the Worker's last teardown:ack. */
   tiddlers:   Array<Record<string, unknown>>;
   /** Unix ms of capture — for diagnostics and staleness detection. */
@@ -287,10 +288,10 @@ export class NodeVmManager {
         "teardown:ack",
       );
       const tiddlers = ack.snapshotTiddlers ? [...ack.snapshotTiddlers] : [];
-      let heads: Automerge.Heads = [];
+      let heads: Heads = [];
       try {
         const doc = this._docHandles.get(wikiId)?.doc();
-        if (doc) heads = Automerge.getHeads(doc);
+        if (doc) heads = getHeads(doc);
       } catch { /* not a real Automerge doc (e.g. test stub) — use empty heads */ }
       snapshot = { heads, tiddlers, capturedAt: Date.now() };
     } catch (err) {

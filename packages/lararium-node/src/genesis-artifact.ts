@@ -16,7 +16,7 @@
 import { readFileSync, existsSync }  from "fs";
 import { join, dirname }             from "path";
 import { fileURLToPath }             from "url";
-import * as Automerge                from "@automerge/automerge";
+import { automergeLoad } from "@lararium/mesh";
 import type { Repo, DocHandle }      from "@automerge/automerge-repo";
 import type { LarDoc }               from "@lararium/mesh";
 import {
@@ -107,7 +107,7 @@ export async function loadGenesisIsland(repo: Repo, genesisDir?: string): Promis
 
   // Smoke-verify bytes before importing: Automerge.load() checks format.
   try {
-    const preview = Automerge.load<LarDoc>(bytes);
+    const preview = automergeLoad<LarDoc>(bytes);
     if (!preview.blobs?.[ENGINE_CORE_ID]) {
       throw new Error(
         `[genesis-artifact] genesis artifact missing TW5 core blob (${ENGINE_CORE_ID}).\n` +
@@ -134,7 +134,7 @@ export async function loadGenesisIsland(repo: Repo, genesisDir?: string): Promis
     throw new Error("[genesis-artifact] genesis artifact missing packed Lares TW5 plugin — run build:genesis after build:plugin.");
   }
   console.log(
-    `[genesis-artifact] loaded  url=${handle.url}  blobs=${blobCount}  plugin=lares-memetic-wikitext  tiddlers=${tiddlerCount}  systemTitles=${doc.systemTitles?.length ?? 0}`,
+    `[genesis-artifact] loaded  url=${handle.url}  blobs=${blobCount}  plugin=lares-memetic-wikitext  tiddlers=${tiddlerCount}`,
   );
 
   return handle;

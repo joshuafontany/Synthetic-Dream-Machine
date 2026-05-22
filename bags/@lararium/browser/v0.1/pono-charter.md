@@ -1,0 +1,128 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/browser/v0.1/pono-charter >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/browser/v0.1/pono-charter"
+file-path    = "bags/@lararium/browser/v0.1/pono-charter.md"
+type         = "text/x-memetic-wikitext"
+register     = "S"
+confidence   = 0.92
+mana         = 0.93
+manao        = 0.90
+manaoio      = 0.88
+role         = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
+tagspace     = "lararium"
+cacheable    = true
+retain       = true
+```
+
+<<~&#x0002;>>
+
+# lararium-browser Pono Charter
+
+Constitutional doc. Governs what code enters the package, how it survives, and what gets deleted.
+Code movement requires a matching entry in the **migration allowlist** (`deletion-map.md`).
+
+<<~ ahu #vessel-law >>
+
+## Vessel Law
+
+The browser vessel lives on the same constitutional law as the node vessel.
+
+**BV-1 — Worker authorities own truth.**
+Causal state, Automerge docs, filter execution, and sync participation live inside
+dedicated Worker realms. The host page cannot reach into an authority or read its
+state except through the declared projection contract.
+
+**BV-2 — The host owns frames.**
+The host page owns DOM attachment, frame lifecycle, and projection mounts.
+It does not own causal state, sync truth, or wiki content.
+Frame birth and death do not affect authority continuity.
+
+**BV-3 — Pool owns warm authorities.**
+The `BrowserAuthorityPool` manages worker lifecycle. It holds warm authorities
+keyed by wiki URI. It does not expose internal worker handles to callers.
+Callers acquire a `BrowserAuthorityLease` and return it. The pool decides what to keep warm.
+
+**BV-4 — Plugin membrane is the TW5-content boundary.**
+TW5-native rendering content (tiddlers, startup modules, page-chrome fragments)
+lives inside the compiled plugin blob. Host TS carries no TW5 page chrome.
+The blob transfers into the worker at boot time.
+
+**BV-5 — Projection adapters are edges, not seams.**
+Adapters translate worker-produced render inputs into host surfaces (HTML, canvas, HUD).
+They carry no sovereign state. They translate; they do not own.
+
+**BV-6 — No ambient globals.**
+`window.$tw`, `window.TiddlyWiki`, and any page-global TW5 attach point are
+categorically excluded from the browser vessel's authority path.
+A future debug path may expose a limited inspector surface; that surface does not
+constitute sovereignty.
+
+**BV-7 — RootTemplate is source material, not constitutional authority.**
+`$:/core/ui/RootTemplate` and `$:/core/ui/PageTemplate` name prior art.
+The Lararium browser vessel owns its root/frame contract.
+Any surviving reference to these tiddlers must live inside the plugin membrane
+or behind the named adapter boundary in `tw5-browser-surface.ts`.
+
+<<~/ahu >>
+
+<<~ ahu #package-law >>
+
+## Package Law
+
+Three packages carry the browser vessel. Responsibility divides cleanly.
+
+| Package | Owns | Does NOT own |
+|---|---|---|
+| `@lararium/mesh` | Vessel law, pool law, worker lease contracts, projection receipts, authority identity and lifecycle types | Any DOM types, any browser runtime APIs |
+| `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, Worker spawn code, pool orchestration |
+| `@lararium/browser` | Browser vessel open/close, worker pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
+
+The `@lararium/browser` package currently holds no source files. Code enters it by passing the migration allowlist check.
+
+<<~/ahu >>
+
+<<~ ahu #migration-allowlist >>
+
+## Migration Allowlist
+
+Code moves into `@lararium/browser` only when it satisfies **all three** tests:
+
+1. **Law test.** The code's responsibility belongs to one of the BV-1–BV-7 assignments above.
+2. **Proof test.** Moving this code makes a cheap-check falsifier pass, not merely easier to imagine passing.
+3. **Residue test.** The code carries no unresolved web2 smell (see `deletion-map.md`). If it carries residue, the residue gets quarantined behind a named adapter boundary before migration.
+
+Code that passes all three gets a migration entry in `deletion-map.md#migration-log`.
+
+<<~/ahu >>
+
+<<~ ahu #open-questions >>
+
+## Open Questions
+
+These questions do not block charter adoption. They require measurement before resolution.
+
+1. **Pre-attach render prep.** How much render work can the worker authority complete before a frame attaches? The answer affects projection contract design.
+2. **Projection data shape.** Which minimal data crosses the worker boundary per render cycle? Prefer structured-clone-friendly small payloads; transferables only where size warrants.
+3. **DOM-bound TW5 hooks.** Which TW5 refresh/action hooks still require DOM access? Each dependency earns an explicit named adapter entry.
+4. **SharedWorker timing.** Dedicated workers first. SharedWorker deferred until dedicated path proves stable.
+5. **Pool topology.** Hot wiki and admin wiki may share one pool with capability flags or run two pools with shared law. Defer until pool metrics land.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #sprint ? -> lar:///ha.ka.ba/@lararium/browser/v0.1/full-detached-worker-authority-pool-sprint family:reference role:sprint >>
+<<~ pranala #deletion-map ? -> lar:///ha.ka.ba/@lararium/browser/v0.1/deletion-map family:reference role:deletion >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/lar-vessel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/vm-pool >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/v0.1/tw5-browser-surface >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

@@ -22,7 +22,6 @@
     "test:quine": "tsx scripts/test-quine.ts"
   },
   "dependencies": {
-    "@automerge/automerge": "^3.2.6",
     "@automerge/automerge-repo": "^2.5.5",
     "@automerge/automerge-repo-network-websocket": "^2.5.5",
     "@automerge/automerge-repo-storage-nodefs": "^2.5.5",
