@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/node/v0.1/projection-kinds"
 file-path    = "bags/@lararium/node/v0.1/projection-kinds.md"
+source-file  = "packages/lararium-node/src/projection-kinds.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

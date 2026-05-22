@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/causal-island"
 file-path    = "bags/@lararium/mesh/v0.1/causal-island.md"
+source-file  = "packages/lararium-mesh/src/causal-island.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

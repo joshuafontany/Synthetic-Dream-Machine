@@ -7,7 +7,7 @@
  * new doc; old doc remains in the repo (operator prunes later via OS-level
  * means or future GC sprint).
  *
- * Lossy by design. Pre-Epoch peers that haven't synced through cannot
+ * Lossy by design. Pre-Epoch vessels that haven't synced through cannot
  * reconstruct the change graph from the new doc alone — they'd need the
  * old doc URL to recover. Acceptable at hobbyist scale per operator's
  * named version-bump-with-migration policy.

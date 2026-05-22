@@ -10,14 +10,9 @@
 
 import type {
   TW5Instance,
-  TW5FakeElement,
-  TW5FakeDocument,
-  TW5ChangeRecord,
   TW5TiddlerInputFields,
   TW5TiddlerFields,
 } from "./types/tiddlywiki.js";
-import { BOOT_SPLASH_ACTIVE_URI } from "@lararium/mesh/lar-uris";
-import type { IslandAccumulator } from "@lararium/mesh";
 import type { LarTiddlerRecord } from "@lararium/mesh";
 import { toLarTiddlerRecord } from "@lararium/mesh";
 import {
@@ -30,55 +25,6 @@ import { bootTrustedModules } from "./tw5-module-gate.js";
 import type { TW5CoreBootBlob, TW5CoreBootInput } from "./tw5-host-bridge.js";
 
 export type { TW5CoreBootBlob } from "./tw5-host-bridge.js";
-
-// ---------------------------------------------------------------------------
-// CameraRegistration — multi-view projection surface
-// ---------------------------------------------------------------------------
-
-/**
- * One camera = one view frustum over the wiki world-state.
- *
- * Each camera holds its own IslandAccumulator and drives its own drain cycle
- * at its own tick rate.  All cameras share one TW5 wiki (world graph).
- *
- * Inverted control: the accumulator drains into the wiki via wiki.transact().
- * The wiki fires a "change" event.  Each widget tree registered via
- * wiki.addEventListener("change", tree.refresh) reacts independently —
- * trees with no dependency on the changed tiddlers return immediately.
- *
- * The view frustum lives in the widget tree's root filter, not in the
- * accumulator.  The accumulator carries no camera identity.
- *
- * Input + output: cameras that accept user input register outbound handlers
- * (saveTiddler / dispatchEvent) on their widget tree.  Rendering priority
- * flows naturally from tickMs — lower tickMs = higher render priority.
- */
-/**
- * Static structure of one camera: the parse→widget→fakeDOM chain.
- * Pairs with CameraRegistration for the full camera contract.
- * Spec: lar:///ha.ka.ba/@lares/api/v0.1/lararium/camera-mount (C-1 through C-5)
- */
-export interface CameraMount {
-  /** Root tiddler whose wikitext body defines the view frustum. */
-  rootTiddler: string;
-  /** The document this camera renders into. */
-  document: TW5FakeDocument | Document;
-  /** The container element this camera renders into. */
-  container: TW5FakeElement | HTMLElement;
-}
-
-export interface CameraRegistration {
-  /** The accumulator this camera drains each tick. */
-  accumulator: IslandAccumulator;
-  /**
-   * Tick interval in milliseconds.
-   *   0 (default) = requestAnimationFrame (~60fps, browser-only)
-   *   N > 0        = setInterval(N) — use for background or non-browser cameras
-   */
-  tickMs?: number;
-  /** Maximum patches to drain per tick. Default: 200. */
-  budget?: number;
-}
 
 import { LARES_MEMETIC_WIKITEXT_PLUGIN } from "./plugin-tiddler.generated.js";
 
@@ -123,125 +69,6 @@ export class TW5Engine {
       });
     })();
     return this._bootPromise;
-  }
-
-  /**
-   * Mount a single camera: constructs the parse→widget→fakeDOM chain once,
-   * registers a wiki "change" listener that refreshes the widget tree, and
-   * returns a teardown function that removes the listener and detaches DOM nodes.
-   *
-   * Isomorphic — works with window.document (browser), $tw.fakeDocument (Node/SSR),
-   * or any fake-DOM implementation.  The caller pairs this with startRenderLoop()
-   * to drive the drain→transact→change→refresh cycle.
-   *
-   * Spec: lar:///ha.ka.ba/@lares/api/v0.1/lararium/camera-mount (C-1 through C-5)
-   */
-  mountCamera(mount: CameraMount): () => void {
-    if (!this._tw) throw new Error("TW5Engine: call boot() before mountCamera()");
-    const tw = this._tw;
-
-    const widget = tw.wiki.makeTranscludeWidget(mount.rootTiddler, {
-      document:     mount.document as TW5FakeDocument,
-      parentWidget: tw.rootWidget,
-    });
-    widget.render(mount.container as TW5FakeElement, null);
-
-    const handler = (changes: Record<string, TW5ChangeRecord>) => {
-      widget.refresh(changes);
-    };
-    tw.wiki.addEventListener("change", handler);
-
-    return () => {
-      tw.wiki.removeEventListener("change", handler);
-      widget.domNodes?.forEach((n) =>
-        (n as unknown as Node).parentNode?.removeChild(n as unknown as Node)
-      );
-    };
-  }
-
-  /**
-   * Mount the TW5 Story River as a floating HUD layer over the infinite canvas.
-   *
-   * The shadow root isolates TW5 stylesheet from the canvas surface behind it.
-   * Uses window.document intentionally — the story river renders real HTML into
-   * the shadow pane; canvas cameras below it use their own fake-DOM documents.
-   * The stylesheet camera (fakeDocument) and the story-river camera (window.document)
-   * stay separate by design: CSS side-effects are not a view frustum.
-   *
-   * @browser-only
-   * ╔══════════════════════════════════════════════════════════════════════════╗
-   * ║  Browser HUD overlay — extract to BrowserTW5Engine when dreamdeck-app  ║
-   * ║  arrives and needs to import TW5Engine without pulling browser APIs.    ║
-   * ╚══════════════════════════════════════════════════════════════════════════╝
-   */
-  mountPanel(container: HTMLElement): () => void {
-    if (!this._tw) throw new Error("TW5Engine: call boot() before mountPanel()");
-    const tw = this._tw;
-
-    const shadow = container.shadowRoot ?? container.attachShadow({ mode: "open" });
-
-    // Stylesheet camera — renders into fakeDocument, syncs CSS text to shadow DOM.
-    const styleWidget = tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet", {
-      document:     tw.fakeDocument,
-      parentWidget: tw.rootWidget,
-    });
-    const styleContainer = tw.fakeDocument.createElement("style");
-    styleWidget.render(styleContainer, null);
-
-    const styleEl = shadow.querySelector("#lar-tw5-styles") as HTMLStyleElement | null
-      ?? (() => {
-        const el = document.createElement("style");
-        el.id = "lar-tw5-styles";
-        shadow.insertBefore(el, shadow.firstChild);
-        return el;
-      })();
-    styleEl.textContent = styleContainer.textContent ?? "";
-
-    const styleHandler = (changes: Record<string, TW5ChangeRecord>) => {
-      if (styleWidget.refresh(changes, styleContainer, null)) {
-        styleEl.textContent = styleContainer.textContent ?? "";
-      }
-    };
-    tw.wiki.addEventListener("change", styleHandler);
-
-    const inner = shadow.querySelector(".tc-page-container-wrapper") as HTMLElement | null
-      ?? (() => {
-        const el = document.createElement("div");
-        el.className = "tc-page-container-wrapper";
-        shadow.appendChild(el);
-        return el;
-      })();
-
-    // Story river camera — the default TW5 view frustum.
-    const teardownCamera = this.mountCamera({
-      rootTiddler: "$:/core/ui/RootTemplate",
-      document:    document as unknown as TW5FakeDocument,
-      container:   inner as unknown as TW5FakeElement,
-    });
-
-    // Wire rootWidget domNodes so TW5's internal event dispatch traverses the tree.
-    tw.rootWidget.domNodes = [inner as unknown as TW5FakeElement];
-
-    return () => {
-      tw.wiki.removeEventListener("change", styleHandler);
-      teardownCamera();
-    };
-  }
-
-  /** Switch the active TW5 palette. Triggers stylesheet recompile. @browser-only */
-  setPalette(paletteName: string): void {
-    if (!this._tw) return;
-    this._tw.wiki.addTiddler(new this._tw.Tiddler({ title: "$:/palette", text: paletteName, tags: [] }));
-  }
-
-  /** Set/clear the boot-splash signal tiddler (lar:///ha.ka.ba/state/boot-splash/active). @browser-only */
-  setBootSplash(active: boolean): void {
-    if (!this._tw) return;
-    if (active) {
-      this._tw.wiki.addTiddler(new this._tw.Tiddler({ title: BOOT_SPLASH_ACTIVE_URI, text: "yes" }));
-    } else {
-      this._tw.wiki.deleteTiddler(BOOT_SPLASH_ACTIVE_URI);
-    }
   }
 
   private runCarrierDeserializer(
@@ -319,64 +146,11 @@ export class TW5Engine {
   }
 
 
-  /**
-   * Multi-camera render loop.
-   *
-   * Each CameraRegistration drives its own drain cycle:
-   *   - tickMs = 0 (default): requestAnimationFrame at ~60fps (browser-only)
-   *   - tickMs > 0: setInterval at that interval (browser + node)
-   *
-   * On each camera tick:
-   *   1. rAF cameras write $:/temp/volatile/lararium/tick — arms TW5's
-   *      volatile-refresh throttle for 60fps repaint.
-   *   2. adaptor.flushAll([camera.accumulator], camera.budget) drains the
-   *      accumulator and applies the batch via wiki.transact().
-   *   3. wiki fires "change" event. Every widget tree registered via
-   *      wiki.addEventListener("change", tree.refresh) reacts — trees with
-   *      no dependency on the changed tiddlers return immediately (O(1)).
-   *
-   * Inverted control: the view frustum lives in each widget tree's root
-   * filter, not in the accumulator.  Cameras at different tick rates drain
-   * independently; the single wiki is the synchronization point.
-   *
-   * Returns a teardown fn that cancels all timers.
-   */
-  startRenderLoop(
-    cameras: CameraRegistration[],
-    adaptor: { flushAll(accs: IslandAccumulator[], budget?: number): void },
-  ): () => void {
-    if (!this._tw) throw new Error("TW5Engine: call boot() before startRenderLoop()");
-    const teardowns: Array<() => void> = [];
-
-    for (const cam of cameras) {
-      const budget = cam.budget ?? 200;
-      const acc    = cam.accumulator;
-      const tickMs = cam.tickMs ?? 0;
-
-      if (tickMs === 0) {
-        let rafId  = 0;
-        let running = true;
-        const tick = (timestamp: number) => {
-          if (!running) return;
-          this._tw!.wiki.addTiddler(
-            new this._tw!.Tiddler({
-              title: "$:/temp/volatile/lararium/tick",
-              text:  String(Math.floor(timestamp)),
-            }),
-          );
-          adaptor.flushAll([acc], budget);
-          rafId = requestAnimationFrame(tick);
-        };
-        rafId = requestAnimationFrame(tick);
-        teardowns.push(() => { running = false; cancelAnimationFrame(rafId); });
-      } else {
-        const id = setInterval(() => adaptor.flushAll([acc], budget), tickMs);
-        teardowns.push(() => clearInterval(id));
-      }
-    }
-
-    return () => teardowns.forEach((fn) => fn());
-  }
+  // startRenderLoop → tw5-camera.ts (sidecar)
+  // mountCamera    → tw5-camera.ts (sidecar)
+  // mountPanel     → tw5-browser-surface.ts (sidecar, browser-only)
+  // setPalette     → tw5-browser-surface.ts (sidecar, browser-only)
+  // setBootSplash  → tw5-browser-surface.ts (sidecar, browser-only)
 
   /** Returns true after boot() resolves. */
   get ready(): boolean { return this._tw !== null; }
@@ -413,10 +187,7 @@ export class TW5Engine {
     this._tw.wiki.addTiddler(new this._tw.Tiddler(fields as Record<string, unknown>));
   }
 
-  /**
-   * Dispose this VM — clear internal refs so GC can collect.
-   * Caller must invoke any mountPanel cleanup fn first.
-   */
+  /** Dispose this VM — clear internal refs so GC can collect. */
   dispose(): void {
     this._tw          = null;
     this._bootPromise = null;

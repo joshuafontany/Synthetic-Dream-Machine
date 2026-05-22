@@ -6,29 +6,29 @@
  *   jobs/<requestId>      VOLATILE scratch tiddler in lararium.local.vm.
  *                         Lives in the admin TW5 wiki only. Never synced via
  *                         Automerge. Tombstoned by the dispatcher after the
- *                         receipt lands.
+ *                         receipt lands. Local intent lives here, not shared truth.
  *
  *   @admin/receipts/<id>  DURABLE receipt tiddler in the Automerge-backed
  *                         admin bag. Written by the dispatcher on done/error.
  *                         Syncs to all peers. Polling this is the "done"
- *                         signal for any observer.
+ *                         signal for any observer. Shared aftermath lives here.
  *
  * Job submission paths:
  *   Local (in-process):   placeJob() → wiki.addTiddler() → TW5 change event
  *                         → dispatcher runs → receipt to @admin/receipts/
- *   Remote (CLI/peers):   peer writes @admin/jobs/<id> to Automerge inbox →
+ *   Remote (CLI/vessels): vessel writes @admin/jobs/<id> to Automerge inbox →
  *                         IslandAdaptor flows it into TW5 wiki →
  *                         dispatcher translates to volatile job → processes →
  *                         receipt to @admin/receipts/
  *
  * Batch contract:
- *   One job tiddler may carry N targets (tiddler URIs, file paths, internet
+ *   One job tiddler may carry N targets (tiddler URIs, file paths, edge resource
  *   URIs, or any string the handler interprets). The receipt always carries a
  *   results map. Single-result and atomic jobs use the conventional
  *   "summary" key so all observers read one durable payload grammar.
  *
  * Forward note (UEFN / kumu ReactionEngine):
- *   Each lararium peer — Node, browser, UE5.6+, Android, Mudlet-LUA — runs
+ *   Each lararium vessel — Node, browser, UE5.6+, Android, Mudlet-LUA — runs
  *   its own admin VM + dispatcher. Jobs are peer-local; receipts sync.
  *   When the Verse-inspired ReactionEngine lands, this dispatcher pattern
  *   federates across causal-island bounds: each island runs its own handler
@@ -39,9 +39,9 @@
  *
  * Architecture laws:
  *   - Tiddler-format law: every job/receipt is a normal tiddler with lar: URI.
- *   - Web3 law: no HTTP/RPC; job submission routes through TW5 wiki events or
- *     Automerge sync — never a named server endpoint.
- *   - Causal-island law: each peer's admin VM owns its own volatile job namespace.
+ *   - Web3 law: no HTTP/RPC control plane; job submission routes through TW5 wiki
+ *     events or Automerge sync — never a named server endpoint.
+ *   - Causal-island law: each vessel's admin VM owns its own volatile job namespace.
  */
 
 import {

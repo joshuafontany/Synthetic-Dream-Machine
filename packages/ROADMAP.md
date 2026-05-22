@@ -41,7 +41,10 @@ and isomorphic utils now live back in mesh; 164/164 tests pass), **and** the
 vessel ontology scrub + S5 quine closure (command→job + peer→vessel rename;
 bags docs prose scrubbed; `/api/health` + CORS deleted from `main.ts`; genesis
 two-pass CID smoke-test fixed; `test:quine` script added; `pnpm test:quine`
-passes — 65 SharktoothSigil tiddlers in genesis; 39/39 tests pass).
+passes — 65 SharktoothSigil tiddlers in genesis; 39/39 tests pass),
+**and** G.SharktoothSigil completion confirmed (65 sigil tiddlers cover the full
+vocabulary; zero active `[[sigils]]` TOML blocks remain; wild-magic property holds;
+remaining monolith TOML carries documentation data tables only — Path O).
 
 Do not re-open those arcs unless a test proves drift.
 
@@ -52,7 +55,7 @@ These planning docs follow one architectural law:
 - Browser vessels and node vessels share one operator-vessel contract.
 - Every vessel writes local intent first, then syncs over the mesh.
 - Capability proof checks happen on the invoking vessel before edge work.
-- Command tiddlers and receipt tiddlers remain the durable ceremony spine.
+- Job tiddlers stay vessel-local scratch; receipt tiddlers carry the durable shared aftermath.
 - Node-only behavior counts as edge adaptation, not authority.
 - Roadmap order favors vessel-law closure before product-side expansion.
 - "peer" names an Automerge sync participant; "vessel" names the lararium identity-and-runtime unit.
@@ -71,14 +74,14 @@ These planning docs follow one architectural law:
 | — | **Shared-type decomposition** | ✅ Done | `mesh → tw5` dep chain broken; dissolved temporary shared-types references; shared contracts live in `@lararium/mesh`; 164/164 tests pass. |
 | — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
+| — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
 | 1 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
 | 2 | **S9 / lararium-browser** | ⬜ Next | Full browser vessel on the same operator-vessel contract: Automerge, IndexedDB, presence, optional OPFS. |
-| 3 | **M / Local intent bridge** | ⬜ Next | Finish shared command/receipt contracts; keep ceremony meaning in the TW5 VM pool; keep `stdio` default and transport secondary. |
-| 5 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
-| 6 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
-| 7 | **G.SharktoothSigil** | ⬜ Next | Migrate remaining TOML sigil blocks in `memetic-wikitext.tid` → SharktoothSigil tiddlers. `grammarRulesFromText` fully retired; `GRAMMAR_TAG` as only registration surface. Talk-story per category. |
-| 8 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |
-| 9 | **O** | ⬜ Corpus hygiene | Author scaffolded heleuma stubs; keep `lares heleuma --write` aligned. |
+| 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
+| 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
+| 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
+| 6 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |
+| 7 | **O** | ⬜ Corpus hygiene | Author scaffolded heleuma stubs; keep `lares heleuma --write` aligned. Migrate monolith documentation TOML tables to canonical bag memes. |
 | 10 | **UEFN scene importer** | ⬜ Queued | .verse class defs + .umap placements + DEB wires → bag of tiddlers + edges. Spec: `bags/@lares/api/v0.1/pono/uefn-scene.md`. |
 
 ## Test Flow Harness
@@ -106,18 +109,18 @@ Goal: live wiki authoring safe under sustained operator editing on any operator 
 
 ## Path L — Admin Doc Ingress Trust Gate
 
-Goal: operator devices federate infrastructure state; room peers cannot; invalid intent gets rejected before edge work.
+Goal: operator vessels federate infrastructure state; non-operator vessels cannot; invalid intent gets rejected before edge work.
 
 - [ ] Gate admin-doc WebSocket ingress on Keyhive `cap=infrastructure` proof.
 - [ ] Operator devices only; room peers rejected.
-- [ ] Preserve command-tiddler coordination surface.
+- [ ] Preserve job/receipt coordination surface.
 - [ ] Negative smoke: non-infrastructure peer cannot sync admin state.
 
-## Path P — Shared Operator-Peer Contract
+## Path P — Shared Operator-Vessel Contract
 
-Goal: make all active plan text, boot surfaces, and ceremony docs describe one peer-shaped architecture instead of a node-centered topology.
+Goal: make all active plan text, boot surfaces, and ceremony docs describe one vessel-shaped architecture instead of a node-centered topology.
 
-- [ ] Write one canonical operator-peer contract spanning browser peer and node peer.
+- [ ] Write one canonical operator-vessel contract spanning browser vessel and node vessel.
 - [ ] Define admin-lane versus active-wiki-lane responsibilities in the package docs.
 - [ ] Mark node-only behavior as edge adaptation, not authority law.
 - [ ] Add one architecture narrative or diagram that shows the shared lane topology.
@@ -125,94 +128,26 @@ Goal: make all active plan text, boot surfaces, and ceremony docs describe one p
 
 Exit criteria:
 
-- browser and node docs read as budget variants of the same peer
+- browser and node docs read as budget variants of the same vessel
 - no active planning doc treats server or node as privileged truth holder
 
-## Path G.SharktoothSigil — Remaining Sigil Vocabulary
+## Path G.SharktoothSigil — ✅ Done
 
-Goal: dissolve `memetic-wikitext.tid` into operator-extensible SharktoothSigil
-tiddlers. Each tiddler = `lar-*` fields (grammar) + `\widget` wikitext (render).
-When all 48 remaining TOML blocks migrate, the monolith holds families only.
+65 SharktoothSigil tiddlers cover the full sigil vocabulary. `grammar-cache.ts`
+reads only `lar:///ha.ka.ba/tags/SharktoothSigil`-tagged tiddlers. Zero active
+`[[sigils]]` TOML array blocks remain in `memetic-wikitext.tid`. The wild-magic
+property holds: adding a sigil means tagging a tiddler; no code change required.
 
-**Governing principle — `mode=` unification:**
-`mode="live"` = current rendering posture (default).
-`mode="shadow"` = frozen/projection read. Every block-container sigil gets both.
-`~aka` ≡ `kahea mode="shadow"` ≡ `pranala family:observe` — the three forms are
-the same semantic at different layers of sugar. All future `\widget ~sigilname`
-bodies accept `mode` and thread it to their template cascade tag.
+Remaining TOML in the monolith carries documentation data tables only — not grammar:
 
-**Category 1 — Block container sigils (close_pattern in TOML; highest operator impact):**
-Each gets a tiddler with `lar-kind`, `lar-open-pattern`, `lar-close-pattern`, and a
-`\widget ~name(p1:"" mode:"live")` body that resolves URI + picks template by mode.
-
-| Sigil | Semantic | Template tag |
+| Table | Rows | Canonical home |
 |---|---|---|
-| `wehe` | outside/exit boundary — content that crosses the scope edge | `$:/tags/Lar/WeheTemplate` |
-| `meme` | meme boundary — wraps a complete meme definition inline | `$:/tags/Lar/MemeTemplate` |
-| `hui` | group/meeting — collaborative scope boundary | `$:/tags/Lar/HuiTemplate` |
-| `heihei` | race/compete — multiple candidate bodies, first wins | `$:/tags/Lar/HeiheiTemplate` |
-| `wai` | water/flow — streaming data or time-series scope | `$:/tags/Lar/WaiTemplate` |
-| `huli` | search/turn — query or exploration scope | `$:/tags/Lar/HuliTemplate` |
-| `puka` | hole/gap — placeholder pending content | `$:/tags/Lar/PukaTemplate` |
+| `[[control-slot]]` | 9 | sourced in `carrier-codec.ts`; inline doc only |
+| `[[lifecycle_values]]` | 5 | migrate to pranala bag meme (Path O) |
+| `[[ladder_5]]` / `[[ooda_ha_5]]` | 10 | migrate to `bags/@lares/api/v0.1/pono/` (Path O) |
+| `[[stances]]` | partial | migrate to stances/syad meme docs (Path O) |
 
-`mode="shadow"` on any of these renders the frozen/archived form (aka posture).
-No new JS needed. Cascade + `mode` param handles live vs. projection.
-
-**Category 2 — Scope/binding sigils:**
-`\let`, `\var`, `\const`, `waiho` — TW5 has native `$let` / `$set`. These sigils are
-pragma-aliases mapping `<<~ \let name=val >>` → TW5 `\define` / `$let`. Tiddlers carry
-`lar-alias-for` + a `\procedure` body that emits the native TW5 form.
-`waiho` (leave/store) = persistent named slot; no direct TW5 equiv; talk-story needed.
-
-**Category 3 — Concurrency sigils:**
-`\sync`, `\race`, `\rush` — OODA-HA execution postures. Block containers.
-`\sync` = all children must resolve before proceeding (join).
-`\race` = first child to resolve wins (select).
-`\rush` = priority-ordered fan-out; no join required.
-No TW5-native equivalent; template bodies define scheduling intent as metadata.
-Actual concurrency execution stays in ReactionEngine (Path R), not in the wikirule.
-Tiddler body = declarative metadata emission; RE reads the intent at runtime.
-
-**Category 4 — OODA-HA narrative sigils (former Path G.rest):**
-`lele`, `papalohe`, `pae` — HUD-visible phase markers for operator and AI agent flow.
-These do NOT render content bodies; they emit a phase-tag node consumed by the
-stage panel / LARES HUD.
-
-| Sigil | OODA-HA phase | Semantic |
-|---|---|---|
-| `lele` | Observe → Orient flow | motion; the reading-across phase |
-| `papalohe` | Orient (listen) | perception; the orienting stillness |
-| `pae` | Act → Aftermath landing | phase landing; LADDER rung marker |
-
-Template bodies: emit a `data-lar-phase` attribute + phase name. No block body.
-`mode="shadow"` = archived phase marker (for projection/history rendering).
-
-**Category 5 — Control/conditional sigils:**
-`\if`, `\elif`, `\else`, `\for` — pragma-aliases for TW5 `$list`/`$reveal`/filter forms.
-`<<~ \if filter >>body<<~/ \if >>` → `\procedure` that wraps `<$list filter=...>`.
-These need careful talk-story: TW5's filter semantics differ from imperative conditionals.
-`mode=` irrelevant here (these are control flow, not transclusion posture).
-
-**Category 6 — Pragma/declaration sigils:**
-`\procedure`, `\define`, `\widget`, `\function`, `\type`, `\typos` —
-TW5 shadow forms for the operator's own sigil/procedure definitions.
-`<<~ \procedure name(params) >>body<<~/ \procedure >>` is how an operator declares
-a new named procedure in memetic-wikitext. These sigils make the declaration form
-first-class in the grammar. Tiddlers carry `lar-kind: pragma-alias`; no `\widget` body
-(the sigil IS the declaration mechanism — it produces no render output of its own).
-
-**Category 7 — Edge/data/device/remaining:**
-`toml` (data fence), `kumu` (device/canvas widget), `papalohe`, `kukali`, `\suspends`,
-`\import`, `\constraint`, `pono` (right-intent marker), `lele`, `ui` (UI boundary),
-`hana` (action), `kapu` (gate/cap), `helu` (enumerate), `mukuwai`, `kahawai`, `waiho`,
-`\query`, `\guard`, `\task` — each talk-story needed before authoring tiddler bodies.
-Priority: surface area used by `sigil-ahu`, `sigil-kahea` cascades first; exotic forms last.
-
-**Migration exit criteria:**
-- All 48 TOML `[[sigils]]` blocks removed from `memetic-wikitext.tid`
-- `memetic-wikitext.tid` contains only `[[families]]` TOML tables + structural preamble
-- `grammarRulesFromText()` call in `grammar-cache.ts` reads families only; sigil path commented out
-- 42/42 tests pass; smoke clean
+These tables do not feed `grammar-cache.ts`. Migration to bag memes deferred to Path O.
 
 ## Path R — ReactionEngine Completion
 
@@ -237,7 +172,7 @@ Invariants:
 |---|---|---|
 | **Tier 2 aka preview** | ⬜ Deferred | Node-side OG metadata fetch → `thumbnail`/`og-title`/`og-description` fields. Home: `disk-projector.ts` or `og-metadata-fetcher.ts`. Design record at `bags/@lararium/tw5/sigil-aka.md`. |
 | **M / Dreamdeck-app** | ⬜ Queued | After admin ingress gate; picks up same-machine peer consolidation deferred from S6.C.5. |
-| **S9 / lararium-browser parity** | ⬜ Queued | Full browser peer on the same operator-peer contract: Automerge, IndexedDB, presence, optional OPFS. |
+| **S9 / lararium-browser parity** | ⬜ Queued | Full browser vessel on the same operator-vessel contract: Automerge, IndexedDB, presence, optional OPFS. |
 | **S10 / dreamdeck-tldraw** | ⬜ Queued | tldraw shapes as `lar://` resource containers; edge types first-class. |
 | **S11 / dreamdeck-app** | ⬜ Queued | React shell; TW5 + canvas composition; no protocol logic in app layer. |
 | **W / CodeMirror 6 + Lezer + LSP** | ⬜ Downstream | After CLI/live wiki authoring stabilizes. |
@@ -247,7 +182,7 @@ Invariants:
 - Kowloon Bridge: `KowloonOutbox` draft queue + `KowloonInbox` feed mirror; `elyncia.app` deployment.
 - Seitan token circle invites.
 - Federated promotion conflict handling between lararia.
-- Subduction evaluation for lararium↔lararium federation once shared operator-peer parity exists.
+- Subduction evaluation for lararium↔lararium federation once shared operator-vessel parity exists.
 - Speculative RE execution, rollback, metered/gas execution.
 - Wikifier polish: DOCTYPE comment and dash-table round-trip diffs.
 - `\sigil` pragma full implementation (parameter schema, pattern, close-pattern, handler field) — may fold into SharktoothSigil tiddler authoring flow directly.
@@ -256,7 +191,7 @@ Invariants:
 ## Small Open Items
 
 - `heleuma` drift detection should include `uri-path`, not only `file-path`.
-- Command-tiddler tombstone happens client-side; decide whether dispatcher should auto-tombstone after audit write.
+- Job-inbox tombstone and volatile job deletion still split across edge and VM paths; decide whether the VM should own the whole retirement rite after audit write.
 - Cosmetic legacy names in a few logs/strings (`room` vs `wiki`).
 - Some generated/source-file memes still need human-authored content beyond scaffolds.
 - `aka`/`kahea` markdown-meme cascade entries: ship `aka-cascade-markdown-meme.tid` and `kahea-cascade-markdown-meme.tid` with appropriate disk-export templates.

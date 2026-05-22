@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/node/v0.1/disk-projector"
 file-path    = "bags/@lararium/node/v0.1/disk-projector.md"
+source-file  = "packages/lararium-node/src/disk-projector.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

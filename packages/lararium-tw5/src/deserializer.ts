@@ -13,6 +13,7 @@ module-type: tiddlerdeserializer
  * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).
  * This file is the causal-island boundary: text/x-memetic-wikitext enters,
  * TiddlerFields[] (parent + ahu-slot children) leave.
+ * Non-TW5 adaptation stops at this membrane; decomposition law begins here.
  *
  * Uses parseMemeText() from @lararium/mesh/meme-ast — isomorphic, no TW5 dep.
  * Does NOT depend on carrier-split.ts (deprecated web2-era code).

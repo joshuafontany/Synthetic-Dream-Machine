@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, rmSync } from "fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 import path from "path";
 
 import { build } from "vite";
@@ -37,9 +37,9 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
             return false;
           },
           output: {
-            banner: mod.banner,
             esModule: false,
             exports: "named",
+            generatedCode: { symbols: false },
             paths: {
               "smol-toml": "lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml",
             },
@@ -61,7 +61,9 @@ export async function buildPluginCjsTiddlers(outDir = TIDDLER_SRC_DIR): Promise<
     });
 
     const outputPath = path.join(outDirAbs, `${mod.name}.js`);
-    const outputText = readFileSync(outputPath, "utf8");
+    const raw = readFileSync(outputPath, "utf8");
+    const outputText = mod.banner + raw;
+    writeFileSync(outputPath, outputText, "utf8");
     manifest.push({
       title: mod.fields["title"]!,
       moduleType: mod.fields["module-type"]!,

@@ -15,8 +15,8 @@ import {
   LAR_VESSEL_CAPABILITIES_NODE,
   LAR_VESSEL_CAPABILITIES_BROWSER,
   LAR_VESSEL_CAPABILITIES_NONE,
-  type OpenVesselOptions,
-  type OpenVesselResult,
+  type LarariumVesselOptions,
+  type LarariumVesselResult,
   OpenIdentitySlot,
   CompositeStore,
   BAG_IDS,
@@ -170,12 +170,12 @@ describe("LarVessel — addProjection", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Operator-vessel contract — shared browser/node factory surface
+// Lararium vessel contract — shared browser/node open surface
 // ---------------------------------------------------------------------------
 
-describe("open-vessel contract — shared boot surface", () => {
+describe("lararium-vessel contract — shared boot surface", () => {
   test("shared options carry host/wiki identity and optional VM factory", () => {
-    const options: OpenVesselOptions = {
+    const options: LarariumVesselOptions = {
       hostId: "elyncia",
       wikiId: "altar-fire",
       recipeUri: "lar:///ha.ka.ba/@lararium/recipes/default",
@@ -188,7 +188,7 @@ describe("open-vessel contract — shared boot surface", () => {
 
   test("shared result surface exposes vessel/repo/store/pool symmetry", () => {
     const vessel = new LarVessel({ vesselId: "p", store: makeStore() });
-    const result: OpenVesselResult<LarVessel<"pool">, "pool", { kind: "repo" }, CompositeStore> = {
+    const result: LarariumVesselResult<LarVessel<"pool">, "pool", { kind: "repo" }, CompositeStore> = {
       vessel,
       pool: "pool",
       repo: { kind: "repo" },

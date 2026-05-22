@@ -12,7 +12,7 @@
  *   IslandAccumulator — live crdt-remote buffering + frame-aligned drain
  *
  * Platform-agnostic: no requestAnimationFrame import. The render loop in
- * TW5Engine.startRenderLoop() (browser) or a setInterval caller (Node)
+ * startRenderLoop() from tw5-camera.ts (browser) or a setInterval caller (Node)
  * drives flushAll() on IslandAdaptor.
  *
  * Spec: lar:///ha.ka.ba/@lares/api/v0.1/lararium/island-accumulator

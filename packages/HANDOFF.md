@@ -44,10 +44,14 @@ Next work, in order:
 2. S9 / lararium-browser: browser vessel on same operator-vessel contract — Automerge,
    IndexedDB, presence, optional OPFS.
 3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
-4. Path G.SharktoothSigil: block-container sigils (wehe, meme, heihei, wai, huli).
-5. UEFN scene importer — DEFERRED until after successful browser vessel e2e tests.
+4. UEFN scene importer — DEFERRED until after successful browser vessel e2e tests.
    Spec exists at bags/@lares/api/v0.1/pono/uefn-scene.md; do not begin import
    pipeline until browser vessel e2e passes.
+
+Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers landed; grammar-cache.ts reads
+SharktoothSigil-tagged tiddlers only; zero active [[sigils]] TOML blocks remain.
+Remaining TOML in memetic-wikitext.tid carries documentation data tables only
+(control-slot, lifecycle_values, ladder_5, stances) — corpus hygiene, Path O.
 
 Completed this turn (2026-05-17 turn 14):
 - shared-type extraction later decomposed back into @lararium/mesh; mesh ↔ tw5 dep chain remains broken without keeping a separate shared-types package.

@@ -232,41 +232,11 @@ Examples, profile guidance, and extended bridge notes belong in the sidecars.
 
 ## Sigil Registry
 
-Each entry names a sigil, its surface form, and its semantic role.
-All sigil rules now carry as SharktoothSigil tiddlers (tag: `lar:///ha.ka.ba/tags/SharktoothSigil`).
-The `toml` data-fence sigil lives at `lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml`.
+Grammar self-hosted. 65 SharktoothSigil tiddlers carry the full vocabulary.
+`grammar-cache.ts` reads only `lar:///ha.ka.ba/tags/SharktoothSigil`-tagged tiddlers.
+Adding a sigil means tagging a tiddler — no code change required.
 
-```toml
-# Sigil registry — sigil rules have migrated to SharktoothSigil tiddlers.
-# Grammar self-hosted: grammar-cache.ts reads only SharktoothSigil-tagged tiddlers.
-
-# --- Concurrency sigils ---
-
-# --- Render-time edge sugar ---
-
-# --- Context sigil ---
-
-# --- Conditional sigils ---
-
-# --- Iteration ---
-
-# --- Definition sigils (<<~! pragma mode) ---
-
-# --- Variable binding sigil ---
-
-# English aliases for waiho
-# --- Device placement sigil ---
-
-# Three surface forms (same as ahu — kau is a child-slot sigil):
-#   disk (definition):  <<~ kau #device DeviceName prop:val >>   — inline; authoritative at parse time
-#   wiki (live-ref):    <<~ kahea kau #device >>                  — child tiddler is authoritative
-#   projection (frozen):<<~ aka kau #device >>                    — frozen read at projection time
-
-# --- Element type definition sigil ---
-
-# English aliases for kumu
-# --- Additional edge/invocation aliases ---
-
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/sharktooth-sigils >>
 
 <<~/ahu >>
 
@@ -274,11 +244,10 @@ The `toml` data-fence sigil lives at `lar:///ha.ka.ba/@lararium/tw5/tiddlers/sig
 
 ## Pranala Family Contracts
 
-Each family carries an invariant property schema.
-The TypeScript validator (`validatePranalaEdge`) enforces these contracts at compile time.
-In Phase 2 this table replaces the hard-coded `FAMILY_CONTRACTS` map in `pranala-parser.ts`.
+Eight families. Each carries an invariant property schema enforced by `validatePranalaEdge`.
+Family tiddlers carry `lar-kind: family` and register via `GRAMMAR_TAG`.
 
-
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala-families >>
 
 <<~/ahu >>
 
@@ -287,28 +256,10 @@ In Phase 2 this table replaces the hard-coded `FAMILY_CONTRACTS` map in `pranala
 ## Lifecycle Values
 
 Pranala edges carry a `lifecycle` field that scopes their validity.
+Five values: `instance` (default), `permanent`, `ephemeral`, `boot`, `per-player`.
+Canonical definition lives in the pranala invariant.
 
-```toml
-[[lifecycle_values]]
-name        = "instance"
-description = "default; exists for the duration of the carrier's active session"
-
-[[lifecycle_values]]
-name        = "permanent"
-description = "persists across sessions and boot cycles"
-
-[[lifecycle_values]]
-name        = "ephemeral"
-description = "exists only for a single render pass or computation"
-
-[[lifecycle_values]]
-name        = "boot"
-description = "valid only during the boot compilation phase"
-
-[[lifecycle_values]]
-name        = "per-player"
-description = "Verse/UEFN: instantiated once per connected player agent; maps to scope:personal in Kowloon model; not shared across the room"
-```
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala >>
 
 <<~/ahu >>
 
@@ -316,108 +267,11 @@ description = "Verse/UEFN: instantiated once per connected player agent; maps to
 
 ## Law of Fives — Invariant Ladders
 
-Two orthogonal 5-point axes underlie all domain-specific scales in the system.
+Two orthogonal 5-point axes: `LADDER_5` (action→week, finest→coarsest) and `OODA_HA_5` (act→aftermath, active→reflective).
+Phase runs counter to scale — act maps to action (finest); aftermath maps to week (coarsest).
 Exported from `packages/lararium-mesh/src/ast.ts` as `LADDER_5`, `OODA_HA_5`, `SCOPE_5`.
 
-```toml
-# Scale ladder — finest to coarsest
-[[ladder_5]]
-index       = 1
-name        = "action"
-scope       = "ephemeral"
-chrono      = "⚡"
-zoom        = "glyph"
-kowloon     = "turn-local"
-ooda_ha     = "act"
-discordian  = "Bureaucracy"
-
-[[ladder_5]]
-index       = 2
-name        = "round"
-scope       = "personal"
-chrono      = "⚔️"
-zoom        = "token"
-kowloon     = "@domain"
-ooda_ha     = "decide"
-discordian  = "Confusion"
-
-[[ladder_5]]
-index       = 3
-name        = "turn"
-scope       = "consensual"
-chrono      = "🔍"
-zoom        = "meme"
-kowloon     = "circle:<id>"
-ooda_ha     = "orient"
-discordian  = "Discord"
-
-[[ladder_5]]
-index       = 4
-name        = "watch"
-scope       = "collective"
-chrono      = "⚙️"
-zoom        = "room"
-kowloon     = "group:<id>"
-ooda_ha     = "observe"
-discordian  = "Chaos"
-
-[[ladder_5]]
-index       = 5
-name        = "week"
-scope       = "universal"
-chrono      = "🗺️"
-zoom        = "network"
-kowloon     = "@public"
-ooda_ha     = "aftermath"
-discordian  = "Aftermath"
-
-# OODA-HA phases — active to reflective
-# Note: phase runs counter to scale. Act=action(finest); Aftermath=week(coarsest).
-[[ooda_ha_5]]
-index   = 1
-name    = "act"
-sigil   = "▶"
-patron  = "Zarathud"
-season  = "Bureaucracy"
-jaina   = "asti"
-type_state = "typed/committed"
-
-[[ooda_ha_5]]
-index   = 2
-name    = "decide"
-sigil   = "◇"
-patron  = "Sri Syadasti"
-season  = "Confusion"
-jaina   = "asti-nasti"
-type_state = "interpret"
-
-[[ooda_ha_5]]
-index   = 3
-name    = "orient"
-sigil   = "⏿"
-patron  = "Dr. Van Van Mojo"
-season  = "Discord"
-jaina   = "nasti"
-type_state = "named shapes"
-
-[[ooda_ha_5]]
-index   = 4
-name    = "observe"
-sigil   = "✶"
-patron  = "Hung Mung"
-season  = "Chaos"
-jaina   = "avaktavya"
-type_state = "? string"
-
-[[ooda_ha_5]]
-index   = 5
-name    = "aftermath"
-sigil   = "⤴↺"
-patron  = "Elder Malaclypse"
-season  = "Aftermath"
-jaina   = "asti-nasti-avaktavya"
-type_state = "blame/validate"
-```
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-law-of-5s >>
 
 <<~/ahu >>
 
@@ -425,226 +279,12 @@ type_state = "blame/validate"
 
 ## Stances, Syad, and Tools
 
-Three separate graphs. Stances encode epistemic register (Syad predicate). Tools encode aperture and feed direction. Syad encodes the 7 truth-value compounds. The graphs connect but do not collapse.
+Three separate graphs. Stances encode epistemic register (Syad predicate). Tools encode aperture and feed direction. Syad encodes 7 truth-value compounds. The graphs connect but do not collapse.
 
 Register measures confidence *within* the active stance — not universal truth weight.
-Source: `lar:///ha.ka.ba/@lares/api/v0.1/mu/the-syad-perspectives` and `lar:///ha.ka.ba/@lares/api/v0.1/mu/the-four-tools`
 
-```toml
-# Graph 1: Five stances → Syad predicate
-# tool_affinity records natural tool; does not lock stance to tool.
-# Poet and Private share jaina_predicate = "avaktavya" (P3);
-#   feed_direction differentiates them (external vs internal) — that edge lives in the Tool graph.
-# Satirist: stated predicate P2 (nasti); operational predicate P6 (nasti+avaktavya).
-#   The P2→P6 gradient marks maturity: brittle at P2, effective when holding P6.
-[[stances]]
-name              = "philosopher"
-sigil             = "🏛️"
-register_measures = "propositional support"
-jaina_predicate   = "asti"
-jaina_index       = 1
-phase_affinity    = "decide"
-tool_affinity     = "sword"
-description       = "propositional truth-confidence; commits to a claim; 0.0=no support, 1.0=full support"
-
-[[stances]]
-name              = "poet"
-sigil             = "🌊"
-register_measures = "analogical resonance"
-jaina_predicate   = "avaktavya"
-jaina_index       = 3
-phase_affinity    = "observe"
-tool_affinity     = "wand"
-description       = "analogical correspondence outward; T/F axis does not fit — measures resonance amplitude"
-
-[[stances]]
-name              = "satirist"
-sigil             = "🗡️"
-register_measures = "targeting confidence"
-jaina_predicate   = "nasti"
-jaina_index       = 2
-jaina_operational = "nasti+avaktavya"
-jaina_index_operational = 6
-phase_affinity    = "act"
-tool_affinity     = "wand+pentacle"
-description       = "targeting what does not hold; operational predicate P6 holds absence+inexpressible; 0.0=missed, 1.0=landed"
-
-[[stances]]
-name              = "humorist"
-sigil             = "🎭"
-register_measures = "relational fit"
-jaina_predicate   = "asti-nasti"
-jaina_index       = 4
-phase_affinity    = "orient"
-tool_affinity     = "cup"
-description       = "holds T and F simultaneously without resolving; 0.0=fell flat, 1.0=connected"
-
-[[stances]]
-name              = "private"
-sigil             = "🔮"
-register_measures = "inward presence"
-jaina_predicate   = "avaktavya"
-jaina_index       = 3
-phase_affinity    = "aftermath"
-tool_affinity     = "pentacle"
-description       = "avaktavya directed inward; T/F axis does not fit — measures interior presence amplitude"
-
-# Graph 2: Seven Syad predicates (Jaina Saptabhangi)
-# P5/P6 = threshold crossings (stance past its boundary, not stable standpoints).
-# P7 = Arcana only — no stance mediates it; reached for, not inhabited.
-[[predicates]]
-index       = 1
-compound    = "asti"
-primitives  = ["T"]
-covered_by  = "philosopher"
-description = "affirms; claim holds from this standpoint"
-
-[[predicates]]
-index       = 2
-compound    = "nasti"
-primitives  = ["F"]
-covered_by  = "satirist"
-description = "denies; claim does not hold from this standpoint"
-
-[[predicates]]
-index       = 3
-compound    = "avaktavya"
-primitives  = ["M"]
-covered_by  = "poet, private"
-description = "inexpressible; T/F axis does not fit the claim — two stances, opposite directions"
-
-[[predicates]]
-index       = 4
-compound    = "asti-nasti"
-primitives  = ["T", "F"]
-covered_by  = "humorist"
-description = "affirms and denies simultaneously; holds without resolving"
-
-[[predicates]]
-index       = 5
-compound    = "asti-avaktavya"
-primitives  = ["T", "M"]
-covered_by  = "threshold"
-description = "threshold crossing: philosopher past its boundary; claim holds AND resists propositional form"
-
-[[predicates]]
-index       = 6
-compound    = "nasti-avaktavya"
-primitives  = ["F", "M"]
-covered_by  = "threshold"
-description = "threshold crossing: satirist past its boundary; absence named AND void beneath resists description; also satirist operational predicate when stable"
-
-[[predicates]]
-index       = 7
-compound    = "asti-nasti-avaktavya"
-primitives  = ["T", "F", "M"]
-covered_by  = "arcana"
-description = "full compound; no stance mediates it; Arcana reaches for it to release the current reading"
-
-# Graph 3: Five tools — feed direction × aperture
-# feed: external | internal | release
-# aperture: wide | narrow | release
-# Arcana has no stance intermediary — maps directly to P7.
-[[tools]]
-name        = "wand"
-ascii       = "*"
-element     = "Fire/Spirit"
-feed        = "external"
-aperture    = "wide"
-phase       = "observe"
-description = "track external signal; wide scan; Observe phase emphasis"
-
-[[tools]]
-name        = "cup"
-ascii       = "?"
-element     = "Water/Emotion"
-feed        = "external"
-aperture    = "wide"
-phase       = "orient"
-description = "wide relational field; hold contested plausibility open; Orient phase emphasis"
-
-[[tools]]
-name        = "sword"
-ascii       = "!"
-element     = "Air/Mind"
-feed        = "external"
-aperture    = "narrow"
-phase       = "decide"
-description = "precision cut; commits to one side; Decide/Act phase emphasis"
-
-[[tools]]
-name        = "pentacle"
-ascii       = "~"
-element     = "Earth/Body"
-feed        = "internal"
-aperture    = "narrow"
-phase       = "aftermath"
-description = "ground internal feed; hidden/structural; Aftermath phase emphasis"
-
-[[tools]]
-name        = "arcana"
-ascii       = "-"
-element     = "Orichalcum"
-feed        = "release"
-aperture    = "release"
-phase       = "release"
-jaina_predicate = "asti-nasti-avaktavya"
-jaina_index = 7
-description = "no stance mediates it; releases current reading without replacing; model agnosticism"
-
-# Canonical posture pairs (Tool combinations — Graph 3 edges)
-[[postures]]
-ascii       = "*!"
-tools       = ["wand", "sword"]
-feed        = "external"
-aperture    = "narrow"
-description = "track external feed, zoom in for detail"
-
-[[postures]]
-ascii       = "*?"
-tools       = ["wand", "cup"]
-feed        = "external"
-aperture    = "wide"
-description = "track external feed, zoom out for relation"
-
-[[postures]]
-ascii       = "~!"
-tools       = ["pentacle", "sword"]
-feed        = "internal"
-aperture    = "narrow"
-description = "ground internal feed, zoom in for precision"
-
-[[postures]]
-ascii       = "~?"
-tools       = ["pentacle", "cup"]
-feed        = "internal"
-aperture    = "wide"
-description = "ground internal feed, zoom out for overview"
-
-[[postures]]
-ascii       = "--"
-tools       = ["arcana"]
-feed        = "release"
-aperture    = "release"
-description = "release current stance/tool reading; model agnosticism"
-
-# Conflict states — Tool graph conflicts only (not Syad conflicts)
-# *~ = Satirist natural posture; Signal Jam for all other stances.
-[[posture_conflicts]]
-ascii            = "*~"
-type             = "feed"
-name             = "Signal Jam"
-stance_pair      = "poet, private"
-satirist_posture = true
-description      = "external and internal feeds locked; Satirist owns this productively; all other stances: named pressure state"
-
-[[posture_conflicts]]
-ascii       = "?!"
-type        = "aperture"
-name        = "Dubious Move"
-stance_pair = "humorist, philosopher"
-description = "wide aperture and narrow aperture locked; wide field asserts precision it cannot support"
-```
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-four-tools >>
 
 <<~/ahu >>
 
@@ -719,17 +359,13 @@ The **projection snapshot** is the human-readable collection format: memetic-wik
 
 <<~ ahu #phase-2-wiring-note >>
 
-## Phase 2 Wiring Note
+## Grammar Self-Hosting — Completed
 
-The TypeScript parser at `packages/lararium-mesh/src/pranala-parser.ts` currently hard-codes all sigil patterns and family contracts. Phase 2 replaces this with a rule-interpreter pattern:
+The Phase 2 plan (read TOML sigil arrays from this carrier via `node-host.ts`, pass as `GrammarRules` to the parser) executed differently. `grammar-cache.ts` now reads `lar:///ha.ka.ba/tags/SharktoothSigil`-tagged tiddlers directly from the wiki. No TOML parse path runs. No carrier read in `node-host.ts`.
 
-1. `node-host.ts` reads this carrier via `readFileSync` before calling `buildControlClosure`
-2. Extracts `[[sigils]]` and `[[families]]` TOML arrays into a `GrammarRules` object
-3. Passes `GrammarRules` as an optional second argument to `parsePranalaEdges`
-4. Parser uses rule-provided patterns when present, falls back to built-ins for bootstrap safety
+Adding a sigil: tag a tiddler with `lar:///ha.ka.ba/tags/SharktoothSigil` and populate `lar-*` fields. No code change. No carrier promotion.
 
-The `GrammarRules` interface is defined in `ast.ts` and exported from `@lararium/mesh` (moved from `pranala-parser.ts` in Phase 3 to break a circular dependency).
-Adding a new sigil requires authoring a `[[sigils]]` entry here and promoting this carrier — no TypeScript rebuild.
+<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/sharktooth-sigils >>
 
 <<~/ahu >>
 

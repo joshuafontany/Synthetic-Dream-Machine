@@ -14,7 +14,19 @@
  */
 
 export { TW5Engine } from "./tw5-vm.js";
-export type { TW5CoreBootBlob, CameraRegistration, CameraMount } from "./tw5-vm.js";
+export type { TW5CoreBootBlob } from "./tw5-vm.js";
+export {
+  ACTIVE_WIKI_URI,
+  ActiveWikiLayerSlot,
+  buildActiveWikiRecord,
+  planActiveWikiSlot,
+  readActiveWikiSlug,
+  selectActiveWikiSlug,
+} from "./active-wiki.js";
+export type { ActiveWikiSelectionSource, ActiveWikiLayerMount, ActiveWikiSlotPlan } from "./active-wiki.js";
+export type { CameraMount, CameraRegistration } from "./tw5-camera.js";
+export { mountCamera, startRenderLoop } from "./tw5-camera.js";
+export { mountPanel, setPalette, setBootSplash } from "./tw5-browser-surface.js";
 export type {
   TW5Wiki,
   TW5Tiddler,
@@ -22,11 +34,33 @@ export type {
 } from "./types/tiddlywiki.d.ts";
 
 export { IslandAdaptor } from "./island-adaptor.js";
+export { openVmIslandBridge } from "./vm-island-bridge.js";
+export type { VmIslandBridge, VmIslandBridgeOptions } from "./vm-island-bridge.js";
+export {
+  openVmCarrierSyncSession,
+} from "./wiki-sync.js";
+export { placeVmJob, patchVmJob, removeVmJob, writeVmJobReceipt, dispatchVmJobLifecycle } from "./job-vm.js";
+export type {
+  VmCarrierSyncInput,
+  VmCarrierSyncResult,
+  VmCarrierSyncSession,
+  VmCarrierSyncSessionOptions,
+} from "./wiki-sync.js";
+export type { VmJobPlacement } from "./job-vm.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
 export type { ProjectionStore } from "./memory-store.js";
 export type { MemeRecipeVm } from "@lararium/mesh";
 
 export { DirectMemeRecipeVm, bootMemeRecipeVm } from "./meme-recipe-vm.js";
+export { collectVmPreloadedTiddlers, openVmSession } from "./vm-session.js";
+export type { VmSessionFactoryOptions, VmSessionResult } from "./vm-session.js";
+export { MountedWikiController } from "./mounted-wiki-controller.js";
+export type {
+  MountedWikiControllerDeps,
+  MountedWikiFlushDriver,
+  MountedWikiMountOptions,
+  MountedWikiSession,
+} from "./mounted-wiki-controller.js";
 
 export { exportMemeText } from "./meme-write.js";
 export { promoteUris, planPromoteUris } from "./modules/lar-promote.js";

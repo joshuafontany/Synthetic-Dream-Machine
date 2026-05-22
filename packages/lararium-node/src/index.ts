@@ -23,6 +23,9 @@ export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-ke
 
 export { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
 export type { JobHandler, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
+export { relayJobInboxChange } from "./job-inbox-relay.js";
+export type { JobInboxRelayOptions, JobPlacementRequest } from "./job-inbox-relay.js";
+export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
 
 export { createWhereHandler } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";
@@ -32,11 +35,12 @@ export type { PromoteHandlerOptions } from "./promote-handler.js";
 
 export {
   createListWikisHandler, createInitWikiHandler,
-  createOpenWikiHandler, createSyncWikiHandler,
+  createOpenWikiHandler,
   createPinWikiHandler, createUnpinWikiHandler,
   createAddBagHandler, createRemoveBagHandler,
   createPruneStaleHandler, createDraftHandler,
 } from "./wiki-handlers.js";
+export { createSyncWikiHandler } from "./wiki-sync-handler.js";
 export type {
   WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions,
   WikiComposeOptions, DraftHandlerOptions,

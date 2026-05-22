@@ -49,9 +49,9 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     return 3;
   }
 
-  let peer;
+  let vessel;
   try {
-    peer = await connectAdminVessel(connectOpts);
+    vessel = await connectAdminVessel(connectOpts);
   } catch (err) {
     console.error(`lares draft: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");
@@ -59,7 +59,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   }
 
   try {
-    const where = await submitJob(peer, "where", { tiddler }, did);
+    const where = await submitJob(vessel, "where", { tiddler }, did);
     if (where.status === "error") {
       console.error(`recipe-presence query failed: ${where.errorMessage ?? "unknown"}`);
       return 4;
@@ -91,7 +91,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     const draftArgs: Record<string, string> = { tiddler };
     if (toBag) draftArgs["toBag"] = toBag;
 
-    const result = await submitJob(peer, "draft", draftArgs, did);
+    const result = await submitJob(vessel, "draft", draftArgs, did);
     if (result.status === "error") {
       console.error(`draft failed: ${result.errorMessage ?? "unknown"}`);
       return 6;
@@ -104,6 +104,6 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     console.log(`  audit:  lar:///ha.ka.ba/@lararium/@admin/log/${result.requestId}`);
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }

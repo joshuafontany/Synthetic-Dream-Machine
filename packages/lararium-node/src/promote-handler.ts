@@ -1,9 +1,9 @@
 /**
  * promote-handler — node projection for the TW5-native promote ceremony.
  *
- * Capability verification and bag mutation run peer-local: the ceremony
+ * Capability verification and bag mutation run vessel-local: the ceremony
  * executes inside the primary TW5 wiki engine (quine-law local to the VM)
- * and the node peer contributes only hostful capabilities (disk, key access).
+ * and the node vessel contributes only hostful capabilities (disk, key access).
  */
 
 import { type CompositeStore, bagScopedStore, type TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";

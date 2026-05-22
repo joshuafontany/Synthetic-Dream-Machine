@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/lar-event-bus"
 file-path    = "bags/@lararium/mesh/v0.1/lar-event-bus.md"
+source-file  = "packages/lararium-mesh/src/lar-event-bus.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

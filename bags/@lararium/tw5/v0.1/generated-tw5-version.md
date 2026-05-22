@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/tw5/v0.1/generated-tw5-version"
 file-path    = "bags/@lararium/tw5/v0.1/generated-tw5-version.md"
+source-file  = "packages/lararium-tw5/src/generated-tw5-version.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

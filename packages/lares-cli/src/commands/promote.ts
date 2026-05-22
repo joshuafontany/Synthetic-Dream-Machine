@@ -2,7 +2,7 @@
  * `lares promote <uri> --to <bag> [--from <bag>] [--yes]`
  *
  * Canon-promotion ceremony. Connects to the running `lares serve` daemon as
- * an Automerge-repo WebSocket peer, writes a recipe-presence query first
+ * an Automerge-repo WebSocket vessel, writes a recipe-presence query first
  * (so the operator confirms the source bag), then writes the actual promote
  * job. Both flow through the admin doc; the daemon's dispatcher reacts.
  *
@@ -63,9 +63,9 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
     return 3;
   }
 
-  let peer;
+  let vessel;
   try {
-    peer = await connectAdminVessel(connectOpts);
+    vessel = await connectAdminVessel(connectOpts);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares promote: ${msg}`);
@@ -75,7 +75,7 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
 
   try {
     // 1. Recipe-presence preview.
-    const where = await submitJob(peer, "where", { tiddler }, did);
+    const where = await submitJob(vessel, "where", { tiddler }, did);
     if (where.status === "error") {
       console.error(`recipe-presence query failed: ${where.errorMessage ?? "unknown"}`);
       return 4;
@@ -116,7 +116,7 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
 
     // 3. Promote.
     const promoteResult = await submitJob(
-      peer, "promote",
+      vessel, "promote",
       { tiddler, toBag, fromBag: primary },
       did,
     );
@@ -138,6 +138,6 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
     console.log(`  audit: lar:///ha.ka.ba/@lararium/@admin/log/${promoteResult.requestId}`);
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }

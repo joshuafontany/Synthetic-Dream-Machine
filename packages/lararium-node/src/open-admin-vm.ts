@@ -8,7 +8,7 @@
  *
  * Federation: scoped to the operator's own devices via cap=infrastructure
  * delegations, gated at the ingress trust check (S7.4). Never reaches wiki
- * peers — the admin doc has its own AutomergeUrl and its own sync boundary.
+ * vessels — the admin doc has its own AutomergeUrl and its own sync boundary.
  *
  * Architecture: the admin VM has its own TW5Engine, its own CompositeStore,
  * and its own IslandAdaptor. Sharing the wiki VM's composite would risk
@@ -77,7 +77,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   // the wiki. onUriChanged handles inbound; saveTiddler/deleteTiddler handle outbound.
   composite.addProjection(adaptor);
 
-  // The admin doc is purely local — no remote Automerge sync peer to wait for.
+  // The admin doc is purely local — no remote Automerge sync vessel to wait for.
   // Mark sync complete immediately so the IslandAdaptor flushes its buffer
   // and the seeded bag-mirror config tiddlers are visible in the admin TW5 wiki
   // before the first job handler runs.

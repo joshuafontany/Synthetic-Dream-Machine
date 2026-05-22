@@ -163,7 +163,10 @@ async function main(): Promise<void> {
 
   await projections.enable({ id: "disk", kind: "disk", enabled: true, fields: {} }, vessel);
 
-  console.log(`[lararium] live — wiki: ${wikiId} | storage: ${storageDir} | root: ${rootDir}`);
+  if (result.activeWikiSource === "admin-marker" && result.activeWikiId !== wikiId) {
+    console.log(`[lararium] active wiki marker: ${wikiId} → ${result.activeWikiId}`);
+  }
+  console.log(`[lararium] live — wiki: ${result.activeWikiId} | storage: ${storageDir} | root: ${rootDir}`);
   console.log(`[lararium] catalog:  ${result.catalogHandleUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
   console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);

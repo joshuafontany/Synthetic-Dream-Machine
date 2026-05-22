@@ -49,10 +49,10 @@ export async function cmdRegisterCold(args: ParsedArgs): Promise<number> {
 }
 
 export async function cmdResidency(_args: ParsedArgs): Promise<number> {
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "residency", {}, "lares-cli");
+    const r = await submitJob(vessel, "residency", {}, "lares-cli");
     if (r.status === "error") {
       console.error(`residency query failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -79,15 +79,15 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
 async function runResidencyCommand(name: string, args: Record<string, unknown>): Promise<number> {
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, name, args, "lares-cli");
+    const r = await submitJob(vessel, name, args, "lares-cli");
     if (r.status === "error") {
       console.error(`${name} failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -95,7 +95,7 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
     console.log(`${name}: ${JSON.stringify(summaryOutput(r) ?? {}, null, 2)}`);
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 

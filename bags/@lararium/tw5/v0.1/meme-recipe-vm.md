@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/tw5/v0.1/meme-recipe-vm"
 file-path    = "bags/@lararium/tw5/v0.1/meme-recipe-vm.md"
+source-file  = "packages/lararium-tw5/src/meme-recipe-vm.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

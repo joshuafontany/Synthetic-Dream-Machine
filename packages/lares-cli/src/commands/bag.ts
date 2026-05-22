@@ -49,11 +49,11 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares bag epoch <bag-url>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -69,7 +69,7 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 

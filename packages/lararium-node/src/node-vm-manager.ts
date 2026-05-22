@@ -1,5 +1,5 @@
 /**
- * NodeVmManager — three-tier TW5 VM lifecycle for the Node.js lararium peer.
+ * NodeVmManager — three-tier TW5 VM lifecycle for the Node.js lararium vessel.
  *
  * ## Tiers
  *

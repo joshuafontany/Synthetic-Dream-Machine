@@ -4,6 +4,8 @@
  * One instance runs per hot-tier wiki slot. Owns a TW5Engine (and in P.3.5
  * a ReactionEngine) co-located in the Worker thread, providing synchronous
  * in-thread reads with no StructuredClone overhead on the hot path.
+ * The worker owns live wiki reaction once promoted; the main thread should
+ * feed snapshots, changesets, and teardown only.
  *
  * ## Lifecycle (GP-5 contract)
  *
@@ -31,6 +33,10 @@
  *   Automerge-repo / DocHandle — Worker holds a local replica, not a live handle.
  *   WebSocket / network — main thread owns all I/O.
  *   CryptoKey material — stays in main thread (GP-4).
+ *
+ * Covenant pressure:
+ *   As ReactionEngine grows, keep authority here narrow and explicit: live wiki
+ *   evaluation in-thread, edge I/O and capability material outside.
  *
  * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/lar-wiki-worker
  */

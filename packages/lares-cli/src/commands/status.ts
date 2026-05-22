@@ -66,9 +66,9 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
   if (portInUse) {
     try {
       const { connectAdminVessel, submitJob, summaryOutput } = await import("../admin-connector.js");
-      const peer = await connectAdminVessel({});
+      const vessel = await connectAdminVessel({});
       try {
-        const r = await submitJob(peer, "residency", {}, "lares-status", { timeoutMs: 2000 });
+        const r = await submitJob(vessel, "residency", {}, "lares-status", { timeoutMs: 2000 });
         if (r.status === "done") {
           const stats   = summaryOutput(r) ?? {};
           const pinned  = (stats["pinned"] ?? []) as string[];
@@ -78,7 +78,7 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
           console.log(`  residency:   ${pinned.length} pinned · ${hot.length}/${hotCap} hot · ${coldCnt} cold`);
         }
       } finally {
-        await peer.disconnect();
+        await vessel.disconnect();
       }
     } catch {
       // Daemon up but residency probe failed — quiet.

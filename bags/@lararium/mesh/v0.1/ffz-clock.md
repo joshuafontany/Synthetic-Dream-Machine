@@ -4,6 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/ffz-clock"
 file-path    = "bags/@lararium/mesh/v0.1/ffz-clock.md"
+source-file  = "packages/lararium-mesh/src/ffz-clock.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50

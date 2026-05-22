@@ -13,7 +13,8 @@
  *   CompositeStore: system → lares → corpus:* → wiki(writable) → draft(writable)
  *   LarVessel: store = wiki AutomergeDocStore, composite = full CompositeStore
  *
- * The relay vessel holds no privilege. It carries sync; it does not adjudicate content truth.
+ * The node vessel holds no semantic privilege. It carries roads, docks, and sync;
+ * it does not adjudicate content truth or wiki ritual meaning.
  * Multiple wikis → multiple openNodeVessel calls, one LarVessel per DocHandle.
  *
  * FPI-5 (trim tab): all Node-specific code lives here.
@@ -32,7 +33,7 @@ import { NodeWSServerAdapter }          from "@automerge/automerge-repo-network-
 import type { WebSocketServer }         from "isomorphic-ws";
 import type {
   LarDoc,
-  OpenVesselOptions, OpenVesselResult, LarOpenPhase,
+  LarariumVesselOptions, LarariumVesselResult, LarOpenPhase,
 } from "@lararium/mesh";
 import {
   LarVessel, LAR_VESSEL_CAPABILITIES_NODE, OpenIdentitySlot,
@@ -47,8 +48,14 @@ import {
 import type { LarTiddlerRecord } from "@lararium/mesh";
 import { toLarTiddlerRecord } from "@lararium/mesh";
 import type { MemeRecipeVm } from "@lararium/mesh";
-import { IslandAccumulator } from "@lararium/mesh";
-import { TW5Engine, IslandAdaptor, DirectMemeRecipeVm, MemoryTiddlerStore } from "@lararium/tw5";
+import {
+  ACTIVE_WIKI_URI,
+  MountedWikiController,
+  TW5Engine,
+  MemoryTiddlerStore,
+  planActiveWikiSlot,
+  selectActiveWikiSlug,
+} from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers,
@@ -64,11 +71,12 @@ import { createPromoteHandler }                    from "./promote-handler.js";
 import { createWhereHandler }                       from "./where-handler.js";
 import {
   createListWikisHandler, createInitWikiHandler,
-  createOpenWikiHandler, createSyncWikiHandler,
-  createPinWikiHandler, createUnpinWikiHandler,
-  createAddBagHandler, createRemoveBagHandler,
-  createPruneStaleHandler, createDraftHandler,
+  createOpenWikiHandler,
 } from "./wiki-handlers.js";
+import { createSyncWikiHandler } from "./wiki-sync-handler.js";
+import { createPinWikiHandler, createUnpinWikiHandler } from "./wiki-residency-handlers.js";
+import { createAddBagHandler, createRemoveBagHandler } from "./wiki-compose-handlers.js";
+import { createPruneStaleHandler, createDraftHandler } from "./wiki-draft-handlers.js";
 import { createEpochBagHandler, createRotateRecipeHandler } from "./epoch-handlers.js";
 import {
   createPinHandler, createUnpinHandler, createResidencyStatsHandler,
@@ -95,7 +103,7 @@ export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstra
 /** @see LarOpenPhase in @lararium/mesh */
 export type NodeOpenPhase = LarOpenPhase;
 
-export interface NodeVesselOptions extends OpenVesselOptions<MemeRecipeVm, TW5Engine> {
+export interface NodeVesselOptions extends LarariumVesselOptions<MemeRecipeVm, TW5Engine> {
   storageDir: string;
   wss:        WebSocketServer;
   catalogUrl?: string | null;
@@ -113,12 +121,16 @@ export interface NodeVesselOptions extends OpenVesselOptions<MemeRecipeVm, TW5En
   rootDir?: string;
 }
 
-export interface NodeVesselResult extends OpenVesselResult<
+export interface NodeVesselResult extends LarariumVesselResult<
   LarVessel<VmPool<MemeRecipeVm>>,
   VmPool<MemeRecipeVm>,
   Repo,
   CompositeStore
 > {
+  /** The wiki slug this vessel actually mounted after admin-marker resolution. */
+  activeWikiId:     string;
+  /** Whether the mounted wiki came from CLI boot args or the admin marker. */
+  activeWikiSource: "boot-arg" | "admin-marker";
   tw5:              TW5Engine;
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz. */
   eventBus:         LarEventBusImpl;
@@ -141,8 +153,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const { hostId, wikiId, storageDir, wss, catalogUrl, recipeUri: recipeUriOpt, onPhase, vmFactory, genesisDir, rootDir: rootDirOpt } = opts;
   const bootstrapPath = join(genesisDir ?? DEFAULT_GENESIS_DIR, "social-bootstrap.json");
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
-  // Stable identity URI for this wiki — the map key in LarDoc.wikis.
-  const wikiKey = wikiLarUri(wikiId);
 
   emit("boot");
 
@@ -344,6 +354,16 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // Admin VM — operator-private coordinator with its own TW5 engine and
   // composite. Corpus tiddlers arrive via the bag recipe stack; no plugin preload needed.
   const adminVm = await openAdminVm({ repo, adminUrl, preloadedTiddlers: [], coreBlob });
+  const { slug: activeWikiId, source: activeWikiSource } = selectActiveWikiSlug(
+    wikiId,
+    await adminVm.composite.get(ACTIVE_WIKI_URI),
+  );
+  const identity = new OpenIdentitySlot(`${hostId}:${activeWikiId}`);
+  const activeWikiPlan = planActiveWikiSlot({
+    hostId,
+    wikiSlug: activeWikiId,
+    identityDid: identity.did,
+  });
 
   // Job dispatcher — subscribes to the admin store and runs jobs
   // delivered as job-tiddlers (CRDT-native CLI ↔ daemon coordination).
@@ -499,8 +519,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await keyhive.registerBag(BAG_IDS.catalog);            // catalog index of wiki oracles
   await keyhive.registerBag(BAG_IDS.lararium);           // engine corpus (canon)
   await keyhive.registerBag(BAG_IDS.lares);              // @lares persona/doctrine (canon)
-  await keyhive.registerBag(wikiLarUri(wikiId));         // active wiki canonical
-  await keyhive.registerBag(wikiDraftLarUri(wikiId));    // active wiki draft
+  await keyhive.registerBag(activeWikiPlan.wikiBagId);         // active wiki canonical
+  await keyhive.registerBag(activeWikiPlan.draftBagId);        // active wiki draft
 
   // Sanity: confirm the operator can verify their own admin access. This
   // closes the D.3 bridge end-to-end — bytes-on-disk → seed → Keyhive
@@ -575,6 +595,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     }
   }));
 
+  // Stable identity URI for the selected primary wiki — the map key in catalog oracles.
+  const wikiKey = activeWikiPlan.wikiKey;
+
   // ── 4. Wiki doc — oracle tiddler path ──────────────────────────────────
   const wikiDocUrl = tiddlerText(catalog?.tiddlers?.[wikiKey]) ?? null;
   const blankRoom  = blankMemeStore(repo);
@@ -588,16 +611,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       (doc.tiddlers as Record<string, LarTiddlerRecord>)[wikiKey] = mutableLarRecord(wikiKey, { text: wikiHandle.url }, "lararium-boot");
     });
   }
-  const wikiBagId = wikiLarUri(wikiId);
+  const wikiBagId = activeWikiPlan.wikiBagId;
   const wikiStore = new AutomergeDocStore(wikiHandle, wikiBagId);
-  composite.addLayer({ bagId: wikiBagId, store: wikiStore, writable: true });
   emit("wiki-ready");
 
   // ── 5. Wiki-Drafts doc — per-user, stored in catalog oracle tiddler ───────
   // Node vessel uses hostId:wikiId identity for its own drafts (operator drafts).
   // User drafts from browser vessels are stored under each browser vessel's DID key.
-  const identity = new OpenIdentitySlot(`${hostId}:${wikiId}`);
-  const draftTiddlerKey = `${wikiKey}/drafts/${encodeURIComponent(identity.did)}`;
+  const draftTiddlerKey = activeWikiPlan.draftOracleTitle;
   const existingDraftUrl: string | null = tiddlerText(catalog?.tiddlers?.[draftTiddlerKey]) ?? null;
   const blankDraft = blankMemeStore(repo);
   const draftHandle: DocHandle<LarDoc> = existingDraftUrl
@@ -612,10 +633,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // E.3 — per-wiki draft bagId. Composite layer encodes which wiki owns
   // the drafts so multiple wikis can mount simultaneously without
   // intermingling. The Automerge doc URL still lives in the catalog under
-  // ${wikiLarUri(slug)}/drafts/${peerDid} (unchanged); only the layer
+  // ${wikiLarUri(slug)}/drafts/${vesselDid} (unchanged); only the layer
   // bagId namespace changed from the static "draft" constant.
-  const draftBagId = wikiDraftLarUri(wikiId);
-  composite.addLayer({ bagId: draftBagId, store: new AutomergeDocStore(draftHandle, draftBagId), writable: true });
+  const draftBagId = activeWikiPlan.draftBagId;
+  const draftStore = new AutomergeDocStore(draftHandle, draftBagId);
 
   // S6 E.2 — projection layer. In-memory MemoryTiddlerStore at top read
   // priority. Holds TW5 runtime state ($:/state/*, $:/HistoryList,
@@ -634,7 +655,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 6. LarVessel ────────────────────────────────────────────────────────────
   wikiStore.markSyncComplete();
   const vessel = new LarVessel<VmPool<MemeRecipeVm>>({
-    vesselId:     `${hostId}:${wikiId}`,
+    vesselId:     activeWikiPlan.vesselId,
     store:        composite,
     capabilities: LAR_VESSEL_CAPABILITIES_NODE,
     identity,
@@ -642,40 +663,29 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   emit("vessel-ready");
 
   // ── 7. TW5Engine ──────────────────────────────────────────────────────────
-  // Derive VM bag stack from the recipe tiddler seeded into ha island.
-  // Falls back to composite.layerIds (full view) if recipe is not yet available.
-  // Default recipe: content Tiga — ha + ka + ba, no social plane, no wiki leaf.
+  // TW5 owns the mounted-session composition. The vessel only supplies
+  // opened stores, core blob, and the local tick driver.
   const resolvedRecipeUri = recipeUriOpt ?? recipeUri("@lararium", "default");
-  const vmRecipe = await composite.getRecipe(resolvedRecipeUri);
-  const vmBagStack: readonly string[] = vmRecipe?.bagStack ?? composite.layerIds;
-
-  // Corpus tiddlers (bags/@lares, bags/@lararium) arrive via the bag recipe stack.
-  // Only preload vendored plugins declared in the resolved Recipe's plugins list.
-  tw5 = new TW5Engine();
-  const preloadedTiddlers: Array<Record<string, unknown>> = [];
-
-  // Only preload vendored plugins declared in the resolved Recipe's plugins list.
-  const recipePlugins = new Set(vmRecipe?.plugins ?? []);
-  for (const [id, entry] of Object.entries(blobs)) {
-    if (!id.startsWith("$:/plugins/")) continue;
-    if (!recipePlugins.has(id)) continue;
-    try {
-      const parsed = JSON.parse(new TextDecoder().decode(new Uint8Array(entry.blob))) as unknown;
-      const arr = Array.isArray(parsed) ? parsed : [parsed];
-      for (const item of arr) {
-        if (item && typeof item === "object" && (item as Record<string, unknown>)["title"]) {
-          preloadedTiddlers.push(item as Record<string, unknown>);
-        }
-      }
-    } catch { /* malformed — skip */ }
-  }
-
-  // Preload the social bootstrap plugin container.
-  // The lararium-bootstrap-sync startup module (lararium-boot-shadows.json) promotes
-  // this plugin to a regular wiki tiddler at boot, routing it to the CRDT store.
-  if (bootstrapPlugin) preloadedTiddlers.push(bootstrapPlugin);
-
-  await tw5.boot(coreBlob, preloadedTiddlers.length > 0 ? preloadedTiddlers : undefined);
+  const mountedWiki = new MountedWikiController(composite);
+  const mountedSession = await mountedWiki.mount({
+    plan: activeWikiPlan,
+    wikiStore,
+    draftStore,
+    recipeUri: resolvedRecipeUri,
+    coreBlob,
+    blobs,
+    bootstrapPlugin,
+    vmFactory,
+    driver: {
+      start(flush): () => void {
+        const tickHandle = setInterval(() => {
+          flush();
+        }, 16);
+        return () => clearInterval(tickHandle);
+      },
+    },
+  });
+  tw5 = mountedSession.engine;
   emit("tw5-booted");
 
   // ── 7a. Event bus — ingress rings + tick loop ────────────────────────────
@@ -685,7 +695,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   eventBus.start();
 
   // P.2 — NodeVmManager. Mount PrimaryWiki as pinned slot.
-  // Adaptor wires after IslandAdaptor construction below; updateAdaptor called there.
+  // The VM island bridge wires the adaptor after this pinned slot exists.
   // onWorkerEvent routes RE reactions from hot-tier Workers into the vm-ring.
   vmManager = new NodeVmManager({
     onWorkerEvent: (wikiId, msg) => {
@@ -696,44 +706,24 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       });
     },
   });
-  vmManager.mountPrimary(wikiId, tw5, null);
-  if (islandHandle) vmManager.registerDocHandle(wikiId, islandHandle);
+  vmManager.mountPrimary(activeWikiId, tw5, null);
+  if (islandHandle) vmManager.registerDocHandle(activeWikiId, islandHandle);
 
   // ── 8. Corpus bags — await after TW5 boots ────────────────────────────────
   await corpusReadyP;
   emit("corpus-ready");
 
-  // ── 9. IslandAdaptor + N-accumulators — causal-island ↔ TW5 wiki bridge ────
-  // Adaptor: pre-sync buffer + non-CRDT immediate apply + outbound saveTiddler/deleteTiddler.
-  // Accumulators: one per bag in recipe — sibling projections; buffer crdt-remote
-  // patches post-sync and drain them as one nalu per setInterval tick.
-  // Priority order matches vmBagStack (lowest index = lowest priority read layer).
-  const adaptor = new IslandAdaptor(tw5, vessel.store, wikiBagId);
-  vmManager.updateAdaptor(wikiId, adaptor);
-  vessel.addProjection(adaptor);
-
-  const accumulators: IslandAccumulator[] = vmBagStack.map(() => {
-    const acc = new IslandAccumulator();
-    vessel.addProjection(acc);
-    return acc;
-  });
-
-  const _nodeTickHandle = setInterval(() => {
-    adaptor.flushAll(accumulators, 200);
-  }, 16);
+  // ── 9. VM island bridge — causal-island ↔ TW5 wiki bridge ─────────────────
+  vmManager.updateAdaptor(activeWikiId, mountedSession.bridge.adaptor);
 
   // ── 10. VmPool ────────────────────────────────────────────────────────────
-  const pool = new VmPool<MemeRecipeVm>();
-  const _vmFactory = vmFactory ?? (
-    async (_uri: string, engine: TW5Engine, bags: readonly string[]) =>
-      new DirectMemeRecipeVm(engine, bags)
-  );
-  await pool.get(resolvedRecipeUri, () => _vmFactory(resolvedRecipeUri, tw5, vmBagStack));
-  vessel.attachVmPool(pool);
+  vessel.attachVmPool(mountedSession.pool);
 
   emit("live");
   return {
-    vessel, tw5, pool, repo, eventBus,
+    activeWikiId,
+    activeWikiSource,
+    vessel, tw5, pool: mountedSession.pool, repo, eventBus,
     store: composite,
     vmManager,
     admin: adminVm,
@@ -741,7 +731,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     catalogHandleUrl: catalogHandle.url,
     larariumDocUrl: islandHandle?.url ?? null,
     phase: "live",
-    stopTick: () => clearInterval(_nodeTickHandle),
+    stopTick: () => {
+      mountedWiki.stop();
+    },
   };
 }
 

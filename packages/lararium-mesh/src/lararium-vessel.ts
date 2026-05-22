@@ -29,12 +29,12 @@ export type VesselVmFactory<TVm, TEngine> = (
 ) => Promise<TVm>;
 
 /**
- * OpenVesselOptions — shared browser/node vessel open inputs.
+ * LarariumVesselOptions — shared browser/node vessel open inputs.
  *
  * Platform vessels may extend this with transport, storage, or mount-specific fields,
  * but these fields stay common across every vessel factory.
  */
-export interface OpenVesselOptions<TVm = unknown, TEngine = unknown> {
+export interface LarariumVesselOptions<TVm = unknown, TEngine = unknown> {
   hostId: string;
   wikiId: string;
   recipeUri?: string;
@@ -43,12 +43,12 @@ export interface OpenVesselOptions<TVm = unknown, TEngine = unknown> {
 }
 
 /**
- * OpenVesselResult — shared browser/node vessel open output.
+ * LarariumVesselResult — shared runtime output for any vessel open surface.
  *
  * Runtime-specific factories may extend this with edge adaptors or UI mounts, but the
  * common vessel/runtime/store/pool surface lives here so every vessel open reads alike.
  */
-export interface OpenVesselResult<
+export interface LarariumVesselResult<
   TVessel = unknown,
   TPool = unknown,
   TRepo = unknown,

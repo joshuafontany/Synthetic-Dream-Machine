@@ -45,11 +45,11 @@ async function tryConnect() {
 }
 
 export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "list-wikis", {}, did);
+    const r = await submitJob(vessel, "list-wikis", {}, did);
     if (r.status === "error") {
       console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -75,7 +75,7 @@ export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -85,11 +85,11 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki init <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "init-wiki", { slug }, did);
+    const r = await submitJob(vessel, "init-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`init failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -106,7 +106,7 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -116,11 +116,11 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki open <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "open-wiki", { slug }, did);
+    const r = await submitJob(vessel, "open-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -128,13 +128,11 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
     const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki: ${slug}  status: ${result["status"]}`);
-    if (result["restartRequired"]) {
-      console.log(`  ${result["hint"] ?? "restart `lares serve` to mount this wiki"}`);
-    }
+    if (typeof result["note"] === "string") console.log(`  ${result["note"]}`);
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -144,11 +142,11 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki sync <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(vessel, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -168,7 +166,7 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -178,11 +176,11 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki pin <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "pin-wiki", { slug }, did);
+    const r = await submitJob(vessel, "pin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -196,7 +194,7 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -206,11 +204,11 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki unpin <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "unpin-wiki", { slug }, did);
+    const r = await submitJob(vessel, "unpin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -223,7 +221,7 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -234,11 +232,11 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki add-bag <slug> <bag-uri>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "add-bag", { slug, bagUrl }, did);
+    const r = await submitJob(vessel, "add-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`add-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -254,7 +252,7 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -265,11 +263,11 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki remove-bag <slug> <bag-uri>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "remove-bag", { slug, bagUrl }, did);
+    const r = await submitJob(vessel, "remove-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -285,7 +283,7 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -303,11 +301,11 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki epoch <slug> <bag-url>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -322,7 +320,7 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -332,11 +330,11 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki rotate-recipe <slug>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(vessel, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -355,7 +353,7 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -367,12 +365,12 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
   }
   const daysOpt = args.options["days"];
   const did     = await operatorDid().catch(() => "lares-cli");
-  const peer    = await tryConnect();
-  if (!peer) return 3;
+  const vessel  = await tryConnect();
+  if (!vessel) return 3;
   try {
     const cmdArgs: Record<string, unknown> = { slug };
     if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
-    const r = await submitJob(peer, "prune-stale", cmdArgs, did);
+    const r = await submitJob(vessel, "prune-stale", cmdArgs, did);
     if (r.status === "error") {
       console.error(`prune-stale failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -396,7 +394,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
     console.log("");
     return 0;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
@@ -406,11 +404,11 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
     console.error("usage: lares wiki which <tiddler-uri>");
     return 2;
   }
-  const did  = await operatorDid().catch(() => "lares-cli");
-  const peer = await tryConnect();
-  if (!peer) return 3;
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
   try {
-    const r = await submitJob(peer, "where", { tiddler }, did);
+    const r = await submitJob(vessel, "where", { tiddler }, did);
     if (r.status === "error") {
       console.error(`which failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -428,13 +426,13 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
     console.log("");
     return primary ? 0 : 5;
   } finally {
-    await peer.disconnect();
+    await vessel.disconnect();
   }
 }
 
 const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: string }>> = {
   "init":  { handler: cmdWikiInit,  summary: "Mint a fresh wiki: wiki canonical + per-wiki draft + recipe. Idempotent." },
-  "open":  { handler: cmdWikiOpen,  summary: "Set the daemon's active wiki marker. Restart required to mount (E.7 = hot-reload)." },
+  "open":  { handler: cmdWikiOpen,  summary: "Set which wiki the next `lares serve` boot mounts as active. Does not live-remount the current vessel." },
   "sync":  { handler: cmdWikiSync,  summary: "Walk wikis/<slug>/memes/** and ingest into the canonical bag. Idempotent." },
   "pin":        { handler: cmdWikiPin,       summary: "Pin every bag in the wiki's recipe (whole-recipe residency)." },
   "unpin":      { handler: cmdWikiUnpin,     summary: "Unpin every bag in the wiki's recipe." },

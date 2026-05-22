@@ -1,14 +1,15 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/node/v0.1/open-node-lar-vessel >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/node/v0.1/open-node-vessel >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/node/v0.1/open-node-lar-vessel"
-file-path    = "bags/@lararium/node/v0.1/open-node-lar-vessel.md"
+uri-path     = "ha.ka.ba/@lararium/node/v0.1/open-node-vessel"
+file-path    = "bags/@lararium/node/v0.1/open-node-vessel.md"
+source-file  = "packages/lararium-node/src/open-node-vessel.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50
 mana         = 0.50
-role         = "self-documentation: TODO describe open-node-lar-vessel.ts"
+role         = "self-documentation: TODO describe open-node-vessel.ts"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true

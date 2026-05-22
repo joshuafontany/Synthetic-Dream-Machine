@@ -80,7 +80,7 @@ describe("isHostfulLarUri", () => {
 
 describe("parseHostfulLarUri", () => {
   test("extracts host and path from a hostful lar: URI", () => {
-    const r = parseHostfulLarUri("lar://altar-fire:peer@elyncia.social/rooms/altar-fire");
+    const r = parseHostfulLarUri("lar://altar-fire:vessel@elyncia.social/rooms/altar-fire");
     expect(r.authority.host).toBe("elyncia.social");
     expect(r.root).toBeDefined();
   });
@@ -88,9 +88,9 @@ describe("parseHostfulLarUri", () => {
 
 // ---------------------------------------------------------------------------
 
-describe("Node-peer causal island capabilities", () => {
-  test("node peer holds promote ability (can gate canon ceremony)", () => {
-    // Admin implies promote — the node peer must hold admin to gate promotions.
+describe("Node-vessel causal island capabilities", () => {
+  test("node vessel holds promote ability (can gate canon ceremony)", () => {
+    // Admin implies promote — the node vessel must hold admin to gate promotions.
     expect(abilityImplies("admin", "promote")).toBe(true);
   });
 

@@ -5,7 +5,7 @@
  *
  *   IslandAdaptor
  *     inbound:  per-island pre-sync buffer → onSyncComplete() batch flush
- *               non-CRDT origins (tw-local echo, canon-hydrate, lares-job) apply immediately
+ *               non-CRDT origins apply immediately at the membrane
  *               post-sync crdt-remote: returns — IslandAccumulator (separate MemeProjection) handles
  *     outbound: saveTiddler() → store.put() (direct)
  *               deleteTiddler() → store.tombstone() (direct)
@@ -25,6 +25,12 @@
  *   Island isolation  — per-island buffer; each onSyncComplete() fires one wiki.transact()
  *   Child cleanup     — deleteTiddler removes ahu fragment-parent slot children
  *
+ * Origin pressure note:
+ *   This adaptor currently carries both TW5-internal causes and edge-facing
+ *   transport causes inside one ChangeOrigin vocabulary. The next YIN split
+ *   should name those separately so the VM reacts to its own event grammar,
+ *   while the adaptor remains only the membrane.
+ *
  * Callers wire:
  *   const adaptor     = new IslandAdaptor(tw5, store, instanceId, targetBag);
  *   const accumulator = new IslandAccumulator();
@@ -35,12 +41,12 @@
  *   // Each camera drives its own drain cycle via CameraRegistration.
  *
  *   // browser (multi-camera):
- *   tw5.startRenderLoop(
- *     [{ accumulator: storyAcc, tickMs: 0, budget: 200 },     // Story River — rAF 60fps
- *      { accumulator: canvasAcc, tickMs: 16, budget: 200 },   // TLDraw canvas — 60fps setInterval
- *      { accumulator: minimapAcc, tickMs: 200, budget: 50 }], // mini-map — 5fps
- *     adaptor,
- *   );
+ *   // startRenderLoop lives in tw5-camera.ts (sidecar):
+ *   startRenderLoop(tw5, [
+ *     { accumulator: storyAcc, tickMs: 0, budget: 200 },     // Story River — rAF 60fps
+ *     { accumulator: canvasAcc, tickMs: 16, budget: 200 },   // TLDraw canvas — 60fps setInterval
+ *     { accumulator: minimapAcc, tickMs: 200, budget: 50 },  // mini-map — 5fps
+ *   ], adaptor);
  *   // node:
  *   setInterval(() => adaptor.flushAll([accumulator], 200), 16);
  *

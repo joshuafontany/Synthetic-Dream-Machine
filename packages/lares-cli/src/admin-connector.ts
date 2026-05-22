@@ -1,10 +1,10 @@
 /**
  * admin-connector — connect the CLI to a running `lares serve` daemon as an
- * Automerge-repo WebSocket peer, then submit job-tiddlers and await
+ * Automerge-repo WebSocket vessel connection, then submit job-tiddlers and await
  * results through the admin doc.
  *
- * Why peer-not-RPC: job-tiddlers + a CRDT sync channel preserve the
- * web3-only invariant. The CLI looks like any other peer of the operator's
+ * Why vessel-not-RPC: job-tiddlers + a CRDT sync channel preserve the
+ * web3-only invariant. The CLI looks like any other vessel of the operator's
  * federation; the daemon's dispatcher reacts to the same admin-doc changes
  * it would react to from a TW5 vm widget or a future ReactionEngine.
  *
@@ -129,7 +129,7 @@ export function summaryOutput(result: SubmitResult): Record<string, unknown> | u
  * leaves no namespace residue.
  */
 export async function submitJob(
-  peer:        AdminVesselHandle,
+  vessel:      AdminVesselHandle,
   verb:        string,
   args:        Record<string, unknown>,
   requestedBy: string,
@@ -142,12 +142,12 @@ export async function submitJob(
   const requestId   = (inboxRecord.tiddler as Record<string, string>)['request-id']!;
   const logTitle    = `${JOB_RECEIPT_URI_PREFIX}${requestId}`;
 
-  await peer.composite.put(inboxRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
+  await vessel.composite.put(inboxRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
 
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     await new Promise((r) => setTimeout(r, pollMs));
-    const event = await peer.composite.get(logTitle);
+    const event = await vessel.composite.get(logTitle);
     if (!event || event.meta?.deleted) continue;
     const fields = event.tiddler as Record<string, string>;
     const status = fields["status"];
