@@ -1,9 +1,9 @@
 /**
- * admin-peer — connect the CLI to a running `lares serve` daemon as an
- * Automerge-repo WebSocket peer, then submit command-tiddlers and await
+ * admin-connector — connect the CLI to a running `lares serve` daemon as an
+ * Automerge-repo WebSocket peer, then submit job-tiddlers and await
  * results through the admin doc.
  *
- * Why peer-not-RPC: command-tiddlers + a CRDT sync channel preserve the
+ * Why peer-not-RPC: job-tiddlers + a CRDT sync channel preserve the
  * web3-only invariant. The CLI looks like any other peer of the operator's
  * federation; the daemon's dispatcher reacts to the same admin-doc changes
  * it would react to from a TW5 vm widget or a future ReactionEngine.
@@ -19,12 +19,12 @@ import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-re
 import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";
 import {
   ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
-  buildCommandTiddler, COMMAND_URI_PREFIX, COMMAND_EVENT_URI_PREFIX,
+  buildJobInboxRecord, JOB_INBOX_URI_PREFIX, JOB_RECEIPT_URI_PREFIX, JOB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh";
 
-export interface AdminPeerHandle {
+export interface AdminVesselHandle {
   readonly repo:      Repo;
   readonly composite: CompositeStore;
   readonly admin:     DocHandle<LarDoc>;
@@ -57,7 +57,7 @@ function readAdminUrl(bootstrapPath: string): string {
 }
 
 /** Connect to the daemon, sync the admin doc, return helpers. */
-export async function connectAdminPeer(opts: ConnectOptions = {}): Promise<AdminPeerHandle> {
+export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<AdminVesselHandle> {
   const port = opts.port ?? Number(process.env["LAR_PORT"] ?? 8080);
   const host = opts.host ?? "127.0.0.1";
   const bootstrap = opts.bootstrapPath ?? join(
@@ -103,24 +103,34 @@ export interface SubmitOptions {
   readonly timeoutMs?: number;
 }
 
+export interface SubmitTargetResult {
+  readonly ok:      boolean;
+  readonly output?: Record<string, unknown>;
+  readonly error?:  string;
+}
+
 export interface SubmitResult {
   readonly status:       "done" | "error";
-  readonly result?:      Record<string, unknown>;
+  readonly results?:     Record<string, SubmitTargetResult>;
   readonly errorMessage?: string;
   readonly requestId:    string;
 }
 
+export function summaryOutput(result: SubmitResult): Record<string, unknown> | undefined {
+  return result.results?.[JOB_RESULT_KEY]?.output;
+}
+
 /**
- * Write a command-tiddler signal, poll for the durable log/<requestId>
- * audit-event tiddler appearing — its appearance IS the "done" signal.
+ * * Write a job-tiddler signal, poll for the durable receipts/<requestId>
+ * tiddler appearing — its appearance IS the "done" signal.
  *
  * Under the split contract: signal-tiddler under cmd/<id> is fire-and-
  * forget; the dispatcher tombstones it. CLI never tombstones; a CLI crash
  * leaves no namespace residue.
  */
-export async function submitCommand(
-  peer:        AdminPeerHandle,
-  command:     string,
+export async function submitJob(
+  peer:        AdminVesselHandle,
+  verb:        string,
   args:        Record<string, unknown>,
   requestedBy: string,
   opts:        SubmitOptions = {},
@@ -128,11 +138,11 @@ export async function submitCommand(
   const pollMs    = opts.pollMs    ?? 100;
   const timeoutMs = opts.timeoutMs ?? 10000;
 
-  const cmdRecord = buildCommandTiddler({ command, args, requestedBy });
-  const requestId = (cmdRecord.tiddler as Record<string, string>)['request-id']!;
-  const logTitle  = `${COMMAND_EVENT_URI_PREFIX}${requestId}`;
+  const inboxRecord = buildJobInboxRecord({ verb, args, requestedBy });
+  const requestId   = (inboxRecord.tiddler as Record<string, string>)['request-id']!;
+  const logTitle    = `${JOB_RECEIPT_URI_PREFIX}${requestId}`;
 
-  await peer.composite.put(cmdRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
+  await peer.composite.put(inboxRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
 
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
@@ -143,21 +153,28 @@ export async function submitCommand(
     const status = fields["status"];
     if (status !== "done" && status !== "error") continue;
 
-    let result: Record<string, unknown> | undefined;
-    if (typeof fields["result"] === "string" && fields["result"].length > 0) {
-      try { result = JSON.parse(fields["result"]); } catch { /* malformed — leave undefined */ }
+    let results: Record<string, SubmitTargetResult> | undefined;
+    if (typeof fields["results"] === "string" && fields["results"].length > 0) {
+      try {
+        const parsed = JSON.parse(fields["results"]);
+        if (parsed && typeof parsed === "object") {
+          results = parsed as Record<string, SubmitTargetResult>;
+        }
+      } catch {
+        /* malformed — leave undefined */
+      }
     }
     const errorMessage = fields["error-message"];
     return {
       status:    status as "done" | "error",
       requestId,
-      ...(result       !== undefined && { result }),
+      ...(results      !== undefined && { results }),
       ...(errorMessage !== undefined && { errorMessage }),
     };
   }
 
-  throw new Error(`command "${command}" timed out after ${timeoutMs}ms`);
+  throw new Error(`job "${verb}" timed out after ${timeoutMs}ms`);
 }
 
-// Re-export so commands don't need a separate import path.
-export { COMMAND_URI_PREFIX };
+// Re-export so job-facing helpers don't need a separate import path.
+export { JOB_INBOX_URI_PREFIX };

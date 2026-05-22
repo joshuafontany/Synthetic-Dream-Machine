@@ -11,7 +11,7 @@
  * essentially a no-op outside of stats reporting until C.2 lands.
  */
 
-import { connectAdminPeer, submitCommand } from "../admin-peer.js";
+import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 export async function cmdPin(args: ParsedArgs): Promise<number> {
@@ -52,12 +52,12 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "residency", {}, "lares-cli");
+    const r = await submitJob(peer, "residency", {}, "lares-cli");
     if (r.status === "error") {
       console.error(`residency query failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const stats = r.result ?? {};
+    const stats = summaryOutput(r) ?? {};
     const pinned = (stats["pinned"] ?? []) as string[];
     const hot    = (stats["hot"]    ?? []) as Array<{ url: string; lastTouched: number; syncActive?: boolean }>;
     const coldCount = stats["coldCount"] as number;
@@ -87,12 +87,12 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, name, args, "lares-cli");
+    const r = await submitJob(peer, name, args, "lares-cli");
     if (r.status === "error") {
       console.error(`${name} failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    console.log(`${name}: ${JSON.stringify(r.result, null, 2)}`);
+    console.log(`${name}: ${JSON.stringify(summaryOutput(r) ?? {}, null, 2)}`);
     return 0;
   } finally {
     await peer.disconnect();
@@ -101,7 +101,7 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
 
 async function tryConnect() {
   try {
-    return await connectAdminPeer({});
+    return await connectAdminVessel({});
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares: ${msg}`);

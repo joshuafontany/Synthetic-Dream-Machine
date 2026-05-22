@@ -21,7 +21,7 @@
  *   Tier 0 — active memes (kumu/UEFN device instances): MAY become islands —
  *            they own their own event horizon, params, and trigger surface.
  *            promotion is optional; correction is local.
- *   Tier 1 — memes inside a room (within your Automerge doc window):
+ *   Tier 1 — memes inside a wiki (within your Automerge doc window):
  *            simultaneously apprehended, but peer state of same doc is not.
  *   Tier 2 — Automerge Realms: other Automerge docs reachable from this one,
  *            no matter where first encountered. Always non-simultaneous.
@@ -58,7 +58,7 @@ export const ABILITY_LADDER = [
   "write",    // produce accepted mutations
   "propose",  // suggest hostful changes (pending; not yet hostless canon)
   "promote",  // hostful → hostless canon-promotion ceremony
-  "admin",    // manage room, recipe, edge island membership
+  "admin",    // manage wiki, recipe, edge island membership
   "revoke",   // roll epoch; terminate future live tail for a principal
 ] as const;
 
@@ -181,7 +181,7 @@ export interface EdgeIslandShape {
 //
 // A meme passes the federation gate when ALL conditions hold.
 // Stage band functions as a UX annotation — NOT a gate condition here.
-// Room recipes MAY filter by stage as operator configuration.
+// Wiki recipes MAY filter by stage as operator configuration.
 // ---------------------------------------------------------------------------
 
 export interface VisibilityGateInput {
@@ -189,9 +189,9 @@ export interface VisibilityGateInput {
   memeRating:      string;
   /** Community-weighted believability scalar [0.0–1.0]. */
   memeManaoio:     number;
-  /** Room's minimum manaoio threshold. */
-  roomMinManaoio:  number;
-  /** Whether the room recipe matches this meme (operator-configured predicate). */
+  /** Wiki's minimum manaoio threshold. */
+  wikiMinManaoio:  number;
+  /** Whether the wiki recipe matches this meme (operator-configured predicate). */
   recipeMatches:   boolean;
   /** Whether the subject holds the "sync" ability on this edge island. */
   subjectCanSync:  boolean;
@@ -208,15 +208,15 @@ const FEDERABLE_RATINGS = new Set(["meme", "ano", "kapu"]);
  * Federation visibility gate — ALL conditions must hold.
  *
  *   rating(meme)    >= Meme
- *   manaoio(meme)   >= room.minManaoio
- *   recipe(room).matches(meme)
+ *   manaoio(meme)   >= wiki.minManaoio
+ *   recipe(wiki).matches(meme)
  *   hasAbility(subject, "sync", edge.id)
  *   !edge.revoked
  *   !violatesKapu(meme, subject)
  */
 export function visibilityGate(input: VisibilityGateInput): boolean {
   if (!FEDERABLE_RATINGS.has(input.memeRating.toLowerCase())) return false;
-  if (input.memeManaoio < input.roomMinManaoio)                return false;
+  if (input.memeManaoio < input.wikiMinManaoio)                return false;
   if (!input.recipeMatches)                                    return false;
   if (!input.subjectCanSync)                                   return false;
   if (input.edgeRevoked)                                       return false;
@@ -231,8 +231,8 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 //
 //   1. authenticate peer / node / device
 //   2. sync Orichalcum authority graph (membership, capabilities, delegations, revocations)
-//   3. derive visible room recipe + visible causal islands
-//   4. sync collection manifest (rooms, memes, edge islands, receipts)
+//   3. derive visible wiki recipe + visible causal islands
+//   4. sync collection manifest (wikis, memes, edge islands, receipts)
 //   5. per-island: a) capability/epoch ops  b) CRDT heads  c) delta payloads  d) receipts
 //
 // A relay that has not completed step 2 MUST NOT receive step 4 or later.
@@ -243,7 +243,7 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 export const AUTHORITY_FIRST_ORDER = [
   "authenticate-peer",         // 1
   "sync-authority-graph",      // 2
-  "derive-visible-rooms",      // 3
+  "derive-visible-wikis",      // 3
   "sync-collection-manifest",  // 4
   "capability-epoch-ops",      // 5a
   "sync-crdt-heads",           // 5b
@@ -256,7 +256,7 @@ export type AuthorityFirstStep = typeof AUTHORITY_FIRST_ORDER[number];
 export type AuthorityFirstState =
   | "authenticating"     // step 1 — peer not verified
   | "syncing-authority"  // step 2 — Orichalcum graph not yet reconciled
-  | "syncing-manifest"   // steps 3–4 — rooms/memes/islands deriving
+  | "syncing-manifest"   // steps 3–4 — wikis/memes/islands deriving
   | "live";              // steps 5+ — delta stream active
 
 /**
@@ -287,7 +287,7 @@ export class AuthorityFirstGuard {
         return true;
       case "sync-authority-graph":
         return this._state !== "authenticating";
-      case "derive-visible-rooms":
+      case "derive-visible-wikis":
       case "sync-collection-manifest":
         return this._state === "syncing-manifest" || this._state === "live";
       case "capability-epoch-ops":
@@ -370,7 +370,7 @@ export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 // PromotionReceipt — cross-island promotion ceremony record
 //
 // Emitted when a draft tiddler moves from the local/session layer to a durable
-// corpus or room island.  Receipts prevent cross-island mutation from becoming
+// corpus or wiki island.  Receipts prevent cross-island mutation from becoming
 // hidden atomicity.  A promotion without a receipt becomes shadow canon.
 //
 // Capability gate: the actor MUST hold at least "promote" in ABILITY_LADDER.
@@ -408,7 +408,7 @@ export interface PromotionReceipt {
 export interface KeyhivePromotionRequest {
   readonly fromUri:      string;
   readonly targetUri:    string;
-  readonly roomId:       string;
+  readonly wikiId:       string;
   readonly proposedText: string;
   readonly reason?:      string;
 }

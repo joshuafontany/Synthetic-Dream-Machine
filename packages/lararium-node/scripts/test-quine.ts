@@ -31,7 +31,6 @@ const LARES_TW5_PLUGIN_TITLE = LARES_MEMETIC_WIKITEXT_PLUGIN_URI;
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../genesis/island.bin");
-const GENESIS_PRE = join(__dir, "../genesis/island.sha256-pre");
 
 function sha256hex(input: string | Uint8Array): string {
   return createHash("sha256").update(input).digest("hex");
@@ -59,23 +58,14 @@ async function main(): Promise<void> {
   // 2. Verify the genesis-cid self-ref tiddler (two-pass build check)
   // ------------------------------------------------------------------
   const GENESIS_CID_TIDDLER = "lar:///ha.ka.ba/@lararium/genesis-cid";
-  const cidTiddler = doc.tiddlers?.[GENESIS_CID_TIDDLER] as
-    { tiddler?: { sha256?: string } } | undefined;
+  const cidRecord = doc.tiddlers?.[GENESIS_CID_TIDDLER] as
+    { fields?: { cid?: string } } | undefined;
 
-  if (!cidTiddler?.tiddler?.sha256) {
-    throw new Error("[quine] genesis-cid tiddler missing — re-run build:genesis.");
+  if (!cidRecord?.fields?.cid) {
+    throw new Error("[quine] genesis-cid tiddler missing or has no cid field — re-run build:genesis.");
   }
-  const storedPreSha = cidTiddler.tiddler.sha256;
-  console.log(`[quine] stored sha256-pre = ${storedPreSha.slice(0, 16)}…`);
-
-  if (existsSync(GENESIS_PRE)) {
-    const diskPreSha = readFileSync(GENESIS_PRE, "utf8").trim();
-    if (diskPreSha !== storedPreSha) {
-      console.warn(`[quine] ⚠ sha256-pre mismatch: disk=${diskPreSha.slice(0, 16)}… stored=${storedPreSha.slice(0, 16)}…`);
-    } else {
-      console.log("[quine] ✓ sha256-pre matches disk record");
-    }
-  }
+  const storedCid = cidRecord.fields.cid;
+  console.log(`[quine] stored genesis-cid = ${storedCid.slice(0, 20)}…`);
 
   // ------------------------------------------------------------------
   // 3. Extract TW5 core blob + compiled plugin blob
@@ -113,7 +103,8 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   // 5. Assert SharktoothSigil grammar tiddlers present
   // ------------------------------------------------------------------
-  const sigilTitles = vm.$tw.wiki.filterTiddlers(`[tag[${GRAMMAR_TAG}]]`);
+  // Plugin contents load as TW5 shadow tiddlers; include shadows in the filter.
+  const sigilTitles = vm.$tw.wiki.filterTiddlers(`[all[tiddlers+shadows]tag[${GRAMMAR_TAG}]]`);
   if (!sigilTitles.length) {
     throw new Error(
       `[quine] FAIL — no SharktoothSigil tiddlers found (tag: ${GRAMMAR_TAG})\n` +

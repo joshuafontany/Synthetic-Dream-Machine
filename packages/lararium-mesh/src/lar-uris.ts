@@ -11,6 +11,26 @@ export const STABLE_TAGSPACE = "ha.ka.ba";
 export const LAR_PREFIX = `lar:///${STABLE_TAGSPACE}/` as const;
 export const TAG_PREFIX = `${LAR_PREFIX}tags/` as const;
 
+// ── Volatile VM tagspace ───────────────────────────────────────────────────
+// Ha/domain=lararium · Ka/quality=local · Ba/dynamic=vm
+// Tiddlers here are scratch — never persisted through IslandAdaptor, never
+// synced via Automerge. Each vessel's admin VM owns its own volatile namespace.
+export const VOLATILE_VM_TAGSPACE = "lararium.local.vm";
+export const VOLATILE_VM_PREFIX   = `lar:///${VOLATILE_VM_TAGSPACE}/` as const;
+
+export function volatileVmUri(path: string): string {
+  return `${VOLATILE_VM_PREFIX}${path.replace(/^\/+/, "")}`;
+}
+
+export function isVolatileVmUri(uri: string): boolean {
+  return uri.startsWith(VOLATILE_VM_PREFIX);
+}
+
+/** A lar: URI is persistable when it is stable (ha.ka.ba) — volatile VM URIs are not. */
+export function isPersistableLarUri(uri: string): boolean {
+  return uri.startsWith("lar:") && !isVolatileVmUri(uri);
+}
+
 export function stableLarUri(path: string): string {
   return `${LAR_PREFIX}${path.replace(/^\/+/, "")}`;
 }
@@ -26,12 +46,12 @@ export const CATALOG_DOC_URI   = stableLarUri("@catalog");
 export const LARES_DOC_URI     = stableLarUri("@lares");
 export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
 
-// Shared tag/state law — consumed by peer projections, not owned by any one runtime.
+// Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
 export const GRAMMAR_TAG = stableTagUri("SharktoothSigil");
 export const PARSE_WARNING_TAG = stableTagUri("lararium-parse-warnings");
 export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
-export const LARES_COMMAND_TAG = stableTagUri("lares-command");
-export const LARES_COMMAND_EVENT_TAG = stableTagUri("lares-command-event");
+export const LARES_JOB_TAG = stableTagUri("lares-job");
+export const LARES_JOB_EVENT_TAG = stableTagUri("lares-job-event");
 export const LARES_PIN_TAG = stableTagUri("lares-pin");
 export const PROMOTION_RECEIPT_TAG = stableTagUri("lararium-promotion-receipt");
 export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");

@@ -147,7 +147,7 @@ export type ChangeOrigin =
   | { readonly kind: "mcp-draft";       readonly toolCallId: string }
   | { readonly kind: "operator-import"; readonly sessionId:  string }
   | { readonly kind: "canvas-draft";    readonly shapeId:    string }
-  | { readonly kind: "lares-command";   readonly requestId:  string };
+  | { readonly kind: "lares-job";        readonly requestId:  string };
 
 // ---------------------------------------------------------------------------
 // LarTiddlerChange — stream unit from store.subscribe()

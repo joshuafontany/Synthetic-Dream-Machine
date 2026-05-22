@@ -1,21 +1,21 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
-> Updated: 2026-05-19
+> Updated: 2026-05-21
 > Branch: feature/lararium-node-4
-> Sprints 0–4: ✅ Complete
-> Active sprint: S5 — Quine Round-Trip Verification
-> Designed sprints: S6 (SessionEventLog), S7 (Circles + Identities capability layer), S8 (Lares command surface + local intent bridge)
-> Addendum: shared operator-peer VM-pool plan attached below
+> Sprints 0–5: ✅ Complete
+> Active sprint: S6 — SessionEventLog
+> Designed sprints: S7 (Circles + Identities capability layer), S8 (Lares command surface + local intent bridge)
+> Addendum: shared operator-vessel VM-pool plan attached below
 
 ---
 
 ## North Star
 
-> The genesis artifact functions as the quine seed. Any peer (node, browser, worker) clones from it. No disk reads at runtime. The build step forms the only seam between disk projections and the CRDT mind.
+> The genesis artifact functions as the quine seed. Any vessel (node, browser, worker) clones from it. No disk reads at runtime. The build step forms the only seam between disk projections and the CRDT mind.
 >
-> Every operator peer establishes WHO it is (IdentitiesDoc), WHAT CIRCLES it belongs to (CirclesDoc), and WHAT IT IS DOING NOW (SessionsDoc) — all without a central server. Social graph control inverts: circles are owned by their center, not by the platform.
+> Every operator vessel establishes WHO it is (IdentitiesDoc), WHAT CIRCLES it belongs to (CirclesDoc), and WHAT IT IS DOING NOW (SessionsDoc) — all without a central server. Social graph control inverts: circles are owned by their center, not by the platform.
 >
-> Browser peers and node peers share one authority shape: local intent first, local proof first, VM-carried ceremony meaning, and edge-only host adaptation.
+> Browser vessels and node vessels share one authority shape: local intent first, local proof first, VM-carried ceremony meaning, and edge-only host adaptation.
 
 ---
 
@@ -94,22 +94,22 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 
 `openNodeLarPeer` rewritten: uses `loadGenesisIsland()`, removes `seedLarariumDoc` disk-walk body, removes `// SPRINT-2` placeholders. `lararium-island.ts` deleted entirely (147 → 0 lines). All satellite doc seeders moved to `genesis-island.ts`.
 
-### S5 — Quine Round-Trip Verification 🔴 Active
+### S5 — Quine Round-Trip Verification ✅ Complete
 
 **Goal:** The engine that boots the system lives inside the system it boots.
 
-**Pono guardrail:** Quine closure counts only if the resulting boot story keeps browser and node on the same peer law. Runtime affordances may differ; seeding authority may not.
+**Pono guardrail:** Quine closure counts only if the resulting boot story keeps browser and node on the same vessel law. Runtime affordances may differ; seeding authority may not.
 
-**Tasks:**
-- [ ] Ensure all `@lararium/tw5` vite outputs write `.tw5.cjs` format
-- [ ] Wire every `.tw5.cjs` plugin blob into `build-genesis-island.ts`
-- [ ] Boot a node peer from genesis; render grammar meme via TW5 vm
-- [ ] Verify rendered output hash matches source tiddler hash (`pnpm test:quine`)
-- [ ] Write genesis CID as self-ref tiddler `$:/lararium/genesis-cid` into island doc
+**Landed:**
+- Plugin blobs (TW5 core + compiled memetic-wikitext plugin + vendored plugins) wired into `build-genesis-island.ts`. Build format stays CJS — Vite outputs `.js` module tiddlers with embedded TW5 header comments.
+- Two-pass CID injection: `genesis-cid` tiddler carries CIDv1 of first post-placeholder serialization. `island.cid` written to disk.
+- `build-genesis-island.ts` smoke test fixed: `.tiddler?.cid` → `.fields?.cid`
+- `scripts/test-quine.ts` fixed: tiddler access path corrected; filter changed to `[all[tiddlers+shadows]tag[GRAMMAR_TAG]]` — plugin contents are TW5 shadow tiddlers.
+- `"test:quine": "tsx scripts/test-quine.ts"` added to `@lararium/node` package.json.
 
-**Exit criteria:** `pnpm test:quine` passes. No external file read required after `genesis.bin` is loaded.
+**Exit criteria met:** `pnpm --filter @lararium/node test:quine` → `Genesis Boot Smoke: PASS` — 4 blobs, 14 tiddlers, 65 SharktoothSigil grammar tiddlers. 39/39 tests pass.
 
-### S6 — SessionEventLog ⬜ Designed
+### S6 — SessionEventLog 🔴 Active
 
 **Goal:** Wire per-session append-only event log; adopt `docHandle.broadcast()` for presence.
 
@@ -393,8 +393,8 @@ S0 Cleanup ✅
 	  └── S2 Build-Time Genesis ✅
 		  ├── S3 Runtime Loader ✅
 		  │     └── S4 Peer Factories ✅
-		  │           └── S5 Quine Closure 🔴 ← HERE
-		  │                 └── S6 SessionEventLog ⬜
+		  │           └── S5 Quine Closure ✅
+		  │                 └── S6 SessionEventLog 🔴 ← HERE
 		  │                       └── S7 Capability Layer ⬜
 		  └── (S3 and S4 unlocked together after S2)
 ```

@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-17 (turn 14)
+> Updated: 2026-05-21 (turn 18)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -37,7 +37,11 @@ shrunk to 1 block; `FamilyRule` tiddlerization in grammar-cache.ts; `KumuListena
 smol-toml as single TW5 library tiddler; `sigil-toml` SharktoothSigil tiddler),
 **and** the shared-type extraction and decomposition pass (`mesh → tw5` dep chain
 broken without keeping a separate shared-types workspace package; pure types
-and isomorphic utils now live back in mesh; 164/164 tests pass).
+and isomorphic utils now live back in mesh; 164/164 tests pass), **and** the
+vessel ontology scrub + S5 quine closure (command→job + peer→vessel rename;
+bags docs prose scrubbed; `/api/health` + CORS deleted from `main.ts`; genesis
+two-pass CID smoke-test fixed; `test:quine` script added; `pnpm test:quine`
+passes — 65 SharktoothSigil tiddlers in genesis; 39/39 tests pass).
 
 Do not re-open those arcs unless a test proves drift.
 
@@ -45,12 +49,13 @@ Do not re-open those arcs unless a test proves drift.
 
 These planning docs follow one architectural law:
 
-- Browser peers and node peers share one operator-peer contract.
-- Every peer writes local intent first, then syncs over the mesh.
-- Capability proof checks happen on the invoking peer before edge work.
+- Browser vessels and node vessels share one operator-vessel contract.
+- Every vessel writes local intent first, then syncs over the mesh.
+- Capability proof checks happen on the invoking vessel before edge work.
 - Command tiddlers and receipt tiddlers remain the durable ceremony spine.
 - Node-only behavior counts as edge adaptation, not authority.
-- Roadmap order favors peer-law closure before product-side expansion.
+- Roadmap order favors vessel-law closure before product-side expansion.
+- "peer" names an Automerge sync participant; "vessel" names the lararium identity-and-runtime unit.
 
 ## Active Priority Order
 
@@ -64,10 +69,11 @@ These planning docs follow one architectural law:
 | — | **Concurrency cluster + grammar self-hosting** | ✅ Done | hui/holo/puka/lele + 8 family tiddlers; TOML monolith = 1 block; wild-magic property holds. |
 | — | **Grammar self-hosting completion** | ✅ Done | `meme-grammar.ts` deleted; `grammarRulesFromText` retired; `GRAMMAR_TAG` in `@lararium/mesh`; smol-toml library tiddler; `sigil-toml` SharktoothSigil tiddler; TOML fallback parse path gone. |
 | — | **Shared-type decomposition** | ✅ Done | `mesh → tw5` dep chain broken; dissolved temporary shared-types references; shared contracts live in `@lararium/mesh`; 164/164 tests pass. |
-| 1 | **P / Operator-peer contract** | ⬜ Next | Make browser and node peers read as one base architecture: admin lane, active wiki lanes, local proof-first, edge-only adaptors. |
-| 2 | **M / Local intent bridge** | ⬜ Next | Finish shared command/receipt contracts; keep ceremony meaning in the TW5 VM pool; keep `stdio` default and transport secondary. |
-| 3 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
-| 4 | **S9 / lararium-browser parity** | ⬜ Next | Full browser peer on the same operator-peer contract: Automerge, IndexedDB, presence, optional OPFS. |
+| — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
+| — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
+| 1 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
+| 2 | **S9 / lararium-browser** | ⬜ Next | Full browser vessel on the same operator-vessel contract: Automerge, IndexedDB, presence, optional OPFS. |
+| 3 | **M / Local intent bridge** | ⬜ Next | Finish shared command/receipt contracts; keep ceremony meaning in the TW5 VM pool; keep `stdio` default and transport secondary. |
 | 5 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 6 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
 | 7 | **G.SharktoothSigil** | ⬜ Next | Migrate remaining TOML sigil blocks in `memetic-wikitext.tid` → SharktoothSigil tiddlers. `grammarRulesFromText` fully retired; `GRAMMAR_TAG` as only registration surface. Talk-story per category. |

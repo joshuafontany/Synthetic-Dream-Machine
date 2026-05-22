@@ -14,13 +14,13 @@
  */
 
 import type { CompositeStore } from "@lararium/mesh";
-import type { CommandHandler } from "./command-dispatcher.js";
+import type { JobHandler } from "./job-dispatcher.js";
 
 export interface WhereHandlerOptions {
   readonly composite: CompositeStore;
 }
 
-export function createWhereHandler(opts: WhereHandlerOptions): CommandHandler {
+export function createWhereHandler(opts: WhereHandlerOptions): JobHandler {
   return async (args) => {
     const tiddler = typeof args["tiddler"] === "string" ? args["tiddler"] : "";
     if (!tiddler) throw new Error("args.tiddler is required");

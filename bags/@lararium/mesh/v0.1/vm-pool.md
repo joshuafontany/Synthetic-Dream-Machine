@@ -43,7 +43,7 @@ The VM pool owns lane lifecycle, residency policy, and handoff between lanes. Th
 
 ### VP-1 — Admin lane always exists
 
-An operator peer keeps one admin VM lane available for command intake, capability materials, durable receipts, and operator-only state.
+An operator peer keeps one admin VM lane available for job intake, capability materials, durable receipts, and operator-only state.
 The pool may restart that VM. The pool may not erase the lane from the peer contract.
 
 ### VP-2 — Active wiki lanes stay explicit
@@ -55,7 +55,7 @@ The pool should not hide wiki selection inside ambient globals.
 ### VP-3 — Residency changes do not change semantics
 
 Cold, warm, and pinned residency affect latency and memory use.
-Residency changes do not change command meaning, receipt shape, or capability law.
+Residency changes do not change job meaning, receipt shape, or capability law.
 
 ### VP-4 — Ceremony work routes to the smallest fitting lane
 
@@ -94,7 +94,7 @@ These modes describe budget, not authority.
 
 ## Lane Handoff
 
-1. The admin lane receives or authors a command record.
+1. The admin lane receives or authors a job record.
 2. The admin lane checks local capability context.
 3. The pool resolves which wiki lane should carry planning or mutation.
 4. The target wiki lane performs VM-local work.
@@ -111,7 +111,7 @@ This handoff keeps one ceremony path while still letting different lanes own dif
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/lar-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/authority >>
-<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/command-tiddler >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/job-tiddler >>
 
 <<~/ahu >>
 

@@ -97,7 +97,7 @@ export class AdminEventStore implements EventStore {
       },
       { authority: "lares-keyhive" },
     );
-    const origin: ChangeOrigin = { kind: "lares-command", requestId: `cap-event-${hash.slice(0, 8)}` };
+    const origin: ChangeOrigin = { kind: "lares-job", requestId: `cap-event-${hash.slice(0, 8)}` };
     await this.opts.admin.put(record, origin, { bag: ADMIN_BAG_ID });
   }
 

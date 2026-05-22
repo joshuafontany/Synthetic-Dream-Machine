@@ -3,7 +3,7 @@
  * and multiple typed projections (TW5 wiki, disk write-back, canvas, MCP).
  *
  * Motivation:
- *   Automerge replays all historical patches to new peers on connect. Without
+ *   Automerge replays all historical patches to new vessels on connect. Without
  *   coalescing, each patch fires every subscriber: the same URI gets deserialized
  *   8+ times, TW5 accumulates hundreds of addTiddler calls before its first
  *   refresh, and disk write-back hammers the filesystem redundantly.
@@ -32,7 +32,7 @@ export type { MemeProjection, RawPatch } from "./tiddler-store.js";
 export class MemeProvider {
   /**
    * Debounce window in ms. Coalesces rapid same-URI patches from Automerge
-   * replay (8–50 patches per URI on a fresh peer connect). 40ms is tight
+   * replay (8–50 patches per URI on a fresh vessel connect). 40ms is tight
    * enough to feel synchronous on a local connection; loose enough to absorb
    * a full initial-sync burst before the first projection callback fires.
    */
@@ -96,7 +96,7 @@ export class MemeProvider {
    * Feed raw Automerge patches. Schedules a debounced fire for each touched key.
    *
    * Eligible keys:
-   *   lar:    — canonical meme URIs (corpus, room, system)
+   *   lar:    — canonical meme URIs (corpus, wiki, system)
    *   Draft of — identity-scoped drafts synced across user devices
    *
    * $:/temp/ and $:/ system tiddlers are excluded — they never enter the store.

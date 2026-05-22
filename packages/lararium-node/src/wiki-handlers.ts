@@ -1,5 +1,5 @@
 /**
- * wiki-handlers — command-tiddler handlers for whole-wiki operations.
+ * wiki-handlers — job-tiddler handlers for whole-wiki operations.
  *
  * Reads composite for wiki oracle tiddlers under
  * `lar:///ha.ka.ba/@lararium/wikis/{slug}`. Each oracle tiddler's `text`
@@ -21,7 +21,7 @@ import {
   AutomergeDocStore, mutableLarRecord, bagScopedStore, tiddlerText, recipeUri,
 } from "@lararium/mesh";
 import { IslandAdaptor, TW5Engine } from "@lararium/tw5";
-import type { CommandHandler } from "./command-dispatcher.js";
+import type { JobHandler } from "./job-dispatcher.js";
 import { stringArg, numberArg, makeRequestId } from "./handler-args.js";
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
@@ -36,7 +36,7 @@ export interface WikiHandlerOptions {
  *  keyhive bridge has finished booting.
  *  getPrimaryEngine resolves lazily (thunk) so the handler closure can
  *  capture it before TW5 finishes booting; safe because handlers only
- *  execute at command-dispatch time, well after the daemon reaches live. */
+ *  execute at job-dispatch time, well after the peer reaches live. */
 export interface WikiMintHandlerOptions {
   readonly composite:        CompositeStore;
   readonly repo:             Repo;
@@ -44,7 +44,7 @@ export interface WikiMintHandlerOptions {
   readonly islandHandle:     DocHandle<LarDoc>;
   readonly operatorDid:      () => Promise<string> | string;
   readonly rootDir:          string;
-  /** Returns the daemon's already-booted primary TW5Engine. */
+  /** Returns the already-booted primary TW5Engine. */
   readonly getPrimaryEngine: () => TW5Engine;
 }
 
@@ -69,7 +69,7 @@ export interface WikiComposeOptions {
  * shape, returns each as `{ slug, uri, automergeUrl }`. The Automerge URL
  * comes from the oracle tiddler's `text` field.
  */
-export function createListWikisHandler(opts: WikiHandlerOptions): CommandHandler {
+export function createListWikisHandler(opts: WikiHandlerOptions): JobHandler {
   return async () => {
     const titles  = await opts.composite.listVisible();
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
@@ -108,7 +108,7 @@ export function createListWikisHandler(opts: WikiHandlerOptions): CommandHandler
  *     bag stack: catalog → lararium → lares → corpus children → wiki
  *     canonical → per-wiki draft.
  */
-export function createInitWikiHandler(opts: WikiMintHandlerOptions): CommandHandler {
+export function createInitWikiHandler(opts: WikiMintHandlerOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required (the wiki name)");
@@ -209,7 +209,7 @@ const ACTIVE_WIKI_URI = `${ADMIN_BAG_ID}/active-wiki`;
  *
  * Idempotent: setting to the current value returns "no-op".
  */
-export function createOpenWikiHandler(opts: WikiHandlerOptions): CommandHandler {
+export function createOpenWikiHandler(opts: WikiHandlerOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
@@ -225,7 +225,7 @@ export function createOpenWikiHandler(opts: WikiHandlerOptions): CommandHandler 
       return { slug, status: "already-active", restartRequired: false };
     }
 
-    const origin: ChangeOrigin = { kind: "lares-command", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
     const record: LarTiddlerRecord = {
       tiddler: {
         title: ACTIVE_WIKI_URI,
@@ -263,7 +263,7 @@ export function createOpenWikiHandler(opts: WikiHandlerOptions): CommandHandler 
  *
  * Returns { slug, scanned, ingested, skipped, recordsIngested, errors[] }.
  */
-export function createSyncWikiHandler(opts: WikiMintHandlerOptions): CommandHandler {
+export function createSyncWikiHandler(opts: WikiMintHandlerOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
@@ -366,7 +366,7 @@ export function createSyncWikiHandler(opts: WikiMintHandlerOptions): CommandHand
  *
  * Returns { slug, recipeUri, pinned: [{ bagUrl, reason }] }.
  */
-export function createPinWikiHandler(opts: WikiResidencyOptions): CommandHandler {
+export function createPinWikiHandler(opts: WikiResidencyOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
@@ -401,7 +401,7 @@ export function createPinWikiHandler(opts: WikiResidencyOptions): CommandHandler
  * want them back. The pin reason field doesn't gate unpin; it's
  * informational. Future refinement: scope unpin by reason prefix.
  */
-export function createUnpinWikiHandler(opts: WikiResidencyOptions): CommandHandler {
+export function createUnpinWikiHandler(opts: WikiResidencyOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
@@ -452,7 +452,7 @@ export function createUnpinWikiHandler(opts: WikiResidencyOptions): CommandHandl
  * can find. Minting fresh bags is out of scope (`wiki init` or specific
  * mint ceremonies handle that).
  */
-export function createAddBagHandler(opts: WikiComposeOptions): CommandHandler {
+export function createAddBagHandler(opts: WikiComposeOptions): JobHandler {
   return async (args) => {
     const slug   = stringArg(args, "slug");
     const bagUrl = stringArg(args, "bagUrl");
@@ -474,7 +474,7 @@ export function createAddBagHandler(opts: WikiComposeOptions): CommandHandler {
     const nextStack = [...stack, bagUrl];
 
     // Mutate the recipe tiddler.
-    const origin: ChangeOrigin = { kind: "lares-command", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
@@ -547,7 +547,7 @@ export function createAddBagHandler(opts: WikiComposeOptions): CommandHandler {
  * tabs/state pointing into the removed bag may resolve to nothing —
  * acceptable at hobbyist scale.
  */
-export function createRemoveBagHandler(opts: WikiComposeOptions): CommandHandler {
+export function createRemoveBagHandler(opts: WikiComposeOptions): JobHandler {
   return async (args) => {
     const slug   = stringArg(args, "slug");
     const bagUrl = stringArg(args, "bagUrl");
@@ -568,7 +568,7 @@ export function createRemoveBagHandler(opts: WikiComposeOptions): CommandHandler
     const nextStack = stack.filter((u) => u !== bagUrl);
 
     // Mutate the recipe.
-    const origin: ChangeOrigin = { kind: "lares-command", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
@@ -625,7 +625,7 @@ export interface DraftHandlerOptions {
   readonly composite: CompositeStore;
 }
 
-export function createDraftHandler(opts: DraftHandlerOptions): CommandHandler {
+export function createDraftHandler(opts: DraftHandlerOptions): JobHandler {
   return async (args, ctx) => {
     const tiddler = stringArg(args, "tiddler");
     let toBag     = stringArg(args, "toBag");
@@ -658,7 +658,7 @@ export function createDraftHandler(opts: DraftHandlerOptions): CommandHandler {
       throw new Error(`target bag is not writable in this composite: ${toBag}`);
     }
 
-    const origin: ChangeOrigin = { kind: "lares-command", requestId: ctx.command.requestId };
+    const origin: ChangeOrigin = { kind: "lares-job", requestId: ctx.job.requestId };
     const drafted: LarTiddlerRecord = {
       tiddler: {
         ...record.tiddler,
@@ -696,7 +696,7 @@ export function createDraftHandler(opts: DraftHandlerOptions): CommandHandler {
 // Args: { slug, daysThreshold? } — default 7 days.
 // Result: { slug, draftBagId, scanned, stale: [{ title, lastUpdate, daysIdle }] }.
 
-export function createPruneStaleHandler(opts: WikiMintHandlerOptions): CommandHandler {
+export function createPruneStaleHandler(opts: WikiMintHandlerOptions): JobHandler {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

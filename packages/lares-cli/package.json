@@ -9,9 +9,9 @@
   },
   "scripts": {
     "prebuild": "node ../../tools/clean-output.mjs dist",
-    "build":     "tsc",
+    "build":     "tsc -p tsconfig.build.json",
     "dev":       "tsx src/bin/lares.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
     "@automerge/automerge-repo": "^2.5.5",

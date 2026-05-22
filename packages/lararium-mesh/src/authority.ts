@@ -2,7 +2,7 @@
  * Lararium authority map — slate-clean auth model.
  *
  * This file deliberately contains no provider SDK, UCAN implementation, token
- * verifier, browser redirect machinery, or VS Code command wiring. It only names
+ * verifier, browser redirect machinery, or VS Code intent wiring. It only names
  * the seams that the next auth architecture will fill.
  *
  * Two first-class auth routes:
@@ -16,16 +16,16 @@
  * 2. GitHub via local VS Code (`github-vscode`)
  *    - Local/dev route for VS Code or VS Code Insiders as the operator UX.
  *    - The extension or local app owns GitHub sign-in and hands Lararium a local
- *      auth receipt over loopback / command bridge.
+ *      auth receipt through a local-first vessel handoff.
  *    - Principal shape should center a GitHub login plus the local editor host.
  *
  * Authorization doctrine:
  *
- *   Auth identifies the operator/device/session.
- *   Catalog policy maps that identity to rooms, corpora, recipes, and actions.
+ *   Auth identifies the operator, vessel, and local island context.
+ *   Catalog policy maps that identity to wikis, corpora, recipes, and actions.
  *   Automerge doc URLs locate data; they do not grant authority.
- *   Sync sharePolicy asks this registry only whether a peer has an accepted
- *   auth receipt. Later policy checks decide read/write/promote/admin.
+ *   Sync sharePolicy asks whether a vessel presents an accepted authority
+ *   receipt. Later policy checks decide read/write/promote/admin.
  *
  * The old UCAN/did:key peer gate has been removed rather than half-kept. If
  * capability chains return later, they should wrap these provider sessions,
@@ -39,6 +39,9 @@
 
 export type LarAuthProvider = "bluesky-oauth" | "github-vscode" | "local-dev";
 
+/** Local runtime identity: browser tab, node daemon, VS Code host, device, etc. */
+export type LarVesselId = string;
+
 export type LarAuthAbility =
   | "auth/session"
   | "catalog/read"
@@ -50,7 +53,7 @@ export type LarAuthAbility =
   | "admin";
 
 export interface LarAuthScope {
-  /** Resource id or prefix: `lararium:*`, `room:altar-fire`, `corpus:sdm`. */
+  /** Resource id or prefix: `lararium:*`, `wiki:altar-fire`, `corpus:sdm`. */
   readonly with: string;
   readonly can: LarAuthAbility | "*";
 }
@@ -95,7 +98,7 @@ export interface LarAuthReceipt {
 
 export interface LarAuthClaim {
   readonly provider: LarAuthProvider;
-  readonly peerId?: string;
+  readonly vesselId?: LarVesselId;
   readonly receipt?: LarAuthReceipt;
   /** Raw provider artifact: OAuth callback payload, VS Code handoff, or local dev marker. */
   readonly proof?: unknown;
@@ -167,35 +170,43 @@ export function receiptAllows(
 }
 
 // ---------------------------------------------------------------------------
-// Peer session registry — provider-neutral replacement for UcanPeerRegistry
+// Authority receipt book — local-first vessel admission surface
 // ---------------------------------------------------------------------------
 
-export class LarAuthSessionRegistry {
-  private peers = new Map<string, LarAuthReceipt>();
+/**
+ * Local authority receipt book.
+ *
+ * This object does not create a server-side login session and does not decide
+ * catalog policy. It is a per-island cache of accepted provider receipts keyed
+ * by local vessel id. Transport may call these vessels "peers"; Lararium does
+ * not let that transport word set the authority model.
+ */
+export class LarAuthorityReceiptBook {
+  private accepted = new Map<LarVesselId, LarAuthReceipt>();
 
-  registerPeer(peerId: string, receipt: LarAuthReceipt): void {
-    this.peers.set(peerId, receipt);
+  acceptReceipt(vesselId: LarVesselId, receipt: LarAuthReceipt): void {
+    this.accepted.set(vesselId, receipt);
   }
 
-  getPeer(peerId: string): LarAuthReceipt | null {
-    const receipt = this.peers.get(peerId);
+  receiptFor(vesselId: LarVesselId): LarAuthReceipt | null {
+    const receipt = this.accepted.get(vesselId);
     if (!receipt) return null;
     if (receipt.expiresAt && Date.parse(receipt.expiresAt) < Date.now()) {
-      this.peers.delete(peerId);
+      this.accepted.delete(vesselId);
       return null;
     }
     return receipt;
   }
 
-  isAuthorized(peerId: string, resource = "lararium:*", ability: LarAuthAbility = "auth/session"): boolean {
-    const receipt = this.getPeer(peerId);
+  vesselAllows(vesselId: LarVesselId, resource = "lararium:*", ability: LarAuthAbility = "auth/session"): boolean {
+    const receipt = this.receiptFor(vesselId);
     if (!receipt) return false;
     return receiptAllows(receipt, resource, ability) || receiptAllows(receipt, resource, "admin");
   }
 
   evictExpired(now = new Date()): void {
-    for (const [id, receipt] of this.peers) {
-      if (receipt.expiresAt && Date.parse(receipt.expiresAt) < now.getTime()) this.peers.delete(id);
+    for (const [id, receipt] of this.accepted) {
+      if (receipt.expiresAt && Date.parse(receipt.expiresAt) < now.getTime()) this.accepted.delete(id);
     }
   }
 }

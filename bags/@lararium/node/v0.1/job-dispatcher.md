@@ -1,14 +1,14 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/node/v0.1/command-dispatcher >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/node/v0.1/job-dispatcher >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/node/v0.1/command-dispatcher"
-file-path    = "bags/@lararium/node/v0.1/command-dispatcher.md"
+uri-path     = "ha.ka.ba/@lararium/node/v0.1/job-dispatcher"
+file-path    = "bags/@lararium/node/v0.1/job-dispatcher.md"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.50
 mana         = 0.50
-role         = "self-documentation: TODO describe command-dispatcher.ts"
+role         = "self-documentation: TODO describe job-dispatcher.ts"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true

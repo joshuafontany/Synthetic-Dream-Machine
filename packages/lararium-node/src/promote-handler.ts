@@ -1,15 +1,15 @@
 /**
- * promote-handler — thin Node wrapper around the TW5-native promote ceremony.
+ * promote-handler — node projection for the TW5-native promote ceremony.
  *
- * Node still owns capability checks and command dispatch. The actual bag/file-path
- * mutation runs inside the primary TW5 wiki engine so the ceremony stays quine-law
- * local to the wiki VM.
+ * Capability verification and bag mutation run peer-local: the ceremony
+ * executes inside the primary TW5 wiki engine (quine-law local to the VM)
+ * and the node peer contributes only hostful capabilities (disk, key access).
  */
 
 import { type CompositeStore, bagScopedStore, type TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
 import { IslandAdaptor, planPromoteUris, type TW5Engine, type TW5Wiki } from "@lararium/tw5";
 import { toLarTiddlerRecord } from "@lararium/mesh";
-import type { CommandHandler } from "./command-dispatcher.js";
+import type { JobHandler } from "./job-dispatcher.js";
 import { stringArg, optionalStringArg } from "./handler-args.js";
 
 function stringListField(value: unknown): string | string[] | undefined {
@@ -23,7 +23,7 @@ export interface PromoteHandlerOptions {
   readonly getMirrorLookupWiki: () => TW5Wiki;
 }
 
-export function createPromoteHandler(opts: PromoteHandlerOptions): CommandHandler {
+export function createPromoteHandler(opts: PromoteHandlerOptions): JobHandler {
   return async (args, ctx) => {
     const tiddler = stringArg(args, "tiddler");
     const toBag = stringArg(args, "toBag");
@@ -72,10 +72,10 @@ export function createPromoteHandler(opts: PromoteHandlerOptions): CommandHandle
 
     const vm = opts.getPrimaryEngine();
     const result = planPromoteUris(vm.wiki, [tiddler], toBag, opts.getMirrorLookupWiki(), {
-      actor: ctx.command.requestedBy,
+      actor: ctx.job.requestedBy,
       sourceBag: actualFromBag,
-      peerId: "node",
-      receiptId: ctx.command.requestId,
+      vesselId: "node",
+      receiptId: ctx.job.requestId,
     });
 
     if (result.error) {
@@ -88,13 +88,13 @@ export function createPromoteHandler(opts: PromoteHandlerOptions): CommandHandle
     const sourceAdaptor = new IslandAdaptor(
       vm,
       bagScopedStore(opts.composite, actualFromBag),
-      `promote-source:${ctx.command.requestId}`,
+      `promote-source:${ctx.job.requestId}`,
       actualFromBag,
     );
     const targetAdaptor = new IslandAdaptor(
       vm,
       bagScopedStore(opts.composite, toBag),
-      `promote-target:${ctx.command.requestId}`,
+      `promote-target:${ctx.job.requestId}`,
       toBag,
     );
 
@@ -131,4 +131,3 @@ export function createPromoteHandler(opts: PromoteHandlerOptions): CommandHandle
     };
   };
 }
-

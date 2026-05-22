@@ -46,7 +46,7 @@ Authority travels with the peer and its proofs. Authority does not collapse into
 ### AU-1 — Peer-visible first check
 
 The invoking peer should validate authority context before it asks a VM lane or edge adaptor to act.
-This keeps command intake local-first and keeps invalid intent from masquerading as pending work.
+This keeps job intake local-first and keeps invalid intent from masquerading as pending work.
 
 ### AU-2 — Edge re-check when needed
 
@@ -75,7 +75,7 @@ One peer may know an identity while refusing a command from that identity.
 
 ## Authority Flow
 
-1. A peer receives or authors a command record.
+1. A peer receives or authors a job record.
 2. The admin lane resolves referenced proofs and local capability context.
 3. The peer accepts or refuses VM-local planning.
 4. Any edge adaptor re-checks before resource-local side effects when needed.
@@ -89,7 +89,7 @@ One peer may know an identity while refusing a command from that identity.
 
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/lar-peer >>
-<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/command-tiddler >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/job-tiddler >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/v0.1/vm-pool >>
 
 <<~/ahu >>

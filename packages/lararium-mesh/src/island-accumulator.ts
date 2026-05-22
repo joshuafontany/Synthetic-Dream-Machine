@@ -39,7 +39,7 @@ export class IslandAccumulator implements MemeProjection {
    *
    * Skips:
    *   - changes that arrive before initial sync completes (IslandAdaptor handles those)
-   *   - non-CRDT origins (canon-hydrate, lares-command, tw-local — IslandAdaptor
+   *   - non-CRDT origins (canon-hydrate, lares-job, tw-local — IslandAdaptor
    *     applies those immediately via _applyChange)
    */
   onUriChanged(change: LarTiddlerChange): void {

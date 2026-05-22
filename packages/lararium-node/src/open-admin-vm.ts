@@ -7,15 +7,15 @@
  * sessions (operator → agent), and ceremony state.
  *
  * Federation: scoped to the operator's own devices via cap=infrastructure
- * delegations, gated at the ingress trust check (S7.4). Never reaches room
+ * delegations, gated at the ingress trust check (S7.4). Never reaches wiki
  * peers — the admin doc has its own AutomergeUrl and its own sync boundary.
  *
  * Architecture: the admin VM has its own TW5Engine, its own CompositeStore,
- * and its own IslandAdaptor. Sharing the room VM's composite would risk
+ * and its own IslandAdaptor. Sharing the wiki VM's composite would risk
  * leaking operator-private content (delegation proofs, session secrets) to
- * room peer connections.
+ * wiki vessel connections.
  *
- * Standalone module — openNodeLarPeer wires this in (S5.6 A.4); for now
+ * Standalone module — openNodeVessel wires this in (S5.6 A.4); for now
  * the function exists as a callable unit for tests and future integration.
  */
 
@@ -27,7 +27,7 @@ import type { TW5CoreBootBlob } from "@lararium/tw5";
 import { waitHandleLocal } from "./repo-helpers.js";
 
 export interface AdminVmOptions {
-  /** Shared Automerge repo — same one the room VM uses. */
+  /** Shared Automerge repo — same one the wiki VM uses. */
   repo: Repo;
   /** Admin doc AutomergeUrl from the social-bootstrap bundle (lararium:init). */
   adminUrl: string;
@@ -39,7 +39,7 @@ export interface AdminVmOptions {
 }
 
 export interface AdminVmResult {
-  /** Booted TW5 engine for the admin room. */
+  /** Booted TW5 engine for the admin wiki. */
   tw5: TW5Engine;
   /** Composite store with the admin doc as the writable layer. */
   composite: CompositeStore;
@@ -80,7 +80,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   // The admin doc is purely local — no remote Automerge sync peer to wait for.
   // Mark sync complete immediately so the IslandAdaptor flushes its buffer
   // and the seeded bag-mirror config tiddlers are visible in the admin TW5 wiki
-  // before the first command handler runs.
+  // before the first job handler runs.
   adminStore.markSyncComplete();
 
   return {

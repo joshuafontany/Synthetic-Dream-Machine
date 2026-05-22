@@ -1,7 +1,7 @@
 import type { LarTiddlerStore } from "./tiddler-store.js";
 
 /**
- * LarOpenPhase — canonical peer boot sequence shared by all platform peers.
+ * LarOpenPhase — canonical vessel boot sequence shared by all platform runtimes.
  * Phase order is monotonic — never goes backward.
  */
 export type LarOpenPhase =
@@ -11,50 +11,50 @@ export type LarOpenPhase =
   | "island-ready"   // island (system bag) resolved — may arrive async
   | "wiki-ready"     // wiki DocHandle resolved
   | "draft-ready"    // wiki-drafts DocHandle resolved
-  | "peer-ready"     // LarPeer constructed, CompositeStore wired
+  | "vessel-ready"   // LarVessel constructed, CompositeStore wired
   | "tw5-booted"     // TW5Engine.boot() resolved
   | "corpus-ready"   // corpus bags attached (fires once all initial corpora loaded)
   | "live";          // IslandAdaptor wired, VmPool attached
 
 /**
- * OperatorPeerVmFactory — caller-injected VM constructor shared by browser and node peers.
+ * VesselVmFactory — caller-injected VM constructor shared by browser and node vessels.
  *
  * The platform factory owns engine boot and bag-stack derivation. The VM factory only
- * receives the resolved recipe scope for the operator peer lane it is opening.
+ * receives the resolved recipe scope for the vessel lane it is opening.
  */
-export type OperatorPeerVmFactory<TVm, TEngine> = (
+export type VesselVmFactory<TVm, TEngine> = (
   recipeUri: string,
   engine: TEngine,
   bagStack: readonly string[],
 ) => Promise<TVm>;
 
 /**
- * OperatorPeerOpenOptions — shared browser/node operator-peer inputs.
+ * OpenVesselOptions — shared browser/node vessel open inputs.
  *
- * Platform peers may extend this with transport, storage, or mount-specific fields,
- * but these fields stay common across every operator peer factory.
+ * Platform vessels may extend this with transport, storage, or mount-specific fields,
+ * but these fields stay common across every vessel factory.
  */
-export interface OperatorPeerOpenOptions<TVm = unknown, TEngine = unknown> {
+export interface OpenVesselOptions<TVm = unknown, TEngine = unknown> {
   hostId: string;
   wikiId: string;
   recipeUri?: string;
   onPhase?: (phase: LarOpenPhase) => void;
-  vmFactory?: OperatorPeerVmFactory<TVm, TEngine>;
+  vmFactory?: VesselVmFactory<TVm, TEngine>;
 }
 
 /**
- * OperatorPeerOpenResult — explicit shared browser/node peer contract.
+ * OpenVesselResult — shared browser/node vessel open output.
  *
  * Runtime-specific factories may extend this with edge adaptors or UI mounts, but the
- * common peer/runtime/store/pool surface lives here so every operator peer reads alike.
+ * common vessel/runtime/store/pool surface lives here so every vessel open reads alike.
  */
-export interface OperatorPeerOpenResult<
-  TPeer = unknown,
+export interface OpenVesselResult<
+  TVessel = unknown,
   TPool = unknown,
   TRepo = unknown,
   TStore extends LarTiddlerStore = LarTiddlerStore,
 > {
-  peer: TPeer;
+  vessel: TVessel;
   pool: TPool;
   repo: TRepo;
   store: TStore;

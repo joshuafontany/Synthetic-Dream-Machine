@@ -2,7 +2,7 @@
  * runInit — one-time social-plane bootstrap for a new Lararium node.
  *
  * Causal-island law: this function holds the ONLY seeding path for social Tiga
- * docs. The server (openNodeLarPeer) finds docs created here; it never authors
+ * docs. The server (openNodeVessel) finds docs created here; it never authors
  * them.
  *
  * Three docs + one bootstrap artifact get produced:
@@ -32,7 +32,7 @@ import {
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
 } from "../social-seed.js";
 import { generateOrLoadOperatorKeypair } from "../operator-key.js";
-import { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "../open-node-lar-peer.js";
+import { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "../open-node-vessel.js";
 
 export interface InitOptions {
   /** Absolute path to the Automerge NodeFS storage directory. */

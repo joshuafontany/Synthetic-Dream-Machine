@@ -170,7 +170,7 @@ export class NodeVmManager {
 
   /**
    * Register the PrimaryWiki as a pinned (never-evicted) in-process slot.
-   * Call once after `openNodeLarPeer` returns the booted `tw5` engine.
+   * Call once after `openNodeVessel` returns the booted `tw5` engine.
    */
   mountPrimary(wikiId: string, engine: TW5Engine, adaptor: IslandAdaptor | null): void {
     this._slots.set(wikiId, {

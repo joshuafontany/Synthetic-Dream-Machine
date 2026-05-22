@@ -1,9 +1,9 @@
 /**
- * promotion-ceremony — peer-neutral CRDT promotion receipt law.
+ * promotion-ceremony — local-first CRDT promotion receipt law.
  *
- * Promotion is not a Node RPC and not a disk operation. Any lawful peer may
+ * Promotion is not a Node RPC and not a disk operation. Any lawful vessel may
  * promote by writing target-bag records, tombstoning source-bag records, and
- * emitting a receipt record into the CRDT. Node peers may observe those records
+ * emitting a receipt record into the CRDT. Hostful vessels may observe those records
  * and project to disk when their local mirror config says to do so.
  */
 
@@ -19,7 +19,7 @@ export interface PromotionReceiptInput {
   readonly skipped?: readonly string[];
   readonly childrenPromoted?: readonly string[];
   readonly promotedAt?: string;
-  readonly peerId?: string;
+  readonly vesselId?: string;
   readonly intent?: string;
 }
 
@@ -59,7 +59,7 @@ export function buildPromotionReceiptFields(input: PromotionReceiptInput): Promo
     skipped: [...(input.skipped ?? [])],
     childrenPromoted: [...(input.childrenPromoted ?? [])],
     promotedAt,
-    peerId: input.peerId ?? "",
+    vesselId: input.vesselId ?? "",
     intent: input.intent ?? "promote",
   };
 
@@ -77,9 +77,9 @@ export function buildPromotionReceiptFields(input: PromotionReceiptInput): Promo
     skipped: (input.skipped ?? []).join(" "),
     "children-promoted": (input.childrenPromoted ?? []).join(" "),
     "promoted-at": promotedAt,
-    "peer-id": input.peerId ?? "",
+    "vessel-id": input.vesselId ?? "",
     intent: input.intent ?? "promote",
-    // Projection is a local peer side effect. Receipts sync but do not render as markdown files.
+    // Projection is a local vessel side effect. Receipts sync but do not render as markdown files.
     "disk-projection": "no",
   };
 }

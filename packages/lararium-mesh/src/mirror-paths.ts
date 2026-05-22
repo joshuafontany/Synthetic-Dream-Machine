@@ -1,7 +1,7 @@
 /**
  * mirror-paths — peer-neutral lar:/// URI → mirror-relative path projection law.
  *
- * TW5 filters, promotion ceremonies, Node disk projection, and future peers all
+ * TW5 filters, promotion ceremonies, Node disk projection, and future vessels all
  * need the same answer for "where would this canonical artifact surface in a
  * compatibility mirror?"  Mesh owns that seam; runtimes only ask.
  */

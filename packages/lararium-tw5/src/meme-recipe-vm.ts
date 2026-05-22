@@ -103,7 +103,7 @@ export class DirectMemeRecipeVm implements MemeRecipeVm {
  * The provider drives all incremental updates (Scale 1–4). No bulk
  * `loadRecords` call — the VM receives deltas as CRDT patches arrive.
  *
- * @param provider   - MemeProvider instance managing the corpus/room doc
+ * @param provider   - MemeProvider instance managing the corpus/wiki doc
  * @param factory    - VM factory; pass `() => new DirectMemeRecipeVm(ltw)` or
  *                     a TW5WorkerProxy factory for Worker isolation (Sprint 6).
  * @returns `{ vm, unsubscribe }` — call `unsubscribe()` to detach the VM from the provider.

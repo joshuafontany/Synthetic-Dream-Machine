@@ -1,5 +1,5 @@
 /**
- * residency-handlers — command-tiddler handlers for operator-driven
+ * residency-handlers — job-tiddler handlers for operator-driven
  * residency control: pin, unpin, residency (stats).
  *
  * Operators invoke these via `lares pin <url>` / `lares unpin <url>` /
@@ -7,14 +7,14 @@
  * the daemon constructs at boot.
  */
 
-import type { CommandHandler } from "./command-dispatcher.js";
+import type { JobHandler } from "./job-dispatcher.js";
 import type { BagResidencyManager } from "@lararium/mesh";
 
 export interface ResidencyHandlerOptions {
   readonly residency: BagResidencyManager;
 }
 
-export function createPinHandler(opts: ResidencyHandlerOptions): CommandHandler {
+export function createPinHandler(opts: ResidencyHandlerOptions): JobHandler {
   return async (args) => {
     const url    = typeof args["url"]    === "string" ? args["url"]    : "";
     const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
@@ -30,7 +30,7 @@ export function createPinHandler(opts: ResidencyHandlerOptions): CommandHandler 
   };
 }
 
-export function createUnpinHandler(opts: ResidencyHandlerOptions): CommandHandler {
+export function createUnpinHandler(opts: ResidencyHandlerOptions): JobHandler {
   return async (args) => {
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
@@ -50,7 +50,7 @@ export function createUnpinHandler(opts: ResidencyHandlerOptions): CommandHandle
  * useful for smoke tests and future "I know this URL exists but won't
  * touch it yet" workflows.
  */
-export function createRegisterColdHandler(opts: ResidencyHandlerOptions): CommandHandler {
+export function createRegisterColdHandler(opts: ResidencyHandlerOptions): JobHandler {
   return async (args) => {
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
@@ -59,7 +59,7 @@ export function createRegisterColdHandler(opts: ResidencyHandlerOptions): Comman
   };
 }
 
-export function createResidencyStatsHandler(opts: ResidencyHandlerOptions): CommandHandler {
+export function createResidencyStatsHandler(opts: ResidencyHandlerOptions): JobHandler {
   return async () => {
     const stats = opts.residency.stats();
     return {

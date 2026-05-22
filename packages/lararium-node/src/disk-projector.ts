@@ -7,7 +7,7 @@
  *
  * Bag-aware (S5.5+): each writable bag may opt into a filesystem mirror via
  * BagMirrorConfig. Bags without a mirror config never write to disk. Edits in
- * the room bag mirror to `wikis/{slug}/...`; canonical bags mirror to
+ * the wiki bag mirror to `wikis/{slug}/...`; canonical bags mirror to
  * `packages/...`. Promotion is a deliberate ceremony that moves a tiddler
  * between bags, with the disk side effect of a file move — the git diff IS
  * the operator's signature on canon.

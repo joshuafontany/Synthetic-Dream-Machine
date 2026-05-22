@@ -7,7 +7,7 @@
  *   GitHubIdentitySlot     — OAuth token mapped to did:web:github.com/<username>
  *   KeyhiveIdentitySlot    — Keyhive convergent capabilities (Ink & Switch, pending Rust→WASM)
  *
- * The interface is intentionally narrow — only what LarPeer and the Automerge
+ * The interface is intentionally narrow — only what LarVessel and the Automerge
  * sharePolicy need to function. Keyhive's full three-layer stack (convergent
  * capabilities + Group CRDT + BeeKEM) slots in without changing the interface.
  *
@@ -18,7 +18,7 @@
  *   (future) to derive deterministic doc URLs per user namespace.
  *
  * URI convention:
- *   lar://did:web:user.bsky.social/rooms/altar-fire
+ *   lar://did:web:user.bsky.social/wikis/altar-fire
  *         └─ userNamespace ──────┘└─ path ────────┘
  *
  * Quine fit:
@@ -33,7 +33,7 @@
  *   Tiddlers with lar: URIs serve as the heleuma sync candidates; $:/ tiddlers do not.
  */
 
-/** Automerge-compatible actor ID — 16-byte UUID string, stable per peer. */
+/** Automerge-compatible actor ID — 16-byte UUID string, stable per vessel. */
 export type ActorId = string;
 
 /**
@@ -46,13 +46,13 @@ export type ActorId = string;
 export type CapabilityToken = string | null;
 
 /**
- * IdentitySlot — minimum surface LarPeer needs from an identity provider.
+ * IdentitySlot — minimum surface LarVessel needs from an identity provider.
  *
  * All methods are async so implementations can lazily fetch keys from
  * IndexedDB (browser) or a key file (node) without blocking construction.
  */
 export interface IdentitySlot {
-  /** The peer's DID — e.g. "did:web:user.bsky.social" or "did:plc:xxxxx". */
+  /** The vessel/operator DID — e.g. "did:web:user.bsky.social" or "did:plc:xxxxx". */
   readonly did: string;
 
   /**
@@ -63,15 +63,15 @@ export interface IdentitySlot {
   deriveActorId(): Promise<ActorId>;
 
   /**
-   * Verify that this peer holds a valid capability to access the given doc.
+   * Verify that this vessel holds a valid capability to access the given doc.
    * Called from Automerge Repo's sharePolicy.
-   * Returns true if the peer should be allowed to sync docUrl.
+   * Returns true if the vessel should be allowed to sync docUrl.
    */
   verifyCapability(docUrl: string, ability: "read" | "write"): Promise<boolean>;
 
   /**
-   * Issue a capability token delegating access to docUrl to another peer DID.
-   * Used for room invitations: the island author issues tokens; joiners present them.
+   * Issue a capability token delegating access to docUrl to another vessel DID.
+   * Used for wiki invitations: the island author issues tokens; joiners present them.
    */
   delegateCapability(
     docUrl:     string,
@@ -81,8 +81,8 @@ export interface IdentitySlot {
   ): Promise<CapabilityToken>;
 
   /**
-   * Verify a capability token presented by a remote peer.
-   * The Automerge Repo sharePolicy calls this when a peer requests a doc.
+   * Verify a capability token presented by a remote vessel.
+   * The Automerge Repo sharePolicy calls this when a vessel requests a doc.
    */
   verifyDelegation(token: CapabilityToken, docUrl: string): Promise<boolean>;
 }
@@ -93,33 +93,33 @@ export interface IdentitySlot {
 // ---------------------------------------------------------------------------
 
 /**
- * OpenIdentitySlot — permits all access; uses peerId hash for stable actorId.
+ * OpenIdentitySlot — permits all access; uses vesselId hash for stable actorId.
  *
  * Current alpha stub. The sharePolicy wired to it returns true
  * unconditionally (same as the current hardcoded `async () => true`), but now
- * the actorId is stable across reboots — derived from the peerId string.
+ * the actorId is stable across reboots — derived from the vesselId string.
  */
 export class OpenIdentitySlot implements IdentitySlot {
   readonly did: string;
-  private readonly _peerId: string;
+  private readonly _vesselId: string;
 
-  constructor(peerId: string) {
-    this._peerId = peerId;
+  constructor(vesselId: string) {
+    this._vesselId = vesselId;
     // Placeholder DID until user logs in via Bluesky (elyncia.social) or GitHub.
     // Real login sets did:web:elyncia.social or did:web:github.com/<user>.
-    this.did = `did:web:elyncia.app/peers/${encodeURIComponent(peerId)}`;
+    this.did = `did:web:elyncia.app/vessels/${encodeURIComponent(vesselId)}`;
   }
 
   async deriveActorId(): Promise<ActorId> {
-    // Stable UUID derived from peerId via Web Crypto SHA-256 truncated to 16 bytes.
+    // Stable UUID derived from vesselId via Web Crypto SHA-256 truncated to 16 bytes.
     // Falls back to a simple string hash in environments without SubtleCrypto.
     try {
       const enc  = new TextEncoder();
-      const hash = await crypto.subtle.digest("SHA-256", enc.encode(this._peerId));
+      const hash = await crypto.subtle.digest("SHA-256", enc.encode(this._vesselId));
       const bytes = new Uint8Array(hash).slice(0, 16);
       return formatUuid(bytes);
     } catch {
-      return deterministicUuid(this._peerId);
+      return deterministicUuid(this._vesselId);
     }
   }
 

@@ -1,14 +1,14 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/v0.1/command-tiddler >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/v0.1/job-tiddler >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/command-tiddler"
-file-path    = "bags/@lararium/mesh/v0.1/command-tiddler.md"
+uri-path     = "ha.ka.ba/@lararium/mesh/v0.1/job-tiddler"
+file-path    = "bags/@lararium/mesh/v0.1/job-tiddler.md"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 0.82
 mana         = 0.80
-role         = "contract for command records that carry ceremony intent through the mesh"
+role         = "contract for job records that carry ceremony intent through the mesh"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
@@ -19,7 +19,7 @@ retain       = true
 
 # Command Tiddler
 
-Mesh-native command record for operator ceremonies.
+Mesh-native job record for operator ceremonies.
 
 <<~/ahu >>
 
@@ -27,10 +27,10 @@ Mesh-native command record for operator ceremonies.
 
 ## Contract
 
-A command tiddler carries durable operator intent through the admin lane and across the causal mesh.
+A job tiddler carries durable operator intent through the admin lane and across the causal mesh.
 It gives CLI, browser UX, and other local tools one shared ceremony vocabulary.
 
-Command tiddlers should carry enough structure to support:
+Job tiddlers should carry enough structure to support:
 
 - local capability intake
 - VM-local planning and apply
@@ -69,25 +69,25 @@ Recommended fields when authority or ordering matters:
 
 ### CT-1 — Commands stay records, not transport payloads
 
-Transport envelopes may carry command tiddlers. Transport does not replace the command record as the durable ceremony artifact.
+Transport envelopes may carry job tiddlers. Transport does not replace the job record as the durable ceremony artifact.
 
-### CT-2 — One command vocabulary across UX surfaces
+### CT-2 — One job vocabulary across UX surfaces
 
-CLI, browser UX, and other operator tools should author the same command shapes.
+CLI, browser UX, and other operator tools should author the same job shapes.
 Presentation may differ. Record law does not.
 
 ### CT-3 — Command intake happens in the admin lane
 
-The admin VM lane should receive, validate, and route command records before wiki-lane or edge work begins.
+The admin VM lane should receive, validate, and route job records before wiki-lane or edge work begins.
 
 ### CT-4 — Commands link forward to receipts
 
-Every command path should allow durable receipt linkage for accept, reject, apply, partial, or deferred outcomes.
+Every job path should allow durable receipt linkage for accept, reject, apply, partial, or deferred outcomes.
 
 ### CT-5 — Commands name intent, not implementation trivia
 
 Command records should say what ceremony the operator requested and what targets it names.
-They should avoid baking transport or runtime-specific implementation details into the command meaning.
+They should avoid baking transport or runtime-specific implementation details into the job meaning.
 
 <<~/ahu >>
 
@@ -97,7 +97,7 @@ They should avoid baking transport or runtime-specific implementation details in
 
 ```json
 {
-	"id": "lar:///ha.ka.ba/@lares/commands/promote/2026-05-19/request-001",
+	"id": "lar:///ha.ka.ba/@lares/jobs/promote/2026-05-19/request-001",
 	"kind": "/canon/promote",
 	"issuer": "lar:///ha.ka.ba/@operators/joshu/device/local-cli",
 	"audience": "lar:///ha.ka.ba/@operators/joshu/admin-lane",

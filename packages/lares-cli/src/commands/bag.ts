@@ -20,7 +20,7 @@ import { repoRoot } from "@lararium/mesh";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
-import { connectAdminPeer, submitCommand } from "../admin-peer.js";
+import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -33,7 +33,7 @@ async function tryConnect() {
   try {
     const root = process.env["LAR_ROOT"];
     const extra = root ? { bootstrapPath: join(root, "genesis", "social-bootstrap.json") } : {};
-    return await connectAdminPeer(extra);
+    return await connectAdminVessel(extra);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares bag: ${msg}`);
@@ -53,12 +53,12 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`bag epoch: ${result["bagUrl"]}`);
     console.log(`  old doc:  ${result["oldDocUrl"]}`);

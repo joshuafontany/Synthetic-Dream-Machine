@@ -2,7 +2,7 @@
  * Capability protocol — provider-neutral authority seam.
  *
  * Mesh owns the shape. Adapters prove it.
- * Keyhive, local-dev stubs, future UCAN/CAIP/EIP-712 bridges, and command
+ * Keyhive, local-dev stubs, future UCAN/CAIP/EIP-712 bridges, and job
  * handlers can all satisfy this small interface without depending on a concrete
  * provider package.
  */

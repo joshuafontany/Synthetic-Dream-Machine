@@ -5,7 +5,7 @@
  *
  *   IslandAdaptor
  *     inbound:  per-island pre-sync buffer → onSyncComplete() batch flush
- *               non-CRDT origins (tw-local echo, canon-hydrate, lares-command) apply immediately
+ *               non-CRDT origins (tw-local echo, canon-hydrate, lares-job) apply immediately
  *               post-sync crdt-remote: returns — IslandAccumulator (separate MemeProjection) handles
  *     outbound: saveTiddler() → store.put() (direct)
  *               deleteTiddler() → store.tombstone() (direct)
@@ -55,7 +55,7 @@ import type {
 } from "@lararium/mesh";
 import { toLarTiddlerRecord } from "@lararium/mesh";
 import type { MemeProjection } from "@lararium/mesh";
-import { IslandAccumulator } from "@lararium/mesh";
+import { IslandAccumulator, isPersistableLarUri } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
 import { splitBodyTiddler } from "./deserializer.js";
 import type { TW5TiddlerInputFields } from "./types/tiddlywiki.d.ts";
@@ -67,7 +67,6 @@ import type { TW5TiddlerInputFields } from "./types/tiddlywiki.d.ts";
 function isTemp(title: string): boolean      { return title.startsWith("$:/temp/"); }
 function isDraft(title: string): boolean     { return title.startsWith("Draft of "); }
 function isTW5System(title: string): boolean { return title.startsWith("$:/"); }
-function isMemeUri(title: string): boolean   { return title.startsWith("lar:"); }
 
 function toTW5FieldStrings(
   tw5: TW5Engine,
@@ -334,7 +333,7 @@ export class IslandAdaptor implements MemeProjection {
 
     if (isTemp(title) || isTW5System(title)) return Promise.resolve();
     if (isDraft(title))                      return Promise.resolve();
-    if (!isMemeUri(title))                   return Promise.resolve();
+    if (!isPersistableLarUri(title))                   return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -366,7 +365,7 @@ export class IslandAdaptor implements MemeProjection {
   deleteTiddler(title: string): Promise<void> {
     if (this._isApplying())                  return Promise.resolve();
     if (isTemp(title) || isTW5System(title)) return Promise.resolve();
-    if (!isMemeUri(title))                   return Promise.resolve();
+    if (!isPersistableLarUri(title))                   return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 

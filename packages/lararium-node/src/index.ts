@@ -6,14 +6,14 @@ export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 export { LarDiskProjector } from "./disk-projector.js";
 export { makeDiskProjectionKind } from "./projection-kinds.js";
 export type { DiskKindDeps } from "./projection-kinds.js";
-export { openNodeLarPeer, createNodeSession } from "./open-node-lar-peer.js";
+export { openNodeVessel, createNodeSession } from "./open-node-vessel.js";
 export { openAdminVm } from "./open-admin-vm.js";
 export type { AdminVmOptions, AdminVmResult } from "./open-admin-vm.js";
-export type { NodeLarPeerOptions, NodeLarPeerResult, NodeOpenPhase, CreateNodeSessionOptions, NodeSessionResult } from "./open-node-lar-peer.js";
+export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase, CreateNodeSessionOptions, NodeSessionResult } from "./open-node-vessel.js";
 
 export { loadGenesisIsland, reconcileIslandFromGenesis, readGenesisSha256, GENESIS_CID } from "./genesis-artifact.js";
 export { createSessionEventLog, seedAdminDoc } from "./social-seed.js";
-export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-lar-peer.js";
+export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-vessel.js";
 export { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 
 export { runInit } from "./commands/init.js";
@@ -21,8 +21,8 @@ export type { InitOptions, InitResult } from "./commands/init.js";
 
 export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-key.js";
 
-export { CommandDispatcher, CommandHandlerRegistry } from "./command-dispatcher.js";
-export type { CommandHandler, CommandContext, CommandDispatcherOptions } from "./command-dispatcher.js";
+export { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
+export type { JobHandler, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
 
 export { createWhereHandler } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";

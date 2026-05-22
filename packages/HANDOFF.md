@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-17 (turn 14)
+> Updated: 2026-05-21 (turn 18)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -30,20 +30,24 @@ grammarRulesFromText fully retired), AND the Verse polychronous CRDT mesh sprint
 (meme-sync-adaptor.ts deleted; IslandAdaptor + IslandAccumulator replace it;
 $tw.syncer provably dead; N-accumulator flushAll + startRenderLoop wired;
 verse-mesh.md + island-adaptor.md + island-accumulator.md memes captured;
-48/48 tests pass) are treated as landed unless tests prove drift.
+48/48 tests pass), AND the vessel ontology scrub + S5 quine closure sprint
+(command→job + peer→vessel rename complete; lar-vessel.md + open-vessel.md prose
+scrubbed with Automerge-peer / lararium-vessel vocabulary split; /api/health
+HTTP endpoint + CORS header deleted from main.ts; build-genesis-island.ts
+two-pass CID injection smoke-test fixed; test-quine.ts shadow-filter fix;
+`pnpm --filter @lararium/node test:quine` passes — 65 SharktoothSigil grammar
+tiddlers self-hosted in genesis artifact; 39/39 tests pass) are treated as
+landed unless tests prove drift.
 
 Next work, in order:
-1. $:/ title retirement — all Lararium-owned tiddlers (including OUR system tags,
-   config, and state) move to lar: URIs. Only direct TW5 core/system overrides
-   keep $:/ titles. Coordinated migration with smokes; not a search/replace.
-2. Path K / F-arc: IslandAdaptor.saveTiddler 300–500ms debounce + projection
-   auto-truncate. Design spec first (meme doc), then code.
-3. Path G.SharktoothSigil: block-container sigils first (wehe, meme, heihei,
-   wai, huli) — carry close_pattern complexity.
-4. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
-5. UEFN scene importer — DEFERRED until after successful browser peer tests.
+1. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+2. S9 / lararium-browser: browser vessel on same operator-vessel contract — Automerge,
+   IndexedDB, presence, optional OPFS.
+3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+4. Path G.SharktoothSigil: block-container sigils (wehe, meme, heihei, wai, huli).
+5. UEFN scene importer — DEFERRED until after successful browser vessel e2e tests.
    Spec exists at bags/@lares/api/v0.1/pono/uefn-scene.md; do not begin import
-   pipeline until browser peer e2e passes.
+   pipeline until browser vessel e2e passes.
 
 Completed this turn (2026-05-17 turn 14):
 - shared-type extraction later decomposed back into @lararium/mesh; mesh ↔ tw5 dep chain remains broken without keeping a separate shared-types package.
@@ -53,6 +57,48 @@ Rules: preserve TW5 VM primacy, bag=Automerge-doc=sync-boundary, no HTTP/RPC
 coordination surface, and explicit operator promotion for canon. Web3 only —
 no web2 models/code/flows in Lares stack.
 ```
+
+## What Changed This Turn (2026-05-21 turn 18)
+
+### S5 Quine Closed — Genesis Boot Smoke: PASS
+
+`pnpm --filter @lararium/node test:quine` now passes. The genesis artifact carries
+a bootable TW5 core + compiled plugin + 65 self-hosted SharktoothSigil grammar tiddlers.
+
+**Bugs fixed:**
+- `build-genesis-island.ts` smoke test: `.tiddler?.cid` → `.fields?.cid` (wrong tiddler record path)
+- `scripts/test-quine.ts`: same `.tiddler?.sha256` → `.fields?.cid` fix; filter changed
+  from `[tag[GRAMMAR_TAG]]` to `[all[tiddlers+shadows]tag[GRAMMAR_TAG]]` — plugin
+  contents load as TW5 shadow tiddlers, not regular tiddlers; the plain `[tag[...]]`
+  filter skips shadows entirely.
+- `package.json` (`@lararium/node`): `"test:quine": "tsx scripts/test-quine.ts"` added.
+
+**Genesis artifact:** 4 blobs, 14 tiddlers, 511 KB, CIDv1 self-ref tiddler wired.
+
+### Web2 Smell Deleted — `/api/health` HTTP endpoint
+
+`packages/lararium-node/src/main.ts`: deleted `makeHandler`, CORS header
+(`Access-Control-Allow-Origin: *`), and the `state` phase object. The HTTP server
+now carries no handler — it exists only as a socket owner for WebSocket upgrades.
+Log line changed from `HTTP+WS server` to `WS relay`. Connect log changed from
+`http://localhost:PORT/#...` to `ws://localhost:PORT/ws#...`.
+
+### Vessel Ontology Scrub — bags docs
+
+`bags/@lararium/mesh/v0.1/lar-vessel.md`:
+- TOML `role` field updated to "vessel"
+- `# Lar Peer` → `# Lar Vessel`
+- New `## Vocabulary` section: Automerge-layer "peer" vs lararium-layer "vessel" defined in two sentences
+- LP-1 renamed "Vessel before server"; body: "A Lararium vessel models itself as a participant in a causal mesh — not a server that clients connect to."
+- LP-2 through LP-5, shape section, ceremony section: "peer" → "vessel" throughout
+
+`bags/@lararium/mesh/v0.1/open-vessel.md`:
+- `# Operator Peer` → `# Open Vessel`
+- "operator peer" → "open vessel" / "vessel" throughout contract, invariants, flow
+
+**Metrics:** 39/39 tests pass; all packages typecheck clean.
+
+---
 
 ## What Changed This Turn (2026-05-20 turn 17)
 

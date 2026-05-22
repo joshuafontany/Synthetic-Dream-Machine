@@ -128,7 +128,7 @@ The Lares stack takes the article's challenge seriously. Five architecture laws 
 
 Two further commitments arrived this branch:
 
-- **Inter-process coordination rides command-tiddlers, not HTTP/RPC.** The CLI joins as just-another-Automerge-peer. The protocol's silence on "how do operator-tools talk to the daemon" gets answered at the CRDT layer, where the rest of the federation already lives.
+- **Inter-process coordination rides job-tiddlers, not HTTP/RPC.** The CLI joins as just-another-Automerge-peer. The protocol's silence on "how do operator-tools talk to the daemon" gets answered at the CRDT layer, where the rest of the federation already lives.
 - **Capability layer adopts Keyhive concap, not UCAN.** Concap integrates revocation into the membership CRDT — the article's "every shared function eventually gets governed by someone" gets a CRDT-shaped answer rather than punting revocation to out-of-band lookup.
 
 These commitments wear technical clothes — governance choices in disguise.

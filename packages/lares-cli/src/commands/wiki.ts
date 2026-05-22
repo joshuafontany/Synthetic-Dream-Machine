@@ -17,7 +17,7 @@
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh";
-import { connectAdminPeer, submitCommand } from "../admin-peer.js";
+import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 type WikiSubcommand = (args: ParsedArgs) => Promise<number>;
@@ -35,7 +35,7 @@ async function tryConnect() {
   try {
     const root = process.env["LAR_ROOT"];
     const extra = root ? { bootstrapPath: join(root, "genesis", "social-bootstrap.json") } : {};
-    return await connectAdminPeer(extra);
+    return await connectAdminVessel(extra);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares wiki: ${msg}`);
@@ -49,12 +49,13 @@ export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "list-wikis", {}, did);
+    const r = await submitJob(peer, "list-wikis", {}, did);
     if (r.status === "error") {
       console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const wikis = (r.result?.["wikis"] ?? []) as Array<{
+    const result = summaryOutput(r) ?? {};
+    const wikis = (result["wikis"] ?? []) as Array<{
       slug: string;
       uri: string;
       automergeUrl: string | null;
@@ -88,12 +89,12 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "init-wiki", { slug }, did);
+    const r = await submitJob(peer, "init-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`init failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki: ${slug}`);
     console.log(`  status:    ${result["status"]}`);
@@ -119,12 +120,12 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "open-wiki", { slug }, did);
+    const r = await submitJob(peer, "open-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki: ${slug}  status: ${result["status"]}`);
     if (result["restartRequired"]) {
@@ -147,12 +148,12 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(peer, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`sync ${slug}:`);
     console.log(`  scanned:  ${result["scanned"]}`);
@@ -181,12 +182,12 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "pin-wiki", { slug }, did);
+    const r = await submitJob(peer, "pin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     const pinned = (result["pinned"] ?? []) as Array<{ bagUrl: string; reason: string }>;
     console.log("");
     console.log(`wiki ${slug}: pinned ${pinned.length} bag(s)`);
@@ -209,12 +210,12 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "unpin-wiki", { slug }, did);
+    const r = await submitJob(peer, "unpin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     const unpinned = (result["unpinned"] ?? []) as string[];
     console.log("");
     console.log(`wiki ${slug}: unpinned ${unpinned.length} bag(s)`);
@@ -237,12 +238,12 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "add-bag", { slug, bagUrl }, did);
+    const r = await submitJob(peer, "add-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`add-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki ${slug}: ${result["status"]}`);
     console.log(`  bag:    ${result["bagUrl"]}`);
@@ -268,12 +269,12 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "remove-bag", { slug, bagUrl }, did);
+    const r = await submitJob(peer, "remove-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki ${slug}: ${result["status"]}`);
     console.log(`  bag:    ${result["bagUrl"]}`);
@@ -306,12 +307,12 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(peer, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki ${slug}: epoch on ${result["bagUrl"]}`);
     console.log(`  old doc:    ${result["oldDocUrl"]}`);
@@ -335,12 +336,12 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitJob(peer, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     console.log("");
     console.log(`wiki ${slug}: rotated to generation ${result["generation"]}`);
     console.log(`  new canon doc:   ${result["newCanonDocUrl"]}`);
@@ -371,12 +372,12 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
   try {
     const cmdArgs: Record<string, unknown> = { slug };
     if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
-    const r = await submitCommand(peer, "prune-stale", cmdArgs, did);
+    const r = await submitJob(peer, "prune-stale", cmdArgs, did);
     if (r.status === "error") {
       console.error(`prune-stale failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const result = r.result ?? {};
+    const result = summaryOutput(r) ?? {};
     const stale  = (result["stale"] ?? []) as Array<{ title: string; lastUpdate: string | null; daysIdle: number }>;
     console.log("");
     console.log(`wiki ${slug} prune-stale (threshold: ${result["daysThreshold"]} days):`);
@@ -409,13 +410,14 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
   const peer = await tryConnect();
   if (!peer) return 3;
   try {
-    const r = await submitCommand(peer, "where", { tiddler }, did);
+    const r = await submitJob(peer, "where", { tiddler }, did);
     if (r.status === "error") {
       console.error(`which failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const bags    = (r.result?.["bags"]       ?? []) as string[];
-    const primary = (r.result?.["primaryBag"] ?? null) as string | null;
+    const result  = summaryOutput(r) ?? {};
+    const bags    = (result["bags"]       ?? []) as string[];
+    const primary = (result["primaryBag"] ?? null) as string | null;
     console.log("");
     console.log(`tiddler:    ${tiddler}`);
     console.log(`primary:    ${primary ?? "(not found)"}`);

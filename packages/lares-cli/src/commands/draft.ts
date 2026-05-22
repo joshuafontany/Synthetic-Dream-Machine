@@ -19,7 +19,7 @@ import { stdin, stdout } from "node:process";
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh";
-import { connectAdminPeer, submitCommand } from "../admin-peer.js";
+import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -37,7 +37,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   }
 
   const portOpt = args.options["port"];
-  const connectOpts: Parameters<typeof connectAdminPeer>[0] = portOpt
+  const connectOpts: Parameters<typeof connectAdminVessel>[0] = portOpt
     ? { port: Number(portOpt) }
     : {};
 
@@ -51,7 +51,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
 
   let peer;
   try {
-    peer = await connectAdminPeer(connectOpts);
+    peer = await connectAdminVessel(connectOpts);
   } catch (err) {
     console.error(`lares draft: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");
@@ -59,13 +59,14 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   }
 
   try {
-    const where = await submitCommand(peer, "where", { tiddler }, did);
+    const where = await submitJob(peer, "where", { tiddler }, did);
     if (where.status === "error") {
       console.error(`recipe-presence query failed: ${where.errorMessage ?? "unknown"}`);
       return 4;
     }
-    const bags    = (where.result?.["bags"] ?? []) as string[];
-    const primary = where.result?.["primaryBag"] as string | null;
+    const whereSummary = summaryOutput(where) ?? {};
+    const bags    = (whereSummary["bags"] ?? []) as string[];
+    const primary = whereSummary["primaryBag"] as string | null;
     if (!primary) {
       console.error(`tiddler not found in any bag: ${tiddler}`);
       return 5;
@@ -90,13 +91,13 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     const draftArgs: Record<string, string> = { tiddler };
     if (toBag) draftArgs["toBag"] = toBag;
 
-    const result = await submitCommand(peer, "draft", draftArgs, did);
+    const result = await submitJob(peer, "draft", draftArgs, did);
     if (result.status === "error") {
       console.error(`draft failed: ${result.errorMessage ?? "unknown"}`);
       return 6;
     }
 
-    const r = result.result ?? {};
+    const r = summaryOutput(result) ?? {};
     console.log(`drafted: ${tiddler}`);
     console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
     console.log(`  status: ${r["status"]}`);

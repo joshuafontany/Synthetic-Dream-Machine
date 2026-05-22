@@ -1,7 +1,7 @@
 /**
- * handler-args — command-handler argument helpers.
+ * handler-args — job-handler argument helpers.
  *
- * Every CommandHandler receives `args: Readonly<Record<string, unknown>>`.
+ * Every JobHandler receives `args: Readonly<Record<string, unknown>>`.
  * These helpers coerce values safely so handler bodies stay declarative.
  *
  * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/handler-args
@@ -28,7 +28,7 @@ export function numberArg(args: Readonly<Record<string, unknown>>, key: string, 
 }
 
 /** Generate a stable-ish requestId for internal ChangeOrigin records when no
- *  command context supplies one (wiki-open, add-bag, etc.). */
+ *  job context supplies one (wiki-open, add-bag, etc.). */
 export function makeRequestId(prefix: string): string {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }

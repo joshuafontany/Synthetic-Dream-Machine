@@ -1,22 +1,18 @@
 /**
- * Lararium Node Server — local-first relay + TW5 engine entrypoint.
+ * Lararium Node Vessel — local-first relay + TW5 engine entrypoint.
  *
- * Boots one LarPeer per configured wiki, wires a WebSocket + HTTP server for
- * browser peers to sync against, and attaches a LarDiskProjector so
- * the packages/lares-core/memes tree stays in sync with the Automerge store.
- *
- * HTTP surface:
- *   GET /api/health    → { ok: true, phase, wikiId }  (infra probe only)
+ * Boots one LarVessel per configured wiki, wires a WebSocket relay for
+ * browser vessels to sync through, and attaches a LarDiskProjector so
+ * the bags/ tree stays in sync with the Automerge store.
  *
  * WS surface (sync):
  *   ws://localhost:8080/ws  → Automerge sync protocol
- *   (Vite dev proxy: /ws → ws://localhost:8080)
  *
  * Usage:
  *   node dist/main.js [--port 8080] [--storage .lararium] [--wiki altar-fire] [--root /alt/root]
  *
  * Environment:
- *   LAR_PORT     — HTTP+WS server port (default 8080)
+ *   LAR_PORT     — WS server port (default 8080)
  *   LAR_STORAGE  — storage directory (default {root}/.lararium)
  *   LAR_WIKI     — wiki id (default altar-fire)
  *   LAR_CATALOG  — existing catalog automerge URL to join (optional)
@@ -26,15 +22,14 @@
  *
  * Bootstrap:
  *   The catalog Automerge URL is printed to stdout on boot.
- *   Share it as a URL fragment: http://HOST:PORT/#CATALOG_URL
- *   Browser peers read it from location.hash on first visit, cache to
+ *   Browser vessels read it from location.hash on first visit, cache to
  *   localStorage for offline return visits.
  */
 
-import { createServer }                  from "http";
+import { createServer }  from "http";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
-import { openNodeLarPeer }               from "./open-node-lar-peer.js";
+import { openNodeVessel }               from "./open-node-vessel.js";
 import { join } from "path";
 import { makeDiskProjectionKind }        from "./projection-kinds.js";
 import { REPO_ROOT }   from "./node-host.js";
@@ -110,48 +105,15 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 }
 
 // ---------------------------------------------------------------------------
-// HTTP handler — cold-bootstrap Tier 0
-// ---------------------------------------------------------------------------
-
-function makeHandler(
-  state: { phase: string; wikiId: string },
-) {
-  return (req: import("http").IncomingMessage, res: import("http").ServerResponse) => {
-    const url = new URL(req.url ?? "/", "http://localhost");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-
-    if (url.pathname === "/api/health") {
-      res.setHeader("Content-Type", "application/json");
-      res.writeHead(200);
-      res.end(JSON.stringify({ ok: true, phase: state.phase, wikiId: state.wikiId }));
-      return;
-    }
-
-    res.setHeader("Content-Type", "application/json");
-    res.writeHead(404);
-    res.end(JSON.stringify({ error: "not found" }));
-  };
-}
-
-// ---------------------------------------------------------------------------
 // Boot
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
   const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, debugJson } = parseArgs();
 
-  // Shared state — updated as boot phases fire.
-  const state: { phase: string; wikiId: string } = {
-    phase:  "boot",
-    wikiId,
-  };
-
-  // HTTP server — /api/health for infra probes only. Relay does not serve content.
-  const httpServer = createServer(makeHandler(state));
-
-  // WS server — path-scoped to /ws only (local-first best practice: reject other upgrade paths
-  // so a stray browser probe or dev tool WS never gets wired into Automerge sync).
-  // `noServer: true` + manual handleProtocols lets us filter by path before upgrade.
+  // WS server — path-scoped to /ws only. Non-WS requests get no handler (socket destroyed
+  // by the upgrade gate below). No HTTP surface — catalog URL advertised via stdout.
+  const httpServer = createServer();
   const wss = new WebSocket.Server({ noServer: true });
 
   httpServer.on("upgrade", (req, socket, head) => {
@@ -164,10 +126,10 @@ async function main(): Promise<void> {
   });
 
   httpServer.listen(port, () => {
-    console.log(`[lararium] HTTP+WS server on :${port}  (GET /api/health  WS /ws)`);
+    console.log(`[lararium] WS relay on :${port}  (ws://localhost:${port}/ws)`);
   });
 
-  const result = await openNodeLarPeer({
+  const result = await openNodeVessel({
     hostId:     "lararium-node",
     wikiId,
     storageDir,
@@ -176,11 +138,10 @@ async function main(): Promise<void> {
     wss,
     catalogUrl,
     onPhase: (phase) => {
-      state.phase = phase;
       console.log(`[lararium] phase → ${phase}`);
     },
   });
-  const { peer, tw5 } = result;
+  const { vessel, tw5 } = result;
 
   // Projection registry — declarative wiring for system projections.
   // Configs are programmatic here; migrate to admin-wiki tiddlers tagged
@@ -200,13 +161,13 @@ async function main(): Promise<void> {
     debugJson,
   }));
 
-  await projections.enable({ id: "disk", kind: "disk", enabled: true, fields: {} }, peer);
+  await projections.enable({ id: "disk", kind: "disk", enabled: true, fields: {} }, vessel);
 
   console.log(`[lararium] live — wiki: ${wikiId} | storage: ${storageDir} | root: ${rootDir}`);
   console.log(`[lararium] catalog:  ${result.catalogHandleUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
   console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);
-  console.log(`[lararium] connect:  http://localhost:${port}/#${result.larariumDocUrl ?? result.catalogHandleUrl ?? ""}`);
+  console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.larariumDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
   const shutdown = () => {
     console.log("[lararium] shutting down");

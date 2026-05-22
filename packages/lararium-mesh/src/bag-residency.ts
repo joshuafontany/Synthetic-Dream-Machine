@@ -2,21 +2,21 @@
  * BagResidencyManager — three-tier residency model for Automerge bags.
  *
  * Each bag in the lararium stack maps to one Automerge document. As an
- * operator's wiki grows (corpus + room + recipe + identity + circles +
- * sessions + admin + N corpus children + N rooms…), the count crosses what
- * any single peer can keep hot in RAM. Browser tabs hit IndexedDB pressure;
+ * operator's wiki grows (corpus + wiki + recipe + identity + circles +
+ * sessions + admin + N corpus children + N wikis…), the count crosses what
+ * any single vessel can keep hot in RAM. Browser tabs hit IndexedDB pressure;
  * Node daemons hit handle-cache growth that automerge-repo does NOT today
  * evict (see https://github.com/automerge/automerge-repo/issues/358).
  *
  * Three tiers:
- *   PINNED  — never evicted. Identity, active room, admin, sessions.
+ *   PINNED  — never evicted. Identity, active wiki, admin, sessions.
  *   HOT     — actively in handle-cache; LRU under cap (default 32).
  *   COLD    — URL known, doc NOT loaded. Stub-on-oracle traversal lands
  *             URLs here without forcing hydration.
  *
  * Golden principles encoded (sourced from research synthesis 2026-05-08):
  *   - Tier by attention, not policy. User-driven hydration; idle eviction.
- *   - Always-hot set: pin identity, active room, sessions, admin.
+ *   - Always-hot set: pin identity, active wiki, sessions, admin.
  *   - Don't evict while syncing. Mid-replication = unsafe to drop handle.
  *   - Compact-before-evict. Skip the multi-second rehydrate replay.
  *   - Stub on oracle traversal. Don't `find()` URLs found in tiddler.text
@@ -34,7 +34,7 @@
  * the LRU + idle sweeper.
  *
  * Architecture invariants preserved:
- *   - Local-first: this manager is per-peer; no central authority.
+ *   - Local-first: this manager is per-vessel; no central authority.
  *   - Web2 smell test: no RPC; pin state lives as tiddlers in the admin
  *     doc (durable, federates to operator devices via the existing
  *     admin-doc sync surface).
@@ -104,7 +104,7 @@ export interface BagResidencyManagerOptions {
 }
 
 /**
- * BagResidencyManager — owns the residency state for one peer's bags.
+ * BagResidencyManager — owns the residency state for one vessel's bags.
  *
  * Phase 1 surface (C.1): pin / unpin / mark hot / mark cold / stats.
  * No eviction triggered automatically; callers can request it but the
@@ -181,7 +181,7 @@ export class BagResidencyManager {
 
   /** Demote a hot bag to cold — calls onEvict hook for compact-then-drop.
    *  Refuses pinned bags AND bags currently mid-sync (the
-   *  automerge-repo#358 invariant: don't evict while a peer is replicating
+   *  automerge-repo#358 invariant: don't evict while a vessel is replicating
    *  to us; we'd drop the sync conversation and have to renegotiate). */
   async evict(url: BagUrl): Promise<boolean> {
     if (this._pinned.has(url)) return false;
@@ -268,7 +268,7 @@ export class BagResidencyManager {
 
   /** Mark or unmark a bag as mid-sync. C.2's sweeper consults this before
    *  eviction (the automerge-repo#358 invariant: "don't evict while
-   *  another peer is actively replicating to us"). */
+   *  another vessel is actively replicating to us"). */
   setSyncActive(url: BagUrl, active: boolean): void {
     const entry = this._hot.get(url);
     if (!entry) return;

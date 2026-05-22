@@ -3,7 +3,7 @@
  *
  * waitHandleLocal: race whenReady() against a short fallback so a
  * repo.find() against an URL the local store doesn't yet have doesn't hang
- * boot. Used by both openNodeLarPeer (room VM) and openAdminVm (admin VM).
+ * boot. Used by both openNodeVessel (wiki VM) and openAdminVm (admin VM).
  */
 
 import type { AutomergeUrl, DocHandle, Repo } from "@automerge/automerge-repo";

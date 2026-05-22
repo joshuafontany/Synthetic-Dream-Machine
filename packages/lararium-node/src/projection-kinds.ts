@@ -4,7 +4,7 @@
  * Each builder closes over platform-bound deps (filesystem roots, TW5 render
  * functions) and returns a LarProjectionKind that the registry can call.
  *
- * Browser peers register a different set of builders (e.g. OPFS export, IDB
+ * Browser vessels register a different set of builders (e.g. OPFS export, IDB
  * mirror) — the registry shape stays identical.
  */
 
@@ -42,7 +42,7 @@ export interface DiskKindDeps {
  * write to disk; they live solely in `.lararium/` Automerge storage.
  */
 export function makeDiskProjectionKind(deps: DiskKindDeps): LarProjectionKind {
-  return async (_config, _peer) => {
+  return async (_config, _vessel) => {
     const projector = new LarDiskProjector(
       deps.mirrors,
       deps.renderFn,

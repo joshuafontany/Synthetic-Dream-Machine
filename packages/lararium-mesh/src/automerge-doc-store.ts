@@ -16,11 +16,11 @@ type MutableLarTiddlerRecord = {
 };
 
 /**
- * AutomergeDocStore — the one LarTiddlerStore for every peer.
+ * AutomergeDocStore — the one LarTiddlerStore for every vessel.
  *
- * Browser, Node, and worker peers all instantiate this directly.
+ * Browser, Node, and worker vessels all instantiate this directly.
  * Platform differences (IndexedDB vs fs vs memory) live in the Repo's
- * storage/network adapters — never in the store. Server-as-peer doctrine.
+ * storage/network adapters — never in the store. Relay-as-vessel doctrine.
  *
  * LarDoc alignment (M24): the Automerge doc carries a `tiddlers` submap.
  *   doc.tiddlers[title] = LarTiddlerRecord
@@ -29,7 +29,7 @@ type MutableLarTiddlerRecord = {
  * AutomergeDocStore strips the leading "tiddlers" segment before handing
  * patches to MemeProvider so the provider stays path-agnostic.
  *
- * FPI-3 (synergy): same mutation/subscription API runs on every peer.
+ * FPI-3 (synergy): same mutation/subscription API runs on every vessel.
  * Local-first Ideal 1 (fast): get/listVisible read from the in-memory doc.
  */
 function _contentEquals(cur: LarTiddlerRecord, rec: LarTiddlerRecord): boolean {

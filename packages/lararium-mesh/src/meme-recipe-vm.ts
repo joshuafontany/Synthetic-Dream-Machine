@@ -27,7 +27,7 @@ export interface MemeRecipeVm extends MemeProjection {
 /**
  * Boot a MemeRecipeVm slot and wire it to a MemeProvider.
  *
- * @param provider - MemeProvider managing the corpus/room doc
+ * @param provider - MemeProvider managing the corpus/wiki doc
  * @param factory  - VM factory function
  * @returns `{ vm, unsubscribe }` — call `unsubscribe()` to detach from provider.
  */

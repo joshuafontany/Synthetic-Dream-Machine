@@ -54,7 +54,7 @@
  *   two `control:implements` edges, one per interface URI.
  *   Maps to `KumuDeviceSpec.implementsTypes`.
  *
- *   Two identity layers per instance (both tiddlers in the room doc):
+ *   Two identity layers per instance (both tiddlers in the wiki doc):
  *     lar:///type-path#name-fragment  — user-selected friendly name (human label)
  *     lar:///type-path#uuid-fragment  — crypto.randomUUID() stable wiring address
  *   Declared in the type meme body via <<~ kahea kau #fragment >> sigils.
@@ -155,8 +155,8 @@ export interface KumuDeviceSpec {
 /**
  * Identifies a live kumu device instance.
  *
- * Both fragments produce tiddler addresses in the room Automerge doc:
- *   lar:///type-path#nameFragment  — human-readable room-local label
+ * Both fragments produce tiddler addresses in the wiki Automerge doc:
+ *   lar:///type-path#nameFragment  — human-readable wiki-local label
  *   lar:///type-path#uuidFragment  — stable UUID address for wiring
  */
 export interface KumuInstanceRef {

@@ -151,7 +151,7 @@ export async function generateOrLoadOperatorKeypair(
  * Cheap read — no crypto. Returns the same `verifyingKey` field
  * generateOrLoadOperatorKeypair surfaces, without regenerating if missing.
  *
- * Used by the CLI to populate command-tiddler `requested-by` with a
+ * Used by the CLI to populate job-tiddler `requested-by` with a
  * Keyhive-recognizable DID (`0x` + verifyingKey hex). Throws when no key
  * file exists.
  */

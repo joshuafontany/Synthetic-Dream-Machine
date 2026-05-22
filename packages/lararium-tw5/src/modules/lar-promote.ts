@@ -61,13 +61,13 @@ export interface PromotePlan extends PromoteResult {
 }
 
 export interface PromotePlanOptions {
-  /** Peer/operator identifier for the CRDT receipt. */
+  /** Operator identifier for the CRDT receipt. */
   actor?: string;
   /** Source bag, when the caller knows it. Browser/TW5 promotion may leave this implicit. */
   sourceBag?: string;
-  /** Peer id / device id for audit. */
-  peerId?: string;
-  /** Deterministic receipt id supplied by command/ceremony dispatchers. */
+  /** Local runtime/vessel id for audit. */
+  vesselId?: string;
+  /** Deterministic receipt id supplied by job/ceremony dispatchers. */
   receiptId?: string;
   /** Set false only for dry-run planning. */
   writeReceipt?: boolean;
@@ -256,7 +256,7 @@ export function planPromoteUris(
           skipped,
           childrenPromoted,
           promotedAt,
-          ...(options.peerId !== undefined && { peerId: options.peerId }),
+          ...(options.vesselId !== undefined && { vesselId: options.vesselId }),
         })
     : undefined;
   const receiptRecord = receiptFields ? { title: receiptFields.title, fields: receiptFields } : undefined;

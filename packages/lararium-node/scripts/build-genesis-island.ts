@@ -458,7 +458,7 @@ async function main(): Promise<void> {
   if (!reloaded.blobs?.[ENGINE_CORE_ID]) {
     throw new Error("[genesis] smoke-test FAILED: TW5 core blob not found after reload");
   }
-  const storedCid = (reloaded.tiddlers?.[GENESIS_CID_TIDDLER] as { tiddler?: { cid?: string } } | undefined)?.tiddler?.cid;
+  const storedCid = (reloaded.tiddlers?.[GENESIS_CID_TIDDLER] as { fields?: { cid?: string } } | undefined)?.fields?.cid;
   if (storedCid !== genesisCid) {
     throw new Error(`[genesis] smoke-test FAILED: genesis-cid tiddler cid mismatch — stored=${storedCid} expected=${genesisCid}`);
   }

@@ -53,7 +53,7 @@ The accumulator and adaptor cover disjoint time windows — no double-write.
 
 **A-2 crdt-remote filter.**
 `onUriChanged` enqueues only `crdt-remote` origins.
-Non-CRDT origins (`tw-local`, `canon-hydrate`, `lares-command`) apply immediately
+Non-CRDT origins (`tw-local`, `canon-hydrate`, `lares-job`) apply immediately
 through `IslandAdaptor._applyChange` — they bypass the accumulator entirely.
 
 **A-3 Drain returns and removes.**

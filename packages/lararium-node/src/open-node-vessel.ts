@@ -1,8 +1,8 @@
 /**
- * openNodeLarPeer — local-first Node.js peer factory.
+ * openNodeVessel — local-first Node.js vessel factory.
  *
  * Boot sequence — Automerge Tiga + leaves (authority-first-sync-order):
- *   1. Repo     — NodeFS storage + WebSocket server
+ *   1. Repo     — NodeFS storage + WebSocket relay
  *   2. ka opens — LarDoc: URL registry (wikis, corpora, engine)
  *   3. ha opens — LarDoc: system bag                           [from catalog.larariumDoc]
  *   4. ba opens — LaresDoc: personality bag                         [from ha oracle tiddler]
@@ -11,10 +11,10 @@
  *   7. Drafts   — per-user draft sync                               [draft bag]
  *
  *   CompositeStore: system → lares → corpus:* → wiki(writable) → draft(writable)
- *   LarPeer: store = wiki AutomergeDocStore, composite = full CompositeStore
+ *   LarVessel: store = wiki AutomergeDocStore, composite = full CompositeStore
  *
- * The server holds no privilege. It relays; it does not adjudicate content truth.
- * Multiple wikis → multiple openNodeLarPeer calls, one LarPeer per DocHandle.
+ * The relay vessel holds no privilege. It carries sync; it does not adjudicate content truth.
+ * Multiple wikis → multiple openNodeVessel calls, one LarVessel per DocHandle.
  *
  * FPI-5 (trim tab): all Node-specific code lives here.
  *
@@ -32,10 +32,10 @@ import { NodeWSServerAdapter }          from "@automerge/automerge-repo-network-
 import type { WebSocketServer }         from "isomorphic-ws";
 import type {
   LarDoc,
-  OperatorPeerOpenOptions, OperatorPeerOpenResult, LarOpenPhase,
+  OpenVesselOptions, OpenVesselResult, LarOpenPhase,
 } from "@lararium/mesh";
 import {
-  LarPeer, PEER_CAPABILITIES_NODE, OpenIdentitySlot,
+  LarVessel, LAR_VESSEL_CAPABILITIES_NODE, OpenIdentitySlot,
   AutomergeDocStore,
   CompositeStore, corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
@@ -59,7 +59,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { NodeVmManager }                  from "./node-vm-manager.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { CommandDispatcher, CommandHandlerRegistry } from "./command-dispatcher.js";
+import { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
 import { createPromoteHandler }                    from "./promote-handler.js";
 import { createWhereHandler }                       from "./where-handler.js";
 import {
@@ -87,7 +87,7 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 // infrastructure exception (same pattern as catalog-url). Contains the social-plane
 // plugin container: a single lar:/// tiddler with packed oracle tiddlers in its text.
 // Primary source for social doc AutomergeUrls on the init node; island oracle tiddlers
-// serve as the fallback for replica nodes that sync the island doc from a peer.
+// serve as the fallback for replica vessels that sync the island doc from another vessel.
 const DEFAULT_GENESIS_DIR = join(__dir, "../genesis");
 // Title of the social bootstrap plugin tiddler baked by lararium:init.
 export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstrap/social";
@@ -95,7 +95,7 @@ export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstra
 /** @see LarOpenPhase in @lararium/mesh */
 export type NodeOpenPhase = LarOpenPhase;
 
-export interface NodeLarPeerOptions extends OperatorPeerOpenOptions<MemeRecipeVm, TW5Engine> {
+export interface NodeVesselOptions extends OpenVesselOptions<MemeRecipeVm, TW5Engine> {
   storageDir: string;
   wss:        WebSocketServer;
   catalogUrl?: string | null;
@@ -104,7 +104,7 @@ export interface NodeLarPeerOptions extends OperatorPeerOpenOptions<MemeRecipeVm
    * Pass a TW5WorkerProxy factory for Worker isolation (Sprint 6 node Worker isolation).
    *
    * @param recipeUri - The resolved recipe URI for the VM scope.
-   * @param tw5       - The booted TW5Engine for this peer.
+   * @param tw5       - The booted TW5Engine for this vessel.
    * @param bagStack  - Ordered bag stack for this recipe's tiddler view.
    */
   /** Directory containing social-bootstrap.json. Defaults to the package's own genesis/. */
@@ -113,8 +113,8 @@ export interface NodeLarPeerOptions extends OperatorPeerOpenOptions<MemeRecipeVm
   rootDir?: string;
 }
 
-export interface NodeLarPeerResult extends OperatorPeerOpenResult<
-  LarPeer<VmPool<MemeRecipeVm>>,
+export interface NodeVesselResult extends OpenVesselResult<
+  LarVessel<VmPool<MemeRecipeVm>>,
   VmPool<MemeRecipeVm>,
   Repo,
   CompositeStore
@@ -137,7 +137,7 @@ export interface NodeLarPeerResult extends OperatorPeerOpenResult<
 const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
   () => repo.create<LarDoc>(emptyLarDoc());
 
-export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLarPeerResult> {
+export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesselResult> {
   const { hostId, wikiId, storageDir, wss, catalogUrl, recipeUri: recipeUriOpt, onPhase, vmFactory, genesisDir, rootDir: rootDirOpt } = opts;
   const bootstrapPath = join(genesisDir ?? DEFAULT_GENESIS_DIR, "social-bootstrap.json");
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
@@ -148,11 +148,11 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
 
   // ── 1. Repo ───────────────────────────────────────────────────────────────
   const storage = new NodeFSStorageAdapter(storageDir);
-  // Tier-3 causal-island boundary: WebSocket server serves as the network relay.
+  // Tier-3 causal-island boundary: WebSocket relay serves Automerge sync only.
   // wss is typed via isomorphic-ws — the same module NodeWSServerAdapter uses.
   const network = new NodeWSServerAdapter(wss);
   // sharePolicy: alpha stub — open federation.
-  // Keyhive/UCAN injection point: async (peerId) => identity.verifyCapability(peerId, "read")
+  // Keyhive/UCAN injection point: async (vesselId) => identity.verifyCapability(vesselId, "read")
   const repo    = new Repo({ storage, network: [network], sharePolicy: async () => true });
   emit("repo-open");
 
@@ -162,8 +162,8 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   // On subsequent boots: read URL from disk, call repo.find() — already in NodeFS, fast.
   // NOT seed-then-hydrate: the URL file serves as the stable rendezvous anchor.
   // GET /api/catalog serves this file's content — available before any sync completes.
-  // catalog-url: named infrastructure exception — stores this peer's own Automerge
-  // doc URL, not content. Peer-symmetric: any peer writes only its own URL here.
+  // catalog-url: named infrastructure exception — stores this vessel's own Automerge
+  // doc URL, not content. Vessel-symmetric: any vessel writes only its own URL here.
   // Analogous to BOOTSTRAP_SCANS (codec layer) — intentionally not in the CRDT.
   const catalogUrlFile = join(storageDir, "catalog-url");
   let resolvedCatalogUrl: string | null = catalogUrl ?? null;
@@ -174,7 +174,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   const blankCatalog = (): DocHandle<LarDoc> => {
     const h = repo.create<LarDoc>(emptyLarDoc());
     // Self-reference: catalog doc holds its own lar: URI and automerge: URL.
-    // Follows the same pattern as LarDoc — any peer that syncs this doc self-discovers.
+    // Follows the same pattern as LarDoc — any vessel that syncs this doc self-discovers.
     h.change((doc) => {
       doc.tiddlers[CATALOG_DOC_URI] = mutableLarRecord(CATALOG_DOC_URI, { text: h.url }, "lararium-seed");
     });
@@ -205,7 +205,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   // ── 3b. LarariumIsland doc (ha) — lararium bag ───────────────────────────
   // Genesis-first boot: load the build-time artifact, then reconcile with any
   // existing live doc. Both cold and resume boot call loadGenesisIsland so the
-  // peer always holds the full engine content, even before any network sync.
+  // vessel always holds the full engine content, even before any network sync.
   const genesisHandle = await loadGenesisIsland(repo, genesisDir);
 
   const islandDocUrl = tiddlerText(catalog?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
@@ -246,7 +246,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   // Ha → ba oracle: LarDoc.tiddlers[LARES_DOC_URI].text = LaresDoc automerge URL.
   // On resume: read URL from oracle tiddler, open existing doc.
   // On first boot: seed a new doc, then write the oracle tiddler into LarDoc.
-  // Zelenka: server is just another peer — no privilege over ba.
+  // Zelenka: relay vessel carries sync — no privilege over ba.
   let laresHandle: DocHandle<LarDoc> | null = null;
   {
     const laresDocUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
@@ -269,12 +269,12 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   }
 
   // ── 3b-social. Social plane docs — @identities / @circles / @sessions ─────
-  // Causal-island law: the server finds; it never seeds. Run `lararium:init` before
-  // first server start to establish these docs via scripts/init-lararium.ts.
+  // Causal-island law: the relay vessel finds; it never seeds. Run `lararium:init` before
+  // first relay start to establish these docs via scripts/init-lararium.ts.
   //
   // URL source priority:
   //   1. genesis/social-bootstrap.json plugin container (init node — authoritative)
-  //   2. ha island oracle tiddlers (replica nodes that synced the island doc from a peer)
+  //   2. ha island oracle tiddlers (replica vessels that synced the island doc from another vessel)
   //
   // The bootstrap plugin is also pushed to preloadedTiddlers so TW5 boots with the
   // oracle tiddlers available as plugin shadows. The lararium-bootstrap-sync startup
@@ -333,7 +333,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   const blobs = islandHandle?.doc()?.blobs ?? {};
   const coreBlobEntry = blobs[ENGINE_CORE_ID];
   if (!coreBlobEntry?.blob) {
-    throw new Error(`[openNodeLarPeer] missing TW5 core blob (${ENGINE_CORE_ID}) in LarDoc; re-run build:genesis`);
+    throw new Error(`[openNodeVessel] missing TW5 core blob (${ENGINE_CORE_ID}) in LarDoc; re-run build:genesis`);
   }
   const coreBlob = {
     bytes:  new Uint8Array(coreBlobEntry.blob),
@@ -345,25 +345,25 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   // composite. Corpus tiddlers arrive via the bag recipe stack; no plugin preload needed.
   const adminVm = await openAdminVm({ repo, adminUrl, preloadedTiddlers: [], coreBlob });
 
-  // Command dispatcher — subscribes to the admin store and runs commands
-  // delivered as command-tiddlers (CRDT-native CLI ↔ daemon coordination).
+  // Job dispatcher — subscribes to the admin store and runs jobs
+  // delivered as job-tiddlers (CRDT-native CLI ↔ daemon coordination).
   // Real handlers register here; the registry stays empty for now and
   // populates as B.4+ lands them.
-  const commandRegistry  = new CommandHandlerRegistry();
+  const jobRegistry  = new JobHandlerRegistry();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
-  commandRegistry.register("echo", async (args) => ({ echoed: args }));
+  jobRegistry.register("echo", async (args) => ({ echoed: args }));
   // Read-only recipe-presence query — `lares where` previews source bag.
-  commandRegistry.register("where",   createWhereHandler({ composite }));
-  // E.4 — read-only wiki commands. write commands (init/sync/pin/etc) land
+  jobRegistry.register("where",   createWhereHandler({ composite }));
+  // E.4 — read-only wiki jobs. write jobs (init/sync/pin/etc) land
   // in E.5+. `list-wikis` walks the catalog for wiki oracle tiddlers.
-  commandRegistry.register("list-wikis", createListWikisHandler({ composite }));
-  // E.5 — wiki write commands. operatorDid resolves lazily so the registry
+  jobRegistry.register("list-wikis", createListWikisHandler({ composite }));
+  // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   // tw5 is assigned after boot (below). The thunk is safe because
-  // command handlers only execute after the daemon emits "live".
+  // job handlers only execute after the daemon emits "live".
   let tw5: TW5Engine;
   let vmManager: NodeVmManager;
-  commandRegistry.register("promote", createPromoteHandler({
+  jobRegistry.register("promote", createPromoteHandler({
     composite,
     getPrimaryEngine: () => tw5,
     getMirrorLookupWiki: () => adminVm.tw5.wiki,
@@ -381,9 +381,9 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
     },
     getPrimaryEngine: () => tw5,
   };
-  commandRegistry.register("init-wiki", createInitWikiHandler(wikiMintOpts));
-  commandRegistry.register("open-wiki", createOpenWikiHandler({ composite }));
-  commandRegistry.register("sync-wiki", createSyncWikiHandler(wikiMintOpts));
+  jobRegistry.register("init-wiki", createInitWikiHandler(wikiMintOpts));
+  jobRegistry.register("open-wiki", createOpenWikiHandler({ composite }));
+  jobRegistry.register("sync-wiki", createSyncWikiHandler(wikiMintOpts));
 
   // S6 — BagResidencyManager. Phase 1 (C.1): instrumentation only; no
   // eviction yet. Pin every doc the daemon touches at boot so we don't
@@ -415,34 +415,34 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   await residency.pin(BAG_IDS.groups,         "boot:circles");
   await residency.pin(BAG_IDS.sessions,       "boot:sessions");
   await residency.pin(ADMIN_BAG_ID,           "boot:admin");
-  commandRegistry.register("pin",       createPinHandler({ residency }));
-  commandRegistry.register("unpin",     createUnpinHandler({ residency }));
-  commandRegistry.register("residency",     createResidencyStatsHandler({ residency }));
-  commandRegistry.register("register-cold", createRegisterColdHandler({ residency }));
+  jobRegistry.register("pin",       createPinHandler({ residency }));
+  jobRegistry.register("unpin",     createUnpinHandler({ residency }));
+  jobRegistry.register("residency",     createResidencyStatsHandler({ residency }));
+  jobRegistry.register("register-cold", createRegisterColdHandler({ residency }));
   // E.6 — whole-recipe residency. Walks the wiki's bag-stack and
   // pins/unpins each bag in one shot.
-  commandRegistry.register("pin-wiki",   createPinWikiHandler({ composite, residency }));
-  commandRegistry.register("unpin-wiki", createUnpinWikiHandler({ composite, residency }));
+  jobRegistry.register("pin-wiki",   createPinWikiHandler({ composite, residency }));
+  jobRegistry.register("unpin-wiki", createUnpinWikiHandler({ composite, residency }));
   // E.7 — recipe composition. Hot-reload at the composite layer; soft
   // remove (no MNT_DETACH StoryList reconciliation yet — F-arc territory).
-  commandRegistry.register("add-bag",    createAddBagHandler({    composite, repo, residency }));
-  commandRegistry.register("remove-bag", createRemoveBagHandler({ composite, repo, residency }));
+  jobRegistry.register("add-bag",    createAddBagHandler({    composite, repo, residency }));
+  jobRegistry.register("remove-bag", createRemoveBagHandler({ composite, repo, residency }));
   // E.8 — DXOS-style snapshot-restart on a single bag. Bounds history;
   // lossy by design. Tombstones survive (Cassandra rule).
-  commandRegistry.register("bag-epoch", createEpochBagHandler({
+  jobRegistry.register("bag-epoch", createEpochBagHandler({
     composite, repo, residency, catalogHandle,
   }));
   // E.9a — Nix-generations stack rotation. Mints a fresh canonical doc;
   // retains old canonical as a previous-canon underlay slot (lower
   // priority) so old generations stay readable.
-  commandRegistry.register("rotate-recipe", createRotateRecipeHandler({
+  jobRegistry.register("rotate-recipe", createRotateRecipeHandler({
     composite, repo, residency, catalogHandle,
   }));
   // E.9b — read-only stale-tiddler queue. Scans the draft bag for
   // tiddlers whose last activity exceeds a threshold (default 7 days);
   // surfaces them for operator's promote-or-prune decisions.
-  commandRegistry.register("prune-stale", createPruneStaleHandler(wikiMintOpts));
-  commandRegistry.register("draft",       createDraftHandler({ composite }));
+  jobRegistry.register("prune-stale", createPruneStaleHandler(wikiMintOpts));
+  jobRegistry.register("draft",       createDraftHandler({ composite }));
   // C.2 — start the background sweeper. Idle eviction + LRU trim run
   // every sweepIntervalMs (default 30s). The manager's own re-entrancy
   // guard makes overlapping ticks safe.
@@ -517,12 +517,13 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
 
   // Now that keyhive exists, construct the dispatcher with it as verifier.
   // ctx.cap in every handler routes through keyhive.verify().
-  const commandDispatcher = new CommandDispatcher({
+  const jobDispatcher = new JobDispatcher({
+    adminVm:  adminVm.tw5,
     admin:    adminVm.composite,
-    registry: commandRegistry,
+    registry: jobRegistry,
     verifier: keyhive,
   });
-  commandDispatcher.start();
+  jobDispatcher.start();
 
   // Zelenka: keep oracle tiddlers current on every boot — self, ka, ba, social plane, admin.
   reconcileWellKnownTiddlers(
@@ -555,7 +556,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
     composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
 
     // Self-describing: corpus doc holds its own lar: URI + automerge URL as a tiddler.
-    // Any peer that opens the doc can discover its canonical lar: address without a catalog lookup.
+    // Any vessel that opens the doc can discover its canonical lar: address without a catalog lookup.
     const corpusUri = corpusLarUri(entry.id);
     const existingCorpusSelfRef = tiddlerText(handle.doc()?.tiddlers?.[corpusUri]);
     if (existingCorpusSelfRef !== handle.url) {
@@ -564,7 +565,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
       });
     }
 
-    // Zelenka: keep tiddler store current so any peer can enumerate corpora
+    // Zelenka: keep tiddler store current so any vessel can enumerate corpora
     // without walking the corpora Record — same pattern as LarDoc oracle.
     const existingText = tiddlerText(catalogHandle.doc()?.tiddlers?.[corpusUri]);
     if (existingText !== entry.docUrl) {
@@ -582,7 +583,7 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
     : blankRoom();
 
   if (!wikiDocUrl) {
-    // Write as oracle tiddler — same schema as browser peer.
+    // Write as oracle tiddler — same schema as browser vessel.
     catalogHandle.change((doc) => {
       (doc.tiddlers as Record<string, LarTiddlerRecord>)[wikiKey] = mutableLarRecord(wikiKey, { text: wikiHandle.url }, "lararium-boot");
     });
@@ -593,8 +594,8 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   emit("wiki-ready");
 
   // ── 5. Wiki-Drafts doc — per-user, stored in catalog oracle tiddler ───────
-  // Node peer uses hostId:wikiId identity for its own drafts (operator drafts).
-  // User drafts from browser peers are stored under each browser peer's DID key.
+  // Node vessel uses hostId:wikiId identity for its own drafts (operator drafts).
+  // User drafts from browser vessels are stored under each browser vessel's DID key.
   const identity = new OpenIdentitySlot(`${hostId}:${wikiId}`);
   const draftTiddlerKey = `${wikiKey}/drafts/${encodeURIComponent(identity.did)}`;
   const existingDraftUrl: string | null = tiddlerText(catalog?.tiddlers?.[draftTiddlerKey]) ?? null;
@@ -630,15 +631,15 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   });
   emit("draft-ready");
 
-  // ── 6. LarPeer ────────────────────────────────────────────────────────────
+  // ── 6. LarVessel ────────────────────────────────────────────────────────────
   wikiStore.markSyncComplete();
-  const peer = new LarPeer<VmPool<MemeRecipeVm>>({
-    peerId:       `${hostId}:${wikiId}`,
+  const vessel = new LarVessel<VmPool<MemeRecipeVm>>({
+    vesselId:     `${hostId}:${wikiId}`,
     store:        composite,
-    capabilities: PEER_CAPABILITIES_NODE,
+    capabilities: LAR_VESSEL_CAPABILITIES_NODE,
     identity,
   });
-  emit("peer-ready");
+  emit("vessel-ready");
 
   // ── 7. TW5Engine ──────────────────────────────────────────────────────────
   // Derive VM bag stack from the recipe tiddler seeded into ha island.
@@ -707,13 +708,13 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
   // Accumulators: one per bag in recipe — sibling projections; buffer crdt-remote
   // patches post-sync and drain them as one nalu per setInterval tick.
   // Priority order matches vmBagStack (lowest index = lowest priority read layer).
-  const adaptor = new IslandAdaptor(tw5, peer.store, wikiBagId);
+  const adaptor = new IslandAdaptor(tw5, vessel.store, wikiBagId);
   vmManager.updateAdaptor(wikiId, adaptor);
-  peer.addProjection(adaptor);
+  vessel.addProjection(adaptor);
 
   const accumulators: IslandAccumulator[] = vmBagStack.map(() => {
     const acc = new IslandAccumulator();
-    peer.addProjection(acc);
+    vessel.addProjection(acc);
     return acc;
   });
 
@@ -728,11 +729,11 @@ export async function openNodeLarPeer(opts: NodeLarPeerOptions): Promise<NodeLar
       new DirectMemeRecipeVm(engine, bags)
   );
   await pool.get(resolvedRecipeUri, () => _vmFactory(resolvedRecipeUri, tw5, vmBagStack));
-  peer.attachVmPool(pool);
+  vessel.attachVmPool(pool);
 
   emit("live");
   return {
-    peer, tw5, pool, repo, eventBus,
+    vessel, tw5, pool, repo, eventBus,
     store: composite,
     vmManager,
     admin: adminVm,
@@ -764,7 +765,7 @@ export interface NodeSessionResult {
  * store (TW5 VM path), creates the per-session SessionEventLog child doc, and
  * wires `session.grounded` emission onto the event bus for L1 clock ticks.
  *
- * Call after `openNodeLarPeer` returns. One call per operator session.
+ * Call after `openNodeVessel` returns. One call per operator session.
  * Pass `result.store` (the CompositeStore) — session tiddler routes to the
  * sessions bag because that layer is registered as writable.
  */

@@ -8,13 +8,13 @@
  *
  *   auth         — identity/receipt confirmed
  *   sw-shell     — Service Worker controls page; app shell from SW cache
- *   catalog      — CatalogDoc synced; room + corpus URLs known
+ *   catalog      — CatalogDoc synced; wiki + corpus URLs known
  *   tw-vm        — primary wiki TW5 rendering VM kernel booted (C≈1 core rendering pool)
- *                  lights right after t.boot() — before room tiddlers hydrate
+ *                  lights right after t.boot() — before wiki tiddlers hydrate
  *                  nothing renders before this; all render-dependent keys branch here
- *                  isomorphic: server peer and browser peer boot the same way
+ *                  isomorphic: relay vessel and browser vessel boot the same way
  *                  additional realm/portal VMs register as projection:<id> keys
- *                  (e.g. a canvas portal to a different room gets its own VM + projection key)
+ *                  (e.g. a canvas portal to a different wiki gets its own VM + projection key)
  *   wiki-content — wiki Automerge doc ready (starts empty → fast; parallel with tw-vm)
  *   tldraw-doc   — tldraw canvas doc ready
  *   corpus:<id>  — per-corpus island ready (arrive async, non-blocking)
