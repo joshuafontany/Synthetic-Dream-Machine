@@ -82,3 +82,5 @@ export { TW5WorkerProxy } from "./tw5-worker-proxy.js";
 export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "./cold-boot-ceremony.js";
 export type { CeremonyTiddler } from "./cold-boot-ceremony.js";
 export type { WorkerFactory, AnyWorker } from "./tw5-worker-proxy.js";
+
+export { WorkerAuthorityHandler } from "./worker-authority-handler.js";

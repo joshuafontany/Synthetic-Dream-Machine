@@ -41,3 +41,4 @@ export * from "./kumu-device.js";
 export { repoRoot } from "./repo-root.js";
 export * from "./browser-authority.js";
 export * from "./genesis-doc.js";
+export * from "./worker-protocol.js";

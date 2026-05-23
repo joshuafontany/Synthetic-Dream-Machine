@@ -9,7 +9,7 @@
  * GP-3: Tiddler-level delta (integration — confirms added/deleted arrays cross the boundary)
  * GP-5: teardown handshake ordering (integration — cancel:confirmed before teardown:ack)
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/lar-worker-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/worker-protocol
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -24,7 +24,7 @@ import {
   type WorkerMsg_TeardownAck,
   type WorkerMsg_PromoteAck,
   type WorkerMsg_Event,
-} from "../src/lar-worker-protocol.js";
+} from "@lararium/mesh";
 
 // Path to the teardown-echo fixture (plain ESM — no ts-jest compilation needed).
 const FIXTURE_URL = new URL("./fixtures/teardown-echo.mjs", import.meta.url);

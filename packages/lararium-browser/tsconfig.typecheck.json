@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "../..",
+    "paths": {
+      "@lararium/mesh": ["packages/lararium-mesh/src/index.ts"],
+      "@lararium/tw5": ["packages/lararium-tw5/src/index.ts"]
+    }
+  }
+}

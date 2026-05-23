@@ -10,7 +10,7 @@
  *   Hot     — LRU of recently-active session wikis (max HOT_CAP slots).
  *             Each slot owns one `worker_threads.Worker`. TW5Engine + (P.3.5)
  *             ReactionEngine run co-located inside the Worker thread.
- *             Main thread communicates via `lar-worker-protocol` envelope only.
+ *             Main thread communicates via worker-protocol envelope (@lararium/mesh) only.
  *
  *   Cold    — CRDT-only. VmSnapshot stores the materialized tiddler view from
  *             the Worker's last teardown:ack. No thread, no engine.
@@ -49,7 +49,7 @@ import {
   mkPromote,
   mkTeardown,
   WORKER_PROTOCOL_VERSION,
-} from "./lar-worker-protocol.js";
+} from "@lararium/mesh";
 import type {
   WorkerMsg_Changeset,
   WorkerMsg_Event,
@@ -57,7 +57,7 @@ import type {
   WorkerMsg_TeardownAck,
   WorkerToMainMsg,
   MainToWorkerMsg,
-} from "./lar-worker-protocol.js";
+} from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
 // VmSnapshot — cold-tier materialized tiddler cache
@@ -120,7 +120,7 @@ export interface WikiBootContext {
    * snapshot. Merged into snapshotTiddlers before sending promote.
    */
   preloadedTiddlers?: Array<Record<string, unknown>>;
-  /** TW5 core bytes from the content-addressed LarDoc blob. */
+  /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
   coreBlob: TW5CoreBootBlob;
 }
 
@@ -242,7 +242,7 @@ export class NodeVmManager {
 
     await _sendAndAwait<WorkerMsg_PromoteAck>(
       worker,
-      mkPromote(wikiId, ctx.coreBlob, snapshotTiddlers),
+      mkPromote(wikiId, ctx.coreBlob.bytes, snapshotTiddlers),
       "promote:ack",
     );
 

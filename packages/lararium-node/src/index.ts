@@ -1,5 +1,3 @@
-export * from "./lar-worker-protocol.js";
-
 export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 

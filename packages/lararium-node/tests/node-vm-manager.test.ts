@@ -17,7 +17,7 @@ import { describe, test, expect, afterEach } from "vitest";
 import type { DocHandle } from "@automerge/automerge-repo";
 import type { MemeStoreDoc } from "@lararium/mesh";
 import { NodeVmManager } from "../src/node-vm-manager.js";
-import type { WorkerMsg_Event } from "../src/lar-worker-protocol.js";
+import type { WorkerMsg_Event } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
 // Fixture Worker URL
@@ -55,6 +55,9 @@ function makeDocHandleStub(
 
 const WIKI_ID = "lar:///ha.ka.ba/@test/wiki";
 
+/** Nominal coreBlob stub — fixture worker ignores the bytes; type remains honest. */
+const STUB_CORE_BLOB = { bytes: new Uint8Array() } as const;
+
 /** Collect Worker events (type === listenable) forwarded via onWorkerEvent. */
 function eventCollector(): {
   events: WorkerMsg_Event[];
@@ -80,7 +83,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle });
+    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
 
     expect(manager.tier(WIKI_ID)).toBe("hot");
     expect(manager.snapshot(WIKI_ID)).toBeNull(); // hot slot has no snapshot yet
@@ -90,8 +93,8 @@ describe("NodeVmManager — Worker lifecycle", () => {
     manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle });
-    await manager.mountWiki(WIKI_ID, { docHandle: handle }); // no-op
+    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
+    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB }); // no-op
 
     expect(manager.tier(WIKI_ID)).toBe("hot");
   });
@@ -103,7 +106,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
       onWorkerEvent:   collector.callback,
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub() });
+    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
 
     // Collect the changeset:applied echo from the fixture Worker.
     const applied = new Promise<WorkerMsg_Event>((resolve) => {
@@ -136,7 +139,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     const seedTiddlers = { "lar:///ha.ka.ba/@test/wiki/seed": { title: "lar:///ha.ka.ba/@test/wiki/seed", text: "seed" } };
     const handle = makeDocHandleStub(seedTiddlers);
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle });
+    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
 
     // Route a changeset so the fixture has tiddlers to snapshot.
     manager.routeChangeset(
@@ -162,7 +165,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
       onWorkerEvent:   collector.callback,
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub() });
+    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
 
     manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/x" }], []);
     await new Promise<void>((r) => setTimeout(r, 200));
@@ -176,7 +179,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
 
     expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 0 });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub() });
+    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
     expect(manager.stats()).toEqual({ pinned: 0, hot: 1, cold: 0 });
 
     await manager.unmountWiki(WIKI_ID);
@@ -191,7 +194,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     });
 
     // Mount, add a tiddler, unmount → cold slot with snapshot.
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub() });
+    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
     manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/persisted", text: "kept" }], []);
     await new Promise<void>((r) => setTimeout(r, 100));
     await manager.unmountWiki(WIKI_ID);
@@ -200,7 +203,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     expect(snap).not.toBeNull();
 
     // Re-mount from cold — fixture receives snapshotTiddlers in the promote message.
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub() });
+    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
     expect(manager.tier(WIKI_ID)).toBe("hot");
 
     // Route a no-op changeset to confirm the Worker is live.
