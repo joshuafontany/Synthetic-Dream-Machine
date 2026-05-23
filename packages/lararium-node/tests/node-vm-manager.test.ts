@@ -10,7 +10,7 @@
  * All tests run against the full NodeVmManager (no mocking of internals).
  * DocHandle is stubbed with a minimal shape — no Automerge-repo dependency.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/node-vm-manager
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
  */
 
 import { describe, test, expect, afterEach } from "vitest";

@@ -13,7 +13,7 @@
  * Platform-neutral: no Node `worker_threads` import, no browser `self` import.
  * Vessel entrypoints bind the I/O; this module names the envelopes only.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/worker-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/worker-protocol
  */
 
 export const WORKER_PROTOCOL_VERSION = 1 as const;

@@ -23,7 +23,7 @@
  * This file owns only the Node I/O binding (parentPort).
  * All TW5 lifecycle logic lives in WorkerAuthorityHandler (@lararium/tw5).
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/lar-wiki-worker
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-wiki-worker
  */
 
 import { parentPort } from "worker_threads";

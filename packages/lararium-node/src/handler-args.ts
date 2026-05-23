@@ -4,7 +4,7 @@
  * Every JobHandler receives `args: Readonly<Record<string, unknown>>`.
  * These helpers coerce values safely so handler bodies stay declarative.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/handler-args
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/handler-args
  */
 
 export function stringArg(args: Readonly<Record<string, unknown>>, key: string): string {

@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: pragma-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/procedure
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/procedure
 lar-alias-for: \procedure
 lar-see-also: wehe
 lar-open-pattern: <<~\s*\\procedure\s+([\w-]+)(?:\s+([^>]*?))?\s*>>

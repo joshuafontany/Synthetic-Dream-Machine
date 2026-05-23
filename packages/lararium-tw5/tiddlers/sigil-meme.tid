@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: context
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/meme
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 lar-see-also: \tiddler
 lar-open-pattern: <<~\s*meme\s+(\S+)\s*>>
 lar-close-pattern: <<~\/meme\s*>>

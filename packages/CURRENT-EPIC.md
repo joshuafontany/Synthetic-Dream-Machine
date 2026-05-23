@@ -414,5 +414,5 @@ S0 Cleanup ✅
 - [Automerge storage compaction](https://patternist.xyz/posts/concurrent-compaction-in-automerge-repo/)
 - [Protocol Stack design doc](../wikis/@lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md)
 - [Lares CLI-daemon sprint plan](../wikis/@lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md)
-- `bags/@lararium/mesh/v0.1/operator-peer.md`
-- `bags/@lares/api/v0.1/lararium/save-path.md`
+- `bags/@lararium/v0.1/mesh/operator-peer.md`
+- `bags/@lares/v0.1/api/lararium/save-path.md`

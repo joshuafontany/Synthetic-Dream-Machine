@@ -1,0 +1,93 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"
+file-path = "bags/@lares/v0.1/api/pono/heleuma/ka.md"
+type = "text/x-memetic-wikitext"
+namespace    = "⊙"
+register     = "CS"
+confidence   = 0.90
+mana         = 0.88
+manao        = 0.87
+manaoio      = 0.85
+cacheable    = true
+retain       = true
+role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
+```
+
+
+
+<<~&#x0002;>>
+
+<<~ ahu #head >>
+
+# Heleuma-Ka Interface (Soul / Fire)
+
+**Ka**: soul, fire, drive, energy, thrust, movement. The animating charge. In motion toward state-change.
+
+A heleuma-ka anchor exists outside the corpus **by current necessity, not by nature**. It has vitality. It is eligible to be promoted into a first-class corpus meme via the boot gate ceremony. The compiled-in code is a chrysalis.
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ locate the compiled artifact and its extractable symbol; confirm it has a standalone function boundary.
+⏿ orient: could this function be loaded from a corpus meme via `_bootModules()`? If yes, this is ka.
+◇ declare `heleuma = "ka"`, `source-symbol`; confirm the symbol is a standalone declaration.
+▶ write `#source` slot with the verbatim extracted function; close the quine record.
+⤴ verify: `sync-heleuma` resolves the symbol, compares, reports clean; signal fields approach ceremony thresholds.
+↺ the anchor lives. The soul moves. Ceremony awaits.
+
+<<~/ahu >>
+
+<<~ ahu #required-fields >>
+
+## Required Fields (SHALL)
+
+An implementing meme SHALL declare in `#iam` TOML:
+
+```toml
+heleuma       = "ka"
+source-symbol = "<standalone function or export name>"
+```
+
+An implementing meme SHALL carry a `#source` slot with the **complete verbatim** body of the named symbol (quine property). Partial captures violate the quine. If the natural unit is embedded in a larger function, extract it to a named function first.
+
+An implementing meme MAY declare `body-sha256` when ready for promotion:
+
+```toml
+body-sha256 = "<sha256 hex of #source slot content>"
+```
+
+This is gate layer 2 (content integrity). Written by `sync-heleuma --commit` when the source is stable.
+
+Gate layer 3 (operator authorization) will be a **keyhive capability proof** — an Ed25519-signed capability from a keyhive principal authorizing corpus injection. This replaces the pre-keyhive `promoted-at` timestamp sketch, which was never implemented and has been removed. Layer 3 is planned but not yet implemented; the gate currently passes on layers 1–2 only.
+
+Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 0.80 / 0.80 / 0.75 / 0.80 as the source matures. The boot gate reads these fields directly.
+
+<<~/ahu >>
+
+<<~ ahu #promotion-path >>
+
+## Promotion Path
+
+When `body-sha256` is present and all signal thresholds are met, `_bootModules()` loads this meme as a live JS module, replacing the compiled-in fallback. (When keyhive lands, a capability proof will also be required — gate layer 3.) At that point:
+
+- `heleuma = "ka"` SHALL be removed
+- The meme pair becomes a standard corpus meme pair
+- The doc meme `source` field MAY be retained as provenance
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:sub-interface >>
+<<~ pranala #gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/boot-gate family:control role:promoted-by >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

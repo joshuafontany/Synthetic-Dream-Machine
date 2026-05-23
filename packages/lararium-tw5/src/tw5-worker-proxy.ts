@@ -20,7 +20,7 @@
  * Isomorphic seam: identical interface whether TW5 runs in-process (DirectMemeRecipeVm)
  * or in a Worker thread (TW5WorkerProxy). The VmPool factory is the only construction site.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/tw5-worker-proxy
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tw5-worker-proxy
  */
 
 import type { LarTiddlerChange } from "@lararium/mesh";

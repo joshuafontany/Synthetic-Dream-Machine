@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-21 (turn 18)
+> Updated: 2026-05-22 (turn 19)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -75,14 +75,15 @@ These planning docs follow one architectural law:
 | — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
 | — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
+| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | worker-protocol.ts moved node→mesh; WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S2); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
 | 1 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
-| 2 | **S9 / lararium-browser** | ⬜ Active (S0 charter+deletion-map landed) | Full browser vessel, detached worker-authority pool. Charter: `bags/@lararium/browser/v0.1/pono-charter.md`. Sprint braid S0–S9 in `bags/@lararium/browser/v0.1/full-detached-worker-authority-pool-sprint.md`. |
+| 2 | **S9 / lararium-browser** | ⬜ Active (S0–S2 landed; S3 IndexedDB next) | Full browser vessel, detached worker-authority pool. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. Sprint braid S0–S9 in `bags/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint.md`. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
 | 6 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |
 | 7 | **O** | ⬜ Corpus hygiene | Author scaffolded heleuma stubs; keep `lares heleuma --write` aligned. Migrate monolith documentation TOML tables to canonical bag memes. |
-| 10 | **UEFN scene importer** | ⬜ Queued | .verse class defs + .umap placements + DEB wires → bag of tiddlers + edges. Spec: `bags/@lares/api/v0.1/pono/uefn-scene.md`. |
+| 10 | **UEFN scene importer** | ⬜ Queued | .verse class defs + .umap placements + DEB wires → bag of tiddlers + edges. Spec: `bags/@lares/v0.1/api/pono/uefn-scene.md`. |
 
 ## Test Flow Harness
 
@@ -144,7 +145,7 @@ Remaining TOML in the monolith carries documentation data tables only — not gr
 |---|---|---|
 | `[[control-slot]]` | 9 | sourced in `carrier-codec.ts`; inline doc only |
 | `[[lifecycle_values]]` | 5 | migrate to pranala bag meme (Path O) |
-| `[[ladder_5]]` / `[[ooda_ha_5]]` | 10 | migrate to `bags/@lares/api/v0.1/pono/` (Path O) |
+| `[[ladder_5]]` / `[[ooda_ha_5]]` | 10 | migrate to `bags/@lares/v0.1/api/pono/` (Path O) |
 | `[[stances]]` | partial | migrate to stances/syad meme docs (Path O) |
 
 These tables do not feed `grammar-cache.ts`. Migration to bag memes deferred to Path O.
@@ -170,7 +171,7 @@ Invariants:
 
 | Path | Status | Trigger |
 |---|---|---|
-| **Tier 2 aka preview** | ⬜ Deferred | Node-side OG metadata fetch → `thumbnail`/`og-title`/`og-description` fields. Home: `disk-projector.ts` or `og-metadata-fetcher.ts`. Design record at `bags/@lararium/tw5/sigil-aka.md`. |
+| **Tier 2 aka preview** | ⬜ Deferred | Node-side OG metadata fetch → `thumbnail`/`og-title`/`og-description` fields. Home: `disk-projector.ts` or `og-metadata-fetcher.ts`. Design record at `bags/@lararium/v0.1/tw5/sigil-aka.md`. |
 | **M / Dreamdeck-app** | ⬜ Queued | After admin ingress gate; picks up same-machine peer consolidation deferred from S6.C.5. |
 | **S9 / lararium-browser** | ⬜ Active | See path S9 above. S0 landed. |
 | **S10 / dreamdeck-tldraw** | ⬜ Queued | tldraw shapes as `lar://` resource containers; edge types first-class. |

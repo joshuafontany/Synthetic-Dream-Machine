@@ -7,7 +7,7 @@
  * Isomorphic: works in Node (setInterval path) and browser (rAF path).
  * Browser vessel (S9) and dreamdeck-app import from here, not from TW5Engine.
  *
- * Spec: lar:///ha.ka.ba/@lares/api/v0.1/lararium/camera-mount (C-1 through C-5)
+ * Spec: lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount (C-1 through C-5)
  */
 
 import type {

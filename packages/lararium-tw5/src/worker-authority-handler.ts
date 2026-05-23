@@ -17,7 +17,7 @@
  *   CryptoKey       — stays in main thread (GP-4).
  *   IslandAdaptor   — no CompositeStore; main thread feeds changesets.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/v0.1/worker-authority-handler
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/worker-authority-handler
  */
 
 import { TW5Engine } from "./tw5-vm.js";

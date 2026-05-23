@@ -1,0 +1,71 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hana >>
+```toml iam
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
+file-path = "bags/@lares/v0.1/api/pono/hana.md"
+type      = "text/x-memetic-wikitext"
+confidence = 0.78
+register  = "S"
+role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
+cacheable = true
+retain    = true
+```
+
+<<~ ahu #head >>
+
+# Hana
+
+*hana* — Hawaiian: work, deed, action, task; to do, make, create; labor; a happening.
+Hana names not just the product but the doing — the active, bounded effort that takes a thing
+from potential to actual. *Hana hou* (do again, encore) carries the sense of repeatable work.
+
+A bounded guest-grammar block. A `hana` block carries a grammar-key that selects the
+interpreter for its body — the body content carries a foreign grammar
+(JSON, YAML, code, formula), not TW5 wikitext, parsed by a registered guest interpreter. English alias: `\task`.
+
+Where `meme` sets tiddler context and `wehe` declares a procedure, `hana` declares work
+that runs through a non-TW5 grammar engine. The block is bounded: it opens, the foreign
+grammar interpreter consumes the body, it closes.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A hana block MUST carry a grammar-key as its first argument.
+The grammar-key MUST identify a registered guest interpreter.
+A hana block MUST close with `<<~/ hana >>`.
+A hana block body MUST be valid input for the named grammar interpreter.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```text
+<<~ hana grammar-key >>
+  body content in the guest grammar
+<<~/ hana >>
+
+<<~ \task grammar-key >>  ...body...  <<~/ \task >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hana family:control role:implements >>
+<<~ pranala #tiddler-sigil-task ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:alias >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

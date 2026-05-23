@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-21 (turn 18)
+> Updated: 2026-05-22 (turn 19)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -36,8 +36,12 @@ scrubbed with Automerge-peer / lararium-vessel vocabulary split; /api/health
 HTTP endpoint + CORS header deleted from main.ts; build-genesis-island.ts
 two-pass CID injection smoke-test fixed; test-quine.ts shadow-filter fix;
 `pnpm --filter @lararium/node test:quine` passes — 65 SharktoothSigil grammar
-tiddlers self-hosted in genesis artifact; 39/39 tests pass) are treated as
-landed unless tests prove drift.
+tiddlers self-hosted in genesis artifact; 39/39 tests pass), AND the
+lararium-browser S2 + YIN bag-URI ontology sprint (worker-protocol.ts moved
+node→mesh; WorkerAuthorityHandler extracted isomorphic; @lararium/browser
+scaffolded; bags/ URI schema unified to @bag/v0.1/lane/rest everywhere; stale
+tsc artifacts purged from lararium-mesh/src; worker-protocol.md meme anchored
+in mesh lane; 188/188 tests pass) are treated as landed unless tests prove drift.
 
 Next work, in order:
 1. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
@@ -45,7 +49,7 @@ Next work, in order:
    IndexedDB, presence, optional OPFS.
 3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 4. UEFN scene importer — DEFERRED until after successful browser vessel e2e tests.
-   Spec exists at bags/@lares/api/v0.1/pono/uefn-scene.md; do not begin import
+   Spec exists at bags/@lares/v0.1/api/pono/uefn-scene.md; do not begin import
    pipeline until browser vessel e2e passes.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers landed; grammar-cache.ts reads
@@ -61,6 +65,42 @@ Rules: preserve TW5 VM primacy, bag=Automerge-doc=sync-boundary, no HTTP/RPC
 coordination surface, and explicit operator promotion for canon. Web3 only —
 no web2 models/code/flows in Lares stack.
 ```
+
+## What Changed This Turn (2026-05-22 turn 19)
+
+### lararium-browser S2 + YIN bag-URI ontology sprint
+
+**worker-protocol.ts moved node → mesh.** The shim that briefly lived in
+`@lararium/node` dissolved in the same turn. Three node source files and two
+test files import protocol types directly from `@lararium/mesh`.
+
+**WorkerAuthorityHandler** extracted from `lar-wiki-worker.ts` into
+`@lararium/tw5/src/worker-authority-handler.ts`. Owns the isomorphic TW5 boot /
+changeset-apply / teardown sequence. Node worker shrunk to a 10-line I/O binding.
+Browser worker (`browser-wiki-worker.ts`) carries the same shape with
+`self.addEventListener` instead of `parentPort.on`.
+
+**`@lararium/browser` scaffolded:** `package.json`, three tsconfigs,
+`vitest.config.ts`, `src/index.ts` stub, `src/browser-wiki-worker.ts`. No exports
+yet — nothing re-exported until a consumer arrives. passWithNoTests.
+
+**bags/ URI schema unified.** All `bags/` paths and `iam` `uri-path`/`file-path`
+fields now follow the canonical form `@bag/v0.1/{lane}/{rest}`. Old form
+`@bag/{lane}/v0.1/{rest}` — the "version in the wrong place" — purged everywhere.
+500+ file moves + iam field rewrites across `@lares`, `@lararium`, `@ftls`,
+`@elyncia`. Zero old-form strings survive in bags, packages, or scripts.
+
+**`worker-protocol.md` meme** moved from node lane to mesh lane, `source-file`
+corrected to `packages/lararium-mesh/src/worker-protocol.ts`.
+
+**Stale tsc artifacts** (`*.js`, `*.d.ts`, `*.js.map`, `*.d.ts.map`) purged from
+`packages/lararium-mesh/src/`. Build confirmed to emit only to `dist/`; no
+prebuild sweep script needed. `tools/clean-src-artifacts.mjs` deleted.
+
+**Metrics:** 188/188 tests pass (mesh 67, tw5 81, node 40, browser
+0+passWithNoTests). All four packages typecheck clean.
+
+---
 
 ## What Changed This Turn (2026-05-21 turn 18)
 
@@ -89,14 +129,14 @@ Log line changed from `HTTP+WS server` to `WS relay`. Connect log changed from
 
 ### Vessel Ontology Scrub — bags docs
 
-`bags/@lararium/mesh/v0.1/lar-vessel.md`:
+`bags/@lararium/v0.1/mesh/lar-vessel.md`:
 - TOML `role` field updated to "vessel"
 - `# Lar Peer` → `# Lar Vessel`
 - New `## Vocabulary` section: Automerge-layer "peer" vs lararium-layer "vessel" defined in two sentences
 - LP-1 renamed "Vessel before server"; body: "A Lararium vessel models itself as a participant in a causal mesh — not a server that clients connect to."
 - LP-2 through LP-5, shape section, ceremony section: "peer" → "vessel" throughout
 
-`bags/@lararium/mesh/v0.1/open-vessel.md`:
+`bags/@lararium/v0.1/mesh/open-vessel.md`:
 - `# Operator Peer` → `# Open Vessel`
 - "operator peer" → "open vessel" / "vessel" throughout contract, invariants, flow
 
@@ -137,7 +177,7 @@ Log line changed from `HTTP+WS server` to `WS relay`. Connect log changed from
 
 ### Path K / F-arc — IslandAdaptor Save-Path Debounce
 
-**Spec meme:** `bags/@lares/api/v0.1/lararium/save-path.md`
+**Spec meme:** `bags/@lares/v0.1/api/lararium/save-path.md`
 Invariants SP-1 through SP-5 documented. SP-3 (draft routing) deferred pending
 wiki-init flow; SP-1 (debounce) and SP-4 (ceremony routing) landed.
 
@@ -332,14 +372,14 @@ deleted entirely. Replaced with a clean web3-native responsibility split.
   priority order), outbound guards, echo guard.
 
 **Meme corpus (bags/):**
-- `bags/@lares/docs/lararium/verse-mesh.md` — Verse polychronous CRDT mesh design:
+- `bags/@lares/v0.1/docs/lararium/verse-mesh.md` — Verse polychronous CRDT mesh design:
   peer-owns-bags law, N local clocks (Signal/INRIA Berry 1991 model), VM pool (live/warm
   slots), camera model (Story River first, TLDraw.js second, many more), visibility gate
   (future), tick sources by platform, wiring law (`store.addProjection` for both siblings).
-- `bags/@lares/api/v0.1/lararium/island-adaptor.md` — invariant spec I-1 through I-8:
+- `bags/@lares/v0.1/api/lararium/island-adaptor.md` — invariant spec I-1 through I-8:
   echo-loop guard, island isolation, single transact per flush, post-sync pass-through,
   non-CRDT immediate apply, outbound guards, cross-bag tombstone resolution, child cleanup.
-- `bags/@lares/api/v0.1/lararium/island-accumulator.md` — invariant spec A-1 through A-5:
+- `bags/@lares/v0.1/api/lararium/island-accumulator.md` — invariant spec A-1 through A-5:
   sync gate, crdt-remote filter, drain returns-and-removes, budget cap, platform-agnostic.
   Camera projection section: each camera MAY hold its own accumulator.
 
@@ -383,7 +423,7 @@ monolith parse path retired in full. `GRAMMAR_TAG` as the single registration su
 - `packages/lararium-tw5/tiddlers/sigil-toml.tid` — `toml` data-fence sigil as a
   SharktoothSigil tiddler (`lar-kind: data`, `lar-name: toml`). The `[[sigils]]`
   TOML block in `memetic-wikitext.tid` removed; sigil-toml.tid replaces it.
-- `bags/@lararium/tw5/lib-smol-toml.md` — bag anchor meme at the library tiddler URI.
+- `bags/@lararium/v0.1/tw5/lib-smol-toml.md` — bag anchor meme at the library tiddler URI.
 
 **Modified:**
 - `packages/lararium-tw5/plugin-build/vite-plugin-build.ts` — smol-toml
@@ -435,7 +475,7 @@ Replaced by nalu-driven TW5 startup module.
   and instance; wired `tw5.registerProjectionBus({handleLarariumEvent})` after boot;
   removed inline `re.onChangeset()` from changeset handler. Worker now forwards
   `tm-verse-event` wiki events → `WorkerMsg_Event` to main thread.
-- `bags/@lares/api/v0.1/pono/reaction-graph.md` — yin-collapse target section updated
+- `bags/@lares/v0.1/api/pono/reaction-graph.md` — yin-collapse target section updated
   to "Landed"; fireSync gap section updated to "CLOSED".
 
 **Metrics:** typecheck clean; 126/126 tests pass; 17 Vite plugin modules (was 16);
@@ -447,7 +487,7 @@ smoke boot clean. All probes pass.
 
 ### Verse Ontology + Yin-Collapse Architecture Research Sprint
 
-**New pono specs (bags/@lares/api/v0.1/pono/):**
+**New pono specs (bags/@lares/v0.1/api/pono/):**
 - `nalu.md` — architectural invariant: nalu as changeset delivery wave; TW5 `refresh(changedTiddlers)` ↔ Verse `OnSimulate(StagedUpdates)` ↔ MemeSyncAdaptor flush; yin-collapse law; one-graph-not-two law; scale note. Infrastructure concept below grammar layer.
 - `hoolele.md` — full pono spec: unstructured escape-hatch sigil; Verse `spawn` analogue; English alias `\spawn`; six-operator concurrency table; when-to-use law; Lararium-specific use cases (CRDT flush, VmPool, Keyhive). Completes six-operator ontology.
 
@@ -493,7 +533,7 @@ smoke boot clean. All probes pass.
 
 **Architecture law now fully holds:** "Sigil dispatch via wikitext. JS widgets only for JS-level semantics (capability hooks, async device I/O)." No sigil has JS-level semantics today, so the plugin carries zero JS sigil widgets.
 
-**Updated docs:** `bags/@lares/api/v0.1/pono/kau.md`, `bags/@lararium/tw5/widgets/kau.md`, `memetic-wikitext.tid` render-modes note, `lar-sigil-shared.ts` comment, ROADMAP.
+**Updated docs:** `bags/@lares/v0.1/api/pono/kau.md`, `bags/@lararium/v0.1/tw5/widgets/kau.md`, `memetic-wikitext.tid` render-modes note, `lar-sigil-shared.ts` comment, ROADMAP.
 
 **Build:** typecheck clean; 16 Vite modules (was 17); 114 inner tiddlers; 38 shadow tiddlers in smoke; all probes pass.
 
@@ -503,7 +543,7 @@ smoke boot clean. All probes pass.
 
 ### Concurrency Sigil Cluster + Grammar Self-Hosting + kumu-device UEFN Alignment
 
-**New pono specs (bags/@lares/api/v0.1/pono/):**
+**New pono specs (bags/@lares/v0.1/api/pono/):**
 - `hui.md` — await-all sync (`sync`); MUST spawn all, MUST NOT resume until all complete.
 - `holo.md` — cancelling race (`race`); first wins, all losers cancel immediately.
   English alias: `\race`. Distinct from `puka/\rush` (no-cancel).

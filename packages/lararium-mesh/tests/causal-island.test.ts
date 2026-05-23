@@ -5,7 +5,7 @@
  * and Orichalcum capabilities. Relay-law exception: pull carries bytes across
  * causal island boundaries without granting read (decrypt) semantics.
  *
- * Meme: lar:///ha.ka.ba/@lares/api/v0.1/pono/causal-islands
+ * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
  */
 
 import { describe, test, expect } from "vitest";
@@ -137,7 +137,7 @@ describe("requestKeyhivePromotion — Keyhive stub", () => {
   test("all promotion requests return not-implemented until Keyhive WASM lands", async () => {
     const result = await requestKeyhivePromotion({
       fromUri:      "lar:///draft/proposal",
-      targetUri:    "lar:///ha.ka.ba/@lares/api/v0.1/mu",
+      targetUri:    "lar:///ha.ka.ba/@lares/v0.1/api/mu",
       wikiId:       "altar-fire",
       proposedText: "draft text",
       reason:       "test: upgrading to canon",

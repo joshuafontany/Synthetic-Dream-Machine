@@ -50,7 +50,7 @@ export type LarPrincipal =
 // All other abilities imply every ability below them in the ladder.
 // ---------------------------------------------------------------------------
 
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
 export const ABILITY_LADDER = [
   "pull",     // retrieve encrypted bytes and forward; cannot decrypt or render
   "read",     // decrypt and render semantic content
@@ -239,7 +239,7 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 // A peer that has not completed step 3 MUST NOT request individual meme deltas.
 // ---------------------------------------------------------------------------
 
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
 export const AUTHORITY_FIRST_ORDER = [
   "authenticate-peer",         // 1
   "sync-authority-graph",      // 2
@@ -326,7 +326,7 @@ export class AuthorityFirstGuard {
  * Things that MUST become causal islands (cross-node causality errors become
  * federation corruption and cannot be corrected inside a single node).
  */
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
 export const CAUSAL_ISLAND_MUST = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
@@ -351,7 +351,7 @@ export type CausalIslandMust = typeof CAUSAL_ISLAND_MUST[number];
  * explicit even though they aren't promoted by ceremony — they qualify as islands
  * by topology.
  */
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
 export const CAUSAL_ISLAND_MAY = [
   "wiki",
   "meme",
@@ -376,7 +376,7 @@ export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 // Capability gate: the actor MUST hold at least "promote" in ABILITY_LADDER.
 // Use abilityImplies(actor.ability, "promote") before accepting.
 //
-// Meme: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/promotion-receipt
+// Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/promotion-receipt
 // ---------------------------------------------------------------------------
 
 export interface PromotionReceipt {

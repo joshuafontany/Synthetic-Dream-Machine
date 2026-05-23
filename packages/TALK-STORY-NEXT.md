@@ -11,13 +11,13 @@
 
 **Ha / Hodge** — structure that held its shape:
 The grammar law corpus landed. Five new bags/ memes now carry the authoritative semantic contract for what the code already implements:
-- `bags/@lares/api/v0.1/pono/parser.md` — `MemeticParser` contract, `lar-sigil` dispatch model, C0 control roles, sigil kinds, `meme-ast` non-TW5 path
-- `bags/@lares/api/v0.1/pono/render-pipeline.md` — three render modes, `lar-render-mode`, template cascade, causal island boundary, kapu render open question
-- `bags/@lares/docs/pono/glyph-codeset.md` — nine-category Unicode glyph codeset rescued from deleted research
-- `bags/@lares/docs/pono/sigil-kind.md` — full `lar-kind` taxonomy with family rule properties
-- `bags/@lares/docs/pono/sigil-shape-motion.md` — Shape/Detail/Motion reading frame, progressive display
-- `bags/@lares/docs/pono/law-of-5s.md` — three-projection unification, subscript scale sigils
-- `bags/@lares/docs/pono/memetic-wikitext.md` — W3C lineage verdicts, TW5 operational grammar model
+- `bags/@lares/v0.1/api/pono/parser.md` — `MemeticParser` contract, `lar-sigil` dispatch model, C0 control roles, sigil kinds, `meme-ast` non-TW5 path
+- `bags/@lares/v0.1/api/pono/render-pipeline.md` — three render modes, `lar-render-mode`, template cascade, causal island boundary, kapu render open question
+- `bags/@lares/v0.1/docs/pono/glyph-codeset.md` — nine-category Unicode glyph codeset rescued from deleted research
+- `bags/@lares/v0.1/docs/pono/sigil-kind.md` — full `lar-kind` taxonomy with family rule properties
+- `bags/@lares/v0.1/docs/pono/sigil-shape-motion.md` — Shape/Detail/Motion reading frame, progressive display
+- `bags/@lares/v0.1/docs/pono/law-of-5s.md` — three-projection unification, subscript scale sigils
+- `bags/@lares/v0.1/docs/pono/memetic-wikitext.md` — W3C lineage verdicts, TW5 operational grammar model
 
 **Ka / Podge** — soul-fire that moved:
 The entire `wikis/@lares-history/lares_research/memetic-wikitext/` corpus (18 files, ~8,000 lines) consumed and cleared. `loci-pono-parser.md` (2187 lines) and `loci-pono-render-pipeline.md` (985 lines) consumed and cleared. History memes written for genesis artifacts (Sharktooth origin chatlog, prior-art comparison, mu emergence sequence).
@@ -35,11 +35,11 @@ Operator live annotation landed in `render-pipeline.md` `#head`: `meme-ast` non-
 
 | Meme | URI | Role |
 |---|---|---|
-| memetic-wikitext (tid) | `lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext` | Constitutional root + grammar kernel + sigil registry |
-| parser.md | `lar:///ha.ka.ba/@lares/api/v0.1/pono/parser` | MemeticParser contract, lar-sigil dispatch, sigil kinds |
-| render-pipeline.md | `lar:///ha.ka.ba/@lares/api/v0.1/pono/render-pipeline` | Three render modes, template cascade, causal island |
-| glyph-codeset.md | `lar:///ha.ka.ba/@lares/docs/pono/glyph-codeset` | Nine-category Unicode codeset, UCAN attenuation |
-| sigil-kind.md | `lar:///ha.ka.ba/@lares/docs/pono/sigil-kind` | lar-kind taxonomy, family rule properties |
+| memetic-wikitext (tid) | `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` | Constitutional root + grammar kernel + sigil registry |
+| parser.md | `lar:///ha.ka.ba/@lares/v0.1/api/pono/parser` | MemeticParser contract, lar-sigil dispatch, sigil kinds |
+| render-pipeline.md | `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline` | Three render modes, template cascade, causal island |
+| glyph-codeset.md | `lar:///ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset` | Nine-category Unicode codeset, UCAN attenuation |
+| sigil-kind.md | `lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind` | lar-kind taxonomy, family rule properties |
 
 ### Open Questions (do not resolve without code evidence)
 
@@ -68,7 +68,7 @@ Operator live annotation landed in `render-pipeline.md` `#head`: `meme-ast` non-
 ### ROADMAP Priority Order (unchanged from last session)
 
 ```
-Priority 1 — UEFN scene importer   (spec at bags/@lares/api/v0.1/pono/uefn-scene.md)
+Priority 1 — UEFN scene importer   (spec at bags/@lares/v0.1/api/pono/uefn-scene.md)
 Priority 2 — K/F-arc               (TW5 save routing, debounce, projection hygiene)
 Priority 3 — L/S7.4                (admin-doc ingress trust gate)
 Priority 4 — G.SharktoothSigil     (remaining TOML sigil blocks → SharktoothSigil tiddlers)
@@ -93,7 +93,7 @@ Three independent vectors, in confidence order:
 
 Six files (~1280 lines) target pranala edge families and lifecycle. The live surface (`pranala-families.md`, `pranala-header.md`, `pranala.md`) exists but the family-contract detail from the research may not have landed there yet. This pass closes the `#family-contracts` gap in `memetic-wikitext.tid` and completes the grammar law arc begun this session.
 
-**Start:** read `wikis/@lares-history/lares_research/pranala/loci-pranala.md` alongside `bags/@lares/api/v0.1/pono/pranala-families.md`. Apply JKD — retain what IS useful, delete what arrived.
+**Start:** read `wikis/@lares-history/lares_research/pranala/loci-pranala.md` alongside `bags/@lares/v0.1/api/pono/pranala-families.md`. Apply JKD — retain what IS useful, delete what arrived.
 
 ### Vector B — S5 Quine Round-Trip (code sprint)
 
@@ -105,7 +105,7 @@ The active sprint. CURRENT-EPIC.md lists the tasks. The grammar law work this se
 
 `meme-structure-research.md` (5462 lines) contains grammar/vocabulary dialectic content (Korzybski/Fuller/Wilson lens) and OODA-A sub-loop patterns. The live `meme.md` and `verse-task-tree.md` may have absorbed most of this — spot-check first. The OODA-A sub-loop nesting patterns (in `memes/ooda-a/`) look like history material rather than live law.
 
-**Start:** read `bags/@lares/api/v0.1/pono/meme.md` first to know the live surface, then open `memes/ooda-a/LOCI.md` (smallest file in the group) to orient.
+**Start:** read `bags/@lares/v0.1/api/pono/meme.md` first to know the live surface, then open `memes/ooda-a/LOCI.md` (smallest file in the group) to orient.
 
 ---
 

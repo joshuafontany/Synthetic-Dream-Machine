@@ -4,8 +4,8 @@ const MODULE_MANA_THRESHOLD = 0.90;
 const MODULE_MANAO_THRESHOLD = 0.85;
 const MODULE_MANAOIO_THRESHOLD = 0.85;
 const MODULE_CONFIDENCE_THRESHOLD = 0.90;
-const MODULE_INTERFACE_URI = "lar:///ha.ka.ba/@lararium/tw5/tw5-module";
-const MODULE_AGGREGATE_URI = "lar:///ha.ka.ba/@lararium/tw5/modules/tw5-modules";
+const MODULE_INTERFACE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module";
+const MODULE_AGGREGATE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules";
 
 export async function bootTrustedModules(tw: TW5Instance): Promise<void> {
   const wiki = tw.wiki;

@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-transclude
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: edge-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/kahea
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea
 lar-alias-for: \transclude
 lar-see-also: kahea
 lar-pattern: <<~\s*\\transclude\s+(\S+)(?:\s+key:([\w-]+))?\s*>>

@@ -10,7 +10,7 @@
  * One regex pair, one balanced-bracket scanner, one slot-path composer —
  * any drift between callers is a bug, so they share this module.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/ahu-scan
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/ahu-scan
  */
 
 /**

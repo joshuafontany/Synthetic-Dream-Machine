@@ -89,7 +89,7 @@ export interface EdgeRecord {
 
 // ---------------------------------------------------------------------------
 // LarTiddlerRecord — host-envelope entry in a bag doc
-// Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/tiddler-record
+// Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tiddler-record
 // ---------------------------------------------------------------------------
 
 export interface LarTiddlerMeta {

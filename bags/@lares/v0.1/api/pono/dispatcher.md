@@ -1,0 +1,92 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/dispatcher"
+file-path = "bags/@lares/v0.1/api/pono/dispatcher.md"
+type = "text/x-memetic-wikitext"
+confidence   = 0.88
+register     = "CS"
+manaoio      = 0.86
+mana         = 0.88
+manao        = 0.86
+role         = "~ dispatcher sigil — routes <<~ name args >> to the named ~procedure; the entry point for all sigil dispatch"
+cacheable    = true
+retain       = true
+```
+
+
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# ~ Dispatcher
+
+The root dispatch sigil. `<<~ name p1 p2 … >>` routes to the `\widget ~name` or
+`\procedure ~name` body registered in the current tiddler scope.
+
+The `~` widget receives `name` and `p1`–`p5` positional arguments and transcludes
+`$variable=[name prefixed with ~]`. This makes every operator-defined `\widget ~sigil`
+callable as `<<~ sigil args >>` without any JS registration.
+
+The `~` dispatcher carries the SharktoothSigil tag, making it first-class in the
+grammar: new sigils need only a tiddler — no code change required.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #ooda-ha >>
+
+✶ sense the sigil name — what named body does this invocation reach?
+⏿ orient: dispatcher looks up `~name` in TW5 procedure/widget namespace; delegates via $transclude
+◇ name MUST match a declared `\widget ~name` or `\procedure ~name` in accessible scope
+▶ emit macrocall node; `~` widget transcludes the named procedure with p1–p5 args threaded through
+⤴ named body renders in place; no edge created; pure render-time delegation
+↺ confirm named procedure resolved; no infinite dispatch loops
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+The dispatcher MUST route via `\widget ~` — not direct JS widget lookup.
+The dispatcher MUST accept `name` and `p1`–`p5` positional arguments only.
+The dispatcher MUST NOT carry `mode=` or other render-posture params — posture lives in the named body.
+A dispatched sigil MUST be declared as `\widget ~name` or `\procedure ~name` in accessible tiddler scope.
+Undefined names resolve to empty output (TW5 missing-variable behavior) — MUST NOT throw.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```text
+<<~ name >>
+<<~ name uri >>
+<<~ name arg1 arg2 >>
+```
+
+TW5 wikitext body:
+```
+\widget ~(name p1:"" p2:"" p3:"" p4:"" p5:"")
+<$transclude $variable={{{ [<name>addprefix[~]] }}} p1=<<p1>> p2=<<p2>> p3=<<p3>> p4=<<p4>> p5=<<p5>>/>
+\end
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher family:control role:implements >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

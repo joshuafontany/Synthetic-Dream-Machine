@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: pragma-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/wehe
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe
 lar-alias-for: \define
 lar-see-also: wehe
 lar-open-pattern: <<~\s*\\define\s+([\w-]+)(?:\s+([^>]*?))?\s*>>

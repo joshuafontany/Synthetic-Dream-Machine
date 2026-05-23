@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-type
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: pragma-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/kumu
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu
 lar-alias-for: \type
 lar-see-also: kumu
 lar-open-pattern: <<~\s*\\type\s+([\w~-]+)(?:\s+([^>]*?))?\s*>>

@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~&#x0001; ? -> lar:///packages/AGENTS >>
 
@@ -193,8 +193,8 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/api/v0.1/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~ pranala #to-root-agents ? -> lar:///AGENTS family:control role:adjacent >>
 <<~ pranala #to-lares ? -> lar:///LARES family:control role:adjacent >>
 <<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/docs/lararium/meme-provider family:reference role:describes >>

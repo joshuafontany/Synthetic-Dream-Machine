@@ -5,7 +5,7 @@
  * TW5WorkerProxy     — Worker-backed implementation; lives in tw5-worker-proxy.ts.
  *                      Platform supplies the workerFactory at construction time.
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/meme-recipe-vm
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/meme-recipe-vm
  */
 
 import type { LarTiddlerChange } from "@lararium/mesh";

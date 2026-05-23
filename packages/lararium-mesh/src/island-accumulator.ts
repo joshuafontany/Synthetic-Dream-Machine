@@ -15,7 +15,7 @@
  * startRenderLoop() from tw5-camera.ts (browser) or a setInterval caller (Node)
  * drives flushAll() on IslandAdaptor.
  *
- * Spec: lar:///ha.ka.ba/@lares/api/v0.1/lararium/island-accumulator
+ * Spec: lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator
  */
 
 import type { LarTiddlerChange } from "./tiddler-store.js";

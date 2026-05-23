@@ -63,7 +63,7 @@
  *
  * Isomorphic: no Node/browser APIs. Works in Node, browser, and TW5-era environments.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/kumu-device
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device
  */
 
 

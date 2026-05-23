@@ -10,7 +10,7 @@
  * All types are platform-neutral. No HTMLElement, no window, no document.
  * The browser runtime in @lararium/browser holds the Worker spawn code.
  *
- * Schema: lar:///ha.ka.ba/@lararium/browser/v0.1/browser-authority
+ * Schema: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority
  */
 
 import type { Heads } from "@automerge/automerge";

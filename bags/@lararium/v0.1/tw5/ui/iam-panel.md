@@ -1,0 +1,128 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel >>
+```toml iam
+uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel"
+file-path = "bags/@lararium/v0.1/tw5/ui/iam-panel.md"
+type = "text/vnd.tiddlywiki"
+register     = "CS"
+confidence   = 0.90
+mana         = 0.90
+manao        = 0.88
+manaoio      = 0.85
+role         = "character sheet template: renders #iam metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
+cacheable    = true
+retain       = true
+tags         = ["$:/tags/Global"]
+```
+
+
+
+<<~&#x0002;>>
+
+<<~ ahu #hud-fields >>
+
+```toml
+# Canonical field ordering for iam-panel render and MCP hud tool.
+# Tier 1 — stat bars (always visible, compact)
+tier1 = ["mana", "manao", "manaoio", "confidence"]
+# Tier 2 — identity block
+tier2 = ["role", "implements", "namespace", "register", "tagspace"]
+# Tier 3 — technical fields (details disclosure)
+tier3 = ["content-type", "module-type", "tw5-module-name", "body-sha256", "cacheable", "retain", "hydrate"]
+# Fields always excluded from tier 4 (raw fallback)
+exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "creator", "modifier"]
+```
+
+<<~/ahu >>
+
+\procedure lar-stat-bar(field, value, threshold:"0.80")
+<div class="lar-stat-row">
+  <span class="lar-stat-label"><<field>></span>
+  <span class="lar-stat-value" data-value=<<value>>
+    data-threshold=<<threshold>>><<value>></span>
+  <span class="lar-stat-pip" style="width:<<value>>em; max-width:1em; display:inline-block;
+    height:0.5em; background: <<colorFromValue value threshold>>; border-radius:2px;"></span>
+</div>
+\end
+
+\procedure lar-iam-panel()
+<div class="lar-iam-panel">
+
+!! Tier 1 — Signal Strength
+
+<div class="lar-stat-block">
+<$list filter="mana manao manaoio confidence" variable="f">
+<$set name="v" value={{{ [{!!$(f)$}] }}}>
+<$reveal type="nomatch" state="" text="">
+<div class="lar-stat-row">
+  <code class="lar-stat-label"><<f>></code>
+  <span class="lar-stat-bar">
+    <span class="lar-stat-fill" style={{{ [<v>multiply[100]format:integer[]] +[addprefix[width:]] +[addsuffix[%]] +[addprefix[]] }}}>
+    </span>
+  </span>
+  <code class="lar-stat-value"><<v>></code>
+</div>
+</$reveal>
+</$set>
+</$list>
+</div>
+
+!! Tier 2 — Identity
+
+<table class="lar-iam-table">
+<$list filter="role implements namespace register tagspace" variable="f">
+<$set name="v" value={{{ [{!!$(f)$}] }}}>
+<$reveal type="nomatch" state="" text="">
+<tr><th><code><<f>></code></th><td><<v>></td></tr>
+</$reveal>
+</$set>
+</$list>
+</table>
+
+!! Tier 3 — Technical
+
+<details class="lar-iam-details">
+<summary>Technical fields</summary>
+<table class="lar-iam-table">
+<$list filter="content-type module-type tw5-module-name body-sha256 cacheable retain hydrate" variable="f">
+<$set name="v" value={{{ [{!!$(f)$}] }}}>
+<$reveal type="nomatch" state="" text="">
+<tr><th><code><<f>></code></th><td><code><<v>></code></td></tr>
+</$reveal>
+</$set>
+</$list>
+</table>
+</details>
+
+!! Tier 4 — All Other Fields
+
+<details class="lar-iam-details">
+<summary>Raw fields</summary>
+<table class="lar-iam-table">
+<$list filter="[fields[]!match[title]!match[text]!match[tags]!match[bag]!match[revision]!match[created]!match[modified]!match[creator]!match[modifier]!match[mana]!match[manao]!match[manaoio]!match[confidence]!match[role]!match[implements]!match[namespace]!match[register]!match[tagspace]!match[content-type]!match[module-type]!match[tw5-module-name]!match[body-sha256]!match[cacheable]!match[retain]!match[hydrate]]" variable="f">
+<$set name="v" value={{{ [{!!$(f)$}] }}}>
+<$reveal type="nomatch" state="" text="">
+<tr><th><code><<f>></code></th><td><<v>></td></tr>
+</$reveal>
+</$set>
+</$list>
+</table>
+</details>
+
+</div>
+\end
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/hud >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

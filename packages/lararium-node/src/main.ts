@@ -56,8 +56,8 @@ async function buildBagMirrors(
   rootDir: string,
 ): Promise<BagMirrorConfig[]> {
   const mirrors: BagMirrorConfig[] = [
-    { bagId: LARES_DOC_URI,    mirrorRoot: join(rootDir, "bags/@lares"),    toRelPath: namedBagPath("@lares") },
-    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(rootDir, "bags/@lararium"), toRelPath: namedBagPath("@lararium") },
+    { bagId: LARES_DOC_URI,    mirrorRoot: join(rootDir, "bags/@lares/v0.1"),    toRelPath: namedBagPath("@lares") },
+    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(rootDir, "bags/@lararium/v0.1"), toRelPath: namedBagPath("@lararium") },
   ];
 
   // Wiki bags — discovered from well-known oracle URI prefix.

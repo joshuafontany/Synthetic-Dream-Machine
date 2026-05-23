@@ -14,7 +14,7 @@
  *
  * Isomorphic: no Node/browser APIs. Works in main thread, Worker, and browser.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/live-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/live-protocol
  */
 
 // ---------------------------------------------------------------------------

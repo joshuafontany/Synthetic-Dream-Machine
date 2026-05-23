@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/lar-promote
+title: lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/lar-promote
 type: application/javascript
 module-type: library
 \*/
@@ -14,12 +14,12 @@ module-type: library
  *
  * module-type: library  →  require()able by widgets and actions.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/lar-promote
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/lar-promote
  *
  * Design invariants:
  *   - Oracle tiddler title = bag URI (e.g. "lar:///ha.ka.ba/@lares").
  *   - `path-filter` field = TW5 filter operator string (e.g. "lar-bag-path[lares]").
- *   - `mirror-root` field = repo-relative path (e.g. "bags/@lares").
+ *   - `mirror-root` field = repo-relative path (e.g. "bags/@lares/v0.1").
  *   - file-path = mirror-root + "/" + relPath  (pure string concat, no path.join).
  *   - Promote = write target bag copy first, tombstone wiki-bag copy second.
  *   - Tombstone routes to the default writable bag (wiki bag) via IslandAdaptor.
@@ -107,10 +107,10 @@ function expandPromotionUris(wiki: PromoteWiki, uris: readonly string[]): {
 
 function resolveOracle(lookupWiki: PromoteWiki, targetBagId: string): PromoteTiddler | undefined {
   if (targetBagId === LARES_BAG_ID) {
-    return { fields: { title: targetBagId, "path-filter": "lar-bag-path[lares]", "mirror-root": "bags/@lares" } };
+    return { fields: { title: targetBagId, "path-filter": "lar-bag-path[lares]", "mirror-root": "bags/@lares/v0.1" } };
   }
   if (targetBagId === LARARIUM_BAG_ID) {
-    return { fields: { title: targetBagId, "path-filter": "lar-bag-path[engine]", "mirror-root": "bags/@lararium" } };
+    return { fields: { title: targetBagId, "path-filter": "lar-bag-path[engine]", "mirror-root": "bags/@lararium/v0.1" } };
   }
 
   const direct = lookupWiki.getTiddler(targetBagId);

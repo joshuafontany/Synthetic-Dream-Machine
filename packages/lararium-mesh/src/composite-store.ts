@@ -290,7 +290,7 @@ export class CompositeStore implements LarTiddlerStore {
    * Recipe tiddlers arrive via IslandAdaptor from the ha island.  Call this
    * method after the peer boot sequence completes so ha is already in the store.
    *
-   * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/recipe
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe
    */
   async getRecipe(uri: string): Promise<RecipeTiddler | null> {
     const rec = await this.get(uri);
@@ -320,7 +320,7 @@ export class CompositeStore implements LarTiddlerStore {
    * Layers not yet registered (corpus docs arriving async) are silently omitted.
    * Callers may call this again after corpus bags attach to get the full set.
    *
-   * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/recipe
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe
    */
   buildLayersFromRecipe(recipe: RecipeTiddler): CompositeLayer[] {
     const result: CompositeLayer[] = [];
@@ -343,7 +343,7 @@ export class CompositeStore implements LarTiddlerStore {
    * Throws if `writableBag` is declared but the layer is not registered or is not
    * marked writable — indicating a boot-sequence ordering error.
    *
-   * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/recipe
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe
    */
   async putViaRecipe(recipe: RecipeTiddler, record: LarTiddlerRecord, origin: ChangeOrigin): Promise<void> {
     if (!recipe.writableBag) {

@@ -1,0 +1,138 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
+```toml iam
+uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
+file-path        = "bags/@lares/v0.1/api/pono/x-tiddlywiki-filter.md"
+type             = "text/x-memetic-wikitext"
+confidence       = 0.92
+register         = "CS"
+mana             = 0.88
+grammar-key      = "x-tiddlywiki-filter"
+guest-mime       = "text/x-tiddlywiki-filter"
+role             = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
+cacheable        = true
+retain           = true
+```
+
+
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# x-tiddlywiki-filter
+
+The `x-tiddlywiki-filter` grammar key gives the Lararium system access to
+the full TiddlyWiki 5 filter expression language — every operator, step form,
+boolean, and run type that TW5 ships.
+
+`wikitext-filter` (`lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter`)
+is the canonical Lararium implementation. It implements the complete
+`x-tiddlywiki-filter` surface and extends it with operators native to the
+pranala data model. This meme is the pointer; that meme is the law.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+
+<<~ ahu #what-is-implemented >>
+
+## What Is Implemented
+
+`wikitext-filter` implements every standard TiddlyWiki 5 filter operator. The
+full operator reference lives in the TW5 documentation:
+
+**[TiddlyWiki Filter Operators — tiddlywiki.com](https://tiddlywiki.com/#Filter%20Operators)**
+
+All standard operators work in Lararium as they do in TW5. The noun substitutions
+below are the only required adjustments — the filter syntax itself is identical.
+
+### Noun substitutions
+
+TW5 uses "tiddler" as its data unit. Lararium uses "meme" (a URI-addressed
+tiddler). Filters work the same way; the labels change.
+
+| TW5 term | Lararium equivalent |
+|---|---|
+| `tiddler` | meme (same thing — URI-addressed tiddler in the wiki store) |
+| `currentTiddler` | use `[self[]]` |
+| `all[tiddlers]` | `all[memes]` (or `all[tiddlers]` — both accepted) |
+| `is[system]` | `[toml:tagspace[system]]` preferred; `is[system]` accepted |
+
+<<~/ahu >>
+
+<<~ ahu #extensions >>
+
+## Extensions in wikitext-filter
+
+On top of the full TW5 surface, `wikitext-filter` adds operators native to the
+Lararium pranala data model. These have no TW5 equivalent.
+
+| Operator | What it queries |
+|---|---|
+| `[toml:key[value]]` | `#iam` TOML metadata fields — replaces `!!field` |
+| `[edge:family[X]role[Y]]` | Pranala edges by family and role — replaces `##index` |
+| `[self[]]` | URI of the current rendering context — replaces `+currentMeme` / `currentTiddler` |
+| `[ahu:id[fragment]]` | Memes that contain an ahu block with a given fragment id |
+| `[edge:family[reaction]trigger[X]]` | Reaction (papalohe) edges by trigger event name |
+
+The deprecated TW5 forms (`!!field`, `##index`, `+currentMeme`) are accepted but
+emit a diagnostic. New authoring should use the Lararium forms above.
+
+See the full spec: `lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter`
+
+<<~/ahu >>
+
+<<~ ahu #invocation >>
+
+## Invocation
+
+Two ways to use this grammar in a carrier:
+
+**Inline** — inside `heihei`, `huli`, or `ui` sigils, filter expressions are read
+as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
+
+```text
+<<~ heihei [tag[invariant]sort[title]] >>
+<<~ huli [toml:tagspace[grammar]] as item >>
+<<~ ui [edge:family[control]role[implements]] >>
+```
+
+**Block** — via `hana` with an explicit grammar key when the expression is
+multi-line or needs a named degradation posture:
+
+````text
+<<~ hana #work >>
+```toml
+grammar      = "x-tiddlywiki-filter"
+context      = "[self[]]"
+degrade      = "no-op"
+result-shape = "set"
+```
+
+tag[invariant]sort[title]
+<<~/hana >>
+````
+
+The grammar keys `"x-tiddlywiki-filter"` and `"wikitext-filter"` are
+interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #to-impl ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter family:control role:implemented-by >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

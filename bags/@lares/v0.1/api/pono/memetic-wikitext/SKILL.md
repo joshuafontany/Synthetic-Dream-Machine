@@ -1,0 +1,246 @@
+---
+name: memetic-wikitext
+description: Generate, compress, or audit memetic-wikitext surfaces under lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext. Keep the parent invariant small, preserve primitive distinction, and push legality tables, examples, and render detail outward.
+allowed-tools: Read, Grep, Glob, Bash, Edit, Write
+---
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
+file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext/SKILL.md"
+type = "text/x-memetic-wikitext"
+confidence = 0.72
+register = "CS"
+manaoio = 0.70
+mana = 0.76
+manao = 0.82
+role = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
+covers = [
+  "lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
+]
+constraints = [
+  "S1: the parent invariant stays the semantic root; this skill does not widen or outrank it",
+  "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs",
+  "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it",
+  "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue",
+  "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"
+]
+skill-package-root = "packages/lares-core/memes/v0.1/api/pono/memetic-wikitext"
+cacheable=true
+retain = true
+```
+
+
+
+# Memetic-Wikitext Skill
+
+[memetic-wikitext.md](../memetic-wikitext.md) holds the root law.
+This skill carries the working procedure.
+
+
+<<~ ahu #load-contract >>
+
+## Load Contract
+
+Keep these points active when the skill loads:
+
+- the parent invariant defines semantic root law
+- the root stays responsible for primitive meaning and minimum boot grammar only
+- `loulou` serves as named `pranala` sugar for outward relation; `aka` and `kahea` do the same for their own relation families where lawful
+- `kapu` qualifies a current act; `?` preserves unresolved pressure without false closure
+- examples, profiles, legality tables, parser detail, and render detail move outward before the parent swells
+- the smallest lawful intervention beats a grand rewrite
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+
+<<~ ahu #workflow-contract >>
+
+## Workflow Contract
+
+Use this skill for four common jobs:
+
+1. author a new memetic-wikitext surface
+2. compress an overloaded root or child surface
+3. audit a surface for primitive blur or boundary drift
+4. split heavy matter into a child or docs companion
+
+Working order:
+
+1. read the active surface fully
+2. identify primitive family, boundary posture, and boot contract pressure
+3. classify content into root law, procedure, example, legality table, bridge note, or archive residue
+4. keep only root law in the parent invariant
+5. move the rest into a child surface or docs companion
+6. verify that the result still teaches the surface with minimal noise
+
+Do not:
+
+- turn the root into parser law
+- turn the root into render-pipeline law
+- let `aka` and `kahea` blur together
+- let `loulou` silently behave like transclusion
+- treat `?` as decoration
+- bury kapu posture in implication when explicit qualification belongs on the page
+- add legacy rename notes when present context already binds the live sugar term
+
+<<~/ahu >>
+
+<<~ ahu #trigger >>
+
+## Trigger
+
+Use this skill when the request asks to:
+
+- write or repair memetic-wikitext law surfaces
+- tighten primitive semantics or boot grammar
+- separate root law from parser or render detail
+- clean up examples, profile guidance, or bridge prose that crowd the parent
+- audit a surface for uncertainty, kapu, or composition drift
+
+Prefer another surface when the work concerns:
+
+- deep parse recognition or normalization only
+- target-specific render behavior only
+- a docs-only rewrite with no memetic-wikitext law pressure
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ read the authored surface as meaning first and observe where the actual overload lands
+⏿ sort root law, primitive distinction, boot grammar, and outward detail by where they belong
+◇ choose the smallest lawful split without turning surface sugar into rival law
+▶ write the lightest useful change and move parse, render, or example weight outward first
+⤴ verify the boot contract still loads and unresolved references stay visible
+↺ name residue honestly, especially where parser or render law still lacks a stable home
+
+<<~/ahu >>
+
+<<~ ahu #observe >>
+
+## ✶ Observe
+
+Read the target surface before changing it.
+
+Look for:
+
+- missing or weak opener and `#iam` identity
+- primitive list drift
+- `loulou` versus `aka` versus `kahea` confusion
+- named `pranala` sugar described as separate law instead of bounded surface sugar
+- `kapu` that replaces an act instead of qualifying it
+- `?` that behaves like ornament rather than bounded openness
+- grammar detail that belongs to parser
+- projection detail that belongs to render-pipeline
+- examples or archive notes that crowd the parent
+
+Name the actual overload before you cut.
+
+<<~/ahu >>
+
+<<~ ahu #orient >>
+
+## ⏿ Orient
+
+Sort material into these buckets:
+
+- `root-law`
+- `primitive-distinction`
+- `boot-grammar`
+- `parse-detail`
+- `render-detail`
+- `example-or-profile`
+- `archive-residue`
+
+Orientation rule:
+
+- `root-law`, `primitive-distinction`, and minimal `boot-grammar` stay near the parent
+- `parse-detail` and `render-detail` leave first
+- `example-or-profile` usually leaves for docs
+- `archive-residue` leaves unless it still binds the current surface
+
+<<~/ahu >>
+
+<<~ ahu #decide >>
+
+## ◇ Decide
+
+Choose the smallest lawful shape:
+
+- parent only, when the surface already stays sharp
+- parent + `SKILL.md`, when operator procedure needs room
+- parent + docs, when explanation and examples crowd the root
+- parent + `SKILL.md` + docs, when law, procedure, and teaching all need distinct rooms
+
+Default toward splitting, not accreting.
+Do not create a child just to rename clutter.
+
+<<~/ahu >>
+
+<<~ ahu #act >>
+
+## ▶ Act
+
+When writing or revising:
+
+- keep the parent's six glyph lines compressed
+- keep one-line primitive roles crisp
+- treat `loulou`, `aka`, and `kahea` as quick chant sugar around `pranala` where their own loci bind that role
+- turn long example ladders into docs tables or fenced examples
+- move checklist and workflow prose into this skill
+- add `loulou` links so the new surfaces actually connect
+
+Aim for a parent that a reader can reload quickly.
+
+<<~/ahu >>
+
+<<~ ahu #verify >>
+
+## ⤴ Verify
+
+Before closing, check:
+
+- opener matches `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext`
+- parent `implements` includes `meme`, `loci`, and `invariant` when the root still functions as all three
+- `constraints` appears in this skill, not `invariants`
+- docs surface states non-law posture near the top
+- named `pranala` sugar reads as surface sugar, not as a rival edge system
+- examples and long bridge notes no longer crowd the parent
+- unresolved references remain named rather than hidden
+
+<<~/ahu >>
+
+<<~ ahu #aftermath >>
+
+## ↺ Aftermath
+
+Close by naming:
+
+- what stayed in the parent
+- what moved to the child
+- what moved to docs
+- what still lacks a lawful downstream home
+
+If parser or render-pipeline law still lacks its own stable carrier, leave the boundary explicit and the residue honest.
+
+<<~/ahu >>
+
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
+
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

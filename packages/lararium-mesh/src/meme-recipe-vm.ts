@@ -5,7 +5,7 @@
  *   DirectMemeRecipeVm  — in-process TW5Engine wrapper (lives in @lararium/tw5)
  *   TW5WorkerProxy      — Worker-backed implementation (lives in @lararium/tw5)
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/meme-recipe-vm
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/meme-recipe-vm
  */
 
 import type { MemeProjection, MemeProvider } from "./meme-provider.js";

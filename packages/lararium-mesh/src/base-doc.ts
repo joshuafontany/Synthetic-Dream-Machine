@@ -18,7 +18,7 @@
  *   Principal verifyingKey, group BeeKEM hints, session capability tokens are
  *   all tiddler fields so they arrive via CRDT sync alongside the content.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/base-doc
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/base-doc
  */
 
 import type { LarTiddlerRecord } from "./tiddler-store.js";

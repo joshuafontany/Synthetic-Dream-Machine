@@ -1,0 +1,128 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kau"
+file-path = "bags/@lares/v0.1/api/pono/kau.md"
+type      = "text/x-memetic-wikitext"
+confidence = 0.90
+register  = "CS"
+manaoio   = 0.86
+mana      = 0.92
+manao     = 0.88
+role      = "device placement/instantiation — set down with intention, own URI, own context"
+cacheable = true
+retain    = true
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Kau
+
+A device placed with intention. The instance takes its own address.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #etymology >>
+
+## Etymology and Mythology
+
+**kau** (Hawaiian): "to place upon, to set down with intention, to perch upon, to hang from above."
+
+The navigator uses *kau* for the moment of setting an anchor — not dropping it carelessly, but placing it with deliberate force at a chosen coordinate. The anchor then holds that position: addressable, persistent, its own fixed point.
+
+In UEFN Verse terms: kau is the moment a `creative_device` descends from the class definition into the island map. The device gains its own property panel, its own event ports, its own UUID in the device hierarchy. The definition (kumu) teaches; the placement (kau) creates.
+
+In Ink & Switch terms: kau is the moment an automerge object earns an `{actor, counter}` identity — it existed as potential in the schema, now it exists as an addressable thing with its own causal history.
+
+In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-instance capability grants attach here. Document-scoped authority today; instance-scoped authority when the WASM lands.
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law
+
+- Kau MUST produce exactly one instance URI: `carrierUri#fragment`.
+- The #fragment MUST be explicit in the sigil OR auto-generated as a UUID on first commit (write-back stub).
+- The instance URI MUST become the `currentTiddler` variable for the kumu body during render.
+- Kau MUST NOT produce a graph edge by itself (device wiring uses papalohe edges).
+- Each kau placement MUST create a distinct causal island: events cross out only via papalohe.
+- Implementations MUST fire the `KauCapabilityHook` with the instance URI when a Keyhive authority provider registers (stub: no-op until WASM).
+- Implementations MUST fire the `KauWriteBackHook` when a UUID fragment auto-generates (stub: no-op until write-back layer wires in).
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```
+<<~ kau DeviceName >>                       placement, auto-generated fragment
+<<~ kau #my-instance DeviceName >>          placement, explicit fragment
+<<~ kau #my-instance DeviceName prop:val >> placement with props
+```
+
+The DeviceName resolves via `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[DeviceName]]`.
+
+### Instance URI
+
+The instance URI forms as: `carrierUri + "#" + fragment`
+
+On first commit with auto-generated fragment, the write-back hook patches the source carrier with the assigned UUID so the address stabilizes on subsequent edits.
+
+### Keyhive stubs (integration boundary)
+
+```typescript
+registerKauCapabilityHook(hook: (instanceUri: string) => unknown)
+registerKauWriteBackHook(hook: (carrierUri: string, fragment: string) => void)
+```
+
+Both stubs are deferred pending Keyhive WASM. When they land, they surface as explicit TW5 action tiddlers (not JS module hooks), consistent with TW5 VM primacy. The kau widget itself is now a TW5-native `\widget ~kau(p1:"")` defined in `sigil-kau.tid` — no JS module.
+
+<<~/ahu >>
+
+<<~ ahu #uefn-mapping >>
+
+## UEFN Device Model Mapping
+
+| memetic-wikitext | UEFN concept              |
+|-----------------|---------------------------|
+| kumu definition | creative_device class     |
+| kau placement   | device on island map      |
+| #fragment       | device instance ID / UUID |
+| papalohe edges  | device wiring panel       |
+| waiho in body   | @editable property        |
+| instance URI    | device URI in hierarchy   |
+
+<<~/ahu >>
+
+<<~ ahu #causal-island >>
+
+## Causal Island
+
+Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable:Event subscribable:Handler >>`.
+
+This maps directly to the Ink & Switch island model: each automerge object is a causally independent document. Merges happen at declared sync points, not implicitly.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:control role:instantiates >>
+<<~ pranala #to-waiho ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho family:control role:contrasts >>
+<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:control role:wires-via >>
+<<~ pranala #to-widget ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/widgets/kau family:control role:implements >>
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:implements >>
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

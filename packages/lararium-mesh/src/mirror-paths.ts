@@ -8,6 +8,8 @@
 
 import { LARARIUM_DOC_URI, LARES_DOC_URI, LAR_PREFIX } from "./lar-uris.js";
 
+const BAG_VERSION = "v0.1";
+
 export type MirrorPathStrategy = "lares" | "engine" | "wiki-shadow";
 
 function splitHash(value: string): [string, string | null] {
@@ -27,25 +29,25 @@ function larTail(uri: string): string | null {
   return uri.startsWith(LAR_PREFIX) ? uri.slice(LAR_PREFIX.length) : null;
 }
 
-/** Canonical @lares mirror path. Legacy unscoped ha.ka.ba paths resolve as @lares. */
+/** Canonical @lares/v0.1 mirror path. */
 export function laresMirrorRelPath(uri: string): string | null {
-  let rest = larTail(uri);
+  const rest = larTail(uri);
   if (rest === null) return null;
-  if (rest.startsWith("@lararium/")) return null;
-  if (rest.startsWith("@lares/")) rest = rest.slice("@lares/".length);
-  else if (rest.startsWith("@")) return null;
+  const prefix = `@lares/${BAG_VERSION}/`;
+  if (!rest.startsWith(prefix)) return null;
 
-  const [pathPart, frag] = splitHash(rest);
+  const [pathPart, frag] = splitHash(rest.slice(prefix.length));
   const base = stripMd(pathPart ?? "");
   return base ? withFrag(base, frag) : null;
 }
 
-/** Canonical @lararium engine mirror path. */
+/** Canonical @lararium/v0.1 engine mirror path. */
 export function engineMirrorRelPath(uri: string): string | null {
   const rest = larTail(uri);
-  if (rest === null || !rest.startsWith("@lararium/")) return null;
+  const prefix = `@lararium/${BAG_VERSION}/`;
+  if (rest === null || !rest.startsWith(prefix)) return null;
 
-  const [pathPart, frag] = splitHash(rest.slice("@lararium/".length));
+  const [pathPart, frag] = splitHash(rest.slice(prefix.length));
   const base = stripMd(pathPart ?? "");
   return base ? withFrag(base, frag) : null;
 }
@@ -56,16 +58,16 @@ export function wikiShadowMirrorRelPath(uri: string): string | null {
   if (rest === null) return null;
   let dirPrefix: string;
 
-  if (rest.startsWith("@lares/")) {
-    rest = rest.slice("@lares/".length);
-    dirPrefix = "lares/";
-  } else if (rest.startsWith("@lararium/")) {
-    rest = rest.slice("@lararium/".length);
-    dirPrefix = "lararium/";
+  if (rest.startsWith(`@lares/${BAG_VERSION}/`)) {
+    rest = rest.slice(`@lares/${BAG_VERSION}/`.length);
+    dirPrefix = `lares/${BAG_VERSION}/`;
+  } else if (rest.startsWith(`@lararium/${BAG_VERSION}/`)) {
+    rest = rest.slice(`@lararium/${BAG_VERSION}/`.length);
+    dirPrefix = `lararium/${BAG_VERSION}/`;
   } else if (rest.startsWith("@")) {
     return null;
   } else {
-    dirPrefix = "lares/";
+    return null;
   }
 
   const [pathPart, frag] = splitHash(rest);

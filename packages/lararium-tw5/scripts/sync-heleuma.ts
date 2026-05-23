@@ -603,7 +603,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
   // ka handles a single symbol; ba handles multiple space-separated symbols
   const heleumaMode = d.symbols.length === 1 ? "ka" : "ba";
 
-  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~&#x0001; ? -> lar:///${uriPath} >>
 \`\`\`toml iam

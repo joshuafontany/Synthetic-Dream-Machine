@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-rush
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: concurrency-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/api/v0.1/pono/puka
+lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/puka
 lar-alias-for: puka
 lar-see-also: puka
 lar-open-pattern: <<~\s*\\rush\s*>>

@@ -21,7 +21,7 @@
  *   lararium/recipes/wiki    — full stack + specific wiki draft bag (writable)
  *   catalog/recipes/default  — catalog + lares + corpus leaves only (no social plane)
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/recipe
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe
  */
 
 // ---------------------------------------------------------------------------
@@ -39,7 +39,7 @@
 // Self-describing: each root-doc bag carries its own descriptor tiddler inside
 // the ha island.  Corpus / wiki bags seed their own descriptor inside their doc.
 //
-// Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/bag
+// Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/bag
 // ---------------------------------------------------------------------------
 
 export interface BagTiddler {
@@ -113,7 +113,7 @@ export { recipeUri } from "./lar-uris.js";
  *
  * Returns [] for null / undefined / unrecognised types.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/recipe
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe
  */
 /**
  * Parse a plugins value from a recipe tiddler field into a string array.

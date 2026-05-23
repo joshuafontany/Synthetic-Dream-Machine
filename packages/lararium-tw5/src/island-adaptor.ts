@@ -50,7 +50,7 @@
  *   // node:
  *   setInterval(() => adaptor.flushAll([accumulator], 200), 16);
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/island-adaptor
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/island-adaptor
  */
 
 import type {

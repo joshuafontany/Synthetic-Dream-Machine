@@ -11,7 +11,7 @@
  * Bag ID law (M21): bag ID = lar: URI of the owning Automerge doc.
  * No opaque prefixes (e.g. "corpus:") — every bag carries a stable lar:/// address.
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/automerge-tiga
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/automerge-tiga
  */
 
 import { describe, test, expect, beforeEach } from "vitest";

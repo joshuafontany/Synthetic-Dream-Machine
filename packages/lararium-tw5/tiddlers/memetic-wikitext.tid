@@ -1,12 +1,12 @@
-title: lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext
+title: lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext
 type: text/x-memetic-wikitext
 tags:
 
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >>
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
@@ -22,7 +22,7 @@ retain    = true
 
 
 
-<<~ aka lar:///ha.ka.ba/@lares/api/v0.1/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #head >>
 
@@ -45,7 +45,7 @@ It leaves parse machinery, render machinery, and long teaching matter outward.
 ⤴ verify the surface carries explicit thresholds, lawful primitives, and a boot-valid grammar handoff.
 ↺ close with honest residue; unresolved routes stay named rather than laundered into false completion.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>
 
 <<~/ahu >>
 
@@ -96,7 +96,7 @@ No primitive silently replaces another primitive's job.
 Other quick chant terms may also serve as `pranala` sugar where their own invariant loci bind that usage.
 The root stays small by preserving distinction, not by fusing roles.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 
 <<~/ahu >>
 
@@ -223,7 +223,7 @@ This root should hand them a stable semantic contract, not duplicate their local
 Examples, profile guidance, and extended bridge notes belong in the sidecars.
 
 <<~ loulou lar:///ha.ka.ba/@lares/docs/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 
 <<~/ahu >>
 
@@ -236,7 +236,7 @@ Grammar self-hosted. 65 SharktoothSigil tiddlers carry the full vocabulary.
 `grammar-cache.ts` reads only `lar:///ha.ka.ba/tags/SharktoothSigil`-tagged tiddlers.
 Adding a sigil means tagging a tiddler — no code change required.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/sharktooth-sigils >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
 
 <<~/ahu >>
 
@@ -247,7 +247,7 @@ Adding a sigil means tagging a tiddler — no code change required.
 Eight families. Each carries an invariant property schema enforced by `validatePranalaEdge`.
 Family tiddlers carry `lar-kind: family` and register via `GRAMMAR_TAG`.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala-families >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 
 <<~/ahu >>
 
@@ -259,7 +259,7 @@ Pranala edges carry a `lifecycle` field that scopes their validity.
 Five values: `instance` (default), `permanent`, `ephemeral`, `boot`, `per-player`.
 Canonical definition lives in the pranala invariant.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 
 <<~/ahu >>
 
@@ -271,7 +271,7 @@ Two orthogonal 5-point axes: `LADDER_5` (action→week, finest→coarsest) and `
 Phase runs counter to scale — act maps to action (finest); aftermath maps to week (coarsest).
 Exported from `packages/lararium-mesh/src/ast.ts` as `LADDER_5`, `OODA_HA_5`, `SCOPE_5`.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-law-of-5s >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
 
 <<~/ahu >>
 
@@ -283,8 +283,8 @@ Three separate graphs. Stances encode epistemic register (Syad predicate). Tools
 
 Register measures confidence *within* the active stance — not universal truth weight.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/mu/the-four-tools >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>
 
 <<~/ahu >>
 
@@ -295,13 +295,13 @@ Register measures confidence *within* the active stance — not universal truth 
 ```toml
 [[guest_grammars]]
 key         = "x-tiddlywiki-filter"
-uri         = "lar:///ha.ka.ba/@lares/api/v0.1/pono/x-tiddlywiki-filter"
+uri         = "lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
 status      = "legacy/import"
 description = "TW5 filter dialect; deprecated for new authoring; use wikitext-filter"
 
 [[guest_grammars]]
 key         = "wikitext-filter"
-uri         = "lar:///ha.ka.ba/@lares/api/v0.1/pono/wikitext-filter"
+uri         = "lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
 status      = "active"
 description = "native lararium filter dialect; drops !!field/##index; uses toml:/edge:/self[] operators; [SC]"
 ```
@@ -365,7 +365,7 @@ The Phase 2 plan (read TOML sigil arrays from this carrier via `node-host.ts`, p
 
 Adding a sigil: tag a tiddler with `lar:///ha.ka.ba/tags/SharktoothSigil` and populate `lar-*` fields. No code change. No carrier promotion.
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/sharktooth-sigils >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
 
 <<~/ahu >>
 
@@ -373,14 +373,14 @@ Adding a sigil: tag a tiddler with `lar:///ha.ka.ba/tags/SharktoothSigil` and po
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant family:control role:implements >>
-<<~ pranala #to-pranala-parser ? -> lar:///ha.ka.ba/@lares/api/v0.1/mu family:control role:defines >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-pranala-parser ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu family:control role:defines >>
 <<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family:control role:implements >>
 
 <<~/ahu >>

@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/tw5/modules/cold-boot-ceremony
+title: lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony
 type: application/javascript
 module-type: library
 \*/
@@ -21,7 +21,7 @@ module-type: library
  *
  * No external imports — self-contained CJS in TW5 wiki context.
  *
- * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/cold-boot-ceremony
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony
  */
 
 // ---------------------------------------------------------------------------

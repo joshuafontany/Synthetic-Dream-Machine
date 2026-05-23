@@ -1,0 +1,90 @@
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu >>
+```toml iam
+uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu"
+file-path = "bags/@lararium/v0.1/tw5/widgets/ahu.md"
+type          = "text/x-memetic-wikitext"
+register      = "CS"
+confidence    = 0.88
+mana          = 0.88
+role          = "anchor: AhuWidget — heleuma ka"
+heleuma       = "ka"
+source-symbol = "AhuWidget"
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu"
+body-sha256 = "26d1bacabd436acf1e2f5b45eedcfe333bade4b400454598c8d7711f7eb4007b"
+cacheable     = true
+retain        = true
+```
+
+<<~&#x0002;>>
+
+<<~ ahu #contract >>
+
+## Contract
+
+`<$ahu>` renders a `<section data-lar-kind="ahu">` slot container, or in `carrier` render-mode, projects the slot body as raw wikitext. Supports reactive refresh on slot-fragment tiddler changes. Attribute: `slot`.
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+## Source
+
+```typescript
+function AhuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
+  this.initialise(parseTreeNode, options);
+}
+AhuWidget.prototype.render = function (this: TW5WidgetInstance, parent: TW5FakeElement, nextSibling: TW5FakeElement | null) {
+  this.parentDomNode = parent;
+  this.computeAttributes();
+  this.execute();
+  const slot        = this.getAttribute("slot", "");
+  const renderMode  = this.getVariable?.("lar-render-mode") ?? "";
+  if (renderMode === "carrier") {
+    const parentUri   = this.getVariable?.("currentTiddler") ?? "";
+    const fragmentUri = parentUri + slot;
+    const fragFields  = this.wiki?.getTiddler?.(fragmentUri)?.fields as Record<string, unknown> | undefined;
+    const body        = typeof fragFields?.["text"] === "string" ? fragFields["text"] : "";
+    const open        = `<<~ ahu ${slot} >>`;
+    const close       = `<<~/ahu >>`;
+    const text        = this.document.createTextNode(open + body + close);
+    parent.insertBefore(text, nextSibling);
+    this.domNodes = [text as unknown as TW5FakeElement];
+  } else {
+    const el = this.document.createElement("section");
+    el.setAttribute("data-lar-kind", "ahu");
+    el.setAttribute("data-lar-slot", slot);
+    parent.appendChild(el);
+    this.domNodes = [el];
+    this.renderChildren(el, null);
+  }
+};
+AhuWidget.prototype.execute = function (this: TW5WidgetInstance) { this.makeChildWidgets(); };
+AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers: Record<string, TW5ChangeRecord>): boolean {
+  const slot       = this.getAttribute("slot", "");
+  const parentUri  = this.getVariable?.("currentTiddler") ?? "";
+  const fragUri    = parentUri + slot;
+  if (changedTiddlers[fragUri]) {
+    this.refreshSelf();
+    return true;
+  }
+  let changed = false;
+  for (const child of (this.children ?? [])) {
+    if (child.refresh(changedTiddlers)) changed = true;
+  }
+  return changed;
+};
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu family:control role:implements >>
+<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
+<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu family:control role:module >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

@@ -160,7 +160,7 @@ function template(opts: {
   const uriPath  = `ha.ka.ba/${opts.uriScope}/${opts.uriVersion}/${opts.slug}`;
   const memeRel  = relative(WORKSPACE, memePathFor(opts.uriScope, opts.uriVersion, opts.slug));
   const sourceRel = relative(WORKSPACE, opts.sourceFile);
-  return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+  return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~&#x0001; ? -> lar:///${uriPath} >>
 \`\`\`toml iam

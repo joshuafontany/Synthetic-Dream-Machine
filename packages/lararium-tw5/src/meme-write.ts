@@ -18,7 +18,7 @@
  *   → disk tree → ingest → equivalent tiddler tree (semantic equivalence,
  *   stable section spacing).
  *
- * Schema: lar:///ha.ka.ba/@lares/api/v0.1/lararium/schema/meme-write
+ * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/meme-write
  */
 
 import type { TW5Engine } from "./tw5-vm.js";

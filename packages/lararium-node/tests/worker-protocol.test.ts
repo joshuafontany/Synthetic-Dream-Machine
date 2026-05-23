@@ -9,7 +9,7 @@
  * GP-3: Tiddler-level delta (integration — confirms added/deleted arrays cross the boundary)
  * GP-5: teardown handshake ordering (integration — cancel:confirmed before teardown:ack)
  *
- * Meme: lar:///ha.ka.ba/@lararium/mesh/v0.1/worker-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/worker-protocol
  */
 
 import { describe, test, expect, afterEach } from "vitest";

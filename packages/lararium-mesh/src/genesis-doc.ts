@@ -8,7 +8,7 @@
  * the two-pass CID injection. The output bytes write to any sink: disk, IndexedDB,
  * bundler inline, or test fixture.
  *
- * Schema: lar:///ha.ka.ba/@lararium/mesh/v0.1/genesis-doc
+ * Schema: lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc
  */
 
 import {

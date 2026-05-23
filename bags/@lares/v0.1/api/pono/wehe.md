@@ -1,0 +1,127 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
+file-path = "bags/@lares/v0.1/api/pono/wehe.md"
+type = "text/x-memetic-wikitext"
+confidence   = 0.85
+register     = "CS"
+manaoio      = 0.82
+mana         = 0.84
+manao        = 0.82
+role         = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
+cacheable    = true
+retain       = true
+```
+
+
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Wehe
+
+*wehe* — Hawaiian: to open, to untie, to uncover, to unfasten; to solve, to cleanse.
+*Wehewehe* (reduplication): to explain, expound, reveal what is mysterious — to make
+visible what had remained hidden. The opening action carries with it an act of revelation.
+
+A block-container sigil declaring a named procedure body. `wehe` crosses the boundary from
+declaration-space into execution-space: the content inside the block becomes callable by name,
+surfacing what had previously stayed undeclared. English alias: `\procedure` (TW5 pragma form).
+Both forms produce the same parse result.
+
+Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a block sigil.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #ooda-ha >>
+
+✶ sense the name and param signature — this block defines a callable; note the crossing boundary
+⏿ orient: pragma-alias; the declaration serves as the sigil; no render output; body becomes callable body
+◇ name MUST be unique in current tiddler scope; params declare positional/named argument surface
+▶ emit pragma declaration node; TW5 parser registers the procedure at parse-time
+⤴ `<<~ kahea name(args) >>` (name-call form) invokes the procedure at render time in any tiddler that transcludes this one
+↺ confirm callable registered; no stray render output; body round-trips correctly
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A wehe block MUST declare a name and optional parameter signature.
+A wehe block MUST close with `<<~/ wehe >>` (or `<<~/ \procedure >>`).
+A wehe block MUST NOT produce render output — it is a declaration, not a transclusion.
+A wehe name MUST be unique within the current tiddler's procedure namespace.
+A wehe block SHOULD use the `~` prefix convention for sigil-dispatched procedures: `<<~ wehe ~name(params) >>`.
+
+English alias `\procedure` is semantically identical. Either form MAY appear in operator memes.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+Hawaiian form:
+```text
+<<~ wehe name(param1:"default" param2:"") >>
+procedure body
+<<~/ wehe >>
+```
+
+English alias form (identical semantics):
+```text
+<<~ \procedure name(param1:"default" param2:"") >>
+procedure body
+<<~/ \procedure >>
+```
+
+`~`-dispatched convention (operator-extension sigils):
+```text
+<<~ \procedure ~mysigil(uri:"" p1:"") >>
+<$tiddler tiddler=<<uri>>>...
+<<~/ \procedure >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #schema >>
+
+## Schema (machine-readable)
+
+```toml
+sigil          = "wehe"
+kind           = "pragma-alias"
+layer          = "block"
+alias          = ["\\procedure"]
+
+open-pattern  = '<<~\s*wehe\s+([\w-]+)(?:\s+([^>]*?))?\s*>>'
+close-pattern = '<<~\/wehe\s*>>'
+
+[alias-map]
+"\\procedure" = "wehe"
+"\\define"    = "wehe"
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
+<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
+<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:control role:implements >>
+<<~ pranala #tiddler-sigil-define ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define family:control role:alias >>
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

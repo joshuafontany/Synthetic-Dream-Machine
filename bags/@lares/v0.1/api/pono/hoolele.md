@@ -1,0 +1,158 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoolele >>
+```toml iam
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
+file-path   = "bags/@lares/v0.1/api/pono/hoolele.md"
+type        = "text/x-memetic-wikitext"
+register    = "S"
+confidence  = 0.82
+mana        = 0.82
+manao       = 0.80
+tagspace    = "stable"
+role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
+cacheable   = true
+retain      = true
+status-date = "2026-05-15"
+```
+
+<<~ ahu #head >>
+
+# Hoolele
+
+*hoʻolele* — Hawaiian: to cause to fly, to launch, to send aloft; causative of
+*lele* (to fly, leap). Where *lele* leaps and knows which tree it came from,
+*hoʻolele* launches something that does not return. The kite released. The canoe
+sent across open ocean with no anchor line back to shore.
+
+An unstructured escape-hatch sigil. Launches a new independent task root —
+a task that outlives the scope that created it and has no parent in the task tree.
+English alias: `\spawn`.
+
+Verse equivalent: `spawn` — the one unstructured concurrency operator. All other
+operators (`sync`, `race`, `rush`, `branch`) create children within the current
+task tree. `spawn` exits the tree entirely, creating a new root. It hides the
+`<suspends>` effect from its caller — the formal mechanism of escape.
+
+**Use `lele` (`\branch`) for side work that can be lost if the parent cancels.**
+**Use `hoolele` (`\spawn`) only when the work MUST complete regardless of what
+cancels around it.**
+
+Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A hoolele call MUST target a single function with `<suspends>` effect.
+A hoolele call MUST NOT target a function with `<decides>` (failable) effect.
+  Wrap failable work in a `<suspends>` function that handles failure internally.
+A hoolele task MUST outlive its creating scope — it is NOT cancelled when the
+  creating scope exits.
+A hoolele task MUST be explicitly cancelled via `task.Cancel()` when no longer needed.
+  Callers MUST retain the returned `task` handle or use a timeout/race pattern.
+A hoolele task MUST NOT be used where `lele` (`\branch`) is sufficient.
+  Prefer `lele` for any work that can be abandoned if the parent scope cancels.
+A hoolele edge MUST carry a target URI as its first argument.
+
+<<~/ahu >>
+
+<<~ ahu #when-to-use >>
+
+## When to Use
+
+`hoolele` is the escape hatch. Use it only for work that fits one of these cases:
+
+**1. Persistence across scope destruction**
+Work that must complete even if the UI, the widget, or the reaction handler
+that started it is torn down. Example: a CRDT write that must flush to peers
+even if the wiki VM is destroyed.
+
+**2. Cross-island work**
+Work that starts in one causal island and must complete in another, with no
+shared cancellation scope. Example: a capability delegation request sent to
+a remote peer.
+
+**3. Background daemon tasks**
+Work that runs indefinitely and should never be cancelled by normal flow.
+Example: the CRDT sync loop, the WebSocket keep-alive, the Keyhive heartbeat.
+
+**All other cases use `lele` (`\branch`).** The tree stays clean; cancellation
+remains predictable; resource leaks are prevented.
+
+<<~/ahu >>
+
+<<~ ahu #six-operator-table >>
+
+## Six-Operator Concurrency Table
+
+`hoolele` completes the Lararium concurrency ontology. All six Verse concurrency
+operators now have pono counterparts:
+
+| Pono | English | Verse | Graph op | Cancellation |
+|---|---|---|---|---|
+| `hui` | `\sync` | `sync` | join node — wait all | enclosing scope exit |
+| `holo` | `\race` | `race` | prune node — recursive subtree cancel | first winner triggers |
+| `puka` | `\rush` | `rush` | select node — first wins, losers continue | enclosing scope exit |
+| `lele` | `\branch` | `branch` | child node — scoped fire-and-continue | enclosing function scope exit |
+| **hoolele** | **\spawn** | **spawn** | **new root — exits tree** | **explicit Cancel() only** |
+
+The five structured operators (`sync`, `race`, `rush`, `branch`, and the containing
+concurrency blocks) all create children in the task tree. `hoolele`/`spawn` is the
+one unstructured escape. It hides the `<suspends>` effect from its caller — this is
+the formal mechanism that allows it to create a new root with no parent scope.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```text
+<<~ hoolele lar:///target/uri >>
+<<~ \spawn lar:///target/uri >>
+```
+
+Returns a `task(t)` handle. The caller MUST retain it for later `Cancel()` or
+`Await()`. Discarding the handle loses the ability to cancel or observe the task.
+
+<<~/ahu >>
+
+<<~ ahu #lararium-use-cases >>
+
+## Lararium-Specific Use Cases
+
+In the Lararium stack, the irreducible TS infrastructure layer (CRDT, network,
+Keyhive) represents work that MUST complete regardless of wiki VM lifecycle.
+These are the natural `hoolele` boundaries:
+
+- **`LarTiddlerStore` CRDT flush** — must complete even if the `MemeSyncAdaptor`
+  is disposed; spawn the flush, hold the task handle in the store.
+- **`VmPool` cross-VM coordination** — work that spans wiki VM instances has no
+  single containing scope; spawn the coordination task at pool level.
+- **Keyhive capability delegation** — async crypto; survives the UI context that
+  initiated it.
+
+The `MemeSyncAdaptor` boundary IS the `hoolele` boundary in the Lararium stack:
+work above it (wiki reactions, widget handlers) uses structured concurrency;
+work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #tiddler-sigil-hoolele ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele family:control role:implements >>
+<<~ pranala #to-lele ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele family:relation role:contrast >>
+<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

@@ -33,7 +33,7 @@
  *   to the `onWorkerEvent` callback registered at construction. The callback
  *   routes the event into the main-thread LarEventBus.
  *
- * Meme: lar:///ha.ka.ba/@lararium/node/v0.1/node-vm-manager
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
  * Meme doc: packages/lararium-node/memes/node-vm-manager.md
  */
 

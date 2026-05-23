@@ -1,0 +1,98 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
+file-path = "bags/@lares/v0.1/api/pono/waiho.md"
+type      = "text/x-memetic-wikitext"
+confidence = 0.90
+register  = "CS"
+manaoio   = 0.84
+mana      = 0.90
+manao     = 0.86
+role      = "ephemeral variable binding — deposit without graph identity"
+cacheable = true
+retain    = true
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Waiho
+
+An ephemeral name deposit. Nothing persists past scope boundary.
+
+<<~/ahu >>
+
+<<~&#x0002;>>
+
+<<~ ahu #etymology >>
+
+## Etymology and Mythology
+
+**waiho** (Hawaiian): "to leave in place, to deposit for later retrieval, to set aside temporarily."
+
+The word carries the feel of a fisherman leaving bait at a known spot — the thing waits where placed, for the one who placed it, for as long as that context holds. When the context dissolves, the bait washes away. Nothing marks the spot afterward.
+
+Compare **kau** (placement with persistent identity) and **aka** (shadow/mirror, source-canonical). Waiho stands apart from both: it holds a value, not a thing. No URI. No mailbox. No graph edge. Just a name bound to a value, alive for the scope, gone at the close.
+
+In the Kumulipo creation chant, *waiho* appears in the context of primal material left at the boundary between sea and land — not yet formed into persistent shape, waiting for the conditions that will give it permanent address.
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law
+
+- Waiho MUST carry exactly one name and one value per pragma/block.
+- Carrier-scoped (`<<~! waiho name = val >>`) MUST hoist to the top of the carrier execution context before any render pass.
+- Block-scoped (`<<~ waiho name = val >>...<<~/waiho >>`) MUST bind name for the duration of the block only.
+- Waiho MUST NOT produce a graph node, URI, or edge in the pranala graph.
+- Waiho MUST NOT persist across carrier boundaries.
+- Implementations MUST treat `\const`, `\let`, `\var` as aliases that map to waiho before evaluation.
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+```
+<<~! waiho name = value >>                  carrier-scoped (hoisted, immutable by convention)
+<<~ waiho name = value >>...<<~/waiho >>    block-scoped
+\const name = value                         English alias (carrier-scoped)
+\let name = value ... /\let                 English alias (block-scoped)
+\var name = value ... /\var                 English alias (block-scoped, mutable)
+```
+
+<<~/ahu >>
+
+<<~ ahu #contrast >>
+
+## Waiho vs Kau vs Aka
+
+| sigil  | creates         | URI?  | graph edge? | scope       | lifetime        |
+|--------|-----------------|-------|-------------|-------------|-----------------|
+| waiho  | name binding    | no    | no          | carrier/block | evaporates at close |
+| kau    | device instance | yes   | no (internal) | carrier   | persistent, addressable |
+| aka    | shadow mirror   | no    | yes (observe) | carrier  | source-canonical |
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-kau ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau family:control role:contrasts >>
+<<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:control role:contrasts >>
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho family:control role:implements >>
+<<~ pranala #tiddler-sigil-const ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-const family:control role:alias >>
+<<~ pranala #tiddler-sigil-let ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-let family:control role:alias >>
+<<~ pranala #tiddler-sigil-var ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var family:control role:alias >>
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

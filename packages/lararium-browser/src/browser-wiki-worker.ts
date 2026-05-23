@@ -28,7 +28,7 @@
  * DOM types do not appear in this file (BA-1). The DedicatedWorkerGlobalScope `self`
  * binding is the sole platform surface used here.
  *
- * Meme: lar:///ha.ka.ba/@lararium/browser/v0.1/browser-wiki-worker
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-wiki-worker
  */
 
 import { WorkerAuthorityHandler } from "@lararium/tw5";
