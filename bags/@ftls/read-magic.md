@@ -1,9 +1,9 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@ftls/api/v0.1/powers/read-magic >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@ftls/v0.1/api/powers/read-magic >>
 ```toml iam
-uri-path = "ha.ka.ba/@ftls/api/v0.1/powers/read-magic"
-file-path = "bags/@ftls/api/v0.1/powers/read-magic.md"
+uri-path = "ha.ka.ba/@ftls/v0.1/api/powers/read-magic"
+file-path = "bags/@ftls/v0.1/api/powers/read-magic.md"
 type = "text/x-memetic-wikitext"
 
 role = "Power interface meme: teaches FTLS power interfaces and that the playable card acts as a projection"
