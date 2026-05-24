@@ -2,12 +2,23 @@
  * worker-protocol — GP-1 schema: discriminated union for all main ↔ wiki-Worker messages.
  *
  * Every message crossing the main-thread / wiki-Worker boundary MUST use this envelope.
- * Implements GP-1 through GP-4 from the structured-clone-gap contract.
+ *
+ * ## Worker Sovereignty Law (isomorphic across all vessel types)
+ *
+ *   1. Every Worker boots a Repo-in-Worker via a transferred `syncPort` (MessagePort).
+ *   2. The Worker derives tiddler state from its own CRDT doc — never from main-thread oracle deltas.
+ *   3. The Worker owns its timing via requestAnimationFrame (browser) / setInterval (Node).
+ *      Tiddler deltas accumulate; the Worker drains at frame boundary, not on message receipt.
+ *   4. `changeset:ack` is a frame-completion signal: the Worker fires it after each rAF drain,
+ *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
+ *   5. `WorkerMsg_Changeset` is @deprecated — CRDT sync via `syncPort` replaces it.
+ *      It survives only for the Node GP-3 oracle path pending NodeVmManager migration.
+ *   6. `WorkerMsg_Promote` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
+ *      for `repo.find()`), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.
- * GP-3: Tiddler-level delta (added / deleted arrays). Main thread derives the delta
- *       from Automerge patches — the Worker never loads the WASM runtime.
+ * GP-3: @deprecated — tiddler-delta oracle path. Worker-side Repo replaces it.
  * GP-4: CryptoKey — NOT on this protocol surface; key material stays in-thread.
  *
  * Platform-neutral: no Node `worker_threads` import, no browser `self` import.
@@ -22,39 +33,47 @@ export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
 // ── Main → Worker ──────────────────────────────────────────────────────────
 
 /**
- * Deliver a tiddler-level delta to the wiki Worker.
+ * Promote the wiki slot from cold to hot (boot TW5 + Repo-in-Worker).
  *
- * GP-3: main thread computes this from Automerge `change` event patches —
- * the Worker never loads the Automerge WASM runtime.
+ * Worker Sovereignty Law:
+ *   - `syncPort` MUST be transferred (not cloned): `postMessage(msg, [msg.syncPort])`.
+ *   - Worker creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
+ *   - Worker calls `repo.find(docUrl)` and awaits `handle.whenReady()` before `promote:ack`.
+ *   - If `docUrl` is null the Worker creates a fresh empty doc (cold boot).
+ *   - `coreHash` carries a SHA-256 hex of `coreBlob`; null = pre-content-addressed trust-on-delivery.
+ *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
- * ACK-gate: every changeset carries a `batch_id`. The Worker MUST reply with
- * `changeset:ack` before the main thread sends the next batch. This gives the
- * Worker backpressure authority — it controls the flow rate, not the producer.
- */
-export interface WorkerMsg_Changeset {
-  schema_version: ProtocolVersion;
-  type: "changeset";
-  wikiUri: string;
-  /** Opaque identifier echoed back in changeset:ack. Caller uses crypto.randomUUID(). */
-  batch_id: string;
-  added:   readonly Record<string, unknown>[];
-  deleted: readonly string[];
-}
-
-/**
- * Promote the wiki slot from cold to hot (boot TW5).
- *
- * GP-2: snapshotTiddlers MUST be a plain-object array — no class instances.
- * BA-5: coreBlob travels as Uint8Array; the Worker runtime transfers ownership.
- *       TW5 boot accepts Uint8Array directly via TW5CoreBootInput.
+ * BA-5: `coreBlob` travels as Uint8Array; transferred at the postMessage call site.
  */
 export interface WorkerMsg_Promote {
   schema_version: ProtocolVersion;
   type: "promote";
   wikiUri: string;
-  snapshotTiddlers: readonly Record<string, unknown>[] | null;
-  /** Serialized TW5 core. Transferred, not cloned. */
+  /** Serialized TW5 core. Transfer alongside syncPort: `postMessage(msg, [coreBlob.buffer, syncPort])`. */
   coreBlob: Uint8Array;
+  /** SHA-256 hex of coreBlob. null = pre-CAS trust-on-delivery (intent: make non-null once CAS lands). */
+  coreHash: string | null;
+  /** AutomergeUrl — Worker calls `repo.find(docUrl)`. null = cold boot, Worker creates fresh doc. */
+  docUrl: string | null;
+  /** MessagePort for Worker-side Repo ↔ main-thread Repo sync. MUST be transferred. */
+  syncPort: MessagePort;
+}
+
+/**
+ * Deliver a tiddler-level delta to the wiki Worker.
+ *
+ * @deprecated GP-3 oracle topology. Worker derives tiddler deltas from its own Repo.
+ * Survives for Node path compatibility pending NodeVmManager migration to Repo-in-Worker.
+ * Remove when NodeVmManager adopts Repo-in-Worker (tracked: GP-3 debt, node-vm-manager.ts).
+ */
+export interface WorkerMsg_Changeset {
+  schema_version: ProtocolVersion;
+  type: "changeset";
+  wikiUri: string;
+  /** Opaque identifier. In Repo-in-Worker path: frame correlation ID (not a main-thread batch ID). */
+  batch_id: string;
+  added:   readonly Record<string, unknown>[];
+  deleted: readonly string[];
 }
 
 /** Demote the wiki slot from hot to cold (teardown; thread may terminate). */
@@ -66,8 +85,8 @@ export interface WorkerMsg_Demote {
 
 /**
  * Begin the GP-5 teardown handshake.
- * Worker MUST complete in-flight reactions, cancel all live handles, then
- * respond with teardown:ack before main calls worker.terminate().
+ * Worker MUST complete in-flight reactions, cancel all live handles, export Repo doc bytes,
+ * then respond with `teardown:ack` before main calls worker.terminate().
  */
 export interface WorkerMsg_Teardown {
   schema_version: ProtocolVersion;
@@ -85,7 +104,6 @@ export type MainToWorkerMsg =
 
 /**
  * Emit a verse-event reaction to the main thread for cross-wiki routing.
- *
  * GP-2: payload MUST contain only string | number | boolean values.
  */
 export interface WorkerMsg_Event {
@@ -104,10 +122,16 @@ export interface WorkerMsg_Event {
 export interface WorkerMsg_TeardownAck {
   schema_version: ProtocolVersion;
   type: "teardown:ack";
+  /** Automerge doc bytes from Worker-side Repo at teardown. Preferred warm-start seed. */
+  docBytes?: Uint8Array;
+  /**
+   * @deprecated GP-3 tiddler snapshot. Remove when NodeVmManager migrates to Repo-in-Worker.
+   * Use docBytes (CRDT truth) instead.
+   */
   snapshotTiddlers?: readonly Record<string, unknown>[];
 }
 
-/** Acknowledgement of successful hot-tier boot (TW5 live and ready). */
+/** Acknowledgement of successful hot-tier boot (TW5 live, Repo synced, first frame ready). */
 export interface WorkerMsg_PromoteAck {
   schema_version: ProtocolVersion;
   type: "promote:ack";
@@ -115,8 +139,7 @@ export interface WorkerMsg_PromoteAck {
 }
 
 /**
- * Worker-side fault signal. Main MUST mark the slot as evicted and
- * NOT route further messages to this Worker.
+ * Worker fault signal. Main MUST mark the slot as evicted.
  */
 export interface WorkerMsg_Fault {
   schema_version: ProtocolVersion;
@@ -126,11 +149,15 @@ export interface WorkerMsg_Fault {
 }
 
 /**
- * ACK-gate reply to WorkerMsg_Changeset.
+ * Frame-completion signal — Worker-owned timing (Worker Sovereignty Law §4).
  *
- * The Worker emits this after applying the tiddler delta. The main thread
- * MUST NOT send the next changeset batch until this arrives. The Worker
- * owns the flow rate — this is the backpressure inversion point.
+ * The Worker fires this after each rAF (browser) / setInterval (Node) drain cycle.
+ * It signals the causal island processed a frame — main thread may use it to track
+ * island liveness. `batch_id` is a frame-local UUID; it does NOT correlate with
+ * a main-thread batch in the Repo-in-Worker path.
+ *
+ * @deprecated name "changeset:ack" reflects the GP-3 origin. Future schema_version
+ * will rename to "frame:ack" when the GP-3 path is fully removed.
  */
 export interface WorkerMsg_ChangesetAck {
   schema_version: ProtocolVersion;
@@ -178,27 +205,41 @@ export function mkTeardown(): WorkerMsg_Teardown {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "teardown" };
 }
 
-export function mkTeardownAck(
-  snapshotTiddlers?: readonly Record<string, unknown>[],
-): WorkerMsg_TeardownAck {
+export function mkTeardownAck(opts: {
+  docBytes?: Uint8Array;
+  /** @deprecated GP-3 path only. */
+  snapshotTiddlers?: readonly Record<string, unknown>[];
+} = {}): WorkerMsg_TeardownAck {
   const msg: WorkerMsg_TeardownAck = { schema_version: WORKER_PROTOCOL_VERSION, type: "teardown:ack" };
-  if (snapshotTiddlers !== undefined) msg.snapshotTiddlers = snapshotTiddlers;
+  if (opts.docBytes !== undefined)        msg.docBytes = opts.docBytes;
+  if (opts.snapshotTiddlers !== undefined) msg.snapshotTiddlers = opts.snapshotTiddlers;
   return msg;
 }
 
-/** coreBlob travels as raw bytes (BA-5 transfer semantics). */
+/**
+ * Create a promote message.
+ *
+ * TRANSFER: caller MUST include `syncPort` (and `coreBlob.buffer` if not yet transferred)
+ * in the `postMessage` transfer list:
+ *   `worker.postMessage(msg, [msg.syncPort, msg.coreBlob.buffer])`
+ */
 export function mkPromote(
   wikiUri: string,
   coreBlob: Uint8Array,
-  snapshotTiddlers: readonly Record<string, unknown>[] | null = null,
+  syncPort: MessagePort,
+  docUrl:   string | null = null,
+  coreHash: string | null = null,
 ): WorkerMsg_Promote {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote", wikiUri, coreBlob, snapshotTiddlers };
+  return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote", wikiUri, coreBlob, coreHash, docUrl, syncPort };
 }
 
 export function mkPromoteAck(wikiUri: string): WorkerMsg_PromoteAck {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote:ack", wikiUri };
 }
 
+/**
+ * @deprecated GP-3 oracle path. In Repo-in-Worker path the Worker generates frame ACKs itself.
+ */
 export function mkChangeset(
   wikiUri: string,
   added:   readonly Record<string, unknown>[],
@@ -214,4 +255,63 @@ export function mkChangesetAck(wikiUri: string, batch_id: string): WorkerMsg_Cha
 
 export function mkFault(wikiUri: string, error: string): WorkerMsg_Fault {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "fault", wikiUri, error };
+}
+
+// ── Tiddler delta extraction — Worker-side utility ─────────────────────────
+
+/**
+ * Extract a tiddler add/delete delta from an Automerge doc + patch list.
+ *
+ * Used by Worker entry files to derive TW5 mutations from Worker-side Repo change events.
+ * Replaces the GP-3 oracle pattern (main-thread `_subscribeDocChanges` ETL).
+ *
+ * `patches` is `Patch[]` from `@automerge/automerge` — each patch identifies a mutated path.
+ * `doc` is the post-change `LarDoc` snapshot (already reconciled).
+ *
+ * Walks `tiddlers.*` patches only; ignores `blobs`, `schemaVersion`, and other top-level keys.
+ */
+export function extractTiddlerDeltaFromPatches(
+  doc:     Record<string, unknown>,
+  patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>,
+): { added: Record<string, unknown>[]; deleted: string[] } {
+  const changedUris = new Set<string>();
+  for (const patch of patches) {
+    if (patch.path.length >= 2 && patch.path[0] === "tiddlers") {
+      changedUris.add(String(patch.path[1]));
+    }
+  }
+
+  const tiddlers = (doc["tiddlers"] ?? {}) as Record<string, unknown>;
+  const added:   Record<string, unknown>[] = [];
+  const deleted: string[]                  = [];
+
+  for (const uri of changedUris) {
+    const rec = tiddlers[uri] as (Record<string, unknown> & { deleted?: boolean }) | undefined;
+    if (!rec || rec["deleted"]) {
+      deleted.push(uri);
+    } else {
+      const tiddlerRec = rec["tiddler"] as Record<string, unknown> | undefined;
+      const fields = tiddlerRec ? { title: uri, ...tiddlerRec } : { title: uri };
+      added.push(fields);
+    }
+  }
+
+  return { added, deleted };
+}
+
+/**
+ * Materialize all tiddlers from a LarDoc snapshot (for initial TW5 load after Repo sync).
+ */
+export function allTiddlersFromDoc(
+  doc: Record<string, unknown>,
+): Record<string, unknown>[] {
+  const tiddlers = (doc["tiddlers"] ?? {}) as Record<string, unknown>;
+  const result: Record<string, unknown>[] = [];
+  for (const [uri, rec] of Object.entries(tiddlers)) {
+    const r = rec as Record<string, unknown> & { deleted?: boolean };
+    if (r["deleted"]) continue;
+    const tiddlerRec = r["tiddler"] as Record<string, unknown> | undefined;
+    result.push(tiddlerRec ? { title: uri, ...tiddlerRec } : { title: uri });
+  }
+  return result;
 }

@@ -1,6 +1,13 @@
 /**
  * @lararium/browser — browser vessel for the Lararium causal-islands system.
  *
- * S2: worker runtime bootstrap landed (browser-wiki-worker.ts).
- * Exports expand when consumers arrive — not before.
+ * Worker Sovereignty Law (isomorphic): Worker boots a Repo-in-Worker via transferred
+ * syncPort; derives tiddler state from its own CRDT doc; owns timing via rAF drain.
+ *
+ * Primary exports:
+ *   BrowserVmManager — BrowserAuthorityPool implementation (island routing + lifecycle).
+ *   browser-wiki-worker — Worker entry (compiled separately; not re-exported here).
  */
+
+export { BrowserVmManager } from "./browser-vm-manager.js";
+export type { BrowserVmManagerOptions } from "./browser-vm-manager.js";

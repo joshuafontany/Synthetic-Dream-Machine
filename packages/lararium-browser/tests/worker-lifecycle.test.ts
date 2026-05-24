@@ -72,7 +72,10 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     );
 
     // coreBlob required by BA-5 — fixture ignores bytes but type must be honest.
-    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0)));
+    // syncPort: browser MessageChannel is available globally in dedicated Workers.
+    const { port1: _main, port2: syncPort } = new MessageChannel();
+    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0), syncPort), [syncPort]);
+    _main.close();
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as { type: string }).type === "promote:ack") as WorkerMsg_PromoteAck & { coreBlobByteLength?: number } | undefined;

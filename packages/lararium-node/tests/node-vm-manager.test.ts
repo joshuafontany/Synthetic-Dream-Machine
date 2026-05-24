@@ -186,7 +186,11 @@ describe("NodeVmManager — Worker lifecycle", () => {
     expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
   });
 
-  test("re-mountWiki from cold slot restores snapshot tiddlers", async () => {
+  test("re-mountWiki from cold slot — cold snapshot captured, Worker live after re-mount", async () => {
+    // GP-3 warm-start via snapshotTiddlers in the promote message is @deprecated.
+    // Repo-in-Worker path restores state via CRDT sync over syncPort, not tiddler injection.
+    // This test verifies: (a) cold snapshot captures tiddlers from teardown:ack, and
+    // (b) the re-mounted Worker is live and responsive.
     const collector = eventCollector();
     manager = new NodeVmManager({
       workerScriptUrl: FIXTURE_URL,
@@ -199,20 +203,23 @@ describe("NodeVmManager — Worker lifecycle", () => {
     await new Promise<void>((r) => setTimeout(r, 100));
     await manager.unmountWiki(WIKI_ID);
 
+    // Cold snapshot carries the Worker's final tiddler state (GP-3 teardown:ack path).
     const snap = manager.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
+    expect(snap!.tiddlers.length).toBeGreaterThanOrEqual(1);
 
-    // Re-mount from cold — fixture receives snapshotTiddlers in the promote message.
+    // Re-mount — Worker spawns fresh; slot is hot and responsive.
     await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
     expect(manager.tier(WIKI_ID)).toBe("hot");
 
-    // Route a no-op changeset to confirm the Worker is live.
-    manager.routeChangeset(WIKI_ID, [], []);
+    // Route a changeset to confirm the Worker is live.
+    manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/new", text: "fresh" }], []);
     await new Promise<void>((r) => setTimeout(r, 150));
 
     const echos = collector.events.filter((e) => e.listenable === "changeset:applied");
     expect(echos.length).toBeGreaterThanOrEqual(1);
-    // The fixture starts with snapshotTiddlers seeded, so totalTiddlers > 0 after empty delta.
-    expect(echos.at(-1)!.payload.totalTiddlers).toBeGreaterThanOrEqual(1);
+    // Worker started fresh (no snapshotTiddlers in promote — Repo-in-Worker path).
+    // addedCount reflects only the changeset we just sent.
+    expect(echos.at(-1)!.payload.addedCount).toBe(1);
   });
 });

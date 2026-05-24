@@ -39,8 +39,10 @@
 
 import { getHeads } from "@lararium/mesh";
 import type { Heads } from "@lararium/mesh";
-import { Worker }     from "worker_threads";
-import type { DocHandle, DocHandleChangePayload } from "@automerge/automerge-repo";
+import { Worker, MessageChannel } from "worker_threads";
+import type { MessagePort } from "worker_threads";
+import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
+import type { DocHandle, DocHandleChangePayload, Repo } from "@automerge/automerge-repo";
 import type { LarDoc } from "@lararium/mesh";
 import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
@@ -66,7 +68,12 @@ import type {
 export interface VmSnapshot {
   /** Automerge heads at snapshot capture time. CRDT remains authoritative. */
   heads:      Heads;
-  /** Materialized TW5 tiddler view from the Worker's last teardown:ack. */
+  /** Automerge doc bytes from Worker-side Repo at teardown — preferred warm-start seed. */
+  docBytes?:  Uint8Array;
+  /**
+   * @deprecated GP-3 tiddler snapshot. Remove when lar-wiki-worker fully migrates to
+   * Repo-in-Worker and teardown:ack carries docBytes instead.
+   */
   tiddlers:   Array<Record<string, unknown>>;
   /** Unix ms of capture — for diagnostics and staleness detection. */
   capturedAt: number;
@@ -91,20 +98,28 @@ interface PinnedSlot {
  * Hot: session wiki — TW5Engine lives inside the Worker thread.
  * Main thread never holds the engine reference; all interaction via postMessage.
  *
- * ACK-gate: one changeset batch in-flight at a time per slot.
- * `changesetQueue` holds batches pending delivery; `awaitingAck` blocks dispatch
- * until the Worker emits changeset:ack. The Worker owns the flow rate.
+ * Repo-in-Worker (S4+): CRDT sync flows via `mainPort` ↔ `syncPort` MessageChannel.
+ * Main-thread Repo wires a `MessageChannelNetworkAdapter` to `mainPort`; the Worker
+ * creates its own Repo with the transferred `syncPort`. No oracle delta needed.
+ *
+ * @deprecated GP-3 fields (`changesetQueue`, `awaitingAck`, `unsubChange`) remain
+ * until `lar-wiki-worker.ts` migration completes and all tests pass clean.
  */
 interface WorkerHotSlot {
   tier:           "hot";
   wikiId:         string;
   worker:         Worker;
+  /** Main-thread side of the Worker sync channel. Close on unmount. */
+  mainPort:       MessagePort;
   lastUsedAt:     number;
-  /** Unsubscribe function — removes the docHandle "change" listener. */
+  /**
+   * @deprecated GP-3 oracle path. Repo-in-Worker replaces live delta forwarding.
+   * Remove after lar-wiki-worker migration + test cleanup.
+   */
   unsubChange:    () => void;
-  /** Batches queued while a changeset is in-flight. */
+  /** @deprecated GP-3 oracle path. */
   changesetQueue: WorkerMsg_Changeset[];
-  /** True while waiting for changeset:ack from the Worker. */
+  /** @deprecated GP-3 oracle path. */
   awaitingAck:    boolean;
 }
 
@@ -148,6 +163,12 @@ export interface NodeVmManagerOptions {
    * Route this into the main-thread LarEventBus.
    */
   onWorkerEvent?: (wikiId: string, msg: WorkerMsg_Event) => void;
+  /**
+   * Optional main-thread Automerge Repo. When provided, each hot slot wires
+   * `mainPort` to this Repo via `MessageChannelNetworkAdapter` so the Worker-side
+   * Repo syncs the wiki doc automatically (Repo-in-Worker path).
+   */
+  mainRepo?: Repo;
 }
 
 // ---------------------------------------------------------------------------
@@ -167,10 +188,12 @@ export class NodeVmManager {
   private readonly _docHandles    = new Map<string, DocHandle<LarDoc>>();
   private readonly _workerUrl:    URL;
   private readonly _onWorkerEvent: ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
+  private readonly _mainRepo:      Repo | null;
 
   constructor(options: NodeVmManagerOptions = {}) {
     this._workerUrl     = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
     this._onWorkerEvent = options.onWorkerEvent ?? null;
+    this._mainRepo      = options.mainRepo ?? null;
   }
 
   // ---------------------------------------------------------------------------
@@ -245,23 +268,35 @@ export class NodeVmManager {
     // Register the handle so disposeAll can capture snapshots from the doc.
     this._docHandles.set(wikiId, ctx.docHandle);
 
+    // Create sync channel — main keeps port1, Worker receives port2 (syncPort).
+    const { port1: mainPort, port2: syncPort } = new MessageChannel();
+
+    // Optionally wire mainPort to the main-thread Repo (Repo-in-Worker path).
+    if (this._mainRepo) {
+      const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
+      this._mainRepo.networkSubsystem.addNetworkAdapter(adapter);
+    }
+
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
+    const promoteMsg = mkPromote(wikiId, ctx.coreBlob.bytes, syncPort as unknown as globalThis.MessagePort, null, null);
     await _sendAndAwait<WorkerMsg_PromoteAck>(
       worker,
-      mkPromote(wikiId, ctx.coreBlob.bytes, snapshotTiddlers),
+      promoteMsg,
       "promote:ack",
+      [syncPort],
     );
 
-    // Wire live changeset delivery: on every doc change, derive the tiddler-level
-    // delta from Automerge patches and forward to the Worker (GP-3).
+    // @deprecated GP-3 oracle path: wire live changeset delivery via doc change events.
+    // Remove when lar-wiki-worker Repo-in-Worker migration completes.
     const unsubChange = _subscribeDocChanges(wikiId, ctx.docHandle, this);
 
     this._slots.set(wikiId, {
       tier: "hot",
       wikiId,
       worker,
+      mainPort,
       lastUsedAt:     Date.now(),
       unsubChange,
       changesetQueue: [],
@@ -277,9 +312,10 @@ export class NodeVmManager {
    * Unmount a hot-tier Worker slot via GP-5 teardown handshake.
    *
    * 1. Sends teardown signal.
-   * 2. Awaits teardown:ack (which carries the Worker's final TW5 tiddler state).
-   * 3. Calls worker.terminate().
-   * 4. Moves slot to cold, using the ack's snapshotTiddlers to seed the snapshot.
+   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker) or
+   *    `snapshotTiddlers` (@deprecated GP-3 fallback).
+   * 3. Closes mainPort, calls worker.terminate().
+   * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
    *
    * No-op for pinned slots and slots already in cold.
    */
@@ -287,33 +323,39 @@ export class NodeVmManager {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.tier === "pinned" || slot.tier === "cold") return;
 
-    const { worker, unsubChange } = slot as WorkerHotSlot;
-    unsubChange(); // stop forwarding doc changes before teardown
+    const hotSlot = slot as WorkerHotSlot;
+    // @deprecated GP-3: stop forwarding doc changes before teardown.
+    hotSlot.unsubChange();
 
     let snapshot: VmSnapshot | null = null;
     try {
       const ack = await _sendAndAwait<WorkerMsg_TeardownAck>(
-        worker,
+        hotSlot.worker,
         mkTeardown(),
         "teardown:ack",
       );
+      // Prefer docBytes (Repo-in-Worker); fall back to @deprecated snapshotTiddlers (GP-3).
       const tiddlers = ack.snapshotTiddlers ? [...ack.snapshotTiddlers] : [];
       let heads: Heads = [];
       try {
         const doc = this._docHandles.get(wikiId)?.doc();
         if (doc) heads = getHeads(doc);
-      } catch { /* not a real Automerge doc (e.g. test stub) — use empty heads */ }
-      snapshot = { heads, tiddlers, capturedAt: Date.now() };
+      } catch { /* test stub — use empty heads */ }
+      const snapshotFields: VmSnapshot = { heads, tiddlers, capturedAt: Date.now() };
+      if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
+      snapshot = snapshotFields;
     } catch (err) {
       console.warn(`[vm-manager] ${wikiId}: teardown handshake failed — ${err}; terminating anyway`);
     }
 
-    await worker.terminate();
+    hotSlot.mainPort.close();
+    await hotSlot.worker.terminate();
     this._slots.set(wikiId, { tier: "cold", wikiId, snapshot });
 
-    console.log(
-      `[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapshot ? `${snapshot.tiddlers.length} tiddlers` : "none"})`,
-    );
+    const snapDesc = snapshot
+      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : `${snapshot.tiddlers.length} tiddlers`)
+      : "none";
+    console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
   }
 
   // ---------------------------------------------------------------------------
@@ -321,13 +363,13 @@ export class NodeVmManager {
   // ---------------------------------------------------------------------------
 
   /**
-   * Route a tiddler-level delta to the wiki's hot-tier Worker (GP-3).
+   * Route a tiddler-level delta to the wiki's hot-tier Worker.
+   *
+   * @deprecated GP-3 oracle path. Repo-in-Worker syncs via the MessageChannel
+   * established in `mountWiki`; this method becomes a no-op once all Workers
+   * carry `syncPort` and `lar-wiki-worker` migration completes.
    *
    * ACK-gated: enqueues the batch if a changeset is already in-flight.
-   * The Worker owns the flow rate — main thread waits for changeset:ack
-   * before dispatching the next batch.
-   *
-   * No-op if the wiki slot is not in the hot tier.
    */
   routeChangeset(
     wikiId:  string,
@@ -493,7 +535,7 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
   worker:       Worker,
   msg:          MainToWorkerMsg,
   expectedType: T["type"],
-  transferList: ArrayBuffer[] = [],
+  transferList: (ArrayBuffer | MessagePort)[] = [],
 ): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(
@@ -528,19 +570,17 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
 }
 
 // ---------------------------------------------------------------------------
-// _subscribeDocChanges — live tiddler-delta forwarding to a Worker slot
+// _subscribeDocChanges — @deprecated GP-3 live tiddler-delta forwarding
 // ---------------------------------------------------------------------------
 
 /**
+ * @deprecated GP-3 oracle path. Repo-in-Worker receives CRDT changes directly
+ * via the MessageChannel established in `mountWiki`; this subscription becomes
+ * unreachable once all Workers carry a `syncPort` and `lar-wiki-worker` migration
+ * completes. Remove together with `routeChangeset`, `changesetQueue`, `awaitingAck`.
+ *
  * Subscribe to `docHandle` change events and forward tiddler-level deltas to
  * the Worker via `manager.routeChangeset()`.
- *
- * Automerge-repo emits `change` with `{ doc, patches }` after every local or
- * remote mutation. Patches identify affected paths; we extract unique tiddler
- * URIs and read current field state from the updated doc — no Automerge WASM
- * in the Worker thread needed.
- *
- * Returns an unsubscribe function the caller MUST invoke before teardown.
  */
 function _subscribeDocChanges(
   wikiId:    string,

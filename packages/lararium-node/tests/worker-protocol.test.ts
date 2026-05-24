@@ -13,7 +13,7 @@
  */
 
 import { describe, test, expect, afterEach } from "vitest";
-import { Worker } from "worker_threads";
+import { Worker, MessageChannel } from "worker_threads";
 import {
   isMainToWorkerMsg,
   isWorkerToMainMsg,
@@ -106,7 +106,9 @@ describe("GP-1 — schema_version enforcement", () => {
       [],
     );
     expect(isMainToWorkerMsg(changeset)).toBe(true);
-    expect(isMainToWorkerMsg(mkPromote("lar:///test", new Uint8Array(0)))).toBe(true);
+    const { port2: _p } = new MessageChannel();
+    expect(isMainToWorkerMsg(mkPromote("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
+    _p.close();
     expect(isMainToWorkerMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
     expect(isMainToWorkerMsg(mkTeardown())).toBe(true);
   });
@@ -201,7 +203,8 @@ describe("GP-5 — teardown handshake (integration)", () => {
       (msgs) => (msgs as { type: string }[]).some((m) => m.type === "promote:ack"),
     );
 
-    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0)));
+    const { port2: syncPort } = new MessageChannel();
+    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0), syncPort as unknown as globalThis.MessagePort), [syncPort]);
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as WorkerMsg_PromoteAck).type === "promote:ack") as WorkerMsg_PromoteAck | undefined;
