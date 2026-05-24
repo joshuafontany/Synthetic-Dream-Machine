@@ -26,7 +26,7 @@ role = "root template meme for RPG-facing /api/powers memes"
 
 An `/api/powers` meme describes one playable Power pattern.
 
-It should load during play without dragging render recipes, source archaeology, chat notes, or conversion debate into the hot path. It may link those colder memes through short edges.
+It should load during play without dragging render recipes, source archaeology, chat notes, or conversion debate into the hot path. It may link those colder memes through `loulou` edges.
 
 Use this template when adding or refactoring `api/powers/*` memes.
 <<~/ahu >>

@@ -39,8 +39,8 @@ Witness reading:
 
 - The spell lets the magic-user read magical words and runes, not speak ordinary languages.
 - Scrolls, item runes, and spellbook writing sit inside the expected target set.
-- Unfamiliar magical writing requires the spell before it can be understood.
-- Once read through the spell, that writing can be read or spoken later without recasting.
+- Unfamiliar magical writing requires the spell before a reader understands it.
+- Once the spell opens that writing, the reader can read or speak it later without recasting.
 - Spellbooks use magical writing. Owners can read their own books without this spell.
 <<~/ahu >>
 
