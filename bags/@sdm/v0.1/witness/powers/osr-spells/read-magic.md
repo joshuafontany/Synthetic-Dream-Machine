@@ -29,7 +29,7 @@ role = "OSR spell witness for Read Magic"
 name = "Read Magic"
 lane = "Magic-User 1"
 range = "0"
-duration = "1 turn"
+duration = "1 turn (10 minutes)"
 effect = "the magic-user only"
 reversible = false
 school = "none in BECMI surface"
@@ -83,7 +83,7 @@ Read Magic
 name = "Read Magic"
 lane = "Magic-User 1"
 range = "0"
-duration = "1 turn"
+duration = "1 turn (10 minutes)"
 effect = "the spellcaster only"
 reversible = false
 school = "none in BECMI surface"
