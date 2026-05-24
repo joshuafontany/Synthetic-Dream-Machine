@@ -7,8 +7,10 @@
  *
  *   1. Worker boots a Repo-in-Worker via the transferred `syncPort` (MessagePort).
  *   2. Worker derives tiddler state from its own CRDT doc — never from main-thread deltas.
- *   3. Worker owns its timing via `requestAnimationFrame`. Incoming CRDT changes accumulate
- *      in `_pendingAdded` / `_pendingDeleted`; the rAF callback drains them each frame.
+ *   3. Worker owns its timing via `requestAnimationFrame` (Chromium/Firefox) with a
+ *      `setTimeout(16ms)` fallback for Safari, which has not shipped rAF in Workers.
+ *      Incoming CRDT changes accumulate in `_pendingAdded` / `_pendingDeleted`;
+ *      the drain callback fires each frame (or frame-equivalent tick).
  *   4. `changeset:ack` fires at the END of each rAF drain — frame-completion signal.
  *   5. `WorkerMsg_Changeset` from main thread is handled only as a deprecated GP-3 fallback.
  *
@@ -65,10 +67,17 @@ let _pendingDeleted: string[]                  = [];
 let _rafScheduled                              = false;
 let _activeWikiUri                             = "";
 
+// Safari does not ship requestAnimationFrame in DedicatedWorkerGlobalScope.
+// Fall back to a 16ms setTimeout (≈60fps) so the drain loop runs on all browsers.
+const _scheduleFrame: (cb: () => void) => void =
+  typeof self.requestAnimationFrame === "function"
+    ? (cb) => self.requestAnimationFrame(cb)
+    : (cb) => setTimeout(cb, 16);
+
 function _scheduleRafDrain(): void {
   if (_rafScheduled) return;
   _rafScheduled = true;
-  self.requestAnimationFrame(() => {
+  _scheduleFrame(() => {
     _rafScheduled = false;
     const added   = _pendingAdded.splice(0);
     const deleted = _pendingDeleted.splice(0);

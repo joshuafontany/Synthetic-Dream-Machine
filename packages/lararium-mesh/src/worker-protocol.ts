@@ -7,14 +7,20 @@
  *
  *   1. Every Worker boots a Repo-in-Worker via a transferred `syncPort` (MessagePort).
  *   2. The Worker derives tiddler state from its own CRDT doc — never from main-thread oracle deltas.
- *   3. The Worker owns its timing via requestAnimationFrame (browser) / setInterval (Node).
- *      Tiddler deltas accumulate; the Worker drains at frame boundary, not on message receipt.
+ *   3. The Worker owns its timing. Browser: requestAnimationFrame (Chromium/Firefox) with
+ *      setTimeout(16ms) fallback for Safari (no rAF in Workers as of 2026). Node:
+ *      setInterval(16ms).unref(). Tiddler deltas accumulate; the Worker drains at each
+ *      frame boundary (or frame-equivalent tick), never on raw message receipt.
  *   4. `changeset:ack` is a frame-completion signal: the Worker fires it after each rAF drain,
  *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
  *   5. `WorkerMsg_Changeset` is @deprecated — CRDT sync via `syncPort` replaces it.
  *      It survives only for the Node GP-3 oracle path pending NodeVmManager migration.
  *   6. `WorkerMsg_Promote` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
  *      for `repo.find()`), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
+ *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
+ *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
+ *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
+ *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.

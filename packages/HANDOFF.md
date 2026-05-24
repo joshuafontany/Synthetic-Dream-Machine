@@ -66,6 +66,101 @@ coordination surface, and explicit operator promotion for canon. Web3 only —
 no web2 models/code/flows in Lares stack.
 ```
 
+## What Changed This Turn (2026-05-24 turn 20)
+
+### Worker Sovereignty Law — Isomorphic Vessel Model + GP-3 Deprecation Sprint
+
+**Worker Sovereignty Law enacted.** Seven clauses (plus §7 mainPort, §3 Safari
+note) now live in `packages/lararium-mesh/src/worker-protocol.ts` as the
+canonical doctrine comment. Isomorphic across all vessel types — node, browser,
+and any future third vessel.
+
+**`worker-protocol.ts` protocol evolution (mesh):**
+- `WorkerMsg_Promote` reshaped: `snapshotTiddlers` removed; `syncPort: MessagePort`
+  (transferred, required), `docUrl: string | null`, `coreHash: string | null` added.
+- `mkPromote(wikiUri, coreBlob, syncPort, docUrl?, coreHash?)` — new signature.
+  `syncPort` is the third positional arg; not optional.
+- `WorkerMsg_TeardownAck`: `docBytes?: Uint8Array` added (preferred); `snapshotTiddlers`
+  marked `@deprecated GP-3`.
+- `mkTeardownAck(opts)` factory: opts-object form, `exactOptionalPropertyTypes`-safe.
+- NEW `extractTiddlerDeltaFromPatches(doc, patches)` — Worker-side tiddler delta from
+  Automerge patches. Removes the oracle-on-main-thread need.
+- NEW `allTiddlersFromDoc(doc)` — materialize all tiddlers for initial TW5 load.
+- `WorkerMsg_Changeset` + `mkChangeset` + `mkChangesetAck` marked `@deprecated GP-3`.
+- Worker Sovereignty Law §7: vessel MUST close `mainPort` before/after `terminate()`.
+  Structural invariant, not convention. Both vessels enforce it.
+- Worker Sovereignty Law §3: Safari rAF gap named — `setTimeout(16)` fallback required.
+
+**`browser-wiki-worker.ts` — fully implemented (browser vessel):**
+- Repo-in-Worker via transferred `syncPort`.
+- `requestAnimationFrame` drain with `typeof self.requestAnimationFrame === "function"`
+  guard + `setTimeout(16)` Safari fallback. Both paths map to `_scheduleFrame`.
+- `automergeSave` on teardown — `docBytes` in `teardown:ack` preferred over tiddler list.
+- GP-3 fallback: `changeset` messages push to pending arrays (deprecated path survives).
+
+**`BrowserVmManager` — new file (browser vessel):**
+- `MessageChannel` per slot: main keeps `port1`, Worker receives `port2` (syncPort).
+- Optional `mainRepo?: Repo` — when provided, wires `MessageChannelNetworkAdapter(port1)`.
+- `acquire/preWarm/evict/disposeAll` implement `BrowserAuthorityPool`.
+- `_makeLease()` stub: `filterTiddlers` / `renderMeme` `@deprecated` pull RPCs → `[]`/`null`.
+- `mainPort.close()` before `worker.terminate()` in `evict()` — law §7 compliant.
+
+**`lar-wiki-worker.ts` — Repo-in-Worker path wired (node vessel):**
+- `setInterval(16ms).unref()` drain loop — does not hold process alive.
+- `syncPort` presence gated: if provided, boots Repo-in-Worker + subscribes handle.
+  If absent, GP-3 deprecated changeset path remains active for backward compat.
+- `automergeSave` on teardown — `docBytes` captured when `_docHandle` non-null.
+
+**`NodeVmManager` — GP-3 deprecation markers + MessageChannel wiring:**
+- `WorkerHotSlot`: `mainPort: MessagePort` added (structural). `unsubChange`,
+  `changesetQueue`, `awaitingAck` marked `@deprecated GP-3 oracle path`.
+- `NodeVmManagerOptions`: `mainRepo?: Repo` added — optional CRDT sync wiring.
+- `mountWiki`: creates `MessageChannel`; optionally wires `mainPort` →
+  `MessageChannelNetworkAdapter` on mainRepo; passes `syncPort` in `mkPromote`;
+  transfers `[syncPort]` in `postMessage`.
+- `unmountWiki`: closes `mainPort`, captures `docBytes` from `teardown:ack` into
+  `VmSnapshot.docBytes` (preferred). Tiddler count log updated to show docBytes size.
+- `routeChangeset`: marked `@deprecated GP-3 oracle path`.
+- `_subscribeDocChanges`: marked `@deprecated GP-3 oracle path`.
+- `VmSnapshot.docBytes?: Uint8Array` added; `tiddlers` marked `@deprecated GP-3`.
+- `_sendAndAwait` transferList typed `(ArrayBuffer | MessagePort)[]` — avoids stale
+  `TransferListItem` deprecated alias from `@types/node`.
+
+**`WorkerAuthorityHandler` refactored (`@lararium/tw5`):**
+- New sovereignty-law API: `bootTw5(wikiUri, coreBlob)`, `applyDelta(wikiUri, added, deleted)`,
+  `sendPromoteAck(wikiUri)`, `sendChangesetAck(wikiUri, frameId)`, `teardown()`.
+- `handleMessage(raw)` marked `@deprecated` — kept for GP-3 fixture Workers.
+- `TeardownResult` interface exported.
+
+**Tests updated:**
+- `worker-protocol.test.ts` (node): `mkPromote` calls updated to supply `MessagePort`
+  from `new MessageChannel()`.
+- `worker-lifecycle.test.ts` (browser): same `mkPromote` signature fix.
+- `node-vm-manager.test.ts`: `re-mountWiki` test reframed — asserts cold snapshot
+  captures tiddlers (GP-3 teardown path) and re-mounted Worker is live + responsive.
+  Removes `totalTiddlers >= 1` assertion (warm-start now requires Repo sync, not
+  tiddler injection in promote).
+
+**Safari rAF gap patched:**
+- `browser-wiki-worker.ts`: `_scheduleFrame` const detects `typeof self.requestAnimationFrame`
+  at module load; falls back to `setTimeout(cb, 16)`. Zero cost when rAF is available.
+
+**Research findings (two agents):**
+- Automerge `MessageChannelNetworkAdapter` is the official Repo-in-Worker adapter — on golden path.
+- Safari shows no intent to ship `DedicatedWorkerGlobalScope.requestAnimationFrame` (as of 2026).
+- Comlink documents the GC leak pattern for MessagePort — our `mainPort.close()` law is correct defense.
+- No prior art combines CRDT-in-Worker + MessageChannel isolation + causal island framing cohesively. Pattern appears novel.
+- Closest federation ancestors: SSB sigchain gossip (topology), Spritely OCapN/CapTP (capability routing), DXOS HALO (identity). None combine all three.
+- Gap confirmed: no system combines invite-only bootstrapping + independent operator storage + capability-based cross-operator trust.
+
+**Metrics:** 192/192 tests pass (mesh 67, tw5 81, node 40, browser 4). All packages typecheck clean.
+
+**`docUrl` federation seam:** remains `null` in both vessels. When non-null, a Worker
+calling `repo.find(docUrl).whenReady()` will sync a remote bag without any protocol change.
+The archipelago forms the moment a bag mirror config carries a remote AutomergeUrl.
+
+---
+
 ## What Changed This Turn (2026-05-22 turn 19)
 
 ### lararium-browser S2 + YIN bag-URI ontology sprint

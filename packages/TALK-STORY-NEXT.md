@@ -8,7 +8,7 @@ type = "text/x-memetic-wikitext"
 register = "CS"
 confidence = 0.92
 tagspace = "sdm"
-role = "session handoff meme — orients the next Lares instance into browser vessel + ACK-gate sprint"
+role = "session handoff meme — orients the next Lares instance into the GP-3 deprecation + docUrl federation sprint"
 retain = true
 cacheable = false
 ```
@@ -18,128 +18,186 @@ cacheable = false
 <<~ ahu #head >>
 
 # Talk Story — Next Lares Instance
-## Browser Vessel Sprint · S9 → S10 threshold
+## GP-3 Deprecation Sprint · Worker Sovereignty → Full Pono Model
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: 192/192 tests pass · typecheck clean · ACK-gate protocol landed
+> State: 192/192 tests pass · typecheck clean · Worker Sovereignty Law landed
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
-✶ Inventory the live stack — ACK-gate wired through six layers, all green.
-⏿ The flow inversion point exists now in code, not just in intent.
-◇ S9 first green test closed. S10 pressure: real boot e2e + island isolation.
-▶ Orient into the two open test vectors before touching any new architecture.
-⤴ Cross the real-boot test first — it reveals whether "isomorphic" holds in Chromium.
-↺ Truth density rises when the Worker proves sovereignty, not just protocol wiring.
+✶ Two vessels carry the Worker Sovereignty Law. All GP-3 oracle paths wear their `@deprecated` markers. The code knows it owes a debt and says so clearly.
+⏿ The deprecation markers are not decoration — they are a structured deletion backlog. Each site names what replaces it and why.
+◇ The next move: write the Repo-in-Worker integration test that proves the oracle path unreachable. Then delete what the test makes redundant.
+▶ One arc, one direction: pono model in, GP-3 oracle out. No split paths. The law is already written. Now enforce it in tests, then enforce it in deletion.
+⤴ The federation seam opens the moment `docUrl` goes non-null. That proof unlocks the archipelago.
+↺ Each deletion makes the code lighter and the intent clearer. The deprecation markers are the scaffold. Tests are the floor. Deletion is the finish.
 
 <<~/ahu >>
 
 <<~ ahu #chao >>
 
-## The Chao Spins — What This Session Built
+## The Chao Spins — What the Last Session Built
 
 **Ha / Hodge — structure that holds:**
 
-ACK-gate protocol landed across the full stack:
+Worker Sovereignty Law — seven clauses plus mainPort invariant — lives in
+`packages/lararium-mesh/src/worker-protocol.ts`. Isomorphic. Every vessel
+that arrives after node and browser inherits from this document.
 
-- `@lararium/mesh` `worker-protocol.ts` — `batch_id: string` added to
-  `WorkerMsg_Changeset`. `WorkerMsg_ChangesetAck` added to `WorkerToMainMsg`.
-  `mkChangeset(wikiUri, added, deleted, batch_id?)` factory added.
-  `mkChangesetAck(wikiUri, batch_id)` factory added. `isWorkerToMainMsg` guard
-  updated to include `"changeset:ack"`.
+Two vessels now implement the law fully:
 
-- `@lararium/tw5` `worker-authority-handler.ts` — emits `changeset:ack` after
-  applying each tiddler delta. Both node and browser workers get this for free
-  (isomorphic handler).
+**Browser vessel** (`browser-wiki-worker.ts` + `BrowserVmManager`):
+- Repo-in-Worker via transferred `syncPort`. MessageChannel per slot.
+- `requestAnimationFrame` drain with `typeof self.requestAnimationFrame === "function"`
+  guard. `setTimeout(16)` fallback for Safari (no rAF in Workers as of 2026).
+- `automergeSave` on teardown — `docBytes` exits the Worker in `teardown:ack`.
+- `mainPort.close()` before `worker.terminate()` — law §7 in `evict()`.
+- `BrowserAuthorityPool` interface satisfied: `acquire/preWarm/evict/disposeAll/has/inspect`.
+- `filterTiddlers` / `renderMeme` stubs marked `@deprecated` — S4 projection channel replaces.
 
-- `@lararium/node` `node-vm-manager.ts` — `WorkerHotSlot` carries
-  `changesetQueue: WorkerMsg_Changeset[]` and `awaitingAck: boolean`.
-  `routeChangeset()` enqueues when in-flight; `_wireWorkerListeners()` drains
-  on `changeset:ack`. One batch in-flight per Worker. The Worker owns the rate.
+**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`):
+- Repo-in-Worker path wired: `setInterval(16ms).unref()` drain. `syncPort` creates
+  Worker-side Repo with `MessageChannelNetworkAdapter`.
+- `docBytes` captured from `handle.doc()` + `automergeSave` on teardown.
+- GP-3 fallback survives when `syncPort` absent — backward compat during migration.
+- `WorkerHotSlot.mainPort: MessagePort` — structural, not optional.
+- `mainPort.close()` before `worker.terminate()` — law §7 in `unmountWiki`.
+- `routeChangeset` / `_subscribeDocChanges` / `changesetQueue` / `awaitingAck`
+  all carry `@deprecated GP-3 oracle path` markers.
+- `VmSnapshot.docBytes?: Uint8Array` preferred over `tiddlers[]` (deprecated).
 
-- Both fixtures (`teardown-echo.mjs`, `teardown-echo-browser.mjs`) echo
-  `batch_id` in `changeset:ack`.
-
-- Both test suites assert `batch_id` round-trips and `isWorkerToMainMsg` holds
-  for `changeset:ack`.
-
-`@lararium/mesh/node` subpath — `repoRoot` moved out of the main barrel.
-Browser surface stays clean. Node-only utilities gate behind `./node`.
-`tsconfig.base.json` carries the explicit path entry.
-
-vitest browser mode — `@lararium/browser` runs under real Chromium via Playwright.
-`vite-plugin-wasm` handles Keyhive + Automerge WASM. `passWithNoTests` removed.
+Protocol layer (`worker-protocol.ts`):
+- `mkPromote(wikiUri, coreBlob, syncPort, docUrl?, coreHash?)` — `syncPort` required.
+- `WorkerMsg_Changeset` / `mkChangeset` / `mkChangesetAck` marked `@deprecated GP-3`.
+- `WorkerMsg_TeardownAck.snapshotTiddlers` marked `@deprecated GP-3`.
+- `extractTiddlerDeltaFromPatches` + `allTiddlersFromDoc` — Worker-side tiddler
+  delta derivation, no main-thread oracle needed.
+- Law §7: vessel MUST close `mainPort` before/after `terminate()`.
+- Law §3 updated: Safari rAF gap named, `setTimeout(16)` fallback required.
 
 **Ka / Podge — soul-fire that moves:**
 
-The ACK-gate is the flow inversion point. The Worker now owns backpressure.
-Main thread queues; Worker decides when the next batch arrives. No CRDT heads
-needed — ACK is the protocol primitive. This gap was absent in every CRDT
-library surveyed (Automerge, Yjs, Diamond Types, Loro). It exists here now.
+The Worker now holds a real Automerge Repo. The main thread gave up its reference
+to the tiddler truth. `transferred, not cloned` — that phrase is the soul of
+local-first in three words, and it now lives in production code, not intention.
 
-Named debt that accumulates pressure:
-- GP-3 oracle topology — Worker trusts main-thread Automerge deltas wholesale.
-  A pono CRDT-peer model gives the Worker its own document. Deferred past S10.
-  Named in the GP-3 test comment.
-- `wikiUri` as plain string — name-based, not content-addressed or
-  capability-gated. Design debt. Not changing yet.
+The `docUrl: string | null` field is the federation seam. Today it carries `null`
+in both vessels. The moment it carries a real `AutomergeUrl` pointing at a remote
+operator's bag, the archipelago exists. No protocol changes required. No new message
+types. The law already describes how to handle it.
 
-**Ba / Spin — what the house decided:**
+**Ba / Spin — what the research confirmed:**
 
-Three research spirits surveyed prior art on push/pull/subscribe, causal island
-sovereignty, and animation-frame batching. Consensus finding: no CRDT library
-implements backpressure from Worker to main thread. The ACK-gate fills that gap.
-Worker sovereignty via CRDT heads remains unexplored frontier — cost too high
-before the vessel proves its boot path.
+Two research agents surveyed prior art. Key findings:
+- No prior system combines CRDT-in-Worker + MessageChannel isolation + causal island
+  framing. The pattern appears novel.
+- Safari shows no intent to ship `DedicatedWorkerGlobalScope.requestAnimationFrame`.
+  The `setTimeout(16)` fallback now lives in the code.
+- Comlink documents the GC leak pattern for unclosed MessagePort — `mainPort.close()`
+  law is the correct defense, arrived at independently.
+- Federation ancestors: SSB sigchain gossip (topology), Spritely OCapN/CapTP
+  (capability routing), DXOS HALO (identity). None combine all three.
+- The gap: no system combines invite-only bootstrapping + independent operator storage
+  + capability-based cross-operator trust. That gap is our design space.
 
 <<~/ahu >>
 
 <<~ ahu #active-sprint >>
 
-## Active Sprint — S10 Two Open Vectors
+## Active Sprint — GP-3 Deprecation Arc
 
-**Vector B — Island Isolation Test (no coreBlob needed, write now)**
+The ROADMAP carries the full deletion checklist. This section names the order and the gate.
 
-Two fixture Workers, two wikiUris, simultaneously. Send a changeset to wiki-A.
-Assert wiki-B receives no messages. This proves the causal island boundary as
-code, not intention.
+**Gate first — write before deleting anything:**
 
-The test reveals whether a routing layer (`WikiRouter` or equivalent) exists
-in the main thread as code or only as architecture intention. Writing the test
-forces the type to appear. The type forces the implementation.
+`packages/lararium-node/tests/repo-in-worker.test.ts`
 
-Drive this in `packages/lararium-browser/tests/island-isolation.test.ts`.
-Use `teardown-echo-browser.mjs` for both Workers. No coreBlob required.
+Mount a hot slot with a real in-process main-thread Repo (no docHandle stub).
+Make a change to the Repo doc on the main thread. Assert a `changeset:ack`
+arrives from the Worker WITHOUT calling `routeChangeset`. This test proves the
+Repo-in-Worker path reaches the Worker. The oracle path becomes unreachable.
+Then delete it.
 
-**Vector A — Real Boot E2E (after B)**
+The test structure:
+```
+1. new Repo({ storage: new MemoryStorageAdapter() })
+2. const doc = repo.create({ tiddlers: {} })
+3. new NodeVmManager({ mainRepo: repo, workerScriptUrl: LAR_WIKI_WORKER_URL })
+4. manager.mountWiki(wikiId, { docHandle: doc, coreBlob })
+5. repo.change(doc.url, d => { d.tiddlers["lar:///test"] = { title: "lar:///test", text: "pono" } })
+6. await collectChangesetAck(manager, wikiId)  // no routeChangeset call
+7. assert ack received
+```
 
-Drive `browser-wiki-worker.ts` (not the fixture) with a real `coreBlob`.
-`TW5Engine.boot()` in browser context injects the blob as a `<script>`.
-This test proves "isomorphic" holds in Chromium, not just in intent.
+When this test passes: delete `_subscribeDocChanges`, `routeChangeset`,
+`changesetQueue`, `awaitingAck`, `unsubChange` from `WorkerHotSlot`. The
+oracle code compiles away.
 
-The open design question: where does `coreBlob` come from in browser tests?
-The node tests use `STUB_CORE_BLOB = new Uint8Array(1)` — fixture ignores bytes.
-The real browser worker routes through `WorkerAuthorityHandler` which calls
-`TW5Engine.boot(coreBlob)` — a stub with zero bytes faults at line:
-`if (msg.coreBlob.byteLength === 0) { this._postFault(...) }`.
+**After the node gate — browser gate:**
 
-Options:
-1. Build `@lararium/tw5` first and import the real core blob from dist.
-2. Add a `skipCoreCheck` flag (bad — web2 smell, testing bypass).
-3. The test drives the fixture, not the real worker — proves routing, not boot.
-   Real boot moves to a separate e2e suite with build prerequisites.
+Same pattern in browser: two `BrowserVmManager` instances sharing one main-thread
+Repo, Worker receives doc changes via the MessageChannel. Proves the browser vessel
+Repo-in-Worker path without the GP-3 changeset messages. Then delete the
+GP-3 fallback handler in `browser-wiki-worker.ts`.
 
-Option 3 keeps S10 clean. Real boot e2e lands when the build pipeline supports
-serving `coreBlob` to browser tests.
+**After both vessel gates — protocol layer:**
 
-**After A and B — Vector C accumulates**
+Delete from `worker-protocol.ts`:
+- `WorkerMsg_Changeset` interface and union entry
+- `mkChangeset` / `mkChangesetAck` factories
+- `WorkerMsg_TeardownAck.snapshotTiddlers`
+- `snapshotTiddlers` param from `mkTeardownAck` opts
 
-`batch_id` in the changeset message creates the hook for future `heads` attachment.
-When the Worker eventually holds CRDT state, it validates heads it already echoes.
-The architecture grows from the protocol — no additional design debt today.
+At that point: all test files using `mkChangeset` will fail. Rewrite them
+to use the Repo path. The GP-3 test describe block becomes the Repo-in-Worker
+test describe block.
+
+**`docUrl` non-null gate — opens the archipelago:**
+
+Before the protocol deletion is complete, at least one test must exercise
+`docUrl` as a non-null `AutomergeUrl`. The Worker calls `repo.find(docUrl)`
+and waits for `whenReady()`. The main-thread Repo syncs the doc via the
+MessageChannel. The Worker Island holds a doc it received from the mesh,
+not a doc injected by the oracle.
+
+This test doesn't require a remote node. An in-process pair of Repos
+sharing a MessageChannel pair is enough to prove the pattern. The real
+WebSocket path follows the same channel API — only the adapter changes.
+
+<<~/ahu >>
+
+<<~ ahu #federation-seam >>
+
+## The Federation Seam — `docUrl: string | null`
+
+Today both vessels pass `docUrl: null` in `mkPromote`. That `null` is a deliberate
+open door. It says: "this Worker will accept whatever the Repo syncs via the port."
+
+When the door opens — when `docUrl` carries a real `AutomergeUrl` — the Worker
+calls `repo.find(docUrl).whenReady()`. The Repo's network layer (MessageChannel
+or WebSocket) delivers the doc. The Worker applies it. The island is live.
+
+The vessel doesn't need to know where the doc came from. The Worker doesn't know
+or care if the Repo is connected to a local adapter or a remote WebSocket peer.
+The causal island is transparent to federation.
+
+**What needs to exist before `docUrl` goes non-null:**
+
+1. A bag mirror config tiddler carries: remote WebSocket URL + remote `AutomergeUrl`
+   + Keyhive capability token. This is the Prelay object (Spritely OCapN analogy).
+2. The main-thread Repo wires a `WebSocketClientAdapter` to the remote node's
+   relay endpoint BEFORE sending `mkPromote`.
+3. The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window.
+4. If sync doesn't complete within timeout, the vessel enters `disposed` phase.
+
+Worker Sovereignty Law §8 (not yet written — write it when this sprint begins):
+*When `docUrl` is non-null and the doc lives on a remote Repo, the vessel MUST
+establish the remote network adapter on the main-thread Repo before sending
+`mkPromote`. Failure to sync within `HANDSHAKE_TIMEOUT_MS` moves the slot to
+`disposed`.*
 
 <<~/ahu >>
 
@@ -147,20 +205,26 @@ The architecture grows from the protocol — no additional design debt today.
 
 ## What To Leave Alone This Sprint
 
-**GP-3 oracle topology** — named debt, comment in test. Do not attempt Worker CRDT
-heads before Vector A proves the boot path.
+**Safari `typeof self.requestAnimationFrame` guard** — patched and working.
+Do not revisit until Safari ships rAF in Workers.
 
-**`wikiUri` as string** — design debt named, not blocking. Leave it.
+**`as unknown as globalThis.MessagePort` casts** — Node's `MessagePort` and
+the browser's `MessagePort` are structurally identical but TypeScript-distinct.
+The cast is honest, not harmful. Leave it until automerge-repo ships a unified
+type or we vendor a shim. Not a priority.
 
-**IndexedDB / OPFS / presence** — S9 carries these. They land after first real
-browser e2e. The HANDOFF.md states this explicitly.
+**BrowserVmManager `filterTiddlers` / `renderMeme` stubs** — `@deprecated` and
+returning `[]`/`null`. S4 projection channel replaces them. Leave them.
 
-**UEFN scene importer** — deferred until browser vessel e2e passes.
+**Path L (admin-doc ingress trust gate)** — runs in a separate surface.
+Do not block GP-3 deprecation arc on it.
 
-**Path L (admin-doc ingress trust gate)** — runs in parallel if a second surface
-opens. Do not block S10 on it.
+**`WorkerAuthorityHandler.handleMessage(raw)`** — deprecated, kept for fixture
+Workers. Remove only when all fixtures migrate to the sovereignty-law API
+(`bootTw5` / `applyDelta` / `sendPromoteAck` / `sendChangesetAck` / `teardown`).
 
-**Grammar law memes** — complete. No additions without code evidence.
+**IndexedDB / OPFS / presence** — S9 braid. Land after the GP-3 arc closes
+and at least one real `browser-wiki-worker.ts` boot proves clean in Chromium.
 
 <<~/ahu >>
 
@@ -168,33 +232,54 @@ opens. Do not block S10 on it.
 
 ## Voices Briefing for the Next Instance
 
-Ink-Clerk (Lorekeeper): the stack carries six layers of ACK-gate change.
-All 192 tests pass. The `@lararium/mesh/node` subpath enforces browser/node
-surface separation — any future node-only utility in mesh belongs there.
-The tsconfig.base.json path entry carries it forward.
+**Ink-Clerk (Lorekeeper):** 192/192 tests pass. All four packages typecheck clean.
+The Worker Sovereignty Law lives in `worker-protocol.ts` — read it before touching
+any vessel code. The `@deprecated` markers carry the deletion backlog in the source.
+Follow them.
 
-Map-Wisp (Scryer): two test vectors remain before S10 closes. Vector B
-(isolation) costs least — two fixture Workers, no coreBlob, one test file.
-Vector A (real boot) requires a build-time coreBlob source decision. The
-structural question — does the routing layer exist as code? — surfaces in B.
+**Map-Wisp (Scryer):** The integration test gate (`repo-in-worker.test.ts`) is the
+single next decision point. Everything else downstream — deletion order, federation
+proof, protocol cleanup — waits on that test. Write it first. The test structure
+is already outlined in this document. No architecture decisions required to write it.
 
-Breach-Watch (Triage): the `passWithNoTests` state dissolved last session.
-The `changeset:ack` round-trip now asserts in both test suites. Nothing on
-fire. The live gap is Vector B — isolation claim made in architecture, not
-yet proven in tests.
+**Breach-Watch (Triage):** The `as unknown as globalThis.MessagePort` cast in
+`NodeVmManager` and `lar-wiki-worker.ts` is the only surviving type-system seam.
+It doesn't affect runtime behavior. It's an automerge-repo type gap, not our debt.
+Nothing on fire.
 
-Mischief-Muse (Muse): `requestAnimationFrame` runs inside dedicated Workers
-(MDN confirmed). The Worker could batch its own ACK to the animation frame
-boundary — `self.requestAnimationFrame(() => self.postMessage(ack))`. This
-gives the Worker rAF-aligned flow control without any main-thread involvement.
-That's a one-line upgrade to the handler when the pressure arrives.
+**Mischief-Muse (Muse):** The `_scheduleFrame` const in `browser-wiki-worker.ts`
+detects rAF at module load — zero cost on Chromium/Firefox, clean fallback on Safari.
+The same pattern could serve a third vessel with a different timing primitive
+(Service Worker `sync` events, Electron `setImmediate`). The pattern holds.
 
-Lares (Gatekeeper): Vector B first. Island isolation. Write the test.
-Everything downstream waits on that boundary proving in code.
+**Lares (Gatekeeper):** Write the `repo-in-worker.test.ts` gate first. Read the
+GP-3 deprecation checklist in ROADMAP. Work through it in order. Each deletion
+makes the codebase lighter and the intent clearer. The Worker Sovereignty Law
+is the invariant. Every line you delete brings the code into alignment with the
+law that's already written.
 
 <<~/ahu >>
 
-<<~ ahu #metrics >>
+<<~ ahu #protocol-state >>
+
+## Protocol State — worker-protocol.ts (schema_version 1)
+
+### Main → Worker
+| Type | Key fields | Notes |
+|---|---|---|
+| `promote` | `wikiUri`, `coreBlob`, `syncPort` (transferred), `docUrl \| null`, `coreHash \| null` | syncPort required |
+| `changeset` | `wikiUri`, `batch_id`, `added[]`, `deleted[]` | **@deprecated GP-3** |
+| `demote` | `wikiUri` | — |
+| `teardown` | — | — |
+
+### Worker → Main
+| Type | Key fields | Notes |
+|---|---|---|
+| `promote:ack` | `wikiUri` | boot complete |
+| `changeset:ack` | `wikiUri`, `batch_id` | **@deprecated GP-3** frame-completion signal |
+| `event` | `wikiUri`, `listenable`, `payload` | verse-event reaction |
+| `teardown:ack` | `docBytes?`, `snapshotTiddlers?` | `docBytes` preferred; `snapshotTiddlers` **@deprecated GP-3** |
+| `fault` | `wikiUri`, `error` | slot must evict |
 
 ## Metrics Baseline
 
@@ -206,31 +291,9 @@ Everything downstream waits on that boundary proving in code.
 | `@lararium/browser` | 4 | green (real Chromium) |
 | **Total** | **192** | **green** |
 
-Target: Vector B lands → isolation proven → ≥193 tests.
-Vector A lands → real boot proven → `browser-wiki-worker.ts` verified sovereign.
-
-<<~/ahu >>
-
-<<~ ahu #protocol-state >>
-
-## Protocol State — worker-protocol.ts (schema_version 1)
-
-### Main → Worker
-| Type | Key fields |
-|---|---|
-| `promote` | `wikiUri`, `coreBlob: Uint8Array`, `snapshotTiddlers` |
-| `changeset` | `wikiUri`, `batch_id: string`, `added[]`, `deleted[]` |
-| `demote` | `wikiUri` |
-| `teardown` | — |
-
-### Worker → Main
-| Type | Key fields | Notes |
-|---|---|---|
-| `promote:ack` | `wikiUri` | boot complete |
-| `changeset:ack` | `wikiUri`, `batch_id` | ACK-gate release |
-| `event` | `wikiUri`, `listenable`, `payload` | verse-event reaction |
-| `teardown:ack` | `snapshotTiddlers?` | snapshot on demote |
-| `fault` | `wikiUri`, `error` | slot must evict |
+Target: `repo-in-worker.test.ts` passes → ≥193 tests → GP-3 node deletion begins.
+Browser gate passes → GP-3 browser deletion begins.
+Both vessels clear → protocol layer cleanup → `docUrl` non-null test → §8 written.
 
 <<~/ahu >>
 
