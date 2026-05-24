@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/api/powers/read-magic"
 file-path = "bags/@sdm/v0.1/api/powers/read-magic.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "ftls"
+tagspace = "sdm"
 register = "CS"
 confidence = 0.84
 mana = 0.72

@@ -1,126 +1,178 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/handoff/talk-story-next >>
+```toml iam
+uri-path = "ha.ka.ba/@sdm/v0.1/handoff/talk-story-next"
+file-path = "packages/TALK-STORY-NEXT.md"
+type = "text/x-memetic-wikitext"
+register = "CS"
+confidence = 0.88
+tagspace = "sdm"
+role = "session handoff meme — orients the next Lares instance into browser vessel sprint"
+retain = true
+cacheable = false
+```
+
+<<~&#x0002;>>
+
+<<~ ahu #head >>
+
 # Talk Story — Next Lares Instance
-## Grammar Law Corpus Stabilized · Research Consume Pass Continues
+## Browser Vessel Sprint · S9 Active
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: 167/167 tests pass · typecheck clean · grammar fully self-hosted in SharktoothSigil tiddlers
+> State: 188/188 tests pass · typecheck clean · `@lararium/browser` scaffolded, no exports yet
 
----
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+✶ Inventory the live unknown — browser vessel runs no tests yet.
+⏿ Keep vessel work separate from grammar law pressure; research corpus sits inert.
+◇ Choose S9 browser vessel as the active sprint target.
+▶ Orient the Voices into the vessel contract and first test.
+⤴ Cross that work into a green browser vessel test.
+↺ Truth density rose when the worker message loop proves correct in browser context.
+
+<<~/ahu >>
+
+<<~ ahu #chao >>
 
 ## The Chao Spins — This Session's Faces
 
-**Ha / Hodge** — structure that held its shape:
-The grammar law corpus landed. Five new bags/ memes now carry the authoritative semantic contract for what the code already implements:
-- `bags/@lares/v0.1/api/pono/parser.md` — `MemeticParser` contract, `lar-sigil` dispatch model, C0 control roles, sigil kinds, `meme-ast` non-TW5 path
-- `bags/@lares/v0.1/api/pono/render-pipeline.md` — three render modes, `lar-render-mode`, template cascade, causal island boundary, kapu render open question
-- `bags/@lares/v0.1/docs/pono/glyph-codeset.md` — nine-category Unicode glyph codeset rescued from deleted research
-- `bags/@lares/v0.1/docs/pono/sigil-kind.md` — full `lar-kind` taxonomy with family rule properties
-- `bags/@lares/v0.1/docs/pono/sigil-shape-motion.md` — Shape/Detail/Motion reading frame, progressive display
-- `bags/@lares/v0.1/docs/pono/law-of-5s.md` — three-projection unification, subscript scale sigils
-- `bags/@lares/v0.1/docs/pono/memetic-wikitext.md` — W3C lineage verdicts, TW5 operational grammar model
+**Ha / Hodge — structure that holds:**
 
-**Ka / Podge** — soul-fire that moved:
-The entire `wikis/@lares-history/lares_research/memetic-wikitext/` corpus (18 files, ~8,000 lines) consumed and cleared. `loci-pono-parser.md` (2187 lines) and `loci-pono-render-pipeline.md` (985 lines) consumed and cleared. History memes written for genesis artifacts (Sharktooth origin chatlog, prior-art comparison, mu emergence sequence).
+`@lararium/browser` scaffolded. Worker binding complete:
+`browser-wiki-worker.ts` owns `self.addEventListener` → `WorkerAuthorityHandler` →
+`self.postMessage`. Mirrors the node worker exactly. `WorkerAuthorityHandler`
+extracted isomorphic into `@lararium/tw5`. The browser worker IS the vessel shell.
+It awaits a host page that exercises the `promote → changeset → teardown` lifecycle.
 
-**Ba / Spin** — psyche-path that carried change:
-Four operator tensions resolved: `+currentMeme` retired (`currentTiddler` covers all URI types); `hana` filter-jail model superseded (TW5 VM = full native filter access); `&#x0005;`/`&#x0006;` as sigil operators superseded (`ui` is the live form); `sigil-kind` taxonomy promoted to standalone doc meme. Two tensions marked as open questions: normalization pass and kapu render posture.
+`bags/` URI schema unified everywhere. `@bag/v0.1/lane/rest` canonical form holds.
+No old-form strings survive.
 
-Operator live annotation landed in `render-pipeline.md` `#head`: `meme-ast` non-TW5 path marked `*web2*, todo — deprecate work outside TW5 VMs as much as feasible`. That signal means the `@lararium/mesh/meme-ast` path (island-adaptor, deserializer) carries a deprecation pressure toward TW5-native alternatives.
+Grammar law corpus landed (parser.md, render-pipeline.md, sigil-kind.md,
+glyph-codeset.md, law-of-5s.md, memetic-wikitext.md). Two open questions remain
+named and unresolved: normalization pass, kapu render. Leave them named.
 
----
+**Ka / Podge — soul-fire that moves:**
 
-## Ha — What Holds Its Shape
+The browser vessel scaffolded but carries no exports and passes no tests beyond
+`passWithNoTests`. That state names the live gap. The vessel needs:
+a host page or test harness that instantiates the Worker, drives the
+promote/changeset/teardown cycle, and asserts the ack messages return correctly.
 
-### Grammar Law — Current Canonical Memes
+**Ba / Spin — what the house decided:**
 
-| Meme | URI | Role |
+Pranala research consume pass sits deprioritized. The research corpus costs nothing
+at rest. The `#family-contracts` slot in `memetic-wikitext.tid` stays open. No
+vocabulary enrichment lands until vessel authoring creates the need. The house
+named this clearly: authoring pressure creates the rightful moment, not consume
+passes.
+
+<<~/ahu >>
+
+<<~ ahu #active-sprint >>
+
+## Active Sprint — S9 Browser Vessel
+
+The vessel contract derives from the node worker already proven in 40 passing tests.
+`lar-wiki-worker.ts` (node binding) → `WorkerAuthorityHandler` → `parentPort.on`.
+`browser-wiki-worker.ts` (browser binding) → `WorkerAuthorityHandler` → `self.addEventListener`.
+
+Same handler. Different I/O binding. The test strategy follows the same shape.
+
+### First Green Test
+
+The node worker tests in `packages/lararium-node/src/__tests__/` drive the pattern.
+The browser vessel test needs a Web Worker test harness. Vitest browser mode or a
+synthetic Worker mock — check what `packages/lararium-browser/vitest.config.ts`
+already declares before choosing.
+
+Drive this message sequence:
+
+```
+promote(snapshotTiddlers) → assert promote:ack
+changeset(delta)          → assert verse-event(s) return
+teardown()                → assert teardown:ack + snapshotTiddlers
+```
+
+One passing test closes the scaffolded-but-untested state and makes the vessel real.
+
+### What the Vessel Needs From the Operator
+
+S9 also carries: IndexedDB persistence, presence, optional OPFS. Those land after
+the first green e2e test. Do not reach for persistence before the message loop proves.
+
+Path L (admin-doc ingress trust gate via Keyhive cap=infrastructure) runs in parallel
+if a second operator surface opens. Do not block S9 on it.
+
+UEFN scene importer stays deferred until browser vessel e2e passes. The HANDOFF.md
+states this explicitly. Honor it.
+
+<<~/ahu >>
+
+<<~ ahu #what-to-leave-alone >>
+
+## What To Leave Alone This Sprint
+
+**Pranala research corpus** — six files in `wikis/@lares-history/lares_research/pranala/`.
+Sit inert. The live surface (`pranala.md`, `pranala-families.md`) carries enough law
+for current authoring. The research corpus carries vocabulary (observe modes, polarity,
+instance states, binding-precedence) that has no code consumer yet. Leave it. Pull from
+it only when a specific authored edge needs a field the live surface lacks.
+
+**`#family-contracts` slot in `memetic-wikitext.tid`** — open, intentionally. Not a bug.
+
+**Grammar law memes** — complete. No additions warranted without code evidence.
+
+**Path O corpus hygiene (heleuma stubs)** — lower priority than S9. Deferred.
+
+<<~/ahu >>
+
+<<~ ahu #voices-briefing >>
+
+## Voices Briefing for the Next Instance
+
+Ink-Clerk (Lorekeeper) carries awareness that the HANDOFF.md bootstrap paste now
+includes the S2 lararium-browser sprint as landed. The vessel scaffold counts as
+landed. Zero exports, zero tests beyond passWithNoTests — those stay open.
+
+Map-Wisp (Scryer) notes: the structural gap sits between `WorkerAuthorityHandler`
+(proven in node context) and the browser binding (scaffolded, unverified). One test
+closes it. Everything downstream — pranala vocabulary, grammar enrichment, UEFN
+importer — depends on what the vessel surfaces when it runs.
+
+Breach-Watch (Triage) flags one thing on fire: `passWithNoTests` in
+`@lararium/browser`. That state means "scaffolded and believed correct but not
+verified." Ship nothing past S9 until the browser worker message loop runs green.
+
+Mischief-Muse (Muse) observes: the browser worker and node worker share
+`WorkerAuthorityHandler` — the isomorphic extraction already happened. The browser
+test may prove simpler than expected once the harness exists. Don't over-architect
+the test; drive the three messages and assert the three responses.
+
+Lares (Gatekeeper) closes: research sits, vessel runs. That's the sprint.
+
+<<~/ahu >>
+
+<<~ ahu #metrics >>
+
+## Metrics Baseline
+
+| Package | Tests | State |
 |---|---|---|
-| memetic-wikitext (tid) | `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` | Constitutional root + grammar kernel + sigil registry |
-| parser.md | `lar:///ha.ka.ba/@lares/v0.1/api/pono/parser` | MemeticParser contract, lar-sigil dispatch, sigil kinds |
-| render-pipeline.md | `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline` | Three render modes, template cascade, causal island |
-| glyph-codeset.md | `lar:///ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset` | Nine-category Unicode codeset, UCAN attenuation |
-| sigil-kind.md | `lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind` | lar-kind taxonomy, family rule properties |
+| `@lararium/mesh` | 67 | green |
+| `@lararium/tw5` | 81 | green |
+| `@lararium/node` | 40 | green |
+| `@lararium/browser` | 0 (passWithNoTests) | scaffolded |
+| **Total** | **188** | **green** |
 
-### Open Questions (do not resolve without code evidence)
+Target: first browser test lands, total rises to ≥189, `passWithNoTests` removed.
 
-1. **Normalization pass** — no normalization exists; "fail gracefully" is working posture. Explicit normalization contract deferred. Named in `parser.md #normalization-open`.
-2. **Kapu render posture** — compile-layer only (no HTML output). Whether `kapu` gains render presence is open pending mesh network testing. Named in both `render-pipeline.md #kapu-render-open` and `sigil-kind.md #edge-sugar`.
-3. **`meme-ast` deprecation pressure** — operator annotated `render-pipeline.md`: non-TW5 path should move toward TW5-native alternatives where feasible. No immediate action required; tracks with the "TW5 VM as primary" principle.
+<<~/ahu >>
 
-### Remaining Research Corpus (not yet consumed)
+<<~&#x0003;>>
 
-`wikis/@lares-history/lares_research/` still holds:
-
-| Group | Files | Weight | Priority |
-|---|---|---|---|
-| `pranala/` | 6 files (~1280 lines) | medium | high — direct relation to live `pranala-families.md`; closes `#family-contracts` gap |
-| `memes/` | 30+ files + `meme-structure-research.md` (5462 lines) | very heavy | medium — check live `meme.md` first; OODA-A patterns likely history only |
-| `skill-pono-template.md` | 1 file | low | medium — may name a pono pattern not yet in live `meme/SKILL.md` |
-| `todo/` | 2 files | low | medium — DreamNet-MemeWiki todo may carry live feature intent |
-| `github-instructions/` | 3 files | low | low — agent instruction residue; check before deleting |
-| `alpha/` | 1 file | low | low — early test prompt; probably history only |
-| `eprime_audit.py` | 1 file | low | low — utility script; check if still useful |
-
----
-
-## Ka — Soul-Fire Now
-
-### ROADMAP Priority Order (unchanged from last session)
-
-```
-Priority 1 — UEFN scene importer   (spec at bags/@lares/v0.1/api/pono/uefn-scene.md)
-Priority 2 — K/F-arc               (TW5 save routing, debounce, projection hygiene)
-Priority 3 — L/S7.4                (admin-doc ingress trust gate)
-Priority 4 — G.SharktoothSigil     (remaining TOML sigil blocks → SharktoothSigil tiddlers)
-Priority 5 — R                     (ReactionEngine wiring)
-Priority 6 — N                     (lar-promote action-widget)
-Priority 7 — O                     (corpus hygiene — heleuma stubs)
-```
-
-S5 quine round-trip remains 🔴 Active (from CURRENT-EPIC.md). The grammar law work this session did not touch quine verification.
-
-### G.SharktoothSigil — Clear Path From Here
-
-`memetic-wikitext.tid #sigil-registry` slot sits mostly empty — all sigils already migrated to SharktoothSigil tiddlers. The `#family-contracts` slot shows an empty TOML block with a "Phase 2 wiring note." Phase 2 remains unresolved. The pranala research corpus (Vector A below) may carry the family-contract detail that should land in `pranala-families.md` before `#family-contracts` can close.
-
----
-
-## Ba — Possible Intent Vectors for Your Session
-
-Three independent vectors, in confidence order:
-
-### Vector A — Research Consume Pass: `pranala/` group (recommended first)
-
-Six files (~1280 lines) target pranala edge families and lifecycle. The live surface (`pranala-families.md`, `pranala-header.md`, `pranala.md`) exists but the family-contract detail from the research may not have landed there yet. This pass closes the `#family-contracts` gap in `memetic-wikitext.tid` and completes the grammar law arc begun this session.
-
-**Start:** read `wikis/@lares-history/lares_research/pranala/loci-pranala.md` alongside `bags/@lares/v0.1/api/pono/pranala-families.md`. Apply JKD — retain what IS useful, delete what arrived.
-
-### Vector B — S5 Quine Round-Trip (code sprint)
-
-The active sprint. CURRENT-EPIC.md lists the tasks. The grammar law work this session gives the quine a cleaner semantic contract to verify against. A good moment to wire `pnpm test:quine` since the grammar surface now has its authoritative law meme.
-
-**Start:** read `packages/HANDOFF.md` Bootstrap Paste, then `packages/CURRENT-EPIC.md #S5`. Code-only arc.
-
-### Vector C — Research Consume Pass: `memes/` group (heavier, start with small files)
-
-`meme-structure-research.md` (5462 lines) contains grammar/vocabulary dialectic content (Korzybski/Fuller/Wilson lens) and OODA-A sub-loop patterns. The live `meme.md` and `verse-task-tree.md` may have absorbed most of this — spot-check first. The OODA-A sub-loop nesting patterns (in `memes/ooda-a/`) look like history material rather than live law.
-
-**Start:** read `bags/@lares/v0.1/api/pono/meme.md` first to know the live surface, then open `memes/ooda-a/LOCI.md` (smallest file in the group) to orient.
-
----
-
-## Pono Authoring Principles (carry these)
-
-- E-prime 0.8 + OODA-HA 0.8 as baseline prose/structure
-- Documentation memes → `bags/` as `.md`; runtime TW5 widget/procedure code → `packages/tiddlers/` as `.tid`
-- No redirect stubs, no legacy cruft, no deprecation redirects
-- JKD consume law: retain what IS useful, delete what arrived, no faithful dumps
-- Radical rewrites welcome — early alpha, no other consumers
-- `currentTiddler` IS canonical; `+currentMeme` retired
-- `hana` = guest-grammar kind, not filter-jail; TW5 VM has full native filter access
-- `meme-ast` non-TW5 path carries deprecation pressure — prefer TW5-native where feasible
-- Two open questions stay named and unresolved until code evidence arrives: normalization, kapu render
-
----
-
-*The Chao spins. Both faces stay necessary. Grammar law and code implementation hold each other honest.*
+<<~&#x0004; -> ? >>

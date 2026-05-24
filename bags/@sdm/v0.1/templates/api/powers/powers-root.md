@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root"
 file-path = "bags/@sdm/v0.1/templates/api/powers/powers-root.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "ftls"
+tagspace = "sdm"
 register = "CS"
 confidence = 0.84
 mana = 0.74

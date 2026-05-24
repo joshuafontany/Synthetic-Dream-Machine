@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic"
 file-path = "bags/@sdm/v0.1/witness/powers/osr-spells/read-magic.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "ftls"
+tagspace = "sdm"
 register = "CS"
 confidence = 0.82
 mana = 0.54
@@ -35,13 +35,27 @@ reversible = false
 school = "none in BECMI surface"
 ```
 
-Witness reading:
+Literal witness:
 
-- The spell lets the magic-user read magical words and runes, not speak ordinary languages.
-- Scrolls, item runes, and spellbook writing sit inside the expected target set.
-- Unfamiliar magical writing requires the spell before a reader understands it.
-- Once the spell opens that writing, the reader can read or speak it later without recasting.
-- Spellbooks use magical writing. Owners can read their own books without this spell.
+```text
+Read Magic
+Range: 0
+Duration: 1 turn
+Effect: The magic-user only
+
+This spell will allow the magic-user to
+read, not speak, any magical words or
+runes, such as those found on magic
+scrolls and other items. Unfamiliar
+magic writings cannot be understood
+without using this spell. However, once a
+magic-user reads a scroll or runes with
+this spell, that magic can be read or
+spoken later (without) using a spell. All
+spell books are written in magical words,
+and only their owners may read them
+without using this spell.
+```
 <<~/ahu >>
 
 <<~ ahu #expert >>
@@ -54,7 +68,12 @@ surface = "spell-list continuity"
 standalone-description = false
 ```
 
-The Expert surface keeps `Read Magic` in the Magic-User 1 list. It does not add a new body that should override the Basic description.
+Literal witness:
+
+```text
+Read Magic
+[Expert Set sourcing note (MU1): Expert Set (pages 13-14) reproduces the spell list only; no standalone description. Description text in Basic staging -> Spell Lists and Basic Spell Descriptions.]
+```
 <<~/ahu >>
 
 <<~ ahu #rules-cyclopedia >>
@@ -70,13 +89,26 @@ reversible = false
 school = "none in BECMI surface"
 ```
 
-Witness reading:
+Literal witness:
 
-- The compendium wording broadens the actor label from magic-user to spellcaster.
-- The target remains magical words and runes on scrolls or other items.
-- Unknown magical writing still requires this spell.
-- The durable later-reading rule remains intact.
-- Spellbook owner access remains a distinct permission clue.
+```text
+Read Magic
+Range: 0
+Duration: 1 turn
+Effect: The spellcaster only
+
+This spell will allow the spellcaster to read, not
+speak, any magical words or runes, such as those
+found on scrolls and other items. A spellcaster
+cannot understand unfamiliar magic writings
+without using this spell. However, once a spell-
+caster reads a scroll or runes with this spell, he
+can read or speak that magic later without using
+a spell.
+All spell books are written in magical words,
+and only their owners may read them without
+using this spell.
+```
 <<~/ahu >>
 
 <<~ ahu #analysis >>

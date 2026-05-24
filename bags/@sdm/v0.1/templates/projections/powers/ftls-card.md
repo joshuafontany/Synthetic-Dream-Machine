@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card"
 file-path = "bags/@sdm/v0.1/templates/projections/powers/ftls-card.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "ftls"
+tagspace = "sdm"
 register = "CS"
 confidence = 0.82
 mana = 0.70

@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells"
 file-path = "bags/@sdm/v0.1/templates/witness/powers/osr-spells.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "ftls"
+tagspace = "sdm"
 register = "CS"
 confidence = 0.82
 mana = 0.62
