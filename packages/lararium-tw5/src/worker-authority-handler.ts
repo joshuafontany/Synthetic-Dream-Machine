@@ -30,6 +30,7 @@ import {
   isMainToWorkerMsg,
   mkPromoteAck,
   mkTeardownAck,
+  mkChangesetAck,
   mkFault,
   WORKER_PROTOCOL_VERSION,
 } from "@lararium/mesh";
@@ -111,6 +112,9 @@ export class WorkerAuthorityHandler {
         wiki.deleteTiddler(title);
       }
       // reaction-router.ts fires tm-verse-event after TW5 processes the nalu.
+      // ACK-gate: Worker emits ack after applying the delta — main thread holds
+      // the next batch until this arrives. The Worker owns the flow rate.
+      this._post(mkChangesetAck(msg.wikiUri, msg.batch_id));
       return;
     }
 

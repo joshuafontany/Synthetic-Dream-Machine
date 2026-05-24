@@ -13,7 +13,7 @@
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
-import { repoRoot as REPO_ROOT } from "@lararium/mesh";
+import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import type { ParsedArgs } from "../parse-args.js";
 
 function dirSizeHint(dir: string): string {

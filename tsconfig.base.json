@@ -21,6 +21,9 @@
       ],
       "@lararium/mesh/meme-ast": [
         "packages/lararium-mesh/src/meme-ast/index.ts"
+      ],
+      "@lararium/mesh/node": [
+        "packages/lararium-mesh/src/node.ts"
       ]
     },
     "strict": true,

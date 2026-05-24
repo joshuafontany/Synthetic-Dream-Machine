@@ -20,7 +20,9 @@ import {
   WORKER_PROTOCOL_VERSION,
   mkTeardown,
   mkPromote,
+  mkChangeset,
   type WorkerMsg_Changeset,
+  type WorkerMsg_ChangesetAck,
   type WorkerMsg_TeardownAck,
   type WorkerMsg_PromoteAck,
   type WorkerMsg_Event,
@@ -99,20 +101,17 @@ describe("GP-1 — schema_version enforcement", () => {
   });
 
   test("all four MainToWorker types pass isMainToWorkerMsg", () => {
-    const changeset: WorkerMsg_Changeset = {
-      schema_version: 1,
-      type: "changeset",
-      wikiUri: "lar:///test",
-      added:   [{ title: "lar:///test/tiddler", text: "hello" }],
-      deleted: [],
-    };
+    const changeset: WorkerMsg_Changeset = mkChangeset("lar:///test",
+      [{ title: "lar:///test/tiddler", text: "hello" }],
+      [],
+    );
     expect(isMainToWorkerMsg(changeset)).toBe(true);
-    expect(isMainToWorkerMsg(mkPromote("lar:///test"))).toBe(true);
+    expect(isMainToWorkerMsg(mkPromote("lar:///test", new Uint8Array(0)))).toBe(true);
     expect(isMainToWorkerMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
     expect(isMainToWorkerMsg(mkTeardown())).toBe(true);
   });
 
-  test("all four WorkerToMain types pass isWorkerToMainMsg", () => {
+  test("all five WorkerToMain types pass isWorkerToMainMsg", () => {
     const event: WorkerMsg_Event = {
       schema_version: 1,
       type: "event",
@@ -123,6 +122,7 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(isWorkerToMainMsg(event)).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "promote:ack", wikiUri: "lar:///test" })).toBe(true);
+    expect(isWorkerToMainMsg({ schema_version: 1, type: "changeset:ack", wikiUri: "lar:///test", batch_id: "x" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
   });
 });
@@ -131,24 +131,15 @@ describe("GP-1 — schema_version enforcement", () => {
 
 describe("GP-3 — tiddler-level delta shape", () => {
   test("WorkerMsg_Changeset with added/deleted arrays passes isMainToWorkerMsg", () => {
-    const msg: WorkerMsg_Changeset = {
-      schema_version: 1,
-      type: "changeset",
-      wikiUri: "lar:///ha.ka.ba/wiki",
-      added:   [{ title: "lar:///ha.ka.ba/wiki/page", text: "hello" }],
-      deleted: ["lar:///ha.ka.ba/wiki/stale"],
-    };
+    const msg = mkChangeset("lar:///ha.ka.ba/wiki",
+      [{ title: "lar:///ha.ka.ba/wiki/page", text: "hello" }],
+      ["lar:///ha.ka.ba/wiki/stale"],
+    );
     expect(isMainToWorkerMsg(msg)).toBe(true);
   });
 
   test("changeset with empty added/deleted arrays is valid", () => {
-    const msg: WorkerMsg_Changeset = {
-      schema_version: 1,
-      type: "changeset",
-      wikiUri: "lar:///ha.ka.ba/wiki",
-      added:   [],
-      deleted: [],
-    };
+    const msg = mkChangeset("lar:///ha.ka.ba/wiki", [], []);
     expect(isMainToWorkerMsg(msg)).toBe(true);
   });
 });
@@ -210,7 +201,7 @@ describe("GP-5 — teardown handshake (integration)", () => {
       (msgs) => (msgs as { type: string }[]).some((m) => m.type === "promote:ack"),
     );
 
-    worker.postMessage(mkPromote(wikiUri));
+    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0)));
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as WorkerMsg_PromoteAck).type === "promote:ack") as WorkerMsg_PromoteAck | undefined;
@@ -221,28 +212,27 @@ describe("GP-5 — teardown handshake (integration)", () => {
 
   test("GP-3: tiddler-level changeset crosses boundary; fixture echoes addedCount/deletedCount", async () => {
     worker = spawnFixture();
-
-    const msgsPromise = collectUntil(
-      worker,
-      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "event"),
+    const wikiUri = "lar:///ha.ka.ba/test-wiki";
+    const cs = mkChangeset(wikiUri,
+      [{ title: `${wikiUri}/a` }, { title: `${wikiUri}/b` }],
+      [`${wikiUri}/old`],
     );
+    worker.postMessage(cs);
 
-    const msg: WorkerMsg_Changeset = {
-      schema_version: 1,
-      type: "changeset",
-      wikiUri: "lar:///ha.ka.ba/test-wiki",
-      added:   [{ title: "lar:///ha.ka.ba/test-wiki/a" }, { title: "lar:///ha.ka.ba/test-wiki/b" }],
-      deleted: ["lar:///ha.ka.ba/test-wiki/old"],
-    };
-    worker.postMessage(msg);
-
-    const msgs = await msgsPromise;
+    const msgs = await collectUntil(
+      worker,
+      (m) => (m as { type: string }[]).some((x) => x.type === "changeset:ack"),
+    );
     const echo = msgs.find((m) => (m as { type: string }).type === "event") as WorkerMsg_Event | undefined;
+    const ack  = msgs.find((m) => (m as { type: string }).type === "changeset:ack") as WorkerMsg_ChangesetAck | undefined;
 
     expect(echo).toBeDefined();
     expect(echo?.listenable).toBe("echo");
     expect(echo?.payload.addedCount).toBe(2);
     expect(echo?.payload.deletedCount).toBe(1);
+    // ACK-gate: batch_id echoed back — main thread can release the queue.
+    expect(ack?.batch_id).toBe(cs.batch_id);
+    expect(isWorkerToMainMsg(ack)).toBe(true);
   });
 
   test("message without schema_version is not routed by the guard", () => {

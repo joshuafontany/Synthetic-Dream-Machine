@@ -25,12 +25,18 @@ export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
  * Deliver a tiddler-level delta to the wiki Worker.
  *
  * GP-3: main thread computes this from Automerge `change` event patches —
- * the Worker never needs to load the Automerge WASM runtime.
+ * the Worker never loads the Automerge WASM runtime.
+ *
+ * ACK-gate: every changeset carries a `batch_id`. The Worker MUST reply with
+ * `changeset:ack` before the main thread sends the next batch. This gives the
+ * Worker backpressure authority — it controls the flow rate, not the producer.
  */
 export interface WorkerMsg_Changeset {
   schema_version: ProtocolVersion;
   type: "changeset";
   wikiUri: string;
+  /** Opaque identifier echoed back in changeset:ack. Caller uses crypto.randomUUID(). */
+  batch_id: string;
   added:   readonly Record<string, unknown>[];
   deleted: readonly string[];
 }
@@ -119,11 +125,26 @@ export interface WorkerMsg_Fault {
   error: string;
 }
 
+/**
+ * ACK-gate reply to WorkerMsg_Changeset.
+ *
+ * The Worker emits this after applying the tiddler delta. The main thread
+ * MUST NOT send the next changeset batch until this arrives. The Worker
+ * owns the flow rate — this is the backpressure inversion point.
+ */
+export interface WorkerMsg_ChangesetAck {
+  schema_version: ProtocolVersion;
+  type: "changeset:ack";
+  wikiUri: string;
+  batch_id: string;
+}
+
 /** All messages a wiki Worker may send to the main thread. */
 export type WorkerToMainMsg =
   | WorkerMsg_Event
   | WorkerMsg_TeardownAck
   | WorkerMsg_PromoteAck
+  | WorkerMsg_ChangesetAck
   | WorkerMsg_Fault;
 
 // ── Type guards ────────────────────────────────────────────────────────────
@@ -146,7 +167,7 @@ export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
 
 export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "promote:ack", "fault"] as const).includes(
+  return (["event", "teardown:ack", "promote:ack", "changeset:ack", "fault"] as const).includes(
     v.type as WorkerToMainMsg["type"],
   );
 }
@@ -176,6 +197,19 @@ export function mkPromote(
 
 export function mkPromoteAck(wikiUri: string): WorkerMsg_PromoteAck {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote:ack", wikiUri };
+}
+
+export function mkChangeset(
+  wikiUri: string,
+  added:   readonly Record<string, unknown>[],
+  deleted: readonly string[],
+  batch_id: string = crypto.randomUUID(),
+): WorkerMsg_Changeset {
+  return { schema_version: WORKER_PROTOCOL_VERSION, type: "changeset", wikiUri, batch_id, added, deleted };
+}
+
+export function mkChangesetAck(wikiUri: string, batch_id: string): WorkerMsg_ChangesetAck {
+  return { schema_version: WORKER_PROTOCOL_VERSION, type: "changeset:ack", wikiUri, batch_id };
 }
 
 export function mkFault(wikiUri: string, error: string): WorkerMsg_Fault {

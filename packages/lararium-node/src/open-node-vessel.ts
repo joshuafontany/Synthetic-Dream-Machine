@@ -61,7 +61,7 @@ import {
   reconcileWellKnownTiddlers,
 } from "./genesis-artifact.js";
 import { seedLaresDoc, createSessionEventLog } from "./social-seed.js";
-import { repoRoot }                       from "@lararium/mesh";
+import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { NodeVmManager }                  from "./node-vm-manager.js";
 import { waitHandleLocal }                from "./repo-helpers.js";

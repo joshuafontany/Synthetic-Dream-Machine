@@ -38,7 +38,6 @@ export * from "./meme-recipe-vm.js";
 export * from "./job-tiddler.js";
 export * from "./bag-residency.js";
 export * from "./kumu-device.js";
-export { repoRoot } from "./repo-root.js";
 export * from "./browser-authority.js";
 export * from "./genesis-doc.js";
 export * from "./worker-protocol.js";

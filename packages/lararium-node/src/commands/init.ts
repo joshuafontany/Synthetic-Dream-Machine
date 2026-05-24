@@ -27,7 +27,7 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
 } from "@lararium/mesh";
 import { buildCeremonyTiddlers } from "@lararium/tw5";
-import { repoRoot } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 import {
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
 } from "../social-seed.js";

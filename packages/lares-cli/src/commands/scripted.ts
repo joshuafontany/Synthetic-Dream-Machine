@@ -7,7 +7,7 @@
 
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
-import { repoRoot as REPO_ROOT } from "@lararium/mesh";
+import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");

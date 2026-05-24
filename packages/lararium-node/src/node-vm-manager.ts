@@ -48,7 +48,7 @@ import {
   isWorkerToMainMsg,
   mkPromote,
   mkTeardown,
-  WORKER_PROTOCOL_VERSION,
+  mkChangeset,
 } from "@lararium/mesh";
 import type {
   WorkerMsg_Changeset,
@@ -90,6 +90,10 @@ interface PinnedSlot {
 /**
  * Hot: session wiki — TW5Engine lives inside the Worker thread.
  * Main thread never holds the engine reference; all interaction via postMessage.
+ *
+ * ACK-gate: one changeset batch in-flight at a time per slot.
+ * `changesetQueue` holds batches pending delivery; `awaitingAck` blocks dispatch
+ * until the Worker emits changeset:ack. The Worker owns the flow rate.
  */
 interface WorkerHotSlot {
   tier:           "hot";
@@ -98,6 +102,10 @@ interface WorkerHotSlot {
   lastUsedAt:     number;
   /** Unsubscribe function — removes the docHandle "change" listener. */
   unsubChange:    () => void;
+  /** Batches queued while a changeset is in-flight. */
+  changesetQueue: WorkerMsg_Changeset[];
+  /** True while waiting for changeset:ack from the Worker. */
+  awaitingAck:    boolean;
 }
 
 interface ColdSlot {
@@ -254,8 +262,10 @@ export class NodeVmManager {
       tier: "hot",
       wikiId,
       worker,
-      lastUsedAt: Date.now(),
+      lastUsedAt:     Date.now(),
       unsubChange,
+      changesetQueue: [],
+      awaitingAck:    false,
     });
 
     console.log(
@@ -313,11 +323,9 @@ export class NodeVmManager {
   /**
    * Route a tiddler-level delta to the wiki's hot-tier Worker (GP-3).
    *
-   * `added`   — plain tiddler field objects to upsert into the Worker's TW5 wiki.
-   * `deleted` — titles to remove.
-   *
-   * The main thread derives these from Automerge `change` event patches, so the
-   * Worker never loads the WASM runtime.
+   * ACK-gated: enqueues the batch if a changeset is already in-flight.
+   * The Worker owns the flow rate — main thread waits for changeset:ack
+   * before dispatching the next batch.
    *
    * No-op if the wiki slot is not in the hot tier.
    */
@@ -328,15 +336,14 @@ export class NodeVmManager {
   ): void {
     const slot = this._slots.get(wikiId);
     if (slot?.tier !== "hot") return;
-
-    const msg: WorkerMsg_Changeset = {
-      schema_version: WORKER_PROTOCOL_VERSION,
-      type: "changeset" as const,
-      wikiUri: wikiId,
-      added,
-      deleted,
-    };
-    (slot as WorkerHotSlot).worker.postMessage(msg);
+    const hotSlot = slot as WorkerHotSlot;
+    const msg = mkChangeset(wikiId, added, deleted);
+    if (hotSlot.awaitingAck) {
+      hotSlot.changesetQueue.push(msg);
+      return;
+    }
+    hotSlot.awaitingAck = true;
+    hotSlot.worker.postMessage(msg);
   }
 
   // ---------------------------------------------------------------------------
@@ -448,6 +455,17 @@ export class NodeVmManager {
           this._onWorkerEvent(wikiId, raw as WorkerMsg_Event);
         } else {
           console.warn(`[vm-manager] WorkerMsg_Event dropped for ${wikiId} — no onWorkerEvent callback registered`);
+        }
+      }
+      if (raw.type === "changeset:ack") {
+        const slot = this._slots.get(wikiId);
+        if (slot?.tier !== "hot") return;
+        const hotSlot = slot as WorkerHotSlot;
+        const next = hotSlot.changesetQueue.shift();
+        if (next) {
+          hotSlot.worker.postMessage(next);
+        } else {
+          hotSlot.awaitingAck = false;
         }
       }
       if (raw.type === "fault") {

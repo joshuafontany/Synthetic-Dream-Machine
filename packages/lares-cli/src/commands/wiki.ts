@@ -16,7 +16,7 @@
 
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 

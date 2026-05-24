@@ -16,7 +16,7 @@
 
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";

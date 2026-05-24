@@ -15,7 +15,7 @@
 
 import { spawn } from "node:child_process";
 import { join } from "node:path";
-import { repoRoot } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 
 /** Run a tsx script and resolve to its exit code. Inherits stdio. */
 export function runTsxScript(scriptPath: string, args: readonly string[] = [], env?: NodeJS.ProcessEnv): Promise<number> {

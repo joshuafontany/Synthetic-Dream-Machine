@@ -22,7 +22,7 @@ import {
   buildJobInboxRecord, JOB_INBOX_URI_PREFIX, JOB_RECEIPT_URI_PREFIX, JOB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
-import { repoRoot } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 
 export interface AdminVesselHandle {
   readonly repo:      Repo;
