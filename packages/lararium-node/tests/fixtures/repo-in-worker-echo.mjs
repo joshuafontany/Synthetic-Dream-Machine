@@ -1,0 +1,88 @@
+/**
+ * repo-in-worker-echo.mjs — Repo-in-Worker gate fixture.
+ *
+ * Proves the CRDT sync path without TW5:
+ *   promote (syncPort transferred) → wire Worker-side Repo → promote:ack
+ *   [doc arrives via CRDT sync]    → handle.on("change") → changeset:ack + event(repo:change)
+ *   teardown                       → teardown:ack
+ *
+ * Emits `event(repo:synced)` after `handle.whenReady()` resolves — tests await
+ * this before mutating the main-thread doc to avoid the initial-sync race.
+ *
+ * NOT production code — gate fixture only.
+ */
+
+import { parentPort } from "node:worker_threads";
+import { Repo } from "@automerge/automerge-repo";
+import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
+
+let wikiUri = null;
+let frameCount = 0;
+
+parentPort.on("message", (msg) => {
+  if (typeof msg !== "object" || msg === null || msg.schema_version !== 1) return;
+
+  if (msg.type === "promote") {
+    wikiUri = msg.wikiUri;
+    const syncPort = msg.syncPort;
+
+    if (syncPort) {
+      const repo = new Repo({
+        network: [new MessageChannelNetworkAdapter(syncPort)],
+        sharePolicy: async () => true,
+      });
+
+      function wireHandle(handle) {
+        void handle.whenReady().then(() => {
+          // Signal that the change listener is now live — tests await this before mutating.
+          parentPort.postMessage({
+            schema_version: 1,
+            type: "event",
+            wikiUri,
+            listenable: "repo:synced",
+            payload: { tiddlerCount: Object.keys(handle.doc()?.tiddlers ?? {}).length },
+          });
+          handle.on("change", ({ doc }) => {
+            frameCount += 1;
+            const tiddlerCount = doc?.tiddlers ? Object.keys(doc.tiddlers).length : 0;
+
+            // Drain signal: frame-completion ack (GP-1 frame signal, not GP-3 batch ACK).
+            parentPort.postMessage({
+              schema_version: 1,
+              type: "changeset:ack",
+              wikiUri,
+              batch_id: `frame-${frameCount}`,
+            });
+
+            // Observable event: surfaces via onWorkerEvent.
+            parentPort.postMessage({
+              schema_version: 1,
+              type: "event",
+              wikiUri,
+              listenable: "repo:change",
+              payload: { frameCount, tiddlerCount },
+            });
+          });
+        });
+      }
+
+      if (msg.docUrl) {
+        // Explicit docUrl: Worker awaits repo.find() — reliable, no gossip race.
+        // repo.find() returns a Promise<DocHandle> in automerge-repo v2.x.
+        void repo.find(msg.docUrl).then((handle) => wireHandle(handle));
+      } else {
+        // Fallback: wait for doc to arrive via gossip (docUrl = null, cold boot).
+        repo.on("document", ({ handle }) => wireHandle(handle));
+      }
+    }
+
+    parentPort.postMessage({ schema_version: 1, type: "promote:ack", wikiUri });
+    return;
+  }
+
+  if (msg.type === "teardown" || msg.type === "demote") {
+    parentPort.postMessage({ schema_version: 1, type: "teardown:ack" });
+    wikiUri = null;
+    return;
+  }
+});

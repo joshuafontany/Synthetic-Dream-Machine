@@ -1,19 +1,23 @@
 /**
  * node-vm-manager.test.ts — NodeVmManager lifecycle integration tests.
  *
- * Uses the vm-manager-echo.mjs fixture Worker (no TW5/RE) to verify:
+ * Two fixture Workers:
+ *   vm-manager-echo.mjs       — lightweight echo (no TW5, no Repo-in-Worker)
+ *   repo-in-worker-echo.mjs   — Repo-in-Worker path; emits repo:synced + repo:change events
+ *
+ * Verifies:
  *   mountWiki   → Worker spawned, promote sent, slot becomes hot
- *   routeChangeset → delta forwarded to Worker; Worker applies and echoes
- *   unmountWiki → teardown handshake; snapshotTiddlers captured; slot becomes cold
+ *   unmountWiki → teardown handshake; slot becomes cold
+ *   Repo-in-Worker → CRDT changes propagate via syncPort (no routeChangeset)
  *   event forwarding → onWorkerEvent callback fires for Worker events
  *
  * All tests run against the full NodeVmManager (no mocking of internals).
- * DocHandle is stubbed with a minimal shape — no Automerge-repo dependency.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
  */
 
 import { describe, test, expect, afterEach } from "vitest";
+import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle } from "@automerge/automerge-repo";
 import type { MemeStoreDoc } from "@lararium/mesh";
 import { NodeVmManager } from "../src/node-vm-manager.js";
@@ -23,7 +27,8 @@ import type { WorkerMsg_Event } from "@lararium/mesh";
 // Fixture Worker URL
 // ---------------------------------------------------------------------------
 
-const FIXTURE_URL = new URL("./fixtures/vm-manager-echo.mjs", import.meta.url);
+const FIXTURE_URL      = new URL("./fixtures/vm-manager-echo.mjs",      import.meta.url);
+const REPO_FIXTURE_URL = new URL("./fixtures/repo-in-worker-echo.mjs", import.meta.url);
 
 // ---------------------------------------------------------------------------
 // Minimal DocHandle stub — no Automerge-repo required in tests
@@ -58,13 +63,38 @@ const WIKI_ID = "lar:///ha.ka.ba/@test/wiki";
 /** Nominal coreBlob stub — fixture worker ignores the bytes; type remains honest. */
 const STUB_CORE_BLOB = { bytes: new Uint8Array() } as const;
 
-/** Collect Worker events (type === listenable) forwarded via onWorkerEvent. */
-function eventCollector(): {
+/** Collect Worker events forwarded via onWorkerEvent. */
+function eventCollector(filter?: string): {
   events: WorkerMsg_Event[];
   callback: (wikiId: string, msg: WorkerMsg_Event) => void;
 } {
   const events: WorkerMsg_Event[] = [];
-  return { events, callback: (_wikiId, msg) => events.push(msg) };
+  return {
+    events,
+    callback: (_wikiId, msg) => { if (!filter || msg.listenable === filter) events.push(msg); },
+  };
+}
+
+/** Wait for the repo-in-worker-echo fixture to signal its change listener is live. */
+function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const iv = setInterval(() => {
+      if (all.events.some((e) => e.listenable === "repo:synced")) { clearInterval(iv); resolve(); }
+      else if (Date.now() - start > timeoutMs) { clearInterval(iv); reject(new Error("timeout waiting for repo:synced")); }
+    }, 20);
+  });
+}
+
+/** Wait until collector.events.length >= count. */
+function waitForEvents(collector: { events: WorkerMsg_Event[] }, count: number, timeoutMs = 3000): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const iv = setInterval(() => {
+      if (collector.events.length >= count) { clearInterval(iv); resolve(); }
+      else if (Date.now() - start > timeoutMs) { clearInterval(iv); reject(new Error(`timeout: expected ${count} events, got ${collector.events.length}`)); }
+    }, 20);
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -73,10 +103,13 @@ function eventCollector(): {
 
 describe("NodeVmManager — Worker lifecycle", () => {
   let manager: NodeVmManager | null = null;
+  let repo:    Repo | null          = null;
 
   afterEach(async () => {
     await manager?.disposeAll();
     manager = null;
+    await repo?.shutdown();
+    repo = null;
   });
 
   test("mountWiki promotes slot to hot tier", async () => {
@@ -99,79 +132,69 @@ describe("NodeVmManager — Worker lifecycle", () => {
     expect(manager.tier(WIKI_ID)).toBe("hot");
   });
 
-  test("routeChangeset delivers added/deleted to the Worker", async () => {
-    const collector = eventCollector();
+  test("CRDT change on main-thread Repo propagates to Worker via syncPort", async () => {
+    // Replaces the old routeChangeset delivery test.
+    // Proves the Repo-in-Worker path: doc change → MessageChannel → Worker repo:change event.
+    const all     = eventCollector();
+    const changes = eventCollector("repo:change");
+
+    repo = new Repo({ sharePolicy: async () => true });
+    const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
+
     manager = new NodeVmManager({
-      workerScriptUrl: FIXTURE_URL,
-      onWorkerEvent:   collector.callback,
+      workerScriptUrl: REPO_FIXTURE_URL,
+      mainRepo:        repo,
+      onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
+    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await waitForSynced(all);
 
-    // Collect the changeset:applied echo from the fixture Worker.
-    const applied = new Promise<WorkerMsg_Event>((resolve) => {
-      const orig = collector.callback;
-      collector.callback = (wikiId, msg) => {
-        orig(wikiId, msg);
-        if (msg.listenable === "changeset:applied") resolve(msg);
-      };
-      // Patch the manager's callback — access via reassignment since it's a closure.
-      // Simpler: just resolve from the collector events array after routeChangeset.
-    });
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/page-a"] = { title: "lar:///ha.ka.ba/@test/wiki/page-a", text: "hello" }; });
+    await waitForEvents(changes, 1);
 
-    manager.routeChangeset(
-      WIKI_ID,
-      [{ title: "lar:///ha.ka.ba/@test/wiki/page-a", text: "hello" }],
-      ["lar:///ha.ka.ba/@test/wiki/stale"],
-    );
-
-    // Wait briefly for the async postMessage round-trip.
-    await new Promise<void>((r) => setTimeout(r, 200));
-
-    const echos = collector.events.filter((e) => e.listenable === "changeset:applied");
-    expect(echos.length).toBeGreaterThanOrEqual(1);
-    expect(echos[0]!.payload.addedCount).toBe(1);
-    expect(echos[0]!.payload.deletedCount).toBe(1);
+    expect(changes.events.length).toBeGreaterThanOrEqual(1);
+    expect(changes.events[0]!.wikiUri).toBe(WIKI_ID);
+    expect(changes.events[0]!.payload.tiddlerCount).toBeGreaterThanOrEqual(1);
   });
 
-  test("unmountWiki moves slot to cold and captures snapshot from teardown:ack", async () => {
+  test("unmountWiki moves slot to cold with snapshot from teardown:ack", async () => {
     manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
-    const seedTiddlers = { "lar:///ha.ka.ba/@test/wiki/seed": { title: "lar:///ha.ka.ba/@test/wiki/seed", text: "seed" } };
-    const handle = makeDocHandleStub(seedTiddlers);
+    const handle = makeDocHandleStub();
 
     await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
-
-    // Route a changeset so the fixture has tiddlers to snapshot.
-    manager.routeChangeset(
-      WIKI_ID,
-      [{ title: "lar:///ha.ka.ba/@test/wiki/added", text: "new" }],
-      [],
-    );
-    await new Promise<void>((r) => setTimeout(r, 100));
-
     await manager.unmountWiki(WIKI_ID);
 
     expect(manager.tier(WIKI_ID)).toBe("cold");
     const snap = manager.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
-    // The fixture echoes back all tiddlers it accumulated.
-    expect(snap!.tiddlers.length).toBeGreaterThanOrEqual(1);
+    // Repo-in-Worker path: snapshot carries docBytes (if Worker exports them) or empty tiddlers.
+    // The vm-manager-echo fixture returns no docBytes — tiddlers array is empty but snapshot exists.
+    expect(Array.isArray(snap!.tiddlers)).toBe(true);
   });
 
   test("onWorkerEvent callback fires for events from the Worker", async () => {
-    const collector = eventCollector();
+    // Uses repo-in-worker-echo: drives a doc change → asserts repo:change event surfaces.
+    const all     = eventCollector();
+    const changes = eventCollector("repo:change");
+
+    repo = new Repo({ sharePolicy: async () => true });
+    const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
+
     manager = new NodeVmManager({
-      workerScriptUrl: FIXTURE_URL,
-      onWorkerEvent:   collector.callback,
+      workerScriptUrl: REPO_FIXTURE_URL,
+      mainRepo:        repo,
+      onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
+    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await waitForSynced(all);
 
-    manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/x" }], []);
-    await new Promise<void>((r) => setTimeout(r, 200));
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/x"] = { title: "lar:///ha.ka.ba/@test/wiki/x" }; });
+    await waitForEvents(changes, 1);
 
-    expect(collector.events.some((e) => e.listenable === "changeset:applied")).toBe(true);
-    expect(collector.events.every((e) => e.wikiUri === WIKI_ID)).toBe(true);
+    expect(changes.events.length).toBeGreaterThanOrEqual(1);
+    expect(changes.events.every((e) => e.wikiUri === WIKI_ID)).toBe(true);
   });
 
   test("stats() reflects tier counts correctly", async () => {
@@ -186,40 +209,44 @@ describe("NodeVmManager — Worker lifecycle", () => {
     expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
   });
 
-  test("re-mountWiki from cold slot — cold snapshot captured, Worker live after re-mount", async () => {
-    // GP-3 warm-start via snapshotTiddlers in the promote message is @deprecated.
-    // Repo-in-Worker path restores state via CRDT sync over syncPort, not tiddler injection.
-    // This test verifies: (a) cold snapshot captures tiddlers from teardown:ack, and
-    // (b) the re-mounted Worker is live and responsive.
-    const collector = eventCollector();
+  test("re-mountWiki from cold slot — snapshot captured, re-mounted Worker live and responsive", async () => {
+    // Repo-in-Worker path: state restores via CRDT sync over syncPort, not tiddler injection.
+    // Verifies: (a) unmount → cold snapshot exists, (b) re-mount → hot and responsive via CRDT.
+    const all     = eventCollector();
+    const changes = eventCollector("repo:change");
+
+    repo = new Repo({ sharePolicy: async () => true });
+    const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
+
     manager = new NodeVmManager({
-      workerScriptUrl: FIXTURE_URL,
-      onWorkerEvent:   collector.callback,
+      workerScriptUrl: REPO_FIXTURE_URL,
+      mainRepo:        repo,
+      onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
-    // Mount, add a tiddler, unmount → cold slot with snapshot.
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
-    manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/persisted", text: "kept" }], []);
-    await new Promise<void>((r) => setTimeout(r, 100));
+    // Mount, drive a change, unmount → cold slot.
+    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await waitForSynced(all);
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/persisted"] = { title: "lar:///ha.ka.ba/@test/wiki/persisted", text: "kept" }; });
+    await waitForEvents(changes, 1);
     await manager.unmountWiki(WIKI_ID);
 
-    // Cold snapshot carries the Worker's final tiddler state (GP-3 teardown:ack path).
     const snap = manager.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
-    expect(snap!.tiddlers.length).toBeGreaterThanOrEqual(1);
 
-    // Re-mount — Worker spawns fresh; slot is hot and responsive.
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
+    // Clear collectors for re-mount phase.
+    all.events.length = 0;
+    changes.events.length = 0;
+
+    // Re-mount — fresh Worker, CRDT doc syncs via mainRepo again.
+    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
     expect(manager.tier(WIKI_ID)).toBe("hot");
 
-    // Route a changeset to confirm the Worker is live.
-    manager.routeChangeset(WIKI_ID, [{ title: "lar:///ha.ka.ba/@test/wiki/new", text: "fresh" }], []);
-    await new Promise<void>((r) => setTimeout(r, 150));
+    await waitForSynced(all);
+    docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/new"] = { title: "lar:///ha.ka.ba/@test/wiki/new", text: "fresh" }; });
+    await waitForEvents(changes, 1);
 
-    const echos = collector.events.filter((e) => e.listenable === "changeset:applied");
-    expect(echos.length).toBeGreaterThanOrEqual(1);
-    // Worker started fresh (no snapshotTiddlers in promote — Repo-in-Worker path).
-    // addedCount reflects only the changeset we just sent.
-    expect(echos.at(-1)!.payload.addedCount).toBe(1);
-  });
+    expect(changes.events.length).toBeGreaterThanOrEqual(1);
+    expect(changes.events.at(-1)!.payload.tiddlerCount).toBeGreaterThanOrEqual(1);
+  }, 10_000);
 });

@@ -42,7 +42,7 @@ import type { Heads } from "@lararium/mesh";
 import { Worker, MessageChannel } from "worker_threads";
 import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
-import type { DocHandle, DocHandleChangePayload, Repo } from "@automerge/automerge-repo";
+import type { DocHandle, Repo } from "@automerge/automerge-repo";
 import type { LarDoc } from "@lararium/mesh";
 import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
@@ -50,10 +50,8 @@ import {
   isWorkerToMainMsg,
   mkPromote,
   mkTeardown,
-  mkChangeset,
 } from "@lararium/mesh";
 import type {
-  WorkerMsg_Changeset,
   WorkerMsg_Event,
   WorkerMsg_PromoteAck,
   WorkerMsg_TeardownAck,
@@ -98,29 +96,17 @@ interface PinnedSlot {
  * Hot: session wiki — TW5Engine lives inside the Worker thread.
  * Main thread never holds the engine reference; all interaction via postMessage.
  *
- * Repo-in-Worker (S4+): CRDT sync flows via `mainPort` ↔ `syncPort` MessageChannel.
+ * Repo-in-Worker: CRDT sync flows via `mainPort` ↔ `syncPort` MessageChannel.
  * Main-thread Repo wires a `MessageChannelNetworkAdapter` to `mainPort`; the Worker
  * creates its own Repo with the transferred `syncPort`. No oracle delta needed.
- *
- * @deprecated GP-3 fields (`changesetQueue`, `awaitingAck`, `unsubChange`) remain
- * until `lar-wiki-worker.ts` migration completes and all tests pass clean.
  */
 interface WorkerHotSlot {
-  tier:           "hot";
-  wikiId:         string;
-  worker:         Worker;
-  /** Main-thread side of the Worker sync channel. Close on unmount. */
-  mainPort:       MessagePort;
-  lastUsedAt:     number;
-  /**
-   * @deprecated GP-3 oracle path. Repo-in-Worker replaces live delta forwarding.
-   * Remove after lar-wiki-worker migration + test cleanup.
-   */
-  unsubChange:    () => void;
-  /** @deprecated GP-3 oracle path. */
-  changesetQueue: WorkerMsg_Changeset[];
-  /** @deprecated GP-3 oracle path. */
-  awaitingAck:    boolean;
+  tier:       "hot";
+  wikiId:     string;
+  worker:     Worker;
+  /** Main-thread side of the Worker sync channel. Close on unmount (Law §7). */
+  mainPort:   MessagePort;
+  lastUsedAt: number;
 }
 
 interface ColdSlot {
@@ -237,7 +223,7 @@ export class NodeVmManager {
    * Evicts the LRU Worker slot (non-pinned) when at capacity.
    *
    * Returns void — the main thread holds no direct engine reference for Worker
-   * slots. Route messages via `routeChangeset()` and receive events via
+   * slots. Receive CRDT changes via the `mainRepo` MessageChannel and events via
    * `onWorkerEvent`.
    */
   async mountWiki(wikiId: string, ctx: WikiBootContext): Promise<void> {
@@ -280,7 +266,10 @@ export class NodeVmManager {
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    const promoteMsg = mkPromote(wikiId, ctx.coreBlob.bytes, syncPort as unknown as globalThis.MessagePort, null, null);
+    // Pass docUrl when mainRepo is wired so Worker calls repo.find(docUrl).whenReady()
+    // instead of the unreliable gossip path (repo.on("document")). null = cold boot.
+    const docUrl = this._mainRepo ? (ctx.docHandle.url as string ?? null) : null;
+    const promoteMsg = mkPromote(wikiId, ctx.coreBlob.bytes, syncPort as unknown as globalThis.MessagePort, docUrl, null);
     await _sendAndAwait<WorkerMsg_PromoteAck>(
       worker,
       promoteMsg,
@@ -288,19 +277,12 @@ export class NodeVmManager {
       [syncPort],
     );
 
-    // @deprecated GP-3 oracle path: wire live changeset delivery via doc change events.
-    // Remove when lar-wiki-worker Repo-in-Worker migration completes.
-    const unsubChange = _subscribeDocChanges(wikiId, ctx.docHandle, this);
-
     this._slots.set(wikiId, {
-      tier: "hot",
+      tier:       "hot",
       wikiId,
       worker,
       mainPort,
-      lastUsedAt:     Date.now(),
-      unsubChange,
-      changesetQueue: [],
-      awaitingAck:    false,
+      lastUsedAt: Date.now(),
     });
 
     console.log(
@@ -324,9 +306,6 @@ export class NodeVmManager {
     if (!slot || slot.tier === "pinned" || slot.tier === "cold") return;
 
     const hotSlot = slot as WorkerHotSlot;
-    // @deprecated GP-3: stop forwarding doc changes before teardown.
-    hotSlot.unsubChange();
-
     let snapshot: VmSnapshot | null = null;
     try {
       const ack = await _sendAndAwait<WorkerMsg_TeardownAck>(
@@ -359,36 +338,6 @@ export class NodeVmManager {
   }
 
   // ---------------------------------------------------------------------------
-  // Changeset routing — forward Automerge bytes to the owning Worker
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Route a tiddler-level delta to the wiki's hot-tier Worker.
-   *
-   * @deprecated GP-3 oracle path. Repo-in-Worker syncs via the MessageChannel
-   * established in `mountWiki`; this method becomes a no-op once all Workers
-   * carry `syncPort` and `lar-wiki-worker` migration completes.
-   *
-   * ACK-gated: enqueues the batch if a changeset is already in-flight.
-   */
-  routeChangeset(
-    wikiId:  string,
-    added:   readonly Record<string, unknown>[],
-    deleted: readonly string[],
-  ): void {
-    const slot = this._slots.get(wikiId);
-    if (slot?.tier !== "hot") return;
-    const hotSlot = slot as WorkerHotSlot;
-    const msg = mkChangeset(wikiId, added, deleted);
-    if (hotSlot.awaitingAck) {
-      hotSlot.changesetQueue.push(msg);
-      return;
-    }
-    hotSlot.awaitingAck = true;
-    hotSlot.worker.postMessage(msg);
-  }
-
-  // ---------------------------------------------------------------------------
   // Engine access — pinned tier only
   // ---------------------------------------------------------------------------
 
@@ -396,8 +345,8 @@ export class NodeVmManager {
    * Returns the in-process TW5Engine for the given wikiId, or null.
    *
    * In P.3 this returns a non-null value ONLY for the pinned (PrimaryWiki)
-   * slot. Worker-backed hot slots do not expose an in-process engine — use
-   * `routeChangeset()` and `onWorkerEvent` instead.
+   * slot. Worker-backed hot slots do not expose an in-process engine — drive
+   * changes via the `mainRepo` MessageChannel and consume events via `onWorkerEvent`.
    */
   getEngine(wikiId: string): TW5Engine | null {
     const slot = this._slots.get(wikiId);
@@ -499,17 +448,6 @@ export class NodeVmManager {
           console.warn(`[vm-manager] WorkerMsg_Event dropped for ${wikiId} — no onWorkerEvent callback registered`);
         }
       }
-      if (raw.type === "changeset:ack") {
-        const slot = this._slots.get(wikiId);
-        if (slot?.tier !== "hot") return;
-        const hotSlot = slot as WorkerHotSlot;
-        const next = hotSlot.changesetQueue.shift();
-        if (next) {
-          hotSlot.worker.postMessage(next);
-        } else {
-          hotSlot.awaitingAck = false;
-        }
-      }
       if (raw.type === "fault") {
         console.error(`[vm-manager] Worker fault for ${wikiId}: ${(raw as { error: string }).error}`);
       }
@@ -569,53 +507,3 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
   });
 }
 
-// ---------------------------------------------------------------------------
-// _subscribeDocChanges — @deprecated GP-3 live tiddler-delta forwarding
-// ---------------------------------------------------------------------------
-
-/**
- * @deprecated GP-3 oracle path. Repo-in-Worker receives CRDT changes directly
- * via the MessageChannel established in `mountWiki`; this subscription becomes
- * unreachable once all Workers carry a `syncPort` and `lar-wiki-worker` migration
- * completes. Remove together with `routeChangeset`, `changesetQueue`, `awaitingAck`.
- *
- * Subscribe to `docHandle` change events and forward tiddler-level deltas to
- * the Worker via `manager.routeChangeset()`.
- */
-function _subscribeDocChanges(
-  wikiId:    string,
-  handle:    DocHandle<LarDoc>,
-  manager:   NodeVmManager,
-): () => void {
-  const onChangeHandler = (payload: DocHandleChangePayload<LarDoc>) => {
-    const { doc, patches } = payload;
-    const changedUris = new Set<string>();
-    for (const patch of patches) {
-      if (patch.path.length >= 2 && patch.path[0] === "tiddlers") {
-        changedUris.add(String(patch.path[1]));
-      }
-    }
-    if (changedUris.size === 0) return;
-
-    const added:   Record<string, unknown>[] = [];
-    const deleted: string[]                  = [];
-
-    for (const uri of changedUris) {
-      const rec = (doc.tiddlers ?? {})[uri] as (Record<string, unknown> & { deleted?: boolean }) | undefined;
-      if (!rec || rec["deleted"]) {
-        deleted.push(uri);
-      } else {
-        const fields: Record<string, unknown> = { title: uri };
-        for (const [k, v] of Object.entries(rec)) {
-          if (k !== "deleted") fields[k] = v;
-        }
-        added.push(fields);
-      }
-    }
-
-    manager.routeChangeset(wikiId, added, deleted);
-  };
-
-  handle.on("change", onChangeHandler);
-  return () => handle.off("change", onChangeHandler);
-}

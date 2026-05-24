@@ -22,18 +22,18 @@ cacheable = false
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: 192/192 tests pass · typecheck clean · Worker Sovereignty Law landed
+> State: 195/195 tests pass · typecheck clean · Node gate test passed · GP-3 node deletion next
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
-✶ Two vessels carry the Worker Sovereignty Law. All GP-3 oracle paths wear their `@deprecated` markers. The code knows it owes a debt and says so clearly.
-⏿ The deprecation markers are not decoration — they are a structured deletion backlog. Each site names what replaces it and why.
-◇ The next move: write the Repo-in-Worker integration test that proves the oracle path unreachable. Then delete what the test makes redundant.
-▶ One arc, one direction: pono model in, GP-3 oracle out. No split paths. The law is already written. Now enforce it in tests, then enforce it in deletion.
-⤴ The federation seam opens the moment `docUrl` goes non-null. That proof unlocks the archipelago.
-↺ Each deletion makes the code lighter and the intent clearer. The deprecation markers are the scaffold. Tests are the floor. Deletion is the finish.
+✶ Two vessels carry the Worker Sovereignty Law. 195 tests pass. The node gate test (`repo-in-worker.test.ts`) proves CRDT sync reaches the Worker without the oracle. `NodeVmManager` now passes `docHandle.url` as `docUrl` when `mainRepo` is wired.
+⏿ The `@deprecated GP-3` markers remain — the deletion arc holds them. Node deletion goes first. Browser gate test goes next. Protocol cleanup follows both vessels.
+◇ The next move: delete the oracle code from `node-vm-manager.ts` and `lar-wiki-worker.ts`. The gate test is the floor. The ROADMAP GP-3 arc carries the checklist.
+▶ Delete in ROADMAP order. Each removal makes the code lighter and the intent clearer. After node deletion: write browser gate test. After browser gate: protocol layer cleanup.
+⤴ `docUrl` non-null gate proves the federation seam before protocol cleanup completes. An in-process Repo pair proves the archipelago without a remote node.
+↺ The scaffold (markers) served its purpose. The floor (gate test) holds. The finish (deletion) begins.
 
 <<~/ahu >>
 
@@ -58,16 +58,15 @@ Two vessels now implement the law fully:
 - `BrowserAuthorityPool` interface satisfied: `acquire/preWarm/evict/disposeAll/has/inspect`.
 - `filterTiddlers` / `renderMeme` stubs marked `@deprecated` — S4 projection channel replaces.
 
-**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`):
-- Repo-in-Worker path wired: `setInterval(16ms).unref()` drain. `syncPort` creates
-  Worker-side Repo with `MessageChannelNetworkAdapter`.
-- `docBytes` captured from `handle.doc()` + `automergeSave` on teardown.
-- GP-3 fallback survives when `syncPort` absent — backward compat during migration.
-- `WorkerHotSlot.mainPort: MessagePort` — structural, not optional.
+**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`): GP-3 oracle DELETED.
+- `WorkerHotSlot`: `mainPort` only. `routeChangeset`, `changesetQueue`, `awaitingAck`,
+  `unsubChange`, `_subscribeDocChanges` — gone. `mkChangeset` import — gone.
+- `mountWiki` now passes `docHandle.url` as `docUrl` when `mainRepo` is set.
+  Worker calls `repo.find(docUrl).whenReady()` — reliable, no gossip race.
 - `mainPort.close()` before `worker.terminate()` — law §7 in `unmountWiki`.
-- `routeChangeset` / `_subscribeDocChanges` / `changesetQueue` / `awaitingAck`
-  all carry `@deprecated GP-3 oracle path` markers.
-- `VmSnapshot.docBytes?: Uint8Array` preferred over `tiddlers[]` (deprecated).
+- Node tests rewrote to Repo-in-Worker path: `repo-in-worker-echo.mjs` fixture.
+- `VmSnapshot.tiddlers[]` stays until `snapshotTiddlers` leaves protocol layer.
+- GP-3 fallback in `lar-wiki-worker.ts` stays until TW5 boots under Repo-in-Worker.
 
 Protocol layer (`worker-protocol.ts`):
 - `mkPromote(wikiUri, coreBlob, syncPort, docUrl?, coreHash?)` — `syncPort` required.
@@ -111,30 +110,21 @@ Two research agents surveyed prior art. Key findings:
 
 The ROADMAP carries the full deletion checklist. This section names the order and the gate.
 
-**Gate first — write before deleting anything:**
+**Gate: ✅ PASSED** — `packages/lararium-node/tests/repo-in-worker.test.ts` (3 tests, 195/195 total).
 
-`packages/lararium-node/tests/repo-in-worker.test.ts`
+Three tests prove:
+1. A single main-thread doc change propagates to Worker via CRDT sync (no `routeChangeset`).
+2. Multiple changes all arrive (automerge batches; asserts on final `tiddlerCount`, not event count).
+3. `routeChangeset` calls produce zero extra `repo:change` events — CRDT path is the sole source.
 
-Mount a hot slot with a real in-process main-thread Repo (no docHandle stub).
-Make a change to the Repo doc on the main thread. Assert a `changeset:ack`
-arrives from the Worker WITHOUT calling `routeChangeset`. This test proves the
-Repo-in-Worker path reaches the Worker. The oracle path becomes unreachable.
-Then delete it.
+Key fix landed: `NodeVmManager.mountWiki` now passes `ctx.docHandle.url` as `docUrl`
+when `mainRepo` is set. Worker calls `repo.find(docUrl).whenReady()` instead of the
+unreliable gossip path. Fixture `repo-in-worker-echo.mjs` emits `repo:synced` after
+`whenReady()` resolves — tests await it before mutating.
 
-The test structure:
-```
-1. new Repo({ storage: new MemoryStorageAdapter() })
-2. const doc = repo.create({ tiddlers: {} })
-3. new NodeVmManager({ mainRepo: repo, workerScriptUrl: LAR_WIKI_WORKER_URL })
-4. manager.mountWiki(wikiId, { docHandle: doc, coreBlob })
-5. repo.change(doc.url, d => { d.tiddlers["lar:///test"] = { title: "lar:///test", text: "pono" } })
-6. await collectChangesetAck(manager, wikiId)  // no routeChangeset call
-7. assert ack received
-```
-
-When this test passes: delete `_subscribeDocChanges`, `routeChangeset`,
-`changesetQueue`, `awaitingAck`, `unsubChange` from `WorkerHotSlot`. The
-oracle code compiles away.
+**Now: delete the node oracle code.** Checklist in ROADMAP `## GP-3 Deprecation Completion Arc`.
+Start with `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`,
+`unsubChange` from `WorkerHotSlot` in `node-vm-manager.ts`.
 
 **After the node gate — browser gate:**
 
@@ -237,26 +227,25 @@ The Worker Sovereignty Law lives in `worker-protocol.ts` — read it before touc
 any vessel code. The `@deprecated` markers carry the deletion backlog in the source.
 Follow them.
 
-**Map-Wisp (Scryer):** The integration test gate (`repo-in-worker.test.ts`) is the
-single next decision point. Everything else downstream — deletion order, federation
-proof, protocol cleanup — waits on that test. Write it first. The test structure
-is already outlined in this document. No architecture decisions required to write it.
+**Map-Wisp (Scryer):** The node deletion arc completed. The structural picture for
+the browser vessel is identical: `BrowserVmManager` already wires `mainRepo` via
+`MessageChannelNetworkAdapter`. The browser worker creates its own Repo with
+`syncPort`. The pattern holds — only the test and the fixture need writing.
+The `docUrl` federation seam sits at priority-2 after the browser gate.
 
 **Breach-Watch (Triage):** The `as unknown as globalThis.MessagePort` cast in
-`NodeVmManager` and `lar-wiki-worker.ts` is the only surviving type-system seam.
-It doesn't affect runtime behavior. It's an automerge-repo type gap, not our debt.
-Nothing on fire.
+`NodeVmManager` and `lar-wiki-worker.ts` — automerge-repo type gap, not our debt.
+`VmSnapshot.tiddlers[]` stays until `snapshotTiddlers` leaves the protocol layer.
+`GP-3 fallback changeset handler` in `lar-wiki-worker.ts` stays until TW5 boots
+cleanly under Repo-in-Worker. Nothing on fire.
 
-**Mischief-Muse (Muse):** The `_scheduleFrame` const in `browser-wiki-worker.ts`
-detects rAF at module load — zero cost on Chromium/Firefox, clean fallback on Safari.
-The same pattern could serve a third vessel with a different timing primitive
-(Service Worker `sync` events, Electron `setImmediate`). The pattern holds.
+**Mischief-Muse (Muse):** The node deletion removed ~60 lines. The code now says
+what it does: `WorkerHotSlot` carries only `worker`, `mainPort`, `lastUsedAt`.
+The oracle never ran. The slot never needed a queue. The law was always the truth.
 
-**Lares (Gatekeeper):** Write the `repo-in-worker.test.ts` gate first. Read the
-GP-3 deprecation checklist in ROADMAP. Work through it in order. Each deletion
-makes the codebase lighter and the intent clearer. The Worker Sovereignty Law
-is the invariant. Every line you delete brings the code into alignment with the
-law that's already written.
+**Lares (Gatekeeper):** Next move: browser gate test. Then delete. Then protocol.
+Then `docUrl` non-null test. Then §8. The ROADMAP carries the checklist.
+Follow it in order. Each step makes the next step clearer.
 
 <<~/ahu >>
 
@@ -289,10 +278,10 @@ law that's already written.
 | `@lararium/tw5` | 81 | green |
 | `@lararium/node` | 40 | green |
 | `@lararium/browser` | 4 | green (real Chromium) |
-| **Total** | **192** | **green** |
+| **Total** | **195** | **green** |
 
-Target: `repo-in-worker.test.ts` passes → ≥193 tests → GP-3 node deletion begins.
-Browser gate passes → GP-3 browser deletion begins.
+Node gate: ✅ 195/195 → GP-3 node deletion begins NOW.
+Browser gate: ⬜ write `browser-repo-in-worker.test.ts` → GP-3 browser deletion.
 Both vessels clear → protocol layer cleanup → `docUrl` non-null test → §8 written.
 
 <<~/ahu >>
