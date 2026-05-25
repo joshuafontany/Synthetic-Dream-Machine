@@ -146,7 +146,7 @@ Power meme-sets now split reusable format language from playable game content.
 Root template memes carry the meta-contracts:
 
 ```text
-bags/@sdm/v0.1/templates/api/powers/powers-root.md
+bags/@sdm/v0.1/templates/api/power.md
 bags/@sdm/v0.1/templates/projections/powers/ftls-card.md
 bags/@sdm/v0.1/templates/witness/powers/osr-spells.md
 ```
@@ -187,11 +187,11 @@ Preferred edge IDs:
 Examples:
 
 ```text
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/power family:control role:implements >>
+<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/power family:control role:implements >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic family:provenance role:witness >>
 <<~ pranala #module ? -> lar:///ha.ka.ba/@sdm/v0.1/api/modules/knowledge-oracle family:taxonomy role:belongs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/ecm-scan family:tag role:has >>
+<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/tags/function/ecm-scan family:tag role:has >>
 ```
 
 Do not encode the full predicate inside the edge id. Let future filters find `#witness`, `#projects`, or `#implements` quickly.
@@ -209,8 +209,9 @@ bags/
     v0.1/
       templates/
         api/
-          powers/
-            powers-root.md
+          power.md
+        interfaces/
+          power.md
         projections/
           powers/
             ftls-card.md
@@ -293,7 +294,7 @@ The first proof passes when:
 Create or revise these files:
 
 ```text
-bags/@sdm/v0.1/templates/api/powers/powers-root.md
+bags/@sdm/v0.1/templates/api/power.md
 bags/@sdm/v0.1/templates/projections/powers/ftls-card.md
 bags/@sdm/v0.1/templates/witness/powers/osr-spells.md
 bags/@sdm/v0.1/api/powers/read-magic.md

@@ -141,8 +141,8 @@ evaporates.
 <<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic family:provenance role:source >>
 <<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/expert family:provenance role:source >>
 <<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/rules-cyclopedia family:provenance role:source >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/shield family:tag role:see >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/ward family:tag role:see >>
+<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/tags/function/shield family:relation role:see >>
+<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/tags/function/ward family:relation role:see >>
 
 <<~/ahu >>
 

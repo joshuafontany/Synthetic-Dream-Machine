@@ -5,6 +5,17 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/api/powers/read-magic"
 file-path = "bags/@sdm/v0.1/api/powers/read-magic.md"
 type      = "text/x-memetic-wikitext"
+tags      = [
+  "lar:///ha.ka.ba/@sdm/tags/storage/trait",
+  "lar:///ha.ka.ba/@sdm/tags/storage/item",
+  "lar:///ha.ka.ba/@sdm/tags/storage/structure",
+  "lar:///ha.ka.ba/@sdm/tags/storage/burden",
+  "lar:///ha.ka.ba/@sdm/tags/domain/divination",
+  "lar:///ha.ka.ba/@sdm/tags/domain/apocrypha",
+  "lar:///ha.ka.ba/@sdm/tags/function/archive",
+  "lar:///ha.ka.ba/@sdm/tags/function/ecm-scan",
+  "lar:///ha.ka.ba/@sdm/tags/function/magic-decode",
+]
 
 tagspace = "sdm"
 register = "CS"
@@ -18,26 +29,23 @@ invariant = false
 role = "Powers API root meme: magical inscription reading and archive-recognition pattern"
 ```
 
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
 <<~&#x0002;>>
 
 # Read Magic
 
-<<~ ahu #interface >>
-## Interface
+<<~ ahu #implements >>
+## Implements
 
-`Read Magic` opens one magical inscription to understanding.
+This root address carries the default FTLS/SDM implementation for the `Read Magic` Power slot and primary API surface.
 
-Use it when a character, item, daemon, shrine, archive service, rite, or burden tries to read a symbolic surface that ordinary language skill cannot parse: scroll script, spellbook notation, item-runes, shrine glyphs, ward marks, silk-knot ciphers, archive labels, or oldtech magical UI.
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/power >>
 
-The Power answers three play questions:
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/read-magic >>
 
-1. **What does this magical writing say or do?**
-2. **Can this operator recognize this pattern later?**
-3. **What lock, veil, corruption, or owner-trace pushes back?**
-
-A successful read reveals the active magical meaning. If the surface carries a usable pattern, the operator marks it as **recognized** for later reading unless the pattern changes, gains a veil, changes owner-lock, or belongs to a different archive lineage.
-
-Counterplay may come from owner-locks, living grimoires, ECM veils, corrupted notation, false rune bait, incomplete inscriptions, hostile copy-protection, or daemon honeypots.
+<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/power family:control role:implements >>
+<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/read-magic family:control role:implements >>
 <<~/ahu >>
 
 <<~ ahu #default >>
@@ -93,20 +101,14 @@ If resistance matters, resolve an ECM scan contest. On sacrifice, the read succe
 
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic >>
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/api/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/read-magic >>
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root family:template role:uses >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/power family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/ecm-scan family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/magic-decode family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/archive-recognition family:control role:implements >>
+<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/power family:template role:uses >>
 
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic family:provenance role:witness >>
 <<~ pranala #module ? -> lar:///ha.ka.ba/@sdm/v0.1/api/modules/knowledge-oracle family:taxonomy role:belongs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/power family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/ecm-scan family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/magic-decode family:tag role:has >>
 
 <<~/ahu >>
 

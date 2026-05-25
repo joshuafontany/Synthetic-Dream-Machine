@@ -5,6 +5,15 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/floating-disc.md"
 type      = "text/x-memetic-wikitext"
+tags      = [
+  "lar:///ha.ka.ba/@sdm/tags/domain/stuckforce",
+  "lar:///ha.ka.ba/@sdm/tags/domain/telekinetic",
+  "lar:///ha.ka.ba/@sdm/tags/hook/sustained",
+  "lar:///ha.ka.ba/@sdm/tags/function/utility",
+  "lar:///ha.ka.ba/@sdm/tags/function/barrier",
+  "lar:///ha.ka.ba/@sdm/tags/function/cargo",
+  "lar:///ha.ka.ba/@sdm/tags/storage/item",
+]
 
 tagspace = "sdm"
 register = "CS"
@@ -38,7 +47,7 @@ You may tilt the disc into an almost impenetrable barrier. It blocks the directi
 
 **Sacrifice or mishap:** drop the load, lock the disc into stuckforce, tilt at the wrong moment, drift with local gravity, damage cargo, or obey a command too literally.
 
-**Tags:** [power] [stuckforce] [telekinetic] [sustained] [utility] [barrier] [cargo] [storage:item]
+**Tags:** [[lar:///ha.ka.ba/@sdm/tags/domain/stuckforce]] [[lar:///ha.ka.ba/@sdm/tags/domain/telekinetic]] [[lar:///ha.ka.ba/@sdm/tags/hook/sustained]] [[lar:///ha.ka.ba/@sdm/tags/function/utility]] [[lar:///ha.ka.ba/@sdm/tags/function/barrier]] [[lar:///ha.ka.ba/@sdm/tags/function/cargo]] [[lar:///ha.ka.ba/@sdm/tags/storage/item]]
 <<~/ahu >>
 
 <<~ ahu #overcharge >>
@@ -65,10 +74,6 @@ You may tilt the disc into an almost impenetrable barrier. It blocks the directi
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/api/powers/floating-disc family:render role:projects >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/power family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/stuckforce family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/telekinetic family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/sustained family:tag role:has >>
 
 <<~/ahu >>
 

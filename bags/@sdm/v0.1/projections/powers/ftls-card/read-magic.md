@@ -5,6 +5,15 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/read-magic.md"
 type      = "text/x-memetic-wikitext"
+tags      = [
+  "lar:///ha.ka.ba/@sdm/tags/domain/divination",
+  "lar:///ha.ka.ba/@sdm/tags/function/ecm-scan",
+  "lar:///ha.ka.ba/@sdm/tags/function/magic-decode",
+  "lar:///ha.ka.ba/@sdm/tags/storage/trait",
+  "lar:///ha.ka.ba/@sdm/tags/storage/item",
+  "lar:///ha.ka.ba/@sdm/tags/storage/structure",
+  "lar:///ha.ka.ba/@sdm/tags/storage/burden",
+]
 
 tagspace = "sdm"
 register = "CS"
@@ -37,7 +46,7 @@ On a clean read, learn the active meaning. Mark the surface, rune-family, spell-
 
 **Sacrifice:** the read succeeds, but leaves a trace: owner ping, archive echo, awakened ward, glyph migraine, daemon attention, or false certainty.
 
-**Tags:** [power] [divination] [ecm:scan] [magic:decode] [storage:trait] [storage:item] [storage:structure] [storage:burden]
+**Tags:** [[lar:///ha.ka.ba/@sdm/tags/domain/divination]] [[lar:///ha.ka.ba/@sdm/tags/function/ecm-scan]] [[lar:///ha.ka.ba/@sdm/tags/function/magic-decode]] [[lar:///ha.ka.ba/@sdm/tags/storage/trait]] [[lar:///ha.ka.ba/@sdm/tags/storage/item]] [[lar:///ha.ka.ba/@sdm/tags/storage/structure]] [[lar:///ha.ka.ba/@sdm/tags/storage/burden]]
 <<~/ahu >>
 
 <<~ ahu #overcharge >>
@@ -64,9 +73,6 @@ On a clean read, learn the active meaning. Mark the surface, rune-family, spell-
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/api/powers/read-magic family:render role:projects >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/power family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/ecm-scan family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/magic-decode family:tag role:has >>
 
 <<~/ahu >>
 

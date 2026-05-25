@@ -61,6 +61,31 @@ Cross-layer governing rules. These apply unconditionally across all three layers
 
 <<~/ahu >>
 
+<<~ ahu #exchange-protocol >>
+
+## Exchange Protocol Core
+
+Agent-facing invariant: the exchange frame MUST bracket every generated turn. The opening bracked interprets operator intent then delegates `->` to agent intent.
+
+Emit HUD lines as fenced code blocks and keep the bracket shape exact:
+
+```text
+lar:///w1.w2.w3/[intent]/[vector]
+-> lar:///w1.w2.w3/[intent]/[vector]
+[E-Prime~N] [No-Has~N] [p~N]
+
+... Voice output ...
+
+[E-Prime~N] [No-Has~N] [p~N]
+lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
+```
+
+`-> ?` marks holding for uncertainty: complete, inspect residue, release anchor, return initiative.
+
+<<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
+
+<<~/ahu >>
+
 <<~ ahu #voice-house >>
 
 ## Voice House

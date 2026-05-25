@@ -5,6 +5,15 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/api/powers/floating-disc"
 file-path = "bags/@sdm/v0.1/api/powers/floating-disc.md"
 type      = "text/x-memetic-wikitext"
+tags      = [
+  "lar:///ha.ka.ba/@sdm/tags/posture/ritual",
+  "lar:///ha.ka.ba/@sdm/tags/storage/item",
+  "lar:///ha.ka.ba/@sdm/tags/domain/stuckforce",
+  "lar:///ha.ka.ba/@sdm/tags/domain/telekinetic",
+  "lar:///ha.ka.ba/@sdm/tags/function/cargo",
+  "lar:///ha.ka.ba/@sdm/tags/function/barrier",
+  "lar:///ha.ka.ba/@sdm/tags/hook/sustained",
+]
 
 tagspace = "sdm"
 register = "CS"
@@ -18,33 +27,26 @@ invariant = false
 role = "Powers API root meme: stuckforce disc, cargo support, mobile barrier"
 ```
 
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
 <<~&#x0002;>>
 
 # Floating Disc
 
-<<~ ahu #interface >>
-## Interface
+<<~ ahu #implements >>
+## Implements
 
-`Floating Disc` describes a local stuckforce platform interface.
+This root address carries the default SDM/UVG implementation for the `Floating Disc` Power slot and primary API surface.
 
-Use it when an operator creates, binds, awakens, or commands a small force surface that can carry cargo, move at walking pace, and serve as an emergency barrier.
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/power >>
 
-At the table, this Power answers three play questions:
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/floating-disc >>
 
-1. **What load can the disc carry or support?**
-2. **How does the disc move relative to the operator?**
-3. **When does the disc vanish, tilt, jam, or become stuckforce residue?**
-
-A clean use creates a visible or translucent force disc at a point within range. The operator or nearby allies can push it at walking pace. The disc can carry objects, packs, salvage, bodies, or improvised loads if the table accepts the load as physically balanced on the surface.
-
-The disc can tilt into a barrier. Treat the tilted face as almost impenetrable until the operator moves it, overloading force breaks it, or the fiction gives an attacker a way around the edge.
-
-Counterplay may come from tight spaces, tilted ground, high wind, force shears, hostile telekinesis, anti-magic fields, stuckforce contamination, cargo imbalance, or separation from the operator.
+<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/power family:control role:implements >>
+<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/floating-disc family:control role:implements >>
 <<~/ahu >>
 
 <<~ ahu #default >>
-## Default SDM Implementation
-
 ```toml iam
 canonical-name = "Floating Disc"
 epithet = "Shield of the Righteous, Mage’s Mule"
@@ -55,10 +57,7 @@ duration = "1 hour"
 source = "Ultraviolet Grasslands and the Black City 2e, p.198"
 ```
 
-Literal SDM implementation:
-
-```text
-Floating Disc
+## Floating Disc
 
 _Shield of the Righteous, Mage’s Mule_
 
@@ -67,21 +66,14 @@ _Shield of the Righteous, Mage’s Mule_
 
 The wizard creates a concave disc of stuckforce 1m in diameter. The disc hovers, can be pushed at a walking pace, and can be tilted to create an almost impenetrable barrier. The disc vanishes if it is more than 30m from the wizard.
 
-_Overcharge:_ the disc can be up to 5m in diameter and moves at the wizard’s spoken command.
-```
+<<~ ahu #default/overcharge >>
+### Overcharge
 
-### FTLS/SDM Play Reading
+**x2 (P:4):** the disc can be up to 5m in diameter and moves at the wizard’s spoken command.
+<<~/ahu >>
 
-**P:** 2 **R:** 30m  
-**T:** point **D:** 1 hour
-
-Create a concave stuckforce disc 1m across at a point within range. It hovers. Anyone with access to it can push it at walking pace. The disc vanishes when it moves more than 30m from the operator.
-
-The disc supports cargo and salvage. It does not attack. Tilt it to make an almost impenetrable barrier; it guards the direction it faces, not every angle around the operator.
-
-**Overcharge:** make the disc up to 5m across. It moves at the operator's spoken command instead of requiring a push.
-
-### Mishap And Residue
+<<~ ahu #default/mishaps >>
+### Mishaps
 
 On failure, sacrifice, or hostile interference, choose one:
 
@@ -91,6 +83,17 @@ On failure, sacrifice, or hostile interference, choose one:
 - the disc drifts with wind, slope, or local gravity;
 - the disc clips cargo into a force shear and damages it;
 - the disc obeys the last spoken command too literally.
+<<~/ahu >>
+
+<<~/ahu >>
+
+<<~ ahu #storage >>
+## Storage
+
+- **Trait:** stuckforce handling, levitant training, wizardly forcecraft.
+- **Item:** pebble-sized force-machine, levitant disc focus, cargo charm.
+- **Structure:** shrine porter, dockside force cradle, ship-barge array.
+- **Burden:** stuckforce scar, command echo, gravity disagreement.
 <<~/ahu >>
 
 <<~ ahu #variants >>
@@ -108,23 +111,15 @@ On failure, sacrifice, or hostile interference, choose one:
 
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/floating-disc >>
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/api/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/interfaces/powers/floating-disc >>
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root family:template role:uses >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/power family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/stuckforce family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/cargo-support family:control role:implements >>
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/api/interfaces/barrier family:control role:implements >>
+<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/power family:template role:uses >>
 
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/floating-disc family:provenance role:witness >>
 <<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/uvg2e/powers/floating-disc family:provenance role:source >>
 <<~ pranala #module ? -> lar:///ha.ka.ba/@sdm/v0.1/api/modules/force-logistics family:taxonomy role:belongs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/power family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/stuckforce family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/telekinetic family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/sustained family:tag role:has >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/v0.1/api/tags/storage-item family:tag role:has >>
 
 <<~/ahu >>
 

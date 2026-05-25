@@ -58,7 +58,7 @@ If the card needs more than one screen during play, push detail back to the Powe
 ## Edges
 
 <<~ pranala #implements ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/powers/powers-root family:template role:see >>
+<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/api/power family:template role:see >>
 
 <<~/ahu >>
 

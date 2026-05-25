@@ -61,7 +61,7 @@ Do not flatten the five measures into one truth spectrum.
 
 ## Stance Register Table
 
-| Stance | Register measures | 0.0 reads as | 1.0 reads as |
+| Stance | Register measures | 0 reads as | 20 reads as |
 |---|---|---|---|
 | 🏛️ Philosopher | propositional support | unsupported | fully confirmed |
 | 🌊 Poet | analogical resonance / correspondence | no resonance | perfect resonance |
