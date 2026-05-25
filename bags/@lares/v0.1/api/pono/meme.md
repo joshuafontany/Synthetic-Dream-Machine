@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme"
 file-path = "bags/@lares/v0.1/api/pono/meme.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.74
+confidence = 15
 register = "CS"
-manaoio = 0.72
-mana = 0.83
-manao = 0.86
+manaoio = 14
+mana = 17
+manao = 17
 namespace    = "⊙"
 role = "meme invariant law, copy-shape authority, and rating posture root"
 control-glyphs = ["&#x0001;", "&#x0002;", "&#x0003;", "&#x0004;", "&#x0005;", "&#x0006;"]

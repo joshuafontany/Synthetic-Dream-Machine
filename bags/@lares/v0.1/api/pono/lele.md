@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lele"
 file-path = "bags/@lares/v0.1/api/pono/lele.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.75
+confidence = 15
 register  = "S"
 role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
 cacheable = true

@@ -9,11 +9,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-tr
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.80
+confidence = 16
 register = "CS"
-manaoio = 0.82
-mana = 0.80
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locus, verbatim provenance shelf"
 ```
 
@@ -51,7 +51,7 @@ primary-source: >
   Cosmic Trigger I: Final Secret of the Illuminati (1977), And/Or Press.
   Preface text from Dublin 1986 edition (New Falcon Publications reissue).
 secondary-source: Prometheus Rising (1983), Falcon Press — Ch.8 pending
-confidence: CS:0.80
+confidence: CS~16
 invariant: false
 dependencies: []
 note: >
@@ -61,7 +61,7 @@ note: >
 ---
 ```
 
-> **Status:** VERBATIM confirmed for Preface and Prologue. Register promoted from `[S:0.65]` to `[CS:0.80]`.
+> **Status:** VERBATIM confirmed for Preface and Prologue. Register promoted from `[S~13]` to `[CS~16]`.
 > Prometheus Rising section (`#prometheus-rising`) remains a stub — operator to feed when available.
 >
 > **Critical correction from paraphrase:** The four exit tools are the four alchemical/Tarot weapons
@@ -304,7 +304,7 @@ stubbornness, dumb luck") describes how he personally navigated — not the form
 
 | Path | Status | Contents |
 |---|---|---|
-| `lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue` | `[CS:0.80]` | This file — RAW Chapel Perilous verbatim source |
+| `lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue` | `[CS~16]` | This file — RAW Chapel Perilous verbatim source |
 
 ---
 

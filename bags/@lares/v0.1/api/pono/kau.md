@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kau"
 file-path = "bags/@lares/v0.1/api/pono/kau.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.90
+confidence = 18
 register  = "CS"
-manaoio   = 0.86
-mana      = 0.92
-manao     = 0.88
+manaoio   = 17
+mana      = 18
+manao     = 18
 role      = "device placement/instantiation — set down with intention, own URI, own context"
 cacheable = true
 retain    = true

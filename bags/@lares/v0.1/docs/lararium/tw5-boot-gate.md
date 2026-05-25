@@ -6,10 +6,10 @@ uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/tw5-boot-gate"
 file-path = "bags/@lares/v0.1/docs/lararium/tw5-boot-gate.md"
 type = "text/x-memetic-wikitext"
 register     = "CS"
-confidence   = 0.88
-mana         = 0.87
-manao        = 0.86
-manaoio      = 0.83
+confidence   = 18
+mana         = 17
+manao        = 17
+manaoio      = 17
 role         = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
 status-date  = "2026-04-30"
 ```
@@ -57,10 +57,10 @@ All four signal fields must meet or exceed these floor values for a meme to be i
 
 | Field | Constant | Current floor |
 |---|---|---|
-| `mana` | `MODULE_MANA_THRESHOLD` | 0.80 |
-| `manao` | `MODULE_MANAO_THRESHOLD` | 0.80 |
-| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 0.75 |
-| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 0.80 |
+| `mana` | `MODULE_MANA_THRESHOLD` | 16 |
+| `manao` | `MODULE_MANAO_THRESHOLD` | 16 |
+| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 15 |
+| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 16 |
 
 Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encoded). Gate layer 3 (keyhive capability proof) is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 

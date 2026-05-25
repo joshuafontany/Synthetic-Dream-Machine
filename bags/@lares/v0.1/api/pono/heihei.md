@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
 file-path = "bags/@lares/v0.1/api/pono/heihei.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.82
+confidence   = 16
 register     = "CS"
-manaoio      = 0.80
-mana         = 0.82
-manao        = 0.80
+manaoio      = 16
+mana         = 16
+manao        = 16
 role         = "race/compete block-container sigil — multiple candidate bodies, first match wins; Hawaiian alias for \\if"
 cacheable    = true
 retain       = true

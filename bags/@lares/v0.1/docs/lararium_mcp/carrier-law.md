@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/lararium_mcp/carrier-law.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.86
-mana         = 0.84
-manaoio      = 0.78
-manao        = 0.86
+confidence   = 17
+mana         = 17
+manaoio      = 16
+manao        = 17
 role         = "canonical carrier-law bundle for Lararium MCP compiler planning"
 source-consumes = [
   "packages/lares-core/memes/docs/mcp/CARRIER_LAW_BUNDLE.md"

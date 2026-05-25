@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loulou"
 file-path = "bags/@lares/v0.1/api/pono/loulou.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.84
+confidence   = 17
 register     = "CS"
-manaoio      = 0.82
-mana         = 0.86
-manao        = 0.84
+manaoio      = 16
+mana         = 17
+manao        = 17
 role         = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
 cacheable    = true
 retain       = true

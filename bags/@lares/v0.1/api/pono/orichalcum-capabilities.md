@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
 file-path = "bags/@lares/v0.1/api/pono/orichalcum-capabilities.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 0.80
+confidence   = 16
 register     = "CS"
-manaoio      = 0.78
-mana         = 0.82
-manao        = 0.80
+manaoio      = 16
+mana         = 16
+manao        = 16
 role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for rooms, edge islands, and canon promotion"
 cacheable    = true
 retain       = true
@@ -162,11 +162,11 @@ Noise and Data are node-local only.
 ```toml
 [[caveats]]
 kind    = "manaoio-at-least"
-type    = "number [0.0–1.0]"
+type    = "integer Level [0–20]"
 note    = """
   Community-weighted believability. Distinct from confidence (operator-set).
   Three separate thresholds: read / propose / promote.
-  Default: 0.0 / 0.60 / 0.80.
+  Default: 0 / 12 / 16.
 """
 ```
 
@@ -206,9 +206,9 @@ note    = "capability invalid after this epoch string; rolls with revocation"
 min_rating_federate  = "Meme"   # Noise and Data are node-local only
 
 # Believability gate — manaoio scalar
-min_manaoio_read     = 0.0
-min_manaoio_propose  = 0.60
-min_manaoio_promote  = 0.80
+min_manaoio_read     = 0
+min_manaoio_propose  = 12
+min_manaoio_promote  = 16
 
 # Stage band is a UX/rendering annotation only.
 # Room recipes MAY include stage-based filter predicates as operator configuration,

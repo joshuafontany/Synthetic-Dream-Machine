@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel"
 file-path = "bags/@lararium/v0.1/tw5/ui/iam-panel.md"
 type = "text/vnd.tiddlywiki"
 register     = "CS"
-confidence   = 0.90
-mana         = 0.90
-manao        = 0.88
-manaoio      = 0.85
+confidence   = 18
+mana         = 18
+manao        = 18
+manaoio      = 17
 role         = "character sheet template: renders #iam metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
 cacheable    = true
 retain       = true
@@ -36,7 +36,7 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~/ahu >>
 
-\procedure lar-stat-bar(field, value, threshold:"0.80")
+\procedure lar-stat-bar(field, value, threshold:"16")
 <div class="lar-stat-row">
   <span class="lar-stat-label"><<field>></span>
   <span class="lar-stat-value" data-value=<<value>>

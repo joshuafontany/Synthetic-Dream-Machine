@@ -5,11 +5,11 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils"
 file-path    = "bags/@lares/v0.1/api/pono/sharktooth-sigils.md"
 type         = "text/x-memetic-wikitext"
-confidence   = 0.90
+confidence   = 18
 register     = "S"
-manaoio      = 0.88
-mana         = 0.90
-manao        = 0.88
+manaoio      = 18
+mana         = 18
+manao        = 18
 role         = "English alias redirect for nihomano-sigils; same meme, English face"
 cacheable    = true
 retain       = true

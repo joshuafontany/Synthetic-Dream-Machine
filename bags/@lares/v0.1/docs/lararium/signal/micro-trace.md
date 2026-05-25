@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace"
 file-path = "bags/@lares/v0.1/docs/lararium/signal/micro-trace.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.80
+confidence = 16
 register = "S"
-manaoio = 0.82
-mana = 0.78
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "docs room for lararium-side micro-trace contract, syntax, density bands, and handoff boundary rules"
 cacheable = false
 retain = false
@@ -50,7 +50,7 @@ This room now carries the lararium-side micro-trace strand directly.
 
 - domain: `lares/signal/`
 - posture: backward-looking in-flow annotation layer
-- status: `[CS:0.80]` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
+- status: `[CS~16]` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
 - source lineage: `builds.stuffed.failed/agents/Lares_Preferences.md` § Signal HUD, confirmed in session
 - backlog links: `lares/sprints/SPRINT_ROADMAP_1_4.md`, `lares/sprints/SPRINT_ROADMAP_1_5.md`
 
@@ -133,11 +133,11 @@ It gates transition categories by externally observable significance.
 
 | Band | p range | Phases emitting | What fires |
 |---|---|---|---|
-| 1 | `p0.0–0.2` | — | Suppress: no inline annotation |
-| 2 | `p0.2–0.4` | ↺ Aftermath | Closing path summary at span-close only |
-| 3 | `p0.4–0.6` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `p0.5` |
-| 4 | `p0.6–0.8` | ⏿ Orient + Band 3 | Adds Orient |
-| 5 | `p0.8–1.0` | All five phases | Full path summary per span |
+| 1 | `p~0–0.2` | — | Suppress: no inline annotation |
+| 2 | `p~4–0.4` | ↺ Aftermath | Closing path summary at span-close only |
+| 3 | `p~8–0.6` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `p~10` |
+| 4 | `p~12–0.8` | ⏿ Orient + Band 3 | Adds Orient |
+| 5 | `p~16–1.0` | All five phases | Full path summary per span |
 
 Commitment phases remain externally observable and timestamp-meaningful.
 Cognitive-processing phases remain span-internal and can stay suppressed at operational resolution.
@@ -176,7 +176,7 @@ If a response claims OODA-HA event trace, that belongs in event markers.
 
 ### OODA-HA Phase Sigils
 
-Phase glyphs are render-target labels and display-only shorthand. These should be used when the operater invokes high `[HA^]` slider values, or when phase chages happen during generative text and them should be flagged for the operator.
+Phase glyphs are render-target labels and display-only shorthand. These should be used when the operater invokes high `[HA^]` Level values, or when phase chages happen during generative text and them should be flagged for the operator.
 
 | Phase | Glyph | Hex entity | Keyword | When active |
 |---|---|---|---|---|
@@ -221,7 +221,7 @@ They do not count as inline intent signals.
 ### Ordinary governed reply
 
 ```
-//threshold.uncertain.opens [S:0.65] 🏛️ ◇ @r
+//threshold.uncertain.opens [S~13] 🏛️ ◇ @r
 
 The ask points at a real boundary in the runtime. →▶ The node answers directly. →↺
 ```
@@ -229,13 +229,13 @@ The ask points at a real boundary in the runtime. →▶ The node answers direct
 ### Mixed flow: parse then governed reply
 
 ```
-lares@Enyalios:~$ lares --parse p0.2 "floating p value, but did that actually change the scale?"
+lares@Enyalios:~$ lares --parse p~4 "floating p value, but did that actually change the scale?"
 
-Segments: 2 | Entry: //input.testing.probes [SP:0.45] 🏛️ ⏿ @r | Exit: //question.audit.holds [S:0.60] 🏛️ ⏿ @r
-floating p value → //signal.uncertain.probes [SP:0.45] 🏛️ ⏿ @r
-but did that actually change the scale? → //question.audit.holds [S:0.60] 🏛️ ⏿ @r
+Segments: 2 | Entry: //input.testing.probes [SP~9] 🏛️ ⏿ @r | Exit: //question.audit.holds [S~12] 🏛️ ⏿ @r
+floating p value → //signal.uncertain.probes [SP~9] 🏛️ ⏿ @r
+but did that actually change the scale? → //question.audit.holds [S~12] 🏛️ ⏿ @r
 
-//question.audit.holds [S:0.72] 🏛️ ◇ @r
+//question.audit.holds [S~14] 🏛️ ◇ @r
 
 Yes. The parse layer and the trace layer were being conflated. →▶ The governed reply states the fix. →↺
 ```
@@ -243,13 +243,13 @@ Yes. The parse layer and the trace layer were being conflated. →▶ The govern
 ### Sub-agent dispatch and return
 
 ```
-lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS:0.80&p=0.5&ffz=0.7.1.0.0
-→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S:0.65&p=0.5&ffz=1.7.0.0.0
+lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS~16&p=10&ffz=0.7.1.0.0
+→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S~13&p=10&ffz=1.7.0.0.0
 
 [Explore agent — contents not in parent trace]
 
-lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S:0.65&p=0.5&ffz=1.7.0.0.0
-→ lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS:0.80&p=0.5&ffz=0.7.1.0.0
+lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S~13&p=10&ffz=1.7.0.0.0
+→ lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS~16&p=10&ffz=0.7.1.0.0
 ```
 
 <<~/ahu >>
@@ -260,8 +260,8 @@ Key operator ruling confirmed: **sub-agent dispatches require URI → URI pair**
 
 | Decision | Status | Notes |
 |---|---|---|
-| HUD scope ruling | `[CS:0.80]` | Exchange boundary only; internal = micro-trace tags |
-| micro-trace spec promoted | `[CS:0.85]` | `lares/signal/micro-trace.md` is the live spec |
+| HUD scope ruling | `[CS~16]` | Exchange boundary only; internal = micro-trace tags |
+| micro-trace spec promoted | `[CS~17]` | `lares/signal/micro-trace.md` is the live spec |
 
 <<~/ahu >>
 

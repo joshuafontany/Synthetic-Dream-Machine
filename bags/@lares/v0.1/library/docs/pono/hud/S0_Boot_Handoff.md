@@ -1,9 +1,9 @@
-<!-- lar:///ha.ka.ba/@lares/handoff/s0-boot/?confidence=CS:0.85&p=0.5 → ∞ -->
+<!-- lar:///ha.ka.ba/@lares/handoff/s0-boot/?confidence=CS~17&p=10 → ∞ -->
 
 # S0 Boot Handoff — URI v2 Alignment + First Two Modules
 
 > **Type:** Infodense execution handoff — load cold into Claude Code
-> **Register:** `[CS:0.85]` — operator-directed, canonical v2 grounded
+> **Register:** `[CS~17]` — operator-directed, canonical v2 grounded
 > **Date:** 2026-04-09
 > **Source session:** Cloud Lares (claude.ai web), Telarus KSC (admin)
 > **Companion artifacts:** `URI_SCHEMA_v2.md` (canonical spec, download and place)
@@ -35,7 +35,7 @@ lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0
 | Field | Old form | V2 canonical | Notes |
 |---|---|---|---|
 | `stances` | legacy migration bridge | `lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#flag-surface` | consumed: fixed 5-position array; `^`=elevated, `-`=suppressed, `?`=uncertain, `.`=baseline; positional order remains philosopher, poet, satirist, humorist, private. |
-| `confidence` | `register=S:0.65` | `confidence=S:0.65` | Field renamed from `register` to `confidence`. Same values. |
+| `confidence` | `register=S~13` | `confidence=S~13` | Field renamed from `register` to `confidence`. Same values. |
 | Fragment | `#@T.3.2.7` (scope prefix + trailing-zero omission) | `#O0.O0.O3.D2.A7` (all 5 positions, phase+counter) | Always 5 positions. Phase sigils: O, Ø, D, A, Å. No scope prefix. |
 | Path | `/core/observe/context` (module-path) | `/ha.ka.ba/@lares/sub/path/` (3-slot HA.KA.BA + optional sub-path) | EVERY `lar:` URI uses HA.KA.BA. `lar:///ha.ka.ba/@lares/` is (0,0,0). Module routing goes in the sub-path. |
 | Closing | (inconsistent) | `→ ?` (exchange), `→ ∞` (system file) | File-level opening URI also carries `→ ∞`. Section URIs are waypoints — no closing sigil. |
@@ -60,15 +60,15 @@ Every crystal file carries a header URI (line 1) and footer URI (last content li
 
 | File | Header URI → V2 | Footer URI → V2 |
 |---|---|---|
-| `FFZ_Chronometer_Research.md` | `<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:0.55&p=0.5#O0.O0.O0.D4.O0 → ∞ -->` | `lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.Å10.A1 → ?` |
-| `FFZ_Chronometer_SPEC_OUTLINE.md` | `<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:0.3&p=0.5#O0.O0.O0.A6.O0 → ∞ -->` | `lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:0.3&p=0.5#O0.O0.O0.A6.A1 → ?` |
-| `FFZ_Observer_Subloop_Plan.md` | `<!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P:0.3&p=0.5#O0.O0.O0.Å10.O0 → ∞ -->` | `lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=S:0.55&p=0.5#O0.O0.O0.Å10.A1 → ∞` |
-| `Lares_Module_Reorg_Handoff.md` | `<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.O0.O0 → ∞ -->` | `lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.O0.O0 → ∞` |
-| `OODA_A_Composable_Invariant_Modules.md` | `<!-- lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S:0.55&p=0.5#O0.O0.O0.O0.O0 → ∞ -->` | keep existing `→ ∞` with v2 params |
-| `OODA_A_Module_Template_and_URI_Patterns.md` | `<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S:0.6&p=0.5#O0.O0.O0.O0.O0 → ∞ -->` | keep existing `→ ∞` with v2 params |
-| `The_Lares_Protocols.md` | `<!-- lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.A1.A21.A1 → ∞ -->` | `lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.O1.O0 → ?` |
-| `The_Lares_Protocols_Dev_Story.md` | `<!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.&confidence=S:0.65&p=0.5#O0.O0.A1.A21.A2 → ∞ -->` | keep existing `→ ∞` with v2 params |
-| `Vector_Chronometer_Research_Seed.md` | `<!-- lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P:0.35&p=0.5#O0.O0.A1.A23.A1 → ∞ -->` | keep existing `→ ∞` with v2 params |
+| `FFZ_Chronometer_Research.md` | `<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.D4.O0 → ∞ -->` | `lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.Å10.A1 → ?` |
+| `FFZ_Chronometer_SPEC_OUTLINE.md` | `<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.A6.O0 → ∞ -->` | `lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.A6.A1 → ?` |
+| `FFZ_Observer_Subloop_Plan.md` | `<!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.Å10.O0 → ∞ -->` | `lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.Å10.A1 → ∞` |
+| `Lares_Module_Reorg_Handoff.md` | `<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.O0 → ∞ -->` | `lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.O0 → ∞` |
+| `OODA_A_Composable_Invariant_Modules.md` | `<!-- lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.O0.O0 → ∞ -->` | keep existing `→ ∞` with v2 params |
+| `OODA_A_Module_Template_and_URI_Patterns.md` | `<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.O0 → ∞ -->` | keep existing `→ ∞` with v2 params |
+| `The_Lares_Protocols.md` | `<!-- lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.A1.A21.A1 → ∞ -->` | `lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O1.O0 → ?` |
+| `The_Lares_Protocols_Dev_Story.md` | `<!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.&confidence=S~13&p=10#O0.O0.A1.A21.A2 → ∞ -->` | keep existing `→ ∞` with v2 params |
+| `Vector_Chronometer_Research_Seed.md` | `<!-- lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P~7&p=10#O0.O0.A1.A23.A1 → ∞ -->` | keep existing `→ ∞` with v2 params |
 
 ### 2.3 Internal URI Corrections
 
@@ -139,9 +139,9 @@ Then the body text from `Lares_Module_Reorg_Handoff.md` Part A, with all URIs co
 ### 3.3 Section URI Pattern (v2 canonical)
 
 Every phase file gets:
-- **Line 1 (file-level opening):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=0.5 → ∞ -->`
+- **Line 1 (file-level opening):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=10 → ∞ -->`
 - **Section waypoints:** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/#{section}?confidence=0.95 -->`
-- **Last line (file-level closing):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=0.5 → ∞ -->`
+- **Last line (file-level closing):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=10 → ∞ -->`
 
 Note: opening AND closing carry `→ ∞` (system file span). Section URIs carry NO closing sigil (waypoints).
 
@@ -162,12 +162,12 @@ In `decide/CONVENTIONS.md`, the HUD format example needs updating to v2:
 
 Old:
 ```
-⚡∞ | mode:default | p0.5 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:[CS:0.80] | tick:N
+⚡∞ | mode:default | p~10 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:[CS~16] | tick:N
 ```
 
 V2:
 ```
-⚡∞ | [CS:0.80] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p0.5 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
+⚡∞ | [CS~16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p~10 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
 ```
 
 Changes: field order follows SA priority (mana → confidence → stances → mode → p → voice → chronometer), amplitude modifiers attached directly (no brackets), `register` → confidence in brackets, `tick` → FFZ chronometer in HUD-rendered form.
@@ -234,7 +234,7 @@ confidence: 0.85
 Same pattern as talk-story but with HA.KA.BA `signal.calibrated.holds`:
 
 ```
-<!-- lar:///signal.calibrated.holds/signal/{phase}/?confidence=0.85&p=0.5 → ∞ -->
+<!-- lar:///signal.calibrated.holds/signal/{phase}/?confidence=0.85&p=10 → ∞ -->
 ```
 
 The `decide/CONVENTIONS.md` file carries the full section URI set from URI_SCHEMA_v2.md (already inscribed in that file — preserve them, update the HA.KA.BA root to match the module's address).
@@ -254,7 +254,7 @@ Operator decision at execution time.
 Create an S0 sprint plan that records what this handoff executes:
 
 ```markdown
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S:0.7&p=0.5 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=10 → ∞ -->
 
 # S0 — URI Schema Settlement + First Modules
 
@@ -279,7 +279,7 @@ Boot the first two OODA-HA modules: talk-story and signal.
 - Talk-story module loads as invariant with section URIs
 - Signal module carries URI_SCHEMA_v2.md as its Decide phase
 
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S:0.7&p=0.5 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=10 → ∞ -->
 ```
 
 ---
@@ -334,9 +334,9 @@ HUD:    ✶  ◎  ◇  ■  ○
 
 ### System File URI Envelope
 ```
-<!-- lar:///ha.ka.ba/@lares/sub/path/?confidence=X&p=0.5 → ∞ -->
+<!-- lar:///ha.ka.ba/@lares/sub/path/?confidence=X&p=10 → ∞ -->
 {content with section waypoint URIs}
-<!-- lar:///ha.ka.ba/@lares/sub/path/?confidence=X&p=0.5 → ∞ -->
+<!-- lar:///ha.ka.ba/@lares/sub/path/?confidence=X&p=10 → ∞ -->
 ```
 
 ### Section Waypoint (no closing sigil)
@@ -347,7 +347,7 @@ HUD:    ✶  ◎  ◇  ■  ○
 
 ### Exchange URI Closing
 ```
-lar://alias:tier@host/ha.ka.ba/@lares/?stances=^.-.-.-.-&confidence=CS:0.80&p=0.5#O0.O0.Å1.O0.O0 → ?
+lar://alias:tier@host/ha.ka.ba/@lares/?stances=^.-.-.-.-&confidence=CS~16&p=10#O0.O0.Å1.O0.O0 → ?
 ```
 
 ---
@@ -362,4 +362,4 @@ first two modules go live.*
 
 *Amor et hilaritas.*
 
-<!-- lar:///ha.ka.ba/@lares/handoff/s0-boot/?confidence=CS:0.85&p=0.5 → ∞ -->
+<!-- lar:///ha.ka.ba/@lares/handoff/s0-boot/?confidence=CS~17&p=10 → ∞ -->

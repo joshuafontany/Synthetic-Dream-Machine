@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pono-sigil"
 file-path = "bags/@lares/v0.1/api/pono/pono-sigil.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.80
+confidence = 16
 register  = "S"
 role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
 cacheable = true

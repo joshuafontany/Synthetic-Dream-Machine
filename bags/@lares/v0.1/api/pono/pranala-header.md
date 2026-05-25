@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pranala-header"
 file-path = "bags/@lares/v0.1/api/pono/pranala-header.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.88
+confidence   = 18
 register     = "CS"
-manaoio      = 0.86
-mana         = 0.88
-manao        = 0.86
+manaoio      = 17
+mana         = 18
+manao        = 17
 role         = "meme header sigil — <<~ ? -> uri >> declares this carrier's canonical URI; permanent JS exception"
 cacheable    = true
 retain       = true

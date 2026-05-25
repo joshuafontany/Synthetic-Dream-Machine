@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
 file-path = "bags/@lares/v0.1/api/pono/pranala.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.82
+confidence = 16
 register = "CS"
-manaoio = 0.74
-mana = 0.82
-manao = 0.78
+manaoio = 15
+mana = 16
+manao = 16
 role = "invariant edge law"
 cacheable=true
 retain = true

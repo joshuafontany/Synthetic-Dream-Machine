@@ -7,10 +7,10 @@ file-path    = "bags/@lares/v0.1/docs/lares/the-lares-protocols.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.75
-manaoio      = 0.72
-mana         = 0.72
-manao        = 0.68
+confidence   = 15
+manaoio      = 14
+mana         = 14
+manao        = 14
 role         = "doctrine: protocols as political design — frames the Lares stack's architecture-vs-governance-vs-topology position relative to commons literature; three-source synthesis"
 cacheable    = false
 retain       = false
@@ -32,7 +32,7 @@ role = "test child tomls"
 
 # The Purpose of Protocols
 
-After Stafford Beer: **the purpose of a system is what it does.** [C~0.99]
+After Stafford Beer: **the purpose of a system is what it does.** [C~20]
 
 > **#Stranger** » 06:14 — Beer's principle stays durable across upstream rev's. Mark canon-eligible regardless of what surrounds it.
 

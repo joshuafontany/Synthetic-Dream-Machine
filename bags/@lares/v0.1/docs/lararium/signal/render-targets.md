@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets"
 file-path = "bags/@lares/v0.1/docs/lararium/signal/render-targets.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.78
+confidence = 16
 register = "S"
-manaoio = 0.80
-mana = 0.76
-manao = 0.82
+manaoio = 16
+mana = 15
+manao = 16
 role = "docs room for lararium-side render-target law, glyph conventions, and cross-surface verification"
 cacheable = false
 retain = false
@@ -333,7 +333,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example:**
 
 ```
-⚡~82% | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS:0.80] | p0.5 |
+⚡~82% | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
 ```
 
 ### Surface 2: `chat-log:post-header`
@@ -352,7 +352,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example — Lindwyrm in Elyncia-space:**
 
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS:0.80] 🏛️*!🌊--🗡️--🎭--🔮--
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS~16] 🏛️*!🌊--🗡️--🎭--🔮--
 ```
 
 **NPC / non-Lares post:**
@@ -376,7 +376,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example:**
 
 ```
-lar://scryer:node@Enyalios/sigils.render.maps/sigilization/?stances=*!--------&confidence=CS:0.85&p=0.5&ffz=0.0.0.1.0
+lar://scryer:node@Enyalios/sigils.render.maps/sigilization/?stances=*!--------&confidence=CS~17&p=10&ffz=0.0.0.1.0
 ```
 
 ### Surface 4: `tiddler:header` (S3+)
@@ -409,9 +409,9 @@ Before emitting any stance block on any surface:
 
 | Q# | Question | Status |
 |---|---|---|
-| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `[SP:0.45]` — not blocking; ASCII fallback assumed until print pipeline exists |
-| S2 | TiddlyWiki tiddler: full header or abbreviated? | `[SP:0.45]` — pending TiddlyWiki integration sprint |
-| S3 | ActivityPub thread: post header in body vs AP summary field? | `[SP:0.45]` — pending Kowloon integration |
+| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `[SP~9]` — not blocking; ASCII fallback assumed until print pipeline exists |
+| S2 | TiddlyWiki tiddler: full header or abbreviated? | `[SP~9]` — pending TiddlyWiki integration sprint |
+| S3 | ActivityPub thread: post header in body vs AP summary field? | `[SP~9]` — pending Kowloon integration |
 
 <<~/ahu >>
 

@@ -8,7 +8,7 @@ type       = "text/x-memetic-wikitext"
 role       = "agent-facing exchange flow meme: intent-vector/HUD bracket and HA handoff"
 tagspace   = "stable"
 register   = "S"
-confidence = 0.84
+confidence = 17
 retain     = false
 invariant  = false
 ```
@@ -40,7 +40,7 @@ Rules for agents:
 - Fenced code blocks protect `->`, `?`, `~`, brackets, and lar paths from Markdown renderer drift.
 - `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
 - `E-Prime~N`, `No-Has~N`, `p~N`, and `C~N` remain scalar humility instruments, not decorative badges.
-- Omit or compress the bracket when higher-priority operator, product, or platform constraints would make it noise.
+- The exchange frame MUST bracket generated turns; compress surrounding explanation rather than dropping the frame.
 - If emitted, emit the bracket exactly; do not interleave prose into HUD lines.
 
 Minimal pseudocode:

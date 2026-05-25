@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/canvas/rooms"
 file-path = "bags/@lararium/v0.1/tw5/canvas/rooms.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.80
+confidence   = 16
 register     = "CS"
-manaoio      = 0.78
-mana         = 0.82
-manao        = 0.80
+manaoio      = 16
+mana         = 16
+manao        = 16
 role         = "lararium canvas room registry — default rooms, portals, layout types"
 cacheable    = true
 retain       = true

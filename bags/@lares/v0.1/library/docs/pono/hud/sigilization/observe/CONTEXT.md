@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///sigils.render.maps/sigilization/observe/?confidence=CS:0.85&p=0.5 -->
+<!-- ∞ → lar:///sigils.render.maps/sigilization/observe/?confidence=CS~17&p=10 -->
 
 # Sigilization — Observe: Context and Bug History
 

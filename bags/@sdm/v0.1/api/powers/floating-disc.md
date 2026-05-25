@@ -17,10 +17,10 @@ tags      = [
 
 tagspace = "sdm"
 register = "CS"
-confidence = 0.84
-mana = 0.74
-manao = 0.86
-manaoio = 0.82
+confidence = 17
+mana = 15
+manao = 17
+manaoio = 16
 cacheable = true
 retain = true
 invariant = false
@@ -54,7 +54,7 @@ p = 2
 range = "30m"
 target = "point"
 duration = "1 hour"
-source = "Ultraviolet Grasslands and the Black City 2e, p.198"
+source = "Ultraviolet Grasslands and the Black City 2e, p~4"
 ```
 
 ## Floating Disc

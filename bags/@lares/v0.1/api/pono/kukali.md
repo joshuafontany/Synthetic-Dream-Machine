@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kukali"
 file-path = "bags/@lares/v0.1/api/pono/kukali.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.82
+confidence   = 16
 register     = "CS"
-manaoio      = 0.80
-mana         = 0.84
-manao        = 0.82
+manaoio      = 16
+mana         = 17
+manao        = 16
 role         = "reactive wait posture inside a causal island — Verse suspends analogue; execution yields until named papalohe trigger fires"
 cacheable    = true
 retain       = true

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/if"
 file-path = "bags/@lares/v0.1/api/pono/if.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.88
+confidence   = 18
 register     = "S"
-manaoio      = 0.86
-mana         = 0.88
-manao        = 0.86
+manaoio      = 17
+mana         = 18
+manao        = 17
 role         = "English alias pointer — \\if redirects to heihei; canonical spec lives at pono/heihei"
 cacheable    = true
 retain       = true

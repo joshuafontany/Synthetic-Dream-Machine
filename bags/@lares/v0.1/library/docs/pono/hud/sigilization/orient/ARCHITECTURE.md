@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///sigils.render.maps/sigilization/orient/?confidence=CS:0.85&p=0.5 -->
+<!-- ∞ → lar:///sigils.render.maps/sigilization/orient/?confidence=CS~17&p=10 -->
 
 # Sigilization — Orient: Architecture and Mapping Tables
 

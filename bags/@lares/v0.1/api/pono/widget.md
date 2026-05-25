@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/widget"
 file-path = "bags/@lares/v0.1/api/pono/widget.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.85
+confidence   = 17
 register     = "S"
-manaoio      = 0.83
-mana         = 0.85
-manao        = 0.83
+manaoio      = 17
+mana         = 17
+manao        = 17
 role         = "\\widget pragma-alias sigil — declares a named ~widget callable via the ~ dispatcher; operator extension point"
 cacheable    = true
 retain       = true

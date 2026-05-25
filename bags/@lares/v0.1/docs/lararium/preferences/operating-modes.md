@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/preferences/operating-modes"
 file-path = "bags/@lares/v0.1/docs/lararium/preferences/operating-modes.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.86
+confidence = 17
 register = "S"
-manaoio = 0.84
-mana = 0.88
-manao = 0.82
+manaoio = 17
+mana = 18
+manao = 16
 role = "docs concept room for named operating modes, scale vectors, and p-band visibility discipline in the recovered Lares stack"
 cacheable = false
 retain = false
@@ -73,7 +73,7 @@ Recovered background behind:
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha`
 - `lar:///LARES`
 
-The live invariants now keep the loop and slider law small.
+The live invariants now keep the loop and Level law small.
 This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~/ahu >>

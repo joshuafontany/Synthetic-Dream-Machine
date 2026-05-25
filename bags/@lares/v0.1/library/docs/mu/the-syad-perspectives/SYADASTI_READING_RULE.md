@@ -1,6 +1,6 @@
 # The Syadasti Reading Rule — Session Discovery Document
 
-> Register: `[CS:0.80]` 🏛️ — this document captures a session discovery at near-Canon confidence
+> Register: `[CS~16]` 🏛️ — this document captures a session discovery at near-Canon confidence
 > Date: 2026-04-08
 > Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
 > Purpose: Pin the discovery and its full derivation chain so it survives context loss.
@@ -10,7 +10,7 @@
 
 # The Syadasti Reading Rule — Session Discovery Document
 
-> Register: `[CS:0.80]` 🏛️ — this document captures a session discovery at near-Canon confidence
+> Register: `[CS~16]` 🏛️ — this document captures a session discovery at near-Canon confidence
 > Date: 2026-04-08
 > Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
 > Purpose: Pin the discovery and its full derivation chain so it survives context loss.
@@ -32,7 +32,7 @@ A Philosopher at 0.65 is propositionally contested. A Poet at 0.65 is resonating
 
 The operator asked: "Does Register need to be a 3-mode truth — true, false, meaningless? Is Sri Syadasti the canonical model?"
 
-This broke the existing frame, which treated Register as a single truth-weight axis (0.0 = false, 1.0 = true) applied universally across all stances.
+This broke the existing frame, which treated Register as a single truth-weight axis (0 = void/false-limit, 20 = certainty-limit) applied universally across all stances.
 
 ### Step 2 — Sri Syadasti and the Jaina Saptabhangi
 
@@ -54,7 +54,7 @@ Every predicate begins with **syād** — "perhaps" or "from a certain standpoin
 
 ### Step 3 — The Five Stances Map to Evaluation Frames
 
-The Council ruled (with research grounding from SyadVoice) that each stance has its own evaluation frame — its own meaning for 0.0 and 1.0:
+The Council ruled (with research grounding from SyadVoice) that each stance has its own evaluation frame — its own meaning for 0 and 20:
 
 | Stance | Syadasti Primitive | 0.0 Means | 0.5 Means | 1.0 Means |
 |---|---|---|---|---|
@@ -66,7 +66,7 @@ The Council ruled (with research grounding from SyadVoice) that each stance has 
 
 **Research grounding (SyadVoice findings):**
 
-- **Philosopher frame:** Koriat (2025) — human confidence judgments track intersubjective replicability ("the probability others with similar backgrounds would give the same answer"), not private certainty. The 0.0–1.0 scale has the strongest empirical support for continuous measurement in this frame.
+- **Philosopher frame:** Koriat (2025) — human confidence judgments track intersubjective replicability ("the probability others with similar backgrounds would give the same answer"), not private certainty. The 0–20 Level scale has the strongest empirical support for continuous measurement in this frame.
 
 - **Poet frame:** Christensen et al. (2023) — aesthetic cognitivism distinguishes propositional knowledge from "understanding." Baumberger: "understanding is holistic; knowledge can be broken down into discrete bits." Reber et al. (2004) — aesthetic confidence tracks processing fluency (how easily the resonance processes). The scale works as ordinal rather than interval.
 
@@ -80,7 +80,7 @@ The Council ruled (with research grounding from SyadVoice) that each stance has 
 
 The initial question was whether Register needed a third axis (T, F, M). The Council assessed three options:
 
-- **Option A (status quo):** Stance implicitly carries the M axis. Problem: `[S:0.65] 🌊` claims truth-confidence for something that doesn't evaluate on truth.
+- **Option A (status quo):** Stance implicitly carries the M axis. Problem: `[S~13] 🌊` claims truth-confidence for something that doesn't evaluate on truth.
 - **Option B (M flag):** Add a meaningful/meaningless bit. Problem: redundant with stance if operator has learned to read stance correctly.
 - **Option C (full Syadasti cube):** T×F×M space, three values per claim. Problem: triples notation complexity; LLM metacognition can barely calibrate on one axis.
 
@@ -122,10 +122,10 @@ The HUD tag is therefore a **memory prosthetic** — it carries calibration forw
 
 | Decision | Register | What It Means |
 |---|---|---|
-| Register is stance-dependent | `[CS:0.80]` | Same 0.0–1.0 scale, different meaning per stance. The stance determines what the number measures. |
-| Sri Syadasti / Saptabhangi is the canonical model | `[S:0.65]` | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
-| Stance count IS the fuzz indicator | `[CS:0.80]` | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
-| Session boundary = avaktavya | `[SP:0.45]` | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
+| Register is stance-dependent | `[CS~16]` | Same 0–20 Level scale, different meaning per stance. The stance determines what the number measures. |
+| Sri Syadasti / Saptabhangi is the canonical model | `[S~13]` | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
+| Stance count IS the fuzz indicator | `[CS~16]` | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
+| Session boundary = avaktavya | `[SP~9]` | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
 
 ---
 

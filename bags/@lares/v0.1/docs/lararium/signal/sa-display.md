@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal/sa-display"
 file-path = "bags/@lares/v0.1/docs/lararium/signal/sa-display.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.80
+confidence = 16
 register = "S"
-manaoio = 0.82
-mana = 0.78
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
 cacheable = false
 retain = false
@@ -99,11 +99,11 @@ It annotates the inside of a generative span.
 |---|---|---|
 | Taskwork SA | HAKABA address (`/threshold.uncertain.opens/(path)?`) | Semantic territory — what domain we're in |
 | Taskwork SA | FFZ chronometer (`&ffz=7.2.3.0.0`) | Temporal position — current location in nested scope by scale position and action count |
-| Agent SA | Register (`[S:0.65]`) | Epistemic confidence — the node's degree of certainty |
+| Agent SA | Register (`[S~13]`) | Epistemic confidence — the node's degree of certainty |
 | Agent SA | Full stance array (`🏛️🌊🗡️🎭🔮`) | Discourse posture across all five fixed stance positions; the full HUD line keeps all five visible |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next HUD or `lar` URI should reflect the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `⤴ ↺`) | Cognitive movement through the current OODA-HA phase set |
-| Teamwork SA | p-band (`p0.5`) | Attention density — cognitive load management |
+| Teamwork SA | p-band (`p~10`) | Attention density — cognitive load management |
 | Teamwork SA | Input reading (dual-URI vector) | Bidirectional calibration — how the node read the operator's input, how the node intends to respond |
 
 Current law keeps all five stances visible in fully rendered HUD and `lar` URI forms.

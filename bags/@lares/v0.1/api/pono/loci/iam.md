@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci/iam"
 file-path = "bags/@lares/v0.1/api/pono/loci/iam.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.70
+confidence = 14
 register = "CS"
-manaoio = 0.68
-mana = 0.76
-manao = 0.84
+manaoio = 14
+mana = 15
+manao = 17
 role = "root metadata law (kānāwai), field-set authority, and reduction charter"
 ```
 
@@ -24,6 +24,8 @@ This meme freezes the surviving field surface for live carriers. It asks each fi
 This meme does not solve weak metadata by adding new buckets. It sharpens the surviving buckets and lets informative weakness remain visible.
 
 **Rating Note:** The five-bucket structural rating (noise → data → meme → ano → kapu) is canonical for all meme law. Here `data` names structured language an AI can use without the memetic wrappers. This law governs the field set, not the rating buckets themselves. Promotion to lares/ canon is a separate ceremony.
+
+**Level Note:** Numeric readiness, trust, mana, stage, and HUD dials now use integer Levels on `0–20`, aligned with SDM+ Levels. Former `0.00–1.00` scalar values convert by `round(old * 20)`. Level `0` means void, off, or absent only when a specific instrument permits that reading. Level `20` marks a limit case; confidence-like instruments SHOULD almost never reach it. Most living system dials SHOULD live at `1–17`; reserve `18–20` for apron, kapu, direct-address, or near-certainty pressure.
 
 
 <<~ ahu #ooda-ha >>

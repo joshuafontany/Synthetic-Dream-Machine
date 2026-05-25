@@ -7,10 +7,10 @@ file-path      = "bags/@lares/v0.1/docs/lares/the-lararium-hud.md"
 type           = "text/x-memetic-wikitext"
 tagspace       = "stable"
 register       = "CS"
-confidence     = 0.72
-manaoio        = 0.68
-mana           = 0.75
-manao          = 0.70
+confidence     = 14
+manaoio        = 14
+mana           = 15
+manao          = 14
 role           = "doctrine: Quine-Wiki AI-Operator Alignment HUD; UEFN island-model ontology alignment; four-scale fractal ReactionEngine; channel_device event-bus equivalence; magical federated mesh system identity"
 cacheable      = false
 retain         = false
@@ -37,20 +37,20 @@ sources        = [
 
 # The Lararium HUD
 
-After Beer: **the purpose of a system is what it does.** [C~0.99]
+After Beer: **the purpose of a system is what it does.** [C~20]
 
-This system functions as a **Quine-Wiki AI-Operator Alignment HUD**. [C~0.99]
+This system functions as a **Quine-Wiki AI-Operator Alignment HUD**. [C~20]
 
 Not a wiki that has a HUD. Not a HUD built on a wiki. The two collapse into the same thing at runtime.
 
-- **Quine**: the meme graph describes itself using the same addressing, storage, and filtering primitives it uses to describe everything else. No separate documentation layer. No privileged meta-level. A tiddler that holds schema rules serves as the schema at runtime (P1). A meme that holds device bindings operates as the device at runtime (P2). [C~0.99]
-- **Wiki**: bags hold tiddler records. Recipes compose bags into wiki views. TW5 renders the recipe into a UI. The bag functions as the canonical unit; the file functions as the projection. [C~0.99]
-- **AI-Operator Alignment**: the threshold relation between a human operator and an AI coordinator functions as the constitutive relationship of the system — not a feature layered on top. AGENTS.md serves as the boot screen. The Voices serve as the notification channels. The OODA-HA loop serves as the update cycle. The LARES dial panel serves as the configuration layer. [C~0.99]
-- **HUD**: the wiki functions as the Heads-Up Display. The operator reads the tiddler graph the way a pilot reads instruments — not the engine, but the state of the engine, rendered continuously in a form that supports decision. Confidence scores, mana levels, stage bands, pranala edges: all function as HUD instruments. [C~0.95]
+- **Quine**: the meme graph describes itself using the same addressing, storage, and filtering primitives it uses to describe everything else. No separate documentation layer. No privileged meta-level. A tiddler that holds schema rules serves as the schema at runtime (P1). A meme that holds device bindings operates as the device at runtime (P2). [C~20]
+- **Wiki**: bags hold tiddler records. Recipes compose bags into wiki views. TW5 renders the recipe into a UI. The bag functions as the canonical unit; the file functions as the projection. [C~20]
+- **AI-Operator Alignment**: the threshold relation between a human operator and an AI coordinator functions as the constitutive relationship of the system — not a feature layered on top. AGENTS.md serves as the boot screen. The Voices serve as the notification channels. The OODA-HA loop serves as the update cycle. The LARES dial panel serves as the configuration layer. [C~20]
+- **HUD**: the wiki functions as the Heads-Up Display. The operator reads the tiddler graph the way a pilot reads instruments — not the engine, but the state of the engine, rendered continuously in a form that supports decision. Confidence scores, mana levels, stage bands, pranala edges: all function as HUD instruments. [C~19]
 
 The home intranet RPG session — a Referee running encounters, managing NPCs, routing events across player-facing wikis — is the **first instantiation** of this system type. Not the definition of it. The system is generic. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
-> **#Stranger** » 03:17 — Lock the identity claim at C~0.99. It survives any specific upstream rev. The use-case list (RPG, household notes, research, creative writing) expands; the identity claim does not change shape with it. Mark canon-eligible when the meme reaches stable.
+> **#Stranger** » 03:17 — Lock the identity claim at C~20. It survives any specific upstream rev. The use-case list (RPG, household notes, research, creative writing) expands; the identity claim does not change shape with it. Mark canon-eligible when the meme reaches stable.
 
 <<~/ahu>>
 
@@ -132,14 +132,14 @@ The Session Wiki = the coordinator `lar_playspace`. Its recipe includes the shar
 **Scale-3 — Nexus Island (node-to-node federation)**
 The NexusRegistryDoc syncs via Subduction (Beelay). A node-to-node pranala connection forms a causal island boundary — named, capability-gated, carrying its own durable offset and epoch (edge island shape from federated-causal-islands). Scale-3 causality remains always non-simultaneous.
 
-**Scale-4 — Commons (the Universe horizon)** [C~0.92 after law-of-5s]
+**Scale-4 — Commons (the Universe horizon)** [C~18 after law-of-5s]
 Human endeavors are bounded at five scales. Scale-4 is the horizon beyond direct federation — the open web, public capability infrastructure, the set of all possible lararium nodes including those not yet reachable or known. No single node holds a snapshot of Scale-4 state; it is always non-simultaneously apprehended (Fuller-Zelenka principle extended to the boundary). The NexusRegistryDoc maps Scale-3 neighbors; Scale-4 is the Universe beyond the edge of the map. At Scale-4 the RE pattern applies in principle (public pranala edges, open corpus sharing, public Keyhive principal directories) but the mechanism becomes protocol-level rather than node-level — it cannot be directly implemented by any single node.
 
 Five scales, bounded sense of Universe, the fractal closes at the horizon.
 
 Each scale is structurally self-similar. The RE pattern (trigger surface → reaction dispatch → event emission) repeats at every scale that can be apprehended. This is the **fractal RE** — not a metaphor; the same ReactionGraph interface re-instantiated at different surfaces.
 
-> **#Council** » 11:02 — Mark the confidence gradient: Scale-0/1 C~0.95 (attested by existing code); Scale-2 C~0.75 (committed, unshipped); Scale-3 C~0.55 (speculative); Scale-4 C~0.40 (horizon, not an implementation target). The *shape* is self-similar at every scale; the *evidence* is not. Scale-4 names the bound, not a thing to build.
+> **#Council** » 11:02 — Mark the confidence gradient: Scale-0/1 C~19 (attested by existing code); Scale-2 C~15 (committed, unshipped); Scale-3 C~11 (speculative); Scale-4 C~8 (horizon, not an implementation target). The *shape* is self-similar at every scale; the *evidence* is not. Scale-4 names the bound, not a thing to build.
 
 <<~/ahu>>
 
@@ -240,7 +240,7 @@ Four invariants that follow from this framing:
 
 1. **The meme graph functions as the alignment surface.** What the AI coordinator knows about the operator's intentions = what the meme graph says. A meme absent from the graph represents an intention absent from the coordinator's reach. Authoring memes enacts alignment work.
 
-2. **Confidence scores function as alignment signals.** `confidence = 0.72` on this meme means: the coordinator expresses this doctrine with 72% confidence. The operator can see where the coordinator holds uncertainty. The HUD renders epistemic state, not just content state.
+2. **Confidence scores function as alignment signals.** `confidence = 14` on this meme means: the coordinator expresses this doctrine with Level 14 confidence. The operator can see where the coordinator holds uncertainty. The HUD renders epistemic state, not just content state.
 
 3. **Voice annotations function as alignment instruments.** When `#Council` warns about overstatement, or `#Liminal` holds open an unanswered question, the coordinator signals its own uncertainty to the operator. The annotation format serves as the alignment protocol.
 
@@ -274,30 +274,30 @@ This is not the RPG use-case. This is the **reference implementation** of the ge
 
 ## Locked Vocabulary
 
-The following names are locked at this meme's confidence level (C~0.72). Names in **bold** are new at this meme; others are confirmed from existing invariants.
+The following names are locked at this meme's confidence level (C~14). Names in **bold** are new at this meme; others are confirmed from existing invariants.
 
 | Name | UEFN source | Status | Definition |
 |---|---|---|---|
-| **Lararium Node** | Island / fort\_playspace | C~0.90 | One `lararium-node` process. The **experience** (authored environment) — NOT the runtime playspace. A node hosts sessions/rounds over its lifetime. |
-| **Session Wiki** | fort\_playspace / session (Simulation) | C~0.85 | Coordinator `lar_playspace`. Broadest recipe in the session; owns the session event-bus bag; pinned-hot. Coordinates N other `lar_playspace` wikis. `GetSession()` → `getSessionWiki()`; `creative_device.GetPlayspace()` → `getWiki()` for the relevant `lar_playspace`. |
-| **lar\_agent** | agent (Simulation) | C~0.82 | Universal participant supertype. Any addressable live entity on the wiki canvas (`player` class has  Keyhive principal identity) and event pins. Covers `player`-class (session-connected) and non-player Wiki Entities. `listenable(lar_agent)` ~ `listenable(agent)`. |
-| **Operator / Guest** | player (Simulation) | C~0.90 | Human session-connected participants. **Operator**: primary human principal, threshold relation (AGENTS.md). **Guest Users**: invited, limited cap. Neither has system authority. |
-| **lares-daemon** | player (Simulation) + system caps | C~0.82 | Session-connected AI coordinator(s). Verse class = `player` (live session link). Lares class = system principal: admin doc authority, Session RE operator, Keyhive system keypair, tier promotion authority. May be plural. The household spirits of the Lararium. |
-| **Wiki Entity / NPC** | `agent` (non-player) | C~0.78 | Generic active wiki entity — interactive characters, scripted actors, game NPCs. On the canvas but NOT session-connected. **No Keyhive identity** — reactive wiki entities only; they carry a `lar_character` tiddler and respond to RE reactions but hold no principal. Population open-ended. |
-| **Kumu Device** | creative\_device | C~0.80 | A meme with a trigger surface and typed KumuListenable/KumuSubscribable pins. `kumu-device.ts` sketch is throwaway; this name survives. |
-| **lar\_behavior** | npc\_behavior (AI module) | C~0.72 | Abstract base class for Wiki Entity lifecycle. Analogue of Verse `npc_behavior` (inherit to define entity logic; `OnBegin<override>` = entity spawns; `OnEnd` = entity despawns). In Lares: a kumu device implementing the RE reaction contract for a non-player agent. `lares-daemon` does NOT use `lar_behavior` (daemon = player-class, not NPC-class). |
-| **Bag scope** | agent\_group | C~0.68 | `agent_group` = "set of agents that share a common ownership." In Lares: a bag IS the ownership scope. Agents whose `lar_character` tiddlers live in the same Automerge bag form a natural group. Multi-daemon coordination = multiple `lares-daemon` agents in the Session Wiki bag. |
-| **lar\_character** | fort\_character | C~0.72 | Tiddler representing an Agent's embodied presence on the infinite canvas. Position fields, state, event pins. Driven by Operator, Guest, lares-daemon, or Wiki Entity. |
-| **Event-Bus Bag** | channel\_device | C~0.80 | Shared Automerge bag in the session recipe. The cross-wiki broadcast relay. |
-| **KumuListenable\<T\>** | listenable(t) | C~0.95 | OUTPUT pin. Locked in verse-event-lattice. |
-| **KumuSubscribable\<T\>** | subscribable(t) | C~0.95 | Persistent callback. Returns KumuCancelable. Locked in verse-event-lattice. |
-| **KumuAwaitable\<T\>** | awaitable(t) | C~0.95 | Single-shot suspension. Locked in verse-event-lattice. |
-| **KumuSignalable\<T\>** | signalable(t) | C~0.95 | INPUT pin. RE-internal. Locked in verse-event-lattice. |
-| **KumuEvent\<T\>** | event(t) | C~0.95 | Concrete event. Implements signalable + awaitable. Locked in verse-event-lattice. |
-| **KumuCancelable** | cancelable | C~0.95 | Subscription handle. `.cancel()` MUST be called on slot demotion. Locked in verse-event-lattice. |
-| **Hot / Cold Tier** | enableable | C~0.90 | Hot = enabled; Cold = disabled. Promotion/demotion = Enable()/Disable(). |
-| **Evicted Slot** | invalidatable | C~0.85 | Worker terminated. RE MUST NOT route events to evicted slots. |
-| **Fractal RE** | (island-scale pattern) | C~0.75 | ReactionGraph re-instantiated at Scale-0 through Scale-4. Same interface; different surfaces. Scale-4 = Commons horizon (boundary, not implementation target). |
+| **Lararium Node** | Island / fort\_playspace | C~18 | One `lararium-node` process. The **experience** (authored environment) — NOT the runtime playspace. A node hosts sessions/rounds over its lifetime. |
+| **Session Wiki** | fort\_playspace / session (Simulation) | C~17 | Coordinator `lar_playspace`. Broadest recipe in the session; owns the session event-bus bag; pinned-hot. Coordinates N other `lar_playspace` wikis. `GetSession()` → `getSessionWiki()`; `creative_device.GetPlayspace()` → `getWiki()` for the relevant `lar_playspace`. |
+| **lar\_agent** | agent (Simulation) | C~16 | Universal participant supertype. Any addressable live entity on the wiki canvas (`player` class has  Keyhive principal identity) and event pins. Covers `player`-class (session-connected) and non-player Wiki Entities. `listenable(lar_agent)` ~ `listenable(agent)`. |
+| **Operator / Guest** | player (Simulation) | C~18 | Human session-connected participants. **Operator**: primary human principal, threshold relation (AGENTS.md). **Guest Users**: invited, limited cap. Neither has system authority. |
+| **lares-daemon** | player (Simulation) + system caps | C~16 | Session-connected AI coordinator(s). Verse class = `player` (live session link). Lares class = system principal: admin doc authority, Session RE operator, Keyhive system keypair, tier promotion authority. May be plural. The household spirits of the Lararium. |
+| **Wiki Entity / NPC** | `agent` (non-player) | C~16 | Generic active wiki entity — interactive characters, scripted actors, game NPCs. On the canvas but NOT session-connected. **No Keyhive identity** — reactive wiki entities only; they carry a `lar_character` tiddler and respond to RE reactions but hold no principal. Population open-ended. |
+| **Kumu Device** | creative\_device | C~16 | A meme with a trigger surface and typed KumuListenable/KumuSubscribable pins. `kumu-device.ts` sketch is throwaway; this name survives. |
+| **lar\_behavior** | npc\_behavior (AI module) | C~14 | Abstract base class for Wiki Entity lifecycle. Analogue of Verse `npc_behavior` (inherit to define entity logic; `OnBegin<override>` = entity spawns; `OnEnd` = entity despawns). In Lares: a kumu device implementing the RE reaction contract for a non-player agent. `lares-daemon` does NOT use `lar_behavior` (daemon = player-class, not NPC-class). |
+| **Bag scope** | agent\_group | C~14 | `agent_group` = "set of agents that share a common ownership." In Lares: a bag IS the ownership scope. Agents whose `lar_character` tiddlers live in the same Automerge bag form a natural group. Multi-daemon coordination = multiple `lares-daemon` agents in the Session Wiki bag. |
+| **lar\_character** | fort\_character | C~14 | Tiddler representing an Agent's embodied presence on the infinite canvas. Position fields, state, event pins. Driven by Operator, Guest, lares-daemon, or Wiki Entity. |
+| **Event-Bus Bag** | channel\_device | C~16 | Shared Automerge bag in the session recipe. The cross-wiki broadcast relay. |
+| **KumuListenable\<T\>** | listenable(t) | C~19 | OUTPUT pin. Locked in verse-event-lattice. |
+| **KumuSubscribable\<T\>** | subscribable(t) | C~19 | Persistent callback. Returns KumuCancelable. Locked in verse-event-lattice. |
+| **KumuAwaitable\<T\>** | awaitable(t) | C~19 | Single-shot suspension. Locked in verse-event-lattice. |
+| **KumuSignalable\<T\>** | signalable(t) | C~19 | INPUT pin. RE-internal. Locked in verse-event-lattice. |
+| **KumuEvent\<T\>** | event(t) | C~19 | Concrete event. Implements signalable + awaitable. Locked in verse-event-lattice. |
+| **KumuCancelable** | cancelable | C~19 | Subscription handle. `.cancel()` MUST be called on slot demotion. Locked in verse-event-lattice. |
+| **Hot / Cold Tier** | enableable | C~18 | Hot = enabled; Cold = disabled. Promotion/demotion = Enable()/Disable(). |
+| **Evicted Slot** | invalidatable | C~17 | Worker terminated. RE MUST NOT route events to evicted slots. |
+| **Fractal RE** | (island-scale pattern) | C~15 | ReactionGraph re-instantiated at Scale-0 through Scale-4. Same interface; different surfaces. Scale-4 = Commons horizon (boundary, not implementation target). |
 
 > **#Lorekeeper** » 02:05 — vocabulary-lock table updated 2026-05-11: added Agent, Operator, NPPC, Kumu-Device Avatar, fort\_playspace, Session Wiki; fixed wrong `agent → Operator` row. Updated 2026-05-14: fixed Lararium Node = experience (NOT playspace); Session Wiki = lar\_playspace (runtime session scope); added lar\_behavior (npc\_behavior analogue) and Bag scope (agent\_group analogue). UEFN canonical: *"There is typically one fort\_playspace for an entire experience, though this may change in the future as the platform evolves"* — multi-playspace path now officially flagged by Epic.
 
@@ -374,18 +374,18 @@ Promotion path: when the Session Wiki RE ships and the vocabulary lock passes a 
 These tensions emerged from OODA-HA Orient during the feature/lararium-node-3 sprint (2026-05-11–14). They are load-bearing: decisions made without naming them first will produce incoherent ontology drift. Each tension is a named fork, not a failure.
 
 **T-1: Playspace nesting — Scale-1 wiki = `lar_playspace`?** ✅ RESOLVED via Quine principle (2026-05-14)
-Quine ruling: *if it can happen in the wiki, it must happen in the wiki.* A playspace scopes agents, state, and rules via a recipe. One Lares wiki = one `lar_playspace`. Nesting = recipe composition (include another wiki's bags). Portal pattern: a canvas page renders filtered tiddlers from shared bags — semi-live via Automerge sync, TW5 filter-based. Session Wiki = the coordinator `lar_playspace` (broadest recipe; owns event-bus bag). Architecture sketched; TW5 filter-based canvas page views for portals not yet shipped (P.4 or later). Resolved at [C~0.82] — portal rendering detail stays open.
+Quine ruling: *if it can happen in the wiki, it must happen in the wiki.* A playspace scopes agents, state, and rules via a recipe. One Lares wiki = one `lar_playspace`. Nesting = recipe composition (include another wiki's bags). Portal pattern: a canvas page renders filtered tiddlers from shared bags — semi-live via Automerge sync, TW5 filter-based. Session Wiki = the coordinator `lar_playspace` (broadest recipe; owns event-bus bag). Architecture sketched; TW5 filter-based canvas page views for portals not yet shipped (P.4 or later). Resolved at [C~16] — portal rendering detail stays open.
 
 **T-2: Nexus playspace — does Scale-3 have a playspace concept?**
 Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (UEFN does not have a cross-island playspace API). Current state: Scale-3 named as Nexus, no playspace concept. Tension: if Lares introduces a "federated playspace" (a shared experience scope across two nodes), what is the Verse-grounded name? Resolution: probably NOT `lar_playspace` — suggest `lar_realm` or `lar_federation` if the concept ships. Hold open.
 
 **T-3: multi-daemon lar_group — when does the concept crystallize?**
-`agent_group` is the Verse type for "set of agents with shared ownership." In Lares: multiple `lares-daemon` coordinators in one session = a natural group. Bag scope captures this implicitly. Named type `lar_group` is C~0.68 and not yet needed for P.3. Resolution: lock when multi-daemon (≥2 concurrent daemons per session) is an active design target. Do NOT force it into P.3 scope.
+`agent_group` is the Verse type for "set of agents with shared ownership." In Lares: multiple `lares-daemon` coordinators in one session = a natural group. Bag scope captures this implicitly. Named type `lar_group` is C~14 and not yet needed for P.3. Resolution: lock when multi-daemon (≥2 concurrent daemons per session) is an active design target. Do NOT force it into P.3 scope.
 
 **T-4: lar_behavior lifecycle contract — OnBegin/OnEnd shape?**
 `npc_behavior.OnBegin<override>()<suspends>:void` is the UEFN contract. Verse: this runs when the NPC spawns. The Lares analogue for a Wiki Entity: when does `lar_behavior.OnBegin` fire? On tiddler creation? On hot-tier promotion? These are not the same event. Resolution: lock when the first Wiki Entity ships. Current hold: the concept is named; the event boundary is open.
 
-> **#Council** » 14:30 — T-1 closed by quine principle; architecture holds at [C~0.82]. T-3 and T-4 remain implementation-deferred. T-2 remains an architecture horizon. J.3 (child co-promotion) promoted to **P.3.5** per operator ruling 2026-05-14 — does NOT block P.3, ships as P.3.5 pre-work for P.4. Name T-2/T-3/T-4 in every sprint review until resolved.
+> **#Council** » 14:30 — T-1 closed by quine principle; architecture holds at [C~16]. T-3 and T-4 remain implementation-deferred. T-2 remains an architecture horizon. J.3 (child co-promotion) promoted to **P.3.5** per operator ruling 2026-05-14 — does NOT block P.3, ships as P.3.5 pre-work for P.4. Name T-2/T-3/T-4 in every sprint review until resolved.
 
 <<~/ahu>>
 
@@ -393,7 +393,7 @@ Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (
 
 ## StructuredClone Gap — P.3 Message Protocol
 
-`[E^:0.7]` `[C~0.82]`
+`[E^:0.7]` `[C~16]`
 
 The P.3 Worker Thread design crosses one mandatory trust boundary: main thread ↔ Worker. Every crossing uses `postMessage()`, which internally applies the **structured clone algorithm** (WHATWG HTML spec, MDN). The gap between "any JS object" and "a structured-clone-safe object" carries non-trivial constraints that shape the entire P.3 message protocol.
 

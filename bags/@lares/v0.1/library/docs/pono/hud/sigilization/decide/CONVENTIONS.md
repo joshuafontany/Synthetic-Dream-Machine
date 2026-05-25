@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///sigils.render.maps/sigilization/decide/?confidence=CS:0.85&p=0.5 -->
+<!-- ∞ → lar:///sigils.render.maps/sigilization/decide/?confidence=CS~17&p=10 -->
 
 # Sigilization — Decide: Normative Conventions
 
@@ -66,7 +66,7 @@ Field order (SA priority — perception-critical first):
 
 **Canonical corrected example:**
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS:0.80] 🏛️+🌊-🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS~16] 🏛️+🌊-🗡️-🎭-🔮-
 ```
 
 ### `record:full`

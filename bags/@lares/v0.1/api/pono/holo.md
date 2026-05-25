@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/holo"
 file-path = "bags/@lares/v0.1/api/pono/holo.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.82
+confidence = 16
 register  = "S"
 role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
 cacheable = true

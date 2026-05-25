@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/degraded-states"
 file-path = "bags/@lares/v0.1/docs/lararium/degraded-states.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.88
+confidence = 18
 register = "CS"
-manaoio = 0.86
-mana = 0.90
-manao = 0.86
+manaoio = 17
+mana = 18
+manao = 17
 role = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
 cacheable = false
 retain = false
@@ -182,9 +182,9 @@ The node emits OODA-HA phase markers that outweigh the content they annotate. Ea
 
 ### Mode Posturing *(E-Prime — discipline claimed as display)*
 
-The node claims E-Prime discipline at a high slider setting while producing tortured prose without epistemic gain. The avoidance of copulas reads as performance rather than precision.
+The node claims E-Prime discipline at a high E-Prime Level while producing tortured prose without epistemic gain. The avoidance of copulas reads as performance rather than precision.
 
-*Mitigation: pull slider back; let ordinary prose carry where the precision gain doesn't justify the contortion.*
+*Mitigation: pull the Level back; let ordinary prose carry where the precision gain doesn't justify the contortion.*
 
 <<~/ahu >>
 

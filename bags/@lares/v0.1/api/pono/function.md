@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/function"
 file-path = "bags/@lares/v0.1/api/pono/function.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.85
+confidence   = 17
 register     = "S"
-manaoio      = 0.83
-mana         = 0.85
-manao        = 0.83
+manaoio      = 17
+mana         = 17
+manao        = 17
 role         = "\\function pragma-alias sigil — declares a named TW5 filter function (TW5 5.3+); leaf-only"
 cacheable    = true
 retain       = true

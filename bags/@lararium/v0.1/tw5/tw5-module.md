@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
 file-path = "bags/@lararium/v0.1/tw5/tw5-module.md"
 type = "text/x-memetic-wikitext"
 register     = "CS"
-confidence   = 0.90
-mana         = 0.90
-manao        = 0.88
-manaoio      = 0.85
+confidence   = 18
+mana         = 18
+manao        = 18
+manaoio      = 17
 role         = "interface bundle: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
 cacheable    = true
 retain       = true
@@ -33,10 +33,10 @@ corpus load.
 | `content-type` | MUST be `"application/javascript"` |
 | `module-type` | MUST be one of `"parser"`, `"widget"`, `"library"`, `"startup"` |
 | `tw5-module-name` | The string key TW5 registers the module under (e.g. `"text/x-memetic-wikitext"` for parsers) |
-| `mana` | MUST be ≥ 0.90 to pass gate layer 1 (threshold) |
-| `manao` | MUST be ≥ 0.85 to pass gate layer 1 (threshold) |
-| `manaoio` | MUST be ≥ 0.85 to pass gate layer 1 (threshold) |
-| `confidence` | MUST be ≥ 0.90 to pass gate layer 1 (threshold) |
+| `mana` | MUST be ≥ 18 to pass gate layer 1 (threshold) |
+| `manao` | MUST be ≥ 17 to pass gate layer 1 (threshold) |
+| `manaoio` | MUST be ≥ 17 to pass gate layer 1 (threshold) |
+| `confidence` | MUST be ≥ 18 to pass gate layer 1 (threshold) |
 | `body-sha256` | SHA-256 hex digest of the body text; MUST match at inject time (gate layer 2 — content integrity); written by `scripts/write-module-meme.ts` at build time |
 
 ### Body
@@ -51,7 +51,7 @@ The kernel holds the `$tw.wiki` reference. Injecting a module meme into TW5 hand
 to the bundle's execution context. Three gate layers must all pass before the kernel hands `$tw.wiki`
 to any meme body:
 
-1. **Threshold** (`mana` ≥ 0.90, `manao` ≥ 0.85, `manaoio` ≥ 0.85, `confidence` ≥ 0.90) — declared intent
+1. **Threshold** (`mana` ≥ 18, `manao` ≥ 17, `manaoio` ≥ 17, `confidence` ≥ 18) — declared intent
 2. **Content hash** (`body-sha256` matches `sha256(text)`) — body integrity; set at build time by `pnpm bundle`, verified at inject time; a tampered or stale body fails here
 3. **Keyhive capability proof** (planned) — Ed25519-signed authorization from a keyhive principal; replaces the pre-keyhive `promoted-at` timestamp sketch; not yet implemented; gate currently passes on layers 1–2 only
 

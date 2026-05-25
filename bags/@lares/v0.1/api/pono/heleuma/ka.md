@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/api/pono/heleuma/ka.md"
 type = "text/x-memetic-wikitext"
 namespace    = "⊙"
 register     = "CS"
-confidence   = 0.90
-mana         = 0.88
-manao        = 0.87
-manaoio      = 0.85
+confidence   = 18
+mana         = 18
+manao        = 17
+manaoio      = 17
 cacheable    = true
 retain       = true
 role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
@@ -64,7 +64,7 @@ This is gate layer 2 (content integrity). Written by `sync-heleuma --commit` whe
 
 Gate layer 3 (operator authorization) will be a **keyhive capability proof** — an Ed25519-signed capability from a keyhive principal authorizing corpus injection. This replaces the pre-keyhive `promoted-at` timestamp sketch, which was never implemented and has been removed. Layer 3 is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 
-Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 0.80 / 0.80 / 0.75 / 0.80 as the source matures. The boot gate reads these fields directly.
+Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 16 / 16 / 15 / 16 as the source matures. The boot gate reads these fields directly.
 
 <<~/ahu >>
 

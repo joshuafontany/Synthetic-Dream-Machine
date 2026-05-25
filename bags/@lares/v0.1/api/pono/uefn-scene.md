@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/uefn-scene"
 file-path = "bags/@lares/v0.1/api/pono/uefn-scene.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.72
+confidence = 14
 register  = "S"
 role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
 cacheable = true

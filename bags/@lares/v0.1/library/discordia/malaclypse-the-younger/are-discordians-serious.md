@@ -9,11 +9,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-di
 file-path = "bags/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.90
+confidence = 18
 register = "C"
-manaoio = 0.90
-mana = 0.90
-manao = 0.90
+manaoio = 18
+mana = 18
+manao = 18
 role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
 ```
 

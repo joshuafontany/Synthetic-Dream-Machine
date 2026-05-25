@@ -6,10 +6,10 @@ uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/local-first"
 file-path   = "bags/@lares/v0.1/api/pono/local-first.md"
 type        = "text/x-memetic-wikitext"
 register    = "CS"
-confidence  = 0.90
-mana        = 0.90
-manao       = 0.88
-manaoio     = 0.86
+confidence  = 18
+mana        = 18
+manao       = 18
+manaoio     = 17
 tagspace    = "stable"
 role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
 cacheable   = true

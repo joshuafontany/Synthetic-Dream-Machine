@@ -5,9 +5,9 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon"
 file-path = "bags/@lares/v0.1/docs/pono/circles-kowloon.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.88
+confidence = 18
 register  = "SC"
-mana      = 0.82
+mana      = 16
 role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
 cacheable = true
 retain    = true

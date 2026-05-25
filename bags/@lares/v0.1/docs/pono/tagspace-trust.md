@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
 file-path = "bags/@lares/v0.1/docs/pono/tagspace-trust.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.72
+confidence = 14
 register = "CS"
-manaoio = 0.66
-mana = 0.74
-manao = 0.80
+manaoio = 13
+mana = 15
+manao = 16
 role = "docs sister for tagspace trust law — explanation, examples, and implementation pressure"
 cacheable = false
 retain = false
@@ -89,7 +89,7 @@ lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust
 A live exchange URI:
 
 ```text
-lar://telarus:operator@enyalios/session.scope.expands/?stances=*?--------&confidence=CS:0.83&p=0.5&ffz=0.0.0.0.0
+lar://telarus:operator@enyalios/session.scope.expands/?stances=*?--------&confidence=CS~17&p=10&ffz=0.0.0.0.0
 ```
 
 A found local FTLS data meme address (HAKABA-style):

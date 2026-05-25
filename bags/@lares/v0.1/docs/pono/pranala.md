@@ -5,7 +5,7 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/pranala"
 file-path = "bags/@lares/v0.1/docs/pono/pranala.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.78
+confidence   = 16
 register     = "S"
 role = "docs companion for pranala: examples, sugar long-forms, and reciprocal-edge guidance"
 cacheable = false

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/exchange-vector"
 file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.74
+confidence = 15
 register = "CS"
-manaoio = 0.68
-mana = 0.80
-manao = 0.82
+manaoio = 14
+mana = 16
+manao = 16
 namespace = "ॐ ँ"
 role = "invariant law for canonical lar URI exchange vectors and HUD emission order"
 cacheable = true

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
 file-path = "bags/@lares/v0.1/api/pono/lar-uri.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.84
+confidence = 17
 register = "CS"
-manaoio = 0.82
-mana = 0.86
-manao = 0.84
+manaoio = 16
+mana = 17
+manao = 17
 namespace = "ॐ ँ"
 role = "invariant lar: URI scheme law (kānāwai), canonical form authority, and grammar primitive"
 cacheable=true

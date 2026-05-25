@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate"
 file-path = "bags/@lararium/v0.1/tw5/modules/boot-gate.md"
 type = "text/x-memetic-wikitext"
 register     = "CS"
-confidence   = 0.87
-mana         = 0.86
-manao        = 0.84
-manaoio      = 0.82
+confidence   = 17
+mana         = 17
+manao        = 17
+manaoio      = 16
 role         = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
 status-date   = "2026-04-30"
 heleuma       = "ha"
@@ -122,10 +122,10 @@ private async _bootModules(): Promise<void> {
 
 | Field | Constant | Floor |
 |---|---|---|
-| `mana` | `MODULE_MANA_THRESHOLD` | 0.80 |
-| `manao` | `MODULE_MANAO_THRESHOLD` | 0.80 |
-| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 0.75 |
-| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 0.80 |
+| `mana` | `MODULE_MANA_THRESHOLD` | 16 |
+| `manao` | `MODULE_MANAO_THRESHOLD` | 16 |
+| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 15 |
+| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 16 |
 
 Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer 3 (keyhive capability proof) remains planned; not yet implemented — gate currently passes on layers 1–2 only.
 

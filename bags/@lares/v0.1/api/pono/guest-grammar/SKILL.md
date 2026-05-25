@@ -10,11 +10,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/guest-grammar/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.70
+confidence = 14
 register = "CS"
-manaoio = 0.68
-mana = 0.74
-manao = 0.80
+manaoio = 14
+mana = 15
+manao = 16
 role = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
 covers = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"

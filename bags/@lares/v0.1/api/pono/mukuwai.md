@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/mukuwai"
 file-path = "bags/@lares/v0.1/api/pono/mukuwai.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.75
+confidence = 15
 register  = "S"
 role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
 cacheable = true

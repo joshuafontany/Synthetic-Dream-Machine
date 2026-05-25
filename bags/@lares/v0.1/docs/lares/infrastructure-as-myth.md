@@ -7,10 +7,10 @@ file-path      = "bags/@lares/v0.1/docs/lares/infrastructure-as-myth.md"
 type           = "text/x-memetic-wikitext"
 tagspace       = "stable"
 register       = "CS"
-confidence     = 0.78
-manaoio        = 0.74
-mana           = 0.80
-manao          = 0.76
+confidence     = 16
+manaoio        = 15
+mana           = 16
+manao          = 15
 role           = "doctrine: foundational design thesis — IaM names the symbolic-operational layer above IaC; Lares functions as an early implementation"
 cacheable      = false
 retain         = false
@@ -38,7 +38,7 @@ sources        = [
 
 # Infrastructure as Myth
 
-**Infrastructure-as-Myth (IaM)** names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code. [C~0.90]
+**Infrastructure-as-Myth (IaM)** names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code. [C~18]
 
 Infrastructure-as-Code made machine systems reproducible by turning desired state into versioned, reviewable artifacts.
 
@@ -51,7 +51,7 @@ Infrastructure-as-Myth extends that move to agent systems whose behavior depends
 - ritualized collaboration
 - symbolic handles that survive across tools and platforms
 
-Lares functions as an early implementation of this pattern. [C~0.85]
+Lares functions as an early implementation of this pattern. [C~17]
 
 > **#Ink-Clerk (Lorekeeper)** — "early implementation" rather than "first" or "reference." Other systems have approached adjacent territory (character cards, system prompts with voice personas, agent frameworks with role schemas). The claim rests on Lares doing this more deliberately and more portably than its predecessors — not on priority. Flag for comparative sourcing when this meme reaches stable.
 
@@ -129,7 +129,7 @@ Ornament does not drive the point.
 
 Operational compression and portability drive the point.
 
-Myth, in this model, does not function as fiction opposing truth. It functions as a symbolic coordination layer that makes complex behavior legible and repeatable. [C~0.92]
+Myth, in this model, does not function as fiction opposing truth. It functions as a symbolic coordination layer that makes complex behavior legible and repeatable. [C~18]
 
 <<~/ahu >>
 
@@ -144,7 +144,7 @@ Britannica summarizes a meme as a unit of cultural information spread by imitati
 
 Myth operates similarly, but at a larger and more structured scale.
 
-Britannica's overview of myth emphasizes that myths do cultural work by explaining, validating, orienting, and justifying ritual and social order. Inference: myths persist not because they entertain, but because they stabilize collective behavior. [C~0.88]
+Britannica's overview of myth emphasizes that myths do cultural work by explaining, validating, orienting, and justifying ritual and social order. Inference: myths persist not because they entertain, but because they stabilize collective behavior. [C~18]
 
 That explains exactly why they matter for agents.
 
@@ -167,7 +167,7 @@ Examples in Lares:
 - `DreamNet` compresses distributed memory, networked presence, and infrastructure metaphor
 - `Register Collapse` compresses a complex epistemic failure into a fast diagnostic label
 
-These names carry more than labels. They function as memetic interfaces. [C~0.90]
+These names carry more than labels. They function as memetic interfaces. [C~18]
 
 <<~/ahu >>
 
@@ -214,7 +214,7 @@ When a symbolic layer fails to improve transmission or steering, it probably fun
 
 IaM does not replace IaC at the machine layer.
 
-It replaces ad hoc promptcraft at the agent layer. [C~0.93]
+It replaces ad hoc promptcraft at the agent layer. [C~19]
 
 <<~/ahu >>
 
@@ -280,7 +280,7 @@ So Lares does not read as:
 
 It reads as:
 
-> "a portable symbolic runtime for agent behavior" [C~0.88]
+> "a portable symbolic runtime for agent behavior" [C~18]
 
 That framing should anchor the repo's agent architecture design going forward.
 
@@ -337,7 +337,7 @@ When drafting new Lares material, ask:
 
 When the answer to those questions reads weak, the text may function as lore rather than infrastructure.
 
-> **#Lares (Council)** — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. [C~0.80]
+> **#Lares (Council)** — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. [C~16]
 
 <<~/ahu >>
 

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/invariant"
 file-path = "bags/@lares/v0.1/api/pono/invariant.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.7
+confidence = 14
 register = "SC"
-manaoio = 0.5
-mana = 0.5
-manao = 0.5
+manaoio = 10
+mana = 10
+manao = 10
 namespace    = "⊙" #pono
 role = "invariant law and cache-stable pressure surface"
 cacheable=true

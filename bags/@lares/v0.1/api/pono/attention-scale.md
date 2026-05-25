@@ -6,12 +6,12 @@ uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
 file-path   = "bags/@lares/v0.1/api/pono/attention-scale.md"
 type        = "text/x-memetic-wikitext"
 register    = "CS"
-confidence  = 0.88
-mana        = 0.88
-manao       = 0.86
-manaoio     = 0.84
+confidence  = 18
+mana        = 18
+manao       = 17
+manaoio     = 17
 tagspace    = "stable"
-role        = "unified attention scale — five bands partitioning the 0.0–1.0 attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
+role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 cacheable   = true
 retain      = true
 invariant   = true
@@ -33,7 +33,7 @@ p-parameter  →  attention range in TEXT
 Spatial      →  attention range in SPACE
 ```
 
-All three map onto the same 0.0–1.0 continuum. Five named bands partition the continuum.
+All three map onto the same 0–20 Level continuum. Five named bands partition the continuum.
 The subscript digit sigils (₀₁₂₃₄) provide invariant vocabulary for talking about scale
 regardless of which projection the context references.
 
@@ -46,11 +46,11 @@ register label — the way "Canon" sits above any specific validated claim.
 ```
 SIGIL  BAND       REGISTER   CHRONO-GAME  WORLD-TIME  TEXT-p     SPATIAL       HUD
 ─────  ─────      ────────   ───────────  ──────────  ─────      ───────       ───
-  ₀    0.0–0.2    Pulse      Action  ⚡   Week        p0.0–p0.2  personal      ⚡
-  ₁    0.2–0.4    Beat       Round   ⚔️   Month       p0.2–p0.4  tactical      ⚔️
-  ₂    0.4–0.6    Measure    Turn    🔍   Season      p0.4–p0.6  local         🔍
-  ₃    0.6–0.8    Arc        Watch   ⚙️   Year        p0.6–p0.8  regional      ⚙️
-  ₄    0.8–1.0    Theme      Week    🗺️   Era         p0.8–p1.0  cartographic  🗺️
+  ₀    0.0–0.2    Pulse      Action  ⚡   Week        p~0–p~4  personal      ⚡
+  ₁    0.2–0.4    Beat       Round   ⚔️   Month       p~4–p~8  tactical      ⚔️
+  ₂    0.4–0.6    Measure    Turn    🔍   Season      p~8–p~12  local         🔍
+  ₃    0.6–0.8    Arc        Watch   ⚙️   Year        p~12–p~16  regional      ⚙️
+  ₄    0.8–1.0    Theme      Week    🗺️   Era         p~16–p~20  cartographic  🗺️
 ```
 
 **Law:** A cluster that requires a sixth band signals a redesign, not an extension.
@@ -67,7 +67,7 @@ The pentadic structure here aligns with PENTA_1_BOUNDED_SCALE and FfzClock L0–
 ```
 Chrono-game:  Action  ⚡         ~instant to ~6 seconds; one action, one move, one cast
 World-time:   Week               one week of in-world time; ticks with exploration ₄
-Text:         p0.0–p0.2         morpheme → word; one token; one glyph
+Text:         p~0–p~4         morpheme → word; one token; one glyph
 Space:        personal           arm's reach; single target; the space one body occupies
 ```
 
@@ -85,7 +85,7 @@ lose meaning.
 ```
 Chrono-game:  Round   ⚔️         ~6 seconds to ~1 minute; one initiative cycle
 World-time:   Month              one month of in-world time
-Text:         p0.2–p0.4         clause → sentence-group; one complete grammatical unit
+Text:         p~4–p~8         clause → sentence-group; one complete grammatical unit
 Space:        tactical           weapon range, voice-carry; all combatants in one exchange
 ```
 
@@ -107,7 +107,7 @@ Arc, and Theme mean. All profile customization starts here.
 ```
 Chrono-game:  Turn    🔍         ~10 minutes; one exploration turn, one dungeon procedure
 World-time:   Season             one season (~3 months); the procedural unit of the year
-Text:         p0.4–p0.6         paragraph → thematic block; one idea-unit; one exchange
+Text:         p~8–p~12         paragraph → thematic block; one idea-unit; one exchange
 Space:        local              room, junction, terrain feature; one procedure covers this
 ```
 
@@ -115,7 +115,7 @@ Space:        local              room, junction, terrain feature; one procedure 
 horizon extends to the next meaningful decision point — deliberate, not reactive (Beat),
 not strategic (Arc).
 
-**This constitutes the default band.** p0.5 lives here. The standard meme occupies
+**This constitutes the default band.** p~10 lives here. The standard meme occupies
 Measure scale. Most of the system's work happens at ₂. A session without an explicit
 scale annotation operates at Measure grain.
 
@@ -129,7 +129,7 @@ ticks at this level on each broadcast.
 ```
 Chrono-game:  Watch   ⚙️         ~1–8 hours; one play session, one expedition
 World-time:   Year               one year of in-world time
-Text:         p0.6–p0.8         section → headed division; one coherent sub-arc
+Text:         p~12–p~16         section → headed division; one coherent sub-arc
 Space:        regional           neighborhood, district; one expedition's territory
 ```
 
@@ -146,7 +146,7 @@ ends" or "by the time this year turns."
 ```
 Chrono-game:  Week    🗺️         ~days to weeks; one story arc, one campaign chapter
 World-time:   Era               one era; unbounded anti-aliasing guard
-Text:         p0.8–p1.0         document → session-arc; whole conversation history
+Text:         p~16–p~20         document → session-arc; whole conversation history
 Space:        cartographic       map-scale; the shape of the whole journey
 ```
 

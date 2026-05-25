@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///sigils.render.maps/sigilization/?confidence=CS:0.85&p=0.5 -->
+<!-- ∞ → lar:///sigils.render.maps/sigilization/?confidence=CS~17&p=10 -->
 
 ```yaml
 ---
@@ -25,7 +25,7 @@ trigger: >
   whether output matches surface rules.
 invariant: false
 dependencies: [uri-schema]
-confidence: CS:0.85
+confidence: CS~17
 ---
 ```
 
@@ -33,7 +33,7 @@ confidence: CS:0.85
 
 > Active render-target material promoted to `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets`
 
-> **Register:** `[CS:0.85]` — near-canon; governs all surface emission
+> **Register:** `[CS~17]` — near-canon; governs all surface emission
 > **Status:** Active. Filed 2026-04-09 as resolution of U10 + U11 (uri-schema open questions).
 > **Source of truth:** `lares/modules/sigilization/decide/CONVENTIONS.md`
 > **Depends on:** `lares/modules/uri-schema/` for canonical record form

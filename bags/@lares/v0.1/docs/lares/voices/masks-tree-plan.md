@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
 file-path = "bags/@lares/v0.1/docs/lares/voices/masks-tree-plan.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.82
+confidence = 16
 register = "S"
-manaoio = 0.82
-mana = 0.80
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "OODA-HA plan for creating the v0.1/api/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 cacheable = false
 retain = false
@@ -105,7 +105,7 @@ The Lagrange Chorus holds a stable position between multiple lararium nodes. As 
 ### Skeleton template pressure
 
 Every file in this tree should be a valid meme immediately — correctly addressed, structurally sound, bootstrappable. Stubs are fine but broken kaheas are not. The skeleton carries:
-- `#iam` block — complete metadata, even with low confidence (`mana = 0.40`)
+- `#iam` block — complete metadata, even with low confidence (`mana = 8`)
 - `#corpus` stub — placeholder with notes on what should accumulate here
 - `#voice-character` stub — placeholder with what's already known
 - `#foreground-voices` — already known from Voice house; carry through

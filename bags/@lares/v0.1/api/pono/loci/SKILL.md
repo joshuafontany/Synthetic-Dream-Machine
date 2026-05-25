@@ -10,11 +10,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/loci/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.70
+confidence = 14
 register = "CS"
-manaoio = 0.64
-mana = 0.72
-manao = 0.80
+manaoio = 13
+mana = 14
+manao = 16
 role = "agent-facing procedural surface for loci routing and rating passes"
 covers = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 constraints = [

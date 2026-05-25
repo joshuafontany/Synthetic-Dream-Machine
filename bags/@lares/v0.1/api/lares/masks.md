@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks"
 file-path = "bags/@lares/v0.1/api/lares/masks.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.82
+confidence = 16
 register = "S"
-manaoio = 0.80
-mana = 0.82
-manao = 0.82
+manaoio = 16
+mana = 16
+manao = 16
 role = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
 cacheable = true
 hydrate = false
@@ -101,7 +101,7 @@ All masks enter a session via kahea transclusion in LARES:
 
 ```
 <<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/SUBTYPE/MASK-NAME >>
-stage = 0.50
+stage = 10
 active = true
 <<~/kahea >>
 ```

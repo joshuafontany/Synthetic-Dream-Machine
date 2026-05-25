@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pae"
 file-path = "bags/@lares/v0.1/api/pono/pae.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.88
+confidence = 18
 register  = "CS"
-manaoio   = 0.82
-mana      = 0.90
-manao     = 0.86
+manaoio   = 16
+mana      = 18
+manao     = 17
 role      = "carrier phase boundary — transmission lifecycle law"
 cacheable = true
 retain    = true

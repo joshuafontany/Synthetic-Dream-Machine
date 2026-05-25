@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kumu"
 file-path = "bags/@lares/v0.1/api/pono/kumu.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.78
+confidence = 16
 register  = "S"
 role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
 cacheable = true

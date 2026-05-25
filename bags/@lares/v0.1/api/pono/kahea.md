@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kahea"
 file-path = "bags/@lares/v0.1/api/pono/kahea.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.84
+confidence   = 17
 register     = "CS"
-manaoio      = 0.82
-mana         = 0.86
-manao        = 0.84
+manaoio      = 16
+mana         = 17
+manao        = 17
 role         = "dataflow-family edge sugar — live transclusion; push-forward value transport; dual form: URI edge and name-call invocation"
 cacheable    = true
 retain       = true

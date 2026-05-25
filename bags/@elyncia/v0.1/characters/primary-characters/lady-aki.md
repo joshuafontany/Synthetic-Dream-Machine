@@ -7,11 +7,11 @@ file-path = "bags/@elyncia/v0.1/characters/primary-characters/lady-aki.md"
 type = "text/x-memetic-wikitext"
 
 tagspace = "stable:@elyncia"
-confidence = 0.82
+confidence = 16
 register = "CS"
-manaoio = 0.78
-mana = 0.84
-manao = 0.82
+manaoio = 16
+mana = 17
+manao = 16
 
 [sdm.daemon]
 name = "Freyja Fontany"

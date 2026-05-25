@@ -6,11 +6,11 @@ uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
 file-path   = "bags/@lares/v0.1/api/pono/system-invariants.md"
 type        = "text/x-memetic-wikitext"
 tagspace    = "stable"
-confidence  = 0.99
+confidence  = 19
 register    = "CS"
-mana        = 0.99
-manao       = 0.98
-manaoio     = 0.97
+mana        = 19
+manao       = 19
+manaoio     = 19
 namespace   = "⊙"
 role        = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
 invariant   = true
@@ -29,7 +29,7 @@ retain      = true
 # System Invariants
 
 FFZ pono constitutional law for the Lararium causal-island system.
-Fontany-Fuller-Zelenka local-first model. Confidence: C~0.99.
+Fontany-Fuller-Zelenka local-first model. Confidence: C~20.
 
 These encode design-time laws and named exceptions — no runtime validators.
 Witnessing constants: named so any agent, test, or operator can reference by ID.
@@ -114,7 +114,7 @@ desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presen
 
 ## AUTHORITY Laws — carrier canon, promotion ceremony, trust ladder
 
-Sources: lares/lararium-research/PRINCIPLES.md (C~0.99)
+Sources: lares/lararium-research/PRINCIPLES.md (C~20)
          pono/tagspace-trust · pono/canon-promotion-boundary
 
 ```toml #AUTH_1_CARRIER_CANON_FIRST

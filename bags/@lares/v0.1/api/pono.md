@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono"
 file-path = "bags/@lares/v0.1/api/pono.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.65
+confidence = 13
 register = "CS"
-manaoio = 0.60
-mana = 0.65
-manao = 0.70
+manaoio = 12
+mana = 13
+manao = 14
 role = "core invariant example of a pono meme: right-sized law surface, bounded self-description, and outward routing pressure"
 cacheable = true
 ```

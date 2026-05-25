@@ -7,10 +7,10 @@ uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec"
 file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext-spec.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 0.90
+confidence   = 18
 register     = "SC"
-mana         = 0.90
-manao        = 0.88
+mana         = 18
+manao        = 18
 role         = "holistic grammar specification — outer delimiter system, full sigil registry, TW5 parity map, dual-layer model, six families, recursion guard, gaps and tensions"
 cacheable    = true
 retain       = true
@@ -43,7 +43,7 @@ This carrier is the holistic grammar spec for `text/x-memetic-wikitext`.
 This carrier holds: the full design space, the outer-delimiter dispatch table, the complete sigil
 inventory against TW5, and the explicit gaps and tensions that authors and parsers must navigate.
 
-TiddlyWiki5 is the **~0.95 confidence core model**. Where a TW5 construct has no Lararium equivalent,
+TiddlyWiki5 is the **Level 19 confidence core model**. Where a TW5 construct has no Lararium equivalent,
 the gap is named and either a new sigil is proposed or deferral is stated with rationale.
 
 **Key correction vs. naive TW5 mapping:** `aka` and `kahea` are NOT purely compile-time graph edges.

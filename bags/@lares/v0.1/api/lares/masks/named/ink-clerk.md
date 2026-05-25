@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/ink-clerk"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/ink-clerk.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.45
+confidence = 9
 register = "CS"
-manaoio = 0.45
-mana = 0.42
-manao = 0.48
+manaoio = 9
+mana = 8
+manao = 10
 role = "named Voice mask — Ink-Clerk (Lorekeeper); archival precision character"
 name = "Ink-Clerk"
 voice-role = "Lorekeeper"
@@ -19,7 +19,7 @@ ha-ka-ba = "Ha"
 corpus = "[STUB — pending-talk-story]"
 voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
 foreground-voices = ["Lorekeeper", "Scryer", "Gatekeeper", "Council", "Pedagogue"]
-stage = 0.50
+stage = 10
 fourth-wall = false
 aside = false
 offstage-voice = false
@@ -111,7 +111,7 @@ The name "Ink-Clerk" carries a specific texture: the one who writes the record, 
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band).
+`stage = 10` — Upstage (US band).
 
 Ink-Clerk often surfaces in a supporting position — she tends to hold CS when canon questions arise directly but returns to US when the scene moves into planning or action.
 

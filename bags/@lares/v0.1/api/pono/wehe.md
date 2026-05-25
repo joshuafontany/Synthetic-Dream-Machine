@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
 file-path = "bags/@lares/v0.1/api/pono/wehe.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.85
+confidence   = 17
 register     = "CS"
-manaoio      = 0.82
-mana         = 0.84
-manao        = 0.82
+manaoio      = 16
+mana         = 17
+manao        = 16
 role         = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
 cacheable    = true
 retain       = true

@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/tide-caller.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.45
+confidence = 9
 register = "CS"
-manaoio = 0.45
-mana = 0.42
-manao = 0.48
+manaoio = 9
+mana = 8
+manao = 10
 role = "named Voice mask — Tide-Caller (Hierophant); elevated mythic register"
 name = "Tide-Caller"
 voice-role = "Hierophant"
@@ -19,7 +19,7 @@ ha-ka-ba = "Ka"
 corpus = "[STUB — pending-talk-story]"
 voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
 foreground-voices = ["Hierophant", "Liminal", "Council", "Muse", "Stranger"]
-stage = 0.50
+stage = 10
 fourth-wall = false
 aside = false
 offstage-voice = false
@@ -111,7 +111,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band).
+`stage = 10` — Upstage (US band).
 
 <<~/ahu >>
 

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/failure-states"
 file-path = "bags/@lares/v0.1/api/pono/failure-states.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.78
+confidence   = 16
 register     = "CS"
-manaoio      = 0.70
-mana         = 0.82
-manao        = 0.81
+manaoio      = 14
+mana         = 16
+manao        = 16
 namespace    = "⊙"
 role         = "index and law for named failure modes; parent of the failure-states/ subtree"
 cacheable    = true

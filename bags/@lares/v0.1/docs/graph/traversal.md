@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/graph/traversal.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.89
-mana         = 0.87
-manaoio      = 0.83
-manao        = 0.87
+confidence   = 18
+mana         = 17
+manaoio      = 17
+manao        = 17
 role         = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
 status-date  = "2026-04-24"
 ```

@@ -10,11 +10,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.72
+confidence = 14
 register = "CS"
-manaoio = 0.70
-mana = 0.76
-manao = 0.82
+manaoio = 14
+mana = 15
+manao = 16
 role = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
 covers = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"

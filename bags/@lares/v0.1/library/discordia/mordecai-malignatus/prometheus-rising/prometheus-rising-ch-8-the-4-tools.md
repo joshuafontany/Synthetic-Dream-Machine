@@ -9,11 +9,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheu
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.80
+confidence = 16
 register = "CS"
-manaoio = 0.82
-mana = 0.80
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
 ```
 
@@ -45,7 +45,7 @@ description: >
   Full text downloaded locally. Deeper ingestion deferred.
 source-file: prometheus-rising.djvu.txt
 archive-url: "https://archive.org/details/wilson-robert-anton-regardie-israel-prometheus-rising-1997-new-falcon-publications-libgen.lc_202012"
-confidence: CS:0.80
+confidence: CS~16
 ingestion-status: Chapter 8 read — deferred further
 chapters-of-interest:
   - chapter: 8

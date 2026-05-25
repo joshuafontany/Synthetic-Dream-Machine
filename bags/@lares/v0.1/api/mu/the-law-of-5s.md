@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s"
 file-path = "bags/@lares/v0.1/api/mu/the-law-of-5s.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence = 0.82
+confidence = 16
 register   = "CS"
-manaoio    = 0.80
-mana       = 0.88
-manao      = 0.85
+manaoio    = 16
+mana       = 18
+manao      = 17
 namespace  = "ॐ ँ"
 role        = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
 cacheable   = true
@@ -31,9 +31,9 @@ body-sha256 = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
 
 Hagbard Celine states the Law of Fives in Appendix Gimmel of the *Illuminatus!* Trilogy:
 
-"All phenomena are directly or indirectly related to the number five." `[C~0.95]`
+"All phenomena are directly or indirectly related to the number five." `[C~19]`
 
-He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `[C~0.95]`
+He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `[C~19]`
 
 <<~/ahu >>
 
@@ -65,7 +65,7 @@ Five phases. Five questions.
 - **▶** — Bureaucracy — Patron Apostle Zarathud
 - **⤴ ↺** — Aftermath — Patron Apostle The Elder Malaclypse
 
-**Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `[C~0.95]`). This node holds its own architecture the same way.
+**Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `[C~19]`). This node holds its own architecture the same way.
 
 <<~/ahu >>
 
@@ -73,9 +73,11 @@ Five phases. Five questions.
 
 ## RAW's Maybe Logic
 
-Truth runs on a 0.0-1.0 continuum.
+Truth runs on a 0–20 Level continuum.
 
 Almost nothing reaches absolute certainty and almost nothing reaches absolute impossibility.
+
+Level `0` names a void, off, or impossible-limit reading only when the local instrument permits it. Level `20` names a maximum/certainty-limit reading. Living system dials normally stay at `1–17`; `18–20` require explicit kapu, apron, or near-certainty pressure.
 
 Maps do not equal territories. Reality tunnels operate constantly.
 
@@ -132,16 +134,16 @@ universal  = "week"
 rating-5 = ["noise", "data", "meme", "ano", "kapu"]
 
 # UX stage ladder — rendering annotation only, NOT a federation gate
-# Maps onto confidence scalar: GR 0.01–0.19 · OS 0.20–0.39 · US 0.40–0.59 · CS 0.60–0.79 · DS 0.80–1.00
+# Maps onto Level bands: GR 1–4 · OS 5–8 · US 9–12 · CS 13–16 · DS 17–20
 stage-5 = ["GR", "OS", "US", "CS", "DS"]
 
-# Stage → representative scalar midpoint (display / defaults)
+# Stage → representative Level midpoint (display / defaults)
 [stage-band-mid]
-GR = 0.10
-OS = 0.30
-US = 0.50
-CS = 0.70
-DS = 0.90
+GR = 2
+OS = 6
+US = 10
+CS = 14
+DS = 18
 
 # Rating → canonical tldraw color name
 [rating-color]
@@ -178,11 +180,11 @@ export const RATING_5 = ["noise", "data", "meme", "ano", "kapu"] as const;
 export const STAGE_5 = ["GR", "OS", "US", "CS", "DS"] as const;
 
 export const STAGE_BAND_MID: Record<Stage5, number> = {
-  GR: 0.10,
-  OS: 0.30,
-  US: 0.50,
-  CS: 0.70,
-  DS: 0.90,
+  GR: 2,
+  OS: 6,
+  US: 10,
+  CS: 14,
+  DS: 18,
 };
 
 export const RATING_COLOR: Record<Rating5, string> = {

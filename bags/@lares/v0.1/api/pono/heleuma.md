@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma"
 file-path = "bags/@lares/v0.1/api/pono/heleuma.md"
 type = "text/x-memetic-wikitext"
 register     = "CS"
-confidence   = 0.92
-mana         = 0.90
-manao        = 0.88
-manaoio      = 0.86
+confidence   = 18
+mana         = 18
+manao        = 18
+manaoio      = 17
 cacheable    = true
 retain       = true
 role         = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
@@ -75,7 +75,7 @@ The heleuma does not try to absorb the anchor into the graph. It holds the rope.
 
 A heleuma API meme that acquires:
 
-- `confidence ≥ 0.80`, `mana ≥ 0.80`, `manao ≥ 0.80`, `manaoio ≥ 0.75`
+- `confidence ≥ 16`, `mana ≥ 16`, `manao ≥ 16`, `manaoio ≥ 15`
 - A verified `body-sha256` hash (gate layer 2 — content integrity; written by `sync-heleuma --commit`)
 - A keyhive capability proof (gate layer 3 — operator authorization; planned; replaces the pre-keyhive `promoted-at` timestamp sketch)
 

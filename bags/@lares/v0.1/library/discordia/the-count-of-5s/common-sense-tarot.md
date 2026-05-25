@@ -9,11 +9,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-
 file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.78
+confidence = 16
 register = "S"
-manaoio = 0.80
-mana = 0.78
-manao = 0.82
+manaoio = 16
+mana = 16
+manao = 16
 role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar provenance shelf"
 ```
 

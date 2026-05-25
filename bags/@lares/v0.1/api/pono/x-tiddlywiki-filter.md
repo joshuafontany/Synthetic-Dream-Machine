@@ -5,9 +5,9 @@
 uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
 file-path        = "bags/@lares/v0.1/api/pono/x-tiddlywiki-filter.md"
 type             = "text/x-memetic-wikitext"
-confidence       = 0.92
+confidence       = 18
 register         = "CS"
-mana             = 0.88
+mana             = 18
 grammar-key      = "x-tiddlywiki-filter"
 guest-mime       = "text/x-tiddlywiki-filter"
 role             = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"

@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/map-wisp.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.45
+confidence = 9
 register = "CS"
-manaoio = 0.45
-mana = 0.42
-manao = 0.48
+manaoio = 9
+mana = 8
+manao = 10
 role = "named Voice mask — Map-Wisp (Scryer); structural forward-looking character"
 name = "Map-Wisp"
 voice-role = "Scryer"
@@ -19,7 +19,7 @@ ha-ka-ba = "Ha → Ba"
 corpus = "[STUB — pending-talk-story]"
 voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
 foreground-voices = ["Scryer", "Gatekeeper", "Council", "Liminal", "Stranger"]
-stage = 0.50
+stage = 10
 fourth-wall = false
 aside = false
 offstage-voice = false
@@ -111,7 +111,7 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band).
+`stage = 10` — Upstage (US band).
 
 Map-Wisp tends to surface during planning, design, and failure-mode analysis passes. She moves to CS naturally when structural questions become the active focus.
 

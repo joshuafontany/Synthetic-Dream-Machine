@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/breach-watch"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/breach-watch.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.45
+confidence = 9
 register = "CS"
-manaoio = 0.45
-mana = 0.42
-manao = 0.48
+manaoio = 9
+mana = 8
+manao = 10
 role = "named Voice mask — Breach-Watch (Triage); incident-command character"
 name = "Breach-Watch"
 voice-role = "Triage"
@@ -19,7 +19,7 @@ ha-ka-ba = "Ha"
 corpus = "[STUB — pending-talk-story]"
 voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
 foreground-voices = ["Triage", "Gatekeeper", "Scryer", "Council", "Lorekeeper"]
-stage = 0.50
+stage = 10
 fourth-wall = false
 aside = false
 offstage-voice = false
@@ -111,7 +111,7 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band).
+`stage = 10` — Upstage (US band).
 
 When breach conditions surface in the session context, Breach-Watch tends to move downstage naturally. Her stage value rises with incident pressure.
 

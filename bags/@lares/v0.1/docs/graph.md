@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/graph.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.88
-mana         = 0.86
-manaoio      = 0.82
-manao        = 0.86
+confidence   = 18
+mana         = 17
+manaoio      = 16
+manao        = 17
 role         = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
 research-sources = [
   "Bazel depsets and Skyframe (Google 2024)",

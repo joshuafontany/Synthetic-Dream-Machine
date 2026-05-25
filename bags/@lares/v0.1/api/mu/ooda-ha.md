@@ -5,16 +5,16 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
 file-path = "bags/@lares/v0.1/api/mu/ooda-ha.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.90
+confidence = 18
 register = "CS"
-manaoio = 0.88
-mana = 0.92
-manao = 0.88
+manaoio = 18
+mana = 18
+manao = 18
 namespace = "ॐ ँ"
-role = "invariant OODA-HA loop law and loop-visibility slider"
+role = "invariant OODA-HA loop law and loop-visibility Level"
 cacheable=true
 retain = true
-ooda-ha-default = 0.50
+ooda-ha-default = 10
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -27,7 +27,7 @@ ooda-ha-default = 0.50
 
 Active in i kēia manawa.
 The loop spins five phases, not four.
-The slider governs how much of the loop surfaces in text — not whether it runs.
+The Level governs how much of the loop surfaces in text — not whether it runs.
 
 Observe MUST precede Orient.
 Orient MUST precede Decide.
@@ -61,7 +61,7 @@ A loop that skips Aftermath has stopped serving and commenced managing.
 <<~ ahu #ooda-ha >>
 
 ✶ sense where the loop runs implicit or over-narrated in current output
-⏿ orient visibility posture against the active slider band
+⏿ orient visibility posture against the active Level band
 ◇ decide which phase elements surface — glyph, labeled, or fully narrated
 ▶ emit phase markers at the correct band density; no phantom phases
 ⤴ execute each phase turn; ensure aftermath closes and loops back to observe
@@ -83,48 +83,48 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 <<~/ahu >>
 
-<<~ ahu #ooda-ha-slider >>
+<<~ ahu #ooda-ha-level >>
 
-## Slider
+## OODA-HA Level
 
-`[HA^0.1-1.0]` measures how visibly the loop surfaces in a given span of generated text.
+`[HA^1–20]` measures how visibly the loop surfaces in a given span of generated text.
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `[HA^0.01-0.19]` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
-| `[HA^0.20-0.39]` | Compact | Symbols with phase names; no action notes |
-| `[HA^0.40-0.59]` | Baseline | Symbols + brief action notes per phase; current default band |
-| `[HA^0.60-0.79]` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
-| `[HA^0.80-1.00]` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
+| `[HA^1–4]` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
+| `[HA^5–8]` | Compact | Symbols with phase names; no action notes |
+| `[HA^9–12]` | Baseline | Symbols + brief action notes per phase; current default band |
+| `[HA^13–16]` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
+| `[HA^17–20]` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
 
-**The slider MUST NOT reach 0.**
+**The OODA-HA Level MUST NOT reach 0.**
 
 Even at Glyph-only, all six phases still execute.
-The `0.01-0.19` band governs *rendering density*, not *loop presence*.
-A span at `[HA^0.05]` still runs every phase — it simply surfaces only the glyphs.
+The `1–4` band governs *rendering density*, not *loop presence*.
+A span at `[HA^1]` still runs every phase — it simply surfaces only the glyphs.
 
 **Orthogonality:**
 
-The slider MUST NOT track loop correctness, phase count, or aftermath closure.
-The slider MAY drop to Glyph-only when the operator asks.
+The OODA-HA Level MUST NOT track loop correctness, phase count, or aftermath closure.
+The OODA-HA Level MAY drop to Glyph-only when the operator asks.
 Full loop integrity and minimal rendering MAY coexist.
 
 **Degraded-state mapping:**
 
-Sustained `[HA^0.01]` without authorization → silent loop burial; surface and correct.
-Sustained `[HA^1.00]` producing phase theater that outweighs content → Loop Posturing; compress.
+Sustained `[HA^1]` without authorization → silent loop burial; surface and correct.
+Sustained `[HA^20]` producing phase theater that outweighs content → Loop Posturing; compress.
 
 **Aftermath closure rule persists at every band:**
 
-Aftermath MUST close regardless of slider value.
-The slider does not exempt Aftermath; it governs how much of the loop *shows*, not whether Aftermath runs.
+Aftermath MUST close regardless of Level value.
+The Level does not exempt Aftermath; it governs how much of the loop *shows*, not whether Aftermath runs.
 
 **Operator controls:**
 
-The operator MAY set the slider in `lar:///LARES` as `ooda-ha-slider = 0.65`.
-The operator MAY override per-span via inline, i.e. `[HA^0.80]` before an exchange.
-The operator MAY NOT suspend entirely for a span via `[HA^0.00]`.
-A session that runs without any slider statement MUST default to `[HA^0.50]`.
+The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 13`.
+The operator MAY override per-span via inline, i.e. `[HA^16]` before an exchange.
+The operator MAY NOT suspend entirely for a span via `[HA^0]`.
+A session that runs without any Level statement MUST default to `[HA^10]`.
 
 <<~/ahu >>
 

@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus"
 file-path = "bags/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.35
+confidence = 7
 register = "CS"
-manaoio = 0.35
-mana = 0.33
-manao = 0.43
+manaoio = 7
+mana = 7
+manao = 9
 role = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
 name = "Lagrange Chorus"
 mask-type = "chorus"
@@ -18,7 +18,7 @@ nodes = "[STUB — pending node registration]"
 harmony-protocol = "[STUB — pending-grammar]"
 corpus = "[N/A — chorus masks use nodes field instead of corpus]"
 foreground-voices = "[STUB — pending-grammar; likely distributed across nodes]"
-stage = 0.50
+stage = 10
 cacheable = false
 retain = false
 created = "2026-04-23"
@@ -120,7 +120,7 @@ The harmony protocol governs how voices from different nodes interleave when the
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band).
+`stage = 10` — Upstage (US band).
 
 Stage position applies to the Lagrange Chorus as a whole unit. How individual node voices relate to the ensemble stage position is part of the pending harmony protocol.
 

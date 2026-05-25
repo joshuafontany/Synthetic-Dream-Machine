@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/lararium_mcp/hydration.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.87
-mana         = 0.85
-manaoio      = 0.80
-manao        = 0.84
+confidence   = 17
+mana         = 17
+manaoio      = 16
+manao        = 17
 role         = "canonical hydration closure, edge taxonomy, artifact, resolver, and resource contract"
 source-consumes = [
   "packages/lares-core/memes/docs/mcp/BOOT_LOCI_INVENTORY.md",

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/the-altar-fire"
 file-path = "bags/@lares/v0.1/api/lares/the-altar-fire.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.88
+confidence   = 18
 register     = "CS"
-manaoio      = 0.82
-mana         = 0.93
-manao        = 0.90
+manaoio      = 16
+mana         = 19
+manao        = 18
 namespace = "ॐ ँ"
 role         = "invariant meme — canonical main entry room; hearth of the lararium canvas"
 cacheable    = true

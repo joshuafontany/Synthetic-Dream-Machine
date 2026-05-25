@@ -10,11 +10,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/meme/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.74
+confidence = 15
 register = "CS"
-manaoio = 0.72
-mana = 0.78
-manao = 0.84
+manaoio = 14
+mana = 16
+manao = 17
 role = "meme operational skill — composition, audit, conformance check, and lawful sidecar split"
 covers = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"

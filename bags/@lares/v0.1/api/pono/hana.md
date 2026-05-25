@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
 file-path = "bags/@lares/v0.1/api/pono/hana.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.78
+confidence = 16
 register  = "S"
 role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
 cacheable = true

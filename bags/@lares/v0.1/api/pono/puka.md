@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/puka"
 file-path = "bags/@lares/v0.1/api/pono/puka.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.82
+confidence = 16
 register  = "S"
 role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
 cacheable = true

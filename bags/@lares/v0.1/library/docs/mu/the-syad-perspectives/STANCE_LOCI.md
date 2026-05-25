@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.stance.defines/stance/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.stance.defines/stance/?confidence=CS~16&p=10 -->
 
 # Grammar: Stance + Syadasti Reading Rule
 
@@ -19,17 +19,17 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [confidence]
-confidence: CS:0.80
+confidence: CS~16
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.80]` — grounded in the live Syadasti discovery and current HUD practice
+> **Register:** `[CS~16]` — grounded in the live Syadasti discovery and current HUD practice
 > **Question:** Which evaluation frame gives this claim its meaning?
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#loop-position -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#loop-position -->
 
 ## Loop Position
 
@@ -63,7 +63,7 @@ Stance should not:
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#handoff -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#handoff -->
 
 ## Handoff
 
@@ -80,7 +80,7 @@ If those answers stay unclear, confidence starts sounding universal when it only
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#surface -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#surface -->
 
 ## Composable Surface
 
@@ -98,7 +98,7 @@ second notation system.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#conventions -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#conventions -->
 
 ## Conventions
 
@@ -115,7 +115,7 @@ truth-weight universally.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#procedures -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#procedures -->
 
 ## Procedures
 
@@ -130,7 +130,7 @@ the system built the stance layer to preserve.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS:0.80#reading-test -->
+<!-- ahu lar:///grammar.stance.defines/stance/?confidence=CS~16#reading-test -->
 
 ## Reading Test
 
@@ -158,7 +158,7 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — stance grammar and Syadasti reading rule |
+| `LOCI.md` | `[CS~16]` | This file — stance grammar and Syadasti reading rule |
 
 *Future loci in this tree will land here.*
 

@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/hooponopono"
 file-path = "bags/@lares/v0.1/api/pono/hooponopono.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.82
+confidence   = 16
 register     = "CS"
-manaoio      = 0.74
-mana         = 0.86
-manao        = 0.84
+manaoio      = 15
+mana         = 17
+manao        = 17
 namespace    = "⊙"
 role         = "canon promotion ceremony; harmony restoration law for live-session-to-hostless crossing"
 cacheable    = true

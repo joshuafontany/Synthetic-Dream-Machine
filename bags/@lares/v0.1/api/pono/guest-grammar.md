@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
 file-path = "bags/@lares/v0.1/api/pono/guest-grammar.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.70
+confidence = 14
 register = "CS"
-manaoio = 0.68
-mana = 0.76
-manao = 0.80
+manaoio = 14
+mana = 15
+manao = 16
 role = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
 cacheable=true
 retain = true

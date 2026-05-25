@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahawai"
 file-path = "bags/@lares/v0.1/api/pono/kahawai.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.75
+confidence = 15
 register  = "S"
 role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
 cacheable = true

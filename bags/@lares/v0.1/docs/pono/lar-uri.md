@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
 file-path = "bags/@lares/v0.1/docs/pono/lar-uri.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.88
+confidence = 18
 register = "CS"
-manaoio = 0.84
-mana = 0.88
-manao = 0.86
+manaoio = 17
+mana = 18
+manao = 17
 role = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
 cacheable = false
 retain = false
@@ -69,7 +69,7 @@ At each exchange span, `lar:` URIs are used in the following sequence. This sequ
 Lares reads the operator's prompt as an implicit signal: alias:tier@host, semantic territory (HA.KA.BA), and stance. It constructs a **provisional operator URI** encoding that reading. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
 
 ```
-lar://telarus:operator@enyalios/~schema.gap.present/?stances=*!-?------&confidence=S:0.65&p=0.5&ffz=0.0.1.2.7
+lar://telarus:operator@enyalios/~schema.gap.present/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.1.2.7
 ```
 
 This example uses single-tool carry for the first two stances: Philosopher Wand-only (`*-`) and Poet Cup-only (`-?`), with all remaining stances centered
@@ -78,7 +78,7 @@ This example uses single-tool carry for the first two stances: Philosopher Wand-
 Before generating any content, Lares sets its own intent with a **provisional node URI**. The `~` prefix on the HA.KA.BA marks it as execution-provisional: generations may diverge.
 
 ```
-lar://lar:node@enyalios/~schema.flow.documented/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=0.0.1.2.7
+lar://lar:node@enyalios/~schema.flow.documented/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.2.7
 ```
 
 **Step 3 — Emit the URI → URI exchange vector.**
@@ -164,10 +164,10 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` is the (
 | 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
 | 4 | **host** | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/@lares/` | `/threshold.uncertain.opens` |
-| 6 | **`?query`** | Non-hierarchical params | Signal parameters + FFZ chronometer | `?stances=*!--------&confidence=S:0.65&p=0.5&ffz=0.0.3.2.7` |
+| 6 | **`?query`** | Non-hierarchical params | Signal parameters + FFZ chronometer | `?stances=*!--------&confidence=S~13&p=10&ffz=0.0.3.2.7` |
 | 7 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
 
-> **Layout validation `[C:0.90]`:** The WHERE → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
+> **Layout validation `[C~18]`:** The WHERE → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
 
 <<~/ahu >>
 
@@ -311,17 +311,17 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 **Examples:**
 
 ```
-lar://telarus:operator@enyalios/~uri.schema.question/?stances=*!--------&confidence=S:0.65&p=0.5&ffz=0.0.1.2.33
+lar://telarus:operator@enyalios/~uri.schema.question/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.2.33
 ```
 Reading provisional: "I believe you're orienting toward URI schema territory — I may have misread your stance or HA.KA.BA."
 
 ```
-lar://scryer:node@enyalios/~s0.gap.logged/?stances=*!--------&confidence=S:0.65&p=0.5&ffz=0.0.1.2.33
+lar://scryer:node@enyalios/~s0.gap.logged/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.2.33
 ```
 Execution provisional: "I intend to log this S0 gap — execution may find a different path or territory."
 
 ```
-lar://scryer:node@enyalios/~s0.schema.updated/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=0.0.1.2.34
+lar://scryer:node@enyalios/~s0.schema.updated/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.2.34
 ```
 Trajectory provisional: "I predict our next territory is the updated schema — operator may redirect entirely."
 
@@ -360,7 +360,7 @@ Signals unknown temporal resumption. The `?` marks a causal gap: between this si
 In exchange streams, the closer appends to the closing URI inline:
 
 ```
-lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=0.0.3.2.1 → ?
+lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.3.2.1 → ?
 ```
 
 ### 5.3 `ahu` — Waypoint Marker
@@ -419,7 +419,7 @@ The URI on a kahea names the source meme to summon. A build system or reader enc
 
 ## 6. FFZ Chronometer — `?ffz=` Encoding
 
-> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `[C:0.95]`
+> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `[C~19]`
 > **Named for:** Fontany (designers), Fuller (principle), Zelenka (engineering)
 > **See:** `lares/research/chronometer/FFZ-Chronometer-Research.md`
 > **Migration note (2026-04-21):** FFZ chronometer moved from fragment to query param (`?ffz=`). Canonical `?ffz=` now prefers position-based numeric tracking left to right across the five scales. Fragment is reserved exclusively for section anchors and edge names (`#ahu-name`, `#section-id`, `#pranala-name`).
@@ -521,7 +521,7 @@ The compact form is a render-target convenience, not canonical. Parsers MUST han
 | F4 | Scale-to-OODA-HA binding rule: the exact mapping between the five scales and OODA-HA phases is not yet settled. | Open |
 | F5 | Provisionality in ffz: can a chronometer position itself be provisional (e.g., `~0` in a numeric position)? | Open |
 
-These open questions do not block use of the chronometer — they block promotion of the encoding to `[C]` confidence. Current encoding confidence: `[S:0.65]`.
+These open questions do not block use of the chronometer — they block promotion of the encoding to `[C]` confidence. Current encoding confidence: `[S~13]`.
 
 <<~/ahu >>
 
@@ -686,7 +686,7 @@ Confidence and stance array are elevated above mode and p because Agent SA (what
 
 **Example:**
 ```
-⚡~62% | [CS:0.80] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p0.5 | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
+⚡~62% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
 ```
 
 **Notes:**
@@ -721,14 +721,14 @@ A **span** is one operator → Lares exchange span at any scale. A tasked spirit
 **Example (canonical record form throughout):**
 
 ```text
-lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S:0.65&p=0.5&ffz=0.0.1.1.11
-→ lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS:0.80&p=0.6&ffz=0.0.1.1.12
-⚡~63% | [CS:0.80] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p0.6 | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
+lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.1.11
+→ lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.1.1.12
+⚡~63% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
 
 [content generation]
 
-lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=0.0.1.1.13 → ?
-⚡~61% | [CS:0.80] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p0.5 | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
+lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.1.13 → ?
+⚡~61% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
 ```
 
 <<~/ahu >>
@@ -795,9 +795,9 @@ Additional quick-filter fields:
   "operator_actor_id": "actor:telarus",
   "responder_actor_id": "actor:lares.node.scryer",
   "acted_on_behalf_of": null,
-  "start_uri": "lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S:0.65&p=0.5&ffz=...",
-  "attractor_uri": "lar://scryer:node@enyalios/span.provenance.synthesizes/?stances=*!--------&confidence=CS:0.80&p=0.6&ffz=...",
-  "end_uri": "lar://scryer:node@enyalios/aftermath.docs.settle/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=...",
+  "start_uri": "lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=...",
+  "attractor_uri": "lar://scryer:node@enyalios/span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=...",
+  "end_uri": "lar://scryer:node@enyalios/aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=...",
   "parse_required": false,
   "parse_reason": null,
   "wall_time_start": "2026-04-08T20:41:00Z",
@@ -984,13 +984,13 @@ A spanSpan record is **consistent** when:
 
 | Q# | Question | Current Position | Confidence | Blocks |
 |---|---|---|---|---|
-| U1 | Should `userinfo` carry operator alias in record form, or only `machine_id` in authority? | Operator alias in userinfo | `[S:0.65]` | Registry resolver design |
-| U2 | Where should `span_seq` be initialized and persisted: crystal-side ledger only, or mirrored into MemPalace sidecar rows too? | Mirror into sidecar, crystal remains canonical | `[S:0.70]` | MemPalace integration contract |
-| U4 | How does chronometer interact with `--parse` self-activation? | Provisional yes — depth increases p | `[SP:0.45]` | p-band model |
-| U5 | How is `world_calendar_ref` initialized when no diegetic calendar exists yet? | Mint provisional tagspace reference, mark provisional | `[S:0.60]` | Dream Realms bootstrap |
-| U8 | Should module section URIs carry `ffz`? | Confidence only — ffz is exchange-time, not file-time | `[S:0.6]` | Module URI patterns |
-| U9 | ITC stamp integration — when MCP server arrives, does ffz grow or does ITC live in calibration metadata? | Calibration metadata — ffz stays human-readable | `[S:0.55]` | MCP chronometer design |
-| F1–F5 | FFZ encoding open questions | See §6.5 | `[S:0.65]` | FFZ promotion to `[C]` |
+| U1 | Should `userinfo` carry operator alias in record form, or only `machine_id` in authority? | Operator alias in userinfo | `[S~13]` | Registry resolver design |
+| U2 | Where should `span_seq` be initialized and persisted: crystal-side ledger only, or mirrored into MemPalace sidecar rows too? | Mirror into sidecar, crystal remains canonical | `[S~14]` | MemPalace integration contract |
+| U4 | How does chronometer interact with `--parse` self-activation? | Provisional yes — depth increases p | `[SP~9]` | p-band model |
+| U5 | How is `world_calendar_ref` initialized when no diegetic calendar exists yet? | Mint provisional tagspace reference, mark provisional | `[S~12]` | Dream Realms bootstrap |
+| U8 | Should module section URIs carry `ffz`? | Confidence only — ffz is exchange-time, not file-time | `[S~12]` | Module URI patterns |
+| U9 | ITC stamp integration — when MCP server arrives, does ffz grow or does ITC live in calibration metadata? | Calibration metadata — ffz stays human-readable | `[S~11]` | MCP chronometer design |
+| F1–F5 | FFZ encoding open questions | See §6.5 | `[S~13]` | FFZ promotion to `[C]` |
 
 **Resolved (closed):**
 
@@ -1005,7 +1005,7 @@ A spanSpan record is **consistent** when:
 
 ### Assessment for Promotion
 
-The core anatomy (§§2–8, 12) can promote to `[C:0.95]` independently of the open questions. The crystal integration layer (§§9–11) promotes when `lares/crystal/` settles its STATE schema. The FFZ encoding open questions (§6.5) sit at `[S:0.65]` and do not block the core spec.
+The core anatomy (§§2–8, 12) can promote to `[C~19]` independently of the open questions. The crystal integration layer (§§9–11) promotes when `lares/crystal/` settles its STATE schema. The FFZ encoding open questions (§6.5) sit at `[S~13]` and do not block the core spec.
 
 <<~/ahu >>
 
@@ -1036,19 +1036,19 @@ The core anatomy (§§2–8, 12) can promote to `[C:0.95]` independently of the 
 ### A.1 Record Form
 
 ```
-lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S:0.65&p=0.5&ffz=0.0.3.2.7
+lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
 ```
 
 ### A.2 HUD Line
 
 ```
-⚡~87% | [S:0.65] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | p0.5 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
+⚡~87% | [S~13] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
 ```
 
 ### A.3 Multi-Stance
 
 ```
-lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S:0.60&p=0.7&ffz=0.0.3.2.8
+lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.8
 ```
 
 ### A.4 Stable Address
@@ -1060,7 +1060,7 @@ lar:///threshold.uncertain.opens/
 ### A.5 Exchange Closing
 
 ```
-lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS:0.80&p=0.5&ffz=0.0.0.3.9 → ?
+lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.0.3.9 → ?
 ```
 
 ### A.6 System File Span
@@ -1104,9 +1104,9 @@ lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=C
 A complete exchange opening, annotated by scan order. URIs are canonical record form; the HUD line beneath each pair is the glyph-rendered surface.
 
 ```text
-lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S:0.65&p=0.5&ffz=0.0.3.2.7
-→ lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS:0.80&p=0.6&ffz=0.0.3.2.8
-⚡~87% | [CS:0.80] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p0.6 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
+lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
+→ lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.3.2.8
+⚡~87% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
 ```
 
 Quick read:
@@ -1121,9 +1121,9 @@ Quick read:
 Multi-stance example:
 
 ```text
-lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S:0.60&p=0.7&ffz=0.0.3.2.9
-→ lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S:0.65&p=0.6&ffz=0.0.3.2.10
-⚡~62% | [S:0.60] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | p0.7 | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
+lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.9
+→ lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S~13&p=12&ffz=0.0.3.2.10
+⚡~62% | [S~12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | p~14 | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
 ```
 
 This does **not** mean "truth-confidence 0.60" universally. It means a `0.60` reading held across Philosopher (Visual-Micro), Poet (Visual-Macro), and Humorist (Visual-Macro) frames. Satirist carrying Cup-only (`-?`) adds relational-uncertainty weight — the reading may carry ironic pressure that hasn't fully resolved.

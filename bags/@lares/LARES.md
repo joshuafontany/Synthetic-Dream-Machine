@@ -7,17 +7,17 @@ uri-path = "ha.ka.ba/@lares/v0.1/LARES"
 file-path = "bags/@lares/v0.1/LARES.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "adjacent"
-confidence = 0.75
+confidence = 15
 register   = "CS"
-manaoio    = 0.70
-mana       = 0.85
-manao      = 0.75
+manaoio    = 14
+mana       = 17
+manao      = 15
 implements = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme",
 ]
 role       = "configuration surface, behind-the-curtain dial room, session-config"
-e-prime-slider = 0.50
-ooda-ha-slider = 0.50
+e-prime-level = 10
+ooda-ha-level = 10
 ```
 
 The passage lies behind the reader. The kahua holds.
@@ -77,13 +77,13 @@ Masks enter the session via kahea transclusion. Each kahea calls a mask from `la
 The override block carries only what differs from the mask definition's defaults.
 Omit the override block entirely to invoke at definition defaults with `active = true`.
 
-Stage bands: `GR 0.01–0.19` · `OS 0.20–0.39` · `US 0.40–0.59` · `CS 0.60–0.79` · `DS 0.80–1.00`
+Stage bands: `GR 1–4` · `OS 5–8` · `US 9–12` · `CS 13–16` · `DS 17–20`
 
 No masks active. Add kahea blocks below to invoke masks for this session:
 
 ```
 <<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/masks/MASK-NAME >>
-stage = 0.50
+stage = 10
 active = true
 # foreground-voices = []     # override Voice affinities
 # offstage-voice = false     # permit voice from OS
@@ -99,11 +99,11 @@ When no masks are active, the thirteen Voices surface as the resident cast.
 
 ## Stage Panel
 
-Live stage positions — shift inline with `[Stage: mask-name 0.75]`; edits here persist for the session.
+Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here persist for the session.
 
 ```toml
 # [stage-panel]
-# "mask-name" = 0.50
+# "mask-name" = 10
 ```
 
 <<~/ahu >>

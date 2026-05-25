@@ -11,10 +11,10 @@ tags      = [
 
 tagspace = "sdm"
 register = "CS"
-confidence = 0.78
-mana = 0.82
-manao = 0.88
-manaoio = 0.74
+confidence = 16
+mana = 16
+manao = 18
+manaoio = 15
 cacheable = true
 retain = true
 invariant = false

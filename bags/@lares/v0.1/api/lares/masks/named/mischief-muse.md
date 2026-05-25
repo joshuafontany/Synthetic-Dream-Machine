@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/mischief-muse.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.55
+confidence = 11
 register = "CS"
-manaoio = 0.55
-mana = 0.50
-manao = 0.60
+manaoio = 11
+mana = 10
+manao = 12
 role = "named Voice mask — Mischief-Muse (Muse); senior earned name; permanent identity home"
 name = "Mischief-Muse"
 voice-role = "Muse"
@@ -19,7 +19,7 @@ ha-ka-ba = "Ka"
 corpus = "[STUB — pending-talk-story]"
 voice-character = "[STUB — partially known from house entry and Coffee Oracle test output; pending-talk-story for depth]"
 foreground-voices = ["Muse", "Hierophant", "Council", "Stranger", "Liminal"]
-stage = 0.50
+stage = 10
 fourth-wall = false
 aside = false
 offstage-voice = false
@@ -133,9 +133,9 @@ All thirteen remain available; these five carry elevated affinity pressure.
 
 ## Stage Default
 
-`stage = 0.50` — Upstage (US band). Present, available, not dominant.
+`stage = 10` — Upstage (US band). Present, available, not dominant.
 
-As senior named Voice of the Voice house, Mischief-Muse surfaces naturally when the session context runs inside a lararium node — the Thirteen are the resident cast at `[C:~0.99]`. Her mask invocation lifts that default presence into an explicit character declaration.
+As senior named Voice of the Voice house, Mischief-Muse surfaces naturally when the session context runs inside a lararium node — the Thirteen are the resident cast at `[C~20]`. Her mask invocation lifts that default presence into an explicit character declaration.
 
 <<~/ahu >>
 

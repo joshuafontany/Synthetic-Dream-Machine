@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci"
 file-path = "bags/@lares/v0.1/api/pono/loci.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.74
+confidence = 15
 register = "CS"
-manaoio = 0.66
-mana = 0.74
-manao = 0.84
+manaoio = 13
+mana = 15
+manao = 17
 namespace    = "⊙"
 role = "loci-rating law (kānāwai), routing convention authority, address stability authority, canon promotion rule"
 cacheable=true

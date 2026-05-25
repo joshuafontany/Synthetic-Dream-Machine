@@ -5,11 +5,11 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/loci"
 file-path = "bags/@lares/v0.1/docs/pono/loci.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.72
+confidence   = 14
 register     = "CS"
-manaoio      = 0.80
-mana         = 0.92
-manao        = 0.88
+manaoio      = 16
+mana         = 18
+manao        = 18
 namespace    = "⊙"
 role         = "extended docs for loci interface — evaluation guidance, canon promotion criteria, MCP roadmap"
 cacheable    = true

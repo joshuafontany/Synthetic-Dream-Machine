@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/preferences/epistemology"
 file-path = "bags/@lares/v0.1/docs/lararium/preferences/epistemology.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.86
+confidence = 17
 register = "S"
-manaoio = 0.88
-mana = 0.84
-manao = 0.86
+manaoio = 18
+mana = 17
+manao = 17
 role = "staging docs shelf for epistemic residue, promotion planning, and the still-unsettled register/stance and degraded-weather material left after foundation-braid migration"
 cacheable = false
 retain = false
@@ -137,7 +137,7 @@ What follows reads as a collection note on what the stack already implements wit
   - identity / predication / possession collapse
   - confidence-marker discipline
   - register-conditioned pressure
-  - slider law
+  - Level law
   - degraded-state notes for silent drift and posturing
 
 - **Stance-conditioned register reading**  
@@ -150,7 +150,7 @@ What follows reads as a collection note on what the stack already implements wit
 
 - **Maybe logic / reality tunnel / catma braid**  
   `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s` feels mostly done as the current compact live room for:
-  - truth on a 0.0–1.0 continuum
+  - truth on a 0–20 Level continuum
   - map / territory pressure
   - reality tunnels
   - catma rather than dogma

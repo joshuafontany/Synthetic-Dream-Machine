@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust"
 file-path = "bags/@lares/v0.1/api/pono/tagspace-trust.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.78
+confidence = 16
 register = "CS"
-manaoio = 0.72
-mana = 0.82
-manao = 0.86
+manaoio = 14
+mana = 16
+manao = 17
 namespace = "ॐ ँ"
 role = "invariant law for shared lar tagspace precedence across system memes and live exchange records"
 cacheable = true

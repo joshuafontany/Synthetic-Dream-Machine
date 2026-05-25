@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
 file-path = "bags/@lares/v0.1/api/pono/waiho.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.90
+confidence = 18
 register  = "CS"
-manaoio   = 0.84
-mana      = 0.90
-manao     = 0.86
+manaoio   = 17
+mana      = 18
+manao     = 17
 role      = "ephemeral variable binding — deposit without graph identity"
 cacheable = true
 retain    = true

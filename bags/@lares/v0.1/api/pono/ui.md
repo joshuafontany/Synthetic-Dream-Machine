@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ui"
 file-path = "bags/@lares/v0.1/api/pono/ui.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.75
+confidence = 15
 register  = "S"
 role      = "query surface sigil — evaluates TW5 filter and renders result list; English alias: \\query"
 cacheable = true

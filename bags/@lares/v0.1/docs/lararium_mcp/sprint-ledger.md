@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/lararium_mcp/sprint-ledger.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.84
-mana         = 0.80
-manaoio      = 0.76
-manao        = 0.82
+confidence   = 17
+mana         = 16
+manaoio      = 15
+manao        = 16
 role         = "canonical closed-sprint ledger and consumption map for Lararium MCP planning documents"
 source-consumes = [
   "packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md",

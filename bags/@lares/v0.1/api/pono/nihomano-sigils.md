@@ -5,11 +5,11 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils"
 file-path    = "bags/@lares/v0.1/api/pono/nihomano-sigils.md"
 type         = "text/x-memetic-wikitext"
-confidence   = 0.90
+confidence   = 18
 register     = "CS"
-manaoio      = 0.88
-mana         = 0.90
-manao        = 0.88
+manaoio      = 18
+mana         = 18
+manao        = 18
 role         = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
 cacheable    = true
 retain       = true

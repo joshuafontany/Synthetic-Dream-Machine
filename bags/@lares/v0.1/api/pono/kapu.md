@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kapu"
 file-path = "bags/@lares/v0.1/api/pono/kapu.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.88
+confidence   = 18
 register     = "CS"
-manaoio      = 0.80
-mana         = 0.92
-manao        = 0.88
+manaoio      = 16
+mana         = 18
+manao        = 18
 namespace    = "⊙"
 role         = "above-namespace authority law; kernel/sacred tier interface; trust boundary root"
 cacheable    = true

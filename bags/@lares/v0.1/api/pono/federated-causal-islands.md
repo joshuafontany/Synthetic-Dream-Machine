@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
 file-path = "bags/@lares/v0.1/api/pono/federated-causal-islands.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 0.82
+confidence   = 16
 register     = "CS"
-manaoio      = 0.80
-mana         = 0.84
-manao        = 0.82
+manaoio      = 16
+mana         = 17
+manao        = 16
 role         = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
 cacheable    = true
 retain       = true
@@ -215,7 +215,7 @@ Tier 3 — Lares nodes (the federated layer)
   Cross-node sync begins with a boot artifact, then proceeds via offset-resumable deltas.
   Authority graph reconciles before manifest. Manifest reconciles before content.
 
-Tier 4 — Commons / Universe horizon [C~0.92 after law-of-5s]
+Tier 4 — Commons / Universe horizon [C~18 after law-of-5s]
   The horizon beyond direct federation. The set of all possible lararium nodes including
   those not yet reachable or known. No single node holds a snapshot of Tier 4 state.
   Non-simultaneously apprehended by definition (Fuller-Zelenka principle extended to the

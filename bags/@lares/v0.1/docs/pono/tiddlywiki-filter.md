@@ -5,7 +5,7 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
 file-path = "bags/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.68
+confidence   = 14
 register     = "S"
 role = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
 cacheable = false

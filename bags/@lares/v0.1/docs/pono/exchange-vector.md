@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/exchange-vector"
 file-path = "bags/@lares/v0.1/docs/pono/exchange-vector.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.70
+confidence = 14
 register = "CS"
-manaoio = 0.64
-mana = 0.74
-manao = 0.80
+manaoio = 13
+mana = 15
+manao = 16
 role = "docs sister for exchange vector law — record form, HUD example, and pattern-training guidance"
 cacheable = false
 retain = false
@@ -77,7 +77,7 @@ Intent belongs in HA.KA.BA territory and signal query.
 A HUD line may follow the canonical vector:
 
 ```text
-⚡~80% | ⚡0.⚔️0.🔍0.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS:0.80] | p0.5 |
+⚡~80% | ⚡0.⚔️0.🔍0.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
 ```
 
 The HUD line is not the canonical URI.

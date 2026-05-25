@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/lararium_mcp/adapters.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.84
-mana         = 0.82
-manaoio      = 0.77
-manao        = 0.84
+confidence   = 17
+mana         = 16
+manaoio      = 15
+manao        = 17
 role         = "canonical submodule adapter and sidecar integration contract for Lararium MCP"
 source-consumes = [
   "packages/lares-core/memes/docs/mcp/SUBMODULE_ADAPTER_INTERFACE.md",

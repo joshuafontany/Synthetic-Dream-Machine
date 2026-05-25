@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/helu"
 file-path = "bags/@lares/v0.1/api/pono/helu.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.78
+confidence = 16
 register  = "S"
 role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
 cacheable = true

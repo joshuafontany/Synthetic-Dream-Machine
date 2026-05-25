@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tick"
 file-path = "bags/@lares/v0.1/api/pono/tick.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.30
+confidence = 6
 register  = "S"
 role      = "device lifecycle hook — run-block-once-per-nalu; Verse OnSimulate(StagedUpdates) entry point; DEFERRED to UE6 ~2027"
 cacheable = true

@@ -6,11 +6,11 @@ uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s"
 file-path = "bags/@lares/v0.1/docs/pono/law-of-5s.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 0.80
+confidence = 16
 register  = "S"
-manaoio   = 0.78
-mana      = 0.82
-manao     = 0.80
+manaoio   = 16
+mana      = 16
+manao     = 16
 role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, p-parameter mapping, and scale UCAN attenuation"
 cacheable = false
 retain    = false
@@ -64,16 +64,16 @@ p-parameter  →  attention range in TEXT
 spatial      →  attention range in SPACE
 ```
 
-All three map onto the same 0.0–1.0 continuum. The unified vocabulary table:
+All three map onto the same 0–20 Level continuum. The unified vocabulary table:
 
 ```
 SIGIL  RANGE      CHRONO   HUD   TEXT-p        SPATIAL
 ─────  ─────      ──────   ───   ─────         ───────
-  ₀    0.0–0.2    Action   ⚡    p0.0–p0.2     personal (arm's reach, single target)
-  ₁    0.2–0.4    Round    ⚔️    p0.2–p0.4     tactical (weapon range, voice-carry)
-  ₂    0.4–0.6    Turn     🔍    p0.4–p0.6     local (room, junction, one procedure)
-  ₃    0.6–0.8    Watch    ⚙️    p0.6–p0.8     regional (neighborhood, district)
-  ₄    0.8–1.0    Week     🗺️    p0.8–p1.0     cartographic (map-scale, full journey)
+  ₀    0.0–0.2    Action   ⚡    p~0–p~4     personal (arm's reach, single target)
+  ₁    0.2–0.4    Round    ⚔️    p~4–p~8     tactical (weapon range, voice-carry)
+  ₂    0.4–0.6    Turn     🔍    p~8–p~12     local (room, junction, one procedure)
+  ₃    0.6–0.8    Watch    ⚙️    p~12–p~16     regional (neighborhood, district)
+  ₄    0.8–1.0    Week     🗺️    p~16–p~20     cartographic (map-scale, full journey)
 ```
 
 **Attention quality per band:**
@@ -83,7 +83,7 @@ SIGIL  RANGE      CHRONO   HUD   TEXT-p        SPATIAL
 - ₃ — episodic; holds a complete sub-story; session memory and active Workers operate at ₃
 - ₄ — strategic/epochal; patterns visible only across many sessions; the outer wall of system self-awareness
 
-**Important distinction:** consecration (0.0–1.0 validated integrity) and attention scale (0.0–1.0 range extent) both use the same numeric continuum but stay orthogonal. Consecration describes TRUST. Scale describes ZOOM. A meme can carry 0.95 consecration at ₀ scale (highly validated, atomic grain) or 0.2 consecration at ₄ scale (provisional sketch, campaign arc).
+**Important distinction:** consecration (0–20 Level validated integrity) and attention scale (0–20 Level range extent) both use the same numeric continuum but stay orthogonal. Consecration describes TRUST. Scale describes ZOOM. A meme can carry Level 19 consecration at ₀ scale (highly validated, atomic grain) or Level 4 consecration at ₄ scale (provisional sketch, campaign arc).
 
 <<~/ahu >>
 
@@ -113,17 +113,17 @@ A counter increment at a lower-numbered Chronometer slot without a higher-slot c
 The `p` parameter's named anchors map onto bands:
 
 ```
-p0.0  = morpheme      → ₀ band (Action grain)
-p0.1  = word          → ₀ band
-p0.2  = clause        → ₁ band (Round grain)
-p0.3  = sentence-grp  → ₁ band
-p0.5  = paragraph     → ₂ band (Turn grain)  DEFAULT
-p0.7  = section       → ₃ band (Watch grain)
-p0.85 = document      → ₄ band (Week grain)
-p1.0  = session-arc   → ₄ band
+p~0  = morpheme      → ₀ band (Action grain)
+p~2  = word          → ₀ band
+p~4  = clause        → ₁ band (Round grain)
+p~6  = sentence-grp  → ₁ band
+p~10  = paragraph     → ₂ band (Turn grain)  DEFAULT
+p~14  = section       → ₃ band (Watch grain)
+p~17 = document      → ₄ band (Week grain)
+p~20  = session-arc   → ₄ band
 ```
 
-"p0.5" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
+"p~10" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
 
 <<~/ahu >>
 

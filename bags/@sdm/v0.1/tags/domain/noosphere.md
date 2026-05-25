@@ -8,10 +8,10 @@ type      = "text/x-memetic-wikitext"
 
 tagspace = "sdm"
 register = "CS"
-confidence = 0.72
-mana = 0.78
-manao = 0.82
-manaoio = 0.70
+confidence = 14
+mana = 16
+manao = 16
+manaoio = 14
 cacheable = true
 retain = true
 invariant = false

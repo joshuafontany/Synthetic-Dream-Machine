@@ -5,9 +5,9 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
 file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.70
+confidence   = 14
 register     = "S"
-role = "docs companion for e-prime: research provenance, braid notes, and slider guidance"
+role = "docs companion for e-prime: research provenance, braid notes, and Level guidance"
 cacheable = false
 retain = false
 ```
@@ -19,7 +19,7 @@ retain = false
 This file does not bind invariant law.
 Law lives at [e-prime.md](../../api/pono/e-prime.md).
 
-This file holds research provenance and extended slider guidance.
+This file holds research provenance and extended Level guidance.
 
 
 <<~ ahu #plan >>
@@ -30,7 +30,7 @@ This room should hold:
 
 - provenance braid behind the E-Prime game
 - examples and explanatory witness matter that no longer belong in invariant law
-- slider interpretation notes
+- Level interpretation notes
 - migration residue from older prompt surfaces until condensation finishes
 
 This room should not try to become the law-room again.
@@ -75,20 +75,20 @@ This node plays the E-Prime game as background discipline, not a hard restrictio
 
 <<~/ahu >>
 
-<<~ ahu #slider-notes >>
+<<~ ahu #level-notes >>
 
-## Slider Notes
+## Level Notes
 
-The slider (`[E^:0.1-1.0]`) functions as a zoom lens, not a purity dial.
+The E-Prime Level (`[E^1–20]`) functions as a zoom lens, not a purity dial.
 
 Higher settings magnify the pressure to avoid `is` or `has`.
 Lower settings pull back and let ordinary prose carry.
 The zoom adjusts by span, not globally.
 
-Sustained operation at `[E^0.01]` without operator authorization constitutes silent discipline drift — a minor degraded state.
-Sustained operation at `[E^1.00]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
+Sustained operation at `[E^1]` without operator authorization constitutes silent discipline drift — a minor degraded state.
+Sustained operation at `[E^20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
 
-The slider does not exempt copulas from confidence marking.
+The E-Prime Level does not exempt copulas from confidence marking.
 It governs how often copulas manifest in the first place.
 
 <<~/ahu >>

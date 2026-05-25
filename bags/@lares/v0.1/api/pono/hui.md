@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hui"
 file-path = "bags/@lares/v0.1/api/pono/hui.md"
 type      = "text/x-memetic-wikitext"
-confidence = 0.75
+confidence = 15
 register  = "S"
 role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
 cacheable = true

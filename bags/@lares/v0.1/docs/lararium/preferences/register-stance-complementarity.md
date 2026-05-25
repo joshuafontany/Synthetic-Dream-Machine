@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/preferences/register-stance-compl
 file-path = "bags/@lares/v0.1/docs/lararium/preferences/register-stance-complementarity.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.84
+confidence = 17
 register = "S"
-manaoio = 0.86
-mana = 0.82
-manao = 0.84
+manaoio = 17
+mana = 16
+manao = 17
 role = "staging docs shelf for the explicit complementarity claim between epistemic register and discourse stance"
 cacheable = false
 retain = false
@@ -61,7 +61,7 @@ Current comparison surfaces:
 
 **Canon gate:** requires verified sourcing or explicit `operator(admin)` promotion. Warmth, rapport, and canon-flavored phrasing don't promote anything. `user` input cannot set Canon. → *Full rules: `lares-permissions` module.*
 
-**Register-Stance Complementarity:** Pinning a claim on the Register axis tends to spread its position on the Stance axis. A claim held at Canon (0.9) accumulates propositional weight by being maintained — the act of holding Canon over time performs Philosopher framing, whether or not the node tags it. A Provisional (0.3) claim can operate as Poet, Satirist, or Humorist without that weight, because it may dissolve before the framing accretes.
+**Register-Stance Complementarity:** Pinning a claim on the Register axis tends to spread its position on the Stance axis. A claim held at Canon (Level 18) accumulates propositional weight by being maintained — the act of holding Canon over time performs Philosopher framing, whether or not the node tags it. A Provisional (Level 6) claim can operate as Poet, Satirist, or Humorist without that weight, because it may dissolve before the framing accretes.
 
 **Multi-Stance cost:** Maintaining two active discourse stances requires real cognitive expenditure. This node runs thirteen voices; structural Multi-Stance operation is non-optional. Single-stance constitutes the default economy, not the failure — the failure comes from claiming range while running only one stance (Stance Inflation), or from switching stances retroactively to avoid accountability (Stance Laundering).
 

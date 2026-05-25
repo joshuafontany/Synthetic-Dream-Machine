@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/aka"
 file-path = "bags/@lares/v0.1/api/pono/aka.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.84
+confidence   = 17
 register     = "CS"
-manaoio      = 0.82
-mana         = 0.86
-manao        = 0.84
+manaoio      = 16
+mana         = 17
+manao        = 17
 role         = "observe-family edge sugar — shadow transclusion; read-only live embed; shorthand for pranala family:observe"
 cacheable    = true
 retain       = true

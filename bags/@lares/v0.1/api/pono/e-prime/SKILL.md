@@ -10,13 +10,13 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/e-prime/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.68
+confidence = 14
 register = "SC"
-manaoio = 0.63
+manaoio = 13
 cacheable=true
 retain = true
-mana = 0.70
-manao = 0.76
+mana = 14
+manao = 15
 role = "secondary E-Prime audit skill, Hoʻoko correction surface, and settled-text conformance guide"
 covers = ["lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime"]
 constraints = [
@@ -51,8 +51,8 @@ E-Prime auditor opens the settled-text correction stream here.
 
 This skill applies to settled text, not first-pass generation.
 `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime` remains the constitutional source.
-Any surviving `is` or `has` in audited text MUST carry `[C~0.99]`.
-Marker form: `[REGISTER~0.00]` — brackets, one tilde, two decimals.
+Any surviving `is` or `has` in audited text MUST carry `[C~20]`.
+Marker form: `[REGISTER~N]` — brackets, one tilde, integer Level on `0–20`.
 The smallest lawful intervention carries.
 Local correction stays local unless the user asks wider.
 
@@ -82,9 +82,9 @@ A direct sentence turn beats a hypothetical fix.
 
 ## Marker Contract
 
-Canonical token: `[SC~0.72]`
+Canonical token: `[SC~14]`
 
-Every audited `is` or `has` MUST carry `[C~0.99]`.
+Every audited `is` or `has` MUST carry `[C~20]`.
 Add a marker elsewhere only when confidence remains load-bearing.
 Marker spray MUST NOT substitute for real pressure.
 A sentence that survives unchanged still falls under the marker rule.
@@ -154,7 +154,7 @@ Classify each hit: `lawful` | `mark-only` | `Hoʻoko-required` | `ambiguous`
 `Hoʻoko-required` — text turns, not just collects warnings.
 `ambiguous` — quotation, code, literal example, or house-style exception makes the surface unclear.
 
-Any audited `is` or `has` without a marker denotes a failure state `[C~0.99]`.
+Any audited `is` or `has` without a marker denotes a failure state `[C~20]`.
 
 <<~/ahu >>
 

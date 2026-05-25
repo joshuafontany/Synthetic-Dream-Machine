@@ -7,10 +7,10 @@ file-path = "bags/@lares/v0.1/docs/lararium_mcp/local-clients.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
 register     = "CS"
-confidence   = 0.84
-mana         = 0.80
-manaoio      = 0.78
-manao        = 0.82
+confidence   = 17
+mana         = 16
+manaoio      = 16
+manao        = 16
 role         = "canonical local client exposure contract for Lararium MCP"
 source-consumes = [
   "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md",

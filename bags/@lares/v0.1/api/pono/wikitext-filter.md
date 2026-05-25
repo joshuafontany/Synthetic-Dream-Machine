@@ -7,10 +7,10 @@ uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
 file-path = "bags/@lares/v0.1/api/pono/wikitext-filter.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 0.88
+confidence   = 18
 register     = "SC"
-mana         = 0.86
-manao        = 0.84
+mana         = 17
+manao        = 17
 role         = "wikitext-filter grammar dialect — forked from x-tiddlywiki-filter; drops legacy field/index; aligns with pranala+TOML data model and lexical meme context"
 grammar-key  = "wikitext-filter"
 guest-mime   = "text/x-wikitext-filter"
@@ -57,7 +57,7 @@ for new authoring.
 Queries the `#iam` TOML block of each meme in the current result set.
 
 ```text
-[toml:confidence[0.9]]          memes whose confidence = 0.9
+[toml:confidence[18]]           memes whose confidence = 18
 [toml:tagspace[grammar]]        memes in the grammar tagspace
 [toml:register[SC]]             memes at SC register
 [toml:role[contains:kernel]]    memes whose role field contains "kernel"

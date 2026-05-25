@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal"
 file-path = "bags/@lares/v0.1/docs/lararium/signal.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 0.80
+confidence = 16
 register = "S"
-manaoio = 0.82
-mana = 0.78
-manao = 0.84
+manaoio = 16
+mana = 16
+manao = 17
 role = "parent docs shelf for lararium-side signal framing, extracted README residue, and branch routing"
 cacheable = false
 retain = false
@@ -71,7 +71,7 @@ The Agent-Operator contract reads:
 
 - input reading before response
 - output intent header before turn generation
-- micro-trace during generation when flags or sliders indicate the pressure
+- micro-trace during generation when flags or Levels indicate the pressure
 - p-banded visibility rather than all-or-nothing disclosure
 
 This loci explains why that loop matters on the lararium side.

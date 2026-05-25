@@ -5,11 +5,11 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/for"
 file-path = "bags/@lares/v0.1/api/pono/for.md"
 type = "text/x-memetic-wikitext"
-confidence   = 0.88
+confidence   = 18
 register     = "S"
-manaoio      = 0.86
-mana         = 0.88
-manao        = 0.86
+manaoio      = 17
+mana         = 18
+manao        = 17
 role         = "English alias pointer — \\for redirects to huli; canonical spec lives at pono/huli"
 cacheable    = true
 retain       = true
