@@ -2,7 +2,7 @@
  * worker-lifecycle.test.ts — browser vessel lifecycle protocol tests.
  *
  * Drives the teardown-echo-browser fixture Worker through the GP-5 contract:
- *   promote(wikiUri)  → promote:ack
+ *   manifest(wikiUri) → ea
  *   changeset(delta)  → event (addedCount / deletedCount echoed)
  *   teardown()        → cancel:confirmed → teardown:ack (ordering asserted)
  *
@@ -16,9 +16,9 @@ import { describe, test, expect, afterEach } from "vitest";
 import {
   isWorkerToMainMsg,
   mkTeardown,
-  mkPromote,
+  mkManifest,
   mkChangeset,
-  type WorkerMsg_PromoteAck,
+  type WorkerMsg_Ea,
   type WorkerMsg_Event,
   type WorkerMsg_ChangesetAck,
 } from "@lararium/mesh";
@@ -62,23 +62,23 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     worker = null;
   });
 
-  test("promote signal elicits promote:ack with matching wikiUri", async () => {
+  test("manifest delivery elicits ea sovereignty declaration with matching wikiUri", async () => {
     worker = spawnFixture();
     const wikiUri = "lar:///ha.ka.ba/test-wiki";
 
     const msgsPromise = collectUntil(
       worker,
-      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "promote:ack"),
+      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "ea"),
     );
 
     // coreBlob required by BA-5 — fixture ignores bytes but type must be honest.
     // syncPort: browser MessageChannel is available globally in dedicated Workers.
     const { port1: _main, port2: syncPort } = new MessageChannel();
-    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0), syncPort), [syncPort]);
+    worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort), [syncPort]);
     _main.close();
     const msgs = await msgsPromise;
 
-    const ack = msgs.find((m) => (m as { type: string }).type === "promote:ack") as WorkerMsg_PromoteAck & { coreBlobByteLength?: number } | undefined;
+    const ack = msgs.find((m) => (m as { type: string }).type === "ea") as WorkerMsg_Ea & { coreBlobByteLength?: number } | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
     // BA-5: coreBlob crossed the structured-clone boundary (fixture echoes byteLength).

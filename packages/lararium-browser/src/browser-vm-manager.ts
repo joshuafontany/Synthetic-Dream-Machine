@@ -8,8 +8,8 @@
  *     2. Creates a MessageChannel. Keeps `mainPort`; transfers `syncPort` to the Worker.
  *     3. Optionally connects `mainPort` to the main-thread Automerge Repo via
  *        `MessageChannelNetworkAdapter` so the Worker-side Repo syncs automatically.
- *     4. Sends `promote` with `syncPort`, `docUrl`, `coreBlob`, `coreHash`.
- *     5. Awaits `promote:ack` — island is live.
+ *     4. Delivers `manifest` with `syncPort`, `docUrl`, `coreBlob`, `coreHash`.
+ *     5. Awaits `ea` — island declares sovereignty; island is live.
  *
  *   Island isolation is structural: each Worker owns its own dedicated realm and
  *   MessagePort. The routing Map `_slots` enforces that no message reaches the
@@ -17,8 +17,8 @@
  *
  * ## BrowserAuthorityPool surface
  *
- *   `acquire`   — spawn + promote; returns BrowserAuthorityLease.
- *   `preWarm`   — spawn + promote without returning a lease.
+ *   `acquire`   — spawn + manifest; returns BrowserAuthorityLease.
+ *   `preWarm`   — spawn + manifest without returning a lease.
  *   `evict`     — GP-5 teardown; returns doc bytes for persistence.
  *   `disposeAll`— evict all slots.
  *   `has`       — slot existence check.
@@ -41,12 +41,12 @@ import { Repo } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import {
   isWorkerToMainMsg,
-  mkPromote,
+  mkManifest,
   mkTeardown,
   WORKER_PROTOCOL_VERSION,
 } from "@lararium/mesh";
 import type {
-  WorkerMsg_PromoteAck,
+  WorkerMsg_Ea,
   WorkerMsg_TeardownAck,
   WorkerMsg_Event,
   WorkerToMainMsg,
@@ -302,25 +302,27 @@ export class BrowserVmManager implements BrowserAuthorityPool {
     });
 
     // 5. Derive docUrl and coreHash from params.
-    //    S10: docUrl arrives via BrowserAuthorityBootParams once the vessel wires AutomergeUrls.
-    //    Until then: null (cold boot — Worker waits for doc via sync channel).
-    const docUrl:   string | null = null;
+    //    docUrl: use params.docUrl when provided so the Worker-side Repo calls
+    //    repo.find(docUrl).whenReady() instead of waiting for gossip sync (Gap 4 fix).
+    //    null = cold boot — Worker accepts whatever the mainRepo syncs via the port.
+    const docUrl:   string | null = params.docUrl ?? null;
     const coreHash: string | null = null;
 
-    // 6. Build warm-start snapshot bytes for the promote message.
-    //    params.snapshots carries Automerge doc bytes keyed by bagId.
-    //    For now we pass the first snapshot's bytes as docBytes in the Worker — deferred to S4.
-    //    Worker receives docUrl: null and will accept whatever the mainRepo syncs via the port.
-
-    // 7. Send promote — transfer syncPort + coreBlob buffer.
+    // 6. Deliver manifest — transfer syncPort + coreBlob buffer to the sovereign island.
+    //    pluginTiddlers, bagStack, recipeUri cross the boundary so the island can think
+    //    from first breath (ea condition 3 — own truth from boot, not from a later delta).
     slot.phase = "booting";
-    const promoteMsg = mkPromote(id, params.coreBlob, syncPort, docUrl, coreHash);
+    const manifestMsg = mkManifest(id, params.coreBlob, syncPort, docUrl, coreHash, {
+      pluginTiddlers: params.pluginTiddlers,
+      bagStack:       params.bagStack,
+      recipeUri:      params.recipeUri,
+    });
     const transferList: Transferable[] = [syncPort];
     if (params.coreBlob.buffer.byteLength > 0) transferList.push(params.coreBlob.buffer);
-    worker.postMessage(promoteMsg, transferList);
+    worker.postMessage(manifestMsg, transferList);
 
-    // 8. Await promote:ack — island is live.
-    await _awaitWorkerMsg<WorkerMsg_PromoteAck>(worker, "promote:ack");
+    // 8. Await ea — Worker declares sovereignty; island is live.
+    await _awaitWorkerMsg<WorkerMsg_Ea>(worker, "ea");
 
     slot.phase    = "live";
     slot.bootedAt = Date.now();

@@ -14,7 +14,7 @@
  *     1. `await handler.bootTw5(wikiUri, coreBlob)`  — boots TW5, wires verse events
  *     2. entry file: wire Repo with syncPort, await Repo ready, extract initial tiddlers
  *     3. `handler.applyDelta(wikiUri, initialTiddlers, [])`  — seed TW5 from CRDT doc
- *     4. `handler.sendPromoteAck(wikiUri)`  — signal main thread: island is live
+ *     4. `handler.sendEa(wikiUri)`  — signal main thread: island is live
  *     5. on Repo change: `handler.applyDelta(wikiUri, added, deleted)` at rAF boundary
  *     6. on teardown: `const result = handler.teardown()`  — dispose TW5, capture snapshot
  *
@@ -40,7 +40,7 @@ import type {
   WorkerMsg_Event,
 } from "@lararium/mesh";
 import {
-  mkPromoteAck,
+  mkEa,
   mkTeardownAck,
   mkChangesetAck,
   mkFault,
@@ -68,19 +68,29 @@ export class WorkerAuthorityHandler {
   // ── Worker Sovereignty Law — orchestration API ──────────────────────────
 
   /**
-   * Boot the TW5Engine. Does NOT send `promote:ack` — the entry file
-   * sends it after the Worker-side Repo is synced and initial tiddlers applied.
+   * Boot the TW5Engine. Does NOT send `ea` — the entry file sends it after the
+   * Worker-side Repo is synced and initial tiddlers applied.
+   *
+   * `preloadedTiddlers` carries the plugin layer (sigils, ahu, pranala, etc.).
+   * These are prerequisite — applied during boot so the CRDT truth layer can use
+   * them from first frame. An island booted without plugin tiddlers fails ea
+   * condition 3 (own truth) silently. Passed directly to TW5Engine.boot.
    *
    * Throws (and sends fault) if `coreBlob` carries zero bytes.
    */
-  async bootTw5(wikiUri: string, coreBlob: Uint8Array): Promise<void> {
+  async bootTw5(
+    wikiUri:          string,
+    coreBlob:         Uint8Array,
+    preloadedTiddlers?: readonly Record<string, unknown>[],
+  ): Promise<void> {
     this._wikiUri = wikiUri;
     if (coreBlob.byteLength === 0) {
-      this._postFault(wikiUri, "promote rejected: coreBlob carries zero bytes — authority cannot boot without a TW5 engine");
+      this._postFault(wikiUri, "manifest rejected: coreBlob carries zero bytes — authority cannot boot without a TW5 engine");
       throw new Error("zero-byte coreBlob");
     }
     this._tw5 = new TW5Engine();
-    await this._tw5.boot(coreBlob);
+    const tiddlers = preloadedTiddlers?.length ? (preloadedTiddlers as Array<Record<string, unknown>>) : undefined;
+    await this._tw5.boot(coreBlob, tiddlers);
 
     this._liveHandles.add({
       cancel: this._tw5.onVerseEvent({
@@ -123,8 +133,8 @@ export class WorkerAuthorityHandler {
   }
 
   /** Send `promote:ack` — call after Repo sync complete and initial tiddlers applied. */
-  sendPromoteAck(wikiUri: string): void {
-    this._post(mkPromoteAck(wikiUri));
+  sendEa(wikiUri: string): void {
+    this._post(mkEa(wikiUri));
   }
 
   /**
@@ -154,13 +164,13 @@ export class WorkerAuthorityHandler {
   // ── Deprecated legacy dispatch ──────────────────────────────────────────
 
   /**
-   * @deprecated Use `bootTw5` / `applyDelta` / `sendPromoteAck` / `teardown` directly.
+   * @deprecated Use `bootTw5` / `applyDelta` / `sendEa` / `teardown` directly.
    *
    * Legacy single-entry dispatch kept for GP-3 compatibility (node fixture Workers,
    * lar-wiki-worker.ts prior to Repo-in-Worker migration). Entry files that adopt
    * the Worker Sovereignty Law should NOT call this method.
    *
-   * Handles: promote (boots TW5, sends promote:ack immediately — no Repo sync wait),
+   * Handles: manifest (boots TW5, sends ea immediately — no Repo sync wait),
    * changeset (applies GP-3 delta), demote/teardown (GP-5 handshake).
    */
   async handleMessage(raw: unknown): Promise<void> {
@@ -168,14 +178,15 @@ export class WorkerAuthorityHandler {
     const msg = raw as Record<string, unknown>;
     if (msg["schema_version"] !== WORKER_PROTOCOL_VERSION) return;
 
-    if (msg["type"] === "promote") {
-      const wikiUri  = msg["wikiUri"]  as string;
-      const coreBlob = msg["coreBlob"] as Uint8Array;
+    if (msg["type"] === "manifest") {
+      const wikiUri        = msg["wikiUri"]        as string;
+      const coreBlob       = msg["coreBlob"]       as Uint8Array;
+      const pluginTiddlers = msg["pluginTiddlers"]  as readonly Record<string, unknown>[] | undefined;
       try {
-        await this.bootTw5(wikiUri, coreBlob);
-        // Legacy path: send ack immediately (no Repo sync wait).
+        await this.bootTw5(wikiUri, coreBlob, pluginTiddlers);
+        // Legacy path: sends ea immediately (no Repo sync wait).
         // Worker Sovereignty Law is NOT satisfied here — island has no CRDT truth of its own.
-        this.sendPromoteAck(wikiUri);
+        this.sendEa(wikiUri);
       } catch {
         // fault already sent by bootTw5
       }

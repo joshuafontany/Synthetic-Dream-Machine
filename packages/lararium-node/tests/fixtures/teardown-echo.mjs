@@ -60,8 +60,8 @@ parentPort.on("message", (msg) => {
     return;
   }
 
-  if (msg.type === "promote") {
-    parentPort.postMessage({ schema_version: 1, type: "promote:ack", wikiUri: msg.wikiUri });
+  if (msg.type === "manifest") {
+    parentPort.postMessage({ schema_version: 1, type: "ea", wikiUri: msg.wikiUri });
     return;
   }
 

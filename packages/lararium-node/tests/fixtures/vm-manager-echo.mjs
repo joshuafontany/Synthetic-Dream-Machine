@@ -2,7 +2,7 @@
  * vm-manager-echo.mjs — lightweight Worker fixture for NodeVmManager lifecycle tests.
  *
  * Implements the lar-wiki-worker protocol without TW5 or ReactionEngine:
- *   promote   → promote:ack
+ *   manifest  → ea
  *   changeset → event(echo, { addedCount, deletedCount, changedUris })
  *   teardown  → teardown:ack (with mock snapshotTiddlers)
  *   demote    → teardown:ack (same)
@@ -23,13 +23,13 @@ parentPort.on("message", (msg) => {
     return;
   }
 
-  if (msg.type === "promote") {
+  if (msg.type === "manifest") {
     wikiUri = msg.wikiUri;
     // Seed from snapshot tiddlers.
     for (const t of (msg.snapshotTiddlers ?? [])) {
       if (typeof t.title === "string") tiddlers.set(t.title, t);
     }
-    parentPort.postMessage({ schema_version: 1, type: "promote:ack", wikiUri });
+    parentPort.postMessage({ schema_version: 1, type: "ea", wikiUri });
     return;
   }
 

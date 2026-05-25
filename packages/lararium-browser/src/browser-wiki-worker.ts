@@ -23,7 +23,7 @@
  *                                        await repo.find(docUrl).whenReady()
  *                                        apply initial tiddlers from doc
  *                                        start rAF drain loop
- *                                      ← promote:ack
+ *                                      ← ea
  *   [CRDT sync flows via syncPort]     → Repo change → rAF accumulator
  *                                      ← changeset:ack (frame signal per rAF drain)
  *                                      ← event (verse-event reaction)
@@ -47,7 +47,7 @@ import {
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
 } from "@lararium/mesh";
-import type { WorkerToMainMsg, WorkerMsg_Promote } from "@lararium/mesh";
+import type { WorkerToMainMsg, WorkerMsg_Manifest } from "@lararium/mesh";
 
 // ── Handler ───────────────────────────────────────────────────────────────
 
@@ -95,8 +95,8 @@ self.addEventListener("message", (e: MessageEvent) => {
   const raw = e.data;
   if (!isMainToWorkerMsg(raw)) return;
 
-  if (raw.type === "promote") {
-    void _handlePromote(raw as WorkerMsg_Promote);
+  if (raw.type === "manifest") {
+    void _handleManifest(raw as WorkerMsg_Manifest);
     return;
   }
 
@@ -132,14 +132,15 @@ function _subscribeHandle(handle: DocHandle<Record<string, unknown>>): void {
   });
 }
 
-// ── Promote ───────────────────────────────────────────────────────────────
+// ── Manifest ──────────────────────────────────────────────────────────────
 
-async function _handlePromote(msg: WorkerMsg_Promote): Promise<void> {
+async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
   _activeWikiUri = msg.wikiUri;
 
-  // 1. Boot TW5 empty — initial tiddler state arrives from Repo sync below.
+  // 1. Boot TW5 with plugin layer — plugins are prerequisite, not cargo.
+  //    Without pluginTiddlers, the island boots hollow (no sigils, no ahu, no pranala).
   try {
-    await handler.bootTw5(msg.wikiUri, msg.coreBlob);
+    await handler.bootTw5(msg.wikiUri, msg.coreBlob, msg.pluginTiddlers);
   } catch {
     return; // fault already sent by bootTw5
   }
@@ -179,7 +180,7 @@ async function _handlePromote(msg: WorkerMsg_Promote): Promise<void> {
   }
 
   // 4. Island is live.
-  handler.sendPromoteAck(msg.wikiUri);
+  handler.sendEa(msg.wikiUri);
 }
 
 // ── Teardown ──────────────────────────────────────────────────────────────

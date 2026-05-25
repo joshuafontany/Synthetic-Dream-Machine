@@ -64,10 +64,23 @@ export interface BrowserAuthorityBootParams {
   coreBlob: Uint8Array;
   /** Serialized compiled plugin blob. Transferred, not cloned. */
   pluginBlob: Uint8Array;
+  /**
+   * Plugin layer tiddlers (sigils, ahu, pranala, etc.) as deserialized tiddler objects.
+   * Prerequisite for ea condition 3 — carried in the manifest so the island can think
+   * from first breath. When present, passed directly as WorkerMsg_Manifest.pluginTiddlers.
+   * Callers who hold pluginBlob as bytes must deserialize before constructing params.
+   */
+  pluginTiddlers?: readonly Record<string, unknown>[];
   /** Bag stack for this wiki, ordered from system to draft. */
   bagStack: readonly string[];
   /** Recipe URI that maps this authority's content scope. */
   recipeUri: string;
+  /**
+   * AutomergeUrl for the wiki doc. Passed as manifest docUrl so the Worker-side Repo
+   * calls repo.find(docUrl).whenReady() instead of waiting for gossip sync.
+   * null = cold boot (Worker creates fresh doc, state arrives via sync channel).
+   */
+  docUrl?: string | null;
   /** Optional: pre-serialized Automerge doc snapshots for warm start. */
   snapshots?: ReadonlyArray<{ bagId: string; bytes: Uint8Array }>;
 }

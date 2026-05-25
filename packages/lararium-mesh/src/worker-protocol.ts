@@ -15,7 +15,7 @@
  *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
  *   5. `WorkerMsg_Changeset` is @deprecated — CRDT sync via `syncPort` replaces it.
  *      It survives only for the Node GP-3 oracle path pending NodeVmManager migration.
- *   6. `WorkerMsg_Promote` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
+ *   6. `WorkerMsg_Manifest` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
  *      for `repo.find()`), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
@@ -39,21 +39,30 @@ export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
 // ── Main → Worker ──────────────────────────────────────────────────────────
 
 /**
- * Promote the wiki slot from cold to hot (boot TW5 + Repo-in-Worker).
+ * Deliver the materials a sovereign Worker island needs to establish itself (boot TW5 + Repo-in-Worker).
  *
  * Worker Sovereignty Law:
  *   - `syncPort` MUST be transferred (not cloned): `postMessage(msg, [msg.syncPort])`.
  *   - Worker creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
- *   - Worker calls `repo.find(docUrl)` and awaits `handle.whenReady()` before `promote:ack`.
+ *   - Worker calls `repo.find(docUrl)` and awaits `handle.whenReady()` before declaring `ea`.
  *   - If `docUrl` is null the Worker creates a fresh empty doc (cold boot).
  *   - `coreHash` carries a SHA-256 hex of `coreBlob`; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
  * BA-5: `coreBlob` travels as Uint8Array; transferred at the postMessage call site.
+ * The main thread acts as courier — delivering materials, not conferring authority.
+ * The Worker establishes its own sovereignty (`ea`) upon receipt.
+ *
+ * Prerequisite fields (island cannot think without these — not cargo):
+ *   - `pluginTiddlers` carries the plugin layer tiddlers (sigils, ahu, pranala, etc.).
+ *     Applied to TW5 immediately after core boot, before Repo sync. An island without
+ *     plugin tiddlers holds structural bones only — it fails ea condition 3 (own truth).
+ *   - `bagStack` carries the ordered bag identifiers for this wiki's content scope.
+ *   - `recipeUri` carries the recipe URI that maps this authority's content scope.
  */
-export interface WorkerMsg_Promote {
+export interface WorkerMsg_Manifest {
   schema_version: ProtocolVersion;
-  type: "promote";
+  type: "manifest";
   wikiUri: string;
   /** Serialized TW5 core. Transfer alongside syncPort: `postMessage(msg, [coreBlob.buffer, syncPort])`. */
   coreBlob: Uint8Array;
@@ -63,6 +72,16 @@ export interface WorkerMsg_Promote {
   docUrl: string | null;
   /** MessagePort for Worker-side Repo ↔ main-thread Repo sync. MUST be transferred. */
   syncPort: MessagePort;
+  /**
+   * Plugin layer tiddlers — sigils, ahu widgets, pranala parsers, etc.
+   * Prerequisite: without these the island cannot parse memetic wikitext.
+   * Applied after core boot, before Repo sync, so the CRDT truth layer can use them immediately.
+   */
+  pluginTiddlers?: readonly Record<string, unknown>[];
+  /** Ordered bag identifiers for this wiki's content scope (system → draft). */
+  bagStack?: readonly string[];
+  /** Recipe URI mapping this authority's content scope. */
+  recipeUri?: string;
 }
 
 /**
@@ -102,7 +121,7 @@ export interface WorkerMsg_Teardown {
 /** All messages the main thread may send to a wiki Worker. */
 export type MainToWorkerMsg =
   | WorkerMsg_Changeset
-  | WorkerMsg_Promote
+  | WorkerMsg_Manifest
   | WorkerMsg_Demote
   | WorkerMsg_Teardown;
 
@@ -137,10 +156,16 @@ export interface WorkerMsg_TeardownAck {
   snapshotTiddlers?: readonly Record<string, unknown>[];
 }
 
-/** Acknowledgement of successful hot-tier boot (TW5 live, Repo synced, first frame ready). */
-export interface WorkerMsg_PromoteAck {
+/**
+ * Sovereignty declaration — the Worker signals it breathes (`ea`): TW5 live, Repo synced, first frame ready.
+ *
+ * In Hawaiian: ea = sovereignty, breath, life. The island declares its own standing;
+ * the main thread records the declaration and considers the island live.
+ * See: lar:///ha.ka.ba/@lararium/v0.1/api/pono/ea
+ */
+export interface WorkerMsg_Ea {
   schema_version: ProtocolVersion;
-  type: "promote:ack";
+  type: "ea";
   wikiUri: string;
 }
 
@@ -176,7 +201,7 @@ export interface WorkerMsg_ChangesetAck {
 export type WorkerToMainMsg =
   | WorkerMsg_Event
   | WorkerMsg_TeardownAck
-  | WorkerMsg_PromoteAck
+  | WorkerMsg_Ea
   | WorkerMsg_ChangesetAck
   | WorkerMsg_Fault;
 
@@ -193,14 +218,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
   if (!_hasVersion(v)) return false;
-  return (["changeset", "promote", "demote", "teardown"] as const).includes(
+  return (["changeset", "manifest", "demote", "teardown"] as const).includes(
     v.type as MainToWorkerMsg["type"],
   );
 }
 
 export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "promote:ack", "changeset:ack", "fault"] as const).includes(
+  return (["event", "teardown:ack", "ea", "changeset:ack", "fault"] as const).includes(
     v.type as WorkerToMainMsg["type"],
   );
 }
@@ -223,24 +248,47 @@ export function mkTeardownAck(opts: {
 }
 
 /**
- * Create a promote message.
+ * Build a manifest delivery message — the courier packet the main thread sends to a Worker island.
  *
  * TRANSFER: caller MUST include `syncPort` (and `coreBlob.buffer` if not yet transferred)
  * in the `postMessage` transfer list:
  *   `worker.postMessage(msg, [msg.syncPort, msg.coreBlob.buffer])`
+ *
+ * `opts.pluginTiddlers` — plugin layer tiddlers (sigils, ahu, pranala, etc.).
+ *   Prerequisite for ea condition 3 (own truth). Omitting yields a hollow island.
+ * `opts.bagStack`  — ordered bag identifiers for this wiki's content scope.
+ * `opts.recipeUri` — recipe URI mapping this authority's content scope.
  */
-export function mkPromote(
-  wikiUri: string,
+export function mkManifest(
+  wikiUri:  string,
   coreBlob: Uint8Array,
   syncPort: MessagePort,
   docUrl:   string | null = null,
   coreHash: string | null = null,
-): WorkerMsg_Promote {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote", wikiUri, coreBlob, coreHash, docUrl, syncPort };
+  opts?: {
+    pluginTiddlers?: readonly Record<string, unknown>[];
+    bagStack?:       readonly string[];
+    recipeUri?:      string;
+  },
+): WorkerMsg_Manifest {
+  const msg: WorkerMsg_Manifest = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "manifest",
+    wikiUri,
+    coreBlob,
+    coreHash,
+    docUrl,
+    syncPort,
+  };
+  if (opts?.pluginTiddlers?.length) msg.pluginTiddlers = opts.pluginTiddlers;
+  if (opts?.bagStack?.length)       msg.bagStack       = opts.bagStack;
+  if (opts?.recipeUri)              msg.recipeUri      = opts.recipeUri;
+  return msg;
 }
 
-export function mkPromoteAck(wikiUri: string): WorkerMsg_PromoteAck {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "promote:ack", wikiUri };
+/** Build an ea sovereignty declaration — the Worker signals it breathes and stands ready. */
+export function mkEa(wikiUri: string): WorkerMsg_Ea {
+  return { schema_version: WORKER_PROTOCOL_VERSION, type: "ea", wikiUri };
 }
 
 /**

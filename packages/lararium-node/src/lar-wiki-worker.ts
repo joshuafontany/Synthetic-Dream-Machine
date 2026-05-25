@@ -25,10 +25,10 @@
  *   main                                Worker
  *   ────                                ──────
  *   new Worker(url)                     → thread boots
- *   postMessage(promote, [syncPort])    → bootTw5 + wire Repo via syncPort
+ *   postMessage(manifest, [syncPort])   → bootTw5 + wire Repo via syncPort
  *                                         await repo.find(docUrl).whenReady()
  *                                         start setInterval drain loop
- *                                       ← promote:ack
+ *                                       ← ea
  *   [CRDT sync via syncPort]            → Repo change → accumulator
  *                                       ← changeset:ack (drain tick signal)
  *   postMessage(teardown)               → cancel handles, export Repo doc bytes
@@ -50,7 +50,7 @@ import {
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
 } from "@lararium/mesh";
-import type { WorkerToMainMsg, WorkerMsg_Promote } from "@lararium/mesh";
+import type { WorkerToMainMsg, WorkerMsg_Manifest } from "@lararium/mesh";
 
 if (!parentPort) {
   throw new Error("[lar-wiki-worker] parentPort is null — must run as a Worker thread.");
@@ -125,8 +125,8 @@ function _subscribeHandle(handle: DocHandle<Record<string, unknown>>): void {
 _port.on("message", (raw: unknown) => {
   if (!isMainToWorkerMsg(raw)) return;
 
-  if (raw.type === "promote") {
-    void _handlePromote(raw as WorkerMsg_Promote & { syncPort?: MessagePort });
+  if (raw.type === "manifest") {
+    void _handleManifest(raw as WorkerMsg_Manifest & { syncPort?: MessagePort });
     return;
   }
 
@@ -143,13 +143,13 @@ _port.on("message", (raw: unknown) => {
   }
 });
 
-// ── Promote ───────────────────────────────────────────────────────────────
+// ── Manifest ──────────────────────────────────────────────────────────────
 
-async function _handlePromote(msg: WorkerMsg_Promote & { syncPort?: MessagePort }): Promise<void> {
+async function _handleManifest(msg: WorkerMsg_Manifest & { syncPort?: MessagePort }): Promise<void> {
   _activeWikiUri = msg.wikiUri;
 
   try {
-    await handler.bootTw5(msg.wikiUri, msg.coreBlob);
+    await handler.bootTw5(msg.wikiUri, msg.coreBlob, msg.pluginTiddlers);
   } catch {
     return;
   }
@@ -191,7 +191,7 @@ async function _handlePromote(msg: WorkerMsg_Promote & { syncPort?: MessagePort 
   // The setInterval drain loop still runs so changeset batches apply at tick cadence.
 
   _startDrainLoop();
-  handler.sendPromoteAck(msg.wikiUri);
+  handler.sendEa(msg.wikiUri);
 }
 
 // ── Teardown ──────────────────────────────────────────────────────────────

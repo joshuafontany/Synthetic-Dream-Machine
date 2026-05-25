@@ -1,0 +1,78 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art"
+file-path = "bags/@lares/v0.1/docs/pono/research-streams/prior-art.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+confidence = 16
+register = "CS"
+manaoio = 16
+mana = 16
+manao = 16
+role = "prior-art witness stream with literal quotes for local-first, worker architecture, and security baselines"
+cacheable = false
+retain = false
+invariant = false
+status-date = "2026-05-25"
+```
+
+<<~&#x0002;>>
+
+<<~ ahu #head >>
+
+# Research Stream - Prior-Art and Best Practices
+
+Literal quote witnesses for architectural grounding.
+
+<<~/ahu >>
+
+<<~ ahu #local-first-crdt >>
+
+## Local-first CRDT Doctrine
+
+> "Automerge is a library which provides fast implementations of several different CRDTs, a compact compression format for these CRDTs, and a sync protocol for efficiently transmitting those changes over the network."
+
+Source: https://github.com/automerge/automerge
+
+> "Yjs doesn't make any assumptions about the network technology you are using. As long as all changes eventually arrive, the documents will sync."
+
+Source: https://docs.yjs.dev/
+
+<<~/ahu >>
+
+<<~ ahu #worker-and-channel >>
+
+## Worker Sovereignty and Channel Law
+
+> "An off-main-thread architecture can significantly improve your app's reliability and user experience."
+
+Source: https://web.dev/articles/off-main-thread
+
+> "The MessageChannel interface of the Channel Messaging API allows us to create a new message channel and send data through it via its two MessagePort properties."
+
+Source: https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel
+
+<<~/ahu >>
+
+<<~ ahu #security-baseline >>
+
+## Security Baseline
+
+> "The OWASP Application Security Verification Standard (ASVS) Project provides a basis for testing web application technical security controls and also provides developers with a list of requirements for secure development."
+
+Source: https://owasp.org/www-project-application-security-verification-standard/
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ pranala #to-hub ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:part-of >>
+<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation role:witnesses >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

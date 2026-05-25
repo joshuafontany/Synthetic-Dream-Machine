@@ -17,7 +17,7 @@
  *
  * ## Promote / demote flow
  *
- *   mountWiki   → spawn Worker → promote → promote:ack → slot = hot
+ *   mountWiki   → spawn Worker → manifest → ea → slot = hot
  *   unmountWiki → teardown → teardown:ack (+ snapshotTiddlers) → worker.terminate()
  *                → slot = cold (cold slot carries the Worker's final TW5 state)
  *
@@ -48,12 +48,12 @@ import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
 import {
   isWorkerToMainMsg,
-  mkPromote,
+  mkManifest,
   mkTeardown,
 } from "@lararium/mesh";
 import type {
   WorkerMsg_Event,
-  WorkerMsg_PromoteAck,
+  WorkerMsg_Ea,
   WorkerMsg_TeardownAck,
   WorkerToMainMsg,
   MainToWorkerMsg,
@@ -122,11 +122,11 @@ type Slot = PinnedSlot | WorkerHotSlot | ColdSlot;
 // ---------------------------------------------------------------------------
 
 export interface WikiBootContext {
-  /** Automerge doc handle — used to materialize VmSnapshot for initial promote. */
+  /** Automerge doc handle — used to materialize VmSnapshot for initial manifest delivery. */
   docHandle: DocHandle<LarDoc>;
   /**
    * Plugin tiddlers to inject into the Worker's TW5 boot alongside the cold
-   * snapshot. Merged into snapshotTiddlers before sending promote.
+   * snapshot. Merged into snapshotTiddlers before delivering manifest.
    */
   preloadedTiddlers?: Array<Record<string, unknown>>;
   /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
@@ -166,7 +166,7 @@ const HOT_CAP = 4;
 // Resolves relative to this module's compiled location (dist/node-vm-manager.js).
 const DEFAULT_WORKER_URL = new URL("./lar-wiki-worker.js", import.meta.url);
 
-// Timeout for GP-5 teardown and promote:ack handshakes.
+// Timeout for GP-5 teardown and ea handshakes.
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
 export class NodeVmManager {
@@ -219,7 +219,7 @@ export class NodeVmManager {
    * Mount a session wiki into the hot tier.
    *
    * Spawns a Worker, materializes a snapshot from the Automerge doc (or uses
-   * the cold-slot snapshot), sends a promote message, and awaits promote:ack.
+   * the cold-slot snapshot), delivers a manifest, and awaits ea.
    * Evicts the LRU Worker slot (non-pinned) when at capacity.
    *
    * Returns void — the main thread holds no direct engine reference for Worker
@@ -239,17 +239,10 @@ export class NodeVmManager {
 
     await this._evictLruIfNeeded();
 
-    // Build snapshotTiddlers: cold-slot tiddlers merged with plugin preloads.
-    const coldSlot    = this._slots.get(wikiId);
-    const coldTiddlers = coldSlot?.tier === "cold" ? (coldSlot.snapshot?.tiddlers ?? null) : null;
-    const pluginTiddlers = ctx.preloadedTiddlers ?? [];
-
-    // Prefer cold-slot tiddlers as the base; plugins go in first so wiki
-    // content can shadow them — same precedence order as the main TW5 boot.
-    const snapshotTiddlers: Record<string, unknown>[] | null =
-      coldTiddlers || pluginTiddlers.length > 0
-        ? [...pluginTiddlers, ...(coldTiddlers ?? [])]
-        : null;
+    // Plugin tiddlers — prerequisite for ea condition 3. These cross the manifest
+    // boundary so the island can parse memetic wikitext from first breath.
+    // Cold-slot tiddlers flow via CRDT Repo sync (docUrl / docBytes), not here.
+    const pluginTiddlers = ctx.preloadedTiddlers?.length ? ctx.preloadedTiddlers : undefined;
 
     // Register the handle so disposeAll can capture snapshots from the doc.
     this._docHandles.set(wikiId, ctx.docHandle);
@@ -257,23 +250,36 @@ export class NodeVmManager {
     // Create sync channel — main keeps port1, Worker receives port2 (syncPort).
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    // Optionally wire mainPort to the main-thread Repo (Repo-in-Worker path).
+    // Wire mainPort to the main-thread Repo (Repo-in-Worker path).
+    // Without mainRepo the Worker falls back to the @deprecated GP-3 gossip path.
     if (this._mainRepo) {
       const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
       this._mainRepo.networkSubsystem.addNetworkAdapter(adapter);
+    } else {
+      console.warn(
+        `[vm-manager] ${wikiId}: mainRepo absent — Worker falls back to GP-3 gossip sync. ` +
+        `Provide NodeVmManagerOptions.mainRepo to satisfy ea condition 1 (own state).`,
+      );
     }
 
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    // Pass docUrl when mainRepo is wired so Worker calls repo.find(docUrl).whenReady()
+    // Pass docUrl when mainRepo wired so Worker calls repo.find(docUrl).whenReady()
     // instead of the unreliable gossip path (repo.on("document")). null = cold boot.
     const docUrl = this._mainRepo ? (ctx.docHandle.url as string ?? null) : null;
-    const promoteMsg = mkPromote(wikiId, ctx.coreBlob.bytes, syncPort as unknown as globalThis.MessagePort, docUrl, null);
-    await _sendAndAwait<WorkerMsg_PromoteAck>(
+    const manifestMsg = mkManifest(
+      wikiId,
+      ctx.coreBlob.bytes,
+      syncPort as unknown as globalThis.MessagePort,
+      docUrl,
+      null,
+      { pluginTiddlers },
+    );
+    await _sendAndAwait<WorkerMsg_Ea>(
       worker,
-      promoteMsg,
-      "promote:ack",
+      manifestMsg,
+      "ea",
       [syncPort],
     );
 
@@ -286,7 +292,7 @@ export class NodeVmManager {
     });
 
     console.log(
-      `[vm-manager] ${wikiId}: promoted hot (snapshot: ${snapshotTiddlers ? `${snapshotTiddlers.length} tiddlers` : "empty"})`,
+      `[vm-manager] ${wikiId}: island ea — hot (plugins: ${pluginTiddlers ? pluginTiddlers.length : 0})`,
     );
   }
 

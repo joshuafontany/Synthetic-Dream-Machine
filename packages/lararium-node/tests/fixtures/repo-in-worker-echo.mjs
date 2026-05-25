@@ -2,7 +2,7 @@
  * repo-in-worker-echo.mjs — Repo-in-Worker gate fixture.
  *
  * Proves the CRDT sync path without TW5:
- *   promote (syncPort transferred) → wire Worker-side Repo → promote:ack
+ *   manifest (syncPort transferred) → wire Worker-side Repo → ea
  *   [doc arrives via CRDT sync]    → handle.on("change") → changeset:ack + event(repo:change)
  *   teardown                       → teardown:ack
  *
@@ -22,7 +22,7 @@ let frameCount = 0;
 parentPort.on("message", (msg) => {
   if (typeof msg !== "object" || msg === null || msg.schema_version !== 1) return;
 
-  if (msg.type === "promote") {
+  if (msg.type === "manifest") {
     wikiUri = msg.wikiUri;
     const syncPort = msg.syncPort;
 
@@ -76,7 +76,7 @@ parentPort.on("message", (msg) => {
       }
     }
 
-    parentPort.postMessage({ schema_version: 1, type: "promote:ack", wikiUri });
+    parentPort.postMessage({ schema_version: 1, type: "ea", wikiUri });
     return;
   }
 

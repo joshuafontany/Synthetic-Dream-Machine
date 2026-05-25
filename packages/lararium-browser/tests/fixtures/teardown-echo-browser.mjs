@@ -6,7 +6,7 @@
  * No worker_threads. No DOM types.
  *
  * Simulates the GP-5 handshake contract:
- *   promote   → promote:ack
+ *   manifest  → ea
  *   changeset → event (echoes addedCount / deletedCount)
  *   teardown  → cancel:confirmed, teardown:ack (ordering preserved)
  */
@@ -42,11 +42,11 @@ self.addEventListener("message", (e) => {
     return;
   }
 
-  if (msg.type === "promote") {
+  if (msg.type === "manifest") {
     // Echo coreBlobByteLength so the test can assert BA-5 transfer crossed the boundary.
     self.postMessage({
       schema_version: 1,
-      type: "promote:ack",
+      type: "ea",
       wikiUri: msg.wikiUri,
       coreBlobByteLength: msg.coreBlob?.byteLength ?? -1,
     });

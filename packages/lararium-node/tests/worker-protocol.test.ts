@@ -19,12 +19,12 @@ import {
   isWorkerToMainMsg,
   WORKER_PROTOCOL_VERSION,
   mkTeardown,
-  mkPromote,
+  mkManifest,
   mkChangeset,
   type WorkerMsg_Changeset,
   type WorkerMsg_ChangesetAck,
   type WorkerMsg_TeardownAck,
-  type WorkerMsg_PromoteAck,
+  type WorkerMsg_Ea,
   type WorkerMsg_Event,
 } from "@lararium/mesh";
 
@@ -107,7 +107,7 @@ describe("GP-1 — schema_version enforcement", () => {
     );
     expect(isMainToWorkerMsg(changeset)).toBe(true);
     const { port2: _p } = new MessageChannel();
-    expect(isMainToWorkerMsg(mkPromote("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
+    expect(isMainToWorkerMsg(mkManifest("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
     _p.close();
     expect(isMainToWorkerMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
     expect(isMainToWorkerMsg(mkTeardown())).toBe(true);
@@ -123,7 +123,7 @@ describe("GP-1 — schema_version enforcement", () => {
     };
     expect(isWorkerToMainMsg(event)).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "promote:ack", wikiUri: "lar:///test" })).toBe(true);
+    expect(isWorkerToMainMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "changeset:ack", wikiUri: "lar:///test", batch_id: "x" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
   });
@@ -194,20 +194,20 @@ describe("GP-5 — teardown handshake (integration)", () => {
     expect(isWorkerToMainMsg(ack)).toBe(true);
   });
 
-  test("promote signal elicits promote:ack", async () => {
+  test("manifest delivery elicits ea sovereignty declaration", async () => {
     worker = spawnFixture();
     const wikiUri = "lar:///ha.ka.ba/test-wiki";
 
     const msgsPromise = collectUntil(
       worker,
-      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "promote:ack"),
+      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "ea"),
     );
 
     const { port2: syncPort } = new MessageChannel();
-    worker.postMessage(mkPromote(wikiUri, new Uint8Array(0), syncPort as unknown as globalThis.MessagePort), [syncPort]);
+    worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort as unknown as globalThis.MessagePort), [syncPort]);
     const msgs = await msgsPromise;
 
-    const ack = msgs.find((m) => (m as WorkerMsg_PromoteAck).type === "promote:ack") as WorkerMsg_PromoteAck | undefined;
+    const ack = msgs.find((m) => (m as WorkerMsg_Ea).type === "ea") as WorkerMsg_Ea | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
     expect(isWorkerToMainMsg(ack)).toBe(true);
