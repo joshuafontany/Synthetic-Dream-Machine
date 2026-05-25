@@ -10,15 +10,8 @@
  *   3. Worker owns its timing via `setInterval` (rAF unavailable in Node worker_threads).
  *      Incoming CRDT changes accumulate; the interval drains them each tick.
  *   4. `changeset:ack` fires at each drain tick — frame-completion signal.
- *   5. `WorkerMsg_Changeset` from main thread is handled as a deprecated GP-3 fallback
- *      while NodeVmManager completes its migration to Repo-in-Worker.
- *
- * ## Deprecation intent
- *
- *   NodeVmManager's GP-3 oracle path (`_subscribeDocChanges`, `routeChangeset`,
- *   `changesetQueue`) is marked @deprecated. Once NodeVmManager wires a MessageChannel
- *   per slot and sends `docUrl` in the promote message, the GP-3 changeset path here
- *   becomes unreachable and can be removed.
+ *   5. `WorkerMsg_Changeset` from main thread — removed. Sovereign islands derive state
+ *      from their own Repo-in-Worker CRDT doc only (ea condition 3: own truth).
  *
  * ## Boot sequence
  *
@@ -135,12 +128,9 @@ _port.on("message", (raw: unknown) => {
     return;
   }
 
-  // @deprecated GP-3 fallback: main-thread oracle delta (NodeVmManager pre-migration).
-  // Repo-in-Worker path never reaches here — CRDT sync flows via syncPort.
-  if (raw.type === "changeset") {
-    _pendingAdded.push(...(raw.added as Record<string, unknown>[]));
-    _pendingDeleted.push(...(raw.deleted as string[]));
-  }
+  // GP-3 "changeset" handler removed. Sovereign islands derive state from their own
+  // Repo-in-Worker CRDT doc — never from main-thread oracle deltas. See ea doctrine:
+  // lar:///ha.ka.ba/@lares/v0.1/api/pono/ea (condition 3: own truth).
 });
 
 // ── Manifest ──────────────────────────────────────────────────────────────

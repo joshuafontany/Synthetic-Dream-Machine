@@ -12,14 +12,14 @@
  *      Incoming CRDT changes accumulate in `_pendingAdded` / `_pendingDeleted`;
  *      the drain callback fires each frame (or frame-equivalent tick).
  *   4. `changeset:ack` fires at the END of each rAF drain — frame-completion signal.
- *   5. `WorkerMsg_Changeset` from main thread is handled only as a deprecated GP-3 fallback.
+ *   5. `WorkerMsg_Changeset` from main thread — removed. Own Repo-in-Worker CRDT truth only.
  *
  * ## Boot sequence
  *
  *   main                               Worker
  *   ────                               ──────
  *   new Worker(url)                    → thread boots
- *   postMessage(promote, [syncPort])   → bootTw5 + wire Repo via syncPort
+ *   postMessage(manifest, [syncPort])  → bootTw5 + wire Repo via syncPort
  *                                        await repo.find(docUrl).whenReady()
  *                                        apply initial tiddlers from doc
  *                                        start rAF drain loop
@@ -55,7 +55,7 @@ const handler = new WorkerAuthorityHandler((msg: WorkerToMainMsg) => {
   self.postMessage(msg);
 });
 
-// ── Worker-side Repo + tracked doc handle (set on promote) ───────────────
+// ── Worker-side Repo + tracked doc handle (set on manifest) ─────────────
 
 let _repo:      Repo | null                                = null;
 let _docHandle: DocHandle<Record<string, unknown>> | null  = null;
@@ -105,13 +105,9 @@ self.addEventListener("message", (e: MessageEvent) => {
     return;
   }
 
-  // @deprecated GP-3 fallback: main-thread oracle delta.
-  // Repo-in-Worker path never reaches here — CRDT sync flows via syncPort.
-  if (raw.type === "changeset") {
-    _pendingAdded.push(...(raw.added as Record<string, unknown>[]));
-    _pendingDeleted.push(...(raw.deleted as string[]));
-    _scheduleRafDrain();
-  }
+  // GP-3 "changeset" handler removed. Sovereign islands derive state from their own
+  // Repo-in-Worker CRDT doc — never from main-thread oracle deltas. See ea doctrine:
+  // lar:///ha.ka.ba/@lares/v0.1/api/pono/ea (condition 3: own truth).
 });
 
 // ── Change-event payload shape ────────────────────────────────────────────

@@ -161,7 +161,7 @@ export interface WorkerMsg_TeardownAck {
  *
  * In Hawaiian: ea = sovereignty, breath, life. The island declares its own standing;
  * the main thread records the declaration and considers the island live.
- * See: lar:///ha.ka.ba/@lararium/v0.1/api/pono/ea
+ * See: lar:///ha.ka.ba/@lares/v0.1/api/pono/ea
  */
 export interface WorkerMsg_Ea {
   schema_version: ProtocolVersion;

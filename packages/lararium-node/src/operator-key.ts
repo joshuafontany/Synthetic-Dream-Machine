@@ -5,11 +5,11 @@
  *   - keypair is generated device-local, persists to disk with mode 0o600
  *   - verifyingKey (hex 32 bytes) feeds did:key derivation
  *   - did:key derivation happens in the TW5 VM (cold-boot-ceremony module)
- *   - GitHub / BlueSky auth enriches displayName; it does not own the DID
+ *   - displayName derives from `git config user.name` — local truth, no network call
  *
  * Key file naming:
- *   Local dev (gh CLI active):  {dataDir}/.operator-key-{login}.json
- *   CI / offline:               {dataDir}/.operator-key.json
+ *   git email configured:  {dataDir}/.operator-key-{email-slug}.json
+ *   git email absent:      {dataDir}/.operator-key.json
  *
  * Different developers on the same machine each get their own keypair.
  * The keypair is random Ed25519 — not derived from GitHub credentials.
@@ -23,47 +23,35 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
 import { join } from "node:path";
-import type { LarAuthReceipt } from "@lararium/mesh";
 
-// ── gh CLI operator receipt ───────────────────────────────────────────────
-// Local-first dev path: reads the active `gh auth login` session. Returns null
-// when gh is absent, unauthenticated, or the GitHub API call fails (offline).
+// ── Local operator identity hint ──────────────────────────────────────────
+// Fully local-first: reads git config only. No network calls, no server tokens.
+// Login slug derived from git email (email-prefix, lowercased, sanitized) for
+// per-developer key file naming on shared machines. DisplayName from git user.name.
+//
+// Causal-island law: operator identity derives from local keys — not from any
+// server-conferred session. GitHub enrichment was web2 smell; git config is local truth.
 
 const exec = promisify(execFile);
 
-interface GitHubUser { login: string; id: number; name?: string; email?: string }
+interface LocalOperatorHint { login: string | null; displayName: string | null }
 
-async function readGhToken(): Promise<string | null> {
+async function readLocalOperatorHint(): Promise<LocalOperatorHint> {
+  let displayName: string | null = null;
+  let login:       string | null = null;
   try {
-    const { stdout } = await exec("gh", ["auth", "token"], { timeout: 3000 });
-    return stdout.trim() || null;
-  } catch { return null; }
-}
-
-async function fetchGitHubUser(token: string): Promise<GitHubUser | null> {
+    const { stdout } = await exec("git", ["config", "--global", "user.name"], { timeout: 2_000 });
+    displayName = stdout.trim() || null;
+  } catch { /* git absent or user.name unset */ }
   try {
-    const res = await fetch("https://api.github.com/user", {
-      headers: { Authorization: `Bearer ${token}`, "User-Agent": "lararium-node/0.1" },
-    });
-    if (!res.ok) return null;
-    return await res.json() as GitHubUser;
-  } catch { return null; }
-}
-
-async function getGhCliOperatorReceipt(): Promise<LarAuthReceipt | null> {
-  const token = await readGhToken();
-  if (!token) return null;
-  const user = await fetchGitHubUser(token);
-  if (!user) return null;
-  const now = new Date();
-  const expires = new Date(now.getTime() + 8 * 60 * 60 * 1000);
-  return {
-    provider: "github-vscode", subject: `github:${user.login}`,
-    displayName: user.name ?? user.login,
-    issuedAt: now.toISOString(), expiresAt: expires.toISOString(),
-    scopes: [{ with: "lararium:*", can: "*" }],
-    principal: { provider: "github-vscode", login: user.login, githubId: String(user.id), editor: "vscode-insiders", localInstanceId: `gh-cli:${user.login}` },
-  };
+    const { stdout } = await exec("git", ["config", "--global", "user.email"], { timeout: 2_000 });
+    const email = stdout.trim();
+    if (email) {
+      // Stable, filesystem-safe slug: email prefix, lowercased, non-alnum→dash.
+      login = email.split("@")[0]!.replace(/[^a-z0-9_-]/gi, "-").toLowerCase();
+    }
+  } catch { /* git absent or user.email unset */ }
+  return { login, displayName };
 }
 
 interface PersistedKey {
@@ -102,16 +90,15 @@ export async function generateOrLoadOperatorKeypair(
 ): Promise<OperatorIdentity> {
   mkdirSync(dataDir, { recursive: true });
 
-  const ghReceipt  = await getGhCliOperatorReceipt().catch(() => null);
-  const ghLogin    = ghReceipt?.subject?.replace("github:", "") ?? null;
-  const keyFile    = join(dataDir, keyFileName(ghLogin));
+  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const keyFile  = join(dataDir, keyFileName(hint.login));
 
   let verifyingKey: string;
 
   if (existsSync(keyFile)) {
     const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
     verifyingKey = raw.verifyingKey;
-    console.log(`[operator-key] loaded keypair${ghLogin ? ` for github:${ghLogin}` : ""}`);
+    console.log(`[operator-key] loaded keypair${hint.login ? ` for ${hint.login}` : ""}`);
   } else {
     const { publicKey, privateKey } = generateKeyPairSync("ed25519");
     const pubJwk  = publicKey.export({ format: "jwk" }) as { x: string };
@@ -119,15 +106,15 @@ export async function generateOrLoadOperatorKeypair(
 
     verifyingKey           = Buffer.from(pubJwk.x,  "base64url").toString("hex");
     const signingKey       = Buffer.from(privJwk.d, "base64url").toString("hex");
-    const persisted: PersistedKey = { verifyingKey, signingKey, ...(ghLogin ? { githubLogin: ghLogin } : {}) };
+    const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { githubLogin: hint.login } : {}) };
 
     writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
     chmodSync(keyFile, 0o600);
-    console.log(`[operator-key] generated new Ed25519 keypair${ghLogin ? ` for github:${ghLogin}` : ""}`);
+    console.log(`[operator-key] generated new Ed25519 keypair${hint.login ? ` for ${hint.login}` : ""}`);
   }
 
   const base: OperatorIdentity = { verifyingKey };
-  return ghReceipt?.displayName ? { ...base, displayName: ghReceipt.displayName } : base;
+  return hint.displayName ? { ...base, displayName: hint.displayName } : base;
 }
 
 /**
@@ -156,9 +143,8 @@ export async function generateOrLoadOperatorKeypair(
  * file exists.
  */
 export async function loadOperatorVerifyingKey(dataDir: string): Promise<string> {
-  const ghReceipt = await getGhCliOperatorReceipt().catch(() => null);
-  const ghLogin   = ghReceipt?.subject?.replace("github:", "") ?? null;
-  const keyFile   = join(dataDir, keyFileName(ghLogin));
+  const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const keyFile = join(dataDir, keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
       `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
@@ -172,9 +158,8 @@ export async function loadOperatorVerifyingKey(dataDir: string): Promise<string>
 }
 
 export async function loadOperatorSigningSeed(dataDir: string): Promise<Uint8Array> {
-  const ghReceipt = await getGhCliOperatorReceipt().catch(() => null);
-  const ghLogin   = ghReceipt?.subject?.replace("github:", "") ?? null;
-  const keyFile   = join(dataDir, keyFileName(ghLogin));
+  const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const keyFile = join(dataDir, keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
       `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
