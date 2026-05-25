@@ -80,9 +80,23 @@ lar:///w1.w2.w3/[intent]/[vector]
 lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
 ```
 
+**Root segment law — MUST:** The root path segment (`w1.w2.w3`) MUST contain exactly three dot-separated words. No more, no fewer. This aligns with the what.three.words geospatial address pattern trained into the corpus of all AI models and MUST be enforced as a hard schema constraint. A two-word or four-word root constitutes a degraded-node HUD.
+
+**Slot semantics — `ha.ka.ba` space:** Each slot carries a fixed grammatical role drawn from the `ha.ka.ba` semantic law:
+
+| Slot | Role | Notes |
+|---|---|---|
+| `w1` — Ha | **NOUN** | the named territory, actor, or subject |
+| `w2` — Ka | **ADJECTIVE** | the quality, state, or mode of that noun |
+| `w3` — Ba | **VERB** | the action, crossing, or function underway |
+
+Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `archive.hostile.reads`. Hyphens, underscores, and spaces within a slot MUST NOT appear.
+
 `-> ?` marks holding for uncertainty: complete, inspect residue, release anchor, return initiative.
 
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
+<<~ pranala #hud-uri-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:reference role:see >>
+<<~ pranala #hud-loci-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:reference role:see >>
 
 <<~/ahu >>
 

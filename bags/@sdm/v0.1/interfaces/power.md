@@ -70,6 +70,7 @@ The master interface asks three questions:
 3. **Which concrete interface names the affordance that reaches the table?**
 
 Counterplay may come from exhausted Life, broken consent, owner-locks, filled Burden slots, Corruption exposure, hostile daemons, anti-magic weather, causal-island boundaries, false grants, or residue that demands payment later.
+
 <<~/ahu >>
 
 <<~ ahu #hooks >>
@@ -95,6 +96,8 @@ Future hooks may connect Life-deduction tracking, payment-source resolution, Bur
 
 Discovery via graph traversal: `edge:control:implements[lar:///ha.ka.ba/@sdm/v0.1/interfaces/power]`
 Concrete interfaces self-declare upward with `family:control role:implements` — no enumeration here.
+
+<<~ pranala #ontology-root ? -> lar:///ha.ka.ba/@sdm/v0.1/api/power family:reference role:see >>
 
 <<~/ahu >>
 

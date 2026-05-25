@@ -54,6 +54,7 @@ Keep the playable root lean. Let `#default` read like a power entry, not like a 
 `#implements` SHOULD carry one or more `pranala family:control role:implements` edges to `interfaces/powers/*`. Do not duplicate the interface URI in `toml iam`; the edge carries canonical graph truth. One OSR spell or SDM Power may implement one interface or several. Split when one spell name bundles several reusable primitives.
 
 Use `#iam.tags` for ordinary TW5 title-tag membership. Do not mirror ordinary tag membership with Pranala edges. `Power` membership does not travel as `kind/power`; it travels as `<<~ pranala ... -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/power family:control role:implements >>`. Use native TW5 tag links in prose only for descriptive facets such as `[[lar:///ha.ka.ba/@sdm/tags/domain/stuckforce]]`. Filter sugar may later expand `[tag:@sdm[domain/stuckforce]]` to `[tag[lar:///ha.ka.ba/@sdm/tags/domain/stuckforce]]`.
+
 <<~/ahu >>
 
 <<~ ahu #writing-law >>

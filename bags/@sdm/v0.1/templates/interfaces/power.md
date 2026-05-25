@@ -50,6 +50,7 @@ A Power interface meme carries these ahu:
 
 Runtime sigil names such as `kahea`, `papalohe`, `kukali`, `lele`, `hui`, `holo`, `puka`, and `hoolele` belong to the reaction engine and causal-island layer, not generic contract keys.
 
+
 Use `#iam.tags` for ordinary TW5 title-tag membership. Do not mirror ordinary tag membership with Pranala edges. Every concrete Power interface SHOULD implement `lar:///ha.ka.ba/@sdm/v0.1/interfaces/power` with a `family:control role:implements` edge; this replaces the retired `kind/power` tag.
 <<~/ahu >>
 
