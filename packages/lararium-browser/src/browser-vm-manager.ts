@@ -44,6 +44,7 @@ import {
   mkManifest,
   mkTeardown,
   WORKER_PROTOCOL_VERSION,
+  type BagBinding,
 } from "@lararium/mesh";
 import type {
   WorkerMsg_Ea,
@@ -301,20 +302,23 @@ export class BrowserVmManager implements BrowserAuthorityPool {
       }
     });
 
-    // 5. Derive docUrl and coreHash from params.
-    //    docUrl: use params.docUrl when provided so the Worker-side Repo calls
-    //    repo.find(docUrl).whenReady() instead of waiting for gossip sync (Gap 4 fix).
-    //    null = cold boot — Worker accepts whatever the mainRepo syncs via the port.
-    const docUrl:   string | null = params.docUrl ?? null;
+    // 5. Build bagBindings + coreHash for the manifest delivery.
+    //    bagBindings: use params.bagBindings when provided; otherwise build a shim from
+    //    the deprecated params.docUrl so the Worker reads bagBindings as primary source.
     const coreHash: string | null = null;
+    const bagBindings: readonly BagBinding[] = params.bagBindings
+      ? params.bagBindings
+      : params.docUrl != null
+        ? [{ bagId: id, writable: true, mode: "relational", docUrl: params.docUrl } satisfies BagBinding]
+        : [{ bagId: id, writable: true, mode: "cold" } satisfies BagBinding];
 
     // 6. Deliver manifest — transfer syncPort + coreBlob buffer to the sovereign island.
-    //    pluginTiddlers, bagStack, recipeUri cross the boundary so the island can think
+    //    pluginTiddlers, bagBindings, recipeUri cross the boundary so the island can think
     //    from first breath (ea condition 3 — own truth from boot, not from a later delta).
     slot.phase = "booting";
-    const manifestMsg = mkManifest(id, params.coreBlob, syncPort, docUrl, coreHash, {
+    const manifestMsg = mkManifest(id, params.coreBlob, syncPort, coreHash, {
       pluginTiddlers: params.pluginTiddlers,
-      bagStack:       params.bagStack,
+      bagBindings,
       recipeUri:      params.recipeUri,
     });
     const transferList: Transferable[] = [syncPort];

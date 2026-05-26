@@ -30,6 +30,8 @@ parentPort.on("message", (msg) => {
       if (typeof t.title === "string") tiddlers.set(t.title, t);
     }
     parentPort.postMessage({ schema_version: 1, type: "ea", wikiUri });
+    // Close the transferred syncPort if present — fixture doesn't use Repo.
+    msg.syncPort?.close?.();
     return;
   }
 

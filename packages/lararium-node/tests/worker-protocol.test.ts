@@ -23,6 +23,9 @@ import {
   type WorkerMsg_TeardownAck,
   type WorkerMsg_Ea,
   type WorkerMsg_Event,
+  type BagBinding,
+  type BagMode,
+  type WorkerStorageConfig,
 } from "@lararium/mesh";
 
 // Path to the teardown-echo fixture (plain ESM — no ts-jest compilation needed).
@@ -59,6 +62,97 @@ function collectUntil(
     });
   });
 }
+
+// ── BagBinding shape (unit) ────────────────────────────────────────────────
+
+describe("BagBinding — capability token shape", () => {
+  test("cold BagBinding satisfies BagMode cold", () => {
+    const b: BagBinding = { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "cold" };
+    expect(b.mode).toBe("cold");
+    expect(b.writable).toBe(false);
+  });
+
+  test("relational BagBinding carries docUrl capability token", () => {
+    const b: BagBinding = {
+      bagId: "lar:///bags/wiki/v0.1",
+      writable: true,
+      mode: "relational",
+      docUrl: "automerge:abc123",
+    };
+    expect(b.mode).toBe("relational");
+    if (b.mode === "relational") expect(b.docUrl).toBe("automerge:abc123");
+  });
+
+  test("mkManifest carries bagBindings in message", () => {
+    const { port2: syncPort } = new MessageChannel();
+    const bindings: readonly BagBinding[] = [
+      { bagId: "lar:///bags/wiki/v0.1", writable: true, mode: "relational", docUrl: "automerge:xyz" },
+      { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "cold" },
+    ];
+    const msg = mkManifest(
+      "lar:///test",
+      new Uint8Array(0),
+      syncPort as unknown as globalThis.MessagePort,
+      null,
+      { bagBindings: bindings },
+    );
+    syncPort.close();
+    expect(msg.bagBindings).toHaveLength(2);
+    expect(msg.bagBindings?.[0]?.mode).toBe("relational");
+    expect(msg.bagBindings?.[1]?.mode).toBe("cold");
+    expect(isMainToWorkerMsg(msg)).toBe(true);
+  });
+
+  test("mkManifest with no opts produces valid manifest (cold boot)", () => {
+    const { port2: syncPort } = new MessageChannel();
+    const msg = mkManifest(
+      "lar:///test-cold",
+      new Uint8Array(0),
+      syncPort as unknown as globalThis.MessagePort,
+    );
+    syncPort.close();
+    expect(msg.bagBindings).toBeUndefined();
+    expect(msg.docUrl).toBeUndefined();
+    expect(isMainToWorkerMsg(msg)).toBe(true);
+  });
+});
+
+// ── WorkerStorageConfig shape (unit) ─────────────────────────────────────
+
+describe("WorkerStorageConfig — Worker-owned storage protocol", () => {
+  test("nodefs config carries dir field", () => {
+    const cfg: WorkerStorageConfig = { type: "nodefs", dir: "/data/lararium/wiki-a" };
+    expect(cfg.type).toBe("nodefs");
+    if (cfg.type === "nodefs") expect(cfg.dir).toBe("/data/lararium/wiki-a");
+  });
+
+  test("idb config carries dbName field", () => {
+    const cfg: WorkerStorageConfig = { type: "idb", dbName: "lararium-wiki-a" };
+    expect(cfg.type).toBe("idb");
+    if (cfg.type === "idb") expect(cfg.dbName).toBe("lararium-wiki-a");
+  });
+
+  test("memory config is ephemeral", () => {
+    const cfg: WorkerStorageConfig = { type: "memory" };
+    expect(cfg.type).toBe("memory");
+  });
+
+  test("mkManifest carries nodefs storage in message", () => {
+    const { port2: syncPort } = new MessageChannel();
+    const storage: WorkerStorageConfig = { type: "nodefs", dir: "/data/wiki-sprint3" };
+    const msg = mkManifest(
+      "lar:///test-storage",
+      new Uint8Array(0),
+      syncPort as unknown as globalThis.MessagePort,
+      null,
+      { storage },
+    );
+    syncPort.close();
+    expect(msg.storage?.type).toBe("nodefs");
+    if (msg.storage?.type === "nodefs") expect(msg.storage.dir).toBe("/data/wiki-sprint3");
+    expect(isMainToWorkerMsg(msg)).toBe(true);
+  });
+});
 
 // ── GP-1: schema_version enforcement (unit) ────────────────────────────────
 

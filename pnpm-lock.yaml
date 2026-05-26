@@ -45,6 +45,9 @@ importers:
       '@automerge/automerge-repo-network-messagechannel':
         specifier: ^2.5.1
         version: 2.5.6
+      '@automerge/automerge-repo-storage-indexeddb':
+        specifier: ^2.5.6
+        version: 2.5.6
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
@@ -200,6 +203,9 @@ packages:
 
   '@automerge/automerge-repo-network-websocket@2.5.5':
     resolution: {integrity: sha512-pwHNXTsTTfofU3X/wtFa9L3lWfAJBI7v1+3EKgFDgEodUJo9FPDH0hcy4HUsQiDrQPADO7FP9fVOQSXVm8n5VA==}
+
+  '@automerge/automerge-repo-storage-indexeddb@2.5.6':
+    resolution: {integrity: sha512-3349orECq2Mj3mo9q6f9ZeXwDkP3lAm6KaivP5+znUpv6Ze+IraE36DdL5GVdzIm+cXej0yWSOCQOalnTMPcQg==}
 
   '@automerge/automerge-repo-storage-nodefs@2.5.5':
     resolution: {integrity: sha512-mdGU5CI/04dAV9UnqW9ImKqtilJXCcga3h/yQtw24SDB6HSMXRl3S748FYFF+dc37bFyUgAcaAXQqavCN8siJw==}
@@ -1581,6 +1587,12 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  '@automerge/automerge-repo-storage-indexeddb@2.5.6':
+    dependencies:
+      '@automerge/automerge-repo': 2.5.6
+    transitivePeerDependencies:
+      - supports-color
 
   '@automerge/automerge-repo-storage-nodefs@2.5.5':
     dependencies:

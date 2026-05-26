@@ -109,6 +109,7 @@ export class WorkerAuthorityHandler {
     wikiUri: string,
     added:   readonly Record<string, unknown>[],
     deleted: readonly string[],
+    _bagId?: string,
   ): void {
     if (!this._tw5) return;
     const wiki    = this._tw5.$tw.wiki;

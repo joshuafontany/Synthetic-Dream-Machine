@@ -66,12 +66,15 @@ parentPort.on("message", (msg) => {
         });
       }
 
-      if (msg.docUrl) {
+      // Resolve docUrl: prefer bagBindings (new), fall back to deprecated msg.docUrl.
+      const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational");
+      const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
+
+      if (resolvedDocUrl) {
         // Explicit docUrl: Worker awaits repo.find() — reliable, no gossip race.
-        // repo.find() returns a Promise<DocHandle> in automerge-repo v2.x.
-        void repo.find(msg.docUrl).then((handle) => wireHandle(handle));
+        void repo.find(resolvedDocUrl).then((handle) => wireHandle(handle));
       } else {
-        // Fallback: wait for doc to arrive via gossip (docUrl = null, cold boot).
+        // Fallback: wait for doc to arrive via gossip (cold boot).
         repo.on("document", ({ handle }) => wireHandle(handle));
       }
     }

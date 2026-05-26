@@ -39,6 +39,48 @@
 export const WORKER_PROTOCOL_VERSION = 1 as const;
 export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
 
+// ── Worker storage configuration ──────────────────────────────────────────
+
+/**
+ * Storage adapter configuration for the Worker-side Automerge Repo.
+ *
+ * Workers that own a storage adapter hold persistent CRDT state independently
+ * of the main-thread relay Repo. The main thread passes this config at manifest
+ * delivery time; the Worker constructs the adapter.
+ *
+ * - `nodefs`  — Node.js `NodeFSStorageAdapter`; Worker receives a filesystem `dir`.
+ * - `idb`     — Browser `IndexedDBStorageAdapter`; Worker receives a `dbName`.
+ * - `memory`  — ephemeral in-memory storage; cold boot or test path.
+ */
+export type WorkerStorageConfig =
+  | { type: "nodefs";  dir:    string }
+  | { type: "idb";     dbName: string }
+  | { type: "memory" };
+
+// ── Bag capability tokens ──────────────────────────────────────────────────
+
+/**
+ * The mode a bag inhabits at manifest delivery time.
+ *
+ * - `cold`       — no persistent CRDT doc yet; Worker creates or receives one via sync.
+ * - `relational` — a known AutomergeUrl; Worker calls `repo.find(docUrl).whenReady()`.
+ *
+ * `AutomergeUrl` IS the CapTP-style capability token for the doc.
+ * A string bagId without a `docUrl` is a label, not a capability.
+ */
+export type BagMode =
+  | { mode: "cold" }
+  | { mode: "relational"; docUrl: string };
+
+/**
+ * A single bag entry in the manifest delivery, combining identity + capability + write intent.
+ *
+ * `bagId`    — stable lar: bag identifier (e.g. `lar:///bags/lares/v0.1`)
+ * `writable` — whether the Worker may call `.change()` on this bag's doc.
+ * `mode`     — cold or relational (with AutomergeUrl capability token).
+ */
+export type BagBinding = { bagId: string; writable: boolean } & BagMode;
+
 // ── Main → Worker ──────────────────────────────────────────────────────────
 
 /**
@@ -60,7 +102,8 @@ export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
  *   - `pluginTiddlers` carries the plugin layer tiddlers (sigils, ahu, pranala, etc.).
  *     Applied to TW5 immediately after core boot, before Repo sync. An island without
  *     plugin tiddlers holds structural bones only — it fails ea condition 3 (own truth).
- *   - `bagStack` carries the ordered bag identifiers for this wiki's content scope.
+ *   - `bagBindings` carries the ordered bag capability tokens for this wiki's content scope.
+ *     Each entry pairs a `bagId` with its `BagMode` (cold or relational AutomergeUrl).
  *   - `recipeUri` carries the recipe URI that maps this authority's content scope.
  */
 export interface WorkerMsg_Manifest {
@@ -71,8 +114,19 @@ export interface WorkerMsg_Manifest {
   coreBlob: Uint8Array;
   /** SHA-256 hex of coreBlob. null = pre-CAS trust-on-delivery (intent: make non-null once CAS lands). */
   coreHash: string | null;
-  /** AutomergeUrl — Worker calls `repo.find(docUrl)`. null = cold boot, Worker creates fresh doc. */
-  docUrl: string | null;
+  /**
+   * Ordered bag capability tokens for this wiki's content scope (system → draft).
+   * Each BagBinding carries the bagId, write intent, and BagMode (cold | relational+docUrl).
+   * Workers iterate in order to seed TW5 and establish doc handles.
+   * Replaces the deprecated `docUrl` + `bagStack` fields.
+   */
+  bagBindings?: readonly BagBinding[];
+  /**
+   * Storage adapter configuration for the Worker-side Automerge Repo.
+   * When present, the Worker creates a persistent Repo (NodeFS or IDB).
+   * Absent or `{ type: "memory" }` = ephemeral relay-only Repo (test / cold-boot path).
+   */
+  storage?: WorkerStorageConfig;
   /** MessagePort for Worker-side Repo ↔ main-thread Repo sync. MUST be transferred. */
   syncPort: MessagePort;
   /**
@@ -81,7 +135,15 @@ export interface WorkerMsg_Manifest {
    * Applied after core boot, before Repo sync, so the CRDT truth layer can use them immediately.
    */
   pluginTiddlers?: readonly Record<string, unknown>[];
-  /** Ordered bag identifiers for this wiki's content scope (system → draft). */
+  /**
+   * @deprecated Use `bagBindings` instead. AutomergeUrl for the primary wiki doc.
+   * Retained for Sprint 1→3 transition. Remove when all VmManagers send `bagBindings`.
+   */
+  docUrl?: string | null;
+  /**
+   * @deprecated Use `bagBindings` instead. Ordered bag identifiers without capability tokens.
+   * Retained for Sprint 1→3 transition. Remove when all VmManagers send `bagBindings`.
+   */
   bagStack?: readonly string[];
   /** Recipe URI mapping this authority's content scope. */
   recipeUri?: string;
@@ -240,19 +302,26 @@ export function mkTeardownAck(opts: {
  *
  * `opts.pluginTiddlers` — plugin layer tiddlers (sigils, ahu, pranala, etc.).
  *   Prerequisite for ea condition 3 (own truth). Omitting yields a hollow island.
- * `opts.bagStack`  — ordered bag identifiers for this wiki's content scope.
- * `opts.recipeUri` — recipe URI mapping this authority's content scope.
+ * `opts.bagBindings` — ordered bag capability tokens (BagBinding[]); preferred over `opts.docUrl`.
+ * `opts.recipeUri`   — recipe URI mapping this authority's content scope.
+ *
+ * @deprecated `opts.docUrl` and `opts.bagStack` — Sprint 1→3 transition shims.
+ *   Pass `bagBindings` instead. These will be removed when all VmManagers migrate.
  */
 export function mkManifest(
   wikiUri:  string,
   coreBlob: Uint8Array,
   syncPort: MessagePort,
-  docUrl:   string | null = null,
   coreHash: string | null = null,
   opts?: {
     pluginTiddlers?: readonly Record<string, unknown>[];
-    bagStack?:       readonly string[];
+    bagBindings?:    readonly BagBinding[];
+    storage?:        WorkerStorageConfig;
     recipeUri?:      string;
+    /** @deprecated use bagBindings */
+    docUrl?:         string | null;
+    /** @deprecated use bagBindings */
+    bagStack?:       readonly string[];
   },
 ): WorkerMsg_Manifest {
   const msg: WorkerMsg_Manifest = {
@@ -261,12 +330,15 @@ export function mkManifest(
     wikiUri,
     coreBlob,
     coreHash,
-    docUrl,
     syncPort,
   };
+  if (opts?.bagBindings?.length)    msg.bagBindings    = opts.bagBindings;
+  if (opts?.storage)                msg.storage        = opts.storage;
   if (opts?.pluginTiddlers?.length) msg.pluginTiddlers = opts.pluginTiddlers;
-  if (opts?.bagStack?.length)       msg.bagStack       = opts.bagStack;
   if (opts?.recipeUri)              msg.recipeUri      = opts.recipeUri;
+  // Sprint 1→3 shims: pass through deprecated fields when callers haven't migrated yet.
+  if (opts?.docUrl !== undefined)   msg.docUrl         = opts.docUrl;
+  if (opts?.bagStack?.length)       msg.bagStack       = opts.bagStack;
   return msg;
 }
 

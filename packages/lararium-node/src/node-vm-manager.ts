@@ -37,19 +37,21 @@
  * Meme doc: packages/lararium-node/memes/node-vm-manager.md
  */
 
-import { getHeads } from "@lararium/mesh";
-import type { Heads } from "@lararium/mesh";
+import { getHeads, load as automergeLoad } from "@lararium/mesh";
+import type { Heads, LarDoc } from "@lararium/mesh";
 import { Worker, MessageChannel } from "worker_threads";
 import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import type { DocHandle, Repo } from "@automerge/automerge-repo";
-import type { LarDoc } from "@lararium/mesh";
+import { join } from "path";
 import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
 import {
   isWorkerToMainMsg,
   mkManifest,
   mkTeardown,
+  type BagBinding,
+  type WorkerStorageConfig,
 } from "@lararium/mesh";
 import type {
   WorkerMsg_Event,
@@ -150,6 +152,13 @@ export interface NodeVmManagerOptions {
    * Repo syncs the wiki doc automatically (Repo-in-Worker path).
    */
   mainRepo?: Repo;
+  /**
+   * Root directory for Worker-owned storage partitions (Sprint 3).
+   * When provided, each wiki Worker receives a `nodefs` storage config pointing
+   * at `<storageRoot>/<sanitized-wikiId>/`. Workers own their CRDT persistence.
+   * Absent = Workers use memory-only (relay Repo is the sole persistence layer).
+   */
+  storageRoot?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -165,16 +174,17 @@ const DEFAULT_WORKER_URL = new URL("./lar-wiki-worker.js", import.meta.url);
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
 export class NodeVmManager {
-  private readonly _slots         = new Map<string, Slot>();
-  private readonly _docHandles    = new Map<string, DocHandle<LarDoc>>();
-  private readonly _workerUrl:    URL;
+  private readonly _slots          = new Map<string, Slot>();
+  private readonly _workerUrl:     URL;
   private readonly _onWorkerEvent: ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
   private readonly _mainRepo:      Repo | null;
+  private readonly _storageRoot:   string | null;
 
   constructor(options: NodeVmManagerOptions = {}) {
     this._workerUrl     = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
     this._onWorkerEvent = options.onWorkerEvent ?? null;
     this._mainRepo      = options.mainRepo ?? null;
+    this._storageRoot   = options.storageRoot ?? null;
   }
 
   // ---------------------------------------------------------------------------
@@ -199,11 +209,6 @@ export class NodeVmManager {
   updateAdaptor(wikiId: string, adaptor: IslandAdaptor): void {
     const slot = this._slots.get(wikiId);
     if (slot?.tier === "pinned") slot.adaptor = adaptor;
-  }
-
-  /** Register a docHandle for snapshot capture at eviction time. */
-  registerDocHandle(wikiId: string, handle: DocHandle<LarDoc>): void {
-    this._docHandles.set(wikiId, handle);
   }
 
   // ---------------------------------------------------------------------------
@@ -236,11 +241,8 @@ export class NodeVmManager {
 
     // Plugin tiddlers — prerequisite for ea condition 3. These cross the manifest
     // boundary so the island can parse memetic wikitext from first breath.
-    // Cold-slot tiddlers flow via CRDT Repo sync (docUrl / docBytes), not here.
+    // Cold-slot tiddlers flow via CRDT Repo sync (bagBindings), not here.
     const pluginTiddlers = ctx.preloadedTiddlers?.length ? ctx.preloadedTiddlers : undefined;
-
-    // Register the handle so disposeAll can capture snapshots from the doc.
-    this._docHandles.set(wikiId, ctx.docHandle);
 
     // Create sync channel — main keeps port1, Worker receives port2 (syncPort).
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
@@ -260,16 +262,25 @@ export class NodeVmManager {
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    // Pass docUrl when mainRepo wired so Worker calls repo.find(docUrl).whenReady()
-    // instead of the unreliable gossip path (repo.on("document")). null = cold boot.
-    const docUrl = this._mainRepo ? (ctx.docHandle.url as string ?? null) : null;
+    // Build bagBindings: one entry per wiki doc at Sprint 2 (full recipe stack Sprint 4+).
+    // When mainRepo is wired, relational binding so Worker calls repo.find(docUrl).
+    // Without mainRepo, cold boot — Worker creates or receives the doc via sync.
+    const rawDocUrl = this._mainRepo ? (ctx.docHandle.url as string | undefined ?? null) : null;
+    const bagBindings: readonly BagBinding[] = rawDocUrl != null
+      ? [{ bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl }]
+      : [{ bagId: wikiId, writable: true, mode: "cold" }];
+
+    // Storage config: derive Worker storage dir from storageRoot + sanitized wikiId.
+    const storage: WorkerStorageConfig | undefined = this._storageRoot
+      ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }
+      : undefined;
+
     const manifestMsg = mkManifest(
       wikiId,
       ctx.coreBlob.bytes,
       syncPort as unknown as globalThis.MessagePort,
-      docUrl,
       null,
-      pluginTiddlers ? { pluginTiddlers } : {},
+      pluginTiddlers ? { pluginTiddlers, bagBindings, storage } : { bagBindings, storage },
     );
     await _sendAndAwait<WorkerMsg_Ea>(
       worker,
@@ -313,11 +324,11 @@ export class NodeVmManager {
         mkTeardown(),
         "teardown:ack",
       );
+      // Derive heads from Worker's docBytes (Worker owns persistence in Sprint 3).
       let heads: Heads = [];
-      try {
-        const doc = this._docHandles.get(wikiId)?.doc();
-        if (doc) heads = getHeads(doc);
-      } catch { /* test stub — use empty heads */ }
+      if (ack.docBytes) {
+        try { heads = getHeads(automergeLoad(ack.docBytes)); } catch { /* corrupt bytes */ }
+      }
       const snapshotFields: VmSnapshot = { heads, capturedAt: Date.now() };
       if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
       snapshot = snapshotFields;
@@ -503,5 +514,14 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
       worker.postMessage(msg);
     }
   });
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Convert a lar: URI to a safe filesystem path component. */
+function _sanitizeWikiId(wikiId: string): string {
+  return wikiId.replace(/^lar:\/\/\//, "").replace(/[^a-zA-Z0-9@._-]/g, "_");
 }
 

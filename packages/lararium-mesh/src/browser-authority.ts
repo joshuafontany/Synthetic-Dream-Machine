@@ -14,6 +14,7 @@
  */
 
 import type { Heads } from "@automerge/automerge";
+import type { BagBinding } from "./worker-protocol.js";
 
 // ---------------------------------------------------------------------------
 // Identity
@@ -71,11 +72,21 @@ export interface BrowserAuthorityBootParams {
    * Callers who hold pluginBlob as bytes must deserialize before constructing params.
    */
   pluginTiddlers?: readonly Record<string, unknown>[];
-  /** Bag stack for this wiki, ordered from system to draft. */
-  bagStack: readonly string[];
+  /**
+   * Ordered bag capability tokens for this wiki's content scope (system → draft).
+   * Preferred over the deprecated `docUrl` + `bagStack` pair.
+   * When present, passed directly as WorkerMsg_Manifest.bagBindings.
+   */
+  bagBindings?: readonly BagBinding[];
+  /**
+   * @deprecated Use `bagBindings` instead.
+   * Bag stack for this wiki, ordered from system to draft.
+   */
+  bagStack?: readonly string[];
   /** Recipe URI that maps this authority's content scope. */
   recipeUri: string;
   /**
+   * @deprecated Use `bagBindings` instead.
    * AutomergeUrl for the wiki doc. Passed as manifest docUrl so the Worker-side Repo
    * calls repo.find(docUrl).whenReady() instead of waiting for gossip sync.
    * null = cold boot (Worker creates fresh doc, state arrives via sync channel).

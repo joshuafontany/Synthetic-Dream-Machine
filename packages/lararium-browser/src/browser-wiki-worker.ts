@@ -37,8 +37,9 @@
  */
 
 import { Repo } from "@automerge/automerge-repo";
-import type { DocHandle, AnyDocumentId } from "@automerge/automerge-repo";
+import type { DocHandle, AnyDocumentId, StorageAdapterInterface } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
+import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
 import { save as automergeSave } from "@automerge/automerge";
 import { WorkerAuthorityHandler } from "@lararium/tw5";
 import {
@@ -47,7 +48,7 @@ import {
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
 } from "@lararium/mesh";
-import type { WorkerToMainMsg, WorkerMsg_Manifest } from "@lararium/mesh";
+import type { WorkerToMainMsg, WorkerMsg_Manifest, WorkerStorageConfig } from "@lararium/mesh";
 
 // ── Handler ───────────────────────────────────────────────────────────────
 
@@ -55,10 +56,22 @@ const handler = new WorkerAuthorityHandler((msg: WorkerToMainMsg) => {
   self.postMessage(msg);
 });
 
-// ── Worker-side Repo + tracked doc handle (set on manifest) ─────────────
+// ── Worker-side Repo + multi-doc handle map (Sprint 2) ───────────────────
+// _handles: bagId → DocHandle, keyed in bagBindings order.
+// _writableHandleId: first writable bagId, used for teardown docBytes export.
 
-let _repo:      Repo | null                                = null;
-let _docHandle: DocHandle<Record<string, unknown>> | null  = null;
+let _repo:             Repo | null                                        = null;
+let _handles:          Map<string, DocHandle<Record<string, unknown>>>    = new Map();
+let _writableHandleId: string | null                                      = null;
+
+// ── Storage adapter factory ───────────────────────────────────────────────
+
+function _buildStorageAdapter(cfg: WorkerStorageConfig | undefined): StorageAdapterInterface | undefined {
+  if (!cfg || cfg.type === "memory") return undefined;
+  if (cfg.type === "idb") return new IndexedDBStorageAdapter(cfg.dbName);
+  // nodefs is Node-only — cannot reach here in browser worker.
+  return undefined;
+}
 
 // ── rAF accumulator — Worker-owned timing ─────────────────────────────────
 
@@ -117,7 +130,7 @@ type DocChangePayload = {
   patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>;
 };
 
-function _subscribeHandle(handle: DocHandle<Record<string, unknown>>): void {
+function _subscribeHandle(bagId: string, handle: DocHandle<Record<string, unknown>>): void {
   handle.on("change", ({ doc, patches }: DocChangePayload) => {
     const delta = extractTiddlerDeltaFromPatches(doc, patches);
     if (delta.added.length > 0 || delta.deleted.length > 0) {
@@ -125,6 +138,7 @@ function _subscribeHandle(handle: DocHandle<Record<string, unknown>>): void {
       _pendingDeleted.push(...delta.deleted);
       _scheduleRafDrain();
     }
+    void bagId; // reserved for Sprint 3 priority-ordered merge
   });
 }
 
@@ -142,40 +156,57 @@ async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
   }
 
   // 2. Wire Worker-side Repo via the transferred sync port.
+  const storageAdapter = _buildStorageAdapter(msg.storage);
   _repo = new Repo({
+    ...(storageAdapter ? { storage: storageAdapter } : {}),
     network: [new MessageChannelNetworkAdapter(msg.syncPort)],
     sharePolicy: async () => true,
   });
 
-  // 3a. Known doc: find, await sync, seed TW5, subscribe to changes.
-  if (msg.docUrl) {
-    const handle = await _repo.find<Record<string, unknown>>(msg.docUrl as AnyDocumentId);
-    await handle.whenReady();
-    _docHandle = handle;
+  const bindings = msg.bagBindings ?? [];
+  const hasCold  = bindings.some(b => b.mode === "cold");
 
-    const doc = handle.doc();
-    if (doc) {
-      const initial = allTiddlersFromDoc(doc);
-      if (initial.length > 0) handler.applyDelta(msg.wikiUri, initial, []);
-    }
-    _subscribeHandle(handle);
+  // Await all relational handles in recipe order, then seed TW5 once.
+  const readyHandles: Array<{ bagId: string; handle: DocHandle<Record<string, unknown>> }> = [];
+  for (const binding of bindings) {
+    if (binding.mode !== "relational") continue;
+    const handle = await _repo.find<Record<string, unknown>>(binding.docUrl as AnyDocumentId);
+    await handle.whenReady();
+    _handles.set(binding.bagId, handle);
+    readyHandles.push({ bagId: binding.bagId, handle });
+    if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
   }
-  // 3b. Cold boot: Repo starts empty; doc arrives via sync from main-thread Repo.
-  else {
+
+  // Seed TW5 from all ready bags in recipe order.
+  const initialAdded: Record<string, unknown>[] = [];
+  for (const { handle } of readyHandles) {
+    const doc = handle.doc();
+    if (doc) initialAdded.push(...allTiddlersFromDoc(doc));
+  }
+  if (initialAdded.length > 0) handler.applyDelta(msg.wikiUri, initialAdded, []);
+
+  for (const { bagId, handle } of readyHandles) {
+    _subscribeHandle(bagId, handle);
+  }
+
+  // Cold-mode: doc arrives via gossip from relay Repo.
+  if (hasCold || bindings.length === 0) {
     _repo.on("document", ({ handle: h }: { handle: DocHandle<Record<string, unknown>> }) => {
       void h.whenReady().then(() => {
-        _docHandle = h;
+        const coldBagId = bindings.find(b => b.mode === "cold")?.bagId ?? msg.wikiUri;
+        _handles.set(coldBagId, h);
+        if (_writableHandleId === null) _writableHandleId = coldBagId;
         const doc = h.doc();
         if (doc) {
           const initial = allTiddlersFromDoc(doc);
           if (initial.length > 0) handler.applyDelta(msg.wikiUri, initial, []);
         }
-        _subscribeHandle(h);
+        _subscribeHandle(coldBagId, h);
       });
     });
   }
 
-  // 4. Island is live.
+  // Island is live.
   handler.sendEa(msg.wikiUri);
 }
 
@@ -187,13 +218,15 @@ async function _handleTeardown(): Promise<void> {
   // Export Repo doc bytes for warm re-boot — CRDT truth over tiddler snapshot.
   let docBytes: Uint8Array | undefined;
   try {
-    const rawDoc = _docHandle?.doc?.();
+    const primaryHandle = _writableHandleId ? _handles.get(_writableHandleId) : undefined;
+    const rawDoc = primaryHandle?.doc?.();
     if (rawDoc) docBytes = automergeSave(rawDoc as Parameters<typeof automergeSave>[0]);
   } catch {
     // Export failed — teardown:ack fires without docBytes.
   }
-  _docHandle = null;
-  _repo      = null;
+  _handles.clear();
+  _writableHandleId = null;
+  _repo             = null;
 
   // exactOptionalPropertyTypes: only include defined fields.
   const ackOpts: { docBytes?: Uint8Array } = {};

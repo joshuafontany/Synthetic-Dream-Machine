@@ -61,8 +61,12 @@ self.addEventListener("message", (e) => {
       sharePolicy: async () => true,
     });
 
-    if (msg.docUrl) {
-      void repo.find(msg.docUrl).then((handle) => wireHandle(handle, true));
+    // Resolve docUrl: prefer bagBindings (new), fall back to deprecated msg.docUrl.
+    const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational");
+    const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
+
+    if (resolvedDocUrl) {
+      void repo.find(resolvedDocUrl).then((handle) => wireHandle(handle, true));
     } else {
       repo.on("document", ({ handle }) => wireHandle(handle, false));
     }
