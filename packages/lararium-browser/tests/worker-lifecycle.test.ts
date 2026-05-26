@@ -17,10 +17,8 @@ import {
   isWorkerToMainMsg,
   mkTeardown,
   mkManifest,
-  mkChangeset,
   type WorkerMsg_Ea,
-  type WorkerMsg_Event,
-  type WorkerMsg_ChangesetAck,
+    type WorkerMsg_Event,
 } from "@lararium/mesh";
 
 const FIXTURE_URL = new URL("./fixtures/teardown-echo-browser.mjs", import.meta.url);
@@ -83,40 +81,6 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     expect(ack?.wikiUri).toBe(wikiUri);
     // BA-5: coreBlob crossed the structured-clone boundary (fixture echoes byteLength).
     expect(ack?.coreBlobByteLength).toBeGreaterThanOrEqual(0);
-    expect(isWorkerToMainMsg(ack)).toBe(true);
-  });
-
-  test("GP-3: changeset crosses boundary; fixture echoes addedCount/deletedCount", async () => {
-    // GP-3 debt: island receives a pre-computed delta from the main-thread Automerge oracle.
-    // A pono CRDT-peer model would have the Worker hold its own document and verify heads.
-    // Named debt — deferred past S9 e2e.
-    worker = spawnFixture();
-
-    const msgsPromise = collectUntil(
-      worker,
-      (msgs) => (msgs as { type: string }[]).some((m) => m.type === "event"),
-    );
-
-    const wikiUri = "lar:///ha.ka.ba/test-wiki";
-    const cs = mkChangeset(wikiUri,
-      [{ title: `${wikiUri}/a` }, { title: `${wikiUri}/b` }],
-      [`${wikiUri}/old`],
-    );
-    worker.postMessage(cs);
-
-    const msgs = await collectUntil(
-      worker,
-      (m) => (m as { type: string }[]).some((x) => x.type === "changeset:ack"),
-    );
-    const echo = msgs.find((m) => (m as { type: string }).type === "event") as WorkerMsg_Event | undefined;
-    const ack  = msgs.find((m) => (m as { type: string }).type === "changeset:ack") as WorkerMsg_ChangesetAck | undefined;
-
-    expect(echo).toBeDefined();
-    expect(echo?.listenable).toBe("echo");
-    expect(echo?.payload.addedCount).toBe(2);
-    expect(echo?.payload.deletedCount).toBe(1);
-    // ACK-gate: batch_id echoed back — main thread can release the queue.
-    expect(ack?.batch_id).toBe(cs.batch_id);
     expect(isWorkerToMainMsg(ack)).toBe(true);
   });
 

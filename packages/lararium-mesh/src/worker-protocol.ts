@@ -13,14 +13,17 @@
  *      frame boundary (or frame-equivalent tick), never on raw message receipt.
  *   4. `changeset:ack` is a frame-completion signal: the Worker fires it after each rAF drain,
  *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
- *   5. `WorkerMsg_Changeset` is @deprecated — CRDT sync via `syncPort` replaces it.
- *      It survives only for the Node GP-3 oracle path pending NodeVmManager migration.
+ *   5. Main-thread `changeset` delivery is removed. CRDT sync via `syncPort` is the sole
+ *      source of tiddler truth for Worker islands.
  *   6. `WorkerMsg_Manifest` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
  *      for `repo.find()`), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
+ *   8. When `docUrl` is non-null, the vessel MUST establish the Repo network adapter for that
+ *      doc source before sending `manifest`. If sync does not reach ready state within
+ *      HANDSHAKE_TIMEOUT_MS, the slot transitions to disposed.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.
@@ -91,16 +94,6 @@ export interface WorkerMsg_Manifest {
  * Survives for Node path compatibility pending NodeVmManager migration to Repo-in-Worker.
  * Remove when NodeVmManager adopts Repo-in-Worker (tracked: GP-3 debt, node-vm-manager.ts).
  */
-export interface WorkerMsg_Changeset {
-  schema_version: ProtocolVersion;
-  type: "changeset";
-  wikiUri: string;
-  /** Opaque identifier. In Repo-in-Worker path: frame correlation ID (not a main-thread batch ID). */
-  batch_id: string;
-  added:   readonly Record<string, unknown>[];
-  deleted: readonly string[];
-}
-
 /** Demote the wiki slot from hot to cold (teardown; thread may terminate). */
 export interface WorkerMsg_Demote {
   schema_version: ProtocolVersion;
@@ -120,7 +113,6 @@ export interface WorkerMsg_Teardown {
 
 /** All messages the main thread may send to a wiki Worker. */
 export type MainToWorkerMsg =
-  | WorkerMsg_Changeset
   | WorkerMsg_Manifest
   | WorkerMsg_Demote
   | WorkerMsg_Teardown;
@@ -149,11 +141,6 @@ export interface WorkerMsg_TeardownAck {
   type: "teardown:ack";
   /** Automerge doc bytes from Worker-side Repo at teardown. Preferred warm-start seed. */
   docBytes?: Uint8Array;
-  /**
-   * @deprecated GP-3 tiddler snapshot. Remove when NodeVmManager migrates to Repo-in-Worker.
-   * Use docBytes (CRDT truth) instead.
-   */
-  snapshotTiddlers?: readonly Record<string, unknown>[];
 }
 
 /**
@@ -218,7 +205,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
   if (!_hasVersion(v)) return false;
-  return (["changeset", "manifest", "demote", "teardown"] as const).includes(
+  return (["manifest", "demote", "teardown"] as const).includes(
     v.type as MainToWorkerMsg["type"],
   );
 }
@@ -238,12 +225,9 @@ export function mkTeardown(): WorkerMsg_Teardown {
 
 export function mkTeardownAck(opts: {
   docBytes?: Uint8Array;
-  /** @deprecated GP-3 path only. */
-  snapshotTiddlers?: readonly Record<string, unknown>[];
 } = {}): WorkerMsg_TeardownAck {
   const msg: WorkerMsg_TeardownAck = { schema_version: WORKER_PROTOCOL_VERSION, type: "teardown:ack" };
-  if (opts.docBytes !== undefined)        msg.docBytes = opts.docBytes;
-  if (opts.snapshotTiddlers !== undefined) msg.snapshotTiddlers = opts.snapshotTiddlers;
+  if (opts.docBytes !== undefined) msg.docBytes = opts.docBytes;
   return msg;
 }
 
@@ -289,18 +273,6 @@ export function mkManifest(
 /** Build an ea sovereignty declaration — the Worker signals it breathes and stands ready. */
 export function mkEa(wikiUri: string): WorkerMsg_Ea {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "ea", wikiUri };
-}
-
-/**
- * @deprecated GP-3 oracle path. In Repo-in-Worker path the Worker generates frame ACKs itself.
- */
-export function mkChangeset(
-  wikiUri: string,
-  added:   readonly Record<string, unknown>[],
-  deleted: readonly string[],
-  batch_id: string = crypto.randomUUID(),
-): WorkerMsg_Changeset {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "changeset", wikiUri, batch_id, added, deleted };
 }
 
 export function mkChangesetAck(wikiUri: string, batch_id: string): WorkerMsg_ChangesetAck {

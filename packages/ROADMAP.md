@@ -58,7 +58,8 @@ These planning docs follow one architectural law:
 - Job tiddlers stay vessel-local scratch; receipt tiddlers carry the durable shared aftermath.
 - Node-only behavior counts as edge adaptation, not authority.
 - Roadmap order favors vessel-law closure before product-side expansion.
-- "peer" names an Automerge sync participant; "vessel" names the lararium identity-and-runtime unit.
+- "vessel" names the lararium identity-and-runtime unit; "peer" names only an Automerge-layer sync participant. Never use "peer" for a lararium vessel.
+- "ea" names the sovereignty breath of a vessel — its right to hold, author, and sync its own causal state. "heartbeat" does not carry this meaning and MUST NOT substitute for it.
 
 ## Active Priority Order
 
@@ -75,13 +76,13 @@ These planning docs follow one architectural law:
 | — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
 | — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
-| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | worker-protocol.ts moved node→mesh; WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S2); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
-| — | **Worker Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in worker-protocol.ts. BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Worker, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per Worker, mainPort.close law, docBytes capture). All GP-3 oracle paths carry @deprecated markers. 192/192 tests. |
-| — | **GP-3 node gate test** | ✅ Done | `repo-in-worker.test.ts` (3 tests) passes. Proves main-thread Repo doc change propagates to Worker via syncPort WITHOUT routeChangeset. NodeVmManager now passes `docHandle.url` as `docUrl` when `mainRepo` is set. Fixture `repo-in-worker-echo.mjs` wires Worker-side Repo and emits `repo:synced` + `repo:change` events. 195/195 tests green. |
-| — | **GP-3 node deletion** | ✅ Done | Deleted: `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkChangeset` import. Rewrote 4 node-vm-manager tests to Repo-in-Worker path. 195/195 green. |
-| 1 | **GP-3 browser gate + deletion** | ⬜ Next | Write browser Repo-in-Worker gate test. Then delete GP-3 fallback in `browser-wiki-worker.ts` + `teardown-echo-browser.mjs`. |
-| 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator devices with `cap=infrastructure` only; prove local capability rejection before edge work. |
-| 3 | **S9 / lararium-browser** | ⬜ Active (S0–S3 architecture landed; S4 real boot e2e + IndexedDB next) | Full browser vessel, detached worker-authority pool. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. Sprint braid S0–S9 in `bags/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint.md`. |
+| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | worker-protocol.ts moved node→mesh; WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S3 architecture landed); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
+| — | **Worker Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in worker-protocol.ts. BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel Worker, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per Worker, mainPort.close law, docBytes capture). All GP-3 oracle paths carry @deprecated markers. 192/192 tests. |
+| — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-worker.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkChangeset` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
+| — | **Identity lattice + keyhive founding ceremony** | ✅ Done | `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` extracted isomorphic into `@lararium/keyhive`. Three-gate lattice A/B/C holds. Two-vessel e2e test (`two-vessel-mesh.test.ts`) 9/9. `lares device-admit` + `lares invite` CLI commands wired. |
+| 1 | **GP-3 browser gate + deletion** | ⬜ Next | Write `browser-repo-in-worker.test.ts`. Then delete GP-3 fallback in `browser-wiki-worker.ts` + `teardown-echo-browser.mjs`. Protocol layer cleanup follows both vessel gates. `docUrl` non-null test opens federation seam. |
+| 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
+| 3 | **S9 / lararium-browser** | ⬜ Active (S0–S3 architecture landed; S4 real boot + IndexedDB next) | Full browser vessel ea-path: IndexedDB storage, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
@@ -158,23 +159,17 @@ These tables do not feed `grammar-cache.ts`. Migration to bag memes deferred to 
 
 All sites marked `@deprecated GP-3 oracle path` form one removal arc.
 
-**Node gate: ✅ PASSED** — `packages/lararium-node/tests/repo-in-worker.test.ts` (3 tests).
-Proves CRDT sync from main-thread Repo reaches Worker via `syncPort` WITHOUT `routeChangeset`.
-`NodeVmManager` now passes `docHandle.url` as `docUrl` when `mainRepo` is set. 195/195 green.
+**Node gate: ✅ PASSED + DELETED** — 195/195 green.
+`routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` gone.
+`NodeVmManager` passes `docHandle.url` as `docUrl` when `mainRepo` is set.
 
-**Deletion order:**
-
-Node vessel (`lar-wiki-worker.ts` + `node-vm-manager.ts`): ✅ DONE
-- [x] `_subscribeDocChanges` — deleted.
-- [x] `routeChangeset` + `changesetQueue` + `awaitingAck` + `unsubChange` on `WorkerHotSlot` — deleted.
-- [x] `mkChangeset` import in `node-vm-manager.ts` — removed.
-- [x] Node tests rewrote to Repo-in-Worker path. `teardown-echo.mjs` `changeset` block — inert (fixture not modified; removal deferred to protocol cleanup).
-- [ ] `GP-3 fallback `changeset` handler in `lar-wiki-worker.ts` — keep until lar-wiki-worker boots with real TW5 under Repo-in-Worker.
+**Node vessel remnants (survive until protocol layer cleans):**
+- [ ] GP-3 fallback `changeset` handler in `lar-wiki-worker.ts` — keep until TW5 boots under Repo-in-Worker.
 - [ ] `VmSnapshot.tiddlers[]` field — keep until protocol `snapshotTiddlers` removed.
 
 Browser vessel gate (write next):
 - [ ] Write `browser-repo-in-worker.test.ts`: two `BrowserVmManager` instances sharing one main-thread
-      Repo. Worker receives doc changes via MessageChannel. Assert Repo-in-Worker path without GP-3 messages.
+      Repo. Worker receives doc changes via MessageChannel. Assert Repo-in-Vessel-Worker path without GP-3 messages.
 
 Browser vessel deletion (after browser gate passes):
 - [ ] GP-3 fallback `changeset` handler in `browser-wiki-worker.ts`.

@@ -4,7 +4,7 @@
  * Implements the lar-wiki-worker protocol without TW5 or ReactionEngine:
  *   manifest  → ea
  *   changeset → event(echo, { addedCount, deletedCount, changedUris })
- *   teardown  → teardown:ack (with mock snapshotTiddlers)
+ *   teardown  → teardown:ack
  *   demote    → teardown:ack (same)
  *
  * NOT production code — fixture only.
@@ -57,10 +57,9 @@ parentPort.on("message", (msg) => {
   }
 
   if (msg.type === "teardown" || msg.type === "demote") {
-    const snapshotTiddlers = [...tiddlers.values()];
     tiddlers.clear();
     wikiUri = null;
-    parentPort.postMessage({ schema_version: 1, type: "teardown:ack", snapshotTiddlers });
+    parentPort.postMessage({ schema_version: 1, type: "teardown:ack" });
     return;
   }
 });

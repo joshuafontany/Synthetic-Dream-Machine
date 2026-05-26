@@ -7,7 +7,6 @@
  *
  * Simulates the GP-5 handshake contract:
  *   manifest  → ea
- *   changeset → event (echoes addedCount / deletedCount)
  *   teardown  → cancel:confirmed, teardown:ack (ordering preserved)
  */
 
@@ -53,19 +52,4 @@ self.addEventListener("message", (e) => {
     return;
   }
 
-  if (msg.type === "changeset") {
-    self.postMessage({
-      schema_version: 1,
-      type: "event",
-      wikiUri: msg.wikiUri,
-      listenable: "echo",
-      payload: {
-        addedCount:   (msg.added   ?? []).length,
-        deletedCount: (msg.deleted ?? []).length,
-      },
-    });
-    // ACK-gate: echo batch_id so the main thread can release the queue.
-    self.postMessage({ schema_version: 1, type: "changeset:ack", wikiUri: msg.wikiUri, batch_id: msg.batch_id });
-    return;
-  }
 });

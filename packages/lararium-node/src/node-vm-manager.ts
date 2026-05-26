@@ -12,13 +12,13 @@
  *             ReactionEngine run co-located inside the Worker thread.
  *             Main thread communicates via worker-protocol envelope (@lararium/mesh) only.
  *
- *   Cold    — CRDT-only. VmSnapshot stores the materialized tiddler view from
- *             the Worker's last teardown:ack. No thread, no engine.
+ *   Cold    — CRDT-only. VmSnapshot stores Automerge heads (+ optional docBytes)
+ *             from the Worker's last teardown:ack. No thread, no engine.
  *
  * ## Promote / demote flow
  *
  *   mountWiki   → spawn Worker → manifest → ea → slot = hot
- *   unmountWiki → teardown → teardown:ack (+ snapshotTiddlers) → worker.terminate()
+ *   unmountWiki → teardown → teardown:ack (+ docBytes) → worker.terminate()
  *                → slot = cold (cold slot carries the Worker's final TW5 state)
  *
  * ## Render surface (pinned engine)
@@ -60,7 +60,7 @@ import type {
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
-// VmSnapshot — cold-tier materialized tiddler cache
+// VmSnapshot — cold-tier CRDT checkpoint
 // ---------------------------------------------------------------------------
 
 export interface VmSnapshot {
@@ -68,11 +68,6 @@ export interface VmSnapshot {
   heads:      Heads;
   /** Automerge doc bytes from Worker-side Repo at teardown — preferred warm-start seed. */
   docBytes?:  Uint8Array;
-  /**
-   * @deprecated GP-3 tiddler snapshot. Remove when lar-wiki-worker fully migrates to
-   * Repo-in-Worker and teardown:ack carries docBytes instead.
-   */
-  tiddlers:   Array<Record<string, unknown>>;
   /** Unix ms of capture — for diagnostics and staleness detection. */
   capturedAt: number;
 }
@@ -125,8 +120,8 @@ export interface WikiBootContext {
   /** Automerge doc handle — used to materialize VmSnapshot for initial manifest delivery. */
   docHandle: DocHandle<LarDoc>;
   /**
-   * Plugin tiddlers to inject into the Worker's TW5 boot alongside the cold
-   * snapshot. Merged into snapshotTiddlers before delivering manifest.
+   * Plugin tiddlers to inject into Worker TW5 boot so sigils/ahu/pranala are
+   * present before CRDT deltas begin applying.
    */
   preloadedTiddlers?: Array<Record<string, unknown>>;
   /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
@@ -300,8 +295,7 @@ export class NodeVmManager {
    * Unmount a hot-tier Worker slot via GP-5 teardown handshake.
    *
    * 1. Sends teardown signal.
-   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker) or
-   *    `snapshotTiddlers` (@deprecated GP-3 fallback).
+   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker).
    * 3. Closes mainPort, calls worker.terminate().
    * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
    *
@@ -319,14 +313,12 @@ export class NodeVmManager {
         mkTeardown(),
         "teardown:ack",
       );
-      // Prefer docBytes (Repo-in-Worker); fall back to @deprecated snapshotTiddlers (GP-3).
-      const tiddlers = ack.snapshotTiddlers ? [...ack.snapshotTiddlers] : [];
       let heads: Heads = [];
       try {
         const doc = this._docHandles.get(wikiId)?.doc();
         if (doc) heads = getHeads(doc);
       } catch { /* test stub — use empty heads */ }
-      const snapshotFields: VmSnapshot = { heads, tiddlers, capturedAt: Date.now() };
+      const snapshotFields: VmSnapshot = { heads, capturedAt: Date.now() };
       if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
       snapshot = snapshotFields;
     } catch (err) {
@@ -338,7 +330,7 @@ export class NodeVmManager {
     this._slots.set(wikiId, { tier: "cold", wikiId, snapshot });
 
     const snapDesc = snapshot
-      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : `${snapshot.tiddlers.length} tiddlers`)
+      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : "heads-only")
       : "none";
     console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
   }

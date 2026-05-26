@@ -19,51 +19,44 @@ SharktoothSigil grammar inversion + aka/kahea mode= collapse sprint,
 lar:-URI namespace + mode= retirement + English alias sigil sprint,
 concurrency sigil cluster + grammar self-hosting + kumu-device UEFN alignment
 sprint, AND the kau.ts → TW5-native wikitext migration (kau.ts + render-modes.ts
-deleted; \widget ~kau + template cascade in sigil-kau.tid; zero JS sigil widgets
-remain), AND the Verse ontology + yin-collapse architecture sprint (nalu.md,
-hoolele.md, verse-task-tree.md, verse-type-lattice.md; six-operator ontology
-complete; TW5 wiki declared primary reactive engine; one graph not two; fireSync
-gap documented; sigil-tick.tid stub registered), AND the grammar self-hosting
-completion sprint (smol-toml as TW5 library tiddler; sigil-toml SharktoothSigil
-tiddler; meme-grammar.ts deleted; GRAMMAR_TAG exported from @lararium/mesh;
-grammarRulesFromText fully retired), AND the Verse polychronous CRDT mesh sprint
-(meme-sync-adaptor.ts deleted; IslandAdaptor + IslandAccumulator replace it;
-$tw.syncer provably dead; N-accumulator flushAll + startRenderLoop wired;
-verse-mesh.md + island-adaptor.md + island-accumulator.md memes captured;
-48/48 tests pass), AND the vessel ontology scrub + S5 quine closure sprint
-(command→job + peer→vessel rename complete; lar-vessel.md + open-vessel.md prose
-scrubbed with Automerge-peer / lararium-vessel vocabulary split; /api/health
-HTTP endpoint + CORS header deleted from main.ts; build-genesis-island.ts
-two-pass CID injection smoke-test fixed; test-quine.ts shadow-filter fix;
-`pnpm --filter @lararium/node test:quine` passes — 65 SharktoothSigil grammar
-tiddlers self-hosted in genesis artifact; 39/39 tests pass), AND the
-lararium-browser S2 + YIN bag-URI ontology sprint (worker-protocol.ts moved
-node→mesh; WorkerAuthorityHandler extracted isomorphic; @lararium/browser
-scaffolded; bags/ URI schema unified to @bag/v0.1/lane/rest everywhere; stale
-tsc artifacts purged from lararium-mesh/src; worker-protocol.md meme anchored
-in mesh lane; 188/188 tests pass) are treated as landed unless tests prove drift.
+deleted; zero JS sigil widgets remain), AND the Verse ontology + yin-collapse
+architecture sprint (six-operator ontology complete; TW5 wiki declared primary
+reactive engine; one graph not two), AND the grammar self-hosting completion
+sprint (meme-grammar.ts deleted; GRAMMAR_TAG exported from @lararium/mesh), AND
+the Verse polychronous CRDT mesh sprint (meme-sync-adaptor.ts deleted;
+IslandAdaptor + IslandAccumulator replace it; $tw.syncer provably dead), AND the
+vessel ontology scrub + S5 quine closure sprint (command→job + peer→vessel rename;
+lar-vessel.md + open-vessel.md scrubbed; /api/health HTTP endpoint + CORS
+deleted; `pnpm test:quine` passes — 65 SharktoothSigil grammar tiddlers in genesis;
+39/39 tests), AND the lararium-browser S2 + YIN bag-URI ontology sprint
+(worker-protocol.ts moved node→mesh; WorkerAuthorityHandler extracted isomorphic;
+@lararium/browser scaffolded S0–S3; bags/ URI schema unified to @bag/v0.1/lane/rest;
+188/188 tests), AND the Worker Sovereignty Law + GP-3 deprecation sprint
+(Isomorphic law 7+1 clauses in worker-protocol.ts; BrowserVmManager +
+browser-wiki-worker.ts fully implemented; NodeVmManager GP-3 oracle deleted —
+routeChangeset, changesetQueue, _subscribeDocChanges, awaitingAck, unsubChange
+gone; 195/195 tests), AND the identity lattice + keyhive founding ceremony sprint
+(runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload extracted isomorphic
+into @lararium/keyhive; three-gate lattice A/B/C passes; two-vessel e2e test 9/9;
+lares device-admit and invite CLI commands wired) are treated as landed unless
+tests prove drift.
 
 Next work, in order:
-1. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
-2. S9 / lararium-browser: browser vessel on same operator-vessel contract — Automerge,
-   IndexedDB, presence, optional OPFS.
-3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
-4. UEFN scene importer — DEFERRED until after successful browser vessel e2e tests.
-   Spec exists at bags/@lares/v0.1/api/pono/uefn-scene.md; do not begin import
-   pipeline until browser vessel e2e passes.
+1. GP-3 browser gate + deletion: write browser-repo-in-worker.test.ts; delete
+   GP-3 fallback in browser-wiki-worker.ts; protocol layer cleanup; docUrl non-null
+   test; Worker Sovereignty Law §8.
+2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+3. S9 / lararium-browser: browser vessel full boot — IndexedDB, WebCrypto keypair,
+   founding ceremony path in browser vessel, presence via broadcast().
+4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 
-Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers landed; grammar-cache.ts reads
-SharktoothSigil-tagged tiddlers only; zero active [[sigils]] TOML blocks remain.
-Remaining TOML in memetic-wikitext.tid carries documentation data tables only
-(control-slot, lifecycle_values, ladder_5, stances) — corpus hygiene, Path O.
+Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
+Remaining TOML in memetic-wikitext.tid: documentation data tables only (Path O).
 
-Completed this turn (2026-05-17 turn 14):
-- shared-type extraction later decomposed back into @lararium/mesh; mesh ↔ tw5 dep chain remains broken without keeping a separate shared-types package.
-- 164/164 tests pass; all four packages typecheck clean.
-
-Rules: preserve TW5 VM primacy, bag=Automerge-doc=sync-boundary, no HTTP/RPC
-coordination surface, and explicit operator promotion for canon. Web3 only —
-no web2 models/code/flows in Lares stack.
+Rules: TW5 VM primacy; vessel = lararium identity+runtime unit (not "peer");
+bag = Automerge-doc = sync-boundary; ea = sovereignty breath (not "heartbeat");
+no HTTP/RPC coordination surface; explicit operator promotion for canon.
+Web3 only — no web2 models/code/flows in Lares stack.
 ```
 
 ## What Changed This Turn (2026-05-24 turn 20)
@@ -837,56 +830,38 @@ wikitext tiddlers, 5 JS widgets retired.
 
 ## Active Objective
 
-Ship the next alpha stability layer for live wiki authoring and operator-device
-federation. The sigils-as-wikitext sprint clears JS surface area and hardens
-the TW5 wikitext dispatch chain for the remaining sigil vocabulary.
+Close the GP-3 browser arc. Then open the browser vessel's ea-path: founding ceremony
+via `@lararium/keyhive`, IndexedDB storage, WebCrypto keypair, broadcast-based presence.
+These two arcs together complete the isomorphic vessel law across all vessel types.
 
-### Path T-1 / ~ahu — Done
+### GP-3 Browser Arc — Active
 
-`lar-sigil.ts` now owns the collapsed block+inline wikirule. `ahu.ts` has been
-retired to `sigil-ahu.tid`; the boot smoke checks the wikitext sigil tiddler
-and leaves rendered sigil behavior to integration flow tests.
+Write `packages/lararium-browser/tests/browser-repo-in-worker.test.ts`:
+- Two `BrowserVmManager` instances sharing one main-thread Repo.
+- Worker receives doc changes via MessageChannel (no `routeChangeset`).
+- Gate passes → delete GP-3 fallback in `browser-wiki-worker.ts`.
+- Protocol layer cleanup follows both vessel gates. See ROADMAP `## GP-3 Deprecation Completion Arc`.
 
-### Path K / F-arc — Save Path Hygiene
+### docUrl Non-Null Gate — Ea Federation Seam
+
+After protocol cleanup: write one test with `docUrl` as a real `AutomergeUrl`.
+In-process Repo pair. Worker calls `repo.find(docUrl).whenReady()`. Proves federation
+without a remote node. Write Worker Sovereignty Law §8 when this gate passes.
+
+### Path L / S7.4 — Admin Doc Ingress Trust Gate
+
+- Gate admin-doc WebSocket ingress on Keyhive `cap=infrastructure` proof.
+- Operator-owned vessels only; non-operator vessels rejected at the ingress.
+- Preserve command-tiddler coordination surface.
+- Negative smoke: non-infrastructure vessel cannot sync admin state.
+
+### Path K / F-arc — Save Path Hygiene (Deferred, not forgotten)
 
 - `$:/state/*` → projection layer, not durable canon/draft.
 - `Draft of *` → per-wiki draft bag.
-- 300–500ms debounce in `IslandAdaptor.saveTiddler` (was MemeSyncAdaptor — renamed).
-- Idle auto-truncate for noisy projection state.
+- 300–500ms debounce in `IslandAdaptor.saveTiddler` — landed for rapid writes;
+  projection auto-truncate and draft routing remain open.
 - Single parser/split law across disk sync, CRDT inbound, TW5 UX save, disk export.
-
-### Path L / S7.4 — Admin Doc Trust Gate
-
-- Gate admin-doc WebSocket ingress on Keyhive `cap=infrastructure` proof.
-- Operator-owned devices only; room peers rejected.
-- Preserve command-tiddler coordination surface.
-- Add positive + negative smokes.
-
-### Path G.SharktoothSigil — Remaining Sigil Vocabulary
-
-48 TOML `[[sigils]]` blocks remain in `memetic-wikitext.tid`. Each migrates
-to a SharktoothSigil tiddler (`lar-*` fields + `\widget` wikitext body). When
-all migrate, the TOML shrinks to families-only and the grammar monolith dissolves.
-
-Migration order by operator impact (see ROADMAP for talk-story per category):
-1. Block-container sigils with `close_pattern` (wehe, meme, hui, heihei, wai, huli, puka)
-2. Scope/binding sigils (\let, \var, \const, waiho)
-3. Concurrency sigils (\sync, \race, \rush)
-4. OODA-HA narrative sigils (lele, papalohe, pae) — Path G.rest renamed into this arc
-5. Control/conditional sigils (\if, \else, \elif, \for) — wikitext \procedure bodies
-6. Pragma/declaration sigils (\procedure, \define, \widget, \type) — TW5 shadow forms
-7. Remaining edge/data/device sigils (kumu, \widget, toml, etc.)
-
-`mode=` aligns across all: live = current rendering posture, shadow = frozen/projection.
-Any sigil with a shadow template variant gets `aka`-style behavior automatically.
-
-### Path R — Verify Before Extending
-
-Inspect `node-vm-manager.ts`, `lar-wiki-worker.ts`, and tests before coding:
-- Does the Worker apply real Automerge changesets locally?
-- Does `routeChangeset()` derive added/deleted URI sets from real changes?
-- Does `ReactionEngine.onChangeset()` run after TW5 state updates in Worker?
-- Do tests cover mount, route, event-forward, unmount, snapshot capture?
 
 ## Architecture Laws To Preserve
 

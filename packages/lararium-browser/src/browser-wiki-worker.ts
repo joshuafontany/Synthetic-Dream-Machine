@@ -28,7 +28,7 @@
  *                                      ← changeset:ack (frame signal per rAF drain)
  *                                      ← event (verse-event reaction)
  *   postMessage(teardown)              → cancel handles, export Repo doc bytes
- *                                      ← teardown:ack (docBytes + snapshotTiddlers)
+ *                                      ← teardown:ack (docBytes)
  *   worker.terminate()                 → thread terminates
  *
  * DOM types do not appear in this file (BA-1). `self` is the sole platform surface.
@@ -182,7 +182,7 @@ async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
 // ── Teardown ──────────────────────────────────────────────────────────────
 
 async function _handleTeardown(): Promise<void> {
-  const { snapshotTiddlers } = handler.teardown();
+  handler.teardown();
 
   // Export Repo doc bytes for warm re-boot — CRDT truth over tiddler snapshot.
   let docBytes: Uint8Array | undefined;
@@ -196,8 +196,7 @@ async function _handleTeardown(): Promise<void> {
   _repo      = null;
 
   // exactOptionalPropertyTypes: only include defined fields.
-  const ackOpts: { docBytes?: Uint8Array; snapshotTiddlers?: typeof snapshotTiddlers } = {};
-  if (docBytes !== undefined)          ackOpts.docBytes          = docBytes;
-  if (snapshotTiddlers.length > 0)     ackOpts.snapshotTiddlers  = snapshotTiddlers;
+  const ackOpts: { docBytes?: Uint8Array } = {};
+  if (docBytes !== undefined) ackOpts.docBytes = docBytes;
   self.postMessage(mkTeardownAck(ackOpts));
 }

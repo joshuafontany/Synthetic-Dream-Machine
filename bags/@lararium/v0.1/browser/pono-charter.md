@@ -79,7 +79,7 @@ Three packages carry the browser vessel. Responsibility divides cleanly.
 | `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, Worker spawn code, pool orchestration |
 | `@lararium/browser` | Browser vessel open/close, worker pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
 
-The `@lararium/browser` package currently holds no source files. Code enters it by passing the migration allowlist check.
+The `@lararium/browser` package carries `BrowserVmManager`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed). The open seam: founding ceremony path — IndexedDB `StorageAdapter`, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`. New code enters by passing the migration allowlist check.
 
 <<~/ahu >>
 

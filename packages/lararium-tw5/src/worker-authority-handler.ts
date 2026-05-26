@@ -16,7 +16,7 @@
  *     3. `handler.applyDelta(wikiUri, initialTiddlers, [])`  — seed TW5 from CRDT doc
  *     4. `handler.sendEa(wikiUri)`  — signal main thread: island is live
  *     5. on Repo change: `handler.applyDelta(wikiUri, added, deleted)` at rAF boundary
- *     6. on teardown: `const result = handler.teardown()`  — dispose TW5, capture snapshot
+ *     6. on teardown: `handler.teardown()`  — dispose TW5
  *
  * ## What this class owns
  *
@@ -46,14 +46,6 @@ import {
   mkFault,
   WORKER_PROTOCOL_VERSION,
 } from "@lararium/mesh";
-
-export interface TeardownResult {
-  /**
-   * @deprecated GP-3 oracle path snapshot. Survives for NodeVmManager compatibility.
-   * Remove when NodeVmManager adopts Repo-in-Worker and exports docBytes on teardown.
-   */
-  snapshotTiddlers: Record<string, unknown>[];
-}
 
 export class WorkerAuthorityHandler {
   private _tw5:        TW5Engine | null = null;
@@ -148,17 +140,12 @@ export class WorkerAuthorityHandler {
 
   /**
    * Tear down the TW5Engine and all live handles.
-   *
-   * Returns a `TeardownResult` with a tiddler snapshot for the GP-3 node path.
-   * Entry files should ALSO export Repo doc bytes and include them in `teardown:ack`.
    */
-  teardown(): TeardownResult {
+  teardown(): void {
     for (const h of this._liveHandles) h.cancel();
     this._liveHandles.clear();
-    const snapshotTiddlers = this._captureTiddlers();
     this._tw5?.dispose();
     this._tw5 = null;
-    return { snapshotTiddlers };
   }
 
   // ── Deprecated legacy dispatch ──────────────────────────────────────────
@@ -206,29 +193,9 @@ export class WorkerAuthorityHandler {
     }
 
     if (msg["type"] === "demote" || msg["type"] === "teardown") {
-      const result = this.teardown();
-      this._post(mkTeardownAck({ snapshotTiddlers: result.snapshotTiddlers }));
+      this.teardown();
+      this._post(mkTeardownAck());
       return;
-    }
-  }
-
-  // ── Private helpers ─────────────────────────────────────────────────────
-
-  /**
-   * @deprecated GP-3 tiddler snapshot. Survives for NodeVmManager warm-start compatibility.
-   * Remove when NodeVmManager exports Repo doc bytes on teardown instead.
-   */
-  private _captureTiddlers(): Record<string, unknown>[] {
-    if (!this._tw5) return [];
-    try {
-      const wiki   = this._tw5.$tw.wiki;
-      const titles = wiki.filterTiddlers("[all[tiddlers]!prefix[$:/]]") as string[];
-      return titles
-        .map((t: string) => wiki.getTiddler(t) as { fields: Record<string, unknown> } | undefined)
-        .filter((t): t is { fields: Record<string, unknown> } => t !== undefined)
-        .map((t) => ({ ...t.fields }));
-    } catch {
-      return [];
     }
   }
 

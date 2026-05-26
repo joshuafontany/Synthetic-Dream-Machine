@@ -20,9 +20,6 @@ import {
   WORKER_PROTOCOL_VERSION,
   mkTeardown,
   mkManifest,
-  mkChangeset,
-  type WorkerMsg_Changeset,
-  type WorkerMsg_ChangesetAck,
   type WorkerMsg_TeardownAck,
   type WorkerMsg_Ea,
   type WorkerMsg_Event,
@@ -100,12 +97,7 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(isMainToWorkerMsg(42)).toBe(false);
   });
 
-  test("all four MainToWorker types pass isMainToWorkerMsg", () => {
-    const changeset: WorkerMsg_Changeset = mkChangeset("lar:///test",
-      [{ title: "lar:///test/tiddler", text: "hello" }],
-      [],
-    );
-    expect(isMainToWorkerMsg(changeset)).toBe(true);
+  test("all three MainToWorker types pass isMainToWorkerMsg", () => {
     const { port2: _p } = new MessageChannel();
     expect(isMainToWorkerMsg(mkManifest("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
     _p.close();
@@ -126,23 +118,6 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(isWorkerToMainMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "changeset:ack", wikiUri: "lar:///test", batch_id: "x" })).toBe(true);
     expect(isWorkerToMainMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
-  });
-});
-
-// ── GP-3: tiddler-level delta shape (unit) ────────────────────────────────
-
-describe("GP-3 — tiddler-level delta shape", () => {
-  test("WorkerMsg_Changeset with added/deleted arrays passes isMainToWorkerMsg", () => {
-    const msg = mkChangeset("lar:///ha.ka.ba/wiki",
-      [{ title: "lar:///ha.ka.ba/wiki/page", text: "hello" }],
-      ["lar:///ha.ka.ba/wiki/stale"],
-    );
-    expect(isMainToWorkerMsg(msg)).toBe(true);
-  });
-
-  test("changeset with empty added/deleted arrays is valid", () => {
-    const msg = mkChangeset("lar:///ha.ka.ba/wiki", [], []);
-    expect(isMainToWorkerMsg(msg)).toBe(true);
   });
 });
 
@@ -210,31 +185,6 @@ describe("GP-5 — teardown handshake (integration)", () => {
     const ack = msgs.find((m) => (m as WorkerMsg_Ea).type === "ea") as WorkerMsg_Ea | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
-    expect(isWorkerToMainMsg(ack)).toBe(true);
-  });
-
-  test("GP-3: tiddler-level changeset crosses boundary; fixture echoes addedCount/deletedCount", async () => {
-    worker = spawnFixture();
-    const wikiUri = "lar:///ha.ka.ba/test-wiki";
-    const cs = mkChangeset(wikiUri,
-      [{ title: `${wikiUri}/a` }, { title: `${wikiUri}/b` }],
-      [`${wikiUri}/old`],
-    );
-    worker.postMessage(cs);
-
-    const msgs = await collectUntil(
-      worker,
-      (m) => (m as { type: string }[]).some((x) => x.type === "changeset:ack"),
-    );
-    const echo = msgs.find((m) => (m as { type: string }).type === "event") as WorkerMsg_Event | undefined;
-    const ack  = msgs.find((m) => (m as { type: string }).type === "changeset:ack") as WorkerMsg_ChangesetAck | undefined;
-
-    expect(echo).toBeDefined();
-    expect(echo?.listenable).toBe("echo");
-    expect(echo?.payload.addedCount).toBe(2);
-    expect(echo?.payload.deletedCount).toBe(1);
-    // ACK-gate: batch_id echoed back — main thread can release the queue.
-    expect(ack?.batch_id).toBe(cs.batch_id);
     expect(isWorkerToMainMsg(ack)).toBe(true);
   });
 

@@ -168,9 +168,8 @@ describe("NodeVmManager — Worker lifecycle", () => {
     expect(manager.tier(WIKI_ID)).toBe("cold");
     const snap = manager.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
-    // Repo-in-Worker path: snapshot carries docBytes (if Worker exports them) or empty tiddlers.
-    // The vm-manager-echo fixture returns no docBytes — tiddlers array is empty but snapshot exists.
-    expect(Array.isArray(snap!.tiddlers)).toBe(true);
+    // Repo-in-Worker path: snapshot carries docBytes when exported; fixture sends heads-only snapshot.
+    expect(Array.isArray(snap!.heads)).toBe(true);
   });
 
   test("onWorkerEvent callback fires for events from the Worker", async () => {

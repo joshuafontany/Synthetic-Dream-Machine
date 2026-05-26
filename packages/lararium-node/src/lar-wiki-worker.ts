@@ -25,7 +25,7 @@
  *   [CRDT sync via syncPort]            → Repo change → accumulator
  *                                       ← changeset:ack (drain tick signal)
  *   postMessage(teardown)               → cancel handles, export Repo doc bytes
- *                                       ← teardown:ack (docBytes + snapshotTiddlers)
+ *                                       ← teardown:ack (docBytes)
  *   worker.terminate()                  → thread terminates
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-wiki-worker
@@ -188,7 +188,7 @@ async function _handleManifest(msg: WorkerMsg_Manifest & { syncPort?: MessagePor
 
 async function _handleTeardown(): Promise<void> {
   _stopDrainLoop();
-  const { snapshotTiddlers } = handler.teardown();
+  handler.teardown();
 
   let docBytes: Uint8Array | undefined;
   try {
@@ -200,8 +200,7 @@ async function _handleTeardown(): Promise<void> {
   _docHandle = null;
   _repo      = null;
 
-  const ackOpts: { docBytes?: Uint8Array; snapshotTiddlers?: typeof snapshotTiddlers } = {};
-  if (docBytes !== undefined)       ackOpts.docBytes         = docBytes;
-  if (snapshotTiddlers.length > 0)  ackOpts.snapshotTiddlers = snapshotTiddlers;
+  const ackOpts: { docBytes?: Uint8Array } = {};
+  if (docBytes !== undefined) ackOpts.docBytes = docBytes;
   _port.postMessage(mkTeardownAck(ackOpts));
 }
