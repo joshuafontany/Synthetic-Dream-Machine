@@ -14,11 +14,11 @@
   "types": "./dist/src/index.d.ts",
   "scripts": {
     "prebuild": "node ../../tools/clean-output.mjs dist",
-    "build":     "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
     "@keyhive/keyhive": "0.0.0-alpha.56c",
-    "@lararium/mesh":  "workspace:*"
+    "@lararium/mesh": "workspace:*"
   }
 }

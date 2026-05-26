@@ -5,8 +5,8 @@
  * (the admin VM's composite). Each Keyhive event becomes one tiddler:
  *
  *   title:    lar:///ha.ka.ba/@lararium/@admin/cap/<eventHash>
- *   tag:      $:/tags/CapEvent (sub-tags by variant: .../Prekey, .../Cgka,
- *             .../Delegation, .../Revocation)
+ *   tag:      lar:///ha.ka.ba/tags/cap-event (sub-tags by variant: .../prekey, .../cgka,
+ *             .../delegation, .../revocation)
  *   fields:   variant, hash, bytes-len, is-delegated, is-revoked
  *   text:     base64-encoded `event.toBytes()` payload
  *
@@ -24,20 +24,19 @@
 
 import {
   ADMIN_BAG_ID, type CompositeStore,
+  CAP_EVENT_TAG, CAP_EVENT_PREKEY_TAG, CAP_EVENT_CGKA_TAG,
+  CAP_EVENT_DELEGATION_TAG, CAP_EVENT_REVOCATION_TAG,
 } from "@lararium/mesh";
 import { type ChangeOrigin, type LarTiddlerRecord, toLarTiddlerRecord } from "@lararium/mesh";
 import type { EventStore, EventRecord } from "./event-store.js";
 
-const CAP_EVENT_TAG_BASE = "$:/tags/CapEvent";
-
-/** Map a Keyhive event variant to its sub-tag — empty when the variant is
- *  unknown to us; the base tag still applies for filter-all queries. */
+/** Map a Keyhive event variant to its lar sub-tag URI. */
 function subTagFor(variant: string): string | null {
   switch (variant) {
-    case "PREKEY_ROTATED":  return `${CAP_EVENT_TAG_BASE}/Prekey`;
-    case "CGKA_OPERATION":  return `${CAP_EVENT_TAG_BASE}/Cgka`;
-    case "DELEGATED":       return `${CAP_EVENT_TAG_BASE}/Delegation`;
-    case "REVOKED":         return `${CAP_EVENT_TAG_BASE}/Revocation`;
+    case "PREKEY_ROTATED":  return CAP_EVENT_PREKEY_TAG;
+    case "CGKA_OPERATION":  return CAP_EVENT_CGKA_TAG;
+    case "DELEGATED":       return CAP_EVENT_DELEGATION_TAG;
+    case "REVOKED":         return CAP_EVENT_REVOCATION_TAG;
     default:                return null;
   }
 }
@@ -84,7 +83,7 @@ export class AdminEventStore implements EventStore {
     if (existing && existing.meta?.deleted !== true) return;
 
     const subTag = subTagFor(rec.variant);
-    const tags   = subTag ? `${CAP_EVENT_TAG_BASE} ${subTag}` : CAP_EVENT_TAG_BASE;
+    const tags   = subTag ? `${CAP_EVENT_TAG} ${subTag}` : CAP_EVENT_TAG;
 
     const record: LarTiddlerRecord = toLarTiddlerRecord(
       {

@@ -43,6 +43,7 @@ import {
   LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, wikiLarUri, wikiDraftLarUri, BAG_IDS, recipeUri,
+  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   VmPool, ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
 import type { LarTiddlerRecord } from "@lararium/mesh";
@@ -60,7 +61,7 @@ import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers,
 } from "./genesis-artifact.js";
-import { seedLaresDoc, createSessionEventLog } from "./social-seed.js";
+import { seedLaresDoc, createSessionEventLog } from "@lararium/mesh";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { NodeVmManager }                  from "./node-vm-manager.js";
@@ -478,7 +479,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // identity from two surfaces.
   //
   // EventStore persists every Keyhive event as a tiddler in the admin
-  // Automerge doc (lar:///...@admin/cap/<sha256>, tagged $:/tags/CapEvent).
+  // Automerge doc (lar:///...@admin/cap/<sha256>, tagged lar:///ha.ka.ba/tags/cap-event).
   // Daemon restart re-hydrates Keyhive state from these tiddlers via
   // ingestEventsBytes — the operator's identity and delegations survive
   // across reboots.
@@ -500,12 +501,63 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     console.log(`[lararium] keyhive: hydrated ${hydrated.ingested} cap events from admin doc`);
   }
   const keyhiveDid         = await keyhive.whoami();
-  // Sanity: the bridge derives the same identity from both surfaces.
+  // Gate A: Keyhive and disk keypair MUST derive the same identity.
+  // Drift here indicates a corrupted event store or mismatched seed file — HALT.
   if (!keyhiveDid.endsWith(operatorIdentity.verifyingKey)) {
-    console.warn(
-      `[lararium] keyhive identity drift: whoami=${keyhiveDid} verifyingKey=${operatorIdentity.verifyingKey}`,
+    throw new Error(
+      `[lararium] identity drift — Keyhive whoami does not match disk keypair. ` +
+      `whoami=${keyhiveDid.slice(0, 18)}… verifyingKey=${operatorIdentity.verifyingKey.slice(0, 16)}… ` +
+      `Run \`lares init --force\` to re-establish operator identity.`,
     );
   }
+  // ── DreamNet boot gates ────────────────────────────────────────────────
+  // Gate B: this vessel's Individual MUST belong to the operator's PersonGroup.
+  //   Proves: this device holds a key that was admitted to this operator's fleet.
+  // Gate C: the operator's PersonGroup MUST belong to the Nexus MeshCabal.
+  //   Proves: this operator holds DreamNet Nexus membership.
+  //
+  // Both gates read sentinel oracle tiddlers written by `lares init`.
+  // If tiddlers are absent, the node has never been initialized — HALT.
+  // If verification fails, the node's identity diverged — HALT.
+  //
+  // NOTE: sentinel Documents are used (not Keyhive Groups) because GroupId
+  // lacks a public constructor in alpha.56c — no round-trip from stored hex.
+  // Migrate to Group when Keyhive API exposes GroupId serialization.
+
+  const adminDoc = adminVm.adminHandle.doc();
+
+  const personGroupDocIdHex   = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_DOC_ID_TIDDLER])   ?? null;
+  const personGroupAgentIdHex = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_AGENT_ID_TIDDLER]) ?? null;
+  const meshCabalDocIdHex     = tiddlerText(adminDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
+
+  if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
+    throw new Error(
+      `[lararium] DreamNet sentinel oracle tiddlers missing — ` +
+      `this node may not have completed initialization. Run \`lares init\`.`,
+    );
+  }
+
+  // Gate B — vessel Individual membership in PersonGroup
+  const vesselIdentifierHex = keyhiveDid; // whoami = hex of IndividualId bytes (with 0x prefix)
+  const gateB = await keyhive.verifySentinelMembership(vesselIdentifierHex, personGroupDocIdHex);
+  if (!gateB.ok) {
+    throw new Error(
+      `[lararium] Gate B: this vessel (${keyhiveDid.slice(0, 18)}…) lacks PersonGroup membership. ` +
+      `${gateB.reason ?? ""} Run \`lares device-admit\` on an existing admitted vessel.`,
+    );
+  }
+  console.log(`[lararium] Gate B ✓ — vessel admitted to operator PersonGroup`);
+
+  // Gate C — PersonGroup membership in MeshCabal (Nexus adminCabal)
+  const gateC = await keyhive.verifySentinelMembership(personGroupAgentIdHex, meshCabalDocIdHex);
+  if (!gateC.ok) {
+    throw new Error(
+      `[lararium] Gate C: operator PersonGroup lacks Nexus MeshCabal membership. ` +
+      `${gateC.reason ?? ""} Run \`lares invite-receive\` with the founding operator's invitation payload.`,
+    );
+  }
+  console.log(`[lararium] Gate C ✓ — operator admitted to Nexus MeshCabal (DreamNet)`);
+
   // Register every writable bag the operator owns with Keyhive — operator
   // becomes implicit admin via Keyhive's generateDocument semantics. The
   // bagId namespace MUST match what dispatchers verify against (lar: URIs,
@@ -522,9 +574,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await keyhive.registerBag(activeWikiPlan.wikiBagId);         // active wiki canonical
   await keyhive.registerBag(activeWikiPlan.draftBagId);        // active wiki draft
 
-  // Sanity: confirm the operator can verify their own admin access. This
-  // closes the D.3 bridge end-to-end — bytes-on-disk → seed → Keyhive
-  // principal → registered bag → admin proof verifies.
+  // Smoke: confirm the operator's registerBag path wires correctly.
+  // Log-only — not a gate. The real sovereignty check ran at Gates B and C above.
   const selfVerify = await keyhive.verify({
     presenter: keyhiveDid,
     bagUrl:    ADMIN_BAG_ID,
@@ -532,7 +583,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   });
   console.log(
     `[lararium] keyhive: did=${keyhiveDid.slice(0, 18)}…  admin-bag registered  ` +
-    `self-admin=${selfVerify.ok}${selfVerify.ok ? "" : ` (${selfVerify.reason})`}`,
+    `self-admin=${selfVerify.ok}${selfVerify.ok ? "" : ` (smoke fail: ${selfVerify.reason})`}`,
   );
 
   // Now that keyhive exists, construct the dispatcher with it as verifier.

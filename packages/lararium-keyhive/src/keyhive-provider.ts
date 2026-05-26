@@ -211,6 +211,78 @@ export class KeyhiveProvider implements CapabilityProvider {
     return { ok: false, reason: `granted=${grantedStr}, required=${args.access}` };
   }
 
+  /**
+   * Create a sentinel Document used as a membership principal.
+   *
+   * NOTE: Keyhive's Group primitive is the semantically correct vehicle for
+   * membership cabals (Person-Group, Mesh adminCabal). However, GroupId has a
+   * private constructor in alpha.56c — no round-trip from stored bytes. We
+   * use Document here because DocumentId has a public constructor, enabling
+   * hex-in-tiddler persistence. Migrate to Group when the API exposes
+   * GroupId serialization or a getGroup(Identifier) path.
+   *
+   * Returns both the DocumentId hex (for bag-level accessForDoc checks) and
+   * the Document's agent Identifier hex (for adding this sentinel as a member
+   * of another sentinel via addMember).
+   */
+  async createSentinelDoc(sentinelUri: string): Promise<{ docIdHex: string; agentIdHex: string }> {
+    const cid = await changeIdForBag(sentinelUri);
+    const doc = await this.requireKh().generateDocument([], cid, []);
+    const docIdHex   = bytesToHex(doc.doc_id.toBytes());
+    const agentIdHex = bytesToHex(doc.id.toBytes());
+    return { docIdHex, agentIdHex };
+  }
+
+  /**
+   * Add an agent (by its Identifier hex) as an Admin member of a sentinel Document.
+   * Used during the founding ceremony to wire vessel Individual → PersonGroup
+   * and PersonGroup → MeshCabal chains.
+   */
+  async addSentinelMember(
+    memberIdentifierHex: string,
+    sentinelDocIdHex:    string,
+  ): Promise<void> {
+    const docId  = new KH.DocumentId(hexToBytes(sentinelDocIdHex));
+    const doc    = await this.requireKh().getDocument(docId);
+    if (!doc) throw new Error(`[keyhive] sentinel doc not found: ${sentinelDocIdHex.slice(0, 16)}…`);
+
+    const agentId = new KH.Identifier(hexToBytes(memberIdentifierHex));
+    const agent   = await this.requireKh().getAgent(agentId);
+    if (!agent) throw new Error(`[keyhive] agent not found for sentinel addMember: ${memberIdentifierHex.slice(0, 16)}…`);
+
+    const access  = KH.Access.tryFromString("admin");
+    if (!access) throw new Error("[keyhive] Access.tryFromString('admin') returned undefined");
+
+    await this.requireKh().addMember(agent, doc.toMembered(), access, []);
+  }
+
+  /**
+   * Verify that an agent (by Identifier hex) holds any access on a sentinel Document.
+   * Gate B: vesselIndividualHex vs personGroupDocIdHex
+   * Gate C: personGroupAgentIdHex vs meshCabalDocIdHex
+   *
+   * Returns VerifyResult shape for consistency with verify().
+   */
+  async verifySentinelMembership(
+    agentIdentifierHex: string,
+    sentinelDocIdHex:   string,
+  ): Promise<{ ok: boolean; reason?: string }> {
+    const docId      = new KH.DocumentId(hexToBytes(sentinelDocIdHex));
+    const identifier = new KH.Identifier(hexToBytes(agentIdentifierHex));
+    const access     = await this.requireKh().accessForDoc(identifier, docId);
+    if (!access) return { ok: false, reason: "no access granted in sentinel" };
+    return { ok: true };
+  }
+
+  /**
+   * Return the operator vessel's IndividualId as a hex Identifier string.
+   * Used during init to wire the founding vessel into the PersonGroup sentinel.
+   */
+  async vesselIdentifierHex(): Promise<string> {
+    const individual = await this.requireKh().individual;
+    return bytesToHex(individual.id.toBytes());
+  }
+
   async hydrateFromEventStore(): Promise<{ ingested: number }> {
     if (!this.eventStore) return { ingested: 0 };
     const records = await this.eventStore.list();

@@ -42,7 +42,6 @@
     "dev": "tsx src/index.ts"
   },
   "devDependencies": {
-    "tiddlywiki": "^5.4.0",
     "vitest": "^3.2.0",
     "tsx": "^4.19.0"
   },

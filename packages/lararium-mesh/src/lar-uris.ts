@@ -54,6 +54,12 @@ export const LARES_JOB_TAG = stableTagUri("lares-job");
 export const LARES_JOB_EVENT_TAG = stableTagUri("lares-job-event");
 export const LARES_PIN_TAG = stableTagUri("lares-pin");
 export const PROMOTION_RECEIPT_TAG = stableTagUri("lararium-promotion-receipt");
+/** Keyhive capability events persisted in the admin doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
+export const CAP_EVENT_TAG = stableTagUri("cap-event");
+export const CAP_EVENT_PREKEY_TAG     = stableTagUri("cap-event/prekey");
+export const CAP_EVENT_CGKA_TAG       = stableTagUri("cap-event/cgka");
+export const CAP_EVENT_DELEGATION_TAG = stableTagUri("cap-event/delegation");
+export const CAP_EVENT_REVOCATION_TAG = stableTagUri("cap-event/revocation");
 export const BOOT_SPLASH_ACTIVE_URI = stableLarUri("state/boot-splash/active");
 
 // ── Social plane ──────────────────────────────────────────────────────────
@@ -143,6 +149,27 @@ export type SessionsDoc = LarDoc;
 export function emptyIdentitiesDoc(): IdentitiesDoc { return emptyLarDoc(); }
 export function emptyCirclesDoc(): CirclesDoc       { return emptyLarDoc(); }
 export function emptySessionsDoc(): SessionsDoc     { return emptyLarDoc(); }
+
+// ── DreamNet identity sentinel URIs ──────────────────────────────────────
+// These URIs serve as ChangeId seeds for Keyhive sentinel Documents that carry
+// DreamNet membership chains. DocumentId uniqueness comes from Keyhive's internal
+// EphemeralSigner (CSPRNG) — the URI is a semantic label only.
+//
+// Two-level identity lattice:
+//   PersonGroup  — vessels belonging to one operator (Vessel Individual → PersonGroup)
+//   MeshCabal    — operators participating in one Nexus (PersonGroup → MeshCabal)
+
+/** Sentinel URI for a vessel's PersonGroup membership document. */
+export const PERSON_GROUP_SENTINEL_URI = stableLarUri("@operator/person-group");
+/** Sentinel URI for a Nexus's MeshCabal membership document. */
+export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
+
+/** Admin oracle tiddler: PersonGroup Document ID (hex). Used by boot Gate B. */
+export const PERSON_GROUP_DOC_ID_TIDDLER   = `${ADMIN_BAG_ID}/sentinel/person-group/doc-id`;
+/** Admin oracle tiddler: PersonGroup agent Identifier (hex). Used by boot Gate C. */
+export const PERSON_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/person-group/agent-id`;
+/** Admin oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
+export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-cabal/doc-id`;
 
 // ── Well-known bag slot IDs ────────────────────────────────────────────────
 // Six root docs (two planes) + in-memory leaves.

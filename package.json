@@ -31,6 +31,9 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "better-sqlite3"
-    ]
+    ],
+    "overrides": {
+      "@automerge/automerge-repo": "2.5.5"
+    }
   }
 }

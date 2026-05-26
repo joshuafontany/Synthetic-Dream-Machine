@@ -274,7 +274,7 @@ export class NodeVmManager {
       syncPort as unknown as globalThis.MessagePort,
       docUrl,
       null,
-      { pluginTiddlers },
+      pluginTiddlers ? { pluginTiddlers } : {},
     );
     await _sendAndAwait<WorkerMsg_Ea>(
       worker,

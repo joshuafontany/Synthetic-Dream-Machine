@@ -12,7 +12,7 @@
  *   git email absent:      {dataDir}/.operator-key.json
  *
  * Different developers on the same machine each get their own keypair.
- * The keypair is random Ed25519 — not derived from GitHub credentials.
+ * The keypair derives from a local CSPRNG — fully device-local, no external service.
  *
  * MUST NOT be placed inside any Automerge doc storage path — MUST NOT sync.
  * Mode 0o600 at write time; caller must ensure dataDir is not world-readable.
@@ -26,11 +26,11 @@ import { join } from "node:path";
 
 // ── Local operator identity hint ──────────────────────────────────────────
 // Fully local-first: reads git config only. No network calls, no server tokens.
-// Login slug derived from git email (email-prefix, lowercased, sanitized) for
+// Email slug derived from git email (email-prefix, lowercased, sanitized) for
 // per-developer key file naming on shared machines. DisplayName from git user.name.
 //
 // Causal-island law: operator identity derives from local keys — not from any
-// server-conferred session. GitHub enrichment was web2 smell; git config is local truth.
+// server-conferred session. Git config supplies local truth; no external registry.
 
 const exec = promisify(execFile);
 
@@ -59,14 +59,14 @@ interface PersistedKey {
   verifyingKey: string;
   /** Hex-encoded 32-byte Ed25519 private key seed. Local signing only. Never synced. */
   signingKey:   string;
-  /** GitHub login at key-generation time. Informational only — not the DID. */
-  githubLogin?: string;
+  /** Git email prefix at key-generation time. Informational only — drives key file naming. */
+  gitEmail?: string;
 }
 
 export interface OperatorIdentity {
   /** Hex-encoded 32-byte Ed25519 verifying key. */
   verifyingKey: string;
-  /** Display name from GitHub / local fallback. Enriches IdentityTiddler only. */
+  /** Display name from git config user.name. Enriches IdentityTiddler only. */
   displayName?: string;
 }
 
@@ -77,8 +77,8 @@ function keyFileName(login: string | null): string {
 /**
  * Generate or load the device Ed25519 operator keypair.
  *
- * Key file is named by GitHub login for local dev — different developers on the
- * same machine each hold separate keys. Falls back to a shared file when offline.
+ * Key file naming uses git email slug — different developers on the same machine
+ * each hold separate keys. Falls back to a shared file when git email is absent.
  *
  * Causal-islands alignment: keypair generation runs as a device-local operation that
  * MUST complete before any Automerge doc opens. The verifyingKey flows into the
@@ -106,7 +106,7 @@ export async function generateOrLoadOperatorKeypair(
 
     verifyingKey           = Buffer.from(pubJwk.x,  "base64url").toString("hex");
     const signingKey       = Buffer.from(privJwk.d, "base64url").toString("hex");
-    const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { githubLogin: hint.login } : {}) };
+    const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { gitEmail: hint.login } : {}) };
 
     writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
     chmodSync(keyFile, 0o600);
