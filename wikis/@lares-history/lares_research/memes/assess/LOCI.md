@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.assess.defines/assess/?confidence=CS:0.85&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.assess.defines/assess/?confidence=CS~17&p=0.5 >>
 
 # Grammar: ○ Assess
 
@@ -19,12 +19,12 @@ scale-range: [action, session]
 trigger: always — grammar primitive
 invariant: true
 dependencies: [observe, orient, decide, act]
-confidence: CS:0.85
+confidence:CS~17
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.85]` — grounded in Lares aftermath practice, FFZ scale-shift work, and crystal discipline
+> **Register:** `[CS~17]` — grounded in Lares aftermath practice, FFZ scale-shift work, and crystal discipline
 > **Glyph:** `○`
 > **Season:** Fifth of five
 > **Question:** What did the cycle produce, what remains, and where does the loop go next?
@@ -138,7 +138,7 @@ If the span reads like cheerleading, Assess has thinned out. If the span quietly
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.85]` | This file — Assess grammar definition |
+| `LOCI.md` | `[CS~17]` | This file — Assess grammar definition |
 
 *Future loci in this tree will land here.*
 

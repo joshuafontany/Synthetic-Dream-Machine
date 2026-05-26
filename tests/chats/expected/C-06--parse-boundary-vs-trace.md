@@ -14,11 +14,11 @@ notes: >
 
 lares@Enyalios:~/Synthetic-Dream-Machine$ lares --parse p0.0 "recheck"
 
-Segments: 3 | Entry: [S:0.60] 🏛️ ◎ @r //input.tight.parses | Exit: [S:0.62] 🏛️ ◎ @r //input.fine.holds | ΔR +0.02 | Mode: 🏛️→🏛️ | Phase: ◎→◎ | Scale: @r | p0.0
-re- → [S:0.60] 🏛️ ◎ @r //prefix.reopens.parse
-check → [S:0.62] 🏛️ ◎ @r //root.audit.holds
+Segments: 3 | Entry: [S~12] 🏛️ ◎ @r //input.tight.parses | Exit: [S~12] 🏛️ ◎ @r //input.fine.holds | ΔR +0.02 | Mode: 🏛️→🏛️ | Phase: ◎→◎ | Scale: @r | p0.0
+re- → [S~12] 🏛️ ◎ @r //prefix.reopens.parse
+check → [S~12] 🏛️ ◎ @r //root.audit.holds
 
-[S:0.60] 🏛️ ◎ @r //question.audit.holds | p0.5
-[S:0.72] 🏛️ ◇ @r //answer.direct.clarifies | p0.5
+[S~12] 🏛️ ◎ @r //question.audit.holds | p0.5
+[S~14] 🏛️ ◇ @r //answer.direct.clarifies | p0.5
 
 Yes. The parse layer marks decomposition boundaries. →■ The governed reply traces only runtime events, not morpheme borders. →○

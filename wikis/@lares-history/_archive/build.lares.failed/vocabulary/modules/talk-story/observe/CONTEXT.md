@@ -41,8 +41,8 @@ Every sprint runs two tracks. Talk Story serves both.
 
 | Track | Confidence | Role |
 |---|---|---|
-| Technical | `[C:0.95]` | Surface spec gaps, unresolved design questions, stale content |
-| Narrative | `[C:0.95]` | Connect technical decisions to myth beats; name the story of the work |
+| Technical | `[C~19]` | Surface spec gaps, unresolved design questions, stale content |
+| Narrative | `[C~19]` | Connect technical decisions to myth beats; name the story of the work |
 
 A sprint is not closed until both tracks are updated.
 

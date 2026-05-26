@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.transclusion.defines/transclusion/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Transclusion
 
@@ -21,17 +21,17 @@ scale-range: [action, project]
 trigger: always — grammar primitive
 invariant: true
 dependencies: [kahua, observe, orient, decide, act, assess]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.80]` — grounded in Nelson, TiddlyWiki, and the live Lares marker ontology
+> **Register:** `[CS~16]` — grounded in Nelson, TiddlyWiki, and the live Lares marker ontology
 > **Question:** How does one locus hold canonical content while many other loci can still use it?
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.85#loop-position -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~17#loop-position -->
 
 ## Loop Position
 
@@ -67,7 +67,7 @@ Transclusion should not:
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.85#prior-art -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~17#prior-art -->
 
 ## Prior Art
 
@@ -102,7 +102,7 @@ summon logic.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.85#handoff -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~17#handoff -->
 
 ## Handoff
 
@@ -127,7 +127,7 @@ clean transclusion surface.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.85#surface -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~17#surface -->
 
 ## Composable Surface
 
@@ -156,7 +156,7 @@ reference when relation matters more than inclusion.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.80#conventions -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~16#conventions -->
 
 ## Conventions
 
@@ -179,7 +179,7 @@ as a transclusion handle inside the active context window.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.80#procedures -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~16#procedures -->
 
 ## Procedures
 
@@ -196,7 +196,7 @@ kind of prose can inform a reader yet still fail as a composable locus.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.80#reading-test -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~16#reading-test -->
 
 ## Reading Test
 
@@ -230,7 +230,7 @@ needs work.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — Transclusion grammar definition |
+| `LOCI.md` | `[CS~16]` | This file — Transclusion grammar definition |
 
 *Future loci in this tree will land here.*
 
@@ -239,7 +239,7 @@ needs work.
 
 ---
 
-<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS:0.80#ooda-eprime-operationalization -->
+<!-- ahu lar:///grammar.transclusion.defines/transclusion/?confidence=CS~16#ooda-eprime-operationalization -->
 
 ## OODA-HA & E-Prime Operationalization
 

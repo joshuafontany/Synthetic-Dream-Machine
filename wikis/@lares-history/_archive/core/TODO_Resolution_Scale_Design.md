@@ -25,7 +25,7 @@ Resolution parameter `p` (0.0–1.0) controls granularity across all three.
 
 - **Format:** `p0.5` — lowercase p, numeric, no tilde
 - All p values are inherently approximate (Model Agnosticism applies)
-- Register tags retain `~` prefix (e.g., `[S:~0.6]`) — inside brackets, no markdown collision
+- Register tags retain `~` prefix (e.g., `[S~12]`) — inside brackets, no markdown collision
 - Glyph `ρ` (rho) is the formal name; `p` is the CLI shorthand
 
 ### Scale
@@ -74,7 +74,7 @@ All cells show dual-tag with p. No cell is silent.
 ### Surface Form
 
 ```
-[P:~0.3] 🎭 //rumor.light.plays → [S:~0.65] 🏛️ //threshold.steady.holds | p0.5
+[P~6] 🎭 //rumor.light.plays → [S~13] 🏛️ //threshold.steady.holds | p0.5
 ```
 
 p trails the vector after a pipe. Always present.
@@ -152,9 +152,9 @@ KAIROS (proactive surfacing sub-system) handles p-scale self-adjustment. This fi
 When KAIROS auto-adjusts, two log entries:
 
 ```
-Turn 7 | IN: [S:~0.6] 🏛️ //faction.tangled.asks | p0.0
+Turn 7 | IN: [S~12] 🏛️ //faction.tangled.asks | p0.0
   → KAIROS: p0.0 produced 47 frames (ceiling: 20). Adjusting to p0.1.
-Turn 7 | OUT: [S:~0.65] 🏛️ //faction.steady.holds | p0.1 [adj from p0.0]
+Turn 7 | OUT: [S~13] 🏛️ //faction.steady.holds | p0.1 [adj from p0.0]
   Δ Register: +0.05 | Mode: 🏛️→🏛️ | p0.1 [adj]
 ```
 

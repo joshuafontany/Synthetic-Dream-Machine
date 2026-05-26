@@ -9826,7 +9826,7 @@ otherwise unharmed.
 
 ### RC: Reverse Spell Synthesized Notes
 
-- Extraction note: Synthesized standalone witness blocks for BECMI reverse spells with no standalone description in any source. Each block is assembled from reverse-spell prose embedded in primary spell descriptions across Companion, Expert, Master, and Rules Cyclopedia staging. Confidence ~0.92. These blocks serve as the canonical osr: source for the corresponding Power Card imports.
+- Extraction note: Synthesized standalone witness blocks for BECMI reverse spells with no standalone description in any source. Each block is assembled from reverse-spell prose embedded in primary spell descriptions across Companion, Expert, Master, and Rules Cyclopedia staging. Confidence ~182. These blocks serve as the canonical osr: source for the corresponding Power Card imports.
 
 ```text
 Finger of Death

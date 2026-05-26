@@ -2,7 +2,7 @@
 
 > Backlog prefix: `REG-*`
 > Sprint target: S3
-> Status: `[SP:0.45]` 🏛️ — scoped; REGISTRY_CONTRACT.md in `sprints/00000/`; no registry files written yet
+> Status: `[SP~9]` 🏛️ — scoped; REGISTRY_CONTRACT.md in `sprints/00000/`; no registry files written yet
 > Narrative beat: *The Consecration of the Lararium. The first `lar:` URI is formally assigned.*
 
 ---
@@ -21,7 +21,7 @@ The governance infrastructure that makes `lar:` URIs stable, resolvable, and aud
 
 ## Key Source
 
-[`lares/scrum/sprints/00000/REGISTRY_CONTRACT.md`](../sprints/00000/REGISTRY_CONTRACT.md) — registry contract spec, `[CS:0.82]`.
+[`lares/scrum/sprints/00000/REGISTRY_CONTRACT.md`](../sprints/00000/REGISTRY_CONTRACT.md) — registry contract spec, `[CS~16]`.
 
 Open question R5: when is `semantic_sha256` ready to promote from deferred to required?
 

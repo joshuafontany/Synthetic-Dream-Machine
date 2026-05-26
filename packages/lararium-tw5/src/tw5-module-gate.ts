@@ -1,9 +1,12 @@
+import { parsePonoLevel } from "@lararium/mesh";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 
-const MODULE_MANA_THRESHOLD = 0.90;
-const MODULE_MANAO_THRESHOLD = 0.85;
-const MODULE_MANAOIO_THRESHOLD = 0.85;
-const MODULE_CONFIDENCE_THRESHOLD = 0.90;
+// Preserves the old 0.00–1.00 gate pressure as SDM+ 0–20 Levels:
+// 0.90 → 18, 0.85 → 17.
+const MODULE_MANA_THRESHOLD = 18;
+const MODULE_MANAO_THRESHOLD = 17;
+const MODULE_MANAOIO_THRESHOLD = 17;
+const MODULE_CONFIDENCE_THRESHOLD = 18;
 const MODULE_INTERFACE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module";
 const MODULE_AGGREGATE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules";
 
@@ -18,11 +21,15 @@ export async function bootTrustedModules(tw: TW5Instance): Promise<void> {
       if (!t) continue;
       const f = t.fields as Record<string, string>;
 
-      const mana = parseFloat(f["mana"] ?? "0");
-      const manao = parseFloat(f["manao"] ?? "0");
-      const manaoio = parseFloat(f["manaoio"] ?? "0");
-      const confidence = parseFloat(f["confidence"] ?? "0");
+      const mana       = parsePonoLevel(f["mana"]);
+      const manao      = parsePonoLevel(f["manao"]);
+      const manaoio    = parsePonoLevel(f["manaoio"]);
+      const confidence = parsePonoLevel(f["confidence"]);
       if (
+        mana === null ||
+        manao === null ||
+        manaoio === null ||
+        confidence === null ||
         mana < MODULE_MANA_THRESHOLD ||
         manao < MODULE_MANAO_THRESHOLD ||
         manaoio < MODULE_MANAOIO_THRESHOLD ||

@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///todo.grammar.pass.plans/ooda-eprime-2026-04-10/?confidence=S:0.65&p=0.5 -->
+<!-- ∞ → lar:///todo.grammar.pass.plans/ooda-eprime-2026-04-10/?confidence=S~13&p=0.5 -->
 
 # Lares Grammar OODA-E-Prime Pass Plan
 
-Status: `[S:0.65]`  
+Status: `[S~13]`  
 Date: 2026-04-10  
 Scope: all `lares/grammar/**/LOCI.md` files
 

@@ -1,5 +1,5 @@
-<!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S:0.65&p=0.5#O0.O0.A1.A21.A2 → ∞ -->
-⚡∞ | mode:dev-story | p0.5 | stances:++?+- | register:[S:0.65] | build:DRAFT
+<!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S~13&p=0.5#O0.O0.A1.A21.A2 → ∞ -->
+⚡∞ | mode:dev-story | p0.5 | stances:++?+- | register:[S~13] | build:DRAFT
 
 # The Lares Protocols — Dev Story
 
@@ -16,7 +16,7 @@
 | Final chronometer | `O0.O0.A1.A21.A2` |
 | Primary artifact | `The_Lares_Protocols.md` |
 | Documents produced | `The_Lares_Protocols.md`, `The_Lares_Protocols_Dev_Story.md`, `SKILL_PLATFORMS_v2.md` (superseded, content consumed here) |
-| Register | `[S:0.65]` — synthesis, operator co-authored |
+| Register | `[S~13]` — synthesis, operator co-authored |
 
 ---
 
@@ -54,37 +54,37 @@ detail for future reference.*
 
 ### Claude Code — CLAUDE.md / `.claude/` Loading
 
-**Loading mechanism** `[C:0.95]`: CLAUDE.md and CLAUDE.local.md files in
+**Loading mechanism** `[C~19]`: CLAUDE.md and CLAUDE.local.md files in
 the directory hierarchy above the working directory load in full at launch.
 Files in subdirectories load on demand when Claude reads files in those
 directories. Both `./CLAUDE.md` and `./.claude/CLAUDE.md` work as project-
 level locations.
 
-**Token budget** `[C:0.95]`: Target under 200 lines per CLAUDE.md file.
+**Token budget** `[C~19]`: Target under 200 lines per CLAUDE.md file.
 Practical budget ~1,500–2,000 tokens for 200 lines. System overhead
 (tools, MCP schemas) consumes 25–35K tokens before conversation.
 200K standard context, 1M with Opus 4.6 on Max/Team/Enterprise.
 
-**`@import` syntax** `[C:0.95]`: `@path/to/file` includes supported.
+**`@import` syntax** `[C~19]`: `@path/to/file` includes supported.
 Recursive depth max 5 hops. Resolve relative to containing file.
 
-**Stacking** `[C:0.95]`: CLAUDE.md and AGENTS.md both load when present.
+**Stacking** `[C~19]`: CLAUDE.md and AGENTS.md both load when present.
 AGENTS.md supports the cross-agent standard.
 
-**Rules directory** `[C:0.95]`: `.claude/rules/` files with `paths:`
+**Rules directory** `[C~19]`: `.claude/rules/` files with `paths:`
 YAML frontmatter load on-demand only. Files WITHOUT `paths:` load
 always-on alongside CLAUDE.md. (In our architecture: ALL rule files
 carry `paths:` to prevent duplication with `lares/AGENTS.md`.)
 
 ### Claude Code — Subagent Inheritance
 
-**What subagents inherit** `[C:0.95]`:
+**What subagents inherit** `[C~19]`:
 1. The prompt string from the parent (only parent→child channel)
 2. The system prompt from its agent.md file
 3. Environment details (working directory, platform)
 4. Skills listed in its `skills` frontmatter (injected into context)
 
-**What subagents do NOT inherit** `[C:0.95]`:
+**What subagents do NOT inherit** `[C~19]`:
 - Parent conversation history
 - Prior tool calls or their results
 - Other subagents' outputs
@@ -95,55 +95,55 @@ working directory — these load based on directory, not parent context.
 
 **Subagents cannot spawn subagents.** Swarm stays one level deep.
 
-**Permissions** `[C:0.95]`: Inherited from parent. Permission mode can be
+**Permissions** `[C~19]`: Inherited from parent. Permission mode can be
 overridden in frontmatter except when parent uses `bypassPermissions`.
 
-**Memory** `[S:0.65]`: `memory: user` gives persistent directory at
+**Memory** `[S~13]`: `memory: user` gives persistent directory at
 `~/.claude/agent-memory/`. First 200 lines of MEMORY.md loaded into
 subagent system prompt.
 
 ### VS Code / GitHub Copilot
 
-**`copilot-instructions.md`** `[C:0.95]`: Plain Markdown in `.github/`.
+**`copilot-instructions.md`** `[C~19]`: Plain Markdown in `.github/`.
 Always-on, available on save (hot-reload). No documented hard token limit.
 
-**Path-scoped instructions** `[C:0.95]`: `.github/instructions/*.instructions.md`
+**Path-scoped instructions** `[C~19]`: `.github/instructions/*.instructions.md`
 with YAML frontmatter: `description` (required, 1–500 chars) and
 `applyTo` (glob pattern, required).
 
-**Custom agents** `[C:0.95]`: `.github/agents/*.agent.md` with YAML
+**Custom agents** `[C~19]`: `.github/agents/*.agent.md` with YAML
 frontmatter. Required: `description`. Optional: `name`, `tools`,
 `model`, `handoffs`, `mcp-servers`. VS Code also reads `.claude/agents/`.
 
-**Skills** `[C:0.95]`: `.github/skills/*/SKILL.md`. Same format as
+**Skills** `[C~19]`: `.github/skills/*/SKILL.md`. Same format as
 Claude Code skills. Cross-platform (Agent Skills open standard).
 
-**Nested AGENTS.md** `[C:0.95]`: Supported with `chat.useNestedAgentsMdFiles`.
+**Nested AGENTS.md** `[C~19]`: Supported with `chat.useNestedAgentsMdFiles`.
 Subfolder AGENTS.md stacks with root. Discovery paths configurable via
 `chat.*Locations` settings.
 
-**Hot-reload** `[CS:0.80]`: Instructions available on save. Agents appear
+**Hot-reload** `[CS~16]`: Instructions available on save. Agents appear
 in picker on save. No window reload needed for most file types.
 
-**GitHub.com cloud agent** `[C:0.95]`: Reads `.github/` from committed
+**GitHub.com cloud agent** `[C~19]`: Reads `.github/` from committed
 repo directly. No separate browser package.
 
 ### Browser Platforms
 
-**claude.ai** `[C:0.95]`: Project Instructions (text field = system prompt)
+**claude.ai** `[C~19]`: Project Instructions (text field = system prompt)
 + Project Knowledge (file uploads, RAG). 200K context shared with
 conversation. Manual paste/upload only.
 
-**ChatGPT** `[C:0.95]`: Custom GPTs (system prompt + up to 20 knowledge
+**ChatGPT** `[C~19]`: Custom GPTs (system prompt + up to 20 knowledge
 files) or Projects (instructions + files + shared conversations).
 Custom Instructions limited to 2× 1,500 chars. Manual setup.
 
-**No automated deployment path** `[P:0.30]` from repo to browser platforms
+**No automated deployment path** `[P~6]` from repo to browser platforms
 as of April 2026. Industry-wide gap.
 
 ### MemPalace MCP
 
-**Interface** `[C:0.95]`: 19 tools via MCP server. `pip install mempalace`
+**Interface** `[C~19]`: 19 tools via MCP server. `pip install mempalace`
 then `claude mcp add mempalace -- python -m mempalace.mcp_server`.
 
 **Key tools**: `mempalace_status`, `mempalace_search` (semantic),
@@ -174,15 +174,15 @@ excluded = ["lares/scrum/"]
 
 [[candidates]]
 source = "lares/talk_story/protocol.md"
-uri = "lar:///talk.story.protocols/talk-story/?stances=^.^.-.-.-&confidence=C:0.95&p=0.5#settle.1.0"
-register = "C:0.95"
+uri = "lar:///talk.story.protocols/talk-story/?stances=^.^.-.-.-&confidence=C~19&p=0.5#settle.1.0"
+confidence="C~19"
 register_numeric = 0.95
-hud_line = "⚡∞ | mode:deployed | p1.0 | stances:+++++ | register:[C:0.95] | build:20260409-a3f2c1e"
+hud_line = "⚡∞ | mode:deployed | p1.0 | stances:+++++ | register:[C~19] | build:20260409-a3f2c1e"
 
 [[candidates]]
 source = "lares/signal/README.md"
-uri = "lar:///signal.active.holds/signal/?stances=^.^.-.-.-&confidence=C:0.95&p=0.5#settle.1.0"
-register = "C:0.95"
+uri = "lar:///signal.active.holds/signal/?stances=^.^.-.-.-&confidence=C~19&p=0.5#settle.1.0"
+confidence="C~19"
 register_numeric = 0.95
 ```
 
@@ -339,7 +339,7 @@ context_limit = "context window"
 name = "Theron the Weary"
 worn_by = "diplomat"
 mode_targets = { philosopher = "+", poet = "?", satirist = "-", humorist = "-", private = "-" }
-register_target = "CS:0.8"
+register_target = "CS~16"
 register_range = [0.7, 0.9]
 tone = "formal, measured, old-world courtesy masking calculation"
 
@@ -347,7 +347,7 @@ tone = "formal, measured, old-world courtesy masking calculation"
 name = "Spark"
 worn_by = "muse"
 mode_targets = { philosopher = "-", poet = "-", satirist = "?", humorist = "+", private = "-" }
-register_target = "SP:0.4"
+register_target = "SP~8"
 register_range = [0.3, 0.5]
 tone = "rapid, slang-heavy, delighted by secrets"
 ```
@@ -470,7 +470,7 @@ deploy-browser:
 
 ## Research Goals (Next Sessions)
 
-### Chronometer Drift & Temporal Hallucination `[P:0.30]`
+### Chronometer Drift & Temporal Hallucination `[P~6]`
 
 **The problem:** The chronometer demands the model maintain a monotonically
 increasing counter across 20+ turns while simultaneously tracking OODA-HA
@@ -520,7 +520,7 @@ MemPalace persists the full clock history across sessions.
 - [ ] Does MCP-backed clock improve accuracy? At what latency cost?
 - [ ] Can drift be detected retroactively from URI sequence analysis?
 
-### Syad Signal Model Refinement `[P:0.30]`
+### Syad Signal Model Refinement `[P~6]`
 
 **Consumed into**
 - `lares/ha-ka-ba/docs/mu/the-syad-perspectives/README.md#spectrum-drift`
@@ -534,24 +534,24 @@ richer alignment instrument. Research needed on:
 - How do additional sigils compose in the HUD without visual overload?
 - Compact URI encoding question consumed; the fixed five-position array now governs the live fold.
 
-### Exchange Wrapping Compact Mode `[P:0.30]`
+### Exchange Wrapping Compact Mode `[P~6]`
 
 Full span wrapping (URI→URI, dual HUD, URI→?) adds visible overhead.
 In high-frequency exchanges (rapid TTRPG combat, rapid-fire dev iteration),
-a compact mode may be needed. But "every span" constitutes `[C:1.0]`.
+a compact mode may be needed. But "every span" constitutes `[C~20]`.
 
 Research: What is the minimum viable span wrapper that preserves
 the protocol's guarantees (alignment visibility, chronometer continuity,
 intent vector traceability) while fitting in a single line?
 
-### MemPalace Integration Design `[P:0.30]`
+### MemPalace Integration Design `[P~6]`
 
 How do exchange vectors, chronometer positions, NPC metadata, and
 session alignment history map onto MemPalace's wing/room/drawer/
 knowledge-graph architecture? Design work, not research — but needs
 the MemPalace MCP tool definitions as input.
 
-### Authn/Authz Framework `[SP:0.4]`
+### Authn/Authz Framework `[SP~8]`
 
 In progress in the local repo. The Lares Protocols doc references it
 but doesn't specify it. The Identity & Permissions model from the
@@ -598,4 +598,4 @@ The Lares Protocols crystallized from a pipeline research dispatch
 into a protocol specification. The conversation IS the log.
 The chronometer tracks where we've been. The Talk Story continues.*
 
-lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S:0.65&p=0.5#O0.O0.A1.A21.A3 → ∞
+lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S~13&p=0.5#O0.O0.A1.A21.A3 → ∞

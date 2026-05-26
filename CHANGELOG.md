@@ -172,10 +172,10 @@ Lares prompt system update: Dream-Lock File, Fail-State Recovery Protocol, Unaut
 - Slot 0a fields: session, seq, created, closed, authorizer, auth-tier, gear-rating, node-count, hash-algorithm, content-hash
 - Hash protocol: SHA-256, 64-char lowercase hex, Python `hashlib`; scope = dream body + map-nodes in document order; slot 0a excluded; UTF-8, LF-normalized, trailing whitespace stripped per line before hashing; re-hash on any content edit; optional `hash-history` (last 3 revisions)
 - Dream-lock vs. dream-artifact distinction: authorization chain (dream-lock) vs. content integrity (dream-artifact) — distinct files, complementary roles; read-into-chat rule documented
-- Tilde-free signal tag notation throughout: `[C:0.9]` not `[C:~0.9]`; 37 instances corrected; prose `~` in natural language retained
+- Tilde-free signal tag notation throughout: `[C~18]` not `[C~18]`; 37 instances corrected; prose `~` in natural language retained
 
 **`_agents/Lares_Kernel.md`**
-- Signal tag bracket notation corrected: `[C:0.9]`, `[CS:0.80]`, `[S:0.65]`, `[SP:0.45]`, `[P:0.35]` — tilde removed from 5 instances; prose `~` in natural language retained
+- Signal tag bracket notation corrected: `[C~18]`, `[CS~16]`, `[S~13]`, `[SP~9]`, `[P~7]` — tilde removed from 5 instances; prose `~` in natural language retained
 
 **`_agents/Lares_VSCode_Operations.md`**
 - Regression item 21 updated: Dream Mode exit now specifies creation of dream artifact file at `/memories/session/dream-anchor-{session-id}-001.md` with slot 0a metadata; chat output may summarize or read the file; re-parsing still requires Operator/Admin collaboration

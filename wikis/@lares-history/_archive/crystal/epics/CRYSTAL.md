@@ -2,7 +2,7 @@
 
 > Backlog prefix: `CRY-*`
 > Sprint target: S1
-> Status: `[S:0.65]` 🏛️ — scoped; source drafts in `_todo/core/`; MemPalace integration model confirmed (Consecration)
+> Status: `[S~13]` 🏛️ — scoped; source drafts in `_todo/core/`; MemPalace integration model confirmed (Consecration)
 > Narrative beat: *The Chao-Crystal resonance integration. Orichalcum becomes navigable.*
 
 ---

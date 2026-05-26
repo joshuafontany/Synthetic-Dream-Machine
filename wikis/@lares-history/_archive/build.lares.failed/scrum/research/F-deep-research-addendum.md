@@ -1,6 +1,6 @@
 # Deep Research Addendum — Multi-Stance Scaling & Authority Transfer
 
-> Register: `[S:0.65]` 🏛️🌊🗡️ — research synthesis; reshapes the centroid~δ model
+> Register: `[S~13]` 🏛️🌊🗡️ — research synthesis; reshapes the centroid~δ model
 > Date: 2026-04-08
 > Feeds: S0 Refinement Plan Improvement #1 (revision needed)
 > Sources: Multimodal distribution theory, aviation AFCS authority models, HUD uncertainty visualization
@@ -58,9 +58,9 @@ The emoji count IS the delta. More emoji = more fuzz. The operator doesn't need 
 
 Instead:
 
-- **HUD display:** `[S:0.65] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
-- **Record form (STATE.jsonl):** The `register` field stays a point value (`"S:0.65"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
-- **URI machine form:** `register=S:0.65` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
+- **HUD display:** `[S~13] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
+- **Record form (STATE.jsonl):** The `register` field stays a point value (`"S~13"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
+- **URI machine form:** `confidence=S~13` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
 
 **Why this is better than centroid~δ:**
 
@@ -108,14 +108,14 @@ But the operator can already influence the state tuple through Input Signal Read
 **Active control ("takes the stick") would mean:**
 
 ```
-~$ lares --set stance=philosopher register=CS:0.80
+~$ lares --set stance=philosopher confidence=CS~16
 ```
 
 The operator declares: "I want this response in Philosopher stance at Canon/Synthesis confidence." The node generates under those constraints. The HUD tag shows the operator-set values, not the node's self-assessment.
 
 ### What Changes in the HUD
 
-When the operator holds the stick, the HUD must show **who authored the state tuple**. Otherwise the operator sees `[CS:0.80] 🏛️` and can't tell whether the node chose that or the operator prescribed it.
+When the operator holds the stick, the HUD must show **who authored the state tuple**. Otherwise the operator sees `[CS~16] 🏛️` and can't tell whether the node chose that or the operator prescribed it.
 
 **Proposed: Authority indicator in the state tuple.**
 
@@ -127,18 +127,18 @@ When the operator holds the stick, the HUD must show **who authored the state tu
 
 Example — operator sets stance, node self-assesses register:
 ```
-[S:0.65] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
+[S~13] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
 ```
-The `⊙` before `🏛️` means "operator-prescribed stance." The register `[S:0.65]` has no indicator — node self-assessed.
+The `⊙` before `🏛️` means "operator-prescribed stance." The register `[S~13]` has no indicator — node self-assessed.
 
 Example — operator sets both:
 ```
-⊙[CS:0.80] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
+⊙[CS~16] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
 ```
 
 Example — all node-declared (current default):
 ```
-[S:0.65] 🏛️ ◎ 🔍.3.2.7 | p0.5
+[S~13] 🏛️ ◎ 🔍.3.2.7 | p0.5
 ```
 
 ### Record Form
@@ -183,10 +183,10 @@ Option C is the most information-rich but doubles the HUD complexity. Option A i
 ~$ lares --set stance=philosopher
 
 # Set register floor (node can assess higher, not lower)
-~$ lares --set register>=S:0.65
+~$ lares --set register>=S~13
 
 # Set both
-~$ lares --set stance=philosopher,satirist register=CS:0.80
+~$ lares --set stance=philosopher,satirist confidence=CS~16
 
 # Release control (return to CMD)
 ~$ lares --set auto
@@ -204,7 +204,7 @@ The centroid~δ notation proposed in the current refinement plan should be **rev
 
 | Before (centroid~δ) | After (stance-count-is-delta) |
 |---|---|
-| `register=S:0.65~0.15` | `register=S:0.65` (always a point) |
+| `confidence=S~13~3` | `confidence=S~13` (always a point) |
 | New validation pattern for `~δ` | No validation change |
 | Boundary saturation rules | Not needed |
 | 6 new test vectors for range form | Not needed |
@@ -215,10 +215,10 @@ The authority transfer model (`--set`, `⊙` indicator) is **new scope**. It doe
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| RES-08 | Mana cost table: stance count → register fuzz magnitude | `[S:0.60]` | S2 |
-| RES-09 | Authority transfer model: `--set` CLI syntax, `⊙` indicator, authority field in STATE.jsonl | `[S:0.55]` | S2 |
-| RES-10 | CWS vs Manual vs CMD mode mapping to operating modes | `[SP:0.45]` | S2 |
-| RES-11 | Five-stance (full Discordian) configuration: what does it mean for register? Is it meaningful or degenerate? | `[SP:0.40]` | S2 (Council ruling) |
+| RES-08 | Mana cost table: stance count → register fuzz magnitude | `[S~12]` | S2 |
+| RES-09 | Authority transfer model: `--set` CLI syntax, `⊙` indicator, authority field in STATE.jsonl | `[S~11]` | S2 |
+| RES-10 | CWS vs Manual vs CMD mode mapping to operating modes | `[SP~9]` | S2 |
+| RES-11 | Five-stance (full Discordian) configuration: what does it mean for register? Is it meaningful or degenerate? | `[SP~8]` | S2 (Council ruling) |
 
 ---
 

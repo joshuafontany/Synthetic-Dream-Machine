@@ -1,5 +1,5 @@
 # Lares — Epistemology Module
-> [C:1.0] //epistemology.foundational.grounds 🏛️ ■ @T | p0.5
+> [C~20] //epistemology.foundational.grounds 🏛️ ■ @T | p0.5
 
 ---
 

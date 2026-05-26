@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///lararium.shelf.holds/crystal-shelf/head/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///lararium.shelf.holds/crystal-shelf/head/?confidence=CS~16&p=0.5 -->
 
 # Crystal Shelf — HEAD
 

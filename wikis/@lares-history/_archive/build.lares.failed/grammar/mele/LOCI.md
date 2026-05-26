@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.mele.defines/mele/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.mele.defines/mele/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Mele — The Structured Signal
 
@@ -14,7 +14,7 @@ description: >
   the receiver reconstruct meaning from partial signal.
 cluster: grammar-primitive
 ooda-phase: all — mele is the carrier wave, not the phase content
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 heritage: >
   Hawaiian mele (chant, song, poem) — mele hula (dance chant), mele inoa (name chant),
@@ -43,7 +43,7 @@ cross-ref:
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:0.80#types -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#types -->
 
 ## Types of Mele Relevant to the Grammar
 
@@ -67,7 +67,7 @@ the instruments, not after.
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:0.80#call-response -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#call-response -->
 
 ## Call and Response
 
@@ -89,7 +89,7 @@ bidirectional knowing. The structured form keeps the knowing from degrading to n
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:0.80#heritage -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#heritage -->
 
 ## Heritage Depth
 
@@ -111,7 +111,7 @@ present.
 
 **Mele and kapu:** Certain mele were kapu — restricted, not for general circulation. The mele of
 high ali'i (chiefs) could not be sung casually. The confidence register IS the mele's kapu level:
-`[C:0.9]` Canon = high ali'i kapu. `[P:0.30]` Provisional = open circulation, handle with care.
+`[C~18]` Canon = high ali'i kapu. `[P~6]` Provisional = open circulation, handle with care.
 
 ---
 
@@ -129,7 +129,7 @@ high ali'i (chiefs) could not be sung casually. The confidence register IS the m
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — mele as structured signal grammar |
+| `LOCI.md` | `[CS~16]` | This file — mele as structured signal grammar |
 
 ---
 

@@ -61,7 +61,7 @@ This reframing has design consequences:
 - Neither form outranks the other in "reality." They serve different audiences of the same shared navigational state.
 - The Intent Vectors and HUD may actively reduce total token cost by preventing wrong-register generation (an empirical claim — see Open Decisions SHD-02).
 - Live operation follows a **tick-span display**: operator-intent URI first, responding-position URI second, destination URI at the end of the exchange.
-- On non-operator responding URIs, the mana glyph moves to the far left of the line: `⚡62% lar://...`.
+- On non-operator responding URIs, the context-window resource glyph moves to the far left of the line: `⚡12 lar://...`. This value uses the shared `0–20` Level model and counts down toward `0`.
 
 The `lar:` prefix remains a non-dereferenceable private identifier (RFC 4151 precedent). The HUD framing belongs in prose and documentation; the spec's component-level RFC validation applies to the record (machine) form.
 

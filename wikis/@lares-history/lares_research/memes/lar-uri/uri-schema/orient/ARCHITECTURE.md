@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=CS:0.90&p=0.5 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=CS~18&p=0.5 -->
 
 # Signal — Orient: URI Architecture
 
-> URI anatomy, design intent, and component map. Source: `lares/modules/uri-schema/URI-SCHEMA.md` §§1–3 `[CS:0.90]`.
+> URI anatomy, design intent, and component map. Source: `lares/modules/uri-schema/URI-SCHEMA.md` §§1–3 `[CS~18]`.
 
 ---
 
@@ -139,7 +139,7 @@ Signal parameters, non-hierarchical.
 | Parameter | Type | Repeatable? | Record Values | HUD Values |
 |---|---|---|---|---|
 | `stances` | 5-char amplitude string | No | `^.?.-.-.-` (positional: philosopher, poet, satirist, humorist, private) | `🏛️+🌊?🗡️-🎭-🔮-` |
-| `confidence` | `R:N` | No | `P:0.35`, `SP:0.45`, `S:0.65`, `CS:0.80`, `C:0.90` | Same |
+| `confidence` | `R:N` | No | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18` | Same |
 | `p` | `N` | No | `0.5` | Same |
 
 **Stance amplitude encoding:**

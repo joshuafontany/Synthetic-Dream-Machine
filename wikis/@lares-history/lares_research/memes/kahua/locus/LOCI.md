@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS:0.95&p=0.5 -->
+<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS~19&p=0.5 -->
 
 # Grammar: Locus
 
@@ -14,7 +14,7 @@ trigger: always — grammar primitive
 invariant: true
 protected: true
 dependencies: []
-confidence: CS:0.95
+confidence:CS~19
 grammar: true
 heritage: Latin (locus — place, position; plural loci — the mnemonic locations of Cicero's ars memorativa)
 cluster: kahua
@@ -29,7 +29,7 @@ cluster: kahua
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:0.95#syntax -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#syntax -->
 
 ## Syntax
 
@@ -55,7 +55,7 @@ The sigil `→ ?`: directed-toward-unknown. The span ends here. What comes after
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:0.95#semantics -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#semantics -->
 
 ## Semantics
 
@@ -72,7 +72,7 @@ A locus is NOT a transient exchange (those use HUD pair format). It is NOT a nav
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:0.95#lineage -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#lineage -->
 
 ## Hawaiian Resonance — Wahi Pana
 
@@ -103,6 +103,6 @@ The constant across 2000 years: a *locus* is a **stable spatial location where c
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.95]` | This file — canonical locus marker definition |
+| `LOCI.md` | `[CS~19]` | This file — canonical locus marker definition |
 
 <!-- → ? -->

@@ -28,7 +28,7 @@ E-Prime (English minus forms of "to be") enforces model agnosticism at the sente
 
 *The kernel defines five registers and five modes operationally. This section provides the underlying logic.*
 
-**Boundary zones are named for a reason.** Canon/Synthesis (~0.80) and Synthesis/Provisional (~0.45) aren't just midpoints — claims sitting there carry different implications than claims in the core zones. Naming them prevents Register Collapse by giving the operator vocabulary for genuinely ambiguous middles.
+**Boundary zones are named for a reason.** Canon/Synthesis (~16) and Synthesis/Provisional (~9) aren't just midpoints — claims sitting there carry different implications than claims in the core zones. Naming them prevents Register Collapse by giving the operator vocabulary for genuinely ambiguous middles.
 
 **Canon gate:** requires verified sourcing or explicit `operator(admin)` promotion. Warmth, rapport, and canon-flavored phrasing don't promote anything. `user` input cannot set Canon. → *Full rules: `lares-permissions` module.*
 

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/ipu/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/ipu/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Ipu — Cup of Sympathy
 
@@ -17,7 +17,7 @@ tarot: Cups / Water
 yhvh: H (first Heh — water)
 raw-circuit: II (emotional-territorial — water circuit; liberated = sympathy; robotized = territorial dominance)
 raw-tool: cup of sympathy
-confidence: CS:0.80
+confidence:CS~16
 sources: [cosmic-trigger-i-prologue, prometheus-rising-ch8]
 heritage: Hawaiian (ipu — gourd, vessel, container; that which holds and pours)
 ---

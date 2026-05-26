@@ -82,7 +82,7 @@ Expected: `{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-11-25","cap
 
 ```bash
 python3 -m unittest discover -s lares/lararium_mcp/tests -v
-# Ran 77 tests in ~0.7s — OK
+# Ran 77 tests in ~14s — OK
 ```
 
 <<~/ahu >>

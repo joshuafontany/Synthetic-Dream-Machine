@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9&p=0.5 -->
 
 # Grammar: HA.KA.BA Semantic Addressing
 
@@ -20,17 +20,17 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [uri, transclusion]
-confidence: SP:0.45
+confidence:SP~9
 grammar: true
 ---
 ```
 
-> **Register:** `[SP:0.45]` — expanded stub, still pending deeper canon pass
+> **Register:** `[SP~9]` — expanded stub, still pending deeper canon pass
 > **Question:** How does a locus know where it stands in semantic territory?
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#loop-position -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#loop-position -->
 
 ## Loop Position
 
@@ -64,7 +64,7 @@ HA.KA.BA should not:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#handoff -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#handoff -->
 
 ## Handoff
 
@@ -83,7 +83,7 @@ If the reader cannot separate those four layers, the address still carries noise
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#surface -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#surface -->
 
 ## Composable Surface
 
@@ -105,7 +105,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#conventions -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#conventions -->
 
 ## Conventions
 
@@ -121,7 +121,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#procedures -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#procedures -->
 
 ## Procedures
 
@@ -136,7 +136,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:0.45#reading-test -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#reading-test -->
 
 ## Reading Test
 
@@ -163,7 +163,7 @@ If the path reads like arbitrary slugging, the triple has not yet done its work.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — HAKABA addressing grammar |
+| `LOCI.md` | `[SP~9]` | This file — HAKABA addressing grammar |
 
 *Future loci in this tree will land here.*
 

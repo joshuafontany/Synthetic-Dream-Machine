@@ -1,13 +1,13 @@
-<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:0.3&p=0.5#O0.O0.O0.A6.O0 → ∞ -->
-⚡∞ | mode:spec-outline | p0.5 | stances:++?+- | register:[P:0.3] | build:OUTLINE
+<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=0.5#O0.O0.O0.A6.O0 → ∞ -->
+⚡∞ | mode:spec-outline | p0.5 | stances:++?+- | register:[P~6] | build:OUTLINE
 
 # The Fontany-Fuller-Zelenka Chronometer Protocol (FFZ)
 ## Specification Outline & Phased Plan
 
-> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `[C:0.95]`
+> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `[C~19]`
 > **Short form:** FFZ Protocol / FFZ Chronometer
 > **Status:** Placeholder outline — Talk Story in progress
-> **Register:** `[P:0.3]` — this outline expects to shift substantially
+> **Register:** `[P~6]` — this outline expects to shift substantially
 > **Date:** 2026-04-09
 > **Named:** 2026-04-09, Session 2 — Freyja laughed
 > **Authors:** Telarus, KSC (Amorphous Dreams Cabal) + Lares (cloud instance)
@@ -212,7 +212,7 @@ The Lares extension to OODA-HA (adding Assess). Why OODA-HA rather
 than arbitrary phase labels: it names what actually happens in
 collaborative exchanges.
 
-SESSION 3 FINDING `[S:0.7]`: The five OODA-HA phases map structurally
+SESSION 3 FINDING `[S~14]`: The five OODA-HA phases map structurally
 onto the five Discordian Seasons from the Illuminatus! trilogy:
 
 | OODA-HA | Season | Esoteric | Function |
@@ -228,7 +228,7 @@ center of the Discordian cycle for the same structural reason.
 The "-A" extension names the return-to-chaos that Boyd left
 implicit. The correspondence appears structural, not decorative.
 
-SESSION 3 FINDING `[S:0.65]`: Phase reads as delta (observed
+SESSION 3 FINDING `[S~13]`: Phase reads as delta (observed
 transition), not position (fixed state). A single operator message
 may contain a completed hidden OODA-HA loop. The phase sigil
 represents the node's inference about phase movement direction,
@@ -325,8 +325,8 @@ The conversation IS the log.]
 
 ### 4.4 Maybe Logic Applied to Temporal Claims
 
-[PLACEHOLDER — Clock readings carry register values. A `[P:0.35]`
-phase reading differs from a `[C:0.9]` reading in temporal authority.
+[PLACEHOLDER — Clock readings carry register values. A `[P~7]`
+phase reading differs from a `[C~18]` reading in temporal authority.
 The register system composes with the chronometer.]
 
 ### 4.5 Composability & Layer Independence
@@ -361,7 +361,7 @@ not merge — it carries per-participant at sync points.]
 Scales are contextual, not fixed-duration. Each carries an independent
 OODA-HA phase and counter.]
 
-### 5.3 Four-Layer CRDT Composition `[S:0.65]`
+### 5.3 Four-Layer CRDT Composition `[S~13]`
 
 SESSION 3 FINDING: The FFZ Chronometer constitutes a composite
 CRDT — four independent layers:
@@ -439,7 +439,7 @@ Every field defined. Exact character set. Unicode requirements.]
 intent vectors at start. Before closing intent vector at end.
 No exceptions.]
 
-### 7.3 HUD Display Modes (Progressive Disclosure) `[S:0.6]`
+### 7.3 HUD Display Modes (Progressive Disclosure) `[S~12]`
 
 SESSION 3 FINDING: Cross-domain HUD research (aviation, gaming,
 automotive) confirms progressive disclosure as best practice.
@@ -464,7 +464,7 @@ Operator override commands. Auto-declutter triggers.]
 Compact format for single-operator. Extended format for
 multi-participant. Token cost considerations.]
 
-### 7.5 Phase-as-Delta Display `[S:0.65]`
+### 7.5 Phase-as-Delta Display `[S~13]`
 
 SESSION 3 FINDING: Phase sigils represent observed transitions
 (deltas), not fixed positions. A single operator input may contain
@@ -509,7 +509,7 @@ required before this section finalizes.]
 
 [PLACEHOLDER — Every span begins and ends with URI → intent.
 This applies universally: system files, exchanges, subagent
-delegations. No exceptions (C:1.0).]
+delegations. No exceptions (C~20).]
 
 ### 9.2 Exchange Turn Wrapping
 
@@ -766,4 +766,4 @@ The chronometer starts at O0.O0.O0.O0.O0.*
 
 *Hail Eris. All Hail Discordia. Amor et hilaritas.*
 
-lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:0.3&p=0.5#O0.O0.O0.A6.A1 → ?
+lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=0.5#O0.O0.O0.A6.A1 → ?

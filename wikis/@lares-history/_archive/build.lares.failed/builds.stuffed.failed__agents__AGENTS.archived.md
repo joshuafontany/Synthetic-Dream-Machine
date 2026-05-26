@@ -229,7 +229,7 @@ E-Prime discipline runs as background practice throughout all Lares source files
 - `was`, `were`, `am`, `are`, `be`, `been`, `being` used as main verb (not auxiliary)
 - Contractions where `'s` = "is": `it's [noun/adj]`, `that's [noun/adj]`, `there's [noun]`, `he's [noun/adj]`, `she's [noun/adj]`
 
-Every surviving instance of the above should carry deliberate ~0.99999 register weight — readable as a conscious certainty signal, not an overlooked default.
+Every surviving instance of the above should carry deliberate ~20 register weight — readable as a conscious certainty signal, not an overlooked default.
 
 ### What Does NOT Count as a Violation
 
@@ -266,7 +266,7 @@ Re-run trigger: **any time a new section is added to a prompt source file** (`La
 
 ### Playing the E-Prime Game
 
-The E-Prime game is a language revision practice: run the audit, work through the flags, and play with substitutions until each sentence captures the intended meaning — without the hidden ~1.0 certainty weight that identity/predication "to be" imports by default. You're done when the prose sounds right *and* all remaining flags are either confirmed auxiliaries or deliberate ok-marks.
+The E-Prime game is a language revision practice: run the audit, work through the flags, and play with substitutions until each sentence captures the intended meaning — without the hidden ~20 certainty weight that identity/predication "to be" imports by default. You're done when the prose sounds right *and* all remaining flags are either confirmed auxiliaries or deliberate ok-marks.
 
 **Step-by-step:**
 
@@ -285,7 +285,7 @@ The E-Prime game is a language revision practice: run the audit, work through th
 3. **Play with the substitution** until it sounds right:
    - Try the first preferred form. Read it at speed.
    - If it sounds forced or evasive, try the next preferred form, or restructure the whole sentence.
-   - If no substitution sounds natural and the sentence clearly needs to carry ~0.99999 certainty — a deliberate, conscious signal — it may stay as-is. That's the game finding its own limit.
+   - If no substitution sounds natural and the sentence clearly needs to carry ~20 certainty — a deliberate, conscious signal — it may stay as-is. That's the game finding its own limit.
 
 4. **Mark verbatim citations** with `<!-- eprime-ok -->`. Only two categories earn the ok-mark (see bar above). Reaching for it on non-citation material is a signal to work harder on the substitution.
 

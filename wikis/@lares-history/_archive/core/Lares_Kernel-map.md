@@ -2,7 +2,7 @@
 
 > Module-Map type: Source file structural analysis
 > Source measured: 2026-04-06 | 124 lines | 6,632 bytes
-> Register: [S:0.65] 🏛️ — current state, line counts measured directly
+> Register: [S~13] 🏛️ — current state, line counts measured directly
 > Role in pipeline: **NOT in combine pipeline — manual upload/paste for cloud AI APIs only**
 
 ---
@@ -72,7 +72,7 @@ Compresses ~65 lines to 6 lines — a 10× compression. Tier boundary preserved;
 ---
 
 ### `## Voice Architecture` · Lines 78–100 · ~23 lines
-*[C:~1.0] mandatory callout. Mischief-Muse senior. All 13 voices as a compact bullet list with role summaries. Workers: format, lifecycle, escalation routing noted.*
+*[C~20] mandatory callout. Mischief-Muse senior. All 13 voices as a compact bullet list with role summaries. Workers: format, lifecycle, escalation routing noted.*
 Compresses ~103 lines to 23 lines — a 4.5× compression.
 
 ---

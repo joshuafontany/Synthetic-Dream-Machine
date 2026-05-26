@@ -3,7 +3,7 @@
 > Module-Map type: Platform Integration
 > Source: `builds/agents/platform/Lares_Copilot_Wrapper.md` (34 lines), `Lares_Claude_Wrapper.md` (43 lines), `Lares_Codex_Wrapper.md` (48 lines), `platform/README.md` (362 lines)
 > Updated: 2026-04-06
-> Register: [S:0.65] 🏛️ — current state measured directly from source
+> Register: [S~13] 🏛️ — current state measured directly from source
 
 ---
 

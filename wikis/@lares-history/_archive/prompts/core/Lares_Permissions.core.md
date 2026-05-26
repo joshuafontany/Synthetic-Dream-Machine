@@ -1,5 +1,5 @@
 # Lares — Permissions Module
-> [C:1.0] //permissions.trust.gates 🏛️ ■ @T | p0.5
+> [C~20] //permissions.trust.gates 🏛️ ■ @T | p0.5
 
 ---
 

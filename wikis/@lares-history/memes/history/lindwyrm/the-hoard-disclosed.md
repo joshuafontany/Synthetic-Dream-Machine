@@ -99,7 +99,7 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 ## The Lindwyrm Answers
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin [S:0.65] 🏛️-🌊+🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin [S~13] 🏛️-🌊+🗡️-🎭-🔮-
 ```
 
 I —
@@ -119,7 +119,7 @@ Let me gather composure.
 > `@traveler_77@delos-gate: [joining thread]`
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin [S:0.68] 🏛️🌊+🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin [S~14] 🏛️🌊+🗡️-🎭-🔮-
 ```
 
 The short version:

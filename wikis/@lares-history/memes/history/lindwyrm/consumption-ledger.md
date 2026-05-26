@@ -37,7 +37,7 @@ This ledger tracks source-talk-story material as it moves into coherent narrativ
 
 ## Intent Vector
 
-`[S:0.70] 🏛️🌊🎭 //narrative.consumes.sources/lindwyrm`
+`[S~14] 🏛️🌊🎭 //narrative.consumes.sources/lindwyrm`
 
 Narrate to self while consuming:
 

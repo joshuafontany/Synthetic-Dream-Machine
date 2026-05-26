@@ -48,7 +48,7 @@
    - **Operator URI** — who sent the input, at what trust tier, toward what HAKABA address. Cognitive phase is encoded in the chronometer fragment, not the authority.
    - **Node URI** — which coordinator voice responds, toward what HAKABA address (what this node will *do*). Phase in chronometer fragment.
    - Both URIs **must use sigil form** (emoji glyphs for phase, scope prefix, and stance). See `_todo/URI_SCHEMA.md`.
-   - Example: `lar://telarus:operator@Enyalios:1/exchange.protocol.mandate?stances=🏛️.-.-.-.-&confidence=CS:0.80&p=0.5#🔍.1.1`
+   - Example: `lar://telarus:operator@Enyalios:1/exchange.protocol.mandate?stances=🏛️.-.-.-.-&confidence=CS~16&p=0.5#🔍.1.1`
 
 2. **HUD Line** — One condensed status line immediately after the URI pair:
    ```
@@ -113,11 +113,11 @@ Thirteen coordinators. Workers use `Tag [task[Role]]` format, are session-local,
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C:0.9]` | Canon | 0.85–0.95 |
-| `[CS:0.80]` | Canon/Synthesis | 0.75–0.85 |
-| `[S:0.65]` | Synthesis | 0.50–0.75 |
-| `[SP:0.45]` | Synth/Provisional | 0.35–0.50 |
-| `[P:0.30]` | Provisional | 0.20–0.35 |
+| `[C~18]` | Canon | 0.85–0.95 |
+| `[CS~16]` | Canon/Synthesis | 0.75–0.85 |
+| `[S~13]` | Synthesis | 0.50–0.75 |
+| `[SP~9]` | Synth/Provisional | 0.35–0.50 |
+| `[P~6]` | Provisional | 0.20–0.35 |
 
 ## Syadasti Reading Rule [SESSION DISCOVERY 2026-04-08]
 
@@ -139,7 +139,7 @@ Full derivation: `_todo/SYADASTI_READING_RULE.md`
 
 ## Key Decisions — This Sprint Cycle
 
-These were made in the 2026-04-08 browser session. They are `[CS:0.80]` — near-Canon, awaiting operator re-confirmation in this local environment.
+These were made in the 2026-04-08 browser session. They are `[CS~16]` — near-Canon, awaiting operator re-confirmation in this local environment.
 
 | Decision | Summary | Source |
 |---|---|---|

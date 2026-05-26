@@ -360,7 +360,7 @@ TW5 analog: `{{Title}}` inline transclusion.
 ### `kapu` — qualification and boundary posture
 
 ```
-<<~ kapu confidence:0.7 >>
+<<~ kapu confidence:14 >>
 <<~ kapu invocation -> bounded|? >>
 ```
 

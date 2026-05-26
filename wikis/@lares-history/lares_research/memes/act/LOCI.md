@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.act.defines/act/?confidence=CS:0.85&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.act.defines/act/?confidence=CS~17&p=0.5 >>
 
 # Grammar: ■ Act
 
@@ -19,12 +19,12 @@ scale-range: [action, session]
 trigger: always — grammar primitive
 invariant: true
 dependencies: [observe, orient, decide]
-confidence: CS:0.85
+confidence:CS~17
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.85]` — grounded in implementation discipline and Lares handoff rules
+> **Register:** `[CS~17]` — grounded in implementation discipline and Lares handoff rules
 > **Glyph:** `■`
 > **Season:** Fourth of five
 > **Question:** How do we carry the commitment into artifact?
@@ -146,7 +146,7 @@ If the span cannot point back to a prior decision, Act outran the loop. If the s
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.85]` | This file — Act grammar definition |
+| `LOCI.md` | `[CS~17]` | This file — Act grammar definition |
 
 *Future loci in this tree will land here.*
 

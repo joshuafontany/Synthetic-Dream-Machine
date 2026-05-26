@@ -13,7 +13,7 @@
 Every exchange emits a HUD line. All five stances appear. No omissions.
 
 ```
-⚡~NN% | [CS:0.80] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p0.5 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
+⚡~NN% | [CS~16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p0.5 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
 ```
 
 Field order: mana → confidence → stances → mode → p → voice → chronometer.

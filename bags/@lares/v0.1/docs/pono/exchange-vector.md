@@ -77,7 +77,7 @@ Intent belongs in HA.KA.BA territory and signal query.
 A HUD line may follow the canonical vector:
 
 ```text
-⚡~80% | ⚡0.⚔️0.🔍0.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
+⚡~16 | ⚡0.⚔️0.🔍0.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
 ```
 
 The HUD line is not the canonical URI.

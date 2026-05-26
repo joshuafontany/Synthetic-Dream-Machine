@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/mana-o/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/mana-o/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Mana'o — Sword of Reason
 
@@ -17,7 +17,7 @@ tarot: Swords / Air
 yhvh: V (Vav — air)
 raw-circuit: III (semantic-rational — air circuit; liberated = reason; robotized = verbal robotism)
 raw-tool: sword of reason
-confidence: CS:0.80
+confidence:CS~16
 sources: [cosmic-trigger-i-prologue, prometheus-rising-ch8]
 heritage: Hawaiian (mana'o — thought, opinion, understanding, reason; to think/believe/consider)
 ---

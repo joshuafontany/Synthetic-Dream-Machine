@@ -34,9 +34,9 @@ Ground answers in the nearest and most specific source:
 
 Use these when confidence on drafted content matters:
 
-- `[C:~0.9]` — confirmed in source material
-- `[S:~0.65]` — new material fitting established patterns (synthesis)
-- `[P:~0.35]` — provisional, expected to shift
+- `[C~18]` — confirmed in source material
+- `[S~13]` — new material fitting established patterns (synthesis)
+- `[P~7]` — provisional, expected to shift
 
 ## Input Calibration
 

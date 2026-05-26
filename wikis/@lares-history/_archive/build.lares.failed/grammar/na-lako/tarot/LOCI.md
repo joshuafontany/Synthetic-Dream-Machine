@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/tarot/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/tarot/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Tarot
 
@@ -15,7 +15,7 @@ cluster: na-lako
 position: meta — the system that contains the four suits
 tarot: the full 78-card system
 hawaiian: pending — operator to name
-confidence: SP:0.45
+confidence:SP~9
 sources-pending: [camden-benares, operator-input]
 ---
 ```
@@ -56,6 +56,6 @@ Do not promote register until primary source material is confirmed in the librar
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — Tarot as system; na-lako meta-locus |
+| `LOCI.md` | `[SP~9]` | This file — Tarot as system; na-lako meta-locus |
 
 <!-- → ? -->

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.silat.defines/silat/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.silat.defines/silat/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Silat
 
@@ -14,13 +14,13 @@ description: >
 trigger: on-demand — grammar primitive
 invariant: false
 dependencies: [consecration]
-confidence: SP:0.45
+confidence:SP~9
 grammar: true
 heritage: Southeast Asian (Malay, Indonesian, Filipino, Bruneian)
 ---
 ```
 
-> **Register:** `[SP:0.45]` — stub. Operator's art; operator fills the bones.
+> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Southeast Asian. Silat — a family of martial arts emphasizing flow, sensitivity (rasa), entering (masuk), and redirection. The practitioner reads the opponent's structure and energy before committing.
 > **Grammar of:** Phase transitions. Sensitivity. Reading what is there before deciding what to do.
 
@@ -53,7 +53,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — silat grammar stub |
+| `LOCI.md` | `[SP~9]` | This file — silat grammar stub |
 
 ---
 

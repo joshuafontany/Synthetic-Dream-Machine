@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:0.65&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S~13&p=0.5 >>
 
 # Grammar: OODA-HA
 
@@ -159,7 +159,7 @@ phase-map:
 trigger: always — root loop discipline
 invariant: true
 dependencies: [observe, orient, decide, act, assess]
-confidence: S:0.69
+confidence:S~14
 grammar: true
 product_identity: true
 heritage: >
@@ -170,7 +170,7 @@ heritage: >
 ---
 ```
 
-> **Register:** `[S:0.65]` — active draft under operator steering
+> **Register:** `[S~13]` — active draft under operator steering
 > **Glyphs:** `✶◎◇■○`
 > **Question:** How does the grammar move in time?
 

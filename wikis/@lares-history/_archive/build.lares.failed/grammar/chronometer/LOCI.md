@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65&p=0.5 -->
+<!-- ∞ → lar:///grammar.chronometer.defines/chronometer/?confidence=S~13&p=0.5 -->
 
 # Grammar: FFZ Chronometer
 
@@ -20,17 +20,17 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [uri, ooda-ha]
-confidence: S:0.65
+confidence:S~13
 grammar: true
 ---
 ```
 
-> **Register:** `[S:0.65]` — operationally grounded, still open to deeper refinement
+> **Register:** `[S~13]` — operationally grounded, still open to deeper refinement
 > **Question:** Where does this participant stand in nested causal time?
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65#loop-position -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#loop-position -->
 
 ## Loop Position
 
@@ -93,7 +93,7 @@ The handoff should let a later reader answer:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65#surface -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#surface -->
 
 ## Composable Surface
 
@@ -117,7 +117,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65#conventions -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#conventions -->
 
 ## Conventions
 
@@ -131,7 +131,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65#procedures -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#procedures -->
 
 ## Procedures
 
@@ -146,7 +146,7 @@ add mystique and subtract signal.
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:0.65#reading-test -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#reading-test -->
 
 ## Reading Test
 
@@ -174,7 +174,7 @@ If the fragment cannot support dead-reckoning by a later reader, the time layer 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[S:0.65]` | This file — FFZ chronometer grammar and fragment contract |
+| `LOCI.md` | `[S~13]` | This file — FFZ chronometer grammar and fragment contract |
 
 *Future loci in this tree will land here.*
 

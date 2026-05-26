@@ -2,7 +2,7 @@
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.kahea.defines/kahea/?confidence=CS:0.95&p=0.5 -->
+<!-- ∞ → lar:///grammar.kahea.defines/kahea/?confidence=CS~19&p=0.5 -->
 
 # Grammar: Kahea
 
@@ -16,7 +16,7 @@ trigger: always — grammar primitive
 invariant: true
 protected: true
 dependencies: [locus, ahu]
-confidence: CS:0.95
+confidence:CS~19
 grammar: true
 heritage: >
   Hawaiian (kahea — to call out, to summon, to invoke by name, to invite).
@@ -36,7 +36,7 @@ cluster: kahua
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:0.95#syntax -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#syntax -->
 
 ## Syntax
 
@@ -51,7 +51,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:0.95#semantics -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#semantics -->
 
 ## Semantics
 
@@ -72,7 +72,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:0.95#conventions -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#conventions -->
 
 ## When to Use Kahea vs Prose Reference
 
@@ -80,14 +80,14 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 |---|---|
 | Content should appear here *as if written here* | `<!-- kahea lar:///... -->` |
 | Reader should know about related content | Prose: "See `lares/grammar/observe/LOCI.md`" |
-| Citation for provenance, not inclusion | Prose with register: `[CS:0.80]` |
+| Citation for provenance, not inclusion | Prose with register: `[CS~16]` |
 | Content is in a stub or provisional state | Prose reference only — don't kahea a stub |
 
 **The broken kahea rule:** A kahea that cannot resolve is an active error, not a passive one. The call goes out and nothing arrives. The dance never starts. Before adding a kahea, verify the target exists.
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:0.95#hula-resonance -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#hula-resonance -->
 
 ## Hawaiian Depth — Kahea in Practice
 
@@ -129,6 +129,6 @@ In the grammar: a kahea marker is not neutral plumbing. It is a declaration of r
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.95]` | This file — canonical kahea marker definition |
+| `LOCI.md` | `[CS~19]` | This file — canonical kahea marker definition |
 
 <!-- → ? -->

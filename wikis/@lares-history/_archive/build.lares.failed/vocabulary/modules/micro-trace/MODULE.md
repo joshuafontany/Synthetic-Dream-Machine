@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/?confidence=CS~16&p=0.5 -->
 
 # Micro-trace Module
 
@@ -24,7 +24,7 @@ trigger: >
   Always active at default p0.5 (Band 3: ◇ Decide · ■ Act · ○ Aftermath).
 invariant: false
 dependencies: [talk-story, uri-schema]
-confidence: CS:0.80
+confidence:CS~16
 ---
 ```
 
@@ -34,7 +34,7 @@ The micro-trace is the **event trace layer** of the Signal HUD system. It annota
 
 ## Source
 
-`lares/signal/micro-trace.md` `[CS:0.80]` — promoted from SIG-04 draft; operator-confirmed 2026-04-08.
+`lares/signal/micro-trace.md` `[CS~16]` — promoted from SIG-04 draft; operator-confirmed 2026-04-08.
 
 ## Deployment Surfaces
 

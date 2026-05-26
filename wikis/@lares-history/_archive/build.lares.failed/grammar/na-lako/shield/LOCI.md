@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/shield/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/shield/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Shield
 
@@ -17,7 +17,7 @@ tarot: unknown — not a standard Tarot suit; possibly Major Arcana / The Moon /
 element: spirit / quintessence (candidate)
 hawaiian: "pā (enclosure, boundary, fence); also: kāhili (the feathered standard — mark of sacred protection)"
 raw-tool: not in Cosmic Trigger I four — extension
-confidence: SP:0.45
+confidence:SP~9
 sources-pending: [camden-benares, operator-input]
 ---
 ```

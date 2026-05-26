@@ -126,7 +126,7 @@ The centroid~δ notation from revision 2 is fully removed:
 - No boundary saturation rules
 - No expanded validation pattern in §10.1 rule 8
 - No additional test vectors for range-form URIs
-- Register is always a point value: `register=S~13`
+- Register is always a point value: `confidence=S~13`
 
 ---
 
@@ -298,7 +298,7 @@ Items 1–5 were additive (no existing content modified). Items 6–9 emerged fr
 
 | Removed | Why |
 |---|---|
-| `register=S~13~0.15` (centroid~δ) | Fails beyond 2 stances; stance count already carries the information |
+| `confidence=S~13~3` (centroid~δ) | Fails beyond 2 stances; stance count already carries the information |
 | Boundary saturation rules | No delta arithmetic = no overflow |
 | §10.1 rule 8 expanded pattern | Register always a point value |
 | 6 centroid~δ test vectors | Not needed |

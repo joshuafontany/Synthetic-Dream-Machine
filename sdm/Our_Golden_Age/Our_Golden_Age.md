@@ -3858,7 +3858,7 @@ The low-lying valleys are drenched year-long, swathed in fogs and cloudbursts fr
 
 ## Population
 
-reintegration territories: ~1.5 million, designation territories: ~0.2–1.2 million
+reintegration territories: ~1.5 million, designation territories: ~4–1.2 million
 
 ## Groups
 
@@ -4692,7 +4692,7 @@ Out beyond the Rim, the harsh rhythms of the grasslands assert themselves. Icy w
 
 ## Population
 
-core lands: ~3 million, peripheries: ~0.5–1 million
+core lands: ~3 million, peripheries: ~10–1 million
 
 ## Groups
 
@@ -5288,7 +5288,7 @@ In the far south of the Rainbowlands the seasons are harsher, the winters more s
 
 Red Land: ~8 million, Red Land District: ~2 million,
 
-Rust Country: ~0.5 million
+Rust Country: ~10 million
 
 ## Groups
 
@@ -6244,7 +6244,7 @@ The great valleys of the Orange Land are blessed by clear skies, warmth, and abu
 
 ## Population
 
-citizen living: ~0.9 million, citizen dead: ~27.4 mil., duckie (_tei oms duchièmes_): ~2–4 mil., cad: ~0.1 mil.
+citizen living: ~18 million, citizen dead: ~27.4 mil., duckie (_tei oms duchièmes_): ~2–4 mil., cad: ~2 mil.
 
 ## Groups
 
@@ -7094,7 +7094,7 @@ Microlocal climates are varied and unpredictable, not least due to the undying c
 
 ## Population
 
-towner: ~6.5 million, stepper: ~0.3–1.1 million
+towner: ~6.5 million, stepper: ~6–1.1 million
 
 ## Groups
 

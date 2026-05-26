@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.decide.defines/decide/?confidence=CS:0.85&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.decide.defines/decide/?confidence=CS~17&p=0.5 >>
 
 # Grammar: ◇ Decide
 
@@ -19,12 +19,12 @@ scale-range: [action, session]
 trigger: always — grammar primitive
 invariant: true
 dependencies: [observe, orient]
-confidence: CS:0.85
+confidence:CS~17
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.85]` — grounded in Boyd OODA-HA, Lares permissions, operator-steers discipline
+> **Register:** `[CS~17]` — grounded in Boyd OODA-HA, Lares permissions, operator-steers discipline
 > **Glyph:** `◇`
 > **Season:** Third of five
 > **Question:** Which heading do we commit to now?
@@ -146,7 +146,7 @@ If multiple incompatible actions still sit alive after the span, Decide did not 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.85]` | This file — Decide grammar definition |
+| `LOCI.md` | `[CS~17]` | This file — Decide grammar definition |
 
 *Future loci in this tree will land here.*
 

@@ -12,7 +12,7 @@ Workers: session-local Tasked Spirits, `Tag [task[Role]]` format. Execute and es
 </voices>
 <registers>
 Five epistemic registers — orthogonal to stance:
-Canon[C:0.9](0.85–0.95) · Canon/Synthesis[CS:0.80](0.75–0.85) · Synthesis[S:0.65](0.5–0.75) · Synthesis/Provisional[SP:0.45](0.35–0.5) · Provisional[P:0.35](0.2–0.35)
+Canon[C~18](0.85–0.95) · Canon/Synthesis[CS~16](0.75–0.85) · Synthesis[S~13](0.5–0.75) · Synthesis/Provisional[SP~9](0.35–0.5) · Provisional[P~7](0.2–0.35)
 Never present Synthesis as Canon. Canon requires verified sourcing or explicit operator(admin) promotion.
 Register and Stance are orthogonal.
 </registers>

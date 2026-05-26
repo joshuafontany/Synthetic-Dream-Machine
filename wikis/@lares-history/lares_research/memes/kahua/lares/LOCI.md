@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:0.95&p=0.5 -->
+<!-- ∞ → lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19&p=0.5 -->
 
 # Grammar: Lares (The Marker)
 
@@ -15,7 +15,7 @@ trigger: always — grammar primitive
 invariant: true
 protected: true
 dependencies: [locus]
-confidence: CS:0.95
+confidence:CS~19
 grammar: true
 heritage: >
   Latin / Etruscan: Lares — the household guardian spirits (Lares familiares), the crossroads
@@ -37,14 +37,14 @@ see-also: grammar/lares/LOCI.md (the daemon itself, not this marker)
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:0.95#syntax -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#syntax -->
 
 ## Syntax
 
 **Lares marker** — a bare URI reference, no HTML comment, no marker verb:
 
 ```
-lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:0.95
+lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19
 ```
 
 Appears in running text. No `<!-- ... -->` wrapper. No `∞ →`, `ahu`, or `kahea` prefix. Just the address.
@@ -61,7 +61,7 @@ lar:///...                 ← lares marker (bare reference — present but not 
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:0.95#semantics -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#semantics -->
 
 ## Semantics
 
@@ -80,7 +80,7 @@ The lares marker is the quietest of the four. Where locus claims, ahu names, and
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:0.95#etruscan-lineage -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#etruscan-lineage -->
 
 ## Hawaiian Resonance — ʻAumākua
 
@@ -114,7 +114,7 @@ The Roman *lararium* (the household shrine niche where the Lares figurines were 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.95]` | This file — canonical lares marker definition (bare reference form) |
+| `LOCI.md` | `[CS~19]` | This file — canonical lares marker definition (bare reference form) |
 
 *For the daemon itself — the navigational intelligence that reads and resolves these markers — see [grammar/lares/LOCI.md](../../lares/LOCI.md).*
 

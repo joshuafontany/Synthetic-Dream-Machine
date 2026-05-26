@@ -64,7 +64,7 @@ Talk-story stance: keep the Green Jello Dinosaur ridiculous and diagnostically u
 ## Thread Entry
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 21 Bureaucracy, origin thread — //resonance.error.greens [S:0.64] 🏛️+🌊++🎭++🔮-
+@lindwyrm@new-delos — YOLD 4995, 21 Bureaucracy, origin thread — //resonance.error.greens [S~13] 🏛️+🌊++🎭++🔮-
 ```
 
 The first orichalcum shaving should have done nothing.

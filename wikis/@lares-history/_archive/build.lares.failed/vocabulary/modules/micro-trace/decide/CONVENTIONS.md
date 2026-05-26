@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS~16&p=0.5 -->
 
 # Micro-trace — Normative Rules
 
-> Syntax and density bands. Source: `lares/signal/micro-trace.md` §§2–3 `[CS:0.80]`.
+> Syntax and density bands. Source: `lares/signal/micro-trace.md` §§2–3 `[CS~16]`.
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->

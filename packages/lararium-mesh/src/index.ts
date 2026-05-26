@@ -23,6 +23,7 @@ export * from "./recipe.js";
 export { bagStackFromRec } from "./bag-stack-from-rec.js";
 export * from "./composite-store.js";
 export * from "./ffz-clock.js";
+export * from "./pono-level.js";
 export * from "./lar-event-bus.js";
 export * from "./social-tiddlers.js";
 export * from "./automerge-doc-store.js";

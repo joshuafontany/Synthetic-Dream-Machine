@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.exchange.defines/exchange/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Exchange Protocol
 
@@ -20,7 +20,7 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [uri, hakaba, chronometer, stance, confidence, ooda-ha]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 heritage: >
   Hawaiian mele as signal-through-noise form: the structured opening,
@@ -28,12 +28,12 @@ heritage: >
 ---
 ```
 
-> **Register:** `[CS:0.80]` — operator-node signal contract
+> **Register:** `[CS~16]` — operator-node signal contract
 > **Question:** How does a work span stay navigable before, during, and after generation?
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#loop-position -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#loop-position -->
 
 ## Loop Position
 
@@ -68,7 +68,7 @@ Exchange should not:
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#handoff -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#handoff -->
 
 ## Handoff
 
@@ -95,7 +95,7 @@ work that the parent session cannot directly log.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#surface -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#surface -->
 
 ## Composable Surface
 
@@ -122,7 +122,7 @@ just as decorative trace.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#conventions -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#conventions -->
 
 ## Conventions
 
@@ -140,7 +140,7 @@ just as decorative trace.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#procedures -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#procedures -->
 
 ## Procedures
 
@@ -156,7 +156,7 @@ as a reusable or auditable exchange.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:0.80#reading-test -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#reading-test -->
 
 ## Reading Test
 
@@ -186,7 +186,7 @@ If the span reads like free-floating prose with no navigational shell, the proto
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — exchange protocol grammar; mele model |
+| `LOCI.md` | `[CS~16]` | This file — exchange protocol grammar; mele model |
 
 *Future loci in this tree will land here.*
 

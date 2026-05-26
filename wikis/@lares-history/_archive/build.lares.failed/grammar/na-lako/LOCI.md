@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/na-lako/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/na-lako/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Nā Lako — The Four Implements
 
@@ -22,7 +22,7 @@ trigger: always — grammar primitive
 invariant: true
 protected: false
 dependencies: [kahua, observe, orient, decide, act]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 sources: [cosmic-trigger-i-prologue, prometheus-rising-ch8]
 heritage: >
@@ -34,7 +34,7 @@ heritage: >
 > **Nā lako** (Hawaiian): *to be fully equipped, to have all necessary supplies.* A navigator setting
 > out with nā lako has everything needed for the voyage. Nothing missing.
 >
-> **Register:** `[SP:0.45]` — stubs. Prometheus Rising Ch.8 is the fuller grounding source. These
+> **Register:** `[SP~9]` — stubs. Prometheus Rising Ch.8 is the fuller grounding source. These
 > four implements will be True Named fully once that text is in the library.
 >
 > **Source:** Robert Anton Wilson, *Cosmic Trigger I* (1977), Prologue — "the wand of intuition,
@@ -43,7 +43,7 @@ heritage: >
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:0.45#heritage -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#heritage -->
 
 ## Heritage
 
@@ -65,7 +65,7 @@ the full kit. The Hawaiian navigator setting out with nā lako has every impleme
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:0.45#the-four -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#the-four -->
 
 ## The Four Implements
 
@@ -73,10 +73,10 @@ Individual LOCI — Hawaiian True Names and English True Names, stub, True Namin
 
 | Implement | Hawaiian LOCUS | English LOCUS | Grammar | Status |
 |---|---|---|---|---|
-| Wand of intuition | ['Ike]('ike/LOCI.md) | [Wand](wand/LOCI.md) | ✶ Observe | `[SP:0.45]` stub |
-| Cup of sympathy | [Ipu](ipu/LOCI.md) | [Cup](cup/LOCI.md) | ◎ Orient | `[SP:0.45]` stub |
-| Sword of reason | [Mana'o](mana-o/LOCI.md) | [Sword](sword/LOCI.md) | ◇ Decide | `[SP:0.45]` stub |
-| Pentacle of valor | [Koa](koa/LOCI.md) | [Pentacle](pentacle/LOCI.md) | ■ Act | `[SP:0.45]` stub |
+| Wand of intuition | ['Ike]('ike/LOCI.md) | [Wand](wand/LOCI.md) | ✶ Observe | `[SP~9]` stub |
+| Cup of sympathy | [Ipu](ipu/LOCI.md) | [Cup](cup/LOCI.md) | ◎ Orient | `[SP~9]` stub |
+| Sword of reason | [Mana'o](mana-o/LOCI.md) | [Sword](sword/LOCI.md) | ◇ Decide | `[SP~9]` stub |
+| Pentacle of valor | [Koa](koa/LOCI.md) | [Pentacle](pentacle/LOCI.md) | ■ Act | `[SP~9]` stub |
 
 **Fifth implement (candidate):** [Shield](shield/LOCI.md) — position in cluster open; see that LOCI for Talk Story questions.
 
@@ -87,7 +87,7 @@ transformation that becomes possible after passage, not during.
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:0.45#ooda-mapping -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#ooda-mapping -->
 
 ## OODA-HA Mapping
 
@@ -114,7 +114,7 @@ The Cabalistic aim: *"bringing the four circuits into balance"* = nā lako = arm
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:0.45#armed-together -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#armed-together -->
 
 ## Armed Together
 
@@ -136,17 +136,17 @@ The full OODA-HA loop IS the complete kit.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — nā lako cluster root |
-| `'ike/LOCI.md` | `[SP:0.45]` | Wand of intuition · 'Ike (Hawaiian) · ✶ Observe |
-| `ipu/LOCI.md` | `[SP:0.45]` | Cup of sympathy · Ipu (Hawaiian) · ◎ Orient |
-| `mana-o/LOCI.md` | `[SP:0.45]` | Sword of reason · Mana'o (Hawaiian) · ◇ Decide |
-| `koa/LOCI.md` | `[SP:0.45]` | Pentacle of valor · Koa (Hawaiian) · ■ Act |
-| `wand/LOCI.md` | `[SP:0.45]` | Wand of intuition (English) · ✶ Observe |
-| `cup/LOCI.md` | `[SP:0.45]` | Cup of sympathy (English) · ◎ Orient |
-| `sword/LOCI.md` | `[SP:0.45]` | Sword of reason (English) · ◇ Decide |
-| `pentacle/LOCI.md` | `[SP:0.45]` | Pentacle of valor (English) · ■ Act |
-| `shield/LOCI.md` | `[SP:0.45]` | Shield — fifth implement candidate · position open |
-| `tarot/LOCI.md` | `[SP:0.45]` | Tarot meta-locus — the 78-card system; Camden Benares pending |
+| `LOCI.md` | `[SP~9]` | This file — nā lako cluster root |
+| `'ike/LOCI.md` | `[SP~9]` | Wand of intuition · 'Ike (Hawaiian) · ✶ Observe |
+| `ipu/LOCI.md` | `[SP~9]` | Cup of sympathy · Ipu (Hawaiian) · ◎ Orient |
+| `mana-o/LOCI.md` | `[SP~9]` | Sword of reason · Mana'o (Hawaiian) · ◇ Decide |
+| `koa/LOCI.md` | `[SP~9]` | Pentacle of valor · Koa (Hawaiian) · ■ Act |
+| `wand/LOCI.md` | `[SP~9]` | Wand of intuition (English) · ✶ Observe |
+| `cup/LOCI.md` | `[SP~9]` | Cup of sympathy (English) · ◎ Orient |
+| `sword/LOCI.md` | `[SP~9]` | Sword of reason (English) · ◇ Decide |
+| `pentacle/LOCI.md` | `[SP~9]` | Pentacle of valor (English) · ■ Act |
+| `shield/LOCI.md` | `[SP~9]` | Shield — fifth implement candidate · position open |
+| `tarot/LOCI.md` | `[SP~9]` | Tarot meta-locus — the 78-card system; Camden Benares pending |
 
 ---
 

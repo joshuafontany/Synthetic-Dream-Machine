@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16&p=0.5 -->
 
 # Micro-trace — Verification
 
@@ -39,11 +39,11 @@ For any governed response, verify:
 <!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=0.80#promotion-criteria -->
 ## Promotion Criteria
 
-`lares/signal/micro-trace.md` is currently `[CS:0.80]`. For promotion to `[C:0.95]`:
+`lares/signal/micro-trace.md` is currently `[CS~16]`. For promotion to `[C~19]`:
 
 - [ ] Density band behavior validated across at least 10 real exchanges
 - [ ] Sub-agent URI pair format validated in at least 3 real sub-agent dispatches
 - [ ] Layer split rule validated: parse + trace coexist without substitution in at least 5 exchanges
-- [ ] `lares/signal/micro-trace.md` promoted to `C:0.95` ☐
+- [ ] `lares/signal/micro-trace.md` promoted to `C~19` ☐
 
 <!-- → ? -->

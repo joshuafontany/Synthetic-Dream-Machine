@@ -2,7 +2,7 @@
 
 > **Scope:** Talk story methodology, protocol evolution, narrative track maintenance
 > **Type:** Open-ended epic — sandboxed outside the sprint cycle. No exit gate. Work lands here when it doesn't fit a numbered sprint.
-> **Register:** `[CS:0.82]`
+> **Register:** `[CS~16]`
 > **Roadmap:** [ROADMAP.md](../../ROADMAP.md)
 
 ---
@@ -61,13 +61,13 @@ The TALK_STORY epic is the operator's workbench for the talk story protocol and 
 
 | Decision | Register |
 |---|---|
-| Talk story = ◎ Orient phase; mandatory, not optional | `[CS:0.82]` |
-| Narrative track register: `[C:0.95]` (corrected from `[C:0.99]`) | `[CS:0.82]` |
-| `lares/scrum/` as sprint operations root | `[CS:0.82]` |
-| Named epics (SIGNAL, CRYSTAL, INVARIANTS, REGISTRY, DEPLOY, DREAMDECK) | `[CS:0.82]` |
-| Sprint-local research in `sprints/000NN/`; cross-sprint in `lares/scrum/research/` | `[CS:0.82]` |
-| TALK_STORY is an epic sandbox, not a sprint | `[CS:0.82]` |
-| Compiler pipeline invalidated; content folded into S3/S4 | `[C:0.95]` |
+| Talk story = ◎ Orient phase; mandatory, not optional | `[CS~16]` |
+| Narrative track register: `[C~19]` (corrected from `[C~20]`) | `[CS~16]` |
+| `lares/scrum/` as sprint operations root | `[CS~16]` |
+| Named epics (SIGNAL, CRYSTAL, INVARIANTS, REGISTRY, DEPLOY, DREAMDECK) | `[CS~16]` |
+| Sprint-local research in `sprints/000NN/`; cross-sprint in `lares/scrum/research/` | `[CS~16]` |
+| TALK_STORY is an epic sandbox, not a sprint | `[CS~16]` |
+| Compiler pipeline invalidated; content folded into S3/S4 | `[C~19]` |
 
 ---
 

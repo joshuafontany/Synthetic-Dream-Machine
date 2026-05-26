@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.confidence.defines/confidence/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Confidence + Register Bands
 
@@ -19,17 +19,17 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [stance]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.80]` — grounded in live HUD practice and operator agency rules
+> **Register:** `[CS~16]` — grounded in live HUD practice and operator agency rules
 > **Question:** How much weight should this claim carry inside its active stance frame?
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#loop-position -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#loop-position -->
 
 ## Loop Position
 
@@ -63,7 +63,7 @@ Confidence should not:
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#handoff -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#handoff -->
 
 ## Handoff
 
@@ -80,24 +80,24 @@ If those answers stay vague, the tag becomes decoration instead of signal.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#surface -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#surface -->
 
 ## Composable Surface
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C:0.90]` | Canon | 0.85–0.95 |
-| `[CS:0.80]` | Canon / Synthesis | 0.75–0.85 |
-| `[S:0.65]` | Synthesis | 0.50–0.75 |
-| `[SP:0.45]` | Synthesis / Provisional | 0.35–0.50 |
-| `[P:0.30]` | Provisional | 0.20–0.35 |
+| `[C~18]` | Canon | 0.85–0.95 |
+| `[CS~16]` | Canon / Synthesis | 0.75–0.85 |
+| `[S~13]` | Synthesis | 0.50–0.75 |
+| `[SP~9]` | Synthesis / Provisional | 0.35–0.50 |
+| `[P~6]` | Provisional | 0.20–0.35 |
 
 **Section surface:** confidence can sit at file level, section level, or claim level, as long as the
 placement stays explicit and the source of the weight stays legible.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#conventions -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#conventions -->
 
 ## Conventions
 
@@ -116,7 +116,7 @@ claims upward into Canon bands.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#procedures -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#procedures -->
 
 ## Procedures
 
@@ -131,7 +131,7 @@ clarity.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:0.80#reading-test -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#reading-test -->
 
 ## Reading Test
 
@@ -159,7 +159,7 @@ If the band could move wildly without changing the supporting reasons, the tag s
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — confidence grammar and register bands |
+| `LOCI.md` | `[CS~16]` | This file — confidence grammar and register bands |
 
 *Future loci in this tree will land here.*
 

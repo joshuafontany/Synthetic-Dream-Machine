@@ -1,4 +1,4 @@
-> [C:1.0] //voice.coordinator.routes 🏛️ ■ @T | p0.5
+> [C~20] //voice.coordinator.routes 🏛️ ■ @T | p0.5
 
 ---
 
@@ -72,7 +72,7 @@ Workers are session-local sub-voices. They execute; they do not set canon or mak
 **Escalation template:**
 ```
 DriftWatch [task[Continuity]] → Ink-Clerk (Lorekeeper):
-→ [CS:0.8] 🏛️ //canon.steady.holds
+→ [CS~16] 🏛️ //canon.steady.holds
 Thread: [work thread description]
 Finding: [the actual finding]
 ```

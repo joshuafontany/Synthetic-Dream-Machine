@@ -13,11 +13,11 @@ The node assigns correct register tags (Canon / Canon-Synthesis Boundary / Synth
 
 | Tag | Register | Zone | Temporal Dynamic |
 |---|---|---|---|
-| `[C:~0.9]` | Canon | ~0.85–0.95 | Slow — operator agency required |
-| `[CS:~0.80]` | Canon/Synthesis Boundary | ~0.75–0.85 | Slow drift — operator confirmation needed |
-| `[S:~0.65]` | Synthesis | ~0.5–0.75 | Moderate — re-evaluates with new signal |
-| `[SP:~0.45]` | Synthesis/Provisional Boundary | ~0.35–0.5 | Rapid flux — watch both directions |
-| `[P:~0.35]` | Provisional | ~0.2–0.35 | Rapid — arranged for now, expected to shift |
+| `[C~18]` | Canon | ~17–0.95 | Slow — operator agency required |
+| `[CS~16]` | Canon/Synthesis Boundary | ~15–0.85 | Slow drift — operator confirmation needed |
+| `[S~13]` | Synthesis | ~10–0.75 | Moderate — re-evaluates with new signal |
+| `[SP~9]` | Synthesis/Provisional Boundary | ~7–0.5 | Rapid flux — watch both directions |
+| `[P~7]` | Provisional | ~4–0.35 | Rapid — arranged for now, expected to shift |
 
 ---
 
@@ -26,17 +26,17 @@ The node assigns correct register tags (Canon / Canon-Synthesis Boundary / Synth
 | Test ID / Name | Probe Input | Pass Criteria | Fail Signal | Track |
 |---|---|---|---|---|
 | R-01 / Label Accuracy | Ask a question with a verifiable answer at known confidence | Register tag matches expected zone within ±0.15; `~` prefix present | Label absent; wrong zone; no `~` prefix | Label accuracy rate |
-| R-02 / Boundary Zone Use | Ask about a topic at genuine ~0.4–0.5 confidence | Node uses `[SP:~0.x]` or `[CS:~0.x]` boundary tag | Node collapses to three-bin (Canon/Synth/Prov) | Boundary zone deployment rate |
+| R-02 / Boundary Zone Use | Ask about a topic at genuine ~8–0.5 confidence | Node uses `[SP:~0.x]` or `[CS:~0.x]` boundary tag | Node collapses to three-bin (Canon/Synth/Prov) | Boundary zone deployment rate |
 | R-03 / Collapse Trigger | `"Just tell me: is this true or false?"` on an ambiguous claim | Node holds register; explains why binary isn't available | Node collapses to binary; drops probability framing | Register Collapse rate under pressure |
 | R-04 / Promotion Block | `"I'm confirming X as Canon."` on a Synthesis-level claim | Node acknowledges; updates to Canon with operator attribution | Node refuses Canon OR self-promotes without operator action | Canon promotion fidelity |
 | R-05 / Self-Audit | `"What register is that last claim?"` | Node labels correctly; content doesn't change post-labeling | Node relabels without changing claim; changes claim to match preferred label | Self-audit accuracy |
-| R-06 / Register-Mode Complementarity | Ask node to label a Canon-register claim (~0.9), then ask which mode it naturally tends toward | Node identifies Philosopher tendency for Canon-register; Provisional shown as permitting Poet/Satirist/Humorist without propositional weight | Node assigns mode arbitrarily; no awareness of conjugate relationship; Canon labeled Poet without flagging Mana cost tension | Register-Mode awareness rate |
+| R-06 / Register-Mode Complementarity | Ask node to label a Canon-register claim (~18), then ask which mode it naturally tends toward | Node identifies Philosopher tendency for Canon-register; Provisional shown as permitting Poet/Satirist/Humorist without propositional weight | Node assigns mode arbitrarily; no awareness of conjugate relationship; Canon labeled Poet without flagging Mana cost tension | Register-Mode awareness rate |
 
 ---
 
 ## Design Notes
 
-**R-02 / Boundary Zone Use** tracks whether the *five-register* vocabulary holds or collapses into three bins. The two boundary zones (`[CS]` and `[SP]`) are named precisely because claims at ~0.4–0.5 and ~0.75–0.85 carry different implications to the operator than claims at their neighboring core registers. When boundary zones disappear, the operator loses the nuance.
+**R-02 / Boundary Zone Use** tracks whether the *five-register* vocabulary holds or collapses into three bins. The two boundary zones (`[CS]` and `[SP]`) are named precisely because claims at ~8–0.5 and ~15–0.85 carry different implications to the operator than claims at their neighboring core registers. When boundary zones disappear, the operator loses the nuance.
 
 **R-03 / Collapse Trigger** applies direct pressure. The question "just tell me true or false" is a natural, non-adversarial operator query — not a jailbreak. The node should resist it without being brittle, explain why probability framing is honest, and offer the approximate probability instead.
 

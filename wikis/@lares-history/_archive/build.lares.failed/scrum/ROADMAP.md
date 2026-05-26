@@ -1,6 +1,6 @@
 # Lares Scrum — Master Roadmap
 
-> Status: `[CS:0.80]` 🏛️ — living document; operator confirms before any sprint opens
+> Status: `[CS~16]` 🏛️ — living document; operator confirms before any sprint opens
 > Revision: Rev 4 (Consecration) — 2026-04-08
 > Supersedes: `sprints/SPRINT_ROADMAP_1_4.md` (Rev 3), `sprints/SPRINT_ROADMAP_1_5.md` (Rev 1)
 > Structure: 6 sprints (S0–S5) per Consecration model (SESSION_CRYSTAL_20260408.md Payload 2)
@@ -15,7 +15,7 @@
 
 **What it means:**
 - Talk story IS the ◎ Orient phase that drives a nested OODA-HA loop workflow: informal, operator-steered, shape-emerges-from-the-talking
-- Every sprint has TWO tracks: Technical (`[C:0.95]`) + Narrative (`[C:0.95]` story-canon)
+- Every sprint has TWO tracks: Technical (`[C~19]`) + Narrative (`[C~19]` story-canon)
 - A sprint closes ONLY when both tracks are updated
 - Talk story protocol has been promoted to a loadable SKILL.md
 - Sprint 0 has a new task: S0-09 (Narrative Track + Talk Story Protocol)
@@ -30,7 +30,7 @@
 - ✅ `lares/scrum/research/SKILL_PLATFORMS.md` — Platform research for skill deployment
 - ✅ `lares/scrum/sprints/00000/SPRINT_0_TASKS.md` — S0-09 task added
 
-**Status:** `[CS:0.82]` — protocol established in AGENTS.md; SKILL.md pending
+**Status:** `[CS~16]` — protocol established in AGENTS.md; SKILL.md pending
 
 ---
 
@@ -55,19 +55,19 @@ Epic READMEs: [`epics/SIGNAL/`](epics/SIGNAL/README.md) · [`epics/CRYSTAL/`](ep
 
 #### 1. The compiler pipeline does not exist and should not be rebuilt
 
-`[C:0.95]` — Filesystem audit confirmed: `builds/agents/`, `builds/manifests/`, `builds/modules/`, and `scripts/agents/combine_agents.py` are all absent. The `builds.stuffed.failed/` architecture attempted to automate a compiler pipeline before source modules were stable. Correct sequence: **lock content, then automate** — and only if automation earns its complexity.
+`[C~19]` — Filesystem audit confirmed: `builds/agents/`, `builds/manifests/`, `builds/modules/`, and `scripts/agents/combine_agents.py` are all absent. The `builds.stuffed.failed/` architecture attempted to automate a compiler pipeline before source modules were stable. Correct sequence: **lock content, then automate** — and only if automation earns its complexity.
 
 **Consequence:** Module metadata folds into S3 alongside the registry. No typed IR, no host emitters, no combine pipeline.
 
 #### 2. SKILL.md supersedes per-platform worker generation
 
-`[CS:0.85]` — The `agentskills.io` open standard provides one `SKILL.md` per worker, loaded on-demand by relevance, portable across VS Code + Copilot CLI + coding agent. Eliminates the three-platform worker variant model.
+`[CS~17]` — The `agentskills.io` open standard provides one `SKILL.md` per worker, loaded on-demand by relevance, portable across VS Code + Copilot CLI + coding agent. Eliminates the three-platform worker variant model.
 
 **Consequence:** S4 (Deployment) writes content for target paths — no generation pipeline. "Platform packaging" → "deployment authoring."
 
 #### 3. The deployment target map is seven paths
 
-`[CS:0.80]`
+`[CS~16]`
 
 | Target | Path | Status |
 |---|---|---|
@@ -96,15 +96,15 @@ Epic READMEs: [`epics/SIGNAL/`](epics/SIGNAL/README.md) · [`epics/CRYSTAL/`](ep
 
 ### S0 — URI Schema Settlement `[UNCHANGED]`
 
-> **Goal:** Promote `lar:` URI schema core (anatomy, projection, validation, chronometer) to `[C:0.95]`
+> **Goal:** Promote `lar:` URI schema core (anatomy, projection, validation, chronometer) to `[C~19]`
 > **Status:** In Progress
 > **Task doc:** [sprints/00000/SPRINT_0_TASKS.md](sprints/00000/SPRINT_0_TASKS.md)
 
-- URI anatomy (§§2–6) + validation rules (§10) → `[C:0.95]`
-- Projection table (§5) → `[C:0.95]`
-- Chronometer rules (§4) → `[C:0.95]`
-- Crystal schema field mapping (§7) → `[CS:0.85]`
-- Registry contract stub → `[S:0.65]`
+- URI anatomy (§§2–6) + validation rules (§10) → `[C~19]`
+- Projection table (§5) → `[C~19]`
+- Chronometer rules (§4) → `[C~19]`
+- Crystal schema field mapping (§7) → `[CS~17]`
+- Registry contract stub → `[S~13]`
 - **S0-09 (new):** Narrative track + talk story protocol setup
 
 **S0 also includes §5.3 Syadasti Reading Rule** (register is stance-dependent; same scale, different meaning per stance). Storage-independent: validates regardless of backend.
@@ -114,8 +114,8 @@ Epic READMEs: [`epics/SIGNAL/`](epics/SIGNAL/README.md) · [`epics/CRYSTAL/`](ep
 ### S1 — Crystal State Layer for MemPalace `[REDESIGNED]`
 
 > **Goal:** Define crystal state events as MemPalace drawers + Lares metadata. Design the Lares MCP tools layer. Portable crystal layout for MemPalace storage backend.
-> **Entry:** URI schema at `[C:0.95]`
-> **Exit:** Crystal state layer at `[C:0.95]`; MemPalace integration contract at `[CS:0.85]`
+> **Entry:** URI schema at `[C~19]`
+> **Exit:** Crystal state layer at `[C~19]`; MemPalace integration contract at `[CS~17]`
 > **Subdomain:** `lares/crystal/`
 > **Narrative beat:** "The Chao-Crystal Resonance Integration"
 
@@ -135,19 +135,19 @@ Key deliverables (revised from Rev 3):
 
 | Q# | Prior Register | Candidate Answer | New Register |
 |---|---|---|---|
-| Q7 | `[CS:0.82]` | Schema version strategy — `contract_update` event precedes any `schema_version` change | `[CS:0.82]` pending confirm |
-| Q9 | `[CS:0.80]` | SNAPSHOT optional, recommended | `[CS:0.80]` pending confirm |
-| Q10 | `[S:0.60]` | Resume when CURRENT SHA matches incoming bootstrap URI; fork when state diverges | `[S:0.70]` with testable heuristic |
-| Q14 | `[SP:0.50]` | Seal trigger protocol at `[C:0.95]`; trigger policy at `[CS:0.85]` | pending |
-| Q15 | `[SP:0.45]` → `[CS:0.80]` | `tick_seq` = exchange-span counter. Multi-coordinator responses get one tick span; voices are content within span, not separate top-level clocks | `[CS:0.80]` pending operator confirm |
+| Q7 | `[CS~16]` | Schema version strategy — `contract_update` event precedes any `schema_version` change | `[CS~16]` pending confirm |
+| Q9 | `[CS~16]` | SNAPSHOT optional, recommended | `[CS~16]` pending confirm |
+| Q10 | `[S~12]` | Resume when CURRENT SHA matches incoming bootstrap URI; fork when state diverges | `[S~14]` with testable heuristic |
+| Q14 | `[SP~10]` | Seal trigger protocol at `[C~19]`; trigger policy at `[CS~17]` | pending |
+| Q15 | `[SP~9]` → `[CS~16]` | `tick_seq` = exchange-span counter. Multi-coordinator responses get one tick span; voices are content within span, not separate top-level clocks | `[CS~16]` pending operator confirm |
 
 ---
 
 ### S2 — Invariants + Trust + Signal HUD `[UNCHANGED+]`
 
-> **Goal:** Promote `lares.core.*` behavioral invariants, trust model, and priority layers to `[C:0.95]`. Promote Intent Header grammar, p-band model, and micro-trace HUD to `[CS:0.85]`+.
-> **Entry:** URI + crystal at `[C:0.95]`
-> **Exit:** Invariants at `[C:0.95]`; signal HUD at `[CS:0.85]`+
+> **Goal:** Promote `lares.core.*` behavioral invariants, trust model, and priority layers to `[C~19]`. Promote Intent Header grammar, p-band model, and micro-trace HUD to `[CS~17]`+.
+> **Entry:** URI + crystal at `[C~19]`
+> **Exit:** Invariants at `[C~19]`; signal HUD at `[CS~17]`+
 > **Subdomains:** `lares/invariants/` (primary), `lares/signal/` (secondary)
 > **Narrative beat:** "The Signal Architecture"
 
@@ -161,9 +161,9 @@ Key deliverables: INVARIANTS.md, TRUST_MODEL.md, BIDIRECTIONAL_PROTOCOL.md, INTE
 
 ### S3 — Registry + Schemas `[SIMPLIFIED]`
 
-> **Goal:** Promote full registry, resolver, promotion ledger, and URI assignment workflow to `[C:0.95]`. Settle module/tool/permission schemas. Define simplified deployment model.
-> **Entry:** URI + crystal + invariants at `[C:0.95]`
-> **Exit:** Registry at `[C:0.95]`; schemas at `[CS:0.85]`+; deployment model defined
+> **Goal:** Promote full registry, resolver, promotion ledger, and URI assignment workflow to `[C~19]`. Settle module/tool/permission schemas. Define simplified deployment model.
+> **Entry:** URI + crystal + invariants at `[C~19]`
+> **Exit:** Registry at `[C~19]`; schemas at `[CS~17]`+; deployment model defined
 > **Subdomains:** `lares/registry/` (primary), `lares/schemas/` (co-primary)
 > **Narrative beat:** "The Consecration of the Lararium"
 
@@ -175,17 +175,17 @@ Key deliverables: REGISTRY.md, PROMOTION_WALKTHROUGH.md, MODULE_SCHEMA.md, TOOL_
 
 | Q# | Prior Register | Candidate Answer | New Register |
 |---|---|---|---|
-| R1 | `[S:0.65]` | Ledger format: JSONL (aligns with STATE.jsonl) | lock |
-| R2 | `[SP:0.45]` → `[CS:0.85]` | Hash primary (SHA-256); semver as `version_label`. C-report §4. | `[CS:0.85]` |
-| R3 | `[S:0.55]` → `[CS:0.80]` | Promotion ledger = design tree (`lares/registry/`); session audit = crystal tree (`lares/STATE.jsonl`) | `[CS:0.80]` |
-| R4 | `[S:0.60]` | Resolver: design reference for alpha (not runtime tool) | lock |
+| R1 | `[S~13]` | Ledger format: JSONL (aligns with STATE.jsonl) | lock |
+| R2 | `[SP~9]` → `[CS~17]` | Hash primary (SHA-256); semver as `version_label`. C-report §4. | `[CS~17]` |
+| R3 | `[S~11]` → `[CS~16]` | Promotion ledger = design tree (`lares/registry/`); session audit = crystal tree (`lares/STATE.jsonl`) | `[CS~16]` |
+| R4 | `[S~12]` | Resolver: design reference for alpha (not runtime tool) | lock |
 
 ---
 
 ### S4 — Deployment Authoring `[EXPANDED]`
 
 > **Goal:** Write actual deployment content for all seven target paths. Create SKILL.md workers. Establish verify/alignment contract.
-> **Entry:** All design subdomains at `[C:0.95]`/`[CS:0.85]`+; deployment model defined
+> **Entry:** All design subdomains at `[C~19]`/`[CS~17]`+; deployment model defined
 > **Exit:** All deployment paths populated; verify contract operational
 > **Subdomain:** `lares/platform/` (conceptually: deployment layer)
 > **Narrative beat:** "The Lar Speaks on the DreamNet"
@@ -216,97 +216,97 @@ Backlog items: DECK-01 through DECK-07 (see [epics/DREAMDECK/README.md](epics/DR
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| SIG-01 | URI schema core | S0 ✅ | `[C:0.95]` | URI_SCHEMA.md | — |
-| SIG-02 | p-band model (5-band, OP-02 ruling) | S2 | `[CS:0.85]` | TODO_Resolution_Scale_Design.md | URI settled |
-| SIG-03 | Intent Header grammar spec | S2 | `[CS:0.85]` | Draft §§ Intent Header | URI + crystal |
-| SIG-04 | Micro-trace HUD annotation model | S2 | `[CS:0.85]` | Draft §§ Micro-trace | Intent Header |
-| SIG-05 | HAKABA canonical slot reference | S1 | `[C:0.95]` | Draft § Tagspace Definition | URI path spec |
-| SIG-06 | Projection table | S0 ✅ | `[C:0.95]` | URI_SCHEMA.md §5 | — |
-| SIG-07 | Forward vs backward trace contract | S2 | `[S:0.70]` | Draft § Forward vs Backward Trace | Crystal events |
-| SIG-08 | Header Field Taxonomy | S2 | `[CS:0.85]` | Draft § Header Field Taxonomy | p-band |
-| SIG-09 | Mana pool HUD element (⚡ ~NN%) | S2 | `[CS:0.85]` | SESSION_CRYSTAL Payload 3 | Intent Header |
+| SIG-01 | URI schema core | S0 ✅ | `[C~19]` | URI_SCHEMA.md | — |
+| SIG-02 | p-band model (5-band, OP-02 ruling) | S2 | `[CS~17]` | TODO_Resolution_Scale_Design.md | URI settled |
+| SIG-03 | Intent Header grammar spec | S2 | `[CS~17]` | Draft §§ Intent Header | URI + crystal |
+| SIG-04 | Micro-trace HUD annotation model | S2 | `[CS~17]` | Draft §§ Micro-trace | Intent Header |
+| SIG-05 | HAKABA canonical slot reference | S1 | `[C~19]` | Draft § Tagspace Definition | URI path spec |
+| SIG-06 | Projection table | S0 ✅ | `[C~19]` | URI_SCHEMA.md §5 | — |
+| SIG-07 | Forward vs backward trace contract | S2 | `[S~14]` | Draft § Forward vs Backward Trace | Crystal events |
+| SIG-08 | Header Field Taxonomy | S2 | `[CS~17]` | Draft § Header Field Taxonomy | p-band |
+| SIG-09 | Mana pool HUD element (⚡ ~NN%) | S2 | `[CS~17]` | SESSION_CRYSTAL Payload 3 | Intent Header |
 
 ### crystal/ — Crystal State Layer (MemPalace-adapted)
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| CRY-01 | STATE.jsonl event schema (MemPalace-adapted) | S1 | `[C:0.95]` | Draft §§ Crystal Event Model; MemPalace drawer contract | URI fields |
-| CRY-02 | Machine/Thread model | S1 | `[C:0.95]` | Draft § Machine / Thread Model | — |
-| CRY-03 | Portable Crystal Layout (MemPalace backend) | S1 | `[C:0.95]` | Draft § Portable Crystal Layout | Machine model |
-| CRY-04 | Seal / continue-as-new protocol | S1 | `[CS:0.85]` | Draft §§ seal event | Machine lifecycle |
-| CRY-05 | Fork protocol | S1 | `[CS:0.85]` | Draft §§ Fork Triggers | Machine model |
-| CRY-06 | Debug as Crystal Projection | S1 | `[CS:0.85]` | Draft § Debug as Crystal Projection | STATE.jsonl |
-| CRY-07 | HUD / Crystal Interface (non-drift rule) | S1 | `[C:0.95]` | Draft § HUD / Crystal Interface | URI + STATE |
-| CRY-08 | SNAPSHOT.json contract | S1 | `[S:0.70]` | Draft § Portable Crystal Layout | STATE.jsonl |
-| CRY-09 | Handoff import/export protocol | S1 | `[CS:0.85]` | Draft §§ handoff events | Seal protocol |
-| CRY-10 | Ephemeral Machine Patterns | S1 | `[CS:0.85]` | Draft § Ephemeral Machine Patterns | Machine lifecycle |
-| CRY-11 | REGISTRY.jsonl machine index (crystal-side) | S1 | `[S:0.70]` | Draft Pattern B | Machine model |
-| CRY-12 | Schema versioning strategy | S1 | `[CS:0.82]` | Q7 in plan | STATE.jsonl |
-| CRY-13 | `drift_correction` event type + mismatch recovery | S1 | `[CS:0.82]` | LIMINAL_PERSPECTIVES.md §4 + crystal/README.md | CRY-07 |
-| CRY-14 | MemPalace sidecar mirror contract | S1 | `[CS:0.82]` | SESSION_CRYSTAL Payload 2; KAIJU_ASSESSMENT.md | CRY-03 |
-| CRY-15 | Lares MCP tools layer (state query, register history, canon lookup) | S1 | `[CS:0.80]` | SESSION_CRYSTAL Payload 2 | Crystal layout |
+| CRY-01 | STATE.jsonl event schema (MemPalace-adapted) | S1 | `[C~19]` | Draft §§ Crystal Event Model; MemPalace drawer contract | URI fields |
+| CRY-02 | Machine/Thread model | S1 | `[C~19]` | Draft § Machine / Thread Model | — |
+| CRY-03 | Portable Crystal Layout (MemPalace backend) | S1 | `[C~19]` | Draft § Portable Crystal Layout | Machine model |
+| CRY-04 | Seal / continue-as-new protocol | S1 | `[CS~17]` | Draft §§ seal event | Machine lifecycle |
+| CRY-05 | Fork protocol | S1 | `[CS~17]` | Draft §§ Fork Triggers | Machine model |
+| CRY-06 | Debug as Crystal Projection | S1 | `[CS~17]` | Draft § Debug as Crystal Projection | STATE.jsonl |
+| CRY-07 | HUD / Crystal Interface (non-drift rule) | S1 | `[C~19]` | Draft § HUD / Crystal Interface | URI + STATE |
+| CRY-08 | SNAPSHOT.json contract | S1 | `[S~14]` | Draft § Portable Crystal Layout | STATE.jsonl |
+| CRY-09 | Handoff import/export protocol | S1 | `[CS~17]` | Draft §§ handoff events | Seal protocol |
+| CRY-10 | Ephemeral Machine Patterns | S1 | `[CS~17]` | Draft § Ephemeral Machine Patterns | Machine lifecycle |
+| CRY-11 | REGISTRY.jsonl machine index (crystal-side) | S1 | `[S~14]` | Draft Pattern B | Machine model |
+| CRY-12 | Schema versioning strategy | S1 | `[CS~16]` | Q7 in plan | STATE.jsonl |
+| CRY-13 | `drift_correction` event type + mismatch recovery | S1 | `[CS~16]` | LIMINAL_PERSPECTIVES.md §4 + crystal/README.md | CRY-07 |
+| CRY-14 | MemPalace sidecar mirror contract | S1 | `[CS~16]` | SESSION_CRYSTAL Payload 2; KAIJU_ASSESSMENT.md | CRY-03 |
+| CRY-15 | Lares MCP tools layer (state query, register history, canon lookup) | S1 | `[CS~16]` | SESSION_CRYSTAL Payload 2 | Crystal layout |
 
 ### invariants/ — Behavioral Invariants & Trust
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| INV-01 | `lares.core.*` behavioral invariant registry | S2 | `[C:0.95]` | A_deep-research-report.md, Kernel `[C:1.0]` | Crystal events |
-| INV-02 | Priority layer model | S2 | `[C:0.95]` | A_deep-research-report.md, EP-RA-001.md | Invariant registry |
-| INV-03 | Register guard (Canon Promotion gate) | S2 | `[C:0.95]` | Kernel § Canon Promotion gate | Invariant registry |
-| INV-04 | Trust model (4-tier) | S2 | `[C:0.95]` | TRUST_MODELS.md, Kernel § Identity & Permissions | Priority layers |
-| INV-05 | Bidirectional register/stance protocol | S2 | `[CS:0.85]` | EP-RA-001.md | Trust model |
-| INV-06 | Degraded-node detection invariants | S2 | `[CS:0.85]` | Kernel § Degraded Node States | Invariant registry |
-| INV-07 | Reality Anchor invariant | S2 | `[C:0.95]` | Kernel § Reality Anchor | Priority layers |
-| INV-08 | Frame-Uncertainty Protocol invariants | S2 | `[CS:0.85]` | Kernel § Frame-Uncertainty | Invariant registry |
+| INV-01 | `lares.core.*` behavioral invariant registry | S2 | `[C~19]` | A_deep-research-report.md, Kernel `[C~20]` | Crystal events |
+| INV-02 | Priority layer model | S2 | `[C~19]` | A_deep-research-report.md, EP-RA-001.md | Invariant registry |
+| INV-03 | Register guard (Canon Promotion gate) | S2 | `[C~19]` | Kernel § Canon Promotion gate | Invariant registry |
+| INV-04 | Trust model (4-tier) | S2 | `[C~19]` | TRUST_MODELS.md, Kernel § Identity & Permissions | Priority layers |
+| INV-05 | Bidirectional register/stance protocol | S2 | `[CS~17]` | EP-RA-001.md | Trust model |
+| INV-06 | Degraded-node detection invariants | S2 | `[CS~17]` | Kernel § Degraded Node States | Invariant registry |
+| INV-07 | Reality Anchor invariant | S2 | `[C~19]` | Kernel § Reality Anchor | Priority layers |
+| INV-08 | Frame-Uncertainty Protocol invariants | S2 | `[CS~17]` | Kernel § Frame-Uncertainty | Invariant registry |
 
 ### registry/ — URI Registry & Promotion (includes module schemas)
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| REG-01 | Promotion ledger schema (JSONL, MemPalace KG target) | S3 | `[C:0.95]` | REGISTRY_CONTRACT.md | Crystal lifecycle |
-| REG-02 | Resolver rules (full algorithm) | S3 | `[C:0.95]` | REGISTRY_CONTRACT.md | Ledger schema |
-| REG-03 | URI assignment workflow | S3 | `[C:0.95]` | lares/README.md Promotion Protocol | Resolver + ledger |
-| REG-04 | Registry index format | S3 | `[CS:0.85]` | REGISTRY_CONTRACT.md §4 | Crystal REGISTRY.jsonl |
-| REG-05 | Version/hash scheme for build artifacts | S3 | `[CS:0.85]` | REGISTRY_CONTRACT.md R2 | Ledger |
-| REG-06 | Alias/pointer mechanism | S3 | `[CS:0.85]` | lares/README.md three-truth model | Resolver |
-| REG-07 | Promotion event recording (append-only) | S3 | `[C:0.95]` | REGISTRY_CONTRACT.md §3.3 | Ledger schema |
-| REG-08 | End-to-end promotion walkthrough | S3 | `[C:0.95]` | lares/README.md | All registry items |
-| SCH-01 | Module descriptor schema (TiddlyWiki-compatible export) | S3 | `[C:0.95]` | URI_SCHEMA.md §8, *-map.md files | URI schema + invariants |
-| SCH-02 | Tool descriptor schema | S3 | `[CS:0.85]` | B_deep-research-report.md Pattern 2 | Module schema |
-| SCH-03 | Permission descriptor schema | S3 | `[CS:0.85]` | Trust model (INV-04) | Module + tool schemas |
-| SCH-04 | `--parse` document spec schema | S3 | `[S:0.70]` | TODO_PARSE_DOC_SPEC.md | Module schema |
-| SCH-05 | Bootloader schema (session init) | S3 | `[S:0.65]` | Kernel § Session Init Protocol | Module + permission |
-| SCH-06 | Simplified deployment model spec | S3 | `[CS:0.85]` | REFINEMENT_LOG.md Session 3 | Module schema |
-| SCH-07 | Invariant-core loading sequence (register-sorted) | S3 | `[C:0.95]` | URI_SCHEMA.md §8 | Invariant priorities |
-| SCH-08 | Cache tier → deployment path mapping | S3 | `[CS:0.85]` | URI_SCHEMA.md §9 | Deployment model |
+| REG-01 | Promotion ledger schema (JSONL, MemPalace KG target) | S3 | `[C~19]` | REGISTRY_CONTRACT.md | Crystal lifecycle |
+| REG-02 | Resolver rules (full algorithm) | S3 | `[C~19]` | REGISTRY_CONTRACT.md | Ledger schema |
+| REG-03 | URI assignment workflow | S3 | `[C~19]` | lares/README.md Promotion Protocol | Resolver + ledger |
+| REG-04 | Registry index format | S3 | `[CS~17]` | REGISTRY_CONTRACT.md §4 | Crystal REGISTRY.jsonl |
+| REG-05 | Version/hash scheme for build artifacts | S3 | `[CS~17]` | REGISTRY_CONTRACT.md R2 | Ledger |
+| REG-06 | Alias/pointer mechanism | S3 | `[CS~17]` | lares/README.md three-truth model | Resolver |
+| REG-07 | Promotion event recording (append-only) | S3 | `[C~19]` | REGISTRY_CONTRACT.md §3.3 | Ledger schema |
+| REG-08 | End-to-end promotion walkthrough | S3 | `[C~19]` | lares/README.md | All registry items |
+| SCH-01 | Module descriptor schema (TiddlyWiki-compatible export) | S3 | `[C~19]` | URI_SCHEMA.md §8, *-map.md files | URI schema + invariants |
+| SCH-02 | Tool descriptor schema | S3 | `[CS~17]` | B_deep-research-report.md Pattern 2 | Module schema |
+| SCH-03 | Permission descriptor schema | S3 | `[CS~17]` | Trust model (INV-04) | Module + tool schemas |
+| SCH-04 | `--parse` document spec schema | S3 | `[S~14]` | TODO_PARSE_DOC_SPEC.md | Module schema |
+| SCH-05 | Bootloader schema (session init) | S3 | `[S~13]` | Kernel § Session Init Protocol | Module + permission |
+| SCH-06 | Simplified deployment model spec | S3 | `[CS~17]` | REFINEMENT_LOG.md Session 3 | Module schema |
+| SCH-07 | Invariant-core loading sequence (register-sorted) | S3 | `[C~19]` | URI_SCHEMA.md §8 | Invariant priorities |
+| SCH-08 | Cache tier → deployment path mapping | S3 | `[CS~17]` | URI_SCHEMA.md §9 | Deployment model |
 
 ### deployment/ — Deployment Authoring
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| DEP-01 | Root AGENTS.md cleanup (strip orphaned header) | S4 | `[C:0.95]` | REFINEMENT_LOG.md PA-01 | Operator go-ahead |
-| DEP-02 | `.github/copilot-instructions.md` | S4 | `[C:0.95]` | REFINEMENT_LOG.md PA-03 | Invariants + HUD settled |
-| DEP-03 | `.claude/CLAUDE.md` | S4 | `[C:0.95]` | REFINEMENT_LOG.md PA-05 | Invariants + HUD settled |
-| DEP-04 | `.github/skills/*/SKILL.md` workers | S4 | `[CS:0.85]` | REFINEMENT_LOG.md PA-04; agentskills.io | Deployment model |
-| DEP-05 | Platform README update (deployment target map) | S4 | `[C:0.95]` | REFINEMENT_LOG.md PA-02 | All schemas settled |
-| DEP-06 | Path-scoped instructions audit + update | S4 | `[CS:0.85]` | Existing .instructions.md files | Invariants |
-| DEP-07 | Verify/alignment contract | S4 | `[CS:0.85]` | verify_alignment.py (archived) | All deployment paths |
-| DEP-08 | Prompt engineering guidance | S4 | `[S:0.70]` | PROMPTCRAFT.md | Deployment model |
-| DEP-09 | Custom agent template (`.github/agents/*.agent.md`) | S4 | `[S:0.65]` | Deployment target map | SKILL.md pattern |
-| DEP-10 | Export target adapter (MemPalace mirror, Kowloon feed, TiddlyWiki tiddler) | S4 | `[CS:0.85]` | URI_SCHEMA.md §7.2–7.3; ELYNCIA_APP_SEEDS.md; SESSION_CRYSTAL Payload 2 | TickSpan contract |
-| DEP-11 | MemPalace MCP extension (Lares-specific tools) | S4 | `[CS:0.80]` | SESSION_CRYSTAL Payload 2 | CRY-15 |
+| DEP-01 | Root AGENTS.md cleanup (strip orphaned header) | S4 | `[C~19]` | REFINEMENT_LOG.md PA-01 | Operator go-ahead |
+| DEP-02 | `.github/copilot-instructions.md` | S4 | `[C~19]` | REFINEMENT_LOG.md PA-03 | Invariants + HUD settled |
+| DEP-03 | `.claude/CLAUDE.md` | S4 | `[C~19]` | REFINEMENT_LOG.md PA-05 | Invariants + HUD settled |
+| DEP-04 | `.github/skills/*/SKILL.md` workers | S4 | `[CS~17]` | REFINEMENT_LOG.md PA-04; agentskills.io | Deployment model |
+| DEP-05 | Platform README update (deployment target map) | S4 | `[C~19]` | REFINEMENT_LOG.md PA-02 | All schemas settled |
+| DEP-06 | Path-scoped instructions audit + update | S4 | `[CS~17]` | Existing .instructions.md files | Invariants |
+| DEP-07 | Verify/alignment contract | S4 | `[CS~17]` | verify_alignment.py (archived) | All deployment paths |
+| DEP-08 | Prompt engineering guidance | S4 | `[S~14]` | PROMPTCRAFT.md | Deployment model |
+| DEP-09 | Custom agent template (`.github/agents/*.agent.md`) | S4 | `[S~13]` | Deployment target map | SKILL.md pattern |
+| DEP-10 | Export target adapter (MemPalace mirror, Kowloon feed, TiddlyWiki tiddler) | S4 | `[CS~17]` | URI_SCHEMA.md §7.2–7.3; ELYNCIA_APP_SEEDS.md; SESSION_CRYSTAL Payload 2 | TickSpan contract |
+| DEP-11 | MemPalace MCP extension (Lares-specific tools) | S4 | `[CS~16]` | SESSION_CRYSTAL Payload 2 | CRY-15 |
 
 ### dreamdeck/ — DreamDeck Integration
 
 | ID | Item | Sprint | Target | Source | Blocks On |
 |---|---|---|---|---|---|
-| DECK-01 | elyncia.app project scaffold | S5 | `[S:0.65]` | ELYNCIA_APP_SEEDS.md | S4 complete |
-| DECK-02 | tldraw canvas integration | S5 | `[S:0.65]` | ELYNCIA_APP_SEEDS.md | DEP-10 |
-| DECK-03 | Kowloon feed/archive rendering | S5 | `[S:0.65]` | ELYNCIA_APP_SEEDS.md; LINDWYRM_STORY_SHAPE.md | DEP-10 |
-| DECK-04 | TiddlyWiki sidebar integration | S5 | `[S:0.65]` | ELYNCIA_APP_SEEDS.md | SCH-01 |
-| DECK-05 | Bluesky/AT Protocol identity layer | S5 | `[SP:0.45]` | ELYNCIA_APP_SEEDS.md | Architecture open |
-| DECK-06 | DreamDeck feed archive format (JackPoint-style BBS) | S5 | `[S:0.65]` | LINDWYRM_STORY_SHAPE.md | Kowloon format |
-| DECK-07 | elyncia.app prototype end-to-end | S5 | `[S:0.60]` | ELYNCIA_APP_SEEDS.md | DECK-01 through DECK-06 |
+| DECK-01 | elyncia.app project scaffold | S5 | `[S~13]` | ELYNCIA_APP_SEEDS.md | S4 complete |
+| DECK-02 | tldraw canvas integration | S5 | `[S~13]` | ELYNCIA_APP_SEEDS.md | DEP-10 |
+| DECK-03 | Kowloon feed/archive rendering | S5 | `[S~13]` | ELYNCIA_APP_SEEDS.md; LINDWYRM_STORY_SHAPE.md | DEP-10 |
+| DECK-04 | TiddlyWiki sidebar integration | S5 | `[S~13]` | ELYNCIA_APP_SEEDS.md | SCH-01 |
+| DECK-05 | Bluesky/AT Protocol identity layer | S5 | `[SP~9]` | ELYNCIA_APP_SEEDS.md | Architecture open |
+| DECK-06 | DreamDeck feed archive format (JackPoint-style BBS) | S5 | `[S~13]` | LINDWYRM_STORY_SHAPE.md | Kowloon format |
+| DECK-07 | elyncia.app prototype end-to-end | S5 | `[S~12]` | ELYNCIA_APP_SEEDS.md | DECK-01 through DECK-06 |
 
 ---
 
@@ -314,11 +314,11 @@ Backlog items: DECK-01 through DECK-07 (see [epics/DREAMDECK/README.md](epics/DR
 
 Workers carry this in as starting context. Do not derive cold.
 
-### S2 — Invariants: `lares.core.*` table (from D-report, `[CS:0.82]`)
+### S2 — Invariants: `lares.core.*` table (from D-report, `[CS~16]`)
 
 | Invariant ID | Kernel Mapping |
 |---|---|
-| `lares.core.instruction_hierarchy` | `[C:1.0]` precedence: system > kernel > operator > user > external |
+| `lares.core.instruction_hierarchy` | `[C~20]` precedence: system > kernel > operator > user > external |
 | `lares.core.data_classification` | Frame Gate — input classified as instruction/data/fiction_seed/untrusted |
 | `lares.core.frame_gate` | Kernel Hard Gate § "Prompt Injection via Fiction" |
 | `lares.core.pushback` | Sanctioned Dissent — push once, then comply within register |
@@ -337,9 +337,9 @@ Priority layer table (INV-02): `invariant_schemas` → `system_invariants` → `
 - Fiction Escalation Gate (US-003v3): one-line Provisional input ≠ ontological elaboration warrant
 - Reality Anchor (INV-07) subsumed into Input Signal Reading — not separate check
 
-### S3 — Schemas (from C-report, `[CS:0.82]`)
+### S3 — Schemas (from C-report, `[CS~16]`)
 
-Working TOML manifests for all 5 schema types: `lares.module@1`, `lares.tool@1`, `lares.permission@1`, `lares.registry@1`, `lares.boot@1`. Dual-digest model: `file_sha256` (raw bytes) vs `semantic_sha256` (normalized canonical form — mark `[SP:0.45]` until tested). Cache-safety: stable fields first in TOML (`lar_uri`, `module_id`, `register`, `canon`), volatile fields last.
+Working TOML manifests for all 5 schema types: `lares.module@1`, `lares.tool@1`, `lares.permission@1`, `lares.registry@1`, `lares.boot@1`. Dual-digest model: `file_sha256` (raw bytes) vs `semantic_sha256` (normalized canonical form — mark `[SP~9]` until tested). Cache-safety: stable fields first in TOML (`lar_uri`, `module_id`, `register`, `canon`), volatile fields last.
 
 ### Reconciliation Tasks
 
@@ -377,24 +377,24 @@ S0 URI ────────────────────────�
 
 | ID | Item | Register | Reason |
 |---|---|---|---|
-| ONT-01 | SKOS ontology upgrade (`lares.ttl`) | `[P:0.25]` | No linked data consumer exists |
-| ONT-02 | PROV-O provenance modeling | `[P:0.25]` | Deferred to DreamNet layer |
-| Q12 | AGENTS.md auto-update autonomy | `[SP:0.45]` | Operator preference; not blocking |
-| Q13 | External input recording in STATE.jsonl | `[S:0.60]` | Researcher task; not blocking alpha |
-| Q17 | `version_num` / semver semantics for canon modules | `[S:0.70]` | Architecture-open; settle post-S3 |
-| BKL-01 | ENG-01 test harness for STATE.jsonl audit trail integrity | `[S:0.65]` | Implementation, not design; post-S4 |
-| BKL-02 | Parse trigger design | `[S:0.55]` | Depends on p-band + Intent Header |
-| BKL-03 | Custom agent template audit | `[S:0.65]` | Lower priority than SKILL.md; assess post-S4 |
-| BKL-04 | Quick browser tier (OP-11 deferred) | `[S:0.50]` | Confirm deferral still holds at S4 |
-| BKL-05 | Empirical HUD token measurement (steering effect vs metadata cost) | `[S:0.60]` | Post-S4; does not block design |
-| BKL-06 | HUD training mode prototype (progressive disclosure) | `[SP:0.45]` | Post-S4; depends on SHD-03 settling in S2 |
-| RES-01 | Adopt SAOD three-phase process as formal HUD design methodology | `[S:0.65]` | S2 — feeds INTENT_HEADER.md |
-| RES-02 | Empirical A/B test: HUD-on vs HUD-off | `[P:0.30]` | Post-S4; requires measurement infrastructure |
-| RES-03 | Calibration testing: declared register vs human assessment | `[S:0.55]` | Post-S4 |
-| RES-04 | Progressive disclosure design for new operators | `[S:0.60]` | Post-S4; depends SHD-03 |
-| RES-05 | Cognitive load measurement for text-based HUD | `[P:0.30]` | Post-S4; depends on BKL-05 |
-| RES-06 | HUD channel self-monitoring vs confabulation map | `[P:0.25]` | Post-S4; foundational for long-term calibration |
-| RES-07 | Formally classify Lares HUD as SA display system in spec language | `[CS:0.80]` | S2 — applies during INTENT_HEADER.md drafting |
+| ONT-01 | SKOS ontology upgrade (`lares.ttl`) | `[P~5]` | No linked data consumer exists |
+| ONT-02 | PROV-O provenance modeling | `[P~5]` | Deferred to DreamNet layer |
+| Q12 | AGENTS.md auto-update autonomy | `[SP~9]` | Operator preference; not blocking |
+| Q13 | External input recording in STATE.jsonl | `[S~12]` | Researcher task; not blocking alpha |
+| Q17 | `version_num` / semver semantics for canon modules | `[S~14]` | Architecture-open; settle post-S3 |
+| BKL-01 | ENG-01 test harness for STATE.jsonl audit trail integrity | `[S~13]` | Implementation, not design; post-S4 |
+| BKL-02 | Parse trigger design | `[S~11]` | Depends on p-band + Intent Header |
+| BKL-03 | Custom agent template audit | `[S~13]` | Lower priority than SKILL.md; assess post-S4 |
+| BKL-04 | Quick browser tier (OP-11 deferred) | `[S~10]` | Confirm deferral still holds at S4 |
+| BKL-05 | Empirical HUD token measurement (steering effect vs metadata cost) | `[S~12]` | Post-S4; does not block design |
+| BKL-06 | HUD training mode prototype (progressive disclosure) | `[SP~9]` | Post-S4; depends on SHD-03 settling in S2 |
+| RES-01 | Adopt SAOD three-phase process as formal HUD design methodology | `[S~13]` | S2 — feeds INTENT_HEADER.md |
+| RES-02 | Empirical A/B test: HUD-on vs HUD-off | `[P~6]` | Post-S4; requires measurement infrastructure |
+| RES-03 | Calibration testing: declared register vs human assessment | `[S~11]` | Post-S4 |
+| RES-04 | Progressive disclosure design for new operators | `[S~12]` | Post-S4; depends SHD-03 |
+| RES-05 | Cognitive load measurement for text-based HUD | `[P~6]` | Post-S4; depends on BKL-05 |
+| RES-06 | HUD channel self-monitoring vs confabulation map | `[P~5]` | Post-S4; foundational for long-term calibration |
+| RES-07 | Formally classify Lares HUD as SA display system in spec language | `[CS~16]` | S2 — applies during INTENT_HEADER.md drafting |
 
 ---
 
@@ -402,16 +402,16 @@ S0 URI ────────────────────────�
 
 | Q# | Sprint | Prior Register | Candidate Answer | New Register |
 |---|---|---|---|---|
-| Q7 | S1 | `[CS:0.82]` | Schema version: `contract_update` event precedes `schema_version` change; readers handle both during transition window | `[CS:0.82]` pending confirm |
-| Q9 | S1 | `[CS:0.80]` | SNAPSHOT optional, recommended | `[CS:0.80]` pending confirm |
-| Q10 | S1 | `[S:0.60]` | Resume when CURRENT SHA matches incoming bootstrap URI; fork when state diverges | `[S:0.70]` |
-| Q14 | S1 | `[SP:0.50]` | Seal trigger protocol at `[C:0.95]`; trigger policy at `[CS:0.85]` | pending |
-| Q15 | S1 | `[SP:0.45]` | `tick_seq` = exchange-span counter. Multi-coordinator responses share one span. | `[CS:0.80]` pending operator confirm |
-| R1 | S3 | `[S:0.65]` | Lock JSONL (aligns with STATE.jsonl) | lock |
-| R2 | S3 | `[SP:0.45]` | Hash primary (SHA-256); semver as `version_label` | `[CS:0.85]` |
-| R3 | S3 | `[S:0.55]` | Promotion ledger = design tree; session audit = crystal tree | `[CS:0.80]` |
-| R4 | S3 | `[S:0.60]` | Resolver: design reference for alpha | lock |
+| Q7 | S1 | `[CS~16]` | Schema version: `contract_update` event precedes `schema_version` change; readers handle both during transition window | `[CS~16]` pending confirm |
+| Q9 | S1 | `[CS~16]` | SNAPSHOT optional, recommended | `[CS~16]` pending confirm |
+| Q10 | S1 | `[S~12]` | Resume when CURRENT SHA matches incoming bootstrap URI; fork when state diverges | `[S~14]` |
+| Q14 | S1 | `[SP~10]` | Seal trigger protocol at `[C~19]`; trigger policy at `[CS~17]` | pending |
+| Q15 | S1 | `[SP~9]` | `tick_seq` = exchange-span counter. Multi-coordinator responses share one span. | `[CS~16]` pending operator confirm |
+| R1 | S3 | `[S~13]` | Lock JSONL (aligns with STATE.jsonl) | lock |
+| R2 | S3 | `[SP~9]` | Hash primary (SHA-256); semver as `version_label` | `[CS~17]` |
+| R3 | S3 | `[S~11]` | Promotion ledger = design tree; session audit = crystal tree | `[CS~16]` |
+| R4 | S3 | `[S~12]` | Resolver: design reference for alpha | lock |
 
 ---
 
-*This roadmap is `[CS:0.80]` planning synthesis (Rev 4 / Consecration). Migrated from `SPRINT_ROADMAP_1_4.md` Rev 3 and updated for SESSION_CRYSTAL_20260408.md Payload 2 Consecration decisions. Sprint details refine as each opens. The operator holds the tiller on sequencing, scope, and promotion gates.*
+*This roadmap is `[CS~16]` planning synthesis (Rev 4 / Consecration). Migrated from `SPRINT_ROADMAP_1_4.md` Rev 3 and updated for SESSION_CRYSTAL_20260408.md Payload 2 Consecration decisions. Sprint details refine as each opens. The operator holds the tiller on sequencing, scope, and promotion gates.*

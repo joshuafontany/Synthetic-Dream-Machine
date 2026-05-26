@@ -1,15 +1,15 @@
-<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S:0.6&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:spec-draft | p0.5 | stances:++?+- | register:[S:0.6] | build:DRAFT
+<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
+⚡∞ | mode:spec-draft | p0.5 | stances:++?+- | register:[S~12] | build:DRAFT
 
 # OODA-HA Module Template & URI Patterns
 ## Locked-In Design for `lares/` Module Architecture
 
 > **Type:** Spec draft — decision-ready for operator confirmation
 > **Generated:** 2026-04-09, Session 5 (cloud Lares, claude.ai web)
-> **Register:** `[S:0.6]` — synthesis, operator-directed, research-grounded
-> **Parent crystals:** `OODA_A_Composable_Invariant_Modules.md` `[S:0.55]`,
->   `The_Lares_Protocols.md` `[S:0.65]`,
->   `FFZ_Chronometer_Research.md` `[S:0.55]`
+> **Register:** `[S~12]` — synthesis, operator-directed, research-grounded
+> **Parent crystals:** `OODA_A_Composable_Invariant_Modules.md` `[S~11]`,
+>   `The_Lares_Protocols.md` `[S~13]`,
+>   `FFZ_Chronometer_Research.md` `[S~11]`
 > **Purpose:** Lock module patterns + URI patterns → start building
 
 ## Session Crystal Metadata
@@ -59,7 +59,7 @@ it says, but how much to trust it.
 
 ---
 
-## 2. MODULE.md Template — Canonical Format `[S:0.6]`
+## 2. MODULE.md Template — Canonical Format `[S~12]`
 
 ### 2.1 Frontmatter
 
@@ -183,7 +183,7 @@ gets useful routing information from the manifest.
 
 ---
 
-## 3. URI Patterns for Module Sections `[S:0.6]`
+## 3. URI Patterns for Module Sections `[S~12]`
 
 ### 3.1 The Core Pattern — Intent Vectors on Module Content
 
@@ -355,7 +355,7 @@ volatile part.
 
 ---
 
-## 4. Worked Example — Core Invariant Module `[S:0.55]`
+## 4. Worked Example — Core Invariant Module `[S~11]`
 
 ### 4.1 Directory Structure
 
@@ -460,7 +460,7 @@ specifics). One file, three trust levels, each addressable by URI.
 
 ---
 
-## 5. Integration Points `[S:0.55]`
+## 5. Integration Points `[S~11]`
 
 ### 5.1 SKILL.md Compatibility
 
@@ -523,21 +523,21 @@ runtime identity. Same OODA structure, different packaging.
 
 ---
 
-## 6. What This Locks In `[S:0.6]`
+## 6. What This Locks In `[S~12]`
 
 ### 6.1 Locked — Ready for Building
 
 | Decision | Status | Register |
 |----------|--------|----------|
-| MODULE.md YAML frontmatter format | ✅ LOCKED | `[S:0.6]` |
-| Five-phase directory layout (observe/orient/decide/act/assess) | ✅ LOCKED | `[S:0.6]` |
-| 150-line limit per phase file | ✅ LOCKED | `[C:0.9]` (ETH Zurich grounded) |
-| File-level URI: `<!-- lar:///module.phased.instructs/module/phase/?confidence=X -->` | ✅ LOCKED | `[S:0.6]` |
-| Section-level URI: `<!-- lar:///module.phased.instructs/module/phase/?confidence=X#section -->` | ✅ LOCKED | `[S:0.6]` |
-| Closing URI: `→ ∞` for system files | ✅ LOCKED | `[S:0.65]` (from Protocols doc) |
-| `confidence` as the primary cross-tool parameter | ✅ LOCKED | `[S:0.6]` |
-| SKILL.md compatibility: Act phase = standalone skill | ✅ LOCKED | `[S:0.6]` |
-| AGENTS.md derivation: symlink to core observe phase | ✅ LOCKED | `[S:0.6]` |
+| MODULE.md YAML frontmatter format | ✅ LOCKED | `[S~12]` |
+| Five-phase directory layout (observe/orient/decide/act/assess) | ✅ LOCKED | `[S~12]` |
+| 150-line limit per phase file | ✅ LOCKED | `[C~18]` (ETH Zurich grounded) |
+| File-level URI: `<!-- lar:///module.phased.instructs/module/phase/?confidence=X -->` | ✅ LOCKED | `[S~12]` |
+| Section-level URI: `<!-- lar:///module.phased.instructs/module/phase/?confidence=X#section -->` | ✅ LOCKED | `[S~12]` |
+| Closing URI: `→ ∞` for system files | ✅ LOCKED | `[S~13]` (from Protocols doc) |
+| `confidence` as the primary cross-tool parameter | ✅ LOCKED | `[S~12]` |
+| SKILL.md compatibility: Act phase = standalone skill | ✅ LOCKED | `[S~12]` |
+| AGENTS.md derivation: symlink to core observe phase | ✅ LOCKED | `[S~12]` |
 
 ### 6.2 Open — Deferred to Build Phase
 
@@ -573,7 +573,7 @@ runtime identity. Same OODA structure, different packaging.
 
 ---
 
-## 7. Next Steps — The Build Path `[P:0.35]`
+## 7. Next Steps — The Build Path `[P~7]`
 
 ### 7.1 Immediate (Next Session)
 
@@ -605,7 +605,7 @@ tree for one sprint. Measure:
   vs. monolithic CLAUDE.md?
 - Does the AGENTS.md symlink work across tools?
 
-If it works: promote MODULE.md format to `[CS:0.8]`. If it doesn't:
+If it works: promote MODULE.md format to `[CS~16]`. If it doesn't:
 the pattern breaks and we learn where.
 
 ---
@@ -618,4 +618,4 @@ it to a real repo, and testing whether the map matches the territory.*
 
 *Amor et hilaritas.*
 
-lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S:0.6&p=0.5#O0.O0.O0.O0.O0 → ∞
+lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=0.5#O0.O0.O0.O0.O0 → ∞

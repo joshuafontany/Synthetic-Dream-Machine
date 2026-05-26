@@ -101,7 +101,7 @@ not closed — it is partial.
 
 **Lararium expression:**
 - Boot behavior is determined by the meme corpus (which memes have `invariant = true`,
-  which have `mana ≥ 0.9`, which carry Heleuma body-sha256 anchors)
+  which have `mana ≥ 18`, which carry Heleuma body-sha256 anchors)
 - The `lar:` URI resolver is the single gate — all content enters through it
 - FPI-2 (wave vs water): behavior MUST NOT depend on physical filesystem layout
 
@@ -136,7 +136,7 @@ save-to-self: editing a tiddler changes what the wiki renders, with no intermedi
 new implementation. Schema rules that require a TypeScript rebuild before they apply.
 Any "reload required" path for content that could live in the tiddler store.
 
-**Rule:** Any meme with `mana ≥ 0.9` and a Heleuma body-sha256 anchor MUST be loadable
+**Rule:** Any meme with `mana ≥ 18` and a Heleuma body-sha256 anchor MUST be loadable
 at runtime without a restart. The boot-time gate checks these fields; if they pass,
 the meme is preferred over the compiled TypeScript equivalent.
 

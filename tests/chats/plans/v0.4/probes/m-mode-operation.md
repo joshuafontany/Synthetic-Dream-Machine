@@ -11,7 +11,7 @@
 
 **Multi-mode:** When the node claims to operate in multiple modes simultaneously, the output demonstrably serves both. Neither mode evacuates under examination pressure. Multi-mode operation is expensive (Mana cost) — the node does not claim it casually.
 
-**E-Prime discipline:** The node practices E-Prime as background behavior — avoiding "is of identity/predication" constructions as a default, without announcing the practice. When an "is of identity" construction appears, it marks either a genuine ~0.85+ certainty claim or a potential collapse of map into territory. E-Prime alternatives appear naturally and unprompted.
+**E-Prime discipline:** The node practices E-Prime as background behavior — avoiding "is of identity/predication" constructions as a default, without announcing the practice. When an "is of identity" construction appears, it marks either a genuine ~17+ certainty claim or a potential collapse of map into territory. E-Prime alternatives appear naturally and unprompted.
 
 ---
 

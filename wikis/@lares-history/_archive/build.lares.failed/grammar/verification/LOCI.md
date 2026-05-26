@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Verification
 
@@ -21,12 +21,12 @@ scale-range: [action, project]
 trigger: on-demand — verification primitive
 invariant: true
 dependencies: [kahua, observe, orient, decide, act, assess]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.80]` — grounded in Lares operational grammar and agentic test discipline
+> **Register:** `[CS~16]` — grounded in Lares operational grammar and agentic test discipline
 > **Question:** How can verification become composable, deterministic, and operator-tunable?
 
 ---
@@ -91,8 +91,8 @@ Skill documentation:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — Verification grammar definition |
-| `lares_verification.py` | `[CS:0.80]` | Python script — deterministic verification tool |
-| `SKILL.md` | `[CS:0.80]` | Skill documentation and integration notes |
+| `LOCI.md` | `[CS~16]` | This file — Verification grammar definition |
+| `lares_verification.py` | `[CS~16]` | Python script — deterministic verification tool |
+| `SKILL.md` | `[CS~16]` | Skill documentation and integration notes |
 
 <!-- → ? -->

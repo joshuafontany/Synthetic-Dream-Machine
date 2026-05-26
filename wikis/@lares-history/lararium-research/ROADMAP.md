@@ -2087,8 +2087,8 @@ Required context now present in-document:
 
 **Parity confidence assessment (complete):**
 
-- TW5 compile/graph layer: ~0.90 — identity, tags, links, transclusion URI form, shadow, import, filter notation solid; `kahea` macro-call now ✓ at parse layer (SigilNode); wehe executor and render layer execution pending
-- UEFN Verse graph layer: ~0.80 — entity/ECS, event wiring (papalohe), hot-reload (UEFN CRDT model), lifecycle:template solid; async concurrency (hui/heihei/puka), kukali/suspends, wehe call execution pending
+- TW5 compile/graph layer: ~18 — identity, tags, links, transclusion URI form, shadow, import, filter notation solid; `kahea` macro-call now ✓ at parse layer (SigilNode); wehe executor and render layer execution pending
+- UEFN Verse graph layer: ~16 — entity/ECS, event wiring (papalohe), hot-reload (UEFN CRDT model), lifecycle:template solid; async concurrency (hui/heihei/puka), kukali/suspends, wehe call execution pending
 
 ### Also completed this session (2026-04-28)
 

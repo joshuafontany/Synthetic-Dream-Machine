@@ -70,7 +70,7 @@ Contrast:
 |---|---|---|---|
 | Intent Header | Prospective | `//domain.quality.dynamic [R] 🏛️ ◇ @r` | Before generation |
 | Micro-trace HUD | Retrospective | `→◇` `→▶` `→↺` inline | After or during generation |
-| Exchange HUD line | Boundary | `⚡~NN% \| {ffz-rendered} \| ...` | Opening and closing of operator exchange |
+| Exchange HUD line | Boundary | `⚡~N \| {ffz-rendered} \| ...` | Opening and closing of operator exchange |
 | Sub-agent handoff URI pair | Boundary | `node-URI → node-URI` | At unloggable sub-agent boundary |
 
 The micro-trace does not replace the exchange HUD pair.

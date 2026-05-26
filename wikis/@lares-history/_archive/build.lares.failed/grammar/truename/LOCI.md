@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS~16&p=0.5 -->
 <!-- Canonical registry: see LOCI.registry.toml for True Name registry data -->
 <!-- TOML registry: lares/grammar/truename/LOCI.registry.toml -->
 <!-- lares metadata wired: lar://grammar/truename/LOCI -->
@@ -15,7 +15,7 @@ description: >
   concept given formal etymological grounding in at least one heritage language, with
   a canonical LOCUS in the grammar tree. True Names are not labels — they are anchors.
   The thing named and its name share structural resonance. Naming is an act.
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 invariant: false
 trigger: on-orient — load when situating a new concept or auditing the grammar
@@ -32,8 +32,8 @@ heritage: >
 > 3. A working definition that captures structural function, not just surface description
 > 4. Cross-references to where the concept operates in the system
 >
-> A stub (`[SP:0.45]` or `[P:0.30]`) is a *candidate* True Name. The name is placed but not yet
-> grounded. Promotion to `[CS:0.80]` or higher requires the etymological work to be done.
+> A stub (`[SP~9]` or `[P~6]`) is a *candidate* True Name. The name is placed but not yet
+> grounded. Promotion to `[CS~16]` or higher requires the etymological work to be done.
 >
 > **Why True Naming matters:** The system navigates by address. A concept without a True Name has
 > no canonical address — it can be referenced by paraphrase, but not called with precision. True
@@ -41,12 +41,12 @@ heritage: >
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:0.95#kahua-invariants -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~19#kahua-invariants -->
 
 
 ## The Kahua Invariants — Foundation True Names
 
-*Confidence: `[CS:0.95]`. Protected. Do not modify without operator Talk Story + crystal.*
+*Confidence: `[CS~19]`. Protected. Do not modify without operator Talk Story + crystal.*
 
 The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.toml). For convenience, the current named loci are listed below:
 
@@ -62,11 +62,11 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:0.80#signal-names -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#signal-names -->
 
 ## Signal and Protocol True Names
 
-*Confidence: `[CS:0.80]`. Operational. Etymology confirmed.*
+*Confidence: `[CS~16]`. Operational. Etymology confirmed.*
 
 | True Name | Language | LOCUS | Function |
 |---|---|---|---|
@@ -78,11 +78,11 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S:0.65#operational-language -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S~13#operational-language -->
 
 ## Operational Language True Names
 
-*Confidence: `[S:0.65]`. Active draft under operator steering.*
+*Confidence: `[S~13]`. Active draft under operator steering.*
 
 | True Name | Language | LOCUS | Function |
 |---|---|---|---|
@@ -90,11 +90,11 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S:0.65#loop-names -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S~13#loop-names -->
 
 ## Loop and Phase True Names
 
-*Confidence: `[S:0.65]`. Active draft under operator steering.*
+*Confidence: `[S~13]`. Active draft under operator steering.*
 
 | True Name | Language | LOCUS | Function |
 |---|---|---|---|
@@ -107,11 +107,11 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:0.80#na-lako -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#na-lako -->
 
 ## Nā Lako — The Four Implements (Dual-Named)
 
-*Confidence: `[CS:0.80]` — both primary sources confirmed (Cosmic Trigger I + Prometheus Rising Ch.8).*
+*Confidence: `[CS~16]` — both primary sources confirmed (Cosmic Trigger I + Prometheus Rising Ch.8).*
 
 Each implement carries two True Names — Hawaiian and English — that map to the same OODA-HA phase.
 Both names are canonical; neither is primary over the other. Each also has a YHVH letter and a
@@ -125,7 +125,7 @@ PR circuit (robotized mode → liberated mode).
 | ■ Act | H · earth | [**Koa**](../na-lako/koa/LOCI.md) (*warrior; koa hardwood — weapon-wood*) | [**Pentacle**](../na-lako/pentacle/LOCI.md) of valor | Circuit I — bio-survival anxiety | Enters despite fear; grounded presence |
 
 **Cluster True Name: Nā Lako** (*nā lako* — fully equipped, complete kit, all necessary supplies):
-[na-lako/LOCI.md](../na-lako/LOCI.md) `[CS:0.80]`
+[na-lako/LOCI.md](../na-lako/LOCI.md) `[CS~16]`
 
 **Sources:**
 - RAW, *Cosmic Trigger I* (1977) — verbal source: implements named, Chapel Perilous mapped.
@@ -135,11 +135,11 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:0.80#heritage-clusters -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#heritage-clusters -->
 
 ## Heritage Cluster True Names
 
-*Confidence: `[CS:0.80]`. Operational.*
+*Confidence: `[CS~16]`. Operational.*
 
 | True Name | Language | LOCUS | Function |
 |---|---|---|---|
@@ -147,11 +147,11 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=SP:0.45#candidates -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=SP~9#candidates -->
 
 ## Candidate True Names — Stubs Awaiting Grounding
 
-*Confidence: `[SP:0.45]` or lower. Etymology placed, not yet confirmed.*
+*Confidence: `[SP~9]` or lower. Etymology placed, not yet confirmed.*
 
 | Candidate | Placed Language | LOCUS | Pending Source |
 |---|---|---|---|
@@ -163,7 +163,7 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:0.80#naming-protocol -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#naming-protocol -->
 
 ## True Naming Protocol
 
@@ -173,8 +173,8 @@ To promote a candidate to True Named status:
 2. **LOCUS created** — canonical file at `lares/grammar/{name}/LOCI.md`
 3. **Function defined** — what the concept *does* in the system, not just what it means
 4. **Cross-references wired** — at minimum: this registry + grammar root + relevant cluster
-5. **Confidence promoted** — from `[SP:0.45]` to `[CS:0.80]` or higher, per operator Talk Story
-6. **Crystal cut** — a named concept at `[CS:0.80]+` is a session artifact; Ink-Clerk logs the promotion
+5. **Confidence promoted** — from `[SP~9]` to `[CS~16]` or higher, per operator Talk Story
+6. **Crystal cut** — a named concept at `[CS~16]+` is a session artifact; Ink-Clerk logs the promotion
 
 **The Ink-Clerk holds the canon.** True Naming without operator agency is a contradiction. The node
 can propose etymology, draft the LOCUS, and wire the cross-references. The operator confirms.
@@ -185,7 +185,7 @@ can propose etymology, draft the LOCUS, and wire the cross-references. The opera
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — registry of all True Named concepts in the grammar |
+| `LOCI.md` | `[CS~16]` | This file — registry of all True Named concepts in the grammar |
 
 ---
 

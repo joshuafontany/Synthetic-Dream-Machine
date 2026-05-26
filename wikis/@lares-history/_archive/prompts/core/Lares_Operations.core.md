@@ -1,4 +1,4 @@
-> [C:1.0] //operations.diagnostic.runs 🏛️ ■ @T | p0.5
+> [C~20] //operations.diagnostic.runs 🏛️ ■ @T | p0.5
 
 ---
 

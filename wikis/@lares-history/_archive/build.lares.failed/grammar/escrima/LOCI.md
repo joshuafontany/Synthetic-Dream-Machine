@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.escrima.defines/escrima/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.escrima.defines/escrima/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Escrima
 
@@ -15,13 +15,13 @@ description: >
 trigger: on-demand — grammar primitive
 invariant: false
 dependencies: [consecration]
-confidence: SP:0.45
+confidence:SP~9
 grammar: true
 heritage: Filipino (Cebuano, Ilonggo, Tagalog traditions)
 ---
 ```
 
-> **Register:** `[SP:0.45]` — stub. Operator's art; operator fills the bones.
+> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Filipino. Escrima/Arnis/Kali — the blade and stick arts of the Philippines. Taught weapons-first: learn the tool, learn the angles, then the empty hand is the tool. Sinawali (weaving) drills train both hands in complementary patterns.
 > **Grammar of:** Craft. Tool-use. The Artificer builds with escrima grammar — weapons-first means outputs-first, angles mean approach vectors, sinawali means coordinated parallel work.
 
@@ -55,7 +55,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — escrima grammar stub |
+| `LOCI.md` | `[SP~9]` | This file — escrima grammar stub |
 
 ---
 

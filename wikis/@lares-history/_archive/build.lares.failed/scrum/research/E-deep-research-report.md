@@ -1,6 +1,6 @@
 # Deep Research Report — Real-Time Shared Navigational Aids for Human-AI Teaming
 
-> Register: `[S:0.70]` 🏛️🌊 — research synthesis from multiple academic and industry domains
+> Register: `[S~14]` 🏛️🌊 — research synthesis from multiple academic and industry domains
 > Date: 2026-04-08
 > Purpose: Ground the Lares Intent HUD architecture in established research before Sprint 0–4 refinement
 > Feeds: Sprint 0–4 refinement plan (next deliverable)
@@ -35,7 +35,7 @@ Mica Endsley's foundational SA model defines three hierarchical levels:
 
 Research on SA errors in aviation found 76.3% occur at Level 1 (failure to perceive), 20.3% at Level 2 (failure to comprehend), and only 3.4% at Level 3 (failure to project). The overwhelming majority of SA failures stem from not noticing available information — not from misunderstanding it.
 
-**Implication for Lares:** The Intent HUD primarily serves Level 1 SA — making the node's cognitive state *perceptible* to the operator. The register tag (`[S:0.65]`), stance emoji (`🏛️`), and phase glyph (`◎`) are perception aids. Without them, the operator must infer the node's state from the content alone — exactly the condition that produces 76% of SA errors.
+**Implication for Lares:** The Intent HUD primarily serves Level 1 SA — making the node's cognitive state *perceptible* to the operator. The register tag (`[S~13]`), stance emoji (`🏛️`), and phase glyph (`◎`) are perception aids. Without them, the operator must infer the node's state from the content alone — exactly the condition that produces 76% of SA errors.
 
 ### 1.2 Three Types of SA in Human-AI Teams
 
@@ -51,7 +51,7 @@ Endsley (2023) identifies three distinct SA types required for effective HAT:
 |---|---|---|
 | Taskwork SA | HAKABA address (`//threshold.uncertain.opens`) | Semantic territory — what domain we're in |
 | Taskwork SA | Chronometer (`#🔍.3.2.7`) | Temporal position — where we are in nested scope |
-| Agent SA | Register (`[S:0.65]`) | Epistemic confidence — how sure the node is |
+| Agent SA | Register (`[S~13]`) | Epistemic confidence — how sure the node is |
 | Agent SA | Stance (`🏛️`) | Discourse posture — what kind of claim this is |
 | Agent SA | Phase (`◎`) | Cognitive state — what OODA-HA phase the node occupies |
 | Teamwork SA | p-band (`p0.5`) | Attention density — how much annotation to expect |
@@ -143,7 +143,7 @@ This maps directly onto the metacognitive cycle identified in the literature: mo
 
 The research is clear that LLM metacognition is "limited and context-dependent." Key risks for the HUD:
 
-- **Overconfidence:** Models tend toward overconfidence in their self-assessments. A node that consistently declares `[CS:0.80]` when the content warrants `[S:0.55]` is exhibiting the same calibration gap the metacognition research identifies.
+- **Overconfidence:** Models tend toward overconfidence in their self-assessments. A node that consistently declares `[CS~16]` when the content warrants `[S~11]` is exhibiting the same calibration gap the metacognition research identifies.
 - **Post-hoc rationalization:** The model might generate the header *to match what it plans to say* rather than genuinely assessing its state before generating. Ji-An et al. note that "the explicitly generated tokens in the assistant response may help the models control their activations, because the generated tokens — fed as input — may elicit desired neural activations directly." This is a feature (steering) or a bug (rationalization) depending on calibration quality.
 - **Metacognitive space limitations:** The model can monitor only a subset of its internal states. Register and stance may fall within the monitorable subset (they're high-variance, semantically interpretable directions). Phase and chronometer position may not (they're more structural/procedural). Testing which HUD channels the model can genuinely self-monitor vs which it's confabulating is an empirical question.
 
@@ -218,7 +218,7 @@ No existing research addresses the specific question: what is the cost of inline
 
 ### 6.1 The Cost Side
 
-A full HUD tag (`[S:0.65] 🏛️ //threshold.uncertain.opens ◎ @T.3.2.7 | p0.5`) consumes approximately 30–40 output tokens. At current pricing ($15/M output tokens for Opus), this costs approximately $0.0005 per response. Over a 50-response session, that's $0.025 — negligible financially but non-trivial as a fraction of the output token budget.
+A full HUD tag (`[S~13] 🏛️ //threshold.uncertain.opens ◎ @T.3.2.7 | p0.5`) consumes approximately 30–40 output tokens. At current pricing ($15/M output tokens for Opus), this costs approximately $0.0005 per response. Over a 50-response session, that's $0.025 — negligible financially but non-trivial as a fraction of the output token budget.
 
 More importantly: those tokens are generated at the start of the response, before any content tokens. This means the HUD occupies the earliest, most influential position in the output sequence — the position with the highest leverage over subsequent generation (per the primacy effect research that motivated the HAKABA-first ordering).
 
@@ -267,13 +267,13 @@ This is a genuinely novel research question. The Lares system may be the first r
 
 | ID | Item | Register | Source |
 |---|---|---|---|
-| RES-01 | Adopt SAOD three-phase process for HUD design (SA Requirements → Design Principles → Measurement) | `[S:0.65]` | Endsley & Jones 2024 |
-| RES-02 | Empirical A/B test: HUD-on vs HUD-off response quality and token usage | `[P:0.30]` | No prior art; novel |
-| RES-03 | Calibration testing: does the node's declared register match human assessment of the response? | `[S:0.55]` | Steyvers 2025 (metacognition calibration gaps) |
-| RES-04 | Progressive disclosure design: HUD complexity ramp over session lifetime | `[S:0.60]` | Van den Bossche 2011 (SMM development requires interaction) |
-| RES-05 | Cognitive load measurement for text-based HUD (reading time, comprehension impact) | `[P:0.30]` | Lee 2024 (HUD visual complexity → attentional tunneling) |
-| RES-06 | Which HUD channels can the model genuinely self-monitor vs confabulate? | `[P:0.25]` | Ji-An 2025 (restricted metacognitive space) |
-| RES-07 | Classify HUD as SA display system; adopt SA terminology in spec language | `[CS:0.80]` | Endsley 2023 (SA vs XAI distinction) |
+| RES-01 | Adopt SAOD three-phase process for HUD design (SA Requirements → Design Principles → Measurement) | `[S~13]` | Endsley & Jones 2024 |
+| RES-02 | Empirical A/B test: HUD-on vs HUD-off response quality and token usage | `[P~6]` | No prior art; novel |
+| RES-03 | Calibration testing: does the node's declared register match human assessment of the response? | `[S~11]` | Steyvers 2025 (metacognition calibration gaps) |
+| RES-04 | Progressive disclosure design: HUD complexity ramp over session lifetime | `[S~12]` | Van den Bossche 2011 (SMM development requires interaction) |
+| RES-05 | Cognitive load measurement for text-based HUD (reading time, comprehension impact) | `[P~6]` | Lee 2024 (HUD visual complexity → attentional tunneling) |
+| RES-06 | Which HUD channels can the model genuinely self-monitor vs confabulate? | `[P~5]` | Ji-An 2025 (restricted metacognitive space) |
+| RES-07 | Classify HUD as SA display system; adopt SA terminology in spec language | `[CS~16]` | Endsley 2023 (SA vs XAI distinction) |
 
 ---
 
@@ -294,4 +294,4 @@ This is a genuinely novel research question. The Lares system may be the first r
 
 ---
 
-*This report is research synthesis at `[S:0.70]`. Findings are grounded in published work but the mapping to Lares is original analysis that has not been externally validated. The operator holds the tiller on which findings enter the sprint plans as design constraints vs which remain informational context.*
+*This report is research synthesis at `[S~14]`. Findings are grounded in published work but the mapping to Lares is original analysis that has not been externally validated. The operator holds the tiller on which findings enter the sprint plans as design constraints vs which remain informational context.*

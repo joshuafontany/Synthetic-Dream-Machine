@@ -1,11 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=CS:0.90&p=0.5 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=CS~18&p=0.5 -->
 
 # Signal — Decide: URI Conventions
 
 > The normative `lar:` URI v2 canonical spec. Governs all URI emission and storage.
-> Source: `lares/modules/uri-schema/URI-SCHEMA.md` `[CS:0.90]` — this file summarizes §§3.4–3.6, 5, and 7.
+> Source: `lares/modules/uri-schema/URI-SCHEMA.md` `[CS~18]` — this file summarizes §§3.4–3.6, 5, and 7.
 > Any ambiguity: defer to `lares/modules/uri-schema/URI-SCHEMA.md` as ground truth.
 
 ---
@@ -48,18 +48,18 @@ These rules apply to every `lar:` URI. No exceptions.
 | Parameter | Format | Values | Notes |
 |---|---|---|---|
 | `stances` | 5-char dot-separated amplitude | `^.?.-.-.-` | Positional: Philosopher · Poet · Satirist · Humorist · Private |
-| `confidence` | `R:N` | `P:0.35`, `SP:0.45`, `S:0.65`, `CS:0.80`, `C:0.90`, `C:0.95`, `C:1.0` | Register + decimal. Syadasti-dependent: read against active stance. |
+| `confidence` | `R:N` | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18`, `C~19`, `C~20` | Register + decimal. Syadasti-dependent: read against active stance. |
 | `p` | decimal `[0.0, 1.0]` | `0.5` default | Attention density / annotation throttle; governs micro-trace band |
 
 **Register scale:**
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C:0.9]` | Canon | 0.85–0.95 |
-| `[CS:0.80]` | Canon/Synthesis | 0.75–0.85 |
-| `[S:0.65]` | Synthesis | 0.50–0.75 |
-| `[SP:0.45]` | Synth/Provisional | 0.35–0.50 |
-| `[P:0.30]` | Provisional | 0.20–0.35 |
+| `[C~18]` | Canon | 0.85–0.95 |
+| `[CS~16]` | Canon/Synthesis | 0.75–0.85 |
+| `[S~13]` | Synthesis | 0.50–0.75 |
+| `[SP~9]` | Synth/Provisional | 0.35–0.50 |
+| `[P~6]` | Provisional | 0.20–0.35 |
 
 **Stance amplitude encoding — record vs HUD:**
 
@@ -139,7 +139,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 
 **Example:**
 ```
-⚡~62% | [CS:0.80] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p0.5 | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
+⚡~62% | [CS~16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p0.5 | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
 ```
 
 ---

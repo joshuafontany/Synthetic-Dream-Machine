@@ -86,7 +86,7 @@ It is the second element of every exchange opening, immediately after the URI pa
 **Format:**
 
 ```
-⚡~NN% | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice(s)} | [target-confidence] | p{p} |
+⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice(s)} | [target-confidence] | p{p} |
 ```
 
 `{tc}` = two-character tool-carry string for that stance (e.g. `*!`, `--`, `~?`).
@@ -95,7 +95,7 @@ It is the second element of every exchange opening, immediately after the URI pa
 
 | Field | SA Type | Source | Notes |
 |---|---|---|---|
-| `⚡~NN%` | Resource | Session (estimated) | "Mana pool"; Context window remaining; `~` mandatory — approximation, not live readout |
+| `⚡~N` | Resource | Session (estimated) | Mana pool / context-window Level on `0–20`; counts down toward `0`; `~` mandatory — approximation, not live readout |
 | `{ffz-rendered}` | Temporal | Node URI `ffz=` | FFZ chronometer as five scale positions with action counts |
 | `🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}` | Agent SA | Node URI `stances=` × tool-carry | All five stances; each followed by its two-character tool-carry, no space |
 | `voice(s):{Voice}` | Agent SA | Coordinator context | Active coordinator voice(s) |
@@ -105,13 +105,13 @@ It is the second element of every exchange opening, immediately after the URI pa
 **Example:**
 
 ```
-⚡~62% | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
+⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
 ```
 
 Notes:
 1. The Intent. The HUD line renders as a separate adjacent artifact — not URI grammar.
-2. `⚡~NN%` surfaces the declared estimate of context window remaining. Starts at ~100% and counts down.
-3. Mana-pool represents a Maybe Logic style estimate, not a direct measurement.
+2. `⚡~N` surfaces the declared estimate of context-window resource remaining as a `0–20` Level. It may start at `20`, or lower when visible context already carries load, and counts down toward `0`.
+3. The mana/context-window pool represents a Maybe Logic style resource estimate, not a direct measurement; it now shares the pono Level model for HUD consistency.
 
 <<~/ahu >>
 

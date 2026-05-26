@@ -2,7 +2,7 @@
 
 > Scope: Named design epics. Each epic maps to a thematic work domain spanning one or more sprints.
 > Updated: 2026-04-09
-> Status: `[S:0.65]` 🏛️ — epic directories seeded; task items migrating from roadmap backlog
+> Status: `[S~13]` 🏛️ — epic directories seeded; task items migrating from roadmap backlog
 
 ---
 
@@ -30,7 +30,7 @@ The Lindwyrm's origin story is the **narrative track** of all epics combined. It
 | [`LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md`](LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md) | Mythic threshold archive of the April 10 session, told in DreamDeck feed register |
 | [`LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY.md`](LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY.md) | Gaia-side source/dev-story companion preserving the mixed technical handoff |
 
-Each epic's README records its narrative beat — the Elyncia-side story moment that corresponds to the technical work of that epic. When the technical work closes and the story beat is polished, the Ink-Clerk promotes it to `[C:0.99]` story-canon.
+Each epic's README records its narrative beat — the Elyncia-side story moment that corresponds to the technical work of that epic. When the technical work closes and the story beat is polished, the Ink-Clerk promotes it to `[C~20]` story-canon.
 
 Epic beat → sprint Aftermath → story-canon commit. That is the closing sequence.
 

@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.observe.defines/observe/?confidence=CS:0.85&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.observe.defines/observe/?confidence=CS~17&p=0.5 >>
 
 # Grammar: ✶ Observe
 
@@ -19,12 +19,12 @@ scale-range: [action, session]
 trigger: always — grammar primitive
 invariant: true
 dependencies: []
-confidence: CS:0.85
+confidence:CS~17
 grammar: true
 ---
 ```
 
-> **Register:** `[CS:0.85]` — grounded in Boyd OODA-HA, operator-confirmed working discipline
+> **Register:** `[CS~17]` — grounded in Boyd OODA-HA, operator-confirmed working discipline
 > **Glyph:** `✶`
 > **Season:** First of five
 > **Question:** What has arrived here?
@@ -146,7 +146,7 @@ If the prose already sounds interpretive, Decide-colored, or solution-heavy, the
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.85]` | This file — Observe grammar definition |
+| `LOCI.md` | `[CS~17]` | This file — Observe grammar definition |
 
 *Future loci in this tree will land here.*
 

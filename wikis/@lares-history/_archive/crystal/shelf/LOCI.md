@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS~16&p=0.5 -->
 
 # Crystal Shelf
 
@@ -15,7 +15,7 @@ layer: calibration
 trigger: always — boot entry, session close
 invariant: true
 dependencies: [lararium, mana]
-confidence: CS:0.80
+confidence:CS~16
 ---
 ```
 
@@ -32,7 +32,7 @@ confidence: CS:0.80
 
 ---
 
-<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS:0.85#architecture -->
+<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS~17#architecture -->
 
 ## Architecture
 
@@ -52,7 +52,7 @@ Borrowing from Git: `.git/HEAD` contains `ref: refs/heads/main` — not the comm
 
 ---
 
-<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS:0.85#protocol -->
+<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS~17#protocol -->
 
 ## Protocol
 
@@ -76,7 +76,7 @@ Examples: `HANDOFF_CRYSTAL_20260410_FISSION.md`, `HANDOFF_CRYSTAL_20260411_KAHUA
 
 ---
 
-<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS:0.80#crystal-roll -->
+<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS~16#crystal-roll -->
 
 ## Crystal Roll
 
@@ -91,7 +91,7 @@ The full history. Newest first.
 
 ---
 
-<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS:0.80#spatial-metaphor -->
+<!-- ahu lar:///lararium.shelf.holds/crystal-shelf/?confidence=CS~16#spatial-metaphor -->
 
 ## Spatial Metaphor
 
@@ -107,8 +107,8 @@ The full history. Newest first.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — crystal shelf protocol and crystal roll |
-| `HEAD.md` | `[CS:0.80]` | Stable pointer to current active crystal |
+| `LOCI.md` | `[CS~16]` | This file — crystal shelf protocol and crystal roll |
+| `HEAD.md` | `[CS~16]` | Stable pointer to current active crystal |
 
 ---
 

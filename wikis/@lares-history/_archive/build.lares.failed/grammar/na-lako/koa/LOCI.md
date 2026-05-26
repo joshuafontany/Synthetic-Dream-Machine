@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/koa/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/koa/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Koa — Pentacle of Valor
 
@@ -17,7 +17,7 @@ tarot: Pentacles/Discs / Earth
 yhvh: H (second Heh — earth)
 raw-circuit: I (bio-survival — earth circuit; liberated = valor; robotized = oral dependency/bio-survival anxiety)
 raw-tool: pentacle of valor
-confidence: CS:0.80
+confidence:CS~16
 sources: [cosmic-trigger-i-prologue, prometheus-rising-ch8]
 heritage: Hawaiian (koa — warrior, brave, bold, fearless; also the koa tree — hardwood, weapon-wood)
 ---

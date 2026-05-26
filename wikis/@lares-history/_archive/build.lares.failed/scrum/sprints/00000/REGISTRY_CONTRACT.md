@@ -1,10 +1,10 @@
 # Registry Contract — `lar:` URI Resolution & Promotion Ledger
 
 > Domain: `lares/registry/`
-> Status: `[S:0.60]` 🏛️ — working design synthesis; depends on URI schema settlement
+> Status: `[S~12]` 🏛️ — working design synthesis; depends on URI schema settlement
 > Updated: 2026-04-08
 > Source: `lares/README.md` (three-truth model), `Signal_HUD_Tagspace-draft.md` §§ Ephemeral Machine Patterns, Ontology Layer
-> Candidate URI: `lar://core/design/registry/contract@S:0.60`
+> Candidate URI: `lar://core/design/registry/contract@S~12`
 
 ---
 
@@ -14,7 +14,7 @@ The registry serves as the **historical/governance truth** layer in the three-tr
 
 | Truth layer | Location | Role |
 |---|---|---|
-| Design truth | `lares/**` | Epistemic gradient `[P] → [C:0.95+]` |
+| Design truth | `lares/**` | Epistemic gradient `[P] → [C~19+]` |
 | Deployment truth | `builds/agents/` | Published, versioned, rollback-ready |
 | **Governance truth** | **`registry/`** | What got promoted, from where, under what evals |
 
@@ -59,8 +59,8 @@ The promotion ledger is append-only. Each entry records a single promotion event
 {
   "timestamp": "2026-04-08T12:00:00Z",
   "lar_uri": "lar:///signal/uri-schema",
-  "promoted_from_register": "CS:0.85",
-  "promoted_to_register": "C:0.95",
+  "promoted_from_register": "CS~17",
+  "promoted_to_register": "C~19",
   "design_source": "lares/modules/uri-schema/URI_SCHEMA.md",
   "build_artifact": "builds/agents/signal/uri-schema-v1.md",
   "file_sha256": "sha256:abc123...",
@@ -112,12 +112,12 @@ Updated only on status change, spawn, seal, or fork. Subject to 200-line discipl
 
 | Q# | Question | Register | Notes |
 |---|---|---|---|
-| R1 | Ledger file format — JSONL vs structured markdown? | `[S:0.65]` | JSONL aligns with STATE.jsonl conventions |
-| R2 | Build version scheme — content hash vs semver vs both? | `[SP:0.45]` | Content hash preferred for integrity; semver for human readability |
-| R3 | Ledger location — `lares/registry/LEDGER.jsonl` vs `lares/PROMOTION_LEDGER.jsonl`? | `[S:0.55]` | Design tree vs crystal tree; different audiences |
-| R4 | Should the resolver be a runtime tool or a design-time reference? | `[S:0.60]` | Alpha: design-time reference; future: runtime resolver |
-| R5 | When is `semantic_sha256` ready to promote from deferred to required? | `[SP:0.45]` | Requires: normalization spec written, prototype run executed on at least one real artifact, two independent tools produce identical hash. Until then, `null` in all ledger entries (use `file_sha256` for integrity). |
+| R1 | Ledger file format — JSONL vs structured markdown? | `[S~13]` | JSONL aligns with STATE.jsonl conventions |
+| R2 | Build version scheme — content hash vs semver vs both? | `[SP~9]` | Content hash preferred for integrity; semver for human readability |
+| R3 | Ledger location — `lares/registry/LEDGER.jsonl` vs `lares/PROMOTION_LEDGER.jsonl`? | `[S~11]` | Design tree vs crystal tree; different audiences |
+| R4 | Should the resolver be a runtime tool or a design-time reference? | `[S~12]` | Alpha: design-time reference; future: runtime resolver |
+| R5 | When is `semantic_sha256` ready to promote from deferred to required? | `[SP~9]` | Requires: normalization spec written, prototype run executed on at least one real artifact, two independent tools produce identical hash. Until then, `null` in all ledger entries (use `file_sha256` for integrity). |
 
 ---
 
-*This document is a working design stub. It settles enough of the registry contract to support URI assignment from sprint 0 outputs. Full registry design follows after the URI schema promotes to `[C:0.95]`.*
+*This document is a working design stub. It settles enough of the registry contract to support URI assignment from sprint 0 outputs. Full registry design follows after the URI schema promotes to `[C~19]`.*

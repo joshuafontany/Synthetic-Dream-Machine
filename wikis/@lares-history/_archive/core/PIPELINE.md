@@ -2,7 +2,7 @@
 
 > Module-Map type: Architecture / Dataflow
 > Source measured: 2026-04-06
-> Register: [S:0.65] 🏛️ — confirms current state, not future target
+> Register: [S~13] 🏛️ — confirms current state, not future target
 
 ---
 

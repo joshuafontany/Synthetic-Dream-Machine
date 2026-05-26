@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.lua.defines/lua/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.lua.defines/lua/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Lua
 
@@ -14,13 +14,13 @@ description: >
 trigger: on-demand — grammar primitive
 invariant: false
 dependencies: [consecration]
-confidence: SP:0.45
+confidence:SP~9
 grammar: true
 heritage: Hawaiian
 ---
 ```
 
-> **Register:** `[SP:0.45]` — stub. Operator's art; operator fills the bones.
+> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Hawaiian. Lua — ancient martial art of bone-breaking, joint manipulation, pressure points. Practitioners learn the body's structure so thoroughly they know where it yields and where it holds. Traditionally restricted (kapu) knowledge.
 > **Grammar of:** Integrity testing. Structural knowing. Finding where the system breaks.
 
@@ -54,7 +54,7 @@ The art was traditionally kapu — restricted knowledge. The grammar carries thi
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — lua grammar stub |
+| `LOCI.md` | `[SP~9]` | This file — lua grammar stub |
 
 ---
 

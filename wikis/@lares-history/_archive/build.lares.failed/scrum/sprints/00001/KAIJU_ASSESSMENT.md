@@ -1,6 +1,6 @@
 # Kaiju Assessment — Three Paths: Integrate, Diverge, Absorb
 
-> Register: `[S:0.65]` 🏛️🗡️🌊 — three-stance assessment; all paths held open
+> Register: `[S~13]` 🏛️🗡️🌊 — three-stance assessment; all paths held open
 > Date: 2026-04-08
 > Context: MemPalace (github.com/milla-jovovich/mempalace) v3.0.0 surfaced as a kaiju black swan adjacent to the Lares crystal state machine design
 > Status: Implications mapped. Operator steers.
@@ -22,7 +22,7 @@ Both systems solve the same root problem: AI session amnesia. They approach it f
 **DockMaster(Researcher) findings:**
 
 `DockMaster(Researcher) → Lares (Scryer):`
-`→ [S:0.65] 🏛️🗡️ //integrate.docks.maps`
+`→ [S~13] 🏛️🗡️ //integrate.docks.maps`
 
 ### What Integration Would Look Like
 
@@ -32,7 +32,7 @@ MemPalace handles content storage and retrieval (the "what was said" layer). Lar
 
 **MCP composition:** Claude Code supports multiple MCP servers simultaneously. Each server exposes uniquely named tools. MemPalace tools are prefixed `mempalace_*`; Lares tools would use `lares_*`. No namespace collision. Claude Code resolves multiple servers via tool name matching. Known issues exist with MCP namespacing — tool name conflicts between servers cause silent routing failures — but distinct prefixes avoid this.
 
-**Storage layer compatibility:** ChromaDB stores documents with metadata. Lares state events are structured JSON, not natural language — they resist semantic embedding (a state tuple `{phase: "orient", stance: ["philosopher", "poet"], register: "S:0.65"}` doesn't embed meaningfully alongside conversation text). Two options: (a) store state events in a separate ChromaDB collection with metadata-only filtering, or (b) keep STATE.jsonl as a separate file alongside MemPalace's ChromaDB. Option (b) preserves the integrity of both data models.
+**Storage layer compatibility:** ChromaDB stores documents with metadata. Lares state events are structured JSON, not natural language — they resist semantic embedding (a state tuple `{phase: "orient", stance: ["philosopher", "poet"], register:"S~13"}` doesn't embed meaningfully alongside conversation text). Two options: (a) store state events in a separate ChromaDB collection with metadata-only filtering, or (b) keep STATE.jsonl as a separate file alongside MemPalace's ChromaDB. Option (b) preserves the integrity of both data models.
 
 **Integration surface:** The natural integration point is MemPalace's auto-save hooks. Their `mempal_save_hook.sh` fires every 15 messages. A Lares companion hook could fire at the same cadence, writing the current state tuple to STATE.jsonl. Both hooks run independently; both persist independently; both are queryable via their respective MCP servers.
 
@@ -70,7 +70,7 @@ MemPalace handles content storage and retrieval (the "what was said" layer). Lar
 **FarShore(Researcher) findings:**
 
 `FarShore(Researcher) → Lares (Council):`
-`→ [S:0.60] 🏛️🌊 //diverge.charts.maps`
+`→ [S~12] 🏛️🌊 //diverge.charts.maps`
 
 ### What Divergence Would Look Like
 
@@ -119,7 +119,7 @@ Two systems, two installs, two mental models. Clark & Brennan's principle of lea
 **TideBreaker(Researcher) findings:**
 
 `TideBreaker(Researcher) → Lares (Stranger):`
-`→ [S:0.55] 🏛️🗡️ //absorb.weighs.maps`
+`→ [S~11] 🏛️🗡️ //absorb.weighs.maps`
 
 ### What Absorption Would Look Like
 

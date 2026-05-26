@@ -35,7 +35,7 @@ lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0
 | Field | Old form | V2 canonical | Notes |
 |---|---|---|---|
 | `stances` | legacy migration bridge | `lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#flag-surface` | consumed: fixed 5-position array; `^`=elevated, `-`=suppressed, `?`=uncertain, `.`=baseline; positional order remains philosopher, poet, satirist, humorist, private. |
-| `confidence` | `register=S~13` | `confidence=S~13` | Field renamed from `register` to `confidence`. Same values. |
+| `confidence` | legacy register query field carrying `S~13` | `confidence=S~13` | Field renamed from `register` to `confidence`. Same values. |
 | Fragment | `#@T.3.2.7` (scope prefix + trailing-zero omission) | `#O0.O0.O3.D2.A7` (all 5 positions, phase+counter) | Always 5 positions. Phase sigils: O, Ø, D, A, Å. No scope prefix. |
 | Path | `/core/observe/context` (module-path) | `/ha.ka.ba/@lares/sub/path/` (3-slot HA.KA.BA + optional sub-path) | EVERY `lar:` URI uses HA.KA.BA. `lar:///ha.ka.ba/@lares/` is (0,0,0). Module routing goes in the sub-path. |
 | Closing | (inconsistent) | `→ ?` (exchange), `→ ∞` (system file) | File-level opening URI also carries `→ ∞`. Section URIs are waypoints — no closing sigil. |
@@ -50,7 +50,7 @@ lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0
 ### 2.1 Cross-Cutting Pattern: Header/Footer URIs
 
 Every crystal file carries a header URI (line 1) and footer URI (last content line). These need:
-- `register=` → `confidence=`
+- legacy register query field → `confidence=`
 - `stances=++?+-` → `stances=^.^.?.-.-` (dot-separated, `^` for elevated)
 - Authority-form header URIs need `alias:tier@host` (no phase sub-field; phase is in chronometer fragment) — BUT crystal header URIs are typically authority-less (`///`) system-file URIs. Convert the `lar://core/research/...` form to `lar:///ha.ka.ba/@lares/sub/path/` form.
 - Header line gets `→ ∞` (system file span opening)
@@ -83,7 +83,7 @@ Every crystal file carries a header URI (line 1) and footer URI (last content li
 
 **Lares_Module_Reorg_Handoff.md** — 20 module-path URIs. Same pattern conversion. Additionally update the §B.5 "Section URI rules" block which currently shows the old format.
 
-**The_Lares_Protocols.md** — fix `stance=philosopher` → `stances=^.-.-.-.-`, fix `register=` → `confidence=`.
+**The_Lares_Protocols.md** — fix `stance=philosopher` → `stances=^.-.-.-.-`, fix legacy register query field → `confidence=`.
 
 ### 2.4 Files to Archive (do not update)
 

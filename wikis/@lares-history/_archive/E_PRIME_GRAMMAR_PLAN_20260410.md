@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///todo.e-prime.plans/grammar-2026-04-10/?confidence=S:0.65&p=0.5 -->
+<!-- ∞ → lar:///todo.e-prime.plans/grammar-2026-04-10/?confidence=S~13&p=0.5 -->
 
 # E-Prime Grammar Plan
 
-Status: `[S:0.65]`  
+Status: `[S~13]`  
 Date: 2026-04-10  
 Scope: plan only; no grammar promotion implied
 
@@ -161,8 +161,8 @@ When the LOCI exists, update `lares/grammar/LOCI.md`:
 
 Update `lares/grammar/truename/LOCI.md` with one of two operator-confirmed outcomes:
 
-- conservative: list `E-Prime` as a candidate True Name at `[SP:0.45]`
-- stronger: list `E-Prime` as operational at `[CS:0.80]`
+- conservative: list `E-Prime` as a candidate True Name at `[SP~9]`
+- stronger: list `E-Prime` as operational at `[CS~16]`
 
 ## Open Decisions
 

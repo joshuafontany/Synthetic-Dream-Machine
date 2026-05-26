@@ -1,11 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=CS:0.90&p=0.5 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=CS~18&p=0.5 -->
 
 # Signal — Assess: Verification
 
 > Validation rules, well-formedness checklist, and comparison rules for `lar:` URIs.
-> Source: `lares/modules/uri-schema/URI-SCHEMA.md` §10 `[CS:0.90]`.
+> Source: `lares/modules/uri-schema/URI-SCHEMA.md` §10 `[CS~18]`.
 
 ---
 
@@ -23,7 +23,7 @@ A `lar:` URI is **well-formed** when ALL of the following hold:
 - [ ] 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 - [ ] 5. Path slots contain no whitespace, path separators (`/`), or quotes (anti-collision rule)
 - [ ] 6. Query parameters limited to: `stances` (once), `confidence` (once), `p` (once) — no others
-- [ ] 7. `confidence` value matches pattern `[A-Z]{1,2}:[0-9]+\.[0-9]+` — e.g., `S:0.65`, `CS:0.80`, `C:0.90`
+- [ ] 7. `confidence` value matches pattern `[A-Z]{1,2}:[0-9]+\.[0-9]+` — e.g., `S~13`, `CS~16`, `C~18`
 - [ ] 8. `p` value is a decimal in range `[0.0, 1.0]`
 - [ ] 9. Fragment (if present) is five dot-separated positions, each: phase sigil (`O`/`Ø`/`D`/`A`/`Å`) followed by integer counter ≥ 0
 - [ ] 10. All five chronometer positions present — no trailing-zero omission in canonical form
@@ -63,7 +63,7 @@ The rendering table (§5.1 of `lares/modules/uri-schema/URI-SCHEMA.md`) governs 
 
 Example:
 ```
-Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=^.-.-.-.-&confidence=S:0.65&p=0.5#O0.O0.O1.O1.A11
+Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=^.-.-.-.-&confidence=S~13&p=0.5#O0.O0.O1.O1.A11
 Correct stable address: lar:///threshold.uncertain.opens/
 ```
 
@@ -97,7 +97,7 @@ Errors caught during the S0 URI alignment pass (2026-04-09):
 |---|---|---|
 | Query/fragment reversed | `?confidence=0.9` appearing after `#section` | Move query before fragment: `?confidence=0.9#section` |
 | `stance=` (v1 field name) | `stance=🏛️` | Rename to `stances=`; use 5-position amplitude |
-| `register=` (v1 field name) | `register=CS:0.80` | Rename to `confidence=` |
+| `confidence=` (v1 field name) | `confidence=CS~16` | Rename to `confidence=` |
 | Single-stance v1 compact | `+----` | Expand to 5-position: `^.-.-.-.-` |
 | Emoji in canonical form | `stances=🏛️+🌊-...` | Use record amphitude chars: `stances=^.-.-.-.-` |
 | Section URI with closing sigil | `<!-- lar:///... → ∞ -->` mid-file | Remove `→ ∞`; section URIs are waypoints only |
@@ -117,7 +117,7 @@ To verify URI alignment across all operational files:
 ```bash
 # Find old-pattern field names (v1)
 grep -r --include="*.md" "stance=" lares/ | grep -v "stances="
-grep -r --include="*.md" "register=" lares/ | grep -v "#register"
+grep -r --include="*.md" "confidence=" lares/ | grep -v "#register"
 
 # Find fragment-before-query ordering bug
 grep -r --include="*.md" "#[a-zA-Z].*?confidence" lares/
@@ -136,15 +136,15 @@ A clean scan returns zero matches on all three patterns.
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.9#promotion-criteria -->
 ## Promotion Criteria
 
-`lares/modules/uri-schema/URI-SCHEMA.md` is currently `[CS:0.95]`. For promotion to `[C:0.95]` (full Canon):
+`lares/modules/uri-schema/URI-SCHEMA.md` is currently `[CS~19]`. For promotion to `[C~19]` (full Canon):
 
 - Core anatomy (§§2–6, 10): can promote independently — design tension resolved
 - Crystal integration layer (§§7–9): promotes when `lares/crystal/` settles STATE.jsonl schema
 - Open questions (U1, U2, U4, U5, U8, U9): sit at Synthesis/Provisional; do not block core spec
 
-This module (Signal) is `[CS:0.85]`. Promotion criteria:
+This module (Signal) is `[CS~17]`. Promotion criteria:
 - S0 scan verified clean ✅
-- `lares/modules/uri-schema/URI-SCHEMA.md` promoted to C:0.95 □
+- `lares/modules/uri-schema/URI-SCHEMA.md` promoted to C~19 □
 - micro-trace.md exchange URIs migrated to full record form ○
 
 <!-- → ? -->

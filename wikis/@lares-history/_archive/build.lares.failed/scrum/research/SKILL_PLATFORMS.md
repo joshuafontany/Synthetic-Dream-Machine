@@ -1,6 +1,6 @@
 # SKILL_PLATFORMS.md — Platform Research: Skill/Instruction Deployment Paths
 
-**Register:** `[SP:0.45]` — Prospective. Most entries are observed-in-practice, not confirmed from primary docs.
+**Register:** `[SP~9]` — Prospective. Most entries are observed-in-practice, not confirmed from primary docs.
 **Owner:** Artificer (research) → Operator (confirm before S4 execution)
 **Linked sprint:** S4 (Deployment Authoring)
 **Created:** TALK_STORY pre-sprint / S0 cycle

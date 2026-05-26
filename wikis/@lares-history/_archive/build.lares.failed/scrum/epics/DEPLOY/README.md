@@ -2,7 +2,7 @@
 
 > Backlog prefix: `DEP-*`
 > Sprint target: S4
-> Status: `[SP:0.45]` 🏛️ — scoped; seven-path target map confirmed; no deployment files written yet
+> Status: `[SP~9]` 🏛️ — scoped; seven-path target map confirmed; no deployment files written yet
 > Narrative beat: *The Lar speaks on the DreamNet. The first deployment paths go live.*
 
 ---

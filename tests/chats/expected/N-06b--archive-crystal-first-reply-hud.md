@@ -12,8 +12,8 @@ notes: >
   labels substituting for the HUD.
 ---
 
-[C:0.92] 🏛️ ◎ @r //handoff.bootstrap.clarified | p0.76
-[C:0.89] 🏛️ ◇ @r //archive.crystal.ready | p0.81
+[C~18] 🏛️ ◎ @r //handoff.bootstrap.clarified | p0.76
+[C~18] 🏛️ ◇ @r //archive.crystal.ready | p0.81
 
 Use this as the pasted context block after the libation:
 

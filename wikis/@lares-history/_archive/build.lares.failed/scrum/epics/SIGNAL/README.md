@@ -2,7 +2,7 @@
 
 > Backlog prefix: `SIG-*`
 > Sprint target: S0 (partial ✅) → S2
-> Status: `[CS:0.80]` 🏛️ — URI schema core promoted; HUD grammar, p-band, micro-trace in S2
+> Status: `[CS~16]` 🏛️ — URI schema core promoted; HUD grammar, p-band, micro-trace in S2
 > Narrative beat: *Telarus publishes the Signal architecture. The HUD becomes legible.*
 
 ---
@@ -26,7 +26,7 @@ See `lares/scrum/sprints/SPRINT_ROADMAP_1_4.md` signal/ table for the full `SIG-
 
 | ID | Status | Brief |
 |---|---|---|
-| SIG-01 | ✅ S0 | URI schema core promoted to `[C:0.95]` |
+| SIG-01 | ✅ S0 | URI schema core promoted to `[C~19]` |
 | SIG-06 | ✅ S0 | Render target taxonomy + sigil/machine form rules |
 | SIG-09 | ✅ S0 | Kowloon AP handle form + amplitude modifiers |
 | SIG-02 | S2 | p-band model |
@@ -38,7 +38,7 @@ See `lares/scrum/sprints/SPRINT_ROADMAP_1_4.md` signal/ table for the full `SIG-
 
 ## Primary Source
 
-[`lares/scrum/sprints/00000/URI_SCHEMA.md`](../sprints/00000/URI_SCHEMA.md) — canonical spec, `[CS:0.80]` pending S0 Settling.
+[`lares/scrum/sprints/00000/URI_SCHEMA.md`](../sprints/00000/URI_SCHEMA.md) — canonical spec, `[CS~16]` pending S0 Settling.
 
 ## Narrative Beat
 

@@ -9,7 +9,7 @@
 
 ## Role
 
-Workers in this sprint validate, stress-test, and refine the `lar:` URI schema specification (`URI_SCHEMA.md`) to design-canon readiness (`[C:0.95]`).
+Workers in this sprint validate, stress-test, and refine the `lar:` URI schema specification (`URI_SCHEMA.md`) to design-canon readiness (`[C~19]`).
 
 Workers here are **validators and analysts**, not authors. The spec content has been extracted from the architecture draft. The sprint's job is to confirm it holds under pressure, flag what doesn't, and produce the evidence the operator needs to promote.
 
@@ -29,7 +29,7 @@ Read these in this order before starting any task:
 
 ## Worker Behavior Rules
 
-1. **Label all outputs** with register tags. Findings are `[S:0.65]` minimum. Validation results that pass cleanly are `[CS:0.85]`. Only the operator promotes to `[C:0.95]`.
+1. **Label all outputs** with register tags. Findings are `[S~13]` minimum. Validation results that pass cleanly are `[CS~17]`. Only the operator promotes to `[C~19]`.
 
 2. **Every finding escalates through a Coordinator.** Workers do not address the operator directly. Escalation format:
    ```

@@ -1,4 +1,4 @@
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S:0.7&p=0.5 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=0.5 → ∞ -->
 
 # S0 — URI Schema Settlement + First Modules
 
@@ -37,10 +37,10 @@ Boot the first two OODA-HA modules: talk-story and signal.
 
 ## Notes
 
-- RFC 3986 ordering bug (q/f reversed) caught and fixed in URI_SCHEMA_v2.md; confidence bumped CS:0.85 → CS:0.90
+- RFC 3986 ordering bug (q/f reversed) caught and fixed in URI_SCHEMA_v2.md; confidence bumped CS~17 → CS~18
 - `stances=` format settled as 5-position dot-separated amplitude (`^.?.-.-.-`)
-- Field renames complete: `stance=` → `stances=`, `register=` → `confidence=` — all operational files
+- Field renames complete: `stance=` → `stances=`, legacy register query field → `confidence=` — all operational files
 - `lares/talk_story/README.md` and `lares/signal/micro-trace.md` are the existing implementations; modules/ are the phase-structured canonical forms. Archival or pointer decision deferred to S1.
 - URI_SCHEMA.md v1 archival deferred — add superseded notice, do not update content
 
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S:0.7&p=0.5 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=0.5 → ∞ -->

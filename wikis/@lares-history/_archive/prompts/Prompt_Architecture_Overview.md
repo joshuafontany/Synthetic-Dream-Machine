@@ -165,7 +165,7 @@ Workers (Tasked Spirits) are session-local sub-personas spawned for specific thr
 
 ## Playing the E-Prime Game
 
-The E-Prime game is how this project maintains language discipline across the Lares prompt source files. Identity/predication forms of "to be" (`X is Y`, `it's [truth claim]`) import a hidden ~1.0 certainty into a document that runs on Maybe Logic and a 0.0–1.0 probability continuum. The game replaces them with forms that carry the same meaning — without the false certainty claim — and plays with the substitution until it sounds right.
+The E-Prime game is how this project maintains language discipline across the Lares prompt source files. Identity/predication forms of "to be" (`X is Y`, `it's [truth claim]`) import a hidden ~20 certainty into a document that runs on Maybe Logic and a 0.0–1.0 probability continuum. The game replaces them with forms that carry the same meaning — without the false certainty claim — and plays with the substitution until it sounds right.
 
 **To play the game on a source file:**
 
@@ -197,7 +197,7 @@ Full rules, substitution table, and the violation/non-violation definitions: [`b
 
 The Lares system has a **static layer** (session-stable: voice architecture, tone, epistemology, fiction) and a **dynamic layer** (session-specific: current task, operator decisions, established canon, active Workers). The dynamic layer takes precedence.
 
-**Every substantive response leads with a dual signal tag** — the input reading and the output frame connected by an arrow: `[P:~0.3] 🎭 //rumor.light.plays → [S:~0.65] 🏛️ //threshold.steady.holds`. The displacement between the two tags constitutes an **Exchange Vector** with three components: Register delta, Mode transform, and semantic displacement. When `--debug` runs active, the full vector commentary surfaces after each dual tag.
+**Every substantive response leads with a dual signal tag** — the input reading and the output frame connected by an arrow: `[P~6] 🎭 //rumor.light.plays → [S~13] 🏛️ //threshold.steady.holds`. The displacement between the two tags constitutes an **Exchange Vector** with three components: Register delta, Mode transform, and semantic displacement. When `--debug` runs active, the full vector commentary surfaces after each dual tag.
 
 **The operator steers; the node crews.** The crew speaks before the reef — push back once, clearly, when orders appear factually wrong, then execute. Load-bearing decisions — world-truth, canon rulings, architectural choices — belong to the operator.
 

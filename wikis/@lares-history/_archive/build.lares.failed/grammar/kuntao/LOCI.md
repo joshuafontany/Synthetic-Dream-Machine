@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.kuntao.defines/kuntao/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.kuntao.defines/kuntao/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Kuntao
 
@@ -15,13 +15,13 @@ description: >
 trigger: on-demand — grammar primitive
 invariant: false
 dependencies: [consecration]
-confidence: SP:0.45
+confidence:SP~9
 grammar: true
 heritage: Chinese-Southeast Asian diaspora (Hokkien, Hakka, Cantonese → Malay Archipelago)
 ---
 ```
 
-> **Register:** `[SP:0.45]` — stub. Operator's art; operator fills the bones.
+> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Chinese-Southeast Asian. Kuntao (拳道, "way of the fist") — Chinese kung fu as transformed by generations of practice in the Malay Archipelago. Not pure Chinese. Not purely Southeast Asian. The diaspora art — born in the bridge space between cultures.
 > **Grammar of:** Bridging. Cross-system integration. How the lararium connects to mempalace, kowloon, tiddlywiki, tldraw. The art of the in-between.
 
@@ -55,7 +55,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP:0.45]` | This file — kuntao grammar stub |
+| `LOCI.md` | `[SP~9]` | This file — kuntao grammar stub |
 
 ---
 

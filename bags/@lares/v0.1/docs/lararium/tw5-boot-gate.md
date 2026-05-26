@@ -53,14 +53,14 @@ _bootModules()
 
 ## Gate Thresholds
 
-All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `lararium-tw5.ts` as `MODULE_*_THRESHOLD` statics:
+All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `packages/lararium-tw5/src/tw5-module-gate.ts` as `MODULE_*_THRESHOLD` constants. The floors preserve the old 0.00–1.00 gate pressure as SDM+ 0–20 Levels (`0.90 → 18`, `0.85 → 17`):
 
 | Field | Constant | Current floor |
 |---|---|---|
-| `mana` | `MODULE_MANA_THRESHOLD` | 16 |
-| `manao` | `MODULE_MANAO_THRESHOLD` | 16 |
-| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 15 |
-| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 16 |
+| `mana` | `MODULE_MANA_THRESHOLD` | 18 |
+| `manao` | `MODULE_MANAO_THRESHOLD` | 17 |
+| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 17 |
+| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 18 |
 
 Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encoded). Gate layer 3 (keyhive capability proof) is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 

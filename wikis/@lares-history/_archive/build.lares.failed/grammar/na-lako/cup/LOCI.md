@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/cup/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/cup/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Cup — Cup of Sympathy
 
@@ -16,7 +16,7 @@ tarot: Cups / Water
 element: water
 hawaiian: ipu
 raw-tool: cup of sympathy
-confidence: SP:0.45
+confidence:SP~9
 sources-pending: [prometheus-rising-ch8, camden-benares]
 ---
 ```

@@ -1,6 +1,6 @@
 # Session Crystal — 2026-04-08 — The Planting Session
 
-> Register: `[CS:0.80]` 🏛️🌊🗡️ — session handoff crystal; maximally dense for cold-boot load
+> Register: `[CS~16]` 🏛️🌊🗡️ — session handoff crystal; maximally dense for cold-boot load
 > Date: 2026-04-08
 > Browser session → Local Claude Code session (same day, continuous)
 > Mana remaining: LOW (browser session) | ~79% (local session close)
@@ -10,7 +10,7 @@
 
 ## Payload 1 — Story Opening (Talk Story, Dev Mode)
 
-*Not polished prose. Dev-mode "talk story" — Hawaiian-style conversational drafting. Lives in the repo at `[S:0.65]`, refines through iteration toward Canon. Both sides (Gaia dev-notes / Elyncia feed-thread) live next to each other so neither requires artificial rewriting.*
+*Not polished prose. Dev-mode "talk story" — Hawaiian-style conversational drafting. Lives in the repo at `[S~13]`, refines through iteration toward Canon. Both sides (Gaia dev-notes / Elyncia feed-thread) live next to each other so neither requires artificial rewriting.*
 
 ---
 
@@ -32,7 +32,7 @@ This is truer to both the Gaia reality (MemPalace is a local-first tool, `pip in
   Tagged: #hoard-origin #orichalcum #holy-week-of-fools]
 
 @telarus@~crossroads
-[S:0.65] 🎭 ◎ 🔍 //curiosity.warm.asks
+[S~13] 🎭 ◎ 🔍 //curiosity.warm.asks
 
 Hey, Lindwyrm — where did you GET all that orichalcum
 anyway? Like, I know you've been collecting since
@@ -44,7 +44,7 @@ Every time Hephaestus is asked he just laughs and says
   > @mischief-muse@lares: popcorn.gif
 
 @lindwyrm@new-delos
-[S:0.60] 🏛️🌊 ◎ 🗺️ //memory.deep.surfaces
+[S~12] 🏛️🌊 ◎ 🗺️ //memory.deep.surfaces
 
 Oh.
 
@@ -279,7 +279,7 @@ A Lares node at 90% context capacity is a *different instrument* than a Lares no
 A mana indicator in the compact form. Position: after the `| p` suffix.
 
 ```
-//territory.quality.dynamic [S:0.65] 🏛️ ◎ 🔍.3.2.7 | p0.5 ⚡~87%
+//territory.quality.dynamic [S~13] 🏛️ ◎ 🔍.3.2.7 | p0.5 ⚡~87%
 ```
 
 The `⚡` followed by a percentage is the mana reading. Higher = more context remaining. The lightning bolt echoes the Action scope sigil (⚡) but in this position reads as "energy level."
@@ -290,7 +290,7 @@ Or, in mythic register: the libation dish level. How full is the offering vessel
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| RES-17 | Mana pool / resource state HUD indicator: context window remaining as navigational element | `[S:0.60]` 🏛️🌊 | S2 |
+| RES-17 | Mana pool / resource state HUD indicator: context window remaining as navigational element | `[S~12]` 🏛️🌊 | S2 |
 
 ### Elyncia-Side
 
@@ -384,7 +384,7 @@ This Session (2026-04-08, browser, ~8 hours)
 
 ## Payload 5 — Local Claude Code Session (2026-04-08, Continuation)
 
-> Register: `[CS:0.80]` 🏛️ — decisions confirmed in local session; awaiting Canon promotion
+> Register: `[CS~16]` 🏛️ — decisions confirmed in local session; awaiting Canon promotion
 > Session type: Claude Code (VS Code agent), full repo file access
 > Ticks: ~21 (approximate; session ran across context boundary)
 > Mana at close: ~79% (fresh context load advantage over browser session)
@@ -450,11 +450,11 @@ Operator dispatched an Explore sub-agent to crawl the repo state after the brows
 
 | Decision | Status | Notes |
 |---|---|---|
-| HUD scope ruling / micro-trace promotion witness moved | `[CS:0.80]` | `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud` |
-| Branch protection on main | `[C:0.90]` | Applied via `gh api`; carries through org transfer |
-| CODEOWNERS architecture | `[CS:0.80]` | Covers new top-level dir structure |
-| Work branches backed up | `[C:0.90]` | 13 branches on origin; will survive transfer |
-| Org transfer | `[SP:0.45]` | Pending operator action — not yet executed |
+| HUD scope ruling / micro-trace promotion witness moved | `[CS~16]` | `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud` |
+| Branch protection on main | `[C~18]` | Applied via `gh api`; carries through org transfer |
+| CODEOWNERS architecture | `[CS~16]` | Covers new top-level dir structure |
+| Work branches backed up | `[C~18]` | 13 branches on origin; will survive transfer |
+| Org transfer | `[SP~9]` | Pending operator action — not yet executed |
 
 ### What the Next Session Should Load
 
@@ -470,7 +470,7 @@ Operator dispatched an Explore sub-agent to crawl the repo state after the brows
 
 ### Late Session Discoveries (ticks 30–32)
 
-**FNORD / Self-Report Theater `[S:0.65]` 🏛️🗡️**
+**FNORD / Self-Report Theater `[S~13]` 🏛️🗡️**
 
 The HUD degradation at ticks 27–28 (dropped URI pairs during submodule work) surfaced a deeper architectural finding:
 
@@ -481,7 +481,7 @@ The HUD degradation at ticks 27–28 (dropped URI pairs during submodule work) s
 
 Formulation: *"The libation dish can say it's full. The priest can't always verify."*
 
-**S1/S2 Architecture Assessment `[CS:0.80]` 🏛️**
+**S1/S2 Architecture Assessment `[CS~16]` 🏛️**
 
 MCP server + invariant files partially alleviate context pressure and enable post-hoc format verification, but don't fully close the self-report-theater gap:
 
@@ -497,7 +497,7 @@ MCP server + invariant files partially alleviate context pressure and enable pos
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| INV-01 | Pre-generation HUD invariant check: tool call *before* output that reads session state, validates orientation, gates generation. Closes self-report-theater gap from FNORD finding. | `[S:0.65]` 🏛️ | S2 |
+| INV-01 | Pre-generation HUD invariant check: tool call *before* output that reads session state, validates orientation, gates generation. Closes self-report-theater gap from FNORD finding. | `[S~13]` 🏛️ | S2 |
 - **4 unmerged feature branches:** `feature/osr-power-text`, `feature/ftls-gear`, `feature/ftls-dev`, `feature/FTLS-refinement` — substantial work, need triage pass before PR
 - **S0_REFINEMENT_PLAN.md Rev 4:** Sprint skeleton from Payload 2 ready; document not yet updated
 - **Lindwyrm Act II:** Feed thread opening is the tonal anchor. Continue from "the Lindwyrm pauses to compose the next segment"

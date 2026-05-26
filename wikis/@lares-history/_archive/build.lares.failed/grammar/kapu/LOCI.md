@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.kapu.defines/kapu/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.kapu.defines/kapu/?confidence=CS~16&p=0.5 -->
 
 # Grammar: Kapu
 
@@ -15,13 +15,13 @@ description: >
 trigger: always — grammar primitive
 invariant: true
 dependencies: [consecration, transclusion]
-confidence: CS:0.80
+confidence:CS~16
 grammar: true
 heritage: Hawaiian
 ---
 ```
 
-> **Register:** `[CS:0.80]` — operator-declared
+> **Register:** `[CS~16]` — operator-declared
 > **Heritage:** Hawaiian. Kapu (also tapu, tabu → English "taboo") — the system of sacred prohibitions governing what is set apart, protected, restricted. Not punishment — protection of what is sacred.
 > **Key principle:** The boundary is not a wall. It is a declaration of what is consecrated. Crossing it is permitted — but governed.
 
@@ -68,7 +68,7 @@ A file without these is outside the kapu. It exists, it can be read, it can be a
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — kapu grammar, boundary definition + crossing rules |
+| `LOCI.md` | `[CS~16]` | This file — kapu grammar, boundary definition + crossing rules |
 
 ---
 

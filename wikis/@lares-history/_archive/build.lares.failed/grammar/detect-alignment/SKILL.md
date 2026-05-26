@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.detectalignment.defines/skill/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.detectalignment.defines/skill/?confidence=CS~16&p=0.5 -->
 
 name: detect-alignment
 ## Files

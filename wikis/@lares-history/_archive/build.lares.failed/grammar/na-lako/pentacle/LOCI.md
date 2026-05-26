@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/pentacle/?confidence=SP:0.45&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/pentacle/?confidence=SP~9&p=0.5 -->
 
 # Grammar: Pentacle — Pentacle of Valor
 
@@ -16,7 +16,7 @@ tarot: Pentacles / Earth
 element: earth
 hawaiian: koa
 raw-tool: pentacle of valor
-confidence: SP:0.45
+confidence:SP~9
 sources-pending: [prometheus-rising-ch8, camden-benares]
 ---
 ```

@@ -4,7 +4,7 @@
 > Branch: `fix/green-jello-dinosaurs-3`
 > HEAD: `ec129fe` + significant unstaged changes to grammar tooling
 > Voice: Artificer
-> Register: `[CS:0.80]` 🛠️🌊
+> Register: `[CS~16]` 🛠️🌊
 
 ---
 

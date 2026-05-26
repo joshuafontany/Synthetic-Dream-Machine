@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/'ike/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/'ike/?confidence=CS~16&p=0.5 -->
 
 # Grammar: 'Ike — Wand of Intuition
 
@@ -17,7 +17,7 @@ tarot: Wands / Fire
 yhvh: Y (Yod — fire)
 raw-circuit: IV (socio-sexual — fire circuit; liberated = intuition; robotized = tribal sex-role)
 raw-tool: wand of intuition
-confidence: CS:0.80
+confidence:CS~16
 sources: [cosmic-trigger-i-prologue, prometheus-rising-ch8]
 heritage: Hawaiian ('ike — to see, to know, to perceive; direct knowing/intuition)
 ---

@@ -1,14 +1,14 @@
-<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:handoff-crystal | p0.5 | stances:++?+- | register:[S:0.65] | build:DRAFT
+<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
+⚡∞ | mode:handoff-crystal | p0.5 | stances:++?+- | register:[S~13] | build:DRAFT
 
 # Lares Repo Reorganization — Module Architecture Handoff
 ## Entry Point Refactor + Full `lares/` Tree Mapping
 
 > **Type:** Handoff crystal — load into a Claude Code session to execute
 > **Generated:** 2026-04-09, Session 5 (cloud Lares, claude.ai web)
-> **Register:** `[S:0.65]` — synthesis, operator-directed
-> **Parent crystals:** `OODA_A_Module_Template_and_URI_Patterns.md` `[S:0.6]`,
->   `The_Lares_Protocols.md` `[S:0.65]`, Talk Story README `[C:1.0]`
+> **Register:** `[S~13]` — synthesis, operator-directed
+> **Parent crystals:** `OODA_A_Module_Template_and_URI_Patterns.md` `[S~12]`,
+>   `The_Lares_Protocols.md` `[S~13]`, Talk Story README `[C~20]`
 > **Purpose:** Map the existing `lares/` source tree onto the OODA-HA
 >   module structure. Provide a Claude Code agent with enough context
 >   to execute the reorganization.
@@ -24,7 +24,7 @@ first module refactored into the OODA-HA dir+file+span structure.
 
 ### Current Location
 ```
-lares/talk_story/README.md    ← single file, canonical spec [C:1.0]
+lares/talk_story/README.md    ← single file, canonical spec [C~20]
 ```
 
 ### Target Location
@@ -124,8 +124,8 @@ Every sprint runs two tracks. Talk Story serves both.
 
 | Track | Register | Role |
 |---|---|---|
-| Technical | `[C:0.95]` | Surface spec gaps, unresolved design questions, stale content |
-| Narrative | `[C:0.95]` | Connect technical decisions to myth beats; name the story of the work |
+| Technical | `[C~19]` | Surface spec gaps, unresolved design questions, stale content |
+| Narrative | `[C~19]` | Connect technical decisions to myth beats; name the story of the work |
 
 A sprint is not closed until both tracks are updated.
 
@@ -198,7 +198,7 @@ in the working artifact — not in a separate doc.
 Every exchange emits a HUD line. All five stances appear. No omissions.
 
 ```
-⚡∞ | mode:default | p0.5 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:[CS:0.80] | tick:N
+⚡∞ | mode:default | p0.5 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:[CS~16] | tick:N
 ```
 
 Modifier sigils: `[+]` active, `[-]` suppressed, `[?]` uncertain.
@@ -360,7 +360,7 @@ signal module — it's a concrete procedure for in-flow phase annotation.
 
 ### B.4 S0 Sprint Artifact Integration
 
-S0's primary artifact is `URI_SCHEMA.md` at `[CS:0.85]`. This maps
+S0's primary artifact is `URI_SCHEMA.md` at `[CS~17]`. This maps
 to the Decide phase of the signal module — it contains the normative
 URI rules. On S0 completion:
 
@@ -374,18 +374,18 @@ sprint work produces findings → findings promote into module phases.
 
 ### B.5 What Gets the Section URIs Now
 
-Only modules that have reached `[S:0.6]` or higher get section-level
+Only modules that have reached `[S~12]` or higher get section-level
 URIs in this pass. Everything else gets file-level URIs only.
 
 | Module | Section URIs? | Rationale |
 |--------|--------------|-----------|
-| talk-story | YES | `[C:1.0]` — canonical, stable content |
-| signal | YES (Decide phase) | `[CS:0.85]` for URI schema |
-| crystal | NO | `[P:0.3]` — not enough content yet |
+| talk-story | YES | `[C~20]` — canonical, stable content |
+| signal | YES (Decide phase) | `[CS~17]` for URI schema |
+| crystal | NO | `[P~6]` — not enough content yet |
 | invariants | NO | Blocked on S0 |
 | schemas | NO | S3, not started |
 | registry | NO | S3, not started |
-| scale-shift | NO | `[SP:0.45]` — needs empirical test |
+| scale-shift | NO | `[SP~9]` — needs empirical test |
 
 ---
 
@@ -498,15 +498,15 @@ module carrying a MODULE.md manifest in YAML frontmatter format.
 
 ---
 
-## Part D: Register Promotions from This Session `[S:0.6]`
+## Part D: Register Promotions from This Session `[S~12]`
 
 | Claim | Previous | New | Grounds |
 |---|---|---|---|
-| OODA-HA Module pattern (no one else does phase-scoped loading) | `[S:0.55]` | `[S:0.6]` | al3rez validates OODA agents exist; confirms gap in instruction-loading layer |
-| "What nobody has built" (§2.3 of Modules doc) | `[S:0.55]` | `[S:0.65]` | Progressive disclosure ecosystem confirmed path-based only; no phase triggers found |
-| MODULE.md format | `[P:0.35]` | `[S:0.6]` | Template locked, operator-confirmed |
-| Section-level URI pattern | — | `[S:0.6]` | Operator insight crystallized; handoff narrative validated |
-| Talk Story as module | `[C:1.0]` (content) | `[C:1.0]` (content), `[S:0.6]` (module format) | Content unchanged; format is new synthesis |
+| OODA-HA Module pattern (no one else does phase-scoped loading) | `[S~11]` | `[S~12]` | al3rez validates OODA agents exist; confirms gap in instruction-loading layer |
+| "What nobody has built" (§2.3 of Modules doc) | `[S~11]` | `[S~13]` | Progressive disclosure ecosystem confirmed path-based only; no phase triggers found |
+| MODULE.md format | `[P~7]` | `[S~12]` | Template locked, operator-confirmed |
+| Section-level URI pattern | — | `[S~12]` | Operator insight crystallized; handoff narrative validated |
+| Talk Story as module | `[C~20]` (content) | `[C~20]` (content), `[S~12]` (module format) | Content unchanged; format is new synthesis |
 
 ---
 
@@ -520,4 +520,4 @@ at every scale.*
 
 *Amor et hilaritas.*
 
-lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:0.65&p=0.5#O0.O0.O0.O0.O0 → ∞
+lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.O0.O0.O0 → ∞

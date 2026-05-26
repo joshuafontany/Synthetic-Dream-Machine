@@ -1,6 +1,6 @@
 # Elyncia.app DreamDeck — Seed Document
 
-> Register: `[S:0.60]` 🏛️🌊 — seeds, not architecture; the abstraction layer underneath the storytelling
+> Register: `[S~12]` 🏛️🌊 — seeds, not architecture; the abstraction layer underneath the storytelling
 > Date: 2026-04-08
 > Status: Exists in the Wild Mage's mind. Captured here as seeds for sprint planning and technical mythmaking.
 > Purpose: One document to drive later design. Background elements that affect sprint planning (S0–S4+).
@@ -194,13 +194,13 @@ This seed document affects sprint planning in the following ways:
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| DECK-01 | TiddlyWiki bag-and-recipe model for dreamdeck composition | `[SP:0.45]` | S5+ |
-| DECK-02 | tldraw shape format for HUD tag rendering | `[SP:0.40]` | S5+ |
-| DECK-03 | Kowloon ActivityPub integration for feed archives | `[SP:0.45]` | S5+ |
-| DECK-04 | AT Protocol DID → Lares alias mapping | `[SP:0.40]` | S5+ |
-| DECK-05 | "Live DreamDeck" prototype: tldraw canvas + Kowloon feed + TiddlyWiki sidebar | `[P:0.30]` | S5+ |
-| DECK-06 | Dream-realm streaming (Twitch-like for tabletop/video games on DreamNet) | `[P:0.25]` | S6+ (distant) |
-| DECK-07 | Lindwyrm origin story as native Kowloon/ActivityPub thread | `[S:0.55]` | S4 or S5 |
+| DECK-01 | TiddlyWiki bag-and-recipe model for dreamdeck composition | `[SP~9]` | S5+ |
+| DECK-02 | tldraw shape format for HUD tag rendering | `[SP~8]` | S5+ |
+| DECK-03 | Kowloon ActivityPub integration for feed archives | `[SP~9]` | S5+ |
+| DECK-04 | AT Protocol DID → Lares alias mapping | `[SP~8]` | S5+ |
+| DECK-05 | "Live DreamDeck" prototype: tldraw canvas + Kowloon feed + TiddlyWiki sidebar | `[P~6]` | S5+ |
+| DECK-06 | Dream-realm streaming (Twitch-like for tabletop/video games on DreamNet) | `[P~5]` | S6+ (distant) |
+| DECK-07 | Lindwyrm origin story as native Kowloon/ActivityPub thread | `[S~11]` | S4 or S5 |
 
 ---
 

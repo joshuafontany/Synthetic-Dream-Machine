@@ -77,7 +77,7 @@ Record and render MUST stay separate while expressing the same signal.
 A compact HUD line SHOULD follow this field order:
 
 ```text
-⚡~NN% | ⚡N.⚔️N.🔍N.⚙️N.🗺️N | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):Name | [R:N] | pN |
+⚡~N | ⚡N.⚔️N.🔍N.⚙️N.🗺️N | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):Name | [R~N] | pN |
 ```
 
 <<~/ahu >>

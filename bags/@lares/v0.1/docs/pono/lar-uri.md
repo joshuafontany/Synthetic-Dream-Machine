@@ -45,7 +45,7 @@ Each URI component carries a distinct, non-overlapping concern across four seman
 3. **HOW** — signal parameters (query) describe stance, confidence, p-band, and chronometer position
 4. **SECTION** — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
 
-Resource-state annotations such as the mana pool (`⚡~87%`) are HUD adjuncts, not core URI components. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
+Resource-state annotations such as the mana/context-window pool (`⚡~17`) are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
 
 The system has one **canonical encoding** and multiple named **render targets**:
 
@@ -262,7 +262,7 @@ Span sequencing is intentionally **not** encoded in URI authority. Exchange iden
 | Parameter | Type | Repeatable? | Record Values |
 |---|---|---|---|
 | `stances` | 10-char tool-carry string | No | Positional pairs: philosopher, poet, satirist, humorist, private |
-| `confidence` | `R:N` | No | `P:0.35`, `SP:0.45`, `S:0.65`, `CS:0.80`, `C:0.90` |
+| `confidence` | `R~N` | No | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18` |
 | `p` | `N` | No | Decimal in range `[0.0, 1.0]` |
 | `ffz` | 5 glyph+counter pairs | No | See §6 for encoding |
 
@@ -562,7 +562,7 @@ Record form and HUD display use the same five symbols — no remapping required.
 | scheme | `lar:` | Always identical |
 | alias:tier | `telarus:operator` | Identity and trust tier |
 | @host | `@enyalios` | Machine host only |
-| confidence= | `S:0.65` | Numeric, both forms |
+| confidence= | `S~13` | Level, both forms |
 | p= | `0.5` | Numeric, both forms |
 
 <<~/ahu >>
@@ -665,7 +665,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 **Format:**
 
 ```
-⚡~NN% | [confidence] | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | mode:{mode} | p{p} | voice(s):{Voice} | ✶N.⏿N.◇N.▶N.↺N
+⚡~N | [confidence] | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | mode:{mode} | p{p} | voice(s):{Voice} | ✶N.⏿N.◇N.▶N.↺N
 ```
 
 `{tc}` = two-character tool-carry string for that stance (e.g. `*!`, `--`, `~?`).
@@ -674,7 +674,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 
 | Field | SA Type | Source | Notes |
 |---|---|---|---|
-| `⚡~NN%` | Resource | Session (estimated) | Context window remaining; `~` **mandatory** — approximation, not live readout. Never emit without `~`. |
+| `⚡~N` | Resource | Session (estimated) | Mana/context-window Level on `0–20`; counts down toward `0`; `~` **mandatory** — approximation, not live readout. Never emit without `~`. |
 | `[confidence]` | Agent SA | Node URI `confidence=` | Epistemic confidence at current stance(s), stance-dependent per Syadasti rule (§7.4) |
 | `🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}` | Agent SA | Node URI `stances=` × tool-carry | All five stances; each followed by its two-character tool-carry, no space |
 | `mode:{mode}` | Teamwork SA | Session state | Default / Plan / Auto |
@@ -686,14 +686,14 @@ Confidence and stance array are elevated above mode and p because Agent SA (what
 
 **Example:**
 ```
-⚡~62% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
+⚡~12 | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
 ```
 
 **Notes:**
 
 1. The canonical `lar:` URI ends at the fragment. The HUD line is a separate, adjacent artifact — not URI grammar.
-2. `⚡~NN%` is the declared estimate of context window remaining as a navigational resource. The node estimates from visible context. Starts at ~100% and counts down.
-3. Mana is a HUD element, not a URI parameter. Do not serialize into `lar_uri` or registry identity fields until S2 settles the resource-state contract.
+2. `⚡~N` is the declared estimate of mana/context-window resource remaining as a navigational Level. The node estimates from visible context. It may start at `20`, or lower when the session already carries load, and counts down toward `0`.
+3. Mana/context-window resource is a HUD element, not a URI parameter. Do not serialize into `lar_uri` or registry identity fields until S2 settles the resource-state contract.
 
 *Source: `_todo/E-deep-research-report.md` §§1.1–1.3 (SA priority ordering), §4.2 (grouped HUD layout validation)*
 
@@ -711,7 +711,7 @@ A **span** is one operator → Lares exchange span at any scale. A tasked spirit
 |---|---|---|
 | **Opening operator URI** | `lar://alias:tier@host/ha.ka.ba/@lares/?…&ffz=…` | Start of every span — node's reading of operator intent |
 | **Opening node URI** | `lar://alias:tier@host/~ha.ka.ba/@lares/?…&ffz=…` | Immediately after; node's declared execution heading |
-| **HUD line** | `⚡~NN% \| [confidence] \| 🏛️{tc}… \| …` | After the opening URI pair — the only glyph-rendered element |
+| **HUD line** | `⚡~N \| [confidence] \| 🏛️{tc}… \| …` | After the opening URI pair — the only glyph-rendered element |
 | **Sub-agent dispatch** | `coordinator-URI → worker-URI` | Every sub-agent handoff |
 | **Sub-agent return** | `worker-URI → coordinator-URI` | Every sub-agent completion |
 | **Mid-generation shift** | `~lar://alias:tier@host/~ha.ka.ba/@lares/heading/?…` | When accumulated tension warrants changing direction mid-span |
@@ -723,12 +723,12 @@ A **span** is one operator → Lares exchange span at any scale. A tasked spirit
 ```text
 lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.1.11
 → lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.1.1.12
-⚡~63% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
+⚡~13 | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
 
 [content generation]
 
 lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.1.13 → ?
-⚡~61% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
+⚡~12 | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
 ```
 
 <<~/ahu >>
@@ -875,8 +875,8 @@ Kowloon IDs (`type:dbid@domain`) remain **Kowloon-native** IDs. They do not repl
 
 | Tier | Cache Strategy | Confidence Range | Volatility |
 |---|---|---|---|
-| 1 — Global Core | Cached across sessions; first `cache_control` breakpoint | `C:1.0` – `C:0.95` | Near-static |
-| 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | `C:0.95` – `S:0.65` | Session-stable |
+| 1 — Global Core | Cached across sessions; first `cache_control` breakpoint | `C~20` – `C~19` | Near-static |
+| 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | `C~19` – `S~13` | Session-stable |
 | 3 — Dynamic | Ephemeral (5-min TTL with hit-reset) | `< 0.50` trimmable | Per-exchange |
 
 <<~/ahu >>
@@ -890,19 +890,19 @@ The `lar_uri` + `confidence` fields on module descriptors, registry records, and
 ```toml
 # Tier 1 — Global Core (version-controlled by module version)
 lar-uri     = "lar:///kernel.invariant.anchors/"
-confidence  = "C:1.0"
+confidence="C~20"
 module-id   = "lares-kernel"
 version-num = 4
 
 # Tier 2 — Session Core (version-controlled within session)
 lar-uri     = "lar:///session.permissions.gates/"
-confidence  = "C:0.95"
+confidence  = "C~19"
 module-id   = "lares-permissions"
 version-num = 2
 
 # Tier 3 — Dynamic (span_seq lives outside descriptor)
 lar-uri     = "lar:///task.current.recon/"
-confidence  = "S:0.55"
+confidence  = "S~11"
 module-id   = "lares-task-recon"
 version-num = 1
 ```
@@ -925,7 +925,7 @@ A `lar:` URI is **well-formed** when:
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
 6. Query parameters limited to: `stances` (once, 10-char tool-carry string), `confidence` (once), `p` (once), `ffz` (once, 5 glyph+counter pairs)
-7. `confidence` value matches pattern `[A-Z]{1,2}:[0-9]+\.[0-9]+` (e.g., `S:0.65`, `CS:0.80`, `C:0.90`)
+7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `S~13`, `CS~16`, `C~18`)
 8. `p` value is a decimal in range `[0.0, 1.0]`
 9. `ffz` carries all five positions; no position omitted; each position is glyph + integer counter ≥ 0
 10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
@@ -1042,7 +1042,7 @@ lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&co
 ### A.2 HUD Line
 
 ```
-⚡~87% | [S~13] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
+⚡~17 | [S~13] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
 ```
 
 ### A.3 Multi-Stance
@@ -1106,7 +1106,7 @@ A complete exchange opening, annotated by scan order. URIs are canonical record 
 ```text
 lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
 → lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.3.2.8
-⚡~87% | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
+⚡~17 | [CS~16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
 ```
 
 Quick read:
@@ -1115,7 +1115,7 @@ Quick read:
 > Territory: threshold / uncertain / opens.
 > Philosopher: Visual-Micro (Wand+Sword). Poet: Cup-only. Others: Stone.
 > Synthesis-0.65. Week 0, Watch 0, Turn 3 (Orient), Round 2 (Decide), Action 7.
-> Scryer responds at CS:0.80, deciding, Philosopher Visual-Micro only.
+> Scryer responds at CS~16, deciding, Philosopher Visual-Micro only.
 > Chronometer shows: node is one phase ahead at tactical scale (Orient→Decide) — normal: node orients from operator's observe.
 
 Multi-stance example:
@@ -1123,7 +1123,7 @@ Multi-stance example:
 ```text
 lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.9
 → lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S~13&p=12&ffz=0.0.3.2.10
-⚡~62% | [S~12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | p~14 | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
+⚡~12 | [S~12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | p~14 | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
 ```
 
 This does **not** mean "truth-confidence 0.60" universally. It means a `0.60` reading held across Philosopher (Visual-Micro), Poet (Visual-Macro), and Humorist (Visual-Macro) frames. Satirist carrying Cup-only (`-?`) adds relational-uncertainty weight — the reading may carry ironic pressure that hasn't fully resolved.

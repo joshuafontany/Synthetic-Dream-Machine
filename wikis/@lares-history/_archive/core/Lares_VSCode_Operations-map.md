@@ -2,7 +2,7 @@
 
 > Module-Map type: Source file structural analysis
 > Source measured: 2026-04-06 | 453 lines | 27,677 bytes
-> Register: [S:0.65] 🏛️ — current state, line counts measured directly
+> Register: [S~13] 🏛️ — current state, line counts measured directly
 > Role in pipeline: **Section B source — appended to ALL platform builds after Lares_Preferences.md**
 
 ---

@@ -197,10 +197,10 @@ Fixed five-stance order and no-partial-emission still apply.
 ### `hud:exchange-pair`
 
 ```
-⚡~NN% | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R:N] | p{p} |
+⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R~N] | p{p} |
 ```
 
-- `⚡~NN%` — context window; `~` prefix mandatory
+- `⚡~N` — context-window resource Level on `0–20`; `~` prefix mandatory
 - `{ffz-rendered}` — chronometer: five scale positions with action counts, glyph form, dot-separated
 - Five stances with amplitude; no separator between stance blocks
 - `voice(s):{Voice}` — active coordinator voice bundle
@@ -317,7 +317,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 **Construction:**
 
-1. Determine context window remaining (estimate — `~` prefix mandatory).
+1. Determine context-window resource Level on `0–20` (estimate — `~` prefix mandatory; often starts below 20 when prior context already carries load).
 2. Render chronometer state in immediate-first order: `⚡N.⚔️N.🔍N.⚙️N.🗺️N`.
 3. For each of the five stances (in order: 🏛️ 🌊 🗡️ 🎭 🔮):
    - Determine which tools the stance is carrying (0, 1, or 2).
@@ -328,12 +328,12 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 4. Append the two-character pair directly to the stance emoji, no space.
 5. Assemble all five as a single unspaced block.
 6. Determine active voice name, target confidence, and `p` value.
-7. Emit in field order: `⚡~NN% | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R:N] | p{p} |`
+7. Emit in field order: `⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R~N] | p{p} |`
 
 **Closed example:**
 
 ```
-⚡~82% | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
+⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
 ```
 
 ### Surface 2: `chat-log:post-header`
@@ -370,7 +370,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 1. No emoji. No glyphs. ASCII only.
 2. URI form: `lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXXXXXXX&confidence=R:N&p=N&ffz=N.N.N.N.N`
 3. Stances parameter: ten-character tool-carry string, two chars per stance, using `*` `?` `!` `~` `-`.
-4. Confidence: `R:N` format (e.g., `CS:0.80`).
+4. Confidence: `R~N` Level format (e.g., `CS~16`).
 5. Chronometer query parameter: five positions dot-separated, each position carrying action count only.
 
 **Closed example:**

@@ -2,9 +2,9 @@
 
 > Scope: Design discussion, infrastructure audit, and governance decisions made during pre-sprint refinement
 > Sprint: S0 pre-entry refinement (not a deliverable task — context record)
-> Register: `[CS:0.85]` 🏛️ — synthesis from a live session; awaits operator canon-promotion on each point
+> Register: `[CS~17]` 🏛️ — synthesis from a live session; awaits operator canon-promotion on each point
 > Date: 2026-04-08
-> Status: RECORD — operator has not yet promoted any item below to `[C:0.95]`
+> Status: RECORD — operator has not yet promoted any item below to `[C~19]`
 
 ---
 
@@ -18,11 +18,11 @@ This log captures design decisions, infrastructure findings, and pending actions
 
 ### Finding: Single-source-of-truth framing conflicts with Maybelogic
 
-`[CS:0.80]` — The prior `lares/README.md` described `builds/agents/` as "the source of truth." That framing is epistemically wrong for a system whose core architecture is a confidence gradient `[P] → [SP] → [S] → [CS] → [C:0.95+]`. Folder address is not a confidence level.
+`[CS~16]` — The prior `lares/README.md` described `builds/agents/` as "the source of truth." That framing is epistemically wrong for a system whose core architecture is a confidence gradient `[P] → [SP] → [S] → [CS] → [C~19+]`. Folder address is not a confidence level.
 
 ### Decision: Three-truth model adopted in `lares/README.md`
 
-`[S:0.70]` — Replacement model, now live in `lares/README.md`:
+`[S~14]` — Replacement model, now live in `lares/README.md`:
 
 | Truth layer | Location | Character |
 |---|---|---|
@@ -34,10 +34,10 @@ Reference basis: Nygard ADR model (status tag on content, not folder address) + 
 
 ### Decision: Promotion Protocol expanded (4 → 6 steps)
 
-`[CS:0.80]` — New flow, live in `lares/README.md`:
+`[CS~16]` — New flow, live in `lares/README.md`:
 
 ```
-design URI [C:0.95] → evaluated candidate → published build artifact (new version)
+design URI [C~19] → evaluated candidate → published build artifact (new version)
     → registry alias pointer update → ledger append
 ```
 
@@ -49,7 +49,7 @@ Added steps: publish as new versioned artifact (not in-place overwrite); update 
 
 ### Finding: `builds/` pipeline does not exist
 
-`[C:0.95]` — Confirmed by filesystem audit (terminal). The following paths claimed in the root `AGENTS.md` header do not exist:
+`[C~19]` — Confirmed by filesystem audit (terminal). The following paths claimed in the root `AGENTS.md` header do not exist:
 
 - `builds/agents/` — directory does not exist
 - `builds/manifests/codex-root.toml` — does not exist
@@ -64,7 +64,7 @@ The only content under `builds/` is `builds/scripts/eprime_audit.py`.
 
 ### Finding: Live deployed instruction files are hand-authored
 
-`[C:0.95]` — The only live deployed instruction artifacts are:
+`[C~19]` — The only live deployed instruction artifacts are:
 
 - `.github/instructions/lares-operations.instructions.md` (hand-authored)
 - `.github/instructions/lares-voice.instructions.md` (hand-authored)
@@ -79,17 +79,17 @@ No `.github/copilot-instructions.md`, no `.github/agents/`, no `.claude/CLAUDE.m
 
 ### Finding: AGENTS.md is now a Linux Foundation open standard
 
-`[CS:0.85]` — AGENTS.md is stewarded by the Agentic AI Foundation under the Linux Foundation. 60k+ repos. Nearest-in-tree wins. VS Code supports via `chat.useAgentsMdFile`. Supported by OpenAI Codex, Copilot coding agent, Gemini CLI, Aider, Cursor, and more.
+`[CS~17]` — AGENTS.md is stewarded by the Agentic AI Foundation under the Linux Foundation. 60k+ repos. Nearest-in-tree wins. VS Code supports via `chat.useAgentsMdFile`. Supported by OpenAI Codex, Copilot coding agent, Gemini CLI, Aider, Cursor, and more.
 
 ### Finding: Agent Skills (`SKILL.md`) supersedes 3-platform worker split
 
-`[CS:0.85]` — `agentskills.io` open standard. Workers live in `.github/skills/*/SKILL.md`. On-demand loading by relevance. Portable across VS Code + Copilot CLI + coding agent without needing per-platform generated variants. This supersedes the old model: `.github/agents/*.agent.md` + `.claude/agents/*.md` + `.codex/agents/*.toml`.
+`[CS~17]` — `agentskills.io` open standard. Workers live in `.github/skills/*/SKILL.md`. On-demand loading by relevance. Portable across VS Code + Copilot CLI + coding agent without needing per-platform generated variants. This supersedes the old model: `.github/agents/*.agent.md` + `.claude/agents/*.md` + `.codex/agents/*.toml`.
 
 **Consequence:** The `builds.stuffed.failed/` archive model built a compiler pipeline to generate 3 platform variants of each worker. That complexity is no longer necessary. One `SKILL.md` per worker = done.
 
 ### Deployment target map (current best practice)
 
-`[CS:0.80]` — Confirmed deployment paths for this VS Code / GitHub Copilot environment:
+`[CS~16]` — Confirmed deployment paths for this VS Code / GitHub Copilot environment:
 
 | Target type | Path | Load behavior |
 |---|---|---|
@@ -103,10 +103,10 @@ No `.github/copilot-instructions.md`, no `.github/agents/`, no `.claude/CLAUDE.m
 
 ### Recommended simplified pipeline model
 
-`[S:0.65]` — Replaces the over-engineered `combine_agents.py` approach:
+`[S~13]` — Replaces the over-engineered `combine_agents.py` approach:
 
 1. **Source** — design material in `lares/**` with confidence tags
-2. **Deploy** — a minimal deploy script copies `[C:0.95]`-tagged modules to the target paths above (or operator does it manually for now)
+2. **Deploy** — a minimal deploy script copies `[C~19]`-tagged modules to the target paths above (or operator does it manually for now)
 3. **Version** — committed artifacts; git SHA = content address. No separate versioning layer needed until content is stable enough to warrant it.
 
 Lock content before automating. The old pipeline built the compiler before the source modules were stable.
@@ -148,7 +148,7 @@ PA-02 (platform README) and PA-04 (SKILL.md workers) touch Sprint 5 territory (P
 
 ## Session 4 — Pre-Sprint Context Audit (for Tasked Spirit Workers)
 
-`[C:0.95]` — Filesystem + file scan performed 2026-04-08 to prepare Worker reading lists for Sprints 1–4.
+`[C~19]` — Filesystem + file scan performed 2026-04-08 to prepare Worker reading lists for Sprints 1–4.
 
 ### Finding: C and D deep-research reports were not in the sprint backlog
 
@@ -211,7 +211,7 @@ Compiled for Tasked Spirit Workers entering each sprint:
 - `_todo/core/TRUST_MODELS.md` (4-tier trust authority caps)
 - `_todo/core/TODO_Resolution_Scale_Design.md` (p-band model)
 - `_todo/core/Signal_HUD_Tagspace-draft.md` (HUD sections: intent header, micro-trace, HAKABA)
-- Kernel `[C:1.0]` tags (invariants must align; Kernel wins all conflicts)
+- Kernel `[C~20]` tags (invariants must align; Kernel wins all conflicts)
 
 **S3 — Registry + Schemas** (`lares/registry/`, `lares/schemas/`):
 - `lares/sprints/0/URI_SCHEMA.md` (canonical URI anatomy)

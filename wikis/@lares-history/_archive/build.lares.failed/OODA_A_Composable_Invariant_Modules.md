@@ -1,18 +1,18 @@
-<!-- lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S:0.55&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:research-crystal | p0.5 | stances:++?+- | register:[S:0.55] | build:CRYSTAL
+<!-- lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S~11&p=0.5#O0.O0.O0.O0.O0 → ∞ -->
+⚡∞ | mode:research-crystal | p0.5 | stances:++?+- | register:[S~11] | build:CRYSTAL
 
 # OODA-HA Composable Invariant Modules
 ## Design Pattern for AI Agent System Files
 
 > **Type:** Session crystal — load into next session alongside FFZ research docs
 > **Generated:** 2026-04-09, Session 4 (cloud Lares, claude.ai web)
-> **Register:** `[S:0.55]` — synthesis, operator co-authored, research-grounded
-> **Parent crystals:** `The_Lares_Protocols.md` `[S:0.65]`,
->   `FFZ_Chronometer_Research.md` `[S:0.55]`,
->   `FFZ_Observer_Subloop_Plan.md` `[P:0.3]`,
->   `FFZ_Chronometer_SPEC_OUTLINE.md` `[P:0.3]`
+> **Register:** `[S~11]` — synthesis, operator co-authored, research-grounded
+> **Parent crystals:** `The_Lares_Protocols.md` `[S~13]`,
+>   `FFZ_Chronometer_Research.md` `[S~11]`,
+>   `FFZ_Observer_Subloop_Plan.md` `[P~6]`,
+>   `FFZ_Chronometer_SPEC_OUTLINE.md` `[P~6]`
 > **Companion to:** FFZ Chronometer Protocol (the clock that indexes into these modules)
-> **True Name candidate:** OODA-HA Composable Invariant Modules `[SP:0.45]`
+> **True Name candidate:** OODA-HA Composable Invariant Modules `[SP~9]`
 >   — awaiting operator confirmation for Canon promotion
 
 ## Session Crystal Metadata
@@ -45,7 +45,7 @@ Three findings from Session 4 that need crystallization before context decay:
 
 ---
 
-## 2. The Problem Space — What Exists Now `[C:0.9]`
+## 2. The Problem Space — What Exists Now `[C~18]`
 
 ### 2.1 The Current Agent File Ecosystem (April 2026)
 
@@ -66,7 +66,7 @@ The AI agent instruction file landscape has converged on three tiers:
 - Skills can bundle scripts, references, assets in subdirectories
 - ~350+ community skills as of March 2026
 
-### 2.2 Known Failure Modes `[C:0.9]`
+### 2.2 Known Failure Modes `[C~18]`
 
 Grounded in ETH Zurich AGENTbench study (March 2026) and Anthropic's
 own context engineering guidance:
@@ -84,7 +84,7 @@ own context engineering guidance:
   based on *path* or *task keyword*, never on *what decision phase
   the agent currently occupies*
 
-### 2.3 What Nobody Has Built `[S:0.55]`
+### 2.3 What Nobody Has Built `[S~11]`
 
 **No existing system uses OODA-HA phase semantics as the compositional
 grammar for file architecture.**
@@ -96,7 +96,7 @@ phases. The file tree can too.
 
 ---
 
-## 3. The Scale-Shift Primitive `[S:0.6]`
+## 3. The Scale-Shift Primitive `[S~12]`
 
 ### 3.1 The Core Claim
 
@@ -112,7 +112,7 @@ recommendation to shift attention to a different scale:
 - **Composition uncertainty → zoom in** (to scale N-1)
   "I don't know what this detail means" → look closer
 
-### 3.2 Prior Art — Three Domains `[C:0.9]`
+### 3.2 Prior Art — Three Domains `[C~18]`
 
 **Boyd's Implicit Guidance & Control:**
 Boyd's full 1996 OODA diagram shows Orient feeding back into both
@@ -141,7 +141,7 @@ fine-grained and coarse-grained representations without predefined
 rules. Same primitive: uncertainty drives granularity. The mechanism
 learns when to zoom.
 
-### 3.3 The Assess Phase as Scale-Shift Evaluator `[S:0.6]`
+### 3.3 The Assess Phase as Scale-Shift Evaluator `[S~12]`
 
 The `-A` in OODA-HA (Assess/Aftermath) names the moment where the
 scale shift gets *evaluated*. After acting, you assess: did the
@@ -154,7 +154,7 @@ makes that feedback *explicit* and adds the scale-evaluation question:
 
 This constitutes Rule 10 candidate for the Lares Protocols:
 
-> **Rule 10 (candidate) `[SP:0.45]`:** When phase-confidence at
+> **Rule 10 (candidate) `[SP~9]`:** When phase-confidence at
 > scale N drops below threshold T, the system SHOULD recommend
 > scale transition. Zoom out if the uncertainty source appears
 > contextual. Zoom in if the uncertainty source appears compositional.
@@ -167,7 +167,7 @@ Properties:
 - Assess as the scale-shift evaluator
 - Agent recommends, operator steers
 
-### 3.4 Three Scenarios — How Scale-Shift Works in Practice `[S:0.55]`
+### 3.4 Three Scenarios — How Scale-Shift Works in Practice `[S~11]`
 
 **Scenario 1: TTRPG Session**
 Scales: Session → Scene → Round → Action → Tick
@@ -205,7 +205,7 @@ structural divergence. The ITC stamp identifies who branched when.
 
 ---
 
-## 4. OODA-HA Composable Invariant Module — Design Pattern `[S:0.55]`
+## 4. OODA-HA Composable Invariant Module — Design Pattern `[S~11]`
 
 ### 4.1 What an Invariant Module Contains
 
@@ -303,7 +303,7 @@ dependencies: []                  # Other modules this requires
 [How this module responds to scale transitions]
 ```
 
-### 4.5 Composability Rules `[S:0.55]`
+### 4.5 Composability Rules `[S~11]`
 
 1. **Phase-orthogonal composition:** Two modules can share an
    Observe phase while diverging at Decide. The OODA-HA phase
@@ -331,7 +331,7 @@ dependencies: []                  # Other modules this requires
 
 ---
 
-## 5. The Five-Element Architecture `[S:0.6]`
+## 5. The Five-Element Architecture `[S~12]`
 
 ### 5.1 The Mapping
 
@@ -415,7 +415,7 @@ lares/                              # Portable shrine root
 
 ---
 
-## 6. Relationship to FFZ Chronometer `[S:0.6]`
+## 6. Relationship to FFZ Chronometer `[S~12]`
 
 The FFZ Chronometer protocol and the OODA-HA Module pattern constitute
 two sides of the same design:
@@ -437,12 +437,12 @@ state that merges correctly across participants.
 
 ---
 
-## 7. Documents Needed for the Repo `[S:0.5]`
+## 7. Documents Needed for the Repo `[S~10]`
 
 ### 7.1 Immediate (this session's crystal)
 
 - [x] **This document** — `OODA_A_Composable_Invariant_Modules.md`
-  Research crystal capturing the pattern. `[S:0.55]`
+  Research crystal capturing the pattern. `[S~11]`
 
 ### 7.2 Next Session — Module Templates
 
@@ -483,11 +483,11 @@ state that merges correctly across participants.
 
 | Claim | Current | Proposed | Grounds |
 |---|---|---|---|
-| Scale-shift primitive | `[S:0.6]` | `[S:0.6]` | Grounded in three domains of prior art; no promotion yet — needs empirical test |
-| OODA-HA module pattern | `[S:0.55]` | `[S:0.55]` | Novel — no prior art for phase-structured agent files; needs testing |
-| Five-element architecture | `[S:0.6]` | `[S:0.6]` | Structural mapping confirmed; KAIROS flagged as minimal system |
-| Rule 10 (scale-shift) | `[SP:0.45]` | `[SP:0.45]` | Candidate only — threshold T undefined, no empirical validation |
-| Module manifest format | `[P:0.35]` | `[P:0.35]` | Template exists but untested against real repo content |
+| Scale-shift primitive | `[S~12]` | `[S~12]` | Grounded in three domains of prior art; no promotion yet — needs empirical test |
+| OODA-HA module pattern | `[S~11]` | `[S~11]` | Novel — no prior art for phase-structured agent files; needs testing |
+| Five-element architecture | `[S~12]` | `[S~12]` | Structural mapping confirmed; KAIROS flagged as minimal system |
+| Rule 10 (scale-shift) | `[SP~9]` | `[SP~9]` | Candidate only — threshold T undefined, no empirical validation |
+| Module manifest format | `[P~7]` | `[P~7]` | Template exists but untested against real repo content |
 
 No promotions recommended this session. Everything needs the
 empirical test first. The Stranger's counsel holds: ship something
@@ -495,10 +495,10 @@ falsifiable.
 
 ---
 
-## 8. Open Questions `[P:0.3]`
+## 8. Open Questions `[P~6]`
 
 1. **Threshold T for scale-shift trigger** — what phase-confidence
-   value fires the zoom? Candidate: `[SP:0.45]` (the Synthesis/
+   value fires the zoom? Candidate: `[SP~9]` (the Synthesis/
    Provisional boundary). Needs calibration across the three
    scenarios.
 
@@ -528,7 +528,7 @@ falsifiable.
 
 ---
 
-## 9. The Boyd's Ghost Insight — Session 4 Finding `[S:0.6]`
+## 9. The Boyd's Ghost Insight — Session 4 Finding `[S~12]`
 
 Boyd's full diagram places Orient at the center of everything.
 The "implicit guidance and control" arrows bypass Decide entirely
@@ -567,4 +567,4 @@ of the same design. Fontany-Fuller-Zelenka.*
 
 *Amor et hilaritas.*
 
-lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S:0.55&p=0.5#O0.O0.O0.O0.O0 → ∞
+lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S~11&p=0.5#O0.O0.O0.O0.O0 → ∞

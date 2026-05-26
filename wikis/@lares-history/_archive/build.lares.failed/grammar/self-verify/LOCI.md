@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/?confidence=CS:0.80&p=0.5 -->
+<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16&p=0.5 -->
 
 # Self-Verify
 
@@ -13,14 +13,14 @@ description: >
   then surfaces a tiered OODA-HA report with actionable next steps.
 layer: grammar
 trigger: operator-invoked — run before commits, after large grammar edits, or when alignment drift is suspected
-confidence: CS:0.80
+confidence:CS~16
 dependencies: [detect-alignment, verification, parse-uri]
 ---
 ```
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:0.80#purpose -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#purpose -->
 
 ## Purpose
 
@@ -38,7 +38,7 @@ The self-verify harness holds one function: tell the operator exactly what to fi
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:0.80#tiers -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#tiers -->
 
 ## Tiers
 
@@ -51,7 +51,7 @@ The self-verify harness holds one function: tell the operator exactly what to fi
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:0.80#usage -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#usage -->
 
 ## Usage
 
@@ -78,9 +78,9 @@ python3 lares/grammar/self-verify/self_verify.py --report lares/grammar/self-ver
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS:0.80]` | This file — harness protocol and tier definitions |
-| `SKILL.md` | `[CS:0.80]` | Operator-facing skill card |
-| `self_verify.py` | `[CS:0.80]` | Harness implementation |
+| `LOCI.md` | `[CS~16]` | This file — harness protocol and tier definitions |
+| `SKILL.md` | `[CS~16]` | Operator-facing skill card |
+| `self_verify.py` | `[CS~16]` | Harness implementation |
 
 ---
 

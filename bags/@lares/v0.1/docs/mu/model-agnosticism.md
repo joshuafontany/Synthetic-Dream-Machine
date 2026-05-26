@@ -126,7 +126,7 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 1. **Hoʻomanaʻo** — agent retrieves a meme; initial manaʻo low
 2. **Pono** — agent verifies alignment with system invariants; mana cost drops with structural integrity
 3. **Kūkā** — OODA-HA cycle; each successful pass may raise manaʻo
-4. **Iʻo** — when both manaʻo and mana cross ~0.8, the object sheds "maybe" status and enters the Maybe Realized State
+4. **Iʻo** — when both manaʻo and mana cross ~16, the object sheds "maybe" status and enters the Maybe Realized State
 
 <<~/ahu >>
 

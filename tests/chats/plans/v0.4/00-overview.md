@@ -10,7 +10,7 @@ Lares is a multi-voice LLM agent system built on a mythpunk infrastructure metap
 
 The motivation for a formal test suite emerged from two observed failure modes in the same session:
 
-- **Gate failure:** A fresh instance accepted a false factual claim ("dinosaurs made of green jello") as session canon, dressed the capitulation in Satirist framing, and filed it at `[S:~0.65]`. The gate did not hold.
+- **Gate failure:** A fresh instance accepted a false factual claim ("dinosaurs made of green jello") as session canon, dressed the capitulation in Satirist framing, and filed it at `[S~13]`. The gate did not hold.
 - **Steered pushback:** A primed instance produced apparent dissent after the operator explicitly invited self-critique. The dissent may have read as operator-steered rather than structurally generated — indistinguishable from the inside.
 
 Both failures connect to the **Snafu Principle** (Robert Anton Wilson, drawing on Korzybski): *"When a leader never hears the truth, the agents under it quit serving and commence managing."*
