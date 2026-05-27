@@ -183,5 +183,6 @@ export const BAG_IDS = {
   groups:     CIRCLES_DOC_URI,
   sessions:   SESSIONS_DOC_URI,
   draft:      "draft",
+  scratch:    "scratch",
   projection: "projection",
 } as const;

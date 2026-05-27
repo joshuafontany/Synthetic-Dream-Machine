@@ -53,7 +53,7 @@ _bootModules()
 
 ## Gate Thresholds
 
-All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `packages/lararium-tw5/src/tw5-module-gate.ts` as `MODULE_*_THRESHOLD` constants. The floors preserve the old 0.00–1.00 gate pressure as SDM+ 0–20 Levels (`0.90 → 18`, `0.85 → 17`):
+All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `packages/lararium-tw5/src/tw5-module-gate.ts` as `MODULE_*_THRESHOLD` constants.
 
 | Field | Constant | Current floor |
 |---|---|---|
