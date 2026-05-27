@@ -92,6 +92,12 @@ export interface JobDispatcherOptions {
   readonly admin:    CompositeStore;
   readonly registry: JobHandlerRegistry;
   readonly verifier?: CapabilityVerifier;
+  /**
+   * Called when a verb is not in the local registry (cross-island relay).
+   * The admin Worker uses this to delegate wiki-scope jobs to the main thread.
+   * If absent, unregistered verbs throw "no handler registered".
+   */
+  readonly relayFn?: (job: JobTiddler) => Promise<Record<string, unknown>>;
 }
 
 export class JobDispatcher {
@@ -119,11 +125,17 @@ export class JobDispatcher {
           this.opts.adminVm,
           this.opts.admin,
           job,
-          () => runLocalJob(job, {
-            admin: this.opts.admin,
-            registry: this.opts.registry,
-            ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
-          }),
+          () => {
+            if (this.opts.registry.has(job.verb)) {
+              return runLocalJob(job, {
+                admin: this.opts.admin,
+                registry: this.opts.registry,
+                ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
+              });
+            }
+            if (this.opts.relayFn) return this.opts.relayFn(job);
+            return Promise.reject(new Error(`no handler registered for "${job.verb}"`));
+          },
         ).catch((err) => {
           console.error("[job-dispatcher] local handler crashed:", err);
         }).finally(() => this.inFlight.delete(job.requestId));

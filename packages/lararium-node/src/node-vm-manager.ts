@@ -37,7 +37,8 @@
  * Meme doc: packages/lararium-node/memes/node-vm-manager.md
  */
 
-import { getHeads, load as automergeLoad } from "@lararium/mesh";
+import { getHeads } from "@lararium/mesh";
+import { load as automergeLoad } from "@automerge/automerge";
 import type { Heads, LarDoc } from "@lararium/mesh";
 import { Worker, MessageChannel } from "worker_threads";
 import type { MessagePort } from "worker_threads";
@@ -280,7 +281,11 @@ export class NodeVmManager {
       ctx.coreBlob.bytes,
       syncPort as unknown as globalThis.MessagePort,
       null,
-      pluginTiddlers ? { pluginTiddlers, bagBindings, storage } : { bagBindings, storage },
+      {
+        ...(pluginTiddlers ? { pluginTiddlers } : {}),
+        bagBindings,
+        ...(storage ? { storage } : {}),
+      },
     );
     await _sendAndAwait<WorkerMsg_Ea>(
       worker,

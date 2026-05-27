@@ -67,7 +67,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { NodeVmManager }                  from "./node-vm-manager.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
+import { JobHandlerRegistry } from "./job-dispatcher.js";
 import { createPromoteHandler }                    from "./promote-handler.js";
 import { createWhereHandler }                       from "./where-handler.js";
 import {
@@ -86,7 +86,7 @@ import {
 import { BagResidencyManager }                      from "@lararium/mesh";
 import { KeyhiveProvider, AdminEventStore }         from "@lararium/keyhive";
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
-import type { AdminVmResult }             from "./open-admin-vm.js";
+import type { AdminVmResult, AdminVmOptions } from "./open-admin-vm.js";
 
 import { LAR_EVENT } from "@lararium/mesh";
 
@@ -352,9 +352,22 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     source: coreBlobEntry.source ?? ENGINE_CORE_ID,
   };
 
-  // Admin VM — operator-private coordinator with its own TW5 engine and
-  // composite. Corpus tiddlers arrive via the bag recipe stack; no plugin preload needed.
-  const adminVm = await openAdminVm({ repo, adminUrl, preloadedTiddlers: [], coreBlob });
+  // Admin VM — sovereign admin island. Spawns lar-admin-worker.ts; holds its own
+  // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + JobDispatcher.
+  // Main thread retains adminHandle (keyhive gates) + composite (cap-event writes).
+  // bagBindings deliver capability tokens for the admin Worker's full recipe.
+  const adminVm = await openAdminVm({
+    repo,
+    adminUrl,
+    coreBlob,
+    bagBindings: [
+      { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
+      ...(laresHandle ? [{ bagId: BAG_IDS.lares, writable: false, mode: "relational" as const, docUrl: laresHandle.url }] : []),
+      { bagId: ADMIN_BAG_ID,     writable: true,  mode: "relational", docUrl: adminUrl },
+    ],
+    storageDir,
+  });
+
   const { slug: activeWikiId, source: activeWikiSource } = selectActiveWikiSlug(
     wikiId,
     await adminVm.composite.get(ACTIVE_WIKI_URI),
@@ -366,10 +379,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     identityDid: identity.did,
   });
 
-  // Job dispatcher — subscribes to the admin store and runs jobs
-  // delivered as job-tiddlers (CRDT-native CLI ↔ daemon coordination).
-  // Real handlers register here; the registry stays empty for now and
-  // populates as B.4+ lands them.
+  // Main-thread relay registry — wiki-scope job handlers whose closure dependencies
+  // live on the main thread (repo, catalogHandle, residency, primary composite).
+  // The admin Worker's JobDispatcher relays unknown verbs here via admin:relay-job.
+  // tw5 and vmManager are assigned after boot below; thunks are safe because
+  // relay jobs only execute after the daemon emits "live".
   const jobRegistry  = new JobHandlerRegistry();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
   jobRegistry.register("echo", async (args) => ({ echoed: args }));
@@ -380,14 +394,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("list-wikis", createListWikisHandler({ composite }));
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
-  // tw5 is assigned after boot (below). The thunk is safe because
-  // job handlers only execute after the daemon emits "live".
   let tw5: TW5Engine;
   let vmManager: NodeVmManager;
+  // getMirrorLookupWiki uses the primary wiki's TW5 — bag-mirror oracle tiddlers
+  // live in the @lararium island corpus, which the primary recipe includes.
   jobRegistry.register("promote", createPromoteHandler({
     composite,
     getPrimaryEngine: () => tw5,
-    getMirrorLookupWiki: () => adminVm.tw5.wiki,
+    getMirrorLookupWiki: () => tw5.wiki,
   }));
   const wikiMintOpts = {
     composite,
@@ -586,15 +600,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     `self-admin=${selfVerify.ok}${selfVerify.ok ? "" : ` (smoke fail: ${selfVerify.reason})`}`,
   );
 
-  // Now that keyhive exists, construct the dispatcher with it as verifier.
-  // ctx.cap in every handler routes through keyhive.verify().
-  const jobDispatcher = new JobDispatcher({
-    adminVm:  adminVm.tw5,
-    admin:    adminVm.composite,
-    registry: jobRegistry,
-    verifier: keyhive,
-  });
-  jobDispatcher.start();
+  // Wire the relay registry now that keyhive exists.
+  // The admin Worker's JobDispatcher relays unknown verbs to this registry via
+  // admin:relay-job messages. configureRelay must be called before workerEa resolves
+  // to ensure no relay jobs are dropped during the boot window.
+  adminVm.configureRelay(jobRegistry, keyhive);
 
   // Zelenka: keep oracle tiddlers current on every boot — self, ka, ba, social plane, admin.
   reconcileWellKnownTiddlers(
@@ -758,7 +768,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     },
   });
   vmManager.mountPrimary(activeWikiId, tw5, null);
-  if (islandHandle) vmManager.registerDocHandle(activeWikiId, islandHandle);
 
   // ── 8. Corpus bags — await after TW5 boots ────────────────────────────────
   await corpusReadyP;
@@ -769,6 +778,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // ── 10. VmPool ────────────────────────────────────────────────────────────
   vessel.attachVmPool(mountedSession.pool);
+
+  // Admin Worker ea gate — vessel is not live until the admin island declares
+  // sovereignty. The admin Worker holds the TW5 job event surface; jobs cannot
+  // dispatch until its drain loop and JobDispatcher are running.
+  await adminVm.workerEa;
 
   emit("live");
   return {

@@ -1,93 +1,228 @@
 /**
- * openAdminVm — boot the operator's admin TW5 engine.
+ * openAdminVm — spawn the sovereign admin Worker island.
  *
- * The admin VM coordinates operator infrastructure for one Lararium node:
- * device delegations (cap=infrastructure), bag-mirror configs tagged
- * lar:///ha.ka.ba/tags/lararium-bag-mirror, projection configs tagged lar:///ha.ka.ba/tags/lararium-projection,
- * sessions (operator → agent), and ceremony state.
+ * The admin Worker holds its own TW5 VM (full recipe: @lararium + @lares + @admin),
+ * its own Repo-in-Worker, its own CompositeStore (CRDT + volatile + projection),
+ * and its own JobDispatcher subscribed to the TW5 wiki change event surface.
  *
- * Federation: scoped to the operator's own devices via cap=infrastructure
- * delegations, gated at the ingress trust check (S7.4). Never reaches wiki
- * vessels — the admin doc has its own AutomergeUrl and its own sync boundary.
+ * Main-thread responsibilities retained here:
+ *   - `adminHandle`  — opened on the main Repo for keyhive event persistence and
+ *                      gate-check reads (PERSON_GROUP, MESH_CABAL sentinel tiddlers).
+ *   - `composite`    — single-layer admin CompositeStore for cap-event writes via
+ *                      AdminEventStore and receipt writes from relay-executed jobs.
+ *   - Relay loop     — listens for `admin:relay-job` from Worker, runs main-thread
+ *                      handler registry, returns `admin:job-result`.
  *
- * Architecture: the admin VM has its own TW5Engine, its own CompositeStore,
- * and its own IslandAdaptor. Sharing the wiki VM's composite would risk
- * leaking operator-private content (delegation proofs, session secrets) to
- * wiki vessel connections.
+ * Boot ordering guarantee:
+ *   `workerEa` resolves only after the admin Worker sends `ea` — TW5 live, all
+ *   CRDT bags synced, drain loop running, JobDispatcher subscribed. `openNodeVessel`
+ *   awaits `workerEa` before emitting `"live"`, enforcing the vessel ordering law:
+ *   admin island must declare sovereignty before the vessel considers itself live.
  *
- * Standalone module — openNodeVessel wires this in (S5.6 A.4); for now
- * the function exists as a callable unit for tests and future integration.
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/open-admin-vm
  */
 
-import type { AutomergeUrl, DocHandle, Repo } from "@automerge/automerge-repo";
-import type { LarDoc } from "@lararium/mesh";
-import { ADMIN_BAG_ID, CompositeStore, AutomergeDocStore, emptyLarDoc } from "@lararium/mesh";
-import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
-import type { TW5CoreBootBlob } from "@lararium/tw5";
-import { waitHandleLocal } from "./repo-helpers.js";
+import { dirname, join }                                from "path";
+import { fileURLToPath }                                from "url";
+import { Worker, MessageChannel }                       from "worker_threads";
+import type { AutomergeUrl, DocHandle, Repo }           from "@automerge/automerge-repo";
+import { MessageChannelNetworkAdapter }                 from "@automerge/automerge-repo-network-messagechannel";
+import type { LarDoc }                                  from "@lararium/mesh";
+import {
+  ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
+  mkManifest, mkAdminPlaceJob, mkAdminJobResult,
+  isWorkerToMainMsg,
+  type BagBinding,
+} from "@lararium/mesh";
+import type { TW5CoreBootBlob }                         from "@lararium/tw5";
+import { runLocalJob }                                  from "./job-local-dispatch.js";
+import type { JobHandlerRegistry }                      from "./job-dispatcher.js";
+import type { CapabilityVerifier }                      from "@lararium/mesh";
+import { waitHandleLocal }                              from "./repo-helpers.js";
+import type { WorkerMsg_Ea, AdminMsg_RelayJob }         from "@lararium/mesh";
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-worker.js", import.meta.url);
 
 export interface AdminVmOptions {
-  /** Shared Automerge repo — same one the wiki VM uses. */
-  repo: Repo;
-  /** Admin doc AutomergeUrl from the social-bootstrap bundle (lararium:init). */
-  adminUrl: string;
-  /** Tiddlers to preload into the admin VM at boot — e.g. the lararium-lares
-   *  corpus blob so bag-mirror config tiddlers can reference lar: URIs. */
-  preloadedTiddlers?: Array<Record<string, unknown>>;
-  /** TW5 core bytes from the content-addressed LarDoc blob. */
-  coreBlob: TW5CoreBootBlob;
+  repo:              Repo;
+  adminUrl:          string;
+  coreBlob:          TW5CoreBootBlob;
+  /** Ordered bag capability tokens for the admin Worker's full recipe. */
+  bagBindings:       readonly BagBinding[];
+  /** Optional storage dir for the admin Worker's NodeFS Repo. */
+  storageDir?:       string;
+  /** Override the admin Worker script URL (tests). */
+  workerScriptUrl?:  URL;
 }
 
 export interface AdminVmResult {
-  /** Booted TW5 engine for the admin wiki. */
-  tw5: TW5Engine;
-  /** Composite store with the admin doc as the writable layer. */
-  composite: CompositeStore;
-  /** Live admin doc handle. */
-  adminHandle: DocHandle<LarDoc>;
-  /** Sync adaptor wired between TW5 and the composite, targeting admin bag. */
-  adaptor: IslandAdaptor;
-  /** Tear down the engine. */
-  dispose: () => void;
+  /** Live admin doc handle on the main Repo — for keyhive and gate-check reads. */
+  adminHandle:  DocHandle<LarDoc>;
+  /**
+   * Single-layer CompositeStore backed by the main Repo's admin handle.
+   * Used by AdminEventStore (cap-event writes) and relay receipt writes.
+   */
+  composite:    CompositeStore;
+  /**
+   * Resolves when the admin Worker has sent `ea` — TW5 live, bags synced,
+   * drain loop running, JobDispatcher subscribed to the wiki change surface.
+   * `openNodeVessel` MUST await this before emitting `"live"`.
+   */
+  workerEa:     Promise<void>;
+  /**
+   * Wire the main-thread relay registry and verifier.
+   * MUST be called before any job can be dispatched — call after keyhive boots,
+   * before awaiting workerEa. Relay jobs that arrive without a configured registry
+   * are rejected with an error result back to the Worker.
+   */
+  configureRelay: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => void;
+  /**
+   * Place a volatile job tiddler in the admin Worker's TW5 wiki.
+   * Delegates to the admin Worker's internal `placeVmJob` via `admin:place-job` message.
+   * The wiki change event fires at the Worker's next tick; JobDispatcher dispatches it.
+   */
+  placeJob:     (opts: import("./job-inbox-relay.js").JobPlacementRequest) => void;
+  /** Terminate the admin Worker and release the main-thread composite. */
+  dispose:      () => void;
 }
 
-export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl } = opts;
+const HANDSHAKE_TIMEOUT_MS = 15_000;
 
+export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
+  const { repo, adminUrl, coreBlob, bagBindings, storageDir, workerScriptUrl } = opts;
+
+  // Mutable relay config — set via configureRelay() after keyhive boots.
+  let _relayRegistry: JobHandlerRegistry | null = null;
+  let _verifier:      CapabilityVerifier | null  = null;
+
+  // ── Main-thread admin handle (keyhive + gate reads) ───────────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
     repo, adminUrl as AutomergeUrl,
     () => repo.create<LarDoc>(emptyLarDoc()),
   );
 
+  // ── Main-thread composite (cap-event + relay receipt writes) ──────────────
   const composite = new CompositeStore();
   const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
-  composite.addLayer({
-    bagId:    ADMIN_BAG_ID,
-    store:    adminStore,
-    writable: true,
-  });
-
-  const tw5 = new TW5Engine();
-  const { preloadedTiddlers } = opts;
-  await tw5.boot(opts.coreBlob, preloadedTiddlers && preloadedTiddlers.length > 0 ? preloadedTiddlers : undefined);
-
-  const adaptor = new IslandAdaptor(tw5, composite, ADMIN_BAG_ID);
-
-  // Subscribe the adaptor to composite changes so admin tiddlers stream into
-  // the wiki. onUriChanged handles inbound; saveTiddler/deleteTiddler handle outbound.
-  composite.addProjection(adaptor);
-
-  // The admin doc is purely local — no remote Automerge sync vessel to wait for.
-  // Mark sync complete immediately so the IslandAdaptor flushes its buffer
-  // and the seeded bag-mirror config tiddlers are visible in the admin TW5 wiki
-  // before the first job handler runs.
+  composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
   adminStore.markSyncComplete();
 
+  // ── Spawn admin Worker ────────────────────────────────────────────────────
+  const { port1: mainPort, port2: syncPort } = new MessageChannel();
+
+  const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
+  repo.networkSubsystem.addNetworkAdapter(adapter);
+
+  const workerUrl = workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL;
+  const worker    = new Worker(workerUrl);
+
+  // ── workerEa Promise ──────────────────────────────────────────────────────
+  let _eaResolve!:  () => void;
+  let _eaReject!:   (err: Error) => void;
+  const workerEa = new Promise<void>((resolve, reject) => {
+    _eaResolve = resolve;
+    _eaReject  = reject;
+  });
+
+  const eaTimer = setTimeout(
+    () => _eaReject(new Error("[openAdminVm] admin Worker ea timeout")),
+    HANDSHAKE_TIMEOUT_MS,
+  );
+
+  // ── Relay loop + Worker message routing ───────────────────────────────────
+  worker.on("message", (raw: unknown) => {
+    if (!isWorkerToMainMsg(raw)) return;
+
+    if (raw.type === "ea") {
+      clearTimeout(eaTimer);
+      _eaResolve();
+      return;
+    }
+
+    if (raw.type === "fault") {
+      clearTimeout(eaTimer);
+      _eaReject(new Error(`[openAdminVm] admin Worker fault: ${(raw as { error: string }).error}`));
+      return;
+    }
+
+    if (raw.type === "admin:relay-job") {
+      const msg = raw as AdminMsg_RelayJob;
+      if (!_relayRegistry) {
+        worker.postMessage(mkAdminJobResult({
+          requestId: msg.requestId,
+          error: `[openAdminVm] relay-job received before configureRelay — verb="${msg.verb}" dropped`,
+        }));
+        return;
+      }
+      // Build a minimal JobTiddler-like object for runLocalJob.
+      const jobLike = {
+        title:       `${ADMIN_BAG_ID}/relay/${msg.requestId}`,
+        requestId:   msg.requestId,
+        verb:        msg.verb,
+        args:        msg.args,
+        requestedBy: msg.requestedBy,
+        requestedAt: new Date().toISOString(),
+        targets:     msg.targets ?? [],
+        batchMode:   (msg.batchMode ?? "best-effort") as import("@lararium/mesh").BatchMode,
+        status:      "pending" as const,
+      };
+      runLocalJob(jobLike, {
+        admin:    composite,
+        registry: _relayRegistry,
+        ...(_verifier ? { verifier: _verifier } : {}),
+      }).then((result) => {
+        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result }));
+      }).catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : String(err);
+        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, error: message }));
+      });
+      return;
+    }
+  });
+
+  worker.on("error", (err) => {
+    console.error("[openAdminVm] admin Worker error:", err);
+    clearTimeout(eaTimer);
+    _eaReject(err);
+  });
+
+  // ── Deliver manifest to admin Worker ──────────────────────────────────────
+  const storage = storageDir
+    ? { type: "nodefs" as const, dir: join(storageDir, "admin") }
+    : undefined;
+
+  const manifestMsg = mkManifest(
+    ADMIN_BAG_ID,
+    coreBlob.bytes,
+    syncPort as unknown as globalThis.MessagePort,
+    coreBlob.sha256 ?? null,
+    { bagBindings, ...(storage ? { storage } : {}) },
+  );
+  worker.postMessage(manifestMsg, [syncPort as unknown as ArrayBuffer]);
+
+  // ── Return result — caller awaits workerEa before emit("live") ────────────
   return {
-    tw5,
-    composite,
     adminHandle,
-    adaptor,
-    dispose: () => { tw5.dispose(); },
+    composite,
+    workerEa,
+    configureRelay: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => {
+      _relayRegistry = registry;
+      _verifier      = verifier ?? null;
+    },
+    placeJob: (jobOpts) => {
+      worker.postMessage(mkAdminPlaceJob({
+        verb:        jobOpts.verb,
+        args:        jobOpts.args,
+        requestedBy: jobOpts.requestedBy,
+        ...(jobOpts.targets?.length ? { targets: [...jobOpts.targets] } : {}),
+        ...(jobOpts.batchMode       ? { batchMode: String(jobOpts.batchMode) } : {}),
+        ...(jobOpts.requestId       ? { requestId: jobOpts.requestId } : {}),
+      }));
+    },
+    dispose: () => {
+      clearTimeout(eaTimer);
+      void worker.terminate();
+    },
   };
 }

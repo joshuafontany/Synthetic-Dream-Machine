@@ -173,11 +173,63 @@ export interface WorkerMsg_Teardown {
   type: "teardown";
 }
 
+// ── Admin Worker protocol ─────────────────────────────────────────────────
+//
+// Three-message round-trip for admin island job coordination.
+//
+// Main → Worker: AdminMsg_PlaceJob  — place a volatile job tiddler in the admin TW5 wiki.
+// Worker → Main: AdminMsg_RelayJob  — relay a wiki-scope job whose handler lives on main.
+// Main → Worker: AdminMsg_JobResult — deliver relay result or error back to Worker.
+//
+// The admin Worker owns the TW5 wiki event surface (kumu device law).
+// All jobs pass through the admin wiki change event → JobDispatcher tick.
+// Wiki-scope handlers that need main-thread resources (repo, catalogHandle, etc.)
+// relay via AdminMsg_RelayJob; the Worker awaits AdminMsg_JobResult before writing receipt.
+
+/** Main → Worker: place a volatile job tiddler in the admin island's TW5 wiki. */
+export interface AdminMsg_PlaceJob {
+  schema_version: ProtocolVersion;
+  type: "admin:place-job";
+  verb: string;
+  args: Record<string, unknown>;
+  requestedBy: string;
+  targets?: string[];
+  batchMode?: string;
+  requestId?: string;
+}
+
+/**
+ * Worker → Main: relay a wiki-scope job to the main-thread handler registry.
+ * Emitted when the admin Worker's JobDispatcher encounters a verb not in its local registry.
+ * Main executes the handler and posts AdminMsg_JobResult back.
+ */
+export interface AdminMsg_RelayJob {
+  schema_version: ProtocolVersion;
+  type: "admin:relay-job";
+  requestId: string;
+  verb: string;
+  args: Record<string, unknown>;
+  requestedBy: string;
+  targets?: string[];
+  batchMode?: string;
+}
+
+/** Main → Worker: relay result or error. Admin Worker resolves the in-flight relay promise. */
+export interface AdminMsg_JobResult {
+  schema_version: ProtocolVersion;
+  type: "admin:job-result";
+  requestId: string;
+  result?: Record<string, unknown>;
+  error?: string;
+}
+
 /** All messages the main thread may send to a wiki Worker. */
 export type MainToWorkerMsg =
   | WorkerMsg_Manifest
   | WorkerMsg_Demote
-  | WorkerMsg_Teardown;
+  | WorkerMsg_Teardown
+  | AdminMsg_PlaceJob
+  | AdminMsg_JobResult;
 
 // ── Worker → Main ──────────────────────────────────────────────────────────
 
@@ -252,7 +304,8 @@ export type WorkerToMainMsg =
   | WorkerMsg_TeardownAck
   | WorkerMsg_Ea
   | WorkerMsg_ChangesetAck
-  | WorkerMsg_Fault;
+  | WorkerMsg_Fault
+  | AdminMsg_RelayJob;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -267,14 +320,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "demote", "teardown"] as const).includes(
+  return (["manifest", "demote", "teardown", "admin:place-job", "admin:job-result"] as const).includes(
     v.type as MainToWorkerMsg["type"],
   );
 }
 
 export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "changeset:ack", "fault"] as const).includes(
+  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "admin:relay-job"] as const).includes(
     v.type as WorkerToMainMsg["type"],
   );
 }
@@ -353,6 +406,63 @@ export function mkChangesetAck(wikiUri: string, batch_id: string): WorkerMsg_Cha
 
 export function mkFault(wikiUri: string, error: string): WorkerMsg_Fault {
   return { schema_version: WORKER_PROTOCOL_VERSION, type: "fault", wikiUri, error };
+}
+
+export function mkAdminPlaceJob(opts: {
+  verb: string;
+  args: Record<string, unknown>;
+  requestedBy: string;
+  targets?: string[];
+  batchMode?: string;
+  requestId?: string;
+}): AdminMsg_PlaceJob {
+  const msg: AdminMsg_PlaceJob = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "admin:place-job",
+    verb: opts.verb,
+    args: opts.args,
+    requestedBy: opts.requestedBy,
+  };
+  if (opts.targets?.length)  msg.targets   = opts.targets;
+  if (opts.batchMode)        msg.batchMode = opts.batchMode;
+  if (opts.requestId)        msg.requestId = opts.requestId;
+  return msg;
+}
+
+export function mkAdminRelayJob(opts: {
+  requestId: string;
+  verb: string;
+  args: Record<string, unknown>;
+  requestedBy: string;
+  targets?: string[];
+  batchMode?: string;
+}): AdminMsg_RelayJob {
+  const msg: AdminMsg_RelayJob = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "admin:relay-job",
+    requestId: opts.requestId,
+    verb: opts.verb,
+    args: opts.args,
+    requestedBy: opts.requestedBy,
+  };
+  if (opts.targets?.length)  msg.targets   = opts.targets;
+  if (opts.batchMode)        msg.batchMode = opts.batchMode;
+  return msg;
+}
+
+export function mkAdminJobResult(opts: {
+  requestId: string;
+  result?: Record<string, unknown>;
+  error?: string;
+}): AdminMsg_JobResult {
+  const msg: AdminMsg_JobResult = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "admin:job-result",
+    requestId: opts.requestId,
+  };
+  if (opts.result !== undefined) msg.result = opts.result;
+  if (opts.error  !== undefined) msg.error  = opts.error;
+  return msg;
 }
 
 // ── Tiddler delta extraction — Worker-side utility ─────────────────────────

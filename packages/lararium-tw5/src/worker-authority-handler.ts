@@ -125,6 +125,15 @@ export class WorkerAuthorityHandler {
     void wikiUri; // wikiUri reserved for future multi-wiki Worker support
   }
 
+  /**
+   * Return the live TW5Engine, or null if not yet booted / already torn down.
+   * Admin Worker entry files use this to pass the engine to IslandAdaptor and JobDispatcher.
+   * Wiki Workers should not need direct engine access — use applyDelta + sendEa instead.
+   */
+  tw5(): TW5Engine | null {
+    return this._tw5;
+  }
+
   /** Send `promote:ack` — call after Repo sync complete and initial tiddlers applied. */
   sendEa(wikiUri: string): void {
     this._post(mkEa(wikiUri));
