@@ -44,7 +44,7 @@ Source: https://docs.yjs.dev/
 
 <<~ ahu #worker-and-channel >>
 
-## Worker Sovereignty and Channel Law
+## Island Sovereignty and Channel Law
 
 > "An off-main-thread architecture can significantly improve your app's reliability and user experience."
 

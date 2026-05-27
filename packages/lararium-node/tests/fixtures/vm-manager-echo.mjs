@@ -1,5 +1,5 @@
 /**
- * vm-manager-echo.mjs — lightweight Worker fixture for NodeVmManager lifecycle tests.
+ * vm-manager-echo.mjs — lightweight island fixture for NodeVmManager lifecycle tests.
  *
  * Implements the lar-wiki-worker protocol without TW5 or ReactionEngine:
  *   manifest        → ea

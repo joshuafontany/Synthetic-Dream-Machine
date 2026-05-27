@@ -12,7 +12,7 @@ Resume from packages/HANDOFF.md and packages/ROADMAP.md.
 Current baseline: quine/genesis, TW5 content-addressed core boot, admin VM,
 command-tiddler CLI, Keyhive concap, bag residency, wiki composition,
 plugin-tiddler boot, sigil cascade architecture, save-side split, recursive
-child co-promotion, Node VM / worker-thread lift, full sigils-as-wikitext
+child co-promotion, Node VM / island-thread lift, full sigils-as-wikitext
 sprint (T-1 wikirule collapse, URI fragment resolution, ahu.ts retirement,
 deserializer root-iam fix, build pipeline clear-before-rebuild),
 SharktoothSigil grammar inversion + aka/kahea mode= collapse sprint,
@@ -29,30 +29,30 @@ vessel ontology scrub + S5 quine closure sprint (command→job + peer→vessel r
 lar-vessel.md + open-vessel.md scrubbed; /api/health HTTP endpoint + CORS
 deleted; `pnpm test:quine` passes — 65 SharktoothSigil grammar tiddlers in genesis;
 39/39 tests), AND the lararium-browser S2 + YIN bag-URI ontology sprint
-(worker-protocol.ts moved node→mesh; WorkerAuthorityHandler extracted isomorphic;
+(island-protocol.ts moved node→mesh; IslandKernel extracted isomorphic;
 @lararium/browser scaffolded S0–S3; bags/ URI schema unified to @bag/v0.1/lane/rest;
-188/188 tests), AND the Worker Sovereignty Law + GP-3 deprecation sprint
-(Isomorphic law 7+1 clauses in worker-protocol.ts; BrowserVesselIslandPool +
+188/188 tests), AND the Island Sovereignty Law + GP-3 deprecation sprint
+(Isomorphic law 7+1 clauses in island-protocol.ts; BrowserVesselIslandPool +
 browser-wiki-worker.ts fully implemented; VesselIslandPool GP-3 oracle deleted —
 routeChangeset, changesetQueue, _subscribeDocChanges, awaitingAck, unsubChange
 gone; 195/195 tests), AND the identity lattice + keyhive founding ceremony sprint
 (runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload extracted isomorphic
 into @lararium/keyhive; three-gate lattice A/B/C passes; two-vessel e2e test 9/9;
-lares device-admit and invite CLI commands wired), AND the Worker Sovereignty Sprints
-1-3 (BagBinding protocol, multi-doc Workers, WorkerStorageConfig; 48/48 tests), AND
+lares device-admit and invite CLI commands wired), AND the Island Sovereignty Sprints
+1-3 (BagBinding protocol, multi-doc islands, IslandStorageConfig; 48/48 tests), AND
 the OTP ontology + dead-weight + gen_island rename sprint (BagMode cold deleted;
-WorkerBehavior→IslandBehavior; WorkerContext→IslandContext; onReady→onEa;
+WorkerBehavior→IslandBehavior; islandContext→IslandContext; onReady→onEa;
 onMessage→onSignal; onTeardown→onDemote; admin:relay-job→admin:delegate-job;
-configureRelay→configureDelegation; WorkerAuthorityHandler→IslandKernel;
+configureRelay→configureDelegation; IslandKernel→IslandKernel;
 JobHandlerRegistry→VerbTable; JobHandler→VerbReactor; create*Handler→make*Reactor;
 NodeVmManager→VesselIslandPool; BrowserVmManager→BrowserVesselIslandPool;
 dead behaviors WikiBehavior/makeWikiDiskBehavior/makeWikiDispatchBehavior deleted;
 handleMessage() deleted from IslandKernel; GP-3 changeset branches deleted from
 fixtures; 55/55 tests), AND the GP-3 browser arc + coherence YIN sprint
-(browser-repo-in-worker.test.ts 2 tests pass — cold-boot + docUrl non-null
+(browser-repo-in-island.test.ts 2 tests pass — cold-boot + docUrl non-null
 federation seam; stale mode:"cold" BagBinding tests removed; teardown fixture
-names cleaned; worker-protocol.md meme updated with correct source-file +
-full contract; Worker Sovereignty Law §8 written; ROADMAP browser gate marked
+names cleaned; island-protocol.md meme updated with correct source-file +
+full contract; Island Sovereignty Law §8 written; ROADMAP browser gate marked
 ✅ Done; 194/194 tests) are treated as landed unless tests prove drift.
 
 Next work, in order:
@@ -68,7 +68,7 @@ Rules: TW5 VM primacy; vessel = lararium identity+runtime unit (not "peer");
 bag = Automerge-doc = sync-boundary; ea = sovereignty breath (not "heartbeat");
 no HTTP/RPC coordination surface; explicit operator promotion for canon.
 Web3 only — no web2 models/code/flows in Lares stack.
-gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback module;
+gen_island pattern: runSovereignisland = kernel; IslandBehavior = callback module;
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
@@ -77,15 +77,15 @@ VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 
 ### GP-3 browser arc + coherence YIN sprint
 
-**GP-3 browser gate: confirmed closed.** `browser-repo-in-worker.test.ts` (2 tests)
+**GP-3 browser gate: confirmed closed.** `browser-repo-in-island.test.ts` (2 tests)
 was already passing: cold-boot path acquires without docUrl; docUrl non-null path
 resolves via `repo.find(docUrl)` and proves federation seam open. Browser
 `browser-wiki-worker.ts` carried no GP-3 fallback — built clean from S19.
 
-**Worker Sovereignty Law §8 written** in `island-protocol.ts` header. §8 covers
-both sides of the federation seam: main-thread wires `MessageChannelNetworkAdapter`
-before manifesting; Worker calls `repo.find(docUrl).whenReady()` before `ea`.
-Gate proof cited: `browser-repo-in-worker.test.ts` test 2.
+**Island Sovereignty Law §8 written** in `island-protocol.ts` header. §8 covers
+both sides of the federation seam: vessel wires `MessageChannelNetworkAdapter`
+before manifesting; island calls `repo.find(docUrl).whenReady()` before `ea`.
+Gate proof cited: `browser-repo-in-island.test.ts` test 2.
 
 **Stale test cleanup:**
 - `island-protocol.test.ts`: removed `"cold BagBinding satisfies BagMode cold"` test
@@ -94,21 +94,21 @@ Gate proof cited: `browser-repo-in-worker.test.ts` test 2.
 
 **Fixture rename:** Both teardown fixtures had `"changeset-subscription"` mock
 subscription name reflecting the GP-3 oracle subscription. Renamed to `"doc-handle"`
-to reflect the Repo-in-Worker doc handle being simulated.
+to reflect the Repo-in-island doc handle being simulated.
 
-**island-protocol.md meme written:** `worker-protocol.md` renamed to `island-protocol.md`
+**island-protocol.md meme written:** `island-protocol.md` renamed to `island-protocol.md`
 (matching the source rename). `source-file` set to `island-protocol.ts`. Full `#contract`
-written: Worker Sovereignty Law (8 clauses), GP grade table, all current message types,
+written: Island Sovereignty Law (8 clauses), GP grade table, all current message types,
 all factories. `ea.md` pranala anchors + loulou references updated to new URI.
 
 **ROADMAP:** Browser gate row marked ✅ Done. GP-3 Deprecation Completion Arc
-section updated — all items cleared; `changeset:ack → frame:ack` rename deferred
+section updated — all items cleared; `frame:ack → frame:ack` rename deferred
 to future schema_version bump.
 
 **Coherence sweep (Explore agent):**
 - island-adaptor meme: MATCH (I-1 through I-8 all hold)
 - island-accumulator meme: MATCH (A-1 through A-5 all hold)
-- worker-protocol meme: WAS STALE → now fixed
+- island-protocol meme: WAS STALE → now fixed
 - voices meme: MATCH (mask layer spec accurate; correctly notes non-integration)
 
 **Metrics:** 194/194 tests pass (mesh 71, tw5 69, node 49, browser 5). All packages
@@ -121,7 +121,7 @@ typecheck clean.
 ### OTP ontology + gen_island rename + dead-weight cut sprint
 
 **BagMode cold deleted.** `{ mode: "cold" }` removed from `BagMode` union in
-`worker-protocol.ts`. Only `{ mode: "relational"; docUrl: string }` remains.
+`island-protocol.ts`. Only `{ mode: "relational"; docUrl: string }` remains.
 Two construction sites in `browser-vessel-island-pool.ts` and `vessel-island-pool.ts`
 updated to use relational with empty `docUrl` fallback.
 
@@ -132,7 +132,7 @@ updated to use relational with empty `docUrl` fallback.
 - `gen_server` comments → `gen_island`
 - Cold gossip listener block deleted from both sovereign-worker-model files
 
-**admin:delegate-job wire rename** (`worker-protocol.ts`, `open-admin-vm.ts`,
+**admin:delegate-job wire rename** (`island-protocol.ts`, `open-admin-vm.ts`,
 `open-node-vessel.ts`, `worker-behaviors.ts`):
 - `AdminMsg_RelayJob` → `AdminMsg_DelegateJob`
 - `mkAdminRelayJob` → `mkAdminDelegateJob`
@@ -143,7 +143,7 @@ updated to use relational with empty `docUrl` fallback.
 - `_pendingRelays` → `_pendingDelegations`
 
 **IslandKernel** (`@lararium/tw5`): `worker-authority-handler.ts` → `island-kernel.ts`;
-class `WorkerAuthorityHandler` → `IslandKernel`; `handleMessage()` deleted (zero callers
+class `IslandKernel` → `IslandKernel`; `handleMessage()` deleted (zero callers
 confirmed; fixtures use raw `parentPort.on("message")`); `mkTeardownAck` import dropped.
 
 **VerbTable / VerbReactor** rename sweep (14 files in lararium-node):
@@ -172,76 +172,76 @@ confirmed; fixtures use raw `parentPort.on("message")`); `mkTeardownAck` import 
 
 ## What Changed This Turn (2026-05-24 turn 20)
 
-### Worker Sovereignty Law — Isomorphic Vessel Model + GP-3 Deprecation Sprint
+### Island Sovereignty Law — Isomorphic Vessel Model + GP-3 Deprecation Sprint
 
-**Worker Sovereignty Law enacted.** Seven clauses (plus §7 mainPort, §3 Safari
-note) now live in `packages/lararium-mesh/src/worker-protocol.ts` as the
+**Island Sovereignty Law enacted.** Seven clauses (plus §7 mainPort, §3 Safari
+note) now live in `packages/lararium-mesh/src/island-protocol.ts` as the
 canonical doctrine comment. Isomorphic across all vessel types — node, browser,
 and any future third vessel.
 
-**`worker-protocol.ts` protocol evolution (mesh):**
-- `WorkerMsg_Promote` reshaped: `snapshotTiddlers` removed; `syncPort: MessagePort`
+**`island-protocol.ts` protocol evolution (mesh):**
+- `IslandMsg_Manifest` reshaped: `snapshotTiddlers` removed; `syncPort: MessagePort`
   (transferred, required), `docUrl: string | null`, `coreHash: string | null` added.
 - `mkPromote(wikiUri, coreBlob, syncPort, docUrl?, coreHash?)` — new signature.
   `syncPort` is the third positional arg; not optional.
-- `WorkerMsg_TeardownAck`: `docBytes?: Uint8Array` added (preferred); `snapshotTiddlers`
-  marked `@deprecated GP-3`.
+- `IslandMsg_TeardownAck`: `docBytes?: Uint8Array` added (preferred); `snapshotTiddlers`
+  marked `removed GP-3`.
 - `mkTeardownAck(opts)` factory: opts-object form, `exactOptionalPropertyTypes`-safe.
-- NEW `extractTiddlerDeltaFromPatches(doc, patches)` — Worker-side tiddler delta from
-  Automerge patches. Removes the oracle-on-main-thread need.
+- NEW `extractTiddlerDeltaFromPatches(doc, patches)` — island-side tiddler delta from
+  Automerge patches. Removes the oracle-on-vessel need.
 - NEW `allTiddlersFromDoc(doc)` — materialize all tiddlers for initial TW5 load.
-- `WorkerMsg_Changeset` + `mkChangeset` + `mkChangesetAck` marked `@deprecated GP-3`.
-- Worker Sovereignty Law §7: vessel MUST close `mainPort` before/after `terminate()`.
+- `IslandMsg_FrameAck` + `mkFrame` + `mkFrameAck` marked `removed GP-3`.
+- Island Sovereignty Law §7: vessel MUST close `mainPort` before/after `terminate()`.
   Structural invariant, not convention. Both vessels enforce it.
-- Worker Sovereignty Law §3: Safari rAF gap named — `setTimeout(16)` fallback required.
+- Island Sovereignty Law §3: Safari rAF gap named — `setTimeout(16)` fallback required.
 
 **`browser-wiki-worker.ts` — fully implemented (browser vessel):**
-- Repo-in-Worker via transferred `syncPort`.
+- Repo-in-island via transferred `syncPort`.
 - `requestAnimationFrame` drain with `typeof self.requestAnimationFrame === "function"`
   guard + `setTimeout(16)` Safari fallback. Both paths map to `_scheduleFrame`.
 - `automergeSave` on teardown — `docBytes` in `teardown:ack` preferred over tiddler list.
 - GP-3 fallback: `changeset` messages push to pending arrays (deprecated path survives).
 
 **`BrowserVmManager` — new file (browser vessel):**
-- `MessageChannel` per slot: main keeps `port1`, Worker receives `port2` (syncPort).
+- `MessageChannel` per slot: main keeps `port1`, island receives `port2` (syncPort).
 - Optional `mainRepo?: Repo` — when provided, wires `MessageChannelNetworkAdapter(port1)`.
 - `acquire/preWarm/evict/disposeAll` implement `BrowserAuthorityPool`.
-- `_makeLease()` stub: `filterTiddlers` / `renderMeme` `@deprecated` pull RPCs → `[]`/`null`.
+- `_makeLease()` stub: `filterTiddlers` / `renderMeme` `superseded` pull RPCs → `[]`/`null`.
 - `mainPort.close()` before `worker.terminate()` in `evict()` — law §7 compliant.
 
-**`lar-wiki-worker.ts` — Repo-in-Worker path wired (node vessel):**
+**`lar-wiki-worker.ts` — Repo-in-island path wired (node vessel):**
 - `setInterval(16ms).unref()` drain loop — does not hold process alive.
-- `syncPort` presence gated: if provided, boots Repo-in-Worker + subscribes handle.
+- `syncPort` presence gated: if provided, boots Repo-in-island + subscribes handle.
   If absent, GP-3 deprecated changeset path remains active for backward compat.
 - `automergeSave` on teardown — `docBytes` captured when `_docHandle` non-null.
 
 **`NodeVmManager` — GP-3 deprecation markers + MessageChannel wiring:**
 - `WorkerHotSlot`: `mainPort: MessagePort` added (structural). `unsubChange`,
-  `changesetQueue`, `awaitingAck` marked `@deprecated GP-3 oracle path`.
+  `changesetQueue`, `awaitingAck` marked `removed GP-3 oracle path`.
 - `NodeVmManagerOptions`: `mainRepo?: Repo` added — optional CRDT sync wiring.
 - `mountWiki`: creates `MessageChannel`; optionally wires `mainPort` →
   `MessageChannelNetworkAdapter` on mainRepo; passes `syncPort` in `mkPromote`;
   transfers `[syncPort]` in `postMessage`.
 - `unmountWiki`: closes `mainPort`, captures `docBytes` from `teardown:ack` into
   `VmSnapshot.docBytes` (preferred). Tiddler count log updated to show docBytes size.
-- `routeChangeset`: marked `@deprecated GP-3 oracle path`.
-- `_subscribeDocChanges`: marked `@deprecated GP-3 oracle path`.
-- `VmSnapshot.docBytes?: Uint8Array` added; `tiddlers` marked `@deprecated GP-3`.
+- `routeChangeset`: marked `removed GP-3 oracle path`.
+- `_subscribeDocChanges`: marked `removed GP-3 oracle path`.
+- `VmSnapshot.docBytes?: Uint8Array` added; `tiddlers` marked `removed GP-3`.
 - `_sendAndAwait` transferList typed `(ArrayBuffer | MessagePort)[]` — avoids stale
   `TransferListItem` deprecated alias from `@types/node`.
 
-**`WorkerAuthorityHandler` refactored (`@lararium/tw5`):**
+**`IslandKernel` refactored (`@lararium/tw5`):**
 - New sovereignty-law API: `bootTw5(wikiUri, coreBlob)`, `applyDelta(wikiUri, added, deleted)`,
-  `sendPromoteAck(wikiUri)`, `sendChangesetAck(wikiUri, frameId)`, `teardown()`.
-- `handleMessage(raw)` marked `@deprecated` — kept for GP-3 fixture Workers.
+  `sendEa(wikiUri)`, `sendFrameAck(wikiUri, frameId)`, `teardown()`.
+- `handleMessage(raw)` marked `superseded` — kept for GP-3 fixture islands.
 - `TeardownResult` interface exported.
 
 **Tests updated:**
-- `worker-protocol.test.ts` (node): `mkPromote` calls updated to supply `MessagePort`
+- `island-protocol.test.ts` (node): `mkPromote` calls updated to supply `MessagePort`
   from `new MessageChannel()`.
 - `worker-lifecycle.test.ts` (browser): same `mkPromote` signature fix.
 - `node-vm-manager.test.ts`: `re-mountWiki` test reframed — asserts cold snapshot
-  captures tiddlers (GP-3 teardown path) and re-mounted Worker is live + responsive.
+  captures tiddlers (GP-3 teardown path) and re-mounted island is live + responsive.
   Removes `totalTiddlers >= 1` assertion (warm-start now requires Repo sync, not
   tiddler injection in promote).
 
@@ -250,16 +250,16 @@ and any future third vessel.
   at module load; falls back to `setTimeout(cb, 16)`. Zero cost when rAF is available.
 
 **Research findings (two agents):**
-- Automerge `MessageChannelNetworkAdapter` is the official Repo-in-Worker adapter — on golden path.
+- Automerge `MessageChannelNetworkAdapter` is the official Repo-in-island adapter — on golden path.
 - Safari shows no intent to ship `DedicatedWorkerGlobalScope.requestAnimationFrame` (as of 2026).
 - Comlink documents the GC leak pattern for MessagePort — our `mainPort.close()` law is correct defense.
-- No prior art combines CRDT-in-Worker + MessageChannel isolation + causal island framing cohesively. Pattern appears novel.
+- No prior art combines CRDT-in-island + MessageChannel isolation + causal island framing cohesively. Pattern appears novel.
 - Closest federation ancestors: SSB sigchain gossip (topology), Spritely OCapN/CapTP (capability routing), DXOS HALO (identity). None combine all three.
 - Gap confirmed: no system combines invite-only bootstrapping + independent operator storage + capability-based cross-operator trust.
 
 **Metrics:** 192/192 tests pass (mesh 67, tw5 81, node 40, browser 4). All packages typecheck clean.
 
-**`docUrl` federation seam:** remains `null` in both vessels. When non-null, a Worker
+**`docUrl` federation seam:** remains `null` in both vessels. When non-null, a island
 calling `repo.find(docUrl).whenReady()` will sync a remote bag without any protocol change.
 The archipelago forms the moment a bag mirror config carries a remote AutomergeUrl.
 
@@ -269,11 +269,11 @@ The archipelago forms the moment a bag mirror config carries a remote AutomergeU
 
 ### lararium-browser S2 + YIN bag-URI ontology sprint
 
-**worker-protocol.ts moved node → mesh.** The shim that briefly lived in
+**island-protocol.ts moved node → mesh.** The shim that briefly lived in
 `@lararium/node` dissolved in the same turn. Three node source files and two
 test files import protocol types directly from `@lararium/mesh`.
 
-**WorkerAuthorityHandler** extracted from `lar-wiki-worker.ts` into
+**IslandKernel** extracted from `lar-wiki-worker.ts` into
 `@lararium/tw5/src/worker-authority-handler.ts`. Owns the isomorphic TW5 boot /
 changeset-apply / teardown sequence. Node worker shrunk to a 10-line I/O binding.
 Browser worker (`browser-wiki-worker.ts`) carries the same shape with
@@ -289,8 +289,8 @@ fields now follow the canonical form `@bag/v0.1/{lane}/{rest}`. Old form
 500+ file moves + iam field rewrites across `@lares`, `@lararium`, `@ftls`,
 `@elyncia`. Zero old-form strings survive in bags, packages, or scripts.
 
-**`worker-protocol.md` meme** moved from node lane to mesh lane, `source-file`
-corrected to `packages/lararium-mesh/src/worker-protocol.ts`.
+**`island-protocol.md` meme** moved from node lane to mesh lane, `source-file`
+corrected to `packages/lararium-mesh/src/island-protocol.ts`.
 
 **Stale tsc artifacts** (`*.js`, `*.d.ts`, `*.js.map`, `*.d.ts.map`) purged from
 `packages/lararium-mesh/src/`. Build confirmed to emit only to `dist/`; no
@@ -672,8 +672,8 @@ Replaced by nalu-driven TW5 startup module.
 **Updated:**
 - `packages/lararium-node/src/lar-wiki-worker.ts` — removed `ReactionEngine` import
   and instance; wired `tw5.registerProjectionBus({handleLarariumEvent})` after boot;
-  removed inline `re.onChangeset()` from changeset handler. Worker now forwards
-  `tm-verse-event` wiki events → `WorkerMsg_Event` to main thread.
+  removed inline `re.onChangeset()` from changeset handler. island now forwards
+  `tm-verse-event` wiki events → `IslandMsg_Event` to vessel.
 - `bags/@lares/v0.1/api/pono/reaction-graph.md` — yin-collapse target section updated
   to "Landed"; fireSync gap section updated to "CLOSED".
 
@@ -947,17 +947,17 @@ These two arcs together complete the isomorphic vessel law across all vessel typ
 
 ### GP-3 Browser Arc — Active
 
-Write `packages/lararium-browser/tests/browser-repo-in-worker.test.ts`:
-- Two `BrowserVmManager` instances sharing one main-thread Repo.
-- Worker receives doc changes via MessageChannel (no `routeChangeset`).
+Write `packages/lararium-browser/tests/browser-repo-in-island.test.ts`:
+- Two `BrowserVmManager` instances sharing one vessel Repo.
+- island receives doc changes via MessageChannel (no `routeChangeset`).
 - Gate passes → delete GP-3 fallback in `browser-wiki-worker.ts`.
 - Protocol layer cleanup follows both vessel gates. See ROADMAP `## GP-3 Deprecation Completion Arc`.
 
 ### docUrl Non-Null Gate — Ea Federation Seam
 
 After protocol cleanup: write one test with `docUrl` as a real `AutomergeUrl`.
-In-process Repo pair. Worker calls `repo.find(docUrl).whenReady()`. Proves federation
-without a remote node. Write Worker Sovereignty Law §8 when this gate passes.
+In-process Repo pair. island calls `repo.find(docUrl).whenReady()`. Proves federation
+without a remote node. Write Island Sovereignty Law §8 when this gate passes.
 
 ### Path L / S7.4 — Admin Doc Ingress Trust Gate
 

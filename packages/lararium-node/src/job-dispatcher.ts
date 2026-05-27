@@ -94,7 +94,7 @@ export interface JobDispatcherOptions {
   readonly verifier?: CapabilityVerifier;
   /**
    * Called when a verb is not in the local registry (cross-island route).
-   * The admin island uses this to route wiki-scope jobs to the main-thread VerbTable.
+   * The admin island uses this to route wiki-scope jobs to the vessel VerbTable.
    * If absent, unregistered verbs throw "no handler registered".
    */
   readonly routeFn?: (job: JobTiddler) => Promise<Record<string, unknown>>;

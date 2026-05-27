@@ -12,7 +12,7 @@ this file carries only open work and ordering pressure.
 The branch holds: quine/core, content-addressed genesis + TW5 core boot, admin
 VM, command-tiddler CLI, Keyhive concap gate, bag residency, wiki composition,
 plugin-tiddler boot, sigil cascade architecture for load-bearing sigils,
-save-side splitting, recursive child co-promotion, Node VM / worker-thread lift,
+save-side splitting, recursive child co-promotion, Node VM / island-thread lift,
 the sigils-as-wikitext sprint (filter self-registration, md-file-router,
 memetic-parser deny-list trim, `\sigil` pragma stub, `\widget ~` dispatcher,
 `~aka`/`~kahea`/`~loulou`/`~pranala-header`/`~pranala` wikitext tiddlers,
@@ -76,11 +76,11 @@ These planning docs follow one architectural law:
 | — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
 | — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
-| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | island-protocol.ts moved node→mesh (was worker-protocol.ts); WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S3 architecture landed); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
-| — | **Worker Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in island-protocol.ts (was worker-protocol.ts). BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel Worker, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per Worker, mainPort.close law, docBytes capture). All GP-3 oracle paths carry @deprecated markers. 192/192 tests. |
-| — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-worker.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkChangeset` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
+| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | island-protocol.ts moved node→mesh (was island-protocol.ts); IslandKernel isomorphic; @lararium/browser scaffolded (S0–S3 architecture landed); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
+| — | **Island Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in island-protocol.ts (was island-protocol.ts). BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel island, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per island, mainPort.close law, docBytes capture). All GP-3 oracle paths carry superseded markers. 192/192 tests. |
+| — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-island.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkFrame` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
 | — | **Identity lattice + keyhive founding ceremony** | ✅ Done | `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` extracted isomorphic into `@lararium/keyhive`. Three-gate lattice A/B/C holds. Two-vessel e2e test (`two-vessel-mesh.test.ts`) 9/9. `lares device-admit` + `lares invite` CLI commands wired. |
-| — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-worker.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: `WorkerMsg_Changeset` + `mkChangeset` removed; `WorkerMsg_ChangesetAck` is the §4 frame-completion signal (rename to `frame:ack` in future schema_version bump). Stale `mode: "cold"` tests removed. 5/5 browser tests green. |
+| — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-island.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: `IslandMsg_FrameAck` + `mkFrame` removed; `IslandMsg_FrameAck` is the §4 frame-completion signal (rename to `frame:ack` in future schema_version bump). Stale `mode: "cold"` tests removed. 5/5 browser tests green. |
 | 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
 | 3 | **S9 / lararium-browser** | ⬜ Active (S0–S3 architecture landed; S4 real boot + IndexedDB next) | Full browser vessel ea-path: IndexedDB storage, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
@@ -157,7 +157,7 @@ These tables do not feed `grammar-cache.ts`. Migration to bag memes deferred to 
 
 ## GP-3 Deprecation Completion Arc
 
-All sites marked `@deprecated GP-3 oracle path` form one removal arc.
+All sites marked `removed GP-3 oracle path` form one removal arc.
 
 **Node gate: ✅ PASSED + DELETED** — 195/195 green.
 `routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` gone.
@@ -169,7 +169,7 @@ All sites marked `@deprecated GP-3 oracle path` form one removal arc.
 
 **Browser gate: ✅ PASSED + DELETED** — 5/5 browser tests green.
 `browser-wiki-worker.ts` carries no GP-3 fallback. `browser-sovereign-island-model.ts` handles manifest/teardown only.
-`docUrl` non-null test in `browser-repo-in-worker.test.ts` (test 2) proves federation seam open.
+`docUrl` non-null test in `browser-repo-in-island.test.ts` (test 2) proves federation seam open.
 
 **Browser vessel remnants — ✅ ALL CLEARED:**
 - [x] GP-3 fallback `changeset` handler in `browser-wiki-worker.ts` — never existed (built clean from S19).
@@ -178,24 +178,24 @@ All sites marked `@deprecated GP-3 oracle path` form one removal arc.
 - [x] `worker-lifecycle.test.ts` — no GP-3 changeset test (built clean from S19).
 
 Protocol layer — ✅ ALL CLEARED (both gates passed):
-- [x] `WorkerMsg_Changeset` interface and type union entry — DELETED (node gate sprint).
-- [x] `mkChangeset` factory — DELETED (node gate sprint).
-- [x] `WorkerMsg_TeardownAck.snapshotTiddlers` field — DELETED.
+- [x] `IslandMsg_FrameAck` interface and type union entry — DELETED (node gate sprint).
+- [x] `mkFrame` factory — DELETED (node gate sprint).
+- [x] `IslandMsg_TeardownAck.snapshotTiddlers` field — DELETED.
 - [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
 - [x] Stale `mode: "cold"` BagBinding tests in `island-protocol.test.ts` — REMOVED.
-- ⧾ `WorkerMsg_ChangesetAck` → `WorkerMsg_FrameAck` + rename `changeset:ack` → `frame:ack` — deferred to future schema_version bump; documented in protocol header.
+- ⧾ `IslandMsg_FrameAck` → `IslandMsg_FrameAck` + rename `frame:ack` → `frame:ack` — deferred to future schema_version bump; documented in protocol header.
 
 **`docUrl` non-null gate (federation seam) — write before protocol layer cleanup:**
 At least one test must exercise `docUrl` as a non-null `AutomergeUrl` with an in-process
-Repo pair. Worker calls `repo.find(docUrl).whenReady()`. Proves the federation door opens
-without protocol changes. Write Worker Sovereignty Law §8 when this gate passes.
+Repo pair. island calls `repo.find(docUrl).whenReady()`. Proves the federation door opens
+without protocol changes. Write Island Sovereignty Law §8 when this gate passes.
 
 ## Path R — ReactionEngine Completion
 
 Goal: one reactive wiki tick per hot-tier wiki, Verse-compatible for alpha.
 
 Invariants:
-1. TW5Engine and ReactionEngine co-locate in the same hot-tier Worker.
+1. TW5Engine and ReactionEngine co-locate in the same hot-tier island.
 2. MemeSyncAdaptor applies changeset first; RE runs second.
 3. RE writes through composite store, never directly through `docHandle.change()`.
 4. Device graph derives from wiki tiddlers/pranala edges.
@@ -205,7 +205,7 @@ Invariants:
 - [ ] Derive changed URI sets from real changesets → `ReactionEngine.onChangeset`.
 - [ ] Expand NodeVmManager integration tests: mount → route → event-forward → unmount.
 - [ ] Verify teardown snapshot captures heads + tiddlers atomically.
-- [ ] Keep piscina only for stateless parse work; stateful hot wikis stay in dedicated Workers.
+- [ ] Keep piscina only for stateless parse work; stateful hot wikis stay in dedicated islands.
 
 ## Near-Future Product / UX Paths
 

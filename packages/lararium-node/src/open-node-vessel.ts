@@ -340,8 +340,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
   // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + JobDispatcher.
-  // Main thread retains adminHandle (keyhive gates) + composite (cap-event writes).
-  // bagBindings deliver capability tokens for the admin Worker's full recipe.
+  // Vessel retains adminHandle (keyhive gates) + composite (cap-event writes).
+  // bagBindings deliver capability tokens for the admin island's full recipe.
   const adminVm = await openAdminVm({
     repo,
     adminUrl,
@@ -365,10 +365,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     identityDid: identity.did,
   });
 
-  // Main-thread delegation registry — wiki-scope job handlers whose closure dependencies
-  // live on the main thread (repo, catalogHandle, residency, primary composite).
-  // The admin Worker's JobDispatcher delegates unknown verbs here via admin:delegate-job.
-  // vmManager is assigned after Worker boot; jobs only execute after "live" is emitted.
+  // Vessel delegation registry — wiki-scope job handlers whose closure dependencies
+  // live on the vessel (repo, catalogHandle, residency, primary composite).
+  // The admin island's JobDispatcher delegates unknown verbs here via admin:delegate-job.
+  // vmManager is assigned after island boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new VerbTable();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
   jobRegistry.register("echo", async (args) => ({ echoed: args }));
@@ -380,7 +380,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   let vmManager: VesselIslandPool;
-  // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki Worker.
+  // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki island.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
   jobRegistry.register("promote", async (args, ctx) =>
     vmManager.placeWikiJob(activeWikiId, {
@@ -592,7 +592,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   );
 
   // Wire the delegation registry now that keyhive exists.
-  // The admin Worker's JobDispatcher delegates unknown verbs to this registry via
+  // The admin island's JobDispatcher delegates unknown verbs to this registry via
   // admin:delegate-job messages. mountMainVerbs must be called before workerEa resolves
   // to ensure no delegated jobs are dropped during the boot window.
   adminVm.mountMainVerbs(jobRegistry, keyhive);
@@ -693,7 +693,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // Scratch layer — local-VM-only MemoryTiddlerStore. Receives session writes
   // that should never sync or persist: job staging, TW5 temp tiddlers.
   // defaultWritable:true so unbagged TW5 saves land here, not in the draft CRDT.
-  // Aligns with Worker sub-surface recipe law (sovereign-island-model.ts).
+  // Aligns with island sub-surface recipe law (sovereign-island-model.ts).
   composite.addLayer({
     bagId:           BAG_IDS.scratch,
     store:           new MemoryTiddlerStore(),
@@ -726,9 +726,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   for (const ring of DEFAULT_RINGS) eventBus.registerRing(ring);
   eventBus.start();
 
-  // ── 7a. VesselIslandPool — sovereign Worker pool ─────────────────────────────
-  // Primary wiki runs in a pinned Worker (makeWikiPrimaryBehavior).
-  // Hot LRU Workers host session wikis. All VM state lives in Workers.
+  // ── 7a. VesselIslandPool — sovereign island pool ─────────────────────────────
+  // Primary wiki runs in a pinned Worker thread (makeWikiPrimaryBehavior).
+  // Hot LRU islands host session wikis. All VM state lives in islands.
   vmManager = new VesselIslandPool({
     mainRepo:      repo,
     storageRoot:   storageDir,
@@ -741,13 +741,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     },
   });
 
-  // ── 8. Corpus bags — await before mounting primary Worker ─────────────────
+  // ── 8. Corpus bags — await before mounting primary island ─────────────────
   await corpusReadyP;
   emit("corpus-ready");
 
-  // ── 9. Primary wiki Worker ────────────────────────────────────────────────
+  // ── 9. Primary wiki island ────────────────────────────────────────────────
   // Build disk mirror configs — @lares + @lararium corpus bags only.
-  // Worker reconstructs BagMirrorConfig via namedBagMirror(bagId, scope, mirrorRoot).
+  // island reconstructs BagMirrorConfig via namedBagMirror(bagId, scope, mirrorRoot).
   const workerRootDir = rootDirOpt ?? repoRoot;
   const diskMirrors: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
     { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
@@ -763,8 +763,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 10. VmPool — vmManager IS the pool ────────────────────────────────────
   vessel.attachVmPool(vmManager);
 
-  // Admin Worker ea gate — vessel is not live until the admin island declares
-  // sovereignty. The admin Worker holds the TW5 job event surface; jobs cannot
+  // Admin island ea gate — vessel is not live until the admin island declares
+  // sovereignty. The admin island holds the TW5 job event surface; jobs cannot
   // dispatch until its drain loop and JobDispatcher are running.
   await adminVm.workerEa;
 

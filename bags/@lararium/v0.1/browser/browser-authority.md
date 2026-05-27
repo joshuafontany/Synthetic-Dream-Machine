@@ -11,7 +11,7 @@ confidence   = 18
 mana         = 18
 manao        = 18
 manaoio      = 17
-role         = "S1 worker authority contract: BrowserAuthorityLease, BrowserAuthorityPool, BrowserAuthorityReceipt"
+role         = "S1 island authority contract: BrowserAuthorityLease, BrowserAuthorityPool, BrowserAuthorityReceipt"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
@@ -21,7 +21,7 @@ retain       = true
 
 # Browser Authority Contract
 
-S1 worker authority contract. Lives in `@lararium/mesh` — no DOM types, no browser runtime.
+S1 island authority contract. Lives in `@lararium/mesh` — no DOM types, no browser runtime.
 The `@lararium/browser` package holds the concrete implementation.
 
 <<~ ahu #types >>
@@ -34,8 +34,8 @@ The `@lararium/browser` package holds the concrete implementation.
 | `BrowserAuthorityPhase` | Monotonic boot sequence: `spawned → booting → tw5-ready → store-wired → live → leased → idle → disposing → disposed` |
 | `BrowserAuthorityBootParams` | Everything the worker needs to boot: authority ID, core blob, plugin blob, bag stack, recipe URI, optional snapshots for warm start |
 | `BrowserAuthorityCapabilities` | Declaration of available operations at current phase; not a permission gate |
-| `BrowserAuthorityLease` | Caller handle returned by `pool.acquire()`; all ops are async RPC across the Worker boundary; no DOM types |
-| `BrowserProjectionSnapshot` | Minimal structured-clone-friendly render inputs crossing the Worker boundary; shape expanded in S4 |
+| `BrowserAuthorityLease` | Caller handle returned by `pool.acquire()`; all ops are async RPC across the island boundary; no DOM types |
+| `BrowserProjectionSnapshot` | Minimal structured-clone-friendly render inputs crossing the island boundary; shape expanded in S4 |
 | `BrowserAuthorityDebugStats` | Diagnostic output: phase, boot duration, lease timestamps, heap hint |
 | `BrowserAuthorityReceipt` | Acknowledgment of pool-level operations (acquire, release, evict, dispose, boot) |
 | `BrowserAuthorityPool` | Pool contract interface; concrete class lives in `@lararium/browser` |
@@ -49,24 +49,24 @@ The `@lararium/browser` package holds the concrete implementation.
 **BA-1 — No DOM types on the contract surface.**
 `BrowserAuthorityLease`, `BrowserAuthorityPool`, and `BrowserAuthorityReceipt` carry zero
 `HTMLElement`, `Document`, `shadowRoot`, or `window` references. The concrete pool
-implementation in `@lararium/browser` may use DOM APIs for Worker spawn; the shared
+implementation in `@lararium/browser` may use DOM APIs for island spawn; the shared
 contract surface stays platform-neutral.
 
 **BA-2 — Phase order is monotonic.**
 A `BrowserAuthorityPhase` never moves backward. An authority that reaches `disposed`
 gets a new entry in the pool on the next `acquire` call — it does not resurrect.
 
-**BA-3 — Lease callers do not control Worker lifecycle.**
+**BA-3 — Lease callers do not control island lifecycle.**
 Calling `lease.release()` returns the authority to the pool. The pool decides whether
-the authority stays warm (`idle`) or gets evicted. Callers hold no Worker handle.
+the authority stays warm (`idle`) or gets evicted. Callers hold no island handle.
 
 **BA-4 — BrowserProjectionSnapshot is structured-clone-friendly.**
-No live DOM nodes, no callbacks, no Proxy objects cross the Worker boundary in a snapshot.
+No live DOM nodes, no callbacks, no Proxy objects cross the island boundary in a snapshot.
 The adapter in `@lararium/browser` translates the snapshot into DOM/canvas/HUD output.
 
 **BA-5 — Boot params transfer large blobs, not clone them.**
 `coreBlob` and `pluginBlob` are `Uint8Array`; the runtime transfers ownership to the
-Worker rather than copying. Snapshots in `bootParams.snapshots` transfer similarly.
+island rather than copying. Snapshots in `bootParams.snapshots` transfer similarly.
 
 <<~/ahu >>
 

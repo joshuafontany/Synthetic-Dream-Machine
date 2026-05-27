@@ -143,10 +143,10 @@ budget choices, not architectural forks.
 |---|---|---|
 | Storage adapter | `NodeFSStorageAdapter` (disk) | IndexedDB adapter |
 | Operator keypair | Ed25519 on disk at 0o600 | WebCrypto non-extractable |
-| VM Worker | `worker_threads` Worker | `DedicatedWorkerGlobalScope` Worker |
+| VM island | `worker_threads` island | `DedicatedWorkerGlobalScope` island |
 | Tick source | `setInterval(16)` | `requestAnimationFrame` + `setTimeout(16)` fallback |
 | Admin lane | ✅ boots at open | ✅ boots at open |
-| Active wiki lanes | pool-managed, piscina for stateless parse | pool-managed, dedicated Workers |
+| Active wiki lanes | pool-managed, piscina for stateless parse | pool-managed, dedicated islands |
 | Founding ceremony | `runFoundingCeremony(repo, seed)` via `@lararium/keyhive` | same |
 | Ea gates A/B/C | ✅ passes at boot | ✅ same ceremony, same gates |
 

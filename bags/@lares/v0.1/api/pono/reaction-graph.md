@@ -170,7 +170,7 @@ packages/lararium-tw5/src/modules/reaction-router.ts
     → wiki.dispatchEvent("tm-verse-event", {uri, listenable})
 
   Worker path: onVerseEvent consumer receives tm-verse-event
-    → posts WorkerMsg_Event to main thread (vm-ring routing)
+    → posts IslandMsg_Event to main thread (vm-ring routing)
 
   Browser path: widget tree handles tm-verse-event directly.
 ```

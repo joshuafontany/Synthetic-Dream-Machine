@@ -5,22 +5,22 @@
  *
  *   Pinned  — PrimaryWiki + admin. Never evicted. Each pinned slot owns a long-lived
  *             Worker thread (same as hot slots, but immune to LRU eviction).
- *             Main thread holds no TW5Engine reference — all interaction via
+ *             Vessel holds no TW5Engine reference — all interaction via
  *             island-protocol envelope (@lararium/mesh) only.
  *
  *   Hot     — LRU of recently-active session wikis (max HOT_CAP slots).
  *             Each slot owns one `worker_threads.Worker`. TW5Engine + ReactionEngine
  *             run co-located inside the Worker thread.
- *             Main thread communicates via island-protocol envelope only.
+ *             Vessel communicates via island-protocol envelope only.
  *
  *   Cold    — CRDT-only. VmSnapshot stores Automerge heads (+ optional docBytes)
- *             from the Worker's last teardown:ack. No thread, no engine.
+ *             from the island's last teardown:ack. No thread, no engine.
  *
  * ## Promote / demote flow
  *
- *   mountWiki   → spawn Worker → manifest → ea → slot = hot
+ *   mountWiki   → spawn island → manifest → ea → slot = hot
  *   unmountWiki → teardown → teardown:ack (+ docBytes) → worker.terminate()
- *                → slot = cold (cold slot carries the Worker's final TW5 state)
+ *                → slot = cold (cold slot carries the island's final TW5 state)
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
  * Meme doc: packages/lararium-node/memes/vessel-island-pool.md
@@ -36,20 +36,20 @@ import type { DocHandle, Repo } from "@automerge/automerge-repo";
 import { join } from "path";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
 import {
-  isWorkerToMainMsg,
+  isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
   mkWikiPlaceJob,
   type BagBinding,
-  type WorkerStorageConfig,
+  type IslandStorageConfig,
 } from "@lararium/mesh";
 import type {
-  WorkerMsg_Event,
-  WorkerMsg_Ea,
-  WorkerMsg_TeardownAck,
+  IslandMsg_Event,
+  IslandMsg_Ea,
+  IslandMsg_TeardownAck,
   WikiMsg_JobResult,
-  WorkerToMainMsg,
-  MainToWorkerMsg,
+  IslandToVesselMsg,
+  VesselToIslandMsg,
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
@@ -59,7 +59,7 @@ import type {
 export interface VmSnapshot {
   /** Automerge heads at snapshot capture time. CRDT remains authoritative. */
   heads:      Heads;
-  /** Automerge doc bytes from Worker-side Repo at teardown — preferred warm-start seed. */
+  /** Automerge doc bytes from island-side Repo at teardown — preferred warm-start seed. */
   docBytes?:  Uint8Array;
   /** Unix ms of capture — for diagnostics and staleness detection. */
   capturedAt: number;
@@ -72,19 +72,19 @@ export interface VmSnapshot {
 type SlotTier = "pinned" | "hot" | "cold";
 
 /**
- * Worker slot — covers both pinned (never-evicted) and hot (LRU) tiers.
+ * island slot — covers both pinned (never-evicted) and hot (LRU) tiers.
  *
  * `pinned: true`  → immune to LRU eviction. Used for PrimaryWiki + admin.
  * `pinned: false` → subject to LRU eviction when HOT_CAP is reached.
  *
- * In both cases the TW5Engine lives inside the Worker thread. The main thread
+ * In both cases the TW5Engine lives inside the Worker thread. The vessel
  * holds no engine reference and interacts only via island-protocol envelopes.
  */
-interface WorkerSlot {
+interface islandSlot {
   tier:       "pinned" | "hot";
   wikiId:     string;
   worker:     Worker;
-  /** Main-thread side of the Worker sync channel. Close on unmount (Law §7). */
+  /** Vessel side of the island sync channel. Close on unmount (Law §7). */
   mainPort:   MessagePort;
   lastUsedAt: number;
 }
@@ -95,7 +95,7 @@ interface ColdSlot {
   snapshot: VmSnapshot | null;
 }
 
-type Slot = WorkerSlot | ColdSlot;
+type Slot = islandSlot | ColdSlot;
 
 // ---------------------------------------------------------------------------
 // WikiBootContext
@@ -105,16 +105,16 @@ export interface WikiBootContext {
   /** Automerge doc handle — used to materialize VmSnapshot for initial manifest delivery. */
   docHandle: DocHandle<LarDoc>;
   /**
-   * Plugin tiddlers to inject into Worker TW5 boot so sigils/ahu/pranala are
+   * Plugin tiddlers to inject into island TW5 boot so sigils/ahu/pranala are
    * present before CRDT deltas begin applying.
    */
   preloadedTiddlers?: Array<Record<string, unknown>>;
   /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
   coreBlob: TW5CoreBootBlob;
   /**
-   * Disk mirror configs for Worker-owned disk projection (Sprint 9).
+   * Disk mirror configs for island-owned disk projection (Sprint 9).
    * Each entry maps a bag to a mirrorRoot dir + scope for namedBagMirror reconstruction.
-   * Only pass for primary Workers with disk write-back responsibility.
+   * Only pass for primary islands with disk write-back responsibility.
    */
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
@@ -125,27 +125,27 @@ export interface WikiBootContext {
 
 export interface VesselIslandPoolOptions {
   /**
-   * URL of the compiled Worker entry script.
+   * URL of the compiled island entry script.
    * Defaults to `lar-wiki-island.js` in the same directory as this module.
-   * Override in tests to use a fixture Worker.
+   * Override in tests to use a fixture island.
    */
   workerScriptUrl?: URL;
   /**
-   * Called when a Worker emits a WorkerMsg_Event (RE reaction).
-   * Route this into the main-thread LarEventBus.
+   * Called when an island emits a IslandMsg_Event (RE reaction).
+   * Route this into the vessel LarEventBus.
    */
-  onWorkerEvent?: (wikiId: string, msg: WorkerMsg_Event) => void;
+  onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
   /**
-   * Optional main-thread Automerge Repo. When provided, each hot slot wires
-   * `mainPort` to this Repo via `MessageChannelNetworkAdapter` so the Worker-side
-   * Repo syncs the wiki doc automatically (Repo-in-Worker path).
+   * Optional vessel Automerge Repo. When provided, each hot slot wires
+   * `mainPort` to this Repo via `MessageChannelNetworkAdapter` so the island-side
+   * Repo syncs the wiki doc automatically (Repo-in-island path).
    */
   mainRepo?: Repo;
   /**
-   * Root directory for Worker-owned storage partitions (Sprint 3).
-   * When provided, each wiki Worker receives a `nodefs` storage config pointing
-   * at `<storageRoot>/<sanitized-wikiId>/`. Workers own their CRDT persistence.
-   * Absent = Workers use memory-only (relay Repo is the sole persistence layer).
+   * Root directory for island-owned storage partitions (Sprint 3).
+   * When provided, each wiki island receives a `nodefs` storage config pointing
+   * at `<storageRoot>/<sanitized-wikiId>/`. islands own their CRDT persistence.
+   * Absent = islands use memory-only (relay Repo is the sole persistence layer).
    */
   storageRoot?: string;
 }
@@ -165,7 +165,7 @@ const HANDSHAKE_TIMEOUT_MS = 10_000;
 export class VesselIslandPool {
   private readonly _slots           = new Map<string, Slot>();
   private readonly _workerUrl:      URL;
-  private readonly _onWorkerEvent:  ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
+  private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
   private readonly _mainRepo:       Repo | null;
   private readonly _storageRoot:    string | null;
   /** Pending wiki:place-job results — requestId → { resolve, reject }. */
@@ -186,7 +186,7 @@ export class VesselIslandPool {
   // ---------------------------------------------------------------------------
 
   /**
-   * Mount the PrimaryWiki as a pinned (never-evicted) Worker slot.
+   * Mount the PrimaryWiki as a pinned (never-evicted) island slot.
    *
    * Identical to `mountWiki` but the resulting slot is immune to LRU eviction.
    * Call after the vessel has a `coreBlob` and the primary wiki doc handle is ready.
@@ -196,17 +196,17 @@ export class VesselIslandPool {
   }
 
   // ---------------------------------------------------------------------------
-  // Hot tier — Worker lifecycle
+  // Hot tier — island lifecycle
   // ---------------------------------------------------------------------------
 
   /**
    * Mount a session wiki into the hot tier.
    *
-   * Spawns a Worker, materializes a snapshot from the Automerge doc (or uses
+   * Spawns a island, materializes a snapshot from the Automerge doc (or uses
    * the cold-slot snapshot), delivers a manifest, and awaits ea.
-   * Evicts the LRU Worker slot (non-pinned) when at capacity.
+   * Evicts the LRU island slot (non-pinned) when at capacity.
    *
-   * Returns void — the main thread holds no direct engine reference for Worker
+   * Returns void — the vessel holds no direct engine reference for island
    * slots. Receive CRDT changes via `onTiddlerDelta` and events via `onWorkerEvent`.
    */
   async mountWiki(wikiId: string, ctx: WikiBootContext): Promise<void> {
@@ -214,10 +214,10 @@ export class VesselIslandPool {
   }
 
   /**
-   * Unmount a hot or pinned Worker slot via GP-5 teardown handshake.
+   * Unmount a hot or pinned island slot via GP-5 teardown handshake.
    *
    * 1. Sends teardown signal.
-   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker).
+   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-island).
    * 3. Closes mainPort, calls worker.terminate().
    * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
    *
@@ -227,10 +227,10 @@ export class VesselIslandPool {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.tier === "cold") return;
 
-    const workerSlot = slot as WorkerSlot;
+    const workerSlot = slot as islandSlot;
     let snapshot: VmSnapshot | null = null;
     try {
-      const ack = await _sendAndAwait<WorkerMsg_TeardownAck>(
+      const ack = await _sendAndAwait<IslandMsg_TeardownAck>(
         workerSlot.worker,
         mkTeardown(),
         "teardown:ack",
@@ -261,9 +261,9 @@ export class VesselIslandPool {
   // ---------------------------------------------------------------------------
 
   /**
-   * Place a wiki-scope job into a hot or pinned Worker and await the result.
+   * Place a wiki-scope job into a hot or pinned island and await the result.
    *
-   * Sends WikiMsg_PlaceJob to the Worker identified by `wikiId`. The Worker
+   * Sends WikiMsg_PlaceJob to the island identified by `wikiId`. The island
    * must run a behavior that handles "wiki:place-job" (e.g. makeWikiDispatchBehavior).
    * Resolves with the result record or rejects on error / timeout.
    */
@@ -279,7 +279,7 @@ export class VesselIslandPool {
   ): Promise<Record<string, unknown>> {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.tier === "cold") {
-      return Promise.reject(new Error(`[vm-manager] no live Worker for ${wikiId}`));
+      return Promise.reject(new Error(`[vm-manager] no live island for ${wikiId}`));
     }
     const requestId = crypto.randomUUID();
     return new Promise<Record<string, unknown>>((resolve, reject) => {
@@ -294,7 +294,7 @@ export class VesselIslandPool {
         resolve: (r) => { clearTimeout(timer); resolve(r); },
         reject:  (e) => { clearTimeout(timer); reject(e); },
       });
-      (slot as WorkerSlot).worker.postMessage(
+      (slot as islandSlot).worker.postMessage(
         mkWikiPlaceJob({ ...opts, requestId }),
       );
     });
@@ -328,7 +328,7 @@ export class VesselIslandPool {
   // Dispose all
   // ---------------------------------------------------------------------------
 
-  /** Teardown all Worker slots (GP-5). */
+  /** Teardown all island slots (GP-5). */
   async disposeAll(): Promise<void> {
     const teardowns: Promise<void>[] = [];
     for (const slot of this._slots.values()) {
@@ -347,7 +347,7 @@ export class VesselIslandPool {
   private async _mountWorker(wikiId: string, ctx: WikiBootContext, pinned: boolean): Promise<void> {
     const existing = this._slots.get(wikiId);
     if (existing && (existing.tier === "hot" || existing.tier === "pinned")) {
-      (existing as WorkerSlot).lastUsedAt = Date.now();
+      (existing as islandSlot).lastUsedAt = Date.now();
       return;
     }
 
@@ -370,7 +370,7 @@ export class VesselIslandPool {
       { bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl ?? "" },
     ];
 
-    const storage: WorkerStorageConfig | undefined = this._storageRoot
+    const storage: IslandStorageConfig | undefined = this._storageRoot
       ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }
       : undefined;
 
@@ -386,7 +386,7 @@ export class VesselIslandPool {
         ...(ctx.diskMirrors?.length ? { diskMirrors: ctx.diskMirrors } : {}),
       },
     );
-    await _sendAndAwait<WorkerMsg_Ea>(
+    await _sendAndAwait<IslandMsg_Ea>(
       worker,
       manifestMsg,
       "ea",
@@ -402,12 +402,12 @@ export class VesselIslandPool {
   }
 
   /**
-   * Evict the LRU hot (non-pinned) Worker slot when at capacity.
+   * Evict the LRU hot (non-pinned) island slot when at capacity.
    * Uses the GP-5 teardown handshake — async.
    */
   private async _evictLruIfNeeded(): Promise<void> {
     const hotSlots = [...this._slots.values()].filter(
-      (s): s is WorkerSlot => s.tier === "hot",
+      (s): s is islandSlot => s.tier === "hot",
     );
     if (hotSlots.length < HOT_CAP) return;
 
@@ -416,15 +416,15 @@ export class VesselIslandPool {
     await this.unmountWiki(lru.wikiId);
   }
 
-  /** Wire message / error listeners on a newly spawned Worker. */
+  /** Wire message / error listeners on a newly spawned island. */
   private _wireWorkerListeners(wikiId: string, worker: Worker): void {
     worker.on("message", (raw: unknown) => {
-      if (!isWorkerToMainMsg(raw)) return;
+      if (!isIslandToVesselMsg(raw)) return;
       if (raw.type === "event") {
         if (this._onWorkerEvent) {
-          this._onWorkerEvent(wikiId, raw as WorkerMsg_Event);
+          this._onWorkerEvent(wikiId, raw as IslandMsg_Event);
         } else {
-          console.warn(`[vm-manager] WorkerMsg_Event dropped for ${wikiId} — no onWorkerEvent callback registered`);
+          console.warn(`[vm-manager] Island event dropped for ${wikiId} — no onWorkerEvent callback registered`);
         }
       }
       if (raw.type === "wiki:job-result") {
@@ -437,29 +437,29 @@ export class VesselIslandPool {
         }
       }
       if (raw.type === "fault") {
-        console.error(`[vm-manager] Worker fault for ${wikiId}: ${(raw as { error: string }).error}`);
+        console.error(`[vm-manager] island fault for ${wikiId}: ${(raw as { error: string }).error}`);
       }
     });
     worker.on("error", (err) => {
-      console.error(`[vm-manager] Worker error for ${wikiId}:`, err);
+      console.error(`[vm-manager] island error for ${wikiId}:`, err);
     });
   }
 }
 
 // ---------------------------------------------------------------------------
-// _sendAndAwait — send a message to a Worker and await the first matching reply
+// _sendAndAwait — send a message to a island and await the first matching reply
 // ---------------------------------------------------------------------------
 
 /**
- * Post `msg` to `worker` and resolve when the Worker replies with a message
+ * Post `msg` to `worker` and resolve when the island replies with a message
  * whose `type` matches `expectedType`.
  *
- * Rejects after `HANDSHAKE_TIMEOUT_MS` or on a Worker error event.
+ * Rejects after `HANDSHAKE_TIMEOUT_MS` or on a island error event.
  * The caller is responsible for calling `worker.terminate()` after this resolves.
  */
-function _sendAndAwait<T extends WorkerToMainMsg>(
-  worker:       Worker,
-  msg:          MainToWorkerMsg,
+function _sendAndAwait<T extends IslandToVesselMsg>(
+  worker:       island,
+  msg:          VesselToIslandMsg,
   expectedType: T["type"],
   transferList: (ArrayBuffer | MessagePort)[] = [],
 ): Promise<T> {
@@ -470,7 +470,7 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
     );
 
     const onMessage = (raw: unknown) => {
-      if (!isWorkerToMainMsg(raw) || raw.type !== expectedType) return;
+      if (!isIslandToVesselMsg(raw) || raw.type !== expectedType) return;
       clearTimeout(timer);
       worker.off("message", onMessage);
       worker.off("error",   onError);

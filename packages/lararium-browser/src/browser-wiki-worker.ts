@@ -15,7 +15,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-wiki-worker
  */
 
-import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
+import { runBrowserSovereignisland } from "./browser-sovereign-island-model.js";
 import { BAG_IDS }                   from "@lararium/mesh";
 import type { BrowserIslandBehavior } from "./browser-sovereign-island-model.js";
 

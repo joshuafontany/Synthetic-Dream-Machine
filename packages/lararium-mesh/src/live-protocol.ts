@@ -12,7 +12,7 @@
  * call `toUri.subscribable`. The graph holds all active bindings and routes `fireSync`
  * calls to the correct handlers.
  *
- * Isomorphic: no Node/browser APIs. Works in main thread, Worker, and browser.
+ * Isomorphic: no Node/browser APIs. Works in vessel, island, and browser.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/live-protocol
  */
@@ -74,7 +74,7 @@ type FireSyncObserver = (fromUri: string, listenable: string, payload: unknown) 
  *   subscribeByFn(fnName, handler)          — target-fn subscription (catches all matching bindings)
  *
  * Additional monitoring hook:
- *   onFireSync(observer) — observe EVERY fireSync call (used by Worker forwarding).
+ *   onFireSync(observer) — observe EVERY fireSync call (used by island forwarding).
  *                          Fires before handler dispatch.
  *
  * `fireSync` dispatch order:
@@ -182,7 +182,7 @@ export class ReactionGraph {
 
   /**
    * Register an observer that receives EVERY `fireSync` call before handler dispatch.
-   * Intended for cross-boundary forwarding (e.g. Worker → main thread bridge).
+   * Intended for cross-boundary forwarding (e.g. island → vessel bridge).
    * Returns a cancellation function.
    */
   onFireSync(observer: FireSyncObserver): () => void {

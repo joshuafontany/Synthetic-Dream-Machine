@@ -2,7 +2,7 @@
  * island-protocol.test.ts — P.3 pre-work gate tests.
  *
  * Tests GP-1 through GP-5 from the structured-clone-gap ahu.
- * All tests must pass before the first LarariumWorker ships.
+ * All tests must pass before the first Lararium island ships.
  *
  * GP-1: schema_version enforcement (unit)
  * GP-2: plain-object payload shape (unit + structural)
@@ -15,17 +15,17 @@
 import { describe, test, expect, afterEach } from "vitest";
 import { Worker, MessageChannel } from "worker_threads";
 import {
-  isMainToWorkerMsg,
-  isWorkerToMainMsg,
-  WORKER_PROTOCOL_VERSION,
+  isVesselToIslandMsg,
+  isIslandToVesselMsg,
+  ISLAND_PROTOCOL_VERSION,
   mkTeardown,
   mkManifest,
-  type WorkerMsg_TeardownAck,
-  type WorkerMsg_Ea,
-  type WorkerMsg_Event,
+  type IslandMsg_TeardownAck,
+  type IslandMsg_Ea,
+  type IslandMsg_Event,
   type BagBinding,
   type BagMode,
-  type WorkerStorageConfig,
+  type IslandStorageConfig,
 } from "@lararium/mesh";
 
 // Path to the teardown-echo fixture (plain ESM — no ts-jest compilation needed).
@@ -37,7 +37,7 @@ function spawnFixture(): Worker {
   return new Worker(FIXTURE_URL);
 }
 
-/** Collect Worker messages until `predicate` returns true, then resolve. */
+/** Collect island messages until `predicate` returns true, then resolve. */
 function collectUntil(
   worker: Worker,
   predicate: (msgs: unknown[]) => boolean,
@@ -94,7 +94,7 @@ describe("BagBinding — capability token shape", () => {
     expect(msg.bagBindings).toHaveLength(2);
     expect(msg.bagBindings?.[0]?.mode).toBe("relational");
     expect(msg.bagBindings?.[1]?.mode).toBe("relational");
-    expect(isMainToWorkerMsg(msg)).toBe(true);
+    expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 
   test("mkManifest with no opts produces valid manifest (cold boot)", () => {
@@ -107,33 +107,33 @@ describe("BagBinding — capability token shape", () => {
     syncPort.close();
     expect(msg.bagBindings).toBeUndefined();
     expect(msg.docUrl).toBeUndefined();
-    expect(isMainToWorkerMsg(msg)).toBe(true);
+    expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 });
 
-// ── WorkerStorageConfig shape (unit) ─────────────────────────────────────
+// ── IslandStorageConfig shape (unit) ─────────────────────────────────────
 
-describe("WorkerStorageConfig — Worker-owned storage protocol", () => {
+describe("IslandStorageConfig — island-owned storage protocol", () => {
   test("nodefs config carries dir field", () => {
-    const cfg: WorkerStorageConfig = { type: "nodefs", dir: "/data/lararium/wiki-a" };
+    const cfg: IslandStorageConfig = { type: "nodefs", dir: "/data/lararium/wiki-a" };
     expect(cfg.type).toBe("nodefs");
     if (cfg.type === "nodefs") expect(cfg.dir).toBe("/data/lararium/wiki-a");
   });
 
   test("idb config carries dbName field", () => {
-    const cfg: WorkerStorageConfig = { type: "idb", dbName: "lararium-wiki-a" };
+    const cfg: IslandStorageConfig = { type: "idb", dbName: "lararium-wiki-a" };
     expect(cfg.type).toBe("idb");
     if (cfg.type === "idb") expect(cfg.dbName).toBe("lararium-wiki-a");
   });
 
   test("memory config is ephemeral", () => {
-    const cfg: WorkerStorageConfig = { type: "memory" };
+    const cfg: IslandStorageConfig = { type: "memory" };
     expect(cfg.type).toBe("memory");
   });
 
   test("mkManifest carries nodefs storage in message", () => {
     const { port2: syncPort } = new MessageChannel();
-    const storage: WorkerStorageConfig = { type: "nodefs", dir: "/data/wiki-sprint3" };
+    const storage: IslandStorageConfig = { type: "nodefs", dir: "/data/wiki-sprint3" };
     const msg = mkManifest(
       "lar:///test-storage",
       new Uint8Array(0),
@@ -144,68 +144,68 @@ describe("WorkerStorageConfig — Worker-owned storage protocol", () => {
     syncPort.close();
     expect(msg.storage?.type).toBe("nodefs");
     if (msg.storage?.type === "nodefs") expect(msg.storage.dir).toBe("/data/wiki-sprint3");
-    expect(isMainToWorkerMsg(msg)).toBe(true);
+    expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 });
 
 // ── GP-1: schema_version enforcement (unit) ────────────────────────────────
 
 describe("GP-1 — schema_version enforcement", () => {
-  test("isMainToWorkerMsg accepts valid teardown with schema_version 1", () => {
+  test("isVesselToIslandMsg accepts valid teardown with schema_version 1", () => {
     const msg = mkTeardown();
-    expect(isMainToWorkerMsg(msg)).toBe(true);
+    expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 
-  test("isMainToWorkerMsg rejects message missing schema_version", () => {
-    expect(isMainToWorkerMsg({ type: "teardown" })).toBe(false);
+  test("isVesselToIslandMsg rejects message missing schema_version", () => {
+    expect(isVesselToIslandMsg({ type: "teardown" })).toBe(false);
   });
 
-  test("isMainToWorkerMsg rejects message with wrong schema_version", () => {
-    expect(isMainToWorkerMsg({ schema_version: 2, type: "teardown" })).toBe(false);
-    expect(isMainToWorkerMsg({ schema_version: 0, type: "teardown" })).toBe(false);
+  test("isVesselToIslandMsg rejects message with wrong schema_version", () => {
+    expect(isVesselToIslandMsg({ schema_version: 2, type: "teardown" })).toBe(false);
+    expect(isVesselToIslandMsg({ schema_version: 0, type: "teardown" })).toBe(false);
   });
 
-  test("isMainToWorkerMsg rejects unknown type even with correct schema_version", () => {
-    expect(isMainToWorkerMsg({ schema_version: WORKER_PROTOCOL_VERSION, type: "unknown" })).toBe(false);
+  test("isVesselToIslandMsg rejects unknown type even with correct schema_version", () => {
+    expect(isVesselToIslandMsg({ schema_version: ISLAND_PROTOCOL_VERSION, type: "unknown" })).toBe(false);
   });
 
-  test("isWorkerToMainMsg accepts valid teardown:ack", () => {
-    const ack: WorkerMsg_TeardownAck = { schema_version: 1, type: "teardown:ack" };
-    expect(isWorkerToMainMsg(ack)).toBe(true);
+  test("isIslandToVesselMsg accepts valid teardown:ack", () => {
+    const ack: IslandMsg_TeardownAck = { schema_version: 1, type: "teardown:ack" };
+    expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 
-  test("isWorkerToMainMsg rejects teardown (main→Worker msg) as Worker→main", () => {
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "teardown" })).toBe(false);
+  test("isIslandToVesselMsg rejects teardown (main→island msg) as island→main", () => {
+    expect(isIslandToVesselMsg({ schema_version: 1, type: "teardown" })).toBe(false);
   });
 
-  test("isMainToWorkerMsg rejects null and primitives", () => {
-    expect(isMainToWorkerMsg(null)).toBe(false);
-    expect(isMainToWorkerMsg(undefined)).toBe(false);
-    expect(isMainToWorkerMsg("teardown")).toBe(false);
-    expect(isMainToWorkerMsg(42)).toBe(false);
+  test("isVesselToIslandMsg rejects null and primitives", () => {
+    expect(isVesselToIslandMsg(null)).toBe(false);
+    expect(isVesselToIslandMsg(undefined)).toBe(false);
+    expect(isVesselToIslandMsg("teardown")).toBe(false);
+    expect(isVesselToIslandMsg(42)).toBe(false);
   });
 
-  test("all three MainToWorker types pass isMainToWorkerMsg", () => {
+  test("all three MainToisland types pass isVesselToIslandMsg", () => {
     const { port2: _p } = new MessageChannel();
-    expect(isMainToWorkerMsg(mkManifest("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
+    expect(isVesselToIslandMsg(mkManifest("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
     _p.close();
-    expect(isMainToWorkerMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
-    expect(isMainToWorkerMsg(mkTeardown())).toBe(true);
+    expect(isVesselToIslandMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
+    expect(isVesselToIslandMsg(mkTeardown())).toBe(true);
   });
 
-  test("all five WorkerToMain types pass isWorkerToMainMsg", () => {
-    const event: WorkerMsg_Event = {
+  test("all five islandToMain types pass isIslandToVesselMsg", () => {
+    const event: IslandMsg_Event = {
       schema_version: 1,
       type: "event",
       wikiUri: "lar:///test",
       listenable: "ev-1",
       payload: { x: 1 },
     };
-    expect(isWorkerToMainMsg(event)).toBe(true);
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "changeset:ack", wikiUri: "lar:///test", batch_id: "x" })).toBe(true);
-    expect(isWorkerToMainMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
+    expect(isIslandToVesselMsg(event)).toBe(true);
+    expect(isIslandToVesselMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
+    expect(isIslandToVesselMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
+    expect(isIslandToVesselMsg({ schema_version: 1, type: "frame:ack", wikiUri: "lar:///test", frameId: "x" })).toBe(true);
+    expect(isIslandToVesselMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
   });
 });
 
@@ -221,7 +221,7 @@ describe("GP-5 — teardown handshake (integration)", () => {
     }
   });
 
-  test("Worker sends cancel:confirmed before teardown:ack", async () => {
+  test("island sends cancel:confirmed before teardown:ack", async () => {
     worker = spawnFixture();
 
     const msgsPromise = collectUntil(
@@ -242,7 +242,7 @@ describe("GP-5 — teardown handshake (integration)", () => {
     expect(cancelIdx).toBeLessThan(ackIdx);
   });
 
-  test("teardown:ack message passes isWorkerToMainMsg guard", async () => {
+  test("teardown:ack message passes isIslandToVesselMsg guard", async () => {
     worker = spawnFixture();
 
     const msgsPromise = collectUntil(
@@ -254,7 +254,7 @@ describe("GP-5 — teardown handshake (integration)", () => {
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as { type: string }).type === "teardown:ack");
-    expect(isWorkerToMainMsg(ack)).toBe(true);
+    expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 
   test("manifest delivery elicits ea sovereignty declaration", async () => {
@@ -270,15 +270,15 @@ describe("GP-5 — teardown handshake (integration)", () => {
     worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort as unknown as globalThis.MessagePort), [syncPort]);
     const msgs = await msgsPromise;
 
-    const ack = msgs.find((m) => (m as WorkerMsg_Ea).type === "ea") as WorkerMsg_Ea | undefined;
+    const ack = msgs.find((m) => (m as IslandMsg_Ea).type === "ea") as IslandMsg_Ea | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
-    expect(isWorkerToMainMsg(ack)).toBe(true);
+    expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 
   test("message without schema_version is not routed by the guard", () => {
-    // Unit test — no Worker needed.
+    // Unit test — no island needed.
     const naked = { type: "teardown" };
-    expect(isMainToWorkerMsg(naked)).toBe(false);
+    expect(isVesselToIslandMsg(naked)).toBe(false);
   });
 });

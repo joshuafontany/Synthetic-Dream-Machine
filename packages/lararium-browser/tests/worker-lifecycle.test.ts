@@ -1,24 +1,24 @@
 /**
  * worker-lifecycle.test.ts — browser vessel lifecycle protocol tests.
  *
- * Drives the teardown-echo-browser fixture Worker through the GP-5 contract:
+ * Drives the teardown-echo-browser fixture island through the GP-5 contract:
  *   manifest(wikiUri) → ea
  *   changeset(delta)  → event (addedCount / deletedCount echoed)
  *   teardown()        → cancel:confirmed → teardown:ack (ordering asserted)
  *
  * Uses the real browser Web Worker API — proves the browser binding layer,
- * not just WorkerAuthorityHandler (already proven in lararium-node).
+ * not just IslandKernel (already proven in lararium-node).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/worker-lifecycle
  */
 
 import { describe, test, expect, afterEach } from "vitest";
 import {
-  isWorkerToMainMsg,
+  isIslandToVesselMsg,
   mkTeardown,
   mkManifest,
-  type WorkerMsg_Ea,
-    type WorkerMsg_Event,
+  type IslandMsg_Ea,
+    type IslandMsg_Event,
 } from "@lararium/mesh";
 
 const FIXTURE_URL = new URL("./fixtures/teardown-echo-browser.mjs", import.meta.url);
@@ -70,18 +70,18 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     );
 
     // coreBlob required by BA-5 — fixture ignores bytes but type must be honest.
-    // syncPort: browser MessageChannel is available globally in dedicated Workers.
+    // syncPort: browser MessageChannel is available globally in dedicated islands.
     const { port1: _main, port2: syncPort } = new MessageChannel();
     worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort), [syncPort]);
     _main.close();
     const msgs = await msgsPromise;
 
-    const ack = msgs.find((m) => (m as { type: string }).type === "ea") as WorkerMsg_Ea & { coreBlobByteLength?: number } | undefined;
+    const ack = msgs.find((m) => (m as { type: string }).type === "ea") as IslandMsg_Ea & { coreBlobByteLength?: number } | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
     // BA-5: coreBlob crossed the structured-clone boundary (fixture echoes byteLength).
     expect(ack?.coreBlobByteLength).toBeGreaterThanOrEqual(0);
-    expect(isWorkerToMainMsg(ack)).toBe(true);
+    expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 
   test("GP-5: teardown — cancel:confirmed arrives before teardown:ack", async () => {
@@ -103,7 +103,7 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     expect(cancelIdx).toBeLessThan(ackIdx);
   });
 
-  test("teardown:ack passes isWorkerToMainMsg guard", async () => {
+  test("teardown:ack passes isIslandToVesselMsg guard", async () => {
     worker = spawnFixture();
 
     const msgsPromise = collectUntil(
@@ -115,6 +115,6 @@ describe("browser worker lifecycle — GP-5 contract", () => {
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as { type: string }).type === "teardown:ack");
-    expect(isWorkerToMainMsg(ack)).toBe(true);
+    expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 });

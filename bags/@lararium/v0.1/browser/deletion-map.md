@@ -77,7 +77,7 @@ touching the browser vessel surface. Four classifications:
 |---|---|---|
 | `AnyWorker` type | Constitutional | Already platform-agnostic. Handles both Node `Worker` and browser `Web Worker` message APIs. |
 | `TW5WorkerProxy` | Constitutional | Already designed for browser use. Core of S2 worker boot. Migrates to `@lararium/browser` as the browser worker runtime; `@lararium/tw5` keeps it as the shared proxy class. |
-| `WorkerFactory` type | Constitutional | Caller supplies the Worker constructor. Browser factory goes in `@lararium/browser`; node factory stays in `@lararium/node`. |
+| `WorkerFactory` type | Constitutional | Caller supplies the island constructor. Browser factory goes in `@lararium/browser`; node factory stays in `@lararium/node`. |
 
 ### No source files yet in packages/lararium-browser/
 
@@ -95,7 +95,7 @@ This file remains the **one adapter boundary** that contains all remaining RootT
 Every entry in the Adapter class above must route through this file.
 No other file in the browser vessel path may import from `window`, `document`, or `HTMLElement` without an explicit migration entry here.
 
-Future HUD surfaces (canvas, UE, Mudlet) bypass this file entirely — they use the worker authority's projection interface directly.
+Future HUD surfaces (canvas, UE, Mudlet) bypass this file entirely — they use the island authority's projection interface directly.
 
 <<~/ahu >>
 
@@ -122,7 +122,7 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 |---|---|---|---|
 | `$:/core/ui/RootTemplate` in `mountPanel` body | Whole-page sovereignty assumption | Lararium root contract (S4/S8) | S8 passes all projection adapter tests |
 | `document.createElement(...)` outside the named adapter boundary | Any occurrence outside `tw5-browser-surface.ts` indicates a DOM seam that escaped the boundary | Route through adapter or project into worker's fakeDocument | Immediately on discovery |
-| `window.$tw` (not currently present; guard against reintroduction) | Page-global authority root | Worker authority via `TW5WorkerProxy` | Never allow in; add lint rule |
+| `window.$tw` (not currently present; guard against reintroduction) | Page-global authority root | Island authority via `TW5WorkerProxy` | Never allow in; add lint rule |
 | Whole-page wiki boot (any code that runs TW5Engine and then attaches to `document.body` directly) | Not present yet; guard against entry | `openBrowserVessel()` → pool → worker → lease → frame | Block at PR review |
 | `tw.rootWidget.domNodes = [...]` assignment outside adapter | Leaks DOM binding into authority layer | Keep in adapter only | S4 projection contract established |
 

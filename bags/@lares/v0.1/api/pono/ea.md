@@ -85,8 +85,8 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 
 | Site | Vessel | Ea condition |
 |---|---|---|
-| Browser wiki Worker | `@lararium/browser` | Repo-in-Worker wired, rAF drain running, first frame ready |
-| Node wiki Worker | `@lararium/node` | Repo-in-Worker wired, setInterval drain running, initial tiddlers applied |
+| Browser wiki island | `@lararium/browser` | Repo-in-island wired, rAF drain running, first frame ready |
+| Node wiki island | `@lararium/node` | Repo-in-island wired, setInterval drain running, initial tiddlers applied |
 | Future: UEFN device | — | Own CRDT peer, own tick loop |
 | Future: mobile island | — | Own CRDT peer, own timing |
 
@@ -100,7 +100,7 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 ## Contrast — What Ea Does Not Mean
 
 - **Not a permission grant.** The courier does not grant `ea`; the island earns it by satisfying the three conditions.
-- **Not a heartbeat.** A heartbeat polls. `ea` fires once at establishment. Liveness after `ea` flows through normal CRDT sync and frame-completion signals (`changeset:ack`).
+- **Not a heartbeat.** A heartbeat polls. `ea` fires once at establishment. Liveness after `ea` flows through normal CRDT sync and frame-completion signals (`frame:ack`).
 - **Not a promote.** `promote` in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
 
 <<~/ahu >>

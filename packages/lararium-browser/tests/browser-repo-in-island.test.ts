@@ -1,15 +1,15 @@
 import { describe, test, expect, afterEach } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import { BrowserVesselIslandPool } from "../src/browser-vessel-island-pool.js";
-import type { WorkerMsg_Event } from "@lararium/mesh";
+import type { IslandMsg_Event } from "@lararium/mesh";
 
-const FIXTURE_URL = new URL("./fixtures/browser-repo-in-worker-echo.mjs", import.meta.url);
+const FIXTURE_URL = new URL("./fixtures/browser-repo-in-island-echo.mjs", import.meta.url);
 
 function eventCollector(filter?: string): {
-  events: WorkerMsg_Event[];
-  callback: (wikiId: string, msg: WorkerMsg_Event) => void;
+  events: IslandMsg_Event[];
+  callback: (wikiId: string, msg: IslandMsg_Event) => void;
 } {
-  const events: WorkerMsg_Event[] = [];
+  const events: IslandMsg_Event[] = [];
   return {
     events,
     callback: (_wikiId, msg) => {
@@ -19,10 +19,10 @@ function eventCollector(filter?: string): {
 }
 
 function waitForEvent(
-  collector: { events: WorkerMsg_Event[] },
-  predicate: (msg: WorkerMsg_Event) => boolean,
+  collector: { events: IslandMsg_Event[] },
+  predicate: (msg: IslandMsg_Event) => boolean,
   timeoutMs = 5000,
-): Promise<WorkerMsg_Event> {
+): Promise<IslandMsg_Event> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const timer = setInterval(() => {
@@ -40,7 +40,7 @@ function waitForEvent(
   });
 }
 
-describe("BrowserVesselIslandPool Repo-in-Worker gate", () => {
+describe("BrowserVesselIslandPool Repo-in-island gate", () => {
   let manager: BrowserVesselIslandPool | null = null;
   let repo: Repo | null = null;
 

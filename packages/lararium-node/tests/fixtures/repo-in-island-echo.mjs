@@ -1,13 +1,13 @@
 /**
- * repo-in-worker-echo.mjs — Repo-in-Worker gate fixture.
+ * repo-in-island-echo.mjs — Repo-in-island gate fixture.
  *
  * Proves the CRDT sync path without TW5:
- *   manifest (syncPort transferred) → wire Worker-side Repo → ea
- *   [doc arrives via CRDT sync]    → handle.on("change") → changeset:ack + event(repo:change)
+ *   manifest (syncPort transferred) → wire island-side Repo → ea
+ *   [doc arrives via CRDT sync]    → handle.on("change") → frame:ack + event(repo:change)
  *   teardown                       → teardown:ack
  *
  * Emits `event(repo:synced)` after `handle.whenReady()` resolves — tests await
- * this before mutating the main-thread doc to avoid the initial-sync race.
+ * this before mutating the vessel doc to avoid the initial-sync race.
  *
  * NOT production code — gate fixture only.
  */
@@ -49,9 +49,9 @@ parentPort.on("message", (msg) => {
             // Drain signal: frame-completion ack (GP-1 frame signal, not GP-3 batch ACK).
             parentPort.postMessage({
               schema_version: 1,
-              type: "changeset:ack",
+              type: "frame:ack",
               wikiUri,
-              batch_id: `frame-${frameCount}`,
+              frameId: `frame-${frameCount}`,
             });
 
             // Observable event: surfaces via onWorkerEvent.
@@ -71,7 +71,7 @@ parentPort.on("message", (msg) => {
       const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
 
       if (resolvedDocUrl) {
-        // Explicit docUrl: Worker awaits repo.find() — reliable, no gossip race.
+        // Explicit docUrl: island awaits repo.find() — reliable, no gossip race.
         void repo.find(resolvedDocUrl).then((handle) => wireHandle(handle));
       } else {
         // Fallback: wait for doc to arrive via gossip (cold boot).

@@ -1,19 +1,19 @@
 /**
  * BrowserVesselIslandPool — browser-vessel implementation of BrowserAuthorityPool.
  *
- * ## Worker Sovereignty Law — main-thread side
+ * ## Island Sovereignty Law — vessel side
  *
- *   For each wiki authority the main thread:
+ *   For each wiki authority the vessel:
  *     1. Spawns a dedicated Web Worker (browser-wiki-worker.ts).
- *     2. Creates a MessageChannel. Keeps `mainPort`; transfers `syncPort` to the Worker.
- *     3. Optionally connects `mainPort` to the main-thread Automerge Repo via
- *        `MessageChannelNetworkAdapter` so the Worker-side Repo syncs automatically.
+ *     2. Creates a MessageChannel. Keeps `mainPort`; transfers `syncPort` to the island.
+ *     3. Optionally connects `mainPort` to the vessel Automerge Repo via
+ *        `MessageChannelNetworkAdapter` so the island-side Repo syncs automatically.
  *     4. Delivers `manifest` with `syncPort`, `docUrl`, `coreBlob`, `coreHash`.
  *     5. Awaits `ea` — island declares sovereignty; island is live.
  *
- *   Island isolation is structural: each Worker owns its own dedicated realm and
+ *   Island isolation is structural: each island owns its own dedicated runtime realm and
  *   MessagePort. The routing Map `_slots` enforces that no message reaches the
- *   wrong Worker — the boundary is a data structure, not a convention.
+ *   wrong island — the boundary is a data structure, not a convention.
  *
  * ## BrowserAuthorityPool surface
  *
@@ -27,12 +27,12 @@
  * ## BrowserAuthorityLease — push-first design intent
  *
  *   `filterTiddlers` and `renderMeme` survive as pull RPCs for S3 compatibility.
- *   They are annotated @deprecated — the push projection path (S4) will replace them.
- *   Request-response uses a `_pending` Map keyed by correlation UUID; the Worker
+ *   They are annotated superseded — the push projection path (S4) will replace them.
+ *   Request-response uses a `_pending` Map keyed by correlation UUID; the island
  *   echoes the UUID in an `rpc:reply` event. Protocol extension deferred to S4.
  *
  *   For now both methods return `[]` / `null` — stubs that compile but do not yet
- *   cross the Worker boundary. Named stubs surface the gap rather than hiding it.
+ *   cross the island boundary. Named stubs surface the gap rather than hiding it.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool
  */
@@ -40,17 +40,17 @@
 import { Repo } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import {
-  isWorkerToMainMsg,
+  isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  WORKER_PROTOCOL_VERSION,
+  ISLAND_PROTOCOL_VERSION,
   type BagBinding,
 } from "@lararium/mesh";
 import type {
-  WorkerMsg_Ea,
-  WorkerMsg_TeardownAck,
-  WorkerMsg_Event,
-  WorkerToMainMsg,
+  IslandMsg_Ea,
+  IslandMsg_TeardownAck,
+  IslandMsg_Event,
+  IslandToVesselMsg,
 } from "@lararium/mesh";
 import type {
   BrowserAuthorityPool,
@@ -74,14 +74,14 @@ interface BrowserSlot {
   lastLeaseAt: number | null;
   lastReleaseAt: number | null;
   /** Callback for verse-event reactions forwarded to the caller. */
-  onEvent:     ((msg: WorkerMsg_Event) => void) | null;
+  onEvent:     ((msg: IslandMsg_Event) => void) | null;
 }
 
 // ── Handshake helpers ──────────────────────────────────────────────────────
 
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
-function _awaitWorkerMsg<T extends WorkerToMainMsg>(
+function _awaitIslandMsg<T extends IslandToVesselMsg>(
   worker: Worker,
   type:   T["type"],
 ): Promise<T> {
@@ -91,7 +91,7 @@ function _awaitWorkerMsg<T extends WorkerToMainMsg>(
       HANDSHAKE_TIMEOUT_MS,
     );
     const onMsg = (e: MessageEvent) => {
-      if (!isWorkerToMainMsg(e.data) || e.data.type !== type) return;
+      if (!isIslandToVesselMsg(e.data) || e.data.type !== type) return;
       clearTimeout(timer);
       worker.removeEventListener("message", onMsg);
       resolve(e.data as T);
@@ -126,23 +126,23 @@ export interface BrowserVesselIslandPoolOptions {
   /** URL of the compiled browser-wiki-worker entry script. */
   workerScriptUrl: URL;
   /**
-   * Optional main-thread Automerge Repo. When provided, each slot wires
+   * Optional vessel Automerge Repo. When provided, each slot wires
    * `mainPort` to this Repo via `MessageChannelNetworkAdapter` so the
-   * Worker-side Repo syncs the wiki doc automatically.
+   * island-side Repo syncs the wiki doc automatically.
    *
-   * When absent (e.g. tests), the Worker-side Repo starts empty and
+   * When absent (e.g. tests), the island-side Repo starts empty and
    * receives only explicit doc bytes from `BrowserAuthorityBootParams.snapshots`.
    */
   mainRepo?: Repo;
-  /** Called when a Worker emits a verse-event reaction. */
-  onWorkerEvent?: (id: BrowserAuthorityId, msg: WorkerMsg_Event) => void;
+  /** Called when a island emits a verse-event reaction. */
+  onWorkerEvent?: (id: BrowserAuthorityId, msg: IslandMsg_Event) => void;
 }
 
 export class BrowserVesselIslandPool implements BrowserAuthorityPool {
   private readonly _slots      = new Map<BrowserAuthorityId, BrowserSlot>();
   private readonly _workerUrl: URL;
   private readonly _mainRepo:  Repo | null;
-  private readonly _onWorkerEvent: ((id: BrowserAuthorityId, msg: WorkerMsg_Event) => void) | null;
+  private readonly _onWorkerEvent: ((id: BrowserAuthorityId, msg: IslandMsg_Event) => void) | null;
 
   constructor(opts: BrowserVesselIslandPoolOptions) {
     this._workerUrl     = opts.workerScriptUrl;
@@ -208,7 +208,7 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
 
     let docBytes: Uint8Array | undefined;
     try {
-      const ackPromise = _awaitWorkerMsg<WorkerMsg_TeardownAck>(slot.worker, "teardown:ack");
+      const ackPromise = _awaitIslandMsg<IslandMsg_TeardownAck>(slot.worker, "teardown:ack");
       slot.worker.postMessage(mkTeardown());
       const ack = await ackPromise;
       docBytes  = ack.docBytes;
@@ -260,16 +260,16 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
     id:     BrowserAuthorityId,
     params: BrowserAuthorityBootParams,
   ): Promise<BrowserSlot> {
-    // 1. Spawn Worker.
+    // 1. Spawn island.
     const worker = new Worker(this._workerUrl, { type: "module" });
     worker.addEventListener("error", (e) => {
-      console.error(`[browser-vessel-island-pool] Worker error (${id}):`, e.message);
+      console.error(`[browser-vessel-island-pool] island error (${id}):`, e.message);
     });
 
-    // 2. Create MessageChannel — main keeps port1, Worker receives port2 (syncPort).
+    // 2. Create MessageChannel — main keeps port1, island receives port2 (syncPort).
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    // 3. Optionally wire mainPort to the main-thread Repo for CRDT sync.
+    // 3. Optionally wire mainPort to the vessel Repo for CRDT sync.
     let slotRepo: Repo | null = null;
     if (this._mainRepo) {
       const adapter = new MessageChannelNetworkAdapter(mainPort);
@@ -289,15 +289,15 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
     };
     this._slots.set(id, slot);
 
-    // 4. Wire main-thread message listener for Worker → main messages.
+    // 4. Wire vessel message listener for island → main messages.
     worker.addEventListener("message", (e: MessageEvent) => {
-      if (!isWorkerToMainMsg(e.data)) return;
-      const msg = e.data as WorkerToMainMsg;
+      if (!isIslandToVesselMsg(e.data)) return;
+      const msg = e.data as IslandToVesselMsg;
       if (msg.type === "event" && this._onWorkerEvent) {
-        this._onWorkerEvent(id, msg as WorkerMsg_Event);
+        this._onWorkerEvent(id, msg as IslandMsg_Event);
       }
       if (msg.type === "fault") {
-        console.error(`[browser-vessel-island-pool] Worker fault (${id}): ${(msg as { error: string }).error}`);
+        console.error(`[browser-vessel-island-pool] island fault (${id}): ${(msg as { error: string }).error}`);
         slot.phase = "disposed";
       }
     });
@@ -322,8 +322,8 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
     if (params.coreBlob.buffer.byteLength > 0) transferList.push(params.coreBlob.buffer);
     worker.postMessage(manifestMsg, transferList);
 
-    // 8. Await ea — Worker declares sovereignty; island is live.
-    await _awaitWorkerMsg<WorkerMsg_Ea>(worker, "ea");
+    // 8. Await ea — island declares sovereignty; island is live.
+    await _awaitIslandMsg<IslandMsg_Ea>(worker, "ea");
 
     slot.phase    = "live";
     slot.bootedAt = Date.now();
@@ -338,7 +338,7 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
       get phase()        { return slot.phase; },
       get capabilities() { return _liveCapabilities(); },
 
-      // @deprecated push-projection (S4) will replace these pull RPCs.
+      // superseded push-projection (S4) will replace these pull RPCs.
       filterTiddlers: async (_expr: string): Promise<string[]> => {
         // Stub — RPC extension deferred to S4 projection channel.
         return [];

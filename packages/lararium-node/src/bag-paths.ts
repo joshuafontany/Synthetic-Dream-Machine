@@ -113,7 +113,7 @@ export function wikiBagPath(): MirrorPathFn {
 /**
  * Construct a BagMirrorConfig for a named-scope bag.
  *
- * Used by Workers to reconstruct mirror configs from the serializable
+ * Used by islands to reconstruct mirror configs from the serializable
  * `diskMirrors` manifest field (which carries `{ bagId, mirrorRoot, scope }`).
  */
 export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string): BagMirrorConfig {

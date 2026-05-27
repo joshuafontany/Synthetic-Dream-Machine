@@ -1,20 +1,20 @@
 /**
  * IslandKernel — isomorphic sovereign island TW5 lifecycle manager.
  *
- * Owns the TW5Engine lifecycle (boot → live → teardown) inside a Worker realm.
- * Platform-neutral: callers supply a `postFn` that routes WorkerToMainMsg to
- * the main thread via parentPort (Node) or self.postMessage (browser).
+ * Owns the TW5Engine lifecycle (boot → live → teardown) inside an island runtime realm.
+ * Platform-neutral: callers supply a `postFn` that routes the v1 IslandToVesselMsg envelope to
+ * the vessel via parentPort (Node) or self.postMessage (browser).
  *
- * ## Worker Sovereignty Law — this class's role
+ * ## Island Sovereignty Law — this class's role
  *
  *   This handler owns TW5 only. It does NOT own Automerge WASM, CryptoKeys, or
- *   the Repo-in-Worker sync port. Those belong to the vessel entry file.
+ *   the Repo-in-island sync port. Those belong to the vessel entry file.
  *
  *   Entry file orchestration pattern (all vessels):
  *     1. `await handler.bootTw5(wikiUri, coreBlob)`  — boots TW5, wires verse events
  *     2. entry file: wire Repo with syncPort, await Repo ready, extract initial tiddlers
  *     3. `handler.applyDelta(wikiUri, initialTiddlers, [])`  — seed TW5 from CRDT doc
- *     4. `handler.sendEa(wikiUri)`  — signal main thread: island is live
+ *     4. `handler.sendEa(wikiUri)`  — signal vessel: island is live
  *     5. on Repo change: `handler.applyDelta(wikiUri, added, deleted)` at rAF boundary
  *     6. on teardown: `handler.teardown()`  — dispose TW5
  *
@@ -26,41 +26,41 @@
  * ## What this class does NOT own
  *
  *   I/O binding     — parentPort / self: stays in vessel entrypoints.
- *   Automerge WASM  — never loaded in this thread. Worker-side Repo lives in the entry file.
- *   CryptoKey       — stays in main thread (GP-4).
+ *   Automerge WASM  — never loaded in this thread. Island-side Repo lives in the entry file.
+ *   CryptoKey       — stays in vessel (GP-4).
  *   syncPort        — MessagePort for Repo sync; consumed by the entry file.
- *   IslandAdaptor   — no CompositeStore in Worker; CRDT feed comes from the Worker-side Repo.
+ *   IslandAdaptor   — no CompositeStore in IslandKernel; CRDT feed comes from the island-side Repo.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-kernel
  */
 
 import { TW5Engine } from "./tw5-vm.js";
 import type {
-  WorkerToMainMsg,
-  WorkerMsg_Event,
+  IslandToVesselMsg,
+  IslandMsg_Event,
 } from "@lararium/mesh";
 import {
   mkEa,
-  mkChangesetAck,
+  mkFrameAck,
   mkFault,
-  WORKER_PROTOCOL_VERSION,
+  ISLAND_PROTOCOL_VERSION,
 } from "@lararium/mesh";
 
 export class IslandKernel {
   private _tw5:        TW5Engine | null = null;
   private _wikiUri:    string | null    = null;
   private readonly _liveHandles         = new Set<{ cancel(): void }>();
-  private readonly _post:               (msg: WorkerToMainMsg) => void;
+  private readonly _post:               (msg: IslandToVesselMsg) => void;
 
-  constructor(postFn: (msg: WorkerToMainMsg) => void) {
+  constructor(postFn: (msg: IslandToVesselMsg) => void) {
     this._post = postFn;
   }
 
-  // ── Worker Sovereignty Law — orchestration API ──────────────────────────
+  // ── Island Sovereignty Law — orchestration API ──────────────────────────
 
   /**
    * Boot the TW5Engine. Does NOT send `ea` — the entry file sends it after the
-   * Worker-side Repo is synced and initial tiddlers applied.
+   * island-side Repo is synced and initial tiddlers applied.
    *
    * `preloadedTiddlers` carries the plugin layer (sigils, ahu, pranala, etc.).
    * These are prerequisite — applied during boot so the CRDT truth layer can use
@@ -87,22 +87,22 @@ export class IslandKernel {
       cancel: this._tw5.onVerseEvent({
         handleVerseEvent: (uri: string, listenable: string) => {
           this._post({
-            schema_version: WORKER_PROTOCOL_VERSION,
+            schema_version: ISLAND_PROTOCOL_VERSION,
             type: "event",
             wikiUri: this._wikiUri!,
             listenable,
             payload: { uri },
-          } satisfies WorkerMsg_Event);
+          } satisfies IslandMsg_Event);
         },
       }),
     });
   }
 
   /**
-   * Apply a tiddler add/delete delta to TW5 (from Worker-side Repo change events).
+   * Apply a tiddler add/delete delta to TW5 (from island-side Repo change events).
    *
    * Entry files call this at rAF / setInterval drain — not on every incoming message.
-   * The Worker owns the timing; this method is synchronous and cheap.
+   * The island owns the timing; this method is synchronous and cheap.
    */
   applyDelta(
     wikiUri: string,
@@ -121,30 +121,30 @@ export class IslandKernel {
     for (const title of deleted) {
       wiki.deleteTiddler(title);
     }
-    void wikiUri; // wikiUri reserved for future multi-wiki Worker support
+    void wikiUri; // wikiUri reserved for future multi-wiki island support
   }
 
   /**
    * Return the live TW5Engine, or null if not yet booted / already torn down.
-   * Admin Worker entry files use this to pass the engine to IslandAdaptor and JobDispatcher.
-   * Wiki Workers should not need direct engine access — use applyDelta + sendEa instead.
+   * Admin island entry files use this to pass the engine to IslandAdaptor and JobDispatcher.
+   * Wiki islands should not need direct engine access — use applyDelta + sendEa instead.
    */
   tw5(): TW5Engine | null {
     return this._tw5;
   }
 
-  /** Send `promote:ack` — call after Repo sync complete and initial tiddlers applied. */
+  /** Send `ea` — call after Repo sync complete and initial tiddlers applied. */
   sendEa(wikiUri: string): void {
     this._post(mkEa(wikiUri));
   }
 
   /**
-   * Send `changeset:ack` — frame-completion signal (Worker Sovereignty Law §4).
+   * Send `frame:ack` — frame-completion signal (Island Sovereignty Law §4).
    * Entry files call this at the END of each rAF / setInterval drain cycle.
-   * `frameId` is a Worker-generated UUID; it does NOT correlate with a main-thread batch.
+   * `frameId` is an island-generated UUID; it does NOT correlate with a vessel batch.
    */
-  sendChangesetAck(wikiUri: string, frameId: string): void {
-    this._post(mkChangesetAck(wikiUri, frameId));
+  sendFrameAck(wikiUri: string, frameId: string): void {
+    this._post(mkFrameAck(wikiUri, frameId));
   }
 
   /**

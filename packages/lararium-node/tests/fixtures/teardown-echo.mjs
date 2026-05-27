@@ -1,5 +1,5 @@
 /**
- * teardown-echo.mjs — minimal wiki Worker fixture for GP-5 teardown handshake tests.
+ * teardown-echo.mjs — minimal wiki island fixture for GP-5 teardown handshake tests.
  *
  * Simulates the handshake contract:
  *   1. Receives { schema_version: 1, type: "teardown" }
@@ -7,7 +7,7 @@
  *   3. Calls cancel() on all live KumuCancelable handles (simulated via cancelTracking)
  *   4. Posts { schema_version: 1, type: "teardown:ack" }
  *
- * The "cancelTracking" array mimics the Worker holding a set of live cancelables
+ * The "cancelTracking" array mimics the island holding a set of live cancelables
  * and calling .cancel() on each before sending ack. The fixture records each
  * cancel call in a pre-teardown "cancel:confirmed" message so the test can assert
  * ordering: cancels complete before ack sends.
@@ -29,7 +29,7 @@ class MockCancelable {
   }
 }
 
-// Simulate two live subscriptions registered by the Worker's Repo.
+// Simulate two live subscriptions registered by the island's Repo.
 const liveSubscriptions = [
   new MockCancelable("doc-handle"),
   new MockCancelable("session-event-bus"),

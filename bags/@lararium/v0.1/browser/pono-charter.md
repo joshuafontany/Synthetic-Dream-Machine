@@ -29,9 +29,9 @@ Code movement requires a matching entry in the **migration allowlist** (`deletio
 
 The browser vessel lives on the same constitutional law as the node vessel.
 
-**BV-1 — Worker authorities own truth.**
+**BV-1 — island authorities own truth.**
 Causal state, Automerge docs, filter execution, and sync participation live inside
-dedicated Worker realms. The host page cannot reach into an authority or read its
+dedicated island runtime realms. The host page cannot reach into an authority or read its
 state except through the declared projection contract.
 
 **BV-2 — The host owns frames.**
@@ -76,8 +76,8 @@ Three packages carry the browser vessel. Responsibility divides cleanly.
 | Package | Owns | Does NOT own |
 |---|---|---|
 | `@lararium/mesh` | Vessel law, pool law, worker lease contracts, projection receipts, authority identity and lifecycle types | Any DOM types, any browser runtime APIs |
-| `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, Worker spawn code, pool orchestration |
-| `@lararium/browser` | Browser vessel open/close, worker pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
+| `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, island spawn code, pool orchestration |
+| `@lararium/browser` | Browser vessel open/close, island pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
 
 The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed). The open seam: founding ceremony path — IndexedDB `StorageAdapter`, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`. New code enters by passing the migration allowlist check.
 
@@ -103,10 +103,10 @@ Code that passes all three gets a migration entry in `deletion-map.md#migration-
 
 These questions do not block charter adoption. They require measurement before resolution.
 
-1. **Pre-attach render prep.** How much render work can the worker authority complete before a frame attaches? The answer affects projection contract design.
+1. **Pre-attach render prep.** How much render work can the island authority complete before a frame attaches? The answer affects projection contract design.
 2. **Projection data shape.** Which minimal data crosses the worker boundary per render cycle? Prefer structured-clone-friendly small payloads; transferables only where size warrants.
 3. **DOM-bound TW5 hooks.** Which TW5 refresh/action hooks still require DOM access? Each dependency earns an explicit named adapter entry.
-4. **SharedWorker timing.** Dedicated workers first. SharedWorker deferred until dedicated path proves stable.
+4. **Sharedisland timing.** Dedicated workers first. Sharedisland deferred until dedicated path proves stable.
 5. **Pool topology.** Hot wiki and admin wiki may share one pool with capability flags or run two pools with shared law. Defer until pool metrics land.
 
 <<~/ahu >>

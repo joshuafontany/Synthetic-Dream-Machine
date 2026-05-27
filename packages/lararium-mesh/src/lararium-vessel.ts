@@ -14,7 +14,7 @@ export type LarOpenPhase =
   | "vessel-ready"   // LarVessel constructed, CompositeStore wired
   | "tw5-booted"     // TW5Engine.boot() resolved
   | "corpus-ready"   // corpus bags attached (fires once all initial corpora loaded)
-  | "live";          // Worker pool attached, vessel sovereign
+  | "live";          // island pool attached, vessel sovereign
 
 /**
  * LarariumVesselOptions — shared browser/node vessel open inputs.

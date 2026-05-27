@@ -15,9 +15,9 @@
  *
  * ## VM Pool alignment
  *
- *   Browser vessel: Admin Worker (sovereign island) + Pinned (primary wiki)
- *                   + N hot Workers (session wikis, LRU-evicted to cold)
- *   Every hot Worker runs via runBrowserSovereignWorker(behavior).
+ *   Browser vessel: Admin island (sovereign island) + Pinned (primary wiki)
+ *                   + N hot islands (session wikis, LRU-evicted to cold)
+ *   Every hot island runs via runBrowserSovereignWorker(behavior).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-sovereign-island-model
  */
@@ -31,19 +31,19 @@ import {
   CompositeStore,
   AutomergeDocStore,
   BAG_IDS,
-  isMainToWorkerMsg,
+  isVesselToIslandMsg,
   mkTeardownAck,
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
-  type WorkerMsg_Manifest,
-  type WorkerStorageConfig,
+  type IslandMsg_Manifest,
+  type IslandStorageConfig,
 } from "@lararium/mesh";
 import {
   IslandKernel,
   IslandAdaptor,
   MemoryTiddlerStore,
 } from "@lararium/tw5";
-import type { WorkerToMainMsg } from "@lararium/mesh";
+import type { IslandToVesselMsg } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 
 // ── BrowserIslandBehavior — gen_island callback module (browser) ──────────
@@ -54,7 +54,7 @@ export interface BrowserIslandContext {
   tw5:       TW5Engine;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handles:   Map<string, DocHandle<any>>;
-  post:      (msg: WorkerToMainMsg) => void;
+  post:      (msg: IslandToVesselMsg) => void;
 }
 
 export interface BrowserIslandBehavior {
@@ -64,10 +64,10 @@ export interface BrowserIslandBehavior {
   onDemote(ctx: BrowserIslandContext): void | Promise<void>;
 }
 
-// ── runBrowserSovereignWorker — the browser gen_island kernel ────────────
+// ── runBrowserSovereignisland — the browser gen_island kernel ────────────
 
 export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void {
-  const _post = (msg: WorkerToMainMsg) => self.postMessage(msg);
+  const _post = (msg: IslandToVesselMsg) => self.postMessage(msg);
   const handler = new IslandKernel(_post);
 
   let _repo:             Repo | null            = null;
@@ -102,7 +102,7 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
       if (added.length > 0 || deleted.length > 0) {
         handler.applyDelta(_activeWikiUri, added, deleted);
       }
-      handler.sendChangesetAck(_activeWikiUri, crypto.randomUUID());
+      handler.sendFrameAck(_activeWikiUri, crypto.randomUUID());
     });
   }
 
@@ -128,7 +128,7 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
 
   // ── Storage ───────────────────────────────────────────────────────────────
 
-  function _buildStorage(cfg: WorkerStorageConfig | undefined): StorageAdapterInterface | undefined {
+  function _buildStorage(cfg: IslandStorageConfig | undefined): StorageAdapterInterface | undefined {
     if (!cfg || cfg.type === "memory") return undefined;
     if (cfg.type === "idb") return new IndexedDBStorageAdapter(cfg.dbName);
     return undefined;
@@ -138,10 +138,10 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
 
   self.addEventListener("message", (e: MessageEvent) => {
     const raw = e.data;
-    if (!isMainToWorkerMsg(raw)) return;
+    if (!isVesselToIslandMsg(raw)) return;
 
     if (raw.type === "manifest") {
-      void _handleManifest(raw as WorkerMsg_Manifest);
+      void _handleManifest(raw as IslandMsg_Manifest);
       return;
     }
 
@@ -155,7 +155,7 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
-  async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
+  async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
 
     try {

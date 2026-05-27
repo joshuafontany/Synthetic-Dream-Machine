@@ -1,8 +1,8 @@
 /**
- * browser-repo-in-worker-echo.mjs — browser Worker gate fixture.
+ * browser-repo-in-island-echo.mjs — browser island gate fixture.
  *
  * Proves CRDT sync path in browser workers without TW5:
- *   manifest (syncPort transferred) -> wire Worker-side Repo -> ea
+ *   manifest (syncPort transferred) -> wire island-side Repo -> ea
  *   [doc arrives via CRDT sync]      -> handle.on("change") -> event(repo:change)
  *   teardown                         -> teardown:ack
  */

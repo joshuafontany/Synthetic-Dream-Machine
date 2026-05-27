@@ -1,33 +1,33 @@
 /**
- * island-protocol — GP-1 schema: discriminated union for all main ↔ wiki-Worker messages.
+ * island-protocol — GP-1 schema: discriminated union for all vessel ↔ causal-island messages.
  *
- * Every message crossing the main-thread / wiki-Worker boundary MUST use this envelope.
+ * Every message crossing the vessel / causal-island boundary MUST use this envelope.
  *
- * ## Worker Sovereignty Law (isomorphic across all vessel types)
+ * ## Island Sovereignty Law (isomorphic across all vessel types)
  *
- *   1. Every Worker boots a Repo-in-Worker via a transferred `syncPort` (MessagePort).
- *   2. The Worker derives tiddler state from its own CRDT doc — never from main-thread oracle deltas.
- *   3. The Worker owns its timing. Browser: requestAnimationFrame (Chromium/Firefox) with
- *      setTimeout(16ms) fallback for Safari (no rAF in Workers as of 2026). Node:
- *      setInterval(16ms).unref(). Tiddler deltas accumulate; the Worker drains at each
+ *   1. Every island boots a Repo-in-island via a transferred `syncPort` (MessagePort).
+ *   2. The island derives tiddler state from its own CRDT doc — never from vessel oracle deltas.
+ *   3. The island owns its timing. Browser: requestAnimationFrame (Chromium/Firefox) with
+ *      setTimeout(16ms) fallback for Safari (no rAF in islands as of 2026). Node:
+ *      setInterval(16ms).unref(). Tiddler deltas accumulate; the island drains at each
  *      frame boundary (or frame-equivalent tick), never on raw message receipt.
- *   4. `changeset:ack` is a frame-completion signal: the Worker fires it after each rAF drain,
+ *   4. `frame:ack` is a frame-completion signal: the island fires it after each rAF drain,
  *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
- *   5. Main-thread `changeset` delivery is removed. CRDT sync via `syncPort` is the sole
- *      source of tiddler truth for Worker islands.
- *   6. `WorkerMsg_Manifest` carries `syncPort` (transferred, not cloned), `bagBindings` (ordered
+ *   5. Vessel oracle delta delivery is removed. CRDT sync via `syncPort` is the sole
+ *      source of tiddler truth for causal islands.
+ *   6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `bagBindings` (ordered
  *      bag capability tokens), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
  *   8. Federation seam — when a `relational` BagBinding carries a non-empty `docUrl`, two obligations
- *      activate. Main-thread: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
- *      main-thread Repo before delivering `manifest`, so the CRDT graph reaches the Worker-side Repo
- *      automatically. Worker-side: the island MUST call `repo.find(docUrl).whenReady()` and await
+ *      activate. Vessel: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
+ *      vessel Repo before delivering `manifest`, so the CRDT graph reaches the island-side Repo
+ *      automatically. Island-side: the island MUST call `repo.find(docUrl).whenReady()` and await
  *      readiness before seeding TW5 and declaring `ea`. Failure on either side leaves the island
  *      holding a disconnected doc; the slot MUST transition to disposed within HANDSHAKE_TIMEOUT_MS.
- *      Gate proof: `browser-repo-in-worker.test.ts` test 2 ("docUrl non-null path resolves via repo.find").
+ *      Gate proof: `browser-repo-in-island.test.ts` test 2 ("docUrl non-null path resolves via repo.find").
  *      When this law holds, two vessels sharing a bag converge without any explicit sync call —
  *      the archipelago forms the moment the AutomergeUrl crosses the boundary.
  *
@@ -41,23 +41,23 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol
  */
 
-export const WORKER_PROTOCOL_VERSION = 1 as const;
-export type ProtocolVersion = typeof WORKER_PROTOCOL_VERSION;
+export const ISLAND_PROTOCOL_VERSION = 1 as const;
+export type ProtocolVersion = typeof ISLAND_PROTOCOL_VERSION;
 
-// ── Worker storage configuration ──────────────────────────────────────────
+// ── Island storage configuration ──────────────────────────────────────────
 
 /**
- * Storage adapter configuration for the Worker-side Automerge Repo.
+ * Storage adapter configuration for the island-side Automerge Repo.
  *
- * Workers that own a storage adapter hold persistent CRDT state independently
- * of the main-thread relay Repo. The main thread passes this config at manifest
- * delivery time; the Worker constructs the adapter.
+ * Islands that own a storage adapter hold persistent CRDT state independently
+ * of the vessel relay Repo. The vessel passes this config at manifest
+ * delivery time; the island constructs the adapter.
  *
- * - `nodefs`  — Node.js `NodeFSStorageAdapter`; Worker receives a filesystem `dir`.
- * - `idb`     — Browser `IndexedDBStorageAdapter`; Worker receives a `dbName`.
+ * - `nodefs`  — Node.js `NodeFSStorageAdapter`; island receives a filesystem `dir`.
+ * - `idb`     — Browser `IndexedDBStorageAdapter`; island receives a `dbName`.
  * - `memory`  — ephemeral in-memory storage; cold boot or test path.
  */
-export type WorkerStorageConfig =
+export type IslandStorageConfig =
   | { type: "nodefs";  dir:    string }
   | { type: "idb";     dbName: string }
   | { type: "memory" };
@@ -67,7 +67,7 @@ export type WorkerStorageConfig =
 /**
  * The mode a bag inhabits at manifest delivery time.
  *
- * - `relational` — a known AutomergeUrl; Worker calls `repo.find(docUrl).whenReady()`.
+ * - `relational` — a known AutomergeUrl; island calls `repo.find(docUrl).whenReady()`.
  *
  * `AutomergeUrl` IS the CapTP-style capability token for the doc.
  * A string bagId without a `docUrl` is a label, not a capability.
@@ -78,37 +78,37 @@ export type BagMode = { mode: "relational"; docUrl: string };
  * A single bag entry in the manifest delivery, combining identity + capability + write intent.
  *
  * `bagId`    — stable lar: bag identifier (e.g. `lar:///bags/lares/v0.1`)
- * `writable` — whether the Worker may call `.change()` on this bag's doc.
+ * `writable` — whether the island may call `.change()` on this bag's doc.
  * `mode`     — cold or relational (with AutomergeUrl capability token).
  */
 export type BagBinding = { bagId: string; writable: boolean } & BagMode;
 
-// ── Main → Worker ──────────────────────────────────────────────────────────
+// ── Vessel → island ──────────────────────────────────────────────────────────
 
 /**
- * Deliver the materials a sovereign Worker island needs to establish itself (boot TW5 + Repo-in-Worker).
+ * Deliver the materials a sovereign causal island needs to establish itself (boot TW5 + Repo-in-island).
  *
- * Worker Sovereignty Law:
+ * Island Sovereignty Law:
  *   - `syncPort` MUST be transferred (not cloned): `postMessage(msg, [msg.syncPort])`.
- *   - Worker creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
- *   - Worker calls `repo.find(docUrl)` and awaits `handle.whenReady()` before declaring `ea`.
- *   - If `docUrl` is null the Worker creates a fresh empty doc (cold boot).
+ *   - The island creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
+ *   - The island calls `repo.find(docUrl)` and awaits `handle.whenReady()` before declaring `ea`.
+ *   - If `docUrl` is null the island creates a fresh empty doc (cold boot).
  *   - `coreHash` carries a SHA-256 hex of `coreBlob`; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
  * BA-5: `coreBlob` travels as Uint8Array; transferred at the postMessage call site.
- * The main thread acts as courier — delivering materials, not conferring authority.
- * The Worker establishes its own sovereignty (`ea`) upon receipt.
+ * The vessel acts as courier — delivering materials, not conferring authority.
+ * The island establishes its own sovereignty (`ea`) upon receipt.
  *
  * Prerequisite fields (island cannot think without these — not cargo):
  *   - `pluginTiddlers` carries the plugin layer tiddlers (sigils, ahu, pranala, etc.).
  *     Applied to TW5 immediately after core boot, before Repo sync. An island without
  *     plugin tiddlers holds structural bones only — it fails ea condition 3 (own truth).
  *   - `bagBindings` carries the ordered bag capability tokens for this wiki's content scope.
- *     Each entry pairs a `bagId` with its `BagMode` (cold or relational AutomergeUrl).
+ *     Each entry pairs a `bagId` with its `BagMode` (relational AutomergeUrl).
  *   - `recipeUri` carries the recipe URI that maps this authority's content scope.
  */
-export interface WorkerMsg_Manifest {
+export interface IslandMsg_Manifest {
   schema_version: ProtocolVersion;
   type: "manifest";
   wikiUri: string;
@@ -119,16 +119,16 @@ export interface WorkerMsg_Manifest {
   /**
    * Ordered bag capability tokens for this wiki's content scope (system → draft).
    * Each BagBinding carries the bagId, write intent, and BagMode (relational+docUrl).
-   * Workers iterate in order to seed TW5 and establish doc handles.
+   * Islands iterate in order to seed TW5 and establish doc handles.
    */
   bagBindings?: readonly BagBinding[];
   /**
-   * Storage adapter configuration for the Worker-side Automerge Repo.
-   * When present, the Worker creates a persistent Repo (NodeFS or IDB).
+   * Storage adapter configuration for the island-side Automerge Repo.
+   * When present, the island creates a persistent Repo (NodeFS or IDB).
    * Absent or `{ type: "memory" }` = ephemeral relay-only Repo (test / cold-boot path).
    */
-  storage?: WorkerStorageConfig;
-  /** MessagePort for Worker-side Repo ↔ main-thread Repo sync. MUST be transferred. */
+  storage?: IslandStorageConfig;
+  /** MessagePort for island-side Repo ↔ vessel Repo sync. MUST be transferred. */
   syncPort: MessagePort;
   /**
    * Plugin layer tiddlers — sigils, ahu widgets, pranala parsers, etc.
@@ -139,17 +139,17 @@ export interface WorkerMsg_Manifest {
   /** Recipe URI mapping this authority's content scope. */
   recipeUri?: string;
   /**
-   * Serializable disk mirror configs for Worker-hosted LarDiskProjector.
+   * Serializable disk mirror configs for island-hosted LarDiskProjector.
    * Each entry carries `bagId`, `mirrorRoot` (absolute path), and `scope`
-   * (e.g. "@lares", "@lararium") so the Worker can reconstruct `BagMirrorConfig`
+   * (e.g. "@lares", "@lararium") so the island can reconstruct `BagMirrorConfig`
    * via `namedBagMirror(scope, mirrorRoot)` from `bag-paths`.
-   * Absent = no disk projection for this Worker.
+   * Absent = no disk projection for this island.
    */
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
 /** Demote the wiki slot from hot to cold (teardown; thread may terminate). */
-export interface WorkerMsg_Demote {
+export interface IslandMsg_Demote {
   schema_version: ProtocolVersion;
   type: "demote";
   wikiUri: string;
@@ -157,28 +157,28 @@ export interface WorkerMsg_Demote {
 
 /**
  * Begin the GP-5 teardown handshake.
- * Worker MUST complete in-flight reactions, cancel all live handles, export Repo doc bytes,
- * then respond with `teardown:ack` before main calls worker.terminate().
+ * Island MUST complete in-flight reactions, cancel all live handles, export Repo doc bytes,
+ * then respond with `teardown:ack` before the vessel calls worker.terminate().
  */
-export interface WorkerMsg_Teardown {
+export interface IslandMsg_Teardown {
   schema_version: ProtocolVersion;
   type: "teardown";
 }
 
-// ── Admin Worker protocol ─────────────────────────────────────────────────
+// ── Admin island protocol ─────────────────────────────────────────────────
 //
 // Three-message round-trip for admin island job coordination.
 //
-// Main → Worker: AdminMsg_PlaceJob  — place a volatile job tiddler in the admin TW5 wiki.
-// Worker → Main: AdminMsg_DelegateJob — delegate a wiki-scope job whose handler lives on main.
-// Main → Worker: AdminMsg_JobResult  — deliver delegation result or error back to Worker.
+// Vessel → island: AdminMsg_PlaceJob  — place a volatile job tiddler in the admin TW5 wiki.
+// Island → vessel: AdminMsg_DelegateJob — delegate a wiki-scope job whose handler lives on main.
+// Vessel → island: AdminMsg_JobResult  — deliver delegation result or error back to island.
 //
-// The admin Worker owns the TW5 wiki event surface (kumu device law).
+// The admin island owns the TW5 wiki event surface (kumu device law).
 // All jobs pass through the admin wiki change event → JobDispatcher tick.
-// Wiki-scope handlers that need main-thread resources (repo, catalogHandle, etc.)
-// delegate via AdminMsg_DelegateJob; the Worker awaits AdminMsg_JobResult before writing receipt.
+// Wiki-scope handlers that need vessel resources (repo, catalogHandle, etc.)
+// delegate via AdminMsg_DelegateJob; the island awaits AdminMsg_JobResult before writing receipt.
 
-/** Main → Worker: place a volatile job tiddler in the admin island's TW5 wiki. */
+/** Vessel → island: place a volatile job tiddler in the admin island's TW5 wiki. */
 export interface AdminMsg_PlaceJob {
   schema_version: ProtocolVersion;
   type: "admin:place-job";
@@ -191,9 +191,9 @@ export interface AdminMsg_PlaceJob {
 }
 
 /**
- * Worker → Main: delegate a wiki-scope job to the main-thread handler registry.
- * Emitted when the admin Worker's JobDispatcher encounters a verb not in its local registry.
- * Main executes the handler and posts AdminMsg_JobResult back.
+ * Island → vessel: delegate a wiki-scope job to the vessel handler registry.
+ * Emitted when the admin island's JobDispatcher encounters a verb not in its local registry.
+ * The vessel executes the handler and posts AdminMsg_JobResult back.
  */
 export interface AdminMsg_DelegateJob {
   schema_version: ProtocolVersion;
@@ -206,7 +206,7 @@ export interface AdminMsg_DelegateJob {
   batchMode?: string;
 }
 
-/** Main → Worker: delegation result or error. Admin Worker resolves the in-flight delegation promise. */
+/** Vessel → island: delegation result or error. Admin island resolves the in-flight delegation promise. */
 export interface AdminMsg_JobResult {
   schema_version: ProtocolVersion;
   type: "admin:job-result";
@@ -215,22 +215,22 @@ export interface AdminMsg_JobResult {
   error?: string;
 }
 
-/** All messages the main thread may send to a wiki Worker. */
-export type MainToWorkerMsg =
-  | WorkerMsg_Manifest
-  | WorkerMsg_Demote
-  | WorkerMsg_Teardown
+/** All messages the vessel may send to a causal island. */
+export type VesselToIslandMsg =
+  | IslandMsg_Manifest
+  | IslandMsg_Demote
+  | IslandMsg_Teardown
   | AdminMsg_PlaceJob
   | AdminMsg_JobResult
   | WikiMsg_PlaceJob;
 
-// ── Worker → Main ──────────────────────────────────────────────────────────
+// ── Island → vessel ──────────────────────────────────────────────────────────
 
 /**
- * Emit a verse-event reaction to the main thread for cross-wiki routing.
+ * Emit a verse-event reaction to the vessel for cross-wiki routing.
  * GP-2: payload MUST contain only string | number | boolean values.
  */
-export interface WorkerMsg_Event {
+export interface IslandMsg_Event {
   schema_version: ProtocolVersion;
   type: "event";
   wikiUri: string;
@@ -241,32 +241,32 @@ export interface WorkerMsg_Event {
 /**
  * GP-5 handshake completion.
  * Sent after all in-flight reactions complete and all live handles cancelled.
- * Main calls worker.terminate() on receipt.
+ * Vessel calls worker.terminate() on receipt.
  */
-export interface WorkerMsg_TeardownAck {
+export interface IslandMsg_TeardownAck {
   schema_version: ProtocolVersion;
   type: "teardown:ack";
-  /** Automerge doc bytes from Worker-side Repo at teardown. Preferred warm-start seed. */
+  /** Automerge doc bytes from island-side Repo at teardown. Preferred warm-start seed. */
   docBytes?: Uint8Array;
 }
 
 /**
- * Sovereignty declaration — the Worker signals it breathes (`ea`): TW5 live, Repo synced, first frame ready.
+ * Sovereignty declaration — the island signals it breathes (`ea`): TW5 live, Repo synced, first frame ready.
  *
  * In Hawaiian: ea = sovereignty, breath, life. The island declares its own standing;
- * the main thread records the declaration and considers the island live.
+ * the vessel records the declaration and considers the island live.
  * See: lar:///ha.ka.ba/@lares/v0.1/api/pono/ea
  */
-export interface WorkerMsg_Ea {
+export interface IslandMsg_Ea {
   schema_version: ProtocolVersion;
   type: "ea";
   wikiUri: string;
 }
 
 /**
- * Worker fault signal. Main MUST mark the slot as evicted.
+ * Island fault signal. Vessel MUST mark the slot as evicted.
  */
-export interface WorkerMsg_Fault {
+export interface IslandMsg_Fault {
   schema_version: ProtocolVersion;
   type: "fault";
   wikiUri: string;
@@ -274,29 +274,27 @@ export interface WorkerMsg_Fault {
 }
 
 /**
- * Frame-completion signal — Worker-owned timing (Worker Sovereignty Law §4).
+ * Frame-completion signal — island-owned timing (Island Sovereignty Law §4).
  *
- * The Worker fires this after each rAF (browser) / setInterval (Node) drain cycle.
- * It signals the causal island processed a frame — main thread may use it to track
- * island liveness. `batch_id` is a frame-local UUID; it does NOT correlate with
- * a main-thread batch in the Repo-in-Worker path.
- *
- * @deprecated name "changeset:ack" reflects the GP-3 origin. Future schema_version
- * will rename to "frame:ack" when the GP-3 path is fully removed.
+ * The island fires this after each rAF (browser) / setInterval (Node) drain cycle.
+ * It signals the causal island processed a frame — the vessel may use it to track
+ * island liveness. `frameId` is a frame-local UUID; it does NOT correlate with
+ * a vessel batch in the Repo-in-island path.
+
  */
-export interface WorkerMsg_ChangesetAck {
+export interface IslandMsg_FrameAck {
   schema_version: ProtocolVersion;
-  type: "changeset:ack";
+  type: "frame:ack";
   wikiUri: string;
-  batch_id: string;
+  frameId: string;
 }
 
 /**
- * Main → Worker: place a wiki-scope job into a wiki Worker's TW5 wiki.
+ * Vessel → island: place a wiki-scope job into a wiki island's TW5 wiki.
  *
- * Parallel to AdminMsg_PlaceJob for the admin Worker. Any Worker running a
+ * Parallel to AdminMsg_PlaceJob for the admin island. Any island running a
  * wiki dispatch behavior handles this by calling placeVmJob on its TW5 wiki.
- * The wiki change event fires at next tick; the Worker's JobDispatcher dispatches it.
+ * The wiki change event fires at next tick; the island's JobDispatcher dispatches it.
  */
 export interface WikiMsg_PlaceJob {
   schema_version: ProtocolVersion;
@@ -310,11 +308,11 @@ export interface WikiMsg_PlaceJob {
 }
 
 /**
- * Worker → Main: wiki-scope job result.
+ * Island → vessel: wiki-scope job result.
  *
- * Sent by a wiki Worker's dispatch behavior after completing a job whose result
- * the main thread needs (e.g. promote — result carries the promoted record list).
- * For fire-and-forget jobs (no result needed) the Worker omits this message.
+ * Sent by a wiki island's dispatch behavior after completing a job whose result
+ * the vessel needs (e.g. promote — result carries the promoted record list).
+ * For fire-and-forget jobs (no result needed) the island omits this message.
  */
 export interface WikiMsg_JobResult {
   schema_version: ProtocolVersion;
@@ -324,13 +322,13 @@ export interface WikiMsg_JobResult {
   error?:         string;
 }
 
-/** All messages a wiki Worker may send to the main thread. */
-export type WorkerToMainMsg =
-  | WorkerMsg_Event
-  | WorkerMsg_TeardownAck
-  | WorkerMsg_Ea
-  | WorkerMsg_ChangesetAck
-  | WorkerMsg_Fault
+/** All messages a causal island may send to the vessel. */
+export type IslandToVesselMsg =
+  | IslandMsg_Event
+  | IslandMsg_TeardownAck
+  | IslandMsg_Ea
+  | IslandMsg_FrameAck
+  | IslandMsg_Fault
   | WikiMsg_JobResult
   | AdminMsg_DelegateJob;
 
@@ -340,41 +338,41 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
   return (
     typeof v === "object" &&
     v !== null &&
-    (v as Record<string, unknown>).schema_version === WORKER_PROTOCOL_VERSION &&
+    (v as Record<string, unknown>).schema_version === ISLAND_PROTOCOL_VERSION &&
     typeof (v as Record<string, unknown>).type === "string"
   );
 }
 
-export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
+export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
   return (["manifest", "demote", "teardown", "admin:place-job", "admin:job-result", "wiki:place-job"] as const).includes(
-    v.type as MainToWorkerMsg["type"],
+    v.type as VesselToIslandMsg["type"],
   );
 }
 
-export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
+export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "wiki:job-result", "admin:delegate-job"] as const).includes(
-    v.type as WorkerToMainMsg["type"],
+  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "wiki:job-result", "admin:delegate-job"] as const).includes(
+    v.type as IslandToVesselMsg["type"],
   );
 }
 
 // ── Envelope factories ─────────────────────────────────────────────────────
 
-export function mkTeardown(): WorkerMsg_Teardown {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "teardown" };
+export function mkTeardown(): IslandMsg_Teardown {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "teardown" };
 }
 
 export function mkTeardownAck(opts: {
   docBytes?: Uint8Array;
-} = {}): WorkerMsg_TeardownAck {
-  const msg: WorkerMsg_TeardownAck = { schema_version: WORKER_PROTOCOL_VERSION, type: "teardown:ack" };
+} = {}): IslandMsg_TeardownAck {
+  const msg: IslandMsg_TeardownAck = { schema_version: ISLAND_PROTOCOL_VERSION, type: "teardown:ack" };
   if (opts.docBytes !== undefined) msg.docBytes = opts.docBytes;
   return msg;
 }
 
 /**
- * Build a manifest delivery message — the courier packet the main thread sends to a Worker island.
+ * Build a manifest delivery message — the courier packet the vessel sends to a causal island.
  *
  * TRANSFER: caller MUST include `syncPort` (and `coreBlob.buffer` if not yet transferred)
  * in the `postMessage` transfer list:
@@ -393,13 +391,13 @@ export function mkManifest(
   opts?: {
     pluginTiddlers?: readonly Record<string, unknown>[];
     bagBindings?:    readonly BagBinding[];
-    storage?:        WorkerStorageConfig;
+    storage?:        IslandStorageConfig;
     recipeUri?:      string;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
   },
-): WorkerMsg_Manifest {
-  const msg: WorkerMsg_Manifest = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+): IslandMsg_Manifest {
+  const msg: IslandMsg_Manifest = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "manifest",
     wikiUri,
     coreBlob,
@@ -414,17 +412,17 @@ export function mkManifest(
   return msg;
 }
 
-/** Build an ea sovereignty declaration — the Worker signals it breathes and stands ready. */
-export function mkEa(wikiUri: string): WorkerMsg_Ea {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "ea", wikiUri };
+/** Build an ea sovereignty declaration — the island signals it breathes and stands ready. */
+export function mkEa(wikiUri: string): IslandMsg_Ea {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "ea", wikiUri };
 }
 
-export function mkChangesetAck(wikiUri: string, batch_id: string): WorkerMsg_ChangesetAck {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "changeset:ack", wikiUri, batch_id };
+export function mkFrameAck(wikiUri: string, frameId: string): IslandMsg_FrameAck {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "frame:ack", wikiUri, frameId };
 }
 
-export function mkFault(wikiUri: string, error: string): WorkerMsg_Fault {
-  return { schema_version: WORKER_PROTOCOL_VERSION, type: "fault", wikiUri, error };
+export function mkFault(wikiUri: string, error: string): IslandMsg_Fault {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "fault", wikiUri, error };
 }
 
 export function mkAdminPlaceJob(opts: {
@@ -436,7 +434,7 @@ export function mkAdminPlaceJob(opts: {
   requestId?: string;
 }): AdminMsg_PlaceJob {
   const msg: AdminMsg_PlaceJob = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "admin:place-job",
     verb: opts.verb,
     args: opts.args,
@@ -457,7 +455,7 @@ export function mkAdminDelegateJob(opts: {
   batchMode?: string;
 }): AdminMsg_DelegateJob {
   const msg: AdminMsg_DelegateJob = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "admin:delegate-job",
     requestId: opts.requestId,
     verb: opts.verb,
@@ -475,7 +473,7 @@ export function mkAdminJobResult(opts: {
   error?: string;
 }): AdminMsg_JobResult {
   const msg: AdminMsg_JobResult = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "admin:job-result",
     requestId: opts.requestId,
   };
@@ -493,7 +491,7 @@ export function mkWikiPlaceJob(opts: {
   requestId?: string;
 }): WikiMsg_PlaceJob {
   const msg: WikiMsg_PlaceJob = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "wiki:place-job",
     verb: opts.verb,
     args: opts.args,
@@ -511,7 +509,7 @@ export function mkWikiJobResult(opts: {
   error?: string;
 }): WikiMsg_JobResult {
   const msg: WikiMsg_JobResult = {
-    schema_version: WORKER_PROTOCOL_VERSION,
+    schema_version: ISLAND_PROTOCOL_VERSION,
     type: "wiki:job-result",
     requestId: opts.requestId,
   };
@@ -520,13 +518,13 @@ export function mkWikiJobResult(opts: {
   return msg;
 }
 
-// ── Tiddler delta extraction — Worker-side utility ─────────────────────────
+// ── Tiddler delta extraction — island-side utility ─────────────────────────
 
 /**
  * Extract a tiddler add/delete delta from an Automerge doc + patch list.
  *
- * Used by Worker entry files to derive TW5 mutations from Worker-side Repo change events.
- * Replaces the GP-3 oracle pattern (main-thread `_subscribeDocChanges` ETL).
+ * Used by island entry files to derive TW5 mutations from island-side Repo change events.
+ * Replaces the GP-3 oracle pattern (vessel `_subscribeDocChanges` ETL).
  *
  * `patches` is `Patch[]` from `@automerge/automerge` — each patch identifies a mutated path.
  * `doc` is the post-change `LarDoc` snapshot (already reconciled).

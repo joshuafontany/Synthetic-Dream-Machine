@@ -1,29 +1,29 @@
 /**
- * island-behaviors — OTP callback modules for sovereign Worker types.
+ * island-behaviors — OTP callback modules for sovereign island types.
  *
  * Each export is an IslandBehavior: the domain-specific half of the OTP
  * gen_island pair. sovereign-island-model.ts owns the lifecycle plumbing;
- * behaviors own what distinguishes one Worker type from another.
+ * behaviors own what distinguishes one island type from another.
  *
- * ## Wiki Worker — null behavior
+ * ## Wiki island — null behavior
  *   Read-dominant: CRDT bags flow in, TW5 session writes land in scratch.
  *   No JobDispatcher, no relay protocol. writeBagId = BAG_IDS.scratch.
  *
- * ## Wiki Worker with disk projection — extends null behavior
- *   Starts a LarDiskProjector inside the Worker, subscribing to TW5 wiki
+ * ## Wiki island with disk projection — extends null behavior
+ *   Starts a LarDiskProjector inside the island, subscribing to TW5 wiki
  *   change events directly. renderFn calls exportMemeText(ctx.tw5, uri).
  *   Receives diskMirrors from manifest (serializable BagMirrorConfig).
  *
- * ## Wiki Worker with dispatch — handles wiki:place-job messages
- *   No kumu device surface (that belongs to admin Worker). Handles explicit
- *   wiki-scope jobs placed by the main thread. Direct inline dispatch (no
+ * ## Wiki island with dispatch — handles wiki:place-job messages
+ *   No kumu device surface (that belongs to admin island). Handles explicit
+ *   wiki-scope jobs placed by the vessel. Direct inline dispatch (no
  *   JobDispatcher subscription) → wiki:job-result posted back.
- *   Cap verification: stubbed (job arrived from main thread = pre-authorized).
+ *   Cap verification: stubbed (job arrived from vessel = pre-authorized).
  *
- * ## Admin Worker — dispatch behavior
+ * ## Admin island — dispatch behavior
  *   Owns the kumu device / Reaction Engine surface (TW5 wiki change events).
  *   JobDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
- *   main thread via AdminMsg_DelegateJob / AdminMsg_JobResult.
+ *   vessel via AdminMsg_DelegateJob / AdminMsg_JobResult.
  *   writeBagId = ADMIN_BAG_ID (CRDT write-back, persisted).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/island-behaviors
@@ -39,7 +39,7 @@ import {
   type BatchMode,
   type JobTiddler,
   type WikiMsg_PlaceJob,
-  type WorkerMsg_Manifest,
+  type IslandMsg_Manifest,
 } from "@lararium/mesh";
 import { placeVmJob, exportMemeText } from "@lararium/tw5";
 import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
@@ -48,16 +48,16 @@ import { namedBagMirror } from "./bag-paths.js";
 import { makePromoteReactor } from "./promote-handler.js";
 import type { IslandBehavior, IslandContext } from "./sovereign-island-model.js";
 
-// ── Primary Wiki Worker behavior — disk projection + wiki dispatch ────────
+// ── Primary Wiki island behavior — disk projection + wiki dispatch ────────
 
 /**
- * IslandBehavior for the primary wiki Worker: disk write-back + wiki-scope job dispatch.
+ * IslandBehavior for the primary wiki island: disk write-back + wiki-scope job dispatch.
  *
  *   onEa     — start LarDiskProjector (if diskMirrors present) + build VerbTable
  *   onSignal — handle wiki:place-job inline dispatch
  *   onDemote — stop projector, clear registry
  */
-export function makeWikiPrimaryBehavior(manifest: WorkerMsg_Manifest): IslandBehavior {
+export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBehavior {
   let _stopProjector: (() => void) | null = null;
   let _registry: VerbTable | null = null;
 
@@ -127,13 +127,13 @@ export function makeWikiPrimaryBehavior(manifest: WorkerMsg_Manifest): IslandBeh
   };
 }
 
-// ── Admin Worker behavior — dispatch + relay ──────────────────────────────
+// ── Admin island behavior — dispatch + relay ──────────────────────────────
 
 export function makeAdminBehavior(): IslandBehavior {
   let _dispatcher: JobDispatcher | null = null;
 
   // Pending delegation map — requestId → { resolve, reject }.
-  // Admin Worker posts AdminMsg_RelayJob for wiki-scope verbs; main thread
+  // Admin island posts AdminMsg_RelayJob for wiki-scope verbs; vessel
   // executes and returns AdminMsg_JobResult. This map holds the Promise resolvers.
   const _pendingDelegations = new Map<string, {
     resolve: (result: Record<string, unknown>) => void;

@@ -18,12 +18,12 @@ retain       = true
 
 <<~&#x0002;>>
 
-# lararium-browser: Full Detached Worker-Authority Pool Sprint
+# lararium-browser: Full Detached island-Authority Pool Sprint
 
 Chosen architecture: **full detached worker-authority pool**.
 
 The browser vessel is a true local-first vessel.
-Worker realms hold authority.
+island runtime realms hold authority.
 The host frame holds surfaces.
 IndexedDB and sync belong to the vessel layer.
 TW5 plugin content stays inside the wiki island.
@@ -35,8 +35,8 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 | Sprint | Goal | Status |
 |---|---|---|
 | S0 | Pono charter + deletion map | ✅ |
-| S1 | Worker authority contract | ✅ |
-| S2 | Worker runtime bootstrap | ⬜ |
+| S1 | Island authority contract | ✅ |
+| S2 | island runtime bootstrap | ⬜ |
 | S3 | IndexedDB / local persistence | ⬜ |
 | S4 | Host frame / projection contract | ⬜ |
 | S5 | Pool orchestrator / lease discipline | ⬜ |
@@ -61,7 +61,7 @@ Dead web2 singleton/page/server residue does not cross the membrane without proo
 ## Primary Law
 
 1. Host owns where a wiki appears.
-2. Worker authority owns causal and compute sovereignty.
+2. Island authority owns causal and compute sovereignty.
 3. Wiki/plugin owns TW5-native rendering content.
 4. Pool owns warm authorities, not page globals.
 5. Projection adapters translate authority output into host surfaces.
@@ -98,10 +98,10 @@ If any check fails, treat it as architectural signal, not a cue to patch around 
 
 ## Open Questions
 
-1. How much render preparation can the worker authority complete before frame attach?
+1. How much render preparation can the island authority complete before frame attach?
 2. Which minimal projection data should cross the worker boundary?
 3. Which TW5 refresh/action hooks still require a DOM-bound root?
-4. Should the first alpha use dedicated workers only, with SharedWorker deferred?
+4. Should the first alpha use dedicated workers only, with Sharedisland deferred?
 5. Should admin wiki and hot wiki share one pool with capability flags, or two pools with shared law?
 
 Do not guess. Measure and document.
@@ -109,7 +109,7 @@ Do not guess. Measure and document.
 ## Alpha Definition of Done
 
 - A browser vessel opens on the same constitutional law as node.
-- Worker authorities own truth and compute.
+- island authorities own truth and compute.
 - The host owns frames and projection mounts.
 - The browser survives reload and reconnect.
 - Hot/admin wiki swapping works.

@@ -1,33 +1,33 @@
 /**
- * repo-in-worker.test.ts — GP-3 deprecation gate test.
+ * repo-in-island.test.ts — GP-3 deprecation gate test.
  *
- * Proves: a main-thread Repo doc change propagates to the Worker via MessageChannel
+ * Proves: a vessel Repo doc change propagates to the island via MessageChannel
  * WITHOUT calling routeChangeset. When this test passes, the GP-3 oracle path
  * becomes provably unreachable and deletion begins.
  *
  * Test structure (from TALK-STORY-NEXT #active-sprint):
- *   1. main-thread Repo with real doc
+ *   1. vessel Repo with real doc
  *   2. VesselIslandPool({ mainRepo })
- *   3. mountWiki → syncPort transferred → Worker wires its own Repo
- *   4. main thread changes the doc
- *   5. CRDT sync fires handle.on("change") in the Worker
- *   6. Worker emits event(repo:change) observable via onWorkerEvent
+ *   3. mountWiki → syncPort transferred → island wires its own Repo
+ *   4. vessel changes the doc
+ *   5. CRDT sync fires handle.on("change") in the island
+ *   6. island emits event(repo:change) observable via onWorkerEvent
  *   7. assert event arrives — no routeChangeset call
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/repo-in-worker
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/repo-in-island
  */
 
 import { describe, test, expect, afterEach } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
-import type { WorkerMsg_Event } from "@lararium/mesh";
+import type { IslandMsg_Event } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 // ---------------------------------------------------------------------------
 // Fixture
 // ---------------------------------------------------------------------------
 
-const FIXTURE_URL = new URL("./fixtures/repo-in-worker-echo.mjs", import.meta.url);
-const WIKI_ID     = "lar:///ha.ka.ba/@test/repo-in-worker";
+const FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
+const WIKI_ID     = "lar:///ha.ka.ba/@test/repo-in-island";
 const STUB_CORE   = { bytes: new Uint8Array() } as const;
 
 // ---------------------------------------------------------------------------
@@ -35,14 +35,14 @@ const STUB_CORE   = { bytes: new Uint8Array() } as const;
 // ---------------------------------------------------------------------------
 
 /**
- * Collect WorkerMsg_Events matching listenable from onWorkerEvent.
+ * Collect IslandMsg_Events matching listenable from onWorkerEvent.
  * Returns the collector array and the callback to pass to VesselIslandPool.
  */
 function eventCollector(filter?: string): {
-  events: WorkerMsg_Event[];
-  callback: (wikiId: string, msg: WorkerMsg_Event) => void;
+  events: IslandMsg_Event[];
+  callback: (wikiId: string, msg: IslandMsg_Event) => void;
 } {
-  const events: WorkerMsg_Event[] = [];
+  const events: IslandMsg_Event[] = [];
   return {
     events,
     callback: (_wikiId, msg) => {
@@ -56,7 +56,7 @@ function eventCollector(filter?: string): {
  * Never calls routeChangeset — CRDT sync only.
  */
 function waitForEvents(
-  collector: { events: WorkerMsg_Event[] },
+  collector: { events: IslandMsg_Event[] },
   count: number,
   timeoutMs = 3000,
 ): Promise<void> {
@@ -83,7 +83,7 @@ function waitForEvents(
  * The fixture emits this after handle.whenReady() resolves and the change listener is live.
  * Must be awaited before any docHandle.change() to avoid the initial-sync race.
  */
-function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Promise<void> {
+function waitForSynced(all: { events: IslandMsg_Event[] }, timeoutMs = 5000): Promise<void> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const interval = setInterval(() => {
@@ -102,7 +102,7 @@ function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Pr
 // Tests
 // ---------------------------------------------------------------------------
 
-describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
+describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
   let manager: VesselIslandPool | null = null;
   let repo: Repo | null = null;
 
@@ -113,7 +113,7 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     repo = null;
   });
 
-  test("doc change on main thread reaches Worker via syncPort without routeChangeset", async () => {
+  test("doc change on vessel reaches island via syncPort without routeChangeset", async () => {
     const all     = eventCollector();           // all events — used to await repo:synced
     const changes = eventCollector("repo:change"); // filtered — the assertion target
 
@@ -135,13 +135,13 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     // The fixture emits repo:synced after handle.whenReady() resolves.
     await waitForSynced(all);
 
-    // Change the doc on the main thread — no routeChangeset call.
+    // Change the doc on the vessel — no routeChangeset call.
     docHandle.change((d) => {
       d.tiddlers["lar:///test/pono"] = { title: "lar:///test/pono", text: "pono" };
     });
 
-    // CRDT sync propagates via MessageChannel → Worker handle.on("change") fires
-    // → Worker emits event(repo:change) → onWorkerEvent fires.
+    // CRDT sync propagates via MessageChannel → island handle.on("change") fires
+    // → island emits event(repo:change) → onWorkerEvent fires.
     await waitForEvents(changes, 1);
 
     expect(changes.events.length).toBeGreaterThanOrEqual(1);
@@ -173,7 +173,7 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     await waitForSynced(all);
 
     // Three changes — automerge may batch rapid successive changes into fewer sync events.
-    // The invariant: all three tiddlers arrive at the Worker via CRDT sync.
+    // The invariant: all three tiddlers arrive at the island via CRDT sync.
     docHandle.change((d) => { d.tiddlers["a"] = { title: "a" }; });
     docHandle.change((d) => { d.tiddlers["b"] = { title: "b" }; });
     docHandle.change((d) => { d.tiddlers["c"] = { title: "c" }; });

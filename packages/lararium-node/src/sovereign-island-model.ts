@@ -1,7 +1,7 @@
 /**
- * sovereign-island-model — Node.js sovereign Worker lifecycle kernel.
+ * sovereign-island-model — Node.js sovereign island lifecycle kernel.
  *
- * Implements the OTP gen_island behavior pattern for sovereign Worker islands:
+ * Implements the OTP gen_island behavior pattern for sovereign causal islands:
  *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → drain → ea → demote
  *   - caller-supplied IslandBehavior: writeBagId + onEa / onSignal / onDemote
  *
@@ -15,14 +15,14 @@
  *   └── projection MemoryTiddlerStore (defaultWritable:false)       ← $:/state/*
  *
  * `behavior.writeBagId` selects which bag IslandAdaptor routes TW5 outbound saves to:
- *   admin Worker → ADMIN_BAG_ID  (CRDT write-back, persisted)
- *   wiki Worker  → BAG_IDS.scratch  (local only, evaporates on teardown)
+ *   admin island → ADMIN_BAG_ID  (CRDT write-back, persisted)
+ *   wiki island   → BAG_IDS.scratch  (local only, evaporates on teardown)
  *
  * ## VM Pool alignment
  *
- *   Node vessel: Admin Worker (sovereign island) + Pinned (PrimaryWiki in-process)
- *                + N hot Workers (session wikis, LRU-evicted to cold)
- *   Every hot Worker runs via runSovereignWorker(behavior).
+ *   Node vessel: Admin island (sovereign island) + Pinned (PrimaryWiki in-process)
+ *                + N hot islands (session wikis, LRU-evicted to cold)
+ *   Every hot island runs via runSovereignWorker(behavior).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/sovereign-island-model
  */
@@ -37,19 +37,19 @@ import {
   CompositeStore,
   AutomergeDocStore,
   BAG_IDS,
-  isMainToWorkerMsg,
+  isVesselToIslandMsg,
   mkTeardownAck,
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
-  type WorkerMsg_Manifest,
-  type WorkerStorageConfig,
+  type IslandMsg_Manifest,
+  type IslandStorageConfig,
 } from "@lararium/mesh";
 import {
   IslandKernel,
   IslandAdaptor,
   MemoryTiddlerStore,
 } from "@lararium/tw5";
-import type { WorkerToMainMsg } from "@lararium/mesh";
+import type { IslandToVesselMsg } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 
 // ── IslandBehavior — the OTP gen_island callback module ───────────────────
@@ -60,7 +60,7 @@ export interface IslandContext {
   tw5:       TW5Engine;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handles:   Map<string, DocHandle<any>>;
-  post:      (msg: WorkerToMainMsg) => void;
+  post:      (msg: IslandToVesselMsg) => void;
 }
 
 /**
@@ -78,19 +78,19 @@ export interface IslandBehavior {
   onDemote(ctx: IslandContext): void | Promise<void>;
 }
 
-// ── runSovereignWorker — the OTP gen_island kernel ────────────────────────
+// ── runSovereignisland — the OTP gen_island kernel ────────────────────────
 
-export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifest: WorkerMsg_Manifest) => IslandBehavior)): void {
+export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior)): void {
   let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
-  const _resolveBehavior = (msg: WorkerMsg_Manifest): IslandBehavior => {
-    if (behavior === null) behavior = (behaviorOrFactory as (m: WorkerMsg_Manifest) => IslandBehavior)(msg);
+  const _resolveBehavior = (msg: IslandMsg_Manifest): IslandBehavior => {
+    if (behavior === null) behavior = (behaviorOrFactory as (m: IslandMsg_Manifest) => IslandBehavior)(msg);
     return behavior;
   };
   if (!parentPort) {
-    throw new Error("[sovereign-worker] parentPort is null — must run as a Worker thread.");
+    throw new Error("[sovereign-island] parentPort is null — must run as a Worker thread.");
   }
   const _port = parentPort;
-  const _post = (msg: WorkerToMainMsg) => _port.postMessage(msg);
+  const _post = (msg: IslandToVesselMsg) => _port.postMessage(msg);
 
   const handler = new IslandKernel(_post);
 
@@ -117,7 +117,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       if (added.length > 0 || deleted.length > 0) {
         handler.applyDelta(_activeWikiUri, added, deleted);
       }
-      handler.sendChangesetAck(_activeWikiUri, crypto.randomUUID());
+      handler.sendFrameAck(_activeWikiUri, crypto.randomUUID());
     }, FRAME_MS);
     if (typeof _interval === "object" && _interval !== null && "unref" in _interval) {
       (_interval as { unref(): void }).unref();
@@ -149,7 +149,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   // ── Storage ───────────────────────────────────────────────────────────────
 
-  function _buildStorage(cfg: WorkerStorageConfig | undefined): StorageAdapterInterface | undefined {
+  function _buildStorage(cfg: IslandStorageConfig | undefined): StorageAdapterInterface | undefined {
     if (!cfg || cfg.type === "memory") return undefined;
     if (cfg.type === "nodefs") return new NodeFSStorageAdapter(cfg.dir);
     return undefined;
@@ -158,10 +158,10 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
   // ── Message dispatch ──────────────────────────────────────────────────────
 
   _port.on("message", (raw: unknown) => {
-    if (!isMainToWorkerMsg(raw)) return;
+    if (!isVesselToIslandMsg(raw)) return;
 
     if (raw.type === "manifest") {
-      void _handleManifest(raw as WorkerMsg_Manifest & { syncPort?: MessagePort });
+      void _handleManifest(raw as IslandMsg_Manifest & { syncPort?: MessagePort });
       return;
     }
 
@@ -176,7 +176,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
-  async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
+  async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
     const behavior = _resolveBehavior(msg);
 

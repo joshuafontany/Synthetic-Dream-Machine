@@ -206,7 +206,7 @@ Tier 2 — Automerge Realms (distinct Automerge docs)
   ALWAYS non-simultaneously apprehended by topology, not by policy.
   "automerge-realm" and "peer-sync-state" MAY be named causal islands for protocol tracking.
   NOTE: the session event-bus bag counts as a Tier 2 boundary — it names a distinct Automerge doc
-  shared across multiple wiki Worker Threads. The Session Wiki RE watching the event-bus bag
+  shared across multiple wiki island Workers. The Session Wiki RE watching the event-bus bag
   forms a Tier 2 crossing. This functions as the canonical cross-wiki coordination pattern (Scale-2 in
   the HUD meme: the-lararium-hud.md).
 

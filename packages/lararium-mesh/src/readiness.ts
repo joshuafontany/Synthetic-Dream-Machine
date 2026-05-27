@@ -7,7 +7,7 @@
  * Boot doctrine (FFZ web3, 2026-05-01):
  *
  *   auth         — identity/receipt confirmed
- *   sw-shell     — Service Worker controls page; app shell from SW cache
+ *   sw-shell     — Service island controls page; app shell from SW cache
  *   catalog      — CatalogDoc synced; wiki + corpus URLs known
  *   tw-vm        — primary wiki TW5 rendering VM kernel booted (C≈1 core rendering pool)
  *                  lights right after t.boot() — before wiki tiddlers hydrate

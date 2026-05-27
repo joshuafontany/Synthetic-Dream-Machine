@@ -1,14 +1,14 @@
 /**
- * browser-authority.ts — S1 worker authority contract for lararium-browser.
+ * browser-authority.ts — S1 island authority contract for lararium-browser.
  *
- * Defines the three types that govern a pooled browser worker authority:
- *   BrowserAuthorityId      — stable key for a worker authority in the pool
+ * Defines the three types that govern a pooled browser island authority:
+ *   BrowserAuthorityId      — stable key for an island authority in the pool
  *   BrowserAuthorityLease   — caller handle, returned by pool.acquire()
  *   BrowserAuthorityReceipt — structured acknowledgment of a completed worker op
  *   BrowserAuthorityPool    — pool contract (extends VmPool law; no DOM types)
  *
  * All types are platform-neutral. No HTMLElement, no window, no document.
- * The browser runtime in @lararium/browser holds the Worker spawn code.
+ * The browser runtime in @lararium/browser holds the island spawn code.
  *
  * Schema: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority
  */
@@ -34,12 +34,12 @@ export type BrowserAuthorityId = string;
 // ---------------------------------------------------------------------------
 
 /**
- * BrowserAuthorityPhase — monotonic boot sequence for a worker authority.
+ * BrowserAuthorityPhase — monotonic boot sequence for an island authority.
  *
- * Mirrors LarOpenPhase for the worker realm. Phase order is strictly forward.
+ * Mirrors LarOpenPhase for the island runtime realm. Phase order is strictly forward.
  */
 export type BrowserAuthorityPhase =
-  | "spawned"       // Worker created; boot message not yet sent
+  | "spawned"       // island created; boot message not yet sent
   | "booting"       // boot() message in-flight
   | "tw5-ready"     // TW5 core + plugin blobs loaded inside worker
   | "store-wired"   // Automerge store + CompositeStore resolved
@@ -47,16 +47,16 @@ export type BrowserAuthorityPhase =
   | "leased"        // Acquired by a caller; host frame may attach
   | "idle"          // Lease returned; authority warm in pool
   | "disposing"     // dispose() called; no new operations
-  | "disposed";     // Worker terminated; pool entry removed
+  | "disposed";     // island terminated; pool entry removed
 
 // ---------------------------------------------------------------------------
 // Boot inputs
 // ---------------------------------------------------------------------------
 
 /**
- * BrowserAuthorityBootParams — everything the worker needs to boot a TW5 authority.
+ * BrowserAuthorityBootParams — everything the island needs to boot a TW5 authority.
  *
- * Transferred or cloned across the Worker boundary. No DOM references.
+ * Transferred or cloned across the Web Worker boundary. No DOM references.
  */
 export interface BrowserAuthorityBootParams {
   /** lar: URI identifying this authority slot — becomes the wiki identity inside the worker. */
@@ -68,28 +68,28 @@ export interface BrowserAuthorityBootParams {
   /**
    * Plugin layer tiddlers (sigils, ahu, pranala, etc.) as deserialized tiddler objects.
    * Prerequisite for ea condition 3 — carried in the manifest so the island can think
-   * from first breath. When present, passed directly as WorkerMsg_Manifest.pluginTiddlers.
+   * from first breath. When present, passed directly as IslandMsg_Manifest.pluginTiddlers (island manifest).
    * Callers who hold pluginBlob as bytes must deserialize before constructing params.
    */
   pluginTiddlers?: readonly Record<string, unknown>[];
   /**
    * Ordered bag capability tokens for this wiki's content scope (system → draft).
    * Preferred over the deprecated `docUrl` + `bagStack` pair.
-   * When present, passed directly as WorkerMsg_Manifest.bagBindings.
+   * When present, passed directly as IslandMsg_Manifest.bagBindings (island manifest).
    */
   bagBindings?: readonly BagBinding[];
   /**
-   * @deprecated Use `bagBindings` instead.
+   * superseded Use `bagBindings` instead.
    * Bag stack for this wiki, ordered from system to draft.
    */
   bagStack?: readonly string[];
   /** Recipe URI that maps this authority's content scope. */
   recipeUri: string;
   /**
-   * @deprecated Use `bagBindings` instead.
-   * AutomergeUrl for the wiki doc. Passed as manifest docUrl so the Worker-side Repo
+   * superseded Use `bagBindings` instead.
+   * AutomergeUrl for the wiki doc. Passed as manifest docUrl so the island-side Repo
    * calls repo.find(docUrl).whenReady() instead of waiting for gossip sync.
-   * null = cold boot (Worker creates fresh doc, state arrives via sync channel).
+   * null = cold boot (island creates fresh doc, state arrives via sync channel).
    */
   docUrl?: string | null;
   /** Optional: pre-serialized Automerge doc snapshots for warm start. */
@@ -101,7 +101,7 @@ export interface BrowserAuthorityBootParams {
 // ---------------------------------------------------------------------------
 
 /**
- * BrowserAuthorityCapabilities — what a worker authority can do on behalf of a caller.
+ * BrowserAuthorityCapabilities — what an island authority can do on behalf of a caller.
  *
  * Not a permission gate — a declaration of available operations.
  * Callers check before requesting; absent flags mean the operation is not supported
@@ -145,13 +145,13 @@ export const BROWSER_AUTHORITY_CAPABILITIES_LIVE: BrowserAuthorityCapabilities =
 // ---------------------------------------------------------------------------
 
 /**
- * BrowserAuthorityLease — caller handle for a live worker authority.
+ * BrowserAuthorityLease — caller handle for a live island authority.
  *
  * Acquired from BrowserAuthorityPool.acquire(). Returned via release().
  * The pool decides whether the underlying authority stays warm or goes idle
  * after release; callers do not control worker lifecycle directly.
  *
- * All operations are async RPC across the Worker boundary.
+ * All operations are async RPC across the island boundary.
  * No DOM types appear on this interface.
  */
 export interface BrowserAuthorityLease {
@@ -204,7 +204,7 @@ export interface BrowserAuthorityLease {
 // ---------------------------------------------------------------------------
 
 /**
- * BrowserProjectionSnapshot — minimal render inputs crossing the Worker boundary.
+ * BrowserProjectionSnapshot — minimal render inputs crossing the island boundary.
  *
  * Structured-clone friendly. No live DOM nodes, no callbacks, no proxies.
  * The projection adapter in @lararium/browser translates this into DOM/canvas/HUD output.
@@ -236,7 +236,7 @@ export interface BrowserAuthorityDebugStats {
   bootDurationMs: number | null;
   lastLeaseAt: number | null;
   lastReleaseAt: number | null;
-  /** Approximate Worker heap usage in bytes, if available via performance.measureUserAgentSpecificMemory(). */
+  /** Approximate island heap usage in bytes, if available via performance.measureUserAgentSpecificMemory(). */
   heapBytes: number | null;
 }
 
@@ -303,7 +303,7 @@ export interface BrowserAuthorityPool {
 
   /**
    * Evict a specific authority from the pool.
-   * Exports snapshots for persistence before terminating the Worker.
+   * Exports snapshots for persistence before terminating the island.
    * Returns the snapshot export for the persistence layer to write to IndexedDB.
    */
   evict(id: BrowserAuthorityId): Promise<{
@@ -313,8 +313,8 @@ export interface BrowserAuthorityPool {
 
   /**
    * Dispose the entire pool.
-   * Evicts all warm and idle authorities; terminates all Workers.
-   * Awaitable — resolves when all Workers have terminated.
+   * Evicts all warm and idle authorities; terminates all islands.
+   * Awaitable — resolves when all islands have terminated.
    */
   disposeAll(): Promise<BrowserAuthorityReceipt[]>;
 

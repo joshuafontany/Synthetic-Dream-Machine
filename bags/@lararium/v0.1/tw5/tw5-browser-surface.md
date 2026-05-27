@@ -34,7 +34,7 @@ these types without an explicit entry in `deletion-map.md`.
 
 **What it does NOT own:**
 
-- Worker authority boot or lifecycle.
+- Island authority boot or lifecycle.
 - Automerge or sync state.
 - Any TW5Engine state beyond reading `engine.$tw`.
 - Any seam that crosses the worker boundary.

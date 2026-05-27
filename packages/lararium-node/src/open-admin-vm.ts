@@ -1,20 +1,20 @@
 /**
- * openAdminVm — spawn the sovereign admin Worker island.
+ * openAdminVm — spawn the sovereign admin island.
  *
- * The admin Worker holds its own TW5 VM (full recipe: @lararium + @lares + @admin),
- * its own Repo-in-Worker, its own CompositeStore (CRDT + volatile + projection),
+ * The admin island holds its own TW5 VM (full recipe: @lararium + @lares + @admin),
+ * its own Repo-in-island, its own CompositeStore (CRDT + volatile + projection),
  * and its own JobDispatcher subscribed to the TW5 wiki change event surface.
  *
- * Main-thread responsibilities retained here:
+ * Vessel responsibilities retained here:
  *   - `adminHandle`  — opened on the main Repo for keyhive event persistence and
  *                      gate-check reads (PERSON_GROUP, MESH_CABAL sentinel tiddlers).
  *   - `composite`    — single-layer admin CompositeStore for cap-event writes via
  *                      AdminEventStore and receipt writes from delegated jobs.
- *   - Delegation loop — listens for `admin:delegate-job` from Worker, runs main-thread
+ *   - Delegation loop — listens for `admin:delegate-job` from island, runs vessel
  *                      handler registry, returns `admin:job-result`.
  *
  * Boot ordering guarantee:
- *   `workerEa` resolves only after the admin Worker sends `ea` — TW5 live, all
+ *   `workerEa` resolves only after the admin island sends `ea` — TW5 live, all
  *   CRDT bags synced, drain loop running, JobDispatcher subscribed. `openNodeVessel`
  *   awaits `workerEa` before emitting `"live"`, enforcing the vessel ordering law:
  *   admin island must declare sovereignty before the vessel considers itself live.
@@ -31,7 +31,7 @@ import type { LarDoc }                                  from "@lararium/mesh";
 import {
   ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
   mkManifest, mkAdminPlaceJob, mkAdminJobResult,
-  isWorkerToMainMsg,
+  isIslandToVesselMsg,
   type BagBinding,
 } from "@lararium/mesh";
 import type { TW5CoreBootBlob }                         from "@lararium/tw5";
@@ -39,7 +39,7 @@ import { runLocalJob }                                  from "./job-local-dispat
 import type { VerbTable }                      from "./job-dispatcher.js";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
-import type { WorkerMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
+import type { IslandMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
@@ -48,11 +48,11 @@ export interface AdminVmOptions {
   repo:              Repo;
   adminUrl:          string;
   coreBlob:          TW5CoreBootBlob;
-  /** Ordered bag capability tokens for the admin Worker's full recipe. */
+  /** Ordered bag capability tokens for the admin island's full recipe. */
   bagBindings:       readonly BagBinding[];
-  /** Optional storage dir for the admin Worker's NodeFS Repo. */
+  /** Optional storage dir for the admin island's NodeFS Repo. */
   storageDir?:       string;
-  /** Override the admin Worker script URL (tests). */
+  /** Override the admin island script URL (tests). */
   workerScriptUrl?:  URL;
 }
 
@@ -65,25 +65,25 @@ export interface AdminVmResult {
    */
   composite:    CompositeStore;
   /**
-   * Resolves when the admin Worker has sent `ea` — TW5 live, bags synced,
+   * Resolves when the admin island has sent `ea` — TW5 live, bags synced,
    * drain loop running, JobDispatcher subscribed to the wiki change surface.
    * `openNodeVessel` MUST await this before emitting `"live"`.
    */
   workerEa:     Promise<void>;
   /**
-   * Wire the main-thread delegation registry and verifier.
+   * Wire the vessel delegation registry and verifier.
    * MUST be called before any job can be dispatched — call after keyhive boots,
    * before awaiting workerEa. Relay jobs that arrive without a configured registry
-   * are rejected with an error result back to the Worker.
+   * are rejected with an error result back to the island.
    */
   mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /**
-   * Place a volatile job tiddler in the admin Worker's TW5 wiki.
-   * Delegates to the admin Worker's internal `placeVmJob` via `admin:place-job` message.
-   * The wiki change event fires at the Worker's next tick; JobDispatcher dispatches it.
+   * Place a volatile job tiddler in the admin island's TW5 wiki.
+   * Delegates to the admin island's internal `placeVmJob` via `admin:place-job` message.
+   * The wiki change event fires at the island's next tick; JobDispatcher dispatches it.
    */
   placeJob:     (opts: import("./job-inbox-signal.js").JobPlacementRequest) => void;
-  /** Terminate the admin Worker and release the main-thread composite. */
+  /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
 
@@ -96,19 +96,19 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   let _delegationRegistry: VerbTable | null = null;
   let _verifier:      CapabilityVerifier | null  = null;
 
-  // ── Main-thread admin handle (keyhive + gate reads) ───────────────────────
+  // ── Vessel admin handle (keyhive + gate reads) ───────────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
     repo, adminUrl as AutomergeUrl,
     () => repo.create<LarDoc>(emptyLarDoc()),
   );
 
-  // ── Main-thread composite (cap-event + relay receipt writes) ──────────────
+  // ── Vessel composite (cap-event + relay receipt writes) ──────────────
   const composite = new CompositeStore();
   const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
   composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
   adminStore.markSyncComplete();
 
-  // ── Spawn admin Worker ────────────────────────────────────────────────────
+  // ── Spawn admin island ────────────────────────────────────────────────────
   const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
   const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
@@ -126,13 +126,13 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   });
 
   const eaTimer = setTimeout(
-    () => _eaReject(new Error("[openAdminVm] admin Worker ea timeout")),
+    () => _eaReject(new Error("[openAdminVm] admin island ea timeout")),
     HANDSHAKE_TIMEOUT_MS,
   );
 
-  // ── Relay loop + Worker message routing ───────────────────────────────────
+  // ── Relay loop + island message routing ───────────────────────────────────
   worker.on("message", (raw: unknown) => {
-    if (!isWorkerToMainMsg(raw)) return;
+    if (!isIslandToVesselMsg(raw)) return;
 
     if (raw.type === "ea") {
       clearTimeout(eaTimer);
@@ -142,7 +142,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
 
     if (raw.type === "fault") {
       clearTimeout(eaTimer);
-      _eaReject(new Error(`[openAdminVm] admin Worker fault: ${(raw as { error: string }).error}`));
+      _eaReject(new Error(`[openAdminVm] admin island fault: ${(raw as { error: string }).error}`));
       return;
     }
 
@@ -182,12 +182,12 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   });
 
   worker.on("error", (err) => {
-    console.error("[openAdminVm] admin Worker error:", err);
+    console.error("[openAdminVm] admin island error:", err);
     clearTimeout(eaTimer);
     _eaReject(err);
   });
 
-  // ── Deliver manifest to admin Worker ──────────────────────────────────────
+  // ── Deliver manifest to admin island ──────────────────────────────────────
   const storage = storageDir
     ? { type: "nodefs" as const, dir: join(storageDir, "admin") }
     : undefined;

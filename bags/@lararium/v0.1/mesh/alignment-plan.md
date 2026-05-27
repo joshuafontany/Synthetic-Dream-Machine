@@ -101,7 +101,7 @@ These rules apply to every new file and every dep addition in the monorepo.
 | New dep in `@lararium/tw5` | Must not reach into `@lararium/node` or `@lararium/browser`. |
 | New dep in `@lararium/node` | May reach into `@lararium/tw5` and `@lararium/mesh`. Not into `@lararium/browser`. |
 | New dep in `@lararium/browser` | May reach into `@lararium/tw5` and `@lararium/mesh`. Not into `@lararium/node`. |
-| New platform dep (IndexedDB, Worker, fs, piscina) | Stays in the platform package. Does not enter `@lararium/mesh` or `@lararium/tw5`. |
+| New platform dep (IndexedDB, island, fs, piscina) | Stays in the platform package. Does not enter `@lararium/mesh` or `@lararium/tw5`. |
 
 <<~/ahu >>
 

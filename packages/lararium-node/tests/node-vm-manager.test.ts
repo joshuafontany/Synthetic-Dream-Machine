@@ -1,15 +1,15 @@
 /**
  * vessel-island-pool.test.ts — VesselIslandPool lifecycle integration tests.
  *
- * Two fixture Workers:
- *   vm-manager-echo.mjs       — lightweight echo (no TW5, no Repo-in-Worker)
- *   repo-in-worker-echo.mjs   — Repo-in-Worker path; emits repo:synced + repo:change events
+ * Two fixture islands:
+ *   vm-manager-echo.mjs       — lightweight echo (no TW5, no Repo-in-island)
+ *   repo-in-island-echo.mjs   — Repo-in-island path; emits repo:synced + repo:change events
  *
  * Verifies:
- *   mountWiki   → Worker spawned, promote sent, slot becomes hot
+ *   mountWiki   → island spawned, promote sent, slot becomes hot
  *   unmountWiki → teardown handshake; slot becomes cold
- *   Repo-in-Worker → CRDT changes propagate via syncPort (no routeChangeset)
- *   event forwarding → onWorkerEvent callback fires for Worker events
+ *   Repo-in-island → CRDT changes propagate via syncPort (no routeChangeset)
+ *   event forwarding → onWorkerEvent callback fires for island events
  *
  * All tests run against the full VesselIslandPool (no mocking of internals).
  *
@@ -21,14 +21,14 @@ import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle } from "@automerge/automerge-repo";
 import type { MemeStoreDoc } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
-import type { WorkerMsg_Event } from "@lararium/mesh";
+import type { IslandMsg_Event } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
-// Fixture Worker URL
+// Fixture island URL
 // ---------------------------------------------------------------------------
 
 const FIXTURE_URL      = new URL("./fixtures/vm-manager-echo.mjs",      import.meta.url);
-const REPO_FIXTURE_URL = new URL("./fixtures/repo-in-worker-echo.mjs", import.meta.url);
+const REPO_FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
 
 // ---------------------------------------------------------------------------
 // Minimal DocHandle stub — no Automerge-repo required in tests
@@ -63,20 +63,20 @@ const WIKI_ID = "lar:///ha.ka.ba/@test/wiki";
 /** Nominal coreBlob stub — fixture worker ignores the bytes; type remains honest. */
 const STUB_CORE_BLOB = { bytes: new Uint8Array() } as const;
 
-/** Collect Worker events forwarded via onWorkerEvent. */
+/** Collect island events forwarded via onWorkerEvent. */
 function eventCollector(filter?: string): {
-  events: WorkerMsg_Event[];
-  callback: (wikiId: string, msg: WorkerMsg_Event) => void;
+  events: IslandMsg_Event[];
+  callback: (wikiId: string, msg: IslandMsg_Event) => void;
 } {
-  const events: WorkerMsg_Event[] = [];
+  const events: IslandMsg_Event[] = [];
   return {
     events,
     callback: (_wikiId, msg) => { if (!filter || msg.listenable === filter) events.push(msg); },
   };
 }
 
-/** Wait for the repo-in-worker-echo fixture to signal its change listener is live. */
-function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Promise<void> {
+/** Wait for the repo-in-island-echo fixture to signal its change listener is live. */
+function waitForSynced(all: { events: IslandMsg_Event[] }, timeoutMs = 5000): Promise<void> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const iv = setInterval(() => {
@@ -87,7 +87,7 @@ function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Pr
 }
 
 /** Wait until collector.events.length >= count. */
-function waitForEvents(collector: { events: WorkerMsg_Event[] }, count: number, timeoutMs = 3000): Promise<void> {
+function waitForEvents(collector: { events: IslandMsg_Event[] }, count: number, timeoutMs = 3000): Promise<void> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const iv = setInterval(() => {
@@ -101,7 +101,7 @@ function waitForEvents(collector: { events: WorkerMsg_Event[] }, count: number, 
 // Tests
 // ---------------------------------------------------------------------------
 
-describe("VesselIslandPool — Worker lifecycle", () => {
+describe("VesselIslandPool — island lifecycle", () => {
   let manager: VesselIslandPool | null = null;
   let repo:    Repo | null          = null;
 
@@ -132,9 +132,9 @@ describe("VesselIslandPool — Worker lifecycle", () => {
     expect(manager.tier(WIKI_ID)).toBe("hot");
   });
 
-  test("CRDT change on main-thread Repo propagates to Worker via syncPort", async () => {
+  test("CRDT change on vessel Repo propagates to island via syncPort", async () => {
     // Replaces the old routeChangeset delivery test.
-    // Proves the Repo-in-Worker path: doc change → MessageChannel → Worker repo:change event.
+    // Proves the Repo-in-island path: doc change → MessageChannel → island repo:change event.
     const all     = eventCollector();
     const changes = eventCollector("repo:change");
 
@@ -168,12 +168,12 @@ describe("VesselIslandPool — Worker lifecycle", () => {
     expect(manager.tier(WIKI_ID)).toBe("cold");
     const snap = manager.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
-    // Repo-in-Worker path: snapshot carries docBytes when exported; fixture sends heads-only snapshot.
+    // Repo-in-island path: snapshot carries docBytes when exported; fixture sends heads-only snapshot.
     expect(Array.isArray(snap!.heads)).toBe(true);
   });
 
-  test("onWorkerEvent callback fires for events from the Worker", async () => {
-    // Uses repo-in-worker-echo: drives a doc change → asserts repo:change event surfaces.
+  test("onWorkerEvent callback fires for events from the island", async () => {
+    // Uses repo-in-island-echo: drives a doc change → asserts repo:change event surfaces.
     const all     = eventCollector();
     const changes = eventCollector("repo:change");
 
@@ -208,8 +208,8 @@ describe("VesselIslandPool — Worker lifecycle", () => {
     expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
   });
 
-  test("re-mountWiki from cold slot — snapshot captured, re-mounted Worker live and responsive", async () => {
-    // Repo-in-Worker path: state restores via CRDT sync over syncPort, not tiddler injection.
+  test("re-mountWiki from cold slot — snapshot captured, re-mounted island live and responsive", async () => {
+    // Repo-in-island path: state restores via CRDT sync over syncPort, not tiddler injection.
     // Verifies: (a) unmount → cold snapshot exists, (b) re-mount → hot and responsive via CRDT.
     const all     = eventCollector();
     const changes = eventCollector("repo:change");
@@ -237,7 +237,7 @@ describe("VesselIslandPool — Worker lifecycle", () => {
     all.events.length = 0;
     changes.events.length = 0;
 
-    // Re-mount — fresh Worker, CRDT doc syncs via mainRepo again.
+    // Re-mount — fresh island, CRDT doc syncs via mainRepo again.
     await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
     expect(manager.tier(WIKI_ID)).toBe("hot");
 
@@ -263,7 +263,7 @@ describe("VesselIslandPool — Worker lifecycle", () => {
     expect(result).toMatchObject({ verb: "echo", echoed: true });
   });
 
-  test("placeWikiJob — rejects when Worker sends error in wiki:job-result", async () => {
+  test("placeWikiJob — rejects when island sends error in wiki:job-result", async () => {
     // We test this by mounting against a fixture that returns an error for unknown verbs.
     // The echo fixture echoes all verbs successfully, so we test the error path directly
     // via a timeout scenario by using a very short timeout — instead use a dedicated check:
@@ -276,6 +276,6 @@ describe("VesselIslandPool — Worker lifecycle", () => {
         args:        {},
         requestedBy: "test",
       }),
-    ).rejects.toThrow("no live Worker");
+    ).rejects.toThrow("no live island");
   });
 });
