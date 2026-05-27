@@ -29,9 +29,9 @@ class MockCancelable {
   }
 }
 
-// Simulate two live subscriptions registered by the Worker's RE.
+// Simulate two live subscriptions registered by the Worker's Repo.
 const liveSubscriptions = [
-  new MockCancelable("changeset-subscription"),
+  new MockCancelable("doc-handle"),
   new MockCancelable("session-event-bus"),
 ];
 

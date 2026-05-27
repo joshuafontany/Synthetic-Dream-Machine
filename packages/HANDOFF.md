@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-27 (turn 21)
+> Updated: 2026-05-27 (turn 22)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -48,15 +48,18 @@ JobHandlerRegistry→VerbTable; JobHandler→VerbReactor; create*Handler→make*
 NodeVmManager→VesselIslandPool; BrowserVmManager→BrowserVesselIslandPool;
 dead behaviors WikiBehavior/makeWikiDiskBehavior/makeWikiDispatchBehavior deleted;
 handleMessage() deleted from IslandKernel; GP-3 changeset branches deleted from
-fixtures; 55/55 tests) are treated as landed unless tests prove drift.
+fixtures; 55/55 tests), AND the GP-3 browser arc + coherence YIN sprint
+(browser-repo-in-worker.test.ts 2 tests pass — cold-boot + docUrl non-null
+federation seam; stale mode:"cold" BagBinding tests removed; teardown fixture
+names cleaned; worker-protocol.md meme updated with correct source-file +
+full contract; Worker Sovereignty Law §8 written; ROADMAP browser gate marked
+✅ Done; 194/194 tests) are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. GP-3 browser gate + deletion: delete GP-3 fallback in browser-wiki-worker.ts;
-   protocol layer cleanup; Worker Sovereignty Law §8.
-2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
-3. S9 / lararium-browser: browser vessel full boot — IndexedDB, WebCrypto keypair,
+1. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+2. S9 / lararium-browser: browser vessel full boot — IndexedDB, WebCrypto keypair,
    founding ceremony path in browser vessel, presence via broadcast().
-4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
 Remaining TOML in memetic-wikitext.tid: documentation data tables only (Path O).
@@ -69,6 +72,49 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-27 turn 22)
+
+### GP-3 browser arc + coherence YIN sprint
+
+**GP-3 browser gate: confirmed closed.** `browser-repo-in-worker.test.ts` (2 tests)
+was already passing: cold-boot path acquires without docUrl; docUrl non-null path
+resolves via `repo.find(docUrl)` and proves federation seam open. Browser
+`browser-wiki-worker.ts` carried no GP-3 fallback — built clean from S19.
+
+**Worker Sovereignty Law §8 written** in `island-protocol.ts` header. §8 covers
+both sides of the federation seam: main-thread wires `MessageChannelNetworkAdapter`
+before manifesting; Worker calls `repo.find(docUrl).whenReady()` before `ea`.
+Gate proof cited: `browser-repo-in-worker.test.ts` test 2.
+
+**Stale test cleanup:**
+- `island-protocol.test.ts`: removed `"cold BagBinding satisfies BagMode cold"` test
+  (BagMode cold deleted in OTP sprint). Updated `"mkManifest carries bagBindings"`
+  test to use two `relational` bindings. 49 node tests (was 50 — one stale deleted).
+
+**Fixture rename:** Both teardown fixtures had `"changeset-subscription"` mock
+subscription name reflecting the GP-3 oracle subscription. Renamed to `"doc-handle"`
+to reflect the Repo-in-Worker doc handle being simulated.
+
+**island-protocol.md meme written:** `worker-protocol.md` renamed to `island-protocol.md`
+(matching the source rename). `source-file` set to `island-protocol.ts`. Full `#contract`
+written: Worker Sovereignty Law (8 clauses), GP grade table, all current message types,
+all factories. `ea.md` pranala anchors + loulou references updated to new URI.
+
+**ROADMAP:** Browser gate row marked ✅ Done. GP-3 Deprecation Completion Arc
+section updated — all items cleared; `changeset:ack → frame:ack` rename deferred
+to future schema_version bump.
+
+**Coherence sweep (Explore agent):**
+- island-adaptor meme: MATCH (I-1 through I-8 all hold)
+- island-accumulator meme: MATCH (A-1 through A-5 all hold)
+- worker-protocol meme: WAS STALE → now fixed
+- voices meme: MATCH (mask layer spec accurate; correctly notes non-integration)
+
+**Metrics:** 194/194 tests pass (mesh 71, tw5 69, node 49, browser 5). All packages
+typecheck clean.
+
+---
 
 ## What Changed This Turn (2026-05-27 turn 21)
 

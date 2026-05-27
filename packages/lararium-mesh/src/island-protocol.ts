@@ -21,9 +21,15 @@
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
- *   8. When `docUrl` is non-null, the vessel MUST establish the Repo network adapter for that
- *      doc source before sending `manifest`. If sync does not reach ready state within
- *      HANDSHAKE_TIMEOUT_MS, the slot transitions to disposed.
+ *   8. Federation seam — when a `relational` BagBinding carries a non-empty `docUrl`, two obligations
+ *      activate. Main-thread: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
+ *      main-thread Repo before delivering `manifest`, so the CRDT graph reaches the Worker-side Repo
+ *      automatically. Worker-side: the island MUST call `repo.find(docUrl).whenReady()` and await
+ *      readiness before seeding TW5 and declaring `ea`. Failure on either side leaves the island
+ *      holding a disconnected doc; the slot MUST transition to disposed within HANDSHAKE_TIMEOUT_MS.
+ *      Gate proof: `browser-repo-in-worker.test.ts` test 2 ("docUrl non-null path resolves via repo.find").
+ *      When this law holds, two vessels sharing a bag converge without any explicit sync call —
+ *      the archipelago forms the moment the AutomergeUrl crosses the boundary.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.

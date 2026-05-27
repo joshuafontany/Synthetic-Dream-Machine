@@ -66,12 +66,6 @@ function collectUntil(
 // ── BagBinding shape (unit) ────────────────────────────────────────────────
 
 describe("BagBinding — capability token shape", () => {
-  test("cold BagBinding satisfies BagMode cold", () => {
-    const b: BagBinding = { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "cold" };
-    expect(b.mode).toBe("cold");
-    expect(b.writable).toBe(false);
-  });
-
   test("relational BagBinding carries docUrl capability token", () => {
     const b: BagBinding = {
       bagId: "lar:///bags/wiki/v0.1",
@@ -86,8 +80,8 @@ describe("BagBinding — capability token shape", () => {
   test("mkManifest carries bagBindings in message", () => {
     const { port2: syncPort } = new MessageChannel();
     const bindings: readonly BagBinding[] = [
-      { bagId: "lar:///bags/wiki/v0.1", writable: true, mode: "relational", docUrl: "automerge:xyz" },
-      { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "cold" },
+      { bagId: "lar:///bags/wiki/v0.1",  writable: true,  mode: "relational", docUrl: "automerge:xyz" },
+      { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "relational", docUrl: "automerge:abc" },
     ];
     const msg = mkManifest(
       "lar:///test",
@@ -99,7 +93,7 @@ describe("BagBinding — capability token shape", () => {
     syncPort.close();
     expect(msg.bagBindings).toHaveLength(2);
     expect(msg.bagBindings?.[0]?.mode).toBe("relational");
-    expect(msg.bagBindings?.[1]?.mode).toBe("cold");
+    expect(msg.bagBindings?.[1]?.mode).toBe("relational");
     expect(isMainToWorkerMsg(msg)).toBe(true);
   });
 

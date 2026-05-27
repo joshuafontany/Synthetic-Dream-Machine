@@ -22,7 +22,7 @@ class MockCancelable {
 }
 
 const liveSubscriptions = [
-  new MockCancelable("changeset-subscription"),
+  new MockCancelable("doc-handle"),
   new MockCancelable("session-event-bus"),
 ];
 

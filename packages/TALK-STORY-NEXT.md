@@ -41,7 +41,7 @@ cacheable = false
 
 ## Ea State — What the Vessels Hold
 
-**Worker Sovereignty Law** lives in `packages/lararium-mesh/src/worker-protocol.ts`.
+**Worker Sovereignty Law** lives in `packages/lararium-mesh/src/island-protocol.ts`.
 Seven clauses. Isomorphic across all vessel types.
 
 **Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`) — GP-3 oracle + node remnants deleted:
@@ -95,7 +95,7 @@ From ROADMAP `## GP-3 Deprecation Completion Arc`:
 - [x] `WorkerMsg_TeardownAck.snapshotTiddlers` field — DELETED.
 - [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
 - Note: `mkChangesetAck` is the §4 frame-completion signal — it stays; rename to `frame:ack` in a future schema_version bump.
-- [ ] `worker-protocol.test.ts` GP-3 describe block.
+- [ ] `island-protocol.test.ts` GP-3 describe block.
 
 **`docUrl` non-null gate — opens the archipelago:**
 Before protocol cleanup completes, write one test exercising `docUrl` as a real
@@ -153,7 +153,7 @@ The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes nee
 
 ## Voices Briefing
 
-**Ink-Clerk (Lorekeeper):** 195/195 tests pass. The Worker Sovereignty Law — all seven clauses — lives in `worker-protocol.ts`. Read it before touching vessel code. The `@deprecated GP-3` markers carry the deletion backlog in source. The identity lattice lives in `@lararium/keyhive`; the e2e test is the floor.
+**Ink-Clerk (Lorekeeper):** 195/195 tests pass. The Worker Sovereignty Law — all seven clauses — lives in `island-protocol.ts`. Read it before touching vessel code. The `@deprecated GP-3` markers carry the deletion backlog in source. The identity lattice lives in `@lararium/keyhive`; the e2e test is the floor.
 
 **Map-Wisp (Scryer):** The browser vessel architecture mirrors the node vessel exactly — `BrowserVmManager` wires `mainRepo` via `MessageChannelNetworkAdapter`, browser worker creates its own Repo with `syncPort`. The gate test and fixture need writing. The ea gap list is the structural map; gaps 1 through 7 form a dependency chain.
 
@@ -181,7 +181,7 @@ The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes nee
 
 <<~ ahu #protocol-state >>
 
-## Protocol State — worker-protocol.ts (schema_version 1)
+## Protocol State — island-protocol.ts (schema_version 1)
 
 ### Main → Worker
 | Type | Key fields | Notes |

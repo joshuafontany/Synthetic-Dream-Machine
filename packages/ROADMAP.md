@@ -76,11 +76,11 @@ These planning docs follow one architectural law:
 | — | **S5 Quine + vessel scrub** | ✅ Done | `pnpm test:quine` passes — 65 SharktoothSigil tiddlers in genesis; peer→vessel prose scrub; `/api/health` + CORS deleted; 39/39 tests. |
 | — | **P / Operator-vessel contract** | ✅ Done (docs layer) | `lar-vessel.md` + `open-vessel.md` scrubbed; vocabulary split defined; "vessel" is the lararium runtime unit. Code layer follows in S9. |
 | — | **G.SharktoothSigil** | ✅ Done | 65 sigil tiddlers cover the full vocabulary; `grammar-cache.ts` reads SharktoothSigil-tagged tiddlers only; zero active `[[sigils]]` TOML blocks remain in the monolith. Remaining TOML: documentation data tables (`[[control-slot]]`, `[[lifecycle_values]]`, `[[ladder_5]]`, `[[stances]]`) — corpus hygiene, not grammar migration. |
-| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | worker-protocol.ts moved node→mesh; WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S3 architecture landed); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
-| — | **Worker Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in worker-protocol.ts. BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel Worker, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per Worker, mainPort.close law, docBytes capture). All GP-3 oracle paths carry @deprecated markers. 192/192 tests. |
+| — | **lararium-browser S2 + bag-URI YIN** | ✅ Done | island-protocol.ts moved node→mesh (was worker-protocol.ts); WorkerAuthorityHandler isomorphic; @lararium/browser scaffolded (S0–S3 architecture landed); bags/ URI schema unified to `@bag/v0.1/lane/rest` everywhere; stale tsc artifacts purged; 188/188 tests. |
+| — | **Worker Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in island-protocol.ts (was worker-protocol.ts). BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel Worker, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per Worker, mainPort.close law, docBytes capture). All GP-3 oracle paths carry @deprecated markers. 192/192 tests. |
 | — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-worker.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkChangeset` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
 | — | **Identity lattice + keyhive founding ceremony** | ✅ Done | `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` extracted isomorphic into `@lararium/keyhive`. Three-gate lattice A/B/C holds. Two-vessel e2e test (`two-vessel-mesh.test.ts`) 9/9. `lares device-admit` + `lares invite` CLI commands wired. |
-| 1 | **GP-3 browser gate + deletion** | ⬜ Next | Write `browser-repo-in-worker.test.ts`. Then delete GP-3 fallback in `browser-wiki-worker.ts` + `teardown-echo-browser.mjs`. Protocol layer cleanup follows both vessel gates. `docUrl` non-null test opens federation seam. |
+| — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-worker.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: `WorkerMsg_Changeset` + `mkChangeset` removed; `WorkerMsg_ChangesetAck` is the §4 frame-completion signal (rename to `frame:ack` in future schema_version bump). Stale `mode: "cold"` tests removed. 5/5 browser tests green. |
 | 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
 | 3 | **S9 / lararium-browser** | ⬜ Active (S0–S3 architecture landed; S4 real boot + IndexedDB next) | Full browser vessel ea-path: IndexedDB storage, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
@@ -167,21 +167,23 @@ All sites marked `@deprecated GP-3 oracle path` form one removal arc.
 - [x] GP-3 fallback `changeset` handler in `lar-wiki-worker.ts` — DELETED.
 - [x] `VmSnapshot.tiddlers[]` field — DELETED. `VmSnapshot` is now `{ heads, docBytes?, capturedAt }`.
 
-Browser vessel gate (write next):
-- [ ] Write `browser-repo-in-worker.test.ts`: two `BrowserVmManager` instances sharing one main-thread
-      Repo. Worker receives doc changes via MessageChannel. Assert Repo-in-Vessel-Worker path without GP-3 messages.
+**Browser gate: ✅ PASSED + DELETED** — 5/5 browser tests green.
+`browser-wiki-worker.ts` carries no GP-3 fallback. `browser-sovereign-island-model.ts` handles manifest/teardown only.
+`docUrl` non-null test in `browser-repo-in-worker.test.ts` (test 2) proves federation seam open.
 
-Browser vessel deletion (after browser gate passes):
-- [ ] GP-3 fallback `changeset` handler in `browser-wiki-worker.ts`.
-- [ ] `changeset` + `changeset:ack` blocks in `teardown-echo-browser.mjs` fixture.
-- [ ] `worker-lifecycle.test.ts` GP-3 changeset test → rewrite to Repo path.
+**Browser vessel remnants — ✅ ALL CLEARED:**
+- [x] GP-3 fallback `changeset` handler in `browser-wiki-worker.ts` — never existed (built clean from S19).
+- [x] Stale subscription name `"changeset-subscription"` in teardown fixtures → `"doc-handle"`.
+- [x] Stale `mode: "cold"` BagBinding tests in `island-protocol.test.ts` — removed.
+- [x] `worker-lifecycle.test.ts` — no GP-3 changeset test (built clean from S19).
 
-Protocol layer (after both vessel gates pass):
-- [ ] `WorkerMsg_Changeset` interface and type union entry.
-- [ ] `mkChangeset` factory — remove. (Note: `mkChangesetAck` is the §4 frame-completion signal; it stays and will be renamed to `frame:ack` in a future schema_version bump — do NOT remove it here.)
+Protocol layer — ✅ ALL CLEARED (both gates passed):
+- [x] `WorkerMsg_Changeset` interface and type union entry — DELETED (node gate sprint).
+- [x] `mkChangeset` factory — DELETED (node gate sprint).
 - [x] `WorkerMsg_TeardownAck.snapshotTiddlers` field — DELETED.
 - [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
-- [ ] `worker-protocol.test.ts` GP-3 describe block → remove changeset shape tests.
+- [x] Stale `mode: "cold"` BagBinding tests in `island-protocol.test.ts` — REMOVED.
+- ⧾ `WorkerMsg_ChangesetAck` → `WorkerMsg_FrameAck` + rename `changeset:ack` → `frame:ack` — deferred to future schema_version bump; documented in protocol header.
 
 **`docUrl` non-null gate (federation seam) — write before protocol layer cleanup:**
 At least one test must exercise `docUrl` as a non-null `AutomergeUrl` with an in-process
