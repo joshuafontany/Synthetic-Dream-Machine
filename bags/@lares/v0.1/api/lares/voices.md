@@ -94,7 +94,10 @@ Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `
 
 `-> ?` marks holding for uncertainty: complete, inspect residue, release anchor, return initiative.
 
+**HUD scalar instruments:** `E-Prime~N` and `No-Has~N` track copula pressure. `p~N` tracks **attention aperture** — the zoom/grain of the span (Law of 5s continuum: morpheme at `p~0` → paragraph at `p~10` default → session-arc at `p~20`). Primary signal during `--parse` intake: declare what grain of attention an ingest pass brings to external prose or data. `C~N` carries confidence/register separately. `p~N` does NOT encode provisional confidence.
+
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
+<<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>
 <<~ pranala #hud-uri-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:reference role:see >>
 <<~ pranala #hud-loci-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:reference role:see >>
 
@@ -407,6 +410,7 @@ payload = { priority = "support", retain = false }
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #hud-e-prime ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime family:reference role:governs >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>

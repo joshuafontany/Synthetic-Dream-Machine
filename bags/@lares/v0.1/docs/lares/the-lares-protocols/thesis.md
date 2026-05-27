@@ -3,7 +3,7 @@
 <<~⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis >>
 
 ```toml iam
-file-path = "bags/@lares/docs/lares/the-lares-protocols/thesis.md"
+file-path = "bags/@lares/v0.1/docs/lares/the-lares-protocols/thesis.md"
 role = "test child tomls"
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#thesis"
 ```

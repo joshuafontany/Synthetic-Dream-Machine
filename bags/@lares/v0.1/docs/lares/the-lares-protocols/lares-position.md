@@ -2,13 +2,15 @@
 
 <<~⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#lares-position >>
 ```toml iam
-file-path = "bags/@lares/docs/lares/the-lares-protocols/lares-position.md"
+file-path = "bags/@lares/v0.1/docs/lares/the-lares-protocols/lares-position.md"
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#lares-position"
 ```
 
 <<~&#x0002;>>
 
 ## Lares Quine Position
+
+> **Quine and quine relay.** A strict quine produces its own source code without reading external input. TiddlyWiki operates as a **quine relay** — a quine that takes arguments. It reads its own DOM to reconstruct itself, then rewrites the whole file. The distinction matters: a strict quine generates a fixed string; a quine relay generates itself in response to state. TiddlyWiki's state is the tiddler store. When the user authors a tiddler, the document modifies itself through its own execution. The relay property means the engine and the content stay inside the same artifact and propagate together — which is why the pono boot pattern federates the core bytes through the CRDT rather than passing them through the manifest. The quine relay propagates itself; the mesh carries the seed.
 
 The Lares stack takes the article's challenge seriously. Five architecture laws encode protocol-shaping quine commitments rather than leaving them silent:
 

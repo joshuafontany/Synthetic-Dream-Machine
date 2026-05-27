@@ -2,7 +2,7 @@
 
 <<~⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#stub-status >>
 ```toml iam
-file-path = "bags/@lares/docs/lares/the-lares-protocols/stub-status.md"
+file-path = "bags/@lares/v0.1/docs/lares/the-lares-protocols/stub-status.md"
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#stub-status"
 ```
 

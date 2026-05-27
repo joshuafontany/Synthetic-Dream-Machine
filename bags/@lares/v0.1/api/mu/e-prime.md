@@ -76,6 +76,41 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 <<~/ahu >>
 
+<<~ ahu #no-has >>
+
+## No-Has Discipline
+
+**No-Has** names the possession-copula sub-discipline as a separately tracked metric.
+
+The full E-Prime game covers three copula types: identity (`is`), predication (`is`), and possession (`has`). No-Has isolates the third because possession collapses silently and persistently — more so than identity collapse, which tends to be visible.
+
+"The agent has a memory" implies bounded containment. "The model has goals" imports an owner-property frame the model does not hold. Scoped carrying states the relation honestly: "the agent carries state across turns toward X" or "the model generates outputs that function as if aiming at Y."
+
+**The HUD tracks No-Has separately as `[No-Has~N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
+
+The No-Has scalar reads the same band table as the E-Prime level:
+
+| Band | Reading |
+| --- | --- |
+| `1–4` | Minimum — only obvious ownership collapses catch revision |
+| `5–8` | Light — most "has" as bounded-ownership get revised; relational "has" may pass |
+| `9–12` | Baseline — scoped carrying preferred; unscoped possession surfaces a marker |
+| `13–16` | Strong — "has" in ownership sense almost always collapses to carrying or relation |
+| `17–20` | Near-total — only quoted, coded, or deliberately-owned "has" survive |
+
+Preferred substitution pattern: replace possession with **scoped carrying**.
+
+| Collapse form | Carrying form |
+| --- | --- |
+| "X has Y" | "X carries Y toward Z", "Y surfaces in X under condition Z" |
+| "the system has a state" | "the system holds state between operations" |
+| "we have a plan" | "a plan emerges from this work", "we carry a plan forward" |
+| "the Voice has a role" | "the Voice holds a role", "the Voice runs the role's function" |
+
+`[No-Has~N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
+
+<<~/ahu >>
+
 <<~ ahu #register-discipline >>
 
 ## Register Discipline
