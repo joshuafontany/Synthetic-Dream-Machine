@@ -42,7 +42,7 @@ import { waitHandleLocal }                              from "./repo-helpers.js"
 import type { WorkerMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-worker.js", import.meta.url);
+const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
 
 export interface AdminVmOptions {
   repo:              Repo;
@@ -76,13 +76,13 @@ export interface AdminVmResult {
    * before awaiting workerEa. Relay jobs that arrive without a configured registry
    * are rejected with an error result back to the Worker.
    */
-  configureDelegation: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
+  mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /**
    * Place a volatile job tiddler in the admin Worker's TW5 wiki.
    * Delegates to the admin Worker's internal `placeVmJob` via `admin:place-job` message.
    * The wiki change event fires at the Worker's next tick; JobDispatcher dispatches it.
    */
-  placeJob:     (opts: import("./job-inbox-relay.js").JobPlacementRequest) => void;
+  placeJob:     (opts: import("./job-inbox-signal.js").JobPlacementRequest) => void;
   /** Terminate the admin Worker and release the main-thread composite. */
   dispose:      () => void;
 }
@@ -92,7 +92,7 @@ const HANDSHAKE_TIMEOUT_MS = 15_000;
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
   const { repo, adminUrl, coreBlob, bagBindings, storageDir, workerScriptUrl } = opts;
 
-  // Mutable delegation config — set via configureDelegation() after keyhive boots.
+  // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
   let _delegationRegistry: VerbTable | null = null;
   let _verifier:      CapabilityVerifier | null  = null;
 
@@ -151,7 +151,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       if (!_delegationRegistry) {
         worker.postMessage(mkAdminJobResult({
           requestId: msg.requestId,
-          error: `[openAdminVm] delegate-job received before configureDelegation — verb="${msg.verb}" dropped`,
+          error: `[openAdminVm] delegate-job received before mountMainVerbs — verb="${msg.verb}" dropped`,
         }));
         return;
       }
@@ -206,7 +206,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     adminHandle,
     composite,
     workerEa,
-    configureDelegation: (registry: VerbTable, verifier?: CapabilityVerifier) => {
+    mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => {
       _delegationRegistry = registry;
       _verifier      = verifier ?? null;
     },

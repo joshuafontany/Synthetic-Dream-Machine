@@ -39,7 +39,7 @@ export * from "./bag-residency.js";
 export * from "./kumu-device.js";
 export * from "./browser-authority.js";
 export * from "./genesis-doc.js";
-export * from "./worker-protocol.js";
+export * from "./island-protocol.js";
 export * from "./social-seed.js";
 export { didKeyFromVerifyingKey, buildCeremonyTiddlers } from "./cold-boot-ceremony.js";
 export type { CeremonyTiddler } from "./cold-boot-ceremony.js";

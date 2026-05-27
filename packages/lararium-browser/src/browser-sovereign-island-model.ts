@@ -1,37 +1,31 @@
 /**
- * sovereign-worker-model — Node.js sovereign Worker lifecycle kernel.
+ * browser-sovereign-island-model — browser Web Worker sovereign lifecycle kernel.
  *
- * Implements the OTP gen_island behavior pattern for sovereign Worker islands:
- *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → drain → ea → demote
- *   - caller-supplied IslandBehavior: writeBagId + onEa / onSignal / onDemote
+ * Browser-platform parallel to sovereign-island-model.ts (Node). Identical
+ * structure; platform deltas:
+ *   - drain loop: requestAnimationFrame (setTimeout 16ms fallback for Safari)
+ *   - message I/O: self.postMessage / self.addEventListener
+ *   - storage: IndexedDBStorageAdapter
  *
- * ## Recipe law — sub-surface layers
- *
- * The model always appends three layers BELOW the caller's CRDT bags, idempotent:
+ * ## Recipe law — sub-surface layers (same as Node model)
  *
  *   bagBindings (CRDT, recipe order)
- *   └── draft CRDT (if present in bindings as BAG_IDS.draft)       ← syncs to peers
  *   └── scratch MemoryTiddlerStore  (defaultWritable:true)          ← local VM only
  *   └── projection MemoryTiddlerStore (defaultWritable:false)       ← $:/state/*
  *
- * `behavior.writeBagId` selects which bag IslandAdaptor routes TW5 outbound saves to:
- *   admin Worker → ADMIN_BAG_ID  (CRDT write-back, persisted)
- *   wiki Worker  → BAG_IDS.scratch  (local only, evaporates on teardown)
- *
  * ## VM Pool alignment
  *
- *   Node vessel: Admin Worker (sovereign island) + Pinned (PrimaryWiki in-process)
- *                + N hot Workers (session wikis, LRU-evicted to cold)
- *   Every hot Worker runs via runSovereignWorker(behavior).
+ *   Browser vessel: Admin Worker (sovereign island) + Pinned (primary wiki)
+ *                   + N hot Workers (session wikis, LRU-evicted to cold)
+ *   Every hot Worker runs via runBrowserSovereignWorker(behavior).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/sovereign-worker-model
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-sovereign-island-model
  */
 
-import { parentPort, MessagePort } from "worker_threads";
 import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle, AnyDocumentId, StorageAdapterInterface } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
-import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
+import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
 import { save as automergeSave } from "@automerge/automerge";
 import {
   CompositeStore,
@@ -52,9 +46,9 @@ import {
 import type { WorkerToMainMsg } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 
-// ── IslandBehavior — the OTP gen_island callback module ───────────────────
+// ── BrowserIslandBehavior — gen_island callback module (browser) ──────────
 
-export interface IslandContext {
+export interface BrowserIslandContext {
   wikiUri:   string;
   composite: CompositeStore;
   tw5:       TW5Engine;
@@ -63,69 +57,53 @@ export interface IslandContext {
   post:      (msg: WorkerToMainMsg) => void;
 }
 
-/**
- * Caller-supplied behavior module. Parallel to OTP's callback module passed to gen_island.
- *
- * - `writeBagId` — IslandAdaptor write target. Admin: ADMIN_BAG_ID. Wiki: BAG_IDS.scratch.
- * - `onEa`       — called after CompositeStore + IslandAdaptor wired, before ea declaration.
- * - `onSignal`   — called for every non-lifecycle message. Return true if handled.
- * - `onDemote`   — called before drain loop stops and docBytes export.
- */
-export interface IslandBehavior {
+export interface BrowserIslandBehavior {
   writeBagId: string;
-  onEa(ctx: IslandContext): void | Promise<void>;
-  onSignal(type: string, raw: unknown, ctx: IslandContext): boolean;
-  onDemote(ctx: IslandContext): void | Promise<void>;
+  onEa(ctx: BrowserIslandContext): void | Promise<void>;
+  onSignal(type: string, raw: unknown, ctx: BrowserIslandContext): boolean;
+  onDemote(ctx: BrowserIslandContext): void | Promise<void>;
 }
 
-// ── runSovereignWorker — the OTP gen_island kernel ────────────────────────
+// ── runBrowserSovereignWorker — the browser gen_island kernel ────────────
 
-export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifest: WorkerMsg_Manifest) => IslandBehavior)): void {
-  let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
-  const _resolveBehavior = (msg: WorkerMsg_Manifest): IslandBehavior => {
-    if (behavior === null) behavior = (behaviorOrFactory as (m: WorkerMsg_Manifest) => IslandBehavior)(msg);
-    return behavior;
-  };
-  if (!parentPort) {
-    throw new Error("[sovereign-worker] parentPort is null — must run as a Worker thread.");
-  }
-  const _port = parentPort;
-  const _post = (msg: WorkerToMainMsg) => _port.postMessage(msg);
-
+export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void {
+  const _post = (msg: WorkerToMainMsg) => self.postMessage(msg);
   const handler = new IslandKernel(_post);
 
-  let _repo:             Repo | null           = null;
+  let _repo:             Repo | null            = null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let _handles:          Map<string, DocHandle<any>> = new Map();
-  let _writableHandleId: string | null         = null;
-  let _composite:        CompositeStore | null = null;
-  let _ctx:              IslandContext | null  = null;
+  let _writableHandleId: string | null          = null;
+  let _composite:        CompositeStore | null  = null;
+  let _ctx:              BrowserIslandContext | null = null;
 
-  // ── Drain loop ────────────────────────────────────────────────────────────
+  // ── rAF drain loop ────────────────────────────────────────────────────────
+  // Safari does not ship requestAnimationFrame in DedicatedWorkerGlobalScope.
 
-  const FRAME_MS = 16;
   let _pendingAdded:   Record<string, unknown>[] = [];
   let _pendingDeleted: string[]                  = [];
-  let _interval:       ReturnType<typeof setInterval> | null = null;
-  let _activeWikiUri   = "";
+  let _rafScheduled                              = false;
+  let _tornDown                                  = false;
+  let _activeWikiUri                             = "";
 
-  function _startDrain(): void {
-    if (_interval !== null) return;
-    _interval = setInterval(() => {
+  const _scheduleFrame: (cb: () => void) => void =
+    typeof self.requestAnimationFrame === "function"
+      ? (cb) => self.requestAnimationFrame(cb)
+      : (cb) => setTimeout(cb, 16);
+
+  function _scheduleDrain(): void {
+    if (_rafScheduled || _tornDown) return;
+    _rafScheduled = true;
+    _scheduleFrame(() => {
+      _rafScheduled = false;
+      if (_tornDown) return;
       const added   = _pendingAdded.splice(0);
       const deleted = _pendingDeleted.splice(0);
       if (added.length > 0 || deleted.length > 0) {
         handler.applyDelta(_activeWikiUri, added, deleted);
       }
       handler.sendChangesetAck(_activeWikiUri, crypto.randomUUID());
-    }, FRAME_MS);
-    if (typeof _interval === "object" && _interval !== null && "unref" in _interval) {
-      (_interval as { unref(): void }).unref();
-    }
-  }
-
-  function _stopDrain(): void {
-    if (_interval !== null) { clearInterval(_interval); _interval = null; }
+    });
   }
 
   // ── Handle subscription ───────────────────────────────────────────────────
@@ -142,6 +120,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       if (delta.added.length > 0 || delta.deleted.length > 0) {
         _pendingAdded.push(...delta.added);
         _pendingDeleted.push(...delta.deleted);
+        _scheduleDrain();
       }
       void bagId;
     });
@@ -151,17 +130,18 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   function _buildStorage(cfg: WorkerStorageConfig | undefined): StorageAdapterInterface | undefined {
     if (!cfg || cfg.type === "memory") return undefined;
-    if (cfg.type === "nodefs") return new NodeFSStorageAdapter(cfg.dir);
+    if (cfg.type === "idb") return new IndexedDBStorageAdapter(cfg.dbName);
     return undefined;
   }
 
   // ── Message dispatch ──────────────────────────────────────────────────────
 
-  _port.on("message", (raw: unknown) => {
+  self.addEventListener("message", (e: MessageEvent) => {
+    const raw = e.data;
     if (!isMainToWorkerMsg(raw)) return;
 
     if (raw.type === "manifest") {
-      void _handleManifest(raw as WorkerMsg_Manifest & { syncPort?: MessagePort });
+      void _handleManifest(raw as WorkerMsg_Manifest);
       return;
     }
 
@@ -170,15 +150,13 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    // Delegate to behavior — admin handles admin:place-job, admin:job-result, etc.
-    if (_ctx && behavior && behavior.onSignal(raw.type, raw, _ctx)) return;
+    if (_ctx && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
   async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
-    const behavior = _resolveBehavior(msg);
 
     try {
       await handler.bootTw5(msg.wikiUri, msg.coreBlob, msg.pluginTiddlers);
@@ -189,7 +167,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     const storageAdapter = _buildStorage(msg.storage);
     _repo = new Repo({
       ...(storageAdapter ? { storage: storageAdapter } : {}),
-      network: [new MessageChannelNetworkAdapter(msg.syncPort as unknown as globalThis.MessagePort)],
+      network: [new MessageChannelNetworkAdapter(msg.syncPort)],
       sharePolicy: async () => true,
     });
 
@@ -215,6 +193,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       _composite.addLayer({ bagId, store, writable, defaultWritable: false });
     }
 
+    // Sub-surface layers — always present, below all CRDT bags.
     _composite.addLayer({
       bagId: BAG_IDS.scratch, store: new MemoryTiddlerStore(),
       writable: true, defaultWritable: true,
@@ -231,7 +210,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     const seed: Record<string, unknown>[] = [];
     for (const { handle } of ready) {
       const doc = handle.doc();
-      if (doc) seed.push(...allTiddlersFromDoc(doc as Record<string, unknown>));
+      if (doc) seed.push(...allTiddlersFromDoc(doc));
     }
     if (seed.length > 0) handler.applyDelta(msg.wikiUri, seed, []);
 
@@ -240,15 +219,14 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
     await behavior.onEa(_ctx);
 
-    _startDrain();
     handler.sendEa(msg.wikiUri);
   }
 
-  // ── Teardown (OTP terminate) ──────────────────────────────────────────────
+  // ── Demote (OTP terminate) ────────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    if (_ctx && behavior) await behavior.onDemote(_ctx);
-    _stopDrain();
+    _tornDown = true;
+    if (_ctx) await behavior.onDemote(_ctx);
     handler.teardown();
 
     let docBytes: Uint8Array | undefined;
@@ -256,7 +234,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       const h = _writableHandleId ? _handles.get(_writableHandleId) : undefined;
       const raw = h?.doc?.();
       if (raw) docBytes = automergeSave(raw as Parameters<typeof automergeSave>[0]);
-    } catch { /* export failed — teardown:ack fires without docBytes */ }
+    } catch { /* export failed */ }
 
     _handles.clear();
     _writableHandleId = null;
@@ -266,6 +244,6 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
     const ackOpts: { docBytes?: Uint8Array } = {};
     if (docBytes !== undefined) ackOpts.docBytes = docBytes;
-    _port.postMessage(mkTeardownAck(ackOpts));
+    self.postMessage(mkTeardownAck(ackOpts));
   }
 }

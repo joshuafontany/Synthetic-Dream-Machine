@@ -1,5 +1,5 @@
 /**
- * worker-protocol — GP-1 schema: discriminated union for all main ↔ wiki-Worker messages.
+ * island-protocol — GP-1 schema: discriminated union for all main ↔ wiki-Worker messages.
  *
  * Every message crossing the main-thread / wiki-Worker boundary MUST use this envelope.
  *
@@ -32,7 +32,7 @@
  * Platform-neutral: no Node `worker_threads` import, no browser `self` import.
  * Vessel entrypoints bind the I/O; this module names the envelopes only.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/worker-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol
  */
 
 export const WORKER_PROTOCOL_VERSION = 1 as const;

@@ -22,8 +22,8 @@ export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-ke
 
 export { JobDispatcher, VerbTable } from "./job-dispatcher.js";
 export type { VerbReactor, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
-export { relayJobInboxChange } from "./job-inbox-relay.js";
-export type { JobInboxRelayOptions, JobPlacementRequest } from "./job-inbox-relay.js";
+export { emitJobInboxSignal } from "./job-inbox-signal.js";
+export type { JobInboxRelayOptions, JobPlacementRequest } from "./job-inbox-signal.js";
 export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
 
 export { makeWhereReactor } from "./where-handler.js";

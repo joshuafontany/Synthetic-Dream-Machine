@@ -6,12 +6,12 @@
  *   Pinned  — PrimaryWiki + admin. Never evicted. Each pinned slot owns a long-lived
  *             Worker thread (same as hot slots, but immune to LRU eviction).
  *             Main thread holds no TW5Engine reference — all interaction via
- *             worker-protocol envelope (@lararium/mesh) only.
+ *             island-protocol envelope (@lararium/mesh) only.
  *
  *   Hot     — LRU of recently-active session wikis (max HOT_CAP slots).
  *             Each slot owns one `worker_threads.Worker`. TW5Engine + ReactionEngine
  *             run co-located inside the Worker thread.
- *             Main thread communicates via worker-protocol envelope only.
+ *             Main thread communicates via island-protocol envelope only.
  *
  *   Cold    — CRDT-only. VmSnapshot stores Automerge heads (+ optional docBytes)
  *             from the Worker's last teardown:ack. No thread, no engine.
@@ -78,7 +78,7 @@ type SlotTier = "pinned" | "hot" | "cold";
  * `pinned: false` → subject to LRU eviction when HOT_CAP is reached.
  *
  * In both cases the TW5Engine lives inside the Worker thread. The main thread
- * holds no engine reference and interacts only via worker-protocol envelopes.
+ * holds no engine reference and interacts only via island-protocol envelopes.
  */
 interface WorkerSlot {
   tier:       "pinned" | "hot";
@@ -126,7 +126,7 @@ export interface WikiBootContext {
 export interface VesselIslandPoolOptions {
   /**
    * URL of the compiled Worker entry script.
-   * Defaults to `lar-wiki-worker.js` in the same directory as this module.
+   * Defaults to `lar-wiki-island.js` in the same directory as this module.
    * Override in tests to use a fixture Worker.
    */
   workerScriptUrl?: URL;
@@ -157,7 +157,7 @@ export interface VesselIslandPoolOptions {
 const HOT_CAP = 4;
 
 // Resolves relative to this module's compiled location (dist/vessel-island-pool.js).
-const DEFAULT_WORKER_URL = new URL("./lar-wiki-worker.js", import.meta.url);
+const DEFAULT_WORKER_URL = new URL("./lar-wiki-island.js", import.meta.url);
 
 // Timeout for GP-5 teardown and ea handshakes.
 const HANDSHAKE_TIMEOUT_MS = 10_000;

@@ -53,8 +53,8 @@ import {
   JOB_URI_PREFIX,
 } from "@lararium/mesh";
 import { dispatchVmJobLifecycle, placeVmJob, type TW5Engine } from "@lararium/tw5";
-import { relayJobInboxChange } from "./job-inbox-relay.js";
-import type { JobPlacementRequest } from "./job-inbox-relay.js";
+import { emitJobInboxSignal } from "./job-inbox-signal.js";
+import type { JobPlacementRequest } from "./job-inbox-signal.js";
 import { runLocalJob } from "./job-local-dispatch.js";
 
 export interface JobContext {
@@ -93,11 +93,11 @@ export interface JobDispatcherOptions {
   readonly registry: VerbTable;
   readonly verifier?: CapabilityVerifier;
   /**
-   * Called when a verb is not in the local registry (cross-island relay).
-   * The admin Worker uses this to delegate wiki-scope jobs to the main thread.
+   * Called when a verb is not in the local registry (cross-island route).
+   * The admin island uses this to route wiki-scope jobs to the main-thread VerbTable.
    * If absent, unregistered verbs throw "no handler registered".
    */
-  readonly relayFn?: (job: JobTiddler) => Promise<Record<string, unknown>>;
+  readonly routeFn?: (job: JobTiddler) => Promise<Record<string, unknown>>;
 }
 
 export class JobDispatcher {
@@ -133,7 +133,7 @@ export class JobDispatcher {
                 ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
               });
             }
-            if (this.opts.relayFn) return this.opts.relayFn(job);
+            if (this.opts.routeFn) return this.opts.routeFn(job);
             return Promise.reject(new Error(`no handler registered for "${job.verb}"`));
           },
         ).catch((err) => {
@@ -148,7 +148,7 @@ export class JobDispatcher {
     // External vessels (CLI, browser, future device vessels) write here.
     // We translate to a volatile local job and tombstone the inbox tiddler.
     this.unsubAutomerge = this.opts.admin.subscribe((change) => {
-      relayJobInboxChange(change, {
+      emitJobInboxSignal(change, {
         admin: this.opts.admin,
         isInFlight: (requestId) => this.inFlight.has(requestId),
         placeJob: (job) => { this.placeJob(job); },

@@ -1,8 +1,8 @@
 /**
- * worker-behaviors — OTP callback modules for sovereign Worker types.
+ * island-behaviors — OTP callback modules for sovereign Worker types.
  *
  * Each export is an IslandBehavior: the domain-specific half of the OTP
- * gen_island pair. sovereign-worker-model.ts owns the lifecycle plumbing;
+ * gen_island pair. sovereign-island-model.ts owns the lifecycle plumbing;
  * behaviors own what distinguishes one Worker type from another.
  *
  * ## Wiki Worker — null behavior
@@ -26,7 +26,7 @@
  *   main thread via AdminMsg_DelegateJob / AdminMsg_JobResult.
  *   writeBagId = ADMIN_BAG_ID (CRDT write-back, persisted).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/worker-behaviors
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/island-behaviors
  */
 
 import {
@@ -46,7 +46,7 @@ import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
 import { makePromoteReactor } from "./promote-handler.js";
-import type { IslandBehavior, IslandContext } from "./sovereign-worker-model.js";
+import type { IslandBehavior, IslandContext } from "./sovereign-island-model.js";
 
 // ── Primary Wiki Worker behavior — disk projection + wiki dispatch ────────
 
@@ -140,7 +140,7 @@ export function makeAdminBehavior(): IslandBehavior {
     reject:  (err: Error) => void;
   }>();
 
-  function _delegateToMain(job: JobTiddler, post: IslandContext["post"]): Promise<Record<string, unknown>> {
+  function _routeToMain(job: JobTiddler, post: IslandContext["post"]): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
       _pendingDelegations.set(job.requestId, { resolve, reject });
       post(mkAdminDelegateJob({
@@ -163,7 +163,7 @@ export function makeAdminBehavior(): IslandBehavior {
         adminVm:  tw5,
         admin:    composite,
         registry,
-        relayFn:  (job) => _delegateToMain(job, post),
+        routeFn:  (job) => _routeToMain(job, post),
       });
       _dispatcher.start();
     },

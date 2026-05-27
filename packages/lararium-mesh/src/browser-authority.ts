@@ -14,7 +14,7 @@
  */
 
 import type { Heads } from "@automerge/automerge";
-import type { BagBinding } from "./worker-protocol.js";
+import type { BagBinding } from "./island-protocol.js";
 
 // ---------------------------------------------------------------------------
 // Identity

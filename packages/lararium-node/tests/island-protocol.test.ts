@@ -1,5 +1,5 @@
 /**
- * worker-protocol.test.ts — P.3 pre-work gate tests.
+ * island-protocol.test.ts — P.3 pre-work gate tests.
  *
  * Tests GP-1 through GP-5 from the structured-clone-gap ahu.
  * All tests must pass before the first LarariumWorker ships.
@@ -9,7 +9,7 @@
  * GP-3: Tiddler-level delta (integration — confirms added/deleted arrays cross the boundary)
  * GP-5: teardown handshake ordering (integration — cancel:confirmed before teardown:ack)
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/worker-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol
  */
 
 import { describe, test, expect, afterEach } from "vitest";

@@ -10,7 +10,7 @@ export interface JobInboxRelayOptions {
   readonly placeJob: (job: JobPlacementRequest) => void;
 }
 
-export async function relayJobInboxChange(
+export async function emitJobInboxSignal(
   change: LarTiddlerChange,
   opts: JobInboxRelayOptions,
 ): Promise<void> {

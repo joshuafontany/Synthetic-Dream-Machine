@@ -338,7 +338,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     source: coreBlobEntry.source ?? ENGINE_CORE_ID,
   };
 
-  // Admin VM — sovereign admin island. Spawns lar-admin-worker.ts; holds its own
+  // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
   // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + JobDispatcher.
   // Main thread retains adminHandle (keyhive gates) + composite (cap-event writes).
   // bagBindings deliver capability tokens for the admin Worker's full recipe.
@@ -593,9 +593,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Wire the delegation registry now that keyhive exists.
   // The admin Worker's JobDispatcher delegates unknown verbs to this registry via
-  // admin:delegate-job messages. configureDelegation must be called before workerEa resolves
+  // admin:delegate-job messages. mountMainVerbs must be called before workerEa resolves
   // to ensure no delegated jobs are dropped during the boot window.
-  adminVm.configureDelegation(jobRegistry, keyhive);
+  adminVm.mountMainVerbs(jobRegistry, keyhive);
 
   // Zelenka: keep oracle tiddlers current on every boot — self, ka, ba, social plane, admin.
   reconcileWellKnownTiddlers(
@@ -693,7 +693,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // Scratch layer — local-VM-only MemoryTiddlerStore. Receives session writes
   // that should never sync or persist: job staging, TW5 temp tiddlers.
   // defaultWritable:true so unbagged TW5 saves land here, not in the draft CRDT.
-  // Aligns with Worker sub-surface recipe law (sovereign-worker-model.ts).
+  // Aligns with Worker sub-surface recipe law (sovereign-island-model.ts).
   composite.addLayer({
     bagId:           BAG_IDS.scratch,
     store:           new MemoryTiddlerStore(),
