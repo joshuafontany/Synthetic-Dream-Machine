@@ -42,17 +42,14 @@ import {
   emptyLarDoc, mutableLarRecord, tiddlerText,
   LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  corpusLarUri, wikiLarUri, wikiDraftLarUri, BAG_IDS, recipeUri,
+  corpusLarUri, wikiLarUri, wikiDraftLarUri, BAG_IDS,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
-  VmPool, ENGINE_CORE_ID,
+  ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
 import type { LarTiddlerRecord } from "@lararium/mesh";
 import { toLarTiddlerRecord } from "@lararium/mesh";
-import type { MemeRecipeVm } from "@lararium/mesh";
 import {
   ACTIVE_WIKI_URI,
-  MountedWikiController,
-  TW5Engine,
   MemoryTiddlerStore,
   planActiveWikiSlot,
   selectActiveWikiSlug,
@@ -102,18 +99,10 @@ export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstra
 /** @see LarOpenPhase in @lararium/mesh */
 export type NodeOpenPhase = LarOpenPhase;
 
-export interface NodeVesselOptions extends LarariumVesselOptions<MemeRecipeVm, TW5Engine> {
+export interface NodeVesselOptions extends LarariumVesselOptions {
   storageDir: string;
   wss:        WebSocketServer;
   catalogUrl?: string | null;
-  /**
-   * Optional factory for the per-recipe VM.  Defaults to DirectMemeRecipeVm (same-thread).
-   * Pass a TW5WorkerProxy factory for Worker isolation (Sprint 6 node Worker isolation).
-   *
-   * @param recipeUri - The resolved recipe URI for the VM scope.
-   * @param tw5       - The booted TW5Engine for this vessel.
-   * @param bagStack  - Ordered bag stack for this recipe's tiddler view.
-   */
   /** Directory containing social-bootstrap.json. Defaults to the package's own genesis/. */
   genesisDir?: string;
   /** Repo root for wiki memes scan and all mirror paths. Defaults to monorepo root. */
@@ -121,8 +110,8 @@ export interface NodeVesselOptions extends LarariumVesselOptions<MemeRecipeVm, T
 }
 
 export interface NodeVesselResult extends LarariumVesselResult<
-  LarVessel<VmPool<MemeRecipeVm>>,
-  VmPool<MemeRecipeVm>,
+  LarVessel<NodeVmManager>,
+  NodeVmManager,
   Repo,
   CompositeStore
 > {
@@ -130,7 +119,6 @@ export interface NodeVesselResult extends LarariumVesselResult<
   activeWikiId:     string;
   /** Whether the mounted wiki came from CLI boot args or the admin marker. */
   activeWikiSource: "boot-arg" | "admin-marker";
-  tw5:              TW5Engine;
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz. */
   eventBus:         LarEventBusImpl;
   /** Three-tier VM lifecycle manager — PrimaryWiki pinned, hot LRU, cold snapshots. */
@@ -149,7 +137,7 @@ const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
   () => repo.create<LarDoc>(emptyLarDoc());
 
 export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesselResult> {
-  const { hostId, wikiId, storageDir, wss, catalogUrl, recipeUri: recipeUriOpt, onPhase, vmFactory, genesisDir, rootDir: rootDirOpt } = opts;
+  const { hostId, wikiId, storageDir, wss, catalogUrl, onPhase, genesisDir, rootDir: rootDirOpt } = opts;
   const bootstrapPath = join(genesisDir ?? DEFAULT_GENESIS_DIR, "social-bootstrap.json");
   const emit = (p: NodeOpenPhase) => onPhase?.(p);
 
@@ -380,8 +368,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // Main-thread relay registry — wiki-scope job handlers whose closure dependencies
   // live on the main thread (repo, catalogHandle, residency, primary composite).
   // The admin Worker's JobDispatcher relays unknown verbs here via admin:relay-job.
-  // tw5 and vmManager are assigned after boot below; thunks are safe because
-  // relay jobs only execute after the daemon emits "live".
+  // vmManager is assigned after Worker boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new JobHandlerRegistry();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
   jobRegistry.register("echo", async (args) => ({ echoed: args }));
@@ -392,7 +379,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("list-wikis", createListWikisHandler({ composite }));
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
-  let tw5: TW5Engine;
   let vmManager: NodeVmManager;
   // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki Worker.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
@@ -727,7 +713,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // ── 6. LarVessel ────────────────────────────────────────────────────────────
   wikiStore.markSyncComplete();
-  const vessel = new LarVessel<VmPool<MemeRecipeVm>>({
+  const vessel = new LarVessel<NodeVmManager>({
     vesselId:     activeWikiPlan.vesselId,
     store:        composite,
     capabilities: LAR_VESSEL_CAPABILITIES_NODE,
@@ -735,43 +721,17 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   });
   emit("vessel-ready");
 
-  // ── 7. TW5Engine ──────────────────────────────────────────────────────────
-  // TW5 owns the mounted-session composition. The vessel only supplies
-  // opened stores, core blob, and the local tick driver.
-  const resolvedRecipeUri = recipeUriOpt ?? recipeUri("@lararium", "default");
-  const mountedWiki = new MountedWikiController(composite);
-  const mountedSession = await mountedWiki.mount({
-    plan: activeWikiPlan,
-    wikiStore,
-    draftStore,
-    recipeUri: resolvedRecipeUri,
-    coreBlob,
-    blobs,
-    bootstrapPlugin,
-    vmFactory,
-    driver: {
-      start(flush): () => void {
-        const tickHandle = setInterval(() => {
-          flush();
-        }, 16);
-        return () => clearInterval(tickHandle);
-      },
-    },
-  });
-  tw5 = mountedSession.engine;
-  emit("tw5-booted");
-
-  // ── 7a. Event bus — ingress rings + tick loop ────────────────────────────
-  // Constructed before NodeVmManager so onWorkerEvent can enqueue to vm-ring.
+  // ── 7. Event bus ─────────────────────────────────────────────────────────
   const eventBus = new LarEventBusImpl(20);
   for (const ring of DEFAULT_RINGS) eventBus.registerRing(ring);
   eventBus.start();
 
-  // P.2 — NodeVmManager. Hot/pinned Worker slots for session wikis.
-  // onWorkerEvent routes RE reactions from hot-tier Workers into the vm-ring.
-  // TODO(task-7): mountPrimaryWorker(activeWikiId, ctx) once MountedWikiController
-  //   moves to a Worker. Until then the primary wiki runs in-process via MountedWikiController.
+  // ── 7a. NodeVmManager — sovereign Worker pool ─────────────────────────────
+  // Primary wiki runs in a pinned Worker (makeWikiPrimaryBehavior).
+  // Hot LRU Workers host session wikis. All VM state lives in Workers.
   vmManager = new NodeVmManager({
+    mainRepo:      repo,
+    storageRoot:   storageDir,
     onWorkerEvent: (wikiId, msg) => {
       eventBus.enqueueToRing("vm-ring", "worker.event", {
         wikiId,
@@ -781,15 +741,27 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     },
   });
 
-  // ── 8. Corpus bags — await after TW5 boots ────────────────────────────────
+  // ── 8. Corpus bags — await before mounting primary Worker ─────────────────
   await corpusReadyP;
   emit("corpus-ready");
 
-  // ── 9. VM island bridge — causal-island ↔ TW5 wiki bridge ─────────────────
-  // bridge.adaptor still wires the in-process composite until task-7 Worker migration.
+  // ── 9. Primary wiki Worker ────────────────────────────────────────────────
+  // Build disk mirror configs — @lares + @lararium corpus bags only.
+  // Worker reconstructs BagMirrorConfig via namedBagMirror(bagId, scope, mirrorRoot).
+  const workerRootDir = rootDirOpt ?? repoRoot;
+  const diskMirrors: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
+    { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
+    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
+  ];
+  await vmManager.mountPrimaryWorker(activeWikiId, {
+    docHandle: wikiHandle,
+    coreBlob,
+    diskMirrors,
+  });
+  emit("tw5-booted");
 
-  // ── 10. VmPool ────────────────────────────────────────────────────────────
-  vessel.attachVmPool(mountedSession.pool);
+  // ── 10. VmPool — vmManager IS the pool ────────────────────────────────────
+  vessel.attachVmPool(vmManager);
 
   // Admin Worker ea gate — vessel is not live until the admin island declares
   // sovereignty. The admin Worker holds the TW5 job event surface; jobs cannot
@@ -800,7 +772,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   return {
     activeWikiId,
     activeWikiSource,
-    vessel, tw5, pool: mountedSession.pool, repo, eventBus,
+    vessel, pool: vmManager, repo, eventBus,
     store: composite,
     vmManager,
     admin: adminVm,
@@ -808,9 +780,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     catalogHandleUrl: catalogHandle.url,
     larariumDocUrl: islandHandle?.url ?? null,
     phase: "live",
-    stopTick: () => {
-      mountedWiki.stop();
-    },
+    stopTick: () => { void vmManager.disposeAll(); },
   };
 }
 

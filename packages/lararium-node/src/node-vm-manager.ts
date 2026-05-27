@@ -111,6 +111,12 @@ export interface WikiBootContext {
   preloadedTiddlers?: Array<Record<string, unknown>>;
   /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
   coreBlob: TW5CoreBootBlob;
+  /**
+   * Disk mirror configs for Worker-owned disk projection (Sprint 9).
+   * Each entry maps a bag to a mirrorRoot dir + scope for namedBagMirror reconstruction.
+   * Only pass for primary Workers with disk write-back responsibility.
+   */
+  diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
 // ---------------------------------------------------------------------------
@@ -381,7 +387,8 @@ export class NodeVmManager {
       {
         ...(pluginTiddlers ? { pluginTiddlers } : {}),
         bagBindings,
-        ...(storage ? { storage } : {}),
+        ...(storage      ? { storage      } : {}),
+        ...(ctx.diskMirrors?.length ? { diskMirrors: ctx.diskMirrors } : {}),
       },
     );
     await _sendAndAwait<WorkerMsg_Ea>(

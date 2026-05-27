@@ -31,60 +31,14 @@ import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { openNodeVessel }               from "./open-node-vessel.js";
 import { join } from "path";
-import { makeDiskProjectionKind }        from "./projection-kinds.js";
 import { REPO_ROOT }   from "./node-host.js";
-import {
-  LarProjectionRegistry,
-  LARES_DOC_URI, LARARIUM_DOC_URI,
-} from "@lararium/mesh";
-import type { CompositeStore }               from "@lararium/mesh";
-import { exportMemeText }                    from "@lararium/tw5";
-import { namedBagPath, wikiBagPath } from "./bag-paths.js";
-import type { BagMirrorConfig } from "./bag-paths.js";
-
-const WIKI_ORACLE_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
-
-/**
- * Build bag-mirror configs from the named-bag layout.
- *
- * Static bags (lares, lararium) derive their mirror paths from scope alone —
- * no oracle fields needed. Wiki bags are discovered by scanning visible
- * tiddlers for the wiki oracle prefix; each wiki name mirrors under `wikis/@<slug>`.
- */
-async function buildBagMirrors(
-  composite: CompositeStore,
-  rootDir: string,
-): Promise<BagMirrorConfig[]> {
-  const mirrors: BagMirrorConfig[] = [
-    { bagId: LARES_DOC_URI,    mirrorRoot: join(rootDir, "bags/@lares/v0.1"),    toRelPath: namedBagPath("@lares") },
-    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(rootDir, "bags/@lararium/v0.1"), toRelPath: namedBagPath("@lararium") },
-  ];
-
-  // Wiki bags — discovered from well-known oracle URI prefix.
-  const allTitles = await composite.listVisible();
-  const wikiPath  = wikiBagPath();
-  for (const title of allTitles) {
-    if (!title.startsWith(WIKI_ORACLE_PREFIX)) continue;
-    if (title.includes("/drafts/"))           continue;
-    const wikiName = title.slice(WIKI_ORACLE_PREFIX.length);
-    if (!wikiName || wikiName.includes("/"))  continue;
-    mirrors.push({
-      bagId:      title,
-      mirrorRoot: join(rootDir, "wikis", `@${wikiName}`),
-      toRelPath:  wikiPath,
-    });
-  }
-
-  console.log(`[lararium] ${mirrors.length} bag-mirror config(s)`);
-  return mirrors;
-}
 
 
 // ---------------------------------------------------------------------------
 // CLI / env config
 // ---------------------------------------------------------------------------
 
-function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null; debugJson: boolean } {
+function parseArgs(): { port: number; storageDir: string; genesisDir: string; wikiId: string; rootDir: string; catalogUrl: string | null } {
   const args = process.argv.slice(2);
   const get  = (flag: string, env: string, fallback: string) => {
     const i = args.indexOf(flag);
@@ -100,7 +54,6 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     wikiId:     get("--wiki", "LAR_WIKI", "altar-fire"),
     rootDir,
     catalogUrl: process.env["LAR_CATALOG"] ?? null,
-    debugJson:  args.includes("--debug") || process.env["LAR_DEBUG_JSON"] === "1",
   };
 }
 
@@ -109,7 +62,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
-  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, debugJson } = parseArgs();
+  const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl } = parseArgs();
 
   // WS server — path-scoped to /ws only. Non-WS requests get no handler (socket destroyed
   // by the upgrade gate below). No HTTP surface — catalog URL advertised via stdout.
@@ -141,28 +94,6 @@ async function main(): Promise<void> {
       console.log(`[lararium] phase → ${phase}`);
     },
   });
-  const { vessel, tw5 } = result;
-
-  // Projection registry — declarative wiring for system projections.
-  // Configs are programmatic here; migrate to admin-wiki tiddlers tagged
-  // lar:///ha.ka.ba/tags/lararium-projection once the admin VM lands (S5.6).
-  const projections = new LarProjectionRegistry();
-
-  // TODO: ReactionEngine not yet implemented in @lararium/mesh. Re-register
-  // the "reaction" kind once it lands; current ReactionGraph maintenance is a
-  // no-op here.
-
-  const mirrors = await buildBagMirrors(result.store, rootDir);
-
-  projections.registerKind("disk", makeDiskProjectionKind({
-    mirrors,
-    tw5,
-    renderFn: async (uri) => { try { return exportMemeText(tw5, uri); } catch { return null; } },
-    debugJson,
-  }));
-
-  await projections.enable({ id: "disk", kind: "disk", enabled: true, fields: {} }, vessel);
-
   if (result.activeWikiSource === "admin-marker" && result.activeWikiId !== wikiId) {
     console.log(`[lararium] active wiki marker: ${wikiId} → ${result.activeWikiId}`);
   }

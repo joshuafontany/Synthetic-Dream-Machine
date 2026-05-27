@@ -80,7 +80,12 @@ export interface WorkerBehavior {
 
 // ── runSovereignWorker — the OTP gen_server ───────────────────────────────
 
-export function runSovereignWorker(behavior: WorkerBehavior): void {
+export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifest: WorkerMsg_Manifest) => WorkerBehavior)): void {
+  let behavior: WorkerBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
+  const _resolveBehavior = (msg: WorkerMsg_Manifest): WorkerBehavior => {
+    if (behavior === null) behavior = (behaviorOrFactory as (m: WorkerMsg_Manifest) => WorkerBehavior)(msg);
+    return behavior;
+  };
   if (!parentPort) {
     throw new Error("[sovereign-worker] parentPort is null — must run as a Worker thread.");
   }
@@ -166,13 +171,14 @@ export function runSovereignWorker(behavior: WorkerBehavior): void {
     }
 
     // Delegate to behavior — admin handles admin:place-job, admin:job-result, etc.
-    if (_ctx && behavior.onMessage(raw.type, raw, _ctx)) return;
+    if (_ctx && behavior && behavior.onMessage(raw.type, raw, _ctx)) return;
   });
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
   async function _handleManifest(msg: WorkerMsg_Manifest & { syncPort?: MessagePort }): Promise<void> {
     _activeWikiUri = msg.wikiUri;
+    const behavior = _resolveBehavior(msg);
 
     try {
       await handler.bootTw5(msg.wikiUri, msg.coreBlob, msg.pluginTiddlers);
@@ -278,7 +284,7 @@ export function runSovereignWorker(behavior: WorkerBehavior): void {
   // ── Teardown (OTP terminate) ──────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    if (_ctx) await behavior.onTeardown(_ctx);
+    if (_ctx && behavior) await behavior.onTeardown(_ctx);
     _stopDrain();
     handler.teardown();
 
