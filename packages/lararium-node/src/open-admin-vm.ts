@@ -9,8 +9,8 @@
  *   - `adminHandle`  — opened on the main Repo for keyhive event persistence and
  *                      gate-check reads (PERSON_GROUP, MESH_CABAL sentinel tiddlers).
  *   - `composite`    — single-layer admin CompositeStore for cap-event writes via
- *                      AdminEventStore and receipt writes from relay-executed jobs.
- *   - Relay loop     — listens for `admin:relay-job` from Worker, runs main-thread
+ *                      AdminEventStore and receipt writes from delegated jobs.
+ *   - Delegation loop — listens for `admin:delegate-job` from Worker, runs main-thread
  *                      handler registry, returns `admin:job-result`.
  *
  * Boot ordering guarantee:
@@ -39,7 +39,7 @@ import { runLocalJob }                                  from "./job-local-dispat
 import type { JobHandlerRegistry }                      from "./job-dispatcher.js";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
-import type { WorkerMsg_Ea, AdminMsg_RelayJob }         from "@lararium/mesh";
+import type { WorkerMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-worker.js", import.meta.url);
@@ -71,12 +71,12 @@ export interface AdminVmResult {
    */
   workerEa:     Promise<void>;
   /**
-   * Wire the main-thread relay registry and verifier.
+   * Wire the main-thread delegation registry and verifier.
    * MUST be called before any job can be dispatched — call after keyhive boots,
    * before awaiting workerEa. Relay jobs that arrive without a configured registry
    * are rejected with an error result back to the Worker.
    */
-  configureRelay: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => void;
+  configureDelegation: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => void;
   /**
    * Place a volatile job tiddler in the admin Worker's TW5 wiki.
    * Delegates to the admin Worker's internal `placeVmJob` via `admin:place-job` message.
@@ -92,8 +92,8 @@ const HANDSHAKE_TIMEOUT_MS = 15_000;
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
   const { repo, adminUrl, coreBlob, bagBindings, storageDir, workerScriptUrl } = opts;
 
-  // Mutable relay config — set via configureRelay() after keyhive boots.
-  let _relayRegistry: JobHandlerRegistry | null = null;
+  // Mutable delegation config — set via configureDelegation() after keyhive boots.
+  let _delegationRegistry: JobHandlerRegistry | null = null;
   let _verifier:      CapabilityVerifier | null  = null;
 
   // ── Main-thread admin handle (keyhive + gate reads) ───────────────────────
@@ -146,18 +146,18 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       return;
     }
 
-    if (raw.type === "admin:relay-job") {
-      const msg = raw as AdminMsg_RelayJob;
-      if (!_relayRegistry) {
+    if (raw.type === "admin:delegate-job") {
+      const msg = raw as AdminMsg_DelegateJob;
+      if (!_delegationRegistry) {
         worker.postMessage(mkAdminJobResult({
           requestId: msg.requestId,
-          error: `[openAdminVm] relay-job received before configureRelay — verb="${msg.verb}" dropped`,
+          error: `[openAdminVm] delegate-job received before configureDelegation — verb="${msg.verb}" dropped`,
         }));
         return;
       }
       // Build a minimal JobTiddler-like object for runLocalJob.
       const jobLike = {
-        title:       `${ADMIN_BAG_ID}/relay/${msg.requestId}`,
+        title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
         requestId:   msg.requestId,
         verb:        msg.verb,
         args:        msg.args,
@@ -169,7 +169,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       };
       runLocalJob(jobLike, {
         admin:    composite,
-        registry: _relayRegistry,
+        registry: _delegationRegistry,
         ...(_verifier ? { verifier: _verifier } : {}),
       }).then((result) => {
         worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result }));
@@ -206,8 +206,8 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     adminHandle,
     composite,
     workerEa,
-    configureRelay: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => {
-      _relayRegistry = registry;
+    configureDelegation: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => {
+      _delegationRegistry = registry;
       _verifier      = verifier ?? null;
     },
     placeJob: (jobOpts) => {

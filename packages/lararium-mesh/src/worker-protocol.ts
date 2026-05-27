@@ -164,13 +164,13 @@ export interface WorkerMsg_Teardown {
 // Three-message round-trip for admin island job coordination.
 //
 // Main → Worker: AdminMsg_PlaceJob  — place a volatile job tiddler in the admin TW5 wiki.
-// Worker → Main: AdminMsg_RelayJob  — relay a wiki-scope job whose handler lives on main.
-// Main → Worker: AdminMsg_JobResult — deliver relay result or error back to Worker.
+// Worker → Main: AdminMsg_DelegateJob — delegate a wiki-scope job whose handler lives on main.
+// Main → Worker: AdminMsg_JobResult  — deliver delegation result or error back to Worker.
 //
 // The admin Worker owns the TW5 wiki event surface (kumu device law).
 // All jobs pass through the admin wiki change event → JobDispatcher tick.
 // Wiki-scope handlers that need main-thread resources (repo, catalogHandle, etc.)
-// relay via AdminMsg_RelayJob; the Worker awaits AdminMsg_JobResult before writing receipt.
+// delegate via AdminMsg_DelegateJob; the Worker awaits AdminMsg_JobResult before writing receipt.
 
 /** Main → Worker: place a volatile job tiddler in the admin island's TW5 wiki. */
 export interface AdminMsg_PlaceJob {
@@ -185,13 +185,13 @@ export interface AdminMsg_PlaceJob {
 }
 
 /**
- * Worker → Main: relay a wiki-scope job to the main-thread handler registry.
+ * Worker → Main: delegate a wiki-scope job to the main-thread handler registry.
  * Emitted when the admin Worker's JobDispatcher encounters a verb not in its local registry.
  * Main executes the handler and posts AdminMsg_JobResult back.
  */
-export interface AdminMsg_RelayJob {
+export interface AdminMsg_DelegateJob {
   schema_version: ProtocolVersion;
-  type: "admin:relay-job";
+  type: "admin:delegate-job";
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
@@ -200,7 +200,7 @@ export interface AdminMsg_RelayJob {
   batchMode?: string;
 }
 
-/** Main → Worker: relay result or error. Admin Worker resolves the in-flight relay promise. */
+/** Main → Worker: delegation result or error. Admin Worker resolves the in-flight delegation promise. */
 export interface AdminMsg_JobResult {
   schema_version: ProtocolVersion;
   type: "admin:job-result";
@@ -326,7 +326,7 @@ export type WorkerToMainMsg =
   | WorkerMsg_ChangesetAck
   | WorkerMsg_Fault
   | WikiMsg_JobResult
-  | AdminMsg_RelayJob;
+  | AdminMsg_DelegateJob;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -348,7 +348,7 @@ export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
 
 export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "wiki:job-result", "admin:relay-job"] as const).includes(
+  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "wiki:job-result", "admin:delegate-job"] as const).includes(
     v.type as WorkerToMainMsg["type"],
   );
 }
@@ -442,17 +442,17 @@ export function mkAdminPlaceJob(opts: {
   return msg;
 }
 
-export function mkAdminRelayJob(opts: {
+export function mkAdminDelegateJob(opts: {
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
   targets?: string[];
   batchMode?: string;
-}): AdminMsg_RelayJob {
-  const msg: AdminMsg_RelayJob = {
+}): AdminMsg_DelegateJob {
+  const msg: AdminMsg_DelegateJob = {
     schema_version: WORKER_PROTOCOL_VERSION,
-    type: "admin:relay-job",
+    type: "admin:delegate-job",
     requestId: opts.requestId,
     verb: opts.verb,
     args: opts.args,

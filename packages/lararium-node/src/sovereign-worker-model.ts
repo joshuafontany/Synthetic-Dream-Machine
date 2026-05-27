@@ -1,9 +1,9 @@
 /**
  * sovereign-worker-model — Node.js sovereign Worker lifecycle kernel.
  *
- * Implements the OTP GenServer behavior pattern for Worker threads:
- *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → drain → ea → teardown
- *   - caller-supplied WorkerBehavior: writeBagId + onReady / onMessage / onTeardown
+ * Implements the OTP gen_island behavior pattern for sovereign Worker islands:
+ *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → drain → ea → demote
+ *   - caller-supplied IslandBehavior: writeBagId + onEa / onSignal / onDemote
  *
  * ## Recipe law — sub-surface layers
  *
@@ -52,9 +52,9 @@ import {
 import type { WorkerToMainMsg } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 
-// ── WorkerBehavior — the OTP callback module ──────────────────────────────
+// ── IslandBehavior — the OTP gen_island callback module ───────────────────
 
-export interface WorkerContext {
+export interface IslandContext {
   wikiUri:   string;
   composite: CompositeStore;
   tw5:       TW5Engine;
@@ -64,26 +64,26 @@ export interface WorkerContext {
 }
 
 /**
- * Caller-supplied behavior module. Parallel to OTP's callback module passed to gen_server.
+ * Caller-supplied behavior module. Parallel to OTP's callback module passed to gen_island.
  *
- * - `writeBagId`  — IslandAdaptor write target. Admin: ADMIN_BAG_ID. Wiki: BAG_IDS.scratch.
- * - `onReady`     — called after CompositeStore + IslandAdaptor wired, before ea.
- * - `onMessage`   — called for every non-lifecycle message. Return true if handled.
- * - `onTeardown`  — called before drain loop stops and docBytes export.
+ * - `writeBagId` — IslandAdaptor write target. Admin: ADMIN_BAG_ID. Wiki: BAG_IDS.scratch.
+ * - `onEa`       — called after CompositeStore + IslandAdaptor wired, before ea declaration.
+ * - `onSignal`   — called for every non-lifecycle message. Return true if handled.
+ * - `onDemote`   — called before drain loop stops and docBytes export.
  */
-export interface WorkerBehavior {
-  writeBagId:  string;
-  onReady(ctx: WorkerContext): void | Promise<void>;
-  onMessage(type: string, raw: unknown, ctx: WorkerContext): boolean;
-  onTeardown(ctx: WorkerContext): void | Promise<void>;
+export interface IslandBehavior {
+  writeBagId: string;
+  onEa(ctx: IslandContext): void | Promise<void>;
+  onSignal(type: string, raw: unknown, ctx: IslandContext): boolean;
+  onDemote(ctx: IslandContext): void | Promise<void>;
 }
 
-// ── runSovereignWorker — the OTP gen_server ───────────────────────────────
+// ── runSovereignWorker — the OTP gen_island kernel ────────────────────────
 
-export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifest: WorkerMsg_Manifest) => WorkerBehavior)): void {
-  let behavior: WorkerBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
-  const _resolveBehavior = (msg: WorkerMsg_Manifest): WorkerBehavior => {
-    if (behavior === null) behavior = (behaviorOrFactory as (m: WorkerMsg_Manifest) => WorkerBehavior)(msg);
+export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifest: WorkerMsg_Manifest) => IslandBehavior)): void {
+  let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
+  const _resolveBehavior = (msg: WorkerMsg_Manifest): IslandBehavior => {
+    if (behavior === null) behavior = (behaviorOrFactory as (m: WorkerMsg_Manifest) => IslandBehavior)(msg);
     return behavior;
   };
   if (!parentPort) {
@@ -99,7 +99,7 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
   let _handles:          Map<string, DocHandle<any>> = new Map();
   let _writableHandleId: string | null         = null;
   let _composite:        CompositeStore | null = null;
-  let _ctx:              WorkerContext | null  = null;
+  let _ctx:              IslandContext | null  = null;
 
   // ── Drain loop ────────────────────────────────────────────────────────────
 
@@ -171,7 +171,7 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
     }
 
     // Delegate to behavior — admin handles admin:place-job, admin:job-result, etc.
-    if (_ctx && behavior && behavior.onMessage(raw.type, raw, _ctx)) return;
+    if (_ctx && behavior && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
@@ -238,7 +238,7 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
     for (const { bagId, handle } of ready) _subscribe(bagId, handle);
 
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
-    await behavior.onReady(_ctx);
+    await behavior.onEa(_ctx);
 
     _startDrain();
     handler.sendEa(msg.wikiUri);
@@ -247,7 +247,7 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
   // ── Teardown (OTP terminate) ──────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    if (_ctx && behavior) await behavior.onTeardown(_ctx);
+    if (_ctx && behavior) await behavior.onDemote(_ctx);
     _stopDrain();
     handler.teardown();
 

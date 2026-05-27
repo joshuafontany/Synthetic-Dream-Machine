@@ -161,11 +161,11 @@ All sites marked `@deprecated GP-3 oracle path` form one removal arc.
 
 **Node gate: ✅ PASSED + DELETED** — 195/195 green.
 `routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` gone.
-`NodeVmManager` passes `docHandle.url` as `docUrl` when `mainRepo` is set.
+`NodeVmManager` sends `bagBindings` per-bag (each `BagMode.relational` entry carries a live `AutomergeUrl`).
 
-**Node vessel remnants (survive until protocol layer cleans):**
-- [ ] GP-3 fallback `changeset` handler in `lar-wiki-worker.ts` — keep until TW5 boots under Repo-in-Worker.
-- [ ] `VmSnapshot.tiddlers[]` field — keep until protocol `snapshotTiddlers` removed.
+**Node vessel remnants — ✅ ALL CLEARED:**
+- [x] GP-3 fallback `changeset` handler in `lar-wiki-worker.ts` — DELETED.
+- [x] `VmSnapshot.tiddlers[]` field — DELETED. `VmSnapshot` is now `{ heads, docBytes?, capturedAt }`.
 
 Browser vessel gate (write next):
 - [ ] Write `browser-repo-in-worker.test.ts`: two `BrowserVmManager` instances sharing one main-thread
@@ -178,9 +178,9 @@ Browser vessel deletion (after browser gate passes):
 
 Protocol layer (after both vessel gates pass):
 - [ ] `WorkerMsg_Changeset` interface and type union entry.
-- [ ] `mkChangeset` / `mkChangesetAck` factories.
-- [ ] `WorkerMsg_TeardownAck.snapshotTiddlers` field.
-- [ ] `snapshotTiddlers` param from `mkTeardownAck` opts.
+- [ ] `mkChangeset` factory — remove. (Note: `mkChangesetAck` is the §4 frame-completion signal; it stays and will be renamed to `frame:ack` in a future schema_version bump — do NOT remove it here.)
+- [x] `WorkerMsg_TeardownAck.snapshotTiddlers` field — DELETED.
+- [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
 - [ ] `worker-protocol.test.ts` GP-3 describe block → remove changeset shape tests.
 
 **`docUrl` non-null gate (federation seam) — write before protocol layer cleanup:**

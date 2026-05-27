@@ -17,13 +17,13 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-worker-model.js";
 import { BAG_IDS }                   from "@lararium/mesh";
-import type { BrowserWorkerBehavior } from "./browser-sovereign-worker-model.js";
+import type { BrowserIslandBehavior } from "./browser-sovereign-worker-model.js";
 
-const BrowserWikiBehavior: BrowserWorkerBehavior = {
-  writeBagId:  BAG_IDS.scratch,
-  onReady:     () => {},
-  onMessage:   () => false,
-  onTeardown:  () => {},
+const BrowserWikiBehavior: BrowserIslandBehavior = {
+  writeBagId: BAG_IDS.scratch,
+  onEa:       () => {},
+  onSignal:   () => false,
+  onDemote:   () => {},
 };
 
 runBrowserSovereignWorker(BrowserWikiBehavior);

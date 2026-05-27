@@ -365,9 +365,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     identityDid: identity.did,
   });
 
-  // Main-thread relay registry — wiki-scope job handlers whose closure dependencies
+  // Main-thread delegation registry — wiki-scope job handlers whose closure dependencies
   // live on the main thread (repo, catalogHandle, residency, primary composite).
-  // The admin Worker's JobDispatcher relays unknown verbs here via admin:relay-job.
+  // The admin Worker's JobDispatcher delegates unknown verbs here via admin:delegate-job.
   // vmManager is assigned after Worker boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new JobHandlerRegistry();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
@@ -591,11 +591,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     `self-admin=${selfVerify.ok}${selfVerify.ok ? "" : ` (smoke fail: ${selfVerify.reason})`}`,
   );
 
-  // Wire the relay registry now that keyhive exists.
-  // The admin Worker's JobDispatcher relays unknown verbs to this registry via
-  // admin:relay-job messages. configureRelay must be called before workerEa resolves
-  // to ensure no relay jobs are dropped during the boot window.
-  adminVm.configureRelay(jobRegistry, keyhive);
+  // Wire the delegation registry now that keyhive exists.
+  // The admin Worker's JobDispatcher delegates unknown verbs to this registry via
+  // admin:delegate-job messages. configureDelegation must be called before workerEa resolves
+  // to ensure no delegated jobs are dropped during the boot window.
+  adminVm.configureDelegation(jobRegistry, keyhive);
 
   // Zelenka: keep oracle tiddlers current on every boot — self, ka, ba, social plane, admin.
   reconcileWellKnownTiddlers(

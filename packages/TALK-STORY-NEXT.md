@@ -28,11 +28,11 @@ cacheable = false
 
 <<~ ahu #ooda-ha >>
 
-✶ Two vessels carry the Worker Sovereignty Law. 195 tests pass. The node GP-3 oracle — `routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` — deleted. The identity lattice holds: `runFoundingCeremony` + `runDeviceAdmitCore` + `runApplyAdmitPayload` live in `@lararium/keyhive`; the two-vessel e2e test passes 9/9. `docUrl: string | null` sits in both `mkPromote` calls, both null today.
-⏿ The browser vessel's GP-3 changeset handler still breathes in `browser-wiki-worker.ts`. The `VmSnapshot.snapshotTiddlers` field still lives in the protocol layer. The `docUrl` field points at the federation door — closed but framed. The ea-gaps list carries seven ordered items; `pluginBlob` remains the highest sovereignty breach.
+✶ Two vessels carry the Worker Sovereignty Law. 195 tests pass. The node GP-3 oracle — `routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` — deleted. The identity lattice holds: `runFoundingCeremony` + `runDeviceAdmitCore` + `runApplyAdmitPayload` live in `@lararium/keyhive`; the two-vessel e2e test passes 9/9. `open-node-vessel.ts` sends `bagBindings` per-bag; each `BagMode.relational` entry carries a live `AutomergeUrl` from the catalog.
+⏿ The browser vessel's GP-3 changeset handler still breathes in `browser-wiki-worker.ts`. The `docUrl` field inside each `BagBinding` points at the federation door — per-bag, live, but Worker-to-Worker sync not yet exercised in a browser gate test. The ea-gaps list has five remaining open items; `pluginBlob` remains the highest sovereignty breach.
 ◇ The next move: write `browser-repo-in-worker.test.ts`. Two `BrowserVmManager` instances, one main-thread Repo, Worker receives doc changes via MessageChannel. Gate passes → delete GP-3 browser fallback → protocol layer cleanup → `docUrl` non-null test → Worker Sovereignty Law §8.
 ▶ The gate pattern mirrors the node gate exactly. `browser-repo-in-worker-echo.mjs` = fixture Worker; `BrowserVmManager` with `mainRepo` set; `repo:synced` + `repo:change` events from the Worker prove the path.
-⤴ After both vessel gates clear: protocol layer loses `WorkerMsg_Changeset`, `mkChangeset`, `mkChangesetAck`, `snapshotTiddlers`. The remaining `@deprecated GP-3` markers go silent. Then `docUrl` non-null test opens the archipelago.
+⤴ After both vessel gates clear: protocol layer loses `WorkerMsg_Changeset`. `mkChangesetAck` is the §4 frame-completion signal — it stays; rename to `frame:ack` happens in a future schema_version bump. Then `docUrl` non-null test opens the archipelago.
 ↺ The browser vessel breathes. The node vessel breathes. The federation seam waits, framed.
 
 <<~/ahu >>
@@ -44,10 +44,10 @@ cacheable = false
 **Worker Sovereignty Law** lives in `packages/lararium-mesh/src/worker-protocol.ts`.
 Seven clauses. Isomorphic across all vessel types.
 
-**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`) — GP-3 oracle deleted:
-- `WorkerHotSlot` carries only `worker`, `mainPort`, `lastUsedAt`. Clean.
-- `mountWiki` passes `ctx.docHandle.url` as `docUrl` when `mainRepo` set.
-- Worker calls `repo.find(docUrl).whenReady()` — reliable, no gossip race.
+**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`) — GP-3 oracle + node remnants deleted:
+- `WorkerSlot` carries `{ worker, mainPort, lastUsedAt }`. Clean.
+- `NodeVmManager.mountWiki` sends `bagBindings` (one `BagMode.relational` entry per bag, each with a live `AutomergeUrl`). No top-level `docUrl` field.
+- Worker calls `repo.find(binding.docUrl).whenReady()` per bag — reliable, no gossip race.
 - Law §7 enforced: `mainPort.close()` before `worker.terminate()`.
 
 **Browser vessel** (`browser-wiki-worker.ts` + `BrowserVmManager`) — GP-3 fallback survives pending gate:
@@ -91,9 +91,10 @@ From ROADMAP `## GP-3 Deprecation Completion Arc`:
 
 **After both vessel gates — protocol layer:**
 - [ ] `WorkerMsg_Changeset` interface and type union entry.
-- [ ] `mkChangeset` / `mkChangesetAck` factories.
-- [ ] `WorkerMsg_TeardownAck.snapshotTiddlers` field.
-- [ ] `snapshotTiddlers` param from `mkTeardownAck` opts.
+- [ ] `mkChangeset` factory — remove.
+- [x] `WorkerMsg_TeardownAck.snapshotTiddlers` field — DELETED.
+- [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
+- Note: `mkChangesetAck` is the §4 frame-completion signal — it stays; rename to `frame:ack` in a future schema_version bump.
 - [ ] `worker-protocol.test.ts` GP-3 describe block.
 
 **`docUrl` non-null gate — opens the archipelago:**
@@ -113,9 +114,9 @@ Seven gaps remain before vessels reach ea-compliant sovereignty. From
 
 | # | Gap | Status | Blocks |
 |---|---|---|---|
-| 1 | **pluginBlob still travels in promote payload** | ⬜ Highest breach | Clean ea boundary |
-| 2 | **`VmSnapshot.tiddlers[]` GP-3 field** | ⬜ Awaiting protocol cleanup | Protocol deletion arc |
-| 3 | **`WorkerMsg_TeardownAck.snapshotTiddlers`** | ⬜ Awaiting browser gate | Protocol deletion arc |
+| 1 | **pluginBlob still travels in manifest payload** | ⬜ Highest breach | Clean ea boundary |
+| 2 | **`VmSnapshot.tiddlers[]` GP-3 field** | ✅ DELETED | — |
+| 3 | **`WorkerMsg_TeardownAck.snapshotTiddlers`** | ✅ DELETED | — |
 | 4 | **`browser-wiki-worker.ts` GP-3 fallback handler** | ⬜ Browser gate blocks | GP-3 browser arc |
 | 5 | **`docUrl` non-null test** | ⬜ After protocol cleanup | Federation seam §8 |
 | 6 | **Worker Sovereignty Law §8** | ⬜ After docUrl test | Mesh federation |
@@ -128,20 +129,22 @@ The cap=infrastructure gate (Path L) closes gap 7 independently.
 
 <<~ ahu #federation-seam >>
 
-## The Federation Seam — `docUrl: string | null`
+## The Federation Seam — `BagMode.docUrl` per Bag
 
-Both vessels pass `docUrl: null` in `mkPromote`. That null is a deliberate open door.
+Each bag in a `WorkerMsg_Manifest` carries `bagBindings` — an array of `BagBinding` entries.
+Each `BagBinding` in `relational` mode holds a `docUrl: AutomergeUrl` capability token.
+The Worker calls `repo.find(binding.docUrl).whenReady()` per bag to establish its causal island.
 
-When `docUrl` carries a real `AutomergeUrl`, the Worker calls
-`repo.find(docUrl).whenReady()`. The Repo's network layer (MessageChannel or
-WebSocket) delivers the doc. The Worker applies it. The island breathes with mesh.
+`docUrl` non-null gate (for the test): write one in-process Repo pair that proves
+`repo.find(docUrl).whenReady()` delivers the doc via MessageChannel sync. This proves
+the federation door opens without protocol changes. Worker Sovereignty Law §8 gets written when this gate passes.
 
-**What the bag mirror config carries when this opens:**
+**What the bag mirror config carries when federation opens:**
 - remote WebSocket relay URL
 - remote `AutomergeUrl` for the bag
 - Keyhive capability token proving authorization
 
-The main-thread Repo wires a `WebSocketClientAdapter` before sending `mkPromote`.
+The main-thread Repo wires a `WebSocketClientAdapter` before sending `mkManifest`.
 The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes needed.
 
 <<~/ahu >>
@@ -156,7 +159,7 @@ The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes nee
 
 **Breach-Watch (Triage):** `pluginBlob` in the promote payload is gap 1 and highest breach. Everything else unblocks in order. The Safari `typeof self.requestAnimationFrame` guard stands. The `as unknown as globalThis.MessagePort` cast in node code carries no debt — automerge-repo type gap, leave it.
 
-**Mischief-Muse (Muse):** The `docUrl: string | null` field is the most interesting object in the codebase right now. It carries null and yet it describes a topology. Two operators, two lararia, one bag mirror config, one `AutomergeUrl` passed in a `mkPromote` call — that is the whole federation model, frameable in 40 bytes.
+**Mischief-Muse (Muse):** The `bagBindings` array is the most interesting object in the codebase right now. Each `BagBinding` in `relational` mode carries a `docUrl: AutomergeUrl` — a capability token, not a label. Two operators, two lararia, one bag mirror config, one `AutomergeUrl` per bag passed in a `mkManifest` call — that is the whole federation model, frameable in 40 bytes per bag.
 
 **Lares (Gatekeeper):** Entry order: browser gate test → browser deletion → protocol layer cleanup → docUrl non-null test → §8. The ROADMAP carries the checklist. Follow it in order. Path L (admin-doc ingress trust gate) runs parallel but independently — do not block the browser arc on it.
 
@@ -183,18 +186,17 @@ The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes nee
 ### Main → Worker
 | Type | Key fields | Notes |
 |---|---|---|
-| `promote` | `wikiUri`, `coreBlob`, `syncPort` (transferred), `docUrl \| null`, `coreHash \| null` | syncPort required |
-| `changeset` | `wikiUri`, `batch_id`, `added[]`, `deleted[]` | **@deprecated GP-3** |
+| `manifest` | `wikiUri`, `coreBlob`, `syncPort` (transferred), `bagBindings[]`, `coreHash \| null`, `storage?`, `diskMirrors?` | `syncPort` MUST be transferred |
 | `demote` | `wikiUri` | — |
 | `teardown` | — | — |
 
 ### Worker → Main
 | Type | Key fields | Notes |
 |---|---|---|
-| `promote:ack` | `wikiUri` | boot complete |
-| `changeset:ack` | `wikiUri`, `batch_id` | **@deprecated GP-3** |
+| `ea` | `wikiUri` | sovereignty declaration; boot complete |
+| `changeset:ack` | `wikiUri`, `batch_id` | §4 frame-completion signal; name reflects GP-3 origin; will rename to `frame:ack` |
 | `event` | `wikiUri`, `listenable`, `payload` | verse-event reaction |
-| `teardown:ack` | `docBytes?`, `snapshotTiddlers?` | `docBytes` preferred; `snapshotTiddlers` **@deprecated GP-3** |
+| `teardown:ack` | `docBytes?` | `docBytes` = Worker Repo snapshot; `snapshotTiddlers` DELETED |
 | `fault` | `wikiUri`, `error` | slot must evict |
 
 ## Metrics Baseline

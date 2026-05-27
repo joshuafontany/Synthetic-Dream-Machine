@@ -14,7 +14,7 @@
  *   └── projection MemoryTiddlerStore (defaultWritable:false) ← $:/state/*
  *
  * JobDispatcher subscribes to TW5 wiki change events — the kumu device law.
- * Wiki-scope verbs relay to main thread via AdminMsg_RelayJob / JobResult.
+ * Wiki-scope verbs delegate to main thread via AdminMsg_DelegateJob / JobResult.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-admin-worker
  */

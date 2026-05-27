@@ -46,9 +46,9 @@ import {
 import type { WorkerToMainMsg } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 
-// ── WorkerBehavior — shared interface (mirrors Node sovereign-worker-model) ─
+// ── BrowserIslandBehavior — gen_island callback module (browser) ──────────
 
-export interface BrowserWorkerContext {
+export interface BrowserIslandContext {
   wikiUri:   string;
   composite: CompositeStore;
   tw5:       TW5Engine;
@@ -57,16 +57,16 @@ export interface BrowserWorkerContext {
   post:      (msg: WorkerToMainMsg) => void;
 }
 
-export interface BrowserWorkerBehavior {
-  writeBagId:  string;
-  onReady(ctx: BrowserWorkerContext): void | Promise<void>;
-  onMessage(type: string, raw: unknown, ctx: BrowserWorkerContext): boolean;
-  onTeardown(ctx: BrowserWorkerContext): void | Promise<void>;
+export interface BrowserIslandBehavior {
+  writeBagId: string;
+  onEa(ctx: BrowserIslandContext): void | Promise<void>;
+  onSignal(type: string, raw: unknown, ctx: BrowserIslandContext): boolean;
+  onDemote(ctx: BrowserIslandContext): void | Promise<void>;
 }
 
-// ── runBrowserSovereignWorker — the browser gen_server ───────────────────
+// ── runBrowserSovereignWorker — the browser gen_island kernel ────────────
 
-export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void {
+export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void {
   const _post = (msg: WorkerToMainMsg) => self.postMessage(msg);
   const handler = new WorkerAuthorityHandler(_post);
 
@@ -75,7 +75,7 @@ export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void
   let _handles:          Map<string, DocHandle<any>> = new Map();
   let _writableHandleId: string | null          = null;
   let _composite:        CompositeStore | null  = null;
-  let _ctx:              BrowserWorkerContext | null = null;
+  let _ctx:              BrowserIslandContext | null = null;
 
   // ── rAF drain loop ────────────────────────────────────────────────────────
   // Safari does not ship requestAnimationFrame in DedicatedWorkerGlobalScope.
@@ -150,7 +150,7 @@ export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void
       return;
     }
 
-    if (_ctx && behavior.onMessage(raw.type, raw, _ctx)) return;
+    if (_ctx && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
@@ -217,16 +217,16 @@ export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void
     for (const { bagId, handle } of ready) _subscribe(bagId, handle);
 
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
-    await behavior.onReady(_ctx);
+    await behavior.onEa(_ctx);
 
     handler.sendEa(msg.wikiUri);
   }
 
-  // ── Teardown (OTP terminate) ──────────────────────────────────────────────
+  // ── Demote (OTP terminate) ────────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
     _tornDown = true;
-    if (_ctx) await behavior.onTeardown(_ctx);
+    if (_ctx) await behavior.onDemote(_ctx);
     handler.teardown();
 
     let docBytes: Uint8Array | undefined;
