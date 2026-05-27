@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-24 (GP-3 node gate passed)
+> Updated: 2026-05-27 (pono federation + YIN ontology closure)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -81,8 +81,11 @@ These planning docs follow one architectural law:
 | — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-island.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkFrame` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
 | — | **Identity lattice + keyhive founding ceremony** | ✅ Done | `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` extracted isomorphic into `@lararium/keyhive`. Three-gate lattice A/B/C holds. Two-vessel e2e test (`two-vessel-mesh.test.ts`) 9/9. `lares device-admit` + `lares invite` CLI commands wired. |
 | — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-island.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: `IslandMsg_FrameAck` + `mkFrame` removed; `IslandMsg_FrameAck` is the §4 frame-completion signal (rename to `frame:ack` in future schema_version bump). Stale `mode: "cold"` tests removed. 5/5 browser tests green. |
+| — | **Pono federation pattern** | ✅ Done | `coreBlob: Uint8Array` evicted from `IslandMsg_Manifest`. Boot order inverted in both sovereign island models: Repo first, `handle.whenReady()`, read `blobs[ENGINE_CORE_ID]` from `@lararium` CRDT doc, `mkFault` if absent, `bootTw5` last. `laraiumDocUrl` required on `VesselIslandPool` — `@lararium` binding prepended per island. `blob-sovereignty.test.ts` gates §6. N×island federation O(CRDT-sync). 195/195 tests. |
+| — | **YIN ontology + typo closure** | ✅ Done | `runSovereignisland` → `runSovereignWorker` in 3 entry files. `worker: island` → `worker: Worker`. `node-vm-manager.test.ts` → `vessel-island-pool.test.ts`. `vm-manager-echo.mjs` → `vm-pool-echo.mjs`. Fixture binding resolution uses `b.writable`. 195/195. |
+| 1 | **§8 archipelago gate** | ⬜ Next | Write one test: `docUrl` as a real `AutomergeUrl`, in-process Repo pair, island calls `repo.find(docUrl).whenReady()`. Proves federation seam without a remote node. Island Sovereignty Law §8 written when this gate passes. |
 | 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
-| 3 | **S9 / lararium-browser** | ⬜ Active (S0–S3 architecture landed; S4 real boot + IndexedDB next) | Full browser vessel ea-path: IndexedDB storage, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. |
+| 3 | **S9 / lararium-browser** | ⬜ Active — architecture before demo | Full causal island architecture must be correct before the browser wiki is visible. S4 real boot: IndexedDB storage adapter, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md`. Pono federation receiver already correct (this sprint). |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |

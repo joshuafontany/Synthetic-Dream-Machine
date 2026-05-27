@@ -19,7 +19,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-admin-island
  */
 
-import { runSovereignisland } from "./sovereign-island-model.js";
+import { runSovereignWorker } from "./sovereign-island-model.js";
 import { makeAdminBehavior }  from "./island-behaviors.js";
 
 runSovereignWorker(makeAdminBehavior());

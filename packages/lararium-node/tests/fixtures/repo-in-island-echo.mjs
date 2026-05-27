@@ -66,8 +66,9 @@ parentPort.on("message", (msg) => {
         });
       }
 
-      // Resolve docUrl: prefer bagBindings (new), fall back to deprecated msg.docUrl.
-      const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational");
+      // Resolve docUrl: use the writable wiki binding (first writable relational).
+      // @lararium binding is read-only; the wiki binding is writable.
+      const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational" && b.writable);
       const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
 
       if (resolvedDocUrl) {

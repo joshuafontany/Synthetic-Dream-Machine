@@ -68,7 +68,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
 
     const acquired = await manager.acquire(authorityId, {
       authorityId,
-      coreBlob: new Uint8Array([1]),
+      coreHash: null,
       pluginBlob: new Uint8Array(),
       bagStack: ["@test"],
       recipeUri: "lar:///ha.ka.ba/@test/recipe",
@@ -100,7 +100,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
 
     const acquired = await manager.acquire(authorityId, {
       authorityId,
-      coreBlob: new Uint8Array([2]),
+      coreHash: null,
       pluginBlob: new Uint8Array(),
       bagStack: ["@test"],
       recipeUri: "lar:///ha.ka.ba/@test/recipe",

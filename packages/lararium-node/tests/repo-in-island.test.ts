@@ -28,7 +28,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 const FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
 const WIKI_ID     = "lar:///ha.ka.ba/@test/repo-in-island";
-const STUB_CORE   = { bytes: new Uint8Array() } as const;
+
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -118,17 +118,19 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change"); // filtered — the assertion target
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
       docHandle: docHandle as never,
-      coreBlob:  STUB_CORE,
+      coreHash:  null,
     });
 
     // Wait for the fixture's change listener to be live before mutating.
@@ -157,17 +159,19 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
       docHandle: docHandle as never,
-      coreBlob:  STUB_CORE,
+      coreHash:  null,
     });
 
     await waitForSynced(all);
@@ -202,17 +206,19 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
       docHandle: docHandle as never,
-      coreBlob:  STUB_CORE,
+      coreHash:  null,
     });
 
     await waitForSynced(all);

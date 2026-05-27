@@ -61,8 +61,11 @@ export type BrowserAuthorityPhase =
 export interface BrowserAuthorityBootParams {
   /** lar: URI identifying this authority slot — becomes the wiki identity inside the worker. */
   authorityId: BrowserAuthorityId;
-  /** Serialized TW5 core blob (content-addressed). Transferred, not cloned. */
-  coreBlob: Uint8Array;
+  /**
+   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
+   * null = pre-CAS. Islands read the actual bytes from the @lararium CRDT doc.
+   */
+  coreHash: string | null;
   /** Serialized compiled plugin blob. Transferred, not cloned. */
   pluginBlob: Uint8Array;
   /**

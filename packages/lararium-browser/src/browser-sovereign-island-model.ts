@@ -31,10 +31,13 @@ import {
   CompositeStore,
   AutomergeDocStore,
   BAG_IDS,
+  ENGINE_CORE_ID,
+  mkFault,
   isVesselToIslandMsg,
   mkTeardownAck,
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
+  type LarDoc,
   type IslandMsg_Manifest,
   type IslandStorageConfig,
 } from "@lararium/mesh";
@@ -158,12 +161,6 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
   async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
 
-    try {
-      await handler.bootTw5(msg.wikiUri, msg.coreBlob, msg.pluginTiddlers);
-    } catch {
-      return;
-    }
-
     const storageAdapter = _buildStorage(msg.storage);
     _repo = new Repo({
       ...(storageAdapter ? { storage: storageAdapter } : {}),
@@ -185,6 +182,21 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
       _handles.set(binding.bagId, handle);
       ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
       if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
+    }
+
+    // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
+    const laraiumHandle = _handles.get(BAG_IDS.lararium);
+    const blobEntry = (laraiumHandle?.doc() as LarDoc | undefined)?.blobs?.[ENGINE_CORE_ID];
+    const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
+    if (!coreBytes) {
+      _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
+      return;
+    }
+
+    try {
+      await handler.bootTw5(msg.wikiUri, coreBytes, msg.pluginTiddlers);
+    } catch {
+      return;
     }
 
     for (const { bagId, handle, writable } of ready) {

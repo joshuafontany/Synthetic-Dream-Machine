@@ -16,7 +16,10 @@
  *   5. Vessel oracle delta delivery is removed. CRDT sync via `syncPort` is the sole
  *      source of tiddler truth for causal islands.
  *   6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `bagBindings` (ordered
- *      bag capability tokens), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
+ *      bag capability tokens), and `coreHash` (content-address intent vector; null = pre-CAS).
+ *      TW5 core bytes are NOT transferred in the manifest — islands read them from
+ *      `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc after `handle.whenReady()`.
+ *      Two vessels federating @lararium share the engine automatically via Automerge sync.
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
@@ -96,8 +99,10 @@ export type BagBinding = { bagId: string; writable: boolean } & BagMode;
  *   - `coreHash` carries a SHA-256 hex of `coreBlob`; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
- * BA-5: `coreBlob` travels as Uint8Array; transferred at the postMessage call site.
- * The vessel acts as courier — delivering materials, not conferring authority.
+ * BA-5 (revised): TW5 core bytes live in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium doc.
+ * Islands read bytes from the CRDT after `handle.whenReady()`. The manifest carries only
+ * `coreHash` (SHA-256 hex) as an integrity gate — never the raw bytes.
+ * The vessel acts as courier — delivering capabilities, not raw bytes.
  * The island establishes its own sovereignty (`ea`) upon receipt.
  *
  * Prerequisite fields (island cannot think without these — not cargo):
@@ -112,9 +117,10 @@ export interface IslandMsg_Manifest {
   schema_version: ProtocolVersion;
   type: "manifest";
   wikiUri: string;
-  /** Serialized TW5 core. Transfer alongside syncPort: `postMessage(msg, [coreBlob.buffer, syncPort])`. */
-  coreBlob: Uint8Array;
-  /** SHA-256 hex of coreBlob. null = pre-CAS trust-on-delivery (intent: make non-null once CAS lands). */
+  /**
+   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
+   * null = pre-CAS trust-on-delivery. Islands verify on read from @lararium CRDT doc.
+   */
   coreHash: string | null;
   /**
    * Ordered bag capability tokens for this wiki's content scope (system → draft).
@@ -385,7 +391,6 @@ export function mkTeardownAck(opts: {
  */
 export function mkManifest(
   wikiUri:  string,
-  coreBlob: Uint8Array,
   syncPort: MessagePort,
   coreHash: string | null = null,
   opts?: {
@@ -400,7 +405,6 @@ export function mkManifest(
     schema_version: ISLAND_PROTOCOL_VERSION,
     type: "manifest",
     wikiUri,
-    coreBlob,
     coreHash,
     syncPort,
   };

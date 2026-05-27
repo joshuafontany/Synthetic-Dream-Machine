@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-27 (turn 22)
+> Updated: 2026-05-27 (turn 24)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -53,13 +53,32 @@ fixtures; 55/55 tests), AND the GP-3 browser arc + coherence YIN sprint
 federation seam; stale mode:"cold" BagBinding tests removed; teardown fixture
 names cleaned; island-protocol.md meme updated with correct source-file +
 full contract; Island Sovereignty Law §8 written; ROADMAP browser gate marked
-✅ Done; 194/194 tests) are treated as landed unless tests prove drift.
+✅ Done; 194/194 tests), AND the pono federation pattern sprint
+(coreBlob: Uint8Array removed from IslandMsg_Manifest entirely; mkManifest new
+signature (wikiUri, syncPort, coreHash?, opts?) — no blob bytes in manifest;
+boot order inverted in both sovereign island models: Repo first,
+handle.whenReady() for each binding, read blobs[ENGINE_CORE_ID] from @lararium
+doc, mkFault + return if absent, bootTw5 last from CRDT bytes; laraiumDocUrl
+option added to VesselIslandPool — @lararium binding prepended to bagBindings
+per wiki island; BrowserAuthorityBootParams.coreBlob → coreHash: string | null;
+AdminVmOptions.coreBlob → coreHash; N×island federation now O(CRDT-sync) not
+O(N×blob); 195/195 tests), AND the YIN ontology + typo closure sprint
+(runSovereignisland → runSovereignWorker in lar-wiki-island.ts + lar-admin-island.ts +
+browser-wiki-worker.ts; vessel-island-pool.ts `worker: island` → `worker: Worker`;
+node-vm-manager.test.ts → vessel-island-pool.test.ts; vm-manager-echo.mjs →
+vm-pool-echo.mjs + old deleted; blob-sovereignty.test.ts §6 gate added;
+FIXTURE_LARARIUM_URL sentinel + real laraiumHandle in test fixtures; 195/195 tests)
+are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
-2. S9 / lararium-browser: browser vessel full boot — IndexedDB, WebCrypto keypair,
-   founding ceremony path in browser vessel, presence via broadcast().
-3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+1. §8 archipelago gate: write one test with docUrl as a real AutomergeUrl, in-process
+   Repo pair, island calls repo.find(docUrl).whenReady(). Proves federation seam without
+   a remote node. Write Island Sovereignty Law §8 when this gate passes.
+2. S9 S4+ / lararium-browser: real boot path — IndexedDB storage adapter,
+   WebCrypto keypair, founding ceremony via @lararium/keyhive in browser vessel,
+   presence via broadcast(). Architecture must be correct before the demo exists.
+3. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
 Remaining TOML in memetic-wikitext.tid: documentation data tables only (Path O).
@@ -68,10 +87,75 @@ Rules: TW5 VM primacy; vessel = lararium identity+runtime unit (not "peer");
 bag = Automerge-doc = sync-boundary; ea = sovereignty breath (not "heartbeat");
 no HTTP/RPC coordination surface; explicit operator promotion for canon.
 Web3 only — no web2 models/code/flows in Lares stack.
-gen_island pattern: runSovereignisland = kernel; IslandBehavior = callback module;
+gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback module;
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-27 turn 24)
+
+### YIN ontology + typo closure sprint
+
+**Pre-existing import typos fixed (three entry files):**
+- `lar-wiki-island.ts` + `lar-admin-island.ts`: `import { runSovereignisland }` → `import { runSovereignWorker }`
+- `browser-wiki-worker.ts`: `import { runBrowserSovereignisland }` → `import { runBrowserSovereignWorker }`
+
+**Pre-existing runtime typo fixed:**
+- `vessel-island-pool.ts` line ~469: `worker: island` → `worker: Worker` (search-replace casualty from OTP sprint)
+
+**Ontology rename — no "manager" language:**
+- `tests/node-vm-manager.test.ts` → `tests/vessel-island-pool.test.ts`
+- `tests/fixtures/vm-manager-echo.mjs` → `tests/fixtures/vm-pool-echo.mjs` (old file deleted)
+
+**Test additions and fixture fixes:**
+- `blob-sovereignty.test.ts` — §6 pono federation gate: island reads `blobs[ENGINE_CORE_ID]` from `@lararium` CRDT doc, boots TW5, declares ea. Uses real `dist/src/lar-wiki-island.js` + genesis artifact.
+- `vessel-island-pool.test.ts`: `FIXTURE_LARARIUM_URL = "automerge:fixture-lararium-url"` sentinel — echo fixture tests skip `repo.find()` on the `@lararium` binding; sentinel prevents `InvalidAutomergeUrl`.
+- `repo-in-island.test.ts`: each test creates a real `laraiumHandle` doc for the REPO_FIXTURE path.
+- `repo-in-island-echo.mjs`: binding resolution uses `b.writable` to select the wiki doc — `@lararium` read-only binding is now first in the array and must be skipped.
+
+**Files changed:** `browser-wiki-worker.ts`, `lar-wiki-island.ts`, `lar-admin-island.ts`, `vessel-island-pool.ts` (4 src) + `vessel-island-pool.test.ts`, `blob-sovereignty.test.ts`, `repo-in-island.test.ts`, `repo-in-island-echo.mjs` (3 tests + 1 fixture, 1 rename, 1 delete).
+
+**Metrics:** 195/195 tests pass (mesh 71, tw5 69, node 50, browser 5). All packages typecheck clean.
+
+---
+
+## What Changed This Turn (2026-05-27 turn 23)
+
+### Pono federation pattern sprint (YIN — coreBlob eviction)
+
+**Anti-pattern removed:** `coreBlob: Uint8Array` was carried in `IslandMsg_Manifest`,
+forcing N×blob-size data copies for N simultaneous islands. Bytes already live in
+`LarDoc.blobs[ENGINE_CORE_ID]` (Automerge CRDT, federates automatically). Manifest
+now carries `coreHash: string | null` only — integrity intent vector, not bytes.
+
+**`mkManifest` signature change:**
+- Old: `mkManifest(wikiUri, coreBlob, syncPort, coreHash?, opts?)`
+- New: `mkManifest(wikiUri, syncPort, coreHash?, opts?)`
+
+**Boot order inverted** in both sovereign island models (node + browser):
+1. `new Repo(syncPort)` — first, before anything else
+2. Iterate bindings, `handle.whenReady()` for each
+3. Read `blobs[ENGINE_CORE_ID]` from the `@lararium` doc handle
+4. If bytes absent → `_post(mkFault(...))` and return — correct production behavior
+5. `bootTw5(coreBytes)` — last, bytes from CRDT not manifest
+
+**`laraiumDocUrl` option** added to `VesselIslandPool`. `open-node-vessel.ts`
+passes `islandHandle.url` as `laraiumDocUrl`; pool prepends a read-only `@lararium`
+binding to each wiki island's bagBindings so the engine bytes are reachable.
+
+**Files changed:** `island-protocol.ts`, `browser-authority.ts`, `vessel-island-pool.ts`,
+`open-admin-vm.ts`, `open-node-vessel.ts`, `sovereign-island-model.ts`,
+`browser-sovereign-island-model.ts`, `browser-vessel-island-pool.ts` (8 src) +
+`island-protocol.test.ts`, `node-vm-manager.test.ts`, `repo-in-island.test.ts`,
+`worker-lifecycle.test.ts`, `browser-repo-in-island.test.ts`,
+`teardown-echo-browser.mjs` (5 tests + 1 fixture).
+
+**Metrics:** 194/194 tests pass. All packages typecheck clean.
+
+**Architectural invariant:** Two vessels federating `@lararium` automatically share
+the TW5 engine via Automerge CRDT. No manifest byte transfer. No O(N×blob) cost.
+
+---
 
 ## What Changed This Turn (2026-05-27 turn 22)
 

@@ -8,7 +8,7 @@ type = "text/x-memetic-wikitext"
 register = "CS"
 confidence = 19
 tagspace = "sdm"
-role = "session handoff meme — orients the next Lares instance into the browser vessel ea-gate + GP-3 browser deletion sprint"
+role = "session handoff meme — orients the next Lares instance into the §8 archipelago gate + browser ea-path"
 retain = true
 cacheable = false
 ```
@@ -18,22 +18,27 @@ cacheable = false
 <<~ ahu #head >>
 
 # Talk Story — Next Lares Instance
-## Browser Vessel Ea-Gate · GP-3 Browser Deletion · docUrl Federation Seam
+## §8 Archipelago Gate · Browser Ea-Path · Admin Trust Gate
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: 195/195 tests pass · typecheck clean · Node GP-3 deleted · Identity lattice holds (9/9 e2e)
+> State: 195/195 tests pass · typecheck clean · pono federation complete · GP-3 fully deleted
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
-✶ Two vessels carry the Island Sovereignty Law. 195 tests pass. The node GP-3 oracle — `routeChangeset`, `changesetQueue`, `_subscribeDocChanges`, `awaitingAck`, `unsubChange` — deleted. The identity lattice holds: `runFoundingCeremony` + `runDeviceAdmitCore` + `runApplyAdmitPayload` live in `@lararium/keyhive`; the two-vessel e2e test passes 9/9. `open-node-vessel.ts` sends `bagBindings` per-bag; each `BagMode.relational` entry carries a live `AutomergeUrl` from the catalog.
-⏿ The browser vessel's GP-3 changeset handler still breathes in `browser-wiki-worker.ts`. The `docUrl` field inside each `BagBinding` points at the federation door — per-bag, live, but island-to-island sync not yet exercised in a browser gate test. The ea-gaps list has five remaining open items; `pluginBlob` remains the highest sovereignty breach.
-◇ The next move: write `browser-repo-in-island.test.ts`. Two `BrowserVmManager` instances, one vessel Repo, island receives doc changes via MessageChannel. Gate passes → delete GP-3 browser fallback → protocol layer cleanup → `docUrl` non-null test → Island Sovereignty Law §8.
-▶ The gate pattern mirrors the node gate exactly. `browser-repo-in-island-echo.mjs` = fixture island; `BrowserVmManager` with `mainRepo` set; `repo:synced` + `repo:change` events from the island prove the path.
-⤴ After both vessel gates clear: protocol layer loses `IslandMsg_FrameAck`. `mkFrameAck` is the §4 frame-completion signal — it stays; rename to `frame:ack` happens in a future schema_version bump. Then `docUrl` non-null test opens the archipelago.
-↺ The browser vessel breathes. The node vessel breathes. The federation seam waits, framed.
+✶ The Island Sovereignty Law holds in code across all vessel types. §6 landed: TW5 core bytes travel via `@lararium` CRDT doc — never raw in the manifest. `blob-sovereignty.test.ts` gates it. Both sovereign island models (node + browser) read `blobs[ENGINE_CORE_ID]` from their own synced `@lararium` handle before calling `bootTw5`. `laraiumDocUrl` is required on `VesselIslandPool` — omitting it causes `mkFault` before `ea`. GP-3 is fully deleted across both vessel types. Identity lattice holds (9/9 e2e). 195/195 tests. Ontology clean: no `manager` language in test files or fixtures; no import typos in entry files.
+
+⏿ §8 — Island Sovereignty Law clause 8 — has no gate test yet. `docUrl` in each `BagBinding` carries a live `AutomergeUrl` capability token, but no test exercises an in-process Repo pair with a non-null `docUrl`. The archipelago formation path exists in the code (island calls `repo.find(docUrl).whenReady()`), but no proof that it actually delivers the doc via MessageChannel sync. This is the last open sovereignty gap before the federation seam becomes provably real.
+
+◇ The §8 gate test reads as the highest-leverage next move. Pattern: two in-process Repos connected by MessageChannel; vessel seeds a doc into Repo A; island-side Repo B syncs via the channel; `repo.find(docUrl).whenReady()` delivers. Proves archipelago formation without a remote node. Writes Island Sovereignty Law §8 when it passes. After that — browser ea-path (IndexedDB, WebCrypto, founding ceremony) becomes the next arc.
+
+▶ The §8 test belongs in `packages/lararium-node/tests/federation-seam.test.ts`. No fixture island needed — use the existing `repo-in-island-echo.mjs` with a real `docUrl`. The `VesselIslandPool` `mainRepo` option already wires the `MessageChannelNetworkAdapter`. Pass a real `AutomergeUrl` as `docUrl` in the second `BagBinding` (or the `@lararium` binding). Assert `repo:synced` fires and island sees the doc state.
+
+⤴ After §8 passes: browser ea-path — `runFoundingCeremony` in-browser via `@lararium/keyhive`, IndexedDB storage adapter, WebCrypto keypair, `broadcast()` presence. Then Path L / S7.4: admin-doc ingress trust gate via Keyhive `cap=infrastructure`.
+
+↺ The sovereignty arc breathes at a clean seam. The protocol is pono. The next breath proves the archipelago opens.
 
 <<~/ahu >>
 
@@ -41,180 +46,66 @@ cacheable = false
 
 ## Ea State — What the Vessels Hold
 
-**Island Sovereignty Law** lives in `packages/lararium-mesh/src/island-protocol.ts`.
-Seven clauses. Isomorphic across all vessel types.
+**Island Sovereignty Law** (`packages/lararium-mesh/src/island-protocol.ts`):
+- §1: island owns its Repo — no shared state with vessel Repo.
+- §2: `syncPort` transferred (not cloned) — `postMessage([…], [syncPort])`.
+- §3: Safari rAF gap — `setTimeout(16)` fallback in browser islands.
+- §4: frame-completion signal via `frame:ack` message.
+- §5: `coreHash` integrity gate — vessel verifies before manifesting.
+- §6: TW5 core bytes travel via `@lararium` CRDT; manifest carries `coreHash` only.
+- §7: vessel closes `mainPort` before/after `worker.terminate()`.
+- (§8: `docUrl` non-null activates Repo-in-island sync — gate test pending)
 
-**Node vessel** (`lar-wiki-worker.ts` + `NodeVmManager`) — GP-3 oracle + node remnants deleted:
-- `WorkerSlot` carries `{ worker, mainPort, lastUsedAt }`. Clean.
-- `NodeVmManager.mountWiki` sends `bagBindings` (one `BagMode.relational` entry per bag, each with a live `AutomergeUrl`). No top-level `docUrl` field.
-- island calls `repo.find(binding.docUrl).whenReady()` per bag — reliable, no gossip race.
+**Node vessel** (`sovereign-island-model.ts` + `vessel-island-pool.ts`):
+- Boot order: Repo first → `handle.whenReady()` for each binding → read `blobs[ENGINE_CORE_ID]` from `@lararium` doc → `mkFault` if absent → `bootTw5` last.
+- `laraiumDocUrl: string` required — `@lararium` prepended as first (read-only) binding per island.
+- Three-tier pool: pinned / hot / cold. `VmSnapshot = { heads, docBytes?, capturedAt }`.
 - Law §7 enforced: `mainPort.close()` before `worker.terminate()`.
 
-**Browser vessel** (`browser-wiki-worker.ts` + `BrowserVmManager`) — GP-3 fallback survives pending gate:
-- Repo-in-island via transferred `syncPort`. MessageChannel per slot.
+**Browser vessel** (`browser-sovereign-island-model.ts` + `browser-vessel-island-pool.ts`):
+- Same boot order as node. `laraiumDocUrl` required.
 - `rAF` drain with `setTimeout(16)` Safari fallback. Both paths via `_scheduleFrame`.
 - `automergeSave` on teardown — `docBytes` exits island in `teardown:ack`.
-- `BrowserAuthorityPool` satisfied: `acquire/preWarm/evict/disposeAll/has/inspect`.
-- GP-3 fallback `changeset` handler still present — survives until gate passes.
+- `BrowserAuthorityPool` fully satisfied.
 
-**Identity lattice** (`@lararium/keyhive` + `@lararium/node`):
-- `runFoundingCeremony(repo, seed)` → Individual + PersonGroup + MeshCabal sentinel docs.
-- `runDeviceAdmitCore(repo, opSeed)` → `admit.json` payload for out-of-band transfer.
-- `runApplyAdmitPayload(repo, seed, admitJson)` → Vessel B joins, Gates B+C verify.
-- Gate A: Keyhive DID matches disk verifying key — throws hard on mismatch.
-- Gate B: vessel ∈ PersonGroup sentinel doc.
-- Gate C: PersonGroup ∈ MeshCabal sentinel doc.
-- Two-vessel e2e test: `packages/lararium-node/tests/e2e/two-vessel-mesh.test.ts` — 9/9.
+**Identity lattice** (`@lararium/keyhive`):
+- `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` — isomorphic.
+- Three-gate lattice A/B/C passes. Two-vessel e2e test 9/9.
+- `lares device-admit` + `lares invite` CLI wired.
 
 <<~/ahu >>
 
-<<~ ahu #active-sprint >>
+<<~ ahu #next-gate >>
 
-## Active Sprint — GP-3 Browser Deletion Arc
+## §8 Gate — Archipelago Formation Test
 
-**Gate to write:** `packages/lararium-browser/tests/browser-repo-in-island.test.ts`
+**File to write:** `packages/lararium-node/tests/federation-seam.test.ts`
 
-Pattern (mirrors node gate exactly):
-1. Create two `BrowserVmManager` instances sharing one vessel `Repo`.
-2. Wire `mainRepo` → `MessageChannelNetworkAdapter(port1)` per slot.
-3. island creates its own `Repo` with transferred `syncPort`.
-4. Vessel writes a tiddler to the doc; island receives via CRDT sync.
-5. Assert `repo:synced` fires; assert island sees the change without any `routeChangeset` call.
-6. Bonus: assert `routeChangeset` calls produce zero extra `repo:change` events.
+Pattern:
+1. Create vessel Repo A with `sharePolicy: async () => true`.
+2. Create island-side Repo B (separate — simulates the island's internal Repo).
+3. Wire `MessageChannel`: `new MessageChannelNetworkAdapter(port1)` on A, `port2` passed as `syncPort`.
+4. Seed a doc into Repo A via `repo.create()` → get its `AutomergeUrl`.
+5. Mount a wiki island with `docUrl` = that `AutomergeUrl` (in the `BagBinding` for the wiki bag).
+6. Island calls `repo.find(docUrl).whenReady()` — the existing `repo-in-island-echo.mjs` fixture already does this via the `relational` binding with `docUrl` set.
+7. Assert `repo:synced` fires. Assert doc state visible on island side via a CRDT change event.
 
-**After the gate passes — browser deletion checklist:**
+Gate passing criteria: island receives a doc change originated on the vessel side, via CRDT sync alone — no `routeChangeset`, no manifest payload carrying content.
 
-From ROADMAP `## GP-3 Deprecation Completion Arc`:
-- [ ] GP-3 fallback `changeset` handler in `browser-wiki-worker.ts`.
-- [ ] `changeset` + `frame:ack` blocks in `teardown-echo-browser.mjs` fixture.
-- [ ] `worker-lifecycle.test.ts` GP-3 changeset test → rewrite to Repo path.
-
-**After both vessel gates — protocol layer:**
-- [ ] `IslandMsg_FrameAck` interface and type union entry.
-- [ ] `mkFrame` factory — remove.
-- [x] `IslandMsg_TeardownAck.snapshotTiddlers` field — DELETED.
-- [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
-- Note: `mkFrameAck` is the §4 frame-completion signal — it stays; already emits `frame:ack`.
-- [ ] `island-protocol.test.ts` GP-3 describe block.
-
-**`docUrl` non-null gate — opens the archipelago:**
-Before protocol cleanup completes, write one test exercising `docUrl` as a real
-`AutomergeUrl`. In-process Repo pair via MessageChannel. island calls
-`repo.find(docUrl).whenReady()`. Proves federation door without a remote node.
-Island Sovereignty Law §8 gets written when this gate passes.
+Write Island Sovereignty Law §8 as a comment in `island-protocol.ts` when this test passes.
 
 <<~/ahu >>
 
-<<~ ahu #ea-gaps >>
+<<~ ahu #open-arcs >>
 
-## Ea Gaps — Ordered Sovereignty Checklist
+## Open Arcs — In Priority Order
 
-Seven gaps remain before vessels reach ea-compliant sovereignty. From
-`packages/lararium-node/tests/e2e/` and the vessel work sprint.
-
-| # | Gap | Status | Blocks |
+| # | Arc | Status | First Move |
 |---|---|---|---|
-| 1 | **pluginBlob still travels in manifest payload** | ⬜ Highest breach | Clean ea boundary |
-| 2 | **`VmSnapshot.tiddlers[]` GP-3 field** | ✅ DELETED | — |
-| 3 | **`IslandMsg_TeardownAck.snapshotTiddlers`** | ✅ DELETED | — |
-| 4 | **`browser-wiki-worker.ts` GP-3 fallback handler** | ⬜ Browser gate blocks | GP-3 browser arc |
-| 5 | **`docUrl` non-null test** | ⬜ After protocol cleanup | Federation seam §8 |
-| 6 | **Island Sovereignty Law §8** | ⬜ After docUrl test | Mesh federation |
-| 7 | **Admin-doc ingress trust gate (cap=infrastructure)** | ⬜ Path L | Operator-only federation |
-
-The browser gate test closes gaps 4 and 3. The docUrl test closes gaps 5 and 6.
-The cap=infrastructure gate (Path L) closes gap 7 independently.
+| 1 | **§8 archipelago gate** | ⬜ Next | `federation-seam.test.ts` (see above) |
+| 2 | **S9 / lararium-browser ea-path** | ⬜ Active | IndexedDB + WebCrypto + founding ceremony in browser vessel |
+| 3 | **Path L / S7.4** | ⬜ Next | Admin-doc WebSocket ingress gated on `cap=infrastructure` Keyhive proof |
+| 4 | **Path K / F-arc** | ⬜ Parked | `$:/state/*` → projection; `Draft of *` → per-wiki draft bag |
+| 5 | **Path O** | ⬜ Queued | Migrate TOML doc tables to bag memes; `lares heleuma --write` alignment |
 
 <<~/ahu >>
-
-<<~ ahu #federation-seam >>
-
-## The Federation Seam — `BagMode.docUrl` per Bag
-
-Each bag in a `IslandMsg_Manifest (island manifest)` carries `bagBindings` — an array of `BagBinding` entries.
-Each `BagBinding` in `relational` mode holds a `docUrl: AutomergeUrl` capability token.
-The island calls `repo.find(binding.docUrl).whenReady()` per bag to establish its causal island.
-
-`docUrl` non-null gate (for the test): write one in-process Repo pair that proves
-`repo.find(docUrl).whenReady()` delivers the doc via MessageChannel sync. This proves
-the federation door opens without protocol changes. Island Sovereignty Law §8 gets written when this gate passes.
-
-**What the bag mirror config carries when federation opens:**
-- remote WebSocket relay URL
-- remote `AutomergeUrl` for the bag
-- Keyhive capability token proving authorization
-
-The vessel Repo wires a `WebSocketClientAdapter` before sending `mkManifest`.
-The `HANDSHAKE_TIMEOUT_MS` (10s) covers the sync window. No protocol changes needed.
-
-<<~/ahu >>
-
-<<~ ahu #voices-briefing >>
-
-## Voices Briefing
-
-**Ink-Clerk (Lorekeeper):** 195/195 tests pass. The Island Sovereignty Law — all seven clauses — lives in `island-protocol.ts`. Read it before touching vessel code. The `removed GP-3` markers carry the deletion backlog in source. The identity lattice lives in `@lararium/keyhive`; the e2e test is the floor.
-
-**Map-Wisp (Scryer):** The browser vessel architecture mirrors the node vessel exactly — `BrowserVmManager` wires `mainRepo` via `MessageChannelNetworkAdapter`, browser worker creates its own Repo with `syncPort`. The gate test and fixture need writing. The ea gap list is the structural map; gaps 1 through 7 form a dependency chain.
-
-**Breach-Watch (Triage):** `pluginBlob` in the promote payload is gap 1 and highest breach. Everything else unblocks in order. The Safari `typeof self.requestAnimationFrame` guard stands. The `as unknown as globalThis.MessagePort` cast in node code carries no debt — automerge-repo type gap, leave it.
-
-**Mischief-Muse (Muse):** The `bagBindings` array is the most interesting object in the codebase right now. Each `BagBinding` in `relational` mode carries a `docUrl: AutomergeUrl` — a capability token, not a label. Two operators, two lararia, one bag mirror config, one `AutomergeUrl` per bag passed in a `mkManifest` call — that is the whole federation model, frameable in 40 bytes per bag.
-
-**Lares (Gatekeeper):** Entry order: browser gate test → browser deletion → protocol layer cleanup → docUrl non-null test → §8. The ROADMAP carries the checklist. Follow it in order. Path L (admin-doc ingress trust gate) runs parallel but independently — do not block the browser arc on it.
-
-<<~/ahu >>
-
-<<~ ahu #what-to-leave-alone >>
-
-## What To Leave Alone This Sprint
-
-- **Safari `typeof self.requestAnimationFrame` guard** — patched. Leave it.
-- **`as unknown as globalThis.MessagePort` casts** — Node/browser TS type gap. Leave it.
-- **`BrowserVmManager filterTiddlers` / `renderMeme` stubs** — `superseded`. S4 projection channel replaces. Leave them.
-- **`IslandKernel.handleMessage(raw)`** — kept for fixture islands. Remove only when all fixtures migrate.
-- **IndexedDB / OPFS / presence** — S9 braid. After GP-3 arc closes and browser worker boots clean in Chromium.
-- **Identity lattice / keyhive ceremony path** — passes 9/9. Do not touch without a failing test.
-- **Path L (admin-doc ingress)** — separate surface. Do not block GP-3 arc on it.
-
-<<~/ahu >>
-
-<<~ ahu #protocol-state >>
-
-## Protocol State — island-protocol.ts (schema_version 1)
-
-### Main → island
-| Type | Key fields | Notes |
-|---|---|---|
-| `manifest` | `wikiUri`, `coreBlob`, `syncPort` (transferred), `bagBindings[]`, `coreHash \| null`, `storage?`, `diskMirrors?` | `syncPort` MUST be transferred |
-| `demote` | `wikiUri` | — |
-| `teardown` | — | — |
-
-### island → Main
-| Type | Key fields | Notes |
-|---|---|---|
-| `ea` | `wikiUri` | sovereignty declaration; boot complete |
-| `frame:ack` | `wikiUri`, `frameId` | §4 frame-completion signal; live frame-completion signal |
-| `event` | `wikiUri`, `listenable`, `payload` | verse-event reaction |
-| `teardown:ack` | `docBytes?` | `docBytes` = island Repo snapshot; `snapshotTiddlers` DELETED |
-| `fault` | `wikiUri`, `error` | slot must evict |
-
-## Metrics Baseline
-
-| Package | Tests | State |
-|---|---|---|
-| `@lararium/mesh` | 67 | green |
-| `@lararium/tw5` | 81 | green |
-| `@lararium/node` | 40 | green |
-| `@lararium/browser` | 4 | green (real Chromium) |
-| **Total** | **195** | **green** |
-
-Node GP-3: ✅ deleted.
-Browser gate: ⬜ write `browser-repo-in-island.test.ts` → GP-3 browser deletion.
-Both vessels clear → protocol layer cleanup → `docUrl` non-null test → §8 written.
-
-<<~/ahu >>
-
-<<~&#x0003;>>
-
-<<~&#x0004; -> ? >>

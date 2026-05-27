@@ -13,7 +13,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-wiki-island
  */
 
-import { runSovereignisland }      from "./sovereign-island-model.js";
+import { runSovereignWorker }      from "./sovereign-island-model.js";
 import { makeWikiPrimaryBehavior } from "./island-behaviors.js";
 
 runSovereignWorker((manifest) => makeWikiPrimaryBehavior(manifest));

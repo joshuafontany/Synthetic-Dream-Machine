@@ -2,7 +2,7 @@
  * vessel-island-pool.test.ts — VesselIslandPool lifecycle integration tests.
  *
  * Two fixture islands:
- *   vm-manager-echo.mjs       — lightweight echo (no TW5, no Repo-in-island)
+ *   vm-pool-echo.mjs       — lightweight echo (no TW5, no Repo-in-island)
  *   repo-in-island-echo.mjs   — Repo-in-island path; emits repo:synced + repo:change events
  *
  * Verifies:
@@ -27,7 +27,7 @@ import type { IslandMsg_Event } from "@lararium/mesh";
 // Fixture island URL
 // ---------------------------------------------------------------------------
 
-const FIXTURE_URL      = new URL("./fixtures/vm-manager-echo.mjs",      import.meta.url);
+const FIXTURE_URL      = new URL("./fixtures/vm-pool-echo.mjs",      import.meta.url);
 const REPO_FIXTURE_URL = new URL("./fixtures/repo-in-island-echo.mjs", import.meta.url);
 
 // ---------------------------------------------------------------------------
@@ -58,10 +58,12 @@ function makeDocHandleStub(
 // Helpers
 // ---------------------------------------------------------------------------
 
-const WIKI_ID = "lar:///ha.ka.ba/@test/wiki";
+const WIKI_ID              = "lar:///ha.ka.ba/@test/wiki";
+/** Fixture sentinel — fixture workers ignore bagBindings; value satisfies required laraiumDocUrl. */
+const FIXTURE_LARARIUM_URL = "automerge:fixture-lararium-url" as const;
 
-/** Nominal coreBlob stub — fixture worker ignores the bytes; type remains honest. */
-const STUB_CORE_BLOB = { bytes: new Uint8Array() } as const;
+
+
 
 /** Collect island events forwarded via onWorkerEvent. */
 function eventCollector(filter?: string): {
@@ -102,34 +104,34 @@ function waitForEvents(collector: { events: IslandMsg_Event[] }, count: number, 
 // ---------------------------------------------------------------------------
 
 describe("VesselIslandPool — island lifecycle", () => {
-  let manager: VesselIslandPool | null = null;
+  let pool: VesselIslandPool | null = null;
   let repo:    Repo | null          = null;
 
   afterEach(async () => {
-    await manager?.disposeAll();
-    manager = null;
+    await pool?.disposeAll();
+    pool = null;
     await repo?.shutdown();
     repo = null;
   });
 
   test("mountWiki promotes slot to hot tier", async () => {
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
+    await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
 
-    expect(manager.tier(WIKI_ID)).toBe("hot");
-    expect(manager.snapshot(WIKI_ID)).toBeNull(); // hot slot has no snapshot yet
+    expect(pool.tier(WIKI_ID)).toBe("hot");
+    expect(pool.snapshot(WIKI_ID)).toBeNull(); // hot slot has no snapshot yet
   });
 
   test("mountWiki is idempotent — second call is a no-op", async () => {
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
-    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB }); // no-op
+    await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
+    await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null }); // no-op
 
-    expect(manager.tier(WIKI_ID)).toBe("hot");
+    expect(pool.tier(WIKI_ID)).toBe("hot");
   });
 
   test("CRDT change on vessel Repo propagates to island via syncPort", async () => {
@@ -139,15 +141,17 @@ describe("VesselIslandPool — island lifecycle", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new VesselIslandPool({
+    pool = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await pool.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreHash: null });
     await waitForSynced(all);
 
     docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/page-a"] = { title: "lar:///ha.ka.ba/@test/wiki/page-a", text: "hello" }; });
@@ -159,14 +163,14 @@ describe("VesselIslandPool — island lifecycle", () => {
   });
 
   test("unmountWiki moves slot to cold with snapshot from teardown:ack", async () => {
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
 
-    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
-    await manager.unmountWiki(WIKI_ID);
+    await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
+    await pool.unmountWiki(WIKI_ID);
 
-    expect(manager.tier(WIKI_ID)).toBe("cold");
-    const snap = manager.snapshot(WIKI_ID);
+    expect(pool.tier(WIKI_ID)).toBe("cold");
+    const snap = pool.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
     // Repo-in-island path: snapshot carries docBytes when exported; fixture sends heads-only snapshot.
     expect(Array.isArray(snap!.heads)).toBe(true);
@@ -178,15 +182,17 @@ describe("VesselIslandPool — island lifecycle", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new VesselIslandPool({
+    pool = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await pool.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreHash: null });
     await waitForSynced(all);
 
     docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/x"] = { title: "lar:///ha.ka.ba/@test/wiki/x" }; });
@@ -197,15 +203,15 @@ describe("VesselIslandPool — island lifecycle", () => {
   });
 
   test("stats() reflects tier counts correctly", async () => {
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
 
-    expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 0 });
+    expect(pool.stats()).toEqual({ pinned: 0, hot: 0, cold: 0 });
 
-    await manager.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreBlob: STUB_CORE_BLOB });
-    expect(manager.stats()).toEqual({ pinned: 0, hot: 1, cold: 0 });
+    await pool.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreHash: null });
+    expect(pool.stats()).toEqual({ pinned: 0, hot: 1, cold: 0 });
 
-    await manager.unmountWiki(WIKI_ID);
-    expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
+    await pool.unmountWiki(WIKI_ID);
+    expect(pool.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
   });
 
   test("re-mountWiki from cold slot — snapshot captured, re-mounted island live and responsive", async () => {
@@ -215,22 +221,24 @@ describe("VesselIslandPool — island lifecycle", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
+    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new VesselIslandPool({
+    pool = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
+      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     // Mount, drive a change, unmount → cold slot.
-    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
+    await pool.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreHash: null });
     await waitForSynced(all);
     docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/persisted"] = { title: "lar:///ha.ka.ba/@test/wiki/persisted", text: "kept" }; });
     await waitForEvents(changes, 1);
-    await manager.unmountWiki(WIKI_ID);
+    await pool.unmountWiki(WIKI_ID);
 
-    const snap = manager.snapshot(WIKI_ID);
+    const snap = pool.snapshot(WIKI_ID);
     expect(snap).not.toBeNull();
 
     // Clear collectors for re-mount phase.
@@ -238,8 +246,8 @@ describe("VesselIslandPool — island lifecycle", () => {
     changes.events.length = 0;
 
     // Re-mount — fresh island, CRDT doc syncs via mainRepo again.
-    await manager.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreBlob: STUB_CORE_BLOB });
-    expect(manager.tier(WIKI_ID)).toBe("hot");
+    await pool.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreHash: null });
+    expect(pool.tier(WIKI_ID)).toBe("hot");
 
     await waitForSynced(all);
     docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/new"] = { title: "lar:///ha.ka.ba/@test/wiki/new", text: "fresh" }; });
@@ -250,11 +258,11 @@ describe("VesselIslandPool — island lifecycle", () => {
   }, 10_000);
 
   test("placeWikiJob — sends wiki:place-job and resolves with wiki:job-result", async () => {
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
-    await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
+    await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
 
-    const result = await manager.placeWikiJob(WIKI_ID, {
+    const result = await pool.placeWikiJob(WIKI_ID, {
       verb:        "echo",
       args:        { message: "hello" },
       requestedBy: "test",
@@ -268,10 +276,10 @@ describe("VesselIslandPool — island lifecycle", () => {
     // The echo fixture echoes all verbs successfully, so we test the error path directly
     // via a timeout scenario by using a very short timeout — instead use a dedicated check:
     // placeWikiJob on a cold slot rejects immediately.
-    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
+    pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
 
     await expect(
-      manager.placeWikiJob("lar:///ha.ka.ba/@test/no-such-wiki", {
+      pool.placeWikiJob("lar:///ha.ka.ba/@test/no-such-wiki", {
         verb:        "promote",
         args:        {},
         requestedBy: "test",

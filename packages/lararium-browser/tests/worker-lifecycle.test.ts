@@ -69,18 +69,15 @@ describe("browser worker lifecycle — GP-5 contract", () => {
       (msgs) => (msgs as { type: string }[]).some((m) => m.type === "ea"),
     );
 
-    // coreBlob required by BA-5 — fixture ignores bytes but type must be honest.
     // syncPort: browser MessageChannel is available globally in dedicated islands.
     const { port1: _main, port2: syncPort } = new MessageChannel();
-    worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort), [syncPort]);
+    worker.postMessage(mkManifest(wikiUri, syncPort), [syncPort]);
     _main.close();
     const msgs = await msgsPromise;
 
-    const ack = msgs.find((m) => (m as { type: string }).type === "ea") as IslandMsg_Ea & { coreBlobByteLength?: number } | undefined;
+    const ack = msgs.find((m) => (m as { type: string }).type === "ea") as IslandMsg_Ea | undefined;
     expect(ack).toBeDefined();
     expect(ack?.wikiUri).toBe(wikiUri);
-    // BA-5: coreBlob crossed the structured-clone boundary (fixture echoes byteLength).
-    expect(ack?.coreBlobByteLength).toBeGreaterThanOrEqual(0);
     expect(isIslandToVesselMsg(ack)).toBe(true);
   });
 

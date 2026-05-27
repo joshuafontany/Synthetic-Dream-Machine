@@ -304,22 +304,22 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
 
     // 5. Build bagBindings + coreHash for the manifest delivery.
     //    bagBindings: use params.bagBindings when provided; otherwise build a shim from params.docUrl.
-    const coreHash: string | null = null;
+    const coreHash: string | null = params.coreHash ?? null;
     const bagBindings: readonly BagBinding[] = params.bagBindings
       ? params.bagBindings
       : [{ bagId: id, writable: true, mode: "relational", docUrl: params.docUrl ?? "" } satisfies BagBinding];
 
-    // 6. Deliver manifest — transfer syncPort + coreBlob buffer to the sovereign island.
+    // 6. Deliver manifest — transfer syncPort to the sovereign island.
+    //    TW5 core bytes are NOT in the manifest; the island reads them from @lararium CRDT doc.
     //    pluginTiddlers, bagBindings, recipeUri cross the boundary so the island can think
     //    from first breath (ea condition 3 — own truth from boot, not from a later delta).
     slot.phase = "booting";
-    const manifestMsg = mkManifest(id, params.coreBlob, syncPort, coreHash, {
+    const manifestMsg = mkManifest(id, syncPort, coreHash, {
       ...(params.pluginTiddlers ? { pluginTiddlers: params.pluginTiddlers } : {}),
       bagBindings,
       recipeUri: params.recipeUri,
     });
     const transferList: Transferable[] = [syncPort];
-    if (params.coreBlob.buffer.byteLength > 0) transferList.push(params.coreBlob.buffer);
     worker.postMessage(manifestMsg, transferList);
 
     // 8. Await ea — island declares sovereignty; island is live.

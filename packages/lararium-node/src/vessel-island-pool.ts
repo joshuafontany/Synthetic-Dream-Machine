@@ -34,13 +34,11 @@ import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import type { DocHandle, Repo } from "@automerge/automerge-repo";
 import { join } from "path";
-import type { TW5CoreBootBlob } from "@lararium/tw5";
 import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  mkWikiPlaceJob,
-  type BagBinding,
+  mkWikiPlaceJob,  BAG_IDS,  type BagBinding,
   type IslandStorageConfig,
 } from "@lararium/mesh";
 import type {
@@ -104,13 +102,15 @@ type Slot = islandSlot | ColdSlot;
 export interface WikiBootContext {
   /** Automerge doc handle — used to materialize VmSnapshot for initial manifest delivery. */
   docHandle: DocHandle<LarDoc>;
-  /**
-   * Plugin tiddlers to inject into island TW5 boot so sigils/ahu/pranala are
+  /** Plugin tiddlers to inject into island TW5 boot so sigils/ahu/pranala are
    * present before CRDT deltas begin applying.
    */
   preloadedTiddlers?: Array<Record<string, unknown>>;
-  /** TW5 core bytes from the content-addressed LarDoc blob. Required — an authority without an engine is not an authority. */
-  coreBlob: TW5CoreBootBlob;
+  /**
+   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
+   * null = pre-CAS. Islands read the actual bytes from the @lararium CRDT doc.
+   */
+  coreHash: string | null;
   /**
    * Disk mirror configs for island-owned disk projection (Sprint 9).
    * Each entry maps a bag to a mirrorRoot dir + scope for namedBagMirror reconstruction.
@@ -148,6 +148,12 @@ export interface VesselIslandPoolOptions {
    * Absent = islands use memory-only (relay Repo is the sole persistence layer).
    */
   storageRoot?: string;
+  /**
+   * AutomergeUrl of the @lararium island doc.
+   * Required — every wiki island reads TW5 core bytes from `LarDoc.blobs[ENGINE_CORE_ID]`
+   * via this binding (§6). Omitting causes every island to post fault and fail ea.
+   */
+  laraiumDocUrl: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -168,17 +174,19 @@ export class VesselIslandPool {
   private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
   private readonly _mainRepo:       Repo | null;
   private readonly _storageRoot:    string | null;
+  private readonly _laraiumDocUrl:  string;
   /** Pending wiki:place-job results — requestId → { resolve, reject }. */
   private readonly _pendingWikiJobs = new Map<string, {
     resolve: (r: Record<string, unknown>) => void;
     reject:  (e: Error) => void;
   }>();
 
-  constructor(options: VesselIslandPoolOptions = {}) {
+  constructor(options: VesselIslandPoolOptions) {
     this._workerUrl      = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
     this._onWorkerEvent  = options.onWorkerEvent ?? null;
     this._mainRepo       = options.mainRepo ?? null;
     this._storageRoot    = options.storageRoot ?? null;
+    this._laraiumDocUrl  = options.laraiumDocUrl;
   }
 
   // ---------------------------------------------------------------------------
@@ -367,6 +375,7 @@ export class VesselIslandPool {
 
     const rawDocUrl = ctx.docHandle.url as string | undefined ?? null;
     const bagBindings: readonly BagBinding[] = [
+      { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: this._laraiumDocUrl },
       { bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl ?? "" },
     ];
 
@@ -376,9 +385,8 @@ export class VesselIslandPool {
 
     const manifestMsg = mkManifest(
       wikiId,
-      ctx.coreBlob.bytes,
       syncPort as unknown as globalThis.MessagePort,
-      null,
+      ctx.coreHash,
       {
         ...(pluginTiddlers ? { pluginTiddlers } : {}),
         bagBindings,
@@ -458,7 +466,7 @@ export class VesselIslandPool {
  * The caller is responsible for calling `worker.terminate()` after this resolves.
  */
 function _sendAndAwait<T extends IslandToVesselMsg>(
-  worker:       island,
+  worker:       Worker,
   msg:          VesselToIslandMsg,
   expectedType: T["type"],
   transferList: (ArrayBuffer | MessagePort)[] = [],

@@ -85,7 +85,6 @@ describe("BagBinding — capability token shape", () => {
     ];
     const msg = mkManifest(
       "lar:///test",
-      new Uint8Array(0),
       syncPort as unknown as globalThis.MessagePort,
       null,
       { bagBindings: bindings },
@@ -101,7 +100,6 @@ describe("BagBinding — capability token shape", () => {
     const { port2: syncPort } = new MessageChannel();
     const msg = mkManifest(
       "lar:///test-cold",
-      new Uint8Array(0),
       syncPort as unknown as globalThis.MessagePort,
     );
     syncPort.close();
@@ -136,7 +134,6 @@ describe("IslandStorageConfig — island-owned storage protocol", () => {
     const storage: IslandStorageConfig = { type: "nodefs", dir: "/data/wiki-sprint3" };
     const msg = mkManifest(
       "lar:///test-storage",
-      new Uint8Array(0),
       syncPort as unknown as globalThis.MessagePort,
       null,
       { storage },

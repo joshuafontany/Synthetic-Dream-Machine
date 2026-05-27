@@ -42,12 +42,10 @@ self.addEventListener("message", (e) => {
   }
 
   if (msg.type === "manifest") {
-    // Echo coreBlobByteLength so the test can assert BA-5 transfer crossed the boundary.
     self.postMessage({
       schema_version: 1,
       type: "ea",
       wikiUri: msg.wikiUri,
-      coreBlobByteLength: msg.coreBlob?.byteLength ?? -1,
     });
     return;
   }

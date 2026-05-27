@@ -34,7 +34,6 @@ import {
   isIslandToVesselMsg,
   type BagBinding,
 } from "@lararium/mesh";
-import type { TW5CoreBootBlob }                         from "@lararium/tw5";
 import { runLocalJob }                                  from "./job-local-dispatch.js";
 import type { VerbTable }                      from "./job-dispatcher.js";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
@@ -47,7 +46,11 @@ const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.ur
 export interface AdminVmOptions {
   repo:              Repo;
   adminUrl:          string;
-  coreBlob:          TW5CoreBootBlob;
+  /**
+   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
+   * null = pre-CAS. The admin island reads bytes from the @lararium CRDT doc.
+   */
+  coreHash:          string | null;
   /** Ordered bag capability tokens for the admin island's full recipe. */
   bagBindings:       readonly BagBinding[];
   /** Optional storage dir for the admin island's NodeFS Repo. */
@@ -90,7 +93,7 @@ export interface AdminVmResult {
 const HANDSHAKE_TIMEOUT_MS = 15_000;
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl, coreBlob, bagBindings, storageDir, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, bagBindings, storageDir, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
   let _delegationRegistry: VerbTable | null = null;
@@ -194,9 +197,8 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
 
   const manifestMsg = mkManifest(
     ADMIN_BAG_ID,
-    coreBlob.bytes,
     syncPort as unknown as globalThis.MessagePort,
-    coreBlob.sha256 ?? null,
+    coreHash,
     { bagBindings, ...(storage ? { storage } : {}) },
   );
   worker.postMessage(manifestMsg, [syncPort as unknown as ArrayBuffer]);

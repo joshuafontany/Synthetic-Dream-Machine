@@ -332,11 +332,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   if (!coreBlobEntry?.blob) {
     throw new Error(`[openNodeVessel] missing TW5 core blob (${ENGINE_CORE_ID}) in LarDoc; re-run build:genesis`);
   }
-  const coreBlob = {
-    bytes:  new Uint8Array(coreBlobEntry.blob),
-    sha256: coreBlobEntry.sha256,
-    source: coreBlobEntry.source ?? ENGINE_CORE_ID,
-  };
+  const coreHash = coreBlobEntry.sha256 ?? null;
 
   // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
   // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + JobDispatcher.
@@ -345,7 +341,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const adminVm = await openAdminVm({
     repo,
     adminUrl,
-    coreBlob,
+    coreHash,
     bagBindings: [
       { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
       ...(laresHandle ? [{ bagId: BAG_IDS.lares, writable: false, mode: "relational" as const, docUrl: laresHandle.url }] : []),
@@ -732,6 +728,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   vmManager = new VesselIslandPool({
     mainRepo:      repo,
     storageRoot:   storageDir,
+    laraiumDocUrl: islandHandle.url,
     onWorkerEvent: (wikiId, msg) => {
       eventBus.enqueueToRing("vm-ring", "worker.event", {
         wikiId,
@@ -755,7 +752,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   ];
   await vmManager.mountPrimaryWorker(activeWikiId, {
     docHandle: wikiHandle,
-    coreBlob,
+    coreHash,
     diskMirrors,
   });
   emit("tw5-booted");
