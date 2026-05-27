@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala/control"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala-control.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.67
-confidence = 0.69
+manaoio = 13
+confidence = 14
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.77
-manao = 0.84
+mana = 15
+manao = 17
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
@@ -101,7 +101,7 @@ label = "binds-next"
 direction = "forward"
 branch-label = "then"
 gate = "sequence"
-confidence = 0.88
+confidence = 18
 render-mode = "pulse-wire"
 status = "declared"
 ```

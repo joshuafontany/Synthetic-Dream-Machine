@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala/proposition"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala-proposition.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.67
-confidence = 0.69
+manaoio = 13
+confidence = 14
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.75
-manao = 0.83
+mana = 15
+manao = 17
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
@@ -94,7 +94,7 @@ label = "governs"
 relation-kind = "ontology"
 direction = "forward"
 polarity = "affirming"
-confidence = 0.91
+confidence = 18
 ontology-source = "lar:///ha.ka.ba/api/v0.1/pono/loci"
 render-mode = "inline-label"
 status = "declared"

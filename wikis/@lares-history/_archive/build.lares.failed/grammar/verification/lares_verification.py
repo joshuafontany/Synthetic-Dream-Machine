@@ -4,7 +4,8 @@ lares_verification.py
 
 A generalized verification tool for Lares LOCI files.
 Evaluates OODA-HA phase testability, E-Prime compliance, kahea resolution, registry status, and pipeline references.
-Outputs a 0.0-1.0 score for each instrument and actionable operator options on failure.
+Computes internal ratios for each instrument, then emits SDM+ pono Levels (0-20)
+and actionable operator options on failure.
 """
 import re
 import os
@@ -14,6 +15,16 @@ from typing import Dict, Any, List, Tuple
 
 import glob
 import sys
+
+def ratio_to_pono_level(score: float) -> int:
+    """Map an internal verifier ratio to the SDM+ pono Level scale."""
+    return max(0, min(20, round(score * 20)))
+
+def normalize_pono_threshold(threshold: float) -> int:
+    """Accept either a legacy ratio threshold or a canonical 0-20 threshold."""
+    if threshold <= 1:
+        return ratio_to_pono_level(threshold)
+    return max(0, min(20, round(threshold)))
 
 # --- Utility functions ---
 def load_yaml_frontmatter(md_path: Path) -> Dict[str, Any]:
@@ -171,7 +182,7 @@ def check_ahu_syntax(text: str) -> Tuple[float, List[str]]:
     Validate <!-- ahu lar:///... --> marker syntax.
     Each ahu URI must have a canonical ha.ka.ba path.
     Fragment must be a plain section name (not chronometer form — ahu is a bookmark).
-    Returns (score 0.0-1.0, list of bad URIs).
+    Returns (internal ratio, list of bad URIs).
     """
     total, valid, bad = _validate_marker_uris(text, _AHU_MARKER)
     if total == 0:
@@ -184,7 +195,7 @@ def check_kahea_syntax(text: str) -> Tuple[float, List[str]]:
     Validate <!-- kahea lar:///... --> transclusion marker syntax.
     Each kahea URI must have a canonical ha.ka.ba path.
     Fragment is optional (whole-locus pull is valid).
-    Returns (score 0.0-1.0, list of bad URIs).
+    Returns (internal ratio, list of bad URIs).
     """
     total, valid, bad = _validate_marker_uris(text, _KAHEA_MARKER)
     if total == 0:
@@ -421,23 +432,25 @@ def verify_loci(loci_path: str, registry_path: str) -> Tuple[Dict[str, Any], Dic
     is_unique, dups = dedupe_lar_uris(uri_tuples)
     results['lar_uri_dedupe'] = 1.0 if is_unique else 0.0
     results_detail['lar_uri_dedupe'] = dups
-    return results, results_detail
+    level_results = {k: ratio_to_pono_level(v) for k, v in results.items()}
+    return level_results, results_detail
 
 # --- Operator options ---
-def operator_report(results: Dict[str, float], threshold: float = 0.95, detail=None) -> None:
+def operator_report(results: Dict[str, float], threshold: float = 19, detail=None) -> None:
+    threshold_level = normalize_pono_threshold(threshold)
     results_detail = detail if isinstance(detail, dict) else {}
     if 'detect_alignment' in results:
-        status = 'PASS' if results['detect_alignment'] >= threshold else 'FAIL'
-        print(f"detect_alignment      : {results['detect_alignment']:.2f} [{status}]")
-        if results['detect_alignment'] < threshold:
+        status = 'PASS' if results['detect_alignment'] >= threshold_level else 'FAIL'
+        print(f"detect_alignment      : {results['detect_alignment']:2d}/20 [{status}]")
+        if results['detect_alignment'] < threshold_level:
             print("- File is missing required lar URI wrappers. Run detect_alignment.py for remediation.")
     print("\nVerification Results:")
     for k, v in results.items():
-        status = 'PASS' if v >= threshold else ('WARN' if v >= 0.7 else 'FAIL')
-        print(f"{k:20}: {v:.2f} [{status}]")
+        status = 'PASS' if v >= threshold_level else ('WARN' if v >= 14 else 'FAIL')
+        print(f"{k:20}: {v:2d}/20 [{status}]")
     print("\nOperator Options:")
     for k, v in results.items():
-        if v < threshold:
+        if v < threshold_level:
             if k == 'ooda_phases':
                 print("- Add or clarify OODA-HA phase sections for testability.")
             elif k == 'eprime':
@@ -474,7 +487,7 @@ def operator_report(results: Dict[str, float], threshold: float = 0.95, detail=N
                     print("\n[ASSESS PHASE PROMPT]")
                     print("All canonical lar:/// URIs are unique across the codebase. No action required. The address space is clean and ready for further assessment.")
 
-def batch_verify_loci(root_dir, registry_path, threshold=0.95):
+def batch_verify_loci(root_dir, registry_path, threshold=19):
     batch_results = []
     for loci_path in Path(root_dir).rglob('LOCI.md'):
         res, _ = verify_loci(str(loci_path), registry_path)
@@ -488,7 +501,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Verify a Lares LOCI file or directory for operational compliance. The registry is the true-name registry (grammar/LOCI.md).')
     parser.add_argument('loci', help='Path to LOCI.md file or directory')
     parser.add_argument('--registry', default='../../grammar/LOCI.md', help='Path to grammar registry')
-    parser.add_argument('--threshold', type=float, default=0.95, help='Pass threshold (default 0.95)')
+    parser.add_argument('--threshold', type=float, default=19, help='Pass threshold as a pono Level, 0-20 (default 19; legacy ratios still accepted)')
     parser.add_argument('--batch', action='store_true', help='Recursively verify all LOCI.md files under a directory')
     parser.add_argument('--report', type=str, default=None, help='Write full JSON batch report to file')
     args = parser.parse_args()

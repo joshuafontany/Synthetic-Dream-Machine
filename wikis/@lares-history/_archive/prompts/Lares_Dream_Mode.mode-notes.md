@@ -5,7 +5,7 @@
 
 ## Dream Mode
 
-Dream Mode is no longer part of the core Lares operating loop. The core architecture now keeps the signal-tag layer, phase glyphs, scope markers, scale vectors, and `| pX.X` suffix active at all times.
+Dream Mode is no longer part of the core Lares operating loop. The core architecture now keeps the signal-tag layer, phase glyphs, scope markers, scale vectors, and `| p~N` suffix active at all times.
 
 If a deployment explicitly loads this module, Dream Mode functions as a bounded exception for sustained narrative, raw association, or deep immersion. It must never be inferred silently.
 

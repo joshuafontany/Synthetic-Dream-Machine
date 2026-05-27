@@ -1,6 +1,6 @@
 # URI Stamping and Loader Architecture for Claude Agents
 
-**Executive Summary:** We design a **canonical `lar:` URI schema** and **stamping protocol** to anchor agent state and intent in conversations. Every message (user or agent) is decorated with a _start-URI_ and _end-URI_ carrying a `register` (confidence) and `canon` (priority) score. These URIs serve as cache anchors and state tags.  We define an ABNF-like grammar for `lar:` URIs, explain how to canonicalize and hash content, and show TOML manifest examples. We detail where to insert URIs and `@event` markers in the interaction (including quoting user input when confidence <1.0). Cache-safety rules ensure Anthropic’s prefix cache hits (block exactness and breakpoints). A migration checklist and sample scripts demonstrate stamping existing files. Finally, we give a test plan, sample bootloader, example stamped conversation, register/canon band tables, and a mermaid flowchart of the pipeline. The design relies on Anthropic/Claude documentation (memory/prompt-caching) and industry standards (TOML v1.0 spec, OpenTelemetry spans, event-sourcing patterns).
+**Executive Summary:** We design a **canonical `lar:` URI schema** and **stamping protocol** to anchor agent state and intent in conversations. Every message (user or agent) is decorated with a _start-URI_ and _end-URI_ carrying a `register` (confidence) and `canon` (priority) score. These URIs serve as cache anchors and state tags.  We define an ABNF-like grammar for `lar:` URIs, explain how to canonicalize and hash content, and show TOML manifest examples. We detail where to insert URIs and `@event` markers in the interaction (including quoting user input when confidence <20). Cache-safety rules ensure Anthropic’s prefix cache hits (block exactness and breakpoints). A migration checklist and sample scripts demonstrate stamping existing files. Finally, we give a test plan, sample bootloader, example stamped conversation, register/canon band tables, and a mermaid flowchart of the pipeline. The design relies on Anthropic/Claude documentation (memory/prompt-caching) and industry standards (TOML v1.0 spec, OpenTelemetry spans, event-sourcing patterns).
 
 ## 1. lar: URI Specification
 
@@ -28,7 +28,7 @@ FLOAT       = DIGIT [ "." DIGIT* ]
 - **Tier/Kind**: e.g. `canon/module`, `canon/tool`. `"canon"` tier indicates agentic canonical content.  
 - **Name and version**: A module name (e.g. `lares-identity`) and semantic version.  
 - **Query params**:
-  - `register`: A letter code (`C`=truth, `S`=second, etc) plus a float 0.0–1.0 confidence. **C~20** means absolute trust.  
+  - `register`: A letter code (`C`=truth, `S`=second, etc) plus a float 0–20 confidence. **C~20** means absolute trust.  
   - `canon`: Float 0.0–10.0 for loader priority (10=highest).  
   - `scope`: **hard/soft/advisory** enforcement (cannot/etc).  
 - **Fragment**: `#<sha256>` is the hex SHA-256 of the content (described below). Including the hash makes the URI **content-addressed**.
@@ -197,7 +197,7 @@ Using this ensures any change in content (even a single char) yields a different
 
 ## 5. Register/Categorization & Enforcement
 
-**Register Semantics (0.0–1.0):** This is the “truth/confidence” axis. We map it to categories:
+**Register Semantics (0–20):** This is the “truth/confidence” axis. We map it to categories:
 
 | Label | Range         | Meaning           |
 |-------|--------------:|:------------------|

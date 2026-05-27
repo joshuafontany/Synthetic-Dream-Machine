@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/module/?confidence=0.95&p=0.5 -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/module/?confidence=C~19&p=10 -->
 
 ---
 name: talk-story
@@ -18,7 +18,7 @@ scale-range: [session, project]
 trigger: always — session start
 invariant: true
 dependencies: []
-confidence: 0.95
+confidence: 19
 ---
 
 # Talk Story Module

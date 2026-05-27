@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/dreamdeck-feed-architecture"
 file-path = "wikis/lares-history/memes/history/lindwyrm/dreamdeck-feed-architecture.md"
 type = "text/x-memetic-wikitext"
 tagspace = "adjacent"
-confidence = 0.72
+confidence = 14
 register = "S"
-manaoio = 0.72
-mana = 0.74
-manao = 0.76
+manaoio = 14
+mana = 15
+manao = 15
 role = "format and cast architecture locus for Lindwyrm DreamDeck feed narrative"
 source-consumed = [
   "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE.md",

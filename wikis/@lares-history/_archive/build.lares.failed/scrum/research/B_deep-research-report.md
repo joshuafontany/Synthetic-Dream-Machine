@@ -135,7 +135,7 @@ lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scop
 title = "Lares Kernel"
 description = "Invariant identity + gates + minimal runtime operating rules."
 
-# Epistemic register (0.0–1.0)
+# Epistemic register (0–20)
 [register]
 label = "C"         # C | CS | S | SP | P
 value = 1.0         # float in [0.0, 1.0]
@@ -801,7 +801,7 @@ This directory drafts the TOML schemas; the clean tree should eventually contain
 
 ## Quick glossary
 
-- **Register**: epistemic confidence (0.0–1.0; C/S/SP/P language)
+- **Register**: epistemic confidence (0–20; C/S/SP/P language)
 - **Canon**: enforcement priority (0.0–10.0 with scope hard/soft/advisory)
 - **Invariant core**: smallest always-loaded subset that bootstraps identity, tools, permissions, protocol
 - **IR**: intermediate representation; compiler output before host formatting

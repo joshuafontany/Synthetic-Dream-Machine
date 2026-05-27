@@ -54,7 +54,7 @@
     - `@issues "none|one|many|stream|?"`
     - `@trace "none|minimal|normal|full|?"`
     - `@route "render|store|emit|recurse|invoke|defer|abort|quarantine|?"`
-    - `@confidence "0.0-1.0|?"`
+    - `@confidence "0–20|?"`
     - `@kapu "policy-address|policy-object|?"`
     - `@residue "none|trace|burden|warning|error|surplus|drift|?"`
 

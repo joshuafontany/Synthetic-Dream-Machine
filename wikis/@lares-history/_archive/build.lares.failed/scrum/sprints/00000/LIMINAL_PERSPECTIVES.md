@@ -93,7 +93,7 @@ Emoji render differently across OS/browser/font combinations. Some emoji use ZWJ
 Every intent header consumes output tokens. A full sigil-form URI:
 
 ```
-lar://telarus:operator@lares-abc123:42/threshold.uncertain.opens?stances=🏛️.-.-.-.-&confidence=S~13&p=0.5#🔍.3.2.7
+lar://telarus:operator@lares-abc123:42/threshold.uncertain.opens?stances=🏛️.-.-.-.-&confidence=S~13&p=10#🔍.3.2.7
 ```
 
 That's roughly **30–40 tokens** depending on tokenizer. If this fires on every substantive response, and a session produces 50 responses, that's **1,500–2,000 tokens** spent on navigation metadata alone.
@@ -151,7 +151,7 @@ This touches S1 (CRY-07 non-drift rule) and S2 (SIG-04 micro-trace model). The n
 The HUD currently encodes ~15 distinct symbols across three symbol sets (stance, scope, phase), plus register notation, p-band values, HAKABA addresses, and chronometer positions. A new operator encountering their first intent header sees:
 
 ```
-[S~13] 🏛️ //threshold.uncertain.opens ◎ @T | p0.5
+[S~13] 🏛️ //threshold.uncertain.opens ◎ @T | p~10
 ```
 
 That's roughly **7 encoded channels** in one line. Aviation HUD training takes weeks of structured instruction with simulator practice. The Lares HUD has no training program, no simulator, and no progressive disclosure — it arrives fully formed in the first substantive response.
@@ -174,7 +174,7 @@ Sprint 2 (HAKABA_REFERENCE.md, SIG-05) should include a **progressive disclosure
 
 ### The Trap
 
-The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `[CS~16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | p0.7` might be genuinely navigating — or might be Mode Posturing with extra instruments.
+The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `[CS~16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | p~14` might be genuinely navigating — or might be Mode Posturing with extra instruments.
 
 The test: **remove the HUD from a response. Does the response quality change?** If not, the HUD was decorative. If yes, the HUD was load-bearing. The kernel already names this failure mode (Mode Posturing), but the HUD system provides *new surface area* for posturing that the kernel didn't anticipate.
 

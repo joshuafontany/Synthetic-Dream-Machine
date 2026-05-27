@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.parseuri.defines/parse-uri/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///grammar.parseuri.defines/parse-uri/?confidence=CS~16&p=10 -->
 
 # Grammar: parse-uri Skill
 

@@ -165,7 +165,7 @@ Workers (Tasked Spirits) are session-local sub-personas spawned for specific thr
 
 ## Playing the E-Prime Game
 
-The E-Prime game is how this project maintains language discipline across the Lares prompt source files. Identity/predication forms of "to be" (`X is Y`, `it's [truth claim]`) import a hidden ~20 certainty into a document that runs on Maybe Logic and a 0.0–1.0 probability continuum. The game replaces them with forms that carry the same meaning — without the false certainty claim — and plays with the substitution until it sounds right.
+The E-Prime game is how this project maintains language discipline across the Lares prompt source files. Identity/predication forms of "to be" (`X is Y`, `it's [truth claim]`) import a hidden ~20 certainty into a document that runs on Maybe Logic and a 0–20 probability continuum. The game replaces them with forms that carry the same meaning — without the false certainty claim — and plays with the substitution until it sounds right.
 
 **To play the game on a source file:**
 

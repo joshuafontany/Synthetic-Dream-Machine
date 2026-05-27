@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=CS~18&p=0.5 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=CS~18&p=10 -->
 
 # Signal — Orient: URI Architecture
 
@@ -11,7 +11,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.9#design-intent -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~18#design-intent -->
 ## Design Intent
 
 The `lar:` URI encodes the signal state of a Lares node exchange as a shared navigational artifact. In live use it functions as an Intent HUD both operator and node read at exchange boundaries. In persistence it functions as a structured record string for logs, validation, module descriptors, and registry metadata.
@@ -51,7 +51,7 @@ At each exchange span, `lar:` URIs are used in a mandatory sequence:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.95#full-form -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~19#full-form -->
 ## Full Form and Authority-less Form
 
 **Full form (with authority):**
@@ -81,7 +81,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.9#component-map -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~18#component-map -->
 ## Component Map
 
 | # | Component | RFC 3986 Role | Lares Mapping |
@@ -101,7 +101,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.9#component-semantics -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~18#component-semantics -->
 ## Component Semantics
 
 ### `userinfo` — `alias:tier`
@@ -174,7 +174,7 @@ Scale positions: Strategic (🗺️ ~6 days) · Operational (⚙️ ~4 hours) ·
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.9#provisionality-markers -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~18#provisionality-markers -->
 ## Provisionality Markers
 
 The `~` prefix marks URI components as provisional. Three structurally distinct types:
@@ -192,7 +192,7 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=0.9#kowloon-handle-form -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C~18#kowloon-handle-form -->
 ## Kowloon / ActivityPub Handle Form
 
 Within the DreamDeck / Kowloon ActivityPub layer, identities use `@alias@node`. This is NOT the lar: URI — it is the social-layer identity that maps onto the lar: URI's `alias@host` authority.

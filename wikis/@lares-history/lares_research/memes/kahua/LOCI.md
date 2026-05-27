@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.kahua.grounds/kahua/?confidence=CS~19&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.kahua.grounds/kahua/?confidence=CS~19&p=10 >>
 
 # Grammar: Kahua
 

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS~16&p=10 -->
 <!-- Canonical registry: see LOCI.registry.toml for True Name registry data -->
 <!-- TOML registry: lares/grammar/truename/LOCI.registry.toml -->
 <!-- lares metadata wired: lar://grammar/truename/LOCI -->

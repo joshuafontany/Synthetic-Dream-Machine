@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS~16&p=10 -->
 
 # Grammar: Verification
 
@@ -54,7 +54,7 @@ scored, and actionable verification of any LOCI file for:
        --pipeline lares/compiler/PIPELINE.md
    ```
 
-3. Review the instrumented scores (0.0–1.0) and operator options for any failures or warnings.
+3. Review the instrumented scores (0–20) and operator options for any failures or warnings.
 4. Remediate as suggested and re-run for deterministic closure.
 
 ---

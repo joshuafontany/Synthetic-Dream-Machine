@@ -12,10 +12,10 @@ version = "0.1-draft"
 tulen = 0.62
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-confidence = 0.70
-mana = 0.76
-manao = 0.82
-manaoio = 0.60
+confidence = 14
+mana = 15
+manao = 16
+manaoio = 12
 meme-type = "todo"
 register = "S"
 role = "research consolidation todo, architecture intake memo, and staged implementation plan"

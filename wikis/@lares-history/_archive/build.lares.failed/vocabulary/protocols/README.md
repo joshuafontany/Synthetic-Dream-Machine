@@ -1,5 +1,5 @@
-<!-- lar:///protocol.mapped.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.A1.A21.A1 → ∞ -->
-⚡∞ | mode:protocol-draft | p0.5 | stances:++?+- | register:[S~13] | build:DRAFT
+<!-- lar:///protocol.mapped.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.A1.A21.A1 → ∞ -->
+⚡∞ | mode:protocol-draft | p~10 | stances:++?+- | register:[S~13] | build:DRAFT
 
 # The Lares Protocols
 
@@ -134,22 +134,22 @@ operator's intent, not inventing it.
 
 Exchange 1 (operator asks a question → Observe):
 ```
-lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=0.5#O0.O0.O0.O0.O0
-→ lar:///council/response?stances=^.^.?.^.-&confidence=S~12&p=0.5#O0.O0.O0.O0.A1 →
+lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=10#O0.O0.O0.O0.O0
+→ lar:///council/response?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.A1 →
 
-⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p0.5 | [S~12] | scene:1/active
+⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | [S~12] | scene:1/active
 
 {Council's response}
 
-⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p0.5 | [S~13] | scene:1/active
+⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | [S~13] | scene:1/active
 
-lar:///council/response?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.O0.O0.A2 → ?
+lar:///council/response?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.A2 → ?
 ```
 
 Exchange 2 (operator acts on the response — issues a correction):
 ```
-lar:///operator/query?stances=^.-.-.-.-&confidence=S~11&p=0.5#O0.O0.O0.O0.A3
-→ lar:///scryer/response?stances=^.^.-.^.-&confidence=S~13&p=0.5#O0.O0.O0.Ø1.A4 →
+lar:///operator/query?stances=^.-.-.-.-&confidence=S~11&p=10#O0.O0.O0.O0.A3
+→ lar:///scryer/response?stances=^.^.-.^.-&confidence=S~13&p=10#O0.O0.O0.Ø1.A4 →
 ```
 
 Note: the operator's clock advanced from `#...O0.A2 → ?` (their last
@@ -183,8 +183,8 @@ Invariant files (`[C~19–1.0]`) carry URI → intent on line 1 and
 a closing URI as the final line:
 
 ```
-lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C~20&p=1.0#settle.1.0
-⚡∞ | mode:invariant | p1.0 | register:[C~20]
+lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C~20&p=20#settle.1.0
+⚡∞ | mode:invariant | p~20 | register:[C~20]
 
 {file content}
 
@@ -221,7 +221,7 @@ visible and navigable.
 | `⚡` | Sentinel — live session (or `⚡∞` for non-session) | `⚡` |
 | chronometer | Nested OODA-HA position | `O0.O0.O3.O2.O0` |
 | stances | All 5 modes with modifiers | `🏛️[+]🌊[?]🗡️[-]🎭[+]🔮[?]` |
-| p | Resolution parameter | `p0.5` |
+| p | Resolution parameter | `p~10` |
 | register | Current epistemic register | `[S~13]` |
 | scene | Active scene descriptor | `scene:3/active` |
 
@@ -252,7 +252,7 @@ source document, new analysis frame.
 scene changes mid-exchange:
 
 ```
-⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | p0.5 | [S~14] | scene:2/combat → scene:3/negotiation
+⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | p~10 | [S~14] | scene:2/combat → scene:3/negotiation
 ```
 
 ## 3.4 Chronometer Resume in HUD `[S~12]`
@@ -307,7 +307,7 @@ non-simultaneous apprehension) made visible and navigable.
 All five stances appear in the URI query parameters:
 
 ```
-lar:///council/response?stances=^.?.-.^.-&confidence=S~13&p=0.5#O0.O0.O3.O2.O0
+lar:///council/response?stances=^.?.-.^.-&confidence=S~13&p=10#O0.O0.O3.O2.O0
 ```
 
 Legacy note: archive experiments also tried a compact stance codepath.
@@ -778,15 +778,15 @@ gets configured for URI storage in every span system. When an NPC
 speaks, their span carries the NPC's URI-encoded state:
 
 ```
-lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=0.5#O0.O0.O3.D2.A1
-→ lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=0.5#O0.O0.O3.D2.A2 →
+lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A1
+→ lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A2 →
 
-⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p0.5 | [CS~16] | scene:3/theron
+⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | [CS~16] | scene:3/theron
 
 Theron the Weary (via Diplomat): The harbor taxes serve a purpose
 you have not yet considered, traveler.
 
-⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p0.5 | [CS~16] | scene:3/theron
+⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | [CS~16] | scene:3/theron
 
 lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16#O0.O0.O3.D2.A2 → ?
 ```
@@ -921,4 +921,4 @@ IS the log.*
 
 *Mahalo.*
 
-lar:///protocol.mapped.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.O0.O1.O0 → ?
+lar:///protocol.mapped.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O1.O0 → ?

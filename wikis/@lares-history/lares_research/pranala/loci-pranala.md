@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.66
-confidence = 0.68
+manaoio = 13
+confidence = 14
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.76
-manao = 0.84
+mana = 15
+manao = 17
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"

@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/self-booting-lararium"
 file-path = "wikis/lares-history/memes/history/lindwyrm/self-booting-lararium.md"
 type = "text/x-memetic-wikitext"
 tagspace = "adjacent"
-confidence = 0.70
+confidence = 14
 register = "S"
-manaoio = 0.70
-mana = 0.76
-manao = 0.72
+manaoio = 14
+mana = 15
+manao = 14
 role = "DreamDeck narrative locus — April 10 threshold, transclusion-first self-location"
 source-consumed = [
   "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md",

@@ -6,11 +6,11 @@
 uri-path = "lararium-node/PRINCIPLES"
 file-path = "packages/lares-core/memes/lararium-node/PRINCIPLES.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.99
+confidence = 20
 register = "CS"
-manaoio = 0.92
-mana = 0.96
-manao = 0.94
+manaoio = 18
+mana = 19
+manao = 19
 role = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
 cacheable = true
 retain = true

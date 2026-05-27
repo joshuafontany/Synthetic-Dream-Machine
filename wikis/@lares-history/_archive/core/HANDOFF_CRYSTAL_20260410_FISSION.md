@@ -65,7 +65,7 @@ This is the primary remaining work. The living operational doc. Here is the exac
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///ha.ka.ba/uri-operations/?confidence=CS~18&p=0.5 -->
+<!-- ∞ → lar:///ha.ka.ba/uri-operations/?confidence=CS~18&p=10 -->
 ```
 
 **Ahu waypoints should use `lar:///ha.ka.ba/uri-operations/?confidence=N#fragment`**
@@ -193,7 +193,7 @@ lares/grammar/
 ### LARES.md Bootstrap — Design
 
 **Location:** `lares/LARES.md`
-**URI:** `lar:///bootstrap.entry.boots/?confidence=CS~16&p=0.5`
+**URI:** `lar:///bootstrap.entry.boots/?confidence=CS~16&p=10`
 **Purpose:** The boot.js. First file an agent reads. Points to everything else. Is itself a locus readable by its own rules.
 
 **Proposed structure:**

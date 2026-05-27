@@ -6,11 +6,11 @@
 uri-path = "LARARIUM-NODE/ROADMAP"
 file-path = "packages/lares-core/memes/lararium-node/ROADMAP.md"
 type = "text/x-memetic-wikitext"
-confidence = 0.88
+confidence = 18
 register = "S"
-manaoio = 0.82
-mana = 0.88
-manao = 0.86
+manaoio = 16
+mana = 18
+manao = 17
 role = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
 cacheable = false
 retain = true

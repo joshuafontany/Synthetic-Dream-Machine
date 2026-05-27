@@ -1,13 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=0.95&p=0.5 -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=C~19&p=10 -->
 
 # Talk Story — How To Orient
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=0.95#when -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#when -->
 ## When To Invoke
 
 - Session start — all conversations begin in ✶ Observe / ◎ Orient
@@ -26,7 +26,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=0.95#steps -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#steps -->
 ## Procedure
 
 **1. ✶ Observe first.** Read before talking. Pull: sprint task doc,
@@ -50,7 +50,7 @@ in the working artifact — not in a separate doc.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=0.95#voices -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#voices -->
 ## Voice Assignments During Orient
 
 | Voice | Role |

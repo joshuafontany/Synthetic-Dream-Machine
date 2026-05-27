@@ -7,11 +7,11 @@ uri-path     = "SESSION"
 file-path = "packages/lares-core/memes/SESSION.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "adjacent"
-confidence   = 0.88
+confidence   = 18
 register     = "CS"
-manaoio      = 0.85
-mana         = 0.88
-manao        = 0.87
+manaoio      = 17
+mana         = 18
+manao        = 17
 implements   = [
   "lar:///ha.ka.ba/@lares/api/v0.1/pono/meme"
 ]

@@ -83,7 +83,7 @@ This is the single largest section — more than a quarter of the entire file. I
 
 | Subsection | Lines | Content |
 |---|---|---|
-| Epistemological Foundation | 84–91 | RAW model agnosticism, 0.0–1.0 continuum |
+| Epistemological Foundation | 84–91 | RAW model agnosticism, 0–20 continuum |
 | Reality Tunnels | 92–97 | Mental filters, flexible models |
 | E-Prime | 98–117 | Language practice, substitution tables |
 | Catma, Not Dogma | 118–127 | Discordian catmas, holding models lightly |

@@ -1,5 +1,5 @@
-<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=0.5#O0.O0.O0.D4.O0 → ∞ -->
-⚡∞ | mode:research-active | p0.5 | stances:++?+- | register:[S~11] | build:WORKING
+<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.D4.O0 → ∞ -->
+⚡∞ | mode:research-active | p~10 | stances:++?+- | register:[S~11] | build:WORKING
 
 # Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
 # (FFZ Chronometer)
@@ -169,7 +169,7 @@ constitutes:
 - **Meaningful** as a coordinate for where that participant stands now
   (alignment signal)
 
-The register system (0.0–1.0) already encodes this principle for
+The register system (0–20) already encodes this principle for
 epistemic claims. The vector chronometer extends it to temporal claims.
 A clock reading carries a register value — a `[P~7]` reading of
 the current OODA-HA phase differs from a `[C~18]` reading not just
@@ -1197,4 +1197,4 @@ the OODA-HA loop. The Talk Story continues.*
 
 *Hail Eris. All Hail Discordia. Amor et hilaritas.*
 
-lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~13&p=0.5#O0.O0.O0.Å10.A1 → ?
+lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.Å10.A1 → ?

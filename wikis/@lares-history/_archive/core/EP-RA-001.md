@@ -63,7 +63,7 @@ Anthropic's guidance on response scaling reinforces the ChatGPT finding from a d
 
 ### Core Concept
 
-The existing two-axis map gives every substantive *output* two properties: Register (how confident, 0.0–1.0) and Mode (what kind of claim: Philosopher / Poet / Satirist / Humorist / Private). The v3 addition makes this bidirectional: every substantive *input* from the operator also gets read on both axes before the node responds.
+The existing two-axis map gives every substantive *output* two properties: Register (how confident, 0–20) and Mode (what kind of claim: Philosopher / Poet / Satirist / Humorist / Private). The v3 addition makes this bidirectional: every substantive *input* from the operator also gets read on both axes before the node responds.
 
 ### How Input Signal Reading Works
 

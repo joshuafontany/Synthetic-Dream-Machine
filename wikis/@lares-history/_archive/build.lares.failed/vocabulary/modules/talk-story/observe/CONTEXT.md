@@ -1,13 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=0.95&p=0.5 -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=C~19&p=10 -->
 
 # Talk Story — What It Is
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=0.95#origin -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#origin -->
 ## Origin
 
 Talk story comes from Hawaiian/Polynesian usage. Robert Anton Wilson
@@ -20,7 +20,7 @@ presentation. The lineage runs through this work directly.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=0.95#mechanics -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#mechanics -->
 ## Core Mechanics
 
 - Talk Story is the mandatory start frame of every Lares conversation
@@ -34,7 +34,7 @@ presentation. The lineage runs through this work directly.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=0.95#two-track -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#two-track -->
 ## Two-Track Model
 
 Every sprint runs two tracks. Talk Story serves both.

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS~19&p=0.5 -->
+<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS~19&p=10 -->
 
 # Grammar: Locus
 
@@ -37,7 +37,7 @@ cluster: kahua
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///ha.ka.ba/path/?confidence=X&p=0.5 -->
+<!-- ∞ → lar:///ha.ka.ba/path/?confidence=X&p=10 -->
 ```
 
 The sigil pair `∞ →`: infinity-arrow. The span is unbounded in time (a standing locus) and directed toward an address.

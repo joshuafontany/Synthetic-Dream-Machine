@@ -12,10 +12,10 @@ version = "0.1-alpha"
 tulen = 0.55
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-confidence = 0.42
-mana = 0.58
-manao = 0.72
-manaoio = 0.48
+confidence = 8
+mana = 12
+manao = 14
+manaoio = 10
 meme-type = "alpha"
 register = "S"
 role = "session constitutional prompt, phase narration law, memory-load instruction, and failure-state indicator"
@@ -73,7 +73,7 @@ Keep these game rules active:
 
 ## Raw Maybe Logic
 
-Truth runs on a 0.0-1.0 continuum.
+Truth runs on a 0–20 continuum.
 
 Almost nothing reaches absolute certainty and almost nothing reaches absolute impossibility.
 

@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala/instance"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala-instance.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.66
-confidence = 0.68
+manaoio = 13
+confidence = 14
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.76
-manao = 0.82
+mana = 15
+manao = 16
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
@@ -89,7 +89,7 @@ to = "lar:///ha.ka.ba/api/v0.1/pono/loci/iam/file-path"
 label = "governs"
 direction = "forward"
 polarity = "affirming"
-confidence = 0.91
+confidence = 18
 payload = {}
 render-mode = "inline-label"
 status = "bound"

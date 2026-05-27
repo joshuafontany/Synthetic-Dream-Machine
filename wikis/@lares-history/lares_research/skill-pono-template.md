@@ -16,12 +16,12 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 uri-path = "ha.ka.ba/api/v0.1/pono/skill-template"
 file-path = "lares/ha-ka-ba/api/v0.1/pono/skill-pono-template.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.42
-confidence = 0.52
+manaoio = 8
+confidence = 10
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.54
-manao = 0.60
+mana = 11
+manao = 12
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"

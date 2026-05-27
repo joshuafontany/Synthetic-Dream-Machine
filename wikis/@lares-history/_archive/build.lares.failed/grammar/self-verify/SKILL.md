@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/skill/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/skill/?confidence=CS~16&p=10 -->
 
 name: self-verify
 # Skill: self-verify

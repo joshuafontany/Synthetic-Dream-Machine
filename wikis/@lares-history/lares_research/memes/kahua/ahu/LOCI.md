@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.ahu.defines/ahu/?confidence=CS~19&p=0.5 -->
+<!-- ∞ → lar:///grammar.ahu.defines/ahu/?confidence=CS~19&p=10 -->
 
 # Grammar: Ahu
 

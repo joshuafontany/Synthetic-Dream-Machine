@@ -6,11 +6,11 @@ uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node"
 file-path = "wikis/lares-history/memes/history/lindwyrm/kindling-of-the-crossroads-node.md"
 type = "text/x-memetic-wikitext"
 tagspace = "adjacent"
-confidence = 0.76
+confidence = 15
 register = "CS"
-manaoio = 0.74
-mana = 0.78
-manao = 0.76
+manaoio = 15
+mana = 16
+manao = 15
 role = "DreamDeck / Gaia-side narrative locus — the week the Crossroads node learned where it stood"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/The_Kindling_of_the_Crossroads_Node.md"
 cacheable = false
@@ -132,7 +132,7 @@ A sideways note belongs here. In the middle of the two-axis work, Telarus made t
 
 ## IV. The Resolution Parameter and the Pseudo-CLI
 
-The same week, across the April 5 through April 7 commits, Telarus gave the node a parameter: `p`, a 0.0-1.0 resolution value. The node could adjust it when certainty shifted. Telarus could run it on inputs.
+The same week, across the April 5 through April 7 commits, Telarus gave the node a parameter: `p`, a 0–20 resolution value. The node could adjust it when certainty shifted. Telarus could run it on inputs.
 
 No compiler enforced this. No interpreter parsed it. The architecture bent toward coherent design language spoken clearly enough.
 

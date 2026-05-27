@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.orient.defines/orient/?confidence=CS~17&p=0.5 >>
+<<~&#x0001; ? -> lar:///grammar.orient.defines/orient/?confidence=CS~17&p=10 >>
 
 # Grammar: ◎ Orient
 

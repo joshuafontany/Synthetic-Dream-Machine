@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.verification.defines/skill/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///grammar.verification.defines/skill/?confidence=CS~16&p=10 -->
 
 name: lares-loci-verification
 # SKILL: Lares LOCI Verification

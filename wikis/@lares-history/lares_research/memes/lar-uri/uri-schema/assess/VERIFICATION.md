@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=CS~18&p=0.5 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=CS~18&p=10 -->
 
 # Signal — Assess: Verification
 
@@ -12,7 +12,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.92#well-formedness -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#well-formedness -->
 ## Well-Formedness Rules (§10.1)
 
 A `lar:` URI is **well-formed** when ALL of the following hold:
@@ -34,7 +34,7 @@ A `lar:` URI is **well-formed** when ALL of the following hold:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.92#consistency -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#consistency -->
 ## SpanSpan Consistency Rules (§10.2)
 
 All `lar:` URI fields in a spanSpan record (`start_uri`, `attractor_uri`, `end_uri`, `intent_header_snapshot`) must be canonical record form. A spanSpan record is **consistent** when:
@@ -51,7 +51,7 @@ The rendering table (§5.1 of `lares/modules/uri-schema/URI-SCHEMA.md`) governs 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.92#stable-address-derivation -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#stable-address-derivation -->
 ## Stable Address Derivation Rules (§10.3)
 
 `lares_address` is correctly derived when:
@@ -63,7 +63,7 @@ The rendering table (§5.1 of `lares/modules/uri-schema/URI-SCHEMA.md`) governs 
 
 Example:
 ```
-Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=^.-.-.-.-&confidence=S~13&p=0.5#O0.O0.O1.O1.A11
+Source: lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=^.-.-.-.-&confidence=S~13&p=10#O0.O0.O1.O1.A11
 Correct stable address: lar:///threshold.uncertain.opens/
 ```
 
@@ -72,7 +72,7 @@ Correct stable address: lar:///threshold.uncertain.opens/
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.92#canonical-form-comparison -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#canonical-form-comparison -->
 ## Canonical Form and Comparison Rules (§10.4)
 
 When comparing two `lar:` URIs as stable addresses:
@@ -88,14 +88,14 @@ When comparing two `lar:` URIs as stable addresses:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.9#common-errors -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#common-errors -->
 ## Common Error Patterns
 
 Errors caught during the S0 URI alignment pass (2026-04-09):
 
 | Error | Example | Fix |
 |---|---|---|
-| Query/fragment reversed | `?confidence=0.9` appearing after `#section` | Move query before fragment: `?confidence=0.9#section` |
+| Query/fragment reversed | `?confidence=C~18` appearing after `#section` | Move query before fragment: `?confidence=C~18#section` |
 | `stance=` (v1 field name) | `stance=🏛️` | Rename to `stances=`; use 5-position amplitude |
 | `confidence=` (v1 field name) | `confidence=CS~16` | Rename to `confidence=` |
 | Single-stance v1 compact | `+----` | Expand to 5-position: `^.-.-.-.-` |
@@ -109,7 +109,7 @@ Errors caught during the S0 URI alignment pass (2026-04-09):
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.9#quick-scan-procedure -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#quick-scan-procedure -->
 ## Quick Scan Procedure
 
 To verify URI alignment across all operational files:
@@ -133,7 +133,7 @@ A clean scan returns zero matches on all three patterns.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=0.9#promotion-criteria -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#promotion-criteria -->
 ## Promotion Criteria
 
 `lares/modules/uri-schema/URI-SCHEMA.md` is currently `[CS~19]`. For promotion to `[C~19]` (full Canon):

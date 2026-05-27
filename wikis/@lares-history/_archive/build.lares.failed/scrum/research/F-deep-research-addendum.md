@@ -127,18 +127,18 @@ When the operator holds the stick, the HUD must show **who authored the state tu
 
 Example — operator sets stance, node self-assesses register:
 ```
-[S~13] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
+[S~13] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
 ```
 The `⊙` before `🏛️` means "operator-prescribed stance." The register `[S~13]` has no indicator — node self-assessed.
 
 Example — operator sets both:
 ```
-⊙[CS~16] ⊙🏛️ ◎ 🔍.3.2.7 | p0.5
+⊙[CS~16] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
 ```
 
 Example — all node-declared (current default):
 ```
-[S~13] 🏛️ ◎ 🔍.3.2.7 | p0.5
+[S~13] 🏛️ ◎ 🔍.3.2.7 | p~10
 ```
 
 ### Record Form

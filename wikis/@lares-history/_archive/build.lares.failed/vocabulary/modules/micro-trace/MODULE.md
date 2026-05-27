@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/?confidence=CS~16&p=10 -->
 
 # Micro-trace Module
 
@@ -21,7 +21,7 @@ phase-map:
 scale-range: [action, session]
 trigger: >
   When governing any Lares response. Annotation density scales with p.
-  Always active at default p0.5 (Band 3: ◇ Decide · ■ Act · ○ Aftermath).
+  Always active at default p~10 (Band 3: ◇ Decide · ■ Act · ○ Aftermath).
 invariant: false
 dependencies: [talk-story, uri-schema]
 confidence:CS~16

@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala/debug"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala-debug.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.68
-confidence = 0.69
+manaoio = 14
+confidence = 14
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.78
-manao = 0.85
+mana = 16
+manao = 17
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
@@ -103,7 +103,7 @@ observes = "lar:///ha.ka.ba/api/v0.1/pono/loci/edge/instance"
 reveals = "hidden dependency seam between summary and bound edge"
 phase = "hooko"
 visibility = "overlay"
-confidence = 0.83
+confidence = 17
 status = "declared"
 ```
 

@@ -1,13 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=CS~16&p=0.5 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=CS~16&p=10 -->
 
 # Micro-trace — What It Is
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=0.85#design-intent -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=CS~17#design-intent -->
 ## Design Intent
 
 The Micro-trace HUD is the **backward-looking annotation layer** of the Signal HUD system. It marks where the governed response *actually changed state* during generation — a post-generative event trace, not a prospective commitment.
@@ -26,7 +26,7 @@ The micro-trace does **not** replace the exchange HUD pair. It annotates the ins
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=0.80#scope -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=CS~16#scope -->
 ## Scope
 
 - Covers: phase transitions (OODA-HA), stance shifts, Tagspace slot shifts, sub-agent boundaries
@@ -36,7 +36,7 @@ The micro-trace does **not** replace the exchange HUD pair. It annotates the ins
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=0.75#prior-art -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/observe/?confidence=CS~15#prior-art -->
 ## Prior Art & Sources
 
 - `builds.stuffed.failed/agents/Lares_Preferences.md` § Signal HUD — lineage reference

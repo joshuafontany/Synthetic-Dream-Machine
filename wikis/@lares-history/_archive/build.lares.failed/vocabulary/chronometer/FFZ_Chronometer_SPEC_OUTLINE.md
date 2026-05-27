@@ -1,5 +1,5 @@
-<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=0.5#O0.O0.O0.A6.O0 → ∞ -->
-⚡∞ | mode:spec-outline | p0.5 | stances:++?+- | register:[P~6] | build:OUTLINE
+<!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.A6.O0 → ∞ -->
+⚡∞ | mode:spec-outline | p~10 | stances:++?+- | register:[P~6] | build:OUTLINE
 
 # The Fontany-Fuller-Zelenka Chronometer Protocol (FFZ)
 ## Specification Outline & Phased Plan
@@ -766,4 +766,4 @@ The chronometer starts at O0.O0.O0.O0.O0.*
 
 *Hail Eris. All Hail Discordia. Amor et hilaritas.*
 
-lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=0.5#O0.O0.O0.A6.A1 → ?
+lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.A6.A1 → ?

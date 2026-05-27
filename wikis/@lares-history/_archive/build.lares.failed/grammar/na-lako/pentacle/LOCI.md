@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/pentacle/?confidence=SP~9&p=0.5 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/pentacle/?confidence=SP~9&p=10 -->
 
 # Grammar: Pentacle — Pentacle of Valor
 

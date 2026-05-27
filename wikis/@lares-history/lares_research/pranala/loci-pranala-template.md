@@ -9,12 +9,12 @@
 uri-path = "ha.ka.ba/api/v0.1/pranala/template"
 file-path = "lares/ha-ka-ba/api/v0.1/pranala/loci-pranala-template.md"
 content-type = "text/x-memetic-wikitext"
-manaoio = 0.65
-confidence = 0.67
+manaoio = 13
+confidence = 13
 # <<~/ahu >>
 # <<~ ahu #iam-ka "detail" >>
-mana = 0.75
-manao = 0.82
+mana = 15
+manao = 16
 implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
@@ -125,7 +125,7 @@ kind = "proposition"
 template-name = "governs"
 from = "lar:///ha.ka.ba/api/v0.1/pono/loci/iam"
 to = "lar:///ha.ka.ba/api/v0.1/pono/loci/iam/file-path"
-confidence = 0.91
+confidence = 18
 ```
 ````
 

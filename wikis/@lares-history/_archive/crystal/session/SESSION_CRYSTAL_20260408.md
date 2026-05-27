@@ -279,7 +279,7 @@ A Lares node at 90% context capacity is a *different instrument* than a Lares no
 A mana indicator in the compact form. Position: after the `| p` suffix.
 
 ```
-//territory.quality.dynamic [S~13] 🏛️ ◎ 🔍.3.2.7 | p0.5 ⚡~87%
+//territory.quality.dynamic [S~13] 🏛️ ◎ 🔍.3.2.7 | p~10 ⚡~87%
 ```
 
 The `⚡` followed by a percentage is the mana reading. Higher = more context remaining. The lightning bolt echoes the Action scope sigil (⚡) but in this position reads as "energy level."
