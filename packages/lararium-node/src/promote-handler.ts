@@ -9,7 +9,7 @@
 import { type CompositeStore, bagScopedStore, type TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
 import { IslandAdaptor, planPromoteUris, type TW5Engine } from "@lararium/tw5";
 import { toLarTiddlerRecord } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { stringArg, optionalStringArg } from "./handler-args.js";
 
 function stringListField(value: unknown): string | string[] | undefined {
@@ -22,7 +22,7 @@ export interface PromoteHandlerOptions {
   readonly tw5:       TW5Engine;
 }
 
-export function createPromoteHandler(opts: PromoteHandlerOptions): JobHandler {
+export function makePromoteReactor(opts: PromoteHandlerOptions): VerbReactor {
   return async (args, ctx) => {
     const tiddler = stringArg(args, "tiddler");
     const toBag = stringArg(args, "toBag");

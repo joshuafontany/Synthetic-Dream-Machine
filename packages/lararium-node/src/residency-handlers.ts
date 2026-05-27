@@ -7,14 +7,14 @@
  * the daemon constructs at boot.
  */
 
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import type { BagResidencyManager } from "@lararium/mesh";
 
 export interface ResidencyHandlerOptions {
   readonly residency: BagResidencyManager;
 }
 
-export function createPinHandler(opts: ResidencyHandlerOptions): JobHandler {
+export function makePinReactor(opts: ResidencyHandlerOptions): VerbReactor {
   return async (args) => {
     const url    = typeof args["url"]    === "string" ? args["url"]    : "";
     const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
@@ -30,7 +30,7 @@ export function createPinHandler(opts: ResidencyHandlerOptions): JobHandler {
   };
 }
 
-export function createUnpinHandler(opts: ResidencyHandlerOptions): JobHandler {
+export function makeUnpinReactor(opts: ResidencyHandlerOptions): VerbReactor {
   return async (args) => {
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
@@ -50,7 +50,7 @@ export function createUnpinHandler(opts: ResidencyHandlerOptions): JobHandler {
  * useful for smoke tests and future "I know this URL exists but won't
  * touch it yet" workflows.
  */
-export function createRegisterColdHandler(opts: ResidencyHandlerOptions): JobHandler {
+export function makeRegisterColdReactor(opts: ResidencyHandlerOptions): VerbReactor {
   return async (args) => {
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
@@ -59,7 +59,7 @@ export function createRegisterColdHandler(opts: ResidencyHandlerOptions): JobHan
   };
 }
 
-export function createResidencyStatsHandler(opts: ResidencyHandlerOptions): JobHandler {
+export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbReactor {
   return async () => {
     const stats = opts.residency.stats();
     return {

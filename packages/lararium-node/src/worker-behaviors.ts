@@ -42,147 +42,24 @@ import {
   type WorkerMsg_Manifest,
 } from "@lararium/mesh";
 import { placeVmJob, exportMemeText } from "@lararium/tw5";
-import { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
+import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
-import { createPromoteHandler } from "./promote-handler.js";
+import { makePromoteReactor } from "./promote-handler.js";
 import type { IslandBehavior, IslandContext } from "./sovereign-worker-model.js";
-
-// ── Wiki Worker behavior — null object (OTP: no-op callback module) ───────
-
-export const WikiBehavior: IslandBehavior = {
-  writeBagId:  BAG_IDS.scratch,
-  onEa:     () => {},
-  onSignal:   () => false,
-  onDemote:  () => {},
-};
-
-// ── Wiki Worker with disk projection ─────────────────────────────────────
-
-/**
- * Behavior for the primary wiki Worker when disk projection is required.
- *
- * Constructs a LarDiskProjector from the manifest's `diskMirrors` field and
- * starts it inside the Worker, subscribing to TW5 wiki change events directly.
- * The renderFn calls exportMemeText(ctx.tw5, uri) — no main-thread round-trip.
- *
- * Pass the manifest message so the behavior can read `diskMirrors` at `onEa` time.
- */
-export function makeWikiDiskBehavior(manifest: WorkerMsg_Manifest): IslandBehavior {
-  let _stopProjector: (() => void) | null = null;
-
-  return {
-    writeBagId: BAG_IDS.scratch,
-
-    onEa(ctx: IslandContext) {
-      const mirrorDefs = manifest.diskMirrors;
-      if (!mirrorDefs?.length) return;
-
-      const mirrors = mirrorDefs.map(({ bagId, mirrorRoot, scope }) =>
-        namedBagMirror(bagId, scope, mirrorRoot),
-      );
-
-      const projector = new LarDiskProjector(
-        mirrors,
-        (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
-      );
-      _stopProjector = projector.start(ctx.tw5);
-    },
-
-    onSignal: () => false,
-
-    onDemote() {
-      _stopProjector?.();
-      _stopProjector = null;
-    },
-  };
-}
-
-// ── Wiki Worker with dispatch — wiki:place-job handler ────────────────────
-
-/**
- * Behavior for wiki Workers that handle explicit wiki-scope jobs from the main thread.
- *
- * Registers a job handler registry (including promote) and dispatches
- * wiki:place-job messages inline — no JobDispatcher subscription needed
- * (wiki Workers have no kumu device surface / TW5 event job inbox).
- *
- * Cap verification is stubbed: the job arrived via WorkerMsg protocol from
- * the main thread, which is the trust boundary. Pre-authorization is assumed.
- *
- * Results are posted back via wiki:job-result when requestId is present.
- */
-export function makeWikiDispatchBehavior(): IslandBehavior {
-  let _registry: JobHandlerRegistry | null = null;
-
-  return {
-    writeBagId: BAG_IDS.scratch,
-
-    onEa(ctx: IslandContext) {
-      _registry = new JobHandlerRegistry();
-      _registry.register("promote", createPromoteHandler({
-        composite: ctx.composite,
-        tw5:       ctx.tw5,
-      }));
-    },
-
-    onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
-      if (type !== "wiki:place-job") return false;
-      if (!_registry) return false;
-      const msg = raw as WikiMsg_PlaceJob;
-      const requestId = msg.requestId ?? crypto.randomUUID();
-      const handler = _registry.get(msg.verb);
-      if (!handler) {
-        if (msg.requestId) {
-          ctx.post(mkWikiJobResult({ requestId, error: `no handler for "${msg.verb}"` }));
-        }
-        return true;
-      }
-      const job: JobTiddler = {
-        requestId,
-        title:       `lar:///ha.ka.ba/@wiki/jobs/${requestId}`,
-        verb:        msg.verb,
-        args:        msg.args,
-        targets:     msg.targets ?? [],
-        batchMode:   (msg.batchMode as BatchMode) ?? "single",
-        status:      "pending",
-        requestedBy: msg.requestedBy,
-        requestedAt: new Date().toISOString(),
-      };
-      void handler(msg.args, {
-        admin: ctx.composite,
-        job,
-        cap: async () => ({ ok: true, reason: "worker-trust" }),
-      }).then((result) => {
-        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, result }));
-      }).catch((err: unknown) => {
-        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: String(err) }));
-      });
-      return true;
-    },
-
-    onDemote() {
-      _registry = null;
-    },
-  };
-}
 
 // ── Primary Wiki Worker behavior — disk projection + wiki dispatch ────────
 
 /**
- * Combined behavior for the primary wiki Worker.
+ * IslandBehavior for the primary wiki Worker: disk write-back + wiki-scope job dispatch.
  *
- * Merges makeWikiDiskBehavior + makeWikiDispatchBehavior into one:
- *   onEa   — start disk projector (if diskMirrors present) + build job registry
+ *   onEa     — start LarDiskProjector (if diskMirrors present) + build VerbTable
  *   onSignal — handle wiki:place-job inline dispatch
- *   onDemote — stop projector
- *
- * Use this behavior when the primary wiki Worker needs both disk write-back
- * and wiki-scope job handling (promote, etc.).
+ *   onDemote — stop projector, clear registry
  */
 export function makeWikiPrimaryBehavior(manifest: WorkerMsg_Manifest): IslandBehavior {
   let _stopProjector: (() => void) | null = null;
-  let _registry: JobHandlerRegistry | null = null;
+  let _registry: VerbTable | null = null;
 
   return {
     writeBagId: BAG_IDS.scratch,
@@ -202,8 +79,8 @@ export function makeWikiPrimaryBehavior(manifest: WorkerMsg_Manifest): IslandBeh
       }
 
       // Wiki-scope dispatch
-      _registry = new JobHandlerRegistry();
-      _registry.register("promote", createPromoteHandler({
+      _registry = new VerbTable();
+      _registry.register("promote", makePromoteReactor({
         composite: ctx.composite,
         tw5:       ctx.tw5,
       }));
@@ -281,7 +158,7 @@ export function makeAdminBehavior(): IslandBehavior {
     writeBagId: ADMIN_BAG_ID,
 
     onEa({ tw5, composite, post }: IslandContext) {
-      const registry = new JobHandlerRegistry();
+      const registry = new VerbTable();
       _dispatcher = new JobDispatcher({
         adminVm:  tw5,
         admin:    composite,

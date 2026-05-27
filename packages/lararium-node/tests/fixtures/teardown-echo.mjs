@@ -65,20 +65,4 @@ parentPort.on("message", (msg) => {
     return;
   }
 
-  if (msg.type === "changeset") {
-    // Echo back counts so the test can assert the delta crossed the boundary.
-    parentPort.postMessage({
-      schema_version: 1,
-      type: "event",
-      wikiUri: msg.wikiUri,
-      listenable: "echo",
-      payload: {
-        addedCount:   (msg.added   ?? []).length,
-        deletedCount: (msg.deleted ?? []).length,
-      },
-    });
-    // ACK-gate: echo batch_id so the main thread can release the queue.
-    parentPort.postMessage({ schema_version: 1, type: "changeset:ack", wikiUri: msg.wikiUri, batch_id: msg.batch_id });
-    return;
-  }
 });

@@ -13,13 +13,13 @@ import {
   wikiDraftLarUri,
   wikiLarUri,
 } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
-export function createListWikisHandler(opts: WikiHandlerOptions): JobHandler {
+export function makeListWikisReactor(opts: WikiHandlerOptions): VerbReactor {
   return async () => {
     const titles = await opts.composite.listVisible();
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
@@ -38,7 +38,7 @@ export function createListWikisHandler(opts: WikiHandlerOptions): JobHandler {
   };
 }
 
-export function createInitWikiHandler(opts: WikiMintHandlerOptions): JobHandler {
+export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required (the wiki name)");
@@ -116,7 +116,7 @@ export function createInitWikiHandler(opts: WikiMintHandlerOptions): JobHandler 
   };
 }
 
-export function createOpenWikiHandler(opts: WikiHandlerOptions): JobHandler {
+export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

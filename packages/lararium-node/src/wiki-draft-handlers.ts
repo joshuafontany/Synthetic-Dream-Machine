@@ -1,11 +1,11 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import { type LarDoc, wikiDraftLarUri, wikiLarUri } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { numberArg, stringArg } from "./handler-args.js";
 import type { DraftHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
 
-export function createDraftHandler(opts: DraftHandlerOptions): JobHandler {
+export function makeDraftReactor(opts: DraftHandlerOptions): VerbReactor {
   return async (args, ctx) => {
     const tiddler = stringArg(args, "tiddler");
     let toBag = stringArg(args, "toBag");
@@ -61,7 +61,7 @@ export function createDraftHandler(opts: DraftHandlerOptions): JobHandler {
   };
 }
 
-export function createPruneStaleHandler(opts: WikiMintHandlerOptions): JobHandler {
+export function makePruneStaleReactor(opts: WikiMintHandlerOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

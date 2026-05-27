@@ -28,7 +28,7 @@ import {
   wikiLarUri, LARARIUM_DOC_URI, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { stringArg, makeRequestId } from "./handler-args.js";
 
 export interface EpochHandlerOptions {
@@ -53,7 +53,7 @@ export interface EpochHandlerOptions {
  *
  * Returns { bagUrl, oldDocUrl, newDocUrl, tiddlerCount, tombstoneCount }.
  */
-export function createEpochBagHandler(opts: EpochHandlerOptions): JobHandler {
+export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
   return async (args) => {
     const bagUrl = stringArg(args, "bagUrl");
     if (!bagUrl) throw new Error("args.bagUrl is required");
@@ -171,7 +171,7 @@ export interface RotateRecipeOptions extends EpochHandlerOptions {}
  * Today the draft layer continues unchanged; operator can promote
  * draft → new canonical via existing `lares promote` ceremonies.
  */
-export function createRotateRecipeHandler(opts: RotateRecipeOptions): JobHandler {
+export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

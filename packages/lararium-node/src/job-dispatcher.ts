@@ -35,7 +35,7 @@
  *   tiddlers become one shape of reaction trigger alongside signal-tiddlers,
  *   alarm-tiddlers, and recipe-deltas. kumu UEFN devices map to vessels whose
  *   dispatchers handle device-native job types (e.g. "uefn:spawn-actor",
- *   "kumu:update-map"). The handler registry shape (pure (args, context) →
+ *   "kumu:update-map"). The VerbTable shape (pure (args, context) →
  *   result) is already ReactionEngine-friendly — no refactor needed at that
  *   boundary. Wire the kumu / UEFN device vessel identity here when ready.
  *
@@ -64,23 +64,23 @@ export interface JobContext {
   readonly cap:     (access: import("@lararium/mesh").CapabilityAccess, bagUrl: string) => Promise<import("@lararium/mesh").CapabilityVerifyResult>;
 }
 
-/** Handler shape: pure function over (args, context) → result map. */
-export type JobHandler = (
+/** VerbReactor shape: pure function over (args, context) → result map. */
+export type VerbReactor = (
   args:    Readonly<Record<string, unknown>>,
   context: JobContext,
 ) => Promise<Record<string, unknown>>;
 
-export class JobHandlerRegistry {
-  private readonly handlers = new Map<string, JobHandler>();
+export class VerbTable {
+  private readonly handlers = new Map<string, VerbReactor>();
 
-  register(verbName: string, handler: JobHandler): void {
+  register(verbName: string, handler: VerbReactor): void {
     if (this.handlers.has(verbName)) {
       throw new Error(`[job-dispatcher] duplicate handler for "${verbName}"`);
     }
     this.handlers.set(verbName, handler);
   }
 
-  get(verbName: string): JobHandler | undefined { return this.handlers.get(verbName); }
+  get(verbName: string): VerbReactor | undefined { return this.handlers.get(verbName); }
   has(verbName: string): boolean { return this.handlers.has(verbName); }
   list(): readonly string[] { return [...this.handlers.keys()].sort(); }
 }
@@ -90,7 +90,7 @@ export interface JobDispatcherOptions {
   readonly adminVm:  TW5Engine;
   /** Admin composite store — receipts and inbox tombstones go here. */
   readonly admin:    CompositeStore;
-  readonly registry: JobHandlerRegistry;
+  readonly registry: VerbTable;
   readonly verifier?: CapabilityVerifier;
   /**
    * Called when a verb is not in the local registry (cross-island relay).

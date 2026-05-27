@@ -36,7 +36,7 @@ import {
 } from "@lararium/mesh";
 import type { TW5CoreBootBlob }                         from "@lararium/tw5";
 import { runLocalJob }                                  from "./job-local-dispatch.js";
-import type { JobHandlerRegistry }                      from "./job-dispatcher.js";
+import type { VerbTable }                      from "./job-dispatcher.js";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
 import type { WorkerMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
@@ -76,7 +76,7 @@ export interface AdminVmResult {
    * before awaiting workerEa. Relay jobs that arrive without a configured registry
    * are rejected with an error result back to the Worker.
    */
-  configureDelegation: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => void;
+  configureDelegation: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /**
    * Place a volatile job tiddler in the admin Worker's TW5 wiki.
    * Delegates to the admin Worker's internal `placeVmJob` via `admin:place-job` message.
@@ -93,7 +93,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   const { repo, adminUrl, coreBlob, bagBindings, storageDir, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via configureDelegation() after keyhive boots.
-  let _delegationRegistry: JobHandlerRegistry | null = null;
+  let _delegationRegistry: VerbTable | null = null;
   let _verifier:      CapabilityVerifier | null  = null;
 
   // ── Main-thread admin handle (keyhive + gate reads) ───────────────────────
@@ -206,7 +206,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     adminHandle,
     composite,
     workerEa,
-    configureDelegation: (registry: JobHandlerRegistry, verifier?: CapabilityVerifier) => {
+    configureDelegation: (registry: VerbTable, verifier?: CapabilityVerifier) => {
       _delegationRegistry = registry;
       _verifier      = verifier ?? null;
     },

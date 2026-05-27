@@ -1,7 +1,7 @@
 /**
  * handler-args — job-handler argument helpers.
  *
- * Every JobHandler receives `args: Readonly<Record<string, unknown>>`.
+ * Every VerbReactor receives `args: Readonly<Record<string, unknown>>`.
  * These helpers coerce values safely so handler bodies stay declarative.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/handler-args

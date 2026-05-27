@@ -20,36 +20,36 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 
 export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-key.js";
 
-export { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
-export type { JobHandler, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
+export { JobDispatcher, VerbTable } from "./job-dispatcher.js";
+export type { VerbReactor, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
 export { relayJobInboxChange } from "./job-inbox-relay.js";
 export type { JobInboxRelayOptions, JobPlacementRequest } from "./job-inbox-relay.js";
 export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
 
-export { createWhereHandler } from "./where-handler.js";
+export { makeWhereReactor } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";
 
-export { createPromoteHandler } from "./promote-handler.js";
+export { makePromoteReactor } from "./promote-handler.js";
 export type { PromoteHandlerOptions } from "./promote-handler.js";
 
 export {
-  createListWikisHandler, createInitWikiHandler,
-  createOpenWikiHandler,
-  createPinWikiHandler, createUnpinWikiHandler,
-  createAddBagHandler, createRemoveBagHandler,
-  createPruneStaleHandler, createDraftHandler,
+  makeListWikisReactor, makeInitWikiReactor,
+  makeOpenWikiReactor,
+  makePinWikiReactor, makeUnpinWikiReactor,
+  makeAddBagReactor, makeRemoveBagReactor,
+  makePruneStaleReactor, makeDraftReactor,
 } from "./wiki-handlers.js";
 export type {
   WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions,
   WikiComposeOptions, DraftHandlerOptions,
 } from "./wiki-handlers.js";
 
-export { createEpochBagHandler, createRotateRecipeHandler } from "./epoch-handlers.js";
+export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
 
 export {
-  createPinHandler, createUnpinHandler, createResidencyStatsHandler,
-  createRegisterColdHandler,
+  makePinReactor, makeUnpinReactor, makeResidencyStatsReactor,
+  makeRegisterColdReactor,
 } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 

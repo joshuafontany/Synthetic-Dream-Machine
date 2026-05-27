@@ -1,5 +1,5 @@
 import { bagStackFromRec, recipeUri } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { stringArg } from "./handler-args.js";
 import type { WikiResidencyOptions } from "./wiki-handlers.js";
 
@@ -12,7 +12,7 @@ import type { WikiResidencyOptions } from "./wiki-handlers.js";
  *
  * Returns { slug, recipeUri, pinned: [{ bagUrl, reason }] }.
  */
-export function createPinWikiHandler(opts: WikiResidencyOptions): JobHandler {
+export function makePinWikiReactor(opts: WikiResidencyOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
@@ -47,7 +47,7 @@ export function createPinWikiHandler(opts: WikiResidencyOptions): JobHandler {
  * want them back. The pin reason field doesn't gate unpin; it's
  * informational. Future refinement: scope unpin by reason prefix.
  */
-export function createUnpinWikiHandler(opts: WikiResidencyOptions): JobHandler {
+export function makeUnpinWikiReactor(opts: WikiResidencyOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

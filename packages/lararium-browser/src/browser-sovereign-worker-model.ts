@@ -39,7 +39,7 @@ import {
   type WorkerStorageConfig,
 } from "@lararium/mesh";
 import {
-  WorkerAuthorityHandler,
+  IslandKernel,
   IslandAdaptor,
   MemoryTiddlerStore,
 } from "@lararium/tw5";
@@ -68,7 +68,7 @@ export interface BrowserIslandBehavior {
 
 export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void {
   const _post = (msg: WorkerToMainMsg) => self.postMessage(msg);
-  const handler = new WorkerAuthorityHandler(_post);
+  const handler = new IslandKernel(_post);
 
   let _repo:             Repo | null            = null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

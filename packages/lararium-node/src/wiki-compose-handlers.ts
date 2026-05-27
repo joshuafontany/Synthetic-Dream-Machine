@@ -7,7 +7,7 @@ import {
   bagStackFromRec,
   recipeUri,
 } from "@lararium/mesh";
-import type { JobHandler } from "./job-dispatcher.js";
+import type { VerbReactor } from "./job-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiComposeOptions } from "./wiki-handlers.js";
 
@@ -22,7 +22,7 @@ import type { WikiComposeOptions } from "./wiki-handlers.js";
  * can find. Minting fresh bags is out of scope (`wiki init` or specific
  * mint ceremonies handle that).
  */
-export function createAddBagHandler(opts: WikiComposeOptions): JobHandler {
+export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     const bagUrl = stringArg(args, "bagUrl");
@@ -108,7 +108,7 @@ export function createAddBagHandler(opts: WikiComposeOptions): JobHandler {
  * F-arc when the TW5 vm refresh pipeline gets touched. For now, operator
  * tabs/state pointing into the removed bag may resolve to nothing.
  */
-export function createRemoveBagHandler(opts: WikiComposeOptions): JobHandler {
+export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     const bagUrl = stringArg(args, "bagUrl");

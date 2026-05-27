@@ -67,4 +67,4 @@ export { parseBagStack, parsePlugins } from "@lararium/mesh";
 export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "@lararium/mesh";
 export type { CeremonyTiddler } from "@lararium/mesh";
 
-export { WorkerAuthorityHandler } from "./worker-authority-handler.js";
+export { IslandKernel } from "./island-kernel.js";

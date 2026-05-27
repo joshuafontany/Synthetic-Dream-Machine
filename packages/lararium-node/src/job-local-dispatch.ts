@@ -1,11 +1,11 @@
 import { type CapabilityAccess, type CapabilityVerifyResult, type CapabilityVerifier, type CompositeStore, type JobTiddler } from "@lararium/mesh";
-import type { JobHandler, JobHandlerRegistry } from "./job-dispatcher.js";
+import type { VerbReactor, VerbTable } from "./job-dispatcher.js";
 
 export type CapVerify = (access: CapabilityAccess, bagUrl: string) => Promise<CapabilityVerifyResult>;
 
 export interface RunLocalJobOptions {
   readonly admin: CompositeStore;
-  readonly registry: JobHandlerRegistry;
+  readonly registry: VerbTable;
   readonly verifier?: CapabilityVerifier;
 }
 
@@ -16,7 +16,7 @@ export function makeCapVerify(verifier: CapabilityVerifier | undefined, requeste
 }
 
 export async function runLocalJob(job: JobTiddler, opts: RunLocalJobOptions): Promise<Record<string, unknown>> {
-  const handler: JobHandler | undefined = opts.registry.get(job.verb);
+  const handler: VerbReactor | undefined = opts.registry.get(job.verb);
 
   if (!handler) {
     throw new Error(`no handler registered for "${job.verb}"`);

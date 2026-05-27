@@ -1,5 +1,5 @@
 /**
- * WorkerAuthorityHandler — isomorphic wiki-worker TW5 lifecycle manager.
+ * IslandKernel — isomorphic sovereign island TW5 lifecycle manager.
  *
  * Owns the TW5Engine lifecycle (boot → live → teardown) inside a Worker realm.
  * Platform-neutral: callers supply a `postFn` that routes WorkerToMainMsg to
@@ -31,7 +31,7 @@
  *   syncPort        — MessagePort for Repo sync; consumed by the entry file.
  *   IslandAdaptor   — no CompositeStore in Worker; CRDT feed comes from the Worker-side Repo.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/worker-authority-handler
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-kernel
  */
 
 import { TW5Engine } from "./tw5-vm.js";
@@ -41,13 +41,12 @@ import type {
 } from "@lararium/mesh";
 import {
   mkEa,
-  mkTeardownAck,
   mkChangesetAck,
   mkFault,
   WORKER_PROTOCOL_VERSION,
 } from "@lararium/mesh";
 
-export class WorkerAuthorityHandler {
+export class IslandKernel {
   private _tw5:        TW5Engine | null = null;
   private _wikiUri:    string | null    = null;
   private readonly _liveHandles         = new Set<{ cancel(): void }>();
@@ -156,57 +155,6 @@ export class WorkerAuthorityHandler {
     this._liveHandles.clear();
     this._tw5?.dispose();
     this._tw5 = null;
-  }
-
-  // ── Deprecated legacy dispatch ──────────────────────────────────────────
-
-  /**
-   * @deprecated Use `bootTw5` / `applyDelta` / `sendEa` / `teardown` directly.
-   *
-   * Legacy single-entry dispatch kept for GP-3 compatibility (node fixture Workers,
-   * lar-wiki-worker.ts prior to Repo-in-Worker migration). Entry files that adopt
-   * the Worker Sovereignty Law should NOT call this method.
-   *
-   * Handles: manifest (boots TW5, sends ea immediately — no Repo sync wait),
-   * changeset (applies GP-3 delta), demote/teardown (GP-5 handshake).
-   */
-  async handleMessage(raw: unknown): Promise<void> {
-    if (typeof raw !== "object" || raw === null) return;
-    const msg = raw as Record<string, unknown>;
-    if (msg["schema_version"] !== WORKER_PROTOCOL_VERSION) return;
-
-    if (msg["type"] === "manifest") {
-      const wikiUri        = msg["wikiUri"]        as string;
-      const coreBlob       = msg["coreBlob"]       as Uint8Array;
-      const pluginTiddlers = msg["pluginTiddlers"]  as readonly Record<string, unknown>[] | undefined;
-      try {
-        await this.bootTw5(wikiUri, coreBlob, pluginTiddlers);
-        // Legacy path: sends ea immediately (no Repo sync wait).
-        // Worker Sovereignty Law is NOT satisfied here — island has no CRDT truth of its own.
-        this.sendEa(wikiUri);
-      } catch {
-        // fault already sent by bootTw5
-      }
-      return;
-    }
-
-    if (msg["type"] === "changeset") {
-      // @deprecated GP-3 oracle delta from main thread.
-      if (!this._tw5) return;
-      this.applyDelta(
-        msg["wikiUri"] as string,
-        msg["added"]   as readonly Record<string, unknown>[],
-        msg["deleted"] as readonly string[],
-      );
-      this.sendChangesetAck(msg["wikiUri"] as string, msg["batch_id"] as string);
-      return;
-    }
-
-    if (msg["type"] === "demote" || msg["type"] === "teardown") {
-      this.teardown();
-      this._post(mkTeardownAck());
-      return;
-    }
   }
 
   private _postFault(uri: string, err: unknown): void {

@@ -64,19 +64,19 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { NodeVmManager }                  from "./node-vm-manager.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { JobHandlerRegistry } from "./job-dispatcher.js";
-import { createWhereHandler }                       from "./where-handler.js";
+import { VerbTable } from "./job-dispatcher.js";
+import { makeWhereReactor }                       from "./where-handler.js";
 import {
-  createListWikisHandler, createInitWikiHandler,
-  createOpenWikiHandler,
+  makeListWikisReactor, makeInitWikiReactor,
+  makeOpenWikiReactor,
 } from "./wiki-handlers.js";
-import { createPinWikiHandler, createUnpinWikiHandler } from "./wiki-residency-handlers.js";
-import { createAddBagHandler, createRemoveBagHandler } from "./wiki-compose-handlers.js";
-import { createPruneStaleHandler, createDraftHandler } from "./wiki-draft-handlers.js";
-import { createEpochBagHandler, createRotateRecipeHandler } from "./epoch-handlers.js";
+import { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handlers.js";
+import { makeAddBagReactor, makeRemoveBagReactor } from "./wiki-compose-handlers.js";
+import { makePruneStaleReactor, makeDraftReactor } from "./wiki-draft-handlers.js";
+import { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 import {
-  createPinHandler, createUnpinHandler, createResidencyStatsHandler,
-  createRegisterColdHandler,
+  makePinReactor, makeUnpinReactor, makeResidencyStatsReactor,
+  makeRegisterColdReactor,
 } from "./residency-handlers.js";
 import { BagResidencyManager }                      from "@lararium/mesh";
 import { KeyhiveProvider, AdminEventStore }         from "@lararium/keyhive";
@@ -369,14 +369,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // live on the main thread (repo, catalogHandle, residency, primary composite).
   // The admin Worker's JobDispatcher delegates unknown verbs here via admin:delegate-job.
   // vmManager is assigned after Worker boot; jobs only execute after "live" is emitted.
-  const jobRegistry  = new JobHandlerRegistry();
+  const jobRegistry  = new VerbTable();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
   jobRegistry.register("echo", async (args) => ({ echoed: args }));
   // Read-only recipe-presence query — `lares where` previews source bag.
-  jobRegistry.register("where",   createWhereHandler({ composite }));
+  jobRegistry.register("where",   makeWhereReactor({ composite }));
   // E.4 — read-only wiki jobs. write jobs (init/sync/pin/etc) land
   // in E.5+. `list-wikis` walks the catalog for wiki oracle tiddlers.
-  jobRegistry.register("list-wikis", createListWikisHandler({ composite }));
+  jobRegistry.register("list-wikis", makeListWikisReactor({ composite }));
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   let vmManager: NodeVmManager;
@@ -408,8 +408,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       return "0x" + operatorIdentity.verifyingKey;
     },
   };
-  jobRegistry.register("init-wiki", createInitWikiHandler(wikiMintOpts));
-  jobRegistry.register("open-wiki", createOpenWikiHandler({ composite }));
+  jobRegistry.register("init-wiki", makeInitWikiReactor(wikiMintOpts));
+  jobRegistry.register("open-wiki", makeOpenWikiReactor({ composite }));
 
   // S6 — BagResidencyManager. Phase 1 (C.1): instrumentation only; no
   // eviction yet. Pin every doc the daemon touches at boot so we don't
@@ -441,34 +441,34 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await residency.pin(BAG_IDS.groups,         "boot:circles");
   await residency.pin(BAG_IDS.sessions,       "boot:sessions");
   await residency.pin(ADMIN_BAG_ID,           "boot:admin");
-  jobRegistry.register("pin",       createPinHandler({ residency }));
-  jobRegistry.register("unpin",     createUnpinHandler({ residency }));
-  jobRegistry.register("residency",     createResidencyStatsHandler({ residency }));
-  jobRegistry.register("register-cold", createRegisterColdHandler({ residency }));
+  jobRegistry.register("pin",       makePinReactor({ residency }));
+  jobRegistry.register("unpin",     makeUnpinReactor({ residency }));
+  jobRegistry.register("residency",     makeResidencyStatsReactor({ residency }));
+  jobRegistry.register("register-cold", makeRegisterColdReactor({ residency }));
   // E.6 — whole-recipe residency. Walks the wiki's bag-stack and
   // pins/unpins each bag in one shot.
-  jobRegistry.register("pin-wiki",   createPinWikiHandler({ composite, residency }));
-  jobRegistry.register("unpin-wiki", createUnpinWikiHandler({ composite, residency }));
+  jobRegistry.register("pin-wiki",   makePinWikiReactor({ composite, residency }));
+  jobRegistry.register("unpin-wiki", makeUnpinWikiReactor({ composite, residency }));
   // E.7 — recipe composition. Hot-reload at the composite layer; soft
   // remove (no MNT_DETACH StoryList reconciliation yet — F-arc territory).
-  jobRegistry.register("add-bag",    createAddBagHandler({    composite, repo, residency }));
-  jobRegistry.register("remove-bag", createRemoveBagHandler({ composite, repo, residency }));
+  jobRegistry.register("add-bag",    makeAddBagReactor({    composite, repo, residency }));
+  jobRegistry.register("remove-bag", makeRemoveBagReactor({ composite, repo, residency }));
   // E.8 — DXOS-style snapshot-restart on a single bag. Bounds history;
   // lossy by design. Tombstones survive (Cassandra rule).
-  jobRegistry.register("bag-epoch", createEpochBagHandler({
+  jobRegistry.register("bag-epoch", makeEpochBagReactor({
     composite, repo, residency, catalogHandle,
   }));
   // E.9a — Nix-generations stack rotation. Mints a fresh canonical doc;
   // retains old canonical as a previous-canon underlay slot (lower
   // priority) so old generations stay readable.
-  jobRegistry.register("rotate-recipe", createRotateRecipeHandler({
+  jobRegistry.register("rotate-recipe", makeRotateRecipeReactor({
     composite, repo, residency, catalogHandle,
   }));
   // E.9b — read-only stale-tiddler queue. Scans the draft bag for
   // tiddlers whose last activity exceeds a threshold (default 7 days);
   // surfaces them for operator's promote-or-prune decisions.
-  jobRegistry.register("prune-stale", createPruneStaleHandler(wikiMintOpts));
-  jobRegistry.register("draft",       createDraftHandler({ composite }));
+  jobRegistry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
+  jobRegistry.register("draft",       makeDraftReactor({ composite }));
   // C.2 — start the background sweeper. Idle eviction + LRU trim run
   // every sweepIntervalMs (default 30s). The manager's own re-entrancy
   // guard makes overlapping ticks safe.
