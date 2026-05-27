@@ -2,8 +2,6 @@ export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
-export { makeDiskProjectionKind } from "./projection-kinds.js";
-export type { DiskKindDeps } from "./projection-kinds.js";
 export { openNodeVessel, createNodeSession } from "./open-node-vessel.js";
 export { openAdminVm } from "./open-admin-vm.js";
 export type { AdminVmOptions, AdminVmResult } from "./open-admin-vm.js";
@@ -41,7 +39,6 @@ export {
   createAddBagHandler, createRemoveBagHandler,
   createPruneStaleHandler, createDraftHandler,
 } from "./wiki-handlers.js";
-export { createSyncWikiHandler } from "./wiki-sync-handler.js";
 export type {
   WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions,
   WikiComposeOptions, DraftHandlerOptions,

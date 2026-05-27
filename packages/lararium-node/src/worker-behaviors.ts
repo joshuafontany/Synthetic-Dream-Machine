@@ -121,9 +121,8 @@ export function makeWikiDispatchBehavior(): WorkerBehavior {
     onReady(ctx: WorkerContext) {
       _registry = new JobHandlerRegistry();
       _registry.register("promote", createPromoteHandler({
-        composite:          ctx.composite,
-        getPrimaryEngine:   () => ctx.tw5,
-        getMirrorLookupWiki: () => ctx.tw5.wiki,
+        composite: ctx.composite,
+        tw5:       ctx.tw5,
       }));
     },
 
@@ -163,6 +162,89 @@ export function makeWikiDispatchBehavior(): WorkerBehavior {
     },
 
     onTeardown() {
+      _registry = null;
+    },
+  };
+}
+
+// ── Primary Wiki Worker behavior — disk projection + wiki dispatch ────────
+
+/**
+ * Combined behavior for the primary wiki Worker.
+ *
+ * Merges makeWikiDiskBehavior + makeWikiDispatchBehavior into one:
+ *   onReady   — start disk projector (if diskMirrors present) + build job registry
+ *   onMessage — handle wiki:place-job inline dispatch
+ *   onTeardown — stop projector
+ *
+ * Use this behavior when the primary wiki Worker needs both disk write-back
+ * and wiki-scope job handling (promote, etc.).
+ */
+export function makeWikiPrimaryBehavior(manifest: WorkerMsg_Manifest): WorkerBehavior {
+  let _stopProjector: (() => void) | null = null;
+  let _registry: JobHandlerRegistry | null = null;
+
+  return {
+    writeBagId: BAG_IDS.scratch,
+
+    onReady(ctx: WorkerContext) {
+      // Disk projection
+      const mirrorDefs = manifest.diskMirrors;
+      if (mirrorDefs?.length) {
+        const mirrors = mirrorDefs.map(({ bagId, mirrorRoot, scope }) =>
+          namedBagMirror(bagId, scope, mirrorRoot),
+        );
+        const projector = new LarDiskProjector(
+          mirrors,
+          (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
+        );
+        _stopProjector = projector.start(ctx.tw5);
+      }
+
+      // Wiki-scope dispatch
+      _registry = new JobHandlerRegistry();
+      _registry.register("promote", createPromoteHandler({
+        composite: ctx.composite,
+        tw5:       ctx.tw5,
+      }));
+    },
+
+    onMessage(type: string, raw: unknown, ctx: WorkerContext): boolean {
+      if (type !== "wiki:place-job") return false;
+      if (!_registry) return false;
+      const msg = raw as WikiMsg_PlaceJob;
+      const requestId = msg.requestId ?? crypto.randomUUID();
+      const handler = _registry.get(msg.verb);
+      if (!handler) {
+        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: `no handler for "${msg.verb}"` }));
+        return true;
+      }
+      const job: JobTiddler = {
+        requestId,
+        title:       `lar:///ha.ka.ba/@wiki/jobs/${requestId}`,
+        verb:        msg.verb,
+        args:        msg.args,
+        targets:     msg.targets ?? [],
+        batchMode:   (msg.batchMode as BatchMode) ?? "single",
+        status:      "pending",
+        requestedBy: msg.requestedBy,
+        requestedAt: new Date().toISOString(),
+      };
+      void handler(msg.args, {
+        admin: ctx.composite,
+        job,
+        cap: async () => ({ ok: true, reason: "worker-trust" }),
+      }).then((result) => {
+        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, result }));
+      }).catch((err: unknown) => {
+        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: String(err) }));
+      });
+      return true;
+    },
+
+    onTeardown() {
+      _stopProjector?.();
+      _stopProjector = null;
       _registry = null;
     },
   };

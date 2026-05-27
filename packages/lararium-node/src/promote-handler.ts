@@ -7,7 +7,7 @@
  */
 
 import { type CompositeStore, bagScopedStore, type TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
-import { IslandAdaptor, planPromoteUris, type TW5Engine, type TW5Wiki } from "@lararium/tw5";
+import { IslandAdaptor, planPromoteUris, type TW5Engine } from "@lararium/tw5";
 import { toLarTiddlerRecord } from "@lararium/mesh";
 import type { JobHandler } from "./job-dispatcher.js";
 import { stringArg, optionalStringArg } from "./handler-args.js";
@@ -19,8 +19,7 @@ function stringListField(value: unknown): string | string[] | undefined {
 
 export interface PromoteHandlerOptions {
   readonly composite: CompositeStore;
-  readonly getPrimaryEngine: () => TW5Engine;
-  readonly getMirrorLookupWiki: () => TW5Wiki;
+  readonly tw5:       TW5Engine;
 }
 
 export function createPromoteHandler(opts: PromoteHandlerOptions): JobHandler {
@@ -70,8 +69,8 @@ export function createPromoteHandler(opts: PromoteHandlerOptions): JobHandler {
       throw new Error(`source bag is not writable in this composite: ${actualFromBag}`);
     }
 
-    const vm = opts.getPrimaryEngine();
-    const result = planPromoteUris(vm.wiki, [tiddler], toBag, opts.getMirrorLookupWiki(), {
+    const vm = opts.tw5;
+    const result = planPromoteUris(vm.wiki, [tiddler], toBag, vm.wiki, {
       actor: ctx.job.requestedBy,
       sourceBag: actualFromBag,
       vesselId: "node",

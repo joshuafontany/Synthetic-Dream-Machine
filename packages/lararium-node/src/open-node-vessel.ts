@@ -68,13 +68,11 @@ import { NodeVmManager }                  from "./node-vm-manager.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import { JobHandlerRegistry } from "./job-dispatcher.js";
-import { createPromoteHandler }                    from "./promote-handler.js";
 import { createWhereHandler }                       from "./where-handler.js";
 import {
   createListWikisHandler, createInitWikiHandler,
   createOpenWikiHandler,
 } from "./wiki-handlers.js";
-import { createSyncWikiHandler } from "./wiki-sync-handler.js";
 import { createPinWikiHandler, createUnpinWikiHandler } from "./wiki-residency-handlers.js";
 import { createAddBagHandler, createRemoveBagHandler } from "./wiki-compose-handlers.js";
 import { createPruneStaleHandler, createDraftHandler } from "./wiki-draft-handlers.js";
@@ -396,13 +394,22 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // can register before the keyhive bridge finishes booting.
   let tw5: TW5Engine;
   let vmManager: NodeVmManager;
-  // getMirrorLookupWiki uses the primary wiki's TW5 — bag-mirror oracle tiddlers
-  // live in the @lararium island corpus, which the primary recipe includes.
-  jobRegistry.register("promote", createPromoteHandler({
-    composite,
-    getPrimaryEngine: () => tw5,
-    getMirrorLookupWiki: () => tw5.wiki,
-  }));
+  // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki Worker.
+  // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
+  jobRegistry.register("promote", async (args, ctx) =>
+    vmManager.placeWikiJob(activeWikiId, {
+      verb:        "promote",
+      args:        args as Record<string, unknown>,
+      requestedBy: ctx.job.requestedBy,
+    }),
+  );
+  jobRegistry.register("sync-wiki", async (args, ctx) =>
+    vmManager.placeWikiJob(activeWikiId, {
+      verb:        "sync-wiki",
+      args:        args as Record<string, unknown>,
+      requestedBy: ctx.job.requestedBy,
+    }),
+  );
   const wikiMintOpts = {
     composite,
     repo,
@@ -414,11 +421,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       // the operator's verifyingKey hex (loaded earlier) is sufficient.
       return "0x" + operatorIdentity.verifyingKey;
     },
-    getPrimaryEngine: () => tw5,
   };
   jobRegistry.register("init-wiki", createInitWikiHandler(wikiMintOpts));
   jobRegistry.register("open-wiki", createOpenWikiHandler({ composite }));
-  jobRegistry.register("sync-wiki", createSyncWikiHandler(wikiMintOpts));
 
   // S6 — BagResidencyManager. Phase 1 (C.1): instrumentation only; no
   // eviction yet. Pin every doc the daemon touches at boot so we don't

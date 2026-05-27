@@ -25,19 +25,19 @@ This file appears to track items from memetic-sigils_v3.md that do not clearly p
 OODA-HA Loop for UCAN-Style Attenuation Migration:
 
 **Observe:**
-v3 presents an explicit section with rules, code, and examples for attenuation, escalation, and inheritance. v4 appears to mention "UCAN attenuation" in Layer 3 and "Attenuation rule for nested memes," but the formal code and detailed logic seem less explicit. This appears as a summary rather than a full migration. Confidence: 0.85 that v4 omits some v3 detail.
+v3 presents an explicit section with rules, code, and examples for attenuation, escalation, and inheritance. v4 appears to mention "UCAN attenuation" in Layer 3 and "Attenuation rule for nested memes," but the formal code and detailed logic seem less explicit. This appears as a summary rather than a full migration. Confidence: C~17 that v4 omits some v3 detail.
 
 **Orient:**
-The v4 document seems to summarize attenuation logic, possibly assuming prior knowledge or deferring detail. Tension: v3's explicitness may serve implementers, while v4's summary may serve conceptual clarity. Open question: Does v4 intend to externalize detailed logic, or should it restore v3's explicit rules? Confidence: 0.7 that more detail would benefit migration clarity.
+The v4 document seems to summarize attenuation logic, possibly assuming prior knowledge or deferring detail. Tension: v3's explicitness may serve implementers, while v4's summary may serve conceptual clarity. Open question: Does v4 intend to externalize detailed logic, or should it restore v3's explicit rules? Confidence: C~14 that more detail would benefit migration clarity.
 
 **Decide:**
-Action: Propose restoring v3's explicit attenuation rules and code examples in v4, annotated in E-Prime and with confidence markers. Scope: Add a subsection to v4 Layer 3 or an appendix. Reversibility: This addition appears easily reversible if later deemed redundant. Confidence: 0.8 in this course of action.
+Action: Propose restoring v3's explicit attenuation rules and code examples in v4, annotated in E-Prime and with confidence markers. Scope: Add a subsection to v4 Layer 3 or an appendix. Reversibility: This addition appears easily reversible if later deemed redundant. Confidence: C~16 in this course of action.
 
 **Act:**
-Pending operator confirmation, prepare a draft migration of v3's attenuation logic into v4, using E-Prime and explicit confidence registration. Annotate any uncertainties or interpretive choices. Confidence: 0.75 that this will clarify the migration gap.
+Pending operator confirmation, prepare a draft migration of v3's attenuation logic into v4, using E-Prime and explicit confidence registration. Annotate any uncertainties or interpretive choices. Confidence: C~15 that this will clarify the migration gap.
 
 **Assess:**
-Once added, review whether v4 now appears to serve both implementers and conceptual readers. Note any remaining ambiguity or new tensions. Carry forward any residue to the next Observe phase. Confidence: 0.7 that this will resolve the main gap, but open to further refinement.
+Once added, review whether v4 now appears to serve both implementers and conceptual readers. Note any remaining ambiguity or new tensions. Carry forward any residue to the next Observe phase. Confidence: C~14 that this will resolve the main gap, but open to further refinement.
 
 ## OODA-HA Loop for v3 → v4 Migration (Maybe-Logic Style)
 
@@ -59,7 +59,7 @@ Once added, review whether v4 now appears to serve both implementers and concept
 
 ### Act
 - Implement the chosen migration actions in v4, using E-Prime and model-agnostic language.
-- Annotate changes with confidence levels and rationale (“This appears to restore the missing logic at 0.8 confidence”).
+- Annotate changes with confidence levels and rationale ("This appears to restore the missing logic at C~16 confidence").
 - Document any blockers, deviations, or surprises encountered during the update.
 
 ### Assess
