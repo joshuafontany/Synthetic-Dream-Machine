@@ -14,32 +14,15 @@ export type LarOpenPhase =
   | "vessel-ready"   // LarVessel constructed, CompositeStore wired
   | "tw5-booted"     // TW5Engine.boot() resolved
   | "corpus-ready"   // corpus bags attached (fires once all initial corpora loaded)
-  | "live";          // IslandAdaptor wired, VmPool attached
-
-/**
- * VesselVmFactory — caller-injected VM constructor shared by browser and node vessels.
- *
- * The platform factory owns engine boot and bag-stack derivation. The VM factory only
- * receives the resolved recipe scope for the vessel lane it is opening.
- */
-export type VesselVmFactory<TVm, TEngine> = (
-  recipeUri: string,
-  engine: TEngine,
-  bagStack: readonly string[],
-) => Promise<TVm>;
+  | "live";          // Worker pool attached, vessel sovereign
 
 /**
  * LarariumVesselOptions — shared browser/node vessel open inputs.
- *
- * Platform vessels may extend this with transport, storage, or mount-specific fields,
- * but these fields stay common across every vessel factory.
  */
-export interface LarariumVesselOptions<TVm = unknown, TEngine = unknown> {
+export interface LarariumVesselOptions {
   hostId: string;
   wikiId: string;
-  recipeUri?: string;
   onPhase?: (phase: LarOpenPhase) => void;
-  vmFactory?: VesselVmFactory<TVm, TEngine>;
 }
 
 /**

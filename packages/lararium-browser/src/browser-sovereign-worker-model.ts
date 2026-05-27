@@ -174,7 +174,6 @@ export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void
     _composite = new CompositeStore();
 
     const bindings = msg.bagBindings ?? [];
-    const hasCold  = bindings.some(b => b.mode === "cold");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ready: Array<{ bagId: string; handle: DocHandle<any>; writable: boolean }> = [];
 
@@ -216,22 +215,6 @@ export function runBrowserSovereignWorker(behavior: BrowserWorkerBehavior): void
     if (seed.length > 0) handler.applyDelta(msg.wikiUri, seed, []);
 
     for (const { bagId, handle } of ready) _subscribe(bagId, handle);
-
-    if (hasCold || bindings.length === 0) {
-      _repo.on("document", ({ handle: h }: { handle: DocHandle<Record<string, unknown>> }) => {
-        void h.whenReady().then(() => {
-          const coldBagId = bindings.find(b => b.mode === "cold")?.bagId ?? msg.wikiUri;
-          _handles.set(coldBagId, h);
-          if (_writableHandleId === null) _writableHandleId = coldBagId;
-          const doc = h.doc();
-          if (doc) {
-            const init = allTiddlersFromDoc(doc);
-            if (init.length > 0) handler.applyDelta(msg.wikiUri, init, []);
-          }
-          _subscribe(coldBagId, h);
-        });
-      });
-    }
 
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
     await behavior.onReady(_ctx);

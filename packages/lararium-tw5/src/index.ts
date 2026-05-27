@@ -5,7 +5,6 @@
  *   TW5Engine               — clean isomorphic TW5 VM (boot/render/tiddler mutation)
  *   IslandAdaptor           — causal-island↔TW5 wiki bridge; inbound buffer/flush + outbound writes
  *   MemoryTiddlerStore      — in-memory LarTiddlerStore (tests / fixtures)
- *   DirectMemeRecipeVm      — in-process TW5Engine wrapper; bootMemeRecipeVm boot helper
  *
  * Widget tree ownership:
  *   Messaging (papalohe/kukali/lele) and kumu device instances are native
@@ -49,18 +48,6 @@ export type {
 export type { VmJobPlacement } from "./job-vm.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
 export type { ProjectionStore } from "./memory-store.js";
-export type { MemeRecipeVm } from "@lararium/mesh";
-
-export { DirectMemeRecipeVm, bootMemeRecipeVm } from "./meme-recipe-vm.js";
-export { collectVmPreloadedTiddlers, openVmSession } from "./vm-session.js";
-export type { VmSessionFactoryOptions, VmSessionResult } from "./vm-session.js";
-export { MountedWikiController } from "./mounted-wiki-controller.js";
-export type {
-  MountedWikiControllerDeps,
-  MountedWikiFlushDriver,
-  MountedWikiMountOptions,
-  MountedWikiSession,
-} from "./mounted-wiki-controller.js";
 
 export { exportMemeText } from "./meme-write.js";
 export { promoteUris, planPromoteUris } from "./modules/lar-promote.js";
@@ -77,10 +64,7 @@ export type { BagTiddler, RecipeTiddler } from "@lararium/mesh";
 export { bagDescriptorUri, recipeUri } from "@lararium/mesh/lar-uris";
 export { parseBagStack, parsePlugins } from "@lararium/mesh";
 
-export { TW5WorkerProxy } from "./tw5-worker-proxy.js";
-
 export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "@lararium/mesh";
 export type { CeremonyTiddler } from "@lararium/mesh";
-export type { WorkerFactory, AnyWorker } from "./tw5-worker-proxy.js";
 
 export { WorkerAuthorityHandler } from "./worker-authority-handler.js";

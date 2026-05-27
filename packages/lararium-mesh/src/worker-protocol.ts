@@ -15,8 +15,8 @@
  *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
  *   5. Main-thread `changeset` delivery is removed. CRDT sync via `syncPort` is the sole
  *      source of tiddler truth for Worker islands.
- *   6. `WorkerMsg_Manifest` carries `syncPort` (transferred, not cloned), `docUrl` (AutomergeUrl
- *      for `repo.find()`), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
+ *   6. `WorkerMsg_Manifest` carries `syncPort` (transferred, not cloned), `bagBindings` (ordered
+ *      bag capability tokens), `coreBlob`, and `coreHash` (content-address intent vector; null = pre-CAS).
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
@@ -27,7 +27,6 @@
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.
- * GP-3: @deprecated — tiddler-delta oracle path. Worker-side Repo replaces it.
  * GP-4: CryptoKey — NOT on this protocol surface; key material stays in-thread.
  *
  * Platform-neutral: no Node `worker_threads` import, no browser `self` import.
@@ -62,15 +61,12 @@ export type WorkerStorageConfig =
 /**
  * The mode a bag inhabits at manifest delivery time.
  *
- * - `cold`       — no persistent CRDT doc yet; Worker creates or receives one via sync.
  * - `relational` — a known AutomergeUrl; Worker calls `repo.find(docUrl).whenReady()`.
  *
  * `AutomergeUrl` IS the CapTP-style capability token for the doc.
  * A string bagId without a `docUrl` is a label, not a capability.
  */
-export type BagMode =
-  | { mode: "cold" }
-  | { mode: "relational"; docUrl: string };
+export type BagMode = { mode: "relational"; docUrl: string };
 
 /**
  * A single bag entry in the manifest delivery, combining identity + capability + write intent.
@@ -116,9 +112,8 @@ export interface WorkerMsg_Manifest {
   coreHash: string | null;
   /**
    * Ordered bag capability tokens for this wiki's content scope (system → draft).
-   * Each BagBinding carries the bagId, write intent, and BagMode (cold | relational+docUrl).
+   * Each BagBinding carries the bagId, write intent, and BagMode (relational+docUrl).
    * Workers iterate in order to seed TW5 and establish doc handles.
-   * Replaces the deprecated `docUrl` + `bagStack` fields.
    */
   bagBindings?: readonly BagBinding[];
   /**
@@ -135,16 +130,6 @@ export interface WorkerMsg_Manifest {
    * Applied after core boot, before Repo sync, so the CRDT truth layer can use them immediately.
    */
   pluginTiddlers?: readonly Record<string, unknown>[];
-  /**
-   * @deprecated Use `bagBindings` instead. AutomergeUrl for the primary wiki doc.
-   * Retained for Sprint 1→3 transition. Remove when all VmManagers send `bagBindings`.
-   */
-  docUrl?: string | null;
-  /**
-   * @deprecated Use `bagBindings` instead. Ordered bag identifiers without capability tokens.
-   * Retained for Sprint 1→3 transition. Remove when all VmManagers send `bagBindings`.
-   */
-  bagStack?: readonly string[];
   /** Recipe URI mapping this authority's content scope. */
   recipeUri?: string;
   /**
@@ -157,13 +142,6 @@ export interface WorkerMsg_Manifest {
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
-/**
- * Deliver a tiddler-level delta to the wiki Worker.
- *
- * @deprecated GP-3 oracle topology. Worker derives tiddler deltas from its own Repo.
- * Survives for Node path compatibility pending NodeVmManager migration to Repo-in-Worker.
- * Remove when NodeVmManager adopts Repo-in-Worker (tracked: GP-3 debt, node-vm-manager.ts).
- */
 /** Demote the wiki slot from hot to cold (teardown; thread may terminate). */
 export interface WorkerMsg_Demote {
   schema_version: ProtocolVersion;
@@ -398,11 +376,8 @@ export function mkTeardownAck(opts: {
  *
  * `opts.pluginTiddlers` — plugin layer tiddlers (sigils, ahu, pranala, etc.).
  *   Prerequisite for ea condition 3 (own truth). Omitting yields a hollow island.
- * `opts.bagBindings` — ordered bag capability tokens (BagBinding[]); preferred over `opts.docUrl`.
+ * `opts.bagBindings` — ordered bag capability tokens (BagBinding[]).
  * `opts.recipeUri`   — recipe URI mapping this authority's content scope.
- *
- * @deprecated `opts.docUrl` and `opts.bagStack` — Sprint 1→3 transition shims.
- *   Pass `bagBindings` instead. These will be removed when all VmManagers migrate.
  */
 export function mkManifest(
   wikiUri:  string,
@@ -415,10 +390,6 @@ export function mkManifest(
     storage?:        WorkerStorageConfig;
     recipeUri?:      string;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
-    /** @deprecated use bagBindings */
-    docUrl?:         string | null;
-    /** @deprecated use bagBindings */
-    bagStack?:       readonly string[];
   },
 ): WorkerMsg_Manifest {
   const msg: WorkerMsg_Manifest = {
@@ -434,9 +405,6 @@ export function mkManifest(
   if (opts?.pluginTiddlers?.length) msg.pluginTiddlers = opts.pluginTiddlers;
   if (opts?.recipeUri)              msg.recipeUri      = opts.recipeUri;
   if (opts?.diskMirrors?.length)    msg.diskMirrors    = opts.diskMirrors;
-  // Sprint 1→3 shims: pass through deprecated fields when callers haven't migrated yet.
-  if (opts?.docUrl !== undefined)   msg.docUrl         = opts.docUrl;
-  if (opts?.bagStack?.length)       msg.bagStack       = opts.bagStack;
   return msg;
 }
 

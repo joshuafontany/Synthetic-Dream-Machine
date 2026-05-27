@@ -360,20 +360,15 @@ export class NodeVmManager {
     if (this._mainRepo) {
       const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
       this._mainRepo.networkSubsystem.addNetworkAdapter(adapter);
-    } else {
-      console.warn(
-        `[vm-manager] ${wikiId}: mainRepo absent — Worker falls back to GP-3 gossip sync. ` +
-        `Provide NodeVmManagerOptions.mainRepo to satisfy ea condition 1 (own state).`,
-      );
     }
 
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    const rawDocUrl = this._mainRepo ? (ctx.docHandle.url as string | undefined ?? null) : null;
-    const bagBindings: readonly BagBinding[] = rawDocUrl != null
-      ? [{ bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl }]
-      : [{ bagId: wikiId, writable: true, mode: "cold" }];
+    const rawDocUrl = ctx.docHandle.url as string | undefined ?? null;
+    const bagBindings: readonly BagBinding[] = [
+      { bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl ?? "" },
+    ];
 
     const storage: WorkerStorageConfig | undefined = this._storageRoot
       ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }

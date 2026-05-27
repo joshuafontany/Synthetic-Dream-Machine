@@ -176,7 +176,7 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
 
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
-  async function _handleManifest(msg: WorkerMsg_Manifest & { syncPort?: MessagePort }): Promise<void> {
+  async function _handleManifest(msg: WorkerMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
     const behavior = _resolveBehavior(msg);
 
@@ -186,29 +186,16 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
       return;
     }
 
-    const syncPort = msg.syncPort;
-    if (!syncPort) {
-      // GP-3 deprecated path — no Repo, no composite, just TW5.
-      _startDrain();
-      handler.sendEa(msg.wikiUri);
-      return;
-    }
-
     const storageAdapter = _buildStorage(msg.storage);
     _repo = new Repo({
       ...(storageAdapter ? { storage: storageAdapter } : {}),
-      network: [new MessageChannelNetworkAdapter(syncPort as unknown as globalThis.MessagePort)],
+      network: [new MessageChannelNetworkAdapter(msg.syncPort as unknown as globalThis.MessagePort)],
       sharePolicy: async () => true,
     });
-
-    // ── Build CompositeStore ──────────────────────────────────────────────
-    // CRDT layers (recipe order) → scratch → projection.
-    // Sub-surface layers always appended — idempotent, not in bagBindings.
 
     _composite = new CompositeStore();
 
     const bindings = msg.bagBindings ?? [];
-    const hasCold  = bindings.some(b => b.mode === "cold");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ready: Array<{ bagId: string; handle: DocHandle<any>; writable: boolean }> = [];
 
@@ -228,7 +215,6 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
       _composite.addLayer({ bagId, store, writable, defaultWritable: false });
     }
 
-    // Sub-surface layers — always present, below all CRDT bags.
     _composite.addLayer({
       bagId: BAG_IDS.scratch, store: new MemoryTiddlerStore(),
       writable: true, defaultWritable: true,
@@ -238,12 +224,10 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
       writable: true, defaultWritable: false,
     });
 
-    // ── IslandAdaptor — behavior declares its write target ────────────────
     const tw5 = handler.tw5()!;
     const adaptor = new IslandAdaptor(tw5, _composite, behavior.writeBagId);
     _composite.addProjection(adaptor);
 
-    // ── Seed TW5 from all CRDT bags ───────────────────────────────────────
     const seed: Record<string, unknown>[] = [];
     for (const { handle } of ready) {
       const doc = handle.doc();
@@ -253,27 +237,6 @@ export function runSovereignWorker(behaviorOrFactory: WorkerBehavior | ((manifes
 
     for (const { bagId, handle } of ready) _subscribe(bagId, handle);
 
-    // Cold-mode gossip fallback.
-    if (hasCold || bindings.length === 0) {
-      const legacyCold = bindings.length === 0 && !msg.docUrl;
-      if (legacyCold || bindings.some(b => b.mode === "cold")) {
-        _repo.on("document", ({ handle: h }: { handle: DocHandle<Record<string, unknown>> }) => {
-          void h.whenReady().then(() => {
-            const coldBagId = bindings.find(b => b.mode === "cold")?.bagId ?? msg.wikiUri;
-            _handles.set(coldBagId, h);
-            if (_writableHandleId === null) _writableHandleId = coldBagId;
-            const doc = h.doc();
-            if (doc) {
-              const init = allTiddlersFromDoc(doc as Record<string, unknown>);
-              if (init.length > 0) handler.applyDelta(msg.wikiUri, init, []);
-            }
-            _subscribe(coldBagId, h);
-          });
-        });
-      }
-    }
-
-    // ── Build context, call behavior.onReady ─────────────────────────────
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
     await behavior.onReady(_ctx);
 

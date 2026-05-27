@@ -303,14 +303,11 @@ export class BrowserVmManager implements BrowserAuthorityPool {
     });
 
     // 5. Build bagBindings + coreHash for the manifest delivery.
-    //    bagBindings: use params.bagBindings when provided; otherwise build a shim from
-    //    the deprecated params.docUrl so the Worker reads bagBindings as primary source.
+    //    bagBindings: use params.bagBindings when provided; otherwise build a shim from params.docUrl.
     const coreHash: string | null = null;
     const bagBindings: readonly BagBinding[] = params.bagBindings
       ? params.bagBindings
-      : params.docUrl != null
-        ? [{ bagId: id, writable: true, mode: "relational", docUrl: params.docUrl } satisfies BagBinding]
-        : [{ bagId: id, writable: true, mode: "cold" } satisfies BagBinding];
+      : [{ bagId: id, writable: true, mode: "relational", docUrl: params.docUrl ?? "" } satisfies BagBinding];
 
     // 6. Deliver manifest — transfer syncPort + coreBlob buffer to the sovereign island.
     //    pluginTiddlers, bagBindings, recipeUri cross the boundary so the island can think
