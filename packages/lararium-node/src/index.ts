@@ -53,5 +53,5 @@ export {
 } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 
-export { NodeVmManager } from "./node-vm-manager.js";
-export type { VmSnapshot, WikiBootContext, NodeVmManagerOptions } from "./node-vm-manager.js";
+export { VesselIslandPool } from "./vessel-island-pool.js";
+export type { VmSnapshot, WikiBootContext, VesselIslandPoolOptions } from "./vessel-island-pool.js";

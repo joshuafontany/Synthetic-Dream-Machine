@@ -1,6 +1,6 @@
 import { describe, test, expect, afterEach } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
-import { BrowserVmManager } from "../src/browser-vm-manager.js";
+import { BrowserVesselIslandPool } from "../src/browser-vessel-island-pool.js";
 import type { WorkerMsg_Event } from "@lararium/mesh";
 
 const FIXTURE_URL = new URL("./fixtures/browser-repo-in-worker-echo.mjs", import.meta.url);
@@ -40,8 +40,8 @@ function waitForEvent(
   });
 }
 
-describe("BrowserVmManager Repo-in-Worker gate", () => {
-  let manager: BrowserVmManager | null = null;
+describe("BrowserVesselIslandPool Repo-in-Worker gate", () => {
+  let manager: BrowserVesselIslandPool | null = null;
   let repo: Repo | null = null;
 
   afterEach(async () => {
@@ -58,7 +58,7 @@ describe("BrowserVmManager Repo-in-Worker gate", () => {
     repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
     const authorityId = "lar:///ha.ka.ba/@test/browser-cold";
 
-    manager = new BrowserVmManager({
+    manager = new BrowserVesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo: repo,
       onWorkerEvent: (id, msg) => {
@@ -89,7 +89,7 @@ describe("BrowserVmManager Repo-in-Worker gate", () => {
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
     const authorityId = "lar:///ha.ka.ba/@test/browser-docurl";
 
-    manager = new BrowserVmManager({
+    manager = new BrowserVesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo: repo,
       onWorkerEvent: (id, msg) => {

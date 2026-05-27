@@ -1,5 +1,5 @@
 /**
- * node-vm-manager.test.ts — NodeVmManager lifecycle integration tests.
+ * vessel-island-pool.test.ts — VesselIslandPool lifecycle integration tests.
  *
  * Two fixture Workers:
  *   vm-manager-echo.mjs       — lightweight echo (no TW5, no Repo-in-Worker)
@@ -11,16 +11,16 @@
  *   Repo-in-Worker → CRDT changes propagate via syncPort (no routeChangeset)
  *   event forwarding → onWorkerEvent callback fires for Worker events
  *
- * All tests run against the full NodeVmManager (no mocking of internals).
+ * All tests run against the full VesselIslandPool (no mocking of internals).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
  */
 
 import { describe, test, expect, afterEach } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle } from "@automerge/automerge-repo";
 import type { MemeStoreDoc } from "@lararium/mesh";
-import { NodeVmManager } from "../src/node-vm-manager.js";
+import { VesselIslandPool } from "../src/vessel-island-pool.js";
 import type { WorkerMsg_Event } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
@@ -101,8 +101,8 @@ function waitForEvents(collector: { events: WorkerMsg_Event[] }, count: number, 
 // Tests
 // ---------------------------------------------------------------------------
 
-describe("NodeVmManager — Worker lifecycle", () => {
-  let manager: NodeVmManager | null = null;
+describe("VesselIslandPool — Worker lifecycle", () => {
+  let manager: VesselIslandPool | null = null;
   let repo:    Repo | null          = null;
 
   afterEach(async () => {
@@ -113,7 +113,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
   });
 
   test("mountWiki promotes slot to hot tier", async () => {
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
 
     await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
@@ -123,7 +123,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
   });
 
   test("mountWiki is idempotent — second call is a no-op", async () => {
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
 
     await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
@@ -141,7 +141,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
@@ -159,7 +159,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
   });
 
   test("unmountWiki moves slot to cold with snapshot from teardown:ack", async () => {
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
 
     await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
@@ -180,7 +180,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
@@ -197,7 +197,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
   });
 
   test("stats() reflects tier counts correctly", async () => {
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
 
     expect(manager.stats()).toEqual({ pinned: 0, hot: 0, cold: 0 });
 
@@ -217,7 +217,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: REPO_FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
@@ -250,7 +250,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
   }, 10_000);
 
   test("placeWikiJob — sends wiki:place-job and resolves with wiki:job-result", async () => {
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
     const handle = makeDocHandleStub();
     await manager.mountWiki(WIKI_ID, { docHandle: handle, coreBlob: STUB_CORE_BLOB });
 
@@ -268,7 +268,7 @@ describe("NodeVmManager — Worker lifecycle", () => {
     // The echo fixture echoes all verbs successfully, so we test the error path directly
     // via a timeout scenario by using a very short timeout — instead use a dedicated check:
     // placeWikiJob on a cold slot rejects immediately.
-    manager = new NodeVmManager({ workerScriptUrl: FIXTURE_URL });
+    manager = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL });
 
     await expect(
       manager.placeWikiJob("lar:///ha.ka.ba/@test/no-such-wiki", {

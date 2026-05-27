@@ -1,5 +1,5 @@
 /**
- * NodeVmManager — three-tier TW5 VM lifecycle for the Node.js lararium vessel.
+ * VesselIslandPool — three-tier TW5 VM lifecycle for the Node.js lararium vessel.
  *
  * ## Tiers
  *
@@ -22,8 +22,8 @@
  *   unmountWiki → teardown → teardown:ack (+ docBytes) → worker.terminate()
  *                → slot = cold (cold slot carries the Worker's final TW5 state)
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
- * Meme doc: packages/lararium-node/memes/node-vm-manager.md
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
+ * Meme doc: packages/lararium-node/memes/vessel-island-pool.md
  */
 
 import { getHeads } from "@lararium/mesh";
@@ -120,10 +120,10 @@ export interface WikiBootContext {
 }
 
 // ---------------------------------------------------------------------------
-// NodeVmManagerOptions
+// VesselIslandPoolOptions
 // ---------------------------------------------------------------------------
 
-export interface NodeVmManagerOptions {
+export interface VesselIslandPoolOptions {
   /**
    * URL of the compiled Worker entry script.
    * Defaults to `lar-wiki-worker.js` in the same directory as this module.
@@ -151,18 +151,18 @@ export interface NodeVmManagerOptions {
 }
 
 // ---------------------------------------------------------------------------
-// NodeVmManager
+// VesselIslandPool
 // ---------------------------------------------------------------------------
 
 const HOT_CAP = 4;
 
-// Resolves relative to this module's compiled location (dist/node-vm-manager.js).
+// Resolves relative to this module's compiled location (dist/vessel-island-pool.js).
 const DEFAULT_WORKER_URL = new URL("./lar-wiki-worker.js", import.meta.url);
 
 // Timeout for GP-5 teardown and ea handshakes.
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
-export class NodeVmManager {
+export class VesselIslandPool {
   private readonly _slots           = new Map<string, Slot>();
   private readonly _workerUrl:      URL;
   private readonly _onWorkerEvent:  ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
@@ -174,7 +174,7 @@ export class NodeVmManager {
     reject:  (e: Error) => void;
   }>();
 
-  constructor(options: NodeVmManagerOptions = {}) {
+  constructor(options: VesselIslandPoolOptions = {}) {
     this._workerUrl      = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
     this._onWorkerEvent  = options.onWorkerEvent ?? null;
     this._mainRepo       = options.mainRepo ?? null;

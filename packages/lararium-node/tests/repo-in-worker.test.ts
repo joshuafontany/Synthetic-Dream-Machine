@@ -7,7 +7,7 @@
  *
  * Test structure (from TALK-STORY-NEXT #active-sprint):
  *   1. main-thread Repo with real doc
- *   2. NodeVmManager({ mainRepo })
+ *   2. VesselIslandPool({ mainRepo })
  *   3. mountWiki → syncPort transferred → Worker wires its own Repo
  *   4. main thread changes the doc
  *   5. CRDT sync fires handle.on("change") in the Worker
@@ -20,7 +20,7 @@
 import { describe, test, expect, afterEach } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import type { WorkerMsg_Event } from "@lararium/mesh";
-import { NodeVmManager } from "../src/node-vm-manager.js";
+import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 // ---------------------------------------------------------------------------
 // Fixture
@@ -36,7 +36,7 @@ const STUB_CORE   = { bytes: new Uint8Array() } as const;
 
 /**
  * Collect WorkerMsg_Events matching listenable from onWorkerEvent.
- * Returns the collector array and the callback to pass to NodeVmManager.
+ * Returns the collector array and the callback to pass to VesselIslandPool.
  */
 function eventCollector(filter?: string): {
   events: WorkerMsg_Event[];
@@ -103,7 +103,7 @@ function waitForSynced(all: { events: WorkerMsg_Event[] }, timeoutMs = 5000): Pr
 // ---------------------------------------------------------------------------
 
 describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
-  let manager: NodeVmManager | null = null;
+  let manager: VesselIslandPool | null = null;
   let repo: Repo | null = null;
 
   afterEach(async () => {
@@ -120,7 +120,7 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
@@ -159,7 +159,7 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
@@ -204,7 +204,7 @@ describe("Repo-in-Worker — CRDT sync gate (GP-3 deprecation proof)", () => {
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
-    manager = new NodeVmManager({
+    manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },

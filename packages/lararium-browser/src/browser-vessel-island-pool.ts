@@ -1,5 +1,5 @@
 /**
- * BrowserVmManager — browser-vessel implementation of BrowserAuthorityPool.
+ * BrowserVesselIslandPool — browser-vessel implementation of BrowserAuthorityPool.
  *
  * ## Worker Sovereignty Law — main-thread side
  *
@@ -34,7 +34,7 @@
  *   For now both methods return `[]` / `null` — stubs that compile but do not yet
  *   cross the Worker boundary. Named stubs surface the gap rather than hiding it.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vm-manager
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool
  */
 
 import { Repo } from "@automerge/automerge-repo";
@@ -87,7 +87,7 @@ function _awaitWorkerMsg<T extends WorkerToMainMsg>(
 ): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(
-      () => reject(new Error(`[browser-vm-manager] timeout waiting for ${type}`)),
+      () => reject(new Error(`[browser-vessel-island-pool] timeout waiting for ${type}`)),
       HANDSHAKE_TIMEOUT_MS,
     );
     const onMsg = (e: MessageEvent) => {
@@ -120,9 +120,9 @@ function _receipt(
   return base;
 }
 
-// ── BrowserVmManager ──────────────────────────────────────────────────────
+// ── BrowserVesselIslandPool ──────────────────────────────────────────────────────
 
-export interface BrowserVmManagerOptions {
+export interface BrowserVesselIslandPoolOptions {
   /** URL of the compiled browser-wiki-worker entry script. */
   workerScriptUrl: URL;
   /**
@@ -138,13 +138,13 @@ export interface BrowserVmManagerOptions {
   onWorkerEvent?: (id: BrowserAuthorityId, msg: WorkerMsg_Event) => void;
 }
 
-export class BrowserVmManager implements BrowserAuthorityPool {
+export class BrowserVesselIslandPool implements BrowserAuthorityPool {
   private readonly _slots      = new Map<BrowserAuthorityId, BrowserSlot>();
   private readonly _workerUrl: URL;
   private readonly _mainRepo:  Repo | null;
   private readonly _onWorkerEvent: ((id: BrowserAuthorityId, msg: WorkerMsg_Event) => void) | null;
 
-  constructor(opts: BrowserVmManagerOptions) {
+  constructor(opts: BrowserVesselIslandPoolOptions) {
     this._workerUrl     = opts.workerScriptUrl;
     this._mainRepo      = opts.mainRepo ?? null;
     this._onWorkerEvent = opts.onWorkerEvent ?? null;
@@ -263,7 +263,7 @@ export class BrowserVmManager implements BrowserAuthorityPool {
     // 1. Spawn Worker.
     const worker = new Worker(this._workerUrl, { type: "module" });
     worker.addEventListener("error", (e) => {
-      console.error(`[browser-vm-manager] Worker error (${id}):`, e.message);
+      console.error(`[browser-vessel-island-pool] Worker error (${id}):`, e.message);
     });
 
     // 2. Create MessageChannel — main keeps port1, Worker receives port2 (syncPort).
@@ -297,7 +297,7 @@ export class BrowserVmManager implements BrowserAuthorityPool {
         this._onWorkerEvent(id, msg as WorkerMsg_Event);
       }
       if (msg.type === "fault") {
-        console.error(`[browser-vm-manager] Worker fault (${id}): ${(msg as { error: string }).error}`);
+        console.error(`[browser-vessel-island-pool] Worker fault (${id}): ${(msg as { error: string }).error}`);
         slot.phase = "disposed";
       }
     });

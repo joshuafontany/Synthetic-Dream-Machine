@@ -61,7 +61,7 @@ import {
 import { seedLaresDoc, createSessionEventLog } from "@lararium/mesh";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
-import { NodeVmManager }                  from "./node-vm-manager.js";
+import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import { VerbTable } from "./job-dispatcher.js";
@@ -110,8 +110,8 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
 }
 
 export interface NodeVesselResult extends LarariumVesselResult<
-  LarVessel<NodeVmManager>,
-  NodeVmManager,
+  LarVessel<VesselIslandPool>,
+  VesselIslandPool,
   Repo,
   CompositeStore
 > {
@@ -122,7 +122,7 @@ export interface NodeVesselResult extends LarariumVesselResult<
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz. */
   eventBus:         LarEventBusImpl;
   /** Three-tier VM lifecycle manager — PrimaryWiki pinned, hot LRU, cold snapshots. */
-  vmManager:        NodeVmManager;
+  vmManager:        VesselIslandPool;
   /** Admin VM — operator-private coordinator (S5.6). */
   admin:            AdminVmResult;
   /** Capability provider — Keyhive-backed cap layer (S7.1 D.3). */
@@ -379,7 +379,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("list-wikis", makeListWikisReactor({ composite }));
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
-  let vmManager: NodeVmManager;
+  let vmManager: VesselIslandPool;
   // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki Worker.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
   jobRegistry.register("promote", async (args, ctx) =>
@@ -713,7 +713,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // ── 6. LarVessel ────────────────────────────────────────────────────────────
   wikiStore.markSyncComplete();
-  const vessel = new LarVessel<NodeVmManager>({
+  const vessel = new LarVessel<VesselIslandPool>({
     vesselId:     activeWikiPlan.vesselId,
     store:        composite,
     capabilities: LAR_VESSEL_CAPABILITIES_NODE,
@@ -726,10 +726,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   for (const ring of DEFAULT_RINGS) eventBus.registerRing(ring);
   eventBus.start();
 
-  // ── 7a. NodeVmManager — sovereign Worker pool ─────────────────────────────
+  // ── 7a. VesselIslandPool — sovereign Worker pool ─────────────────────────────
   // Primary wiki runs in a pinned Worker (makeWikiPrimaryBehavior).
   // Hot LRU Workers host session wikis. All VM state lives in Workers.
-  vmManager = new NodeVmManager({
+  vmManager = new VesselIslandPool({
     mainRepo:      repo,
     storageRoot:   storageDir,
     onWorkerEvent: (wikiId, msg) => {

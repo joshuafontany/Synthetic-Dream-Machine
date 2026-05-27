@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-22 (turn 19)
+> Updated: 2026-05-27 (turn 21)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -32,19 +32,27 @@ deleted; `pnpm test:quine` passes — 65 SharktoothSigil grammar tiddlers in gen
 (worker-protocol.ts moved node→mesh; WorkerAuthorityHandler extracted isomorphic;
 @lararium/browser scaffolded S0–S3; bags/ URI schema unified to @bag/v0.1/lane/rest;
 188/188 tests), AND the Worker Sovereignty Law + GP-3 deprecation sprint
-(Isomorphic law 7+1 clauses in worker-protocol.ts; BrowserVmManager +
-browser-wiki-worker.ts fully implemented; NodeVmManager GP-3 oracle deleted —
+(Isomorphic law 7+1 clauses in worker-protocol.ts; BrowserVesselIslandPool +
+browser-wiki-worker.ts fully implemented; VesselIslandPool GP-3 oracle deleted —
 routeChangeset, changesetQueue, _subscribeDocChanges, awaitingAck, unsubChange
 gone; 195/195 tests), AND the identity lattice + keyhive founding ceremony sprint
 (runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload extracted isomorphic
 into @lararium/keyhive; three-gate lattice A/B/C passes; two-vessel e2e test 9/9;
-lares device-admit and invite CLI commands wired) are treated as landed unless
-tests prove drift.
+lares device-admit and invite CLI commands wired), AND the Worker Sovereignty Sprints
+1-3 (BagBinding protocol, multi-doc Workers, WorkerStorageConfig; 48/48 tests), AND
+the OTP ontology + dead-weight + gen_island rename sprint (BagMode cold deleted;
+WorkerBehavior→IslandBehavior; WorkerContext→IslandContext; onReady→onEa;
+onMessage→onSignal; onTeardown→onDemote; admin:relay-job→admin:delegate-job;
+configureRelay→configureDelegation; WorkerAuthorityHandler→IslandKernel;
+JobHandlerRegistry→VerbTable; JobHandler→VerbReactor; create*Handler→make*Reactor;
+NodeVmManager→VesselIslandPool; BrowserVmManager→BrowserVesselIslandPool;
+dead behaviors WikiBehavior/makeWikiDiskBehavior/makeWikiDispatchBehavior deleted;
+handleMessage() deleted from IslandKernel; GP-3 changeset branches deleted from
+fixtures; 55/55 tests) are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. GP-3 browser gate + deletion: write browser-repo-in-worker.test.ts; delete
-   GP-3 fallback in browser-wiki-worker.ts; protocol layer cleanup; docUrl non-null
-   test; Worker Sovereignty Law §8.
+1. GP-3 browser gate + deletion: delete GP-3 fallback in browser-wiki-worker.ts;
+   protocol layer cleanup; Worker Sovereignty Law §8.
 2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
 3. S9 / lararium-browser: browser vessel full boot — IndexedDB, WebCrypto keypair,
    founding ceremony path in browser vessel, presence via broadcast().
@@ -57,7 +65,64 @@ Rules: TW5 VM primacy; vessel = lararium identity+runtime unit (not "peer");
 bag = Automerge-doc = sync-boundary; ea = sovereignty breath (not "heartbeat");
 no HTTP/RPC coordination surface; explicit operator promotion for canon.
 Web3 only — no web2 models/code/flows in Lares stack.
+gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback module;
+onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
+VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-27 turn 21)
+
+### OTP ontology + gen_island rename + dead-weight cut sprint
+
+**BagMode cold deleted.** `{ mode: "cold" }` removed from `BagMode` union in
+`worker-protocol.ts`. Only `{ mode: "relational"; docUrl: string }` remains.
+Two construction sites in `browser-vessel-island-pool.ts` and `vessel-island-pool.ts`
+updated to use relational with empty `docUrl` fallback.
+
+**IslandBehavior / IslandContext rename sweep** (`sovereign-worker-model.ts`,
+`browser-sovereign-worker-model.ts`, `browser-wiki-worker.ts`, `worker-behaviors.ts`):
+- `WorkerBehavior` → `IslandBehavior`, `WorkerContext` → `IslandContext`
+- `onReady` → `onEa`, `onMessage` → `onSignal`, `onTeardown` → `onDemote`
+- `gen_server` comments → `gen_island`
+- Cold gossip listener block deleted from both sovereign-worker-model files
+
+**admin:delegate-job wire rename** (`worker-protocol.ts`, `open-admin-vm.ts`,
+`open-node-vessel.ts`, `worker-behaviors.ts`):
+- `AdminMsg_RelayJob` → `AdminMsg_DelegateJob`
+- `mkAdminRelayJob` → `mkAdminDelegateJob`
+- `"admin:relay-job"` → `"admin:delegate-job"`
+- `configureRelay` → `configureDelegation`
+- `_relayRegistry` → `_delegationRegistry`
+- `_relayToMain` → `_delegateToMain`
+- `_pendingRelays` → `_pendingDelegations`
+
+**IslandKernel** (`@lararium/tw5`): `worker-authority-handler.ts` → `island-kernel.ts`;
+class `WorkerAuthorityHandler` → `IslandKernel`; `handleMessage()` deleted (zero callers
+confirmed; fixtures use raw `parentPort.on("message")`); `mkTeardownAck` import dropped.
+
+**VerbTable / VerbReactor** rename sweep (14 files in lararium-node):
+- `JobHandlerRegistry` → `VerbTable`
+- `JobHandler` → `VerbReactor`
+- All `create*Handler` → `make*Reactor` (makePromoteReactor, makeWhereReactor, etc.)
+
+**Dead behaviors deleted** from `worker-behaviors.ts`:
+- `WikiBehavior` null object
+- `makeWikiDiskBehavior`
+- `makeWikiDispatchBehavior`
+- `makeWikiPrimaryBehavior` remains as sole factory
+
+**Fixture GP-3 branches deleted:**
+- `vm-manager-echo.mjs`: changeset branch, snapshotTiddlers seeding, tiddlers Map
+- `teardown-echo.mjs`: changeset branch
+
+**VesselIslandPool rename:**
+- `node-vm-manager.ts` → `vessel-island-pool.ts`; `NodeVmManager` → `VesselIslandPool`
+- `browser-vm-manager.ts` → `browser-vessel-island-pool.ts`; `BrowserVmManager` → `BrowserVesselIslandPool`
+- All import sites, test files, and index exports updated
+
+**Metrics:** 55/55 tests pass (node 50, browser 5). All packages typecheck clean.
+
+---
 
 ## What Changed This Turn (2026-05-24 turn 20)
 

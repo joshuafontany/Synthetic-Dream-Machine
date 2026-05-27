@@ -5,9 +5,9 @@
  * syncPort; derives tiddler state from its own CRDT doc; owns timing via rAF drain.
  *
  * Primary exports:
- *   BrowserVmManager — BrowserAuthorityPool implementation (island routing + lifecycle).
+ *   BrowserVesselIslandPool — BrowserAuthorityPool implementation (island routing + lifecycle).
  *   browser-wiki-worker — Worker entry (compiled separately; not re-exported here).
  */
 
-export { BrowserVmManager } from "./browser-vm-manager.js";
-export type { BrowserVmManagerOptions } from "./browser-vm-manager.js";
+export { BrowserVesselIslandPool } from "./browser-vessel-island-pool.js";
+export type { BrowserVesselIslandPoolOptions } from "./browser-vessel-island-pool.js";
