@@ -9,6 +9,11 @@
  *   Read-dominant: CRDT bags flow in, TW5 session writes land in scratch.
  *   No JobDispatcher, no relay protocol. writeBagId = BAG_IDS.scratch.
  *
+ * ## Wiki Worker with disk projection — extends null behavior
+ *   Starts a LarDiskProjector inside the Worker, subscribing to TW5 wiki
+ *   change events directly. renderFn calls exportMemeText(ctx.tw5, uri).
+ *   Receives diskMirrors from manifest (serializable BagMirrorConfig).
+ *
  * ## Admin Worker — dispatch behavior
  *   Owns the kumu device / Reaction Engine surface (TW5 wiki change events).
  *   JobDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
@@ -26,9 +31,12 @@ import {
   type AdminMsg_JobResult,
   type BatchMode,
   type JobTiddler,
+  type WorkerMsg_Manifest,
 } from "@lararium/mesh";
-import { placeVmJob } from "@lararium/tw5";
+import { placeVmJob, exportMemeText } from "@lararium/tw5";
 import { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
+import { LarDiskProjector } from "./disk-projector.js";
+import { namedBagMirror } from "./bag-paths.js";
 import type { WorkerBehavior, WorkerContext } from "./sovereign-worker-model.js";
 
 // ── Wiki Worker behavior — null object (OTP: no-op callback module) ───────
@@ -39,6 +47,47 @@ export const WikiBehavior: WorkerBehavior = {
   onMessage:   () => false,
   onTeardown:  () => {},
 };
+
+// ── Wiki Worker with disk projection ─────────────────────────────────────
+
+/**
+ * Behavior for the primary wiki Worker when disk projection is required.
+ *
+ * Constructs a LarDiskProjector from the manifest's `diskMirrors` field and
+ * starts it inside the Worker, subscribing to TW5 wiki change events directly.
+ * The renderFn calls exportMemeText(ctx.tw5, uri) — no main-thread round-trip.
+ *
+ * Pass the manifest message so the behavior can read `diskMirrors` at `onReady` time.
+ */
+export function makeWikiDiskBehavior(manifest: WorkerMsg_Manifest): WorkerBehavior {
+  let _stopProjector: (() => void) | null = null;
+
+  return {
+    writeBagId: BAG_IDS.scratch,
+
+    onReady(ctx: WorkerContext) {
+      const mirrorDefs = manifest.diskMirrors;
+      if (!mirrorDefs?.length) return;
+
+      const mirrors = mirrorDefs.map(({ bagId, mirrorRoot, scope }) =>
+        namedBagMirror(bagId, scope, mirrorRoot),
+      );
+
+      const projector = new LarDiskProjector(
+        mirrors,
+        (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
+      );
+      _stopProjector = projector.start(ctx.tw5);
+    },
+
+    onMessage: () => false,
+
+    onTeardown() {
+      _stopProjector?.();
+      _stopProjector = null;
+    },
+  };
+}
 
 // ── Admin Worker behavior — dispatch + relay ──────────────────────────────
 

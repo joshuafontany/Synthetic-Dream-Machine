@@ -147,6 +147,14 @@ export interface WorkerMsg_Manifest {
   bagStack?: readonly string[];
   /** Recipe URI mapping this authority's content scope. */
   recipeUri?: string;
+  /**
+   * Serializable disk mirror configs for Worker-hosted LarDiskProjector.
+   * Each entry carries `bagId`, `mirrorRoot` (absolute path), and `scope`
+   * (e.g. "@lares", "@lararium") so the Worker can reconstruct `BagMirrorConfig`
+   * via `namedBagMirror(scope, mirrorRoot)` from `bag-paths`.
+   * Absent = no disk projection for this Worker.
+   */
+  diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
 /**
@@ -229,7 +237,8 @@ export type MainToWorkerMsg =
   | WorkerMsg_Demote
   | WorkerMsg_Teardown
   | AdminMsg_PlaceJob
-  | AdminMsg_JobResult;
+  | AdminMsg_JobResult
+  | WikiMsg_PlaceJob;
 
 // ── Worker → Main ──────────────────────────────────────────────────────────
 
@@ -298,6 +307,39 @@ export interface WorkerMsg_ChangesetAck {
   batch_id: string;
 }
 
+/**
+ * Main → Worker: place a wiki-scope job into a wiki Worker's TW5 wiki.
+ *
+ * Parallel to AdminMsg_PlaceJob for the admin Worker. Any Worker running a
+ * wiki dispatch behavior handles this by calling placeVmJob on its TW5 wiki.
+ * The wiki change event fires at next tick; the Worker's JobDispatcher dispatches it.
+ */
+export interface WikiMsg_PlaceJob {
+  schema_version: ProtocolVersion;
+  type:           "wiki:place-job";
+  verb:           string;
+  args:           Record<string, unknown>;
+  requestedBy:    string;
+  targets?:       string[];
+  batchMode?:     string;
+  requestId?:     string;
+}
+
+/**
+ * Worker → Main: wiki-scope job result.
+ *
+ * Sent by a wiki Worker's dispatch behavior after completing a job whose result
+ * the main thread needs (e.g. promote — result carries the promoted record list).
+ * For fire-and-forget jobs (no result needed) the Worker omits this message.
+ */
+export interface WikiMsg_JobResult {
+  schema_version: ProtocolVersion;
+  type:           "wiki:job-result";
+  requestId:      string;
+  result?:        Record<string, unknown>;
+  error?:         string;
+}
+
 /** All messages a wiki Worker may send to the main thread. */
 export type WorkerToMainMsg =
   | WorkerMsg_Event
@@ -305,6 +347,7 @@ export type WorkerToMainMsg =
   | WorkerMsg_Ea
   | WorkerMsg_ChangesetAck
   | WorkerMsg_Fault
+  | WikiMsg_JobResult
   | AdminMsg_RelayJob;
 
 // ── Type guards ────────────────────────────────────────────────────────────
@@ -320,14 +363,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isMainToWorkerMsg(v: unknown): v is MainToWorkerMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "demote", "teardown", "admin:place-job", "admin:job-result"] as const).includes(
+  return (["manifest", "demote", "teardown", "admin:place-job", "admin:job-result", "wiki:place-job"] as const).includes(
     v.type as MainToWorkerMsg["type"],
   );
 }
 
 export function isWorkerToMainMsg(v: unknown): v is WorkerToMainMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "admin:relay-job"] as const).includes(
+  return (["event", "teardown:ack", "ea", "changeset:ack", "fault", "wiki:job-result", "admin:relay-job"] as const).includes(
     v.type as WorkerToMainMsg["type"],
   );
 }
@@ -371,6 +414,7 @@ export function mkManifest(
     bagBindings?:    readonly BagBinding[];
     storage?:        WorkerStorageConfig;
     recipeUri?:      string;
+    diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
     /** @deprecated use bagBindings */
     docUrl?:         string | null;
     /** @deprecated use bagBindings */
@@ -389,6 +433,7 @@ export function mkManifest(
   if (opts?.storage)                msg.storage        = opts.storage;
   if (opts?.pluginTiddlers?.length) msg.pluginTiddlers = opts.pluginTiddlers;
   if (opts?.recipeUri)              msg.recipeUri      = opts.recipeUri;
+  if (opts?.diskMirrors?.length)    msg.diskMirrors    = opts.diskMirrors;
   // Sprint 1→3 shims: pass through deprecated fields when callers haven't migrated yet.
   if (opts?.docUrl !== undefined)   msg.docUrl         = opts.docUrl;
   if (opts?.bagStack?.length)       msg.bagStack       = opts.bagStack;
@@ -458,6 +503,42 @@ export function mkAdminJobResult(opts: {
   const msg: AdminMsg_JobResult = {
     schema_version: WORKER_PROTOCOL_VERSION,
     type: "admin:job-result",
+    requestId: opts.requestId,
+  };
+  if (opts.result !== undefined) msg.result = opts.result;
+  if (opts.error  !== undefined) msg.error  = opts.error;
+  return msg;
+}
+
+export function mkWikiPlaceJob(opts: {
+  verb: string;
+  args: Record<string, unknown>;
+  requestedBy: string;
+  targets?: string[];
+  batchMode?: string;
+  requestId?: string;
+}): WikiMsg_PlaceJob {
+  const msg: WikiMsg_PlaceJob = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "wiki:place-job",
+    verb: opts.verb,
+    args: opts.args,
+    requestedBy: opts.requestedBy,
+  };
+  if (opts.targets?.length)  msg.targets   = opts.targets;
+  if (opts.batchMode)        msg.batchMode = opts.batchMode;
+  if (opts.requestId)        msg.requestId = opts.requestId;
+  return msg;
+}
+
+export function mkWikiJobResult(opts: {
+  requestId: string;
+  result?: Record<string, unknown>;
+  error?: string;
+}): WikiMsg_JobResult {
+  const msg: WikiMsg_JobResult = {
+    schema_version: WORKER_PROTOCOL_VERSION,
+    type: "wiki:job-result",
     requestId: opts.requestId,
   };
   if (opts.result !== undefined) msg.result = opts.result;

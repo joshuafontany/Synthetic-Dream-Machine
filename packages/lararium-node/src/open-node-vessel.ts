@@ -699,12 +699,19 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const draftBagId = activeWikiPlan.draftBagId;
   const draftStore = new AutomergeDocStore(draftHandle, draftBagId);
 
-  // S6 E.2 — projection layer. In-memory MemoryTiddlerStore at top read
-  // priority. Holds TW5 runtime state ($:/state/*, $:/HistoryList,
-  // $:/StoryList, derived projections) that the operator does not want
-  // synced or persisted. Writes route here only when record.bag ===
-  // BAG_IDS.projection ("projection"); defaultWritable=false keeps draft
-  // as the unbagged-write target. Daemon restart starts this layer empty.
+  // Scratch layer — local-VM-only MemoryTiddlerStore. Receives session writes
+  // that should never sync or persist: job staging, TW5 temp tiddlers.
+  // defaultWritable:true so unbagged TW5 saves land here, not in the draft CRDT.
+  // Aligns with Worker sub-surface recipe law (sovereign-worker-model.ts).
+  composite.addLayer({
+    bagId:           BAG_IDS.scratch,
+    store:           new MemoryTiddlerStore(),
+    writable:        true,
+    defaultWritable: true,
+  });
+
+  // Projection layer — $:/state/*, $:/HistoryList, $:/StoryList.
+  // Never synced or persisted. defaultWritable:false — unbagged saves go to scratch.
   composite.addLayer({
     bagId:           BAG_IDS.projection,
     store:           new MemoryTiddlerStore(),
@@ -755,9 +762,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   for (const ring of DEFAULT_RINGS) eventBus.registerRing(ring);
   eventBus.start();
 
-  // P.2 — NodeVmManager. Mount PrimaryWiki as pinned slot.
-  // The VM island bridge wires the adaptor after this pinned slot exists.
+  // P.2 — NodeVmManager. Hot/pinned Worker slots for session wikis.
   // onWorkerEvent routes RE reactions from hot-tier Workers into the vm-ring.
+  // TODO(task-7): mountPrimaryWorker(activeWikiId, ctx) once MountedWikiController
+  //   moves to a Worker. Until then the primary wiki runs in-process via MountedWikiController.
   vmManager = new NodeVmManager({
     onWorkerEvent: (wikiId, msg) => {
       eventBus.enqueueToRing("vm-ring", "worker.event", {
@@ -767,14 +775,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       });
     },
   });
-  vmManager.mountPrimary(activeWikiId, tw5, null);
 
   // ── 8. Corpus bags — await after TW5 boots ────────────────────────────────
   await corpusReadyP;
   emit("corpus-ready");
 
   // ── 9. VM island bridge — causal-island ↔ TW5 wiki bridge ─────────────────
-  vmManager.updateAdaptor(activeWikiId, mountedSession.bridge.adaptor);
+  // bridge.adaptor still wires the in-process composite until task-7 Worker migration.
 
   // ── 10. VmPool ────────────────────────────────────────────────────────────
   vessel.attachVmPool(mountedSession.pool);

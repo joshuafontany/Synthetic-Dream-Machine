@@ -109,3 +109,13 @@ export function wikiBagPath(): MirrorPathFn {
     return `${dirPrefix}${rel}`;
   };
 }
+
+/**
+ * Construct a BagMirrorConfig for a named-scope bag.
+ *
+ * Used by Workers to reconstruct mirror configs from the serializable
+ * `diskMirrors` manifest field (which carries `{ bagId, mirrorRoot, scope }`).
+ */
+export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string): BagMirrorConfig {
+  return { bagId, mirrorRoot, toRelPath: namedBagPath(scope) };
+}

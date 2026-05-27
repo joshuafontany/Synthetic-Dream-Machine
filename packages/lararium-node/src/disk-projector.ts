@@ -41,7 +41,7 @@ export class LarDiskProjector {
   private readonly timers = new Map<string, ReturnType<typeof setTimeout>>();
   private _firstFlushDone = false;
 
-  private _tw5?: TW5Engine;
+  private _tw5: TW5Engine | null = null;
 
   constructor(
     /** Bag mirrors. Bags absent from this list never write to disk. */

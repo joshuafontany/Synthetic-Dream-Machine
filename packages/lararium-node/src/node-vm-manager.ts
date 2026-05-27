@@ -3,14 +3,15 @@
  *
  * ## Tiers
  *
- *   Pinned  — PrimaryWiki + admin. Never evicted. TW5Engine runs in-process
- *             (same thread as the main event loop). IslandAdaptor wires it
- *             to the CompositeStore. All synchronous engine reads are free.
+ *   Pinned  — PrimaryWiki + admin. Never evicted. Each pinned slot owns a long-lived
+ *             Worker thread (same as hot slots, but immune to LRU eviction).
+ *             Main thread holds no TW5Engine reference — all interaction via
+ *             worker-protocol envelope (@lararium/mesh) only.
  *
  *   Hot     — LRU of recently-active session wikis (max HOT_CAP slots).
- *             Each slot owns one `worker_threads.Worker`. TW5Engine + (P.3.5)
- *             ReactionEngine run co-located inside the Worker thread.
- *             Main thread communicates via worker-protocol envelope (@lararium/mesh) only.
+ *             Each slot owns one `worker_threads.Worker`. TW5Engine + ReactionEngine
+ *             run co-located inside the Worker thread.
+ *             Main thread communicates via worker-protocol envelope only.
  *
  *   Cold    — CRDT-only. VmSnapshot stores Automerge heads (+ optional docBytes)
  *             from the Worker's last teardown:ack. No thread, no engine.
@@ -20,18 +21,6 @@
  *   mountWiki   → spawn Worker → manifest → ea → slot = hot
  *   unmountWiki → teardown → teardown:ack (+ docBytes) → worker.terminate()
  *                → slot = cold (cold slot carries the Worker's final TW5 state)
- *
- * ## Render surface (pinned engine)
- *
- *   renderMeme — template-dependent; pinned engine serves all render requests.
- *                Worker-backed wikis are not directly renderable from main in P.3.
- *                Cross-wiki render will route through the Worker event channel in P.4.
- *
- * ## ReactionEngine routing (P.3.5)
- *
- *   When a Worker emits WorkerMsg_Event (RE reaction), the manager forwards it
- *   to the `onWorkerEvent` callback registered at construction. The callback
- *   routes the event into the main-thread LarEventBus.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-vm-manager
  * Meme doc: packages/lararium-node/memes/node-vm-manager.md
@@ -45,7 +34,6 @@ import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import type { DocHandle, Repo } from "@automerge/automerge-repo";
 import { join } from "path";
-import { TW5Engine, IslandAdaptor } from "@lararium/tw5";
 import type { TW5CoreBootBlob } from "@lararium/tw5";
 import {
   isWorkerToMainMsg,
@@ -81,25 +69,17 @@ export interface VmSnapshot {
 
 type SlotTier = "pinned" | "hot" | "cold";
 
-/** Pinned: PrimaryWiki or admin — TW5Engine lives in-process. */
-interface PinnedSlot {
-  tier:       "pinned";
-  wikiId:     string;
-  engine:     TW5Engine;
-  adaptor:    IslandAdaptor | null;
-  lastUsedAt: number;
-}
-
 /**
- * Hot: session wiki — TW5Engine lives inside the Worker thread.
- * Main thread never holds the engine reference; all interaction via postMessage.
+ * Worker slot — covers both pinned (never-evicted) and hot (LRU) tiers.
  *
- * Repo-in-Worker: CRDT sync flows via `mainPort` ↔ `syncPort` MessageChannel.
- * Main-thread Repo wires a `MessageChannelNetworkAdapter` to `mainPort`; the Worker
- * creates its own Repo with the transferred `syncPort`. No oracle delta needed.
+ * `pinned: true`  → immune to LRU eviction. Used for PrimaryWiki + admin.
+ * `pinned: false` → subject to LRU eviction when HOT_CAP is reached.
+ *
+ * In both cases the TW5Engine lives inside the Worker thread. The main thread
+ * holds no engine reference and interacts only via worker-protocol envelopes.
  */
-interface WorkerHotSlot {
-  tier:       "hot";
+interface WorkerSlot {
+  tier:       "pinned" | "hot";
   wikiId:     string;
   worker:     Worker;
   /** Main-thread side of the Worker sync channel. Close on unmount (Law §7). */
@@ -113,7 +93,7 @@ interface ColdSlot {
   snapshot: VmSnapshot | null;
 }
 
-type Slot = PinnedSlot | WorkerHotSlot | ColdSlot;
+type Slot = WorkerSlot | ColdSlot;
 
 // ---------------------------------------------------------------------------
 // WikiBootContext
@@ -175,17 +155,17 @@ const DEFAULT_WORKER_URL = new URL("./lar-wiki-worker.js", import.meta.url);
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
 export class NodeVmManager {
-  private readonly _slots          = new Map<string, Slot>();
-  private readonly _workerUrl:     URL;
-  private readonly _onWorkerEvent: ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
-  private readonly _mainRepo:      Repo | null;
-  private readonly _storageRoot:   string | null;
+  private readonly _slots           = new Map<string, Slot>();
+  private readonly _workerUrl:      URL;
+  private readonly _onWorkerEvent:  ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
+  private readonly _mainRepo:       Repo | null;
+  private readonly _storageRoot:    string | null;
 
   constructor(options: NodeVmManagerOptions = {}) {
-    this._workerUrl     = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
-    this._onWorkerEvent = options.onWorkerEvent ?? null;
-    this._mainRepo      = options.mainRepo ?? null;
-    this._storageRoot   = options.storageRoot ?? null;
+    this._workerUrl      = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
+    this._onWorkerEvent  = options.onWorkerEvent ?? null;
+    this._mainRepo       = options.mainRepo ?? null;
+    this._storageRoot    = options.storageRoot ?? null;
   }
 
   // ---------------------------------------------------------------------------
@@ -193,23 +173,13 @@ export class NodeVmManager {
   // ---------------------------------------------------------------------------
 
   /**
-   * Register the PrimaryWiki as a pinned (never-evicted) in-process slot.
-   * Call once after `openNodeVessel` returns the booted `tw5` engine.
+   * Mount the PrimaryWiki as a pinned (never-evicted) Worker slot.
+   *
+   * Identical to `mountWiki` but the resulting slot is immune to LRU eviction.
+   * Call after the vessel has a `coreBlob` and the primary wiki doc handle is ready.
    */
-  mountPrimary(wikiId: string, engine: TW5Engine, adaptor: IslandAdaptor | null): void {
-    this._slots.set(wikiId, {
-      tier: "pinned",
-      wikiId,
-      engine,
-      adaptor,
-      lastUsedAt: Date.now(),
-    });
-  }
-
-  /** Wire or update the IslandAdaptor on the pinned slot. */
-  updateAdaptor(wikiId: string, adaptor: IslandAdaptor): void {
-    const slot = this._slots.get(wikiId);
-    if (slot?.tier === "pinned") slot.adaptor = adaptor;
+  async mountPrimaryWorker(wikiId: string, ctx: WikiBootContext): Promise<void> {
+    await this._mountWorker(wikiId, ctx, true);
   }
 
   // ---------------------------------------------------------------------------
@@ -224,32 +194,112 @@ export class NodeVmManager {
    * Evicts the LRU Worker slot (non-pinned) when at capacity.
    *
    * Returns void — the main thread holds no direct engine reference for Worker
-   * slots. Receive CRDT changes via the `mainRepo` MessageChannel and events via
-   * `onWorkerEvent`.
+   * slots. Receive CRDT changes via `onTiddlerDelta` and events via `onWorkerEvent`.
    */
   async mountWiki(wikiId: string, ctx: WikiBootContext): Promise<void> {
+    await this._mountWorker(wikiId, ctx, false);
+  }
+
+  /**
+   * Unmount a hot or pinned Worker slot via GP-5 teardown handshake.
+   *
+   * 1. Sends teardown signal.
+   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker).
+   * 3. Closes mainPort, calls worker.terminate().
+   * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
+   *
+   * No-op for slots already in cold.
+   */
+  async unmountWiki(wikiId: string): Promise<void> {
+    const slot = this._slots.get(wikiId);
+    if (!slot || slot.tier === "cold") return;
+
+    const workerSlot = slot as WorkerSlot;
+    let snapshot: VmSnapshot | null = null;
+    try {
+      const ack = await _sendAndAwait<WorkerMsg_TeardownAck>(
+        workerSlot.worker,
+        mkTeardown(),
+        "teardown:ack",
+      );
+      let heads: Heads = [];
+      if (ack.docBytes) {
+        try { heads = getHeads(automergeLoad(ack.docBytes)); } catch { /* corrupt bytes */ }
+      }
+      const snapshotFields: VmSnapshot = { heads, capturedAt: Date.now() };
+      if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
+      snapshot = snapshotFields;
+    } catch (err) {
+      console.warn(`[vm-manager] ${wikiId}: teardown handshake failed — ${err}; terminating anyway`);
+    }
+
+    workerSlot.mainPort.close();
+    await workerSlot.worker.terminate();
+    this._slots.set(wikiId, { tier: "cold", wikiId, snapshot });
+
+    const snapDesc = snapshot
+      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : "heads-only")
+      : "none";
+    console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Accessors
+  // ---------------------------------------------------------------------------
+
+  tier(wikiId: string): SlotTier | null {
+    return this._slots.get(wikiId)?.tier ?? null;
+  }
+
+  snapshot(wikiId: string): VmSnapshot | null {
+    const slot = this._slots.get(wikiId);
+    return slot?.tier === "cold" ? slot.snapshot : null;
+  }
+
+  /** Diagnostics: slot counts by tier. */
+  stats(): { pinned: number; hot: number; cold: number } {
+    let pinned = 0, hot = 0, cold = 0;
+    for (const s of this._slots.values()) {
+      if (s.tier === "pinned")   pinned++;
+      else if (s.tier === "hot") hot++;
+      else                       cold++;
+    }
+    return { pinned, hot, cold };
+  }
+
+  // ---------------------------------------------------------------------------
+  // Dispose all
+  // ---------------------------------------------------------------------------
+
+  /** Teardown all Worker slots (GP-5). */
+  async disposeAll(): Promise<void> {
+    const teardowns: Promise<void>[] = [];
+    for (const slot of this._slots.values()) {
+      if (slot.tier === "hot" || slot.tier === "pinned") {
+        teardowns.push(this.unmountWiki(slot.wikiId));
+      }
+    }
+    await Promise.allSettled(teardowns);
+    this._slots.clear();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Private helpers
+  // ---------------------------------------------------------------------------
+
+  private async _mountWorker(wikiId: string, ctx: WikiBootContext, pinned: boolean): Promise<void> {
     const existing = this._slots.get(wikiId);
-    if (existing?.tier === "hot") {
-      (existing as WorkerHotSlot).lastUsedAt = Date.now();
-      return;
-    }
-    if (existing?.tier === "pinned") {
-      (existing as PinnedSlot).lastUsedAt = Date.now();
+    if (existing && (existing.tier === "hot" || existing.tier === "pinned")) {
+      (existing as WorkerSlot).lastUsedAt = Date.now();
       return;
     }
 
-    await this._evictLruIfNeeded();
+    if (!pinned) await this._evictLruIfNeeded();
 
-    // Plugin tiddlers — prerequisite for ea condition 3. These cross the manifest
-    // boundary so the island can parse memetic wikitext from first breath.
-    // Cold-slot tiddlers flow via CRDT Repo sync (bagBindings), not here.
     const pluginTiddlers = ctx.preloadedTiddlers?.length ? ctx.preloadedTiddlers : undefined;
 
-    // Create sync channel — main keeps port1, Worker receives port2 (syncPort).
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    // Wire mainPort to the main-thread Repo (Repo-in-Worker path).
-    // Without mainRepo the Worker falls back to the @deprecated GP-3 gossip path.
     if (this._mainRepo) {
       const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
       this._mainRepo.networkSubsystem.addNetworkAdapter(adapter);
@@ -263,15 +313,11 @@ export class NodeVmManager {
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    // Build bagBindings: one entry per wiki doc at Sprint 2 (full recipe stack Sprint 4+).
-    // When mainRepo is wired, relational binding so Worker calls repo.find(docUrl).
-    // Without mainRepo, cold boot — Worker creates or receives the doc via sync.
     const rawDocUrl = this._mainRepo ? (ctx.docHandle.url as string | undefined ?? null) : null;
     const bagBindings: readonly BagBinding[] = rawDocUrl != null
       ? [{ bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl }]
       : [{ bagId: wikiId, writable: true, mode: "cold" }];
 
-    // Storage config: derive Worker storage dir from storageRoot + sanitized wikiId.
     const storage: WorkerStorageConfig | undefined = this._storageRoot
       ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }
       : undefined;
@@ -294,155 +340,21 @@ export class NodeVmManager {
       [syncPort],
     );
 
-    this._slots.set(wikiId, {
-      tier:       "hot",
-      wikiId,
-      worker,
-      mainPort,
-      lastUsedAt: Date.now(),
-    });
+    const tier = pinned ? "pinned" : "hot";
+    this._slots.set(wikiId, { tier, wikiId, worker, mainPort, lastUsedAt: Date.now() });
 
     console.log(
-      `[vm-manager] ${wikiId}: island ea — hot (plugins: ${pluginTiddlers ? pluginTiddlers.length : 0})`,
+      `[vm-manager] ${wikiId}: island ea — ${tier} (plugins: ${pluginTiddlers ? pluginTiddlers.length : 0})`,
     );
   }
 
   /**
-   * Unmount a hot-tier Worker slot via GP-5 teardown handshake.
-   *
-   * 1. Sends teardown signal.
-   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-Worker).
-   * 3. Closes mainPort, calls worker.terminate().
-   * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
-   *
-   * No-op for pinned slots and slots already in cold.
-   */
-  async unmountWiki(wikiId: string): Promise<void> {
-    const slot = this._slots.get(wikiId);
-    if (!slot || slot.tier === "pinned" || slot.tier === "cold") return;
-
-    const hotSlot = slot as WorkerHotSlot;
-    let snapshot: VmSnapshot | null = null;
-    try {
-      const ack = await _sendAndAwait<WorkerMsg_TeardownAck>(
-        hotSlot.worker,
-        mkTeardown(),
-        "teardown:ack",
-      );
-      // Derive heads from Worker's docBytes (Worker owns persistence in Sprint 3).
-      let heads: Heads = [];
-      if (ack.docBytes) {
-        try { heads = getHeads(automergeLoad(ack.docBytes)); } catch { /* corrupt bytes */ }
-      }
-      const snapshotFields: VmSnapshot = { heads, capturedAt: Date.now() };
-      if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
-      snapshot = snapshotFields;
-    } catch (err) {
-      console.warn(`[vm-manager] ${wikiId}: teardown handshake failed — ${err}; terminating anyway`);
-    }
-
-    hotSlot.mainPort.close();
-    await hotSlot.worker.terminate();
-    this._slots.set(wikiId, { tier: "cold", wikiId, snapshot });
-
-    const snapDesc = snapshot
-      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : "heads-only")
-      : "none";
-    console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
-  }
-
-  // ---------------------------------------------------------------------------
-  // Engine access — pinned tier only
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Returns the in-process TW5Engine for the given wikiId, or null.
-   *
-   * In P.3 this returns a non-null value ONLY for the pinned (PrimaryWiki)
-   * slot. Worker-backed hot slots do not expose an in-process engine — drive
-   * changes via the `mainRepo` MessageChannel and consume events via `onWorkerEvent`.
-   */
-  getEngine(wikiId: string): TW5Engine | null {
-    const slot = this._slots.get(wikiId);
-    if (slot?.tier === "pinned") {
-      (slot as PinnedSlot).lastUsedAt = Date.now();
-      return (slot as PinnedSlot).engine;
-    }
-    return null;
-  }
-
-  tier(wikiId: string): SlotTier | null {
-    return this._slots.get(wikiId)?.tier ?? null;
-  }
-
-  snapshot(wikiId: string): VmSnapshot | null {
-    const slot = this._slots.get(wikiId);
-    return slot?.tier === "cold" ? slot.snapshot : null;
-  }
-
-  /** Diagnostics: slot counts by tier. */
-  stats(): { pinned: number; hot: number; cold: number } {
-    let pinned = 0, hot = 0, cold = 0;
-    for (const s of this._slots.values()) {
-      if (s.tier === "pinned")      pinned++;
-      else if (s.tier === "hot")    hot++;
-      else                          cold++;
-    }
-    return { pinned, hot, cold };
-  }
-
-  /**
-   * Render a meme URI using the pinned wiki's engine (template-dependent).
-   * Worker-backed wikis are not directly renderable from the main thread in P.3.
-   */
-  async renderMeme(uri: string): Promise<string | null> {
-    const engine = this._pinnedEngine();
-    if (!engine) return null;
-    try {
-      const { exportMemeText } = await import("@lararium/tw5");
-      return exportMemeText(engine, uri);
-    } catch {
-      return null;
-    }
-  }
-
-  // ---------------------------------------------------------------------------
-  // Dispose all
-  // ---------------------------------------------------------------------------
-
-  /** Teardown all Worker slots (GP-5) and dispose the pinned engine. */
-  async disposeAll(): Promise<void> {
-    const teardowns: Promise<void>[] = [];
-    for (const slot of this._slots.values()) {
-      if (slot.tier === "hot")    teardowns.push(this.unmountWiki(slot.wikiId));
-      if (slot.tier === "pinned") {
-        const p = slot as PinnedSlot;
-        p.adaptor?.stop();
-        p.engine.dispose();
-      }
-    }
-    await Promise.allSettled(teardowns);
-    this._slots.clear();
-  }
-
-  // ---------------------------------------------------------------------------
-  // Private helpers
-  // ---------------------------------------------------------------------------
-
-  private _pinnedEngine(): TW5Engine | null {
-    for (const slot of this._slots.values()) {
-      if (slot.tier === "pinned") return (slot as PinnedSlot).engine;
-    }
-    return null;
-  }
-
-  /**
-   * Evict the LRU Worker hot slot when at capacity.
+   * Evict the LRU hot (non-pinned) Worker slot when at capacity.
    * Uses the GP-5 teardown handshake — async.
    */
   private async _evictLruIfNeeded(): Promise<void> {
     const hotSlots = [...this._slots.values()].filter(
-      (s): s is WorkerHotSlot => s.tier === "hot",
+      (s): s is WorkerSlot => s.tier === "hot",
     );
     if (hotSlots.length < HOT_CAP) return;
 
@@ -529,4 +441,3 @@ function _sendAndAwait<T extends WorkerToMainMsg>(
 function _sanitizeWikiId(wikiId: string): string {
   return wikiId.replace(/^lar:\/\/\//, "").replace(/[^a-zA-Z0-9@._-]/g, "_");
 }
-
