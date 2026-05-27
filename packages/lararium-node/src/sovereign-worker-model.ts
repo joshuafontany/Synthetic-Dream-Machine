@@ -188,8 +188,9 @@ export function runSovereignWorker(behavior: WorkerBehavior): void {
       return;
     }
 
+    const storageAdapter = _buildStorage(msg.storage);
     _repo = new Repo({
-      ...(_buildStorage(msg.storage) ? { storage: _buildStorage(msg.storage) } : {}),
+      ...(storageAdapter ? { storage: storageAdapter } : {}),
       network: [new MessageChannelNetworkAdapter(syncPort as unknown as globalThis.MessagePort)],
       sharePolicy: async () => true,
     });

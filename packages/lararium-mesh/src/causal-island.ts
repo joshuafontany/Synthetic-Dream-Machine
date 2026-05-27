@@ -187,7 +187,7 @@ export interface EdgeIslandShape {
 export interface VisibilityGateInput {
   /** Structural rating of the meme carrier (noise | data | meme | ano | kapu). */
   memeRating:      string;
-  /** Community-weighted believability scalar [0.0–1.0]. */
+  /** Community-weighted believability Level [0–20]. */
   memeManaoio:     number;
   /** Wiki's minimum manaoio threshold. */
   wikiMinManaoio:  number;

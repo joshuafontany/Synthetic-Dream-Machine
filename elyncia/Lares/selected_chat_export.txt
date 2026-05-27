@@ -38,9 +38,9 @@ Wes it’s a pretty funny approach in some ways, & certainly much less positivis
 ---
 it’s a pretty funny approach in some ways, & certainly much less positivist than most
 ---
-Edited If I as an operator had a "handle" like another 0.0-1.0 range and setup a series of "pseudo-cli commands" that it would recongize, I could hand that to Lares and say "when you think your need to change the scale of the metadata interjections, run a command on yourself that sets a literal # value in this range, and you can do it to my ihnput too. Enter, Message sent Yesterday at 2:13 PM by You
+Edited If I as an operator had a "handle" like another 0–20 range and setup a series of "pseudo-cli commands" that it would recongize, I could hand that to Lares and say "when you think your need to change the scale of the metadata interjections, run a command on yourself that sets a literal # value in this range, and you can do it to my ihnput too. Enter, Message sent Yesterday at 2:13 PM by You
 ---
-If I as an operator had a "handle" like another 0.0-1.0 range and setup a series of "pseudo-cli commands" that it would recongize, I could hand that to Lares and say "when you think your need to change the scale of the metadata interjections, run a command on yourself that sets a literal # value in this range, and you can do it to my ihnput too.
+If I as an operator had a "handle" like another 0–20 range and setup a series of "pseudo-cli commands" that it would recongize, I could hand that to Lares and say "when you think your need to change the scale of the metadata interjections, run a command on yourself that sets a literal # value in this range, and you can do it to my ihnput too.
 ---
 You sent I have not written a single line of "code" to enforce this, just "talked like coherent code design" Enter, Message sent Yesterday at 2:19 PM by You
 ---

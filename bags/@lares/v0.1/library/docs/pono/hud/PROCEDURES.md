@@ -14,7 +14,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=0.9#exchange-span-display-contract -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=C~18#exchange-span-display-contract -->
 ## Exchange Span Display Contract *(consumed)*
 
 > Consumed into `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal#migrated-hud-anatomy-exchange-flow` and `#migrated-hud-anatomy-span-display-contract`
@@ -66,7 +66,7 @@ lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=^.-.-.-.-&confidence=
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=0.9#micro-trace-rules -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=C~18#micro-trace-rules -->
 ## Micro-trace HUD — Emit Rules *(consumed)*
 
 > Consumed into `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud#micro-trace-syntax`, `#micro-trace-density`, and `#micro-trace-layer-split`
@@ -116,7 +116,7 @@ Canonical flag-behavior table now lives at:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=0.9#sub-agent-handoff -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=C~18#sub-agent-handoff -->
 ## Sub-agent and Coordinator Handoff Protocol *(consumed)*
 
 > Consumed into `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud#micro-trace-handoff`
@@ -149,7 +149,7 @@ Within the same session (no spawned sub-agent): micro-trace tag only, unless:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=0.9#parse-mode -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=C~18#parse-mode -->
 ## Parse Mode and Layer Separation *(consumed)*
 
 > Consumed into `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud#micro-trace-layer-split`
@@ -168,7 +168,7 @@ If the opening operator URI cannot cleanly summarize the incoming prompt (multi-
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=0.9#system-file-uris -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/act/?confidence=C~18#system-file-uris -->
 ## System File URI Procedures
 
 When writing or updating system files:

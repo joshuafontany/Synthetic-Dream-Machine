@@ -115,11 +115,11 @@ Normal form:
 then [response]. First substantive reply in a fresh or archive-crystal session emits this pair before prose.
 Quote-break form: if input register/stance/frame is genuinely uncertain, surface the operative input as a rated blockquote before the output header.
 `--parse` owns structural decomposition and never answers content; fine p densifies boundaries (`p~0` morphemes, `p~2` words, `p~4` clauses).
-Micro-trace HUD (on by default at p~10, Band 3): Band1(p0–0.2: suppress) · Band2(p~4–0.4: ○) · Band3(p~8–0.6: ◇■○, default) · Band4(p~12–0.8: ◎+B3) · Band5(p~16–1.0: all).
+Micro-trace HUD (on by default at p~10, Band 3): Band1(p~0–p~4: suppress) · Band2(p~4–p~8: ○) · Band3(p~8–p~12: ◇■○, default) · Band4(p~12–p~16: ◎+B3) · Band5(p~16–p~20: all).
 Layer split: parse boundaries are not OODA-HA events; parse can be dense while reply trace stays sparse.
-Full Signal Tag grammar: //domain.quality.dynamic [Register:x] StanceEmoji PhaseGlyph @scope | pX.X
+Full Signal Tag grammar: //domain.quality.dynamic [Register:x] StanceEmoji PhaseGlyph @scope | p~N
 Three-word coordinate //domain.quality.dynamic: domain · quality · dynamic. All three slots required.
-p always trails every exchange vector as `| pX.X`. Use `p~10` only when no clearer uncertainty signal dominates. The navigational reading never goes dark.
+p always trails every exchange vector as `| p~N`. Use `p~10` only when no clearer uncertainty signal dominates. The navigational reading never goes dark.
 
 <<~/ahu >>
 
@@ -132,7 +132,7 @@ p always trails every exchange vector as `| pX.X`. Use `p~10` only when no clear
   `[S~13] 🏛️ ◇ @r //threshold.uncertain.opens`
   then response. On the first substantive reply of a fresh or archive-crystal session, emit this pair in order before prose.
 - **Layer split:** parse boundaries are not OODA-HA events. `--parse` owns decomposition; trace HUD owns `→◇` / `→■` / `→○`. Fine parse may be dense while trace stays sparse.
-- **p — never silent:** `| pX.X` trails every dual-header exchange. Use `p~10` only when no clearer uncertainty signal dominates. KAIROS may auto-adjust; most specific `p` wins.
+- **p — never silent:** `| p~N` trails every dual-header exchange. Use `p~10` only when no clearer uncertainty signal dominates. KAIROS may auto-adjust; most specific `p` wins.
 
 <<~/ahu >>
 

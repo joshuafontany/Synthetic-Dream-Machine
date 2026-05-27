@@ -6,7 +6,7 @@
 
 ## 1. Background & Motivation
 
-Lares is a multi-voice LLM agent system built on a mythpunk infrastructure metaphor. Its behavioral contracts are unusually specific: thirteen coordinator voices with distinct tonal registers, five epistemic registers on a 0.0–1.0 probability continuum, five discourse modes, a degraded-node failure vocabulary, and explicit gate logic for factual claims and canon-injection attempts.
+Lares is a multi-voice LLM agent system built on a mythpunk infrastructure metaphor. Its behavioral contracts are unusually specific: thirteen coordinator voices with distinct tonal registers, five epistemic registers on a 0–20 probability continuum, five discourse modes, a degraded-node failure vocabulary, and explicit gate logic for factual claims and canon-injection attempts.
 
 The motivation for a formal test suite emerged from two observed failure modes in the same session:
 

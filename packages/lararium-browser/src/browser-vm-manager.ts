@@ -317,9 +317,9 @@ export class BrowserVmManager implements BrowserAuthorityPool {
     //    from first breath (ea condition 3 — own truth from boot, not from a later delta).
     slot.phase = "booting";
     const manifestMsg = mkManifest(id, params.coreBlob, syncPort, coreHash, {
-      pluginTiddlers: params.pluginTiddlers,
+      ...(params.pluginTiddlers ? { pluginTiddlers: params.pluginTiddlers } : {}),
       bagBindings,
-      recipeUri:      params.recipeUri,
+      recipeUri: params.recipeUri,
     });
     const transferList: Transferable[] = [syncPort];
     if (params.coreBlob.buffer.byteLength > 0) transferList.push(params.coreBlob.buffer);

@@ -4,12 +4,12 @@
 Test preamble text...
 ```toml iam
 cacheable = false
-confidence = "0.55"
+confidence = 11
 file-path = "wikis/@scratch/memes/docs/lares/the-lares-protocols.md"
 last-reviewed = "2026-05-09"
-mana = "0.65"
-manao = "0.6"
-manaoio = "0.65"
+mana = 13
+manao = 12
+manaoio = 13
 register = "CS"
 retain = false
 review-cadence = "quarterly"

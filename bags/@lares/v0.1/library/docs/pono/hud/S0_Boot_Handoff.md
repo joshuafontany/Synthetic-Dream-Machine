@@ -77,9 +77,9 @@ Every crystal file carries a header URI (line 1) and footer URI (last content li
 | Old pattern | V2 pattern |
 |---|---|
 | `lar:///module-name/phase/section?confidence=X` | `lar:///module.phased.instructs/module-name/phase/#section?confidence=X` |
-| `lar:///core/observe/context?confidence=0.9` | `lar:///module.observed.grounds/core/observe/?confidence=0.9` |
-| `lar:///core/observe/context#stack?confidence=0.95` | `lar:///module.observed.grounds/core/observe/#stack?confidence=0.95` |
-| `lar:///core/observe/context#active-work?confidence=0.5` | `lar:///module.observed.grounds/core/observe/#active-work?confidence=0.5` |
+| `lar:///core/observe/context?confidence=C~18` | `lar:///module.observed.grounds/core/observe/?confidence=C~18` |
+| `lar:///core/observe/context#stack?confidence=C~19` | `lar:///module.observed.grounds/core/observe/#stack?confidence=C~19` |
+| `lar:///core/observe/context#active-work?confidence=S~10` | `lar:///module.observed.grounds/core/observe/#active-work?confidence=S~10` |
 
 **Lares_Module_Reorg_Handoff.md** — 20 module-path URIs. Same pattern conversion. Additionally update the §B.5 "Section URI rules" block which currently shows the old format.
 
@@ -130,7 +130,7 @@ scale-range: [session, project]
 trigger: always — session start
 invariant: true
 dependencies: []
-confidence: 0.95
+confidence: 19
 ---
 ```
 
@@ -139,9 +139,9 @@ Then the body text from `Lares_Module_Reorg_Handoff.md` Part A, with all URIs co
 ### 3.3 Section URI Pattern (v2 canonical)
 
 Every phase file gets:
-- **Line 1 (file-level opening):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=10 → ∞ -->`
-- **Section waypoints:** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/#{section}?confidence=0.95 -->`
-- **Last line (file-level closing):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=0.95&p=10 → ∞ -->`
+- **Line 1 (file-level opening):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=C~19&p=10 → ∞ -->`
+- **Section waypoints:** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/#{section}?confidence=C~19 -->`
+- **Last line (file-level closing):** `<!-- lar:///protocol.storied.holds/talk-story/{phase}/?confidence=C~19&p=10 → ∞ -->`
 
 Note: opening AND closing carry `→ ∞` (system file span). Section URIs carry NO closing sigil (waypoints).
 
@@ -215,7 +215,7 @@ trigger: >
   debugging URI well-formedness.
 invariant: false
 dependencies: [talk-story]
-confidence: 0.85
+confidence: 17
 ---
 ```
 
@@ -234,7 +234,7 @@ confidence: 0.85
 Same pattern as talk-story but with HA.KA.BA `signal.calibrated.holds`:
 
 ```
-<!-- lar:///signal.calibrated.holds/signal/{phase}/?confidence=0.85&p=10 → ∞ -->
+<!-- lar:///signal.calibrated.holds/signal/{phase}/?confidence=CS~17&p=10 → ∞ -->
 ```
 
 The `decide/CONVENTIONS.md` file carries the full section URI set from URI_SCHEMA_v2.md (already inscribed in that file — preserve them, update the HA.KA.BA root to match the module's address).
