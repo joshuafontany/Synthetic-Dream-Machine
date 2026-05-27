@@ -1,30 +1,38 @@
 /**
  * lar-wiki-worker — Node.js wiki Worker entry point.
  *
- * ## Worker Sovereignty Law — Node.js binding
+ * Sovereign wiki island: owns its TW5 VM, full-recipe CompositeStore, and
+ * IslandAdaptor. Wiki Workers hold a read-dominant recipe — CRDT bags flow
+ * inbound; TW5 session writes (UI state, scratch) land in the volatile layer.
  *
- *   This file implements the isomorphic Worker Sovereignty Law for the Node vessel:
+ * ## Worker Sovereignty Law — Node.js binding (full recipe)
  *
- *   1. Worker boots a Repo-in-Worker via the transferred `syncPort` (MessagePort from worker_threads).
- *   2. Worker derives tiddler state from its own CRDT doc — never from main-thread oracle deltas.
- *   3. Worker owns its timing via `setInterval` (rAF unavailable in Node worker_threads).
- *      Incoming CRDT changes accumulate; the interval drains them each tick.
- *   4. `changeset:ack` fires at each drain tick — frame-completion signal.
- *   5. `WorkerMsg_Changeset` from main thread — removed. Sovereign islands derive state
- *      from their own Repo-in-Worker CRDT doc only (ea condition 3: own truth).
+ *   1. Worker-side Repo syncs all bound bags via syncPort.
+ *   2. TW5 boots with all bags seeded (full recipe in binding order).
+ *   3. Volatile MemoryTiddlerStore receives unbagged TW5 saves (UI state,
+ *      session scratch). defaultWritable:true so TW5 saves land here.
+ *   4. Projection MemoryTiddlerStore holds $:/state/* and $:/HistoryList.
+ *      Never persisted — evaporates on teardown. defaultWritable:false.
+ *   5. IslandAdaptor wires TW5 ↔ CompositeStore; volatile bag is write target.
+ *      CRDT bags remain read-only — wiki Workers do not write back to CRDT.
+ *   6. `ea` fires when all bags ready, TW5 seeded, drain loop running.
  *
  * ## Boot sequence
  *
- *   main                                Worker
- *   ────                                ──────
+ *   main                                Wiki Worker
+ *   ────                                ───────────
  *   new Worker(url)                     → thread boots
- *   postMessage(manifest, [syncPort])   → bootTw5 + wire Repo via syncPort
- *                                         await repo.find(docUrl).whenReady()
+ *   postMessage(manifest, [syncPort])   → bootTw5
+ *                                         wire Repo via syncPort
+ *                                         await all relational handles
+ *                                         build CompositeStore (CRDT+volatile+projection)
+ *                                         wire IslandAdaptor
+ *                                         seed TW5 from all CRDT bags
  *                                         start setInterval drain loop
  *                                       ← ea
  *   [CRDT sync via syncPort]            → Repo change → accumulator
- *                                       ← changeset:ack (drain tick signal)
- *   postMessage(teardown)               → cancel handles, export Repo doc bytes
+ *                                       ← changeset:ack (drain tick)
+ *   postMessage(teardown)               → stop drain loop, export CRDT doc bytes
  *                                       ← teardown:ack (docBytes)
  *   worker.terminate()                  → thread terminates
  *
@@ -37,14 +45,23 @@ import type { DocHandle, AnyDocumentId, StorageAdapterInterface } from "@automer
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { save as automergeSave } from "@automerge/automerge";
-import { WorkerAuthorityHandler } from "@lararium/tw5";
 import {
+  CompositeStore,
+  AutomergeDocStore,
+  BAG_IDS,
   isMainToWorkerMsg,
   mkTeardownAck,
   extractTiddlerDeltaFromPatches,
   allTiddlersFromDoc,
+  type WorkerMsg_Manifest,
+  type WorkerStorageConfig,
 } from "@lararium/mesh";
-import type { WorkerToMainMsg, WorkerMsg_Manifest, WorkerStorageConfig } from "@lararium/mesh";
+import {
+  WorkerAuthorityHandler,
+  IslandAdaptor,
+  MemoryTiddlerStore,
+} from "@lararium/tw5";
+import type { WorkerToMainMsg } from "@lararium/mesh";
 
 if (!parentPort) {
   throw new Error("[lar-wiki-worker] parentPort is null — must run as a Worker thread.");
@@ -58,33 +75,30 @@ const handler = new WorkerAuthorityHandler((msg: WorkerToMainMsg) => {
   _port.postMessage(msg);
 });
 
-// ── Worker-side Repo + multi-doc handle map (Sprint 2) ───────────────────
-// _handles: bagId → DocHandle, keyed in bagBindings order.
-// _writableHandleId: first writable bagId, used for teardown docBytes export.
+// ── Worker-side Repo + bag handle map ─────────────────────────────────────
 
-let _repo:              Repo | null                                        = null;
-let _handles:           Map<string, DocHandle<Record<string, unknown>>>    = new Map();
-let _writableHandleId:  string | null                                      = null;
+let _repo:             Repo | null                                        = null;
+let _handles:          Map<string, DocHandle<Record<string, unknown>>>    = new Map();
+let _writableHandleId: string | null                                      = null;
+let _composite:        CompositeStore | null                              = null;
+let _adaptor:          IslandAdaptor | null                               = null;
 
 // ── Storage adapter factory ───────────────────────────────────────────────
 
 function _buildStorageAdapter(cfg: WorkerStorageConfig | undefined): StorageAdapterInterface | undefined {
   if (!cfg || cfg.type === "memory") return undefined;
   if (cfg.type === "nodefs") return new NodeFSStorageAdapter(cfg.dir);
-  // idb is browser-only — cannot reach here in Node worker.
   return undefined;
 }
 
-// ── setInterval accumulator — Worker-owned timing (Node path) ─────────────
-// Node worker_threads does not provide requestAnimationFrame.
-// A 16ms interval approximates 60fps frame cadence.
+// ── setInterval drain loop — Worker-owned timing (Node path) ──────────────
 
 const FRAME_INTERVAL_MS = 16;
 
-let _pendingAdded:    Record<string, unknown>[] = [];
-let _pendingDeleted:  string[]                  = [];
-let _intervalHandle:  ReturnType<typeof setInterval> | null = null;
-let _activeWikiUri                              = "";
+let _pendingAdded:   Record<string, unknown>[] = [];
+let _pendingDeleted: string[]                  = [];
+let _intervalHandle: ReturnType<typeof setInterval> | null = null;
+let _activeWikiUri                             = "";
 
 function _startDrainLoop(): void {
   if (_intervalHandle !== null) return;
@@ -96,7 +110,6 @@ function _startDrainLoop(): void {
     }
     handler.sendChangesetAck(_activeWikiUri, crypto.randomUUID());
   }, FRAME_INTERVAL_MS);
-  // Do not keep the process alive solely for the drain loop.
   if (typeof _intervalHandle === "object" && _intervalHandle !== null && "unref" in _intervalHandle) {
     (_intervalHandle as { unref(): void }).unref();
   }
@@ -123,7 +136,7 @@ function _subscribeHandle(bagId: string, handle: DocHandle<Record<string, unknow
       _pendingAdded.push(...delta.added);
       _pendingDeleted.push(...delta.deleted);
     }
-    void bagId; // reserved for Sprint 3 priority-ordered merge
+    void bagId;
   });
 }
 
@@ -143,8 +156,7 @@ _port.on("message", (raw: unknown) => {
   }
 
   // GP-3 "changeset" handler removed. Sovereign islands derive state from their own
-  // Repo-in-Worker CRDT doc — never from main-thread oracle deltas. See ea doctrine:
-  // lar:///ha.ka.ba/@lares/v0.1/api/pono/ea (condition 3: own truth).
+  // Repo-in-Worker CRDT doc — never from main-thread oracle deltas.
 });
 
 // ── Manifest ──────────────────────────────────────────────────────────────
@@ -158,66 +170,112 @@ async function _handleManifest(msg: WorkerMsg_Manifest & { syncPort?: MessagePor
     return;
   }
 
-  // Wire Worker-side Repo if syncPort transferred.
   const syncPort = msg.syncPort;
-  if (syncPort) {
-    const storageAdapter = _buildStorageAdapter(msg.storage);
-    _repo = new Repo({
-      ...(storageAdapter ? { storage: storageAdapter } : {}),
-      network: [new MessageChannelNetworkAdapter(syncPort as unknown as globalThis.MessagePort)],
-      sharePolicy: async () => true,
+  if (!syncPort) {
+    // No syncPort: GP-3 deprecated path — start drain loop with empty composite.
+    _startDrainLoop();
+    handler.sendEa(msg.wikiUri);
+    return;
+  }
+
+  const storageAdapter = _buildStorageAdapter(msg.storage);
+  _repo = new Repo({
+    ...(storageAdapter ? { storage: storageAdapter } : {}),
+    network: [new MessageChannelNetworkAdapter(syncPort as unknown as globalThis.MessagePort)],
+    sharePolicy: async () => true,
+  });
+
+  // ── Build CompositeStore: CRDT bags + volatile + projection ──────────────
+  // Layer order (lowest → highest priority):
+  //   bound CRDT bags (recipe order) — read-only
+  //   volatile MemoryTiddlerStore    — defaultWritable:true (TW5 session saves)
+  //   projection MemoryTiddlerStore  — defaultWritable:false ($:/state/*)
+
+  _composite = new CompositeStore();
+
+  const bindings     = msg.bagBindings ?? [];
+  const hasCold      = bindings.some(b => b.mode === "cold");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const readyHandles: Array<{ bagId: string; handle: DocHandle<any>; writable: boolean }> = [];
+
+  for (const binding of bindings) {
+    if (binding.mode !== "relational") continue;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handle = await _repo.find<any>(binding.docUrl as AnyDocumentId);
+    await handle.whenReady();
+    _handles.set(binding.bagId, handle);
+    readyHandles.push({ bagId: binding.bagId, handle, writable: binding.writable });
+    if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
+  }
+
+  // Add CRDT layers to composite in recipe order — all read-only for wiki Workers.
+  for (const { bagId, handle } of readyHandles) {
+    const store = new AutomergeDocStore(handle, bagId);
+    store.markSyncComplete();
+    _composite.addLayer({
+      bagId,
+      store,
+      writable:        false,
+      defaultWritable: false,
     });
+  }
 
-    const bindings = msg.bagBindings ?? [];
-    const hasCold  = bindings.some(b => b.mode === "cold");
+  // Volatile layer — TW5 session writes (UI state, scratch). Never persisted.
+  _composite.addLayer({
+    bagId:           "volatile",
+    store:           new MemoryTiddlerStore(),
+    writable:        true,
+    defaultWritable: true,
+  });
 
-    // Await all relational handles in recipe order, then seed TW5 once with all bags.
-    const readyHandles: Array<{ bagId: string; handle: DocHandle<Record<string, unknown>> }> = [];
-    for (const binding of bindings) {
-      if (binding.mode !== "relational") continue;
-      const handle = await _repo.find<Record<string, unknown>>(binding.docUrl as AnyDocumentId);
-      await handle.whenReady();
-      _handles.set(binding.bagId, handle);
-      readyHandles.push({ bagId: binding.bagId, handle });
-      if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
-    }
+  // Projection layer — $:/state/*, $:/HistoryList. Never persisted.
+  _composite.addLayer({
+    bagId:           BAG_IDS.projection,
+    store:           new MemoryTiddlerStore(),
+    writable:        true,
+    defaultWritable: false,
+  });
 
-    // Seed TW5 from all ready bags in recipe order.
-    const initialAdded: Record<string, unknown>[] = [];
-    for (const { handle } of readyHandles) {
-      const doc = handle.doc();
-      if (doc) initialAdded.push(...allTiddlersFromDoc(doc as Record<string, unknown>));
-    }
-    if (initialAdded.length > 0) handler.applyDelta(msg.wikiUri, initialAdded, []);
+  // ── Wire IslandAdaptor ────────────────────────────────────────────────────
+  // Write target = "volatile" — TW5 outbound saves land here, not in any CRDT bag.
+  // CRDT bags remain read-only for wiki Workers.
 
-    // Subscribe each handle for live change events.
-    for (const { bagId, handle } of readyHandles) {
-      _subscribeHandle(bagId, handle);
-    }
+  const tw5 = handler.tw5()!;
+  _adaptor = new IslandAdaptor(tw5, _composite, "volatile");
+  _composite.addProjection(_adaptor);
 
-    // Cold-mode fallback: doc arrives via gossip from the relay Repo.
-    if (hasCold || bindings.length === 0) {
-      // Shim: handle legacy docUrl cold-boot path (no bagBindings cold entries yet in Sprint 1→2).
-      const legacyCold = bindings.length === 0 && !msg.docUrl;
-      if (legacyCold || bindings.some(b => b.mode === "cold")) {
-        _repo.on("document", ({ handle: h }: { handle: DocHandle<Record<string, unknown>> }) => {
-          void h.whenReady().then(() => {
-            const coldBagId = bindings.find(b => b.mode === "cold")?.bagId ?? msg.wikiUri;
-            _handles.set(coldBagId, h);
-            if (_writableHandleId === null) _writableHandleId = coldBagId;
-            const doc = h.doc();
-            if (doc) {
-              const initial = allTiddlersFromDoc(doc as Record<string, unknown>);
-              if (initial.length > 0) handler.applyDelta(msg.wikiUri, initial, []);
-            }
-            _subscribeHandle(coldBagId, h);
-          });
+  // ── Seed TW5 from all CRDT bags ──────────────────────────────────────────
+  const initialAdded: Record<string, unknown>[] = [];
+  for (const { handle } of readyHandles) {
+    const doc = handle.doc();
+    if (doc) initialAdded.push(...allTiddlersFromDoc(doc as Record<string, unknown>));
+  }
+  if (initialAdded.length > 0) handler.applyDelta(msg.wikiUri, initialAdded, []);
+
+  // ── Subscribe handles for live change events ──────────────────────────────
+  for (const { bagId, handle } of readyHandles) {
+    _subscribeHandle(bagId, handle);
+  }
+
+  // Cold-mode gossip fallback for legacy/cold bindings.
+  if (hasCold || bindings.length === 0) {
+    const legacyCold = bindings.length === 0 && !msg.docUrl;
+    if (legacyCold || bindings.some(b => b.mode === "cold")) {
+      _repo.on("document", ({ handle: h }: { handle: DocHandle<Record<string, unknown>> }) => {
+        void h.whenReady().then(() => {
+          const coldBagId = bindings.find(b => b.mode === "cold")?.bagId ?? msg.wikiUri;
+          _handles.set(coldBagId, h);
+          if (_writableHandleId === null) _writableHandleId = coldBagId;
+          const doc = h.doc();
+          if (doc) {
+            const initial = allTiddlersFromDoc(doc as Record<string, unknown>);
+            if (initial.length > 0) handler.applyDelta(msg.wikiUri, initial, []);
+          }
+          _subscribeHandle(coldBagId, h);
         });
-      }
+      });
     }
   }
-  // No syncPort: GP-3 deprecated path — NodeVmManager sends changesets directly.
-  // The setInterval drain loop still runs so changeset batches apply at tick cadence.
 
   _startDrainLoop();
   handler.sendEa(msg.wikiUri);
@@ -237,8 +295,11 @@ async function _handleTeardown(): Promise<void> {
   } catch {
     // Export failed — teardown:ack fires without docBytes.
   }
+
   _handles.clear();
   _writableHandleId = null;
+  _composite        = null;
+  _adaptor          = null;
   _repo             = null;
 
   const ackOpts: { docBytes?: Uint8Array } = {};
