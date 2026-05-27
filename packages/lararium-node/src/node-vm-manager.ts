@@ -39,6 +39,7 @@ import {
   isWorkerToMainMsg,
   mkManifest,
   mkTeardown,
+  mkWikiPlaceJob,
   type BagBinding,
   type WorkerStorageConfig,
 } from "@lararium/mesh";
@@ -46,6 +47,7 @@ import type {
   WorkerMsg_Event,
   WorkerMsg_Ea,
   WorkerMsg_TeardownAck,
+  WikiMsg_JobResult,
   WorkerToMainMsg,
   MainToWorkerMsg,
 } from "@lararium/mesh";
@@ -160,6 +162,11 @@ export class NodeVmManager {
   private readonly _onWorkerEvent:  ((wikiId: string, msg: WorkerMsg_Event) => void) | null;
   private readonly _mainRepo:       Repo | null;
   private readonly _storageRoot:    string | null;
+  /** Pending wiki:place-job results — requestId → { resolve, reject }. */
+  private readonly _pendingWikiJobs = new Map<string, {
+    resolve: (r: Record<string, unknown>) => void;
+    reject:  (e: Error) => void;
+  }>();
 
   constructor(options: NodeVmManagerOptions = {}) {
     this._workerUrl      = options.workerScriptUrl ?? DEFAULT_WORKER_URL;
@@ -241,6 +248,50 @@ export class NodeVmManager {
       ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : "heads-only")
       : "none";
     console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Wiki-scope job dispatch
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Place a wiki-scope job into a hot or pinned Worker and await the result.
+   *
+   * Sends WikiMsg_PlaceJob to the Worker identified by `wikiId`. The Worker
+   * must run a behavior that handles "wiki:place-job" (e.g. makeWikiDispatchBehavior).
+   * Resolves with the result record or rejects on error / timeout.
+   */
+  placeWikiJob(
+    wikiId:  string,
+    opts: {
+      verb:        string;
+      args:        Record<string, unknown>;
+      requestedBy: string;
+      targets?:    string[];
+      batchMode?:  string;
+    },
+  ): Promise<Record<string, unknown>> {
+    const slot = this._slots.get(wikiId);
+    if (!slot || slot.tier === "cold") {
+      return Promise.reject(new Error(`[vm-manager] no live Worker for ${wikiId}`));
+    }
+    const requestId = crypto.randomUUID();
+    return new Promise<Record<string, unknown>>((resolve, reject) => {
+      const timer = setTimeout(
+        () => {
+          this._pendingWikiJobs.delete(requestId);
+          reject(new Error(`[vm-manager] wiki:place-job timeout for ${wikiId}/${opts.verb}`));
+        },
+        HANDSHAKE_TIMEOUT_MS,
+      );
+      this._pendingWikiJobs.set(requestId, {
+        resolve: (r) => { clearTimeout(timer); resolve(r); },
+        reject:  (e) => { clearTimeout(timer); reject(e); },
+      });
+      (slot as WorkerSlot).worker.postMessage(
+        mkWikiPlaceJob({ ...opts, requestId }),
+      );
+    });
   }
 
   // ---------------------------------------------------------------------------
@@ -372,6 +423,15 @@ export class NodeVmManager {
           this._onWorkerEvent(wikiId, raw as WorkerMsg_Event);
         } else {
           console.warn(`[vm-manager] WorkerMsg_Event dropped for ${wikiId} — no onWorkerEvent callback registered`);
+        }
+      }
+      if (raw.type === "wiki:job-result") {
+        const result = raw as WikiMsg_JobResult;
+        const pending = this._pendingWikiJobs.get(result.requestId);
+        if (pending) {
+          this._pendingWikiJobs.delete(result.requestId);
+          if (result.error) pending.reject(new Error(result.error));
+          else               pending.resolve(result.result ?? {});
         }
       }
       if (raw.type === "fault") {

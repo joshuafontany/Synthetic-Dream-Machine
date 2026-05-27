@@ -58,6 +58,19 @@ parentPort.on("message", (msg) => {
     return;
   }
 
+  if (msg.type === "wiki:place-job") {
+    // Echo job back as result for testing wiki:place-job / wiki:job-result round-trip.
+    if (msg.requestId) {
+      parentPort.postMessage({
+        schema_version: 1,
+        type: "wiki:job-result",
+        requestId: msg.requestId,
+        result: { verb: msg.verb, echoed: true },
+      });
+    }
+    return;
+  }
+
   if (msg.type === "teardown" || msg.type === "demote") {
     tiddlers.clear();
     wikiUri = null;

@@ -14,6 +14,12 @@
  *   change events directly. renderFn calls exportMemeText(ctx.tw5, uri).
  *   Receives diskMirrors from manifest (serializable BagMirrorConfig).
  *
+ * ## Wiki Worker with dispatch — handles wiki:place-job messages
+ *   No kumu device surface (that belongs to admin Worker). Handles explicit
+ *   wiki-scope jobs placed by the main thread. Direct inline dispatch (no
+ *   JobDispatcher subscription) → wiki:job-result posted back.
+ *   Cap verification: stubbed (job arrived from main thread = pre-authorized).
+ *
  * ## Admin Worker — dispatch behavior
  *   Owns the kumu device / Reaction Engine surface (TW5 wiki change events).
  *   JobDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
@@ -27,16 +33,19 @@ import {
   BAG_IDS,
   ADMIN_BAG_ID,
   mkAdminRelayJob,
+  mkWikiJobResult,
   type AdminMsg_PlaceJob,
   type AdminMsg_JobResult,
   type BatchMode,
   type JobTiddler,
+  type WikiMsg_PlaceJob,
   type WorkerMsg_Manifest,
 } from "@lararium/mesh";
 import { placeVmJob, exportMemeText } from "@lararium/tw5";
 import { JobDispatcher, JobHandlerRegistry } from "./job-dispatcher.js";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
+import { createPromoteHandler } from "./promote-handler.js";
 import type { WorkerBehavior, WorkerContext } from "./sovereign-worker-model.js";
 
 // ── Wiki Worker behavior — null object (OTP: no-op callback module) ───────
@@ -85,6 +94,76 @@ export function makeWikiDiskBehavior(manifest: WorkerMsg_Manifest): WorkerBehavi
     onTeardown() {
       _stopProjector?.();
       _stopProjector = null;
+    },
+  };
+}
+
+// ── Wiki Worker with dispatch — wiki:place-job handler ────────────────────
+
+/**
+ * Behavior for wiki Workers that handle explicit wiki-scope jobs from the main thread.
+ *
+ * Registers a job handler registry (including promote) and dispatches
+ * wiki:place-job messages inline — no JobDispatcher subscription needed
+ * (wiki Workers have no kumu device surface / TW5 event job inbox).
+ *
+ * Cap verification is stubbed: the job arrived via WorkerMsg protocol from
+ * the main thread, which is the trust boundary. Pre-authorization is assumed.
+ *
+ * Results are posted back via wiki:job-result when requestId is present.
+ */
+export function makeWikiDispatchBehavior(): WorkerBehavior {
+  let _registry: JobHandlerRegistry | null = null;
+
+  return {
+    writeBagId: BAG_IDS.scratch,
+
+    onReady(ctx: WorkerContext) {
+      _registry = new JobHandlerRegistry();
+      _registry.register("promote", createPromoteHandler({
+        composite:          ctx.composite,
+        getPrimaryEngine:   () => ctx.tw5,
+        getMirrorLookupWiki: () => ctx.tw5.wiki,
+      }));
+    },
+
+    onMessage(type: string, raw: unknown, ctx: WorkerContext): boolean {
+      if (type !== "wiki:place-job") return false;
+      if (!_registry) return false;
+      const msg = raw as WikiMsg_PlaceJob;
+      const requestId = msg.requestId ?? crypto.randomUUID();
+      const handler = _registry.get(msg.verb);
+      if (!handler) {
+        if (msg.requestId) {
+          ctx.post(mkWikiJobResult({ requestId, error: `no handler for "${msg.verb}"` }));
+        }
+        return true;
+      }
+      const job: JobTiddler = {
+        requestId,
+        title:       `lar:///ha.ka.ba/@wiki/jobs/${requestId}`,
+        verb:        msg.verb,
+        args:        msg.args,
+        targets:     msg.targets ?? [],
+        batchMode:   (msg.batchMode as BatchMode) ?? "single",
+        status:      "pending",
+        requestedBy: msg.requestedBy,
+        requestedAt: new Date().toISOString(),
+      };
+      void handler(msg.args, {
+        admin: ctx.composite,
+        job,
+        cap: async () => ({ ok: true, reason: "worker-trust" }),
+      }).then((result) => {
+        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, result }));
+      }).catch((err: unknown) => {
+        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: String(err) }));
+      });
+      return true;
+    },
+
+    onTeardown() {
+      _registry = null;
     },
   };
 }
