@@ -1,9 +1,7 @@
 /**
  * Pono Level — canonical SDM+ scalar instrument.
  *
- * Local-first authority dials use integer Levels on the closed 0–20 range.
- * Former 0.00–1.00 scalar values map by round(old * 20); keep that converter
- * explicit so legacy ratios cannot silently re-enter current protocol surfaces.
+ * Integer Levels on the closed 0–20 range.
  *
  * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam
  */
@@ -27,20 +25,10 @@ export function clampPonoLevel(value: number): PonoLevel {
   return Math.min(PONO_LEVEL_MAX, Math.max(PONO_LEVEL_MIN, Math.round(value))) as PonoLevel;
 }
 
-export function legacyScalarToPonoLevel(value: number): PonoLevel {
-  return clampPonoLevel(value * PONO_LEVEL_MAX);
-}
-
-export interface ParsePonoLevelOptions {
-  /** Explicit migration bridge for known legacy 0.00–1.00 values. Default: false. */
-  legacy01?: boolean;
-}
-
-export function parsePonoLevel(raw: unknown, opts: ParsePonoLevelOptions = {}): PonoLevel | null {
+export function parsePonoLevel(raw: unknown): PonoLevel | null {
   const value = typeof raw === "string" && raw.trim() !== "" ? Number(raw.trim()) : raw;
   if (typeof value !== "number" || !Number.isFinite(value)) return null;
   if (isPonoLevel(value)) return value;
-  if (opts.legacy01 === true && value >= 0 && value <= 1) return legacyScalarToPonoLevel(value);
   return null;
 }
 

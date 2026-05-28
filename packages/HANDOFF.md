@@ -67,7 +67,12 @@ O(N×blob); 195/195 tests), AND the YIN ontology + typo closure sprint
 browser-wiki-worker.ts; vessel-island-pool.ts `worker: island` → `worker: Worker`;
 node-vm-manager.test.ts → vessel-island-pool.test.ts; vm-manager-echo.mjs →
 vm-pool-echo.mjs + old deleted; blob-sovereignty.test.ts §6 gate added;
-FIXTURE_LARARIUM_URL sentinel + real laraiumHandle in test fixtures; 195/195 tests)
+FIXTURE_LARARIUM_URL sentinel + real laraiumHandle in test fixtures; 195/195 tests),
+AND the §8 archipelago gate + test hardening sprint
+(federation-seam.test.ts — pure Repo-level §8 gate, bidirectional, no pool machinery;
+island-protocol.ts §8 clause updated to cite node + browser gate proofs;
+blob-sovereignty.test.ts silent returns → describe.skipIf with named skip reason;
+repo-in-island.test.ts writable-binding selector comment added; 197/197 tests)
 are treated as landed unless tests prove drift.
 
 Next work, in order:
@@ -91,6 +96,39 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-27 turn 25)
+
+### §8 Archipelago Gate + Test Hardening Sprint
+
+**`federation-seam.test.ts` — §8 pure Repo gate:**
+- Two in-process Repos joined by one `MessageChannel` via `MessageChannelNetworkAdapter`.
+- Test 1: vessel doc change propagates to island via CRDT — no manifest payload, no `routeChangeset`.
+- Test 2: island doc change propagates back to vessel — proves the channel is bidirectional.
+- This is the Repo-level primitive that `VesselIslandPool.mountWiki()` and `BrowserVesselIslandPool.mountWiki()` both rest on.
+- API note: `repo.find()` returns `Promise<DocHandle>`; `await repo.find(url)` then `handle.whenReady()`.
+
+**`island-protocol.ts` §8 clause updated:**
+- Gate proof line now cites both: `federation-seam.test.ts` (node, pure Repo) + `browser-repo-in-island.test.ts` test 2 (browser pool).
+
+**`blob-sovereignty.test.ts` hardened:**
+- Replaced two silent mid-test `return` guards with `describe.skipIf(skipReason)`.
+- A skip in CI is visible; a silent return is not. Skip reason string names the missing artifact and the command to build it.
+
+**`repo-in-island.test.ts`:**
+- Added one-line comment at the `mountWiki` call site explaining the `b.writable` selector in `repo-in-island-echo.mjs`.
+
+**`TALK-STORY-NEXT.md`:**
+- §8 row updated to ✅ with both gate proof citations.
+- Active objective advanced to S9 browser ea-path.
+- Pre-flight audit of `open-node-vessel.ts` named as S9 gate-zero.
+- File map rewritten for S9.
+
+**Files changed:** `federation-seam.test.ts` (new), `blob-sovereignty.test.ts`, `repo-in-island.test.ts`, `island-protocol.ts`, `TALK-STORY-NEXT.md`, `HANDOFF.md`.
+
+**Metrics:** 197/197 tests pass (mesh 71, tw5 69, node 52, browser 5). All packages typecheck clean.
+
+---
 
 ## What Changed This Turn (2026-05-27 turn 24)
 

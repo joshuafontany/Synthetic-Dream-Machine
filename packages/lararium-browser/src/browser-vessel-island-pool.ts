@@ -8,7 +8,7 @@
  *     2. Creates a MessageChannel. Keeps `mainPort`; transfers `syncPort` to the island.
  *     3. Optionally connects `mainPort` to the vessel Automerge Repo via
  *        `MessageChannelNetworkAdapter` so the island-side Repo syncs automatically.
- *     4. Delivers `manifest` with `syncPort`, `docUrl`, `coreBlob`, `coreHash`.
+ *     4. Delivers `manifest` with `syncPort`, `bagBindings`, `coreHash` (no blob bytes — TW5 core travels via CRDT).
  *     5. Awaits `ea` — island declares sovereignty; island is live.
  *
  *   Island isolation is structural: each island owns its own dedicated runtime realm and
@@ -303,11 +303,8 @@ export class BrowserVesselIslandPool implements BrowserAuthorityPool {
     });
 
     // 5. Build bagBindings + coreHash for the manifest delivery.
-    //    bagBindings: use params.bagBindings when provided; otherwise build a shim from params.docUrl.
     const coreHash: string | null = params.coreHash ?? null;
-    const bagBindings: readonly BagBinding[] = params.bagBindings
-      ? params.bagBindings
-      : [{ bagId: id, writable: true, mode: "relational", docUrl: params.docUrl ?? "" } satisfies BagBinding];
+    const bagBindings: readonly BagBinding[] = params.bagBindings ?? [];
 
     // 6. Deliver manifest — transfer syncPort to the sovereign island.
     //    TW5 core bytes are NOT in the manifest; the island reads them from @lararium CRDT doc.

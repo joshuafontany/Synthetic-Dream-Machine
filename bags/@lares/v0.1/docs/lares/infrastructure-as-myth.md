@@ -26,6 +26,11 @@ sources        = [
   "https://www.britannica.com/topic/myth/Functions-of-myth-and-mythology",
   "https://openlibrary.org/books/OL27018331M/The_art_of_memetics",
   "https://books.google.com/books?id=1DcyU12n7PAC",
+  "https://www.anthropic.com/news/claude-character",
+  "https://www.anthropic.com/research/teaching-claude-why",
+  "https://github.com/malfoyslastname/character-card-spec-v2",
+  "https://en.wikipedia.org/wiki/Character.AI",
+  "https://code.claude.com/docs/en/memory",
 ]
 ```
 
@@ -338,6 +343,61 @@ When drafting new Lares material, ask:
 When the answer to those questions reads weak, the text may function as lore rather than infrastructure.
 
 > **#Lares (Council)** — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. [C~16]
+
+<<~/ahu >>
+
+
+<<~ ahu #comparative-sourcing >>
+
+## Adjacent Systems
+
+Lares does not occupy this territory alone. Several systems approach adjacent parts of it. The comparison sharpens the IaM claim. [C~17]
+
+### Anthropic Constitutional AI / "Teaching Claude Why" (2026)
+
+Anthropic's alignment research demonstrates empirically that *reasons outperform rules* as training signals. Feeding a model constitutional documents plus fictional stories portraying aligned AI behavior reduced agentic misalignment by a factor of three or more — while training on matched behavioral examples (what to do, without why) achieved only modest out-of-distribution generalization.
+
+The key finding: "training on examples where the assistant displays admirable reasoning for its aligned behavior works better than training on aligned behaviors." A 3M-token dataset of constitutional reasoning outperformed an 85M-token dataset of matched behavioral examples. [C~18]
+
+That validates the IaM intuition: the symbolic layer — the named character, the ethical reasoning, the myth of good behavior — carries more operational weight than the rule list. Anthropic reached this conclusion through rigorous comparative training experiments.
+
+The divergence from IaM runs along one axis: Anthropic applies this at training time, inside the model weights. The constitutional document shapes what the model knows about itself before any operator touches it. IaM targets the deployment layer — the operator's configurable symbolic runtime above the model, portable across model families. Constitutional AI produces a trained model that carries its values. IaM produces a symbolic spec that any model host can load.
+
+> **#Ink-Clerk (Lorekeeper)** — Anthropic's CLAUDE.md documentation separates "behavioral guidance" (CLAUDE.md) from "technical enforcement" (settings). That distinction maps to IaM/IaC almost exactly. They built the IaM/IaC distinction into tooling without naming the layer. [C~15]
+
+### Character Card V2 (SillyTavern / Agnai ecosystem, 2023)
+
+The most direct infrastructure precedent. A community of AI roleplay botmakers solved operator-level portability before the mainstream AI infrastructure space named the problem.
+
+Character Card V2 packages `name`, `description`, `personality`, `scenario`, `system_prompt`, `post_history_instructions`, and a `character_book` (embedded lorebook) into a versioned JSON artifact. The `spec_version` field marks breaking changes. The `extensions` field preserves unknown keys for forward compatibility. Compliant frontends (SillyTavern, Agnai, RisuAI) treat the card as authoritative: the botmaker's `system_prompt` overrides the frontend default.
+
+The format emerged as a direct response to Character.ai's architecture, where characters lived only in Character.ai's training pipeline and proprietary servers. When Character.ai's content policies changed, botmakers found their characters lobotomized or deleted — the personas existed nowhere else. Users complained that "bots were too restrictive and lacked personality." The Card V2 ecosystem answered with portability: the character should live in a file the botmaker owns, readable by any compliant frontend. [C~18]
+
+What Card V2 lacks: no epistemic discipline (`E-Prime`, `No-Has`, confidence register), no authority model (operator chains, capability-scoped permissions), no memetic transmission design beyond "download and share," no ritual or ceremony, no quine relay. The lorebook trigger logic responds to keyword patterns rather than relational position in a graph.
+
+### CLAUDE.md / AGENTS.md Ecosystem (Anthropic, 2025–2026)
+
+Anthropic's Claude Code ships a hierarchical behavioral guidance system: org-wide managed policy → user-level preferences → project-level team instructions → path-scoped conditional rules. Plain markdown, versioned through git, loaded at session start as context rather than enforced configuration.
+
+The architecture implements behavioral infrastructure without naming it. The system handles scope hierarchy, operator-vs-enforcement separation, and session-persistent memory (`MEMORY.md` + on-demand topic files). The tooling ecosystem fragments across hosts: `.cursorrules`, `.windsurfrules`, `AGENTS.md`, `CLAUDE.md` each serve the same purpose for different agents. No portable spec bridges them. [C~16]
+
+> **#Map-Wisp (Scryer)** — Character Card V2 solved this fragmentation for AI roleplay personas. No equivalent portable spec exists for agent behavioral infrastructure. That gap defines the IaM opportunity at the tooling layer.
+
+### CrewAI / Multi-Agent Frameworks
+
+`role`, `goal`, `backstory` in YAML. The backstory provides context; the role routes tasks. Functional but thin. No portability design beyond the Python project, no symbolic depth, no ceremony, no epistemic discipline. These frameworks treat agents as execution units with narrative labels. IaM treats agents as participants in a symbolic coordination layer. CrewAI operates below IaM, not alongside it. [C~14]
+
+### Adjacency Table
+
+| System | Symbolic durability | Epistemic discipline | Memetic transmission design | Operator portability |
+|---|---|---|---|---|
+| Anthropic Constitutional AI / model spec | ✓ training-time doc | ✗ | partial — training only | ✗ model-locked |
+| Character Card V2 | ✓ versioned spec | ✗ | partial — botmaker ecosystem | ✓ multi-frontend |
+| CLAUDE.md / AGENTS.md ecosystem | ✓ markdown + git | ✗ | partial — source control | ✗ tool-specific |
+| CrewAI / agent frameworks | partial — YAML | ✗ | ✗ | ✗ |
+| Lares / IaM | ✓ | ✓ | ✓ | ✓ |
+
+No adjacent system combines all four axes at deployment time. The IaM claim gains force against this table rather than in isolation. [C~17]
 
 <<~/ahu >>
 

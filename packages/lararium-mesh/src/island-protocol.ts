@@ -30,7 +30,8 @@
  *      automatically. Island-side: the island MUST call `repo.find(docUrl).whenReady()` and await
  *      readiness before seeding TW5 and declaring `ea`. Failure on either side leaves the island
  *      holding a disconnected doc; the slot MUST transition to disposed within HANDSHAKE_TIMEOUT_MS.
- *      Gate proof: `browser-repo-in-island.test.ts` test 2 ("docUrl non-null path resolves via repo.find").
+ *      Gate proof: `federation-seam.test.ts` (node, pure Repo — vessel→island + island→vessel) +
+*                  `browser-repo-in-island.test.ts` test 2 (browser pool, docUrl non-null path).
  *      When this law holds, two vessels sharing a bag converge without any explicit sync call —
  *      the archipelago forms the moment the AutomergeUrl crosses the boundary.
  *
@@ -96,7 +97,7 @@ export type BagBinding = { bagId: string; writable: boolean } & BagMode;
  *   - The island creates its own Automerge Repo with `MessageChannelNetworkAdapter(syncPort)`.
  *   - The island calls `repo.find(docUrl)` and awaits `handle.whenReady()` before declaring `ea`.
  *   - If `docUrl` is null the island creates a fresh empty doc (cold boot).
- *   - `coreHash` carries a SHA-256 hex of `coreBlob`; null = pre-content-addressed trust-on-delivery.
+ *   - `coreHash` carries a SHA-256 hex of the TW5 core blob stored in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc; null = pre-content-addressed trust-on-delivery.
  *     This field is an intent vector: once a CAS store exists, null MUST be rejected at boot.
  *
  * BA-5 (revised): TW5 core bytes live in `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium doc.
@@ -380,9 +381,9 @@ export function mkTeardownAck(opts: {
 /**
  * Build a manifest delivery message — the courier packet the vessel sends to a causal island.
  *
- * TRANSFER: caller MUST include `syncPort` (and `coreBlob.buffer` if not yet transferred)
- * in the `postMessage` transfer list:
- *   `worker.postMessage(msg, [msg.syncPort, msg.coreBlob.buffer])`
+ * TRANSFER: caller MUST include `syncPort` in the `postMessage` transfer list:
+ *   `worker.postMessage(msg, [msg.syncPort])`
+ * No blob bytes travel in the manifest — TW5 core bytes live in the @lararium CRDT doc.
  *
  * `opts.pluginTiddlers` — plugin layer tiddlers (sigils, ahu, pranala, etc.).
  *   Prerequisite for ea condition 3 (own truth). Omitting yields a hollow island.

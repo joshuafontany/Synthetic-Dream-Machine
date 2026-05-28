@@ -8,10 +8,6 @@
  * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
  * - any other shape → virtual (no on-disk path; wiki-only)
  *
- * Removed (S5.7): chapelRelPath / @lares/chapel-perilous-opens — superseded by
- * the bag-mirror system. Unstable URIs that haven't earned a stable @-scope
- * resolve as virtual; promote into @lares or @lararium scope to gain disk.
- *
  * NOTE: `lararium-mesh` is isomorphic — no `fs`, `path`, or `process` imports.
  * File existence and reading are delegated to the host (lararium-node).
  */

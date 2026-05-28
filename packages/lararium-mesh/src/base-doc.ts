@@ -61,10 +61,6 @@ export interface LarBlobEntry {
  *
  * `tiddlers` — mutable inside Automerge `handle.change()` callbacks; readonly elsewhere.
  * `blobs` — optional binary store; any bag may carry image/attachment blobs.
- *
- * superseded systemTitles — removed. Intent superseded by `wiki.isShadowTiddler()`
- * at VM boot time; a pre-baked list risks silent drift on TW5 upgrades and the only
- * consumer was a log line in genesis-artifact.ts.
  */
 export interface LarDoc {
   readonly schemaVersion: string;

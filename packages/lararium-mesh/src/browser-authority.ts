@@ -66,13 +66,10 @@ export interface BrowserAuthorityBootParams {
    * null = pre-CAS. Islands read the actual bytes from the @lararium CRDT doc.
    */
   coreHash: string | null;
-  /** Serialized compiled plugin blob. Transferred, not cloned. */
-  pluginBlob: Uint8Array;
   /**
    * Plugin layer tiddlers (sigils, ahu, pranala, etc.) as deserialized tiddler objects.
    * Prerequisite for ea condition 3 — carried in the manifest so the island can think
-   * from first breath. When present, passed directly as IslandMsg_Manifest.pluginTiddlers (island manifest).
-   * Callers who hold pluginBlob as bytes must deserialize before constructing params.
+   * from first breath. When present, passed directly as IslandMsg_Manifest.pluginTiddlers.
    */
   pluginTiddlers?: readonly Record<string, unknown>[];
   /**
@@ -81,20 +78,8 @@ export interface BrowserAuthorityBootParams {
    * When present, passed directly as IslandMsg_Manifest.bagBindings (island manifest).
    */
   bagBindings?: readonly BagBinding[];
-  /**
-   * superseded Use `bagBindings` instead.
-   * Bag stack for this wiki, ordered from system to draft.
-   */
-  bagStack?: readonly string[];
   /** Recipe URI that maps this authority's content scope. */
   recipeUri: string;
-  /**
-   * superseded Use `bagBindings` instead.
-   * AutomergeUrl for the wiki doc. Passed as manifest docUrl so the island-side Repo
-   * calls repo.find(docUrl).whenReady() instead of waiting for gossip sync.
-   * null = cold boot (island creates fresh doc, state arrives via sync channel).
-   */
-  docUrl?: string | null;
   /** Optional: pre-serialized Automerge doc snapshots for warm start. */
   snapshots?: ReadonlyArray<{ bagId: string; bytes: Uint8Array }>;
 }

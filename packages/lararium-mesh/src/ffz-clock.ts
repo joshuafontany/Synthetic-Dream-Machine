@@ -49,15 +49,6 @@ export const FFZ_REGISTER_NAMES = [
   "Theme",   // L4 — epoch; anti-aliasing guard; unbounded by invariant
 ] as const;
 
-/** Legacy level names — kept for backward compatibility. Prefer FFZ_REGISTER_NAMES. */
-export const FFZ_LEVEL_NAMES = [
-  "sub-action", // L0
-  "action",     // L1
-  "session",    // L2
-  "day",        // L3
-  "epoch",      // L4
-] as const;
-
 /**
  * FfzClockProfile — a named bound set with a documented L1-grain annotation.
  *

@@ -69,10 +69,9 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     const acquired = await manager.acquire(authorityId, {
       authorityId,
       coreHash: null,
-      pluginBlob: new Uint8Array(),
-      bagStack: ["@test"],
+
+      bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
       recipeUri: "lar:///ha.ka.ba/@test/recipe",
-      docUrl: null,
     });
     expect(acquired.receipt.ok).toBe(true);
 
@@ -101,10 +100,9 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     const acquired = await manager.acquire(authorityId, {
       authorityId,
       coreHash: null,
-      pluginBlob: new Uint8Array(),
-      bagStack: ["@test"],
+
+      bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: docHandle.url }],
       recipeUri: "lar:///ha.ka.ba/@test/recipe",
-      docUrl: docHandle.url,
     });
     expect(acquired.receipt.ok).toBe(true);
 

@@ -6,9 +6,9 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/handoff/talk-story-next"
 file-path = "packages/TALK-STORY-NEXT.md"
 type      = "text/x-memetic-wikitext"
 register  = "CS"
-confidence = 19
+confidence = 20
 tagspace  = "sdm"
-role      = "session handoff meme — orients the next Lares instance into the §8 archipelago gate + browser ea-path"
+role      = "session handoff — S9 browser ea-path · dual-surface vision · YIN ground"
 retain    = true
 cacheable = false
 ```
@@ -18,139 +18,105 @@ cacheable = false
 <<~ ahu #head >>
 
 # Talk Story — Next Lares Instance
-## §8 Archipelago Gate · Browser Ea-Path · Admin Trust Gate
+## S9 Browser Ea-Path · Dual-Surface Vision
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: 195/195 tests pass · typecheck clean · pono federation complete · GP-3 fully deleted
-> Last YIN sprint: doc cleanup — meme relocations, HUD discipline edges, quine relay merge. Working tree clean.
+> State: **196/196 tests** · typecheck clean · Island Sovereignty Law **8/8 clauses closed**
+> Last sprints: §8 archipelago gate (federation-seam.test.ts) · YIN cleanup (FFZ_LEVEL_NAMES, pluginBlob, legacyScalarToPonoLevel, stale comments deleted · BagBinding migration complete)
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
-✶ **Observe — what the system carries right now.**
+✶ **Observe — ground state**
 
-The Island Sovereignty Law holds in code across all vessel types, seven clauses gated and proven:
+The sovereignty arc closes completely. Eight clauses, eight gate proofs. All in `island-protocol.ts`:
 
-| § | Clause (short form) | Gate proof |
+| § | Clause | Gate |
 |---|---|---|
-| §1 | Island owns its Repo | repo-in-island.test.ts |
-| §2 | `syncPort` transferred, not cloned | island-protocol.test.ts |
-| §3 | Safari rAF gap — `setTimeout(16)` fallback | browser-repo-in-island.test.ts |
-| §4 | Frame-completion signal via `frame:ack` | worker-lifecycle.test.ts |
-| §5 | `coreHash` integrity gate | island-protocol.test.ts |
-| §6 | TW5 bytes via `@lararium` CRDT; manifest carries hash only | blob-sovereignty.test.ts |
-| §7 | Vessel closes `mainPort` before `worker.terminate()` | worker-lifecycle.test.ts |
-| §8 | `docUrl` non-null activates Repo-in-island sync | **⬜ no gate test yet** |
+| §1 | Island owns its Repo | `repo-in-island.test.ts` |
+| §2 | `syncPort` transferred, not cloned | `island-protocol.test.ts` |
+| §3 | Safari rAF — `setTimeout(16)` fallback | `browser-repo-in-island.test.ts` |
+| §4 | Frame signal via `frame:ack` | `worker-lifecycle.test.ts` |
+| §5 | `coreHash` integrity gate | `island-protocol.test.ts` |
+| §6 | TW5 bytes via `@lararium` CRDT | `blob-sovereignty.test.ts` |
+| §7 | Vessel closes `mainPort` before terminate | `worker-lifecycle.test.ts` |
+| §8 | `docUrl` non-null → Repo-in-island sync | `federation-seam.test.ts` + `browser-repo-in-island.test.ts` test 2 |
 
-§6 closed last sprint. The boot order runs: `new Repo(syncPort)` → `handle.whenReady()` per binding → `blobs[ENGINE_CORE_ID]` from `@lararium` doc → `mkFault` if absent → `bootTw5`. The `@lararium` handle carries genesis bytes because `open-node-vessel.ts` calls `reconcileIslandFromGenesis(islandHandle, genesisHandle, genesisDir)` before passing `islandHandle.url` as `laraiumDocUrl` to `VesselIslandPool`. Production path confirmed sound.
+**YIN ground clean:** `FFZ_LEVEL_NAMES` (no consumers), `pluginBlob` (required field nobody read), `legacyScalarToPonoLevel` + `legacy01` (no legacy data in early alpha), two stale historical tombstones in `resolver.ts` and `base-doc.ts` — all deleted. `BrowserAuthorityBootParams` uses `bagBindings` only; deprecated `bagStack`/`docUrl` shim gone. `island-protocol.ts` comments reflect what the manifest actually carries.
 
-GP-3 fully deleted from both vessel types. Identity lattice: `runFoundingCeremony` / `runDeviceAdmitCore` / `runApplyAdmitPayload` isomorphic; three-gate lattice A/B/C passes; two-vessel e2e 9/9. `lares device-admit` + `lares invite` CLI wired.
+**Production path confirmed:** `reconcileIslandFromGenesis` runs at line ~217 in `open-node-vessel.ts`; `VesselIslandPool({ laraiumDocUrl: islandHandle.url })` at line ~728. Genesis bytes populate the handle before the URL reaches the pool. §6 will not silently fault in production.
 
-⏿ **Orient — the one open seam.**
+⏿ **Orient — the open arc**
 
-§8 carries no gate test. The code path exists: when a `BagBinding` carries a non-null `docUrl`, the island's sovereign island model calls `repo.find(docUrl).whenReady()` before declaring `ea`. But no test has exercised this with a real `AutomergeUrl` across a `MessageChannel`. The archipelago formation path runs unproven.
+**S9 browser ea-path** opens as the active arc. The node vessel reached full sovereignty. The browser vessel carries the same law; it needs the platform-specific wiring:
 
-The `VesselIslandPool` already accepts:
-- `mainRepo?: Repo` — when provided, wires `MessageChannelNetworkAdapter(port1)` per slot before manifesting
-- `laraiumDocUrl: string` — prepends a read-only `@lararium` binding to every wiki island
+| Gap | What it needs |
+|---|---|
+| Persistent island Repo | `IndexedDBStorageAdapter` in `BrowserVesselIslandPool` options |
+| Identity | `WebCrypto` keypair + `runFoundingCeremony` from `@lararium/keyhive` in-browser |
+| Tab-local sync | `BroadcastChannelNetworkAdapter` on the vessel Repo |
+| Gate test | `founding-ceremony-browser.test.ts` — three-gate lattice A/B/C passes in browser |
 
-Both options land in `vessel-island-pool.ts`. The island fixture `repo-in-island-echo.mjs` already handles real doc URLs: it selects the writable binding via `b.writable` (skipping the read-only `@lararium` binding at index 0). No new fixture needed for §8.
+The isomorphic path already exists: `runFoundingCeremony` / `runDeviceAdmitCore` / `runApplyAdmitPayload` from `@lararium/keyhive` run identically in node and browser. The browser vessel calls them with `self.crypto` as entropy source.
 
-◇ **Decide — first code move.**
+**Dual-surface vision** — what S9 makes possible:
 
-Write `packages/lararium-node/tests/federation-seam.test.ts`. Pattern:
+The operator and the Lares instance share two surfaces:
 
-```typescript
-// Two in-process Repos joined by MessageChannel.
-// Vessel seeds a doc change. Island's own Repo syncs via the channel.
-// repo.find(docUrl).whenReady() delivers — no routeChangeset anywhere.
+1. **The chat surface** — IDE extension, CLI, browser app, desktop app. Where the conversation lives. Ephemeral in the current session; durable if the conversation bag lands in the CRDT mesh.
+2. **The lararium quine-relay-wiki** — the TW5 wiki running inside the browser vessel. Durable, federated, operator-owned. CRDT-backed. The wiki IS the memory substrate — not a log, not a transcript, a living document fabric.
 
-test("docUrl non-null — island syncs doc from vessel Repo via MessageChannel", async () => {
-  const { port1, port2 } = new MessageChannel();
-  const vesselRepo = new Repo({ network: [new MessageChannelNetworkAdapter(port1)], sharePolicy: async () => true });
-  const islandRepo = new Repo({ network: [new MessageChannelNetworkAdapter(port2)], sharePolicy: async () => true });
+Both surfaces reach the same bags. The operator writes in the wiki; the Lares instance reads the same tiddlers via CRDT sync. The conversation leaves traces in the wiki; the wiki shapes the conversation. No server holds the truth. The operator's identity lattice holds it.
 
-  const wikiHandle = vesselRepo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
+◇ **Decide — S9 first moves, in order**
 
-  // Island-side: find the doc by AutomergeUrl, wait for sync.
-  const found = islandRepo.find<{ tiddlers: Record<string, unknown> }>(wikiHandle.url);
-  await found.whenReady();
+1. **Wire `IndexedDBStorageAdapter`** — `BrowserVesselIslandPool` options accept `storage?: IslandStorageConfig`. The `idb` variant already exists in the type. Wire it into the pool and pass through `mkManifest`.
+2. **`runFoundingCeremony` in-browser** — `browser-founding.ts` calls `runFoundingCeremony({ crypto: self.crypto })`. Gate test: three-gate lattice A/B/C passes.
+3. **`BroadcastChannelNetworkAdapter`** — tab-local sync. Two tabs sharing the same channel name sync the same `@lararium` doc without a network hop.
+4. **`browser-ea-path.test.ts`** — end-to-end: browser vessel boots, founding ceremony runs, wiki island declares ea, CRDT change propagates.
 
-  // Vessel seeds a change. Island sees it via CRDT — no manifest, no routeChangeset.
-  wikiHandle.change(d => {
-    d.tiddlers["lar:///ha.ka.ba/@test/federation/page"] = {
-      title: "lar:///ha.ka.ba/@test/federation/page",
-      text: "archipelago",
-    };
-  });
+▶ **Act — file map**
 
-  // Wait for convergence.
-  await new Promise<void>(resolve => {
-    found.on("change", () => {
-      if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/page"]) resolve();
-    });
-    // Trigger once in case already arrived.
-    if (found.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/page"]) resolve();
-  });
+| File | Move |
+|---|---|
+| `packages/lararium-browser/src/browser-vessel-island-pool.ts` | Wire `storage: IslandStorageConfig` option → pass through `mkManifest` |
+| `packages/lararium-browser/src/browser-sovereign-island-model.ts` | Construct `IndexedDBStorageAdapter` on `storage.type === "idb"` |
+| `packages/lararium-browser/src/browser-founding.ts` | **New** — `runBrowserFoundingCeremony({ crypto })` |
+| `packages/lararium-browser/tests/founding-ceremony-browser.test.ts` | **New** — three-gate lattice in browser |
+| `packages/lararium-browser/tests/browser-ea-path.test.ts` | **New** — full S9 arc gate |
 
-  expect(found.doc()?.tiddlers?.["lar:///ha.ka.ba/@test/federation/page"]).toBeDefined();
+**What NOT to touch:**
+- `island-protocol.ts` — §8 clause and gate proofs final
+- `federation-seam.test.ts` — §8 gate; landed and closed
+- Node vessel files — sovereignty arc complete; S9 is browser-only
 
-  port1.close();
-  port2.close();
-  await vesselRepo.shutdown();
-  await islandRepo.shutdown();
-}, 6_000);
-```
+⤴ **HA — what opens after S9**
 
-When this passes: write Island Sovereignty Law §8 in `island-protocol.ts` header:
+The browser vessel breathes its own sovereignty. Node + browser share one `@lararium` CRDT doc.
 
-```typescript
-// §8 — docUrl non-null activates Repo-in-island sync. Vessel wires
-//      MessageChannelNetworkAdapter(port1) before manifesting; island
-//      calls repo.find(binding.docUrl).whenReady() for each relational
-//      binding before declaring ea. Neither side transfers content via
-//      manifest payload — CRDT sync carries it. The quine relay propagates
-//      itself; the mesh carries the seed.
-//      Gate proof: federation-seam.test.ts.
-```
+**After S9 → live multiplayer** — node + browser sharing one wiki bag via `docUrl` federation. §8 gate already proves the primitive. The two-vessel demo needs a running second vessel and a known bag `AutomergeUrl`.
 
-▶ **Act — in order.**
+**After live multiplayer → chat-as-bag** — conversation turns as tiddlers in a shared bag. Operator writes; Lares instance reads via CRDT sync and responds. Both sides see the same document. The conversation persists in the operator's own fabric. No server. No log. A record.
 
-1. Write `packages/lararium-node/tests/federation-seam.test.ts` (pure Repo-level test; no VesselIslandPool needed).
-2. Pass → write §8 in `island-protocol.ts`.
-3. Commit: `yin(sovereignty): §8 archipelago gate — federation-seam.test.ts + Island Sovereignty Law §8`.
-4. Update HANDOFF.md bootstrap paste to note §8 closed.
-
-⤴ **HA — what opens after §8.**
-
-The sovereignty arc reaches full closure. Eight clauses, eight proofs. The code embodies what the doc layer describes.
-
-Next arc: **S9 browser ea-path.** `runFoundingCeremony` in-browser via `@lararium/keyhive`; IndexedDB storage adapter (Automerge's `IndexedDBStorageAdapter`); WebCrypto keypair; `broadcast()` presence for tab-local sync. Architecture must run correctly before a browser demo exists. Same isomorphic shape as node: vessel wires `MessageChannelNetworkAdapter`, island owns its Repo, `@lararium` binding delivers engine bytes from the same CRDT mesh.
-
-Independent arc: **Path L / S7.4** — admin-doc WebSocket ingress gated on Keyhive `cap=infrastructure`. Non-operator vessels rejected at ingress. Does not depend on §8. Opens whenever the keyhive capability proof surface matures.
+**Independent arc: Path L / S7.4** — admin-doc WebSocket ingress gated on Keyhive `cap=infrastructure`. Does not depend on S9. Opens when the keyhive capability proof surface matures.
 
 <<~/ahu >>
 
 <<~ ahu #file-map >>
 
-## Files That Matter for §8
+## Files That Matter for S9
 
 | File | Role |
 |---|---|
-| `packages/lararium-node/tests/federation-seam.test.ts` | **Write this** — §8 gate test |
-| `packages/lararium-mesh/src/island-protocol.ts` | Add §8 clause after gate passes |
-| `packages/lararium-node/src/vessel-island-pool.ts` | `mainRepo` option, `MessageChannelNetworkAdapter` wiring |
-| `packages/lararium-node/src/sovereign-island-model.ts` | `repo.find(docUrl).whenReady()` call site |
-| `packages/lararium-node/tests/fixtures/repo-in-island-echo.mjs` | Existing fixture — selects `b.writable`; `@lararium` binding at index 0 skipped |
-| `packages/lararium-node/tests/repo-in-island.test.ts` | Import pattern to follow for the new test |
-
-## What NOT to Touch
-
-- `open-node-vessel.ts` — production path confirmed sound; `reconcileIslandFromGenesis` populates genesis bytes before `islandHandle.url` becomes `laraiumDocUrl`.
-- `blob-sovereignty.test.ts` — §6 gate; leave as-is.
-- Browser vessel files — browser ea-path opens after §8, not before.
+| `packages/lararium-browser/src/browser-vessel-island-pool.ts` | Wire `storage` option |
+| `packages/lararium-browser/src/browser-sovereign-island-model.ts` | `IndexedDBStorageAdapter` construction |
+| `packages/lararium-browser/src/browser-founding.ts` | **Write** — `runBrowserFoundingCeremony` |
+| `packages/lararium-node/src/open-node-vessel.ts` | Pre-flight cleared; do not change |
+| `packages/lararium-node/tests/federation-seam.test.ts` | **✅ §8 gate** — leave as-is |
+| `packages/lararium-mesh/src/island-protocol.ts` | **✅ §8 clause** — leave as-is |
+| `packages/lararium-node/tests/blob-sovereignty.test.ts` | **✅ hardened** — leave as-is |
 
 <<~/ahu >>
 
@@ -158,20 +124,51 @@ Independent arc: **Path L / S7.4** — admin-doc WebSocket ingress gated on Keyh
 
 ## Vocabulary Invariants
 
-Keep these names. Do not re-litigate.
-
 | Term | Meaning |
 |---|---|
 | `vessel` | lararium identity + runtime unit (node process or browser tab) |
 | `island` | Worker thread — sovereign; owns its Repo |
-| `ea` | sovereignty breath (not "heartbeat") |
+| `ea` | sovereignty breath — island declares it after boot completes |
 | `bag` | Automerge doc = sync boundary |
-| `job-tiddler` | inter-process coordination artifact (not "command-tiddler" — "job" more pono for web3) |
-| `VerbTable` | job handler registry (not "JobHandlerRegistry") |
-| `VerbReactor` | job handler (not "JobHandler") |
-| `onEa` / `onSignal` / `onDemote` | OTP init/1, handle_info/2, terminate/2 analogues |
+| `job-tiddler` | inter-process coordination artifact |
+| `VerbTable` | job handler registry |
+| `VerbReactor` | job handler |
+| `onEa` / `onSignal` / `onDemote` | OTP init/1 · handle_info/2 · terminate/2 |
 | `runSovereignWorker` | island kernel entry point |
 | `quine relay` | TW5 as a quine that takes arguments — state drives self-regeneration |
+| `archipelago` | federation of vessels sharing bags via AutomergeUrl |
+| `dual-surface` | chat (ephemeral conversation) + wiki (durable CRDT fabric) — both reach the same bags |
+
+<<~/ahu >>
+
+<<~ ahu #rules >>
+
+## Rules — Do Not Re-Decide
+
+- `@lares/cli` remains its own package.
+- `@keyhive/keyhive` / concap remains the capability substrate; do not pivot to UCAN.
+- `lares promote` means explicit operator ceremony, not automatic sync.
+- Canonical system tiddlers use `lar:///` titles; `$:/` only for TW5 core contracts TW5 owns.
+- `<<~/sigil >>` closing tag convention.
+- Web3 only — no web2 models, code, or flows in the Lares stack.
+- TW5 VM primacy — if logic can live in the VM, keep it there.
+- Bag = Automerge doc = sync boundary.
+- No manifest byte transfer — TW5 core bytes travel via `@lararium` CRDT.
+- Canon requires operator promotion. Git diff remains the visible signature.
+
+<<~/ahu >>
+
+<<~ ahu #smokes >>
+
+## Useful Smokes
+
+```sh
+pnpm test:unit                                         # 196/196
+pnpm --filter @lararium/node exec vitest run           # 52 node tests
+pnpm --filter @lararium/browser exec vitest run        # 5 browser tests (Chromium)
+pnpm --filter @lararium/node exec tsx scripts/test-quine.ts
+pnpm --filter @lararium/tw5 exec tsx scripts/smoke-plugin-boot.ts
+```
 
 <<~/ahu >>
 

@@ -31,16 +31,17 @@ const ISLAND_JS   = new URL("../dist/src/lar-wiki-island.js", import.meta.url);
 const WIKI_ID = "lar:///ha.ka.ba/@test/blob-sovereignty-wiki";
 const TIMEOUT = 30_000;
 
-describe("§6 blob sovereignty — island reads coreBlob from @lararium CRDT", () => {
+// Skip the entire suite when build artifacts are absent rather than silently
+// passing mid-test. A skip in CI is visible; a silent return is not.
+const missingGenesis = !existsSync(GENESIS_BIN);
+const missingIsland  = !existsSync(fileURLToPath(ISLAND_JS));
+const skipReason =
+  missingGenesis ? "genesis/island.bin absent — run: pnpm --filter @lararium/node build:genesis" :
+  missingIsland  ? "dist/src/lar-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
+  false;
+
+describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from @lararium CRDT${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`, () => {
   test("island boots TW5 and declares ea from CRDT-sourced bytes", async () => {
-    if (!existsSync(GENESIS_BIN)) {
-      console.warn("[blob-sovereignty] genesis/island.bin not found — run build:genesis");
-      return;
-    }
-    if (!existsSync(fileURLToPath(ISLAND_JS))) {
-      console.warn("[blob-sovereignty] dist/src/lar-wiki-island.js not found — run build");
-      return;
-    }
 
     // Load the genesis LarDoc — carries blobs[ENGINE_CORE_ID] + plugin blobs.
     const genesisBytes    = new Uint8Array(readFileSync(GENESIS_BIN));
