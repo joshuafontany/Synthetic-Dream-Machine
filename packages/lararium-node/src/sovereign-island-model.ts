@@ -29,7 +29,7 @@
 
 import { parentPort, MessagePort } from "worker_threads";
 import { Repo } from "@automerge/automerge-repo";
-import type { DocHandle, AnyDocumentId, StorageAdapterInterface } from "@automerge/automerge-repo";
+import type { DocHandle, AutomergeUrl, StorageAdapterInterface } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { save as automergeSave } from "@automerge/automerge";
@@ -61,8 +61,7 @@ export interface IslandContext {
   wikiUri:   string;
   composite: CompositeStore;
   tw5:       TW5Engine;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handles:   Map<string, DocHandle<any>>;
+  handles:   Map<string, DocHandle<LarDoc>>;
   post:      (msg: IslandToVesselMsg) => void;
 }
 
@@ -97,9 +96,8 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   const handler = new IslandKernel(_post);
 
-  let _repo:             Repo | null           = null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let _handles:          Map<string, DocHandle<any>> = new Map();
+  let _repo:             Repo | null                    = null;
+  let _handles:          Map<string, DocHandle<LarDoc>> = new Map();
   let _writableHandleId: string | null         = null;
   let _composite:        CompositeStore | null = null;
   let _ctx:              IslandContext | null  = null;
@@ -138,15 +136,13 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function _subscribe(bagId: string, handle: DocHandle<any>): void {
+  function _subscribe(_bagId: string, handle: DocHandle<LarDoc>): void {
     handle.on("change", ({ doc, patches }: DocChangePayload) => {
       const delta = extractTiddlerDeltaFromPatches(doc, patches);
       if (delta.added.length > 0 || delta.deleted.length > 0) {
         _pendingAdded.push(...delta.added);
         _pendingDeleted.push(...delta.deleted);
       }
-      void bagId;
     });
   }
 
@@ -193,13 +189,11 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     _composite = new CompositeStore();
 
     const bindings = msg.bagBindings ?? [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ready: Array<{ bagId: string; handle: DocHandle<any>; writable: boolean }> = [];
+    const ready: Array<{ bagId: string; handle: DocHandle<LarDoc>; writable: boolean }> = [];
 
     for (const binding of bindings) {
       if (binding.mode !== "relational") continue;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const handle = await _repo.find<any>(binding.docUrl as AnyDocumentId);
+      const handle = await _repo.find<LarDoc>(binding.docUrl as AutomergeUrl);
       await handle.whenReady();
       _handles.set(binding.bagId, handle);
       ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
@@ -208,7 +202,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     const laraiumHandle = _handles.get(BAG_IDS.lararium);
-    const blobEntry = (laraiumHandle?.doc() as LarDoc | undefined)?.blobs?.[ENGINE_CORE_ID];
+    const blobEntry = laraiumHandle?.doc()?.blobs?.[ENGINE_CORE_ID];
     const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
     if (!coreBytes) {
       _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));

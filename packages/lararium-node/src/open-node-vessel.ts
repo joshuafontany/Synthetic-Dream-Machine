@@ -407,14 +407,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("init-wiki", makeInitWikiReactor(wikiMintOpts));
   jobRegistry.register("open-wiki", makeOpenWikiReactor({ composite }));
 
-  // S6 — BagResidencyManager. Phase 1 (C.1): instrumentation only; no
-  // eviction yet. Pin every doc the daemon touches at boot so we don't
-  // unintentionally evict load-bearing infrastructure once C.2 wires the LRU.
-  // S6 C.2 — sweeper-aware residency manager. onEvict stays a stub here
-  // until upstream Automerge-repo lands a public eviction API (#358);
-  // C.2's value is the manager's own book-keeping (hot cap enforcement,
-  // idle eviction, sync-state guard) so the wiring is in place when the
-  // handle-drop path materializes.
+  // BagResidencyManager — hot-cap LRU + idle sweeper + sync-state guard.
+  // onEvict calls vmManager.unmountWiki; handle-drop deferred to automerge-repo#358.
   const residency = new BagResidencyManager({
     hotCap:          32,
     idleMs:          300_000,   // 5 min

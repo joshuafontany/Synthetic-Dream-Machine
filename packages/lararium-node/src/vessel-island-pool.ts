@@ -70,7 +70,7 @@ export interface VmSnapshot {
 type SlotTier = "pinned" | "hot" | "cold";
 
 /**
- * island slot — covers both pinned (never-evicted) and hot (LRU) tiers.
+ * IslandSlot — covers both pinned (never-evicted) and hot (LRU) tiers.
  *
  * `pinned: true`  → immune to LRU eviction. Used for PrimaryWiki + admin.
  * `pinned: false` → subject to LRU eviction when HOT_CAP is reached.
@@ -78,7 +78,7 @@ type SlotTier = "pinned" | "hot" | "cold";
  * In both cases the TW5Engine lives inside the Worker thread. The vessel
  * holds no engine reference and interacts only via island-protocol envelopes.
  */
-interface islandSlot {
+interface IslandSlot {
   tier:       "pinned" | "hot";
   wikiId:     string;
   worker:     Worker;
@@ -93,7 +93,7 @@ interface ColdSlot {
   snapshot: VmSnapshot | null;
 }
 
-type Slot = islandSlot | ColdSlot;
+type Slot = IslandSlot | ColdSlot;
 
 // ---------------------------------------------------------------------------
 // WikiBootContext
@@ -235,7 +235,7 @@ export class VesselIslandPool {
     const slot = this._slots.get(wikiId);
     if (!slot || slot.tier === "cold") return;
 
-    const workerSlot = slot as islandSlot;
+    const workerSlot = slot as IslandSlot;
     let snapshot: VmSnapshot | null = null;
     try {
       const ack = await _sendAndAwait<IslandMsg_TeardownAck>(
@@ -302,7 +302,7 @@ export class VesselIslandPool {
         resolve: (r) => { clearTimeout(timer); resolve(r); },
         reject:  (e) => { clearTimeout(timer); reject(e); },
       });
-      (slot as islandSlot).worker.postMessage(
+      (slot as IslandSlot).worker.postMessage(
         mkWikiPlaceJob({ ...opts, requestId }),
       );
     });
@@ -355,7 +355,7 @@ export class VesselIslandPool {
   private async _mountWorker(wikiId: string, ctx: WikiBootContext, pinned: boolean): Promise<void> {
     const existing = this._slots.get(wikiId);
     if (existing && (existing.tier === "hot" || existing.tier === "pinned")) {
-      (existing as islandSlot).lastUsedAt = Date.now();
+      (existing as IslandSlot).lastUsedAt = Date.now();
       return;
     }
 
@@ -415,7 +415,7 @@ export class VesselIslandPool {
    */
   private async _evictLruIfNeeded(): Promise<void> {
     const hotSlots = [...this._slots.values()].filter(
-      (s): s is islandSlot => s.tier === "hot",
+      (s): s is IslandSlot => s.tier === "hot",
     );
     if (hotSlots.length < HOT_CAP) return;
 
