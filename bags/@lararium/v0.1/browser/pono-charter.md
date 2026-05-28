@@ -47,7 +47,8 @@ Callers acquire a `BrowserAuthorityLease` and return it. The pool decides what t
 **BV-4 — Plugin membrane is the TW5-content boundary.**
 TW5-native rendering content (tiddlers, startup modules, page-chrome fragments)
 lives inside the compiled plugin blob. Host TS carries no TW5 page chrome.
-The blob transfers into the worker at boot time.
+The island reads the plugin blob bytes from the `@lararium` CRDT doc after Repo sync —
+no blob bytes transfer in the manifest. `coreHash` identifies the blob; the mesh delivers it.
 
 **BV-5 — Projection adapters are edges, not seams.**
 Adapters translate worker-produced render inputs into host surfaces (HTML, canvas, HUD).
@@ -59,7 +60,10 @@ categorically excluded from the browser vessel's authority path.
 A future debug path may expose a limited inspector surface; that surface does not
 constitute sovereignty.
 
-**BV-7 — RootTemplate is source material, not constitutional authority.**
+**BV-7 — Islands tick themselves; the host does not drive state changes.**
+Each island authority runs its own rAF drain loop (or `setTimeout` fallback in environments without `requestAnimationFrame`). The host MAY send messages; the island drains them at frame boundaries, never on raw message receipt. This preserves the island's causal sovereignty — its internal state advances on its own clock, not the host's.
+
+**BV-8 — RootTemplate is source material, not constitutional authority.**
 `$:/core/ui/RootTemplate` and `$:/core/ui/PageTemplate` name prior art.
 The Lararium browser vessel owns its root/frame contract.
 Any surviving reference to these tiddlers must live inside the plugin membrane
@@ -79,7 +83,7 @@ Three packages carry the browser vessel. Responsibility divides cleanly.
 | `@lararium/tw5` | TW5 engine wrapper, content-addressed boot artifacts, plugin build pipeline, projection-neutral render interfaces | Browser frame logic, IndexedDB, island spawn code, pool orchestration |
 | `@lararium/browser` | Browser vessel open/close, island pool orchestration, IndexedDB and local persistence, sync transport ownership, host frame manager, hot/admin wiki swap, browser-side projection adapters, browser plugin blob generation | Node-only APIs, piscina, filesystem, any server-side auth surface |
 
-The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed). The open seam: founding ceremony path — IndexedDB `StorageAdapter`, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`. New code enters by passing the migration allowlist check.
+The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed; §8 gate closed). The open seam for S9 S4: real boot path — `IndexedDBStorageAdapter` per island Worker Repo, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`, presence via `broadcast()`. Island Sovereignty Law §1–§8 all hold gate proofs. New code enters by passing the migration allowlist check.
 
 <<~/ahu >>
 
@@ -89,7 +93,7 @@ The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki
 
 Code moves into `@lararium/browser` only when it satisfies **all three** tests:
 
-1. **Law test.** The code's responsibility belongs to one of the BV-1–BV-7 assignments above.
+1. **Law test.** The code's responsibility belongs to one of the BV-1–BV-8 assignments above, and satisfies Island Sovereignty Law §1–§8 (`island-protocol.ts`).
 2. **Proof test.** Moving this code makes a cheap-check falsifier pass, not merely easier to imagine passing.
 3. **Residue test.** The code carries no unresolved web2 smell (see `deletion-map.md`). If it carries residue, the residue gets quarantined behind a named adapter boundary before migration.
 

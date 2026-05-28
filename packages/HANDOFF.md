@@ -60,7 +60,7 @@ boot order inverted in both sovereign island models: Repo first,
 handle.whenReady() for each binding, read blobs[ENGINE_CORE_ID] from @lararium
 doc, mkFault + return if absent, bootTw5 last from CRDT bytes; laraiumDocUrl
 option added to VesselIslandPool — @lararium binding prepended to bagBindings
-per wiki island; BrowserAuthorityBootParams.coreBlob → coreHash: string | null;
+per wiki island; BrowserWikiMountParams.coreHash: string | null (no blob bytes);
 AdminVmOptions.coreBlob → coreHash; N×island federation now O(CRDT-sync) not
 O(N×blob); 195/195 tests), AND the YIN ontology + typo closure sprint
 (runSovereignisland → runSovereignWorker in lar-wiki-island.ts + lar-admin-island.ts +
@@ -76,13 +76,11 @@ repo-in-island.test.ts writable-binding selector comment added; 197/197 tests)
 are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. §8 archipelago gate: write one test with docUrl as a real AutomergeUrl, in-process
-   Repo pair, island calls repo.find(docUrl).whenReady(). Proves federation seam without
-   a remote node. Write Island Sovereignty Law §8 when this gate passes.
-2. S9 S4+ / lararium-browser: real boot path — IndexedDB storage adapter,
+1. S9 S4 / lararium-browser: real boot path — IndexedDB storage adapter,
    WebCrypto keypair, founding ceremony via @lararium/keyhive in browser vessel,
-   presence via broadcast(). Architecture must be correct before the demo exists.
-3. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+   presence via broadcast(). Charter: bags/@lararium/v0.1/browser/pono-charter.md (exists).
+2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+3. Path M: finish shared job/receipt contracts; ceremony meaning stays in TW5 VM pool.
 4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
@@ -327,9 +325,8 @@ and any future third vessel.
 **`BrowserVmManager` — new file (browser vessel):**
 - `MessageChannel` per slot: main keeps `port1`, island receives `port2` (syncPort).
 - Optional `mainRepo?: Repo` — when provided, wires `MessageChannelNetworkAdapter(port1)`.
-- `acquire/preWarm/evict/disposeAll` implement `BrowserAuthorityPool`.
-- `_makeLease()` stub: `filterTiddlers` / `renderMeme` `superseded` pull RPCs → `[]`/`null`.
-- `mainPort.close()` before `worker.terminate()` in `evict()` — law §7 compliant.
+- `mountWiki/unmountWiki/disposeAll` — Node-parallel API; no lease/receipt/capability layer.
+- `mainPort.close()` before `worker.terminate()` in `unmountWiki()` — law §7 compliant.
 
 **`lar-wiki-worker.ts` — Repo-in-island path wired (node vessel):**
 - `setInterval(16ms).unref()` drain loop — does not hold process alive.
@@ -1067,19 +1064,13 @@ Close the GP-3 browser arc. Then open the browser vessel's ea-path: founding cer
 via `@lararium/keyhive`, IndexedDB storage, WebCrypto keypair, broadcast-based presence.
 These two arcs together complete the isomorphic vessel law across all vessel types.
 
-### GP-3 Browser Arc — Active
+### GP-3 Browser Arc — ✅ Done
 
-Write `packages/lararium-browser/tests/browser-repo-in-island.test.ts`:
-- Two `BrowserVmManager` instances sharing one vessel Repo.
-- island receives doc changes via MessageChannel (no `routeChangeset`).
-- Gate passes → delete GP-3 fallback in `browser-wiki-worker.ts`.
-- Protocol layer cleanup follows both vessel gates. See ROADMAP `## GP-3 Deprecation Completion Arc`.
+`browser-repo-in-island.test.ts` (2 tests) passes. GP-3 fallback never existed in `browser-wiki-worker.ts`. Protocol layer fully cleared (both gates). See ROADMAP `## GP-3 Deprecation Completion Arc`.
 
-### docUrl Non-Null Gate — Ea Federation Seam
+### docUrl Non-Null Gate (§8) — ✅ Done
 
-After protocol cleanup: write one test with `docUrl` as a real `AutomergeUrl`.
-In-process Repo pair. island calls `repo.find(docUrl).whenReady()`. Proves federation
-without a remote node. Write Island Sovereignty Law §8 when this gate passes.
+`federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair. Island Sovereignty Law §8 written. Gate proof cites node + browser paths.
 
 ### Path L / S7.4 — Admin Doc Ingress Trust Gate
 

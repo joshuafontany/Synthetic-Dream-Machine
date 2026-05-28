@@ -41,54 +41,49 @@ function waitForEvent(
 }
 
 describe("BrowserVesselIslandPool Repo-in-island gate", () => {
-  let manager: BrowserVesselIslandPool | null = null;
+  let pool: BrowserVesselIslandPool | null = null;
   let repo: Repo | null = null;
 
   afterEach(async () => {
-    await manager?.disposeAll();
-    manager = null;
+    await pool?.disposeAll();
+    pool = null;
     await repo?.shutdown();
     repo = null;
   });
 
-  test("cold-boot path acquires without docUrl and emits no fault", async () => {
+  test("cold-boot path mounts without docUrl and emits no fault", async () => {
     const all = eventCollector();
+    const islandId = "lar:///ha.ka.ba/@test/browser-cold";
 
     repo = new Repo({ sharePolicy: async () => true });
     repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
-    const authorityId = "lar:///ha.ka.ba/@test/browser-cold";
 
-    manager = new BrowserVesselIslandPool({
+    pool = new BrowserVesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo: repo,
-      onWorkerEvent: (id, msg) => {
-        all.callback(id, msg);
-      },
+      onWorkerEvent: (id, msg) => all.callback(id, msg),
     });
 
-    const acquired = await manager.acquire(authorityId, {
-      authorityId,
-      coreHash: null,
-
+    await pool.mountWiki(islandId, {
+      coreHash:   null,
       bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
-      recipeUri: "lar:///ha.ka.ba/@test/recipe",
+      recipeUri:  "lar:///ha.ka.ba/@test/recipe",
     });
-    expect(acquired.receipt.ok).toBe(true);
+    expect(pool.has(islandId)).toBe(true);
 
     await new Promise<void>((resolve) => setTimeout(resolve, 150));
     expect(all.events.every((e) => e.type !== "fault")).toBe(true);
-    acquired.lease.release();
   });
 
   test("docUrl non-null path resolves via repo.find(docUrl)", async () => {
-    const all = eventCollector();
+    const all     = eventCollector();
     const changes = eventCollector("repo:change");
+    const islandId = "lar:///ha.ka.ba/@test/browser-docurl";
 
     repo = new Repo({ sharePolicy: async () => true });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
-    const authorityId = "lar:///ha.ka.ba/@test/browser-docurl";
 
-    manager = new BrowserVesselIslandPool({
+    pool = new BrowserVesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo: repo,
       onWorkerEvent: (id, msg) => {
@@ -97,14 +92,12 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
       },
     });
 
-    const acquired = await manager.acquire(authorityId, {
-      authorityId,
-      coreHash: null,
-
+    await pool.mountWiki(islandId, {
+      coreHash:    null,
       bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: docHandle.url }],
-      recipeUri: "lar:///ha.ka.ba/@test/recipe",
+      recipeUri:   "lar:///ha.ka.ba/@test/recipe",
     });
-    expect(acquired.receipt.ok).toBe(true);
+    expect(pool.has(islandId)).toBe(true);
 
     const synced = await waitForEvent(all, (e) => e.listenable === "repo:synced");
     expect(synced.payload.usingDocUrl).toBe(true);
@@ -112,12 +105,11 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     docHandle.change((d) => {
       d.tiddlers["lar:///ha.ka.ba/@test/browser-docurl/page"] = {
         title: "lar:///ha.ka.ba/@test/browser-docurl/page",
-        text: "docurl",
+        text:  "docurl",
       };
     });
 
     const change = await waitForEvent(changes, (e) => Number(e.payload.tiddlerCount) >= 1);
     expect(change.payload.usingDocUrl).toBe(true);
-    acquired.lease.release();
   });
 });

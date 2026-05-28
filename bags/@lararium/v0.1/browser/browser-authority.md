@@ -10,8 +10,8 @@ register     = "S"
 confidence   = 18
 mana         = 18
 manao        = 18
-manaoio      = 17
-role         = "S1 island authority contract: BrowserAuthorityLease, BrowserAuthorityPool, BrowserAuthorityReceipt"
+manaoio      = 18
+role         = "Browser island boundary types: BrowserWikiMountParams, BrowserProjectionSnapshot"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
@@ -19,10 +19,10 @@ retain       = true
 
 <<~&#x0002;>>
 
-# Browser Authority Contract
+# Browser Island Boundary Types
 
-S1 island authority contract. Lives in `@lararium/mesh` — no DOM types, no browser runtime.
-The `@lararium/browser` package holds the concrete implementation.
+Data shapes that cross the island boundary. Lives in `@lararium/mesh` — no DOM types, no pool contracts.
+The `@lararium/browser` package holds the concrete pool implementation.
 
 <<~ ahu #types >>
 
@@ -30,15 +30,8 @@ The `@lararium/browser` package holds the concrete implementation.
 
 | Type | Role |
 |---|---|
-| `BrowserAuthorityId` | Stable key for a pool slot; formatted as a `lar:` URI matching the wiki identity |
-| `BrowserAuthorityPhase` | Monotonic boot sequence: `spawned → booting → tw5-ready → store-wired → live → leased → idle → disposing → disposed` |
-| `BrowserAuthorityBootParams` | Everything the worker needs to boot: authority ID, core blob, plugin blob, bag stack, recipe URI, optional snapshots for warm start |
-| `BrowserAuthorityCapabilities` | Declaration of available operations at current phase; not a permission gate |
-| `BrowserAuthorityLease` | Caller handle returned by `pool.acquire()`; all ops are async RPC across the island boundary; no DOM types |
-| `BrowserProjectionSnapshot` | Minimal structured-clone-friendly render inputs crossing the island boundary; shape expanded in S4 |
-| `BrowserAuthorityDebugStats` | Diagnostic output: phase, boot duration, lease timestamps, heap hint |
-| `BrowserAuthorityReceipt` | Acknowledgment of pool-level operations (acquire, release, evict, dispose, boot) |
-| `BrowserAuthorityPool` | Pool contract interface; concrete class lives in `@lararium/browser` |
+| `BrowserWikiMountParams` | What the pool needs to mount a wiki island: coreHash, bagBindings, recipeUri, optional pluginTiddlers |
+| `BrowserProjectionSnapshot` | Minimal structured-clone-friendly render inputs crossing the island boundary; shape expands in S4 |
 
 <<~/ahu >>
 
@@ -46,27 +39,19 @@ The `@lararium/browser` package holds the concrete implementation.
 
 ## Invariants
 
-**BA-1 — No DOM types on the contract surface.**
-`BrowserAuthorityLease`, `BrowserAuthorityPool`, and `BrowserAuthorityReceipt` carry zero
-`HTMLElement`, `Document`, `shadowRoot`, or `window` references. The concrete pool
-implementation in `@lararium/browser` may use DOM APIs for island spawn; the shared
-contract surface stays platform-neutral.
+**BA-1 — No DOM types on the boundary surface.**
+`BrowserWikiMountParams` and `BrowserProjectionSnapshot` carry zero `HTMLElement`,
+`Document`, or `window` references. The pool implementation in `@lararium/browser`
+may use DOM APIs for island spawn; the shared contract surface stays platform-neutral.
 
-**BA-2 — Phase order is monotonic.**
-A `BrowserAuthorityPhase` never moves backward. An authority that reaches `disposed`
-gets a new entry in the pool on the next `acquire` call — it does not resurrect.
+**BA-2 — No blob bytes in the mount params.**
+The island reads `ENGINE_CORE_ID` bytes from the `@lararium` CRDT doc after Repo sync.
+`coreHash` carries the SHA-256 hex for integrity; the mesh delivers the actual bytes.
+No snapshot bytes transfer between vessel and island at mount time.
 
-**BA-3 — Lease callers do not control island lifecycle.**
-Calling `lease.release()` returns the authority to the pool. The pool decides whether
-the authority stays warm (`idle`) or gets evicted. Callers hold no island handle.
-
-**BA-4 — BrowserProjectionSnapshot is structured-clone-friendly.**
+**BA-3 — BrowserProjectionSnapshot is structured-clone-friendly.**
 No live DOM nodes, no callbacks, no Proxy objects cross the island boundary in a snapshot.
-The adapter in `@lararium/browser` translates the snapshot into DOM/canvas/HUD output.
-
-**BA-5 — Boot params transfer large blobs, not clone them.**
-`coreBlob` and `pluginBlob` are `Uint8Array`; the runtime transfers ownership to the
-island rather than copying. Snapshots in `bootParams.snapshots` transfer similarly.
+The projection adapter in `@lararium/browser` translates the snapshot into DOM/canvas/HUD output.
 
 <<~/ahu >>
 
@@ -74,9 +59,8 @@ island rather than copying. Snapshots in `bootParams.snapshots` transfer similar
 
 ## Open Questions (deferred to S4)
 
-- Exact shape of `BrowserProjectionSnapshot.payload` — what TW5 state needs to cross the boundary per render cycle.
-- Whether `projectionSnapshot()` should push snapshots (worker-initiated) or pull (host-initiated). S4 measurements decide.
-- `debugStats()` heap reporting: `performance.measureUserAgentSpecificMemory()` is origin-isolated only; document the constraint when wiring S5 metrics.
+- Exact shape of `BrowserProjectionSnapshot.payload` — which TW5 state crosses the boundary per render cycle.
+- Push vs pull projection: worker-initiated snapshot push or host-initiated pull. S4 measurements decide.
 
 <<~/ahu >>
 
@@ -85,10 +69,8 @@ island rather than copying. Snapshots in `bootParams.snapshots` transfer similar
 ## Edges
 
 <<~ pranala #charter ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter family:reference role:implements >>
-<<~ pranala #sprint ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint family:reference role:sprint >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/vm-pool >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/meme-recipe-vm >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lararium-vessel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool >>
 
 <<~/ahu >>
 

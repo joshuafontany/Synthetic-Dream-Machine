@@ -33,7 +33,7 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 5. Vessel `changeset` delivery REMOVED. CRDT sync via `syncPort` is the sole source of tiddler truth.
 6. `IslandMsg_Manifest` carries `syncPort` (transferred), `bagBindings`, `coreBlob`, and `coreHash`. `IslandMsg_Manifest` remains the v1 name.
 7. The vessel MUST close `mainPort` at evict/unmount time. Failure leaks the NetworkAdapter silently.
-8. Federation seam — when a `relational` BagBinding carries a non-empty `docUrl`, the vessel wires `MessageChannelNetworkAdapter(mainPort)` on the main Repo before manifesting; the island calls `repo.find(docUrl).whenReady()` before declaring `ea`. Gate proof: `browser-repo-in-island.test.ts` test 2.
+8. Federation seam — when a `relational` BagBinding carries a non-empty `docUrl`, the vessel wires `MessageChannelNetworkAdapter(mainPort)` on the main Repo before manifesting; the island calls `repo.find(docUrl).whenReady()` before declaring `ea`. Gate proof: `federation-seam.test.ts` (node, pure Repo — bidirectional) + `browser-repo-in-island.test.ts` test 2 (browser pool).
 
 ### Guarantee grades
 

@@ -1,38 +1,16 @@
 /**
- * BrowserVesselIslandPool — browser-vessel implementation of BrowserAuthorityPool.
+ * BrowserVesselIslandPool — browser pool for wiki island authorities.
  *
- * ## Island Sovereignty Law — vessel side
+ * Island Sovereignty Law — vessel side:
+ *   1. Spawns a dedicated Web Worker per wiki island.
+ *   2. Creates a MessageChannel. Keeps mainPort; transfers syncPort to the island.
+ *   3. Optionally wires mainPort to the vessel Repo via MessageChannelNetworkAdapter
+ *      so the island-side Repo syncs the wiki doc automatically.
+ *   4. Delivers manifest with syncPort, bagBindings, coreHash.
+ *      TW5 core bytes travel via CRDT — no blob bytes in the manifest.
+ *   5. Awaits ea — island declares sovereignty; island is live.
  *
- *   For each wiki authority the vessel:
- *     1. Spawns a dedicated Web Worker (browser-wiki-worker.ts).
- *     2. Creates a MessageChannel. Keeps `mainPort`; transfers `syncPort` to the island.
- *     3. Optionally connects `mainPort` to the vessel Automerge Repo via
- *        `MessageChannelNetworkAdapter` so the island-side Repo syncs automatically.
- *     4. Delivers `manifest` with `syncPort`, `bagBindings`, `coreHash` (no blob bytes — TW5 core travels via CRDT).
- *     5. Awaits `ea` — island declares sovereignty; island is live.
- *
- *   Island isolation is structural: each island owns its own dedicated runtime realm and
- *   MessagePort. The routing Map `_slots` enforces that no message reaches the
- *   wrong island — the boundary is a data structure, not a convention.
- *
- * ## BrowserAuthorityPool surface
- *
- *   `acquire`   — spawn + manifest; returns BrowserAuthorityLease.
- *   `preWarm`   — spawn + manifest without returning a lease.
- *   `evict`     — GP-5 teardown; returns doc bytes for persistence.
- *   `disposeAll`— evict all slots.
- *   `has`       — slot existence check.
- *   `inspect`   — live phase snapshot (diagnostics).
- *
- * ## BrowserAuthorityLease — push-first design intent
- *
- *   `filterTiddlers` and `renderMeme` survive as pull RPCs for S3 compatibility.
- *   They are annotated superseded — the push projection path (S4) will replace them.
- *   Request-response uses a `_pending` Map keyed by correlation UUID; the island
- *   echoes the UUID in an `rpc:reply` event. Protocol extension deferred to S4.
- *
- *   For now both methods return `[]` / `null` — stubs that compile but do not yet
- *   cross the island boundary. Named stubs surface the gap rather than hiding it.
+ * API mirrors VesselIslandPool (Node): mountWiki / unmountWiki / disposeAll.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool
  */
@@ -43,47 +21,32 @@ import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  ISLAND_PROTOCOL_VERSION,
-  type BagBinding,
 } from "@lararium/mesh";
 import type {
   IslandMsg_Ea,
   IslandMsg_TeardownAck,
   IslandMsg_Event,
   IslandToVesselMsg,
-} from "@lararium/mesh";
-import type {
-  BrowserAuthorityPool,
-  BrowserAuthorityId,
-  BrowserAuthorityBootParams,
-  BrowserAuthorityReceipt,
-  BrowserAuthorityLease,
-  BrowserAuthorityPhase,
-  BrowserProjectionSnapshot,
-  BrowserAuthorityDebugStats,
+  BrowserWikiMountParams,
 } from "@lararium/mesh";
 
-// ── Slot ──────────────────────────────────────────────────────────────────
+// ── Internal slot ──────────────────────────────────────────────────────────
+
+type SlotPhase = "booting" | "live" | "disposing" | "disposed";
 
 interface BrowserSlot {
-  worker:      Worker;
-  mainPort:    MessagePort;
-  mainRepo:    Repo | null;
-  phase:       BrowserAuthorityPhase;
-  bootedAt:    number | null;
-  lastLeaseAt: number | null;
-  lastReleaseAt: number | null;
-  /** Callback for verse-event reactions forwarded to the caller. */
-  onEvent:     ((msg: IslandMsg_Event) => void) | null;
+  worker:   Worker;
+  mainPort: MessagePort;
+  phase:    SlotPhase;
 }
 
-// ── Handshake helpers ──────────────────────────────────────────────────────
+// ── Handshake ──────────────────────────────────────────────────────────────
 
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
-function _awaitIslandMsg<T extends IslandToVesselMsg>(
+function _awaitMsg<T extends { type: string }>(
   worker: Worker,
-  type:   T["type"],
+  type:   string,
 ): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(
@@ -100,297 +63,103 @@ function _awaitIslandMsg<T extends IslandToVesselMsg>(
   });
 }
 
-function _receipt(
-  id:          BrowserAuthorityId,
-  operation:   BrowserAuthorityReceipt["operation"],
-  ok:          boolean,
-  startMs:     number,
-  phase:       BrowserAuthorityPhase,
-  error?:      string,
-): BrowserAuthorityReceipt {
-  const base: BrowserAuthorityReceipt = {
-    authorityId: id,
-    operation,
-    ok,
-    durationMs:  Date.now() - startMs,
-    resultPhase: phase,
-    at:          Date.now(),
-  };
-  if (error !== undefined) base.error = error;
-  return base;
-}
-
-// ── BrowserVesselIslandPool ──────────────────────────────────────────────────────
+// ── BrowserVesselIslandPool ────────────────────────────────────────────────
 
 export interface BrowserVesselIslandPoolOptions {
   /** URL of the compiled browser-wiki-worker entry script. */
   workerScriptUrl: URL;
   /**
-   * Optional vessel Automerge Repo. When provided, each slot wires
-   * `mainPort` to this Repo via `MessageChannelNetworkAdapter` so the
-   * island-side Repo syncs the wiki doc automatically.
-   *
-   * When absent (e.g. tests), the island-side Repo starts empty and
-   * receives only explicit doc bytes from `BrowserAuthorityBootParams.snapshots`.
+   * Optional vessel Automerge Repo. When provided, each island's mainPort wires
+   * to this Repo via MessageChannelNetworkAdapter so the island syncs automatically.
    */
   mainRepo?: Repo;
-  /** Called when a island emits a verse-event reaction. */
-  onWorkerEvent?: (id: BrowserAuthorityId, msg: IslandMsg_Event) => void;
+  /** Called when an island emits a verse-event reaction. */
+  onWorkerEvent?: (id: string, msg: IslandMsg_Event) => void;
 }
 
-export class BrowserVesselIslandPool implements BrowserAuthorityPool {
-  private readonly _slots      = new Map<BrowserAuthorityId, BrowserSlot>();
+export class BrowserVesselIslandPool {
+  private readonly _slots     = new Map<string, BrowserSlot>();
   private readonly _workerUrl: URL;
   private readonly _mainRepo:  Repo | null;
-  private readonly _onWorkerEvent: ((id: BrowserAuthorityId, msg: IslandMsg_Event) => void) | null;
+  private readonly _onEvent:   ((id: string, msg: IslandMsg_Event) => void) | null;
 
   constructor(opts: BrowserVesselIslandPoolOptions) {
-    this._workerUrl     = opts.workerScriptUrl;
-    this._mainRepo      = opts.mainRepo ?? null;
-    this._onWorkerEvent = opts.onWorkerEvent ?? null;
+    this._workerUrl = opts.workerScriptUrl;
+    this._mainRepo  = opts.mainRepo ?? null;
+    this._onEvent   = opts.onWorkerEvent ?? null;
   }
 
-  // ── BrowserAuthorityPool ─────────────────────────────────────────────────
+  async mountWiki(id: string, params: BrowserWikiMountParams): Promise<void> {
+    if (this._slots.has(id)) return;
 
-  async acquire(
-    id:     BrowserAuthorityId,
-    params: BrowserAuthorityBootParams,
-  ): Promise<{ receipt: BrowserAuthorityReceipt; lease: BrowserAuthorityLease }> {
-    const start = Date.now();
-    let slot = this._slots.get(id);
-
-    if (!slot || slot.phase === "disposed") {
-      try {
-        slot = await this._spawnAndBoot(id, params);
-      } catch (err) {
-        return {
-          receipt: _receipt(id, "acquire", false, start, "disposed", String(err)),
-          lease:   this._stubLease(id),
-        };
-      }
-    }
-
-    slot.phase       = "leased";
-    slot.lastLeaseAt = Date.now();
-    return {
-      receipt: _receipt(id, "acquire", true, start, "leased"),
-      lease:   this._makeLease(id, slot),
-    };
-  }
-
-  async preWarm(
-    id:     BrowserAuthorityId,
-    params: BrowserAuthorityBootParams,
-  ): Promise<BrowserAuthorityReceipt> {
-    const start = Date.now();
-    try {
-      await this._spawnAndBoot(id, params);
-      return _receipt(id, "preWarm", true, start, "idle");
-    } catch (err) {
-      return _receipt(id, "preWarm", false, start, "disposed", String(err));
-    }
-  }
-
-  async evict(id: BrowserAuthorityId): Promise<{
-    receipt:   BrowserAuthorityReceipt;
-    snapshots: Array<{ bagId: string; bytes: Uint8Array }>;
-  }> {
-    const start = Date.now();
-    const slot  = this._slots.get(id);
-    if (!slot || slot.phase === "disposed") {
-      return {
-        receipt:   _receipt(id, "evict", true, start, "disposed"),
-        snapshots: [],
-      };
-    }
-
-    slot.phase = "disposing";
-
-    let docBytes: Uint8Array | undefined;
-    try {
-      const ackPromise = _awaitIslandMsg<IslandMsg_TeardownAck>(slot.worker, "teardown:ack");
-      slot.worker.postMessage(mkTeardown());
-      const ack = await ackPromise;
-      docBytes  = ack.docBytes;
-    } catch {
-      // Teardown timed out — terminate anyway.
-    }
-
-    // mainRepo network adapter cleanup is handled by Repo disposal; no per-adapter teardown API.
-    slot.mainPort.close();
-    slot.worker.terminate();
-    slot.phase = "disposed";
-    this._slots.delete(id);
-
-    // Wrap docBytes as a single-bag snapshot keyed by the authority id.
-    const snapshots: Array<{ bagId: string; bytes: Uint8Array }> =
-      docBytes ? [{ bagId: id, bytes: docBytes }] : [];
-
-    return {
-      receipt:   _receipt(id, "evict", true, start, "disposed"),
-      snapshots,
-    };
-  }
-
-  async disposeAll(): Promise<BrowserAuthorityReceipt[]> {
-    const results = await Promise.allSettled(
-      [...this._slots.keys()].map((id) => this.evict(id).then(({ receipt }) => receipt)),
-    );
-    return results.map((r) =>
-      r.status === "fulfilled"
-        ? r.value
-        : _receipt("unknown", "dispose", false, Date.now(), "disposed", String(r.reason)),
-    );
-  }
-
-  has(id: BrowserAuthorityId): boolean {
-    const slot = this._slots.get(id);
-    return !!slot && slot.phase !== "disposed";
-  }
-
-  inspect(): Array<{ id: BrowserAuthorityId; phase: BrowserAuthorityPhase }> {
-    return [...this._slots.entries()].map(([id, slot]) => ({ id, phase: slot.phase }));
-  }
-
-  get size(): number { return this._slots.size; }
-
-  // ── Private — spawn + boot ────────────────────────────────────────────────
-
-  private async _spawnAndBoot(
-    id:     BrowserAuthorityId,
-    params: BrowserAuthorityBootParams,
-  ): Promise<BrowserSlot> {
-    // 1. Spawn island.
     const worker = new Worker(this._workerUrl, { type: "module" });
-    worker.addEventListener("error", (e) => {
-      console.error(`[browser-vessel-island-pool] island error (${id}):`, e.message);
-    });
+    worker.addEventListener("error", (e) =>
+      console.error(`[browser-vessel-island-pool] island error (${id}):`, e.message),
+    );
 
-    // 2. Create MessageChannel — main keeps port1, island receives port2 (syncPort).
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    // 3. Optionally wire mainPort to the vessel Repo for CRDT sync.
-    let slotRepo: Repo | null = null;
     if (this._mainRepo) {
-      const adapter = new MessageChannelNetworkAdapter(mainPort);
-      this._mainRepo.networkSubsystem.addNetworkAdapter(adapter);
-      slotRepo = this._mainRepo;
+      this._mainRepo.networkSubsystem.addNetworkAdapter(
+        new MessageChannelNetworkAdapter(mainPort),
+      );
     }
 
-    const slot: BrowserSlot = {
-      worker,
-      mainPort,
-      mainRepo:      slotRepo,
-      phase:         "spawned",
-      bootedAt:      null,
-      lastLeaseAt:   null,
-      lastReleaseAt: null,
-      onEvent:       null,
-    };
+    const slot: BrowserSlot = { worker, mainPort, phase: "booting" };
     this._slots.set(id, slot);
 
-    // 4. Wire vessel message listener for island → main messages.
     worker.addEventListener("message", (e: MessageEvent) => {
       if (!isIslandToVesselMsg(e.data)) return;
       const msg = e.data as IslandToVesselMsg;
-      if (msg.type === "event" && this._onWorkerEvent) {
-        this._onWorkerEvent(id, msg as IslandMsg_Event);
-      }
+      if (msg.type === "event" && this._onEvent) this._onEvent(id, msg as IslandMsg_Event);
       if (msg.type === "fault") {
         console.error(`[browser-vessel-island-pool] island fault (${id}): ${(msg as { error: string }).error}`);
         slot.phase = "disposed";
       }
     });
 
-    // 5. Build bagBindings + coreHash for the manifest delivery.
-    const coreHash: string | null = params.coreHash ?? null;
-    const bagBindings: readonly BagBinding[] = params.bagBindings ?? [];
-
-    // 6. Deliver manifest — transfer syncPort to the sovereign island.
-    //    TW5 core bytes are NOT in the manifest; the island reads them from @lararium CRDT doc.
-    //    pluginTiddlers, bagBindings, recipeUri cross the boundary so the island can think
-    //    from first breath (ea condition 3 — own truth from boot, not from a later delta).
-    slot.phase = "booting";
-    const manifestMsg = mkManifest(id, syncPort, coreHash, {
+    const manifestMsg = mkManifest(id, syncPort, params.coreHash, {
+      bagBindings: params.bagBindings,
+      recipeUri:   params.recipeUri,
       ...(params.pluginTiddlers ? { pluginTiddlers: params.pluginTiddlers } : {}),
-      bagBindings,
-      recipeUri: params.recipeUri,
     });
-    const transferList: Transferable[] = [syncPort];
-    worker.postMessage(manifestMsg, transferList);
+    worker.postMessage(manifestMsg, [syncPort]);
 
-    // 8. Await ea — island declares sovereignty; island is live.
-    await _awaitIslandMsg<IslandMsg_Ea>(worker, "ea");
-
-    slot.phase    = "live";
-    slot.bootedAt = Date.now();
-    return slot;
+    await _awaitMsg<IslandMsg_Ea>(worker, "ea");
+    slot.phase = "live";
   }
 
-  // ── Private — lease factory ───────────────────────────────────────────────
+  async unmountWiki(id: string): Promise<void> {
+    const slot = this._slots.get(id);
+    if (!slot || slot.phase === "disposed") return;
 
-  private _makeLease(id: BrowserAuthorityId, slot: BrowserSlot): BrowserAuthorityLease {
-    return {
-      authorityId: id,
-      get phase()        { return slot.phase; },
-      get capabilities() { return _liveCapabilities(); },
+    slot.phase = "disposing";
+    try {
+      const ackPromise = _awaitMsg<IslandMsg_TeardownAck>(slot.worker, "teardown:ack");
+      slot.worker.postMessage(mkTeardown());
+      await ackPromise;
+    } catch {
+      // teardown timed out — terminate anyway
+    }
 
-      // superseded push-projection (S4) will replace these pull RPCs.
-      filterTiddlers: async (_expr: string): Promise<string[]> => {
-        // Stub — RPC extension deferred to S4 projection channel.
-        return [];
-      },
-      renderMeme: async (_uri: string): Promise<string | null> => {
-        // Stub — RPC extension deferred to S4 projection channel.
-        return null;
-      },
-      projectionSnapshot: async (): Promise<BrowserProjectionSnapshot> => {
-        return {
-          authorityId: id,
-          payload:     {},
-          heads:       [],
-          producedAt:  Date.now(),
-        };
-      },
-      exportSnapshots: async (): Promise<Array<{ bagId: string; bytes: Uint8Array }>> => {
-        return [];
-      },
-      debugStats: async (): Promise<BrowserAuthorityDebugStats> => ({
-        authorityId:    id,
-        phase:          slot.phase,
-        bootDurationMs: slot.bootedAt != null ? slot.bootedAt - (slot.lastLeaseAt ?? slot.bootedAt) : null,
-        lastLeaseAt:    slot.lastLeaseAt,
-        lastReleaseAt:  slot.lastReleaseAt,
-        heapBytes:      null,
-      }),
-      release: () => {
-        slot.phase        = "idle";
-        slot.lastReleaseAt = Date.now();
-      },
-    };
+    slot.mainPort.close();
+    slot.worker.terminate();
+    slot.phase = "disposed";
+    this._slots.delete(id);
   }
 
-  private _stubLease(id: BrowserAuthorityId): BrowserAuthorityLease {
-    return {
-      authorityId:        id,
-      phase:              "disposed",
-      capabilities:       _noCapabilities(),
-      filterTiddlers:     async () => [],
-      renderMeme:         async () => null,
-      projectionSnapshot: async () => ({ authorityId: id, payload: {}, heads: [], producedAt: Date.now() }),
-      exportSnapshots:    async () => [],
-      debugStats:         async () => ({ authorityId: id, phase: "disposed", bootDurationMs: null, lastLeaseAt: null, lastReleaseAt: null, heapBytes: null }),
-      release:            () => {},
-    };
+  async disposeAll(): Promise<void> {
+    await Promise.allSettled([...this._slots.keys()].map((id) => this.unmountWiki(id)));
   }
+
+  has(id: string): boolean {
+    const slot = this._slots.get(id);
+    return !!slot && slot.phase !== "disposed";
+  }
+
+  inspect(): Array<{ id: string; phase: SlotPhase }> {
+    return [...this._slots.entries()].map(([id, slot]) => ({ id, phase: slot.phase }));
+  }
+
+  get size(): number { return this._slots.size; }
 }
-
-// ── Capability helpers ────────────────────────────────────────────────────
-
-import {
-  BROWSER_AUTHORITY_CAPABILITIES_LIVE,
-  BROWSER_AUTHORITY_CAPABILITIES_NONE,
-} from "@lararium/mesh";
-
-function _liveCapabilities() { return { ...BROWSER_AUTHORITY_CAPABILITIES_LIVE }; }
-function _noCapabilities()   { return { ...BROWSER_AUTHORITY_CAPABILITIES_NONE }; }
