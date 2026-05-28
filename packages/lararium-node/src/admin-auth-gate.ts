@@ -21,8 +21,12 @@
  *   2. The Repo's sharePolicy should call getIdentifierForSocket() to build
  *      PeerId → identifierHex entries when the adapter emits "peer-candidate".
  *
- * Alpha note: nonce signature verification is stubbed (TODO L.2).
- * The ContactCard self-certification + accessForDoc is the primary gate.
+ * Security posture (alpha):
+ *   - Nonce signature verification is stubbed (TODO L.2). Full challenge-response:
+ *     sig = Ed25519Sign(identityPrivKey, nonce_bytes || serverStaticPubKey_bytes).
+ *   - ContactCard payload is capped at MAX_CONTACT_CARD_BYTES before TextEncoder.
+ *   - Concurrent unauthenticated connections are capped at MAX_PENDING.
+ *   - Auth timeout is 5 s (machine-to-machine; no human interaction path).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/admin-auth-gate
  */
@@ -37,9 +41,12 @@ import {
 } from "@lararium/mesh";
 import type { CapabilityProvider } from "@lararium/keyhive";
 
-const AUTH_TIMEOUT_MS = 15_000;
+const AUTH_TIMEOUT_MS       = 5_000;
+const MAX_PENDING           = 50;     // max concurrent unauthenticated connections
+const MAX_CONTACT_CARD_BYTES = 64_000; // 64 KB — generous for a self-certifying identity packet
 const WS_CLOSE_UNAUTHORIZED  = 4003;
 const WS_CLOSE_NOT_READY     = 4503;
+const WS_CLOSE_RATE_LIMITED  = 4429;
 
 interface ArmedState {
   keyhive:    CapabilityProvider;
@@ -57,6 +64,7 @@ export class AdminAuthGate extends EventEmitter {
   readonly clients: Set<WebSocket> = new Set();
 
   private armed: ArmedState | null = null;
+  private _pending = 0;
   /** socket → Keyhive Identifier hex (set on successful auth). */
   private readonly socketToIdentifier = new WeakMap<WebSocket, string>();
 
@@ -80,8 +88,9 @@ export class AdminAuthGate extends EventEmitter {
 
   /**
    * Look up the Keyhive Identifier hex for an authenticated socket.
-   * Call this from a "peer-candidate" listener on the NetworkAdapter to
-   * populate the PeerId → identifierHex map used by sharePolicy.
+   * Call this (deferred by one microtask) from a "peer-candidate" listener
+   * on the NetworkAdapter to populate the PeerId → identifierHex map used
+   * by sharePolicy.
    */
   getIdentifierForSocket(socket: WebSocket): string | undefined {
     return this.socketToIdentifier.get(socket);
@@ -92,6 +101,13 @@ export class AdminAuthGate extends EventEmitter {
       this._deny(socket, WS_CLOSE_NOT_READY, "vessel not ready");
       return;
     }
+
+    if (this._pending >= MAX_PENDING) {
+      this._deny(socket, WS_CLOSE_RATE_LIMITED, "too many pending auth connections");
+      return;
+    }
+
+    this._pending++;
     const { keyhive, adminBagUrl } = this.armed;
 
     const nonce = randomBytes(32).toString("hex");
@@ -132,7 +148,12 @@ export class AdminAuthGate extends EventEmitter {
             return;
           }
 
-          // TODO(L.2): verify parsed.sig = Ed25519(nonce_bytes, identityKey)
+          if (parsed.contactCard.length > MAX_CONTACT_CARD_BYTES) {
+            resolve({ ok: false, reason: "contactCard payload too large" });
+            return;
+          }
+
+          // TODO(L.2): verify parsed.sig = Ed25519Sign(identityPrivKey, nonce_bytes || serverStaticPubKey_bytes)
           // Alpha: ContactCard self-certification + accessForDoc is the primary gate.
 
           const cardBytes = new TextEncoder().encode(parsed.contactCard);
@@ -160,6 +181,8 @@ export class AdminAuthGate extends EventEmitter {
       socket.once("close", onClose);
       socket.once("message", onMessage);
     });
+
+    this._pending--;
 
     if (!result.ok) {
       this._send(socket, mkLarAuthDenied(result.reason));

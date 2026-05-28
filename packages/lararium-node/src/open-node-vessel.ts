@@ -151,15 +151,19 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // join flows. Gate starts disarmed (rejects all) until keyhive boots.
   const authGate = new AdminAuthGate(wss);
   const network  = new NodeWSServerAdapter(authGate as unknown as typeof wss);
-  // peerIdentifierMap: populated by "peer-candidate" listener below.
-  // sharePolicy uses it to allow only auth-gate-verified peers per doc.
+  // peerIdentifierMap: built by the "peer-candidate" listener below; sharePolicy
+  // admits only auth-gate-verified peers.
   const peerIdentifierMap = new Map<string, string>();
+  // NodeWSServerAdapter sets sockets[peerId] AFTER emitting "peer-candidate",
+  // so defer the lookup by one microtask to let the assignment land first.
   network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
-    const socket = (network.sockets as Record<string, unknown>)[peerId];
-    if (socket) {
-      const identHex = authGate.getIdentifierForSocket(socket as Parameters<typeof authGate.getIdentifierForSocket>[0]);
-      if (identHex) peerIdentifierMap.set(peerId, identHex);
-    }
+    queueMicrotask(() => {
+      const socket = (network.sockets as Record<string, unknown>)[peerId];
+      if (socket) {
+        const identHex = authGate.getIdentifierForSocket(socket as Parameters<typeof authGate.getIdentifierForSocket>[0]);
+        if (identHex) peerIdentifierMap.set(peerId, identHex);
+      }
+    });
   });
   const repo = new Repo({
     storage,

@@ -10,7 +10,6 @@
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { createServer }                               from "node:http";
-import type { IncomingMessage }                       from "node:http";
 import { WebSocketServer, WebSocket }                 from "ws";
 import { AdminAuthGate }                              from "../src/admin-auth-gate.js";
 import type { CapabilityProvider }                    from "@lararium/keyhive";
