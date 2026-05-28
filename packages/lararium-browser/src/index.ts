@@ -29,8 +29,8 @@ export {
 } from "./browser-genesis.js";
 export type { GenesisReconcileResult } from "./browser-genesis.js";
 
-export { openBrowserAdminVm } from "./open-browser-admin-vm.js";
+export { openBrowserAdminVm, VerbTable } from "./open-browser-admin-vm.js";
 export type {
   BrowserAdminVmOptions, BrowserAdminVmResult,
-  BrowserVerbTable, BrowserVerbHandler, BrowserJobPlacementRequest,
+  BrowserVerbTable, VerbReactor, BrowserJobPlacementRequest,
 } from "./open-browser-admin-vm.js";

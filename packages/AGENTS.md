@@ -108,7 +108,7 @@ Runtime       openNodeLarPeer (server)           finds docs, wires layers; never
 
 `genesis/social-bootstrap.json` materializes as a TW5 plugin container tagged `$:/tags/LarariumBootstrap`. The `lararium-bootstrap-sync` startup module promotes the container after the syncer initializes, so the bundle syncs as one package and individual user overrides remain editable.
 
-Admin state — operator-private to one node, federated to the operator's own devices via `cap=infrastructure` device delegations — lives in its own Automerge doc at `lar:///ha.ka.ba/@lararium/@admin` (bag URI). The logical room presents at `lar:///ha.ka.ba/@lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary.
+Admin state — operator-private to one node, federated to the operator's own devices via `cap=admin` device delegations — lives in its own Automerge doc at `lar:///ha.ka.ba/@lararium/@admin` (bag URI). The logical room presents at `lar:///ha.ka.ba/@lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary.
 
 Projections register as kinds with `LarProjectionRegistry`; configs are programmatic now, will move to admin-room tiddlers tagged `$:/tags/LarariumProjection` once the admin VM lands (S5.6).
 

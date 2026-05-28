@@ -51,7 +51,7 @@ Other Signer factories surfaced:
 6. signedDelegation is a `SignedDelegation` ready for transport.
 ```
 
-**Mapping to our bag model:** each Lararium bag (Automerge doc URL) IS a Keyhive `Document`. Members of a bag-doc carry caps over that bag. `cap=infrastructure` for own devices = `addMember(device, adminBag.toMembered(), "admin")`. `cap=promote` on a specific corpus bag = `addMember(peer, corpusBag.toMembered(), "admin"|"write")` — depends on what abilities Keyhive's `Access` enum offers (we tried only "admin"; need to enumerate).
+**Mapping to our bag model:** each Lararium bag (Automerge doc URL) IS a Keyhive `Document`. Members of a bag-doc carry caps over that bag. `cap=admin` for own devices = `addMember(device, adminBag.toMembered(), "admin")`. `cap=promote` on a specific corpus bag = `addMember(peer, corpusBag.toMembered(), "admin"|"write")` — depends on what abilities Keyhive's `Access` enum offers (we tried only "admin"; need to enumerate).
 
 **Pitfalls discovered:**
 - `ChangeId` has a public `constructor(bytes: Uint8Array)`, NOT a static `fromBytes`. The probe's first iteration assumed `fromBytes` — failed silently.

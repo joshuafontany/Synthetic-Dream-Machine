@@ -106,7 +106,7 @@ It does not depend on `@lararium/tw5`, `@lararium/node`, or `@lararium/browser`.
 The founding ceremony produces an unforgeable membership proof that any vessel holding
 the operator seed can verify from cold. No server participates in this verification.
 The CRDT events that carry the Gates B and C proofs travel in the admin doc — the
-same doc that syncs only to `cap=infrastructure` vessels.
+same doc that syncs only to `cap=admin` vessels.
 
 The operator seed MUST NOT enter any Automerge doc. The ceremony reads it to derive
 the Individual keypair and then releases it. The keypair itself (public material only)

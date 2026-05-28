@@ -90,7 +90,7 @@ These planning docs follow one architectural law:
 | — | **YIN ontology + typo closure** | ✅ Done | `runSovereignisland` → `runSovereignWorker` in 3 entry files. `worker: island` → `worker: Worker`. `node-vm-manager.test.ts` → `vessel-island-pool.test.ts`. `vm-manager-echo.mjs` → `vm-pool-echo.mjs`. Fixture binding resolution uses `b.writable`. 195/195. |
 | — | **§8 archipelago gate** | ✅ Done | `federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair via `MessageChannelNetworkAdapter`. Island Sovereignty Law §8 written. Gate proof cites node + browser (`browser-repo-in-island.test.ts` test 2). 196/196 tests. |
 | — | **S9 / lararium-browser S4 real boot** | ✅ Done | `openBrowserVessel`: WebCrypto Ed25519 keypair (IDB-persisted), `runFoundingCeremony` isomorphic (Buffer→btoa/atob in `ceremony-core.ts` + `admin-event-store.ts`), Gates A/B/C verified in real Chromium, `docHandle.broadcast()` wired. `browser-operator-key.ts` + `open-browser-vessel.ts` + `BrowserVesselIslandPoolOptions.workerScriptUrl` optional. `browser-founding-ceremony.test.ts` 7/7 Playwright. 19/19 browser tests. |
-| 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
+| 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=admin` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
@@ -125,7 +125,7 @@ Goal: live wiki authoring safe under sustained operator editing on any operator 
 
 Goal: operator vessels federate infrastructure state; non-operator vessels cannot; invalid intent gets rejected before edge work.
 
-- [ ] Gate admin-doc WebSocket ingress on Keyhive `cap=infrastructure` proof.
+- [ ] Gate admin-doc WebSocket ingress on Keyhive `cap=admin` proof.
 - [ ] Operator devices only; room peers rejected.
 - [ ] Preserve job/receipt coordination surface.
 - [ ] Negative smoke: non-infrastructure peer cannot sync admin state.

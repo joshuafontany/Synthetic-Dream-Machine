@@ -79,7 +79,7 @@ Next work, in order:
 1. S9 S4 / lararium-browser: real boot path — IndexedDB storage adapter,
    WebCrypto keypair, founding ceremony via @lararium/keyhive in browser vessel,
    presence via broadcast(). Charter: bags/@lararium/v0.1/browser/pono-charter.md (exists).
-2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=infrastructure.
+2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=admin.
 3. Path M: finish shared job/receipt contracts; ceremony meaning stays in TW5 VM pool.
 4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
 
@@ -1074,7 +1074,7 @@ These two arcs together complete the isomorphic vessel law across all vessel typ
 
 ### Path L / S7.4 — Admin Doc Ingress Trust Gate
 
-- Gate admin-doc WebSocket ingress on Keyhive `cap=infrastructure` proof.
+- Gate admin-doc WebSocket ingress on Keyhive `cap=admin` proof.
 - Operator-owned vessels only; non-operator vessels rejected at the ingress.
 - Preserve command-tiddler coordination surface.
 - Negative smoke: non-infrastructure vessel cannot sync admin state.

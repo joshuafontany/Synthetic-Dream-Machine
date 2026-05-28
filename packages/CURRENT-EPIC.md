@@ -18,7 +18,7 @@
 >
 > S6 was never opened in code — `social-doc.ts` does not exist.  
 > ROADMAP Priority 1 = **S9 / lararium-browser S4 real boot** (IndexedDB + WebCrypto + keyhive founding ceremony + `broadcast()` presence).  
-> ROADMAP Priority 2 = **L / S7.4** — admin-doc ingress trust gate (`cap=infrastructure`).  
+> ROADMAP Priority 2 = **L / S7.4** — admin-doc ingress trust gate (`cap=admin`).  
 > ROADMAP Priority 3 = **M** — local intent bridge (command/receipt contracts + stdio transport).  
 >
 > Design content in this file that aligns with pono models is kept intact as reference material.
@@ -146,7 +146,7 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 
 ### S7 — Circles + Identities Capability Layer ⬜ Deferred (design doc only)
 
-> **ROADMAP note (2026-05-27):** The nearest active guard for this work is **ROADMAP Priority 2 — L / S7.4** (admin-doc ingress trust gate: `cap=infrastructure` Keyhive proof; non-operator vessels rejected).
+> **ROADMAP note (2026-05-27):** The nearest active guard for this work is **ROADMAP Priority 2 — L / S7.4** (admin-doc ingress trust gate: `cap=admin` Keyhive proof; non-operator vessels rejected).
 > The full Circles + Identities capability delegation chain comes after S9 and L close.
 > Canonical reference: `packages/ROADMAP.md` Path L.
 
@@ -169,7 +169,7 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 ### S8 — Lares Command Surface + Local Intent Bridge ⬜ Deferred
 
 > **ROADMAP note (2026-05-27):** This sprint's intent splits across two active ROADMAP paths:
-> - **Priority 2 — L / S7.4**: admin-doc ingress trust gate (operator vessels with `cap=infrastructure` only).
+> - **Priority 2 — L / S7.4**: admin-doc ingress trust gate (operator vessels with `cap=admin` only).
 > - **Priority 3 — M**: local intent bridge — shared job/receipt contracts, ceremony meaning in TW5 VM pool, transports as edge adaptation.
 > `lares-cli/src/admin-connector.ts` stubs exist; `stdio` transport is the missing seam.
 > Canonical reference: `packages/ROADMAP.md` Paths L and M.

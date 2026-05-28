@@ -96,7 +96,7 @@ membership in a causal island it does not own. Delegation flows from the operato
 root key outward, never inward from a relay or server.
 
 **OP-E4 — Ea at the admin ingress.**
-Admin-doc WebSocket ingress gates on `cap=infrastructure` proof. Non-operator
+Admin-doc WebSocket ingress gates on `cap=admin` proof. Non-operator
 vessels receive no admin state. The proof check happens on the receiving vessel
 before any doc change applies.
 

@@ -25,12 +25,13 @@ import {
   type AdminMsg_JobResult,
   type BatchMode,
   type JobTiddler,
+  type CapabilityVerifier,
 } from "@lararium/mesh";
 import { placeVmJob } from "./job-vm.js";
 import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
-export function makeAdminBehavior(): IslandBehavior {
+export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior {
   let _dispatcher: JobDispatcher | null = null;
 
   const _pendingDelegations = new Map<string, {
@@ -62,6 +63,7 @@ export function makeAdminBehavior(): IslandBehavior {
         admin:    composite,
         registry,
         routeFn:  (job) => _routeToMain(job, post),
+        ...(verifier ? { verifier } : {}),
       });
       _dispatcher.start();
     },

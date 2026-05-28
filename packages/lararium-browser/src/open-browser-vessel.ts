@@ -72,8 +72,8 @@ import {
   reconcileGenesisUpdate, writeGenesisBytesToOpfs,
 }                                            from "./browser-genesis.js";
 import {
-  openBrowserAdminVm,
-  type BrowserAdminVmResult, type BrowserVerbTable,
+  openBrowserAdminVm, VerbTable,
+  type BrowserAdminVmResult,
 }                                            from "./open-browser-admin-vm.js";
 
 // ── Bootstrap artifact ────────────────────────────────────────────────────────
@@ -120,7 +120,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   /** URL of the compiled browser wiki Worker script. Required for primary wiki island boot. */
   workerScriptUrl?: URL;
   /** Optional verb registry for admin delegation. If absent, only "echo" is wired. */
-  verbTable?:      BrowserVerbTable;
+  verbTable?:      VerbTable;
 }
 
 export interface BrowserVesselResult extends LarariumVesselResult<
@@ -446,9 +446,9 @@ export async function openBrowserVessel(
     });
 
     // Wire verb registry — minimal browser surface (echo + verbs from caller).
-    const registry: BrowserVerbTable = new Map(verbTable ?? []);
+    const registry: VerbTable = verbTable ?? new VerbTable();
     if (!registry.has("echo")) {
-      registry.set("echo", async (args) => ({ echoed: args }));
+      registry.register("echo", async (args) => ({ echoed: args }));
     }
     admin.mountMainVerbs(registry);
 

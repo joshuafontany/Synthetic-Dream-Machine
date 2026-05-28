@@ -100,7 +100,7 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 
 **After live multiplayer → chat-as-bag** — conversation turns as tiddlers in a shared bag. Operator writes; Lares instance reads via CRDT sync and responds. Both sides see the same document. The conversation persists in the operator's own fabric. No server. No log. A record.
 
-**Independent arc: Path L / S7.4** — admin-doc WebSocket ingress gated on Keyhive `cap=infrastructure`. Does not depend on S9. Opens when the keyhive capability proof surface matures.
+**Independent arc: Path L / S7.4** — admin-doc WebSocket ingress gated on Keyhive `cap=admin`. Does not depend on S9. Opens when the keyhive capability proof surface matures.
 
 <<~/ahu >>
 

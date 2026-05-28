@@ -23,9 +23,11 @@ import {
   ADMIN_BAG_ID, CompositeStore, AutomergeDocStore, emptyLarDoc,
   mkManifest, mkAdminPlaceJob, mkAdminJobResult,
   isIslandToVesselMsg,
-  type BagBinding, type LarDoc,
+  type BagBinding, type LarDoc, type CapabilityVerifier,
 } from "@lararium/mesh";
 import type { AdminMsg_DelegateJob, IslandMsg_Ea } from "@lararium/mesh";
+import { runLocalJob, VerbTable } from "@lararium/tw5";
+export type { VerbReactor } from "@lararium/tw5";
 
 // ── Types re-used from open-admin-vm (Node) ───────────────────────────────────
 
@@ -51,19 +53,19 @@ export interface BrowserAdminVmResult {
    */
   workerEa:       Promise<void>;
   /**
-   * Wire the vessel delegation registry. Call after keyhive boots, before
-   * awaiting workerEa. Jobs arriving before registry is set are rejected.
+   * Wire the vessel delegation registry and verifier.
+   * Call after keyhive boots, before awaiting workerEa.
+   * Jobs arriving before registry is set are rejected.
    */
-  mountMainVerbs: (registry: BrowserVerbTable) => void;
+  mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /** Place a volatile job in the admin island's TW5 wiki. */
   placeJob:       (opts: BrowserJobPlacementRequest) => void;
   /** Terminate the admin island Worker. */
   dispose:        () => void;
 }
 
-/** Minimal verb registry for browser admin island delegation. */
-export type BrowserVerbHandler = (args: Record<string, unknown>) => Promise<unknown>;
-export type BrowserVerbTable   = Map<string, BrowserVerbHandler>;
+export { VerbTable };
+export type { VerbTable as BrowserVerbTable };
 
 export interface BrowserJobPlacementRequest {
   verb:         string;
@@ -79,7 +81,8 @@ export async function openBrowserAdminVm(
 ): Promise<BrowserAdminVmResult> {
   const { repo, adminUrl, coreHash, bagBindings, workerScriptUrl } = opts;
 
-  let _registry: BrowserVerbTable | null = null;
+  let _registry: VerbTable | null = null;
+  let _verifier: CapabilityVerifier | null = null;
 
   // ── Admin doc handle (keyhive + gate reads) ──────────────────────────────
   const adminHandle = await (async () => {
@@ -134,16 +137,30 @@ export async function openBrowserAdminVm(
 
     if (raw.type === "admin:delegate-job") {
       const msg = raw as AdminMsg_DelegateJob;
-      const handler = _registry?.get(msg.verb);
-      if (!handler) {
+      if (!_registry) {
         worker.postMessage(mkAdminJobResult({
           requestId: msg.requestId,
-          error: `[open-browser-admin-vm] no handler for verb="${msg.verb}"`,
+          error: `[open-browser-admin-vm] delegate-job received before mountMainVerbs — verb="${msg.verb}" dropped`,
         }));
         return;
       }
-      handler(msg.args as unknown as Record<string, unknown>).then((result) => {
-        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result: result as Record<string, unknown> }));
+      const jobLike = {
+        title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
+        requestId:   msg.requestId,
+        verb:        msg.verb,
+        args:        msg.args,
+        requestedBy: msg.requestedBy,
+        requestedAt: new Date().toISOString(),
+        targets:     msg.targets ?? [],
+        batchMode:   (msg.batchMode ?? "best-effort") as import("@lararium/mesh").BatchMode,
+        status:      "pending" as const,
+      };
+      runLocalJob(jobLike, {
+        admin:    composite,
+        registry: _registry,
+        ...(_verifier ? { verifier: _verifier } : {}),
+      }).then((result) => {
+        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result }));
       }).catch((err: unknown) => {
         worker.postMessage(mkAdminJobResult({
           requestId: msg.requestId,
@@ -161,7 +178,10 @@ export async function openBrowserAdminVm(
     adminHandle,
     composite,
     workerEa,
-    mountMainVerbs: (registry) => { _registry = registry; },
+    mountMainVerbs: (registry, verifier?) => {
+      _registry = registry;
+      _verifier = verifier ?? null;
+    },
     placeJob: (jobOpts) => {
       worker.postMessage(mkAdminPlaceJob({
         verb:        jobOpts.verb,
