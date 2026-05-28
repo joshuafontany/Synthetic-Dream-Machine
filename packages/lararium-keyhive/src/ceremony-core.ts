@@ -188,6 +188,8 @@ export interface DeviceAdmitCoreInput {
   /** Cap events in AdminEventStore-compatible form: base64 bytes + variant string. */
   capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
   syncUrl:               string | null;
+  /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
+  islandDocUrl?:         string | null;
 }
 
 /**
@@ -200,7 +202,7 @@ export async function runDeviceAdmitCore(
 ): Promise<DeviceAdmitPayload> {
   const {
     operatorSeed, personGroupDocIdHex, personGroupAgentIdHex,
-    meshCabalDocIdHex, capEvents, syncUrl,
+    meshCabalDocIdHex, capEvents, syncUrl, islandDocUrl,
   } = input;
 
   const keyhive = new KeyhiveProvider();
@@ -234,6 +236,7 @@ export async function runDeviceAdmitCore(
     meshCabalDocIdHex,
     capEvents,
     syncUrl,
+    ...(islandDocUrl != null ? { islandDocUrl } : {}),
   };
 }
 

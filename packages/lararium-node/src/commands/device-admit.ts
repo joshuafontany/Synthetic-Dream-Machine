@@ -30,10 +30,12 @@ import { loadOperatorSigningSeed } from "../operator-key.js";
 export type { DeviceAdmitPayload } from "@lararium/keyhive";
 
 export interface DeviceAdmitOptions {
-  readonly storageDir?: string;
-  readonly genesisDir?: string;
-  readonly outPath?:    string;
-  readonly syncUrl?:    string;
+  readonly storageDir?:    string;
+  readonly genesisDir?:    string;
+  readonly outPath?:       string;
+  readonly syncUrl?:       string;
+  /** Automerge URL of this vessel's genesis island — included in payload for peer-sync delivery. */
+  readonly islandDocUrl?:  string | null;
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
@@ -118,7 +120,8 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
     personGroupAgentIdHex,
     meshCabalDocIdHex,
     capEvents,
-    syncUrl: opts.syncUrl ?? null,
+    syncUrl:      opts.syncUrl      ?? null,
+    islandDocUrl: opts.islandDocUrl ?? null,
   });
 
   const json = JSON.stringify(payload, null, 2);

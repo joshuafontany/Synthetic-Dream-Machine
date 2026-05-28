@@ -20,3 +20,17 @@ export {
   openVesselIdb, idbGet, idbPut,
 } from "./browser-operator-key.js";
 export type { BrowserOperatorIdentity } from "./browser-operator-key.js";
+
+export {
+  loadGenesisIslandFromBytes, findGenesisIsland,
+  reconcileGenesisUpdate,
+  writeGenesisBytesToOpfs, readGenesisBytesFromOpfs,
+  genesisCidFromBytes,
+} from "./browser-genesis.js";
+export type { GenesisReconcileResult } from "./browser-genesis.js";
+
+export { openBrowserAdminVm } from "./open-browser-admin-vm.js";
+export type {
+  BrowserAdminVmOptions, BrowserAdminVmResult,
+  BrowserVerbTable, BrowserVerbHandler, BrowserJobPlacementRequest,
+} from "./open-browser-admin-vm.js";

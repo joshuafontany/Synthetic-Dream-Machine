@@ -40,4 +40,11 @@ export interface DeviceAdmitPayload {
   readonly meshCabalDocIdHex:      string;
   readonly capEvents:              ReadonlyArray<{ variant: string; bytes: string }>;
   readonly syncUrl:                string | null;
+  /**
+   * Automerge URL of the genesis island doc on the issuing vessel's Repo.
+   * Browser vessels call repo.find(islandDocUrl) over the WebSocket to sync
+   * the genesis island (TW5 core blob + sigil tiddlers) without a separate
+   * binary delivery. Absent on payloads from older vessels; treated as null.
+   */
+  readonly islandDocUrl?:          string | null;
 }

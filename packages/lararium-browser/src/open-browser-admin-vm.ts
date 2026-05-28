@@ -1,0 +1,178 @@
+/**
+ * openBrowserAdminVm — spawn the sovereign browser admin island.
+ *
+ * Browser platform counterpart of openAdminVm (Node). Platform surface swapped:
+ *   Node:    import { Worker } from "worker_threads"; worker.on("message", ...)
+ *   Browser: new Worker(url, { type: "module" }); worker.addEventListener(...)
+ *
+ * All message types, manifest protocol, delegation loop, and workerEa semantics
+ * are identical to the Node path — they live in @lararium/mesh (isomorphic).
+ *
+ * Boot ordering guarantee:
+ *   workerEa resolves only after the admin island sends "ea" — TW5 live, all
+ *   CRDT bags synced, drain loop running, JobDispatcher subscribed.
+ *   openBrowserVessel awaits workerEa before emitting "live".
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/open-browser-admin-vm
+ */
+
+import { Repo }                              from "@automerge/automerge-repo";
+import type { AutomergeUrl, DocHandle }      from "@automerge/automerge-repo";
+import { MessageChannelNetworkAdapter }      from "@automerge/automerge-repo-network-messagechannel";
+import {
+  ADMIN_BAG_ID, CompositeStore, AutomergeDocStore, emptyLarDoc,
+  mkManifest, mkAdminPlaceJob, mkAdminJobResult,
+  isIslandToVesselMsg,
+  type BagBinding, type LarDoc,
+} from "@lararium/mesh";
+import type { AdminMsg_DelegateJob, IslandMsg_Ea } from "@lararium/mesh";
+
+// ── Types re-used from open-admin-vm (Node) ───────────────────────────────────
+
+export interface BrowserAdminVmOptions {
+  repo:             Repo;
+  adminUrl:         string;
+  /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
+  coreHash:         string | null;
+  /** Ordered bag capability tokens for the admin island's full recipe. */
+  bagBindings:      readonly BagBinding[];
+  /** URL of the compiled browser admin island Worker script. */
+  workerScriptUrl:  URL;
+}
+
+export interface BrowserAdminVmResult {
+  /** Live admin doc handle — for keyhive gate reads and cap-event writes. */
+  adminHandle:    DocHandle<LarDoc>;
+  /** Single-layer CompositeStore backed by adminHandle. */
+  composite:      CompositeStore;
+  /**
+   * Resolves when the admin island sends "ea" — TW5 live, bags synced,
+   * drain loop running, JobDispatcher subscribed. Vessel awaits this before "live".
+   */
+  workerEa:       Promise<void>;
+  /**
+   * Wire the vessel delegation registry. Call after keyhive boots, before
+   * awaiting workerEa. Jobs arriving before registry is set are rejected.
+   */
+  mountMainVerbs: (registry: BrowserVerbTable) => void;
+  /** Place a volatile job in the admin island's TW5 wiki. */
+  placeJob:       (opts: BrowserJobPlacementRequest) => void;
+  /** Terminate the admin island Worker. */
+  dispose:        () => void;
+}
+
+/** Minimal verb registry for browser admin island delegation. */
+export type BrowserVerbHandler = (args: Record<string, unknown>) => Promise<unknown>;
+export type BrowserVerbTable   = Map<string, BrowserVerbHandler>;
+
+export interface BrowserJobPlacementRequest {
+  verb:         string;
+  args:         Record<string, unknown>;
+  requestedBy?: string;
+  requestId?:   string;
+}
+
+const HANDSHAKE_TIMEOUT_MS = 15_000;
+
+export async function openBrowserAdminVm(
+  opts: BrowserAdminVmOptions,
+): Promise<BrowserAdminVmResult> {
+  const { repo, adminUrl, coreHash, bagBindings, workerScriptUrl } = opts;
+
+  let _registry: BrowserVerbTable | null = null;
+
+  // ── Admin doc handle (keyhive + gate reads) ──────────────────────────────
+  const adminHandle = await (async () => {
+    const h = await repo.find<LarDoc>(adminUrl as AutomergeUrl);
+    try { await h.whenReady(["ready", "unavailable"]); } catch { /* fallback */ }
+    if (h.state === "unavailable") return repo.create<LarDoc>(emptyLarDoc());
+    return h;
+  })();
+
+  // ── Vessel composite (cap-event + receipt writes) ────────────────────────
+  const composite  = new CompositeStore();
+  const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
+  composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
+  adminStore.markSyncComplete();
+
+  // ── MessageChannel — island ↔ vessel Repo sync ───────────────────────────
+  const { port1: mainPort, port2: syncPort } = new MessageChannel();
+  repo.networkSubsystem.addNetworkAdapter(new MessageChannelNetworkAdapter(mainPort));
+
+  // ── Spawn admin Worker ────────────────────────────────────────────────────
+  const worker = new Worker(workerScriptUrl, { type: "module" });
+  worker.addEventListener("error", (e) =>
+    console.error("[open-browser-admin-vm] worker error:", e.message),
+  );
+
+  // ── workerEa Promise ──────────────────────────────────────────────────────
+  let _resolve!: () => void;
+  let _reject!:  (err: Error) => void;
+  const workerEa = new Promise<void>((res, rej) => { _resolve = res; _reject = rej; });
+
+  const eaTimer = setTimeout(
+    () => _reject(new Error("[open-browser-admin-vm] admin island ea timeout")),
+    HANDSHAKE_TIMEOUT_MS,
+  );
+
+  // ── Message routing ───────────────────────────────────────────────────────
+  worker.addEventListener("message", (e: MessageEvent) => {
+    const raw = e.data as unknown;
+    if (!isIslandToVesselMsg(raw)) return;
+
+    if (raw.type === "ea") {
+      clearTimeout(eaTimer);
+      _resolve();
+      return;
+    }
+
+    if (raw.type === "fault") {
+      clearTimeout(eaTimer);
+      _reject(new Error(`[open-browser-admin-vm] admin island fault: ${(raw as { error: string }).error}`));
+      return;
+    }
+
+    if (raw.type === "admin:delegate-job") {
+      const msg = raw as AdminMsg_DelegateJob;
+      const handler = _registry?.get(msg.verb);
+      if (!handler) {
+        worker.postMessage(mkAdminJobResult({
+          requestId: msg.requestId,
+          error: `[open-browser-admin-vm] no handler for verb="${msg.verb}"`,
+        }));
+        return;
+      }
+      handler(msg.args as unknown as Record<string, unknown>).then((result) => {
+        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result: result as Record<string, unknown> }));
+      }).catch((err: unknown) => {
+        worker.postMessage(mkAdminJobResult({
+          requestId: msg.requestId,
+          error: err instanceof Error ? err.message : String(err),
+        }));
+      });
+    }
+  });
+
+  // ── Deliver manifest ──────────────────────────────────────────────────────
+  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, coreHash, { bagBindings });
+  worker.postMessage(manifestMsg, [syncPort]);
+
+  return {
+    adminHandle,
+    composite,
+    workerEa,
+    mountMainVerbs: (registry) => { _registry = registry; },
+    placeJob: (jobOpts) => {
+      worker.postMessage(mkAdminPlaceJob({
+        verb:        jobOpts.verb,
+        args:        jobOpts.args,
+        requestedBy: jobOpts.requestedBy ?? "browser-vessel",
+        ...(jobOpts.requestId ? { requestId: jobOpts.requestId } : {}),
+      }));
+    },
+    dispose: () => {
+      clearTimeout(eaTimer);
+      void worker.terminate();
+    },
+  };
+}
