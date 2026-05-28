@@ -45,28 +45,11 @@ import {
   MemoryTiddlerStore,
 } from "@lararium/tw5";
 import type { IslandToVesselMsg } from "@lararium/mesh";
-import type { TW5Engine } from "@lararium/tw5";
-
-// ── BrowserIslandBehavior — gen_island callback module (browser) ──────────
-
-export interface BrowserIslandContext {
-  wikiUri:   string;
-  composite: CompositeStore;
-  tw5:       TW5Engine;
-  handles:   Map<string, DocHandle<LarDoc>>;
-  post:      (msg: IslandToVesselMsg) => void;
-}
-
-export interface BrowserIslandBehavior {
-  writeBagId: string;
-  onEa(ctx: BrowserIslandContext): void | Promise<void>;
-  onSignal(type: string, raw: unknown, ctx: BrowserIslandContext): boolean;
-  onDemote(ctx: BrowserIslandContext): void | Promise<void>;
-}
+import type { IslandContext, IslandBehavior } from "@lararium/tw5";
 
 // ── runBrowserSovereignWorker — the browser gen_island kernel ────────────
 
-export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void {
+export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   const _post = (msg: IslandToVesselMsg) => self.postMessage(msg);
   const handler = new IslandKernel(_post);
 
@@ -74,7 +57,7 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
   let _handles:          Map<string, DocHandle<LarDoc>>     = new Map();
   let _writableHandleId: string | null                      = null;
   let _composite:        CompositeStore | null              = null;
-  let _ctx:              BrowserIslandContext | null        = null;
+  let _ctx:              IslandContext | null               = null;
 
   // ── rAF drain loop ────────────────────────────────────────────────────────
   // Safari does not ship requestAnimationFrame in DedicatedWorkerGlobalScope.

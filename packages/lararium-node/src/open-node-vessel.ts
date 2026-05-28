@@ -414,8 +414,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     idleMs:          300_000,   // 5 min
     sweepIntervalMs:  30_000,   // 30 sec
     onEvict: async (bagId) => {
-      // vmManager.unmountWiki captures a VmSnapshot and tears down the TW5Engine.
-      // No-op if bagId is pinned or has no live VM.
+      // TW5 lives inside the island Worker — unmountWiki sends teardown, awaits ack,
+      // then terminates the Worker. No TW5Engine reference exists on the main thread.
+      // No-op if bagId is pinned or has no live island.
       await vmManager.unmountWiki(bagId);
       console.log(`[bag-residency] evicted ${bagId} (vm unmounted, compact-then-drop reserved for repo#358)`);
     },

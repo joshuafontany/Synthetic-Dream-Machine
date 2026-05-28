@@ -52,34 +52,9 @@ import {
   MemoryTiddlerStore,
 } from "@lararium/tw5";
 import type { IslandToVesselMsg } from "@lararium/mesh";
-import type { TW5Engine } from "@lararium/tw5";
+import type { IslandContext, IslandBehavior } from "@lararium/tw5";
 
-// ── IslandBehavior — the OTP gen_island callback module ───────────────────
-
-export interface IslandContext {
-  wikiUri:   string;
-  composite: CompositeStore;
-  tw5:       TW5Engine;
-  handles:   Map<string, DocHandle<LarDoc>>;
-  post:      (msg: IslandToVesselMsg) => void;
-}
-
-/**
- * Caller-supplied behavior module. Parallel to OTP's callback module passed to gen_island.
- *
- * - `writeBagId` — IslandAdaptor write target. Admin: ADMIN_BAG_ID. Wiki: BAG_IDS.scratch.
- * - `onEa`       — called after CompositeStore + IslandAdaptor wired, before ea declaration.
- * - `onSignal`   — called for every non-lifecycle message. Return true if handled.
- * - `onDemote`   — called before drain loop stops.
- */
-export interface IslandBehavior {
-  writeBagId: string;
-  onEa(ctx: IslandContext): void | Promise<void>;
-  onSignal(type: string, raw: unknown, ctx: IslandContext): boolean;
-  onDemote(ctx: IslandContext): void | Promise<void>;
-}
-
-// ── runSovereignisland — the OTP gen_island kernel ────────────────────────
+// ── runSovereignWorker — the OTP gen_island kernel ────────────────────────
 
 export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior)): void {
   let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;

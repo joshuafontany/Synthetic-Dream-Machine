@@ -44,27 +44,31 @@
  *   - Web3 law: no HTTP/RPC control plane. Coordination is TW5 wiki events + CRDT sync.
  *   - Capability hooks: ctx.cap is bound per-job to requestedBy DID. S7
  *     keyhive verification lands here without handler changes.
+ *
+ * Isomorphic: no Node or browser platform APIs. Runs in any sovereign Worker.
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/job-dispatcher
  */
 
 import {
-  type JobTiddler, type CompositeStore,
+  type JobTiddler,
+  type CompositeStore,
   type CapabilityVerifier,
   parseJobTiddler,
   JOB_URI_PREFIX,
 } from "@lararium/mesh";
-import { dispatchVmJobLifecycle, placeVmJob, type TW5Engine } from "@lararium/tw5";
+import { dispatchVmJobLifecycle, placeVmJob } from "./job-vm.js";
+import type { TW5Engine } from "./tw5-vm.js";
 import { emitJobInboxSignal } from "./job-inbox-signal.js";
 import type { JobPlacementRequest } from "./job-inbox-signal.js";
 import { runLocalJob } from "./job-local-dispatch.js";
 
 export interface JobContext {
-  readonly admin:   CompositeStore;
-  /** The parsed job tiddler — handlers may read targets, batchMode, args. */
-  readonly job:     JobTiddler;
-  readonly cap:     (access: import("@lararium/mesh").CapabilityAccess, bagUrl: string) => Promise<import("@lararium/mesh").CapabilityVerifyResult>;
+  readonly admin: CompositeStore;
+  readonly job:   JobTiddler;
+  readonly cap:   (access: import("@lararium/mesh").CapabilityAccess, bagUrl: string) => Promise<import("@lararium/mesh").CapabilityVerifyResult>;
 }
 
-/** VerbReactor shape: pure function over (args, context) → result map. */
 export type VerbReactor = (
   args:    Readonly<Record<string, unknown>>,
   context: JobContext,
@@ -86,18 +90,11 @@ export class VerbTable {
 }
 
 export interface JobDispatcherOptions {
-  /** Admin TW5 engine — local job tiddlers are written to and watched on its wiki. */
-  readonly adminVm:  TW5Engine;
-  /** Admin composite store — receipts and inbox tombstones go here. */
-  readonly admin:    CompositeStore;
-  readonly registry: VerbTable;
+  readonly adminVm:   TW5Engine;
+  readonly admin:     CompositeStore;
+  readonly registry:  VerbTable;
   readonly verifier?: CapabilityVerifier;
-  /**
-   * Called when a verb is not in the local registry (cross-island route).
-   * The admin island uses this to route wiki-scope jobs to the vessel VerbTable.
-   * If absent, unregistered verbs throw "no handler registered".
-   */
-  readonly routeFn?: (job: JobTiddler) => Promise<Record<string, unknown>>;
+  readonly routeFn?:  (job: JobTiddler) => Promise<Record<string, unknown>>;
 }
 
 export class JobDispatcher {
@@ -110,7 +107,6 @@ export class JobDispatcher {
   start(): void {
     if (this.unsubWiki) return;
 
-    // ── LOCAL path: watch TW5 wiki change events ────────────────────────────
     const wiki = this.opts.adminVm.$tw.wiki;
     const onWikiChange = (changedTiddlers: Record<string, { deleted?: boolean }>) => {
       for (const title of Object.keys(changedTiddlers)) {
@@ -128,7 +124,7 @@ export class JobDispatcher {
           () => {
             if (this.opts.registry.has(job.verb)) {
               return runLocalJob(job, {
-                admin: this.opts.admin,
+                admin:    this.opts.admin,
                 registry: this.opts.registry,
                 ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
               });
@@ -144,14 +140,11 @@ export class JobDispatcher {
     wiki.addEventListener("change", onWikiChange);
     this.unsubWiki = () => wiki.removeEventListener("change", onWikiChange);
 
-    // ── REMOTE path: watch Automerge inbox (@admin/jobs/<id>) ──────────────
-    // External vessels (CLI, browser, future device vessels) write here.
-    // We translate to a volatile local job and tombstone the inbox tiddler.
     this.unsubAutomerge = this.opts.admin.subscribe((change) => {
       emitJobInboxSignal(change, {
-        admin: this.opts.admin,
+        admin:      this.opts.admin,
         isInFlight: (requestId) => this.inFlight.has(requestId),
-        placeJob: (job) => { this.placeJob(job); },
+        placeJob:   (job) => { this.placeJob(job); },
       }).catch((err) => {
         console.error("[job-dispatcher] inbox relay crashed:", err);
       });
@@ -165,11 +158,6 @@ export class JobDispatcher {
     this.unsubAutomerge?.(); this.unsubAutomerge = null;
   }
 
-  /**
-   * Place a volatile job tiddler in the admin TW5 wiki.
-   * The wiki change event fires and the local dispatch path picks it up.
-   * This is the pono path for all in-process callers.
-   */
   placeJob(opts: JobPlacementRequest): string {
     return placeVmJob(this.opts.adminVm, opts);
   }

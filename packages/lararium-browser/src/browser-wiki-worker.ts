@@ -17,9 +17,9 @@
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
 import { BAG_IDS }                   from "@lararium/mesh";
-import type { BrowserIslandBehavior } from "./browser-sovereign-island-model.js";
+import type { IslandBehavior } from "@lararium/tw5";
 
-const BrowserWikiBehavior: BrowserIslandBehavior = {
+const BrowserWikiBehavior: IslandBehavior = {
   writeBagId: BAG_IDS.scratch,
   onEa:       () => {},
   onSignal:   () => false,

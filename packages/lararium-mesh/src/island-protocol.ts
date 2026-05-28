@@ -34,6 +34,14 @@
 *                  `browser-repo-in-island.test.ts` test 2 (browser pool, docUrl non-null path).
  *      When this law holds, two vessels sharing a bag converge without any explicit sync call —
  *      the archipelago forms the moment the AutomergeUrl crosses the boundary.
+ *   9. TW5 SHALL NOT instantiate on the main thread. Every `TW5Engine` lives inside a sovereign
+ *      Worker (Node `worker_threads`, browser `Web Worker`, future WASM/UE5 runtimes).
+ *      The main thread holds `DocHandle` references and `CompositeStore` layers; it does not
+ *      hold or reference `TW5Engine`. Any code that calls `bootTw5()` or instantiates
+ *      `TW5Engine` outside a Worker constitutes a sovereignty violation.
+ *      Boot sites (all inside Workers): `lar-admin-island.ts` (Node admin),
+ *      `lar-wiki-island.ts` (Node wiki), `browser-wiki-worker.ts` (browser wiki),
+ *      `browser-admin-island.ts` (browser admin). Main-thread entry files carry no TW5 import.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.

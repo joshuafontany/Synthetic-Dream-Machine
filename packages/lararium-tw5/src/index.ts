@@ -67,4 +67,13 @@ export { parseBagStack, parsePlugins } from "@lararium/mesh";
 export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "@lararium/mesh";
 export type { CeremonyTiddler } from "@lararium/mesh";
 
+export type { IslandContext, IslandBehavior } from "./island-context.js";
+export { JobDispatcher, VerbTable } from "./job-dispatcher.js";
+export type { JobContext, VerbReactor, JobDispatcherOptions } from "./job-dispatcher.js";
+export { emitJobInboxSignal } from "./job-inbox-signal.js";
+export type { JobPlacementRequest, JobInboxRelayOptions } from "./job-inbox-signal.js";
+export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
+export type { CapVerify, RunLocalJobOptions } from "./job-local-dispatch.js";
+export { makeAdminBehavior } from "./admin-behavior.js";
+
 export { IslandKernel } from "./island-kernel.js";

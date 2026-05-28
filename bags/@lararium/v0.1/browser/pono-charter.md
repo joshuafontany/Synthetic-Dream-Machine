@@ -69,6 +69,21 @@ The Lararium browser vessel owns its root/frame contract.
 Any surviving reference to these tiddlers must live inside the plugin membrane
 or behind the named adapter boundary in `tw5-browser-surface.ts`.
 
+**BV-9 — Sovereign Worker boot requires `Content-Security-Policy: worker-src 'self'`.**
+The Worker URL passed via `adminWorkerUrl` / `workerScriptUrl` is an XSS injection sink
+(MDN classification). Pono sovereign deployment MUST emit a `Content-Security-Policy`
+response header containing `worker-src 'self'` from the serving layer (Caddy, nginx, or
+equivalent). This prevents any cross-origin script from being loaded as a Worker, which
+would bypass Island Sovereignty Law §1 (each island owns its own Repo and keypair).
+
+The `@lararium/browser` package itself does not set headers — it operates inside the
+browser security model. The obligation sits at the serving edge:
+- In the `Caddyfile`: `header Content-Security-Policy "worker-src 'self'; …"`
+- In Docker / deployment manifests: verified before any operator vessel goes live.
+
+During local development, the Vite dev server's same-origin constraint provides equivalent
+protection; no explicit CSP is required in that context.
+
 <<~/ahu >>
 
 <<~ ahu #package-law >>

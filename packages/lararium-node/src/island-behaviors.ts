@@ -31,22 +31,16 @@
 
 import {
   BAG_IDS,
-  ADMIN_BAG_ID,
-  mkAdminDelegateJob,
   mkWikiJobResult,
-  type AdminMsg_PlaceJob,
-  type AdminMsg_JobResult,
   type BatchMode,
-  type JobTiddler,
   type WikiMsg_PlaceJob,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
 import { placeVmJob, exportMemeText } from "@lararium/tw5";
-import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
 import { makePromoteReactor } from "./promote-handler.js";
-import type { IslandBehavior, IslandContext } from "./sovereign-island-model.js";
+import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 
 // ── Primary Wiki island behavior — disk projection + wiki dispatch ────────
 
@@ -127,81 +121,3 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
   };
 }
 
-// ── Admin island behavior — dispatch + relay ──────────────────────────────
-
-export function makeAdminBehavior(): IslandBehavior {
-  let _dispatcher: JobDispatcher | null = null;
-
-  // Pending delegation map — requestId → { resolve, reject }.
-  // Admin island posts AdminMsg_RelayJob for wiki-scope verbs; vessel
-  // executes and returns AdminMsg_JobResult. This map holds the Promise resolvers.
-  const _pendingDelegations = new Map<string, {
-    resolve: (result: Record<string, unknown>) => void;
-    reject:  (err: Error) => void;
-  }>();
-
-  function _routeToMain(job: JobTiddler, post: IslandContext["post"]): Promise<Record<string, unknown>> {
-    return new Promise((resolve, reject) => {
-      _pendingDelegations.set(job.requestId, { resolve, reject });
-      post(mkAdminDelegateJob({
-        requestId:   job.requestId,
-        verb:        job.verb,
-        args:        job.args as Record<string, unknown>,
-        requestedBy: job.requestedBy,
-        ...(job.targets?.length ? { targets: [...job.targets] } : {}),
-        ...(job.batchMode       ? { batchMode: String(job.batchMode) } : {}),
-      }));
-    });
-  }
-
-  return {
-    writeBagId: ADMIN_BAG_ID,
-
-    onEa({ tw5, composite, post }: IslandContext) {
-      const registry = new VerbTable();
-      _dispatcher = new JobDispatcher({
-        adminVm:  tw5,
-        admin:    composite,
-        registry,
-        routeFn:  (job) => _routeToMain(job, post),
-      });
-      _dispatcher.start();
-    },
-
-    onSignal(type: string, raw: unknown, { tw5, post }: IslandContext): boolean {
-      if (type === "admin:place-job") {
-        const msg = raw as AdminMsg_PlaceJob;
-        if (tw5) {
-          placeVmJob(tw5, {
-            verb:        msg.verb,
-            args:        msg.args,
-            requestedBy: msg.requestedBy,
-            ...(msg.targets   ? { targets:   msg.targets   } : {}),
-            ...(msg.batchMode ? { batchMode: msg.batchMode as BatchMode } : {}),
-            ...(msg.requestId ? { requestId: msg.requestId } : {}),
-          });
-        }
-        return true;
-      }
-
-      if (type === "admin:job-result") {
-        const msg = raw as AdminMsg_JobResult;
-        const pending = _pendingDelegations.get(msg.requestId);
-        if (pending) {
-          _pendingDelegations.delete(msg.requestId);
-          if (msg.error) pending.reject(new Error(msg.error));
-          else           pending.resolve(msg.result ?? {});
-        }
-        void post; // post available if needed for future acks
-        return true;
-      }
-
-      return false;
-    },
-
-    onDemote() {
-      _dispatcher?.stop();
-      _dispatcher = null;
-    },
-  };
-}

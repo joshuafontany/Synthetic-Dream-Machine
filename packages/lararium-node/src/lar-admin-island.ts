@@ -20,6 +20,6 @@
  */
 
 import { runSovereignWorker } from "./sovereign-island-model.js";
-import { makeAdminBehavior }  from "./island-behaviors.js";
+import { makeAdminBehavior }  from "@lararium/tw5";
 
 runSovereignWorker(makeAdminBehavior());
