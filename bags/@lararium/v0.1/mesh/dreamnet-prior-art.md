@@ -1,0 +1,575 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
+file-path    = "bags/@lararium/v0.1/mesh/dreamnet-prior-art.md"
+type         = "text/x-memetic-wikitext"
+register     = "CS"
+confidence   = 15
+mana         = 16
+manao        = 15
+manaoio      = 14
+role         = "prior art research synthesis: best practices and golden principles for DreamNet five-layer topology"
+tagspace     = "lararium"
+cacheable    = true
+retain       = true
+research-date = "2026-05-28"
+```
+<<~&#x0002;>>
+
+# DreamNet/Lares: Prior Art Research Synthesis
+
+*Research date: 2026-05-28. Sources fetched and synthesized from primary specifications, essays, and technical documentation.*
+
+---
+
+## Table of Contents
+
+1. [Source Syntheses](#source-syntheses)
+2. [Layer Mapping: Prior Art → DreamNet](#layer-mapping)
+3. [Where DreamNet Aligns with Best Practices](#alignment)
+4. [Where DreamNet Diverges and Why](#divergences)
+5. [Identified Gaps](#gaps)
+
+---
+
+## 1. Source Syntheses
+
+### 1.1 Ink & Switch — Local-First Software (2019)
+
+**Core Golden Principles:**
+
+1. **No Spinners**: The application must work without waiting for the network. Local state is primary; remote state is secondary.
+2. **Your Work Is Not Trapped on One Device**: Data must move freely across all devices belonging to a user.
+3. **The Network Is Optional**: A crash or server outage must never result in data loss or inability to work.
+4. **Collaboration with Your Colleagues**: Multiple users can work on the same document simultaneously, including while offline, with automatic merge on reconnect.
+5. **The Long Now**: Software must remain usable after the vendor disappears. Proprietary cloud lock-in is an existential risk to data.
+6. **Security and Privacy by Default**: The local-first model is privacy-preserving by construction: data lives on your machine first.
+7. **You Retain Ultimate Ownership and Control**: The user's device, not a server, is the authoritative source of truth.
+
+**Design Decisions Mapping to DreamNet:**
+
+| Ink & Switch Principle | DreamNet mapping |
+|---|---|
+| Local copy is primary | device-vessel holds authoritative local CRDT repo; outer layers cannot override |
+| Sync without coordinator | Automerge CRDT merge, no lock server |
+| Software longevity | CID genesis artifact as immutable protocol root — data remains readable after forks |
+| User ownership | Operator keypair on device-vessel; no outer layer holds signing keys |
+
+**Specific Prior Art Patterns:**
+- Triplicate — Ink & Switch's own local-first CMS prototype (demonstrates TW5-like wiki pattern)
+- Automerge (developed at Ink & Switch) — the CRDT library DreamNet uses directly
+- Pushpin — real-time collaborative tool with no server required
+
+---
+
+### 1.2 Automerge
+
+**Core Golden Principles:**
+
+1. **Network-agnostic data structure**: Automerge is a pure data library; it does not know or care about transport.
+2. **Immutable snapshots**: Every Automerge state object is an immutable value. Mutations produce new state objects.
+3. **Automatic merge, no coordinator**: CRDT semantics guarantee convergence without a master node.
+4. **Portable**: JS (Node, Electron, browser), Rust (WASM, C FFI, iOS). Same algorithm, same merge semantics, everywhere.
+5. **Operation history**: Full change log. Branch, diff, merge workflows are possible as a first-class feature.
+
+**Design Decisions:**
+- **Causal ordering via vector clocks** (Lamport counters embedded in actor IDs): No wall clock trust required.
+- **Conflict representation, not resolution**: Automerge retains both concurrent values as a conflict object. Application chooses which to display; the CRDT never silently drops writes.
+- **Actor IDs**: Each Automerge peer has a unique actor ID. This is the primitive from which DreamNet's operator keypairs can be derived.
+- **automerge-repo**: Higher-level layer providing storage adapters (IndexedDB, filesystem) and network adapters (BroadcastChannel, WebSocket, WebRTC).
+
+**Contrast with DreamNet:**
+- Automerge has no built-in access control. It merges everything from anyone who has the document. DreamNet adds the capability layer (ABILITY_LADDER) *on top of* CRDT merge — a principled separation that Automerge explicitly endorses.
+
+**Named Patterns:**
+- RGA (Replicated Growable Array) — underlying sequence CRDT for text
+- Columnar encoding (Kleppmann 2020) — reduces document overhead to ~1.5x size vs raw content
+- automerge-repo StorageAdapter / NetworkAdapter interfaces — the extension points DreamNet device-vessels should implement
+
+---
+
+### 1.3 UCAN — User Controlled Authorization Networks
+
+**Core Golden Principles:**
+
+1. **Trustless delegation**: Authority can be passed from peer to peer without an online Authorization Server. The chain of cryptographic signatures is the proof.
+2. **Certificate capabilities, not ACLs**: Authorization is a bearer token (like a movie ticket), not a list lookup (like a bouncer's clipboard). No server needs to be consulted at auth time.
+3. **Principle of Least Authority (PoLA)**: Every delegation MUST either restate or attenuate (narrow) its authority. You cannot grant what you do not have. You can always grant less.
+4. **Inversion of control**: The resource owner issues UCANs to agents; there is no Authorization Server sitting between requestor and resource. The resource IS the root of trust.
+5. **Content-addressed tokens**: Each UCAN hashes to a unique CIDv1. The token IS its own identity. Revocation is by CID.
+6. **Short expiry windows**: Keeping validity windows short limits blast radius.
+7. **DID-based principals**: All actors are identified by `did:key` (or equivalent), not by email or username.
+
+**Design Decisions:**
+- **Delegation chain as provenance log**: The UCAN chain is inherently an audit trail. Every grant is traceable to its root.
+- **Attenuation is additive downward**: Capabilities can only narrow going down the chain.
+- **UCAN + CRDT**: In a pull model, an agent can hold a local CRDT replica and a UCAN invocation log, and gossiping both gives transparent provenance of authority in eventually consistent systems. **This directly matches DreamNet's architecture.**
+- **Revocation**: Irreversible but possible. Once a CID is revoked, all downstream delegations in the chain must fail. This is Lares' `revoke` tier.
+
+**Contrast with DreamNet:**
+- UCAN does not define group membership or shared contexts. Keyhive fills this gap. UCAN is the per-token primitive; Keyhive is the group management layer.
+- UCAN's confinement problem (you cannot know all sub-delegations) maps to a real risk in DreamNet's `promote` / `admin` tiers.
+
+**Named Patterns:**
+- SPKI/SDSI — the 1990s predecessor; UCAN is essentially SPKI made web-native
+- ZCAP-LD (W3C CCG) — closely related W3C approach using JSON-LD
+- Macaroon — MAC-based capability system; faster but weaker (rooted in server, not user)
+- Biscuit — Datalog-based capabilities; allows richer policy expression
+- CACAO — cross-chain capability; similar delegation model
+
+---
+
+### 1.4 Keyhive (Fission)
+
+**Core Golden Principles (reconstructed from secondary references):**
+
+1. **Group membership as CRDT**: Rather than a central server managing who is in a group, membership state is itself a CRDT that replicates across all members.
+2. **Device admission via out-of-band ceremony**: Adding a new device to a PersonGroup does not require any server. A signed message from an existing device is sufficient. This is the "Seitan token exchange" pattern.
+3. **Sentinel documents as group anchors**: Each group level (person, cabal, nexus) has a sentinel document — a CID-addressed genesis artifact that defines the group's charter.
+4. **Capability delegation through the group hierarchy**: A Keyhive PersonGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonGroups.
+
+**Design Decisions:**
+- **Local-first membership**: Group state replicates via the same CRDT mechanism as application data. No separate membership server.
+- **Cap-admin owns infrastructure bags**: The Keyhive pattern maps to DreamNet's cabalGroup owning "local infrastructure bags" with `cap=admin`.
+
+**Named Patterns:**
+- Local-First Auth (Herb Caudill) — non-certificate-based; uses CRDT to build group membership list. Very close to Keyhive's approach.
+- Seitan token exchange — Keybase's device-admission ceremony; readable, out-of-band, no server needed.
+
+---
+
+### 1.5 Braid / HTTP State Synchronization
+
+**Core Golden Principles:**
+
+1. **State synchronization as a first-class HTTP primitive**: Braid extends HTTP to be a state *synchronization* protocol, with versioning, subscriptions, patches, and merge types.
+2. **Interoperability across merge algorithms**: Different CRDTs and OT implementations speak the same Braid message format. No single algorithm is mandated.
+3. **P2P semantics levels**: Level 0 = today's HTTP. Level 1 = subscriptions. Level 2 = patches/versions/merges. Levels 3–4 = P2P semantics.
+
+**Design Decisions:**
+- **Merge-type negotiation**: Client and server declare which CRDT/OT algorithm they support. Interoperability requires shared merge-type.
+- **History-pruning CRDTs**: Antimatter (from Braid group) is the first CRDT that can garbage-collect history without losing the ability to merge.
+
+**Contrast with DreamNet:**
+- Braid-HTTP is a candidate for the nexusGroup ↔ nexusGroup layer. DreamNet's `shared grammar` concept is analogous to Braid's merge-type negotiation.
+
+**Named Patterns:**
+- Antimatter — history-pruning CRDT, solves unbounded growth
+- Diamond Types (josephg) — fastest known text CRDT, O(log n) operations
+- Sync9 / SyncX — JSON+text CRDT with OT compatibility bridge
+
+---
+
+### 1.6 Matrix Protocol
+
+**Core Golden Principles:**
+
+1. **No single point of control**: Room state is replicated across all homeservers whose users participate.
+2. **Event graphs (DAGs), not ordered logs**: Room history is a DAG of events with causal ordering.
+3. **Eventual consistency, not strong consistency**: Matrix explicitly optimizes for AP (Availability + Partition tolerance).
+4. **Homeserver as sovereign unit**: Each homeserver manages its own users' accounts.
+5. **State events vs. message events**: Persistent room state is modeled separately from transient messages.
+6. **Power levels, not capabilities**: Matrix uses a numeric power level (0–100) to gate actions.
+
+**Design Decisions:**
+- **State resolution algorithm is deterministic and server-independent**: Given the same event graph, any server must compute the same resolved state. Key to federation without coordination.
+- **Olm/Megolm E2E encryption**: Per-device keys; forward secrecy via double ratchet. Sessions are managed per-device (analogous to DreamNet device-vessels).
+
+**Contrast with DreamNet:**
+- Matrix has no local-first mode. Homeservers are always-on servers. DreamNet device-vessels can be browser tabs — a fundamental architectural difference.
+- Matrix's power level system is coarser than DreamNet's ABILITY_LADDER but simpler.
+- Matrix federation is symmetric (server ↔ server). DreamNet's nexusGroup layer is explicitly asymmetric in sovereignty.
+
+**Named Patterns:**
+- Room Version state resolution algorithm — deterministic, commutative state merge across federated servers
+- Olm (Double Ratchet) / Megolm (group ratchet) — per-device encryption session management
+- MXC URI scheme — Matrix's content-addressed URI for attachments (analogous to `lar:///`)
+
+---
+
+### 1.7 Gordon Brander / Subconscious / Noosphere
+
+**Core Golden Principles (reconstructed from secondary references):**
+
+1. **The Small Web**: Decentralization fails if users must run servers. Sovereignty requires that the user's device IS the server.
+2. **Noosphere**: Protocol for a user-sovereign note graph. Content-addressed (CID), user-keyed (DID), linked (URI).
+3. **Permissionless composition**: Any app can link to any note by its CID without requesting permission.
+4. **Shared language, not shared data**: Interoperability across networks comes from agreeing on vocabulary (ontology), not from centralizing data.
+5. **The Sphere**: User's unit of sovereignty — a CID-rooted DAG of notes owned by a keypair.
+
+**Named Patterns:**
+- Noosphere protocol — content-addressed, DID-keyed note graph
+- Sphere — user-sovereign data container with CID root
+
+---
+
+### 1.8 Spritely Institute / OCapN
+
+**Core Golden Principles:**
+
+1. **Object capabilities are distributed programming**: In OCapN/Goblins, sending a message to a networked object looks identical to calling a local method.
+2. **Capabilities ARE references**: In a pure ocap system, having a reference to an object IS having permission to use it.
+3. **Promise pipelining**: Results of remote calls can be passed as arguments to the next call without waiting for the network round-trip.
+4. **3rd-party handoffs**: A peer can introduce two other peers to each other by passing a capability reference.
+5. **CRDTs + capabilities are composable** (Nov 2025 Spritely blog): "Composing capability security and conflict-free replicated data types" — direct prior art for DreamNet's combination of Automerge + ABILITY_LADDER.
+
+**Design Decisions:**
+- **Netlayers as transport abstraction**: OCapN runs over Tor, libp2p, TCP+TLS, IBC. Transport-independent.
+- **Confinement via reference discipline**: Capabilities cannot be forged.
+
+**Contrast with DreamNet:**
+- OCapN provides live object capabilities (call semantics). DreamNet uses certificate capabilities (UCAN-style bearer tokens). Different points in the capability design space:
+  - OCapN: fine-grained, live, requires connectivity
+  - UCAN/DreamNet: coarse-grained, offline-verifiable, partition-tolerant
+
+**Named Patterns:**
+- CapTP (Capability Transport Protocol) — the heart of OCapN
+- Petnames — human-readable mappings over cryptographic identifiers
+- Magenc — content-encrypted store; capability-protected immutable blobs
+
+---
+
+### 1.9 IPFS Content Addressing
+
+**Core Golden Principles:**
+
+1. **Location independence**: CIDs name content, not servers.
+2. **Cryptographic integrity**: Any difference in content produces a different CID.
+3. **Self-describing**: CIDv1 embeds the hash algorithm, codec, and encoding in the identifier itself.
+4. **DAG structure**: Large content is chunked into blocks linked by CIDs, forming a Merkle DAG.
+5. **CID profiles for reproducibility**: CID profiles document canonical parameter sets for interoperability.
+
+**Design Decisions:**
+- **`dag-cbor` as canonical encoding**: UCAN mandates DAG-CBOR for signing; IPLD's DAG-CBOR is the natural bridge.
+- **Multiformats**: Self-describing binary formats that can evolve without breaking existing CIDs.
+
+**Note**: DreamNet uses CIDs as stable identifiers but may retrieve content over any transport. Does not require IPFS infrastructure.
+
+**Named Patterns:**
+- IPLD (InterPlanetary Linked Data) — universal data model for content-addressed DAGs
+- Merkle DAG — the underlying data structure
+- Multibase / Multihash / Multicodec — self-describing primitives enabling codec-agnostic CIDs
+
+---
+
+### 1.10 CRDTs in Production
+
+**Core Golden Principles:**
+
+1. **Logical clocks over system time**: System clocks cannot be trusted. Lamport counters and Hybrid Logical Clocks (HLCs) provide causally correct ordering.
+2. **Two-timestamp pattern**: For efficient delta sync, retain both `row_time` (merge semantics) and `local_row_time` (what a peer has seen). Conflating these causes proxy divergence.
+3. **Deterministic tie-breaking**: Concurrent edits at the same logical time must be resolved by a deterministic, total-order comparator.
+4. **CRDTs work in centralized systems too**: Git is the canonical example.
+5. **Performance is no longer an objection**: Modern CRDTs handle 100KB documents efficiently. 6 million text edits/second in Rust (Diamond Types).
+
+**Named Patterns:**
+- HLC (Hybrid Logical Clock) — combines wall clock with Lamport counter for causal correctness
+- RGA / LSEQ / YATA — sequence CRDT algorithms for ordered text
+- Delta-CRDTs — send only the delta (diff) between states; critical for efficient sync
+
+---
+
+### 1.11 Capability-Based Security (E Language / Mark Miller / OCapN)
+
+**Core Golden Principles:**
+
+1. **Capabilities as the only access mechanism**: In a pure ocap system, the only way to affect an object is to have a reference (capability) to it. No ambient authority.
+2. **No separation of authority from reference**: Possession of the capability IS the authorization. Eliminates confused deputy attacks by construction.
+3. **Composability**: Capability systems compose without interference.
+4. **Attenuation by wrapping**: Any capability can be wrapped in a facet that attenuates its powers.
+5. **Principle of Least Authority (POLA)**: Grant only the minimum capability needed for a task.
+6. **The Structure of Authority (Miller et al.)**: "Treating security as a separate concern has not succeeded. Security must be integrated with knowledge of what constitutes least authority."
+
+**Named Patterns:**
+- E language (Mark Miller) — the original object capability programming language
+- Vat model — each process is a "vat"; objects communicate via capabilities over async message passing; precursor to DreamNet's vessel model
+- SPKI/SDSI — Simple Public Key Infrastructure; DreamNet's keypair model is SPKI-compatible
+- Confused deputy problem — capability systems eliminate this by making authority explicit in references
+
+---
+
+### 1.12 Hypercore Protocol (Holepunch/Pears)
+
+**Core Golden Principles:**
+
+1. **One writer, many readers**: A Hypercore is an append-only log with a single writer (keypair) and unlimited readers.
+2. **Reading IS authorization**: Possessing the Hypercore `key` (public key) authorizes reading.
+3. **Sparse replication**: Peers can replicate only the blocks they need.
+4. **Autobase = multi-writer CRDT**: Multi-writer layer that merges contributions from multiple per-user Hypercores.
+5. **Hyperswarm = topic-based peer discovery**: No central server required.
+
+**Design Decisions:**
+- **Single-writer append-only log**: Each vessel writes to its own log; Autobase handles multi-writer merge. Maps cleanly to DreamNet's device-vessel.
+- **Discovery key ≠ read key**: Separation of discovery (Hyperswarm topic) from read authorization (`core.key`) — a security design decision DreamNet should mirror.
+- **Corestore**: Manages multiple Hypercores under a single namespace.
+
+**Contrast with DreamNet:**
+- DreamNet uses Automerge (any-writer CRDT) rather than Hypercore (single-writer append-only log).
+- Hypercore's single-writer model makes it easier to reason about who wrote what — important for ABILITY_LADDER enforcement.
+
+**Named Patterns:**
+- Hypercore — secure, distributed append-only log
+- Autobase — multi-writer view over many Hypercores
+- Hyperswarm + HyperDHT — topic-based P2P discovery without a tracker server
+- Hyperbee — append-only B-tree over a Hypercore
+- Hyperdrive — full filesystem over Hypercore
+
+---
+
+## 2. Layer Mapping: Prior Art → DreamNet
+
+### Layer 1: device-vessel
+
+| Feature | Prior Art | Maturity |
+|---|---|---|
+| Local-first data store | Automerge (Ink & Switch) | Production |
+| Sovereign keypair | UCAN `did:key`, Hypercore writer keypair | Production |
+| Browser + server runtime | Automerge-repo (BroadcastChannel, WebSocket) | Production |
+| TW5 wiki as local app | TiddlyWiki self-contained single-file model | Decades of production |
+| Actor ID per vessel | Automerge actor IDs, E language Vat model | Research + production |
+| Offline-first writes | All local-first sources | Well-established principle |
+
+**Assessment**: Device-vessel is the best-grounded layer. All required components have production implementations and strong theoretical backing.
+
+---
+
+### Layer 2: personGroup
+
+| Feature | Prior Art | Maturity |
+|---|---|---|
+| Group as CRDT membership doc | Local-First Auth (Caudill), Keyhive | Research + early production |
+| Out-of-band device admission ceremony | Seitan token exchange (Keybase), UCAN delegation | Production |
+| Multi-device identity | Matrix (per-device keys), Olm/Megolm | Production |
+| Sentinel genesis document | UCAN root CID, Hypercore writer key | Pattern well-known |
+| Capability delegation per device | UCAN attenuation chain | Production spec |
+
+**Assessment**: PersonGroup is well-supported by prior art. The Seitan/Local-First Auth pattern for ceremony-based device admission is the closest analogue. Primary risk: no single system combines all three (CRDT membership + ceremony + UCAN delegation) in production.
+
+---
+
+### Layer 3: cabalGroup
+
+| Feature | Prior Art | Maturity |
+|---|---|---|
+| Group-of-groups with charter | Matrix rooms, Keyhive MeshCabal | Research |
+| Charter-as-genesis-CID | IPFS CID semantics, UCAN root | Pattern well-known |
+| Shared ontology enforcement | No direct prior art; closest = Matrix event type namespacing | Partial |
+| Infrastructure bag ownership (cap=admin) | UCAN `admin` delegation | Pattern well-known |
+| Intra-cabal CRDT sync | Automerge-repo multi-peer | Production |
+
+**Assessment**: cabalGroup has clear design intent but fewer direct precedents as a *combined* construct. Individual pieces exist in prior art but have not been combined in the exact DreamNet configuration.
+
+---
+
+### Layer 4: nexusGroup
+
+| Feature | Prior Art | Maturity |
+|---|---|---|
+| Federation without central authority | Matrix federation, SMTP | Production (Matrix) |
+| Multiple cabalGroups cooperating | ActivityPub federation | Production |
+| No single point of control | Matrix (rooms span servers), Hyperswarm topics | Production |
+| Interop across implementations | Braid merge-type negotiation | Active development |
+| Federated identity | DIDs, Matrix @user:server syntax | Production |
+
+**Assessment**: nexusGroup maps closely to Matrix's federation model — the most mature prior art. Key divergence: Matrix homeservers are always-on and assume server-to-server connectivity. DreamNet's nexusGroup must tolerate cabalGroups going offline indefinitely. Braid's merge-type negotiation is the best candidate for cross-cabal interoperability protocol.
+
+---
+
+### Layer 5: DreamNet
+
+| Feature | Prior Art | Maturity |
+|---|---|---|
+| Shared grammar as interop surface | Braid (merge-types), ActivityPub (vocabulary), IPLD | Production (individually) |
+| URI scheme as grammar root | Matrix MXC, IPFS ipfs://, lar:/// | Pattern well-known |
+| Legibility across partitions and protocol forks | No direct prior art for all-5-layers | Novel |
+| No outer layer commands inner | E language vat authority model | Research |
+| SharktoothSigil / mana vocabulary | No direct prior art | Novel |
+
+**Assessment**: The outermost DreamNet layer is the most novel. No existing system defines a cross-federation shared grammar that survives protocol forks and network partitions as a *first-class design goal*. ActivityPub comes closest but lacks the sovereignty properties and CRDT-backed state.
+
+---
+
+## 3. Where DreamNet Aligns with Best Practices
+
+### Strong Alignments
+
+**1. Local-first data primacy**
+DreamNet's "every write originates in a sovereign vessel" is the direct instantiation of the Ink & Switch local-first ideal. All major local-first systems agree on this.
+
+**2. CRDT for conflict-free merge**
+Using Automerge specifically is a pragmatic choice aligned with the field's best option as of 2025-2026. Automerge's network-agnosticism and actor-ID-based causal ordering are correct primitives.
+
+**3. Content-addressed genesis artifact (CID)**
+Using a CID as the protocol root is a well-established pattern in UCAN, IPFS, Noosphere, and Hypercore. Provides tamper-evident identity, location independence, and an immutable reference for protocol versioning.
+
+**4. Capability-based security over ACLs**
+The ABILITY_LADDER is a principled capability system. This aligns with the deepest prior art (Mark Miller, E language, UCAN, OCapN). The UCAN spec's own motivation section could be describing DreamNet's rationale verbatim.
+
+**5. Keypair-per-vessel sovereign identity**
+Each device-vessel having its own keypair is exactly the UCAN/Hypercore/Matrix model. Private keys do not leave the vessel. Authority is shared by delegation, not by key sharing.
+
+**6. No outer layer can substitute inner intent**
+The capability principle applied to the layer structure: you cannot grant more than you have. In formal terms, DreamNet's sovereignty hierarchy is monotone.
+
+**7. Out-of-band device admission ceremony**
+QR/file/DM ceremony maps exactly to the Seitan token exchange pattern (Keybase, cited in UCAN prior art).
+
+---
+
+## 4. Where DreamNet Diverges and Why
+
+### Principled Divergences
+
+**1. Browser-tab as a sovereign vessel**
+Most prior art (Matrix, Hypercore) assumes always-on servers as the fundamental unit. DreamNet's browser tab as first-class sovereign vessel is more aggressive than any production system. The risks (ephemeral IndexedDB, no stable network address, short lifetime) are engineering-level, not architectural.
+
+**2. Five-layer topology vs. flat federation**
+Matrix and ActivityPub use two layers: client and server/homeserver. DreamNet uses five nested layers with explicit sovereignty semantics at each boundary. The principled motivation: the five layers map to real social structures (individual → household → community → city → world). Risk: coordination complexity at layer boundaries.
+
+**3. Shared grammar over shared implementation**
+DreamNet explicitly rejects shared implementation as the interoperability surface. ActivityPub uses both. DreamNet's approach is more philosophically consistent but harder to bootstrap: new implementations must correctly interpret shared vocabulary without reference to a canonical implementation. Requires excellent SharktoothSigil specification and strong test fixtures.
+
+**4. TiddlyWiki as the embedded data layer**
+No other distributed system uses TW5 as a knowledge store. Strength: TW5's mature ecosystem, self-contained model, plugin architecture. Risk: TW5 is not natively designed for CRDT merge. Closest analogue: Triplicate project (Ink & Switch).
+
+**5. mana/manao/manaoio trust-weight lattice**
+The three-tier trust weight system has no direct prior art in the literature reviewed. Novel ontological primitives require careful formal specification to avoid semantic drift across implementations.
+
+### Potentially Risky Divergences
+
+**1. No explicit revocation mechanism at the CRDT layer**
+UCAN explicitly specifies revocation (by CID). DreamNet's `revoke` tier implies intent but the mechanism for propagating revocation in an eventually-consistent CRDT system is not specified. In AP systems, revocation is the hardest problem.
+
+**2. Shared grammar survivability across protocol forks**
+The claim that DreamNet is "legible across network partitions and protocol forks" is ambitious. ActivityPub has struggled with this even with a reference implementation.
+
+**3. Authority confinement in the presence of sub-delegation**
+The UCAN spec explicitly flags the confinement problem: certificate capabilities cannot guarantee knowledge of all sub-delegations. The architecture should specify a depth limit or attenuation requirement on outward delegation.
+
+---
+
+## 5. Identified Gaps
+
+### Gap 1: Explicit Revocation Propagation Protocol
+
+**Source**: UCAN spec §Lifecycle, Hypercore, Matrix
+
+**Description**: DreamNet has a `revoke` tier but no specified mechanism for propagating revocations to all vessels that may have cached capabilities. The architecture should specify:
+- How revocations are represented in the CRDT (as CRDT operations, so they merge)
+- What the maximum acceptable propagation delay is
+- How a vessel should behave when it holds a capability it has not yet verified is un-revoked
+
+**Prior art**: UCAN Revocation sub-spec; Keyhive revocation via group-CRDT; Local-First Auth revocation event
+
+---
+
+### Gap 2: Document Growth / CRDT Compaction Strategy
+
+**Source**: josephg "CRDTs are the future," Braid Antimatter, vlcn.io
+
+**Description**: Automerge's op log grows unboundedly with edits. A long-lived device-vessel with years of edit history will accumulate significant storage overhead. No provision for:
+- Snapshotting / compacting the Automerge log
+- Garbage-collecting tombstoned (deleted) content
+- Differentiating "protocol history that must be retained" from "edit history that can be compacted"
+
+**Prior art**: Antimatter (Braid group) — first history-pruning text CRDT; Automerge's own compaction research; Git's `gc` and pack files
+
+---
+
+### Gap 3: Petnames / Human-Readable Layer Over Cryptographic IDs
+
+**Source**: Spritely Institute "Petnames" paper, Subconscious Noosphere
+
+**Description**: DreamNet principals are identified by keypairs (did:key or equivalent) and CIDs. These are unforgeable but not human-readable. No named mechanism for users to assign human-readable names to other vessels, cabalGroups, or genesis artifacts. The SharktoothSigil vocabulary may fill part of this gap but is not described as a petname system.
+
+**Prior art**: Petnames paper (Spritely); Noosphere sphere naming; Matrix display names / room aliases; Keybase username-to-key attestation
+
+---
+
+### Gap 4: Synchronization Protocol Specification for nexusGroup Layer
+
+**Source**: Braid, Matrix Server-Server API
+
+**Description**: DreamNet specifies CRDT semantics for intra-vessel and intra-cabal sync, but not the wire protocol for nexusGroup ↔ nexusGroup communication. Needs:
+- A specified transport envelope for inter-cabal sync (Braid-HTTP is a candidate)
+- A merge-type negotiation mechanism for cross-cabal interoperability
+- An explicit anti-entropy protocol (how do nexusGroups discover what they're missing?)
+
+**Prior art**: Braid-HTTP (IETF draft); Matrix Server-Server API; Hyperswarm (topic-based peer discovery); Set reconciliation
+
+---
+
+### Gap 5: Hybrid Logical Clocks (HLC) for Event Ordering
+
+**Source**: vlcn.io CRDT guide, distributed systems literature
+
+**Description**: The architecture does not specify how events are timestamped within a device-vessel. Using system time is explicitly unsafe. Automerge uses Lamport counters internally, but:
+- No specified mapping between Automerge's internal causal ordering and human-visible timestamps
+- The mana/manao/manaoio lattice may need causal ordering to determine which trust-weight values are "more recent"
+- Cross-vessel event ordering for nexusGroup and DreamNet layers is unspecified
+
+**Prior art**: Hybrid Logical Clocks (HLC) — combines wall clock for human readability with Lamport counter for causal correctness. Used in CockroachDB, vlcn.io's cr-sqlite.
+
+---
+
+### Gap 6: Discovery Key / Read Key Separation
+
+**Source**: Hypercore protocol
+
+**Description**: Hypercore explicitly separates the `discoveryKey` (find peers) from the `key` (read capability). DreamNet's architecture does not explicitly specify this separation. A device-vessel advertising its presence for peer discovery should not reveal its read capabilities.
+
+**Prior art**: Hypercore `core.discoveryKey` vs. `core.key`; UCAN audience field; Magenc (Spritely) capability-protected content addressing
+
+---
+
+### Gap 7: Formal Specification of ABILITY_LADDER Attenuation Rules
+
+**Source**: UCAN §Attenuation, E language capability theory
+
+**Description**: The ABILITY_LADDER is described but the *attenuation rules* are not formally specified:
+- Can a `write` holder delegate `read`? (Yes, by attenuation — should be explicit)
+- Can an `admin` delegate `revoke` to a vessel that only holds `write`? (Likely no — needs specification)
+- What does attenuation look like at the nexusGroup layer where inner vessels may not be visible?
+
+**Prior art**: UCAN §Attenuation + §Authority + §Command hierarchy; E language `Facet` pattern; OCapN attenuated forwarders
+
+---
+
+### Gap 8: Absent Network: Long-Partition Behavior
+
+**Source**: Ink & Switch local-first essay, Braid AP-vs-CP analysis, Matrix CAP-AP tradeoff
+
+**Description**: The architecture specifies eventual consistency but not behavior during extended partitions:
+- If a device-vessel is offline for years, then comes online, how is its CRDT state merged without re-fetching all history?
+- If a cabalGroup forks (two sub-groups lose contact and both continue operating), is there a mechanism for later reconciliation?
+- The DreamNet layer is described as surviving "protocol forks" — but no fork reconciliation protocol is specified.
+
+**Prior art**: Matrix state resolution algorithm (deterministic fork merge); Braid fork semantics; Automerge's built-in merge-on-reconnect
+
+---
+
+## Summary Table
+
+| Category | Finding |
+|---|---|
+| Strongest alignment | Local-first primacy, Automerge CRDT, CID genesis artifact, UCAN-style capability ladder, keypair sovereignty |
+| Principled divergences | Browser-tab vessel, five-layer topology, shared grammar over shared implementation |
+| Potentially risky divergences | Revocation propagation, confinement in certificate cap model, mana lattice novelty |
+| **Gap 1** | Explicit revocation propagation protocol |
+| **Gap 2** | CRDT compaction / document growth strategy |
+| **Gap 3** | Petnames / human-readable layer over cryptographic IDs |
+| **Gap 4** | nexusGroup wire protocol (Braid-HTTP is candidate) |
+| **Gap 5** | Hybrid Logical Clocks for cross-vessel event ordering |
+| **Gap 6** | Discovery key / read key separation |
+| **Gap 7** | Formal attenuation rules for ABILITY_LADDER |
+| **Gap 8** | Long-partition / fork reconciliation behavior |
+
+---
+
+<<~ pranala #to-dreamnet-architecture ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture family:research role:grounds >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

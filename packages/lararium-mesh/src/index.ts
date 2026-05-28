@@ -44,3 +44,12 @@ export * from "./social-seed.js";
 export { didKeyFromVerifyingKey, buildCeremonyTiddlers } from "./cold-boot-ceremony.js";
 export type { CeremonyTiddler } from "./cold-boot-ceremony.js";
 export type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
+export {
+  AUTH_WIRE_VERSION,
+  mkLarChallenge, mkLarAuth, mkLarAuthOk, mkLarAuthDenied,
+  isLarChallengeMsg, isLarAuthMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
+} from "./auth-wire.js";
+export type {
+  AuthWireVersion,
+  LarChallengeMsg, LarAuthMsg, LarAuthOkMsg, LarAuthDeniedMsg, LarAuthWireMsg,
+} from "./auth-wire.js";

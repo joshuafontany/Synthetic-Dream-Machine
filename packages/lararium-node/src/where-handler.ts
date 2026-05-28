@@ -14,7 +14,7 @@
  */
 
 import type { CompositeStore } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 
 export interface WhereHandlerOptions {
   readonly composite: CompositeStore;

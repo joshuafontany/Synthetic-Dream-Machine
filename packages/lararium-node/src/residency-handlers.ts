@@ -7,7 +7,7 @@
  * the daemon constructs at boot.
  */
 
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import type { BagResidencyManager } from "@lararium/mesh";
 
 export interface ResidencyHandlerOptions {

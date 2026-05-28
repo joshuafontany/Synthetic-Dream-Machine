@@ -1,7 +1,7 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import { type LarDoc, wikiDraftLarUri, wikiLarUri } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import { numberArg, stringArg } from "./handler-args.js";
 import type { DraftHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
 

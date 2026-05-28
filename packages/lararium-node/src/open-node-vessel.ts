@@ -64,7 +64,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { VerbTable } from "./job-dispatcher.js";
+import { VerbTable } from "@lararium/tw5";
 import { makeWhereReactor }                       from "./where-handler.js";
 import {
   makeListWikisReactor, makeInitWikiReactor,
@@ -81,6 +81,7 @@ import {
 import { BagResidencyManager }                      from "@lararium/mesh";
 import { KeyhiveProvider, AdminEventStore }         from "@lararium/keyhive";
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
+import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult, AdminVmOptions } from "./open-admin-vm.js";
 
 import { LAR_EVENT } from "@lararium/mesh";
@@ -146,11 +147,25 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 1. Repo ───────────────────────────────────────────────────────────────
   const storage = new NodeFSStorageAdapter(storageDir);
   // Tier-3 causal-island boundary: WebSocket relay serves Automerge sync only.
-  // wss is typed via isomorphic-ws — the same module NodeWSServerAdapter uses.
-  const network = new NodeWSServerAdapter(wss);
-  // sharePolicy: alpha stub — open federation.
-  // Keyhive/UCAN injection point: async (vesselId) => identity.verifyCapability(vesselId, "read")
-  const repo    = new Repo({ storage, network: [network], sharePolicy: async () => true });
+  // AdminAuthGate wraps the wss: runs lar:challenge/lar:auth before Automerge
+  // join flows. Gate starts disarmed (rejects all) until keyhive boots.
+  const authGate = new AdminAuthGate(wss);
+  const network  = new NodeWSServerAdapter(authGate as unknown as typeof wss);
+  // peerIdentifierMap: populated by "peer-candidate" listener below.
+  // sharePolicy uses it to allow only auth-gate-verified peers per doc.
+  const peerIdentifierMap = new Map<string, string>();
+  network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
+    const socket = (network.sockets as Record<string, unknown>)[peerId];
+    if (socket) {
+      const identHex = authGate.getIdentifierForSocket(socket as Parameters<typeof authGate.getIdentifierForSocket>[0]);
+      if (identHex) peerIdentifierMap.set(peerId, identHex);
+    }
+  });
+  const repo = new Repo({
+    storage,
+    network: [network],
+    sharePolicy: async (peerId) => peerIdentifierMap.has(peerId),
+  });
   emit("repo-open");
 
   // ── 2. Catalog ────────────────────────────────────────────────────────────
@@ -569,6 +584,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await keyhive.registerBag(BAG_IDS.lares);              // @lares persona/doctrine (canon)
   await keyhive.registerBag(activeWikiPlan.wikiBagId);         // active wiki canonical
   await keyhive.registerBag(activeWikiPlan.draftBagId);        // active wiki draft
+
+  // Arm the auth gate — connections arriving after this point go through
+  // Keyhive accessForDoc verification before Automerge sync begins.
+  authGate.arm(keyhive, ADMIN_BAG_ID);
 
   // Smoke: confirm the operator's registerBag path wires correctly.
   // Log-only — not a gate. The real sovereignty check ran at Gates B and C above.

@@ -1,0 +1,255 @@
+/**
+ * admin-auth-gate.test.ts — Path L auth gate smoke tests.
+ *
+ * Tests the pre-Automerge lar:challenge / lar:auth / lar:auth-ok wire exchange
+ * using a real WebSocket server, raw WebSocket client connections, and a stub
+ * CapabilityProvider. No Automerge-repo, no TW5, no filesystem.
+ *
+ * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/admin-auth-gate
+ */
+
+import { describe, test, expect, beforeEach, afterEach } from "vitest";
+import { createServer }                               from "node:http";
+import type { IncomingMessage }                       from "node:http";
+import { WebSocketServer, WebSocket }                 from "ws";
+import { AdminAuthGate }                              from "../src/admin-auth-gate.js";
+import type { CapabilityProvider }                    from "@lararium/keyhive";
+import {
+  isLarChallengeMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
+  mkLarAuth,
+} from "@lararium/mesh";
+
+// ── Stub CapabilityProvider ───────────────────────────────────────────────────
+
+type StubVerifyResult = { ok: true } | { ok: false; reason: string };
+
+function makeStubProvider(opts: {
+  receiveResult: { id: string };
+  verifyResult:  StubVerifyResult;
+}): CapabilityProvider {
+  return {
+    async init()                { /* no-op */ },
+    async whoami()              { return "0xdeadbeef"; },
+    async contactCard()         { return new Uint8Array(); },
+    async receiveContactCard()  { return opts.receiveResult; },
+    async registerBag()         { return { docId: "deadbeef" }; },
+    async delegate()            { return { delegationId: "x", bytes: new Uint8Array() }; },
+    async revoke()              { return { bytes: new Uint8Array() }; },
+    async verify()              { return opts.verifyResult; },
+    async hydrateFromEventStore() { return { ingested: 0 }; },
+    async dispose()             { /* no-op */ },
+  } as unknown as CapabilityProvider;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function makeServer(): Promise<{ wss: WebSocketServer; port: number; close: () => Promise<void> }> {
+  return new Promise((resolve, reject) => {
+    const http = createServer();
+    const wss  = new WebSocketServer({ server: http });
+    http.listen(0, "127.0.0.1", () => {
+      const addr = http.address();
+      if (!addr || typeof addr === "string") { reject(new Error("bad address")); return; }
+      resolve({
+        wss,
+        port: addr.port,
+        close: () => new Promise<void>((res) => {
+          wss.close(() => http.close(() => res()));
+        }),
+      });
+    });
+  });
+}
+
+// BufferedSocket wraps a WebSocket and eagerly buffers every incoming message
+// from the moment of connection. On loopback the server can send the challenge
+// in the same TCP segment as the HTTP 101 upgrade, so a plain `ws.once("message")`
+// registered after `await connect()` would miss it. The buffer drains on each
+// `nextMessage()` call, preserving delivery order.
+class BufferedSocket {
+  readonly ws: WebSocket;
+  private readonly _buf: unknown[] = [];
+  private readonly _waiters: Array<(v: unknown) => void> = [];
+
+  constructor(ws: WebSocket) {
+    this.ws = ws;
+    ws.on("message", (data: Buffer | string) => {
+      const msg = JSON.parse(data.toString());
+      const waiter = this._waiters.shift();
+      if (waiter) { waiter(msg); }
+      else        { this._buf.push(msg); }
+    });
+  }
+
+  nextMessage(): Promise<unknown> {
+    if (this._buf.length > 0) return Promise.resolve(this._buf.shift()!);
+    return new Promise((res) => this._waiters.push(res));
+  }
+
+  send(data: string): void { this.ws.send(data); }
+  close(): void { this.ws.close(); }
+  terminate(): void { (this.ws as unknown as { terminate(): void }).terminate(); }
+
+  once(event: "close", handler: (code: number, reason: Buffer) => void): void {
+    this.ws.once(event as "close", handler);
+  }
+}
+
+function connect(port: number): Promise<BufferedSocket> {
+  return new Promise((resolve, reject) => {
+    const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+    const buf = new BufferedSocket(ws);
+    ws.once("open",  () => resolve(buf));
+    ws.once("error", reject);
+  });
+}
+
+function nextMessage(s: BufferedSocket): Promise<unknown> {
+  return s.nextMessage();
+}
+
+function nextClose(s: BufferedSocket): Promise<{ code: number; reason: string }> {
+  return new Promise((resolve) => {
+    s.once("close", (code, reason) => resolve({ code, reason: reason.toString() }));
+  });
+}
+
+// ── Tests ─────────────────────────────────────────────────────────────────────
+
+describe("AdminAuthGate — pre-sync auth exchange", () => {
+  let serverInfo: Awaited<ReturnType<typeof makeServer>>;
+  let gate: AdminAuthGate;
+
+  beforeEach(async () => {
+    serverInfo = await makeServer();
+    gate = new AdminAuthGate(serverInfo.wss);
+  });
+
+  afterEach(async () => {
+    await serverInfo.close();
+  });
+
+  test("disarmed gate rejects connection with 4503", async () => {
+    const ws = await connect(serverInfo.port);
+    // Gate is not armed — no challenge is sent; socket closes immediately with 4503.
+    const { code } = await nextClose(ws);
+    expect(code).toBe(4503);
+  });
+
+  test("armed gate sends lar:challenge on connect", async () => {
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: true },
+    }));
+
+    const ws  = await connect(serverInfo.port);
+    const msg = await nextMessage(ws);
+
+    expect(isLarChallengeMsg(msg)).toBe(true);
+    expect(typeof (msg as { nonce: string }).nonce).toBe("string");
+    expect((msg as { nonce: string }).nonce).toHaveLength(64); // 32 bytes hex
+
+    ws.close();
+  });
+
+  test("valid auth → lar:auth-ok; gate emits connection to adapter", async () => {
+    const connectionSeen = new Promise<void>((resolve) => {
+      gate.once("connection", () => resolve());
+    });
+
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: true },
+    }));
+
+    const ws      = await connect(serverInfo.port);
+    const chal    = await nextMessage(ws) as { nonce: string };
+    expect(isLarChallengeMsg(chal)).toBe(true);
+
+    ws.send(JSON.stringify(mkLarAuth("valid-card-json", chal.nonce, "stub-sig")));
+    const response = await nextMessage(ws);
+    expect(isLarAuthOkMsg(response)).toBe(true);
+
+    await connectionSeen;
+
+    // socket is in clients set after auth
+    expect(gate.clients.size).toBe(1);
+
+    ws.close();
+  });
+
+  test("insufficient capability → lar:auth-denied + close(4003)", async () => {
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: false, reason: "no admin grant" },
+    }));
+
+    const ws    = await connect(serverInfo.port);
+    const chal  = await nextMessage(ws) as { nonce: string };
+
+    ws.send(JSON.stringify(mkLarAuth("card", chal.nonce, "sig")));
+
+    const denied = await nextMessage(ws);
+    expect(isLarAuthDeniedMsg(denied)).toBe(true);
+    expect((denied as { reason: string }).reason).toContain("no admin grant");
+
+    const { code } = await nextClose(ws);
+    expect(code).toBe(4003);
+  });
+
+  test("wrong nonce → lar:auth-denied + close(4003)", async () => {
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: true },
+    }));
+
+    const ws = await connect(serverInfo.port);
+    await nextMessage(ws); // consume challenge
+
+    ws.send(JSON.stringify(mkLarAuth("card", "wrong-nonce", "sig")));
+
+    const denied = await nextMessage(ws);
+    expect(isLarAuthDeniedMsg(denied)).toBe(true);
+
+    const { code } = await nextClose(ws);
+    expect(code).toBe(4003);
+  });
+
+  test("sending non-auth message → lar:auth-denied + close(4003)", async () => {
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: true },
+    }));
+
+    const ws = await connect(serverInfo.port);
+    await nextMessage(ws); // consume challenge
+
+    ws.send(JSON.stringify({ type: "join", senderId: "peer-x" })); // automerge message
+
+    const denied = await nextMessage(ws);
+    expect(isLarAuthDeniedMsg(denied)).toBe(true);
+
+    const { code } = await nextClose(ws);
+    expect(code).toBe(4003);
+  });
+
+  test("clients set decrements when authenticated connection closes", async () => {
+    gate.arm(makeStubProvider({
+      receiveResult: { id: "0xaabbcc" },
+      verifyResult:  { ok: true },
+    }));
+
+    const ws   = await connect(serverInfo.port);
+    const chal = await nextMessage(ws) as { nonce: string };
+    ws.send(JSON.stringify(mkLarAuth("card", chal.nonce, "sig")));
+    await nextMessage(ws); // auth-ok
+
+    expect(gate.clients.size).toBe(1);
+
+    // terminate() is a forced close that fires the server-side "close" event
+    // synchronously without waiting for a graceful handshake.
+    ws.terminate();
+    await new Promise<void>((r) => setTimeout(r, 50));
+    expect(gate.clients.size).toBe(0);
+  });
+});

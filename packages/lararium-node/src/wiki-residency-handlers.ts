@@ -1,5 +1,5 @@
 import { bagStackFromRec, recipeUri } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import { stringArg } from "./handler-args.js";
 import type { WikiResidencyOptions } from "./wiki-handlers.js";
 

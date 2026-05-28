@@ -28,7 +28,7 @@ import {
   wikiLarUri, LARARIUM_DOC_URI, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import { stringArg, makeRequestId } from "./handler-args.js";
 
 export interface EpochHandlerOptions {

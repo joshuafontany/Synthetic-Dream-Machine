@@ -2,6 +2,7 @@ export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
+export { AdminAuthGate } from "./admin-auth-gate.js";
 export { openNodeVessel, createNodeSession } from "./open-node-vessel.js";
 export { openAdminVm } from "./open-admin-vm.js";
 export type { AdminVmOptions, AdminVmResult } from "./open-admin-vm.js";
@@ -20,11 +21,11 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 
 export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-key.js";
 
-export { JobDispatcher, VerbTable } from "./job-dispatcher.js";
-export type { VerbReactor, JobContext, JobDispatcherOptions } from "./job-dispatcher.js";
-export { emitJobInboxSignal } from "./job-inbox-signal.js";
-export type { JobInboxRelayOptions, JobPlacementRequest } from "./job-inbox-signal.js";
-export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
+export { JobDispatcher, VerbTable } from "@lararium/tw5";
+export type { VerbReactor, JobContext, JobDispatcherOptions } from "@lararium/tw5";
+export { emitJobInboxSignal } from "@lararium/tw5";
+export type { JobInboxRelayOptions, JobPlacementRequest } from "@lararium/tw5";
+export { runLocalJob, makeCapVerify } from "@lararium/tw5";
 
 export { makeWhereReactor } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";

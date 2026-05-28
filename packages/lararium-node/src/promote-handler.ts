@@ -9,7 +9,7 @@
 import { type CompositeStore, bagScopedStore, type TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
 import { IslandAdaptor, planPromoteUris, type TW5Engine } from "@lararium/tw5";
 import { toLarTiddlerRecord } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import { stringArg, optionalStringArg } from "./handler-args.js";
 
 function stringListField(value: unknown): string | string[] | undefined {

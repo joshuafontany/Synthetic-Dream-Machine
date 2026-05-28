@@ -74,8 +74,8 @@ importers:
   packages/lararium-keyhive:
     dependencies:
       '@keyhive/keyhive':
-        specifier: 0.0.0-alpha.56c
-        version: 0.0.0-alpha.56c
+        specifier: 0.0.0-alpha.58b
+        version: 0.0.0-alpha.58b
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
@@ -436,8 +436,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@keyhive/keyhive@0.0.0-alpha.56c':
-    resolution: {integrity: sha512-eANHQ5+dNw4RbN9uu81n79pJ3ocbrngd8Vn+qN2EK9qpi2DuaoMdbkIYY9ubLirBRSTL9Hz2pDXuCHWJkn587g==}
+  '@keyhive/keyhive@0.0.0-alpha.58b':
+    resolution: {integrity: sha512-WAQorh73QDZYIVYukoaAGC3oyj2nqVk7XwrTHIr/wzbAnjqtuyKxaVfvSJ40YeR+R7divpJZysIfGIbOpE6RLA==}
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
@@ -1765,7 +1765,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@keyhive/keyhive@0.0.0-alpha.56c': {}
+  '@keyhive/keyhive@0.0.0-alpha.58b': {}
 
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:

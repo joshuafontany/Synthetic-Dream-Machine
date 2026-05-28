@@ -13,7 +13,7 @@ import {
   wikiDraftLarUri,
   wikiLarUri,
 } from "@lararium/mesh";
-import type { VerbReactor } from "./job-dispatcher.js";
+import type { VerbReactor } from "@lararium/tw5";
 import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
 

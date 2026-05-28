@@ -36,7 +36,8 @@ import {
   type WikiMsg_PlaceJob,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
-import { placeVmJob, exportMemeText } from "@lararium/tw5";
+import { placeVmJob, exportMemeText, VerbTable } from "@lararium/tw5";
+import type { JobTiddler } from "@lararium/mesh";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
 import { makePromoteReactor } from "./promote-handler.js";

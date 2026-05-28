@@ -34,8 +34,8 @@ import {
   isIslandToVesselMsg,
   type BagBinding,
 } from "@lararium/mesh";
-import { runLocalJob }                                  from "./job-local-dispatch.js";
-import type { VerbTable }                      from "./job-dispatcher.js";
+import { runLocalJob }                                  from "@lararium/tw5";
+import type { VerbTable }                      from "@lararium/tw5";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
 import type { IslandMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
@@ -85,7 +85,7 @@ export interface AdminVmResult {
    * Delegates to the admin island's internal `placeVmJob` via `admin:place-job` message.
    * The wiki change event fires at the island's next tick; JobDispatcher dispatches it.
    */
-  placeJob:     (opts: import("./job-inbox-signal.js").JobPlacementRequest) => void;
+  placeJob:     (opts: import("@lararium/tw5").JobPlacementRequest) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
