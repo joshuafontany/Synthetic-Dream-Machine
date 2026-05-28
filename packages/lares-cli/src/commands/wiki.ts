@@ -17,7 +17,7 @@
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
-import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
+import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 type WikiSubcommand = (args: ParsedArgs) => Promise<number>;
@@ -49,7 +49,7 @@ export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "list-wikis", {}, did);
+    const r = await submitVerb(vessel, "list-wikis", {}, did);
     if (r.status === "error") {
       console.error(`list failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -89,7 +89,7 @@ export async function cmdWikiInit(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "init-wiki", { slug }, did);
+    const r = await submitVerb(vessel, "init-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`init failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -120,7 +120,7 @@ export async function cmdWikiOpen(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "open-wiki", { slug }, did);
+    const r = await submitVerb(vessel, "open-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`open failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -146,7 +146,7 @@ export async function cmdWikiSync(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitVerb(vessel, "sync-wiki", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`sync failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -180,7 +180,7 @@ export async function cmdWikiPin(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "pin-wiki", { slug }, did);
+    const r = await submitVerb(vessel, "pin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`pin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -208,7 +208,7 @@ export async function cmdWikiUnpin(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "unpin-wiki", { slug }, did);
+    const r = await submitVerb(vessel, "unpin-wiki", { slug }, did);
     if (r.status === "error") {
       console.error(`unpin failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -236,7 +236,7 @@ export async function cmdWikiAddBag(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "add-bag", { slug, bagUrl }, did);
+    const r = await submitVerb(vessel, "add-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`add-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -267,7 +267,7 @@ export async function cmdWikiRemoveBag(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "remove-bag", { slug, bagUrl }, did);
+    const r = await submitVerb(vessel, "remove-bag", { slug, bagUrl }, did);
     if (r.status === "error") {
       console.error(`remove-bag failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -305,7 +305,7 @@ export async function cmdWikiEpoch(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitVerb(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`wiki epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -334,7 +334,7 @@ export async function cmdWikiRotateRecipe(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
+    const r = await submitVerb(vessel, "rotate-recipe", { slug }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`rotate-recipe failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -370,7 +370,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
   try {
     const cmdArgs: Record<string, unknown> = { slug };
     if (daysOpt) cmdArgs["daysThreshold"] = Number(daysOpt);
-    const r = await submitJob(vessel, "prune-stale", cmdArgs, did);
+    const r = await submitVerb(vessel, "prune-stale", cmdArgs, did);
     if (r.status === "error") {
       console.error(`prune-stale failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -408,7 +408,7 @@ export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "where", { tiddler }, did);
+    const r = await submitVerb(vessel, "where", { tiddler }, did);
     if (r.status === "error") {
       console.error(`which failed: ${r.errorMessage ?? "unknown"}`);
       return 4;

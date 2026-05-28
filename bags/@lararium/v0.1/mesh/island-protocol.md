@@ -51,9 +51,9 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 | `manifest` | Boot materials — `coreBlob`, `syncPort`, `bagBindings`, `pluginTiddlers`, `recipeUri`. |
 | `demote` | Soft demotion: hot → cold without full terminate. |
 | `teardown` | GP-5 handshake start: island completes in-flight work then sends `teardown:ack`. |
-| `admin:place-job` | Place a volatile job tiddler in the admin island's TW5 wiki. |
-| `admin:job-result` | Deliver delegation result back to the admin island. |
-| `wiki:place-job` | Place a wiki-scope job in a wiki island's TW5 wiki. |
+| `admin:place-verb` | Place a volatile job tiddler in the admin island's TW5 wiki. |
+| `admin:verb-result` | Deliver delegation result back to the admin island. |
+| `wiki:place-verb` | Place a wiki-scope job in a wiki island's TW5 wiki. |
 
 ### Message types — Island → vessel
 
@@ -64,8 +64,8 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 | `frame:ack` | Frame-completion signal (§4). Live frame-completion signal. |
 | `event` | Verse-event reaction — `listenable` + `payload` (string/number/boolean values only). |
 | `fault` | Island fault — vessel MUST mark the slot as evicted. |
-| `admin:delegate-job` | Admin island delegates a verb to the vessel handler registry. |
-| `wiki:job-result` | Wiki island result for a job whose result the vessel awaits. |
+| `admin:delegate-verb` | Admin island delegates a verb to the vessel handler registry. |
+| `wiki:verb-result` | Wiki island result for a job whose result the vessel awaits. |
 
 ### Island-first aliases
 
@@ -77,7 +77,7 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 ### Factories
 
 `mkManifest` · `mkEa` · `mkTeardown` · `mkTeardownAck` · `mkFrameAck` · `mkFault`
-`mkAdminPlaceJob` · `mkAdminDelegateJob` · `mkAdminJobResult` · `mkWikiPlaceJob` · `mkWikiJobResult`
+`mkAdminPlaceVerb` · `mkAdminDelegateVerb` · `mkAdminVerbResult` · `mkWikiPlaceVerb` · `mkWikiVerbResult`
 
 <<~/ahu >>
 

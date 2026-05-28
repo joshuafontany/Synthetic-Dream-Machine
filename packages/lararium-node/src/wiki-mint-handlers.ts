@@ -132,7 +132,7 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
       return { slug, status: "already-active", liveApplied: true };
     }
 
-    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const record: LarTiddlerRecord = buildActiveWikiRecord(slug, "lares-cli:wiki-open");
     await opts.composite.put(record, origin, { bag: ADMIN_BAG_ID });
 

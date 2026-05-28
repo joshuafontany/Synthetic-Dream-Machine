@@ -3,7 +3,7 @@
  *
  * Sovereign wiki island. Runs the shared browser-sovereign-island-model
  * lifecycle with BrowserWikiBehavior: read-dominant, TW5 session saves
- * land in scratch, no JobDispatcher, no relay protocol.
+ * land in scratch, no VerbDispatcher, no relay protocol.
  *
  * Recipe (auto-assembled by browser-sovereign-island-model):
  *   bagBindings CRDT bags (recipe order, read-only)

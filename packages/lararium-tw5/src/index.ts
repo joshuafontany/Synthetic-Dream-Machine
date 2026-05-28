@@ -38,14 +38,14 @@ export type { VmIslandBridge, VmIslandBridgeOptions } from "./vm-island-bridge.j
 export {
   openVmCarrierSyncSession,
 } from "./wiki-sync.js";
-export { placeVmJob, patchVmJob, removeVmJob, writeVmJobReceipt, dispatchVmJobLifecycle } from "./job-vm.js";
+export { placeVerbInvocation, patchVerbInvocation, removeVerbInvocation, writeVerbOutcome, dispatchVerbLifecycle } from "./verb-vm.js";
+export type { VerbPlacement } from "./verb-vm.js";
 export type {
   VmCarrierSyncInput,
   VmCarrierSyncResult,
   VmCarrierSyncSession,
   VmCarrierSyncSessionOptions,
 } from "./wiki-sync.js";
-export type { VmJobPlacement } from "./job-vm.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
 export type { ProjectionStore } from "./memory-store.js";
 
@@ -68,12 +68,12 @@ export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "@lararium/mesh";
 export type { CeremonyTiddler } from "@lararium/mesh";
 
 export type { IslandContext, IslandBehavior } from "./island-context.js";
-export { JobDispatcher, VerbTable } from "./job-dispatcher.js";
-export type { JobContext, VerbReactor, JobDispatcherOptions } from "./job-dispatcher.js";
-export { emitJobInboxSignal } from "./job-inbox-signal.js";
-export type { JobPlacementRequest, JobInboxRelayOptions } from "./job-inbox-signal.js";
-export { runLocalJob, makeCapVerify } from "./job-local-dispatch.js";
-export type { CapVerify, RunLocalJobOptions } from "./job-local-dispatch.js";
+export { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
+export type { VerbContext, VerbReactor, VerbDispatcherOptions } from "./verb-dispatcher.js";
+export { emitVerbSignal } from "./verb-signal.js";
+export type { VerbSignalRequest, VerbSignalRelayOptions } from "./verb-signal.js";
+export { runLocalVerb, makeCapVerify } from "./verb-local-dispatch.js";
+export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
 export { makeAdminBehavior } from "./admin-behavior.js";
 
 export { IslandKernel } from "./island-kernel.js";

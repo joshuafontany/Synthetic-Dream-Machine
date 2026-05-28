@@ -2,16 +2,14 @@
  * admin-behavior — isomorphic admin island behavior for all platforms.
  *
  * makeAdminBehavior() returns an IslandBehavior that:
- *   - Starts a JobDispatcher subscribed to TW5 wiki change events (local path)
- *     and to the admin CompositeStore (remote/inbox path).
- *   - Routes wiki-scope verbs to the vessel via AdminMsg_DelegateJob /
- *     AdminMsg_JobResult, holding Promise resolvers in a pending delegation map.
- *   - Handles admin:place-job from the vessel (main-thread → island).
- *   - Handles admin:job-result from the vessel (island delegation round-trip).
+ *   - Starts a VerbDispatcher subscribed to TW5 wiki change events (local path)
+ *     and to the admin CompositeStore (remote/signal path).
+ *   - Routes wiki-scope verbs to the vessel via AdminMsg_DelegateVerb /
+ *     AdminMsg_VerbResult, holding Promise resolvers in a pending delegation map.
+ *   - Handles admin:place-verb from the vessel (main-thread → island).
+ *   - Handles admin:verb-result from the vessel (island delegation round-trip).
  *
  * Runs identically in Node worker_threads and browser Web Workers.
- * Node admin island entry (lar-admin-island.ts) and browser admin island entry
- * (browser-admin-island.ts) both import this — no platform fork.
  *
  * Island Sovereignty Law §9 applies: this behavior always runs inside a Worker.
  *
@@ -20,35 +18,35 @@
 
 import {
   ADMIN_BAG_ID,
-  mkAdminDelegateJob,
-  type AdminMsg_PlaceJob,
-  type AdminMsg_JobResult,
+  mkAdminDelegateVerb,
+  type AdminMsg_PlaceVerb,
+  type AdminMsg_VerbResult,
   type BatchMode,
-  type JobTiddler,
+  type VerbInvocation,
   type CapabilityVerifier,
 } from "@lararium/mesh";
-import { placeVmJob } from "./job-vm.js";
-import { JobDispatcher, VerbTable } from "./job-dispatcher.js";
+import { placeVerbInvocation } from "./verb-vm.js";
+import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
 export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior {
-  let _dispatcher: JobDispatcher | null = null;
+  let _dispatcher: VerbDispatcher | null = null;
 
   const _pendingDelegations = new Map<string, {
     resolve: (result: Record<string, unknown>) => void;
     reject:  (err: Error) => void;
   }>();
 
-  function _routeToMain(job: JobTiddler, post: IslandContext["post"]): Promise<Record<string, unknown>> {
+  function _routeToMain(invocation: VerbInvocation, post: IslandContext["post"]): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
-      _pendingDelegations.set(job.requestId, { resolve, reject });
-      post(mkAdminDelegateJob({
-        requestId:   job.requestId,
-        verb:        job.verb,
-        args:        job.args as Record<string, unknown>,
-        requestedBy: job.requestedBy,
-        ...(job.targets?.length ? { targets: [...job.targets] } : {}),
-        ...(job.batchMode       ? { batchMode: String(job.batchMode) } : {}),
+      _pendingDelegations.set(invocation.requestId, { resolve, reject });
+      post(mkAdminDelegateVerb({
+        requestId:   invocation.requestId,
+        verb:        invocation.verb,
+        args:        invocation.args as Record<string, unknown>,
+        requestedBy: invocation.requestedBy,
+        ...(invocation.targets?.length ? { targets: [...invocation.targets] } : {}),
+        ...(invocation.batchMode       ? { batchMode: String(invocation.batchMode) } : {}),
       }));
     });
   }
@@ -58,21 +56,21 @@ export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior
 
     onEa({ tw5, composite, post }: IslandContext) {
       const registry = new VerbTable();
-      _dispatcher = new JobDispatcher({
+      _dispatcher = new VerbDispatcher({
         adminVm:  tw5,
         admin:    composite,
         registry,
-        routeFn:  (job) => _routeToMain(job, post),
+        routeFn:  (invocation) => _routeToMain(invocation, post),
         ...(verifier ? { verifier } : {}),
       });
       _dispatcher.start();
     },
 
     onSignal(type: string, raw: unknown, { tw5, post }: IslandContext): boolean {
-      if (type === "admin:place-job") {
-        const msg = raw as AdminMsg_PlaceJob;
+      if (type === "admin:place-verb") {
+        const msg = raw as AdminMsg_PlaceVerb;
         if (tw5) {
-          placeVmJob(tw5, {
+          placeVerbInvocation(tw5, {
             verb:        msg.verb,
             args:        msg.args,
             requestedBy: msg.requestedBy,
@@ -84,8 +82,8 @@ export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior
         return true;
       }
 
-      if (type === "admin:job-result") {
-        const msg = raw as AdminMsg_JobResult;
+      if (type === "admin:verb-result") {
+        const msg = raw as AdminMsg_VerbResult;
         const pending = _pendingDelegations.get(msg.requestId);
         if (pending) {
           _pendingDelegations.delete(msg.requestId);

@@ -20,7 +20,7 @@ import { repoRoot } from "@lararium/mesh/node";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
-import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
+import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -53,7 +53,7 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+    const r = await submitVerb(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
     if (r.status === "error") {
       console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
       return 4;

@@ -3,7 +3,7 @@
  *
  * Implements the lar-wiki-worker protocol without TW5 or ReactionEngine:
  *   manifest        → ea
- *   wiki:place-job  → wiki:job-result (echo)
+ *   wiki:place-verb → wiki:verb-result (echo)
  *   teardown/demote → teardown:ack
  *
  * NOT production code — fixture only.
@@ -27,12 +27,12 @@ parentPort.on("message", (msg) => {
     return;
   }
 
-  if (msg.type === "wiki:place-job") {
-    // Echo job back as result for testing wiki:place-job / wiki:job-result round-trip.
+  if (msg.type === "wiki:place-verb") {
+    // Echo verb back as result for testing wiki:place-verb / wiki:verb-result round-trip.
     if (msg.requestId) {
       parentPort.postMessage({
         schema_version: 1,
-        type: "wiki:job-result",
+        type: "wiki:verb-result",
         requestId: msg.requestId,
         result: { verb: msg.verb, echoed: true },
       });

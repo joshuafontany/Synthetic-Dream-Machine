@@ -42,7 +42,7 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
 
     const nextStack = [...stack, bagUrl];
 
-    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
@@ -128,7 +128,7 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
 
     const nextStack = stack.filter((u) => u !== bagUrl);
 
-    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("wiki") };
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,

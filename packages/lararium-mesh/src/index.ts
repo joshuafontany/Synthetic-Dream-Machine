@@ -34,7 +34,7 @@ export { OpenIdentitySlot } from "./identity-slot.js";
 export * from "./meme-provider.js";
 export * from "./live-protocol.js";
 export * from "./island-accumulator.js";
-export * from "./job-tiddler.js";
+export * from "./verb-tiddler.js";
 export * from "./bag-residency.js";
 export * from "./kumu-device.js";
 export * from "./browser-authority.js";

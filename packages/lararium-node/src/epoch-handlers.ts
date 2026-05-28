@@ -236,7 +236,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       ? [...stack.slice(0, wikiIdx), previousCanonUri, ...stack.slice(wikiIdx)]
       : [...stack, previousCanonUri, wikiKey];
 
-    const origin: ChangeOrigin = { kind: "lares-job", requestId: makeRequestId("rotate") };
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("rotate") };
     const updatedRecipe: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
@@ -288,4 +288,4 @@ function escapeRegExp(s: string): string {
 
 
 // Origin tag used by Epoch — reserved for future audit-log integration.
-export const EPOCH_ORIGIN: ChangeOrigin = { kind: "lares-job", requestId: "epoch" };
+export const EPOCH_ORIGIN: ChangeOrigin = { kind: "lares-verb", requestId: "epoch" };

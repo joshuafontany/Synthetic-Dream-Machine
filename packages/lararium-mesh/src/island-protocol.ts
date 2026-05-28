@@ -182,21 +182,21 @@ export interface IslandMsg_Teardown {
 
 // ── Admin island protocol ─────────────────────────────────────────────────
 //
-// Three-message round-trip for admin island job coordination.
+// Three-message round-trip for admin island verb coordination.
 //
-// Vessel → island: AdminMsg_PlaceJob  — place a volatile job tiddler in the admin TW5 wiki.
-// Island → vessel: AdminMsg_DelegateJob — delegate a wiki-scope job whose handler lives on main.
-// Vessel → island: AdminMsg_JobResult  — deliver delegation result or error back to island.
+// Vessel → island: AdminMsg_PlaceVerb   — place a volatile verb invocation in the admin TW5 wiki.
+// Island → vessel: AdminMsg_DelegateVerb — delegate a wiki-scope verb whose handler lives on main.
+// Vessel → island: AdminMsg_VerbResult  — deliver delegation result or error back to island.
 //
 // The admin island owns the TW5 wiki event surface (kumu device law).
-// All jobs pass through the admin wiki change event → JobDispatcher tick.
+// All verbs pass through the admin wiki change event → VerbDispatcher tick.
 // Wiki-scope handlers that need vessel resources (repo, catalogHandle, etc.)
-// delegate via AdminMsg_DelegateJob; the island awaits AdminMsg_JobResult before writing receipt.
+// delegate via AdminMsg_DelegateVerb; the island awaits AdminMsg_VerbResult before writing outcome.
 
-/** Vessel → island: place a volatile job tiddler in the admin island's TW5 wiki. */
-export interface AdminMsg_PlaceJob {
+/** Vessel → island: place a volatile verb invocation in the admin island's TW5 wiki. */
+export interface AdminMsg_PlaceVerb {
   schema_version: ProtocolVersion;
-  type: "admin:place-job";
+  type: "admin:place-verb";
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
@@ -206,13 +206,13 @@ export interface AdminMsg_PlaceJob {
 }
 
 /**
- * Island → vessel: delegate a wiki-scope job to the vessel handler registry.
- * Emitted when the admin island's JobDispatcher encounters a verb not in its local registry.
- * The vessel executes the handler and posts AdminMsg_JobResult back.
+ * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
+ * Emitted when the admin island's VerbDispatcher encounters a verb not in its local registry.
+ * The vessel executes the handler and posts AdminMsg_VerbResult back.
  */
-export interface AdminMsg_DelegateJob {
+export interface AdminMsg_DelegateVerb {
   schema_version: ProtocolVersion;
-  type: "admin:delegate-job";
+  type: "admin:delegate-verb";
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
@@ -222,9 +222,9 @@ export interface AdminMsg_DelegateJob {
 }
 
 /** Vessel → island: delegation result or error. Admin island resolves the in-flight delegation promise. */
-export interface AdminMsg_JobResult {
+export interface AdminMsg_VerbResult {
   schema_version: ProtocolVersion;
-  type: "admin:job-result";
+  type: "admin:verb-result";
   requestId: string;
   result?: Record<string, unknown>;
   error?: string;
@@ -235,9 +235,9 @@ export type VesselToIslandMsg =
   | IslandMsg_Manifest
   | IslandMsg_Demote
   | IslandMsg_Teardown
-  | AdminMsg_PlaceJob
-  | AdminMsg_JobResult
-  | WikiMsg_PlaceJob;
+  | AdminMsg_PlaceVerb
+  | AdminMsg_VerbResult
+  | WikiMsg_PlaceVerb;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
 
@@ -303,15 +303,15 @@ export interface IslandMsg_FrameAck {
 }
 
 /**
- * Vessel → island: place a wiki-scope job into a wiki island's TW5 wiki.
+ * Vessel → island: place a wiki-scope verb invocation into a wiki island's TW5 wiki.
  *
- * Parallel to AdminMsg_PlaceJob for the admin island. Any island running a
- * wiki dispatch behavior handles this by calling placeVmJob on its TW5 wiki.
- * The wiki change event fires at next tick; the island's JobDispatcher dispatches it.
+ * Parallel to AdminMsg_PlaceVerb for the admin island. Any island running a
+ * wiki dispatch behavior handles this by calling placeVerbInvocation on its TW5 wiki.
+ * The wiki change event fires at next tick; the island's VerbDispatcher dispatches it.
  */
-export interface WikiMsg_PlaceJob {
+export interface WikiMsg_PlaceVerb {
   schema_version: ProtocolVersion;
-  type:           "wiki:place-job";
+  type:           "wiki:place-verb";
   verb:           string;
   args:           Record<string, unknown>;
   requestedBy:    string;
@@ -321,15 +321,15 @@ export interface WikiMsg_PlaceJob {
 }
 
 /**
- * Island → vessel: wiki-scope job result.
+ * Island → vessel: wiki-scope verb result.
  *
- * Sent by a wiki island's dispatch behavior after completing a job whose result
+ * Sent by a wiki island's dispatch behavior after completing a verb whose result
  * the vessel needs (e.g. promote — result carries the promoted record list).
- * For fire-and-forget jobs (no result needed) the island omits this message.
+ * For fire-and-forget verbs (no result needed) the island omits this message.
  */
-export interface WikiMsg_JobResult {
+export interface WikiMsg_VerbResult {
   schema_version: ProtocolVersion;
-  type:           "wiki:job-result";
+  type:           "wiki:verb-result";
   requestId:      string;
   result?:        Record<string, unknown>;
   error?:         string;
@@ -342,8 +342,8 @@ export type IslandToVesselMsg =
   | IslandMsg_Ea
   | IslandMsg_FrameAck
   | IslandMsg_Fault
-  | WikiMsg_JobResult
-  | AdminMsg_DelegateJob;
+  | WikiMsg_VerbResult
+  | AdminMsg_DelegateVerb;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -358,14 +358,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "demote", "teardown", "admin:place-job", "admin:job-result", "wiki:place-job"] as const).includes(
+  return (["manifest", "demote", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "wiki:job-result", "admin:delegate-job"] as const).includes(
+  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -432,17 +432,17 @@ export function mkFault(wikiUri: string, error: string): IslandMsg_Fault {
   return { schema_version: ISLAND_PROTOCOL_VERSION, type: "fault", wikiUri, error };
 }
 
-export function mkAdminPlaceJob(opts: {
+export function mkAdminPlaceVerb(opts: {
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
   targets?: string[];
   batchMode?: string;
   requestId?: string;
-}): AdminMsg_PlaceJob {
-  const msg: AdminMsg_PlaceJob = {
+}): AdminMsg_PlaceVerb {
+  const msg: AdminMsg_PlaceVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:place-job",
+    type: "admin:place-verb",
     verb: opts.verb,
     args: opts.args,
     requestedBy: opts.requestedBy,
@@ -453,17 +453,17 @@ export function mkAdminPlaceJob(opts: {
   return msg;
 }
 
-export function mkAdminDelegateJob(opts: {
+export function mkAdminDelegateVerb(opts: {
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
   targets?: string[];
   batchMode?: string;
-}): AdminMsg_DelegateJob {
-  const msg: AdminMsg_DelegateJob = {
+}): AdminMsg_DelegateVerb {
+  const msg: AdminMsg_DelegateVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:delegate-job",
+    type: "admin:delegate-verb",
     requestId: opts.requestId,
     verb: opts.verb,
     args: opts.args,
@@ -474,14 +474,14 @@ export function mkAdminDelegateJob(opts: {
   return msg;
 }
 
-export function mkAdminJobResult(opts: {
+export function mkAdminVerbResult(opts: {
   requestId: string;
   result?: Record<string, unknown>;
   error?: string;
-}): AdminMsg_JobResult {
-  const msg: AdminMsg_JobResult = {
+}): AdminMsg_VerbResult {
+  const msg: AdminMsg_VerbResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:job-result",
+    type: "admin:verb-result",
     requestId: opts.requestId,
   };
   if (opts.result !== undefined) msg.result = opts.result;
@@ -489,17 +489,17 @@ export function mkAdminJobResult(opts: {
   return msg;
 }
 
-export function mkWikiPlaceJob(opts: {
+export function mkWikiPlaceVerb(opts: {
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
   targets?: string[];
   batchMode?: string;
   requestId?: string;
-}): WikiMsg_PlaceJob {
-  const msg: WikiMsg_PlaceJob = {
+}): WikiMsg_PlaceVerb {
+  const msg: WikiMsg_PlaceVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "wiki:place-job",
+    type: "wiki:place-verb",
     verb: opts.verb,
     args: opts.args,
     requestedBy: opts.requestedBy,
@@ -510,20 +510,21 @@ export function mkWikiPlaceJob(opts: {
   return msg;
 }
 
-export function mkWikiJobResult(opts: {
+export function mkWikiVerbResult(opts: {
   requestId: string;
   result?: Record<string, unknown>;
   error?: string;
-}): WikiMsg_JobResult {
-  const msg: WikiMsg_JobResult = {
+}): WikiMsg_VerbResult {
+  const msg: WikiMsg_VerbResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "wiki:job-result",
+    type: "wiki:verb-result",
     requestId: opts.requestId,
   };
   if (opts.result !== undefined) msg.result = opts.result;
   if (opts.error  !== undefined) msg.error  = opts.error;
   return msg;
 }
+
 
 // ── Tiddler delta extraction — island-side utility ─────────────────────────
 

@@ -3,7 +3,7 @@
  *
  * Sovereign wiki island. Runs the sovereign-island-model lifecycle with
  * makeWikiPrimaryBehavior: disk projection (from manifest.diskMirrors) +
- * inline wiki:place-job dispatch (promote, sync-wiki).
+ * inline wiki:place-verb dispatch (promote, sync-wiki).
  *
  * Recipe (auto-assembled by sovereign-island-model):
  *   bagBindings CRDT bags (recipe order)

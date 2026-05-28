@@ -50,8 +50,8 @@ export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins
 export const GRAMMAR_TAG = stableTagUri("SharktoothSigil");
 export const PARSE_WARNING_TAG = stableTagUri("lararium-parse-warnings");
 export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
-export const LARES_JOB_TAG = stableTagUri("lares-job");
-export const LARES_JOB_EVENT_TAG = stableTagUri("lares-job-event");
+export const LARES_VERB_TAG = stableTagUri("lares-verb");
+export const LARES_VERB_EVENT_TAG = stableTagUri("lares-verb-event");
 export const LARES_PIN_TAG = stableTagUri("lares-pin");
 export const PROMOTION_RECEIPT_TAG = stableTagUri("lararium-promotion-receipt");
 /** Keyhive capability events persisted in the admin doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */

@@ -46,14 +46,14 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 ## Law
 
-The ReactionGraph is the live reaction dispatch layer.
-It is isomorphic (no Node or browser APIs) and runs on both server and client.
-It carries static bindings (declared in carrier pranala edges) and dynamic subscriptions (runtime).
+The ReactionGraph anchors the live reaction dispatch layer.
+It uses an isomorphic surface (no Node or browser APIs) and runs on both server and client.
+It carries static bindings (declared in carrier pranala edges) plus dynamic subscriptions (runtime).
 
-A reaction binding is a (fromUri, listenable) → (toUri, subscribable) routing rule.
-`fromUri` is the meme that fires. `listenable` is the event name (UEFN OUTPUT pin). `subscribable` is the handler label (UEFN INPUT pin).
+A reaction binding defines a (fromUri, listenable) → (toUri, subscribable) routing rule.
+`fromUri` names the meme that fires. `listenable` names the event label (UEFN OUTPUT pin). `subscribable` names the handler label (UEFN INPUT pin).
 
-The graph is the Tier 0 dispatch surface — all kumu event crossings route through it.
+The graph defines the Tier 0 dispatch surface — all kumu event crossings route through it.
 
 <<~/ahu >>
 
@@ -71,8 +71,8 @@ role         = "pranala edge role, or null"
 source       = "wired | subscribed"
 ```
 
-`wired` bindings are declared in carrier text as pranala edges with `family:reaction`.
-`subscribed` bindings are established at runtime via `subscribe()`.
+`wired` bindings arrive in carrier text as pranala edges with `family:reaction`.
+`subscribed` bindings form at runtime via `subscribe()`.
 
 <<~/ahu >>
 
@@ -89,7 +89,7 @@ fireRace         — heihei: first handler to settle wins; all continue
 fireRush         — puka: first to resolve wins; others receive AbortSignal
 ```
 
-`fireSync` is the default for view-layer reactions (navigation, zoom, relay).
+`fireSync` sets the default for view-layer reactions (navigation, zoom, relay).
 `fire` / `fireAll` for async workflows (store operations, TW5 hydration).
 `fireRace` / `fireRush` reserved for competitive dispatch (future: multi-realm routing).
 
@@ -108,7 +108,7 @@ subscribeByFn(fnName, handler) → unsub             — handler for ALL binding
 subscribeOnce(fromUri, listenable) → Promise + cancel()  — kukali bridge primitive
 ```
 
-`subscribeByFn` is the preferred wiring point for view-layer actions.
+`subscribeByFn` marks the preferred wiring point for view-layer actions.
 Register once; automatically handles bindings that arrive after boot via `updateUri()`.
 Equivalent to subscribing to a UEFN Relay device by name rather than by source.
 
@@ -123,8 +123,8 @@ The returned Promise resolves when the listenable fires once; `cancel()` rejects
 
 `load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
 A handler registered via `subscribe()` or `subscribeOnce()` survives graph reloads
-as long as the (fromUri, listenable) key still exists in the incoming binding set.
-Unoccupied slots for removed bindings are dropped; occupied slots are kept.
+as long as the (fromUri, listenable) key still appears in the incoming binding set.
+Unoccupied slots for removed bindings drop; occupied slots persist.
 
 This preserves in-flight kukali suspensions across TW5 wiki-change events.
 
@@ -152,7 +152,7 @@ reaction-roles = ["listenable", "subscribable", "observes", "throttles", "deboun
 
 ## Yin-Collapse Target Architecture
 
-The current ReactionGraph TS implementation is a **provisional bridge**, not the
+The current ReactionGraph TS implementation provides a **provisional bridge**, not the
 target architecture. The target collapses the routing layer into the TW5 wiki.
 
 ### Landed (2026-05-15) — reaction-router.ts TW5 startup module
@@ -175,20 +175,20 @@ packages/lararium-tw5/src/modules/reaction-router.ts
   Browser path: widget tree handles tm-verse-event directly.
 ```
 
-`ReactionGraph` and `extractReactionBindings` remain in `live-protocol.ts`
+`ReactionGraph` and `extractReactionBindings` now reside in `live-protocol.ts`
 (imported by reaction-router.ts). `ReactionEngine` class removed from
 kumu-device.ts. `lar-wiki-worker.ts` now wires `onVerseEvent`
 and drops the inline `re.onChangeset()` call.
 
-What remains in TS: MemeSyncAdaptor + LarTiddlerStore + VmPool + Keyhive.
+TS still carries: MemeSyncAdaptor + LarTiddlerStore + VmPool + Keyhive.
 
 ### `fireSync` gap — CLOSED (2026-05-15)
 
-The gap (inline dispatch before nalu) no longer exists. `reaction-router.ts`
+The gap (inline dispatch before nalu) no longer appears. `reaction-router.ts`
 fires reactions inside `wiki.addEventListener("change")` — after TW5 coalesces
 the batch. Dispatch now happens within the nalu, not before it.
 
-`fireSync` on `ReactionGraph` remains available for direct test use, but the
+`fireSync` on `ReactionGraph` ships for direct test use, but the
 production dispatch path runs exclusively through the nalu hook.
 
 ### Prior art validating the collapse

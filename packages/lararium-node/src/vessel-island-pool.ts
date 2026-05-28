@@ -36,14 +36,14 @@ import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  mkWikiPlaceJob,  BAG_IDS,  type BagBinding,
+  mkWikiPlaceVerb,  BAG_IDS,  type BagBinding,
   type IslandStorageConfig,
 } from "@lararium/mesh";
 import type {
   IslandMsg_Event,
   IslandMsg_Ea,
   IslandMsg_TeardownAck,
-  WikiMsg_JobResult,
+  WikiMsg_VerbResult,
   IslandToVesselMsg,
   VesselToIslandMsg,
 } from "@lararium/mesh";
@@ -160,8 +160,8 @@ export class VesselIslandPool {
   private readonly _mainRepo:       Repo | null;
   private readonly _storageRoot:    string | null;
   private readonly _laraiumDocUrl:  string;
-  /** Pending wiki:place-job results — requestId → { resolve, reject }. */
-  private readonly _pendingWikiJobs = new Map<string, {
+  /** Pending wiki:place-verb results — requestId → { resolve, reject }. */
+  private readonly _pendingWikiVerbs = new Map<string, {
     resolve: (r: Record<string, unknown>) => void;
     reject:  (e: Error) => void;
   }>();
@@ -245,11 +245,11 @@ export class VesselIslandPool {
   /**
    * Place a wiki-scope job into a hot or pinned island and await the result.
    *
-   * Sends WikiMsg_PlaceJob to the island identified by `wikiId`. The island
-   * must run a behavior that handles "wiki:place-job" (e.g. makeWikiDispatchBehavior).
+   * Sends WikiMsg_PlaceVerb to the island identified by `wikiId`. The island
+   * must run a behavior that handles "wiki:place-verb" (e.g. makeWikiDispatchBehavior).
    * Resolves with the result record or rejects on error / timeout.
    */
-  placeWikiJob(
+  placeWikiVerb(
     wikiId:  string,
     opts: {
       verb:        string;
@@ -267,17 +267,17 @@ export class VesselIslandPool {
     return new Promise<Record<string, unknown>>((resolve, reject) => {
       const timer = setTimeout(
         () => {
-          this._pendingWikiJobs.delete(requestId);
-          reject(new Error(`[vm-manager] wiki:place-job timeout for ${wikiId}/${opts.verb}`));
+          this._pendingWikiVerbs.delete(requestId);
+          reject(new Error(`[vm-manager] wiki:place-verb timeout for ${wikiId}/${opts.verb}`));
         },
         HANDSHAKE_TIMEOUT_MS,
       );
-      this._pendingWikiJobs.set(requestId, {
+      this._pendingWikiVerbs.set(requestId, {
         resolve: (r) => { clearTimeout(timer); resolve(r); },
         reject:  (e) => { clearTimeout(timer); reject(e); },
       });
       (slot as IslandSlot).worker.postMessage(
-        mkWikiPlaceJob({ ...opts, requestId }),
+        mkWikiPlaceVerb({ ...opts, requestId }),
       );
     });
   }
@@ -410,11 +410,11 @@ export class VesselIslandPool {
           console.warn(`[vm-manager] Island event dropped for ${wikiId} — no onWorkerEvent callback registered`);
         }
       }
-      if (raw.type === "wiki:job-result") {
-        const result = raw as WikiMsg_JobResult;
-        const pending = this._pendingWikiJobs.get(result.requestId);
+      if (raw.type === "wiki:verb-result") {
+        const result = raw as WikiMsg_VerbResult;
+        const pending = this._pendingWikiVerbs.get(result.requestId);
         if (pending) {
-          this._pendingWikiJobs.delete(result.requestId);
+          this._pendingWikiVerbs.delete(result.requestId);
           if (result.error) pending.reject(new Error(result.error));
           else               pending.resolve(result.result ?? {});
         }

@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-27 (S9 browser founding ceremony confirmed green — 215/215 tests)
+> Updated: 2026-05-28 (Path L sealed — admin-auth WebSocket gate + YIN aftermath; 59/59 tests)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -60,7 +60,7 @@ These planning docs follow one architectural law:
 - Browser vessels and node vessels share one operator-vessel contract.
 - Every vessel writes local intent first, then syncs over the mesh.
 - Capability proof checks happen on the invoking vessel before edge work.
-- Job tiddlers stay vessel-local scratch; receipt tiddlers carry the durable shared aftermath.
+- Verb invocations stay vessel-local scratch; outcome tiddlers carry the durable shared aftermath.
 - Node-only behavior counts as edge adaptation, not authority.
 - Roadmap order favors vessel-law closure before product-side expansion.
 - "vessel" names the lararium identity-and-runtime unit; "peer" names only an Automerge-layer sync participant. Never use "peer" for a lararium vessel.
@@ -90,8 +90,8 @@ These planning docs follow one architectural law:
 | — | **YIN ontology + typo closure** | ✅ Done | `runSovereignisland` → `runSovereignWorker` in 3 entry files. `worker: island` → `worker: Worker`. `node-vm-manager.test.ts` → `vessel-island-pool.test.ts`. `vm-manager-echo.mjs` → `vm-pool-echo.mjs`. Fixture binding resolution uses `b.writable`. 195/195. |
 | — | **§8 archipelago gate** | ✅ Done | `federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair via `MessageChannelNetworkAdapter`. Island Sovereignty Law §8 written. Gate proof cites node + browser (`browser-repo-in-island.test.ts` test 2). 196/196 tests. |
 | — | **S9 / lararium-browser S4 real boot** | ✅ Done | `openBrowserVessel`: WebCrypto Ed25519 keypair (IDB-persisted), `runFoundingCeremony` isomorphic (Buffer→btoa/atob in `ceremony-core.ts` + `admin-event-store.ts`), Gates A/B/C verified in real Chromium, `docHandle.broadcast()` wired. `browser-operator-key.ts` + `open-browser-vessel.ts` + `BrowserVesselIslandPoolOptions.workerScriptUrl` optional. `browser-founding-ceremony.test.ts` 7/7 Playwright. 19/19 browser tests. |
-| 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=admin` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
-| 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
+| — | **L / S7.4** | ✅ Done | `AdminAuthGate`: lar:challenge/lar:auth WebSocket handshake; `accessForDoc` concap gate; `peerIdentifierMap` + `queueMicrotask` race fix; MAX_PENDING + contactCard cap + timeout hardening. TODO L.2 (nonce signing) deferred — alpha posture acceptable, see M sprint. 59/59 tests. |
+| 1 | **M / Local intent bridge** | ⬜ Next | Verb/outcome vocabulary now canonical (job→verb, receipt→outcome, inbox→signal corpus-wide, 196/196 tests). Next: wire `IslandMsg_Event` for cross-vessel event routing; connect Reaction Engine `tm-verse-event` to inter-island signal paths. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
 | 6 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |

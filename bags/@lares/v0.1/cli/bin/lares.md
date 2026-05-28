@@ -17,11 +17,11 @@ retain       = true
 
 <<~ ahu #contract >>
 The `lares` binary holds the operator's only top-level ceremony surface. It dispatches subcommands registered in a single COMMANDS table (init, status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma, promote, help). Each command is a thin async handler:
-* Library commands (init, promote) import their logic from `@lararium/node` so the same operations can run inside a TW5 vm via the job-tiddler protocol.
+* Library commands (init, promote) import their logic from `@lararium/node` so the same operations can run inside a TW5 vm via the verb-tiddler protocol.
 * Scripted commands shell out to the existing tsx scripts via `runTsxScript` / `runCommand`.
 * Status is a pure local probe (storage size, port in use, bootstrap presence).
 
 The binary holds NO domain logic. Adding a new operator ceremony means: add the handler, add the COMMANDS row, optionally add a meme anchor.
 
-Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispatch — `promote` rides job-tiddlers through the admin doc), TW5 vm primacy (handlers are widget-friendly), and the corpus-vs-engine category boundary (this file lives in an engine package, NOT a corpus one).
+Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispatch — `promote` rides verb-tiddlers through the admin doc), TW5 vm primacy (handlers are widget-friendly), and the corpus-vs-engine category boundary (this file lives in an engine package, NOT a corpus one).
 <<~/ahu >>

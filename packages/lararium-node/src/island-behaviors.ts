@@ -7,23 +7,23 @@
  *
  * ## Wiki island — null behavior
  *   Read-dominant: CRDT bags flow in, TW5 session writes land in scratch.
- *   No JobDispatcher, no relay protocol. writeBagId = BAG_IDS.scratch.
+ *   No VerbDispatcher, no relay protocol. writeBagId = BAG_IDS.scratch.
  *
  * ## Wiki island with disk projection — extends null behavior
  *   Starts a LarDiskProjector inside the island, subscribing to TW5 wiki
  *   change events directly. renderFn calls exportMemeText(ctx.tw5, uri).
  *   Receives diskMirrors from manifest (serializable BagMirrorConfig).
  *
- * ## Wiki island with dispatch — handles wiki:place-job messages
+ * ## Wiki island with dispatch — handles wiki:place-verb messages
  *   No kumu device surface (that belongs to admin island). Handles explicit
- *   wiki-scope jobs placed by the vessel. Direct inline dispatch (no
- *   JobDispatcher subscription) → wiki:job-result posted back.
- *   Cap verification: stubbed (job arrived from vessel = pre-authorized).
+ *   wiki-scope verbs placed by the vessel. Direct inline dispatch (no
+ *   VerbDispatcher subscription) → wiki:verb-result posted back.
+ *   Cap verification: stubbed (verb arrived from vessel = pre-authorized).
  *
  * ## Admin island — dispatch behavior
  *   Owns the kumu device / Reaction Engine surface (TW5 wiki change events).
- *   JobDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
- *   vessel via AdminMsg_DelegateJob / AdminMsg_JobResult.
+ *   VerbDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
+ *   vessel via AdminMsg_DelegateVerb / AdminMsg_VerbResult.
  *   writeBagId = ADMIN_BAG_ID (CRDT write-back, persisted).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/island-behaviors
@@ -31,13 +31,13 @@
 
 import {
   BAG_IDS,
-  mkWikiJobResult,
+  mkWikiVerbResult,
   type BatchMode,
-  type WikiMsg_PlaceJob,
+  type WikiMsg_PlaceVerb,
   type IslandMsg_Manifest,
+  type VerbInvocation,
 } from "@lararium/mesh";
-import { placeVmJob, exportMemeText, VerbTable } from "@lararium/tw5";
-import type { JobTiddler } from "@lararium/mesh";
+import { placeVerbInvocation, exportMemeText, VerbTable } from "@lararium/tw5";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
 import { makePromoteReactor } from "./promote-handler.js";
@@ -46,10 +46,10 @@ import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 // ── Primary Wiki island behavior — disk projection + wiki dispatch ────────
 
 /**
- * IslandBehavior for the primary wiki island: disk write-back + wiki-scope job dispatch.
+ * IslandBehavior for the primary wiki island: disk write-back + wiki-scope verb dispatch.
  *
  *   onEa     — start LarDiskProjector (if diskMirrors present) + build VerbTable
- *   onSignal — handle wiki:place-job inline dispatch
+ *   onSignal — handle wiki:place-verb inline dispatch
  *   onDemote — stop projector, clear registry
  */
 export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBehavior {
@@ -82,18 +82,18 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
-      if (type !== "wiki:place-job") return false;
+      if (type !== "wiki:place-verb") return false;
       if (!_registry) return false;
-      const msg = raw as WikiMsg_PlaceJob;
+      const msg = raw as WikiMsg_PlaceVerb;
       const requestId = msg.requestId ?? crypto.randomUUID();
       const handler = _registry.get(msg.verb);
       if (!handler) {
-        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: `no handler for "${msg.verb}"` }));
+        if (msg.requestId) ctx.post(mkWikiVerbResult({ requestId, error: `no handler for "${msg.verb}"` }));
         return true;
       }
-      const job: JobTiddler = {
+      const invocation: VerbInvocation = {
         requestId,
-        title:       `lar:///ha.ka.ba/@wiki/jobs/${requestId}`,
+        title:       `lar:///ha.ka.ba/@wiki/verbs/${requestId}`,
         verb:        msg.verb,
         args:        msg.args,
         targets:     msg.targets ?? [],
@@ -104,12 +104,12 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       };
       void handler(msg.args, {
         admin: ctx.composite,
-        job,
-        cap: async () => ({ ok: true, reason: "worker-trust" }),
+        invocation,
+        cap:   async () => ({ ok: true, reason: "worker-trust" }),
       }).then((result) => {
-        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, result }));
+        if (msg.requestId) ctx.post(mkWikiVerbResult({ requestId, result }));
       }).catch((err: unknown) => {
-        if (msg.requestId) ctx.post(mkWikiJobResult({ requestId, error: String(err) }));
+        if (msg.requestId) ctx.post(mkWikiVerbResult({ requestId, error: String(err) }));
       });
       return true;
     },
@@ -121,4 +121,3 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
     },
   };
 }
-

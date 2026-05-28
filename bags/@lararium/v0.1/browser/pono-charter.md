@@ -44,18 +44,18 @@ The `BrowserAuthorityPool` manages worker lifecycle. It holds warm authorities
 keyed by wiki URI. It does not expose internal worker handles to callers.
 Callers acquire a `BrowserAuthorityLease` and return it. The pool decides what to keep warm.
 
-**BV-4 — Plugin membrane is the TW5-content boundary.**
+**BV-4 — Plugin membrane defines the TW5-content boundary.**
 TW5-native rendering content (tiddlers, startup modules, page-chrome fragments)
 lives inside the compiled plugin blob. Host TS carries no TW5 page chrome.
 The island reads the plugin blob bytes from the `@lararium` CRDT doc after Repo sync —
 no blob bytes transfer in the manifest. `coreHash` identifies the blob; the mesh delivers it.
 
-**BV-5 — Projection adapters are edges, not seams.**
+**BV-5 — Projection adapters mark edges, not seams.**
 Adapters translate worker-produced render inputs into host surfaces (HTML, canvas, HUD).
 They carry no sovereign state. They translate; they do not own.
 
 **BV-6 — No ambient globals.**
-`window.$tw`, `window.TiddlyWiki`, and any page-global TW5 attach point are
+`window.$tw`, `window.TiddlyWiki`, and any page-global TW5 attach point hold
 categorically excluded from the browser vessel's authority path.
 A future debug path may expose a limited inspector surface; that surface does not
 constitute sovereignty.
@@ -63,14 +63,14 @@ constitute sovereignty.
 **BV-7 — Islands tick themselves; the host does not drive state changes.**
 Each island authority runs its own rAF drain loop (or `setTimeout` fallback in environments without `requestAnimationFrame`). The host MAY send messages; the island drains them at frame boundaries, never on raw message receipt. This preserves the island's causal sovereignty — its internal state advances on its own clock, not the host's.
 
-**BV-8 — RootTemplate is source material, not constitutional authority.**
+**BV-8 — RootTemplate supplies source material, not constitutional authority.**
 `$:/core/ui/RootTemplate` and `$:/core/ui/PageTemplate` name prior art.
 The Lararium browser vessel owns its root/frame contract.
 Any surviving reference to these tiddlers must live inside the plugin membrane
 or behind the named adapter boundary in `tw5-browser-surface.ts`.
 
 **BV-9 — Sovereign Worker boot requires `Content-Security-Policy: worker-src 'self'`.**
-The Worker URL passed via `adminWorkerUrl` / `workerScriptUrl` is an XSS injection sink
+The Worker URL passed via `adminWorkerUrl` / `workerScriptUrl` creates an XSS injection sink
 (MDN classification). Pono sovereign deployment MUST emit a `Content-Security-Policy`
 response header containing `worker-src 'self'` from the serving layer (Caddy, nginx, or
 equivalent). This prevents any cross-origin script from being loaded as a Worker, which
@@ -82,7 +82,7 @@ browser security model. The obligation sits at the serving edge:
 - In Docker / deployment manifests: verified before any operator vessel goes live.
 
 During local development, the Vite dev server's same-origin constraint provides equivalent
-protection; no explicit CSP is required in that context.
+protection; no explicit CSP gets required in that context.
 
 <<~/ahu >>
 

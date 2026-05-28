@@ -130,7 +130,7 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 | `island` | Worker thread — sovereign; owns its Repo |
 | `ea` | sovereignty breath — island declares it after boot completes |
 | `bag` | Automerge doc = sync boundary |
-| `job-tiddler` | inter-process coordination artifact |
+| `verb-tiddler` | inter-process coordination artifact |
 | `VerbTable` | job handler registry |
 | `VerbReactor` | job handler |
 | `onEa` / `onSignal` / `onDemote` | OTP init/1 · handle_info/2 · terminate/2 |

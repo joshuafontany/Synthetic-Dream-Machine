@@ -36,7 +36,7 @@ export function makeDraftReactor(opts: DraftHandlerOptions): VerbReactor {
       throw new Error(`target bag is not writable in this composite: ${toBag}`);
     }
 
-    const origin: ChangeOrigin = { kind: "lares-job", requestId: ctx.job.requestId };
+    const origin: ChangeOrigin = { kind: "lares-verb", requestId: ctx.invocation.requestId };
     const drafted: LarTiddlerRecord = {
       tiddler: {
         ...record.tiddler,

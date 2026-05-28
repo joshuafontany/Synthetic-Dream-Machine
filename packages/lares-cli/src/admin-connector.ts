@@ -1,11 +1,11 @@
 /**
  * admin-connector — connect the CLI to a running `lares serve` daemon as an
- * Automerge-repo WebSocket vessel connection, then submit job-tiddlers and await
- * results through the admin doc.
+ * Automerge-repo WebSocket vessel connection, then submit verb-signal tiddlers
+ * and await outcomes through the admin doc.
  *
- * Why vessel-not-RPC: job-tiddlers + a CRDT sync channel preserve the
+ * Why vessel-not-RPC: verb-signal tiddlers + a CRDT sync channel preserve the
  * web3-only invariant. The CLI looks like any other vessel of the operator's
- * federation; the daemon's dispatcher reacts to the same admin-doc changes
+ * federation; the daemon's VerbDispatcher reacts to the same admin-doc changes
  * it would react to from a TW5 vm widget or a future ReactionEngine.
  *
  * Attach mode only (operator-chosen for B.5): the CLI requires a daemon to
@@ -19,7 +19,7 @@ import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-re
 import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";
 import {
   ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
-  buildJobInboxRecord, JOB_INBOX_URI_PREFIX, JOB_RECEIPT_URI_PREFIX, JOB_RESULT_KEY,
+  buildVerbSignal, VERB_SIGNAL_URI_PREFIX, VERB_OUTCOME_URI_PREFIX, VERB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
@@ -69,7 +69,6 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
   const adapter = new WebSocketClientAdapter(`ws://${host}:${port}/ws`);
   const repo    = new Repo({ network: [adapter] });
 
-  // Wait for ready or fail fast.
   await Promise.race([
     adapter.whenReady(),
     new Promise<never>((_, rej) => setTimeout(
@@ -117,18 +116,18 @@ export interface SubmitResult {
 }
 
 export function summaryOutput(result: SubmitResult): Record<string, unknown> | undefined {
-  return result.results?.[JOB_RESULT_KEY]?.output;
+  return result.results?.[VERB_RESULT_KEY]?.output;
 }
 
 /**
- * * Write a job-tiddler signal, poll for the durable receipts/<requestId>
- * tiddler appearing — its appearance IS the "done" signal.
+ * Write a verb-signal tiddler to the shared admin CRDT doc, then poll for
+ * the durable @admin/outcomes/<requestId> tiddler — its appearance IS the
+ * "done" signal (CRDT convergence = result).
  *
- * Under the split contract: signal-tiddler under cmd/<id> is fire-and-
- * forget; the dispatcher tombstones it. CLI never tombstones; a CLI crash
- * leaves no namespace residue.
+ * Signal tiddler is fire-and-forget; the dispatcher tombstones it.
+ * CLI never tombstones; a CLI crash leaves no namespace residue.
  */
-export async function submitJob(
+export async function submitVerb(
   vessel:      AdminVesselHandle,
   verb:        string,
   args:        Record<string, unknown>,
@@ -138,16 +137,16 @@ export async function submitJob(
   const pollMs    = opts.pollMs    ?? 100;
   const timeoutMs = opts.timeoutMs ?? 10000;
 
-  const inboxRecord = buildJobInboxRecord({ verb, args, requestedBy });
-  const requestId   = (inboxRecord.tiddler as Record<string, string>)['request-id']!;
-  const logTitle    = `${JOB_RECEIPT_URI_PREFIX}${requestId}`;
+  const signalRecord = buildVerbSignal({ verb, args, requestedBy });
+  const requestId    = (signalRecord.tiddler as Record<string, string>)['request-id']!;
+  const outcomeTitle = `${VERB_OUTCOME_URI_PREFIX}${requestId}`;
 
-  await vessel.composite.put(inboxRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
+  await vessel.composite.put(signalRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
 
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     await new Promise((r) => setTimeout(r, pollMs));
-    const event = await vessel.composite.get(logTitle);
+    const event = await vessel.composite.get(outcomeTitle);
     if (!event || event.meta?.deleted) continue;
     const fields = event.tiddler as Record<string, string>;
     const status = fields["status"];
@@ -173,8 +172,8 @@ export async function submitJob(
     };
   }
 
-  throw new Error(`job "${verb}" timed out after ${timeoutMs}ms`);
+  throw new Error(`verb "${verb}" timed out after ${timeoutMs}ms`);
 }
 
-// Re-export so job-facing helpers don't need a separate import path.
-export { JOB_INBOX_URI_PREFIX };
+// Re-export so verb-facing helpers don't need a separate import path.
+export { VERB_SIGNAL_URI_PREFIX };

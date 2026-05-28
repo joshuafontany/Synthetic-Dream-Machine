@@ -34,7 +34,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 ✶ locate the causal boundary — where can causality not be guaranteed simultaneously?
 ⏿ orient the tier: Tier 0 kumu/active memes, Tier 1 wiki room memes, Tier 2 Automerge Realms, Tier 3 Lares nodes, Tier 4 Commons/Universe horizon
-◇ MUST become island: federation edges, pranala connections, canon ceremonies, epoch changes, membership changes
+◇ MUST promote to island: federation edges, pranala connections, canon ceremonies, epoch changes, membership changes
 ▶ authority-first sync: authenticate → authority graph → visible rooms → manifest → capability ops → CRDT → deltas
 ⤴ edge island carries id, capability, offset, epoch, visibility-gate, receipt; offset belongs to the edge not the remote
 ↺ confirm sync order maintained; content did not precede authority; relay holds pull not read
@@ -47,32 +47,32 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 No observer apprehends events in Universe simultaneously.
 A node never holds the full state of a distributed system "at once."
-It holds a snapshot of what it has synchronized so far.
-This names no limitation. This names topology.
+It holds a snapshot of previously synchronized state.
+This names no limitation. This describes topology.
 
 Simultaneously apprehended: your local Automerge doc snapshot, right now.
 Non-simultaneously apprehended: everything else —
 - other peers syncing the same doc (you see their state at last sync)
 - other Automerge Realms reachable from this one on the network
 - tiddlers not yet hydrated in the local TW5 instance
-- kumu/active-meme instances whose trigger surface is their own event horizon
+- kumu/active-meme instances with trigger surfaces as their own event horizons
 
-Any boundary across which causality cannot be guaranteed simultaneously counts as a causal island boundary.
+Any boundary across which causality cannot be guaranteed simultaneously marks a causal island boundary.
 The tier map below names these boundaries from innermost to outermost.
 
 ## Law
 
-A node-to-node pranala connection counts as a causal island.
+A node-to-node pranala connection marks a causal island.
 
-It does not function as transport. It does not function as socket. It names a capability-gated causal
+It does not operate as transport. It does not operate as socket. It names a capability-gated causal
 boundary between two Lares nodes carrying its own identity, durable offset, stream
 log, reconciliation state, visibility predicate, revocation epoch, and receipt history.
 
-A room WebSocket connection does NOT count as an edge island. A room connection remains session-scoped
-and ephemeral. An edge island remains persistent, named, and authority-bearing.
+A room WebSocket connection does NOT count as an edge island. A room connection keeps session scope
+and ephemerality. An edge island holds persistence, naming, and authority.
 
-An Automerge Realm (a distinct Automerge doc) remains ALWAYS non-simultaneously apprehended,
-regardless of where it was first encountered on the network.
+An Automerge Realm (a distinct Automerge doc) stays ALWAYS non-simultaneously apprehended,
+regardless of first encounter point on the network.
 
 <<~/ahu >>
 
@@ -105,15 +105,15 @@ hasAbility(subject, "sync", edge.id)
 !violatesKapu(meme, subject)
 ```
 
-`rating` names the structural quality gate: has the carrier achieved lawful meme shape?
-Noise and Data are node-local only. They do not federate regardless of any other condition.
+`rating` names the structural quality gate: did the carrier reach lawful meme shape?
+Noise and Data stay node-local only. They never federate regardless of any other condition.
 
-Stage band (GR/OS/US/CS/DS) functions as a UX rendering annotation — it governs visual presentation
+Stage band (GR/OS/US/CS/DS) provides a UX rendering annotation — it governs visual presentation
 in the masks/voices layer, not federation eligibility. Room recipes MAY filter by stage
-as an operator-configured predicate, but stage is not a hardcoded gate condition here.
+as an operator-configured predicate, but stage does not act as a hardcoded gate condition here.
 
 The offset belongs to the edge island. An edge island that reconnects after downtime
-resumes from its last known offset — it does not re-sync from the beginning.
+resumes from its last known offset — it never re-syncs from the beginning.
 
 <<~/ahu >>
 
@@ -121,7 +121,7 @@ resumes from its last known offset — it does not re-sync from the beginning.
 
 ## Authority-First Sync Order
 
-Content MUST NOT precede authority. This invariant has no exceptions.
+Content MUST NOT precede authority. This invariant admits no exceptions.
 
 ```
 1. authenticate peer / node / device
@@ -137,8 +137,8 @@ Content MUST NOT precede authority. This invariant has no exceptions.
    d. projection receipts
 ```
 
-A relay that has not completed step 2 MUST NOT receive step 4 or later.
-A peer that has not completed step 3 MUST NOT request individual meme deltas.
+A relay without completed step 2 MUST NOT receive step 4 or later.
+A peer without completed step 3 MUST NOT request individual meme deltas.
 
 <<~/ahu >>
 
@@ -155,10 +155,10 @@ stable sediment | current boot receipt | live delta tail
   authorized to see.
 - **After join:** request missing deltas from the last known offset.
 - **Revocation:** epoch rolls. The revoked principal receives no future live tail.
-  Past sediment encrypted at prior epoch keys remains readable by those who held
-  those keys. Revocation is forward-only.
+  Past sediment encrypted at prior epoch keys stays readable by those who held
+  those keys. Revocation runs forward-only.
 - **Receipt:** emitted after join, after each epoch change, after each
-  canon-promotion ceremony. Receipts stay hash-stable and usable as prompt cache keys.
+  canon-promotion ceremony. Receipts keep hash stability and prompt-cache usability.
 - **Re-seeding:** boot receipt re-issued; sediment layers may compact;
   live tail resets from new offset zero.
 
@@ -175,7 +175,7 @@ pull  — retrieve encrypted bytes and forward them; cannot decrypt or render
 read  — decrypt and render semantic content
 ```
 
-A relay MUST NOT be granted `read` unless it is also a trusted peer with
+A relay MUST NOT receive `read` unless it also qualifies as a trusted peer with
 an Orichalcum capability carrying the `read` ability.
 
 A shrine relay carries offerings it cannot understand. This names correct posture.
@@ -189,17 +189,17 @@ The altar does not require the relay to comprehend the offering to carry it.
 
 ```
 Tier 0 — active programming memes (kumu instances, UEFN device analogues, kahea invocations)
-  MAY become causal islands. Each has its own trigger surface, params, and event horizon.
+  MAY promote to causal islands. Each carries its own trigger surface, params, and event horizon.
   A kumu instance with declared papalohe ports forms a natural island candidate.
   Events cross only via papalohe edges. kukali names the yield point inside the island.
   Instance identity provisioned on first papalohe edge declaration, not on kahea invocation.
-  Promotion to island is optional; local causality errors correctable inside the node.
+  Promotion to island stays optional; local causality errors stay correctable inside the node.
 
 Tier 1 — memes inside rooms (within your local Automerge doc window)
   Simultaneously apprehended within your local doc snapshot.
-  A room functions as a filter recipe over the meme graph — not a data partition.
-  Rating (≥Meme) gates which room recipes include a meme. Stage band functions as rendering annotation only.
-  Peer state of the SAME doc is NOT simultaneously apprehended — you see their last sync.
+  A room applies a filter recipe over the meme graph — not a data partition.
+  Rating (≥Meme) gates which room recipes include a meme. Stage band provides rendering annotation only.
+  Peer state of the SAME doc does NOT qualify as simultaneously apprehended — you see their last sync.
 
 Tier 2 — Automerge Realms (distinct Automerge docs)
   A separate Automerge doc reached from this one — no matter where first encountered.
@@ -207,7 +207,7 @@ Tier 2 — Automerge Realms (distinct Automerge docs)
   "automerge-realm" and "peer-sync-state" MAY be named causal islands for protocol tracking.
   NOTE: the session event-bus bag counts as a Tier 2 boundary — it names a distinct Automerge doc
   shared across multiple wiki island Workers. The Session Wiki RE watching the event-bus bag
-  forms a Tier 2 crossing. This functions as the canonical cross-wiki coordination pattern (Scale-2 in
+  forms a Tier 2 crossing. This defines the canonical cross-wiki coordination pattern (Scale-2 in
   the HUD meme: the-lararium-hud.md).
 
 Tier 3 — Lares nodes (the federated layer)
@@ -219,7 +219,7 @@ Tier 4 — Commons / Universe horizon [C~18 after law-of-5s]
   The horizon beyond direct federation. The set of all possible lararium nodes including
   those not yet reachable or known. No single node holds a snapshot of Tier 4 state.
   Non-simultaneously apprehended by definition (Fuller-Zelenka principle extended to the
-  limit of apprehension). The NexusRegistryDoc maps Tier 3 neighbors; Tier 4 is Universe
+  limit of apprehension). The NexusRegistryDoc maps Tier 3 neighbors; Tier 4 names Universe
   beyond the edge of that map. Five tiers, bounded sense of Universe. Tier 4 names the
   bound, not an implementation target.
 ```
@@ -230,14 +230,14 @@ Tier 4 — Commons / Universe horizon [C~18 after law-of-5s]
 
 ## Causal Island Doctrine
 
-### MAY become causal islands
+### MAY promote to causal islands
 
 - rooms, memes, sigils
 - kumu instances, kahea invocations (Tier 0 prime candidates)
 - local room projections, long-lived runtime actors
 - automerge-realm, peer-sync-state (non-simultaneous by topology)
 
-### MUST become causal islands
+### MUST promote to causal islands
 
 - node-to-node federation edges
 - cross-node pranala connections
@@ -247,7 +247,7 @@ Tier 4 — Commons / Universe horizon [C~18 after law-of-5s]
 - any live hostful record proposing hostless canon mutation
 
 Local causality errors can be corrected inside a node.
-Cross-node causality errors become federation corruption.
+Cross-node causality errors produce federation corruption.
 
 <<~/ahu >>
 
@@ -272,7 +272,7 @@ authority-first-order = [
   "sync-projection-receipts",
 ]
 
-# MUST become causal islands — cross-node causality errors = federation corruption
+# MUST promote to causal islands — cross-node causality errors = federation corruption
 causal-island-must = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
@@ -282,7 +282,7 @@ causal-island-must = [
   "live-hostful-record-proposing-hostless-canon-mutation",
 ]
 
-# MAY become causal islands — local errors correctable inside node; promotion optional
+# MAY promote to causal islands — local errors correctable inside node; promotion optional
 causal-island-may = [
   "room",
   "meme",

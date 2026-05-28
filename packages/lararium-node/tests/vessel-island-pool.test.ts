@@ -259,12 +259,12 @@ describe("VesselIslandPool — island lifecycle", () => {
     expect(changes.events.at(-1)!.payload.tiddlerCount).toBeGreaterThanOrEqual(1);
   }, 10_000);
 
-  test("placeWikiJob — sends wiki:place-job and resolves with wiki:job-result", async () => {
+  test("placeWikiVerb — sends wiki:place-verb and resolves with wiki:verb-result", async () => {
     pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
 
-    const result = await pool.placeWikiJob(WIKI_ID, {
+    const result = await pool.placeWikiVerb(WIKI_ID, {
       verb:        "echo",
       args:        { message: "hello" },
       requestedBy: "test",
@@ -273,15 +273,15 @@ describe("VesselIslandPool — island lifecycle", () => {
     expect(result).toMatchObject({ verb: "echo", echoed: true });
   });
 
-  test("placeWikiJob — rejects when island sends error in wiki:job-result", async () => {
+  test("placeWikiVerb — rejects when island sends error in wiki:verb-result", async () => {
     // We test this by mounting against a fixture that returns an error for unknown verbs.
     // The echo fixture echoes all verbs successfully, so we test the error path directly
     // via a timeout scenario by using a very short timeout — instead use a dedicated check:
-    // placeWikiJob on a cold slot rejects immediately.
+    // placeWikiVerb on a cold slot rejects immediately.
     pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
 
     await expect(
-      pool.placeWikiJob("lar:///ha.ka.ba/@test/no-such-wiki", {
+      pool.placeWikiVerb("lar:///ha.ka.ba/@test/no-such-wiki", {
         verb:        "promote",
         args:        {},
         requestedBy: "test",

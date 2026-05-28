@@ -61,14 +61,14 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
   console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);
 
   // C.4 — when the daemon is up, ask it for a residency snapshot. Cheap
-  // call (one job-tiddler round-trip); if anything fails, fall through
+  // call (one verb-tiddler round-trip); if anything fails, fall through
   // silently — `lares status` stays cheap and never errors.
   if (portInUse) {
     try {
-      const { connectAdminVessel, submitJob, summaryOutput } = await import("../admin-connector.js");
+      const { connectAdminVessel, submitVerb, summaryOutput } = await import("../admin-connector.js");
       const vessel = await connectAdminVessel({});
       try {
-        const r = await submitJob(vessel, "residency", {}, "lares-status", { timeoutMs: 2000 });
+        const r = await submitVerb(vessel, "residency", {}, "lares-status", { timeoutMs: 2000 });
         if (r.status === "done") {
           const stats   = summaryOutput(r) ?? {};
           const pinned  = (stats["pinned"] ?? []) as string[];

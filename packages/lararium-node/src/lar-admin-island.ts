@@ -2,7 +2,7 @@
  * lar-admin-island — Node.js admin island entry point.
  *
  * Sovereign admin island. Runs the shared sovereign-island-model lifecycle
- * with AdminBehavior: full recipe, JobDispatcher on TW5 wiki change events
+ * with AdminBehavior: full recipe, VerbDispatcher on TW5 wiki change events
  * (the kumu device / Reaction Engine surface), relay protocol for wiki-scope
  * verbs, TW5 saves write back to the admin CRDT bag.
  *
@@ -13,8 +13,8 @@
  *   └── scratch MemoryTiddlerStore  (defaultWritable:true)   ← job staging
  *   └── projection MemoryTiddlerStore (defaultWritable:false) ← $:/state/*
  *
- * JobDispatcher subscribes to TW5 wiki change events — the kumu device law.
- * Wiki-scope verbs delegate to vessel via AdminMsg_DelegateJob / JobResult.
+ * VerbDispatcher subscribes to TW5 wiki change events — the kumu device law.
+ * Wiki-scope verbs delegate to vessel via AdminMsg_DelegateVerb / JobResult.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-admin-island
  */

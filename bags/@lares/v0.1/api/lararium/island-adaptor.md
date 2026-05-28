@@ -31,7 +31,7 @@ It does NOT implement the TW5 `syncadaptor` module contract.
 |---|---|
 | Pre-sync inbound buffer per island | IslandAdaptor |
 | `onSyncComplete` batch flush (one `wiki.transact()` per island) | IslandAdaptor |
-| Non-CRDT immediate apply (canon-hydrate, lares-job, tw-local echoes) | IslandAdaptor |
+| Non-CRDT immediate apply (canon-hydrate, lares-verb, tw-local echoes) | IslandAdaptor |
 | Post-sync crdt-remote buffering | IslandAccumulator (separate projection) |
 | rAF-frame drain of post-sync patches | IslandAdaptor.flushAll() |
 | Outbound `saveTiddler` → `store.put()` | IslandAdaptor |
@@ -73,7 +73,7 @@ for `crdt-remote` origins.
 IslandAccumulator holds those changes until the next frame drain.
 
 **I-5 Non-CRDT immediate apply.**
-`tw-local`, `canon-hydrate`, `lares-job` origins bypass the sync gate and
+`tw-local`, `canon-hydrate`, `lares-verb` origins bypass the sync gate and
 apply immediately via `_applyChange`.
 
 **I-6 Outbound guards — saveTiddler.**

@@ -2,9 +2,9 @@
  * browser-admin-island — browser Web Worker entry point for the admin island.
  *
  * Sovereign admin island. Runs the shared browser sovereign island lifecycle
- * with the isomorphic makeAdminBehavior: JobDispatcher subscribed to TW5 wiki
+ * with the isomorphic makeAdminBehavior: VerbDispatcher subscribed to TW5 wiki
  * change events (local path) + CRDT inbox relay (remote path). Delegation
- * routing via AdminMsg_DelegateJob / AdminMsg_JobResult.
+ * routing via AdminMsg_DelegateVerb / AdminMsg_VerbResult.
  *
  * Platform counterpart of lar-admin-island.ts (Node). Both import
  * makeAdminBehavior from @lararium/tw5 — no platform fork in the behavior.

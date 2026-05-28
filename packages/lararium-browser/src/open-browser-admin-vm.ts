@@ -10,7 +10,7 @@
  *
  * Boot ordering guarantee:
  *   workerEa resolves only after the admin island sends "ea" — TW5 live, all
- *   CRDT bags synced, drain loop running, JobDispatcher subscribed.
+ *   CRDT bags synced, drain loop running, VerbDispatcher subscribed.
  *   openBrowserVessel awaits workerEa before emitting "live".
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/open-browser-admin-vm
@@ -21,12 +21,12 @@ import type { AutomergeUrl, DocHandle }      from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter }      from "@automerge/automerge-repo-network-messagechannel";
 import {
   ADMIN_BAG_ID, CompositeStore, AutomergeDocStore, emptyLarDoc,
-  mkManifest, mkAdminPlaceJob, mkAdminJobResult,
+  mkManifest, mkAdminPlaceVerb, mkAdminVerbResult,
   isIslandToVesselMsg,
   type BagBinding, type LarDoc, type CapabilityVerifier,
 } from "@lararium/mesh";
-import type { AdminMsg_DelegateJob, IslandMsg_Ea } from "@lararium/mesh";
-import { runLocalJob, VerbTable } from "@lararium/tw5";
+import type { AdminMsg_DelegateVerb, IslandMsg_Ea } from "@lararium/mesh";
+import { runLocalVerb, VerbTable } from "@lararium/tw5";
 export type { VerbReactor } from "@lararium/tw5";
 
 // ── Types re-used from open-admin-vm (Node) ───────────────────────────────────
@@ -49,7 +49,7 @@ export interface BrowserAdminVmResult {
   composite:      CompositeStore;
   /**
    * Resolves when the admin island sends "ea" — TW5 live, bags synced,
-   * drain loop running, JobDispatcher subscribed. Vessel awaits this before "live".
+   * drain loop running, VerbDispatcher subscribed. Vessel awaits this before "live".
    */
   workerEa:       Promise<void>;
   /**
@@ -59,7 +59,7 @@ export interface BrowserAdminVmResult {
    */
   mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /** Place a volatile job in the admin island's TW5 wiki. */
-  placeJob:       (opts: BrowserJobPlacementRequest) => void;
+  placeVerb:       (opts: BrowserVerbPlacementRequest) => void;
   /** Terminate the admin island Worker. */
   dispose:        () => void;
 }
@@ -67,7 +67,7 @@ export interface BrowserAdminVmResult {
 export { VerbTable };
 export type { VerbTable as BrowserVerbTable };
 
-export interface BrowserJobPlacementRequest {
+export interface BrowserVerbPlacementRequest {
   verb:         string;
   args:         Record<string, unknown>;
   requestedBy?: string;
@@ -135,16 +135,16 @@ export async function openBrowserAdminVm(
       return;
     }
 
-    if (raw.type === "admin:delegate-job") {
-      const msg = raw as AdminMsg_DelegateJob;
+    if (raw.type === "admin:delegate-verb") {
+      const msg = raw as AdminMsg_DelegateVerb;
       if (!_registry) {
-        worker.postMessage(mkAdminJobResult({
+        worker.postMessage(mkAdminVerbResult({
           requestId: msg.requestId,
           error: `[open-browser-admin-vm] delegate-job received before mountMainVerbs — verb="${msg.verb}" dropped`,
         }));
         return;
       }
-      const jobLike = {
+      const invocationLike = {
         title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
         requestId:   msg.requestId,
         verb:        msg.verb,
@@ -155,14 +155,14 @@ export async function openBrowserAdminVm(
         batchMode:   (msg.batchMode ?? "best-effort") as import("@lararium/mesh").BatchMode,
         status:      "pending" as const,
       };
-      runLocalJob(jobLike, {
+      runLocalVerb(invocationLike, {
         admin:    composite,
         registry: _registry,
         ...(_verifier ? { verifier: _verifier } : {}),
       }).then((result) => {
-        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result }));
+        worker.postMessage(mkAdminVerbResult({ requestId: msg.requestId, result }));
       }).catch((err: unknown) => {
-        worker.postMessage(mkAdminJobResult({
+        worker.postMessage(mkAdminVerbResult({
           requestId: msg.requestId,
           error: err instanceof Error ? err.message : String(err),
         }));
@@ -182,8 +182,8 @@ export async function openBrowserAdminVm(
       _registry = registry;
       _verifier = verifier ?? null;
     },
-    placeJob: (jobOpts) => {
-      worker.postMessage(mkAdminPlaceJob({
+    placeVerb: (jobOpts) => {
+      worker.postMessage(mkAdminPlaceVerb({
         verb:        jobOpts.verb,
         args:        jobOpts.args,
         requestedBy: jobOpts.requestedBy ?? "browser-vessel",

@@ -1,5 +1,5 @@
 /**
- * wiki-handlers — job-tiddler handlers for whole-wiki operations.
+ * wiki-handlers — verb-tiddler handlers for whole-wiki operations.
  *
  * Vessel-edge handlers: bag minting, repo/doc plumbing, residency.
  * Wiki-semantic rites (sync, promote) live in the VM islands.

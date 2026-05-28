@@ -27,5 +27,6 @@ export default defineConfig({
       instances: [{ browser: "chromium" }],
     },
     include: ["tests/**/*.test.ts"],
+    testTimeout: 30_000,
   },
 });

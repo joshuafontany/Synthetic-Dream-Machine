@@ -71,10 +71,10 @@ export function makePromoteReactor(opts: PromoteHandlerOptions): VerbReactor {
 
     const vm = opts.tw5;
     const result = planPromoteUris(vm.wiki, [tiddler], toBag, vm.wiki, {
-      actor: ctx.job.requestedBy,
+      actor: ctx.invocation.requestedBy,
       sourceBag: actualFromBag,
       vesselId: "node",
-      receiptId: ctx.job.requestId,
+      receiptId: ctx.invocation.requestId,
     });
 
     if (result.error) {
@@ -87,13 +87,13 @@ export function makePromoteReactor(opts: PromoteHandlerOptions): VerbReactor {
     const sourceAdaptor = new IslandAdaptor(
       vm,
       bagScopedStore(opts.composite, actualFromBag),
-      `promote-source:${ctx.job.requestId}`,
+      `promote-source:${ctx.invocation.requestId}`,
       actualFromBag,
     );
     const targetAdaptor = new IslandAdaptor(
       vm,
       bagScopedStore(opts.composite, toBag),
-      `promote-target:${ctx.job.requestId}`,
+      `promote-target:${ctx.invocation.requestId}`,
       toBag,
     );
 

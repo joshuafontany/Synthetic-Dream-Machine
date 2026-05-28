@@ -126,7 +126,7 @@ export class IslandKernel {
 
   /**
    * Return the live TW5Engine, or null if not yet booted / already torn down.
-   * Admin island entry files use this to pass the engine to IslandAdaptor and JobDispatcher.
+   * Admin island entry files use this to pass the engine to IslandAdaptor and VerbDispatcher.
    * Wiki islands should not need direct engine access — use applyDelta + sendEa instead.
    */
   tw5(): TW5Engine | null {

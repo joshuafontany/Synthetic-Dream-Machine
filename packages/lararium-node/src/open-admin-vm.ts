@@ -3,19 +3,19 @@
  *
  * The admin island holds its own TW5 VM (full recipe: @lararium + @lares + @admin),
  * its own Repo-in-island, its own CompositeStore (CRDT + volatile + projection),
- * and its own JobDispatcher subscribed to the TW5 wiki change event surface.
+ * and its own VerbDispatcher subscribed to the TW5 wiki change event surface.
  *
  * Vessel responsibilities retained here:
  *   - `adminHandle`  — opened on the main Repo for keyhive event persistence and
  *                      gate-check reads (PERSON_GROUP, MESH_CABAL sentinel tiddlers).
  *   - `composite`    — single-layer admin CompositeStore for cap-event writes via
  *                      AdminEventStore and receipt writes from delegated jobs.
- *   - Delegation loop — listens for `admin:delegate-job` from island, runs vessel
- *                      handler registry, returns `admin:job-result`.
+ *   - Delegation loop — listens for `admin:delegate-verb` from island, runs vessel
+ *                      handler registry, returns `admin:verb-result`.
  *
  * Boot ordering guarantee:
  *   `workerEa` resolves only after the admin island sends `ea` — TW5 live, all
- *   CRDT bags synced, drain loop running, JobDispatcher subscribed. `openNodeVessel`
+ *   CRDT bags synced, drain loop running, VerbDispatcher subscribed. `openNodeVessel`
  *   awaits `workerEa` before emitting `"live"`, enforcing the vessel ordering law:
  *   admin island must declare sovereignty before the vessel considers itself live.
  *
@@ -30,15 +30,15 @@ import { MessageChannelNetworkAdapter }                 from "@automerge/automer
 import type { LarDoc }                                  from "@lararium/mesh";
 import {
   ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
-  mkManifest, mkAdminPlaceJob, mkAdminJobResult,
+  mkManifest, mkAdminPlaceVerb, mkAdminVerbResult,
   isIslandToVesselMsg,
   type BagBinding,
 } from "@lararium/mesh";
-import { runLocalJob }                                  from "@lararium/tw5";
-import type { VerbTable }                      from "@lararium/tw5";
+import { runLocalVerb }                                 from "@lararium/tw5";
+import type { VerbTable }                               from "@lararium/tw5";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
-import type { IslandMsg_Ea, AdminMsg_DelegateJob }         from "@lararium/mesh";
+import type { IslandMsg_Ea, AdminMsg_DelegateVerb }      from "@lararium/mesh";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
@@ -69,7 +69,7 @@ export interface AdminVmResult {
   composite:    CompositeStore;
   /**
    * Resolves when the admin island has sent `ea` — TW5 live, bags synced,
-   * drain loop running, JobDispatcher subscribed to the wiki change surface.
+   * drain loop running, VerbDispatcher subscribed to the wiki change surface.
    * `openNodeVessel` MUST await this before emitting `"live"`.
    */
   workerEa:     Promise<void>;
@@ -82,10 +82,10 @@ export interface AdminVmResult {
   mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
   /**
    * Place a volatile job tiddler in the admin island's TW5 wiki.
-   * Delegates to the admin island's internal `placeVmJob` via `admin:place-job` message.
-   * The wiki change event fires at the island's next tick; JobDispatcher dispatches it.
+   * Delegates to the admin island's internal `placeVerbInvocation` via `admin:place-verb` message.
+   * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
    */
-  placeJob:     (opts: import("@lararium/tw5").JobPlacementRequest) => void;
+  placeVerb:    (opts: import("@lararium/tw5").VerbSignalRequest) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -149,17 +149,16 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       return;
     }
 
-    if (raw.type === "admin:delegate-job") {
-      const msg = raw as AdminMsg_DelegateJob;
+    if (raw.type === "admin:delegate-verb") {
+      const msg = raw as AdminMsg_DelegateVerb;
       if (!_delegationRegistry) {
-        worker.postMessage(mkAdminJobResult({
+        worker.postMessage(mkAdminVerbResult({
           requestId: msg.requestId,
-          error: `[openAdminVm] delegate-job received before mountMainVerbs — verb="${msg.verb}" dropped`,
+          error: `[openAdminVm] delegate-verb received before mountMainVerbs — verb="${msg.verb}" dropped`,
         }));
         return;
       }
-      // Build a minimal JobTiddler-like object for runLocalJob.
-      const jobLike = {
+      const invocationLike = {
         title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
         requestId:   msg.requestId,
         verb:        msg.verb,
@@ -170,15 +169,15 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
         batchMode:   (msg.batchMode ?? "best-effort") as import("@lararium/mesh").BatchMode,
         status:      "pending" as const,
       };
-      runLocalJob(jobLike, {
+      runLocalVerb(invocationLike, {
         admin:    composite,
         registry: _delegationRegistry,
         ...(_verifier ? { verifier: _verifier } : {}),
       }).then((result) => {
-        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, result }));
+        worker.postMessage(mkAdminVerbResult({ requestId: msg.requestId, result }));
       }).catch((err: unknown) => {
         const message = err instanceof Error ? err.message : String(err);
-        worker.postMessage(mkAdminJobResult({ requestId: msg.requestId, error: message }));
+        worker.postMessage(mkAdminVerbResult({ requestId: msg.requestId, error: message }));
       });
       return;
     }
@@ -212,14 +211,14 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       _delegationRegistry = registry;
       _verifier      = verifier ?? null;
     },
-    placeJob: (jobOpts) => {
-      worker.postMessage(mkAdminPlaceJob({
-        verb:        jobOpts.verb,
-        args:        jobOpts.args,
-        requestedBy: jobOpts.requestedBy,
-        ...(jobOpts.targets?.length ? { targets: [...jobOpts.targets] } : {}),
-        ...(jobOpts.batchMode       ? { batchMode: String(jobOpts.batchMode) } : {}),
-        ...(jobOpts.requestId       ? { requestId: jobOpts.requestId } : {}),
+    placeVerb: (verbOpts) => {
+      worker.postMessage(mkAdminPlaceVerb({
+        verb:        verbOpts.verb,
+        args:        verbOpts.args,
+        requestedBy: verbOpts.requestedBy,
+        ...(verbOpts.targets?.length ? { targets: [...verbOpts.targets] } : {}),
+        ...(verbOpts.batchMode       ? { batchMode: String(verbOpts.batchMode) } : {}),
+        ...(verbOpts.requestId       ? { requestId: verbOpts.requestId } : {}),
       }));
     },
     dispose: () => {

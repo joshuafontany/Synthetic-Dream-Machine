@@ -143,7 +143,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    // Delegate to behavior — admin handles admin:place-job, admin:job-result, etc.
+    // Delegate to behavior — admin handles admin:place-verb, admin:verb-result, etc.
     if (_ctx && behavior && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 

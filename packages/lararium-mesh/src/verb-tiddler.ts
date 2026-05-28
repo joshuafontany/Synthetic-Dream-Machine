@@ -1,83 +1,82 @@
 /**
- * job-tiddler — volatile VM job protocol for the admin causal island.
+ * verb-tiddler — volatile verb invocation protocol for the admin causal island.
  *
  * Two-tiddler contract:
  *
- *   jobs/<requestId>      VOLATILE scratch tiddler in lararium.local.vm.
+ *   verbs/<requestId>     VOLATILE scratch tiddler in lararium.local.vm.
  *                         Lives in the admin TW5 wiki only. Never synced via
  *                         Automerge. Tombstoned by the dispatcher after the
- *                         receipt lands. Local intent lives here, not shared truth.
+ *                         outcome lands. Local intent lives here, not shared truth.
  *
- *   @admin/receipts/<id>  DURABLE receipt tiddler in the Automerge-backed
+ *   @admin/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
  *                         admin bag. Written by the dispatcher on done/error.
- *                         Syncs to all peers. Polling this is the "done"
- *                         signal for any observer. Shared aftermath lives here.
+ *                         Syncs to all vessels. CRDT convergence here IS the result.
+ *                         Shared aftermath lives here.
  *
- * Job submission paths:
- *   Local (in-process):   placeJob() → wiki.addTiddler() → TW5 change event
- *                         → dispatcher runs → receipt to @admin/receipts/
- *   Remote (CLI/vessels): vessel writes @admin/jobs/<id> to Automerge inbox →
+ * Verb invocation paths:
+ *   Local (in-process):   placeVerb() → wiki.addTiddler() → TW5 change event
+ *                         → dispatcher runs → outcome to @admin/outcomes/
+ *   Remote (CLI/vessels): vessel writes @admin/signals/<id> to Automerge →
  *                         IslandAdaptor flows it into TW5 wiki →
- *                         dispatcher translates to volatile job → processes →
- *                         receipt to @admin/receipts/
+ *                         dispatcher translates to volatile invocation → processes →
+ *                         outcome to @admin/outcomes/
  *
  * Batch contract:
- *   One job tiddler may carry N targets (tiddler URIs, file paths, edge resource
- *   URIs, or any string the handler interprets). The receipt always carries a
- *   results map. Single-result and atomic jobs use the conventional
+ *   One invocation tiddler may carry N targets (tiddler URIs, file paths, edge resource
+ *   URIs, or any string the handler interprets). The outcome always carries a
+ *   results map. Single-result and atomic verbs use the conventional
  *   "summary" key so all observers read one durable payload grammar.
  *
- * Forward note (UEFN / kumu ReactionEngine):
- *   Each lararium vessel — Node, browser, UE5.6+, Android, Mudlet-LUA — runs
- *   its own admin VM + dispatcher. Jobs are peer-local; receipts sync.
- *   When the Verse-inspired ReactionEngine lands, this dispatcher pattern
- *   federates across causal-island bounds: each island runs its own handler
- *   registry, job tiddlers become one shape of reaction trigger among many
- *   (signal-tiddlers, alarm-tiddlers, recipe-deltas …), and kumu UEFN devices
- *   map to peers whose dispatchers handle device-native job types.
- *   Keep handler signatures pure (args, context) → result for easy federation.
+ * Reaction Engine note (UEFN / kumu):
+ *   Each lararium vessel runs its own admin VM + VerbDispatcher. Invocations are
+ *   vessel-local; outcomes sync via CRDT. When the Verse-inspired ReactionEngine
+ *   matures, verb invocations become one shape of reaction trigger among many
+ *   (event-signal tiddlers, alarm tiddlers, recipe-deltas). VerbReactor signatures
+ *   are pure (args, context) → result — already ReactionEngine-compatible.
  *
  * Architecture laws:
- *   - Tiddler-format law: every job/receipt is a normal tiddler with lar: URI.
- *   - Web3 law: no HTTP/RPC control plane; job submission routes through TW5 wiki
+ *   - Tiddler-format law: every invocation/outcome is a normal tiddler with lar: URI.
+ *   - Web3 law: no HTTP/RPC control plane; verb submission routes through TW5 wiki
  *     events or Automerge sync — never a named server endpoint.
- *   - Causal-island law: each vessel's admin VM owns its own volatile job namespace.
+ *   - Causal-island law: each vessel's admin VM owns its own volatile verb namespace.
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler
  */
 
 import {
   ADMIN_BAG_ID, VOLATILE_VM_PREFIX,
-  LARES_JOB_EVENT_TAG, LARES_JOB_TAG,
+  LARES_VERB_EVENT_TAG, LARES_VERB_TAG,
 } from "./lar-uris.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 
 // ── URI prefixes ───────────────────────────────────────────────────────────
 
-/** Volatile job tiddlers — admin TW5 wiki scratch, never synced. */
-export const JOB_URI_PREFIX = `${VOLATILE_VM_PREFIX}jobs/`;
+/** Volatile verb invocation tiddlers — admin TW5 wiki scratch, never synced. */
+export const VERB_URI_PREFIX = `${VOLATILE_VM_PREFIX}verbs/`;
 
-/** Automerge-backed job inbox — remote peers write here; dispatcher translates
- *  to volatile and tombstones after pickup. */
-export const JOB_INBOX_URI_PREFIX = `${ADMIN_BAG_ID}/jobs/`;
+/** Automerge-backed verb signal — remote vessels write here; dispatcher translates
+ *  to volatile invocation and tombstones after pickup. */
+export const VERB_SIGNAL_URI_PREFIX = `${ADMIN_BAG_ID}/signals/`;
 
-/** Durable receipt tiddlers — Automerge-backed, sync to all peers. */
-export const JOB_RECEIPT_URI_PREFIX = `${ADMIN_BAG_ID}/receipts/`;
+/** Durable outcome tiddlers — Automerge-backed, sync to all vessels. */
+export const VERB_OUTCOME_URI_PREFIX = `${ADMIN_BAG_ID}/outcomes/`;
 
-/** Result map key for single-result (no explicit targets) jobs. */
-export const JOB_RESULT_KEY = "summary" as const;
+/** Result map key for single-result (no explicit targets) verbs. */
+export const VERB_RESULT_KEY = "summary" as const;
 
-// ── Job shape ──────────────────────────────────────────────────────────────
+// ── Verb invocation shape ──────────────────────────────────────────────────
 
-export type JobStatus = "pending" | "running" | "done" | "error";
+export type VerbStatus = "pending" | "running" | "done" | "error";
 
 /**
  * Batch execution mode.
- *   best-effort — each target runs independently; receipt has per-target results.
- *   atomic       — all targets succeed or none; receipt has single ok/error.
+ *   best-effort — each target runs independently; outcome has per-target results.
+ *   atomic       — all targets succeed or none; outcome has single ok/error.
  */
 export type BatchMode = "best-effort" | "atomic";
 
-/** Parsed job tiddler. Fields are string-typed (tiddler field law). */
-export interface JobTiddler {
+/** Parsed verb invocation tiddler. Fields are string-typed (tiddler field law). */
+export interface VerbInvocation {
   readonly requestId:   string;
   readonly title:       string;
   readonly verb:        string;
@@ -89,56 +88,56 @@ export interface JobTiddler {
    *   - file path:     "/abs/path/to/file.md" or "relative/path"
    *   - internet URI:  "https://..."
    *   - any other id the handler understands
-   * Empty list = no targets (args-only job).
+   * Empty list = no targets (args-only verb).
    */
   readonly targets:     readonly string[];
   readonly batchMode:   BatchMode;
-  readonly status:      JobStatus;
+  readonly status:      VerbStatus;
   readonly requestedBy: string;
   readonly requestedAt: string;
 }
 
-// ── Receipt shape ──────────────────────────────────────────────────────────
+// ── Outcome shape ──────────────────────────────────────────────────────────
 
-export interface JobTargetResult {
+export interface VerbTargetResult {
   readonly ok:      boolean;
   readonly output?: Record<string, unknown>;
   readonly error?:  string;
 }
 
-export interface JobReceiptRecord extends LarTiddlerRecord {
+export interface VerbOutcomeRecord extends LarTiddlerRecord {
   readonly tiddler: {
-    readonly title:         string;
-    readonly "request-id":  string;
-    readonly verb:          string;
-    readonly status:        "done" | "error";
+    readonly title:          string;
+    readonly "request-id":   string;
+    readonly verb:           string;
+    readonly status:         "done" | "error";
     readonly "requested-by": string;
     readonly "completed-at": string;
-    readonly cause:         string;
-    readonly tags:          string;
-    // JSON map of { targetOrSummaryKey → JobTargetResult }
-    readonly results?:      string;
+    readonly cause:          string;
+    readonly tags:           string;
+    // JSON map of { targetOrSummaryKey → VerbTargetResult }
+    readonly results?:       string;
     readonly "error-message"?: string;
     [k: string]: unknown;
   };
 }
 
-export function buildJobReceiptTiddler(opts: {
-  requestId:    string;
-  verb:         string;
-  status:       "done" | "error";
-  requestedBy:  string;
-  cause:        string;
-  batchMode:    BatchMode;
-  results?:     Record<string, JobTargetResult>;
+export function buildVerbOutcome(opts: {
+  requestId:     string;
+  verb:          string;
+  status:        "done" | "error";
+  requestedBy:   string;
+  cause:         string;
+  batchMode:     BatchMode;
+  results?:      Record<string, VerbTargetResult>;
   errorMessage?: string;
-  authority?:   string;
+  authority?:    string;
 }): LarTiddlerRecord {
-  const title = `${JOB_RECEIPT_URI_PREFIX}${opts.requestId}`;
+  const title = `${VERB_OUTCOME_URI_PREFIX}${opts.requestId}`;
   const base = {
     title,
-    tags:            LARES_JOB_EVENT_TAG,
-    "request-id":   opts.requestId,
+    tags:            LARES_VERB_EVENT_TAG,
+    "request-id":    opts.requestId,
     verb:            opts.verb,
     status:          opts.status,
     "requested-by":  opts.requestedBy,
@@ -164,12 +163,12 @@ export function newRequestId(): string {
   return `${ms}-${rand}`;
 }
 
-export function isJobTitle(title: string): boolean {
-  return title.startsWith(JOB_URI_PREFIX);
+export function isVerbInvocationTitle(title: string): boolean {
+  return title.startsWith(VERB_URI_PREFIX);
 }
 
-/** Build a volatile job tiddler for wiki.addTiddler() (local path). */
-export function buildJobTiddler(opts: {
+/** Build a volatile verb invocation tiddler for wiki.addTiddler() (local path). */
+export function buildVerbInvocation(opts: {
   verb:        string;
   args:        Record<string, unknown>;
   requestedBy: string;
@@ -178,23 +177,23 @@ export function buildJobTiddler(opts: {
   requestId?:  string;
 }): Record<string, unknown> {
   const requestId = opts.requestId ?? newRequestId();
-  const title     = `${JOB_URI_PREFIX}${requestId}`;
+  const title     = `${VERB_URI_PREFIX}${requestId}`;
   return {
     title,
-    tags:            LARES_JOB_TAG,
+    tags:            LARES_VERB_TAG,
     verb:            opts.verb,
     args:            JSON.stringify(opts.args),
     targets:         JSON.stringify(opts.targets ?? []),
     "batch-mode":    opts.batchMode ?? "best-effort",
-    "request-id":   requestId,
+    "request-id":    requestId,
     status:          "pending",
     "requested-by":  opts.requestedBy,
     "requested-at":  new Date().toISOString(),
   };
 }
 
-/** Build an Automerge-inbox job record for remote peer submission. */
-export function buildJobInboxRecord(opts: {
+/** Build an Automerge verb-signal record for remote vessel submission. */
+export function buildVerbSignal(opts: {
   verb:        string;
   args:        Record<string, unknown>;
   requestedBy: string;
@@ -204,16 +203,16 @@ export function buildJobInboxRecord(opts: {
   authority?:  string;
 }): LarTiddlerRecord {
   const requestId = opts.requestId ?? newRequestId();
-  const title     = `${JOB_INBOX_URI_PREFIX}${requestId}`;
+  const title     = `${VERB_SIGNAL_URI_PREFIX}${requestId}`;
   return {
     tiddler: {
       title,
-      tags:            LARES_JOB_TAG,
+      tags:            LARES_VERB_TAG,
       verb:            opts.verb,
       args:            JSON.stringify(opts.args),
       targets:         JSON.stringify(opts.targets ?? []),
       "batch-mode":    opts.batchMode ?? "best-effort",
-      "request-id":   requestId,
+      "request-id":    requestId,
       status:          "pending",
       "requested-by":  opts.requestedBy,
       "requested-at":  new Date().toISOString(),
@@ -223,21 +222,21 @@ export function buildJobInboxRecord(opts: {
 }
 
 /** Parse a flat tiddler field bag (from wiki.getTiddler().fields or
- *  record.tiddler) into a JobTiddler. Returns null when the shape doesn't match. */
-export function parseJobTiddler(fields: Record<string, unknown>): JobTiddler | null {
+ *  record.tiddler) into a VerbInvocation. Returns null when the shape doesn't match. */
+export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvocation | null {
   const title = typeof fields["title"] === "string" ? fields["title"] : null;
   if (!title) return null;
-  if (!title.startsWith(JOB_URI_PREFIX) && !title.startsWith(JOB_INBOX_URI_PREFIX)) return null;
+  if (!title.startsWith(VERB_URI_PREFIX) && !title.startsWith(VERB_SIGNAL_URI_PREFIX)) return null;
 
   const tag = fields["tags"];
   const tagsStr = Array.isArray(tag) ? tag.join(" ") : (typeof tag === "string" ? tag : "");
-  if (!tagsStr.includes(LARES_JOB_TAG)) return null;
+  if (!tagsStr.includes(LARES_VERB_TAG)) return null;
 
   const verb        = typeof fields["verb"]          === "string" ? fields["verb"]          : null;
-  const requestId   = typeof fields["request-id"]   === "string" ? fields["request-id"]   : null;
+  const requestId   = typeof fields["request-id"]    === "string" ? fields["request-id"]    : null;
   const status      = fields["status"];
-  const requestedBy = typeof fields["requested-by"] === "string" ? fields["requested-by"] : "";
-  const requestedAt = typeof fields["requested-at"] === "string" ? fields["requested-at"] : "";
+  const requestedBy = typeof fields["requested-by"]  === "string" ? fields["requested-by"]  : "";
+  const requestedAt = typeof fields["requested-at"]  === "string" ? fields["requested-at"]  : "";
   const batchMode   = fields["batch-mode"] === "atomic" ? "atomic" as const : "best-effort" as const;
 
   if (!verb || !requestId) return null;

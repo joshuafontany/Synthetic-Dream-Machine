@@ -21,11 +21,11 @@ export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-a
 
 export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-key.js";
 
-export { JobDispatcher, VerbTable } from "@lararium/tw5";
-export type { VerbReactor, JobContext, JobDispatcherOptions } from "@lararium/tw5";
-export { emitJobInboxSignal } from "@lararium/tw5";
-export type { JobInboxRelayOptions, JobPlacementRequest } from "@lararium/tw5";
-export { runLocalJob, makeCapVerify } from "@lararium/tw5";
+export { VerbDispatcher, VerbTable } from "@lararium/tw5";
+export type { VerbReactor, VerbContext, VerbDispatcherOptions } from "@lararium/tw5";
+export { emitVerbSignal } from "@lararium/tw5";
+export type { VerbSignalRelayOptions, VerbSignalRequest } from "@lararium/tw5";
+export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 
 export { makeWhereReactor } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";

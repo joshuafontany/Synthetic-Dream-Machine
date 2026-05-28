@@ -21,7 +21,7 @@ import { stdin, stdout } from "node:process";
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
-import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
+import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 /** Load the operator's DID — `0x` + verifyingKey hex — for signing the
@@ -75,7 +75,7 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
 
   try {
     // 1. Recipe-presence preview.
-    const where = await submitJob(vessel, "where", { tiddler }, did);
+    const where = await submitVerb(vessel, "where", { tiddler }, did);
     if (where.status === "error") {
       console.error(`recipe-presence query failed: ${where.errorMessage ?? "unknown"}`);
       return 4;
@@ -115,7 +115,7 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
     }
 
     // 3. Promote.
-    const promoteResult = await submitJob(
+    const promoteResult = await submitVerb(
       vessel, "promote",
       { tiddler, toBag, fromBag: primary },
       did,

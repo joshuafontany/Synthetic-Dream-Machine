@@ -1,15 +1,15 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/job-tiddler >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/job-tiddler"
-file-path    = "bags/@lararium/v0.1/mesh/job-tiddler.md"
-source-file  = "packages/lararium-mesh/src/job-tiddler.ts"
+uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler"
+file-path    = "bags/@lararium/v0.1/mesh/verb-tiddler.md"
+source-file  = "packages/lararium-mesh/src/verb-tiddler.ts"
 type         = "text/x-memetic-wikitext"
 register     = "CS"
 confidence   = 10
 mana         = 10
-role         = "self-documentation: TODO describe job-tiddler.ts"
+role         = "self-documentation: TODO describe verb-tiddler.ts"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true

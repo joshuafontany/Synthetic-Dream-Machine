@@ -1,5 +1,5 @@
 /**
- * residency-handlers — job-tiddler handlers for operator-driven
+ * residency-handlers — verb-tiddler handlers for operator-driven
  * residency control: pin, unpin, residency (stats).
  *
  * Operators invoke these via `lares pin <url>` / `lares unpin <url>` /

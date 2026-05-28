@@ -11,7 +11,7 @@
  * essentially a no-op outside of stats reporting until C.2 lands.
  */
 
-import { connectAdminVessel, submitJob, summaryOutput } from "../admin-connector.js";
+import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 export async function cmdPin(args: ParsedArgs): Promise<number> {
@@ -52,7 +52,7 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, "residency", {}, "lares-cli");
+    const r = await submitVerb(vessel, "residency", {}, "lares-cli");
     if (r.status === "error") {
       console.error(`residency query failed: ${r.errorMessage ?? "unknown"}`);
       return 4;
@@ -87,7 +87,7 @@ async function runResidencyCommand(name: string, args: Record<string, unknown>):
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {
-    const r = await submitJob(vessel, name, args, "lares-cli");
+    const r = await submitVerb(vessel, name, args, "lares-cli");
     if (r.status === "error") {
       console.error(`${name} failed: ${r.errorMessage ?? "unknown"}`);
       return 4;

@@ -354,7 +354,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const coreHash = coreBlobEntry.sha256 ?? null;
 
   // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
-  // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + JobDispatcher.
+  // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + VerbDispatcher.
   // Vessel retains adminHandle (keyhive gates) + composite (cap-event writes).
   // bagBindings deliver capability tokens for the admin island's full recipe.
   const adminVm = await openAdminVm({
@@ -382,7 +382,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Vessel delegation registry — wiki-scope job handlers whose closure dependencies
   // live on the vessel (repo, catalogHandle, residency, primary composite).
-  // The admin island's JobDispatcher delegates unknown verbs here via admin:delegate-job.
+  // The admin island's VerbDispatcher delegates unknown verbs here via admin:delegate-verb.
   // vmManager is assigned after island boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new VerbTable();
   // Stub "echo" handler — useful for end-to-end smoke of the protocol.
@@ -395,20 +395,20 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   let vmManager: VesselIslandPool;
-  // promote and sync-wiki are VM-native — route as placeWikiJob to the primary wiki island.
+  // promote and sync-wiki are VM-native — route as placeWikiVerb to the primary wiki island.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
   jobRegistry.register("promote", async (args, ctx) =>
-    vmManager.placeWikiJob(activeWikiId, {
+    vmManager.placeWikiVerb(activeWikiId, {
       verb:        "promote",
       args:        args as Record<string, unknown>,
-      requestedBy: ctx.job.requestedBy,
+      requestedBy: ctx.invocation.requestedBy,
     }),
   );
   jobRegistry.register("sync-wiki", async (args, ctx) =>
-    vmManager.placeWikiJob(activeWikiId, {
+    vmManager.placeWikiVerb(activeWikiId, {
       verb:        "sync-wiki",
       args:        args as Record<string, unknown>,
-      requestedBy: ctx.job.requestedBy,
+      requestedBy: ctx.invocation.requestedBy,
     }),
   );
   const wikiMintOpts = {
@@ -606,8 +606,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   );
 
   // Wire the delegation registry now that keyhive exists.
-  // The admin island's JobDispatcher delegates unknown verbs to this registry via
-  // admin:delegate-job messages. mountMainVerbs must be called before workerEa resolves
+  // The admin island's VerbDispatcher delegates unknown verbs to this registry via
+  // admin:delegate-verb messages. mountMainVerbs must be called before workerEa resolves
   // to ensure no delegated jobs are dropped during the boot window.
   adminVm.mountMainVerbs(jobRegistry, keyhive);
 
@@ -780,7 +780,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Admin island ea gate — vessel is not live until the admin island declares
   // sovereignty. The admin island holds the TW5 job event surface; jobs cannot
-  // dispatch until its drain loop and JobDispatcher are running.
+  // dispatch until its drain loop and VerbDispatcher are running.
   await adminVm.workerEa;
 
   emit("live");
