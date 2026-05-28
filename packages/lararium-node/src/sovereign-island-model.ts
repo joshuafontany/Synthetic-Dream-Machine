@@ -32,7 +32,6 @@ import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle, AutomergeUrl, StorageAdapterInterface } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
-import { save as automergeSave } from "@automerge/automerge";
 import {
   CompositeStore,
   AutomergeDocStore,
@@ -71,7 +70,7 @@ export interface IslandContext {
  * - `writeBagId` — IslandAdaptor write target. Admin: ADMIN_BAG_ID. Wiki: BAG_IDS.scratch.
  * - `onEa`       — called after CompositeStore + IslandAdaptor wired, before ea declaration.
  * - `onSignal`   — called for every non-lifecycle message. Return true if handled.
- * - `onDemote`   — called before drain loop stops and docBytes export.
+ * - `onDemote`   — called before drain loop stops.
  */
 export interface IslandBehavior {
   writeBagId: string;
@@ -257,21 +256,12 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     _stopDrain();
     handler.teardown();
 
-    let docBytes: Uint8Array | undefined;
-    try {
-      const h = _writableHandleId ? _handles.get(_writableHandleId) : undefined;
-      const raw = h?.doc?.();
-      if (raw) docBytes = automergeSave(raw as Parameters<typeof automergeSave>[0]);
-    } catch { /* export failed — teardown:ack fires without docBytes */ }
-
     _handles.clear();
     _writableHandleId = null;
     _composite        = null;
     _ctx              = null;
     _repo             = null;
 
-    const ackOpts: { docBytes?: Uint8Array } = {};
-    if (docBytes !== undefined) ackOpts.docBytes = docBytes;
-    _port.postMessage(mkTeardownAck(ackOpts));
+    _port.postMessage(mkTeardownAck());
   }
 }

@@ -253,8 +253,6 @@ export interface IslandMsg_Event {
 export interface IslandMsg_TeardownAck {
   schema_version: ProtocolVersion;
   type: "teardown:ack";
-  /** Automerge doc bytes from island-side Repo at teardown. Preferred warm-start seed. */
-  docBytes?: Uint8Array;
 }
 
 /**
@@ -370,12 +368,8 @@ export function mkTeardown(): IslandMsg_Teardown {
   return { schema_version: ISLAND_PROTOCOL_VERSION, type: "teardown" };
 }
 
-export function mkTeardownAck(opts: {
-  docBytes?: Uint8Array;
-} = {}): IslandMsg_TeardownAck {
-  const msg: IslandMsg_TeardownAck = { schema_version: ISLAND_PROTOCOL_VERSION, type: "teardown:ack" };
-  if (opts.docBytes !== undefined) msg.docBytes = opts.docBytes;
-  return msg;
+export function mkTeardownAck(): IslandMsg_TeardownAck {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "teardown:ack" };
 }
 
 /**

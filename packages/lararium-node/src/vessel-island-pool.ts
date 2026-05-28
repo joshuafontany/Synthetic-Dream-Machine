@@ -13,22 +13,20 @@
  *             run co-located inside the Worker thread.
  *             Vessel communicates via island-protocol envelope only.
  *
- *   Cold    — CRDT-only. VmSnapshot stores Automerge heads (+ optional docBytes)
- *             from the island's last teardown:ack. No thread, no engine.
+ *   Cold    — CRDT-only. Records demotedAt timestamp. No thread, no engine.
+ *             CRDT Repo (NodeFS) holds all persistent state.
  *
  * ## Promote / demote flow
  *
  *   mountWiki   → spawn island → manifest → ea → slot = hot
- *   unmountWiki → teardown → teardown:ack (+ docBytes) → worker.terminate()
- *                → slot = cold (cold slot carries the island's final TW5 state)
+ *   unmountWiki → teardown → teardown:ack → worker.terminate()
+ *                → slot = cold (NodeFS Repo owns CRDT persistence)
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
  * Meme doc: packages/lararium-node/memes/vessel-island-pool.md
  */
 
-import { getHeads } from "@lararium/mesh";
-import { load as automergeLoad } from "@automerge/automerge";
-import type { Heads, LarDoc } from "@lararium/mesh";
+import type { LarDoc } from "@lararium/mesh";
 import { Worker, MessageChannel } from "worker_threads";
 import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
@@ -49,19 +47,6 @@ import type {
   IslandToVesselMsg,
   VesselToIslandMsg,
 } from "@lararium/mesh";
-
-// ---------------------------------------------------------------------------
-// VmSnapshot — cold-tier CRDT checkpoint
-// ---------------------------------------------------------------------------
-
-export interface VmSnapshot {
-  /** Automerge heads at snapshot capture time. CRDT remains authoritative. */
-  heads:      Heads;
-  /** Automerge doc bytes from island-side Repo at teardown — preferred warm-start seed. */
-  docBytes?:  Uint8Array;
-  /** Unix ms of capture — for diagnostics and staleness detection. */
-  capturedAt: number;
-}
 
 // ---------------------------------------------------------------------------
 // Slot types
@@ -88,9 +73,9 @@ interface IslandSlot {
 }
 
 interface ColdSlot {
-  tier:     "cold";
-  wikiId:   string;
-  snapshot: VmSnapshot | null;
+  tier:       "cold";
+  wikiId:     string;
+  demotedAt:  number;
 }
 
 type Slot = IslandSlot | ColdSlot;
@@ -100,7 +85,7 @@ type Slot = IslandSlot | ColdSlot;
 // ---------------------------------------------------------------------------
 
 export interface WikiBootContext {
-  /** Automerge doc handle — used to materialize VmSnapshot for initial manifest delivery. */
+  /** Automerge doc handle — used to deliver bagBindings to the island manifest. */
   docHandle: DocHandle<LarDoc>;
   /** Plugin tiddlers to inject into island TW5 boot so sigils/ahu/pranala are
    * present before CRDT deltas begin applying.
@@ -210,8 +195,7 @@ export class VesselIslandPool {
   /**
    * Mount a session wiki into the hot tier.
    *
-   * Spawns a island, materializes a snapshot from the Automerge doc (or uses
-   * the cold-slot snapshot), delivers a manifest, and awaits ea.
+   * Spawns an island, delivers a manifest, and awaits ea.
    * Evicts the LRU island slot (non-pinned) when at capacity.
    *
    * Returns void — the vessel holds no direct engine reference for island
@@ -225,9 +209,9 @@ export class VesselIslandPool {
    * Unmount a hot or pinned island slot via GP-5 teardown handshake.
    *
    * 1. Sends teardown signal.
-   * 2. Awaits teardown:ack — captures `docBytes` (Repo-in-island).
+   * 2. Awaits teardown:ack.
    * 3. Closes mainPort, calls worker.terminate().
-   * 4. Moves slot to cold with a VmSnapshot seeded from the ack.
+   * 4. Moves slot to cold. NodeFS Repo inside the island owns CRDT persistence.
    *
    * No-op for slots already in cold.
    */
@@ -236,32 +220,22 @@ export class VesselIslandPool {
     if (!slot || slot.tier === "cold") return;
 
     const workerSlot = slot as IslandSlot;
-    let snapshot: VmSnapshot | null = null;
     try {
-      const ack = await _sendAndAwait<IslandMsg_TeardownAck>(
+      await _sendAndAwait<IslandMsg_TeardownAck>(
         workerSlot.worker,
         mkTeardown(),
         "teardown:ack",
       );
-      let heads: Heads = [];
-      if (ack.docBytes) {
-        try { heads = getHeads(automergeLoad(ack.docBytes)); } catch { /* corrupt bytes */ }
-      }
-      const snapshotFields: VmSnapshot = { heads, capturedAt: Date.now() };
-      if (ack.docBytes !== undefined) snapshotFields.docBytes = ack.docBytes;
-      snapshot = snapshotFields;
     } catch (err) {
       console.warn(`[vm-manager] ${wikiId}: teardown handshake failed — ${err}; terminating anyway`);
     }
 
     workerSlot.mainPort.close();
     await workerSlot.worker.terminate();
-    this._slots.set(wikiId, { tier: "cold", wikiId, snapshot });
+    const demotedAt = Date.now();
+    this._slots.set(wikiId, { tier: "cold", wikiId, demotedAt });
 
-    const snapDesc = snapshot
-      ? (snapshot.docBytes ? `docBytes(${snapshot.docBytes.byteLength}b)` : "heads-only")
-      : "none";
-    console.log(`[vm-manager] ${wikiId}: unmounted → cold (snapshot: ${snapDesc})`);
+    console.log(`[vm-manager] ${wikiId}: unmounted → cold`);
   }
 
   // ---------------------------------------------------------------------------
@@ -316,9 +290,10 @@ export class VesselIslandPool {
     return this._slots.get(wikiId)?.tier ?? null;
   }
 
-  snapshot(wikiId: string): VmSnapshot | null {
+  /** Unix ms when this island last went cold, or null if not in cold tier. */
+  coldSince(wikiId: string): number | null {
     const slot = this._slots.get(wikiId);
-    return slot?.tier === "cold" ? slot.snapshot : null;
+    return slot?.tier === "cold" ? slot.demotedAt : null;
   }
 
   /** Diagnostics: slot counts by tier. */

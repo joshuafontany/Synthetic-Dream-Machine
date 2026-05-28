@@ -121,7 +121,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
 
     expect(pool.tier(WIKI_ID)).toBe("hot");
-    expect(pool.snapshot(WIKI_ID)).toBeNull(); // hot slot has no snapshot yet
+    expect(pool.coldSince(WIKI_ID)).toBeNull(); // not in cold tier
   });
 
   test("mountWiki is idempotent — second call is a no-op", async () => {
@@ -162,18 +162,20 @@ describe("VesselIslandPool — island lifecycle", () => {
     expect(changes.events[0]!.payload.tiddlerCount).toBeGreaterThanOrEqual(1);
   });
 
-  test("unmountWiki moves slot to cold with snapshot from teardown:ack", async () => {
+  test("unmountWiki moves slot to cold; coldSince returns a timestamp", async () => {
     pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
     const handle = makeDocHandleStub();
 
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
+    const before = Date.now();
     await pool.unmountWiki(WIKI_ID);
+    const after = Date.now();
 
     expect(pool.tier(WIKI_ID)).toBe("cold");
-    const snap = pool.snapshot(WIKI_ID);
-    expect(snap).not.toBeNull();
-    // Repo-in-island path: snapshot carries docBytes when exported; fixture sends heads-only snapshot.
-    expect(Array.isArray(snap!.heads)).toBe(true);
+    const ts = pool.coldSince(WIKI_ID);
+    expect(ts).not.toBeNull();
+    expect(ts!).toBeGreaterThanOrEqual(before);
+    expect(ts!).toBeLessThanOrEqual(after + 100);
   });
 
   test("onWorkerEvent callback fires for events from the island", async () => {
@@ -214,9 +216,9 @@ describe("VesselIslandPool — island lifecycle", () => {
     expect(pool.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
   });
 
-  test("re-mountWiki from cold slot — snapshot captured, re-mounted island live and responsive", async () => {
-    // Repo-in-island path: state restores via CRDT sync over syncPort, not tiddler injection.
-    // Verifies: (a) unmount → cold snapshot exists, (b) re-mount → hot and responsive via CRDT.
+  test("re-mountWiki from cold slot — cold recorded, re-mounted island live and responsive", async () => {
+    // Repo-in-island path: state restores via CRDT sync over syncPort.
+    // Verifies: (a) unmount → cold slot exists, (b) re-mount → hot and responsive via CRDT.
     const all     = eventCollector();
     const changes = eventCollector("repo:change");
 
@@ -238,8 +240,8 @@ describe("VesselIslandPool — island lifecycle", () => {
     await waitForEvents(changes, 1);
     await pool.unmountWiki(WIKI_ID);
 
-    const snap = pool.snapshot(WIKI_ID);
-    expect(snap).not.toBeNull();
+    expect(pool.tier(WIKI_ID)).toBe("cold");
+    expect(pool.coldSince(WIKI_ID)).not.toBeNull();
 
     // Clear collectors for re-mount phase.
     all.events.length = 0;

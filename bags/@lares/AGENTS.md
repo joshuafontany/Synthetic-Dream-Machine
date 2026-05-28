@@ -4,7 +4,7 @@
 
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/AGENTS"
-file-path = "bags/@lares/v0.1/AGENTS.md"
+file-path = "bags/@lares/AGENTS.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "adjacent"
 confidence   = 16

@@ -26,7 +26,6 @@ import { Repo } from "@automerge/automerge-repo";
 import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
-import { save as automergeSave } from "@automerge/automerge";
 import {
   CompositeStore,
   AutomergeDocStore,
@@ -226,21 +225,12 @@ export function runBrowserSovereignWorker(behavior: BrowserIslandBehavior): void
     if (_ctx) await behavior.onDemote(_ctx);
     handler.teardown();
 
-    let docBytes: Uint8Array | undefined;
-    try {
-      const h = _writableHandleId ? _handles.get(_writableHandleId) : undefined;
-      const raw = h?.doc?.();
-      if (raw) docBytes = automergeSave(raw as Parameters<typeof automergeSave>[0]);
-    } catch { /* export failed */ }
-
     _handles.clear();
     _writableHandleId = null;
     _composite        = null;
     _ctx              = null;
     _repo             = null;
 
-    const ackOpts: { docBytes?: Uint8Array } = {};
-    if (docBytes !== undefined) ackOpts.docBytes = docBytes;
-    self.postMessage(mkTeardownAck(ackOpts));
+    self.postMessage(mkTeardownAck());
   }
 }
