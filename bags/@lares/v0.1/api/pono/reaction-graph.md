@@ -150,14 +150,13 @@ reaction-roles = ["listenable", "subscribable", "observes", "throttles", "deboun
 
 <<~ ahu #yin-collapse-target >>
 
-## Yin-Collapse Target Architecture
+## Yin-Collapse — Completed (2026-05-15)
 
-The current ReactionGraph TS implementation provides a **provisional bridge**, not the
-target architecture. The target collapses the routing layer into the TW5 wiki.
+`ReactionEngine` (TS inline dispatch class) removed. The TW5 wiki IS the reactive engine.
+The yin-collapse is not provisional — it landed and shipped. `reaction-router.ts` is
+the target architecture, not a bridge to it.
 
-### Landed (2026-05-15) — reaction-router.ts TW5 startup module
-
-`ReactionEngine` (TS, inline dispatch) removed. Replaced by:
+### What shipped
 
 ```
 packages/lararium-tw5/src/modules/reaction-router.ts
@@ -166,44 +165,47 @@ packages/lararium-tw5/src/modules/reaction-router.ts
   Boot: scan all lar: tiddlers → build ReactionGraph from papalohe bindings.
 
   wiki.addEventListener("change", handler):           ← nalu arrives
-    → update ReactionGraph bindings for changed URIs
-    → wiki.dispatchEvent("tm-verse-event", {uri, listenable})
+    → update ReactionGraph bindings for changed URIs (live-query invariant)
+    → wiki.dispatchEvent("tm-verse-event", { uri, listenable })
 
-  Worker path: onVerseEvent consumer receives tm-verse-event
-    → posts IslandMsg_Event to main thread (vm-ring routing)
-
-  Browser path: widget tree handles tm-verse-event directly.
+  island-kernel.ts onVerseEvent receives tm-verse-event
+    → posts IslandMsg_Event to vessel (cross-island boundary)
 ```
 
-`ReactionGraph` and `extractReactionBindings` now reside in `live-protocol.ts`
-(imported by reaction-router.ts). `ReactionEngine` class removed from
-kumu-device.ts. `lar-wiki-worker.ts` now wires `onVerseEvent`
-and drops the inline `re.onChangeset()` call.
+`ReactionGraph` and `extractReactionBindings` reside in `reaction-graph.ts`
+(imported by `reaction-router.ts`). `ReactionEngine` class removed from
+`kumu-device.ts`. No inline `re.onChangeset()` call remains anywhere.
 
-TS still carries: MemeSyncAdaptor + LarTiddlerStore + VmPool + Keyhive.
+TS irreducible layer carries only: `MemeSyncAdaptor` + `LarTiddlerStore` + `VesselIslandPool` + Keyhive.
 
-### `fireSync` gap — CLOSED (2026-05-15)
+### Cross-island boundary (Path M)
 
-The gap (inline dispatch before nalu) no longer appears. `reaction-router.ts`
-fires reactions inside `wiki.addEventListener("change")` — after TW5 coalesces
-the batch. Dispatch now happens within the nalu, not before it.
+`reaction-router.ts` fires `IslandMsg_Event` when a nalu-triggered reaction dispatches.
+Vessel receives `IslandMsg_Event` → routes to `VerbDispatcher` via `placeVerb()`.
+Outcome tiddler written to shared admin CRDT. CRDT convergence = distributed promise.
+Promise-pipelining law: islands fire without waiting for vessel ACK.
 
-`fireSync` on `ReactionGraph` ships for direct test use, but the
-production dispatch path runs exclusively through the nalu hook.
+### `fireSync` — test surface only
 
-### Prior art validating the collapse
+`fireSync` on `ReactionGraph` ships for unit tests and in-memory fixtures.
+Production code MUST NOT call `fireSync` directly. The production path runs
+exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
+
+### Prior art grounding
 
 - **Elm Architecture** — one update function IS the engine; Cmd/Sub = side effects outside
-- **Solid.js fine-grained** — synchronous reactive graph, no separate routing layer
-- **MobX transaction** — transaction() IS the batch boundary; reactions defer until close
-- **Synchronous instantaneous reaction** (Esterel/Lustre lineage) — academic name for this pattern
+- **Solid.js fine-grained reactive** — synchronous reactive graph, no overlay layer
+- **MobX transaction** — `transaction()` IS the batch boundary; reactions defer until close
+- **vlcn.io live-query reactivity** (2024) — incremental per-dependency dispatch; not full-scan
+- **Goblins/OCapN promise pipelining** (FOSDEM 2025) — fire without ACK; CRDT resolves
+- **LoRe declarative dataflow** (arxiv:2304.07133, 2024) — changeset → derived state pipeline
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #tier0-dispatch ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:implements >>
+<<~ pranala #tier0-dispatch ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:implements >>
 <<~ pranala #depends-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:depends >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:dataflow role:reads >>
 <<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:dataflow role:reads >>

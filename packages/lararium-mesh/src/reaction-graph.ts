@@ -1,20 +1,21 @@
 /**
- * live-protocol.ts — ReactionBinding, ReactionGraph, ReactionHandler, extractReactionBindings.
+ * reaction-graph.ts — ReactionBinding, ReactionGraph, ReactionHandler, extractReactionBindings.
  *
- * Provides the wiring substrate for `ReactionEngine` (kumu-device.ts).
+ * Within-island reaction dispatch substrate. Scope: one TW5 wiki instance.
+ * Cross-island routing: IslandMsg_Event (island-protocol.ts).
+ * Cross-vessel routing: CRDT convergence — write outcome tiddler, observe convergence.
  *
- * Design vocabulary (from ast.ts):
- *   papalohe pranala edge  — instance-level OUTPUT→INPUT wiring (editor pin-wire)
- *   listenable             — OUTPUT event pin on a source kumu device
- *   subscribable           — INPUT fn pin on a target kumu device
+ * Design vocabulary:
+ *   papalohe pranala edge — instance-level OUTPUT→INPUT wiring
+ *   listenable            — OUTPUT event pin (Verse listenable / event type)
+ *   subscribable          — INPUT fn pin (Verse public method)
  *
- * A `ReactionBinding` represents one papalohe edge: when `fromUri` emits `listenable`,
- * call `toUri.subscribable`. The graph holds all active bindings and routes `fireSync`
- * calls to the correct handlers.
+ * Production dispatch: reaction-router.ts (nalu-driven TW5 startup module).
+ * fireSync is for unit tests only; production calls wiki.dispatchEvent("tm-verse-event").
  *
  * Isomorphic: no Node/browser APIs. Works in vessel, island, and browser.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/live-protocol
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-graph
  */
 
 // ---------------------------------------------------------------------------

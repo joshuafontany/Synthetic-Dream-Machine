@@ -28,8 +28,8 @@ import { parseMemeEdges } from "../meme-ast/index.js";
 import {
   extractReactionBindings,
   ReactionGraph,
-} from "@lararium/mesh/live-protocol";
-import type { ReactionBinding } from "@lararium/mesh/live-protocol";
+} from "@lararium/mesh/reaction-graph";
+import type { ReactionBinding } from "@lararium/mesh/reaction-graph";
 
 // ---------------------------------------------------------------------------
 // TW5 startup lifecycle

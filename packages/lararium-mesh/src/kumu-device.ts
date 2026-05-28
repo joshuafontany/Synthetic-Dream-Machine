@@ -1,67 +1,39 @@
 /**
- * kumu-device.ts — KumuDeviceSpec + ReactionEngine.
+ * kumu-device.ts — KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef.
  *
- * ## Verse 5.6+ device model (NOT Blueprint)
+ * Type-level device contract. Spec layer only — no runtime dispatch.
+ * Runtime reaction dispatch: reaction-router.ts (nalu-driven TW5 startup module).
+ * Runtime routing table: ReactionGraph (reaction-graph.ts).
  *
- * UEFN Verse 5.6+ uses single-inheritance class composition. A `creative_device` subclass
- * gains behavior by:
- *   - Declaring `listenable(payload)` fields as OUTPUT event pins (built-in devices only;
- *     custom device listenable fields not yet DEB-bindable in UEFN editor as of 2025)
- *   - Declaring public methods matching the payload signature as INPUT function pins
- *   - `using { /Path }` is a MODULE IMPORT directive (namespace scope), NOT trait composition
- *   - Class hierarchy: `my_device := class(creative_device)` — single inheritance only
+ * ## Verse 5.6+ device model
  *
- * Verse event type hierarchy:
- *   `event(T)`      — implements signalable + awaitable; NOT subscribable
- *   `listenable(T)` — implements awaitable + subscribable; built-in device events use this
- *   `Subscribe()`   → returns `cancelable` (our `() => void` unsubscribe)
- *   `Await()<suspends>` → single-shot coroutine (our `subscribeOnce()`)
+ * A kumu device meme is the Lararium creative_device equivalent.
+ *   `@editable` property  → ahu slot URI in KumuDeviceSpec.slots
+ *   listenable(T) field   → KumuListenable (verseKind: "listenable"; awaitable + subscribable)
+ *   event(T) field        → KumuListenable (verseKind: "event"; signalable + awaitable only)
+ *   public input method   → KumuSubscribable (INPUT fn pin)
+ *   class(P)              → control:extends edge → KumuDeviceSpec.extendsType
+ *   class(P, I, J)        → control:implements edges → KumuDeviceSpec.implementsTypes
+ *   DEB editor wire       → papalohe pranala edge (instance-level ReactionBinding)
+ *   Await(event)<suspends>→ ReactionGraph.subscribeOnce() (kukali primitive)
+ *   `using { /Path }`     → module namespace import — NOT trait composition
  *
- * Verse concurrency:
- *   `branch` → lele / \branch: structured fire-and-continue, bounded by enclosing async context
- *   `sync`   → hui / \sync: await-all
- *   `race`   → holo / \race: first wins, losers CANCEL
- *   `rush`   → puka / \rush: first wins, losers CONTINUE until the enclosing async context completes
- *   `spawn`  → unstructured escape hatch; no pono sigil until the runtime needs it
+ * Verse concurrency sigil map:
+ *   branch → lele  — structured fire-and-continue
+ *   sync   → hui   — await-all
+ *   race   → holo  — first wins, losers cancel
+ *   rush   → puka  — first wins, losers continue
  *
- * ## Lararium vocabulary mapping
+ * ## Three semantic layers (do not conflate)
  *
- *   Verse `listenable(T)` field  → `KumuListenable`     (OUTPUT pin; `reaction:listenable` role)
- *   Verse `event(T)` field       → `KumuListenable`     (verseKind: "event"; Await-only, not Subscribe)
- *   Verse public input method    → `KumuSubscribable`   (INPUT fn pin; `reaction:subscribable` role)
- *   Verse class parent (`class(P)`)    → `control:extends` pranala edge → `KumuDeviceSpec.extendsType`
- *   Verse interface (`class(P, I, J)`) → `control:implements` pranala edges → `KumuDeviceSpec.implementsTypes`
- *   UEFN editor DEB wire               → `papalohe` pranala edge (instance-level binding)
- *   `Await(event)<suspends>`     → `ReactionGraph.subscribeOnce()`
- *   UEFN game-loop actor tick    → `ReactionEngine.onChangeset()` — Scale-3 synchronous tick
+ *   Ahu-slot tree (document structure) — fragment-parent + slot tiddler fields.
+ *   control:extends (one edge) — single Verse parent class → extendsType.
+ *   control:implements (N edges) — Verse interface composition → implementsTypes.
  *
- * ## KumuDeviceSpec
- *   Isomorphic type describing a kumu device type. Derived from the type meme's
- *   pranala edge list — three semantic layers:
+ * KumuDeviceSpec derives from pranala edges, not from a TS class hierarchy.
+ * No separate registration step — authoring a type meme with reaction edges IS registration.
  *
- *   ## Three semantic layers (do not conflate)
- *
- *   **Ahu-slot tree** (document structure) — `fragment-parent` + `slot` tiddler fields.
- *   One `.md` file decomposes into a root tiddler and N slot fragment tiddlers.
- *   This is the meme parent/child/grandchild tree. NOT a pranala edge.
- *
- *   **`control:extends`** (one edge) — the single Verse parent class.
- *   `my_device := class(creative_device)` → one `control:extends` edge, `toUri = creative_device URI`.
- *   Maps to `KumuDeviceSpec.extendsType`.
- *
- *   **`control:implements`** (N edges) — Verse interface composition.
- *   `my_device := class(creative_device, challengeable, listenable_t)` → one `control:extends` +
- *   two `control:implements` edges, one per interface URI.
- *   Maps to `KumuDeviceSpec.implementsTypes`.
- *
- *   Two identity layers per instance (both tiddlers in the wiki doc):
- *     lar:///type-path#name-fragment  — user-selected friendly name (human label)
- *     lar:///type-path#uuid-fragment  — crypto.randomUUID() stable wiring address
- *   Declared in the type meme body via <<~ kahea kau #fragment >> sigils.
- *
- * Reaction routing collapsed into reaction-router.ts (TW5 startup module, nalu-driven).
- *
- * Isomorphic: no Node/browser APIs. Works in Node, browser, and TW5-era environments.
+ * Isomorphic: no Node/browser APIs.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device
  */

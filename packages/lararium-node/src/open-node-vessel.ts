@@ -754,6 +754,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         payload: msg.payload,
       });
     },
+    // Path M.1 — cross-island verb routing.
+    // Promise-pipelining law: island fires without ACK; vessel routes fire-and-forget.
+    // When a worker.event payload carries `verb`, place it on the admin island.
+    // adminVm not yet available here — consumer wired after adminVm resolves (see below).
   });
 
   // ── 8. Corpus bags — await before mounting primary island ─────────────────
@@ -782,6 +786,23 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // sovereignty. The admin island holds the TW5 job event surface; jobs cannot
   // dispatch until its drain loop and VerbDispatcher are running.
   await adminVm.workerEa;
+
+  // Path M.1 — wire worker.event consumer now that adminVm is live.
+  // Rings drain through emit() → subscribe() handlers; subscribe on the event type directly.
+  // Promise-pipelining law: island fires IslandMsg_Event without ACK; vessel routes fire-and-forget.
+  // payload.verb present → cross-island verb dispatch; absent → observation-only signal.
+  eventBus.subscribe<{ wikiId: string; listenable: string; payload: Record<string, string | number | boolean> }>(
+    "worker.event",
+    ({ listenable, payload }) => {
+      const verb = typeof payload["verb"] === "string" ? payload["verb"] : undefined;
+      if (!verb) return;
+      adminVm.placeVerb({
+        verb,
+        args:        payload as unknown as Record<string, unknown>,
+        requestedBy: typeof payload["requestedBy"] === "string" ? payload["requestedBy"] : listenable,
+      });
+    },
+  );
 
   emit("live");
   return {

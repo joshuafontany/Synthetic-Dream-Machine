@@ -1,0 +1,173 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol"
+file-path    = "bags/@lararium/v0.1/mesh/reaction-protocol.md"
+source-file  = "packages/lararium-mesh/src/reaction-graph.ts"
+type         = "text/x-memetic-wikitext"
+register     = "CS"
+confidence   = 17
+mana         = 17
+manao        = 17
+manaoio      = 16
+tagspace     = "lararium"
+role         = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
+cacheable    = true
+retain       = true
+invariant    = true
+status-date  = "2026-05-28"
+```
+<<~&#x0002;>>
+
+<<~ ahu #head >>
+
+# Reaction Graph
+
+Within-island reaction dispatch substrate.
+Isomorphic: no Node/browser APIs. Runs in vessel, island, and browser.
+
+**Scope boundary:** `ReactionGraph` routes within one TW5 wiki instance.
+It never addresses another island, another vessel, or the network.
+- Cross-island routing: `IslandMsg_Event` (island-protocol.ts)
+- Cross-vessel routing: CRDT convergence — write outcome tiddler, observe convergence
+
+The production dispatch path runs through `reaction-router.ts` (nalu-driven).
+`ReactionGraph` is the routing table that `reaction-router.ts` populates and queries.
+`fireSync` ships for direct test use only; production code MUST NOT call it directly.
+
+<<~/ahu >>
+
+<<~ ahu #exports >>
+
+## Exports
+
+### `ReactionBinding`
+
+One papalohe instance-level wire: when `fromUri` emits `listenable`, call `toUri.subscribable`.
+
+```
+fromUri      — source device instance URI
+toUri        — target device instance URI
+listenable   — OUTPUT event pin name on fromUri (Verse OUTPUT pin)
+subscribable — INPUT fn pin name on toUri (Verse INPUT pin)
+source       — "wired" (from wiki AST) | "subscribed" (runtime Subscribe())
+```
+
+`wired` bindings derive from `family:reaction` pranala edges in the meme's carrier text.
+`subscribed` bindings form at runtime via `subscribe()`.
+
+---
+
+### `ReactionHandler`
+
+```typescript
+type ReactionHandler = (payload: unknown) => void
+```
+
+Called when a bound reaction fires. Payload carries the event context (GP-2 compliant: plain values only).
+
+---
+
+### `EdgeLike`
+
+Minimal edge shape accepted by `extractReactionBindings`. Matches `PranalaEdge` from `@lararium/mesh/ast`.
+
+---
+
+### `ReactionGraph`
+
+Live wiring map + handler registry.
+
+**Binding API:**
+
+| Method | Behaviour |
+|---|---|
+| `load(bindings)` | Replace entire binding set |
+| `updateUri(uri, bindings)` | Replace all bindings referencing `uri` (incremental nalu update) |
+| `removeUri(uri)` | Remove all bindings referencing `uri` (tiddler deleted) |
+| `bindings` | Flat readonly array of all current bindings |
+
+**Subscription API:**
+
+| Method | Verse analogue |
+|---|---|
+| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` |
+| `subscribeByFn(fnName, handler) → cancel` | `@subscribes Enable()` — fires for all bindings routing to `fnName`; `"*"` = wildcard |
+| `subscribeOnce(fromUri, listenable) → Promise` | `Await(event)<suspends>` — kukali primitive |
+| `onFireSync(observer) → cancel` | Monitoring hook — fires before handler dispatch |
+
+**Dispatch:**
+
+`fireSync(fromUri, listenable, payload)` — synchronous UEFN game-loop tick fidelity.
+
+Dispatch order:
+1. `onFireSync` observers (monitoring — receive full context before any handler)
+2. Direct handlers for `(fromUri, listenable)` key
+3. Per-fn handlers for every binding where `fromUri+listenable` matches, via `subscribable` name
+
+---
+
+### `extractReactionBindings(edges) → ReactionBinding[]`
+
+Derives `ReactionBinding` records from a flat edge list.
+
+Selects edges that carry both `payload.listenable` and `payload.subscribable` (non-empty strings) — these represent instance-level papalohe wires. Edges carrying only one of the two fields declare a type-level pin, not a wire, and get ignored here.
+
+All extracted bindings carry `source: "wired"`.
+
+<<~/ahu >>
+
+<<~ ahu #update-invariant >>
+
+## Update Invariant
+
+`load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
+
+A handler registered via `subscribe()` or `subscribeOnce()` survives graph reloads
+as long as the `(fromUri, listenable)` key still appears in the incoming binding set.
+Unoccupied slots for removed bindings drop; occupied slots persist.
+
+This preserves in-flight kukali suspensions across TW5 wiki-change events (nalu rebuilds).
+
+<<~/ahu >>
+
+<<~ ahu #production-dispatch-path >>
+
+## Production Dispatch Path
+
+`reaction-router.ts` owns production dispatch. The path:
+
+```
+nalu arrives (wiki.addEventListener("change", handler))
+  → for each changed lar: URI:
+      updateUri(uri, extractReactionBindings(parseMemeEdges(uri, text)))
+      fireReactionsForUri(wiki, graph, uri)
+        → for each listenable in bindings for uri:
+            wiki.dispatchEvent("tm-verse-event", { uri, listenable })
+              → island-kernel.ts onVerseEvent handler
+                → posts IslandMsg_Event to vessel
+```
+
+`fireSync` on `ReactionGraph` provides synchronous dispatch for unit tests and in-memory fixtures.
+Production code calls `wiki.dispatchEvent("tm-verse-event")` only; `ReactionGraph.fireSync` never
+appears in production paths.
+
+<<!/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-reaction-engine ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:within-island >>
+<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:reference role:see >>
+<<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:reference role:see >>
+<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>

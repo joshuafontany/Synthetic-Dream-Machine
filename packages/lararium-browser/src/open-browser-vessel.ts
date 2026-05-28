@@ -425,7 +425,20 @@ export async function openBrowserVessel(
   // ── 11. Island pool ───────────────────────────────────────────────────────
   const pool = new BrowserVesselIslandPool({
     mainRepo:      repo,
-    onWorkerEvent: () => { /* event bus integration deferred to event-bus sprint */ },
+    // Path M.1 — cross-island verb routing.
+    // Promise-pipelining law: island fires without ACK; vessel routes fire-and-forget.
+    // admin resolves after openBrowserAdminVm(); closure captures the reference.
+    onWorkerEvent: (_id, msg) => {
+      const verb = typeof msg.payload["verb"] === "string" ? msg.payload["verb"] : undefined;
+      if (!verb || !admin) return; // observation-only or admin not yet live
+      admin.placeVerb({
+        verb,
+        args:        msg.payload as unknown as Record<string, unknown>,
+        requestedBy: typeof msg.payload["requestedBy"] === "string"
+          ? msg.payload["requestedBy"]
+          : msg.listenable,
+      });
+    },
     ...(workerScriptUrl ? { workerScriptUrl } : {}),
   });
   vessel.attachVmPool(pool);

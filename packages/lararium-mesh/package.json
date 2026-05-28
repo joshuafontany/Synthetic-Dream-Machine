@@ -24,9 +24,9 @@
       "import": "./dist/promotion-ceremony.js",
       "types": "./dist/promotion-ceremony.d.ts"
     },
-    "./live-protocol": {
-      "import": "./dist/live-protocol.js",
-      "types": "./dist/live-protocol.d.ts"
+    "./reaction-graph": {
+      "import": "./dist/reaction-graph.js",
+      "types": "./dist/reaction-graph.d.ts"
     },
     "./node": {
       "import": "./dist/node.js",
