@@ -1,11 +1,28 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
-> Updated: 2026-05-21
+> Updated: 2026-05-27
 > Branch: feature/lararium-node-4
 > Sprints 0–5: ✅ Complete
-> Active sprint: S6 — SessionEventLog
-> Designed sprints: S7 (Circles + Identities capability layer), S8 (Lares command surface + local intent bridge)
+> S6 — SessionEventLog: ⬜ Deferred (design notes preserved; no code landed yet)
+> S7 — Circles + Identities: ⬜ Deferred (design doc only)
+> S8 — Lares command surface + local intent bridge: ⬜ Deferred (maps to ROADMAP paths M + L)
 > Addendum: shared operator-vessel VM-pool plan attached below
+
+---
+
+> **⚠ ARCHIVE NOTICE — 2026-05-27**
+>
+> This document is a **design archive**, not a canonical work list.
+> The sprint numbering here (S0–S8) predates the ROADMAP trim.
+> **Canonical active priorities live in [`packages/ROADMAP.md`](./ROADMAP.md).**
+>
+> S6 was never opened in code — `social-doc.ts` does not exist.  
+> ROADMAP Priority 1 = **S9 / lararium-browser S4 real boot** (IndexedDB + WebCrypto + keyhive founding ceremony + `broadcast()` presence).  
+> ROADMAP Priority 2 = **L / S7.4** — admin-doc ingress trust gate (`cap=infrastructure`).  
+> ROADMAP Priority 3 = **M** — local intent bridge (command/receipt contracts + stdio transport).  
+>
+> Design content in this file that aligns with pono models is kept intact as reference material.
+> Any task listed as ⬜ here must be verified against `packages/ROADMAP.md` before reopening.
 
 ---
 
@@ -109,24 +126,33 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 
 **Exit criteria met:** `pnpm --filter @lararium/node test:quine` → `Genesis Boot Smoke: PASS` — 4 blobs, 14 tiddlers, 65 SharktoothSigil grammar tiddlers. 39/39 tests pass.
 
-### S6 — SessionEventLog 🔴 Active
+### S6 — SessionEventLog ⬜ Deferred
+
+> **ROADMAP note (2026-05-27):** S6 was never opened in code. `social-doc.ts` does not exist in the codebase.
+> The `broadcast()` presence insight is now captured in **ROADMAP Priority 1 — S9 / lararium-browser S4** (pono charter BV-4).
+> The full Social Tiga (IdentitiesDoc, CirclesDoc, SessionsDoc + SessionEventLog) is downstream of S9 and L.
+> Do not reopen S6 tasks until S9 closes and `packages/ROADMAP.md` carries a path entry for it.
 
 **Goal:** Wire per-session append-only event log; adopt `docHandle.broadcast()` for presence.
 
-**Tasks:**
-- [ ] Add `eventLogUrl: string` and `eventLogHeads: string[]` to `SessionTiddler` interface in `social-doc.ts`
+**Tasks (deferred):**
+- [ ] Add `eventLogUrl: string` and `eventLogHeads: string[]` to `SessionTiddler` interface in `social-doc.ts` (planned file, does not exist yet)
 - [ ] Add `SessionEventLog` doc type + `SessionEvent` entry type in `social-doc.ts`
 - [ ] Add `seedSessionEventLog(repo, sessionId)` in `genesis-island.ts`
 - [ ] Update `capabilityToken` field semantics: store UCAN root hash (not the token)
 - [ ] Document `broadcast()` usage pattern for ephemeral presence in session-opening code path
 
-**Key insight from research:** `docHandle.broadcast()` (automerge-repo `EphemeralMessage`) is the correct primitive for presence — NOT a separate persisted doc. Direct equivalent to Yjs awareness. Never touches `NodeFSStorageAdapter`.
+**Key insight from research (still valid):** `docHandle.broadcast()` (automerge-repo `EphemeralMessage`) is the correct primitive for presence — NOT a separate persisted doc. Direct equivalent to Yjs awareness. Never touches `NodeFSStorageAdapter`.
 
-### S7 — Circles + Identities Capability Layer ⬜ Designed (design doc only)
+### S7 — Circles + Identities Capability Layer ⬜ Deferred (design doc only)
+
+> **ROADMAP note (2026-05-27):** The nearest active guard for this work is **ROADMAP Priority 2 — L / S7.4** (admin-doc ingress trust gate: `cap=infrastructure` Keyhive proof; non-operator vessels rejected).
+> The full Circles + Identities capability delegation chain comes after S9 and L close.
+> Canonical reference: `packages/ROADMAP.md` Path L.
 
 **Goal:** IdentitiesDoc and CirclesDoc acquire real protocol integrity via capability delegation chain.
 
-**Design decisions (from research):**
+**Design decisions (from research, still valid):**
 - `IdentitiesDoc`: Keyhive person-as-group model; each person = a group of their device `did:key`s; delegation chain proves "Device B is also me"
 - `CirclesDoc`: Keyhive convergent capabilities + Seitan token invitations (@localfirst/auth); nexus admin = founding key for system circles; users = founding key for personal circles
 - ERA paper (arXiv:2601.22963): epoch-resolved arbitration for concurrent admin revocations
@@ -140,7 +166,13 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 
 **References:** `wikis/@lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md`
 
-### S8 — Lares Command Surface + Local Intent Bridge ⬜ Designed
+### S8 — Lares Command Surface + Local Intent Bridge ⬜ Deferred
+
+> **ROADMAP note (2026-05-27):** This sprint's intent splits across two active ROADMAP paths:
+> - **Priority 2 — L / S7.4**: admin-doc ingress trust gate (operator vessels with `cap=infrastructure` only).
+> - **Priority 3 — M**: local intent bridge — shared job/receipt contracts, ceremony meaning in TW5 VM pool, transports as edge adaptation.
+> `lares-cli/src/admin-connector.ts` stubs exist; `stdio` transport is the missing seam.
+> Canonical reference: `packages/ROADMAP.md` Paths L and M.
 
 **Goal:** move CLI and daemon coordination onto command tiddler records and receipt tiddler records, while keeping execution inside the TW5 VM pool wherever the VM can carry the work.
 
@@ -170,6 +202,17 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 ---
 
 ## Addendum — Shared Operator Peer VM Pool Plan
+
+> **ROADMAP note (2026-05-27):** The six addendum sprints below are design-layer work that predates the pono ROADMAP trim.
+> Their intent maps to active ROADMAP paths as follows:
+> - Addendum Sprint 1 (Operator Peer Contract) → **ROADMAP Path P** (shared operator-vessel contract)
+> - Addendum Sprint 2 (Ceremony Contract Unification) → **ROADMAP Path M** (local intent bridge)
+> - Addendum Sprint 3 (Capability Gate at the Peer) → **ROADMAP Path L** (admin-doc ingress trust gate)
+> - Addendum Sprint 4 (Shared VM Pool Runtime) → **ROADMAP Priority 1 — S9** (lararium-browser S4 real boot)
+> - Addendum Sprint 5 (Edge Adaptors) → **ROADMAP Path K** (TW5 routing, debounce, projection hygiene)
+> - Addendum Sprint 6 (Planning Convergence) → already complete per ROADMAP 2026-05-27 update
+>
+> Canonical active priorities: `packages/ROADMAP.md`.
 
 This addendum keeps the genesis and protocol-stack material intact while naming the next architecture move more explicitly.
 
@@ -390,13 +433,18 @@ Ephemeral channel (not a doc):
 ```
 S0 Cleanup ✅
   └── S1 Invariants ✅
-	  └── S2 Build-Time Genesis ✅
-		  ├── S3 Runtime Loader ✅
-		  │     └── S4 Peer Factories ✅
-		  │           └── S5 Quine Closure ✅
-		  │                 └── S6 SessionEventLog 🔴 ← HERE
-		  │                       └── S7 Capability Layer ⬜
-		  └── (S3 and S4 unlocked together after S2)
+      └── S2 Build-Time Genesis ✅
+          ├── S3 Runtime Loader ✅
+          │     └── S4 Peer Factories ✅
+          │           └── S5 Quine Closure ✅
+          │                 └── S6 SessionEventLog ⬜ Deferred (no code yet; ROADMAP S9 carries broadcast() presence)
+          │                       └── S7 Capability Layer ⬜ Deferred (ROADMAP Path L is the active gate)
+          └── (S3 and S4 unlocked together after S2)
+
+Active pono work → packages/ROADMAP.md:
+  Priority 1: S9 / lararium-browser S4 (IndexedDB + WebCrypto + keyhive founding ceremony)
+  Priority 2: L / S7.4 (admin-doc ingress trust gate)
+  Priority 3: M (local intent bridge — command/receipt + stdio)
 ```
 
 ---

@@ -8,8 +8,16 @@ export default defineConfig({
   plugins: [wasm()],
   resolve: {
     alias: [
-      { find: "@lararium/mesh", replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
-      { find: "@lararium/tw5",  replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
+      // Stub Node's `crypto` module for browser tests — tw5-host-bridge uses createHash.
+      { find: /^(node:)?crypto$/, replacement: path.resolve(root, "src/__stubs__/crypto-stub.ts") },
+      { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
+      { find: "@lararium/mesh/cascade",          replacement: path.resolve(root, "../lararium-mesh/src/cascade.ts") },
+      { find: "@lararium/mesh/lar-uris",         replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
+      { find: "@lararium/mesh/mirror-paths",     replacement: path.resolve(root, "../lararium-mesh/src/mirror-paths.ts") },
+      { find: "@lararium/mesh/promotion-ceremony", replacement: path.resolve(root, "../lararium-mesh/src/promotion-ceremony.ts") },
+      { find: "@lararium/mesh/live-protocol",    replacement: path.resolve(root, "../lararium-mesh/src/live-protocol.ts") },
+      { find: "@lararium/mesh",                  replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
+      { find: "@lararium/tw5",                   replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
     ],
   },
   test: {

@@ -33,6 +33,19 @@ import {
   CAP_EVENT_TAG,
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
 } from "@lararium/mesh";
+
+function bytesToBase64(bytes: Uint8Array): string {
+  let bin = "";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]!);
+  return btoa(bin);
+}
+
+function base64ToBytes(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
 import { buildCeremonyTiddlers } from "@lararium/mesh";
 import { KeyhiveProvider } from "./keyhive-provider.js";
 import { InMemoryEventStore } from "./event-store.js";
@@ -122,7 +135,7 @@ export async function runFoundingCeremony(
         doc.tiddlers[title] = {
           tiddler: {
             title,
-            text:        Buffer.from(evt.bytes).toString("base64"),
+            text:        bytesToBase64(evt.bytes),
             tags:        CAP_EVENT_TAG,
             variant:     evt.variant,
             hash,
@@ -194,8 +207,8 @@ export async function runDeviceAdmitCore(
   const store   = new InMemoryEventStore();
 
   for (const r of capEvents) {
-    const bytes   = new Uint8Array(Buffer.from(r.bytes, "base64"));
-    const hashBuf = await crypto.subtle.digest("SHA-256", bytes);
+    const bytes   = base64ToBytes(r.bytes);
+    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.buffer as ArrayBuffer);
     const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
     await store.put({ hash, variant: r.variant, bytes });
   }
@@ -276,8 +289,8 @@ export async function runApplyAdmitPayload(
 
   // Write cap events from payload into admin doc.
   for (const evt of payload.capEvents) {
-    const bytes   = new Uint8Array(Buffer.from(evt.bytes, "base64"));
-    const hashBuf = await crypto.subtle.digest("SHA-256", bytes);
+    const bytes   = base64ToBytes(evt.bytes);
+    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.buffer as ArrayBuffer);
     const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
     const title   = capEventTitle(hash);
     adminHandle.change((doc) => {

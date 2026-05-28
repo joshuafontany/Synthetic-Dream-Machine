@@ -48,6 +48,9 @@ importers:
       '@automerge/automerge-repo-storage-indexeddb':
         specifier: ^2.5.6
         version: 2.5.6
+      '@lararium/keyhive':
+        specifier: workspace:*
+        version: link:../lararium-keyhive
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh

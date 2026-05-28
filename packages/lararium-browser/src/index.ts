@@ -11,3 +11,12 @@
 
 export { BrowserVesselIslandPool } from "./browser-vessel-island-pool.js";
 export type { BrowserVesselIslandPoolOptions } from "./browser-vessel-island-pool.js";
+
+export { openBrowserVessel } from "./open-browser-vessel.js";
+export type { BrowserVesselOptions, BrowserVesselResult } from "./open-browser-vessel.js";
+
+export {
+  generateOrLoadBrowserKeypair, loadBrowserSigningSeed,
+  openVesselIdb, idbGet, idbPut,
+} from "./browser-operator-key.js";
+export type { BrowserOperatorIdentity } from "./browser-operator-key.js";

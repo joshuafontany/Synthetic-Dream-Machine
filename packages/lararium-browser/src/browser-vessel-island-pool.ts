@@ -57,7 +57,7 @@ function _awaitMsg<T extends { type: string }>(
       if (!isIslandToVesselMsg(e.data) || e.data.type !== type) return;
       clearTimeout(timer);
       worker.removeEventListener("message", onMsg);
-      resolve(e.data as T);
+      resolve(e.data as unknown as T);
     };
     worker.addEventListener("message", onMsg);
   });
@@ -66,8 +66,13 @@ function _awaitMsg<T extends { type: string }>(
 // ── BrowserVesselIslandPool ────────────────────────────────────────────────
 
 export interface BrowserVesselIslandPoolOptions {
-  /** URL of the compiled browser-wiki-worker entry script. */
-  workerScriptUrl: URL;
+  /**
+   * URL of the compiled browser-wiki-worker entry script.
+   * Optional at construction time; required before calling mountWiki.
+   * Omit when constructing a pool as a placeholder (e.g., before the genesis
+   * island is available to supply TW5 core bytes).
+   */
+  workerScriptUrl?: URL;
   /**
    * Optional vessel Automerge Repo. When provided, each island's mainPort wires
    * to this Repo via MessageChannelNetworkAdapter so the island syncs automatically.
@@ -79,18 +84,24 @@ export interface BrowserVesselIslandPoolOptions {
 
 export class BrowserVesselIslandPool {
   private readonly _slots     = new Map<string, BrowserSlot>();
-  private readonly _workerUrl: URL;
+  private readonly _workerUrl: URL | null;
   private readonly _mainRepo:  Repo | null;
   private readonly _onEvent:   ((id: string, msg: IslandMsg_Event) => void) | null;
 
   constructor(opts: BrowserVesselIslandPoolOptions) {
-    this._workerUrl = opts.workerScriptUrl;
+    this._workerUrl = opts.workerScriptUrl ?? null;
     this._mainRepo  = opts.mainRepo ?? null;
     this._onEvent   = opts.onWorkerEvent ?? null;
   }
 
   async mountWiki(id: string, params: BrowserWikiMountParams): Promise<void> {
     if (this._slots.has(id)) return;
+    if (!this._workerUrl) {
+      throw new Error(
+        `[browser-vessel-island-pool] cannot mountWiki("${id}") — no workerScriptUrl set. ` +
+        `Pass workerScriptUrl when constructing the pool (requires genesis island for TW5 core bytes).`,
+      );
+    }
 
     const worker = new Worker(this._workerUrl, { type: "module" });
     worker.addEventListener("error", (e) =>

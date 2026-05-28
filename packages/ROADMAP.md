@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-27 (§8 archipelago gate + YIN cleanup — 196/196 tests)
+> Updated: 2026-05-27 (S9 browser founding ceremony confirmed green — 215/215 tests)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -44,7 +44,12 @@ two-pass CID smoke-test fixed; `test:quine` script added; `pnpm test:quine`
 passes — 65 SharktoothSigil tiddlers in genesis; 39/39 tests pass),
 **and** G.SharktoothSigil completion confirmed (65 sigil tiddlers cover the full
 vocabulary; zero active `[[sigils]]` TOML blocks remain; wild-magic property holds;
-remaining monolith TOML carries documentation data tables only — Path O).
+remaining monolith TOML carries documentation data tables only — Path O),
+**and** S9 / lararium-browser S4 real boot confirmed (`openBrowserVessel` full boot
+sequence: IndexedDBStorageAdapter, WebCrypto Ed25519 keypair, `runFoundingCeremony`
+on first boot, Gates A/B/C, `broadcast()` presence, `emit("live")`. Bootstrap
+artifact persists to IDB; resume boot rehydrates without re-running ceremony.
+19/19 browser tests green in real Chromium via Playwright. ROADMAP Priority 1 closed.).
 
 Do not re-open those arcs unless a test proves drift.
 
@@ -84,7 +89,7 @@ These planning docs follow one architectural law:
 | — | **Pono federation pattern** | ✅ Done | `coreBlob: Uint8Array` evicted from `IslandMsg_Manifest`. Boot order inverted in both sovereign island models: Repo first, `handle.whenReady()`, read `blobs[ENGINE_CORE_ID]` from `@lararium` CRDT doc, `mkFault` if absent, `bootTw5` last. `laraiumDocUrl` required on `VesselIslandPool` — `@lararium` binding prepended per island. `blob-sovereignty.test.ts` gates §6. N×island federation O(CRDT-sync). 195/195 tests. |
 | — | **YIN ontology + typo closure** | ✅ Done | `runSovereignisland` → `runSovereignWorker` in 3 entry files. `worker: island` → `worker: Worker`. `node-vm-manager.test.ts` → `vessel-island-pool.test.ts`. `vm-manager-echo.mjs` → `vm-pool-echo.mjs`. Fixture binding resolution uses `b.writable`. 195/195. |
 | — | **§8 archipelago gate** | ✅ Done | `federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair via `MessageChannelNetworkAdapter`. Island Sovereignty Law §8 written. Gate proof cites node + browser (`browser-repo-in-island.test.ts` test 2). 196/196 tests. |
-| 1 | **S9 / lararium-browser S4 real boot** | ⬜ Next | IndexedDB storage adapter, WebCrypto keypair, founding ceremony via `@lararium/keyhive`, presence via `broadcast()`. Charter: `bags/@lararium/v0.1/browser/pono-charter.md` (exists). Pono federation receiver correct. |
+| — | **S9 / lararium-browser S4 real boot** | ✅ Done | `openBrowserVessel`: WebCrypto Ed25519 keypair (IDB-persisted), `runFoundingCeremony` isomorphic (Buffer→btoa/atob in `ceremony-core.ts` + `admin-event-store.ts`), Gates A/B/C verified in real Chromium, `docHandle.broadcast()` wired. `browser-operator-key.ts` + `open-browser-vessel.ts` + `BrowserVesselIslandPoolOptions.workerScriptUrl` optional. `browser-founding-ceremony.test.ts` 7/7 Playwright. 19/19 browser tests. |
 | 2 | **L / S7.4** | ⬜ Next | Admin-doc ingress trust gate: operator vessels with `cap=infrastructure` only; prove local capability rejection before edge work. Non-operator vessels rejected at ingress. |
 | 3 | **M / Local intent bridge** | ⬜ Next | Finish shared job/receipt contracts; keep ceremony meaning in the TW5 VM pool; treat transports as edge adaptation, not authority. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
@@ -215,7 +220,7 @@ Invariants:
 |---|---|---|
 | **Tier 2 aka preview** | ⬜ Deferred | Node-side OG metadata fetch → `thumbnail`/`og-title`/`og-description` fields. Home: `disk-projector.ts` or `og-metadata-fetcher.ts`. Design record at `bags/@lararium/v0.1/tw5/sigil-aka.md`. |
 | **M / Dreamdeck-app** | ⬜ Queued | After admin ingress gate; picks up same-machine peer consolidation deferred from S6.C.5. |
-| **S9 / lararium-browser** | ⬜ Active | S0–S3 landed. Charter exists. S4 real boot is next (see priority table). |
+| **S9 / lararium-browser** | 🔶 S4 done | S0–S4 landed. Charter holds. S5 (genesis island in browser, TW5 boot) deferred to dreamdeck-app sprint. |
 | **S10 / dreamdeck-tldraw** | ⬜ Queued | tldraw shapes as `lar://` resource containers; edge types first-class. |
 | **S11 / dreamdeck-app** | ⬜ Queued | React shell; TW5 + canvas composition; no protocol logic in app layer. |
 | **W / CodeMirror 6 + Lezer + LSP** | ⬜ Downstream | After CLI/live wiki authoring stabilizes. |
