@@ -429,7 +429,8 @@ export async function openBrowserVessel(
     // Promise-pipelining law: island fires without ACK; vessel routes fire-and-forget.
     // admin resolves after openBrowserAdminVm(); closure captures the reference.
     onWorkerEvent: (_id, msg) => {
-      const verb = typeof msg.payload["verb"] === "string" ? msg.payload["verb"] : undefined;
+      const verb    = typeof msg.payload["verb"]    === "string" ? msg.payload["verb"]    : undefined;
+      const fromUri = typeof msg.payload["fromUri"] === "string" ? msg.payload["fromUri"] : undefined;
       if (!verb || !admin) return; // observation-only or admin not yet live
       admin.placeVerb({
         verb,
@@ -437,6 +438,8 @@ export async function openBrowserVessel(
         requestedBy: typeof msg.payload["requestedBy"] === "string"
           ? msg.payload["requestedBy"]
           : msg.listenable,
+        listenable: msg.listenable,
+        ...(fromUri ? { fromUri } : {}),
       });
     },
     ...(workerScriptUrl ? { workerScriptUrl } : {}),

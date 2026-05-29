@@ -794,12 +794,15 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   eventBus.subscribe<{ wikiId: string; listenable: string; payload: Record<string, string | number | boolean> }>(
     "worker.event",
     ({ listenable, payload }) => {
-      const verb = typeof payload["verb"] === "string" ? payload["verb"] : undefined;
+      const verb    = typeof payload["verb"]    === "string" ? payload["verb"]    : undefined;
+      const fromUri = typeof payload["fromUri"] === "string" ? payload["fromUri"] : undefined;
       if (!verb) return;
       adminVm.placeVerb({
         verb,
         args:        payload as unknown as Record<string, unknown>,
         requestedBy: typeof payload["requestedBy"] === "string" ? payload["requestedBy"] : listenable,
+        listenable,
+        ...(fromUri ? { fromUri } : {}),
       });
     },
   );

@@ -90,12 +90,14 @@ Live wiring map + handler registry.
 
 **Subscription API:**
 
-| Method | Verse analogue |
-|---|---|
-| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` |
-| `subscribeByFn(fnName, handler) → cancel` | `@subscribes Enable()` — fires for all bindings routing to `fnName`; `"*"` = wildcard |
-| `subscribeOnce(fromUri, listenable) → Promise` | `Await(event)<suspends>` — kukali primitive |
-| `onFireSync(observer) → cancel` | Monitoring hook — fires before handler dispatch |
+| Method | Verse analogue | `verseKind` constraint |
+|---|---|---|
+| `subscribe(fromUri, listenable, handler) → cancel` | `sourceDevice.OutputEvent.Subscribe(handler)` | **`listenable` only** — user `event(T)` fields lack `subscribable`; use `subscribeOnce` instead |
+| `subscribeByFn(fnName, handler) → cancel` | `@subscribes Enable()` — fires for all bindings routing to `fnName`; `"*"` = wildcard | `listenable` only |
+| `subscribeOnce(fromUri, listenable) → Promise` | `Await(event)<suspends>` — kukali primitive | **both** `listenable` and `event` |
+| `onFireSync(observer) → cancel` | Monitoring hook — fires before handler dispatch | both |
+
+**Verse type split:** engine-exposed events (`button_device.InteractedWithEvent`) carry type `listenable(payload)` — supports `Subscribe()` and `Await()`. User-declared `event(T)` fields in custom Verse devices carry type `event(payload)` — supports `Signal()` and `Await()` only; `Subscribe()` is unavailable from outside the declaring class. This is a confirmed Verse language gap (acknowledged by Epic, not yet closed as of mid-2026).
 
 **Dispatch:**
 

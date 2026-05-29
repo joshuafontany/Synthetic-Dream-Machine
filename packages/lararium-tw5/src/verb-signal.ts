@@ -46,5 +46,7 @@ export async function emitVerbSignal(
     targets:     [...invocation.targets],
     batchMode:   invocation.batchMode,
     requestId:   invocation.requestId,
+    ...(invocation.fromUri    !== undefined && { fromUri:    invocation.fromUri }),
+    ...(invocation.listenable !== undefined && { listenable: invocation.listenable }),
   });
 }

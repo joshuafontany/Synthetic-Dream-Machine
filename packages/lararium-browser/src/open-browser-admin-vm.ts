@@ -72,6 +72,8 @@ export interface BrowserVerbPlacementRequest {
   args:         Record<string, unknown>;
   requestedBy?: string;
   requestId?:   string;
+  fromUri?:     string;
+  listenable?:  string;
 }
 
 const HANDSHAKE_TIMEOUT_MS = 15_000;
@@ -187,7 +189,9 @@ export async function openBrowserAdminVm(
         verb:        jobOpts.verb,
         args:        jobOpts.args,
         requestedBy: jobOpts.requestedBy ?? "browser-vessel",
-        ...(jobOpts.requestId ? { requestId: jobOpts.requestId } : {}),
+        ...(jobOpts.requestId  ? { requestId:  jobOpts.requestId  } : {}),
+        ...(jobOpts.fromUri    ? { fromUri:    jobOpts.fromUri    } : {}),
+        ...(jobOpts.listenable ? { listenable: jobOpts.listenable } : {}),
       }));
     },
     dispose: () => {

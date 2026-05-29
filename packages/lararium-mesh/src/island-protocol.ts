@@ -203,6 +203,8 @@ export interface AdminMsg_PlaceVerb {
   targets?: string[];
   batchMode?: string;
   requestId?: string;
+  fromUri?: string;
+  listenable?: string;
 }
 
 /**
@@ -439,6 +441,8 @@ export function mkAdminPlaceVerb(opts: {
   targets?: string[];
   batchMode?: string;
   requestId?: string;
+  fromUri?: string;
+  listenable?: string;
 }): AdminMsg_PlaceVerb {
   const msg: AdminMsg_PlaceVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -447,9 +451,11 @@ export function mkAdminPlaceVerb(opts: {
     args: opts.args,
     requestedBy: opts.requestedBy,
   };
-  if (opts.targets?.length)  msg.targets   = opts.targets;
-  if (opts.batchMode)        msg.batchMode = opts.batchMode;
-  if (opts.requestId)        msg.requestId = opts.requestId;
+  if (opts.targets?.length)  msg.targets    = opts.targets;
+  if (opts.batchMode)        msg.batchMode  = opts.batchMode;
+  if (opts.requestId)        msg.requestId  = opts.requestId;
+  if (opts.fromUri)          msg.fromUri    = opts.fromUri;
+  if (opts.listenable)       msg.listenable = opts.listenable;
   return msg;
 }
 

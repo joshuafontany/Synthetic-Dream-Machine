@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-28 (Path L sealed — admin-auth WebSocket gate + YIN aftermath; 59/59 tests)
+> Updated: 2026-05-28 (M.1 reaction-graph rename + vessel wires + 26-test suite; 243/243 tests)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -91,7 +91,8 @@ These planning docs follow one architectural law:
 | — | **§8 archipelago gate** | ✅ Done | `federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair via `MessageChannelNetworkAdapter`. Island Sovereignty Law §8 written. Gate proof cites node + browser (`browser-repo-in-island.test.ts` test 2). 196/196 tests. |
 | — | **S9 / lararium-browser S4 real boot** | ✅ Done | `openBrowserVessel`: WebCrypto Ed25519 keypair (IDB-persisted), `runFoundingCeremony` isomorphic (Buffer→btoa/atob in `ceremony-core.ts` + `admin-event-store.ts`), Gates A/B/C verified in real Chromium, `docHandle.broadcast()` wired. `browser-operator-key.ts` + `open-browser-vessel.ts` + `BrowserVesselIslandPoolOptions.workerScriptUrl` optional. `browser-founding-ceremony.test.ts` 7/7 Playwright. 19/19 browser tests. |
 | — | **L / S7.4** | ✅ Done | `AdminAuthGate`: lar:challenge/lar:auth WebSocket handshake; `accessForDoc` concap gate; `peerIdentifierMap` + `queueMicrotask` race fix; MAX_PENDING + contactCard cap + timeout hardening. TODO L.2 (nonce signing) deferred — alpha posture acceptable, see M sprint. 59/59 tests. |
-| 1 | **M / Local intent bridge** | ⬜ Next | Verb/outcome vocabulary now canonical (job→verb, receipt→outcome, inbox→signal corpus-wide, 196/196 tests). Next: wire `IslandMsg_Event` for cross-vessel event routing; connect Reaction Engine `tm-verse-event` to inter-island signal paths. |
+| — | **M.1 / reaction-graph rename + vessel wires** | ✅ Done | `live-protocol.ts` → `reaction-graph.ts` (scope claim: within-island only). M.1 node wire: `eventBus.subscribe("worker.event")` → `adminVm.placeVerb()` after `workerEa`. M.1 browser wire: `onWorkerEvent` → `admin.placeVerb()`. `ReactionGraph` 26-test suite added. Mesh build + tw5 plugin rebuild clean. 243/243 tests. |
+| 1 | **M / Local intent bridge** | ⬜ Next | M.1 vessel wires done. Next: (a) integration test proving wiki-island reaction with payload.verb → vessel eventBus → adminVm.placeVerb round-trip; (b) author first wiki device tiddler that fires a reaction carrying `verb` payload; (c) stdio bridge for CLI/daemon local intent path. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
 | 6 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |

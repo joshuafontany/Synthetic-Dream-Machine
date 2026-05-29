@@ -77,3 +77,4 @@ export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
 export { makeAdminBehavior } from "./admin-behavior.js";
 
 export { IslandKernel } from "./island-kernel.js";
+

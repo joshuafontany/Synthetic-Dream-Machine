@@ -29,7 +29,7 @@ export { GRAMMAR_TAG };
 // ---------------------------------------------------------------------------
 
 export const name      = "lararium-grammar-cache";
-export const platforms = ["browser"];
+export const platforms = ["browser", "node"];
 export const after     = ["startup"];
 
 type TwFields = Record<string, unknown>;

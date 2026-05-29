@@ -176,17 +176,53 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     const laraiumHandle = _handles.get(BAG_IDS.lararium);
-    const blobEntry = laraiumHandle?.doc()?.blobs?.[ENGINE_CORE_ID];
+    const laraiumDoc    = laraiumHandle?.doc();
+    const blobEntry = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
     const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
     if (!coreBytes) {
       _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
       return;
     }
 
+    // §6b — TW5 plugin tiddlers travel via @lararium CRDT blob store.
+    // Blobs with mimeType "application/json" are TW5 plugin tiddlers.
+    // Parse and pass as preloadTiddlers so the island boots with current plugins.
+    const pluginTiddlers: Record<string, unknown>[] = [];
+    const blobs = laraiumDoc?.blobs ?? {};
+    console.log("[island] genesis blobs:", Object.keys(blobs));
+    for (const [id, entry] of Object.entries(blobs)) {
+      if (id === ENGINE_CORE_ID) continue;
+      const mime = (entry as unknown as Record<string, unknown>)["mimeType"];
+      console.log("[island] blob:", id, "mimeType:", mime);
+      if (mime !== "application/json") continue;
+      const blobBytes = (entry as unknown as Record<string, unknown>)["blob"];
+      if (!blobBytes) { console.log("[island] blob", id, "has no bytes"); continue; }
+      try {
+        const json = JSON.parse(new TextDecoder().decode(new Uint8Array(blobBytes as Uint8Array))) as Record<string, unknown>;
+        console.log("[island] parsed plugin:", json["title"] ?? id);
+        pluginTiddlers.push(json);
+      } catch (e) { console.log("[island] blob parse error:", id, e); }
+    }
+    console.log("[island] pluginTiddlers count:", pluginTiddlers.length);
+
     try {
-      await handler.bootTw5(msg.wikiUri, coreBytes, msg.pluginTiddlers);
+      await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers.length ? pluginTiddlers : msg.pluginTiddlers);
     } catch {
       return;
+    }
+
+    // §6c — pono diagnostics: verify startup modules registered after boot.
+    {
+      const tw5 = handler.tw5();
+      if (tw5) {
+        const titles = tw5.$tw.modules?.titles ?? {};
+        const startupMods = Object.keys(titles).filter(t => titles[t]?.moduleType === "startup");
+        console.log("[island] startup modules after boot:", startupMods);
+        const pluginCount = tw5.$tw.wiki?.filterTiddlers("[all[tiddlers+shadows]type[application/json]plugin-type[plugin]]") ?? [];
+        console.log("[island] registered plugins:", pluginCount);
+        const rrListener = tw5.$tw.wiki?.eventListeners?.["change"]?.length ?? "unknown";
+        console.log("[island] change listeners:", rrListener);
+      }
     }
 
     for (const { bagId, handle, writable } of ready) {

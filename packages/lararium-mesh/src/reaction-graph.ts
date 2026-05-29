@@ -146,6 +146,10 @@ export class ReactionGraph {
    * Subscribe to events emitted by `fromUri` with name `listenable`.
    * Returns a cancellation function.
    * Analogous to Verse `sourceDevice.OutputEvent.Subscribe(handler)`.
+   *
+   * Verse constraint: valid only for sources with `verseKind: "listenable"`.
+   * User-declared `event(T)` fields (verseKind: "event") lack `subscribable` —
+   * they support only `Await()`. Use `subscribeOnce()` for those sources instead.
    */
   subscribe(fromUri: string, listenable: string, handler: ReactionHandler): () => void {
     const key = `${fromUri}\0${listenable}`;
@@ -170,6 +174,7 @@ export class ReactionGraph {
 
   /**
    * Single-shot: resolves with the next `payload` from `(fromUri, listenable)`.
+   * Analogous to Verse `Await(event)<suspends>` — valid for both `listenable` and `event` sources.
    * Analogous to Verse `Await(event)<suspends>` (kukali primitive).
    */
   subscribeOnce(fromUri: string, listenable: string): Promise<unknown> {

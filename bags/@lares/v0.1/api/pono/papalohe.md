@@ -110,6 +110,22 @@ canonical-roles = ["listenable", "subscribable", "observes", "throttles", "debou
 
 <<~/ahu >>
 
+<<~ ahu #binding-source >>
+
+## Binding Source — `ReactionBinding.source`
+
+Every `ReactionBinding` derived from a papalohe edge carries a `source` field.
+Two values, distinct Verse-side origins:
+
+| Value | Verse origin | Lares origin | Lifecycle |
+|---|---|---|---|
+| `"wired"` | UEFN **Direct Event Binding** (DEB) — editor-configured at level design time. Includes `@subscribes`-attributed Verse methods wired via the Details panel. Static per session; resolved at level load. | `extractReactionBindings()` call on wiki AST edges | Survives `updateUri()` graph rebuilds if the key remains |
+| `"subscribed"` | Runtime `Subscribe()` call in Verse `OnBegin()`. Returns a `cancelable`; caller must hold a reference or the GC silently drops the subscription. | `ReactionGraph.subscribe()` call | Cancelled explicitly via returned cancel fn; does not survive `load()` / `updateUri()` |
+
+**DEB has no public export API.** UEFN stores DEB wires inside `.umap` actor property blobs (standard UE actor serialization). No standalone graph file or introspection endpoint exists. Importing DEB structure into Lararium requires parsing `.umap` binary assets or a Verse-side relay device that introspects its own subscriptions at runtime — both are limited paths. See `#import-pipeline` in `lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene`.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

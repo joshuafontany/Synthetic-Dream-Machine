@@ -26,8 +26,6 @@ import type { TW5CoreBootBlob, TW5CoreBootInput } from "./tw5-host-bridge.js";
 
 export type { TW5CoreBootBlob } from "./tw5-host-bridge.js";
 
-import { LARES_MEMETIC_WIKITEXT_PLUGIN } from "./plugin-tiddler.generated.js";
-
 // ---------------------------------------------------------------------------
 // TW5Engine — clean isomorphic TW5 VM
 // ---------------------------------------------------------------------------
@@ -53,14 +51,6 @@ export class TW5Engine {
       const allPreloads = preloadedTiddlers ?? [];
 
       instance.preloadTiddlers = instance.preloadTiddlers ?? [];
-      // Single plugin tiddler — the lar:// canonical envelope
-      // emitted by `pnpm build:plugin`. TW5's standard plugin
-      // loader unpacks the JSON envelope, registers each inner
-      // module via $tw.modules.define, and materializes the
-      // cascade configs / templates / mount as shadow tiddlers.
-      // Replaces the imperative widget/parser/wikirule/
-      // deserializer registrations that the V.1 boot path used.
-      instance.preloadTiddlers.push(LARES_MEMETIC_WIKITEXT_PLUGIN as unknown as Record<string, unknown>);
       for (const t of allPreloads) instance.preloadTiddlers.push(t as Record<string, unknown>);
 
       await bootWithHostBridge(instance, isBrowser, async () => {
@@ -133,12 +123,14 @@ export class TW5Engine {
    * KukaliWidget fires "tm-verse-event"; the consumer handles it.
    * Returns a teardown function (Verse cancelable equivalent).
    */
-  onVerseEvent(consumer: { handleVerseEvent(uri: string, listenable: string): void }): () => void {
+  onVerseEvent(consumer: {
+    handleVerseEvent(uri: string, listenable: string, verb?: string, fromUri?: string): void;
+  }): () => void {
     if (!this._tw) return () => {};
     const handler = (...args: unknown[]) => {
-      const event = args[0] as { uri?: string; listenable?: string } | undefined;
+      const event = args[0] as { uri?: string; listenable?: string; verb?: string; fromUri?: string } | undefined;
       if (event?.uri && event.listenable) {
-        consumer.handleVerseEvent(event.uri, event.listenable);
+        consumer.handleVerseEvent(event.uri, event.listenable, event.verb, event.fromUri);
       }
     };
     this._tw.wiki.addEventListener("tm-verse-event", handler);

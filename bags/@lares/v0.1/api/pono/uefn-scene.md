@@ -153,6 +153,22 @@ Output: one Automerge bag per scene. Bag URI: `lar:///project-slug/scene-slug`.
 The importer does not need to run inside UEFN — it reads source files. The output bag
 works in any Lararium peer: browser, Node server, TW5 wiki.
 
+### Blocking Constraint — DEB Has No Public Export API
+
+**DEB (Direct Event Binding) wires have no standalone export format.**
+Epic stores DEB bindings inside each device actor's property blob within the `.umap`
+file (standard Unreal Engine actor serialization). No public API, graph file, or
+runtime introspection endpoint exposes them independently.
+
+Two viable import paths, each with limits:
+
+| Path | How | Limit |
+|---|---|---|
+| **`.umap` binary parse** | Read UE asset file directly; deserialize actor properties to extract DEB arrays | Requires UE asset format knowledge; format can shift across engine versions |
+| **Verse relay device** | A custom Verse device placed in the level subscribes to all target events on `OnBegin` and emits its own inventory at runtime | Can only observe events it subscribes to; cannot introspect arbitrary device graphs it wasn't designed for |
+
+**Sprint entry gate:** the import pipeline sprint MUST resolve this path before committing to a DEB extraction approach. No code work begins on the importer until one path is selected and prototyped.
+
 <<~/ahu >>
 
 <<~ ahu #verse-effect-specifiers >>

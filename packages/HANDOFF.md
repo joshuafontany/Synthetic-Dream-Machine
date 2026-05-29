@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-27 (turn 24)
+> Updated: 2026-05-28 (turn 27)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -76,12 +76,12 @@ repo-in-island.test.ts writable-binding selector comment added; 197/197 tests)
 are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. S9 S4 / lararium-browser: real boot path — IndexedDB storage adapter,
-   WebCrypto keypair, founding ceremony via @lararium/keyhive in browser vessel,
-   presence via broadcast(). Charter: bags/@lararium/v0.1/browser/pono-charter.md (exists).
-2. Path L / S7.4: admin-doc ingress trust gate via Keyhive cap=admin.
-3. Path M: finish shared job/receipt contracts; ceremony meaning stays in TW5 VM pool.
-4. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+1. Path M.3: full-TW5-boot integration test — wiki device tiddler edge drives verb
+   dispatch end-to-end through reaction-router → island-kernel → vessel → placeVerb.
+   (M.2 gate proven; M.3 requires real TW5 boot + parseMemeEdges in the loop.)
+2. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+3. Path R: ReactionEngine completion — onChangeset wiring, changed-URI derivation,
+   NodeVmManager integration tests through mount→event→forward→unmount cycle.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
 Remaining TOML in memetic-wikitext.tid: documentation data tables only (Path O).
@@ -94,6 +94,120 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-28 turn 27)
+
+### M.2 — verb-as-tiddler-field + routing pipeline closure ✅ 246/246 tests
+
+**Architectural decision (adversarial-reviewed):**
+URI carries minimum semantic identity only (`@admin/signals/<requestId>`).
+Verb routing metadata lives entirely in tiddler fields — TW5-queryable,
+filterable, cascadable. `[field:verb[promote]]` spans signal + outcome tiddlers.
+Rating vs alternatives: Plan C (17/20) > Plan B URI-encodes-verb (11/20) > Plan A thread-scalar (12/20).
+
+**`verb-tiddler.ts` (`@lararium/mesh`) — field model extended:**
+- `VerbInvocation` gains optional `fromUri?` and `listenable?` fields (source device URI + Verse event name)
+- `buildVerbInvocation` / `buildVerbSignal` write `"from-uri"` and `"listenable"` tiddler fields
+- `parseVerbInvocation` reads them back (exactOptionalPropertyTypes-safe spread pattern)
+- `buildVerbOutcome` already carried `verb` field — no change needed
+
+**`island-protocol.ts` (`@lararium/mesh`) — protocol extended:**
+- `AdminMsg_PlaceVerb` gains optional `fromUri?` and `listenable?`
+- `mkAdminPlaceVerb` threads both fields through
+
+**`reaction-router.ts` (`@lararium/tw5` TW5 startup module) — verb metadata extraction:**
+- `parseEdgesForUri()` replaces `bindingsFromUri()` — single pass over `parseMemeEdges` output
+  produces both `ReactionBinding[]` AND `Map<listenable, verb>` from `reaction:listenable` edges
+- Module-level `_verbsByUri: Map<uri, Map<listenable, verb>>` — maintained in sync with nalu updates
+- `fireReactionsForUri()` collects listenables from BOTH graph.bindings AND `_verbsByUri`
+  (fires verb dispatch for tiddlers with `payload.verb` even without papalohe wires)
+- `tm-verse-event` now carries `{ uri, listenable, verb?, fromUri? }` — backward compatible
+
+**`tw5-vm.ts` — `onVerseEvent` signature extended:**
+- `handleVerseEvent(uri, listenable, verb?, fromUri?)` — passes verb metadata through
+
+**`island-kernel.ts` — `IslandMsg_Event.payload` enriched:**
+- `payload: { uri, verb?, fromUri? }` — vessel sees all fields; observation-only events omit verb
+
+**`admin-behavior.ts` — `admin:place-verb` handler threads `fromUri`/`listenable`** through to `placeVerbInvocation`
+
+**Vessel wires — node + browser updated:**
+- `open-node-vessel.ts` M.1 subscriber passes `listenable` + `fromUri?` to `placeVerb`
+- `open-browser-vessel.ts` same; `BrowserVerbPlacementRequest` gains `fromUri?`/`listenable?`
+- `open-browser-admin-vm.ts` threads both through `mkAdminPlaceVerb`
+
+**`verb-signal.ts` — relay threads `fromUri`/`listenable`** from signal tiddler through to `placeVerb`
+
+**Integration test — `tests/event-routing.test.ts` (new, 3 tests):**
+- `tests/fixtures/event-verb-echo.mjs` — fixture island posts `IslandMsg_Event` with
+  `{ verb: "echo-verb", listenable: "OnActivated", fromUri: "lar:///test/instances/promote-button-1" }`
+- Suite A: VesselIslandPool integration — asserts `payload.verb`, `payload.fromUri` arrive correctly
+- Suite B: M.1 handler unit — extracts verb+fromUri+listenable, calls placeVerb; ignores observation-only
+
+**Corpus — `bags/@lararium/v0.1/tw5/devices/promote-button.md` (new):**
+- First kumu device type meme with `reaction:listenable` edge carrying `payload.verb = "promote"`
+- Documents the full dispatch chain from tiddler edge → verb dispatch → TW5 filter queries
+
+## What Changed This Turn (2026-05-28 turn 26)
+
+### ReactionGraph rename + M.1 wires + test coverage sprint
+
+**`live-protocol.ts` → `reaction-graph.ts` (rename, `@lararium/mesh`):**
+- Header comment rewritten to scope boundary claim: within-island dispatch only.
+- Cross-island routing (`IslandMsg_Event`) and cross-vessel routing (CRDT convergence)
+  explicitly named as out-of-scope.
+- `production dispatch path` doc block added — `fireSync` is test-only; production
+  calls `wiki.dispatchEvent("tm-verse-event")`.
+- `packages/lararium-mesh/package.json` exports entry: `./reaction-graph` (was `./live-protocol`).
+- `packages/lararium-mesh/src/index.ts` re-export updated.
+- All importers updated: `reaction-router.ts`, `open-node-vessel.ts`, `open-browser-vessel.ts`,
+  both vitest configs. No `live-protocol` import survives in source.
+
+**`kumu-device.ts` header rewritten:** DEB editor wire → papalohe pranala edge framing;
+`ReactionEngine` reference removed (ReactionEngine class deleted in yin-collapse sprint).
+
+**`open-node-vessel.ts` — Path M.1 node wire:**
+- `eventBus.subscribe("worker.event")` consumer wired *after* `await adminVm.workerEa`.
+- `payload["verb"]` present → `adminVm.placeVerb({ verb, args, requestedBy })`.
+- `payload["verb"]` absent → observation-only (signal drops cleanly, no error).
+- Promise-pipelining law enforced: fire-and-forget, no ACK expected.
+
+**`open-browser-vessel.ts` — Path M.1 browser wire:**
+- `onWorkerEvent` stub replaced with real routing: `payload["verb"]` → `admin.placeVerb()`.
+- Guard: `if (!verb || !admin) return` — admin-not-yet-live path clean.
+
+**`@lararium/mesh` build:** `tsc -p tsconfig.build.json` emits `dist/reaction-graph.{js,d.ts}`.
+`dist/live-protocol.*` artifacts removed.
+
+**`@lararium/tw5` plugin rebuild:** `pnpm --filter @lararium/tw5 build` — plugin bundle
+now references `reaction-graph` (not `live-protocol`). 121 inner tiddlers packed. 19 modules.
+
+**`packages/lararium-mesh/tests/reaction-graph.test.ts` — 26 new tests:**
+- `extractReactionBindings`: 5 tests (valid extraction, missing fields, empty strings, no endpoints, mixed list).
+- `ReactionGraph` binding management: 4 tests (load replaces, updateUri partial replace, removeUri by fromUri, removeUri by toUri).
+- Direct subscribe/fireSync: 5 tests (fires, wrong listenable skips, cancel, multiple handlers, default payload).
+- `subscribeByFn`: 3 tests (fires for matching fn, wildcard once per fireSync, cancel).
+- `onFireSync` observer: 3 tests (order before handlers, cancel, error isolation).
+- `subscribeOnce`: 2 tests (resolves first payload only, pending on wrong listenable).
+- Update invariant: 3 tests (handlers survive load() if key present, subscribeOnce survives updateUri(), error isolation between handlers).
+
+**`bags/@lararium/v0.1/mesh/reaction-protocol.md`:** `source-file` already set to
+`packages/lararium-mesh/src/reaction-graph.ts` — no edit needed. Meme coherent.
+
+**Design note — M.1 payload.verb gap:** The `onWorkerEvent` → `placeVerb` route only
+fires when `IslandMsg_Event.payload["verb"]` carries a string. The island-kernel currently
+posts `payload: { uri }` — no `verb` field. So all current reaction events remain
+observation-only at the vessel boundary. The next M sprint: author a wiki device tiddler
+that fires a reaction with explicit `verb` in payload, and write an integration test that
+proves the full round-trip.
+
+**Files changed:** `reaction-graph.ts` (rename + header), `kumu-device.ts`, `index.ts`,
+`open-node-vessel.ts`, `open-browser-vessel.ts`, two vitest configs,
+`reaction-graph.test.ts` (new), `package.json` (@lararium/mesh exports).
+
+**Metrics:** 243/243 tests pass (mesh 96, tw5 69, node 59, browser 19). Build clean.
+
+---
 
 ## What Changed This Turn (2026-05-27 turn 25)
 

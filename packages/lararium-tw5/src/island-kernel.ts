@@ -85,13 +85,17 @@ export class IslandKernel {
 
     this._liveHandles.add({
       cancel: this._tw5.onVerseEvent({
-        handleVerseEvent: (uri: string, listenable: string) => {
+        handleVerseEvent: (uri: string, listenable: string, verb?: string, fromUri?: string) => {
           this._post({
             schema_version: ISLAND_PROTOCOL_VERSION,
             type: "event",
             wikiUri: this._wikiUri!,
             listenable,
-            payload: { uri },
+            payload: {
+              uri,
+              ...(verb    !== undefined && { verb }),
+              ...(fromUri !== undefined && { fromUri }),
+            },
           } satisfies IslandMsg_Event);
         },
       }),

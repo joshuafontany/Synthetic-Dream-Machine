@@ -95,6 +95,10 @@ export interface VerbInvocation {
   readonly status:      VerbStatus;
   readonly requestedBy: string;
   readonly requestedAt: string;
+  /** Source device instance URI — Verse `fromUri` (papalohe edge origin). */
+  readonly fromUri?:    string;
+  /** Verse event name that triggered dispatch — maps to `reaction:listenable` payload.listenable. */
+  readonly listenable?: string;
 }
 
 // ── Outcome shape ──────────────────────────────────────────────────────────
@@ -175,6 +179,8 @@ export function buildVerbInvocation(opts: {
   targets?:    string[];
   batchMode?:  BatchMode;
   requestId?:  string;
+  fromUri?:    string;
+  listenable?: string;
 }): Record<string, unknown> {
   const requestId = opts.requestId ?? newRequestId();
   const title     = `${VERB_URI_PREFIX}${requestId}`;
@@ -189,6 +195,8 @@ export function buildVerbInvocation(opts: {
     status:          "pending",
     "requested-by":  opts.requestedBy,
     "requested-at":  new Date().toISOString(),
+    ...(opts.fromUri    !== undefined && { "from-uri":   opts.fromUri }),
+    ...(opts.listenable !== undefined && { listenable:   opts.listenable }),
   };
 }
 
@@ -201,6 +209,8 @@ export function buildVerbSignal(opts: {
   batchMode?:  BatchMode;
   requestId?:  string;
   authority?:  string;
+  fromUri?:    string;
+  listenable?: string;
 }): LarTiddlerRecord {
   const requestId = opts.requestId ?? newRequestId();
   const title     = `${VERB_SIGNAL_URI_PREFIX}${requestId}`;
@@ -216,6 +226,8 @@ export function buildVerbSignal(opts: {
       status:          "pending",
       "requested-by":  opts.requestedBy,
       "requested-at":  new Date().toISOString(),
+      ...(opts.fromUri    !== undefined && { "from-uri":   opts.fromUri }),
+      ...(opts.listenable !== undefined && { listenable:   opts.listenable }),
     },
     meta: { authority: opts.authority ?? "lares-cli" },
   };
@@ -253,7 +265,14 @@ export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvoca
     if (Array.isArray(parsed)) targets = parsed.filter((t): t is string => typeof t === "string");
   } catch { /* treat as empty */ }
 
-  return { requestId, title, verb, args, targets, batchMode, status, requestedBy, requestedAt };
+  const fromUri    = typeof fields["from-uri"]   === "string" ? fields["from-uri"]   : undefined;
+  const listenable = typeof fields["listenable"] === "string" ? fields["listenable"] : undefined;
+
+  return {
+    requestId, title, verb, args, targets, batchMode, status, requestedBy, requestedAt,
+    ...(fromUri    !== undefined && { fromUri }),
+    ...(listenable !== undefined && { listenable }),
+  };
 }
 
 export function buildRunningPatch(): Record<string, string> {

@@ -74,9 +74,11 @@ export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior
             verb:        msg.verb,
             args:        msg.args,
             requestedBy: msg.requestedBy,
-            ...(msg.targets   ? { targets:   msg.targets   } : {}),
-            ...(msg.batchMode ? { batchMode: msg.batchMode as BatchMode } : {}),
-            ...(msg.requestId ? { requestId: msg.requestId } : {}),
+            ...(msg.targets   ? { targets:    msg.targets              } : {}),
+            ...(msg.batchMode ? { batchMode:  msg.batchMode as BatchMode } : {}),
+            ...(msg.requestId ? { requestId:  msg.requestId             } : {}),
+            ...(msg.fromUri   ? { fromUri:    msg.fromUri               } : {}),
+            ...(msg.listenable? { listenable: msg.listenable            } : {}),
           });
         }
         return true;

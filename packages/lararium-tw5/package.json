@@ -23,6 +23,10 @@
     "./tw5-memes-root": {
       "import": "./tw5-memes-root.js",
       "types": "./tw5-memes-root.d.ts"
+    },
+    "./plugin-tiddler.generated": {
+      "import": "./dist/plugin-tiddler.generated.js",
+      "types": "./dist/plugin-tiddler.generated.d.ts"
     }
   },
   "main": "./dist/index.js",

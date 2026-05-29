@@ -18,6 +18,8 @@ export interface VerbPlacement {
   readonly targets?:    string[];
   readonly batchMode?:  BatchMode;
   readonly requestId?:  string;
+  readonly fromUri?:    string;
+  readonly listenable?: string;
 }
 
 export function placeVerbInvocation(tw5: TW5Engine, opts: VerbPlacement): string {
