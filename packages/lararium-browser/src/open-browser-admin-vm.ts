@@ -88,10 +88,15 @@ export async function openBrowserAdminVm(
 
   // ── Admin doc handle (keyhive + gate reads) ──────────────────────────────
   const adminHandle = await (async () => {
-    const h = await repo.find<LarDoc>(adminUrl as AutomergeUrl);
-    try { await h.whenReady(["ready", "unavailable"]); } catch { /* fallback */ }
-    if (h.state === "unavailable") return repo.create<LarDoc>(emptyLarDoc());
-    return h;
+    try {
+      const h = await repo.find<LarDoc>(adminUrl as AutomergeUrl, {
+        allowableStates: ["ready", "unavailable"],
+      });
+      if (h.isUnavailable()) return repo.create<LarDoc>(emptyLarDoc());
+      return h;
+    } catch {
+      return repo.create<LarDoc>(emptyLarDoc());
+    }
   })();
 
   // ── Vessel composite (cap-event + receipt writes) ────────────────────────
