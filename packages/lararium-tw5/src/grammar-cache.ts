@@ -20,6 +20,7 @@ module-type: startup
  *   resetGrammar()                    — explicit cache invalidation (tests / emergency)
  */
 
+import type { TW5Wiki } from "./types/tiddlywiki.js";
 import type { GrammarRules, SigilRule, FamilyRule } from "./meme-ast/types.js";
 import { GRAMMAR_TAG } from "@lararium/mesh/lar-uris";
 export { GRAMMAR_TAG };
@@ -28,32 +29,21 @@ export { GRAMMAR_TAG };
 // TW5 startup lifecycle
 // ---------------------------------------------------------------------------
 
-export const name      = "lararium-grammar-cache";
-export const platforms = ["browser", "node"];
-export const after     = ["startup"];
+export const name  = "lararium-grammar-cache";
+export const after = ["startup"];
 
-type TwFields = Record<string, unknown>;
-type TwTiddler = { fields: TwFields };
-type TwWiki = {
-  getTiddler(t: string): TwTiddler | undefined;
-  getTiddlerText(t: string): string | undefined;
-  filterTiddlers(filter: string): string[];
-  addEventListener(ev: "change", fn: (changes: Record<string, unknown>) => void): void;
-};
-
-function getWiki(): TwWiki | undefined {
-  return (globalThis as { $tw?: { wiki?: TwWiki } }).$tw?.wiki;
-}
+// TW5's evalGlobal injects $tw as a direct function parameter into module code.
+// In the Node VM sandbox (vm.runInContext), globalThis is the empty VM context —
+// $tw must be accessed as the injected variable, not via globalThis.$tw.
+declare const $tw: { wiki?: TW5Wiki } | undefined;
 
 export function startup(): void {
-  const wiki = getWiki();
+  const wiki = $tw?.wiki;
   if (!wiki) return;
   wiki.addEventListener("change", (changes) => {
     for (const title of Object.keys(changes)) {
-      const tags = wiki.getTiddler(title)?.fields?.["tags"];
-      const tagList = Array.isArray(tags) ? tags
-        : typeof tags === "string" ? tags.split(" ") : [];
-      if (tagList.includes(GRAMMAR_TAG)) { _cache = undefined; return; }
+      const tags = wiki.getTiddler(title)?.fields.tags ?? [];
+      if (tags.includes(GRAMMAR_TAG)) { _cache = undefined; return; }
     }
   });
 }
@@ -68,7 +58,7 @@ export function getGrammar(): GrammarRules | null {
   if (_cache) return _cache.rules;
   let rules: GrammarRules | null = null;
   try {
-    const wiki = getWiki();
+    const wiki = $tw?.wiki;
     if (wiki) rules = buildGrammarFromWiki(wiki);
   } catch { /* grammar unavailable — BOOTSTRAP_SCANS remain active */ }
   _cache = { loaded: true, rules };
@@ -88,14 +78,14 @@ function str(v: unknown): string { return typeof v === "string" ? v : ""; }
  * `lar-name` field takes precedence; otherwise strips the "sigil-" prefix
  * from the last path segment of the title (e.g. "…/sigil-ahu" → "ahu").
  */
-function nameFromTitle(title: string, fields: TwFields): string {
+function nameFromTitle(title: string, fields: Readonly<Record<string, unknown>>): string {
   if (fields["lar-name"]) return str(fields["lar-name"]);
   const last = title.split("/").pop() ?? title;
   return last.startsWith("sigil-") ? last.slice(6) : last;
 }
 
 /** Build SigilRule from a SharktoothSigil tiddler's fields. Returns null for family tiddlers. */
-function sigilFromFields(title: string, fields: TwFields): SigilRule | null {
+function sigilFromFields(title: string, fields: Readonly<Record<string, unknown>>): SigilRule | null {
   const kindRaw = str(fields["lar-kind"]);
   if (!kindRaw || kindRaw === "family") return null;
   const kind = kindRaw as SigilRule["kind"];
@@ -113,10 +103,9 @@ function sigilFromFields(title: string, fields: TwFields): SigilRule | null {
 }
 
 /** Build FamilyRule from a SharktoothSigil tiddler with lar-kind: family. */
-function familyFromFields(title: string, fields: TwFields): FamilyRule | null {
+function familyFromFields(title: string, fields: Readonly<Record<string, unknown>>): FamilyRule | null {
   if (str(fields["lar-kind"]) !== "family") return null;
   const name = nameFromTitle(title, fields);
-  // Strip "family-" prefix from names like "family-control" → "control"
   const familyName = name.startsWith("family-") ? name.slice(7) : name;
   return {
     name:               familyName,
@@ -134,7 +123,7 @@ function familyFromFields(title: string, fields: TwFields): FamilyRule | null {
  * Grammar fully self-hosted: every sigil and family rule carries as a tiddler.
  * The `toml` data-fence sigil lives at lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml.
  */
-function buildGrammarFromWiki(wiki: TwWiki): GrammarRules | null {
+function buildGrammarFromWiki(wiki: TW5Wiki): GrammarRules | null {
   const titles = wiki.filterTiddlers(`[tag[${GRAMMAR_TAG}]]`);
   const sigils:   SigilRule[]   = [];
   const families: FamilyRule[]  = [];

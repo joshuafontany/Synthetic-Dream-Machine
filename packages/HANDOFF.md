@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-28 (turn 27)
+> Updated: 2026-05-29 (turn 28)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -76,11 +76,12 @@ repo-in-island.test.ts writable-binding selector comment added; 197/197 tests)
 are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. Path M.3: full-TW5-boot integration test — wiki device tiddler edge drives verb
-   dispatch end-to-end through reaction-router → island-kernel → vessel → placeVerb.
-   (M.2 gate proven; M.3 requires real TW5 boot + parseMemeEdges in the loop.)
-2. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
-3. Path R: ReactionEngine completion — onChangeset wiring, changed-URI derivation,
+1. Path M(b): author `promote-button` device tiddler in genesis that fires a real
+   `reaction:listenable` edge with `payload.verb = "promote"`. Prove it drives
+   placeVerb without a fixture — first real in-corpus kumu device.
+2. Path M(c): stdio bridge for CLI/daemon local intent path.
+3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
+4. Path R: ReactionEngine completion — onChangeset wiring, changed-URI derivation,
    NodeVmManager integration tests through mount→event→forward→unmount cycle.
 
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
@@ -94,6 +95,48 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-29 turn 28)
+
+### M.3 — Full-TW5-Boot Reaction Gate ✅ 248/248 tests
+
+**Gate closed:** `verb-tiddler-dispatch.test.ts` (2 tests) proves the full path:
+CRDT write → island TW5 → `reaction-router` nalu fires → `tm-verse-event` →
+`IslandMsg_Event` with `payload.verb === "promote"` arrives at vessel `onWorkerEvent`.
+
+**Root cause (confirmed via TW5 boot.js trace):**
+`reaction-router.ts` and `grammar-cache.ts` read `globalThis.$tw?.wiki` in their
+`getWiki()` helpers. TW5's non-browser module evaluation path uses:
+```
+vm.runInContext(code, vm.createContext({}), filename)
+```
+Inside that `vm.runInContext({})` sandbox, `globalThis` resolves to the **empty VM
+context object** — not the real Node.js globalThis. `$tw` is only reachable as the
+**direct function parameter** injected by `evalGlobal`'s wrapper:
+```javascript
+(function($tw, module, exports, ...) { [module code] })($tw_value, ...)
+```
+
+**Fix:** Removed `getWiki()` from both modules. Added TypeScript ambient declaration:
+```typescript
+declare const $tw: { wiki?: TwWiki } | undefined;
+```
+All `getWiki()` call sites replaced with `$tw?.wiki` direct access.
+
+**Files changed:**
+- `packages/lararium-tw5/src/modules/reaction-router.ts` — `getWiki()` removed; `declare const $tw` ambient; `startup()` uses `$tw?.wiki` directly.
+- `packages/lararium-tw5/src/grammar-cache.ts` — same pattern; `startup()` + `getGrammar()` both converted.
+- `packages/lararium-node/src/sovereign-island-model.ts` — pono diagnostic block removed (§6c trace + drain log); clean.
+- `packages/lararium-node/genesis/island.bin` — rebuilt (sha256=a3b9265a…, 508 KB, 4 blobs, 14 tiddlers).
+
+**Architecture invariant confirmed:** Island Sovereignty Law holds end-to-end.
+Plugin bytes travel from genesis `@lararium` Automerge doc blob store → island
+`pluginTiddlers` → TW5 `preloadTiddlers` → `reaction-router` startup module runs
+in TW5's `vm.runInContext` sandbox — no manifest byte transfer, no duplicate load path.
+
+**Metrics:** 248/248 tests pass (mesh 96, tw5 69, node 64, browser 19). Build clean.
+
+---
 
 ## What Changed This Turn (2026-05-28 turn 27)
 

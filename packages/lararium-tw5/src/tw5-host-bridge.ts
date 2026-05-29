@@ -104,8 +104,12 @@ async function loadNodeTiddlyWiki(coreBlob?: TW5CoreBootBlob): Promise<{ TiddlyW
       tw["__larariumModuleShim"] = moduleShim;
     }
   } finally {
-    if (priorTw === undefined) delete (globalThis as Record<string, unknown>)["$tw"];
-    else (globalThis as Record<string, unknown>)["$tw"] = priorTw;
+    // Leave $tw on globalThis — the blob evaluation establishes the island's own
+    // TW5 instance there. Startup modules (reaction-router, grammar-cache) read
+    // $tw.wiki via globalThis.$tw. In a Worker thread, globalThis is the island's
+    // isolated scope; the instance stays sovereign. Restore the other shims that
+    // were only needed during blob evaluation.
+    if (priorTw !== undefined) (globalThis as Record<string, unknown>)["$tw"] = priorTw;
     if (priorLoad === undefined) delete (globalThis as Record<string, unknown>)["_load"];
     else (globalThis as Record<string, unknown>)["_load"] = priorLoad;
     if (priorWindow === undefined) delete (globalThis as Record<string, unknown>)["window"];
@@ -147,7 +151,10 @@ async function ensureBrowserCoreLoaded(coreBlob?: TW5CoreBootBlob): Promise<void
 
 function neutralizeNodeBootAuthority(instance: TW5Instance): void {
   instance.boot.argv = [];
-  (instance as unknown as { node: null; browser: null }).node = null;
+  // Null both platform flags: prevents TW5 from reading filesystem (node path)
+  // or DOM (browser path) during blob-boot. Our startup modules (reaction-router,
+  // grammar-cache) omit the `platforms` field so they pass globalExclude regardless.
+  (instance as unknown as { node: null; browser: null }).node    = null;
   (instance as unknown as { node: null; browser: null }).browser = null;
   (instance as unknown as { loadTiddlersNode?: () => void }).loadTiddlersNode = () => {};
 }
@@ -185,12 +192,12 @@ export async function bootWithHostBridge(
 
     const hostGlobal = globalThis as Record<string, unknown>;
     const savedRequire = hostGlobal["require"];
-    const savedModule = hostGlobal["module"];
+    const savedModule  = hostGlobal["module"];
     const nodeRequireShim = !isBrowser ? (instance as unknown as Record<string, unknown>)["__larariumRequireShim"] : undefined;
-    const nodeModuleShim = !isBrowser ? (instance as unknown as Record<string, unknown>)["__larariumModuleShim"] : undefined;
+    const nodeModuleShim  = !isBrowser ? (instance as unknown as Record<string, unknown>)["__larariumModuleShim"]  : undefined;
     if (!isBrowser) {
       if (nodeRequireShim) hostGlobal["require"] = nodeRequireShim;
-      if (nodeModuleShim) hostGlobal["module"] = nodeModuleShim;
+      if (nodeModuleShim)  hostGlobal["module"]  = nodeModuleShim;
     }
 
     instance.boot.boot(() => {

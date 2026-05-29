@@ -137,16 +137,19 @@ describe("openBrowserVessel", () => {
   });
 
   test("different wikiId produces distinct wiki docs", async () => {
+    // Open vessels sequentially on the same IDB so the founding ceremony docs are
+    // fully flushed before the second Repo opens. Concurrent open on the same IDB
+    // creates a race: a's docs enter "unavailable" in b's Repo before IDB writes land.
     const idb = freshIdb();
 
-    const a = await openBrowserVessel({ hostId: "h", wikiId: "wiki-a", idbName: idb });
-    const b = await openBrowserVessel({ hostId: "h", wikiId: "wiki-b", idbName: idb });
-
-    expect(a.wikiDocUrl).not.toBe(b.wikiDocUrl);
-
+    const a    = await openBrowserVessel({ hostId: "h", wikiId: "wiki-a", idbName: idb });
+    const aUrl = a.wikiDocUrl;
     await a.repo.shutdown();
-    await b.repo.shutdown();
     await a.keyhive.dispose();
+
+    const b = await openBrowserVessel({ hostId: "h", wikiId: "wiki-b", idbName: idb });
+    expect(aUrl).not.toBe(b.wikiDocUrl);
+    await b.repo.shutdown();
     await b.keyhive.dispose();
   });
 });

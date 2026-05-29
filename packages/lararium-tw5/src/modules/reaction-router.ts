@@ -24,6 +24,7 @@ module-type: startup
  * Meme: lar:///ha.ka.ba/@lararium/tw5/modules/reaction-router
  */
 
+import type { TW5Wiki } from "../types/tiddlywiki.js";
 import { parseMemeEdges } from "../meme-ast/index.js";
 import {
   extractReactionBindings,
@@ -36,7 +37,6 @@ import type { ReactionBinding } from "@lararium/mesh/reaction-graph";
 // ---------------------------------------------------------------------------
 
 export const name      = "lararium-reaction-router";
-export const platforms = ["browser", "node"];
 export const after     = ["startup"];
 export const synchronous = true;
 
@@ -50,20 +50,13 @@ let _graph: ReactionGraph | null = null;
 // Helpers
 // ---------------------------------------------------------------------------
 
-type TwWiki = {
-  filterTiddlers(filter: string): string[];
-  getTiddler(t: string): { fields: Record<string, unknown> } | undefined;
-  getTiddlerText(t: string): string | undefined;
-  addEventListener(ev: "change", fn: (changes: Record<string, unknown>) => void): void;
-  dispatchEvent(type: string, ...args: unknown[]): void;
-};
-
-function getWiki(): TwWiki | undefined {
-  return (globalThis as { $tw?: { wiki?: TwWiki } }).$tw?.wiki;
-}
+// TW5's evalGlobal injects $tw as a direct function parameter into module code.
+// In the Node VM sandbox (vm.runInContext), globalThis is the empty VM context —
+// $tw must be accessed as the injected variable, not via globalThis.$tw.
+declare const $tw: { wiki?: TW5Wiki } | undefined;
 
 /** Extract ReactionBindings from one lar: tiddler's text (papalohe wires). */
-function bindingsFromUri(wiki: TwWiki, uri: string): ReactionBinding[] {
+function bindingsFromUri(wiki: TW5Wiki, uri: string): ReactionBinding[] {
   const text = wiki.getTiddlerText(uri);
   if (!text) return [];
   try {
@@ -93,7 +86,7 @@ function bindingsFromUri(wiki: TwWiki, uri: string): ReactionBinding[] {
  * Verb-carrying events: { uri, listenable, verb, fromUri }.
  * Listenable-only events (no verb): { uri, listenable } — observation only.
  */
-function fireReactionsForUri(wiki: TwWiki, graph: ReactionGraph, uri: string): void {
+function fireReactionsForUri(wiki: TW5Wiki, graph: ReactionGraph, uri: string): void {
   // listenable → verb? (undefined = observation-only)
   const listenables = new Map<string, string | undefined>();
 
@@ -127,9 +120,8 @@ function fireReactionsForUri(wiki: TwWiki, graph: ReactionGraph, uri: string): v
 // ---------------------------------------------------------------------------
 
 export function startup(): void {
-  const wiki = getWiki();
+  const wiki = $tw?.wiki;
   if (!wiki) return;
-  console.log("[reaction-router] startup() running");
 
   const graph = new ReactionGraph();
   _graph = graph;
@@ -143,7 +135,6 @@ export function startup(): void {
 
   // Nalu hook — fires after TW5 coalesces a batch of addTiddler() calls.
   wiki.addEventListener("change", (changedTiddlers) => {
-    console.log("[reaction-router] change event:", Object.keys(changedTiddlers));
     for (const uri of Object.keys(changedTiddlers)) {
       if (!uri.startsWith("lar:")) continue;
 
@@ -155,8 +146,6 @@ export function startup(): void {
         else graph.removeUri(uri);
       }
 
-      // Fire reactions — dispatches wiki-level tm-verse-event.
-      console.log("[reaction-router] fireReactionsForUri:", uri);
       fireReactionsForUri(wiki, graph, uri);
     }
   });

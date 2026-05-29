@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-28 (M.1 reaction-graph rename + vessel wires + 26-test suite; 243/243 tests)
+> Updated: 2026-05-29 (M.3 verb-tiddler-dispatch integration gate closed; 248/248 tests)
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -92,7 +92,9 @@ These planning docs follow one architectural law:
 | — | **S9 / lararium-browser S4 real boot** | ✅ Done | `openBrowserVessel`: WebCrypto Ed25519 keypair (IDB-persisted), `runFoundingCeremony` isomorphic (Buffer→btoa/atob in `ceremony-core.ts` + `admin-event-store.ts`), Gates A/B/C verified in real Chromium, `docHandle.broadcast()` wired. `browser-operator-key.ts` + `open-browser-vessel.ts` + `BrowserVesselIslandPoolOptions.workerScriptUrl` optional. `browser-founding-ceremony.test.ts` 7/7 Playwright. 19/19 browser tests. |
 | — | **L / S7.4** | ✅ Done | `AdminAuthGate`: lar:challenge/lar:auth WebSocket handshake; `accessForDoc` concap gate; `peerIdentifierMap` + `queueMicrotask` race fix; MAX_PENDING + contactCard cap + timeout hardening. TODO L.2 (nonce signing) deferred — alpha posture acceptable, see M sprint. 59/59 tests. |
 | — | **M.1 / reaction-graph rename + vessel wires** | ✅ Done | `live-protocol.ts` → `reaction-graph.ts` (scope claim: within-island only). M.1 node wire: `eventBus.subscribe("worker.event")` → `adminVm.placeVerb()` after `workerEa`. M.1 browser wire: `onWorkerEvent` → `admin.placeVerb()`. `ReactionGraph` 26-test suite added. Mesh build + tw5 plugin rebuild clean. 243/243 tests. |
-| 1 | **M / Local intent bridge** | ⬜ Next | M.1 vessel wires done. Next: (a) integration test proving wiki-island reaction with payload.verb → vessel eventBus → adminVm.placeVerb round-trip; (b) author first wiki device tiddler that fires a reaction carrying `verb` payload; (c) stdio bridge for CLI/daemon local intent path. |
+| — | **M.2 / verb-as-tiddler-field pipeline** | ✅ Done | `VerbInvocation` gains `fromUri`/`listenable`; `reaction-router.ts` extended with `_verbsByUri` map + verb-field dispatch; `IslandMsg_Event.payload` enriched; `event-routing.test.ts` (3 tests). 246/246 tests. |
+| — | **M.3 / full-TW5-boot reaction gate** | ✅ Done | `verb-tiddler-dispatch.test.ts` (2 tests) proves end-to-end: verb-carrying tiddler lands via CRDT → reaction-router nalu fires → `tm-verse-event` → `IslandMsg_Event` with `payload.verb === "promote"` at vessel. Root fix: `declare const $tw` ambient in `reaction-router.ts` + `grammar-cache.ts` — TW5's `evalSandboxed` runs in `vm.createContext({})` where `globalThis.$tw` is undefined; `$tw` parameter injection works. Genesis rebuilt (sha=a3b926…). 248/248 tests. |
+| 1 | **M / Local intent bridge** | ⬜ Next | M.1–M.3 closed. Remaining: (b) author first real wiki device tiddler (`promote-button`) in genesis that fires `reaction:listenable` edge carrying `verb: "promote"`; (c) stdio bridge for CLI/daemon local intent path. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
 | 6 | **N** | ⬜ UI shim | `<$lar-promote>` action-widget writes the same command-tiddler as CLI promote. |

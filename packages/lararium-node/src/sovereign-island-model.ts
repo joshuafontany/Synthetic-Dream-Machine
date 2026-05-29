@@ -211,20 +211,6 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    // §6c — pono diagnostics: verify startup modules registered after boot.
-    {
-      const tw5 = handler.tw5();
-      if (tw5) {
-        const titles = tw5.$tw.modules?.titles ?? {};
-        const startupMods = Object.keys(titles).filter(t => titles[t]?.moduleType === "startup");
-        console.log("[island] startup modules after boot:", startupMods);
-        const pluginCount = tw5.$tw.wiki?.filterTiddlers("[all[tiddlers+shadows]type[application/json]plugin-type[plugin]]") ?? [];
-        console.log("[island] registered plugins:", pluginCount);
-        const rrListener = tw5.$tw.wiki?.eventListeners?.["change"]?.length ?? "unknown";
-        console.log("[island] change listeners:", rrListener);
-      }
-    }
-
     for (const { bagId, handle, writable } of ready) {
       const store = new AutomergeDocStore(handle, bagId);
       store.markSyncComplete();

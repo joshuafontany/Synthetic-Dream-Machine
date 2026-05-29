@@ -145,6 +145,11 @@ async function waitHandleLocal<T>(
   fallback: () => DocHandle<T>,
 ): Promise<DocHandle<T>> {
   const handle = await repo.find<T>(url as AutomergeUrl);
+  // Automerge fires an internal error event when a doc enters "unavailable" state.
+  // Without a registered handler the event becomes an unhandled rejection that
+  // propagates past whenReady's try/catch. Suppress it here; the state check below
+  // routes to fallback() when the doc is locally unavailable.
+  handle.on("error", () => {});
   try {
     await handle.whenReady(["ready", "unavailable"]);
   } catch {
