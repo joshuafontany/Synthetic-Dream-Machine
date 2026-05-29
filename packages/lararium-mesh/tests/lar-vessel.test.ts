@@ -174,16 +174,14 @@ describe("LarVessel — addProjection", () => {
 // ---------------------------------------------------------------------------
 
 describe("lararium-vessel contract — shared boot surface", () => {
-  test("shared options carry host/wiki identity and optional VM factory", () => {
+  test("shared options carry host/wiki identity", () => {
     const options: LarariumVesselOptions = {
       hostId: "elyncia",
       wikiId: "altar-fire",
-      recipeUri: "lar:///ha.ka.ba/@lararium/recipes/default",
     };
 
     expect(options.hostId).toBe("elyncia");
     expect(options.wikiId).toBe("altar-fire");
-    expect(options.recipeUri).toContain("/recipes/default");
   });
 
   test("shared result surface exposes vessel/repo/store/pool symmetry", () => {

@@ -87,10 +87,6 @@ type Slot = IslandSlot | ColdSlot;
 export interface WikiBootContext {
   /** Automerge doc handle — used to deliver bagBindings to the island manifest. */
   docHandle: DocHandle<LarDoc>;
-  /** Plugin tiddlers to inject into island TW5 boot so sigils/ahu/pranala are
-   * present before CRDT deltas begin applying.
-   */
-  preloadedTiddlers?: Array<Record<string, unknown>>;
   /**
    * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
    * null = pre-CAS. Islands read the actual bytes from the @lararium CRDT doc.
@@ -336,8 +332,6 @@ export class VesselIslandPool {
 
     if (!pinned) await this._evictLruIfNeeded();
 
-    const pluginTiddlers = ctx.preloadedTiddlers?.length ? ctx.preloadedTiddlers : undefined;
-
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
     if (this._mainRepo) {
@@ -363,9 +357,8 @@ export class VesselIslandPool {
       syncPort as unknown as globalThis.MessagePort,
       ctx.coreHash,
       {
-        ...(pluginTiddlers ? { pluginTiddlers } : {}),
         bagBindings,
-        ...(storage      ? { storage      } : {}),
+        ...(storage             ? { storage                  } : {}),
         ...(ctx.diskMirrors?.length ? { diskMirrors: ctx.diskMirrors } : {}),
       },
     );
@@ -379,9 +372,7 @@ export class VesselIslandPool {
     const tier = pinned ? "pinned" : "hot";
     this._slots.set(wikiId, { tier, wikiId, worker, mainPort, lastUsedAt: Date.now() });
 
-    console.log(
-      `[vm-manager] ${wikiId}: island ea — ${tier} (plugins: ${pluginTiddlers ? pluginTiddlers.length : 0})`,
-    );
+    console.log(`[vm-manager] ${wikiId}: island ea — ${tier}`);
   }
 
   /**

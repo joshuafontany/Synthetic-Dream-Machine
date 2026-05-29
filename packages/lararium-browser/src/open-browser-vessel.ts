@@ -45,17 +45,14 @@ import {
   LarVessel, LAR_VESSEL_CAPABILITIES_BROWSER, OpenIdentitySlot,
   AutomergeDocStore, CompositeStore,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI,
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID,
   BAG_IDS,
-  wikiLarUri,
   type LarDoc, type LarariumVesselOptions, type LarariumVesselResult,
 }                                            from "@lararium/mesh";
 import {
   MemoryTiddlerStore,
-  planActiveWikiSlot, selectActiveWikiSlug, ACTIVE_WIKI_URI,
+  planActiveWikiSlot, selectActiveWikiSlug,
 }                                            from "@lararium/tw5";
 import {
   KeyhiveProvider, AdminEventStore,
@@ -78,8 +75,8 @@ import {
 
 // ── Bootstrap artifact ────────────────────────────────────────────────────────
 
-const BOOTSTRAP_KEY    = "social-bootstrap";
-const ISLAND_URL_KEY   = "island-doc-url";
+const BOOTSTRAP_KEY  = "social-bootstrap";
+const ISLAND_URL_KEY = "island-doc-url";
 
 interface BrowserBootstrap {
   identitiesUrl:         string;
@@ -89,6 +86,50 @@ interface BrowserBootstrap {
   personGroupDocIdHex:   string;
   personGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
+}
+
+// ── withVesselIdb helpers — one open/close per boot phase ────────────────────
+
+interface BootKeyReads {
+  bootstrap:      BrowserBootstrap | undefined;
+  catalogUrl:     string | undefined;
+  storedIslandUrl: string | undefined;
+}
+
+/** Read all boot-time IDB keys in one connection. */
+async function readBootKeys(idbName: string): Promise<BootKeyReads> {
+  const idb = await openVesselIdb(idbName);
+  try {
+    const [bootstrap, catalogUrl, storedIslandUrl] = await Promise.all([
+      idbGet<BrowserBootstrap>(idb, "bootstrap", BOOTSTRAP_KEY),
+      idbGet<string>(idb, "keystore", "catalog-url"),
+      idbGet<string>(idb, "keystore", ISLAND_URL_KEY),
+    ]);
+    return { bootstrap, catalogUrl, storedIslandUrl };
+  } finally {
+    idb.close();
+  }
+}
+
+interface BootKeyWrites {
+  bootstrap?:  BrowserBootstrap;
+  catalogUrl?: string;
+  islandUrl?:  string;
+}
+
+/** Write all boot-time IDB key updates in one connection. */
+async function writeBootKeys(idbName: string, writes: BootKeyWrites): Promise<void> {
+  if (!writes.bootstrap && !writes.catalogUrl && !writes.islandUrl) return;
+  const idb = await openVesselIdb(idbName);
+  try {
+    await Promise.all([
+      ...(writes.bootstrap  ? [idbPut(idb, "bootstrap", BOOTSTRAP_KEY,  writes.bootstrap)]  : []),
+      ...(writes.catalogUrl ? [idbPut(idb, "keystore",  "catalog-url",  writes.catalogUrl)] : []),
+      ...(writes.islandUrl  ? [idbPut(idb, "keystore",  ISLAND_URL_KEY, writes.islandUrl)]  : []),
+    ]);
+  } finally {
+    idb.close();
+  }
 }
 
 // ── Options / Result ──────────────────────────────────────────────────────────
@@ -184,10 +225,12 @@ export async function openBrowserVessel(
   const operatorIdentity = await generateOrLoadBrowserKeypair(idbName, displayName);
   const operatorSeed     = await loadBrowserSigningSeed(idbName);
 
+  // ── 3–4–7. Read all boot keys in one IDB session ──────────────────────────
+  const bootKeys = await readBootKeys(idbName);
+  const bootKeyWrites: BootKeyWrites = {};
+
   // ── 3. Bootstrap — auto-init on first boot ────────────────────────────────
-  const idb     = await openVesselIdb(idbName);
-  let bootstrap = await idbGet<BrowserBootstrap>(idb, "bootstrap", BOOTSTRAP_KEY);
-  idb.close();
+  let bootstrap = bootKeys.bootstrap;
 
   if (!bootstrap) {
     const result = await runFoundingCeremony({
@@ -205,9 +248,7 @@ export async function openBrowserVessel(
       personGroupAgentIdHex: result.personGroupAgentIdHex,
       meshCabalDocIdHex:     result.meshCabalDocIdHex,
     };
-    const idb2 = await openVesselIdb(idbName);
-    await idbPut(idb2, "bootstrap", BOOTSTRAP_KEY, bootstrap);
-    idb2.close();
+    bootKeyWrites.bootstrap = bootstrap;
   }
 
   // ── 4. Catalog doc ────────────────────────────────────────────────────────
@@ -219,18 +260,12 @@ export async function openBrowserVessel(
     return h;
   };
 
-  const idb3       = await openVesselIdb(idbName);
-  const catalogUrl = await idbGet<string>(idb3, "keystore", "catalog-url");
-  idb3.close();
-
   let catalogHandle: DocHandle<LarDoc>;
-  if (catalogUrl) {
-    catalogHandle = await waitHandleLocal<LarDoc>(repo, catalogUrl, blankCatalog);
+  if (bootKeys.catalogUrl) {
+    catalogHandle = await waitHandleLocal<LarDoc>(repo, bootKeys.catalogUrl, blankCatalog);
   } else {
     catalogHandle = blankCatalog();
-    const idb4 = await openVesselIdb(idbName);
-    await idbPut(idb4, "keystore", "catalog-url", catalogHandle.url);
-    idb4.close();
+    bootKeyWrites.catalogUrl = catalogHandle.url;
   }
   emit("catalog-ready");
 
@@ -251,22 +286,17 @@ export async function openBrowserVessel(
   composite.addLayer({ bagId: ADMIN_BAG_ID,       store: new AutomergeDocStore(adminHandle,      ADMIN_BAG_ID),       writable: true  });
 
   // ── 7. Genesis island (optional — Tier 1/2 paths) ─────────────────────────
-  let islandHandle:    DocHandle<LarDoc> | null = null;
-  let coreHash:        string | null = null;
-  let engineUpdated  = false;
-
-  // Resolve stored island URL from IDB keystore (Tier 2 fast path).
-  const idb5          = await openVesselIdb(idbName);
-  const storedIslandUrl = await idbGet<string>(idb5, "keystore", ISLAND_URL_KEY);
-  idb5.close();
+  let islandHandle: DocHandle<LarDoc> | null = null;
+  let coreHash:     string | null            = null;
+  let engineUpdated                          = false;
 
   if (genesisBytes) {
     // Tier 1 (bytes path): import bytes → Repo → IDB.
     const incomingHandle = await loadGenesisIslandFromBytes(repo, genesisBytes);
 
-    if (storedIslandUrl) {
+    if (bootKeys.storedIslandUrl) {
       // Resume: load live handle, reconcile if CID drifted (engine update).
-      const liveHandle = await findGenesisIsland(repo, storedIslandUrl);
+      const liveHandle = await findGenesisIsland(repo, bootKeys.storedIslandUrl);
       if (liveHandle) {
         const reconcile = await reconcileGenesisUpdate(liveHandle, incomingHandle, genesisBytes);
         engineUpdated = reconcile.updated;
@@ -276,58 +306,60 @@ export async function openBrowserVessel(
       }
     } else {
       // Cold boot: incoming IS the island; persist URL.
-      islandHandle = incomingHandle;
-      const idb6   = await openVesselIdb(idbName);
-      await idbPut(idb6, "keystore", ISLAND_URL_KEY, islandHandle.url);
-      idb6.close();
+      islandHandle             = incomingHandle;
+      bootKeyWrites.islandUrl  = islandHandle.url;
       // Tier 3: write to OPFS for Worker direct access.
       await writeGenesisBytesToOpfs(genesisBytes);
     }
-  } else if (storedIslandUrl) {
+  } else if (bootKeys.storedIslandUrl) {
     // Tier 2: no bytes this boot — load from IDB via Automerge URL.
-    islandHandle = await findGenesisIsland(repo, storedIslandUrl);
+    islandHandle = await findGenesisIsland(repo, bootKeys.storedIslandUrl);
   } else if (admitIslandDocUrl) {
     // Tier 1 (peer-sync path): caller connected Repo to peer; sync island doc.
     islandHandle = await findGenesisIsland(repo, admitIslandDocUrl);
-    if (islandHandle) {
-      const idb7 = await openVesselIdb(idbName);
-      await idbPut(idb7, "keystore", ISLAND_URL_KEY, islandHandle.url);
-      idb7.close();
-    }
+    if (islandHandle) bootKeyWrites.islandUrl = islandHandle.url;
   }
+
+  // ── Write all new boot keys in one IDB session ────────────────────────────
+  await writeBootKeys(idbName, bootKeyWrites);
 
   if (islandHandle) {
     const doc = islandHandle.doc();
     coreHash  = doc?.blobs?.[ENGINE_CORE_ID]?.sha256 ?? null;
 
-    composite.addLayer({
-      bagId:           BAG_IDS.lararium,
-      store:           new AutomergeDocStore(islandHandle, BAG_IDS.lararium),
-      writable:        true,
-      defaultWritable: false,
-    });
-
-    // @lares layer — oracle tiddler in island doc.
-    const laresDocUrl = tiddlerText(doc?.tiddlers?.[LARES_DOC_URI]) ?? null;
-    if (laresDocUrl) {
-      const laresHandle = await waitHandleLocal<LarDoc>(repo, laresDocUrl, blankDoc);
+    if (!coreHash) {
+      console.warn("[browser-vessel] genesis island missing ENGINE_CORE_ID blob — skipping island layers");
+      islandHandle = null;
+    } else {
       composite.addLayer({
-        bagId:           BAG_IDS.lares,
-        store:           new AutomergeDocStore(laresHandle, BAG_IDS.lares),
+        bagId:           BAG_IDS.lararium,
+        store:           new AutomergeDocStore(islandHandle, BAG_IDS.lararium),
         writable:        true,
         defaultWritable: false,
       });
-    }
 
-    // Write island URL oracle into catalog so island-ready state persists.
-    const existingIslandRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
-    if (existingIslandRef !== islandHandle.url) {
-      catalogHandle.change((doc) => {
-        doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle!.url }, "browser-boot");
-      });
-    }
+      // @lares layer — oracle tiddler in island doc.
+      const laresDocUrl = tiddlerText(doc?.tiddlers?.[LARES_DOC_URI]) ?? null;
+      if (laresDocUrl) {
+        const laresHandle = await waitHandleLocal<LarDoc>(repo, laresDocUrl, blankDoc);
+        composite.addLayer({
+          bagId:           BAG_IDS.lares,
+          store:           new AutomergeDocStore(laresHandle, BAG_IDS.lares),
+          writable:        true,
+          defaultWritable: false,
+        });
+      }
 
-    emit("island-ready");
+      // Write island URL oracle into catalog so island-ready state persists.
+      const existingIslandRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+      if (existingIslandRef !== islandHandle.url) {
+        catalogHandle.change((cdoc) => {
+          cdoc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle!.url }, "browser-boot");
+        });
+      }
+
+      emit("island-ready");
+    }
   }
 
   // ── 8. Capability layer ───────────────────────────────────────────────────
@@ -475,7 +507,6 @@ export async function openBrowserVessel(
     if (workerScriptUrl) {
       await pool.mountWiki(activeWikiId, {
         coreHash,
-        recipeUri: wikiLarUri(activeWikiId),
         bagBindings: [
           { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
           { bagId: wikiBagId,        writable: true,  mode: "relational", docUrl: wikiHandle.url  },

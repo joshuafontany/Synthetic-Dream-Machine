@@ -153,15 +153,35 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     const laraiumHandle = _handles.get(BAG_IDS.lararium);
-    const blobEntry = laraiumHandle?.doc()?.blobs?.[ENGINE_CORE_ID];
+    const laraiumDoc    = laraiumHandle?.doc();
+    const blobEntry     = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
     const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
     if (!coreBytes) {
       _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
       return;
     }
 
+    // §6b — plugin tiddlers travel via @lararium CRDT blob store (application/json blobs).
+    const pluginTiddlers: Record<string, unknown>[] = [];
+    const blobs = laraiumDoc?.blobs ?? {};
+    for (const [id, entry] of Object.entries(blobs)) {
+      if (id === ENGINE_CORE_ID) continue;
+      const mime = (entry as unknown as Record<string, unknown>)["mimeType"];
+      if (mime !== "application/json") continue;
+      const blobBytes = (entry as unknown as Record<string, unknown>)["blob"];
+      if (!blobBytes) continue;
+      try {
+        const json = JSON.parse(new TextDecoder().decode(new Uint8Array(blobBytes as Uint8Array))) as Record<string, unknown>;
+        pluginTiddlers.push(json);
+      } catch { /* malformed blob — skip */ }
+    }
+    if (!pluginTiddlers.length) {
+      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — no application/json blobs in @lararium CRDT doc"));
+      return;
+    }
+
     try {
-      await handler.bootTw5(msg.wikiUri, coreBytes, msg.pluginTiddlers);
+      await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers);
     } catch {
       return;
     }

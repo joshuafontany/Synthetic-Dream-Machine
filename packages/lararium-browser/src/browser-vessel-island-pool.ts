@@ -131,8 +131,6 @@ export class BrowserVesselIslandPool {
 
     const manifestMsg = mkManifest(id, syncPort, params.coreHash, {
       bagBindings: params.bagBindings,
-      recipeUri:   params.recipeUri,
-      ...(params.pluginTiddlers ? { pluginTiddlers: params.pluginTiddlers } : {}),
     });
     worker.postMessage(manifestMsg, [syncPort]);
 

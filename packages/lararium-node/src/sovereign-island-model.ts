@@ -184,29 +184,28 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    // §6b — TW5 plugin tiddlers travel via @lararium CRDT blob store.
-    // Blobs with mimeType "application/json" are TW5 plugin tiddlers.
-    // Parse and pass as preloadTiddlers so the island boots with current plugins.
+    // §6b — plugin tiddlers travel via @lararium CRDT blob store (application/json blobs).
+    // Islands read and apply them here — no manifest field needed.
     const pluginTiddlers: Record<string, unknown>[] = [];
     const blobs = laraiumDoc?.blobs ?? {};
-    console.log("[island] genesis blobs:", Object.keys(blobs));
     for (const [id, entry] of Object.entries(blobs)) {
       if (id === ENGINE_CORE_ID) continue;
       const mime = (entry as unknown as Record<string, unknown>)["mimeType"];
-      console.log("[island] blob:", id, "mimeType:", mime);
       if (mime !== "application/json") continue;
       const blobBytes = (entry as unknown as Record<string, unknown>)["blob"];
-      if (!blobBytes) { console.log("[island] blob", id, "has no bytes"); continue; }
+      if (!blobBytes) continue;
       try {
         const json = JSON.parse(new TextDecoder().decode(new Uint8Array(blobBytes as Uint8Array))) as Record<string, unknown>;
-        console.log("[island] parsed plugin:", json["title"] ?? id);
         pluginTiddlers.push(json);
-      } catch (e) { console.log("[island] blob parse error:", id, e); }
+      } catch { /* malformed blob — skip */ }
     }
-    console.log("[island] pluginTiddlers count:", pluginTiddlers.length);
+    if (!pluginTiddlers.length) {
+      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — no application/json blobs in @lararium CRDT doc"));
+      return;
+    }
 
     try {
-      await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers.length ? pluginTiddlers : msg.pluginTiddlers);
+      await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers);
     } catch {
       return;
     }

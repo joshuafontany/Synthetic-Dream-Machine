@@ -115,12 +115,11 @@ export type BagBinding = { bagId: string; writable: boolean } & BagMode;
  * The island establishes its own sovereignty (`ea`) upon receipt.
  *
  * Prerequisite fields (island cannot think without these — not cargo):
- *   - `pluginTiddlers` carries the plugin layer tiddlers (sigils, ahu, pranala, etc.).
- *     Applied to TW5 immediately after core boot, before Repo sync. An island without
- *     plugin tiddlers holds structural bones only — it fails ea condition 3 (own truth).
  *   - `bagBindings` carries the ordered bag capability tokens for this wiki's content scope.
  *     Each entry pairs a `bagId` with its `BagMode` (relational AutomergeUrl).
- *   - `recipeUri` carries the recipe URI that maps this authority's content scope.
+ *
+ * Plugin tiddlers travel via the @lararium CRDT blob store (application/json blobs).
+ * Islands read and apply them from the CRDT after `handle.whenReady()` — no manifest field needed.
  */
 export interface IslandMsg_Manifest {
   schema_version: ProtocolVersion;
@@ -145,14 +144,6 @@ export interface IslandMsg_Manifest {
   storage?: IslandStorageConfig;
   /** MessagePort for island-side Repo ↔ vessel Repo sync. MUST be transferred. */
   syncPort: MessagePort;
-  /**
-   * Plugin layer tiddlers — sigils, ahu widgets, pranala parsers, etc.
-   * Prerequisite: without these the island cannot parse memetic wikitext.
-   * Applied after core boot, before Repo sync, so the CRDT truth layer can use them immediately.
-   */
-  pluginTiddlers?: readonly Record<string, unknown>[];
-  /** Recipe URI mapping this authority's content scope. */
-  recipeUri?: string;
   /**
    * Serializable disk mirror configs for island-hosted LarDiskProjector.
    * Each entry carries `bagId`, `mirrorRoot` (absolute path), and `scope`
@@ -387,22 +378,18 @@ export function mkTeardownAck(): IslandMsg_TeardownAck {
  *
  * TRANSFER: caller MUST include `syncPort` in the `postMessage` transfer list:
  *   `worker.postMessage(msg, [msg.syncPort])`
- * No blob bytes travel in the manifest — TW5 core bytes live in the @lararium CRDT doc.
+ * No blob bytes travel in the manifest — TW5 core bytes and plugin tiddlers live in
+ * the @lararium CRDT doc. Islands read them from the CRDT after `handle.whenReady()`.
  *
- * `opts.pluginTiddlers` — plugin layer tiddlers (sigils, ahu, pranala, etc.).
- *   Prerequisite for ea condition 3 (own truth). Omitting yields a hollow island.
  * `opts.bagBindings` — ordered bag capability tokens (BagBinding[]).
- * `opts.recipeUri`   — recipe URI mapping this authority's content scope.
  */
 export function mkManifest(
   wikiUri:  string,
   syncPort: MessagePort,
   coreHash: string | null = null,
   opts?: {
-    pluginTiddlers?: readonly Record<string, unknown>[];
     bagBindings?:    readonly BagBinding[];
     storage?:        IslandStorageConfig;
-    recipeUri?:      string;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
   },
 ): IslandMsg_Manifest {
@@ -413,11 +400,9 @@ export function mkManifest(
     coreHash,
     syncPort,
   };
-  if (opts?.bagBindings?.length)    msg.bagBindings    = opts.bagBindings;
-  if (opts?.storage)                msg.storage        = opts.storage;
-  if (opts?.pluginTiddlers?.length) msg.pluginTiddlers = opts.pluginTiddlers;
-  if (opts?.recipeUri)              msg.recipeUri      = opts.recipeUri;
-  if (opts?.diskMirrors?.length)    msg.diskMirrors    = opts.diskMirrors;
+  if (opts?.bagBindings?.length) msg.bagBindings = opts.bagBindings;
+  if (opts?.storage)             msg.storage     = opts.storage;
+  if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
   return msg;
 }
 

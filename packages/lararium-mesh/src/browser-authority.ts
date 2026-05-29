@@ -15,17 +15,13 @@ import type { BagBinding } from "./island-protocol.js";
  * BrowserWikiMountParams — what the pool needs to mount a wiki island.
  *
  * Passed to BrowserVesselIslandPool.mountWiki(). No blob bytes — the island
- * reads TW5 core bytes from the @lararium CRDT doc after Repo sync.
+ * reads TW5 core bytes and plugin tiddlers from the @lararium CRDT doc after Repo sync.
  */
 export interface BrowserWikiMountParams {
   /** SHA-256 hex of TW5 core blob. null = pre-CAS. Island resolves bytes from the mesh. */
   coreHash: string | null;
   /** Ordered bag bindings for this wiki's content scope. */
   bagBindings: readonly BagBinding[];
-  /** Recipe URI that identifies this island's content scope. */
-  recipeUri: string;
-  /** Plugin layer tiddlers for ea condition 3 — island thinks from first breath. */
-  pluginTiddlers?: readonly Record<string, unknown>[];
 }
 
 /**

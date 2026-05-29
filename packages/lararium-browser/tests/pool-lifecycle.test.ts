@@ -37,7 +37,6 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     await pool.mountWiki(WIKI_A, {
       coreHash:    null,
       bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
-      recipeUri:   WIKI_A,
     });
 
     expect(pool.has(WIKI_A)).toBe(true);
@@ -51,12 +50,10 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     await pool.mountWiki(WIKI_A, {
       coreHash:    null,
       bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
-      recipeUri:   WIKI_A,
     });
     await pool.mountWiki(WIKI_A, {
       coreHash:    null,
       bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
-      recipeUri:   WIKI_A,
     });
 
     expect(pool.size).toBe(1);
@@ -67,8 +64,8 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
     await Promise.all([
-      pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [], recipeUri: WIKI_A }),
-      pool.mountWiki(WIKI_B, { coreHash: null, bagBindings: [], recipeUri: WIKI_B }),
+      pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [] }),
+      pool.mountWiki(WIKI_B, { coreHash: null, bagBindings: [] }),
     ]);
 
     expect(pool.has(WIKI_A)).toBe(true);
@@ -83,7 +80,7 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     repo = new Repo({ sharePolicy: async () => true });
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
-    await pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [], recipeUri: WIKI_A });
+    await pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [] });
     expect(pool.has(WIKI_A)).toBe(true);
 
     await pool.unmountWiki(WIKI_A);
@@ -103,8 +100,8 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
     await Promise.all([
-      pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [], recipeUri: WIKI_A }),
-      pool.mountWiki(WIKI_B, { coreHash: null, bagBindings: [], recipeUri: WIKI_B }),
+      pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [] }),
+      pool.mountWiki(WIKI_B, { coreHash: null, bagBindings: [] }),
     ]);
     expect(pool.size).toBe(2);
 
@@ -118,7 +115,7 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     repo = new Repo({ sharePolicy: async () => true });
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
-    await pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [], recipeUri: WIKI_A });
+    await pool.mountWiki(WIKI_A, { coreHash: null, bagBindings: [] });
 
     const snapshot = pool.inspect();
     expect(snapshot).toHaveLength(1);
