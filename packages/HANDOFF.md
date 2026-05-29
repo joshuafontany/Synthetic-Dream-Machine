@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-29 (turn 28)
+> Updated: 2026-05-29 (turn 29)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -84,6 +84,14 @@ Next work, in order:
 4. Path R: ReactionEngine completion — onChangeset wiring, changed-URI derivation,
    NodeVmManager integration tests through mount→event→forward→unmount cycle.
 
+Automerge API law (confirmed, v2.5.6): always pass { allowableStates: ["ready",
+"unavailable"] } to repo.find() when a missing doc should gracefully fall back.
+repo.find() is async and rejects on "unavailable" by default. handle.isUnavailable()
+checks the settled state. repo.shutdown() calls repo.flush() — sequential test
+ordering plus await shutdown() guarantees IDB durability. Stay on v2.5.6: main
+branch is v2.6.0-alpha.0 (10 days old as of 2026-05-29), xstate→DocumentQuery
+refactor in flight, Keyhive not integrated, no stable release date.
+
 Path G.SharktoothSigil: COMPLETE. 65 sigil tiddlers; zero active [[sigils]] TOML blocks.
 Remaining TOML in memetic-wikitext.tid: documentation data tables only (Path O).
 
@@ -95,6 +103,57 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-29 turn 29)
+
+### Automerge `repo.find()` guard — three call sites hardened ✅ 248/248 tests
+
+**Research synthesis (three agents: disk source, Ink & Switch GitHub, Brooklyn Zelenka/Fission):**
+
+Confirmed that `waitHandleLocal` (and two sibling sites) had a misplaced try/catch:
+`repo.find()` is `async` in v2.5.6 and **rejects** with `Error("Document X is unavailable")`
+when a doc reaches the "unavailable" state. The try/catch only wrapped the subsequent
+`handle.whenReady()` call, which was unreachable if `repo.find()` threw. The `handle.on("error", () => {})` added in the prior turn was dead code — `DocHandle` uses **eventemitter3** (not Node.js native EventEmitter), emits no "error" event, and eventemitter3 does not throw for unhandled event names.
+
+**Blessed v2.5.6 pattern** (confirmed from Repo.d.ts, Repo.js dist):
+```typescript
+// CORRECT — repo.find() resolves with handle regardless of state;
+// caller routes to fallback() on unavailable.
+try {
+  const handle = await repo.find<T>(url, { allowableStates: ["ready", "unavailable"] });
+  if (handle.isUnavailable()) return fallback();
+  return handle;
+} catch {
+  return fallback();  // storage adapter error, corrupted doc, etc.
+}
+```
+
+**Three sites fixed:**
+- `packages/lararium-browser/src/open-browser-vessel.ts` — `waitHandleLocal` (5 call sites in vessel boot)
+- `packages/lararium-browser/src/browser-genesis.ts` — `findGenesisIsland` (had outer catch that saved it but with dead `whenReady` + `state` check)
+- `packages/lararium-browser/src/open-browser-admin-vm.ts` — admin handle load (misplaced inner try)
+
+**Key facts confirmed from source:**
+- `repo.shutdown()` calls `repo.flush()` (Repo.js:740-744). `await repo.shutdown()` guarantees IDB writes land. The sequential test ordering (`await a.repo.shutdown()` before opening b) is the correct and sufficient durability fence — no separate `repo.flush()` call needed before shutdown.
+- `handle.whenReady(["ready", "unavailable"])` still works in published v2.5.6 but is deprecated in the unreleased main branch. Migration: `allowableStates` option on `repo.find()`.
+- `handle.isUnavailable()` still works in published v2.5.6 (`isUnavailable = () => this.inState(["unavailable"])`).
+
+**Automerge main-branch decision: STAY ON v2.5.6.**
+v2.6.0-alpha.0 released 2026-05-19 (10 days old). xstate→DocumentQuery architectural refactor in flight, 38 open PRs, two known bugs (#462 FS cache, #652 presence sync). Keyhive is not integrated into automerge-repo at all. No stable release date. The `allowableStates` API we now use maps cleanly to the v2.6 `findWithProgress().subscribe()` API — migration will be mechanical when stable releases.
+
+**Brooklyn Zelenka / Fission error taxonomy (6 patterns for reference):**
+1. Unavailable = partition state, not error. Design for it as normal operating state.
+2. Authorization ≠ Unavailability. Separate code paths; proof-CID-unresolvable is retry-candidate, capability-denied is not.
+3. Causal buffering over error. "Not yet arrived" is a buffer state (p2panda). Operations with unmet causal deps are buffered, not rejected.
+4. Monotonic queries tolerate partial data. RhizomeDB/Datalog: monotone queries return smaller-but-correct answers on partial data; no "unavailable" error.
+5. Eventual revocation. Keyhive: revocation is a CRDT operation that propagates eventually; offline peers stay authorized locally until sync.
+6. CAR Mirror session-scoped unavailability. Mark "unavailable from server X for this session," exclude from future rounds, try other servers. Not permanent.
+
+**Commit:** `1c774f12` fix(browser): correct repo.find() unavailable guard across three call sites
+
+**Metrics:** 248/248 tests pass (mesh 96, tw5 69, node 64, browser 19). 2 commits ahead of origin.
+
+---
 
 ## What Changed This Turn (2026-05-29 turn 28)
 
