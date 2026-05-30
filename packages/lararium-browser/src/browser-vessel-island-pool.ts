@@ -24,6 +24,7 @@ import {
 } from "@lararium/mesh";
 import type {
   IslandMsg_Ea,
+  IslandMsg_Ready,
   IslandMsg_TeardownAck,
   IslandMsg_Event,
   IslandToVesselMsg,
@@ -110,12 +111,6 @@ export class BrowserVesselIslandPool {
 
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    if (this._mainRepo) {
-      this._mainRepo.networkSubsystem.addNetworkAdapter(
-        new MessageChannelNetworkAdapter(mainPort),
-      );
-    }
-
     const slot: BrowserSlot = { worker, mainPort, phase: "booting" };
     this._slots.set(id, slot);
 
@@ -129,10 +124,21 @@ export class BrowserVesselIslandPool {
       }
     });
 
+    // Inversion of control: wait for Worker to signal its listener is registered
+    // and WASM has finished loading before transferring the syncPort.
+    await _awaitMsg<IslandMsg_Ready>(worker, "ready");
+
     const manifestMsg = mkManifest(id, syncPort, params.coreHash, {
       bagBindings: params.bagBindings,
     });
     worker.postMessage(manifestMsg, [syncPort]);
+
+    // Wire mainPort to vessel Repo AFTER transferring syncPort.
+    if (this._mainRepo) {
+      this._mainRepo.networkSubsystem.addNetworkAdapter(
+        new MessageChannelNetworkAdapter(mainPort),
+      );
+    }
 
     await _awaitMsg<IslandMsg_Ea>(worker, "ea");
     slot.phase = "live";

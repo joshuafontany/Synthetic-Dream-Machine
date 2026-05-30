@@ -33,6 +33,8 @@ export type {
 } from "./types/tiddlywiki.d.ts";
 
 export { IslandAdaptor } from "./island-adaptor.js";
+export { buildIslandRecipe } from "./island-recipe.js";
+export type { BuildIslandRecipeInput, RecipeReadyBinding } from "./island-recipe.js";
 export { openVmIslandBridge } from "./vm-island-bridge.js";
 export type { VmIslandBridge, VmIslandBridgeOptions } from "./vm-island-bridge.js";
 export {

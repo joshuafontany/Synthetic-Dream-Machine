@@ -34,22 +34,18 @@ import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
   CompositeStore,
-  AutomergeDocStore,
   BAG_IDS,
   ENGINE_CORE_ID,
   mkFault,
   isVesselToIslandMsg,
   mkTeardownAck,
-  extractTiddlerDeltaFromPatches,
-  allTiddlersFromDoc,
   type LarDoc,
   type IslandMsg_Manifest,
   type IslandStorageConfig,
 } from "@lararium/mesh";
 import {
   IslandKernel,
-  IslandAdaptor,
-  MemoryTiddlerStore,
+  buildIslandRecipe,
 } from "@lararium/tw5";
 import type { IslandToVesselMsg } from "@lararium/mesh";
 import type { IslandContext, IslandBehavior } from "@lararium/tw5";
@@ -75,50 +71,13 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
   let _writableHandleId: string | null         = null;
   let _composite:        CompositeStore | null = null;
   let _ctx:              IslandContext | null  = null;
+  let _activeWikiUri                           = "";
 
-  // ── Drain loop ────────────────────────────────────────────────────────────
-
-  const FRAME_MS = 16;
-  let _pendingAdded:   Record<string, unknown>[] = [];
-  let _pendingDeleted: string[]                  = [];
-  let _interval:       ReturnType<typeof setInterval> | null = null;
-  let _activeWikiUri   = "";
-
-  function _startDrain(): void {
-    if (_interval !== null) return;
-    _interval = setInterval(() => {
-      const added   = _pendingAdded.splice(0);
-      const deleted = _pendingDeleted.splice(0);
-      if (added.length > 0 || deleted.length > 0) {
-        handler.applyDelta(_activeWikiUri, added, deleted);
-      }
-      handler.sendFrameAck(_activeWikiUri, crypto.randomUUID());
-    }, FRAME_MS);
-    if (typeof _interval === "object" && _interval !== null && "unref" in _interval) {
-      (_interval as { unref(): void }).unref();
-    }
-  }
-
-  function _stopDrain(): void {
-    if (_interval !== null) { clearInterval(_interval); _interval = null; }
-  }
-
-  // ── Handle subscription ───────────────────────────────────────────────────
-
-  type DocChangePayload = {
-    doc:     Record<string, unknown>;
-    patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>;
-  };
-
-  function _subscribe(_bagId: string, handle: DocHandle<LarDoc>): void {
-    handle.on("change", ({ doc, patches }: DocChangePayload) => {
-      const delta = extractTiddlerDeltaFromPatches(doc, patches);
-      if (delta.added.length > 0 || delta.deleted.length > 0) {
-        _pendingAdded.push(...delta.added);
-        _pendingDeleted.push(...delta.deleted);
-      }
-    });
-  }
+  // Live CRDT patches flow through AutomergeDocStore.handle.on("change") →
+  // MemeProvider → IslandAdaptor → $tw.lares.enqueueNalu. The wiki's
+  // nalu-engine startup module owns the drain (one wiki.transact() per frame
+  // across all bags). No worker-side drain loop, no _pendingAdded array, no
+  // raw handle subscription.
 
   // ── Storage ───────────────────────────────────────────────────────────────
 
@@ -167,7 +126,10 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
     for (const binding of bindings) {
       if (binding.mode !== "relational") continue;
-      const handle = await _repo.find<LarDoc>(binding.docUrl as AutomergeUrl);
+      const handle = await _repo.find<LarDoc>(
+        binding.docUrl as AutomergeUrl,
+        { allowableStates: ["ready", "unavailable"] },
+      );
       await handle.whenReady();
       _handles.set(binding.bagId, handle);
       ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
@@ -210,38 +172,19 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    for (const { bagId, handle, writable } of ready) {
-      const store = new AutomergeDocStore(handle, bagId);
-      store.markSyncComplete();
-      _composite.addLayer({ bagId, store, writable, defaultWritable: false });
-    }
-
-    _composite.addLayer({
-      bagId: BAG_IDS.scratch, store: new MemoryTiddlerStore(),
-      writable: true, defaultWritable: true,
-    });
-    _composite.addLayer({
-      bagId: BAG_IDS.projection, store: new MemoryTiddlerStore(),
-      writable: true, defaultWritable: false,
-    });
-
     const tw5 = handler.tw5()!;
-    const adaptor = new IslandAdaptor(tw5, _composite, behavior.writeBagId);
-    _composite.addProjection(adaptor);
-
-    const seed: Record<string, unknown>[] = [];
-    for (const { handle } of ready) {
-      const doc = handle.doc();
-      if (doc) seed.push(...allTiddlersFromDoc(doc as Record<string, unknown>));
-    }
-    if (seed.length > 0) handler.applyDelta(msg.wikiUri, seed, []);
-
-    for (const { bagId, handle } of ready) _subscribe(bagId, handle);
+    // One recipe model: shared assembly for CRDT layers + scratch/projection
+    // + adaptor + initial replay/sync-complete handoff.
+    buildIslandRecipe({
+      tw5,
+      composite: _composite,
+      writeBagId: behavior.writeBagId,
+      ready,
+    });
 
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
     await behavior.onEa(_ctx);
 
-    _startDrain();
     handler.sendEa(msg.wikiUri);
   }
 
@@ -249,7 +192,6 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   async function _handleTeardown(): Promise<void> {
     if (_ctx && behavior) await behavior.onDemote(_ctx);
-    _stopDrain();
     handler.teardown();
 
     _handles.clear();

@@ -81,3 +81,6 @@ self.addEventListener("message", (e) => {
     return;
   }
 });
+
+// Inversion of control: listener is registered; vessel may now send manifest.
+self.postMessage({ schema_version: 1, type: "ready" });

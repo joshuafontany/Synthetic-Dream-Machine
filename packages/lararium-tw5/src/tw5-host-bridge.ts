@@ -38,6 +38,48 @@ export function verifyCoreBootBlob(core: TW5CoreBootBlob): void {
   }
 }
 
+function makeBrowserVmShim(): Record<string, unknown> {
+  function runInCtx(code: string, ctx: Record<string, unknown> | undefined): unknown {
+    const c = ctx ?? (Object.create(null) as Record<string, unknown>);
+    const keys = Object.keys(c);
+    const vals = keys.map((k) => c[k]);
+    try {
+      return (new Function(...keys, code) as (...args: unknown[]) => unknown)(...vals);
+    } catch { return undefined; }
+  }
+  class BrowserVmScript {
+    private readonly code: string;
+    constructor(code: string, _options?: unknown) { this.code = code; }
+    runInContext(ctx: Record<string, unknown>): unknown { return runInCtx(this.code, ctx); }
+    runInNewContext(ctx?: Record<string, unknown>): unknown { return runInCtx(this.code, ctx); }
+    runInThisContext(): unknown { try { return new Function(this.code)(); } catch { return undefined; } }
+  }
+  return {
+    Script: BrowserVmScript,
+    createContext(ctx: Record<string, unknown>): Record<string, unknown> {
+      return ctx ?? (Object.create(null) as Record<string, unknown>);
+    },
+    runInContext(code: string, ctx: Record<string, unknown>): unknown { return runInCtx(code, ctx); },
+    runInNewContext(code: string, ctx?: Record<string, unknown>): unknown { return runInCtx(code, ctx); },
+    runInThisContext(code: string): unknown { try { return new Function(code)(); } catch { return undefined; } },
+  };
+}
+
+function makeBrowserPathShim(): Record<string, unknown> {
+  const sep = "/";
+  const normalize = (p: string) => p.replace(/\/+/g, "/").replace(/\/$/, "") || "/";
+  const dirname  = (p: string) => { const i = p.lastIndexOf("/"); return i < 1 ? (i === 0 ? "/" : ".") : p.slice(0, i); };
+  const basename = (p: string, ext?: string) => { const b = p.slice(p.lastIndexOf("/") + 1); return ext && b.endsWith(ext) ? b.slice(0, -ext.length) : b; };
+  const extname  = (p: string) => { const b = basename(p); const i = b.lastIndexOf("."); return i > 0 ? b.slice(i) : ""; };
+  const join     = (...parts: string[]) => normalize(parts.filter(Boolean).join("/"));
+  const resolve  = (...parts: string[]) => {
+    let acc = "/";
+    for (const p of parts) { acc = p.startsWith("/") ? p : join(acc, p); }
+    return normalize(acc);
+  };
+  return { sep, dirname, basename, extname, join, resolve, normalize };
+}
+
 function makeDeniedFsShim(): Record<string, unknown> {
   return new Proxy(Object.create(null) as Record<string, unknown>, {
     get(_target, prop) {
@@ -127,26 +169,84 @@ async function loadNodeTiddlyWiki(coreBlob?: TW5CoreBootBlob): Promise<{ TiddlyW
   throw new Error("TW5Engine: coreBlob did not yield a TiddlyWiki instance.");
 }
 
-async function ensureBrowserCoreLoaded(coreBlob?: TW5CoreBootBlob): Promise<void> {
-  if (coreBlob && !globalThis.$tw?.modules?.titles) {
-    globalThis.$tw ??= {} as TW5Instance;
-    globalThis.$tw.boot ??= {} as TW5Instance["boot"];
-    globalThis.$tw.boot.suppressBoot = true;
+// vm polyfill tiddler text — injected into TW5's module registry before boot.
+// When $:/boot/boot.js re-executes as a startup module it overwrites
+// $tw.boot.commonJsRequire with TW5's internal _load, which cannot resolve Node
+// built-ins. Preloading a "vm" tiddler with module-type "library" makes
+// _load("vm") find this polyfill instead.
+const BROWSER_VM_TIDDLER_TEXT = `\
+exports.createContext = function(ctx) { return ctx || Object.create(null); };
+exports.Script = function Script(code) { this.code = code; };
+exports.Script.prototype.runInContext = function(ctx) {
+  var keys = Object.keys(ctx || {}), vals = keys.map(function(k) { return ctx[k]; });
+  try { return Function.apply(null, keys.concat([this.code])).apply(null, vals); } catch(e) { return undefined; }
+};
+exports.Script.prototype.runInNewContext = function(ctx) { return this.runInContext(ctx || Object.create(null)); };
+exports.Script.prototype.runInThisContext = function() { try { return Function(this.code)(); } catch(e) { return undefined; } };
+exports.runInContext = function(code, ctx) { return new exports.Script(code).runInContext(ctx); };
+exports.runInNewContext = function(code, ctx) { return new exports.Script(code).runInNewContext(ctx); };
+exports.runInThisContext = function(code) { try { return Function(code)(); } catch(e) { return undefined; } };
+`;
 
-    await new Promise<void>((resolve, reject) => {
-      const blob = new Blob([new Uint8Array(coreBlob.bytes)], { type: "application/javascript" });
-      const blobUrl = URL.createObjectURL(blob);
-      const script = document.createElement("script");
-      script.src = blobUrl;
-      script.onload = () => { URL.revokeObjectURL(blobUrl); resolve(); };
-      script.onerror = () => { URL.revokeObjectURL(blobUrl); reject(new Error("TW5Engine: blob script load failed")); };
-      document.head.appendChild(script);
-    });
+// Browser Web Workers have `importScripts` but no `window` or `document`.
+// TW5 core must be evaluated via Function() — same as Node path — but without
+// Node's `createRequire`. This shim throws on any Node built-in require.
+async function loadBrowserWorkerTiddlyWiki(coreBlob?: TW5CoreBootBlob): Promise<{ TiddlyWiki: () => unknown }> {
+  if (!coreBlob) {
+    throw new Error("TW5Engine: browser Worker boot requires coreBlob from LarariumDoc.");
   }
 
-  if (!globalThis.$tw?.modules?.titles) {
-    throw new Error("TW5Engine: no TW5 core. Pass coreBlob from LarariumDoc to boot().");
+  const moduleShim: { exports: Record<string, unknown>; filename: string } = {
+    exports: {},
+    filename: "/virtual/lararium/tiddlywiki/boot/boot.js",
+  };
+  const exportsShim = moduleShim.exports;
+  const requireShim = (id: string): unknown => {
+    if (id === "../package.json") return { engines: { node: ">=18.0.0" } };
+    if (id === "fs"   || id === "node:fs")   return makeDeniedFsShim();
+    if (id === "path" || id === "node:path") return makeBrowserPathShim();
+    if (id === "vm"   || id === "node:vm")   return makeBrowserVmShim();
+    throw new Error(`TW5Engine: browser Worker coreBlob attempted require(${JSON.stringify(id)}) — Node built-ins unavailable`);
+  };
+
+  const g = globalThis as Record<string, unknown>;
+  const priorTw      = g["$tw"];
+  const priorWindow  = g["window"];
+  const priorRequire = g["require"];
+  let twFromBlob: unknown;
+  try {
+    g["window"]  = globalThis;
+    g["require"] = requireShim;
+    // Pre-seed $tw with node:{} so bootprefix (executed immediately via _load) skips
+    // platform detection. Without this, bootprefix detects browser=null (no document)
+    // and node=null (no process), so boot.js sets vm.createContext({}) with vm=undefined.
+    // With node:{}: vm = require("vm") → makeBrowserVmShim(), vm.createContext({}) → safe.
+    // Neutralization (node=null, loadTiddlersNode stub) happens after blob eval, before boot().
+    g["$tw"]     = { boot: { suppressBoot: true }, node: {}, browser: null };
+    const source   = new TextDecoder().decode(new Uint8Array(coreBlob.bytes));
+    const evaluate = new Function("exports", "module", "require", "window", "process", source);
+    evaluate(exportsShim, moduleShim, requireShim, globalThis, undefined);
+    twFromBlob = g["$tw"];
+    if (twFromBlob && typeof twFromBlob === "object") {
+      const tw = twFromBlob as Record<string, unknown>;
+      tw["__larariumRequireShim"] = requireShim;
+      tw["__larariumModuleShim"]  = moduleShim;
+    }
+  } finally {
+    if (priorTw !== undefined) g["$tw"] = priorTw;
+    if (priorWindow  === undefined) delete g["window"];
+    else g["window"]  = priorWindow;
+    if (priorRequire === undefined) delete g["require"];
+    else g["require"] = priorRequire;
   }
+
+  if (typeof exportsShim["TiddlyWiki"] === "function") {
+    return exportsShim as { TiddlyWiki: () => unknown };
+  }
+  if (twFromBlob && typeof twFromBlob === "object") {
+    return { TiddlyWiki: () => twFromBlob };
+  }
+  throw new Error("TW5Engine: browser Worker coreBlob did not yield a TiddlyWiki instance.");
 }
 
 function neutralizeNodeBootAuthority(instance: TW5Instance): void {
@@ -162,18 +262,33 @@ function neutralizeNodeBootAuthority(instance: TW5Instance): void {
 export async function prepareHostBootInstance(
   coreBlob?: TW5CoreBootBlob,
 ): Promise<{ instance: TW5Instance; isBrowser: boolean }> {
-  const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+  const isBrowserMain = typeof window !== "undefined" && typeof document !== "undefined";
+  // ES module Workers lack `importScripts` (only classic Workers have it) and lack
+  // `process` (Node global). Use absence of `process` to distinguish browser Workers
+  // from Node Worker threads. Vite browser bundles do not inject a process polyfill.
+  const isBrowserWorker = !isBrowserMain &&
+    typeof (globalThis as Record<string, unknown>)["process"] === "undefined";
 
-  if (isBrowser) {
-    await ensureBrowserCoreLoaded(coreBlob);
-    globalThis.$tw!.boot.suppressBoot = true;
-    globalThis.$tw!.boot.argv = globalThis.$tw!.boot.argv ?? [];
-    return { instance: globalThis.$tw as unknown as TW5Instance, isBrowser };
+  if (isBrowserMain) {
+    // §9 sovereignty law: TW5 SHALL NOT instantiate on the main thread.
+    // Every TW5Engine lives inside a sovereign Worker. Boot via browser-wiki-worker.ts only.
+    throw new Error("TW5Engine: sovereignty violation — TW5 SHALL NOT instantiate on the main thread (§9). Boot TW5 in a Worker only.");
+  }
+
+  if (isBrowserWorker) {
+    const instance = (await loadBrowserWorkerTiddlyWiki(coreBlob)).TiddlyWiki() as unknown as TW5Instance;
+    // Neutralize node authority AFTER blob eval (which needed $tw.node={} to load vmShim),
+    // but BEFORE boot.boot() so Node-specific blocks ($tw.node check) and fs access are skipped.
+    instance.boot.argv = [];
+    (instance as unknown as { node: null }).node = null;
+    (instance as unknown as { loadTiddlersNode?: () => void }).loadTiddlersNode = () => {};
+
+    return { instance, isBrowser: false };
   }
 
   const instance = (await loadNodeTiddlyWiki(coreBlob)).TiddlyWiki() as unknown as TW5Instance;
   neutralizeNodeBootAuthority(instance);
-  return { instance, isBrowser };
+  return { instance, isBrowser: false };
 }
 
 export async function bootWithHostBridge(

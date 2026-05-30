@@ -102,7 +102,7 @@ export class AutomergeDocStore implements LarTiddlerStore {
       () => this.bagId,
     );
 
-    const remoteOrigin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: "automerge" };
+    const remoteOrigin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: bagId ?? "automerge" };
     handle.on("change", ({ patches }) => {
       // Re-map ["tiddlers", title, ...] → [title, ...] before fan-out.
       // Patches that touch doc-level fields (schemaVersion, etc.) are dropped here
@@ -119,7 +119,33 @@ export class AutomergeDocStore implements LarTiddlerStore {
   }
 
   markSyncComplete(): void {
-    this.provider.markSyncComplete();
+    this.provider.markSyncComplete(this.bagId ?? "automerge");
+  }
+
+  /**
+   * Drive the current doc state through the projection bus as a series of
+   * crdt-remote changes. Called once per bag after `addProjection()` registers
+   * the adaptor + accumulator and before `markSyncComplete()` fires.
+   *
+   * The adaptor's pre-sync buffer collects these; onSyncComplete flushes them
+   * in one `wiki.transact()` per bag during initial replay. The accumulator
+   * drops them (syncReady still false). Live patches after markSyncComplete
+   * flow through the standard handleChange() path into the shared accumulator.
+   */
+  emitInitialReplay(): void {
+    const tiddlers = this.handle.doc()?.tiddlers;
+    if (!tiddlers) return;
+    const origin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: this.bagId ?? "automerge" };
+    for (const raw of Object.values(tiddlers) as LarTiddlerRecord[]) {
+      if (!raw || !raw.tiddler?.title) continue;
+      const title = raw.tiddler.title;
+      this.provider.fireImmediate({
+        title,
+        record: _freezeRecord(raw),
+        origin,
+        ...(this.bagId !== undefined ? { bag: this.bagId } : {}),
+      });
+    }
   }
 
   async listVisible(): Promise<string[]> {

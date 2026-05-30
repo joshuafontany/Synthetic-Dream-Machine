@@ -1,54 +1,24 @@
 /**
- * island-adaptor — causal-island ↔ TW5 wiki bridge for the Verse polychronous mesh.
+ * island-adaptor — TS membrane between CompositeStore and the wiki's nalu engine.
  *
- * Architecture law — responsibility split:
+ * Narrowed role under the yin-collapse law (nalu.md):
+ *   - inbound (projection)  → forward LarTiddlerChange → $tw.lares.enqueueNalu()
+ *   - outbound (TW5 edits)  → saveTiddler() / deleteTiddler() → store.put/tombstone
+ *   - cross-bag tombstone resolution stays in TS (needs async getLive on composite)
+ *   - echo guard delegates to $tw.lares.isApplyingNalu() (wiki owns apply lifetime)
  *
- *   IslandAdaptor
- *     inbound:  per-island pre-sync buffer → onSyncComplete() batch flush
- *               non-CRDT origins apply immediately at the membrane
- *               post-sync crdt-remote: returns — IslandAccumulator (separate MemeProjection) handles
- *     outbound: saveTiddler() → store.put() (direct)
- *               deleteTiddler() → store.tombstone() (direct)
+ * What this used to own and no longer does (moved into TW5 module nalu-engine):
+ *   - per-island pre-sync buffer (initial replay flows through enqueueNalu)
+ *   - onSyncComplete batch flush (sync gate is observability only now)
+ *   - IslandAccumulator wiring (single shared queue lives in the wiki)
+ *   - flushAll(accs, budget) (frame drain lives in the wiki)
+ *   - wiki.transact() wrapping (one transact per nalu — wiki side)
+ *   - kernel.applyDelta calls (retired — the wiki module owns wiki writes)
  *
- *   IslandAccumulator (registered separately via addProjection)
- *     post-sync crdt-remote buffering → drained per rAF frame via flushAll()
- *
- * IslandAdaptor wires directly: start() → store.addProjection() / store.subscribe().
- *
- * Preserved invariants:
- *   Echo-loop guard   — _applying Map<key, ChangeOrigin> suppresses outbound during inbound
- *                       key shapes: instanceId · islandId · `${instanceId}:cross-bag`
- *                                   `${instanceId}:acc` · `${instanceId}:child` · `changeset:${kind}`
- *   Canon guard       — lar:///ha.ka.ba/ namespace is read-only (saveTiddler skips)
- *   Temp guard        — $:/temp/* and $:/ never reach the store
- *   Draft suppression — "Draft of …" suppressed until M-E island
- *   Island isolation  — per-island buffer; each onSyncComplete() fires one wiki.transact()
- *   Child cleanup     — deleteTiddler removes ahu fragment-parent slot children
- *
- * Origin pressure note:
- *   This adaptor currently carries both TW5-internal causes and edge-facing
- *   transport causes inside one ChangeOrigin vocabulary. The next YIN split
- *   should name those separately so the VM reacts to its own event grammar,
- *   while the adaptor remains only the membrane.
- *
- * Callers wire:
- *   const adaptor     = new IslandAdaptor(tw5, store, instanceId, targetBag);
- *   const accumulator = new IslandAccumulator();
- *   store.addProjection(adaptor);       // handles pre-sync buffer + non-CRDT
- *   store.addProjection(accumulator);   // handles post-sync crdt-remote
- *
- *   // Per camera: wiki.addEventListener("change", tree.refresh) for widget tree refresh.
- *   // Each camera drives its own drain cycle via CameraRegistration.
- *
- *   // browser (multi-camera):
- *   // startRenderLoop lives in tw5-camera.ts (sidecar):
- *   startRenderLoop(tw5, [
- *     { accumulator: storyAcc, tickMs: 0, budget: 200 },     // Story River — rAF 60fps
- *     { accumulator: canvasAcc, tickMs: 16, budget: 200 },   // TLDraw canvas — 60fps setInterval
- *     { accumulator: minimapAcc, tickMs: 200, budget: 50 },  // mini-map — 5fps
- *   ], adaptor);
- *   // node:
- *   setInterval(() => adaptor.flushAll([accumulator], 200), 16);
+ * Initial replay path:
+ *   AutomergeDocStore.emitInitialReplay() fires fireImmediate per existing tiddler
+ *     → MemeProvider fan-out → this adaptor.onUriChanged → $tw.lares.enqueueNalu
+ *     → next frame drains the lot in one wiki.transact()
  *
  * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/island-adaptor
  */
@@ -58,13 +28,12 @@ import type {
   LarTiddlerRecord,
   LarTiddlerChange,
   ChangeOrigin,
+  MemeProjection,
 } from "@lararium/mesh";
-import { toLarTiddlerRecord } from "@lararium/mesh";
-import type { MemeProjection } from "@lararium/mesh";
-import { IslandAccumulator, isPersistableLarUri } from "@lararium/mesh";
+import { toLarTiddlerRecord, isPersistableLarUri } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
+import type { LaresTw5Extension } from "./types/lares-globals.js";
 import { splitBodyTiddler } from "./deserializer.js";
-import type { TW5TiddlerInputFields } from "./types/tiddlywiki.d.ts";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -78,7 +47,7 @@ function toTW5FieldStrings(
   tw5: TW5Engine,
   tiddler: unknown,
 ): Record<string, string> {
-  const candidate = tiddler as { getFieldStrings?: (options?: { exclude?: string[] }) => Record<string, string>; fields?: Record<string, unknown> } | null;
+  const candidate = tiddler as { getFieldStrings?: () => Record<string, string>; fields?: Record<string, unknown> } | null;
   if (candidate?.getFieldStrings) return candidate.getFieldStrings();
 
   const Tiddler = tw5.$tw.Tiddler;
@@ -95,17 +64,6 @@ function extractFields(tw5: TW5Engine, tiddler: unknown): Record<string, string>
   return toTW5FieldStrings(tw5, tiddler);
 }
 
-function bulkApply(tw5: TW5Engine, batch: TW5TiddlerInputFields[]): void {
-  const wiki    = tw5.$tw.wiki;
-  const Tiddler = tw5.$tw.Tiddler;
-  const apply   = () => { for (const f of batch) wiki.addTiddler(new Tiddler(f)); };
-  if (typeof wiki.transact === "function") wiki.transact(apply); else apply();
-}
-
-function toTW5ProjectionFields(record: LarTiddlerRecord, bag?: string): TW5TiddlerInputFields {
-  return bag ? { ...record.tiddler, bag } : record.tiddler;
-}
-
 // ---------------------------------------------------------------------------
 // IslandAdaptor
 // ---------------------------------------------------------------------------
@@ -116,26 +74,7 @@ export class IslandAdaptor implements MemeProjection {
   /** Bag this adaptor targets for outbound writes. */
   readonly targetBag: string;
 
-  /**
-   * Echo-loop guard.  Keyed by apply slot so concurrent island replays
-   * (M-bags) and carrier-child removes don't interfere.
-   *
-   *   instanceId              — standard inbound apply
-   *   islandId                — onSyncComplete batch flush
-   *   `${instanceId}:cross-bag` — async tombstone resolution
-   *   `${instanceId}:acc`     — flushAll frame drain
-   *   `${instanceId}:child`   — carrier-child cleanup during deleteTiddler
-   *   `changeset:${kind}`     — onChangeset bulk path
-   */
-  private readonly _applying = new Map<string, ChangeOrigin>();
-  private _isApplying(): boolean { return this._applying.size > 0; }
-
-  /** Per-island sync-complete gate. */
-  private readonly _syncComplete = new Set<string>();
-  /** Pre-sync inbound buffer, drained on onSyncComplete(). */
-  private readonly _buffer = new Map<string, LarTiddlerChange[]>();
-
-  // SP-1 — 400 ms capture debounce (save-path invariant).
+  // SP-1 — 400 ms capture debounce on outbound saves.
   static readonly DEBOUNCE_MS = 400;
   private readonly _debounce = new Map<string, ReturnType<typeof setTimeout>>();
   private readonly _pending  = new Map<string, {
@@ -157,137 +96,63 @@ export class IslandAdaptor implements MemeProjection {
   }
 
   // ---------------------------------------------------------------------------
-  // MemeProjection — inbound CRDT→TW5
+  // Echo guard — delegated to the in-wiki nalu engine
+  // ---------------------------------------------------------------------------
+
+  private _isApplying(): boolean {
+    const { lares } = this.tw5.$tw as unknown as LaresTw5Extension;
+    return lares?.isApplyingNalu?.() === true;
+  }
+
+  private _enqueue(change: LarTiddlerChange): void {
+    const { lares } = this.tw5.$tw as unknown as LaresTw5Extension;
+    lares?.enqueueNalu?.(change);
+  }
+
+  // ---------------------------------------------------------------------------
+  // MemeProjection — inbound CRDT→wiki via the nalu engine
   // ---------------------------------------------------------------------------
 
   /**
-   * Inbound URI change from MemeProvider.
+   * Forward each change to the wiki's nalu engine. The engine batches them
+   * across all bags and drains one wiki.transact() per frame.
    *
-   *   crdt-remote + pre-sync  → buffer per island (onSyncComplete flushes)
-   *   crdt-remote + post-sync → return; IslandAccumulator owns this path
-   *   all other origins       → apply immediately (echo-guarded)
+   * Own tw-local echoes are filtered here so they never re-enter the queue.
+   * Cross-bag tombstones resolve before enqueue: a tombstone in one bag must
+   * not delete the tiddler if another recipe layer still holds a live copy.
    */
   onUriChanged(change: LarTiddlerChange): void {
-    if (change.origin.kind !== "crdt-remote") {
-      this._applyChange(change);
-      return;
-    }
-    const islandId = change.origin.edgeIsland;
-    if (this._syncComplete.has(islandId)) return; // IslandAccumulator handles post-sync
-    const buf = this._buffer.get(islandId) ?? [];
-    buf.push(change);
-    this._buffer.set(islandId, buf);
-  }
+    if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) return;
 
-  /**
-   * Scale-3 bulk inbound path — fires when MemeProvider coalesces a large patch
-   * (>= CHANGESET_THRESHOLD URIs).  Fetches all records from the store and
-   * applies as one wiki.transact() to produce a single widget refresh pass.
-   */
-  async onChangeset(uris: ReadonlySet<string>, origin: ChangeOrigin): Promise<void> {
-    if (this._isApplying()) return;
-    const applyKey = `changeset:${origin.kind}`;
-    this._applying.set(applyKey, origin);
-    try {
-      const toRemove: string[] = [];
-      const toAdd: TW5TiddlerInputFields[] = [];
-
-      await Promise.all(Array.from(uris).map(async (uri) => {
-        const rec = await this.store.get(uri);
-        if (!rec || rec.meta?.deleted) { toRemove.push(uri); return; }
-        toAdd.push(toTW5ProjectionFields(rec));
-      }));
-
-      const wiki = this.tw5.$tw.wiki;
-      for (const title of toRemove) wiki.deleteTiddler(title);
-      if (toAdd.length > 0) bulkApply(this.tw5, toAdd);
-    } finally {
-      this._applying.delete(applyKey);
-    }
-  }
-
-  /**
-   * Island initial-sync settled.  Drains the island's buffer in one
-   * wiki.transact() — one widget refresh pass per island.
-   */
-  onSyncComplete(islandId = "automerge"): void {
-    this._syncComplete.add(islandId);
-    const buf = this._buffer.get(islandId) ?? [];
-    this._buffer.delete(islandId);
-    if (buf.length === 0) return;
-
-    const toRemove: string[] = [];
-    const toAdd: TW5TiddlerInputFields[] = [];
-
-    for (const change of buf) {
-      // Suppress own tw-local echoes that arrived before sync settled.
-      if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) continue;
-
-      if (change.record === null || change.record.meta?.deleted) {
-        toRemove.push(change.title);
-        for (const t of this._childUrisOf(change.title)) toRemove.push(t);
-      } else {
-        toAdd.push(toTW5ProjectionFields(change.record, change.bag));
+    if (change.record === null || change.record.meta?.deleted) {
+      const store = this.store as { getLive?: (t: string) => Promise<LarTiddlerRecord | null> };
+      if (typeof store.getLive === "function") {
+        void this._resolveCrossBagTombstone(change, store.getLive.bind(store));
+        return;
       }
     }
-
-    const applyKey = islandId;
-    this._applying.set(applyKey, { kind: "crdt-remote", edgeIsland: islandId });
-    try {
-      const wiki = this.tw5.$tw.wiki;
-      for (const title of toRemove) wiki.deleteTiddler(title);
-      if (toAdd.length > 0) bulkApply(this.tw5, toAdd);
-    } finally {
-      this._applying.delete(applyKey);
-    }
+    this._enqueue(change);
   }
-
-  // ---------------------------------------------------------------------------
-  // Render-loop integration — IslandAccumulator drain
-  // ---------------------------------------------------------------------------
 
   /**
-   * Drain N accumulators in recipe priority order (index 0 = lowest bag priority,
-   * last index = highest).  Shares `budget` total patches across all accumulators —
-   * stops when the frame budget exhausts, carries remainder to the next tick.
-   * Each non-empty accumulator drains into one wiki.transact() block.
-   *
-   * Called per rAF frame by TW5Engine.startRenderLoop() (browser) or a
-   * setInterval driver (Node).
+   * Scale-3 bulk inbound path — fires when MemeProvider coalesces a large patch.
+   * Translate each URI to a LarTiddlerChange and enqueue. The nalu engine still
+   * applies the whole batch in one wiki.transact() at the next frame.
    */
-  flushAll(accs: IslandAccumulator[], budget = 200): void {
-    let remaining = budget;
-    for (const acc of accs) {
-      if (remaining <= 0) break;
-      const batch = acc.drain(remaining);
-      if (batch.length === 0) continue;
-      remaining -= batch.length;
-      this._applyBatch(batch);
-    }
+  async onChangeset(uris: ReadonlySet<string>, origin: ChangeOrigin): Promise<void> {
+    await Promise.all(Array.from(uris).map(async (uri) => {
+      const rec = await this.store.get(uri);
+      this._enqueue({ title: uri, record: rec ?? null, origin });
+    }));
   }
 
-  private _applyBatch(batch: LarTiddlerChange[]): void {
-    const applyKey = `${this.instanceId}:acc`;
-    const origin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: "automerge" };
-    this._applying.set(applyKey, origin);
-    try {
-      const wiki    = this.tw5.$tw.wiki;
-      const Tiddler = this.tw5.$tw.Tiddler;
-      const apply = () => {
-        for (const change of batch) {
-          if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) continue;
-          if (change.record === null || change.record.meta?.deleted) {
-            wiki.deleteTiddler(change.title);
-            for (const t of this._childUrisOf(change.title)) wiki.deleteTiddler(t);
-          } else {
-            wiki.addTiddler(new Tiddler(toTW5ProjectionFields(change.record, change.bag)));
-          }
-        }
-      };
-      if (typeof wiki.transact === "function") wiki.transact(apply); else apply();
-    } finally {
-      this._applying.delete(applyKey);
-    }
+  /**
+   * onSyncComplete is observability-only under the unified-nalu model.
+   * The wiki's nalu engine has no per-bag sync gate — initial replay flows
+   * through the same enqueue/drain path as live changes.
+   */
+  onSyncComplete(_islandId = "automerge"): void {
+    // intentionally empty
   }
 
   // ---------------------------------------------------------------------------
@@ -298,7 +163,7 @@ export class IslandAdaptor implements MemeProjection {
     if (typeof this.store.addProjection === "function") {
       this._unsubscribe = this.store.addProjection(this);
     } else {
-      this._unsubscribe = this.store.subscribe((change) => this._applyChange(change));
+      this._unsubscribe = this.store.subscribe((change) => this.onUriChanged(change));
     }
     return () => this.stop();
   }
@@ -315,22 +180,6 @@ export class IslandAdaptor implements MemeProjection {
   // Outbound TW5→CRDT
   // ---------------------------------------------------------------------------
 
-  /**
-   * TW5 wiki edit → bag write.
-   *
-   * Guards:
-   *   - Echo-loop: _applying active → skip (inbound apply in progress)
-   *   - Temp guard: $:/temp/* → skip
-   *   - System guard: $:/ → skip
-   *   - Draft suppression: "Draft of …" → skip (M-E island not yet wired)
-   *   - Meme URI gate: only lar: URIs reach the store
-   *
-   * Routing law: explicit bag field → ceremony write (promote uses this to reach canonical bags).
-   * No explicit bag field → live TW5 edit; routes to this.targetBag (top wiki draft bag).
-   *
-   * Path H auto-split: if the body contains <<~ ahu blocks, splitBodyTiddler()
-   * materialises child slot tiddlers in the bag (ONE parser, FOUR call sites law).
-   */
   saveTiddler(tiddler: unknown): Promise<void> {
     if (this._isApplying()) return Promise.resolve();
 
@@ -339,7 +188,7 @@ export class IslandAdaptor implements MemeProjection {
 
     if (isTemp(title) || isTW5System(title)) return Promise.resolve();
     if (isDraft(title))                      return Promise.resolve();
-    if (!isPersistableLarUri(title))                   return Promise.resolve();
+    if (!isPersistableLarUri(title))         return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -371,15 +220,14 @@ export class IslandAdaptor implements MemeProjection {
   deleteTiddler(title: string): Promise<void> {
     if (this._isApplying())                  return Promise.resolve();
     if (isTemp(title) || isTW5System(title)) return Promise.resolve();
-    if (!isPersistableLarUri(title))                   return Promise.resolve();
+    if (!isPersistableLarUri(title))         return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
     return this.store.tombstone(title, origin).then(() => {
-      this._removeSlotChildren(title, origin);
+      this._removeSlotChildren(title);
     });
   }
-
 
   // ---------------------------------------------------------------------------
   // Private helpers
@@ -389,73 +237,33 @@ export class IslandAdaptor implements MemeProjection {
     return this.tw5.$tw.wiki.filterTiddlers(`[field:fragment-parent[${parentUri}]]`) as string[];
   }
 
-  private _removeFromTw5(title: string): void {
-    const wiki = this.tw5.$tw.wiki;
-    wiki.deleteTiddler(title);
-    for (const t of this._childUrisOf(title)) wiki.deleteTiddler(t);
-  }
-
-  private _applyChange(change: LarTiddlerChange): void {
-    if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) return;
-
-    const applyKey = this.instanceId;
-    this._applying.set(applyKey, change.origin);
-    try {
-      if (change.record === null || change.record.meta?.deleted) {
-        // Cross-bag tombstone: only wipe TW5 when no live copy remains anywhere in the recipe.
-        const store = this.store as { getLive?: (t: string) => Promise<LarTiddlerRecord | null> };
-        if (typeof store.getLive === "function") {
-          // Guard held for the full async lifetime — key re-set inside the closure
-          // so the echo guard stays active through the microtask gap.
-          void this._applyCrossBagTombstone(change.title, change.origin, store.getLive.bind(store));
-        } else {
-          this._removeFromTw5(change.title);
-        }
-      } else {
-        this.tw5.$tw.wiki.addTiddler(new this.tw5.$tw.Tiddler(toTW5ProjectionFields(change.record, change.bag)));
-      }
-    } finally {
-      this._applying.delete(applyKey);
-    }
-  }
-
   /**
-   * Cross-bag tombstone resolution — async path with explicit guard lifetime.
-   * The _applying key persists through the await so the echo guard never drops
-   * between the synchronous delete and the async getLive resolution.
+   * Cross-bag tombstone resolution — async path.
+   * Stays in TS because it needs to read across CompositeStore layers via getLive.
+   * Either enqueues the tombstone (no live copy elsewhere) or enqueues the live
+   * record from another bag (one of the other layers still holds it).
    */
-  private async _applyCrossBagTombstone(
-    title:   string,
-    origin:  ChangeOrigin,
+  private async _resolveCrossBagTombstone(
+    change:  LarTiddlerChange,
     getLive: (t: string) => Promise<LarTiddlerRecord | null>,
   ): Promise<void> {
-    const key = `${this.instanceId}:cross-bag`;
-    this._applying.set(key, origin);
-    try {
-      const live = await getLive(title);
-      if (live) {
-        this.tw5.$tw.wiki.addTiddler(new this.tw5.$tw.Tiddler(toTW5ProjectionFields(live)));
-      } else {
-        this._removeFromTw5(title);
-      }
-    } finally {
-      this._applying.delete(key);
+    const live = await getLive(change.title);
+    if (live) {
+      this._enqueue({ title: change.title, record: live, origin: change.origin, ...(change.bag !== undefined ? { bag: change.bag } : {}) });
+    } else {
+      this._enqueue(change);
     }
   }
 
-  /** Remove ahu-slot child tiddlers from TW5 under the echo guard. */
-  private _removeSlotChildren(parentUri: string, origin: ChangeOrigin): void {
+  /** Remove ahu-slot child tiddlers from TW5 during outbound delete. */
+  private _removeSlotChildren(parentUri: string): void {
     const children = this.tw5.$tw.wiki.filterTiddlers(`[field:fragment-parent[${parentUri}]]`);
-    if (children.length === 0) return;
-    const childKey = `${this.instanceId}:child`;
-    this._applying.set(childKey, origin);
-    try { for (const t of children) this.tw5.$tw.wiki.deleteTiddler(t); }
-    finally { this._applying.delete(childKey); }
+    for (const t of children) this.tw5.$tw.wiki.deleteTiddler(t);
   }
 
   /**
-   * Write a lar: URI to the store.  Splits ahu fragment-parent blocks first
-   * (Path H auto-split).  Tombstones orphaned slot children.
+   * Write a lar: URI to the store. Splits ahu fragment-parent blocks first
+   * (Path H auto-split). Tombstones orphaned slot children.
    */
   private async _writeMeme(
     title:  string,
@@ -464,8 +272,6 @@ export class IslandAdaptor implements MemeProjection {
   ): Promise<void> {
     const bodyText = fields["text"] ?? "";
     const { parent, children } = splitBodyTiddler(title, bodyText, fields);
-    // Ceremony writes (promote) pass an explicit bag field to route to the canonical target.
-    // Live TW5 edits without an explicit bag field fall back to this.targetBag (top wiki draft bag).
     const targetBag = fields["bag"] || this.targetBag;
     const { bag: _bag, ...persistedParent } = parent;
 

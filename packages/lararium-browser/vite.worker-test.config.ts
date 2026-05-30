@@ -1,3 +1,17 @@
+/**
+ * vite.worker-test.config.ts — Vite bundle for the browser M.3 breathing gate.
+ *
+ * Browser Web Workers cannot resolve bare workspace specifiers (`@lararium/mesh`,
+ * `@lararium/tw5`) — Vite alias transforms apply only to the main test context.
+ * This config produces a self-contained ES module bundle of browser-wiki-worker.ts
+ * that a Chromium Worker can load without a module resolution gap.
+ *
+ * Output: tests/fixtures/browser-wiki-worker-bundle.js
+ * Usage:  pnpm --filter @lararium/browser run build:test-worker
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/vite-worker-test-config
+ */
+
 import { defineConfig } from "vitest/config";
 import wasm from "vite-plugin-wasm";
 import path from "path";
@@ -8,7 +22,6 @@ export default defineConfig({
   plugins: [wasm()],
   resolve: {
     alias: [
-      // Stub Node's `crypto` module for browser tests — tw5-host-bridge uses createHash.
       { find: /^(node:)?crypto$/, replacement: path.resolve(root, "src/__stubs__/crypto-stub.ts") },
       { find: "@lararium/keyhive",               replacement: path.resolve(root, "../lararium-keyhive/src/index.ts") },
       { find: "@lararium/mesh/cascade",          replacement: path.resolve(root, "../lararium-mesh/src/cascade.ts") },
@@ -20,20 +33,21 @@ export default defineConfig({
       { find: "@lararium/tw5",                   replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
     ],
   },
-  server: {
-    fs: {
-      // Allow Vite to serve genesis artifact from the adjacent node package.
-      // Required for browser-m3-breathing.test.ts to fetch island.bin.
-      allow: [path.resolve(root, "../")],
+  // base controls the public path embedded in the bundle for asset URLs.
+  // Worker loads bundle from /tests/fixtures/; WASM emitted to /tests/fixtures/assets/.
+  // Without this, Vite emits WASM paths as /assets/... which the dev server can't find.
+  base: "/tests/fixtures/",
+  build: {
+    target:      "esnext",
+    outDir:      path.resolve(root, "tests/fixtures"),
+    emptyOutDir: false,
+    rollupOptions: {
+      input: path.resolve(root, "src/browser-wiki-worker.ts"),
+      output: {
+        entryFileNames: "browser-wiki-worker-bundle.js",
+        format:         "es",
+        codeSplitting:  false,
+      },
     },
-  },
-  test: {
-    browser: {
-      enabled: true,
-      provider: "playwright",
-      instances: [{ browser: "chromium" }],
-    },
-    include: ["tests/**/*.test.ts"],
-    testTimeout: 30_000,
   },
 });

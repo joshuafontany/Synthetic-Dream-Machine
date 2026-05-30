@@ -328,6 +328,20 @@ export interface WikiMsg_VerbResult {
   error?:         string;
 }
 
+/**
+ * Worker readiness signal — the island's message handler is registered and the Worker
+ * is ready to receive the manifest. The vessel MUST NOT send the manifest (with
+ * transferred syncPort) until it receives this signal.
+ *
+ * This is required for ES module Workers that load WASM at startup (top-level await).
+ * Messages sent before the listener is registered are dropped in browser Workers.
+ * Inversion of control: the Worker initiates; the vessel waits.
+ */
+export interface IslandMsg_Ready {
+  schema_version: ProtocolVersion;
+  type: "ready";
+}
+
 /** All messages a causal island may send to the vessel. */
 export type IslandToVesselMsg =
   | IslandMsg_Event
@@ -335,6 +349,7 @@ export type IslandToVesselMsg =
   | IslandMsg_Ea
   | IslandMsg_FrameAck
   | IslandMsg_Fault
+  | IslandMsg_Ready
   | WikiMsg_VerbResult
   | AdminMsg_DelegateVerb;
 
@@ -358,7 +373,7 @@ export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
+  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "ready", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -404,6 +419,11 @@ export function mkManifest(
   if (opts?.storage)             msg.storage     = opts.storage;
   if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
   return msg;
+}
+
+/** Ready signal — Worker has registered its message listener, vessel may now send the manifest. */
+export function mkReady(): IslandMsg_Ready {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "ready" };
 }
 
 /** Build an ea sovereignty declaration — the island signals it breathes and stands ready. */

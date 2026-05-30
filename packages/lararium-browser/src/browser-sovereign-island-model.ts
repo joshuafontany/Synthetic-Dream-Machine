@@ -28,21 +28,18 @@ import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-
 import { IndexedDBStorageAdapter } from "@automerge/automerge-repo-storage-indexeddb";
 import {
   CompositeStore,
-  AutomergeDocStore,
   BAG_IDS,
   ENGINE_CORE_ID,
   mkFault,
+  mkReady,
   isVesselToIslandMsg,
   mkTeardownAck,
-  extractTiddlerDeltaFromPatches,
-  allTiddlersFromDoc,
   type LarDoc,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
 import {
   IslandKernel,
-  IslandAdaptor,
-  MemoryTiddlerStore,
+  buildIslandRecipe,
 } from "@lararium/tw5";
 import type { IslandToVesselMsg } from "@lararium/mesh";
 import type { IslandContext, IslandBehavior } from "@lararium/tw5";
@@ -58,53 +55,14 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   let _writableHandleId: string | null                      = null;
   let _composite:        CompositeStore | null              = null;
   let _ctx:              IslandContext | null               = null;
+  let _tornDown                                             = false;
+  let _activeWikiUri                                        = "";
 
-  // ── rAF drain loop ────────────────────────────────────────────────────────
-  // Safari does not ship requestAnimationFrame in DedicatedWorkerGlobalScope.
-
-  let _pendingAdded:   Record<string, unknown>[] = [];
-  let _pendingDeleted: string[]                  = [];
-  let _rafScheduled                              = false;
-  let _tornDown                                  = false;
-  let _activeWikiUri                             = "";
-
-  const _scheduleFrame: (cb: () => void) => void =
-    typeof self.requestAnimationFrame === "function"
-      ? (cb) => self.requestAnimationFrame(cb)
-      : (cb) => setTimeout(cb, 16);
-
-  function _scheduleDrain(): void {
-    if (_rafScheduled || _tornDown) return;
-    _rafScheduled = true;
-    _scheduleFrame(() => {
-      _rafScheduled = false;
-      if (_tornDown) return;
-      const added   = _pendingAdded.splice(0);
-      const deleted = _pendingDeleted.splice(0);
-      if (added.length > 0 || deleted.length > 0) {
-        handler.applyDelta(_activeWikiUri, added, deleted);
-      }
-      handler.sendFrameAck(_activeWikiUri, crypto.randomUUID());
-    });
-  }
-
-  // ── Handle subscription ───────────────────────────────────────────────────
-
-  type DocChangePayload = {
-    doc:     Record<string, unknown>;
-    patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>;
-  };
-
-  function _subscribe(_bagId: string, handle: DocHandle<LarDoc>): void {
-    handle.on("change", ({ doc, patches }: DocChangePayload) => {
-      const delta = extractTiddlerDeltaFromPatches(doc, patches);
-      if (delta.added.length > 0 || delta.deleted.length > 0) {
-        _pendingAdded.push(...delta.added);
-        _pendingDeleted.push(...delta.deleted);
-        _scheduleDrain();
-      }
-    });
-  }
+  // Live CRDT patches flow through AutomergeDocStore.handle.on("change") →
+  // MemeProvider → IslandAdaptor → $tw.lares.enqueueNalu. The wiki's
+  // nalu-engine startup module owns the drain (one wiki.transact() per frame
+  // across all bags). No worker-side rAF loop, no _pendingAdded array, no
+  // raw handle subscription.
 
   // ── Message dispatch ──────────────────────────────────────────────────────
 
@@ -125,11 +83,24 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
     if (_ctx && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 
+  // Inversion of control: signal the vessel that this Worker's message handler
+  // is registered and WASM has finished loading (top-level await in ES module
+  // Workers completes before this line). Vessel MUST NOT send manifest until
+  // it receives this "ready" signal.
+  self.postMessage(mkReady());
+
   // ── Manifest (OTP init) ───────────────────────────────────────────────────
 
   async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
+    try {
+      await _doManifest(msg);
+    } catch (err) {
+      _post(mkFault(msg.wikiUri, `manifest handler threw: ${String(err)}`));
+    }
+  }
 
+  async function _doManifest(msg: IslandMsg_Manifest): Promise<void> {
     // Island owns its own IndexedDB partition keyed by its identity URI.
     _repo = new Repo({
       storage:     new IndexedDBStorageAdapter(msg.wikiUri),
@@ -144,7 +115,11 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
 
     for (const binding of bindings) {
       if (binding.mode !== "relational") continue;
-      const handle = await _repo.find<LarDoc>(binding.docUrl as AutomergeUrl);
+      // allowableStates: doc arrives via syncPort after connect — not yet "ready" at find() time.
+      const handle = await _repo.find<LarDoc>(
+        binding.docUrl as AutomergeUrl,
+        { allowableStates: ["ready", "unavailable"] },
+      );
       await handle.whenReady();
       _handles.set(binding.bagId, handle);
       ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
@@ -182,38 +157,21 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
 
     try {
       await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers);
-    } catch {
+    } catch (err) {
+      const stack = err instanceof Error ? (err.stack ?? String(err)) : String(err);
+      _post(mkFault(msg.wikiUri, `bootTw5 threw: ${stack}`));
       return;
     }
 
-    for (const { bagId, handle, writable } of ready) {
-      const store = new AutomergeDocStore(handle, bagId);
-      store.markSyncComplete();
-      _composite.addLayer({ bagId, store, writable, defaultWritable: false });
-    }
-
-    // Sub-surface layers — always present, below all CRDT bags.
-    _composite.addLayer({
-      bagId: BAG_IDS.scratch, store: new MemoryTiddlerStore(),
-      writable: true, defaultWritable: true,
-    });
-    _composite.addLayer({
-      bagId: BAG_IDS.projection, store: new MemoryTiddlerStore(),
-      writable: true, defaultWritable: false,
-    });
-
     const tw5 = handler.tw5()!;
-    const adaptor = new IslandAdaptor(tw5, _composite, behavior.writeBagId);
-    _composite.addProjection(adaptor);
-
-    const seed: Record<string, unknown>[] = [];
-    for (const { handle } of ready) {
-      const doc = handle.doc();
-      if (doc) seed.push(...allTiddlersFromDoc(doc));
-    }
-    if (seed.length > 0) handler.applyDelta(msg.wikiUri, seed, []);
-
-    for (const { bagId, handle } of ready) _subscribe(bagId, handle);
+    // One recipe model: shared assembly for CRDT layers + scratch/projection
+    // + adaptor + initial replay/sync-complete handoff.
+    buildIslandRecipe({
+      tw5,
+      composite: _composite,
+      writeBagId: behavior.writeBagId,
+      ready,
+    });
 
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post };
     await behavior.onEa(_ctx);
