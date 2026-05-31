@@ -175,14 +175,14 @@ excluded = ["lares/scrum/"]
 [[candidates]]
 source = "lares/talk_story/protocol.md"
 uri = "lar:///talk.story.protocols/talk-story/?stances=^.^.-.-.-&confidence=C~19&p=10#settle.1.0"
-confidence="C~19"
+confidence="~:confidence[C],[19]"
 register_numeric = 0.95
 hud_line = "⚡∞ | mode:deployed | p~20 | stances:+++++ | register:~:confidence[C],[19] | build:20260409-a3f2c1e"
 
 [[candidates]]
 source = "lares/signal/README.md"
 uri = "lar:///signal.active.holds/signal/?stances=^.^.-.-.-&confidence=C~19&p=10#settle.1.0"
-confidence="C~19"
+confidence="~:confidence[C],[19]"
 register_numeric = 0.95
 ```
 
@@ -339,7 +339,7 @@ context_limit = "context window"
 name = "Theron the Weary"
 worn_by = "diplomat"
 mode_targets = { philosopher = "+", poet = "?", satirist = "-", humorist = "-", private = "-" }
-register_target = "CS~16"
+register_target = "~:confidence[CS],[16]"
 register_range = [0.7, 0.9]
 tone = "formal, measured, old-world courtesy masking calculation"
 
@@ -347,7 +347,7 @@ tone = "formal, measured, old-world courtesy masking calculation"
 name = "Spark"
 worn_by = "muse"
 mode_targets = { philosopher = "-", poet = "-", satirist = "?", humorist = "+", private = "-" }
-register_target = "SP~8"
+register_target = "~:confidence[SP],[8]"
 register_range = [0.3, 0.5]
 tone = "rapid, slang-heavy, delighted by secrets"
 ```

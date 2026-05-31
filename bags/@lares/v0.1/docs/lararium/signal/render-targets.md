@@ -370,7 +370,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 1. No emoji. No glyphs. ASCII only.
 2. URI form: `lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXXXXXXX&confidence=R:N&p=N&ffz=N.N.N.N.N`
 3. Stances parameter: ten-character tool-carry string, two chars per stance, using `*` `?` `!` `~` `-`.
-4. Confidence: `R~N` Level format (e.g., `CS~16`).
+4. Confidence: `[R],[N]` Level format (e.g., `~:confidence[CS],[16]`).
 5. Chronometer query parameter: five positions dot-separated, each position carrying action count only.
 
 **Closed example:**

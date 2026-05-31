@@ -4,7 +4,7 @@
 > Status: `~:confidence[S],[12]` 🏛️ — working design synthesis; depends on URI schema settlement
 > Updated: 2026-04-08
 > Source: `lares/README.md` (three-truth model), `Signal_HUD_Tagspace-draft.md` §§ Ephemeral Machine Patterns, Ontology Layer
-> Candidate URI: `lar://core/design/registry/contract@S~12`
+> Candidate URI: `lar://core/design/registry/contract@~:confidence[S],[12]`
 
 ---
 
@@ -59,8 +59,8 @@ The promotion ledger is append-only. Each entry records a single promotion event
 {
   "timestamp": "2026-04-08T12:00:00Z",
   "lar_uri": "lar:///signal/uri-schema",
-  "promoted_from_register": "CS~17",
-  "promoted_to_register": "C~19",
+  "promoted_from_register": "~:confidence[CS],[17]",
+  "promoted_to_register": "~:confidence[C],[19]",
   "design_source": "lares/modules/uri-schema/URI_SCHEMA.md",
   "build_artifact": "builds/agents/signal/uri-schema-v1.md",
   "file_sha256": "sha256:abc123...",

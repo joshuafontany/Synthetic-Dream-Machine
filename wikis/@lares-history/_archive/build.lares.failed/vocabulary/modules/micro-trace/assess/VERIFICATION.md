@@ -44,6 +44,6 @@ For any governed response, verify:
 - [ ] Density band behavior validated across at least 10 real exchanges
 - [ ] Sub-agent URI pair format validated in at least 3 real sub-agent dispatches
 - [ ] Layer split rule validated: parse + trace coexist without substitution in at least 5 exchanges
-- [ ] `lares/signal/micro-trace.md` promoted to `C~19` ☐
+- [ ] `lares/signal/micro-trace.md` promoted to `~:confidence[C],[19]` ☐
 
 <!-- → ? -->

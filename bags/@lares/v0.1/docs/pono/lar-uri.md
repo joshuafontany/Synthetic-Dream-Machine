@@ -262,7 +262,7 @@ Span sequencing is intentionally **not** encoded in URI authority. Exchange iden
 | Parameter | Type | Repeatable? | Record Values |
 |---|---|---|---|
 | `stances` | 10-char tool-carry string | No | Positional pairs: philosopher, poet, satirist, humorist, private |
-| `confidence` | `R~N` | No | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18` |
+| `confidence` | `R~N` | No | `~:confidence[P],[7]`, `~:confidence[SP],[9]`, `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]` |
 | `p` | `N` | No | Decimal in range `[0.0, 1.0]` |
 | `ffz` | 5 glyph+counter pairs | No | See §6 for encoding |
 
@@ -562,7 +562,7 @@ Record form and HUD display use the same five symbols — no remapping required.
 | scheme | `lar:` | Always identical |
 | alias:tier | `telarus:operator` | Identity and trust tier |
 | @host | `@enyalios` | Machine host only |
-| confidence= | `S~13` | Level, both forms |
+| confidence= | `~:confidence[S],[13]` | Level, both forms |
 | p= | `0.5` | Numeric, both forms |
 
 <<~/ahu >>
@@ -875,8 +875,8 @@ Kowloon IDs (`type:dbid@domain`) remain **Kowloon-native** IDs. They do not repl
 
 | Tier | Cache Strategy | Confidence Range | Volatility |
 |---|---|---|---|
-| 1 — Global Core | Cached across sessions; first `cache_control` breakpoint | `C~20` – `C~19` | Near-static |
-| 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | `C~19` – `S~13` | Session-stable |
+| 1 — Global Core | Cached across sessions; first `cache_control` breakpoint | `~:confidence[C],[20]` – `~:confidence[C],[19]` | Near-static |
+| 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | `~:confidence[C],[19]` – `~:confidence[S],[13]` | Session-stable |
 | 3 — Dynamic | Ephemeral (5-min TTL with hit-reset) | `< 0.50` trimmable | Per-exchange |
 
 <<~/ahu >>
@@ -890,19 +890,19 @@ The `lar_uri` + `confidence` fields on module descriptors, registry records, and
 ```toml
 # Tier 1 — Global Core (version-controlled by module version)
 lar-uri     = "lar:///kernel.invariant.anchors/"
-confidence="C~20"
+confidence="~:confidence[C],[20]"
 module-id   = "lares-kernel"
 version-num = 4
 
 # Tier 2 — Session Core (version-controlled within session)
 lar-uri     = "lar:///session.permissions.gates/"
-confidence  = "C~19"
+confidence  = "~:confidence[C],[19]"
 module-id   = "lares-permissions"
 version-num = 2
 
 # Tier 3 — Dynamic (span_seq lives outside descriptor)
 lar-uri     = "lar:///task.current.recon/"
-confidence  = "S~11"
+confidence  = "~:confidence[S],[11]"
 module-id   = "lares-task-recon"
 version-num = 1
 ```
@@ -925,7 +925,7 @@ A `lar:` URI is **well-formed** when:
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
 6. Query parameters limited to: `stances` (once, 10-char tool-carry string), `confidence` (once), `p` (once), `ffz` (once, 5 glyph+counter pairs)
-7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `S~13`, `CS~16`, `C~18`)
+7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]`)
 8. `p` value is a decimal in range `[0.0, 1.0]`
 9. `ffz` carries all five positions; no position omitted; each position is glyph + integer counter ≥ 0
 10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
@@ -1115,7 +1115,7 @@ Quick read:
 > Territory: threshold / uncertain / opens.
 > Philosopher: Visual-Micro (Wand+Sword). Poet: Cup-only. Others: Stone.
 > Synthesis-0.65. Week 0, Watch 0, Turn 3 (Orient), Round 2 (Decide), Action 7.
-> Scryer responds at CS~16, deciding, Philosopher Visual-Micro only.
+> Scryer responds at ~:confidence[CS],[16], deciding, Philosopher Visual-Micro only.
 > Chronometer shows: node is one phase ahead at tactical scale (Orient→Decide) — normal: node orients from operator's observe.
 
 Multi-stance example:

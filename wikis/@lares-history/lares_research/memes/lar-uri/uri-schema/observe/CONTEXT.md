@@ -34,7 +34,7 @@ lar://alias:tier@host/ha.ka.ba/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0.O0.O0 
 
 ### The Fragment Bug (Fixed)
 
-All 16 section-level URIs in the canonical spec were emitting `#fragment?query` (RFC 3986 violation). Fixed in session 2026-04-09: all canonical URIs now use `?query#fragment` order. The spec was updated; the file confidence bumped CS~17 → CS~18.
+All 16 section-level URIs in the canonical spec were emitting `#fragment?query` (RFC 3986 violation). Fixed in session 2026-04-09: all canonical URIs now use `?query#fragment` order. The spec was updated; the file confidence bumped ~:confidence[CS],[17] → ~:confidence[CS],[18].
 
 ### Stances: All Five, Every URI
 
@@ -94,15 +94,15 @@ The following questions are `~:confidence[SP],[9]` – `~:confidence[S],[13]`. T
 
 | Q# | Question | Current position | Confidence |
 |---|---|---|---|
-| U1 | Operator alias in userinfo vs machine_id only? | Operator alias in userinfo | S~13 |
-| U2 | span_seq in crystal ledger only vs mirrored to MemPalace? | Mirror into sidecar | S~14 |
-| U4 | Chronometer interaction with `--parse` self-activation? | Provisional yes — depth increases p | SP~9 |
-| U5 | world_calendar_ref when no diegetic calendar yet? | Mint provisional tagspace reference | S~12 |
-| U8 | Module section URIs: carry chronometer fragments or just confidence? | Confidence only | S~12 |
-| U9 | ITC stamps in fragment when MCP server arrives? | Calibration metadata — fragment stays human-readable | S~11 |
-| U10 | `chat-log:post-header` render target: all five stances, or active stances only? | **CLOSED 2026-04-10.** Resolution: all five stances always. Consistency with HUD invariant; amplitude provides readability gradation. Active stances use `+`/`++`; suppressed stances use `-`/`--`. Normative rule codified in `lares/modules/sigilization/decide/CONVENTIONS.md`. All story draft post headers corrected. | CS~17 |
-| U11 | URI sigilization: sub-section of uri-schema module, or separate module? | **CLOSED 2026-04-10.** Resolution: standalone module `lares/modules/sigilization/`. Created 2026-04-10 with full OODA-HA phase files. Rationale: surface count (5 targets), update rate decoupling, dependency direction (sigilization depends on uri-schema, not reverse). | CS~17 |
-| U12 | Grammar vs protocol: should the exchange span display contract (when to emit URIs, what sequence, the ordering rules) split to a separate `exchange-protocol` module? | **Open 2026-04-10.** uri-schema carries two concerns: (1) URI grammar — field semantics, value constraints, RFC 3986 ordering [C~19 stable]; (2) exchange span protocol — emission choreography, display contract, sub-agent handoff ordering [CS~16 may evolve]. Protocol concern may grow as sub-agent dispatch patterns expand (S2+). Options: A) extract `exchange-protocol` module (clean boundary, more indirection); B) rename uri-schema to `signal-protocol` and own both explicitly; C) keep as-is with dual-concern acknowledgment (current position, filed in MODULE.md). Operator steers on timing. Not a blocker for S0. | SP~9 |
+| U1 | Operator alias in userinfo vs machine_id only? | Operator alias in userinfo | ~:confidence[S],[13] |
+| U2 | span_seq in crystal ledger only vs mirrored to MemPalace? | Mirror into sidecar | ~:confidence[S],[14] |
+| U4 | Chronometer interaction with `--parse` self-activation? | Provisional yes — depth increases p | ~:confidence[SP],[9] |
+| U5 | world_calendar_ref when no diegetic calendar yet? | Mint provisional tagspace reference | ~:confidence[S],[12] |
+| U8 | Module section URIs: carry chronometer fragments or just confidence? | Confidence only | ~:confidence[S],[12] |
+| U9 | ITC stamps in fragment when MCP server arrives? | Calibration metadata — fragment stays human-readable | ~:confidence[S],[11] |
+| U10 | `chat-log:post-header` render target: all five stances, or active stances only? | **CLOSED 2026-04-10.** Resolution: all five stances always. Consistency with HUD invariant; amplitude provides readability gradation. Active stances use `+`/`++`; suppressed stances use `-`/`--`. Normative rule codified in `lares/modules/sigilization/decide/CONVENTIONS.md`. All story draft post headers corrected. | ~:confidence[CS],[17] |
+| U11 | URI sigilization: sub-section of uri-schema module, or separate module? | **CLOSED 2026-04-10.** Resolution: standalone module `lares/modules/sigilization/`. Created 2026-04-10 with full OODA-HA phase files. Rationale: surface count (5 targets), update rate decoupling, dependency direction (sigilization depends on uri-schema, not reverse). | ~:confidence[CS],[17] |
+| U12 | Grammar vs protocol: should the exchange span display contract (when to emit URIs, what sequence, the ordering rules) split to a separate `exchange-protocol` module? | **Open 2026-04-10.** uri-schema carries two concerns: (1) URI grammar — field semantics, value constraints, RFC 3986 ordering ~:confidence[C],[19] stable; (2) exchange span protocol — emission choreography, display contract, sub-agent handoff ordering ~:confidence[CS],[16] may evolve. Protocol concern may grow as sub-agent dispatch patterns expand (S2+). Options: A) extract `exchange-protocol` module (clean boundary, more indirection); B) rename uri-schema to `signal-protocol` and own both explicitly; C) keep as-is with dual-concern acknowledgment (current position, filed in MODULE.md). Operator steers on timing. Not a blocker for S0. | ~:confidence[SP],[9] |
 
 ---
 

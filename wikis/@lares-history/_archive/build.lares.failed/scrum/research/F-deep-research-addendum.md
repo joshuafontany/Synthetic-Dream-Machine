@@ -59,7 +59,7 @@ The emoji count IS the delta. More emoji = more fuzz. The operator doesn't need 
 Instead:
 
 - **HUD display:** `~:confidence[S],[13] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
-- **Record form (STATE.jsonl):** The `register` field stays a point value (`"S~13"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
+- **Record form (STATE.jsonl):** The `register` field stays a point value (`"~:confidence[S],[13]"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
 - **URI machine form:** `confidence=S~13` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
 
 **Why this is better than centroid~δ:**

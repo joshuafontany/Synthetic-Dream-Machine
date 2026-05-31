@@ -48,7 +48,7 @@ These rules apply to every `lar:` URI. No exceptions.
 | Parameter | Format | Values | Notes |
 |---|---|---|---|
 | `stances` | 5-char dot-separated amplitude | `^.?.-.-.-` | Positional: Philosopher · Poet · Satirist · Humorist · Private |
-| `confidence` | `R:N` | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18`, `C~19`, `C~20` | Register + decimal. Syadasti-dependent: read against active stance. |
+| `confidence` | `R:N` | `~:confidence[P],[7]`, `~:confidence[SP],[9]`, `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]`, `~:confidence[C],[19]`, `~:confidence[C],[20]` | Register + decimal. Syadasti-dependent: read against active stance. |
 | `p` | decimal `[0.0, 1.0]` | `0.5` default | Attention density / annotation throttle; governs micro-trace band |
 
 **Register scale:**

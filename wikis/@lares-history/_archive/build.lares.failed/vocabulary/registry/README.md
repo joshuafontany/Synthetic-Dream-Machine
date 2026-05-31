@@ -13,7 +13,7 @@
 - URI anatomy reference (authoritative cross-reference from `../signal/` — field-by-field)
 - Resolver spec: how a `lar:` URI maps to a live machine, crystal, or design unit
 - Alias ledger schema: operator aliases, machine aliases, subdir promotion records
-- Promotion ledger: when a design unit reaches `C~19` and gets a canonical URI, that record lives here
+- Promotion ledger: when a design unit reaches `~:confidence[C],[19]` and gets a canonical URI, that record lives here
 - LARES.jsonl or equivalent registry file spec (if needed)
 
 ## Does Not Belong Here

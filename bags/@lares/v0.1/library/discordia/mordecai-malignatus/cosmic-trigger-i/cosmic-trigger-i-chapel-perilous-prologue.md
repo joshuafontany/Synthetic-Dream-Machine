@@ -51,7 +51,7 @@ primary-source: >
   Cosmic Trigger I: Final Secret of the Illuminati (1977), And/Or Press.
   Preface text from Dublin 1986 edition (New Falcon Publications reissue).
 secondary-source: Prometheus Rising (1983), Falcon Press — Ch.8 pending
-confidence: CS~16
+confidence: ~:confidence[CS],[16]
 invariant: false
 dependencies: []
 note: >

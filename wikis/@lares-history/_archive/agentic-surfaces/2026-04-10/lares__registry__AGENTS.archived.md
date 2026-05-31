@@ -19,7 +19,7 @@ Design workers in this subdirectory define how `lar:` URIs resolve and how the p
 4. Read `../../_todo/core/C-deep-research-report.md` for URI stamping protocol and TOML registry examples (complements A for registry design).
 4. Propose minimal resolver spec: what a `lar://` URI resolves to in practice (file path? crystal ref? nothing at runtime?).
 6. Propose alias ledger format (TOML or JSONL, with operator aliases and machine IDs).
-7. Propose promotion ledger entry spec: what gets written when a design unit reaches `C~19`.
+7. Propose promotion ledger entry spec: what gets written when a design unit reaches `~:confidence[C],[19]`.
 8. Label all proposals `[Synthesis]` until schema settlement.
 
 ---

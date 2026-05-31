@@ -39,7 +39,7 @@ Rules for agents:
 - Closing lines reverse the bracket: constraint HUD, aftermath intent-vector, `-> ?` on the same line.
 - Fenced code blocks protect `->`, `?`, `~`, brackets, and lar paths from Markdown renderer drift.
 - `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
-- `E-Prime~N`, `No-Has~N`, `p~N`, and `C~N` remain scalar humility instruments, not decorative badges.
+- `E-Prime~N`, `No-Has~N`, `p~N`, and `~:confidence[C],[N]` remain scalar humility instruments, not decorative badges.
   - `E-Prime~N` (1–20): how strongly the span avoids identity and predication copulas (`is` as essence or state-report). See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
   - `No-Has~N` (1–20): how strongly the span avoids possession collapse (`has` as bounded ownership). Tracked separately because possession drift accumulates beneath E-Prime revision pressure. Preferred form: scoped carrying.
   - `p~N` (0–20): attention aperture — the grain/zoom of attention the span carries. Maps onto the Law of 5s continuum: `p~0`–`p~4` = morpheme/word (₀ Action band, narrowest); `p~8`–`p~12` = paragraph (₂ Turn band, DEFAULT); `p~16`–`p~20` = document/session-arc (₄ Week band, widest). Primary signal during `--parse` intake: declares what grain of attention the ingesting pass brings to external prose or data before it enters the system. See `lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping`.

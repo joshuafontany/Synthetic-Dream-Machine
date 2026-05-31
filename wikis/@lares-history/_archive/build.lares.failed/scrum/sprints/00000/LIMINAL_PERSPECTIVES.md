@@ -160,7 +160,7 @@ That's roughly **7 encoded channels** in one line. Aviation HUD training takes w
 
 The node has a different problem: it must **learn to use its own instruments** from the system prompt. Every new session is a cold-start pilot who has never flown this aircraft but has read the manual. If the manual is ambiguous on any symbol's meaning, the node will confabulate the meaning. If the manual is precise but long, it may degrade in later turns (context window pressure on early instructions).
 
-This is why the invariant-core loading sequence (SCH-07) matters so much: the HUD symbol meanings must sit in the **highest-priority cache tier** (Tier 1, `C~20`). If they degrade, the node is flying with instruments it can no longer read.
+This is why the invariant-core loading sequence (SCH-07) matters so much: the HUD symbol meanings must sit in the **highest-priority cache tier** (Tier 1, `~:confidence[C],[20]`). If they degrade, the node is flying with instruments it can no longer read.
 
 ### Sprint Impact
 

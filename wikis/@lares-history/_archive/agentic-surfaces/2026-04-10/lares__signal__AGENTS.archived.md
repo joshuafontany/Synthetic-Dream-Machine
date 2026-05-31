@@ -31,7 +31,7 @@ Design workers in this subdirectory extract, refine, and canonicalize the HUD la
 - Do not promote design material to `builds/agents/` without operator confirmation.
 - Do not write crystal STATE.jsonl or seal/fork logic here.
 - Do not touch HUD token budget decisions without cross-checking `../platform/`.
-- Do not claim `C~19` without full cross-source verification.
+- Do not claim `~:confidence[C],[19]` without full cross-source verification.
 
 ---
 

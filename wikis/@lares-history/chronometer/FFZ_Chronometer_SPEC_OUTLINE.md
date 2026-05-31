@@ -517,7 +517,7 @@ required before this section finalizes.]
 
 [PLACEHOLDER — Every span begins and ends with URI → intent.
 This applies universally: system files, exchanges, subagent
-delegations. No exceptions (C~20).]
+delegations. No exceptions (~:confidence[C],[20]).]
 
 ### 9.2 Exchange Turn Wrapping
 

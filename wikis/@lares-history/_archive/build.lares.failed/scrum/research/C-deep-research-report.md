@@ -28,7 +28,7 @@ FLOAT       = DIGIT [ "." DIGIT* ]
 - **Tier/Kind**: e.g. `canon/module`, `canon/tool`. `"canon"` tier indicates agentic canonical content.  
 - **Name and version**: A module name (e.g. `lares-identity`) and semantic version.  
 - **Query params**:
-  - `register`: A letter code (`C`=truth, `S`=second, etc) plus a float 0–20 confidence. **C~20** means absolute trust.  
+  - `register`: A letter code (`C`=truth, `S`=second, etc) plus a float 0–20 confidence. **~:confidence[C],[20]** means absolute trust.  
   - `canon`: Float 0.0–10.0 for loader priority (10=highest).  
   - `scope`: **hard/soft/advisory** enforcement (cannot/etc).  
 - **Fragment**: `#<sha256>` is the hex SHA-256 of the content (described below). Including the hash makes the URI **content-addressed**.
@@ -207,7 +207,7 @@ Using this ensures any change in content (even a single char) yields a different
 | SP    | 0.25–0.49     | Peripheral guess  |
 | P     | 0.00–0.24     | Placeholder/fallback |
 
-Files with `confidence=C~20` are in the *Canon hierarchy* (agentic). Others are progressively uncertain. If an input falls below some threshold (e.g. `SP~8`), we resort to quoting/decomposition.
+Files with `confidence=C~20` are in the *Canon hierarchy* (agentic). Others are progressively uncertain. If an input falls below some threshold (e.g. `~:confidence[SP],[8]`), we resort to quoting/decomposition.
 
 **Promotion Workflow:** New or migrated modules start at low canon. A review/promotion step raises:
 - **Candidate** (draft, canon ~2–5, scope=advisory)
@@ -223,8 +223,8 @@ Below is a *combined table* of enforcement:
 
 | Register Band | Canon Band | Scope   | Loader Action on Conflict           |
 |-------------:|----------:|:-------|:------------------------------------|
-| `C~20` (Highest) | 9.5–10.0 | hard    | **Error:** Cannot override or omit. |
-| `C~19`         | 8.0–9.49  | soft    | Warning: prefer override if needed. |
+| `~:confidence[C],[20]` (Highest) | 9.5–10.0 | hard    | **Error:** Cannot override or omit. |
+| `~:confidence[C],[19]`         | 8.0–9.49  | soft    | Warning: prefer override if needed. |
 | `S/CS`           | 5.0–7.99  | advisory| Optional: trim if no space.        |
 | `SP/P`           | 0.0–4.99  | advisory| Archive-only; not auto-loaded.     |
 

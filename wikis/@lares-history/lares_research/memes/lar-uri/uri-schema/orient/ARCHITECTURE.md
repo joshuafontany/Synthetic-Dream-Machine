@@ -139,7 +139,7 @@ Signal parameters, non-hierarchical.
 | Parameter | Type | Repeatable? | Record Values | HUD Values |
 |---|---|---|---|---|
 | `stances` | 5-char amplitude string | No | `^.?.-.-.-` (positional: philosopher, poet, satirist, humorist, private) | `🏛️+🌊?🗡️-🎭-🔮-` |
-| `confidence` | `R:N` | No | `P~7`, `SP~9`, `S~13`, `CS~16`, `C~18` | Same |
+| `confidence` | `R:N` | No | `~:confidence[P],[7]`, `~:confidence[SP],[9]`, `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]` | Same |
 | `p` | `N` | No | `0.5` | Same |
 
 **Stance amplitude encoding:**

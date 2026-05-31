@@ -37,7 +37,7 @@ Boot the first two OODA-HA modules: talk-story and signal.
 
 ## Notes
 
-- RFC 3986 ordering bug (q/f reversed) caught and fixed in URI_SCHEMA_v2.md; confidence bumped CS~17 → CS~18
+- RFC 3986 ordering bug (q/f reversed) caught and fixed in URI_SCHEMA_v2.md; confidence bumped ~:confidence[CS],[17] → ~:confidence[CS],[18]
 - `stances=` format settled as 5-position dot-separated amplitude (`^.?.-.-.-`)
 - Field renames complete: `stance=` → `stances=`, legacy register query field → `confidence=` — all operational files
 - `lares/talk_story/README.md` and `lares/signal/micro-trace.md` are the existing implementations; modules/ are the phase-structured canonical forms. Archival or pointer decision deferred to S1.

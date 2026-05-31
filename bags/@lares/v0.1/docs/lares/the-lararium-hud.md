@@ -50,7 +50,7 @@ Not a wiki that has a HUD. Not a HUD built on a wiki. The two collapse into the 
 
 The home intranet RPG session — a Referee running encounters, managing NPCs, routing events across player-facing wikis — is the **first instantiation** of this system type. Not the definition of it. The system is generic. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
-> **#Stranger** » 03:17 — Lock the identity claim at C~20. It survives any specific upstream rev. The use-case list (RPG, household notes, research, creative writing) expands; the identity claim does not change shape with it. Mark canon-eligible when the meme reaches stable.
+> **#Stranger** » 03:17 — Lock the identity claim at `~:confidence[C],[20]`. It survives any specific upstream rev. The use-case list (RPG, household notes, research, creative writing) expands; the identity claim does not change shape with it. Mark canon-eligible when the meme reaches stable.
 
 <<~/ahu>>
 
@@ -139,7 +139,7 @@ Five scales, bounded sense of Universe, the fractal closes at the horizon.
 
 Each scale is structurally self-similar. The RE pattern (trigger surface → reaction dispatch → event emission) repeats at every scale that can be apprehended. This is the **fractal RE** — not a metaphor; the same ReactionGraph interface re-instantiated at different surfaces.
 
-> **#Council** » 11:02 — Mark the confidence gradient: Scale-0/1 C~19 (attested by existing code); Scale-2 C~15 (committed, unshipped); Scale-3 C~11 (speculative); Scale-4 C~8 (horizon, not an implementation target). The *shape* is self-similar at every scale; the *evidence* is not. Scale-4 names the bound, not a thing to build.
+> **#Council** » 11:02 — Mark the confidence gradient: Scale-0/1 ~:confidence[C],[19] (attested by existing code); Scale-2 ~:confidence[C],[15] (committed, unshipped); Scale-3 ~:confidence[C],[11] (speculative); Scale-4 ~:confidence[C],[8] (horizon, not an implementation target). The *shape* is self-similar at every scale; the *evidence* is not. Scale-4 names the bound, not a thing to build.
 
 <<~/ahu>>
 
@@ -274,30 +274,30 @@ This is not the RPG use-case. This is the **reference implementation** of the ge
 
 ## Locked Vocabulary
 
-The following names are locked at this meme's confidence level (C~14). Names in **bold** are new at this meme; others are confirmed from existing invariants.
+The following names are locked at this meme's confidence level (~:confidence[C],[14]). Names in **bold** are new at this meme; others are confirmed from existing invariants.
 
 | Name | UEFN source | Status | Definition |
 |---|---|---|---|
-| **Lararium Node** | Island / fort\_playspace | C~18 | One `lararium-node` process. The **experience** (authored environment) — NOT the runtime playspace. A node hosts sessions/rounds over its lifetime. |
-| **Session Wiki** | fort\_playspace / session (Simulation) | C~17 | Coordinator `lar_playspace`. Broadest recipe in the session; owns the session event-bus bag; pinned-hot. Coordinates N other `lar_playspace` wikis. `GetSession()` → `getSessionWiki()`; `creative_device.GetPlayspace()` → `getWiki()` for the relevant `lar_playspace`. |
-| **lar\_agent** | agent (Simulation) | C~16 | Universal participant supertype. Any addressable live entity on the wiki canvas (`player` class has  Keyhive principal identity) and event pins. Covers `player`-class (session-connected) and non-player Wiki Entities. `listenable(lar_agent)` ~ `listenable(agent)`. |
-| **Operator / Guest** | player (Simulation) | C~18 | Human session-connected participants. **Operator**: primary human principal, threshold relation (AGENTS.md). **Guest Users**: invited, limited cap. Neither has system authority. |
-| **lares-daemon** | player (Simulation) + system caps | C~16 | Session-connected AI coordinator(s). Verse class = `player` (live session link). Lares class = system principal: admin doc authority, Session RE operator, Keyhive system keypair, tier promotion authority. May be plural. The household spirits of the Lararium. |
-| **Wiki Entity / NPC** | `agent` (non-player) | C~16 | Generic active wiki entity — interactive characters, scripted actors, game NPCs. On the canvas but NOT session-connected. **No Keyhive identity** — reactive wiki entities only; they carry a `lar_character` tiddler and respond to RE reactions but hold no principal. Population open-ended. |
-| **Kumu Device** | creative\_device | C~16 | A meme with a trigger surface and typed KumuListenable/KumuSubscribable pins. `kumu-device.ts` sketch is throwaway; this name survives. |
-| **lar\_behavior** | npc\_behavior (AI module) | C~14 | Abstract base class for Wiki Entity lifecycle. Analogue of Verse `npc_behavior` (inherit to define entity logic; `OnBegin<override>` = entity spawns; `OnEnd` = entity despawns). In Lares: a kumu device implementing the RE reaction contract for a non-player agent. `lares-daemon` does NOT use `lar_behavior` (daemon = player-class, not NPC-class). |
-| **Bag scope** | agent\_group | C~14 | `agent_group` = "set of agents that share a common ownership." In Lares: a bag IS the ownership scope. Agents whose `lar_character` tiddlers live in the same Automerge bag form a natural group. Multi-daemon coordination = multiple `lares-daemon` agents in the Session Wiki bag. |
-| **lar\_character** | fort\_character | C~14 | Tiddler representing an Agent's embodied presence on the infinite canvas. Position fields, state, event pins. Driven by Operator, Guest, lares-daemon, or Wiki Entity. |
-| **Event-Bus Bag** | channel\_device | C~16 | Shared Automerge bag in the session recipe. The cross-wiki broadcast relay. |
-| **KumuListenable\<T\>** | listenable(t) | C~19 | OUTPUT pin. Locked in verse-event-lattice. |
-| **KumuSubscribable\<T\>** | subscribable(t) | C~19 | Persistent callback. Returns KumuCancelable. Locked in verse-event-lattice. |
-| **KumuAwaitable\<T\>** | awaitable(t) | C~19 | Single-shot suspension. Locked in verse-event-lattice. |
-| **KumuSignalable\<T\>** | signalable(t) | C~19 | INPUT pin. RE-internal. Locked in verse-event-lattice. |
-| **KumuEvent\<T\>** | event(t) | C~19 | Concrete event. Implements signalable + awaitable. Locked in verse-event-lattice. |
-| **KumuCancelable** | cancelable | C~19 | Subscription handle. `.cancel()` MUST be called on slot demotion. Locked in verse-event-lattice. |
-| **Hot / Cold Tier** | enableable | C~18 | Hot = enabled; Cold = disabled. Promotion/demotion = Enable()/Disable(). |
-| **Evicted Slot** | invalidatable | C~17 | Worker terminated. RE MUST NOT route events to evicted slots. |
-| **Fractal RE** | (island-scale pattern) | C~15 | ReactionGraph re-instantiated at Scale-0 through Scale-4. Same interface; different surfaces. Scale-4 = Commons horizon (boundary, not implementation target). |
+| **Lararium Node** | Island / fort\_playspace | ~:confidence[C],[18] | One `lararium-node` process. The **experience** (authored environment) — NOT the runtime playspace. A node hosts sessions/rounds over its lifetime. |
+| **Session Wiki** | fort\_playspace / session (Simulation) | ~:confidence[C],[17] | Coordinator `lar_playspace`. Broadest recipe in the session; owns the session event-bus bag; pinned-hot. Coordinates N other `lar_playspace` wikis. `GetSession()` → `getSessionWiki()`; `creative_device.GetPlayspace()` → `getWiki()` for the relevant `lar_playspace`. |
+| **lar\_agent** | agent (Simulation) | ~:confidence[C],[16] | Universal participant supertype. Any addressable live entity on the wiki canvas (`player` class has  Keyhive principal identity) and event pins. Covers `player`-class (session-connected) and non-player Wiki Entities. `listenable(lar_agent)` ~ `listenable(agent)`. |
+| **Operator / Guest** | player (Simulation) | ~:confidence[C],[18] | Human session-connected participants. **Operator**: primary human principal, threshold relation (AGENTS.md). **Guest Users**: invited, limited cap. Neither has system authority. |
+| **lares-daemon** | player (Simulation) + system caps | ~:confidence[C],[16] | Session-connected AI coordinator(s). Verse class = `player` (live session link). Lares class = system principal: admin doc authority, Session RE operator, Keyhive system keypair, tier promotion authority. May be plural. The household spirits of the Lararium. |
+| **Wiki Entity / NPC** | `agent` (non-player) | ~:confidence[C],[16] | Generic active wiki entity — interactive characters, scripted actors, game NPCs. On the canvas but NOT session-connected. **No Keyhive identity** — reactive wiki entities only; they carry a `lar_character` tiddler and respond to RE reactions but hold no principal. Population open-ended. |
+| **Kumu Device** | creative\_device | ~:confidence[C],[16] | A meme with a trigger surface and typed KumuListenable/KumuSubscribable pins. `kumu-device.ts` sketch is throwaway; this name survives. |
+| **lar\_behavior** | npc\_behavior (AI module) | ~:confidence[C],[14] | Abstract base class for Wiki Entity lifecycle. Analogue of Verse `npc_behavior` (inherit to define entity logic; `OnBegin<override>` = entity spawns; `OnEnd` = entity despawns). In Lares: a kumu device implementing the RE reaction contract for a non-player agent. `lares-daemon` does NOT use `lar_behavior` (daemon = player-class, not NPC-class). |
+| **Bag scope** | agent\_group | ~:confidence[C],[14] | `agent_group` = "set of agents that share a common ownership." In Lares: a bag IS the ownership scope. Agents whose `lar_character` tiddlers live in the same Automerge bag form a natural group. Multi-daemon coordination = multiple `lares-daemon` agents in the Session Wiki bag. |
+| **lar\_character** | fort\_character | ~:confidence[C],[14] | Tiddler representing an Agent's embodied presence on the infinite canvas. Position fields, state, event pins. Driven by Operator, Guest, lares-daemon, or Wiki Entity. |
+| **Event-Bus Bag** | channel\_device | ~:confidence[C],[16] | Shared Automerge bag in the session recipe. The cross-wiki broadcast relay. |
+| **KumuListenable\<T\>** | listenable(t) | ~:confidence[C],[19] | OUTPUT pin. Locked in verse-event-lattice. |
+| **KumuSubscribable\<T\>** | subscribable(t) | ~:confidence[C],[19] | Persistent callback. Returns KumuCancelable. Locked in verse-event-lattice. |
+| **KumuAwaitable\<T\>** | awaitable(t) | ~:confidence[C],[19] | Single-shot suspension. Locked in verse-event-lattice. |
+| **KumuSignalable\<T\>** | signalable(t) | ~:confidence[C],[19] | INPUT pin. RE-internal. Locked in verse-event-lattice. |
+| **KumuEvent\<T\>** | event(t) | ~:confidence[C],[19] | Concrete event. Implements signalable + awaitable. Locked in verse-event-lattice. |
+| **KumuCancelable** | cancelable | ~:confidence[C],[19] | Subscription handle. `.cancel()` MUST be called on slot demotion. Locked in verse-event-lattice. |
+| **Hot / Cold Tier** | enableable | ~:confidence[C],[18] | Hot = enabled; Cold = disabled. Promotion/demotion = Enable()/Disable(). |
+| **Evicted Slot** | invalidatable | ~:confidence[C],[17] | Worker terminated. RE MUST NOT route events to evicted slots. |
+| **Fractal RE** | (island-scale pattern) | ~:confidence[C],[15] | ReactionGraph re-instantiated at Scale-0 through Scale-4. Same interface; different surfaces. Scale-4 = Commons horizon (boundary, not implementation target). |
 
 > **#Lorekeeper** » 02:05 — vocabulary-lock table updated 2026-05-11: added Agent, Operator, NPPC, Kumu-Device Avatar, fort\_playspace, Session Wiki; fixed wrong `agent → Operator` row. Updated 2026-05-14: fixed Lararium Node = experience (NOT playspace); Session Wiki = lar\_playspace (runtime session scope); added lar\_behavior (npc\_behavior analogue) and Bag scope (agent\_group analogue). UEFN canonical: *"There is typically one fort\_playspace for an entire experience, though this may change in the future as the platform evolves"* — multi-playspace path now officially flagged by Epic.
 
@@ -380,7 +380,7 @@ Quine ruling: *if it can happen in the wiki, it must happen in the wiki.* A play
 Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (UEFN does not have a cross-island playspace API). Current state: Scale-3 named as Nexus, no playspace concept. Tension: if Lares introduces a "federated playspace" (a shared experience scope across two nodes), what is the Verse-grounded name? Resolution: probably NOT `lar_playspace` — suggest `lar_realm` or `lar_federation` if the concept ships. Hold open.
 
 **T-3: multi-daemon lar_group — when does the concept crystallize?**
-`agent_group` is the Verse type for "set of agents with shared ownership." In Lares: multiple `lares-daemon` coordinators in one session = a natural group. Bag scope captures this implicitly. Named type `lar_group` is C~14 and not yet needed for P.3. Resolution: lock when multi-daemon (≥2 concurrent daemons per session) is an active design target. Do NOT force it into P.3 scope.
+`agent_group` is the Verse type for "set of agents with shared ownership." In Lares: multiple `lares-daemon` coordinators in one session = a natural group. Bag scope captures this implicitly. Named type `lar_group` is ~:confidence[C],[14] and not yet needed for P.3. Resolution: lock when multi-daemon (≥2 concurrent daemons per session) is an active design target. Do NOT force it into P.3 scope.
 
 **T-4: lar_behavior lifecycle contract — OnBegin/OnEnd shape?**
 `npc_behavior.OnBegin<override>()<suspends>:void` is the UEFN contract. Verse: this runs when the NPC spawns. The Lares analogue for a Wiki Entity: when does `lar_behavior.OnBegin` fire? On tiddler creation? On hot-tier promotion? These are not the same event. Resolution: lock when the first Wiki Entity ships. Current hold: the concept is named; the event boundary is open.

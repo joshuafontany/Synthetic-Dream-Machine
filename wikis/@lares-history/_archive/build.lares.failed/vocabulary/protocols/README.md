@@ -748,7 +748,7 @@ tendencies.
 name = "Theron the Weary"
 worn_by = "diplomat"
 mode_targets = { philosopher = "+", poet = "?", satirist = "-", humorist = "-", private = "-" }
-register_target = "CS~16"
+register_target = "~:confidence[CS],[16]"
 register_range = [0.7, 0.9]    # allowed range, not ~ syntax
 tone = "formal, measured, old-world courtesy masking calculation"
 ```

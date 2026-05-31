@@ -107,7 +107,7 @@ Operator hasn't decided yet.
 ## Ahu Map of Source File (for extraction)
 
 ```
-Line 1:    ∞ → (locus opener, confidence CS~19)
+Line 1:    ∞ → (locus opener, confidence ~:confidence[CS],[19])
 Line 14:   ahu #design-intent         (0.9)  → OPS §1-2
 Line 73:   ahu #scheme-registration   (0.95) → already in RFC doc
 Line 89:   ahu #uri-anatomy           (0.85) → RFC (3.1-3.4), OPS §7 (3.3.1 Kowloon)
@@ -162,13 +162,13 @@ Key decisions locked this session:
 
 ```
 lares/grammar/
-├── LOCI.md                    ← Root registry (CS~16)
-├── observe/LOCI.md            ← ✶ Observe grammar (CS~17) — full content
-├── orient/LOCI.md             ← ◎ Orient grammar (CS~17) — full content
-├── decide/LOCI.md             ← ◇ Decide grammar (CS~17) — full content
-├── act/LOCI.md                ← ■ Act grammar (CS~17) — full content
-├── assess/LOCI.md             ← ○ Assess grammar (CS~17) — full content
-├── transclusion/LOCI.md       ← Transclusion model (CS~16) — full content
+├── LOCI.md                    ← Root registry (~:confidence[CS],[16])
+├── observe/LOCI.md            ← ✶ Observe grammar (~:confidence[CS],[17]) — full content
+├── orient/LOCI.md             ← ◎ Orient grammar (~:confidence[CS],[17]) — full content
+├── decide/LOCI.md             ← ◇ Decide grammar (~:confidence[CS],[17]) — full content
+├── act/LOCI.md                ← ■ Act grammar (~:confidence[CS],[17]) — full content
+├── assess/LOCI.md             ← ○ Assess grammar (~:confidence[CS],[17]) — full content
+├── transclusion/LOCI.md       ← Transclusion model (~:confidence[CS],[16]) — full content
 ├── uri/LOCI.md                ← URI syntax — stub w/ kahea
 ├── hakaba/LOCI.md             ← HA.KA.BA — stub w/ kahea
 ├── exchange/LOCI.md           ← Exchange protocol — stub w/ kahea

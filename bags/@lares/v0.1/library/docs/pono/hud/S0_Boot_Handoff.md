@@ -35,7 +35,7 @@ lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXX&confidence=R:N&p=N#O0.O0.O0
 | Field | Old form | V2 canonical | Notes |
 |---|---|---|---|
 | `stances` | legacy migration bridge | `lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#flag-surface` | consumed: fixed 5-position array; `^`=elevated, `-`=suppressed, `?`=uncertain, `.`=baseline; positional order remains philosopher, poet, satirist, humorist, private. |
-| `confidence` | legacy register query field carrying `S~13` | `confidence=S~13` | Field renamed from `register` to `confidence`. Same values. |
+| `confidence` | legacy register query field carrying `~:confidence[S],[13]` | `confidence=S~13` | Field renamed from `register` to `confidence`. Same values. |
 | Fragment | `#@T.3.2.7` (scope prefix + trailing-zero omission) | `#O0.O0.O3.D2.A7` (all 5 positions, phase+counter) | Always 5 positions. Phase sigils: O, Ø, D, A, Å. No scope prefix. |
 | Path | `/core/observe/context` (module-path) | `/ha.ka.ba/@lares/sub/path/` (3-slot HA.KA.BA + optional sub-path) | EVERY `lar:` URI uses HA.KA.BA. `lar:///ha.ka.ba/@lares/` is (0,0,0). Module routing goes in the sub-path. |
 | Closing | (inconsistent) | `→ ?` (exchange), `→ ∞` (system file) | File-level opening URI also carries `→ ∞`. Section URIs are waypoints — no closing sigil. |

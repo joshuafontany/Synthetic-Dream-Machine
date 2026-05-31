@@ -246,7 +246,7 @@ The Intent Header and Micro-trace HUD are the operator-facing surface of the cry
 
 **Non-drift rule (two-part):**
 
-- **Governing header fields:** if the live Intent Header reads `🏛️ ~:confidence[S],[13] ◎ @r` then the crystal event must record `register:"S~13"`, `stance: "philosopher"`, `phase: "orient"`, `scope: "r"`. A discrepancy between the header's declared state and the ledger-recorded governing state is a runtime integrity failure.
+- **Governing header fields:** if the live Intent Header reads `🏛️ ~:confidence[S],[13] ◎ @r` then the crystal event must record `register:"~:confidence[S],[13]"`, `stance: "philosopher"`, `phase: "orient"`, `scope: "r"`. A discrepancy between the header's declared state and the ledger-recorded governing state is a runtime integrity failure.
 - **Annotation fields:** post-generative HUD annotations (`micro_trace_path`, `closure_register`, stance-shift markers, Tagspace echoes) are distinct from governing header state. They appear in the HUD *after* the span completes and are recorded as annotation fields in `STATE.jsonl` (`micro_trace_path`, `closure_register`). A discrepancy between HUD-visible annotations and ledger-recorded annotation fields is also a runtime integrity failure, but it does not mean the governing header was wrong — the two categories must not be conflated.
 
 ---
@@ -1233,7 +1233,7 @@ The two forms share identical syntax. The projection table below lists the *only
 | `scheme` | `lar:` | |
 | `alias:tier(` | `telarus:operator(` | First userinfo sub-field + tier + parenthetical modifier of tier |
 | `@host:port` | `@lares-abc123:42` | |
-| `confidence=` | `S~13` | |
+| `confidence=` | `~:confidence[S],[13]` | |
 | `p=` | `0.5` | |
 | chronometer counters | `3.2.7` | Dot-separated — universal after scope prefix |
 
@@ -1290,7 +1290,7 @@ The `lar_uri` + `register` fields on every module descriptor become the compiler
 Module descriptor frontmatter:
 ```toml
 lar_uri   = "lar:///kernel/invariant/anchors"
-confidence="C~20"
+confidence="~:confidence[C],[20]"
 module_id   = "lares-kernel"
 ```
 
@@ -1309,8 +1309,8 @@ register < 0.50  ← trimmable under budget pressure
 
 | Tier | Content Layer | Cache Strategy | Register Range | Lares Modules | Volatility |
 |---|---|---|---|---|---|
-| **1 — Global Core** | System parameter; first `cache_control` breakpoint | Cached across sessions; rarely invalidated | `C~20` – `C~19` | Kernel, identity, hard gates, tool schemas, epistemology | Near-static |
-| **2 — Session Core** | Conversation prefix; rolling `cache_control` breakpoint on history | Cached within session; invalidated on permission or profile change | `C~19` – `S~13` | Permissions, user profile, session canon, Workers, operating mode | Session-stable |
+| **1 — Global Core** | System parameter; first `cache_control` breakpoint | Cached across sessions; rarely invalidated | `~:confidence[C],[20]` – `~:confidence[C],[19]` | Kernel, identity, hard gates, tool schemas, epistemology | Near-static |
+| **2 — Session Core** | Conversation prefix; rolling `cache_control` breakpoint on history | Cached within session; invalidated on permission or profile change | `~:confidence[C],[19]` – `~:confidence[S],[13]` | Permissions, user profile, session canon, Workers, operating mode | Session-stable |
 | **3 — Dynamic** | Latest user message + tool results; `cache_control: ephemeral` on last user turn | Ephemeral (5-min TTL with hit-reset); re-fetched on every exchange | `< 0.50` trimmable | Current task context, tool results, active exchange state | Per-exchange |
 
 #### Context Engineering Primitives ↔ Machine Lifecycle Tiers
@@ -1329,33 +1329,33 @@ Anthropic's speculative prompt-caching pattern — send `max_tokens=1` with full
 
 For `confidence=C~20` modules (kernel, hard gates, identity), the chronometer's vector clock doubles as a **version control number**. Because these modules change rarely and each change constitutes a canonical event:
 
-- The `seq_num` on a `C~20` module's descriptor increments only when the module content changes — effectively a monotonic version counter.
+- The `seq_num` on a `~:confidence[C],[20]` module's descriptor increments only when the module content changes — effectively a monotonic version counter.
 - The chronometer position (`#@T.W.w.t`) on a canon module's `r_update` event records *when* that version was loaded, not just *what* it contains.
 - A `contract_update` event with `confidence=C~20` carries version semantics: it represents a canonical schema migration, not a routine state change. Build-time validation can compare `seq_num` across deployments to detect version drift.
 
-This applies transitively to Tier 2 (`C~19` locked axioms) — the same `seq_num` increment + chronometer timestamp pattern serves as session-scoped version tracking for permissions and profile modules.
+This applies transitively to Tier 2 (`~:confidence[C],[19]` locked axioms) — the same `seq_num` increment + chronometer timestamp pattern serves as session-scoped version tracking for permissions and profile modules.
 
 ```
 # Tier 1 (Global Core) — version-controlled by seq_num
 lar_uri   = "lar:///kernel/invariant/anchors"
-confidence="C~20"
+confidence="~:confidence[C],[20]"
 module_id   = "lares-kernel"
 seq_num     = 4            # ← version 4 of the kernel module
 
 # Tier 2 (Session Core) — version-controlled within session
 lar_uri   = "lar:///session/permissions/gates"
-confidence="C~19"
+confidence="~:confidence[C],[19]"
 module_id   = "lares-permissions"
 seq_num     = 2            # ← second revision this session
 
 # Tier 3 (Dynamic) — no version semantics; seq_num is event counter only
 lar_uri   = "lar:///task/current/recon"
-confidence="S~11"
+confidence="~:confidence[S],[11]"
 module_id   = "lares-task-recon"
 seq_num     = 47           # ← 47th event, not 47th version
 ```
 
-For Tier 3 dynamic modules, `seq_num` retains its original meaning: a monotonic event counter, not a version number. The distinction arises from the register — parsers and loaders can branch on `register >= C~19` to treat `seq_num` as version.
+For Tier 3 dynamic modules, `seq_num` retains its original meaning: a monotonic event counter, not a version number. The distinction arises from the register — parsers and loaders can branch on `register >= ~:confidence[C],[19]` to treat `seq_num` as version.
 
 > **Source:** Anthropic claude-cookbooks (deepwiki.com/anthropics/claude-cookbooks): 9.1 Prompt Caching (cache_control breakpoints, ephemeral TTL, speculative warming), 7.4 Context Engineering for Agents (compaction, tool-result clearing, memory tool), 6.3 Context Management and Compaction (background compaction, session memory patterns). Mapped against this document's Invariant-Core Loading Sequence and Ephemeral Machine Patterns.
 

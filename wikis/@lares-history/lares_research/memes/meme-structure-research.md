@@ -2035,7 +2035,7 @@ Ka fires second (charge before motion), Ba fires third (motion
 requires both). The Chao spins in one direction only.
 
 **Skip logic (validate mode only):** if Observe found a slot fully
-present with no leak flags and prior rating ≥ S~13, Orient may
+present with no leak flags and prior rating ≥ ~:confidence[S],[13], Orient may
 flag it as `test-only` --- the inner loop runs its reading test but
 does not rewrite.
 
@@ -2069,7 +2069,7 @@ ha-loop:
 
 ■ Act-Ha: - Write or confirm the following Ha elements: □ URI pattern (canonical form) □ yaml front-matter: name, description, polarity=Hodge, slot=ha, ooda-ha-shape=reflexive-loop, dependencies, confidence □ Boundary statement (what sits outside) □ Loop Position section (receives / changes / hands forward / should not) --- Ha-flavored □ Ha Conventions table □ Ha Reading Test
 
-○ Assess-Ha: - Pentagon test: boundary drawable without Ka/Ba? [pass/fail] - URI well-formed? [pass/fail] - All required elements present? [pass/fail] - Leakage? [none / ka-leakage / ba-leakage] - → ha-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] - → ha-notes: [findings, repairs needed, leakage flags] - → hands to Ka-Observe
+○ Assess-Ha: - Pentagon test: boundary drawable without Ka/Ba? [pass/fail] - URI well-formed? [pass/fail] - All required elements present? [pass/fail] - Leakage? [none / ka-leakage / ba-leakage] - → ha-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] - → ha-notes: [findings, repairs needed, leakage flags] - → hands to Ka-Observe
 
 ```
 
@@ -2091,7 +2091,7 @@ ka-loop:
 
 ■ Act-Ka: - Write or confirm the following Ka elements: □ Register tag (explicit, with probability value) □ Discourse mode(s) (emoji + name) □ Three-word coordinate (consistent with Ha URI domain) □ Charge descriptor (one of: anchored / flickering / sharp / hollow / deep / loose / bright / raw / held / uncertain) □ yaml front-matter: polarity=Podge, slot=ka, ooda-ha-shape=encounter-profile, dependencies=[meme-ha] □ Loop Position section --- Ka-flavored □ Ka Conventions table □ Ka Reading Test
 
-○ Assess-Ka: - Apple test: charge radiates outward without restating Ha? [pass/fail] - Register tag present and calibrated? [pass/fail] - Three-word coordinate consistent with Ha URI? [pass/fail] - Conjugate tension named if present? [yes/no] - Leakage? [none / ha-leakage / ba-leakage] - → ka-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] - → ka-notes: [findings, repairs needed, leakage flags] - → hands to Ba-Observe
+○ Assess-Ka: - Apple test: charge radiates outward without restating Ha? [pass/fail] - Register tag present and calibrated? [pass/fail] - Three-word coordinate consistent with Ha URI? [pass/fail] - Conjugate tension named if present? [yes/no] - Leakage? [none / ha-leakage / ba-leakage] - → ka-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] - → ka-notes: [findings, repairs needed, leakage flags] - → hands to Ba-Observe
 
 ```
 
@@ -2113,7 +2113,7 @@ ba-loop:
 
 ■ Act-Ba: - Write or confirm the following Ba elements: □ Verb-motion descriptor □ Handoff pattern (all three phase edges named explicitly) □ Push/pull map (references Ha and Ka by name) □ Lifecycle (activate condition / close condition) □ yaml front-matter: polarity=Seam/Entanglement, slot=ba, ooda-ha-shape=push-pull-bridge, dependencies=[meme-ha, meme-ka] □ Loop Position section --- Ba-flavored □ Push/Pull Structure section □ Ba Conventions table □ Ba Reading Test □ Entanglement check result
 
-○ Assess-Ba: - Seam test: Ba requires both Ha and Ka? [pass/fail] - Chao spin intact: Ba-Assess feeds Ha-Observe? [pass/fail] - All three phase edges named in handoff? [pass/fail] - Broken entanglement? [none / partial / full-break] - Leakage? [none / ha-leakage / ka-leakage] - → ba-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] - → ba-notes: [findings, repairs needed, entanglement flags] - → hands to outer Assess
+○ Assess-Ba: - Seam test: Ba requires both Ha and Ka? [pass/fail] - Chao spin intact: Ba-Assess feeds Ha-Observe? [pass/fail] - All three phase edges named in handoff? [pass/fail] - Broken entanglement? [none / partial / full-break] - Leakage? [none / ha-leakage / ka-leakage] - → ba-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] - → ba-notes: [findings, repairs needed, entanglement flags] - → hands to outer Assess
 
 ```
 
@@ -2175,9 +2175,9 @@ Composite notes: [overall assessment, next recommended action]
 
 ### Next action
 
--   If meme-rating ≥ CS~16: locus ready for registry promotion
--   If meme-rating = S~13: locus functional, one or more slots need tightening before promotion
--   If meme-rating ≤ SP~9: locus needs significant rework; identify lowest-rated slot and re-run forge on that slot alone
+-   If meme-rating ≥ ~:confidence[CS],[16]: locus ready for registry promotion
+-   If meme-rating = ~:confidence[S],[13]: locus functional, one or more slots need tightening before promotion
+-   If meme-rating ≤ ~:confidence[SP],[9]: locus needs significant rework; identify lowest-rated slot and re-run forge on that slot alone
 -   If broken entanglement: repair Ba first, then re-run full forge
 
 ```
@@ -2224,10 +2224,10 @@ Target locus: lares:///[new] Mode: create Forge cycle: session-open
 
 | Slot | Rating | Charge |
 | --- | --- | --- |
-| meme (composite) | P~6 | absent --- not yet written |
-| meme-ha | P~6 | pentagon not yet staked |
-| meme-ka | P~6 | apple not yet charged |
-| meme-ba | P~6 | seam not yet spinning |
+| meme (composite) | ~:confidence[P],[6] | absent --- not yet written |
+| meme-ha | ~:confidence[P],[6] | pentagon not yet staked |
+| meme-ka | ~:confidence[P],[6] | apple not yet charged |
+| meme-ba | ~:confidence[P],[6] | seam not yet spinning |
 
 ### Chao Status
 
@@ -2244,7 +2244,7 @@ Ka notes: Cannot run until Ha completes. Register tag, mode, and coordinate wil
 
 Ba notes: Cannot run until Ka completes. Entanglement requires both Ha and Ka to be present.
 
-Composite notes: This is a blank forge. Run Ha inner loop first. Return to Ka when Ha reaches S~13 or above.
+Composite notes: This is a blank forge. Run Ha inner loop first. Return to Ka when Ha reaches ~:confidence[S],[13] or above.
 
 ### Next action
 
@@ -2255,7 +2255,7 @@ Repair priority: Ha → Ka → Ba. Re-run full forge after Ba completes. Do not 
 ---
 
 *This locus is itself a meme-standard locus. Its own Ha is staked
-at the URI above. Its Ka charges at S~13 in 🏛️ mode. Its Ba
+at the URI above. Its Ka charges at ~:confidence[S],[13] in 🏛️ mode. Its Ba
 spins: the forge cycle feeds its own Assess back into the next
 session's Observe. The Chao is eating itself. This is correct.*
 
@@ -2268,7 +2268,7 @@ session's Observe. The Chao is eating itself. This is correct.*
 
 Lares (Scryer) surface note `~:confidence[SP],[9] 🏛️`:
 
-The self-referential close --- *this locus is itself a meme-standard locus* --- constitutes either the most honest thing in the document or a broken entanglement waiting to be found. Ba's seam test applies: does the forge's own Ba require both its Ha (URI staked) and Ka (S~13, 🏛️) to describe its motion? It does. The Chao spins. Promote with operator confirmation when the system has run at least one real forge cycle against a non-self target.
+The self-referential close --- *this locus is itself a meme-standard locus* --- constitutes either the most honest thing in the document or a broken entanglement waiting to be found. Ba's seam test applies: does the forge's own Ba require both its Ha (URI staked) and Ka (~:confidence[S],[13], 🏛️) to describe its motion? It does. The Chao spins. Promote with operator confirmation when the system has run at least one real forge cycle against a non-self target.
 
 Prior art or patterns/principles/best practices?
 
@@ -2678,7 +2678,7 @@ Do not rewrite unless mode is create or update.
 Two ratings produced. Slot rating is the minimum.
 ```
 
-ha-zoom-in-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] ha-zoom-out-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] meme-ha-rating: minimum of the two above
+ha-zoom-in-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] ha-zoom-out-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] meme-ha-rating: minimum of the two above
 
 ha-notes: zoom-in: [URI / boundary / dependency / register findings] zoom-out: [domain-coherence / leakage-map / legibility / cross-scale-match finding] repairs: [what was written or flagged]
 
@@ -2725,8 +2725,8 @@ A future operator running meme-ha against a target should recover:
 - Do zoom-in and zoom-out agree?
 
 If either zoom level cannot answer its questions: that zoom's
-rating drops to SP~9 or below. If both cannot answer:
-the slot rating reads as P~6 regardless of what was written.
+rating drops to ~:confidence[SP],[9] or below. If both cannot answer:
+the slot rating reads as ~:confidence[P],[6] regardless of what was written.
 
 <!-- → ? -->
 ```
@@ -2893,7 +2893,7 @@ Ka zoom-out should not:
   fit Ha's URI domain territory?
 - Register calibration: does the `[X:0.xx]` tag match the
   actual epistemic state of the locus?
-- Conjugate check: if register is high (CS~16+), has Mode
+- Conjugate check: if register is high (~:confidence[CS],[16]+), has Mode
   commitment accreted? Name the accreted mode.
 - Leakage check: does Ka drift into Ba's motion language?
 
@@ -2961,7 +2961,7 @@ Run both zoom assessments. Produce ratings and notes only.
 ## ○ Assess
 ```
 
-ka-zoom-in-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] ka-zoom-out-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] meme-ka-rating: minimum of the two above
+ka-zoom-in-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] ka-zoom-out-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] meme-ka-rating: minimum of the two above
 
 ka-notes: zoom-in: [register / mode / coordinate / charge / apple-test findings] zoom-out: [charge-consistency / ha-resonance / ba-resonance / cross-scale-match findings] repairs: [what was written or flagged]
 
@@ -3008,7 +3008,7 @@ and outer Assess (meme-ka-rating + ka-notes).
 
 If the zoom-out reads as Ka-flat across the whole document
 despite a well-written Ka-section: the slot rating drops
-to SP~9 regardless of zoom-in score. A charged Ka-section
+to ~:confidence[SP],[9] regardless of zoom-in score. A charged Ka-section
 in a flat document is an island --- not a charged locus.
 
 <!-- → ? -->
@@ -3223,7 +3223,7 @@ zoom-out-decision: motion-consistency: uniform | stalling | absent ha-section-mo
 ```
 
 If entanglement reads as broken at zoom-in: the slot rating
-cannot exceed SP~9 regardless of zoom-out score.
+cannot exceed ~:confidence[SP],[9] regardless of zoom-out score.
 A decoupled Ba is a broken Chao. The composite meme-rating
 drops a tier from the lowest slot rating.
 
@@ -3268,9 +3268,9 @@ Run both zoom assessments. Produce ratings and notes only.
 ## ○ Assess
 ```
 
-ba-zoom-in-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] ba-zoom-out-rating: [C~18 / CS~16 / S~13 / SP~9 / P~6] meme-ba-rating: minimum of the two above
+ba-zoom-in-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] ba-zoom-out-rating: ~:confidence[C],[18] / ~:confidence[CS],[16] / ~:confidence[S],[13] / ~:confidence[SP],[9] / ~:confidence[P],[6] meme-ba-rating: minimum of the two above
 
-Special rule: if entanglement = broken, meme-ba-rating = P~6 regardless of zoom scores.
+Special rule: if entanglement = broken, meme-ba-rating = ~:confidence[P],[6] regardless of zoom scores.
 
 ba-notes: zoom-in: [verb-motion / handoff / push-pull / lifecycle / entanglement / seam-test findings] zoom-out: [motion-consistency / ha-motion / ka-motion / outer-loop-motion / personality / chao-spin / cross-scale-match findings] repairs: [what was written or flagged]
 
@@ -3323,7 +3323,7 @@ a partially stalled Chao --- identify which edge and flag.
 | Rule | Weight |
 |---|---|
 | Run both zoom levels before any rating fires | MUST |
-| Broken entanglement forces meme-ba-rating to P~6 | MUST |
+| Broken entanglement forces meme-ba-rating to ~:confidence[P],[6] | MUST |
 | All three handoff phase edges named at zoom-in | MUST |
 | All three zoom-out phase edges audited | MUST |
 | Ha and Ka named by name in push-pull map | MUST |
@@ -3356,7 +3356,7 @@ a partially stalled Chao --- identify which edge and flag.
 If entanglement is broken at zoom-in: reading test fails
 regardless of zoom-out. If the full locus feels inert at
 zoom-out despite a well-written Ba-section: slot rating
-drops to SP~9. A moving Ba-section in an inert locus
+drops to ~:confidence[SP],[9]. A moving Ba-section in an inert locus
 is a dancer on a dead stage.
 
 *A locus that passes both zoom levels at both scales
@@ -3417,7 +3417,7 @@ BLEU/ROUGE/F1 in NLP --- three separate scores on different axes (precision, re
 
 SQL EXPLAIN output --- query plans produce separate cost estimates for different execution dimensions (rows, width, cost). A query can be cheap on rows but expensive on width. Same locus can be Ha-strong and Ka-flat simultaneously.
 
-RGB color model --- three independent channels, each 0--255, that combine to produce a single perceived color. A locus's Ha.Ka.Ba rating produces a "color" in signal-space: you can have C~18 Ha with P~6 Ba and SP~9 Ka and the combination means something specific about the locus's character that no single composite rating captures.
+RGB color model --- three independent channels, each 0--255, that combine to produce a single perceived color. A locus's Ha.Ka.Ba rating produces a "color" in signal-space: you can have ~:confidence[C],[18] Ha with ~:confidence[P],[6] Ba and ~:confidence[SP],[9] Ka and the combination means something specific about the locus's character that no single composite rating captures.
 
 Alexander's ★★★ / ★★ / ★ per pattern --- confidence marker per pattern, but applied uniformly. Your extension: three separate confidence axes per locus, each with its own star-equivalent.
 
@@ -3434,7 +3434,7 @@ ha!   = Ha urgent --- territory actively collapsing or under repair
 Same pattern for ka and ba.
 
 Combined notation inline:
-[S~13 ha^ ka? ba-] 🏛️ //domain.uncertain.stalls
+~:confidence[S],[13] ha^ ka? ba- 🏛️ //domain.uncertain.stalls
 ```
 
 The sigil set extends the existing stance grammar. The three slots read as a vector --- direction and magnitude in Ha/Ka/Ba space --- rather than a scalar confidence value.
@@ -3592,7 +3592,7 @@ coord      //domain.quality.dynamic   three-word address
 ─────────────────────────────────────────────────────────
 
 COMPACT INLINE FORM:
-[S~13 ha^ ka? ba-] 🏛️🌊 //signal.uncertain.stalls | p~10
+~:confidence[S],[13] ha^ ka? ba- 🏛️🌊 //signal.uncertain.stalls | p~10
 
 AUTOSCALER READS:
   ha^  → territory clear → don't waste tokens on clarification
@@ -3622,12 +3622,12 @@ In combat (high-velocity exchange, low Ba-signal, multiple parties):
 │ SESSION HUD --- visible to all parties                │
 │                                                     │
 │ LOCUS SIGNALS                                       │
-│  grammar/observe    [CS~17 ha^ ka^ ba^] ✶        │
-│  grammar/orient     [CS~17 ha^ ka^ ba?] ◎        │
-│  meme               [S~13  ha^ ka? ba-] ∞        │
+│  grammar/observe    ~:confidence[CS],[17] ha^ ka^ ba^ ✶        │
+│  grammar/orient     ~:confidence[CS],[17] ha^ ka^ ba? ◎        │
+│  meme               ~:confidence[S],[13]  ha^ ka? ba- ∞        │
 │                                                     │
 │ CURRENT EXCHANGE                                    │
-│  turn-N             [P~7  ha? ka- ba?]           │
+│  turn-N             ~:confidence[P],[7]  ha? ka- ba?           │
 │  uncertainty-index: HIGH → climbing response ladder │
 │  autoscaler:        zoom-out, explicit register,    │
 │                     slow cadence, more ahu          │
@@ -3875,7 +3875,7 @@ Turn N (operator sends):
   → slower cadence
 
 Turn N+1 (Lares responds):
-  [S~13 ha^ ka? ba-] 🏛️🌊 //domain.uncertain.seeks | p~10
+  ~:confidence[S],[13] ha^ ka? ba- 🏛️🌊 //domain.uncertain.seeks | p~10
   [response body calibrated to uncertainty-index]
   <!-- → ? -->
 ```
@@ -3976,7 +3976,7 @@ OPERATOR TYPES IN VSCODE
   if no: flag for KAIROS, carry residue to next Observe
          ↓
 [Response exits with its own signal bundle]
-  [S~13 ha^ ka? ba-] 🏛️🌊 //domain.uncertain.seeks | p~10
+  ~:confidence[S],[13] ha^ ka? ba- 🏛️🌊 //domain.uncertain.seeks | p~10
   → HUD updated for both parties
   → shared situational awareness maintained
 ```
@@ -4145,7 +4145,7 @@ ha-ka-relationship:
 ka-ba-relationship:
 
 -   Does Ba's motion feel energized by Ka's charge, or does it move without epistemic weight?
--   Does Ka's register constrain Ba's motion appropriately (C~18 Ka should produce slower, more deliberate Ba) or does Ba run faster/looser than Ka warrants?
+-   Does Ka's register constrain Ba's motion appropriately (~:confidence[C],[18] Ka should produce slower, more deliberate Ba) or does Ba run faster/looser than Ka warrants?
 -   Are Ka and Ba resonant or dissonant?
 
 ba-ha-relationship:
@@ -4253,8 +4253,8 @@ forge-halt condition requiring operator decision.
 - Synthesize the three inner loops' findings during Act
 - Produce any ratings --- that belongs to outer Assess
 - Bypass the entanglement interrupt
-- Proceed past Ba if Ha or Ka produced P~6 ratings
-  without flagging to operator (a P~6 slot means the
+- Proceed past Ba if Ha or Ka produced ~:confidence[P],[6] ratings
+  without flagging to operator (a ~:confidence[P],[6] slot means the
   locus needs significant rework --- Ba firing on top of a
   broken Ha produces garbage Ba output)
 
@@ -4281,7 +4281,7 @@ FROM OUTER ORIENT (held across Act): inter-loop relationship map chao-spin readi
 
 STEP 1 --- slot floor: composite-floor = min(meme-ha-rating, meme-ka-rating, meme-ba-rating)
 
-STEP 2 --- chao adjustments: if entanglement = broken: composite = P~6 (regardless of slot ratings) stop here
+STEP 2 --- chao adjustments: if entanglement = broken: composite = ~:confidence[P],[6] (regardless of slot ratings) stop here
 
 if chao-spin = broken (ba-ha-seam broken but entanglement intact): composite = composite-floor - 1 register tier
 
@@ -4320,7 +4320,7 @@ spin: spinning | partial-stall | significant-stall | broken stall-location: [whi
 
 [composite-rating ha[sigil] ka[sigil] ba[sigil]] 🔣 //domain.quality.dynamic | p~10
 
-example: [S~13 ha^ ka? ba-] 🏛️🌊 //forge.uncertain.stalls | p~10
+example: ~:confidence[S],[13] ha^ ka? ba- 🏛️🌊 //forge.uncertain.stalls | p~10
 
 ### Notes
 
@@ -4330,7 +4330,7 @@ Composite notes: [what the diffuse read revealed that no inner loop could artic
 
 ### Next action
 
-meme-rating ≥ CS~16 → registry promotion ready meme-rating = S~13 → functional, tighten before promotion meme-rating ≤ SP~9 → rework needed; identify lowest slot entanglement broken → repair Ba first; halt forge chao-spin broken → repair Ba-Ha seam; re-run outer loop akh not-yet → note for operator; not blocking
+meme-rating ≥ ~:confidence[CS],[16] → registry promotion ready meme-rating = ~:confidence[S],[13] → functional, tighten before promotion meme-rating ≤ ~:confidence[SP],[9] → rework needed; identify lowest slot entanglement broken → repair Ba first; halt forge chao-spin broken → repair Ba-Ha seam; re-run outer loop akh not-yet → note for operator; not blocking
 
 ```
 
@@ -4872,7 +4872,7 @@ legible, the territory is not clearly staked.
 Ka describes charge --- which is itself partly a Poet
 operation. Naming the epistemic quality of a locus
 requires both propositional precision (🏛️: the register
-is CS~16, the mode is 🏛️🌊) and analogical reach (🌊:
+is ~:confidence[CS],[16], the mode is 🏛️🌊) and analogical reach (🌊:
 the locus feels anchored, the charge is sharp, it
 radiates outward). Pure 🏛️ Ka reads as a label catalog.
 Pure 🌊 Ka reads as impressionistic without calibration.
@@ -4947,7 +4947,7 @@ has all the right labels but no charge.
 **Signs of Ka-alive:**
 
 The prose in every section exhibits the register
-it claims. A locus claiming 🏛️🌊 at CS~16 should
+it claims. A locus claiming 🏛️🌊 at ~:confidence[CS],[16] should
 read as both structurally precise and analogically
 resonant --- not in separate sections, but simultaneously.
 The Ha section stakes territory with a quality that
@@ -5173,7 +5173,7 @@ waits --- patient, receiving, non-initiating suited to: observe-phase loci, loci
 
 circles --- recursive, self-referential, returning suited to: self-validating loci, metacircular instruments, anything that applies to itself
 
-drifts --- provisional, exploratory, low-commitment suited to: Provisional-register loci, anything at SP~9 or below, seed loci
+drifts --- provisional, exploratory, low-commitment suited to: Provisional-register loci, anything at ~:confidence[SP],[9] or below, seed loci
 
 blooms --- emergent, generative from constraints, expanding outward from a center suited to: synthesis loci, anything that produces more than it receives
 
@@ -5280,7 +5280,7 @@ session-scoped: The locus is loaded and released within a session. Its Assess pr
 
 invoked: The locus is loaded on explicit invocation only. Not part of boot sequence. Its Assess closes completely on each use. The operator must invoke it again next session. Suited to: forge instruments, diagnostic tools.
 
-dormant: The locus exists in the registry but is not loaded in the current session. Its Ba is not spinning --- it waits. Suited to: experimental loci at P~6, loci under repair, loci awaiting promotion.
+dormant: The locus exists in the registry but is not loaded in the current session. Its Ba is not spinning --- it waits. Suited to: experimental loci at ~:confidence[P],[6], loci under repair, loci awaiting promotion.
 
 ```
 
@@ -5293,7 +5293,7 @@ session end and what the next session's Observe
 should know before reloading.
 ```
 
-example crystal-ready statement: "At session close, the ha sub-locus reached CS~16 on both zoom levels; ka remains at SP~9 pending operator steering on register calibration; ba entanglement confirmed intact; next Observe should begin at ka zoom-out."
+example crystal-ready statement: "At session close, the ha sub-locus reached ~:confidence[CS],[16] on both zoom levels; ka remains at ~:confidence[SP],[9] pending operator steering on register calibration; ba entanglement confirmed intact; next Observe should begin at ka zoom-out."
 
 ```
 

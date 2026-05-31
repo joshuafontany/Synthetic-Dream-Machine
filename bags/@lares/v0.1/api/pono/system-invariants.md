@@ -29,7 +29,7 @@ retain      = true
 # System Invariants
 
 FFZ pono constitutional law for the Lararium causal-island system.
-Fontany-Fuller-Zelenka local-first model. Confidence: C~20.
+Fontany-Fuller-Zelenka local-first model. Confidence: `~:confidence[C],[20]`.
 
 These encode design-time laws and named exceptions — no runtime validators.
 Witnessing constants: named so any agent, test, or operator can reference by ID.
@@ -114,7 +114,7 @@ desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presen
 
 ## AUTHORITY Laws — carrier canon, promotion ceremony, trust ladder
 
-Sources: lares/lararium-research/PRINCIPLES.md (C~20)
+Sources: lares/lararium-research/PRINCIPLES.md (~:confidence[C],[20])
          pono/tagspace-trust · pono/canon-promotion-boundary
 
 ```toml #AUTH_1_CARRIER_CANON_FIRST

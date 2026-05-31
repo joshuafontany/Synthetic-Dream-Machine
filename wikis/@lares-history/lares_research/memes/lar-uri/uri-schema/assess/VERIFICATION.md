@@ -23,7 +23,7 @@ A `lar:` URI is **well-formed** when ALL of the following hold:
 - [ ] 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 - [ ] 5. Path slots contain no whitespace, path separators (`/`), or quotes (anti-collision rule)
 - [ ] 6. Query parameters limited to: `stances` (once), `confidence` (once), `p` (once) — no others
-- [ ] 7. `confidence` value matches pattern `[A-Z]{1,2}:[0-9]+\.[0-9]+` — e.g., `S~13`, `CS~16`, `C~18`
+- [ ] 7. `confidence` value matches pattern `[A-Z]{1,2}:[0-9]+\.[0-9]+` — e.g., `~:confidence[S],[13]`, `~:confidence[CS],[16]`, `~:confidence[C],[18]`
 - [ ] 8. `p` value is a decimal in range `[0.0, 1.0]`
 - [ ] 9. Fragment (if present) is five dot-separated positions, each: phase sigil (`O`/`Ø`/`D`/`A`/`Å`) followed by integer counter ≥ 0
 - [ ] 10. All five chronometer positions present — no trailing-zero omission in canonical form
@@ -144,7 +144,7 @@ A clean scan returns zero matches on all three patterns.
 
 This module (Signal) is `~:confidence[CS],[17]`. Promotion criteria:
 - S0 scan verified clean ✅
-- `lares/modules/uri-schema/URI-SCHEMA.md` promoted to C~19 □
+- `lares/modules/uri-schema/URI-SCHEMA.md` promoted to ~:confidence[C],[19] □
 - micro-trace.md exchange URIs migrated to full record form ○
 
 <!-- → ? -->
