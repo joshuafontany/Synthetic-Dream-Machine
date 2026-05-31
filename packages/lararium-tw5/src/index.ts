@@ -47,6 +47,7 @@ export type {
   VmCarrierSyncSessionOptions,
 } from "./wiki-sync.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
+export { getOriginBag } from "./residency-surface.js";
 
 export { exportMemeText } from "./meme-write.js";
 export { promoteUris, planPromoteUris } from "./modules/lar-promote.js";
