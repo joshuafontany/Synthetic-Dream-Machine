@@ -1,12 +1,12 @@
 /**
  * `lares draft <uri> [--to <bag>] [--yes]`
  *
- * Pull-into-draft ceremony — the missing third leg between `wiki sync` and
- * `promote`. Copies a tiddler currently resolving from a lower bag into a
- * writable draft bag (default: the active room's draft / composite default
- * writable). The source bag is left intact; the new copy overlays via
- * composite priority. Operator can then edit the draft and `lares promote`
- * it later to publish into canon.
+ * Pull-into-draft ceremony — copies a tiddler currently resolving from a
+ * lower bag into a writable draft bag (default: the active room's draft /
+ * composite default writable). The source bag stays intact; the new copy
+ * overlays via composite priority. Operator can then edit the draft and
+ * land it into another bag through a residency ACTION verb (Sprint 5 of
+ * the Residency Model Epic ships `lares act` for that purpose).
  *
  * Flags:
  *   --to <bag>     target draft bag (default: active room's draft)

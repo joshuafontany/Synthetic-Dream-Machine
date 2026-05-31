@@ -36,6 +36,7 @@ export * from "./reaction-graph.js";
 export * from "./wiki-recipe.js";
 export * from "./verb-tiddler.js";
 export * from "./residency-actions.js";
+export * from "./effect-record.js";
 export * from "./bag-residency.js";
 export * from "./kumu-device.js";
 export * from "./browser-authority.js";

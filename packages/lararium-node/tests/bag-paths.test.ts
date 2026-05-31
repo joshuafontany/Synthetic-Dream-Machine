@@ -19,7 +19,7 @@ describe("namedBagPath", () => {
   test("rejects @lararium titles for the @lares mirror", () => {
     const toRelPath = namedBagPath("@lares");
 
-    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/lar-promote")).toBeNull();
+    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/nalu-engine")).toBeNull();
   });
 });
 
@@ -35,6 +35,6 @@ describe("wikiBagPath", () => {
     const toRelPath = wikiBagPath();
 
     expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols")).toBe("lares/v0.1/docs/lares/the-lares-protocols.md");
-    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/lar-promote")).toBe("lararium/v0.1/tw5/modules/lar-promote.md");
+    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/nalu-engine")).toBe("lararium/v0.1/tw5/modules/nalu-engine.md");
   });
 });

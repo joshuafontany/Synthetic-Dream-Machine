@@ -83,7 +83,7 @@ For stable and unstable paths: each slot holds exactly one lowercase word — Ha
 
 TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local — shadow tiddlers, palette state, draft markers, plugin internals. The lararium sync filter mirrors this distinction: only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk.
 
-Lares system tiddlers — cascade configs, render templates, global mounts, plugin envelopes — MUST carry `lar:///` titles (typically under `lar:///config/...`, `lar:///mounts/...`, `lar:///plugins/...`, or `lar:///ha.ka.ba/@lararium/templates/...`). This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to disk and federate to peers; it lets the canon-promote ceremony trust the bag state.
+Lares system tiddlers — cascade configs, render templates, global mounts, plugin envelopes — MUST carry `lar:///` titles (typically under `lar:///config/...`, `lar:///mounts/...`, `lar:///plugins/...`, or `lar:///ha.ka.ba/@lararium/templates/...`). This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to disk and federate to peers; it lets residency-action handlers (Sprint 5 of the Residency Model Epic) trust the bag state.
 
 Tag *values* may still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values are not titles and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
 

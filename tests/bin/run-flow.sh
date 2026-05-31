@@ -9,18 +9,14 @@ FLOW="${1:-all}"
 export LAR_ROOT="${LAR_ROOT:-$REPO_ROOT/tests}"
 
 case "$FLOW" in
-  all|tw5|tw5-sync)
+  all|tw5)
     pnpm test:tw5-fixture
-    bash tests/lararium-tw5/sync/sync-decompose-promote.sh both
+    # tw5-sync, tw5-decompose, tw5-promote flow scripts retired 2026-05-31 under
+    # the residency-model cleanup. Residency-action flow scripts (Sprint 5+)
+    # will land under tests/lararium-tw5/residency/.
     ;;
   tw5-fixture)
     pnpm test:tw5-fixture
-    ;;
-  tw5-decompose)
-    bash tests/lararium-tw5/sync/sync-decompose-promote.sh decompose
-    ;;
-  tw5-promote)
-    bash tests/lararium-tw5/sync/sync-decompose-promote.sh promote
     ;;
   clean)
     bash tests/bin/cleanup-lar-root.sh
@@ -30,10 +26,8 @@ case "$FLOW" in
 Unknown flow: $FLOW
 
 Usage:
-  tests/bin/run-flow.sh all
+  tests/bin/run-flow.sh all          # alias for tw5-fixture
   tests/bin/run-flow.sh tw5-fixture
-  tests/bin/run-flow.sh tw5-decompose
-  tests/bin/run-flow.sh tw5-promote
   tests/bin/run-flow.sh clean
 USAGE
     exit 2

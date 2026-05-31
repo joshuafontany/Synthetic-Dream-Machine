@@ -389,7 +389,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
         console.log(`    ${s.title}  (${idleStr})`);
       }
       console.log("");
-      console.log("  Promote with: lares promote <uri> --to <canonical-bag>");
+      console.log("  Decide each through a residency ACTION verb (Sprint 5 — lares act ADD/COPY/MOVE/DROP).");
     }
     console.log("");
     return 0;
@@ -440,7 +440,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: s
   "remove-bag": { handler: cmdWikiRemoveBag, summary: "Remove a bag from the wiki's recipe (soft remove; F-arc adds StoryList drain)." },
   "epoch":         { handler: cmdWikiEpoch,         summary: "DXOS-style snapshot-restart on one of the wiki's bags. Bounds history." },
   "rotate-recipe": { handler: cmdWikiRotateRecipe,  summary: "Nix-generations: mint fresh canonical; retain old as previous-canon underlay." },
-  "prune-stale":   { handler: cmdWikiPruneStale,    summary: "Surface stale draft tiddlers (no recent activity) for promote-or-prune." },
+  "prune-stale":   { handler: cmdWikiPruneStale,    summary: "Surface stale draft tiddlers (no recent activity) for residency-action-or-prune." },
   "list":       { handler: cmdWikiList,      summary: "Enumerate wikis registered in the catalog. Needs `lares serve`." },
   "which":      { handler: cmdWikiWhich,     summary: "Recipe-presence query — list bags holding a tiddler. Needs `lares serve`." },
 };

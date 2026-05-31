@@ -147,14 +147,14 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 
 - `@lares/cli` remains its own package.
 - `@keyhive/keyhive` / concap remains the capability substrate; do not pivot to UCAN.
-- `lares promote` means explicit operator ceremony, not automatic sync.
 - Canonical system tiddlers use `lar:///` titles; `$:/` only for TW5 core contracts TW5 owns.
 - `<<~/sigil >>` closing tag convention.
 - Web3 only — no web2 models, code, or flows in the Lares stack.
 - TW5 VM primacy — if logic can live in the VM, keep it there.
 - Bag = Automerge doc = sync boundary.
 - No manifest byte transfer — TW5 core bytes travel via `@lararium` CRDT.
-- Canon requires operator gesture through an ACTION verb (`ADD COPY MOVE CLEAR DROP LOAD`). Every residency change writes an indelible effect record tagged with the matching archival verb (`accession`, `deaccession`, `transfer`, `withdrawal`, …). No silent unlink. The `lares promote` CLI verb stays as a deprecation shim for one milestone; the canonical surface goes through `lares act`. See [bags/@lares/v0.1/api/lararium/residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md) and [packages/EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md).
+- Canon requires operator gesture through an ACTION verb (`ADD COPY MOVE CLEAR DROP LOAD`). Every residency change writes an indelible effect record tagged with the matching archival verb (`accession`, `deaccession`, `transfer`, `withdrawal`, …). No silent unlink. The CLI surface lives at `lares act` (Sprint 5 of the Residency Model Epic ships the handler family). The prior `lares promote` ceremony retired 2026-05-31 — see [bags/@lares/v0.1/api/lararium/residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md) and [packages/EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md).
+- Conflict resolution surfaces to operator-agent or cabal Talk Story; the CRDT layer detects + records, never decides. Automated arbitration reads as anti-pono. (See agent memory slug `project-talk-story-conflict-surfacing`, and the `#conflict-resolution` ahu in [bags/@lares/v0.1/api/lararium/residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md).)
 - Git diff remains the visible signature.
 
 <<~/ahu >>

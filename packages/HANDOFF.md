@@ -104,6 +104,38 @@ onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
 
+## What Changed This Turn (2026-05-31 turn 32)
+
+### Residency Model — Sprints 2/3/3-deferred/4 + `lares promote` retirement cleanup ✅ workspace 369→? (+33 from Sprint 4) · ceremony fully retired
+
+**Sprints landed in one continuous arc (turns 31→32):**
+
+- **Sprint 2** — ACTION verb data model. `residency-actions.ts` (~210 lines) carries `ACTION_VERBS` const tuple (`ADD`/`COPY`/`MOVE`/`CLEAR`/`DROP`/`LOAD`), `ResidencyAction` discriminated union (6 variants), `parseResidencyAction` validator, `newChangeId` factory, change-id preservation across encode→JSON→parse roundtrip (Anti-pattern #1 defense). 50 tests. URI grammar resolved: ACTION verbs compose on top of `verb-tiddler.ts` (M.2 pipeline) — no new URI prefix invented. Commit `8265b216`.
+- **Sprint 3** — Multi-residency at recipe layer. `CompositeStore.resolveAll(title)` + `resolveTopmost(title)` + `WikiRecipe.bagEpochs` + `WikiRecipe.lenses` + `lensFor()` hook. Nalu engine annotates inbound writes with `origin-bag` field (Anti-pattern #4 defense). `getOriginBag(wiki, title)` helper in `@lararium/tw5`. 21 tests.
+- **Sprint 3 deferred-enactment** — `headsEqual()` set-semantic helper, `LarTiddlerStore.getHeads?()` + `AutomergeDocStore.getHeads()`, `CompositeStore.auditEpochs(recipe)`, `EpochPinState` discriminated union. Lens registry reworked from per-bag (`SlotUri`) to per-version (`schemaVersion` string) per Cambria research finding. `LarTiddlerMeta.schemaVersion?` added. Three research spirits dispatched (Automerge heads, Cambria lenses, production CRDT pinning) — all refined the design. 19 tests.
+- **Sprint 4** — Effect record surface (archival audit). `effect-record.ts` (~280 lines) carries `ARCHIVAL_VERBS` const (`accession`, `deaccession`, `transfer`, `withdrawal`, `loan`, `holdings`, `reappraisal`, `disposition`), `EffectRecord` interface, `mapActionToEffects()` per-verb mapping, `writeEffectRecord()` + `withEffectRecord()` helpers. Whiteout-shadow semantics in `resolveTopmost`/`getLive` (Anti-pattern #3 defense): tombstone in higher bag stops cascade rather than falling through. New `listBagsTombstoning(title)` surfaces hides. 33 tests.
+- **Talk-Story conflict-surfacing principle** captured as canon. Operator named the architectural truth: CRDT layer detects + records conflicts; resolution surfaces to operator-agent or cabal Talk Story. Automated arbitration reads as anti-pono. `residency-model.md` gains `#conflict-resolution` ahu; deferred items (modal-view reader + commit queue) reframed from "arbitration mechanisms" to "Talk-Story-surfacing layers." `project-talk-story-conflict-surfacing` memory saved.
+
+**`lares promote` retirement (Aftermath cleanup loop):**
+
+Operator directive: retire the ceremony completely; no un-pono language; no deprecation shim. Executed in five waves:
+
+- **Wave A (code):** Deleted `lares-cli/src/commands/promote.ts`, `lararium-node/src/promote-handler.ts`, `lararium-tw5/src/modules/lar-promote.ts`, `lararium-tw5/tiddlers/src/lar-promote.js`. Updated `bin/lares.ts` (removed cmdPromote + verb row), `island-behaviors.ts` (removed `_registry.register("promote", ...)`), `lararium-node/src/index.ts` + `lararium-tw5/src/index.ts` (removed exports), `open-node-vessel.ts` (removed orphaned `jobRegistry.register("promote", ...)` + scrubbed 4 ceremony comments), `commands/draft.ts` + `commands/wiki.ts` (scrubbed user-facing strings).
+- **Wave B (tests):** Deleted `tests/lararium-tw5/promote/` directory and `tests/lararium-tw5/sync/sync-decompose-promote.sh`. Updated `tests/lararium-tw5/vitest.config.ts` include path → `residency/**`. Rewrote `tests/bin/run-flow.sh` (removed `tw5-decompose` + `tw5-promote` subcommands). Updated `packages/lararium-node/tests/bag-paths.test.ts` (replaced lar-promote test-data URI with `nalu-engine`). Updated root `package.json` `test:tw5-flow` to a placeholder script.
+- **Wave C (memes):** Deleted `bags/@lararium/v0.1/node/promote-handler.md` + `bags/@lararium/v0.1/tw5/modules/lar-promote.md`. Scrubbed ceremony references in `bags/@lares/v0.1/api/pono/lar-uri.md`, `bags/@lares/v0.1/docs/lares/the-lares-protocols.md`, `bags/@lares/v0.1/docs/lares/the-lararium-hud.md`, `bags/@lararium/v0.1/node/handler-args.md`, `bags/@lararium/v0.1/tw5/tw5-fields-flat.md`.
+- **Wave D (planning):** Updated `packages/AGENTS.md` (removed promote-handler from @lararium/node listing; removed `promote` from @lares/cli verb list; rewrote Canon promotion paragraph). Updated `packages/ROADMAP.md` (test-flow description). Rewrote `packages/TALK-STORY-NEXT.md` rules (removed deprecation-shim line, added conflict-surfacing principle). Rewrote `packages/EPIC-RESIDENCY-MODEL.md` Sprint 5 (removed S5.3 deprecation-shim story; added S5.6 `promotion-ceremony.ts` retirement as named follow-up). Updated `tests/AGENTS.md` + `tests/README.md`.
+- **Wave E (verify):** Workspace typecheck clean across 6 packages.
+
+**Named pono-debt surfaced (not closed in this turn):**
+
+- `promotion-ceremony.ts` + `PROMOTION_RECEIPT_TAG` constant in `@lararium/mesh` — deep architectural surface that `causal-island.ts` references; retirement deferred to Sprint 5 (story S5.6).
+- `ABILITY_LADDER` in `causal-island.ts` includes `"promote"` as a capability level — Keyhive-shared concept; renaming requires Keyhive coordination. Mark as long-tail debt; ability semantic still holds even though the verb name shifts.
+- Worker tier-signal types in `the-lararium-hud.md` (line 454) still use `"promote"|"demote"` strings — describes a P.3 surface that hasn't fully landed; will harmonize with the ACTION verb register when Worker #1 ships.
+
+**Metrics:** mesh 213/213 (+33 from Sprint 4), tw5 73/73, node 64/64, browser 19/20 (1 pre-existing TW5-boot shim gap). Workspace 369/370. Typecheck 6/6 packages clean. Branch carries ~50 modified files across the four-sprint arc + cleanup; commit boundary remains operator's call.
+
+---
+
 ## What Changed This Turn (2026-05-30 turn 31)
 
 ### Residency Model Epic — pono memetic intent + sprint plan landed ✅ docs+memes only, no code

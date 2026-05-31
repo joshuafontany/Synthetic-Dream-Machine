@@ -26,6 +26,8 @@ import {
   corpusLarUri,
   wikiLarUri,
 } from "./lar-uris.js";
+import { headsEqual } from "./wiki-recipe.js";
+import type { WikiRecipe, EpochPinState } from "./wiki-recipe.js";
 
 // Re-export so callers get bag IDs and URI helpers from a single import.
 export { corpusLarUri as corpusBagId, wikiLarUri as wikiBagId };
@@ -216,14 +218,21 @@ export class CompositeStore implements LarTiddlerStore {
    *  Standard composite.get() returns the first non-null result including
    *  tombstones — useful when a caller needs to know about deletions.
    *  getLive() is the variant ceremonies use when "is the tiddler actually
-   *  there right now" matters (promote source-detection, draft-from). */
+   *  there right now" matters (promote source-detection, draft-from).
+   *
+   *  Residency Model S4.3 — **whiteout-shadow semantics**: a tombstone in a
+   *  higher-priority bag stops the cascade rather than falling through. A
+   *  tombstone-in-HIGH means "intentionally hidden at this priority"; lower
+   *  bags do not surface. Anti-pattern #3 defense (whiteout resurrection —
+   *  OverlayFS / Docker layer pattern adapted to multi-bag CRDT). */
   async getLive(title: string): Promise<LarTiddlerRecord | null> {
     for (let i = this.layers.length - 1; i >= 0; i--) {
-      const rec = await this.layers[i]!.store.get(title);
-      if (rec && !rec.meta?.deleted) {
-        if (this.residency) void Promise.resolve(this.residency.touch(this.layers[i]!.bagId));
-        return rec;
-      }
+      const layer = this.layers[i]!;
+      const rec = await layer.store.get(title);
+      if (rec === null) continue;          // truly absent — fall through
+      if (rec.meta?.deleted) return null;  // tombstone — intentionally hidden, stop
+      if (this.residency) void Promise.resolve(this.residency.touch(layer.bagId));
+      return rec;
     }
     return null;
   }
@@ -270,18 +279,89 @@ export class CompositeStore implements LarTiddlerStore {
    * layer; consumers surface origin-bag in the read path (IslandAdaptor +
    * getOriginBag).
    *
+   * Residency Model S4.3 — **whiteout-shadow semantics**: tombstone in a
+   * higher-priority bag stops the cascade and returns null. Anti-pattern #3
+   * defense (whiteout resurrection). For multi-residency presence-reporting
+   * that ignores the shadow, call `resolveAll(title)` instead.
+   *
    * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
    */
   async resolveTopmost(title: string): Promise<{ bagId: string; record: LarTiddlerRecord } | null> {
     for (let i = this.layers.length - 1; i >= 0; i--) {
       const layer = this.layers[i]!;
       const rec = await layer.store.get(title);
-      if (rec && !rec.meta?.deleted) {
-        if (this.residency) void Promise.resolve(this.residency.touch(layer.bagId));
-        return { bagId: layer.bagId, record: rec };
-      }
+      if (rec === null) continue;          // truly absent — fall through
+      if (rec.meta?.deleted) return null;  // tombstone — intentionally hidden, stop
+      if (this.residency) void Promise.resolve(this.residency.touch(layer.bagId));
+      return { bagId: layer.bagId, record: rec };
     }
     return null;
+  }
+
+  /**
+   * Residency Model S4.3 — list bag IDs that explicitly tombstone `title`,
+   * ordered highest-priority first. Sibling of resolveAll (presence report);
+   * surfaces the whiteout-shadow hides for operator-visible coordinate
+   * inspection. A title may BOTH appear in resolveAll (live in lower bags)
+   * AND in listBagsTombstoning (hidden by upper-bag whiteout) when an
+   * operator deaccessions in a high-priority bag while lower bags retain
+   * their copies — that combination signals "topmost reader sees nothing
+   * but the union catalog still holds the title."
+   */
+  async listBagsTombstoning(title: string): Promise<string[]> {
+    const out: string[] = [];
+    for (let i = this.layers.length - 1; i >= 0; i--) {
+      const layer = this.layers[i]!;
+      const rec = await layer.store.get(title);
+      if (rec && rec.meta?.deleted) out.push(layer.bagId);
+    }
+    return out;
+  }
+
+  /**
+   * Residency Model — audit per-bag pin state against the recipe's `bagEpochs`.
+   *
+   * Returns a Map keyed by bagId carrying one EpochPinState per pinned bag.
+   * Default policy: **audit-only**. Operators read the audit; downstream
+   * consumers MAY refuse, time-travel via `view(pinnedHeads)`, or warn. Loud
+   * silent refusal at the read path stays out of scope per the deferred-
+   * enactment design (modal-view reader belongs to a follow-up sprint with
+   * explicit "detached" operator UX, modelled on Loro's checkout cycle).
+   *
+   * Heads comparison uses `headsEqual` (set-semantics) — Automerge Heads form
+   * a mathematical set; order across save/load or implementations stays
+   * non-contractual. See wiki-recipe.headsEqual for sources.
+   *
+   * Bags whose store omits `getHeads()` (e.g. MemoryTiddlerStore) report
+   * `{ state: "opaque" }` rather than `matched` or `drifted` — the audit
+   * surfaces uninspectable layers honestly instead of asserting matches it
+   * cannot verify.
+   *
+   * Anti-pattern #5 defense (recipe-drift poisoning).
+   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   */
+  async auditEpochs(recipe: WikiRecipe): Promise<Map<string, EpochPinState>> {
+    const out = new Map<string, EpochPinState>();
+    const pins = recipe.bagEpochs;
+    if (!pins || pins.size === 0) return out;
+    for (const [bagId, pinned] of pins) {
+      const layer = this.layers.find((l) => l.bagId === bagId);
+      if (!layer) { out.set(bagId, { state: "absent" }); continue; }
+      const getHeads = layer.store.getHeads;
+      if (typeof getHeads !== "function") {
+        out.set(bagId, { state: "opaque" });
+        continue;
+      }
+      const current = await getHeads.call(layer.store);
+      if (current === null) {
+        out.set(bagId, { state: "opaque" });
+        continue;
+      }
+      out.set(bagId, headsEqual(pinned, current)
+        ? { state: "matched", heads: current }
+        : { state: "drifted", pinned, current });
+    }
+    return out;
   }
 
   subscribe(fn: (change: LarTiddlerChange) => void): () => void {

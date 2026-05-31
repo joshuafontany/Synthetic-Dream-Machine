@@ -248,7 +248,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     });
   }
 
-  // Writable for the canon-promotion ceremony (`lares promote --to <lararium>`).
+  // Writable so future residency-action handlers (Sprint 5 of the Residency Model Epic) can land tiddlers here.
   // defaultWritable:false keeps unbagged TW5 saves routing to the wiki — only
   // explicit record.bag === BAG_IDS.lararium writes land here.
   composite.addLayer({
@@ -275,7 +275,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     } else {
       laresHandle = seedLaresDoc(repo);
     }
-    // Writable for the canon-promotion ceremony (wiki/draft → @lares canon).
+    // Writable so residency-action handlers (Sprint 5) can land tiddlers from wiki/draft into @lares canon.
     // defaultWritable:false so unbagged TW5 saves continue routing to the wiki.
     composite.addLayer({
       bagId:           BAG_IDS.lares,
@@ -396,15 +396,12 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   let vmManager: VesselIslandPool;
-  // promote and sync-wiki are VM-native — route as placeWikiVerb to the primary wiki island.
+  // sync-wiki is VM-native — route as placeWikiVerb to the primary wiki island.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
-  jobRegistry.register("promote", async (args, ctx) =>
-    vmManager.placeWikiVerb(activeWikiId, {
-      verb:        "promote",
-      args:        args as Record<string, unknown>,
-      requestedBy: ctx.invocation.requestedBy,
-    }),
-  );
+  //
+  // The "promote" registration retired 2026-05-31 under the residency-model cleanup.
+  // Residency ACTION verb handlers (ADD / COPY / MOVE / CLEAR / DROP / LOAD) land in
+  // Sprint 5 of the Residency Model Epic — see packages/EPIC-RESIDENCY-MODEL.md.
   jobRegistry.register("sync-wiki", async (args, ctx) =>
     vmManager.placeWikiVerb(activeWikiId, {
       verb:        "sync-wiki",
@@ -477,7 +474,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   }));
   // E.9b — read-only stale-tiddler queue. Scans the draft bag for
   // tiddlers whose last activity exceeds a threshold (default 7 days);
-  // surfaces them for operator's promote-or-prune decisions.
+  // surfaces them for operator's residency-action-or-prune decisions.
   jobRegistry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
   jobRegistry.register("draft",       makeDraftReactor({ composite }));
   // C.2 — start the background sweeper. Idle eviction + LRU trim run

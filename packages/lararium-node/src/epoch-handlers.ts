@@ -168,8 +168,9 @@ export interface RotateRecipeOptions extends EpochHandlerOptions {}
  *   5. Re-pin residency for both URIs.
  *
  * Draft-drain into new canonical is deferred to F-arc routing rules.
- * Today the draft layer continues unchanged; operator can promote
- * draft → new canonical via existing `lares promote` ceremonies.
+ * Today the draft layer continues unchanged; operator can lift
+ * draft → new canonical via residency ACTION verbs (Sprint 5 of the
+ * Residency Model Epic ships `lares act MOVE`/`ADD`/`COPY`).
  */
 export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor {
   return async (args) => {
@@ -277,7 +278,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       previousCanonDocUrl: oldDocUrl,
       stack:              nextStack,
       layerSwapped,
-      note: "draft-drain into new canonical reserved for F-arc; operator can promote draft → new canon via `lares promote` today",
+      note: "draft-drain into new canonical reserved for F-arc; operator can lift draft → new canon via a residency ACTION verb (`lares act MOVE`/`ADD`, Sprint 5)",
     };
   };
 }

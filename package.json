@@ -13,7 +13,7 @@
     "test:tw5-fixture": "pnpm --filter @lararium/tw5 exec vitest run -c ../../tests/lararium-tw5/vitest.config.ts",
     "test:sigil-alignment": "pnpm --filter @lararium/tw5 test:sigil-alignment",
     "test:flows": "bash tests/bin/run-flow.sh all",
-    "test:tw5-flow": "bash tests/lararium-tw5/sync/sync-decompose-promote.sh both"
+    "test:tw5-flow": "echo 'TW5 flow scripts retired 2026-05-31 under the residency-model cleanup. Residency-action flow scripts land in Sprint 5 — see packages/EPIC-RESIDENCY-MODEL.md.' && exit 0"
   },
   "devDependencies": {
     "@lares/cli": "workspace:*",

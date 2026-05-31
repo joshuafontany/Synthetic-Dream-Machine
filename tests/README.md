@@ -29,34 +29,24 @@ Fixture-backed full-stack tests that share the isolated `tests/` Lararium now li
 ## Commands
 
 ```sh
-pnpm test:unit       # package-local Jest suites
-pnpm test:tw5-fixture # fixture-backed TW5 tests under tests/lararium-tw5/
-pnpm test:flows      # top-level integration flows; currently TW5 sync/decompose/promote
-pnpm test:tw5-flow   # direct TW5 integration flow
+pnpm test:unit       # package-local vitest suites
+pnpm test:tw5-fixture # fixture-backed TW5 tests under tests/lararium-tw5/residency/
+pnpm test:flows      # top-level integration flows
+pnpm test:tw5-flow   # placeholder — residency-action flow scripts land in Sprint 5
 ```
 
 The flow scripts set `LAR_ROOT=tests` by default. That keeps `.lararium/`, `wikis/`,
 isolated canonical `bags/`, and disposable run captures under `tests/results/` instead
 of touching the canonical repo tree.
 
-## Flow: lararium-tw5 sync/decompose/promote
+## Flow: residency-action (pending — Sprint 5)
 
-```sh
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh decompose
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh promote
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh both
-```
-
-This flow:
-
-1. resets an isolated test lararium root;
-2. boots `lares serve --wiki scratch --root tests`;
-3. initializes a test wiki;
-4. copies `tests/src/the-lares-protocols.md` into `tests/wikis/@<slug>/memes/**` for ingest;
-5. runs `lares wiki sync`;
-6. verifies child meme decomposition against `tests/expected/wikis/**`;
-7. captures decompose and promote outputs under `tests/results/**`;
-8. optionally promotes to the isolated canonical `tests/bags/**` tree and diffs again.
+The previous `sync-decompose-promote.sh` flow retired 2026-05-31 under the
+residency-model cleanup. Replacement flows that exercise the residency
+ACTION verb surface (ADD / COPY / MOVE / CLEAR / DROP / LOAD) land in
+Sprint 5 of the Residency Model Epic — see
+[`packages/EPIC-RESIDENCY-MODEL.md`](../packages/EPIC-RESIDENCY-MODEL.md).
+New scripts will live under `tests/lararium-tw5/residency/`.
 
 ## Adding new flows
 

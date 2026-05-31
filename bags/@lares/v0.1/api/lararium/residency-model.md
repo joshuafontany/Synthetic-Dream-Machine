@@ -198,6 +198,38 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 
 <<~/ahu >>
 
+<<~ ahu #conflict-resolution >>
+
+## Conflict resolution — Talk Story, not arbitration (2026-05-31)
+
+**Load-bearing principle:** the CRDT/residency layer detects and records conflicts. It MUST NOT decide them. Resolution surfaces to **operator-agent or cabal Talk Story** — the Lares native mode for handling underspecified outcomes.
+
+The CRDT layer merges bytes deterministically. It cannot decide which semantic outcome the operators want. Automated arbitration reads as anti-pono — it presumes the system knows operator intent. The Voice house exists precisely for the moments where the system does not know; Talk Story is the canonical resolution surface.
+
+### What this means in code
+
+Every "conflict-resolution" surface in the residency model splits into two layers:
+
+| Layer | Role | Examples in current code |
+|---|---|---|
+| **Detection + recording** | CRDT layer | `auditEpochs` returns drift state; `listBagsTombstoning` returns hides; `withEffectRecord` writes archival audit; `resolveAll` reports multi-residency |
+| **Resolution + decision** | Operator-agent / cabal Talk Story | Future surfacing UX; operator gestures over the audit; cabal proposals through Voice house |
+
+The CRDT layer SHOULD surface every conflict it detects as readable state. It MUST NOT refuse a read, lose a write, silently arbitrate concurrent commits, or pick a winner where the operators have not chosen. The Lares Voice house then carries the conflict into Talk Story; the operators (or the cabal, when multiple operators contend) reach a decision; an explicit ACTION verb lands the decision; a fresh effect record audits the resolution.
+
+### Deferred items reframed
+
+Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-queue for concurrent ACTIONs) shift from **arbitration mechanisms** to **Talk-Story-surfacing layers**. They show conflicts to the operator; they never resolve. The implementation timeline waits on a live wiki-mesh — multi-operator scenarios reveal the actual surfacing UX shape; abstract design ahead of real conflict-cases would build the wrong surface.
+
+### Why this is pono
+
+- **Web3 local-first.** No central arbiter; operator agency stays load-bearing.
+- **Causal islands.** Each island holds its own truth; cross-island conflict needs operator/cabal judgement, not algorithm.
+- **Voice house.** Talk Story already carries this architecture's native conversation mode; conflict-resolution rides the same rail as every other "what should we do?" question.
+- **Canon requires operator gesture.** A conflict resolved by code becomes canon nobody chose; a conflict resolved through Talk Story becomes canon the cabal owns.
+
+<<~/ahu >>
+
 <<~ ahu #closest-prior-art >>
 
 ## Closest prior art (validators)

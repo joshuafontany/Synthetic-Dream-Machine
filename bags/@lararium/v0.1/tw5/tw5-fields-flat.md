@@ -31,7 +31,7 @@ Normalises a TW5 runtime field bag to a flat string map:
 
 ## Why here
 
-Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skipped `bag`) and `promote-handler.ts` owned `flattenPromoteFields()` (skipped nulls). Both converted `TW5TiddlerFields → Record<string,string>` before calling `adaptor.saveFields()`. The `IslandAdaptor` owns the `bag` routing decision; neither caller needed to suppress it. `tw5FieldsToRecord` covers both cases cleanly. Normalisation belongs in the tw5 package alongside `TW5TiddlerFields`.
+Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skipped `bag`) and the retired `promote-handler.ts` (deleted 2026-05-31) owned `flattenPromoteFields()` (skipped nulls). Both converted `TW5TiddlerFields → Record<string,string>` before calling `adaptor.saveFields()`. The `IslandAdaptor` owns the `bag` routing decision; neither caller needed to suppress it. `tw5FieldsToRecord` covers both cases cleanly. Normalisation belongs in the tw5 package alongside `TW5TiddlerFields`.
 
 ## Promotion path
 

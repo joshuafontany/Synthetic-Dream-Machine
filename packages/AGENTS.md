@@ -57,13 +57,13 @@ Six packages carry the stack. Each owns one boundary; cross-cutting work travels
 
 `@lararium/tw5` carries TiddlyWiki runtime integration. Put the TW5 VM surface (`tw5-vm`, `tw5-host-bridge`, `tw5-browser-surface`, `tw5-module-gate`, `tw5-camera`), island layer (`island-kernel`, `island-adaptor`, `island-recipe`, `island-context`, `cold-boot-ceremony`, `active-wiki`, `admin-behavior`), memetic-wikitext machinery (`memetic-parser`, `meme-ast`, `meme-stream`, `meme-write`, `meme-worker-script`, `deserializer`, `grammar-cache`), verb pipeline (`verb-vm`, `verb-dispatcher`, `verb-local-dispatch`, `verb-signal`), TW5-side stores (`memory-store`, `wiki-sync`), generated TW5 core metadata (`generated-tw5-version`, `plugin-tiddler.generated`), and `wikirules` / `macros` / `modules` / `filters` here. Treat disk projection as Node-shaped even when the barrel export exposes it.
 
-`@lararium/node` carries local Lararium host duties. Put the host (`node-host`, `main`, `open-node-vessel`, `open-admin-vm`), island plumbing (`lar-admin-island`, `lar-wiki-island`, `sovereign-island-model`, `vessel-island-pool`, `island-behaviors`, `lar-event-bus-impl`), bag-path + residency law (`bag-paths`, `residency-handlers`, `wiki-residency-handlers`), boot artifacts (`genesis-artifact`, `epoch-handlers`, `operator-key`, `admin-auth-gate`), the wiki composition family (`wiki-handlers`, `wiki-compose-handlers`, `wiki-draft-handlers`, `wiki-mint-handlers`), `promote-handler`, `where-handler`, `repo-helpers`, the kind-based `disk-projector`, and the node-side `commands/` family (`device-admit`, `init`) here. One `lararium-node` process = one Lararium (household shrine). The running server **finds**; it never seeds social state.
+`@lararium/node` carries local Lararium host duties. Put the host (`node-host`, `main`, `open-node-vessel`, `open-admin-vm`), island plumbing (`lar-admin-island`, `lar-wiki-island`, `sovereign-island-model`, `vessel-island-pool`, `island-behaviors`, `lar-event-bus-impl`), bag-path + residency law (`bag-paths`, `residency-handlers`, `wiki-residency-handlers`), boot artifacts (`genesis-artifact`, `epoch-handlers`, `operator-key`, `admin-auth-gate`), the wiki composition family (`wiki-handlers`, `wiki-compose-handlers`, `wiki-draft-handlers`, `wiki-mint-handlers`), `where-handler`, `repo-helpers`, the kind-based `disk-projector`, and the node-side `commands/` family (`device-admit`, `init`) here. ACTION verb handlers (Sprint 5 of the Residency Model Epic) will land alongside as `action-handler.ts`. One `lararium-node` process = one Lararium (household shrine). The running server **finds**; it never seeds social state.
 
 `@lararium/browser` carries browser Lararium peer duties. Put `browser-vessel`, `browser-admin-vm`, `browser-genesis` (three-tier), `browser-operator-key`, `browser-sovereign-island-model`, `browser-vessel-island-pool`, `browser-wiki-worker`, and `__stubs__` for browser-incompatible deps here. Parallels `@lararium/node` with browser-native capabilities (WebSocket, IndexedDB, WebCrypto). No React, no canvas.
 
 `@lararium/keyhive` carries the capability layer. Pre-alpha integration of `@keyhive/keyhive` WASM bindings. Put `capability-provider`, `keyhive-provider`, `ceremony-core`, `event-store`, `admin-event-store` here. One Keyhive Doc = one bag (1:1). Binary read/admin gate, with `ABILITY_LADDER` caveats riding on top. Cap-event home and γ-with-operator-α-mirror sync stay in design flux — touch with care.
 
-`@lares/cli` carries the operator-facing surface. Put the `lares` binary (`bin/lares`), arg parsing (`parse-args`), process spawn (`spawn`), `admin-connector`, and the verb family in `commands/` (`bag`, `ceremony`, `draft`, `init`, `promote`, `residency`, `scripted`, `status`, `wiki`) here. The CLI carries no protocol logic — every verb dispatches to `@lararium/node` handlers through the admin WS gate.
+`@lares/cli` carries the operator-facing surface. Put the `lares` binary (`bin/lares`), arg parsing (`parse-args`), process spawn (`spawn`), `admin-connector`, and the verb family in `commands/` (`bag`, `ceremony`, `draft`, `init`, `residency`, `scripted`, `status`, `wiki`) here. Sprint 5 of the Residency Model Epic adds `commands/act.ts` for the ACTION verb surface (`lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD`). The CLI carries no protocol logic — every verb dispatches to `@lararium/node` handlers through the admin WS gate.
 
 ## Package Map (planned, not yet implemented)
 
@@ -105,7 +105,7 @@ TW5 child edit
   -> projection fan-out + ReactionGraph dispatch
 ```
 
-Canon promotion travels a separate Orichalcum path. The `promote-handler` in `@lararium/node` carries the ceremony; the `lares promote` verb is its only operator surface. Do not let live wiki edits write `bags/` directly.
+Residency transitions travel through the ACTION verb surface (`ADD`, `COPY`, `MOVE`, `CLEAR`, `DROP`, `LOAD`) governed by the [Residency Model Epic](EPIC-RESIDENCY-MODEL.md). Sprint 5 ships `@lararium/node/src/action-handler.ts` + `lares act` CLI; the prior `lares promote` ceremony retired 2026-05-31 with no replacement shim. Do not let live wiki edits write `bags/` directly — operators land bag content through ACTION verbs.
 
 <<~/ahu >>
 
@@ -187,8 +187,8 @@ TW5 fixture and sigil-alignment routes:
 ```sh
 pnpm test:tw5-fixture
 pnpm test:sigil-alignment
-pnpm test:tw5-flow         # bash test: sync-decompose-promote
-pnpm test:flows            # bash test: all flow shells
+pnpm test:tw5-flow         # placeholder — residency-action flow scripts pending Sprint 5
+pnpm test:flows            # top-level integration flows
 ```
 
 Build all package outputs when generated files, barrels, bundle seams, TW5 vendor assets, or app integration change:

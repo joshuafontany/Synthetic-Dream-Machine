@@ -7,7 +7,7 @@ This tree carries repository-level integration test flows, shared fixtures, and 
 | Test kind | Location | Runner | Purpose |
 |---|---|---|---|
 | Unit / package contract tests | `packages/<package>/tests/` | **vitest** via `pnpm --filter <pkg> test` | Fast tests for code owned by one package. Keep these close to implementation. Active in `@lararium/{mesh,tw5,node,browser}`. |
-| Fixture-backed isolated-Lararium TW5 tests | `tests/lararium-tw5/promote/**/*.test.ts` | vitest via `pnpm test:tw5-fixture` (root config: `tests/lararium-tw5/vitest.config.ts`) | Tests that need the shared `tests/` Lararium root, support fixtures, or cross-package source imports without booting the full daemon flow. |
+| Fixture-backed isolated-Lararium TW5 tests | `tests/lararium-tw5/residency/**/*.test.ts` *(pending — Sprint 5 of the Residency Model Epic)* | vitest via `pnpm test:tw5-fixture` (root config: `tests/lararium-tw5/vitest.config.ts`) | Tests that need the shared `tests/` Lararium root, support fixtures, or cross-package source imports without booting the full node-host flow. The prior `promote/` subdir retired 2026-05-31. |
 | Integration / daemon flows | `tests/<surface>/**/*.sh` | shell flow scripts via `tests/bin/run-flow.sh` | Cross-package ceremonies involving CLI, node host, disk projection, Automerge state, and golden outputs. |
 | Sigil-alignment route | inside `@lararium/tw5` | `pnpm test:sigil-alignment` | Parser-level alignment guard for the memetic-wikitext sigil grammar. |
 | Historical chat / HUD behavioral plans | `tests/chats/` (incl. versioned `v0.2/`, `v0.3/`, `v0.4/`) | not part of active code CI | Archived Lares prompt-contract plans and exemplar chat outputs. Do not mix these with deterministic code-flow goldens. |
@@ -28,10 +28,10 @@ From the repository root:
 ```sh
 pnpm test                # alias of test:unit — all package-local vitest suites
 pnpm test:unit           # package-local vitest suites (pnpm -r test)
-pnpm test:tw5-fixture    # fixture-backed isolated-Lararium TW5 tests (promote/**)
+pnpm test:tw5-fixture    # fixture-backed isolated-Lararium TW5 tests (residency/**, pending Sprint 5)
 pnpm test:sigil-alignment # @lararium/tw5 sigil-alignment guard
-pnpm test:flows          # top-level integration flows; currently TW5 sync/decompose/promote
-pnpm test:tw5-flow       # direct TW5 integration flow (sync-decompose-promote.sh both)
+pnpm test:flows          # top-level integration flows (residency flows land in Sprint 5)
+pnpm test:tw5-flow       # placeholder — residency-action flow scripts pending Sprint 5
 ```
 
 Package-specific commands remain valid:
@@ -49,7 +49,7 @@ pnpm --filter @lararium/browser test
 tests/bin/run-flow.sh all           # default: tw5-fixture + tw5-sync flow (both)
 tests/bin/run-flow.sh tw5-fixture
 tests/bin/run-flow.sh tw5-decompose
-tests/bin/run-flow.sh tw5-promote
+tests/bin/run-flow.sh clean
 tests/bin/run-flow.sh clean         # invokes cleanup-lar-root.sh
 ```
 
@@ -64,17 +64,17 @@ tests/
     wait-daemon.sh        bounded readiness check for a spawned node host
     cleanup-lar-root.sh   tears down disposable LAR_ROOT state
   lararium-tw5/
-    vitest.config.ts      vitest root for fixture-backed TW5 tests (includes promote/**)
-    promote/              vitest tests for the promote ceremony (e.g. lar-promote.test.ts)
+    vitest.config.ts      vitest root for fixture-backed TW5 tests (includes residency/** — pending Sprint 5)
+    residency/            (pending) vitest tests for the residency ACTION verb family
     support/              shared test helpers (e.g. test-lararium.ts)
-    sync/                 daemon + CLI flow scripts (sync-decompose-promote.sh)
+    sync/                 (retired) prior flow scripts — replacements land in residency/ under Sprint 5
   src/                    source fixtures copied into isolated test wikis
                           (e.g. the-lares-protocols.md)
   fixtures/               additional reusable test fixtures (currently empty; reserve for non-src/ fixtures)
   genesis/                CID-verifiable build + init artifacts for isolated runs
                           (island.bin, island.cid, island.sha256[-pre], social-bootstrap.json)
   bags/                   isolated canonical bag root when LAR_ROOT=tests
-                          (promote flows write here, never into the repo-root bags/)
+                          (residency-action flows write here, never into the repo-root bags/)
   wikis/                  disposable wiki mirror/output tree (e.g. @scratch/)
   expected/               deterministic golden outputs for code-flow diffs
                           (bags/, wikis/, README.md)
@@ -137,24 +137,15 @@ Prefer adding reusable helpers to `tests/bin/` instead of copying node-host setu
 
 ## Current primary flow
 
-`tests/lararium-tw5/sync/sync-decompose-promote.sh` exercises:
+**Retired 2026-05-31** under the residency-model cleanup. The previous
+`sync-decompose-promote.sh` flow exercised the `lares promote` ceremony,
+which has retired in favor of the Residency Model's ACTION verb surface
+(ADD / COPY / MOVE / CLEAR / DROP / LOAD).
 
-- isolated reset (cleanup-lar-root);
-- node host boot (`lares serve --wiki scratch --root tests`);
-- `lares wiki init`;
-- fixture meme copy (`tests/src/the-lares-protocols.md` → `tests/wikis/@<slug>/memes/**`);
-- `lares wiki sync`;
-- decomposition into parent + child meme files;
-- optional `lares promote` into isolated `tests/bags/**`;
-- normalized diff against `tests/expected/wikis/**` (and `tests/expected/bags/**` when promoting).
-
-Subcommands:
-
-```sh
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh decompose
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh promote
-bash tests/lararium-tw5/sync/sync-decompose-promote.sh both     # what test:tw5-flow runs
-```
+Replacement flows that exercise the residency ACTION verb surface land in
+Sprint 5 of the Residency Model Epic — see
+[`packages/EPIC-RESIDENCY-MODEL.md`](../packages/EPIC-RESIDENCY-MODEL.md).
+New scripts will live under `tests/lararium-tw5/residency/`.
 
 ## Naming drift watch
 

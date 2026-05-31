@@ -117,7 +117,7 @@ These planning docs follow one architectural law:
 
 - `pnpm test:unit` — package-local Jest suites.
 - `pnpm test:flows` — top-level isolated integration flows.
-- `pnpm test:tw5-flow` — direct TW5 sync/decompose/promote flow.
+- `pnpm test:tw5-flow` — placeholder (residency-action flow scripts land in Sprint 5 of the Residency Model Epic; the prior sync/decompose/promote flow retired 2026-05-31).
 - `pnpm --filter @lararium/tw5 exec tsx scripts/smoke-plugin-boot.ts` — plugin
   boot smoke (shadow tiddlers + deserializer probes; all sigil widgets are TW5-native).
 

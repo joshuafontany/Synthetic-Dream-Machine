@@ -32,7 +32,6 @@ import {
 import { placeVerbInvocation, exportMemeText, VerbTable } from "@lararium/tw5";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
-import { makePromoteReactor } from "./promote-handler.js";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 
 // ── Primary Wiki island behavior — disk projection + wiki dispatch ────────
@@ -63,12 +62,10 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
         _stopProjector = projector.start(ctx.tw5);
       }
 
-      // Wiki-scope dispatch
+      // Wiki-scope dispatch — empty until Sprint 5 lands the ACTION verb
+      // handler family (ADD / COPY / MOVE / CLEAR / DROP / LOAD) under the
+      // Residency Model. See packages/EPIC-RESIDENCY-MODEL.md Sprint 5.
       _registry = new VerbTable();
-      _registry.register("promote", makePromoteReactor({
-        composite: ctx.composite,
-        tw5:       ctx.tw5,
-      }));
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {

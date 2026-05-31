@@ -220,7 +220,7 @@ The system operates as a quine in the sense of quine-principles P1–P4:
 
 **P4 (Render = Projection):** The file on disk functions as a render-projection of the Automerge bag. The Automerge bag holds canonical state. The `*.md` file offers value (grep-able, git-trackable, human-readable) without claiming to hold the source of truth. The source of truth lives in the CRDT; the file functions as the HUD for the CRDT.
 
-The quine does not complete at the current branch. P3 runs partial — the schema memes exist but do not yet fully drive runtime validation. P4 carries architectural commitment but not operational completion (the promote-handler and projection-write path land in a later arc). The quine functions as an asymptote; the system approaches it without arriving.
+The quine does not complete at the current branch. P3 runs partial — the schema memes exist but do not yet fully drive runtime validation. P4 carries architectural commitment but not operational completion (residency-action handlers and the projection-write path land in a later arc — see the Residency Model Epic). The quine functions as an asymptote; the system approaches it without arriving.
 
 > **#Council** » 19:11 — "The quine does not complete at the current branch" is the honest statement. Mark it. The risk of the quine framing is that it invites completeness theater — claiming the quine is achieved when the meme graph merely *describes* a quine rather than *being* one. The distinction: a system that describes P4 in a meme is not P4. P4 requires that the file on disk is provably a projection of the Automerge bag, tested by a round-trip. That test does not yet exist. Hold the framing; hedge the claim; run the round-trip test before promoting this meme to stable.
 

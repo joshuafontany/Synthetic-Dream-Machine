@@ -1,4 +1,5 @@
 import type { DocHandle } from "@automerge/automerge-repo";
+import { getHeads as automergeGetHeads } from "@automerge/automerge";
 import type { LarTiddlerRecord, LarTiddlerStore, LarTiddlerChange, ChangeOrigin } from "./tiddler-store.js";
 import type { MemeProjection } from "./meme-provider.js";
 import { MemeProvider } from "./meme-provider.js";
@@ -159,6 +160,17 @@ export class AutomergeDocStore implements LarTiddlerStore {
   async get(title: string): Promise<LarTiddlerRecord | null> {
     const raw = this.handle.doc()?.tiddlers?.[title];
     return raw ? _freezeRecord(raw) : null;
+  }
+
+  /**
+   * Residency Model: current Automerge Heads for this bag's doc.
+   * Returns null when the doc has not yet hydrated (DocHandle.doc() returns
+   * undefined). Used by CompositeStore.auditEpochs() to detect bag-epoch drift.
+   */
+  async getHeads(): Promise<readonly string[] | null> {
+    const doc = this.handle.doc();
+    if (!doc) return null;
+    return automergeGetHeads(doc) as readonly string[];
   }
 
   async put(record: LarTiddlerRecord, origin: ChangeOrigin): Promise<void> {

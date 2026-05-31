@@ -30,7 +30,7 @@ Four exports. All pure functions. No imports from Lararium packages.
 
 ## Why here
 
-Every `CommandHandler` receives `args: Readonly<Record<string, unknown>>`. Before this file, each handler module defined its own local `stringArg`. Three copies existed in `wiki-handlers.ts`, `epoch-handlers.ts`, and `promote-handler.ts`. `ctx_request_id_safe()` was duplicated across two files under different names.
+Every `CommandHandler` receives `args: Readonly<Record<string, unknown>>`. Before this file, each handler module defined its own local `stringArg`. Two copies remain in `wiki-handlers.ts` and `epoch-handlers.ts`; a third copy lived in the retired `promote-handler.ts` until 2026-05-31. `ctx_request_id_safe()` was duplicated across two files under different names.
 
 ## Promotion path
 

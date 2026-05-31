@@ -12,9 +12,12 @@
 import { describe, test, expect } from "vitest";
 import { CompositeStore } from "../src/composite-store.js";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
-import { lensFor, identityLens, TEMP_BAG, DRAFT_BAG, LARES_BAG, LARARIUM_BAG, wikiBagUri } from "../src/wiki-recipe.js";
-import type { WikiRecipe } from "../src/wiki-recipe.js";
-import type { LarTiddlerRecord, ChangeOrigin } from "../src/tiddler-store.js";
+import {
+  lensFor, identityLens, headsEqual,
+  LARES_BAG, wikiBagUri,
+} from "../src/wiki-recipe.js";
+import type { WikiRecipe, EpochPinState } from "../src/wiki-recipe.js";
+import type { LarTiddlerRecord, LarTiddlerStore, ChangeOrigin } from "../src/tiddler-store.js";
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -106,11 +109,12 @@ describe("CompositeStore.resolveTopmost", () => {
     expect((top?.record.tiddler as Record<string, unknown>)["text"]).toBe("high-version");
   });
 
-  test("skips tombstones — returns next live layer below the highest tombstone", async () => {
+  test("absent in HIGH (no put) falls through to the next live layer below", async () => {
+    // Truly-absent (not tombstoned) in HIGH falls through. Distinct from the
+    // tombstone-shadow case (covered in the whiteout-shadow describe block).
     const store = await makeStoreWithLayers();
     await store.put(rec("partial", "mid-live"), origin(MID), { bag: MID });
-    await store.put(rec("partial", "high-version"), origin(HIGH), { bag: HIGH });
-    await store.tombstoneInBag(HIGH, "partial", origin(HIGH));
+    // HIGH has no record at all for "partial".
     const top = await store.resolveTopmost("partial");
     expect(top?.bagId).toBe(MID);
   });
@@ -175,7 +179,7 @@ describe("WikiRecipe.bagEpochs (Anti-pattern #5 hook)", () => {
 });
 
 // ---------------------------------------------------------------------------
-// lensFor (S3.6 — hook, identity default)
+// lensFor (Anti-pattern #2 hook — version-keyed registry)
 // ---------------------------------------------------------------------------
 
 describe("lensFor (Anti-pattern #2 hook)", () => {
@@ -184,20 +188,319 @@ describe("lensFor (Anti-pattern #2 hook)", () => {
     expect(identityLens(r)).toBe(r);
   });
 
-  test("lensFor returns identityLens for any (recipe, title, bag) tuple by default", () => {
+  test("lensFor returns identityLens when record carries no schemaVersion", () => {
     const recipe: WikiRecipe = { wikiSlug: "demo" };
-    const lens = lensFor(recipe, "any-title", LARES_BAG);
-    expect(lens).toBe(identityLens);
     const r = rec("x", "hello");
+    const lens = lensFor(recipe, r);
+    expect(lens).toBe(identityLens);
     expect(lens(r)).toBe(r);
   });
 
-  test("lensFor stays callable across the full expanded slot set", () => {
-    const recipe: WikiRecipe = { wikiSlug: "demo", canonBags: ["lar:///ha.ka.ba/@canon"] };
-    const slots = [TEMP_BAG, DRAFT_BAG, wikiBagUri("demo"), "lar:///ha.ka.ba/@canon", LARES_BAG, LARARIUM_BAG];
-    for (const slot of slots) {
-      const lens = lensFor(recipe, "title", slot);
-      expect(typeof lens).toBe("function");
-    }
+  test("lensFor returns identityLens when recipe has no lenses map", () => {
+    const recipe: WikiRecipe = { wikiSlug: "demo" };
+    const r: LarTiddlerRecord = { tiddler: { title: "x", text: "hello" }, meta: { schemaVersion: "v1" } };
+    expect(lensFor(recipe, r)).toBe(identityLens);
+  });
+
+  test("lensFor returns identityLens when record's schemaVersion is unregistered", () => {
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      lenses: new Map([["v1", (rr) => rr]]),
+    };
+    const r: LarTiddlerRecord = { tiddler: { title: "x", text: "hello" }, meta: { schemaVersion: "v99" } };
+    expect(lensFor(recipe, r)).toBe(identityLens);
+  });
+
+  test("lensFor returns the registered lens when schemaVersion matches", () => {
+    const v1Lens: (r: LarTiddlerRecord) => LarTiddlerRecord = (r) => ({
+      ...r,
+      tiddler: { ...r.tiddler, lensed: "yes" },
+    });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      lenses: new Map([["v1", v1Lens]]),
+    };
+    const r: LarTiddlerRecord = { tiddler: { title: "x", text: "hello" }, meta: { schemaVersion: "v1" } };
+    const lens = lensFor(recipe, r);
+    expect(lens).toBe(v1Lens);
+    expect((lens(r).tiddler as Record<string, unknown>)["lensed"]).toBe("yes");
+  });
+
+  test("multiple version-keyed lenses route by record version", () => {
+    const v1Lens: (r: LarTiddlerRecord) => LarTiddlerRecord = (r) => ({ ...r, tiddler: { ...r.tiddler, via: "v1" } });
+    const v2Lens: (r: LarTiddlerRecord) => LarTiddlerRecord = (r) => ({ ...r, tiddler: { ...r.tiddler, via: "v2" } });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      lenses: new Map([["v1", v1Lens], ["v2", v2Lens]]),
+    };
+    const r1: LarTiddlerRecord = { tiddler: { title: "x", text: "hello" }, meta: { schemaVersion: "v1" } };
+    const r2: LarTiddlerRecord = { tiddler: { title: "y", text: "world" }, meta: { schemaVersion: "v2" } };
+    expect(lensFor(recipe, r1)).toBe(v1Lens);
+    expect(lensFor(recipe, r2)).toBe(v2Lens);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// headsEqual (Spirit 1 finding: heads form a set, not an array)
+// ---------------------------------------------------------------------------
+
+describe("headsEqual (set-semantic equality)", () => {
+  test("empty arrays match", () => {
+    expect(headsEqual([], [])).toBe(true);
+  });
+
+  test("identical arrays match", () => {
+    expect(headsEqual(["a"], ["a"])).toBe(true);
+    expect(headsEqual(["a", "b"], ["a", "b"])).toBe(true);
+  });
+
+  test("differently-ordered arrays match (set-semantics)", () => {
+    expect(headsEqual(["a", "b"], ["b", "a"])).toBe(true);
+    expect(headsEqual(["c", "a", "b"], ["a", "b", "c"])).toBe(true);
+  });
+
+  test("different lengths never match", () => {
+    expect(headsEqual(["a"], ["a", "b"])).toBe(false);
+    expect(headsEqual([], ["a"])).toBe(false);
+  });
+
+  test("different members never match", () => {
+    expect(headsEqual(["a"], ["b"])).toBe(false);
+    expect(headsEqual(["a", "b"], ["a", "c"])).toBe(false);
+  });
+
+  test("reference equality short-circuits", () => {
+    const h: readonly string[] = ["a", "b"];
+    expect(headsEqual(h, h)).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CompositeStore.auditEpochs (Anti-pattern #5 defense — audit-only)
+// ---------------------------------------------------------------------------
+
+/** Heads-aware MemoryTiddlerStore wrapper for audit tests. */
+class HeadsAwareStore implements LarTiddlerStore {
+  constructor(public heads: readonly string[] | null, private readonly inner = new MemoryTiddlerStore()) {}
+  listVisible(): Promise<string[]> { return this.inner.listVisible(); }
+  get(title: string): Promise<LarTiddlerRecord | null> { return this.inner.get(title); }
+  put(record: LarTiddlerRecord, origin: ChangeOrigin): Promise<void> { return this.inner.put(record, origin); }
+  tombstone(title: string, origin: ChangeOrigin): Promise<void> { return this.inner.tombstone(title, origin); }
+  subscribe(fn: (c: import("../src/tiddler-store.js").LarTiddlerChange) => void): () => void { return this.inner.subscribe(fn); }
+  async getHeads(): Promise<readonly string[] | null> { return this.heads; }
+}
+
+const BAG_A = "lar:///ha.ka.ba/@aleph";
+const BAG_B = "lar:///ha.ka.ba/@beth";
+
+describe("CompositeStore.auditEpochs", () => {
+  test("returns empty map when recipe has no bagEpochs", async () => {
+    const store = await makeStoreWithLayers();
+    const recipe: WikiRecipe = { wikiSlug: "demo" };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.size).toBe(0);
+  });
+
+  test("returns 'matched' when current heads equal pinned heads", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h1", "h2"]), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h1", "h2"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    const state = audit.get(BAG_A);
+    expect(state?.state).toBe("matched");
+    expect((state as { state: "matched"; heads: readonly string[] }).heads).toEqual(["h1", "h2"]);
+  });
+
+  test("returns 'matched' when heads differ in order only (Spirit 1 set-semantics)", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["b", "a", "c"]), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["a", "b", "c"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.get(BAG_A)?.state).toBe("matched");
+  });
+
+  test("returns 'drifted' when current heads differ from pinned", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h3"]), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    const state = audit.get(BAG_A);
+    expect(state?.state).toBe("drifted");
+    const drifted = state as { state: "drifted"; pinned: readonly string[]; current: readonly string[] };
+    expect(drifted.pinned).toEqual(["h1"]);
+    expect(drifted.current).toEqual(["h3"]);
+  });
+
+  test("returns 'absent' when pinned bag has no layer registered", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h1"]), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h1"]], [BAG_B, ["x"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.get(BAG_B)?.state).toBe("absent");
+    expect(audit.get(BAG_A)?.state).toBe("matched");
+  });
+
+  test("returns 'opaque' when layer's store cannot expose heads", async () => {
+    const store = new CompositeStore();
+    // MemoryTiddlerStore does not implement getHeads — opaque to audit.
+    store.addLayer({ bagId: BAG_A, store: new MemoryTiddlerStore(), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.get(BAG_A)?.state).toBe("opaque");
+  });
+
+  test("returns 'opaque' when getHeads returns null (doc not hydrated)", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(null), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h1"]]]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.get(BAG_A)?.state).toBe("opaque");
+  });
+
+  test("audits multiple pinned bags independently", async () => {
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_A, store: new HeadsAwareStore(["h-a"]), writable: true });
+    store.addLayer({ bagId: BAG_B, store: new HeadsAwareStore(["h-b-current"]), writable: true });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([
+        [BAG_A, ["h-a"]],          // matched
+        [BAG_B, ["h-b-pinned"]],   // drifted
+      ]),
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.size).toBe(2);
+    expect(audit.get(BAG_A)?.state).toBe("matched");
+    expect(audit.get(BAG_B)?.state).toBe("drifted");
+  });
+
+  test("audit-only — default read paths stay unaffected by drift", async () => {
+    // Spirit 3 finding: most production CRDT apps do NOT pin. SDM default
+    // stays audit-only; drift does not block resolveAll / get / resolveTopmost.
+    const store = new CompositeStore();
+    store.addLayer({
+      bagId: BAG_A,
+      store: new HeadsAwareStore(["h-current"]),
+      writable: true,
+    });
+    await store.put(rec("T", "live"), origin(BAG_A), { bag: BAG_A });
+    const recipe: WikiRecipe = {
+      wikiSlug: "demo",
+      bagEpochs: new Map([[BAG_A, ["h-pinned"]]]),  // drifted
+    };
+    const audit = await store.auditEpochs(recipe);
+    expect(audit.get(BAG_A)?.state).toBe("drifted");
+    // Drift does NOT affect default reads.
+    const top = await store.resolveTopmost("T");
+    expect(top?.bagId).toBe(BAG_A);
+    expect((top?.record.tiddler as Record<string, unknown>)["text"]).toBe("live");
+  });
+
+  test("EpochPinState type carries discriminated states", () => {
+    // Compile-time check that the discriminated union covers all five states.
+    const states: EpochPinState[] = [
+      { state: "unpinned" },
+      { state: "matched", heads: ["h"] },
+      { state: "drifted", pinned: ["a"], current: ["b"] },
+      { state: "absent" },
+      { state: "opaque" },
+    ];
+    expect(states).toHaveLength(5);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Whiteout-shadow semantics (S4.3 — Anti-pattern #3 defense)
+// ---------------------------------------------------------------------------
+
+describe("whiteout-shadow — tombstone in higher bag stops cascade", () => {
+  test("resolveTopmost returns null when HIGH tombstones a title that MID/LOW hold live", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
+    await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    // Operator deaccessions T in HIGH.
+    await store.tombstoneInBag(HIGH, "T", origin(HIGH));
+    // Whiteout-shadow: HIGH's tombstone stops the cascade.
+    const top = await store.resolveTopmost("T");
+    expect(top).toBeNull();
+  });
+
+  test("getLive returns null under the same whiteout-shadow", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    await store.tombstoneInBag(HIGH, "T", origin(HIGH));
+    expect(await store.getLive("T")).toBeNull();
+  });
+
+  test("absent in HIGH (no record at all) falls through to MID — distinct from tombstone", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
+    // HIGH has NO record for T at all (not a tombstone — truly absent).
+    const top = await store.resolveTopmost("T");
+    expect(top?.bagId).toBe(MID);
+  });
+
+  test("tombstone in MID with live HIGH returns HIGH (cascade not yet shadowed)", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
+    await store.tombstoneInBag(MID, "T", origin(MID));
+    // HIGH is live; tombstone in MID does not affect HIGH-priority read.
+    const top = await store.resolveTopmost("T");
+    expect(top?.bagId).toBe(HIGH);
+  });
+
+  test("resolveAll stays a presence report — shows live bags even when HIGH whiteouts", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
+    await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    await store.tombstoneInBag(HIGH, "T", origin(HIGH));
+    // resolveAll = presence report (skips tombstones, returns live versions).
+    const all = await store.resolveAll("T");
+    expect(all.map((r) => r.bagId).sort()).toEqual([LOW, MID].sort());
+  });
+
+  test("listBagsTombstoning reports which bags explicitly hide a title", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    await store.tombstoneInBag(HIGH, "T", origin(HIGH));
+    expect(await store.listBagsTombstoning("T")).toEqual([HIGH]);
+  });
+
+  test("listBagsTombstoning returns empty when no bag tombstones the title", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    expect(await store.listBagsTombstoning("T")).toEqual([]);
+  });
+
+  test("listBagsTombstoning orders highest-priority-first", async () => {
+    const store = await makeStoreWithLayers();
+    await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
+    await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
+    await store.tombstoneInBag(MID, "T", origin(MID));
+    await store.tombstoneInBag(HIGH, "T", origin(HIGH));
+    expect(await store.listBagsTombstoning("T")).toEqual([HIGH, MID]);
   });
 });

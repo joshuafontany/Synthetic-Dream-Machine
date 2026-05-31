@@ -2,8 +2,9 @@
  * where-handler — recipe-presence query for a tiddler.
  *
  * Returns which bags currently hold a non-tombstoned record for the given
- * URI. Used by the `lares promote` CLI to preview the source bag before
- * writing the actual promote command (operator confirms the move).
+ * URI. Operator uses this to preview the source bag before issuing a
+ * residency ACTION verb (`lares act ADD/COPY/MOVE`, Sprint 5) that lands
+ * the tiddler into another bag.
  *
  * Pure read operation; no side effects, no capability check needed today.
  *

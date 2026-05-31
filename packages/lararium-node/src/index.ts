@@ -30,9 +30,6 @@ export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 export { makeWhereReactor } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";
 
-export { makePromoteReactor } from "./promote-handler.js";
-export type { PromoteHandlerOptions } from "./promote-handler.js";
-
 export {
   makeListWikisReactor, makeInitWikiReactor,
   makeOpenWikiReactor,

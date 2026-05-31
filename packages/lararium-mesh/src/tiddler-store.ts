@@ -93,11 +93,19 @@ export interface EdgeRecord {
 // ---------------------------------------------------------------------------
 
 export interface LarTiddlerMeta {
-  readonly deleted?:     boolean;
-  readonly sourceUri?:   string;
-  readonly contentHash?: string;
-  readonly authority?:   string;
-  readonly recipe?:      string;
+  readonly deleted?:       boolean;
+  readonly sourceUri?:     string;
+  readonly contentHash?:   string;
+  readonly authority?:     string;
+  readonly recipe?:        string;
+  /**
+   * Residency Model schema-version tag — Anti-pattern #2 defense (schema drift
+   * across multi-bag residency). Records carry their schema-version so the
+   * recipe's lens registry can project them into the consumer's expected shape
+   * via `lensFor(recipe, record)`. Absent = no migration needed; identityLens
+   * applies. Convention: short stable string (e.g. "v1", "lore-2", "2026-05").
+   */
+  readonly schemaVersion?: string;
 }
 
 export interface LarTiddlerRecord {
@@ -179,6 +187,17 @@ export interface LarTiddlerStore {
    * Returns null if the title does not exist or the caller lacks read ability.
    */
   get(title: string): Promise<LarTiddlerRecord | null>;
+
+  /**
+   * Residency Model: optional heads getter for CRDT-backed stores.
+   * Returns the current Automerge Heads when the underlying store carries
+   * causal history; returns null for in-memory stores with no Automerge backing.
+   *
+   * Used by CompositeStore.auditEpochs() to detect bag-epoch drift
+   * (Anti-pattern #5 defense). Stores that omit this method behave as if it
+   * returned null — they cannot participate in pin checks.
+   */
+  getHeads?(): Promise<readonly string[] | null>;
 
   /**
    * Write a record to live wiki state.

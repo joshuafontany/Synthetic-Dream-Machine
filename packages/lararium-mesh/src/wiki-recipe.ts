@@ -62,40 +62,111 @@ export interface WikiRecipe {
   /**
    * Optional bag-epoch pins — Anti-pattern #5 defense (recipe-drift poisoning).
    * Each pinned slot carries an Automerge Heads array naming the expected state.
-   * When a slot carries a pin, the recipe MAY refuse a read whose underlying
-   * doc heads differ from the pin (lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
-   * Anti-pattern #5). Sprint 3 lands the interface; enforcement defers to a
-   * later sprint when consumers exist. Default null/absent = unpinned.
+   * When a slot carries a pin, `CompositeStore.auditEpochs(recipe)` reports
+   * the drift state per bag; `resolveAllRespectingPins(recipe, title)` skips
+   * drifted bags from the read path. Default reads (`resolveAll` / `get` /
+   * `resolveTopmost`) stay unaffected — opt-in by call site.
+   * Default null/absent = unpinned.
    */
   readonly bagEpochs?: ReadonlyMap<SlotUri, Heads>;
+
+  /**
+   * Optional read-time lenses keyed by `meta.schemaVersion` — Anti-pattern #2
+   * defense (schema drift across multi-bag residency). Cambria-style projection
+   * from a record's stored schema-version into the consumer's expected shape.
+   *
+   * **Why version-keyed, not bag-keyed (research-refined 2026-05-31):**
+   * Per-bag keys duplicate the same lens across bags that share a schema
+   * generation. Cambria's settled model keys lenses by `(sourceVersion,
+   * targetVersion)`. For Sprint 3 a flat `Map<sourceVersion, RecordLens>`
+   * suffices — each entry projects from `sourceVersion` to the recipe's
+   * single current consumer shape. Promote to `Map<[fromV, toV], RecordLens>`
+   * shortest-path resolution only when ≥3 concurrent versions live.
+   *
+   * `lensFor(recipe, record)` reads `record.meta?.schemaVersion`; absent or
+   * unrecognized version falls back to identityLens.
+   */
+  readonly lenses?: ReadonlyMap<string, RecordLens>;
 }
 
 /**
  * Read-time lens function — Anti-pattern #2 defense (schema drift across
- * multi-bag residency). Cambria-style projection from a bag's stored shape
- * into the consumer's expected shape. Sprint 3 lands the hook with identity
- * default; future sprints land actual lens functions.
+ * multi-bag residency). Cambria-style read-projection from a record's stored
+ * shape into the consumer's expected shape. One-way only (read-projection,
+ * not bidirectional writeback) — bidirectionality stays a research project
+ * per the Cambria literature; Sprint 3 keeps the surface honest.
  *
  * Signature: (record) => record. Pure function; no IO.
  */
 export type RecordLens = (record: LarTiddlerRecord) => LarTiddlerRecord;
 
-/** Identity lens — default for every (title, bag) pair until a real lens lands. */
+/** Identity lens — default when no version-keyed lens registers. */
 export const identityLens: RecordLens = (record) => record;
 
 /**
- * Return the lens function that SHOULD apply to a (title, bag) read.
+ * Return the lens function that SHOULD apply to a record read.
  *
- * Sprint 3 implementation: always returns identityLens — no real lenses
- * exist yet. The hook lives at recipe scope so that future Cambria-style
- * per-(bag-version × title-shape) lenses can register here without breaking
- * the read API.
+ * Reads `record.meta?.schemaVersion` and looks up `recipe.lenses?.get(version)`.
+ * Falls back to identityLens when:
+ *   - the record carries no schemaVersion (legacy / unmigrated content)
+ *   - the recipe registers no lens for the record's version
+ *   - the recipe has no lenses map at all
  *
  * Anti-pattern #2 defense: read-time lensing, not write-time migration.
  */
-export function lensFor(_recipe: WikiRecipe, _title: string, _bag: SlotUri): RecordLens {
-  return identityLens;
+export function lensFor(recipe: WikiRecipe, record: LarTiddlerRecord): RecordLens {
+  const version = record.meta?.schemaVersion;
+  if (!version || !recipe.lenses) return identityLens;
+  return recipe.lenses.get(version) ?? identityLens;
 }
+
+// ── Heads comparison helpers ────────────────────────────────────────────────
+
+/**
+ * Set-semantic equality for Automerge Heads.
+ *
+ * **Why set-semantics (research-refined 2026-05-31):** Automerge `Heads` is a
+ * mathematical *set* of change hashes — the DAG frontier — but the API
+ * returns it as a string[]. Order is not contractually deterministic across
+ * save/load or across implementations. Prior Automerge bugs traced to
+ * order-sensitive heads comparison causing sync loops. Always compare as
+ * sorted arrays or sets. See:
+ *   - https://github.com/automerge/automerge/releases (heads-arg correctness fix)
+ *   - https://github.com/automerge/beelay/blob/main/docs/protocol.md (sorted-then-hashed)
+ */
+export function headsEqual(a: readonly string[], b: readonly string[]): boolean {
+  if (a === b) return true;
+  if (a.length !== b.length) return false;
+  // Sort once then compare; cheap for typical frontier size (1–3 entries).
+  const sa = [...a].sort();
+  const sb = [...b].sort();
+  for (let i = 0; i < sa.length; i++) {
+    if (sa[i] !== sb[i]) return false;
+  }
+  return true;
+}
+
+/**
+ * EpochPinState — per-bag pin status returned by `CompositeStore.auditEpochs`.
+ *
+ *   unpinned  — the recipe carries no pin for this bag
+ *   matched   — current bag heads equal the pinned heads (set-semantically)
+ *   drifted   — current heads differ from pinned (bag moved since pin)
+ *   absent    — pinned bag has no layer registered on this composite
+ *   opaque    — bag layer exists but cannot expose heads (e.g. MemoryTiddlerStore)
+ *
+ * Default policy: audit-only. Operators read the audit; downstream consumers
+ * MAY refuse, time-travel via `view(pinnedHeads)`, or warn. Loud silent
+ * refusal at the read path stays out of scope per the
+ * residency-model deferred-enactment design (modal-view reader belongs to
+ * a follow-up sprint with explicit "detached" operator UX).
+ */
+export type EpochPinState =
+  | { readonly state: "unpinned" }
+  | { readonly state: "matched";  readonly heads:  readonly string[] }
+  | { readonly state: "drifted";  readonly pinned: readonly string[]; readonly current: readonly string[] }
+  | { readonly state: "absent" }
+  | { readonly state: "opaque" };
 
 /**
  * Slot URI → AutomergeUrl. Null for @temp (no CRDT — in-memory only).
