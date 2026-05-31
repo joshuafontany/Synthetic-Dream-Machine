@@ -13,7 +13,6 @@ import {
   abilityImplies,
   capabilityHasAbility,
   ABILITY_LADDER,
-  requestKeyhivePromotion,
 } from "../src/index.js";
 import type { OrichalcumAbility, OrichalcumCapability, LarPrincipal } from "../src/index.js";
 
@@ -35,7 +34,9 @@ describe("ABILITY_LADDER — ordered from least to most privileged", () => {
   });
 
   test("all expected abilities present", () => {
-    const expected: OrichalcumAbility[] = ["pull", "read", "sync", "write", "propose", "promote", "admin", "revoke"];
+    // "promote" retired 2026-05-31 — canon-promotion ceremony gone;
+    // residency-model bag-priority cascade subsumes the gating semantic.
+    const expected: OrichalcumAbility[] = ["pull", "read", "sync", "write", "propose", "admin", "revoke"];
     for (const a of expected) expect(ABILITY_LADDER).toContain(a);
   });
 });
@@ -55,7 +56,7 @@ describe("abilityImplies — ability ladder contracts", () => {
     expect(abilityImplies("pull", "read")).toBe(false);
     expect(abilityImplies("pull", "sync")).toBe(false);
     expect(abilityImplies("pull", "write")).toBe(false);
-    expect(abilityImplies("pull", "promote")).toBe(false);
+    expect(abilityImplies("pull", "admin")).toBe(false);
   });
 
   test("read implies read but not write", () => {
@@ -68,23 +69,23 @@ describe("abilityImplies — ability ladder contracts", () => {
     expect(abilityImplies("write", "sync")).toBe(true);
   });
 
-  test("write does NOT imply promote (canon gate requires promote ability)", () => {
-    expect(abilityImplies("write", "promote")).toBe(false);
+  test("write does NOT imply propose (propose is a separate suggestion-level capability)", () => {
+    expect(abilityImplies("write", "propose")).toBe(false);
   });
 
-  test("promote implies write, sync, read", () => {
-    expect(abilityImplies("promote", "write")).toBe(true);
-    expect(abilityImplies("promote", "sync")).toBe(true);
-    expect(abilityImplies("promote", "read")).toBe(true);
+  test("propose implies write, sync, read", () => {
+    expect(abilityImplies("propose", "write")).toBe(true);
+    expect(abilityImplies("propose", "sync")).toBe(true);
+    expect(abilityImplies("propose", "read")).toBe(true);
   });
 
-  test("admin implies promote", () => {
-    expect(abilityImplies("admin", "promote")).toBe(true);
+  test("admin implies propose", () => {
+    expect(abilityImplies("admin", "propose")).toBe(true);
   });
 
-  test("revoke implies admin and promote", () => {
+  test("revoke implies admin and propose", () => {
     expect(abilityImplies("revoke", "admin")).toBe(true);
-    expect(abilityImplies("revoke", "promote")).toBe(true);
+    expect(abilityImplies("revoke", "propose")).toBe(true);
   });
 });
 
@@ -123,32 +124,16 @@ describe("capabilityHasAbility — token gate", () => {
     expect(capabilityHasAbility(cap([]), "pull")).toBe(false);
   });
 
-  test("promote capability grants write and read", () => {
-    expect(capabilityHasAbility(cap(["promote"]), "write")).toBe(true);
-    expect(capabilityHasAbility(cap(["promote"]), "read")).toBe(true);
+  test("propose capability grants write and read", () => {
+    expect(capabilityHasAbility(cap(["propose"]), "write")).toBe(true);
+    expect(capabilityHasAbility(cap(["propose"]), "read")).toBe(true);
   });
 });
 
 // ---------------------------------------------------------------------------
-// requestKeyhivePromotion — stub: not yet wired
+// requestKeyhivePromotion stub retired 2026-05-31 — the canon-promotion ceremony
+// it gated no longer exists. Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/
+// LOAD) are the operator-facing surface; effect-record.ts is the audit-trail
+// layer; Keyhive's Tier-1 read/admin gate (capability-provider.ts) handles
+// cryptographic authorization. No stub here covers a ceremony that left.
 // ---------------------------------------------------------------------------
-
-describe("requestKeyhivePromotion — Keyhive stub", () => {
-  test("all promotion requests return not-implemented until Keyhive WASM lands", async () => {
-    const result = await requestKeyhivePromotion({
-      fromUri:      "lar:///draft/proposal",
-      targetUri:    "lar:///ha.ka.ba/@lares/v0.1/api/mu",
-      wikiId:       "altar-fire",
-      proposedText: "draft text",
-      reason:       "test: upgrading to canon",
-    });
-    expect(result.ok).toBe(false);
-    expect(result.status).toBe("not-implemented");
-    expect(result.reason).toContain("keyhive-promotion-graph-not-wired");
-  });
-
-  test("promotion cannot touch the ability ladder (write ≠ promote)", () => {
-    // Sentinel: even if Keyhive lands, write does not gate promotions.
-    expect(abilityImplies("write", "promote")).toBe(false);
-  });
-});

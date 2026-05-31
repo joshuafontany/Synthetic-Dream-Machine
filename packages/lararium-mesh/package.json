@@ -20,10 +20,6 @@
       "import": "./dist/mirror-paths.js",
       "types": "./dist/mirror-paths.d.ts"
     },
-    "./promotion-ceremony": {
-      "import": "./dist/promotion-ceremony.js",
-      "types": "./dist/promotion-ceremony.d.ts"
-    },
     "./reaction-graph": {
       "import": "./dist/reaction-graph.js",
       "types": "./dist/reaction-graph.d.ts"

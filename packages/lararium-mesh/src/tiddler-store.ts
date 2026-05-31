@@ -106,6 +106,19 @@ export interface LarTiddlerMeta {
    * applies. Convention: short stable string (e.g. "v1", "lore-2", "2026-05").
    */
   readonly schemaVersion?: string;
+  /**
+   * Residency Model change-id — Anti-pattern #1 defense (causal-history
+   * severance on copy). When an ACTION verb (ADD / COPY / MOVE / LOAD)
+   * transfers a tiddler between bags, the handler MUST preserve the
+   * change-id from the source record onto the destination record. Downstream
+   * tooling (operator queries, audit replay) recognizes "same change,
+   * different bag" by comparing change-ids across bag-Manifestations of
+   * one tiddler-title.
+   *
+   * Convention: opaque string, typically minted by `newChangeId()` on
+   * first-write or LOAD; preserved across subsequent transfers.
+   */
+  readonly changeId?: string;
 }
 
 export interface LarTiddlerRecord {

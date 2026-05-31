@@ -53,7 +53,9 @@ export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
 export const LARES_VERB_TAG = stableTagUri("lares-verb");
 export const LARES_VERB_EVENT_TAG = stableTagUri("lares-verb-event");
 export const LARES_PIN_TAG = stableTagUri("lares-pin");
-export const PROMOTION_RECEIPT_TAG = stableTagUri("lararium-promotion-receipt");
+// PROMOTION_RECEIPT_TAG retired 2026-05-31 under the residency-model cleanup —
+// per-bag EffectRecord tiddlers (effect-record.ts, LARES_EFFECT_RECORD_TAG)
+// replace the centralized promotion-receipt mechanism.
 /** Keyhive capability events persisted in the admin doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
 export const CAP_EVENT_TAG = stableTagUri("cap-event");
 export const CAP_EVENT_PREKEY_TAG     = stableTagUri("cap-event/prekey");

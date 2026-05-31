@@ -451,7 +451,10 @@ TW5 + RE occupy the **same** Worker thread (co-located, synchronous reads) preci
 
 1. **Main → Worker:** changeset notification — `{ schema_version: 1, type: "changeset", changeset: Uint8Array }`
 2. **Worker → Main:** event emission — `{ schema_version: 1, type: "event", listenable: string, payload: {...} }`
-3. **Main → Worker:** tier signal — `{ schema_version: 1, type: "teardown" | "promote" | "demote" }`
+3. **Main → Worker:** tier signal — `{ schema_version: 1, type: "teardown" | "hoʻomahana" | "hoʻokai" }`
+   - `hoʻomahana` ("to warm") — promote a cool slot toward hot/active tier
+   - `hoʻokai` ("to make sea-like / cool down") — demote a hot slot toward cool/archived tier
+   - Pele/Kai duality: pinned tier reads `hot` (operator keeps Pele's mana alive); active reads `mahana` (warm); archived reads `kai` (sea-cool, settled). The transition verbs use the causative `hoʻo-` prefix.
 
 These three message types cover the full P.3 boundary surface. Lock them before shipping Worker #1.
 

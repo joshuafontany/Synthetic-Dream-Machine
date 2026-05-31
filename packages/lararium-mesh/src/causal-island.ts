@@ -51,14 +51,23 @@ export type LarPrincipal =
 // ---------------------------------------------------------------------------
 
 // Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+//
+// Local Tier-2 ability vocabulary. Keyhive's own Access enum carries only four
+// variants (Pull, Read, Edit, Admin) — this ladder layers finer-grained caveats
+// on top of Keyhive's binary read/admin gate. See:
+// packages/lararium-keyhive/src/capability-provider.ts for the Tier-1/Tier-2 split.
+//
+// "promote" retired 2026-05-31 — the canon-promotion ceremony it gated no longer
+// exists. Under the residency-model bag-priority cascade, canon emerges from
+// writing to a lower-priority bag (which requires the same "admin" capability on
+// that bag), so a separate ability rung carries no additional gating semantic.
 export const ABILITY_LADDER = [
   "pull",     // retrieve encrypted bytes and forward; cannot decrypt or render
   "read",     // decrypt and render semantic content
   "sync",     // participate in CRDT reconciliation
   "write",    // produce accepted mutations
-  "propose",  // suggest hostful changes (pending; not yet hostless canon)
-  "promote",  // hostful → hostless canon-promotion ceremony
-  "admin",    // manage wiki, recipe, edge island membership
+  "propose",  // suggest changes (operator review precedes a residency ACTION)
+  "admin",    // manage wiki, recipe, edge island membership, residency actions
   "revoke",   // roll epoch; terminate future live tail for a principal
 ] as const;
 
@@ -330,7 +339,7 @@ export class AuthorityFirstGuard {
 export const CAUSAL_ISLAND_MUST = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
-  "canon-promotion-ceremony",
+  "cross-bag-residency-action",
   "revocation-epoch-change",
   "encrypted-sync-membership-change",
   "live-hostful-record-proposing-hostless-canon-mutation",
@@ -367,66 +376,12 @@ export const CAUSAL_ISLAND_MAY = [
 export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 
 // ---------------------------------------------------------------------------
-// PromotionReceipt — cross-island promotion ceremony record
-//
-// Emitted when a draft tiddler moves from the local/session layer to a durable
-// corpus or wiki island.  Receipts prevent cross-island mutation from becoming
-// hidden atomicity.  A promotion without a receipt becomes shadow canon.
-//
-// Capability gate: the actor MUST hold at least "promote" in ABILITY_LADDER.
-// Use abilityImplies(actor.ability, "promote") before accepting.
-//
-// Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/promotion-receipt
+// PromotionReceipt + requestKeyhivePromotion retired 2026-05-31 under the
+// residency-model cleanup. The replacement audit-trail layer is EffectRecord
+// (packages/lararium-mesh/src/effect-record.ts) — per-bag tagged with one of
+// ARCHIVAL_VERBS (accession / deaccession / transfer / withdrawal / loan /
+// holdings / reappraisal / disposition). Effect records live IN the bags they
+// describe and travel with bag CRDT history; they do not need a centralized
+// receipt registry. Keyhive integration for residency ACTION verbs (when it
+// lands) will get a fresh stub-or-real handler family in @lararium/keyhive.
 // ---------------------------------------------------------------------------
-
-export interface PromotionReceipt {
-  /** The draft tiddler title being promoted. */
-  readonly sourceDraftId: string;
-  /** Target tiddler title in the destination island (may differ from draft id). */
-  readonly targetId: string;
-  /** Bag ID of the destination island (e.g. wikiDraftLarUri(slug), or a corpus bag URI). */
-  readonly targetBag: string;
-  /** Automerge doc head(s) of the destination island before the promotion write. */
-  readonly beforeHeads: readonly string[];
-  /** Automerge doc head(s) of the destination island after the promotion write. */
-  readonly afterHeads: readonly string[];
-  /** Principal performing the promotion — must hold "promote" ability. */
-  readonly actor: LarPrincipal;
-  /** ISO 8601 timestamp of the ceremony. */
-  readonly promotedAt: string;
-  /**
-   * Projection ids invalidated by this promotion.
-   * Projection consumers must recompute any listed id after receiving this receipt.
-   */
-  readonly invalidatesProjections: readonly string[];
-}
-
-// ---------------------------------------------------------------------------
-// requestKeyhivePromotion — stub (Keyhive WASM promotion graph not yet wired)
-// ---------------------------------------------------------------------------
-
-export interface KeyhivePromotionRequest {
-  readonly fromUri:      string;
-  readonly targetUri:    string;
-  readonly wikiId:       string;
-  readonly proposedText: string;
-  readonly reason?:      string;
-}
-
-export type KeyhivePromotionResult =
-  | { readonly ok: true;  readonly receiptUri: string }
-  | { readonly ok: false; readonly status: "not-implemented"; readonly reason: string };
-
-/**
- * Stub: returns not-implemented until the Keyhive promotion graph is wired.
- * Sentinel test in causal-island.test.ts guards this boundary.
- */
-export async function requestKeyhivePromotion(
-  _req: KeyhivePromotionRequest,
-): Promise<KeyhivePromotionResult> {
-  return {
-    ok: false,
-    status: "not-implemented",
-    reason: "keyhive-promotion-graph-not-wired",
-  };
-}

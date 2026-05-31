@@ -103,7 +103,7 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
       return;
     }
 
-    if (raw.type === "teardown" || raw.type === "demote") {
+    if (raw.type === "teardown" || raw.type === "hookai") {
       void _handleTeardown();
       return;
     }

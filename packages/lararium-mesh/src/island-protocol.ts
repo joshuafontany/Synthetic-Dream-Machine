@@ -142,10 +142,21 @@ export interface IslandMsg_Manifest {
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
-/** Demote the wiki slot from hot to cold (teardown; thread may terminate). */
-export interface IslandMsg_Demote {
+/**
+ * Cool the wiki slot from hot to cold (teardown; thread may terminate).
+ *
+ * Type literal `"hookai"` — Hawaiian: hoʻokai, "to make sea-like / cool down."
+ * Pairs with the future warming signal `"hoomahana"` (hoʻomahana, "to warm")
+ * per the Pele/Kai duality in the worker tier-signal vocabulary.
+ *
+ * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup —
+ * the temperature register (hot/warm/cool) replaces the
+ * organizational-promotion register (promote/demote) that conflicted with
+ * the residency-model ACTION verb surface.
+ */
+export interface IslandMsg_HooKai {
   schema_version: ProtocolVersion;
-  type: "demote";
+  type: "hookai";
   wikiUri: string;
 }
 
@@ -214,7 +225,7 @@ export interface AdminMsg_VerbResult {
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
-  | IslandMsg_Demote
+  | IslandMsg_HooKai
   | IslandMsg_Teardown
   | AdminMsg_PlaceVerb
   | AdminMsg_VerbResult
@@ -337,7 +348,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "demote", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hookai", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
