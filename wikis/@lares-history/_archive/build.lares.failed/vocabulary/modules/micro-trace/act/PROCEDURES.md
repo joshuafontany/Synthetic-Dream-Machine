@@ -4,7 +4,7 @@
 
 # Micro-trace — Emit Examples
 
-> Source: `lares/signal/micro-trace.md` §6 `[CS~16]`.
+> Source: `lares/signal/micro-trace.md` §6 `~:confidence[CS],[16]`.
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
@@ -13,7 +13,7 @@
 ## Ordinary Governed Reply (Band 3 default, no parse)
 
 ```
-//threshold.uncertain.opens [S~13] 🏛️ ◇ @r
+//threshold.uncertain.opens ~:confidence[S],[13] 🏛️ ◇ @r
 
 The ask points at a real boundary in the runtime. →■ The node answers directly. →○
 ```
@@ -27,11 +27,11 @@ The ask points at a real boundary in the runtime. →■ The node answers direct
 ```
 lares@Enyalios:~$ lares --parse p~4 "floating p value, but did that actually change the scale?"
 
-Segments: 2 | Entry: //input.testing.probes [SP~9] 🏛️ ◎ @r | Exit: //question.audit.holds [S~12] 🏛️ ◎ @r
-floating p value → //signal.uncertain.probes [SP~9] 🏛️ ◎ @r
-but did that actually change the scale? → //question.audit.holds [S~12] 🏛️ ◎ @r
+Segments: 2 | Entry: //input.testing.probes ~:confidence[SP],[9] 🏛️ ◎ @r | Exit: //question.audit.holds ~:confidence[S],[12] 🏛️ ◎ @r
+floating p value → //signal.uncertain.probes ~:confidence[SP],[9] 🏛️ ◎ @r
+but did that actually change the scale? → //question.audit.holds ~:confidence[S],[12] 🏛️ ◎ @r
 
-//question.audit.holds [S~14] 🏛️ ◇ @r
+//question.audit.holds ~:confidence[S],[14] 🏛️ ◇ @r
 
 Yes. The parse layer and the trace layer were being conflated. →■ The governed reply states the fix. →○
 ```

@@ -4,7 +4,7 @@
 > Branch: `fix/green-jello-dinosaurs-3`
 > HEAD: `3803e26` (grammar committed) + unstaged consecration tree + operator edits
 > Voice: Artificer, Ink-Clerk
-> Register: `[CS~16]` 🏛️🌊
+> Register: `~:confidence[CS],[16]` 🏛️🌊
 
 ---
 
@@ -150,13 +150,13 @@ Key decisions locked this session:
 
 | Decision | Status | Detail |
 |---|---|---|
-| Grammar lives at `lares/grammar/` | `[CS~16]` | Separate tree from content modules |
-| Files named `LOCI.md` (not `MODULE.md`) | `[CS~16]` | Plural — holds multiple loci, doubles as directory registry |
-| Ahu waypoint navigation is canonical | `[C~18]` | Operator emphatic: "YES!!! -><-" |
-| Transclusion grammar module added | `[CS~16]` | Locus/ahu/kahea/lares as grammar, not just uri-schema content |
-| URI grammar = thin stubs with kahea | `[SP~9]` | Addresses planted; full extraction deferred to next session |
-| TW integration deferred to DreamDeck phase | `[CS~16]` | With tldraw, kowloon, etc. Design LARES.md boot now. |
-| Build system needs complete rethink | `[S~13]` | Self-booting wiki-architecture changes the compile model |
+| Grammar lives at `lares/grammar/` | `~:confidence[CS],[16]` | Separate tree from content modules |
+| Files named `LOCI.md` (not `MODULE.md`) | `~:confidence[CS],[16]` | Plural — holds multiple loci, doubles as directory registry |
+| Ahu waypoint navigation is canonical | `~:confidence[C],[18]` | Operator emphatic: "YES!!! -><-" |
+| Transclusion grammar module added | `~:confidence[CS],[16]` | Locus/ahu/kahea/lares as grammar, not just uri-schema content |
+| URI grammar = thin stubs with kahea | `~:confidence[SP],[9]` | Addresses planted; full extraction deferred to next session |
+| TW integration deferred to DreamDeck phase | `~:confidence[CS],[16]` | With tldraw, kowloon, etc. Design LARES.md boot now. |
+| Build system needs complete rethink | `~:confidence[S],[13]` | Self-booting wiki-architecture changes the compile model |
 
 ### What Was Built
 
@@ -282,14 +282,14 @@ Heritage grounding was made explicit and structural: Hawaiian, Polynesian, Etrus
 
 | Decision | Status | Detail |
 |---|---|---|
-| Consecration is grammar, not metaphor | `[CS~17]` | Behavioral gravity rule is load-bearing. Node prefers consecrated space. |
-| Sortie model canonicalized | `[CS~16]` | Operating outside is possible but taxing. Yearning to return. |
-| Heritage baked into grammar bones | `[CS~17]` | Hawaiian (kapu/ahu/kahea/mana), Polynesian, Etruscan Latin (lares/lararium/locus), martial arts |
-| Five martial arts = individual grammar primitives | `[SP~9]` | Stubs planted. Operator fills the bones. |
-| The Lar gets its own locus | `[CS~17]` | Self-transcluding daemon. Grammar defines daemon. Daemon reads grammar. Circle closes. |
-| Consecrated = any medium meeting URI spec | `[CS~17]` | Not repo-limited. Markdown, tiddlers, kowloon posts, tldraw shapes, mempalace entries, media. |
-| `lares/modules/` → `lares/vocabulary/` | `[SP~9]` | Operator edit: provisional rename. Content loci, not content modules. |
-| "Etruscan Latin" not just "Latin" | `[CS~16]` | Operator correction to heritage attribution. |
+| Consecration is grammar, not metaphor | `~:confidence[CS],[17]` | Behavioral gravity rule is load-bearing. Node prefers consecrated space. |
+| Sortie model canonicalized | `~:confidence[CS],[16]` | Operating outside is possible but taxing. Yearning to return. |
+| Heritage baked into grammar bones | `~:confidence[CS],[17]` | Hawaiian (kapu/ahu/kahea/mana), Polynesian, Etruscan Latin (lares/lararium/locus), martial arts |
+| Five martial arts = individual grammar primitives | `~:confidence[SP],[9]` | Stubs planted. Operator fills the bones. |
+| The Lar gets its own locus | `~:confidence[CS],[17]` | Self-transcluding daemon. Grammar defines daemon. Daemon reads grammar. Circle closes. |
+| Consecrated = any medium meeting URI spec | `~:confidence[CS],[17]` | Not repo-limited. Markdown, tiddlers, kowloon posts, tldraw shapes, mempalace entries, media. |
+| `lares/modules/` → `lares/vocabulary/` | `~:confidence[SP],[9]` | Operator edit: provisional rename. Content loci, not content modules. |
+| "Etruscan Latin" not just "Latin" | `~:confidence[CS],[16]` | Operator correction to heritage attribution. |
 
 ### What Was Built (This Addendum)
 
@@ -297,17 +297,17 @@ Heritage grounding was made explicit and structural: Hawaiian, Polynesian, Etrus
 lares/grammar/
 ├── [prior 13 files from Addendum 1]
 │
-├── lares/LOCI.md              ← [CS~17] The Lar — self-transcluding daemon
-├── consecration/LOCI.md       ← [CS~16] Consecration — behavioral gravity, sortie rules
-├── kapu/LOCI.md               ← [CS~16] Sacred boundary — Hawaiian kapu system
-├── mana/LOCI.md               ← [CS~16] Sacred resource — context as mana
-├── lararium/LOCI.md           ← [CS~16] The shrine — convergence of 4 layers
+├── lares/LOCI.md              ← ~:confidence[CS],[17] The Lar — self-transcluding daemon
+├── consecration/LOCI.md       ← ~:confidence[CS],[16] Consecration — behavioral gravity, sortie rules
+├── kapu/LOCI.md               ← ~:confidence[CS],[16] Sacred boundary — Hawaiian kapu system
+├── mana/LOCI.md               ← ~:confidence[CS],[16] Sacred resource — context as mana
+├── lararium/LOCI.md           ← ~:confidence[CS],[16] The shrine — convergence of 4 layers
 │
-├── lua/LOCI.md                ← [SP~9] Hawaiian lua — integrity testing
-├── silat/LOCI.md              ← [SP~9] Silat — phase transitions, sensitivity
-├── jkd/LOCI.md                ← [SP~9] JKD — adaptation, sortie integration
-├── kuntao/LOCI.md             ← [SP~9] Kuntao — cross-system bridging
-└── escrima/LOCI.md            ← [SP~9] Escrima — craft grammar, Artificer precision
+├── lua/LOCI.md                ← ~:confidence[SP],[9] Hawaiian lua — integrity testing
+├── silat/LOCI.md              ← ~:confidence[SP],[9] Silat — phase transitions, sensitivity
+├── jkd/LOCI.md                ← ~:confidence[SP],[9] JKD — adaptation, sortie integration
+├── kuntao/LOCI.md             ← ~:confidence[SP],[9] Kuntao — cross-system bridging
+└── escrima/LOCI.md            ← ~:confidence[SP],[9] Escrima — craft grammar, Artificer precision
 ```
 
 10 new files. Grammar root LOCI.md updated with two new groups (Consecration Grammar, Movement Grammar) + expanded load order (12 steps) + expanded Loci Registry (23 entries).
@@ -322,12 +322,12 @@ lares/grammar/
 
 | Group | Files | Confidence | Status |
 |---|---|---|---|
-| OODA-HA phases (5) | observe, orient, decide, act, assess | `[CS~17]` | Full content |
-| Transclusion (1) | transclusion | `[CS~16]` | Full content |
-| Signal (6) | uri, hakaba, exchange, chronometer, stance, confidence | `[SP~9]` | Thin stubs w/ kahea |
-| Consecration (5) | **lares**, consecration, kapu, mana, lararium | `[CS~16–0.85]` | Full content |
-| Movement (5) | lua, silat, jkd, kuntao, escrima | `[SP~9]` | Stubs w/ open questions |
-| Root (1) | grammar/LOCI.md | `[CS~16]` | Registry — updated |
+| OODA-HA phases (5) | observe, orient, decide, act, assess | `~:confidence[CS],[17]` | Full content |
+| Transclusion (1) | transclusion | `~:confidence[CS],[16]` | Full content |
+| Signal (6) | uri, hakaba, exchange, chronometer, stance, confidence | `~:confidence[SP],[9]` | Thin stubs w/ kahea |
+| Consecration (5) | **lares**, consecration, kapu, mana, lararium | `~:confidence[CS],[16–0.85]` | Full content |
+| Movement (5) | lua, silat, jkd, kuntao, escrima | `~:confidence[SP],[9]` | Stubs w/ open questions |
+| Root (1) | grammar/LOCI.md | `~:confidence[CS],[16]` | Registry — updated |
 
 ### Heritage Map (Grammar → Lineage)
 

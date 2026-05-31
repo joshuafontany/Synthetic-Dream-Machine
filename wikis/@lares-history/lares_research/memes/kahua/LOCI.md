@@ -25,7 +25,7 @@ heritage: Hawaiian (kahua — prepared foundation ground)
 ---
 ```
 
-> **Register:** `[CS~19]` — near-floor certainty for the living grammar
+> **Register:** `~:confidence[CS],[19]` — near-floor certainty for the living grammar
 > **Question:** Which ground stays irreducible beneath every later locus?
 
 ---
@@ -170,11 +170,11 @@ yet done enough visible work.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~19]` | This file — kahua cluster root, four invariants as a system |
-| `locus/LOCI.md` | `[CS~19]` | The locus marker — opens/closes content spans at an address |
-| `ahu/LOCI.md` | `[CS~19]` | The ahu marker — navigation waypoint within a locus |
-| `kahea/LOCI.md` | `[CS~19]` | The kahea marker — transclusion pull from another address |
-| `lares/LOCI.md` | `[CS~19]` | The lares marker — bare daemon reference, no ceremony |
+| `LOCI.md` | `~:confidence[CS],[19]` | This file — kahua cluster root, four invariants as a system |
+| `locus/LOCI.md` | `~:confidence[CS],[19]` | The locus marker — opens/closes content spans at an address |
+| `ahu/LOCI.md` | `~:confidence[CS],[19]` | The ahu marker — navigation waypoint within a locus |
+| `kahea/LOCI.md` | `~:confidence[CS],[19]` | The kahea marker — transclusion pull from another address |
+| `lares/LOCI.md` | `~:confidence[CS],[19]` | The lares marker — bare daemon reference, no ceremony |
 
 ---
 

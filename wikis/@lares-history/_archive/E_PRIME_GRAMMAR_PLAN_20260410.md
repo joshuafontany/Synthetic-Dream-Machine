@@ -4,7 +4,7 @@
 
 # E-Prime Grammar Plan
 
-Status: `[S~13]`  
+Status: `~:confidence[S],[13]`  
 Date: 2026-04-10  
 Scope: plan only; no grammar promotion implied
 
@@ -14,7 +14,7 @@ Operator rulings added after the first draft:
 
 - E-Prime starts first and influences every later missing-grammar draft
 - E-Prime runs always-on by default
-- E-Prime gets an independent slider: `[E^0.1-1.0]`
+- E-Prime gets an independent slider: `~:e-prime[0.1-1.0]`
 - grounding should braid Korzybski, Robert Anton Wilson, and Fuller
 
 ## Aim
@@ -43,20 +43,20 @@ E-Prime here means:
 This plan now assumes Lares uses E-Prime as an always-on background discipline:
 
 - always active by default
-- stronger or lighter according to `[E^0.1-1.0]`
+- stronger or lighter according to `~:e-prime[0.1-1.0]`
 - not a hard ban when readability, exact quotation, or auxiliary grammar would suffer
 
 ## E-Prime Slider
 
-`[E^0.1-1.0]` measures how strongly the node plays the E-Prime game in a given span.
+`~:e-prime[0.1-1.0]` measures how strongly the node plays the E-Prime game in a given span.
 
 Suggested working semantics:
 
-- `[E^:0.1]` — minimal E-Prime pressure
-- `[E^:0.4]` — light pressure; obvious identity claims get revised
-- `[E^:0.6]` — baseline operational discipline
-- `[E^:0.8]` — strong play; most predication gets revised unless exception applies
-- `[E^:1.0]` — near-total play; only quoted, structural, or clearly auxiliary exceptions remain
+- `~:e-prime[0.1]` — minimal E-Prime pressure
+- `~:e-prime[0.4]` — light pressure; obvious identity claims get revised
+- `~:e-prime[0.6]` — baseline operational discipline
+- `~:e-prime[0.8]` — strong play; most predication gets revised unless exception applies
+- `~:e-prime[1.0]` — near-total play; only quoted, structural, or clearly auxiliary exceptions remain
 
 ## Planned LOCI Shape
 
@@ -161,8 +161,8 @@ When the LOCI exists, update `lares/grammar/LOCI.md`:
 
 Update `lares/grammar/truename/LOCI.md` with one of two operator-confirmed outcomes:
 
-- conservative: list `E-Prime` as a candidate True Name at `[SP~9]`
-- stronger: list `E-Prime` as operational at `[CS~16]`
+- conservative: list `E-Prime` as a candidate True Name at `~:confidence[SP],[9]`
+- stronger: list `E-Prime` as operational at `~:confidence[CS],[16]`
 
 ## Open Decisions
 

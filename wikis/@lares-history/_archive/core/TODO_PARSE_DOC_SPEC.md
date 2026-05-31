@@ -70,14 +70,14 @@ One marker per turn, placed as an HTML comment on the line **immediately precedi
 | Marker type | `lares:turn` | literal | Distinguishes from other HTML comments |
 | Turn ID | `turn:` | `TN` zero-indexed | T0, T1, T2… |
 | Section | `section:` | Heading label, underscored | `section:III`, `section:IV` |
-| Register | `reg:` | `[X:0.0]` — **no tilde** | `reg:[SP~8]` |
+| Register | `reg:` | `[X:0.0]` — **no tilde** | `reg:~:confidence[SP],[8]` |
 | Mode | `mode:` | Emoji(s), no space between | `mode:🏛️🌊` |
 | Coordinate | `coord:` | `//domain.quality.dynamic` | `coord://threshold.uncertain.softens` |
 | Input type | `type:` | `command` \| `action` \| `action+command` | |
 
 **Example:**
 ```
-<!-- lares:turn turn:T3 section:III reg:[SP~8] mode:🎭 coord://threshold.uncertain.softens type:action -->
+<!-- lares:turn turn:T3 section:III reg:~:confidence[SP],[8] mode:🎭 coord://threshold.uncertain.softens type:action -->
 ```
 
 **Regex-extractable** per field with `(\w+):(\S+)` pattern. No positional assumptions. Field order is fixed for consistency; parsers should use key matching.
@@ -109,7 +109,7 @@ Inserted or updated at the document head, before the first `##` section heading.
 
 | Turn | Section | Type | Register | Mode | Coordinate |
 |---|---|---|---|---|---|
-| T0 | III | action | [P~6] | 🌊 | //threshold.new.arrives |
+| T0 | III | action | ~:confidence[P],[6] | 🌊 | //threshold.new.arrives |
 ```
 
 - The HTML comment line carries machine-readable summary

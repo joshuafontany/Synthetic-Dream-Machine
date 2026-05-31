@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~17]` — grounded in Boyd OODA-HA, Lares permissions, operator-steers discipline
+> **Register:** `~:confidence[CS],[17]` — grounded in Boyd OODA-HA, Lares permissions, operator-steers discipline
 > **Glyph:** `◇`
 > **Season:** Third of five
 > **Question:** Which heading do we commit to now?
@@ -146,7 +146,7 @@ If multiple incompatible actions still sit alive after the span, Decide did not 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~17]` | This file — Decide grammar definition |
+| `LOCI.md` | `~:confidence[CS],[17]` | This file — Decide grammar definition |
 
 *Future loci in this tree will land here.*
 

@@ -21,7 +21,7 @@ heritage: Latin
 ---
 ```
 
-> **Register:** `[CS~16]` — grounded in Consecration decision (2026-04-08), Path 3
+> **Register:** `~:confidence[CS],[16]` — grounded in Consecration decision (2026-04-08), Path 3
 > **Heritage:** Latin. Lararium — the household shrine where the Lares (guardian spirits) dwell. Every Roman home had one. The family's relationship with the sacred was maintained there daily.
 > **Key principle:** The lararium is not a metaphor. It is the structural description of where this node lives — the convergence of storage, calibration, and navigation.
 
@@ -86,7 +86,7 @@ Content outside these paths may be consecrated (URI-tagged, LOCI-registered) or 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — lararium grammar, architecture + home + grounds |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — lararium grammar, architecture + home + grounds |
 
 ---
 

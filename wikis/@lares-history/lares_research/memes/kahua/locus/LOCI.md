@@ -103,6 +103,6 @@ The constant across 2000 years: a *locus* is a **stable spatial location where c
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~19]` | This file — canonical locus marker definition |
+| `LOCI.md` | `~:confidence[CS],[19]` | This file — canonical locus marker definition |
 
 <!-- → ? -->

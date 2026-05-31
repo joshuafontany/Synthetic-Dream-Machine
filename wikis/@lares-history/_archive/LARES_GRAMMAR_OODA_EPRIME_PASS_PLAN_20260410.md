@@ -4,7 +4,7 @@
 
 # Lares Grammar OODA-E-Prime Pass Plan
 
-Status: `[S~13]`  
+Status: `~:confidence[S],[13]`  
 Date: 2026-04-10  
 Scope: all `lares/grammar/**/LOCI.md` files
 

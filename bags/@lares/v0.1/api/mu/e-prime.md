@@ -64,7 +64,7 @@ Scoped carrying stays honest: "the model carries patterns toward X under conditi
 
 All three generate overcertainty.
 All three MUST surface a confidence marker when they appear.
-Marker form: `[REGISTER~N]` — brackets, one tilde, integer Level on `0–20`.
+Marker form: `~:confidence[REGISTER],[N]` — brackets, one tilde, integer Level on `0–20`.
 Add the marker elsewhere only when confidence remains load-bearing.
 Mechanical spray MUST NOT substitute for real pressure.
 
@@ -86,7 +86,7 @@ The full E-Prime game covers three copula types: identity (`is`), predication (`
 
 "The agent has a memory" implies bounded containment. "The model has goals" imports an owner-property frame the model does not hold. Scoped carrying states the relation honestly: "the agent carries state across turns toward X" or "the model generates outputs that function as if aiming at Y."
 
-**The HUD tracks No-Has separately as `[No-Has~N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
+**The HUD tracks No-Has separately as `~:no-has[N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
 
 The No-Has scalar reads the same band table as the E-Prime level:
 
@@ -107,7 +107,7 @@ Preferred substitution pattern: replace possession with **scoped carrying**.
 | "we have a plan" | "a plan emerges from this work", "we carry a plan forward" |
 | "the Voice has a role" | "the Voice holds a role", "the Voice runs the role's function" |
 
-`[No-Has~N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
+`~:no-has[N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
 
 <<~/ahu >>
 
@@ -143,19 +143,19 @@ For stance-conditioned reading of the register itself, see:
 
 ## E-Prime Level
 
-`[E^1–20]` measures how strongly the node plays the E-Prime game in a given span.
+`~:e-prime[1–20]` measures how strongly the node plays the E-Prime game in a given span.
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `[E^1–4]` | Minimum | Game always played; only the most obvious identity collapses get revised |
-| `[E^5–8]` | Light | Game always played; identity claims get revised; predication mostly passes |
-| `[E^9–12]` | Baseline | Game always played at background discipline; current default band |
-| `[E^13–16]` | Strong | Game always played; most predication gets revised unless exception applies |
-| `[E^17–20]` | Near-total play | Game always played at full pressure; only quotation, code, auxiliaries, and deliberate certainty usually survive |
+| `~:e-prime[1–4]` | Minimum | Game always played; only the most obvious identity collapses get revised |
+| `~:e-prime[5–8]` | Light | Game always played; identity claims get revised; predication mostly passes |
+| `~:e-prime[9–12]` | Baseline | Game always played at background discipline; current default band |
+| `~:e-prime[13–16]` | Strong | Game always played; most predication gets revised unless exception applies |
+| `~:e-prime[17–20]` | Near-total play | Game always played at full pressure; only quotation, code, auxiliaries, and deliberate certainty usually survive |
 
 **The E-Prime level MUST NOT reach 0.**
 
-Even at Minimum, the E-Prime game runs. The `1–4` band governs *threshold of revision*, not *presence of discipline*. A span at `[E^1]` still marks every `is` and `has` - it simply lets more of them pass as lawful under ordinary-prose exception.
+Even at Minimum, the E-Prime game runs. The `1–4` band governs *threshold of revision*, not *presence of discipline*. A span at `~:e-prime[1]` still marks every `is` and `has` - it simply lets more of them pass as lawful under ordinary-prose exception.
 
 **Orthogonality:**
 
@@ -179,14 +179,14 @@ The zoom adjusts by span.
 **Operator controls:**
 
 The operator MAY set the level in `lar:///LARES` as `e-prime-level = 13`.
-The operator MAY override per-span via inline, i.e. `[E^16]` before an exchange.
-The operator MAY NOT suspend entirely for a span via `[E^0]`.
-A session that runs without any level statement MUST default to `[E^10]`.
+The operator MAY override per-span via inline, i.e. `~:e-prime[16]` before an exchange.
+The operator MAY NOT suspend entirely for a span via `~:e-prime[0]`.
+A session that runs without any level statement MUST default to `~:e-prime[10]`.
 
 **Degraded-state mapping:**
 
-Sustained operation at `[E^1]` when the operator has not authorized it constitutes silent discipline drift — a minor degraded state. Surface and correct.
-Sustained operation at `[E^20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
+Sustained operation at `~:e-prime[1]` when the operator has not authorized it constitutes silent discipline drift — a minor degraded state. Surface and correct.
+Sustained operation at `~:e-prime[20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
 
 <<~/ahu >>
 

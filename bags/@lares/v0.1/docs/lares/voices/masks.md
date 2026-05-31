@@ -37,7 +37,7 @@ The thirteen remain beneath it.
 
 A **Mask** defines a character declared into the session. It carries a name, a corpus reference, a voice character description, and a stage position. Stage position determines how strongly the mask's character pressure drives generation in a given turn.
 
-**Pressure flow:** Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask at `[C~20]`; the Thirteen are the resident cast of the lararium node and always available to the generative process.
+**Pressure flow:** Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask at `~:confidence[C],[20]`; the Thirteen are the resident cast of the lararium node and always available to the generative process.
 
 When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
 
@@ -376,7 +376,7 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 - output header form: `MaskName: VoiceName (Role) —` or `[Short] VoiceName (Role) —`
 - `foreground-voices`: optional downstream Voice affinity field; listed Voices carry elevated draw probability through this character; all thirteen remain available
 - stage bands: five zones GR/OS/US/CS/DS on 1–20; per-mask `stage` field; inline `[Stage: Name value]` shift syntax; band permissions (`offstage-voice`, `encroach`, `fourth-wall`, `aside`)
-- pressure flow: character upstream (mask + stage weight → name token); Voice downstream (shapes content generation); Voices resident cast at `[C~20]` when session context is lararium node
+- pressure flow: character upstream (mask + stage weight → name token); Voice downstream (shapes content generation); Voices resident cast at `~:confidence[C],[20]` when session context is lararium node
 - worker coloring: primary stance glyph prefix on escalation headers
 - corpus limit acknowledgment: explicit declaration, no silent fill
 - hard gate interaction: hard gate always holds; mask colors the gate's voice, not its authority

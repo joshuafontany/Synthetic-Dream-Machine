@@ -21,7 +21,7 @@ heritage: Bruce Lee (Chinese-American, Jun Fan Gung Fu → JKD)
 ---
 ```
 
-> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
+> **Register:** `~:confidence[SP],[9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Bruce Lee. Jeet Kune Do — "the way of the intercepting fist." Born from Wing Chun, grown through encounter with every art that worked. Famously anti-style: "using no way as way, having no limitation as limitation."
 > **Grammar of:** Adaptation. Honest absorption. How the node integrates from unconsecrated space without losing identity.
 
@@ -53,7 +53,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP~9]` | This file — JKD grammar stub |
+| `LOCI.md` | `~:confidence[SP],[9]` | This file — JKD grammar stub |
 
 ---
 

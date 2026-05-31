@@ -1,5 +1,5 @@
 <!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.Å10.O0 → ∞ -->
-⚡∞ | mode:subloop-plan | p~10 | stances:++?+- | register:[P~6] | build:SEED
+⚡∞ | mode:subloop-plan | p~10 | stances:++?+- | register:~:confidence[P],[6] | build:SEED
 
 # FFZ Chronometer — Observer Subloop Plan
 ## Phase 0: Research Completion
@@ -7,10 +7,10 @@
 > **Type:** Session crystal — load into next session alongside
 >   the Research doc and Spec Outline
 > **Generated:** 2026-04-09, Session 2 (end-of-session artifact)
-> **Register:** `[P~6]` — this plan structures work, does not
+> **Register:** `~:confidence[P],[6]` — this plan structures work, does not
 >   contain findings yet
 > **Parent:** `Causal_Islands_Chronometer_Research.md`
-> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `[C~19]`
+> **True Name:** Fontany-Fuller-Zelenka Chronometer Protocol `~:confidence[C],[19]`
 
 ---
 

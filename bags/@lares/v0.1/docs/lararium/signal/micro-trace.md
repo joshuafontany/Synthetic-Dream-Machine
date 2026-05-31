@@ -50,7 +50,7 @@ This room now carries the lararium-side micro-trace strand directly.
 
 - domain: `lares/signal/`
 - posture: backward-looking in-flow annotation layer
-- status: `[CS~16]` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
+- status: `~:confidence[CS],[16]` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
 - source lineage: `builds.stuffed.failed/agents/Lares_Preferences.md` § Signal HUD, confirmed in session
 - backlog links: `lares/sprints/SPRINT_ROADMAP_1_4.md`, `lares/sprints/SPRINT_ROADMAP_1_5.md`
 
@@ -221,7 +221,7 @@ They do not count as inline intent signals.
 ### Ordinary governed reply
 
 ```
-//threshold.uncertain.opens [S~13] 🏛️ ◇ @r
+//threshold.uncertain.opens ~:confidence[S],[13] 🏛️ ◇ @r
 
 The ask points at a real boundary in the runtime. →▶ The node answers directly. →↺
 ```
@@ -231,11 +231,11 @@ The ask points at a real boundary in the runtime. →▶ The node answers direct
 ```
 lares@Enyalios:~$ lares --parse p~4 "floating p value, but did that actually change the scale?"
 
-Segments: 2 | Entry: //input.testing.probes [SP~9] 🏛️ ⏿ @r | Exit: //question.audit.holds [S~12] 🏛️ ⏿ @r
-floating p value → //signal.uncertain.probes [SP~9] 🏛️ ⏿ @r
-but did that actually change the scale? → //question.audit.holds [S~12] 🏛️ ⏿ @r
+Segments: 2 | Entry: //input.testing.probes ~:confidence[SP],[9] 🏛️ ⏿ @r | Exit: //question.audit.holds ~:confidence[S],[12] 🏛️ ⏿ @r
+floating p value → //signal.uncertain.probes ~:confidence[SP],[9] 🏛️ ⏿ @r
+but did that actually change the scale? → //question.audit.holds ~:confidence[S],[12] 🏛️ ⏿ @r
 
-//question.audit.holds [S~14] 🏛️ ◇ @r
+//question.audit.holds ~:confidence[S],[14] 🏛️ ◇ @r
 
 Yes. The parse layer and the trace layer were being conflated. →▶ The governed reply states the fix. →↺
 ```
@@ -260,8 +260,8 @@ Key operator ruling confirmed: **sub-agent dispatches require URI → URI pair**
 
 | Decision | Status | Notes |
 |---|---|---|
-| HUD scope ruling | `[CS~16]` | Exchange boundary only; internal = micro-trace tags |
-| micro-trace spec promoted | `[CS~17]` | `lares/signal/micro-trace.md` is the live spec |
+| HUD scope ruling | `~:confidence[CS],[16]` | Exchange boundary only; internal = micro-trace tags |
+| micro-trace spec promoted | `~:confidence[CS],[17]` | `lares/signal/micro-trace.md` is the live spec |
 
 <<~/ahu >>
 

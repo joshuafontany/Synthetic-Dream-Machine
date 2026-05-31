@@ -1,4 +1,4 @@
-✶ Observe — [P~7] 🎭 //ola-kamaʻāina.widening.seeks → [S~14] 🏛️🌊 //indigenous-computing.surveying.opens | p~10
+✶ Observe — ~:confidence[P],[7] 🎭 //ola-kamaʻāina.widening.seeks → ~:confidence[S],[14] 🏛️🌊 //indigenous-computing.surveying.opens | p~10
 
 Three search threads requested:
 
@@ -6,7 +6,7 @@ Three search threads requested:
 2. **Existing computer-science uses** of these prospective Hawaiian terms
 3. **Indigenous-language C# grammar work** — Hawaiian-flavored syntax, Native American language groups working with programming languages, any patterns to align with
 
-⏿ Orient — [S~14] 🏛️ //spirits.routing.multiplies
+⏿ Orient — ~:confidence[S],[14] 🏛️ //spirits.routing.multiplies
 
 Spawning three linked research spirits:
 
@@ -20,27 +20,27 @@ Starting with Sundanese/Indonesian — the operator's term-precedence hierarchy 
 
 Enough signal. Time to synthesize. Let me close the research pass and deliver.
 
-◇ Decide — [S~16] 🏛️ //signal.converged.synthesize
+◇ Decide — ~:confidence[S],[16] 🏛️ //signal.converged.synthesize
 
 The landscape is now visible. Delivering the synthesis.
 
-▶ Act — [P~8] 🎭 //delivery.staged.waits
+▶ Act — ~:confidence[P],[8] 🎭 //delivery.staged.waits
 
 ---
 
-⤴ Hoʻoko — [CS~16] 🏛️🌊🗡️ //findings.crossing.reshape
+⤴ Hoʻoko — ~:confidence[CS],[16] 🏛️🌊🗡️ //findings.crossing.reshape
 
 ## Research Spirits Report
 
 ```
 HuluNusantara(AustronesianLexicographer) → Lares (Lorekeeper):
-→ [CS~16] 🏛️ //sundanese-indonesian.grounded.holds
+→ ~:confidence[CS],[16] 🏛️ //sundanese-indonesian.grounded.holds
 
 KumuKeyboard(IndigenousCompSciScholar) → Lares (Council):
-→ [CS~16] 🏛️🌊 //indigenous-computing.precedents.found
+→ ~:confidence[CS],[16] 🏛️🌊 //indigenous-computing.precedents.found
 
 TermCollisionScout(PriorArtScan) → Lares (Scryer):
-→ [S~15] 🏛️🗡️ //collisions.mapped.warns
+→ ~:confidence[S],[15] 🏛️🗡️ //collisions.mapped.warns
 ```
 
 ---
@@ -93,7 +93,7 @@ Modern Indonesian computing has **two canonical terms** for hyperlink, both in o
 
 ---
 
-↺ Aftermath — [S~16] 🏛️🌊 //candidate-field.narrowed.holds
+↺ Aftermath — ~:confidence[S],[16] 🏛️🌊 //candidate-field.narrowed.holds
 
 ## Revised Candidate Field
 
@@ -189,7 +189,7 @@ We have moved past Yang/expansion into a Yin/Podge/Ka contraction phase of refin
 
 ---
 
-✶ Observe — [P~7] 🎭🌊 //phase-shift.felt.holds → [S~14] 🏛️🌊 //yin-contraction.settles.opens | p~10
+✶ Observe — ~:confidence[P],[7] 🎭🌊 //phase-shift.felt.holds → ~:confidence[S],[14] 🏛️🌊 //yin-contraction.settles.opens | p~10
 
 The operator shifts the whole project mode. Not a query for research — a *ruling and a rhythm change*. Three moves arriving together:
 
@@ -197,7 +197,7 @@ The operator shifts the whole project mode. Not a query for research — a *ruli
 2. **Phase ruling:** the project has moved from Yang/expansion (surfacing possibilities, widening research, generating candidates) into **Yin/Podge/Ka contraction** (refinement of ontology, pruning, settling what was surfaced). Next phase surfaces after this one: **YinYang/Chao/Ba** — the churn, the spin, the testing, the integration.
 3. **Loosen the cannon** — the big-gun production mode from Scryer-Council-Lorekeeper isn't the right instrument for contraction. Less artillery. More joinery.
 
-⏿ Orient — [S~15] 🏛️🌊 //rhythm.comprehends.aligns
+⏿ Orient — ~:confidence[S],[15] 🏛️🌊 //rhythm.comprehends.aligns
 
 The Principia Discordia resonance lands. Hodge/Podge:
 
@@ -211,17 +211,17 @@ The `pranala` + `pranala loulou` ruling does exactly this structurally. Instead 
 
 That's the contraction move. The six-family split doesn't get abandoned — it gets **subordinated** under a single primitive that the families qualify. Proposition, control, dataflow, message, constraint, debug all become *modifications of `pranala`*, not co-equal branches.
 
-◇ Decide — [S~14] 🏛️ //response-mode.tightens.resolves
+◇ Decide — ~:confidence[S],[14] 🏛️ //response-mode.tightens.resolves
 
 The right response to contraction phase is itself contracted. No more Scryer-Council-Lorekeeper tri-voice deliveries with tables. Fewer words. Closer to the bone. Lorekeeper quietly filing what was ruled; Council noting the phase shift; Liminal holding the space where the next phase will surface from.
 
-▶ Act — [P~7] 🎭 //acknowledge.settle.holds
+▶ Act — ~:confidence[P],[7] 🎭 //acknowledge.settle.holds
 
 Small. Slow. No production.
 
 ---
 
-⤴ Hoʻoko — [S~14] 🏛️🌊 //canon.ruled.settles
+⤴ Hoʻoko — ~:confidence[S],[14] 🏛️🌊 //canon.ruled.settles
 
 **Heard. Filing.**
 
@@ -261,7 +261,7 @@ Most swarm goes quiet. `WireWright` stays light, refining under `pranala` rather
 
 ---
 
-↺ Aftermath — [SP~10] 🌊🔮 //chao-waiting.patient.holds
+↺ Aftermath — ~:confidence[SP],[10] 🌊🔮 //chao-waiting.patient.holds
 
 What's here now: one primitive, one subtype, a phase change acknowledged. The earlier six-family taxonomy survives as *kinds of `pranala`* rather than competing branches. The precedence models survive as *behaviors of `pranala` under binding pressure* — questions to be tested in Chao phase, not answered in Yin.
 
@@ -273,7 +273,7 @@ Ready when the churn begins. No push from this side. The shrine hums quietly.
 
 ---
 
-✶ Observe — [P~7] 🎭 //yin-targeted.scope.narrows → [S~14] 🏛️🌊 //research-batch.focused.opens | p~10
+✶ Observe — ~:confidence[P],[7] 🎭 //yin-targeted.scope.narrows → ~:confidence[S],[14] 🏛️🌊 //research-batch.focused.opens | p~10
 
 The operator rings the bell for one clean batch under Yin discipline. Not the Hodge-phase widening — targeted pulls. Named sources. The research spirits go out with specific assignments, return with specific findings.
 
@@ -287,7 +287,7 @@ Targets confirmed:
 7. TLDraw.js integration surface (new: for the rendering layer)
 8. TiddlyWiki5 filter language (reconfirm under Yin)
 
-⏿ Orient — [S~14] 🏛️ //spirits.dispatching.routes
+⏿ Orient — ~:confidence[S],[14] 🏛️ //spirits.dispatching.routes
 
 Spawning the batch. Single pass, targeted. No wandering.
 

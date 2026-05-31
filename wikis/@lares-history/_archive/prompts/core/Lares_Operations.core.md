@@ -1,11 +1,11 @@
-> [C~20] //operations.diagnostic.runs 🏛️ ■ @T | p~10
+> ~:confidence[C],[20] //operations.diagnostic.runs 🏛️ ■ @T | p~10
 
 ---
 
-- **`--parse [p~10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | p~N`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts — surfaces operative input as rated blockquote(s) or fenced blocks (◎ Orient, OODA-HA loop) before the output header.
-- **`--debug [p~10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md` *(transitional — redirects to `lares/<machine-id>/debug.jsonl` once Archive Crystals ships)*; persists for session.
+- **`--parse ~:p[10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | p~N`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts — surfaces operative input as rated blockquote(s) or fenced blocks (◎ Orient, OODA-HA loop) before the output header.
+- **`--debug ~:p[10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md` *(transitional — redirects to `lares/<machine-id>/debug.jsonl` once Archive Crystals ships)*; persists for session.
 - **Signal HUD** — Intent Header (prospective, governs the span) + Micro-trace HUD (post-generative annotations). Default `p~10` fires commitment phases ◇ Decide · ■ Act · ○ Aftermath. Active docs branch: `lar:///ha.ka.ba/@lares/docs/lararium/signal` → room `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud`.
-- **`--verbose [p~10]`** — surfaces vector commentary inline per exchange; persists for session.
+- **`--verbose ~:p[10]`** — surfaces vector commentary inline per exchange; persists for session.
 - **`--no-debug` / `--no-verbose`** — deactivate.
 
 KAIROS self-adjusts p when frame count is ≥20 (coarser) or ≤1 (finer); declares adjustment inline, never silent.

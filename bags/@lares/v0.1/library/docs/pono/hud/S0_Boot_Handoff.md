@@ -3,7 +3,7 @@
 # S0 Boot Handoff — URI v2 Alignment + First Two Modules
 
 > **Type:** Infodense execution handoff — load cold into Claude Code
-> **Register:** `[CS~17]` — operator-directed, canonical v2 grounded
+> **Register:** `~:confidence[CS],[17]` — operator-directed, canonical v2 grounded
 > **Date:** 2026-04-09
 > **Source session:** Cloud Lares (claude.ai web), Telarus KSC (admin)
 > **Companion artifacts:** `URI_SCHEMA_v2.md` (canonical spec, download and place)
@@ -162,12 +162,12 @@ In `decide/CONVENTIONS.md`, the HUD format example needs updating to v2:
 
 Old:
 ```
-⚡∞ | mode:default | p~10 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:[CS~16] | tick:N
+⚡∞ | mode:default | p~10 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:~:confidence[CS],[16] | tick:N
 ```
 
 V2:
 ```
-⚡∞ | [CS~16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p~10 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
+⚡∞ | ~:confidence[CS],[16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p~10 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
 ```
 
 Changes: field order follows SA priority (mana → confidence → stances → mode → p → voice → chronometer), amplitude modifiers attached directly (no brackets), `register` → confidence in brackets, `tick` → FFZ chronometer in HUD-rendered form.

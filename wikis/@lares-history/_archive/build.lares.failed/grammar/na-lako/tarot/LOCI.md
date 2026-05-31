@@ -56,6 +56,6 @@ Do not promote register until primary source material is confirmed in the librar
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP~9]` | This file — Tarot as system; na-lako meta-locus |
+| `LOCI.md` | `~:confidence[SP],[9]` | This file — Tarot as system; na-lako meta-locus |
 
 <!-- → ? -->

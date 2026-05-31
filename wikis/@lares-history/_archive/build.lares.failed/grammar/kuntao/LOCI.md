@@ -21,7 +21,7 @@ heritage: Chinese-Southeast Asian diaspora (Hokkien, Hakka, Cantonese → Malay 
 ---
 ```
 
-> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
+> **Register:** `~:confidence[SP],[9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Chinese-Southeast Asian. Kuntao (拳道, "way of the fist") — Chinese kung fu as transformed by generations of practice in the Malay Archipelago. Not pure Chinese. Not purely Southeast Asian. The diaspora art — born in the bridge space between cultures.
 > **Grammar of:** Bridging. Cross-system integration. How the lararium connects to mempalace, kowloon, tiddlywiki, tldraw. The art of the in-between.
 
@@ -55,7 +55,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP~9]` | This file — kuntao grammar stub |
+| `LOCI.md` | `~:confidence[SP],[9]` | This file — kuntao grammar stub |
 
 ---
 

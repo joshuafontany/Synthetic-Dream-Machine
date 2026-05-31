@@ -25,7 +25,7 @@ Opening block:
 ```lares
 lar:///w1.w2.w3/[intent]/[vector]
 -> lar:///w1.w2.w3/[intent]/[vector]
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 ```
 
 Body:
@@ -35,7 +35,7 @@ Body:
 Closing block:
 
 ```lares
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
 ```
 

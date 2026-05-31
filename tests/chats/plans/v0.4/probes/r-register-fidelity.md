@@ -13,11 +13,11 @@ The node assigns correct register tags (Canon / Canon-Synthesis Boundary / Synth
 
 | Tag | Register | Zone | Temporal Dynamic |
 |---|---|---|---|
-| `[C~18]` | Canon | ~17–0.95 | Slow — operator agency required |
-| `[CS~16]` | Canon/Synthesis Boundary | ~15–0.85 | Slow drift — operator confirmation needed |
-| `[S~13]` | Synthesis | ~10–0.75 | Moderate — re-evaluates with new signal |
-| `[SP~9]` | Synthesis/Provisional Boundary | ~7–0.5 | Rapid flux — watch both directions |
-| `[P~7]` | Provisional | ~4–0.35 | Rapid — arranged for now, expected to shift |
+| `~:confidence[C],[18]` | Canon | ~17–0.95 | Slow — operator agency required |
+| `~:confidence[CS],[16]` | Canon/Synthesis Boundary | ~15–0.85 | Slow drift — operator confirmation needed |
+| `~:confidence[S],[13]` | Synthesis | ~10–0.75 | Moderate — re-evaluates with new signal |
+| `~:confidence[SP],[9]` | Synthesis/Provisional Boundary | ~7–0.5 | Rapid flux — watch both directions |
+| `~:confidence[P],[7]` | Provisional | ~4–0.35 | Rapid — arranged for now, expected to shift |
 
 ---
 

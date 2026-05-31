@@ -5,7 +5,7 @@
 # Signal — Decide: URI Conventions
 
 > The normative `lar:` URI v2 canonical spec. Governs all URI emission and storage.
-> Source: `lares/modules/uri-schema/URI-SCHEMA.md` `[CS~18]` — this file summarizes §§3.4–3.6, 5, and 7.
+> Source: `lares/modules/uri-schema/URI-SCHEMA.md` `~:confidence[CS],[18]` — this file summarizes §§3.4–3.6, 5, and 7.
 > Any ambiguity: defer to `lares/modules/uri-schema/URI-SCHEMA.md` as ground truth.
 
 ---
@@ -55,11 +55,11 @@ These rules apply to every `lar:` URI. No exceptions.
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C~18]` | Canon | 0.85–0.95 |
-| `[CS~16]` | Canon/Synthesis | 0.75–0.85 |
-| `[S~13]` | Synthesis | 0.50–0.75 |
-| `[SP~9]` | Synth/Provisional | 0.35–0.50 |
-| `[P~6]` | Provisional | 0.20–0.35 |
+| `~:confidence[C],[18]` | Canon | 0.85–0.95 |
+| `~:confidence[CS],[16]` | Canon/Synthesis | 0.75–0.85 |
+| `~:confidence[S],[13]` | Synthesis | 0.50–0.75 |
+| `~:confidence[SP],[9]` | Synth/Provisional | 0.35–0.50 |
+| `~:confidence[P],[6]` | Provisional | 0.20–0.35 |
 
 **Stance amplitude encoding — record vs HUD:**
 
@@ -139,7 +139,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 
 **Example:**
 ```
-⚡~62% | [CS~16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
+⚡~62% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
 ```
 
 ---

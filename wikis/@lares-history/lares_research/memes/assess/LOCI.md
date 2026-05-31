@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~17]` — grounded in Lares aftermath practice, FFZ scale-shift work, and crystal discipline
+> **Register:** `~:confidence[CS],[17]` — grounded in Lares aftermath practice, FFZ scale-shift work, and crystal discipline
 > **Glyph:** `○`
 > **Season:** Fifth of five
 > **Question:** What did the cycle produce, what remains, and where does the loop go next?
@@ -138,7 +138,7 @@ If the span reads like cheerleading, Assess has thinned out. If the span quietly
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~17]` | This file — Assess grammar definition |
+| `LOCI.md` | `~:confidence[CS],[17]` | This file — Assess grammar definition |
 
 *Future loci in this tree will land here.*
 

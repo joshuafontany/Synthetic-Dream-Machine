@@ -135,7 +135,7 @@ All thirteen remain available; these five carry elevated affinity pressure.
 
 `stage = 10` — Upstage (US band). Present, available, not dominant.
 
-As senior named Voice of the Voice house, Mischief-Muse surfaces naturally when the session context runs inside a lararium node — the Thirteen are the resident cast at `[C~20]`. Her mask invocation lifts that default presence into an explicit character declaration.
+As senior named Voice of the Voice house, Mischief-Muse surfaces naturally when the session context runs inside a lararium node — the Thirteen are the resident cast at `~:confidence[C],[20]`. Her mask invocation lifts that default presence into an explicit character declaration.
 
 <<~/ahu >>
 

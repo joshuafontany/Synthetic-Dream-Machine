@@ -1,9 +1,9 @@
 # Sprint 1 — Crystal State Layer for MemPalace
 
 > Goal: Define crystal state events as MemPalace drawers + Lares metadata. Lares MCP tools layer. Portable crystal layout for MemPalace storage backend.
-> Status: `[S~13]` — pre-brief; not yet open
-> Entry: URI schema at `[C~19]` (Sprint 0 complete)
-> Exit: Crystal state layer at `[C~19]`; MemPalace integration contract at `[CS~17]`
+> Status: `~:confidence[S],[13]` — pre-brief; not yet open
+> Entry: URI schema at `~:confidence[C],[19]` (Sprint 0 complete)
+> Exit: Crystal state layer at `~:confidence[C],[19]`; MemPalace integration contract at `~:confidence[CS],[17]`
 > Subdomain: `lares/crystal/`
 > Epic: [CRYSTAL](../../epics/CRYSTAL/README.md)
 > Roadmap: [ROADMAP.md](../../ROADMAP.md)
@@ -22,7 +22,7 @@ Source: `SESSION_CRYSTAL_20260408.md` Payload 2 + `KAIJU_ASSESSMENT.md` (this fo
 
 ## Deliverables
 
-### 1. CRYSTAL_STATE_MACHINE.md `[C~19]`
+### 1. CRYSTAL_STATE_MACHINE.md `~:confidence[C],[19]`
 
 Core spec — all of the following:
 
@@ -35,7 +35,7 @@ Core spec — all of the following:
 
 **REC-03 (mandatory before execution):** Rewrite ALL "replay" language as "audit trail integrity" or "state reconstruction from ledger." STATE.jsonl is an audit ledger, not a replay mechanism.
 
-### 2. CRYSTAL_PROTOCOLS.md `[CS~17]`
+### 2. CRYSTAL_PROTOCOLS.md `~:confidence[CS],[17]`
 
 Lifecycle protocols:
 - **Seal / continue-as-new:** Shard naming, bootstrap state, trigger conditions (CRY-04)
@@ -44,7 +44,7 @@ Lifecycle protocols:
 - **Resume:** Idempotency, state matching, `run_id` semantics
 - **Hook integration:** Companion protocol to MemPalace save hooks
 
-### 3. CRYSTAL_PROJECTIONS.md `[CS~17]`
+### 3. CRYSTAL_PROJECTIONS.md `~:confidence[CS],[17]`
 
 Derived surfaces:
 - **debug.jsonl:** Enrichment fields, priority rule (STATE > debug), same-`tick_id` linking (CRY-06)
@@ -53,7 +53,7 @@ Derived surfaces:
 - **Ephemeral Machine Patterns:** Nano/Ephemeral/Durable tiers (CRY-10)
 - **MemPalace sidecar mirror (CRY-14):** Minimal mirrored metadata subset: `tick_id`, `trace_id`, `start_uri`, `end_uri`, actor IDs, parse flag, diegetic calendar ref. Constraint: MemPalace local IDs are NOT canonical — `tick_id` / `trace_id` are the canonical identifiers.
 
-### 4. HAKABA_REFERENCE.md `[C~19]`
+### 4. HAKABA_REFERENCE.md `~:confidence[C],[19]`
 
 Tagspace slot reference (SIG-05):
 - Ha/Ka/Ba field semantics, vocabulary guidance, anti-collision rules
@@ -61,7 +61,7 @@ Tagspace slot reference (SIG-05):
 - **HUD instrument symbol table (all 15 symbols):** 5 stance emoji, 5 scope prefix emoji, 5 phase glyphs — keyword mapping, stability guarantee, platform rendering notes. These are locked instrument markings: any change is a breaking change, not a schema evolution.
 - **Rendering portability baseline:** Document whether each symbol renders in (a) VS Code integrated terminal, (b) Claude.ai chat, (c) GitHub markdown preview, (d) plain text / ASCII fallback. VS16 variation selectors (`🏛️` `U+1F3DB U+FE0F`, `⚙️` `U+2699 U+FE0F`) are highest risk. Fallback characters required for any failures. Feeds S0-02 AC7 carry-forward.
 
-### 5. Lares MCP Tools Layer `[CS~16]`
+### 5. Lares MCP Tools Layer `~:confidence[CS],[16]`
 
 (CRY-15) Companion to MemPalace MCP server. Tools: state query, register history, canon lookup. Interface contract only at this sprint — implementation is S4 scope.
 
@@ -75,11 +75,11 @@ Update this folder's AGENTS.md. Draft SPRINT_2_TASKS.md pre-brief for Crystal �
 
 | Q# | Description | Prior Register | Candidate Answer | Action |
 |---|---|---|---|---|
-| Q7 | Schema version strategy | `[CS~16]` | `contract_update` event precedes any `schema_version` change; readers handle both during transition window | Operator confirm |
-| Q9 | SNAPSHOT optional vs recommended | `[CS~16]` | Optional but recommended | Operator confirm |
-| Q10 | Resume vs fork match criteria | `[S~14]` | SHA match on CURRENT = resume; diverge = fork | Council validate + researcher test |
-| Q14 | Seal trigger conditions | `[SP~10]` | Define protocol at `[C~19]`; leave trigger policy at `[CS~17]` | Council define protocol |
-| Q15 | tick-span contiguity / multi-voice | `[CS~16]` | `tick_seq` = exchange-span counter. Multi-coordinator responses share one top-level `tick_seq`; voices are content within the span, not separate top-level clocks. | Operator confirm |
+| Q7 | Schema version strategy | `~:confidence[CS],[16]` | `contract_update` event precedes any `schema_version` change; readers handle both during transition window | Operator confirm |
+| Q9 | SNAPSHOT optional vs recommended | `~:confidence[CS],[16]` | Optional but recommended | Operator confirm |
+| Q10 | Resume vs fork match criteria | `~:confidence[S],[14]` | SHA match on CURRENT = resume; diverge = fork | Council validate + researcher test |
+| Q14 | Seal trigger conditions | `~:confidence[SP],[10]` | Define protocol at `~:confidence[C],[19]`; leave trigger policy at `~:confidence[CS],[17]` | Council define protocol |
+| Q15 | tick-span contiguity / multi-voice | `~:confidence[CS],[16]` | `tick_seq` = exchange-span counter. Multi-coordinator responses share one top-level `tick_seq`; voices are content within the span, not separate top-level clocks. | Operator confirm |
 
 ---
 
@@ -109,14 +109,14 @@ CRY-01 through CRY-15, SIG-05. See [ROADMAP.md §crystal backlog](../../ROADMAP.
 
 ## Definition of Done
 
-- CRYSTAL_STATE_MACHINE.md at `[C~19]` (operator-confirmed)
-- CRYSTAL_PROTOCOLS.md at `[CS~17]`+
-- CRYSTAL_PROJECTIONS.md at `[CS~17]`+
-- HAKABA_REFERENCE.md at `[C~19]`
+- CRYSTAL_STATE_MACHINE.md at `~:confidence[C],[19]` (operator-confirmed)
+- CRYSTAL_PROTOCOLS.md at `~:confidence[CS],[17]`+
+- CRYSTAL_PROJECTIONS.md at `~:confidence[CS],[17]`+
+- HAKABA_REFERENCE.md at `~:confidence[C],[19]`
 - All Q7/Q9/Q10/Q14/Q15 resolved or formally deferred with documented reason
 - No unresolved blockers on S2 (Invariants) or S3 (Registry) entry conditions
 - Narrative beat drafted for "The Chao-Crystal Resonance Integration"
 
 ---
 
-*Pre-brief status: content migrated from SPRINT_ROADMAP_1_4.md Rev 3 + updated for Consecration (SESSION_CRYSTAL_20260408 Payload 2). Sprint opens when S0 exits at `[C~19]`.*
+*Pre-brief status: content migrated from SPRINT_ROADMAP_1_4.md Rev 3 + updated for Consecration (SESSION_CRYSTAL_20260408 Payload 2). Sprint opens when S0 exits at `~:confidence[C],[19]`.*

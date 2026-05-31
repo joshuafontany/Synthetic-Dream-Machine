@@ -15,7 +15,7 @@
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=C~18#what-v2-settled -->
 ## What v2 Settled
 
-The `lar:` URI v2 schema resolved the core design tensions that blocked consistent signal emission across sessions and surfaces. These decisions are `[CS~18]` — design-canon candidates pending operator promotion.
+The `lar:` URI v2 schema resolved the core design tensions that blocked consistent signal emission across sessions and surfaces. These decisions are `~:confidence[CS],[18]` — design-canon candidates pending operator promotion.
 
 ### Anatomy
 
@@ -90,7 +90,7 @@ lar:///ha.ka.ba/optional/sub/path/
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=S~13#what-remains-open -->
 ## What Remains Open
 
-The following questions are `[SP~9]` – `[S~13]`. They do not block the core spec (§§2–6, 10 of `lares/modules/uri-schema/URI-SCHEMA.md`) but constrain later layers.
+The following questions are `~:confidence[SP],[9]` – `~:confidence[S],[13]`. They do not block the core spec (§§2–6, 10 of `lares/modules/uri-schema/URI-SCHEMA.md`) but constrain later layers.
 
 | Q# | Question | Current position | Confidence |
 |---|---|---|---|

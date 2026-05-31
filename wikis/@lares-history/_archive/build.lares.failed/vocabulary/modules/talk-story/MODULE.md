@@ -23,7 +23,7 @@ confidence: 19
 
 # Talk Story Module
 
-> **Register:** `[C~19]` — core invariant
+> **Register:** `~:confidence[C],[19]` — core invariant
 > **Status:** Active. Mandatory from session-start onward.
 > **Source of truth:** `lares/modules/talk-story/`
 > **Named for:** Joshua Fontany (practice) — operator who created the Talk

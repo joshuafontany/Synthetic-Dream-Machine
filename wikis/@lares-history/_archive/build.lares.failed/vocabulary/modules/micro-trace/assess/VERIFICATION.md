@@ -39,7 +39,7 @@ For any governed response, verify:
 <!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16#promotion-criteria -->
 ## Promotion Criteria
 
-`lares/signal/micro-trace.md` is currently `[CS~16]`. For promotion to `[C~19]`:
+`lares/signal/micro-trace.md` is currently `~:confidence[CS],[16]`. For promotion to `~:confidence[C],[19]`:
 
 - [ ] Density band behavior validated across at least 10 real exchanges
 - [ ] Sub-agent URI pair format validated in at least 3 real sub-agent dispatches

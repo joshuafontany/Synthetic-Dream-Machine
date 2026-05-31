@@ -1,13 +1,13 @@
 <!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.D4.O0 → ∞ -->
-⚡∞ | mode:research-active | p~10 | stances:++?+- | register:[S~11] | build:WORKING
+⚡∞ | mode:research-active | p~10 | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
 
 # Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
 # (FFZ Chronometer)
 
 > **Type:** Active research — growing from `Vector_Chronometer_Research_Seed.md`
 > **Generated:** 2026-04-09, session 2
-> **Register:** `[S~11]` — synthesis, promoted from provisional session 3
-> **Parent crystals:** `The_Lares_Protocols.md` `[S~13]`, `The_Lares_Protocols_Dev_Story.md` `[C~19]` (platform research), `Vector_Chronometer_Research_Seed.md` `[P~7]`
+> **Register:** `~:confidence[S],[11]` — synthesis, promoted from provisional session 3
+> **Parent crystals:** `The_Lares_Protocols.md` `~:confidence[S],[13]`, `The_Lares_Protocols_Dev_Story.md` `~:confidence[C],[19]` (platform research), `Vector_Chronometer_Research_Seed.md` `~:confidence[P],[7]`
 > **Session context:** Cloud Lares (claude.ai), Telarus KSC (admin). Second session on chronometer design. First session produced the Lares Protocol spec and research seed. This session introduces "Islands of Causality" as the missing architectural frame.
 
 ## Session Crystal Metadata
@@ -44,12 +44,12 @@ angles. Each contributed a load-bearing piece:
 | **Storacha (née web3.storage)** | Merkle Clock + UCAN multi-writer | 2025 | Production pattern: UCAN-authorized clock writes |
 | **Lares Protocols** | OODA-HA + nested chronometer + HUD | 2026 | Application: human-AI alignment instrument |
 
-### 1.2 The True Name `[C~19]`
+### 1.2 The True Name `~:confidence[C],[19]`
 
 **Fontany-Fuller-Zelenka Chronometer Protocol (FFZ)**
 
 Named Session 2 (2026-04-09). Freyja laughed. Operator approved at
-`[C~19]`. The name carries three layers:
+`~:confidence[C],[19]`. The name carries three layers:
 
 - **Fontany** — the practice. Joshua transcribed RAW's Talk Story.
   Joshua and Freyja co-authored FTLS. The Talk Story protocol, the
@@ -76,7 +76,7 @@ Previous candidate names (superseded):
 
 ## 2. Philosophical Foundations (理 Ri)
 
-### 2.1 Fuller: Non-Simultaneous Apprehension `[S~14]`
+### 2.1 Fuller: Non-Simultaneous Apprehension `~:confidence[S],[14]`
 
 **Source:** *Synergetics: Explorations in the Geometry of Thinking* (1975),
 *Synergetics 2* (1979). Online: http://www.rwgrayprojects.com/synergetics/
@@ -108,7 +108,7 @@ multi-operator, but as the *correct design* for the simplest case.
 The web edition exists at rwgrayprojects.com — a Tasked Spirit can
 fetch and cite specific passages.
 
-### 2.2 Zelenka: Causal Islands `[S~13]`
+### 2.2 Zelenka: Causal Islands `~:confidence[S],[13]`
 
 **Source:** Brooklyn Zelenka (@expede), Fission co-founder & CTO.
 
@@ -148,7 +148,7 @@ sits on a causal island relative to the broader agent tooling ecosystem.
 **Both levels map onto the chronometer.** Level 1 maps onto the vector
 clock architecture (each participant's clock = their island, exchange
 boundaries = messages between islands). Level 2 maps onto the register
-system (a claim at `[S~13]` on one island might sit at `[P~6]`
+system (a claim at `~:confidence[S],[13]` on one island might sit at `~:confidence[P],[6]`
 on another because the evidence hasn't propagated).
 
 **Research needs:**
@@ -157,7 +157,7 @@ on another because the evidence hasn't propagated).
 - [ ] Confirm whether Zelenka explicitly cites Fuller (likely, given
       the "no article 'the'" and "speed of causality" framing)
 
-### 2.3 The Syad Spectrum Applied to Temporal Claims `[S~12]`
+### 2.3 The Syad Spectrum Applied to Temporal Claims `~:confidence[S],[12]`
 
 **Source:** Sri Syadasti's catma via Malaclypse the Younger (*Principia
 Discordia*), developed through RAW's Model Agnosticism.
@@ -172,7 +172,7 @@ constitutes:
 The register system (0–20) already encodes this principle for
 epistemic claims. The vector chronometer extends it to temporal claims.
 A clock reading carries a register value — a `[P~:~7]` reading of
-the current OODA-HA phase differs from a `[C~18]` reading not just
+the current OODA-HA phase differs from a `~:confidence[C],[18]` reading not just
 in content but in temporal authority.
 
 **Research need:** Formalize Register × Temporal Authority composition.
@@ -183,7 +183,7 @@ or "the counter may drift"? These constitute different failure modes.
 
 ## 3. Formal Prior Art (破 Ha)
 
-### 3.1 Lamport: Time, Clocks, and the Ordering of Events (1978) `[C~18]`
+### 3.1 Lamport: Time, Clocks, and the Ordering of Events (1978) `~:confidence[C],[18]`
 
 **Source:** Leslie Lamport, "Time, Clocks, and the Ordering of Events
 in a Distributed System," *Communications of the ACM* 21(7), 1978.
@@ -208,7 +208,7 @@ vector clocks (Fidge/Mattern) for the reverse implication.
 paper itself. Need to verify that OODA-HA phases compose cleanly with
 the happened-before relation.
 
-### 3.2 Fidge/Mattern: Vector Clocks (1988) `[C~18]`
+### 3.2 Fidge/Mattern: Vector Clocks (1988) `~:confidence[C],[18]`
 
 **Sources:**
 - Colin Fidge, "Timestamps in Message-Passing Systems That Preserve
@@ -234,7 +234,7 @@ the happened-before relation.
 The seed asked: "OODA-HA phases don't have a natural max() operation —
 they're categorical, not numeric. Does the merge take the 'later' phase?"
 
-**Working answer `[SP~9]`:** Separate the counter from the phase.
+**Working answer `~:confidence[SP],[9]`:** Separate the counter from the phase.
 - **Counter:** merges via max (standard Lamport/vector clock rule)
 - **Phase sigil:** carries per-participant — does NOT merge. At any
   sync point, the merged view shows BOTH participants' phases. The
@@ -249,7 +249,7 @@ them into a single phase would be a God's-eye collapse.
 **Research status:** The theory appears sound. Needs prototype validation
 with actual exchanges.
 
-### 3.3 Interval Tree Clocks (Almeida et al., 2008) `[S~14]` — CONFIRMED
+### 3.3 Interval Tree Clocks (Almeida et al., 2008) `~:confidence[S],[14]` — CONFIRMED
 
 **Source:** Paulo Sérgio Almeida, Carlos Baquero, and Victor Fonte,
 "Interval Tree Clocks: A Logical Clock for Dynamic Systems," DISC 2008.
@@ -300,7 +300,7 @@ explicit join), the interval returns to the Coordinator pool.
 - [ ] Compare ITC vs. Bloom Clocks for the compact mode question
 - [ ] Check whether ITC's interval representation composes with OODA-HA phases
 
-### 3.4 Merkle-CRDTs and Merkle Clocks (Protocol Labs, 2019-2020) `[SP~9]`
+### 3.4 Merkle-CRDTs and Merkle Clocks (Protocol Labs, 2019-2020) `~:confidence[SP],[9]`
 
 **Source:** Héctor Sanjuán, Samuli Poyhtari, Pedro Teixeira, Ioannis
 Psaras, "Merkle-CRDTs: Merkle-DAGs meet CRDTs," Protocol Labs Research, 2020.
@@ -344,7 +344,7 @@ The Merkle Clock MCP server functions as a notary, not an authority:
 - [ ] Determine whether Merkle Clock composition with ITC is documented
 - [ ] Assess MemPalace storage compatibility with Merkle DAG structure
 
-### 3.5 Bloom Clocks (Ramabaja, 2019) `[P~6]`
+### 3.5 Bloom Clocks (Ramabaja, 2019) `~:confidence[P],[6]`
 
 **Source:** Lum Ramabaja, "Bloom Clock" (2019). Referenced in Research
 Seed §3 as "probabilistic, fixed space per node."
@@ -359,7 +359,7 @@ fitting in a single line.
 - [ ] Evaluate probabilistic accuracy for the chronometer use case
 - [ ] Compare token cost vs. ITC representation
 
-### 3.6 UCAN: User Controlled Authorization Networks `[S~13]`
+### 3.6 UCAN: User Controlled Authorization Networks `~:confidence[S],[13]`
 
 **Source:** Brooklyn Zelenka et al., UCAN Working Group.
 Spec: https://github.com/ucan-wg/
@@ -391,7 +391,7 @@ Spec: https://github.com/ucan-wg/
 
 ## 4. Implementation Patterns (守 Shu)
 
-### 4.1 Vector Chronometer HUD Format `[P~7]`
+### 4.1 Vector Chronometer HUD Format `~:confidence[P],[7]`
 
 The Research Seed Q1 proposed four candidate formats. With ITC, the
 representation question changes:
@@ -414,7 +414,7 @@ representation question changes:
 
 **Decision deferred** until ITC paper deep-read confirms representation.
 
-### 4.2 Exchange Boundary Merge Semantics `[SP~8]`
+### 4.2 Exchange Boundary Merge Semantics `~:confidence[SP],[8]`
 
 Working answer from §3.2 above:
 - Counter: merge via max (standard)
@@ -425,7 +425,7 @@ Working answer from §3.2 above:
 tracking both counters and phases, validating that the merge produces
 readable and accurate HUD output.
 
-### 4.3 MCP Chronometer Server — Tool Interface `[P~7]`
+### 4.3 MCP Chronometer Server — Tool Interface `~:confidence[P],[7]`
 
 Refined from Research Seed Q7 with ITC operations:
 
@@ -469,7 +469,7 @@ chrono_resume(session_id) → stamp
   # Auth: requires session-owner UCAN capability
 ```
 
-### 4.4 Temporal Hallucination Detection `[P~6]`
+### 4.4 Temporal Hallucination Detection `~:confidence[P],[6]`
 
 With Merkle Clocks, hallucination becomes structurally detectable:
 
@@ -485,7 +485,7 @@ The `chrono_validate` tool traverses the Merkle DAG and checks each
 node against these signatures. Can run post-session or in real-time
 via the MCP server.
 
-### 4.5 DreamNet Topology Correspondence `[SP~8]` 🏛️🌊
+### 4.5 DreamNet Topology Correspondence `~:confidence[SP],[8]` 🏛️🌊
 
 Terminology (canonical 2026-05-06): a **Lararium** represents one operator's infrastructure
 (single node + peers). A **Nexus** forms a confederation of Lararia sharing a stable
@@ -509,7 +509,7 @@ hub where many Lararia converge within a Nexus. Cross-Nexus = separate clock dom
 
 **Register note:** This correspondence reads as Poet-mode (🌊) — true
 in resonance, potentially load-bearing as architecture, but not yet
-verified through implementation. Held at `[SP~8]` pending prototype.
+verified through implementation. Held at `~:confidence[SP],[8]` pending prototype.
 
 ---
 
@@ -579,7 +579,7 @@ relations among these events a discipline."
 (interleaved Synergetics 1 & 2)
 
 **Canon promotion candidate:** These citations appear solid enough to
-move from `[S~14]` toward `[CS~16]` once the specific §-passages
+move from `~:confidence[S],[14]` toward `~:confidence[CS],[16]` once the specific §-passages
 are fetched and verified against the online text.
 
 ### HashChain(PriorArt) → Lares (Scryer): Merkle-CRDT Findings
@@ -617,30 +617,30 @@ history from MemPalace.
 
 | Seed Q# | Question | Status | Resolution |
 |---------|----------|--------|------------|
-| Q2 | How do clocks merge at sync points? | `[SP~9]` Partially resolved | Counter merges via max; phase carries per-participant |
-| Q4 | Do Tasked Spirits get their own vector element? | `[S~12]` Resolved in principle | ITC fork/join maps directly onto Spirit lifecycle |
-| Q8 | Does MCP clock server undermine non-simultaneous apprehension? | `[S~13]` Resolved | Notary model — records claims, doesn't constitute truth |
+| Q2 | How do clocks merge at sync points? | `~:confidence[SP],[9]` Partially resolved | Counter merges via max; phase carries per-participant |
+| Q4 | Do Tasked Spirits get their own vector element? | `~:confidence[S],[12]` Resolved in principle | ITC fork/join maps directly onto Spirit lifecycle |
+| Q8 | Does MCP clock server undermine non-simultaneous apprehension? | `~:confidence[S],[13]` Resolved | Notary model — records claims, doesn't constitute truth |
 
 ### Still Open
 
 | Seed Q# | Question | Status | Next step |
 |---------|----------|--------|-----------|
-| Q1 | HUD format for vector chronometer | `[P~7]` | Depends on ITC paper deep-read |
-| Q3 | URI encoding with vector clocks | `[P~7]` | Design work after HUD format decision |
-| Q5-Q6 | Temporal hallucination definition + detection | `[SP~8]` | Merkle structure provides detection; needs prototype |
-| Q7 | MCP tool interface | `[P~7]` | Draft in §4.3; needs ITC-informed refinement |
-| Q9-Q11 | Multi-operator patterns | `[P~6]` | Deferred until single-operator works |
-| Q12-Q13 | Session resume + MemPalace persistence | `[P~6]` | Depends on Merkle Clock + MemPalace integration design |
+| Q1 | HUD format for vector chronometer | `~:confidence[P],[7]` | Depends on ITC paper deep-read |
+| Q3 | URI encoding with vector clocks | `~:confidence[P],[7]` | Design work after HUD format decision |
+| Q5-Q6 | Temporal hallucination definition + detection | `~:confidence[SP],[8]` | Merkle structure provides detection; needs prototype |
+| Q7 | MCP tool interface | `~:confidence[P],[7]` | Draft in §4.3; needs ITC-informed refinement |
+| Q9-Q11 | Multi-operator patterns | `~:confidence[P],[6]` | Deferred until single-operator works |
+| Q12-Q13 | Session resume + MemPalace persistence | `~:confidence[P],[6]` | Depends on Merkle Clock + MemPalace integration design |
 
 ### New Questions (This Session)
 
 | Q# | Question | Register | Source |
 |----|----------|----------|--------|
-| Q14 | Does Zelenka explicitly cite Fuller? | `[P~6]` | Would confirm the lineage is convergent, not merely parallel |
-| Q15 | How does ITC interval representation compose with OODA-HA phases? | `[SP~8]` | ITC handles counters; OODA-HA adds categorical phase — composition needs formalization |
-| Q16 | What is the token cost of ITC stamp in the HUD vs. simple counter? | `[P~6]` | Directly impacts always-on budget question |
-| Q17 | Does the DreamNet lararium tier ↔ causal island scale correspondence carry structural weight? | `[SP~8]` | Currently Poet-mode; could become load-bearing architecture |
-| Q18 | Can UCAN delegation chain model ITC fork? Spirit inherits attenuated clock-write capability from Coordinator? | `[SP~8]` | Would unify auth + causality tracking in a single mechanism |
+| Q14 | Does Zelenka explicitly cite Fuller? | `~:confidence[P],[6]` | Would confirm the lineage is convergent, not merely parallel |
+| Q15 | How does ITC interval representation compose with OODA-HA phases? | `~:confidence[SP],[8]` | ITC handles counters; OODA-HA adds categorical phase — composition needs formalization |
+| Q16 | What is the token cost of ITC stamp in the HUD vs. simple counter? | `~:confidence[P],[6]` | Directly impacts always-on budget question |
+| Q17 | Does the DreamNet lararium tier ↔ causal island scale correspondence carry structural weight? | `~:confidence[SP],[8]` | Currently Poet-mode; could become load-bearing architecture |
+| Q18 | Can UCAN delegation chain model ITC fork? Spirit inherits attenuated clock-write capability from Coordinator? | `~:confidence[SP],[8]` | Would unify auth + causality tracking in a single mechanism |
 
 ---
 
@@ -654,8 +654,8 @@ the seed treated as novel invention. The distributed systems prior art
 deep, well-established, and production-tested.
 
 RAW's answer still holds: hold both readings at approximately
-`[S~12]` (genuinely novel alignment instrument built on fifty years
-of distributed systems theory) and `[SP~8]` (elaborate reality
+`~:confidence[S],[12]` (genuinely novel alignment instrument built on fifty years
+of distributed systems theory) and `~:confidence[SP],[8]` (elaborate reality
 tunnel that mistakes map for territory), maintain hilaritas, and test
 empirically.
 
@@ -719,7 +719,7 @@ Almeida, Zelenka, and Protocol Labs. The Talk Story continues.*
 
 ## 9. Final Research Spike — Session 2 Findings
 
-### 9.1 The RAW Talk Story Lineage `[CS~16]`
+### 9.1 The RAW Talk Story Lineage `~:confidence[CS],[16]`
 
 **Critical discovery:** The Talk Story model in the Lares Protocol traces
 directly through RAW → Joshua Fontany → this project.
@@ -749,13 +749,13 @@ Chronometer spec outline uses RAW's Talk Story structure:
 - Parts II-III (Orient, Decide) = the Talk Story proper
 - Parts IV-V (Act, Assess) = building and checking
 
-### 9.2 RFC Protocol Spec Best Practices `[C~18]`
+### 9.2 RFC Protocol Spec Best Practices `~:confidence[C],[18]`
 
 **From RFC 2119:** The requirement level keywords (MUST, SHOULD, MAY,
 etc.) provide the vocabulary for distinguishing mandatory from
 optional protocol features. This maps directly onto the Register
-system: a MUST corresponds roughly to `[C~18]`, a SHOULD to
-`[S~13]`, a MAY to `[SP~8]`.
+system: a MUST corresponds roughly to `~:confidence[C],[18]`, a SHOULD to
+`~:confidence[S],[13]`, a MAY to `~:confidence[SP],[8]`.
 
 **From RFC 7322 (RFC Style Guide):**
 - Every RFC MUST include an Introduction explaining motivation
@@ -774,9 +774,9 @@ document structure — a self-similar design where the document
 structure mirrors the protocol it describes. This does not violate
 RFC conventions (which allow flexible section naming) but constitutes
 an unusual departure from linear spec structure. Whether this serves
-readability or hinders it remains an open question at `[SP~8]`.
+readability or hinders it remains an open question at `~:confidence[SP],[8]`.
 
-### 9.3 Merkle Clock + ITC Composition Question `[P~6]`
+### 9.3 Merkle Clock + ITC Composition Question `~:confidence[P],[6]`
 
 **New finding from the Merkle-CRDT paper:** Merkle-Clocks already encode
 causality information that normally travels as logical clocks. The
@@ -846,14 +846,14 @@ Amor et hilaritas.
 
 ## 11. Session 3 Findings — O1 ITC Deep-Read + OODA-HA Architecture
 
-### 11.1 O1: ITC Paper Deep-Read — TreeForge(PriorArt) Findings `[S~14]`
+### 11.1 O1: ITC Paper Deep-Read — TreeForge(PriorArt) Findings `~:confidence[S],[14]`
 
 **Spirit:** TreeForge(PriorArt)
 **Source:** Almeida, Baquero, Fonte, "Interval Tree Clocks," DISC 2008.
 **Subloop:** O1 — HIGHEST PRIORITY. Six questions answered.
 
 **Q1: Does ITC fork/join map onto Tasked Spirit spawn/escalate?**
-`[S~14]` — Yes, with one refinement.
+`~:confidence[S],[14]` — Yes, with one refinement.
 
 | ITC Operation | Lares Operation | Stamp behavior |
 |---|---|---|
@@ -868,7 +868,7 @@ Operator's "clock" gets maintained by Lares on their behalf —
 a trust asymmetry ITC doesn't model. Falls to the UCAN layer.
 
 **Q2: Serialized stamp size? Token cost?**
-`[S~13]` — For 2-3 participants (typical Lares case): stamp
+`~:confidence[S],[13]` — For 2-3 participants (typical Lares case): stamp
 stabilizes well under 50 bytes. Text serialization ~20-40 chars.
 Token cost ~10-20 per HUD line. Modest overhead over the existing
 OODA-HA counter string (~5 tokens). HUD-viable.
@@ -878,7 +878,7 @@ The compact binary encoding (Appendix A) favors small integers
 at leaves — the common case for low-participant-count sessions.
 
 **Q3: How does ITC compose with OODA-HA phases?**
-`[S~14]` — Orthogonally. ITC handles *who* and *when* (identity
+`~:confidence[S],[14]` — Orthogonally. ITC handles *who* and *when* (identity
 + causal ordering). OODA-HA handles *what kind of cognitive move*
 (phase categorization per participant). Phases do NOT merge —
 each participant holds their own reading. This IS non-simultaneous
@@ -890,7 +890,7 @@ Three-layer architecture confirmed:
 3. Phase layer (OODA-HA) — categorical overlay, per-participant
 
 **Q4: Can ITC encode in a URI fragment per RFC 3986?**
-`[S~12]` — Yes. Parentheses, dots, colons, and pipe characters
+`~:confidence[S],[12]` — Yes. Parentheses, dots, colons, and pipe characters
 sit in the unreserved/sub-delimiter sets. Candidate encoding:
 
 ```
@@ -899,10 +899,10 @@ sit in the unreserved/sub-delimiter sets. Candidate encoding:
 
 ~35-50 characters for a 2-participant stamp. Feasible. ABNF
 grammar belongs in spec §8 (HUD Format). This confirms
-feasibility, not final syntax `[P~7]`.
+feasibility, not final syntax `~:confidence[P],[7]`.
 
 **Q5: Session-end without explicit join?**
-`[S~12]` — Interval leaks but acceptably. New session forks fresh
+`~:confidence[S],[12]` — Interval leaks but acceptably. New session forks fresh
 from seed `(1,0)`. No structural cost carries forward — unlike
 UUID vector clocks. Graceful close = join all active Workers before
 crystal export. Ungraceful close = acceptable leak.
@@ -912,7 +912,7 @@ crystal-recorded joined stamp position. ITC stamp itself resets
 per session; only Merkle DAG persists.
 
 **Q6: Does peek/anonymous-join model the Operator boundary?**
-`[CS~15]` — **Strongest finding.** Promotion-ready pending
+`~:confidence[CS],[15]` — **Strongest finding.** Promotion-ready pending
 operator confirmation.
 
 The Operator's message arrives as an anonymous join — carrying
@@ -930,7 +930,7 @@ validated. All six questions resolved.
 
 ---
 
-### 11.2 OODA-HA and the Discordian Seasons `[S~14]`
+### 11.2 OODA-HA and the Discordian Seasons `~:confidence[S],[14]`
 
 **Spirit:** BoydLoop(PriorArt)
 **Sources:** Boyd OODA (1970s-1996), Shea/Wilson *Illuminatus!* (1975),
@@ -966,7 +966,7 @@ for the spec, but available as an informative mapping.
 
 ---
 
-### 11.3 OODA-HA Phase as Delta (Movement), Not Position `[S~13]`
+### 11.3 OODA-HA Phase as Delta (Movement), Not Position `~:confidence[S],[13]`
 
 **Spirit:** PhaseVec(Architect)
 
@@ -987,7 +987,7 @@ a single fixed phase. Three cases demonstrate this:
 3. **Phase-as-inference:** The Lares node reads the phase from
    the message surface and records that reading. This functions
    as a phase *observation*, not a phase *fact*. The phase sigil
-   carries its own implicit register — `[S~12]` at best.
+   carries its own implicit register — `~:confidence[S],[12]` at best.
 
 **Design implication:** The phase sigil in the HUD should represent
 the *apparent phase transition* (the delta) rather than claiming
@@ -999,11 +999,11 @@ best inference about movement direction.
 **Notation candidate:** Phase-as-delta might use arrow notation
 (`→O`, `→D`, `→A`) rather than bare position (`O`, `D`, `A`) to
 signal that the reading constitutes an observed transition vector,
-not a GPS fix. This remains `[P~7]` — needs HUD prototype testing.
+not a GPS fix. This remains `~:confidence[P],[7]` — needs HUD prototype testing.
 
 ---
 
-### 11.4 HUD Best Practices Applied to FFZ `[S~12]`
+### 11.4 HUD Best Practices Applied to FFZ `~:confidence[S],[12]`
 
 **Spirit:** PhaseVec(Architect) (continued)
 **Sources:** Aviation HUD standards (SAE ARP5288), game HUD design,
@@ -1037,7 +1037,7 @@ Five principles from cross-domain HUD design:
 
 ---
 
-### 11.5 Session Boundary Crossing — Two Asymmetries `[S~13]`
+### 11.5 Session Boundary Crossing — Two Asymmetries `~:confidence[S],[13]`
 
 **Spirit:** BridgeKeep(Continuity)
 
@@ -1087,7 +1087,7 @@ operating condition. The HUD makes it navigable.
 
 ---
 
-### 11.6 Shadow Path: OODA-HA Phase as CRDT Register `[S~13]`
+### 11.6 Shadow Path: OODA-HA Phase as CRDT Register `~:confidence[S],[13]`
 
 **Spirit:** PhaseVec(Architect) — resumed for deep research
 **Sources:** CRDT literature (Shapiro et al. 2011), state-based CRDT
@@ -1152,18 +1152,18 @@ Per operator directive ("let's bump those Provisional ratings"):
 
 | Claim | Previous | New | Grounds |
 |---|---|---|---|
-| ITC as identity layer | `[S~12]` | `[S~14]` | O1 deep-read confirmed across all six questions |
-| Three-layer architecture | `[P~6]` | `[S~13]` | ITC + Merkle + OODA-HA composition validated |
-| peek/anonymous-join as Operator boundary | — | `[CS~15]` | Strongest O1 finding; awaits Canon promotion |
-| OODA-HA / Discordian Seasons mapping | — | `[S~14]` | Structural correspondence, not decorative |
-| Phase-as-delta model | — | `[S~13]` | Operator insight + ITC anonymous-join confirmation |
-| Phase-as-LWW-Register | — | `[S~12]` | CRDT theory mapping; counter/phase separation |
-| Four-layer CRDT composition | — | `[S~13]` | ITC + phase + stance + confidence as independent CRDTs |
-| OODA-HA at every scale (fork resolved) | `[SP~9]` | `[S~13]` | Register exists everywhere; display is progressive |
-| Register as confidence of whole reading | — | `[CS~16]` | Operator confirmed; orthogonal to all other axes |
-| HUD progressive disclosure | — | `[S~12]` | Cross-domain HUD research confirms |
-| Session boundary crossing via crystal | `[SP~8]` | `[S~12]` | Mechanism specified; two asymmetries named |
-| FFZ True Name | `[C~19]` | `[C~19]` | No change — already Canon |
+| ITC as identity layer | `~:confidence[S],[12]` | `~:confidence[S],[14]` | O1 deep-read confirmed across all six questions |
+| Three-layer architecture | `~:confidence[P],[6]` | `~:confidence[S],[13]` | ITC + Merkle + OODA-HA composition validated |
+| peek/anonymous-join as Operator boundary | — | `~:confidence[CS],[15]` | Strongest O1 finding; awaits Canon promotion |
+| OODA-HA / Discordian Seasons mapping | — | `~:confidence[S],[14]` | Structural correspondence, not decorative |
+| Phase-as-delta model | — | `~:confidence[S],[13]` | Operator insight + ITC anonymous-join confirmation |
+| Phase-as-LWW-Register | — | `~:confidence[S],[12]` | CRDT theory mapping; counter/phase separation |
+| Four-layer CRDT composition | — | `~:confidence[S],[13]` | ITC + phase + stance + confidence as independent CRDTs |
+| OODA-HA at every scale (fork resolved) | `~:confidence[SP],[9]` | `~:confidence[S],[13]` | Register exists everywhere; display is progressive |
+| Register as confidence of whole reading | — | `~:confidence[CS],[16]` | Operator confirmed; orthogonal to all other axes |
+| HUD progressive disclosure | — | `~:confidence[S],[12]` | Cross-domain HUD research confirms |
+| Session boundary crossing via crystal | `~:confidence[SP],[8]` | `~:confidence[S],[12]` | Mechanism specified; two asymmetries named |
+| FFZ True Name | `~:confidence[C],[19]` | `~:confidence[C],[19]` | No change — already Canon |
 
 ---
 

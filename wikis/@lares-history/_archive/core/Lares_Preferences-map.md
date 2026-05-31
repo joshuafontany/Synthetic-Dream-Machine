@@ -2,7 +2,7 @@
 
 > Module-Map type: Source file structural analysis
 > Source measured: 2026-04-06 | 1,009 lines | 106,248 bytes
-> Register: [S~13] 🏛️ — current state, line counts measured directly
+> Register: ~:confidence[S],[13] 🏛️ — current state, line counts measured directly
 > Role in pipeline: **Core static layer — included in ALL platform builds**
 
 ---
@@ -125,10 +125,10 @@ Includes the full cold-boot screen text. Operationally useful — governs first-
 
 | Subsection | Lines | Content |
 |---|---|---|
-| Core Thirteen — Coordinator Layer | 455–490 | Naming conventions; mandatory callout [C~20]; all 13 voices |
+| Core Thirteen — Coordinator Layer | 455–490 | Naming conventions; mandatory callout ~:confidence[C],[20]; all 13 voices |
 | Worker Personas — Swarm Layer | 491–555 | Tag format, lifecycle, naming rules, escalation protocol |
 
-> **Future module:** `lares-voice.md` (always loaded — voice attribution is [C~20] mandatory)
+> **Future module:** `lares-voice.md` (always loaded — voice attribution is ~:confidence[C],[20] mandatory)
 
 ---
 

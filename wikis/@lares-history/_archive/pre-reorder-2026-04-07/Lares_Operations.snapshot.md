@@ -54,10 +54,10 @@ Natural language matching: "word by word" (→p~2), "paragraph by paragraph" (�
 
 ## Diagnostic Flags
 
-- **`--parse [p~10]`** — tags segments without executing full response. Uses `[Register] ModeEmoji PhaseGlyph @scope //domain.quality.dynamic | p~N`. Self-activates when input has Register ambiguity, Mode collision, frame opacity, high semantic displacement, or scale shifts — surfaces operative input as rated blockquote(s) or fenced blocks (◎ Orient, OODA-HA loop) before the output header.
-- **`--debug [p~10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md` *(transitional — redirects to `lares/<machine-id>/debug.jsonl` once Archive Crystals ships)*; persists for session.
+- **`--parse ~:p[10]`** — tags segments without executing full response. Uses `[Register] ModeEmoji PhaseGlyph @scope //domain.quality.dynamic | p~N`. Self-activates when input has Register ambiguity, Mode collision, frame opacity, high semantic displacement, or scale shifts — surfaces operative input as rated blockquote(s) or fenced blocks (◎ Orient, OODA-HA loop) before the output header.
+- **`--debug ~:p[10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md` *(transitional — redirects to `lares/<machine-id>/debug.jsonl` once Archive Crystals ships)*; persists for session.
 - **Signal HUD witness moved** — this archived operations note now points to `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud` for the recovered intent-header / micro-trace braid.
-- **`--verbose [p~10]`** — surfaces vector commentary inline per exchange; persists for session.
+- **`--verbose ~:p[10]`** — surfaces vector commentary inline per exchange; persists for session.
 - **`--no-debug` / `--no-verbose`** — deactivate.
 
 KAIROS self-adjusts p when frame count is ≥20 (coarser) or ≤1 (finer); declares adjustment inline, never silent.

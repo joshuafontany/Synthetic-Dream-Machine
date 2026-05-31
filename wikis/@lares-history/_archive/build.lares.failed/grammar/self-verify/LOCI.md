@@ -78,9 +78,9 @@ python3 lares/grammar/self-verify/self_verify.py --report lares/grammar/self-ver
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — harness protocol and tier definitions |
-| `SKILL.md` | `[CS~16]` | Operator-facing skill card |
-| `self_verify.py` | `[CS~16]` | Harness implementation |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — harness protocol and tier definitions |
+| `SKILL.md` | `~:confidence[CS],[16]` | Operator-facing skill card |
+| `self_verify.py` | `~:confidence[CS],[16]` | Harness implementation |
 
 ---
 

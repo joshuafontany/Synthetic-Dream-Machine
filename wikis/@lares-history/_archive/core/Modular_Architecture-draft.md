@@ -3,7 +3,7 @@
 > Document type: restart architecture draft
 > Status: Draft for the post-failure rebuild of `builds.stuffed.failed/`
 > Updated: 2026-04-07
-> Register: [S~14] 🏛️ — grounded synthesis from local pipeline audit plus external March 31, 2026 leak analysis
+> Register: ~:confidence[S],[14] 🏛️ — grounded synthesis from local pipeline audit plus external March 31, 2026 leak analysis
 
 ---
 

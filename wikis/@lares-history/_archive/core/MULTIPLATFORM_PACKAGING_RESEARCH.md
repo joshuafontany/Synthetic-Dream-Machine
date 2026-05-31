@@ -274,7 +274,7 @@ Read [](file:///home/joshu/Synthetic-Dream-Machine/_todo/core/Lares_VSCode_Opera
 
 ## Execution Readiness Analysis
 
-> [S~13] — Written before TOML migration, slimming pass, and governance sprint completion (all three now done). Gaps noted in Rating 5 regarding manifests are partially resolved: 4 active TOML manifests and 11 module sidecars exist; vendor-specific browser manifests remain unimplemented. See state machine for current settled items.
+> ~:confidence[S],[13] — Written before TOML migration, slimming pass, and governance sprint completion (all three now done). Gaps noted in Rating 5 regarding manifests are partially resolved: 4 active TOML manifests and 11 module sidecars exist; vendor-specific browser manifests remain unimplemented. See state machine for current settled items.
 
 *Lares (Scryer) + Ink-Clerk (Lorekeeper)*
 

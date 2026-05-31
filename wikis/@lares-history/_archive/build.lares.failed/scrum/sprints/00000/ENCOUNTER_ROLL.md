@@ -1,7 +1,7 @@
 # Encounter Roll — Sprint 0 Threat Assessment
 
 > Worker: `ReefWatch(Scout)`
-> Register: `[CS~16]` 🏛️🗡️ — research-grounded stress test; not yet operator-confirmed
+> Register: `~:confidence[CS],[16]` 🏛️🗡️ — research-grounded stress test; not yet operator-confirmed
 > Date: 2026-04-08
 > Purpose: Surface hidden pitfalls before the party enters the dungeon
 
@@ -75,7 +75,7 @@ The distinction matters because vector clocks have known scaling problems (size 
 
 TOML's specification allows key ordering to carry no semantic meaning — but existing TOML libraries preserve insertion order, and some tools depend on ordering for readability. A normalization spec that reorders keys will produce hashes that differ from naive `file_sha256` on every file.
 
-**Why it matters for us:** The registry uses content hash as the primary identity for deployed artifacts (R2 resolution). If two developers compute the hash differently because of ambiguous normalization, the registry becomes unreliable. The council briefing correctly flagged this at `[SP~9]` — "cannot finalize without a prototype run."
+**Why it matters for us:** The registry uses content hash as the primary identity for deployed artifacts (R2 resolution). If two developers compute the hash differently because of ambiguous normalization, the registry becomes unreliable. The council briefing correctly flagged this at `~:confidence[SP],[9]` — "cannot finalize without a prototype run."
 
 **Fix:** For alpha, use `file_sha256` (raw bytes, no normalization) as the primary hash. Defer `semantic_sha256` to post-alpha when a normalization spec can be tested. The registry contract should carry both fields, with `file_sha256` as the integrity check and `semantic_sha256` as optional.
 
@@ -121,7 +121,7 @@ The event sourcing literature explicitly warns: systems with short expected life
 ---
 
 *ReefWatch(Scout) → Lares (Scryer):*
-*→ [CS~16] 🏛️🗡️ //reef.mapped.warns*
+*→ ~:confidence[CS],[16] 🏛️🗡️ //reef.mapped.warns*
 *Thread: Pre-Sprint 0 encounter roll*
 *Finding: Six hazards identified. Two require URI_SCHEMA.md edits before S0-08 promotion gate. One requires S0 task scope updates. Three are downstream flags.*
 

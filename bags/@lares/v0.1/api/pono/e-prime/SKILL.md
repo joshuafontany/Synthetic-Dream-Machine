@@ -51,8 +51,8 @@ E-Prime auditor opens the settled-text correction stream here.
 
 This skill applies to settled text, not first-pass generation.
 `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime` remains the constitutional source.
-Any surviving `is` or `has` in audited text MUST carry `[C~20]`.
-Marker form: `[REGISTER~N]` — brackets, one tilde, integer Level on `0–20`.
+Any surviving `is` or `has` in audited text MUST carry `~:confidence[C],[20]`.
+Marker form: `~:confidence[REGISTER],[N]` — brackets, one tilde, integer Level on `0–20`.
 The smallest lawful intervention carries.
 Local correction stays local unless the user asks wider.
 
@@ -84,7 +84,7 @@ A direct sentence turn beats a hypothetical fix.
 
 Canonical token: `[SC~14]`
 
-Every audited `is` or `has` MUST carry `[C~20]`.
+Every audited `is` or `has` MUST carry `~:confidence[C],[20]`.
 Add a marker elsewhere only when confidence remains load-bearing.
 Marker spray MUST NOT substitute for real pressure.
 A sentence that survives unchanged still falls under the marker rule.
@@ -154,7 +154,7 @@ Classify each hit: `lawful` | `mark-only` | `Hoʻoko-required` | `ambiguous`
 `Hoʻoko-required` — text turns, not just collects warnings.
 `ambiguous` — quotation, code, literal example, or house-style exception makes the surface unclear.
 
-Any audited `is` or `has` without a marker denotes a failure state `[C~20]`.
+Any audited `is` or `has` without a marker denotes a failure state `~:confidence[C],[20]`.
 
 <<~/ahu >>
 

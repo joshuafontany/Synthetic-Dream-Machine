@@ -1,9 +1,9 @@
 # Sprint 0 — `lar:` URI Schema Settlement
 
-> Goal: Promote the `lar:` URI schema core (anatomy, projection, validation, chronometer) to `[C~19]` design-canon.
+> Goal: Promote the `lar:` URI schema core (anatomy, projection, validation, chronometer) to `~:confidence[C],[19]` design-canon.
 > Duration: Single sprint (1 focused session)
-> Entry state: `[CS~17]` — URI_SCHEMA.md extracted and consolidated from draft
-> Exit state: `[C~19]` — operator-confirmed, ready for `builds/` publication
+> Entry state: `~:confidence[CS],[17]` — URI_SCHEMA.md extracted and consolidated from draft
+> Exit state: `~:confidence[C],[19]` — operator-confirmed, ready for `builds/` publication
 > Governs: `lares/signal/`, `lares/registry/` (stub), `lares/crystal/` (interface contract)
 
 ---
@@ -11,13 +11,13 @@
 ## Sprint Scope
 
 **In scope:**
-- URI anatomy (§§2–6 of URI_SCHEMA.md) — promote to `[C~19]`
-- Validation rules (§10) — promote to `[C~19]`
-- Projection table (§5) — promote to `[C~19]`
-- Chronometer rules (§4) — promote to `[C~19]`
-- Crystal schema field mapping (§7) — promote to `[CS~17]` (blocks on crystal/ settling)
-- Registry contract stub — promote to `[S~13]` (enough to support URI assignment)
-- Module descriptor integration (§8) — promote to `[CS~16]` (blocks on compiler/ settling)
+- URI anatomy (§§2–6 of URI_SCHEMA.md) — promote to `~:confidence[C],[19]`
+- Validation rules (§10) — promote to `~:confidence[C],[19]`
+- Projection table (§5) — promote to `~:confidence[C],[19]`
+- Chronometer rules (§4) — promote to `~:confidence[C],[19]`
+- Crystal schema field mapping (§7) — promote to `~:confidence[CS],[17]` (blocks on crystal/ settling)
+- Registry contract stub — promote to `~:confidence[S],[13]` (enough to support URI assignment)
+- Module descriptor integration (§8) — promote to `~:confidence[CS],[16]` (blocks on compiler/ settling)
 
 **Out of scope:**
 - Full registry implementation (deferred to registry/ sprint)
@@ -53,7 +53,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-01 — Verify URI Anatomy Against RFC 3986
 
 **Worker:** `RFC-Check(Validator)`
-**Register target:** `[C~19]`
+**Register target:** `~:confidence[C],[19]`
 **Input:** URI_SCHEMA.md §3
 **Acceptance criteria:**
 1. Every URI component maps to exactly one RFC 3986 §3 generic syntax component
@@ -70,7 +70,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-02 — Validate Projection Table Completeness and Invertibility
 
 **Worker:** `MirrorTest(Validator)`
-**Register target:** `[C~19]`
+**Register target:** `~:confidence[C],[19]`
 **Input:** URI_SCHEMA.md §5
 **Acceptance criteria:**
 1. Every machine keyword maps to exactly one sigil glyph (bijective)
@@ -88,7 +88,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-03 — Stress-Test Chronometer Rules
 
 **Worker:** `ClockHammer(Validator)`
-**Register target:** `[C~19]`
+**Register target:** `~:confidence[C],[19]`
 **Input:** URI_SCHEMA.md §4
 **Acceptance criteria:**
 1. Scope-depth agreement rule holds for all 5 scale levels
@@ -105,7 +105,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-04 — Validate Well-Formedness Rules
 
 **Worker:** `GateCheck(Validator)`
-**Register target:** `[C~19]`
+**Register target:** `~:confidence[C],[19]`
 **Input:** URI_SCHEMA.md §10
 **Acceptance criteria:**
 1. Each of the **12 validation rules** (11 well-formedness rules in §10.1–10.3 + the canonical form / comparison rules in §10.4) is testable — can be expressed as a boolean assertion against a URI string
@@ -122,7 +122,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-05 — Verify Crystal Field Mapping Contract
 
 **Worker:** `LedgerBind(Validator)`
-**Register target:** `[CS~17]`
+**Register target:** `~:confidence[CS],[17]`
 **Input:** URI_SCHEMA.md §7, Signal_HUD_Tagspace-draft.md Crystal Event Model
 **Acceptance criteria:**
 1. The four URI-derived fields (`lar_uri`, `lares_address`, `intent_header_snapshot`, `chronometer`) are derivable from the full URI without ambiguity
@@ -146,14 +146,14 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-06 — Assess Open Questions for Promotion Readiness
 
 **Worker:** `QGate(Analyst)`
-**Register target:** `[S~14]` (the assessment itself; question resolutions remain at their current registers)
+**Register target:** `~:confidence[S],[14]` (the assessment itself; question resolutions remain at their current registers)
 **Input:** URI_SCHEMA.md §11, draft §§ Open Design Questions
 **Acceptance criteria:**
 1. Each open question has a stated current position and register
 2. Each question has a clear "blocks" dependency — what can't proceed until it resolves
 3. Assessment: which questions block the core URI spec promotion vs which can remain open post-promotion
-4. For questions at `[CS~16]`+ (U3, U6): provide a brief argument for or against promotion alongside the core spec
-5. For questions at `[SP~9]` (U4): confirm that the core spec functions correctly regardless of U4's resolution
+4. For questions at `~:confidence[CS],[16]`+ (U3, U6): provide a brief argument for or against promotion alongside the core spec
+5. For questions at `~:confidence[SP],[9]` (U4): confirm that the core spec functions correctly regardless of U4's resolution
 
 **Deliverable:** Assessment table with promotion-readiness rating per question. Recommendation: which questions to promote with core, which to leave open.
 
@@ -162,7 +162,7 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-07 — Draft Registry Stub for URI Assignment
 
 **Worker:** `LedgerDraft(Artificer)`
-**Register target:** `[S~13]`
+**Register target:** `~:confidence[S],[13]`
 **Input:** REGISTRY_CONTRACT.md, lares/README.md promotion protocol
 **Acceptance criteria:**
 1. Ledger entry schema is consistent with the three-truth model
@@ -171,14 +171,14 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 4. The resolver algorithm is testable (given a URI, produce a deterministic result)
 5. REGISTRY.jsonl machine index format is consistent with the crystal system's REGISTRY.jsonl pattern
 
-**Deliverable:** Completed REGISTRY_CONTRACT.md at `[S~13]`. Example ledger entry for URI schema promotion.
+**Deliverable:** Completed REGISTRY_CONTRACT.md at `~:confidence[S],[13]`. Example ledger entry for URI schema promotion.
 
 ---
 
 ### S0-09 — Establish Narrative Track + Talk Story Protocol
 
 **Worker:** Operator + Ink-Clerk
-**Register target:** `[CS~16]`
+**Register target:** `~:confidence[CS],[16]`
 **Input:** OODA-HA loop (lares/AGENTS.md), talk story skill spec, epic narrative docs
 **Acceptance criteria:**
 1. `talk-story` skill loadable in VS Code (SKILL.md present at `.github/skills/talk-story/`)
@@ -202,11 +202,11 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 ### S0-08 — Operator Review Gate
 
 **Worker:** None — this is an operator task
-**Register target:** `[C~19]` (the promotion itself)
+**Register target:** `~:confidence[C],[19]` (the promotion itself)
 **Input:** All S0-01 through S0-07 deliverables
 **Acceptance criteria:**
 1. Operator reviews all validation deliverables
-2. Operator confirms or rejects promotion of core URI spec (§§2–6, 10) to `[C~19]`
+2. Operator confirms or rejects promotion of core URI spec (§§2–6, 10) to `~:confidence[C],[19]`
 3. Operator rules on any flagged issues from S0-01 through S0-06
 4. Operator assigns `lar:` URI to the promoted spec via registry ledger entry
 5. If promoted: spec published as new versioned artifact in `builds/agents/signal/`
@@ -222,8 +222,8 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 **Escalation path:** Structural findings → Lares (Scryer). Contested calls → Lares (Council). Promotion decisions → Operator.
 
 **Definition of Done for Sprint 0:**
-- URI_SCHEMA.md core sections at `[C~19]` (operator-confirmed)
-- REGISTRY_CONTRACT.md at `[S~13]` (working stub)
+- URI_SCHEMA.md core sections at `~:confidence[C],[19]` (operator-confirmed)
+- REGISTRY_CONTRACT.md at `~:confidence[S],[13]` (working stub)
 - All validation deliverables filed
 - No unresolved blockers on downstream sprints (crystal/, compiler/, registry/)
 - Promotion ledger entry recorded (if promoted)
@@ -242,4 +242,4 @@ REGISTRY_CONTRACT.md      ← depends on URI_SCHEMA.md core
 
 ---
 
-*Sprint 0 produces the bedrock: once the URI anatomy is at `[C~19]`, every downstream system has a stable semantic addressing layer to build on.*
+*Sprint 0 produces the bedrock: once the URI anatomy is at `~:confidence[C],[19]`, every downstream system has a stable semantic addressing layer to build on.*

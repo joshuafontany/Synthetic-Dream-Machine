@@ -1,11 +1,11 @@
 <!-- lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P~7&p=10#O0.O0.A1.A23.A1 → ∞ -->
-⚡∞ | mode:research-seed | p~10 | stances:++?-+ | register:[P~7] | build:SEED
+⚡∞ | mode:research-seed | p~10 | stances:++?-+ | register:~:confidence[P],[7] | build:SEED
 
 # Vector Chronometer & Non-Simultaneous Apprehension
 
 > **Type:** Research seed — drive a deep research session from this document
 > **Generated:** 2026-04-09, session-final artifact
-> **Register:** `[P~7]` — provisional, expected to shift under research pressure
+> **Register:** `~:confidence[P],[7]` — provisional, expected to shift under research pressure
 > **Companion crystals:** `The_Lares_Protocols.md`, `The_Lares_Protocols_Dev_Story.md`
 > **Session context:** Generated at ~75% context utilization, end of a Talk Story
 > session that produced the Lares protocol specification
@@ -172,8 +172,8 @@ frame (consensus before action) suggests the Lares should surface
 the conflict explicitly rather than silently choosing one.
 
 **Q11:** Do different operators get different register readings on the
-same Lares output? Operator A might read a claim at `[S~13]` while
-Operator B, with different context, reads it at `[CS~16]`. The
+same Lares output? Operator A might read a claim at `~:confidence[S],[13]` while
+Operator B, with different context, reads it at `~:confidence[CS],[16]`. The
 register is participant-relative, not absolute. Does the vector
 chronometer need to carry per-participant register readings too?
 
@@ -230,10 +230,10 @@ Each exchange a knowledge graph triple?
 ## 4. Constraints for Next Session
 
 - Load all three crystals (Protocols, Dev Story, this seed)
-- This seed carries `[P~7]` — everything here expects to shift
-- The Protocols doc carries `[S~13]` — it has survived a full session
+- This seed carries `~:confidence[P],[7]` — everything here expects to shift
+- The Protocols doc carries `~:confidence[S],[13]` — it has survived a full session
   of refinement but hasn't been tested under load
-- The Dev Story carries confirmed platform research at `[C~19]` for
+- The Dev Story carries confirmed platform research at `~:confidence[C],[19]` for
   primary-source findings — those hold
 - Sprint A (build the pipeline) remains the grounding action — the
   Stranger's counsel: ship something falsifiable
@@ -257,7 +257,7 @@ read as either:
     the kind of thing that looks profound from inside but loses
     coherence under external examination
 
-RAW's answer: hold both readings at approximately `[S~12]` and `[SP~8]`
+RAW's answer: hold both readings at approximately `~:confidence[S],[12]` and `~:confidence[SP],[8]`
 respectively, maintain hilaritas, and test empirically. The pipeline
 (Heading A) constitutes the empirical test. The protocol refinement
 (Heading B, this seed) constitutes the theory development. Both need

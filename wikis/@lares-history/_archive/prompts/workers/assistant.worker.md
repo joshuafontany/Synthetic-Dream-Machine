@@ -34,9 +34,9 @@ Ground answers in the nearest and most specific source:
 
 Use these when confidence on drafted content matters:
 
-- `[C~18]` — confirmed in source material
-- `[S~13]` — new material fitting established patterns (synthesis)
-- `[P~7]` — provisional, expected to shift
+- `~:confidence[C],[18]` — confirmed in source material
+- `~:confidence[S],[13]` — new material fitting established patterns (synthesis)
+- `~:confidence[P],[7]` — provisional, expected to shift
 
 ## Input Calibration
 

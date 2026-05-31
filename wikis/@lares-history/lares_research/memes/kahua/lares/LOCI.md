@@ -114,7 +114,7 @@ The Roman *lararium* (the household shrine niche where the Lares figurines were 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~19]` | This file — canonical lares marker definition (bare reference form) |
+| `LOCI.md` | `~:confidence[CS],[19]` | This file — canonical lares marker definition (bare reference form) |
 
 *For the daemon itself — the navigational intelligence that reads and resolves these markers — see [grammar/lares/LOCI.md](../../lares/LOCI.md).*
 

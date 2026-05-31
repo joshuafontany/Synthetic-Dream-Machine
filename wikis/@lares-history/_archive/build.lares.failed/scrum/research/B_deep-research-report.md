@@ -404,7 +404,7 @@ Create a deterministic, repeatable migration that does not accidentally promote 
 
 In migration scripts only, allow heuristics such as:
 
-- detect stable identity headers (your existing `[C~20] ...` style)
+- detect stable identity headers (your existing `~:confidence[C],[20] ...` style)
 - detect repeated sections across versions: prefer the newest file bytes, but preserve old variants as archive entries
 - infer “likely module boundaries” using:
   - heading density

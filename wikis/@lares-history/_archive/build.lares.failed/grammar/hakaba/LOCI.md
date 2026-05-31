@@ -25,7 +25,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[SP~9]` — expanded stub, still pending deeper canon pass
+> **Register:** `~:confidence[SP],[9]` — expanded stub, still pending deeper canon pass
 > **Question:** How does a locus know where it stands in semantic territory?
 
 ---
@@ -163,7 +163,7 @@ If the path reads like arbitrary slugging, the triple has not yet done its work.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP~9]` | This file — HAKABA addressing grammar |
+| `LOCI.md` | `~:confidence[SP],[9]` | This file — HAKABA addressing grammar |
 
 *Future loci in this tree will land here.*
 

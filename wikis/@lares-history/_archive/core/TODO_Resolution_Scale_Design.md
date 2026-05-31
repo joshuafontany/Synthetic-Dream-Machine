@@ -25,7 +25,7 @@ Resolution parameter `p` (0–20) controls granularity across all three.
 
 - **Format:** `p~10` — lowercase p, numeric, no tilde
 - All p values are inherently approximate (Model Agnosticism applies)
-- Register tags retain `~` prefix (e.g., `[S~12]`) — inside brackets, no markdown collision
+- Register tags retain `~` prefix (e.g., `~:confidence[S],[12]`) — inside brackets, no markdown collision
 - Glyph `ρ` (rho) is the formal name; `p` is the CLI shorthand
 
 ### Scale
@@ -74,7 +74,7 @@ All cells show dual-tag with p. No cell is silent.
 ### Surface Form
 
 ```
-[P~6] 🎭 //rumor.light.plays → [S~13] 🏛️ //threshold.steady.holds | p~10
+~:confidence[P],[6] 🎭 //rumor.light.plays → ~:confidence[S],[13] 🏛️ //threshold.steady.holds | p~10
 ```
 
 p trails the vector after a pipe. Always present.
@@ -152,9 +152,9 @@ KAIROS (proactive surfacing sub-system) handles p-scale self-adjustment. This fi
 When KAIROS auto-adjusts, two log entries:
 
 ```
-Turn 7 | IN: [S~12] 🏛️ //faction.tangled.asks | p~0
+Turn 7 | IN: ~:confidence[S],[12] 🏛️ //faction.tangled.asks | p~0
   → KAIROS: p~0 produced 47 frames (ceiling: 20). Adjusting to p~2.
-Turn 7 | OUT: [S~13] 🏛️ //faction.steady.holds | p~2 [adj from p~0]
+Turn 7 | OUT: ~:confidence[S],[13] 🏛️ //faction.steady.holds | p~2 [adj from p~0]
   Δ Register: +0.05 | Mode: 🏛️→🏛️ | p~2 [adj]
 ```
 

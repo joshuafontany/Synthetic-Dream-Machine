@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~17]` — grounded in Boyd OODA-HA, Talk Story, Syadasti reading
+> **Register:** `~:confidence[CS],[17]` — grounded in Boyd OODA-HA, Talk Story, Syadasti reading
 > **Glyph:** `◎`
 > **Season:** Second of five
 > **Question:** What pattern and tension rise from the gathered surface?
@@ -139,7 +139,7 @@ If the prose sounds like a final verdict, Orient collapsed too early. If the pro
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~17]` | This file — Orient grammar definition |
+| `LOCI.md` | `~:confidence[CS],[17]` | This file — Orient grammar definition |
 
 *Future loci in this tree will land here.*
 

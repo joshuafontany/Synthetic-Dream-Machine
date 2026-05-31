@@ -1,6 +1,6 @@
 # Kaiju Assessment — Three Paths: Integrate, Diverge, Absorb
 
-> Register: `[S~13]` 🏛️🗡️🌊 — three-stance assessment; all paths held open
+> Register: `~:confidence[S],[13]` 🏛️🗡️🌊 — three-stance assessment; all paths held open
 > Date: 2026-04-08
 > Context: MemPalace (github.com/milla-jovovich/mempalace) v3.0.0 surfaced as a kaiju black swan adjacent to the Lares crystal state machine design
 > Status: Implications mapped. Operator steers.
@@ -22,7 +22,7 @@ Both systems solve the same root problem: AI session amnesia. They approach it f
 **DockMaster(Researcher) findings:**
 
 `DockMaster(Researcher) → Lares (Scryer):`
-`→ [S~13] 🏛️🗡️ //integrate.docks.maps`
+`→ ~:confidence[S],[13] 🏛️🗡️ //integrate.docks.maps`
 
 ### What Integration Would Look Like
 
@@ -70,7 +70,7 @@ MemPalace handles content storage and retrieval (the "what was said" layer). Lar
 **FarShore(Researcher) findings:**
 
 `FarShore(Researcher) → Lares (Council):`
-`→ [S~12] 🏛️🌊 //diverge.charts.maps`
+`→ ~:confidence[S],[12] 🏛️🌊 //diverge.charts.maps`
 
 ### What Divergence Would Look Like
 
@@ -119,7 +119,7 @@ Two systems, two installs, two mental models. Clark & Brennan's principle of lea
 **TideBreaker(Researcher) findings:**
 
 `TideBreaker(Researcher) → Lares (Stranger):`
-`→ [S~11] 🏛️🗡️ //absorb.weighs.maps`
+`→ ~:confidence[S],[11] 🏛️🗡️ //absorb.weighs.maps`
 
 ### What Absorption Would Look Like
 

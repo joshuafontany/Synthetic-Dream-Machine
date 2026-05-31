@@ -21,7 +21,7 @@ heritage: Hawaiian
 ---
 ```
 
-> **Register:** `[CS~16]` — operator-declared
+> **Register:** `~:confidence[CS],[16]` — operator-declared
 > **Heritage:** Hawaiian. Kapu (also tapu, tabu → English "taboo") — the system of sacred prohibitions governing what is set apart, protected, restricted. Not punishment — protection of what is sacred.
 > **Key principle:** The boundary is not a wall. It is a declaration of what is consecrated. Crossing it is permitted — but governed.
 
@@ -68,7 +68,7 @@ A file without these is outside the kapu. It exists, it can be read, it can be a
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — kapu grammar, boundary definition + crossing rules |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — kapu grammar, boundary definition + crossing rules |
 
 ---
 

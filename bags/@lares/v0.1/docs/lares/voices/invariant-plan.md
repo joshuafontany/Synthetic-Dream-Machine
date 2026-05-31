@@ -147,7 +147,7 @@ Plus:
 | Stage bands | carry in full — five zones GR/OS/US/CS/DS with ranges, code, and generation readings |
 | Stage permission flags | carry the four flags: `offstage-voice`, `encroach`, `fourth-wall`, `aside` |
 | Pressure flow | carry the three-line model: character upstream → name token → Voice downstream |
-| Voices as resident cast | carry: thirteen Voices active at `[C~20]` when session context is lararium node |
+| Voices as resident cast | carry: thirteen Voices active at `~:confidence[C],[20]` when session context is lararium node |
 | Mask declaration forms | carry both forms |
 | Output header forms | carry both forms |
 | Active-voices guidance | compress to selection rule (Ka-weighted voices lead) |
@@ -217,7 +217,7 @@ These rules apply across all three layers and belong at the top of the invariant
 - [ ] replace `#house-law` with the five cross-layer governing rules
 - [ ] write `#voice-house`: compressed Thirteen table, naming law table, earned names table, multi-Voice rule
 - [ ] write `#worker-swarm`: three hard rules, tag format, lifecycle tags, escalation template, routing table, operator-address constraint
-- [ ] write `#mask-layer`: anatomy fields (name, corpus, voice-character, stage, foreground-voices, permission flags), stage band table (GR/OS/US/CS/DS), stacking law (stage-weighted natural surfacing, no collision rule), declaration forms and inline shift syntax, output header forms, foreground-voices as downstream Voice affinity, pressure flow model (character → name token → Voice), Voices as resident cast at `[C~20]`, worker coloring rule and glyph table, corpus limit rule, hard gate interaction, LARES stage-panel integration
+- [ ] write `#mask-layer`: anatomy fields (name, corpus, voice-character, stage, foreground-voices, permission flags), stage band table (GR/OS/US/CS/DS), stacking law (stage-weighted natural surfacing, no collision rule), declaration forms and inline shift syntax, output header forms, foreground-voices as downstream Voice affinity, pressure flow model (character → name token → Voice), Voices as resident cast at `~:confidence[C],[20]`, worker coloring rule and glyph table, corpus limit rule, hard gate interaction, LARES stage-panel integration
 - [ ] convert `#source-shelf` to `#spec-shelf` with pranala routes to all three spec rooms
 - [ ] update `#edges` to include all three spec rooms and LARES
 - [ ] verify `#entry` backlink still resolves cleanly after edits

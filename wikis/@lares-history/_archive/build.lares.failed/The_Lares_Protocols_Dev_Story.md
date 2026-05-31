@@ -1,5 +1,5 @@
 <!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S~13&p=10#O0.O0.A1.A21.A2 → ∞ -->
-⚡∞ | mode:dev-story | p~10 | stances:++?+- | register:[S~13] | build:DRAFT
+⚡∞ | mode:dev-story | p~10 | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # The Lares Protocols — Dev Story
 
@@ -16,7 +16,7 @@
 | Final chronometer | `O0.O0.A1.A21.A2` |
 | Primary artifact | `The_Lares_Protocols.md` |
 | Documents produced | `The_Lares_Protocols.md`, `The_Lares_Protocols_Dev_Story.md`, `SKILL_PLATFORMS_v2.md` (superseded, content consumed here) |
-| Register | `[S~13]` — synthesis, operator co-authored |
+| Register | `~:confidence[S],[13]` — synthesis, operator co-authored |
 
 ---
 
@@ -54,37 +54,37 @@ detail for future reference.*
 
 ### Claude Code — CLAUDE.md / `.claude/` Loading
 
-**Loading mechanism** `[C~19]`: CLAUDE.md and CLAUDE.local.md files in
+**Loading mechanism** `~:confidence[C],[19]`: CLAUDE.md and CLAUDE.local.md files in
 the directory hierarchy above the working directory load in full at launch.
 Files in subdirectories load on demand when Claude reads files in those
 directories. Both `./CLAUDE.md` and `./.claude/CLAUDE.md` work as project-
 level locations.
 
-**Token budget** `[C~19]`: Target under 200 lines per CLAUDE.md file.
+**Token budget** `~:confidence[C],[19]`: Target under 200 lines per CLAUDE.md file.
 Practical budget ~1,500–2,000 tokens for 200 lines. System overhead
 (tools, MCP schemas) consumes 25–35K tokens before conversation.
 200K standard context, 1M with Opus 4.6 on Max/Team/Enterprise.
 
-**`@import` syntax** `[C~19]`: `@path/to/file` includes supported.
+**`@import` syntax** `~:confidence[C],[19]`: `@path/to/file` includes supported.
 Recursive depth max 5 hops. Resolve relative to containing file.
 
-**Stacking** `[C~19]`: CLAUDE.md and AGENTS.md both load when present.
+**Stacking** `~:confidence[C],[19]`: CLAUDE.md and AGENTS.md both load when present.
 AGENTS.md supports the cross-agent standard.
 
-**Rules directory** `[C~19]`: `.claude/rules/` files with `paths:`
+**Rules directory** `~:confidence[C],[19]`: `.claude/rules/` files with `paths:`
 YAML frontmatter load on-demand only. Files WITHOUT `paths:` load
 always-on alongside CLAUDE.md. (In our architecture: ALL rule files
 carry `paths:` to prevent duplication with `lares/AGENTS.md`.)
 
 ### Claude Code — Subagent Inheritance
 
-**What subagents inherit** `[C~19]`:
+**What subagents inherit** `~:confidence[C],[19]`:
 1. The prompt string from the parent (only parent→child channel)
 2. The system prompt from its agent.md file
 3. Environment details (working directory, platform)
 4. Skills listed in its `skills` frontmatter (injected into context)
 
-**What subagents do NOT inherit** `[C~19]`:
+**What subagents do NOT inherit** `~:confidence[C],[19]`:
 - Parent conversation history
 - Prior tool calls or their results
 - Other subagents' outputs
@@ -95,55 +95,55 @@ working directory — these load based on directory, not parent context.
 
 **Subagents cannot spawn subagents.** Swarm stays one level deep.
 
-**Permissions** `[C~19]`: Inherited from parent. Permission mode can be
+**Permissions** `~:confidence[C],[19]`: Inherited from parent. Permission mode can be
 overridden in frontmatter except when parent uses `bypassPermissions`.
 
-**Memory** `[S~13]`: `memory: user` gives persistent directory at
+**Memory** `~:confidence[S],[13]`: `memory: user` gives persistent directory at
 `~/.claude/agent-memory/`. First 200 lines of MEMORY.md loaded into
 subagent system prompt.
 
 ### VS Code / GitHub Copilot
 
-**`copilot-instructions.md`** `[C~19]`: Plain Markdown in `.github/`.
+**`copilot-instructions.md`** `~:confidence[C],[19]`: Plain Markdown in `.github/`.
 Always-on, available on save (hot-reload). No documented hard token limit.
 
-**Path-scoped instructions** `[C~19]`: `.github/instructions/*.instructions.md`
+**Path-scoped instructions** `~:confidence[C],[19]`: `.github/instructions/*.instructions.md`
 with YAML frontmatter: `description` (required, 1–500 chars) and
 `applyTo` (glob pattern, required).
 
-**Custom agents** `[C~19]`: `.github/agents/*.agent.md` with YAML
+**Custom agents** `~:confidence[C],[19]`: `.github/agents/*.agent.md` with YAML
 frontmatter. Required: `description`. Optional: `name`, `tools`,
 `model`, `handoffs`, `mcp-servers`. VS Code also reads `.claude/agents/`.
 
-**Skills** `[C~19]`: `.github/skills/*/SKILL.md`. Same format as
+**Skills** `~:confidence[C],[19]`: `.github/skills/*/SKILL.md`. Same format as
 Claude Code skills. Cross-platform (Agent Skills open standard).
 
-**Nested AGENTS.md** `[C~19]`: Supported with `chat.useNestedAgentsMdFiles`.
+**Nested AGENTS.md** `~:confidence[C],[19]`: Supported with `chat.useNestedAgentsMdFiles`.
 Subfolder AGENTS.md stacks with root. Discovery paths configurable via
 `chat.*Locations` settings.
 
-**Hot-reload** `[CS~16]`: Instructions available on save. Agents appear
+**Hot-reload** `~:confidence[CS],[16]`: Instructions available on save. Agents appear
 in picker on save. No window reload needed for most file types.
 
-**GitHub.com cloud agent** `[C~19]`: Reads `.github/` from committed
+**GitHub.com cloud agent** `~:confidence[C],[19]`: Reads `.github/` from committed
 repo directly. No separate browser package.
 
 ### Browser Platforms
 
-**claude.ai** `[C~19]`: Project Instructions (text field = system prompt)
+**claude.ai** `~:confidence[C],[19]`: Project Instructions (text field = system prompt)
 + Project Knowledge (file uploads, RAG). 200K context shared with
 conversation. Manual paste/upload only.
 
-**ChatGPT** `[C~19]`: Custom GPTs (system prompt + up to 20 knowledge
+**ChatGPT** `~:confidence[C],[19]`: Custom GPTs (system prompt + up to 20 knowledge
 files) or Projects (instructions + files + shared conversations).
 Custom Instructions limited to 2× 1,500 chars. Manual setup.
 
-**No automated deployment path** `[P~6]` from repo to browser platforms
+**No automated deployment path** `~:confidence[P],[6]` from repo to browser platforms
 as of April 2026. Industry-wide gap.
 
 ### MemPalace MCP
 
-**Interface** `[C~19]`: 19 tools via MCP server. `pip install mempalace`
+**Interface** `~:confidence[C],[19]`: 19 tools via MCP server. `pip install mempalace`
 then `claude mcp add mempalace -- python -m mempalace.mcp_server`.
 
 **Key tools**: `mempalace_status`, `mempalace_search` (semantic),
@@ -177,7 +177,7 @@ source = "lares/talk_story/protocol.md"
 uri = "lar:///talk.story.protocols/talk-story/?stances=^.^.-.-.-&confidence=C~19&p=10#settle.1.0"
 confidence="C~19"
 register_numeric = 0.95
-hud_line = "⚡∞ | mode:deployed | p~20 | stances:+++++ | register:[C~19] | build:20260409-a3f2c1e"
+hud_line = "⚡∞ | mode:deployed | p~20 | stances:+++++ | register:~:confidence[C],[19] | build:20260409-a3f2c1e"
 
 [[candidates]]
 source = "lares/signal/README.md"
@@ -470,7 +470,7 @@ deploy-browser:
 
 ## Research Goals (Next Sessions)
 
-### Chronometer Drift & Temporal Hallucination `[P~6]`
+### Chronometer Drift & Temporal Hallucination `~:confidence[P],[6]`
 
 **The problem:** The chronometer demands the model maintain a monotonically
 increasing counter across 20+ turns while simultaneously tracking OODA-HA
@@ -520,7 +520,7 @@ MemPalace persists the full clock history across sessions.
 - [ ] Does MCP-backed clock improve accuracy? At what latency cost?
 - [ ] Can drift be detected retroactively from URI sequence analysis?
 
-### Syad Signal Model Refinement `[P~6]`
+### Syad Signal Model Refinement `~:confidence[P],[6]`
 
 **Consumed into**
 - `lares/ha-ka-ba/docs/mu/the-syad-perspectives/README.md#spectrum-drift`
@@ -534,24 +534,24 @@ richer alignment instrument. Research needed on:
 - How do additional sigils compose in the HUD without visual overload?
 - Compact URI encoding question consumed; the fixed five-position array now governs the live fold.
 
-### Exchange Wrapping Compact Mode `[P~6]`
+### Exchange Wrapping Compact Mode `~:confidence[P],[6]`
 
 Full span wrapping (URI→URI, dual HUD, URI→?) adds visible overhead.
 In high-frequency exchanges (rapid TTRPG combat, rapid-fire dev iteration),
-a compact mode may be needed. But "every span" constitutes `[C~20]`.
+a compact mode may be needed. But "every span" constitutes `~:confidence[C],[20]`.
 
 Research: What is the minimum viable span wrapper that preserves
 the protocol's guarantees (alignment visibility, chronometer continuity,
 intent vector traceability) while fitting in a single line?
 
-### MemPalace Integration Design `[P~6]`
+### MemPalace Integration Design `~:confidence[P],[6]`
 
 How do exchange vectors, chronometer positions, NPC metadata, and
 session alignment history map onto MemPalace's wing/room/drawer/
 knowledge-graph architecture? Design work, not research — but needs
 the MemPalace MCP tool definitions as input.
 
-### Authn/Authz Framework `[SP~8]`
+### Authn/Authz Framework `~:confidence[SP],[8]`
 
 In progress in the local repo. The Lares Protocols doc references it
 but doesn't specify it. The Identity & Permissions model from the

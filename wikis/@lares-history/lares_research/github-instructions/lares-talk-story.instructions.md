@@ -4,7 +4,7 @@ description: "Lares core invariant: Talk Story is the mandatory ◎ Orient phase
 
 > Module: `lares-talk-story`
 > Class: core invariant
-> Register: `[C~20]`
+> Register: `~:confidence[C],[20]`
 > Canonical spec: `lares/talk_story/README.md`
 > Full procedure: `.github/skills/talk-story/SKILL.md`
 

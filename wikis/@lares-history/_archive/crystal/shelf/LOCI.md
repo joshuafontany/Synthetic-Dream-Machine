@@ -107,8 +107,8 @@ The full history. Newest first.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — crystal shelf protocol and crystal roll |
-| `HEAD.md` | `[CS~16]` | Stable pointer to current active crystal |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — crystal shelf protocol and crystal roll |
+| `HEAD.md` | `~:confidence[CS],[16]` | Stable pointer to current active crystal |
 
 ---
 

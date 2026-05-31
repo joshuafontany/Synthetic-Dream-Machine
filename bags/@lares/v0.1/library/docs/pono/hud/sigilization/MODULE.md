@@ -33,7 +33,7 @@ confidence: CS~17
 
 > Active render-target material promoted to `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets`
 
-> **Register:** `[CS~17]` — near-canon; governs all surface emission
+> **Register:** `~:confidence[CS],[17]` — near-canon; governs all surface emission
 > **Status:** Active. Filed 2026-04-09 as resolution of U10 + U11 (uri-schema open questions).
 > **Source of truth:** `lares/modules/sigilization/decide/CONVENTIONS.md`
 > **Depends on:** `lares/modules/uri-schema/` for canonical record form

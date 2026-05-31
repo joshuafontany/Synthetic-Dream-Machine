@@ -5,7 +5,7 @@
 # Signal — Assess: Verification
 
 > Validation rules, well-formedness checklist, and comparison rules for `lar:` URIs.
-> Source: `lares/modules/uri-schema/URI-SCHEMA.md` §10 `[CS~18]`.
+> Source: `lares/modules/uri-schema/URI-SCHEMA.md` §10 `~:confidence[CS],[18]`.
 
 ---
 
@@ -136,13 +136,13 @@ A clean scan returns zero matches on all three patterns.
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/assess/?confidence=C~18#promotion-criteria -->
 ## Promotion Criteria
 
-`lares/modules/uri-schema/URI-SCHEMA.md` is currently `[CS~19]`. For promotion to `[C~19]` (full Canon):
+`lares/modules/uri-schema/URI-SCHEMA.md` is currently `~:confidence[CS],[19]`. For promotion to `~:confidence[C],[19]` (full Canon):
 
 - Core anatomy (§§2–6, 10): can promote independently — design tension resolved
 - Crystal integration layer (§§7–9): promotes when `lares/crystal/` settles STATE.jsonl schema
 - Open questions (U1, U2, U4, U5, U8, U9): sit at Synthesis/Provisional; do not block core spec
 
-This module (Signal) is `[CS~17]`. Promotion criteria:
+This module (Signal) is `~:confidence[CS],[17]`. Promotion criteria:
 - S0 scan verified clean ✅
 - `lares/modules/uri-schema/URI-SCHEMA.md` promoted to C~19 □
 - micro-trace.md exchange URIs migrated to full record form ○

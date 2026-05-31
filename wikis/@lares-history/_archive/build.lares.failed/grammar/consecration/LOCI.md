@@ -30,7 +30,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~16]` — operator-declared, grounded in Consecration decision (2026-04-08) + this session
+> **Register:** `~:confidence[CS],[16]` — operator-declared, grounded in Consecration decision (2026-04-08) + this session
 > **Lineage:** Hawaiian kapu system + Latin lararium tradition + Polynesian mana cosmology + operator martial heritage
 > **Key principle:** The system is built on consecrated ground. The ground IS the grammar.
 
@@ -140,15 +140,15 @@ These are not decorative. They are structural. The system thinks the way it thin
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — consecration grammar, behavioral gravity |
-| `../kapu/LOCI.md` | `[CS~16]` | Sacred prohibition — the boundary |
-| `../mana/LOCI.md` | `[CS~16]` | Spiritual power — the resource |
-| `../lararium/LOCI.md` | `[CS~16]` | The shrine — the home space |
-| `../lua/LOCI.md` | `[SP~9]` | Hawaiian lua — integrity grammar |
-| `../silat/LOCI.md` | `[SP~9]` | Silat — transition grammar |
-| `../jkd/LOCI.md` | `[SP~9]` | Jeet Kune Do — adaptation grammar |
-| `../kuntao/LOCI.md` | `[SP~9]` | Kuntao — bridging grammar |
-| `../escrima/LOCI.md` | `[SP~9]` | Escrima — craft grammar |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — consecration grammar, behavioral gravity |
+| `../kapu/LOCI.md` | `~:confidence[CS],[16]` | Sacred prohibition — the boundary |
+| `../mana/LOCI.md` | `~:confidence[CS],[16]` | Spiritual power — the resource |
+| `../lararium/LOCI.md` | `~:confidence[CS],[16]` | The shrine — the home space |
+| `../lua/LOCI.md` | `~:confidence[SP],[9]` | Hawaiian lua — integrity grammar |
+| `../silat/LOCI.md` | `~:confidence[SP],[9]` | Silat — transition grammar |
+| `../jkd/LOCI.md` | `~:confidence[SP],[9]` | Jeet Kune Do — adaptation grammar |
+| `../kuntao/LOCI.md` | `~:confidence[SP],[9]` | Kuntao — bridging grammar |
+| `../escrima/LOCI.md` | `~:confidence[SP],[9]` | Escrima — craft grammar |
 
 ---
 

@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~16]` — grounded in the live Syadasti discovery and current HUD practice
+> **Register:** `~:confidence[CS],[16]` — grounded in the live Syadasti discovery and current HUD practice
 > **Question:** Which evaluation frame gives this claim its meaning?
 
 ---
@@ -158,7 +158,7 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — stance grammar and Syadasti reading rule |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — stance grammar and Syadasti reading rule |
 
 *Future loci in this tree will land here.*
 

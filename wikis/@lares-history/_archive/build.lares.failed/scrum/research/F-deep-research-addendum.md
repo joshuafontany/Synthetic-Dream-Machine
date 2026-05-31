@@ -1,6 +1,6 @@
 # Deep Research Addendum — Multi-Stance Scaling & Authority Transfer
 
-> Register: `[S~13]` 🏛️🌊🗡️ — research synthesis; reshapes the centroid~δ model
+> Register: `~:confidence[S],[13]` 🏛️🌊🗡️ — research synthesis; reshapes the centroid~δ model
 > Date: 2026-04-08
 > Feeds: S0 Refinement Plan Improvement #1 (revision needed)
 > Sources: Multimodal distribution theory, aviation AFCS authority models, HUD uncertainty visualization
@@ -58,7 +58,7 @@ The emoji count IS the delta. More emoji = more fuzz. The operator doesn't need 
 
 Instead:
 
-- **HUD display:** `[S~13] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
+- **HUD display:** `~:confidence[S],[13] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
 - **Record form (STATE.jsonl):** The `register` field stays a point value (`"S~13"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
 - **URI machine form:** `confidence=S~13` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
 
@@ -115,7 +115,7 @@ The operator declares: "I want this response in Philosopher stance at Canon/Synt
 
 ### What Changes in the HUD
 
-When the operator holds the stick, the HUD must show **who authored the state tuple**. Otherwise the operator sees `[CS~16] 🏛️` and can't tell whether the node chose that or the operator prescribed it.
+When the operator holds the stick, the HUD must show **who authored the state tuple**. Otherwise the operator sees `~:confidence[CS],[16] 🏛️` and can't tell whether the node chose that or the operator prescribed it.
 
 **Proposed: Authority indicator in the state tuple.**
 
@@ -127,18 +127,18 @@ When the operator holds the stick, the HUD must show **who authored the state tu
 
 Example — operator sets stance, node self-assesses register:
 ```
-[S~13] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
+~:confidence[S],[13] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
 ```
-The `⊙` before `🏛️` means "operator-prescribed stance." The register `[S~13]` has no indicator — node self-assessed.
+The `⊙` before `🏛️` means "operator-prescribed stance." The register `~:confidence[S],[13]` has no indicator — node self-assessed.
 
 Example — operator sets both:
 ```
-⊙[CS~16] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
+⊙~:confidence[CS],[16] ⊙🏛️ ◎ 🔍.3.2.7 | p~10
 ```
 
 Example — all node-declared (current default):
 ```
-[S~13] 🏛️ ◎ 🔍.3.2.7 | p~10
+~:confidence[S],[13] 🏛️ ◎ 🔍.3.2.7 | p~10
 ```
 
 ### Record Form
@@ -215,10 +215,10 @@ The authority transfer model (`--set`, `⊙` indicator) is **new scope**. It doe
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| RES-08 | Mana cost table: stance count → register fuzz magnitude | `[S~12]` | S2 |
-| RES-09 | Authority transfer model: `--set` CLI syntax, `⊙` indicator, authority field in STATE.jsonl | `[S~11]` | S2 |
-| RES-10 | CWS vs Manual vs CMD mode mapping to operating modes | `[SP~9]` | S2 |
-| RES-11 | Five-stance (full Discordian) configuration: what does it mean for register? Is it meaningful or degenerate? | `[SP~8]` | S2 (Council ruling) |
+| RES-08 | Mana cost table: stance count → register fuzz magnitude | `~:confidence[S],[12]` | S2 |
+| RES-09 | Authority transfer model: `--set` CLI syntax, `⊙` indicator, authority field in STATE.jsonl | `~:confidence[S],[11]` | S2 |
+| RES-10 | CWS vs Manual vs CMD mode mapping to operating modes | `~:confidence[SP],[9]` | S2 |
+| RES-11 | Five-stance (full Discordian) configuration: what does it mean for register? Is it meaningful or degenerate? | `~:confidence[SP],[8]` | S2 (Council ruling) |
 
 ---
 

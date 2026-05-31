@@ -113,11 +113,11 @@ Thirteen coordinators. Workers use `Tag [task[Role]]` format, are session-local,
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C~18]` | Canon | 0.85–0.95 |
-| `[CS~16]` | Canon/Synthesis | 0.75–0.85 |
-| `[S~13]` | Synthesis | 0.50–0.75 |
-| `[SP~9]` | Synth/Provisional | 0.35–0.50 |
-| `[P~6]` | Provisional | 0.20–0.35 |
+| `~:confidence[C],[18]` | Canon | 0.85–0.95 |
+| `~:confidence[CS],[16]` | Canon/Synthesis | 0.75–0.85 |
+| `~:confidence[S],[13]` | Synthesis | 0.50–0.75 |
+| `~:confidence[SP],[9]` | Synth/Provisional | 0.35–0.50 |
+| `~:confidence[P],[6]` | Provisional | 0.20–0.35 |
 
 ## Syadasti Reading Rule [SESSION DISCOVERY 2026-04-08]
 
@@ -139,7 +139,7 @@ Full derivation: `_todo/SYADASTI_READING_RULE.md`
 
 ## Key Decisions — This Sprint Cycle
 
-These were made in the 2026-04-08 browser session. They are `[CS~16]` — near-Canon, awaiting operator re-confirmation in this local environment.
+These were made in the 2026-04-08 browser session. They are `~:confidence[CS],[16]` — near-Canon, awaiting operator re-confirmation in this local environment.
 
 | Decision | Summary | Source |
 |---|---|---|

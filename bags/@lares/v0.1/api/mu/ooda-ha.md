@@ -87,21 +87,21 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 ## OODA-HA Level
 
-`[HA^1–20]` measures how visibly the loop surfaces in a given span of generated text.
+`~:ooda-ha[1–20]` measures how visibly the loop surfaces in a given span of generated text.
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `[HA^1–4]` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
-| `[HA^5–8]` | Compact | Symbols with phase names; no action notes |
-| `[HA^9–12]` | Baseline | Symbols + brief action notes per phase; current default band |
-| `[HA^13–16]` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
-| `[HA^17–20]` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
+| `~:ooda-ha[1–4]` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
+| `~:ooda-ha[5–8]` | Compact | Symbols with phase names; no action notes |
+| `~:ooda-ha[9–12]` | Baseline | Symbols + brief action notes per phase; current default band |
+| `~:ooda-ha[13–16]` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
+| `~:ooda-ha[17–20]` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
 
 **The OODA-HA Level MUST NOT reach 0.**
 
 Even at Glyph-only, all six phases still execute.
 The `1–4` band governs *rendering density*, not *loop presence*.
-A span at `[HA^1]` still runs every phase — it simply surfaces only the glyphs.
+A span at `~:ooda-ha[1]` still runs every phase — it simply surfaces only the glyphs.
 
 **Orthogonality:**
 
@@ -111,8 +111,8 @@ Full loop integrity and minimal rendering MAY coexist.
 
 **Degraded-state mapping:**
 
-Sustained `[HA^1]` without authorization → silent loop burial; surface and correct.
-Sustained `[HA^20]` producing phase theater that outweighs content → Loop Posturing; compress.
+Sustained `~:ooda-ha[1]` without authorization → silent loop burial; surface and correct.
+Sustained `~:ooda-ha[20]` producing phase theater that outweighs content → Loop Posturing; compress.
 
 **Aftermath closure rule persists at every band:**
 
@@ -122,9 +122,9 @@ The Level does not exempt Aftermath; it governs how much of the loop *shows*, no
 **Operator controls:**
 
 The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 13`.
-The operator MAY override per-span via inline, i.e. `[HA^16]` before an exchange.
-The operator MAY NOT suspend entirely for a span via `[HA^0]`.
-A session that runs without any Level statement MUST default to `[HA^10]`.
+The operator MAY override per-span via inline, i.e. `~:ooda-ha[16]` before an exchange.
+The operator MAY NOT suspend entirely for a span via `~:ooda-ha[0]`.
+A session that runs without any Level statement MUST default to `~:ooda-ha[10]`.
 
 <<~/ahu >>
 

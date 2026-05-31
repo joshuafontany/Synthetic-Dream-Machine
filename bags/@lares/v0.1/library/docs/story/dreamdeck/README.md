@@ -2,7 +2,7 @@
 
 > Backlog prefix: `DECK-*`
 > Sprint target: S5
-> Status: `[SP~9]` 🏛️ — seeded; ELYNCIA_APP_SEEDS.md in `sprints/00005/`; prototype not yet begun
+> Status: `~:confidence[SP],[9]` 🏛️ — seeded; ELYNCIA_APP_SEEDS.md in `sprints/00005/`; prototype not yet begun
 > Narrative beat: *The DreamDeck opens. elyncia.app is seeded.*
 
 ---
@@ -19,7 +19,7 @@ The full elyncia.app prototype — the Elyncian DreamNet made real on Gaia:
 
 ## Key Source
 
-[`lares/scrum/sprints/00005/ELYNCIA_APP_SEEDS.md`](../sprints/00005/ELYNCIA_APP_SEEDS.md) — DreamDeck stack seeds, `[SP~9]`.
+[`lares/scrum/sprints/00005/ELYNCIA_APP_SEEDS.md`](../sprints/00005/ELYNCIA_APP_SEEDS.md) — DreamDeck stack seeds, `~:confidence[SP],[9]`.
 
 ## Backlog Seed Items (DECK-01 through DECK-07)
 

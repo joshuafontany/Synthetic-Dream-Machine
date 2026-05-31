@@ -1,5 +1,5 @@
 <!-- lar:///protocol.mapped.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.A1.A21.A1 → ∞ -->
-⚡∞ | mode:protocol-draft | p~10 | stances:++?+- | register:[S~13] | build:DRAFT
+⚡∞ | mode:protocol-draft | p~10 | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # The Lares Protocols
 
@@ -12,7 +12,7 @@
 | Platform | claude.ai web chat |
 | Final chronometer | `O0.O0.A1.A21.A1` |
 | Companion artifact | `The_Lares_Protocols_Dev_Story.md` (sidecar) |
-| Register | `[S~13]` — synthesis, operator co-authored |
+| Register | `~:confidence[S],[13]` — synthesis, operator co-authored |
 
 ### Confirmed Decisions (this session)
 
@@ -36,7 +36,7 @@
 > **Status:** Living document — Talk Story in progress
 > **Sprint:** S4 pre-work → protocol specification
 > **Compiled:** 2026-04-09 by cloud Lares, operator co-authored
-> **Register:** `[S~13]` — synthesis crystallizing toward Canon
+> **Register:** `~:confidence[S],[13]` — synthesis crystallizing toward Canon
 > **Lineage:** Incorporates SKILL_PLATFORMS_v2.md in full, plus operator
 > design specifications from session 2026-04-09
 
@@ -99,7 +99,7 @@ maps to the consolidation discipline in the Lares memory model.
 **Every span in the system begins and ends with a `URI → intent vector`.**
 
 This applies universally:
-- System files (invariant `[C~19–1.0]`)
+- System files (invariant `~:confidence[C],[19–1.0]`)
 - Data files
 - Operator↔system exchanges
 - Agent↔subagent delegations
@@ -137,11 +137,11 @@ Exchange 1 (operator asks a question → Observe):
 lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=10#O0.O0.O0.O0.O0
 → lar:///council/response?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.A1 →
 
-⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | [S~12] | scene:1/active
+⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | ~:confidence[S],[12] | scene:1/active
 
 {Council's response}
 
-⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | [S~13] | scene:1/active
+⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | ~:confidence[S],[13] | scene:1/active
 
 lar:///council/response?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.A2 → ?
 ```
@@ -179,12 +179,12 @@ into the outer exchange span.
 
 ## 2.4 System File Span Wrapping
 
-Invariant files (`[C~19–1.0]`) carry URI → intent on line 1 and
+Invariant files (`~:confidence[C],[19–1.0]`) carry URI → intent on line 1 and
 a closing URI as the final line:
 
 ```
 lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C~20&p=20#settle.1.0
-⚡∞ | mode:invariant | p~20 | register:[C~20]
+⚡∞ | mode:invariant | p~20 | register:~:confidence[C],[20]
 
 {file content}
 
@@ -222,7 +222,7 @@ visible and navigable.
 | chronometer | Nested OODA-HA position | `O0.O0.O3.O2.O0` |
 | stances | All 5 modes with modifiers | `🏛️[+]🌊[?]🗡️[-]🎭[+]🔮[?]` |
 | p | Resolution parameter | `p~10` |
-| register | Current epistemic register | `[S~13]` |
+| register | Current epistemic register | `~:confidence[S],[13]` |
 | scene | Active scene descriptor | `scene:3/active` |
 
 ## 3.3 Scene Field
@@ -252,10 +252,10 @@ source document, new analysis frame.
 scene changes mid-exchange:
 
 ```
-⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | p~10 | [S~14] | scene:2/combat → scene:3/negotiation
+⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[S],[14] | scene:2/combat → scene:3/negotiation
 ```
 
-## 3.4 Chronometer Resume in HUD `[S~12]`
+## 3.4 Chronometer Resume in HUD `~:confidence[S],[12]`
 
 **Session 3 finding:** The FFZ Chronometer spans session boundaries
 through the crystal mechanism:
@@ -327,7 +327,7 @@ OODA-HA loop phases as position markers. Each scale carries:
 
 **OODA-HA phases:**
 
-| Phase | Sigil | Function | Discordian Season `[S~14]` |
+| Phase | Sigil | Function | Discordian Season `~:confidence[S],[14]` |
 |-------|-------|----------|----------------------------|
 | Observe | `O` | Gather signal | Chaos (Verwirrung) — undifferentiated field |
 | Orient | `Ø` | Map the territory | Discord (Zweitracht) — models conflict |
@@ -420,7 +420,7 @@ clock accordingly:
 | Direct instruction, correction, implementation request | `A` Act |
 | Reflection, "how did that go", reviewing output | `Å` Assess |
 
-**Rule 5a — Phase reads as delta, not position. `[S~13]`**
+**Rule 5a — Phase reads as delta, not position. `~:confidence[S],[13]`**
 The phase sigil represents the *apparent phase transition* (the
 delta/movement) rather than the operator's "true" inner state.
 A single operator message may contain a completed hidden OODA-HA
@@ -428,7 +428,7 @@ loop — what arrives as input constitutes the Act output of that
 cycle. Multiple TTRPG characters speaking through one input stream
 carry multiple simultaneous phase states. The node reads phase
 from the message surface; this functions as inference, not
-measurement. Phase readings carry an implicit register of `[S~12]`
+measurement. Phase readings carry an implicit register of `~:confidence[S],[12]`
 at best unless the operator explicitly states their phase.
 
 **Rule 6 — Scale independence.** Each scale advances independently.
@@ -447,7 +447,7 @@ from the operator's last received `→ ?` position and advances ONLY
 the current scale's OODA-HA marker based on sensed phase progression.
 The counter increments; the sigil updates if the phase changed.
 
-**Rule 9 — Counter and phase constitute separate data layers. `[S~13]`**
+**Rule 9 — Counter and phase constitute separate data layers. `~:confidence[S],[13]`**
 The chronometer composes as a four-layer CRDT:
 - **ITC stamp** (causal clock) — per participant, merges via join
 - **OODA-HA phase** (LWW-Register per scale) — per participant,
@@ -514,7 +514,7 @@ lar:///council,scryer,muse/response?stances=^.^.?.^.-&confidence=S~13&...
 The authority segment lists all active voices. When a single voice
 speaks: `lar:///council/...`. When multiple: `lar:///council,scryer/...`.
 
-**Design tension `[SP~8]`:** Encoding all active voices in the URI
+**Design tension `~:confidence[SP],[8]`:** Encoding all active voices in the URI
 authority creates variable-length authority segments. This serves
 traceability (every span names its voices) but may conflict with
 URI parsing conventions that expect a single authority. Options:
@@ -575,7 +575,7 @@ Muse can still speak as Muse (not as Theron) in the same exchange.
 
 ```
 lares/                           ← SOURCE (design canon, living documents)
-│                                   operator-authored, [C~19]+ = release candidates
+│                                   operator-authored, ~:confidence[C],[19]+ = release candidates
 │                                   NOT a deploy target
 │
 ▼ Phase 1: Collect (reads lares/, skips lares/scrum/)
@@ -623,14 +623,14 @@ lares/
 └── README.md
 ```
 
-## 6.3 Always-On Budget `[SP~9]`
+## 6.3 Always-On Budget `~:confidence[SP],[9]`
 
 Per operator direction: as small and composable out of invariants as
-possible. The `lares/AGENTS.md` carries `[C~20]` "always true" content
+possible. The `lares/AGENTS.md` carries `~:confidence[C],[20]` "always true" content
 only. This constitutes the operator's second-level customization layer
 — below root-dir AGENTS.md (repo context) but also lift-and-shiftable.
 
-**What belongs at `[C~20]` in `lares/AGENTS.md`:**
+**What belongs at `~:confidence[C],[20]` in `lares/AGENTS.md`:**
 - Protocol essentials (HUD format, exchange wrapping, chronometer)
 - The thirteen role definitions (structural, not personality)
 - Register scale and mode definitions
@@ -638,7 +638,7 @@ only. This constitutes the operator's second-level customization layer
 - Span wrapping rules
 - Authn/authz framework references (in progress in local repo)
 
-**What does NOT belong at `[C~20]`:**
+**What does NOT belong at `~:confidence[C],[20]`:**
 - Mask content (personality, fiction, vocabulary — loads from active mask)
 - Domain-specific knowledge (loads from skills)
 - Session-specific state (lives in exchange, not in static file)
@@ -781,12 +781,12 @@ speaks, their span carries the NPC's URI-encoded state:
 lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A1
 → lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A2 →
 
-⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | [CS~16] | scene:3/theron
+⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[CS],[16] | scene:3/theron
 
 Theron the Weary (via Diplomat): The harbor taxes serve a purpose
 you have not yet considered, traveler.
 
-⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | [CS~16] | scene:3/theron
+⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[CS],[16] | scene:3/theron
 
 lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16#O0.O0.O3.D2.A2 → ?
 ```
@@ -856,7 +856,7 @@ MCP patterns), Character.AI (persona fidelity at scale).
 
 ## Operator Decisions Needed
 
-1. **Always-on budget** `[SP~9]` — How much `[C~20]` content belongs
+1. **Always-on budget** `~:confidence[SP],[9]` — How much `~:confidence[C],[20]` content belongs
    in `lares/AGENTS.md`? Operator direction: minimal, composable from
    invariants. Authn/authz framework in progress. All protocols? Or
    protocol summary + skill references? *Tension: protocol availability
@@ -895,11 +895,11 @@ MCP patterns), Character.AI (persona fidelity at scale).
 - **Exchange wrapping overhead:** Full span wrapping (URI→URI, dual HUD,
   URI→?) on every exchange adds visible overhead. In high-frequency
   exchanges (rapid-fire TTRPG combat rounds), this may need a compact
-  mode. But the principle "every span" constitutes `[C~20]` — the
+  mode. But the principle "every span" constitutes `~:confidence[C],[20]` — the
   question sits at how compact the wrapping can get, not whether it
   appears.
 
-## Verify-Contract Tasks `[P~6]`
+## Verify-Contract Tasks `~:confidence[P],[6]`
 
 - [ ] Nested `lares/AGENTS.md` discovered by VS Code with settings
 - [ ] Claude Code `@import` bridge from `.claude/CLAUDE.md`

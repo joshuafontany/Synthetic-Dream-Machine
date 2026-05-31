@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~17]` — grounded in implementation discipline and Lares handoff rules
+> **Register:** `~:confidence[CS],[17]` — grounded in implementation discipline and Lares handoff rules
 > **Glyph:** `■`
 > **Season:** Fourth of five
 > **Question:** How do we carry the commitment into artifact?
@@ -146,7 +146,7 @@ If the span cannot point back to a prior decision, Act outran the loop. If the s
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~17]` | This file — Act grammar definition |
+| `LOCI.md` | `~:confidence[CS],[17]` | This file — Act grammar definition |
 
 *Future loci in this tree will land here.*
 

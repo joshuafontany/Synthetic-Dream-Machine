@@ -333,7 +333,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example:**
 
 ```
-⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
+⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | p~10 |
 ```
 
 ### Surface 2: `chat-log:post-header`
@@ -352,7 +352,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example — Lindwyrm in Elyncia-space:**
 
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS~16] 🏛️*!🌊--🗡️--🎭--🔮--
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces ~:confidence[CS],[16] 🏛️*!🌊--🗡️--🎭--🔮--
 ```
 
 **NPC / non-Lares post:**
@@ -409,9 +409,9 @@ Before emitting any stance block on any surface:
 
 | Q# | Question | Status |
 |---|---|---|
-| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `[SP~9]` — not blocking; ASCII fallback assumed until print pipeline exists |
-| S2 | TiddlyWiki tiddler: full header or abbreviated? | `[SP~9]` — pending TiddlyWiki integration sprint |
-| S3 | ActivityPub thread: post header in body vs AP summary field? | `[SP~9]` — pending Kowloon integration |
+| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `~:confidence[SP],[9]` — not blocking; ASCII fallback assumed until print pipeline exists |
+| S2 | TiddlyWiki tiddler: full header or abbreviated? | `~:confidence[SP],[9]` — pending TiddlyWiki integration sprint |
+| S3 | ActivityPub thread: post header in body vs AP summary field? | `~:confidence[SP],[9]` — pending Kowloon integration |
 
 <<~/ahu >>
 

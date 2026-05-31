@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~17]` — grounded in Boyd OODA-HA, operator-confirmed working discipline
+> **Register:** `~:confidence[CS],[17]` — grounded in Boyd OODA-HA, operator-confirmed working discipline
 > **Glyph:** `✶`
 > **Season:** First of five
 > **Question:** What has arrived here?
@@ -146,7 +146,7 @@ If the prose already sounds interpretive, Decide-colored, or solution-heavy, the
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~17]` | This file — Observe grammar definition |
+| `LOCI.md` | `~:confidence[CS],[17]` | This file — Observe grammar definition |
 
 *Future loci in this tree will land here.*
 

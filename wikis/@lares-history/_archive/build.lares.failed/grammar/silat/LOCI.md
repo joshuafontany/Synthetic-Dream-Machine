@@ -20,7 +20,7 @@ heritage: Southeast Asian (Malay, Indonesian, Filipino, Bruneian)
 ---
 ```
 
-> **Register:** `[SP~9]` — stub. Operator's art; operator fills the bones.
+> **Register:** `~:confidence[SP],[9]` — stub. Operator's art; operator fills the bones.
 > **Heritage:** Southeast Asian. Silat — a family of martial arts emphasizing flow, sensitivity (rasa), entering (masuk), and redirection. The practitioner reads the opponent's structure and energy before committing.
 > **Grammar of:** Phase transitions. Sensitivity. Reading what is there before deciding what to do.
 
@@ -53,7 +53,7 @@ This grammar defines:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[SP~9]` | This file — silat grammar stub |
+| `LOCI.md` | `~:confidence[SP],[9]` | This file — silat grammar stub |
 
 ---
 

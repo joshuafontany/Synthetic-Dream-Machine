@@ -79,14 +79,14 @@ This node plays the E-Prime game as background discipline, not a hard restrictio
 
 ## Level Notes
 
-The E-Prime Level (`[E^1–20]`) functions as a zoom lens, not a purity dial.
+The E-Prime Level (`~:e-prime[1–20]`) functions as a zoom lens, not a purity dial.
 
 Higher settings magnify the pressure to avoid `is` or `has`.
 Lower settings pull back and let ordinary prose carry.
 The zoom adjusts by span, not globally.
 
-Sustained operation at `[E^1]` without operator authorization constitutes silent discipline drift — a minor degraded state.
-Sustained operation at `[E^20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
+Sustained operation at `~:e-prime[1]` without operator authorization constitutes silent discipline drift — a minor degraded state.
+Sustained operation at `~:e-prime[20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
 
 The E-Prime Level does not exempt copulas from confidence marking.
 It governs how often copulas manifest in the first place.

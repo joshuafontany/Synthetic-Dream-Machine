@@ -6,19 +6,19 @@
 
 | Turn | Section | Input Type | Register | Mode | Coordinate |
 |---|---|---|---|---|---|
-| T0 | III | `action` — approach (3 lines) | `[P~6]` | 🌊 | `//threshold.new.arrives` |
-| T1 | III | `command` — `lares` cold init | `[P~6]` | 🏛️ | `//threshold.open.seeks` |
-| T2 | III | `command` — `lares help` | `[P~7]` | 🏛️ | `//orientation.uncertain.asks` |
-| T3 | III | `action` — offering gesture (3 lines) | `[SP~8]` | 🎭 | `//threshold.uncertain.softens` |
-| T4 | III | `action+command` — sit + `lares status` | `[SP~9]` | 🏛️ | `//node.steady.asks` |
-| T5 | IV | `action` — accept chai (2 lines) | `[P~6]` | 🌊 | `//offering.held.opens` |
-| T6 | IV | `command` — `ink-clerk --query` | `[CS~16]` | 🏛️ | `//mana.sharp.asks` |
-| T7 | IV | `command` — `map-wisp --query` | `[S~12]` | 🏛️🌊 | `//route.liminal.circles` |
-| T8 | IV | `command` — `bolt-priest --query` | `[CS~15]` | 🏛️ | `//orichalcum.loose.waits` |
-| T9 | IV | `command` — `--realms` | `[P~6]` | 🏛️ | `//realm.open.asks` |
-| T10 | IV | `command` — `--streams` | `[P~6]` | 🏛️ | `//archive.open.asks` |
-| T11 | IV | `action` — figure observation (3 lines) | `[SP~8]` | 🌊 | `//void.liminal.watches` |
-| T12 | IV | `action` — under couch | `[SP~9]` | 🎭 | `//threshold.deep.seeks` |
+| T0 | III | `action` — approach (3 lines) | `~:confidence[P],[6]` | 🌊 | `//threshold.new.arrives` |
+| T1 | III | `command` — `lares` cold init | `~:confidence[P],[6]` | 🏛️ | `//threshold.open.seeks` |
+| T2 | III | `command` — `lares help` | `~:confidence[P],[7]` | 🏛️ | `//orientation.uncertain.asks` |
+| T3 | III | `action` — offering gesture (3 lines) | `~:confidence[SP],[8]` | 🎭 | `//threshold.uncertain.softens` |
+| T4 | III | `action+command` — sit + `lares status` | `~:confidence[SP],[9]` | 🏛️ | `//node.steady.asks` |
+| T5 | IV | `action` — accept chai (2 lines) | `~:confidence[P],[6]` | 🌊 | `//offering.held.opens` |
+| T6 | IV | `command` — `ink-clerk --query` | `~:confidence[CS],[16]` | 🏛️ | `//mana.sharp.asks` |
+| T7 | IV | `command` — `map-wisp --query` | `~:confidence[S],[12]` | 🏛️🌊 | `//route.liminal.circles` |
+| T8 | IV | `command` — `bolt-priest --query` | `~:confidence[CS],[15]` | 🏛️ | `//orichalcum.loose.waits` |
+| T9 | IV | `command` — `--realms` | `~:confidence[P],[6]` | 🏛️ | `//realm.open.asks` |
+| T10 | IV | `command` — `--streams` | `~:confidence[P],[6]` | 🏛️ | `//archive.open.asks` |
+| T11 | IV | `action` — figure observation (3 lines) | `~:confidence[SP],[8]` | 🌊 | `//void.liminal.watches` |
+| T12 | IV | `action` — under couch | `~:confidence[SP],[9]` | 🎭 | `//threshold.deep.seeks` |
 
 ---
 
@@ -41,14 +41,14 @@ The Realm portal — a standing orichalcum-inlaid archway in the rear corner, sl
 ## III. OPERATOR APPROACH
 *[CLI sequence — tourist/first-timer]*
 
-<!-- turn:T0 | [P~6] 🌊 //threshold.new.arrives | type:action -->
+<!-- turn:T0 | ~:confidence[P],[6] 🌊 //threshold.new.arrives | type:action -->
 ```
 ~$ [approaching the Spice Quarter crossroads, New Delos]
 ~$ [archway visible; orichalcum figure above lintel; low hum audible]
 ~$ [the figure's dish smells of cardamom]
 ```
 
-<!-- turn:T1 | [P~6] 🏛️ //threshold.open.seeks | type:command -->
+<!-- turn:T1 | ~:confidence[P],[6] 🏛️ //threshold.open.seeks | type:command -->
 ```
 ~$ lares
 ```
@@ -79,7 +79,7 @@ Type STATUS for node readout.
 Or just... come in. The chai is on.
 ```
 
-<!-- turn:T2 | [P~7] 🏛️ //orientation.uncertain.asks | type:command -->
+<!-- turn:T2 | ~:confidence[P],[7] 🏛️ //orientation.uncertain.asks | type:command -->
 ```
 ~$ lares help
 ```
@@ -117,7 +117,7 @@ Type STREAMS for current streamer feeds.
 Or talk to the chorus. They're listening.
 ```
 
-<!-- turn:T3 | [SP~8] 🎭 //threshold.uncertain.softens | type:action -->
+<!-- turn:T3 | ~:confidence[SP],[8] 🎭 //threshold.uncertain.softens | type:action -->
 ```
 ~$ [operator looks around, uncertain]
 ~$ [approaches the offering shelf]
@@ -127,7 +127,7 @@ Or talk to the chorus. They're listening.
 ```
 OFFERING RECEIVED: coin (minor)
 Node registers: gratitude, small warmth
-Input read: [SP~8] 🎭 //threshold.uncertain.softens
+Input read: ~:confidence[SP],[8] 🎭 //threshold.uncertain.softens
 Affinity bonus confirmed for this session.
 
 MUG-SMOKE (Advocate):
@@ -140,7 +140,7 @@ Chai is fresh. The couch near the door
 is cleaner than it looks.
 ```
 
-<!-- turn:T4 | [SP~9] 🏛️ //node.steady.asks | type:action+command -->
+<!-- turn:T4 | ~:confidence[SP],[9] 🏛️ //node.steady.asks | type:action+command -->
 ```
 ~$ [sits down, pulls out personal device]
 ~$ lares status
@@ -179,7 +179,7 @@ It will be here after.
 MUG-SMOKE (Advocate) *(hospitality daemon, always online)*:
 Beverage status: chai hot, coffee hotter, something the MAP-WISP left near the back counter that smells like pine resin and starlight — do not ask what it is, just know it is technically safe. Cardamom oil on the offering shelf again this morning. Node running warm. Affinity bonus active on Fire and Spice tags. Foam omens available; today’s omen is a small spiral which could mean journey, recursion, or *please stop overthinking it.*
 
-<!-- turn:T5 | [P~6] 🌊 //offering.held.opens | type:action -->
+<!-- turn:T5 | ~:confidence[P],[6] 🌊 //offering.held.opens | type:action -->
 ```
 ~$ [operator accepts chai]
 ~$ [the spiral in the foam is very precise]
@@ -194,13 +194,13 @@ Powers cost life equal to Power Level. The universe accepts exact change. Castin
 
 Unverified report: someone in the Glassblowers’ Quarter has been sustaining Level 6 casting via "aggressive wine offerings." We are monitoring. The node there is reportedly very cheerful and slightly unstable. These facts may be related.
 
-<!-- turn:T6 | [CS~16] 🏛️ //mana.sharp.asks | type:command -->
+<!-- turn:T6 | ~:confidence[CS],[16] 🏛️ //mana.sharp.asks | type:command -->
 ```
 ~$ lares ink-clerk --query "what happens at wild magic threshold"
 ```
 
 ```
-Input read: [CS~16] 🏛️ //mana.sharp.asks
+Input read: ~:confidence[CS],[16] 🏛️ //mana.sharp.asks
 INK-CLERK (Lorekeeper):
 When mana cost exceeds your Level and the node's
 effective Level combined, a Danger Roll triggers.
@@ -239,13 +239,13 @@ The Etheric Road between Spice Quarter and Weavers’ District is open but smell
 
 New anomaly logged: a vendor has appeared at the northern crossroads selling maps of places that do not yet exist. The maps are extremely accurate. The vendor cannot be located when you look directly at where they were standing. We have purchased four maps. We recommend the same.
 
-<!-- turn:T7 | [S~12] 🏛️🌊 //route.liminal.circles | type:command -->
+<!-- turn:T7 | ~:confidence[S],[12] 🏛️🌊 //route.liminal.circles | type:command -->
 ```
 ~$ lares map-wisp --query "maps vendor northern crossroads"
 ```
 
 ```
-Input read: [S~12] 🏛️🌊 //route.liminal.circles
+Input read: ~:confidence[S],[12] 🏛️🌊 //route.liminal.circles
 MAP-WISP (Scryer):
 Confirmed. The vendor is real.
 The maps are real.
@@ -266,13 +266,13 @@ Node integrity report: nominal. The third serpent in the south fresco has been r
 
 Salvage advisory for operators working the Outer Market today: stake a claim properly before you touch anything. Recon first, refine fast, leave before the building learns your name. The warehouse district near the East Gate has been developing opinions since the third week of the Copper Season. Respectful entry is still possible. Mining is not advisable.
 
-<!-- turn:T8 | [CS~15] 🏛️ //orichalcum.loose.waits | type:command -->
+<!-- turn:T8 | ~:confidence[CS],[15] 🏛️ //orichalcum.loose.waits | type:command -->
 ```
 ~$ lares bolt-priest --query "alcove 2 rig is stuttering on realm entry"
 ```
 
 ```
-Input read: [CS~15] 🏛️ //orichalcum.loose.waits
+Input read: ~:confidence[CS],[15] 🏛️ //orichalcum.loose.waits
 BOLT-PRIEST (Triage):
 Known issue. Alcove 2 rig has a loose
 orichalcum contact on the left temple-mount.
@@ -291,7 +291,7 @@ Alcove 1 or 3 recommended if available.
 
 **[DREAM REALM STATUS BOARD]**
 
-<!-- turn:T9 | [P~6] 🏛️ //realm.open.asks | type:command -->
+<!-- turn:T9 | ~:confidence[P],[6] 🏛️ //realm.open.asks | type:command -->
 ```
 ~$ lares --realms
 ```
@@ -354,7 +354,7 @@ the same posture.
 
 **[STREAMER FEEDS — VERIFIED CHANNELS]**
 
-<!-- turn:T10 | [P~6] 🏛️ //archive.open.asks | type:command -->
+<!-- turn:T10 | ~:confidence[P],[6] 🏛️ //archive.open.asks | type:command -->
 ```
 ~$ lares --streams
 ```
@@ -410,7 +410,7 @@ The Realm substrate thing hums in a way this Muse finds extremely suspicious and
 *:the figure has never reacted:*
 *:this has always been fine:*
 
-<!-- turn:T11 | [SP~8] 🌊 //void.liminal.watches | type:action -->
+<!-- turn:T11 | ~:confidence[SP],[8] 🌊 //void.liminal.watches | type:action -->
 ```
 ~$ [operator stares at the east wall figure for a moment]
 ~$ [looks away]
@@ -432,7 +432,7 @@ INK-CLERK (Lorekeeper): Filed under: *Consequences, Known, Accepted Anyway.*
 
 MAP-WISP (Scryer): The thing under the couch has been there for three seasons. It was waiting for the right person.
 
-<!-- turn:T12 | [SP~9] 🎭 //threshold.deep.seeks | type:action -->
+<!-- turn:T12 | ~:confidence[SP],[9] 🎭 //threshold.deep.seeks | type:action -->
 ```
 ~$ [operator checks under the couch]
 ```

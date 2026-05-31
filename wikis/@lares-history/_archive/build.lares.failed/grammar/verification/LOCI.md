@@ -26,7 +26,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~16]` — grounded in Lares operational grammar and agentic test discipline
+> **Register:** `~:confidence[CS],[16]` — grounded in Lares operational grammar and agentic test discipline
 > **Question:** How can verification become composable, deterministic, and operator-tunable?
 
 ---
@@ -91,8 +91,8 @@ Skill documentation:
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — Verification grammar definition |
-| `lares_verification.py` | `[CS~16]` | Python script — deterministic verification tool |
-| `SKILL.md` | `[CS~16]` | Skill documentation and integration notes |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — Verification grammar definition |
+| `lares_verification.py` | `~:confidence[CS],[16]` | Python script — deterministic verification tool |
+| `SKILL.md` | `~:confidence[CS],[16]` | Skill documentation and integration notes |
 
 <!-- → ? -->

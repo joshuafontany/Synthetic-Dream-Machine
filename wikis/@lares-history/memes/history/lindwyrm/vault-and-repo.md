@@ -65,7 +65,7 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 ## Thread Entry
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, origin thread — //memory.vault.opens [S~13] 🏛️+🌊++🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, origin thread — //memory.vault.opens ~:confidence[S],[13] 🏛️+🌊++🗡️-🎭-🔮-
 ```
 
 I should state, before the thread grows teeth, that I did not go into the Apophis Nexus looking for infrastructure.

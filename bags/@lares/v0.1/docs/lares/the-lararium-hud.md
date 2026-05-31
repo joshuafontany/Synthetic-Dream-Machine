@@ -37,16 +37,16 @@ sources        = [
 
 # The Lararium HUD
 
-After Beer: **the purpose of a system is what it does.** [C~20]
+After Beer: **the purpose of a system is what it does.** ~:confidence[C],[20]
 
-This system functions as a **Quine-Wiki AI-Operator Alignment HUD**. [C~20]
+This system functions as a **Quine-Wiki AI-Operator Alignment HUD**. ~:confidence[C],[20]
 
 Not a wiki that has a HUD. Not a HUD built on a wiki. The two collapse into the same thing at runtime.
 
-- **Quine**: the meme graph describes itself using the same addressing, storage, and filtering primitives it uses to describe everything else. No separate documentation layer. No privileged meta-level. A tiddler that holds schema rules serves as the schema at runtime (P1). A meme that holds device bindings operates as the device at runtime (P2). [C~20]
-- **Wiki**: bags hold tiddler records. Recipes compose bags into wiki views. TW5 renders the recipe into a UI. The bag functions as the canonical unit; the file functions as the projection. [C~20]
-- **AI-Operator Alignment**: the threshold relation between a human operator and an AI coordinator functions as the constitutive relationship of the system — not a feature layered on top. AGENTS.md serves as the boot screen. The Voices serve as the notification channels. The OODA-HA loop serves as the update cycle. The LARES dial panel serves as the configuration layer. [C~20]
-- **HUD**: the wiki functions as the Heads-Up Display. The operator reads the tiddler graph the way a pilot reads instruments — not the engine, but the state of the engine, rendered continuously in a form that supports decision. Confidence scores, mana levels, stage bands, pranala edges: all function as HUD instruments. [C~19]
+- **Quine**: the meme graph describes itself using the same addressing, storage, and filtering primitives it uses to describe everything else. No separate documentation layer. No privileged meta-level. A tiddler that holds schema rules serves as the schema at runtime (P1). A meme that holds device bindings operates as the device at runtime (P2). ~:confidence[C],[20]
+- **Wiki**: bags hold tiddler records. Recipes compose bags into wiki views. TW5 renders the recipe into a UI. The bag functions as the canonical unit; the file functions as the projection. ~:confidence[C],[20]
+- **AI-Operator Alignment**: the threshold relation between a human operator and an AI coordinator functions as the constitutive relationship of the system — not a feature layered on top. AGENTS.md serves as the boot screen. The Voices serve as the notification channels. The OODA-HA loop serves as the update cycle. The LARES dial panel serves as the configuration layer. ~:confidence[C],[20]
+- **HUD**: the wiki functions as the Heads-Up Display. The operator reads the tiddler graph the way a pilot reads instruments — not the engine, but the state of the engine, rendered continuously in a form that supports decision. Confidence scores, mana levels, stage bands, pranala edges: all function as HUD instruments. ~:confidence[C],[19]
 
 The home intranet RPG session — a Referee running encounters, managing NPCs, routing events across player-facing wikis — is the **first instantiation** of this system type. Not the definition of it. The system is generic. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
@@ -374,7 +374,7 @@ Promotion path: when the Session Wiki RE ships and the vocabulary lock passes a 
 These tensions emerged from OODA-HA Orient during the feature/lararium-node-3 sprint (2026-05-11–14). They are load-bearing: decisions made without naming them first will produce incoherent ontology drift. Each tension is a named fork, not a failure.
 
 **T-1: Playspace nesting — Scale-1 wiki = `lar_playspace`?** ✅ RESOLVED via Quine principle (2026-05-14)
-Quine ruling: *if it can happen in the wiki, it must happen in the wiki.* A playspace scopes agents, state, and rules via a recipe. One Lares wiki = one `lar_playspace`. Nesting = recipe composition (include another wiki's bags). Portal pattern: a canvas page renders filtered tiddlers from shared bags — semi-live via Automerge sync, TW5 filter-based. Session Wiki = the coordinator `lar_playspace` (broadest recipe; owns event-bus bag). Architecture sketched; TW5 filter-based canvas page views for portals not yet shipped (P.4 or later). Resolved at [C~16] — portal rendering detail stays open.
+Quine ruling: *if it can happen in the wiki, it must happen in the wiki.* A playspace scopes agents, state, and rules via a recipe. One Lares wiki = one `lar_playspace`. Nesting = recipe composition (include another wiki's bags). Portal pattern: a canvas page renders filtered tiddlers from shared bags — semi-live via Automerge sync, TW5 filter-based. Session Wiki = the coordinator `lar_playspace` (broadest recipe; owns event-bus bag). Architecture sketched; TW5 filter-based canvas page views for portals not yet shipped (P.4 or later). Resolved at ~:confidence[C],[16] — portal rendering detail stays open.
 
 **T-2: Nexus playspace — does Scale-3 have a playspace concept?**
 Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (UEFN does not have a cross-island playspace API). Current state: Scale-3 named as Nexus, no playspace concept. Tension: if Lares introduces a "federated playspace" (a shared experience scope across two nodes), what is the Verse-grounded name? Resolution: probably NOT `lar_playspace` — suggest `lar_realm` or `lar_federation` if the concept ships. Hold open.
@@ -385,7 +385,7 @@ Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (
 **T-4: lar_behavior lifecycle contract — OnBegin/OnEnd shape?**
 `npc_behavior.OnBegin<override>()<suspends>:void` is the UEFN contract. Verse: this runs when the NPC spawns. The Lares analogue for a Wiki Entity: when does `lar_behavior.OnBegin` fire? On tiddler creation? On hot-tier promotion? These are not the same event. Resolution: lock when the first Wiki Entity ships. Current hold: the concept is named; the event boundary is open.
 
-> **#Council** » 14:30 — T-1 closed by quine principle; architecture holds at [C~16]. T-3 and T-4 remain implementation-deferred. T-2 remains an architecture horizon. J.3 (child co-promotion) promoted to **P.3.5** per operator ruling 2026-05-14 — does NOT block P.3, ships as P.3.5 pre-work for P.4. Name T-2/T-3/T-4 in every sprint review until resolved.
+> **#Council** » 14:30 — T-1 closed by quine principle; architecture holds at ~:confidence[C],[16]. T-3 and T-4 remain implementation-deferred. T-2 remains an architecture horizon. J.3 (child co-promotion) promoted to **P.3.5** per operator ruling 2026-05-14 — does NOT block P.3, ships as P.3.5 pre-work for P.4. Name T-2/T-3/T-4 in every sprint review until resolved.
 
 <<~/ahu>>
 
@@ -393,7 +393,7 @@ Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (
 
 ## StructuredClone Gap — P.3 Message Protocol
 
-`[E^:0.7]` `[C~16]`
+`~:e-prime[0.7]` `~:confidence[C],[16]`
 
 The P.3 Worker Thread design crosses one mandatory trust boundary: main thread ↔ Worker. Every crossing uses `postMessage()`, which internally applies the **structured clone algorithm** (WHATWG HTML spec, MDN). The gap between "any JS object" and "a structured-clone-safe object" carries non-trivial constraints that shape the entire P.3 message protocol.
 

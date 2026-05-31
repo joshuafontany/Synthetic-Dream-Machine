@@ -4,7 +4,7 @@
 
 # Micro-trace — Normative Rules
 
-> Syntax and density bands. Source: `lares/signal/micro-trace.md` §§2–3 `[CS~16]`.
+> Syntax and density bands. Source: `lares/signal/micro-trace.md` §§2–3 `~:confidence[CS],[16]`.
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->

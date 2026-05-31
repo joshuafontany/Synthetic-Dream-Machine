@@ -24,7 +24,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~16]` — grounded in live HUD practice and operator agency rules
+> **Register:** `~:confidence[CS],[16]` — grounded in live HUD practice and operator agency rules
 > **Question:** How much weight should this claim carry inside its active stance frame?
 
 ---
@@ -86,11 +86,11 @@ If those answers stay vague, the tag becomes decoration instead of signal.
 
 | Tag | Zone | Range |
 |---|---|---|
-| `[C~18]` | Canon | 0.85–0.95 |
-| `[CS~16]` | Canon / Synthesis | 0.75–0.85 |
-| `[S~13]` | Synthesis | 0.50–0.75 |
-| `[SP~9]` | Synthesis / Provisional | 0.35–0.50 |
-| `[P~6]` | Provisional | 0.20–0.35 |
+| `~:confidence[C],[18]` | Canon | 0.85–0.95 |
+| `~:confidence[CS],[16]` | Canon / Synthesis | 0.75–0.85 |
+| `~:confidence[S],[13]` | Synthesis | 0.50–0.75 |
+| `~:confidence[SP],[9]` | Synthesis / Provisional | 0.35–0.50 |
+| `~:confidence[P],[6]` | Provisional | 0.20–0.35 |
 
 **Section surface:** confidence can sit at file level, section level, or claim level, as long as the
 placement stays explicit and the source of the weight stays legible.
@@ -159,7 +159,7 @@ If the band could move wildly without changing the supporting reasons, the tag s
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — confidence grammar and register bands |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — confidence grammar and register bands |
 
 *Future loci in this tree will land here.*
 

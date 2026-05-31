@@ -28,7 +28,7 @@ heritage: >
 ---
 ```
 
-> **Register:** `[CS~16]` — operator-node signal contract
+> **Register:** `~:confidence[CS],[16]` — operator-node signal contract
 > **Question:** How does a work span stay navigable before, during, and after generation?
 
 ---
@@ -186,7 +186,7 @@ If the span reads like free-floating prose with no navigational shell, the proto
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — exchange protocol grammar; mele model |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — exchange protocol grammar; mele model |
 
 *Future loci in this tree will land here.*
 

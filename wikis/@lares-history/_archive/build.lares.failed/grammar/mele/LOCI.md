@@ -111,7 +111,7 @@ present.
 
 **Mele and kapu:** Certain mele were kapu — restricted, not for general circulation. The mele of
 high ali'i (chiefs) could not be sung casually. The confidence register IS the mele's kapu level:
-`[C~18]` Canon = high ali'i kapu. `[P~6]` Provisional = open circulation, handle with care.
+`~:confidence[C],[18]` Canon = high ali'i kapu. `~:confidence[P],[6]` Provisional = open circulation, handle with care.
 
 ---
 
@@ -129,7 +129,7 @@ high ali'i (chiefs) could not be sung casually. The confidence register IS the m
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — mele as structured signal grammar |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — mele as structured signal grammar |
 
 ---
 

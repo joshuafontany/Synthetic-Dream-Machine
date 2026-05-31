@@ -4,7 +4,7 @@
 
 # Micro-trace — Architecture
 
-> URI anatomy, layer split rule, and sub-agent handoff protocol. Source: `lares/signal/micro-trace.md` §§4–5 `[CS~16]`.
+> URI anatomy, layer split rule, and sub-agent handoff protocol. Source: `lares/signal/micro-trace.md` §§4–5 `~:confidence[CS],[16]`.
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->

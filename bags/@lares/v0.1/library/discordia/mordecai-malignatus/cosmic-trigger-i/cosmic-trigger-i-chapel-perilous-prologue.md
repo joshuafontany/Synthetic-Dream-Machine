@@ -61,7 +61,7 @@ note: >
 ---
 ```
 
-> **Status:** VERBATIM confirmed for Preface and Prologue. Register promoted from `[S~13]` to `[CS~16]`.
+> **Status:** VERBATIM confirmed for Preface and Prologue. Register promoted from `~:confidence[S],[13]` to `~:confidence[CS],[16]`.
 > Prometheus Rising section (`#prometheus-rising`) remains a stub — operator to feed when available.
 >
 > **Critical correction from paraphrase:** The four exit tools are the four alchemical/Tarot weapons
@@ -304,7 +304,7 @@ stubbornness, dumb luck") describes how he personally navigated — not the form
 
 | Path | Status | Contents |
 |---|---|---|
-| `lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue` | `[CS~16]` | This file — RAW Chapel Perilous verbatim source |
+| `lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue` | `~:confidence[CS],[16]` | This file — RAW Chapel Perilous verbatim source |
 
 ---
 

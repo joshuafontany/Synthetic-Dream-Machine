@@ -66,7 +66,7 @@ Field order (SA priority — perception-critical first):
 
 **Canonical corrected example:**
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces [CS~16] 🏛️+🌊-🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces ~:confidence[CS],[16] 🏛️+🌊-🗡️-🎭-🔮-
 ```
 
 ### `record:full`

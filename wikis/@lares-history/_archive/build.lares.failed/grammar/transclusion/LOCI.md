@@ -26,7 +26,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[CS~16]` — grounded in Nelson, TiddlyWiki, and the live Lares marker ontology
+> **Register:** `~:confidence[CS],[16]` — grounded in Nelson, TiddlyWiki, and the live Lares marker ontology
 > **Question:** How does one locus hold canonical content while many other loci can still use it?
 
 ---
@@ -230,7 +230,7 @@ needs work.
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~16]` | This file — Transclusion grammar definition |
+| `LOCI.md` | `~:confidence[CS],[16]` | This file — Transclusion grammar definition |
 
 *Future loci in this tree will land here.*
 

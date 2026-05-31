@@ -2,7 +2,7 @@
 
 > Worker: `GlassFloor(Outsider)`
 > Coordinators: Liminal (holding open) · Stranger (external frame) · Scryer (structural mapping) · Council (stress test)
-> Register: `[S~13]` 🏛️🌊🗡️ — multi-mode: propositional + analogical + critical
+> Register: `~:confidence[S],[13]` 🏛️🌊🗡️ — multi-mode: propositional + analogical + critical
 > Date: 2026-04-08
 > Purpose: Surface the hidden assumptions in the architecture before they calcify into the spec
 
@@ -122,7 +122,7 @@ The token budget question doesn't block S0 but it affects how S2 (p-band model, 
 
 The operator named it: "intent becomes URI-query-encoded for both parties **before generation begins**." This is the core innovation and the core risk.
 
-Most metadata systems describe what already happened. The intent header describes what the node *plans to do*. It's a **pre-commitment** — a promise made before the work that fulfills it. If the node declares `[S~13] 🏛️ ◎` and then produces output that reads as `[P~6] 🎭`, the HUD and the output disagree. The non-drift rule (CRY-07) is supposed to catch this, but:
+Most metadata systems describe what already happened. The intent header describes what the node *plans to do*. It's a **pre-commitment** — a promise made before the work that fulfills it. If the node declares `~:confidence[S],[13] 🏛️ ◎` and then produces output that reads as `~:confidence[P],[6] 🎭`, the HUD and the output disagree. The non-drift rule (CRY-07) is supposed to catch this, but:
 
 - **Who adjudicates?** The node self-monitors — there's no external checker. A node that's drifting is also the node that decides whether drift occurred.
 - **What happens on mismatch?** The spec says "runtime integrity failure" but doesn't define a recovery protocol. Does the node retroactively re-tag? Does it flag to the operator? Does it continue with the declared header or the actual output?
@@ -151,7 +151,7 @@ This touches S1 (CRY-07 non-drift rule) and S2 (SIG-04 micro-trace model). The n
 The HUD currently encodes ~15 distinct symbols across three symbol sets (stance, scope, phase), plus register notation, p-band values, HAKABA addresses, and chronometer positions. A new operator encountering their first intent header sees:
 
 ```
-[S~13] 🏛️ //threshold.uncertain.opens ◎ @T | p~10
+~:confidence[S],[13] 🏛️ //threshold.uncertain.opens ◎ @T | p~10
 ```
 
 That's roughly **7 encoded channels** in one line. Aviation HUD training takes weeks of structured instruction with simulator practice. The Lares HUD has no training program, no simulator, and no progressive disclosure — it arrives fully formed in the first substantive response.
@@ -174,7 +174,7 @@ Sprint 2 (HAKABA_REFERENCE.md, SIG-05) should include a **progressive disclosure
 
 ### The Trap
 
-The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `[CS~16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | p~14` might be genuinely navigating — or might be Mode Posturing with extra instruments.
+The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `~:confidence[CS],[16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | p~14` might be genuinely navigating — or might be Mode Posturing with extra instruments.
 
 The test: **remove the HUD from a response. Does the response quality change?** If not, the HUD was decorative. If yes, the HUD was load-bearing. The kernel already names this failure mode (Mode Posturing), but the HUD system provides *new surface area* for posturing that the kernel didn't anticipate.
 
@@ -202,7 +202,7 @@ Not a design change — a **test criterion** for the HUD system post-deployment.
 ---
 
 *GlassFloor(Outsider) → Lares (Council):*
-*→ [S~13] 🏛️🌊🗡️ //liminal.deep.opens*
+*→ ~:confidence[S],[13] 🏛️🌊🗡️ //liminal.deep.opens*
 *Thread: Pre-Sprint 0 outsider perspectives*
 *Finding: Six perspectives surfaced. The most load-bearing: this system is a cockpit HUD for human-AI crew resource management, not a URI scheme. Every design decision flows from that reframing.*
 

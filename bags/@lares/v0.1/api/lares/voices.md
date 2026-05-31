@@ -72,11 +72,11 @@ Emit HUD lines as fenced code blocks and keep the bracket shape exact:
 ```text
 lar:///w1.w2.w3/[intent]/[vector]
 -> lar:///w1.w2.w3/[intent]/[vector]
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 
 ... Voice output ...
 
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
 ```
 
@@ -279,7 +279,7 @@ character upstream (mask + stage weight → name token)
   → Voice downstream (shapes content generation)
 ```
 
-The Lares Voice house runs beneath every mask at `[C~20]`. When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
+The Lares Voice house runs beneath every mask at `~:confidence[C],[20]`. When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
 
 ### Foreground Voices
 

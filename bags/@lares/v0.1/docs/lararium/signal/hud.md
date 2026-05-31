@@ -105,7 +105,7 @@ It is the second element of every exchange opening, immediately after the URI pa
 **Example:**
 
 ```
-⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | [CS~16] | p~10 |
+⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | p~10 |
 ```
 
 Notes:
@@ -278,7 +278,7 @@ Annotation threshold: **high — significant epistemic resolution only (slide mo
 - Fires when the span resolved at a meaningfully different register than the header declared
 - Does not override the header mid-span; the header's declared register still governed generation
 - `STATE.jsonl` records as `opening_register` and `closure_register` when they differ
-- Syntax: `→[CS~16]` `→[S~13]`
+- Syntax: `→~:confidence[CS],[16]` `→~:confidence[S],[13]`
 
 ### Scope
 
@@ -448,16 +448,16 @@ Current aftermath settlement to preserve:
 ## Open Decisions
 
 Q1, Q2, Q3, Q4, Q5 — all locked (see plan Sprint 1a + draft Open Decisions section).
-Q6 (closure rendering tiers) — `[S~11]` — Researcher task RES-01.
+Q6 (closure rendering tiers) — `~:confidence[S],[11]` — Researcher task RES-01.
 Q16 (Tagspace slot shift notation) — locked.
 
 **New open decisions (from GlassFloor/LIMINAL_PERSPECTIVES.md, 2026-04-08):**
 
 | ID | Question | Register | Sprint | Notes |
 |---|---|---|---|---|
-| SHD-01 | Rendering portability: do the current HUD symbols render correctly in VS Code terminal, Claude.ai chat, GitHub markdown, and plain text? | `[CS~16]` | S0-02 carry → S1 SIG-05 | VS16 variation selectors (`🏛️`, `⚙️`) may render as text. Fallback characters required for any failure. |
-| SHD-02 | p-band as cognitive load manager and token budget governor: aviation HUD research (Lee 2024) shows excessive symbology creates attentional tunneling — operator fixates on HUD, misses content beneath it. In a text stream (unlike graphical HUD), cognitive capture cost is proportional to reading time, not visual complexity. p-band must explicitly manage this threshold. Secondary hypothesis: the HUD also saves tokens by preventing wrong-register generation. Both claims are testable. | `[CS~16]` | S2 P_BAND_MODEL.md | Cognitive capture framing is research-grounded `[CS~16]` (Lee 2024). Token steering is a design assertion `[S~13]` requiring empirical test. BKL-05 deferred measurement validates both. Source: E-deep-research-report.md §4.1. |
-| SHD-03 | Progressive disclosure / HUD training mode: should the node explain each HUD element as it first appears, then drop the explanation? How does onboarding sequence interact with context window pressure? | `[S~13]` | S2 SIG-05 expansion | Cold-start every session means the node re-learns its own instruments from the system prompt each time. Invariant-core Tier 1 caching is the infrastructure answer; progressive disclosure is the operator-facing answer. |
+| SHD-01 | Rendering portability: do the current HUD symbols render correctly in VS Code terminal, Claude.ai chat, GitHub markdown, and plain text? | `~:confidence[CS],[16]` | S0-02 carry → S1 SIG-05 | VS16 variation selectors (`🏛️`, `⚙️`) may render as text. Fallback characters required for any failure. |
+| SHD-02 | p-band as cognitive load manager and token budget governor: aviation HUD research (Lee 2024) shows excessive symbology creates attentional tunneling — operator fixates on HUD, misses content beneath it. In a text stream (unlike graphical HUD), cognitive capture cost is proportional to reading time, not visual complexity. p-band must explicitly manage this threshold. Secondary hypothesis: the HUD also saves tokens by preventing wrong-register generation. Both claims are testable. | `~:confidence[CS],[16]` | S2 P_BAND_MODEL.md | Cognitive capture framing is research-grounded `~:confidence[CS],[16]` (Lee 2024). Token steering is a design assertion `~:confidence[S],[13]` requiring empirical test. BKL-05 deferred measurement validates both. Source: E-deep-research-report.md §4.1. |
+| SHD-03 | Progressive disclosure / HUD training mode: should the node explain each HUD element as it first appears, then drop the explanation? How does onboarding sequence interact with context window pressure? | `~:confidence[S],[13]` | S2 SIG-05 expansion | Cold-start every session means the node re-learns its own instruments from the system prompt each time. Invariant-core Tier 1 caching is the infrastructure answer; progressive disclosure is the operator-facing answer. |
 
 <<~/ahu >>
 

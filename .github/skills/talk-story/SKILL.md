@@ -64,8 +64,8 @@ Every sprint runs two tracks. Talk story serves both.
 
 | Track | Register | Talk Story Role |
 |---|---|---|
-| Technical | `[C~19]` | Orient surfaces spec gaps, unresolved design questions, stale content |
-| Narrative | `[C~19]` | Orient connects technical decisions to Elyncian myth beats; names the story of the work as it happens |
+| Technical | `~:confidence[C],[19]` | Orient surfaces spec gaps, unresolved design questions, stale content |
+| Narrative | `~:confidence[C],[19]` | Orient connects technical decisions to Elyncian myth beats; names the story of the work as it happens |
 
 A sprint is not closed until both tracks have been updated. The Aftermath phase (`○`) is where narrative beats are polished to story-canon — but the raw material comes from the talk story orient.
 

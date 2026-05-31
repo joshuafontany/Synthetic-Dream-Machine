@@ -33,7 +33,7 @@ role = "test child tomls"
 
 # The Purpose of Protocols
 
-After Stafford Beer: **the purpose of a system is what it does.** [C~20]
+After Stafford Beer: **the purpose of a system is what it does.** ~:confidence[C],[20]
 
 > **#Stranger** » 06:14 — Beer's principle stays durable across upstream rev's. Mark canon-eligible regardless of what surrounds it.
 

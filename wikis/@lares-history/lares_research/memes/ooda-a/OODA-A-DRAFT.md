@@ -170,7 +170,7 @@ heritage: >
 ---
 ```
 
-> **Register:** `[S~13]` — active draft under operator steering
+> **Register:** `~:confidence[S],[13]` — active draft under operator steering
 > **Glyphs:** `✶◎◇■○`
 > **Question:** How does the grammar move in time?
 

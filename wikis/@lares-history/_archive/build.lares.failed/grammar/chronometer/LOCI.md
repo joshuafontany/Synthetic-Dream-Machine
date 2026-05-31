@@ -25,7 +25,7 @@ grammar: true
 ---
 ```
 
-> **Register:** `[S~13]` — operationally grounded, still open to deeper refinement
+> **Register:** `~:confidence[S],[13]` — operationally grounded, still open to deeper refinement
 > **Question:** Where does this participant stand in nested causal time?
 
 ---
@@ -174,7 +174,7 @@ If the fragment cannot support dead-reckoning by a later reader, the time layer 
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[S~13]` | This file — FFZ chronometer grammar and fragment contract |
+| `LOCI.md` | `~:confidence[S],[13]` | This file — FFZ chronometer grammar and fragment contract |
 
 *Future loci in this tree will land here.*
 

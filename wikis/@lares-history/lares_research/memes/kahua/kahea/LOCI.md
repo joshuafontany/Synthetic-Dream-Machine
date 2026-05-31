@@ -80,7 +80,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 |---|---|
 | Content should appear here *as if written here* | `<!-- kahea lar:///... -->` |
 | Reader should know about related content | Prose: "See `lares/grammar/observe/LOCI.md`" |
-| Citation for provenance, not inclusion | Prose with register: `[CS~16]` |
+| Citation for provenance, not inclusion | Prose with register: `~:confidence[CS],[16]` |
 | Content is in a stub or provisional state | Prose reference only — don't kahea a stub |
 
 **The broken kahea rule:** A kahea that cannot resolve is an active error, not a passive one. The call goes out and nothing arrives. The dance never starts. Before adding a kahea, verify the target exists.
@@ -129,6 +129,6 @@ In the grammar: a kahea marker is not neutral plumbing. It is a declaration of r
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `[CS~19]` | This file — canonical kahea marker definition |
+| `LOCI.md` | `~:confidence[CS],[19]` | This file — canonical kahea marker definition |
 
 <!-- → ? -->

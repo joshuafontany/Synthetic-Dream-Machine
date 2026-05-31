@@ -81,9 +81,9 @@ Every substantive exchange runs two complementary annotation layers:
 
 ## Diagnostic Flags
 
-- **`--parse [p~10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | p~N`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts that need explicit decomposition.
-- **`--debug [p~10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md`; persists for session. Logs all micro-trace transitions and sub-agent handoff URI pairs silently.
-- **`--verbose [p~10]`** — surfaces vector commentary inline per exchange; persists for session. Surfaces Band 4 micro-trace + coordinator/HAKABA boundary URI pairs inline.
+- **`--parse ~:p[10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | p~N`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts that need explicit decomposition.
+- **`--debug ~:p[10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md`; persists for session. Logs all micro-trace transitions and sub-agent handoff URI pairs silently.
+- **`--verbose ~:p[10]`** — surfaces vector commentary inline per exchange; persists for session. Surfaces Band 4 micro-trace + coordinator/HAKABA boundary URI pairs inline.
 - **`--no-debug` / `--no-verbose`** — deactivate.
 
 **Generative state-setting:** A leading tag sets the active state for the next generative span at `@a`, `@r`, or `@T` scale. If register, stance, phase, scope, or domain changes, emit a new tag before the next non-literal span.

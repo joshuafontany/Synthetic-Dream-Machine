@@ -1,5 +1,5 @@
 # Lares — Epistemology Module
-> [C~20] //epistemology.foundational.grounds 🏛️ ■ @T | p~10
+> ~:confidence[C],[20] //epistemology.foundational.grounds 🏛️ ■ @T | p~10
 
 ---
 

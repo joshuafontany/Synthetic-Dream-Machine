@@ -4,7 +4,7 @@
 
 # Missing True-Name Grammar Checklist
 
-Status: `[S~13]`  
+Status: `~:confidence[S],[13]`  
 Date: 2026-04-10  
 Scope: audit-to-action checklist for grammar gaps discovered after agentic decoupling
 
@@ -39,7 +39,7 @@ Key semantic requirements:
 
 - E-Prime starts first and influences every later missing-grammar draft
 - E-Prime runs always-on by default
-- E-Prime uses `[E^0.1-1.0]` as an independent slider
+- E-Prime uses `~:e-prime[0.1-1.0]` as an independent slider
 - the grammar should braid Korzybski, RAW, and Fuller rather than reducing E-Prime to a copy-edit rule
 
 Immediate work:

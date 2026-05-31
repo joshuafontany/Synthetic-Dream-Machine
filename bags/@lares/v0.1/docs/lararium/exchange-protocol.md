@@ -25,11 +25,11 @@ Core bracket:
 ```text
 lar:///op.w1.w2/[intent]/[vector]
 -> lar:///ag.w1.w2/[intent]/[vector]
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 
 ... generated response ...
 
-[E-Prime~N] [No-Has~N] [p~N]
+~:e-prime[N] ~:no-has[N] ~:p[N]
 lar:///ag.aftermath.w3/[what-landed]/[next-vector] -> ?
 ```
 

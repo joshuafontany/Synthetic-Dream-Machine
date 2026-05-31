@@ -99,7 +99,7 @@ It annotates the inside of a generative span.
 |---|---|---|
 | Taskwork SA | HAKABA address (`/threshold.uncertain.opens/(path)?`) | Semantic territory — what domain we're in |
 | Taskwork SA | FFZ chronometer (`&ffz=7.2.3.0.0`) | Temporal position — current location in nested scope by scale position and action count |
-| Agent SA | Register (`[S~13]`) | Epistemic confidence — the node's degree of certainty |
+| Agent SA | Register (`~:confidence[S],[13]`) | Epistemic confidence — the node's degree of certainty |
 | Agent SA | Full stance array (`🏛️🌊🗡️🎭🔮`) | Discourse posture across all five fixed stance positions; the full HUD line keeps all five visible |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next HUD or `lar` URI should reflect the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `⤴ ↺`) | Cognitive movement through the current OODA-HA phase set |

@@ -34,7 +34,7 @@ The micro-trace is the **event trace layer** of the Signal HUD system. It annota
 
 ## Source
 
-`lares/signal/micro-trace.md` `[CS~16]` — promoted from SIG-04 draft; operator-confirmed 2026-04-08.
+`lares/signal/micro-trace.md` `~:confidence[CS],[16]` — promoted from SIG-04 draft; operator-confirmed 2026-04-08.
 
 ## Deployment Surfaces
 
