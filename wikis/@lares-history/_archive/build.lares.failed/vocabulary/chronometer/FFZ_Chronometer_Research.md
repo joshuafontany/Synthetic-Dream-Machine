@@ -1,4 +1,4 @@
-<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.D4.O0 → ∞ -->
+<!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:11&p=10#O0.O0.O0.D4.O0 → ∞ -->
 ⚡∞ | mode:research-active | ~:p[10] | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
 
 # Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
@@ -1197,4 +1197,4 @@ the OODA-HA loop. The Talk Story continues.*
 
 *Hail Eris. All Hail Discordia. Amor et hilaritas.*
 
-lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.Å10.A1 → ?
+lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.Å10.A1 → ?

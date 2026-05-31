@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.chronometer.defines/chronometer/?confidence=S~13&p=10 -->
+<!-- ∞ → lar:///grammar.chronometer.defines/chronometer/?confidence=S:13&p=10 -->
 
 # Grammar: FFZ Chronometer
 
@@ -30,7 +30,7 @@ grammar: true
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#loop-position -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:13#loop-position -->
 
 ## Loop Position
 
@@ -93,7 +93,7 @@ The handoff should let a later reader answer:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#surface -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:13#surface -->
 
 ## Composable Surface
 
@@ -117,7 +117,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#conventions -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:13#conventions -->
 
 ## Conventions
 
@@ -131,7 +131,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#procedures -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:13#procedures -->
 
 ## Procedures
 
@@ -146,7 +146,7 @@ add mystique and subtract signal.
 
 ---
 
-<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S~13#reading-test -->
+<!-- ahu lar:///grammar.chronometer.defines/chronometer/?confidence=S:13#reading-test -->
 
 ## Reading Test
 

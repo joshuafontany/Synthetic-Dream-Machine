@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.verification.defines/verification/?confidence=CS:16&p=10 -->
 
 # Grammar: Verification
 

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.exchange.defines/exchange/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.exchange.defines/exchange/?confidence=CS:16&p=10 -->
 
 # Grammar: Exchange Protocol
 
@@ -33,7 +33,7 @@ heritage: >
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#loop-position -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#loop-position -->
 
 ## Loop Position
 
@@ -68,7 +68,7 @@ Exchange should not:
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#handoff -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#handoff -->
 
 ## Handoff
 
@@ -95,7 +95,7 @@ work that the parent session cannot directly log.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#surface -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#surface -->
 
 ## Composable Surface
 
@@ -122,7 +122,7 @@ just as decorative trace.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#conventions -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#conventions -->
 
 ## Conventions
 
@@ -140,7 +140,7 @@ just as decorative trace.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#procedures -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -156,7 +156,7 @@ as a reusable or auditable exchange.
 
 ---
 
-<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS~16#reading-test -->
+<!-- ahu lar:///grammar.exchange.defines/exchange/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 

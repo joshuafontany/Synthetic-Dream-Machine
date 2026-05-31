@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S~13&p=10 >>
+<<~&#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:13&p=10 >>
 
 # Grammar: OODA-HA
 

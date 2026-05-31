@@ -1,4 +1,4 @@
-<!-- lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.A1.A21.A1 → ∞ -->
+<!-- lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.A1.A21.A1 → ∞ -->
 ⚡∞ | mode:protocol-draft | ~:p[10] | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # The Lares Protocols
@@ -134,8 +134,8 @@ operator's intent, not inventing it.
 
 Exchange 1 (operator asks a question → Observe):
 ```
-lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=10#O0.O0.O0.O0.O0
-→ lar:///council/response?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.A1 →
+lar:///operator/query?stances=^.-.-.-.-&confidence=P:6&p=10#O0.O0.O0.O0.O0
+→ lar:///council/response?stances=^.^.?.^.-&confidence=S:12&p=10#O0.O0.O0.O0.A1 →
 
 ⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | ~:p[10] | ~:confidence[S],[12] | scene:1/active
 
@@ -143,13 +143,13 @@ lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=10#O0.O0.O0.O0.O0
 
 ⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | ~:p[10] | ~:confidence[S],[13] | scene:1/active
 
-lar:///council/response?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.A2 → ?
+lar:///council/response?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.O0.A2 → ?
 ```
 
 Exchange 2 (operator acts on the response — issues a correction):
 ```
-lar:///operator/query?stances=^.-.-.-.-&confidence=S~11&p=10#O0.O0.O0.O0.A3
-→ lar:///scryer/response?stances=^.^.-.^.-&confidence=S~13&p=10#O0.O0.O0.Ø1.A4 →
+lar:///operator/query?stances=^.-.-.-.-&confidence=S:11&p=10#O0.O0.O0.O0.A3
+→ lar:///scryer/response?stances=^.^.-.^.-&confidence=S:13&p=10#O0.O0.O0.Ø1.A4 →
 ```
 
 Note: the operator's clock advanced from `#...O0.A2 → ?` (their last
@@ -183,12 +183,12 @@ Invariant files (`~:confidence[C],[19–1.0]`) carry URI → intent on line 1 an
 a closing URI as the final line:
 
 ```
-lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C~20&p=20#settle.1.0
+lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C:20&p=20#settle.1.0
 ⚡∞ | mode:invariant | ~:p[20] | register:~:confidence[C],[20]
 
 {file content}
 
-lar:///core/protocol/registers?confidence=C~20#settle.1.0 → ∞
+lar:///core/protocol/registers?confidence=C:20#settle.1.0 → ∞
 ```
 
 The `→ ∞` closing sigil indicates the span does not pass to another
@@ -308,7 +308,7 @@ non-simultaneous apprehension) made visible and navigable.
 All five stances appear in the URI query parameters:
 
 ```
-lar:///council/response?stances=^.-.-.-.-&confidence=S~13&p=10#O0.O0.O3.O2.O0
+lar:///council/response?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O3.O2.O0
 ```
 
 Legacy note: archive experiments also tried a compact stance codepath.
@@ -509,7 +509,7 @@ Every URI encodes the active voices for that span. This constitutes
 a mandatory field, not optional metadata:
 
 ```
-lar:///council,scryer,muse/response?stances=^.^.?.^.-&confidence=S~13&...
+lar:///council,scryer,muse/response?stances=^.^.?.^.-&confidence=S:13&...
 ```
 
 The authority segment lists all active voices. When a single voice
@@ -779,8 +779,8 @@ gets configured for URI storage in every span system. When an NPC
 speaks, their span carries the NPC's URI-encoded state:
 
 ```
-lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A1
-→ lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A2 →
+lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS:16&p=10#O0.O0.O3.D2.A1
+→ lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS:16&p=10#O0.O0.O3.D2.A2 →
 
 ⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | ~:p[10] | ~:confidence[CS],[16] | scene:3/theron
 
@@ -789,7 +789,7 @@ you have not yet considered, traveler.
 
 ⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | ~:p[10] | ~:confidence[CS],[16] | scene:3/theron
 
-lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16#O0.O0.O3.D2.A2 → ?
+lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS:16#O0.O0.O3.D2.A2 → ?
 ```
 
 ## 7.4 MemPalace Integration
@@ -922,4 +922,4 @@ IS the log.*
 
 *Mahalo.*
 
-lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O1.O0 → ?
+lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.O1.O0 → ?

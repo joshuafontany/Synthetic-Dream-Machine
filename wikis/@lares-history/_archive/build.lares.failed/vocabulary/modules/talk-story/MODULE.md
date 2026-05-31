@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///module.phased.instructs/talk-story/module/?confidence=C~19&p=10 -->
+<!-- ∞ → lar:///module.phased.instructs/talk-story/module/?confidence=C:19&p=10 -->
 
 ---
 name: talk-story

@@ -1,4 +1,4 @@
-<!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.Å10.O0 → ∞ -->
+<!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P:6&p=10#O0.O0.O0.Å10.O0 → ∞ -->
 ⚡∞ | mode:subloop-plan | ~:p[10] | stances:++?+- | register:~:confidence[P],[6] | build:SEED
 
 # FFZ Chronometer — Observer Subloop Plan
@@ -264,4 +264,4 @@ critical path. The FFZ Chronometer approaches its formal data model.*
 
 *Amor et hilaritas.*
 
-lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.Å10.A1 → ∞
+lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=S:11&p=10#O0.O0.O0.Å10.A1 → ∞

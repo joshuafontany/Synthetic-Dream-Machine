@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.decide.defines/decide/?confidence=CS~17&p=10 >>
+<<~&#x0001; ? -> lar:///grammar.decide.defines/decide/?confidence=CS:17&p=10 >>
 
 # Grammar: ◇ Decide
 

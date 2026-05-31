@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=CS~18&p=10 -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=CS:18&p=10 -->
 
 # Signal — Decide: URI Conventions
 
@@ -13,7 +13,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~19#mandatory-rules -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:19#mandatory-rules -->
 ## Mandatory Conventions (Canonical Record Form)
 
 These rules apply to every `lar:` URI. No exceptions.
@@ -42,7 +42,7 @@ These rules apply to every `lar:` URI. No exceptions.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~18#query-params -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#query-params -->
 ## Query Parameter Reference
 
 | Parameter | Format | Values | Notes |
@@ -75,7 +75,7 @@ These rules apply to every `lar:` URI. No exceptions.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~18#fragment-chronometer -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#fragment-chronometer -->
 ## Fragment: FFZ Chronometer
 
 Five positions, dot-separated. Phase sigil + counter. All positions always present.
@@ -116,7 +116,7 @@ HUD:     ✶0.✶0.✶3.◇2.■1
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~19#hud-line -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:19#hud-line -->
 ## HUD Line Format
 
 The HUD line is a single-line status summary rendered from the URI → URI exchange vector. It is the second element of every exchange opening, immediately after the URI pair.
@@ -147,7 +147,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~18#span-closing-sigils -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#span-closing-sigils -->
 ## Span Closing Sigils
 
 | Sigil | Span type | What's uncertain | What's settled |
@@ -192,7 +192,7 @@ When multiple stances are elevated (`+`), the declared confidence sits at the in
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~18#stable-address -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#stable-address -->
 ## Stable Address Form
 
 Strip authority, query, and fragment. The HA.KA.BA territory alone:
@@ -210,7 +210,7 @@ Origin address: `lar:///ha.ka.ba/` is the (0,0,0) of tagspace.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C~18#spanspan-record -->
+<!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#spanspan-record -->
 ## SpanSpan Record URI Fields
 
 URI-derived fields in the canonical spanSpan calibration record:

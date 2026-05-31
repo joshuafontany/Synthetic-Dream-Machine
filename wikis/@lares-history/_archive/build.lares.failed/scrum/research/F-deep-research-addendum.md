@@ -60,7 +60,7 @@ Instead:
 
 - **HUD display:** `~:confidence[S],[13] 🏛️🗡️` — register point value + all active stance emoji. The COUNT of emoji IS the fuzz indicator. No numeric delta needed.
 - **Record form (STATE.jsonl):** The `register` field stays a point value (`"~:confidence[S],[13]"`). A new field `stance_count` (integer) and the existing multi-stance `stance` array communicate the distribution shape. Consumers who need the fuzz assess it from the stance count, not from a computed delta.
-- **URI machine form:** `confidence=S~13` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
+- **URI machine form:** `confidence=S:13` (always a point). `stance=philosopher&stance=satirist` (all active stances listed). The stance count is derivable from the query parameters — no new field needed in the URI.
 
 **Why this is better than centroid~δ:**
 
@@ -108,7 +108,7 @@ But the operator can already influence the state tuple through Input Signal Read
 **Active control ("takes the stick") would mean:**
 
 ```
-~$ lares --set stance=philosopher confidence=CS~16
+~$ lares --set stance=philosopher confidence=CS:16
 ```
 
 The operator declares: "I want this response in Philosopher stance at Canon/Synthesis confidence." The node generates under those constraints. The HUD tag shows the operator-set values, not the node's self-assessment.
@@ -186,7 +186,7 @@ Option C is the most information-rich but doubles the HUD complexity. Option A i
 ~$ lares --set register>=S~13
 
 # Set both
-~$ lares --set stance=philosopher,satirist confidence=CS~16
+~$ lares --set stance=philosopher,satirist confidence=CS:16
 
 # Release control (return to CMD)
 ~$ lares --set auto
@@ -204,7 +204,7 @@ The centroid~δ notation proposed in the current refinement plan should be **rev
 
 | Before (centroid~δ) | After (stance-count-is-delta) |
 |---|---|
-| `confidence=S~13~3` | `confidence=S~13` (always a point) |
+| `confidence=S:13~3` | `confidence=S:13` (always a point) |
 | New validation pattern for `~δ` | No validation change |
 | Boundary saturation rules | Not needed |
 | 6 new test vectors for range form | Not needed |

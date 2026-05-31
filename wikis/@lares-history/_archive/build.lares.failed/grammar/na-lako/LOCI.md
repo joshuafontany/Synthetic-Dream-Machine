@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/na-lako/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/na-lako/?confidence=CS:16&p=10 -->
 
 # Grammar: Nā Lako — The Four Implements
 
@@ -43,7 +43,7 @@ heritage: >
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#heritage -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:9#heritage -->
 
 ## Heritage
 
@@ -65,7 +65,7 @@ the full kit. The Hawaiian navigator setting out with nā lako has every impleme
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#the-four -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:9#the-four -->
 
 ## The Four Implements
 
@@ -87,7 +87,7 @@ transformation that becomes possible after passage, not during.
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#ooda-mapping -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:9#ooda-mapping -->
 
 ## OODA-HA Mapping
 
@@ -114,7 +114,7 @@ The Cabalistic aim: *"bringing the four circuits into balance"* = nā lako = arm
 
 ---
 
-<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP~9#armed-together -->
+<!-- ahu lar:///grammar.na-lako.holds/na-lako/?confidence=SP:9#armed-together -->
 
 ## Armed Together
 

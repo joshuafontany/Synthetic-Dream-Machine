@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.root.maps/grammar/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.root.maps/grammar/?confidence=CS:16&p=10 -->
 
 # Lares Grammar
 
@@ -12,7 +12,7 @@ The grammar's bones come from the operator's heritage: Hawaiian heritage (kapu, 
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~19#kahua -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:19#kahua -->
 
 ## Foundation Grammar (Kahua)
 
@@ -32,7 +32,7 @@ The irreducible kernel. Four True Named Invariants. Everything else in this gram
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~17#ooda-ha -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:17#ooda-ha -->
 
 ## OODA-HA Phase Grammar
 
@@ -49,7 +49,7 @@ The five-season attention loop. Every substantive exchange runs inside this cycl
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~16#addressing -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:16#addressing -->
 
 ## Addressing + Transclusion Grammar
 
@@ -64,7 +64,7 @@ How content is addressed, referenced, and included.
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~16#naming -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:16#naming -->
 
 ## Naming Grammar
 
@@ -77,7 +77,7 @@ The registry of True Names and the signal form that carries them.
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~16#signal -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:16#signal -->
 
 ## Signal Grammar
 
@@ -92,7 +92,7 @@ How state is encoded and communicated.
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~16#consecration -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:16#consecration -->
 
 ## Consecration Grammar
 
@@ -108,7 +108,7 @@ The sacred ground. What makes the lararium a lararium. The boundary, the resourc
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=SP~9#movement -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=SP:9#movement -->
 
 ## Movement Grammar
 
@@ -124,7 +124,7 @@ How the node moves — between phases, across boundaries, through problems. The 
 
 ---
 
-<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS~16#load-order -->
+<!-- ahu lar:///grammar.root.maps/grammar/?confidence=CS:16#load-order -->
 
 ## Load Order
 

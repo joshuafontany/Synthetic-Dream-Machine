@@ -2,7 +2,7 @@
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.kahea.defines/kahea/?confidence=CS~19&p=10 -->
+<!-- ∞ → lar:///grammar.kahea.defines/kahea/?confidence=CS:19&p=10 -->
 
 # Grammar: Kahea
 
@@ -36,7 +36,7 @@ cluster: kahua
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#syntax -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:19#syntax -->
 
 ## Syntax
 
@@ -51,7 +51,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#semantics -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:19#semantics -->
 
 ## Semantics
 
@@ -72,7 +72,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#conventions -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:19#conventions -->
 
 ## When to Use Kahea vs Prose Reference
 
@@ -87,7 +87,7 @@ The content at `lar:///ha.ka.ba/other-path/#fragment` is pulled into this docume
 
 ---
 
-<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS~19#hula-resonance -->
+<!-- ahu lar:///grammar.kahea.defines/kahea/?confidence=CS:19#hula-resonance -->
 
 ## Hawaiian Depth — Kahea in Practice
 

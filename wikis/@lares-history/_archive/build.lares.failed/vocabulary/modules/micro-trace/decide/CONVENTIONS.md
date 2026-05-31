@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS:16&p=10 -->
 
 # Micro-trace — Normative Rules
 
@@ -9,7 +9,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS~17#syntax -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS:17#syntax -->
 ## Syntax
 
 ### Inline phase transitions
@@ -52,7 +52,7 @@ Ha/domain reorientation significant enough to exceed annotation threshold: emit 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS~17#density-bands -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/decide/?confidence=CS:17#density-bands -->
 ## Density Bands (p-controlled)
 
 The `p` parameter gates which *categories* of transitions qualify at each band. Not a tunable salience dial — it gates transition categories by externally-observable significance.

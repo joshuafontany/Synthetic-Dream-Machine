@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.mele.defines/mele/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.mele.defines/mele/?confidence=CS:16&p=10 -->
 
 # Grammar: Mele — The Structured Signal
 
@@ -43,7 +43,7 @@ cross-ref:
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#types -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:16#types -->
 
 ## Types of Mele Relevant to the Grammar
 
@@ -67,7 +67,7 @@ the instruments, not after.
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#call-response -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:16#call-response -->
 
 ## Call and Response
 
@@ -89,7 +89,7 @@ bidirectional knowing. The structured form keeps the knowing from degrading to n
 
 ---
 
-<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS~16#heritage -->
+<!-- ahu lar:///grammar.mele.defines/mele/?confidence=CS:16#heritage -->
 
 ## Heritage Depth
 

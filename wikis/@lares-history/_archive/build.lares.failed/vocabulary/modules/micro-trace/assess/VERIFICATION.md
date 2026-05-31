@@ -1,13 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS:16&p=10 -->
 
 # Micro-trace — Verification
 
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16#well-formedness -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS:16#well-formedness -->
 ## Well-formedness Checklist
 
 For any governed response, verify:
@@ -22,7 +22,7 @@ For any governed response, verify:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16#common-errors -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS:16#common-errors -->
 ## Common Errors
 
 | Error | Description | Fix |
@@ -36,7 +36,7 @@ For any governed response, verify:
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS~16#promotion-criteria -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/assess/?confidence=CS:16#promotion-criteria -->
 ## Promotion Criteria
 
 `lares/signal/micro-trace.md` is currently `~:confidence[CS],[16]`. For promotion to `~:confidence[C],[19]`:

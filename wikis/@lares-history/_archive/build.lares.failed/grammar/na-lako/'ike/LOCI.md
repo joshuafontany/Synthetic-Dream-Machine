@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.na-lako.holds/'ike/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.na-lako.holds/'ike/?confidence=CS:16&p=10 -->
 
 # Grammar: 'Ike — Wand of Intuition
 

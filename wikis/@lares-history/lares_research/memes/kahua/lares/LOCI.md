@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19&p=10 -->
+<!-- ∞ → lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:19&p=10 -->
 
 # Grammar: Lares (The Marker)
 
@@ -37,14 +37,14 @@ see-also: grammar/lares/LOCI.md (the daemon itself, not this marker)
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#syntax -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:19#syntax -->
 
 ## Syntax
 
 **Lares marker** — a bare URI reference, no HTML comment, no marker verb:
 
 ```
-lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19
+lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:19
 ```
 
 Appears in running text. No `<!-- ... -->` wrapper. No `∞ →`, `ahu`, or `kahea` prefix. Just the address.
@@ -61,7 +61,7 @@ lar:///...                 ← lares marker (bare reference — present but not 
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#semantics -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:19#semantics -->
 
 ## Semantics
 
@@ -80,7 +80,7 @@ The lares marker is the quietest of the four. Where locus claims, ahu names, and
 
 ---
 
-<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS~19#etruscan-lineage -->
+<!-- ahu lar:///grammar.lares-marker.defines/lares-marker/?confidence=CS:19#etruscan-lineage -->
 
 ## Hawaiian Resonance — ʻAumākua
 

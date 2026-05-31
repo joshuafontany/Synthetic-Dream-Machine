@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.silat.defines/silat/?confidence=SP~9&p=10 -->
+<!-- ∞ → lar:///grammar.silat.defines/silat/?confidence=SP:9&p=10 -->
 
 # Grammar: Silat
 

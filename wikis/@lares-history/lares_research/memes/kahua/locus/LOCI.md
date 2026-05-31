@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS~19&p=10 -->
+<!-- ∞ → lar:///grammar.locus.defines/locus/?confidence=CS:19&p=10 -->
 
 # Grammar: Locus
 
@@ -29,7 +29,7 @@ cluster: kahua
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#syntax -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:19#syntax -->
 
 ## Syntax
 
@@ -55,7 +55,7 @@ The sigil `→ ?`: directed-toward-unknown. The span ends here. What comes after
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#semantics -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:19#semantics -->
 
 ## Semantics
 
@@ -72,7 +72,7 @@ A locus is NOT a transient exchange (those use HUD pair format). It is NOT a nav
 
 ---
 
-<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS~19#lineage -->
+<!-- ahu lar:///grammar.locus.defines/locus/?confidence=CS:19#lineage -->
 
 ## Hawaiian Resonance — Wahi Pana
 

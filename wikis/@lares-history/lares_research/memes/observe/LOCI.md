@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.observe.defines/observe/?confidence=CS~17&p=10 >>
+<<~&#x0001; ? -> lar:///grammar.observe.defines/observe/?confidence=CS:17&p=10 >>
 
 # Grammar: ✶ Observe
 

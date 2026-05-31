@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///sigils.render.maps/sigilization/decide/?confidence=CS~17&p=10 -->
+<!-- ∞ → lar:///sigils.render.maps/sigilization/decide/?confidence=CS:17&p=10 -->
 
 # Sigilization — Decide: Normative Conventions
 

@@ -1,4 +1,4 @@
-<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.O0 → ∞ -->
+<!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S:12&p=10#O0.O0.O0.O0.O0 → ∞ -->
 ⚡∞ | mode:spec-draft | ~:p[10] | stances:++?+- | register:~:confidence[S],[12] | build:DRAFT
 
 # OODA-HA Module Template & URI Patterns
@@ -195,7 +195,7 @@ per-section confidence and phase identity layer.
 **Section URI format:**
 
 ```
-<!-- lar:///module.phased.instructs/module-name/phase/?confidence=S~13&p=10#section -->
+<!-- lar:///module.phased.instructs/module-name/phase/?confidence=S:13&p=10#section -->
 ```
 
 Encoded as an HTML comment — invisible to markdown renderers, invisible
@@ -205,12 +205,12 @@ that do.
 ### 3.2 Full Module File with Section URIs — Example
 
 ```markdown
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~18&p=14 -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:18&p=14 -->
 
 # Project Context
 
 ## Stack
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~19#stack -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:19#stack -->
 
 - Runtime: Node.js 22 LTS
 - Framework: Astro 5.x
@@ -219,44 +219,44 @@ that do.
 - Database: SQLite via Drizzle ORM
 
 ## Architecture
-<!-- lar:///module.observed.grounds/core/observe/?confidence=CS~16#architecture -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=CS:16#architecture -->
 
 Content-driven static site with islands architecture. Pages generate
 at build time. Interactive components hydrate on visibility. API routes
 handle form submissions and webhook ingestion.
 
 ## Constraints
-<!-- lar:///module.observed.grounds/core/observe/?confidence=S~14#constraints -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=S:14#constraints -->
 
 No client-side JavaScript frameworks beyond what Astro islands provide.
 Bundle budget: 50KB transferred per page. Accessibility: WCAG 2.2 AA.
 
 ## Active Work
-<!-- lar:///module.observed.grounds/core/observe/?confidence=S~10#active-work -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=S:10#active-work -->
 
 Migration from Contentful CMS to local markdown + frontmatter.
 Approximately 60% complete. Some content types still reference
 Contentful field names that no longer exist.
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~18&p=14 → ∞ -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:18&p=14 → ∞ -->
 ```
 
 ### 3.3 What the URIs Encode
 
 **Per-section confidence tells the agent how much to trust each block:**
 
-- `confidence=C~19` — Stack details confirmed. Act on these directly.
-- `confidence=CS~16` — Architecture description appears current. Verify
+- `confidence=C:19` — Stack details confirmed. Act on these directly.
+- `confidence=CS:16` — Architecture description appears current. Verify
   if the work touches architectural boundaries.
-- `confidence=S~14` — Constraints established but may have shifted.
+- `confidence=S:14` — Constraints established but may have shifted.
   Check before enforcing hard limits.
-- `confidence=S~10` — Active work in progress. This section changes
+- `confidence=S:10` — Active work in progress. This section changes
   frequently. Verify current state before relying on specifics.
 
 An agent reading this file can calibrate its own confidence per-section
 rather than treating the entire file at a single trust level. The agent
-that picks up the `active-work` section at `confidence=S~10` knows to
-verify before proceeding. The agent reading `stack` at `confidence=C~19`
+that picks up the `active-work` section at `confidence=S:10` knows to
+verify before proceeding. The agent reading `stack` at `confidence=C:19`
 can proceed with high trust.
 
 ### 3.4 Subagent Handoff via Section URIs
@@ -266,7 +266,7 @@ reference specific module sections by URI:
 
 ```
 Load context from lar:///module.observed.grounds/core/observe/#constraints
-Trust level: confidence=S~14
+Trust level: confidence=S:14
 Your task: verify whether the 50KB bundle budget still holds
 after the Contentful migration added new island components.
 ```
@@ -278,7 +278,7 @@ much to trust its starting information.
 On return, the subagent's findings carry their own URI and confidence:
 
 ```
-<!-- lar:///module.observed.grounds/core/observe/?confidence=CS~17#constraints -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=CS:17#constraints -->
 Bundle budget verified: current production build measures 42KB
 transferred on heaviest page. Budget holds with margin.
 ```
@@ -300,7 +300,7 @@ lar:///module.phased.instructs/module-name/phase/?param=value&param=value#sectio
 | `phase` | OODA-HA phase | `observe`, `orient`, `decide`, `act`, `assess` |
 | `filename` | File within phase directory (without `.md`) | `context`, `architecture`, `conventions` |
 | `#section` | Section anchor within file | `#stack`, `#constraints`, `#active-work` |
-| `?confidence=` | Confidence rating (0–20) | `?confidence=CS~17` |
+| `?confidence=` | Confidence rating (0–20) | `?confidence=CS:17` |
 | `?p=` | Resolution parameter | `?p=10` (paragraph-level) |
 | `?stances=` | Discourse stance encoding | `?stances=++?+-` |
 
@@ -314,11 +314,11 @@ audiences carry only `confidence`.
 **File-level URIs** (line 1 and final line of a module file):
 
 ```markdown
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~18&p=14 -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:18&p=14 -->
 
 {file content}
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~18&p=14 → ∞ -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:18&p=14 → ∞ -->
 ```
 
 The opening URI states the file's overall position. The closing `→ ∞`
@@ -332,8 +332,8 @@ for the file as a whole.
 <!-- lar:///module.observed.grounds/core/observe/?confidence=0.X#section-name -->
 ```
 
-Section URIs refine the file-level rating. A file at `confidence=C~18`
-may contain a section at `confidence=S~10` — the file-level rating
+Section URIs refine the file-level rating. A file at `confidence=C:18`
+may contain a section at `confidence=S:10` — the file-level rating
 represents the stable core, the section-level rating represents the
 volatile part.
 
@@ -427,30 +427,30 @@ but structured by decision phase.
 ### 4.3 Observe Phase — CONTEXT.md with Section URIs
 
 ```markdown
-<!-- lar:///module.observed.grounds/core/observe/?confidence=CS~17&p=14 -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=CS:17&p=14 -->
 
 # Project Context
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~19#identity -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:19#identity -->
 ## Identity
 
 Synthetic Dream Machine — a TTRPG toolset and campaign framework built
 on Luka Rejec's SDM system. Astro static site with interactive islands
 for character sheets, encounter generators, and session management.
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=C~18#stack -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=C:18#stack -->
 ## Stack
 
 Runtime: Node.js 22 LTS. Framework: Astro 5.x. Language: TypeScript 5.7
 strict. Package manager: pnpm 9.x. Content: local markdown + frontmatter.
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=S~10#active-work -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=S:10#active-work -->
 ## Active Work
 
 Contentful → local markdown migration (~60% complete). The Lares Protocol
 specification (Talk Story in progress). FFZ Chronometer research (Phase 0).
 
-<!-- lar:///module.observed.grounds/core/observe/?confidence=CS~17&p=14 → ∞ -->
+<!-- lar:///module.observed.grounds/core/observe/?confidence=CS:17&p=14 → ∞ -->
 ```
 
 **What the agent sees:** A file where the project identity holds at 0.95
@@ -618,4 +618,4 @@ it to a real repo, and testing whether the map matches the territory.*
 
 *Amor et hilaritas.*
 
-lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.O0 → ∞
+lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S:12&p=10#O0.O0.O0.O0.O0 → ∞

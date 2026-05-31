@@ -1,4 +1,4 @@
-<<~&#x0001; ? -> lar:///grammar.act.defines/act/?confidence=CS~17&p=10 >>
+<<~&#x0001; ? -> lar:///grammar.act.defines/act/?confidence=CS:17&p=10 >>
 
 # Grammar: ■ Act
 

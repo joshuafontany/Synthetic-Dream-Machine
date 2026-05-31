@@ -130,7 +130,7 @@ schema = "lares.module@1"
 
 # Stable identity
 module_id = "lares-kernel"
-lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scope=hard#sha256=__SEMANTIC_SHA256__"
+lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C:20&canon=10.0&scope=hard#sha256=__SEMANTIC_SHA256__"
 
 title = "Lares Kernel"
 description = "Invariant identity + gates + minimal runtime operating rules."
@@ -187,7 +187,7 @@ File: `tools/<tool_id>.tool.toml`
 schema = "lares.tool@1"
 
 tool_id = "web_search"
-lar_uri = "lar://canon/tool/web_search@1.0.0?confidence=C~20&canon=9.0&scope=hard#sha256=__SEMANTIC_SHA256__"
+lar_uri = "lar://canon/tool/web_search@1.0.0?confidence=C:20&canon=9.0&scope=hard#sha256=__SEMANTIC_SHA256__"
 
 title = "Web Search Tool"
 description = "External web search integration; used only when permitted."
@@ -227,7 +227,7 @@ File: `permissions/<perm_id>.permission.toml`
 schema = "lares.permission@1"
 
 permission_id = "repo-safe-default"
-lar_uri = "lar://canon/permission/repo-safe-default@1.0.0?confidence=C~20&canon=9.5&scope=hard#sha256=__SEMANTIC_SHA256__"
+lar_uri = "lar://canon/permission/repo-safe-default@1.0.0?confidence=C:20&canon=9.5&scope=hard#sha256=__SEMANTIC_SHA256__"
 
 title = "Workspace Trust Gate + Safe Defaults"
 description = "Deny sensitive file reads; require confirmation for dangerous actions."
@@ -270,7 +270,7 @@ generated_at = "2026-04-07T00:00:00Z"
 
 # Determinism rule: entries sorted lexicographically by lar_uri.
 [[entry]]
-lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scope=hard#sha256=abc..."
+lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C:20&canon=10.0&scope=hard#sha256=abc..."
 kind = "module"
 descriptor_path = "modules/lares-kernel.module.toml"
 source_path = "sources/kernel/Lares_Kernel.md"
@@ -297,16 +297,16 @@ emit_agents_dir = ".claude/agents"
 
 # The invariant core: canon hard modules only
 [[load]]
-lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scope=hard#sha256=..."
+lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C:20&canon=10.0&scope=hard#sha256=..."
 required = true
 
 [[load]]
-lar_uri = "lar://canon/module/lares-epistemology@1.0.0?confidence=C~20&canon=9.6&scope=hard#sha256=..."
+lar_uri = "lar://canon/module/lares-epistemology@1.0.0?confidence=C:20&canon=9.6&scope=hard#sha256=..."
 required = true
 
 # Optional scoped modules (emit to .claude/rules with paths frontmatter)
 [[load]]
-lar_uri = "lar://canon/module/lares-vscode-ops@1.0.0?confidence=C~20&canon=8.5&scope=soft#sha256=..."
+lar_uri = "lar://canon/module/lares-vscode-ops@1.0.0?confidence=C:20&canon=8.5&scope=soft#sha256=..."
 required = false
 emit_as_rule = true
 rule_paths = ["_todo/**", "builds/**"]
@@ -343,17 +343,17 @@ This aligns with event sourcing guidance: event ordering and state reconstructio
 
 Invariant core module:
 ```text
-lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scope=hard#sha256=0b7c...
+lar://canon/module/lares-kernel@4.0.1?confidence=C:20&canon=10.0&scope=hard#sha256=0b7c...
 ```
 
 Scoped rule module:
 ```text
-lar://canon/module/lares-vscode-ops@1.0.0?confidence=C~20&canon=8.5&scope=soft#sha256=91aa...
+lar://canon/module/lares-vscode-ops@1.0.0?confidence=C:20&canon=8.5&scope=soft#sha256=91aa...
 ```
 
 Archive/candidate (not auto-loaded):
 ```text
-lar://archive/note/monoprompt-sketch@0.0.0?confidence=S~13&canon=2.0&scope=advisory#sha256=fe12...
+lar://archive/note/monoprompt-sketch@0.0.0?confidence=S:13&canon=2.0&scope=advisory#sha256=fe12...
 ```
 
 ## Cache-friendly assembly and breakpoints
@@ -497,27 +497,27 @@ emit_agents_dir = ".claude/agents"
 
 # Stable invariant core (canon hard)
 [[load]]
-lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C~20&canon=10.0&scope=hard#sha256=0b7c..."
+lar_uri = "lar://canon/module/lares-kernel@4.0.1?confidence=C:20&canon=10.0&scope=hard#sha256=0b7c..."
 required = true
 
 [[load]]
-lar_uri = "lar://canon/module/lares-permissions@1.0.0?confidence=C~20&canon=9.7&scope=hard#sha256=31aa..."
+lar_uri = "lar://canon/module/lares-permissions@1.0.0?confidence=C:20&canon=9.7&scope=hard#sha256=31aa..."
 required = true
 
 [[load]]
-lar_uri = "lar://canon/module/lares-epistemology@1.0.0?confidence=C~20&canon=9.6&scope=hard#sha256=98bd..."
+lar_uri = "lar://canon/module/lares-epistemology@1.0.0?confidence=C:20&canon=9.6&scope=hard#sha256=98bd..."
 required = true
 
 # Scoped modules as rules (path-scoped; lazy-load)
 [[load]]
-lar_uri = "lar://canon/module/lares-vscode-ops@1.0.0?confidence=C~20&canon=8.5&scope=soft#sha256=12ef..."
+lar_uri = "lar://canon/module/lares-vscode-ops@1.0.0?confidence=C:20&canon=8.5&scope=soft#sha256=12ef..."
 required = false
 emit_as_rule = true
 rule_paths = ["_todo/**", "builds/**"]
 
 # Archive material never auto-loaded
 [[load]]
-lar_uri = "lar://archive/note/old-monoprompt@0.0.0?confidence=S~13&canon=2.0&scope=advisory#sha256=fe12..."
+lar_uri = "lar://archive/note/old-monoprompt@0.0.0?confidence=S:13&canon=2.0&scope=advisory#sha256=fe12..."
 required = false
 emit_as_rule = false
 ```
@@ -571,7 +571,7 @@ All “agentic files” that belong to the Canon hierarchy must:
 - declare `canon_scope = "hard"` or `"soft"` (not `"advisory"`)
 - carry a `lar:` URI where the path begins with `lar://canon/...` (preferred)
 
-This is the *mechanical* meaning of “canon=1.0 marks agentic files”: **confidence=C~20** is the membership flag for Canon-hierarchy runtime artifacts.
+This is the *mechanical* meaning of “canon=1.0 marks agentic files”: **confidence=C:20** is the membership flag for Canon-hierarchy runtime artifacts.
 
 ### Canon bands and enforcement
 
@@ -599,7 +599,7 @@ Use Markdown for content modules. Use JSON only where append-only logs or strict
 Every module/tool/permission/grant must have a stable URI.
 
 **Preferred URI form**
-`lar://canon/<kind>/<name>@<semver>?confidence=C~20&canon=9.8&scope=hard#sha256=<digest>`
+`lar://canon/<kind>/<name>@<semver>?confidence=C:20&canon=9.8&scope=hard#sha256=<digest>`
 
 Rules:
 - the URI is *machine identity*, not a prose title

@@ -69,7 +69,7 @@ At each exchange span, `lar:` URIs are used in the following sequence. This sequ
 Lares reads the operator's prompt as an implicit signal: alias:tier@host, semantic territory (HA.KA.BA), and stance. It constructs a **provisional operator URI** encoding that reading. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
 
 ```
-lar://telarus:operator@enyalios/~schema.gap.present/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.1.2.7
+lar://telarus:operator@enyalios/~schema.gap.present/?stances=*!-?------&confidence=S:13&p=10&ffz=0.0.1.2.7
 ```
 
 This example uses single-tool carry for the first two stances: Philosopher Wand-only (`*-`) and Poet Cup-only (`-?`), with all remaining stances centered
@@ -78,7 +78,7 @@ This example uses single-tool carry for the first two stances: Philosopher Wand-
 Before generating any content, Lares sets its own intent with a **provisional node URI**. The `~` prefix on the HA.KA.BA marks it as execution-provisional: generations may diverge.
 
 ```
-lar://lar:node@enyalios/~schema.flow.documented/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.2.7
+lar://lar:node@enyalios/~schema.flow.documented/?stances=*!--------&confidence=CS:16&p=10&ffz=0.0.1.2.7
 ```
 
 **Step 3 — Emit the URI → URI exchange vector.**
@@ -164,7 +164,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` is the (
 | 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
 | 4 | **host** | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/@lares/` | `/threshold.uncertain.opens` |
-| 6 | **`?query`** | Non-hierarchical params | Signal parameters + FFZ chronometer | `?stances=*!--------&confidence=S~13&p=10&ffz=0.0.3.2.7` |
+| 6 | **`?query`** | Non-hierarchical params | Signal parameters + FFZ chronometer | `?stances=*!--------&confidence=S:13&p=10&ffz=0.0.3.2.7` |
 | 7 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
 
 > **Layout validation `~:confidence[C],[18]`:** The WHERE → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
@@ -311,17 +311,17 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 **Examples:**
 
 ```
-lar://telarus:operator@enyalios/~uri.schema.question/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.2.33
+lar://telarus:operator@enyalios/~uri.schema.question/?stances=*!--------&confidence=S:13&p=10&ffz=0.0.1.2.33
 ```
 Reading provisional: "I believe you're orienting toward URI schema territory — I may have misread your stance or HA.KA.BA."
 
 ```
-lar://scryer:node@enyalios/~s0.gap.logged/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.2.33
+lar://scryer:node@enyalios/~s0.gap.logged/?stances=*!--------&confidence=S:13&p=10&ffz=0.0.1.2.33
 ```
 Execution provisional: "I intend to log this S0 gap — execution may find a different path or territory."
 
 ```
-lar://scryer:node@enyalios/~s0.schema.updated/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.2.34
+lar://scryer:node@enyalios/~s0.schema.updated/?stances=*!--------&confidence=CS:16&p=10&ffz=0.0.1.2.34
 ```
 Trajectory provisional: "I predict our next territory is the updated schema — operator may redirect entirely."
 
@@ -360,7 +360,7 @@ Signals unknown temporal resumption. The `?` marks a causal gap: between this si
 In exchange streams, the closer appends to the closing URI inline:
 
 ```
-lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.3.2.1 → ?
+lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS:16&p=10&ffz=0.0.3.2.1 → ?
 ```
 
 ### 5.3 `ahu` — Waypoint Marker
@@ -721,13 +721,13 @@ A **span** is one operator → Lares exchange span at any scale. A tasked spirit
 **Example (canonical record form throughout):**
 
 ```text
-lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.1.11
-→ lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.1.1.12
+lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S:13&p=10&ffz=0.0.1.1.11
+→ lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS:16&p=12&ffz=0.0.1.1.12
 ⚡~13 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[12] | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
 
 [content generation]
 
-lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.1.13 → ?
+lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS:16&p=10&ffz=0.0.1.1.13 → ?
 ⚡~12 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
 ```
 
@@ -795,9 +795,9 @@ Additional quick-filter fields:
   "operator_actor_id": "actor:telarus",
   "responder_actor_id": "actor:lares.node.scryer",
   "acted_on_behalf_of": null,
-  "start_uri": "lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=...",
-  "attractor_uri": "lar://scryer:node@enyalios/span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=...",
-  "end_uri": "lar://scryer:node@enyalios/aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=...",
+  "start_uri": "lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S:13&p=10&ffz=...",
+  "attractor_uri": "lar://scryer:node@enyalios/span.provenance.synthesizes/?stances=*!--------&confidence=CS:16&p=12&ffz=...",
+  "end_uri": "lar://scryer:node@enyalios/aftermath.docs.settle/?stances=*!--------&confidence=CS:16&p=10&ffz=...",
   "parse_required": false,
   "parse_reason": null,
   "wall_time_start": "2026-04-08T20:41:00Z",
@@ -1036,7 +1036,7 @@ The core anatomy (§§2–8, 12) can promote to `~:confidence[C],[19]` independe
 ### A.1 Record Form
 
 ```
-lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
+lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S:13&p=10&ffz=0.0.3.2.7
 ```
 
 ### A.2 HUD Line
@@ -1048,7 +1048,7 @@ lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&co
 ### A.3 Multi-Stance
 
 ```
-lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.8
+lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S:12&p=14&ffz=0.0.3.2.8
 ```
 
 ### A.4 Stable Address
@@ -1060,7 +1060,7 @@ lar:///threshold.uncertain.opens/
 ### A.5 Exchange Closing
 
 ```
-lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.0.3.9 → ?
+lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=CS:16&p=10&ffz=0.0.0.3.9 → ?
 ```
 
 ### A.6 System File Span
@@ -1104,8 +1104,8 @@ lar://scryer:node@enyalios/schema.settled.rests/?stances=*!--------&confidence=C
 A complete exchange opening, annotated by scan order. URIs are canonical record form; the HUD line beneath each pair is the glyph-rendered surface.
 
 ```text
-lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
-→ lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.3.2.8
+lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S:13&p=10&ffz=0.0.3.2.7
+→ lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS:16&p=12&ffz=0.0.3.2.8
 ⚡~17 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[12] | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
 ```
 
@@ -1121,8 +1121,8 @@ Quick read:
 Multi-stance example:
 
 ```text
-lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.9
-→ lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S~13&p=12&ffz=0.0.3.2.10
+lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S:12&p=14&ffz=0.0.3.2.9
+→ lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S:13&p=12&ffz=0.0.3.2.10
 ⚡~12 | ~:confidence[S],[12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | ~:p[14] | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
 ```
 

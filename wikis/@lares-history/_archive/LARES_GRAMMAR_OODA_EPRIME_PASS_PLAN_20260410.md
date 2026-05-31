@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///todo.grammar.pass.plans/ooda-eprime-2026-04-10/?confidence=S~13&p=10 -->
+<!-- ∞ → lar:///todo.grammar.pass.plans/ooda-eprime-2026-04-10/?confidence=S:13&p=10 -->
 
 # Lares Grammar OODA-E-Prime Pass Plan
 

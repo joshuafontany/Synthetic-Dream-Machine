@@ -243,13 +243,13 @@ Yes. The parse layer and the trace layer were being conflated. →▶ The govern
 ### Sub-agent dispatch and return
 
 ```
-lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS~16&p=10&ffz=0.7.1.0.0
-→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S~13&p=10&ffz=1.7.0.0.0
+lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS:16&p=10&ffz=0.7.1.0.0
+→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S:13&p=10&ffz=1.7.0.0.0
 
 [Explore agent — contents not in parent trace]
 
-lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S~13&p=10&ffz=1.7.0.0.0
-→ lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS~16&p=10&ffz=0.7.1.0.0
+lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S:13&p=10&ffz=1.7.0.0.0
+→ lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS:16&p=10&ffz=0.7.1.0.0
 ```
 
 <<~/ahu >>

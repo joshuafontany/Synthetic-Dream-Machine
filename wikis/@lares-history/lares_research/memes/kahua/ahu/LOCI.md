@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.ahu.defines/ahu/?confidence=CS~19&p=10 -->
+<!-- ∞ → lar:///grammar.ahu.defines/ahu/?confidence=CS:19&p=10 -->
 
 # Grammar: Ahu
 
@@ -36,13 +36,13 @@ cluster: kahua
 
 ---
 
-<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS~19#syntax -->
+<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS:19#syntax -->
 
 ## Syntax
 
 **Ahu marker** — names a waypoint, carries its own address + fragment:
 ```
-<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS~19#fragment-name -->
+<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS:19#fragment-name -->
 ```
 
 The fragment (`#fragment-name`) is what external references navigate to. The ahu marker establishes both:
@@ -53,7 +53,7 @@ The fragment (`#fragment-name`) is what external references navigate to. The ahu
 
 ---
 
-<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS~19#semantics -->
+<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS:19#semantics -->
 
 ## Semantics
 
@@ -68,7 +68,7 @@ The fragment (`#fragment-name`) is what external references navigate to. The ahu
 
 ---
 
-<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS~19#placement -->
+<!-- ahu lar:///grammar.ahu.defines/ahu/?confidence=CS:19#placement -->
 
 ## Hawaiian Depth — Ahu Types
 

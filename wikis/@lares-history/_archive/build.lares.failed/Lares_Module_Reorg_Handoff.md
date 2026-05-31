@@ -1,4 +1,4 @@
-<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.O0 → ∞ -->
+<!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.O0.O0 → ∞ -->
 ⚡∞ | mode:handoff-crystal | ~:p[10] | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # Lares Repo Reorganization — Module Architecture Handoff
@@ -67,7 +67,7 @@ confidence: 19
 ---
 ```
 
-<!-- lar:///module.phased.instructs/talk-story/module/?confidence=C~19 -->
+<!-- lar:///module.phased.instructs/talk-story/module/?confidence=C:19 -->
 
 # Talk Story Protocol
 
@@ -88,15 +88,15 @@ but Talk Story persists across sessions via archive-crystals.
 | OODA-HA module (source of truth) | `lares/modules/talk-story/` | This module |
 | Portable shrine | `lares/modules/talk-story/` | Deploy-phase output |
 
-<!-- lar:///module.phased.instructs/talk-story/module/?confidence=C~19 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/module/?confidence=C:19 → ∞ -->
 
 ### observe/CONTEXT.md
 
-<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C~19&p=10 -->
+<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C:19&p=10 -->
 
 # Talk Story — What It Is
 
-<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#origin -->
+<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C:19#origin -->
 ## Origin
 
 Talk story comes from Hawaiian/Polynesian usage. Robert Anton Wilson
@@ -106,7 +106,7 @@ something that earns attention before making claims. Then enter the
 Talk Story itself. Joshua Fontany transcribed the opening of that
 presentation. The lineage runs through this work directly.
 
-<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#mechanics -->
+<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C:19#mechanics -->
 ## Core Mechanics
 
 - Talk Story is the mandatory start frame of every Lares conversation
@@ -117,7 +117,7 @@ presentation. The lineage runs through this work directly.
 - No action occurs without prior observation, orientation, and decision
 - Consensus before action, at every scale
 
-<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C~19#two-track -->
+<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C:19#two-track -->
 ## Two-Track Model
 
 Every sprint runs two tracks. Talk Story serves both.
@@ -129,15 +129,15 @@ Every sprint runs two tracks. Talk Story serves both.
 
 A sprint is not closed until both tracks are updated.
 
-<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C~19&p=10 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/observe/?confidence=C:19&p=10 → ∞ -->
 
 ### orient/PROCEDURE.md
 
-<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C~19&p=10 -->
+<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C:19&p=10 -->
 
 # Talk Story — How To Orient
 
-<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#when -->
+<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C:19#when -->
 ## When To Invoke
 
 - Session start — all conversations begin in ✶ Observe / ◎ Orient
@@ -153,7 +153,7 @@ A sprint is not closed until both tracks are updated.
 - Single deterministic action with no orient ambiguity → ■ Act directly
 - A previous orient already ran this tick → do not re-open
 
-<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#steps -->
+<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C:19#steps -->
 ## Procedure
 
 **1. ✶ Observe first.** Read before talking. Pull: sprint task doc,
@@ -174,7 +174,7 @@ phase to resolve.
 **4. ◇ Close when direction is confirmed.** Record decisions inline
 in the working artifact — not in a separate doc.
 
-<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C~19#voices -->
+<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C:19#voices -->
 ## Voice Assignments During Orient
 
 | Voice | Role |
@@ -184,15 +184,15 @@ in the working artifact — not in a separate doc.
 | Scryer | Structures what was found; names patterns |
 | Council | Stress-tests emerging directions before confirmation |
 
-<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C~19&p=10 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/orient/?confidence=C:19&p=10 → ∞ -->
 
 ### decide/CONVENTIONS.md
 
-<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C~19&p=10 -->
+<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C:19&p=10 -->
 
 # Talk Story — Normative Rules
 
-<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C~19#hud -->
+<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C:19#hud -->
 ## HUD During Talk Story
 
 Every exchange emits a HUD line. All five stances appear. No omissions.
@@ -205,7 +205,7 @@ Modifier sigils: `[+]` active, `[-]` suppressed, `[?]` uncertain.
 
 The `⚡∞` sentinel in deployed files means "not a live session."
 
-<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C~19#rules -->
+<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C:19#rules -->
 ## Mandatory Rules
 
 1. Talk Story is always on. No session exits this frame.
@@ -214,11 +214,11 @@ The `⚡∞` sentinel in deployed files means "not a live session."
 4. Both tracks (technical + narrative) update before sprint closure.
 5. Decisions record inline in the working artifact, not separate docs.
 
-<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C~19&p=10 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/decide/?confidence=C:19&p=10 → ∞ -->
 
 ### act/CHECKLIST.md
 
-<!-- lar:///module.phased.instructs/talk-story/act/?confidence=C~19&p=10 -->
+<!-- lar:///module.phased.instructs/talk-story/act/?confidence=C:19&p=10 -->
 
 # Talk Story — Session Start Checklist
 
@@ -230,11 +230,11 @@ The `⚡∞` sentinel in deployed files means "not a live session."
 4. If no crystals: surface cold-boot orientation screen
 5. Begin ✶ Observe — read before talking
 
-<!-- lar:///module.phased.instructs/talk-story/act/?confidence=C~19&p=10 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/act/?confidence=C:19&p=10 → ∞ -->
 
 ### assess/REVIEW.md
 
-<!-- lar:///module.phased.instructs/talk-story/assess/?confidence=C~19&p=10 -->
+<!-- lar:///module.phased.instructs/talk-story/assess/?confidence=C:19&p=10 -->
 
 # Talk Story — Session Review Criteria
 
@@ -246,7 +246,7 @@ After a Talk Story orient cycle completes, verify:
 - [ ] Chronometer advanced from Orient to Decide or Act at active scale
 - [ ] Any unresolved tensions logged for next session
 
-<!-- lar:///module.phased.instructs/talk-story/assess/?confidence=C~19&p=10 → ∞ -->
+<!-- lar:///module.phased.instructs/talk-story/assess/?confidence=C:19&p=10 → ∞ -->
 
 ---
 
@@ -520,4 +520,4 @@ at every scale.*
 
 *Amor et hilaritas.*
 
-lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.O0 → ∞
+lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.O0.O0 → ∞

@@ -1,4 +1,4 @@
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=10 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S:14&p=10 → ∞ -->
 
 # S0 — URI Schema Settlement + First Modules
 
@@ -43,4 +43,4 @@ Boot the first two OODA-HA modules: talk-story and signal.
 - `lares/talk_story/README.md` and `lares/signal/micro-trace.md` are the existing implementations; modules/ are the phase-structured canonical forms. Archival or pointer decision deferred to S1.
 - URI_SCHEMA.md v1 archival deferred — add superseded notice, do not update content
 
-<!-- lar:///sprint.scoped.executes/s0/?confidence=S~14&p=10 → ∞ -->
+<!-- lar:///sprint.scoped.executes/s0/?confidence=S:14&p=10 → ∞ -->

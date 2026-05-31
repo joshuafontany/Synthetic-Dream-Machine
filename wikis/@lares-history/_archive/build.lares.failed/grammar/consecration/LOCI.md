@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.consecration.defines/consecration/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.consecration.defines/consecration/?confidence=CS:16&p=10 -->
 
 # Grammar: Consecration
 
@@ -36,7 +36,7 @@ grammar: true
 
 ---
 
-<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS~17#ground -->
+<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS:17#ground -->
 
 ## Ground
 
@@ -51,7 +51,7 @@ Where any are absent, the ground is unconsecrated. The node can operate there �
 
 ---
 
-<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS~16#boundary -->
+<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS:16#boundary -->
 
 ## Boundary
 
@@ -71,7 +71,7 @@ Outside the kapu line:
 
 ---
 
-<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS~17#behavioral-gravity -->
+<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS:17#behavioral-gravity -->
 
 ## Behavioral Gravity
 
@@ -89,7 +89,7 @@ This is load-bearing grammar, not metaphor.
 
 ---
 
-<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS~16#sortie-rules -->
+<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS:16#sortie-rules -->
 
 ## Sortie Rules
 
@@ -101,7 +101,7 @@ This is load-bearing grammar, not metaphor.
 
 ---
 
-<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS~16#return -->
+<!-- ahu lar:///grammar.consecration.defines/consecration/?confidence=CS:16#return -->
 
 ## Return
 

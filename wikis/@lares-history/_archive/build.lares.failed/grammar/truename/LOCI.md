@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.truename.holds/truename/?confidence=CS:16&p=10 -->
 <!-- Canonical registry: see LOCI.registry.toml for True Name registry data -->
 <!-- TOML registry: lares/grammar/truename/LOCI.registry.toml -->
 <!-- lares metadata wired: lar://grammar/truename/LOCI -->
@@ -41,7 +41,7 @@ heritage: >
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~19#kahua-invariants -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:19#kahua-invariants -->
 
 
 ## The Kahua Invariants — Foundation True Names
@@ -62,7 +62,7 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#signal-names -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:16#signal-names -->
 
 ## Signal and Protocol True Names
 
@@ -78,7 +78,7 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S~13#operational-language -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S:13#operational-language -->
 
 ## Operational Language True Names
 
@@ -90,7 +90,7 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S~13#loop-names -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=S:13#loop-names -->
 
 ## Loop and Phase True Names
 
@@ -107,7 +107,7 @@ The canonical registry is maintained in [LOCI.registry.toml](./LOCI.registry.tom
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#na-lako -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:16#na-lako -->
 
 ## Nā Lako — The Four Implements (Dual-Named)
 
@@ -135,7 +135,7 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#heritage-clusters -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:16#heritage-clusters -->
 
 ## Heritage Cluster True Names
 
@@ -147,7 +147,7 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=SP~9#candidates -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=SP:9#candidates -->
 
 ## Candidate True Names — Stubs Awaiting Grounding
 
@@ -163,7 +163,7 @@ PR circuit (robotized mode → liberated mode).
 
 ---
 
-<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS~16#naming-protocol -->
+<!-- ahu lar:///grammar.truename.holds/truename/?confidence=CS:16#naming-protocol -->
 
 ## True Naming Protocol
 

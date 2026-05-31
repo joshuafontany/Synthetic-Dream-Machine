@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.confidence.defines/confidence/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.confidence.defines/confidence/?confidence=CS:16&p=10 -->
 
 # Grammar: Confidence + Register Bands
 
@@ -29,7 +29,7 @@ grammar: true
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#loop-position -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#loop-position -->
 
 ## Loop Position
 
@@ -63,7 +63,7 @@ Confidence should not:
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#handoff -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#handoff -->
 
 ## Handoff
 
@@ -80,7 +80,7 @@ If those answers stay vague, the tag becomes decoration instead of signal.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#surface -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#surface -->
 
 ## Composable Surface
 
@@ -97,7 +97,7 @@ placement stays explicit and the source of the weight stays legible.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#conventions -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#conventions -->
 
 ## Conventions
 
@@ -116,7 +116,7 @@ claims upward into Canon bands.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#procedures -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -131,7 +131,7 @@ clarity.
 
 ---
 
-<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS~16#reading-test -->
+<!-- ahu lar:///grammar.confidence.defines/confidence/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 

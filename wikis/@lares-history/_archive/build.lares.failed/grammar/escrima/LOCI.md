@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.escrima.defines/escrima/?confidence=SP~9&p=10 -->
+<!-- ∞ → lar:///grammar.escrima.defines/escrima/?confidence=SP:9&p=10 -->
 
 # Grammar: Escrima
 

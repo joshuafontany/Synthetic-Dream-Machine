@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS:16&p=10 -->
 
 # Micro-trace — Architecture
 
@@ -9,7 +9,7 @@
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS~17#layer-split -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS:17#layer-split -->
 ## Layer Split Rule
 
 Parse boundaries and Micro-trace HUD events are **orthogonal**:
@@ -31,7 +31,7 @@ They may coexist in the same exchange. Neither substitutes for the other.
 <!-- → ? -->
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS~17#handoff-protocol -->
+<!-- ∞ → lar:///trace.micro.marks/micro-trace/orient/?confidence=CS:17#handoff-protocol -->
 ## Sub-agent and Coordinator Handoff Protocol
 
 ### Why URI pairs at sub-agent boundaries

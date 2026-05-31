@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9&p=10 -->
+<!-- ∞ → lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9&p=10 -->
 
 # Grammar: HA.KA.BA Semantic Addressing
 
@@ -30,7 +30,7 @@ grammar: true
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#loop-position -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#loop-position -->
 
 ## Loop Position
 
@@ -64,7 +64,7 @@ HA.KA.BA should not:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#handoff -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#handoff -->
 
 ## Handoff
 
@@ -83,7 +83,7 @@ If the reader cannot separate those four layers, the address still carries noise
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#surface -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#surface -->
 
 ## Composable Surface
 
@@ -105,7 +105,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#conventions -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#conventions -->
 
 ## Conventions
 
@@ -121,7 +121,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#procedures -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#procedures -->
 
 ## Procedures
 
@@ -136,7 +136,7 @@ That surface should remain reusable across:
 
 ---
 
-<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP~9#reading-test -->
+<!-- ahu lar:///grammar.hakaba.defines/hakaba/?confidence=SP:9#reading-test -->
 
 ## Reading Test
 

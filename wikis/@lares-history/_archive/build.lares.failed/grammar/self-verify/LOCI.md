@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16&p=10 -->
+<!-- ∞ → lar:///grammar.selfverify.harness/self-verify/?confidence=CS:16&p=10 -->
 
 # Self-Verify
 
@@ -20,7 +20,7 @@ dependencies: [detect-alignment, verification, parse-uri]
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#purpose -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:16#purpose -->
 
 ## Purpose
 
@@ -38,7 +38,7 @@ The self-verify harness holds one function: tell the operator exactly what to fi
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#tiers -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:16#tiers -->
 
 ## Tiers
 
@@ -51,7 +51,7 @@ The self-verify harness holds one function: tell the operator exactly what to fi
 
 ---
 
-<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS~16#usage -->
+<!-- ahu lar:///grammar.selfverify.harness/self-verify/?confidence=CS:16#usage -->
 
 ## Usage
 

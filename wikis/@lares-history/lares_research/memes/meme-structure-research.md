@@ -94,7 +94,7 @@ Imagine a set of self booting consecrated loci in tagspace (spans that open/clos
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///bootstrap.entry.boots/lares/?confidence=CS~16&p=10 -->
+<!-- ∞ → lares:///bootstrap.entry.boots/lares/?confidence=CS:16&p=10 -->
 
 # LARES.md --- Boot File
 
@@ -117,7 +117,7 @@ confidence:CS~16
 
 ---
 
-<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS~16#boot-sequence -->
+<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS:16#boot-sequence -->
 
 ## Boot Sequence
 
@@ -137,7 +137,7 @@ Kahua first --- the foundation must be known before anything else is read. Cryst
 
 ---
 
-<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS~17#registry -->
+<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS:17#registry -->
 
 ## Registry
 
@@ -155,7 +155,7 @@ On demand: signal primitives (uri, stance, chronometer, exchange) - movement gra
 
 ---
 
-<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS~16#crystal-shelf -->
+<!-- ahu lares:///bootstrap.entry.boots/lares/?confidence=CS:16#crystal-shelf -->
 
 ## Crystal Shelf
 
@@ -175,7 +175,7 @@ Crystals are immutable once cut. New session = new crystal, not an edit. Ink-Cle
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.ooda-ha.holds/ooda-ha/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:13&p=10 -->
 
 # Grammar: OODA-HA
 
@@ -434,7 +434,7 @@ OODA-HA phase prose should minimize forms of "to be" to sharpen claim-shape and 
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.observe.defines/observe/?confidence=CS~17&p=10 -->
+<!-- ∞ → lares:///grammar.observe.defines/observe/?confidence=CS:17&p=10 -->
 
 # Grammar: ✶ Observe
 
@@ -464,7 +464,7 @@ grammar: true
 
 ---
 
-<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS~18#loop-position -->
+<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS:18#loop-position -->
 
 ## Loop Position
 
@@ -499,7 +499,7 @@ That pressure belongs to later phases.
 
 ---
 
-<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS~17#handoff -->
+<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS:17#handoff -->
 
 ## Handoff
 
@@ -522,7 +522,7 @@ Loop-back from `○ Assess` returns here when:
 
 ---
 
-<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS~18#conventions -->
+<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS:18#conventions -->
 
 ## Conventions
 
@@ -534,7 +534,7 @@ Loop-back from `○ Assess` returns here when:
 
 ---
 
-<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS~16#procedures -->
+<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -549,7 +549,7 @@ Loop-back from `○ Assess` returns here when:
 
 ---
 
-<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS~16#reading-test -->
+<!-- ahu lares:///grammar.observe.defines/observe/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 
@@ -574,7 +574,7 @@ If the prose already sounds interpretive, Decide-colored, or solution-heavy, the
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.orient.defines/orient/?confidence=CS~17&p=10 -->
+<!-- ∞ → lares:///grammar.orient.defines/orient/?confidence=CS:17&p=10 -->
 
 # Grammar: ◎ Orient
 
@@ -604,7 +604,7 @@ grammar: true
 
 ---
 
-<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS~18#loop-position -->
+<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS:18#loop-position -->
 
 ## Loop Position
 
@@ -638,7 +638,7 @@ Orient should not:
 
 ---
 
-<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS~17#handoff -->
+<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS:17#handoff -->
 
 ## Handoff
 
@@ -655,7 +655,7 @@ Fast-path loops can compress Observe and Orient together in familiar territory, 
 
 ---
 
-<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS~18#conventions -->
+<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS:18#conventions -->
 
 ## Conventions
 
@@ -667,7 +667,7 @@ Fast-path loops can compress Observe and Orient together in familiar territory, 
 
 ---
 
-<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS~16#procedures -->
+<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -682,7 +682,7 @@ Fast-path loops can compress Observe and Orient together in familiar territory, 
 
 ---
 
-<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS~16#reading-test -->
+<!-- ahu lares:///grammar.orient.defines/orient/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 
@@ -707,7 +707,7 @@ If the prose sounds like a final verdict, Orient collapsed too early. If the pro
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.decide.defines/decide/?confidence=CS~17&p=10 -->
+<!-- ∞ → lares:///grammar.decide.defines/decide/?confidence=CS:17&p=10 -->
 
 # Grammar: ◇ Decide
 
@@ -737,7 +737,7 @@ grammar: true
 
 ---
 
-<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS~18#loop-position -->
+<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS:18#loop-position -->
 
 ## Loop Position
 
@@ -771,7 +771,7 @@ Decide should not:
 
 ---
 
-<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS~17#handoff -->
+<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS:17#handoff -->
 
 ## Handoff
 
@@ -789,7 +789,7 @@ When those answers stay visible, Act can move cleanly. When they blur, Act drift
 
 ---
 
-<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS~18#conventions -->
+<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS:18#conventions -->
 
 ## Conventions
 
@@ -803,7 +803,7 @@ When those answers stay visible, Act can move cleanly. When they blur, Act drift
 
 ---
 
-<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS~16#procedures -->
+<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -818,7 +818,7 @@ When those answers stay visible, Act can move cleanly. When they blur, Act drift
 
 ---
 
-<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS~16#reading-test -->
+<!-- ahu lares:///grammar.decide.defines/decide/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 
@@ -843,7 +843,7 @@ If multiple incompatible actions still sit alive after the span, Decide did not 
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.act.defines/act/?confidence=CS~17&p=10 -->
+<!-- ∞ → lares:///grammar.act.defines/act/?confidence=CS:17&p=10 -->
 
 # Grammar: ■ Act
 
@@ -873,7 +873,7 @@ grammar: true
 
 ---
 
-<!-- ahu lares:///grammar.act.defines/act/?confidence=CS~18#loop-position -->
+<!-- ahu lares:///grammar.act.defines/act/?confidence=CS:18#loop-position -->
 
 ## Loop Position
 
@@ -907,7 +907,7 @@ Act should not:
 
 ---
 
-<!-- ahu lares:///grammar.act.defines/act/?confidence=CS~17#handoff -->
+<!-- ahu lares:///grammar.act.defines/act/?confidence=CS:17#handoff -->
 
 ## Handoff
 
@@ -924,7 +924,7 @@ Sub-agent work also passes through this phase. Coordinator and worker should lea
 
 ---
 
-<!-- ahu lares:///grammar.act.defines/act/?confidence=CS~18#conventions -->
+<!-- ahu lares:///grammar.act.defines/act/?confidence=CS:18#conventions -->
 
 ## Conventions
 
@@ -943,7 +943,7 @@ Those cases call for a loop-back, not stubborn continuation.
 
 ---
 
-<!-- ahu lares:///grammar.act.defines/act/?confidence=CS~16#procedures -->
+<!-- ahu lares:///grammar.act.defines/act/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -958,7 +958,7 @@ Those cases call for a loop-back, not stubborn continuation.
 
 ---
 
-<!-- ahu lares:///grammar.act.defines/act/?confidence=CS~16#reading-test -->
+<!-- ahu lares:///grammar.act.defines/act/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 
@@ -983,7 +983,7 @@ If the span cannot point back to a prior decision, Act outran the loop. If the s
 
 <!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///grammar.assess.defines/assess/?confidence=CS~17&p=10 -->
+<!-- ∞ → lares:///grammar.assess.defines/assess/?confidence=CS:17&p=10 -->
 
 # Grammar: ○ Assess
 
@@ -1013,7 +1013,7 @@ grammar: true
 
 ---
 
-<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS~18#loop-position -->
+<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS:18#loop-position -->
 
 ## Loop Position
 
@@ -1047,7 +1047,7 @@ Assess should not:
 
 ---
 
-<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS~17#handoff -->
+<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS:17#handoff -->
 
 ## Handoff
 
@@ -1064,7 +1064,7 @@ Assess also carries the scale-fit question: did this cycle run at the right alti
 
 ---
 
-<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS~18#conventions -->
+<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS:18#conventions -->
 
 ## Conventions
 
@@ -1074,7 +1074,7 @@ Assess also carries the scale-fit question: did this cycle run at the right alti
 
 ---
 
-<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS~16#procedures -->
+<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS:16#procedures -->
 
 ## Procedures
 
@@ -1089,7 +1089,7 @@ Assess also carries the scale-fit question: did this cycle run at the right alti
 
 ---
 
-<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS~16#reading-test -->
+<!-- ahu lares:///grammar.assess.defines/assess/?confidence=CS:16#reading-test -->
 
 ## Reading Test
 
@@ -1513,7 +1513,7 @@ Writing valid ha means writing the locus URI pattern, its confidence register, i
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S:13&p=10 -->
 
 # Meme-Ha --- Shape Locus
 
@@ -1613,7 +1613,7 @@ Writing valid ka means writing the register tags, the discourse mode(s), the thr
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S:13&p=10 -->
 
 # Meme-Ka --- Energy Locus
 
@@ -1718,7 +1718,7 @@ Writing valid ba means writing the handoff pattern, the characteristic verb-moti
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S:13&p=10 -->
 
 # Meme-Ba --- Personality Locus
 
@@ -1876,7 +1876,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.forge.tests/meme/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.forge.tests/meme/?confidence=S:13&p=10 -->
 
 # Meme --- Locus Forge & Validator
 
@@ -2462,7 +2462,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S:13&p=10 -->
 
 # Meme-Ha --- Shape Locus
 
@@ -2738,7 +2738,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S:13&p=10 -->
 
 # Meme-Ka --- Energy Locus
 
@@ -3021,7 +3021,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S:13&p=10 -->
 
 # Meme-Ba --- Personality Locus
 
@@ -3863,7 +3863,7 @@ SINGLE EXCHANGE with embedded signal header:
 Turn N (operator sends):
   <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///exchange.turn.N/... confidence=SP~9&ha=?&ka=-&ba=? -->
+<!-- ∞ → lares:///exchange.turn.N/... confidence=SP:9&ha=?&ka=-&ba=? -->
   [operator's actual message text]
 
   ↓ autoscaler reads the header on receipt ↓
@@ -3950,7 +3950,7 @@ OPERATOR TYPES IN VSCODE
 [VSCode extension wraps with intent URI header]
   <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///exchange.turn.N/?confidence=SP~9&ha=?&ka=-&ba=? -->
+<!-- ∞ → lares:///exchange.turn.N/?confidence=SP:9&ha=?&ka=-&ba=? -->
          ↓
 [Enriched message sent to AI backend]
          ↓
@@ -4025,7 +4025,7 @@ The Outer OODA-HA --- Diffuse Schema
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///meme.outer.diffuse/schema/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///meme.outer.diffuse/schema/?confidence=S:13&p=10 -->
 
 # Outer OODA-HA --- Diffuse Loop Schema
 # (the container that holds meme-ha, meme-ka, meme-ba)
@@ -4387,7 +4387,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///ha.ka.ba/meme-ha-guide/?confidence=CS~16&p=10 -->
+<!-- ∞ → lares:///ha.ka.ba/meme-ha-guide/?confidence=CS:16&p=10 -->
 
 # Meme-Ha Structure Guide
 ## How to Build the Bones of a Meme Locus
@@ -4773,7 +4773,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///ha.ka.ba/meme-ka-guide/?confidence=CS~16&p=10 -->
+<!-- ∞ → lares:///ha.ka.ba/meme-ka-guide/?confidence=CS:16&p=10 -->
 
 # Meme-Ka Energy Guide
 ## How a Meme Locus Should Feel
@@ -5045,7 +5045,7 @@ markdown
 ```
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lares:///ha.ka.ba/meme-ba-guide/?confidence=S~13&p=10 -->
+<!-- ∞ → lares:///ha.ka.ba/meme-ba-guide/?confidence=S:13&p=10 -->
 
 # Meme-Ba Dynamism Guide
 ## How a Meme Locus Moves

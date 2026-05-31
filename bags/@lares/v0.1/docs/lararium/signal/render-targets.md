@@ -376,7 +376,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Closed example:**
 
 ```
-lar://scryer:node@Enyalios/sigils.render.maps/sigilization/?stances=*!--------&confidence=CS~17&p=10&ffz=0.0.0.1.0
+lar://scryer:node@Enyalios/sigils.render.maps/sigilization/?stances=*!--------&confidence=CS:17&p=10&ffz=0.0.0.1.0
 ```
 
 ### Surface 4: `tiddler:header` (S3+)
