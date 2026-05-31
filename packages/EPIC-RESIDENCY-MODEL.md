@@ -76,21 +76,32 @@ Sprint dependencies form a partial order, not a strict line. Sprints 2–4 form 
 
 ---
 
-### Sprint 2 — Data Model + ACTION Verb URI Shape
+### Sprint 2 — Data Model + ACTION Verb URI Shape ✅ DONE (2026-05-31)
 
 **Goal:** Land the ACTION verb surface as types + URI grammar in `@lararium/mesh`, with no behavior wired yet.
 
 **Stories:**
 
-- [ ] **S2.1** — Define `ACTION_VERBS` const array in `@lararium/mesh/src/residency-actions.ts`: `["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD"] as const`. Export `ActionVerb` type.
-- [ ] **S2.2** — Define `ResidencyAction` interface — verb, title-arg, from-bag, to-bag (optional), requested-by, listenable, request-id, change-id.
-- [ ] **S2.3** — Action URI grammar: design + document the canonical `lar:///` shape for action URIs (e.g. `lar:///@lararium/action/<VERB>/<request-id>`). Cross-reference [lar-uri.md](../bags/@lares/v0.1/api/pono/lar-uri.md).
-- [ ] **S2.4** — Parser + validator: `parseResidencyAction(uri)` returns `ResidencyAction | null`; rejects unknown verbs, malformed args.
-- [ ] **S2.5** — Verb-tiddler integration: extend `verb-tiddler.ts` (M.2 pipeline) to recognize ACTION verbs alongside the existing verb field.
-- [ ] **S2.6** — `change-id` propagation invariant (Anti-pattern #1 defense): every ACTION carries a stable change-id that survives copy/move between bags.
-- [ ] **S2.7** — Tests: URI roundtrip; verb-set boundary (no string outside ACTION_VERBS); change-id preservation across COPY.
+- [x] **S2.1** — `ACTION_VERBS` const + `ActionVerb` type landed in `packages/lararium-mesh/src/residency-actions.ts`. Subset tuples `TRANSFER_VERBS` (`ADD`/`COPY`/`MOVE`) and `BAG_VERBS` (`CLEAR`/`DROP`) added with matching type guards `isActionVerb` / `isTransferVerb` / `isBagVerb`.
+- [x] **S2.2** — `ResidencyAction` lands as a discriminated union with six variants (`AddAction`, `CopyAction`, `MoveAction`, `ClearAction`, `DropAction`, `LoadAction`). Per-verb required fields enforced at the type level.
+- [x] **S2.3** — URI grammar RESOLVED: ACTION verbs compose ON TOP of `verb-tiddler.ts` rather than living under a separate prefix. No new URI prefix invented. Documented in `residency-model.md` `#action-verb-surface` and in the source-file header comment. Cross-reference: [lar-uri.md](../bags/@lares/v0.1/api/pono/lar-uri.md).
+- [x] **S2.4** — `parseResidencyAction(inv: VerbInvocation): ResidencyAction | null` validates verb membership + per-verb required args. Returns null on any malformed input. `encodeResidencyArgs` provides the symmetric encode path.
+- [x] **S2.5** — Verb-tiddler integration extension: NOT REQUIRED. The existing `VerbInvocation` shape already carries `verb`, `args`, `from-uri`, `listenable` — the parser reads through. Composition rather than extension.
+- [x] **S2.6** — `change-id` propagation invariant: `newChangeId()` factory + `changeId` field required in `AddAction` / `CopyAction` / `MoveAction` / `LoadAction` at the type level. Validator rejects ADD/COPY/MOVE/LOAD missing change-id. Tests prove change-id survives `encodeResidencyArgs` → `JSON.stringify` → `JSON.parse` → `parseResidencyAction` roundtrip. Handler-layer preservation across bags lands in Sprint 5.
+- [x] **S2.7** — `packages/lararium-mesh/tests/residency-actions.test.ts`: **50 test cases** across verb-set membership, per-verb parse/encode roundtrips, missing-arg rejection (all required args, per verb), case-sensitivity (ALL-CAPS canon), retired-triple rejection (stage/commit/push return null), and the change-id preservation gate.
 
-**Exit criteria:** typecheck clean; new tests pass; the action surface exists as data, no behavior wired yet.
+**Exit criteria met:**
+- ✅ Workspace typecheck clean (6/6 packages).
+- ✅ `@lararium/mesh` tests: **146/146** passing (+50 new).
+- ✅ No regression across workspace: 296/297 passing total (1 pre-existing TW5-boot shim gap on `browser-m3-breathing`, unrelated to Sprint 2).
+- ✅ Action surface exists as data; zero behavior wired.
+
+**Receipts:**
+- New: `packages/lararium-mesh/src/residency-actions.ts` (~210 lines)
+- New: `packages/lararium-mesh/tests/residency-actions.test.ts` (~350 lines)
+- Edit: `packages/lararium-mesh/src/index.ts` (+1 export)
+- Edit: `bags/@lares/v0.1/api/lararium/residency-model.md` (#action-verb-surface URI grammar resolution)
+- Edit: `packages/EPIC-RESIDENCY-MODEL.md` (this sprint marker)
 
 ---
 

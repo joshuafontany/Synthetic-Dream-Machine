@@ -132,7 +132,7 @@ The Session Wiki = the coordinator `lar_playspace`. Its recipe includes the shar
 **Scale-3 — Nexus Island (node-to-node federation)**
 The NexusRegistryDoc syncs via Subduction (Beelay). A node-to-node pranala connection forms a causal island boundary — named, capability-gated, carrying its own durable offset and epoch (edge island shape from federated-causal-islands). Scale-3 causality remains always non-simultaneous.
 
-**Scale-4 — Commons (the Universe horizon)** [C~18 after law-of-5s]
+**Scale-4 — Commons (the Universe horizon)** `~:confidence[C],[18]` *(after law-of-5s)*
 Human endeavors are bounded at five scales. Scale-4 is the horizon beyond direct federation — the open web, public capability infrastructure, the set of all possible lararium nodes including those not yet reachable or known. No single node holds a snapshot of Scale-4 state; it is always non-simultaneously apprehended (Fuller-Zelenka principle extended to the boundary). The NexusRegistryDoc maps Scale-3 neighbors; Scale-4 is the Universe beyond the edge of the map. At Scale-4 the RE pattern applies in principle (public pranala edges, open corpus sharing, public Keyhive principal directories) but the mechanism becomes protocol-level rather than node-level — it cannot be directly implemented by any single node.
 
 Five scales, bounded sense of Universe, the fractal closes at the horizon.

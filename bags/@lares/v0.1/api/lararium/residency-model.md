@@ -87,20 +87,36 @@ Operator gestures over residency travel through a six-verb action surface, ALL C
 
 ALL-CAPS by deliberate convention — the action surface SHOULD read at a glance as a distinct register from prose, sigils, and tiddler-field names.
 
-**Concrete URI shape (design-pending; expected form):**
+**URI grammar — RESOLVED (Sprint 2, 2026-05-31):**
 
-The M.2 verb-as-tiddler-field pipeline already lands as the carrier. An action arrives as a verb-tiddler under `lar:///@admin/cmd/<request-id>` carrying fields:
+The M.2 verb-as-tiddler-field pipeline carries the action surface. ACTION verbs compose ON TOP of `verb-tiddler.ts` rather than living under a separate URI prefix — the action identity travels as the `verb` field value within an existing verb-tiddler. Three URI prefixes already exist:
 
 ```
-verb           = "ADD"            # the action verb
-title-arg      = "MyTiddler"      # Work-level identity
-from-arg       = "lar:///ha.ka.ba/@personal"
-to-arg         = "lar:///ha.ka.ba/@elyncia/lore"
+lar:///lararium.local.vm/verbs/<requestId>   # volatile local invocation (admin VM scratch)
+lar:///ha.ka.ba/@admin/signals/<requestId>   # Automerge-backed remote vessel signal
+lar:///ha.ka.ba/@admin/outcomes/<requestId>  # Automerge-backed durable outcome
+```
+
+An ACTION arrives as a `VerbInvocation` whose `verb` field belongs to `ACTION_VERBS`. Per-verb arguments ride inside the existing JSON `args` field — kebab-case on the wire, camelCase in the TypeScript discriminated union. Example ADD invocation tiddler fields:
+
+```
+verb           = "ADD"
+args           = '{"title":"MyTiddler","from-bag":"lar:///ha.ka.ba/@personal","to-bag":"lar:///ha.ka.ba/@elyncia","change-id":"c-stable-1"}'
+request-id     = <requestId>
 requested-by   = <PersonGroup-id>
-listenable     = "OnActivated"
+listenable     = "OnActivated"     # optional Verse event source
+from-uri       = "lar:///.../button-1"  # optional papalohe edge origin
 ```
 
-The `lar://@lararium/action/<VERB>` URI shape MAY also surface for in-wiki invocation (e.g. an action widget); both forms route through the same handler family. Final URI grammar lands in implementation sprint.
+Per-verb args:
+
+| Verb | Args |
+|---|---|
+| `ADD` / `COPY` / `MOVE` | `title`, `from-bag`, `to-bag`, `change-id` |
+| `CLEAR` / `DROP` | `bag` |
+| `LOAD` | `source-uri`, `to-bag`, `change-id` (mints fresh) |
+
+Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
 
 <<~/ahu >>
 
