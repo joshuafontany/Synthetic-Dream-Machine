@@ -42,7 +42,7 @@ module-type: startup
  */
 
 import type { TW5Instance, TW5Wiki } from "../types/tiddlywiki.js";
-import type { LarTiddlerChange } from "@lararium/mesh";
+import type { LarTiddlerChange, TW5TiddlerInputFieldsWithTitle } from "@lararium/mesh";
 import type { LaresTw5Extension } from "../types/lares-globals.js";
 
 // ---------------------------------------------------------------------------
@@ -88,9 +88,14 @@ function _scheduleFrame(): void {
 // Drain — one wiki.transact() per frame, regardless of bag count
 // ---------------------------------------------------------------------------
 
-function _toFields(change: LarTiddlerChange): Record<string, unknown> {
-  const fields = { ...change.record!.tiddler };
-  if (change.bag !== undefined) (fields as Record<string, unknown>)["bag"] = change.bag;
+function _toFields(change: LarTiddlerChange): TW5TiddlerInputFieldsWithTitle {
+  // CRDT records store the title as the doc key, not nested in `tiddler` —
+  // restore it from `change.title` so the wiki tiddler carries its identity.
+  const fields: TW5TiddlerInputFieldsWithTitle = {
+    ...change.record!.tiddler,
+    title: change.title,
+    ...(change.bag !== undefined ? { bag: change.bag } : {}),
+  };
   return fields;
 }
 

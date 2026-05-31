@@ -112,7 +112,7 @@ describe.skipIf(skipReason)(
           const tiddlers = (d as unknown as Record<string, unknown>)["tiddlers"] as
             Record<string, unknown>;
           // CRDT record format: { tiddler: { ...fields } } where title = key (not nested).
-          // extractTiddlerDeltaFromPatches reads rec["tiddler"] and prepends title: uri.
+          // The nalu engine restores title from change.title when applying to the wiki.
           tiddlers[DEVICE_URI] = {
             tiddler: {
               verb:       "promote",

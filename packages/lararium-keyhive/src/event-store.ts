@@ -7,7 +7,7 @@
  *
  * Phase D.2 ships an InMemoryEventStore — sufficient for the smoke test
  * and unit work. D.4 introduces a tiddler-backed AdminEventStore that
- * persists events under lar:///ha.ka.ba/@lararium/@admin/cap/<hash> in
+ * persists events under lar:///ha.ka.ba/@admin/cap/<hash> in
  * the admin doc.
  *
  * On daemon boot, the EventStore lists all stored events and replays them

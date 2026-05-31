@@ -88,13 +88,11 @@ export function makePromoteReactor(opts: PromoteHandlerOptions): VerbReactor {
       vm,
       bagScopedStore(opts.composite, actualFromBag),
       `promote-source:${ctx.invocation.requestId}`,
-      actualFromBag,
     );
     const targetAdaptor = new IslandAdaptor(
       vm,
       bagScopedStore(opts.composite, toBag),
       `promote-target:${ctx.invocation.requestId}`,
-      toBag,
     );
 
     for (const copy of result.copies) {

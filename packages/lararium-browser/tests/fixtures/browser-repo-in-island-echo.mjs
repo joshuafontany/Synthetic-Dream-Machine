@@ -61,9 +61,10 @@ self.addEventListener("message", (e) => {
       sharePolicy: async () => true,
     });
 
-    // Resolve docUrl: prefer bagBindings (new), fall back to deprecated msg.docUrl.
-    const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational");
-    const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
+    // Resolve docUrl from the WikiRecipe + resolver.
+    const resolver = msg.resolver ?? {};
+    const slug = msg.recipe?.wikiSlug;
+    const resolvedDocUrl = (slug && resolver[`lar:///ha.ka.ba/@${slug}`]) ?? null;
 
     if (resolvedDocUrl) {
       void repo.find(resolvedDocUrl).then((handle) => wireHandle(handle, true));

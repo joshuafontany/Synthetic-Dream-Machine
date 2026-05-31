@@ -23,8 +23,8 @@ export {
   selectActiveWikiSlug,
 } from "./active-wiki.js";
 export type { ActiveWikiSelectionSource, ActiveWikiLayerMount, ActiveWikiSlotPlan } from "./active-wiki.js";
-export type { CameraMount, CameraRegistration } from "./tw5-camera.js";
-export { mountCamera, startRenderLoop } from "./tw5-camera.js";
+export type { CameraMount } from "./tw5-camera.js";
+export { mountCamera } from "./tw5-camera.js";
 export { mountPanel, setPalette, setBootSplash } from "./tw5-browser-surface.js";
 export type {
   TW5Wiki,
@@ -35,8 +35,6 @@ export type {
 export { IslandAdaptor } from "./island-adaptor.js";
 export { buildIslandRecipe } from "./island-recipe.js";
 export type { BuildIslandRecipeInput, RecipeReadyBinding } from "./island-recipe.js";
-export { openVmIslandBridge } from "./vm-island-bridge.js";
-export type { VmIslandBridge, VmIslandBridgeOptions } from "./vm-island-bridge.js";
 export {
   openVmCarrierSyncSession,
 } from "./wiki-sync.js";
@@ -49,7 +47,6 @@ export type {
   VmCarrierSyncSessionOptions,
 } from "./wiki-sync.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
-export type { ProjectionStore } from "./memory-store.js";
 
 export { exportMemeText } from "./meme-write.js";
 export { promoteUris, planPromoteUris } from "./modules/lar-promote.js";

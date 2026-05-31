@@ -10,10 +10,10 @@
  * the archipelago forms the moment the URL crosses the boundary.
  *
  * Island Sovereignty Law §8:
- *   When a relational BagBinding carries a non-empty docUrl, the vessel wires
- *   MessageChannelNetworkAdapter(mainPort) before delivering manifest; the island
- *   calls repo.find(docUrl).whenReady() before declaring ea. CRDT sync carries
- *   content — the manifest carries hash only.
+ *   When a slot in `manifest.resolver` carries a non-empty AutomergeUrl, the vessel
+ *   wires MessageChannelNetworkAdapter(mainPort) before delivering manifest; the
+ *   island calls repo.find(docUrl).whenReady() before declaring ea. CRDT sync
+ *   carries content — the manifest carries hash only.
  *
  * Gate proof: this file (node, pure Repo) +
  *             browser-repo-in-island.test.ts test 2 (browser pool).

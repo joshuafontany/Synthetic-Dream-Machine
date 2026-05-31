@@ -23,9 +23,8 @@ import {
   type IslandMsg_TeardownAck,
   type IslandMsg_Ea,
   type IslandMsg_Event,
-  type BagBinding,
-  type BagMode,
   type IslandStorageConfig,
+  type WikiRecipe,
 } from "@lararium/mesh";
 
 // Path to the teardown-echo fixture (plain ESM — no ts-jest compilation needed).
@@ -63,48 +62,44 @@ function collectUntil(
   });
 }
 
-// ── BagBinding shape (unit) ────────────────────────────────────────────────
+// ── WikiRecipe + resolver shape (unit) ────────────────────────────────────
 
-describe("BagBinding — capability token shape", () => {
-  test("relational BagBinding carries docUrl capability token", () => {
-    const b: BagBinding = {
-      bagId: "lar:///bags/wiki/v0.1",
-      writable: true,
-      mode: "relational",
-      docUrl: "automerge:abc123",
-    };
-    expect(b.mode).toBe("relational");
-    if (b.mode === "relational") expect(b.docUrl).toBe("automerge:abc123");
-  });
-
-  test("mkManifest carries bagBindings in message", () => {
+describe("WikiRecipe + resolver — manifest payload shape", () => {
+  test("mkManifest carries recipe + resolver in message", () => {
     const { port2: syncPort } = new MessageChannel();
-    const bindings: readonly BagBinding[] = [
-      { bagId: "lar:///bags/wiki/v0.1",  writable: true,  mode: "relational", docUrl: "automerge:xyz" },
-      { bagId: "lar:///bags/lares/v0.1", writable: false, mode: "relational", docUrl: "automerge:abc" },
-    ];
+    const recipe: WikiRecipe = {
+      wikiSlug: "test",
+      canonBags: ["lar:///ha.ka.ba/@sdm"],
+    };
+    const resolver = {
+      "lar:///ha.ka.ba/@test":     "automerge:xyz",
+      "lar:///ha.ka.ba/@lararium": "automerge:abc",
+      "lar:///ha.ka.ba/@sdm":      "automerge:def",
+    };
     const msg = mkManifest(
       "lar:///test",
       syncPort as unknown as globalThis.MessagePort,
-      null,
-      { bagBindings: bindings },
+      recipe,
+      resolver,
     );
     syncPort.close();
-    expect(msg.bagBindings).toHaveLength(2);
-    expect(msg.bagBindings?.[0]?.mode).toBe("relational");
-    expect(msg.bagBindings?.[1]?.mode).toBe("relational");
+    expect(msg.recipe.wikiSlug).toBe("test");
+    expect(msg.recipe.canonBags).toHaveLength(1);
+    expect(msg.resolver["lar:///ha.ka.ba/@test"]).toBe("automerge:xyz");
     expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 
-  test("mkManifest with no opts produces valid manifest (cold boot)", () => {
+  test("mkManifest with minimal recipe produces valid manifest (cold boot)", () => {
     const { port2: syncPort } = new MessageChannel();
     const msg = mkManifest(
       "lar:///test-cold",
       syncPort as unknown as globalThis.MessagePort,
+      { wikiSlug: "cold" },
+      {},
     );
     syncPort.close();
-    expect(msg.bagBindings).toBeUndefined();
-    expect(msg.docUrl).toBeUndefined();
+    expect(msg.recipe.wikiSlug).toBe("cold");
+    expect(Object.keys(msg.resolver)).toHaveLength(0);
     expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 });
@@ -135,6 +130,8 @@ describe("IslandStorageConfig — island-owned storage protocol", () => {
     const msg = mkManifest(
       "lar:///test-storage",
       syncPort as unknown as globalThis.MessagePort,
+      { wikiSlug: "test-storage" },
+      {},
       null,
       { storage },
     );
@@ -184,13 +181,13 @@ describe("GP-1 — schema_version enforcement", () => {
 
   test("all three MainToisland types pass isVesselToIslandMsg", () => {
     const { port2: _p } = new MessageChannel();
-    expect(isVesselToIslandMsg(mkManifest("lar:///test", new Uint8Array(0), _p as unknown as globalThis.MessagePort))).toBe(true);
+    expect(isVesselToIslandMsg(mkManifest("lar:///test", _p as unknown as globalThis.MessagePort, { wikiSlug: "test" }, {}))).toBe(true);
     _p.close();
     expect(isVesselToIslandMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
     expect(isVesselToIslandMsg(mkTeardown())).toBe(true);
   });
 
-  test("all five islandToMain types pass isIslandToVesselMsg", () => {
+  test("all four islandToMain types pass isIslandToVesselMsg", () => {
     const event: IslandMsg_Event = {
       schema_version: 1,
       type: "event",
@@ -201,7 +198,6 @@ describe("GP-1 — schema_version enforcement", () => {
     expect(isIslandToVesselMsg(event)).toBe(true);
     expect(isIslandToVesselMsg({ schema_version: 1, type: "teardown:ack" })).toBe(true);
     expect(isIslandToVesselMsg({ schema_version: 1, type: "ea", wikiUri: "lar:///test" })).toBe(true);
-    expect(isIslandToVesselMsg({ schema_version: 1, type: "frame:ack", wikiUri: "lar:///test", frameId: "x" })).toBe(true);
     expect(isIslandToVesselMsg({ schema_version: 1, type: "fault", wikiUri: "lar:///test", error: "boom" })).toBe(true);
   });
 });
@@ -264,7 +260,10 @@ describe("GP-5 — teardown handshake (integration)", () => {
     );
 
     const { port2: syncPort } = new MessageChannel();
-    worker.postMessage(mkManifest(wikiUri, new Uint8Array(0), syncPort as unknown as globalThis.MessagePort), [syncPort]);
+    worker.postMessage(
+      mkManifest(wikiUri, syncPort as unknown as globalThis.MessagePort, { wikiSlug: "test" }, {}),
+      [syncPort],
+    );
     const msgs = await msgsPromise;
 
     const ack = msgs.find((m) => (m as IslandMsg_Ea).type === "ea") as IslandMsg_Ea | undefined;

@@ -5,32 +5,24 @@
  * gen_island pair. sovereign-island-model.ts owns the lifecycle plumbing;
  * behaviors own what distinguishes one island type from another.
  *
- * ## Wiki island — null behavior
- *   Read-dominant: CRDT bags flow in, TW5 session writes land in scratch.
- *   No VerbDispatcher, no relay protocol. writeBagId = BAG_IDS.scratch.
+ * Under the one-recipe model, write routing happens via the in-wiki cascade
+ * (`lar:///ha.ka.ba/@lararium/config/bag-paths`) — behaviors no longer carry
+ * a writeBagId.
  *
- * ## Wiki island with disk projection — extends null behavior
- *   Starts a LarDiskProjector inside the island, subscribing to TW5 wiki
- *   change events directly. renderFn calls exportMemeText(ctx.tw5, uri).
- *   Receives diskMirrors from manifest (serializable BagMirrorConfig).
+ * ## Wiki island — disk projection + wiki-scope verb dispatch
+ *   onEa     — start LarDiskProjector (if diskMirrors present) + build VerbTable
+ *   onSignal — handle wiki:place-verb inline dispatch
+ *   onDemote — stop projector, clear registry
  *
- * ## Wiki island with dispatch — handles wiki:place-verb messages
- *   No kumu device surface (that belongs to admin island). Handles explicit
- *   wiki-scope verbs placed by the vessel. Direct inline dispatch (no
- *   VerbDispatcher subscription) → wiki:verb-result posted back.
- *   Cap verification: stubbed (verb arrived from vessel = pre-authorized).
- *
- * ## Admin island — dispatch behavior
+ * ## Admin island — dispatch behavior (lives in @lararium/tw5/admin-behavior)
  *   Owns the kumu device / Reaction Engine surface (TW5 wiki change events).
  *   VerbDispatcher subscribes to TW5 wiki events; wiki-scope verbs relay to
  *   vessel via AdminMsg_DelegateVerb / AdminMsg_VerbResult.
- *   writeBagId = ADMIN_BAG_ID (CRDT write-back, persisted).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/island-behaviors
  */
 
 import {
-  BAG_IDS,
   mkWikiVerbResult,
   type BatchMode,
   type WikiMsg_PlaceVerb,
@@ -57,8 +49,6 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
   let _registry: VerbTable | null = null;
 
   return {
-    writeBagId: BAG_IDS.scratch,
-
     onEa(ctx: IslandContext) {
       // Disk projection
       const mirrorDefs = manifest.diskMirrors;

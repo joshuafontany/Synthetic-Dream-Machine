@@ -23,7 +23,7 @@ import {
   ADMIN_BAG_ID, CompositeStore, AutomergeDocStore, emptyLarDoc,
   mkManifest, mkAdminPlaceVerb, mkAdminVerbResult,
   isIslandToVesselMsg,
-  type BagBinding, type LarDoc, type CapabilityVerifier,
+  type LarDoc, type CapabilityVerifier, type WikiRecipe,
 } from "@lararium/mesh";
 import type { AdminMsg_DelegateVerb, IslandMsg_Ea } from "@lararium/mesh";
 import { runLocalVerb, VerbTable } from "@lararium/tw5";
@@ -36,8 +36,10 @@ export interface BrowserAdminVmOptions {
   adminUrl:         string;
   /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
   coreHash:         string | null;
-  /** Ordered bag capability tokens for the admin island's full recipe. */
-  bagBindings:      readonly BagBinding[];
+  /** Canonical one-recipe model for the admin island. */
+  recipe:           WikiRecipe;
+  /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
+  resolver:         Readonly<Record<string, string | null>>;
   /** URL of the compiled browser admin island Worker script. */
   workerScriptUrl:  URL;
 }
@@ -81,7 +83,7 @@ const HANDSHAKE_TIMEOUT_MS = 15_000;
 export async function openBrowserAdminVm(
   opts: BrowserAdminVmOptions,
 ): Promise<BrowserAdminVmResult> {
-  const { repo, adminUrl, coreHash, bagBindings, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, recipe, resolver, workerScriptUrl } = opts;
 
   let _registry: VerbTable | null = null;
   let _verifier: CapabilityVerifier | null = null;
@@ -178,7 +180,7 @@ export async function openBrowserAdminVm(
   });
 
   // ── Deliver manifest ──────────────────────────────────────────────────────
-  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, coreHash, { bagBindings });
+  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, resolver, coreHash);
   worker.postMessage(manifestMsg, [syncPort]);
 
   return {

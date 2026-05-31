@@ -71,7 +71,7 @@ describe("browser worker lifecycle — GP-5 contract", () => {
 
     // syncPort: browser MessageChannel is available globally in dedicated islands.
     const { port1: _main, port2: syncPort } = new MessageChannel();
-    worker.postMessage(mkManifest(wikiUri, syncPort), [syncPort]);
+    worker.postMessage(mkManifest(wikiUri, syncPort, { wikiSlug: "test-wiki" }, {}), [syncPort]);
     _main.close();
     const msgs = await msgsPromise;
 

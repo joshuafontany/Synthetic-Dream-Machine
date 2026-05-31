@@ -42,7 +42,8 @@ import {
   emptyLarDoc, mutableLarRecord, tiddlerText,
   LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  corpusLarUri, wikiLarUri, wikiDraftLarUri, BAG_IDS,
+  corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
+  wikiLarUri, wikiDraftLarUri, BAG_IDS, TEMP_BAG,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
@@ -354,18 +355,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const coreHash = coreBlobEntry.sha256 ?? null;
 
   // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
-  // TW5 VM (full recipe: @lararium + @lares + @admin) + Repo + VerbDispatcher.
+  // TW5 VM (recipe: @temp + @draft + @admin + @lares + @lararium) + Repo + VerbDispatcher.
   // Vessel retains adminHandle (keyhive gates) + composite (cap-event writes).
-  // bagBindings deliver capability tokens for the admin island's full recipe.
+  // The resolver delivers AutomergeUrl capability tokens for each CRDT slot.
   const adminVm = await openAdminVm({
     repo,
     adminUrl,
     coreHash,
-    bagBindings: [
-      { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
-      ...(laresHandle ? [{ bagId: BAG_IDS.lares, writable: false, mode: "relational" as const, docUrl: laresHandle.url }] : []),
-      { bagId: ADMIN_BAG_ID,     writable: true,  mode: "relational", docUrl: adminUrl },
-    ],
+    resolver: {
+      "lar:///ha.ka.ba/@admin":    adminUrl,
+      [BAG_IDS.lararium]:          islandHandle.url,
+      ...(laresHandle ? { [BAG_IDS.lares]: laresHandle.url } : {}),
+    },
     storageDir,
   });
 
@@ -621,15 +622,15 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     adminVm.adminHandle.url,
   );
 
-  // ── 3c. Corpus docs — one bag per corpus child-doc ───────────────────────
-  // Isomorphic oracle path: read from LarDoc.tiddlers keyed by corpusLarUri(slug).
-  // corpusLarUri(slug) = "lar:///ha.ka.ba/@catalog/@{slug}" (pos-2 child-doc slot).
-  // catalog.corpora Record is a legacy optimization index only; tiddlers oracle authoritative.
-  const CORPUS_PREFIX = "lar:///ha.ka.ba/@catalog/@";
+  // ── 3c. Corpus docs — one top-level bag per corpus ───────────────────────
+  // Each corpus is a first-class bag at child[1] (e.g. lar:///ha.ka.ba/@elyncia).
+  // The catalog tracks corpora as registry entries at
+  // lar:///ha.ka.ba/@catalog/corpus/<slug> whose `text` field carries the
+  // corpus bag's AutomergeUrl. Discovery walks the registry.
   const corpusEntries = Object.entries(catalog?.tiddlers ?? {})
-    .filter(([uri]) => uri.startsWith(CORPUS_PREFIX))
+    .filter(([uri]) => uri.startsWith(CATALOG_CORPUS_PREFIX))
     .map(([uri, tiddler]) => ({
-      id: uri.slice(CORPUS_PREFIX.length),
+      id: uri.slice(CATALOG_CORPUS_PREFIX.length),
       docUrl: tiddlerText(tiddler),
     }))
     .filter((e): e is { id: string; docUrl: string } => Boolean(e.docUrl));
@@ -641,8 +642,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     const bagId = corpusBagId(entry.id);
     composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
 
-    // Self-describing: corpus doc holds its own lar: URI + automerge URL as a tiddler.
-    // Any vessel that opens the doc can discover its canonical lar: address without a catalog lookup.
+    // Self-describing: corpus doc holds its own canonical bag URI as a tiddler
+    // whose `text` is the AutomergeUrl. Any vessel that opens the doc can read
+    // its canonical lar: address without a catalog lookup.
     const corpusUri = corpusLarUri(entry.id);
     const existingCorpusSelfRef = tiddlerText(handle.doc()?.tiddlers?.[corpusUri]);
     if (existingCorpusSelfRef !== handle.url) {
@@ -651,12 +653,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       });
     }
 
-    // Zelenka: keep tiddler store current so any vessel can enumerate corpora
-    // without walking the corpora Record — same pattern as LarDoc oracle.
-    const existingText = tiddlerText(catalogHandle.doc()?.tiddlers?.[corpusUri]);
+    // Catalog registry entry — points from the catalog at the corpus bag's
+    // AutomergeUrl. Registry pattern: catalog catalogs; it does not host.
+    const registryUri = catalogCorpusEntryUri(entry.id);
+    const existingText = tiddlerText(catalogHandle.doc()?.tiddlers?.[registryUri]);
     if (existingText !== entry.docUrl) {
       catalogHandle.change((doc) => {
-        doc.tiddlers[corpusUri] = mutableLarRecord(corpusUri, { text: entry.docUrl }, "lararium-seed");
+        doc.tiddlers[registryUri] = mutableLarRecord(registryUri, { text: entry.docUrl }, "lararium-seed");
       });
     }
   }));
@@ -704,24 +707,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const draftBagId = activeWikiPlan.draftBagId;
   const draftStore = new AutomergeDocStore(draftHandle, draftBagId);
 
-  // Scratch layer — local-VM-only MemoryTiddlerStore. Receives session writes
-  // that should never sync or persist: job staging, TW5 temp tiddlers.
-  // defaultWritable:true so unbagged TW5 saves land here, not in the draft CRDT.
-  // Aligns with island sub-surface recipe law (sovereign-island-model.ts).
+  // @temp layer — local-VM-only MemoryTiddlerStore. Receives $:/temp/* and
+  // any volatile session writes. defaultWritable:true so unbagged TW5 saves
+  // land here, not in the draft CRDT. Top of cascade per WikiRecipe law.
   composite.addLayer({
-    bagId:           BAG_IDS.scratch,
+    bagId:           TEMP_BAG,
     store:           new MemoryTiddlerStore(),
     writable:        true,
     defaultWritable: true,
-  });
-
-  // Projection layer — $:/state/*, $:/HistoryList, $:/StoryList.
-  // Never synced or persisted. defaultWritable:false — unbagged saves go to scratch.
-  composite.addLayer({
-    bagId:           BAG_IDS.projection,
-    store:           new MemoryTiddlerStore(),
-    writable:        true,
-    defaultWritable: false,
   });
   emit("draft-ready");
 

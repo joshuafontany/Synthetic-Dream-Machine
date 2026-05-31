@@ -1,81 +1,112 @@
 /**
- * island-recipe — one recipe model for sovereign islands.
+ * island-recipe — one-model assembly for sovereign islands.
  *
- * Canonical assembly order:
- *   1) CRDT relational bags from manifest bagBindings
- *   2) scratch MemoryTiddlerStore (default writable)
- *   3) projection MemoryTiddlerStore (non-default writable)
- *   4) IslandAdaptor projection
- *   5) initial replay + sync complete signals per CRDT bag
+ * Canonical assembly:
+ *   1) `expandRecipe(recipe)` → ordered slot URIs (top of array = highest priority)
+ *   2) addLayer for each slot in cascade order (bottom-up): @lararium first, @temp last
+ *   3) @temp slot uses a MemoryTiddlerStore; all other slots use AutomergeDocStore
+ *   4) IslandAdaptor projection registers
+ *   5) initial replay + sync complete + synchronous flushNalu so the wiki carries
+ *      its seed state before behavior.onEa runs
  *
  * Node and browser sovereign workers both call this helper so recipe behavior
- * stays aligned as one model.
+ * stays one shape across platforms.
  */
 
 import {
   CompositeStore,
   AutomergeDocStore,
-  BAG_IDS,
+  expandRecipe,
+  wikiBagUri,
+  TEMP_BAG,
   type LarDoc,
   type DocHandle,
+  type WikiRecipe,
+  type SlotUri,
 } from "@lararium/mesh";
 import { IslandAdaptor } from "./island-adaptor.js";
 import { MemoryTiddlerStore } from "./memory-store.js";
 import type { TW5Engine } from "./tw5-vm.js";
 
 export interface RecipeReadyBinding {
-  bagId: string;
+  /** Slot URI from the expanded recipe. */
+  slot: SlotUri;
   handle: DocHandle<LarDoc>;
-  writable: boolean;
 }
 
 export interface BuildIslandRecipeInput {
   tw5: TW5Engine;
   composite: CompositeStore;
-  writeBagId: string;
+  recipe: WikiRecipe;
+  /** Resolved CRDT handles keyed by slot URI. @temp has no entry. */
   ready: readonly RecipeReadyBinding[];
 }
 
 /**
- * Build the sovereign island recipe and return the adaptor plus CRDT stores.
+ * Build the sovereign island recipe and return the adaptor.
+ *
+ * Cascade layering: walks `expandRecipe()` in reverse so the lowest-priority
+ * slot (@lararium) registers first via `addLayer`. CompositeStore's "first wins"
+ * read order matches the slot array's top-first orientation.
  */
 export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   adaptor: IslandAdaptor;
-  stores: Array<{ bagId: string; store: AutomergeDocStore }>;
+  stores: Array<{ slot: SlotUri; store: AutomergeDocStore | MemoryTiddlerStore }>;
 } {
-  const { tw5, composite, writeBagId, ready } = input;
+  const { tw5, composite, recipe, ready } = input;
 
-  const stores: Array<{ bagId: string; store: AutomergeDocStore }> = [];
-  for (const { bagId, handle, writable } of ready) {
-    const store = new AutomergeDocStore(handle, bagId);
-    composite.addLayer({ bagId, store, writable, defaultWritable: false });
-    stores.push({ bagId, store });
+  const handleBySlot = new Map(ready.map((r) => [r.slot, r.handle]));
+  const slots        = expandRecipe(recipe);
+  const stores: Array<{ slot: SlotUri; store: AutomergeDocStore | MemoryTiddlerStore }> = [];
+
+  // Bottom-up addLayer order. Slot at index slots.length-1 (@lararium) lands first.
+  let tempStore: MemoryTiddlerStore | null = null;
+  for (let i = slots.length - 1; i >= 0; i--) {
+    const slot = slots[i]!;
+    if (slot === TEMP_BAG) {
+      tempStore = new MemoryTiddlerStore();
+      composite.addLayer({ bagId: slot, store: tempStore, writable: true, defaultWritable: true });
+      stores.push({ slot, store: tempStore });
+      continue;
+    }
+    const handle = handleBySlot.get(slot);
+    if (!handle) continue; // CRDT slot not provided — skip (cold or unmapped)
+    const store = new AutomergeDocStore(handle, slot);
+    // All CRDT slots accept writes; the in-wiki bag-paths cascade decides routing
+    // (lar:///ha.ka.ba/@lararium/config/bag-paths). Ceremony writes pass an explicit `bag` field
+    // to override the cascade and write to canonical slots.
+    composite.addLayer({ bagId: slot, store, writable: true, defaultWritable: false });
+    stores.push({ slot, store });
   }
 
-  composite.addLayer({
-    bagId: BAG_IDS.scratch,
-    store: new MemoryTiddlerStore(),
-    writable: true,
-    defaultWritable: true,
-  });
-  composite.addLayer({
-    bagId: BAG_IDS.projection,
-    store: new MemoryTiddlerStore(),
-    writable: true,
-    defaultWritable: false,
-  });
+  // Per-wiki cascade reference — the default `lar:///ha.ka.ba/@lararium/config/bag-paths`
+  // reads this value via `{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}` to
+  // resolve `lar:` writes to the active wiki's bag. Volatile (lives in @temp),
+  // set once at boot, shadows any @lararium fallback by cascade priority.
+  if (tempStore) {
+    void tempStore.put(
+      {
+        tiddler: {
+          title: "lar:///ha.ka.ba/@lararium/config/current-wiki-bag",
+          text:  wikiBagUri(recipe.wikiSlug),
+        },
+      },
+      { kind: "canon-hydrate", receipt: "recipe-boot" },
+    );
+  }
 
-  const adaptor = new IslandAdaptor(tw5, composite, writeBagId);
+  const adaptor = new IslandAdaptor(tw5, composite, recipe.wikiSlug);
   composite.addProjection(adaptor);
 
+  // Drive existing CRDT state through the projection bus → adaptor → nalu engine.
   for (const { store } of stores) {
-    store.emitInitialReplay();
-    store.markSyncComplete();
+    if (store instanceof AutomergeDocStore) {
+      store.emitInitialReplay();
+      store.markSyncComplete();
+    }
   }
 
-  // Drain the initial replay synchronously so the wiki carries its seed state
-  // before behavior.onEa runs. Live patches after this point land on the
-  // frame-aligned drain owned by the nalu engine.
+  // Synchronously drain so the wiki carries its seed before behavior.onEa runs.
   const lares = (tw5.$tw as { lares?: { flushNalu?: (budget?: number) => void } }).lares;
   lares?.flushNalu?.(Number.MAX_SAFE_INTEGER);
 

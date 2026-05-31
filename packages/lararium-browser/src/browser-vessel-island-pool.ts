@@ -128,9 +128,13 @@ export class BrowserVesselIslandPool {
     // and WASM has finished loading before transferring the syncPort.
     await _awaitMsg<IslandMsg_Ready>(worker, "ready");
 
-    const manifestMsg = mkManifest(id, syncPort, params.coreHash, {
-      bagBindings: params.bagBindings,
-    });
+    const manifestMsg = mkManifest(
+      id,
+      syncPort,
+      params.recipe,
+      params.resolver,
+      params.coreHash,
+    );
     worker.postMessage(manifestMsg, [syncPort]);
 
     // Wire mainPort to vessel Repo AFTER transferring syncPort.

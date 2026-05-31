@@ -65,8 +65,9 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     });
 
     await pool.mountWiki(islandId, {
-      coreHash:   null,
-      bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: "" }],
+      coreHash: null,
+      recipe: { wikiSlug: "test" },
+      resolver: {},
     });
     expect(pool.has(islandId)).toBe(true);
 
@@ -92,8 +93,9 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     });
 
     await pool.mountWiki(islandId, {
-      coreHash:    null,
-      bagBindings: [{ bagId: "@test", writable: true, mode: "relational", docUrl: docHandle.url }],
+      coreHash: null,
+      recipe: { wikiSlug: "test" },
+      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
     });
     expect(pool.has(islandId)).toBe(true);
 

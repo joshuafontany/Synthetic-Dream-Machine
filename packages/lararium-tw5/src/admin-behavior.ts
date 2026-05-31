@@ -17,7 +17,6 @@
  */
 
 import {
-  ADMIN_BAG_ID,
   mkAdminDelegateVerb,
   type AdminMsg_PlaceVerb,
   type AdminMsg_VerbResult,
@@ -52,8 +51,6 @@ export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior
   }
 
   return {
-    writeBagId: ADMIN_BAG_ID,
-
     onEa({ tw5, composite, post }: IslandContext) {
       const registry = new VerbTable();
       _dispatcher = new VerbDispatcher({

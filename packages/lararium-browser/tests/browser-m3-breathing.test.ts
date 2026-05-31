@@ -150,10 +150,11 @@ describe("browser M.3 breathing gate — promote-button nalu end-to-end in Chrom
         // seeded the wiki doc, declared sovereignty via self.postMessage.
         await pool.mountWiki(WIKI_ID, {
           coreHash,
-          bagBindings: [
-            { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: laraiumHandle.url },
-            { bagId: WIKI_ID,          writable: true,  mode: "relational", docUrl: (wikiHandle as unknown as { url: string }).url },
-          ],
+          recipe: { wikiSlug: "test" },
+          resolver: {
+            [BAG_IDS.lararium]:          laraiumHandle.url,
+            "lar:///ha.ka.ba/@test":     (wikiHandle as unknown as { url: string }).url,
+          },
         });
 
         // ── Gate — verb event arrives at vessel boundary in Chromium ──

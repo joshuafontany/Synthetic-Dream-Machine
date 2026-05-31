@@ -30,9 +30,10 @@ import { MessageChannelNetworkAdapter }                 from "@automerge/automer
 import type { LarDoc }                                  from "@lararium/mesh";
 import {
   ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
+  LARARIUM_BAG, LARES_BAG,
   mkManifest, mkAdminPlaceVerb, mkAdminVerbResult,
   isIslandToVesselMsg,
-  type BagBinding,
+  type WikiRecipe,
 } from "@lararium/mesh";
 import { runLocalVerb }                                 from "@lararium/tw5";
 import type { VerbTable }                               from "@lararium/tw5";
@@ -51,8 +52,11 @@ export interface AdminVmOptions {
    * null = pre-CAS. The admin island reads bytes from the @lararium CRDT doc.
    */
   coreHash:          string | null;
-  /** Ordered bag capability tokens for the admin island's full recipe. */
-  bagBindings:       readonly BagBinding[];
+  /** AutomergeUrl resolver: slot URI → doc URL. Carries @lararium / @lares /
+   *  @admin (and any canon bags the operator mounts). */
+  resolver:          Readonly<Record<string, string | null>>;
+  /** Optional canon bag URIs for the admin recipe. Empty by default. */
+  canonBags?:        readonly string[];
   /** Optional storage dir for the admin island's NodeFS Repo. */
   storageDir?:       string;
   /** Override the admin island script URL (tests). */
@@ -93,7 +97,8 @@ export interface AdminVmResult {
 const HANDSHAKE_TIMEOUT_MS = 15_000;
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl, coreHash, bagBindings, storageDir, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, resolver, canonBags, storageDir, workerScriptUrl } = opts;
+  void adminUrl;
 
   // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
   let _delegationRegistry: VerbTable | null = null;
@@ -194,11 +199,18 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     ? { type: "nodefs" as const, dir: join(storageDir, "admin") }
     : undefined;
 
+  const recipe: WikiRecipe = {
+    wikiSlug: "admin",
+    ...(canonBags?.length ? { canonBags } : {}),
+  };
+  void LARARIUM_BAG; void LARES_BAG; // marker — caller's resolver must include these
   const manifestMsg = mkManifest(
     ADMIN_BAG_ID,
     syncPort as unknown as globalThis.MessagePort,
+    recipe,
+    resolver,
     coreHash,
-    { bagBindings, ...(storage ? { storage } : {}) },
+    storage ? { storage } : undefined,
   );
   worker.postMessage(manifestMsg, [syncPort as unknown as ArrayBuffer]);
 

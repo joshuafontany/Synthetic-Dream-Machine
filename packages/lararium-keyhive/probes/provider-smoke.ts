@@ -45,7 +45,7 @@ async function main() {
     return;
   }
 
-  const bag = "lar:///ha.ka.ba/@lararium/@admin";
+  const bag = "lar:///ha.ka.ba/@admin";
   const reg = await operator.registerBag(bag);
   console.log(`[smoke] operator registered bag ${bag} → docId ${reg.docId.slice(0, 24)}…`);
 

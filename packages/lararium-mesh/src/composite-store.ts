@@ -113,7 +113,7 @@ export class CompositeStore implements LarTiddlerStore {
     }
 
     // Emit synthetic "put" events for tiddlers already in the arriving layer
-    // so projections (IslandAdaptor, IslandAccumulator) see existing content.
+    // so projections (IslandAdaptor) see existing content.
     if (this.listeners.size > 0) {
       layer.store.listVisible().then((titles) => {
         for (const title of titles) {

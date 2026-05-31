@@ -70,11 +70,11 @@ describe("CompositeStore — layer management", () => {
     expect(store.hasBag(corpusId)).toBe(false);
   });
 
-  test("corpusBagId produces lar: URI at pos-2 child-doc slot", () => {
-    // M21 law: bag ID = full lar: URI of the owning Automerge doc.
-    // Corpus docs live at pos-2 under @catalog.
-    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/@catalog/@elyncia");
-    expect(corpusBagId("lares")).toBe("lar:///ha.ka.ba/@catalog/@lares");
+  test("corpusBagId produces a top-level @<slug> bag URI", () => {
+    // Bag-tag rule: every bag has exactly one canonical address at child[1].
+    // Each corpus is a first-class bag at lar:///ha.ka.ba/@<slug>.
+    expect(corpusBagId("elyncia")).toBe("lar:///ha.ka.ba/@elyncia");
+    expect(corpusBagId("sdm")).toBe("lar:///ha.ka.ba/@sdm");
   });
 });
 

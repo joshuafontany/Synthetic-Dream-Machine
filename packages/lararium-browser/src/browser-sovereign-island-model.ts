@@ -7,11 +7,16 @@
  *   - message I/O: self.postMessage / self.addEventListener
  *   - storage: IndexedDBStorageAdapter keyed by wikiUri — island owns its persistence
  *
- * ## Recipe law — sub-surface layers (same as Node model)
+ * ## Recipe law — slot expansion (same as Node model, top wins)
  *
- *   bagBindings (CRDT, recipe order)
- *   └── scratch MemoryTiddlerStore  (defaultWritable:true)          ← local VM only
- *   └── projection MemoryTiddlerStore (defaultWritable:false)       ← $:/state/*
+ *   lar:///ha.ka.ba/@temp        (volatile MemoryTiddlerStore per-island)
+ *   lar:///ha.ka.ba/@draft       (CRDT, drafts)
+ *   lar:///ha.ka.ba/@<wikiSlug>  (CRDT, wiki identity)
+ *   canon bags                   (CRDT, optional)
+ *   lar:///ha.ka.ba/@lares       (CRDT)
+ *   lar:///ha.ka.ba/@lararium    (CRDT)
+ *
+ *   Write routing happens via the in-wiki bag-paths cascade.
  *
  * ## VM Pool alignment
  *
@@ -30,12 +35,15 @@ import {
   CompositeStore,
   BAG_IDS,
   ENGINE_CORE_ID,
+  TEMP_BAG,
+  expandRecipe,
   mkFault,
   mkReady,
   isVesselToIslandMsg,
   mkTeardownAck,
   type LarDoc,
   type IslandMsg_Manifest,
+  type SlotUri,
 } from "@lararium/mesh";
 import {
   IslandKernel,
@@ -55,7 +63,6 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   let _writableHandleId: string | null                      = null;
   let _composite:        CompositeStore | null              = null;
   let _ctx:              IslandContext | null               = null;
-  let _tornDown                                             = false;
   let _activeWikiUri                                        = "";
 
   // Live CRDT patches flow through AutomergeDocStore.handle.on("change") →
@@ -110,21 +117,25 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
 
     _composite = new CompositeStore();
 
-    const bindings = msg.bagBindings ?? [];
-    const ready: Array<{ bagId: string; handle: DocHandle<LarDoc>; writable: boolean }> = [];
+    // Walk expandRecipe() and resolve each CRDT slot's doc handle via the
+    // manifest's resolver. @temp has no CRDT handle.
+    const slots = expandRecipe(msg.recipe);
+    const ready: Array<{ slot: SlotUri; handle: DocHandle<LarDoc> }> = [];
 
-    for (const binding of bindings) {
-      if (binding.mode !== "relational") continue;
+    for (const slot of slots) {
+      if (slot === TEMP_BAG) continue;
+      const docUrl = msg.resolver[slot];
+      if (!docUrl) continue;
       // allowableStates: doc arrives via syncPort after connect — not yet "ready" at find() time.
       const handle = await _repo.find<LarDoc>(
-        binding.docUrl as AutomergeUrl,
+        docUrl as AutomergeUrl,
         { allowableStates: ["ready", "unavailable"] },
       );
       await handle.whenReady();
-      _handles.set(binding.bagId, handle);
-      ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
-      if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
+      _handles.set(slot, handle);
+      ready.push({ slot, handle });
     }
+    void _writableHandleId; // reserved for future M-bags writable-rotation work
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     const laraiumHandle = _handles.get(BAG_IDS.lararium);
@@ -164,12 +175,13 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
     }
 
     const tw5 = handler.tw5()!;
-    // One recipe model: shared assembly for CRDT layers + scratch/projection
-    // + adaptor + initial replay/sync-complete handoff.
+    // One recipe model — buildIslandRecipe walks expandRecipe(msg.recipe),
+    // wires @temp + every resolved CRDT slot, registers the adaptor, drains
+    // initial replay synchronously through the in-wiki nalu engine.
     buildIslandRecipe({
       tw5,
       composite: _composite,
-      writeBagId: behavior.writeBagId,
+      recipe: msg.recipe,
       ready,
     });
 
@@ -182,7 +194,6 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   // ── Demote (OTP terminate) ────────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    _tornDown = true;
     if (_ctx) await behavior.onDemote(_ctx);
     handler.teardown();
 

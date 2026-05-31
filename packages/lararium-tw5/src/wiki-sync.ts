@@ -6,7 +6,6 @@ export interface VmCarrierSyncSessionOptions {
   readonly vm: TW5Engine;
   readonly store: LarTiddlerStore;
   readonly instanceId: string;
-  readonly targetBag: string;
 }
 
 export interface VmCarrierSyncInput {
@@ -30,7 +29,7 @@ export interface VmCarrierSyncSession {
 }
 
 export function openVmCarrierSyncSession(opts: VmCarrierSyncSessionOptions): VmCarrierSyncSession {
-  const adaptor = new IslandAdaptor(opts.vm, opts.store, opts.instanceId, opts.targetBag);
+  const adaptor = new IslandAdaptor(opts.vm, opts.store, opts.instanceId);
   adaptor.start();
   adaptor.onSyncComplete("automerge");
 

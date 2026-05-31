@@ -70,10 +70,31 @@ export const SESSIONS_DOC_URI   = stableLarUri("@sessions");
 
 // ── URI builders ──────────────────────────────────────────────────────────
 
-/** e.g. corpusLarUri("elyncia") → "lar:///ha.ka.ba/@catalog/@elyncia" */
+/**
+ * Canonical URI of a corpus bag.
+ *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/@elyncia"
+ *
+ * Every corpus is a first-class bag at child[1] under the bag-tag rule
+ * (see lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule).
+ */
 export function corpusLarUri(slug: string): string {
-  return stableLarUri(`@catalog/@${slug}`);
+  return stableLarUri(`@${slug}`);
 }
+
+/**
+ * Registry-entry URI inside @catalog that points at a corpus bag.
+ *   catalogCorpusEntryUri("elyncia") → "lar:///ha.ka.ba/@catalog/corpus/elyncia"
+ *
+ * The tiddler at this title lives in the @catalog bag and carries the
+ * corpus bag's AutomergeUrl as its `text` field. Registry pattern: catalog
+ * catalogs; it does not host.
+ */
+export function catalogCorpusEntryUri(slug: string): string {
+  return stableLarUri(`@catalog/corpus/${slug}`);
+}
+
+/** Prefix used to discover catalog corpus-registry entries. */
+export const CATALOG_CORPUS_PREFIX = stableLarUri("@catalog/corpus/");
 
 /** e.g. wikiLarUri("altar-fire") → "lar:///ha.ka.ba/@lararium/wikis/altar-fire" */
 export function wikiLarUri(slug: string): string {
@@ -90,7 +111,8 @@ export function wikiDraftLarUri(slug: string): string {
 export const ADMIN_WIKI_SLUG = "admin";
 export const ADMIN_WIKI_URI  = wikiLarUri(ADMIN_WIKI_SLUG);
 /** Admin doc sits at pos-2 under @lararium — distinct from the /wikis/admin leaf path. */
-export const ADMIN_BAG_ID    = stableLarUri("@lararium/@admin");
+/** Admin wiki bag id. Aligned to wikiBagUri("admin") under the one-recipe model. */
+export const ADMIN_BAG_ID    = stableLarUri("@admin");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
 
@@ -175,6 +197,13 @@ export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-caba
 // Six root docs (two planes) + in-memory leaves.
 // Bag ID = lar: URI of the owning Automerge doc.
 
+/**
+ * Vessel-wide system bag URIs. These exist once per vessel and serve all wikis.
+ *
+ * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, canon bags) live in
+ * `wiki-recipe.ts` — they are slot URIs in the same lar:///ha.ka.ba/@<name>
+ * namespace, resolved per-wiki via the manifest's `BagResolver`.
+ */
 export const BAG_IDS = {
   lararium:   LARARIUM_DOC_URI,
   catalog:    CATALOG_DOC_URI,
@@ -182,7 +211,4 @@ export const BAG_IDS = {
   identities: IDENTITIES_DOC_URI,
   groups:     CIRCLES_DOC_URI,
   sessions:   SESSIONS_DOC_URI,
-  draft:      "draft",
-  scratch:    "scratch",
-  projection: "projection",
 } as const;

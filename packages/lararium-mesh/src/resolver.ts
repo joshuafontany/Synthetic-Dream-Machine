@@ -184,17 +184,14 @@ export function resolveLarUri(uri: string): LarResolution {
       return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath, kind: "tuple-file", virtual: false };
     }
 
-    // lar:///ha.ka.ba/@{root-doc}[/@{child-doc}][/{path}] — named doc oracle URI.
+    // lar:///ha.ka.ba/@{bag}[/{path}] — bag-addressed URI.
     //
     // URI grammar law (pos 0-indexed after lar:///):
-    //   pos 1  @name  = root doc identity  (one of six reserved roots)
-    //   pos 2  @name  = child doc under root  e.g. @catalog/@elyncia corpus
-    //   pos 2+ plain  = leaf path under root  e.g. @lararium/wikis/altar-fire
-    //   pos 3+ always plain, never @-prefixed
+    //   pos 1  @name  = bag identity (one canonical address per bag)
+    //   pos 2+ plain  = tiddler / path inside the bag (never @-prefixed)
     //
     // Any @-prefixed segment at pos 1 that is not @lares or @lararium resolves
     // as virtual (doc identity, not a file path).
-    // @catalog/@{slug} also resolves as virtual (corpus child-doc identity).
     if (childPath[0]?.startsWith("@")) {
       return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
     }

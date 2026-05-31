@@ -2,19 +2,34 @@
  * MemoryTiddlerStore — in-memory LarTiddlerStore.
  *
  * Two roles:
- *   1. Tests and fixtures (original purpose). Used by host.test.ts,
- *      sync-adaptor.test.ts, and the browser host factory during
- *      development.
- *   2. **Production projection layer** (E.2 onward). Mounted as the
- *      top-priority composite layer with bagId = `BAG_IDS.projection`.
- *      Holds tiddlers whose `bag` field reads `"projection"` —
- *      typically TW5 runtime state (`$:/state/*`, `$:/HistoryList`,
- *      `$:/StoryList`) that the operator does NOT want synced or
- *      persisted. The store has no I/O, no Automerge backing, no wire
- *      surface; on daemon restart the projection layer comes up empty.
+ *   1. Tests and fixtures.
+ *   2. The `@temp` slot in every WikiRecipe — top of the cascade, volatile
+ *      per-island. No I/O, no Automerge backing, no wire surface; on island
+ *      restart the slot comes up empty.
+ *
+ * What belongs in @temp (device-vessel local, never crosses the boundary):
+ *   $:/temp/*           drafts mid-typing, alerts, HTTP request trackers
+ *   $:/temp/volatile/*  rAF tick markers, animation frames
+ *   $:/status/*         TW5 login/identity status flags (per-device)
+ *   $:/boot/*           boot-time config
+ *   $:/HistoryList      navigation back-stack
+ *   $:/state/popup/*    sub-second UI popup state
+ *   (catch-all) $:/*    anything else under TW5's system namespace
+ *
+ * What does NOT belong in @temp (operator's cross-device viewing state):
+ *   $:/StoryList         which tiddlers are open in the story river
+ *   $:/state/folded/*    fold/expand state per tiddler frame
+ *   $:/state/tab-*       selected tab per tiddler
+ *   $:/palette           operator's chosen color palette
+ *
+ * The above belong in a future `@personal` slot — a CRDT bag scoped to the
+ * operator's Keyhive PersonGroup (their authorised device cabal). See:
+ *   bags/@lares/v0.1/api/lararium/personal-slot-proposal.md
  *
  * Tombstoned titles disappear from listVisible() but remain readable via
  * get() when the record carries { deleted: true }.
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store
  */
 
 import type {
@@ -80,9 +95,3 @@ export class MemoryTiddlerStore implements LarTiddlerStore {
   }
 }
 
-/**
- * ProjectionStore — alias for MemoryTiddlerStore used as the BAG_IDS.projection
- * composite layer.  Holds TW5 runtime state ($:/state/*, $:/StoryList, etc.)
- * that never syncs or persists.  Comes up empty on every daemon restart.
- */
-export type ProjectionStore = MemoryTiddlerStore;

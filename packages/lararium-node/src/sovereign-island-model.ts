@@ -1,27 +1,30 @@
 /**
  * sovereign-island-model — Node.js sovereign island lifecycle kernel.
  *
- * Implements the OTP gen_island behavior pattern for sovereign causal islands:
- *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → drain → ea → demote
- *   - caller-supplied IslandBehavior: writeBagId + onEa / onSignal / onDemote
+ * Implements the OTP gen_island pattern for sovereign causal islands:
+ *   - generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → ea → demote
+ *   - caller-supplied IslandBehavior: onEa / onSignal / onDemote
  *
- * ## Recipe law — sub-surface layers
+ * ## Recipe law — one model across all wikis
  *
- * The model always appends three layers BELOW the caller's CRDT bags, idempotent:
+ *   Manifest carries `recipe: WikiRecipe + resolver: { slot → docUrl }`.
+ *   The worker walks `expandRecipe(recipe)` and resolves each CRDT slot's
+ *   doc handle, then `buildIslandRecipe()` lays the composite stack:
  *
- *   bagBindings (CRDT, recipe order)
- *   └── draft CRDT (if present in bindings as BAG_IDS.draft)       ← syncs to peers
- *   └── scratch MemoryTiddlerStore  (defaultWritable:true)          ← local VM only
- *   └── projection MemoryTiddlerStore (defaultWritable:false)       ← $:/state/*
+ *     @temp        (MemoryTiddlerStore, volatile)
+ *     @draft       (CRDT, high-churn drafts)
+ *     @<wikiSlug>  (CRDT, operator's edits)
+ *     canonBags[]  (CRDT, optional content libraries)
+ *     @lares       (CRDT, required personality)
+ *     @lararium    (CRDT, required system / engine core)
  *
- * `behavior.writeBagId` selects which bag IslandAdaptor routes TW5 outbound saves to:
- *   admin island → ADMIN_BAG_ID  (CRDT write-back, persisted)
- *   wiki island   → BAG_IDS.scratch  (local only, evaporates on teardown)
+ *   Write routing happens via the in-wiki cascade
+ *   (`lar:///ha.ka.ba/@lararium/config/bag-paths`), not by behavior config.
  *
  * ## VM Pool alignment
  *
  *   Node vessel: Admin island (sovereign island) + Pinned (PrimaryWiki in-process)
- *                + N hot islands (session wikis, LRU-evicted to cold)
+ *                + N hot islands (session wikis, LRU-evicted to cold).
  *   Every hot island runs via runSovereignWorker(behavior).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/sovereign-island-model
@@ -36,12 +39,15 @@ import {
   CompositeStore,
   BAG_IDS,
   ENGINE_CORE_ID,
+  TEMP_BAG,
+  expandRecipe,
   mkFault,
   isVesselToIslandMsg,
   mkTeardownAck,
   type LarDoc,
   type IslandMsg_Manifest,
   type IslandStorageConfig,
+  type SlotUri,
 } from "@lararium/mesh";
 import {
   IslandKernel,
@@ -121,20 +127,25 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
     _composite = new CompositeStore();
 
-    const bindings = msg.bagBindings ?? [];
-    const ready: Array<{ bagId: string; handle: DocHandle<LarDoc>; writable: boolean }> = [];
+    // Walk expandRecipe() and resolve each CRDT slot's doc handle via the
+    // manifest's resolver. @temp has no CRDT handle — buildIslandRecipe wires
+    // a MemoryTiddlerStore for it.
+    const slots = expandRecipe(msg.recipe);
+    const ready: Array<{ slot: SlotUri; handle: DocHandle<LarDoc> }> = [];
 
-    for (const binding of bindings) {
-      if (binding.mode !== "relational") continue;
+    for (const slot of slots) {
+      if (slot === TEMP_BAG) continue;
+      const docUrl = msg.resolver[slot];
+      if (!docUrl) continue;
       const handle = await _repo.find<LarDoc>(
-        binding.docUrl as AutomergeUrl,
+        docUrl as AutomergeUrl,
         { allowableStates: ["ready", "unavailable"] },
       );
       await handle.whenReady();
-      _handles.set(binding.bagId, handle);
-      ready.push({ bagId: binding.bagId, handle, writable: binding.writable });
-      if (binding.writable && _writableHandleId === null) _writableHandleId = binding.bagId;
+      _handles.set(slot, handle);
+      ready.push({ slot, handle });
     }
+    void _writableHandleId; // reserved for future M-bags writable-rotation work
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     const laraiumHandle = _handles.get(BAG_IDS.lararium);
@@ -173,12 +184,13 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
     }
 
     const tw5 = handler.tw5()!;
-    // One recipe model: shared assembly for CRDT layers + scratch/projection
-    // + adaptor + initial replay/sync-complete handoff.
+    // One recipe model — buildIslandRecipe walks expandRecipe(msg.recipe),
+    // wires @temp + every resolved CRDT slot, registers the adaptor, drains
+    // initial replay synchronously through the in-wiki nalu engine.
     buildIslandRecipe({
       tw5,
       composite: _composite,
-      writeBagId: behavior.writeBagId,
+      recipe: msg.recipe,
       ready,
     });
 

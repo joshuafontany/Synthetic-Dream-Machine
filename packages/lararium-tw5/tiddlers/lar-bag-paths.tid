@@ -1,0 +1,11 @@
+title: lar:///ha.ka.ba/@lararium/config/bag-paths
+tags: $:/tags/Global lar:///ha.ka.ba/tags/LarariumConfig
+type: text/vnd.tiddlywiki
+
+[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]
+[prefix[$:/status/]then[lar:///ha.ka.ba/@temp]]
+[prefix[$:/boot/]then[lar:///ha.ka.ba/@temp]]
+[prefix[$:/HistoryList]then[lar:///ha.ka.ba/@temp]]
+[prefix[$:/state/]then[lar:///ha.ka.ba/@temp]]
+[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]
+[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]

@@ -7,24 +7,24 @@
  *
  *   1. Every island boots a Repo-in-island via a transferred `syncPort` (MessagePort).
  *   2. The island derives tiddler state from its own CRDT doc — never from vessel oracle deltas.
- *   3. The island owns its timing. Browser: requestAnimationFrame (Chromium/Firefox) with
- *      setTimeout(16ms) fallback for Safari (no rAF in islands as of 2026). Node:
- *      setInterval(16ms).unref(). Tiddler deltas accumulate; the island drains at each
- *      frame boundary (or frame-equivalent tick), never on raw message receipt.
- *   4. `frame:ack` is a frame-completion signal: the island fires it after each rAF drain,
- *      signalling the causal island processed a frame. It is NOT a per-batch correlation ACK.
+ *   3. The island owns its timing. The in-wiki nalu engine drives frame-aligned drain:
+ *      browser `requestAnimationFrame` (with setTimeout(16ms) fallback for Safari),
+ *      node setTimeout(16ms). Tiddler deltas accumulate via $tw.lares.enqueueNalu;
+ *      one wiki.transact() per frame across all bags. No raw-message-receipt drains.
+ *   4. (retired) Frame-completion ACK signal — drain timing stays island-internal.
  *   5. Vessel oracle delta delivery is removed. CRDT sync via `syncPort` is the sole
  *      source of tiddler truth for causal islands.
- *   6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `bagBindings` (ordered
- *      bag capability tokens), and `coreHash` (content-address intent vector; null = pre-CAS).
- *      TW5 core bytes are NOT transferred in the manifest — islands read them from
- *      `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc after `handle.whenReady()`.
- *      Two vessels federating @lararium share the engine automatically via Automerge sync.
+ *   6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `recipe` (WikiRecipe
+ *      slot structure), `resolver` (slot URI → AutomergeUrl map), and `coreHash`
+ *      (content-address intent vector; null = pre-CAS). TW5 core bytes are NOT transferred
+ *      in the manifest — islands read them from `LarDoc.blobs[ENGINE_CORE_ID]` on the
+ *      @lararium CRDT doc after `handle.whenReady()`. Two vessels federating @lararium
+ *      share the engine automatically via Automerge sync.
  *   7. The vessel MUST close `mainPort` at evict/unmount time — before or after worker.terminate().
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
- *   8. Federation seam — when a `relational` BagBinding carries a non-empty `docUrl`, two obligations
+ *   8. Federation seam — when a slot in `resolver` carries a non-empty AutomergeUrl, two obligations
  *      activate. Vessel: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
  *      vessel Repo before delivering `manifest`, so the CRDT graph reaches the island-side Repo
  *      automatically. Island-side: the island MUST call `repo.find(docUrl).whenReady()` and await
@@ -74,26 +74,15 @@ export type IslandStorageConfig =
   | { type: "idb";     dbName: string }
   | { type: "memory" };
 
-// ── Bag capability tokens ──────────────────────────────────────────────────
-
-/**
- * The mode a bag inhabits at manifest delivery time.
- *
- * - `relational` — a known AutomergeUrl; island calls `repo.find(docUrl).whenReady()`.
- *
- * `AutomergeUrl` IS the CapTP-style capability token for the doc.
- * A string bagId without a `docUrl` is a label, not a capability.
- */
-export type BagMode = { mode: "relational"; docUrl: string };
-
-/**
- * A single bag entry in the manifest delivery, combining identity + capability + write intent.
- *
- * `bagId`    — stable lar: bag identifier (e.g. `lar:///bags/lares/v0.1`)
- * `writable` — whether the island may call `.change()` on this bag's doc.
- * `mode`     — cold or relational (with AutomergeUrl capability token).
- */
-export type BagBinding = { bagId: string; writable: boolean } & BagMode;
+// ── Recipe + bag resolution ────────────────────────────────────────────────
+//
+// The manifest carries a WikiRecipe (the slot structure, vessel-independent)
+// and a serialised BagResolver (slot URI → AutomergeUrl). `WikiRecipe` lives
+// in wiki-recipe.ts; the resolver is a plain `{ [slotUri]: docUrl | null }`
+// object so it survives structuredClone across worker boundaries.
+//
+// `AutomergeUrl` IS the CapTP-style capability token for each CRDT bag's doc.
+// A slot URI without a resolver entry resolves to null (in-memory / cold).
 
 // ── Vessel → island ──────────────────────────────────────────────────────────
 
@@ -115,8 +104,9 @@ export type BagBinding = { bagId: string; writable: boolean } & BagMode;
  * The island establishes its own sovereignty (`ea`) upon receipt.
  *
  * Prerequisite fields (island cannot think without these — not cargo):
- *   - `bagBindings` carries the ordered bag capability tokens for this wiki's content scope.
- *     Each entry pairs a `bagId` with its `BagMode` (relational AutomergeUrl).
+ *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional canonBags).
+ *   - `resolver` is the slot URI → AutomergeUrl map. Null entries indicate
+ *     in-memory / cold slots (`@temp` always; other slots if creating fresh).
  *
  * Plugin tiddlers travel via the @lararium CRDT blob store (application/json blobs).
  * Islands read and apply them from the CRDT after `handle.whenReady()` — no manifest field needed.
@@ -130,12 +120,10 @@ export interface IslandMsg_Manifest {
    * null = pre-CAS trust-on-delivery. Islands verify on read from @lararium CRDT doc.
    */
   coreHash: string | null;
-  /**
-   * Ordered bag capability tokens for this wiki's content scope (system → draft).
-   * Each BagBinding carries the bagId, write intent, and BagMode (relational+docUrl).
-   * Islands iterate in order to seed TW5 and establish doc handles.
-   */
-  bagBindings?: readonly BagBinding[];
+  /** Slot structure for this wiki — wikiSlug + optional canonBags. */
+  recipe: import("./wiki-recipe.js").WikiRecipe;
+  /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
+  resolver: Readonly<Record<string, string | null>>;
   /**
    * Storage adapter configuration for the island-side Automerge Repo.
    * When present, the island creates a persistent Repo (NodeFS or IDB).
@@ -280,22 +268,6 @@ export interface IslandMsg_Fault {
 }
 
 /**
- * Frame-completion signal — island-owned timing (Island Sovereignty Law §4).
- *
- * The island fires this after each rAF (browser) / setInterval (Node) drain cycle.
- * It signals the causal island processed a frame — the vessel may use it to track
- * island liveness. `frameId` is a frame-local UUID; it does NOT correlate with
- * a vessel batch in the Repo-in-island path.
-
- */
-export interface IslandMsg_FrameAck {
-  schema_version: ProtocolVersion;
-  type: "frame:ack";
-  wikiUri: string;
-  frameId: string;
-}
-
-/**
  * Vessel → island: place a wiki-scope verb invocation into a wiki island's TW5 wiki.
  *
  * Parallel to AdminMsg_PlaceVerb for the admin island. Any island running a
@@ -347,7 +319,6 @@ export type IslandToVesselMsg =
   | IslandMsg_Event
   | IslandMsg_TeardownAck
   | IslandMsg_Ea
-  | IslandMsg_FrameAck
   | IslandMsg_Fault
   | IslandMsg_Ready
   | WikiMsg_VerbResult
@@ -373,7 +344,7 @@ export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "frame:ack", "fault", "ready", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -393,17 +364,21 @@ export function mkTeardownAck(): IslandMsg_TeardownAck {
  *
  * TRANSFER: caller MUST include `syncPort` in the `postMessage` transfer list:
  *   `worker.postMessage(msg, [msg.syncPort])`
+ *
+ * The manifest carries the WikiRecipe (slot structure) + BagResolver (slot URI →
+ * AutomergeUrl). The island walks `expandRecipe(recipe)` to build its composite
+ * stack and reads `resolver` to wire each CRDT slot to its doc handle.
+ *
  * No blob bytes travel in the manifest — TW5 core bytes and plugin tiddlers live in
  * the @lararium CRDT doc. Islands read them from the CRDT after `handle.whenReady()`.
- *
- * `opts.bagBindings` — ordered bag capability tokens (BagBinding[]).
  */
 export function mkManifest(
   wikiUri:  string,
   syncPort: MessagePort,
+  recipe:   import("./wiki-recipe.js").WikiRecipe,
+  resolver: Readonly<Record<string, string | null>>,
   coreHash: string | null = null,
   opts?: {
-    bagBindings?:    readonly BagBinding[];
     storage?:        IslandStorageConfig;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
   },
@@ -413,9 +388,10 @@ export function mkManifest(
     type: "manifest",
     wikiUri,
     coreHash,
+    recipe,
+    resolver,
     syncPort,
   };
-  if (opts?.bagBindings?.length) msg.bagBindings = opts.bagBindings;
   if (opts?.storage)             msg.storage     = opts.storage;
   if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
   return msg;
@@ -429,10 +405,6 @@ export function mkReady(): IslandMsg_Ready {
 /** Build an ea sovereignty declaration — the island signals it breathes and stands ready. */
 export function mkEa(wikiUri: string): IslandMsg_Ea {
   return { schema_version: ISLAND_PROTOCOL_VERSION, type: "ea", wikiUri };
-}
-
-export function mkFrameAck(wikiUri: string, frameId: string): IslandMsg_FrameAck {
-  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "frame:ack", wikiUri, frameId };
 }
 
 export function mkFault(wikiUri: string, error: string): IslandMsg_Fault {
@@ -539,59 +511,3 @@ export function mkWikiVerbResult(opts: {
 
 // ── Tiddler delta extraction — island-side utility ─────────────────────────
 
-/**
- * Extract a tiddler add/delete delta from an Automerge doc + patch list.
- *
- * Used by island entry files to derive TW5 mutations from island-side Repo change events.
- * Replaces the GP-3 oracle pattern (vessel `_subscribeDocChanges` ETL).
- *
- * `patches` is `Patch[]` from `@automerge/automerge` — each patch identifies a mutated path.
- * `doc` is the post-change `LarDoc` snapshot (already reconciled).
- *
- * Walks `tiddlers.*` patches only; ignores `blobs`, `schemaVersion`, and other top-level keys.
- */
-export function extractTiddlerDeltaFromPatches(
-  doc:     Record<string, unknown>,
-  patches: ReadonlyArray<{ path: ReadonlyArray<string | number> }>,
-): { added: Record<string, unknown>[]; deleted: string[] } {
-  const changedUris = new Set<string>();
-  for (const patch of patches) {
-    if (patch.path.length >= 2 && patch.path[0] === "tiddlers") {
-      changedUris.add(String(patch.path[1]));
-    }
-  }
-
-  const tiddlers = (doc["tiddlers"] ?? {}) as Record<string, unknown>;
-  const added:   Record<string, unknown>[] = [];
-  const deleted: string[]                  = [];
-
-  for (const uri of changedUris) {
-    const rec = tiddlers[uri] as (Record<string, unknown> & { deleted?: boolean }) | undefined;
-    if (!rec || rec["deleted"]) {
-      deleted.push(uri);
-    } else {
-      const tiddlerRec = rec["tiddler"] as Record<string, unknown> | undefined;
-      const fields = tiddlerRec ? { title: uri, ...tiddlerRec } : { title: uri };
-      added.push(fields);
-    }
-  }
-
-  return { added, deleted };
-}
-
-/**
- * Materialize all tiddlers from a LarDoc snapshot (for initial TW5 load after Repo sync).
- */
-export function allTiddlersFromDoc(
-  doc: Record<string, unknown>,
-): Record<string, unknown>[] {
-  const tiddlers = (doc["tiddlers"] ?? {}) as Record<string, unknown>;
-  const result: Record<string, unknown>[] = [];
-  for (const [uri, rec] of Object.entries(tiddlers)) {
-    const r = rec as Record<string, unknown> & { deleted?: boolean };
-    if (r["deleted"]) continue;
-    const tiddlerRec = r["tiddler"] as Record<string, unknown> | undefined;
-    result.push(tiddlerRec ? { title: uri, ...tiddlerRec } : { title: uri });
-  }
-  return result;
-}

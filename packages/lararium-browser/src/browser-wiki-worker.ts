@@ -2,13 +2,12 @@
  * browser-wiki-worker — browser Web Worker entry point for wiki authorities.
  *
  * Sovereign wiki island. Runs the shared browser-sovereign-island-model
- * lifecycle with BrowserWikiBehavior: read-dominant, TW5 session saves
- * land in scratch, no VerbDispatcher, no relay protocol.
+ * lifecycle with BrowserWikiBehavior: read-dominant, no VerbDispatcher,
+ * no relay protocol. Write routing flows through the in-wiki bag-paths
+ * cascade (operator-configurable).
  *
- * Recipe (auto-assembled by browser-sovereign-island-model):
- *   bagBindings CRDT bags (recipe order, read-only)
- *   └── scratch MemoryTiddlerStore  (defaultWritable:true)   ← local VM only
- *   └── projection MemoryTiddlerStore (defaultWritable:false) ← $:/state/*
+ * Recipe expansion follows the canonical WikiRecipe shape — see
+ * browser-sovereign-island-model.ts for the slot table.
  *
  * DOM types do not appear in this file (BA-1). `self` is the sole platform surface.
  *
@@ -16,11 +15,9 @@
  */
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
-import { BAG_IDS }                   from "@lararium/mesh";
 import type { IslandBehavior } from "@lararium/tw5";
 
 const BrowserWikiBehavior: IslandBehavior = {
-  writeBagId: BAG_IDS.scratch,
   onEa:       () => {},
   onSignal:   () => false,
   onDemote:   () => {},

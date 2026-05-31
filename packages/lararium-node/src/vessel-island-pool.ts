@@ -36,8 +36,10 @@ import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  mkWikiPlaceVerb,  BAG_IDS,  type BagBinding,
+  mkWikiPlaceVerb,  BAG_IDS,
+  LARARIUM_BAG, wikiBagUri, slugFromUri,
   type IslandStorageConfig,
+  type WikiRecipe,
 } from "@lararium/mesh";
 import type {
   IslandMsg_Event,
@@ -343,10 +345,12 @@ export class VesselIslandPool {
     this._wireWorkerListeners(wikiId, worker);
 
     const rawDocUrl = ctx.docHandle.url as string | undefined ?? null;
-    const bagBindings: readonly BagBinding[] = [
-      { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: this._laraiumDocUrl },
-      { bagId: wikiId, writable: true, mode: "relational", docUrl: rawDocUrl ?? "" },
-    ];
+    const wikiSlug  = slugFromUri(wikiId);
+    const recipe: WikiRecipe = { wikiSlug };
+    const resolver: Record<string, string | null> = {
+      [LARARIUM_BAG]:           this._laraiumDocUrl,
+      [wikiBagUri(wikiSlug)]:   rawDocUrl,
+    };
 
     const storage: IslandStorageConfig | undefined = this._storageRoot
       ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }
@@ -355,9 +359,10 @@ export class VesselIslandPool {
     const manifestMsg = mkManifest(
       wikiId,
       syncPort as unknown as globalThis.MessagePort,
+      recipe,
+      resolver,
       ctx.coreHash,
       {
-        bagBindings,
         ...(storage             ? { storage                  } : {}),
         ...(ctx.diskMirrors?.length ? { diskMirrors: ctx.diskMirrors } : {}),
       },

@@ -10,11 +10,11 @@ confidence  = 18
 mana        = 18
 manao       = 17
 tagspace    = "stable"
-role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ MemeSyncAdaptor boundary; yin-collapse law"
+role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
 cacheable   = true
 retain      = true
 invariant   = true
-status-date = "2026-05-15"
+status-date = "2026-05-30"
 ```
 
 <<~&#x0002;>>
@@ -55,11 +55,20 @@ Verse / UEFN SceneGraph layer:
   Engine batches between frames       ← batch boundary: simulation tick
   OnSimulate(StagedUpdates)<suspends> ← WAVE ARRIVES: all components see same updates
 
-MemeSyncAdaptor layer (Lararium bridge):
+Lararium nalu engine (in-wiki TW5 startup module):
   CRDT merge patches arrive           ← scattered writes (from peers, from CRDT ops)
-  Adaptor batches addTiddler() calls  ← batch boundary: per-island flush
-  wiki.nextTick flushes to refresh    ← WAVE ARRIVES: TW5 wiki reflects CRDT state
+  AutomergeDocStore → MemeProvider → IslandAdaptor → enqueueNalu(change) × N
+  rAF / setTimeout frame boundary     ← batch boundary: unified queue across ALL bags
+  wiki.transact(apply batch)          ← WAVE ARRIVES: one transact per frame, one nalu
 ```
+
+**Unified-nalu law:** the in-wiki nalu engine collects changes from every CRDT bag into
+one shared queue and drains the lot in ONE `wiki.transact()` per frame. Prior art
+(Vue 3 scheduler, MobX `transaction`, Yjs `transact`, Solid `batch`, React 18 automatic
+batching, S.js tick, the DREAM glitch-freedom paper) all converge on this shape: one
+boundary per tick across heterogeneous sources beats N boundaries with the cascade-refresh
++ FRP-glitch anti-pattern. Our widget filter is O(1) hash-lookup, so the cost scales with
+*changed* hashes, not bag count — no fan-out objection applies.
 
 **The invariant:** The nalu is not one tiddler change. It is the atomic delivery
 of a *batch* of changes to all observers simultaneously. Every observer — every
@@ -101,37 +110,40 @@ itself has no sigil; the `\tick` sigil hooks into the nalu.
 ## Yin-Collapse Law
 
 **Law:** The TW5 wiki (`$tw.wiki`) IS the primary synchronous reactive engine.
-The ReactionGraph TS layer is a provisional bridge to the target architecture,
-not the target architecture itself.
+The TS layer is the minimal membrane around it — only what TW5 cannot do from inside.
 
-**Target architecture:**
+**Landed architecture (2026-05-30):**
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │  TW5: $tw.wiki             ← primary reactive engine │
 │  TW5: Widget tree          ← refresh = nalu delivery │
+│  TW5: nalu-engine          ← unified queue + drain   │
+│  TW5: reaction-router      ← routing as startup code │
 │  TW5: SharktoothSigil      ← grammar as tiddlers     │
-│  TW5: Reaction startup mod ← routing as startup code │
 │  TW5: Reaction tiddlers    ← bindings as tiddler data│
 ├─────────────────────────────────────────────────────┤
-│  TS:  MemeSyncAdaptor      ← minimal bridge (thin)   │
-│  TS:  LarTiddlerStore      ← Automerge CRDT          │
-│  TS:  VmPool               ← multi-wiki coordination │
+│  TS:  IslandAdaptor        ← membrane: forward + echo│
+│  TS:  AutomergeDocStore    ← Automerge CRDT          │
+│  TS:  CompositeStore       ← recipe layer stack       │
+│  TS:  VesselIslandPool     ← multi-island coordination│
 │  TS:  Keyhive / network    ← crypto + peers          │
 └─────────────────────────────────────────────────────┘
 ```
 
-**What collapses from TS into TW5:**
-- `ReactionGraph` routing table → `family:reaction` pranala tiddlers (already exist)
-- `ReactionGraph.fireSync()` → TW5 startup module `addEventListener` on `tm-verse-event`
-- `TW5Engine.onVerseEvent()` → startup module `addEventListener` + teardown
-- `VerseEventConsumer` interface → startup module closure
+**Inside the wiki (`module-type: startup`):**
+- `nalu-engine` — unified `LarTiddlerChange[]` queue across all bags + frame-aligned drain
+  + one `wiki.transact()` per frame + apply-time echo guard (`$tw.lares.isApplyingNalu`)
+- `reaction-router` — `wiki.addEventListener("change")` listener that fires `tm-verse-event`
+  for `lar:` tiddlers whose papalohe bindings name a listenable
 
-**What does NOT collapse (irreducible TS):**
-- `LarTiddlerStore` — TW5 has no CRDT; Automerge is irreducible
-- Network / WebRTC / WebSocket — browser/Node APIs, not TW5
-- Keyhive capabilities — cryptographic operations, not TW5
-- `VmPool` multi-wiki coordination — TW5 is single-wiki by design
+**TS-side membrane (irreducible — TW5 cannot do these):**
+- `AutomergeDocStore` — CRDT, patch subscription, MemeProvider fan-out
+- `IslandAdaptor` — forward `LarTiddlerChange` → `$tw.lares.enqueueNalu`, filter own
+  echoes, resolve cross-bag tombstones, route outbound saveTiddler/deleteTiddler
+- Network / WebRTC / WebSocket — browser/Node APIs
+- Keyhive capabilities — cryptographic operations
+- `VesselIslandPool` — multi-island coordination at the vessel layer
 
 **The prior art validating this collapse:**
 - **Elm Architecture** — one `Model`, one `update` loop, side effects as data (`Cmd`)
@@ -165,18 +177,19 @@ Per-bag physical federation (Automerge):
 ```
 
 **NOT two parallel reactive engines.** The CRDT layer is the distributed persistent
-store. TW5 is the live reactive view. The MemeSyncAdaptor is the boundary — it
-translates CRDT patch events into tiddler writes that trigger the nalu.
+store. TW5 is the live reactive view. The IslandAdaptor + nalu-engine boundary
+translates CRDT patch events into one batched `wiki.transact()` per frame.
 
 ```
 CRDT (the sea)
-  → MemeSyncAdaptor (the wind)
-    → wiki.addTiddler() × N (the swell builds)
-      → wiki.nextTick() (the crest forms)
-        → refresh(changedTiddlers) (the wave arrives on shore)
+  → AutomergeDocStore / MemeProvider (the wind shaping water)
+    → IslandAdaptor.onUriChanged (filter + cross-bag resolution)
+      → $tw.lares.enqueueNalu(change) × N (the swell builds across bags)
+        → rAF / setTimeout frame boundary (the crest forms)
+          → wiki.transact(apply batch) (the wave arrives on shore — one nalu)
 ```
 
-The shore is the widget tree. The same shore receives waves from any bag.
+The shore is the widget tree. One shore receives one wave per frame from all bags.
 
 <<~/ahu >>
 

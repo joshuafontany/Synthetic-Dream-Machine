@@ -37,6 +37,25 @@ class FakeTW5Engine {
   readonly enqueueCalls:       LarTiddlerChange[]  = [];
   applying = false;
 
+  // Cascade-config tiddler texts the fake serves through wiki.getTiddlerText.
+  // Default cascade mirrors lar-bag-paths.tid so the adaptor routes lar: writes
+  // to TARGET_BAG (used as the test's "current wiki bag").
+  readonly tiddlerTexts = new Map<string, string>([
+    [
+      "lar:///ha.ka.ba/@lararium/config/bag-paths",
+      [
+        "[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]",
+        "[prefix[$:/status/]then[lar:///ha.ka.ba/@temp]]",
+        "[prefix[$:/boot/]then[lar:///ha.ka.ba/@temp]]",
+        "[prefix[$:/HistoryList]then[lar:///ha.ka.ba/@temp]]",
+        "[prefix[$:/state/]then[lar:///ha.ka.ba/@temp]]",
+        "[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]",
+        "[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]",
+      ].join("\n"),
+    ],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-bag", "lar:///ha.ka.ba/@lararium/wikis/test-wiki/draft"],
+  ]);
+
   readonly wiki = {
     addTiddler:      (tiddler: { fields?: TW5FieldsMap } | TW5FieldsMap): void => {
       const fields = (tiddler && typeof tiddler === "object" && "fields" in tiddler && tiddler.fields)
@@ -46,7 +65,26 @@ class FakeTW5Engine {
     },
     deleteTiddler:   (title: string): void => { this.deleteTiddlerCalls.push(title); },
     getTiddler:      (_title: string) => undefined,
-    filterTiddlers:  (_filter: string): string[] => [],
+    getTiddlerText:  (title: string, fallback?: string): string =>
+      this.tiddlerTexts.get(title) ?? fallback ?? "",
+    filterTiddlers:  (filter: string, _widget: unknown, source: unknown): string[] => {
+      // Minimal cascade-rule parser: [prefix[X]then[Y]] or [prefix[X]then{Z}].
+      const re = /^\[prefix\[([^\]]*)\]then(?:\[([^\]]*)\]|\{([^}]+)\})\]$/;
+      const m  = re.exec(filter);
+      if (!m) return [];
+      const prefix      = m[1] ?? "";
+      const literalThen = m[2];
+      const refThen     = m[3];
+      let title = "";
+      (source as (fn: (t: unknown, ti: string) => void) => void)((_t, ti) => { title = ti; });
+      if (!title.startsWith(prefix)) return [];
+      if (literalThen !== undefined) return [literalThen]; // empty string = explicit skip
+      if (refThen) {
+        const text = this.tiddlerTexts.get(refThen) ?? "";
+        return text ? [text] : [];
+      }
+      return [];
+    },
     transact:        (fn: () => void): void => fn(),
     addEventListener:    (_e: string, _cb: (c: Record<string, unknown>) => void): void => {},
     removeEventListener: (_e: string, _cb: (c: Record<string, unknown>) => void): void => {},
@@ -307,16 +345,19 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     expect(bags).toContain("lar:///ha.ka.ba/@lares");
   });
 
-  test("$:/temp/ title → skipped (no debounce timer)", async () => {
-    const puts: string[] = [];
+  test("$:/temp/ title → cascade routes to @temp", async () => {
+    const bags: string[] = [];
     const orig = store.put.bind(store);
-    store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
+    store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
 
-    await adaptor.saveTiddler({ fields: { title: "$:/temp/x" } });
-    expect(puts).toHaveLength(0);
+    const done = adaptor.saveTiddler({ fields: { title: "$:/temp/x" } });
+    await flush();
+    await done;
+
+    expect(bags).toContain("lar:///ha.ka.ba/@temp");
   });
 
-  test("$:/ system title → skipped", async () => {
+  test("$:/StoryList → no cascade rule yet (skipped until @personal lands)", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
@@ -325,7 +366,7 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     expect(puts).toHaveLength(0);
   });
 
-  test("plain text title (no lar: prefix) → skipped", async () => {
+  test("plain text title (no cascade rule) → skipped", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };

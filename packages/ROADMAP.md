@@ -49,7 +49,17 @@ remaining monolith TOML carries documentation data tables only — Path O),
 sequence: IndexedDBStorageAdapter, WebCrypto Ed25519 keypair, `runFoundingCeremony`
 on first boot, Gates A/B/C, `broadcast()` presence, `emit("live")`. Bootstrap
 artifact persists to IDB; resume boot rehydrates without re-running ceremony.
-19/19 browser tests green in real Chromium via Playwright. ROADMAP Priority 1 closed.).
+19/19 browser tests green in real Chromium via Playwright. ROADMAP Priority 1 closed.),
+**and** the TW5-native unified-nalu + WikiRecipe + in-wiki cascade-routing sprint
+(turn 30 — yin-collapse law in code: `nalu-engine` startup module owns the unified
+queue across all bags + one `wiki.transact()` per frame; `IslandAdaptor` narrowed
+to membrane; `WikiRecipe { wikiSlug, canonBags? }` is the one-model recipe for every
+wiki; write routing moved from TS prefix code into the wiki via
+`lar:///ha.ka.ba/@lararium/config/bag-paths` cascade tiddler; `IslandAccumulator` /
+`kernel.applyDelta` / frame-ack / `BagBinding` / `BAG_IDS.scratch+projection+draft` /
+`IslandBehavior.writeBagId` / `ProjectionStore` all retired; `ADMIN_BAG_ID` aligned to
+`lar:///ha.ka.ba/@admin`; 227/227 tests in node-side packages, browser 19/20
+unchanged from pre-pivot).
 
 Do not re-open those arcs unless a test proves drift.
 
@@ -85,7 +95,7 @@ These planning docs follow one architectural law:
 | — | **Island Sovereignty Law + GP-3 deprecation sprint** | ✅ Done | Isomorphic law (7+1 clauses) in island-protocol.ts (was island-protocol.ts). BrowserVmManager + browser-wiki-worker.ts fully implemented (Repo-in-Vessel island, rAF+Safari fallback, docBytes teardown). NodeVmManager wired (MessageChannel per island, mainPort.close law, docBytes capture). All GP-3 oracle paths carry superseded markers. 192/192 tests. |
 | — | **GP-3 node gate + deletion** | ✅ Done | `repo-in-island.test.ts` (3 tests) passes. `_subscribeDocChanges`, `routeChangeset`, `changesetQueue`, `awaitingAck`, `unsubChange`, `mkFrame` import deleted. NodeVmManager passes `docHandle.url` as `docUrl`. 195/195 green. |
 | — | **Identity lattice + keyhive founding ceremony** | ✅ Done | `runFoundingCeremony`, `runDeviceAdmitCore`, `runApplyAdmitPayload` extracted isomorphic into `@lararium/keyhive`. Three-gate lattice A/B/C holds. Two-vessel e2e test (`two-vessel-mesh.test.ts`) 9/9. `lares device-admit` + `lares invite` CLI commands wired. |
-| — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-island.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: `IslandMsg_FrameAck` + `mkFrame` removed; `IslandMsg_FrameAck` is the §4 frame-completion signal (rename to `frame:ack` in future schema_version bump). Stale `mode: "cold"` tests removed. 5/5 browser tests green. |
+| — | **GP-3 browser gate + deletion** | ✅ Done | `browser-repo-in-island.test.ts` (2 tests) passes: cold-boot + docUrl non-null (federation seam open). `browser-wiki-worker.ts` carries no GP-3 fallback. Protocol layer: stale `mkFrame` removed. Stale `mode: "cold"` tests removed. 5/5 browser tests green. (Note: `IslandMsg_FrameAck` itself fully retired in turn 30 — see unified-nalu sprint.) |
 | — | **Pono federation pattern** | ✅ Done | `coreBlob: Uint8Array` evicted from `IslandMsg_Manifest`. Boot order inverted in both sovereign island models: Repo first, `handle.whenReady()`, read `blobs[ENGINE_CORE_ID]` from `@lararium` CRDT doc, `mkFault` if absent, `bootTw5` last. `laraiumDocUrl` required on `VesselIslandPool` — `@lararium` binding prepended per island. `blob-sovereignty.test.ts` gates §6. N×island federation O(CRDT-sync). 195/195 tests. |
 | — | **YIN ontology + typo closure** | ✅ Done | `runSovereignisland` → `runSovereignWorker` in 3 entry files. `worker: island` → `worker: Worker`. `node-vm-manager.test.ts` → `vessel-island-pool.test.ts`. `vm-manager-echo.mjs` → `vm-pool-echo.mjs`. Fixture binding resolution uses `b.writable`. 195/195. |
 | — | **§8 archipelago gate** | ✅ Done | `federation-seam.test.ts` (2 tests): bidirectional in-process Repo pair via `MessageChannelNetworkAdapter`. Island Sovereignty Law §8 written. Gate proof cites node + browser (`browser-repo-in-island.test.ts` test 2). 196/196 tests. |
@@ -94,6 +104,7 @@ These planning docs follow one architectural law:
 | — | **M.1 / reaction-graph rename + vessel wires** | ✅ Done | `live-protocol.ts` → `reaction-graph.ts` (scope claim: within-island only). M.1 node wire: `eventBus.subscribe("worker.event")` → `adminVm.placeVerb()` after `workerEa`. M.1 browser wire: `onWorkerEvent` → `admin.placeVerb()`. `ReactionGraph` 26-test suite added. Mesh build + tw5 plugin rebuild clean. 243/243 tests. |
 | — | **M.2 / verb-as-tiddler-field pipeline** | ✅ Done | `VerbInvocation` gains `fromUri`/`listenable`; `reaction-router.ts` extended with `_verbsByUri` map + verb-field dispatch; `IslandMsg_Event.payload` enriched; `event-routing.test.ts` (3 tests). 246/246 tests. |
 | — | **M.3 / full-TW5-boot reaction gate** | ✅ Done | `verb-tiddler-dispatch.test.ts` (2 tests) proves end-to-end: verb-carrying tiddler lands via CRDT → reaction-router nalu fires → `tm-verse-event` → `IslandMsg_Event` with `payload.verb === "promote"` at vessel. Root fix: `declare const $tw` ambient in `reaction-router.ts` + `grammar-cache.ts` — TW5's `evalSandboxed` runs in `vm.createContext({})` where `globalThis.$tw` is undefined; `$tw` parameter injection works. Genesis rebuilt (sha=a3b926…). 248/248 tests. |
+| — | **TW5-native unified nalu + WikiRecipe + in-wiki cascade routing** | ✅ Done | `nalu-engine` startup module owns unified queue + frame-aligned drain + one `wiki.transact()` per frame. IslandAdaptor narrowed to membrane (forward `LarTiddlerChange` → `$tw.lares.enqueueNalu` + cross-bag tombstone). One-model `WikiRecipe { wikiSlug, canonBags? }` for every wiki; manifest carries `recipe + resolver` instead of `bagBindings[]`. Write routing moved into the wiki via `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade tiddler — `IslandAdaptor._routeBag` walks `wiki.filterTiddlers` mirroring TW5's `$:/config/FileSystemPaths` pattern. Shadow-tiddler semantics confirmed (multi-bag occupancy by design). Retired: `IslandAccumulator`, `kernel.applyDelta`, frame-ack message, `vm-island-bridge`, `startRenderLoop`, `extractTiddlerDeltaFromPatches`, `allTiddlersFromDoc`, `ProjectionStore` alias, `BAG_IDS.scratch/projection/draft`, `BagBinding`, `IslandBehavior.writeBagId`, `routeWrite()`. `ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/@admin`. Memes: deleted `island-accumulator.md`, rewrote `island-adaptor.md`, updated `nalu.md`, wrote `nalu-engine.md`. 227/227 tests (mesh 96 + tw5 67 + node 64). Browser 19/20 (pre-existing TW5-boot shim gap, unrelated). |
 | 1 | **M / Local intent bridge** | ⬜ Next | M.1–M.3 closed. Remaining: (b) author first real wiki device tiddler (`promote-button`) in genesis that fires `reaction:listenable` edge carrying `verb: "promote"`; (c) stdio bridge for CLI/daemon local intent path. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
@@ -194,7 +205,8 @@ Protocol layer — ✅ ALL CLEARED (both gates passed):
 - [x] `IslandMsg_TeardownAck.snapshotTiddlers` field — DELETED.
 - [x] `snapshotTiddlers` param from `mkTeardownAck` opts — DELETED.
 - [x] Stale `mode: "cold"` BagBinding tests in `island-protocol.test.ts` — REMOVED.
-- ⧾ `IslandMsg_FrameAck` → `IslandMsg_FrameAck` + rename `frame:ack` → `frame:ack` — deferred to future schema_version bump; documented in protocol header.
+- [x] `frame:ack` message type entirely retired (turn 30 unified-nalu sprint) — drain timing now lives in the in-wiki nalu engine; vessel does not observe frame ticks. Type guard, factory, fixture sends all removed.
+- [x] `BagBinding` type retired (turn 30) — replaced by `WikiRecipe + resolver` in `IslandMsg_Manifest`.
 
 **`docUrl` non-null gate (federation seam) — ✅ DONE:**
 `federation-seam.test.ts` proves the door bidirectionally. Island Sovereignty Law §8 written.

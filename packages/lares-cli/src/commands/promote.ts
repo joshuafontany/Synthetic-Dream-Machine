@@ -135,7 +135,7 @@ export async function cmdPromote(args: ParsedArgs): Promise<number> {
       console.log(`  children: ${children.length} slot${children.length === 1 ? "" : "s"} co-promoted`);
       for (const c of children) console.log(`    ${c}`);
     }
-    console.log(`  audit: lar:///ha.ka.ba/@lararium/@admin/log/${promoteResult.requestId}`);
+    console.log(`  audit: lar:///ha.ka.ba/@admin/log/${promoteResult.requestId}`);
     return 0;
   } finally {
     await vessel.disconnect();

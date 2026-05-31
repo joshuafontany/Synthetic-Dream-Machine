@@ -1,6 +1,6 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-29 (turn 29)
+> Updated: 2026-05-30 (turn 30)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
@@ -103,6 +103,90 @@ gen_island pattern: runSovereignWorker = kernel; IslandBehavior = callback modul
 onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
+
+## What Changed This Turn (2026-05-30 turn 30)
+
+### TW5-native unified-nalu + WikiRecipe one-model + in-wiki bag-paths cascade ✅ 227/227 tests (browser m3 pre-existing shim gap)
+
+Three connected architectural moves landed across mesh, tw5, node, browser:
+
+**1. TW5-native unified nalu (yin-collapse law in code).**
+The wiki IS the reactive engine. New `module-type: startup` plugin module
+[`nalu-engine.ts`](lararium-tw5/src/modules/nalu-engine.ts) owns the
+unified queue across ALL CRDT bags + frame-aligned drain + ONE `wiki.transact()`
+per frame + apply-time echo guard. TS membrane (IslandAdaptor) collapsed to:
+forward `LarTiddlerChange` → `$tw.lares.enqueueNalu` + outbound saveTiddler /
+deleteTiddler + cross-bag tombstone resolution. Retired entirely:
+`IslandAccumulator` class, `IslandKernel.applyDelta`, `IslandMsg_FrameAck`
++ `mkFrameAck` + `sendFrameAck`, `vm-island-bridge.ts` + test, `startRenderLoop`,
+`extractTiddlerDeltaFromPatches`, `allTiddlersFromDoc`, frame-ack message type
+from `isIslandToVesselMsg`, ProjectionStore type alias. Prior-art research
+(DriftWatch worker spirit): Vue 3 scheduler · MobX `transaction` · Yjs `transact`
+· Solid `batch` · React 18 auto-batch · S.js · DREAM glitch-freedom — all
+converge on one-tick-boundary across heterogeneous sources.
+
+**2. WikiRecipe — one model for every wiki.**
+```typescript
+interface WikiRecipe { wikiSlug: string; canonBags?: readonly SlotUri[] }
+```
+Expands to fixed cascade `[@temp, @draft, @<wikiSlug>, ...canon, @lares, @lararium]`.
+Slot URIs live in the `lar:///ha.ka.ba/@<name>` namespace alongside content
+URIs (no parallel naming system). Manifest carries `recipe: WikiRecipe +
+resolver: { slotUri → AutomergeUrl }` instead of `bagBindings[]`. `BagBinding`
+type retired; `BAG_IDS.scratch/projection/draft` deleted (slot URIs replace them).
+`ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/@admin` (was nested under @lararium).
+`IslandBehavior.writeBagId` retired — admin/wiki behaviors share recipe shape;
+differences live in `onEa` / `onSignal`.
+
+**3. In-wiki bag-paths cascade (TW5 cascade pattern).**
+Write routing moves OUT of TS prefix-matching into the wiki itself. Default
+cascade ships as plugin tiddler `lar:///ha.ka.ba/@lararium/config/bag-paths`:
+
+```
+[prefix[$:/temp/]then[lar:///ha.ka.ba/@temp]]
+[prefix[Draft of ]then[lar:///ha.ka.ba/@draft]]
+[prefix[$:/]then[]]
+[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]
+```
+
+`IslandAdaptor._routeBag()` walks this cascade via `wiki.filterTiddlers(filter,
+undefined, source)` — first non-empty result wins, empty string = explicit
+skip. Per-wiki current-wiki-bag value lives in `@temp` (volatile, set by
+`buildIslandRecipe`). Mirrors TW5's `$:/config/FileSystemPaths` pattern
+(filesystem.js:317). Pono properties: routing logic lives as data,
+operator-configurable at runtime, per-wiki overlays compose via cascade
+priority (wiki bag overrides @lararium default automatically).
+
+**Shadow-tiddler semantics confirmed.** `CompositeStore.put({bag})` writes one
+layer only — multi-bag occupancy by design. Stage/commit mental model maps
+cleanly: edits stage to @<wiki>, explicit `bag` field commits to canon
+(@lares for federation, others local). `tombstoneInBag(bagId, title)` exists
+for explicit per-bag delete (publish semantics).
+
+**Cleanup pass:** stale comment sweep across docstrings (sovereign-island-model,
+island-context, island-behaviors, lar-admin-island, lar-wiki-island,
+browser-sovereign-island-model, browser-wiki-worker, memory-store, tw5-vm,
+island-protocol header). 4 `$:/config/Lar*` literal refs migrated to
+`lar:///ha.ka.ba/@lararium/config/*` namespace. Memes: deleted
+`bags/@lares/v0.1/api/lararium/island-accumulator.md` (class retired),
+rewrote [island-adaptor.md](../bags/@lares/v0.1/api/lararium/island-adaptor.md),
+updated [nalu.md](../bags/@lares/v0.1/api/pono/nalu.md), wrote new
+[nalu-engine.md](../bags/@lares/v0.1/api/lararium/nalu-engine.md).
+
+**Surfaced but not enacted (sibling sprints):**
+- Legacy `lar:///config/Lar/*` cascade-template URIs (36 refs across wikitext
+  template tiddlers) — analogous pono concern, separate sweep.
+- TW5 UX surface: bag-data tab in tiddler info, CRDT metadata, history crumbs,
+  stage/commit UI controls, bulk commit verb, federation-vs-local bag
+  annotations on @lares / @lararium.
+- Browser TW5-boot global-shim gap (pre-existing, surfaces only when
+  browser-m3-breathing fixture exists) — separate diagnostic story.
+- `promote` → `commit` verb rename (operator's "stage/commit" mental model).
+
+**Metrics:** mesh 96/96, tw5 67/67, node 64/64, browser 19/20 (1 pre-existing
+TW5-boot shim issue, unrelated to this work). Multiple commits ahead.
+
+---
 
 ## What Changed This Turn (2026-05-29 turn 29)
 

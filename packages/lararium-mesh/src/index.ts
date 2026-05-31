@@ -33,7 +33,7 @@ export type { IdentitySlot, CapabilityToken, ActorId } from "./identity-slot.js"
 export { OpenIdentitySlot } from "./identity-slot.js";
 export * from "./meme-provider.js";
 export * from "./reaction-graph.js";
-export * from "./island-accumulator.js";
+export * from "./wiki-recipe.js";
 export * from "./verb-tiddler.js";
 export * from "./bag-residency.js";
 export * from "./kumu-device.js";

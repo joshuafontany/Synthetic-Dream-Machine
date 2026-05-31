@@ -33,13 +33,15 @@ export interface IslandContext {
  * gen_island pair. The sovereign island kernel owns lifecycle plumbing;
  * behaviors own what distinguishes one island type from another.
  *
- * - `writeBagId` — IslandAdaptor write target.
- * - `onEa`       — called after CompositeStore + IslandAdaptor wired, before ea.
- * - `onSignal`   — called for every non-lifecycle message. Return true if handled.
- * - `onDemote`   — called before drain loop stops.
+ * Under the one-recipe model, write routing happens via the in-wiki cascade
+ * (`lar:///ha.ka.ba/@lararium/config/bag-paths`) — admin and wiki behaviors
+ * share the same recipe shape; their differences live in `onEa` / `onSignal`.
+ *
+ * - `onEa`     — called after CompositeStore + IslandAdaptor wired, before ea.
+ * - `onSignal` — called for every non-lifecycle message. Return true if handled.
+ * - `onDemote` — called before drain loop stops.
  */
 export interface IslandBehavior {
-  writeBagId: string;
   onEa(ctx: IslandContext): void | Promise<void>;
   onSignal(type: string, raw: unknown, ctx: IslandContext): boolean;
   onDemote(ctx: IslandContext): void | Promise<void>;

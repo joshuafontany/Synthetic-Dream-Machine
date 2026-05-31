@@ -47,7 +47,8 @@ import {
   emptyLarDoc, mutableLarRecord, tiddlerText,
   CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID,
-  BAG_IDS,
+  BAG_IDS, TEMP_BAG,
+  slugFromUri,
   type LarDoc, type LarariumVesselOptions, type LarariumVesselResult,
 }                                            from "@lararium/mesh";
 import {
@@ -72,6 +73,7 @@ import {
   openBrowserAdminVm, VerbTable,
   type BrowserAdminVmResult,
 }                                            from "./open-browser-admin-vm.js";
+import type { WikiRecipe }                   from "@lararium/mesh";
 
 // ── Bootstrap artifact ────────────────────────────────────────────────────────
 
@@ -435,8 +437,7 @@ export async function openBrowserVessel(
   }
   composite.addLayer({ bagId: activeWikiPlan.draftBagId, store: new AutomergeDocStore(draftHandle, activeWikiPlan.draftBagId), writable: true, defaultWritable: false });
 
-  composite.addLayer({ bagId: BAG_IDS.scratch,    store: new MemoryTiddlerStore(), writable: true, defaultWritable: true  });
-  composite.addLayer({ bagId: BAG_IDS.projection, store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
+  composite.addLayer({ bagId: TEMP_BAG, store: new MemoryTiddlerStore(), writable: true, defaultWritable: true });
 
   emit("wiki-ready");
 
@@ -491,10 +492,11 @@ export async function openBrowserVessel(
       adminUrl:        bootstrap.adminUrl,
       coreHash,
       workerScriptUrl: adminWorkerUrl,
-      bagBindings: [
-        { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
-        { bagId: ADMIN_BAG_ID,     writable: true,  mode: "relational", docUrl: bootstrap.adminUrl },
-      ],
+      recipe: { wikiSlug: "admin" } satisfies WikiRecipe,
+      resolver: {
+        [BAG_IDS.lararium]:        islandHandle.url,
+        "lar:///ha.ka.ba/@admin":  bootstrap.adminUrl,
+      },
     });
 
     // Wire verb registry — minimal browser surface (echo + verbs from caller).
@@ -505,12 +507,14 @@ export async function openBrowserVessel(
     admin.mountMainVerbs(registry);
 
     if (workerScriptUrl) {
+      const wikiSlug = slugFromUri(activeWikiId);
       await pool.mountWiki(activeWikiId, {
         coreHash,
-        bagBindings: [
-          { bagId: BAG_IDS.lararium, writable: false, mode: "relational", docUrl: islandHandle.url },
-          { bagId: wikiBagId,        writable: true,  mode: "relational", docUrl: wikiHandle.url  },
-        ],
+        recipe: { wikiSlug } satisfies WikiRecipe,
+        resolver: {
+          [BAG_IDS.lararium]:           islandHandle.url,
+          [`lar:///ha.ka.ba/@${wikiSlug}`]: wikiHandle.url,
+        },
       });
       emit("tw5-booted");
     }

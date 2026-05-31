@@ -3,7 +3,7 @@
  *
  * Proves the CRDT sync path without TW5:
  *   manifest (syncPort transferred) → wire island-side Repo → ea
- *   [doc arrives via CRDT sync]    → handle.on("change") → frame:ack + event(repo:change)
+ *   [doc arrives via CRDT sync]    → handle.on("change") → event(repo:change)
  *   teardown                       → teardown:ack
  *
  * Emits `event(repo:synced)` after `handle.whenReady()` resolves — tests await
@@ -46,14 +46,6 @@ parentPort.on("message", (msg) => {
             frameCount += 1;
             const tiddlerCount = doc?.tiddlers ? Object.keys(doc.tiddlers).length : 0;
 
-            // Drain signal: frame-completion ack (GP-1 frame signal, not GP-3 batch ACK).
-            parentPort.postMessage({
-              schema_version: 1,
-              type: "frame:ack",
-              wikiUri,
-              frameId: `frame-${frameCount}`,
-            });
-
             // Observable event: surfaces via onWorkerEvent.
             parentPort.postMessage({
               schema_version: 1,
@@ -66,10 +58,11 @@ parentPort.on("message", (msg) => {
         });
       }
 
-      // Resolve docUrl: use the writable wiki binding (first writable relational).
-      // @lararium binding is read-only; the wiki binding is writable.
-      const relationalBinding = msg.bagBindings?.find(b => b.mode === "relational" && b.writable);
-      const resolvedDocUrl = relationalBinding?.docUrl ?? msg.docUrl ?? null;
+      // Resolve docUrl from the WikiRecipe + resolver: the wiki identity slot
+      // (lar:///ha.ka.ba/@<wikiSlug>) is the writable target.
+      const resolver = msg.resolver ?? {};
+      const slug = msg.recipe?.wikiSlug;
+      const resolvedDocUrl = (slug && resolver[`lar:///ha.ka.ba/@${slug}`]) ?? null;
 
       if (resolvedDocUrl) {
         // Explicit docUrl: island awaits repo.find() — reliable, no gossip race.

@@ -91,6 +91,30 @@ Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/`
 
 For drag-and-drop distribution to the broader TW5 community, lar-namespaced plugin envelopes MAY be re-emitted under `$:/plugins/...` titles. The plugin module code is identical; only the envelope title differs. This dual-distribution shape is a packaging convention, not a namespace exception — the canonical artifact carrying the operator's signature is always the `lar:///` form.
 
+### Bag-Tag Rule — `@` Designates a CRDT Surface
+
+Within lar paths (`lar:///ha.ka.ba/...` OR `lar:///w1.w2.w3/...` style), exactly **one** path segment MAY carry an `@`-tag prefix: **`child[1]` only**. An `@`-tagged segment designates **a bag — a CRDT surface (today an Automerge doc)**. Every bag has exactly one canonical address.
+
+```
+lar:///ha.ka.ba/@lares                     ← child[1]=@lares       : the personality bag
+lar:///ha.ka.ba/@lararium                  ← child[1]=@lararium    : the system bag
+lar:///ha.ka.ba/@admin                     ← child[1]=@admin       : the admin wiki bag
+lar:///ha.ka.ba/@synthetic-dream-machine   ← child[1]=@<wiki-slug> : a wiki bag
+lar:///ha.ka.ba/@elyncia                   ← child[1]=@<corpus>    : a canon content bag
+lar:///ha.ka.ba/@personal                  ← child[1]=@personal    : the personal slot
+lar:///ha.ka.ba/@draft                     ← child[1]=@draft       : the draft slot
+lar:///ha.ka.ba/@temp                      ← child[1]=@temp        : the volatile slot (no CRDT)
+```
+
+Law summary:
+
+1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; coordinate triple for unstable).
+2. `child[1]` MAY carry `@<name>` — names a top-level bag. Each bag has exactly one canonical address.
+3. `child[2]` and deeper MUST NOT carry `@`-prefix. Those segments name tiddlers (or path navigation) within the bag's address space — never further sub-bags.
+4. Resolution: the runtime resolves an `@`-tagged segment to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the slot identity; the resolver maps it to the live doc. Two devices binding the same slot URI to different doc URLs (different recipes, different personal docs, etc.) is the normal case — the URI is the address, the doc is the house.
+
+Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* pointing at OTHER bags. The canonical example is `@catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/@catalog/corpus/<slug>` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/@<slug>` bag. Catalog catalogs; it does not host.
+
 <<~/ahu >>
 
 <<~ ahu #signal-law >>

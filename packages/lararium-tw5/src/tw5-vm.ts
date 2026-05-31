@@ -138,7 +138,6 @@ export class TW5Engine {
   }
 
 
-  // startRenderLoop → tw5-camera.ts (sidecar)
   // mountCamera    → tw5-camera.ts (sidecar)
   // mountPanel     → tw5-browser-surface.ts (sidecar, browser-only)
   // setPalette     → tw5-browser-surface.ts (sidecar, browser-only)

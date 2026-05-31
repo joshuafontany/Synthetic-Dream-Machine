@@ -29,8 +29,12 @@ import type {
   LarTiddlerChange,
   ChangeOrigin,
   MemeProjection,
+  SlotUri,
 } from "@lararium/mesh";
-import { toLarTiddlerRecord, isPersistableLarUri } from "@lararium/mesh";
+import { toLarTiddlerRecord } from "@lararium/mesh";
+
+/** Cascade config tiddler — newline-separated filter expressions; first non-empty result wins. */
+const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/@lararium/config/bag-paths";
 import type { TW5Engine } from "./tw5-vm.js";
 import type { LaresTw5Extension } from "./types/lares-globals.js";
 import { splitBodyTiddler } from "./deserializer.js";
@@ -38,10 +42,6 @@ import { splitBodyTiddler } from "./deserializer.js";
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function isTemp(title: string): boolean      { return title.startsWith("$:/temp/"); }
-function isDraft(title: string): boolean     { return title.startsWith("Draft of "); }
-function isTW5System(title: string): boolean { return title.startsWith("$:/"); }
 
 function toTW5FieldStrings(
   tw5: TW5Engine,
@@ -71,9 +71,6 @@ function extractFields(tw5: TW5Engine, tiddler: unknown): Record<string, string>
 export class IslandAdaptor implements MemeProjection {
   readonly name = "lararium-island";
 
-  /** Bag this adaptor targets for outbound writes. */
-  readonly targetBag: string;
-
   // SP-1 — 400 ms capture debounce on outbound saves.
   static readonly DEBOUNCE_MS = 400;
   private readonly _debounce = new Map<string, ReturnType<typeof setTimeout>>();
@@ -90,9 +87,42 @@ export class IslandAdaptor implements MemeProjection {
     private readonly tw5:   TW5Engine,
     private readonly store: LarTiddlerStore,
     readonly instanceId:    string,
-    targetBag = "wiki",
-  ) {
-    this.targetBag = targetBag;
+  ) {}
+
+  /**
+   * Walk the in-wiki bag-path cascade to pick a target slot URI.
+   *
+   * Mirrors TW5's `$:/config/FileSystemPaths` pattern: newline-separated
+   * filter expressions evaluated against a single-tiddler source. First
+   * filter returning a non-empty string wins. Empty string result means
+   * "match found, skip the write" (used for `$:/*` system tiddlers).
+   *
+   * Returns `null` when:
+   *   - the config tiddler is absent or empty
+   *   - the cascade exhausts without any filter matching
+   *   - the matching filter returned an empty string (explicit skip)
+   *
+   * The cascade lives as a tiddler in the wiki — operator-configurable at
+   * runtime. Per-wiki overlays compose naturally via the recipe cascade
+   * (a `lar:///ha.ka.ba/@lararium/config/bag-paths` overlaid in @<wikiSlug> wins over the
+   * default in @lararium).
+   */
+  private _routeBag(title: string): SlotUri | null {
+    const wiki = this.tw5.$tw.wiki;
+    if (typeof wiki.getTiddlerText !== "function" || typeof wiki.filterTiddlers !== "function") return null;
+    const config = wiki.getTiddlerText(BAG_PATHS_CONFIG, "");
+    if (!config) return null;
+    const filters = config.split("\n").map((s: string) => s.trim()).filter((s: string) => s.length > 0);
+    // Single-tiddler iterator — equivalent to TW5's wiki.makeTiddlerIterator([title]).
+    const source = (fn: (t: unknown, ti: string) => void): void => fn(wiki.getTiddler(title), title);
+    for (const filter of filters) {
+      const result = wiki.filterTiddlers(filter, undefined, source as never);
+      if (result.length === 0) continue;
+      const first = result[0] ?? "";
+      // Empty result = explicit skip (filter matched but returned no path).
+      return first === "" ? null : first;
+    }
+    return null;
   }
 
   // ---------------------------------------------------------------------------
@@ -186,9 +216,12 @@ export class IslandAdaptor implements MemeProjection {
     const fields = extractFields(this.tw5, tiddler);
     const title  = fields["title"] ?? "";
 
-    if (isTemp(title) || isTW5System(title)) return Promise.resolve();
-    if (isDraft(title))                      return Promise.resolve();
-    if (!isPersistableLarUri(title))         return Promise.resolve();
+    // Cascade pre-check: skip if no rule routes this title AND no explicit
+    // `bag` override (ceremony). Filters that USED to live here as hard-coded
+    // prefix checks now live in the in-wiki bag-paths cascade — operator-
+    // editable, per-wiki overlayable.
+    const explicitBag = fields["bag"];
+    if (!explicitBag && this._routeBag(title) === null) return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -218,9 +251,9 @@ export class IslandAdaptor implements MemeProjection {
   }
 
   deleteTiddler(title: string): Promise<void> {
-    if (this._isApplying())                  return Promise.resolve();
-    if (isTemp(title) || isTW5System(title)) return Promise.resolve();
-    if (!isPersistableLarUri(title))         return Promise.resolve();
+    if (this._isApplying()) return Promise.resolve();
+    // Cascade pre-check — skip the tombstone if no rule routes the title.
+    if (this._routeBag(title) === null) return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -272,7 +305,14 @@ export class IslandAdaptor implements MemeProjection {
   ): Promise<void> {
     const bodyText = fields["text"] ?? "";
     const { parent, children } = splitBodyTiddler(title, bodyText, fields);
-    const targetBag = fields["bag"] || this.targetBag;
+    // Ceremony writes carry an explicit `bag` field to route to a canonical slot;
+    // live edits route by walking the in-wiki cascade (lar:///ha.ka.ba/@lararium/config/bag-paths).
+    // The cascade returns null when no rule matches or an explicit-skip rule fires
+    // (e.g. $:/* system tiddlers).
+    // Explicit `bag` field (ceremony writes) short-circuits the cascade; only
+    // walk the in-wiki cascade when no override is present.
+    const targetBag = (fields["bag"] as SlotUri | undefined) ?? this._routeBag(title);
+    if (!targetBag) return;
     const { bag: _bag, ...persistedParent } = parent;
 
     await this.store.put(toLarTiddlerRecord({ ...persistedParent, title }), origin, { bag: targetBag });

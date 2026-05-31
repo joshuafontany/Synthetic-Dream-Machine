@@ -10,7 +10,7 @@ confidence  = 18
 mana        = 18
 manao       = 18
 manaoio     = 17
-role        = "causal-island ↔ TW5 wiki bridge — inbound pre-sync buffer + non-CRDT apply + outbound direct writes"
+role        = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
 cacheable   = true
 retain      = true
 docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
@@ -20,91 +20,84 @@ docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 
 ## Identity
 
-`IslandAdaptor` is the causal-island ↔ TW5 wiki bridge.
+`IslandAdaptor` is the narrow TS membrane between `CompositeStore` and the wiki.
 It implements `MemeProjection` (inbound) and exposes `saveTiddler` / `deleteTiddler` (outbound).
-It does NOT implement the TW5 `syncadaptor` module contract.
-`$tw.syncer` does not run — no `module-type:syncadaptor` tiddler exists in the plugin bundle.
+It does NOT implement the TW5 `syncadaptor` module contract — `$tw.syncer` does not run.
+
+Under the yin-collapse law (lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu), the wiki IS the
+reactive engine. The adaptor's responsibility collapsed to membrane work that TW5 cannot
+do from inside itself: subscribing to the CompositeStore projection bus, filtering own
+echoes, resolving cross-bag tombstones across recipe layers, and routing outbound TW5
+edits to `store.put` / `store.tombstone`.
 
 ## Responsibility Split
 
 | Concern | Owner |
 |---|---|
-| Pre-sync inbound buffer per island | IslandAdaptor |
-| `onSyncComplete` batch flush (one `wiki.transact()` per island) | IslandAdaptor |
-| Non-CRDT immediate apply (canon-hydrate, lares-verb, tw-local echoes) | IslandAdaptor |
-| Post-sync crdt-remote buffering | IslandAccumulator (separate projection) |
-| rAF-frame drain of post-sync patches | IslandAdaptor.flushAll() |
-| Outbound `saveTiddler` → `store.put()` | IslandAdaptor |
-| Outbound `deleteTiddler` → `store.tombstone()` | IslandAdaptor |
+| Subscribe to CompositeStore projection bus | IslandAdaptor |
+| Filter own `tw-local` echoes (skip our own writes coming back) | IslandAdaptor |
+| Cross-bag tombstone resolution (`store.getLive` across recipe layers) | IslandAdaptor |
+| Forward inbound `LarTiddlerChange` → `$tw.lares.enqueueNalu` | IslandAdaptor |
+| Unified queue + per-frame `wiki.transact()` drain | nalu-engine (in-wiki) |
+| Outbound `saveTiddler` (400 ms debounce + Path-H auto-split) → `store.put` | IslandAdaptor |
+| Outbound `deleteTiddler` → `store.tombstone` | IslandAdaptor |
+| Echo guard for outbound during drain | `$tw.lares.isApplyingNalu()` |
 
-## Wiring — Callers Register Both Projections
+## Wiring — One Projection, Not Two
 
 ```typescript
-const adaptor     = new IslandAdaptor(tw5, store, instanceId, targetBag);
-const accumulator = new IslandAccumulator();
-store.addProjection(adaptor);       // pre-sync buffer + non-CRDT
-store.addProjection(accumulator);   // post-sync crdt-remote
+const adaptor = new IslandAdaptor(tw5, store, instanceId, targetBag);
+store.addProjection(adaptor);
 ```
 
-The adaptor and accumulator are **siblings** in the projection fan-out,
-not nested. Both receive `onUriChanged` from `MemeProvider`.
-The adaptor handles everything before sync complete; the accumulator handles
-everything after.
+No accumulator. No `flushAll`. The wiki's nalu engine owns the queue and the drain.
 
 ## Invariants
 
-**I-1 Echo-loop guard.**
-`_applying: Map<string, ChangeOrigin>` remains non-empty for the duration of any inbound apply.
-`saveTiddler` and `deleteTiddler` return early (no-op) whenever `_applying.size > 0`.
-Multiple concurrent island replays use distinct apply-key slots — they do not interfere.
+**I-1 Echo filter at the membrane.**
+`onUriChanged` returns immediately when `change.origin.kind === "tw-local"` and
+`origin.instanceId === this.instanceId`. Own writes never re-enter the queue.
 
-**I-2 Island isolation.**
-One buffer per `edgeIsland` id.
-`onSyncComplete(islandId)` drains only that island's buffer.
-Multiple islands flush independently.
+**I-2 Cross-bag tombstone resolution.**
+On a tombstone change, if the store exposes `getLive(uri)`, resolve before enqueue —
+a tombstone in one bag must not delete the tiddler if another recipe layer still
+holds a live copy. Either the live record or the tombstone reaches `enqueueNalu`,
+never both.
 
-**I-3 Single transact per flush.**
-`onSyncComplete` applies its entire buffer inside one `wiki.transact()` call —
-one widget refresh pass per island, not one per tiddler.
+**I-3 Single forwarding path for all origins.**
+Every inbound change — `crdt-remote`, `canon-hydrate`, `lares-verb` — flows through
+`enqueueNalu`. No origin gets special-cased to bypass the nalu engine. The engine
+applies one `wiki.transact()` per frame regardless of origin mix.
 
-**I-4 Post-sync crdt-remote pass-through.**
-After `_syncComplete.has(islandId)` returns true, `onUriChanged` returns immediately
-for `crdt-remote` origins.
-IslandAccumulator holds those changes until the next frame drain.
-
-**I-5 Non-CRDT immediate apply.**
-`tw-local`, `canon-hydrate`, `lares-verb` origins bypass the sync gate and
-apply immediately via `_applyChange`.
-
-**I-6 Outbound guards — saveTiddler.**
-Skip if: `_isApplying()` || `$:/temp/` || `$:/` || `Draft of ` || not `lar:` prefix.
+**I-4 Outbound guards — saveTiddler.**
+Skip if: `$tw.lares.isApplyingNalu()` || `$:/temp/` || `$:/` || `Draft of ` || not `lar:` prefix.
 All other `lar:` URIs reach `store.put()` via the Path-H auto-split (`splitBodyTiddler`).
 
-**I-7 Cross-bag tombstone resolution.**
-On a delete change, if the store exposes `getLive(uri)`, resolve before wiping TW5 —
-a tombstone in one bag must not wipe TW5 if another recipe layer still holds a live copy.
+**I-5 Outbound guards — deleteTiddler.**
+Skip if: `$tw.lares.isApplyingNalu()` || `$:/temp/` || `$:/` || not `lar:` prefix.
+On a passing delete: `store.tombstone()` fires, then ahu fragment-parent children
+get removed from the wiki directly (outbound housekeeping, not a drain operation).
 
-**I-8 Child cleanup.**
-`deleteTiddler` removes ahu fragment-parent slot children from TW5 under the echo guard
-using a dedicated `${instanceId}:child` apply-key slot.
+**I-6 onSyncComplete is observability-only.**
+Under unified-nalu there is no per-island pre-sync buffer. The method exists for
+projection-protocol compatibility and may carry future telemetry; it does not
+mutate adaptor or wiki state.
 
-## flushAll — Per-Camera Drain
+**I-7 onChangeset (FFZ Scale-3) routes through enqueue.**
+For bulk patches (URIs ≥ `MemeProvider.CHANGESET_THRESHOLD`), the adaptor resolves
+each URI via `store.get()` and emits one `enqueueNalu` per URI. The nalu engine
+still drains them in one `wiki.transact()` at the next frame.
 
-```typescript
-flushAll(accs: IslandAccumulator[], budget = 200): void
-```
+## Initial replay
 
-Drains each accumulator in the array, up to `budget` patches total.
-Carries remainder to the next tick.
-Each non-empty accumulator drains into one `wiki.transact()` block.
-The wiki fires `change` after each transact — all registered widget trees react.
-
-In multi-camera wiring, `startRenderLoop` calls `flushAll([cam.accumulator], cam.budget)`
-per camera at each camera's own tick rate.  The adaptor applies the batch to the shared wiki.
-Each widget tree's `refresh(changedTiddlers)` selects the relevant subset — view frustum
-lives in the tree's root filter, not in the adaptor or accumulator.
+The recipe (`buildIslandRecipe`) drives `AutomergeDocStore.emitInitialReplay()` per bag
+after `addProjection(adaptor)` registers. Each existing tiddler flows through
+`provider.fireImmediate` → `adaptor.onUriChanged` → `$tw.lares.enqueueNalu`.
+The recipe then calls `$tw.lares.flushNalu(Number.MAX_SAFE_INTEGER)` so the wiki carries
+its seed state synchronously before `behavior.onEa` runs.
 
 <<~&#x0002;>>
 
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~&#x0004; -> lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine >>
+<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>

@@ -11,16 +11,19 @@
  *   the Repo-in-island sync port. Those belong to the vessel entry file.
  *
  *   Entry file orchestration pattern (all vessels):
- *     1. `await handler.bootTw5(wikiUri, coreBlob)`  — boots TW5, wires verse events
- *     2. entry file: wire Repo with syncPort, await Repo ready, extract initial tiddlers
- *     3. `handler.applyDelta(wikiUri, initialTiddlers, [])`  — seed TW5 from CRDT doc
- *     4. `handler.sendEa(wikiUri)`  — signal vessel: island is live
- *     5. on Repo change: `handler.applyDelta(wikiUri, added, deleted)` at rAF boundary
- *     6. on teardown: `handler.teardown()`  — dispose TW5
+ *     1. `await handler.bootTw5(wikiUri, coreBlob, pluginTiddlers)` — boots TW5, wires verse events,
+ *         installs the in-wiki nalu engine ($tw.lares.enqueueNalu)
+ *     2. entry file: wire Repo with syncPort, await Repo ready
+ *     3. `buildIslandRecipe(...)` — composite layers + IslandAdaptor projection +
+ *         initial replay through the wiki's nalu engine
+ *     4. `handler.sendEa(wikiUri)` — signal vessel: island is live
+ *     5. live CRDT patches: AutomergeDocStore → MemeProvider → IslandAdaptor →
+ *         $tw.lares.enqueueNalu → one wiki.transact() per frame
+ *     6. on teardown: `handler.teardown()` — dispose TW5
  *
  * ## What this class owns
  *
- *   TW5Engine   — full TiddlyWiki kernel, in-memory.
+ *   TW5Engine    — full TiddlyWiki kernel, in-memory.
  *   live handles — verse-event listeners; cancelled in order on teardown.
  *
  * ## What this class does NOT own
@@ -29,7 +32,7 @@
  *   Automerge WASM  — never loaded in this thread. Island-side Repo lives in the entry file.
  *   CryptoKey       — stays in vessel (GP-4).
  *   syncPort        — MessagePort for Repo sync; consumed by the entry file.
- *   IslandAdaptor   — no CompositeStore in IslandKernel; CRDT feed comes from the island-side Repo.
+ *   nalu drain      — lives inside the wiki as a TW5 startup module (nalu-engine).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-kernel
  */
@@ -41,7 +44,6 @@ import type {
 } from "@lararium/mesh";
 import {
   mkEa,
-  mkFrameAck,
   mkFault,
   ISLAND_PROTOCOL_VERSION,
 } from "@lararium/mesh";
@@ -60,12 +62,12 @@ export class IslandKernel {
 
   /**
    * Boot the TW5Engine. Does NOT send `ea` — the entry file sends it after the
-   * island-side Repo is synced and initial tiddlers applied.
+   * island-side Repo is synced and the recipe (including initial replay through
+   * the nalu engine) has assembled.
    *
-   * `preloadedTiddlers` carries the plugin layer (sigils, ahu, pranala, etc.).
-   * These are prerequisite — applied during boot so the CRDT truth layer can use
-   * them from first frame. An island booted without plugin tiddlers fails ea
-   * condition 3 (own truth) silently. Passed directly to TW5Engine.boot.
+   * `preloadedTiddlers` carries the plugin layer (sigils, ahu, pranala, nalu-engine).
+   * Applied during boot so the in-wiki nalu engine + reaction-router are live from
+   * first frame. Passed directly to TW5Engine.boot.
    *
    * Throws (and sends fault) if `coreBlob` carries zero bytes.
    */
@@ -103,52 +105,16 @@ export class IslandKernel {
   }
 
   /**
-   * Apply a tiddler add/delete delta to TW5 (from island-side Repo change events).
-   *
-   * Entry files call this at rAF / setInterval drain — not on every incoming message.
-   * The island owns the timing; this method is synchronous and cheap.
-   */
-  applyDelta(
-    wikiUri: string,
-    added:   readonly Record<string, unknown>[],
-    deleted: readonly string[],
-    _bagId?: string,
-  ): void {
-    if (!this._tw5) return;
-    const wiki    = this._tw5.$tw.wiki;
-    const Tiddler = this._tw5.$tw.Tiddler;
-    for (const fields of added) {
-      const title = fields["title"];
-      if (typeof title !== "string") continue;
-      wiki.addTiddler(new Tiddler(fields as Record<string, unknown>));
-    }
-    for (const title of deleted) {
-      wiki.deleteTiddler(title);
-    }
-    void wikiUri; // wikiUri reserved for future multi-wiki island support
-  }
-
-  /**
    * Return the live TW5Engine, or null if not yet booted / already torn down.
-   * Admin island entry files use this to pass the engine to IslandAdaptor and VerbDispatcher.
-   * Wiki islands should not need direct engine access — use applyDelta + sendEa instead.
+   * Entry files use this to pass the engine to IslandAdaptor / buildIslandRecipe.
    */
   tw5(): TW5Engine | null {
     return this._tw5;
   }
 
-  /** Send `ea` — call after Repo sync complete and initial tiddlers applied. */
+  /** Send `ea` — call after Repo sync complete and the island recipe has assembled. */
   sendEa(wikiUri: string): void {
     this._post(mkEa(wikiUri));
-  }
-
-  /**
-   * Send `frame:ack` — frame-completion signal (Island Sovereignty Law §4).
-   * Entry files call this at the END of each rAF / setInterval drain cycle.
-   * `frameId` is an island-generated UUID; it does NOT correlate with a vessel batch.
-   */
-  sendFrameAck(wikiUri: string, frameId: string): void {
-    this._post(mkFrameAck(wikiUri, frameId));
   }
 
   /**
