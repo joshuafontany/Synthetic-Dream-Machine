@@ -25,7 +25,7 @@ The ask points at a real boundary in the runtime. →■ The node answers direct
 ## Mixed Flow: Parse then Governed Reply
 
 ```
-lares@Enyalios:~$ lares --parse p~4 "floating p value, but did that actually change the scale?"
+lares@Enyalios:~$ lares --parse ~:p[4] "floating p value, but did that actually change the scale?"
 
 Segments: 2 | Entry: //input.testing.probes ~:confidence[SP],[9] 🏛️ ◎ @r | Exit: //question.audit.holds ~:confidence[S],[12] 🏛️ ◎ @r
 floating p value → //signal.uncertain.probes ~:confidence[SP],[9] 🏛️ ◎ @r

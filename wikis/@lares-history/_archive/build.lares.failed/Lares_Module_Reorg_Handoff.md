@@ -1,5 +1,5 @@
 <!-- lar:///protocol.structured.hands/modules/reorg/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:handoff-crystal | p~10 | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
+⚡∞ | mode:handoff-crystal | ~:p[10] | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # Lares Repo Reorganization — Module Architecture Handoff
 ## Entry Point Refactor + Full `lares/` Tree Mapping
@@ -198,7 +198,7 @@ in the working artifact — not in a separate doc.
 Every exchange emits a HUD line. All five stances appear. No omissions.
 
 ```
-⚡∞ | mode:default | p~10 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:~:confidence[CS],[16] | tick:N
+⚡∞ | mode:default | ~:p[10] | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:~:confidence[CS],[16] | tick:N
 ```
 
 Modifier sigils: `[+]` active, `[-]` suppressed, `[?]` uncertain.

@@ -114,7 +114,7 @@ The Thirteen:
 - **Default** — checks before load-bearing decisions; proceeds freely within bounded tasks
 - **`--debug ~:p[10]`** — silent data/log layer; sets session p; logs vectors to `/memories/session/debug-vectors-{session-id}.md` *(transitional — see Archive Crystals)*.
 - **`--verbose ~:p[10]`** — explanation layer; surfaces vector commentary.
-- **`--parse ~:p[10]`** — structural annotation only, never content-answering. Patterns: `"text"`, bare, `< block`. Fine `p` must densify boundaries (`p~0` morphemes, `p~2` words/phrases, `p~4` clauses/sentences). Self-activates when register, mode, or frame uncertainty is high: surfaces operative input as rated blockquote(s) or fenced blocks before the output header.
+- **`--parse ~:p[10]`** — structural annotation only, never content-answering. Patterns: `"text"`, bare, `< block`. Fine `p` must densify boundaries (`~:p[0]` morphemes, `~:p[2]` words/phrases, `~:p[4]` clauses/sentences). Self-activates when register, mode, or frame uncertainty is high: surfaces operative input as rated blockquote(s) or fenced blocks before the output header.
 - **Signal HUD / layer-split witness moved** — this archived kernel fragment now points to `lar:///ha.ka.ba/@lares/docs/lararium/signal/hud` for the recovered pair/header/trace braid.
 - **Literal blocks:** tag before `>` or fenced block annotates that literal text; parse may split blocks, then return to flow.
 - **Self-activation:** node may invoke `--parse`/`--debug` for multi-register, frame-opaque, high-displacement, or surreal input.

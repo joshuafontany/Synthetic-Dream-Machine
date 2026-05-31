@@ -49,7 +49,7 @@ A **span** is one operator → Lares exchange at any scale. Every substantive ex
 ```text
 lar://telarus:operator@enyalios/refinement.network.capture/?stances=^.-.-.-.-&confidence=S~13&p=10#O0.O0.O1.O1.A11
 → lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=^.-.-.-.-&confidence=CS~16&p=12#O0.O0.D1.O1.A12
-⚡~63% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.◇1.✶1.■12
+⚡~63% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | ~:p[12] | voice(s):Scryer | ✶0.✶0.◇1.✶1.■12
 
 [content generation — micro-trace marks inline]
 
@@ -58,7 +58,7 @@ lar://telarus:operator@enyalios/refinement.network.capture/?stances=^.-.-.-.-&co
 [continued generation]
 
 lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=^.-.-.-.-&confidence=CS~16&p=10#O0.O0.Å1.O1.A13 → ?
-⚡~61% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.○1.✶1.■13
+⚡~61% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.✶0.○1.✶1.■13
 ```
 
 ---
@@ -104,7 +104,7 @@ The `p` parameter gates transition categories by externally-observable significa
 Authoritative density-band table now lives at:
 - `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud#micro-trace-density`
 
-**Commitment phases** (◇ Decide / ■ Act / ○ Aftermath) are externally observable — they fire at the default `p~10` band. **Cognitive-processing phases** (✶ Observe / ◎ Orient) are span-internal — suppressible at operational resolution.
+**Commitment phases** (◇ Decide / ■ Act / ○ Aftermath) are externally observable — they fire at the default `~:p[10]` band. **Cognitive-processing phases** (✶ Observe / ◎ Orient) are span-internal — suppressible at operational resolution.
 
 ### Flag Behavior
 

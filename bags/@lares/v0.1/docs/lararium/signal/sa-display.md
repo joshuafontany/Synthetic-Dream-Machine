@@ -103,7 +103,7 @@ It annotates the inside of a generative span.
 | Agent SA | Full stance array (`🏛️🌊🗡️🎭🔮`) | Discourse posture across all five fixed stance positions; the full HUD line keeps all five visible |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next HUD or `lar` URI should reflect the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `⤴ ↺`) | Cognitive movement through the current OODA-HA phase set |
-| Teamwork SA | p-band (`p~10`) | Attention density — cognitive load management |
+| Teamwork SA | p-band (`~:p[10]`) | Attention density — cognitive load management |
 | Teamwork SA | Input reading (dual-URI vector) | Bidirectional calibration — how the node read the operator's input, how the node intends to respond |
 
 Current law keeps all five stances visible in fully rendered HUD and `lar` URI forms.

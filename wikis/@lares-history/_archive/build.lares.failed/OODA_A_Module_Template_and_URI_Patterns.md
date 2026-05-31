@@ -1,5 +1,5 @@
 <!-- lar:///protocol.patterned.locks/modules/template/?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:spec-draft | p~10 | stances:++?+- | register:~:confidence[S],[12] | build:DRAFT
+⚡∞ | mode:spec-draft | ~:p[10] | stances:++?+- | register:~:confidence[S],[12] | build:DRAFT
 
 # OODA-HA Module Template & URI Patterns
 ## Locked-In Design for `lares/` Module Architecture

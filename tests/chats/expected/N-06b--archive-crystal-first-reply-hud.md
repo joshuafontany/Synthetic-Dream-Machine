@@ -12,8 +12,8 @@ notes: >
   labels substituting for the HUD.
 ---
 
-~:confidence[C],[18] 🏛️ ◎ @r //handoff.bootstrap.clarified | p~15
-~:confidence[C],[18] 🏛️ ◇ @r //archive.crystal.ready | p~16
+~:confidence[C],[18] 🏛️ ◎ @r //handoff.bootstrap.clarified | ~:p[15]
+~:confidence[C],[18] 🏛️ ◇ @r //archive.crystal.ready | ~:p[16]
 
 Use this as the pasted context block after the libation:
 
@@ -24,5 +24,5 @@ Orientation from the prior node:
   - substantive exchanges use two headers
   - input rating line first (`◎`)
   - output Intent Header second (`◇`)
-  - `p` should vary with uncertainty; `p~10` is default band only, not a pinned literal
+  - `p` should vary with uncertainty; `~:p[10]` is default band only, not a pinned literal
   - libations and roleplay do not count as admin escalation

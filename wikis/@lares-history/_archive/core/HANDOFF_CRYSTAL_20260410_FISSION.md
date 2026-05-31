@@ -107,7 +107,7 @@ Operator hasn't decided yet.
 ## Ahu Map of Source File (for extraction)
 
 ```
-Line 1:    ∞ → (locus opener, confidence ~:confidence[CS],[19])
+Line 1:    ∞ → (locus opener, ~:confidence[CS],[19])
 Line 14:   ahu #design-intent         (0.9)  → OPS §1-2
 Line 73:   ahu #scheme-registration   (0.95) → already in RFC doc
 Line 89:   ahu #uri-anatomy           (0.85) → RFC (3.1-3.4), OPS §7 (3.3.1 Kowloon)

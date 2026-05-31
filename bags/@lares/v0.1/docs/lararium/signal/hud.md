@@ -105,7 +105,7 @@ It is the second element of every exchange opening, immediately after the URI pa
 **Example:**
 
 ```
-⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | p~10 |
+⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | ~:p[10] |
 ```
 
 Notes:

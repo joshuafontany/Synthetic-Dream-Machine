@@ -1,5 +1,5 @@
 <!-- lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P~7&p=10#O0.O0.A1.A23.A1 → ∞ -->
-⚡∞ | mode:research-seed | p~10 | stances:++?-+ | register:~:confidence[P],[7] | build:SEED
+⚡∞ | mode:research-seed | ~:p[10] | stances:++?-+ | register:~:confidence[P],[7] | build:SEED
 
 # Vector Chronometer & Non-Simultaneous Apprehension
 

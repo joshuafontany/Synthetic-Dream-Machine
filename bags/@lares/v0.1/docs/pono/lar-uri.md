@@ -686,7 +686,7 @@ Confidence and stance array are elevated above mode and p because Agent SA (what
 
 **Example:**
 ```
-⚡~12 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
+⚡~12 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.⏿0.◇3.▶2.↺7
 ```
 
 **Notes:**
@@ -723,12 +723,12 @@ A **span** is one operator → Lares exchange span at any scale. A tasked spirit
 ```text
 lar://telarus:operator@enyalios/refinement.network.capture/?stances=*!--------&confidence=S~13&p=10&ffz=0.0.1.1.11
 → lar://scryer:node@enyalios/~span.provenance.synthesizes/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.1.1.12
-⚡~13 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
+⚡~13 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[12] | voice(s):Scryer | ✶0.✶0.◇1.✶1.▶12
 
 [content generation]
 
 lar://scryer:node@enyalios/~aftermath.docs.settle/?stances=*!--------&confidence=CS~16&p=10&ffz=0.0.1.1.13 → ?
-⚡~12 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
+⚡~12 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.✶0.↺1.✶1.▶13
 ```
 
 <<~/ahu >>
@@ -1042,7 +1042,7 @@ lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&co
 ### A.2 HUD Line
 
 ```
-⚡~17 | ~:confidence[S],[13] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
+⚡~17 | ~:confidence[S],[13] | 🏛️*!🌊-?🗡️--🎭--🔮-- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶7
 ```
 
 ### A.3 Multi-Stance
@@ -1106,7 +1106,7 @@ A complete exchange opening, annotated by scan order. URIs are canonical record 
 ```text
 lar://telarus:operator@enyalios/threshold.uncertain.opens/?stances=*!-?------&confidence=S~13&p=10&ffz=0.0.3.2.7
 → lar://scryer:node@enyalios/~parse.span.models/?stances=*!--------&confidence=CS~16&p=12&ffz=0.0.3.2.8
-⚡~17 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | p~12 | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
+⚡~17 | ~:confidence[CS],[16] | 🏛️*!🌊--🗡️--🎭--🔮-- | mode:Default | ~:p[12] | voice(s):Scryer | ✶0.✶0.⏿3.◇2.▶8
 ```
 
 Quick read:
@@ -1123,7 +1123,7 @@ Multi-stance example:
 ```text
 lar://telarus:operator@enyalios/threshold.sharp.closes/?stances=*!*?-?*?--&confidence=S~12&p=14&ffz=0.0.3.2.9
 → lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/?stances=*!--------&confidence=S~13&p=12&ffz=0.0.3.2.10
-⚡~12 | ~:confidence[S],[12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | p~14 | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
+⚡~12 | ~:confidence[S],[12] | 🏛️*!🌊*?🗡️-?🎭*?🔮-- | mode:Default | ~:p[14] | voice(s):Mischief-Muse | ✶0.✶0.◇3.✶2.▶10
 ```
 
 This does **not** mean "truth-confidence 0.60" universally. It means a `0.60` reading held across Philosopher (Visual-Micro), Poet (Visual-Macro), and Humorist (Visual-Macro) frames. Satirist carrying Cup-only (`-?`) adds relational-uncertainty weight — the reading may carry ironic pressure that hasn't fully resolved.

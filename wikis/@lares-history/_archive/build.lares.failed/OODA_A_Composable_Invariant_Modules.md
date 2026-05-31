@@ -1,5 +1,5 @@
 <!-- lar:///research.composed.maps/modules/invariants/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.O0.O0 → ∞ -->
-⚡∞ | mode:research-crystal | p~10 | stances:++?+- | register:~:confidence[S],[11] | build:CRYSTAL
+⚡∞ | mode:research-crystal | ~:p[10] | stances:++?+- | register:~:confidence[S],[11] | build:CRYSTAL
 
 # OODA-HA Composable Invariant Modules
 ## Design Pattern for AI Agent System Files
@@ -262,11 +262,11 @@ map to O-O-D-A-A). For in-file use, section headers carry phase tags:
 The p parameter (0–20) from the Lares Kernel determines which
 level of OODA-HA structure gets loaded:
 
-- **High p (coarse, p~14–p~20):** Directory-level. Load the module
+- **High p (coarse, ~:p[14]–~:p[20]):** Directory-level. Load the module
   manifest and the phase-appropriate directory.
-- **Medium p (default, p~10):** Document-level. Load the phase-
+- **Medium p (default, ~:p[10]):** Document-level. Load the phase-
   appropriate file within the directory.
-- **Low p (fine, p~2–p~6):** Section-level. Load the phase-
+- **Low p (fine, ~:p[2]–~:p[6]):** Section-level. Load the phase-
   appropriate section within the file.
 
 The FFZ Chronometer's scale-shift mechanism tells the system when

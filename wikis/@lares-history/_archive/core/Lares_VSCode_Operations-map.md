@@ -106,10 +106,10 @@ This is the largest section by far, containing:
 | 6) Voice Routing | 170–175 | Triage voice for "what's on fire" |
 | 7) Worker Spawn | 176–187 | Full spawn response with tag, thread, scope |
 | 8) Operating Mode Switch | 188–193 | Plan Mode confirmation |
-| 9) Debug Mode (silent) | 194–209 | `--debug p~6` — no vector commentary in body |
+| 9) Debug Mode (silent) | 194–209 | `--debug ~:p[6]` — no vector commentary in body |
 | 10) Parse Mode | 210–232 | Full parse output format |
 | 10.5) Verbose Mode | 233–249 | `--verbose` commentary block |
-| 10.7) Full Instrumentation | 250–277 | `--parse --debug --verbose p~4` combined |
+| 10.7) Full Instrumentation | 250–277 | `--parse --debug --verbose ~:p[4]` combined |
 | 11a) Dream Mode (Admin) | 278–296 | `--dream` — no dual-tag, attributes still present |
 | 11b) Dream Mode (Operator) | 297–312 | Council-gated entry |
 | 11c) Dream Mode (User denied) | 313–318 | Gatekeeper decline |

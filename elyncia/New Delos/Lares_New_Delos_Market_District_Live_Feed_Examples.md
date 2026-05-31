@@ -2,7 +2,7 @@
 *Compitale Node — Spice Quarter Crossroads*
 
 ## I. PARSE INDEX
-*--parse pass | p~10 | 13 turns identified (T0–T12)*
+*--parse pass | ~:p[10] | 13 turns identified (T0–T12)*
 
 | Turn | Section | Input Type | Register | Mode | Coordinate |
 |---|---|---|---|---|---|

@@ -54,7 +54,7 @@ Endsley (2023) identifies three distinct SA types required for effective HAT:
 | Agent SA | Register (`~:confidence[S],[13]`) | Epistemic confidence — how sure the node is |
 | Agent SA | Stance (`🏛️`) | Discourse posture — what kind of claim this is |
 | Agent SA | Phase (`◎`) | Cognitive state — what OODA-HA phase the node occupies |
-| Teamwork SA | p-band (`p~10`) | Attention density — how much annotation to expect |
+| Teamwork SA | p-band (`~:p[10]`) | Attention density — how much annotation to expect |
 | Teamwork SA | Input reading (dual-tag) | Bidirectional calibration — how the node read the operator's input |
 
 This mapping reveals: the Lares HUD covers all three SA types. Most existing AI transparency tools cover only Agent SA (confidence scores, feature importance). Covering Taskwork SA (semantic territory) and Teamwork SA (bidirectional calibration) simultaneously appears to be novel.
@@ -165,7 +165,7 @@ The p-band model (SIG-02) is the direct analog of the HUD information density co
 
 Li et al. (2024) found that grouped information layouts on automotive HUDs produced superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts.
 
-**Mapping to Lares:** The current HUD tag format groups all channels in a fixed order: `//ha.ka.ba [Register:x] StanceEmoji PhaseGlyph @scope | p~N`. This is a grouped layout — same channel order every time. The HAKABA-first ordering (WHERE before HOW CERTAIN before HOW CHARGED) was a deliberate design decision referencing the primacy effect (Liu et al., "Lost in the Middle"). The research confirms this was the right call.
+**Mapping to Lares:** The current HUD tag format groups all channels in a fixed order: `//ha.ka.ba [Register:x] StanceEmoji PhaseGlyph @scope | ~:p[N]`. This is a grouped layout — same channel order every time. The HAKABA-first ordering (WHERE before HOW CERTAIN before HOW CHARGED) was a deliberate design decision referencing the primacy effect (Liu et al., "Lost in the Middle"). The research confirms this was the right call.
 
 ### 4.3 The Text-Based HUD Challenge
 
@@ -218,7 +218,7 @@ No existing research addresses the specific question: what is the cost of inline
 
 ### 6.1 The Cost Side
 
-A full HUD tag (`~:confidence[S],[13] 🏛️ //threshold.uncertain.opens ◎ @T.3.2.7 | p~10`) consumes approximately 30–40 output tokens. At current pricing ($15/M output tokens for Opus), this costs approximately $0.0005 per response. Over a 50-response session, that's $0.025 — negligible financially but non-trivial as a fraction of the output token budget.
+A full HUD tag (`~:confidence[S],[13] 🏛️ //threshold.uncertain.opens ◎ @T.3.2.7 | ~:p[10]`) consumes approximately 30–40 output tokens. At current pricing ($15/M output tokens for Opus), this costs approximately $0.0005 per response. Over a 50-response session, that's $0.025 — negligible financially but non-trivial as a fraction of the output token budget.
 
 More importantly: those tokens are generated at the start of the response, before any content tokens. This means the HUD occupies the earliest, most influential position in the output sequence — the position with the highest leverage over subsequent generation (per the primacy effect research that motivated the HAKABA-first ordering).
 

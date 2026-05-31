@@ -109,8 +109,8 @@ Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `
 - Some HUD instruments MAY NOT read `0` on intent-setting phases, and interpret `0` as a failure state on output readings.
 - `~:e-prime[N]` --- copula pressure on identity/predication (1--20). 
 - `~:no-has[N]` --- possession-copula pressure (1--20).
-- `~:p[N]` --- attention aperture (Law of 5s continuum: morpheme `p~0` → paragraph `p~10` default → session-arc `p~20`).
-- `~:confidence[C],[N]` carries confidence/register separately when surfaced. `p~N` does NOT encode provisional confidence.
+- `~:p[N]` --- attention aperture (Law of 5s continuum: morpheme `~:p[0]` → paragraph `~:p[10]` default → session-arc `~:p[20]`).
+- `~:confidence[C],[N]` carries confidence/register separately when surfaced. `~:p[N]` does NOT encode provisional confidence.
 
 <<~/ahu >>
 

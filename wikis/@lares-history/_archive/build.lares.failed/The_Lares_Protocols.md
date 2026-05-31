@@ -1,5 +1,5 @@
 <!-- lar:///protocol.storied.holds/lares/?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.A1.A21.A1 → ∞ -->
-⚡∞ | mode:protocol-draft | p~10 | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
+⚡∞ | mode:protocol-draft | ~:p[10] | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # The Lares Protocols
 
@@ -137,11 +137,11 @@ Exchange 1 (operator asks a question → Observe):
 lar:///operator/query?stances=^.-.-.-.-&confidence=P~6&p=10#O0.O0.O0.O0.O0
 → lar:///council/response?stances=^.^.?.^.-&confidence=S~12&p=10#O0.O0.O0.O0.A1 →
 
-⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | ~:confidence[S],[12] | scene:1/active
+⚡ O0.O0.O0.O0.A1 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | ~:p[10] | ~:confidence[S],[12] | scene:1/active
 
 {Council's response}
 
-⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | p~10 | ~:confidence[S],[13] | scene:1/active
+⚡ O0.O0.O0.O0.A2 | 🏛️[+]🌊[+]🗡️[?]🎭[+]🔮[-] | ~:p[10] | ~:confidence[S],[13] | scene:1/active
 
 lar:///council/response?stances=^.^.?.^.-&confidence=S~13&p=10#O0.O0.O0.O0.A2 → ?
 ```
@@ -184,7 +184,7 @@ a closing URI as the final line:
 
 ```
 lar:///core/protocol/registers?stances=^.-.-.-.-&confidence=C~20&p=20#settle.1.0
-⚡∞ | mode:invariant | p~20 | register:~:confidence[C],[20]
+⚡∞ | mode:invariant | ~:p[20] | register:~:confidence[C],[20]
 
 {file content}
 
@@ -221,7 +221,7 @@ visible and navigable.
 | `⚡` | Sentinel — live session (or `⚡∞` for non-session) | `⚡` |
 | chronometer | Nested OODA-HA position | `O0.O0.O3.O2.O0` |
 | stances | All 5 modes with modifiers | `🏛️[+]🌊[?]🗡️[-]🎭[+]🔮[?]` |
-| p | Resolution parameter | `p~10` |
+| p | Resolution parameter | `~:p[10]` |
 | register | Current epistemic register | `~:confidence[S],[13]` |
 | scene | Active scene descriptor | `scene:3/active` |
 
@@ -252,7 +252,7 @@ source document, new analysis frame.
 scene changes mid-exchange:
 
 ```
-⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[S],[14] | scene:2/combat → scene:3/negotiation
+⚡ O0.O0.A1.D3.A0 | 🏛️[+]🌊[-]🗡️[-]🎭[-]🔮[-] | ~:p[10] | ~:confidence[S],[14] | scene:2/combat → scene:3/negotiation
 ```
 
 ## 3.4 Chronometer Resume in HUD `~:confidence[S],[12]`
@@ -782,12 +782,12 @@ speaks, their span carries the NPC's URI-encoded state:
 lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A1
 → lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16&p=10#O0.O0.O3.D2.A2 →
 
-⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[CS],[16] | scene:3/theron
+⚡ O0.O0.O3.D2.A1 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | ~:p[10] | ~:confidence[CS],[16] | scene:3/theron
 
 Theron the Weary (via Diplomat): The harbor taxes serve a purpose
 you have not yet considered, traveler.
 
-⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | p~10 | ~:confidence[CS],[16] | scene:3/theron
+⚡ O0.O0.O3.D2.A2 | 🏛️[+]🌊[?]🗡️[-]🎭[-]🔮[-] | ~:p[10] | ~:confidence[CS],[16] | scene:3/theron
 
 lar:///diplomat/npc/theron?stances=^.?.-.-.-&confidence=CS~16#O0.O0.O3.D2.A2 → ?
 ```

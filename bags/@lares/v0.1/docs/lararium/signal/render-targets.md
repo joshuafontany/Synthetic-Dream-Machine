@@ -197,7 +197,7 @@ Fixed five-stance order and no-partial-emission still apply.
 ### `hud:exchange-pair`
 
 ```
-⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R~N] | p{p} |
+⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | ~:confidence[R],[N] | p{p} |
 ```
 
 - `⚡~N` — context-window resource Level on `0–20`; `~` prefix mandatory
@@ -328,12 +328,12 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 4. Append the two-character pair directly to the stance emoji, no space.
 5. Assemble all five as a single unspaced block.
 6. Determine active voice name, target confidence, and `p` value.
-7. Emit in field order: `⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | [R~N] | p{p} |`
+7. Emit in field order: `⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | ~:confidence[R],[N] | p{p} |`
 
 **Closed example:**
 
 ```
-⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | p~10 |
+⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | ~:p[10] |
 ```
 
 ### Surface 2: `chat-log:post-header`

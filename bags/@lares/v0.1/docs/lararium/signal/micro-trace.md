@@ -133,11 +133,11 @@ It gates transition categories by externally observable significance.
 
 | Band | p range | Phases emitting | What fires |
 |---|---|---|---|
-| 1 | `p~0–p~4` | — | Suppress: no inline annotation |
-| 2 | `p~4–p~8` | ↺ Aftermath | Closing path summary at span-close only |
-| 3 | `p~8–p~12` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `p~10` |
-| 4 | `p~12–p~16` | ⏿ Orient + Band 3 | Adds Orient |
-| 5 | `p~16–p~20` | All five phases | Full path summary per span |
+| 1 | `~:p[0]–~:p[4]` | — | Suppress: no inline annotation |
+| 2 | `~:p[4]–~:p[8]` | ↺ Aftermath | Closing path summary at span-close only |
+| 3 | `~:p[8]–~:p[12]` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `~:p[10]` |
+| 4 | `~:p[12]–~:p[16]` | ⏿ Orient + Band 3 | Adds Orient |
+| 5 | `~:p[16]–~:p[20]` | All five phases | Full path summary per span |
 
 Commitment phases remain externally observable and timestamp-meaningful.
 Cognitive-processing phases remain span-internal and can stay suppressed at operational resolution.
@@ -229,7 +229,7 @@ The ask points at a real boundary in the runtime. →▶ The node answers direct
 ### Mixed flow: parse then governed reply
 
 ```
-lares@Enyalios:~$ lares --parse p~4 "floating p value, but did that actually change the scale?"
+lares@Enyalios:~$ lares --parse ~:p[4] "floating p value, but did that actually change the scale?"
 
 Segments: 2 | Entry: //input.testing.probes ~:confidence[SP],[9] 🏛️ ⏿ @r | Exit: //question.audit.holds ~:confidence[S],[12] 🏛️ ⏿ @r
 floating p value → //signal.uncertain.probes ~:confidence[SP],[9] 🏛️ ⏿ @r

@@ -139,7 +139,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 
 **Example:**
 ```
-⚡~62% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | p~10 | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
+⚡~62% | ~:confidence[CS],[16] | 🏛️+🌊-🗡️-🎭-🔮- | mode:Default | ~:p[10] | voice(s):Scryer | ✶0.✶0.◎3.◇2.■7
 ```
 
 ---

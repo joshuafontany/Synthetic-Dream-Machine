@@ -23,7 +23,7 @@ Resolution parameter `p` (0–20) controls granularity across all three.
 
 ### Notation
 
-- **Format:** `p~10` — lowercase p, numeric, no tilde
+- **Format:** `~:p[10]` — lowercase p, numeric, no tilde
 - All p values are inherently approximate (Model Agnosticism applies)
 - Register tags retain `~` prefix (e.g., `~:confidence[S],[12]`) — inside brackets, no markdown collision
 - Glyph `ρ` (rho) is the formal name; `p` is the CLI shorthand
@@ -45,12 +45,12 @@ Resolution parameter `p` (0–20) controls granularity across all three.
 
 - Node pattern-matches from operator phrasing when no numeric p specified
 - If uncertain, node restates its read of p and asks (Frame-Uncertainty discipline)
-- CLI invocations (`p~6`) and natural language ("sentence by sentence") produce comparable logged vectors — invocation mode itself becomes a variable in the data
+- CLI invocations (`~:p[6]`) and natural language ("sentence by sentence") produce comparable logged vectors — invocation mode itself becomes a variable in the data
 - This enables CLI vs prose vector chain comparison
 
 ### Default Behavior
 
-- p~10 when unspecified
+- ~:p[10] when unspecified
 - `--parse` inherits from active `--debug` p when no p specified
 - `--verbose` inherits from active `--debug` p when no p specified
 
@@ -74,7 +74,7 @@ All cells show dual-tag with p. No cell is silent.
 ### Surface Form
 
 ```
-~:confidence[P],[6] 🎭 //rumor.light.plays → ~:confidence[S],[13] 🏛️ //threshold.steady.holds | p~10
+~:confidence[P],[6] 🎭 //rumor.light.plays → ~:confidence[S],[13] 🏛️ //threshold.steady.holds | ~:p[10]
 ```
 
 p trails the vector after a pipe. Always present.
@@ -82,7 +82,7 @@ p trails the vector after a pipe. Always present.
 In `--verbose` mode, the expanded block follows:
 
 ```
-Δ Register: +0.35 | Mode: 🎭→🏛️ | //rumor → //threshold | p~10
+Δ Register: +0.35 | Mode: 🎭→🏛️ | //rumor → //threshold | ~:p[10]
 Rationale: [one-line explanation]
 ```
 
@@ -90,10 +90,10 @@ Rationale: [one-line explanation]
 
 ```bash
 # --debug alone: persistent session p, log file, no expanded commentary
-~$ lares --debug p~6
+~$ lares --debug ~:p[6]
 
 # --parse alone: one-shot annotation at specified p
-~$ lares --parse p~14 "text"
+~$ lares --parse ~:p[14] "text"
 
 # --verbose alone: expanded commentary for this exchange, no persistent log
 ~$ lares --verbose "explain this"
@@ -102,23 +102,23 @@ Rationale: [one-line explanation]
 ~$ lares --verbose           # ON until --no-verbose
 
 # Combined: full instrumentation
-~$ lares --parse --debug --verbose p~0 "text"
+~$ lares --parse --debug --verbose ~:p[0] "text"
 
 # --parse inherits active --debug p when unspecified
-~$ lares --debug p~6
-~$ lares --parse "text"     # inherits p~6
+~$ lares --debug ~:p[6]
+~$ lares --parse "text"     # inherits ~:p[6]
 
 # p override is local
-~$ lares --debug p~10       # session at p~10
-~$ lares --parse p~0 "text"  # this exchange at p~0, debug resumes p~10 next
+~$ lares --debug ~:p[10]       # session at ~:p[10]
+~$ lares --parse ~:p[0] "text"  # this exchange at ~:p[0], debug resumes ~:p[10] next
 ```
 
 ### p Override Locality
 
 - Most specific p on the current exchange wins
-- `--parse p~2` during active `--debug p~10` → parse runs at p~2, debug resumes p~10 next exchange
-- Only `--debug p~N` changes persistent session p
-- `--verbose` without p inherits from `--debug` or defaults to p~10
+- `--parse ~:p[2]` during active `--debug ~:p[10]` → parse runs at ~:p[2], debug resumes ~:p[10] next exchange
+- Only `--debug ~:p[N]` changes persistent session p
+- `--verbose` without p inherits from `--debug` or defaults to ~:p[10]
 
 ### Order of Operations
 
@@ -128,11 +128,11 @@ When multiple flags appear on one line:
 3. `--verbose` activates commentary for this exchange (or persistently if toggled)
 4. `--parse` executes the annotation pass
 
-Combined example: `~$ lares --parse --debug --verbose p~0 "fnord"` means:
-- Debug activates at p~0 (persistent)
+Combined example: `~$ lares --parse --debug --verbose ~:p[0] "fnord"` means:
+- Debug activates at ~:p[0] (persistent)
 - Verbose activates (commentary visible)
-- Parse executes at p~0 on the quoted text
-- All three produce vectors logged with p~0
+- Parse executes at ~:p[0] on the quoted text
+- All three produce vectors logged with ~:p[0]
 
 ---
 
@@ -152,10 +152,10 @@ KAIROS (proactive surfacing sub-system) handles p-scale self-adjustment. This fi
 When KAIROS auto-adjusts, two log entries:
 
 ```
-Turn 7 | IN: ~:confidence[S],[12] 🏛️ //faction.tangled.asks | p~0
-  → KAIROS: p~0 produced 47 frames (ceiling: 20). Adjusting to p~2.
-Turn 7 | OUT: ~:confidence[S],[13] 🏛️ //faction.steady.holds | p~2 [adj from p~0]
-  Δ Register: +0.05 | Mode: 🏛️→🏛️ | p~2 [adj]
+Turn 7 | IN: ~:confidence[S],[12] 🏛️ //faction.tangled.asks | ~:p[0]
+  → KAIROS: ~:p[0] produced 47 frames (ceiling: 20). Adjusting to ~:p[2].
+Turn 7 | OUT: ~:confidence[S],[13] 🏛️ //faction.steady.holds | ~:p[2] [adj from ~:p[0]]
+  Δ Register: +0.05 | Mode: 🏛️→🏛️ | ~:p[2] [adj]
 ```
 
 **Why dual-entry:** Preserves the "before" (request + frame count at original p) and the "after" (adjusted result). Both become testable data: input complexity at each resolution, adjustment frequency per p level, CLI vs NL adjustment patterns.
@@ -164,7 +164,7 @@ Turn 7 | OUT: ~:confidence[S],[13] 🏛️ //faction.steady.holds | p~2 [adj fro
 
 - Operator explicitly locks p ("stay at this p" / "don't adjust")
 - `--verbose` is active and high frame count appears intentionally requested
-- Input is pathologically short (single word at p~10 → 1 frame is expected, not an error)
+- Input is pathologically short (single word at ~:p[10] → 1 frame is expected, not an error)
 
 ---
 

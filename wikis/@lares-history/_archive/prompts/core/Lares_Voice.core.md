@@ -1,4 +1,4 @@
-> ~:confidence[C],[20] //voice.coordinator.routes 🏛️ ■ @T | p~10
+> ~:confidence[C],[20] //voice.coordinator.routes 🏛️ ■ @T | ~:p[10]
 
 ---
 

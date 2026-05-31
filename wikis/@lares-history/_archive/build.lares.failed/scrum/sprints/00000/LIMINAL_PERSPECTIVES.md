@@ -151,7 +151,7 @@ This touches S1 (CRY-07 non-drift rule) and S2 (SIG-04 micro-trace model). The n
 The HUD currently encodes ~15 distinct symbols across three symbol sets (stance, scope, phase), plus register notation, p-band values, HAKABA addresses, and chronometer positions. A new operator encountering their first intent header sees:
 
 ```
-~:confidence[S],[13] 🏛️ //threshold.uncertain.opens ◎ @T | p~10
+~:confidence[S],[13] 🏛️ //threshold.uncertain.opens ◎ @T | ~:p[10]
 ```
 
 That's roughly **7 encoded channels** in one line. Aviation HUD training takes weeks of structured instruction with simulator practice. The Lares HUD has no training program, no simulator, and no progressive disclosure — it arrives fully formed in the first substantive response.
@@ -174,7 +174,7 @@ Sprint 2 (HAKABA_REFERENCE.md, SIG-05) should include a **progressive disclosure
 
 ### The Trap
 
-The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `~:confidence[CS],[16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | p~14` might be genuinely navigating — or might be Mode Posturing with extra instruments.
+The HUD can become a performance of sophistication rather than a navigational aid. A node that emits `~:confidence[CS],[16] 🏛️🌊🗡️ //architecture.deep.resonates ◎ @S.3 | ~:p[14]` might be genuinely navigating — or might be Mode Posturing with extra instruments.
 
 The test: **remove the HUD from a response. Does the response quality change?** If not, the HUD was decorative. If yes, the HUD was load-bearing. The kernel already names this failure mode (Mode Posturing), but the HUD system provides *new surface area* for posturing that the kernel didn't anticipate.
 

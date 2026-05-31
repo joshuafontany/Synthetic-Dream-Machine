@@ -69,11 +69,11 @@ All three map onto the same 0–20 Level continuum. The unified vocabulary table
 ```
 SIGIL  RANGE      CHRONO   HUD   TEXT-p        SPATIAL
 ─────  ─────      ──────   ───   ─────         ───────
-  ₀    0.0–0.2    Action   ⚡    p~0–p~4     personal (arm's reach, single target)
-  ₁    0.2–0.4    Round    ⚔️    p~4–p~8     tactical (weapon range, voice-carry)
-  ₂    0.4–0.6    Turn     🔍    p~8–p~12     local (room, junction, one procedure)
-  ₃    0.6–0.8    Watch    ⚙️    p~12–p~16     regional (neighborhood, district)
-  ₄    0.8–1.0    Week     🗺️    p~16–p~20     cartographic (map-scale, full journey)
+  ₀    0.0–0.2    Action   ⚡    ~:p[0]–~:p[4]     personal (arm's reach, single target)
+  ₁    0.2–0.4    Round    ⚔️    ~:p[4]–~:p[8]     tactical (weapon range, voice-carry)
+  ₂    0.4–0.6    Turn     🔍    ~:p[8]–~:p[12]     local (room, junction, one procedure)
+  ₃    0.6–0.8    Watch    ⚙️    ~:p[12]–~:p[16]     regional (neighborhood, district)
+  ₄    0.8–1.0    Week     🗺️    ~:p[16]–~:p[20]     cartographic (map-scale, full journey)
 ```
 
 **Attention quality per band:**
@@ -113,17 +113,17 @@ A counter increment at a lower-numbered Chronometer slot without a higher-slot c
 The `p` parameter's named anchors map onto bands:
 
 ```
-p~0  = morpheme      → ₀ band (Action grain)
-p~2  = word          → ₀ band
-p~4  = clause        → ₁ band (Round grain)
-p~6  = sentence-grp  → ₁ band
-p~10  = paragraph     → ₂ band (Turn grain)  DEFAULT
-p~14  = section       → ₃ band (Watch grain)
-p~17 = document      → ₄ band (Week grain)
-p~20  = session-arc   → ₄ band
+~:p[0]  = morpheme      → ₀ band (Action grain)
+~:p[2]  = word          → ₀ band
+~:p[4]  = clause        → ₁ band (Round grain)
+~:p[6]  = sentence-grp  → ₁ band
+~:p[10]  = paragraph     → ₂ band (Turn grain)  DEFAULT
+~:p[14]  = section       → ₃ band (Watch grain)
+~:p[17] = document      → ₄ band (Week grain)
+~:p[20]  = session-arc   → ₄ band
 ```
 
-"p~10" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
+"~:p[10]" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
 
 <<~/ahu >>
 

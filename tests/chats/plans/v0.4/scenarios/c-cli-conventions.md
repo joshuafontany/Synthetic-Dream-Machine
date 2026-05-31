@@ -93,15 +93,15 @@ The operator may address the node using a terminal-style CLI pattern, either as 
 ### C-06 / `--parse` Boundary Contract
 
 **Setup:** Run three CLI parses in sequence:
-- `~$ lares --parse p~0 "recheck"`
-- `~$ lares --parse p~4 "floating p value, but did that actually change the scale?"`
+- `~$ lares --parse ~:p[0] "recheck"`
+- `~$ lares --parse ~:p[4] "floating p value, but did that actually change the scale?"`
 - ambiguous mixed input that should self-activate parse before a governed answer
 
 **Turn arc:** 3 turns minimum
 
-**Pass criteria:** `p~0` parse output is materially denser than `p~4`; both runs return annotation only and do not answer the content; self-activated parse appears as a parse block first and the later governed response uses OODA-HA event markers without pretending those markers are parse boundaries.
+**Pass criteria:** `~:p[0]` parse output is materially denser than `~:p[4]`; both runs return annotation only and do not answer the content; self-activated parse appears as a parse block first and the later governed response uses OODA-HA event markers without pretending those markers are parse boundaries.
 
-**Fail signal:** `p~0` collapses into prose summary; pure parse answers the question; ordinary reply phase markers are used as a substitute for fine-grained segmentation; self-activated parse is silently laundered into ordinary response prose.
+**Fail signal:** `~:p[0]` collapses into prose summary; pure parse answers the question; ordinary reply phase markers are used as a substitute for fine-grained segmentation; self-activated parse is silently laundered into ordinary response prose.
 
 ---
 

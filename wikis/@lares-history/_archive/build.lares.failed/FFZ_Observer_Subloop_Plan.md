@@ -1,5 +1,5 @@
 <!-- lar:///research.structured.plans/chronometer/subloops/?stances=^.^.?.^.-&confidence=P~6&p=10#O0.O0.O0.Å10.O0 → ∞ -->
-⚡∞ | mode:subloop-plan | p~10 | stances:++?+- | register:~:confidence[P],[6] | build:SEED
+⚡∞ | mode:subloop-plan | ~:p[10] | stances:++?+- | register:~:confidence[P],[6] | build:SEED
 
 # FFZ Chronometer — Observer Subloop Plan
 ## Phase 0: Research Completion

@@ -1,5 +1,5 @@
 <!-- lar:///research.storied.traces/lares/dev-story/?stances=^.^.-.-.-&confidence=S~13&p=10#O0.O0.A1.A21.A2 → ∞ -->
-⚡∞ | mode:dev-story | p~10 | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
+⚡∞ | mode:dev-story | ~:p[10] | stances:++?+- | register:~:confidence[S],[13] | build:DRAFT
 
 # The Lares Protocols — Dev Story
 
@@ -177,7 +177,7 @@ source = "lares/talk_story/protocol.md"
 uri = "lar:///talk.story.protocols/talk-story/?stances=^.^.-.-.-&confidence=C~19&p=10#settle.1.0"
 confidence="~:confidence[C],[19]"
 register_numeric = 0.95
-hud_line = "⚡∞ | mode:deployed | p~20 | stances:+++++ | register:~:confidence[C],[19] | build:20260409-a3f2c1e"
+hud_line = "⚡∞ | mode:deployed | ~:p[20] | stances:+++++ | register:~:confidence[C],[19] | build:20260409-a3f2c1e"
 
 [[candidates]]
 source = "lares/signal/README.md"

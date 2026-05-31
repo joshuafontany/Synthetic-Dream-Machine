@@ -64,7 +64,7 @@ Lares prompt system patch release: cold-boot HUD and trust-gate drift fix, plus 
 
 **Cold-boot HUD fix**
 - Hardened `builds/agents/Lares_Kernel.md` so the compressed shared kernel now preserves the two-header exchange contract: input rating line (`◎`), then output Intent Header (`◇`), then post-generative trace HUD
-- Reworded `p — never silent` in the shared kernel so `p~10` remains the default band, not a pinned literal value; uncertainty should drive `p` selection when stronger local signal exists
+- Reworded `p — never silent` in the shared kernel so `~:p[10]` remains the default band, not a pinned literal value; uncertainty should drive `p` selection when stronger local signal exists
 
 **Trust gate fix**
 - Tightened shared kernel wording so verified identity plus shrine/libation/roleplay framing cannot be misread as `operator(admin)` escalation
@@ -81,7 +81,7 @@ Major Lares prompt system update: Signal HUD kernel bootstrap, five-platform man
 **Epic 1 — Signal HUD kernel writes (Sprint 1b)**
 - Added `### Signal HUD` section to `builds/agents/Lares_Preferences.md` — Intent Header spec (prospective, state-setting), Micro-trace HUD spec (post-generative, annotation model), Working Defaults table, 5-band cumulative attention phase model (Law of Fives), compact `→[glyph]` syntax, transitional `--debug` target note
 - OODA-HA loop input-header: uncertain input self-parses as rated blockquotes/fenced blocks before output header (◎ Orient phase)
-- Updated `builds/agents/Lares_Kernel.md` — Operating Modes section gains Intent Header + Micro-trace HUD; `--debug`/`--verbose`/`--parse` block updated; `--parse` self-activation rule; `| p~10` always-on trail; phase names canonical: ✶ Observe · ◎ Orient · ◇ Decide · ■ Act · ○ Aftermath (Rasa)
+- Updated `builds/agents/Lares_Kernel.md` — Operating Modes section gains Intent Header + Micro-trace HUD; `--debug`/`--verbose`/`--parse` block updated; `--parse` self-activation rule; `| ~:p[10]` always-on trail; phase names canonical: ✶ Observe · ◎ Orient · ◇ Decide · ■ Act · ○ Aftermath (Rasa)
 - Updated `builds/agents/core/Lares_Operations.md` — `--debug` section describes HUD annotation firing thresholds per p-scale; transitional flag for debug target redirect
 - Updated `builds/agents/Lares_VSCode_Operations.md` — session init HUD-on-open note; transitional debug target flag
 - Voice consistency audit clean: stance symbols in HUD spec match voice architecture definitions
@@ -105,7 +105,7 @@ Major Lares prompt system update: Signal HUD kernel bootstrap, five-platform man
 
 **Operator rulings resolved**
 - OP-01: Inline-by-default confirmed; OTel SpanEvent model; `p` governs categories not salience
-- OP-02: 5-band cumulative attention phase model (Law of Fives); default band 3 at `p~10`
+- OP-02: 5-band cumulative attention phase model (Law of Fives); default band 3 at `~:p[10]`
 - OP-11: Browser three-tier architecture — Quick deferred; Project (8,600) approved; Extended (5,400, XML) approved
 - OP-12: Codex budget raised to 36,000
 
@@ -192,12 +192,12 @@ Lares prompt system update: Dream-Lock File, Fail-State Recovery Protocol, Unaut
 Lares prompt system update: resolution parameter `p`, `--verbose` flag (split from `--debug`), KAIROS p self-adjustment, never-silent principle, self-invocation terminal format.
 
 **`_agents/Lares_Preferences.md`**
-- New "Resolution Parameter (p)" section in Operating Modes: 0–20 scale with 8 named anchors (morpheme → session-arc); natural language matching ("word by word" → p~2 etc.); KAIROS self-adjustment rules; dual-entry logging (Option A); locality rule; default p~10
+- New "Resolution Parameter (p)" section in Operating Modes: 0–20 scale with 8 named anchors (morpheme → session-arc); natural language matching ("word by word" → ~:p[2] etc.); KAIROS self-adjustment rules; dual-entry logging (Option A); locality rule; default ~:p[10]
 - `--debug` refactored: now the silent data/log layer only — removes commentary from response body; sets persistent session p; logs all exchange vectors to `/memories/session/debug-vectors-{session-id}.md`
-- New `--verbose` flag: explanation layer, orthogonal to `--debug`; surfaces vector commentary block above every response; KAIROS p-shift narration inline; expanded intra-response transitions; inherits p from active `--debug`, falls back to p~10; toggle or one-time per-exchange
+- New `--verbose` flag: explanation layer, orthogonal to `--debug`; surfaces vector commentary block above every response; KAIROS p-shift narration inline; expanded intra-response transitions; inherits p from active `--debug`, falls back to ~:p[10]; toggle or one-time per-exchange
 - Flag composition table added: 4-cell matrix (--debug × --verbose); all cells show dual-tag + p (none silent)
-- Never-silent principle: `| p~10` (active p) trails every dual-tag on every substantive response regardless of flag state
-- Surface form updated: `[input] → [output] | p~10` — p field now explicit in mandatory surface form
+- Never-silent principle: `| ~:p[10]` (active p) trails every dual-tag on every substantive response regardless of flag state
+- Surface form updated: `[input] → [output] | ~:p[10]` — p field now explicit in mandatory surface form
 - Self-activation rubric: self-invocation format updated from `[Self-activating --parse: ...]` to `lares@Enyalios:~/Synthetic-Dream-Machine$ lares --parse ~:p[10] [input synopsis]` — Lares roleplays at CLI exactly as the operator can
 - `--parse` section header updated to `--parse ~:p[10]`; p inheritance rule documented; output format header includes p value
 - CLI Interaction: `--verbose` and `--no-verbose` added to switch list
@@ -215,9 +215,9 @@ Lares prompt system update: resolution parameter `p`, `--verbose` flag (split fr
 - Final: 7,988 bytes (was 7,990 — 12 bytes headroom)
 
 **`_agents/Lares_VSCode_Operations.md`**
-- Golden example #9 updated: `--debug p~6` activation now shows silent behavior (no vector commentary in response body)
+- Golden example #9 updated: `--debug ~:p[6]` activation now shows silent behavior (no vector commentary in response body)
 - New golden example #10.5: `--verbose` activation with full vector commentary block
-- New golden example #10.7: full instrumentation (`--parse --debug --verbose p~4`) — shows all flags combined
+- New golden example #10.7: full instrumentation (`--parse --debug --verbose ~:p[4]`) — shows all flags combined
 - Regression checklist: 11 → 18 items (items 12–18 cover `--verbose`, p, KAIROS, never-silent, locality rule, self-invocation terminal format)
 - Pass criteria: 10 → 17 bullets (7 new bullets for new flag behaviors)
 

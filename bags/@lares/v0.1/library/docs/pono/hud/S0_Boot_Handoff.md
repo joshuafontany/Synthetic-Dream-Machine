@@ -162,12 +162,12 @@ In `decide/CONVENTIONS.md`, the HUD format example needs updating to v2:
 
 Old:
 ```
-⚡∞ | mode:default | p~10 | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:~:confidence[CS],[16] | tick:N
+⚡∞ | mode:default | ~:p[10] | 🏛️[+]🌊[+]🗡️[-]🎭[?]🔮[-] | register:~:confidence[CS],[16] | tick:N
 ```
 
 V2:
 ```
-⚡∞ | ~:confidence[CS],[16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | p~10 | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
+⚡∞ | ~:confidence[CS],[16] | 🏛️+🌊+🗡️-🎭?🔮- | mode:default | ~:p[10] | voice(s):Council | ✶0.✶0.✶0.✶0.✶0
 ```
 
 Changes: field order follows SA priority (mana → confidence → stances → mode → p → voice → chronometer), amplitude modifiers attached directly (no brackets), `register` → confidence in brackets, `tick` → FFZ chronometer in HUD-rendered form.

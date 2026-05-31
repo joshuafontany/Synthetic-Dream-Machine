@@ -43,9 +43,9 @@ The live model currently provides:
 
 The current live grammar, in compressed form, is:
 
-`//domain.quality.dynamic StanceEmoji [Register:x] PhaseGlyph @scope | p~N`
+`//domain.quality.dynamic StanceEmoji [Register:x] PhaseGlyph @scope | ~:p[N]`
 
-**Tag grammar updated (2026-04-07, branch `fix/green-jello-dinosaurs`):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | p~N`. Rationale: WHERE (semantic territory) precedes WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) and HOW-CERTAIN (register, calibrated against that stance). Stance precedes register because the posture of a claim conditions the probability assigned to it. All canonical source files and this draft updated in the same pass.
+**Tag grammar updated (2026-04-07, branch `fix/green-jello-dinosaurs`):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | ~:p[N]`. Rationale: WHERE (semantic territory) precedes WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) and HOW-CERTAIN (register, calibrated against that stance). Stance precedes register because the posture of a claim conditions the probability assigned to it. All canonical source files and this draft updated in the same pass.
 
 The live system also now treats the leading tag as prospective: it sets the active generative state for the next span. What remains underdefined is the in-flow signal behavior inside that governed span.
 
@@ -779,7 +779,7 @@ The draft had already spontaneously adopted `→◇` and `→■` in its own wor
 | End-of-span completed path (verbose/debug) | `[◎→◇→■]` | Bracketed; appears at span close; backward-looking audit model |
 | Stance shift (Option B, on meaningful turn) | `→🏛️` `→🌊` | Same `→[signal]` convention; fires only on genuine stance transition |
 
-**P-scale density guidance** (provisional): `p~0–p~4` — suppress inline markers, optional closing path summary; `p~6–p~10` — structural transitions only (`→◇`, `→■`, `→○`); `p~14–p~20` — individual step transitions + path summary.
+**P-scale density guidance** (provisional): `~:p[0]–~:p[4]` — suppress inline markers, optional closing path summary; `~:p[6]–~:p[10]` — structural transitions only (`→◇`, `→■`, `→○`); `~:p[14]–~:p[20]` — individual step transitions + path summary.
 
 **Sources fetched 2026-04-07:** gwern.net/Sidenotes ✅; gwern.net/subscript ✅; edwardtufte.github.io/tufte-css ✅; conventionalcommits.org ✅; orgmode.org/manual/Emphasis-and-Monospace ✅; fountain.io/syntax ✅. Sweller (2019) CLT review not accessible; principle applied from secondary literature.
 
@@ -852,7 +852,7 @@ The SDM corpus carries the full HAKABA permutation table. Entity types are defin
 | — | ✓ | — | Pure fire — no vessel, no direction |
 | — | — | ✓ | Pure direction — no vessel, no fire |
 
-[Canon: sdm/Ultraviolet_Grasslands_and_the_Black_City_2e → p~5 Death; sdm/Vastlands_Guidebook → Death and HAKABA]
+[Canon: sdm/Ultraviolet_Grasslands_and_the_Black_City_2e → ~:p[5] Death; sdm/Vastlands_Guidebook → Death and HAKABA]
 
 The Tagspace address maps onto this: every signal span posits at minimum Ha (the domain/vessel), Ka (the animating fire/quality), and Ba (the direction/dynamic). A tagless span is equivalent to pure matter on the existence table — no fire, no direction, no provenance.
 
@@ -932,11 +932,11 @@ Decisions below are tracked until locked into architecture. Locked entries recor
 
    | Band | p range | Phases emitting | What fires |
    |---|---|---|---|
-   | 1 | `p~0–p~4` | — (none) | Suppress: no inline annotation |
-   | 2 | `p~4–p~8` | ○ | Aftermath only: closing path summary at span-close |
-   | 3 | `p~8–p~12` | ◇ ■ ○ | Commitment phases: Decide/Act transitions + closing summary **(default)** |
-   | 4 | `p~12–p~16` | ◎ ◇ ■ ○ | Adds Orient: commitment phases + processing entry point |
-   | 5 | `p~16–p~20` | ✶ ◎ ◇ ■ ○ | All five phases + full path summary per span |
+   | 1 | `~:p[0]–~:p[4]` | — (none) | Suppress: no inline annotation |
+   | 2 | `~:p[4]–~:p[8]` | ○ | Aftermath only: closing path summary at span-close |
+   | 3 | `~:p[8]–~:p[12]` | ◇ ■ ○ | Commitment phases: Decide/Act transitions + closing summary **(default)** |
+   | 4 | `~:p[12]–~:p[16]` | ◎ ◇ ■ ○ | Adds Orient: commitment phases + processing entry point |
+   | 5 | `~:p[16]–~:p[20]` | ✶ ◎ ◇ ■ ○ | All five phases + full path summary per span |
 
    **Rationale:** Commitment phases (◇ ■ ○) are externally observable, timestamp-meaningful events. Cognitive-processing phases (✶ ◎) are span-internal states — suppressible at operational resolution, visible at debug resolution (Anthropic `display: "omitted"` precedent for `thinking_delta`). The 5-band structure is grounded in the Law of Fives: five bands, five phases, one-to-one cumulative mapping. KAIROS p-adjustment may shift the operative band mid-session; most specific `p` wins. `~:confidence[C],[19]` (operator-direct)
 6. How should closure outcomes be rendered in ordinary prose vs `--verbose` vs debug logs? `~:confidence[S],[11]` — adjacent rendering decisions exist in file; researcher can draft a table.
@@ -1031,7 +1031,7 @@ These are current working assumptions, not canon.
 - **HAKABA slot names** (`Ha`, `Ka`, `Ba`) appear openly in HUD annotations — Infrastructure-as-Myth; vocabulary is learned through use on [elyncia.app](https://elyncia.app)
 - **`p`** remains header-only; granularity changes require a new header
 - **HAKABA** order (Ha/domain → Ka/quality → Ba/dynamic) is the canonical logical field order `~:confidence[C],[19]`; governs ontological hierarchy and the full address form; does not constrain annotation text-order (rendering follows threshold and occurrence)
-- **Tag rendering order (confirmed 2026-04-07):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | p~N`. Order: WHERE (semantic territory) → WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) → HOW-CERTAIN (register, calibrated against that stance constellation). Stance precedes register because posture precedes probability. Primacy effect: the most human-scannable coordinate appears first.
+- **Tag rendering order (confirmed 2026-04-07):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | ~:p[N]`. Order: WHERE (semantic territory) → WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) → HOW-CERTAIN (register, calibrated against that stance constellation). Stance precedes register because posture precedes probability. Primacy effect: the most human-scannable coordinate appears first.
 
 **Crystal state machine layer:**
 
@@ -1523,7 +1523,7 @@ exploration scale — Turn 5: assess the wreckage and the room's remaining nodes
 - `#⚡.4.1.4.1.2` — Action 2, same round, same ⚡ scope
 - `#🔍.4.1.5` — Combat over (Round Aftermath → Turn increment). Chronometer *contracts*: positions 4 and 5 disappear, position 3 increments from 4 to 5. Scope returns to 🔍 Tactical. The scale shift is visible in the fragment alone.
 
-The `p` value also shifts: tactical runs at `p~10` (default band 3 — commitment phases only), but combat escalates to `p~14` (band 4 — adds Orient) and action peaks at `p~16` (band 5 — all five phases). More danger = more attention = denser trace.
+The `p` value also shifts: tactical runs at `~:p[10]` (default band 3 — commitment phases only), but combat escalates to `~:p[14]` (band 4 — adds Orient) and action peaks at `~:p[16]` (band 5 — all five phases). More danger = more attention = denser trace.
 
 ---
 
@@ -1554,7 +1554,7 @@ Deferred decisions and future refactors that are out of scope for the current al
 
 1. **Mode → Stance refactor (Kuntao Silat terminology)** — **COMPLETE (2026-04-07, branch `fix/green-jello-dinosaurs`).** The kernel's five discourse modes (🏛️ Philosopher · 🌊 Poet · 🗡️ Satirist · 🎭 Humorist · 🔮 Private) have been renamed **Stances**, drawn from Kuntao Silat: *Ma-Bu* (horse stance / grounded presence), *Jurus* (forms / structured engagement), *Langkah* (stepping / directed movement). The word "mode" was overloaded across the Tagspace field label (Ka), the kernel discourse-stance concept, and general English usage. Executed across all canonical source files: `Lares_Kernel.md`, `Lares_Preferences.md`, `Lares_VSCode_Operations.md`, `core/Lares_Epistemology.md`, `core/Lares_Operations.md`, `core/Lares_Permissions.md`. Also applied to this draft in the same pass. **Ka's field label has already been updated to `fire` in this draft** to free `mode` for eventual decommission. Grammar reorder (`//ha.ka.ba` first) executed in same pass.
 
-2. **Parse trigger on high-uncertainty operator input** — `~:confidence[SP],[9]` design note. When Lares's output Intent Header carries `~:confidence[SP],[9]` or below (register ≤ 0.45) or `p < 0.4`, the operator's follow-up can optionally prepend Lares's output tag before their input text: `//ha.ka.ba 🔮 ~:confidence[SP],[9] ◇ @r | p~7 → [operator text here]`. This signals Lares to run a `--parse` self-diagnostic on the operator's input string *before* generating the new output Intent Header. Rationale: high-uncertainty output means the node did not converge cleanly on territory — the safest next step is to explicitly parse the operator's correction or follow-up rather than committing to a new header from incomplete ground. The dual-header `input_tag:` / `output_header:` form in the Replay/debug example (§Examples) is the natural surface for this. **Open question:** should this be automatic (triggered by the register alone) or explicit (requires operator to prepend the tag)? Current preference: explicit — operator steers, node crews.
+2. **Parse trigger on high-uncertainty operator input** — `~:confidence[SP],[9]` design note. When Lares's output Intent Header carries `~:confidence[SP],[9]` or below (register ≤ 0.45) or `p < 0.4`, the operator's follow-up can optionally prepend Lares's output tag before their input text: `//ha.ka.ba 🔮 ~:confidence[SP],[9] ◇ @r | ~:p[7] → [operator text here]`. This signals Lares to run a `--parse` self-diagnostic on the operator's input string *before* generating the new output Intent Header. Rationale: high-uncertainty output means the node did not converge cleanly on territory — the safest next step is to explicitly parse the operator's correction or follow-up rather than committing to a new header from incomplete ground. The dual-header `input_tag:` / `output_header:` form in the Replay/debug example (§Examples) is the natural surface for this. **Open question:** should this be automatic (triggered by the register alone) or explicit (requires operator to prepend the tag)? Current preference: explicit — operator steers, node crews.
 
 3. **Phase names → OODA-HA canonical terminology** — The five attention-loop phases (`✶ ◎ ◇ ■ ○`) map to: *Observe → Orient → Decide → Act → **Aftermath (Rasa)***. The formal canonical name for the loop is **OODA-HA** (John Boyd's OODA loop + Aftermath/Rasa as the mandatory closure phase). Canonical phase name: **Aftermath**, with *Rasa* as the parenthetical alternate name (yogic/Sanskrit resonance: the aesthetic flavor or emotional essence left after the act completes). Both names are canonical; Aftermath is the primary label in documentation; Rasa appears in parentheses when the in-world / DreamNet register is foregrounded. Current glyph names in the kernel and draft are already ooda-haligned; this backlog item is to (a) make OODA-HA the explicit canonical label in all documentation, (b) deprecate any informal phase names, and (c) ensure the phase glyph set and the OODA-HA terminology are cross-referenced in the kernel prompt and tag spec. The `○` Aftermath phase is the distinguishing addition — OODA as originally formulated loops back from Act to Observe without a formal rest/rasa state. OODA-HA names that fifth phase explicitly and treats it as mandatory (not optional) on completed rounds.
 

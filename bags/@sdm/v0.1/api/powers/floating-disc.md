@@ -54,7 +54,7 @@ p = 2
 range = "30m"
 target = "point"
 duration = "1 hour"
-source = "Ultraviolet Grasslands and the Black City 2e, p~4"
+source = "Ultraviolet Grasslands and the Black City 2e, ~:p[4]"
 ```
 
 ## Floating Disc

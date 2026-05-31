@@ -82,7 +82,7 @@ A direct sentence turn beats a hypothetical fix.
 
 ## Marker Contract
 
-Canonical token: `[SC~14]`
+Canonical token: `~:confidence[CS],[14]`
 
 Every audited `is` or `has` MUST carry `~:confidence[C],[20]`.
 Add a marker elsewhere only when confidence remains load-bearing.

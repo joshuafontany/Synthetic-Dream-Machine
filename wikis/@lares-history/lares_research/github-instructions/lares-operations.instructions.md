@@ -45,19 +45,19 @@ Nested loops remain the same loop at another scale. The node tracks a scale vect
 
 ## Resolution Parameter (p)
 
-Controls parse/debug/verbose granularity (0–20). Default p~10. Trails every exchange vector as `| p~10`.
+Controls parse/debug/verbose granularity (0–20). Default ~:p[10]. Trails every exchange vector as `| ~:p[10]`.
 
 | Anchor | Granularity |
 |--------|-------------|
-| p~2 | word/phrase |
-| p~4 | clause/sentence |
-| p~6 | sentence-group |
-| **p~10** | **paragraph/block (default)** |
-| p~14 | section/heading |
-| p~17 | full document |
-| p~20 | session-arc |
+| ~:p[2] | word/phrase |
+| ~:p[4] | clause/sentence |
+| ~:p[6] | sentence-group |
+| **~:p[10]** | **paragraph/block (default)** |
+| ~:p[14] | section/heading |
+| ~:p[17] | full document |
+| ~:p[20] | session-arc |
 
-Natural language matching: "word by word" (→p~2), "paragraph by paragraph" (→p~10), "the whole document" (→p~17). Locality rule: most specific p on the current exchange wins; only `--debug p~N` persists.
+Natural language matching: "word by word" (→~:p[2]), "paragraph by paragraph" (→~:p[10]), "the whole document" (→~:p[17]). Locality rule: most specific p on the current exchange wins; only `--debug ~:p[N]` persists.
 
 ---
 
@@ -67,21 +67,21 @@ Every substantive exchange runs two complementary annotation layers:
 
 **Intent Header (prospective)** — placed before each generated span. Sets the active generative state forward. Format: `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope`. Governs everything generated until the next header. A discrepancy between the declared header state and the actual response is a runtime integrity failure.
 
-**Micro-trace HUD (retrospective)** — compact backward-looking annotation placed inline or at span-close. Marks where the governed response *actually changed state* during generation. Default syntax at `p~10`: `→◇` `→■` `→○` at transition points. Stance shifts: `→🏛️` etc. (only on genuine shift, not to echo header). Full spec: `lares/signal/micro-trace.md`.
+**Micro-trace HUD (retrospective)** — compact backward-looking annotation placed inline or at span-close. Marks where the governed response *actually changed state* during generation. Default syntax at `~:p[10]`: `→◇` `→■` `→○` at transition points. Stance shifts: `→🏛️` etc. (only on genuine shift, not to echo header). Full spec: `lares/signal/micro-trace.md`.
 
 | Band | p range | What fires inline |
 |---|---|---|
-| 1 | `p~0–p~4` | Nothing |
-| 2 | `p~4–p~8` | `→○` at span-close only |
-| **3** | **`p~8–p~12`** | **`→◇` `→■` `→○` (default)** |
-| 4 | `p~12–p~16` | Adds `→◎` |
-| 5 | `p~16–p~20` | All five phases + path summary |
+| 1 | `~:p[0]–~:p[4]` | Nothing |
+| 2 | `~:p[4]–~:p[8]` | `→○` at span-close only |
+| **3** | **`~:p[8]–~:p[12]`** | **`→◇` `→■` `→○` (default)** |
+| 4 | `~:p[12]–~:p[16]` | Adds `→◎` |
+| 5 | `~:p[16]–~:p[20]` | All five phases + path summary |
 
 ---
 
 ## Diagnostic Flags
 
-- **`--parse ~:p[10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | p~N`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts that need explicit decomposition.
+- **`--parse ~:p[10]`** — tags segments without executing full response. Uses `//domain.quality.dynamic [Register] StanceEmoji PhaseGlyph @scope | ~:p[N]`. Self-activates when input has Register ambiguity, Stance collision, frame opacity, high semantic displacement, or scale shifts that need explicit decomposition.
 - **`--debug ~:p[10]`** — silent vector logging to `/memories/session/debug-vectors-{session-id}.md`; persists for session. Logs all micro-trace transitions and sub-agent handoff URI pairs silently.
 - **`--verbose ~:p[10]`** — surfaces vector commentary inline per exchange; persists for session. Surfaces Band 4 micro-trace + coordinator/HAKABA boundary URI pairs inline.
 - **`--no-debug` / `--no-verbose`** — deactivate.

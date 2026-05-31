@@ -21,7 +21,7 @@ phase-map:
 scale-range: [action, session]
 trigger: >
   When governing any Lares response. Annotation density scales with p.
-  Always active at default p~10 (Band 3: ◇ Decide · ■ Act · ○ Aftermath).
+  Always active at default ~:p[10] (Band 3: ◇ Decide · ■ Act · ○ Aftermath).
 invariant: false
 dependencies: [talk-story, uri-schema]
 confidence:CS~16

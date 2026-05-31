@@ -1,5 +1,5 @@
 <!-- lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S~11&p=10#O0.O0.O0.D4.O0 → ∞ -->
-⚡∞ | mode:research-active | p~10 | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
+⚡∞ | mode:research-active | ~:p[10] | stances:++?+- | register:~:confidence[S],[11] | build:WORKING
 
 # Fontany-Fuller-Zelenka Chronometer Protocol — Research Document
 # (FFZ Chronometer)
