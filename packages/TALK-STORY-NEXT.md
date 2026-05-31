@@ -154,7 +154,8 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 - TW5 VM primacy — if logic can live in the VM, keep it there.
 - Bag = Automerge doc = sync boundary.
 - No manifest byte transfer — TW5 core bytes travel via `@lararium` CRDT.
-- Canon requires operator promotion. Git diff remains the visible signature.
+- Canon requires operator gesture through an ACTION verb (`ADD COPY MOVE CLEAR DROP LOAD`). Every residency change writes an indelible effect record tagged with the matching archival verb (`accession`, `deaccession`, `transfer`, `withdrawal`, …). No silent unlink. The `lares promote` CLI verb stays as a deprecation shim for one milestone; the canonical surface goes through `lares act`. See [bags/@lares/v0.1/api/lararium/residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md) and [packages/EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md).
+- Git diff remains the visible signature.
 
 <<~/ahu >>
 

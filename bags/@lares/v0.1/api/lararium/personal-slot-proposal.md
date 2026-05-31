@@ -205,6 +205,41 @@ Same wiring for `@draft` — vessel maintains per-pair draft doc URLs.
 
 <<~/ahu >>
 
+<<~ ahu #reconciliation >>
+
+## Reconciliation with the Residency Model (2026-05-30)
+
+The approved [residency-model](residency-model.md) reframes how this proposal lands.
+The slot URI, the (PersonGroup × recipe-fingerprint) keying, and the Yang/Yin/Chao
+position above `@<wiki>` all survive intact. Two clarifications follow:
+
+1. **Cascade rules become first-write defaults, not authoritative routing.**
+   The `@personal` cascade entries in `#cascade-rules` MUST hold as *defaults for
+   where a new tiddler first lands* — not as *the one place a tiddler may live*.
+   Under the residency model a title MAY have residency in `@personal` AND
+   `@<wiki>` AND a canon library simultaneously. The recipe walks priority and
+   surfaces the topmost Manifestation; the cascade only decides where the
+   first-write goes when no other bag already holds the title.
+
+2. **Migration tests gain +2 cases for multi-bag residency.** The existing 7-test
+   plan in `#migration` covers single-bag residency. Add:
+   - **Test 8 (multi-bag overlay):** write `$:/StoryList` in `@personal`, then
+     `lares act ADD --title $:/StoryList --from @personal --to @<wiki>`. Assert
+     resolveAll returns both bags; resolveTopmost picks `@personal` per recipe
+     priority; origin-bag field reads `@personal`; the `@<wiki>` Manifestation
+     remains visible to `lares wiki resolve $:/StoryList`.
+   - **Test 9 (transfer effect record):** `lares act MOVE --title MyNote
+     --from @personal --to @<wiki>` produces one `transfer` effect record
+     pairing accession (`@<wiki>`) + deaccession (`@personal`); the deaccession
+     log persists in `@personal/log/residency/` after the tiddler leaves.
+
+Status remains `approved`. The data-model mechanism (BagResolver bound per
+(PersonGroup × recipe-fingerprint)) does not change. Implementation now coordinates
+with Sprint 7 of `packages/EPIC-RESIDENCY-MODEL.md` rather than landing as an
+independent migration.
+
+<<~/ahu >>
+
 <<~ ahu #open-questions >>
 
 ## Open questions (remaining)

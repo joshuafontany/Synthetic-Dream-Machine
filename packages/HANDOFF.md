@@ -104,6 +104,37 @@ onEa/onSignal/onDemote = OTP init/1 / handle_info/2 / terminate/2.
 VesselIslandPool: vessel invites islands (mounts), does not supervise them.
 ```
 
+## What Changed This Turn (2026-05-30 turn 31)
+
+### Residency Model Epic — pono memetic intent + sprint plan landed ✅ docs+memes only, no code
+
+**Architectural decision approved.** After two rounds of research (eight spirits total), the recipe/bag + CRDT model resolves as a **coordinate space + query plan**, not a timeline + branches. The git-style `stage / commit / push` triple proposed in the prior pivot gets retired — it imported a timeline mental model into a coordinate-space architecture. The actual surface carries **two distinct verb registers**:
+
+- **ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation):** `ADD`, `COPY`, `MOVE`, `CLEAR`, `DROP`, `LOAD` — operator gestures over residency.
+- **Effect-record annotations (tiddler tags, archival profession derivation):** `accession`, `deaccession`, `transfer`, `withdrawal`, `loan`, `holdings`, `reappraisal`, `disposition` — indelible audit per residency change.
+
+Floating Librarians of Mu endorse (high confidence). Pono.
+
+**Memetic intent landed:** [`bags/@lares/v0.1/api/lararium/residency-model.md`](../bags/@lares/v0.1/api/lararium/residency-model.md) (confidence 17, status=approved, approved-on 2026-05-30). Carries the load-bearing invariant: coordinate-first not timeline-first; Work-identity preserved across residencies (FRBR/LRM); operator-visible coordinate surface; audit-trail discipline; verb vocabulary from set-algebra + cataloging. Six named anti-patterns surfaced from research (causal-history severance, schema drift, whiteout resurrection, shadow-override confusion, recipe-drift poisoning, concurrent commits) — each gets a named defense in the sprint plan.
+
+**Sprint plan authored:** [`packages/EPIC-RESIDENCY-MODEL.md`](EPIC-RESIDENCY-MODEL.md) — ten sprints in OODA-HA cycle-flow form. Sprint 1 (memetic intent + reconciliation) closed this turn. Sprints 2–10 queued: data model + URI grammar, multi-residency at recipe layer, effect-record audit, action handlers in node + CLI, browser parity, `@personal` slot enactment coordinated with the model, coordinate-inspection UI, doc meme sweep, test golden regeneration.
+
+**Reconciliation:** [`personal-slot-proposal.md`](../bags/@lares/v0.1/api/lararium/personal-slot-proposal.md) (status remains `approved`) gains a `#reconciliation` ahu block clarifying that cascade rules become **first-write defaults** under the residency model, with +2 multi-bag residency tests added to the migration plan. Coordinated with Sprint 7 of the new Epic.
+
+**Memory:** `project_residency_model_architecture.md` saved. Prior memory `project_stage_commit_push_model.md` marked SUPERSEDED with header warning; preserved for context.
+
+**Cross-references updated:**
+- `packages/ROADMAP.md` — Priority 2 row added (Residency Model Epic); Path N description updated to reflect `<$lar-action>` widget shape instead of `<$lar-promote>`.
+- `packages/TALK-STORY-NEXT.md` — rules section now names ACTION verbs + archival audit as the canonical surface; `lares promote` named as deprecation shim for one milestone.
+
+**Research synthesis (eight spirits across two sessions):** Round 1 surveyed CRDT composition, git/jj/pijul/cherry-pick, overlay/union filesystem anti-patterns, multi-vault knowledge tool UX. Round 2 stripped git framing entirely and surveyed CRDT residency primitives, library/archival cataloging vocabulary, federation/propagation protocols, scope/namespace patterns. The convergent finding across both rounds: **no shipping CRDT system has composed multi-bag residency with operator-facing gestures.** SDM fills a real gap. Closest validators: TiddlyWiki Bags/Recipes (same shape, K/V not CRDT), RDF named graphs + SPARQL Update (settled vocabulary since 2013), FRBR/LRM + SAA professional discipline (identity-across-custody, late 19th c.), Willow protocol (CRDT-adjacent substrate that separates coordinate from payload by design). Key citations preserved in `residency-model.md` `#closest-prior-art`.
+
+**Code surface untouched.** 72 lingering `promote` references across `lares-cli`, `lararium-node`, `lararium-mesh` await Sprint 5 of the Epic. `promote-handler.ts` stays in place. Tests stay green. Branch carries no new code commits.
+
+**Metrics:** unchanged from turn 30 — mesh 96/96, tw5 67/67, node 64/64, browser 19/20 (1 pre-existing TW5-boot shim gap).
+
+---
+
 ## What Changed This Turn (2026-05-30 turn 30)
 
 ### TW5-native unified-nalu + WikiRecipe one-model + in-wiki bag-paths cascade ✅ 227/227 tests (browser m3 pre-existing shim gap)
