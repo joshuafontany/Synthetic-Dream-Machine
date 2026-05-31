@@ -25,7 +25,7 @@ trigger: >
   whether output matches surface rules.
 invariant: false
 dependencies: [uri-schema]
-confidence: ~:confidence[CS],[17]
+confidence: [CS],[17]
 ---
 ```
 

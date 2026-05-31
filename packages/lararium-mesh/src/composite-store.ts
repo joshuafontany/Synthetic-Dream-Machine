@@ -241,6 +241,49 @@ export class CompositeStore implements LarTiddlerStore {
     return out;
   }
 
+  /**
+   * Residency Model S3.1 — return every (bagId, record) pair holding a
+   * non-tombstoned manifestation of `title`, ordered highest-priority first.
+   *
+   * Surfaces multi-bag residency for operator inspection (lares wiki resolve)
+   * and for downstream tooling that needs the full set of Manifestations.
+   * Pairs with resolveTopmost() which returns only the winning pair.
+   *
+   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   */
+  async resolveAll(title: string): Promise<Array<{ bagId: string; record: LarTiddlerRecord }>> {
+    const out: Array<{ bagId: string; record: LarTiddlerRecord }> = [];
+    for (let i = this.layers.length - 1; i >= 0; i--) {
+      const layer = this.layers[i]!;
+      const rec = await layer.store.get(title);
+      if (rec && !rec.meta?.deleted) out.push({ bagId: layer.bagId, record: rec });
+    }
+    return out;
+  }
+
+  /**
+   * Residency Model S3.2 — return the winning (bagId, record) pair for `title`
+   * per recipe priority, or null when no live residency exists.
+   *
+   * Equivalent to getLive() but carries the source bag for operator-visible
+   * coordinate surface. The CSS DevTools Computed-panel analog at the data
+   * layer; consumers surface origin-bag in the read path (IslandAdaptor +
+   * getOriginBag).
+   *
+   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   */
+  async resolveTopmost(title: string): Promise<{ bagId: string; record: LarTiddlerRecord } | null> {
+    for (let i = this.layers.length - 1; i >= 0; i--) {
+      const layer = this.layers[i]!;
+      const rec = await layer.store.get(title);
+      if (rec && !rec.meta?.deleted) {
+        if (this.residency) void Promise.resolve(this.residency.touch(layer.bagId));
+        return { bagId: layer.bagId, record: rec };
+      }
+    }
+    return null;
+  }
+
   subscribe(fn: (change: LarTiddlerChange) => void): () => void {
     this.listeners.add(fn);
     return () => { this.listeners.delete(fn); };

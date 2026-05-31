@@ -91,10 +91,15 @@ function _scheduleFrame(): void {
 function _toFields(change: LarTiddlerChange): TW5TiddlerInputFieldsWithTitle {
   // CRDT records store the title as the doc key, not nested in `tiddler` —
   // restore it from `change.title` so the wiki tiddler carries its identity.
+  //
+  // Residency Model S3.4 — every inbound write annotates `origin-bag` so the
+  // operator can answer "which bag does this come from?" at every read
+  // (Anti-pattern #4 defense). The legacy `bag` field stays for outbound
+  // write-target override; `origin-bag` carries inbound provenance.
   const fields: TW5TiddlerInputFieldsWithTitle = {
     ...change.record!.tiddler,
     title: change.title,
-    ...(change.bag !== undefined ? { bag: change.bag } : {}),
+    ...(change.bag !== undefined ? { bag: change.bag, "origin-bag": change.bag } : {}),
   };
   return fields;
 }

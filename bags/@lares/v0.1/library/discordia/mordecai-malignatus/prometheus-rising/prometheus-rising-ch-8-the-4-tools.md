@@ -45,7 +45,7 @@ description: >
   Full text downloaded locally. Deeper ingestion deferred.
 source-file: prometheus-rising.djvu.txt
 archive-url: "https://archive.org/details/wilson-robert-anton-regardie-israel-prometheus-rising-1997-new-falcon-publications-libgen.lc_202012"
-confidence: ~:confidence[CS],[16]
+confidence: [CS],[16]
 ingestion-status: Chapter 8 read — deferred further
 chapters-of-interest:
   - chapter: 8

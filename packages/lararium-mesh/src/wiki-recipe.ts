@@ -17,6 +17,8 @@
  */
 
 import type { AutomergeUrl } from "@automerge/automerge-repo";
+import type { Heads } from "@automerge/automerge";
+import type { LarTiddlerRecord } from "./tiddler-store.js";
 
 /** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
 export type SlotUri = string;
@@ -57,6 +59,42 @@ export interface WikiRecipe {
    * canonBags[0] wins ties over canonBags[1]. Read-only from this wiki.
    */
   readonly canonBags?: readonly SlotUri[];
+  /**
+   * Optional bag-epoch pins — Anti-pattern #5 defense (recipe-drift poisoning).
+   * Each pinned slot carries an Automerge Heads array naming the expected state.
+   * When a slot carries a pin, the recipe MAY refuse a read whose underlying
+   * doc heads differ from the pin (lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   * Anti-pattern #5). Sprint 3 lands the interface; enforcement defers to a
+   * later sprint when consumers exist. Default null/absent = unpinned.
+   */
+  readonly bagEpochs?: ReadonlyMap<SlotUri, Heads>;
+}
+
+/**
+ * Read-time lens function — Anti-pattern #2 defense (schema drift across
+ * multi-bag residency). Cambria-style projection from a bag's stored shape
+ * into the consumer's expected shape. Sprint 3 lands the hook with identity
+ * default; future sprints land actual lens functions.
+ *
+ * Signature: (record) => record. Pure function; no IO.
+ */
+export type RecordLens = (record: LarTiddlerRecord) => LarTiddlerRecord;
+
+/** Identity lens — default for every (title, bag) pair until a real lens lands. */
+export const identityLens: RecordLens = (record) => record;
+
+/**
+ * Return the lens function that SHOULD apply to a (title, bag) read.
+ *
+ * Sprint 3 implementation: always returns identityLens — no real lenses
+ * exist yet. The hook lives at recipe scope so that future Cambria-style
+ * per-(bag-version × title-shape) lenses can register here without breaking
+ * the read API.
+ *
+ * Anti-pattern #2 defense: read-time lensing, not write-time migration.
+ */
+export function lensFor(_recipe: WikiRecipe, _title: string, _bag: SlotUri): RecordLens {
+  return identityLens;
 }
 
 /**

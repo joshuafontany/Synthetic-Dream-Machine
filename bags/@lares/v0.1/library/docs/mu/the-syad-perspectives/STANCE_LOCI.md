@@ -19,7 +19,7 @@ phase-map:
 trigger: always — grammar primitive
 invariant: true
 dependencies: [confidence]
-confidence: ~:confidence[CS],[16]
+confidence: [CS],[16]
 grammar: true
 ---
 ```
