@@ -35,8 +35,13 @@ function origin(bagId: string): ChangeOrigin {
 async function makeStoreWithLayers(): Promise<CompositeStore> {
   const composite = new CompositeStore();
   // Layers added lowest-priority → highest-priority (composite-store convention).
-  composite.addLayer({ bagId: LOW,  store: new MemoryTiddlerStore(), writable: false });
-  composite.addLayer({ bagId: MID,  store: new MemoryTiddlerStore(), writable: false });
+  // All three mark `writable: true` so the test can route explicit-bag writes
+  // to any layer. `defaultWritable: false` on LOW/MID preserves HIGH as the
+  // default writable for unbagged writes — matches normal recipe semantics
+  // (wiki bag at top is the default writable; canon bags accept explicit
+  // ceremony-routed writes but don't override the default).
+  composite.addLayer({ bagId: LOW,  store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
+  composite.addLayer({ bagId: MID,  store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
   composite.addLayer({ bagId: HIGH, store: new MemoryTiddlerStore(), writable: true });
   return composite;
 }
