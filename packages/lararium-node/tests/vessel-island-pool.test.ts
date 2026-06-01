@@ -282,7 +282,7 @@ describe("VesselIslandPool — island lifecycle", () => {
 
     await expect(
       pool.placeWikiVerb("lar:///ha.ka.ba/@test/no-such-wiki", {
-        verb:        "promote",
+        verb:        "MOVE",
         args:        {},
         requestedBy: "test",
       }),

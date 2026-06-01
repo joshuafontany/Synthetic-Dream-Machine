@@ -1,0 +1,332 @@
+/**
+ * action-handler — Residency Model ACTION verb handler family tests (Sprint 5).
+ *
+ * Verifies:
+ *   - registerActionReactors fills the VerbTable with all six verbs
+ *   - each handler executes the bag mutation
+ *   - each handler writes the expected effect records via withEffectRecord
+ *   - cap-verify gates destination bag (and source bag for MOVE)
+ *   - change-id preserves across ADD / COPY / MOVE transfers
+ *   - LOAD throws not-implemented (Sprint 5 scope honest about external fetch)
+ *
+ * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ */
+
+import { describe, test, expect } from "vitest";
+import {
+  CompositeStore,
+  ACTION_VERBS,
+  newChangeId,
+  isEffectRecordUri,
+} from "@lararium/mesh";
+import type {
+  ActionVerb, ChangeOrigin, LarTiddlerRecord, VerbContext, VerbInvocation,
+  CapabilityAccess, CapabilityVerifyResult,
+} from "@lararium/mesh";
+import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
+import { VerbTable } from "../../lararium-tw5/src/verb-dispatcher.js";
+import { registerActionReactors } from "../../lararium-tw5/src/action-handler.js";
+
+// ---------------------------------------------------------------------------
+// Fixtures
+// ---------------------------------------------------------------------------
+
+const BAG_LOW  = "lar:///ha.ka.ba/@low";
+const BAG_MID  = "lar:///ha.ka.ba/@mid";
+const BAG_HIGH = "lar:///ha.ka.ba/@high";
+
+function makeComposite(): CompositeStore {
+  const c = new CompositeStore();
+  c.addLayer({ bagId: BAG_LOW,  store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
+  c.addLayer({ bagId: BAG_MID,  store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
+  c.addLayer({ bagId: BAG_HIGH, store: new MemoryTiddlerStore(), writable: true });
+  return c;
+}
+
+function alwaysAllowCap(): VerbContext["cap"] {
+  return async (_access: CapabilityAccess, _bagUrl: string): Promise<CapabilityVerifyResult> => ({ ok: true });
+}
+
+function makeContext(composite: CompositeStore, verb: ActionVerb, args: Record<string, unknown>): VerbContext {
+  const invocation: VerbInvocation = {
+    requestId:   "req-1",
+    title:       `lar:///lararium.local.vm/verbs/req-1`,
+    verb,
+    args,
+    targets:     [],
+    batchMode:   "best-effort",
+    status:      "pending",
+    requestedBy: "operator-test",
+    requestedAt: "2026-05-31T00:00:00Z",
+  };
+  return { admin: composite, invocation, cap: alwaysAllowCap() };
+}
+
+function denyCap(deniedBag: string): VerbContext["cap"] {
+  return async (_access, bagUrl): Promise<CapabilityVerifyResult> =>
+    bagUrl === deniedBag ? { ok: false, reason: "denied-in-test" } : { ok: true };
+}
+
+async function effectRecordsIn(composite: CompositeStore): Promise<string[]> {
+  return (await composite.listVisible()).filter(isEffectRecordUri);
+}
+
+function seedTiddler(composite: CompositeStore, bag: string, title: string, text: string, changeId?: string): Promise<void> {
+  const record: LarTiddlerRecord = {
+    tiddler: { title, text },
+    ...(changeId !== undefined && { meta: { changeId } }),
+  };
+  const origin: ChangeOrigin = { kind: "crdt-remote", edgeIsland: bag };
+  return composite.put(record, origin, { bag });
+}
+
+// ---------------------------------------------------------------------------
+// registerActionReactors fills the table
+// ---------------------------------------------------------------------------
+
+describe("registerActionReactors", () => {
+  test("registers all six ACTION verbs on the table", () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    for (const verb of ACTION_VERBS) {
+      expect(table.has(verb)).toBe(true);
+    }
+  });
+
+  test("does not register non-ACTION verbs", () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    expect(table.has("promote")).toBe(false);
+    expect(table.has("commit")).toBe(false);
+    expect(table.has("echo")).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// ADD handler
+// ---------------------------------------------------------------------------
+
+describe("ADD handler", () => {
+  test("copies tiddler from fromBag to toBag preserving change-id", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
+
+    const handler = table.get("ADD")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
+    const result = await handler(args, makeContext(composite, "ADD", args));
+
+    expect(result["verb"]).toBe("ADD");
+    expect(result["title"]).toBe("T");
+    expect(result["fromBag"]).toBe(BAG_LOW);
+    expect(result["toBag"]).toBe(BAG_HIGH);
+    expect(result["changeId"]).toBe(cid);
+
+    // Both bags hold the tiddler now.
+    const all = await composite.resolveAll("T");
+    expect(all.map((e) => e.bagId).sort()).toEqual([BAG_HIGH, BAG_LOW].sort());
+
+    // change-id preserved on the destination.
+    const dest = all.find((e) => e.bagId === BAG_HIGH)!;
+    expect(dest.record.meta?.changeId).toBe(cid);
+
+    // Effect record landed (accession in to-bag).
+    const effects = await effectRecordsIn(composite);
+    expect(effects.length).toBe(1);
+  });
+
+  test("rejects when source bag does not hold the title", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("ADD")!;
+    const args = { title: "missing", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
+    await expect(handler(args, makeContext(composite, "ADD", args))).rejects.toThrow(/does not hold/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// MOVE handler
+// ---------------------------------------------------------------------------
+
+describe("MOVE handler", () => {
+  test("lands in toBag and tombstones in fromBag (transfer pair)", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
+
+    const handler = table.get("MOVE")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
+    await handler(args, makeContext(composite, "MOVE", args));
+
+    // toBag holds; fromBag tombstone-shadows but resolveAll only sees live entries.
+    const all = await composite.resolveAll("T");
+    expect(all.map((e) => e.bagId)).toEqual([BAG_HIGH]);
+    expect(await composite.listBagsTombstoning("T")).toEqual([BAG_LOW]);
+
+    // Two effect records — one accession in BAG_HIGH + one deaccession in BAG_LOW.
+    const effects = await effectRecordsIn(composite);
+    expect(effects.length).toBe(2);
+  });
+
+  test("requires admin on both source AND destination bag", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_LOW, "T", "x", "c-1");
+
+    const handler = table.get("MOVE")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c-1" };
+    // Deny source bag access.
+    const ctx: VerbContext = {
+      ...makeContext(composite, "MOVE", args),
+      cap: denyCap(BAG_LOW),
+    };
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@low/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// COPY handler
+// ---------------------------------------------------------------------------
+
+describe("COPY handler", () => {
+  test("overwrites destination preserving change-id", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_LOW,  "T", "low-text",  "c-source");
+    await seedTiddler(composite, BAG_HIGH, "T", "high-text", "c-old");
+
+    const handler = table.get("COPY")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c-source" };
+    const result = await handler(args, makeContext(composite, "COPY", args));
+    expect(result["mode"]).toBe("overwrite");
+
+    const dest = (await composite.resolveAll("T")).find((e) => e.bagId === BAG_HIGH)!;
+    expect((dest.record.tiddler as Record<string, unknown>)["text"]).toBe("low-text");
+    expect(dest.record.meta?.changeId).toBe("c-source");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// CLEAR + DROP handlers
+// ---------------------------------------------------------------------------
+
+describe("CLEAR handler", () => {
+  test("tombstones every live title in bag + writes bag-level disposition record", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_MID, "A", "a");
+    await seedTiddler(composite, BAG_MID, "B", "b");
+    await seedTiddler(composite, BAG_MID, "C", "c");
+
+    const handler = table.get("CLEAR")!;
+    const args = { bag: BAG_MID };
+    const result = await handler(args, makeContext(composite, "CLEAR", args));
+
+    expect(result["clearedCount"]).toBe(3);
+    expect(await composite.listBagsTombstoning("A")).toContain(BAG_MID);
+    expect(await composite.listBagsTombstoning("B")).toContain(BAG_MID);
+    expect(await composite.listBagsTombstoning("C")).toContain(BAG_MID);
+
+    // One bag-level disposition effect-record (per Sprint 4 mapping).
+    const effects = await effectRecordsIn(composite);
+    expect(effects.length).toBe(1);
+  });
+});
+
+describe("DROP handler", () => {
+  test("tombstones every live title + writes bag-retired disposition", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_MID, "A", "a");
+    await seedTiddler(composite, BAG_MID, "B", "b");
+
+    const handler = table.get("DROP")!;
+    const args = { bag: BAG_MID };
+    const result = await handler(args, makeContext(composite, "DROP", args));
+
+    expect(result["retiredCount"]).toBe(2);
+    expect(result["note"]).toContain("recipe-edit");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// LOAD handler — explicit "not implemented" surface
+// ---------------------------------------------------------------------------
+
+describe("LOAD handler", () => {
+  test("throws explicit not-implemented (external fetch belongs to a later sprint)", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("LOAD")!;
+    const args = { "source-uri": "https://example.org/seed.json", "to-bag": BAG_HIGH, "change-id": "c" };
+    await expect(handler(args, makeContext(composite, "LOAD", args))).rejects.toThrow(/not yet implemented/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Cap-verify gates
+// ---------------------------------------------------------------------------
+
+describe("cap-verify gates", () => {
+  test("ADD rejects when destination cap denied", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_LOW, "T", "x", "c");
+    const handler = table.get("ADD")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
+    const ctx: VerbContext = {
+      ...makeContext(composite, "ADD", args),
+      cap: denyCap(BAG_HIGH),
+    };
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@high/);
+  });
+
+  test("CLEAR rejects when bag cap denied", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("CLEAR")!;
+    const args = { bag: BAG_MID };
+    const ctx: VerbContext = {
+      ...makeContext(composite, "CLEAR", args),
+      cap: denyCap(BAG_MID),
+    };
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*@mid/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Malformed args
+// ---------------------------------------------------------------------------
+
+describe("malformed args", () => {
+  test("ADD without title rejects", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("ADD")!;
+    const args = { "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
+    await expect(handler(args, makeContext(composite, "ADD", args))).rejects.toThrow(/malformed/);
+  });
+
+  test("CLEAR without bag rejects", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("CLEAR")!;
+    await expect(handler({}, makeContext(composite, "CLEAR", {}))).rejects.toThrow(/malformed/);
+  });
+});

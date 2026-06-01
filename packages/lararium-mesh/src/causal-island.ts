@@ -180,7 +180,7 @@ export interface EdgeIslandShape {
   readonly lifecycle:   EdgeIslandLifecycle;
   /**
    * Hash-stable receipt — updated after join, after each epoch change, after
-   * each canon-promotion ceremony. Usable as a prompt cache key.
+   * each residency ACTION verb invocation. Usable as a prompt cache key.
    */
   readonly receipt:     string | null;
 }

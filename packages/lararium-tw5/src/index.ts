@@ -48,6 +48,8 @@ export type {
 } from "./wiki-sync.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
 export { getOriginBag } from "./residency-surface.js";
+export { registerActionReactors, makeActionReactorFor } from "./action-handler.js";
+export type { ActionHandlerOptions } from "./action-handler.js";
 
 export { exportMemeText } from "./meme-write.js";
 // (lar-promote module retired 2026-05-31 under the residency-model cleanup;

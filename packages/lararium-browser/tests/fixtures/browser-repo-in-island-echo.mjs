@@ -76,7 +76,7 @@ self.addEventListener("message", (e) => {
     return;
   }
 
-  if (msg.type === "teardown" || msg.type === "demote") {
+  if (msg.type === "teardown" || msg.type === "hooanu") {
     self.postMessage({ schema_version: 1, type: "teardown:ack" });
     wikiUri = "";
     return;

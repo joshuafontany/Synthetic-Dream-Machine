@@ -183,7 +183,7 @@ describe("GP-1 — schema_version enforcement", () => {
     const { port2: _p } = new MessageChannel();
     expect(isVesselToIslandMsg(mkManifest("lar:///test", _p as unknown as globalThis.MessagePort, { wikiSlug: "test" }, {}))).toBe(true);
     _p.close();
-    expect(isVesselToIslandMsg({ schema_version: 1, type: "demote", wikiUri: "lar:///test" })).toBe(true);
+    expect(isVesselToIslandMsg({ schema_version: 1, type: "hooanu", wikiUri: "lar:///test" })).toBe(true);
     expect(isVesselToIslandMsg(mkTeardown())).toBe(true);
   });
 

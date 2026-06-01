@@ -40,7 +40,7 @@ parentPort.on("message", (msg) => {
     return;
   }
 
-  if (msg.type === "teardown" || msg.type === "demote") {
+  if (msg.type === "teardown" || msg.type === "hooanu") {
     wikiUri = null;
     parentPort.postMessage({ schema_version: 1, type: "teardown:ack" });
     return;

@@ -32,6 +32,7 @@ import {
 import { placeVerbInvocation, exportMemeText, VerbTable } from "@lararium/tw5";
 import { LarDiskProjector } from "./disk-projector.js";
 import { namedBagMirror } from "./bag-paths.js";
+import { registerActionReactors } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 
 // ── Primary Wiki island behavior — disk projection + wiki dispatch ────────
@@ -62,10 +63,12 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
         _stopProjector = projector.start(ctx.tw5);
       }
 
-      // Wiki-scope dispatch — empty until Sprint 5 lands the ACTION verb
-      // handler family (ADD / COPY / MOVE / CLEAR / DROP / LOAD) under the
-      // Residency Model. See packages/EPIC-RESIDENCY-MODEL.md Sprint 5.
+      // Wiki-scope dispatch — Residency Model ACTION verb family.
+      // Registers ADD / COPY / MOVE / CLEAR / DROP / LOAD reactors that
+      // wrap every bag mutation in withEffectRecord (archival audit).
+      // See packages/EPIC-RESIDENCY-MODEL.md Sprint 5.
       _registry = new VerbTable();
+      registerActionReactors(_registry, { composite: ctx.composite });
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {

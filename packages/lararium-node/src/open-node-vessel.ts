@@ -67,6 +67,7 @@ import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import { VerbTable } from "@lararium/tw5";
 import { makeWhereReactor }                       from "./where-handler.js";
+import { makeResolveReactor }                     from "./resolve-handler.js";
 import {
   makeListWikisReactor, makeInitWikiReactor,
   makeOpenWikiReactor,
@@ -390,6 +391,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("echo", async (args) => ({ echoed: args }));
   // Read-only recipe-presence query — `lares where` previews source bag.
   jobRegistry.register("where",   makeWhereReactor({ composite }));
+  // Read-only Residency Model coordinate-inspection — `lares wiki resolve`.
+  // Returns live Manifestations + tombstoning bags + change-id per Manifestation
+  // (the full whiteout-shadow surface for operator-driven Talk Story).
+  jobRegistry.register("resolve", makeResolveReactor({ composite }));
   // E.4 — read-only wiki jobs. write jobs (init/sync/pin/etc) land
   // in E.5+. `list-wikis` walks the catalog for wiki oracle tiddlers.
   jobRegistry.register("list-wikis", makeListWikisReactor({ composite }));

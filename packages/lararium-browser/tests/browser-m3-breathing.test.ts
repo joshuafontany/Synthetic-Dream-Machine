@@ -5,12 +5,12 @@
  *
  * Identical pipeline, platform-honest infrastructure:
  *
- *   wiki doc tiddler { verb: "promote", listenable: "InteractedWithEvent" }
+ *   wiki doc tiddler { verb: "MOVE", listenable: "InteractedWithEvent" }
  *     → seeded into real TW5 browser island via CRDT bagBinding
  *     → reaction-router.ts startup module (TW5 "change" nalu — rAF drain)
  *     → fireReactionsForUri → wiki.dispatchEvent("tm-verse-event", { verb, listenable, fromUri })
  *     → IslandKernel.onVerseEvent consumer
- *     → IslandMsg_Event { verb: "promote", listenable: "InteractedWithEvent", fromUri }
+ *     → IslandMsg_Event { verb: "MOVE", listenable: "InteractedWithEvent", fromUri }
  *     → BrowserVesselIslandPool.onWorkerEvent
  *
  * ## Platform deltas vs Node
@@ -94,14 +94,14 @@ function waitFor<T>(
 // ── Constants ──────────────────────────────────────────────────────────────
 
 const WIKI_ID    = "lar:///ha.ka.ba/@test/browser-m3-breathing";
-const BUTTON_URI = "lar:///test/instances/promote-button-1";
+const BUTTON_URI = "lar:///test/instances/move-button-1";
 const TIMEOUT    = 30_000;
 
 // ── Suite ──────────────────────────────────────────────────────────────────
 
-describe("browser M.3 breathing gate — promote-button nalu end-to-end in Chromium", () => {
+describe("browser M.3 breathing gate — move-button nalu end-to-end in Chromium", () => {
   test(
-    "wiki tiddler verb:promote fires IslandMsg_Event via real TW5 reaction-router — no fixture injection",
+    "wiki tiddler verb:MOVE fires IslandMsg_Event via real TW5 reaction-router — no fixture injection",
     async () => {
       // ── Artifact guard ────────────────────────────────────────────────
       const skipReason = await checkArtifacts();
@@ -122,7 +122,7 @@ describe("browser M.3 breathing gate — promote-button nalu end-to-end in Chrom
       const vesselRepo    = new Repo({ sharePolicy: async () => true });
       const laraiumHandle = vesselRepo.import<LarDoc>(genesisBytes);
 
-      // ── Wiki doc — carries the promote-button instance tiddler ────────
+      // ── Wiki doc — carries the move-button instance tiddler ────────
       // Platform delta vs Node: none. The tiddler structure is identical.
       // The reaction-router.ts startup module runs the same code on both platforms.
       const wikiHandle = vesselRepo.create<LarDoc>();
@@ -130,7 +130,7 @@ describe("browser M.3 breathing gate — promote-button nalu end-to-end in Chrom
         .change((d: Record<string, unknown>) => {
           d["tiddlers"] = {
             [BUTTON_URI]: mutableLarRecord(BUTTON_URI, {
-              verb:       "promote",
+              verb:       "MOVE",
               listenable: "InteractedWithEvent",
             }, "browser-m3-test"),
           };
@@ -163,17 +163,17 @@ describe("browser M.3 breathing gate — promote-button nalu end-to-end in Chrom
         const hit = await waitFor(
           () => events.find(
             (e) => typeof e.payload["verb"] === "string" &&
-                   e.payload["verb"]       === "promote" &&
+                   e.payload["verb"]       === "MOVE" &&
                    e.listenable            === "InteractedWithEvent",
           ),
           8_000,  // slightly wider than Node — rAF after ea, not immediate
-          `IslandMsg_Event { verb:"promote", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
+          `IslandMsg_Event { verb:"MOVE", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
         );
 
         expect(hit.type).toBe("event");
         expect(hit.wikiUri).toBe(WIKI_ID);
         expect(hit.listenable).toBe("InteractedWithEvent");
-        expect(hit.payload["verb"]).toBe("promote");
+        expect(hit.payload["verb"]).toBe("MOVE");
         expect(hit.payload["fromUri"]).toBe(BUTTON_URI);
         expect(hit.payload["uri"]).toBe(BUTTON_URI);
 

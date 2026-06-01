@@ -89,13 +89,13 @@ describe("parseHostfulLarUri", () => {
 // ---------------------------------------------------------------------------
 
 describe("Node-vessel causal island capabilities", () => {
-  test("node vessel holds promote ability (can gate canon ceremony)", () => {
-    // Admin implies promote — the node vessel must hold admin to gate promotions.
-    expect(abilityImplies("admin", "promote")).toBe(true);
+  test("node vessel holds propose ability (can gate residency actions)", () => {
+    // Admin implies propose — the node vessel must hold admin to gate residency actions.
+    expect(abilityImplies("admin", "propose")).toBe(true);
   });
 
-  test("room-level write does NOT imply canon promote (content ≠ authority)", () => {
-    expect(abilityImplies("write", "promote")).toBe(false);
+  test("room-level write does NOT imply propose (content ≠ authority)", () => {
+    expect(abilityImplies("write", "propose")).toBe(false);
   });
 
   test("relay (pull) cannot read room content (causal island boundary law)", () => {

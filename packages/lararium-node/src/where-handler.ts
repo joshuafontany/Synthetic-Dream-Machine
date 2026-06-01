@@ -29,7 +29,7 @@ export function makeWhereReactor(opts: WhereHandlerOptions): VerbReactor {
     const bags    = await opts.composite.listBagsHolding(tiddler);
     // primaryBag must reflect the live primary holder, not a tombstone.
     // listBagsHolding already filters deletions and orders highest-priority
-    // first — its head is the canonical source for promote ceremonies.
+    // first — its head is the source bag for any current read (origin-bag).
     const primary = bags[0] ?? null;
 
     return { tiddler, bags, primaryBag: primary };

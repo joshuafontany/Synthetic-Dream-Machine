@@ -43,7 +43,7 @@ import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord,
 } from "@lararium/mesh";
-import type { VerbReactor, VerbTable } from "@lararium/tw5";
+import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 
 // ── Options + registration ─────────────────────────────────────────────────
 

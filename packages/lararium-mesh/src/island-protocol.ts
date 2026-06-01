@@ -145,7 +145,7 @@ export interface IslandMsg_Manifest {
 /**
  * Cool the wiki slot from hot to cold (teardown; thread may terminate).
  *
- * Type literal `"hookai"` — Hawaiian: hoʻokai, "to make sea-like / cool down."
+ * Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
  * Pairs with the future warming signal `"hoomahana"` (hoʻomahana, "to warm")
  * per the Pele/Kai duality in the worker tier-signal vocabulary.
  *
@@ -154,9 +154,9 @@ export interface IslandMsg_Manifest {
  * organizational-promotion register (promote/demote) that conflicted with
  * the residency-model ACTION verb surface.
  */
-export interface IslandMsg_HooKai {
+export interface IslandMsg_HooAnu {
   schema_version: ProtocolVersion;
-  type: "hookai";
+  type: "hooanu";
   wikiUri: string;
 }
 
@@ -225,7 +225,7 @@ export interface AdminMsg_VerbResult {
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
-  | IslandMsg_HooKai
+  | IslandMsg_HooAnu
   | IslandMsg_Teardown
   | AdminMsg_PlaceVerb
   | AdminMsg_VerbResult
@@ -348,7 +348,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hookai", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }

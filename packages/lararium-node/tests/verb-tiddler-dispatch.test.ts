@@ -107,7 +107,7 @@ describe.skipIf(skipReason)(
         // Write a tiddler with `verb` and `listenable` fields to the wiki CRDT doc.
         // CRDT sync propagates to island → IslandAdaptor → wiki.addTiddler → nalu fires
         // → reaction-router reads fields["verb"] → tm-verse-event → IslandMsg_Event.
-        const DEVICE_URI = "lar:///test/devices/promote-button-1";
+        const DEVICE_URI = "lar:///test/devices/move-button-1";
         wikiHandle.change((d) => {
           const tiddlers = (d as unknown as Record<string, unknown>)["tiddlers"] as
             Record<string, unknown>;
@@ -115,7 +115,7 @@ describe.skipIf(skipReason)(
           // The nalu engine restores title from change.title when applying to the wiki.
           tiddlers[DEVICE_URI] = {
             tiddler: {
-              verb:       "promote",
+              verb:       "MOVE",
               listenable: "InteractedWithEvent",
               text:       "test device tiddler",
               tags:       "",
@@ -125,13 +125,13 @@ describe.skipIf(skipReason)(
 
         // Wait for the verb event to arrive via onWorkerEvent.
         const ev = await waitFor(
-          () => events.find((e) => e.payload["verb"] === "promote"),
+          () => events.find((e) => e.payload["verb"] === "MOVE"),
           8000,
-          "IslandMsg_Event with payload.verb=promote",
+          "IslandMsg_Event with payload.verb=MOVE",
         );
 
         expect(ev.listenable).toBe("InteractedWithEvent");
-        expect(ev.payload["verb"]).toBe("promote");
+        expect(ev.payload["verb"]).toBe("MOVE");
         expect(ev.payload["fromUri"]).toBe(DEVICE_URI);
         expect(ev.payload["uri"]).toBe(DEVICE_URI);
         expect(ev.wikiUri).toBe(WIKI_ID);

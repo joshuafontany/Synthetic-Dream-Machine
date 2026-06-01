@@ -82,7 +82,7 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
       return;
     }
 
-    if (raw.type === "teardown" || raw.type === "hookai") {
+    if (raw.type === "teardown" || raw.type === "hooanu") {
       void _handleTeardown();
       return;
     }

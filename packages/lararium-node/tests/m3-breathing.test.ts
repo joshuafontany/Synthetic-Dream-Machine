@@ -5,12 +5,12 @@
  *
  * Proves the full nalu pipeline end-to-end without fixture injection:
  *
- *   wiki doc tiddler { verb: "promote", listenable: "InteractedWithEvent" }
+ *   wiki doc tiddler { verb: "MOVE", listenable: "InteractedWithEvent" }
  *     → seeded into real TW5 island via CRDT bagBinding
  *     → reaction-router.ts startup module (TW5 change event)
  *     → fireReactionsForUri → wiki.dispatchEvent("tm-verse-event", { verb, listenable, fromUri })
  *     → IslandKernel.onVerseEvent consumer
- *     → IslandMsg_Event { verb: "promote", listenable: "InteractedWithEvent", fromUri }
+ *     → IslandMsg_Event { verb: "MOVE", listenable: "InteractedWithEvent", fromUri }
  *     → vessel VesselIslandPool.onWorkerEvent
  *
  * Uses the real compiled lar-wiki-island.js + genesis/island.bin.
@@ -70,16 +70,16 @@ function waitFor<T>(
 // ── Constants ──────────────────────────────────────────────────────────────
 
 const WIKI_ID    = "lar:///ha.ka.ba/@test/m3-breathing";
-const BUTTON_URI = "lar:///test/instances/promote-button-1";
+const BUTTON_URI = "lar:///test/instances/move-button-1";
 const TIMEOUT    = 30_000;
 
 // ── Suite ──────────────────────────────────────────────────────────────────
 
 describe.skipIf(skipReason)(
-  `M.3 breathing gate — promote-button nalu end-to-end${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`,
+  `M.3 breathing gate — move-button nalu end-to-end${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`,
   () => {
     test(
-      "wiki tiddler verb:promote fires IslandMsg_Event via real TW5 reaction-router — no fixture injection",
+      "wiki tiddler verb:MOVE fires IslandMsg_Event via real TW5 reaction-router — no fixture injection",
       async () => {
         // ── Load genesis ──────────────────────────────────────────────────
         const genesisBytes = new Uint8Array(readFileSync(GENESIS_BIN));
@@ -92,14 +92,14 @@ describe.skipIf(skipReason)(
         const vesselRepo    = new Repo({ sharePolicy: async () => true });
         const laraiumHandle = vesselRepo.import<LarDoc>(genesisBytes);
 
-        // ── Wiki doc — carries the promote-button instance tiddler ────────
+        // ── Wiki doc — carries the move-button instance tiddler ────────
         // verb + listenable fields are the exact contract fireReactionsForUri reads.
         // No papalohe edge wiring needed — direct field dispatch (M.2 architecture).
         const wikiHandle = vesselRepo.create<LarDoc>();
         wikiHandle.change((d) => {
           (d as unknown as Record<string, unknown>)["tiddlers"] = {
             [BUTTON_URI]: mutableLarRecord(BUTTON_URI, {
-              verb:       "promote",
+              verb:       "MOVE",
               listenable: "InteractedWithEvent",
             }, "m3-test"),
           };
@@ -128,17 +128,17 @@ describe.skipIf(skipReason)(
           const hit = await waitFor(
             () => events.find(
               (e) => typeof e.payload["verb"] === "string" &&
-                     e.payload["verb"]       === "promote" &&
+                     e.payload["verb"]       === "MOVE" &&
                      e.listenable            === "InteractedWithEvent",
             ),
             5_000,
-            `IslandMsg_Event { verb:"promote", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
+            `IslandMsg_Event { verb:"MOVE", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
           );
 
           expect(hit.type).toBe("event");
           expect(hit.wikiUri).toBe(WIKI_ID);
           expect(hit.listenable).toBe("InteractedWithEvent");
-          expect(hit.payload["verb"]).toBe("promote");
+          expect(hit.payload["verb"]).toBe("MOVE");
           expect(hit.payload["fromUri"]).toBe(BUTTON_URI);
           expect(hit.payload["uri"]).toBe(BUTTON_URI);
 

@@ -398,6 +398,84 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
   }
 }
 
+/**
+ * `lares wiki resolve <tiddler-uri>` — Residency Model coordinate-inspection.
+ *
+ * Lists every Manifestation (FRBR Expression-level realization) of `tiddler`
+ * across bags in the recipe, ordered highest-priority first. The winning bag
+ * (origin-bag for any current read) gets a `→` marker.
+ *
+ * Sprint:  Residency Model Epic — S8.2
+ * Meme:    lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ *
+ * Reuses the `where` verb on the node side (composite.listBagsHolding —
+ * live-only). Tombstone-inspection across bags waits on a sibling `resolve`
+ * verb that exposes composite.listBagsTombstoning (named follow-up under
+ * the Talk-Story-surfacing principle — operators inspect the audit; the
+ * CRDT layer surfaces what it sees).
+ */
+export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
+  const tiddler = args.positional[0];
+  if (!tiddler) {
+    console.error("usage: lares wiki resolve <tiddler-uri>");
+    return 2;
+  }
+  const did    = await operatorDid().catch(() => "lares-cli");
+  const vessel = await tryConnect();
+  if (!vessel) return 3;
+  try {
+    const r = await submitVerb(vessel, "resolve", { tiddler }, did);
+    if (r.status === "error") {
+      console.error(`resolve failed: ${r.errorMessage ?? "unknown"}`);
+      return 4;
+    }
+    const result        = summaryOutput(r) ?? {};
+    const manifestations = (result["manifestations"] ?? []) as Array<{ bagId: string; changeId?: string }>;
+    const tombstones    = (result["tombstones"]    ?? []) as string[];
+    const winning       = (result["winningBag"]    ?? null) as string | null;
+
+    console.log("");
+    console.log(`Residency for ${tiddler}`);
+    if (manifestations.length === 0 && tombstones.length === 0) {
+      console.log("  (no residency in any bag — tiddler unknown)");
+      console.log("");
+      return 5;
+    }
+    console.log("");
+
+    if (manifestations.length > 0) {
+      console.log("  Live Manifestations (highest priority first):");
+      for (const m of manifestations) {
+        const marker  = m.bagId === winning ? "→" : " ";
+        const idTag   = m.changeId ? `  [change-id: ${m.changeId}]` : "";
+        console.log(`    ${marker} ${m.bagId}${idTag}`);
+      }
+      console.log("");
+      console.log(`  Winning surface (origin-bag): ${winning}`);
+      console.log("");
+    } else {
+      console.log("  (no live Manifestations — the title carries only whiteout-shadows)");
+      console.log("");
+    }
+
+    if (tombstones.length > 0) {
+      console.log("  Whiteout-shadows (bags that explicitly hide the title):");
+      for (const b of tombstones) {
+        console.log(`      ${b}`);
+      }
+      console.log("");
+      console.log("  Note: a whiteout in a higher-priority bag stops the cascade.");
+      console.log("        See bags/@lares/v0.1/api/lararium/residency-model.md #conflict-resolution");
+      console.log("        — resolution surfaces to operator / cabal Talk Story.");
+      console.log("");
+    }
+
+    return manifestations.length > 0 ? 0 : 5;
+  } finally {
+    await vessel.disconnect();
+  }
+}
+
 export async function cmdWikiWhich(args: ParsedArgs): Promise<number> {
   const tiddler = args.positional[0];
   if (!tiddler) {
@@ -443,6 +521,7 @@ const SUBCOMMANDS: Readonly<Record<string, { handler: WikiSubcommand; summary: s
   "prune-stale":   { handler: cmdWikiPruneStale,    summary: "Surface stale draft tiddlers (no recent activity) for residency-action-or-prune." },
   "list":       { handler: cmdWikiList,      summary: "Enumerate wikis registered in the catalog. Needs `lares serve`." },
   "which":      { handler: cmdWikiWhich,     summary: "Recipe-presence query — list bags holding a tiddler. Needs `lares serve`." },
+  "resolve":    { handler: cmdWikiResolve,   summary: "Residency Model coordinate-inspection — list all Manifestations of a tiddler across bags; highlight winning bag per recipe priority. Needs `lares serve`." },
 };
 
 function printWikiHelp(): void {

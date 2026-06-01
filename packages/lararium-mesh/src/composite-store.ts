@@ -188,8 +188,8 @@ export class CompositeStore implements LarTiddlerStore {
 
   /**
    * Tombstone a tiddler in a specific writable bag — used by ceremonies that
-   * need to delete from a non-default writable layer (e.g. canon-promotion
-   * removes the source-bag copy after writing the canonical copy).
+   * need to delete from a non-default writable layer (e.g. the MOVE residency
+   * ACTION removes the source-bag copy after writing the destination copy).
    * Throws when the named bag is absent or not writable.
    */
   async tombstoneInBag(bagId: string, title: string, origin: ChangeOrigin): Promise<void> {

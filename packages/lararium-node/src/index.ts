@@ -30,6 +30,9 @@ export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 export { makeWhereReactor } from "./where-handler.js";
 export type { WhereHandlerOptions } from "./where-handler.js";
 
+export { makeResolveReactor } from "./resolve-handler.js";
+export type { ResolveHandlerOptions } from "./resolve-handler.js";
+
 export {
   makeListWikisReactor, makeInitWikiReactor,
   makeOpenWikiReactor,
