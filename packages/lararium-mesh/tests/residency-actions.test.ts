@@ -53,12 +53,8 @@ describe("ACTION_VERBS membership", () => {
   });
 
   test("isActionVerb rejects non-ACTION verbs (verb-set boundary)", () => {
-    expect(isActionVerb("stage")).toBe(false);
-    expect(isActionVerb("STAGE")).toBe(false); // STAGE not in ACTION_VERBS
-    expect(isActionVerb("STAGE")).toBe(false);
-    expect(isActionVerb("COMMIT")).toBe(false);
-    expect(isActionVerb("PUSH")).toBe(false);
     expect(isActionVerb("echo")).toBe(false);
+    expect(isActionVerb("frobnicate")).toBe(false);
     expect(isActionVerb("")).toBe(false);
   });
 
@@ -189,16 +185,9 @@ describe("parseResidencyAction — valid cases", () => {
 // ---------------------------------------------------------------------------
 
 describe("parseResidencyAction — verb-set rejection", () => {
-  test("returns null for non-ACTION verb (legacy 'stage')", () => {
-    const inv = makeInvocation("stage", { title: "X", "from-bag": "Y", "to-bag": "Z", "change-id": "c" });
+  test("returns null for a non-ACTION verb", () => {
+    const inv = makeInvocation("echo", { title: "X", "from-bag": "Y", "to-bag": "Z", "change-id": "c" });
     expect(parseResidencyAction(inv)).toBeNull();
-  });
-
-  test("returns null for retired triple verbs (stage/commit/push)", () => {
-    for (const v of ["stage", "commit", "push", "STAGE", "COMMIT", "PUSH"]) {
-      const inv = makeInvocation(v, { title: "X", "from-bag": "Y", "to-bag": "Z", "change-id": "c" });
-      expect(parseResidencyAction(inv)).toBeNull();
-    }
   });
 
   test("returns null for empty verb", () => {

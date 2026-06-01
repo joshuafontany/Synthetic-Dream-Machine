@@ -52,7 +52,7 @@ describe("ARCHIVAL_VERBS membership", () => {
 
   test("isArchivalVerb rejects non-archival verbs", () => {
     expect(isArchivalVerb("ADD")).toBe(false);         // an ACTION verb, not archival
-    expect(isArchivalVerb("commit")).toBe(false);
+    expect(isArchivalVerb("echo")).toBe(false);
     expect(isArchivalVerb("ACCESSION")).toBe(false);   // archival verbs stay lowercase
     expect(isArchivalVerb("")).toBe(false);
   });

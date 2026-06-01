@@ -99,9 +99,8 @@ describe("registerActionReactors", () => {
     const composite = makeComposite();
     const table = new VerbTable();
     registerActionReactors(table, { composite });
-    expect(table.has("stage")).toBe(false);
-    expect(table.has("commit")).toBe(false);
     expect(table.has("echo")).toBe(false);
+    expect(table.has("frobnicate")).toBe(false);
   });
 });
 
