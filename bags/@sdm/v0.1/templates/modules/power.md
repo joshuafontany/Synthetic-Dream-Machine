@@ -55,7 +55,7 @@ tags = ["@sdm/function/ecm-scan", "@sdm/domain/divination", "@sdm/hook/dangerous
 
 - `#has` is **flat**: no `family`, no `role`. The target path prefix carries semantics.
 - A module `#has` one mount-point and zero-or-more components.
-- Do NOT use `#implements`. Do NOT link an `interfaces/` meme. That spine retired with v0.0.
+- Do NOT use the retired `implements` edge, and do NOT link an `interfaces/` meme. That inheritance spine retired with v0.0; v0.1 composes with flat `has`.
 
 ```text
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
