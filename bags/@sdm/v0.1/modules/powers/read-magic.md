@@ -36,7 +36,7 @@ role      = "Power module: Read Magic — decode a magical inscription's interfa
 # Read Magic
 
 <<~ ahu #has >>
-## Has
+## Composition
 
 Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
 
@@ -49,7 +49,6 @@ Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
 <<~/ahu >>
 
 <<~ ahu #default >>
-## Default
 
 ```toml default
 canonical-name = "Read Magic"

@@ -23,9 +23,8 @@ role      = "FTLS card projection: Floating Disc — playable surface with click
 # Floating Disc — FTLS Card
 
 <<~ ahu #card >>
-## Card
-
-**FLOATING DISC** — *Mage's Mule, Shield of the Righteous*
+## Floating Disc
+*Mage's Mule, Shield of the Righteous*
 
 **P:** 2 · **R:** 30m · **T:** point · **D:** 1 hour
 
@@ -40,17 +39,11 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 <<~/ahu >>
 
 <<~ ahu #pills >>
-## Pills
+## Components
 
-```text
-<<tag-pill "@sdm/domain/stuckforce">>
-<<tag-pill "@sdm/function/cargo">>
-<<tag-pill "@sdm/function/barrier">>
-<<tag-pill "@sdm/hook/sustained">>
-<<tag-pill "@sdm/mount/trait">>
-```
+<<tag-pill "@sdm/domain/stuckforce">> <<tag-pill "@sdm/function/cargo">> <<tag-pill "@sdm/function/barrier">> <<tag-pill "@sdm/hook/sustained">> <<tag-pill "@sdm/mount/trait">>
 
-On paper: `[stuckforce] [cargo] [barrier] [sustained] [trait]`.
+On paper: `[stuckforce] [cargo] [barrier] [sustained] [trait]`. On screen each pill clicks through to its component.
 <<~/ahu >>
 
 <<~ ahu #edges >>

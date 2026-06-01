@@ -34,29 +34,29 @@ An FTLS card projection renders a Power module as one table-facing game surface.
 ## Card Shape
 
 ```text
-#card        name, epithet, P/R/T/D, main effect, counterplay
+#card        heading = Power name (see heading law); epithet, P/R/T/D, effect, counterplay
 #overcharge  x2/x4/x8 escalations
-#pills       component pills + mount-point pills, via <<tag-pill>>
+#pills       (visible heading "Components") component + mount-point pills, via <<tag-pill>>
 #edges       #projects back to module, #template
 ```
 
-The bottom rows render component and mount-point pills with the `<<tag-pill>>` procedure. On paper the pills read as keywords; on screen each pill clicks through to its component tiddler and a filter of every module that shares it.
+The component section renders pills with the `<<tag-pill>>` procedure. On paper the pills read as keywords; on screen each clicks through to its component tiddler and a filter of every module that shares it. On paper they read like `[ecm-scan] [magic-decode] [archive] [divination]` · `[trait] [item] [structure]`.
 
-```text
-[ecm-scan] [magic-decode] [archive] [divination]
-[trait] [item] [structure]
-```
-
-Pill source form (procedure, quoted title):
-
-```text
-<<tag-pill "@sdm/function/ecm-scan">>
-```
+**Live, never fenced.** In a card body the procedure call is live wikitext so TW5 renders it — `<<tag-pill "@sdm/function/ecm-scan">>` standing on its own, never inside a code fence. A fenced call renders as dead literal text and the doorway never opens. (Any code fences in *this template* are illustrative only.)
 <<~/ahu >>
 
 <<~ ahu #writing-law >>
 ## Writing Law
 
+- **Heading-naming law.** A visible heading carries the *name of the thing*, never the structural ahu id. The `#card` section's heading renders the **Power-Instance name** — the projected module's `caption`, or the instance's own name when the card projects an instance — never a label like "Card". The ahu id stays `#card`; the heading carries the name.
+- **Generative target.** Author the heading to pull the name, so any Power auto-titles its own card. The TW5 form transcludes the projected module's caption with an instance-name override:
+
+```text
+## <$transclude $tiddler=<<instance>> $field="name"><$transclude $tiddler=<<module>> $field="caption"/></$transclude>
+```
+
+  In file-first authoring today, write the literal Power name as the `#card` heading; the transclusion form is the render target the surface grows into.
+- **Render-fence law.** Anything meant to render — `<<tag-pill>>`, transclusions, widgets — stays live wikitext, never inside a code fence. Reserve fences for things shown *as text* (TOML data, literal source quotes, illustrative examples).
 - Use imperative, playable wording. Keep reminders short.
 - Do not duplicate witness text. Do not explain projection architecture.
 - If the card needs more than one screen during play, push detail back to the module or a variant.

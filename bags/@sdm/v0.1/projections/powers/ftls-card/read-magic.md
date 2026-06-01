@@ -23,9 +23,8 @@ role      = "FTLS card projection: Read Magic — playable surface with clickabl
 # Read Magic — FTLS Card
 
 <<~ ahu #card >>
-## Card
-
-**READ MAGIC** — *First Key, Archive Handshake*
+## Read Magic
+*First Key, Archive Handshake*
 
 **P:** 2 · **R:** self · **T:** one magical inscription · **D:** 10 minutes
 
@@ -41,28 +40,13 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 <<~/ahu >>
 
 <<~ ahu #pills >>
-## Pills
+## Components
 
-Components:
+<<tag-pill "@sdm/domain/divination">> <<tag-pill "@sdm/function/magic-decode">> <<tag-pill "@sdm/function/ecm-scan">> <<tag-pill "@sdm/function/archive">> <<tag-pill "@sdm/hook/dangerous">>
 
-```text
-<<tag-pill "@sdm/domain/divination">>
-<<tag-pill "@sdm/function/magic-decode">>
-<<tag-pill "@sdm/function/ecm-scan">>
-<<tag-pill "@sdm/function/archive">>
-<<tag-pill "@sdm/hook/dangerous">>
-```
+<<tag-pill "@sdm/mount/trait">> <<tag-pill "@sdm/mount/item">> <<tag-pill "@sdm/mount/structure">> <<tag-pill "@sdm/mount/burden">>
 
-Mount-points:
-
-```text
-<<tag-pill "@sdm/mount/trait">>
-<<tag-pill "@sdm/mount/item">>
-<<tag-pill "@sdm/mount/structure">>
-<<tag-pill "@sdm/mount/burden">>
-```
-
-On paper these read as keywords: `[divination] [magic-decode] [ecm-scan] [archive] [dangerous]` · `[trait] [item] [structure] [burden]`. On screen each clicks through to its component and a filter of every module that shares it.
+On paper these read as keywords: `[divination] [magic-decode] [ecm-scan] [archive] [dangerous]` · `[trait] [item] [structure] [burden]`. On screen each pill clicks through to its component and a filter of every module that shares it.
 <<~/ahu >>
 
 <<~ ahu #edges >>

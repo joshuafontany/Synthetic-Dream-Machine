@@ -66,6 +66,8 @@ tags = ["@sdm/function/ecm-scan", "@sdm/domain/divination", "@sdm/hook/dangerous
 <<~ ahu #writing-law >>
 ## Writing Law
 
+- **Heading-naming law.** A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries **no** heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
+- **Render-fence law.** Anything meant to render — transclusions, widgets, procedure calls — stays live wikitext, never in a code fence. Fence only what is shown *as text* (TOML data, literal quotes).
 - Prefer table-action language over design chat. Name cost, range, target, duration, counterplay directly.
 - Keep `#default` reading like a Power entry, not a code block.
 - Card wording lives in the projection meme; source archaeology in the witness meme.

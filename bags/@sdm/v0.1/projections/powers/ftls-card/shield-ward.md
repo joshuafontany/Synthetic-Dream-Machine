@@ -23,9 +23,8 @@ role      = "FTLS card projection: Shield Ward — playable surface with clickab
 # Shield Ward — FTLS Card
 
 <<~ ahu #card >>
-## Card
-
-**SHIELD WARD** — *Skin-Close Barrier, Missile Filter*
+## Shield Ward
+*Skin-Close Barrier, Missile Filter*
 
 **P:** 2 · **R:** self · **T:** operator · **D:** 20 minutes
 
@@ -40,17 +39,11 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 <<~/ahu >>
 
 <<~ ahu #pills >>
-## Pills
+## Components
 
-```text
-<<tag-pill "@sdm/domain/abjuration">>
-<<tag-pill "@sdm/function/ward">>
-<<tag-pill "@sdm/function/barrier">>
-<<tag-pill "@sdm/hook/imbued">>
-<<tag-pill "@sdm/mount/trait">>
-```
+<<tag-pill "@sdm/domain/abjuration">> <<tag-pill "@sdm/function/ward">> <<tag-pill "@sdm/function/barrier">> <<tag-pill "@sdm/hook/imbued">> <<tag-pill "@sdm/mount/trait">>
 
-On paper: `[abjuration] [ward] [barrier] [imbued] [trait]`.
+On paper: `[abjuration] [ward] [barrier] [imbued] [trait]`. On screen each pill clicks through to its component.
 <<~/ahu >>
 
 <<~ ahu #edges >>

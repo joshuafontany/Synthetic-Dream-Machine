@@ -35,7 +35,7 @@ role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo 
 # Floating Disc
 
 <<~ ahu #has >>
-## Has
+## Composition
 
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo >>
@@ -45,7 +45,6 @@ role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo 
 <<~/ahu >>
 
 <<~ ahu #default >>
-## Default
 
 ```toml default
 canonical-name = "Floating Disc"

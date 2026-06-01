@@ -35,7 +35,7 @@ role      = "Power module: Shield Ward — a skin-close abjuration barrier that 
 # Shield Ward
 
 <<~ ahu #has >>
-## Has
+## Composition
 
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ward >>
@@ -45,7 +45,6 @@ role      = "Power module: Shield Ward — a skin-close abjuration barrier that 
 <<~/ahu >>
 
 <<~ ahu #default >>
-## Default
 
 ```toml default
 canonical-name = "Shield Ward"
