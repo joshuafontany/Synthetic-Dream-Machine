@@ -361,13 +361,16 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     expect(bags).toContain("lar:///ha.ka.ba/@temp");
   });
 
-  test("$:/StoryList → no cascade rule yet (skipped until @personal lands)", async () => {
-    const puts: string[] = [];
+  test("$:/StoryList → cascade routes to @personal", async () => {
+    const bags: string[] = [];
     const orig = store.put.bind(store);
-    store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
+    store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
 
-    await adaptor.saveTiddler({ fields: { title: "$:/StoryList" } });
-    expect(puts).toHaveLength(0);
+    const done = adaptor.saveTiddler({ fields: { title: "$:/StoryList" } });
+    await flush();
+    await done;
+
+    expect(bags).toContain("lar:///ha.ka.ba/@personal");
   });
 
   test("plain text title (no cascade rule) → skipped", async () => {
