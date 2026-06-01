@@ -202,23 +202,25 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 ---
 
-### Sprint 5 — Action Handlers in Node + CLI Surface
+### Sprint 5 — Action Handlers (TW5 VM) + CLI Surface ✅ CORE COMPLETE (2026-06-01)
 
-**Goal:** Author the ACTION verb handler family in `@lararium/node`; ship `lares act` as the canonical CLI surface for residency gestures.
+**Goal:** Author the ACTION verb handler family; ship `lares act` as the canonical CLI surface for residency gestures.
 
 **Scope refined 2026-05-31:** the prior `lares promote` ceremony retired entirely under the cleanup loop (no deprecation shim — pono cleanliness). Sprint 5 ships the replacement fresh: ACTION verb handlers + `lares act` CLI, both wrapped in `withEffectRecord` for archival audit (Sprint 4 infrastructure).
 
+**Location note (reconciled 2026-06-01):** handlers landed in `@lararium/tw5/src/action-handler.ts` (NOT `@lararium/node` as originally planned) — ACTION verbs run wiki-scope inside the TW5 VM, registered via `@lararium/node` `island-behaviors.ts`. CLI in `@lares/cli`. The decomposition is correct; the EPIC's original `node` path was superseded.
+
 **Stories:**
 
-- [ ] **S5.1** — Author `@lararium/node/src/action-handler.ts` — dispatches by `ActionVerb`. One handler per verb: `handleAdd`, `handleCopy`, `handleMove`, `handleClear`, `handleDrop`, `handleLoad`.
-- [ ] **S5.2** — Each handler invokes `withEffectRecord(...)` from Sprint 4. No bag mutation without effect record.
-- [ ] **S5.3** — Register the ACTION verb handler family in `island-behaviors.ts` `makeWikiPrimaryBehavior` (the registration point cleared during the 2026-05-31 cleanup; `_registry.register("ADD", ...)`, etc.).
-- [ ] **S5.4** — Add `lares act` CLI surface in `@lares/cli/src/commands/act.ts` — operator-facing: `lares act ADD --title <t> --from <bag> --to <bag>`. Parameter validation lifts from S2.4. Register in `bin/lares.ts` COMMANDS.
-- [ ] **S5.5** — Sweep residual `"promote"` strings the cleanup did not touch — search for any remaining ceremony-specific references that landed during Sprint 5 implementation. Generic English usage of "promote" (e.g. "promote a value to type T") stays.
-- [ ] **S5.6** — Retire `promotion-ceremony.ts` + `PROMOTION_RECEIPT_TAG` from `@lararium/mesh` — surfaced as Wave-E pono-debt during the 2026-05-31 cleanup; deferred to Sprint 5 because they touch `causal-island.ts` deeply. Effect records (Sprint 4) replace promotion receipts.
-- [ ] **S5.7** — Tests: each ACTION verb roundtrips through CLI → admin VM verb-tiddler → action-handler → bag mutation + effect record.
+- [x] **S5.1** — `@lararium/tw5/src/action-handler.ts` dispatches all six verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) via `executeAction` + `registerActionReactors`. LOAD throws explicit not-implemented (external fetch deferred — out of Sprint 5 scope).
+- [x] **S5.2** — `executeAction` runs inside `withEffectRecord(action, composite, …)` (action-handler.ts:81). No bag mutation without effect record.
+- [x] **S5.3** — `registerActionReactors` wires the ACTION verb family in `@lararium/node/src/island-behaviors.ts` (wiki-scope dispatch, line ~66).
+- [x] **S5.4** — `lares act <VERB>` CLI landed in `@lares/cli/src/commands/act.ts`, registered in `bin/lares.ts` COMMANDS (line 43).
+- [~] **S5.5** — Code-side ✅: active code carries no ceremony-`promote` strings. **Meme-prose tail** (≈10 memes still carry ceremony-`promote`) is the operator's active S9 sweep — tracked there, not re-claimed here.
+- [x] **S5.6** — `promotion-ceremony.ts` deleted; `PROMOTION_RECEIPT_TAG` retired (`lar-uris.ts:56`, `index.ts:20` notes). Effect records (Sprint 4) replace promotion receipts.
+- [~] **S5.7** — 14 tests in `@lararium/node/tests/action-handler.test.ts`: registration (all six on the table; non-ACTION rejected), per-verb behavior (ADD change-id preservation, MOVE transfer-pair + dual-admin, COPY overwrite, CLEAR/DROP disposition records, LOAD not-implemented), cap-verify gates. **Open:** a single full CLI→admin-VM→handler integration roundtrip test (current coverage is handler + cap-gate unit level).
 
-**Exit criteria:** `lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD` works through the full pipeline; `promotion-ceremony.ts` retired; no ceremony-language references remain in active code or memes.
+**Exit criteria:** ✅ `lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD` pipeline built; ✅ `promotion-ceremony.ts` retired; ✅ active code ceremony-clean. **Remaining tails:** meme-prose ceremony-language sweep (→ S9, operator-active) + one integration-roundtrip test (S5.7).
 
 ---
 
@@ -228,11 +230,11 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 **Stories:**
 
-- [ ] **S6.1** — Mirror action-handler.ts into browser vessel; verify isomorphic path through admin VM `placeVerb` → action-handler.
-- [ ] **S6.2** — Browser test: action verb roundtrips through `openBrowserVessel` → admin VM → action handler → bag mutation + effect record.
-- [ ] **S6.3** — Verify three-tier residency (pinned/hot/cold from BagResidencyManager) cooperates with multi-bag residency reads.
+- [x] **S6.1** — Browser vessel mirrors the action surface: `browser-wiki-worker.ts` imports `registerActionReactors` from `@lararium/tw5` and registers the same six-verb family as the Node vessel — `action-handler.ts` is **shared, not duplicated** (no browser-only handler logic). *(verified 2026-06-01)*
+- [ ] **S6.2** — Browser test: action verb roundtrips through `openBrowserVessel` → admin VM → action handler → bag mutation + effect record. *(Not yet a dedicated test; `browser-m3-breathing.test.ts` carries a pre-existing TW5-boot shim red bead, unrelated. Open.)*
+- [ ] **S6.3** — Verify three-tier residency (pinned/hot/cold from BagResidencyManager) cooperates with multi-bag residency reads. *(Open.)*
 
-**Exit criteria:** browser + node both pass identical action-surface tests; no node-only handler logic.
+**Exit criteria:** browser + node both pass identical action-surface tests; no node-only handler logic. *(S6.1 ✅ — surface mirrored. S6.2/S6.3 open: dedicated browser roundtrip test + tier-cooperation verification remain.)*
 
 ---
 
@@ -244,8 +246,8 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 - [x] **S7.1** — Add `PERSONAL_BAG` constant to `wiki-recipe.ts`: `lar:///ha.ka.ba/@personal`. *(landed 2026-05-31)*
 - [x] **S7.2** — Update `expandRecipe()` to insert `@personal` between `@draft` and `@<wikiSlug>` (priority position from the approved proposal). *(landed 2026-05-31)*
-- [ ] **S7.3** — Update default cascade tiddler `lar:///ha.ka.ba/@lararium/config/bag-paths` with `@personal` rules — explicitly noted as **first-write defaults**, not authoritative routing. Q3 resolved 2026-05-31: `$:/palette` routes to `@personal`.
-- [ ] **S7.4** — Vessel boot: compute recipe-fingerprint as SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` (Q5 revised 2026-05-31 — `@lares` and `@lararium` doc-ids excluded so switching personality or system bag does not fork operator view state across devices).
+- [x] **S7.3** — Cascade rules landed in `lar-bag-paths.tid` *(2026-05-31)* — four `@personal` first-write defaults above the `$:/state/` catch-all: `$:/StoryList`, `$:/state/folded/`, `$:/state/tab-`, `$:/palette` (Q3) → `@personal`. Test fixture in `island-adaptor.test.ts` synced; `$:/StoryList → @personal` routing test passing. First-write defaults, not authoritative routing.
+- [x] **S7.4** — `computeRecipeFingerprint({wikiDocId, canonBagDocIds})` primitive landed in `wiki-recipe.ts` *(2026-05-31)* — SHA-256 over canonical JSON of `(wikiDocId + sorted canonBagDocIds)`; `@lares`/`@lararium` excluded (Q5 revised). 8 tests in `recipe-fingerprint.test.ts` (determinism, sort-stability, canon-set differentiation, caller-mutation isolation). **Vessel-boot integration** (compute-at-mount + thread into `BagResolver`) folds into S7.5 per `personal-bindings.md`.
 - [ ] **S7.5** — `BagResolver` map gets per-(PersonGroup × recipe-fingerprint) `@personal` and `@draft` URL resolution. Storage shape: admin-doc-stored binding tiddlers per `lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings` (proposed 2026-05-31, pending operator endorsement).
 - [ ] **S7.6** — Keyhive PersonGroup grant + capability check on `@personal` and `@draft` bags. Q4 deferred 2026-05-31: ships with implicit-on-membership subscription as default; explicit per-wiki opt-out toggle becomes follow-up sprint scope. Survey 2026-05-31: KeyhiveProvider.delegate + addSentinelMember already cover the grant path; not blocked on Keyhive maturity.
 - [ ] **S7.7** — Tests (original 7 from personal-slot-proposal + 2 from residency-model reconciliation):
@@ -267,7 +269,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 **Stories:**
 
 - [ ] **S8.1** — TW5 widget: `<$lar-origin-bag>` displays origin-bag for current tiddler. Cascade-templateable.
-- [ ] **S8.2** — `lares wiki resolve <title>` CLI verb — lists all bags holding `<title>`, with the winning bag highlighted (SPARQL `GRAPH ?g` analog).
+- [x] **S8.2** — `lares wiki resolve <tiddler-uri>` landed — `cmdWikiResolve` in `@lares/cli/src/commands/wiki.ts` (registered line 524), dispatches the `resolve` verb via `submitVerb`. Lists Manifestations across bags, winning bag per recipe priority (SPARQL `GRAPH ?g` analog). *(verified 2026-06-01; live-only — cross-bag tombstone inspection flagged as a sibling follow-up in source.)*
 - [ ] **S8.3** — TW5 sidebar panel: per-tiddler residency view showing all Manifestations across all bags in the recipe, with change-id and last-edit timestamp.
 - [ ] **S8.4** — `lares wiki diff --bump-pins` — shows what would change in the live view if a sprint bumped all bag-epoch pins to current heads (Anti-pattern #5 operator-facing surface).
 

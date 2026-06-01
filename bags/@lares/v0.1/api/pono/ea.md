@@ -101,7 +101,7 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 
 - **Not a permission grant.** The courier does not grant `ea`; the island earns it by satisfying the three conditions.
 - **Not a heartbeat.** A heartbeat polls. `ea` fires once at establishment. Liveness after `ea` flows through normal CRDT sync and frame-completion signals (`frame:ack`).
-- **Not a promote.** `promote` in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
+- **Not a MOVE.** `MOVE` (and its residency ACTION siblings) in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
 
 <<~/ahu >>
 

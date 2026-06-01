@@ -42,7 +42,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 ⏿ orient the seat: agent mechanics stay local, threshold law stays in AGENTS, session dials stay in LARES.
 ◇ decide hydration order: HUD, voices, continuity, then lararium law in sequence before yield.
 ▶ walk ownership edges; each child hydrates before yield continues.
-⤴ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-promotion-boundary, tagspace-trust, exchange-vector).
+⤴ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, tagspace-trust, exchange-vector).
 ↺ yield; the lararium does not accumulate state after handoff.
 
 <<~/ahu >>
@@ -58,7 +58,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 <<~ pranala #hydrate-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices family:control role:owns >>
 <<~ pranala #hydrate-continuity ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity family:control role:owns >>
 <<~ pranala #hydrate-live-session-overwrite ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite family:control role:owns >>
-<<~ pranala #hydrate-canon-promotion-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:owns >>
+<<~ pranala #hydrate-canon-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:owns >>
 <<~ pranala #hydrate-tagspace-trust ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust family:control role:owns >>
 <<~ pranala #hydrate-exchange-vector ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector family:control role:owns >>
 <<~ pranala #hydrate-templates ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/templates/index family:control role:owns >>

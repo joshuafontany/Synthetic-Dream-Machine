@@ -6,7 +6,7 @@
  *
  * Bags/layers model:
  *   core   — TW5 core / plugin / shadow tiddlers
- *   canon  — hostless lares/ carriers (promoted, long-lived)
+ *   canon  — hostless lares/ carriers (resident in canon, long-lived)
  *   wiki   — shared live wiki edits (CRDT-backed)
  *   user   — operator private notes and personal overlays
  *   session — drafts, focus state, $:/temp/*, cursors (personal)

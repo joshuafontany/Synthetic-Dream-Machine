@@ -26,7 +26,7 @@ S5.8 ✅ closed. S6 (BagResidencyManager) ✅ closed (C.1→C.6, C.5 deferred).
 S7.1 (Capability layer via @keyhive/keyhive) ✅ closed (D.1→D.6).
 S8 (Wiki composition) ✅ closed (E.1→E.10). Twelve operator verbs across
 `lares bag` + `lares wiki` subcommand surfaces.
-E.10.1→E.10.4: canon-promote hardening + ahu render rewrite via TW5
+E.10.1→E.10.4: canon MOVE hardening + ahu render rewrite via TW5
 wikirule + cascade + templates. E.10.5→E.10.9: yin-mode collapse —
 delete MemeticParser typed-widget emitter (~330 lines), purge dead web2-
 era stubs (-18 files), drop tag-driven cascade discriminator (Roslyn /
@@ -160,9 +160,9 @@ Operational rule:
 | S5.6 | ✅ | Admin TW5 VM stood up. Admin doc at `lar:///ha.ka.ba/@lararium/@admin`. Bag-mirror configs read from admin tiddlers tagged `$:/tags/LarariumBagMirror`. |
 | S5.8 | ✅ | `@lares/cli` package + `lares` binary; command-tiddler CRDT protocol; TS dispatcher; promote/where/echo handlers; durable audit-event tiddlers. |
 | S6 | ✅ | `BagResidencyManager` end-to-end: pinned/hot/cold tiers, LRU + idle sweeper + sync-state guard, register-cold for oracle stubs, composite-store hydrate-on-read, `lares status` residency line. C.5 same-machine peer consolidation deferred to the dreamdeck-app sprint. |
-| S7.1 (D.1→D.6) | ✅ | @keyhive/keyhive (concap) integration complete. Operator-key bridge, AdminEventStore persistence, ctx.cap wired, promote-handler enforces. Operator identity and admin proof survive daemon restarts. |
+| S7.1 (D.1→D.6) | ✅ | @keyhive/keyhive (concap) integration complete. Operator-key bridge, AdminEventStore persistence, ctx.cap wired, action-handler enforces. Operator identity and admin proof survive daemon restarts. |
 | S8 (E.1→E.10) | ✅ | Wiki composition end-to-end. `lares bag` + `lares wiki` subcommand surfaces (12 verbs). Per-wiki draft bagId namespace; explicit `BAG_IDS.projection` MemoryTiddlerStore. Disk → CRDT sync ceremony. DXOS-style bag epoch for bounded history. Nix-generations recipe rotation. Stale-tiddler queue. Hot-reload via composite addLayer/removeLayer. |
-| S8 (E.10.1→E.10.4) | ✅ | Canon-promote ceremony hardened end-to-end. E.10.1: Keyhive registers all writable bags at boot (lar: URIs, not automerge: URLs); `lares draft <uri>` ceremony pulls non-writable-bag tiddlers into draft for promote. E.10.2: six bugs fixed — open canonical bags as writable+defaultWritable:false; MemeSyncAdaptor buffer gate skipped for local-origin events; AutomergeDocStore.tombstone carries `record.bag`; disk-projector per-bag unlink on tombstone; cross-bag tombstone walks `composite.getLive()` before yanking from TW5; promote/where source-detection via `listBagsHolding`. E.10.3: exportMemeText routes through `wiki.renderTiddler`. E.10.4: ahu render dispatch as TW5-native wikirule + cascade + templates — AhuWidget owns no scope decision, MemeticParser+deserializer registration synchronous (race fix), `wikirules/memetic-wikitext-sigil.ts` makes `<<~` first-class grammar in any wikitext context. |
+| S8 (E.10.1→E.10.4) | ✅ | Canon-MOVE (residency ACTION) hardened end-to-end. E.10.1: Keyhive registers all writable bags at boot (lar: URIs, not automerge: URLs); `lares draft <uri>` ceremony pulls non-writable-bag tiddlers into draft for promote. E.10.2: six bugs fixed — open canonical bags as writable+defaultWritable:false; MemeSyncAdaptor buffer gate skipped for local-origin events; AutomergeDocStore.tombstone carries `record.bag`; disk-projector per-bag unlink on tombstone; cross-bag tombstone walks `composite.getLive()` before yanking from TW5; promote/where source-detection via `listBagsHolding`. E.10.3: exportMemeText routes through `wiki.renderTiddler`. E.10.4: ahu render dispatch as TW5-native wikirule + cascade + templates — AhuWidget owns no scope decision, MemeticParser+deserializer registration synchronous (race fix), `wikirules/memetic-wikitext-sigil.ts` makes `<<~` first-class grammar in any wikitext context. |
 
 ## S5.8 sub-arc — what each commit landed
 
@@ -172,7 +172,7 @@ Operational rule:
 | B.2 | `50a9c5be` | Full taxonomy port: `lares` covers status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma. Old pnpm scripts removed (operator chose immediate replacement). Init path-bug fixed. |
 | B.3 | `b564ef0c` | Command-tiddler protocol: title `lar:///ha.ka.ba/@lararium/@admin/cmd/<requestId>`, tag `$:/tags/LaresCommand`. TS `CommandDispatcher` + `CommandHandlerRegistry` mounted alongside admin VM. Echo handler for smoke. |
 | B.4 | `1681e83f` | Promote handler (TS, factory closing over room composite). `tombstoneInBag()`, `hasWritableBag()` on CompositeStore. Durable audit-event tiddlers under `@admin/log/<requestId>`. Tagged `$:/tags/LaresCommandEvent`. |
-| B.5 | `1ff23ede` | `lares promote` CLI: WS attach to daemon as Automerge-repo peer; recipe-presence preview via `where` handler; confirmation prompt; full polled round-trip + tombstone. |
+| B.5 | `1ff23ede` | `lares act MOVE` CLI: WS attach to daemon as Automerge-repo peer; recipe-presence preview via `where` handler; confirmation prompt; full polled round-trip + tombstone. |
 | B.6 | _(this commit)_ | Full smoke proven (where round-trip via CLI). HANDOFF + memory updates. Serve-cwd bug fix folded in. |
 
 ## Architectural keystones to preserve
@@ -190,7 +190,7 @@ Operational rule:
 - **Audit URI:**    `lar:///ha.ka.ba/@lararium/@admin/log/<requestId>`  tag `$:/tags/LaresCommandEvent`
 - **Lifecycle:** CLI writes pending → dispatcher transitions running → done|error → CLI tombstones command-tiddler. Audit event survives.
 - **Handlers today:** `echo` (admin composite), `promote` (room composite), `where` (room composite, recipe-presence).
-- **Forward generalization:** when UEFN-Verse ReactionEngine lands, this dispatcher pattern federates across causal-island bounds; command-tiddlers become one shape of reaction trigger among many. Comments inline in command-dispatcher.ts and promote-handler.ts.
+- **Forward generalization:** when UEFN-Verse ReactionEngine lands, this dispatcher pattern federates across causal-island bounds; command-tiddlers become one shape of reaction trigger among many. Comments inline in command-dispatcher.ts and action-handler.ts.
 
 ## Path P — NodeVmManager / TW5 VM pool lift
 
@@ -315,10 +315,10 @@ Six sigils ride the template-cascade architecture. Five share `widgets/_cascade-
 
 ### Smoke ✅ — End-to-end daemon round-trip (2026-05-10)
 In-process smoke: deserialize + render + plugin boot — clean (27 shadow tiddlers, all 6 sigils render, slot round-trip verified).
-Daemon smoke: `lares serve` + `lares wiki sync altar-fire` + `lares promote` ceremony — **verified at protocol layer**. Room bag (altar-fire) → canonical bag (@lares), audit tiddler written. infrastructure-correct = feature-correct confirmed at the happy-path layer.
+Daemon smoke: `lares serve` + `lares wiki sync altar-fire` + `lares act MOVE` ceremony — **verified at protocol layer**. Room bag (altar-fire) → canonical bag (@lares), audit tiddler written. infrastructure-correct = feature-correct confirmed at the happy-path layer.
 
 **Gap revealed — J.3 child co-promotion missing:**
-`lares promote` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #slot >>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
+`lares act MOVE` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #slot >>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
 
 **Key lessons:**
 - `lares wiki sync <room>` is the prerequisite for promote — disk file must be ingested into room bag first.
@@ -342,7 +342,7 @@ The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct
 Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root iam toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
 
 ### Path J — Per-slot iam emission with default-elision + recursive promote ✅ CLOSED
-J.1+J.2+J.3 all complete (2026-05-11). `promote-handler.ts` enumerates `#fragment` children by URI prefix, confirms each still lives in the source bag, and co-promotes in one atomic ChangeOrigin. Returns `childrenPromoted: string[]` in the ceremony result.
+J.1+J.2+J.3 all complete (2026-05-11). `action-handler.ts` enumerates `#fragment` children by URI prefix, confirms each still lives in the source bag, and co-promotes in one atomic ChangeOrigin. Returns `childrenPromoted: string[]` in the ceremony result.
 
 ### Path K — F-arc deferred (TW5 routing rule + Yjs debounce + auto-truncate projection)
 Original F-arc charter — `$:/state/*` → projection layer; `Draft of *` → per-wiki draft bag; Yjs-style captureTimeout debounce 300-500ms; idle auto-truncate of projection layer. Lives in MemeSyncAdaptor. Important once browser peer surfaces let operators edit at sustained rates.
@@ -370,7 +370,7 @@ lares reset --force      # wipes .lararium + bootstrap, re-init
 lares serve              # daemon foreground (alternate terminal)
 
 # In another terminal — smoke negative path:
-lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/@lares --yes
+lares act MOVE lar:///definitely-not-real --to lar:///ha.ka.ba/@lares --yes
 # Expected: "tiddler not found in any bag: …"
 
 # Verify cap-layer round-trip:
@@ -400,7 +400,7 @@ lares status
 # Expected:  bootstrap: present | storage: N files, X KiB | port 8080: in use
 
 # Real promote (operator: pick a tiddler that lives in a room bag):
-lares promote <uri> --to <target-bag>
+lares act MOVE <uri> --to <target-bag>
 # Walks: where preview → confirmation → promote → audit URI printed
 ```
 
@@ -414,7 +414,7 @@ lares promote <uri> --to <target-bag>
 - Some legacy daemon log noise: `TimeoutNegativeWarning` from Automerge repo on attach. Cosmetic.
 - `meme-sync-adaptor.ts:129` — `targetBag` default string is `"room"` (stale from rooms→wikis rename). Cosmetic; production callers always pass an explicit bag ID.
 - Heleuma drift: `ha.ka.ba/@lararium/tw5/widgets/toml` needs `tsx scripts/sync-heleuma.ts --sync-modules --commit` to resolve.
-- `file-path` absent in child iam when tiddler is authored directly in TW5 UX (not synced from disk) — `source-file` field not set → `parentSourceFile` empty. Correct by design (no disk path exists yet); J.3 promote ceremony will set it once children land in canonical bag.
+- `file-path` absent in child iam when tiddler is authored directly in TW5 UX (not synced from disk) — `source-file` field not set → `parentSourceFile` empty. Correct by design (no disk path exists yet); J.3 MOVE (residency ACTION) will set it once children land in canonical bag.
 
 ## Active memory pointers (claude memory system)
 
@@ -437,7 +437,7 @@ lares promote <uri> --to <target-bag>
 - Per-package `memes/` is the canonical convention — no central `ha-ka-ba/` filesystem aggregator
 - **Corpus-vs-engine package category.** Corpus packages (`@lares/core`, `elyncia`, `ftls`, `sdm`, `wtf`) hold tiddler-package projections in `memes/`; their root JS is at most a 5-line path helper, NOT a TS pipeline. Engine packages (`@lararium/*`, `@lares/cli`) run `src/` + `dist/` + `tsc`. The asymmetry encodes architecture-principle 5: meme files are render projections, code is code-as-projection. Do not migrate corpus index.js to TS.
 - **Command-tiddler split contract.** `cmd/<id>` = thin signal-tiddler (status state-machine ONLY, no result/error data). `log/<id>` = durable record (full result+audit). Dispatcher tombstones `cmd/<id>` after writing `log/<id>`. CLI polls `log/<id>` and never tombstones. Crash-safe.
-- **Capability layer = @keyhive/keyhive (Ink & Switch concap, pre-alpha).** Bag URL ↔ Keyhive Document, 1:1. Two-tier policy: Keyhive provides the binary read/admin cryptographic gate; ABILITY_LADDER caveats live at the application layer (promote-handler etc.). Pinned to `0.0.0-alpha.56c`; upgrades = planned breaking changes.
+- **Capability layer = @keyhive/keyhive (Ink & Switch concap, pre-alpha).** Bag URL ↔ Keyhive Document, 1:1. Two-tier policy: Keyhive provides the binary read/admin cryptographic gate; ABILITY_LADDER caveats live at the application layer (action-handler etc.). Pinned to `0.0.0-alpha.56c`; upgrades = planned breaking changes.
 - **Cap-log sync semantics: γ-with-operator-mirror.** Room peers hold the cap-subgraph for bags they're members of (Beelay's transitive-closure-rooted-at-doc rule). Operator devices hold the full cap log across all bags as a strict subset of γ. NOT (β) full-graph (leaks topology). NOT pure (α) operator-private (breaks revocation propagation).
 - **DID encoding.** Use `whoami: IndividualId` + own bytes-to-hex. NOT `idString` — strips per-byte leading zeros, breaks DID round-trip.
 - **ContactCard transport.** JSON via `toJson`/`fromJson`, wrap with TextEncoder. NOT bytes — alpha.56c doesn't expose `toBytes` for ContactCard.
@@ -448,7 +448,7 @@ lares promote <uri> --to <target-bag>
 - Admin URI shape: room URI vs bag URI distinction is intentional
 - Bag-mirror configs live in admin room (operator-private, federates to operator devices only)
 - `MemeStoreDoc` reused for AdminDoc — semantic distinction in URI, not type
-- `wikis/{slug}/` gitignored — promotion ceremony writes git-visible canon
+- `wikis/{slug}/` gitignored — MOVE (residency ACTION) writes git-visible canon
 
 ---
 

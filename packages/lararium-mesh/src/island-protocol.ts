@@ -148,9 +148,8 @@ export interface IslandMsg_Manifest {
  * Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
  *
  * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup —
- * the temperature register (hot/cold) replaces the
- * organizational-promotion register (promote/demote) that conflicted with
- * the residency-model ACTION verb surface.
+ * the temperature register (hot/cold) replaces the old organizational rank
+ * register that conflicted with the residency-model ACTION verb surface.
  *
  * Counterpart-verb status: a parallel `IslandMsg_HooMahana` warm-up signal
  * stays intentionally deferred. The `cold` → `hot` transition today happens
@@ -307,7 +306,7 @@ export interface WikiMsg_PlaceVerb {
  * Island → vessel: wiki-scope verb result.
  *
  * Sent by a wiki island's dispatch behavior after completing a verb whose result
- * the vessel needs (e.g. promote — result carries the promoted record list).
+ * the vessel needs (e.g. MOVE — result carries the moved record list).
  * For fire-and-forget verbs (no result needed) the island omits this message.
  */
 export interface WikiMsg_VerbResult {

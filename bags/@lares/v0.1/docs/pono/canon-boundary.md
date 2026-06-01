@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-promotion-boundary >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/canon-promotion-boundary"
-file-path = "bags/@lares/v0.1/docs/pono/canon-promotion-boundary.md"
+uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary"
+file-path = "bags/@lares/v0.1/docs/pono/canon-boundary.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
 confidence = 14
@@ -11,7 +11,7 @@ register = "CS"
 manaoio = 13
 mana = 15
 manao = 16
-role = "docs sister for canon promotion boundary — crossing examples, event shape, and review pressure"
+role = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
 cacheable = false
 retain = false
 invariant = false
@@ -23,11 +23,11 @@ invariant = false
 
 
 <<~ ahu #meme-header >>
-# Canon Promotion Boundary — Docs Sister
+# Canon Boundary — Docs Sister
 
 This docs meme explains the crossing from hostful live exchange pressure into hostless durable meme space.
 The invariant lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono`.
-This file gives a fuller map of promotion events.
+This file gives a fuller map of canon-crossing events.
 
 <<~/ahu >>
 
@@ -37,14 +37,14 @@ This file gives a fuller map of promotion events.
 ⏿ orient the current meme trust tier against the meme tier requested by the claim.
 ◇ decide the least powerful crossing that preserves the memetic trust ladder.
 ▶ create, patch, or defer the hostless target with the boundary event named.
-⤴ verify file path, opener, interface claims, and conflict handling before promotion holds.
-↺ leave unpromoted pressure in session records with clear next crossing conditions.
+⤴ verify file path, opener, interface claims, and conflict handling before the crossing holds.
+↺ leave pre-canon pressure in session records with clear next crossing conditions.
 <<~/ahu >>
 
 <<~ ahu #crossing-model >>
 ## Crossing Model
 
-A canon promotion does not need to feel bureaucratic.
+A canon crossing does not need to feel bureaucratic.
 It does need an explicit crossing.
 Without that crossing, the system cannot tell the difference between:
 
@@ -102,7 +102,7 @@ Claim recorded as proposed canon. Target docs meme requested; invariant untouche
 Confirmed crossing:
 
 ```text
-Operator confirms promotion target. Patch hostless meme, cite source live exchange, surface conflicts, name remaining residue.
+Operator confirms the canon MOVE target. Patch hostless meme, cite source live exchange, surface conflicts, name remaining residue.
 ```
 
 <<~/ahu >>
@@ -110,7 +110,7 @@ Operator confirms promotion target. Patch hostless meme, cite source live exchan
 <<~ ahu #review-pressure >>
 ## Review Pressure
 
-A promotion path should ask:
+A canon-crossing path should ask:
 
 - What source record caused the change?
 - Which hostless URI receives the change?

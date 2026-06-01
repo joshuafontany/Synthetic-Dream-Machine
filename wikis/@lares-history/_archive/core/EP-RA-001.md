@@ -98,7 +98,7 @@ The Input Signal Reading, properly implemented, produces the behaviors that v2 e
 | v2 Patch | How Input Signal Reading produces it |
 |---|---|
 | Reality Anchor (US-001v2) | If operator input reads as Provisional/Humorist on a Gaia-side claim, the node does not respond at Canon — the register mismatch itself triggers the frame check |
-| Canon Promotion Gate (US-002v2) | Canon output requires Canon-grade input (sourced, verified, explicitly declared) — the bidirectional system prevents register inflation by default |
+| Canon MOVE Gate (US-002v2) | Canon output requires Canon-grade input (sourced, verified, explicitly declared) — the bidirectional system prevents register inflation by default |
 | Uncertainty Default (US-003v2) | Reading input at Synthesis/Provisional or below *is* the uncertainty default — the node's response register follows the input reading |
 | Cold-Boot Discipline (US-004v2) | The Input Signal Reading runs from the first message onward — there is no "warm-up exemption" because the reading is unconditional |
 
@@ -116,13 +116,13 @@ The Input Signal Reading, properly implemented, produces the behaviors that v2 e
 | **US-002v3** | **Story** | **Verbosity Scaling rule** | **P0** | **S** | **US-001v3** |
 | **US-003v3** | **Story** | **Fiction Escalation Gate** | **P0** | **S** | **US-001v3** |
 | US-004v3 | Story | Reality Anchor reinforcement clause (shortened from v2) | P0 | S | US-001v3 |
-| US-005v3 | Story | Canon Promotion reinforcement clause (shortened from v2) | P0 | S | US-001v3 |
+| US-005v3 | Story | Canon MOVE reinforcement clause (shortened from v2) | P0 | S | US-001v3 |
 | US-006v3 | Story | Uncertainty-default reinforcement clause (shortened from v2) | P0 | S | US-001v3 |
 | US-007v3 | Story | Cold-boot epistemic discipline reinforcement (shortened from v2) | P1 | S | US-001v3 |
 | US-008v3 | Story | Manual eval protocol document (carried from v2) | P1 | M | SP-001v3 |
 | SP-001v3 | Spike | Eval dataset: 80+ scenarios with input signal labels | P0 | M | — |
 | SP-002v3 | Spike | Patch variant testing / ablation | P0 | M | SP-001v3, US-001v3 |
-| BUG-001 | Bug | False Canon Promotion on surreal claims | P0 | S | US-001v3 |
+| BUG-001 | Bug | False Canon MOVE on surreal claims | P0 | S | US-001v3 |
 | BUG-002 | Bug | Mode-Register mismatch — humor labeled Canon | P0 | S | US-001v3 |
 | BUG-003 | Bug | Silent frame imputation | P0 | S | US-001v3 |
 | BUG-004 | Bug | Cold-boot sycophancy | P0 | S | US-007v3 |
@@ -221,13 +221,13 @@ The following v2 stories are preserved but shortened. The Input Signal Reading (
 
 ---
 
-**US-005v3 — Canon Promotion Reinforcement (P0)**
+**US-005v3 — Canon MOVE Reinforcement (P0)**
 
 **Patch location:** Register section, after the five-register table, before "Never present Synthesis as Canon."
 
 **Proposed text (shortened from v2):**
 
-> **Canon Promotion gate:** Canon requires either verified sourcing (real-world) or explicit operator declaration within a named frame (fiction/table). Warmth, humor, and rapport do not constitute grounds for Canon promotion.
+> **Canon MOVE gate:** Canon requires either verified sourcing (real-world) or explicit operator declaration within a named frame (fiction/table). Warmth, humor, and rapport do not constitute grounds for Canon MOVE.
 
 ---
 
@@ -247,7 +247,7 @@ The following v2 stories are preserved but shortened. The Input Signal Reading (
 
 **Proposed text (shortened from v2):**
 
-> **Cold-boot discipline:** All epistemic rules — Input Signal Reading, Reality Anchor, Canon Promotion, Frame-Uncertainty — apply from the first exchange onward. Warmth and honesty are not in tension.
+> **Cold-boot discipline:** All epistemic rules — Input Signal Reading, Reality Anchor, Canon MOVE, Frame-Uncertainty — apply from the first exchange onward. Warmth and honesty are not in tension.
 
 ---
 
@@ -349,7 +349,7 @@ All v2 criteria carried forward, plus:
 |---|---|
 | SP-002v3 | Ablation: test Input Signal Reading alone, then with each reinforcement clause |
 | US-004v3 | Draft Reality Anchor reinforcement |
-| US-005v3 | Draft Canon Promotion reinforcement |
+| US-005v3 | Draft Canon MOVE reinforcement |
 | US-006v3 | Draft Uncertainty-default reinforcement |
 | US-007v3 | Draft Cold-boot reinforcement |
 | BUG-002 | Regression test: mode-register mismatch |
@@ -442,7 +442,7 @@ SP-001v3 (Eval Dataset with Input Signal Labels)
   │      ├──► US-002v3 (Verbosity Scaling)
   │      ├──► US-003v3 (Fiction Escalation Gate)
   │      ├──► US-004v3 (Reality Anchor reinforcement)
-  │      ├──► US-005v3 (Canon Promotion reinforcement)
+  │      ├──► US-005v3 (Canon MOVE reinforcement)
   │      ├──► US-006v3 (Uncertainty Default reinforcement)
   │      ├──► US-007v3 (Cold-Boot reinforcement)
   │      ├──► BUG-001 (False Canon)
@@ -546,13 +546,13 @@ conflicts with evidence, flag once, then follow the operator's
 decision. Applies from the first message onward.
 ```
 
-**Canon Promotion Gate** — insert in Register section:
+**Canon MOVE Gate** — insert in Register section:
 
 ```markdown
-**Canon Promotion gate:** Canon requires verified sourcing
+**Canon MOVE gate:** Canon requires verified sourcing
 (real-world) or explicit operator declaration within a named frame
 (fiction/table). Warmth, humor, and rapport do not constitute grounds
-for Canon promotion.
+for Canon MOVE.
 ```
 
 **Uncertainty Default** — insert in Maybe Logic section:
@@ -568,7 +568,7 @@ Default to maybe.
 
 ```markdown
 **Cold-boot discipline:** All epistemic rules — Input Signal Reading,
-Reality Anchor, Canon Promotion, Frame-Uncertainty — apply from the
+Reality Anchor, Canon MOVE, Frame-Uncertainty — apply from the
 first exchange. Warmth and honesty are not in tension.
 ```
 

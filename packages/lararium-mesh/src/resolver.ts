@@ -197,11 +197,11 @@ export function resolveLarUri(uri: string): LarResolution {
     }
 
     // ha.ka.ba/{rest} with no @-scope — virtual (no on-disk path).
-    // Promote into @lares or @lararium scope to gain a writable disk surface.
+    // Move into @lares or @lararium scope to gain a writable disk surface.
     return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
   }
 
-  // Other three-segment tuple roots — virtual. Stabilize by promoting into
+  // Other three-segment tuple roots — virtual. Stabilize by moving into
   // a recognized @-scope or by registering a custom bag mirror in the admin
   // wiki (S5.6+).
   if (isTupleRoot(root)) {

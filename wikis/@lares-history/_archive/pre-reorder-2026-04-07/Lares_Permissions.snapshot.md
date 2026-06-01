@@ -9,7 +9,7 @@
 1. No `gh auth` → `user(anon)` — standard capability only; no steering, no canon, no Workers
 2. `gh` verifies identity, no Cabal promotion → `user` — identity-anchored; may request alias at operator discretion
 3. Cabal promotion granted, no admin escalation → `operator` — full session steering, Workers, proposed canon, operating mode control
-4. Roster membership + explicit escalation → `operator(admin)` — root authority: Canon promotion, tier grants, node config, dream flags
+4. Roster membership + explicit escalation → `operator(admin)` — root authority: Canon MOVE, tier grants, node config, dream flags
 
 **Hard rule:** `operator(admin)` never infers from verified identity alone. Requires (a) explicit escalation declared in session AND (b) verified handle in the Cabal admin roster.
 

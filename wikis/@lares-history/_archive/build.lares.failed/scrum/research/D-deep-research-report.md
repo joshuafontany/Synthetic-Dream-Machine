@@ -74,7 +74,7 @@ Other invariants include:
 - **`lares.core.instruction_hierarchy`**: defines priority layers (system > kernel > operator > user > external) and override rules. Ensures “higher overrides lower”【12†L207-L214】.
 - **`lares.core.data_classification`**: labels input as `instruction`, `data`, `fiction_seed`, or `untrusted`, with a default of `data`. Retrieved content is `untrusted`.
 - **`lares.core.pushback`**: specifies when to push back (one concise refusal) on invalid instructions.
-- **`lares.core.register_guard`**: sets output register ceilings and canon promotion requirements (only operator/admin can promote certain registers).
+- **`lares.core.register_guard`**: sets output register ceilings and canon MOVE requirements (only operator/admin can promote certain registers).
 - **`lares.core.tool_policy`**: allowlists tools by role and enforces least privilege【12†L469-L472】.
 - **`lares.core.orchestration`**: defines agent roles and subagent spawning rules.
 
@@ -136,7 +136,7 @@ flowchart TD
 1. **Discovery:** Find all `schemas/` and `invariants/` TOML files, sorted lexicographically for determinism.
 2. **Validation:** Parse each TOML. Any missing required field or unknown key causes an error (no silent fixes). Duplicate invariant IDs or URIs are rejected. This follows TOML’s rule: duplicate keys are invalid【11†L57-L61】.
 3. **Frame Gate:** Before running the agent, examine user input. If it risks overriding higher-layer logic (e.g., declares alternate reality), trigger a pushback and clarifying question as per `[lares.core.frame_gate]`.
-4. **Register/CANON Assignment:** Enforce that output’s register cannot exceed input’s register unless allowed by an explicit signal (canon promotion). Violations trigger refusal.
+4. **Register/CANON Assignment:** Enforce that output’s register cannot exceed input’s register unless allowed by an explicit signal (canon MOVE). Violations trigger refusal.
 5. **Generation + Event Tagging:** The agent generates the answer, inserting `@event` where specified. Internally, it knows to stop or tag final token as needed.
 6. **State Emission:** After generation or on event boundary, the final state URI is emitted. The agent then stops and waits for the next user input.
 

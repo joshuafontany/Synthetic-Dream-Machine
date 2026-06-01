@@ -78,7 +78,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/canon-promotion-boundary >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/canon-boundary >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>

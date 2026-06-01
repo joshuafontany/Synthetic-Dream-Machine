@@ -205,7 +205,7 @@ min_rating_federate  = "Meme"   # Noise and Data are node-local only
 # Believability gate — manaoio scalar
 min_manaoio_read     = 0
 min_manaoio_propose  = 12
-min_manaoio_promote  = 16
+min_manaoio_move     = 16
 
 # Stage band is a UX/rendering annotation only.
 # Room recipes MAY include stage-based filter predicates as operator configuration,
@@ -247,13 +247,13 @@ This means:
 ```
 lar:///rooms/the-altar-fire
   members:
-    admin group   → promote + admin
+    admin group   → move + admin
     operator group → read + sync + propose
     public group  → read (visible public layer only)
 
 lar:///memes/ha.ka.ba/@lares/pono/some-meme
   members:
-    admin group   → write + promote
+    admin group   → write + move
     operator group → read + sync + propose
 
 edge:nodeA:nodeB:altar-fire:epoch42

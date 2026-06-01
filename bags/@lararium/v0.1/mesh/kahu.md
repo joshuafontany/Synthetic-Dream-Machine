@@ -66,7 +66,7 @@ These two live in separate registers:
 
 | Register | Term | Meaning |
 |---|---|---|
-| ABILITY_LADDER | `cap=admin` | may touch lower bag layers; may promote tiddlers into corpus; may grant/revoke |
+| ABILITY_LADDER | `cap=admin` | may touch lower bag layers; may MOVE tiddlers into corpus; may grant/revoke |
 | Role / governance | kahu | guardian of the protocol grammar; held by the Amorphous Dreams Cabal |
 
 An operator may hold `cap=admin` on their own cabalGroup's infrastructure bags. That

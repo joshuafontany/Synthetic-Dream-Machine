@@ -218,7 +218,7 @@ export class CompositeStore implements LarTiddlerStore {
    *  Standard composite.get() returns the first non-null result including
    *  tombstones — useful when a caller needs to know about deletions.
    *  getLive() is the variant ceremonies use when "is the tiddler actually
-   *  there right now" matters (promote source-detection, draft-from).
+   *  there right now" matters (MOVE source-detection, draft-from).
    *
    *  Residency Model S4.3 — **kāpae semantics**: a tombstone in a
    *  higher-priority bag stops the cascade rather than falling through. A
@@ -486,7 +486,7 @@ export class CompositeStore implements LarTiddlerStore {
  * Returns a LarTiddlerStore view over `composite` that fans reads across all
  * layers (standard composite priority) but pins writes to `bagId`.
  *
- * Use this when a ceremony (promote, wiki-sync) needs to issue `put`/`tombstone`
+ * Use this when a ceremony (MOVE, wiki-sync) needs to issue `put`/`tombstone`
  * to one specific bag while still resolving cross-bag reads through the full
  * composite (e.g. cross-bag tombstone resolution, getLive checks).
  */

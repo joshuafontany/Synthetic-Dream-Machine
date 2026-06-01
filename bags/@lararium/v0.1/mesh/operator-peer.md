@@ -111,7 +111,7 @@ records and consume the same receipt tiddler records. The surface type does not
 change the record shape.
 
 **OP-CR1 — Command tiddlers carry intent.**
-A command tiddler records what the operator intends: promote, admit, invite, revoke.
+A command tiddler records what the operator intends: MOVE, admit, invite, revoke.
 It carries: `id` (lar: URI), `type`, `payload`, `authoredAt`, and a `capProof` reference
 or inline token. It lives in the admin doc. It does not disappear on receipt.
 

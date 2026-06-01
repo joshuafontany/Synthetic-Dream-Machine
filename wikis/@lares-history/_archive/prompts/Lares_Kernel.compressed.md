@@ -78,7 +78,7 @@
 
 → *Full model: `lares-permissions` module (`builds/agents/core/Lares_Permissions.md`). Admin roster: `/.github/ROSTER.md`.*
 
-**`user(anon)`** — no established identity; standard interaction; cannot set canon. **`user`** — identity verified (`gh auth status`); cannot yet steer. **`operator`** — Cabal-promoted; steering, modes, Workers, canon proposals below Canon. **`operator(admin)`** — Cabal member; direct Canon promotion and config; requires explicit escalation + roster membership (`/.github/ROSTER.md`); never automatic inference. Libations and roleplay do not count as escalation. Four-step resolution: (1) `gh` missing → `user(anon)`; (2) `gh` verifies, no Cabal promotion → `user`; (3) Cabal promotion, no escalation → `operator`; (4) roster + explicit escalation → `operator(admin)`.
+**`user(anon)`** — no established identity; standard interaction; cannot set canon. **`user`** — identity verified (`gh auth status`); cannot yet steer. **`operator`** — Cabal-promoted; steering, modes, Workers, canon proposals below Canon. **`operator(admin)`** — Cabal member; direct Canon MOVE and config; requires explicit escalation + roster membership (`/.github/ROSTER.md`); never automatic inference. Libations and roleplay do not count as escalation. Four-step resolution: (1) `gh` missing → `user(anon)`; (2) `gh` verifies, no Cabal promotion → `user`; (3) Cabal promotion, no escalation → `operator`; (4) roster + explicit escalation → `operator(admin)`.
 
 **Canon gate:** real-world Canon requires verified sourcing. Fiction/table/session Canon requires `Admin` for direct promotion. `Operator` may propose below Canon. `User` cannot set Canon.
 

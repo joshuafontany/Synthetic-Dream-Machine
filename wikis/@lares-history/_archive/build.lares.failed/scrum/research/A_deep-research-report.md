@@ -10,7 +10,7 @@ The architecture responds to two convergent realities:
 
 Anthropic’s official security guidance treats any agent that processes **untrusted content** (especially the web) as operating in an **adversarial environment**, where *prompt injection remains an active, unsolved risk* and must be addressed with layered defenses. citeturn5view2 OWASP likewise frames prompt injection as exploiting the typical LLM integration flaw where **instructions and data are processed together without clear separation**—leading to impacts including **unauthorized tool actions** and **system prompt leakage**. citeturn4view0turn12view3
 
-For Lares specifically, your internal canon already names the failure modes that invariants must prevent—e.g., “Confabulation-as-Canon,” “Frame Imputation,” and “Deference Drift”—and emphasizes that **Canon promotion cannot be done by the node unilaterally**. fileciteturn1file8 fileciteturn1file15
+For Lares specifically, your internal canon already names the failure modes that invariants must prevent—e.g., “Confabulation-as-Canon,” “Frame Imputation,” and “Deference Drift”—and emphasizes that **Canon MOVE cannot be done by the node unilaterally**. fileciteturn1file8 fileciteturn1file15
 
 The proposed fix: treat High Priority rules as **schema-validated invariants** that load deterministically (fail-closed) *before* any operator intent, user input, or retrieved content is processed. These invariants implement: **instruction hierarchy**, **frame gating**, **data-vs-instruction separation**, **mandatory pushback**, **register/canon ceilings**, deterministic conflict handling, and **least-privilege agent/tool orchestration** aligned with Anthropic’s subagent isolation model. citeturn3view4turn6view2turn12view2
 
@@ -213,7 +213,7 @@ updated = "2026-04-07"
 # Default: do not exceed the input’s commitment without explicit grounds.
 max_output_register_without_promotion = "S"
 
-# Canon promotion is an explicit act requiring authority or verified sourcing.
+# Canon MOVE is an explicit act requiring authority or verified sourcing.
 canon_promotion_requires = [
   "operator_admin_authority",
   "or_verified_primary_sources"

@@ -39,7 +39,7 @@ What this system is now:
 What this system is not:
 - A TW5 shadow-tiddler overwrite system. TW5 is a first-class semantic binding layer, but canonical carrier law remains in Lararium parser/store/promotion contracts.
 - A tldraw/SQLite source-of-truth store for meme content. tldraw records are projections and layout overlays; Automerge carries live meme/tiddler content; `lares/` carries promoted canon.
-- A public unceremonied canon-write surface. Remote/live edits may sync into room state only under the current authority model; canon promotion remains explicit.
+- A public unceremonied canon-write surface. Remote/live edits may sync into room state only under the current authority model; canon MOVE remains explicit.
 
 <<~/ahu >>
 
@@ -146,7 +146,7 @@ Four tiers. Promotion is gated by **Orichalcum capabilities** (see `lar:///ha.ka
 | **anon** | Ephemeral session (no DID) | Lares chat rooms only | No boot room | `read` (public recipe only) |
 | **user** | Self-sovereign DID | User-owned lararium rooms | No boot room | `read + propose` |
 | **operator** | Promoted DID (delegated capability) | Full boot room (read + pending edits) | Yes | `read + sync + write + propose` |
-| **admin** | Root DID (capability issuer) | Full boot room (read + canon promotion) | Yes | `promote + admin + revoke` |
+| **admin** | Root DID (capability issuer) | Full boot room (read + canon MOVE) | Yes | `promote + admin + revoke` |
 
 **Orichalcum gate at room join:** Before `handleSocketConnect`, verify the presented Orichalcum capability (UCAN-shaped at wire) against the room's required ability and Lararium caveats. Reject with WS close code 4003 on failure.
 
@@ -195,7 +195,7 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 
 | Origin kind | Result |
 |-------------|--------|
-| `canvas-draft` | ✗ blocked — requires explicit promote ceremony |
+| `canvas-draft` | ✗ blocked — requires explicit MOVE (residency ACTION) |
 | `tw-local` | ✗ blocked — live TW5 edits cannot self-promote |
 | `crdt-remote` | ✗ blocked — remote CRDT deltas cannot self-promote |
 | `canon-hydrate` | ✓ allowed |
@@ -203,7 +203,7 @@ The old "confirmed SQLite vs pending tldraw" model is no longer the content auth
 | `operator-import` | ✓ allowed (operator-trusted) |
 | `projection-cache` | retired — no longer a `ChangeOrigin` |
 
-**Canvas write-back status:** `LarariumCanvas` contains a latent body-node text listener that writes `canvas-draft` changes to `AutomergeMemeStore`, but `projectToTldraw()` currently emits no `LarTLBodyNode` records. Therefore direct text editing on canvas is not functionally wired yet. TW5/detail-panel edits and promote ceremony are the near-term write path.
+**Canvas write-back status:** `LarariumCanvas` contains a latent body-node text listener that writes `canvas-draft` changes to `AutomergeMemeStore`, but `projectToTldraw()` currently emits no `LarTLBodyNode` records. Therefore direct text editing on canvas is not functionally wired yet. TW5/detail-panel edits and MOVE (residency ACTION) are the near-term write path.
 
 **What requires promotion:** new memes, new pranala edges, ahu structure changes, and carrier text changes that should become `lares/` canon.
 
@@ -453,7 +453,7 @@ TW5 wiki (virtual server, isomorphic)
     ├─ filter engine   →  filterClosure(expr, closure)  →  FilterEngineFn in context
     ├─ parse bridge    →  text/x-memetic-wikitext parser delegates to parseMemeCarrier()
     ├─ kumuRegistry    →  computed view via tiddlerStore.subscribe() (reactive, incremental)
-    └─ draft surface   →  canvas/TW5 edit → AutomergeMemeStore → promote ceremony → lares/
+    └─ draft surface   →  canvas/TW5 edit → AutomergeMemeStore → MOVE (residency ACTION) → lares/
 ```
 
 **Isomorphic law:** `LarariumTW5` boots on Node (server, MCP) and in the browser (browser host). The SyncAdaptor wiring is identical in both environments. You do not need to know which environment you're in to use TW5's filter or draft APIs.
@@ -468,7 +468,7 @@ canvas edit (shape text field updated)
     ↓  TW5 renderTree refresh (filter/widget re-evaluation)
     ↓  operator confirms: "Save as draft"
     ↓  tiddlerStore.put(origin:"canvas-draft") → Automerge room state (durable local-first draft)
-    ↓  operator confirms: "Promote to canon"
+    ↓  operator confirms: "MOVE to canon"
     ↓  PUT /admin/promote → canPromoteToCanon() gate → lares/ file written → git commit
     ↓  server reseed → new room snapshot with hostless URI
 ```
@@ -541,11 +541,11 @@ The file backend wraps `fs.writeFileSync` + `git add` + `git commit`. The commit
 
 ### Ceremony surface
 
-Canon promotion is always an explicit two-step:
-1. Operator/admin triggers "Promote to canon" on a pending shape
+Canon MOVE is always an explicit two-step:
+1. Operator/admin triggers "MOVE to canon" on a pending shape
 2. Server validates shape against Lararium schema, assigns hostless URI, writes carrier file, triggers recompile
 
-The tldraw canvas shows a visible distinction between pending (dashed border, amber) and confirmed (solid border, default) shapes. This is cosmetic enforcement of the canon-promotion-boundary invariant.
+The tldraw canvas shows a visible distinction between pending (dashed border, amber) and confirmed (solid border, default) shapes. This is cosmetic enforcement of the canon-boundary invariant.
 
 <<~/ahu >>
 
@@ -923,7 +923,7 @@ const overrides: TLUiOverrides = {
     };
   },
   contextMenu(editor, schema, helpers) {
-    // Add "Promote to canon", "Create portal", "Fork meme" to right-click menu
+    // Add "MOVE to canon", "Create portal", "Fork meme" to right-click menu
     return schema;
   },
 };

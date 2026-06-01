@@ -81,7 +81,7 @@ A lower-tier carrier MUST NOT override or shadow a kapu carrier's declared conte
 A kapu carrier MAY declare children that are themselves kapu, forming a kernel lineage.
 
 The `live-session-overwrite` failure mode names the specific violation: a lower-tier live exchange record claiming to override a kapu carrier by recency, repetition, or charm.
-The `canon-promotion-boundary` names the gate: crossing from live session pressure into kapu canon requires explicit ceremony, not silent accumulation.
+The `canon-boundary` names the gate: crossing from live session pressure into kapu canon requires explicit ceremony, not silent accumulation.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
@@ -113,7 +113,7 @@ The sigil structure signals. The interface bundle discriminates.
 This meme governs the kapu rating and above-namespace trust law.
 `meme` governs the copy-shape and five-bucket rating posture root.
 `invariant` governs compressed constitutional pressure for all invariant-compliant memes.
-`loci` governs stable-address coherence and canon-promotion ceremony.
+`loci` governs stable-address coherence and the canon MOVE ceremony.
 `tagspace-trust` governs the shared tagspace authority ordering.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>

@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
 file-path = "bags/@lares/v0.1/api/pono/causal-islands.md"
 type  = "text/x-memetic-wikitext"
 register      = "CS"
-confidence    = 15
+confidence    = 18
 mana          = 18
-manao         = 16
-manaoio       = 15
+manao         = 17
+manaoio       = 17
 tagspace      = "stable"
 role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 cacheable     = true
@@ -18,8 +18,8 @@ invariant     = true
 status-date   = "2026-06-01"
 heleuma       = "ba"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
-# body-sha256 dropped 2026-06-01 — body rewritten (linear ladder → 3-axis model);
-# recompute at canon-promote. confidence lowered 18→15 pending operator promote-confirm.
+# confidence restored to 18 on operator move-confirm 2026-06-01 (the 3-axis rewrite holds).
+# body-sha256 pending regen by the canon-MOVE tooling (owns the parser-canonical byte form).
 ```
 
 

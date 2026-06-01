@@ -588,7 +588,7 @@ There is also an important repo-state nuance: the Python package on the branch y
 
 For the MCP adapter specifically, the safest near-term choice is to treat the official TypeScript SDK as a moving boundary and pin to the stable generation that fits your delivery horizon. The official SDK docs still show the current production package shape around `@modelcontextprotocol/sdk` with `McpServer`, stdio transport, resources/tools/prompts, and Streamable HTTP support, while the official SDK repository also states that its `main` branch is a v2 line still labeled pre-alpha and that v1.x remains the recommended production line until v2 fully settles. That is exactly why the MCP-facing code should live in `packages/lararium-mcp`, not in `lararium-mesh` or even `lararium-node`. 
 
-Status correction (2026-04-29): the original migration recommendation has been overtaken by implementation. Resolver/carrier/index/compiler logic is in TypeScript packages; TW5 runtime embedding is active as the isomorphic filter/render/sync layer; `PUT /admin/promote` and disk↔Automerge sync are live. The remaining caution still stands: keep canon promotion explicit, keep `lararium-mesh` isomorphic, and do not let tldraw/Kowloon adapter records become Lararium ontology.
+Status correction (2026-04-29): the original migration recommendation has been overtaken by implementation. Resolver/carrier/index/compiler logic is in TypeScript packages; TW5 runtime embedding is active as the isomorphic filter/render/sync layer; `PUT /admin/promote` and disk↔Automerge sync are live. The remaining caution still stands: keep canon MOVE explicit, keep `lararium-mesh` isomorphic, and do not let tldraw/Kowloon adapter records become Lararium ontology.
 
 ### Lararium Context Integration
 
@@ -652,7 +652,7 @@ Previously-listed avoids, revised:
 | DOM widget tree as canonical execution model | Still avoid — the three-tree pipeline is canonical; TW5 DOM is view output only |
 | TiddlyWiki runtime as carrier-law dependency | **Superseded** — TW5 is the isomorphic filter host and virtual server; it IS the binding layer |
 | editable executable JS as first-class content primitive | Still avoid — JS-as-tiddler is TW5 internals; Lararium carriers are wikitext only |
-| shadow-tiddler override semantics as mutation model | Still avoid — mutation goes through the canon-promotion ceremony, not tiddler shadowing |
+| shadow-tiddler override semantics as mutation model | Still avoid — mutation goes through the canon-MOVE (residency ACTION), not tiddler shadowing |
 
 ### Browser Host and Bundle Path
 
@@ -1154,14 +1154,14 @@ AGENTS (threshold router only)
   │         ├─owns─→ chao, the-four-tools, the-law-of-5s, the-syad-perspectives
   │         └─owns─→ lararium (agent mechanics seat)
   │                   ├─owns─→ hud, voices, continuity
-  │                   └─owns─→ live-session-overwrite, canon-promotion-boundary,
+  │                   └─owns─→ live-session-overwrite, canon-boundary,
   │                             tagspace-trust, exchange-vector   (lararium law)
   └─owns─→ LARES (operator dials — threshold yields directly)
 ```
 
 ### Rationale
 
-`AGENTS` is a threshold membrane, not an execution owner. Routing and yielding are its only jobs. `mu` is the living practice kernel — it owns every discipline and law meme the agent carries into execution. `lararium` is the agent mechanics seat; the four new pono invariant memes (`live-session-overwrite`, `canon-promotion-boundary`, `tagspace-trust`, `exchange-vector`) are lararium law, not kernel law, so they land under `lararium`. `LARES` stays at the threshold — operator dials are not the kernel's to own.
+`AGENTS` is a threshold membrane, not an execution owner. Routing and yielding are its only jobs. `mu` is the living practice kernel — it owns every discipline and law meme the agent carries into execution. `lararium` is the agent mechanics seat; the four new pono invariant memes (`live-session-overwrite`, `canon-boundary`, `tagspace-trust`, `exchange-vector`) are lararium law, not kernel law, so they land under `lararium`. `LARES` stays at the threshold — operator dials are not the kernel's to own.
 
 The dead-weight `lararium → LARES` owns edge was removed. LARES is reached once, cleanly, from AGENTS.
 
@@ -1379,7 +1379,7 @@ No snapshot injection in HTML. No `loadSnapshot()` on the client. Browser calls 
 - `SQLiteSyncStorage` is now the default persistence backend (SQLite, not in-memory, survives process restarts)
 - `initialSnapshot` and `onDataChange` are **deprecated** in favor of pluggable `storage` option
 - One `TLSocketRoom` per document — our three pages (story-river, meme-detail, graph) are partitions within one room
-- tldraw sync keeps confirmed server state and optimistic client pending state as **separate layers** — this structurally enforces `canon-promotion-boundary` without extra code
+- tldraw sync keeps confirmed server state and optimistic client pending state as **separate layers** — this structurally enforces `canon-boundary` without extra code
 - `useSync` (from `@tldraw/sync`) replaces the local store; clients never "load" a snapshot, they join a live room
 
 ### Room Key = BootReceipt SHA
@@ -1392,7 +1392,7 @@ Room identity is derived from `BootReceipt.sha`, making re-seeding idempotent:
 
 This is content-addressed room identity. Same IPFS discipline: compute-then-address, not name-then-mutate.
 
-### canon-promotion-boundary Holds Structurally
+### canon-boundary Holds Structurally
 
 tldraw sync's two-layer model (confirmed server / pending client) is isomorphic to the Lararium trust tier model:
 
@@ -1401,7 +1401,7 @@ confirmed server state  ≡  hostless canon (lares/ tree)
 pending client state    ≡  hostful live exchange (session pressure)
 ```
 
-Canvas edits live in the pending layer. Nothing crosses to server state without a sync commit. Nothing crosses from server state to lares/ canon without a separate promotion ceremony. The boundary is enforced by the protocol, not by convention.
+Canvas edits live in the pending layer. Nothing crosses to server state without a sync commit. Nothing crosses from server state to lares/ canon without a separate MOVE (residency ACTION). The boundary is enforced by the protocol, not by convention.
 
 ### What Changes in the Codebase
 
@@ -1650,7 +1650,7 @@ See MULTIPLAYER `#theme-system` for full CSS token tables.
 **Implemented.** `store.listen(() => { debounce(scanMemes, 150) }, { scope: "document" })` added inside the `synced-remote` `useEffect` in `LarariumCanvas`. One-shot scan on first sync, then live re-scan on any shape add/remove/meta change. `scope: "document"` skips camera/presence records — fires ~100x less than default. Cleanup returns both `unsub()` and `clearTimeout`.
 
 Do not in Milestone 6:
-- Canon promotion / write-back to `lares/`
+- Canon MOVE / write-back to `lares/`
 - UCAN implementation (design frozen)
 - Kowloon projection
 - Multi-user presence / cursors
@@ -1685,7 +1685,7 @@ Milestone 6 complete. All blocking live gaps resolved. Commentary items document
 
 Research foundation: `lares/lararium-node/MEME-STORE-FOUNDATIONS.md`
 
-Three converging pressures from TW5 tiddler contract, UE5 World Partition schema enforcement, and AST self-hosting grammar define the substrate that must hold before canon promotion, UCAN, or multi-user presence can land safely.
+Three converging pressures from TW5 tiddler contract, UE5 World Partition schema enforcement, and AST self-hosting grammar define the substrate that must hold before canon MOVE, UCAN, or multi-user presence can land safely.
 
 Three laws:
 - **`meme-immutability`** — a confirmed meme is never mutated; edits produce new URIs; re-seeding replaces the full room snapshot (not individual shapes)
@@ -1724,7 +1724,7 @@ Future: extract `FAMILY_CONTRACTS` to `lares/grammars/pranala-families.md` carri
 
 **Hot-reload path now live:** Edit grammar carrier in `lares/grammars/memetic-wikitext.md` → `GET /admin/reseed` → server rebuilds from fresh disk → grammar rule changes take effect without TypeScript rebuild.
 
-**Phase 3 (next):** Parser itself becomes a meme. Template cascade (tldraw projection) driven by grammar memes. Canvas can edit its own renderer. Sigil rules and family contracts editable as canvas shapes, promoted via canon-promotion ceremony.
+**Phase 3 (next):** Parser itself becomes a meme. Template cascade (tldraw projection) driven by grammar memes. Canvas can edit its own renderer. Sigil rules and family contracts editable as canvas shapes, promoted via canon-MOVE (residency ACTION).
 
 <<~/ahu >>
 
@@ -2120,7 +2120,7 @@ Required context now present in-document:
 - OMeta/Ohm bootstrap pattern: TypeScript parser = cold-start kernel (confirmed correct); grammar meme = extensions only
 - Unison hash identity: our `lar:///` URIs + BootReceipt SHA is this pattern
 - Hazel typed holes: `WidgetNode { def: null }` is the implementation
-- Verse STM: canon-promotion ceremony must be transactional (write-back gate design confirmed)
+- Verse STM: canon-MOVE (residency ACTION) must be transactional (write-back gate design confirmed)
 - Eve failure (no stable identity + meta eats object): meme-immutability law + hash URIs is the defense
 
 ### Critical path forward (M8 close conditions)
@@ -2193,7 +2193,7 @@ All M5/M6/M7/M8/M9 tactile behaviors unverified by automated browser. Manual smo
 
 ### Priority 4: Canon-promotion surface ✓ guard + endpoint shipped (ceremony deferred to M10)
 
-`canPromoteToCanon(input)` policy function shipped in `@lararium/mesh/live-protocol.ts`. Enforces the target invariant: projection-cache may render/inform/propose but may NOT canon-promote. 9 tests in `packages/lararium-node/tests/canon-promotion-guard.test.ts`. `LarariumAuthorityEnvelope` discriminated union: local-operator/ucan-delegated/keyhive arms; only local-operator executes today.
+`canPromoteToCanon(input)` policy function shipped in `@lararium/mesh/live-protocol.ts`. Enforces the target invariant: projection-cache may render/inform/propose but may NOT canon MOVE. 9 tests in `packages/lararium-node/tests/canon-promotion-guard.test.ts`. `LarariumAuthorityEnvelope` discriminated union: local-operator/ucan-delegated/keyhive arms; only local-operator executes today.
 
 `PUT /admin/promote` endpoint shipped in `serve.ts` (M10): localhost-only, reads `{ uri, carrierText, shapeId? }`, calls `canPromoteToCanon` as gate, resolves via `resolveLarUri`, path-traversal guard, writes to `lares/`, lares/ watcher triggers reseed. 7 integration tests in `promote-guard.test.ts`.
 
@@ -2431,7 +2431,7 @@ room island     (bag: "room",  writable)        — primary content gate
 |---|---|---|
 | C | First-paint projection — `GET /snapshot/:roomId` serves static TW5 HTML before Automerge ready | Not started |
 | D | System bag + projection bag in CompositeStore | Partial (~70%) |
-| E | Draft promotion ceremony | ~10% |
+| E | Draft MOVE (residency ACTION) | ~10% |
 | F | Presence split (presence never in durable corpus/room doc) | 0% |
 
 **Projection law (Fontany-Fuller-Zelenka):** The snapshot/projection lane is a read artifact. It MUST NOT seed or bootstrap any Automerge doc. Causal islands own their own history. The projection is a window, not the source.

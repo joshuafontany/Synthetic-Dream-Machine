@@ -25,7 +25,7 @@ UCAN appears very close to what Lararium needs: public-key-verifiable delegation
 But Lararium’s authority model carries extra meaning UCAN does not know about:
 
 - confidence and manaoio thresholds,
-- stage bands and canon promotion,
+- stage bands and canon MOVE,
 - `hostful` live-session records versus `hostless` invariant memes,
 - `kapu` rendering/semantic boundaries,
 - operator-ratified authority versus merely cryptographically valid authority,
@@ -364,7 +364,7 @@ Lararium should treat the following as potential authority-bearing groups:
 - meme,
 - wiki recipe,
 - edge island,
-- canon-promotion ceremony,
+- canon-MOVE (residency ACTION),
 - imported artifact,
 - private working branch,
 - public invariant meme.
@@ -856,7 +856,7 @@ Working decision:
 
   Do not consume UCAN whole as Lararium law yet.
   Consume UCAN’s golden principles into an Orichalcum Capability Profile.
-  Keep Orichalcum UCAN-compatible at the wire/proof boundary, but Lararium-native in semantic caveats: confidence, manaoio, stage band, kapu scope, hostful-vs-hostless boundary, room recipe, edge-island epoch, and canon-promotion ceremony.
+  Keep Orichalcum UCAN-compatible at the wire/proof boundary, but Lararium-native in semantic caveats: confidence, manaoio, stage band, kapu scope, hostful-vs-hostless boundary, room recipe, edge-island epoch, and canon-MOVE (residency ACTION).
 
 Council task:
 

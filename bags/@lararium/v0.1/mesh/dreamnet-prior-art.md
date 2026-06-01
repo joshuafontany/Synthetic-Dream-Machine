@@ -110,7 +110,7 @@ research-date = "2026-05-28"
 
 **Contrast with DreamNet:**
 - UCAN does not define group membership or shared contexts. Keyhive fills this gap. UCAN provides the per-token primitive; Keyhive provides the group management layer.
-- UCAN's confinement problem (you cannot know all sub-delegations) surfaces a real risk in DreamNet's `promote` / `admin` tiers.
+- UCAN's confinement problem (you cannot know all sub-delegations) surfaces a real risk in DreamNet's `move` / `admin` tiers.
 
 **Named Patterns:**
 - SPKI/SDSI — the 1990s predecessor; UCAN advances SPKI into web-native form

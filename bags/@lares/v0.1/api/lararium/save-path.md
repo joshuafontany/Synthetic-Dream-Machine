@@ -97,7 +97,7 @@ the silent-drop behavior SHOULD remain to prevent drafts polluting the wrong bag
 ### SP-4 — Ceremony Routing
 
 If `fields["bag"]` carries an explicit bag URI, `saveTiddler` MUST use it
-instead of `this.targetBag`. This is the promote-ceremony path.
+instead of `this.targetBag`. This is the MOVE-ceremony (canon residency) path.
 
 Live TW5 edits without an explicit bag field route to `this.targetBag`.
 

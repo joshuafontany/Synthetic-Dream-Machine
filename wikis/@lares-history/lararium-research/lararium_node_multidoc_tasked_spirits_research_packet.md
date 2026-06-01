@@ -52,7 +52,7 @@ The TW5 engine (`tiddlywikicore-*.js`) lives in its own `LarariumDoc` corpus isl
 | B.1 — Engine Island | `LarariumDoc` blob + sha256. SW verification + mesh-native delivery. Resume boot now calls `reconcileEngineBlobIfChanged` — re-ingests updated TW5 core if disk sha differs from stored sha. ~100% |
 | C — First-paint (FFZ) | No server-rendered snapshot — rejected as web2 SPA pattern. `sw-shell` readiness key lights when SW controls page (warm: immediate; cold: `controllerchange`). App shell serves from SW cache. Automerge islands hydrate in background. ~60% |
 | D — Recipe/bag live surface | `CompositeStore` + per-recipe TW5 VMs done. `BAG_IDS` constants (`system`, `room`, `draft`, `projection`) + `corpusBagId()` factory added. `hasBag()` guard prevents duplicate registration. Priority order locked. System and projection store implementations still pending. ~80% |
-| E — Draft promotion ceremony | `PromotionReceipt` type in `causal-island.ts`. `promoteDraft` stub on `NodeMemeStore` with ability-ladder guard (`promote` required). 6 `abilityImplies` guard tests passing. Head-tracking and projection invalidation pending. ~25% |
+| E — Draft MOVE (residency ACTION) | `PromotionReceipt` type in `causal-island.ts`. `promoteDraft` stub on `NodeMemeStore` with ability-ladder guard (`promote` required). 6 `abilityImplies` guard tests passing. Head-tracking and projection invalidation pending. ~25% |
 | F — Presence split | Not started. ~0% |
 
 **FFZ web3 principle (locked 2026-05-01):** No server-rendered CRDT projections served as HTML. The disk and any HTTP response are projections; the Automerge store is the mind. `sw-shell` replaces `snapshot` across the codebase.
@@ -914,7 +914,7 @@ projection bag
 
 Even if most bags are backed by the same old doc at first, the composition model should already exist.
 
-### Milestone E — draft promotion ceremony
+### Milestone E — draft MOVE (residency ACTION)
 
 Keep `draft-of` churn local. Promotion emits:
 

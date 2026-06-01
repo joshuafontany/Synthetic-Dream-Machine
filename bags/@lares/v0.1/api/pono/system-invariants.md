@@ -115,7 +115,7 @@ desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presen
 ## AUTHORITY Laws — carrier canon, promotion ceremony, trust ladder
 
 Sources: lares/lararium-research/PRINCIPLES.md (~:confidence[C],[20])
-         pono/tagspace-trust · pono/canon-promotion-boundary
+         pono/tagspace-trust · pono/canon-boundary
 
 ```toml #AUTH_1_CARRIER_CANON_FIRST
 id    = "AUTH_1_CARRIER_CANON_FIRST"
@@ -123,10 +123,10 @@ label = "Carrier canon first"
 desc  = "Hostless lar:/// carriers under lares/ carry canon. The operator can boot, inspect, edit, and recover locally. Network sync serves local agency; it does not define truth."
 ```
 
-```toml #AUTH_2_PROJECTION_NEVER_PROMOTES
-id    = "AUTH_2_PROJECTION_NEVER_PROMOTES"
-label = "Projection never promotes itself"
-desc  = "TW5, tldraw, HUD, MCP, DreamDeck, and Kowloon surfaces render and draft — they do not silently promote. A surface write that reaches lares/ MUST pass through an explicit promotion ceremony."
+```toml #AUTH_2_PROJECTION_NEVER_WRITES_CANON
+id    = "AUTH_2_PROJECTION_NEVER_WRITES_CANON"
+label = "Projection never writes canon itself"
+desc  = "TW5, tldraw, HUD, MCP, DreamDeck, and Kowloon surfaces render and draft — they do not silently write canon. A surface write that reaches lares/ MUST pass through an explicit ACTION verb (MOVE into a canon bag)."
 ```
 
 ```toml #AUTH_3_FORK_BEFORE_OVERWRITE
@@ -348,7 +348,7 @@ desc  = "The node peer writes catalog-url to disk; the browser peer does not. Th
 ```toml #PEER_3_AUTHORITY_FROM_CAPABILITY
 id    = "PEER_3_AUTHORITY_FROM_CAPABILITY"
 label = "Authority flows from capability receipts, not boot order"
-desc  = "No peer gains write or promote authority by being first online, by holding more history, or by writing genesis. Authority requires a capability receipt, signature, or policy (Keyhive, future work). Until Keyhive lands, all peers operate at parity below the canon promotion boundary."
+desc  = "No peer gains write or canon-MOVE authority by being first online, by holding more history, or by writing genesis. Authority requires a capability receipt, signature, or policy (Keyhive, future work). Until Keyhive lands, all peers operate at parity below the canon residency boundary."
 ```
 
 <<~/ahu >>

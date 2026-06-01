@@ -147,7 +147,7 @@ Speaker role and truth tier must stay separate.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-promotion-boundary >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary >>
 
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>

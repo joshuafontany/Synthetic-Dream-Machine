@@ -455,7 +455,7 @@ def migrate_stuffed_archive(archive_root: str, out_root: str):
     registry = build_registry(out_root + "/modules", out_root + "/sources")
     write_toml(out_root + "/registry/lares.registry.toml", registry)
 
-    # 6) verification gates (no canon promotion here)
+    # 6) verification gates (no canon MOVE here)
     run_verification(out_root, target="claude-code.vscode")
 ```
 

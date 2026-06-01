@@ -384,7 +384,7 @@ This Session (2026-04-08, browser, ~8 hours)
 
 ## Payload 5 — Local Claude Code Session (2026-04-08, Continuation)
 
-> Register: `~:confidence[CS],[16]` 🏛️ — decisions confirmed in local session; awaiting Canon promotion
+> Register: `~:confidence[CS],[16]` 🏛️ — decisions confirmed in local session; awaiting Canon MOVE
 > Session type: Claude Code (VS Code agent), full repo file access
 > Ticks: ~21 (approximate; session ran across context boundary)
 > Mana at close: ~79% (fresh context load advantage over browser session)

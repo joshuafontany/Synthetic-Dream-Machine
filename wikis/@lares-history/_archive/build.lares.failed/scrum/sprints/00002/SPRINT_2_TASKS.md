@@ -25,7 +25,7 @@ The HUD's annotation thresholds (SIG-08) depend on the priority layer model (INV
 
 - `lares.core.*` behavioral invariant registry — 8 invariants from D-report TOML. Workers **validate against Kernel `~:confidence[C],[20]` tags; do not derive from scratch**.
 - Priority layer model (INV-02): 7-layer table from D-report
-- Register guard: Canon Promotion gate as formal invariant (INV-03)
+- Register guard: Canon MOVE gate as formal invariant (INV-03)
 - Reality Anchor (INV-07): subsumed into Input Signal Reading per EP-RA-001 v3 — consequence of register calibration on factual claims, not a separate check
 - **REC-01 reconciliation:** C-report `canon` field (0.0–10.0 scale) vs D-report priority layer names — resolve mapping before SCH-01 promotes. Two representations, same concept.
 

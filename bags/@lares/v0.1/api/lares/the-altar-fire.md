@@ -53,8 +53,8 @@ The canvas renders differently by trust tier. These projections share the same r
 |------|---------------|-------------|
 | **anon** | Public memes only; invariant memes visible but locked | Browse, read, enter chat portals |
 | **user** | All public memes + own room portal; own pending shapes visible | Read + create in own rooms; pending edits |
-| **operator** | Full boot closure + promoted room list; portal ring visible | Read + pending edits; canon-promotion ceremony available |
-| **admin** | Full boot closure + invariant meme surfaces; all portals | Read + write + canon-promotion; invariant meme editing |
+| **operator** | Full boot closure + canon room list; portal ring visible | Read + pending edits; canon MOVE ceremony available |
+| **admin** | Full boot closure + invariant meme surfaces; all portals | Read + write + canon MOVE; invariant meme editing |
 
 The WebSocket handshake determines trust tier via UCAN capability chain. Until UCAN lands, the server assigns operator tier to all local stdio connections and anon to all network connections.
 
@@ -99,7 +99,7 @@ The visual distinction:
 - **Deep-saved / canon** shapes: solid border, full color, lock icon
 
 Live → branch currently means writing the shared Automerge meme store through the TW5/store adaptor.
-Branch → deep save requires explicit "Promote to canon" ceremony (operator+).
+Branch → deep save requires explicit "MOVE to canon" ceremony (operator+).
 Invariant meme edits require admin tier and a separate confirmation ceremony.
 
 <<~/ahu >>

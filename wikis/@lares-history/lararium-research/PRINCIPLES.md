@@ -41,7 +41,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 1. **Carrier canon first.** Hostless `lar:///` carriers under `lares/` carry canon.
 2. **Projection never promotes itself.** TW5, tldraw, HUD, MCP, DreamDeck, and future Kowloon surfaces render and draft; they do not silently promote.
 3. **Fork before overwrite.** Live/session material may fork, annotate, propose, and request merge; it must not silently override invariant loci.
-4. **Ceremony marks canon promotion.** Agentic or operator writes that reach `lares/` need actor, origin, target URI, diff, receipt, and rollback path.
+4. **Ceremony marks canon MOVE.** Agentic or operator writes that reach `lares/` need actor, origin, target URI, diff, receipt, and rollback path.
 
 <<~/ahu >>
 
@@ -95,7 +95,7 @@ carrier canon
       ↔ TW5 semantic/filter/edit VM
       → tldraw / HUD / DreamDeck projections
       → disk projector queue
-        → carrier write-back only through explicit projection law or promotion ceremony
+        → carrier write-back only through explicit projection law or MOVE (residency ACTION)
 ```
 
 <<~/ahu >>

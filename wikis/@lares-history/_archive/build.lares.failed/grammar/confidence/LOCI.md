@@ -106,7 +106,7 @@ placement stays explicit and the source of the weight stays legible.
 | Read the band through stance | MUST | Same number measures different things in different frames |
 | Match the band to the evidence chain | MUST | Weight should stay earned |
 | Keep promotion and demotion explicit | SHOULD | Quiet drift harms trust |
-| Require operator agency for Canon promotion | MUST | Canon should not self-appoint |
+| Require operator agency for Canon MOVE | MUST | Canon should not self-appoint |
 | Keep local confidence attachable at the `ahu` level | SHOULD | Settlement can vary within one locus |
 
 **Promotion rule:** stronger evidence, clearer source chain, and operator confirmation carry

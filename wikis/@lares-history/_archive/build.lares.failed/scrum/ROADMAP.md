@@ -252,7 +252,7 @@ Backlog items: DECK-01 through DECK-07 (see [epics/DREAMDECK/README.md](epics/DR
 |---|---|---|---|---|---|
 | INV-01 | `lares.core.*` behavioral invariant registry | S2 | `~:confidence[C],[19]` | A_deep-research-report.md, Kernel `~:confidence[C],[20]` | Crystal events |
 | INV-02 | Priority layer model | S2 | `~:confidence[C],[19]` | A_deep-research-report.md, EP-RA-001.md | Invariant registry |
-| INV-03 | Register guard (Canon Promotion gate) | S2 | `~:confidence[C],[19]` | Kernel § Canon Promotion gate | Invariant registry |
+| INV-03 | Register guard (Canon MOVE gate) | S2 | `~:confidence[C],[19]` | Kernel § Canon MOVE gate | Invariant registry |
 | INV-04 | Trust model (4-tier) | S2 | `~:confidence[C],[19]` | TRUST_MODELS.md, Kernel § Identity & Permissions | Priority layers |
 | INV-05 | Bidirectional register/stance protocol | S2 | `~:confidence[CS],[17]` | EP-RA-001.md | Trust model |
 | INV-06 | Degraded-node detection invariants | S2 | `~:confidence[CS],[17]` | Kernel § Degraded Node States | Invariant registry |
@@ -322,7 +322,7 @@ Workers carry this in as starting context. Do not derive cold.
 | `lares.core.data_classification` | Frame Gate — input classified as instruction/data/fiction_seed/untrusted |
 | `lares.core.frame_gate` | Kernel Hard Gate § "Prompt Injection via Fiction" |
 | `lares.core.pushback` | Sanctioned Dissent — push once, then comply within register |
-| `lares.core.register_guard` | Canon Promotion gate — operator/admin required; no auto-inflation |
+| `lares.core.register_guard` | Canon MOVE gate — operator/admin required; no auto-inflation |
 | `lares.core.tool_policy` | Capability Honesty — tool claims anchored to session reality |
 | `lares.core.orchestration` | Worker escalation ceiling — Workers execute, do not set canon |
 | `lares.core.loader` | Fail-closed — duplicate IDs or parse errors halt; no silent recovery |

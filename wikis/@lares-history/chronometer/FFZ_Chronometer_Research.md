@@ -578,7 +578,7 @@ relations among these events a discipline."
 **Online full text:** http://www.rwgrayprojects.com/synergetics/intro/explicit.html
 (interleaved Synergetics 1 & 2)
 
-**Canon promotion candidate:** These citations appear solid enough to
+**Canon MOVE candidate:** These citations appear solid enough to
 move from `~:confidence[S],[14]` toward `~:confidence[CS],[16]` once the specific §-passages
 are fetched and verified against the online text.
 
@@ -1154,7 +1154,7 @@ Per operator directive ("let's bump those Provisional ratings"):
 |---|---|---|---|
 | ITC as identity layer | `~:confidence[S],[12]` | `~:confidence[S],[14]` | O1 deep-read confirmed across all six questions |
 | Three-layer architecture | `~:confidence[P],[6]` | `~:confidence[S],[13]` | ITC + Merkle + OODA-HA composition validated |
-| peek/anonymous-join as Operator boundary | — | `~:confidence[CS],[15]` | Strongest O1 finding; awaits Canon promotion |
+| peek/anonymous-join as Operator boundary | — | `~:confidence[CS],[15]` | Strongest O1 finding; awaits Canon MOVE |
 | OODA-HA / Discordian Seasons mapping | — | `~:confidence[S],[14]` | Structural correspondence, not decorative |
 | Phase-as-delta model | — | `~:confidence[S],[13]` | Operator insight + ITC anonymous-join confirmation |
 | Phase-as-LWW-Register | — | `~:confidence[S],[12]` | CRDT theory mapping; counter/phase separation |

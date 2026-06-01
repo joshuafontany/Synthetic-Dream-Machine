@@ -76,8 +76,8 @@ repo-in-island.test.ts writable-binding selector comment added; 197/197 tests)
 are treated as landed unless tests prove drift.
 
 Next work, in order:
-1. Path M(b): author `promote-button` device tiddler in genesis that fires a real
-   `reaction:listenable` edge with `payload.verb = "promote"`. Prove it drives
+1. Path M(b): author `move-button` device tiddler in genesis that fires a real
+   `reaction:listenable` edge with `payload.verb = "MOVE"`. Prove it drives
    placeVerb without a fixture — first real in-corpus kumu device.
 2. Path M(c): stdio bridge for CLI/daemon local intent path.
 3. Path K / F-arc: IslandAdaptor.saveTiddler debounce + projection auto-truncate.
@@ -308,7 +308,7 @@ v2.6.0-alpha.0 released 2026-05-19 (10 days old). xstate→DocumentQuery archite
 
 **Gate closed:** `verb-tiddler-dispatch.test.ts` (2 tests) proves the full path:
 CRDT write → island TW5 → `reaction-router` nalu fires → `tm-verse-event` →
-`IslandMsg_Event` with `payload.verb === "promote"` arrives at vessel `onWorkerEvent`.
+`IslandMsg_Event` with `payload.verb === "MOVE"` arrives at vessel `onWorkerEvent`.
 
 **Root cause (confirmed via TW5 boot.js trace):**
 `reaction-router.ts` and `grammar-cache.ts` read `globalThis.$tw?.wiki` in their
@@ -351,7 +351,7 @@ in TW5's `vm.runInContext` sandbox — no manifest byte transfer, no duplicate l
 **Architectural decision (adversarial-reviewed):**
 URI carries minimum semantic identity only (`@admin/signals/<requestId>`).
 Verb routing metadata lives entirely in tiddler fields — TW5-queryable,
-filterable, cascadable. `[field:verb[promote]]` spans signal + outcome tiddlers.
+filterable, cascadable. `[field:verb[MOVE]]` spans signal + outcome tiddlers.
 Rating vs alternatives: Plan C (17/20) > Plan B URI-encodes-verb (11/20) > Plan A thread-scalar (12/20).
 
 **`verb-tiddler.ts` (`@lararium/mesh`) — field model extended:**
@@ -389,12 +389,12 @@ Rating vs alternatives: Plan C (17/20) > Plan B URI-encodes-verb (11/20) > Plan 
 
 **Integration test — `tests/event-routing.test.ts` (new, 3 tests):**
 - `tests/fixtures/event-verb-echo.mjs` — fixture island posts `IslandMsg_Event` with
-  `{ verb: "echo-verb", listenable: "OnActivated", fromUri: "lar:///test/instances/promote-button-1" }`
+  `{ verb: "echo-verb", listenable: "OnActivated", fromUri: "lar:///test/instances/move-button-1" }`
 - Suite A: VesselIslandPool integration — asserts `payload.verb`, `payload.fromUri` arrive correctly
 - Suite B: M.1 handler unit — extracts verb+fromUri+listenable, calls placeVerb; ignores observation-only
 
-**Corpus — `bags/@lararium/v0.1/tw5/devices/promote-button.md` (new):**
-- First kumu device type meme with `reaction:listenable` edge carrying `payload.verb = "promote"`
+**Corpus — `bags/@lararium/v0.1/tw5/devices/move-button.md` (new):**
+- First kumu device type meme with `reaction:listenable` edge carrying `payload.verb = "MOVE"`
 - Documents the full dispatch chain from tiddler edge → verb dispatch → TW5 filter queries
 
 ## What Changed This Turn (2026-05-28 turn 26)
