@@ -14,7 +14,7 @@ manao     = 17
 manaoio   = 16
 cacheable = true
 retain    = true
-invariant = true
+invariant = false
 role      = "SDM Powers ontology root: causal-island-crossing definition, ha.ka.ba activation address schema, storage class taxonomy"
 ```
 
