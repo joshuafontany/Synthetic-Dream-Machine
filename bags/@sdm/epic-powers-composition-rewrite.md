@@ -412,8 +412,9 @@ traits:
 <<~ ahu #decisions-resolved >>
 ## Decisions Resolved — Session Zero (2026-05-31)
 
-Four design decisions closed by operator approval after corpus + design-lead
-research. These bind the sprints below.
+Design decisions closed by operator approval after corpus + design-lead
+research (D1–D4 Session Zero; D5 at the two-tiddler amendment; D6 at Sprint 3).
+These bind the sprints below.
 
 **D1 — `location` merges into `structure` (one Site mount-point).**
 The corpus never distinguishes them — it names a single category, "Structure/
@@ -468,6 +469,23 @@ component/mount is addressed by **two tiddlers**:
 
 Modules and cards tag with the **short** form; `#has` edges address the **full meme**.
 This supersedes the earlier "version-free bag-scoped single title" wording in `#tw5-tags`.
+
+**D6 — Module nesting: an entity `#has` a Power; `#composes` stays module→module (2026-06-01, Sprint 3).**
+When an item, artifact, site, or creature carries a Power, it is **an entity with
+mount-points** — it `#has` the Power through the relevant mount-point (`item`,
+`structure`, `trait`, `burden`), exactly as a character does. There is **no second
+module type** for "things that hold Powers." `#composes` is reserved strictly for
+**module→module** wiring — a Power that triggers or riders another Power (e.g. a
+leash/trigger linking two modules; see Floating Disc Aftermath). The carried Power's
+own composition is **not re-listed** on the host; the host edge points at the Power
+meme, which keeps its own `#has` block. Earthdawn/Starfinder confirm: a grimoire, a
+vehicle, a kaer are all "a host that holds modules." Proven in Sprint 3 by
+`modules/items/porters-pebble` (item `#has` `modules/powers/floating-disc`).
+
+**Taxonomy (Sprint 3):** non-spell affordances get sibling module directories that
+reuse the same power template — `modules/abilities/` (creature/monster abilities),
+`modules/items/` (objects). `modules/powers/` stays the home of practised spells.
+Same template, same `#has`/`#default` shape; the directory names the source-kind.
 
 **Open residue from this research (not blocking Sprint 0):**
 - Name the mobility component slug (`@sdm/hook/propulsion`? `@sdm/posture/mobile`?).
@@ -588,11 +606,32 @@ Write any new component memes needed. After all three exist: pattern review.
 Compare side by side. Confirm the template generalizes. Surface anything that
 wants `#composes` or `#modifies`.
 
-### Sprint 3 — Beyond Spells (Extend)
+### Sprint 3 — Beyond Spells (Extend) ✅ CORE COMPLETE (2026-06-01)
 
 One monster ability module. One magic item module. Test whether the same
 template covers non-spell affordances. Decide module nesting: when an item
 `#has` a Power, does it use the same module shape or a different one?
+
+**Landed:**
+- **`modules/abilities/neural-whip`** — the Cave Octopus's stuckforce tentacle-lash
+  (UVG, L16 biomancer). First exerciser of **`hook/attack`** (resolves vs Defense,
+  no save). Surfaced the first offensive **`function/restrain`** component (+ tag
+  pointer) — prior functions all served the wielder; an attack demanded the address
+  (Principle 6). Reuses `domain/stuckforce` + `mount/trait`. Proves the Power
+  template covers a monster's innate ability **unchanged**.
+- **`modules/items/porters-pebble`** — a Stuckforce Relic that `#has`
+  `modules/powers/floating-disc` + `#has` `mount-points/item`. The **nesting proof**:
+  an item is an entity, carries a Power by `#has` through the `item` mount-point, and
+  reuses the Floating Disc module unchanged (no component re-listing). → **D6**.
+- Each carries its FTLS card (`projections/abilities|items/ftls-card/…`) and a
+  provenance witness (`witness/abilities/uvg-bestiary/…`, `witness/items/uvg/…`).
+
+**Decided:** module nesting → **D6** (entity `#has`, not `#composes`). `#composes`
+stays reserved for module→module.
+
+**Deferred to S3.x / S4:** a pure-damage `function/strike` (waits for a second
+attack Power to demand it); `domain/noosphere` promotion (waits for a mind-jolt
+neural Power); the `#holds` relation edge may demote if flat `#has` proves enough.
 
 ### Sprint 4 — Hard Cases (Stress)
 
@@ -669,7 +708,8 @@ relationship to the mounted pattern. This remains speculative.
 ## Aftermath
 
 - **Filter ergonomics.** Test target-URI-prefix filtering in Sprint 1.
-- **Module nesting.** Item-carrying-Power: `#has` or `#composes`? Sprint 3.
+- **Module nesting.** ✅ RESOLVED (Sprint 3) → entity `#has` a Power through its
+  mount-point; `#composes` reserved for module→module. See `#decisions-resolved` D6.
 - **Counterpoint doctrine.** Co-active module interaction rules. Sprint 4.
   Start from the existing FTLS ECM vocabulary (`[scan]` `[veil]` `[jam]`
   `[negate]` `[suppress]` `[redirect]` `[capture]` `[hijack]`) — these

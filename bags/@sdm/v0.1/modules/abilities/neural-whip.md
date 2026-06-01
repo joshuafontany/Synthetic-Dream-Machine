@@ -1,0 +1,102 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip >>
+```toml iam
+uri-path  = "ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip"
+file-path = "bags/@sdm/v0.1/modules/abilities/neural-whip.md"
+type      = "text/x-memetic-wikitext"
+
+title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip"
+caption   = "Neural Whip"
+tags = [
+  "@sdm/tags/domain/stuckforce",
+  "@sdm/tags/function/restrain",
+  "@sdm/tags/hook/attack",
+  "@sdm/tags/mount/trait",
+]
+
+tagspace  = "sdm"
+register  = "CS"
+confidence = 15
+mana      = 14
+manao     = 17
+manaoio   = 15
+cacheable = true
+retain    = true
+invariant = false
+role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tentacle-lash; first proof the Power template covers a non-spell monster affordance, first exerciser of hook/attack"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~&#x0002;>>
+
+# Neural Whip
+
+<<~ ahu #has >>
+## Composition
+
+<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
+<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/restrain >>
+<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack >>
+<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
+<<~/ahu >>
+
+<<~ ahu #default >>
+
+```toml default
+canonical-name = "Neural Whip"
+epithet = "The Biomancer's Reach"
+p = 3
+range = "10m"
+target = "one creature"
+duration = "instant; hold sustained"
+default-mount = "trait"
+source = "Ultraviolet Grasslands and the Black City 2e — the Cave Octopus (L16, biomancer)"
+```
+
+**P:** 3 · **R:** 10m · **T:** one creature · **D:** instant (hold sustained)
+
+A many-coloured neural tentacle lashes out as a coil of stuckforce sheathed in living nerve. It strikes **against the target's Defense** — no save. On a hit it deals a lash of force and **seizes** the target: held fast at the whip's reach, dragged a metre toward the biomancer each round the grip holds. A held creature acts at disadvantage and cannot move off; it breaks free on a contested Strength test against the whip's P, or by severing the tentacle (the limb has its own Life).
+
+### Overcharge
+
+- **x2 — P:6.** Two tentacles strike, seizing two targets or one with a crushing double-grip (+force, harder break).
+- **x4 — P:12.** The whip lifts and constricts — a held creature is hauled fully off the ground, helpless until it breaks the grip.
+
+### Mishaps
+
+On a botched strike or interfered control, choose one: the tentacle grips the wrong target (an ally, the practitioner's own gear); locks rigid and cannot release this round; over-constricts and shears what it holds; recoils and lashes the wielder; or grips empty air and goes slack for a round.
+<<~/ahu >>
+
+<<~ ahu #variants >>
+## Variants
+
+- **Cave Octopus Reach** — the source form: a doddering biomancer's defensive lash from neural tentacles. Seats `trait`.
+- **Stuckforce Snare** — limbless: a free-floating coil of gripping force a practitioner throws. Seats `trait` or `item`.
+- **Constrictor's Coil** — a creature's anatomical tentacle/serpent grapple reskinned to this module. Seats `trait`.
+- **Shrine Sentinel Lash** — a guardian structure that seizes trespassers. Seats `structure`.
+<<~/ahu >>
+
+<<~ ahu #edges >>
+## Edges
+
+<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
+<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip family:render role:projects >>
+<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip family:provenance role:witness >>
+<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
+
+<<~/ahu >>
+
+<<~ ahu #aftermath >>
+## Aftermath
+
+- **First `hook/attack` exerciser.** Confirms the Power template covers a non-spell monster affordance unchanged — same `#has` + `#default` shape, attack resolution instead of a save.
+- **First offensive `function`.** `restrain` is the first function that acts *on* an unwilling target; prior functions (cargo, barrier, ward, archive, decode, ecm-scan) all serve the wielder. A second offensive Power (a damaging strike with no grip) will likely demand a sibling `function/strike` — promote then (Principle 6), not now.
+- **Pure-damage attacks** want a function that is not `restrain`; this module deliberately models the *grip*, which the source creature leads with.
+- If a future neural attack jolts the mind rather than grips the body, that wants `domain/noosphere` (carried in v0.0) promoted on first query.
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>
