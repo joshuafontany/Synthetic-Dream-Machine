@@ -239,7 +239,7 @@ Gate failures at steps 5–6 reject the operation and emit a refusal receipt.
 
 ## Documents as Groups
 
-A room, meme, recipe, edge island, or canon-promotion ceremony
+A room, meme, recipe, or edge island
 MAY act as an authority-bearing group with its own access graph.
 
 This means:

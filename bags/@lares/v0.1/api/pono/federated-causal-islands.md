@@ -158,7 +158,7 @@ stable sediment | current boot receipt | live delta tail
   Past sediment encrypted at prior epoch keys stays readable by those who held
   those keys. Revocation runs forward-only.
 - **Receipt:** emitted after join, after each epoch change, after each
-  canon-promotion ceremony. Receipts keep hash stability and prompt-cache usability.
+  canon residency action (MOVE into a lower-priority bag). Receipts keep hash stability and prompt-cache usability.
 - **Re-seeding:** boot receipt re-issued; sediment layers may compact;
   live tail resets from new offset zero.
 
@@ -241,10 +241,10 @@ Tier 4 — Commons / Universe horizon ~:confidence[C],[18] (after law-of-5s)
 
 - node-to-node federation edges
 - cross-node pranala connections
-- canon-promotion ceremonies
+- cross-node residency actions (MOVE/COPY into canon bags)
 - revocation epoch changes
 - encrypted sync membership changes
-- any live hostful record proposing hostless canon mutation
+- alignment-stance federation (a peer-stance/vouch crossing an edge island)
 
 Local causality errors can be corrected inside a node.
 Cross-node causality errors produce federation corruption.
@@ -276,10 +276,10 @@ authority-first-order = [
 causal-island-must = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
-  "canon-promotion-ceremony",
+  "cross-node-residency-action",
   "revocation-epoch-change",
   "encrypted-sync-membership-change",
-  "live-hostful-record-proposing-hostless-canon-mutation",
+  "alignment-stance-federation",
 ]
 
 # MAY promote to causal islands — local errors correctable inside node; promotion optional

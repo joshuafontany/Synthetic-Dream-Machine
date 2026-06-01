@@ -112,7 +112,7 @@ desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presen
 
 <<~ ahu #authority-laws >>
 
-## AUTHORITY Laws — carrier canon, promotion ceremony, trust ladder
+## AUTHORITY Laws — carrier canon, residency actions, trust ladder
 
 Sources: lares/lararium-research/PRINCIPLES.md (~:confidence[C],[20])
          pono/tagspace-trust · pono/canon-boundary
@@ -305,7 +305,7 @@ rather than its structural position in the island topology (see ISLAND Laws abov
 ```toml #GEN_1_CAUSAL_ROOT
 id    = "GEN_1_CAUSAL_ROOT"
 label = "Genesis is the causal root; no peer holds an earlier history"
-desc  = "The genesis artifact establishes the zero point. Every live doc is a causal fork from it. No peer may introduce content that predates the genesis root into a room doc without explicit promotion ceremony."
+desc  = "The genesis artifact establishes the zero point. Every live doc is a causal fork from it. No peer may introduce content that predates the genesis root into a room doc without an explicit residency MOVE (canon ACTION verb)."
 ```
 
 ```toml #GEN_2_CONTENT_ADDRESSED

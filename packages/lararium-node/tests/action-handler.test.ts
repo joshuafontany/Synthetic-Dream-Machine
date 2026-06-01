@@ -21,11 +21,12 @@ import {
 } from "@lararium/mesh";
 import type {
   ActionVerb, ChangeOrigin, LarTiddlerRecord, VerbContext, VerbInvocation,
-  CapabilityAccess, CapabilityVerifyResult,
+  CapabilityAccess, CapabilityVerifyResult, CapabilityVerifier,
 } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { VerbTable } from "../../lararium-tw5/src/verb-dispatcher.js";
 import { registerActionReactors } from "../../lararium-tw5/src/action-handler.js";
+import { runLocalVerb } from "../../lararium-tw5/src/verb-local-dispatch.js";
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -328,5 +329,106 @@ describe("malformed args", () => {
     registerActionReactors(table, { composite });
     const handler = table.get("CLEAR")!;
     await expect(handler({}, makeContext(composite, "CLEAR", {}))).rejects.toThrow(/malformed/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// S5.7 — Integration: verb-tiddler → runLocalVerb → handler
+//
+// The unit blocks above hand-build VerbContext and call the reactor directly.
+// This block exercises the real dispatch seam the admin VM (open-admin-vm.ts)
+// and browser worker use: registry lookup by `invocation.verb` + the
+// CapabilityVerifier→cap() adaptation (makeCapVerify) + handler run. A full CLI
+// binary spawn + TW5 boot roundtrip stays covered by the live `lares act`
+// command + `verb-tiddler-dispatch.test.ts` full-boot harness; this closes the
+// dispatch-wiring gap the unit blocks skip.
+// ---------------------------------------------------------------------------
+
+describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () => {
+  // A real CapabilityVerifier (not a hand-stubbed cap): proves makeCapVerify
+  // adapts verifier.verify({presenter,bagUrl,access}) into the handler's cap().
+  function verifier(denyBag?: string): CapabilityVerifier {
+    return {
+      verify: async ({ bagUrl }): Promise<CapabilityVerifyResult> =>
+        bagUrl === denyBag ? { ok: false, reason: "verifier-denied" } : { ok: true },
+    };
+  }
+
+  function invocation(verb: ActionVerb, args: Record<string, unknown>): VerbInvocation {
+    return {
+      requestId:   "s57-req",
+      title:       "lar:///lararium.local.vm/verbs/s57-req",
+      verb,
+      args,
+      targets:     [],
+      batchMode:   "best-effort",
+      status:      "pending",
+      requestedBy: "did:web:operator-test",
+      requestedAt: "2026-06-01T00:00:00Z",
+    };
+  }
+
+  test("ADD dispatches through registry + verifier → mutation + effect record", async () => {
+    const composite = makeComposite();
+    const registry  = new VerbTable();
+    registerActionReactors(registry, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
+
+    const args   = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
+    const result = await runLocalVerb(invocation("ADD", args), { admin: composite, registry, verifier: verifier() });
+
+    expect(result["verb"]).toBe("ADD");
+    const all = await composite.resolveAll("T");
+    expect(all.map((e) => e.bagId).sort()).toEqual([BAG_HIGH, BAG_LOW].sort());
+    expect((await effectRecordsIn(composite)).length).toBe(1);
+  });
+
+  test("MOVE dispatches → transfer pair (accession + deaccession) through the seam", async () => {
+    const composite = makeComposite();
+    const registry  = new VerbTable();
+    registerActionReactors(registry, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
+
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
+    await runLocalVerb(invocation("MOVE", args), { admin: composite, registry, verifier: verifier() });
+
+    expect((await composite.resolveAll("T")).map((e) => e.bagId)).toEqual([BAG_HIGH]);
+    expect(await composite.listKapaeBags("T")).toEqual([BAG_LOW]);
+    expect((await effectRecordsIn(composite)).length).toBe(2);
+  });
+
+  test("verifier denial gates the dispatched verb (verifier.verify drives cap)", async () => {
+    const composite = makeComposite();
+    const registry  = new VerbTable();
+    registerActionReactors(registry, { composite });
+    await seedTiddler(composite, BAG_LOW, "T", "x", "c");
+
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
+    await expect(
+      runLocalVerb(invocation("ADD", args), { admin: composite, registry, verifier: verifier(BAG_HIGH) }),
+    ).rejects.toThrow(/cap-denied.*@high/);
+    expect((await effectRecordsIn(composite)).length).toBe(0); // gated before mutate-then-log
+  });
+
+  test("no verifier → makeCapVerify defaults to allow (open alpha path)", async () => {
+    const composite = makeComposite();
+    const registry  = new VerbTable();
+    registerActionReactors(registry, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "x", cid);
+
+    const args   = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
+    const result = await runLocalVerb(invocation("ADD", args), { admin: composite, registry });
+    expect(result["verb"]).toBe("ADD");
+  });
+
+  test("unregistered verb → runLocalVerb throws (registry lookup gate)", async () => {
+    const composite = makeComposite();
+    const registry  = new VerbTable(); // empty — no reactors registered
+    await expect(
+      runLocalVerb(invocation("ADD", { title: "T" }), { admin: composite, registry }),
+    ).rejects.toThrow(/no handler registered/);
   });
 });
