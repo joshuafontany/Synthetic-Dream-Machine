@@ -24,7 +24,9 @@ export function makePinReactor(opts: ResidencyHandlerOptions): VerbReactor {
     } else {
       await opts.residency.pin(url);
     }
-    const result: Record<string, unknown> = { url, tier: opts.residency.tier(url) };
+    const result: Record<string, unknown> = {
+      url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url),
+    };
     if (reason !== undefined) result["reason"] = reason;
     return result;
   };
@@ -35,7 +37,7 @@ export function makeUnpinReactor(opts: ResidencyHandlerOptions): VerbReactor {
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
     opts.residency.unpin(url);
-    return { url, tier: opts.residency.tier(url) };
+    return { url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url) };
   };
 }
 
@@ -55,7 +57,7 @@ export function makeRegisterColdReactor(opts: ResidencyHandlerOptions): VerbReac
     const url = typeof args["url"] === "string" ? args["url"] : "";
     if (!url) throw new Error("args.url is required");
     opts.residency.registerCold(url);
-    return { url, tier: opts.residency.tier(url) };
+    return { url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url) };
   };
 }
 
@@ -65,6 +67,11 @@ export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbRe
     return {
       pinned:    [...stats.pinned],
       hot:       stats.hot.map((e) => ({
+        url:         e.url,
+        lastTouched: e.lastTouched,
+        ...(e.syncActive !== undefined && { syncActive: e.syncActive }),
+      })),
+      warm:      stats.warm.map((e) => ({
         url:         e.url,
         lastTouched: e.lastTouched,
         ...(e.syncActive !== undefined && { syncActive: e.syncActive }),

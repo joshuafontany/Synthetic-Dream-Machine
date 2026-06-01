@@ -124,7 +124,7 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
 
     // Re-pin if pinned (residency.pin is idempotent + name-keyed by URL,
     // and URL stays the same — composite-bagId, not Automerge-doc-URL).
-    if (opts.residency.tier(bagUrl) === "pinned") {
+    if (opts.residency.isPinned(bagUrl)) {
       await opts.residency.pin(bagUrl, `epoch-rebound`);
     }
 
@@ -264,7 +264,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       });
       layerSwapped = true;
     }
-    if (opts.residency.tier(wikiKey) === "pinned") {
+    if (opts.residency.isPinned(wikiKey)) {
       await opts.residency.pin(wikiKey, `rotated-gen-${nextGen}`);
     }
     // Previous-canon ships cold; operator pin if they want it hot.
