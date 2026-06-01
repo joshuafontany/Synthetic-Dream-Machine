@@ -34,9 +34,9 @@ describe("ABILITY_LADDER — ordered from least to most privileged", () => {
   });
 
   test("all expected abilities present", () => {
-    // "promote" retired 2026-05-31 — canon-promotion ceremony gone;
+    // "promote" + "propose" retired 2026-05-31 — neither ceremony exists today;
     // residency-model bag-priority cascade subsumes the gating semantic.
-    const expected: OrichalcumAbility[] = ["pull", "read", "sync", "write", "propose", "admin", "revoke"];
+    const expected: OrichalcumAbility[] = ["pull", "read", "sync", "write", "admin", "revoke"];
     for (const a of expected) expect(ABILITY_LADDER).toContain(a);
   });
 });
@@ -69,23 +69,15 @@ describe("abilityImplies — ability ladder contracts", () => {
     expect(abilityImplies("write", "sync")).toBe(true);
   });
 
-  test("write does NOT imply propose (propose is a separate suggestion-level capability)", () => {
-    expect(abilityImplies("write", "propose")).toBe(false);
+  test("admin implies write, sync, read", () => {
+    expect(abilityImplies("admin", "write")).toBe(true);
+    expect(abilityImplies("admin", "sync")).toBe(true);
+    expect(abilityImplies("admin", "read")).toBe(true);
   });
 
-  test("propose implies write, sync, read", () => {
-    expect(abilityImplies("propose", "write")).toBe(true);
-    expect(abilityImplies("propose", "sync")).toBe(true);
-    expect(abilityImplies("propose", "read")).toBe(true);
-  });
-
-  test("admin implies propose", () => {
-    expect(abilityImplies("admin", "propose")).toBe(true);
-  });
-
-  test("revoke implies admin and propose", () => {
+  test("revoke implies admin and write", () => {
     expect(abilityImplies("revoke", "admin")).toBe(true);
-    expect(abilityImplies("revoke", "propose")).toBe(true);
+    expect(abilityImplies("revoke", "write")).toBe(true);
   });
 });
 
@@ -124,9 +116,9 @@ describe("capabilityHasAbility — token gate", () => {
     expect(capabilityHasAbility(cap([]), "pull")).toBe(false);
   });
 
-  test("propose capability grants write and read", () => {
-    expect(capabilityHasAbility(cap(["propose"]), "write")).toBe(true);
-    expect(capabilityHasAbility(cap(["propose"]), "read")).toBe(true);
+  test("admin capability grants write and read", () => {
+    expect(capabilityHasAbility(cap(["admin"]), "write")).toBe(true);
+    expect(capabilityHasAbility(cap(["admin"]), "read")).toBe(true);
   });
 });
 

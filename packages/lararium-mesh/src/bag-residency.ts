@@ -47,7 +47,26 @@ import { ADMIN_BAG_ID, LARES_PIN_TAG } from "./lar-uris.js";
 /** A bag's URL — Automerge doc URL, e.g. "automerge:abc123…". */
 export type BagUrl = string;
 
-/** Residency tier of a single bag. */
+/**
+ * Residency tier of a single bag.
+ *
+ * Tier-state nouns stay English (`pinned`/`hot`/`cold`) for semantic clarity
+ * at the type level — these name STATES the bag occupies.
+ *
+ * The transition VERBS that move a bag between states wear Hawaiian per the
+ * lararium HUD doctrine (`bags/@lares/v0.1/docs/lares/the-lararium-hud.md`):
+ *
+ *   - `hoʻoanu` ("to cool down") — `hot` → `cold` transition. The
+ *     `IslandMsg_HooAnu` worker signal in `island-protocol.ts` drives it.
+ *   - `hoʻomahana` ("to warm") — `cold` → `hot` transition. Today this
+ *     happens via vessel re-mount in `vessel-island-pool.mountWiki`, not via
+ *     a worker signal — a fresh worker process boots and runs `ea`. A future
+ *     pause-without-terminate scheme MAY introduce a corresponding worker
+ *     signal type; the Hawaiian verb name is reserved for it.
+ *   - `pinned` ↔ `hot`/`cold` transitions ride the operator-level
+ *     pin/unpin gestures and do not carry a transition-verb name (the state
+ *     change describes itself).
+ */
 export type ResidencyTier = "pinned" | "hot" | "cold";
 
 /**

@@ -61,12 +61,16 @@ export type LarPrincipal =
 // exists. Under the residency-model bag-priority cascade, canon emerges from
 // writing to a lower-priority bag (which requires the same "admin" capability on
 // that bag), so a separate ability rung carries no additional gating semantic.
+//
+// "propose" retired 2026-05-31 — the same shape. No live consumer ever read it;
+// the residency-model ACTION verbs (ADD/MOVE/COPY/CLEAR/DROP/LOAD) all gate on
+// "admin" today. A propose-style ceremony (operator-review-before-enact) MAY
+// reintroduce the rung with then-current semantics if such a ceremony emerges.
 export const ABILITY_LADDER = [
   "pull",     // retrieve encrypted bytes and forward; cannot decrypt or render
   "read",     // decrypt and render semantic content
   "sync",     // participate in CRDT reconciliation
   "write",    // produce accepted mutations
-  "propose",  // suggest changes (operator review precedes a residency ACTION)
   "admin",    // manage wiki, recipe, edge island membership, residency actions
   "revoke",   // roll epoch; terminate future live tail for a principal
 ] as const;

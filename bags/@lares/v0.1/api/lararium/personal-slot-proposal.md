@@ -262,6 +262,7 @@ Q6 (@draft scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-f
 <<~ pranala #bag-paths ? -> lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths family:relation role:adds-rules-to >>
 <<~ pranala #lar-uri-bag-tag ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule family:relation role:governed-by >>
 <<~ pranala #keyhive ? -> lar:///ha.ka.ba/@lares/v0.1/api/keyhive/person-group family:relation role:scoped-by >>
+<<~ pranala #personal-bindings ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings family:relation role:storage-shape-for >>
 
 <<~/ahu >>
 

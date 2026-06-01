@@ -146,13 +146,20 @@ export interface IslandMsg_Manifest {
  * Cool the wiki slot from hot to cold (teardown; thread may terminate).
  *
  * Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
- * Pairs with the future warming signal `"hoomahana"` (hoʻomahana, "to warm")
- * per the Pele/Kai duality in the worker tier-signal vocabulary.
  *
  * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup —
- * the temperature register (hot/warm/cool) replaces the
+ * the temperature register (hot/cold) replaces the
  * organizational-promotion register (promote/demote) that conflicted with
  * the residency-model ACTION verb surface.
+ *
+ * Counterpart-verb status: a parallel `IslandMsg_HooMahana` warm-up signal
+ * stays intentionally deferred. The `cold` → `hot` transition today happens
+ * at the vessel layer via `vessel-island-pool.mountWiki` — a fresh worker
+ * process boots and runs `ea` — not via a worker-side signal. The Hawaiian
+ * verb `hoʻomahana` ("to warm") gets reserved for a future pause-without-
+ * terminate scheme where workers persist across cool-down cycles and warm
+ * back up by signal instead of by spawn. No such scheme exists today; adding
+ * the type now would create dead vocabulary.
  */
 export interface IslandMsg_HooAnu {
   schema_version: ProtocolVersion;

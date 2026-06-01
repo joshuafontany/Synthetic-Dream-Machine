@@ -246,8 +246,8 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [x] **S7.2** — Update `expandRecipe()` to insert `@personal` between `@draft` and `@<wikiSlug>` (priority position from the approved proposal). *(landed 2026-05-31)*
 - [ ] **S7.3** — Update default cascade tiddler `lar:///ha.ka.ba/@lararium/config/bag-paths` with `@personal` rules — explicitly noted as **first-write defaults**, not authoritative routing. Q3 resolved 2026-05-31: `$:/palette` routes to `@personal`.
 - [ ] **S7.4** — Vessel boot: compute recipe-fingerprint as SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` (Q5 revised 2026-05-31 — `@lares` and `@lararium` doc-ids excluded so switching personality or system bag does not fork operator view state across devices).
-- [ ] **S7.5** — `BagResolver` map gets per-(PersonGroup × recipe-fingerprint) `@personal` and `@draft` URL resolution.
-- [ ] **S7.6** — Keyhive PersonGroup grant + capability check on `@personal` and `@draft` bags. Q4 deferred 2026-05-31: ships with implicit-on-membership subscription as default; explicit per-wiki opt-out toggle becomes follow-up sprint scope.
+- [ ] **S7.5** — `BagResolver` map gets per-(PersonGroup × recipe-fingerprint) `@personal` and `@draft` URL resolution. Storage shape: admin-doc-stored binding tiddlers per `lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings` (proposed 2026-05-31, pending operator endorsement).
+- [ ] **S7.6** — Keyhive PersonGroup grant + capability check on `@personal` and `@draft` bags. Q4 deferred 2026-05-31: ships with implicit-on-membership subscription as default; explicit per-wiki opt-out toggle becomes follow-up sprint scope. Survey 2026-05-31: KeyhiveProvider.delegate + addSentinelMember already cover the grant path; not blocked on Keyhive maturity.
 - [ ] **S7.7** — Tests (original 7 from personal-slot-proposal + 2 from residency-model reconciliation):
   - Two devices, same recipe, same PersonGroup → write StoryList on A, observe on B.
   - Two devices, different recipe, same PersonGroup → write StoryList on A, B sees nothing.

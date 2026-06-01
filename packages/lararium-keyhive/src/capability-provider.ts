@@ -13,11 +13,12 @@ import type {
  *   * Tier 1 (this interface) — Keyhive's binary access gate. read or admin.
  *     Cryptographic. Per-bag (one Keyhive Document per Lararium bag URL).
  *   * Tier 2 (application layer) — finer-grained ABILITY_LADDER caveats
- *     (write, propose, …) checked AFTER Keyhive's admin proof verifies.
- *     Lives in residency action handlers (Sprint 5 of the Residency Model
- *     Epic) and friends, not here. The "promote" capability rung retired
- *     2026-05-31 — its ceremony retired and the residency-model bag-priority
- *     cascade subsumes the gating semantic.
+ *     (pull, read, sync, write, admin, revoke) checked AFTER Keyhive's admin
+ *     proof verifies. Lives in residency action handlers (Sprint 5 of the
+ *     Residency Model Epic) and friends, not here. The "promote" and
+ *     "propose" capability rungs both retired 2026-05-31 — the ceremonies
+ *     they gated no longer exist; the residency-model bag-priority cascade
+ *     subsumes the gating semantic.
  *
  * The interface is provider-shaped so implementations can swap:
  *   * KeyhiveProvider (D.2) — wraps @keyhive/keyhive WASM
