@@ -87,7 +87,7 @@ describe("resolve verb", () => {
 
     // Live: only BAG_LOW (BAG_HIGH tombstoned).
     expect((result["manifestations"] as Array<{ bagId: string }>).map((m) => m.bagId)).toEqual([BAG_LOW]);
-    // Whiteout surfaces the hiding bag.
+    // Kāpae surfaces the bag that set the title aside.
     expect(result["tombstones"]).toEqual([BAG_HIGH]);
     // winningBag still = live-priority head (resolveAll skips tombstones).
     expect(result["winningBag"]).toBe(BAG_LOW);

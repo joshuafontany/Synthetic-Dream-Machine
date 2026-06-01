@@ -454,12 +454,12 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
       console.log(`  Winning surface (origin-bag): ${winning}`);
       console.log("");
     } else {
-      console.log("  (no live Manifestations — the title carries only kāpaes)");
+      console.log("  (no live Manifestations — the title carries only kāpae marks)");
       console.log("");
     }
 
     if (tombstones.length > 0) {
-      console.log("  Kāpae marks (bags that explicitly hide the title):");
+      console.log("  Kāpae marks (bags that have set this title aside at their priority):");
       for (const b of tombstones) {
         console.log(`      ${b}`);
       }
