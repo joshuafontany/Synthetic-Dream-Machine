@@ -273,8 +273,10 @@ meant to escape):
   change-sets. A firehose is fine *inside* a consenting cabal; it terminates at the island boundary.
 - ✗ **Capital-intensive single global index** (ATProto's Appview monopoly). We hold no
   whole-network index to monopolize — reads project per-VM from locally-resident bags
-  (residency model: pinned/hot/cold). Keep aggregation a swappable edge view over data the
-  aggregator may sync but not read.
+  (island-owned residency tiers: hot/warm/cold on the thermal axis + an orthogonal pin-flag;
+  bag residency derives from the warmest referencing island — see
+  `lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers`). Keep aggregation a swappable
+  edge view over data the aggregator may sync but not read.
 - ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
   capabilities — never a shared master key over a ring's members.
 - ✗ **Global blocklists / global trust scores** (EigenTrust-style). Sybil-vulnerable without

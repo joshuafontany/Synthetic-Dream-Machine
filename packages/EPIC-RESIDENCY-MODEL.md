@@ -308,20 +308,45 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 ---
 
+### Sprint 11 — Residency Tier Unification (Thermal + Pin + Warm Build)
+
+**Goal:** Collapse residency into ONE island-owned model and build the warm tier. Operator rulings 2026-06-01: (1) thermal axis `hot/warm/cold` + orthogonal pin-flag (pinned is NOT a temperature); (2) **build warm now** (pause-without-terminate); (3) **collapse bag residency into the Island Pool / causal-island code** — "bag" stays a TW5 term, but the residency *methods* move out of the side-file `bag-residency.ts` (which predates the causal-islands model) into the causal-island code.
+
+**Canon (landed 2026-06-01):** [bags/@lares/v0.1/api/lararium/residency-tiers.md](../bags/@lares/v0.1/api/lararium/residency-tiers.md) — load-bearing invariant. causal-islands.md + the-lararium-hud.md reconciled to it.
+
+**Why this re-sequences S7:** S7.5 binding-resolution waited on a boot reorder (admin-VM-first) so the delegate-verb seam is live before any wiki mount. That reorder + "mount primary via the unified `mountWiki` path with `pinned: true`" land HERE as platform work; S7.5/7.6/7.7 then resume on the reordered boot.
+
+**Stories:**
+
+- [ ] **S11.1** — Relocate residency methods (pin/unpin/hydrate/cool/handle-drop/`ChunkStore`) from `lararium-mesh/src/bag-residency.ts` into the causal-island code: model + contracts in `causal-island.ts`; Worker-lifecycle mechanism in `lararium-node/src/vessel-island-pool.ts`. Retire the standalone side-file's tier authority. Keep "bag" as the TW5 layer term throughout. One node cap (Island Pool hot/warm budget); no independent bag LRU.
+- [ ] **S11.2** — Pin becomes an orthogonal boolean flag, not a `SlotTier`/`ResidencyTier` peer. Type shape: `tier: "hot" | "warm" | "cold"` + `pinned: boolean`. Admin / active wiki / Session Wiki = pinned-hot. Pin state persists as admin-doc tiddlers (existing surface; no RPC).
+- [ ] **S11.3** — Build the warm tier: `IslandMsg_HooMahana` worker signal + Worker suspend-without-terminate lifecycle (engine pauses, handles retained, reactions quiesced) + a `warm` slot budget between hot and cold. Lift the "dead vocabulary" reservation in `island-protocol.ts`.
+- [ ] **S11.4** — Derived bag residency: a bag's tier = warmest tier among islands whose recipes reference it. Handle-drop on island cool MUST check `syncActive` (don't drop mid-replication) and shared-reference (don't drop a bag a pinned/hot island still holds). Preserve stub-on-oracle-traversal (lazy hydration).
+- [ ] **S11.5** — Boot reorder in `open-node-vessel.ts`: `await adminVm.workerEa` before the primary wiki mount; mount primary via the unified `_mountWorker`/`mountWiki` path with `pinned: true` (no special `mountPrimaryWorker` temperature). Unblocks S7.5's delegate-verb-seam resolution.
+- [ ] **S11.6** — Tests: thermal transitions (hot↔warm↔cold), pin-flag exemption from cooling, warm resume-by-signal vs cold resume-by-spawn, derived bag residency (shared bag stays hot while any pinned/hot island references it), syncActive guard blocks handle-drop.
+
+**Exit criteria:** one residency model owned by the Island Pool; `bag-residency.ts` side-file authority retired (methods homed in causal-island code); warm tier live (suspend/resume by signal); pin orthogonal; boot reordered admin-first. Then S7.5 resumes.
+
+**Dependency note:** S11.5 (boot reorder) is the prerequisite the S7.5/7.6/7.7 stories were blocked on. Run S11 before completing S7.
+
+---
+
 ## Cross-sprint dependencies
 
 ```
 S1 ✅ (memetic intent + reconciliation)
   └── S2 (action verb URI + types)
        ├── S3 (multi-residency + read surface)
-       │    └── S7 (@personal enactment) ← waits for S3 + S4
+       │    └── S7 (@personal enactment) ← waits for S3 + S4 + S11.5 boot reorder
        ├── S4 (effect records + audit) ← runs with S3
        │    └── S5 (action handlers + CLI) ← waits for S2 + S4
        │         └── S6 (browser parity) ← waits for S5
        └── S8 (coordinate-inspection UI) ← can start once S3 lands
 
-S9 (doc meme sweep) — can run in parallel with S5+ (touch different files)
+S9  (doc meme sweep) — can run in parallel with S5+ (touch different files)
 S10 (test golden regeneration) — waits for S5 to settle behavior
+S11 (residency tier unification: thermal+pin+warm, bag-residency collapse)
+     — canon landed; build re-sequences S7 (S11.5 boot reorder is S7.5's prerequisite)
 ```
 
 ---

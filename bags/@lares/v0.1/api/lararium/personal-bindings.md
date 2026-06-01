@@ -5,15 +5,17 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings"
 file-path    = "bags/@lares/v0.1/api/lararium/personal-bindings.md"
 type         = "text/x-memetic-wikitext"
-tagspace     = "proposal"
+tagspace     = "stable"
 register     = "S"
-confidence   = 14
+confidence   = 16
 mana         = 16
 manao        = 15
-manaoio      = 14
-role         = "design proposal — admin-doc-stored binding map for (PersonGroup × recipe-fingerprint) → @personal/@draft docUrl; the storage shape that unblocks Sprint 7 S7.5+S7.6"
-status       = "proposed"
+manaoio      = 16
+role         = "approved storage shape — admin-doc-stored binding map for (PersonGroup × recipe-fingerprint) → @personal/@draft docUrl; unblocks Sprint 7 S7.5+S7.6"
+status       = "approved"
 proposed-on  = "2026-05-31"
+approved-on  = "2026-06-01"
+approved-defaults = "Q1 keep recipe-trace; Q2 split @personal/@draft tiddlers; Q3 orphan-tolerant idempotent mint; Q4 cross-fingerprint linkage deferred"
 cacheable    = true
 retain       = true
 ```
@@ -92,60 +94,83 @@ The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AU
 
 ## Vessel boot flow
 
-Vessel-island-pool's `_mountWorker(wikiId, ctx)` gains the following sequence before building the manifest's `resolver` map:
+**Layering law (corrected 2026-06-01 after three research spirits converged on (A)).** Binding-resolution — compute fingerprint → look up → mint-on-absent → Keyhive-delegate → write binding tiddler — MUST run at the **host / composition layer** (`open-node-vessel.ts`), NOT inside `VesselIslandPool`. The pool stays envelope-only per its design law (vessel-island-pool.ts header); it holds no `repo`/`composite`/`keyhive`/admin-doc references and MUST NOT gain them. The host resolves the `@personal`/`@draft` doc URLs and passes them **through** `WikiBootContext` into the pool, which merely adds them to the manifest `resolver` map.
+
+Three convergent justifications:
+
+- **Composition Root** (Seemann) — side-effectful object-graph wiring belongs at the entry point that already holds the deps; pushing it into a leaf inverts the pattern.
+- **Service-Locator anti-pattern** — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
+- **Object-capability "only a holder may delegate"** (Miller, *Capability Myths Demolished*) + **POLA** + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
+
+**Established repo grain (codebase spirit):** draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:694-701`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`). The new helper follows that grain exactly.
+
+### Primary-wiki path (the only live path today)
+
+The codebase spirit confirmed `mountWiki` (hot-tier session mount) has **no production call site** — only `mountPrimaryWorker` runs. So Sprint 7 wires binding-resolution for the **primary wiki only**. The host resolves bindings before the `mountPrimaryWorker` call (open-node-vessel.ts:770), mirroring the draft-mint site:
 
 ```typescript
-// 1. Read the operator's PersonGroup id from the admin doc
-const personGroupHex = adminDoc.tiddlers[PERSON_GROUP_DOC_ID_TIDDLER]?.text;
-if (!personGroupHex) throw new Error("[vessel] founding ceremony incomplete — no PersonGroup");
+// open-node-vessel.ts — host composition layer, BEFORE mountPrimaryWorker.
+// keyhive, composite, repo, identity all in scope here (see :615, :694-710).
 
-// 2. Compute the recipe fingerprint
 const fingerprint = await computeRecipeFingerprint({
-  wikiDocId:      ctx.docHandle.url,
-  canonBagDocIds: ctx.canonHandles?.map(h => h.url) ?? [],
+  wikiDocId:      wikiHandle.url,
+  canonBagDocIds: canonHandles.map((h) => h.url),  // @lares/@lararium excluded per Q5
 });
 
-// 3a. Look up the @personal binding tiddler
-const personalKey = `lar:///ha.ka.ba/@admin/personal-bindings/${fingerprint}`;
-let personalUrl   = adminDoc.tiddlers[personalKey]?.text ?? null;
+const { personalUrl } = await resolveOrMintBinding({
+  kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
+  fingerprint, repo, composite, keyhive,
+});
+const { draftUrl } = await resolveOrMintBinding({
+  kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
+  fingerprint, repo, composite, keyhive,
+});
 
-// 3b. Mint on absent + delegate to PersonGroup
-if (!personalUrl) {
-  const personalHandle = repo.create<LarDoc>(emptyLarDoc());
-  personalUrl          = personalHandle.url;
-  await keyhiveProvider.delegate({
-    bagUrl:   personalUrl,
-    audience: personGroupHex,
-    access:   "admin",
-  });
-  // Write the binding tiddler into the admin doc
-  await composite.put({ tiddler: {
-    title:        personalKey,
-    text:         personalUrl,
-    kind:         "personal-binding",
-    fingerprint,
-    "recipe-trace": canonicalJson({ wikiDocId, canonBagDocIds }),
-    "minted-on":  new Date().toISOString(),
-    "minted-by":  await keyhiveProvider.vesselIdentifierHex(),
-  } }, { bag: ADMIN_BAG_ID });
-}
-
-// 4. Same flow for @draft under `draft-bindings/${fingerprint}`
-// (extracted to a single helper resolveOrMintBinding(kind, fingerprint))
-
-// 5. Build the enriched resolver with @personal + @draft URLs
-const resolver = {
-  [LARARIUM_BAG]:         this._laraiumDocUrl,
-  [LARES_BAG]:            this._laresDocUrl,
-  [wikiBagUri(wikiSlug)]: rawDocUrl,
-  [PERSONAL_BAG]:         personalUrl,
-  [DRAFT_BAG]:            draftUrl,
-};
-
-// 6. mkManifest with the enriched resolver (existing flow)
+await vmManager.mountPrimaryWorker(activeWikiId, {
+  docHandle: wikiHandle, coreHash, diskMirrors,
+  personalDocUrl: personalUrl,   // NEW — WikiBootContext pass-through
+  draftDocUrl:    draftUrl,      // NEW
+});
 ```
 
-Net addition: ~80–120 lines including the helper, the imports, and the two-binding parallelism. The existing `_mountWorker` body stays largely untouched.
+`resolveOrMintBinding` (new shared helper, node-side):
+
+```typescript
+// reads PERSON_GROUP_DOC_ID_TIDDLER from the admin doc, computes the binding key,
+// returns existing url, or mints + delegates + writes the binding tiddler.
+const key = `${prefix}/${fingerprint}`;
+const existing = await composite.get(key, { bag: ADMIN_BAG_ID });
+if (existing?.text) return { url: existing.text };
+
+const handle = repo.create<LarDoc>(emptyLarDoc());
+const personGroupHex = (await composite.get(PERSON_GROUP_DOC_ID_TIDDLER, { bag: ADMIN_BAG_ID }))?.text;
+if (!personGroupHex) throw new Error("[binding] founding ceremony incomplete — no PersonGroup");
+await keyhive.delegate({ bagUrl: handle.url, audience: personGroupHex, access: "admin" });
+await composite.put(mutableLarRecord(key, {
+  text: handle.url, kind, fingerprint,
+  "recipe-trace": canonicalJson({ wikiDocId, canonBagDocIds }),  // Q1 keep
+  "minted-on": new Date().toISOString(),
+  "minted-by": await keyhive.vesselIdentifierHex(),
+}, "personal-bindings"), { bag: ADMIN_BAG_ID });
+return { url: handle.url };
+```
+
+Then `_mountWorker` only adds the pass-through URLs to the resolver — no logic, no new deps:
+
+```typescript
+const resolver: Record<string, string | null> = {
+  [LARARIUM_BAG]:         this._laraiumDocUrl,
+  [wikiBagUri(wikiSlug)]: rawDocUrl,
+  ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
+  ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
+};
+```
+
+### Session-wiki path (deferred — wires when `mountWiki` gets a production caller)
+
+When hot-tier session mounts get a production path, binding-resolution for them routes through the **admin-VM delegate-verb** seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`), since by then the admin VM is live (`await adminVm.workerEa`, :783). The primary path cannot use this seam: `mountPrimaryWorker` (:770) runs *before* the admin VM declares sovereignty (:783). `resolveOrMintBinding` stays callable from both the host-inline path and the future verb handler.
+
+**First delegate() call site.** S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
 
 <<~/ahu >>
 
@@ -171,18 +196,22 @@ Net addition: ~80–120 lines including the helper, the imports, and the two-bin
 
 ## Browser-side deferral
 
-The handoff names "S9 / lararium-browser S4 real boot" as still in flight (IndexedDB + WebCrypto + Keyhive founding ceremony in the browser vessel). The node-side enactment of this proposal lands cleanly today; the browser-side mirror waits until S9-S4 settles so the wire-in builds on a settled foundation rather than shifting ground. The proposal's data model and lifecycle stay platform-agnostic — when the browser vessel reaches real-boot, the same `_mountWorker` enrichment applies via the equivalent code path in `browser-sovereign-island-model.ts`.
+The handoff names "S9 / lararium-browser S4 real boot" as still in flight (IndexedDB + WebCrypto + Keyhive founding ceremony in the browser vessel). The node-side enactment of this proposal lands cleanly today; the browser-side mirror waits until S9-S4 settles so the wire-in builds on a settled foundation rather than shifting ground. The proposal's data model and lifecycle stay platform-agnostic — when the browser vessel reaches real-boot, the same host-layer `resolveOrMintBinding` + `WikiBootContext` pass-through applies via the equivalent composition path in `browser-sovereign-island-model.ts`. The browser pool stays envelope-only too.
 
 <<~/ahu >>
 
 <<~ ahu #open-questions >>
 
-## Open questions
+## Open questions — resolved at endorsement (2026-06-01)
 
-1. **`recipe-trace` field — keep or drop?** Operator-facing inspection benefits from knowing what inputs produced a fingerprint. Storing canonical-JSON of the inputs adds ~200 bytes per binding tiddler. Worth the cost? Default: keep (inspection beats minimal storage in early alpha).
-2. **`@draft` separation — separate tiddler or one combined?** Could store both URLs in a single tiddler keyed by `${fingerprintHex}` with two fields (`personal-url`, `draft-url`). Splitting reads cleaner; combining halves tiddler count. Default: split (one concern per tiddler, follows TW5 grain).
-3. **Mint atomicity.** The mint flow does: `repo.create()` → `delegate()` → `put()` write-binding. If the vessel crashes between mint and binding-write, a docUrl gets orphaned. Mitigation: idempotent retry (next boot computes same fingerprint, finds no binding, mints again — old orphan stays unreferenced). Acceptable for early alpha?
-4. **Cross-fingerprint linkage.** When operator adds a canon bag to an existing wiki, the fingerprint changes, and a new `@personal` doc gets minted with empty state. The operator may want their previous view state to carry forward into the new recipe context. Out of scope for Sprint 7; future sprint MAY add a `lares wiki personal --import-from <fingerprint>` ceremony.
+Operator endorsed the proposal and ruled the four open questions at their documented defaults:
+
+1. **`recipe-trace` field — RESOLVED: keep.** Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler).
+2. **`@draft` separation — RESOLVED: split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
+3. **Mint atomicity — RESOLVED: orphan-tolerant idempotent mint accepted for early alpha.** `repo.create()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl. Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
+4. **Cross-fingerprint linkage — RESOLVED: deferred.** Out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`.
+
+**Layering question (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 
 <<~/ahu >>
 
