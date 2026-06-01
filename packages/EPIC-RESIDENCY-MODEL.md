@@ -216,11 +216,11 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [x] **S5.2** — `executeAction` runs inside `withEffectRecord(action, composite, …)` (action-handler.ts:81). No bag mutation without effect record.
 - [x] **S5.3** — `registerActionReactors` wires the ACTION verb family in `@lararium/node/src/island-behaviors.ts` (wiki-scope dispatch, line ~66).
 - [x] **S5.4** — `lares act <VERB>` CLI landed in `@lares/cli/src/commands/act.ts`, registered in `bin/lares.ts` COMMANDS (line 43).
-- [x] **S5.5** — Active code carries no ceremony-`promote` strings; the confident ceremony-meme refs swept (operator's `3a6d80ed` + this loop's causal-island/federated-causal-islands/system-invariants/orichalcum fixes). One ambiguous class (loci `canon-promotion` workflow vocabulary, `hooponopono` ceremony role) flagged to S9 for operator semantic judgment — not a Sprint 5 blocker.
+- [x] **S5.5** — Active code carries no ceremony-`promote` strings; all ceremony-meme refs swept (operator `3a6d80ed` + the full S9.1 sweep, incl. the loci/hooponopono `canon-promotion` → canon-MOVE rewrite under operator ruling 2026-06-01). Generic tier/stable/component "promotion" preserved as a distinct sense.
 - [x] **S5.6** — `promotion-ceremony.ts` deleted; `PROMOTION_RECEIPT_TAG` retired (`lar-uris.ts:56`, `index.ts:20` notes). Effect records (Sprint 4) replace promotion receipts.
 - [x] **S5.7** — 19 tests in `@lararium/node/tests/action-handler.test.ts` (was 14, +5 integration). Unit: registration, per-verb behavior (ADD change-id preservation, MOVE transfer-pair + dual-admin, COPY overwrite, CLEAR/DROP disposition, LOAD not-implemented), cap-verify gates. **Integration (S5.7, 2026-06-01):** five tests through `runLocalVerb` — the real dispatch seam (registry lookup + `CapabilityVerifier`→`cap()` via `makeCapVerify` + handler) the admin VM uses: ADD/MOVE mutation + effect record, real-verifier denial gating (zero effect records on deny), no-verifier default-allow, unregistered-verb rejection. Full CLI-binary spawn covered by the live `lares act` command + `verb-tiddler-dispatch.test.ts` full-boot harness.
 
-**Exit criteria met:** ✅ `lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD` pipeline built + dispatch-seam tested; ✅ `promotion-ceremony.ts` retired; ✅ active code ceremony-clean; ✅ confident ceremony-meme refs swept. (One ambiguous meme-vocabulary class deferred to S9 for operator judgment.)
+**Exit criteria met:** ✅ `lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD` pipeline built + dispatch-seam tested; ✅ `promotion-ceremony.ts` retired; ✅ active code ceremony-clean; ✅ ceremony-meme refs swept (S9 complete).
 
 ---
 
@@ -277,18 +277,18 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 ---
 
-### Sprint 9 — Doc Meme Sweep ✅ CORE COMPLETE (2026-06-01)
+### Sprint 9 — Doc Meme Sweep ✅ DONE (2026-06-01)
 
 **Goal:** Update existing memes carrying promote-era vocabulary; preserve generic promotion prose where appropriate; tag ceremony-specific references for replacement.
 
 **Stories:**
 
-- [~] **S9.1** — `bags/` swept across two passes (operator `3a6d80ed` ceremony→MOVE rename + this loop's doctrine-meme fixes: `causal-islands.md`, `federated-causal-islands.md` MUST-list synced to code, `system-invariants.md` AUTHORITY header + genesis law, `orichalcum-capabilities.md` group-principal list + ability-ladder). **One ambiguous class left for operator judgment** (the S9-residual flagged 2026-06-01): `loci/SKILL.md` + `loci.md` use `canon-promotion` as a *workflow concept* (a carrier graduating to canon), and `hooponopono.md`'s role is literally "canon promotion ceremony" — these may be a distinct ongoing concept rather than the retired `lares promote` command. Editing them freely risks corrupting loci's core vocabulary. **Operator: rewrite to residency-MOVE, or keep as distinct concept?**
+- [x] **S9.1** — `bags/` swept across passes (operator `3a6d80ed` ceremony→MOVE rename + doctrine-meme fixes: `causal-islands.md`, `federated-causal-islands.md` MUST-list synced to code, `system-invariants.md` AUTHORITY header/genesis law/AUTH_4 label, `orichalcum-capabilities.md` role+head+ability-ladder+group-principal). **Operator ruling 2026-06-01: canon-promotion → residency MOVE.** Swept: `loci/SKILL.md` (all canon-promotion → canon-MOVE), `loci.md` + `docs/pono/loci.md` (role + criteria + self-MOVE), `hooponopono.md` (reframed as the harmony ceremony wrapping a canon MOVE — substance preserved), `live-session-overwrite.md` (both docs + failure-states), `spine.md`, `the-lares-protocols.md` (federated canon MOVE → alignment-layer). **Deliberately left** (distinct sense, NOT the retired ceremony): generic tier/stable/component promotion (`hot-tier promotion`, `promote to stable tagspace`, `@sdm` component-meme promotion, doc relocation) + the historical past-tense ref in `residency-model.md:43`.
 - [x] **S9.2** — `packages/AGENTS.md` carries no `promote-handler` reference (already clean; Spine uses action-handler / ACTION verb family).
 - [x] **S9.3** — `sync-decompose-promote.sh` retired; `tests/AGENTS.md:10` route doc updated (prior `promote/` subdir retired 2026-05-31). Line ~141 retains a historical note describing the retired flow — acceptable (marked historical, per exit criteria).
 - [x] **S9.4** — `bags/@lares/v0.1/api/lararium/action-handler.md` authored 2026-06-01 — source-of-truth meme for the six-verb handler family (verbs table, handler law, dispatch seam, edges).
 
-**Exit criteria:** ✅ no doc references promote ceremony as the *current* model in code-backed doctrine memes; ceremony refs replaced or marked historical. **One open judgment:** loci/hooponopono `canon-promotion` semantics (S9.1) — concept vs ceremony — awaits operator ruling.
+**Exit criteria met:** ✅ no doc references the promote ceremony as the *current* model; every ceremony-specific ref replaced (→ canon MOVE / residency MOVE) or marked historical. Generic tier/stable/component "promotion" (a distinct ongoing sense) correctly preserved.
 
 ---
 

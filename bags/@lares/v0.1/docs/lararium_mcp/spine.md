@@ -100,7 +100,7 @@ The v1 spine carries four promises:
 | `lar:///INDEXES/**` | virtual all-caps compiler indexes |
 | `lar:///boot/**` | virtual compiler artifact resources |
 | `lar:///ha.ka.ba/@lares/**` | stable tuple root mapped into `packages/lares-core/memes/**` |
-| future `lar:///*.*.*/**` | unstable tuple roots may map into chapel-perilous paths until canon promotion |
+| future `lar:///*.*.*/**` | unstable tuple roots may map into chapel-perilous paths until canon MOVE |
 
 <<~/ahu >>
 

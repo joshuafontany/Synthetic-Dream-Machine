@@ -11,7 +11,7 @@ register     = "CS"
 manaoio      = 16
 mana         = 16
 manao        = 16
-role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for rooms, edge islands, and canon promotion"
+role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for rooms, edge islands, and canon MOVE"
 cacheable    = true
 retain       = true
 invariant    = true
@@ -24,7 +24,7 @@ invariant    = true
 # Orichalcum Capabilities
 
 UCAN-compatible capability proof with Lararium-native semantic caveats.
-Authority gate for rooms, edge islands, and canon promotion.
+Authority gate for rooms, edge islands, and canon MOVE.
 
 <<~/ahu >>
 

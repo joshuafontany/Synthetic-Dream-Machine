@@ -156,7 +156,7 @@ Architecture and individual rights fail to suffice. The article names the gap: p
 
 Lares carries an inflection here. The single-operator + family-RPG scale temporarily occupies the same governance footprint as a self-hosted blog: the operator carries the institution single-handed. The interesting tests arrive at federation:
 
-- *Federated promotion (Path E in HANDOFF).* When peer A asks peer B to accept canon, what conflict-resolution mechanism resolves disagreement? Today the operator decides locally and the git diff signs the canon; what if peer B's canon view differs?
+- *Federated canon MOVE (Path E in HANDOFF).* When peer A asks peer B to accept canon, what conflict-resolution mechanism resolves disagreement? Today the operator decides locally and the git diff signs the canon; what if peer B's canon view differs? (This is alignment-layer territory — see `lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer`.)
 - *Cross-bag commons.* When two rooms share a corpus dependency, who decides when the dependency rev's? The bag-mirror config tiddlers give operator-level control; the federated case wants more.
 - *Revocation propagation under partition.* Concap's CRDT-shaped revocation supplies the right primitive. The institutional question — *who holds authority to revoke against whom, under what dispute mechanism* — stays unresolved.
 

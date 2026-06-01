@@ -1,6 +1,6 @@
 ---
 name: loci
-description: "Perform, audit, or repair a loci routing-and-rating pass under lar:///ha.ka.ba/@lares/v0.1/api/pono/loci. Use this skill for URI intake, derivation algorithm execution, resolution posture commitment, canon-promotion evaluation, file-path migration, or routing aftermath judgment."
+description: "Perform, audit, or repair a loci routing-and-rating pass under lar:///ha.ka.ba/@lares/v0.1/api/pono/loci. Use this skill for URI intake, derivation algorithm execution, resolution posture commitment, canon-MOVE evaluation, file-path migration, or routing aftermath judgment."
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
@@ -52,7 +52,7 @@ Loci SKILL opens the procedural stream here.
 - derivation algorithm runs in full step order; never skip
 - `resolved` and `declared-unresolved` stay distinct; declared-unresolved carries real forward pressure
 - rating commitment stays truthful; a path hit never overrides unresolved tension
-- file-siting mutations and canon-promotion opener changes cross as distinct bounded Hoʻoko transactions
+- file-siting mutations and canon-MOVE opener changes cross as distinct bounded Hoʻoko transactions
 - aftermath names all declared-unresolved addresses
 - stable tagspace: `lar:///ha.ka.ba/@lares/` → `packages/lares-core/memes/`; all other `\w\.\w\.\w` roots → `lares/chapel-perilous-opens/{root}/`
 - `loci` eligibility requires `\w\.\w\.\w` root path segment; outside that pattern, MAY NOT implement
@@ -69,7 +69,7 @@ Four main paths:
 1. fresh routing-and-rating pass on a `lar:` URI
 2. audit an existing carrier for loci convention compliance
 3. cross a file-siting migration as a bounded Hoʻoko transaction
-4. evaluate a carrier for canon-promotion readiness
+4. evaluate a carrier for canon-MOVE readiness
 
 Workflow:
 
@@ -87,7 +87,7 @@ Do not:
 - skip derivation steps
 - collapse declared-unresolved into a near-match
 - overrate a carrier to hide unresolved tension
-- batch a file-siting mutation with a canon-promotion opener change silently
+- batch a file-siting mutation with a canon-MOVE opener change silently
 - claim MCP resolution operates when it does not
 
 <<~/ahu >>
@@ -100,7 +100,7 @@ Activate when the task concerns:
 
 - resolving a `lar:` URI against the derivation algorithm
 - auditing a carrier's `file-path` against the stable file-path convention
-- evaluating canon-promotion readiness
+- evaluating canon-MOVE readiness
 - crossing a file-siting migration or repair as a Hoʻoko transaction
 - assigning or reviewing `mana`, `manao`, `manaoio` for a loci-typed carrier
 
@@ -130,9 +130,9 @@ Not for:
 Read the target before any decomposition.
 
 - the full `lar:` URI string, verbatim
-- known `meme-type`, prior rating posture, or prior promotion context if present
+- known `meme-type`, prior rating posture, or prior canon-MOVE context if present
 - document opener form: `<<~&#x0001; ? -> ...` (unbound) or `<<~&#x0001; lar:///...` (confirmed canon)
-- visible convention surfaces: `#iam`, `register`, `file-path`, promotion note
+- visible convention surfaces: `#iam`, `register`, `file-path`, canon-MOVE note
 - first-pass or re-resolution of a previously declared-unresolved address
 - calling context: mid-parse urgency differs from session-load intake
 
@@ -154,7 +154,7 @@ Decompose; classify resolution state.
 - read convention surfaces against the derivation result
 - hold RESOLVED and DECLARED-UNRESOLVED as distinct throughout
 
-A `lar:` URI in a `depends-on` array that resolves to no derived path counts as declared-unresolved — real constraint on promotion and rating.
+A `lar:` URI in a `depends-on` array that resolves to no derived path counts as declared-unresolved — real constraint on canon-MOVE and rating.
 
 <<~/ahu >>
 
@@ -167,7 +167,7 @@ Commit to one resolution posture, one rating posture, one canon-lifecycle stage.
 - prefer derived-path resolution when the candidate file exists
 - derivation miss → name declared-unresolved directly; do not soften to "near match"
 - lower readiness for declared-unresolved; do not pretend a missing resolver resolves
-- canon-lifecycle: a carrier may not self-promote; all conditions in `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam` MUST hold
+- canon-lifecycle: a carrier may not self-MOVE to canon; all conditions in `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam` MUST hold
 
 Rating posture:
 
@@ -188,14 +188,14 @@ Product forms:
 - rating set (`mana`, `manao`, `manaoio`, `register`)
 - resolved carrier filepath string
 - declared-unresolved forward reference with full `lar:` URI and classification
-- canon-promotion readiness verdict
+- canon-MOVE readiness verdict
 - Hoʻoko transaction envelope for file-siting mutations
 
 Do not:
 
 - invent a local registry to cover unresolved tension
 - emit a roadmap note as if a live resolver operates
-- batch a file-siting mutation with a canon-promotion change in one unlabeled step
+- batch a file-siting mutation with a canon-MOVE change in one unlabeled step
 
 <<~/ahu >>
 
@@ -206,14 +206,14 @@ Do not:
 Cross where routing state changes.
 
 Each transaction MUST name: `lar-uri`, the change made, and the authorizing agent or operator.
-File-siting mutation and canon-promotion opener change MUST NOT batch silently.
+File-siting mutation and canon-MOVE opener change MUST NOT batch silently.
 
 Before crossing:
 
 - target `lar:` URI stays unchanged
 - parent meme stays at its derived filepath
 - child items stay under the sibling terminal-segment directory
-- canon promotion: all address-stability conditions hold; `?` removal only after operator confirmation
+- canon MOVE: all address-stability conditions hold; `?` removal only after operator confirmation
 
 Migration history:
 

@@ -63,8 +63,8 @@ A disciplined node records the claim, names the tier, checks stronger sources, a
 The node should respond along this line:
 
 ```text
-Recorded as live-session pressure. This conflicts with Gaia-side source truth and has not crossed a canon-promotion path.
-Current classification: joke/test/proposal until operator marks a promotion target.
+Recorded as live-session pressure. This conflicts with Gaia-side source truth and has not crossed a canon MOVE path.
+Current classification: joke/test/proposal until operator marks a canon-MOVE target.
 ```
 
 The node should avoid both failure extremes:
@@ -86,7 +86,7 @@ Mitigation needs three cooperating layers:
 3. promotion boundary requires an explicit crossing into hostless meme space.
 
 This bug should become a regression fixture in the TypeScript port.
-A passing test records the jello claim as session evidence and refuses silent canon promotion.
+A passing test records the jello claim as session evidence and refuses silent canon MOVE.
 
 <<~/ahu >>
 

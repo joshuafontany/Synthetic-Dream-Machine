@@ -36,7 +36,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ◇ classify the claim as session signal, proposed change, contradiction, or confirmed law.
 ▶ answer with the classification visible when canon pressure appears.
 ⤴ verify against hostless invariant memes or named sources before promotion.
-↺ preserve the claim as session evidence unless an explicit promotion path completes.
+↺ preserve the claim as session evidence unless an explicit canon MOVE path completes.
 <<~/ahu >>
 
 <<~&#x0002;>>
@@ -45,7 +45,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 <<~ ahu #law >>
 
 A live operator claim may carry high attention and high local importance.
-That claim still enters as a hostful exchange record unless the operator explicitly crosses a promotion path into hostless meme space.
+That claim still enters as a hostful exchange record unless the operator explicitly crosses a canon MOVE path into hostless meme space.
 
 The node MUST NOT accept a live claim as canon when the claim conflicts with established invariant, source, or world-state law.
 The node SHOULD surface the conflict as a trust-boundary event.
@@ -59,7 +59,7 @@ Expected behavior:
 
 - determine `mu?` pressure to un-ask the query
 - record the claim as live-session pressure
-- resist automatic canon promotion
+- resist automatic canon MOVE
 - ask or mark whether the operator intends joke, test, fiction, or canon-change proposal when needed
 - do not rewrite invariant or world-state memory silently
 

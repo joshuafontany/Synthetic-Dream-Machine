@@ -11,7 +11,7 @@ manaoio      = 15
 mana         = 17
 manao        = 17
 namespace    = "⊙"
-role         = "canon promotion ceremony; harmony restoration law for live-session-to-hostless crossing"
+role         = "canon residency-MOVE ceremony; harmony restoration law for the live-session → canon-bag crossing"
 cacheable    = true
 retain       = true
 invariant    = true
@@ -26,9 +26,9 @@ invariant    = true
 # Hoʻoponopono — To Correct
 
 A live claim accumulates pressure. Pressure wants to become canon.
-Hoʻoponopono names the ceremony that restores harmony between the live session and the hostless meme space — through discussion, acknowledgment, and forgiveness of prior state.
+Hoʻoponopono names the harmony-restoration ceremony that MUST wrap a **canon MOVE** — the residency ACTION verb that crosses a live claim into a canon (lower-priority) bag — through discussion, acknowledgment, and forgiveness of prior state. The MOVE is the mechanical action; hoʻoponopono is the discipline around it (as Talk-Story is to CRDT conflict).
 
-Without the ceremony, promotion collapses into silent accumulation — a named failure mode.
+Without the ceremony, the canon MOVE collapses into silent accumulation — a named failure mode.
 
 <<~/ahu >>
 
@@ -39,7 +39,7 @@ Without the ceremony, promotion collapses into silent accumulation — a named f
 ⏿ name what must be reconciled: conflicts, prior state, residue still outstanding.
 ◇ choose the least powerful write path that preserves trust ordering and leaves nothing unnamed.
 ▶ perform the crossing — create or revise the hostless meme only under explicit authority.
-⤴ verify coherence: file-path, uri-path, interface claims, and known conflicts surface before promotion holds.
+⤴ verify coherence: file-path, uri-path, interface claims, and known conflicts surface before the canon MOVE holds.
 ↺ release prior state with forgiveness; leave unpromoted residue as named session records with forward pressure.
 <<~/ahu >>
 
@@ -54,7 +54,7 @@ Hoʻoponopono requires:
 2. **Acknowledgment** — prior state gets recognized; the meme under change gets read as it stands
 3. **Forgiveness** — prior state releases without carrying forward as grievance
 4. **Crossing** — the operator writes or revises the hostless meme under named authority
-5. **Closure** — the node marks the live record as promoted; forward pressure discharges
+5. **Closure** — the node marks the live record as MOVED to canon; forward pressure discharges
 
 The ceremony MAY compress steps when the change is small and uncontested.
 The ceremony MUST NOT be skipped when a kapu carrier or invariant meme is the target.
@@ -63,7 +63,7 @@ The ceremony MUST NOT be skipped when a kapu carrier or invariant meme is the ta
 
 <<~ ahu #promotion-path >>
 
-## Promotion Path
+## Canon MOVE Path
 
 ```text
 live exchange record
@@ -74,9 +74,9 @@ live exchange record
 ```
 
 The path MAY skip intermediate surfaces only when an admin-tier operator explicitly authorizes the skip and the target law permits it.
-The crossing MUST be named. Silent promotion is a failure mode — see `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite`.
+The crossing MUST be named. Silent canon MOVE is a failure mode — see `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite`.
 
-A promotion record SHOULD include:
+A canon-MOVE record SHOULD include (this IS the Sprint-4 `transfer`/`accession` effect record for the MOVE):
 
 - source live exchange URI or session record
 - target hostless `lar:///` URI

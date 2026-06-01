@@ -11,7 +11,7 @@ manaoio      = 16
 mana         = 18
 manao        = 18
 namespace    = "⊙"
-role         = "extended docs for loci interface — evaluation guidance, canon promotion criteria, MCP roadmap"
+role         = "extended docs for loci interface — evaluation guidance, canon-MOVE criteria, MCP roadmap"
 cacheable    = true
 ```
 
@@ -21,7 +21,7 @@ cacheable    = true
 
 # Loci — Extended Docs
 
-Extended notes, rating guidance, canon promotion criteria, and MCP roadmap for `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci`.
+Extended notes, rating guidance, canon-MOVE criteria, and MCP roadmap for `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci`.
 Not a law surface. Explanation, evaluation guidance, and research that belongs outside the invariant and SKILL.
 
 ---
@@ -65,7 +65,7 @@ Higher `CS` posture additionally requires:
 - live MCP resolver or equivalent externally governed resolution substrate operates
 - document opener `?` removed
 
-Canon promotion requires an external act; a meme may not self-promote.
+A canon MOVE requires an external act; a meme may not self-MOVE to canon.
 
 ---
 
@@ -111,7 +111,7 @@ A live MCP server answers the remaining live-resolution tension. Intended shape:
 - decide whether `meme-type` remains a required caller hint or becomes server-discoverable
 - decide how child items advertise canonical sidecars while preserving the stable parent filepath rule
 - define failure surfaces for unresolved `lar:` URIs in a live resolver
-- define how canon promotion depends on live resolver trust, uptime, and cache semantics
+- define how canon MOVE depends on live resolver trust, uptime, and cache semantics
 
 No MCP resolver operates today.
 

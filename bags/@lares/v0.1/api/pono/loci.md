@@ -11,7 +11,7 @@ manaoio = 13
 mana = 15
 manao = 17
 namespace    = "⊙"
-role = "loci-rating law (kānāwai), routing convention authority, address stability authority, canon promotion rule"
+role = "loci-rating law (kānāwai), routing convention authority, address stability authority, canon-MOVE rule"
 cacheable=true
 retain = true
 ```
@@ -46,7 +46,7 @@ Root path segments outside `\w\.\w\.\w` MAY NOT implement `loci`.
 ⏿ Run the derivation algorithm; classify resolved or declared-unresolved; confirm file-path convention holds.
 ◇ Commit to one resolution posture, one rating posture, one canon-lifecycle stage.
 ▶ Prepare the routing product: rating set, resolved path, or declared-unresolved forward reference.
-⤴ Cross file-siting mutations and canon-promotion opener changes as distinct bounded transactions.
+⤴ Cross file-siting mutations and canon-MOVE opener changes as distinct bounded transactions.
 ↺ Name which URIs resolved, which remain declared-unresolved, and what closes each gap.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL >>
@@ -165,7 +165,7 @@ Convention surfaces:
 1. `lar:` URI in the document opener
 2. `#iam` rating cluster and `register`
 3. derivation algorithm and file-path convention (this file)
-4. canon-promotion criteria (`lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam`)
+4. canon-MOVE criteria (`lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam`)
 
 Convention fails when:
 

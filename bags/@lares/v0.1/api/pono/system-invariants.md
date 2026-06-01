@@ -137,8 +137,8 @@ desc  = "Live and session material may fork, annotate, propose, and request merg
 
 ```toml #AUTH_4_CEREMONY
 id    = "AUTH_4_CEREMONY"
-label = "Ceremony marks canon promotion"
-desc  = "Any write that reaches lares/ MUST carry: actor, origin URI, target URI, diff, receipt, and rollback path. Without this crossing the system cannot distinguish a draft from a promotion."
+label = "Ceremony marks canon MOVE"
+desc  = "Any write that reaches lares/ MUST carry: actor, origin URI, target URI, diff, receipt, and rollback path. Without this crossing the system cannot distinguish a draft from a canon MOVE."
 ```
 
 ```toml #AUTH_5_TRUST_LADDER
