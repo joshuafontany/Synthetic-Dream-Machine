@@ -207,3 +207,48 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
 // against the saving tiddler — first non-empty result is the target slot URI.
 // Operator-configurable at runtime; per-wiki overlays compose via the recipe
 // cascade. See: lar:///ha.ka.ba/@lares/v0.1/api/lararium/bag-paths-cascade
+
+// ── Recipe fingerprint (Q5 revised 2026-05-31) ──────────────────────────────
+
+import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
+
+/**
+ * Recipe-fingerprint input — the canonical bag-doc-id set that names "the
+ * same recipe" for purposes of cross-device @personal binding.
+ *
+ * Per Q5 (revised 2026-05-31, personal-slot-proposal): only the wiki bag
+ * doc-id and the canonBags doc-ids participate. @lares and @lararium
+ * doc-ids do NOT participate — switching personality or system bag does
+ * not fork operator view state across devices.
+ */
+export interface RecipeFingerprintInput {
+  /** The wiki identity bag's Automerge doc URL (resolver[wikiBagUri(slug)]). */
+  readonly wikiDocId: string;
+  /** Canon bag doc URLs in any order — sorted internally before hashing. */
+  readonly canonBagDocIds: readonly string[];
+}
+
+/**
+ * Compute the recipe-fingerprint for `@personal` / `@draft` binding.
+ *
+ * SHA-256 hex over canonical JSON of `{ wikiDocId, canonBagDocIds: sorted }`.
+ * Two devices share an `@personal` binding iff their `(PersonGroup ×
+ * fingerprint)` pairs match. The vessel stores `@personal` doc URLs keyed by
+ * this fingerprint.
+ *
+ * Sort-stability: `canonBagDocIds` get sorted before hashing so caller
+ * ordering does not change the fingerprint. `canonicalJson` sorts object
+ * keys for further stability.
+ *
+ * @see lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal#open-questions Q5
+ */
+export async function computeRecipeFingerprint(
+  input: RecipeFingerprintInput,
+  provider: DigestProvider = defaultCryptoProvider,
+): Promise<string> {
+  const canonical = {
+    wikiDocId:      input.wikiDocId,
+    canonBagDocIds: [...input.canonBagDocIds].sort(),
+  };
+  return sha256Hex(canonicalJsonBytes(canonical), provider);
+}
