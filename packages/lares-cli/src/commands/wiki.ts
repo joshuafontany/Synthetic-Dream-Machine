@@ -410,7 +410,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
  *
  * Reuses the `where` verb on the node side (composite.listBagsHolding —
  * live-only). Tombstone-inspection across bags waits on a sibling `resolve`
- * verb that exposes composite.listBagsTombstoning (named follow-up under
+ * verb that exposes composite.listKapaeBags (named follow-up under
  * the Talk-Story-surfacing principle — operators inspect the audit; the
  * CRDT layer surfaces what it sees).
  */
@@ -454,17 +454,17 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
       console.log(`  Winning surface (origin-bag): ${winning}`);
       console.log("");
     } else {
-      console.log("  (no live Manifestations — the title carries only whiteout-shadows)");
+      console.log("  (no live Manifestations — the title carries only kāpaes)");
       console.log("");
     }
 
     if (tombstones.length > 0) {
-      console.log("  Whiteout-shadows (bags that explicitly hide the title):");
+      console.log("  Kāpae marks (bags that explicitly hide the title):");
       for (const b of tombstones) {
         console.log(`      ${b}`);
       }
       console.log("");
-      console.log("  Note: a whiteout in a higher-priority bag stops the cascade.");
+      console.log("  Note: a kāpae mark in a higher-priority bag stops the cascade.");
       console.log("        See bags/@lares/v0.1/api/lararium/residency-model.md #conflict-resolution");
       console.log("        — resolution surfaces to operator / cabal Talk Story.");
       console.log("");

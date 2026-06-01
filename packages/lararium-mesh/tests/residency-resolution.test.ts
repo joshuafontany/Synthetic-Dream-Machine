@@ -111,7 +111,7 @@ describe("CompositeStore.resolveTopmost", () => {
 
   test("absent in HIGH (no put) falls through to the next live layer below", async () => {
     // Truly-absent (not tombstoned) in HIGH falls through. Distinct from the
-    // tombstone-shadow case (covered in the whiteout-shadow describe block).
+    // tombstone-shadow case (covered in the kāpae describe block).
     const store = await makeStoreWithLayers();
     await store.put(rec("partial", "mid-live"), origin(MID), { bag: MID });
     // HIGH has no record at all for "partial".
@@ -428,10 +428,10 @@ describe("CompositeStore.auditEpochs", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Whiteout-shadow semantics (S4.3 — Anti-pattern #3 defense)
+// Kāpae semantics (S4.3 — Anti-pattern #3 defense)
 // ---------------------------------------------------------------------------
 
-describe("whiteout-shadow — tombstone in higher bag stops cascade", () => {
+describe("kāpae — tombstone in higher bag stops cascade", () => {
   test("resolveTopmost returns null when HIGH tombstones a title that MID/LOW hold live", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
@@ -439,12 +439,12 @@ describe("whiteout-shadow — tombstone in higher bag stops cascade", () => {
     await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
     // Operator deaccessions T in HIGH.
     await store.tombstoneInBag(HIGH, "T", origin(HIGH));
-    // Whiteout-shadow: HIGH's tombstone stops the cascade.
+    // Kāpae: HIGH's tombstone stops the cascade.
     const top = await store.resolveTopmost("T");
     expect(top).toBeNull();
   });
 
-  test("getLive returns null under the same whiteout-shadow", async () => {
+  test("getLive returns null under the same kāpae", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
     await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
@@ -470,7 +470,7 @@ describe("whiteout-shadow — tombstone in higher bag stops cascade", () => {
     expect(top?.bagId).toBe(HIGH);
   });
 
-  test("resolveAll stays a presence report — shows live bags even when HIGH whiteouts", async () => {
+  test("resolveAll stays a presence report — shows live bags even when HIGH places kāpae", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
     await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
@@ -481,26 +481,26 @@ describe("whiteout-shadow — tombstone in higher bag stops cascade", () => {
     expect(all.map((r) => r.bagId).sort()).toEqual([LOW, MID].sort());
   });
 
-  test("listBagsTombstoning reports which bags explicitly hide a title", async () => {
+  test("listKapaeBags reports which bags explicitly hide a title", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "low-live"), origin(LOW), { bag: LOW });
     await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
     await store.tombstoneInBag(HIGH, "T", origin(HIGH));
-    expect(await store.listBagsTombstoning("T")).toEqual([HIGH]);
+    expect(await store.listKapaeBags("T")).toEqual([HIGH]);
   });
 
-  test("listBagsTombstoning returns empty when no bag tombstones the title", async () => {
+  test("listKapaeBags returns empty when no bag tombstones the title", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
-    expect(await store.listBagsTombstoning("T")).toEqual([]);
+    expect(await store.listKapaeBags("T")).toEqual([]);
   });
 
-  test("listBagsTombstoning orders highest-priority-first", async () => {
+  test("listKapaeBags orders highest-priority-first", async () => {
     const store = await makeStoreWithLayers();
     await store.put(rec("T", "mid-live"), origin(MID), { bag: MID });
     await store.put(rec("T", "high-live"), origin(HIGH), { bag: HIGH });
     await store.tombstoneInBag(MID, "T", origin(MID));
     await store.tombstoneInBag(HIGH, "T", origin(HIGH));
-    expect(await store.listBagsTombstoning("T")).toEqual([HIGH, MID]);
+    expect(await store.listKapaeBags("T")).toEqual([HIGH, MID]);
   });
 });

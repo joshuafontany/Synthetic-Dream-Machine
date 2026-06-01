@@ -220,10 +220,10 @@ export class CompositeStore implements LarTiddlerStore {
    *  getLive() is the variant ceremonies use when "is the tiddler actually
    *  there right now" matters (promote source-detection, draft-from).
    *
-   *  Residency Model S4.3 — **whiteout-shadow semantics**: a tombstone in a
+   *  Residency Model S4.3 — **kāpae semantics**: a tombstone in a
    *  higher-priority bag stops the cascade rather than falling through. A
    *  tombstone-in-HIGH means "intentionally hidden at this priority"; lower
-   *  bags do not surface. Anti-pattern #3 defense (whiteout resurrection —
+   *  bags do not surface. Anti-pattern #3 defense (kāpae resurrection —
    *  OverlayFS / Docker layer pattern adapted to multi-bag CRDT). */
   async getLive(title: string): Promise<LarTiddlerRecord | null> {
     for (let i = this.layers.length - 1; i >= 0; i--) {
@@ -279,9 +279,9 @@ export class CompositeStore implements LarTiddlerStore {
    * layer; consumers surface origin-bag in the read path (IslandAdaptor +
    * getOriginBag).
    *
-   * Residency Model S4.3 — **whiteout-shadow semantics**: tombstone in a
+   * Residency Model S4.3 — **kāpae semantics**: tombstone in a
    * higher-priority bag stops the cascade and returns null. Anti-pattern #3
-   * defense (whiteout resurrection). For multi-residency presence-reporting
+   * defense (kāpae resurrection). For multi-residency presence-reporting
    * that ignores the shadow, call `resolveAll(title)` instead.
    *
    * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
@@ -301,14 +301,14 @@ export class CompositeStore implements LarTiddlerStore {
   /**
    * Residency Model S4.3 — list bag IDs that explicitly tombstone `title`,
    * ordered highest-priority first. Sibling of resolveAll (presence report);
-   * surfaces the whiteout-shadow hides for operator-visible coordinate
+   * surfaces the kāpae hides for operator-visible coordinate
    * inspection. A title may BOTH appear in resolveAll (live in lower bags)
-   * AND in listBagsTombstoning (hidden by upper-bag whiteout) when an
+   * AND in listKapaeBags (hidden by upper-bag kāpae) when an
    * operator deaccessions in a high-priority bag while lower bags retain
    * their copies — that combination signals "topmost reader sees nothing
    * but the union catalog still holds the title."
    */
-  async listBagsTombstoning(title: string): Promise<string[]> {
+  async listKapaeBags(title: string): Promise<string[]> {
     const out: string[] = [];
     for (let i = this.layers.length - 1; i >= 0; i--) {
       const layer = this.layers[i]!;

@@ -168,7 +168,7 @@ describe("MOVE handler", () => {
     // toBag holds; fromBag tombstone-shadows but resolveAll only sees live entries.
     const all = await composite.resolveAll("T");
     expect(all.map((e) => e.bagId)).toEqual([BAG_HIGH]);
-    expect(await composite.listBagsTombstoning("T")).toEqual([BAG_LOW]);
+    expect(await composite.listKapaeBags("T")).toEqual([BAG_LOW]);
 
     // Two effect records — one accession in BAG_HIGH + one deaccession in BAG_LOW.
     const effects = await effectRecordsIn(composite);
@@ -233,9 +233,9 @@ describe("CLEAR handler", () => {
     const result = await handler(args, makeContext(composite, "CLEAR", args));
 
     expect(result["clearedCount"]).toBe(3);
-    expect(await composite.listBagsTombstoning("A")).toContain(BAG_MID);
-    expect(await composite.listBagsTombstoning("B")).toContain(BAG_MID);
-    expect(await composite.listBagsTombstoning("C")).toContain(BAG_MID);
+    expect(await composite.listKapaeBags("A")).toContain(BAG_MID);
+    expect(await composite.listKapaeBags("B")).toContain(BAG_MID);
+    expect(await composite.listKapaeBags("C")).toContain(BAG_MID);
 
     // One bag-level disposition effect-record (per Sprint 4 mapping).
     const effects = await effectRecordsIn(composite);

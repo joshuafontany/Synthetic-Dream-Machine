@@ -11,7 +11,7 @@
  *   - writeEffectRecord against MemoryTiddlerStore
  *   - withEffectRecord mutate-then-log ordering + error path
  *
- * Whiteout-shadow tests for CompositeStore (S4.3) live in
+ * Kāpae tests for CompositeStore (S4.3) live in
  * residency-resolution.test.ts.
  *
  * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model

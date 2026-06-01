@@ -76,7 +76,7 @@ describe("resolve verb", () => {
     expect(manifs[2]!.changeId).toBe("c-low");
   });
 
-  test("surfaces tombstones separately from manifestations (whiteout-shadow)", async () => {
+  test("surfaces tombstones separately from manifestations (kāpae)", async () => {
     const composite = makeComposite();
     await composite.put(rec("T", "low-text"),  origin(BAG_LOW),  { bag: BAG_LOW });
     await composite.put(rec("T", "high-text"), origin(BAG_HIGH), { bag: BAG_HIGH });

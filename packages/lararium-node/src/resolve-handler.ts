@@ -4,7 +4,7 @@
  * Sibling of where-handler.ts. Returns the richer view that operator-facing
  * inspection wants: every live Manifestation across bags (with change-id
  * preserved per-bag), the winning bag per recipe priority, and the bags
- * that explicitly tombstone the title (whiteout-shadow surfacing for
+ * that explicitly tombstone the title (kāpae surfacing for
  * Talk-Story-decided overrides).
  *
  * Args:    { tiddler: string }
@@ -12,7 +12,7 @@
  * Result:  {
  *   tiddler:        string,
  *   manifestations: Array<{ bagId: string, changeId?: string }>,
- *   tombstones:     string[],   // bag URIs that explicitly tombstone (whiteout-shadow)
+ *   tombstones:     string[],   // bag URIs that explicitly tombstone (kāpae)
  *   winningBag:     string | null,
  * }
  *
@@ -36,7 +36,7 @@ export function makeResolveReactor(opts: ResolveHandlerOptions): VerbReactor {
     if (!tiddler) throw new Error("args.tiddler is required");
 
     const live       = await opts.composite.resolveAll(tiddler);
-    const tombstones = await opts.composite.listBagsTombstoning(tiddler);
+    const tombstones = await opts.composite.listKapaeBags(tiddler);
 
     const manifestations = live.map((entry) => {
       const changeId = entry.record.meta?.changeId;

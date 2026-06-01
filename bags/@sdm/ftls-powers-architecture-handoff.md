@@ -1,321 +1,140 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/handoff/powers-architecture >>
+<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/handoff/powers-architecture-reboot >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/handoff/powers-architecture"
+uri-path  = "ha.ka.ba/@sdm/handoff/powers-architecture-reboot"
 file-path = "bags/@sdm/ftls-powers-architecture-handoff.md"
 type      = "text/x-memetic-wikitext"
 
-tagspace = "sdm"
-register = "CS"
-confidence = 17
-mana = 16
-manao = 17
-manaoio = 16
-cacheable = true
-retain = true
+tagspace  = "sdm"
+register  = "P"
+confidence = 6
+mana      = 7
+manao     = 16
+manaoio   = 5
+cacheable = false
+retain    = true
 invariant = false
-role = "handoff meme for local Lares council implementing FTLS Powers as file-first memetic-wikitext in an Automerge/TW5 bag"
+role      = "reboot landing pad — archives the v0.0 Powers proof and holds a clean gate open for an incoming research drop that sets the next Powers architecture"
 ```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~&#x0002;>>
 
-# Handoff — FTLS Powers Memetic Architecture
+# Handoff — FTLS Powers Architecture Reboot
 
 <<~ ahu #kahea >>
 ## Kahea to the Local Lares Council
 
-Local Lares council, receive this handoff as an active working meme.
+Local Lares council, this meme no longer crews a build. It crews a *threshold*.
 
-You sit inside the repo, on branch context supplied by the operator. Treat this document as the current design pressure for the `@ftls` Powers bag. Work in e-prime where possible. Keep the operator steering; you crew.
+The first Powers architecture proof landed and now rests as an archive. A research drop arrives next and will set the new architecture. Until that drop lands and the operator releases the gate, this council holds the question open — it does not collapse it into code.
 
-Do not rebuild the whole Powers chapter. Establish the new memetic space by proving one small chain: `Read Magic` as a Powers API root, one FTLS game-card projection, and one OSR witness meme.
-
-<<~/ahu >>
-
-<<~ ahu #operator-intent >>
-## Operator Intent
-
-The operator wants `@ftls` Powers to move from large markdown chapters into composable `text/x-memetic-wikitext` memes hosted in a TiddlyWiki5 VM and synchronized through Automerge bags.
-
-Current authoring happens on disk. Browser clients do not yet provide reliable live authoring. Therefore:
-
-- memes live as markdown files on disk;
-- the bag represents a composable wiki recipe and an Automerge document;
-- everything eventually appears as TW5 tiddlers in the wiki runtime;
-- no separate `.tid` export path should anchor the design yet;
-- `projections/` stay inside the bag because projection recipes belong to the shared wiki corpus, not to disposable build output.
+Work in e-prime. Keep the operator steering. The Liminal Voice holds this room until the drop arrives.
 
 <<~/ahu >>
 
-<<~ ahu #uri-law >>
-## URI and Path Law
-
-Use the updated version placement. The version sits directly under the bag member:
+<<~ ahu #status >>
+## Status — Reboot Pending
 
 ```text
-lar:///ha.ka.ba/@sdm/v0.1/api/powers/read-magic
+phase      = pre-architecture
+prior      = @sdm/v0.0   (archived proof, frozen)
+incoming   = research drop  (architecture unknown until landed)
+gate       = CLOSED — no new build until operator releases
 ```
 
-Mirror this on disk:
-
-```text
-bags/@sdm/v0.1/api/powers/read-magic.md
-```
-
-Do not use the older buried version pattern:
-
-```text
-lar:///ha.ka.ba/@ftls/api/v0.1/powers/read-magic
-```
-
-Use authority-less `lar:///` addresses for stable graph and meme addresses. Use session-form `lar://alias:tier@host/...` only in exchange spans.
+The prior handoff's first-task and acceptance criteria no longer bind. They served the v0.0 proof and retired with it. This document carries forward only the residue worth keeping and the gate that protects the reboot.
 
 <<~/ahu >>
 
-<<~ ahu #ontology >>
-## Pono Powers Ontology
+<<~ ahu #v0-archive >>
+## What v0.0 Was — The Archived Proof
 
-Carry these meme classes downstream.
+The tree at `lar:///ha.ka.ba/@sdm/v0.0/**` froze the first proof of file-first memetic Powers. Treat it as read-only prior art, not as a design to extend in place.
+
+It proved a small chain end to end:
 
 ```text
-Powers API root meme
-  summonable hub for live play
-  holds interface + default implementation + variant index + edges + residue
-
-Projection meme
-  render recipe or resolved render surface
-  may churn as FTLS game-card design matures
-  stays in the @bag
-
-Witness meme
-  provenance and source archaeology
-  lazy-load except during audit/conversion/source work
-
-Interface meme
-  reusable contract that a Power, tool, shrine, daemon, or cultural practice can implement
-
-Module meme
-  taxonomy and doctrine cluster
-
-Tag meme
-  filterable semantic tag with human-readable meaning
-
-Instance meme
-  actual character, item, shrine, culture, campaign, or sheet realization
+Powers API root meme   →  api/powers/{read-magic,floating-disc,shield-ward}
+Interface meme         →  interfaces/power + per-power contracts
+Projection meme        →  projections/powers/ftls-card/*
+Witness meme           →  witness/powers/osr-spells/*
+Template split         →  templates/{api,interfaces,projections,witness,tags}
+Tag vocabulary         →  tags/{domain,function,hook,posture,storage}
 ```
 
-Rule of thumb:
+It established that memes live as `text/x-memetic-wikitext` files on disk, that the bag reads as a composable wiki recipe plus an Automerge document, and that `@sdm/<version>/...` version placement sits directly under the bag member.
+
+**Frozen, not deleted.** The new architecture MAY mine v0.0 for shape, vocabulary, and conversion anchors. It MUST NOT silently inherit v0.0's structure as canon. The research drop sets canon.
+
+<<~/ahu >>
+
+<<~ ahu #residue >>
+## Residue Carried Across the Reboot
+
+Lessons from the v0.0 proof that earned the right to outlive it. The new architecture SHOULD weigh these, not obey them.
 
 ```text
-what pattern must do       -> Powers API root #interface
-one valid SDM way          -> Powers API root #default
-how to display it          -> Projection meme
-where it came from         -> Witness meme
-how it appears in play     -> Instance or Variant meme
+#carry  authority-before-content   — sync the capability graph before any meme body
+#carry  child[1]-only @-bag rule    — exactly one CRDT surface per bag address
+#carry  short edge ids              — #implements #projects #witness #module #tag #variant
+#carry  lean summonable API roots   — long projection/witness bodies live in linked memes
+#carry  projections stay in-bag     — render recipes belong to the shared wiki corpus
+#carry  witness stays lazy          — provenance loads only on audit/conversion passes
+#carry  no .tid anchor              — .tid reserved for runtime TW5 widget/procedure code
+#carry  web3 local-first + causal-islands — no web2 model leaks into the Lares stack proper
+```
+
+Open questions the drop SHOULD answer rather than the council guessing:
+
+```text
+#hold   does the new model keep the Power/Projection/Witness triad, or refactor it?
+#hold   what replaces or extends the v0.0 template-split contract?
+#hold   does versioning stay @sdm/<version>/ under the bag member?
+#hold   how do FTLS game-cards relate to the new projection surface?
 ```
 
 <<~/ahu >>
 
-<<~ ahu #powers-api-root-contract >>
-## Powers API Root Contract
+<<~ ahu #gate >>
+## Reboot Gate (Hard)
 
-A Powers API root meme should stay lean enough to summon during play.
-
-Required ahu:
-
-```text
-#interface
-#default
-#variants
-#edges
-#residue
-```
-
-Avoid embedding long projection or witness bodies in the Powers API root. Link them with short, TW5-filter-friendly edges.
-
-A Powers API root may mention a projection or witness in prose, but the full projection and full witness should live in linked memes.
-
-<<~/ahu >>
-
-<<~ ahu #template-split >>
-## Template Split Plan
-
-Power meme-sets now split reusable format language from playable game content.
-
-Root template memes carry the meta-contracts:
-
-```text
-bags/@sdm/v0.1/templates/api/power.md
-bags/@sdm/v0.1/templates/projections/powers/ftls-card.md
-bags/@sdm/v0.1/templates/witness/powers/osr-spells.md
-```
-
-Concrete Power meme-sets should use those templates through `#template` edges, then stay clean and table-facing:
-
-```text
-api/powers/<power>.md                         -> Powers API root: interface/default/variants/edges/residue
-projections/powers/ftls-card/<power>.md       -> playable card surface only
-witness/powers/osr-spells/<power>.md          -> cold provenance and conversion anchors
-```
-
-Delete chat-thread scaffolding when it only explains the design process. Preserve only the noets that clarify pono intent, loader behavior, or audit value, and move those into templates.
-
-<<~/ahu >>
-
-<<~ ahu #edge-discipline >>
-## Edge Discipline
-
-Keep edge IDs short for future TW5 filter work. Put nuance in `family` and `role`.
-
-Preferred edge IDs:
-
-```text
-#implements
-#projects
-#witness
-#module
-#tag
-#variant
-#instance
-#source
-#see
-#blocks
-#needs
-```
-
-Examples:
-
-```text
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@sdm/v0.1/interfaces/power family:control role:implements >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic family:render role:projects >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic family:provenance role:witness >>
-<<~ pranala #module ? -> lar:///ha.ka.ba/@sdm/v0.1/api/modules/knowledge-oracle family:taxonomy role:belongs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/@sdm/tags/function/ecm-scan family:tag role:has >>
-```
-
-Do not encode the full predicate inside the edge id. Let future filters find `#witness`, `#projects`, or `#implements` quickly.
-
-<<~/ahu >>
-
-<<~ ahu #bag-topology >>
-## Initial Bag Topology
-
-Use this topology for the first proof.
-
-```text
-bags/
-  @sdm/
-    v0.1/
-      templates/
-        api/
-          power.md
-        interfaces/
-          power.md
-        projections/
-          powers/
-            ftls-card.md
-        witness/
-          powers/
-            osr-spells.md
-      api/
-        powers/
-          read-magic.md
-        interfaces/
-          power.md
-          ecm-scan.md
-          magic-decode.md
-          archive-recognition.md
-        modules/
-          knowledge-oracle.md
-        tags/
-          power.md
-          ecm-scan.md
-          storage-trait.md
-          storage-item.md
-          storage-structure.md
-          storage-burden.md
-      projections/
-        powers/
-          ftls-card/
-            read-magic.md
-      witness/
-        powers/
-          osr-spells/
-            read-magic.md
-```
-
-The projection path above represents a resolved first card surface for `Read Magic`. The reusable FTLS card template now lives at:
-
-```text
-bags/@sdm/v0.1/templates/projections/powers/ftls-card.md
-```
-
-Do not move resolved card text into the template; let real cards expose their churn.
+1. **No build before the drop.** The council MUST NOT scaffold the new architecture from this document alone. This meme states pressure and residue; it does not name the new design.
+2. **Drop sets canon.** When the research drop lands, read it first. It supersedes any v0.0 shape this document describes.
+3. **v0.0 stays frozen.** Do not edit under `lar:///ha.ka.ba/@sdm/v0.0/**` to fit new ideas. Branch the new version; leave the archive intact.
+4. **Surface conflict.** Where the drop contradicts a `#carry` residue line, name the conflict to the operator. Do not quietly drop a carried lesson, and do not quietly override the drop.
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
-## OODA-HA Work Loop
+## OODA-HA — Reboot Loop
 
-✶ **Observe:** Read existing Powers chapter context, conversion crosswalk, and current `Read Magic` sketch. Confirm that `Read Magic` still serves as POC-0.
+✶ **Observe:** Await the research drop. Until it lands, read v0.0 only as archive.
 
-⏿ **Orient:** Keep Power, Projection, and Witness as linked memes. Keep projection inside `@ftls` bag. Keep witness lazy-loadable.
+⏿ **Orient:** Hold the four `#hold` questions open. Do not pre-answer them.
 
-◇ **Decide:** Create root templates for the three meme-set parts, then create the concrete Read Magic core, card projection, and OSR witness.
+◇ **Decide:** Decide nothing structural yet. The decision waits on the drop and the operator's release.
 
-▶ **Act:** Write the template memes and the three Read Magic files. Use the updated URI path convention. Keep edges short. Keep the `/api/powers` meme lean.
+▶ **Act:** When released, the first act reads the drop in full, then maps drop ↔ residue before any file lands.
 
-⤴ **Verify:** A live-play request for `Read Magic` should load the Powers API root plus projection without loading the witness unless source archaeology enters the prompt.
+⤴ **Hoʻoko:** Name what the drop changes versus what it keeps from v0.0.
 
-↺ **Aftermath:** Carry any unresolved ontology questions into `#residue`, not into hidden assumptions.
-
-<<~/ahu >>
-
-<<~ ahu #acceptance >>
-## Acceptance Criteria
-
-The first proof passes when:
-
-- root templates exist for Powers API root, FTLS card projection, and OSR spell witness;
-- `Read Magic` Powers API root has `#interface`, `#default`, `#variants`, `#edges`, and `#residue`;
-- `Read Magic` projection has a playable FTLS card surface without template/design chatter;
-- `Read Magic` witness preserves Basic, Expert, and Rules Cyclopedia conversion anchors without turning into the live implementation;
-- the Powers API root links to projection and witness through short edge ids;
-- no `.tid` export assumption anchors the architecture;
-- version placement follows `@sdm/v0.1/...`;
-- e-prime drift stays low enough that the text reads as procedure, not metaphysical overclaim.
-
-<<~/ahu >>
-
-<<~ ahu #first-task >>
-## First Task
-
-Create or revise these files:
-
-```text
-bags/@sdm/v0.1/templates/api/power.md
-bags/@sdm/v0.1/templates/projections/powers/ftls-card.md
-bags/@sdm/v0.1/templates/witness/powers/osr-spells.md
-bags/@sdm/v0.1/api/powers/read-magic.md
-bags/@sdm/v0.1/projections/powers/ftls-card/read-magic.md
-bags/@sdm/v0.1/witness/powers/osr-spells/read-magic.md
-```
-
-Then stop. Do not migrate the rest of Chapter 06 yet.
+↺ **Aftermath:** Carry unresolved tension into a fresh `#residue` block, never into hidden assumptions.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/api/powers/read-magic >>
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic >>
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.0/docs/power-ontology >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.0/api/powers/read-magic >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
-<<~ pranala #implements ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.0/witness/powers/handoff-archive family:provenance role:source >>
 <<~ pranala #see ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:reference role:see >>
+<<~ pranala #blocks ? -> lar:///ha.ka.ba/@sdm/handoff/powers-architecture-reboot family:control role:blocks >>
 
 <<~/ahu >>
 

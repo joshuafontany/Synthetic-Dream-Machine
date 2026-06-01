@@ -393,7 +393,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("where",   makeWhereReactor({ composite }));
   // Read-only Residency Model coordinate-inspection — `lares wiki resolve`.
   // Returns live Manifestations + tombstoning bags + change-id per Manifestation
-  // (the full whiteout-shadow surface for operator-driven Talk Story).
+  // (the full kāpae surface for operator-driven Talk Story).
   jobRegistry.register("resolve", makeResolveReactor({ composite }));
   // E.4 — read-only wiki jobs. write jobs (init/sync/pin/etc) land
   // in E.5+. `list-wikis` walks the catalog for wiki oracle tiddlers.

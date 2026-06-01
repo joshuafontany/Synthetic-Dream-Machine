@@ -36,7 +36,7 @@ Six failure modes surfaced by prior research. Each story that touches the affect
 |---|---|---|---|
 | 1 | Causal-history severance on copy | Sprint 2 / 5 | Preserve `change-id` across ACTIONs |
 | 2 | Schema drift across multi-bag residency | Sprint 3 | Read-time lens hook (Cambria-shaped) |
-| 3 | Whiteout resurrection | Sprint 4 | First-class `tombstone` op |
+| 3 | Kāpae resurrection | Sprint 4 | First-class `tombstone` op |
 | 4 | Shadow-override confusion (TW5 #570, #9139) | Sprint 8 | Surface `origin-bag` on every read |
 | 5 | Recipe-drift poisoning | Sprint 3 | Recipe pins bag-epochs |
 | 6 | Concurrent commits into same lower bag | Sprint 4 / 5 | Operator-visible commit queue |
@@ -165,7 +165,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 - [x] **S4.1** — `EffectRecord` interface + `ARCHIVAL_VERBS` const (`accession, deaccession, transfer, withdrawal, loan, holdings, reappraisal, disposition`) + `ArchivalVerb` type + `LARES_EFFECT_RECORD_TAG` landed in `packages/lararium-mesh/src/effect-record.ts`.
 - [x] **S4.2** — Effect log URI shape: `lar:///<bag>/log/residency/<event-id>`. Builders `effectLogPrefix(bag)` + `effectRecordUri(bag, eventId)` + predicate `isEffectRecordUri(title)` + `newEventId()` factory + `buildEffectRecordTiddler` + `parseEffectRecord` symmetric roundtrip.
-- [x] **S4.3** — Whiteout-shadow landed in `CompositeStore.resolveTopmost()` + `getLive()`: tombstone in a higher-priority bag STOPS the cascade (returns null) rather than falling through to lower bags. Anti-pattern #3 defense (whiteout resurrection — OverlayFS/Docker layer pattern adapted to multi-bag CRDT). `resolveAll()` retained as **presence report** (skips tombstones across all layers). New `listBagsTombstoning(title)` surfaces which bags explicitly hide a title, highest-priority-first.
+- [x] **S4.3** — Kāpae landed in `CompositeStore.resolveTopmost()` + `getLive()`: tombstone in a higher-priority bag STOPS the cascade (returns null) rather than falling through to lower bags. Anti-pattern #3 defense (kāpae resurrection — OverlayFS/Docker layer pattern adapted to multi-bag CRDT). `resolveAll()` retained as **presence report** (skips tombstones across all layers). New `listKapaeBags(title)` surfaces which bags explicitly hide a title, highest-priority-first.
 - [x] **S4.4** — `mapActionToEffects(action, opts?)` pure mapping. Per-verb table:
   - ADD → 1 accession in to-bag
   - COPY → 1 accession in to-bag (`reason: "copy-overwrite"`)
@@ -177,23 +177,23 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [⏸] **S4.6** — **Commit queue (concurrent-action arbitration) DEFERRED.** Spirit 3 research (Round 2) named this as Upwelling's explicitly-unsolved problem; surfacing concurrent-residency conflicts requires proper concurrency design + operator UX. Same shape as the modal-view reader deferral from Sprint 3. Belongs with the follow-up sprint that lands `resolveAllRespectingPins` + transitive-pin-fragmentation mitigation.
 - [x] **S4.7** — Tests landed:
   - `packages/lararium-mesh/tests/effect-record.test.ts` (25 cases) — archival verb membership; URI builders; event-id uniqueness; encode/parse roundtrip per shape; per-ACTION-verb mapping correctness; MOVE transferId pairing; audit-coverage invariant (every ACTION produces ≥1 effect); writeEffectRecord through composite; withEffectRecord mutate-then-log order + error path + result passthrough.
-  - `residency-resolution.test.ts` whiteout-shadow describe block (8 cases) — tombstone-in-HIGH stops cascade; absent-in-HIGH falls through (distinct); tombstone-in-MID with live HIGH returns HIGH; `resolveAll` stays presence report; `listBagsTombstoning` reports + orders correctly.
+  - `residency-resolution.test.ts` kāpae describe block (8 cases) — tombstone-in-HIGH stops cascade; absent-in-HIGH falls through (distinct); tombstone-in-MID with live HIGH returns HIGH; `resolveAll` stays presence report; `listKapaeBags` reports + orders correctly.
   - One Sprint 3 test corrected: `"skips tombstones — returns next live layer below the highest tombstone"` had asserted the OLD (buggy) fall-through behavior; renamed/rewritten to `"absent in HIGH (no put) falls through to the next live layer below"` which tests the correct truly-absent case.
 
 **Exit criteria met:**
 - ✅ Workspace typecheck clean (6/6 packages).
-- ✅ `@lararium/mesh` tests: **213/213** passing (+33 new from Sprint 4: 25 effect-record + 8 whiteout-shadow).
+- ✅ `@lararium/mesh` tests: **213/213** passing (+33 new from Sprint 4: 25 effect-record + 8 kāpae).
 - ✅ TW5: 73/73, Node: 64/64, Browser: 19/20 (1 pre-existing TW5-boot shim gap, unrelated).
 - ✅ Workspace total: **369/370** (+33 from Sprint 4, zero regression).
 - ✅ No path through ACTION verbs can mutate a bag without an effect record landing first (verified by withEffectRecord tests).
-- ✅ Whiteout-shadow defends Anti-pattern #3; `listBagsTombstoning` surfaces hides for operator inspection.
+- ✅ Kāpae defends Anti-pattern #3; `listKapaeBags` surfaces hides for operator inspection.
 
 **Receipts:**
 - New: `packages/lararium-mesh/src/effect-record.ts` (~280 lines)
-- Edit: `packages/lararium-mesh/src/composite-store.ts` (+whiteout-shadow in getLive/resolveTopmost, +listBagsTombstoning)
+- Edit: `packages/lararium-mesh/src/composite-store.ts` (+kāpae in getLive/resolveTopmost, +listKapaeBags)
 - Edit: `packages/lararium-mesh/src/index.ts` (+effect-record export)
 - New: `packages/lararium-mesh/tests/effect-record.test.ts` (25 tests)
-- Edit: `packages/lararium-mesh/tests/residency-resolution.test.ts` (+whiteout-shadow section 8 tests; 1 Sprint 3 test corrected)
+- Edit: `packages/lararium-mesh/tests/residency-resolution.test.ts` (+kāpae section 8 tests; 1 Sprint 3 test corrected)
 - Edit: `packages/EPIC-RESIDENCY-MODEL.md` (this sprint marker)
 
 **What Sprint 4 deferred:**

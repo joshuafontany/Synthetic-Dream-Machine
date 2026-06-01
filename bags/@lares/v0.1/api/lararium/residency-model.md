@@ -191,7 +191,7 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 |---|---|---|---|
 | 1 | **Causal-history severance on copy** | Upwelling / Patchwork / Cambria | Preserve `change-id` (Gerrit/Mercurial/jj/Sapling pattern) across ACTION verbs so lifting between bags retains identity |
 | 2 | **Schema drift across multi-bag residency** | Kleppmann EuroSys 2021 | Cambria-style read-time lenses, not write-time migration |
-| 3 | **Whiteout resurrection** | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" |
+| 3 | **Kāpae resurrection** | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" |
 | 4 | **Shadow-override confusion** | TW5 #570, #9139 | Surface `origin-bag` as a tiddler field on every read |
 | 5 | **Recipe-drift poisoning** | Nix overlays / OCI layers | Recipe pins bag-epochs (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
 | 6 | **Concurrent commits into same lower bag** | Upwelling (explicitly unsolved) | Operator-visible commit queue per bag; surface the race rather than hide it |
@@ -212,7 +212,7 @@ Every "conflict-resolution" surface in the residency model splits into two layer
 
 | Layer | Role | Examples in current code |
 |---|---|---|
-| **Detection + recording** | CRDT layer | `auditEpochs` returns drift state; `listBagsTombstoning` returns hides; `withEffectRecord` writes archival audit; `resolveAll` reports multi-residency |
+| **Detection + recording** | CRDT layer | `auditEpochs` returns drift state; `listKapaeBags` returns hides; `withEffectRecord` writes archival audit; `resolveAll` reports multi-residency |
 | **Resolution + decision** | Operator-agent / cabal Talk Story | Future surfacing UX; operator gestures over the audit; cabal proposals through Voice house |
 
 The CRDT layer SHOULD surface every conflict it detects as readable state. It MUST NOT refuse a read, lose a write, silently arbitrate concurrent commits, or pick a winner where the operators have not chosen. The Lares Voice house then carries the conflict into Talk Story; the operators (or the cabal, when multiple operators contend) reach a decision; an explicit ACTION verb lands the decision; a fresh effect record audits the resolution.
