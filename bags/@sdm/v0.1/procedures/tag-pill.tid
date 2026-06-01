@@ -1,0 +1,14 @@
+title: $:/sdm/procedures/tag-pill
+caption: tag-pill
+tags: $:/tags/Global
+type: text/vnd.tiddlywiki
+
+\procedure tag-pill(target)
+<$link to=<<target>>>
+<span class="sdm-tag-pill">
+<$transclude $tiddler=<<target>> $field="caption">
+<$text text=<<target>>/>
+</$transclude>
+</span>
+</$link>
+\end

@@ -411,6 +411,60 @@ traits:
 ```
 <<~/ahu >>
 
+<<~ ahu #decisions-resolved >>
+## Decisions Resolved — Session Zero (2026-05-31)
+
+Four design decisions closed by operator approval after corpus + design-lead
+research. These bind the sprints below.
+
+**D1 — `location` merges into `structure` (one Site mount-point).**
+The corpus never distinguishes them — it names a single category, "Structure/
+Location (installed in gear/vehicles/infrastructure)." Design leads converge on
+one entity-with-mount-points: Earthdawn (kaer/citadel/flying Kila are one warded
+place), Starfinder (frame + typed mounts + bays + role slots), Spelljammer (ship =
+stat-view + map-view of one entity; per-vehicle stat forks were walked back),
+Blades (lair sheet with slots; a mobile asset is just a slot occupant).
+→ **Fixed-vs-mobile is NOT a mount-point or type distinction. It is a flat `#has`
+component** (propulsion/mobility) on the Site. A forest and an airship are the
+same Site; one has a mobility component filled. Keeps mobility flat (relevant to
+the vertical-vs-flat pressure).
+
+**D2 — Item container = one mount-point + sub-rule; character Item = 7+Strength.**
+Corpus-canonical: *"Power albums, technocodices, and spell books … let you carry
+a number of powers in a single inventory slot"* (Vastlands Guidebook); *"may let
+multiple powers ride in the same slot"* (Traits Index). Albums/codices/spellbooks
+are flavors of one container mechanism, not separate types. Character Item slot
+count stays fixed at **7+Strength**.
+
+**D3 — Site (structure) capacity = XP+resource upgrade economy, not a fixed count.**
+Per OGA "Golden Age Item Upgrading" ([Our_Golden_Age.md:1079-1111](Our_Golden_Age.md)):
+a Hallmark / vehicle / domicile / Site carries **base attributes like a
+character** and upgrades each attribute **independently** (XP + referee resources,
+doubling cost `n+1 = 2(n)`), **decoupled from a single Level** (the legacy UVG
+"Traditional Item Levelling" tied all to Level; the Golden Age model does not).
+Capacity itself is a purchasable "Trait" upgrade ("capacity increases" is listed).
+"Levels most relevant for vehicles." → The `structure` mount-point `#cost` and
+`#overflow` blocks reference this economy; they do NOT state a slot count.
+This applies ONLY to upgradable Sites — character Trait (7+Thought), Item
+(7+Strength), and Burden (20, −1 each) keep their fixed Vastlands counts.
+
+**D4 — `<<tag-pill>>` is a TW5 `\procedure` in a `$:/tags/Global` `.tid`.**
+Macros are superseded since TW5 5.3.0 and pass parameters by textual substitution
+that breaks on `@`/`/` titles. Use a `\procedure`; read `caption` via
+`<$transclude $tiddler=<<target>> $field="caption">` with the body as title
+fallback; wrap in `<$link>` + `.sdm-tag-pill` span. Register wiki-wide via
+`tags: $:/tags/Global` on a system tiddler `$:/sdm/macros/tag-pill`. `.tid` for
+runtime procedure code honors pono tiddler-format law. Call quoted.
+
+**Open residue from this research (not blocking Sprint 0):**
+- Name the mobility component slug (`@sdm/hook/propulsion`? `@sdm/posture/mobile`?).
+- Ship role-slots (Helm/Gunnery/Damage-Control, FTLS Ch08) hint at a future
+  "role slot" concept on Sites, distinct from Power mount-points. Note for Sprint 3/4.
+- Site as dual-view (stat-view / interior-map-view, per Spelljammer) — a
+  projection concern, not a mount-point concern. Note for projections work.
+
+<<~/ahu >>
+
 <<~ ahu #sprints >>
 ## Sprints — Instructions for the Enacting Lares
 
@@ -440,11 +494,19 @@ from Vastlands Guidebook pp.28-29 and SDM Quickstart. Give each: `#contract`,
 `#activation`, `#cost`, `#failure`, `#removal`, `#overflow`, `#aftermath`.
 The Burden mount-point's `-1 per slot` rule, the Trait slot count (7+Thought),
 the Item slot count (7+Strength) — these are canonical facts that get addressed.
-**Decision needed:** does `location` (from SDM template) merge with `structure`
-or get its own mount-point? **Decision needed:** the Item mount-point must
-address the container mechanism (albums, grimoires hold multiple Powers per
-slot) — one mount-point with a container sub-rule, not separate mount-points
-per container type.
+
+**RESOLVED (see `#decisions-resolved`):**
+- `location` **merges into** `structure`. One Site mount-point. Fixed-vs-mobile
+  is a flat `#has` component on the Site (propulsion/mobility), not a separate
+  mount-point or a type fork.
+- The **Item** mount-point is **one** mount-point with a container sub-rule
+  (albums/grimoires/technocodices hold multiple Powers per slot), not separate
+  types. Character Item capacity stays fixed at **7+Strength**.
+- The **structure (Site)** mount-point does NOT carry a fixed slot count. A Site
+  (Hallmark, vehicle, domicile, fixed place) holds **base attributes like a
+  character**; capacity is a **purchasable upgrade** (XP + referee resources,
+  tracked per-attribute, decoupled from Level) per OGA "Golden Age Item
+  Upgrading." Its `#cost`/`#overflow` blocks reference that economy, not a count.
 
 **S0.4 — Write ~14 component memes + template.**
 Address the tags that Read Magic, Floating Disc, and Shield Ward actually use.
@@ -460,10 +522,16 @@ modifies the Power), `#interaction` (how it plays with other components),
 **Caution (Principle 6):** if any component proves to carry no query value
 during Sprint 1, demote it back to a TOML header tag and delete the meme.
 
-**S0.6 — Write the `<<tag-pill>>` macro.**
-A TW5 macro that reads the caption field from the target component tiddler
-and renders a pill-styled link. Falls back to the raw title without the
-caption. This macro deploys on every card projection. Sprint 0 deliverable
+**S0.6 — Write the `<<tag-pill>>` procedure.** *(RESOLVED — see `#decisions-resolved`)*
+A TW5 **`\procedure`** (NOT a `\define` macro — macros are superseded since
+TW5 5.3.0 and pass params by brittle textual substitution that breaks on `@`/`/`
+titles). It reads the `caption` field from the target component tiddler via
+`<$transclude $tiddler=<<target>> $field="caption">` with the transclude body as
+the title fallback, wrapped in `<$link>` + a `.sdm-tag-pill` span. Lives in a
+`.tid` system tiddler (`title: $:/sdm/macros/tag-pill`) tagged `$:/tags/Global`
+for wiki-wide registration — satisfying pono tiddler-format law (`.tid` reserved
+for runtime widget/procedure code). Call quoted: `<<tag-pill "@sdm/function/ecm-scan">>`.
+This procedure deploys on every card projection. Sprint 0 deliverable
 because Sprint 1 card projections depend on it.
 
 **S0.5 — Write projection and witness templates.** Fresh for v0.1.
@@ -593,11 +661,13 @@ relationship to the mounted pattern. This remains speculative.
   Start from the existing FTLS ECM vocabulary (`[scan]` `[veil]` `[jam]`
   `[negate]` `[suppress]` `[redirect]` `[capture]` `[hijack]`) — these
   already name the layer-interaction modes the `#modifies` edge reaches for.
-- **Location vs Structure.** The SDM template lists `location` and `structure`
-  as separate storage classes. Decide: one mount-point or two? Sprint 0.
-- **Power containers.** Albums, grimoires, and technocodices hold multiple
-  Powers per Item slot. The Item mount-point contract must address container-
-  sharing. Sprint 0.3.
+- **Location vs Structure.** ✅ RESOLVED → merged into one Site mount-point;
+  mobility is a flat `#has` component. See `#decisions-resolved`.
+- **Power containers.** ✅ RESOLVED → one Item mount-point + container sub-rule;
+  character Item capacity fixed at 7+Strength. See `#decisions-resolved`.
+- **Site capacity economy.** Structure/Site slots scale by XP + resource spend
+  (OGA "Golden Age Item Upgrading"), not a fixed count. Wire the Site
+  `#cost`/`#overflow` blocks to that economy in Sprint 0.3 / test in Sprint 4.
 - **Locked Powers as instance data.** Lock-state (which attributes remain
   locked/encrypted/damaged) and unlock-progress belong in the instance-layer
   YAML alongside variant and mutations.

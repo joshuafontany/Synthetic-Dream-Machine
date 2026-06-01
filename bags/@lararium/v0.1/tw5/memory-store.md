@@ -53,7 +53,7 @@ routes the following TW5 title patterns to @temp:
 | `$:/status/*` | `$:/status/IsLoggedIn`, `$:/status/IsAnonymous`, `$:/status/IsReadOnly`, `$:/status/UserName` | TW5 status flags — per-device login state, not shared identity |
 | `$:/boot/*` | TW5 boot config set during startup | Boot-time only; rebuilt each session |
 | `$:/HistoryList` | Navigation back-stack (one entry per back-button click) | Per-device interaction history; meaningless across devices |
-| `$:/state/*` | UI fold/expand state, selected tabs, popup open-state | Per-device UI state (today). Once `@personal` lands, the specific patterns that carry operator intent across devices — `$:/state/folded/*`, `$:/state/tab-*`, `$:/StoryList`, `$:/palette` — move there. |
+| `$:/state/*` | UI fold/expand state, selected tabs, popup open-state | Per-device UI state today. The `@personal` slot itself now ships in `expandRecipe` (S7.1+S7.2 landed 2026-05-31), but the cascade rules that would route `$:/state/folded/*`, `$:/state/tab-*`, `$:/StoryList`, and `$:/palette` away from `@temp` still pend S7.3 — the rest stays here until those rules land. |
 
 **No catch-all rule.** The cascade only enumerates patterns it knows the
 destination for. Writes whose title matches nothing in the cascade fall out
@@ -94,8 +94,16 @@ the proposal at
 [[lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal]] for
 boot wiring and the cascade rules that will activate it.
 
-Until `@personal` lands, the `$:/state/*` catch-all in the cascade routes
-these tiddlers to `@temp` — they don't survive device boundaries.
+**Landing status (2026-05-31).** S7.1 + S7.2 of EPIC-RESIDENCY-MODEL landed:
+`PERSONAL_BAG` exists as a constant in `wiki-recipe.ts` and `expandRecipe()`
+now returns the slot URI between `@draft` and the wiki bag. Existing islands
+gracefully skip the slot when no resolver entry maps it (per the optional-
+slot semantics in `island-recipe.ts` and `sovereign-island-model.ts`), so the
+floor stays green pending the remaining S7 stories. Until S7.3 (cascade
+rules), S7.4 (recipe-fingerprint), S7.5 (resolver binding), and S7.6 (Keyhive
+PersonGroup grant) land, the `$:/state/*` catch-all in the cascade routes
+the operator's viewing state to `@temp` — it doesn't yet survive device
+boundaries.
 
 <<~/ahu >>
 

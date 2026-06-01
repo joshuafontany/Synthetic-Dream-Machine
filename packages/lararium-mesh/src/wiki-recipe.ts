@@ -5,6 +5,12 @@
  *
  *   lar:///ha.ka.ba/@temp       — volatile, in-memory, $:/temp/* lives here
  *   lar:///ha.ka.ba/@draft      — "Draft of …" tiddlers, CRDT, high-churn
+ *   lar:///ha.ka.ba/@personal   — operator cross-device viewing state ($:/StoryList,
+ *                                 $:/state/folded/*, $:/state/tab-*), CRDT, keyed per
+ *                                 (PersonGroup × recipe-fingerprint) by the vessel
+ *                                 resolver (see personal-slot-proposal#scoping-mechanism).
+ *                                 Slot URI literal here; per-recipe doc binding lives in
+ *                                 BagResolver, not the URI.
  *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
  *   canonBags[]                 — optional content libraries, CRDT, read-only from wiki
  *   lar:///ha.ka.ba/@lares      — personality, CRDT, required
@@ -23,9 +29,14 @@ import type { LarTiddlerRecord } from "./tiddler-store.js";
 /** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
 export type SlotUri = string;
 
-/** Five fixed slots always present in every recipe. */
+/**
+ * Six fixed slot URIs always present in every recipe. The wiki identity slot
+ * derives from `wikiSlug` via `wikiBagUri()`; the remaining five name themselves
+ * here as constants.
+ */
 export const TEMP_BAG     = "lar:///ha.ka.ba/@temp"     as const;
 export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
+export const PERSONAL_BAG = "lar:///ha.ka.ba/@personal" as const;
 export const LARES_BAG    = "lar:///ha.ka.ba/@lares"    as const;
 export const LARARIUM_BAG = "lar:///ha.ka.ba/@lararium" as const;
 
@@ -183,6 +194,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
   return [
     TEMP_BAG,
     DRAFT_BAG,
+    PERSONAL_BAG,
     wikiBagUri(r.wikiSlug),
     ...(r.canonBags ?? []),
     LARES_BAG,

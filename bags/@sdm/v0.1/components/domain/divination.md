@@ -1,0 +1,70 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination >>
+```toml iam
+uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/divination"
+file-path = "bags/@sdm/v0.1/components/domain/divination.md"
+type      = "text/x-memetic-wikitext"
+
+title     = "@sdm/domain/divination"
+caption   = "divination"
+tagspace  = "sdm"
+register  = "S"
+confidence = 13
+mana      = 13
+manao     = 16
+manaoio   = 13
+cacheable = true
+retain    = true
+invariant = false
+role      = "component (domain): Divination — the school of perceiving the hidden"
+```
+
+<<~&#x0002;>>
+
+# Divination
+
+<<~ ahu #definition >>
+## Definition
+
+The domain of perceiving the hidden — reading inscriptions, scrying distance, sensing patterns, presences, and intent.
+<<~/ahu >>
+
+<<~ ahu #activation >>
+## Activation
+
+Orients a module toward **knowing rather than changing**. It targets information, not matter — what is there, what it means, who left it. Rarely resolves as an attack.
+<<~/ahu >>
+
+<<~ ahu #interaction >>
+## Interaction
+
+Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`. A `veil`/`spoof` effect degrades it; a `hook/dangerous` reading risks Corruption when it pierces something defended.
+<<~/ahu >>
+
+<<~ ahu #filters >>
+## Filters
+
+```text
+[tag[@sdm/domain/divination]]              all divination modules
+[tag[prefix[@sdm/domain/]]]                all domain components
+[tag[@sdm/domain/divination]tag[@sdm/function/archive]]   divinations that archive
+```
+<<~/ahu >>
+
+<<~ ahu #aftermath >>
+## Aftermath
+
+- Confirm whether scrying-at-range and inscription-reading want separate sub-functions or stay one domain.
+<<~/ahu >>
+
+<<~ ahu #edges >>
+## Edges
+
+<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+
+<<~/ahu >>
+
+<<~&#x0003;>>
+
+<<~&#x0004; -> ? >>
