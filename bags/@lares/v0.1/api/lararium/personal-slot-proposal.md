@@ -242,17 +242,14 @@ independent migration.
 
 <<~ ahu #open-questions >>
 
-## Open questions (remaining)
+## Questions (all resolved 2026-05-31)
 
 Q1 (slot priority order) ✅ approved — `@personal` between `@draft` and `@<wikiSlug>`.
 Q2 (one @personal or per-wiki) ✅ resolved — single canonical URI, resolver binds per (PersonGroup × recipe-fingerprint).
-
-Remaining:
-
-3. **`$:/palette` scope.** Does palette belong in `@personal` (operator-across-devices) or `@lares` (personality-across-mesh)? Both readings still valid.
-4. **Subscription gesture.** Implicit on PersonGroup membership, or explicit per-wiki toggle?
-5. **Fingerprint algorithm.** SHA-256 of `(@<wiki>-doc-id + sorted canonBags doc-ids + @lares-doc-id + @lararium-doc-id)`? Open: should `@lares` and `@lararium` doc-ids participate? Probably yes — different system or personality = different view state context.
-6. **@draft scoping** ✅ confirmed — follows the same `(PersonGroup × recipe-fingerprint)` keying as @personal. Locked at slot URI `lar:///ha.ka.ba/@draft`, resolver-bound.
+Q3 (`$:/palette` scope) ✅ resolved 2026-05-31 — palette routes to `@personal` (operator-across-devices). Cascade rule `[prefix[$:/palette]then[lar:///ha.ka.ba/@personal]]` lands above the `$:/state/` catch-all in S7.3. Custom palette definitions under `$:/palettes/*` are NOT covered by this rule — open follow-up if operator-built palettes need to travel with the operator across recipes.
+Q4 (subscription gesture) ✅ deferred 2026-05-31 — S7.6 ships with implicit-on-PersonGroup-membership as the default subscription gesture; the per-wiki explicit opt-out toggle becomes follow-up sprint scope once the operator has lived with the implicit default and surfaced any consent-friction.
+Q5 (fingerprint algorithm) ✅ revised 2026-05-31 — SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate in the fingerprint — switching Lares personality or system bag does not fork the operator's view state across devices. EPIC-RESIDENCY-MODEL.md S7.4 spec carries the same revision.
+Q6 (@draft scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-fingerprint)` keying as @personal. Locked at slot URI `lar:///ha.ka.ba/@draft`, resolver-bound.
 
 <<~/ahu >>
 
