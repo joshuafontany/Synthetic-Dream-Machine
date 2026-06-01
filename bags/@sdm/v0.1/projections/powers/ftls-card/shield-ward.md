@@ -5,6 +5,13 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/shield-ward.md"
 type      = "text/x-memetic-wikitext"
+tags = [
+  "@sdm/tags/domain/abjuration",
+  "@sdm/tags/function/ward",
+  "@sdm/tags/function/barrier",
+  "@sdm/tags/hook/imbued",
+  "@sdm/tags/mount/trait",
+]
 
 tagspace  = "sdm"
 register  = "CS"
@@ -38,12 +45,10 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 - **x4 (P:8)** — hold through one breach, then flicker (mishap check to maintain).
 <<~/ahu >>
 
-<<~ ahu #pills >>
+<<~ ahu #components >>
 ## Components
 
-<<tag-pill "@sdm/domain/abjuration">> <<tag-pill "@sdm/function/ward">> <<tag-pill "@sdm/function/barrier">> <<tag-pill "@sdm/hook/imbued">> <<tag-pill "@sdm/mount/trait">>
-
-On paper: `[abjuration] [ward] [barrier] [imbued] [trait]`. On screen each pill clicks through to its component.
+<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>
 <<~/ahu >>
 
 <<~ ahu #edges >>

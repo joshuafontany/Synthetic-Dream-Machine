@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/magic-decode"
 file-path = "bags/@sdm/v0.1/components/function/magic-decode.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/magic-decode"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode"
 caption   = "magic-decode"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 ## Filters
 
 ```text
-[tag[@sdm/function/magic-decode]]                          all decode modules
-[tag[@sdm/function/magic-decode]tag[@sdm/domain/divination]]  decode-divinations
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode]]                          all decode modules
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode]tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination]]  decode-divinations
 ```
 <<~/ahu >>
 

@@ -41,13 +41,24 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 #aftermath    open questions
 ```
 
-**TW5 identity (in `toml iam`):** carry three fields so pills and filters resolve —
+**Two tiddlers per component.**
+
+1. **The full meme** — this `.md`, in the recipe. Its TW5 title is its full lar: URI (= `lar:///` + `uri-path`); it carries all content. In `toml iam`:
 
 ```toml
-title   = "@sdm/function/ecm-scan"   # bag-scoped, version-free, stable TW5 title
-caption = "ecm-scan"                  # display name for <<tag-pill>>
-# uri-path carries the full versioned address
+title   = "lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
+caption = "ecm-scan"
 ```
+
+2. **The short tag pointer** — a lightweight `.tid` at `tags/{facet}/{slug}.tid`, the thing tags actually reference. A *virtual* tiddler: not stacked into the recipe unless the operator edits a membership. Short title; a `meme` field points back to the full meme:
+
+```
+title: @sdm/tags/function/ecm-scan
+caption: ecm-scan
+meme: lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan
+```
+
+Modules and cards tag with the **short** form. `<<tag-pill>>` reads the pointer's `caption` for the label and follows its `meme` field to open the full meme. Filters harvest `[tags[]prefix[@]]`.
 <<~/ahu >>
 
 <<~ ahu #promote-demote-law >>

@@ -6,15 +6,15 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
 file-path = "bags/@sdm/v0.1/modules/powers/read-magic.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/module/read-magic"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
 caption   = "Read Magic"
 tags = [
-  "@sdm/domain/divination",
-  "@sdm/function/magic-decode",
-  "@sdm/function/ecm-scan",
-  "@sdm/function/archive",
-  "@sdm/hook/dangerous",
-  "@sdm/mount/trait",
+  "@sdm/tags/domain/divination",
+  "@sdm/tags/function/magic-decode",
+  "@sdm/tags/function/ecm-scan",
+  "@sdm/tags/function/archive",
+  "@sdm/tags/hook/dangerous",
+  "@sdm/tags/mount/trait",
 ]
 
 tagspace  = "sdm"

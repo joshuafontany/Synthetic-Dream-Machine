@@ -5,6 +5,14 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/read-magic.md"
 type      = "text/x-memetic-wikitext"
+tags = [
+  "@sdm/tags/domain/divination",
+  "@sdm/tags/function/magic-decode",
+  "@sdm/tags/function/ecm-scan",
+  "@sdm/tags/function/archive",
+  "@sdm/tags/hook/dangerous",
+  "@sdm/tags/mount/trait",
+]
 
 tagspace  = "sdm"
 register  = "CS"
@@ -39,14 +47,10 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 - **x8 (P:16, dangerous)** — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
 <<~/ahu >>
 
-<<~ ahu #pills >>
+<<~ ahu #components >>
 ## Components
 
-<<tag-pill "@sdm/domain/divination">> <<tag-pill "@sdm/function/magic-decode">> <<tag-pill "@sdm/function/ecm-scan">> <<tag-pill "@sdm/function/archive">> <<tag-pill "@sdm/hook/dangerous">>
-
-<<tag-pill "@sdm/mount/trait">> <<tag-pill "@sdm/mount/item">> <<tag-pill "@sdm/mount/structure">> <<tag-pill "@sdm/mount/burden">>
-
-On paper these read as keywords: `[divination] [magic-decode] [ecm-scan] [archive] [dangerous]` · `[trait] [item] [structure] [burden]`. On screen each pill clicks through to its component and a filter of every module that shares it.
+<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>
 <<~/ahu >>
 
 <<~ ahu #edges >>

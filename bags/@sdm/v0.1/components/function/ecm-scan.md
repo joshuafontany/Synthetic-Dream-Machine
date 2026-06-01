@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
 file-path = "bags/@sdm/v0.1/components/function/ecm-scan.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/ecm-scan"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
 caption   = "ecm-scan"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 ## Filters
 
 ```text
-[tag[@sdm/function/ecm-scan]]              all ecm-scan modules
-[tag[prefix[@sdm/function/]]]              all function components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan]]              all ecm-scan modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/function/]]]              all function components
 ```
 <<~/ahu >>
 

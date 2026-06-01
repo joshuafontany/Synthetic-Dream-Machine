@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/burden"
 file-path = "bags/@sdm/v0.1/mount-points/burden.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/mount/burden"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/mount-points/burden"
 caption   = "burden"
 tagspace  = "sdm"
 register  = "CS"

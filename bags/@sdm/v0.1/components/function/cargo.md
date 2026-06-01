@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/cargo"
 file-path = "bags/@sdm/v0.1/components/function/cargo.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/cargo"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo"
 caption   = "cargo"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 ## Filters
 
 ```text
-[tag[@sdm/function/cargo]]                          all cargo modules
-[tag[@sdm/function/cargo]tag[@sdm/domain/stuckforce]]  stuckforce hauling
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo]]                          all cargo modules
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo]tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce]]  stuckforce hauling
 ```
 <<~/ahu >>
 

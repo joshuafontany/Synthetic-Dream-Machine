@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/abjuration"
 file-path = "bags/@sdm/v0.1/components/domain/abjuration.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/domain/abjuration"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration"
 caption   = "abjuration"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 ## Filters
 
 ```text
-[tag[@sdm/domain/abjuration]]                       all abjuration modules
-[tag[@sdm/domain/abjuration]tag[@sdm/function/ward]]   warding abjurations
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration]]                       all abjuration modules
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration]tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/ward]]   warding abjurations
 ```
 <<~/ahu >>
 

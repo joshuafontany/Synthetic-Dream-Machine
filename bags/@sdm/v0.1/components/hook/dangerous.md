@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/dangerous"
 file-path = "bags/@sdm/v0.1/components/hook/dangerous.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/hook/dangerous"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous"
 caption   = "dangerous"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Composes with any domain or function. **Vertical-vs-flat pressure lives here:** 
 ## Filters
 
 ```text
-[tag[@sdm/hook/dangerous]]                 all dangerous modules — the vertical cross-section
-[tag[prefix[@sdm/hook/]]]                  all hook components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous]]                 all dangerous modules — the vertical cross-section
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/hook/]]]                  all hook components
 ```
 <<~/ahu >>
 

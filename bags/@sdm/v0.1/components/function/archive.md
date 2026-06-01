@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/archive"
 file-path = "bags/@sdm/v0.1/components/function/archive.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/archive"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/archive"
 caption   = "archive"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 ## Filters
 
 ```text
-[tag[@sdm/function/archive]]               all archive modules
-[tag[prefix[@sdm/function/]]]              all function components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/archive]]               all archive modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/function/]]]              all function components
 ```
 <<~/ahu >>
 

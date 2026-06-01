@@ -6,14 +6,14 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
 file-path = "bags/@sdm/v0.1/modules/powers/floating-disc.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/module/floating-disc"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
 caption   = "Floating Disc"
 tags = [
-  "@sdm/domain/stuckforce",
-  "@sdm/function/cargo",
-  "@sdm/function/barrier",
-  "@sdm/hook/sustained",
-  "@sdm/mount/trait",
+  "@sdm/tags/domain/stuckforce",
+  "@sdm/tags/function/cargo",
+  "@sdm/tags/function/barrier",
+  "@sdm/tags/hook/sustained",
+  "@sdm/tags/mount/trait",
 ]
 
 tagspace  = "sdm"

@@ -6,14 +6,14 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 file-path = "bags/@sdm/v0.1/modules/powers/shield-ward.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/module/shield-ward"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 caption   = "Shield Ward"
 tags = [
-  "@sdm/domain/abjuration",
-  "@sdm/function/ward",
-  "@sdm/function/barrier",
-  "@sdm/hook/imbued",
-  "@sdm/mount/trait",
+  "@sdm/tags/domain/abjuration",
+  "@sdm/tags/function/ward",
+  "@sdm/tags/function/barrier",
+  "@sdm/tags/hook/imbued",
+  "@sdm/tags/mount/trait",
 ]
 
 tagspace  = "sdm"

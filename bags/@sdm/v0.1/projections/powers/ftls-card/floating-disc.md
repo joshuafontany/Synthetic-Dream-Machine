@@ -5,6 +5,13 @@
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/floating-disc.md"
 type      = "text/x-memetic-wikitext"
+tags = [
+  "@sdm/tags/domain/stuckforce",
+  "@sdm/tags/function/cargo",
+  "@sdm/tags/function/barrier",
+  "@sdm/tags/hook/sustained",
+  "@sdm/tags/mount/trait",
+]
 
 tagspace  = "sdm"
 register  = "CS"
@@ -38,12 +45,10 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 - **x4 (P:8)** — two discs, or one that safely bears a creature.
 <<~/ahu >>
 
-<<~ ahu #pills >>
+<<~ ahu #components >>
 ## Components
 
-<<tag-pill "@sdm/domain/stuckforce">> <<tag-pill "@sdm/function/cargo">> <<tag-pill "@sdm/function/barrier">> <<tag-pill "@sdm/hook/sustained">> <<tag-pill "@sdm/mount/trait">>
-
-On paper: `[stuckforce] [cargo] [barrier] [sustained] [trait]`. On screen each pill clicks through to its component.
+<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>
 <<~/ahu >>
 
 <<~ ahu #edges >>

@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/divination"
 file-path = "bags/@sdm/v0.1/components/domain/divination.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/domain/divination"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination"
 caption   = "divination"
 tagspace  = "sdm"
 register  = "S"
@@ -46,9 +46,9 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 ## Filters
 
 ```text
-[tag[@sdm/domain/divination]]              all divination modules
-[tag[prefix[@sdm/domain/]]]                all domain components
-[tag[@sdm/domain/divination]tag[@sdm/function/archive]]   divinations that archive
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination]]              all divination modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/domain/]]]                all domain components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination]tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/archive]]   divinations that archive
 ```
 <<~/ahu >>
 

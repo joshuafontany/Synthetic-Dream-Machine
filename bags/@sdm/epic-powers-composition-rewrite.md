@@ -262,54 +262,52 @@ Pranala form:
 <<~ ahu #tw5-tags >>
 ## TW5 Tag Syntax — Component Representation
 
-Component tags follow pono TW5 wikitext conventions. The tag title serves as
-the stable TW5 identifier; the caption field renders the readable pill; the
-lar-uri field carries the full versioned address.
+**Canon: every meme's TW5 title is its full `lar:///` URI** (= `lar:///` + `uri-path`). A component is addressed by **two tiddlers** — a full meme and a short virtual tag pointer.
 
-### Tag Title Convention
+### Two Tiddlers per Component
 
 ```text
-TW5 title:     @sdm/function/ecm-scan        ← bag-scoped, version-free, stable
-caption:       ecm-scan                       ← display name for pills
-lar-uri:       lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan  ← versioned address
+Full meme   (.md, in recipe)    title:   lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan
+                                caption: ecm-scan
+                                carries  #definition #activation #interaction #filters #aftermath
+
+Tag pointer (.tid, virtual)     title:   @sdm/tags/function/ecm-scan
+                                caption: ecm-scan
+                                meme:    lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan
 ```
 
-The `@sdm/` prefix scopes to the bag without carrying a version number. The
-title outlives version changes; the `lar-uri` field updates per version.
+The **full meme** holds content; its title is the lar URI. The **tag pointer** is the lightweight thing tags actually reference. Its short title `@sdm/tags/{facet}/{slug}` mirrors `$:/tags/…` and reconstructs its own lar identity (`lar:///ha.ka.ba/@sdm/v0.1/tags/{facet}/{slug}`, matching its file path); its `meme` field forwards to the full meme. Pointers are **virtual** — not stacked into the recipe unless the operator edits a membership — and live as `.tid` to differentiate from `.md` memes. Mounts follow the same split (`@sdm/tags/mount/{slug}` → `…/mount-points/{slug}`).
 
 ### Wikitext Forms
 
 | Context | Syntax | Renders as |
 |---|---|---|
-| Card tag pill | `<<tag-pill @sdm/function/ecm-scan>>` | [ecm-scan] ← clickable, links to component |
-| Inline link | `[[@sdm/function/ecm-scan]]` | fallback link (readable if not beautiful) |
-| Filter: one tag | `[tag[@sdm/function/ecm-scan]]` | all tiddlers tagged with this component |
-| Filter: AND | `[tag[@sdm/function/ecm-scan]tag[@sdm/domain/divination]]` | both tags |
-| Filter: facet | `[tag[prefix[@sdm/function/]]]` | all function-facet components |
-| Filter: all SDM | `[tag[prefix[@sdm/]]]` | all SDM components |
+| Card tag pill | `<<tag-pill "@sdm/tags/function/ecm-scan">>` | [ecm-scan] — clickable, opens the full meme via the pointer's `meme` field |
+| Filter: one tag | `[tag[@sdm/tags/function/ecm-scan]]` | all tiddlers carrying this tag |
+| Filter: AND | `[tag[@sdm/tags/function/ecm-scan]tag[@sdm/tags/domain/divination]]` | both |
+| Filter: facet | `[tag[]prefix[@sdm/tags/function/]]` | all function-facet tags |
+| Filter: all SDM tags | `[tag[]prefix[@sdm/tags/]]` | all SDM tag pointers |
 
-### TOML Tags in Module Memes
+### TOML Tags in Module & Card Memes
 
 ```toml
 tags = [
-  "@sdm/function/ecm-scan",
-  "@sdm/function/magic-decode",
-  "@sdm/function/archive",
-  "@sdm/domain/divination",
-  "@sdm/domain/apocrypha",
-  "@sdm/hook/dangerous",
+  "@sdm/tags/function/ecm-scan",
+  "@sdm/tags/function/magic-decode",
+  "@sdm/tags/function/archive",
+  "@sdm/tags/domain/divination",
+  "@sdm/tags/hook/dangerous",
+  "@sdm/tags/mount/trait",
 ]
 ```
 
-The TOML `tags` field mirrors the Pranala `#has` edges for TW5 native filter
-compatibility. Pranala edges carry graph truth; TOML tags carry TW5 filter
-sugar. Both resolve to the same component tiddler.
+The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph truth and address the **full meme** (lar URI); `tags` reference the **short tag pointer**, which forwards to that same meme. Both reach the one component.
 
-### The `<<tag-pill>>` Macro
+### Rendering: `tag-pill` + `components`
 
-A Sprint 0 deliverable. Reads the caption field from the target tiddler and
-renders a pill-styled link. Falls back to the raw title if the caption field
-doesn't exist. Writes once, deploys on every card.
+- `<<tag-pill "TAG">>` reads the pointer's `caption` for the label and follows its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to open the full meme.
+- A card declares composition **once** as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
+- Both live as runtime `.tid` tagged `$:/tags/Global`: `lar:///ha.ka.ba/@sdm/procedures/tag-pill` and `lar:///ha.ka.ba/@lararium/lists/components`.
 <<~/ahu >>
 
 <<~ ahu #progressive-display >>
@@ -382,7 +380,7 @@ each pill reads as a keyword the player learns over time.
 Example `#has` + TOML tags (both point to same component tiddlers):
 
 ```toml
-tags = ["@sdm/function/ecm-scan", "@sdm/domain/divination", "@sdm/hook/dangerous"]
+tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags/hook/dangerous"]
 ```
 
 ```text
@@ -450,11 +448,26 @@ This applies ONLY to upgradable Sites — character Trait (7+Thought), Item
 
 **D4 — `<<tag-pill>>` is a TW5 `\procedure` in a `$:/tags/Global` `.tid`.**
 Macros are superseded since TW5 5.3.0 and pass parameters by textual substitution
-that breaks on `@`/`/` titles. Use a `\procedure`; read `caption` via
-`<$transclude $tiddler=<<target>> $field="caption">` with the body as title
-fallback; wrap in `<$link>` + `.sdm-tag-pill` span. Register wiki-wide via
-`tags: $:/tags/Global` on a system tiddler `$:/sdm/macros/tag-pill`. `.tid` for
-runtime procedure code honors pono tiddler-format law. Call quoted.
+that breaks on `@`/`/` titles. Use a `\procedure`; read the pointer's `caption` via
+`<$transclude $tiddler=<<target>> $field="caption">` (title fallback) and follow
+its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to the
+full meme; wrap in a `.sdm-tag-pill` span. Register wiki-wide via
+`tags: $:/tags/Global`. The procedure's own title is its lar URI
+`lar:///ha.ka.ba/@sdm/procedures/tag-pill` (see D5); `.tid` for runtime procedure
+code honors pono tiddler-format law. A companion `lar:///ha.ka.ba/@lararium/lists/components`
+procedure renders every `@`-tag on a tiddler via `tag-pill`, so a card declares
+composition once as tags and calls one `<<~ kahea … >>`.
+
+**D5 — Naming canon: lar: URI titles + two-tiddler tags (2026-05-31, amends D4 & `#tw5-tags`).**
+Every meme's TW5 title is its full `lar:///` URI (= `lar:///` + `uri-path`). A
+component/mount is addressed by **two tiddlers**:
+- the **full meme** (`.md`, in recipe) — lar URI title, `caption`, all content;
+- a **short tag pointer** (`.tid`, *virtual* — not stacked unless an operator edits
+  a membership) titled `@sdm/tags/{facet}/{slug}` (mirrors `$:/tags/…`, reconstructs
+  its own lar URI), carrying `caption` + a `meme` field that forwards to the full meme.
+
+Modules and cards tag with the **short** form; `#has` edges address the **full meme**.
+This supersedes the earlier "version-free bag-scoped single title" wording in `#tw5-tags`.
 
 **Open residue from this research (not blocking Sprint 0):**
 - Name the mobility component slug (`@sdm/hook/propulsion`? `@sdm/posture/mobile`?).
@@ -510,15 +523,14 @@ the Item slot count (7+Strength) — these are canonical facts that get addresse
 
 **S0.4 — Write ~14 component memes + template.**
 Address the tags that Read Magic, Floating Disc, and Shield Ward actually use.
-TW5 title convention: `@sdm/{facet}/{slug}` (bag-scoped, version-free).
-Caption field: short display name for pills. Lar-uri field: full versioned
-address. Each gets: `#definition` (one sentence), `#activation` (how it
+Per D5: each component is a **full meme** (`.md`, title = its lar URI, `caption`
+for display) plus a **short tag pointer** (`.tid` at `tags/{facet}/{slug}.tid`,
+title `@sdm/tags/{facet}/{slug}`, `caption` + `meme`-pointer back to the meme).
+Each full meme gets: `#definition` (one sentence), `#activation` (how it
 modifies the Power), `#interaction` (how it plays with other components),
-`#filters`. Start with: `@sdm/domain/divination`, `@sdm/domain/abjuration`,
-`@sdm/domain/stuckforce`, `@sdm/function/ecm-scan`, `@sdm/function/magic-decode`,
-`@sdm/function/archive`, `@sdm/function/cargo`, `@sdm/function/barrier`,
-`@sdm/function/ward`, `@sdm/hook/imbued`, `@sdm/hook/sustained`,
-`@sdm/hook/dangerous`, `@sdm/hook/attack`, `@sdm/posture/ritual`.
+`#filters`. Start with: `divination`, `abjuration`, `stuckforce` (domain);
+`ecm-scan`, `magic-decode`, `archive`, `cargo`, `barrier`, `ward` (function);
+`imbued`, `sustained`, `dangerous`, `attack` (hook); `ritual` (posture).
 **Caution (Principle 6):** if any component proves to carry no query value
 during Sprint 1, demote it back to a TOML header tag and delete the meme.
 
@@ -527,10 +539,11 @@ A TW5 **`\procedure`** (NOT a `\define` macro — macros are superseded since
 TW5 5.3.0 and pass params by brittle textual substitution that breaks on `@`/`/`
 titles). It reads the `caption` field from the target component tiddler via
 `<$transclude $tiddler=<<target>> $field="caption">` with the transclude body as
-the title fallback, wrapped in `<$link>` + a `.sdm-tag-pill` span. Lives in a
-`.tid` system tiddler (`title: $:/sdm/macros/tag-pill`) tagged `$:/tags/Global`
-for wiki-wide registration — satisfying pono tiddler-format law (`.tid` reserved
-for runtime widget/procedure code). Call quoted: `<<tag-pill "@sdm/function/ecm-scan">>`.
+the title fallback, follows the pointer's `meme` field via
+`<$link to={{{ [<target>get[meme]else<target>] }}}>`, wrapped in a `.sdm-tag-pill`
+span. Lives in a `.tid` tiddler titled `lar:///ha.ka.ba/@sdm/procedures/tag-pill`
+tagged `$:/tags/Global` for wiki-wide registration — satisfying pono tiddler-format law (`.tid` reserved
+for runtime widget/procedure code). Call quoted: `<<tag-pill "@sdm/tags/function/ecm-scan">>`.
 This procedure deploys on every card projection. Sprint 0 deliverable
 because Sprint 1 card projections depend on it.
 
@@ -605,9 +618,9 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 - [ ] 20+ component memes (addressed from Appendix Null)
 - [ ] Composition model doc with instance-data examples
 - [ ] Layer interaction / counterpoint doctrine (even at `~:confidence[P],[4]`)
-- [ ] Cards display tag pills via `<<tag-pill>>` macro linking to component tiddlers
-- [ ] Tag titles follow `@sdm/{facet}/{slug}` convention with caption fields
-- [ ] `<<tag-pill>>` macro exists and renders caption-as-pill for all component tiddlers
+- [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
+- [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
+- [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme
 <<~/ahu >>
 
 <<~ ahu #open-pressures >>

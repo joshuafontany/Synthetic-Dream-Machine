@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/posture/ritual"
 file-path = "bags/@sdm/v0.1/components/posture/ritual.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/posture/ritual"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual"
 caption   = "ritual"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 ## Filters
 
 ```text
-[tag[@sdm/posture/ritual]]                 all ritual modules
-[tag[prefix[@sdm/posture/]]]               all posture components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual]]                 all ritual modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/posture/]]]               all posture components
 ```
 <<~/ahu >>
 

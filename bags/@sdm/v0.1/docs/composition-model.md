@@ -87,7 +87,7 @@ Four mount-points. Each changes how a seated module activates, costs, fails, and
 <<~ ahu #progressive-disclosure >>
 ## Progressive Disclosure — Cards as Doorways
 
-Component pills on a card serve two functions at once: a **mnemonic** on paper (a player learns `[ecm-scan]` as a keyword over sessions) and a **doorway** on screen (clicking the pill opens the component tiddler and a filter of every module that shares it). Printed cards carry the mnemonic; digital cards carry both. The `<<tag-pill>>` procedure renders both faces from one source.
+Component pills on a card serve two functions at once: a **mnemonic** on paper (a player learns `[ecm-scan]` as a keyword over sessions) and a **doorway** on screen (clicking the pill follows its tag pointer's `meme` field to open the full component meme and a filter of every module that shares it). Printed cards carry the mnemonic; digital cards carry both. A card declares its components once as `@sdm/tags/…` tags; the `components` list renders each via `<<tag-pill>>` from that one source.
 <<~/ahu >>
 
 <<~ ahu #practitioner-state >>

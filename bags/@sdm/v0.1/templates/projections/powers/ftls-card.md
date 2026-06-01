@@ -36,13 +36,17 @@ An FTLS card projection renders a Power module as one table-facing game surface.
 ```text
 #card        heading = Power name (see heading law); epithet, P/R/T/D, effect, counterplay
 #overcharge  x2/x4/x8 escalations
-#pills       (visible heading "Components") component + mount-point pills, via <<tag-pill>>
+#components  one kahea call; pills come from the card's lar: URI tags
 #edges       #projects back to module, #template
 ```
 
-The component section renders pills with the `<<tag-pill>>` procedure. On paper the pills read as keywords; on screen each clicks through to its component tiddler and a filter of every module that shares it. On paper they read like `[ecm-scan] [magic-decode] [archive] [divination]` · `[trait] [item] [structure]`.
+**Composition is declared once, as tags.** The card's `toml iam` carries a `tags` field that mirrors the module's `#has` — the full lar: URI of each component and mount-point (every meme's title is its lar URI; tags reference titles). The `#components` section then holds a single call:
 
-**Live, never fenced.** In a card body the procedure call is live wikitext so TW5 renders it — `<<tag-pill "@sdm/function/ecm-scan">>` standing on its own, never inside a code fence. A fenced call renders as dead literal text and the doorway never opens. (Any code fences in *this template* are illustrative only.)
+`<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>`
+
+That procedure reads the current tiddler's `@`-prefixed tags and renders each as a clickable `tag-pill`. No hand-listing — add or drop a tag in `iam` and the pill row follows. On screen each pill clicks through to its component tiddler and a filter of every module that shares it.
+
+**Live, never fenced.** The kahea call is live wikitext so it renders; a fenced call renders as dead literal text and the doorway never opens. (Any code fences in *this template* are illustrative only.)
 <<~/ahu >>
 
 <<~ ahu #writing-law >>

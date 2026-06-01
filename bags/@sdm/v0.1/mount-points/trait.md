@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/trait"
 file-path = "bags/@sdm/v0.1/mount-points/trait.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/mount/trait"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait"
 caption   = "trait"
 tagspace  = "sdm"
 register  = "CS"

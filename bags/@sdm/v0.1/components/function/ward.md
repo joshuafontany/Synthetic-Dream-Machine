@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ward"
 file-path = "bags/@sdm/v0.1/components/function/ward.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/ward"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/ward"
 caption   = "ward"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 ## Filters
 
 ```text
-[tag[@sdm/function/ward]]                             all ward modules
-[tag[@sdm/function/ward]tag[@sdm/hook/sustained]]       standing wards
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/ward]]                             all ward modules
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/ward]tag[lar:///ha.ka.ba/@sdm/v0.1/components/hook/sustained]]       standing wards
 ```
 <<~/ahu >>
 

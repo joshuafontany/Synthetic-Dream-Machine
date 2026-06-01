@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/sustained"
 file-path = "bags/@sdm/v0.1/components/hook/sustained.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/hook/sustained"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/sustained"
 caption   = "sustained"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 ## Filters
 
 ```text
-[tag[@sdm/hook/sustained]]                 all sustained modules
-[tag[prefix[@sdm/hook/]]]                  all hook components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/hook/sustained]]                 all sustained modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/hook/]]]                  all hook components
 ```
 <<~/ahu >>
 

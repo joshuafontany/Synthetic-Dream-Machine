@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/barrier"
 file-path = "bags/@sdm/v0.1/components/function/barrier.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/function/barrier"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier"
 caption   = "barrier"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 ## Filters
 
 ```text
-[tag[@sdm/function/barrier]]                          all barrier modules
-[tag[@sdm/function/barrier]tag[@sdm/domain/abjuration]]  defensive barriers
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier]]                          all barrier modules
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier]tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration]]  defensive barriers
 ```
 <<~/ahu >>
 

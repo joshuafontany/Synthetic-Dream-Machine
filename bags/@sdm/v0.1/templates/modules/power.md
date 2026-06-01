@@ -43,10 +43,10 @@ The canonical SDM Power card (P/R/T/D/Ox + tags) **is** the `#default` block. Th
 #aftermath   open questions, not hidden assumptions
 ```
 
-The TOML `tags` field MUST mirror the `#has` component edges, for TW5-native filter compatibility. Pranala edges carry graph truth; TOML tags carry filter sugar; both resolve to the same component tiddler.
+The TOML `tags` field MUST mirror the `#has` component edges, for TW5-native filter compatibility. Pranala `#has` edges carry graph truth and address the **full meme** (lar: URI); TOML `tags` carry filter sugar and reference the **short tag pointer** (`@sdm/tags/{facet}/{slug}`), which points back to that same meme via its `meme` field.
 
 ```toml
-tags = ["@sdm/function/ecm-scan", "@sdm/domain/divination", "@sdm/hook/dangerous"]
+tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags/hook/dangerous"]
 ```
 <<~/ahu >>
 

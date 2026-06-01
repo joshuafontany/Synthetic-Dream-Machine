@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/attack"
 file-path = "bags/@sdm/v0.1/components/hook/attack.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/hook/attack"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack"
 caption   = "attack"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 ## Filters
 
 ```text
-[tag[@sdm/hook/attack]]                    all attack modules
-[tag[prefix[@sdm/hook/]]]                  all hook components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack]]                    all attack modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/hook/]]]                  all hook components
 ```
 <<~/ahu >>
 

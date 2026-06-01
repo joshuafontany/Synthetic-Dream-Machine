@@ -6,7 +6,7 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/imbued"
 file-path = "bags/@sdm/v0.1/components/hook/imbued.md"
 type      = "text/x-memetic-wikitext"
 
-title     = "@sdm/hook/imbued"
+title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued"
 caption   = "imbued"
 tagspace  = "sdm"
 register  = "S"
@@ -46,8 +46,8 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 ## Filters
 
 ```text
-[tag[@sdm/hook/imbued]]                    all imbued modules
-[tag[prefix[@sdm/hook/]]]                  all hook components
+[tag[lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued]]                    all imbued modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/hook/]]]                  all hook components
 ```
 <<~/ahu >>
 
