@@ -53,8 +53,8 @@ describe("ACTION_VERBS membership", () => {
   });
 
   test("isActionVerb rejects non-ACTION verbs (verb-set boundary)", () => {
-    expect(isActionVerb("promote")).toBe(false);
-    expect(isActionVerb("PROMOTE")).toBe(false); // PROMOTE not in ACTION_VERBS
+    expect(isActionVerb("stage")).toBe(false);
+    expect(isActionVerb("STAGE")).toBe(false); // STAGE not in ACTION_VERBS
     expect(isActionVerb("STAGE")).toBe(false);
     expect(isActionVerb("COMMIT")).toBe(false);
     expect(isActionVerb("PUSH")).toBe(false);
@@ -189,8 +189,8 @@ describe("parseResidencyAction — valid cases", () => {
 // ---------------------------------------------------------------------------
 
 describe("parseResidencyAction — verb-set rejection", () => {
-  test("returns null for non-ACTION verb (legacy 'promote')", () => {
-    const inv = makeInvocation("promote", { title: "X", "from-bag": "Y", "to-bag": "Z", "change-id": "c" });
+  test("returns null for non-ACTION verb (legacy 'stage')", () => {
+    const inv = makeInvocation("stage", { title: "X", "from-bag": "Y", "to-bag": "Z", "change-id": "c" });
     expect(parseResidencyAction(inv)).toBeNull();
   });
 

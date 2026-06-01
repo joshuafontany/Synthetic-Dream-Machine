@@ -27,17 +27,19 @@ describe("ABILITY_LADDER — ordered from least to most privileged", () => {
     expect(pullIdx).toBeLessThan(readIdx);
   });
 
-  test("admin appears before revoke", () => {
-    const adminIdx  = ABILITY_LADDER.indexOf("admin");
-    const revokeIdx = ABILITY_LADDER.indexOf("revoke");
-    expect(adminIdx).toBeLessThan(revokeIdx);
+  test("edit appears before admin", () => {
+    const editIdx  = ABILITY_LADDER.indexOf("edit");
+    const adminIdx = ABILITY_LADDER.indexOf("admin");
+    expect(editIdx).toBeLessThan(adminIdx);
   });
 
-  test("all expected abilities present", () => {
-    // "promote" + "propose" retired 2026-05-31 — neither ceremony exists today;
-    // residency-model bag-priority cascade subsumes the gating semantic.
-    const expected: OrichalcumAbility[] = ["pull", "read", "sync", "write", "admin", "revoke"];
+  test("all expected abilities present — 4-rung access axis (Keyhive-native verbs)", () => {
+    // Access axis = Keyhive's native enum verbs (Pull/Read/Edit/Admin). Retired:
+    // "promote"+"propose" (2026-05-31), "sync"+"revoke" (2026-06-01 — sync =
+    // pull-at-scale; revoke = an admin operation). See causal-island.ts.
+    const expected: OrichalcumAbility[] = ["pull", "read", "edit", "admin"];
     for (const a of expected) expect(ABILITY_LADDER).toContain(a);
+    expect(ABILITY_LADDER.length).toBe(4);
   });
 });
 
@@ -54,30 +56,22 @@ describe("abilityImplies — ability ladder contracts", () => {
 
   test("relay-law: pull does NOT imply read (a shrine relay cannot decrypt)", () => {
     expect(abilityImplies("pull", "read")).toBe(false);
-    expect(abilityImplies("pull", "sync")).toBe(false);
     expect(abilityImplies("pull", "write")).toBe(false);
     expect(abilityImplies("pull", "admin")).toBe(false);
   });
 
-  test("read implies read but not write", () => {
+  test("read implies read but not edit", () => {
     expect(abilityImplies("read", "read")).toBe(true);
-    expect(abilityImplies("read", "write")).toBe(false);
+    expect(abilityImplies("read", "edit")).toBe(false);
   });
 
-  test("write implies read and sync", () => {
-    expect(abilityImplies("write", "read")).toBe(true);
-    expect(abilityImplies("write", "sync")).toBe(true);
+  test("edit implies read", () => {
+    expect(abilityImplies("edit", "read")).toBe(true);
   });
 
-  test("admin implies write, sync, read", () => {
-    expect(abilityImplies("admin", "write")).toBe(true);
-    expect(abilityImplies("admin", "sync")).toBe(true);
+  test("admin implies edit and read (Keyhive Admin satisfies the levels below)", () => {
+    expect(abilityImplies("admin", "edit")).toBe(true);
     expect(abilityImplies("admin", "read")).toBe(true);
-  });
-
-  test("revoke implies admin and write", () => {
-    expect(abilityImplies("revoke", "admin")).toBe(true);
-    expect(abilityImplies("revoke", "write")).toBe(true);
   });
 });
 
@@ -103,8 +97,8 @@ describe("capabilityHasAbility — token gate", () => {
     expect(capabilityHasAbility(cap(["read"]), "read")).toBe(true);
   });
 
-  test("write capability grants read (implies)", () => {
-    expect(capabilityHasAbility(cap(["write"]), "read")).toBe(true);
+  test("edit capability grants read (implies)", () => {
+    expect(capabilityHasAbility(cap(["edit"]), "read")).toBe(true);
   });
 
   test("pull capability does NOT grant read (relay-law)", () => {
@@ -116,8 +110,8 @@ describe("capabilityHasAbility — token gate", () => {
     expect(capabilityHasAbility(cap([]), "pull")).toBe(false);
   });
 
-  test("admin capability grants write and read", () => {
-    expect(capabilityHasAbility(cap(["admin"]), "write")).toBe(true);
+  test("admin capability grants edit and read", () => {
+    expect(capabilityHasAbility(cap(["admin"]), "edit")).toBe(true);
     expect(capabilityHasAbility(cap(["admin"]), "read")).toBe(true);
   });
 });

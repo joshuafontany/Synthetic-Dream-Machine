@@ -43,36 +43,51 @@ export type LarPrincipal =
   | LarPrincipalLocal;
 
 // ---------------------------------------------------------------------------
-// Ability Ladder
+// Access axis — Axis 1 of the refined authority model
 //
-// Ordered from least to most privileged.
-// EXCEPTION: pull does NOT imply read. A relay holds pull without read.
-// All other abilities imply every ability below them in the ladder.
-// ---------------------------------------------------------------------------
-
 // Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
 //
-// Local Tier-2 ability vocabulary. Keyhive's own Access enum carries only four
-// variants (Pull, Read, Edit, Admin) — this ladder layers finer-grained caveats
-// on top of Keyhive's binary read/admin gate. See:
-// packages/lararium-keyhive/src/capability-provider.ts for the Tier-1/Tier-2 split.
+// The authority model has THREE structural axes plus one alignment plane
+// (refined 2026-06-01 against Frazee "Practical Decentralization" + prior-art
+// research). This file owns the per-bag ACCESS axis and the edge-island
+// federation scaffolding. The other dimensions live elsewhere:
 //
-// "promote" retired 2026-05-31 — the canon-promotion ceremony it gated no longer
-// exists. Under the residency-model bag-priority cascade, canon emerges from
-// writing to a lower-priority bag (which requires the same "admin" capability on
-// that bag), so a separate ability rung carries no additional gating semantic.
+//   Axis 1 — ACCESS   (this ladder) — monotonic, cryptographic, per bag.
+//   Axis 2 — SCALE    — Keyhive group nesting (PersonGroup ⊂ Cabal ⊂ … ⊂ DreamNet).
+//   Axis 3 — POWERS   — separation of host/relay/aggregate/address/moderate;
+//                       lar:/// host-independent addressing is the lever.
+//   Plane 0 — ALIGNMENT — non-monotonic, subjective trust (the "lemures" plane).
+//                       lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer
 //
-// "propose" retired 2026-05-31 — the same shape. No live consumer ever read it;
-// the residency-model ACTION verbs (ADD/MOVE/COPY/CLEAR/DROP/LOAD) all gate on
-// "admin" today. A propose-style ceremony (operator-review-before-enact) MAY
-// reintroduce the rung with then-current semantics if such a ceremony emerges.
+// The ACCESS axis is a 1:1 mirror of Keyhive's native Access enum (Pull, Read,
+// Edit, Admin) — NOT a parallel Lararium-invented ladder. The live gate is
+// `CapabilityVerifier.verify({ access: "read" | "admin" })` (capability.ts);
+// this ordered tuple gives the edge-island federation scaffolding a typed
+// vocabulary for the same four levels, with the relay-law exception.
+//
+// EXCEPTION (relay-law): pull does NOT imply read. A relay holds pull and
+// forwards ENCRYPTED bytes it cannot decrypt or render. All other levels imply
+// every level below them.
+//
+// Retired rungs (do not reintroduce without a live consumer + canon update):
+//   "promote" (2026-05-31) — canon-promotion ceremony gone; residency-model
+//      bag-priority cascade subsumes it (write to a lower-priority bag = admin).
+//   "propose" (2026-05-31) — no consumer; residency ACTION verbs gate on admin.
+//   "sync"    (2026-06-01) — not a rung. Sync = pull-at-infrastructure-scale
+//      (forward ciphertext bidirectionally). Edge eligibility rides the
+//      `subjectCanSync` gate boolean, derived from pull/read on the edge.
+//   "revoke"  (2026-06-01) — not a rung. Revocation = an ADMIN operation
+//      (roll the epoch). Carried structurally by EdgeIslandShape.epoch +
+//      the "revoked" lifecycle state, not a privilege level above admin.
+// Verbs ARE Keyhive's native Access verbs (Pull/Read/Edit/Admin) — lexical, not
+// just structural, mirror. `Access.tryFromString` accepts these strings; our
+// live gate `CapabilityAccess` (capability.ts) is the {read, admin} subset the
+// KeyhiveProvider delegates today. Use `edit`, not a coined `write`.
 export const ABILITY_LADDER = [
-  "pull",     // retrieve encrypted bytes and forward; cannot decrypt or render
-  "read",     // decrypt and render semantic content
-  "sync",     // participate in CRDT reconciliation
-  "write",    // produce accepted mutations
-  "admin",    // manage wiki, recipe, edge island membership, residency actions
-  "revoke",   // roll epoch; terminate future live tail for a principal
+  "pull",     // forward encrypted bytes; cannot decrypt or render (Keyhive Pull)
+  "read",     // decrypt and render semantic content (Keyhive Read)
+  "edit",     // produce accepted mutations (Keyhive Edit)
+  "admin",    // manage membership, recipe, epoch/revocation, residency actions (Keyhive Admin)
 ] as const;
 
 export type OrichalcumAbility = typeof ABILITY_LADDER[number];
@@ -361,7 +376,7 @@ export type CausalIslandMust = typeof CAUSAL_ISLAND_MUST[number];
  *
  * "automerge-realm" and "peer-sync-state" are always non-simultaneously
  * apprehended (Fuller-Zelenka); they are listed here to make the doctrine
- * explicit even though they aren't promoted by ceremony — they qualify as islands
+ * explicit even though no ceremony moves them — they qualify as islands
  * by topology.
  */
 // Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands

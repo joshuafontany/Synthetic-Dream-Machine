@@ -37,15 +37,17 @@ body-sha256 = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"
 
 ## Contract
 
-`abilityImplies(have, need)` serves as the capability lattice predicate. The `ABILITY_LADDER` array defines total order from weakest (`pull`) to strongest (`revoke`).
+`abilityImplies(have, need)` serves as the capability lattice predicate. The `ABILITY_LADDER` array defines total order from weakest (`pull`) to strongest (`admin`). The ladder is the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md) model — a 1:1 lexical mirror of Keyhive's native Access verbs.
 
 **Relay-law exception**: `pull` carries without implying `read`. A shrine relay holds encrypted offerings it cannot decrypt or render. This stands as the ONLY non-monotonic case in the lattice. All other abilities imply every ability below them.
 
 ```
-pull < read < sync < write < propose < promote < admin < revoke
+pull < read < edit < admin          (Keyhive-native verbs)
 ```
 
 Exception: `pull` does NOT imply `read`. A principal with `pull` may forward bytes; it cannot decrypt or render.
+
+Retired rungs: `propose` + `promote` (2026-05-31 — ceremonies gone); `sync` + `revoke` (2026-06-01 — `sync` = pull-at-infrastructure-scale, a gate boolean not a rung; `revoke` = an `admin` operation that rolls the epoch).
 
 **Why compiled-in**: this predicate runs inside `capabilityHasAbility`, `visibilityGate`, and the Automerge share-policy gate — all of which run before TW5 boots. Keyhive will carry capability proofs that embed this lattice natively; `abilityImplies` will be subsumed, not promoted.
 

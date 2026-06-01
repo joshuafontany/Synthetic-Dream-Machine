@@ -86,8 +86,8 @@ describe("M.2 event-routing — island→vessel verb payload transport", () => {
 
     expect(ev.listenable).toBe("OnActivated");
     expect(ev.payload["verb"]).toBe("echo-verb");
-    expect(ev.payload["fromUri"]).toBe("lar:///test/instances/promote-button-1");
-    expect(ev.payload["uri"]).toBe("lar:///test/instances/promote-button-1");
+    expect(ev.payload["fromUri"]).toBe("lar:///test/instances/move-button-1");
+    expect(ev.payload["uri"]).toBe("lar:///test/instances/move-button-1");
   });
 });
 

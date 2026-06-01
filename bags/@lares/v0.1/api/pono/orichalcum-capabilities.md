@@ -89,16 +89,15 @@ These are not the same object. Keep device identity below operator identity.
 
 ## Ability Ladder
 
+The ladder is the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md)
+model — a 1:1 lexical mirror of Keyhive's native Access verbs.
+
 ```
-pull     — retrieve encrypted bytes; relay without reading
-           pull does NOT imply read — this is the relay-law exception
-read     — decrypt and render semantic content
-sync     — participate in reconciliation
-write    — produce accepted mutations
-propose  — suggest hostful changes (pending; not yet hostless canon)
-promote  — hostful → hostless canon-promotion ceremony
-admin    — manage room, recipe, edge island membership
-revoke   — roll epoch; terminate future live tail for a principal
+pull   — forward encrypted bytes; relay without reading (Keyhive Pull)
+         pull does NOT imply read — this is the relay-law exception
+read   — decrypt and render semantic content (Keyhive Read)
+edit   — produce accepted mutations (Keyhive Edit)
+admin  — manage membership, recipe, epoch/revocation, residency actions (Keyhive Admin)
 ```
 
 Each ability implies all abilities below it in this ladder, EXCEPT:
@@ -106,17 +105,15 @@ Each ability implies all abilities below it in this ladder, EXCEPT:
 
 ```toml
 # Ordered least → most privileged. Source of truth for ABILITY_LADDER in
-# packages/lararium-mesh/src/causal-island.ts
+# packages/lararium-mesh/src/causal-island.ts. Keyhive-native verbs.
 ability-ladder = [
-  "pull",     # retrieve encrypted bytes; relay without reading
-  "read",     # decrypt and render semantic content
-  "sync",     # participate in CRDT reconciliation
-  "write",    # produce accepted mutations
-  "propose",  # suggest hostful changes (not yet hostless canon)
-  "promote",  # hostful → hostless canon-promotion ceremony
-  "admin",    # manage room, recipe, edge island membership
-  "revoke",   # roll epoch; terminate future live tail for a principal
+  "pull",     # forward encrypted bytes; relay without reading (Keyhive Pull)
+  "read",     # decrypt and render semantic content (Keyhive Read)
+  "edit",     # produce accepted mutations (Keyhive Edit)
+  "admin",    # manage membership, recipe, epoch/revocation, residency actions (Keyhive Admin)
 ]
+# Retired rungs: "propose"+"promote" (2026-05-31, ceremonies gone);
+#   "sync"+"revoke" (2026-06-01 — sync = pull-at-scale; revoke = an admin op).
 
 # Relay-law exception: pull does NOT imply read
 pull-implies-read = false
@@ -165,7 +162,7 @@ kind    = "manaoio-at-least"
 type    = "integer Level [0–20]"
 note    = """
   Community-weighted believability. Distinct from confidence (operator-set).
-  Three separate thresholds: read / propose / promote.
+  Three separate thresholds: read / edit / admin.
   Default: 0 / 12 / 16.
 """
 ```

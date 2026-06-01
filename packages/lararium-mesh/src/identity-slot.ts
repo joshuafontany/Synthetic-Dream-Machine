@@ -67,7 +67,7 @@ export interface IdentitySlot {
    * Called from Automerge Repo's sharePolicy.
    * Returns true if the vessel should be allowed to sync docUrl.
    */
-  verifyCapability(docUrl: string, ability: "read" | "write"): Promise<boolean>;
+  verifyCapability(docUrl: string, ability: "read" | "edit"): Promise<boolean>;
 
   /**
    * Issue a capability token delegating access to docUrl to another vessel DID.
@@ -76,7 +76,7 @@ export interface IdentitySlot {
   delegateCapability(
     docUrl:     string,
     toDid:      string,
-    ability:    "read" | "write",
+    ability:    "read" | "edit",
     expiresIn?: number,  // seconds; undefined = no expiry
   ): Promise<CapabilityToken>;
 
@@ -123,12 +123,12 @@ export class OpenIdentitySlot implements IdentitySlot {
     }
   }
 
-  async verifyCapability(_docUrl: string, _ability: "read" | "write"): Promise<boolean> {
+  async verifyCapability(_docUrl: string, _ability: "read" | "edit"): Promise<boolean> {
     return true; // alpha: open
   }
 
   async delegateCapability(
-    _docUrl: string, _toDid: string, _ability: "read" | "write",
+    _docUrl: string, _toDid: string, _ability: "read" | "edit",
   ): Promise<CapabilityToken> {
     return null; // alpha: no token required
   }

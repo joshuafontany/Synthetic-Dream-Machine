@@ -129,7 +129,7 @@ Operator directive: retire the ceremony completely; no un-pono language; no depr
 **Named pono-debt surfaced (not closed in this turn):**
 
 - `promotion-ceremony.ts` + `PROMOTION_RECEIPT_TAG` constant in `@lararium/mesh` — deep architectural surface that `causal-island.ts` references; retirement deferred to Sprint 5 (story S5.6).
-- `ABILITY_LADDER` in `causal-island.ts` includes `"promote"` as a capability level — Keyhive-shared concept; renaming requires Keyhive coordination. Mark as long-tail debt; ability semantic still holds even though the verb name shifts.
+- ~~`ABILITY_LADDER` in `causal-island.ts` includes `"promote"`~~ — RESOLVED 2026-06-01. The ladder collapsed to the 4 Keyhive-native verbs (`pull`/`read`/`edit`/`admin`); `promote`+`propose` (2026-05-31) and `sync`+`revoke` (2026-06-01) retired. The ladder is now Axis 1 (ACCESS) of the 3-axis authority model; see `lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands` + `alignment-layer`.
 - Worker tier-signal types in `the-lararium-hud.md` (line 454) still use `"promote"|"demote"` strings — describes a P.3 surface that hasn't fully landed; will harmonize with the ACTION verb register when Worker #1 ships.
 
 **Metrics:** mesh 213/213 (+33 from Sprint 4), tw5 73/73, node 64/64, browser 19/20 (1 pre-existing TW5-boot shim gap). Workspace 369/370. Typecheck 6/6 packages clean. Branch carries ~50 modified files across the four-sprint arc + cleanup; commit boundary remains operator's call.

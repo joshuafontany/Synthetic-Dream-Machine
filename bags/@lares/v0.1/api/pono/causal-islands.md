@@ -6,19 +6,20 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
 file-path = "bags/@lares/v0.1/api/pono/causal-islands.md"
 type  = "text/x-memetic-wikitext"
 register      = "CS"
-confidence    = 18
+confidence    = 15
 mana          = 18
-manao         = 17
-manaoio       = 17
+manao         = 16
+manaoio       = 15
 tagspace      = "stable"
-role          = "invariant law: causal island doctrine, MUST/MAY taxonomy, visibility gate, authority-first sync order, edge island lifecycle"
+role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 cacheable     = true
 retain        = true
 invariant     = true
-status-date   = "2026-04-30"
+status-date   = "2026-06-01"
 heleuma       = "ba"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
-body-sha256 = "f9ed8276003e50678b775c174d2c439b43fbd5591845473751b9076ee4c1ebf5"
+# body-sha256 dropped 2026-06-01 — body rewritten (linear ladder → 3-axis model);
+# recompute at canon-promote. confidence lowered 18→15 pending operator promote-confirm.
 ```
 
 
@@ -31,9 +32,55 @@ A causal island carries its own trigger surface, event horizon, and capability g
 The doctrine partitions cross-node causality (MUST) from within-node causality (MAY).
 Content MUST NOT precede authority — this invariant has no exceptions.
 
+**Authority has three structural axes plus one alignment plane** (refined 2026-06-01
+against Frazee, *Practical Decentralization*, and prior-art research across ATProto,
+SSB, Holochain, Nostr, IPFS, ActivityPub, and the local-first lineage). The earlier
+single linear ability-ladder fused into one rope what are really independent axes;
+this version separates them.
+
 <<~/ahu >>
 
 <<~&#x0002;>>
+
+<<~ ahu #model >>
+
+## The model — three axes + one plane
+
+| Dimension | Kind | What it answers | Where it lives |
+|---|---|---|---|
+| **Axis 1 — Access** | monotonic, cryptographic, per-bag | "may this principal pull / read / edit / admin this bag?" | this meme + Keyhive |
+| **Axis 2 — Scale** | monotonic, composition | "which membership ring is this?" | Keyhive group nesting |
+| **Axis 3 — Powers** | functional decomposition | "which faculty does this provider hold?" | separation-of-powers doctrine |
+| **Plane 0 — Alignment** | NON-monotonic, subjective | "do I *choose* to sync/relay/surface/vouch for this actor?" | [alignment-layer](alignment-layer.md) |
+
+**Axis 1 — Access.** Four levels, a 1:1 lexical mirror of Keyhive's native Access enum
+(`pull`, `read`, `edit`, `admin`). NOT a parallel Lararium-coined ladder — the live gate
+is `CapabilityVerifier.verify({ access: "read" | "admin" })`; the four-verb tuple gives
+the edge-island federation scaffolding a typed vocabulary for the same levels. The
+relay-law exception governs the bottom rung.
+
+**Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups:
+`Individual ⊂ PersonGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring
+forms a causal island with a **cryptographic membrane** — the Keyhive delegation chain
+IS the join-rule. "DreamNet" names no registry and no canonical graph; it is the emergent
+transitive closure of who-relays-to-whom under everyone's local stances.
+
+**Axis 3 — Powers.** The faculties of infrastructure are separable and each devolvable to
+a distinct provider: `host · relay · aggregate · address · moderate`. **Host-independent
+`lar:///` addressing is the lever** that makes them separable (a `lar:///` URI names content
+by identity, the resolver binds it to a doc at boot — no host appears in the address). The
+governing law, learned from ATProto's failures: **every power you separate but make
+expensive or central re-concentrates** (their PLC ledger, their single capital-intensive
+Appview, their shared rotation keys each re-grew the monopoly they meant to escape).
+
+**Plane 0 — Alignment.** Capability answers *"CAN this actor act?"* — monotonic, and a
+malicious actor can hold cryptographically valid capabilities. Alignment answers
+*"do I WANT to peer with this actor?"* — non-monotonic, subjective, reputation-rooted, and
+capability structurally cannot express it. Lives in its own invariant
+([alignment-layer.md](alignment-layer.md)); enforced by **withholding voluntary sync at the
+Beelay boundary**, never by reaching into another island's data. The "lemures" plane.
+
+<<~/ahu >>
 
 <<~ ahu #law >>
 
@@ -44,11 +91,22 @@ until the authority graph (Orichalcum capabilities, delegations, revocations) ha
 A relay that has not completed step 2 MUST NOT receive step 4 or later.
 A peer that has not completed step 3 MUST NOT request individual meme deltas.
 
-**Relay-law**: pull does NOT imply read. A shrine relay holds pull; it carries encrypted
-offerings it cannot decrypt or render. All other abilities imply every ability below them.
+**Relay-law** (Access axis, bottom rung): `pull` does NOT imply `read`. A shrine relay holds
+`pull`; it carries ENCRYPTED offerings it cannot decrypt or render. All other access levels
+imply every level below them. (We are strictly stronger than ATProto here: their relay reads
+a plaintext firehose; ours forwards ciphertext it cannot open — the correct boundary for a
+private mesh of households rather than a public broadcast medium.)
 
 **Visibility gate**: ALL six conditions must hold for a meme to federate across an edge island.
 Stage band is a UX annotation — NOT a gate condition.
+
+**Membrane law** (Scale axis): joining a ring requires a capability delegation from that ring's
+Keyhive group. The delegation chain is the join-rule; there is no central admission authority.
+
+**Alignment law** (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
+against a per-island root. No global consensus, no central registry, no global trust score.
+A valid-capability-holding lemure is refused by being **starved of voluntary peering**, never
+by a central ban. See [alignment-layer.md](alignment-layer.md).
 
 <<~/ahu >>
 
@@ -57,12 +115,29 @@ Stage band is a UX annotation — NOT a gate condition.
 ## Schema (machine-readable)
 
 ```toml
-# Ability ladder — ordered least to most privileged
-# EXCEPTION: pull does NOT imply read (relay-law)
-# All other abilities imply every ability below them
-ability-ladder = ["pull", "read", "sync", "write", "propose", "promote", "admin", "revoke"]
+# ── Axis 1 — ACCESS (per-bag, monotonic, Keyhive-native verbs) ──────────────
+# EXCEPTION: pull does NOT imply read (relay-law). Others imply every level below.
+access-axis       = ["pull", "read", "edit", "admin"]
 pull-implies-read = false
 implication-rule  = "ordered-except-pull"
+# retired rungs: "propose","promote" (2026-05-31); "sync","revoke" (2026-06-01)
+#   sync   = pull-at-infrastructure-scale (forward ciphertext) — a gate boolean, not a rung
+#   revoke = an ADMIN operation (roll the epoch) — carried by edge-island epoch + lifecycle
+
+# ── Axis 2 — SCALE (membership nesting; Keyhive group composition) ──────────
+scale-lattice = ["individual", "person-group", "cabal", "neighborhood", "city", "nexus", "dreamnet"]
+membrane-rule = "delegation-chain-is-the-join-rule"   # each ring = a causal island membrane
+
+# ── Axis 3 — POWERS (separable faculties; each devolvable to a distinct provider) ─
+powers       = ["host", "relay", "aggregate", "address", "moderate"]
+powers-lever = "lar-uri-host-independent-addressing"
+powers-law   = "every-separated-power-made-expensive-or-central-reconcentrates"
+
+# ── Plane 0 — ALIGNMENT (non-monotonic subjective trust; the lemures plane) ──
+# Primitives + full doctrine: lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer
+alignment-primitives   = ["peer-stance", "vouch", "label"]
+alignment-enforcement  = "withhold-voluntary-sync-at-beelay-boundary"
+alignment-evaluation   = "local-per-island-root"   # NEVER global consensus / registry / score
 
 # Ratings eligible to federate — noise and data are node-local only
 federable-ratings = ["meme", "ano", "kapu"]
@@ -94,10 +169,10 @@ edge-island-lifecycle = ["boot-receipt", "live-tail", "sediment", "revoked"]
 causal-island-must = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
-  "canon-promotion-ceremony",
+  "cross-node-residency-action",          # ADD/MOVE/COPY across a federation edge
   "revocation-epoch-change",
   "encrypted-sync-membership-change",
-  "live-hostful-record-proposing-hostless-canon-mutation",
+  "alignment-stance-federation",          # a peer-stance/vouch crossing an edge island
 ]
 
 # Causal island MAY doctrine
@@ -121,7 +196,7 @@ conditions = [
   "rating(meme) >= meme",
   "manaoio(meme) >= room.minManaoio",
   "recipe(room).matches(meme)",
-  "hasAbility(subject, sync, edge.id)",
+  "subjectCanSync(subject, edge.id)",      # holds pull on the edge (forward ciphertext)
   "!edge.revoked",
   "!violatesKapu(meme, subject)",
 ]
@@ -134,16 +209,14 @@ conditions = [
 ## Source (TypeScript — compiled-in)
 
 ```typescript
+// Axis 1 — ACCESS: Keyhive-native verbs (Pull/Read/Edit/Admin). Use `edit`, not `write`.
 export const ABILITY_LADDER = [
-  "pull",     // retrieve encrypted bytes and forward; cannot decrypt or render
-  "read",     // decrypt and render semantic content
-  "sync",     // participate in CRDT reconciliation
-  "write",    // produce accepted mutations
-  "propose",  // suggest hostful changes (pending; not yet hostless canon)
-  "promote",  // hostful → hostless canon-promotion ceremony
-  "admin",    // manage room, recipe, edge island membership
-  "revoke",   // roll epoch; terminate future live tail for a principal
+  "pull",     // forward encrypted bytes; cannot decrypt or render (Keyhive Pull)
+  "read",     // decrypt and render semantic content (Keyhive Read)
+  "edit",     // produce accepted mutations (Keyhive Edit)
+  "admin",    // manage membership, recipe, epoch/revocation, residency actions (Keyhive Admin)
 ] as const;
+// EXCEPTION (relay-law): pull does NOT imply read. All other levels imply those below.
 
 export const AUTHORITY_FIRST_ORDER = [
   "authenticate-peer",         // 1
@@ -159,29 +232,25 @@ export const AUTHORITY_FIRST_ORDER = [
 export const CAUSAL_ISLAND_MUST = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
-  "canon-promotion-ceremony",
+  "cross-node-residency-action",
   "revocation-epoch-change",
   "encrypted-sync-membership-change",
-  "live-hostful-record-proposing-hostless-canon-mutation",
+  "alignment-stance-federation",
 ] as const;
 
 export const CAUSAL_ISLAND_MAY = [
-  "room",
-  "meme",
-  "sigil",
-  "kumu-instance",
-  "kahea-invocation",
-  "local-room-projection",
-  "long-lived-runtime-actor",
-  "automerge-realm",
-  "peer-sync-state",
+  "room", "meme", "sigil", "kumu-instance", "kahea-invocation",
+  "local-room-projection", "long-lived-runtime-actor",
+  "automerge-realm", "peer-sync-state",
 ] as const;
 
+// Edge-island federation scaffolding (Tier 3 node-to-node boundary) is retained
+// even ahead of live consumers — it is the cross-ring sync protocol for Axis 2.
 export function visibilityGate(input: VisibilityGateInput): boolean {
   if (!FEDERABLE_RATINGS.has(input.memeRating.toLowerCase())) return false;
-  if (input.memeManaoio < input.roomMinManaoio)                return false;
+  if (input.memeManaoio < input.wikiMinManaoio)                return false;
   if (!input.recipeMatches)                                    return false;
-  if (!input.subjectCanSync)                                   return false;
+  if (!input.subjectCanSync)                                   return false;  // holds pull on edge
   if (input.edgeRevoked)                                       return false;
   if (input.violatesKapu)                                      return false;
   return true;
@@ -190,11 +259,35 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 
 <<~/ahu >>
 
+<<~ ahu #reject >>
+
+## Reject-list — the re-concentration traps
+
+Named so the stack never grows them (each re-created the power problem its source protocol
+meant to escape):
+
+- ✗ **Central identity ledger** (ATProto's `did:plc`). Resolve identity *within the island*
+  via Keyhive + Automerge causal history. `did:web`-style domain identity is acceptable ONLY
+  as an optional bridge at the external Kowloon web2.5 boundary.
+- ✗ **Public plaintext firehose as backbone.** Propagate encrypted, capability-gated
+  change-sets. A firehose is fine *inside* a consenting cabal; it terminates at the island boundary.
+- ✗ **Capital-intensive single global index** (ATProto's Appview monopoly). We hold no
+  whole-network index to monopolize — reads project per-VM from locally-resident bags
+  (residency model: pinned/hot/cold). Keep aggregation a swappable edge view over data the
+  aggregator may sync but not read.
+- ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
+  capabilities — never a shared master key over a ring's members.
+- ✗ **Global blocklists / global trust scores** (EigenTrust-style). Sybil-vulnerable without
+  costly identity, and they imply a global "now" we do not have. Trust roots are plural and chosen.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:extends >>
 <<~ pranala #to-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:implements >>
+<<~ pranala #to-alignment-layer ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer family:control role:extends >>
 
 <<~/ahu >>
 

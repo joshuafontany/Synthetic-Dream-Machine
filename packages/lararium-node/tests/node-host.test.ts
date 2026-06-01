@@ -89,14 +89,14 @@ describe("parseHostfulLarUri", () => {
 // ---------------------------------------------------------------------------
 
 describe("Node-vessel causal island capabilities", () => {
-  test("node vessel holds write capability via admin (can gate residency actions)", () => {
+  test("node vessel holds edit capability via admin (can gate residency actions)", () => {
     // The node vessel needs admin to gate residency-model ACTION verbs;
-    // admin implies write so the same cap covers content mutation.
-    expect(abilityImplies("admin", "write")).toBe(true);
+    // admin implies edit (Keyhive Edit) so the same cap covers content mutation.
+    expect(abilityImplies("admin", "edit")).toBe(true);
   });
 
-  test("read does NOT imply write (content gates write separately)", () => {
-    expect(abilityImplies("read", "write")).toBe(false);
+  test("read does NOT imply edit (content gates edit separately)", () => {
+    expect(abilityImplies("read", "edit")).toBe(false);
   });
 
   test("relay (pull) cannot read room content (causal island boundary law)", () => {

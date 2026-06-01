@@ -337,7 +337,7 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     expect(texts).toEqual(["v3"]);
   });
 
-  test("explicit bag field routes ceremony write to canonical bag (promote path)", async () => {
+  test("explicit bag field routes ceremony write to canonical bag (MOVE path)", async () => {
     const bags: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };

@@ -35,9 +35,9 @@ parentPort.on("message", (msg) => {
       wikiUri,
       listenable: "OnActivated",
       payload: {
-        uri:      "lar:///test/instances/promote-button-1",
+        uri:      "lar:///test/instances/move-button-1",
         verb:     "echo-verb",
-        fromUri:  "lar:///test/instances/promote-button-1",
+        fromUri:  "lar:///test/instances/move-button-1",
       },
     });
 

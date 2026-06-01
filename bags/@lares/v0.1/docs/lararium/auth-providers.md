@@ -49,7 +49,7 @@ auth-abilities = [
   "room/write",
   "corpus/read",
   "corpus/write",
-  "canon/promote",
+  "canon/move",
   "admin",
 ]
 

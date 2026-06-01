@@ -458,7 +458,7 @@ WHERE (path) → HOW (query) → SECTION (fragment).
 
 **Relay-law:** pull does NOT imply read. A shrine relay holds pull; it carries encrypted offerings it cannot decrypt or render.
 
-**Ability ladder** (least → most privileged): `pull → read → sync → write → propose → promote → admin → revoke`. EXCEPTION: pull does NOT imply read. All other abilities imply every ability below them.
+**Access axis** (Axis 1, least → most privileged): `pull → read → edit → admin` — a 1:1 mirror of Keyhive's native Access verbs. EXCEPTION: pull does NOT imply read (relay-law). All other levels imply every level below them. (Retired rungs: `propose`/`promote` 2026-05-31; `sync`/`revoke` 2026-06-01 — sync = pull-at-scale, revoke = an admin op. Scale, powers, and the alignment plane are the other dimensions — see `lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands`.)
 
 **Scale ladder:**
 - **Lararium** --- one operator's infrastructure (lararium-node + browser peers + devices).

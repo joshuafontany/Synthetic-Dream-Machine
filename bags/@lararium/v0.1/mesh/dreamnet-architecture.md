@@ -140,11 +140,12 @@ live command crosses the DreamNet layer from the Cabal to any operator.
 
 ## Capability Layer Across the Topology
 
-The ABILITY_LADDER governs all cross-vessel capability claims regardless of which
-layer the actors occupy:
+The ABILITY_LADDER (Axis 1 — ACCESS) governs all cross-vessel capability claims
+regardless of which layer the actors occupy. Its verbs are a 1:1 mirror of Keyhive's
+native Access enum:
 
 ```text
-pull → read → sync → write → propose → promote → admin → revoke
+pull → read → edit → admin          (Keyhive-native)
 ```
 
 Each rung names what an actor may do to a specific Keyhive bag doc. The same ladder

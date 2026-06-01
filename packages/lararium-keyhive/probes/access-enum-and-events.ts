@@ -16,7 +16,7 @@ console.log("[probe] === A: Access string enumeration ===");
 // Try every plausible UCAN-style + filesystem-style + role-style ability string.
 const candidates = [
   // UCAN/our ABILITY_LADDER
-  "pull", "read", "sync", "write", "propose", "promote", "admin", "revoke",
+  "pull", "read", "sync", "write", "propose", "move", "admin", "revoke",
   // Filesystem-style
   "none", "r", "rw", "rwx", "owner",
   // Role-style

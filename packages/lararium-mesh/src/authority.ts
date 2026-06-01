@@ -25,7 +25,7 @@
  *   Catalog policy maps that identity to wikis, corpora, recipes, and actions.
  *   Automerge doc URLs locate data; they do not grant authority.
  *   Sync sharePolicy asks whether a vessel presents an accepted authority
- *   receipt. Later policy checks decide read/write/promote/admin.
+ *   receipt. Later policy checks decide read/write/move/admin.
  *
  * The old UCAN/did:key peer gate has been removed rather than half-kept. If
  * capability chains return later, they should wrap these provider sessions,
@@ -49,7 +49,7 @@ export type LarAuthAbility =
   | "wiki/write"
   | "corpus/read"
   | "corpus/write"
-  | "canon/promote"
+  | "canon/move"
   | "admin";
 
 export interface LarAuthScope {
