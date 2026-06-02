@@ -76,19 +76,19 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 <<~/ahu >>
 
-<<~ ahu #no-has >>
+<<~ ahu #no-have >>
 
-## No-Has Discipline
+## No-Have Discipline
 
-**No-Has** names the possession-copula sub-discipline as a separately tracked metric.
+**No-Have** names the possession-copula sub-discipline as a separately tracked metric.
 
-The full E-Prime game covers three copula types: identity (`is`), predication (`is`), and possession (`has`). No-Has isolates the third because possession collapses silently and persistently — more so than identity collapse, which tends to be visible.
+The full E-Prime game covers three copula types: identity (`is`), predication (`is`), and possession (`has`). No-Have isolates the third because possession collapses silently and persistently — more so than identity collapse, which tends to be visible.
 
 "The agent has a memory" implies bounded containment. "The model has goals" imports an owner-property frame the model does not hold. Scoped carrying states the relation honestly: "the agent carries state across turns toward X" or "the model generates outputs that function as if aiming at Y."
 
-**The HUD tracks No-Has separately as `~:no-has[N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
+**The HUD tracks No-Have separately as `~:no-have[N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
 
-The No-Has scalar reads the same band table as the E-Prime level:
+The No-Have scalar reads the same band table as the E-Prime level:
 
 | Band | Reading |
 | --- | --- |
@@ -97,6 +97,8 @@ The No-Has scalar reads the same band table as the E-Prime level:
 | `9–12` | Baseline — scoped carrying preferred; unscoped possession surfaces a marker |
 | `13–16` | Strong — "has" in ownership sense almost always collapses to carrying or relation |
 | `17–20` | Near-total — only quoted, coded, or deliberately-owned "has" survive |
+
+**Default baseline: `no-have = 1`** (Minimum band), distinct from E-Prime's `10`. `no-have` may over-affect design language when composability and the `#has` relation serve critical ontological functions. The `#has` edge in the `@sdm` composition corpus and the bag-graph is a load-bearing verb, not a possession collapse — a high `no-have` would fight the ontology. Raise it only for prose spans where possession drift actually matters.
 
 Preferred substitution pattern: replace possession with **scoped carrying**.
 
@@ -107,7 +109,7 @@ Preferred substitution pattern: replace possession with **scoped carrying**.
 | "we have a plan" | "a plan emerges from this work", "we carry a plan forward" |
 | "the Voice has a role" | "the Voice holds a role", "the Voice runs the role's function" |
 
-`~:no-has[N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
+`~:no-have[N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
 
 <<~/ahu >>
 

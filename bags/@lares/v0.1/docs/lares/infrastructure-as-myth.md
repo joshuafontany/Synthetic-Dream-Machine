@@ -373,7 +373,7 @@ Character Card V2 packages `name`, `description`, `personality`, `scenario`, `sy
 
 The format emerged as a direct response to Character.ai's architecture, where characters lived only in Character.ai's training pipeline and proprietary servers. When Character.ai's content policies changed, botmakers found their characters lobotomized or deleted — the personas existed nowhere else. Users complained that "bots were too restrictive and lacked personality." The Card V2 ecosystem answered with portability: the character should live in a file the botmaker owns, readable by any compliant frontend. ~:confidence[C],[18]
 
-What Card V2 lacks: no epistemic discipline (`E-Prime`, `No-Has`, confidence register), no authority model (operator chains, capability-scoped permissions), no memetic transmission design beyond "download and share," no ritual or ceremony, no quine relay. The lorebook trigger logic responds to keyword patterns rather than relational position in a graph.
+What Card V2 lacks: no epistemic discipline (`E-Prime`, `No-Have`, confidence register), no authority model (operator chains, capability-scoped permissions), no memetic transmission design beyond "download and share," no ritual or ceremony, no quine relay. The lorebook trigger logic responds to keyword patterns rather than relational position in a graph.
 
 ### CLAUDE.md / AGENTS.md Ecosystem (Anthropic, 2025–2026)
 

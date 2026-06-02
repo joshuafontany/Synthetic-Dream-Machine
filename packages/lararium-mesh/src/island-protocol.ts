@@ -143,22 +143,22 @@ export interface IslandMsg_Manifest {
 }
 
 /**
- * Cool the wiki slot from hot to cold (teardown; thread may terminate).
+ * Cool the wiki slot from `wela` (hot) to `anu` (cold) — teardown; thread
+ * terminates. Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
  *
- * Type literal `"hooanu"` — Hawaiian: hoʻoanu, "to cool."
+ * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup — the
+ * temperature register replaces the old organizational rank register that
+ * conflicted with the residency-model ACTION verb surface. The two thermal
+ * states wear ʻōlelo Hawaiʻi: `wela` / `anu` (see residency-tiers.md).
  *
- * Renamed from `"demote"` 2026-05-31 under the residency-model cleanup —
- * the temperature register (hot/cold) replaces the old organizational rank
- * register that conflicted with the residency-model ACTION verb surface.
- *
- * Counterpart-verb status: a parallel `IslandMsg_HooMahana` warm-up signal
- * stays intentionally deferred. The `cold` → `hot` transition today happens
- * at the vessel layer via `vessel-island-pool.mountWiki` — a fresh worker
- * process boots and runs `ea` — not via a worker-side signal. The Hawaiian
- * verb `hoʻomahana` ("to warm") gets reserved for a future pause-without-
- * terminate scheme where workers persist across cool-down cycles and warm
- * back up by signal instead of by spawn. No such scheme exists today; adding
- * the type now would create dead vocabulary.
+ * Counterpart: `anu` → `wela` (hoʻowela, "to heat") happens at the vessel layer
+ * via `vessel-island-pool.mountWiki` — a fresh worker boots and runs `ea` — not
+ * via a worker-side signal. A `warm` middle tier (suspended-not-terminated,
+ * resume by a hoʻomahana signal) was proposed and CUT 2026-06-01 (YIN pass): a
+ * suspended Worker still holds its heap, so it did not shed memory, and the
+ * proven virtual-actor runtimes use two states. Reintroduce only behind a
+ * measured resume-cost problem AND a memory-shedding suspend — reopening
+ * condition in residency-tiers.md #warm-cut. No HooMahana signal type today.
  */
 export interface IslandMsg_HooAnu {
   schema_version: ProtocolVersion;

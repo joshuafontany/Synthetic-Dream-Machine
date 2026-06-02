@@ -65,19 +65,14 @@ export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbRe
   return async () => {
     const stats = opts.residency.stats();
     return {
-      pinned:    [...stats.pinned],
-      hot:       stats.hot.map((e) => ({
+      pinned:   [...stats.pinned],
+      wela:     stats.wela.map((e) => ({
         url:         e.url,
         lastTouched: e.lastTouched,
         ...(e.syncActive !== undefined && { syncActive: e.syncActive }),
       })),
-      warm:      stats.warm.map((e) => ({
-        url:         e.url,
-        lastTouched: e.lastTouched,
-        ...(e.syncActive !== undefined && { syncActive: e.syncActive }),
-      })),
-      coldCount: stats.coldCount,
-      hotCap:    stats.hotCap,
+      anuCount: stats.anuCount,
+      hotCap:   stats.hotCap,
     };
   };
 }

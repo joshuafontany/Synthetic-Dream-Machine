@@ -24,6 +24,12 @@ role      = "epic plan: SDM+ Powers as navigable composition space"
 
 # Epic — Powers Composition Rewrite
 
+> **⏸ DEFERRED (2026-06-01).** All further Power-sprint work (Sprint 4 — Hard
+> Cases, Sprint 5 — Polish + Gate, and the bulk conversion behind it) is **on
+> hold** while the lararium does a YIN / cleanup pass on the OODA-HA + HUD layer.
+> Sprints 0–3 stand complete and committed; the composition model and the
+> module-nesting doctrine (D6) hold. Resume here once the OODA-HA cleanup lands.
+
 <<~ ahu #vision >>
 ## Vision
 
@@ -736,12 +742,15 @@ relationship to the mounted pattern. This remains speculative.
 <<~ ahu #meme-edges >>
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.0/witness/powers/handoff-archive >>
-<<~ loulou lar:///ha.ka.ba/@sdm/v0.0/api/power >>
+**`@sdm/v0.0` deleted 2026-06-01** — the prototype archive was completely
+superseded by v0.1 (three proof Powers migrated; the inheritance/`#implements`
+spine replaced by flat `#has`). The full record of what v0.0 held and why it
+retired lives in the transition witness; the files themselves remain in git
+history if ever needed.
 
-<<~ pranala #retires ? -> lar:///ha.ka.ba/@sdm/v0.0/interfaces/power family:lifecycle role:retires >>
-<<~ pranala #retires ? -> lar:///ha.ka.ba/@sdm/v0.0/templates/api/power family:lifecycle role:retires >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.0/witness/powers/handoff-archive family:provenance role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/architecture/v0.0-transition >>
+
+<<~ pranala #retires ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/architecture/v0.0-transition family:lifecycle role:retires >>
 
 <<~/ahu >>
 

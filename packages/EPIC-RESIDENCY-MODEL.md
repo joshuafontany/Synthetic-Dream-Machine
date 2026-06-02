@@ -308,26 +308,30 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 ---
 
-### Sprint 11 — Residency Tier Unification (Thermal + Pin + Warm Build)
+### Sprint 11 — Residency Tier Unification (Two-State ʻŌlelo + Pin)
 
-**Goal:** Collapse residency into ONE island-owned model and build the warm tier. Operator rulings 2026-06-01: (1) thermal axis `hot/warm/cold` + orthogonal pin-flag (pinned is NOT a temperature); (2) **build warm now** (pause-without-terminate); (3) **collapse bag residency into the Island Pool / causal-island code** — "bag" stays a TW5 term, but the residency *methods* move out of the side-file `bag-residency.ts` (which predates the causal-islands model) into the causal-island code.
+**Goal:** Collapse residency into ONE island-owned model. Operator rulings 2026-06-01: (1) thermal axis + orthogonal pin-flag (pinned is NOT a temperature); (2) **collapse bag residency into the causal-island code** — "bag" stays a TW5 term, but the residency *methods* move out of the side-file `bag-residency.ts` (predates the causal-islands model) into the causal-island code; (3) **warm tier CUT** (see below) — the model is **two states in ʻōlelo Hawaiʻi: `wela` (hot) / `anu` (cold)**.
 
-**Canon (landed 2026-06-01):** [bags/@lares/v0.1/api/lararium/residency-tiers.md](../bags/@lares/v0.1/api/lararium/residency-tiers.md) — load-bearing invariant. causal-islands.md + the-lararium-hud.md reconciled to it.
+**Warm cut (YIN, 2026-06-01):** "build warm now" was reversed the same day after an adversarial + kupono + YIN research pass. A suspended Worker still holds its heap (warm sheds CPU, not the memory the model bounds); the proven virtual-actor runtimes (Orleans/Akka/Dapr) use two states; warm was built ahead of any measured need. Reopening condition lives in residency-tiers.md #warm-cut (measured resume-cost problem AND a memory-shedding suspend).
 
-**Why this re-sequences S7:** S7.5 binding-resolution waited on a boot reorder (admin-VM-first) so the delegate-verb seam is live before any wiki mount. That reorder + "mount primary via the unified `mountWiki` path with `pinned: true`" land HERE as platform work; S7.5/7.6/7.7 then resume on the reordered boot.
+**Canon (landed + revised 2026-06-01):** [bags/@lares/v0.1/api/lararium/residency-tiers.md](../bags/@lares/v0.1/api/lararium/residency-tiers.md) — load-bearing invariant. causal-islands.md + the-lararium-hud.md + island-protocol.ts reconciled to wela/anu.
+
+**Why this re-sequences S7:** S7.5 binding-resolution waits on a boot reorder (admin-VM-first) so the delegate-verb seam is live before any wiki mount. That reorder (S11.5) lands as platform work; S7.5/7.6/7.7 resume on it.
 
 **Stories:**
 
-- [ ] **S11.1** — Relocate residency methods (pin/unpin/hydrate/cool/handle-drop/`ChunkStore`) from `lararium-mesh/src/bag-residency.ts` into the causal-island code: model + contracts in `causal-island.ts`; Worker-lifecycle mechanism in `lararium-node/src/vessel-island-pool.ts`. Retire the standalone side-file's tier authority. Keep "bag" as the TW5 layer term throughout. One node cap (Island Pool hot/warm budget); no independent bag LRU.
-- [ ] **S11.2** — Pin becomes an orthogonal boolean flag, not a `SlotTier`/`ResidencyTier` peer. Type shape: `tier: "hot" | "warm" | "cold"` + `pinned: boolean`. Admin / active wiki / Session Wiki = pinned-hot. Pin state persists as admin-doc tiddlers (existing surface; no RPC).
-- [ ] **S11.3** — Build the warm tier: `IslandMsg_HooMahana` worker signal + Worker suspend-without-terminate lifecycle (engine pauses, handles retained, reactions quiesced) + a `warm` slot budget between hot and cold. Lift the "dead vocabulary" reservation in `island-protocol.ts`.
-- [ ] **S11.4** — Derived bag residency: a bag's tier = warmest tier among islands whose recipes reference it. Handle-drop on island cool MUST check `syncActive` (don't drop mid-replication) and shared-reference (don't drop a bag a pinned/hot island still holds). Preserve stub-on-oracle-traversal (lazy hydration).
-- [ ] **S11.5** — Boot reorder in `open-node-vessel.ts`: `await adminVm.workerEa` before the primary wiki mount; mount primary via the unified `_mountWorker`/`mountWiki` path with `pinned: true` (no special `mountPrimaryWorker` temperature). Unblocks S7.5's delegate-verb-seam resolution.
-- [ ] **S11.6** — Tests: thermal transitions (hot↔warm↔cold), pin-flag exemption from cooling, warm resume-by-signal vs cold resume-by-spawn, derived bag residency (shared bag stays hot while any pinned/hot island references it), syncActive guard blocks handle-drop.
+- [x] **S11.1** — Relocate residency surface from `bag-residency.ts` → `causal-island.ts`; side-file deleted; mesh index repointed. "bag" stays the TW5 layer term. *(commit 58e2281c)*
+- [x] **S11.2** — Two-state thermal axis `ResidencyTemperature = "wela" | "anu"` + orthogonal `pinned` flag (`isPinned()`); single-map manager; `cool()` (hoʻoanu) with TOCTOU `evicting`-flag guard; single-stage idle sweep; cap bounds unpinned-wela; consumers propagated. *(landed; warm member cut in the YIN pass)*
+- [x] **S11.3** — ~~Build warm tier~~ **CUT (YIN).** No `IslandMsg_HooMahana`, no suspend-without-terminate. Reopening condition in residency-tiers.md #warm-cut.
+- [x] **S11.4** (model) — `deriveBagTemperature()` reachability rule (any `wela` referencing island → `wela`, else `anu`). *(landed)*
+- [ ] **S11.5** — Boot reorder in `open-node-vessel.ts`: `await adminVm.workerEa` before the primary wiki mount; mount primary via the unified `_mountWorker`/`mountWiki` path with `pinned: true`. Reshape the pool's own `SlotTier` to `wela|anu` + pin flag. Unblocks S7.5. *(open)*
+- [x] **S11.6** — Residency test suite (was ZERO coverage): 21 tests incl. a TOCTOU regression. mesh 215→236. *(landed)*
 
-**Exit criteria:** one residency model owned by the Island Pool; `bag-residency.ts` side-file authority retired (methods homed in causal-island code); warm tier live (suspend/resume by signal); pin orthogonal; boot reordered admin-first. Then S7.5 resumes.
+**Deferred refinement (adversarial finding):** the sweeper is pure-age LRU (not scan-resistant). Add a second-chance reference bit (CLOCK/SIEVE) if a scan-pollution problem appears. Also: when derived-residency wiring lands, a bag held `wela` by a *pinned* island must not count against the cap (cap-arithmetic correctness).
 
-**Dependency note:** S11.5 (boot reorder) is the prerequisite the S7.5/7.6/7.7 stories were blocked on. Run S11 before completing S7.
+**Exit criteria:** one residency model owned by the Island Pool; `bag-residency.ts` retired (methods homed in causal-island code); two-state wela/anu + orthogonal pin; boot reordered admin-first (S11.5 open). Then S7.5 resumes.
+
+**Dependency note:** S11.5 (boot reorder) is the prerequisite the S7.5/7.6/7.7 stories were blocked on.
 
 ---
 
@@ -345,8 +349,8 @@ S1 ✅ (memetic intent + reconciliation)
 
 S9  (doc meme sweep) — can run in parallel with S5+ (touch different files)
 S10 (test golden regeneration) — waits for S5 to settle behavior
-S11 (residency tier unification: thermal+pin+warm, bag-residency collapse)
-     — canon landed; build re-sequences S7 (S11.5 boot reorder is S7.5's prerequisite)
+S11 (residency tier unification: two-state wela/anu + pin, bag-residency collapse;
+     warm CUT) — S11.1/2/4/6 ✅ landed; S11.5 boot reorder open (S7.5's prerequisite)
 ```
 
 ---

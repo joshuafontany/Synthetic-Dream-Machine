@@ -411,59 +411,55 @@ export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 // Residency model — relocated from bag-residency.ts on 2026-06-01 (EPIC S11.1).
 //
 // Operator ruling: the causal-island code hosts residency; the standalone
-// side-file (older than the causal-islands model) is retired. The thermal+pin
-// reshape (hot/warm/cold + orthogonal pin-flag) lands in S11.2; this block is a
-// behavior-preserving move.
+// side-file (older than the causal-islands model) is retired. Model: a two-state
+// thermal axis in ʻōlelo Hawaiʻi — wela (hot) / anu (cold) — plus an orthogonal
+// pin flag. The `warm` middle tier was cut (YIN pass, 2026-06-01).
 //
-// NOTE: 'ResidencyTier' here is the RESIDENCY tier (pinned/hot/cold), DISTINCT
-// from the ontological causal-island Tier 0-3 in this file's header doctrine.
+// NOTE: this RESIDENCY temperature (wela/anu) is DISTINCT from the ontological
+// causal-island Tier 0-3 in this file's header doctrine.
 // Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers
 // ===========================================================================
 /** A bag's URL — Automerge doc URL, e.g. "automerge:abc123…". */
 export type BagUrl = string;
 
 /**
- * Residency TEMPERATURE of a single bag — the thermal axis (S11.2 reshape).
+ * Residency TEMPERATURE of an island/bag — the thermal axis, in ʻōlelo Hawaiʻi.
  *
  * Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers
  *
- *   hot   — live + reacting; handle in cache.
- *   warm  — quiesced but handle RETAINED; cheap re-warm by signal (no spawn).
- *   cold  — handle dropped; URL known, doc not loaded; re-warm by spawn + `ea`.
+ *   wela ("hot")  — live + reacting; handle in cache; the island's Worker runs.
+ *   anu  ("cold") — torn down; URL known, doc not loaded; resume by spawn + `ea`.
+ *
+ * TWO states only. The `warm` (mahana) middle tier was CUT 2026-06-01 — a YIN
+ * pass (adversarial + kupono research + the Orleans/Akka two-state virtual-actor
+ * precedent) found that a suspended Worker still holds its heap, so warm did NOT
+ * shed the memory this model exists to bound, and it had no actor-system
+ * precedent. Reintroduce only behind a measured resume-cost problem AND a real
+ * memory-shedding suspend (isolate evicted, handle-cache retained).
  *
  * `pinned` is NOT a temperature — it is an ORTHOGONAL flag ("exempt from
- * cooling"). See `isPinned()`. A pinned bag still has a temperature (hot).
+ * cooling"), kupono-aligned with Orleans `[KeepAlive]` / Android foreground.
+ * See `isPinned()`. A pinned bag is wela and stays wela.
  *
  * Transition VERBS wear Hawaiian (the-lararium-hud.md doctrine):
- *   - `hoʻoanu` ("to cool") — hot → warm → cold. `IslandMsg_HooAnu` drives the
- *     island side; `cool()` drives this bookkeeping side.
- *   - `hoʻomahana` ("to warm") — cold → warm → hot. `touch()` warms a bag back;
- *     the `IslandMsg_HooMahana` worker signal (S11.3) wires the
- *     pause-without-terminate resume mechanism.
+ *   - `hoʻoanu`  ("to cool") — wela → anu. `IslandMsg_HooAnu` drives the island
+ *     side; `cool()` drives this bookkeeping side.
+ *   - `hoʻowela` ("to heat") — anu → wela. `touch()` heats a bag back to live;
+ *     resume re-acquires the handle via repo.find() + the island `ea` handshake.
  */
-export type ResidencyTemperature = "hot" | "warm" | "cold";
+export type ResidencyTemperature = "wela" | "anu";
 
 /**
- * A bag's residency derives from the islands whose recipes reference it:
- * the **warmest** referencing island wins (hot > warm > cold). No referencing
- * island → cold. This is the collapse rule (EPIC S11.4): bags do not carry an
- * independent tier; their temperature is computed from island residency.
+ * A bag's residency derives from the islands whose recipes reference it: if ANY
+ * referencing island is `wela`, the bag is `wela`; otherwise `anu`. No
+ * referencing island → anu. The collapse rule (EPIC S11.4) — bags carry no
+ * independent tier; their temperature is reachability from a live island root.
  */
 export function deriveBagTemperature(
   islandTemps: readonly ResidencyTemperature[],
 ): ResidencyTemperature {
-  if (islandTemps.includes("hot"))  return "hot";
-  if (islandTemps.includes("warm")) return "warm";
-  return "cold";
+  return islandTemps.includes("wela") ? "wela" : "anu";
 }
-
-/**
- * @deprecated Pre-collapse tier vocabulary (`pinned`/`hot`/`cold`). The model
- * split into an orthogonal temperature axis + pin flag on 2026-06-01. New code
- * uses `ResidencyTemperature` + `isPinned()`. Retained only as a transitional
- * type alias; remove once no external reference remains.
- */
-export type ResidencyTier = ResidencyTemperature | "pinned";
 
 /**
  * ChunkStore — storage abstraction shaped to match Beelay's Sedimentree
@@ -487,7 +483,7 @@ export interface ChunkStore {
 /** Snapshot of one bag's residency record. */
 export interface BagResidencyEntry {
   readonly url:          BagUrl;
-  readonly temperature:  ResidencyTemperature;
+  readonly temperature:  ResidencyTemperature;   // "wela" | "anu"
   readonly pinned:       boolean;  // orthogonal flag — exempt from cooling
   readonly lastTouched:  number;   // ms epoch
   readonly pinReason?:   string;   // operator-supplied or system pin reason
@@ -496,32 +492,27 @@ export interface BagResidencyEntry {
 
 /** Stats summary for `lares residency` instrumentation. */
 export interface BagResidencyStats {
-  readonly pinned:    readonly BagUrl[];
-  readonly hot:       readonly BagResidencyEntry[];
-  readonly warm:      readonly BagResidencyEntry[];
-  readonly coldCount: number;
-  readonly hotCap:    number;
+  readonly pinned:   readonly BagUrl[];
+  readonly wela:     readonly BagResidencyEntry[];   // unpinned live (hot) entries
+  readonly anuCount: number;                         // cold (URL known, unloaded)
+  readonly hotCap:   number;                         // cap on unpinned-wela residents
 }
 
 export interface BagResidencyManagerOptions {
-  /** Soft cap on RESIDENT (hot + warm) bag count. Default 32. Pinned bags are
+  /** Soft cap on unpinned-wela (live) bag count. Default 32. Pinned bags are
    *  exempt and do not count against the cap. */
   readonly hotCap?:     number;
-  /** Idle threshold in ms. Hot bags untouched longer than this cool to warm;
-   *  warm bags untouched longer than 2×idleMs cool to cold. Default 300_000. */
+  /** Idle threshold in ms. A wela bag untouched longer than this cools to anu.
+   *  Default 300_000 (5 minutes). */
   readonly idleMs?:     number;
   /** Sweeper tick interval in ms. Default 30_000 (30 seconds). */
   readonly sweepIntervalMs?: number;
-  /** Hook called when transitioning cold → hot (hoʻomahana warm-up). Wires
-   *  into Automerge's repo.find(). */
+  /** Hook called when heating anu → wela (hoʻowela). Wires into repo.find(). */
   readonly onHydrate?:  (url: BagUrl) => Promise<void>;
-  /** Hook called when transitioning to cold (hoʻoanu deep-cool). Compact-then-
-   *  drop; until automerge-repo#358 lands a public eviction API the actual
-   *  handle drop stays a TODO inside the hook impl. */
+  /** Hook called when cooling wela → anu (hoʻoanu). Compact-then-drop; until
+   *  automerge-repo#358 lands a public eviction API the actual handle drop
+   *  stays a TODO inside the hook impl. */
   readonly onEvict?:    (url: BagUrl) => Promise<void>;
-  /** Hook called when transitioning hot → warm (hoʻoanu quiesce). The handle is
-   *  RETAINED; S11.3 wires Worker suspend-without-terminate here. */
-  readonly onSuspend?:  (url: BagUrl) => Promise<void>;
 }
 
 /** Internal per-bag residency state (single-map model). */
@@ -531,6 +522,9 @@ interface ResidencyState {
   lastTouched: number;
   pinReason?:  string;
   syncActive?: boolean;
+  /** Transient: set while an async `onEvict` is in flight. A concurrent touch /
+   *  sync-start / pin clears it, which aborts the cool (TOCTOU guard). */
+  evicting?:   boolean;
 }
 
 /**
@@ -552,7 +546,6 @@ export class BagResidencyManager {
   private readonly sweepIntervalMs: number;
   private readonly onHydrate?:      (url: BagUrl) => Promise<void>;
   private readonly onEvict?:        (url: BagUrl) => Promise<void>;
-  private readonly onSuspend?:      (url: BagUrl) => Promise<void>;
   // ReturnType<typeof setInterval> resolves to DOM's `number` here because
   // @types/node isn't on the lararium-mesh type chain. The runtime value
   // is Node's Timeout. clearInterval accepts both; only Node has .unref().
@@ -565,13 +558,12 @@ export class BagResidencyManager {
     this.sweepIntervalMs = opts.sweepIntervalMs ?? 30_000;
     if (opts.onHydrate) this.onHydrate = opts.onHydrate;
     if (opts.onEvict)   this.onEvict   = opts.onEvict;
-    if (opts.onSuspend) this.onSuspend = opts.onSuspend;
   }
 
   private _ensure(url: BagUrl): ResidencyState {
     let s = this._bags.get(url);
     if (!s) {
-      s = { temperature: "cold", pinned: false, lastTouched: Date.now() };
+      s = { temperature: "anu", pinned: false, lastTouched: Date.now() };
       this._bags.set(url, s);
     }
     return s;
@@ -588,15 +580,15 @@ export class BagResidencyManager {
     };
   }
 
-  /** Pin a bag — exempt it from cooling (orthogonal flag). A cold bag warms
-   *  to hot (hydrate); a hot/warm bag stays resident and gains the flag. */
+  /** Pin a bag — exempt it from cooling (orthogonal flag). An anu bag heats to
+   *  wela (hydrate); a wela bag stays resident and gains the flag. */
   async pin(url: BagUrl, reason?: string): Promise<void> {
-    const wasCold = (this._bags.get(url)?.temperature ?? "cold") === "cold";
+    const wasCold = (this._bags.get(url)?.temperature ?? "anu") === "anu";
     const s = this._ensure(url);
     s.pinned = true;
     if (reason !== undefined) s.pinReason = reason;
     if (wasCold) {
-      s.temperature = "hot";
+      s.temperature = "wela";
       s.lastTouched = Date.now();
       if (this.onHydrate) await this.onHydrate(url);
     }
@@ -611,82 +603,83 @@ export class BagResidencyManager {
     delete s.pinReason;
   }
 
-  /** Note that a bag was just touched (read or write) — `hoʻomahana` to hot.
-   *  Warms cold/warm → hot via onHydrate (cold only); bumps lastTouched.
+  /** Note that a bag was just touched (read or write) — `hoʻowela` to wela.
+   *  Heats anu → wela via onHydrate (only when it was cold); bumps lastTouched.
    *  Triggers an LRU trim when adding pushes resident count past hotCap. */
   async touch(url: BagUrl): Promise<void> {
-    const wasCold = (this._bags.get(url)?.temperature ?? "cold") === "cold";
+    const wasCold = (this._bags.get(url)?.temperature ?? "anu") === "anu";
     const s = this._ensure(url);
     if (wasCold && this.onHydrate) await this.onHydrate(url);
-    s.temperature = "hot";
+    s.temperature = "wela";
     s.lastTouched = Date.now();
+    delete s.evicting;            // cancel any in-flight cool — bag is live again
     await this.enforceCap();
   }
 
   /** Register a URL we know about but haven't loaded. Oracle traversal calls
    *  this when it sees a `tiddler.text → automerge:URL` pointer for a bag not
-   *  already tracked. No-op if already known (never demotes a live bag). */
+   *  already tracked. No-op if already known (never cools a live bag). */
   registerCold(url: BagUrl): void {
     if (this._bags.has(url)) return;
-    this._bags.set(url, { temperature: "cold", pinned: false, lastTouched: Date.now() });
+    this._bags.set(url, { temperature: "anu", pinned: false, lastTouched: Date.now() });
   }
 
-  /** `hoʻoanu` — cool a bag toward `target`. Refuses pinned bags.
+  /** `hoʻoanu` — cool a wela bag to anu (compact-then-drop the handle).
+   *  Refuses pinned bags and bags mid-replication (automerge-repo#358).
    *
-   *  → warm: only from hot. Handle RETAINED; calls onSuspend (island quiesce).
-   *  → cold: from hot or warm. Refuses mid-sync (automerge-repo#358 invariant);
-   *          calls onEvict (compact-then-drop). Drops the handle.
-   *
-   *  Returns true when the temperature moved. */
-  async cool(url: BagUrl, target: "warm" | "cold"): Promise<boolean> {
+   *  TOCTOU guard: `onEvict` is async; a concurrent `touch` (hoʻowela), pin, or
+   *  sync-start may land during the await. We raise a transient `evicting` flag
+   *  before the await; touch/pin/setSyncActive clear it. If it was cleared (or
+   *  the bag began syncing / got pinned) we abort the drop — never clobber a
+   *  freshly-live bag (the llama.cpp `unload_lru` race). `onEvict` MUST be
+   *  idempotent: if a cool aborts after onEvict ran, the bag stays wela and the
+   *  next sweep retries. Returns true only when the bag actually moved to anu. */
+  async cool(url: BagUrl): Promise<boolean> {
     const s = this._bags.get(url);
-    if (!s || s.pinned) return false;
-    if (s.temperature === target) return false;
-    if (target === "cold") {
-      if (s.syncActive) return false;       // #358 — don't drop mid-replication
-      if (this.onEvict) await this.onEvict(url);
-      s.temperature = "cold";
-      delete s.syncActive;
-      return true;
+    if (!s || s.pinned || s.temperature === "anu" || s.syncActive) return false;
+    s.evicting = true;
+    if (this.onEvict) await this.onEvict(url);
+    const after = this._bags.get(url);
+    if (!after || !after.evicting || after.pinned || after.syncActive) {
+      if (after) delete after.evicting;
+      return false;   // raced — a touch / pin / sync-start cleared the intent
     }
-    // target === "warm" — only a step down from hot (cold→warm is a warm-up)
-    if (s.temperature !== "hot") return false;
-    if (this.onSuspend) await this.onSuspend(url);
-    s.temperature = "warm";
+    after.temperature = "anu";
+    delete after.evicting;
+    delete after.syncActive;
     return true;
   }
 
-  /** Backward-compatible alias — `evict` == cool to cold (handle drop). */
+  /** Alias — historical name for cooling a bag to anu (handle drop). */
   async evict(url: BagUrl): Promise<boolean> {
-    return this.cool(url, "cold");
+    return this.cool(url);
   }
 
-  /** Count of UNPINNED resident (hot + warm) bags. Pinned bags are exempt from
-   *  cooling and do NOT count against the cap (preserves pre-collapse semantics
-   *  where `_hot` excluded pinned). The cap bounds this number. */
+  /** Count of UNPINNED wela (live) bags. Pinned bags are exempt from cooling and
+   *  do NOT count against the cap (preserves pre-collapse semantics where `_hot`
+   *  excluded pinned). The cap bounds this number. */
   private residentCount(): number {
     let n = 0;
-    for (const s of this._bags.values()) if (!s.pinned && s.temperature !== "cold") n++;
+    for (const s of this._bags.values()) if (!s.pinned && s.temperature === "wela") n++;
     return n;
   }
 
-  /** LRU trim — while resident > hotCap, cool the oldest evictable bag to cold.
-   *  Prefers warm victims over hot (warm is already a cooling candidate). */
+  /** LRU trim — while unpinned-wela > hotCap, cool the oldest evictable bag. */
   private async enforceCap(): Promise<void> {
     while (this.residentCount() > this.hotCap) {
-      const target = this._oldestOf("warm") ?? this._oldestOf("hot");
-      if (!target) break;        // every resident bag is pinned or mid-sync
-      const ok = await this.cool(target, "cold");
+      const target = this._oldestWela();
+      if (!target) break;        // every wela bag is pinned or mid-sync
+      const ok = await this.cool(target);
       if (!ok) break;            // race or refusal — bail; next sweep retries
     }
   }
 
-  /** Oldest unpinned, non-syncing bag at the given temperature, or null. */
-  private _oldestOf(temp: ResidencyTemperature): BagUrl | null {
+  /** Oldest unpinned, non-syncing wela bag, or null. */
+  private _oldestWela(): BagUrl | null {
     let oldestUrl: BagUrl | null = null;
     let oldestAt  = Infinity;
     for (const [url, s] of this._bags) {
-      if (s.pinned || s.syncActive || s.temperature !== temp) continue;
+      if (s.pinned || s.syncActive || s.temperature !== "wela") continue;
       if (s.lastTouched < oldestAt) {
         oldestAt  = s.lastTouched;
         oldestUrl = url;
@@ -716,39 +709,31 @@ export class BagResidencyManager {
     this.sweeperTimer = null;
   }
 
-  /** One sweep pass (two-stage idle cooling, then cap enforcement):
-   *    1. hot  idle > idleMs    → warm   (quiesce, handle retained)
-   *    2. warm idle > 2×idleMs  → cold   (compact-then-drop)
-   *    3. resident > hotCap     → cold   (LRU trim)
-   *  Re-entrancy-guarded so overlapping ticks don't fight. */
-  async sweepOnce(): Promise<{ warmed: number; cooled: number; lruEvicted: number }> {
-    if (this.sweepInFlight) return { warmed: 0, cooled: 0, lruEvicted: 0 };
+  /** One sweep pass: cool idle wela → anu (idle > idleMs), then enforce the cap.
+   *  Re-entrancy-guarded so overlapping ticks don't fight.
+   *
+   *  Known refinement (deferred, adversarial-research finding): this is pure-age
+   *  LRU and so is not scan-resistant — a one-shot sweep over many bags can
+   *  evict the genuine working set. A cheap second-chance reference bit
+   *  (CLOCK/SIEVE) would fix it; not yet warranted at current scale. */
+  async sweepOnce(): Promise<{ cooled: number; lruEvicted: number }> {
+    if (this.sweepInFlight) return { cooled: 0, lruEvicted: 0 };
     this.sweepInFlight = true;
-    let warmed = 0, cooled = 0, lruEvicted = 0;
+    let cooled = 0, lruEvicted = 0;
     try {
-      const now        = Date.now();
-      const warmCutoff = now - this.idleMs;       // hot  → warm
-      const coldCutoff = now - this.idleMs * 2;   // warm → cold (deeper idle)
-      // Stage 1 — idle hot cools to warm.
-      const toWarm: BagUrl[] = [];
+      const cutoff = Date.now() - this.idleMs;
+      const stale: BagUrl[] = [];
       for (const [url, s] of this._bags)
-        if (!s.pinned && !s.syncActive && s.temperature === "hot" && s.lastTouched < warmCutoff)
-          toWarm.push(url);
-      for (const url of toWarm) if (await this.cool(url, "warm")) warmed++;
-      // Stage 2 — deeper-idle warm cools to cold.
-      const toCold: BagUrl[] = [];
-      for (const [url, s] of this._bags)
-        if (!s.pinned && !s.syncActive && s.temperature === "warm" && s.lastTouched < coldCutoff)
-          toCold.push(url);
-      for (const url of toCold) if (await this.cool(url, "cold")) cooled++;
-      // Stage 3 — enforce the resident cap.
+        if (!s.pinned && !s.syncActive && s.temperature === "wela" && s.lastTouched < cutoff)
+          stale.push(url);
+      for (const url of stale) if (await this.cool(url)) cooled++;
       const before = this.residentCount();
       await this.enforceCap();
       lruEvicted = before - this.residentCount();
     } finally {
       this.sweepInFlight = false;
     }
-    return { warmed, cooled, lruEvicted };
+    return { cooled, lruEvicted };
   }
 
   /** Mark or unmark a bag as mid-sync. The sweeper + cool() consult this
@@ -764,8 +749,8 @@ export class BagResidencyManager {
     return this._bags.has(url);
   }
 
-  /** Temperature of a bag, or null if unknown. NOTE: returns the thermal tier
-   *  only — use `isPinned()` for the orthogonal pin flag. */
+  /** Temperature of a bag (`wela` | `anu`), or null if unknown. NOTE: returns
+   *  the thermal tier only — use `isPinned()` for the orthogonal pin flag. */
   tier(url: BagUrl): ResidencyTemperature | null {
     return this._bags.get(url)?.temperature ?? null;
   }
@@ -781,24 +766,20 @@ export class BagResidencyManager {
     return out;
   }
 
-  /** Hot entries sorted by lastTouched DESC (most-recent first). */
-  hot(): readonly BagResidencyEntry[] {
-    return this._entriesAt("hot").sort((a, b) => b.lastTouched - a.lastTouched);
+  /** Unpinned wela (live) entries, most-recently-touched first. */
+  wela(): readonly BagResidencyEntry[] {
+    return this._entriesAt("wela").sort((a, b) => b.lastTouched - a.lastTouched);
   }
 
-  /** Warm entries sorted by lastTouched DESC. */
-  warm(): readonly BagResidencyEntry[] {
-    return this._entriesAt("warm").sort((a, b) => b.lastTouched - a.lastTouched);
-  }
-
-  cold(): readonly BagUrl[] {
+  /** anu (cold) bag URLs — known but not loaded. */
+  anu(): readonly BagUrl[] {
     const out: BagUrl[] = [];
-    for (const [url, s] of this._bags) if (s.temperature === "cold") out.push(url);
+    for (const [url, s] of this._bags) if (s.temperature === "anu") out.push(url);
     return out;
   }
 
-  // Reports UNPINNED entries at a temperature — stats buckets (pinned / hot /
-  // warm / cold) stay disjoint, so a pinned-hot bag appears only under pinned().
+  // Reports UNPINNED entries at a temperature — stats buckets (pinned / wela /
+  // anu) stay disjoint, so a pinned-wela bag appears only under pinned().
   private _entriesAt(temp: ResidencyTemperature): BagResidencyEntry[] {
     const out: BagResidencyEntry[] = [];
     for (const [url, s] of this._bags)
@@ -808,11 +789,10 @@ export class BagResidencyManager {
 
   stats(): BagResidencyStats {
     return {
-      pinned:    this.pinned(),
-      hot:       this.hot(),
-      warm:      this.warm(),
-      coldCount: this.cold().length,
-      hotCap:    this.hotCap,
+      pinned:   this.pinned(),
+      wela:     this.wela(),
+      anuCount: this.anu().length,
+      hotCap:   this.hotCap,
     };
   }
 }
