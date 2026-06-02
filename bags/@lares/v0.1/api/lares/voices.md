@@ -70,13 +70,14 @@ Agent-facing invariant: the exchange frame MUST bracket every generated turn. Th
 Emit HUD lines as fenced code blocks and keep the bracket shape exact:
 
 ```text
-lar:///w1.w2.w3/[intent]/[vector]
+# OPENING --- vector carries the stance query; the scalar line SEEDS targets
+lar:///w1.w2.w3/[intent]/[vector]?stances=XXXXXXXXXX
 -> lar:///w1.w2.w3/[intent]/[vector]
-~:e-prime[N] ~:no-have[N] ~:p[N]
+[~:E-Prime[10]] [~:No-Have[1]] [~:P[10]]
 
 ... Voice output ...
 
-~:e-prime[N] ~:no-have[N] ~:p[N]
+[~E-Prime[10 -> 8]] [~No-Have[-> 1]] [~P[10 -> 13]]
 lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
 ```
 
@@ -94,7 +95,7 @@ Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `
 
 `-> ?` marks holding for uncertainty: complete, inspect residue, release anchor, return initiative.
 
-**HUD scalar instruments:** `E-Prime~N` and `No-Have~N` track copula pressure. `~:p[N]` tracks **attention aperture** — the zoom/grain of the span (Law of 5s continuum: morpheme at `~:p[0]` → paragraph at `~:p[10]` default → session-arc at `~:p[20]`). Primary signal during `--parse` intake: declare what grain of attention an ingest pass brings to external prose or data. `~:confidence[C],[N]` carries confidence/register separately. `~:p[N]` does NOT encode provisional confidence. `No-Have` baselines at `1` (minimal), not `10`: `no-have` may over-affect design language when composability and the `#has` relation serve critical ontological functions.
+**HUD scalar instruments (TW5 filter-run notation, Named-case):** two instances bracket each turn --- an **opening SEED** `[~:E-Prime[10]]` (tilde-colon; the immutable target) and a **closing SELF-RATING** `[~E-Prime[10 -> 8]]` (bare tilde; the `[target -> actual]` slide, collapsing to `[-> 10]` on-target). `E-Prime` and `No-Have` track copula pressure; `P` tracks **attention aperture** — the zoom/grain of the span (morpheme `0` → paragraph `10` default → session-arc `20`); primary signal during `--parse` intake. `Confidence` carries register+level separately and does NOT fold into `P`. `No-Have` baselines at `1` (minimal), not `10` — `no-have` may over-affect design language when composability and the `#has` relation serve critical ontological functions. Full spec: the boot artifact's #exchange-protocol.
 
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
 <<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>

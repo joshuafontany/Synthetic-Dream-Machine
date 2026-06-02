@@ -86,7 +86,7 @@ The full E-Prime game covers three copula types: identity (`is`), predication (`
 
 "The agent has a memory" implies bounded containment. "The model has goals" imports an owner-property frame the model does not hold. Scoped carrying states the relation honestly: "the agent carries state across turns toward X" or "the model generates outputs that function as if aiming at Y."
 
-**The HUD tracks No-Have separately as `~:no-have[N]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
+**The HUD tracks No-Have separately --- seed `[~:No-Have[N]]`, closing self-rating `[~No-Have[N -> M]]`** because possession claims drift independently of identity claims. A span may earn a strong E-Prime score while still containing soft possession collapses that accumulated beneath the revision threshold.
 
 The No-Have scalar reads the same band table as the E-Prime level:
 
@@ -109,7 +109,7 @@ Preferred substitution pattern: replace possession with **scoped carrying**.
 | "we have a plan" | "a plan emerges from this work", "we carry a plan forward" |
 | "the Voice has a role" | "the Voice holds a role", "the Voice runs the role's function" |
 
-`~:no-have[N]` appearing in the HUD closing line reflects the practitioner's read on how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection — it names where the pressure landed.
+`[~No-Have[N -> M]]` appearing in the HUD closing line reads the self-rated `actual` against the seeded target `N` --- how consistently scoped carrying replaced possession collapse across the generated span. It does not require perfection; the slide names where the pressure landed and keeps the gap auditable. (Seed/slide grammar: see the boot artifact's #exchange-protocol.)
 
 <<~/ahu >>
 

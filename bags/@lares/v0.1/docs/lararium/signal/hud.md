@@ -344,6 +344,8 @@ It records where the span actually landed epistemically.
 The header's declared register still governed generation; the slide says "it resolved here."
 `STATE.jsonl` records both as `opening_register` and `closure_register` when they differ.
 
+**Generalized to the scalar HUD (2026-06-02):** the same slide now governs every scalar instrument, not register alone. The opening line SEEDs an immutable target in TW5 filter-run notation --- `[~:E-Prime[N]]` (tilde-colon, Named-case, outer `[ ]` wrapper); the closing line SELF-RATES via the slide --- `[~E-Prime[N -> M]]` (bare tilde; `[target -> actual]`, collapsing to `[-> N]` on-target). Log `opening`/`closure` per instrument as register already does. Canon: the boot artifact's #exchange-protocol.
+
 <<~/ahu >>
 
 <<~ ahu #migrated-tagspace-in-flow-rendering-options >>
