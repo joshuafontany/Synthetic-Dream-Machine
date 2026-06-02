@@ -48,36 +48,42 @@ import type {
   WikiMsg_VerbResult,
   IslandToVesselMsg,
   VesselToIslandMsg,
+  ResidencyTemperature,
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
 // Slot types
+//
+// The pool stands in the SAME residency vocabulary as the mesh model (EPIC S11
+// collapse — residency-tiers.md): a two-state ʻōlelo thermal axis `wela` (live)
+// / `anu` (torn down), plus an orthogonal `pinned` flag. A live island is always
+// `wela`; `pinned` (PrimaryWiki + admin) exempts it from LRU eviction. There is
+// no separate "pinned tier" — pin is a flag crossing the temperature axis.
 // ---------------------------------------------------------------------------
 
-type SlotTier = "pinned" | "hot" | "cold";
-
 /**
- * IslandSlot — covers both pinned (never-evicted) and hot (LRU) tiers.
+ * IslandSlot — a live (`wela`) island Worker, pinned or not.
  *
  * `pinned: true`  → immune to LRU eviction. Used for PrimaryWiki + admin.
  * `pinned: false` → subject to LRU eviction when HOT_CAP is reached.
  *
- * In both cases the TW5Engine lives inside the Worker thread. The vessel
- * holds no engine reference and interacts only via island-protocol envelopes.
+ * The TW5Engine lives inside the Worker thread. The vessel holds no engine
+ * reference and interacts only via island-protocol envelopes.
  */
 interface IslandSlot {
-  tier:       "pinned" | "hot";
-  wikiId:     string;
-  worker:     Worker;
+  temperature: "wela";
+  pinned:      boolean;
+  wikiId:      string;
+  worker:      Worker;
   /** Vessel side of the island sync channel. Close on unmount (Law §7). */
-  mainPort:   MessagePort;
-  lastUsedAt: number;
+  mainPort:    MessagePort;
+  lastUsedAt:  number;
 }
 
 interface ColdSlot {
-  tier:       "cold";
-  wikiId:     string;
-  demotedAt:  number;
+  temperature: "anu";
+  wikiId:      string;
+  demotedAt:   number;
 }
 
 type Slot = IslandSlot | ColdSlot;
@@ -173,34 +179,34 @@ export class VesselIslandPool {
   }
 
   // ---------------------------------------------------------------------------
-  // Pinned tier — PrimaryWiki
+  // Island lifecycle — one unified mount path
   // ---------------------------------------------------------------------------
 
   /**
-   * Mount the PrimaryWiki as a pinned (never-evicted) island slot.
+   * Mount a wiki as a live (`wela`) island slot.
    *
-   * Identical to `mountWiki` but the resulting slot is immune to LRU eviction.
-   * Call after the vessel has a `coreBlob` and the primary wiki doc handle is ready.
+   * Spawns an island, delivers a manifest, awaits ea. `opts.pinned: true` makes
+   * the slot immune to LRU eviction (PrimaryWiki + admin) — pin is an orthogonal
+   * flag, NOT a separate temperature (EPIC S11). Unpinned slots are LRU-evicted
+   * when HOT_CAP is reached.
+   *
+   * Returns void — the vessel holds no direct engine reference for island slots.
+   * Receive CRDT changes via `onWorkerEvent`.
    */
-  async mountPrimaryWorker(wikiId: string, ctx: WikiBootContext): Promise<void> {
-    await this._mountWorker(wikiId, ctx, true);
+  async mountWiki(
+    wikiId: string,
+    ctx:    WikiBootContext,
+    opts:   { pinned?: boolean } = {},
+  ): Promise<void> {
+    await this._mountWorker(wikiId, ctx, opts.pinned ?? false);
   }
 
-  // ---------------------------------------------------------------------------
-  // Hot tier — island lifecycle
-  // ---------------------------------------------------------------------------
-
   /**
-   * Mount a session wiki into the hot tier.
-   *
-   * Spawns an island, delivers a manifest, and awaits ea.
-   * Evicts the LRU island slot (non-pinned) when at capacity.
-   *
-   * Returns void — the vessel holds no direct engine reference for island
-   * slots. Receive CRDT changes via `onTiddlerDelta` and events via `onWorkerEvent`.
+   * @deprecated Use `mountWiki(wikiId, ctx, { pinned: true })`. Kept as a named
+   * convenience alias for the PrimaryWiki mount; routes through the unified path.
    */
-  async mountWiki(wikiId: string, ctx: WikiBootContext): Promise<void> {
-    await this._mountWorker(wikiId, ctx, false);
+  async mountPrimaryWorker(wikiId: string, ctx: WikiBootContext): Promise<void> {
+    await this.mountWiki(wikiId, ctx, { pinned: true });
   }
 
   /**
@@ -215,7 +221,7 @@ export class VesselIslandPool {
    */
   async unmountWiki(wikiId: string): Promise<void> {
     const slot = this._slots.get(wikiId);
-    if (!slot || slot.tier === "cold") return;
+    if (!slot || slot.temperature === "anu") return;
 
     const workerSlot = slot as IslandSlot;
     try {
@@ -231,9 +237,9 @@ export class VesselIslandPool {
     workerSlot.mainPort.close();
     await workerSlot.worker.terminate();
     const demotedAt = Date.now();
-    this._slots.set(wikiId, { tier: "cold", wikiId, demotedAt });
+    this._slots.set(wikiId, { temperature: "anu", wikiId, demotedAt });
 
-    console.log(`[vm-manager] ${wikiId}: unmounted → cold`);
+    console.log(`[vm-manager] ${wikiId}: unmounted → anu`);
   }
 
   // ---------------------------------------------------------------------------
@@ -258,7 +264,7 @@ export class VesselIslandPool {
     },
   ): Promise<Record<string, unknown>> {
     const slot = this._slots.get(wikiId);
-    if (!slot || slot.tier === "cold") {
+    if (!slot || slot.temperature === "anu") {
       return Promise.reject(new Error(`[vm-manager] no live island for ${wikiId}`));
     }
     const requestId = crypto.randomUUID();
@@ -284,25 +290,35 @@ export class VesselIslandPool {
   // Accessors
   // ---------------------------------------------------------------------------
 
-  tier(wikiId: string): SlotTier | null {
-    return this._slots.get(wikiId)?.tier ?? null;
+  /** Temperature of an island slot (`wela` | `anu`), or null if unknown. NOTE:
+   *  use `isPinned()` for the orthogonal pin flag. */
+  tier(wikiId: string): ResidencyTemperature | null {
+    return this._slots.get(wikiId)?.temperature ?? null;
   }
 
-  /** Unix ms when this island last went cold, or null if not in cold tier. */
+  /** The orthogonal pin flag — true if this island is exempt from LRU eviction
+   *  (PrimaryWiki + admin). False for anu slots and unpinned live islands. */
+  isPinned(wikiId: string): boolean {
+    const slot = this._slots.get(wikiId);
+    return slot?.temperature === "wela" ? slot.pinned : false;
+  }
+
+  /** Unix ms when this island last went anu (cold), or null if still live. */
   coldSince(wikiId: string): number | null {
     const slot = this._slots.get(wikiId);
-    return slot?.tier === "cold" ? slot.demotedAt : null;
+    return slot?.temperature === "anu" ? slot.demotedAt : null;
   }
 
-  /** Diagnostics: slot counts by tier. */
-  stats(): { pinned: number; hot: number; cold: number } {
-    let pinned = 0, hot = 0, cold = 0;
+  /** Diagnostics: slot counts. `wela` is unpinned-live; `pinned` counts live
+   *  pin-flagged islands separately (disjoint); `anu` is torn-down. */
+  stats(): { pinned: number; wela: number; anu: number } {
+    let pinned = 0, wela = 0, anu = 0;
     for (const s of this._slots.values()) {
-      if (s.tier === "pinned")   pinned++;
-      else if (s.tier === "hot") hot++;
-      else                       cold++;
+      if (s.temperature === "anu")  anu++;
+      else if (s.pinned)            pinned++;
+      else                          wela++;
     }
-    return { pinned, hot, cold };
+    return { pinned, wela, anu };
   }
 
   // ---------------------------------------------------------------------------
@@ -313,7 +329,7 @@ export class VesselIslandPool {
   async disposeAll(): Promise<void> {
     const teardowns: Promise<void>[] = [];
     for (const slot of this._slots.values()) {
-      if (slot.tier === "hot" || slot.tier === "pinned") {
+      if (slot.temperature === "wela") {
         teardowns.push(this.unmountWiki(slot.wikiId));
       }
     }
@@ -327,8 +343,8 @@ export class VesselIslandPool {
 
   private async _mountWorker(wikiId: string, ctx: WikiBootContext, pinned: boolean): Promise<void> {
     const existing = this._slots.get(wikiId);
-    if (existing && (existing.tier === "hot" || existing.tier === "pinned")) {
-      (existing as IslandSlot).lastUsedAt = Date.now();
+    if (existing && existing.temperature === "wela") {
+      existing.lastUsedAt = Date.now();
       return;
     }
 
@@ -374,10 +390,11 @@ export class VesselIslandPool {
       [syncPort],
     );
 
-    const tier = pinned ? "pinned" : "hot";
-    this._slots.set(wikiId, { tier, wikiId, worker, mainPort, lastUsedAt: Date.now() });
+    this._slots.set(wikiId, {
+      temperature: "wela", pinned, wikiId, worker, mainPort, lastUsedAt: Date.now(),
+    });
 
-    console.log(`[vm-manager] ${wikiId}: island ea — ${tier}`);
+    console.log(`[vm-manager] ${wikiId}: island ea — wela${pinned ? " (pinned)" : ""}`);
   }
 
   /**
@@ -386,7 +403,7 @@ export class VesselIslandPool {
    */
   private async _evictLruIfNeeded(): Promise<void> {
     const hotSlots = [...this._slots.values()].filter(
-      (s): s is IslandSlot => s.tier === "hot",
+      (s): s is IslandSlot => s.temperature === "wela" && !s.pinned,
     );
     if (hotSlots.length < HOT_CAP) return;
 

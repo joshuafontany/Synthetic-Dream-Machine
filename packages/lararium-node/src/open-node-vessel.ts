@@ -759,6 +759,15 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await corpusReadyP;
   emit("corpus-ready");
 
+  // ── 8a. Admin sovereignty gate — BEFORE any wiki mount (S11.5 boot reorder) ──
+  // The vessel is not live until the admin island declares sovereignty; the admin
+  // island holds the TW5 job event surface (drain loop + VerbDispatcher). Gating
+  // here — admin-first — means the delegate-verb seam is live before the primary
+  // wiki mounts, which is the prerequisite for S7.5 @personal binding-resolution
+  // (resolve/mint @personal+@draft via the admin VM, then mount the primary with
+  // the resolved URLs). Admin was spawned at boot start; this only awaits its ea.
+  await adminVm.workerEa;
+
   // ── 9. Primary wiki island ────────────────────────────────────────────────
   // Build disk mirror configs — @lares + @lararium corpus bags only.
   // island reconstructs BagMirrorConfig via namedBagMirror(bagId, scope, mirrorRoot).
@@ -767,20 +776,17 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
     { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
   ];
-  await vmManager.mountPrimaryWorker(activeWikiId, {
+  // Unified mount path — primary is a `wela` slot with the `pinned` flag set
+  // (never LRU-evicted); pin is orthogonal to temperature (EPIC S11.5).
+  await vmManager.mountWiki(activeWikiId, {
     docHandle: wikiHandle,
     coreHash,
     diskMirrors,
-  });
+  }, { pinned: true });
   emit("tw5-booted");
 
   // ── 10. VmPool — vmManager IS the pool ────────────────────────────────────
   vessel.attachVmPool(vmManager);
-
-  // Admin island ea gate — vessel is not live until the admin island declares
-  // sovereignty. The admin island holds the TW5 job event surface; jobs cannot
-  // dispatch until its drain loop and VerbDispatcher are running.
-  await adminVm.workerEa;
 
   // Path M.1 — wire worker.event consumer now that adminVm is live.
   // Rings drain through emit() → subscribe() handlers; subscribe on the event type directly.

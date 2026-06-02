@@ -74,7 +74,7 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
         coreHash,
       });
 
-      expect(pool.tier(WIKI_ID)).toBe("hot");
+      expect(pool.tier(WIKI_ID)).toBe("wela");
     } finally {
       await pool.disposeAll();
       await vesselRepo.shutdown();

@@ -102,7 +102,7 @@ describe.skipIf(skipReason)(
           docHandle: wikiHandle,
           coreHash,
         });
-        expect(pool.tier(WIKI_ID)).toBe("hot");
+        expect(pool.tier(WIKI_ID)).toBe("wela");
 
         // Write a tiddler with `verb` and `listenable` fields to the wiki CRDT doc.
         // CRDT sync propagates to island → IslandAdaptor → wiki.addTiddler → nalu fires

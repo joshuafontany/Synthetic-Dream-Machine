@@ -120,7 +120,7 @@ describe("VesselIslandPool — island lifecycle", () => {
 
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
 
-    expect(pool.tier(WIKI_ID)).toBe("hot");
+    expect(pool.tier(WIKI_ID)).toBe("wela");
     expect(pool.coldSince(WIKI_ID)).toBeNull(); // not in cold tier
   });
 
@@ -131,7 +131,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null });
     await pool.mountWiki(WIKI_ID, { docHandle: handle, coreHash: null }); // no-op
 
-    expect(pool.tier(WIKI_ID)).toBe("hot");
+    expect(pool.tier(WIKI_ID)).toBe("wela");
   });
 
   test("CRDT change on vessel Repo propagates to island via syncPort", async () => {
@@ -171,7 +171,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await pool.unmountWiki(WIKI_ID);
     const after = Date.now();
 
-    expect(pool.tier(WIKI_ID)).toBe("cold");
+    expect(pool.tier(WIKI_ID)).toBe("anu");
     const ts = pool.coldSince(WIKI_ID);
     expect(ts).not.toBeNull();
     expect(ts!).toBeGreaterThanOrEqual(before);
@@ -207,13 +207,13 @@ describe("VesselIslandPool — island lifecycle", () => {
   test("stats() reflects tier counts correctly", async () => {
     pool = new VesselIslandPool({ workerScriptUrl: FIXTURE_URL, laraiumDocUrl: FIXTURE_LARARIUM_URL });
 
-    expect(pool.stats()).toEqual({ pinned: 0, hot: 0, cold: 0 });
+    expect(pool.stats()).toEqual({ pinned: 0, wela: 0, anu: 0 });
 
     await pool.mountWiki(WIKI_ID, { docHandle: makeDocHandleStub(), coreHash: null });
-    expect(pool.stats()).toEqual({ pinned: 0, hot: 1, cold: 0 });
+    expect(pool.stats()).toEqual({ pinned: 0, wela: 1, anu: 0 });
 
     await pool.unmountWiki(WIKI_ID);
-    expect(pool.stats()).toEqual({ pinned: 0, hot: 0, cold: 1 });
+    expect(pool.stats()).toEqual({ pinned: 0, wela: 0, anu: 1 });
   });
 
   test("re-mountWiki from cold slot — cold recorded, re-mounted island live and responsive", async () => {
@@ -240,7 +240,7 @@ describe("VesselIslandPool — island lifecycle", () => {
     await waitForEvents(changes, 1);
     await pool.unmountWiki(WIKI_ID);
 
-    expect(pool.tier(WIKI_ID)).toBe("cold");
+    expect(pool.tier(WIKI_ID)).toBe("anu");
     expect(pool.coldSince(WIKI_ID)).not.toBeNull();
 
     // Clear collectors for re-mount phase.
@@ -249,7 +249,7 @@ describe("VesselIslandPool — island lifecycle", () => {
 
     // Re-mount — fresh island, CRDT doc syncs via mainRepo again.
     await pool.mountWiki(WIKI_ID, { docHandle: docHandle as never, coreHash: null });
-    expect(pool.tier(WIKI_ID)).toBe("hot");
+    expect(pool.tier(WIKI_ID)).toBe("wela");
 
     await waitForSynced(all);
     docHandle.change((d) => { d.tiddlers["lar:///ha.ka.ba/@test/wiki/new"] = { title: "lar:///ha.ka.ba/@test/wiki/new", text: "fresh" }; });

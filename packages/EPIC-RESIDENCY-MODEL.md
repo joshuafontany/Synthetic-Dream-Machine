@@ -324,14 +324,14 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [x] **S11.2** — Two-state thermal axis `ResidencyTemperature = "wela" | "anu"` + orthogonal `pinned` flag (`isPinned()`); single-map manager; `cool()` (hoʻoanu) with TOCTOU `evicting`-flag guard; single-stage idle sweep; cap bounds unpinned-wela; consumers propagated. *(landed; warm member cut in the YIN pass)*
 - [x] **S11.3** — ~~Build warm tier~~ **CUT (YIN).** No `IslandMsg_HooMahana`, no suspend-without-terminate. Reopening condition in residency-tiers.md #warm-cut.
 - [x] **S11.4** (model) — `deriveBagTemperature()` reachability rule (any `wela` referencing island → `wela`, else `anu`). *(landed)*
-- [ ] **S11.5** — Boot reorder in `open-node-vessel.ts`: `await adminVm.workerEa` before the primary wiki mount; mount primary via the unified `_mountWorker`/`mountWiki` path with `pinned: true`. Reshape the pool's own `SlotTier` to `wela|anu` + pin flag. Unblocks S7.5. *(open)*
+- [x] **S11.5** — Boot reorder in `open-node-vessel.ts`: `await adminVm.workerEa` now gates BEFORE the primary mount (admin-first) — the delegate-verb seam is live before any wiki mounts, unblocking S7.5. Primary mounts via the unified `mountWiki(.., { pinned: true })` path (`mountPrimaryWorker` → deprecated alias). Pool's own slot model reshaped to import mesh `ResidencyTemperature` (`wela`/`anu`) + orthogonal `pinned` flag; `tier()` returns `wela`/`anu`, `+isPinned()`, `stats()` → `{pinned, wela, anu}`. Tests updated. *(landed 2026-06-02)*
 - [x] **S11.6** — Residency test suite (was ZERO coverage): 21 tests incl. a TOCTOU regression. mesh 215→236. *(landed)*
 
 **Deferred refinement (adversarial finding):** the sweeper is pure-age LRU (not scan-resistant). Add a second-chance reference bit (CLOCK/SIEVE) if a scan-pollution problem appears. Also: when derived-residency wiring lands, a bag held `wela` by a *pinned* island must not count against the cap (cap-arithmetic correctness).
 
-**Exit criteria:** one residency model owned by the Island Pool; `bag-residency.ts` retired (methods homed in causal-island code); two-state wela/anu + orthogonal pin; boot reordered admin-first (S11.5 open). Then S7.5 resumes.
+**Exit criteria MET:** one residency model owned by the Island Pool; `bag-residency.ts` retired (methods homed in causal-island code); two-state wela/anu + orthogonal pin across BOTH mesh manager and the node pool; boot reordered admin-first ✅. **Sprint 11 complete** — S7.5 is now unblocked.
 
-**Dependency note:** S11.5 (boot reorder) is the prerequisite the S7.5/7.6/7.7 stories were blocked on.
+**Dependency note:** S11.5 (boot reorder) was the prerequisite the S7.5/7.6/7.7 stories were blocked on — now cleared. @personal binding-resolution can resolve/mint via the live admin-VM delegate-verb seam, then mount the primary with the resolved URLs.
 
 ---
 
@@ -349,8 +349,8 @@ S1 ✅ (memetic intent + reconciliation)
 
 S9  (doc meme sweep) — can run in parallel with S5+ (touch different files)
 S10 (test golden regeneration) — waits for S5 to settle behavior
-S11 (residency tier unification: two-state wela/anu + pin, bag-residency collapse;
-     warm CUT) — S11.1/2/4/6 ✅ landed; S11.5 boot reorder open (S7.5's prerequisite)
+S11 ✅ (residency tier unification: two-state wela/anu + pin, bag-residency collapse;
+     warm CUT; boot reordered admin-first) — COMPLETE; unblocks S7.5
 ```
 
 ---
