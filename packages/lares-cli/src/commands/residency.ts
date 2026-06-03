@@ -5,7 +5,7 @@
  *
  * Operator-driven residency control. Pin guarantees a bag stays hot;
  * unpin demotes (the LRU may then evict if pressure rises). residency
- * prints the current pinned/hot/cold snapshot.
+ * prints the current pinned / wela / anu snapshot.
  *
  * Phase 1 (C.1): instrumentation only — no eviction yet, so unpin is
  * essentially a no-op outside of stats reporting until C.2 lands.
@@ -59,23 +59,23 @@ export async function cmdResidency(_args: ParsedArgs): Promise<number> {
     }
     const stats = summaryOutput(r) ?? {};
     const pinned = (stats["pinned"] ?? []) as string[];
-    const hot    = (stats["hot"]    ?? []) as Array<{ url: string; lastTouched: number; syncActive?: boolean }>;
-    const coldCount = stats["coldCount"] as number;
-    const hotCap    = stats["hotCap"]    as number;
+    const wela   = (stats["wela"]   ?? []) as Array<{ url: string; lastTouched: number; syncActive?: boolean }>;
+    const anuCount = stats["anuCount"] as number;
+    const hotCap   = stats["hotCap"]   as number;
 
     console.log("");
     console.log(`pinned (${pinned.length}):`);
     for (const u of pinned) console.log(`  ${u}`);
     console.log("");
-    console.log(`hot (${hot.length}/${hotCap}):`);
-    for (const e of hot) {
+    console.log(`wela (${wela.length}/${hotCap}):`);
+    for (const e of wela) {
       const age   = Date.now() - e.lastTouched;
       const human = age < 60_000 ? `${Math.round(age/1000)}s ago` : `${Math.round(age/60_000)}m ago`;
       const sync  = e.syncActive ? "  (syncing)" : "";
       console.log(`  ${e.url}  — touched ${human}${sync}`);
     }
     console.log("");
-    console.log(`cold count: ${coldCount}`);
+    console.log(`anu count: ${anuCount}`);
     console.log("");
     return 0;
   } finally {

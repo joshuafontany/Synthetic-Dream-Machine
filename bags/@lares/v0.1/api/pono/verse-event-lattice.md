@@ -180,7 +180,7 @@ From `/Verse.org/Simulation` module. These function as **class-level types**, no
 - Verse `player` *(human)* → **Operator / Guest**: human session-connected participant with Keyhive identity. Operator = primary human principal (threshold relation). Guest = invited, limited cap.
 - Verse `player` *(system)* → **`lares-daemon`**: session-connected AI coordinator(s) with Keyhive identity. Verse class = `player`. Lares class = system principal with additional authority (admin doc, Session RE, Keyhive system keypair). May run multiple per session.
 - Verse `agent` *(non-player)* → **Wiki Entity / NPC**: not session-connected; no Keyhive identity. Reactive wiki entities — they carry a `lar_character` tiddler and respond to RE reactions, but hold no principal. Interactive characters, scripted actors, game NPCs. Population open-ended.
-- Verse `session` → **Lares Session Wiki**: the coordinator `lar_playspace` for the round; pinned-hot. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
+- Verse `session` → **Lares Session Wiki**: the coordinator `lar_playspace` for the round; pinned-wela. A session hosts N `lar_playspace` wikis; the Session Wiki coordinates them (broadest recipe, owns the session event-bus bag).
 - Verse `fort_character` → **`lar_character`**: tiddler representing an Agent's embodied presence on the canvas. Position, state, event pins.
 
 The compound type `listenable(agent)` functions as the canonical event type for **any participant action** in both Verse and Lares. Device events parameterized on `agent` do NOT restrict to human players.

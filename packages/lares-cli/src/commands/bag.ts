@@ -8,7 +8,7 @@
  * Verbs:
  *   pin <url> [--reason <text>]   — never evict this bag from RAM
  *   unpin <url>                   — demote pinned bag to hot LRU
- *   stats                         — pinned / hot / cold residency snapshot
+ *   stats                         — pinned / wela / anu residency snapshot
  *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
  *
  * E.1 ships these four; E.8 adds `bag epoch <url>` (DXOS-style snapshot-restart).

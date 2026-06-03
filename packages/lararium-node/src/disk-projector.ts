@@ -5,12 +5,15 @@
  * This projector NEVER reads from disk — that direction belongs to the ingest
  * path (file watcher → store.put).
  *
- * Bag-aware (S5.5+): each writable bag may opt into a filesystem mirror via
- * BagMirrorConfig. Bags without a mirror config never write to disk. Edits in
- * the wiki bag mirror to `wikis/{slug}/...`; canonical bags mirror to
- * `packages/...`. Promotion is a deliberate ceremony that moves a tiddler
- * between bags, with the disk side effect of a file move — the git diff IS
- * the operator's signature on canon.
+ * Bag-aware: each writable bag may opt into a filesystem mirror via
+ * BagMirrorConfig. Bags without a mirror config never write to disk. The two
+ * projection surfaces split by bag role (see api/lararium/disk-projection):
+ *   - wiki content (@<slug>)      → `wikis/{slug}/...`   (projection / output)
+ *   - seed/canon (@lares/@lararium/@sdm) → `bags/@NAME/v0.1/...` (seed / canon)
+ * State/runtime bags (@personal/@draft/@temp/@admin) carry no mirror.
+ * A residency MOVE (the canon ACTION verb — the "promotion ceremony" is retired)
+ * that relocates a tiddler between bags has the disk side effect of a file move
+ * between surfaces; the git diff IS the operator's signature on the change.
  *
  * Projection law (Fontany-Fuller-Zelenka):
  *   Disk projection is a RENDER operation, not a string copy.

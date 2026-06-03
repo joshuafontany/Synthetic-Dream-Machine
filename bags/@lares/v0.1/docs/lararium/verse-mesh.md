@@ -48,9 +48,9 @@ Each peer holds a `VmPool<TW5RecipeVm>` with named slots:
 
 ```
 Peer
- ├── BagResidencyManager          ← hot / warm / cold oracle per bag
- ├── AutomergeDocStore[bag]       ← one per bag (always, including cold)
- │    └── IslandAccumulator[bag]  ← one per hot/warm bag
+ ├── BagResidencyManager          ← wela / anu residency per bag (in causal-island.ts)
+ ├── AutomergeDocStore[bag]       ← one per bag (always, including anu)
+ │    └── IslandAccumulator[bag]  ← one per wela bag
  │
  └── VmPool<TW5RecipeVm>
       ├── slot[live]              ← one active VM; rAF-driven; paints the UX

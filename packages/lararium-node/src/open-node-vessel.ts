@@ -124,7 +124,8 @@ export interface NodeVesselResult extends LarariumVesselResult<
   activeWikiSource: "boot-arg" | "admin-marker";
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz. */
   eventBus:         LarEventBusImpl;
-  /** Three-tier VM lifecycle manager — PrimaryWiki pinned, hot LRU, cold snapshots. */
+  /** Island Pool — two-state VM lifecycle (wela/anu) + orthogonal pin flag;
+   *  PrimaryWiki pinned-wela, unpinned-wela LRU-evicted, anu = torn-down snapshot. */
   vmManager:        VesselIslandPool;
   /** Admin VM — operator-private coordinator (S5.6). */
   admin:            AdminVmResult;

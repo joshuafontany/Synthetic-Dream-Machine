@@ -70,7 +70,7 @@ The always-hot set (system-pinned):
 
 - **identity / admin** — the operator's sovereign authority surface; the admin VM.
 - **active wiki** — the PrimaryWiki the operator currently works in.
-- **Session Wiki** — the coordinator `lar_playspace`; pinned-hot, always first in recipe order.
+- **Session Wiki** — the coordinator `lar_playspace`; pinned-wela, always first in recipe order.
 
 Operator pin/unpin gestures move the flag; they do not carry a Hawaiian transition-verb name (the state change describes itself). Pin is durable: pin state lives as tiddlers in the admin doc and federates to operator devices via the existing admin-doc sync surface (no RPC — web2 smell test holds).
 

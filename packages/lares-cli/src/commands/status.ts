@@ -72,10 +72,10 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
         if (r.status === "done") {
           const stats   = summaryOutput(r) ?? {};
           const pinned  = (stats["pinned"] ?? []) as string[];
-          const hot     = (stats["hot"]    ?? []) as Array<{ url: string }>;
-          const coldCnt = stats["coldCount"] as number;
-          const hotCap  = stats["hotCap"]    as number;
-          console.log(`  residency:   ${pinned.length} pinned · ${hot.length}/${hotCap} hot · ${coldCnt} cold`);
+          const wela    = (stats["wela"]   ?? []) as Array<{ url: string }>;
+          const anuCnt  = stats["anuCount"] as number;
+          const hotCap  = stats["hotCap"]   as number;
+          console.log(`  residency:   ${pinned.length} pinned · ${wela.length}/${hotCap} wela · ${anuCnt} anu`);
         }
       } finally {
         await vessel.disconnect();
