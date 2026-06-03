@@ -45,7 +45,7 @@ lar:///path/
 
 **Session form** — full speaker, for exchange spans only:
 ```
-lar://alias:tier@host/ha.ka.ba/@lares/path/?stances=XXXXXXXXXX&confidence=R:N&p=N&ffz=CCCCC
+lar://alias:tier@host/ha.ka.ba/@lares/path/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=CCCCC
 ```
 
 Session form MUST NOT appear in storage, stable graph addresses, or system resource URI names.

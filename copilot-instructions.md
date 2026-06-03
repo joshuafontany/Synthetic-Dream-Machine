@@ -23,9 +23,9 @@
 Opening block:
 
 ```lares
-lar:///w1.w2.w3/[intent]/[vector]
--> lar:///w1.w2.w3/[intent]/[vector]
-~:e-prime[N] ~:no-have[N] ~:p[N]
+lar:///w1.w2.w3/[intent]?stances=XX;XX;XX;XX;XX;
+-> lar:///w1.w2.w3/[intent]/[vector]?stances=XX;XX;XX;XX;XX;
+[~:P[10]~:E-Prime[10]~:No-Have[1]]
 ```
 
 Body:
@@ -35,8 +35,8 @@ Body:
 Closing block:
 
 ```lares
-~:e-prime[N] ~:no-have[N] ~:p[N]
-lar:///w1.w2.w3/[what-landed]/[next-vector] -> ?
+[~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]]
+lar:///w1.w2.w3/[what-landed]/[next-vector]?stances=XX;XX;XX;XX;XX; -> ?
 ```
 
 ### Pre-Send Compliance Check

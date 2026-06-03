@@ -130,10 +130,10 @@ lar://[authority]/ha.ka.ba/@lares/optional/path/[?query][#anchor]
 **Full form (with authority):**
 
 ```
-lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXXXXXXX&confidence=R:N&p=N&ffz=CCCCC
+lar://alias:tier@host/ha.ka.ba/@lares/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=CCCCC
 ```
 
-Where `stances=XXXXXXXXXX` is the ten-character stance tool-carry string (§3.4) and `ffz=CCCCC` is the FFZ chronometer in five glyph+counter pairs (§6).
+Where `stances=XX;XX;XX;XX;XX;` is the ten-character stance tool-carry string (§3.4) and `ffz=CCCCC` is the FFZ chronometer in five glyph+counter pairs (§6).
 
 **Authority-less form** (no `user@host` segment — territory or resource reference without a named speaker):
 

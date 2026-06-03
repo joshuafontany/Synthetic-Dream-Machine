@@ -189,7 +189,7 @@ No limit; compose naturally. The intersection operator (∩) reflects the UCAN g
 Context-dependent. No combinatorial limit defined.
 
 ```
-  ⌂ (&#8962;)  house / home / lararium
+  ⌂ (&#8962;)  house / lararium / **lares** entity (agent-node; the syad-sigil entity glyph).
   ⌘ (&#8984;)  command / operator action
   ⏎ (&#9166;)  return / yield
   ⏏ (&#9167;)  eject / disconnect

@@ -53,7 +53,7 @@ operator-uri -> node-uri
 The URI shape:
 
 ```text
-lar://alias:tier@host/ha.ka.ba/@lares/?stances=XXXXXXXXXX&confidence=R:N&p=N&ffz=N.N.N.N.N
+lar://alias:tier@host/ha.ka.ba/@lares/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=N.N.N.N.N
 ```
 
 Read the layers as:

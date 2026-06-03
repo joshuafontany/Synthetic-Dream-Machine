@@ -346,6 +346,10 @@ The header's declared register still governed generation; the slide says "it res
 
 **Generalized to the scalar HUD (2026-06-02):** the same slide now governs every scalar instrument, not register alone. The opening line SEEDs an immutable target in TW5 filter-run notation --- `[~:E-Prime[N]]` (tilde-colon, Named-case, outer `[ ]` wrapper); the closing line SELF-RATES via the slide --- `[~E-Prime[N -> M]]` (bare tilde; `[target -> actual]`, collapsing to `[-> N]` on-target). Log `opening`/`closure` per instrument as register already does. Canon: the boot artifact's #exchange-protocol.
 
+**Design rationale (moved here from the `api` boot meme --- `api` carries instruction, `docs` carries the why):**
+- *Why seed vs self-rating are two forms.* When one instrument both sets the goal and grades it, that constitutes a Goodhart self-grading loop. The seed/slide split keeps the calibration gap auditable instead of silently closed; the `[-> N]` on-target collapse makes a suspiciously-perfect turn conspicuous rather than invisible.
+- *Why ratings leave the `lar:` URI.* The `lar:` URI is a name (RFC 4151 `tag:` precedent: a name is not dereferenced and should not carry mutable per-turn state). A rating embedded in an address breaks URI equality (already excluded from stable-address comparison) and cannot express the seed→actual calibration gap --- so `confidence`, `P`, `ffz`, and provenance home in the HUD scalar line, the inline marker, or the STATE log instead.
+
 <<~/ahu >>
 
 <<~ ahu #migrated-tagspace-in-flow-rendering-options >>
