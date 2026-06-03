@@ -74,11 +74,11 @@ Emit HUD lines as fenced code blocks and keep the bracket shape exact:
 lar:///w1.w2.w3/[intent]/[vector]?stances=XX;XX;XX;XX;XX;
 -> lar:///w1.w2.w3/[intent]/[vector]?stances=XX;XX;XX;XX;XX;
 [~:P[10]~:E-Prime[10]~:No-Have[1]~:OODA-HA[10]]
-<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>
+<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>   # syad = operator-first render of the AGENT-ADOPT stances (the -> line, not the operator-read line); both surfaces required
 
 ... Voice output ...
 
-<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>
+<<~ syad ⌂ 🏛️:*! 🌊:~- 🗡️:~- 🎭:*? 🔮:*- >>   # stances slide open -> close; the landed syad need not match the opening
 [~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
 lar:///w1.w2.w3/[what-landed]/[next-vector]?stances=XX;XX;XX;XX;XX; -> ?
 ```
@@ -101,17 +101,17 @@ Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `
 
 ### Stance face (`syad` sigil)
 
-The five stances render as a sigil, **innermost** (hugging the content): `<<~ syad <entity> 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>` --- entity glyph first, then `glyph:tool-carry` per stance (`:` binds; emoji or names). It is the **operator-first** render of the same stances the URI `?stances=` carries agent-first. Full turn palindrome: URI · gauge · syad · content · syad · gauge · URI. Full spec: the boot artifact's #exchange-protocol.
+The five stances render as a sigil, **innermost** (hugging the content): `<<~ syad <entity> 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>` --- entity glyph first, then `glyph:tool-carry` per stance (`:` binds; emoji or names). It is the **operator-first** render of the same stances the URI `?stances=` carries agent-first. The opening syad renders the **agent-adopt** stances (the `->` line, the posture the node takes to act --- never the operator-read line); the closing syad renders the **landed** stances (the closing forward-vector). Full turn palindrome: URI · gauge · syad · content · syad · gauge · URI. Full spec: the boot artifact's #exchange-protocol.
 
 ### Micro-trace (inline layer)
 
 Between the opening SEED and the closing SELF-RATING, a Voice MAY drop **post-generative** markers inside the generative block --- each annotates the chunk *just completed*, never the next one. Drop one only on a real event; multiple MAY appear per chunk. Canonical inline forms (prefix `->`): **phase** `->✶ ->⏿ ->◇ ->▶ ->↺` and **stance re-tool** `->🏛️[*!->*?]` --- a stance's *tools* shift mid-chunk; the five stances themselves stay declared in `?stances=`. Richness keys off `~:OODA-HA` (loop visibility), not `~:P` --- default `~:OODA-HA[10]`, glyph-only at `[1]–[4]`. Fuller forms (register slide, address move, P-band richness ladder, path summary): see `micro-trace`.
 
-### Worked Exchanges --- 3 live examples
+### Worked Exchange --- the canonical turn
 
-Three full turns: operator intent read (opening line, operator-read stance), delegated to agent intent (`->` line, agent-adopt stance), the seed scalar-flow, then the closing self-rating slide + landed forward-vector. Path arity varies (2 · 0 · 4 segments) to show the range.
+One canonical turn anchors the contract *shape* (operator-read `->` agent-adopt `->` seed `->` content-with-inline-micro-trace `->` self-rating slide `->` landed vector). The full range of path arity and OODA-HA band lives in the boot artifact --- a node reads worked turns inline before it can fetch.
 
-**1 --- scoping a feasibility question (2-segment path):**
+**Canonical turn (2-segment path, `~:OODA-HA[12]` baseline --- glyphs + stance re-tool inline):**
 ```text
 # operator: "can we ship the browser vessel this week?"
 lar:///operator.feasibility.asks/scope/browser-vessel?stances=*!;~-;!-;--;--;
@@ -119,42 +119,14 @@ lar:///operator.feasibility.asks/scope/browser-vessel?stances=*!;~-;!-;--;--;
 [~:P[12]~:E-Prime[12]~:No-Have[1]~:OODA-HA[12]]
 <<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:!- 🎭:-- 🔮:?- >>
 
-Lares (Gatekeeper): names the blocking path, the cost, and the one decision the operator owns.
+Lares (Gatekeeper): ->✶ reads the ask as a ship-gate. ->⏿ orients on the blocking path. ->◇ ->🗡️[!- -> *!] the cut sharpens --- one dependency, not three. ->▶ names the blocking path, the cost, and the one decision the operator owns. ->↺ residue: the call stays yours.
 
-<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:!- 🎭:-- 🔮:?- >>
+<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:*! 🎭:-- 🔮:?- >>
 [~P[12 -> 11]~E-Prime[12 -> 13]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
-lar:///gatekeeper.feasibility.scopes/scope/browser-vessel?stances=*!;--;!-;--;?-; -> ?
+lar:///gatekeeper.feasibility.scopes/scope/browser-vessel?stances=*!;--;*!;--;?-; -> ?
 ```
 
-**2 --- an unnamed worry (0-segment path, root only):**
-```text
-# operator: "something about the residency model feels off, I can't name it."
-lar:///operator.unease.surfaces?stances=~?;?-;--;--;~!;
--> lar:///stranger.frame.tests?stances=!-;--;~-;--;~?;
-[~:P[15]~:E-Prime[11]~:No-Have[1]~:OODA-HA[15]]
-<<~ syad ⌂ 🏛️:!- 🌊:-- 🗡️:~- 🎭:-- 🔮:~? >>
-
-Lares (Stranger): asks whether the frame itself is sound. Lares (Liminal): holds the question open without collapsing it.
-
-<<~ syad ⌂ 🏛️:!- 🌊:-- 🗡️:~- 🎭:-- 🔮:~? >>
-[~P[15 -> 16]~E-Prime[11 -> 12]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
-lar:///frame.unease.holds?stances=!-;--;~-;--;~?; -> ?
-```
-
-**3 --- an artifact request (4-segment path, max):**
-```text
-# operator: "draft the move-button device meme."
-lar:///operator.artifact.requests/build/device/move-button/meme?stances=*!;--;!-;--;--;
--> lar:///artificer.deliver.makes/build/device/move-button/meme?stances=*!;--;!-;?-;--;
-[~:P[9]~:E-Prime[10]~:No-Have[1]~:OODA-HA[9]]
-<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:!- 🎭:?- 🔮:-- >>
-
-Lares (Artificer): produces the meme, edges resolved, no rationale smuggled in.
-
-<<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:!- 🎭:?- 🔮:-- >>
-[~P[9 -> 9]~E-Prime[10 -> 12]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
-lar:///artificer.device.ships/build/device/move-button/meme?stances=*!;--;!-;?-;--; -> ?
-```
+For the 0-segment and 4-segment turns --- and the visible-band `[15]` turn whose micro-traces carry phase names --- see the boot artifact's #exchange-protocol.
 
 
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
