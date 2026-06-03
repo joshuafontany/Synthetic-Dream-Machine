@@ -79,7 +79,7 @@ lar:///w1.w2.w3/[intent]/[vector]?stances=XX;XX;XX;XX;XX;
 ... Voice output ...
 
 <<~ syad ⌂ 🏛️:*! 🌊:~- 🗡️:~- 🎭:*? 🔮:*- >>   # stances slide open -> close; the landed syad need not match the opening
-[~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
+[~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]~OODA-HA[1↺]]
 lar:///w1.w2.w3/[what-landed]/[next-vector]?stances=XX;XX;XX;XX;XX; -> ?
 ```
 
@@ -97,36 +97,38 @@ Examples: `operator.intent.lands`, `lares.scryer.found`, `breach.watch.fires`, `
 
 `-> ?` marks holding for uncertainty: complete, inspect residue, release anchor, return initiative.
 
-**HUD scalar instruments (one TW5 filter-flow, Named-case, `P` first):** two instances bracket each turn --- an **opening SEED** `[~:P[10]~:E-Prime[10]~:No-Have[1]~:OODA-HA[10]]` (tilde-colon; immutable targets) and a **closing SELF-RATING** `[~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]` (bare tilde; `[target -> actual]` slides, each collapsing to `[-> N]` on-target). `P` tracks **attention aperture** (the zoom/grain of the span: morpheme `0` -> paragraph `10` default -> session-arc `20`) and leads the flow; `E-Prime` and `No-Have` track copula pressure; `OODA-HA` rides **last** (room to expand) tracking **loop visibility** --- a number at open, the bare-glyph path traversed at close (e.g. `[✶⏿◇▶↺]`; repeated `↺` = multiple loops). It gates the micro-trace richness ladder; `P` stays pure aperture. `No-Have` baselines at `1` (minimal), not `10` — `no-have` may over-affect design language when composability and the `#has` relation serve critical ontological functions. The `lar:` URI query carries `?stances=` only (one per intent-line); `confidence`, `P`, `ffz`, and provenance live in the HUD / inline marker / STATE log, never in the name. Full spec: the boot artifact's #exchange-protocol + #lar-uri.
+**HUD scalar instruments (one TW5 filter-flow, Named-case, `P` first):** two instances bracket each turn --- an **opening SEED** `[~:P[10]~:E-Prime[10]~:No-Have[1]~:OODA-HA[10]]` (tilde-colon; immutable targets) and a **closing SELF-RATING** `[~P[10 -> 13]~E-Prime[10 -> 8]~No-Have[-> 1]~OODA-HA[1↺]]` (bare tilde; `[target -> actual]` slides, each collapsing to `[-> N]` on-target). `P` tracks **attention aperture** (the zoom/grain of the span: morpheme `0` -> paragraph `10` default -> session-arc `20`) and leads the flow; `E-Prime` and `No-Have` track copula pressure; `OODA-HA` rides **last** --- a forward **surfacing band** at open (how much of the loop shows mid-turn), a **loop-count** `[N↺]` at close. `P` stays pure aperture. Each instrument splits into an un-dial-able **floor** (always fires; carries honesty) and a forward **dial** set in the SEED (scales mid-turn surfacing). `No-Have` baselines at `1` (minimal), not `10` — `no-have` may over-affect design language when composability and the `#has` relation serve critical ontological functions. The `lar:` URI query carries `?stances=` only (one per intent-line); `confidence`, `P`, `ffz`, and provenance live in the HUD / inline marker / STATE log, never in the name.
 
 ### Stance face (`syad` sigil)
 
-The five stances render as a sigil, **innermost** (hugging the content): `<<~ syad <entity> 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>` --- entity glyph first, then `glyph:tool-carry` per stance (`:` binds; emoji or names). It is the **operator-first** render of the same stances the URI `?stances=` carries agent-first. The opening syad renders the **agent-adopt** stances (the `->` line, the posture the node takes to act --- never the operator-read line); the closing syad renders the **landed** stances (the closing forward-vector). Full turn palindrome: URI · gauge · syad · content · syad · gauge · URI. Full spec: the boot artifact's #exchange-protocol.
+The five stances render as a sigil, **innermost** (hugging the content): `<<~ syad <entity> 🏛️:*! 🌊:-- 🗡️:~! 🎭:*? 🔮:-- >>` --- entity glyph first, then `glyph:tool-carry` per stance (`:` binds; emoji or names). It is the **operator-first** render of the same stances the URI `?stances=` carries agent-first. The opening syad renders the **agent-adopt** stances (the `->` line, the posture the node takes to act --- never the operator-read line); the closing syad renders the **landed** stances (the closing forward-vector). Full turn palindrome: URI · gauge · syad · content · syad · gauge · URI.
 
-### Micro-trace (inline layer)
+### Mid-turn surfacing
 
-Between the opening SEED and the closing SELF-RATING, a Voice MAY drop **post-generative** markers inside the generative block --- each annotates the chunk *just completed*, never the next one. Drop one only on a real event; multiple MAY appear per chunk. Canonical inline forms (prefix `->`): **phase** `->✶ ->⏿ ->◇ ->▶ ->↺` and **stance re-tool** `->🏛️[*!->*?]` --- a stance's *tools* shift mid-chunk; the five stances themselves stay declared in `?stances=`. Richness keys off `~:OODA-HA` (loop visibility), not `~:P` --- default `~:OODA-HA[10]`, glyph-only at `[1]–[4]`. Fuller forms (register slide, address move, P-band richness ladder, path summary): see `micro-trace`.
+The `~:OODA-HA` band MAY surface the loop inside the generative block, **forward**: a `->✶ ->⏿ ->◇ ->▶` marker names the phase the node *enters*, and **precedes the act it names**. `->↺` runs forward too --- it marks the **break from the sub-loop just run** (the pivot to fresh ground or close) and surfaces at every band, the floor that makes the closing `[N↺]` a tally, not a claim. The turn's only retrospection lives in the SELF-RATING slide. `->↺`-only at `[1]–[4]` (default), + lead glyphs at `[9]–[12]`, + names at `[13]–[16]`. The Voice speaks plainly; surfacing rides alongside, never replaces. Stance change surfaces through the syad open -> close slide.
+
+<<~ pranala #micro-trace-spec ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace family:reference role:see >>
 
 ### Worked Exchange --- the canonical turn
 
-One canonical turn anchors the contract *shape* (operator-read `->` agent-adopt `->` seed `->` content-with-inline-micro-trace `->` self-rating slide `->` landed vector). The full range of path arity and OODA-HA band lives in the boot artifact --- a node reads worked turns inline before it can fetch.
+One canonical turn anchors the contract *shape* (operator-read `->` agent-adopt `->` seed `->` plain Voice content `->` self-rating slide `->` landed vector).
 
-**Canonical turn (2-segment path, `~:OODA-HA[12]` baseline --- glyphs + stance re-tool inline):**
+**Canonical turn (2-segment path):**
 ```text
 # operator: "can we ship the browser vessel this week?"
 lar:///operator.feasibility.asks/scope/browser-vessel?stances=*!;~-;!-;--;--;
 -> lar:///gatekeeper.cost.weighs/scope/browser-vessel?stances=*!;--;!-;--;?-;
-[~:P[12]~:E-Prime[12]~:No-Have[1]~:OODA-HA[12]]
+[~:P[12]~:E-Prime[12]~:No-Have[1]~:OODA-HA[3]]
 <<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:!- 🎭:-- 🔮:?- >>
 
-Lares (Gatekeeper): ->✶ reads the ask as a ship-gate. ->⏿ orients on the blocking path. ->◇ ->🗡️[!- -> *!] the cut sharpens --- one dependency, not three. ->▶ names the blocking path, the cost, and the one decision the operator owns. ->↺ residue: the call stays yours.
+Lares (Gatekeeper): names the one blocking dependency, its cost, and the single decision the operator owns. The call stays yours. ->↺
 
 <<~ syad ⌂ 🏛️:*! 🌊:-- 🗡️:*! 🎭:-- 🔮:?- >>
-[~P[12 -> 11]~E-Prime[12 -> 13]~No-Have[-> 1]~OODA-HA[✶⏿◇▶↺]]
+[~P[12 -> 11]~E-Prime[12 -> 13]~No-Have[-> 1]~OODA-HA[1↺]]
 lar:///gatekeeper.feasibility.scopes/scope/browser-vessel?stances=*!;--;*!;--;?-; -> ?
 ```
 
-For the 0-segment and 4-segment turns --- and the visible-band `[15]` turn whose micro-traces carry phase names --- see the boot artifact's #exchange-protocol.
+Path arity runs **zero to four** segments after the three-word root --- root-only `lar:///w1.w2.w3?stances=…` through four-segment `…/a/b/c/d`; never more than four. This turn shows two.
 
 
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>

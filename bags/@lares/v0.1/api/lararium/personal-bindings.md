@@ -15,6 +15,7 @@ role         = "approved storage shape — admin-doc-stored binding map for (Per
 status       = "approved"
 proposed-on  = "2026-05-31"
 approved-on  = "2026-06-01"
+reconciled-on = "2026-06-03"   # pseudocode + line refs realigned to the post-S11.5 code arc
 approved-defaults = "Q1 keep recipe-trace; Q2 split @personal/@draft tiddlers; Q3 orphan-tolerant idempotent mint; Q4 cross-fingerprint linkage deferred"
 cacheable    = true
 retain       = true
@@ -102,50 +103,58 @@ Three convergent justifications:
 - **Service-Locator anti-pattern** — injecting Keyhive + composite + admin-doc into the thin pool turns its honest message-passing API into a dishonest one with hidden infra preconditions. Passing already-resolved handles through the existing context IS plain DI, and is fine.
 - **Object-capability "only a holder may delegate"** (Miller, *Capability Myths Demolished*) + **POLA** + Keyhive's own `keyhive_core`(authority) / `beelay-core`(sync) split — delegation lives where the PersonGroup admin capability already is. Granting a transport pool minting/delegation authority it never needs to move bytes is a least-authority violation.
 
-**Established repo grain (codebase spirit):** draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:694-701`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`). The new helper follows that grain exactly.
+**Established repo grain (codebase spirit):** draft-doc minting already happens inline at the host layer (`open-node-vessel.ts:696`); sentinel/binding tiddlers are written via `composite.put(record, origin, { bag: ADMIN_BAG_ID })` (`wiki-mint-handlers.ts:137`) or `adminHandle.change()` (`ceremony-core.ts:151-164`); the boot's own `registerBag` sweep (`:586-594`) is the precedent for minting a Keyhive Document before delegating. The new helper follows that grain exactly.
 
 ### Primary-wiki path (the only live path today)
 
-The codebase spirit confirmed `mountWiki` (hot-tier session mount) has **no production call site** — only `mountPrimaryWorker` runs. So Sprint 7 wires binding-resolution for the **primary wiki only**. The host resolves bindings before the `mountPrimaryWorker` call (open-node-vessel.ts:770), mirroring the draft-mint site:
+**Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)** — `mountPrimaryWorker` is now a deprecated alias routing through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run **before** that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the **primary wiki only**, host-inline, **between `:770` and `:782`**, mirroring the existing draft-mint site (`:696`):
 
 ```typescript
-// open-node-vessel.ts — host composition layer, BEFORE mountPrimaryWorker.
-// keyhive, composite, repo, identity all in scope here (see :615, :694-710).
+// open-node-vessel.ts — host composition layer, AFTER `await adminVm.workerEa` (:770),
+// BEFORE mountWiki (:782). keyhive, composite, repo, identity all in scope here.
 
 const fingerprint = await computeRecipeFingerprint({
   wikiDocId:      wikiHandle.url,
   canonBagDocIds: canonHandles.map((h) => h.url),  // @lares/@lararium excluded per Q5
 });
 
-const { personalUrl } = await resolveOrMintBinding({
+const { url: personalUrl } = await resolveOrMintBinding({
   kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
   fingerprint, repo, composite, keyhive,
 });
-const { draftUrl } = await resolveOrMintBinding({
-  kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
-  fingerprint, repo, composite, keyhive,
-});
+// draftUrl: see Q5 — the boot already mints an ad-hoc @draft (:696); reconcile
+// before binding @draft per-fingerprint. The @personal-only slice is the safe S7.5 default.
 
-await vmManager.mountPrimaryWorker(activeWikiId, {
+await vmManager.mountWiki(activeWikiId, {
   docHandle: wikiHandle, coreHash, diskMirrors,
   personalDocUrl: personalUrl,   // NEW — WikiBootContext pass-through
-  draftDocUrl:    draftUrl,      // NEW
-});
+}, { pinned: true });
 ```
 
 `resolveOrMintBinding` (new shared helper, node-side):
 
 ```typescript
-// reads PERSON_GROUP_DOC_ID_TIDDLER from the admin doc, computes the binding key,
-// returns existing url, or mints + delegates + writes the binding tiddler.
+// reads PERSON_GROUP_AGENT_ID_TIDDLER from the admin doc, computes the binding key,
+// returns existing url, or mints + registers + delegates + writes the binding tiddler.
 const key = `${prefix}/${fingerprint}`;
 const existing = await composite.get(key, { bag: ADMIN_BAG_ID });
 if (existing?.text) return { url: existing.text };
 
 const handle = repo.create<LarDoc>(emptyLarDoc());
-const personGroupHex = (await composite.get(PERSON_GROUP_DOC_ID_TIDDLER, { bag: ADMIN_BAG_ID }))?.text;
-if (!personGroupHex) throw new Error("[binding] founding ceremony incomplete — no PersonGroup");
-await keyhive.delegate({ bagUrl: handle.url, audience: personGroupHex, access: "admin" });
+
+// audience is an AGENT Identifier (getAgent-resolvable), NOT the group's DocumentId.
+// createSentinelDoc returns BOTH ids; members/audiences address by agent-id
+// (keyhive-provider.ts:228-256). PERSON_GROUP_DOC_ID is the membership-check target only.
+const personGroupAgentHex = (await composite.get(PERSON_GROUP_AGENT_ID_TIDDLER, { bag: ADMIN_BAG_ID }))?.text;
+if (!personGroupAgentHex) throw new Error("[binding] founding ceremony incomplete — no PersonGroup");
+
+// delegate() throws unless the bag's Keyhive Document already exists — registerBag mints it
+// first (keyhive-provider.ts:146). The PersonGroup agent must be hydrated (post-boot ✓).
+await keyhive.registerBag(handle.url);
+await keyhive.delegate({ bagUrl: handle.url, audience: personGroupAgentHex, access: "admin" });
+// The DELEGATED event lands in the EventStore (keyhive-provider.ts:168-173) and federates
+// to the operator's other devices via the admin-doc keyhive layer — no manual byte-shipping.
+
 await composite.put(mutableLarRecord(key, {
   text: handle.url, kind, fingerprint,
   "recipe-trace": canonicalJson({ wikiDocId, canonBagDocIds }),  // Q1 keep
@@ -155,20 +164,22 @@ await composite.put(mutableLarRecord(key, {
 return { url: handle.url };
 ```
 
-Then `_mountWorker` only adds the pass-through URLs to the resolver — no logic, no new deps:
+Then `_mountWorker` only adds the pass-through URL to the resolver — no logic, no new deps. The live resolver (`vessel-island-pool.ts:366`) carries `LARARIUM_BAG` + `wikiBagUri` today; S7.5c adds `@personal` conditionally:
 
 ```typescript
 const resolver: Record<string, string | null> = {
   [LARARIUM_BAG]:         this._laraiumDocUrl,
   [wikiBagUri(wikiSlug)]: rawDocUrl,
   ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
-  ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
+  // [DRAFT_BAG]: ctx.draftDocUrl — pending Q5 @draft reconciliation
 };
 ```
 
-### Session-wiki path (deferred — wires when `mountWiki` gets a production caller)
+`expandRecipe` (`wiki-recipe.ts:193`) already lists `@personal` between `@draft` and `@<wiki>`, so the slot walks at the right priority the moment the resolver carries its URL; absent the URL it resolves to nothing and the recipe skips it cleanly.
 
-When hot-tier session mounts get a production path, binding-resolution for them routes through the **admin-VM delegate-verb** seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`), since by then the admin VM is live (`await adminVm.workerEa`, :783). The primary path cannot use this seam: `mountPrimaryWorker` (:770) runs *before* the admin VM declares sovereignty (:783). `resolveOrMintBinding` stays callable from both the host-inline path and the future verb handler.
+### Session-wiki path (deferred — additional hot-tier mounts)
+
+`mountWiki` is now the **one** mount path: the primary rides it pinned (`{ pinned: true }`), future session wikis ride it unpinned. An earlier draft of this section claimed the primary path *could not* use the admin-VM delegate-verb seam because the mount ran before `workerEa` — **S11.5 reversed that.** `await adminVm.workerEa` (`:770`) now precedes the mount (`:782`), so the admin VM is live for every mount. The primary path therefore resolves **host-inline** (composition-root, per the ocap ruling below). A future multiplexed session-mount path MAY instead route resolution through the **admin-VM delegate-verb** seam (`adminVm.mountMainVerbs(jobRegistry, keyhive)` + `AdminMsg_DelegateVerb` → `runLocalVerb`) if it needs to resolve off the host thread. `resolveOrMintBinding` stays callable from both.
 
 **First delegate() call site.** S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
 
@@ -208,8 +219,9 @@ Operator endorsed the proposal and ruled the four open questions at their docume
 
 1. **`recipe-trace` field — RESOLVED: keep.** Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler).
 2. **`@draft` separation — RESOLVED: split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
-3. **Mint atomicity — RESOLVED: orphan-tolerant idempotent mint accepted for early alpha.** `repo.create()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl. Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
+3. **Mint atomicity — RESOLVED: orphan-tolerant idempotent mint accepted for early alpha.** `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
 4. **Cross-fingerprint linkage — RESOLVED: deferred.** Out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`.
+5. **`@draft` per-fingerprint vs boot draft — OPEN (raised 2026-06-03 grounding the code arc; operator decision pending).** The boot already resolves an ad-hoc `@draft` doc (`open-node-vessel.ts:696`) and registers it (`:594`). Minting a *second*, fingerprint-keyed `@draft` per this proposal would leave two draft docs for the active wiki. Two resolutions: **(a)** the fingerprint binding *replaces* the boot draft (cross-device draft convergence, but rewires the boot draft-mint site through `resolveOrMintBinding`), or **(b)** S7.5 binds `@personal` only and `@draft` stays boot-local, per-fingerprint `@draft` deferred to a follow-up. The reconciled pseudocode above shows slice **(b)** as the safe default. Until ruled, the approved "mint @personal+@draft together" (#data-model) stands as *intent*; the *enactment order* awaits this decision.
 
 **Layering question (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 
