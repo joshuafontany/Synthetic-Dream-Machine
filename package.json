@@ -10,10 +10,8 @@
     "lint": "pnpm -r lint",
     "dev": "concurrently -n node,vite -c magenta,cyan \"pnpm --filter @lararium/node dev\" \"pnpm --filter @lararium/app dev\"",
     "test:unit": "pnpm -r test",
-    "test:tw5-fixture": "pnpm --filter @lararium/tw5 exec vitest run -c ../../tests/lararium-tw5/vitest.config.ts",
     "test:sigil-alignment": "pnpm --filter @lararium/tw5 test:sigil-alignment",
-    "test:flows": "bash tests/bin/run-flow.sh all",
-    "test:tw5-flow": "echo 'TW5 flow scripts retired 2026-05-31 under the residency-model cleanup. Residency-action flow scripts land in Sprint 5 — see packages/EPIC-RESIDENCY-MODEL.md.' && exit 0"
+    "test:flows": "echo 'Top-level tests/ harness nuked 2026-06-02 (superseded models). Tests are co-located in packages/*/tests — run pnpm -r test. See tests/TEST-ARCHITECTURE.md.' && exit 0"
   },
   "devDependencies": {
     "@lares/cli": "workspace:*",
