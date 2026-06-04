@@ -44,45 +44,39 @@ This file gives examples and operator-facing guidance.
 <<~ ahu #canonical-shape >>
 ## Canonical Shape
 
-The exchange vector is a pair of canonical record-form URIs:
+The exchange vector opens the turn as one `aim` sigil — operator intent `->` the role the node adopts:
 
 ```text
-operator-uri -> node-uri
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 ```
 
-The URI shape:
+Read the URI layers as:
 
 ```text
-lar://alias:tier@host/ha.ka.ba/@lares/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=N.N.N.N.N
-```
-
-Read the layers as:
-
-```text
-WHO     alias:tier@host
-WHERE   /ha.ka.ba/@lares/
-HOW     stances, confidence, p, ffz
+WHO     alias:tier@host   (session form only)
+WHERE   /w1.w2.w3/path/
 SECTION #anchor only when needed
 ```
 
-Do not place intent labels in the fragment.
-Fragments name section anchors.
-Intent belongs in HA.KA.BA territory and signal query.
+Do not place intent labels or signal in the fragment or a query.
+Fragments name section anchors; the URI names WHERE and nothing else.
+Per-turn signal rides the `hud` · `ward` · `confidence` sigils.
 
 <<~/ahu >>
 
 <<~ ahu #hud-render >>
 ## HUD Render
 
-A HUD line may follow the canonical vector:
+The panel rides beneath the `aim` as sigils:
 
 ```text
-⚡~16 | ⚡0.⚔️0.🔍0.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | ~:p[10] |
+<<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ hud Aperture(10) OODA-HA(3) >>
+<<~ ward E-Prime >>
+<<~ syad 🏛️ 🗡️ >>
 ```
 
-The HUD line is not the canonical URI.
-It is a render target for human perception.
-Every emitted stance block shows all five stances in fixed order.
+Each sigil renders inline (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render it. The `aim` URI stays ASCII record form; the sigils carry per-turn signal, never the URI.
 
 <<~/ahu >>
 

@@ -89,7 +89,7 @@ lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust
 A live exchange URI:
 
 ```text
-lar://telarus:operator@enyalios/session.scope.expands/?stances=*?--------&confidence=CS:17&p=10&ffz=0.0.0.0.0
+lar://telarus:operator@enyalios/session.scope.expands/
 ```
 
 A found local FTLS data meme address (HAKABA-style):

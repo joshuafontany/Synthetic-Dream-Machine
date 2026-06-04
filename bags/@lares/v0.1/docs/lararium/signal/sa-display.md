@@ -97,14 +97,14 @@ It annotates the inside of a generative span.
 
 | SA Type | HUD Channel | What It Conveys |
 |---|---|---|
-| Taskwork SA | HAKABA address (`/threshold.uncertain.opens/(path)?`) | Semantic territory — what domain we're in |
-| Taskwork SA | FFZ chronometer (`&ffz=7.2.3.0.0`) | Temporal position — current location in nested scope by scale position and action count |
-| Agent SA | Register (`~:confidence[S],[13]`) | Epistemic confidence — the node's degree of certainty |
-| Agent SA | Full stance array (`🏛️🌊🗡️🎭🔮`) | Discourse posture across all five fixed stance positions; the full HUD line keeps all five visible |
-| Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next HUD or `lar` URI should reflect the shift |
-| Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `⤴ ↺`) | Cognitive movement through the current OODA-HA phase set |
-| Teamwork SA | p-band (`~:p[10]`) | Attention density — cognitive load management |
-| Teamwork SA | Input reading (dual-URI vector) | Bidirectional calibration — how the node read the operator's input, how the node intends to respond |
+| Taskwork SA | `aim` WHERE-vector (`lar:///threshold.uncertain.opens/…`) | Semantic territory — what domain we're in |
+| Taskwork SA | `OODA-HA` gauge (`OODA-HA(N↺)`) | Temporal position — loops the turn ran through the phase set |
+| Agent SA | `confidence` sigil (`<<~ confidence Synthesis 13/20 >>`) | Epistemic confidence — the node's degree of certainty |
+| Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️ >>`) | Discourse posture — the standpoints the node invokes and adopts |
+| Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next `syad` lens reflects the shift |
+| Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `↺`) | Cognitive movement through the current OODA-HA phase set |
+| Teamwork SA | `Aperture` gauge (`Aperture(N)`) | Attention range — cognitive load management |
+| Teamwork SA | `aim` reading (operator intent `->` adopted role) | Bidirectional calibration — how the node read the input, how it intends to respond |
 
 Current law keeps all five stances visible in fully rendered HUD and `lar` URI forms.
 Inline stance changes may surface locally during a span.

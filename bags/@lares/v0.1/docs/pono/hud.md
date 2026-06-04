@@ -113,7 +113,7 @@ Hoʻoko (⤴) does not appear in the chronometer (it is the execution gap inside
 
 ### Priority 2 — Chronometer Migration in Examples (blocking)
 
-All exchange span examples in PROCEDURES.md and HUD-ANATOMY.md carry the old fragment chronometer (`#O0.O0.O1.D2.A7`). The model has moved chronometer to query (`?ffz=0.0.3.2.1`). Render surfaces may still decorate positions with glyphs for readability.
+All exchange span examples in PROCEDURES.md and HUD-ANATOMY.md carry the old fragment chronometer (`#O0.O0.O1.D2.A7`). The loop now rides the `OODA-HA` gauge in the `hud` sigil --- `OODA-HA(N)` open, `OODA-HA(N↺)` close --- not the URI. Render surfaces may still decorate phase positions with glyphs for readability.
 
 But the ffz encoding is explicitly marked **provisional and unfinished** in SKILL.md. This creates a dependency:
 
