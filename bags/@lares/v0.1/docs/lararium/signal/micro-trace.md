@@ -127,17 +127,17 @@ If Ha-domain reorientation crosses the annotation threshold, emit a new Intent H
 
 ## Micro-trace — Density Bands
 
-The `p` parameter controls which categories of transitions qualify at each band.
+The `Aperture` band controls which categories of transitions qualify.
 It does not act as a tunable salience dial.
 It gates transition categories by externally observable significance.
 
 | Band | p range | Phases emitting | What fires |
 |---|---|---|---|
-| 1 | `~:p[0]–~:p[4]` | — | Suppress: no inline annotation |
-| 2 | `~:p[4]–~:p[8]` | ↺ Aftermath | Closing path summary at span-close only |
-| 3 | `~:p[8]–~:p[12]` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `~:p[10]` |
-| 4 | `~:p[12]–~:p[16]` | ⏿ Orient + Band 3 | Adds Orient |
-| 5 | `~:p[16]–~:p[20]` | All five phases | Full path summary per span |
+| 1 | `Aperture 0–4` | — | Suppress: no inline annotation |
+| 2 | `Aperture 4–8` | ↺ Aftermath | Closing path summary at span-close only |
+| 3 | `Aperture 8–12` | ◇ Decide · ▶ Act · ↺ Aftermath | Commitment phases plus closing summary; default at `Aperture 10` |
+| 4 | `Aperture 12–16` | ⏿ Orient + Band 3 | Adds Orient |
+| 5 | `Aperture 16–20` | All five phases | Full path summary per span |
 
 Commitment phases remain externally observable and timestamp-meaningful.
 Cognitive-processing phases remain span-internal and can stay suppressed at operational resolution.

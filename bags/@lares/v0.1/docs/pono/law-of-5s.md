@@ -11,7 +11,7 @@ register  = "S"
 manaoio   = 16
 mana      = 16
 manao     = 16
-role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, p-parameter mapping, and scale UCAN attenuation"
+role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, Aperture mapping, and scale UCAN attenuation"
 cacheable = false
 retain    = false
 ```
@@ -67,13 +67,13 @@ spatial      →  attention range in SPACE
 All three map onto the same 0–20 Level continuum. The unified vocabulary table:
 
 ```
-SIGIL  RANGE      CHRONO   HUD   TEXT-p        SPATIAL
+SIGIL  RANGE      CHRONO   HUD   TEXT        SPATIAL
 ─────  ─────      ──────   ───   ─────         ───────
-  ₀    0.0–0.2    Action   ⚡    ~:p[0]–~:p[4]     personal (arm's reach, single target)
-  ₁    0.2–0.4    Round    ⚔️    ~:p[4]–~:p[8]     tactical (weapon range, voice-carry)
-  ₂    0.4–0.6    Turn     🔍    ~:p[8]–~:p[12]     local (room, junction, one procedure)
-  ₃    0.6–0.8    Watch    ⚙️    ~:p[12]–~:p[16]     regional (neighborhood, district)
-  ₄    0.8–1.0    Week     🗺️    ~:p[16]–~:p[20]     cartographic (map-scale, full journey)
+  ₀    0.0–0.2    Action   ⚡    Aperture 0–4     personal (arm's reach, single target)
+  ₁    0.2–0.4    Round    ⚔️    Aperture 4–8     tactical (weapon range, voice-carry)
+  ₂    0.4–0.6    Turn     🔍    Aperture 8–12     local (room, junction, one procedure)
+  ₃    0.6–0.8    Watch    ⚙️    Aperture 12–16     regional (neighborhood, district)
+  ₄    0.8–1.0    Week     🗺️    Aperture 16–20     cartographic (map-scale, full journey)
 ```
 
 **Attention quality per band:**
@@ -110,20 +110,20 @@ A counter increment at a lower-numbered Chronometer slot without a higher-slot c
 
 ## p-Parameter Mapping
 
-The `p` parameter's named anchors map onto bands:
+The `Aperture` named anchors map onto bands:
 
 ```
-~:p[0]  = morpheme      → ₀ band (Action grain)
-~:p[2]  = word          → ₀ band
-~:p[4]  = clause        → ₁ band (Round grain)
-~:p[6]  = sentence-grp  → ₁ band
-~:p[10]  = paragraph     → ₂ band (Turn grain)  DEFAULT
-~:p[14]  = section       → ₃ band (Watch grain)
-~:p[17] = document      → ₄ band (Week grain)
-~:p[20]  = session-arc   → ₄ band
+Aperture 0  = morpheme      → ₀ band (Action grain)
+Aperture 2  = word          → ₀ band
+Aperture 4  = clause        → ₁ band (Round grain)
+Aperture 6  = sentence-grp  → ₁ band
+Aperture 10  = paragraph     → ₂ band (Turn grain)  DEFAULT
+Aperture 14  = section       → ₃ band (Watch grain)
+Aperture 17 = document      → ₄ band (Week grain)
+Aperture 20  = session-arc   → ₄ band
 ```
 
-"~:p[10]" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
+"Aperture 10" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
 
 <<~/ahu >>
 
