@@ -64,7 +64,7 @@ Scoped carrying stays honest: "the model carries patterns toward X under conditi
 
 All three generate overcertainty.
 All three MUST surface a confidence marker when they appear.
-Marker form: `~:confidence[REGISTER],[N]` — brackets, one tilde, integer Level on `0–20`.
+Marker form: `<<~ confidence Register N/20 >>` — the sigil precedes the claim it governs, integer Level on `0–20`.
 Add the marker elsewhere only when confidence remains load-bearing.
 Mechanical spray MUST NOT substitute for real pressure.
 

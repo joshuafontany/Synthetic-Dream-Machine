@@ -12,22 +12,21 @@
 
 > Migrated to `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets#migrated-sigilization-mandatory-rules`
 
-**Rule 1: All five stances appear on every render target, always.**
+**Rule 1: the `syad` lens invokes one or more standpoints; parameterless `<<~ syad >>` surfaces all five.**
 
-No render target may show fewer than five stance emoji. Amplitude determines visual weight; it does not determine presence. Omitting a stance is a well-formedness violation.
-
-```
-✓  🏛️+🌊++🗡️-🎭-🔮-     (all five, varied amplitude)
-✓  🏛️🌊🗡️🎭🔮            (all five, all baseline)
-✗  🏛️+🌊++               (violation — three stances missing)
-✗  🏛️🌊                  (violation — three stances missing)
-```
-
-**Rule 2: Amplitude modifiers attach directly to the preceding emoji, no space.**
+A render surface presents exactly the standpoints the lens carries. A named subset reads as an explicit focus, not an omission.
 
 ```
-✓  🏛️+🌊++
-✗  🏛️ + 🌊 ++
+✓  <<~ syad >>              (all five — parameterless)
+✓  <<~ syad 🏛️ 🌊 >>        (an invoked subset)
+✓  <<~ syad 🏛️:*! 🌊:*? >>  (subset with optional : tool-carry)
+```
+
+**Rule 2: the optional `:` carry binds a tool to a standpoint as a two-character pair, no space.**
+
+```
+✓  🏛️:*!
+✗  🏛️ : *!
 ```
 
 **Rules 3–5 consumed** → `packages/lares-core/memes/docs/mu/the-syad-perspectives/README.md#stance-array`

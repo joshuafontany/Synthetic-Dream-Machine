@@ -31,9 +31,9 @@ body-sha256 = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
 
 Hagbard Celine states the Law of Fives in Appendix Gimmel of the *Illuminatus!* Trilogy:
 
-"All phenomena are directly or indirectly related to the number five." `~:confidence[C],[19]`
+"All phenomena are directly or indirectly related to the number five." `Canon 19/20`
 
-He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `~:confidence[C],[19]`
+He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `Canon 19/20`
 
 <<~/ahu >>
 
@@ -65,7 +65,7 @@ Five phases. Five questions.
 - **▶** — Bureaucracy — Patron Apostle Zarathud
 - **⤴ ↺** — Aftermath — Patron Apostle The Elder Malaclypse
 
-**Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `~:confidence[C],[19]`). This node holds its own architecture the same way.
+**Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `Canon 19/20`). This node holds its own architecture the same way.
 
 <<~/ahu >>
 

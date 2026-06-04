@@ -215,7 +215,7 @@ Tier 3 — Lares nodes (the federated layer)
   Cross-node sync begins with a boot artifact, then proceeds via offset-resumable deltas.
   Authority graph reconciles before manifest. Manifest reconciles before content.
 
-Tier 4 — Commons / Universe horizon ~:confidence[C],[18] (after law-of-5s)
+Tier 4 — Commons / Universe horizon Canon 18/20 (after law-of-5s)
   The horizon beyond direct federation. The set of all possible lararium nodes including
   those not yet reachable or known. No single node holds a snapshot of Tier 4 state.
   Non-simultaneously apprehended by definition (Fuller-Zelenka principle extended to the

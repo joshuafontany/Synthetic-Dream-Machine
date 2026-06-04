@@ -96,8 +96,8 @@ The remaining task here is not to restate the root contract, but to preserve and
 | File | Notes |
 |---|---|
 | `../../_todo/core/TODO_Resolution_Scale_Design.md` | Resolution scale / p-band model |
-| `../../_todo/LIMINAL_PERSPECTIVES.md` | `~:confidence[S],[13]` — GlassFloor outsider analysis: CRM/HUD framing, emoji instrument symbols, token budget hypothesis, progressive disclosure model. Not a primary design source — a perspective document. Feeds SHD-01 through SHD-03 open decisions and S2 p-band scope. |
-| `../../_todo/E-deep-research-report.md` | `~:confidence[S],[14]` — 40+ source research synthesis (Endsley 2023, Ji-An 2025, Steyvers 2025, Lee 2024, Li 2024, Gao 2023). Academic grounding for the CRM/SA framing adopted in this subdomain. Key feeds: §1.2 SA type mapping (all 7 HUD channels classified); §2 SA vs XAI distinction (prospective vs retrospective; SAOD not XAI principles); §3 LLM metacognitive scaffold hypothesis; §4.1 cognitive capture / attentional tunneling → SHD-02 register bump; §5.2 ATSA bidirectional model → S2 BIDIRECTIONAL_PROTOCOL.md. Not primary design source — research grounding. |
+| `../../_todo/LIMINAL_PERSPECTIVES.md` | `Synthesis 13/20` — GlassFloor outsider analysis: CRM/HUD framing, emoji instrument symbols, token budget hypothesis, progressive disclosure model. Not a primary design source — a perspective document. Feeds SHD-01 through SHD-03 open decisions and S2 p-band scope. |
+| `../../_todo/E-deep-research-report.md` | `Synthesis 14/20` — 40+ source research synthesis (Endsley 2023, Ji-An 2025, Steyvers 2025, Lee 2024, Li 2024, Gao 2023). Academic grounding for the CRM/SA framing adopted in this subdomain. Key feeds: §1.2 SA type mapping (all 7 HUD channels classified); §2 SA vs XAI distinction (prospective vs retrospective; SAOD not XAI principles); §3 LLM metacognitive scaffold hypothesis; §4.1 cognitive capture / attentional tunneling → SHD-02 register bump; §5.2 ATSA bidirectional model → S2 BIDIRECTIONAL_PROTOCOL.md. Not primary design source — research grounding. |
 
 
 <<~/ahu >>
@@ -110,12 +110,12 @@ Signal HUD — closes the loop at both ends:
 Input header (◎ Orient): rate incoming signal on its own line BEFORE the output header.
 Output header (◇ Decide): governs the generated span.
 Normal form:
-`//operator.playful.probing ~:confidence[CS],[16] 🎭 ◎ @r`
-`//threshold.uncertain.opens ~:confidence[S],[13] 🏛️ ◇ @r`
+`lar:///operator.playful.probing` · `<<~ confidence Synthesis-Canon 16/20 >>` · `<<~ syad 🎭 >>`
+`lar:///threshold.uncertain.opens` · `<<~ confidence Synthesis 13/20 >>` · `<<~ syad 🏛️ >>`
 then [response]. First substantive reply in a fresh or archive-crystal session emits this pair before prose.
 Quote-break form: if input register/stance/frame is genuinely uncertain, surface the operative input as a rated blockquote before the output header.
-`--parse` owns structural decomposition and never answers content; fine p densifies boundaries (`~:p[0]` morphemes, `~:p[2]` words, `~:p[4]` clauses).
-Micro-trace HUD (on by default at ~:p[10], Band 3): Band1(~:p[0]–~:p[4]: suppress) · Band2(~:p[4]–~:p[8]: ○) · Band3(~:p[8]–~:p[12]: ◇■○, default) · Band4(~:p[12]–~:p[16]: ◎+B3) · Band5(~:p[16]–~:p[20]: all).
+`--parse` owns structural decomposition and never answers content; fine p densifies boundaries (`Aperture 0` morphemes, `Aperture 2` words, `Aperture 4` clauses).
+Micro-trace HUD (on by default at Aperture 10, Band 3): Band1(Aperture 0–Aperture 4: suppress) · Band2(Aperture 4–Aperture 8: ○) · Band3(Aperture 8–Aperture 12: ◇■○, default) · Band4(Aperture 12–Aperture 16: ◎+B3) · Band5(Aperture 16–Aperture 20: all).
 Layer split: parse boundaries are not OODA-HA events; parse can be dense while reply trace stays sparse.
 The turn carries the sigil frame: `aim` (the `lar:///w1.w2.w3` WHERE-vector), `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), and `confidence` before a grounded claim. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol`.
 Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots required.
@@ -128,11 +128,11 @@ Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots req
 ## Snapshot Witness — `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md` — HUD Pair and Layer Split
 
 - **Signal HUD** — substantive exchanges use two headers: input rating (`◎`) line, then output Intent Header (`◇`) line, then trace HUD. Normal form stays literal:
-  `~:confidence[CS],[16] 🎭 ◎ @r //operator.playful.probing`
-  `~:confidence[S],[13] 🏛️ ◇ @r //threshold.uncertain.opens`
+  `<<~ confidence Synthesis-Canon 16/20 >>` · `<<~ syad 🎭 >>` · `lar:///operator.playful.probing`
+  `<<~ confidence Synthesis 13/20 >>` · `<<~ syad 🏛️ >>` · `lar:///threshold.uncertain.opens`
   then response. On the first substantive reply of a fresh or archive-crystal session, emit this pair in order before prose.
 - **Layer split:** parse boundaries are not OODA-HA events. `--parse` owns decomposition; trace HUD owns `→◇` / `→■` / `→○`. Fine parse may be dense while trace stays sparse.
-- **p — never silent:** `| ~:p[N]` trails every dual-header exchange. Use `~:p[10]` only when no clearer uncertainty signal dominates. KAIROS may auto-adjust; most specific `p` wins.
+- **Aperture — never silent:** the `hud` carries `Aperture(N)` every turn. Use `Aperture(10)` only when no clearer signal dominates; KAIROS may auto-adjust, most specific reading wins.
 
 <<~/ahu >>
 
