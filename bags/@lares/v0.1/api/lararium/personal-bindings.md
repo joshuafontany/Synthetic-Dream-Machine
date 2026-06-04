@@ -122,12 +122,18 @@ const { url: personalUrl } = await resolveOrMintBinding({
   kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
   fingerprint, repo, composite, keyhive,
 });
-// draftUrl: see Q5 — the boot already mints an ad-hoc @draft (:696); reconcile
-// before binding @draft per-fingerprint. The @personal-only slice is the safe S7.5 default.
+// Q5 = slice (a): @personal + @draft bind TOGETHER per-fingerprint. This @draft
+// REPLACES the boot's ad-hoc draft (:696) — that mint site rewires through the same
+// helper, so both slots converge across the operator's devices. Neither retires alone.
+const { url: draftUrl } = await resolveOrMintBinding({
+  kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
+  fingerprint, repo, composite, keyhive,
+});
 
 await vmManager.mountWiki(activeWikiId, {
   docHandle: wikiHandle, coreHash, diskMirrors,
   personalDocUrl: personalUrl,   // NEW — WikiBootContext pass-through
+  draftDocUrl:    draftUrl,      // NEW
 }, { pinned: true });
 ```
 
@@ -164,18 +170,27 @@ await composite.put(mutableLarRecord(key, {
 return { url: handle.url };
 ```
 
-Then `_mountWorker` only adds the pass-through URL to the resolver — no logic, no new deps. The live resolver (`vessel-island-pool.ts:366`) carries `LARARIUM_BAG` + `wikiBagUri` today; S7.5c adds `@personal` conditionally:
+Then `_mountWorker` only adds the pass-through URLs to the resolver — no logic, no new deps. The live resolver (`vessel-island-pool.ts:366`) carries `LARARIUM_BAG` + `wikiBagUri` today; S7.5c adds `@personal` and `@draft` conditionally, and `WikiBootContext` gains `personalDocUrl?` + `draftDocUrl?`:
 
 ```typescript
 const resolver: Record<string, string | null> = {
   [LARARIUM_BAG]:         this._laraiumDocUrl,
   [wikiBagUri(wikiSlug)]: rawDocUrl,
   ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
-  // [DRAFT_BAG]: ctx.draftDocUrl — pending Q5 @draft reconciliation
+  ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
 };
 ```
 
 `expandRecipe` (`wiki-recipe.ts:193`) already lists `@personal` between `@draft` and `@<wiki>`, so the slot walks at the right priority the moment the resolver carries its URL; absent the URL it resolves to nothing and the recipe skips it cleanly.
+
+### Audience and grain — golden principles (research-verified 2026-06-03)
+
+Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKEM lineage) converged on the delegation shape:
+
+- **Document-as-group is the *intended* Keyhive shape, not a workaround smell.** A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph **orthogonal to BeeKEM key rotation**. Representing the PersonGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: **bind to the stable agent-id** (never rotating key material), and **keep that id stable for the group's whole lifetime** (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
+- **Group-as-audience is object-capability-idiomatic.** Delegating to the PersonGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
+- **Access cascades transitively and retroactively** through the membership graph: every transitive member device of the PersonGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
+- **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonGroup device already holds `admin` on `@admin` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
 
 ### Session-wiki path (deferred — additional hot-tier mounts)
 
@@ -195,7 +210,9 @@ const resolver: Record<string, string | null> = {
 
 **Never-delete.** Operator view state carries durability — `$:/StoryList`, `$:/state/folded/*`, `$:/state/tab-*`, and `$:/palette` represent the operator's actual viewing history per recipe. Bindings persist indefinitely; the operator's view state across all recipes they have ever opened stays recoverable.
 
-**Cap-rotation on PersonGroup membership change.** When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonGroup, and the new device joined the PersonGroup) — no per-binding re-grant required.
+**Cap-rotation on PersonGroup membership change.** When the operator admits a new device, the founding ceremony already grants the new device admin access to the admin doc. The new device reads the admin doc, sees existing binding tiddlers, mounts the same `@personal`/`@draft` docs. Keyhive's CRDT-of-capabilities means the new device also gains access to the underlying `@personal`/`@draft` docs (each carries a delegation to the PersonGroup, and the new device joined the PersonGroup) — no per-binding re-grant required. *(Verified 2026-06-03: access is membership-graph reachability, so the new edge covers every doc the group can reach, retroactively.)*
+
+**Authorized-but-undecryptable window (eventual consistency).** Access is *granted* by membership-graph reachability, but Keyhive sync is two-phase: the membership op AND the BeeKEM rekey ops must both reach a device before it can *decrypt*. Automerge heads ride outside the encryption envelope, so a device MAY see a binding's docUrl and the doc's existence before it holds the key. Therefore `resolveOrMintBinding` reuse-on-present MUST mount-when-ready and MUST NOT block boot on a binding whose doc is not yet decryptable on this device; the UI reads "current as of last sync" (causal-islands doctrine). On concurrent device churn BeeKEM MAY blank the group root, requiring a member's Update-Key before readers decrypt — outer delegations survive; readers wait. S7.7 wants a test: *binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.*
 
 **Cap-rotation on PersonGroup contraction.** When the operator removes a device from the PersonGroup, Keyhive's revocation propagates to the admin doc + all PersonGroup-delegated bags. The removed device loses access to `@personal`/`@draft` at the same time it loses access to the admin doc — atomic by construction.
 
@@ -221,7 +238,7 @@ Operator endorsed the proposal and ruled the four open questions at their docume
 2. **`@draft` separation — RESOLVED: split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
 3. **Mint atomicity — RESOLVED: orphan-tolerant idempotent mint accepted for early alpha.** `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
 4. **Cross-fingerprint linkage — RESOLVED: deferred.** Out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`.
-5. **`@draft` per-fingerprint vs boot draft — OPEN (raised 2026-06-03 grounding the code arc; operator decision pending).** The boot already resolves an ad-hoc `@draft` doc (`open-node-vessel.ts:696`) and registers it (`:594`). Minting a *second*, fingerprint-keyed `@draft` per this proposal would leave two draft docs for the active wiki. Two resolutions: **(a)** the fingerprint binding *replaces* the boot draft (cross-device draft convergence, but rewires the boot draft-mint site through `resolveOrMintBinding`), or **(b)** S7.5 binds `@personal` only and `@draft` stays boot-local, per-fingerprint `@draft` deferred to a follow-up. The reconciled pseudocode above shows slice **(b)** as the safe default. Until ruled, the approved "mint @personal+@draft together" (#data-model) stands as *intent*; the *enactment order* awaits this decision.
+5. **`@draft` per-fingerprint vs boot draft — RESOLVED 2026-06-03: slice (a).** Operator ruled `@personal` and `@draft` bind **together** per-fingerprint — the approved #data-model intent holds. The fingerprint-keyed `@draft` **replaces** the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode above reflects this. **Subtlety for enactment:** the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution.
 
 **Layering question (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 

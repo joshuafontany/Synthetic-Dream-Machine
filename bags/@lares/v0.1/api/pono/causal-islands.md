@@ -59,6 +59,16 @@ is `CapabilityVerifier.verify({ access: "read" | "admin" })`; the four-verb tupl
 the edge-island federation scaffolding a typed vocabulary for the same levels. The
 relay-law exception governs the bottom rung.
 
+**Grain debt (POLA, 2026-06-03).** Because the live gate collapses to `read | admin`, an
+`edit`-intent delegation — the POLA-correct grain for a surface a principal co-edits but
+should NOT re-delegate — currently rounds **up** to `admin`. Documented over-grant: e.g.
+delegating an operator's `@personal`/`@draft` view-state to their own PersonGroup grants
+`admin` where `edit` is the true least-authority. Acceptable while the principal set is
+homogeneous-trust (those devices already hold `admin` on `@admin`, so marginal authority
+≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
+`CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
+[personal-bindings](../lararium/personal-bindings.md).
+
 **Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups:
 `Individual ⊂ PersonGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring
 forms a causal island with a **cryptographic membrane** — the Keyhive delegation chain
