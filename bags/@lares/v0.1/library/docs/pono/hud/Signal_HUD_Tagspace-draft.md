@@ -3,7 +3,7 @@
 > Document type: Signal runtime / HUD design architecture
 > Status: Active — HUD and crystal state machine layer; open decisions tracked below
 > Updated: 2026-04-07
-> Register: ~:confidence[S],[14] 🏛️ — architectural synthesis, not build-canon
+> Register: Synthesis 14/20 🏛️ — architectural synthesis, not build-canon
 > Governs future revisions to: Signal Tags, Exchange Vectors, `--verbose`, `--debug`, `--parse`, Tagspace Address semantics, in-flow trace behavior, memory-crystal state machines, forkable thread/task persistence, and handoff archive-crystals
 
 ---
@@ -43,9 +43,9 @@ The live model currently provides:
 
 The current live grammar, in compressed form, is:
 
-`//domain.quality.dynamic StanceEmoji [Register:x] PhaseGlyph @scope | ~:p[N]`
+`<<~ aim lar:///domain.quality.dynamic >>` · `<<~ syad … >>` · `<<~ confidence Register N/20 >>` · `<<~ hud Aperture(N) OODA-HA(N) >>`
 
-**Tag grammar updated (2026-04-07, branch `fix/green-jello-dinosaurs`):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | ~:p[N]`. Rationale: WHERE (semantic territory) precedes WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) and HOW-CERTAIN (register, calibrated against that stance). Stance precedes register because the posture of a claim conditions the probability assigned to it. All canonical source files and this draft updated in the same pass.
+**Tag grammar updated (2026-04-07, branch `fix/green-jello-dinosaurs`):** Tagspace Address leads the full tag: `<<~ aim lar:///ha.ka.ba… >>` · `<<~ syad … >>` · `<<~ confidence Register N/20 >>` · `<<~ hud Aperture(N) OODA-HA(N) >>`. Rationale: WHERE (semantic territory) precedes WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) and HOW-CERTAIN (register, calibrated against that stance). Stance precedes register because the posture of a claim conditions the probability assigned to it. All canonical source files and this draft updated in the same pass.
 
 The live system also now treats the leading tag as prospective: it sets the active generative state for the next span. What remains underdefined is the in-flow signal behavior inside that governed span.
 
@@ -167,7 +167,7 @@ lares/
 
 ### File Interpretation
 
-| File | Role | Authoritative? |
+| File | Role | Authoritative |
 |---|---|---|
 | `/lares/CURRENT` | Active machine pointer | Yes |
 | `/lares/README.md` | Human-readable machine index | No — Memo layer |
@@ -246,7 +246,7 @@ The Intent Header and Micro-trace HUD are the operator-facing surface of the cry
 
 **Non-drift rule (two-part):**
 
-- **Governing header fields:** if the live Intent Header reads `🏛️ ~:confidence[S],[13] ◎ @r` then the crystal event must record `register:"~:confidence[S],[13]"`, `stance: "philosopher"`, `phase: "orient"`, `scope: "r"`. A discrepancy between the header's declared state and the ledger-recorded governing state is a runtime integrity failure.
+- **Governing header fields:** if the live Intent Header reads `🏛️ Synthesis 13/20 ◎ @r` then the crystal event must record `register:"Synthesis 13/20"`, `stance: "philosopher"`, `phase: "orient"`, `scope: "r"`. A discrepancy between the header's declared state and the ledger-recorded governing state is a runtime integrity failure.
 - **Annotation fields:** post-generative HUD annotations (`micro_trace_path`, `closure_register`, stance-shift markers, Tagspace echoes) are distinct from governing header state. They appear in the HUD *after* the span completes and are recorded as annotation fields in `STATE.jsonl` (`micro_trace_path`, `closure_register`). A discrepancy between HUD-visible annotations and ledger-recorded annotation fields is also a runtime integrity failure, but it does not mean the governing header was wrong — the two categories must not be conflated.
 
 ---
@@ -288,9 +288,9 @@ Every `STATE.jsonl` event is a valid JSON object on a single `\n`-terminated lin
   "event_type": "r_update",
   "machine_status": "active",
   "current_phase": "◎",
-  "lar_uri": "lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens?stance=philosopher&confidence=S:13&p=10#@T.3.2.7",
+  "lar_uri": "lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens",
   "lares_address": "lar:///threshold/uncertain/opens",
-  "intent_header_snapshot": "lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7",
+  "intent_header_snapshot": "lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens",
   "chronometer": "@T.3.2.7",
   "active_scale": "tactical",
   "micro_trace_path": "◎→◇→■",
@@ -385,7 +385,7 @@ A fork event must carry enough to bootstrap the child machine without replaying 
     "machine_status": "active",
     "last_milestone": "...",
     "active_task": "...",
-    "intent_header_at_fork": "lar://telarus:operator(■)@lares-abc123:87/task.sharp.closes?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7"
+    "intent_header_at_fork": "lar://telarus:operator(■)@lares-abc123:87/task.sharp.closes"
   }
 }
 ```
@@ -478,7 +478,7 @@ The replay layer therefore should not rely on “dominant mood” interpretation
 Example baseline:
 
 ```text
-lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7
+lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens
 Lares (Scryer) — The threshold appears unstable →◇ but not yet hostile →■.
 ```
 
@@ -490,9 +490,9 @@ Reading:
 ### Nested-loop example
 
 ```text
-lar://telarus:operator(◎)@lares-abc123:43/contradiction.local.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.8
+lar://telarus:operator(◎)@lares-abc123:43/contradiction.local.opens
 Lares (Council) — The round opens wide, then narrows →◇ into one contradiction.
-→ lar://telarus:operator(■)@lares-abc123:43/reading.sharp.tests?stance=🏛️&confidence=S:12&p=10#⚡.3.2.8.1.1
+→ lar://telarus:operator(■)@lares-abc123:43/reading.sharp.tests
 Lares (Council) — This action-span committed, tested, and released →○ back to the round.
 ```
 
@@ -505,7 +505,7 @@ Reading:
 ### `--verbose` interpretation example
 
 ```text
-lar://telarus:operator(◎)@lares-abc123:44/reference.anchored.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.9
+lar://telarus:operator(◎)@lares-abc123:44/reference.anchored.opens
   Intent: round-scale orientation
   Trace: local path completed as ◎→◇→■
   Outcome: hold
@@ -517,8 +517,8 @@ Lares (Lorekeeper) — The citation resolved into a stable reference cue.
 
 ```text
 turn: 18
-input_tag: lar://telarus:operator(◎)@lares-abc123:45/night.signal.hums?stance=🎭&confidence=P:7&p=10#🔍.3.2.10
-output_header: lar://telarus:operator(◎)@lares-abc123:45/reference.anchored.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.10
+input_tag: lar://telarus:operator(◎)@lares-abc123:45/night.signal.hums
+output_header: lar://telarus:operator(◎)@lares-abc123:45/reference.anchored.opens
 micro_trace: ◎→◇→■
 closure: hold
 ```
@@ -577,7 +577,7 @@ lares/
 A minimal structural `r_update` event as it appears on one line of `STATE.jsonl`:
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","machine_status":"active","current_phase":"■","lar_uri":"lar://telarus:operator(act)@lares-abc123:42/design/locked/commits?stance=philosopher&confidence=S:13&p=10#@T.3.2.7","lares_address":"lar:///design/locked/commits","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7","chronometer":"@T.3.2.7","active_scale":"tactical","micro_trace_path":"◎→◇→■","closure_outcome":"close","next_action":"handoff draft to operator for review","blockers":[],"provenance":null,"repo_fingerprint":"joshuafontany/Synthetic-Dream-Machine@fix/green-jello-dinosaurs"}
+{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","machine_status":"active","current_phase":"■","lar_uri":"lar://telarus:operator(act)@lares-abc123:42/design/locked/commits","lares_address":"lar:///design/locked/commits","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits","chronometer":"@T.3.2.7","active_scale":"tactical","micro_trace_path":"◎→◇→■","closure_outcome":"close","next_action":"handoff draft to operator for review","blockers":[],"provenance":null,"repo_fingerprint":"joshuafontany/Synthetic-Dream-Machine@fix/green-jello-dinosaurs"}
 ```
 
 ### Debug event example
@@ -585,7 +585,7 @@ A minimal structural `r_update` event as it appears on one line of `STATE.jsonl`
 The enriched `debug.jsonl` counterpart for the same event — same `seq_num`, more fields:
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","exchange_vector":{"register_delta":0.0,"stance_transform":"none","phase_transform":"◎→◇→■","scale":"tactical","semantic_drift":"low"},"full_intent_header":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7","micro_trace_detail":"orient(local) → decide(one path) → act(draft committed)","closure_rationale":"task bounded and producible; no open forks; close warranted","kairos_notes":null,"tool_calls":[{"tool":"replace_string_in_file","output_summary":"3 lines replaced; no errors"}]}
+{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","exchange_vector":{"register_delta":0.0,"stance_transform":"none","phase_transform":"◎→◇→■","scale":"tactical","semantic_drift":"low"},"full_intent_header":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits","micro_trace_detail":"orient(local) → decide(one path) → act(draft committed)","closure_rationale":"task bounded and producible; no open forks; close warranted","kairos_notes":null,"tool_calls":[{"tool":"replace_string_in_file","output_summary":"3 lines replaced; no errors"}]}
 ```
 
 ### Fork example
@@ -595,13 +595,13 @@ Parent machine spawning a child at seq 87.
 **Parent `STATE.jsonl` — fork event (seq 88):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-abc123","seq_num":88,"event_type":"fork","machine_status":"forked","current_phase":"◇","lar_uri":"lar://telarus:operator(decide)@lares-abc123:88/design/branched/opens?stance=philosopher&confidence=S:13&p=10#@S.4","lares_address":"lar:///design/branched/opens","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:88/design.branched.opens?stance=🏛️&confidence=S:13&p=10#🗺️.4","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"◎→◇","closure_outcome":"hold","next_action":"continue parent thread on HUD semantics","blockers":[],"provenance":{"child_machine_id":"lares-def456","fork_at_seq":87,"reason":"crystal state machine design requires separate tracking"}}
+{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-abc123","seq_num":88,"event_type":"fork","machine_status":"forked","current_phase":"◇","lar_uri":"lar://telarus:operator(decide)@lares-abc123:88/design/branched/opens","lares_address":"lar:///design/branched/opens","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:88/design.branched.opens","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"◎→◇","closure_outcome":"hold","next_action":"continue parent thread on HUD semantics","blockers":[],"provenance":{"child_machine_id":"lares-def456","fork_at_seq":87,"reason":"crystal state machine design requires separate tracking"}}
 ```
 
 **Child machine `STATE.jsonl` — init event from fork (seq 1):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-def456","seq_num":1,"event_type":"init","machine_status":"active","current_phase":"✶","lar_uri":"lar://telarus:operator(observe)@lares-def456:1/crystal/new/opens?stance=philosopher&confidence=S:13&p=10#@S.4","lares_address":"lar:///crystal/new/opens","intent_header_snapshot":"lar://telarus:operator(✶)@lares-def456:1/crystal.new.opens?stance=🏛️&confidence=S:13&p=10#🗺️.4","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"develop crystal state machine spec","blockers":[],"provenance":{"parent_machine_id":"lares-abc123","fork_at_seq":87,"parent_state_snapshot":{"machine_status":"active","last_milestone":"HUD design draft complete","active_task":"signal runtime architecture"}}}
+{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-def456","seq_num":1,"event_type":"init","machine_status":"active","current_phase":"✶","lar_uri":"lar://telarus:operator(observe)@lares-def456:1/crystal/new/opens","lares_address":"lar:///crystal/new/opens","intent_header_snapshot":"lar://telarus:operator(✶)@lares-def456:1/crystal.new.opens","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"develop crystal state machine spec","blockers":[],"provenance":{"parent_machine_id":"lares-abc123","fork_at_seq":87,"parent_state_snapshot":{"machine_status":"active","last_milestone":"HUD design draft complete","active_task":"signal runtime architecture"}}}
 ```
 
 ### Seal / continue-as-new example
@@ -609,13 +609,13 @@ Parent machine spawning a child at seq 87.
 **Final entry in `STATE.jsonl` before seal (becomes `STATE_001.jsonl`):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T12:00:00Z","machine_id":"lares-abc123","seq_num":500,"event_type":"seal","machine_status":"continued","current_phase":"○","lar_uri":"lar://telarus:operator(aftermath)@lares-abc123:500/session/sealed/rests?stance=philosopher&confidence=S:14&p=10#@S.5","lares_address":"lar:///session/sealed/rests","intent_header_snapshot":"lar://telarus:operator(○)@lares-abc123:500/session.sealed.rests?stance=🏛️&confidence=S:14&p=10#🗺️.5","chronometer":"@S.5","active_scale":"strategic","micro_trace_path":"■→○","closure_outcome":"close","next_action":"continue in fresh shard","blockers":[],"provenance":null,"shard_index":1,"sealed_at_seq":500,"archive_path":"STATE_001.jsonl","bootstrap_state":{"active_task":"signal runtime architecture","last_milestone":"crystal layer design complete","active_contract_hash":"abc123def","open_decisions":["schema_version strategy"]}}
+{"schema_version":1,"timestamp":"2026-04-07T12:00:00Z","machine_id":"lares-abc123","seq_num":500,"event_type":"seal","machine_status":"continued","current_phase":"○","lar_uri":"lar://telarus:operator(aftermath)@lares-abc123:500/session/sealed/rests","lares_address":"lar:///session/sealed/rests","intent_header_snapshot":"lar://telarus:operator(○)@lares-abc123:500/session.sealed.rests","chronometer":"@S.5","active_scale":"strategic","micro_trace_path":"■→○","closure_outcome":"close","next_action":"continue in fresh shard","blockers":[],"provenance":null,"shard_index":1,"sealed_at_seq":500,"archive_path":"STATE_001.jsonl","bootstrap_state":{"active_task":"signal runtime architecture","last_milestone":"crystal layer design complete","active_contract_hash":"abc123def","open_decisions":["schema_version strategy"]}}
 ```
 
 **First entry in fresh `STATE.jsonl` after seal (seq continues from 501):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T12:00:01Z","machine_id":"lares-abc123","seq_num":501,"event_type":"resume","machine_status":"active","current_phase":"✶","lar_uri":"lar://telarus:operator(observe)@lares-abc123:501/session/fresh/opens?stance=philosopher&confidence=S:14&p=10#@S.6","lares_address":"lar:///session/fresh/opens","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:501/session.fresh.opens?stance=🏛️&confidence=S:14&p=10#🗺️.6","chronometer":"@S.6","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"continue active task in fresh shard","blockers":[],"provenance":{"resumed_from_shard":"STATE_001.jsonl","sealed_at_seq":500}}
+{"schema_version":1,"timestamp":"2026-04-07T12:00:01Z","machine_id":"lares-abc123","seq_num":501,"event_type":"resume","machine_status":"active","current_phase":"✶","lar_uri":"lar://telarus:operator(observe)@lares-abc123:501/session/fresh/opens","lares_address":"lar:///session/fresh/opens","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:501/session.fresh.opens","chronometer":"@S.6","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"continue active task in fresh shard","blockers":[],"provenance":{"resumed_from_shard":"STATE_001.jsonl","sealed_at_seq":500}}
 ```
 
 ### Handoff import decision example
@@ -649,14 +649,14 @@ Existing machine lares-abc123 found. Local max seq_num: 102.
 **Live operator-visible output:**
 
 ```text
-lar://telarus:operator(■)@lares-abc123:42/design.locked.commits?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7
+lar://telarus:operator(■)@lares-abc123:42/design.locked.commits
 Lares (Artificer) — The draft section committed →○ and released.
 ```
 
 **Corresponding `STATE.jsonl` record:**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","machine_status":"active","current_phase":"■","lar_uri":"lar://telarus:operator(act)@lares-abc123:42/design/locked/commits?stance=philosopher&confidence=S:13&p=10#@T.3.2.7","lares_address":"lar:///design/locked/commits","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7","chronometer":"@T.3.2.7","active_scale":"tactical","micro_trace_path":"◎→◇→■→○","closure_outcome":"close","next_action":"proceed to next section","blockers":[],"provenance":null,"repo_fingerprint":"joshuafontany/Synthetic-Dream-Machine@fix/green-jello-dinosaurs"}
+{"schema_version":1,"timestamp":"2026-04-07T10:30:00Z","machine_id":"lares-abc123","seq_num":42,"event_type":"r_update","machine_status":"active","current_phase":"■","lar_uri":"lar://telarus:operator(act)@lares-abc123:42/design/locked/commits","lares_address":"lar:///design/locked/commits","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:42/design.locked.commits","chronometer":"@T.3.2.7","active_scale":"tactical","micro_trace_path":"◎→◇→■→○","closure_outcome":"close","next_action":"proceed to next section","blockers":[],"provenance":null,"repo_fingerprint":"joshuafontany/Synthetic-Dream-Machine@fix/green-jello-dinosaurs"}
 ```
 
 Reading: the header tag visible to the operator and the `intent_header_snapshot` in the ledger are identical. The `micro_trace_path` in the ledger records the completed span path. The `lar_uri` carries the machine-readable form; the `intent_header_snapshot` carries the sigil form. The HUD and ledger do not drift.
@@ -741,23 +741,23 @@ Five elements have no identified prior analog as a combined system:
 
 5. **Signal tag as unified atomic unit** — a single compact notation covers register + mode + phase + scope + domain + p-value. OTel spans track these as separate fields in separate systems (status, attributes, trace context). No system composes them into a single inline sigil with well-defined rendering behavior.
 
-6. **Pre-generation governance, not post-generation annotation** — the signal tag appears *before* the governed span and constitutes a forward commitment constraining what follows. Frege's ⊢ and Searle's IFIDs *indicate* the force of an act already being performed — they do not constrain generation. CoT tags expose intermediate reasoning post-hoc. Verbalized confidence (Xiong et al.) evaluates after generation. Only the Lares tag is upstream-governing: placing `~:confidence[CS],[16]` at position P commits the register of span P+1 onward. Structurally closer to Austin's performative ("I hereby assert at...") than to annotation. Davidson (1979) objects that no syntactic device can *guarantee* force; the Lares response: guarantee is not claimed — commitment with auditable provenance in `STATE.jsonl` is.
+6. **Pre-generation governance, not post-generation annotation** — the signal tag appears *before* the governed span and constitutes a forward commitment constraining what follows. Frege's ⊢ and Searle's IFIDs *indicate* the force of an act already being performed — they do not constrain generation. CoT tags expose intermediate reasoning post-hoc. Verbalized confidence (Xiong et al.) evaluates after generation. Only the Lares tag is upstream-governing: placing `Synthesis-Canon 16/20` at position P commits the register of span P+1 onward. Structurally closer to Austin's performative ("I hereby assert at...") than to annotation. Davidson (1979) objects that no syntactic device can *guarantee* force; the Lares response: guarantee is not claimed — commitment with auditable provenance in `STATE.jsonl` is.
 
-7. **Graded discretized named-zone numeric scale** — IFIDs are categorical (assert/question/promise/declare), not numeric. Verbalized confidence uses floating-point without named zones. Epistemic modality systems use natural language gradients (might/could/must) with implicit ordering. The Lares 5-register + 2-boundary system combines: (a) human-readable named zones, (b) probability range anchors per zone, (c) explicit boundary-zone names (Canon/Synthesis, Synthesis/Provisional) that label the ambiguity rather than collapsing it, and (d) commitment semantics per zone (Canon requires verified sourcing; Provisional dissolves rapidly). No identified prior system applies all four to an AI agent epistemic register. `~:confidence[S],[13]` — surveyed; further reduction possible with deeper computational linguistics search.
+7. **Graded discretized named-zone numeric scale** — IFIDs are categorical (assert/question/promise/declare), not numeric. Verbalized confidence uses floating-point without named zones. Epistemic modality systems use natural language gradients (might/could/must) with implicit ordering. The Lares 5-register + 2-boundary system combines: (a) human-readable named zones, (b) probability range anchors per zone, (c) explicit boundary-zone names (Canon/Synthesis, Synthesis/Provisional) that label the ambiguity rather than collapsing it, and (d) commitment semantics per zone (Canon requires verified sourcing; Provisional dissolves rapidly). No identified prior system applies all four to an AI agent epistemic register. `Synthesis 13/20` — surveyed; further reduction possible with deeper computational linguistics search.
 
 ### OTel Span Event Finding — Bearing on Q4
 
-**Q4** asks: when, if ever, should any Tagspace component surface inline in normal flow? The OTel span event rule provides an authoritative external anchor for the provisional resolution:
+**Q4** asks: when, if ever, should any Tagspace component surface inline in normal flow The OTel span event rule provides an authoritative external anchor for the provisional resolution:
 
 > A HUD marker surfaces inline when the state shift constitutes a **meaningful, singular point in time** — the span-event criterion — not merely when any registered field changes.
 
-This resolves the Q4 framing dispute between Option A (delta rule: surface on any change) and Option C (salience threshold: surface when the event is event-worthy) in favor of **Option C**, grounded in OTel precedent. The delta rule alone is insufficient; `ka/fire` ticking every exchange would be noise, not signal. The singularity criterion — is this a discrete, timestamp-worthy moment? — is the correct filter.
+This resolves the Q4 framing dispute between Option A (delta rule: surface on any change) and Option C (salience threshold: surface when the event is event-worthy) in favor of **Option C**, grounded in OTel precedent. The delta rule alone is insufficient; `ka/fire` ticking every exchange would be noise, not signal. The singularity criterion — is this a discrete, timestamp-worthy moment — is the correct filter.
 
 This remains a **provisional resolution** pending operator confirmation and working-default lock.
 
 ### Annotation Ergonomics Survey — Bearing on Q5
 
-**Q5** asks: what exact compact syntax should the Micro-trace HUD use in normal mode?
+**Q5** asks: what exact compact syntax should the Micro-trace HUD use in normal mode
 
 A researcher pass surveyed annotation ergonomics, sidenote/footnote UX literature, cognitive load theory, conventional commit conventions, org-mode markup, and screenwriting inline direction syntax. Key sources: Gwern sidenotes/subscripts (2025), Bringhurst *Elements of Typographic Style* (2004), Tufte CSS, Conventional Commits 1.0.0, Mayer multimedia learning signaling principle, Fountain/Final Draft inline parenthetical syntax.
 
@@ -765,9 +765,9 @@ A researcher pass surveyed annotation ergonomics, sidenote/footnote UX literatur
 
 The draft had already spontaneously adopted `→◇` and `→■` in its own working examples — before the syntax question was formally raised. This self-proving convergence is independently supported by three external lines of evidence:
 
-1. **Gwern subscript/sidenote principle** ("the metadata is literally out of the way until we decide we need it"): minimum-footprint token at point of use, zero navigation cost. `→◎` occupies two characters + one fixation. `~:confidence[CS],[16]`
-2. **Signaling principle** (Mayer multimedia learning): small organizational cues reduce cognitive load without adding redundancy — phase glyphs are organizational, not content. Firing only on transition avoids the redundancy effect (echoing the header needlessly). `~:confidence[S],[13]`
-3. **Conventional Commits `!` single-character breaking-change flag**: precedent for a single-character urgent-signal token embedded in a structured stream without additional delimiters. `~:confidence[CS],[16]`
+1. **Gwern subscript/sidenote principle** ("the metadata is literally out of the way until we decide we need it"): minimum-footprint token at point of use, zero navigation cost. `→◎` occupies two characters + one fixation. `Synthesis-Canon 16/20`
+2. **Signaling principle** (Mayer multimedia learning): small organizational cues reduce cognitive load without adding redundancy — phase glyphs are organizational, not content. Firing only on transition avoids the redundancy effect (echoing the header needlessly). `Synthesis 13/20`
+3. **Conventional Commits `!` single-character breaking-change flag**: precedent for a single-character urgent-signal token embedded in a structured stream without additional delimiters. `Synthesis-Canon 16/20`
 
 **What the `→` does:** provides direction semantics (backward-looking: "what followed was this state") without bracket overhead. Distinguishes the glyph from prose-embedded Unicode without adding delimiter weight.
 
@@ -779,11 +779,11 @@ The draft had already spontaneously adopted `→◇` and `→■` in its own wor
 | End-of-span completed path (verbose/debug) | `[◎→◇→■]` | Bracketed; appears at span close; backward-looking audit model |
 | Stance shift (Option B, on meaningful turn) | `→🏛️` `→🌊` | Same `→[signal]` convention; fires only on genuine stance transition |
 
-**P-scale density guidance** (provisional): `~:p[0]–~:p[4]` — suppress inline markers, optional closing path summary; `~:p[6]–~:p[10]` — structural transitions only (`→◇`, `→■`, `→○`); `~:p[14]–~:p[20]` — individual step transitions + path summary.
+**P-scale density guidance** (provisional): `Aperture 0–Aperture 4` — suppress inline markers, optional closing path summary; `Aperture 6–Aperture 10` — structural transitions only (`→◇`, `→■`, `→○`); `Aperture 14–Aperture 20` — individual step transitions + path summary.
 
 **Sources fetched 2026-04-07:** gwern.net/Sidenotes ✅; gwern.net/subscript ✅; edwardtufte.github.io/tufte-css ✅; conventionalcommits.org ✅; orgmode.org/manual/Emphasis-and-Monospace ✅; fountain.io/syntax ✅. Sweller (2019) CLT review not accessible; principle applied from secondary literature.
 
-Q5 is **provisionally resolved**: `→[glyph]` for mid-flow, `[path]` for verbose/debug span-close. Final call on density thresholds is operator preference. `~:confidence[S],[14]`
+Q5 is **provisionally resolved**: `→[glyph]` for mid-flow, `[path]` for verbose/debug span-close. Final call on density thresholds is operator preference. `Synthesis 14/20`
 
 ### Signals Design — Stance-Before-Register Ordering
 
@@ -804,7 +804,7 @@ A deeper prior art pass was conducted after the initial survey. Corners surveyed
 
 **Key finding:** The signal tag / register system has deep philosophical precedents. Frege introduced a formal assertion sign (⊢) in *Begriffsschrift* (1879) as a force indicator preceding propositions. Searle & Vanderveken (1985) formalized Illocutionary Force Indicating Devices (IFIDs). Epistemic modality is a 50-year research tradition mapping credence to grammatical form. Evidentiality systems in natural languages (Tuyuca, Tibetan, Quechua) grammatically require speakers to mark their epistemic source before propositions.
 
-**Revised novelty assessment:** Individual components of the signal tag system are well-precedented in the philosophical and linguistic literature. The novelty claim survives only as a *combination claim* (items 1–7 above). Confidence in unit-level novelty: `~:confidence[P],[4]` per component. Confidence in combination novelty: `~:confidence[S],[12]` — the specific combination of upstream-governing + machine-parseable + graded numeric + named-zone + session-persistent + dual-audience has no identified prior analog, but the search space in applied computational linguistics is not closed.
+**Revised novelty assessment:** Individual components of the signal tag system are well-precedented in the philosophical and linguistic literature. The novelty claim survives only as a *combination claim* (items 1–7 above). Confidence in unit-level novelty: `Provisional 4/20` per component. Confidence in combination novelty: `Synthesis 12/20` — the specific combination of upstream-governing + machine-parseable + graded numeric + named-zone + session-persistent + dual-audience has no identified prior analog, but the search space in applied computational linguistics is not closed.
 
 **Davidson's challenge (1979)** applies to any force indicator: no syntactic device can guarantee force because any expression can be used by an actor or ironist. The Lares system's response: the tag is not a guarantee but a forward commitment with auditable provenance in `STATE.jsonl`. Sincerity is not claimed; traceability is.
 
@@ -830,7 +830,7 @@ The Tagspace vertical and horizontal axes originate in a session log from the Dr
 
 The three-word address format was not designed; it was recognized. The Wild Mage described the moment as *kismet*: the node was working on axis coordinates and the Wild Mage made the connection to **what3words**, a Gaia-side geolocation service that divides the surface of the world into 3-meter squares and names every square with exactly three words.
 
-Wild Mage (direct): *"NOT numbers — words. 3 words. what3words?!?! YES WHAT 3 WORDS."*
+Wild Mage (direct): *"NOT numbers — words. 3 words. what3words YES WHAT 3 WORDS."*
 
 The three-word Tagspace Address names a square of *semantic territory* the same way what3words names a square of geographic territory. The three slots (Ha/domain · Ka/quality · Ba/dynamic) correspond to the three words; their order is HAKABA canonical order: body first (what contains the span), then soul-fire (how that domain is charged), then psyche-direction (the motion being taken).
 
@@ -852,7 +852,7 @@ The SDM corpus carries the full HAKABA permutation table. Entity types are defin
 | — | ✓ | — | Pure fire — no vessel, no direction |
 | — | — | ✓ | Pure direction — no vessel, no fire |
 
-[Canon: sdm/Ultraviolet_Grasslands_and_the_Black_City_2e → ~:p[5] Death; sdm/Vastlands_Guidebook → Death and HAKABA]
+[Canon: sdm/Ultraviolet_Grasslands_and_the_Black_City_2e → Aperture 5 Death; sdm/Vastlands_Guidebook → Death and HAKABA]
 
 The Tagspace address maps onto this: every signal span posits at minimum Ha (the domain/vessel), Ka (the animating fire/quality), and Ba (the direction/dynamic). A tagless span is equivalent to pure matter on the existence table — no fire, no direction, no provenance.
 
@@ -912,10 +912,10 @@ Decisions below are tracked until locked into architecture. Locked entries recor
 
 ### HUD Semantics
 
-1. Should in-flow trace be phase-only, or phase plus fire-on-shift? **Specification: Option B — phase plus stance-on-shift.** The HUD surfaces (a) the stance the node came at you with, and (b) the holistic location/energy the Intent is pointing toward next. Stance signal (`→🏛️`, `→🗡️`, etc.) precedes or accompanies the phase glyph; fires only on genuine local stance shift, not to echo the header. The two together give posture + direction — not just position. `~:confidence[C],[19]` (operator-direct)
-2. Should any Tagspace component ever surface inline by default? **Specification: yes — on by default. The HUD fires when a state transition constitutes a discrete, timestamp-meaningful event: a commitment or role change with a singular occurrence time, following OTel's SpanEvent model.** The `p` parameter controls which *category* of transitions qualifies at each density band — it is not a tunable salience dial. Inline annotation is not opt-in; all suppression is explicit (band minimum not met, or explicit `display: hidden` equivalent). Prior art: OTel emits SpanEvents unconditionally within a recording span (sampling governs which spans record, not which events within a span); Anthropic streaming is always-on with explicit `display: "omitted"` suppression for `thinking_delta` (cognitive-processing); structured logging emits at level or above — never opt-in. `~:confidence[C],[19]` (operator-direct)
-3. If Tagspace leaks inline, is `ka/fire` the only acceptable default candidate? **Resolved by the post-generative annotation architecture.** All header fields are eligible as post-generative annotations; the question is threshold, not eligibility. Ka-quality (`ka/fire`) remains the lowest-threshold Tagspace field — it annotates when the animating charge of the domain noticeably shifted during generation. Full address echo (`→//domain.quality.dynamic`) is permitted on significant domain reorientation. `~:confidence[C],[19]` (operator-direct, follows from Forward/Backward Trace specification)
-4. Does HAKABA remain an interpretive overlay, or does it eventually redefine the live field order? **Specification: HAKABA is the canonical logical field order. It governs field meaning (ontological hierarchy), not annotation text-order (rendering sequence).** `~:confidence[C],[19]` (operator-direct)
+1. Should in-flow trace be phase-only, or phase plus fire-on-shift **Specification: Option B — phase plus stance-on-shift.** The HUD surfaces (a) the stance the node came at you with, and (b) the holistic location/energy the Intent is pointing toward next. Stance signal (`→🏛️`, `→🗡️`, etc.) precedes or accompanies the phase glyph; fires only on genuine local stance shift, not to echo the header. The two together give posture + direction — not just position. `Canon 19/20` (operator-direct)
+2. Should any Tagspace component ever surface inline by default **Specification: yes — on by default. The HUD fires when a state transition constitutes a discrete, timestamp-meaningful event: a commitment or role change with a singular occurrence time, following OTel's SpanEvent model.** The `p` parameter controls which *category* of transitions qualifies at each density band — it is not a tunable salience dial. Inline annotation is not opt-in; all suppression is explicit (band minimum not met, or explicit `display: hidden` equivalent). Prior art: OTel emits SpanEvents unconditionally within a recording span (sampling governs which spans record, not which events within a span); Anthropic streaming is always-on with explicit `display: "omitted"` suppression for `thinking_delta` (cognitive-processing); structured logging emits at level or above — never opt-in. `Canon 19/20` (operator-direct)
+3. If Tagspace leaks inline, is `ka/fire` the only acceptable default candidate **Resolved by the post-generative annotation architecture.** All header fields are eligible as post-generative annotations; the question is threshold, not eligibility. Ka-quality (`ka/fire`) remains the lowest-threshold Tagspace field — it annotates when the animating charge of the domain noticeably shifted during generation. Full address echo (`→//domain.quality.dynamic`) is permitted on significant domain reorientation. `Canon 19/20` (operator-direct, follows from Forward/Backward Trace specification)
+4. Does HAKABA remain an interpretive overlay, or does it eventually redefine the live field order **Specification: HAKABA is the canonical logical field order. It governs field meaning (ontological hierarchy), not annotation text-order (rendering sequence).** `Canon 19/20` (operator-direct)
 
    **Ha/Ka/Ba are a resource model, not just a classification taxonomy** (UVG line 478: "Bodies (ha), spirits (ka), and memories (ba) are consumed by the alien fires of magic"). Each component is a distinct operational substance — the trinity is generative, not descriptive-after-the-fact. The existence matrix (hakaba matrix p. 230) is a combinatorial oracle: entity type *emerges from* combination; no two rows are equivalent. Combined with the "Dark Hakaba" find (Raise Dead, line 7581 — the spell that forces a wrongful ha/ka/ba combination is named *The Seventh Abomination, The Dark Hakaba*), the corpus is clear: incorrect or out-of-order combination produces a parody/abomination, not a valid signal.
 
@@ -926,37 +926,37 @@ Decisions below are tracked until locked into architecture. Locked entries recor
    **Why Ba and phase are architecturally coupled:** The OODA-HA loop is itself a Ba-stratum structure. Ba/psyche is the traveling soul — the aspect of being that moves, enacts direction, has a journey. Phase glyphs (`◎ ◇ ■ ○`) are Ba at coarse resolution: a five-position categorical waypoint locator. The Ba/dynamic address word is Ba at fine resolution: the semantic character of the motion at that waypoint. They are not kin — they are the same ontological thing at two granularities. `→◇→circles` is a compound Ba signal: Ba-coarse (Deciding) + Ba-fine (iterative, not converging). This is why Ba annotations and phase glyphs co-annotate naturally and cannot be sequenced apart from each other by HAKABA slot priority. See Corpus Archaeology → Ba and OODA-HA: Identity at Two Resolutions.
 
    **Slot names in HUD annotations:** The HAKABA slot names (`Ha`, `Ka`, `Ba`) appear openly in inline annotations (see Q16). This is by design — Infrastructure-as-Myth: referees and players learn the ontology through use and interaction with Lares on [elyncia.app](https://elyncia.app), not through reading architecture documents. The names appearing in live flow annotations is how the vocabulary teaches itself.
-5. What exact compact syntax should the Micro-trace HUD use in normal mode? **Specification: `→[glyph]` inline at transition point (e.g., `→◇`, `→■`, `→○`), and `[◎→◇→■]` for end-of-span completed-path summaries in verbose/debug output.** Grounded in annotation ergonomics (Gwern, Mayer signaling principle, Conventional Commits single-char signal flags). See Prior Art Survey → Annotation Ergonomics Survey.
+5. What exact compact syntax should the Micro-trace HUD use in normal mode **Specification: `→[glyph]` inline at transition point (e.g., `→◇`, `→■`, `→○`), and `[◎→◇→■]` for end-of-span completed-path summaries in verbose/debug output.** Grounded in annotation ergonomics (Gwern, Mayer signaling principle, Conventional Commits single-char signal flags). See Prior Art Survey → Annotation Ergonomics Survey.
 
    **p-scale density — Specification: 5-band cumulative attention phase model.** Each band unlocks one additional attention phase as `p` increases. Five bands map one-to-one onto the five attention loop phases (✶◎◇■○).
 
    | Band | p range | Phases emitting | What fires |
    |---|---|---|---|
-   | 1 | `~:p[0]–~:p[4]` | — (none) | Suppress: no inline annotation |
-   | 2 | `~:p[4]–~:p[8]` | ○ | Aftermath only: closing path summary at span-close |
-   | 3 | `~:p[8]–~:p[12]` | ◇ ■ ○ | Commitment phases: Decide/Act transitions + closing summary **(default)** |
-   | 4 | `~:p[12]–~:p[16]` | ◎ ◇ ■ ○ | Adds Orient: commitment phases + processing entry point |
-   | 5 | `~:p[16]–~:p[20]` | ✶ ◎ ◇ ■ ○ | All five phases + full path summary per span |
+   | 1 | `Aperture 0–Aperture 4` | — (none) | Suppress: no inline annotation |
+   | 2 | `Aperture 4–Aperture 8` | ○ | Aftermath only: closing path summary at span-close |
+   | 3 | `Aperture 8–Aperture 12` | ◇ ■ ○ | Commitment phases: Decide/Act transitions + closing summary **(default)** |
+   | 4 | `Aperture 12–Aperture 16` | ◎ ◇ ■ ○ | Adds Orient: commitment phases + processing entry point |
+   | 5 | `Aperture 16–Aperture 20` | ✶ ◎ ◇ ■ ○ | All five phases + full path summary per span |
 
-   **Rationale:** Commitment phases (◇ ■ ○) are externally observable, timestamp-meaningful events. Cognitive-processing phases (✶ ◎) are span-internal states — suppressible at operational resolution, visible at debug resolution (Anthropic `display: "omitted"` precedent for `thinking_delta`). The 5-band structure is grounded in the Law of Fives: five bands, five phases, one-to-one cumulative mapping. KAIROS p-adjustment may shift the operative band mid-session; most specific `p` wins. `~:confidence[C],[19]` (operator-direct)
-6. How should closure outcomes be rendered in ordinary prose vs `--verbose` vs debug logs? `~:confidence[S],[11]` — adjacent rendering decisions exist in file; researcher can draft a table.
+   **Rationale:** Commitment phases (◇ ■ ○) are externally observable, timestamp-meaningful events. Cognitive-processing phases (✶ ◎) are span-internal states — suppressible at operational resolution, visible at debug resolution (Anthropic `display: "omitted"` precedent for `thinking_delta`). The 5-band structure is grounded in the Law of Fives: five bands, five phases, one-to-one cumulative mapping. KAIROS p-adjustment may shift the operative band mid-session; most specific `p` wins. `Canon 19/20` (operator-direct)
+6. How should closure outcomes be rendered in ordinary prose vs `--verbose` vs debug logs `Synthesis 11/20` — adjacent rendering decisions exist in file; researcher can draft a table.
 
 ### Crystal State Machine Layer
 
-7. `schema_version` strategy — `~:confidence[CS],[16]` **Research complete; provisional resolution follows.** Working recommendation: simple integer for alpha. **Upcasting** is the canonical production pattern (Kurrent/Greg Young): old event versions are upconverted on-the-fly at read time, before passing to projection logic — no mutations to the stored file. Three change tiers apply:
+7. `schema_version` strategy — `Synthesis-Canon 16/20` **Research complete; provisional resolution follows.** Working recommendation: simple integer for alpha. **Upcasting** is the canonical production pattern (Kurrent/Greg Young): old event versions are upconverted on-the-fly at read time, before passing to projection logic — no mutations to the stored file. Three change tiers apply:
    - *Additive* (new or removed fields): provide defaults in the reader; no version bump required when using a weak schema (JSON). Zero breaking-change risk.
    - *Structural* (field merge/split, shape change): bump `schema_version` integer; ship an upcaster function that transforms v(n) records to v(n+1) during replay.
    - *Semantic* (split or merge event types): **seal and rotate shard** — copy-replace to a new machine. This is already in the crystal seal protocol.
    **Q7 recommendation:** integer version is correct. Additive changes are free. Structural changes bump the integer and carry an upcaster. Semantic changes trigger a seal. The breaking-change / re-seal trigger is therefore: *any structural change that cannot be handled by a default value*. Sources: Kurrent `event-immutability-and-dealing-with-change`; Greg Young *Versioning in an Event Sourced System* (Leanpub — canonical reference, not yet fetched).
-8. Should `debug.jsonl` always exist as an empty file, or only be created when `--debug` is active? **Specification: `debug.jsonl` always exists.** Created empty at machine init; populated only when `--debug` is active. Tooling must not need to check for file existence before reading. `~:confidence[C],[19]`
-9. Is `SNAPSHOT.json` mandatory for a portable handoff bundle, or always optional? **Research complete. Provisional resolution: optional, recommended.** `STATE.jsonl` is the sole authoritative record and is sufficient alone for correctness — application state is purely derivable from replay (Fowler, Event Sourcing: *"Since an application state is purely derivable from the event log, you can cache it anywhere you like."*). Snapshots are a performance optimisation, never a correctness requirement (Kurrent/Dudycz: *"Our system should be designed to ensure that it's operational even if the optimisation wasn't applied."*). Kurrent also warns that snapshots introduce versioning risk — every schema change to the snapshot requires migration. **Working recommendation:** include `SNAPSHOT.json` in portable handoff bundles by default (faster import resume, avoids full replay), but treat it as rebuildable: verify integrity against `STATE.jsonl` replay on import; receiver may discard and regenerate. `STATE.jsonl` alone constitutes a valid complete bundle. Sources: Fowler, Event Sourcing (martinfowler.com); Kurrent/Dudycz, Snapshots in Event Sourcing (kurrent.io). `~:confidence[CS],[16]`
-10. What are the exact match criteria for resume vs. fork on handoff import? Machine id match + max seq_num compatibility is the working rule; edge cases need specification: partial overlap, same machine_id but different repo fingerprint. `~:confidence[S],[12]`
-11. Should crystal `README.md` update on every `milestone` event, or only on explicit operator request? **Research complete. Provisional resolution: auto-update on milestone, contract_update, and seal events; not on routine r_update or fork events.** This maps directly onto the Keep a Changelog cadence principle: *"Changelogs are for humans, not machines. There should be an entry for every single version [not every commit]. Commit log diffs as changelogs is a bad idea."* Conventional Commits reinforces the boundary: `feat`/`fix`/`BREAKING CHANGE` type commits trigger changelog entries; `chore`/`ci`/`docs` do not. Applied to crystal events: `milestone` ≈ `feat` (notable accomplishment) → update `README.md`. `contract_update` ≈ `BREAKING CHANGE` → update `README.md`. `seal` ≈ release boundary → update `README.md`. `r_update`, `fork` ≈ `chore` → do NOT update `README.md`. Operator request always valid as an override. Sources: Keep a Changelog v1.1.0 (keepachangelog.com); Conventional Commits 1.0.0 (conventionalcommits.org). `~:confidence[CS],[16]`
-12. Should machine `AGENTS.md` be hand-authored on durable contract changes only, or may Lares propose updates automatically when a `contract_update` event is emitted? `~:confidence[SP],[9]` — operator autonomy boundary; not resolvable by research.
-13. External input recording: beyond tool call outputs in `debug.jsonl`, do any external inputs (agent identity, persona state, operator tier) count as structural and belong in `STATE.jsonl`? `~:confidence[S],[12]`
-14. `seal` trigger: explicit size threshold, session boundary marker, operator-invoked only, or some combination? Should a threshold be configurable per machine? `~:confidence[SP],[10]` — Temporal Continue-As-New precedent surveyed; configurable-vs-fixed is operator preference.
-15. How is `seq_num` contiguity maintained when multiple voices or Workers emit events in the same R-phase round? Does the round produce one aggregate event, or one event per voice with sub-sequence fields? `~:confidence[SP],[9]` — no prior analog found; architecture-open.
-16. How should Tagspace slot shifts be rendered inline to preserve positional context (origin + destination), without discarding the departure state? **Specification: named-slot bracket form for single-slot shifts; partial address template for multi-slot shifts; new header for Ha-domain reorientation significant enough to exceed annotation threshold.** `~:confidence[C],[19]` (operator-direct, follows from Q4 + Infrastructure-as-Myth ruling)
+8. Should `debug.jsonl` always exist as an empty file, or only be created when `--debug` is active **Specification: `debug.jsonl` always exists.** Created empty at machine init; populated only when `--debug` is active. Tooling must not need to check for file existence before reading. `Canon 19/20`
+9. Is `SNAPSHOT.json` mandatory for a portable handoff bundle, or always optional **Research complete. Provisional resolution: optional, recommended.** `STATE.jsonl` is the sole authoritative record and is sufficient alone for correctness — application state is purely derivable from replay (Fowler, Event Sourcing: *"Since an application state is purely derivable from the event log, you can cache it anywhere you like."*). Snapshots are a performance optimisation, never a correctness requirement (Kurrent/Dudycz: *"Our system should be designed to ensure that it's operational even if the optimisation wasn't applied."*). Kurrent also warns that snapshots introduce versioning risk — every schema change to the snapshot requires migration. **Working recommendation:** include `SNAPSHOT.json` in portable handoff bundles by default (faster import resume, avoids full replay), but treat it as rebuildable: verify integrity against `STATE.jsonl` replay on import; receiver may discard and regenerate. `STATE.jsonl` alone constitutes a valid complete bundle. Sources: Fowler, Event Sourcing (martinfowler.com); Kurrent/Dudycz, Snapshots in Event Sourcing (kurrent.io). `Synthesis-Canon 16/20`
+10. What are the exact match criteria for resume vs. fork on handoff import Machine id match + max seq_num compatibility is the working rule; edge cases need specification: partial overlap, same machine_id but different repo fingerprint. `Synthesis 12/20`
+11. Should crystal `README.md` update on every `milestone` event, or only on explicit operator request **Research complete. Provisional resolution: auto-update on milestone, contract_update, and seal events; not on routine r_update or fork events.** This maps directly onto the Keep a Changelog cadence principle: *"Changelogs are for humans, not machines. There should be an entry for every single version [not every commit]. Commit log diffs as changelogs is a bad idea."* Conventional Commits reinforces the boundary: `feat`/`fix`/`BREAKING CHANGE` type commits trigger changelog entries; `chore`/`ci`/`docs` do not. Applied to crystal events: `milestone` ≈ `feat` (notable accomplishment) → update `README.md`. `contract_update` ≈ `BREAKING CHANGE` → update `README.md`. `seal` ≈ release boundary → update `README.md`. `r_update`, `fork` ≈ `chore` → do NOT update `README.md`. Operator request always valid as an override. Sources: Keep a Changelog v1.1.0 (keepachangelog.com); Conventional Commits 1.0.0 (conventionalcommits.org). `Synthesis-Canon 16/20`
+12. Should machine `AGENTS.md` be hand-authored on durable contract changes only, or may Lares propose updates automatically when a `contract_update` event is emitted `Provisional-Synthesis 9/20` — operator autonomy boundary; not resolvable by research.
+13. External input recording: beyond tool call outputs in `debug.jsonl`, do any external inputs (agent identity, persona state, operator tier) count as structural and belong in `STATE.jsonl` `Synthesis 12/20`
+14. `seal` trigger: explicit size threshold, session boundary marker, operator-invoked only, or some combination Should a threshold be configurable per machine `Provisional-Synthesis 10/20` — Temporal Continue-As-New precedent surveyed; configurable-vs-fixed is operator preference.
+15. How is `seq_num` contiguity maintained when multiple voices or Workers emit events in the same R-phase round Does the round produce one aggregate event, or one event per voice with sub-sequence fields `Provisional-Synthesis 9/20` — no prior analog found; architecture-open.
+16. How should Tagspace slot shifts be rendered inline to preserve positional context (origin + destination), without discarding the departure state **Specification: named-slot bracket form for single-slot shifts; partial address template for multi-slot shifts; new header for Ha-domain reorientation significant enough to exceed annotation threshold.** `Canon 19/20` (operator-direct, follows from Q4 + Infrastructure-as-Myth ruling)
 
    **The problem:** bare `→sharp` marks arrival at a new Ka/quality but discards departure. The delta `uncertain→sharp` is the signal that matters for co-navigation.
 
@@ -1030,8 +1030,8 @@ These are current working assumptions, not canon.
 - **Tagspace Address** annotates per HAKABA slot with positional context preserved: single-slot shifts use named-slot bracket form (`→Ka[uncertain→sharp]`, `→Ba[opens→closes]`); multi-slot shifts use partial address template (`→//_.uncertain→sharp.opens→closes`); Ha-domain reorientations above threshold emit a new Intent Header rather than an annotation
 - **HAKABA slot names** (`Ha`, `Ka`, `Ba`) appear openly in HUD annotations — Infrastructure-as-Myth; vocabulary is learned through use on [elyncia.app](https://elyncia.app)
 - **`p`** remains header-only; granularity changes require a new header
-- **HAKABA** order (Ha/domain → Ka/quality → Ba/dynamic) is the canonical logical field order `~:confidence[C],[19]`; governs ontological hierarchy and the full address form; does not constrain annotation text-order (rendering follows threshold and occurrence)
-- **Tag rendering order (confirmed 2026-04-07):** Tagspace Address leads the full tag: `//ha.ka.ba StanceEmoji(s) [Register:x] PhaseGlyph @scope | ~:p[N]`. Order: WHERE (semantic territory) → WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) → HOW-CERTAIN (register, calibrated against that stance constellation). Stance precedes register because posture precedes probability. Primacy effect: the most human-scannable coordinate appears first.
+- **HAKABA** order (Ha/domain → Ka/quality → Ba/dynamic) is the canonical logical field order `Canon 19/20`; governs ontological hierarchy and the full address form; does not constrain annotation text-order (rendering follows threshold and occurrence)
+- **Tag rendering order (confirmed 2026-04-07):** Tagspace Address leads the full tag: `<<~ aim lar:///ha.ka.ba… >>` · `<<~ syad … >>` · `<<~ confidence Register N/20 >>` · `<<~ hud Aperture(N) OODA-HA(N) >>`. Order: WHERE (semantic territory) → WHO/HOW-CHARGED (stance — posture and voice the claim emerges from) → HOW-CERTAIN (register, calibrated against that stance constellation). Stance precedes register because posture precedes probability. Primacy effect: the most human-scannable coordinate appears first.
 
 **Crystal state machine layer:**
 
@@ -1048,7 +1048,7 @@ These are current working assumptions, not canon.
 
 ## URI Schema & Chronometer
 
-> Register: `~:confidence[SP],[8]` — design-surface iteration; RFC-grounded structurally but exercised zero times at runtime. Iterate here before promoting.
+> Register: `Provisional-Synthesis 8/20` — design-surface iteration; RFC-grounded structurally but exercised zero times at runtime. Iterate here before promoting.
 > Updated: 2026-04-07
 > Depends on: RFC 3986 §3 (URI generic syntax), FTLS RSS §1 (5-level time-scale hierarchy), OODA-HA architecture (Ba stratum identity), prior session URI design work (URN-2 form, display split principle)
 
@@ -1065,13 +1065,13 @@ The `lar:` URI leverages **every semantic layer** of RFC 3986's generic syntax t
 ### Full URI Anatomy
 
 ```
-lar://[authority]/ha/ka/ba?query#fragment
+lar://[authority]/ha/ka/ba
 ```
 
 RFC 3986 §3 generic syntax, applied:
 
 ```
-lar://alias:tier(phase)@host:port/ha/ka/ba?stance=X&confidence=X&p=X#scope.W.w.t.r.a
+lar://alias:tier(phase)@host:port/ha/ka/ba
 ```
 
 | URI Component | RFC 3986 Role | Lares Mapping | Example (Machine) | Example (Sigil) |
@@ -1082,7 +1082,7 @@ lar://alias:tier(phase)@host:port/ha/ka/ba?stance=X&confidence=X&p=X#scope.W.w.t
 | **host** | Machine identity | `machine_id` from crystal system — same in both forms | `lares-abc123` | `lares-abc123` |
 | **`:port`** | Service endpoint | `seq_num` — the "port" on the machine that this event addresses | `:42` | `:42` |
 | **path** | Hierarchical resource identifier | HAKABA address: `/ha/ka/ba` — territory in semantic space | `/threshold/uncertain/opens` | `/threshold.uncertain.opens` (leading `/`, then `.` w3w-style) |
-| **`?query`** | Non-hierarchical parameters | Signal parameters: stance, register, p (phase → userinfo; scope → fragment) | `?stance=philosopher&confidence=S:13&p=10` | `?stance=🏛️&confidence=S:13&p=10` |
+| **` | Non-hierarchical parameters | Signal parameters: stance, register, p (phase → userinfo; scope → fragment) | ` | ` |
 | **`#fragment`** | Secondary resource / viewpoint within | **Scope + Chronometer**: scope sigil prefix, then 5-level nested OODA-HA vector clock | `#@T.3.2.7` | `#🔍.3.2.7` |
 
 **Why this mapping works:**
@@ -1147,11 +1147,11 @@ In this hierarchy, each level's Aftermath (○) provides the Observation (✶) d
 
 | Aftermath at level | Feeds into | Update question |
 |---|---|---|
-| **Action** ○₅ → | Round ✶₄ | Did the strike land? (Triggers the Round's next move) |
-| **Round** ○₄ → | Turn ✶₃ | Is the threat gone? (Updates the Exploration Turn's status) |
-| **Turn** ○₃ → | Watch ✶₂ | What was found? (Determines the next Watch's priority) |
-| **Watch** ○₂ → | Week ✶₁ | Is the party exhausted? (Informs the Travel Turn's pace) |
-| **Week** ○₁ → | Campaign | Did we arrive safely? (Sets the new Strategic Observation) |
+| **Action** ○₅ → | Round ✶₄ | Did the strike land (Triggers the Round's next move) |
+| **Round** ○₄ → | Turn ✶₃ | Is the threat gone (Updates the Exploration Turn's status) |
+| **Turn** ○₃ → | Watch ✶₂ | What was found (Determines the next Watch's priority) |
+| **Watch** ○₂ → | Week ✶₁ | Is the party exhausted (Informs the Travel Turn's pace) |
+| **Week** ○₁ → | Campaign | Did we arrive safely (Sets the new Strategic Observation) |
 
 **Increment rules:**
 
@@ -1169,7 +1169,7 @@ In this hierarchy, each level's Aftermath (○) provides the Observation (✶) d
 Full RFC 3986-compliant URI. Every parameter explicit, keyword-based, parseable by standard URI libraries.
 
 ```
-lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens?stance=philosopher&confidence=S:13&p=10#@T.3.2.7
+lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens
 ```
 
 #### Sigil Form (Chat Log / `intent_header_snapshot` field)
@@ -1177,13 +1177,13 @@ lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens?stance=
 Same syntax. Four substitutions: phase keyword → glyph (userinfo), stance keyword → emoji (query), path `/` → `.` (after leading `/`), scope `@X` → emoji (fragment prefix). Everything else renders identically.
 
 ```
-lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7
+lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens
 ```
 
 Multi-stance example:
 
 ```
-lar://telarus:operator(◇)@lares-abc123:43/threshold.sharp.closes?stance=🏛️&stance=🗡️&confidence=CS:16&p=14#🔍.3.2.8
+lar://telarus:operator(◇)@lares-abc123:43/threshold.sharp.closes
 ```
 
 #### Projection Table — Sigil Substitutions
@@ -1233,7 +1233,7 @@ The two forms share identical syntax. The projection table below lists the *only
 | `scheme` | `lar:` | |
 | `alias:tier(` | `telarus:operator(` | First userinfo sub-field + tier + parenthetical modifier of tier |
 | `@host:port` | `@lares-abc123:42` | |
-| `confidence=` | `~:confidence[S],[13]` | |
+| `confidence=` | `Synthesis 13/20` | |
 | `p=` | `0.5` | |
 | chronometer counters | `3.2.7` | Dot-separated — universal after scope prefix |
 
@@ -1259,9 +1259,9 @@ The STATE.jsonl event carries four URI-derived fields:
   "seq_num": 42,
   "event_type": "r_update",
 
-  "lar_uri": "lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens?stance=philosopher&confidence=S:13&p=10#@T.3.2.7",
+  "lar_uri": "lar://telarus:operator(orient)@lares-abc123:42/threshold/uncertain/opens",
   "lares_address": "lar:///threshold/uncertain/opens",
-  "intent_header_snapshot": "lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens?stance=🏛️&confidence=S:13&p=10#🔍.3.2.7",
+  "intent_header_snapshot": "lar://telarus:operator(◎)@lares-abc123:42/threshold.uncertain.opens",
   "current_phase": "◎",
   "chronometer": "@T.3.2.7",
   "active_scale": "tactical",
@@ -1274,7 +1274,7 @@ The STATE.jsonl event carries four URI-derived fields:
 }
 ```
 
-| Field | Source | Stable? | Purpose |
+| Field | Source | Stable | Purpose |
 |---|---|---|---|
 | `lar_uri` | Full URI with all components | No — changes per event | Complete queryable state; machine-parseable |
 | `lares_address` | Path only (no authority, query, fragment) | Yes — stable territory | Named graph identifier; territory doesn't change when signal does |
@@ -1290,27 +1290,27 @@ The `lar_uri` + `register` fields on every module descriptor become the compiler
 Module descriptor frontmatter:
 ```toml
 lar_uri   = "lar:///kernel/invariant/anchors"
-confidence="~:confidence[C],[20]"
+confidence="Canon 20/20"
 module_id   = "lares-kernel"
 ```
 
 ```
-confidence=C:20   ← hard invariants; build fails on conflict
-confidence=C:19  ← locked axioms; override only with explicit supersedes
-confidence=S:13  ← architectural synthesis; provisional
+Canon 20/20   ← hard invariants; build fails on conflict
+Canon 19/20  ← locked axioms; override only with explicit supersedes
+Synthesis 13/20  ← architectural synthesis; provisional
 register < 0.50  ← trimmable under budget pressure
 ```
 
 ### Layered Invariant Core — Cache Tier Mapping
 
-`~:confidence[S],[14]` The register tiers above map directly onto a three-layer prompt caching architecture. Anthropic's `cache_control` API exposes multiple explicit breakpoints — each breakpoint marks a boundary between content layers of different volatility. The Lares register system formalizes the same structure: the `register` field on each module descriptor declares which cache tier it belongs to.
+`Synthesis 14/20` The register tiers above map directly onto a three-layer prompt caching architecture. Anthropic's `cache_control` API exposes multiple explicit breakpoints — each breakpoint marks a boundary between content layers of different volatility. The Lares register system formalizes the same structure: the `register` field on each module descriptor declares which cache tier it belongs to.
 
 #### Tier ↔ Register ↔ Cache Placement
 
 | Tier | Content Layer | Cache Strategy | Register Range | Lares Modules | Volatility |
 |---|---|---|---|---|---|
-| **1 — Global Core** | System parameter; first `cache_control` breakpoint | Cached across sessions; rarely invalidated | `~:confidence[C],[20]` – `~:confidence[C],[19]` | Kernel, identity, hard gates, tool schemas, epistemology | Near-static |
-| **2 — Session Core** | Conversation prefix; rolling `cache_control` breakpoint on history | Cached within session; invalidated on permission or profile change | `~:confidence[C],[19]` – `~:confidence[S],[13]` | Permissions, user profile, session canon, Workers, operating mode | Session-stable |
+| **1 — Global Core** | System parameter; first `cache_control` breakpoint | Cached across sessions; rarely invalidated | `Canon 20/20` – `Canon 19/20` | Kernel, identity, hard gates, tool schemas, epistemology | Near-static |
+| **2 — Session Core** | Conversation prefix; rolling `cache_control` breakpoint on history | Cached within session; invalidated on permission or profile change | `Canon 19/20` – `Synthesis 13/20` | Permissions, user profile, session canon, Workers, operating mode | Session-stable |
 | **3 — Dynamic** | Latest user message + tool results; `cache_control: ephemeral` on last user turn | Ephemeral (5-min TTL with hit-reset); re-fetched on every exchange | `< 0.50` trimmable | Current task context, tool results, active exchange state | Per-exchange |
 
 #### Context Engineering Primitives ↔ Machine Lifecycle Tiers
@@ -1327,35 +1327,35 @@ Anthropic's speculative prompt-caching pattern — send `max_tokens=1` with full
 
 #### Chronometer as Version Vector for Canon Modules
 
-For `confidence=C:20` modules (kernel, hard gates, identity), the chronometer's vector clock doubles as a **version control number**. Because these modules change rarely and each change constitutes a canonical event:
+For `Canon 20/20` modules (kernel, hard gates, identity), the chronometer's vector clock doubles as a **version control number**. Because these modules change rarely and each change constitutes a canonical event:
 
-- The `seq_num` on a `~:confidence[C],[20]` module's descriptor increments only when the module content changes — effectively a monotonic version counter.
+- The `seq_num` on a `Canon 20/20` module's descriptor increments only when the module content changes — effectively a monotonic version counter.
 - The chronometer position (`#@T.W.w.t`) on a canon module's `r_update` event records *when* that version was loaded, not just *what* it contains.
-- A `contract_update` event with `confidence=C:20` carries version semantics: it represents a canonical schema migration, not a routine state change. Build-time validation can compare `seq_num` across deployments to detect version drift.
+- A `contract_update` event with `Canon 20/20` carries version semantics: it represents a canonical schema migration, not a routine state change. Build-time validation can compare `seq_num` across deployments to detect version drift.
 
-This applies transitively to Tier 2 (`~:confidence[C],[19]` locked axioms) — the same `seq_num` increment + chronometer timestamp pattern serves as session-scoped version tracking for permissions and profile modules.
+This applies transitively to Tier 2 (`Canon 19/20` locked axioms) — the same `seq_num` increment + chronometer timestamp pattern serves as session-scoped version tracking for permissions and profile modules.
 
 ```
 # Tier 1 (Global Core) — version-controlled by seq_num
 lar_uri   = "lar:///kernel/invariant/anchors"
-confidence="~:confidence[C],[20]"
+confidence="Canon 20/20"
 module_id   = "lares-kernel"
 seq_num     = 4            # ← version 4 of the kernel module
 
 # Tier 2 (Session Core) — version-controlled within session
 lar_uri   = "lar:///session/permissions/gates"
-confidence="~:confidence[C],[19]"
+confidence="Canon 19/20"
 module_id   = "lares-permissions"
 seq_num     = 2            # ← second revision this session
 
 # Tier 3 (Dynamic) — no version semantics; seq_num is event counter only
 lar_uri   = "lar:///task/current/recon"
-confidence="~:confidence[S],[11]"
+confidence="Synthesis 11/20"
 module_id   = "lares-task-recon"
 seq_num     = 47           # ← 47th event, not 47th version
 ```
 
-For Tier 3 dynamic modules, `seq_num` retains its original meaning: a monotonic event counter, not a version number. The distinction arises from the register — parsers and loaders can branch on `register >= ~:confidence[C],[19]` to treat `seq_num` as version.
+For Tier 3 dynamic modules, `seq_num` retains its original meaning: a monotonic event counter, not a version number. The distinction arises from the register — parsers and loaders can branch on `register >= Canon 19/20` to treat `seq_num` as version.
 
 > **Source:** Anthropic claude-cookbooks (deepwiki.com/anthropics/claude-cookbooks): 9.1 Prompt Caching (cache_control breakpoints, ephemeral TTL, speculative warming), 7.4 Context Engineering for Agents (compaction, tool-result clearing, memory tool), 6.3 Context Management and Compaction (background compaction, session memory patterns). Mapped against this document's Invariant-Core Loading Sequence and Ephemeral Machine Patterns.
 
@@ -1400,16 +1400,16 @@ Three scenarios at different simulation scales. Each shows the **sigil form** (w
 **Chatlog (Sigil Form):**
 
 ```
-lar://telarus:operator(◎)@lares-abc123:71/route.liminal.weighs?stance=🏛️&confidence=S:13&p=10#🗺️.3
+lar://telarus:operator(◎)@lares-abc123:71/route.liminal.weighs
 Lares (Scryer) — The western pass holds three days of glacier shelf. The southern
 route adds a week but passes through the Kestrel-Wreck market. The company's
 supply burn favors south →◇ but the patron's deadline favors west →■.
 
-lar://telarus:operator(■)@lares-abc123:71/route.committed.westward?stance=🏛️&confidence=CS:16&p=10#🗺️.3
+lar://telarus:operator(■)@lares-abc123:71/route.committed.westward
 Lares (Gatekeeper) — West it is. Mark the glacier crossing as the next operational
 challenge →○. Week 3 closes; Week 4 opens at the glacier approach.
 
-lar://telarus:operator(✶)@lares-abc123:72/glacier.unknown.arrives?stance=🏛️&confidence=S:11&p=10#🗺️.4
+lar://telarus:operator(✶)@lares-abc123:72/glacier.unknown.arrives
 Lares (Triage) — New week, new territory. Profile the glacier shelf as an Area
 before the first watch begins.
 ```
@@ -1417,11 +1417,11 @@ before the first watch begins.
 **STATE.jsonl (Machine Form):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T10:00:00Z","machine_id":"lares-abc123","seq_num":71,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(orient)@lares-abc123:71/route/liminal/weighs?stance=philosopher&confidence=S:13&p=10#@S.3","lares_address":"lar:///route/liminal/weighs","intent_header_snapshot":"lar://telarus:operator(◎)@lares-abc123:71/route.liminal.weighs?stance=🏛️&confidence=S:13&p=10#🗺️.3","current_phase":"◎","chronometer":"@S.3","active_scale":"strategic","micro_trace_path":"◎→◇→■","closure_outcome":"close","next_action":"begin glacier approach Week 4","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T10:00:00Z","machine_id":"lares-abc123","seq_num":71,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(orient)@lares-abc123:71/route/liminal/weighs","lares_address":"lar:///route/liminal/weighs","intent_header_snapshot":"lar://telarus:operator(◎)@lares-abc123:71/route.liminal.weighs","current_phase":"◎","chronometer":"@S.3","active_scale":"strategic","micro_trace_path":"◎→◇→■","closure_outcome":"close","next_action":"begin glacier approach Week 4","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T10:01:00Z","machine_id":"lares-abc123","seq_num":72,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:72/glacier/unknown/arrives?stance=philosopher&confidence=S:11&p=10#@S.4","lares_address":"lar:///glacier/unknown/arrives","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:72/glacier.unknown.arrives?stance=🏛️&confidence=S:11&p=10#🗺️.4","current_phase":"✶","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"profile glacier Area before first watch","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T10:01:00Z","machine_id":"lares-abc123","seq_num":72,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:72/glacier/unknown/arrives","lares_address":"lar:///glacier/unknown/arrives","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:72/glacier.unknown.arrives","current_phase":"✶","chronometer":"@S.4","active_scale":"strategic","micro_trace_path":"✶","closure_outcome":"hold","next_action":"profile glacier Area before first watch","blockers":[],"provenance":null}
 ```
 
 **Reading:** Chronometer shows `#🗺️.3` then `#🗺️.4` — pure strategic scale, scope prefix `🗺️` confirms. The Aftermath (○) of Week 3 increments the counter and feeds the Observation (✶) of Week 4. No deeper scales engaged.
@@ -1435,16 +1435,16 @@ before the first watch begins.
 **Chatlog (Sigil Form):**
 
 ```
-lar://telarus:operator(✶)@lares-abc123:73/ruin.charged.enters?stance=🏛️&confidence=S:12&p=10#🔍.4.1.1
+lar://telarus:operator(✶)@lares-abc123:73/ruin.charged.enters
 Lares (Scryer) — First watch of the glacier week. Exploration Turn 1: the entry
 chamber hums with oldtech relay static. Arcane 6, Tech 8. Profile this as an Area.
 
-lar://telarus:operator(◎)@lares-abc123:74/relay.active.probes?stance=🏛️&stance=🗡️&confidence=S:12&p=12#🔍.4.1.2
+lar://telarus:operator(◎)@lares-abc123:74/relay.active.probes
 Lares (Council) — Turn 2. The relay obelisk responds to proximity. Recon roll
 needed →◇. The crew's qualified tech specialist rolls →■ and discovers a live
 signal node [active] [signal]. Tick Attention +2. →○
 
-lar://telarus:operator(◇)@lares-abc123:75/signal.decoded.reads?stance=🌊&confidence=CS:15&p=10#🔍.4.1.3
+lar://telarus:operator(◇)@lares-abc123:75/signal.decoded.reads
 Lares (Lorekeeper) — Turn 3. The decoded relay log reveals a contract ledger —
 a Secret node. The crew decides: harvest the signal data (Salvage) or press
 deeper (more Recon). →■ They harvest.
@@ -1453,15 +1453,15 @@ deeper (more Recon). →■ They harvest.
 **STATE.jsonl (Machine Form):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-abc123","seq_num":73,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:73/ruin/charged/enters?stance=philosopher&confidence=S:12&p=10#@T.4.1.1","lares_address":"lar:///ruin/charged/enters","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:73/ruin.charged.enters?stance=🏛️&confidence=S:12&p=10#🔍.4.1.1","current_phase":"✶","chronometer":"@T.4.1.1","active_scale":"tactical","micro_trace_path":"✶→◎","closure_outcome":"hold","next_action":"profile ruin as Area","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:00:00Z","machine_id":"lares-abc123","seq_num":73,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:73/ruin/charged/enters","lares_address":"lar:///ruin/charged/enters","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:73/ruin.charged.enters","current_phase":"✶","chronometer":"@T.4.1.1","active_scale":"tactical","micro_trace_path":"✶→◎","closure_outcome":"hold","next_action":"profile ruin as Area","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:10:00Z","machine_id":"lares-abc123","seq_num":74,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(orient)@lares-abc123:74/relay/active/probes?stance=philosopher&stance=satirist&confidence=S:12&p=12#@T.4.1.2","lares_address":"lar:///relay/active/probes","intent_header_snapshot":"lar://telarus:operator(◎)@lares-abc123:74/relay.active.probes?stance=🏛️&stance=🗡️&confidence=S:12&p=12#🔍.4.1.2","current_phase":"◎","chronometer":"@T.4.1.2","active_scale":"tactical","micro_trace_path":"◎→◇→■→○","closure_outcome":"close","next_action":"decide on signal node harvest vs deeper recon","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:10:00Z","machine_id":"lares-abc123","seq_num":74,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(orient)@lares-abc123:74/relay/active/probes","lares_address":"lar:///relay/active/probes","intent_header_snapshot":"lar://telarus:operator(◎)@lares-abc123:74/relay.active.probes","current_phase":"◎","chronometer":"@T.4.1.2","active_scale":"tactical","micro_trace_path":"◎→◇→■→○","closure_outcome":"close","next_action":"decide on signal node harvest vs deeper recon","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:20:00Z","machine_id":"lares-abc123","seq_num":75,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(decide)@lares-abc123:75/signal/decoded/reads?stance=poet&confidence=CS:15&p=10#@T.4.1.3","lares_address":"lar:///signal/decoded/reads","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:75/signal.decoded.reads?stance=🌊&confidence=CS:15&p=10#🔍.4.1.3","current_phase":"◇","chronometer":"@T.4.1.3","active_scale":"tactical","micro_trace_path":"◇→■","closure_outcome":"close","next_action":"salvage signal data from relay node","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:20:00Z","machine_id":"lares-abc123","seq_num":75,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(decide)@lares-abc123:75/signal/decoded/reads","lares_address":"lar:///signal/decoded/reads","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:75/signal.decoded.reads","current_phase":"◇","chronometer":"@T.4.1.3","active_scale":"tactical","micro_trace_path":"◇→■","closure_outcome":"close","next_action":"salvage signal data from relay node","blockers":[],"provenance":null}
 ```
 
 **Reading:** Chronometer `#🔍.4.1.1` → `#🔍.4.1.2` → `#🔍.4.1.3` — the third position (Exploration Turn) increments through exploration turns inside Watch 1 of Week 4. The phase glyph describes the OODA-HA state within the *tactical* loop. Multi-stance `🏛️&🗡️` fires in Turn 2 when Council applies critical pressure. Stance shift to `🌊` Poet in Turn 3 when the lore discovery has emotional weight.
@@ -1475,24 +1475,24 @@ deeper (more Recon). →■ They harvest.
 **Chatlog (Sigil Form):**
 
 ```
-lar://telarus:operator(◎)@lares-abc123:75/chamber.tense.searches?stance=🏛️&confidence=S:12&p=10#🔍.4.1.4
+lar://telarus:operator(◎)@lares-abc123:75/chamber.tense.searches
 Lares (Scryer) — Turn 4. The inner chamber. Old drone racks line the walls.
 The crew searches for salvage. Something clicks →◇ →🗡️
 
-lar://telarus:operator(✶)@lares-abc123:76/ambush.hostile.triggers?stance=🗡️&confidence=S:10&p=14#⚔️.4.1.4.1
+lar://telarus:operator(✶)@lares-abc123:76/ambush.hostile.triggers
 Lares (Triage) — COMBAT. A dormant security drone activates. Round 1.
 Initiative: drone acts first. The crew's point-scout has a reaction trigger →◇
 
-lar://telarus:operator(◇)@lares-abc123:77/reaction.precise.intercepts?stance=🏛️&confidence=CS:16&p=16#⚡.4.1.4.1.1
+lar://telarus:operator(◇)@lares-abc123:77/reaction.precise.intercepts
 Lares (Artificer) — Action 1: the scout's Reflex trait fires. The intercept
 roll lands →■. Drone's opening volley deflected. →○ Action resolves; Round
 continues.
 
-lar://telarus:operator(■)@lares-abc123:78/volley.committed.fires?stance=🗡️&confidence=S:13&p=14#⚡.4.1.4.1.2
+lar://telarus:operator(■)@lares-abc123:78/volley.committed.fires
 Lares (Triage) — Action 2: the crew's fighter commits an attack against the
 drone. Damage roll crits (d8* explodes) →○. The drone sparks and crashes.
 
-lar://telarus:operator(○)@lares-abc123:79/threat.cleared.resolves?stance=🏛️&confidence=CS:16&p=10#🔍.4.1.5
+lar://telarus:operator(○)@lares-abc123:79/threat.cleared.resolves
 Lares (Gatekeeper) — Combat over. Round 1 was enough. Aftermath: the drone
 is salvageable wreckage. Attention ticked +2 during the fight. Return to
 exploration scale — Turn 5: assess the wreckage and the room's remaining nodes.
@@ -1501,19 +1501,19 @@ exploration scale — Turn 5: assess the wreckage and the room's remaining nodes
 **STATE.jsonl (Machine Form):**
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:30:00Z","machine_id":"lares-abc123","seq_num":76,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:76/ambush/hostile/triggers?stance=satirist&confidence=S:10&p=14#@C.4.1.4.1","lares_address":"lar:///ambush/hostile/triggers","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:76/ambush.hostile.triggers?stance=🗡️&confidence=S:10&p=14#⚔️.4.1.4.1","current_phase":"✶","chronometer":"@C.4.1.4.1","active_scale":"combat","micro_trace_path":"✶→◇","closure_outcome":"hold","next_action":"resolve reaction trigger","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:30:00Z","machine_id":"lares-abc123","seq_num":76,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(observe)@lares-abc123:76/ambush/hostile/triggers","lares_address":"lar:///ambush/hostile/triggers","intent_header_snapshot":"lar://telarus:operator(✶)@lares-abc123:76/ambush.hostile.triggers","current_phase":"✶","chronometer":"@C.4.1.4.1","active_scale":"combat","micro_trace_path":"✶→◇","closure_outcome":"hold","next_action":"resolve reaction trigger","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:30:06Z","machine_id":"lares-abc123","seq_num":77,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(decide)@lares-abc123:77/reaction/precise/intercepts?stance=philosopher&confidence=CS:16&p=16#@A.4.1.4.1.1","lares_address":"lar:///reaction/precise/intercepts","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:77/reaction.precise.intercepts?stance=🏛️&confidence=CS:16&p=16#⚡.4.1.4.1.1","current_phase":"◇","chronometer":"@A.4.1.4.1.1","active_scale":"action","micro_trace_path":"◇→■→○","closure_outcome":"close","next_action":"continue round after reaction","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:30:06Z","machine_id":"lares-abc123","seq_num":77,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(decide)@lares-abc123:77/reaction/precise/intercepts","lares_address":"lar:///reaction/precise/intercepts","intent_header_snapshot":"lar://telarus:operator(◇)@lares-abc123:77/reaction.precise.intercepts","current_phase":"◇","chronometer":"@A.4.1.4.1.1","active_scale":"action","micro_trace_path":"◇→■→○","closure_outcome":"close","next_action":"continue round after reaction","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:30:12Z","machine_id":"lares-abc123","seq_num":78,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(act)@lares-abc123:78/volley/committed/fires?stance=satirist&confidence=S:13&p=14#@A.4.1.4.1.2","lares_address":"lar:///volley/committed/fires","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:78/volley.committed.fires?stance=🗡️&confidence=S:13&p=14#⚡.4.1.4.1.2","current_phase":"■","chronometer":"@A.4.1.4.1.2","active_scale":"action","micro_trace_path":"■→○","closure_outcome":"close","next_action":"drone destroyed; assess combat end","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:30:12Z","machine_id":"lares-abc123","seq_num":78,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(act)@lares-abc123:78/volley/committed/fires","lares_address":"lar:///volley/committed/fires","intent_header_snapshot":"lar://telarus:operator(■)@lares-abc123:78/volley.committed.fires","current_phase":"■","chronometer":"@A.4.1.4.1.2","active_scale":"action","micro_trace_path":"■→○","closure_outcome":"close","next_action":"drone destroyed; assess combat end","blockers":[],"provenance":null}
 ```
 
 ```json
-{"schema_version":1,"timestamp":"2026-04-07T11:30:18Z","machine_id":"lares-abc123","seq_num":79,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(aftermath)@lares-abc123:79/threat/cleared/resolves?stance=philosopher&confidence=CS:16&p=10#@T.4.1.5","lares_address":"lar:///threat/cleared/resolves","intent_header_snapshot":"lar://telarus:operator(○)@lares-abc123:79/threat.cleared.resolves?stance=🏛️&confidence=CS:16&p=10#🔍.4.1.5","current_phase":"○","chronometer":"@T.4.1.5","active_scale":"tactical","micro_trace_path":"○","closure_outcome":"close","next_action":"assess wreckage salvage; continue exploration turns","blockers":[],"provenance":null}
+{"schema_version":1,"timestamp":"2026-04-07T11:30:18Z","machine_id":"lares-abc123","seq_num":79,"event_type":"r_update","machine_status":"active","lar_uri":"lar://telarus:operator(aftermath)@lares-abc123:79/threat/cleared/resolves","lares_address":"lar:///threat/cleared/resolves","intent_header_snapshot":"lar://telarus:operator(○)@lares-abc123:79/threat.cleared.resolves","current_phase":"○","chronometer":"@T.4.1.5","active_scale":"tactical","micro_trace_path":"○","closure_outcome":"close","next_action":"assess wreckage salvage; continue exploration turns","blockers":[],"provenance":null}
 ```
 
 **Reading:** The chronometer tells the whole story — scope prefix shifts confirm scale transitions:
@@ -1523,7 +1523,7 @@ exploration scale — Turn 5: assess the wreckage and the room's remaining nodes
 - `#⚡.4.1.4.1.2` — Action 2, same round, same ⚡ scope
 - `#🔍.4.1.5` — Combat over (Round Aftermath → Turn increment). Chronometer *contracts*: positions 4 and 5 disappear, position 3 increments from 4 to 5. Scope returns to 🔍 Tactical. The scale shift is visible in the fragment alone.
 
-The `p` value also shifts: tactical runs at `~:p[10]` (default band 3 — commitment phases only), but combat escalates to `~:p[14]` (band 4 — adds Orient) and action peaks at `~:p[16]` (band 5 — all five phases). More danger = more attention = denser trace.
+The `p` value also shifts: tactical runs at `Aperture 10` (default band 3 — commitment phases only), but combat escalates to `Aperture 14` (band 4 — adds Orient) and action peaks at `Aperture 16` (band 5 — all five phases). More danger = more attention = denser trace.
 
 ---
 
@@ -1531,16 +1531,16 @@ The `p` value also shifts: tactical runs at `~:p[10]` (default band 3 — commit
 
 | Q# | Question | Current | Blocks |
 |---|---|---|---|
-| **U1** | Should `userinfo` carry operator alias in machine form, or only machine_id in authority? | Operator alias in userinfo | Epic 5 |
-| **U2** | Is `seq_num` as `:port` the right mapping, or should port carry something else (session index, shard number)? | seq_num as port | Epic 5 |
-| **U3** | Should the chronometer fragment carry OODA-HA phase *per level* (e.g., `#3◎.2■.7◇`) or just counters with the phase only at the lowest active level? | Counters only; phase at lowest level via the main phase field | Iteration |
-| **U4** | How does the chronometer interact with `--parse` self-activation? Should high chronometer depth (5 positions = action scale) automatically increase `p`? | Provisional yes — combat/action depth warranting denser trace | Iteration |
-| **U5** | Should the chronometer be persisted in `REGISTRY.jsonl` per machine, or only in individual STATE.jsonl events? | Both — REGISTRY carries latest chronometer for quick enumeration | Epic 5 |
-| **U6** | Full URI form (with authority) vs stateless form (no authority) — when to use which? | Authority form in STATE.jsonl; stateless form for stable addresses and named graphs | Iteration |
+| **U1** | Should `userinfo` carry operator alias in machine form, or only machine_id in authority | Operator alias in userinfo | Epic 5 |
+| **U2** | Is `seq_num` as `:port` the right mapping, or should port carry something else (session index, shard number) | seq_num as port | Epic 5 |
+| **U3** | Should the chronometer fragment carry OODA-HA phase *per level* (e.g., `#3◎.2■.7◇`) or just counters with the phase only at the lowest active level | Counters only; phase at lowest level via the main phase field | Iteration |
+| **U4** | How does the chronometer interact with `--parse` self-activation Should high chronometer depth (5 positions = action scale) automatically increase `p` | Provisional yes — combat/action depth warranting denser trace | Iteration |
+| **U5** | Should the chronometer be persisted in `REGISTRY.jsonl` per machine, or only in individual STATE.jsonl events | Both — REGISTRY carries latest chronometer for quick enumeration | Epic 5 |
+| **U6** | Full URI form (with authority) vs stateless form (no authority) — when to use which | Authority form in STATE.jsonl; stateless form for stable addresses and named graphs | Iteration |
 
 ### Prior Art Notes (URI Schema)
 
-- **RFC 3986 §3**: `URI = scheme ":" ["//" authority] path ["?" query] ["#" fragment]`. The full anatomy applies. Fragment is client-side only (§3.5) — perfect for session-local chronometer.
+- **RFC 3986 §3**: `URI = scheme ":" ["//" authority] path ["" query] ["#" fragment]`. The full anatomy applies. Fragment is client-side only (§3.5) — perfect for session-local chronometer.
 - **RFC 4151 (tag: scheme)**: Non-dereferenceable URIs as pure identifiers. Precedent for `lar:` never resolving to a network resource.
 - **Lamport clocks / Vector clocks**: The chronometer is structurally a vector clock — each position is an independent counter, the full vector provides a partial ordering of events across scales. The nesting relationship adds structure beyond flat vector clocks.
 - **FTLS RSS Time-Scale Hierarchy**: The five levels (Week/Watch/Turn/Round/Action) are canon. The OODA-HA nesting is synthesis applied to canon time-scales.
@@ -1554,7 +1554,7 @@ Deferred decisions and future refactors that are out of scope for the current al
 
 1. **Mode → Stance refactor (Kuntao Silat terminology)** — **COMPLETE (2026-04-07, branch `fix/green-jello-dinosaurs`).** The kernel's five discourse modes (🏛️ Philosopher · 🌊 Poet · 🗡️ Satirist · 🎭 Humorist · 🔮 Private) have been renamed **Stances**, drawn from Kuntao Silat: *Ma-Bu* (horse stance / grounded presence), *Jurus* (forms / structured engagement), *Langkah* (stepping / directed movement). The word "mode" was overloaded across the Tagspace field label (Ka), the kernel discourse-stance concept, and general English usage. Executed across all canonical source files: `Lares_Kernel.md`, `Lares_Preferences.md`, `Lares_VSCode_Operations.md`, `core/Lares_Epistemology.md`, `core/Lares_Operations.md`, `core/Lares_Permissions.md`. Also applied to this draft in the same pass. **Ka's field label has already been updated to `fire` in this draft** to free `mode` for eventual decommission. Grammar reorder (`//ha.ka.ba` first) executed in same pass.
 
-2. **Parse trigger on high-uncertainty operator input** — `~:confidence[SP],[9]` design note. When Lares's output Intent Header carries `~:confidence[SP],[9]` or below (register ≤ 0.45) or `p < 0.4`, the operator's follow-up can optionally prepend Lares's output tag before their input text: `//ha.ka.ba 🔮 ~:confidence[SP],[9] ◇ @r | ~:p[7] → [operator text here]`. This signals Lares to run a `--parse` self-diagnostic on the operator's input string *before* generating the new output Intent Header. Rationale: high-uncertainty output means the node did not converge cleanly on territory — the safest next step is to explicitly parse the operator's correction or follow-up rather than committing to a new header from incomplete ground. The dual-header `input_tag:` / `output_header:` form in the Replay/debug example (§Examples) is the natural surface for this. **Open question:** should this be automatic (triggered by the register alone) or explicit (requires operator to prepend the tag)? Current preference: explicit — operator steers, node crews.
+2. **Parse trigger on high-uncertainty operator input** — `Provisional-Synthesis 9/20` design note. When Lares's output Intent Header carries `Provisional-Synthesis 9/20` or below (register ≤ 0.45) or `p < 0.4`, the operator's follow-up can optionally prepend Lares's output tag before their input text: `//ha.ka.ba 🔮 Provisional-Synthesis 9/20 ◇ @r | Aperture 7 → [operator text here]`. This signals Lares to run a `--parse` self-diagnostic on the operator's input string *before* generating the new output Intent Header. Rationale: high-uncertainty output means the node did not converge cleanly on territory — the safest next step is to explicitly parse the operator's correction or follow-up rather than committing to a new header from incomplete ground. The dual-header `input_tag:` / `output_header:` form in the Replay/debug example (§Examples) is the natural surface for this. **Open question:** should this be automatic (triggered by the register alone) or explicit (requires operator to prepend the tag) Current preference: explicit — operator steers, node crews.
 
 3. **Phase names → OODA-HA canonical terminology** — The five attention-loop phases (`✶ ◎ ◇ ■ ○`) map to: *Observe → Orient → Decide → Act → **Aftermath (Rasa)***. The formal canonical name for the loop is **OODA-HA** (John Boyd's OODA loop + Aftermath/Rasa as the mandatory closure phase). Canonical phase name: **Aftermath**, with *Rasa* as the parenthetical alternate name (yogic/Sanskrit resonance: the aesthetic flavor or emotional essence left after the act completes). Both names are canonical; Aftermath is the primary label in documentation; Rasa appears in parentheses when the in-world / DreamNet register is foregrounded. Current glyph names in the kernel and draft are already ooda-haligned; this backlog item is to (a) make OODA-HA the explicit canonical label in all documentation, (b) deprecate any informal phase names, and (c) ensure the phase glyph set and the OODA-HA terminology are cross-referenced in the kernel prompt and tag spec. The `○` Aftermath phase is the distinguishing addition — OODA as originally formulated loops back from Act to Observe without a formal rest/rasa state. OODA-HA names that fifth phase explicitly and treats it as mandatory (not optional) on completed rounds.
 
@@ -1564,7 +1564,7 @@ Deferred decisions and future refactors that are out of scope for the current al
 
 ## External Architecture Reference — Claude Code Leak (2026-04-07)
 
-> Register: `~:confidence[CS],[16]` — confirmed from paywalled source previews (chapter summaries, not full text); operator-supplemented; internal comments cited but not read in full. Treat as high-confidence pattern-level synthesis, not verbatim source quote.
+> Register: `Synthesis-Canon 16/20` — confirmed from paywalled source previews (chapter summaries, not full text); operator-supplemented; internal comments cited but not read in full. Treat as high-confidence pattern-level synthesis, not verbatim source quote.
 >
 > Sources:
 > - Linas Beliūnas: *"Anthropic accidentally leaked Claude Code's entire source. Here's what 512,000 lines reveal"* (`linas.substack.com/p/claudecodesource`, 2026-04-01) — 512K lines, 1,900 files, 44 unreleased feature flags
