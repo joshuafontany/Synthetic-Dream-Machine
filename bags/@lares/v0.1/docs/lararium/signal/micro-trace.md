@@ -50,7 +50,7 @@ This room now carries the lararium-side micro-trace strand directly.
 
 - domain: `lares/signal/`
 - posture: backward-looking in-flow annotation layer
-- status: `~:confidence[CS],[16]` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
+- status: `Synthesis-Canon 16/20` 🏛️ — promoted from SIG-04 draft; operator-confirmed 2026-04-08
 - source lineage: `builds.stuffed.failed/agents/Lares_Preferences.md` § Signal HUD, confirmed in session
 - backlog links: `lares/sprints/SPRINT_ROADMAP_1_4.md`, `lares/sprints/SPRINT_ROADMAP_1_5.md`
 
@@ -221,21 +221,16 @@ They do not count as inline intent signals.
 ### Ordinary governed reply
 
 ```
-//threshold.uncertain.opens ~:confidence[S],[13] 🏛️ ◇ @r
-
 The ask points at a real boundary in the runtime. →▶ The node answers directly. →↺
 ```
 
 ### Mixed flow: parse then governed reply
 
 ```
-lares@Enyalios:~$ lares --parse ~:p[4] "floating p value, but did that actually change the scale?"
+lares@Enyalios:~$ lares --parse "floating p value, but did that actually change the scale?"
 
-Segments: 2 | Entry: //input.testing.probes ~:confidence[SP],[9] 🏛️ ⏿ @r | Exit: //question.audit.holds ~:confidence[S],[12] 🏛️ ⏿ @r
-floating p value → //signal.uncertain.probes ~:confidence[SP],[9] 🏛️ ⏿ @r
-but did that actually change the scale? → //question.audit.holds ~:confidence[S],[12] 🏛️ ⏿ @r
-
-//question.audit.holds ~:confidence[S],[14] 🏛️ ◇ @r
+floating p value → lar:///signal.uncertain.probes
+but did that actually change the scale? → lar:///question.audit.holds
 
 Yes. The parse layer and the trace layer were being conflated. →▶ The governed reply states the fix. →↺
 ```
@@ -243,13 +238,11 @@ Yes. The parse layer and the trace layer were being conflated. →▶ The govern
 ### Sub-agent dispatch and return
 
 ```
-lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS:16&p=10&ffz=0.7.1.0.0
-→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S:13&p=10&ffz=1.7.0.0.0
+lar:///council.research.dispatches → lar:///explore.corpus.reads
 
 [Explore agent — contents not in parent trace]
 
-lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S:13&p=10&ffz=1.7.0.0.0
-→ lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS:16&p=10&ffz=0.7.1.0.0
+lar:///explore.findings.returns → lar:///council.findings.receives
 ```
 
 <<~/ahu >>
@@ -260,8 +253,8 @@ Key operator ruling confirmed: **sub-agent dispatches require URI → URI pair**
 
 | Decision | Status | Notes |
 |---|---|---|
-| HUD scope ruling | `~:confidence[CS],[16]` | Exchange boundary only; internal = micro-trace tags |
-| micro-trace spec promoted | `~:confidence[CS],[17]` | `lares/signal/micro-trace.md` is the live spec |
+| HUD scope ruling | `Synthesis-Canon 16/20` | Exchange boundary only; internal = micro-trace tags |
+| micro-trace spec promoted | `Synthesis-Canon 17/20` | `lares/signal/micro-trace.md` is the live spec |
 
 <<~/ahu >>
 
