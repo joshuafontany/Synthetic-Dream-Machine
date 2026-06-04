@@ -60,7 +60,7 @@ The five bands constitute three projections of a single phenomenon: **attention 
 
 ```
 Chronometer  →  attention range in TIME
-p-parameter  →  attention range in TEXT
+Aperture     →  attention range in TEXT   (the turn-HUD gauge)
 spatial      →  attention range in SPACE
 ```
 

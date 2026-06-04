@@ -11,7 +11,7 @@ mana        = 18
 manao       = 17
 manaoio     = 17
 tagspace    = "stable"
-role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
+role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 cacheable   = true
 retain      = true
 invariant   = true
@@ -29,9 +29,11 @@ phenomenon: **attention range**.
 
 ```
 Chronometer  →  attention range in TIME
-p-parameter  →  attention range in TEXT
+Aperture     →  attention range in TEXT
 Spatial      →  attention range in SPACE
 ```
+
+On the turn HUD the TEXT projection surfaces as the **`Aperture`** gauge --- `<<~ hud Aperture(10) … >>` --- read against the five bands below.
 
 All three map onto the same 0–20 Level continuum. Five named bands partition the continuum.
 The subscript digit sigils (₀₁₂₃₄) provide invariant vocabulary for talking about scale
