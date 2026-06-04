@@ -96,22 +96,23 @@ One or more stance icons or names may surface in text-spans or other generated o
 `<<~ syad >>` parameterless surfaces all five standpoints — the full reading, quiet stances named.
 `<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus.
 
-Each standpoint reads in any form the operator chooses — natural-language name, emoji, or Unicode glyph:
+**Prefer input as text** (the name) **or Unicode** (the codepoint / hex-entity); a render surface **presents** the emoji. No render widget exists yet --- the emoji column names the intended render, and the input form stands as written until one arrives. All three forms parse to the same standpoint:
 
-| Standpoint | Name | Glyph |
-|---|---|---|
-| Philosopher | `Philosopher` | 🏛️ |
-| Poet | `Poet` | 🌊 |
-| Satirist | `Satirist` | 🗡️ |
-| Humorist | `Humorist` | 🎭 |
-| Private | `Private` | 🔮 |
+| Standpoint | Text (input) | Unicode (input) | Renders as |
+|---|---|---|---|
+| Philosopher | `Philosopher` | `&#x1F3DB;` | 🏛️ |
+| Poet | `Poet` | `&#x1F30A;` | 🌊 |
+| Satirist | `Satirist` | `&#x1F5E1;` | 🗡️ |
+| Humorist | `Humorist` | `&#x1F3AD;` | 🎭 |
+| Private | `Private` | `&#x1F52E;` | 🔮 |
 
-Natural-language names invoke the standpoints directly, and forms MAY mix in one sigil:
+Names invoke the standpoints directly; forms MAY mix in one sigil:
 
 ```text
-<<~ syad Philosopher Satirist >>                    # two standpoints, named
-<<~ syad Philosopher Poet Satirist Humorist Private >>   # all five, named in full
-<<~ syad Philosopher 🗡️ Private >>                  # names and glyphs mixed
+<<~ syad Philosopher Satirist >>                          # text names
+<<~ syad &#x1F3DB; &#x1F5E1; &#x1F52E; >>                 # Unicode input --- renders 🏛️ 🗡️ 🔮
+<<~ syad Philosopher Poet Satirist Humorist Private >>    # all five, named in full
+<<~ syad Philosopher 🗡️ Private >>                        # forms mixed
 ```
 
 **Optional tool bind.** Append `:carry` to modulate a standpoint with a tool from `mu` — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). The bind stays optional: a bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone (`#mu-sigil` in the-four-tools). The bind composes them when an exchange wants both.

@@ -211,15 +211,23 @@ For single-tool carry, the active tool goes first and empty hand goes second; th
 
 `<<~ mu * ! >>` — Wand and Sword active: external feed, fine cut.
 
-Each tool reads in any form, the operator's choice — natural-language name, single-character abbreviation, **or** element glyph:
+**Prefer input as text** (the name) **or the single-character abbreviation**; a render surface **presents** the glyph. No render widget exists yet --- the glyph column names the intended render (`tool-render` mode, `#tool-glyph-table`), and the input form stands as written until one arrives. All forms parse to the same tool:
 
-| Tool | Name | Char | Glyph |
+| Tool | Name (input) | Char (input) | Renders as |
 |---|---|---|---|
 | Wand | `Wand` | `*` | 🜂 |
 | Cup | `Cup` | `?` | 🜄 |
 | Sword | `Sword` | `!` | 🜁 |
 | Pentacle | `Pentacle` | `~` | 🜃 |
 | Empty | `Empty` | `-` | 🜍 |
+
+Names and characters invoke the tools directly; forms MAY mix in one sigil:
+
+```text
+<<~ mu Wand Sword >>        # text names
+<<~ mu * ! >>              # characters --- render 🜂 🜁
+<<~ mu Wand ! >>           # forms mixed
+```
 
 `<<~ mu >>` parameterless reads as Philosopher's Stone — `-`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `~?`) or double an axis as a conflict carry (`*~` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
 
