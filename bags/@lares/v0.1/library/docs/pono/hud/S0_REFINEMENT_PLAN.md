@@ -1,6 +1,6 @@
 # Sprint 0 Document Refinement Plan — Refactored
 
-> Register: `~:confidence[CS],[16]` 🏛️ — concrete refactoring; Chapel Perilous findings locked in
+> Register: `Synthesis-Canon 16/20` 🏛️ — concrete refactoring; Chapel Perilous findings locked in
 > Date: 2026-04-08 (refactored)
 > Purpose: Incorporate research findings from reports E, F, and G into the S0 document set
 > Applies to: URI_SCHEMA.md, SPRINT_0_TASKS.md, AGENTS.md, REGISTRY_CONTRACT.md
@@ -126,7 +126,7 @@ The centroid~δ notation from revision 2 is fully removed:
 - No boundary saturation rules
 - No expanded validation pattern in §10.1 rule 8
 - No additional test vectors for range-form URIs
-- Register is always a point value: `confidence=S:13`
+- Register is always a point value: `Synthesis 13/20`
 
 ---
 
@@ -138,7 +138,7 @@ The spec never shows how to read a complete HUD tag from left to right.
 
 ### Fix: Add Appendix B
 
-Annotated full URI + compact form + multi-stance example showing the Syadasti reading rule in action. The multi-stance example demonstrates how `~:confidence[S],[12] 🏛️🌊🔮` reads differently than `~:confidence[S],[12] 🏛️` — same number, three evaluation frames.
+Annotated full URI + compact form + multi-stance example showing the Syadasti reading rule in action. The multi-stance example demonstrates how `Synthesis 12/20 🏛️🌊🔮` reads differently than `Synthesis 12/20 🏛️` — same number, three evaluation frames.
 
 ### Files Changed
 
@@ -259,20 +259,20 @@ Research substrate (informs but does not constrain S0):
 
 | ID | Item | Register | Sprint | Source |
 |---|---|---|---|---|
-| RES-08 | Mana cost table: stance count → register fuzz magnitude | `~:confidence[S],[12]` | S2 | F-report |
-| RES-09 | Authority transfer: `--set` CLI, `⊙` indicator, authority field | `~:confidence[S],[11]` | S2 | F-report |
-| RES-10 | CMD/CWS/Manual mode mapping | `~:confidence[SP],[9]` | S2 | F-report |
-| RES-11 | 5-stance (full Discordian) config meaning | `~:confidence[SP],[8]` | S2 | F-report |
-| RES-12 | Syadasti catma as epistemological ground (Kernel) | `~:confidence[S],[13]` | S2 | G-report |
-| RES-13 | Stance semantics: literature-grounded anchors (SyadVoice) | `~:confidence[S],[14]` | S0 §5.3.3 | SyadVoice |
-| RES-14 | HUD as memory prosthetic / grounding artifact (Clark & Brennan) | `~:confidence[S],[12]` | S1 | BridgeWatch |
-| RES-15 | Meaning asymmetry in mutual recognition contract | `~:confidence[S],[11]` | S2 | G-report |
-| RES-16 | Session boundary as avaktavya | `~:confidence[SP],[9]` | Deferred | G-report |
-| RES-17 | Mana pool / resource state HUD indicator: context window remaining as navigational element | `~:confidence[S],[12]` 🏛️🌊 | S2 | Local session |
-| RES-18 | HAKABA word-count constraint: each slot = exactly one lowercase word; 3-word combination mandatory; optional `/path` sub-extension for within-territory routing. Stable address strips sub-path. | `~:confidence[CS],[16]` 🏛️ | S0 §3.4 | Local session tick 34 |
-| RES-19 | Provisionality marker taxonomy: `~` prefix for reading / execution / trajectory types on operator URI, opening node URI, and closing node URI respectively. HUD-form only; record form uses `provisional=` query param. | `~:confidence[CS],[16]` 🏛️ | S0 §3.5 | Local session tick 33–34 |
-| RES-20 | Kowloon/AP handle form (§3.3.1): `@handle@node` canonical social identity, AP↔lar: URI mapping table, `~node` nomadic convention, render target taxonomy (`chat-log:post-header` / `hud:exchange-pair` / `record:full`), territory-first ordering, `{/optional/path}` in template. | `~:confidence[CS],[16]` 🏛️ | S0 §3.3.1 | Local session ticks 43–44 |
-| RES-21 | Stance amplitude modifiers: `++`/`+`/(none)/`-`/`--` attach directly to preceding stance emoji, no space, per-stance independently. Maps to SDM modifier system. | `~:confidence[CS],[16]` 🏛️ | S0 §3.3.1 | Local session tick 45 |
+| RES-08 | Mana cost table: stance count → register fuzz magnitude | `Synthesis 12/20` | S2 | F-report |
+| RES-09 | Authority transfer: `--set` CLI, `⊙` indicator, authority field | `Synthesis 11/20` | S2 | F-report |
+| RES-10 | CMD/CWS/Manual mode mapping | `Provisional-Synthesis 9/20` | S2 | F-report |
+| RES-11 | 5-stance (full Discordian) config meaning | `Provisional-Synthesis 8/20` | S2 | F-report |
+| RES-12 | Syadasti catma as epistemological ground (Kernel) | `Synthesis 13/20` | S2 | G-report |
+| RES-13 | Stance semantics: literature-grounded anchors (SyadVoice) | `Synthesis 14/20` | S0 §5.3.3 | SyadVoice |
+| RES-14 | HUD as memory prosthetic / grounding artifact (Clark & Brennan) | `Synthesis 12/20` | S1 | BridgeWatch |
+| RES-15 | Meaning asymmetry in mutual recognition contract | `Synthesis 11/20` | S2 | G-report |
+| RES-16 | Session boundary as avaktavya | `Provisional-Synthesis 9/20` | Deferred | G-report |
+| RES-17 | Mana pool / resource state HUD indicator: context window remaining as navigational element | `Synthesis 12/20` 🏛️🌊 | S2 | Local session |
+| RES-18 | HAKABA word-count constraint: each slot = exactly one lowercase word; 3-word combination mandatory; optional `/path` sub-extension for within-territory routing. Stable address strips sub-path. | `Synthesis-Canon 16/20` 🏛️ | S0 §3.4 | Local session tick 34 |
+| RES-19 | Provisionality marker taxonomy: `~` prefix for reading / execution / trajectory types on operator URI, opening node URI, and closing node URI respectively. HUD-form only; record form uses `provisional=` query param. | `Synthesis-Canon 16/20` 🏛️ | S0 §3.5 | Local session tick 33–34 |
+| RES-20 | Kowloon/AP handle form (§3.3.1): `@handle@node` canonical social identity, AP↔lar: URI mapping table, `~node` nomadic convention, render target taxonomy (`chat-log:post-header` / `hud:exchange-pair` / `record:full`), territory-first ordering, `{/optional/path}` in template. | `Synthesis-Canon 16/20` 🏛️ | S0 §3.3.1 | Local session ticks 43–44 |
+| RES-21 | Stance amplitude modifiers: `++`/`+`/(none)/`-`/`--` attach directly to preceding stance emoji, no space, per-stance independently. Maps to SDM modifier system. | `Synthesis-Canon 16/20` 🏛️ | S0 §3.3.1 | Local session tick 45 |
 
 ---
 
@@ -298,7 +298,7 @@ Items 1–5 were additive (no existing content modified). Items 6–9 emerged fr
 
 | Removed | Why |
 |---|---|
-| `confidence=S:13~3` (centroid~δ) | Fails beyond 2 stances; stance count already carries the information |
+| `Synthesis 13/20` with a centroid~δ suffix | Fails beyond 2 stances; stance count already carries the information |
 | Boundary saturation rules | No delta arithmetic = no overflow |
 | §10.1 rule 8 expanded pattern | Register always a point value |
 | 6 centroid~δ test vectors | Not needed |
