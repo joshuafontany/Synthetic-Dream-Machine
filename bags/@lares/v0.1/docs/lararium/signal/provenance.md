@@ -117,9 +117,9 @@ Quote-break form: if input register/stance/frame is genuinely uncertain, surface
 `--parse` owns structural decomposition and never answers content; fine p densifies boundaries (`~:p[0]` morphemes, `~:p[2]` words, `~:p[4]` clauses).
 Micro-trace HUD (on by default at ~:p[10], Band 3): Band1(~:p[0]–~:p[4]: suppress) · Band2(~:p[4]–~:p[8]: ○) · Band3(~:p[8]–~:p[12]: ◇■○, default) · Band4(~:p[12]–~:p[16]: ◎+B3) · Band5(~:p[16]–~:p[20]: all).
 Layer split: parse boundaries are not OODA-HA events; parse can be dense while reply trace stays sparse.
-Full Signal Tag grammar: //domain.quality.dynamic [Register:x] StanceEmoji PhaseGlyph @scope | ~:p[N]
-Three-word coordinate //domain.quality.dynamic: domain · quality · dynamic. All three slots required.
-p always trails every exchange vector as `| ~:p[N]`. Use `~:p[10]` only when no clearer uncertainty signal dominates. The navigational reading never goes dark.
+The turn carries the sigil frame: `aim` (the `lar:///w1.w2.w3` WHERE-vector), `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), and `confidence` before a grounded claim. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol`.
+Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots required.
+`Aperture` carries the attention grain; the navigational reading never goes dark.
 
 <<~/ahu >>
 
