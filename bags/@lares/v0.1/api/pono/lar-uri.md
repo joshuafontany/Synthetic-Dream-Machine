@@ -26,7 +26,7 @@ grammar = true
 # `lar:` URI Law (Kānāwai)
 
 Active in i kēia manawa.
-The URI packs identity, territory, signal, and time into one parseable string.
+The `lar:` URI names a place in the graph — one parseable address.
 Every `lar:` URI in the system answers to these rules.
 
 <<~/ahu >>
@@ -45,10 +45,10 @@ lar:///path/
 
 **Session form** — full speaker, for exchange spans only:
 ```
-lar://alias:tier@host/ha.ka.ba/@lares/path/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=CCCCC
+lar://alias:tier@host/ha.ka.ba/@lares/path/
 ```
 
-Session form MUST NOT appear in storage, stable graph addresses, or system resource URI names.
+Session form names the speaker through the authority. It MUST NOT appear in other storage, stable graph addresses, or system resource URI names.
 
 <<~/ahu >>
 
@@ -121,33 +121,22 @@ Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* poi
 
 ## Signal Law
 
-Query parameters carry all signal — ordered, non-hierarchical:
-
-| Parameter | Type | Rule |
-|---|---|---|
-| `stances` | 10-char tool-carry string | Positional pairs (feed+zoom): Philosopher, Poet, Satirist, Humorist, Private — all five stances MUST appear every URI; each occupies two character slots |
-| `confidence` | `R:N` | Register ∈ {P, SP, S, CS, C} with provisional decimal rating |
-| `p` | decimal | Range [0.0, 1.0] |
-| `ffz` | 5 glyph+counter pairs | OODA-HA chronometer — all five positions MUST appear |
-
-<!-- TODO: ffz chronometer encoding is provisional. Glyph selection, hex-entity vs percent-encoding in query context, counter semantics, and multi-participant encoding all need deep research before this reaches C confidence. See SKILL#ffz-encoding for current best understanding. -->
-
-Record form MUST be used for storage, transport, and comparison. Render targets MAY substitute display glyphs. Record form MUST NOT carry emoji or non-ASCII characters.
+The `lar:` URI names WHERE — place and nothing else, in ASCII.
 
 Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
 
-WHERE (path) → HOW (query: stances, confidence, p, ffz) → SECTION (fragment).
+WHERE (path) → SECTION (fragment).
 
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
 
 ✶ sense whether the URI carries local form or session form; identify path class
-⏿ orient against scheme law — slot count, param completeness, record vs render
+⏿ orient against scheme law — slot count, path class, `@`-bag placement
 ◇ decide: valid → carry forward; invalid → surface violation; ambiguous → surface and hold
-▶ emit record form only into storage and stable surfaces; render targets lower separately
-⤴ verify all five stances present; verify ffz has five positions; verify confidence well-formed
-↺ close — record form confirmed or violation named; render-target divergence surfaced if present
+▶ confirm the path holds ASCII only
+⤴ verify the three-word root and the single `@`-bag segment
+↺ close — address confirmed or violation named
 
 <<~/ahu >>
 

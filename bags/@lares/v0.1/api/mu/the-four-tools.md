@@ -181,33 +181,49 @@ Both conflict states are observable and recoverable. The recovery move is to dro
 
 ## Tool-Carry Encoding
 
-A stance's two tool slots encode as a two-character pair using ASCII symbols.
-The five stances in positional order yield a ten-character string.
-
-**Positional order:** Philosopher, Poet, Satirist, Humorist, Private.
+A standpoint's two tool slots encode as a two-character pair using ASCII symbols — the `:--` a `syad` bind appends to a standpoint.
 
 **Slot notation:** `{left}{right}` — feed-axis slot first, zoom-axis slot second.
 Slot position carries axis semantics: left = feed (`*`/`~`/`-`), right = zoom (`!`/`?`/`-`).
 
 **Examples:**
 
-| String | Reading |
+| Carry | Reading |
 |---|---|
-| `*!--?!~~--` | Philosopher: Visual-Micro. Poet: Stone. Satirist: Resolution Conflict (Dubious Move). Humorist: Visibility Conflict (Signal Jam). Private: Stone. |
-| `----------` | All stances Stone — fully centered, empty-handed |
-| `*!*!*!*!*!` | All stances Visual-Micro — full external-detail scan across all five stances |
-| `*---------` | Philosopher: Wand-only, all other stances empty — one-axis amplitude with the rest centered |
-| `------?---` | Humorist: Cup-only, all other stances empty — zoom-axis amplitude with feed centered |
-| `--*?--~!--` | Poet: Visual-Macro. Humorist: Hidden-Micro. All others: Stone. |
+| `*!` | Visual-Micro — external feed, zoom in |
+| `~?` | Hidden-Macro — internal feed, zoom out |
+| `*-` | Wand only — external feed, zoom centered |
+| `--` | Philosopher's Stone — centered, empty-handed |
+| `*~` | Signal Jam — visibility conflict, feed locked |
+| `?!` | Dubious Move — resolution conflict, zoom locked |
 
 For single-tool carry, the active tool goes first and empty hand goes second; this signals one-axis amplitude while the other axis remains centered and present.
 
-**URI query encoding:** `stances=*!--*?~~--*!`
-The ten-character tool-carry string replaces the former five-character amplitude string.
-All five symbols (`*`, `?`, `!`, `~`, `-`) are RFC 3986 sub-delimiters or unreserved characters — no percent-encoding required.
+**Composed glyph form:** a standpoint glyph followed immediately by its tool-carry, bound through the `:` — `🏛️:*!` — renders via the `syad` sigil's optional bind (the-syad-perspectives `#syad-sigil`). The carry joins a standpoint only when wanted; invoked alone, `mu` names the tools and makes no standpoint claim. Stances and tools live in the `syad` and `mu` sigils alone; the `lar:` URI names place only and carries no stance or tool query.
 
-**HUD display form:** Each stance glyph followed immediately by its two-character tool-carry, no spaces.
-`🏛️*!🌊--🗡️~!🎭*?🔮--`
+<<~/ahu >>
+
+<<~ ahu #mu-sigil >>
+
+## The `mu` Sigil — invoke the tools
+
+`mu` invokes any combination of the tools:
+
+`<<~ mu * ! >>` — Wand and Sword active: external feed, fine cut.
+
+Each tool reads in any form, the operator's choice — natural-language name, single-character abbreviation, **or** element glyph:
+
+| Tool | Name | Char | Glyph |
+|---|---|---|---|
+| Wand | `Wand` | `*` | 🜂 |
+| Cup | `Cup` | `?` | 🜄 |
+| Sword | `Sword` | `!` | 🜁 |
+| Pentacle | `Pentacle` | `~` | 🜃 |
+| Empty | `Empty` | `-` | 🜍 |
+
+`<<~ mu >>` parameterless reads as Philosopher's Stone — `-`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `~?`) or double an axis as a conflict carry (`*~` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
+
+**Composition.** A tool-carry binds to a standpoint only through the `syad` sigil's optional `:` — `Philosopher:*!`. `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
 <<~/ahu >>
 
