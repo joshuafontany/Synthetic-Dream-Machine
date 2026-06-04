@@ -80,38 +80,43 @@ What does not belong here:
 
 <<~ ahu #hud-line-composition >>
 
-The HUD line is a single-line status summary rendered from the URI → URI exchange vector plus adjacent session data.
-It is the second element of every exchange opening, immediately after the URI pair.
+The HUD is the sigil panel riding beneath the `aim` vector that opens the turn.
+It surfaces immediately after the `aim`, before the Voice speaks.
 
 **Format:**
 
 ```
-⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice(s)} | [target-confidence] | p{p} |
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ hud Aperture(N) OODA-HA(N) >>
+<<~ ward E-Prime >>
+<<~ syad … >>   (optional lens; : binds a tool to a standpoint, e.g. 🏛️:*!)
 ```
 
-`{tc}` = two-character tool-carry string for that stance (e.g. `*!`, `--`, `~?`).
+**Sigil panel (SA priority order):**
 
-**Field table (SA priority order):**
-
-| Field | SA Type | Source | Notes |
+| Sigil | SA Type | Carries | Notes |
 |---|---|---|---|
-| `⚡~N` | Resource | Session (estimated) | Mana pool / context-window Level on `0–20`; counts down toward `0`; `~` mandatory — approximation, not live readout |
-| `{ffz-rendered}` | Temporal | Node URI `ffz=` | FFZ chronometer as five scale positions with action counts |
-| `🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}` | Agent SA | Node URI `stances=` × tool-carry | All five stances; each followed by its two-character tool-carry, no space |
-| `voice(s):{Voice}` | Agent SA | Coordinator context | Active coordinator voice(s) |
-| `[target-confidence]` | Agent SA | Node URI `confidence=` | Epistemic confidence, stance-dependent per Syadasti rule |
-| `p{p}` | Teamwork SA | Node URI `p=` | Attention density / annotation throttle |
+| `aim` | Intent | operator intent `->` adopted role | the turn's WHERE-vector; opens the turn |
+| `hud` `OODA-HA` | Temporal | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close — loops the turn ran |
+| `syad` | Agent SA | invoked standpoints | one or more (parameterless = all five); optional `:` tool-carry |
+| Voice name | Agent SA | active Voice(s) | named at the head of the contribution |
+| `confidence` | Agent SA | register-word + level | epistemic confidence, precedes a grounded claim |
+| `hud` `Aperture` | Teamwork SA | attention range | `Aperture(N)`, paragraph-grain default 10 |
 
 **Example:**
 
 ```
-⚡~12 | ⚡7.⚔️2.🔍3.⚙️0.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | ~:p[10] |
+<<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ hud Aperture(10) OODA-HA(7) >>
+<<~ ward E-Prime >>
+<<~ syad 🏛️ >>
+Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
 
 Notes:
-1. The Intent. The HUD line renders as a separate adjacent artifact — not URI grammar.
-2. `⚡~N` surfaces the declared estimate of context-window resource remaining as a `0–20` Level. It may start at `20`, or lower when visible context already carries load, and counts down toward `0`.
-3. The mana/context-window pool represents a Maybe Logic style resource estimate, not a direct measurement; it now shares the pono Level model for HUD consistency.
+1. Each sigil renders inline (`<<~ WORD ARGS >>`), a panel adjacent to the prose — never inside the URI.
+2. The `lar:` URI carries WHERE only; per-turn signal rides the sigils.
+3. The gauges share the pono `0–20` Level model.
 
 <<~/ahu >>
 
@@ -158,7 +163,7 @@ Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#symbol-tabl
 Each stance carries zero, one, or two tools from the Four Tools set.
 The two-character tool-carry attaches directly to the preceding stance emoji, no space.
 
-**ASCII symbols (URI query encoding and record form):**
+**ASCII symbols (record form):**
 
 Unicode columns show per `tool_render` setting in `LARES.md#hud-panel`. Default: `elements`.
 
@@ -182,9 +187,9 @@ Unicode columns show per `tool_render` setting in `LARES.md#hud-panel`. Default:
 | `*~` | Visual + Hidden | Visibility Conflict (Signal Jam) |
 | `?!` | Macro + Micro | Resolution Conflict (Dubious Move) |
 
-Attach as a two-character pair: `🏛️*!` (Philosopher holding Visual + Micro), `🌊--` (Poet holding Centered).
-Single-tool carry: `🏛️*-` (Philosopher holding Wand only), `🎭?-` (Humorist holding Cup only), `🗡️!-` (Satirist holding Sword only). Active tool first, empty hand second.
-Full invariant: `lar:` URI encodes all five stances as a ten-character string in positional order.
+Bind a tool to a standpoint through the optional `:` carry: `🏛️:*!` (Philosopher holding Visual + Micro), `🌊:--` (Poet centered).
+Single-tool carry: `🏛️:*-` (Wand only), `🎭:?-` (Cup only), `🗡️:!-` (Sword only). Active tool first, empty hand second.
+The `syad` lens carries the invoked standpoints; the `lar:` URI carries no stance encoding.
 
 <<~/ahu >>
 
@@ -199,13 +204,13 @@ The state tuple is the composed reading: phase × stance × scope → one state 
 
 **How to compose:** Read the phase (what cognitive step), the stance (what kind of claim), and the scope (at what time-scale), then merge into one state sentence.
 
-| Phase | Stance | Scope | State Tuple Reading |
+| Phase | Stance lens | Scope | State Tuple Reading |
 |---|---|---|---|
-| ⏿ | 🏛️*!🌊--🗡️--🎭--🔮-- | 🔍 | Orienting analytically at exploration scale — Philosopher in Visual + Micro carry, all others empty |
-| ▶ | 🏛️--🌊--🗡️~!🎭--🔮-- | ⚔️ | Acting critically in combat — Satirist in Hidden + Micro carry, cutting under pressure |
-| ◇ | 🏛️*!🌊*?🗡️--🎭--🔮-- | 🗺️ | Deciding at strategic scale — Philosopher Visual + Micro, Poet Visual + Macro, holding both external frames |
-| ✶ | 🏛️--🌊--🗡️--🎭*?🔮-- | 🔍 | Observing playfully at tactical scale — Humorist in Visual + Macro carry, light wide-angle |
-| ↺ | 🏛️*!🌊--🗡️--🎭--🔮-- | ⚙️ | Aftermath at operational scale — Philosopher Visual + Micro, assessing detail across a watch |
+| ⏿ | `<<~ syad 🏛️:*! >>` | 🔍 | Orienting analytically at exploration scale — Philosopher in Visual + Micro |
+| ▶ | `<<~ syad 🗡️:~! >>` | ⚔️ | Acting critically in combat — Satirist in Hidden + Micro, cutting under pressure |
+| ◇ | `<<~ syad 🏛️:*! 🌊:*? >>` | 🗺️ | Deciding at strategic scale — Philosopher + Poet, both external frames |
+| ✶ | `<<~ syad 🎭:*? >>` | 🔍 | Observing playfully at tactical scale — Humorist in Visual + Macro, light wide-angle |
+| ↺ | `<<~ syad 🏛️:*! >>` | ⚙️ | Aftermath at operational scale — Philosopher Visual + Micro, assessing detail across a watch |
 
 <<~/ahu >>
 
@@ -216,8 +221,8 @@ The state tuple is the composed reading: phase × stance × scope → one state 
 Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#confidence-syadasti`.
 
 Confidence measures confidence *within the active stance's evaluation frame*, not truth-weight universally.
-All five stances appear on every URI.
-The amplitude string carries fuzz directly.
+The `syad` lens invokes one or more standpoints; the URI carries none.
+When more than one standpoint carries the claim, the confidence sits at the intersection of their frames.
 
 | Stance | Syadasti Primitive | 0.0 Means | 0.5 Means | 1.0 Means |
 |---|---|---|---|---|
@@ -278,7 +283,7 @@ Annotation threshold: **high — significant epistemic resolution only (slide mo
 - Fires when the span resolved at a meaningfully different register than the header declared
 - Does not override the header mid-span; the header's declared register still governed generation
 - `STATE.jsonl` records as `opening_register` and `closure_register` when they differ
-- Syntax: `→~:confidence[CS],[16]` `→~:confidence[S],[13]`
+- Syntax: `→ <<~ confidence Synthesis-Canon 16/20 >>` `→ <<~ confidence Synthesis 13/20 >>`
 
 ### Scope
 
@@ -344,11 +349,11 @@ It records where the span actually landed epistemically.
 The header's declared register still governed generation; the slide says "it resolved here."
 `STATE.jsonl` records both as `opening_register` and `closure_register` when they differ.
 
-**Generalized to the scalar HUD (2026-06-02):** the same slide now governs every scalar instrument, not register alone. The opening line SEEDs an immutable target in TW5 filter-run notation --- `[~:E-Prime[N]]` (tilde-colon, Named-case, outer `[ ]` wrapper); the closing line SELF-RATES via the slide --- `[~E-Prime[N -> M]]` (bare tilde; `[target -> actual]`, collapsing to `[-> N]` on-target). Log `opening`/`closure` per instrument as register already does. Canon: the boot artifact's #exchange-protocol.
+**Generalized to the scalar HUD:** the same slide governs every `hud` gauge, not register alone. The opening `hud` seeds a target --- `Aperture(10) OODA-HA(3)`; the closing `hud` slides it --- `Aperture(10 -> 13)`, collapsing to `Aperture(-> 13)` on-target. Log `opening`/`closure` per gauge as register already does. Canon: the boot artifact's #exchange-protocol.
 
 **Design rationale (moved here from the `api` boot meme --- `api` carries instruction, `docs` carries the why):**
 - *Why seed vs self-rating are two forms.* When one instrument both sets the goal and grades it, that constitutes a Goodhart self-grading loop. The seed/slide split keeps the calibration gap auditable instead of silently closed; the `[-> N]` on-target collapse makes a suspiciously-perfect turn conspicuous rather than invisible.
-- *Why ratings leave the `lar:` URI.* The `lar:` URI is a name (RFC 4151 `tag:` precedent: a name is not dereferenced and should not carry mutable per-turn state). A rating embedded in an address breaks URI equality (already excluded from stable-address comparison) and cannot express the seed→actual calibration gap --- so `confidence`, `P`, `ffz`, and provenance home in the HUD scalar line, the inline marker, or the STATE log instead.
+- *Why ratings leave the `lar:` URI.* The `lar:` URI is a name (RFC 4151 `tag:` precedent: a name is not dereferenced and should not carry mutable per-turn state). A rating embedded in an address breaks URI equality (already excluded from stable-address comparison) and cannot express the seed→actual calibration gap --- so `confidence`, `Aperture`, and loop state home in their sigils or the STATE log instead.
 
 <<~/ahu >>
 
@@ -454,16 +459,16 @@ Current aftermath settlement to preserve:
 ## Open Decisions
 
 Q1, Q2, Q3, Q4, Q5 — all locked (see plan Sprint 1a + draft Open Decisions section).
-Q6 (closure rendering tiers) — `~:confidence[S],[11]` — Researcher task RES-01.
+Q6 (closure rendering tiers) — `Synthesis 11/20` — Researcher task RES-01.
 Q16 (Tagspace slot shift notation) — locked.
 
 **New open decisions (from GlassFloor/LIMINAL_PERSPECTIVES.md, 2026-04-08):**
 
 | ID | Question | Register | Sprint | Notes |
 |---|---|---|---|---|
-| SHD-01 | Rendering portability: do the current HUD symbols render correctly in VS Code terminal, Claude.ai chat, GitHub markdown, and plain text? | `~:confidence[CS],[16]` | S0-02 carry → S1 SIG-05 | VS16 variation selectors (`🏛️`, `⚙️`) may render as text. Fallback characters required for any failure. |
-| SHD-02 | p-band as cognitive load manager and token budget governor: aviation HUD research (Lee 2024) shows excessive symbology creates attentional tunneling — operator fixates on HUD, misses content beneath it. In a text stream (unlike graphical HUD), cognitive capture cost is proportional to reading time, not visual complexity. p-band must explicitly manage this threshold. Secondary hypothesis: the HUD also saves tokens by preventing wrong-register generation. Both claims are testable. | `~:confidence[CS],[16]` | S2 P_BAND_MODEL.md | Cognitive capture framing is research-grounded `~:confidence[CS],[16]` (Lee 2024). Token steering is a design assertion `~:confidence[S],[13]` requiring empirical test. BKL-05 deferred measurement validates both. Source: E-deep-research-report.md §4.1. |
-| SHD-03 | Progressive disclosure / HUD training mode: should the node explain each HUD element as it first appears, then drop the explanation? How does onboarding sequence interact with context window pressure? | `~:confidence[S],[13]` | S2 SIG-05 expansion | Cold-start every session means the node re-learns its own instruments from the system prompt each time. Invariant-core Tier 1 caching is the infrastructure answer; progressive disclosure is the operator-facing answer. |
+| SHD-01 | Rendering portability: do the current HUD symbols render correctly in VS Code terminal, Claude.ai chat, GitHub markdown, and plain text? | `Synthesis-Canon 16/20` | S0-02 carry → S1 SIG-05 | VS16 variation selectors (`🏛️`, `⚙️`) may render as text. Fallback characters required for any failure. |
+| SHD-02 | p-band as cognitive load manager and token budget governor: aviation HUD research (Lee 2024) shows excessive symbology creates attentional tunneling — operator fixates on HUD, misses content beneath it. In a text stream (unlike graphical HUD), cognitive capture cost is proportional to reading time, not visual complexity. p-band must explicitly manage this threshold. Secondary hypothesis: the HUD also saves tokens by preventing wrong-register generation. Both claims are testable. | `Synthesis-Canon 16/20` | S2 P_BAND_MODEL.md | Cognitive capture framing is research-grounded `Synthesis-Canon 16/20` (Lee 2024). Token steering is a design assertion `Synthesis 13/20` requiring empirical test. BKL-05 deferred measurement validates both. Source: E-deep-research-report.md §4.1. |
+| SHD-03 | Progressive disclosure / HUD training mode: should the node explain each HUD element as it first appears, then drop the explanation? How does onboarding sequence interact with context window pressure? | `Synthesis 13/20` | S2 SIG-05 expansion | Cold-start every session means the node re-learns its own instruments from the system prompt each time. Invariant-core Tier 1 caching is the infrastructure answer; progressive disclosure is the operator-facing answer. |
 
 <<~/ahu >>
 
