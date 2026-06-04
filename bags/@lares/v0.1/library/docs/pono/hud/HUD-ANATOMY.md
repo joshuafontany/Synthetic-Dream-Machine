@@ -9,7 +9,7 @@
 
 # HUD Anatomy
 
-> Status: `~:confidence[SP],[12]` — extracted from URI-SCHEMA.md; stale examples throughout; not yet promoted
+> Status: `Provisional-Synthesis 12/20` — extracted from URI-SCHEMA.md; stale examples throughout; not yet promoted
 > Source: `URI-SCHEMA.md` §1.1 (Exchange Flow) and §5 (HUD Rendering)
 > Extracted: 2026-04-21
 

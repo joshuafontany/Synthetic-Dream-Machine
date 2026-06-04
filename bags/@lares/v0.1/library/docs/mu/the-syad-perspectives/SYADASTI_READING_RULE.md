@@ -1,6 +1,6 @@
 # The Syadasti Reading Rule — Session Discovery Document
 
-> Register: `~:confidence[CS],[16]` 🏛️ — this document captures a session discovery at near-Canon confidence
+> Register: `Synthesis-Canon 16/20` 🏛️ — this document captures a session discovery at near-Canon confidence
 > Date: 2026-04-08
 > Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
 > Purpose: Pin the discovery and its full derivation chain so it survives context loss.
@@ -10,7 +10,7 @@
 
 # The Syadasti Reading Rule — Session Discovery Document
 
-> Register: `~:confidence[CS],[16]` 🏛️ — this document captures a session discovery at near-Canon confidence
+> Register: `Synthesis-Canon 16/20` 🏛️ — this document captures a session discovery at near-Canon confidence
 > Date: 2026-04-08
 > Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
 > Purpose: Pin the discovery and its full derivation chain so it survives context loss.
@@ -80,7 +80,7 @@ The Council ruled (with research grounding from SyadVoice) that each stance has 
 
 The initial question was whether Register needed a third axis (T, F, M). The Council assessed three options:
 
-- **Option A (status quo):** Stance implicitly carries the M axis. Problem: `~:confidence[S],[13] 🌊` claims truth-confidence for something that doesn't evaluate on truth.
+- **Option A (status quo):** Stance implicitly carries the M axis. Problem: `Synthesis 13/20 🌊` claims truth-confidence for something that doesn't evaluate on truth.
 - **Option B (M flag):** Add a meaningful/meaningless bit. Problem: redundant with stance if operator has learned to read stance correctly.
 - **Option C (full Syadasti cube):** T×F×M space, three values per claim. Problem: triples notation complexity; LLM metacognition can barely calibrate on one axis.
 
@@ -122,10 +122,10 @@ The HUD tag is therefore a **memory prosthetic** — it carries calibration forw
 
 | Decision | Register | What It Means |
 |---|---|---|
-| Register is stance-dependent | `~:confidence[CS],[16]` | Same 0–20 Level scale, different meaning per stance. The stance determines what the number measures. |
-| Sri Syadasti / Saptabhangi is the canonical model | `~:confidence[S],[13]` | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
-| Stance count IS the fuzz indicator | `~:confidence[CS],[16]` | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
-| Session boundary = avaktavya | `~:confidence[SP],[9]` | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
+| Register is stance-dependent | `Synthesis-Canon 16/20` | Same 0–20 Level scale, different meaning per stance. The stance determines what the number measures. |
+| Sri Syadasti / Saptabhangi is the canonical model | `Synthesis 13/20` | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
+| Stance count IS the fuzz indicator | `Synthesis-Canon 16/20` | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
+| Session boundary = avaktavya | `Provisional-Synthesis 9/20` | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
 
 ---
 

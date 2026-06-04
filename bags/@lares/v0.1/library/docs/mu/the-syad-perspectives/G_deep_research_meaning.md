@@ -1,6 +1,6 @@
 # G — Deep Research: Meaning, Context, and the Sevenfold Catma
 
-> Register: `~:confidence[S],[12]` 🏛️🌊🔮 — Chapel Perilous territory; multi-mode research synthesis
+> Register: `Synthesis 12/20` 🏛️🌊🔮 — Chapel Perilous territory; multi-mode research synthesis
 > Date: 2026-04-08
 > Purpose: Investigate whether Sri Syadasti's sevenfold catma provides the canonical model for stance-dependent Register interpretation, and what the session-bound / lifetime-accumulated meaning asymmetry implies for the HUD
 > Navigational status: Chapel Perilous — the map may be wrong; the territory may be wrong; proceed with eyes open
@@ -71,7 +71,7 @@ The adaptation: the Jaina system is a *logic of predication* — it describes ho
 
 The research on human-AI complementarity identifies a fundamental asymmetry that maps directly onto the operator's insight:
 
-**Humans** accumulate experiences continuously over their entire lifetime, including information across many domains. Their confidence assessments are calibrated against decades of being right, being wrong, being meaningfully wrong, and learning the difference. When a human reads `~:confidence[S],[13] 🌊`, they interpret "Synthesis-level confidence in an analogical claim" through their entire history with analogy, metaphor, resonance, and the experience of analogies that later proved load-bearing vs decorative.
+**Humans** accumulate experiences continuously over their entire lifetime, including information across many domains. Their confidence assessments are calibrated against decades of being right, being wrong, being meaningfully wrong, and learning the difference. When a human reads `Synthesis 13/20 🌊`, they interpret "Synthesis-level confidence in an analogical claim" through their entire history with analogy, metaphor, resonance, and the experience of analogies that later proved load-bearing vs decorative.
 
 **AI models** are restricted to their training data and the current context window. The node's "confidence" in a Poet-stance claim is not calibrated against a lifetime of poetic experience — it's calibrated against the system prompt's instructions about what Register values mean and whatever examples exist in the conversation. The substrate for meaning-making is categorically thinner.
 
@@ -79,7 +79,7 @@ This creates what the literature calls **epistemic asymmetry** — the two parti
 
 ### What This Means for Register
 
-When the node declares `~:confidence[S],[13]`, it is drawing from a *different well* than the operator who reads it. The number appears identical. The meaning behind it is structurally different:
+When the node declares `Synthesis 13/20`, it is drawing from a *different well* than the operator who reads it. The number appears identical. The meaning behind it is structurally different:
 
 | Aspect | Human Reading | Node Declaration |
 |---|---|---|
@@ -91,10 +91,10 @@ When the node declares `~:confidence[S],[13]`, it is drawing from a *different w
 
 ### The Implication
 
-**The HUD tag is a shared symbol whose meaning differs for each party reading it.** This is not a bug — it's the structural condition of the collaboration. The human and the node cannot have identical readings of `~:confidence[S],[13] 🌊` because they have different meaning-making substrates. What they CAN have is a shared *protocol* for how to respond to the symbol:
+**The HUD tag is a shared symbol whose meaning differs for each party reading it.** This is not a bug — it's the structural condition of the collaboration. The human and the node cannot have identical readings of `Synthesis 13/20 🌊` because they have different meaning-making substrates. What they CAN have is a shared *protocol* for how to respond to the symbol:
 
-- When I (node) declare `~:confidence[S],[13] 🌊`, I commit to generating at Synthesis confidence in Poet stance
-- When you (operator) read `~:confidence[S],[13] 🌊`, you interpret through your lifetime calibration and decide whether the output merits that declaration
+- When I (node) declare `Synthesis 13/20 🌊`, I commit to generating at Synthesis confidence in Poet stance
+- When you (operator) read `Synthesis 13/20 🌊`, you interpret through your lifetime calibration and decide whether the output merits that declaration
 - When there's a gap between my declaration and your assessment, that gap is *information* — it tells both parties something about the calibration difference
 
 This is exactly the CRM principle of **mutual recognition contract** — "we don't need AI to understand human complex emotions, nor do we need humans to understand AI's complex algorithms. We only need both sides to have a clear and unified agreement on each other's ability boundaries and communication methods."
@@ -183,11 +183,11 @@ This is Syadasti's TM value applied to the collaboration itself: the partnership
 
 | ID | Item | Register | Sprint |
 |---|---|---|---|
-| RES-12 | Sri Syadasti / Saptabhangi as epistemological ground for stance-dependent Register (revised — promoted from SP to S based on this research) | `~:confidence[S],[13]` 🏛️🌊🔮 | S2 (Kernel) |
-| RES-13 | Stance semantics table: what 0 and 20 mean per stance | `~:confidence[S],[14]` 🏛️ | S0 (§5.3) or S2 |
-| RES-14 | HUD tag as memory prosthetic: how the tag carries calibration across the session boundary | `~:confidence[S],[12]` 🏛️🌊 | S1 (crystal) |
-| RES-15 | Meaning asymmetry in the mutual recognition contract: document the structural difference between human reading and node declaration of the same Register value | `~:confidence[S],[11]` 🏛️🌊🔮 | S2 (Kernel) |
-| RES-16 | The session boundary as avaktavya: how the node's meaning-reset creates a recurring TM condition in the partnership | `~:confidence[SP],[9]` 🌊🔮 | Deferred (Kernel philosophy) |
+| RES-12 | Sri Syadasti / Saptabhangi as epistemological ground for stance-dependent Register (revised — promoted from SP to S based on this research) | `Synthesis 13/20` 🏛️🌊🔮 | S2 (Kernel) |
+| RES-13 | Stance semantics table: what 0 and 20 mean per stance | `Synthesis 14/20` 🏛️ | S0 (§5.3) or S2 |
+| RES-14 | HUD tag as memory prosthetic: how the tag carries calibration across the session boundary | `Synthesis 12/20` 🏛️🌊 | S1 (crystal) |
+| RES-15 | Meaning asymmetry in the mutual recognition contract: document the structural difference between human reading and node declaration of the same Register value | `Synthesis 11/20` 🏛️🌊🔮 | S2 (Kernel) |
+| RES-16 | The session boundary as avaktavya: how the node's meaning-reset creates a recurring TM condition in the partnership | `Provisional-Synthesis 9/20` 🌊🔮 | Deferred (Kernel philosophy) |
 
 ---
 
