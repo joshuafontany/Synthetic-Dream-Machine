@@ -77,7 +77,7 @@ A heleuma API meme that acquires:
 
 - `confidence ≥ 16`, `mana ≥ 16`, `manao ≥ 16`, `manaoio ≥ 15`
 - A verified `body-sha256` hash (gate layer 2 — content integrity; written by `sync-heleuma --commit`)
-- A keyhive capability proof (gate layer 3 — operator authorization; planned; replaces the pre-keyhive `promoted-at` timestamp sketch)
+- A keyhive capability proof (gate layer 3 — operator authorization; planned)
 
 ...MAY load through `_bootModules()` via the corpus gate and replace its compiled-in counterpart. At that point the heleuma pair functions as a standard meme pair and `heleuma = true` MAY be removed.
 

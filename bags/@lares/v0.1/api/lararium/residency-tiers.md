@@ -41,7 +41,7 @@ Residency decomposes into two orthogonal dimensions, the thermal axis named in �
 
 **Two states, not three (revised 2026-06-01).** A `warm` (mahana) middle tier was proposed and then **cut** the same day after an adversarial + kupono + YIN research pass — see #warm-cut. The model is `wela | anu` + pin.
 
-**Supersedes** the prior two-manager split (independent `BagResidencyManager` tiers + `VesselIslandPool` tiers) per operator ruling: *collapse bag residency into the Island Pool concepts.*
+Bag residency lives in the Island Pool concepts (operator ruling): one manager --- the `VesselIslandPool` --- holds the residency tiers.
 
 **"bag" stays a term.** The collapse touches residency *authority*, not the TW5 vocabulary. A **bag** remains the TW5 layer/coordinate — one Automerge document, one axis of the recipe query plan (residency-model, linked in #edges). What collapses is the standalone *residency manager*: the methods that pin, hydrate, and cool docs (today in `bag-residency.ts`, a side-file predating the causal-islands model) MUST move into the **causal-island code** — the module that owns the causal-islands model is where residency methods belong. No one-off side file outranks the model it predates.
 

@@ -743,8 +743,7 @@ Variables do not leak through sibling scope. `meme` sets an explicit lexical con
 ```
 
 This follows the Svelte `setContext` model: explicit, bounded, non-leaking.
-`+currentMeme` ambient lookup from the TW5 filter grammar is **deprecated** in `wikitext-filter`.
-Explicit binding via `meme` sigil replaces it.
+`wikitext-filter` binds meme context explicitly via the `meme` sigil; it carries no `+currentMeme` ambient lookup.
 
 ### Filter context binding
 

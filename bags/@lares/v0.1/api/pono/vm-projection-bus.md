@@ -11,7 +11,7 @@ mana        = 18
 manao       = 18
 manaoio     = 17
 tagspace    = "stable"
-role        = "invariant doctrine: VmPool→Projection Messaging Standard; dispatchEvent/addEventListener pattern; TW5Engine.onVerseEvent design; replaces _larKukaliHook"
+role        = "invariant doctrine: VmPool→Projection Messaging Standard; dispatchEvent/addEventListener pattern; TW5Engine.onVerseEvent design"
 cacheable   = true
 retain      = true
 invariant   = true
@@ -25,8 +25,7 @@ status-date = "2026-05-02"
 # VM Pool → Projection Messaging Bus
 
 The projection bus is the coupling between the TW5 VM (widget tree, render events)
-and the ReactionEngine (CRDT projection, meme store mutations). It replaces the
-`_larKukaliHook` singleton with a Verse-aligned `signalable`/`subscribable`
+and the ReactionEngine (CRDT projection, meme store mutations). It carries a Verse-aligned `signalable`/`subscribable`
 asymmetry baked into the TW5 wiki event system.
 
 **Law:** TW5Engine does not know about ReactionEngine. ReactionEngine registers
@@ -136,7 +135,7 @@ Problems with this pattern:
 3. Not isomorphic — browser and node had different hook installation sites
 4. Non-cancellable — no teardown path; leaked on VM disposal
 
-The replacement:
+The pattern:
 
 ```typescript
 // ✓ web3 pattern — per-VM registration, correct dependency direction

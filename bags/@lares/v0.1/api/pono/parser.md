@@ -144,7 +144,7 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 `kapu` (`lar-kind: edge-sugar`) operates at compile layer only. It produces no render output. It marks a threshold, restriction, or qualification in the graph.
 
-`hana` (`lar-kind: guest-grammar`) delegates body to a guest interpreter selected by grammar key. The live TW5 VM provides full native TW5 filter access; the old "bounded sub-grammar jail" model no longer applies. `hana` holds its place for Verse scripting, TOML block payloads, and future grammar integrations not natively available in TW5. See `lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind#guest-grammar`.
+`hana` (`lar-kind: guest-grammar`) delegates body to a guest interpreter selected by grammar key. The live TW5 VM provides full native TW5 filter access. `hana` holds its place for Verse scripting, TOML block payloads, and future grammar integrations not natively available in TW5. See `lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind#guest-grammar`.
 
 <<~/ahu >>
 

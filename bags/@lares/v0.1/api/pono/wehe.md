@@ -29,7 +29,7 @@ visible what had remained hidden. The opening action carries with it an act of r
 
 A block-container sigil declaring a named procedure body. `wehe` crosses the boundary from
 declaration-space into execution-space: the content inside the block becomes callable by name,
-surfacing what had previously stayed undeclared. English alias: `\procedure` (TW5 pragma form).
+surfacing what otherwise stays undeclared. English alias: `\procedure` (TW5 pragma form).
 Both forms produce the same parse result.
 
 Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a block sigil.

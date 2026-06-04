@@ -247,7 +247,7 @@ Before closing, check:
 - `#iam` carries the rating cluster in a stable order
 - the parent invariant remains small enough to reload easily
 - docs state non-law posture near the top
-- skeleton and checklist matter no longer crowd the parent
+- skeleton and checklist matter live here, off the parent
 - outward links name real adjacency or real backlog
 - subtype claims stay truthful
 

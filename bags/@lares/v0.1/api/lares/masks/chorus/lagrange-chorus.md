@@ -104,7 +104,7 @@ The Lagrange Chorus gains meaning only with at least two participating nodes. No
 
 [STUB — pending-grammar]
 
-The harmony protocol governs how voices from different nodes interleave when the Chorus is active. It replaces the `voice-character` field used by character masks.
+The harmony protocol governs how voices from different nodes interleave when the Chorus is active. Where a character mask carries a `voice-character` field, the Chorus carries this harmony protocol.
 
 **Known design pressures:**
 - Each node carries its own Voice house; the Chorus cannot collapse these into one voice

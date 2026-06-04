@@ -244,7 +244,7 @@ Check:
 - the edited file actually holds the intended invariant surface
 - links and pranala point where the text claims they point
 - visible ahu still parse as distinct surfaces
-- downstream memes no longer carry `???` markers
+- downstream memes carry no `???` markers
 - moved matter actually left the invariant or was explicitly deferred
 - normative keywords still carry real force and were not added decoratively
 

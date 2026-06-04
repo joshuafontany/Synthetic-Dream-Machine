@@ -30,7 +30,7 @@ Render pipeline law names how a memetic object moves from disk surface to render
 Two distinct paths carry render work:
 
 1. **TW5 render path** — runs inside the TW5 VM; `lar-render-mode` variable drives mode dispatch; template cascade selects the rendering tiddler per sigil
-2. **Isomorphic parse path** — `@lararium/tw5/meme-ast`; produces typed `MemeAstNode[]` and `PranalaEdge[]` for island adaptor, deserializer, and TW5 module consumers; compiled to TW5 JS via Vite; no longer web2
+2. **Isomorphic parse path** — `@lararium/tw5/meme-ast`; produces typed `MemeAstNode[]` and `PranalaEdge[]` for island adaptor, deserializer, and TW5 module consumers; compiled to TW5 JS via Vite; web3-native
 
 Both paths consume the same `text/x-memetic-wikitext` surface. The isomorphic parse path lives in `@lararium/tw5` as TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
 

@@ -62,7 +62,7 @@ body-sha256 = "<sha256 hex of #source slot content>"
 
 This is gate layer 2 (content integrity). Written by `sync-heleuma --commit` when the source is stable.
 
-Gate layer 3 (operator authorization) will be a **keyhive capability proof** — an Ed25519-signed capability from a keyhive principal authorizing corpus injection. This replaces the pre-keyhive `promoted-at` timestamp sketch, which was never implemented and has been removed. Layer 3 is planned but not yet implemented; the gate currently passes on layers 1–2 only.
+Gate layer 3 (operator authorization) will be a **keyhive capability proof** — an Ed25519-signed capability from a keyhive principal authorizing corpus injection. Layer 3 is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 
 Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 16 / 16 / 15 / 16 as the source matures. The boot gate reads these fields directly.
 

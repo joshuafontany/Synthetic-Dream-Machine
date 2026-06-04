@@ -209,7 +209,7 @@ Before closing, check:
 - `constraints` appears in this skill, not `invariants`
 - docs surface states non-law posture near the top
 - named `pranala` sugar reads as surface sugar, not as a rival edge system
-- examples and long bridge notes no longer crowd the parent
+- examples and long bridge notes live here, off the parent
 - unresolved references remain named rather than hidden
 
 <<~/ahu >>

@@ -237,8 +237,7 @@ The grammar accepts all five families equally. The parse result for a Hawaiian s
 - Writable by any operator with bag write access — language extension requires no authority
   beyond bag membership.
 
-The tag replaces the old `$:/tags/LarariumGrammar` — a `$:/` system-namespace tag that required
-code-side knowledge to register. The migration from `$:/` to `lar:///` namespaces across all
+The tag lives in the `lar:///` namespace, not the `$:/` system namespace that requires code-side registration. The migration from `$:/` to `lar:///` namespaces across all
 owned tags is the companion sprint to this one.
 
 When the TOML monolith (`memetic-wikitext.tid`) reaches families-only state — when the 7 remaining

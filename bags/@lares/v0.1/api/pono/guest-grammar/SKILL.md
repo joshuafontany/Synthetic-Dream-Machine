@@ -224,7 +224,7 @@ Before closing, check:
 - `hana` keeps opener, payload, and body distinct
 - docs state non-law posture near the top
 - no host primitive got reassigned to guest-family work
-- parser and lowering detail no longer crowd the parent
+- parser and lowering detail live here, off the parent
 - outward links name real adjacency or real backlog
 
 <<~/ahu >>

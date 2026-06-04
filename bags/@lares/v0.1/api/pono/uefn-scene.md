@@ -187,7 +187,7 @@ Effect specifiers on device functions carry semantic meaning in the Lararium gra
 | Divergence | `<converges>` | handler guaranteed to terminate | (future annotation) |
 | Prediction | `<predicts>` | deterministic prediction context | (future annotation) |
 
-**`<no_rollback>` (deprecated):** side effects survive failure; kapu-layer marker.
+**`<no_rollback>` (kapu-layer marker):** side effects survive failure.
 
 **`spawn` hides `<suspends>`:** A `spawn` expression absorbs the `<suspends>` effect
 of the spawned function. The calling context does NOT need `<suspends>`. This is the
