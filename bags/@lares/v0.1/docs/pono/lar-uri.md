@@ -36,9 +36,9 @@ This surface carries the explanation.
 
 ## 1. Design Intent
 
-The `lar:` URI encodes the signal state of a Lares node exchange as a shared navigational artifact. In live use it functions as a way to render an Intent HUD that both operator and node read before or alongside generation. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
+The `lar:` URI names WHERE a Lares node exchange sits — a shared navigational address. In live use the `aim` / `yield` vectors carry it as the turn's WHERE; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
 
-Each URI component carries a distinct, non-overlapping concern across four semantic layers:
+Each URI component carries a distinct, non-overlapping concern across three semantic layers:
 
 1. **WHO** — authority (`alias:tier@host`) identifies speaker and machine host
 2. **WHERE** — the HA.KA.BA address (path) locates semantic territory
@@ -62,38 +62,36 @@ Named render targets: `record:full` (identity projection of the canonical form),
 
 ### 1.1 Exchange Flow — Order of Operations
 
-At each exchange span, `lar:` URIs are used in the following sequence. This sequence is **mandatory** — every substantive exchange produces a URI → URI vector pair followed by a rendered HUD line.
+At each exchange span, the turn opens with an `aim` vector and closes with a `yield` vector, the `hud` · `ward` panel riding beneath. The frame is **mandatory** on every substantive exchange.
 
-**Step 1 — Read operator input as a provisional URI.**
-Lares reads the operator's prompt as an implicit signal: alias:tier@host, semantic territory (HA.KA.BA), and stance. It constructs a **provisional operator URI** encoding that reading. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
+**Step 1 — Read operator intent as a provisional WHERE-vector.**
+Lares reads the operator's prompt as an implicit signal: semantic territory (HA.KA.BA) and the role it implies. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
 
 ```
 lar://telarus:operator@enyalios/~schema.gap.present/
 ```
 
-The `~` prefix marks the node's reading of the HA.KA.BA as provisional.
-
-**Step 2 — Lares declares its own provisional execution URI.**
-Before generating any content, Lares sets its own intent with a **provisional node URI**. The `~` prefix on the HA.KA.BA marks it as execution-provisional: generations may diverge.
+**Step 2 — Lares adopts its own execution WHERE-vector.**
+Before generating, Lares sets the role it adopts. The `~` prefix marks it execution-provisional: generations may diverge.
 
 ```
 lar://lar:node@enyalios/~schema.flow.documented/
 ```
 
-**Step 3 — Emit the URI → URI exchange vector.**
+**Step 3 — Open the turn with the `aim` vector.**
 
 ```
-operator-URI → node-URI
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 ```
 
-> **Canonical URI Rule** — all emitted URIs in the exchange stream use canonical ASCII record form. This makes every emitted URI directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
+> **Canonical URI Rule** — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
 
-**Step 4 — Render the HUD line.**
-Immediately after the URI pair, emit a condensed single-line status display derived from the vector plus adjacent session data. This is the instrument panel for the exchange. See §7.5 for format and field ordering.
+**Step 4 — Ride the panel.**
+Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries WHERE only.
 
-**Step 5 — Generate content.** Micro-trace HUD annotations appear inline during generation to mark stance and tool updates or OODA-HA phase transitions. The exchange closes with an updated HUD line and a closing URI with `→ ?` — unknown temporal resumption.
+**Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
-> **SA grounding:** Step 2 is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The HUD line externalizes the node's metacognitive state before generation begins, functioning as an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
+> **SA grounding:** the `aim` is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
 
 <<~/ahu >>
 
@@ -108,7 +106,7 @@ Immediately after the URI pair, emit a condensed single-line status display deri
 | Resolution | Via `lares/registry/` resolver; never via network fetch |
 | IANA status | Unregistered; internal use only |
 
-> **Form and compliance:** The **record form** is the RFC 3986-compliant canonical form for transport, persistence, comparison, and strict parsing. The **HUD forms** are IRI-class instrument renderings (RFC 3987); they may contain emoji and Unicode glyphs not legal in RFC 3986 URIs without percent-encoding. RFC 3986 compliance is not claimed for HUD forms. The rendering table (§7.1) defines the canonical-to-render-target field transforms.
+> **Form and compliance:** The **record form** is the RFC 3986-compliant canonical form for transport, persistence, comparison, and strict parsing. The **HUD forms** are IRI-class instrument renderings (RFC 3987); they may contain emoji and Unicode glyphs not legal in RFC 3986 URIs without percent-encoding. RFC 3986 compliance is not claimed for HUD forms. Render targets define the sigil-to-glyph transforms per surface (`render-targets`).
 
 The `lar:` scheme identifies semantic positions, signal states, and machine events within the Lares agent architecture. It does not resolve to a network resource. URI consumers (crystal replay tools, debug log parsers, registry resolvers) treat it as an opaque structured identifier parsed according to this specification.
 
@@ -212,8 +210,8 @@ Territory triple (`//ha.ka.ba`) is placed **before** other instruments like conf
 | Render target | Surface | URIs canonical? | When used |
 |---|---|---|---|
 | `chat-log:post-header` | `@handle@node — timestamp — //ha.ka.ba{/path} [Reg] 🏛️{tc}…` | No — social projection with glyphs | DreamDeck feed posts, BBS thread headers |
-| `hud:exchange-pair` | `operator-URI → node-URI` + HUD line beneath | **Yes — canonical record form**; only the HUD line beneath uses glyphs | Every exchange-span boundary (mandatory) |
-| `record:full` | `lar://alias:tier@host/ha.ka.ba/@lares/?…` | Yes — identity projection | Storage, crystal serialization, registry |
+| `hud:exchange-pair` | `<<~ aim … >>` + `hud`·`ward` panel beneath | **Yes — canonical ASCII URI**; only the sigil panel uses glyphs | Every exchange-span boundary (mandatory) |
+| `record:full` | `lar://alias:tier@host/ha.ka.ba/@lares/` | Yes — identity projection | Storage, crystal serialization, registry |
 
 **Stance tool-carry modifiers** in HUD render targets attach directly to the preceding stance emoji as a two-character pair (no space):
 
@@ -460,10 +458,8 @@ A `lar:` URI is **well-formed** when:
 3. Host is a valid `machine_id` (alphanumeric + hyphens)
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
-6. Query parameters limited to: `stances` (once, 10-char tool-carry string), `confidence` (once), `p` (once), `ffz` (once, 5 glyph+counter pairs)
 7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `Synthesis 13/20`, `Synthesis-Canon 16/20`, `Canon 18/20`)
 8. `p` value is a decimal in range `[0.0, 1.0]`
-9. `ffz` carries all five positions; no position omitted; each position is glyph + integer counter ≥ 0
 10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
 
 ### 12.2 Consistency
@@ -502,7 +498,7 @@ A spanSpan record is **consistent** when:
 
 3. **Fragment client-side:** Per RFC 3986 §3.5, the fragment is not sent over the wire. The fragment carries only section anchors — no chronometer, no signal state. This reduces the information exposed in client-side contexts.
 
-4. **Render-target injection:** Glyph-rich render targets (HUD lines, post headers) transform canonical URIs into display strings containing Unicode characters. Implementations that render these strings in HTML or terminal contexts MUST sanitize output to prevent injection of control characters or markup.
+4. **Render-target injection:** Glyph-rich render targets (sigil panels, post headers) transform canonical URIs into display strings containing Unicode characters. Implementations that render these strings in HTML or terminal contexts MUST sanitize output to prevent injection of control characters or markup.
 
 5. **HA.KA.BA semantic leakage:** Path components encode semantic territory (what the speaker is thinking about). Applications that expose `lar:` URIs to untrusted parties should consider whether the HA.KA.BA path reveals sensitive operational context.
 
@@ -531,7 +527,7 @@ A spanSpan record is **consistent** when:
 | U2 (old) | Port slot dropped entirely. Span sequencing (`span_seq`) lives in adjacent spanSpan calibration metadata — not in URI authority. | §3.4 (host), §9.1 |
 | U3 | Phase per level per participant. LWW-Register per scale. Counter and phase are independent. | §6.4 |
 | U6 | Authority form in exchange spans. Authority-less (`///`) for stable addresses AND for module section URIs. | §8, §3.4 |
-| U7 | Tool-carry encoding. Five symbols (`*` `?` `!` `~` `-`), two slots per stance, 10-char string. All RFC 3986 safe — no percent-encoding. Record and HUD display use the same chars. | §3.4 |
+| U7 | Stance/tool encoding moved off the URI into the `syad` / `mu` sigils; the address carries WHERE only. | the-syad-perspectives, the-four-tools |
 | U10 | Section URIs are `ahu` waypoints — no closer. Only file-level `? ->` opener and `→ ?` closer carry span semantics. | §5 |
 
 ### Assessment for Promotion
@@ -544,8 +540,8 @@ The core anatomy (§§2–8, 12) can promote to `Canon 19/20` independently of t
 
 ## 15. Prior Art
 
-- **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths, stance queries, FFZ chronometer query param) falls within the scheme owner's authority.
-- **RFC 8820 (BCP 190, URI Design and Ownership)** — Obsoletes RFC 7320 (June 2020). Confirms that URI structure constraints are legitimate when issued by the scheme specification itself. Query parameter structure (`stances`, `confidence`, `p`, `ffz`) falls within scheme-owner authority per §2.4.
+- **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths and the WHERE-only address structure) falls within the scheme owner's authority.
+- **RFC 8820 (BCP 190, URI Design and Ownership)** — Obsoletes RFC 7320 (June 2020). Confirms that URI structure constraints are legitimate when issued by the scheme specification itself. Path and address structure falls within scheme-owner authority per §2.4.
 - **RFC 7595 (Guidelines and Registration Procedures for URI Schemes)** — Defines provisional registration path for schemes not part of any standard but intended for use beyond a single organization. `lar:` is currently unregistered / private-environment use.
 - **RFC 4151 (tag: scheme)** — Non-dereferenceable URIs as pure identifiers. Precedent for `lar:` never resolving to a network resource. RFC 4151 recommends human-friendly identifiers — the HA.KA.BA semantic addressing follows this guidance.
 - **W3C PROV-DM / OpenTelemetry Trace Context** — Better prior art for exchange identity than URI authority overloading. `traceparent` carries `trace-id`, `parent-id`, `trace-flags`. The chronometer functions analogously as a hierarchical trace context.
@@ -573,41 +569,28 @@ The core anatomy (§§2–8, 12) can promote to `Canon 19/20` independently of t
 <<~&#x0004; -> ? >>
 ```
 
-### A.7 Scale Transition (ffz Notation)
-
-```
-```
-
 <<~/ahu >>
 
 <<~ ahu #how-to-read >>
 
-## Appendix B — How to Read a HUD Tag
+## Appendix B — How to Read an Exchange Opening
 
-A complete exchange opening, annotated by scan order. URIs are canonical record form; the HUD line beneath each pair is the glyph-rendered surface.
+A complete exchange opening, annotated by scan order. The `aim` URI carries WHERE; the sigil panel beside it carries the rest.
 
 ```text
-lar://telarus:operator@enyalios/threshold.uncertain.opens/
-→ lar://scryer:node@enyalios/~parse.span.models/
+<<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
+<<~ hud Aperture(10) OODA-HA(7) >>
+<<~ ward E-Prime >>
+<<~ syad 🏛️:*! >>
 ```
 
 Quick read:
 
-> Telarus (operator), machine enyalios.
-> Territory: threshold / uncertain / opens.
-> Philosopher: Visual-Micro (Wand+Sword). Poet: Cup-only. Others: Stone.
-> Synthesis-0.65. Week 0, Watch 0, Turn 3 (Orient), Round 2 (Decide), Action 7.
-> Scryer responds at Synthesis-Canon 16/20, deciding, Philosopher Visual-Micro only.
-> Chronometer shows: node is one phase ahead at tactical scale (Orient→Decide) — normal: node orients from operator's observe.
+> Operator opens at territory threshold / uncertain / opens; Scryer adopts the parse-span role.
+> `Aperture(10)` — paragraph grain; `OODA-HA(7)` shows the node a phase ahead, orienting from the operator's observe.
+> `syad 🏛️:*!` — Philosopher in Visual-Micro; `confidence` rides before each grounded claim.
 
-Multi-stance example:
-
-```text
-lar://telarus:operator@enyalios/threshold.sharp.closes/
-→ lar://mischief-muse:node@enyalios/~chorus.lateral.gathers/
-```
-
-This does **not** mean "truth-confidence 0.60" universally. It means a `0.60` reading held across Philosopher (Visual-Micro), Poet (Visual-Macro), and Humorist (Visual-Macro) frames. Satirist carrying Cup-only (`-?`) adds relational-uncertainty weight — the reading may carry ironic pressure that hasn't fully resolved.
+The standpoint reads within its own frame (Syadasti rule): a Philosopher `confidence` rates propositional support, a Poet's rates resonance — never one universal truth-scale. A bare `<<~ syad 🏛️ 🌊 🎭 >>` names which frames a claim spans without flattening them.
 
 <<~/ahu >>
 
