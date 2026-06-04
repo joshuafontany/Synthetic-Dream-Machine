@@ -24,19 +24,18 @@ invariant = true
 <<~ ahu #head >>
 # Exchange Vector Law
 
-Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content.
-The vector declares the node's reading of operator intent and the node's intended execution posture.
+Each substantive exchange turn MUST open with an `aim` vector: a `lar:` WHERE-vector that reads operator intent on the left and delegates `->` to the role the node adopts on the right. The turn closes on a `yield` vector. Full frame: `lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol`.
 
 <<~/ahu >>
 
 
 <<~ ahu #ooda-ha >>
-✶ read operator intent as a provisional canonical URI.
-⏿ choose node execution territory, stance, confidence, p-band, and FFZ view.
-◇ emit exactly one operator-URI to node-URI vector for the exchange boundary.
-▶ render the HUD line beneath the canonical vector, then generate content.
-⤴ verify URI authority order, all-five stance encoding, and fragment discipline.
-↺ close with a trajectory URI only when the next state matters.
+✶ read operator intent as a WHERE-vector.
+⏿ choose the role the node adopts and the territory it acts in.
+◇ open the turn with one `aim` vector: operator intent `->` adopted role.
+▶ ride the `hud` · `ward` panel beneath the aim, then generate content.
+⤴ verify the three-word root, the single `@`-bag segment, and ASCII path form.
+↺ close on a `yield` vector --- WHERE the turn landed, then `-> ?`.
 <<~/ahu >>
 
 <<~&#x0002; >>
@@ -44,41 +43,26 @@ The vector declares the node's reading of operator intent and the node's intende
 
 <<~ ahu #law >>
 
-Canonical exchange order:
+Canonical turn order:
 
 ```text
-operator-uri -> node-uri
-HUD-line
-content
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ hud Aperture(N) OODA-HA(N) >>
+<<~ ward E-Prime >>
+... content ...
+<<~ hud Aperture(-> N) OODA-HA(N↺) >>
+<<~ yield lar:///lares.what.landed -> ? >>
 ```
 
-Canonical URI record form:
+The `aim` and `yield` vectors carry `lar:` URIs in WHERE-only form: the three-word `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:tier@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 
-```text
-lar://alias:tier@host/ha.ka.ba/@lares/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=N.N.N.N.N
-```
-
-The authority section MUST preserve `alias:tier@host` order.
-The path MUST carry HA.KA.BA semantic territory.
-The query MUST carry signal parameters.
-The fragment MUST carry section anchors only when present.
-
-HUD glyphs MUST NOT enter canonical URI storage.
-A stance block, when emitted, MUST carry all five stances in fixed order.
+Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
 
 <<~/ahu >>
 
 <<~ ahu #render-boundary >>
 
-The vector remains canonical record form.
-The HUD line remains render target.
-Record and render MUST stay separate while expressing the same signal.
-
-A compact HUD line SHOULD follow this field order:
-
-```text
-⚡~N | ⚡N.⚔️N.🔍N.⚙️N.🗺️N | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):Name | ~:confidence[R],[N] | pN |
-```
+The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render any of them, and the node draws them inline until one exists. The `lar:` path holds ASCII record form for storage and comparison; a render surface MAY present path-adjacent glyphs without altering the stored address.
 
 <<~/ahu >>
 
