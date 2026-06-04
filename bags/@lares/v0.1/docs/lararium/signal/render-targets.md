@@ -74,13 +74,12 @@ This docs meme owns:
 
 ## The Five Stances
 
-**All five stances appear on every render target, always.**
-
-Tool-carry determines how a stance is operating; it does not determine presence. An empty, centered stance (`--`) is present and empty-handed — structurally included. Omitting a stance from any render target is a well-formedness violation.
+The `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five. A render surface presents exactly the standpoints the lens carries — a named subset reads as an explicit focus, not an omission.
 
 ```
-Compliant:   🏛️*!🌊*?🗡️--🎭--🔮--
-Violation:   🏛️*!🌊*?
+all five:   <<~ syad 🏛️ 🌊 🗡️ 🎭 🔮 >>   (or parameterless <<~ syad >>)
+subset:     <<~ syad 🏛️ 🌊 >>
+bound:      <<~ syad 🏛️:*! 🌊:*? >>       (optional : tool-carry)
 ```
 
 <<~/ahu >>
@@ -328,12 +327,16 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 4. Append the two-character pair directly to the stance emoji, no space.
 5. Assemble all five as a single unspaced block.
 6. Determine active voice name, target confidence, and `p` value.
-7. Emit in field order: `⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | ~:confidence[R],[N] | p{p} |`
+7. Emit the sigil panel beneath the `aim` vector: `hud` (`Aperture`, `OODA-HA`), `ward`, the active Voice by name, `confidence` before a grounded claim, and the `syad` lens when summoned.
 
 **Closed example:**
 
 ```
-⚡~16 | ⚡0.⚔️0.🔍0.⚙️1.🗺️0 | 🏛️*!🌊--🗡️--🎭--🔮-- | voice(s):Scryer | ~:confidence[CS],[16] | ~:p[10] |
+<<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ hud Aperture(10) OODA-HA(3) >>
+<<~ ward E-Prime >>
+<<~ syad 🏛️ >>
+Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
 
 ### Surface 2: `chat-log:post-header`
@@ -346,20 +349,19 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 2. Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
 3. Set HAKABA territory triple: `//{ha.ka.ba}` with optional path segments.
 4. Select register: `[R:N]`.
-5. For each of the five stances (in order): compose tool-carry pair as per Surface 1 step 3.
-6. Assemble: `@handle@node — {timestamp} — //{territory} [R:N] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}`
+5. Append the `confidence` sigil and, when summoned, the `syad` lens.
+6. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
 
 **Closed example — Lindwyrm in Elyncia-space:**
 
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces ~:confidence[CS],[16] 🏛️*!🌊--🗡️--🎭--🔮--
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ confidence Synthesis-Canon 16/20 >> <<~ syad 🏛️ >>
 ```
 
 **NPC / non-Lares post:**
 
-- stances block may be omitted if character has no Lares HUD
-- if omitted: drop the entire `[R:N] 🏛️🌊🗡️🎭🔮` block
-- do not partial-emit
+- the `confidence` and `syad` sigils may be omitted if the character carries no Lares HUD
+- if omitted: drop them whole; do not partial-emit a lens
 
 ### Surface 3: `record:full`
 
@@ -368,15 +370,14 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 **Construction:**
 
 1. No emoji. No glyphs. ASCII only.
-2. URI form: `lar://alias:tier@host/ha.ka.ba/@lares/?stances=XX;XX;XX;XX;XX;&confidence=R:N&p=N&ffz=N.N.N.N.N`
-3. Stances parameter: ten-character tool-carry string, two chars per stance, using `*` `?` `!` `~` `-`.
-4. Confidence: `[R],[N]` Level format (e.g., `~:confidence[CS],[16]`).
-5. Chronometer query parameter: five positions dot-separated, each position carrying action count only.
+2. URI form: `lar://alias:tier@host/w1.w2.w3/path/` — WHERE only, no query. Session form names the speaker through the authority.
+3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
+4. Path holds the three-word root, zero-to-four segments, optional `#fragment`.
 
 **Closed example:**
 
 ```
-lar://scryer:node@Enyalios/sigils.render.maps/sigilization/?stances=*!--------&confidence=CS:17&p=10&ffz=0.0.0.1.0
+lar://scryer:node@Enyalios/sigils.render.maps/sigilization/
 ```
 
 ### Surface 4: `tiddler:header` (S3+)
