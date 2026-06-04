@@ -17,7 +17,7 @@ retain       = true
 hydrate      = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Operator-Vessel Contract
 
@@ -170,6 +170,6 @@ identical ea rights.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

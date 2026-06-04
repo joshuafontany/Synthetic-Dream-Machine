@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Archive — storing to and retrieving from a noospheric record"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Archive
 
@@ -64,6 +64,6 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

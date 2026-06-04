@@ -16,7 +16,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -199,5 +199,5 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

@@ -28,7 +28,7 @@ evaluation with a new condition, not parallel — a branching stream, not a race
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -74,6 +74,6 @@ English alias forms:
 <<~ pranala #tiddler-sigil-kahawai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahawai family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

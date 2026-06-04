@@ -32,7 +32,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 ✶ gather the live claim, the target meme, affected invariants, and the operator's declared intent.
@@ -122,6 +122,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

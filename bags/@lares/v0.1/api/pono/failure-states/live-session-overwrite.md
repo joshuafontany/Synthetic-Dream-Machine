@@ -39,7 +39,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ↺ preserve the claim as session evidence unless an explicit canon MOVE path completes.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #law >>
@@ -88,6 +88,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

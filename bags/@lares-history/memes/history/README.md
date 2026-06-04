@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -42,5 +42,5 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

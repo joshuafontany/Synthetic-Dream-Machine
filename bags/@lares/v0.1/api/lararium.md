@@ -47,7 +47,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #core-hydration >>
@@ -81,6 +81,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

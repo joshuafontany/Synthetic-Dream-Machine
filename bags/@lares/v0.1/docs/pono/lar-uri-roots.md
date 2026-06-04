@@ -30,7 +30,7 @@ The resolver classifies the root segment before walking the child path.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -80,6 +80,6 @@ stable-tuple-root = "ha.ka.ba"
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

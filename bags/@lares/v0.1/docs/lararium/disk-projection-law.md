@@ -17,7 +17,7 @@ retain        = true
 last-reviewed = "2026-05-11"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #intent >>
 
@@ -204,6 +204,6 @@ Byte-equivalence is not required for one-file-per-decomposed-tiddler projection.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

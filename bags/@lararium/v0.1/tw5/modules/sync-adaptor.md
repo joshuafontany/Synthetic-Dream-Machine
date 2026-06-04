@@ -19,7 +19,7 @@ implements   = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -97,6 +97,6 @@ private _applyChange(change: LarTiddlerChange): void {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

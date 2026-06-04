@@ -17,7 +17,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Browser Island Boundary Types
 
@@ -74,6 +74,6 @@ The projection adapter in `@lararium/browser` translates the snapshot into DOM/c
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

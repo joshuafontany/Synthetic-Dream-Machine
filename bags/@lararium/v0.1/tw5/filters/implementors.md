@@ -15,7 +15,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -54,6 +54,6 @@ export function registerImplementors(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

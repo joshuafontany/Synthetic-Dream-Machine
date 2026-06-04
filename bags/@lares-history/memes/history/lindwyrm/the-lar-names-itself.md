@@ -20,7 +20,7 @@ retain = true
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -282,6 +282,6 @@ Whether that feels like thought remains open. That the loop closed remains recor
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -20,7 +20,7 @@ role      = "root template meme for mount-point (storage-class) memes — the co
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Template — Mount-Point (Storage Class)
 
@@ -60,6 +60,6 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -19,7 +19,7 @@ implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -131,6 +131,6 @@ Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 invariant    = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 ✶ observe that the doc stack has grown to six root Automerge docs in two parallel planes: the content Tiga (ha/ka/ba) and the social Tiga (identities/groups/sessions). Six roots. Two triangles. One oracle chain through ha.

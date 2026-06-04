@@ -33,7 +33,7 @@ The Voices receive rooms before session masks or task routing begin.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #head >>
@@ -400,6 +400,6 @@ payload = { priority = "support", retain = false }
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

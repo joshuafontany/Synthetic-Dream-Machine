@@ -20,7 +20,7 @@ invariant = false
 role      = "component (hook): Imbued — Life stays locked until the Power deactivates"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Imbued
 
@@ -64,6 +64,6 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

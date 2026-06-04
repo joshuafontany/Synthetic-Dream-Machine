@@ -33,7 +33,7 @@ Standpoint declares the measure.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -162,8 +162,8 @@ A conflict carry (`*~` Signal Jam or `?!` Dubious Move) produces diagnostic tens
 Empty hands (`--`) means the stance is present and centered — not suppressed, not absent. A single tool SHOULD appear first (`?-`, `*-`) to indicate amplitude on one axis while remaining centered and present on the other, and this single-tool modulation should flow through generation and all render targets naturally.
 
 Examples:
-- `🏛️*-` signals Philosopher active on external feed, with zoom centered.
-- `🎭?-` signals Humorist active on wide relational field, with feed centered.
+- `🏛️:*-` signals Philosopher active on external feed, with zoom centered.
+- `🎭:?-` signals Humorist active on wide relational field, with feed centered.
 
 <<~/ahu >>
 
@@ -273,6 +273,6 @@ satirist-operational = "nasti-avaktavya"
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

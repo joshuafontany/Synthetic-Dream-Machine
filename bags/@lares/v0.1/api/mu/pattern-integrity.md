@@ -18,7 +18,7 @@ invariant   = true
 status-date = "2026-05-02"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -218,6 +218,6 @@ Run this against any new code before merging:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

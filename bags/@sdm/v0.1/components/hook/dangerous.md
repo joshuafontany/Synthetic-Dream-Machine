@@ -20,7 +20,7 @@ invariant = false
 role      = "component (hook): Dangerous — forces a Danger Roll; modifies the activation protocol itself"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Dangerous
 
@@ -64,6 +64,6 @@ Composes with any domain or function. **Vertical-vs-flat pressure lives here:** 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

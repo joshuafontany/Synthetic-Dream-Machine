@@ -33,7 +33,7 @@ status-date  = "2026-04-23"
 ↺ adapt: when submodule health fails, the main server should keep running with that namespace absent.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #adapter-interface >>
@@ -175,6 +175,6 @@ The following remain blocked until explicit policy lands:
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

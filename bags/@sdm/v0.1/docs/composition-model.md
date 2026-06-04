@@ -20,7 +20,7 @@ role      = "operator/dev doctrine: the Powers composition model — entity + mo
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Composition Model — Operator / Dev Doc
 
@@ -121,6 +121,6 @@ Full lineage table lives in the epic. See edges.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

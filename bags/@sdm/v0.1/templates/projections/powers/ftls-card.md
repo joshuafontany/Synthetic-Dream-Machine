@@ -20,7 +20,7 @@ role      = "root template meme for FTLS Power card projection memes — playabl
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Template — FTLS Power Card Projection
 
@@ -74,6 +74,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

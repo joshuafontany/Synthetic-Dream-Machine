@@ -18,7 +18,7 @@ role         = "invariant interface: heleuma-ha — body/structure anchor; perma
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -64,6 +64,6 @@ An implementing meme SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

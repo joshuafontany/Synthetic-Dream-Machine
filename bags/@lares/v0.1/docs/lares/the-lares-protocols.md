@@ -113,7 +113,7 @@ Lares answers the diagnostic with a fourth arrangement:
 
 <<~/ahu>>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #lares-position >>
 
@@ -190,6 +190,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu>>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

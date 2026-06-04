@@ -59,7 +59,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -175,6 +175,6 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

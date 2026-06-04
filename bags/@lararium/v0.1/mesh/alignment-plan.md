@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Package Alignment Plan
 
@@ -131,6 +131,6 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

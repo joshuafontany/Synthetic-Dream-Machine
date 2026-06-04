@@ -18,7 +18,7 @@ implements   = [
 role         = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha-m25-loop1-stack-upward-walk-2026-05-03 >>
 
@@ -1193,6 +1193,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

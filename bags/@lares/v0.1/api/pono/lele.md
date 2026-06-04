@@ -30,7 +30,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -64,6 +64,6 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -31,7 +31,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -138,6 +138,6 @@ Two values, distinct Verse-side origins:
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

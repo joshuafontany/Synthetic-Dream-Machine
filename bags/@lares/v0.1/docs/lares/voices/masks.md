@@ -45,7 +45,7 @@ When a session context declares "action inside a lararium node," the Thirteen su
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #anatomy >>
@@ -399,6 +399,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -19,7 +19,7 @@ list-after   = "$:/core/ui/StartupActions/DefaultTiddlers"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 \rules only filteredtranscludeinline transcludeinline
 
@@ -52,7 +52,7 @@ list-after   = "$:/core/ui/StartupActions/DefaultTiddlers"
 
 </$list>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ ahu #edges >>
 

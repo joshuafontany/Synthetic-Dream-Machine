@@ -18,7 +18,7 @@ retain       = true
 invariant    = true
 status-date  = "2026-05-28"
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -170,6 +170,6 @@ appears in production paths.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -18,7 +18,7 @@ tags         = ["$:/tags/Stylesheet"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 \rules only filteredtranscludeinline transcludeinline
 /* Depends on: a palette tiddler loaded before this stylesheet — <<colour X>> resolves
@@ -162,7 +162,7 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
   display: none;
 }
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ ahu #edges >>
 

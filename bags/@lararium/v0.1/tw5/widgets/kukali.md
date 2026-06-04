@@ -15,7 +15,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -45,6 +45,6 @@ export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTre
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

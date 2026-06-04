@@ -31,7 +31,7 @@ role      = "Power module: Read Magic — decode a magical inscription's interfa
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Read Magic
 
@@ -105,6 +105,6 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 - Split Thread Reading into a spider-folk webcraft module when that play needs it.
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

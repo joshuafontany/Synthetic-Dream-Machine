@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # lararium-browser Pono Charter
 
@@ -142,6 +142,6 @@ These questions do not block charter adoption. They require measurement before r
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

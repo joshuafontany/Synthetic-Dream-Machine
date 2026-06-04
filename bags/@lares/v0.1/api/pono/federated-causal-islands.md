@@ -28,7 +28,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -307,6 +307,6 @@ causal-island-may = [
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

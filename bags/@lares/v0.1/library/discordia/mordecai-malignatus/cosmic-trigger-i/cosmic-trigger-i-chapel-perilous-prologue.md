@@ -19,7 +19,7 @@ role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locu
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -319,6 +319,6 @@ stubbornness, dumb luck") describes how he personally navigated — not the form
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

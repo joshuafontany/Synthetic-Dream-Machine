@@ -15,7 +15,7 @@ cacheable = true
 retain = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 ## TW5 Tiddler Field Shapes
 
@@ -96,6 +96,6 @@ This split removes the old flat-record ambiguity where TW5 content fields and ho
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

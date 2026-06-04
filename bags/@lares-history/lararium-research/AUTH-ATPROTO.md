@@ -16,7 +16,7 @@ hydrate      = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #oauth-position >>
@@ -213,6 +213,6 @@ No ATProto login implementation this milestone — doctrine only.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

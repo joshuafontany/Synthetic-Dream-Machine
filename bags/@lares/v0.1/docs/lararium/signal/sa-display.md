@@ -18,7 +18,7 @@ retain = false
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -128,6 +128,6 @@ Per-position stance modifier glyph design remains in motion; current record-form
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -38,7 +38,7 @@ The invariant already holds elsewhere.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #research-braid >>
@@ -105,6 +105,6 @@ It governs how often copulas manifest in the first place.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

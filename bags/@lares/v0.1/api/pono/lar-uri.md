@@ -52,7 +52,7 @@ Session form names the speaker through the authority. It MUST NOT appear in othe
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #path-taxonomy >>
@@ -155,6 +155,6 @@ WHERE (path) → SECTION (fragment).
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

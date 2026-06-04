@@ -18,7 +18,7 @@ retain = false
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -149,6 +149,6 @@ p always trails every exchange vector as `| ~:p[N]`. Use `~:p[10]` only when no 
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

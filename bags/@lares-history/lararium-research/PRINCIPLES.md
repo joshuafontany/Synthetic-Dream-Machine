@@ -17,7 +17,7 @@ retain = true
 invariant = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #meme-header >>
 # Lararium Node — Quine-Wiki-Agentic-HUD Principles
@@ -113,7 +113,7 @@ carrier canon
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ ahu #edges >>
 <<~ pranala #implements ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:principles >>

@@ -114,7 +114,7 @@ result-shape = "set"
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #guidance >>
@@ -166,6 +166,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

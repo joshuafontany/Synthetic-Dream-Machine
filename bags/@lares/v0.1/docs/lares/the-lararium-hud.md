@@ -54,7 +54,7 @@ The home intranet RPG session — a Referee running encounters, managing NPCs, r
 
 <<~/ahu>>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #uefn-ontology >>
 
@@ -462,6 +462,6 @@ These three message types cover the full P.3 boundary surface. Lock them before 
 
 <<~/ahu>>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

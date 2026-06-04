@@ -15,7 +15,7 @@ retain    = true
 tags      = ["$:/tags/Global"]
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -44,6 +44,6 @@ tags      = ["$:/tags/Global"]
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -51,7 +51,7 @@ Current target:
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #observe >>
@@ -277,6 +277,6 @@ Multi-mask composability now in base spec. No longer deferred.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

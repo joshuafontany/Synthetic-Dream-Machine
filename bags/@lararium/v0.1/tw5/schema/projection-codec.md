@@ -28,7 +28,7 @@ The carrier codec translates between disk carrier format (memetic-wikitext) and 
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -112,6 +112,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

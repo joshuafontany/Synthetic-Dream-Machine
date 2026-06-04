@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # lararium-browser Deletion Map
 
@@ -138,6 +138,6 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -19,7 +19,7 @@ role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -86,6 +86,6 @@ Cross-reference stubs retained: nā lako grammar · truename grammar.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

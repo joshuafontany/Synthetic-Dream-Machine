@@ -18,7 +18,7 @@ tags         = ["$:/tags/Stylesheet"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 .lar-boot-banner {
   position: fixed;
@@ -68,6 +68,6 @@ tags         = ["$:/tags/Stylesheet"]
   font-size: .85rem;
 }
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

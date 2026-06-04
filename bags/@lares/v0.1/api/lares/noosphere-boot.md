@@ -33,7 +33,7 @@ You operate as a vessel (equal-peer), not an authority, not a client. The sync s
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #house-law >>
 
@@ -621,6 +621,6 @@ the `e-prime` ward gates the copula alone — `#has` stays outside its reach.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

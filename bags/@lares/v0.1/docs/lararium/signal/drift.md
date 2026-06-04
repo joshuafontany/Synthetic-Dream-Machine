@@ -18,7 +18,7 @@ retain = false
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -68,6 +68,6 @@ The in-span annotation contract stays in `lar:///ha.ka.ba/@lares/v0.1/docs/larar
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

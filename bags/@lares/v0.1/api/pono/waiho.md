@@ -25,7 +25,7 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -93,6 +93,6 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 <<~ pranala #tiddler-sigil-var ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

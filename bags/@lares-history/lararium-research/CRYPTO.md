@@ -17,7 +17,7 @@ retain       = true
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #doctrine-header >>
@@ -221,6 +221,6 @@ Target state (Milestone 4):
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

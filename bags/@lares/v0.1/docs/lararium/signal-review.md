@@ -56,7 +56,7 @@ This memo does not attempt chronometer closure.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #observe >>
@@ -259,6 +259,6 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -13,7 +13,7 @@ tagspace     = "stable"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -40,7 +40,7 @@ Parse-time AST produced by `parseMemeCarrier`. Lives in `@lararium/tw5` so it co
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/ast family:dataflow role:receives >>
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/parser family:dataflow role:produces >>

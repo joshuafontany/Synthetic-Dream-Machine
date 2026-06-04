@@ -20,7 +20,7 @@ role      = "root template meme for OSR spell witness memes — cold provenance 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Template — OSR Spell Witness
 
@@ -60,6 +60,6 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

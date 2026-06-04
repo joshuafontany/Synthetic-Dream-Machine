@@ -19,7 +19,7 @@ retain = true
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -264,6 +264,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

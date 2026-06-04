@@ -32,7 +32,7 @@ edges SHOULD carry a confidence rating when the observation is uncertain.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -131,6 +131,6 @@ confidence-bounded = true
 <<~ pranala #tiddler-sigil-shadow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-shadow family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

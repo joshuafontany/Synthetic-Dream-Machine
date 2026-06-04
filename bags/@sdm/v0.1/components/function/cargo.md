@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Cargo — carrying, hauling, or bearing a load"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Cargo
 
@@ -64,6 +64,6 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

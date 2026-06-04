@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 research-date = "2026-05-28"
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # DreamNet/Lares: Prior Art Research Synthesis
 
@@ -570,6 +570,6 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 <<~ pranala #to-dreamnet-architecture ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture family:research role:grounds >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

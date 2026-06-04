@@ -26,7 +26,7 @@ A carrier's phased arrival through a transmission medium.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -152,6 +152,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

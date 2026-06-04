@@ -30,7 +30,7 @@ The widget module tiddler ships as `lar:///lararium-node/tw5/widgets`.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -121,6 +121,6 @@ export function createLarariumWidgets(_tw: TW5Instance): Record<string, WidgetCt
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

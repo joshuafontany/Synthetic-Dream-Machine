@@ -15,7 +15,7 @@ role        = "heleuma: TW5TiddlerFields → Record<string,string> normaliser"
 cacheable   = true
 retain      = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -39,5 +39,5 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

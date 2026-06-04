@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -121,5 +121,5 @@ The W3C research additionally identified: the grammar still lacks its own canoni
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

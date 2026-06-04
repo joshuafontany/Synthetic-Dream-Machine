@@ -19,7 +19,7 @@ role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenanc
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -129,6 +129,6 @@ meaning changes with the reading-standpoint that receives the declaration.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

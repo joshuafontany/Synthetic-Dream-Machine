@@ -20,7 +20,7 @@ body-sha256 = "902384bddf7a2475d207b38cfe20e7268479741326db46c8a4ef252b747b4e97"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -79,6 +79,6 @@ export function receiptAllows(
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

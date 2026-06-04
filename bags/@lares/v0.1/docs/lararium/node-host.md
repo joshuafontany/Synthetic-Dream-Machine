@@ -31,7 +31,7 @@ they gate corpus validation and filter evaluation.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -138,6 +138,6 @@ export interface CorpusSource {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

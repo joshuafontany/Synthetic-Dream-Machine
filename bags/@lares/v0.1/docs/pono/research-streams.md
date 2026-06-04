@@ -18,7 +18,7 @@ invariant = false
 status-date = "2026-05-25"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -65,6 +65,6 @@ executable adversarial tests -> receipt-backed trust
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

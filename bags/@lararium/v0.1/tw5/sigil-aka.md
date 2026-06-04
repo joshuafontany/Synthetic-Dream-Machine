@@ -15,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -125,4 +125,4 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>

@@ -16,7 +16,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -114,5 +114,5 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

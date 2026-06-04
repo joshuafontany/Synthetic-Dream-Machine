@@ -72,7 +72,7 @@ packages/lares-core/memes/v0.1/api/masks/
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #orient >>
@@ -270,6 +270,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

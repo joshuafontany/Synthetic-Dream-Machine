@@ -36,7 +36,7 @@ sources        = [
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #thesis >>
@@ -413,6 +413,6 @@ No adjacent system combines all four axes at deployment time. The IaM claim gain
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

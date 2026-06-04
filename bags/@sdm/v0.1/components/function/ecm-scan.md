@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): ECM Scan — sensing and analyzing active Powers and noospheric signatures"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # ECM Scan
 
@@ -64,6 +64,6 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

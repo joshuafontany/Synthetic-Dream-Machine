@@ -18,7 +18,7 @@ role         = "invariant interface: heleuma-ba — psyche/path anchor; quine-on
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -66,6 +66,6 @@ An implementing meme SHALL NOT declare `body-sha256` without also declaring `sou
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

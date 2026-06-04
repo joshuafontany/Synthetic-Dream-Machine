@@ -59,7 +59,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -175,6 +175,6 @@ How Breach-Watch colors each Voice register when they speak through her incident
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

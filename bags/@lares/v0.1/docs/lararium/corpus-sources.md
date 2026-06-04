@@ -31,7 +31,7 @@ The recipe layer composes them for any given room or view.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -152,6 +152,6 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

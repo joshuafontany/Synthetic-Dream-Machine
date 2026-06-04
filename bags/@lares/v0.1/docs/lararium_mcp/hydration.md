@@ -32,7 +32,7 @@ status-date  = "2026-04-23"
 ↺ adapt: stale static maps receive drift tests until the pranala DAG compiler lands.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #required-core >>
@@ -168,6 +168,6 @@ Minimal boot should remain small enough to avoid compaction.
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

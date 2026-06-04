@@ -18,7 +18,7 @@ source-symbol = "createLarariumWidgets"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -108,6 +108,6 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

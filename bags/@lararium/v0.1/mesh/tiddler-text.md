@@ -15,7 +15,7 @@ role        = "heleuma: oracle tiddler text-field reader"
 cacheable   = true
 retain      = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -31,5 +31,5 @@ Oracle tiddlers (lararium, catalog, lares, wiki, corpus) carry their payload Aut
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

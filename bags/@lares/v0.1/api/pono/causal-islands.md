@@ -40,7 +40,7 @@ this version separates them.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #model >>
 
@@ -303,6 +303,6 @@ meant to escape):
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

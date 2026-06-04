@@ -30,7 +30,7 @@ grammar interpreter consumes the body, it closes.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -66,6 +66,6 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

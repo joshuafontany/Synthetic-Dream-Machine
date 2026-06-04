@@ -16,7 +16,7 @@ cacheable = true
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Pono
 
@@ -55,6 +55,6 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

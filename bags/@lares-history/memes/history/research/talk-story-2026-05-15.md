@@ -16,7 +16,7 @@ retain      = true
 status-date = "2026-05-15"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -244,6 +244,6 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

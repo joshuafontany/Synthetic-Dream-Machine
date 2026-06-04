@@ -38,7 +38,7 @@ OODA-HA glyphs annotate the six-phase flow inside #ooda-ha slots.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -105,8 +105,8 @@ EOT  = { char = "&#x0004;", kapu-alias = "&#x0014; (DC4)", role = "carrier throa
 doctype = "<!-- <<~ !DOCTYPE = lar:///...>> -->"
 opener  = "<<~[namespace-glyphs?][SOH|DC1] ? -> lar:///URI >>"
 iam     = "<<~ ahu #iam >> ... <<~/ahu >>"
-stx     = "<<~[prefix?]&#x0002;>>"                      # meme body open
-etx     = "<<~[prefix?]&#x0003;>>"                      # meme body close
+stx     = "<<~[prefix?]&#x0002; >>"                      # meme body open
+etx     = "<<~[prefix?]&#x0003; >>"                      # meme body close
 eot     = "<<~[EOT|DC4] -> ? >>"                         # carrier throat close — always bare
 
 # CarrierShape — parse result, always present after extraction
@@ -172,6 +172,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

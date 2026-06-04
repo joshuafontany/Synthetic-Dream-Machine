@@ -20,7 +20,7 @@ invariant = false
 role      = "component (hook): Attack — resolves against Defense rather than as a save"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Attack
 
@@ -64,6 +64,6 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

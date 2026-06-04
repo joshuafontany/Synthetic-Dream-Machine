@@ -30,7 +30,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -144,5 +144,5 @@ This meme governs the kapu rating and above-namespace trust law.
 <<~ pranala #tiddler-sigil-kapu ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0014; -> ? >>

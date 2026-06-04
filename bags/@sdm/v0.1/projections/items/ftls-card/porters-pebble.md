@@ -22,7 +22,7 @@ invariant = false
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Porter's Pebble — FTLS Card
 
@@ -60,6 +60,6 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

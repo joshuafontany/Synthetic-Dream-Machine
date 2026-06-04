@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Restrain — grip, hold, or immobilise a target; the first offensive function the attack-hook surfaced"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Restrain
 
@@ -65,6 +65,6 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

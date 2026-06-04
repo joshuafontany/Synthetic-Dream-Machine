@@ -33,7 +33,7 @@ The instrument panel belongs to the mechanics house, not the threshold.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #head >>
@@ -93,6 +93,6 @@ This child meme stays small enough to hydrate on every cold start.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

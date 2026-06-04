@@ -29,7 +29,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -212,6 +212,6 @@ exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

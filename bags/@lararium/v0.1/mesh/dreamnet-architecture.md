@@ -15,7 +15,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # DreamNet Architecture
 
@@ -238,6 +238,6 @@ Design decision pending. Path L is Priority 2 on the active roadmap.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

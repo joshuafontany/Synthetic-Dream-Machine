@@ -18,7 +18,7 @@ invariant = false
 role      = "OSR spell witness for Shield (source alias of SDM+ Shield Ward) — cold-load provenance"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # OSR Witness — Shield Ward
 
@@ -95,6 +95,6 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

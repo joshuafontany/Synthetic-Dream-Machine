@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -71,5 +71,5 @@ Research consumed into live docs/packages. Source files deleted 2026-05-16.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

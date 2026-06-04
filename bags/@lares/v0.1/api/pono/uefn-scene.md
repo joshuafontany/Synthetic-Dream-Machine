@@ -25,7 +25,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #semantic-separation >>
 
@@ -214,6 +214,6 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

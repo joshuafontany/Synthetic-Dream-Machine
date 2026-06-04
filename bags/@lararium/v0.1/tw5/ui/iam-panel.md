@@ -18,7 +18,7 @@ tags         = ["$:/tags/Global"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #hud-fields >>
 
@@ -123,6 +123,6 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

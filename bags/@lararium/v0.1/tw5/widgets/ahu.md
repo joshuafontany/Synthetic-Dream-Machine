@@ -15,7 +15,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -85,6 +85,6 @@ AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

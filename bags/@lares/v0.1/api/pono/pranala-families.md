@@ -31,7 +31,7 @@ Families carry role vocabularies and contract flags governing validation.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -177,6 +177,6 @@ spatial    = "light-blue"
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

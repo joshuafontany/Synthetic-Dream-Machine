@@ -17,7 +17,7 @@ source       = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #overview >>
 
@@ -49,6 +49,6 @@ Once the corpus path passes the boot gate and injects `tw5-modules`, that bundle
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

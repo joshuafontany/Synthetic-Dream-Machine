@@ -15,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -82,4 +82,4 @@ the canonical dispatch through the Hawaiian implementation.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>

@@ -30,7 +30,7 @@ the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the dec
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -72,6 +72,6 @@ TW5 native equivalent:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -40,7 +40,7 @@ portals         = [ boot, full, chat:*, user:${did}, synthetic-dream-machine/ftl
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #trust-surface >>
@@ -116,6 +116,6 @@ Invariant meme edits require admin tier and a separate confirmation ceremony.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

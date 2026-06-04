@@ -34,7 +34,7 @@ pranala data model. This meme is the pointer; that meme is the law.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #what-is-implemented >>
@@ -133,6 +133,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

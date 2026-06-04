@@ -27,7 +27,7 @@ Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #problem >>
 
@@ -153,6 +153,6 @@ No callbacks fire after `stop()`.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

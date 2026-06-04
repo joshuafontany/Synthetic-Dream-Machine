@@ -13,7 +13,7 @@ tagspace     = "stable"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -43,7 +43,7 @@ Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, retu
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ast family:dataflow role:produces >>
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/pranala-parser family:dataflow role:sibling >>

@@ -38,7 +38,7 @@ The agent and operator MUST carry four Minor Arcana weapons and one Major Arcana
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -303,6 +303,6 @@ arcana   = "release"
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

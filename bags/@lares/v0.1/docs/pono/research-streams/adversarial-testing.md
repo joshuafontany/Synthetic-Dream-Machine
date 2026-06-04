@@ -18,7 +18,7 @@ invariant = false
 status-date = "2026-05-25"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -82,6 +82,6 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

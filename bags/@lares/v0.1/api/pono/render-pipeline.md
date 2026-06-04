@@ -19,7 +19,7 @@ source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -212,5 +212,5 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

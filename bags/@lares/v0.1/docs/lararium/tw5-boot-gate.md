@@ -16,7 +16,7 @@ status-date  = "2026-04-30"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -76,6 +76,6 @@ The **implementors interface** it queries IS a meme: `lar:///ha.ka.ba/@lares/v0.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

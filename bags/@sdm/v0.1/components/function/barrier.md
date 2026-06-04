@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Barrier — raising a physical or force wall"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Barrier
 
@@ -64,6 +64,6 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

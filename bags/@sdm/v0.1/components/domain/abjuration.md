@@ -20,7 +20,7 @@ invariant = false
 role      = "component (domain): Abjuration — the school of protection and negation"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Abjuration
 
@@ -64,6 +64,6 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

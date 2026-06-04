@@ -96,7 +96,7 @@ after `addProjection(adaptor)` registers. Each existing tiddler flows through
 The recipe then calls `$tw.lares.flushNalu(Number.MAX_SAFE_INTEGER)` so the wiki carries
 its seed state synchronously before `behavior.onEa` runs.
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~&#x0004; -> lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine >>
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>

@@ -25,7 +25,7 @@ invariant = false
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Shield Ward — FTLS Card
 
@@ -60,6 +60,6 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

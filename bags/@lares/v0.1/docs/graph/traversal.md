@@ -27,7 +27,7 @@ status-date  = "2026-04-24"
 ↺ execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #graph-planes >>
@@ -239,6 +239,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -13,7 +13,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 The `lares` binary holds the operator's only top-level ceremony surface. It dispatches subcommands registered in a single COMMANDS table (init, status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma, act, help). Each command is a thin async handler:

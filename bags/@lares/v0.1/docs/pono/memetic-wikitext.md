@@ -19,7 +19,7 @@ invariant = false
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -81,7 +81,7 @@ They do not rewrite primitive meaning.
 
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
 ````

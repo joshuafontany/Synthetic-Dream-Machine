@@ -22,7 +22,7 @@ role      = "mount-point: Item — Power stored in an object; container sub-rule
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Mount-Point — Item
 
@@ -77,6 +77,6 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

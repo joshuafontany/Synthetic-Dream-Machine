@@ -14,7 +14,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -91,6 +91,6 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -18,7 +18,7 @@ invariant = false
 role      = "UVG relic witness for Porter's Pebble — pebble-machine provenance + the Floating Disc 'Stuckforce Relic' variant, cold-load"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # UVG Witness — Porter's Pebble
 
@@ -60,6 +60,6 @@ The v0.1 **Porter's Pebble** is the epic's first **module-nesting** proof:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

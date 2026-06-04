@@ -26,7 +26,7 @@ invariant = false
 role      = "FTLS card projection: Read Magic — playable surface with clickable component pills"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Read Magic — FTLS Card
 
@@ -62,6 +62,6 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

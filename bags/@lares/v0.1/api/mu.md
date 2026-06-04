@@ -71,7 +71,7 @@ The grammar appears as Mu performing itself.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -119,6 +119,6 @@ Mu does not hold:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

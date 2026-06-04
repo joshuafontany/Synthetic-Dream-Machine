@@ -15,7 +15,7 @@ role        = "heleuma: command-handler argument coercers + requestId factory"
 cacheable   = true
 retain      = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -38,5 +38,5 @@ These helpers carry no side effects or platform assumptions. They could become a
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

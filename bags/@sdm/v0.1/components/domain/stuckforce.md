@@ -20,7 +20,7 @@ invariant = false
 role      = "component (domain): Stuckforce — the SDM domain of applied gripping force"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Stuckforce
 
@@ -64,6 +64,6 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

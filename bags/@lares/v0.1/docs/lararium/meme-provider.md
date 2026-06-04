@@ -19,7 +19,7 @@ docs         = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 /**
  * MemeProvider — coalescing fan-out layer between an Automerge DocHandle
@@ -203,6 +203,6 @@ export class MemeProvider {
   }
 }
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

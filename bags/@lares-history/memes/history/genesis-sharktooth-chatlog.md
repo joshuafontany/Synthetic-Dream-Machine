@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -110,5 +110,5 @@ This seeded the Lares 13-Voices model — the session's internal dialogue demons
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

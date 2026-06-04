@@ -20,7 +20,7 @@ invariant = false
 role      = "component (hook): Sustained — requires ongoing concentration; distraction deactivates"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Sustained
 
@@ -64,6 +64,6 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -18,7 +18,7 @@ retain = false
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #provenance >>
@@ -303,6 +303,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

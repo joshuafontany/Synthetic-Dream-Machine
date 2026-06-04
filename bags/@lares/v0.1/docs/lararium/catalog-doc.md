@@ -43,7 +43,7 @@ A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -132,6 +132,6 @@ fields = [
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

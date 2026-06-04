@@ -19,7 +19,7 @@ list-before  = "$:/core/ui/ViewTemplate/body"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 \whitespace trim
 <$list filter="[all[current]has[ahu-slot]]" variable="_" emptyMessage="">
@@ -35,7 +35,7 @@ list-before  = "$:/core/ui/ViewTemplate/body"
 
 </$list>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ ahu #edges >>
 

@@ -18,7 +18,7 @@ retain       = true
 invariant    = true
 status-date  = "2026-05-28"
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -195,6 +195,6 @@ See: `lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu#yin-collapse-law`
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

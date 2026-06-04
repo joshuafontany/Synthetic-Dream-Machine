@@ -28,7 +28,7 @@ and renders whatever answers.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -65,6 +65,6 @@ TW5 filter expansion:
 <<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

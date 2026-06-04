@@ -37,11 +37,11 @@ Treat that loci as constitutional.
 This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 Loci SKILL opens the procedural stream here.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #load-contract >>
@@ -259,6 +259,6 @@ Aftermath that names only resolved URIs hides the pressure that matters most.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

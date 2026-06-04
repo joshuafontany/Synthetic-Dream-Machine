@@ -22,7 +22,7 @@ role      = "mount-point: Burden — Power as curse, compulsion, affliction, or 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Mount-Point — Burden
 
@@ -75,6 +75,6 @@ Burden is itself the overflow sink for Trait and Item. Past 20, the character is
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

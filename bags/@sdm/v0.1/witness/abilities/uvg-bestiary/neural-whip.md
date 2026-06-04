@@ -18,7 +18,7 @@ invariant = false
 role      = "UVG bestiary witness for Neural Whip — Cave Octopus provenance, cold-load"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # UVG Witness — Neural Whip
 
@@ -63,6 +63,6 @@ The v0.1 **Neural Whip** module abstracts the creature's signature tentacle into
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

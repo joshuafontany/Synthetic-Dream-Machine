@@ -18,7 +18,7 @@ invariant = false
 role      = "OSR spell witness for Floating Disc — Basic/Expert/Rules-Cyclopedia provenance, cold-load"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # OSR Witness — Floating Disc
 
@@ -85,6 +85,6 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

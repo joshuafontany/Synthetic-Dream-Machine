@@ -20,7 +20,7 @@ invariant = false
 role      = "component (domain): Divination — the school of perceiving the hidden"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Divination
 
@@ -65,6 +65,6 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -15,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -78,4 +78,4 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>

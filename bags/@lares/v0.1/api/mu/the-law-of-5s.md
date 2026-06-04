@@ -37,7 +37,7 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -212,6 +212,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

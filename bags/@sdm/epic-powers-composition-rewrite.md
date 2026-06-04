@@ -20,7 +20,7 @@ role      = "epic plan: SDM+ Powers as navigable composition space"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Epic — Powers Composition Rewrite
 
@@ -754,6 +754,6 @@ history if ever needed.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

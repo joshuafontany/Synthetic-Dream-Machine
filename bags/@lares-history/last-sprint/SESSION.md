@@ -80,7 +80,7 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 | `meme-sync-adaptor.ts` | `_applyLiveRecord` and `onChangeset` bulk path both stamp `bag` field on TW5 tiddlers — disk projector reads bag provenance without touching Automerge. |
 | `bag-mirror.ts` | `wikiShadowPathStrategy` extended with bare `lar:///ha.ka.ba/{rest}` URI fallback (no @-scope) → `memes/{rest}.md`. Fragment URIs → `memes/{path}/{fragment}.md`. Fixes the zero-projection bug for wiki-bag tiddlers. |
 | `deserializer.ts` + plugin bundle | `splitRecursive` extended: `parentSourceFile` param threads to child `file-path` generation. Children receive full effective iam via `regenerateIamToml(effectiveIam, {})` with child-specific `uri-path` + `file-path` override. Child `file-path` strips the leading `#` from `block.slot`. **Build law: changes to `deserializer.ts` require `tsx scripts/build-plugin-tiddler.ts` — `tsc` alone is NOT sufficient (deserializer runs inside TW5 plugin bundle).** |
-| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), iam block (from `iam-source`), STX (`<<~&#x0002;>>`), `{{!!text}}`, ETX (`<<~&#x0003;>>`), EOT (`<<~&#x0004; -> ? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
+| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), iam block (from `iam-source`), STX (`<<~&#x0002; >>`), `{{!!text}}`, ETX (`<<~&#x0003; >>`), EOT (`<<~&#x0004; -> ? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
 
 **Five-layer child file structure confirmed:**
 ```
@@ -92,11 +92,11 @@ tagspace = "draft"
 …
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 body text…
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
 ```

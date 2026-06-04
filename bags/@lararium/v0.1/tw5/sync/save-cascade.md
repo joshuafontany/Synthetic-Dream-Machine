@@ -20,7 +20,7 @@ source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -94,6 +94,6 @@ rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tid
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

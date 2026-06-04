@@ -28,7 +28,7 @@ Authority gate for rooms, edge islands, and canon MOVE.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -299,6 +299,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

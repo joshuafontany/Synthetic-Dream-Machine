@@ -15,7 +15,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -52,6 +52,6 @@ tw.filterOperators["toml"] = function (source: TW5FilterSource, operator: TW5Fil
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -105,7 +105,7 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>

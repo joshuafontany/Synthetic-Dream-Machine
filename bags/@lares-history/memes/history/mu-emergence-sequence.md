@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -100,5 +100,5 @@ These three negative constraints landed unchanged in the live `mu.md`.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

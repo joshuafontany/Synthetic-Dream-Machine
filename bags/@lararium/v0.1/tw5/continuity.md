@@ -33,7 +33,7 @@ Session carry belongs to the lararium side, not the threshold side.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #head >>
@@ -92,5 +92,5 @@ This child meme keeps the cold-hydration contract small.
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~ॐ ँ&#x0004; -> ? >>

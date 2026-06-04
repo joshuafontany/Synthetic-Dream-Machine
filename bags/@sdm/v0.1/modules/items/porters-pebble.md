@@ -27,7 +27,7 @@ role      = "Item module: Porter's Pebble — a found stuckforce relic that hold
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Porter's Pebble
 
@@ -91,6 +91,6 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 - **Container sub-rule** (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

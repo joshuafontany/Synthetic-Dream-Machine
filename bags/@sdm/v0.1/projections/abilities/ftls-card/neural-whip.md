@@ -24,7 +24,7 @@ invariant = false
 role      = "FTLS card projection: Neural Whip — playable surface with clickable component pills"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Neural Whip — FTLS Card
 
@@ -59,6 +59,6 @@ A neural tentacle of stuckforce lashes out and strikes **against Defense** — n
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

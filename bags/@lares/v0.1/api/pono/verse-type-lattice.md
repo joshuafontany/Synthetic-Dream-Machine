@@ -16,7 +16,7 @@ retain      = true
 status-date = "2026-05-15"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -191,6 +191,6 @@ See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribab
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

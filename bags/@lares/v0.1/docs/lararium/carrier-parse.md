@@ -20,7 +20,7 @@ body-sha256 = "de5ced103cad1f1a5e414cabe57a2052578fa69e190baf2e2dc06fb458db9ceb"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -83,6 +83,6 @@ export function parseCarrier(uri: string, text: string): CarrierRecord {
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

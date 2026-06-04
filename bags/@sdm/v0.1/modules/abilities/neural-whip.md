@@ -29,7 +29,7 @@ role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tenta
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Neural Whip
 
@@ -97,6 +97,6 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 - If a future neural attack jolts the mind rather than grips the body, that wants `domain/noosphere` (carried in v0.0) promoted on first query.
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

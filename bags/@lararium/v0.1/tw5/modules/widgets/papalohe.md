@@ -19,7 +19,7 @@ cacheable   = true
 status-date = "2026-05-03"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -49,6 +49,6 @@ export function PapaloheWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseT
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -47,7 +47,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #taxonomy >>
@@ -130,6 +130,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -17,7 +17,7 @@ approved-on  = "2026-05-30"
 uri-shape    = "lar:///ha.ka.ba/@personal"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #problem >>
 
@@ -266,6 +266,6 @@ Q6 (@draft scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-f
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

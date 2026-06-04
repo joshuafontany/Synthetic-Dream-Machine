@@ -14,7 +14,7 @@ role         = "Gruvbox Dark color palette for TW5 theme engine"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 background: #282828
 foreground: #ebdbb2
@@ -109,6 +109,6 @@ wikilist-item: #3c3836
 wikilist-toolbar-background: #1d2021
 wikilist-toolbar-foreground: #ebdbb2
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

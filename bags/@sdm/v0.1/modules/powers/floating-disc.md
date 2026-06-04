@@ -30,7 +30,7 @@ role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Floating Disc
 
@@ -99,6 +99,6 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 - `telekinetic` domain (v0.0 carried it alongside stuckforce): promote a component only if a query needs to split force-types.
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

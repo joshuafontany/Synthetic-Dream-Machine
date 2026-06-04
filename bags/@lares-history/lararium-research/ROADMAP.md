@@ -32,7 +32,7 @@ It adds explicit ahu markers around the major research sections so the file can 
 ↺ keep residue visible: MCP SDK churn, protocol-version drift, FFZ semantics, hostful session resolution, write-back gates, and missing formal lararium-node spec
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #m13-session-open-2026-05-02 >>

@@ -15,7 +15,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Kahu
 
@@ -141,6 +141,6 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

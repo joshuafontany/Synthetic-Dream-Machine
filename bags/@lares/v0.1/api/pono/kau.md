@@ -25,7 +25,7 @@ A device placed with intention. The instance takes its own address.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -123,6 +123,6 @@ This maps directly to the Ink & Switch island model: each automerge object is a 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

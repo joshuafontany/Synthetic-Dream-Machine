@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Magic Decode — turning a magical inscription into active, readable meaning"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Magic Decode
 
@@ -64,6 +64,6 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

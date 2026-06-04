@@ -25,7 +25,7 @@ invariant = false
 role      = "FTLS card projection: Floating Disc — playable surface with clickable component pills"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Floating Disc — FTLS Card
 
@@ -60,6 +60,6 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

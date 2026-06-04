@@ -27,7 +27,7 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #edges >>
 
@@ -38,6 +38,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

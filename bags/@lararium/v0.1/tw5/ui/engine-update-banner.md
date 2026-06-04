@@ -18,7 +18,7 @@ tags         = ["$:/tags/PageTemplate"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <$reveal type="nomatch" state="$:/lararium/engine/update-available" text="">
 <div class="lar-engine-update-banner">
@@ -26,6 +26,6 @@ tags         = ["$:/tags/PageTemplate"]
 </div>
 </$reveal>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

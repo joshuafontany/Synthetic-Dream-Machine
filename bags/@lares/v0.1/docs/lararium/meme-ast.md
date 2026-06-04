@@ -18,7 +18,7 @@ body-sha256 = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
 ```
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -59,6 +59,6 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

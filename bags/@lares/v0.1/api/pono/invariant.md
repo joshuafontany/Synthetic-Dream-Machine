@@ -47,7 +47,7 @@ loulou links bind invariant -> documentation.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #invariant-law >>
 
@@ -108,6 +108,6 @@ Invariant-compliant memes MUST fill the OODA-HA phase line with their own pressu
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

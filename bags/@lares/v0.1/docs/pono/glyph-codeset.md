@@ -16,7 +16,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -331,5 +331,5 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ? >>

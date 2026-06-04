@@ -28,7 +28,7 @@ question itself has exhausted all candidates. The stream reaches the cut-off; th
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ English alias form:
 <<~ pranala #tiddler-sigil-mukuwai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-mukuwai family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

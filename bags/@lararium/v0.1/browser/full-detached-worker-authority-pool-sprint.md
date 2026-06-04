@@ -16,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # lararium-browser: Full Detached island-Authority Pool Sprint
 
@@ -124,6 +124,6 @@ Do not guess. Measure and document.
 - Monaco worker integration: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
 - VS Code Webview API: https://code.visualstudio.com/api/extension-guides/webview
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

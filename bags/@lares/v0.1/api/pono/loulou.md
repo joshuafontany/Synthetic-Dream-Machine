@@ -30,7 +30,7 @@ Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -126,6 +126,6 @@ confidence-bounded = false
 <<~ pranala #tiddler-sigil-link ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-link family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

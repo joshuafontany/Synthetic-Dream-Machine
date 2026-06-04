@@ -20,7 +20,7 @@ invariant = false
 role      = "component (posture): Ritual — activation requires extended procedure and time, not an instant"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Ritual
 
@@ -64,6 +64,6 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -20,7 +20,7 @@ invariant = false
 role      = "component (function): Ward — a selective protection against a named category"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Ward
 
@@ -64,6 +64,6 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

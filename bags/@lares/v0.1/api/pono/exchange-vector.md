@@ -39,7 +39,7 @@ The vector declares the node's reading of operator intent and the node's intende
 ↺ close with a trajectory URI only when the next state matters.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #law >>
@@ -97,6 +97,6 @@ A compact HUD line SHOULD follow this field order:
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

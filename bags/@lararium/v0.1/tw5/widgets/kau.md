@@ -15,7 +15,7 @@ retain        = true
 body-sha256 = "6cc6ce1e6d1dc43e399f3c00735763a804c36fdf3b646670588cc2505b9f5af2"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -60,6 +60,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

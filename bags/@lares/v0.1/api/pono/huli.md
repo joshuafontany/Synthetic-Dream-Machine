@@ -36,7 +36,7 @@ directed attention moving through the set.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -123,6 +123,6 @@ close-pattern = '<<~\/huli\s*>>'
 <<~ pranala #tiddler-sigil-for ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -56,7 +56,7 @@ Named render targets: `record:full` (identity projection of the canonical form),
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #exchange-flow >>
@@ -352,7 +352,7 @@ Signals unknown temporal resumption. The `?` marks a causal gap: between this si
 `→ ?` does not signal uncertainty about the meme's content — that is what `confidence` and register carry. It signals uncertainty about the meme's continuity in time.
 
 ```
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
 ```

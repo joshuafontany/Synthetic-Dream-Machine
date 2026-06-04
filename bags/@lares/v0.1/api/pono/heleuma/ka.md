@@ -18,7 +18,7 @@ role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -88,6 +88,6 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

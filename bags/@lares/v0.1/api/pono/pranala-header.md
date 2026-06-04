@@ -32,7 +32,7 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -100,6 +100,6 @@ uri = 1
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

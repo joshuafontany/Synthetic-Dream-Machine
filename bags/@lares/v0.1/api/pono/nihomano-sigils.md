@@ -51,7 +51,7 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #wild-magic >>
 
@@ -266,6 +266,6 @@ lives in a tiddler.
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

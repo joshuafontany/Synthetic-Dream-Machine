@@ -13,7 +13,7 @@ retain     = false
 invariant  = false
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #exchange-flow >>
 ## Exchange Flow — Agent Contract
@@ -60,6 +60,6 @@ emit fenced CLOSE: HUD + aftermath-vector -> ?
 <<~ pranala #voices-core ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#exchange-protocol family:control role:condensed-into >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

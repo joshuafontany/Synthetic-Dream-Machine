@@ -30,7 +30,7 @@ executes today; `bluesky-oauth` and `github-vscode` carry principal shapes.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -75,6 +75,6 @@ fields = ["label: string"]
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

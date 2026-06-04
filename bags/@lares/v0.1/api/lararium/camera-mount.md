@@ -138,7 +138,7 @@ const unmount = () => { teardownLoop(); teardownMount(); };
 the shadow pane. Canvas cameras behind it each hold their own fake-DOM document.
 The `mountCamera` interface stays identical. The `document` type changes; the chain does not.
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>

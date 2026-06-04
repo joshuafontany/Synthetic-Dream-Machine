@@ -53,7 +53,7 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #tree >>
@@ -86,6 +86,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

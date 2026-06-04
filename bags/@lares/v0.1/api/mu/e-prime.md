@@ -34,7 +34,7 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -206,6 +206,6 @@ Sustained operation at `~:e-prime[20]` that produces tortured prose without gain
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

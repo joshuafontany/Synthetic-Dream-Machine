@@ -18,7 +18,7 @@ invariant   = true
 status-date = "2026-05-02"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -180,6 +180,6 @@ The asymmetry is preserved:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

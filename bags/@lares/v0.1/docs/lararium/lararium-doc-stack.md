@@ -15,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # LarariumDoc Stack
 
@@ -144,7 +144,7 @@ A companion `$:/plugins/lararium/export/md` TW5 plugin registers the
 `.md` format in the export dropdown — re-using TW5's export widget
 infrastructure rather than rolling a separate exporter.
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
 

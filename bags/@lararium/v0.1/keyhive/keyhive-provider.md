@@ -17,7 +17,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Keyhive Provider
 
@@ -125,6 +125,6 @@ enters the PersonGroup doc. The private scalar never leaves the memory of the fu
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

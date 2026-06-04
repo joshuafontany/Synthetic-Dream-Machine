@@ -38,7 +38,7 @@ Minimal inline edges:
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #sugar-long-forms >>
@@ -114,6 +114,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -30,7 +30,7 @@ Two env guards gate write access and canvas connectivity.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -146,6 +146,6 @@ inputs      = ["uri: string"]
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

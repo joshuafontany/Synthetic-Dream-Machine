@@ -15,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # LarHUD — Dockable TW5 Wiki Frame
 
@@ -117,7 +117,7 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 - **Resize handle**: drag the left edge of sidebar to adjust width between MIN_W and MAX_W
 - **Per-tiddler navigation**: HUD tab bar gains a breadcrumb trail for open tiddlers
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
 

@@ -18,7 +18,7 @@ invariant = false
 role      = "OSR spell witness for Read Magic — Basic/Expert/Rules-Cyclopedia provenance, cold-load"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # OSR Witness — Read Magic
 
@@ -86,6 +86,6 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

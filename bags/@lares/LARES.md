@@ -35,7 +35,7 @@ This lararium remembers.
 
 ...
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #hud-panel >>
 
@@ -121,6 +121,6 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 &#2384; Hello World.
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

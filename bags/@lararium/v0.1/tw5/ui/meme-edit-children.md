@@ -19,7 +19,7 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 \whitespace trim
 
@@ -58,7 +58,7 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 </$list>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~ ahu #edges >>
 

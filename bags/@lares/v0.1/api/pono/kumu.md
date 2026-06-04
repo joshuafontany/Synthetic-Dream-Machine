@@ -30,7 +30,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #law >>
 
@@ -68,6 +68,6 @@ A kumu declaration MUST NOT produce render output — it registers a type defini
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

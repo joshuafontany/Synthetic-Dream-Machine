@@ -18,12 +18,12 @@ tags         = ["$:/tags/PageTemplate"]
 
 
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <$reveal type="nomatch" state="$:/lararium/boot-splash/active" text="">
 <div class="lar-boot-banner">⬡ lararium — warming causal islands…</div>
 </$reveal>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

@@ -20,7 +20,7 @@ role      = "root template meme for component memes — an addressed facet a mod
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Template — Component
 
@@ -74,6 +74,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

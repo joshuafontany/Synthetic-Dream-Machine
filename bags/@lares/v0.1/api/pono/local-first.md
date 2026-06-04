@@ -18,7 +18,7 @@ invariant   = true
 status-date = "2026-05-02"
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #head >>
 
@@ -256,6 +256,6 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

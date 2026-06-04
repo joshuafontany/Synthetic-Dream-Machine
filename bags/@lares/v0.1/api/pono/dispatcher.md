@@ -35,7 +35,7 @@ grammar: new sigils need only a tiddler — no code change required.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -87,6 +87,6 @@ TW5 wikitext body:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

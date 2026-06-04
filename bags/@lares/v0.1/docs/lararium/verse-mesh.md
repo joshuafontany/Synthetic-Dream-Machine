@@ -246,7 +246,7 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
 <<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>

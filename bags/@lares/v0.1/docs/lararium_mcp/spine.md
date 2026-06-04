@@ -31,7 +31,7 @@ status-date  = "2026-04-23"
 ↺ adapt: active roadmap and backlog stay outside this consumed set until their sprints close.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #core-proposition >>
@@ -150,6 +150,6 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

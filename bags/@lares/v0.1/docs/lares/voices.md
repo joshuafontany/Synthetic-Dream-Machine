@@ -40,7 +40,7 @@ Lower layers remain load-bearing when higher layers are absent.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #three-layer-model >>
@@ -250,6 +250,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voic
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

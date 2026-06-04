@@ -27,7 +27,7 @@ invariant    = false
 ↺ name conflicts precisely; a gap left implicit will silently corrupt authoring practice.
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #purpose >>
@@ -306,7 +306,7 @@ Special form of `ahu`. Contains TOML metadata. Must be first. Not repeated.
 
 ```
 <<~&#x0001; ? -> lar:///canonical-uri >>   ← file header
-<<~&#x0003;>>
+<<~&#x0003; >>
 <<~&#x0004; -> ?                        >>   ← file footer
 ```
 
@@ -1272,6 +1272,6 @@ All eight families are wired in `pranala-parser.ts` (`KNOWN_FAMILIES`, `FAMILY_C
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

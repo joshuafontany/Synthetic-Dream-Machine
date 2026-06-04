@@ -30,7 +30,7 @@ One typed, directed, acyclic edge between two sockets.
 
 <<~/ahu >>
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -263,6 +263,6 @@ reaction-roles = ["subscription", "handler", "callback"]
 <<~/ahu >>
 
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>

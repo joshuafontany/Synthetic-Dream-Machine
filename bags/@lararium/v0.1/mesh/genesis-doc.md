@@ -17,7 +17,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002;>>
+<<~&#x0002; >>
 
 # Genesis Doc Builder
 
@@ -94,6 +94,6 @@ The three-layer split that governs where genesis code lives:
 
 <<~/ahu >>
 
-<<~&#x0003;>>
+<<~&#x0003; >>
 
 <<~&#x0004; -> ? >>
