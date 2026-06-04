@@ -106,7 +106,15 @@ Each standpoint reads in any form the operator chooses — natural-language name
 | Humorist | `Humorist` | 🎭 |
 | Private | `Private` | 🔮 |
 
-**Optional tool bind.** Append `:carry` to modulate a standpoint with a tool from `mu` — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). The bind stays optional: a bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone (`#mu-sigil` in the-four-tools). The bind composes them when an exchange wants both.
+Natural-language names invoke the standpoints directly, and forms MAY mix in one sigil:
+
+```text
+<<~ syad Philosopher Satirist >>                    # two standpoints, named
+<<~ syad Philosopher Poet Satirist Humorist Private >>   # all five, named in full
+<<~ syad Philosopher 🗡️ Private >>                  # names and glyphs mixed
+```
+
+**Optional tool bind.** Append `:carry` to modulate a standpoint with a tool from `mu` — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). The bind stays optional: a bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone (`#mu-sigil` in the-four-tools). The bind composes them when an exchange wants both.
 
 <<~/ahu >>
 
