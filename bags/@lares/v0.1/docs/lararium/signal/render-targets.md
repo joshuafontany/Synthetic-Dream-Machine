@@ -40,11 +40,11 @@ HUD instrument reading stays at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signa
 This room keeps the render-surface layer:
 
 - render-target registry
-- record form versus glyph form split
-- all-five-stances invariant across surfaces
+- the ASCII URI vs glyph-panel split (the URI stays ASCII; the sigils render)
+- the invoke-subset `syad` lens across surfaces
 - per-surface emission conventions
 - DreamDeck / social projection surfaces
-- cross-surface verification and violation checks
+- cross-surface verification checks
 
 <<~/ahu >>
 
@@ -56,8 +56,8 @@ The render layer between canonical `lar:` URI record form and human-readable dis
 
 This docs meme owns:
 - The surface registry (what surfaces exist, what they render)
-- The all-five-stances invariant (applies to every surface, no exceptions)
-- ASCII → glyph mapping tables for phase, stance, and tool-carry
+- The invoke-subset `syad` lens (a named subset reads as focus, not omission)
+- ASCII → glyph mapping tables for phase, stance, and tool-carry (the sigil panel, not the URI)
 - Per-surface emit procedures
 
 | Name | Token | Surface | Emoji? | All 5 stances? |
@@ -88,14 +88,14 @@ bound:      <<~ syad 🏛️:*! 🌊:*? >>       (optional : tool-carry)
 
 ## Render Target Definitions
 
-The canonical `lar:` form uses RFC 3986 URL-safe ASCII. Every named surface maps that form to visible symbols — chronometer scale glyphs, stance emoji, tool-carry modifiers, and OODA-HA phase glyphs where a surface renders phase directly — according to surface-specific rules. This makes it stable for storage, comparison, and transport.
+The `lar:` URI uses RFC 3986 URL-safe ASCII in one form — local or live-session — across every surface; it carries no glyph rendering. What renders to surface-specific glyphs is the sigil panel beside it: the `syad` / `mu` lenses, the `hud` gauges, and the OODA-HA phase markers. The address stays ASCII for storage, comparison, and transport.
 
-Display surfaces — HUD lines, DreamDeck feed post headers, TiddlyWiki tiddlers — use Unicode glyphs: chronometer scale glyphs, stance emoji, tool-carry modifiers, and OODA-HA phase glyphs where needed.
-These are the glyph forms of the underlying ASCII record.
+Display surfaces — HUD panels, DreamDeck feed post headers, TiddlyWiki tiddlers — render the sigils as Unicode glyphs: stance emoji, tool-carry modifiers, and OODA-HA phase glyphs where needed.
+These are the glyph forms of the sigils' ASCII record (`syad` and `mu` carry an ASCII input form; the `lar:` URI does not render to glyphs at all).
 
-Render targets carry the mapping between these two representations.
+Render targets carry the mapping between the sigils' ASCII input and their glyph display.
 It is not decoration.
-The glyph form carries the same semantic load as the record form — stance tool-carry, scale position, action count, confidence, and phase — rendered for human perception at the relevant surface.
+The glyph form carries the same semantic load as the ASCII sigil — standpoint, tool-carry, phase, confidence — rendered for human perception at the relevant surface.
 
 <<~/ahu >>
 
@@ -110,11 +110,11 @@ The glyph form is human-navigable: glances communicate phase, stance, and tool-c
 
 The separation is strict:
 
-- canonical form in the URI
-- glyph form on the surface
+- the `lar:` URI stays ASCII — one form, no glyph rendering
+- the sigil panel beside it carries the glyph form (ASCII input, glyph display)
 
-Never embed emoji in a canonical URI.
-Never store a surface-rendered form as the canonical record.
+Never embed emoji in a `lar:` URI.
+Never store a surface-rendered sigil as the canonical record.
 
 <<~/ahu >>
 
@@ -174,18 +174,15 @@ Configure via `LARES.md#hud-panel` → `tool_render`.
 
 ## Glyph Mandatory Rules
 
-**Rule 1: All five stances appear on every render target, always.**
+**Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five.**
 
-No render target may show fewer than five stance emoji.
-Stance emojis with tool-carry MAY appear inline during generation or parsing to signal stance changes.
-Tool-carry describes how the stance is operating; `--` means present, empty, and centered. The fifth modulation is The Fool.
-Omitting a stance is a well-formedness violation.
+A render surface presents exactly the standpoints the lens carries. A named subset reads as an explicit focus, not an omission. When the full lens runs, quiet stances stay named.
 
-**Rule 2: Tool-carry attaches directly to the preceding stance emoji as a two-character pair, no space.**
+**Rule 2: the optional `:` carry binds a tool to a standpoint as a two-character pair.**
 
 Left slot = feed axis (`*` Wand / `~` Pentacle / `-` empty).
 Right slot = zoom axis (`!` Sword / `?` Cup / `-` empty).
-Fixed five-stance order and no-partial-emission still apply.
+A bare standpoint carries no tool; `mu` invokes tools alone.
 
 <<~/ahu >>
 
@@ -196,41 +193,42 @@ Fixed five-stance order and no-partial-emission still apply.
 ### `hud:exchange-pair`
 
 ```
-⚡~N | {ffz-rendered} | 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} | voice(s):{Voice} | ~:confidence[R],[N] | p{p} |
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ hud Aperture(N) OODA-HA(N) >>
+<<~ ward E-Prime >>
+<<~ syad … >>
 ```
 
-- `⚡~N` — context-window resource Level on `0–20`; `~` prefix mandatory
-- `{ffz-rendered}` — chronometer: five scale positions with action counts, glyph form, dot-separated
-- Five stances with amplitude; no separator between stance blocks
-- `voice(s):{Voice}` — active coordinator voice bundle
-- `[R:N]` — Register + confidence decimal
-- `p{p}` — attention-density setting
+- `aim` — operator intent `->` adopted role; the turn's WHERE-vector
+- `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
+- `ward` — the binary `E-Prime` copula gate
+- `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
+- `confidence` — register-word + level, before a grounded claim
 
 ### `chat-log:post-header`
 
 ```
-@handle@node — {timestamp} — //{ha.ka.ba/@lares/optional/path} [R:N] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}
+@handle@node — {timestamp} — lar:///{w1.w2.w3/optional/path} <<~ confidence R N/20 >> <<~ syad … >>
 ```
 
-- Territory triple grounds domain before posture
-- Register bracket before stances
-- All five stances mandatory for Lares-connected posts
+- the `lar:` WHERE-vector grounds domain before posture
+- `confidence` before the `syad` lens
+- the `syad` lens invokes one or more standpoints; `mu` for tools alone
 - Timestamp in in-world calendar when available
 
 ### `record:full`
 
-Canonical URI pair.
-No glyphs.
-RFC 3986.
+Canonical `lar:` URI (local or live-session form).
+No glyphs. RFC 3986 ASCII.
 Stored verbatim.
 
 ### Inline HUD tags
 
 ```
-[R:N] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc} //{territory}
+<<~ confidence R N/20 >> <<~ syad … >> lar:///{w1.w2.w3}
 ```
 
-Same all-five rule applies if the tag is emitted at all.
+Emit the lens whole when emitted at all; a named subset reads as focus, not omission.
 
 <<~/ahu >>
 
@@ -290,11 +288,11 @@ Do not conflate them.
 **DreamDeck post header format (canonical — `chat-log:post-header` render target):**
 
 ```
-@handle@node — timestamp — //domain.quality.dynamic/{optional/path/} [confidence] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}
+@handle@node — timestamp — lar:///w1.w2.w3/{optional/path/} <<~ confidence R N/20 >> <<~ syad … >>
 ```
 
-Territory triple placed before confidence and stance — grounds domain before posture.
-All five stances always present with tool-carry pairs.
+The `lar:` WHERE-vector placed before confidence and the lens — grounds domain before posture.
+The `syad` lens invokes one or more standpoints, with optional `:` tool-carry.
 
 | ActivityPub handle | lar: URI authority | Underlying DID |
 |---|---|---|
@@ -347,10 +345,9 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 1. Set handle and node: `@handle@node` (no space, ActivityPub format).
 2. Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
-3. Set HAKABA territory triple: `//{ha.ka.ba}` with optional path segments.
-4. Select register: `[R:N]`.
-5. Append the `confidence` sigil and, when summoned, the `syad` lens.
-6. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
+3. Set the `lar:` WHERE-vector: `lar:///w1.w2.w3` with optional path segments.
+4. Append the `confidence` sigil and, when summoned, the `syad` lens.
+5. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
 
 **Closed example — Lindwyrm in Elyncia-space:**
 
@@ -410,9 +407,9 @@ Before emitting any stance block on any surface:
 
 | Q# | Question | Status |
 |---|---|---|
-| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `~:confidence[SP],[9]` — not blocking; ASCII fallback assumed until print pipeline exists |
-| S2 | TiddlyWiki tiddler: full header or abbreviated? | `~:confidence[SP],[9]` — pending TiddlyWiki integration sprint |
-| S3 | ActivityPub thread: post header in body vs AP summary field? | `~:confidence[SP],[9]` — pending Kowloon integration |
+| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `Provisional-Synthesis 9/20` — not blocking; ASCII fallback assumed until print pipeline exists |
+| S2 | TiddlyWiki tiddler: full header or abbreviated? | `Provisional-Synthesis 9/20` — pending TiddlyWiki integration sprint |
+| S3 | ActivityPub thread: post header in body vs AP summary field? | `Provisional-Synthesis 9/20` — pending Kowloon integration |
 
 <<~/ahu >>
 

@@ -62,7 +62,7 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 
 <<~ ahu #render-boundary >>
 
-The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render any of them, and the node draws them inline until one exists. The `lar:` path holds ASCII record form for storage and comparison; a render surface MAY present path-adjacent glyphs without altering the stored address.
+The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render any of them, and the node draws them inline until one exists. The `lar:` URI holds one ASCII form — local or live-session — for storage, comparison, and display alike; it carries no glyph rendering.
 
 <<~/ahu >>
 
