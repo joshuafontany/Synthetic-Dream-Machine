@@ -21,11 +21,11 @@ retain = false
 
 <<~ ahu #meme-header >>
 
-# HUD Source Shelf
+# HUD Source Shelf — Design Lineage
 
-Exchange span law, intent vectors, render targets, and micro-trace gather here.
+This shelf indexes the HUD design archive — the source docs the live sigil grammar grew from.
+The live grammar lives in `lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol` and the `signal/*` rooms.
 URI grammar stays in `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri`.
-HUD rendering, exchange protocol, and sigilization live here.
 
 <<~/ahu >>
 
@@ -61,17 +61,15 @@ This shelf does NOT govern URI grammar. URI scheme law lives at:
 ### Shelf surfaces (this tree)
 
 - [HUD-ANATOMY.md](HUD-ANATOMY.md) — HUD line composition, symbol tables, state tuple reading, confidence Syadasti reading rule, render target definitions, Kowloon/ActivityPub handle form. Extracted from `URI-SCHEMA.md` §1.1 and §5. **Stale: old fragment chronometer, old phase glyphs.**
-- [PROCEDURES.md](PROCEDURES.md) — exchange span display contract, micro-trace emit rules, sub-agent handoff protocol, parse mode, system file URI procedures. Moved from `lar-uri/act/PROCEDURES.md`. **Stale: old fragment chronometer, old micro-trace glyphs.**
 
 ### Source architecture docs (moved from `_todo/core/`)
 
-- [Signal_HUD_Tagspace-draft.md](Signal_HUD_Tagspace-draft.md) — 2043-line authoritative source document defining the complete HUD and crystal state machine layer. Tagspace definition, Intent Header vs In-Flow Signal, rendering across p-scale, crystal ledger format (STATE.jsonl, SNAPSHOT.json). **Primary HUD architecture source.**
+- [Signal_HUD_Tagspace-draft.md](Signal_HUD_Tagspace-draft.md) — 2043-line authoritative source document defining the complete HUD and crystal state machine layer. Tagspace definition, Intent Header vs In-Flow Signal, rendering across p-scale, crystal ledger format (STATE.jsonl, SNAPSHOT.json). **Design-lineage archive — superseded by the live sigil grammar.**
 - [TODO_Signal_HUD_Crystal_Plan.md](TODO_Signal_HUD_Crystal_Plan.md) — 617-line master implementation plan for Signal HUD, Tagspace, and Archive Crystals. Five epics covering Intent Header spec, Micro-trace HUD, and `--debug` target redirects.
 
 ### Sprint and handoff docs (moved from `build.lares.failed/`)
 
 - [S0_REFINEMENT_PLAN.md](S0_REFINEMENT_PLAN.md) — Sprint 0 refinement plan. Unifies HUD symbol table with state tuple readings (Phase × Stance × Scope), Syadasti Reading Rule, render target anatomy, DreamDeck/Kowloon taxonomy.
-- [S0_Boot_Handoff.md](S0_Boot_Handoff.md) — Sprint 0 execution handoff for URI v2 alignment. Render target corrections, exchange vector patterns, closing sigil protocols (`→ ?` and `→ ∞`).
 
 ### Sigilization module (moved from `build.lares.failed/vocabulary/modules/sigilization/`)
 
@@ -88,71 +86,9 @@ Full OODA-HA phase-decomposed module for HUD glyph rendering rules. Not yet prom
 
 <<~ ahu #research-plan >>
 
-## Research Plan
+## Research Plan --- resolved
 
-### Priority 1 — Glyph Rationalization (blocking)
-
-The HUD surface uses two glyph sets that are currently in conflict:
-
-**Old micro-trace glyphs** (in PROCEDURES.md and HUD-ANATOMY.md):
-- `✶` Observe, `◎` Orient, `◇` Decide, `■` Act, `○` Aftermath
-
-**Current OODA-HA glyphs** (locked in `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha`):
-- `✶` Observe, `⏿` Orient, `◇` Decide, `▶` Act, `⤴` Hoʻoko, `↺` Aftermath
-
-Hoʻoko (⤴) does not appear in the chronometer (it is the execution gap inside Act that surfaces to Aftermath). The chronometer's five phase positions use: `✶ ⏿ ◇ ▶ ↺`.
-
-**Research question:** Are micro-trace inline marks (`→◎ →■ →○`) intentionally different from OODA-HA glyphs, or do they need updating to `→⏿ →▶ →↺`? If different, what is the semantic reason?
-
-**Suspected answer:** They should update. The old `◎ ■ ○` set predates OODA-HA glyph lock-in. No documented reason to keep them distinct.
-
-**Action needed:** Audit all HUD/PROCEDURES examples and update glyph set throughout.
-
----
-
-### Priority 2 — Chronometer Migration in Examples (blocking)
-
-All exchange span examples in PROCEDURES.md and HUD-ANATOMY.md carry the old fragment chronometer (`#O0.O0.O1.D2.A7`). The loop now rides the `OODA-HA` gauge in the `hud` sigil --- `OODA-HA(N)` open, `OODA-HA(N↺)` close --- not the URI. Render surfaces may still decorate phase positions with glyphs for readability.
-
-But the ffz encoding is explicitly marked **provisional and unfinished** in SKILL.md. This creates a dependency:
-
-- Examples cannot be updated until ffz deep research lands
-- ffz deep research is the blocking item for PROCEDURES.md and HUD-ANATOMY.md promotion
-
-**Action needed:** Flag all stale examples. Hold updates until ffz research resolves hex-entity vs percent-encoding question and counter semantics.
-
----
-
-### Priority 3 — Symbol Table Rationalization
-
-HUD-ANATOMY.md §5.3.1 carries four separate sigil sets:
-1. Phase sigils (old set — needs update per Priority 1)
-2. Authority/actor marks (`⊙` operator_set, `◇` node) — status unknown
-3. Stance sigils (🏛️ 🌊 🗡️ 🎭 🔮) — stable, locked in
-4. Chronometer scale sigils (🗺️ ⚙️ 🔍 ⚔️ ⚡) — stable, not yet in invariant.
-   Canonical register names for these five scales: L0 = Pulse, L1 = Beat,
-   L2 = Measure, L3 = Arc, L4 = Theme.
-   See `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`.
-
-**Action needed:** After Priority 1 resolves, rebuild the unified symbol table with the updated glyph set. The scale sigil set (🗺️ through ⚡) maps to the attention-scale register names (Pulse/Beat/Measure/Arc/Theme); the full binding table belongs in the attention-scale meme and in any chronometer research doc.
-
----
-
-### Priority 5 — DreamDeck / ActivityPub Social Layer
-
-HUD-ANATOMY.md carries the Kowloon two-part handle form (`@alias@host`) and DreamDeck post header format. This is a social-layer concern separate from the exchange span contract.
-
-**Action needed:** Consider whether DreamDeck content belongs in a separate `docs/pono/dreamdeck/` shelf once that surface develops further.
-
----
-
-### Priority 6 — URI-SCHEMA.md Cleanup
-
-The following sections of `lar-uri/URI-SCHEMA.md` have been extracted to this shelf:
-- §1.1 Exchange Flow → HUD-ANATOMY.md
-- §5 HUD Rendering → HUD-ANATOMY.md
-
-Those sections in URI-SCHEMA.md now carry redundant content. A future pass should reduce them to pointers into this shelf.
+The glyph-rationalization, chronometer-migration, and symbol-table questions this shelf once staged closed in the sigil-grammar ripple: the OODA-HA phase glyphs locked (`✶ ⏿ ◇ ▶ ↺`), the loop moved off the URI onto the `hud` `OODA-HA` gauge, the attention scale unified as `Aperture` (bands Pulse·Beat·Measure·Arc·Theme, canon: `attention-scale`), and the URI contracted to one ASCII WHERE-only form. The archive docs below preserve the lineage; they no longer drive open work.
 
 <<~/ahu >>
 

@@ -102,7 +102,7 @@ The branch already suggests a clean five-room split:
 |---|---|
 | `signal.md` | parent charter, exchange-boundary contract, routing |
 | `signal/tagspace.md` | address semantics and slot framing |
-| `signal/hud.md` | HUD line, micro-trace, annotation thresholds, witness bundle kept to what still drives decisions |
+| `signal/hud.md` | sigil panel, micro-trace, annotation thresholds, witness bundle kept to what still drives decisions |
 | `signal/render-targets.md` | surface registry, glyph projection, fallback behavior, per-surface rules |
 | `signal/sa-display.md` | theory, research framing, SA-vs-XAI distinction |
 

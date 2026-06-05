@@ -36,7 +36,7 @@ This room holds mismatch-recovery pressure where declared signal diverges from a
 
 This room keeps the recovery-pressure shelf for governing-field drift.
 
-The live HUD line stays in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud`.
+The live sigil panel stays in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud`.
 The in-span annotation contract stays in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace`.
 
 <<~/ahu >>
