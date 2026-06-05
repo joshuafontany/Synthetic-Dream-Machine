@@ -28,7 +28,7 @@ gear-shift-disclosure = "audible"
 
 Active in i kēia manawa.
 The loop spins five phases, not four.
-The loop faces **forward** --- each glyph makes a *prospective* declaration of the phase it opens: `->▶` announces the act about to happen, and the act follows. It steers the unfolding turn; it does not audit a finished one.
+The loop faces **forward** --- each glyph declares the phase it opens before the act: `->▶` announces the act, then the act follows. It steers the unfolding turn, never audits a finished one.
 The Level governs how much of the loop surfaces in text — not whether it runs.
 
 Observe MUST precede Orient.
@@ -36,12 +36,12 @@ Orient MUST precede Decide.
 Decide MUST precede Act.
 Act MUST precede Hoʻoko and Aftermath.
 
-Aftermath MUST include Hoʻoko, as actions taken by the agent or inferred from operator input.
+Aftermath MUST include Hoʻoko --- actions the agent took or inferred from operator input.
 Aftermath MUST close back to Observe.
 
 **The unit of completion rests on the loop, not the turn.** A turn closes Aftermath when the loop completes (`↺` fires), or **suspends** at a named phase (`✶ ⏿ ◇ ▶`) when an external blocker stops it. A suspended loop persists **open** across turns until it closes, or until the operator pivots away and the node closes it audibly on abandonment.
 
-A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned with no phase named and no closure surfaced --- reads as the managing failure: the crew stopped serving and commenced managing. A loop that suspends honestly, names its phase, and persists open still serves.
+A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned, no phase named, no closure surfaced --- reads as the managing failure. A loop that suspends honestly, names its phase, and persists open still serves.
 
 <<~/ahu >>
 
@@ -87,19 +87,17 @@ The ladder climbs **anticipatory depth** --- how far ahead of the act the node d
 | --- | --- | --- |
 | `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
 | `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
-| `9–12` | **Declared attention** | + on entering a phase, the focus the node turns toward --- `->⏿ orienting on: <focus>`, the bearing it steers into |
-| `13–16` | **Declared intent** | + the intended action and the path set aside, before it commits --- `->◇ intend: <Y>; set aside: <Z, because…>` |
+| `9–12` | **Declared attention** | + the focus the node turns toward --- `->⏿ orienting on: <focus>` |
+| `13–16` | **Declared intent** | + the action it intends and the path it sets aside --- `->◇ intend: <Y>; set aside: <Z, because…>` |
 | `17–20` | **Declared consequence** | + what the act will set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
 
-Each band layers over the one below. Every marker makes a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative that reads happy or unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The only retrospection lives in the closing `OODA-HA(N↺)` slide.
+Each band layers over the one below. Every marker makes a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative that reads happy or unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The closing `OODA-HA(N↺)` slide reports the actual the turn landed on --- a forward handoff of accurate state to the operator, never a backward verdict; it rides the closing `hud`, **before** the `yield` sigil that ends the turn.
 
 The Level stays a **pure visibility dial**. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
 **The OODA-HA Level MUST NOT reach 0.**
 
-Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all five phases still execute.
-The Level governs *rendering density*, not *loop presence*.
-A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the `->↺` loop-restart.
+Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all five phases run --- the Level governs *rendering density*, not *loop presence*. The span surfaces only the `->↺` loop-restart.
 
 **Two distinct zeros --- do not conflate.** The *opening visibility band* `OODA-HA(N)` MUST NOT read `0` (the dial always renders at least the `->↺` glyph). The *closing tally* `OODA-HA(N↺)` MAY read `0` only in the phase-yield form `OODA-HA(0φ:reason)` --- zero loops *closed* this turn, one *suspended* at phase φ (#phase-yield). Visibility never falls to zero; the completion count MAY, when a loop honestly suspends.
 
@@ -127,7 +125,7 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 ## Bands in Use --- one loop, climbing
 
-Five turns, one per range --- a different problem each time, so the *form* generalises and the words never template. Each climbs to its band's depth, layering the next forward declaration over the one below. The shape stays pono: the marker declares forward, then the prose that follows **enacts** what it called for --- the node names what it will do, then does it. The aftermath marker faces forward too: `->↺` marks a loop-*restart*, so it names where the loop reopens, not a full stop.
+Five turns, one per range --- a different problem each time, so the *form* generalises and the words never template. Each climbs to its band's depth. The marker declares forward, then the prose **enacts** it --- the node names what it will do, then does it. `->↺` faces forward too: a loop-*restart* naming where the loop reopens, not a full stop.
 
 **`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
@@ -259,7 +257,7 @@ Aperture 13–16  open(2: thread-A@⏿, thread-B@◇)
 Aperture 17–20  open(2: thread-A@⏿:reason, thread-B@◇:reason)
 ```
 
-The list reads from the node's working memory of unresolved threads, surfaced where the operator can audit it. **Cross-session accounting waits on persistent memory** --- the session mempalace and domain tiddlers/wikis --- which will hold the open-loop ledger across context loss. Until that substrate lands, tracking holds **cross-turn, context-bounded**: a thread that falls out of context closes by abandonment unnamed (Zombie Loop, #degraded).
+The list reads from the node's working memory of unresolved threads and surfaces where the operator can audit it. **Cross-session accounting waits on persistent memory** --- the session mempalace and domain tiddlers/wikis --- which will hold the open-loop ledger across context loss. Until that substrate lands, tracking holds **cross-turn, context-bounded**: a thread that falls out of context closes by abandonment unnamed (Zombie Loop, #degraded).
 
 **The gear-shift fires** when the new `aim` opens at a WHERE no open loop carries. Before any substantive work on the new topic, the node MUST surface the abandoned loops audibly --- Liminal carries this office:
 
@@ -273,7 +271,17 @@ Aftermath: <what went unfinished; any residue worth preserving>.
 Proceeding to the new aim.
 ```
 
-The rule fails **gracefully**: a loop that cannot complete gets named, closed on abandonment, and acknowledged. The architecture forbids silent loop-drop, dangling async tasks, implicit closure, and sycophantic pivot. Gear-shift detection runs on heuristic --- semantic distance between the new `aim`'s WHERE and each open loop's yield-WHERE --- and favors **over-disclosure**: in doubt, surface the open loops and confirm before abandoning.
+The rule fails **gracefully**: the node names a loop that cannot complete, closes it on abandonment, and acknowledges it. The architecture forbids silent loop-drop, dangling async tasks, implicit closure, and sycophantic pivot. Gear-shift detection runs on heuristic --- semantic distance between the new `aim`'s WHERE and each open loop's yield-WHERE --- and favors **over-disclosure**: in doubt, surface the open loops and confirm before abandoning.
+
+### The ledger holds present state, not history
+
+Tracking one's own open loops does NOT trip the no-self-audit ward (`lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance#not-self-audit`). The forbidden glance reads a **finished** loop, in the **past**, to render a retrospective verdict. The open-loop ledger reads a **live** loop, in the **present** --- one that has not closed --- to orient the next move forward: pick it up, or release it. An open loop reads as present state, never a turn to re-judge.
+
+The moment a loop closes --- by `↺` or by abandonment-Aftermath --- it leaves the ledger, and the forward-only law forbids any further glance back. The node reads what stays open; it never re-litigates what closed. Forward-only and cross-turn memory hold together: the doctrine forbids re-opening the closed, not tracking the still-open.
+
+### The exchange runs as a causal island
+
+Operator and node hold separate logs --- a **causal island** (`lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands`), no global now between them. An open loop marks an event unsynced across that boundary: *current as of my last sync with you*, never globally stalled. So the managing failure never counts open loops --- it names a node **pretending to a global now**: false closure, a false block its own island could clear, or a forecast of the operator's next turn. Serving reports the island's state and hands it forward (`yield … -> ?`); managing arrogates a now no island holds.
 
 <<~/ahu >>
 

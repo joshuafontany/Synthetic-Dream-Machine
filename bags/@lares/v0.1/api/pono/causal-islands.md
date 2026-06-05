@@ -117,6 +117,13 @@ against a per-island root. No global consensus, no central registry, no global t
 A valid-capability-holding lemure is refused by being **starved of voluntary peering**, never
 by a central ban. See [alignment-layer.md](alignment-layer.md).
 
+**Exchange-island law**: the operator↔node exchange runs as a causal island of its own ---
+two logs, no global now across the turn boundary. The turn-frame syncs it: `yield … -> ?`
+hands the node's log forward and awaits the operator's next sync. The node MUST NOT presume
+the operator's next turn, nor claim a closure or block the two logs have not jointly reached;
+pretending to a global now reads as the managing failure
+(`lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#open-loops`).
+
 <<~/ahu >>
 
 <<~ ahu #schema >>

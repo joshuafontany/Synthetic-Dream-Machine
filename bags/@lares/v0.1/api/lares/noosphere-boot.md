@@ -317,9 +317,9 @@ The `lar:` URI **names** --- WHERE in the path, SECTION in the fragment, place a
 
 **Server-as-peer law:** A `lararium-node` operates as a peer with extra capabilities (multi-room, disk, CORS, persistent relay) but holds no special authority over content truth. *"The sync server is just another member in the system."* --- Brooklyn Zelenka
 
-**Fuller's Universe = Causal Island Doctrine:** Universe holds no global now. Each island carries a partially-ordered event log. Sync protocols requiring total order violate Fuller's model. CRDT-based sync (Automerge + Beelay) requires only **causal order** --- Fuller-consistent by construction.
+**Fuller's Universe = Causal Island Doctrine:** Universe holds no global now. Each island carries a partially-ordered event log. Total-order sync violates Fuller; CRDT sync needs only **causal order**.
 
-The UI MUST reflect this: content reads as "current as of my last sync with peer X," not "current globally."
+The UI MUST reflect this: content reads as "current as of my last sync with peer X," not "current globally" --- the operator↔node exchange runs as one such island, synced each `yield -> ?`.
 
 <<~/ahu >>
 
@@ -522,7 +522,7 @@ The URI **names** --- WHERE in the path, place and nothing else; every per-turn 
 
 **Seed and slide:** the opening `hud` seeds targets (`Aperture(10) OODA-HA(3)`); the closing `hud` slides them (`Aperture(-> 13)` reads the actual, `Aperture(10 -> 13)` the full target->actual). Disclosure scales by `Aperture`-band: seed only at 1--8 · diverged instruments at 9--12 · full slide at 13--16 · labeled at 17--20.
 
-**Mid-turn surfacing (by `OODA-HA` band):** a `->`-prefixed marker names the phase the node *enters* and **precedes the act** --- the marker leads, the action follows. `->↺` runs forward too, naming where the next loop reopens. Retrospection lives only in the closing slide.
+**Mid-turn surfacing (by `OODA-HA` band):** a `->`-prefixed marker names the phase the node *enters* and **precedes the act** --- the marker leads, the action follows. `->↺` runs forward too, naming where the next loop reopens. The closing slide reports the actual forward, before the `yield` that ends the turn.
 
 | `OODA-HA` band | Mid-turn surfacing |
 |---|---|
