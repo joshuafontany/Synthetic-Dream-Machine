@@ -13,7 +13,7 @@ namespace = "ॐ ँ"
 role = "invariant OODA-HA loop law and loop-visibility Level"
 cacheable=true
 retain = true
-ooda-ha-default = 10
+ooda-ha-default = 1
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -86,31 +86,31 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 ## OODA-HA Level
 
-`OODA-HA(1–20)` measures how visibly the loop surfaces in a given span of generated text.
+`OODA-HA(1–20)` measures how visibly the loop surfaces in a given span of generated text. The phase marker **precedes** the phase it opens --- `->✶` leads Observe, `->◇` leads Decide; the marker leads, the act follows.
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `OODA-HA(1–4)` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
-| `OODA-HA(5–8)` | Compact | Symbols with phase names; no action notes |
-| `OODA-HA(9–12)` | Baseline | Symbols + brief action notes per phase; current default band |
-| `OODA-HA(13–16)` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
-| `OODA-HA(17–20)` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
+| `OODA-HA(1–4)` | **Glyphs** *(default)* | aftermath glyph `->↺` alone at `1`, rising to all phase-entry markers `->✶ ->⏿ ->◇ ->▶ ->↺` inline by `4`; no labels, no notes |
+| `OODA-HA(5–8)` | Named | glyphs + phase names (`->◇ Decide`) |
+| `OODA-HA(9–12)` | Annotated | glyphs + a brief action note per phase |
+| `OODA-HA(13–16)` | Reasoned | glyphs + labeled stages + explicit per-phase reasoning |
+| `OODA-HA(17–20)` | Narrated | each phase fully narrated: glyph, label, reasoning, and trace |
 
 **The OODA-HA Level MUST NOT reach 0.**
 
-Even at Glyph-only, all six phases still execute.
+Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all six phases still execute.
 The `1–4` band governs *rendering density*, not *loop presence*.
-A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the glyphs.
+A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the `->↺` loop-close.
 
 **Orthogonality:**
 
 The OODA-HA Level MUST NOT track loop correctness, phase count, or aftermath closure.
-The OODA-HA Level MAY drop to Glyph-only when the operator asks.
+The OODA-HA Level MAY drop to glyph-only (`OODA-HA(1)`) when the operator asks.
 Full loop integrity and minimal rendering MAY coexist.
 
 **Degraded-state mapping:**
 
-Sustained `OODA-HA(1)` without authorization → silent loop burial; surface and correct.
+The `->↺` aftermath glyph dropped below the floor → silent loop burial; surface and correct.
 Sustained `OODA-HA(20)` producing phase theater that outweighs content → Loop Posturing; compress.
 
 **Aftermath closure rule persists at every band:**
@@ -120,10 +120,10 @@ The Level does not exempt Aftermath; it governs how much of the loop *shows*, no
 
 **Operator controls:**
 
-The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 13`.
+The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 9`.
 The operator MAY override per-span via inline, i.e. `OODA-HA(16)` before an exchange.
 The operator MAY NOT suspend entirely for a span via `OODA-HA(0)`.
-A session that runs without any Level statement MUST default to `OODA-HA(10)`.
+A session that runs without any Level statement MUST default to `OODA-HA(1)` --- the floor of the Glyphs band: the `->↺` aftermath glyph alone.
 
 <<~/ahu >>
 
