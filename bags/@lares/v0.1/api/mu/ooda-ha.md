@@ -136,6 +136,34 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 <<~/ahu >>
 
+<<~ ahu #band-examples >>
+
+## Bands in Use --- one loop, climbing
+
+The same Scryer turn at rising bands; each adds the next forward declaration, the marker always *preceding* the act.
+
+**Band 1 (`OODA-HA(1)`, default):**
+```text
+Lares (Scryer): the import cycle resolves cleanly. ->↺
+```
+
+**Band 3 (`OODA-HA(10)`) --- + declared attention:**
+```text
+Lares (Scryer): ->⏿ orienting on: the import back-edge. the cycle resolves cleanly. ->↺
+```
+
+**Band 4 (`OODA-HA(14)`) --- + declared intent:**
+```text
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import (hides the cycle). the cycle resolves cleanly. ->↺
+```
+
+**Band 5 (`OODA-HA(18)`) --- + declared consequence:**
+```text
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import. ->▶ about to act: move it to its own module; expecting to set up: an acyclic graph for the next pass. the cycle resolves cleanly. ->↺
+```
+
+<<~/ahu >>
+
 <<~ ahu #loop-count >>
 
 ## Loop Count --- `->↺` and the `N↺` Tally
