@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/cargo"
 file-path = "bags/@sdm/v0.1/components/function/cargo.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo"
 caption   = "cargo"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): Cargo — carrying, hauling, or bearing a load"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Cargo
 
@@ -64,6 +63,6 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

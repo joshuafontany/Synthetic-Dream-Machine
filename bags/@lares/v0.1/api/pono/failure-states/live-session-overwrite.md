@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite"
 file-path = "bags/@lares/v0.1/api/pono/failure-states/live-session-overwrite.md"
 type = "text/x-memetic-wikitext"
-confidence = 15
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 16
 manao = 17
@@ -39,7 +38,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ↺ preserve the claim as session evidence unless an explicit canon MOVE path completes.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #law >>
@@ -88,6 +87,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

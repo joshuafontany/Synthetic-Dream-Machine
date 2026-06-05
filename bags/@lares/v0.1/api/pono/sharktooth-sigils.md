@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils"
 file-path    = "bags/@lares/v0.1/api/pono/sharktooth-sigils.md"
 type         = "text/x-memetic-wikitext"
-confidence   = 18
-register     = "S"
+register     = "Synthesis"
 manaoio      = 18
 mana         = 18
 manao        = 18
@@ -43,6 +42,6 @@ discovered sigil set.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

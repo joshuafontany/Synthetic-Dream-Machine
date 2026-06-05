@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/puka"
 file-path = "bags/@lares/v0.1/api/pono/puka.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
 cacheable = true
 retain    = true
@@ -35,7 +34,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -79,6 +78,6 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

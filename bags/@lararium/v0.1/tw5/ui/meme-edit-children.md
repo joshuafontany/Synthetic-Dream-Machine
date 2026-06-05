@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/meme-edit-children >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/meme-edit-children >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/meme-edit-children"
 file-path = "bags/@lararium/v0.1/tw5/ui/meme-edit-children.md"
 type = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -19,7 +18,7 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 \whitespace trim
 
@@ -58,7 +57,7 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 </$list>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
 <<~ ahu #edges >>
 
@@ -66,4 +65,4 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

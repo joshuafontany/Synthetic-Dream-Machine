@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/hud"
 file-path = "bags/@lares/v0.1/docs/pono/hud.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 12
-register = "SP"
+register = "Provisional-Synthesis"
 manaoio = 12
 mana = 13
 manao = 14
@@ -52,7 +51,7 @@ This shelf does NOT govern URI grammar. URI scheme law lives at:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #current-files >>
@@ -169,6 +168,6 @@ Those sections in URI-SCHEMA.md now carry redundant content. A future pass shoul
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-deserializer >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-deserializer >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/tw5-deserializer"
 file-path = "bags/@lares/v0.1/docs/lararium/tw5-deserializer.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 manaoio      = 16
@@ -17,7 +16,7 @@ source       = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #overview >>
 
@@ -49,6 +48,6 @@ Once the corpus path passes the boot gate and injects `tw5-modules`, that bundle
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

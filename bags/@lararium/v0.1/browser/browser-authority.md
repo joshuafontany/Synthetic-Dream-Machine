@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/browser/browser-authority"
 file-path    = "bags/@lararium/v0.1/browser/browser-authority.md"
 source-file  = "packages/lararium-mesh/src/browser-authority.ts"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 18
 manao        = 18
 manaoio      = 18
@@ -17,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Browser Island Boundary Types
 
@@ -74,6 +73,6 @@ The projection adapter in `@lararium/browser` translates the snapshot into DOM/c
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

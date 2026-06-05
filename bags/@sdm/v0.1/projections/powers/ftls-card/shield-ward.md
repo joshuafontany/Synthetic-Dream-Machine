@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/shield-ward.md"
@@ -14,8 +14,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -25,7 +24,7 @@ invariant = false
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Shield Ward — FTLS Card
 
@@ -60,6 +59,6 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

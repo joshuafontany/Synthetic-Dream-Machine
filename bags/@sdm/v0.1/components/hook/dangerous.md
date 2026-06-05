@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/dangerous"
 file-path = "bags/@sdm/v0.1/components/hook/dangerous.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous"
 caption   = "dangerous"
 tagspace  = "sdm"
-register  = "S"
-confidence = 14
+register  = "Synthesis"
 mana      = 14
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (hook): Dangerous — forces a Danger Roll; modifies the activation protocol itself"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Dangerous
 
@@ -64,6 +63,6 @@ Composes with any domain or function. **Vertical-vs-flat pressure lives here:** 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

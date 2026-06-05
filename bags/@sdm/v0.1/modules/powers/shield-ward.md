@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 file-path = "bags/@sdm/v0.1/modules/powers/shield-ward.md"
@@ -17,8 +17,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 16
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -30,7 +29,7 @@ role      = "Power module: Shield Ward — a skin-close abjuration barrier that 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Shield Ward
 
@@ -101,6 +100,6 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 - A Dispel/anti-magic effect that drops this ward wants a `#modifies` edge, not `#has`.
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

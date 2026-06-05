@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/readiness-keys >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/readiness-keys >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/readiness-keys"
 file-path = "bags/@lares/v0.1/docs/lararium/readiness-keys.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -40,7 +39,7 @@ auth → catalog → snapshot → room-content → room-presence
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -100,6 +99,6 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

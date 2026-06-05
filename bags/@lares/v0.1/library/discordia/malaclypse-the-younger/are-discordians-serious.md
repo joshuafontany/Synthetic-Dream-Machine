@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious >>
 
 <<~ ahu #iam >>
 
@@ -9,8 +9,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-di
 file-path = "bags/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 18
-register = "C"
+register = "Canon"
 manaoio = 18
 mana = 18
 manao = 18
@@ -19,7 +18,7 @@ role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenanc
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -129,6 +128,6 @@ meaning changes with the reading-standpoint that receives the declaration.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

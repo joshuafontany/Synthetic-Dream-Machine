@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/attack"
 file-path = "bags/@sdm/v0.1/components/hook/attack.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack"
 caption   = "attack"
 tagspace  = "sdm"
-register  = "S"
-confidence = 14
+register  = "Synthesis"
 mana      = 14
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (hook): Attack — resolves against Defense rather than as a save"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Attack
 
@@ -64,6 +63,6 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

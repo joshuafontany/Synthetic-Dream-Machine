@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art"
 file-path = "bags/@lares/v0.1/docs/pono/research-streams/prior-art.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -18,7 +17,7 @@ invariant = false
 status-date = "2026-05-25"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -73,6 +72,6 @@ Source: https://owasp.org/www-project-application-security-verification-standard
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

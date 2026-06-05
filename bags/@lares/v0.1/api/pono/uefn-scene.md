@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/uefn-scene"
 file-path = "bags/@lares/v0.1/api/pono/uefn-scene.md"
 type      = "text/x-memetic-wikitext"
-confidence = 14
-register  = "S"
+register  = "Synthesis"
 role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
 cacheable = true
 retain    = true
@@ -25,7 +24,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #semantic-separation >>
 
@@ -214,6 +213,6 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

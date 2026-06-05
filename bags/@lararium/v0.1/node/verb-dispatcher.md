@@ -1,20 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/node/verb-dispatcher >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/node/verb-dispatcher >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/node/verb-dispatcher"
 file-path    = "bags/@lararium/v0.1/node/verb-dispatcher.md"
 source-file  = "packages/lararium-node/src/verb-dispatcher.ts"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 10
+register     = "Synthesis-Canon"
 mana         = 10
 role         = "self-documentation: TODO describe verb-dispatcher.ts"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 TODO: describe the load-bearing surface this file owns.

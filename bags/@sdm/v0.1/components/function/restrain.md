@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/restrain >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/restrain >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/restrain"
 file-path = "bags/@sdm/v0.1/components/function/restrain.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/restrain"
 caption   = "restrain"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): Restrain — grip, hold, or immobilise a target; the first offensive function the attack-hook surfaced"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Restrain
 
@@ -65,6 +64,6 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

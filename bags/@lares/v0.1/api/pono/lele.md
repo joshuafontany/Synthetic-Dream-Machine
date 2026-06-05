@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lele"
 file-path = "bags/@lares/v0.1/api/pono/lele.md"
 type      = "text/x-memetic-wikitext"
-confidence = 15
-register  = "S"
+register  = "Synthesis"
 role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -64,6 +63,6 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

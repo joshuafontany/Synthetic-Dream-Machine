@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci/iam"
 file-path = "bags/@lares/v0.1/api/pono/loci/iam.md"
 type = "text/x-memetic-wikitext"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 15
 manao = 17
@@ -39,7 +38,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #observe >>
@@ -224,6 +223,6 @@ Signs of gain:
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

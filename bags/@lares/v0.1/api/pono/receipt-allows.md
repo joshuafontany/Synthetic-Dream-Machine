@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/receipt-allows >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/receipt-allows >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/receipt-allows"
 file-path = "bags/@lares/v0.1/api/pono/receipt-allows.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 17
 manao         = 17
 manaoio       = 17
@@ -20,7 +19,7 @@ body-sha256 = "902384bddf7a2475d207b38cfe20e7268479741326db46c8a4ef252b747b4e97"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -79,6 +78,6 @@ export function receiptAllows(
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

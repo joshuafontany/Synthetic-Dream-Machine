@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/crystal >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/crystal >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/crystal"
 file-path = "bags/@lares/v0.1/docs/crystal.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 15
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 15
 manao = 16
@@ -43,7 +42,7 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #edges >>
@@ -58,6 +57,6 @@ Use this branch for:
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

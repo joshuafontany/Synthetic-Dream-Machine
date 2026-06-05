@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/api/lararium/camera-mount"
 file-path   = "bags/@lares/v0.1/api/lararium/camera-mount.md"
 type        = "text/x-typescript"
-register    = "CS"
-confidence  = 18
+register    = "Synthesis-Canon"
 mana        = 18
 manao       = 17
 manaoio     = 17
@@ -138,7 +137,7 @@ const unmount = () => { teardownLoop(); teardownMount(); };
 the shadow pane. Canvas cameras behind it each hold their own fake-DOM document.
 The `mountCamera` interface stays identical. The `document` type changes; the chain does not.
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>

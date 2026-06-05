@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/auth-providers >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/auth-providers >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/auth-providers"
 file-path = "bags/@lares/v0.1/docs/lararium/auth-providers.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 17
+register      = "Synthesis-Canon"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -30,7 +29,7 @@ executes today; `bluesky-oauth` and `github-vscode` carry principal shapes.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -75,6 +74,6 @@ fields = ["label: string"]
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters"
 file-path = "bags/@lares/v0.1/docs/lararium_mcp/adapters.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 16
 manaoio      = 15
 manao        = 17
@@ -33,7 +32,7 @@ status-date  = "2026-04-23"
 ↺ adapt: when submodule health fails, the main server should keep running with that namespace absent.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #adapter-interface >>
@@ -175,6 +174,6 @@ The following remain blocked until explicit policy lands:
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

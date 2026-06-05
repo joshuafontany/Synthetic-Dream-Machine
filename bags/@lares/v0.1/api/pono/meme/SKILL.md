@@ -5,13 +5,12 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/meme/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 15
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 16
 manao = 17
@@ -54,7 +53,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #workflow-contract >>
@@ -204,7 +203,7 @@ When writing or revising:
 ````markdown
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/[PATH] >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/[PATH] >>
 
 
 # [Title]
@@ -230,9 +229,9 @@ When writing or revising:
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 ````
 
 <<~/ahu >>
@@ -277,4 +276,4 @@ Close by naming:
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/memory-store"
 file-path    = "bags/@lararium/v0.1/tw5/memory-store.md"
 source-file  = "packages/lararium-tw5/src/memory-store.ts"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 16
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 role         = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
@@ -15,7 +14,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -140,6 +139,6 @@ same change record any AutomergeDocStore would emit.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

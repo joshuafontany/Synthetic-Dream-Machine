@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner"
 file-path = "bags/@lararium/v0.1/tw5/ui/engine-update-banner.md"
 type         = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -18,7 +17,7 @@ tags         = ["$:/tags/PageTemplate"]
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <$reveal type="nomatch" state="$:/lararium/engine/update-available" text="">
 <div class="lar-engine-update-banner">
@@ -26,6 +25,6 @@ tags         = ["$:/tags/PageTemplate"]
 </div>
 </$reveal>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

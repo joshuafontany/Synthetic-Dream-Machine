@@ -1,20 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-dark >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-dark >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-dark"
 file-path = "bags/@lararium/v0.1/tw5/palette/gruvbox-dark.md"
 type = "text/plain"
 tagspace     = "adjacent"
-confidence   = 19
-register     = "S"
+register     = "Synthesis"
 tags         = ["$:/tags/Palette"]
 role         = "Gruvbox Dark color palette for TW5 theme engine"
 ```
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 background: #282828
 foreground: #ebdbb2
@@ -109,6 +108,6 @@ wikilist-item: #3c3836
 wikilist-toolbar-background: #1d2021
 wikilist-toolbar-foreground: #ebdbb2
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

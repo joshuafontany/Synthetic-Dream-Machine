@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kau >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kau >>
 ```toml iam
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/kau"
 file-path     = "bags/@lararium/v0.1/tw5/widgets/kau.md"
 type          = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 role          = "anchor: ~kau TW5 wikitext widget — heleuma ka"
 heleuma       = "ka"
@@ -15,7 +14,7 @@ retain        = true
 body-sha256 = "6cc6ce1e6d1dc43e399f3c00735763a804c36fdf3b646670588cc2505b9f5af2"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -60,6 +59,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

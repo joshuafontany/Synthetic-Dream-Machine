@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells"
 file-path = "bags/@sdm/v0.1/templates/witness/powers/osr-spells.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 12
 manao     = 17
 manaoio   = 16
@@ -20,7 +19,7 @@ role      = "root template meme for OSR spell witness memes — cold provenance 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Template — OSR Spell Witness
 
@@ -60,6 +59,6 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

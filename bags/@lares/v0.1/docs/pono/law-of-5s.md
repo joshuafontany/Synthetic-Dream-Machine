@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s"
 file-path = "bags/@lares/v0.1/docs/pono/law-of-5s.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 manaoio   = 16
 mana      = 16
 manao     = 16
@@ -16,7 +15,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -171,5 +170,5 @@ Each dot-separated position corresponds to one band. Reading left to right zooms
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

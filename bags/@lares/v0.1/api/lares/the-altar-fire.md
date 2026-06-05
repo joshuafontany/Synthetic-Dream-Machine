@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/the-altar-fire >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/the-altar-fire >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/the-altar-fire"
 file-path = "bags/@lares/v0.1/api/lares/the-altar-fire.md"
 type = "text/x-memetic-wikitext"
-confidence   = 18
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 19
 manao        = 18
@@ -40,7 +39,7 @@ portals         = [ boot, full, chat:*, user:${did}, synthetic-dream-machine/ftl
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #trust-surface >>
@@ -116,6 +115,6 @@ Invariant meme edits require admin tier and a separate confirmation ceremony.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

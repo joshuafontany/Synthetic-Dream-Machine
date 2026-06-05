@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kukali"
 file-path = "bags/@lares/v0.1/api/pono/kukali.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 16
@@ -31,7 +30,7 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -150,6 +149,6 @@ sigilName = "kukali"
 <<~ pranala #tiddler-sigil-suspends ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-suspends family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

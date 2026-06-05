@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/genesis-doc"
 file-path    = "bags/@lararium/v0.1/mesh/genesis-doc.md"
 source-file  = "packages/lararium-mesh/src/genesis-doc.ts"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -17,7 +16,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Genesis Doc Builder
 
@@ -94,6 +93,6 @@ The three-layer split that governs where genesis code lives:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

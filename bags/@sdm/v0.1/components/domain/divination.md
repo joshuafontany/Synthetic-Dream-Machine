@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/divination"
 file-path = "bags/@sdm/v0.1/components/domain/divination.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination"
 caption   = "divination"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (domain): Divination — the school of perceiving the hidden"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Divination
 
@@ -65,6 +64,6 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

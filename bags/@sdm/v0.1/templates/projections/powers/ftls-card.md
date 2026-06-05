@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card"
 file-path = "bags/@sdm/v0.1/templates/projections/powers/ftls-card.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -20,7 +19,7 @@ role      = "root template meme for FTLS Power card projection memes — playabl
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Template — FTLS Power Card Projection
 
@@ -74,6 +73,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

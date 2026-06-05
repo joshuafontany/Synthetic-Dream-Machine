@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain"
 file-path = "bags/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -54,7 +53,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -167,6 +166,6 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

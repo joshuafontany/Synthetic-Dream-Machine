@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/imbued"
 file-path = "bags/@sdm/v0.1/components/hook/imbued.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued"
 caption   = "imbued"
 tagspace  = "sdm"
-register  = "S"
-confidence = 14
+register  = "Synthesis"
 mana      = 14
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (hook): Imbued — Life stays locked until the Power deactivates"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Imbued
 
@@ -64,6 +63,6 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

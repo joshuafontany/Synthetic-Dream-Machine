@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/lararium-doc-stack >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/lararium-doc-stack >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/lararium-doc-stack"
 file-path    = "bags/@lares/v0.1/docs/lararium/lararium-doc-stack.md"
 type         = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 19
+register     = "Synthesis-Canon"
 mana         = 19
 manao        = 18
 manaoio      = 18
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # LarariumDoc Stack
 
@@ -144,9 +143,9 @@ A companion `$:/plugins/lararium/export/md` TW5 plugin registers the
 `.md` format in the export dropdown — re-using TW5's export widget
 infrastructure rather than rolling a separate exporter.
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 
 <<~ ahu #edges >>
 

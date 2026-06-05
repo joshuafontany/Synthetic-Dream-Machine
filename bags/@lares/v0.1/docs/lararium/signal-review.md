@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal-review >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal-review >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal-review"
 file-path = "bags/@lares/v0.1/docs/lararium/signal-review.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 17
 mana = 16
 manao = 17
@@ -56,7 +55,7 @@ This memo does not attempt chronometer closure.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #observe >>
@@ -259,6 +258,6 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

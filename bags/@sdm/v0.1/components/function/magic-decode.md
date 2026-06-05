@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/magic-decode"
 file-path = "bags/@sdm/v0.1/components/function/magic-decode.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode"
 caption   = "magic-decode"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): Magic Decode — turning a magical inscription into active, readable meaning"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Magic Decode
 
@@ -64,6 +63,6 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

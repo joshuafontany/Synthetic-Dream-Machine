@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/read-magic.md"
@@ -15,8 +15,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -26,7 +25,7 @@ invariant = false
 role      = "FTLS card projection: Read Magic — playable surface with clickable component pills"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Read Magic — FTLS Card
 
@@ -62,6 +61,6 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

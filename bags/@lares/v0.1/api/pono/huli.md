@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/huli"
 file-path = "bags/@lares/v0.1/api/pono/huli.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 16
 manao        = 16
@@ -36,7 +35,7 @@ directed attention moving through the set.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -123,6 +122,6 @@ close-pattern = '<<~\/huli\s*>>'
 <<~ pranala #tiddler-sigil-for ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

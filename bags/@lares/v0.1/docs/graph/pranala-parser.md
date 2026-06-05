@@ -4,14 +4,13 @@
 *A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.*
 
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser"
 file-path = "bags/@lares/v0.1/docs/graph/pranala-parser.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manaoio      = 16
 manao        = 17
@@ -32,7 +31,7 @@ status-date  = "2026-04-24"
 ↺ the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #surface-forms >>
@@ -219,6 +218,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

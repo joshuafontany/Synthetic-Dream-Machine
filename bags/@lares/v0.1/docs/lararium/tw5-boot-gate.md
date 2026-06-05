@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-boot-gate >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-boot-gate >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/tw5-boot-gate"
 file-path = "bags/@lares/v0.1/docs/lararium/tw5-boot-gate.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 manaoio      = 17
@@ -16,7 +15,7 @@ status-date  = "2026-04-30"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -76,6 +75,6 @@ The **implementors interface** it queries IS a meme: `lar:///ha.ka.ba/@lares/v0.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tick >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tick >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tick"
 file-path = "bags/@lares/v0.1/api/pono/tick.md"
 type      = "text/x-memetic-wikitext"
-confidence = 6
-register  = "S"
+register  = "Synthesis"
 role      = "device lifecycle hook — run-block-once-per-nalu; Verse OnSimulate(StagedUpdates) entry point; DEFERRED to UE6 ~2027"
 cacheable = true
 retain    = true
@@ -27,7 +26,7 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #edges >>
 
@@ -38,6 +37,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

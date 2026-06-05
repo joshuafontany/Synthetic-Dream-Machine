@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class"
 file-path = "bags/@sdm/v0.1/templates/mount-points/storage-class.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -20,7 +19,7 @@ role      = "root template meme for mount-point (storage-class) memes — the co
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Template — Mount-Point (Storage Class)
 
@@ -60,6 +59,6 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

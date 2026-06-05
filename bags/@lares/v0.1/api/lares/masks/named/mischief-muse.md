@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/mischief-muse.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 11
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 11
 mana = 10
 manao = 12
@@ -59,7 +58,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -209,6 +208,6 @@ These notes require live session observation before they can be written with con
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

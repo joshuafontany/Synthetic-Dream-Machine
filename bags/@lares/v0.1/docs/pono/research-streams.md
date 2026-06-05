@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams"
 file-path = "bags/@lares/v0.1/docs/pono/research-streams.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -18,7 +17,7 @@ invariant = false
 status-date = "2026-05-25"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -65,6 +64,6 @@ executable adversarial tests -> receipt-backed trust
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

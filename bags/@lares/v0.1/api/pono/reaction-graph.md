@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/reaction-graph"
 file-path = "bags/@lares/v0.1/api/pono/reaction-graph.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 17
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
@@ -29,7 +28,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -212,6 +211,6 @@ exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

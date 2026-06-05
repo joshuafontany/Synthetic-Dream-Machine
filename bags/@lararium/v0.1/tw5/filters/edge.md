@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/edge >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/edge >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/filters/edge"
 file-path = "bags/@lararium/v0.1/tw5/filters/edge.md"
 type          = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 role          = "anchor: registerEdgeOperator — heleuma ka"
 heleuma       = "ka"
@@ -15,7 +14,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -57,6 +56,6 @@ tw.filterOperators["edge"] = function (source: TW5FilterSource, operator: TW5Fil
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ea >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ea >>
 ```toml iam
 uri-path   = "ha.ka.ba/@lares/v0.1/api/pono/ea"
 file-path  = "bags/@lares/v0.1/api/pono/ea.md"
 type       = "text/x-memetic-wikitext"
 tagspace   = "stable"
-confidence = 15
-register   = "S"
+register   = "Synthesis"
 mana       = 16
 manao      = 15
 namespace  = "ॐ ँ"
@@ -118,6 +117,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

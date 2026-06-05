@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils"
 file-path    = "bags/@lares/v0.1/api/pono/nihomano-sigils.md"
 type         = "text/x-memetic-wikitext"
-confidence   = 18
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 18
 mana         = 18
 manao        = 18
@@ -51,7 +50,7 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #wild-magic >>
 
@@ -265,6 +264,6 @@ lives in a tiddler.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

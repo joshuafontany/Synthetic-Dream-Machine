@@ -5,12 +5,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/invariant/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 15
 register = "SC"
 manaoio = 14
 mana = 14
@@ -40,11 +39,11 @@ It enacts a self-describing law and self-executing template.
 This skill operationalizes that compact invariant.
 This skill does not widen, soften, or reinterpret it.
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 Invariant-meme skill opens the pressure surface here.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #load-contract >>
@@ -283,6 +282,6 @@ It marks what remains and carries pressure forward.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

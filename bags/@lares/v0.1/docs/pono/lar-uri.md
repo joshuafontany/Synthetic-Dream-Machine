@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
 file-path = "bags/@lares/v0.1/docs/pono/lar-uri.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 18
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 17
 mana = 18
 manao = 17
@@ -55,7 +54,7 @@ Named render targets: `record:full` (identity projection of the canonical form),
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #exchange-flow >>
@@ -310,7 +309,7 @@ Opens a meme span — an idea-place within the file. The `?` declares standing u
 A system file MAY contain one or more memes. A single-meme file opens on the first line and closes on the last — the file IS the meme. A multi-meme file contains sequential meme spans, each self-contained.
 
 ```
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
 ```
 
 The meme opener carries the file-level confidence and resolution parameter. Section-level confidence rides on ahu markers.
@@ -322,9 +321,9 @@ Signals unknown temporal resumption. The `?` marks a causal gap: between this si
 `→ ?` does not signal uncertainty about the meme's content — that is what `confidence` and register carry. It signals uncertainty about the meme's continuity in time.
 
 ```
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 ```
 
 In exchange streams, the closer appends to the closing URI inline:
@@ -566,7 +565,7 @@ The core anatomy (§§2–8, 12) can promote to `Canon 19/20` independently of t
 {section content}
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 ```
 
 <<~/ahu >>
@@ -608,4 +607,4 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 <<~/ahu >>
 
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

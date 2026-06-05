@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter >>
 
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
 file-path = "bags/@lares/v0.1/api/pono/wikitext-filter.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 18
 register     = "SC"
 mana         = 17
 manao        = 17
@@ -233,4 +232,4 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

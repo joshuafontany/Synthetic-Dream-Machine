@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward"
 file-path = "bags/@sdm/v0.1/witness/powers/osr-spells/shield-ward.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 16
+register  = "Synthesis-Canon"
 mana      = 12
 manao     = 16
 manaoio   = 17
@@ -18,7 +17,7 @@ invariant = false
 role      = "OSR spell witness for Shield (source alias of SDM+ Shield Ward) — cold-load provenance"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # OSR Witness — Shield Ward
 
@@ -95,6 +94,6 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

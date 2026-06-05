@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger"
 file-path = "bags/@lares/v0.1/docs/lararium_mcp/sprint-ledger.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 16
 manaoio      = 15
 manao        = 16
@@ -32,7 +31,7 @@ status      = "sequence-bound; no calendar dates"
 ↺ adapt: future sprint docs enter this ledger only after closure.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #closed-sprints >>
@@ -116,6 +115,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/catalog-doc >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/catalog-doc >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/catalog-doc"
 file-path = "bags/@lares/v0.1/docs/lararium/catalog-doc.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -43,7 +42,7 @@ A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #schema >>
 
@@ -132,6 +131,6 @@ fields = [
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

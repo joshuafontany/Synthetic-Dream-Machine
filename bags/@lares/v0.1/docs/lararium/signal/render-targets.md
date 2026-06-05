@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets"
 file-path = "bags/@lares/v0.1/docs/lararium/signal/render-targets.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 15
 manao = 16
@@ -18,7 +17,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -426,6 +425,6 @@ Before emitting any stance block on any surface:
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

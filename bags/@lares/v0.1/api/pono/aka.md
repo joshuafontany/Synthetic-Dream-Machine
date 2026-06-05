@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/aka"
 file-path = "bags/@lares/v0.1/api/pono/aka.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
@@ -32,7 +31,7 @@ edges SHOULD carry a confidence rating when the observation is uncertain.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -131,6 +130,6 @@ confidence-bounded = true
 <<~ pranala #tiddler-sigil-shadow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-shadow family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

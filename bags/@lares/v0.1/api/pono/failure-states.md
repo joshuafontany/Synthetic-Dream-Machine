@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/failure-states"
 file-path = "bags/@lares/v0.1/api/pono/failure-states.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 14
 mana         = 16
 manao        = 16
@@ -31,7 +30,7 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 ✶ detect the pattern — compare incoming pressure against the named failure-state index.
@@ -64,6 +63,6 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

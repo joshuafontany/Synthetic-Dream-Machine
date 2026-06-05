@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoolele >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoolele >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
 file-path   = "bags/@lares/v0.1/api/pono/hoolele.md"
 type        = "text/x-memetic-wikitext"
-register    = "S"
-confidence  = 16
+register    = "Synthesis"
 mana        = 16
 manao       = 16
 tagspace    = "stable"
@@ -42,7 +41,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -153,6 +152,6 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

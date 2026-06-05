@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kahu >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kahu >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/kahu"
 file-path    = "bags/@lararium/v0.1/mesh/kahu.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 16
 manaoio      = 16
@@ -15,7 +14,7 @@ tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Kahu
 
@@ -141,6 +140,6 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

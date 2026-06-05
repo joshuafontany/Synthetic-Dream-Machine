@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles"
 file-path = "bags/@lararium/v0.1/tw5/ui/ahu-styles.md"
 type = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -18,7 +17,7 @@ tags         = ["$:/tags/Stylesheet"]
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 \rules only filteredtranscludeinline transcludeinline
 /* Depends on: a palette tiddler loaded before this stylesheet — <<colour X>> resolves
@@ -162,7 +161,7 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
   display: none;
 }
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
 <<~ ahu #edges >>
 
@@ -170,4 +169,4 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

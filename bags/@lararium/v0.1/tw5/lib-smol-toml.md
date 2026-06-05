@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml"
 file-path    = "bags/@lararium/v0.1/tw5/lib-smol-toml.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 17
 manao        = 16
 manaoio      = 16
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -73,6 +72,6 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

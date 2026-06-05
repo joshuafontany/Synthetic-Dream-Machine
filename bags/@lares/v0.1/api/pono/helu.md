@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/helu >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/helu >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/helu"
 file-path = "bags/@lares/v0.1/api/pono/helu.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -71,6 +70,6 @@ TW5 equivalent:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

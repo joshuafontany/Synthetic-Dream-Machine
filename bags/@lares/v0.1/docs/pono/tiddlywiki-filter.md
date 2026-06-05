@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
 file-path = "bags/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
 type = "text/x-memetic-wikitext"
-confidence   = 14
-register     = "S"
+register     = "Synthesis"
 role = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
 cacheable = false
 retain = false
@@ -114,7 +113,7 @@ result-shape = "set"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #guidance >>
@@ -166,6 +165,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

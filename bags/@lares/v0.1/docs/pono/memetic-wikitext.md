@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext"
 file-path = "bags/@lares/v0.1/docs/pono/memetic-wikitext.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 16
 manao = 17
@@ -19,7 +18,7 @@ invariant = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -76,14 +75,14 @@ They do not rewrite primitive meaning.
 ### Minimum document
 
 ````markdown
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/example >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/example >>
 
 
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 ````
 
 ### Minimum relation, inclusion, invocation
@@ -205,4 +204,4 @@ These design tests drive the v5 spec rebuild. They came from the prior-art compa
 <<~ pranala #implements-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

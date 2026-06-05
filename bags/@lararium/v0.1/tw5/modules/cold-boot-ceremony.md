@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
 file-path    = "bags/@lararium/v0.1/tw5/modules/cold-boot-ceremony.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -19,7 +18,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -200,6 +199,6 @@ export function buildCeremonyTiddlers(
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

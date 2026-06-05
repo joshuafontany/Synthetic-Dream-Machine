@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/meme"
 file-path = "bags/@lares/v0.1/docs/pono/meme.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 15
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 15
 mana = 16
 manao = 17
@@ -19,7 +18,7 @@ invariant = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -125,6 +124,6 @@ Research backlog and subtype-specific detail should deepen into their own outwar
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

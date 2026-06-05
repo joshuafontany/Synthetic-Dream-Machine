@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset"
 file-path = "bags/@lares/v0.1/docs/pono/glyph-codeset.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 17
-register  = "S"
+register  = "Synthesis"
 manaoio   = 16
 mana      = 17
 manao     = 16
@@ -16,7 +15,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -331,5 +330,5 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

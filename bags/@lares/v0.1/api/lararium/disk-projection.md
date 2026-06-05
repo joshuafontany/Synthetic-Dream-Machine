@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/disk-projection >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/disk-projection >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/lararium/disk-projection"
 file-path    = "bags/@lares/v0.1/api/lararium/disk-projection.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 16
-register     = "S"
+register     = "Synthesis"
 manaoio      = 15
 mana         = 17
 manao        = 17
@@ -22,7 +21,7 @@ retain       = true
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #core-claim >>
 
@@ -119,6 +118,6 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

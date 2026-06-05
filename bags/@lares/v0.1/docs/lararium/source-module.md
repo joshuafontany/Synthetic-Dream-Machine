@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/source-module >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/source-module >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/source-module"
 file-path = "bags/@lares/v0.1/docs/lararium/source-module.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 15
 mana         = 16
 manao        = 16
@@ -27,7 +26,7 @@ Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -119,6 +118,6 @@ The `write-source-memes.ts` script MUST:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

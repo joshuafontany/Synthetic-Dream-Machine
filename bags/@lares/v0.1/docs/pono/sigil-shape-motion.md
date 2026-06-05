@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sigil-shape-motion >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sigil-shape-motion >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-shape-motion"
 file-path = "bags/@lares/v0.1/docs/pono/sigil-shape-motion.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 manaoio   = 16
 mana      = 17
 manao     = 16
@@ -16,7 +15,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -114,5 +113,5 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

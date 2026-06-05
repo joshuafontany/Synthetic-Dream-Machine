@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/peer-coordination >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/peer-coordination >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/peer-coordination"
 file-path    = "bags/@lares/v0.1/docs/lararium/peer-coordination.md"
 type         = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Peer Coordination — Automerge Rendezvous Doctrine
 
@@ -193,9 +192,9 @@ rendezvous exists; the island file approach is the correct solution.
 with their IDs as a single import payload — relevant for shipping the initial
 island definition bundle to new nodes.
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 
 <<~ ahu #edges >>
 

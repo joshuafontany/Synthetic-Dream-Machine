@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble"
 file-path = "bags/@sdm/v0.1/projections/items/ftls-card/porters-pebble.md"
@@ -11,8 +11,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -22,7 +21,7 @@ invariant = false
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Porter's Pebble — FTLS Card
 
@@ -60,6 +59,6 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences/operating-modes >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences/operating-modes >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/preferences/operating-modes"
 file-path = "bags/@lares/v0.1/docs/lararium/preferences/operating-modes.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 17
-register = "S"
+register = "Synthesis"
 manaoio = 17
 mana = 18
 manao = 16
@@ -18,7 +17,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -91,6 +90,6 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

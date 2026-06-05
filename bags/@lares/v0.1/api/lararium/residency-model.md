@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/lararium/residency-model"
 file-path    = "bags/@lares/v0.1/api/lararium/residency-model.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 17
-register     = "S"
+register     = "Synthesis"
 manaoio      = 16
 mana         = 18
 manao        = 17
@@ -22,7 +21,7 @@ retain       = true
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #core-claim >>
 
@@ -262,6 +261,6 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

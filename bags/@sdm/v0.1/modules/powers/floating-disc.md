@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
 file-path = "bags/@sdm/v0.1/modules/powers/floating-disc.md"
@@ -17,8 +17,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 16
+register  = "Synthesis-Canon"
 mana      = 15
 manao     = 17
 manaoio   = 16
@@ -30,7 +29,7 @@ role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo 
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Floating Disc
 
@@ -99,6 +98,6 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 - `telekinetic` domain (v0.0 carried it alongside stuckforce): promote a component only if a query needs to split force-types.
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

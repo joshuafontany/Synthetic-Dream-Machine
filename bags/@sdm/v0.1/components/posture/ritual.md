@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/posture/ritual"
 file-path = "bags/@sdm/v0.1/components/posture/ritual.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual"
 caption   = "ritual"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (posture): Ritual — activation requires extended procedure and time, not an instant"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Ritual
 
@@ -64,6 +63,6 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

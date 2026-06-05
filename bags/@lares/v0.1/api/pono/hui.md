@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hui >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hui >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hui"
 file-path = "bags/@lares/v0.1/api/pono/hui.md"
 type      = "text/x-memetic-wikitext"
-confidence = 15
-register  = "S"
+register  = "Synthesis"
 role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -69,6 +68,6 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

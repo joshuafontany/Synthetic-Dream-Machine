@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"
 file-path = "bags/@lares/v0.1/api/pono/heleuma/ka.md"
 type = "text/x-memetic-wikitext"
 namespace    = "⊙"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 17
@@ -18,7 +17,7 @@ role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -88,6 +87,6 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/dispatcher"
 file-path = "bags/@lares/v0.1/api/pono/dispatcher.md"
 type = "text/x-memetic-wikitext"
-confidence   = 18
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 17
 mana         = 18
 manao        = 17
@@ -35,7 +34,7 @@ grammar: new sigils need only a tiddler — no code change required.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -87,6 +86,6 @@ TW5 wikitext body:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

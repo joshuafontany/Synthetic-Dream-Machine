@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/save-path >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/save-path >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lararium/save-path"
 file-path = "bags/@lares/v0.1/api/lararium/save-path.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 18
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 17
 mana = 18
 manao = 17
@@ -27,7 +26,7 @@ Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #problem >>
 
@@ -153,6 +152,6 @@ No callbacks fire after `stop()`.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium"
 file-path = "bags/@lares/v0.1/docs/lararium.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 15
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 15
 manao = 16
@@ -45,7 +44,7 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #mechanics-shelf >>
@@ -79,6 +78,6 @@ The rooms may deepen later without moving the seat again.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

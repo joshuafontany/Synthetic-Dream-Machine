@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle"
 file-path = "bags/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 15
 manao = 14
@@ -21,7 +20,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -123,6 +122,6 @@ Use this witness carrier for provenance.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/parser"
 file-path = "bags/@lares/v0.1/api/pono/parser.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 18
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 16
 mana      = 18
 manao     = 17
@@ -18,7 +17,7 @@ retain    = true
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -203,7 +202,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 Canonical form:
 ````text
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/path/to/meme >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/path/to/meme >>
 ```toml iam
 uri-path  = "..."
 file-path = "..."
@@ -260,5 +259,5 @@ Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

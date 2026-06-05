@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
 file-path = "bags/@sdm/v0.1/components/function/ecm-scan.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
 caption   = "ecm-scan"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): ECM Scan — sensing and analyzing active Powers and noospheric signatures"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # ECM Scan
 
@@ -64,6 +63,6 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

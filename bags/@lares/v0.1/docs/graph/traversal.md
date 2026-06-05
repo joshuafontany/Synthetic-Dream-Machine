@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/traversal"
 file-path = "bags/@lares/v0.1/docs/graph/traversal.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 17
 manaoio      = 17
 manao        = 17
@@ -27,7 +26,7 @@ status-date  = "2026-04-24"
 ↺ execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #graph-planes >>
@@ -239,6 +238,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

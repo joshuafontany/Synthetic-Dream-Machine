@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/pranala"
 file-path = "bags/@lares/v0.1/docs/pono/pranala.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "S"
+register     = "Synthesis"
 role = "docs companion for pranala: examples, sugar long-forms, and reciprocal-edge guidance"
 cacheable = false
 retain = false
@@ -38,7 +37,7 @@ Minimal inline edges:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #sugar-long-forms >>
@@ -114,6 +113,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

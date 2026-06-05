@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sigil-procedure >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sigil-procedure >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/sigil-procedure"
 file-path    = "bags/@lararium/v0.1/tw5/sigil-procedure.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 16
 manao        = 16
 manaoio      = 16
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -78,4 +77,4 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>

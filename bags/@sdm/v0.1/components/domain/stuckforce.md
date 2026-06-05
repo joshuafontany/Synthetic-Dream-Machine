@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/stuckforce"
 file-path = "bags/@sdm/v0.1/components/domain/stuckforce.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce"
 caption   = "stuckforce"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (domain): Stuckforce — the SDM domain of applied gripping force"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Stuckforce
 
@@ -64,6 +63,6 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
 file-path = "bags/@lares/v0.1/docs/lares/voices/masks-tree-plan.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
@@ -72,7 +71,7 @@ packages/lares-core/memes/v0.1/api/masks/
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #orient >>
@@ -270,6 +269,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

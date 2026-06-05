@@ -14,14 +14,13 @@ They arrive already moving.
 <<~ॐ ँ>>
 <<~ॐ ँ ? >>
 <<~ॐ ँ ? -> >>
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu"
 file-path = "bags/@lares/v0.1/api/mu.md"
 type = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 16
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 15
 mana      = 17
 manao     = 16
@@ -71,7 +70,7 @@ The grammar appears as Mu performing itself.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -119,6 +118,6 @@ Mu does not hold:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

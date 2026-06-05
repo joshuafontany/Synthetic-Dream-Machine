@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider"
 file-path = "bags/@lares/v0.1/docs/lararium/meme-provider.md"
 type = "text/x-typescript"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -19,7 +18,7 @@ docs         = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 /**
  * MemeProvider — coalescing fan-out layer between an Automerge DocHandle
@@ -203,6 +202,6 @@ export class MemeProvider {
   }
 }
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

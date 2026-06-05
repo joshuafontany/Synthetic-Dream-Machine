@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/archive >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/archive >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/archive"
 file-path = "bags/@sdm/v0.1/components/function/archive.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/archive"
 caption   = "archive"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): Archive — storing to and retrieving from a noospheric record"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Archive
 
@@ -64,6 +63,6 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

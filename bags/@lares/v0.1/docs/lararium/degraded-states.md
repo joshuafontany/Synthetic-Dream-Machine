@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/degraded-states >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/degraded-states >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/degraded-states"
 file-path = "bags/@lares/v0.1/docs/lararium/degraded-states.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 18
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 17
 mana = 18
 manao = 17
@@ -18,7 +17,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #provenance >>
@@ -219,6 +218,6 @@ The operator naming a degraded state constitutes correction input, not accusatio
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

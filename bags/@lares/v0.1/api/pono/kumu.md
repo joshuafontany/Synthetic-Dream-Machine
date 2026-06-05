@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kumu"
 file-path = "bags/@lares/v0.1/api/pono/kumu.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -68,6 +67,6 @@ A kumu declaration MUST NOT produce render output — it registers a type defini
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

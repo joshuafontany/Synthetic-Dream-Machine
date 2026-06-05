@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance"
 file-path = "bags/@lares/v0.1/docs/lararium/signal/provenance.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
@@ -18,7 +17,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -149,6 +148,6 @@ Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots req
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

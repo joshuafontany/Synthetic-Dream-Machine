@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/modules/power"
 file-path = "bags/@sdm/v0.1/templates/modules/power.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 15
 manao     = 17
 manaoio   = 15
@@ -20,7 +19,7 @@ role      = "root template meme for Power module memes — flat #has composition
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Template — Power Module
 
@@ -83,6 +82,6 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

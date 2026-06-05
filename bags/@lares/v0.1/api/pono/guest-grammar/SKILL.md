@@ -5,13 +5,12 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/guest-grammar/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 15
 manao = 16
@@ -54,7 +53,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #workflow-contract >>
@@ -255,6 +254,6 @@ Close by naming:
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

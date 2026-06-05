@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/disk-projection-law >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/disk-projection-law >>
 ```toml iam
 uri-path      = "ha.ka.ba/@lares/v0.1/docs/lararium/disk-projection-law"
 file-path     = "bags/@lares/v0.1/docs/lararium/disk-projection-law.md"
 type          = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 19
+register      = "Synthesis-Canon"
 mana          = 18
 manao         = 18
 manaoio       = 18
@@ -17,7 +16,7 @@ retain        = true
 last-reviewed = "2026-05-11"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #intent >>
 
@@ -204,6 +203,6 @@ Byte-equivalence is not required for one-file-per-decomposed-tiddler projection.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

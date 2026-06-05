@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
 file-path = "bags/@lares/v0.1/api/mu/the-syad-perspectives.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 17
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 17
 mana = 16
 manao = 18
@@ -33,7 +32,7 @@ Standpoint declares the measure.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -282,6 +281,6 @@ satirist-operational = "nasti-avaktavya"
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

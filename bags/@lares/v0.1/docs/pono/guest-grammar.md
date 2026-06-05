@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar"
 file-path = "bags/@lares/v0.1/docs/pono/guest-grammar.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 15
 manao = 16
@@ -19,7 +18,7 @@ invariant = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -103,6 +102,6 @@ The current shape keeps:
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

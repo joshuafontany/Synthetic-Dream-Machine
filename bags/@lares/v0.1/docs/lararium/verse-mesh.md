@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 file-path   = "bags/@lares/v0.1/docs/lararium/verse-mesh.md"
 type        = "text/vnd.tiddlywiki"
 register    = "DS"
-confidence  = 18
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -246,10 +245,10 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
-<<~&#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
+<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>

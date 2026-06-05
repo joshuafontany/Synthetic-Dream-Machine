@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ward >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ward >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ward"
 file-path = "bags/@sdm/v0.1/components/function/ward.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/function/ward"
 caption   = "ward"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 12
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (function): Ward — a selective protection against a named category"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Ward
 
@@ -64,6 +63,6 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

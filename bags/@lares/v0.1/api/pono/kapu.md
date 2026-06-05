@@ -5,8 +5,7 @@
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kapu"
 file-path = "bags/@lares/v0.1/api/pono/kapu.md"
 type = "text/x-memetic-wikitext"
-confidence   = 18
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 18
 manao        = 18
@@ -30,7 +29,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -98,7 +97,7 @@ Above-namespace carriers declare their register through:
 | signal | example | meaning |
 |---|---|---|
 | `namespace` IAM field | `namespace = "ॐ ँ"` | named glyph-space above base |
-| kernel control chars | `<<~&#x0001; ? ->` | positions 1–4 reserved for kernel-tier structural sigils |
+| kernel control chars | `<<~ &#x0001; ? ->` | positions 1–4 reserved for kernel-tier structural sigils |
 | role field | `role = "... kernel ..."` | explicit declaration of kernel authority |
 
 A carrier that uses kernel control characters without implementing kapu reads as `ano` or below.
@@ -144,5 +143,5 @@ This meme governs the kapu rating and above-namespace trust law.
 <<~ pranala #tiddler-sigil-kapu ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 <<~&#x0014; -> ? >>

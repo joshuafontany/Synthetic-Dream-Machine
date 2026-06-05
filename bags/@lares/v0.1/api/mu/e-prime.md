@@ -1,11 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu/e-prime"
 file-path = "bags/@lares/v0.1/api/mu/e-prime.md"
 type = "text/x-memetic-wikitext"
-confidence = 14
 register = "SC"
 manaoio = 15
 mana = 14
@@ -34,7 +33,7 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -190,6 +189,6 @@ Sustained operation at `~:e-prime[20]` that produces tortured prose without gain
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

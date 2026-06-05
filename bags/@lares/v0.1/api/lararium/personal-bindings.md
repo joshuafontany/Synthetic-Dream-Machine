@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings"
 file-path    = "bags/@lares/v0.1/api/lararium/personal-bindings.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "S"
-confidence   = 16
+register     = "Synthesis"
 mana         = 16
 manao        = 15
 manaoio      = 16
@@ -23,7 +22,7 @@ retain       = true
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #core-claim >>
 
@@ -270,6 +269,6 @@ Three layers, one operator gesture. Open the wiki; the StoryList syncs to your o
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

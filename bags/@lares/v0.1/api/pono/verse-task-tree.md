@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree"
 file-path   = "bags/@lares/v0.1/api/pono/verse-task-tree.md"
 type        = "text/x-memetic-wikitext"
-register    = "CS"
-confidence  = 18
+register    = "Synthesis-Canon"
 mana        = 18
 manao       = 17
 tagspace    = "stable"
@@ -16,7 +15,7 @@ retain      = true
 status-date = "2026-05-15"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -275,6 +274,6 @@ async-aware, deterministic semantics with the concurrency operators.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

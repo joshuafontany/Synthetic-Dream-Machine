@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools >>
 
 <<~ ahu #iam >>
 
@@ -9,8 +9,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheu
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 17
@@ -19,7 +18,7 @@ role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -86,6 +85,6 @@ Cross-reference stubs retained: nā lako grammar · truename grammar.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

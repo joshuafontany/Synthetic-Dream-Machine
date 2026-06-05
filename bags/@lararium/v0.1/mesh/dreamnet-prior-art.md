@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
 file-path    = "bags/@lararium/v0.1/mesh/dreamnet-prior-art.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 15
+register     = "Synthesis-Canon"
 mana         = 16
 manao        = 15
 manaoio      = 14
@@ -16,7 +15,7 @@ cacheable    = true
 retain       = true
 research-date = "2026-05-28"
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # DreamNet/Lares: Prior Art Research Synthesis
 
@@ -570,6 +569,6 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 <<~ pranala #to-dreamnet-architecture ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture family:research role:grounds >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

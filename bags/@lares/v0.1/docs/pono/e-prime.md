@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/e-prime >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/e-prime >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
 file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
 type = "text/x-memetic-wikitext"
-confidence   = 14
-register     = "S"
+register     = "Synthesis"
 role = "docs companion for e-prime: research provenance, braid notes, and Level guidance"
 cacheable = false
 retain = false
@@ -38,7 +37,7 @@ The invariant already holds elsewhere.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #research-braid >>
@@ -105,6 +104,6 @@ It governs how often copulas manifest in the first place.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

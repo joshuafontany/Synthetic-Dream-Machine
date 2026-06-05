@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab"
 file-path = "bags/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab.md"
 type = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -19,7 +18,7 @@ list-after   = "$:/core/ui/ViewTemplate/body"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <$reveal type="match" state="$:/state/tab/view-1-$(currentTiddler)$" default="iam" text="iam">
 <$list filter="[<currentTiddler>prefix[lar:]]" variable="ignore">
@@ -27,7 +26,7 @@ list-after   = "$:/core/ui/ViewTemplate/body"
 </$list>
 </$reveal>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
 <<~ ahu #edges >>
 
@@ -36,4 +35,4 @@ list-after   = "$:/core/ui/ViewTemplate/body"
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

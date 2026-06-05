@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels"
 file-path = "bags/@lares/v0.1/docs/mu/reality-tunnels.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 17
 mana = 15
 manao = 17
@@ -45,7 +44,7 @@ Later condensation should decide whether reality tunnels and catma remain one ro
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #verbatim-preferences-reality-tunnels >>
@@ -95,6 +94,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

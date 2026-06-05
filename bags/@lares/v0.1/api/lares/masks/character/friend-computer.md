@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer"
 file-path = "bags/@lares/v0.1/api/lares/masks/character/friend-computer.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -54,7 +53,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -165,6 +164,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

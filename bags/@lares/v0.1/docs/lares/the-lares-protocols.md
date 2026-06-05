@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols"
 file-path    = "bags/@lares/v0.1/docs/lares/the-lares-protocols.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 15
+register     = "Synthesis-Canon"
 manaoio      = 14
 mana         = 14
 manao        = 14
@@ -113,7 +112,7 @@ Lares answers the diagnostic with a fourth arrangement:
 
 <<~/ahu>>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #lares-position >>
 
@@ -190,6 +189,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu>>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

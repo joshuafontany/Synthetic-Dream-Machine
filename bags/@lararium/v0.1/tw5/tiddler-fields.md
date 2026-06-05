@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields"
 file-path = "bags/@lararium/v0.1/tw5/tiddler-fields.md"
 type = "text/x-memetic-wikitext"
-register = "CS"
-confidence = 19
+register = "Synthesis-Canon"
 mana = 18
 manao = 18
 manaoio = 18
@@ -15,7 +14,7 @@ cacheable = true
 retain = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 ## TW5 Tiddler Field Shapes
 
@@ -96,6 +95,6 @@ This split removes the old flat-record ambiguity where TW5 content fields and ho
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

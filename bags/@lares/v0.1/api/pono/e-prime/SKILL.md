@@ -5,12 +5,11 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime/SKILL >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/e-prime/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 14
 register = "SC"
 manaoio = 13
 cacheable=true
@@ -38,11 +37,11 @@ Settled wording only.
 This skill arrives when wording has already settled and needs inspection, marking, or correction.
 This skill does not weaken or reinterpret the loci.
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 E-Prime auditor opens the settled-text correction stream here.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #load-contract >>
@@ -270,6 +269,6 @@ Residue stays named honestly:
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

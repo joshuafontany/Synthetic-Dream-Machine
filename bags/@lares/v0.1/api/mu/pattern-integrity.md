@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"
 file-path   = "bags/@lares/v0.1/api/mu/pattern-integrity.md"
 type        = "text/x-memetic-wikitext"
-register    = "CS"
-confidence  = 18
+register    = "Synthesis-Canon"
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -18,7 +17,7 @@ invariant   = true
 status-date = "2026-05-02"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -218,6 +217,6 @@ Run this against any new code before merging:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

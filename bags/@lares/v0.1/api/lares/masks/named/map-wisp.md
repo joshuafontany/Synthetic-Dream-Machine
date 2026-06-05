@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp"
 file-path = "bags/@lares/v0.1/api/lares/masks/named/map-wisp.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 9
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 9
 mana = 8
 manao = 10
@@ -59,7 +58,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #corpus >>
@@ -175,6 +174,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

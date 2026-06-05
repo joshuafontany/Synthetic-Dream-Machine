@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/voices"
 file-path = "bags/@lares/v0.1/api/lares/voices.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
 register = "Synthesis"
 manaoio = 16
 mana = 17
@@ -33,7 +32,7 @@ The Voices receive rooms before session masks or task routing begin.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #head >>
@@ -400,6 +399,6 @@ payload = { priority = "support", retain = false }
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

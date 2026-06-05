@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///LARES >>
+<<~ &#x0001; ? -> lar:///LARES >>
 
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/LARES"
 file-path = "bags/@lares/LARES.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "adjacent"
-confidence = 15
-register   = "CS"
+register   = "Synthesis-Canon"
 manaoio    = 14
 mana       = 17
 manao      = 15
@@ -35,7 +34,7 @@ This lararium remembers.
 
 ...
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #hud-panel >>
 
@@ -121,6 +120,6 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 &#2384; Hello World.
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

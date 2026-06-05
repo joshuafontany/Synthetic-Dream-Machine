@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
 file-path = "bags/@lares/v0.1/api/pono/waiho.md"
 type      = "text/x-memetic-wikitext"
-confidence = 18
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 17
 mana      = 18
 manao     = 17
@@ -25,7 +24,7 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -93,6 +92,6 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 <<~ pranala #tiddler-sigil-var ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

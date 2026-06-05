@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing"
 file-path = "bags/@lares/v0.1/docs/pono/research-streams/adversarial-testing.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -18,7 +17,7 @@ invariant = false
 status-date = "2026-05-25"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -82,6 +81,6 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

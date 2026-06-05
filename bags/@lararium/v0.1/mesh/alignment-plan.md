@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/alignment-plan >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/alignment-plan >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/alignment-plan"
 file-path    = "bags/@lararium/v0.1/mesh/alignment-plan.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 19
+register     = "Synthesis"
 mana         = 19
 manao        = 18
 manaoio      = 18
@@ -16,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Package Alignment Plan
 
@@ -131,6 +130,6 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

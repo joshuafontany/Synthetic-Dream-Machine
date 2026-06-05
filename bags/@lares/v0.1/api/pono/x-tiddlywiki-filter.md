@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
 ```toml iam
 uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
 file-path        = "bags/@lares/v0.1/api/pono/x-tiddlywiki-filter.md"
 type             = "text/x-memetic-wikitext"
-confidence       = 18
-register         = "CS"
+register         = "Synthesis-Canon"
 mana             = 18
 grammar-key      = "x-tiddlywiki-filter"
 guest-mime       = "text/x-tiddlywiki-filter"
@@ -34,7 +33,7 @@ pranala data model. This meme is the pointer; that meme is the law.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #what-is-implemented >>
@@ -133,6 +132,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/invariant-plan >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/invariant-plan >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/invariant-plan"
 file-path = "bags/@lares/v0.1/docs/lares/voices/invariant-plan.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
@@ -51,7 +50,7 @@ Current target:
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #observe >>
@@ -277,6 +276,6 @@ Multi-mask composability now in base spec. No longer deferred.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

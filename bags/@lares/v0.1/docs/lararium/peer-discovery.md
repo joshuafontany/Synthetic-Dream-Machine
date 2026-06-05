@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/peer-discovery >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/peer-discovery >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/peer-discovery"
 file-path    = "bags/@lares/v0.1/docs/lararium/peer-discovery.md"
 type         = "text/vnd.tiddlywiki"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Peer Discovery Doctrine
 
@@ -234,9 +233,9 @@ the first sync message — removes the need for TLS as the transport trust layer
 - **mDNS in the browser**: not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
 
 <<~ ahu #edges >>
 

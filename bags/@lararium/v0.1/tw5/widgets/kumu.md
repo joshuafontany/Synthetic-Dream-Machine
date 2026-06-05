@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu"
 file-path = "bags/@lararium/v0.1/tw5/widgets/kumu.md"
 type          = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 role          = "anchor: KumuWidget — heleuma ka"
 heleuma       = "ka"
@@ -15,7 +14,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -45,6 +44,6 @@ export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

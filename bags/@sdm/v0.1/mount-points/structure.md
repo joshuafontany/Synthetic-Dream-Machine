@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/structure >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/structure >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/structure"
 file-path = "bags/@sdm/v0.1/mount-points/structure.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/mount-points/structure"
 caption   = "structure"
 tagspace  = "sdm"
-register  = "SP"
-confidence = 7
+register  = "Provisional-Synthesis"
 mana      = 8
 manao     = 17
 manaoio   = 6
@@ -22,7 +21,7 @@ role      = "mount-point: Structure (Site) — Power bound to a place; absorbs t
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Mount-Point — Structure (Site)
 
@@ -83,6 +82,6 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

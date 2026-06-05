@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki >>
 ```toml iam
 uri-path = "ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki"
 file-path = "bags/@elyncia/v0.1/characters/primary-characters/lady-aki.md"
 type = "text/x-memetic-wikitext"
 
 tagspace = "stable:@elyncia"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 17
 manao = 16

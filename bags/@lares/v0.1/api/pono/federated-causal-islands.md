@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
 file-path = "bags/@lares/v0.1/api/pono/federated-causal-islands.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 16
@@ -28,7 +27,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -307,6 +306,6 @@ causal-island-may = [
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

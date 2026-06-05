@@ -5,7 +5,7 @@
 <!-- Hold updates until ffz deep research resolves encoding and glyph rationalization completes. -->
 <!-- See hud.md research plan for priority ordering. -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY >>
 
 # HUD Anatomy
 
@@ -23,7 +23,7 @@
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #render-targets >>
@@ -75,6 +75,6 @@
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

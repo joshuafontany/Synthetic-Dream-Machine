@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/action-handler >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/action-handler >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lararium/action-handler"
 file-path = "bags/@lares/v0.1/api/lararium/action-handler.md"
 source-file = "packages/lararium-tw5/src/action-handler.ts"
 type      = "text/x-memetic-wikitext"
-register      = "S"
-confidence    = 15
+register      = "Synthesis"
 mana          = 16
 manao         = 16
 manaoio       = 15
@@ -21,7 +20,7 @@ status-date   = "2026-06-01"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -110,6 +109,6 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

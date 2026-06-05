@@ -1,11 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon"
 file-path = "bags/@lares/v0.1/docs/pono/circles-kowloon.md"
 type      = "text/x-memetic-wikitext"
-confidence = 18
 register  = "SC"
 mana      = 16
 role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
@@ -15,7 +14,7 @@ retain    = true
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #core-inversion >>
 
@@ -163,6 +162,6 @@ Nexus authorization circles (seeded by nexus admin at nexus boot):
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

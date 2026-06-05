@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
 file-path = "bags/@lares/v0.1/api/pono/heihei.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 16
 manao        = 16
@@ -38,7 +37,7 @@ competitive-filter selection posture (serial evaluation, first non-empty result 
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -127,6 +126,6 @@ close-pattern = '<<~\/heihei\s*>>'
 <<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

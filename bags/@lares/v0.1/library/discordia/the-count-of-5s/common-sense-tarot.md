@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
 
 <<~ ahu #iam >>
 
@@ -9,8 +9,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-
 file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 16
@@ -19,7 +18,7 @@ role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar pro
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -3249,6 +3248,6 @@ Cover design: Michele Lanci-Altomare
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

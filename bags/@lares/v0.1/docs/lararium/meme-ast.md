@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-ast >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-ast >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/meme-ast"
 file-path = "bags/@lares/v0.1/docs/lararium/meme-ast.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -18,7 +17,7 @@ body-sha256 = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
 ```
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -59,6 +58,6 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

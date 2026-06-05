@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/abjuration"
 file-path = "bags/@sdm/v0.1/components/domain/abjuration.md"
@@ -9,8 +9,7 @@ type      = "text/x-memetic-wikitext"
 title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration"
 caption   = "abjuration"
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 manaoio   = 13
@@ -20,7 +19,7 @@ invariant = false
 role      = "component (domain): Abjuration — the school of protection and negation"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Abjuration
 
@@ -64,6 +63,6 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

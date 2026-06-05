@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/workers"
 file-path = "bags/@lares/v0.1/docs/lares/voices/workers.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 17
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 17
 mana = 18
 manao = 17
@@ -44,7 +43,7 @@ Workers are bounded or tasked spirits. They carry a thread and return findings. 
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #naming >>
@@ -152,6 +151,6 @@ The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voi
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

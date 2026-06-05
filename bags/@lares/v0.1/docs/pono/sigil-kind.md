@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind"
 file-path = "bags/@lares/v0.1/docs/pono/sigil-kind.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 18
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 17
 mana      = 18
 manao     = 18
@@ -16,7 +15,7 @@ cacheable = true
 retain    = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -199,5 +198,5 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

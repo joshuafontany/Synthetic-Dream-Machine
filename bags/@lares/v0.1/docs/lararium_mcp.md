@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp"
 file-path = "bags/@lares/v0.1/docs/lararium_mcp.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 16
 manaoio      = 15
 manao        = 16
@@ -33,7 +32,7 @@ test-count   = 77
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #running >>
@@ -344,6 +343,6 @@ class MyAdapter:
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

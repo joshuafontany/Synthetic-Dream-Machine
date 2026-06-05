@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/exchange-vector"
 file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
 type = "text/x-memetic-wikitext"
-confidence = 15
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 16
 manao = 16
@@ -38,7 +37,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` WHERE-ve
 ↺ close on a `yield` vector --- WHERE the turn landed, then `-> ?`.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #law >>
@@ -81,6 +80,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

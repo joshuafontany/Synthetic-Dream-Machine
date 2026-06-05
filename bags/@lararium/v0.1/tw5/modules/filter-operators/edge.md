@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge"
 file-path   = "bags/@lararium/v0.1/tw5/modules/filter-operators/edge.md"
 type        = "text/x-memetic-wikitext"
-register    = "CS"
-confidence  = 14
+register    = "Synthesis-Canon"
 mana        = 14
 manao       = 14
 manaoio     = 13
@@ -19,7 +18,7 @@ cacheable   = true
 status-date = "2026-05-03"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -64,6 +63,6 @@ export function registerEdge(tw: TW5Instance): void {
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

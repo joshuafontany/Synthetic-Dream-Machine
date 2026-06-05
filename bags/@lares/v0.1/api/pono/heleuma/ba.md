@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ba >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ba >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ba"
 file-path = "bags/@lares/v0.1/api/pono/heleuma/ba.md"
 type = "text/x-memetic-wikitext"
 namespace    = "⊙"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 17
@@ -18,7 +17,7 @@ role         = "invariant interface: heleuma-ba — psyche/path anchor; quine-on
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -66,6 +65,6 @@ An implementing meme SHALL NOT declare `body-sha256` without also declaring `sou
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

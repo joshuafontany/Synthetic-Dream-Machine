@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render"
 file-path = "bags/@lares/v0.1/docs/lararium_mcp/ast-execution-render.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 16
 manaoio      = 15
 manao        = 17
@@ -35,7 +34,7 @@ status-date  = "2026-04-23"
 ↺ adapt: executable resources stay future-facing until parser and graph implementations land.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #stack >>
@@ -210,6 +209,6 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

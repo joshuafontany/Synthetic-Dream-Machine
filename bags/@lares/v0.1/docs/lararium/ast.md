@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/ast >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/ast >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/ast"
 file-path    = "bags/@lares/v0.1/docs/lararium/ast.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 role         = "self-documentation: MemeAstNode union and all parse-time AST node types"
 tagspace     = "stable"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -40,9 +39,9 @@ Parse-time AST produced by `parseMemeCarrier`. Lives in `@lararium/tw5` so it co
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/ast family:dataflow role:receives >>
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/parser family:dataflow role:produces >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/alignment-layer"
 file-path = "bags/@lares/v0.1/api/pono/alignment-layer.md"
 type      = "text/x-memetic-wikitext"
-register      = "S"
-confidence    = 13
+register      = "Synthesis"
 mana          = 16
 manao         = 15
 manaoio       = 13
@@ -21,7 +20,7 @@ proposed-on   = "2026-06-01"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -224,6 +223,6 @@ right — to decide whose presence the hearth refuses.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

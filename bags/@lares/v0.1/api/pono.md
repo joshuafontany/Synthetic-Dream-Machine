@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono"
 file-path = "bags/@lares/v0.1/api/pono.md"
 type = "text/x-memetic-wikitext"
-confidence = 13
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 12
 mana = 13
 manao = 14
@@ -16,7 +15,7 @@ cacheable = true
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Pono
 
@@ -55,6 +54,6 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

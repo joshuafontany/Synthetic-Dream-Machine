@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///AGENTS >>
+<<~ &#x0001; ? -> lar:///AGENTS >>
 
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/AGENTS"
 file-path = "bags/@lares/AGENTS.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "adjacent"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 18
 manao        = 17
@@ -17,7 +16,7 @@ cacheable    = true
 hydrate      = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -87,6 +86,6 @@ Human reader: watch Mu teach itself. Agent reader: carry threshold law forward. 
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

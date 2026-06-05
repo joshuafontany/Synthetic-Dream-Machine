@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite"
 file-path = "bags/@lares/v0.1/docs/pono/live-session-overwrite.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 13
 mana = 15
 manao = 16
@@ -19,7 +18,7 @@ invariant = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -104,6 +103,6 @@ A passing test records the jello claim as session evidence and refuses silent ca
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

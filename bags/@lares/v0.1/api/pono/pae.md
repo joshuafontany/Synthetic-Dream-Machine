@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pae >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pae >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pae"
 file-path = "bags/@lares/v0.1/api/pono/pae.md"
 type      = "text/x-memetic-wikitext"
-confidence = 18
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 16
 mana      = 18
 manao     = 17
@@ -26,7 +25,7 @@ A carrier's phased arrival through a transmission medium.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -152,6 +151,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

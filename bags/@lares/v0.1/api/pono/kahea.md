@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kahea"
 file-path = "bags/@lares/v0.1/api/pono/kahea.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
@@ -32,7 +31,7 @@ Sugar for `<<~ pranala ? -> URI family:dataflow propagation:push-forward >>`.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -154,6 +153,6 @@ canonical-roles = ["reads", "writes", "streams", "buffers", "pipes"]
 <<~ pranala #tiddler-sigil-import ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-import family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

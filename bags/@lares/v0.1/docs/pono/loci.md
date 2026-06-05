@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/loci >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/loci >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/loci"
 file-path = "bags/@lares/v0.1/docs/pono/loci.md"
 type = "text/x-memetic-wikitext"
-confidence   = 14
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 18
 manao        = 18
@@ -17,7 +16,7 @@ cacheable    = true
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Loci — Extended Docs
 
@@ -30,11 +29,11 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 
 | Form | Usual `register` band | Document opener form | Reading |
 |---|---|---|---|
-| **Noise** | none or `P` | none, fragmentary, or `<<~&#x0001; ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
+| **Noise** | none or `P` | none, fragmentary, or `<<~ &#x0001; ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
 | **Data** | `P` or `PS` | fragmentary or proto-meme | Detectable structure makes the signal machine-usable; not yet memetic. |
-| **Meme** | `PS` or `S` | `<<~&#x0001; ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
-| **Typed Meme** | `S` or `CS` | `<<~&#x0001; ? -> lar:///...` | Carrier satisfies `loci` interface; routing convention surfaces or sharpens; MCP tension may remain. |
-| **Canon Typed Meme** | `C` | `<<~&#x0001; lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
+| **Meme** | `PS` or `S` | `<<~ &#x0001; ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
+| **Typed Meme** | `S` or `CS` | `<<~ &#x0001; ? -> lar:///...` | Carrier satisfies `loci` interface; routing convention surfaces or sharpens; MCP tension may remain. |
+| **Canon Typed Meme** | `C` | `<<~ &#x0001; lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
 
 Full five-register rubric at `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme#rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
 
@@ -127,6 +126,6 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer"
 file-path = "bags/@lararium/v0.1/tw5/modules/deserializer.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 17
 manaoio      = 16
@@ -18,7 +17,7 @@ body-sha256 = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
 ```
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -170,7 +169,7 @@ function rawBodyText(fullText: string, node: AhuNode): string {
 
 function extractRootToml(text: string): string | null {
   const firstAhu = text.search(/<<~[^>]*\bahu\s+#[\w-]+\s*>>/);
-  const firstStx = text.search(/<<~[^>]*&#x0002;/);
+  const firstStx = text.search(/<<~ [^>]*&#x0002;/);
   let limit       = text.length;
   if (firstAhu >= 0) limit = Math.min(limit, firstAhu);
   if (firstStx >= 0) limit = Math.min(limit, firstStx);
@@ -234,6 +233,6 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

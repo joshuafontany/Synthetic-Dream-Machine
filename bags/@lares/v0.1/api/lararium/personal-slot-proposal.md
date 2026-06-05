@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal"
 file-path    = "bags/@lares/v0.1/api/lararium/personal-slot-proposal.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 13
+register     = "Synthesis"
 mana         = 14
 manao        = 14
 manaoio      = 13
@@ -17,7 +16,7 @@ approved-on  = "2026-05-30"
 uri-shape    = "lar:///ha.ka.ba/@personal"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #problem >>
 
@@ -266,6 +265,6 @@ Q6 (@draft scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-f
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

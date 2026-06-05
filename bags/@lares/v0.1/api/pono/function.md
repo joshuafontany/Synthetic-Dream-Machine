@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/function >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/function >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/function"
 file-path = "bags/@lares/v0.1/api/pono/function.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "S"
+register     = "Synthesis"
 manaoio      = 17
 mana         = 17
 manao        = 17
@@ -30,7 +29,7 @@ the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the dec
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -72,6 +71,6 @@ TW5 native equivalent:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

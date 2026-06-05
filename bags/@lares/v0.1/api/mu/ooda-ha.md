@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
 file-path = "bags/@lares/v0.1/api/mu/ooda-ha.md"
 type = "text/x-memetic-wikitext"
-confidence = 18
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 18
 mana = 18
 manao = 18
@@ -55,7 +54,7 @@ A loop that skips Aftermath has stopped serving and commenced managing.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -155,6 +154,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "⤴", "↺"]
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

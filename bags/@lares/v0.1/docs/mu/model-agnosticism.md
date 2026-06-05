@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism"
 file-path = "bags/@lares/v0.1/docs/mu/model-agnosticism.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
@@ -45,7 +44,7 @@ Later condensation should leave only what the docs shelf needs after the live AP
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #verbatim-preferences-foundation >>
@@ -142,6 +141,6 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

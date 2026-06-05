@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip"
 file-path = "bags/@sdm/v0.1/projections/abilities/ftls-card/neural-whip.md"
@@ -13,8 +13,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -24,7 +23,7 @@ invariant = false
 role      = "FTLS card projection: Neural Whip — playable surface with clickable component pills"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Neural Whip — FTLS Card
 
@@ -59,6 +58,6 @@ A neural tentacle of stuckforce lashes out and strikes **against Defense** — n
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

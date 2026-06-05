@@ -1,20 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/island-protocol"
 file-path    = "bags/@lararium/v0.1/mesh/island-protocol.md"
 source-file  = "packages/lararium-mesh/src/island-protocol.ts"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 14
+register     = "Synthesis-Canon"
 mana         = 14
 role         = "island message envelope schema: all vessel ↔ causal-island message types, Island Sovereignty Law, and envelope factories"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -91,6 +90,6 @@ Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

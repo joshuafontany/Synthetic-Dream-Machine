@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/hud"
 file-path = "bags/@lares/v0.1/api/lares/hud.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 13
-register = "S"
+register = "Synthesis"
 manaoio = 12
 mana = 14
 manao = 14
@@ -33,7 +32,7 @@ The instrument panel belongs to the mechanics house, not the threshold.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #head >>
@@ -93,6 +92,6 @@ This child meme stays small enough to hydrate on every cold start.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

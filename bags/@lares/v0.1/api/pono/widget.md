@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/widget >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/widget >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/widget"
 file-path = "bags/@lares/v0.1/api/pono/widget.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "S"
+register     = "Synthesis"
 manaoio      = 17
 mana         = 17
 manao        = 17
@@ -33,7 +32,7 @@ No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for c
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -72,6 +71,6 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

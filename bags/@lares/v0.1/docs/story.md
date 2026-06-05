@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/story >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/story >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/story"
 file-path = "bags/@lares/v0.1/docs/story.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 14
-register = "S"
+register = "Synthesis"
 manaoio = 15
 mana = 15
 manao = 16
@@ -18,7 +17,7 @@ retain = false
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -65,6 +64,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

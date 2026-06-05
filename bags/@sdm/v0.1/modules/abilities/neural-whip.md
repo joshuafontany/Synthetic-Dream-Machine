@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip"
 file-path = "bags/@sdm/v0.1/modules/abilities/neural-whip.md"
@@ -16,8 +16,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -29,7 +28,7 @@ role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tenta
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Neural Whip
 
@@ -97,6 +96,6 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 - If a future neural attack jolts the mind rather than grips the body, that wants `domain/noosphere` (carried in v0.0) promoted on first query.
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

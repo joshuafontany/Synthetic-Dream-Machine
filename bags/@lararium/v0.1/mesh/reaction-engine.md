@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"
 file-path    = "bags/@lararium/v0.1/mesh/reaction-engine.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 manaoio      = 16
@@ -17,7 +16,7 @@ retain       = true
 invariant    = true
 status-date  = "2026-05-28"
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -173,6 +172,6 @@ One wave. All observers. Same synchronous context.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

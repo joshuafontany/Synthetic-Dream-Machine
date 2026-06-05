@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/hooponopono"
 file-path = "bags/@lares/v0.1/api/pono/hooponopono.md"
 type = "text/x-memetic-wikitext"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 15
 mana         = 17
 manao        = 17
@@ -32,7 +31,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 ✶ gather the live claim, the target meme, affected invariants, and the operator's declared intent.
@@ -122,6 +121,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

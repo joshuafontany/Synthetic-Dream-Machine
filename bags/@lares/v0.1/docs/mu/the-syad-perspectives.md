@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives"
 file-path = "bags/@lares/v0.1/docs/mu/the-syad-perspectives.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "S"
+register = "Synthesis"
 manaoio = 16
 mana = 15
 manao = 17
@@ -43,7 +42,7 @@ Different measure.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #saptabhangi >>
@@ -126,6 +125,6 @@ The archive-derived research bundle lives at:
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

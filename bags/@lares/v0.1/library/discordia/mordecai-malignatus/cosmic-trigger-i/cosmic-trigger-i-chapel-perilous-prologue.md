@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue >>
 
 <<~ ahu #iam >>
 
@@ -9,8 +9,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-tr
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 17
@@ -19,7 +18,7 @@ role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locu
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #meme-header >>
@@ -319,6 +318,6 @@ stubbornness, dumb luck") describes how he personally navigated — not the form
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

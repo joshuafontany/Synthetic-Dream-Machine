@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
 file-path = "bags/@lares/v0.1/api/pono/orichalcum-capabilities.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 16
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 16
 manao        = 16
@@ -28,7 +27,7 @@ Authority gate for rooms, edge islands, and canon MOVE.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -299,6 +298,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

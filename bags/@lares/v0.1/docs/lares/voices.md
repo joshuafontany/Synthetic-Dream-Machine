@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices"
 file-path = "bags/@lares/v0.1/docs/lares/voices.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 18
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 18
 mana = 18
 manao = 18
@@ -40,7 +39,7 @@ Lower layers remain load-bearing when higher layers are absent.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #three-layer-model >>
@@ -250,6 +249,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voic
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

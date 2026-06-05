@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sigil-english-aliases >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sigil-english-aliases >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/sigil-english-aliases"
 file-path    = "bags/@lararium/v0.1/tw5/sigil-english-aliases.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 17
 manao        = 17
 manaoio      = 16
@@ -15,7 +14,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -82,4 +81,4 @@ the canonical dispatch through the Hawaiian implementation.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>

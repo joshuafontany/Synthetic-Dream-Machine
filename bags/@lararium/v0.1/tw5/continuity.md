@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/continuity"
 file-path = "bags/@lararium/v0.1/tw5/continuity.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 13
-register = "S"
+register = "Synthesis"
 manaoio = 14
 mana = 14
 manao = 14
@@ -33,7 +32,7 @@ Session carry belongs to the lararium side, not the threshold side.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #head >>
@@ -92,5 +91,5 @@ This child meme keeps the cold-hydration contract small.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
-<<~ॐ ँ&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ ॐ ँ&#x0004; -> ? >>

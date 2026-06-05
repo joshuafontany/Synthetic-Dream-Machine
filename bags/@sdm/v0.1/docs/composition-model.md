@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/docs/composition-model"
 file-path = "bags/@sdm/v0.1/docs/composition-model.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 15
 manao     = 18
 manaoio   = 14
@@ -20,7 +19,7 @@ role      = "operator/dev doctrine: the Powers composition model — entity + mo
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Composition Model — Operator / Dev Doc
 
@@ -121,6 +120,6 @@ Full lineage table lives in the epic. See edges.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

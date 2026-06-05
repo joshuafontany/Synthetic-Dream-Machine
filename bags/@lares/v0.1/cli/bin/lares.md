@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/cli/bin/lares >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/cli/bin/lares >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/cli/bin/lares"
 file-path    = "bags/@lares/v0.1/cli/bin/lares.md"
 type         = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 10
+register     = "Synthesis-Canon"
 mana         = 10
 role         = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
 ```
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 The `lares` binary holds the operator's only top-level ceremony surface. It dispatches subcommands registered in a single COMMANDS table (init, status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma, act, help). Each command is a thin async handler:

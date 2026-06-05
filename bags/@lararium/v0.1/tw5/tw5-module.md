@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
 file-path = "bags/@lararium/v0.1/tw5/tw5-module.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -17,7 +16,7 @@ retain       = true
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 ## TW5 Module Interface
 
@@ -41,7 +40,7 @@ corpus load.
 
 ### Body
 
-The meme body (between `<<~&#x0002; >>` and `<<~&#x0003; >>`) MUST be a self-contained CJS JS bundle
+The meme body (between `<<~ &#x0002; >>` and `<<~ &#x0003; >>`) MUST be a self-contained CJS JS bundle
 with no unresolved external imports. `tiddlywiki` MAY be referenced as the global `$tw` — the host
 TW5 instance provides it at injection time.
 
@@ -74,6 +73,6 @@ boots correctly in offline or cold-start conditions before the corpus is loaded.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

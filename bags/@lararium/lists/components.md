@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/lists/components >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/lists/components >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lararium/lists/components"
 file-path = "bags/@lararium/lists/components.md"
 type      = "text/vnd.tiddlywiki"
-register  = "S"
-confidence = 13
+register  = "Synthesis"
 mana      = 13
 manao     = 16
 role      = "TW5 procedure: render every @-bag tag on the current tiddler as a clickable tag-pill"
@@ -15,7 +14,7 @@ retain    = true
 tags      = ["$:/tags/Global"]
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -44,6 +43,6 @@ tags      = ["$:/tags/Global"]
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

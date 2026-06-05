@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/mu/chao"
 file-path = "bags/@lares/v0.1/api/mu/chao.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence = 16
-register   = "CS"
+register   = "Synthesis-Canon"
 manaoio    = 14
 mana       = 17
 manao      = 16
@@ -42,7 +41,7 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #ooda-ha >>
@@ -163,6 +162,6 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

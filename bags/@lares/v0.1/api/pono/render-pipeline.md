@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/render-pipeline"
 file-path = "bags/@lares/v0.1/api/pono/render-pipeline.md"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 17
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 16
 mana      = 17
 manao     = 17
@@ -19,7 +18,7 @@ source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -212,5 +211,5 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>

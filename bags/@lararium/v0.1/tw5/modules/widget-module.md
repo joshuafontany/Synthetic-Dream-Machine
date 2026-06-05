@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module"
 file-path = "bags/@lararium/v0.1/tw5/modules/widget-module.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 manaoio      = 16
@@ -18,7 +17,7 @@ source-symbol = "createLarariumWidgets"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -108,6 +107,6 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

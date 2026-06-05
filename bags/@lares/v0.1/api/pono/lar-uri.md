@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
 file-path = "bags/@lares/v0.1/api/pono/lar-uri.md"
 type = "text/x-memetic-wikitext"
-confidence = 17
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 17
 manao = 17
@@ -52,7 +51,7 @@ Session form names the speaker through the authority. It MUST NOT appear in othe
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #path-taxonomy >>
@@ -155,6 +154,6 @@ WHERE (path) → SECTION (fragment).
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

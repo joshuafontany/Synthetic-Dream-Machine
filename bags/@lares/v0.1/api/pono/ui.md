@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ui >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ui >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ui"
 file-path = "bags/@lares/v0.1/api/pono/ui.md"
 type      = "text/x-memetic-wikitext"
-confidence = 15
-register  = "S"
+register  = "Synthesis"
 role      = "query surface sigil — evaluates TW5 filter and renders result list; English alias: \\query"
 cacheable = true
 retain    = true
@@ -28,7 +27,7 @@ and renders whatever answers.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -65,6 +64,6 @@ TW5 filter expansion:
 <<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

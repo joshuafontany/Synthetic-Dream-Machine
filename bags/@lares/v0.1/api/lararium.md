@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lararium"
 file-path = "bags/@lares/v0.1/api/lararium.md"
 type = "text/x-memetic-wikitext"
 tagspace  = "stable"
-confidence = 14
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 14
 mana      = 16
 manao     = 15
@@ -47,7 +46,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #core-hydration >>
@@ -81,6 +80,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

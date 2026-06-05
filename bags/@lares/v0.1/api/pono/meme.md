@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme"
 file-path = "bags/@lares/v0.1/api/pono/meme.md"
 type = "text/x-memetic-wikitext"
-confidence = 15
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 14
 mana = 17
 manao = 17
@@ -40,7 +39,7 @@ through a social network.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -160,6 +159,6 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

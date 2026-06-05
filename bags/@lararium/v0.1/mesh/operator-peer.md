@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/operator-peer"
 file-path    = "bags/@lararium/v0.1/mesh/operator-peer.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 19
+register     = "Synthesis"
 mana         = 19
 manao        = 19
 manaoio      = 18
@@ -17,7 +16,7 @@ retain       = true
 hydrate      = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Operator-Vessel Contract
 
@@ -170,6 +169,6 @@ identical ea rights.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

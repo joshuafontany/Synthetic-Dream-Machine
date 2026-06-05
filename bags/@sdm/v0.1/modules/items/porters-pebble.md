@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble"
 file-path = "bags/@sdm/v0.1/modules/items/porters-pebble.md"
@@ -14,8 +14,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -27,7 +26,7 @@ role      = "Item module: Porter's Pebble — a found stuckforce relic that hold
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Porter's Pebble
 
@@ -91,6 +90,6 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 - **Container sub-rule** (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

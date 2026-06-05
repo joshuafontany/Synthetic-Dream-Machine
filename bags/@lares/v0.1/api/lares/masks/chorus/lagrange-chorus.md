@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus"
 file-path = "bags/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 7
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 7
 mana = 7
 manao = 9
@@ -54,7 +53,7 @@ label = "parent-index-entry"
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #concept >>
@@ -168,6 +167,6 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

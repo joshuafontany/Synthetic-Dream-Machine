@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
 file-path = "bags/@lares/v0.1/api/pono/wehe.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 16
@@ -36,7 +35,7 @@ Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a bloc
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -122,6 +121,6 @@ close-pattern = '<<~\/wehe\s*>>'
 <<~ pranala #tiddler-sigil-define ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define family:control role:alias >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

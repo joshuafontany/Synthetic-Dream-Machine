@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tiddler-record >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tiddler-record >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/tiddler-record"
 file-path = "bags/@lares/v0.1/api/pono/tiddler-record.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 18
 manao        = 18
 manaoio      = 18
@@ -30,7 +29,7 @@ Carrier text functions as a projection artifact — not as an Automerge storage 
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -104,6 +103,6 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

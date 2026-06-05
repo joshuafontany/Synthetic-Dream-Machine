@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/artifacts >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/artifacts >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
 file-path = "bags/@lares/v0.1/docs/graph/artifacts.md"
 type = "text/x-memetic-wikitext"
 tagspace     = "stable"
-register     = "CS"
-confidence   = 18
+register     = "Synthesis-Canon"
 mana         = 17
 manaoio      = 16
 manao        = 17
@@ -27,7 +26,7 @@ status-date  = "2026-04-24"
 ↺ MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #content-addressing >>
@@ -305,6 +304,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

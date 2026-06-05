@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks"
 file-path = "bags/@lares/v0.1/docs/lares/voices/masks.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-confidence = 16
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 16
 mana = 16
 manao = 16
@@ -45,7 +44,7 @@ When a session context declares "action inside a lararium node," the Thirteen su
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #anatomy >>
@@ -399,6 +398,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

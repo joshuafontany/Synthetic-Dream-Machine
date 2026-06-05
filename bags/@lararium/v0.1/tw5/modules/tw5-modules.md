@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules"
 file-path = "bags/@lararium/v0.1/tw5/modules/tw5-modules.md"
 type    = "application/javascript"
 module-type     = "library"
 tw5-module-name = "lararium-tw5-modules"
-register        = "CS"
-confidence      = 19
+register        = "Synthesis-Canon"
 mana            = 19
 manao           = 18
 manaoio         = 18
@@ -21,11 +20,11 @@ body-sha256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
 <<~ ahu #source >>
 
@@ -51,4 +50,4 @@ Run `pnpm --filter @lararium/tw5 build` to regenerate.
 
 <<~/ahu >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

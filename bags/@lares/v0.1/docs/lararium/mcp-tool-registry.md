@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/mcp-tool-registry >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/mcp-tool-registry >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium/mcp-tool-registry"
 file-path = "bags/@lares/v0.1/docs/lararium/mcp-tool-registry.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 17
+register      = "Synthesis-Canon"
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -30,7 +29,7 @@ Two env guards gate write access and canvas connectivity.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -146,6 +145,6 @@ inputs      = ["uri: string"]
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

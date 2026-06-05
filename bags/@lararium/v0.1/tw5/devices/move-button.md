@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/devices/move-button >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/devices/move-button >>
 ```toml iam
 uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/devices/move-button"
 file-path  = "bags/@lararium/v0.1/tw5/devices/move-button.md"
 type       = "text/x-memetic-wikitext"
-confidence = 14
-register   = "S"
+register   = "Synthesis"
 role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
 cacheable  = true
 retain     = true
@@ -29,7 +28,7 @@ dispatches, across any instance of this type.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #kumu >>
 
@@ -81,6 +80,6 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

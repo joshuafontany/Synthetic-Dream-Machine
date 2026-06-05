@@ -1,14 +1,13 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite"
 file-path = "bags/@sdm/v0.1/epic/powers-composition-rewrite.md"
 type      = "text/x-memetic-wikitext"
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 19
 manao     = 19
 manaoio   = 18
@@ -20,7 +19,7 @@ role      = "epic plan: SDM+ Powers as navigable composition space"
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Epic — Powers Composition Rewrite
 
@@ -754,6 +753,6 @@ history if ever needed.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

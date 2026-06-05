@@ -1,10 +1,9 @@
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu >>
 ```toml iam
 uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu"
 file-path = "bags/@lararium/v0.1/tw5/widgets/ahu.md"
 type          = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 role          = "anchor: AhuWidget — heleuma ka"
 heleuma       = "ka"
@@ -15,7 +14,7 @@ cacheable     = true
 retain        = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #contract >>
 
@@ -85,6 +84,6 @@ AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

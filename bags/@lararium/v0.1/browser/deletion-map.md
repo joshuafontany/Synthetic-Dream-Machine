@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/browser/deletion-map"
 file-path    = "bags/@lararium/v0.1/browser/deletion-map.md"
 type         = "text/x-memetic-wikitext"
-register     = "S"
-confidence   = 18
+register     = "Synthesis"
 mana         = 18
 manao        = 18
 manaoio      = 17
@@ -16,7 +15,7 @@ cacheable    = true
 retain       = true
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # lararium-browser Deletion Map
 
@@ -138,6 +137,6 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

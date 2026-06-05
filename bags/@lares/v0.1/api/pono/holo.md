@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/holo"
 file-path = "bags/@lares/v0.1/api/pono/holo.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
 cacheable = true
 retain    = true
@@ -33,7 +32,7 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -76,6 +75,6 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

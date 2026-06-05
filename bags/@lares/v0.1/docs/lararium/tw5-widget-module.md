@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-widget-module >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/tw5-widget-module >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium/tw5-widget-module"
 file-path = "bags/@lares/v0.1/docs/lararium/tw5-widget-module.md"
 type = "text/x-memetic-wikitext"
-register     = "CS"
-confidence   = 17
+register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 manaoio      = 16
@@ -17,7 +16,7 @@ source       = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/widget-module"
 
 
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #overview >>
 
@@ -47,6 +46,6 @@ When the boot gate passes at least one corpus meme, `tw5-modules` is loaded as a
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -5,13 +5,12 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL"
 file-path = "bags/@lares/v0.1/api/pono/loci/SKILL.md"
 type = "text/x-memetic-wikitext"
-confidence = 14
-register = "CS"
+register = "Synthesis-Canon"
 manaoio = 13
 mana = 14
 manao = 16
@@ -37,11 +36,11 @@ Treat that loci as constitutional.
 This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 Loci SKILL opens the procedural stream here.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #load-contract >>
@@ -131,7 +130,7 @@ Read the target before any decomposition.
 
 - the full `lar:` URI string, verbatim
 - known `meme-type`, prior rating posture, or prior canon-MOVE context if present
-- document opener form: `<<~&#x0001; ? -> ...` (unbound) or `<<~&#x0001; lar:///...` (confirmed canon)
+- document opener form: `<<~ &#x0001; ? -> ...` (unbound) or `<<~ &#x0001; lar:///...` (confirmed canon)
 - visible convention surfaces: `#iam`, `register`, `file-path`, canon-MOVE note
 - first-pass or re-resolution of a previously declared-unresolved address
 - calling context: mid-parse urgency differs from session-load intake
@@ -259,6 +258,6 @@ Aftermath that names only resolved URIs hides the pressure that matters most.
 <<~/ahu >>
 
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

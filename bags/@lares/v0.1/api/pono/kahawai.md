@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahawai"
 file-path = "bags/@lares/v0.1/api/pono/kahawai.md"
 type      = "text/x-memetic-wikitext"
-confidence = 15
-register  = "S"
+register  = "Synthesis"
 role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
 cacheable = true
 retain    = true
@@ -28,7 +27,7 @@ evaluation with a new condition, not parallel — a branching stream, not a race
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -74,6 +73,6 @@ English alias forms:
 <<~ pranala #tiddler-sigil-kahawai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahawai family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kau"
 file-path = "bags/@lares/v0.1/api/pono/kau.md"
 type      = "text/x-memetic-wikitext"
-confidence = 18
-register  = "CS"
+register  = "Synthesis-Canon"
 manaoio   = 17
 mana      = 18
 manao     = 18
@@ -25,7 +24,7 @@ A device placed with intention. The instance takes its own address.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #etymology >>
 
@@ -123,6 +122,6 @@ This maps directly to the Ink & Switch island model: each automerge object is a 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

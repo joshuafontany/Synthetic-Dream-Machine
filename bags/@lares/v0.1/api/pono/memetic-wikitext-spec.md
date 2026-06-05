@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec >>
 
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec"
 file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext-spec.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
-confidence   = 18
 register     = "SC"
 mana         = 18
 manao        = 18
@@ -27,7 +26,7 @@ invariant    = false
 ↺ name conflicts precisely; a gap left implicit will silently corrupt authoring practice.
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 
 <<~ ahu #purpose >>
@@ -69,8 +68,8 @@ The `<<` `>>` angle-bracket pair is the outer delimiter family for all active si
 | `<<~/` | Sharktooth close — ends a block sigil | `<<~/ahu >>`, `<<~/define >>` |
 | `<<~!` | Pragma mode — definition sigils (`\define` / `\procedure` / `\function` equivalents) | `<<~! define name(params) >>` |
 | `<<~?` | Unresolved-pressure mode | `<<~? #fragment >>` (open question worksite) |
-| `<<~&#x0001;` | Document header control character | file-level header edge |
-| `<<~&#x0004;` | Document footer control character | file-level footer edge |
+| `<<~ &#x0001;` | Document header control character | file-level header edge |
+| `<<~ &#x0004;` | Document footer control character | file-level footer edge |
 | `<<` *(bare)* | **Reserved.** Not currently valid Lararium syntax. TW5 macro-call compat deferred. | — |
 
 ### The sharktooth mark
@@ -305,9 +304,9 @@ Special form of `ahu`. Contains TOML metadata. Must be first. Not repeated.
 ### Header / footer edge (`? ->`)
 
 ```
-<<~&#x0001; ? -> lar:///canonical-uri >>   ← file header
-<<~&#x0003; >>
-<<~&#x0004; -> ?                        >>   ← file footer
+<<~ &#x0001; ? -> lar:///canonical-uri >>   ← file header
+<<~ &#x0003; >>
+<<~ &#x0004; -> ?                        >>   ← file footer
 ```
 
 Document-level DAG sockets. Required in well-formed carriers.
@@ -1271,6 +1270,6 @@ All eight families are wired in `pranala-parser.ts` (`KNOWN_FAMILIES`, `FAMILY_C
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

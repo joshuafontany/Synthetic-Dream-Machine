@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils"
 file-path = "bags/@lares/v0.1/api/pono/carrier-sigils.md"
 type  = "text/x-memetic-wikitext"
-register      = "CS"
-confidence    = 18
+register      = "Synthesis-Canon"
 mana          = 18
 manao         = 18
 manaoio       = 17
@@ -33,12 +32,12 @@ Control characters in kernel-tier sigils carry **three simultaneous roles**:
 3. **Elevated resonance** — the kapu range (DC1–DC4: &#x0011;–&#x0014;) reaches admin-only space; standard operators cannot produce these characters; only admin-tier principals can author kapu-range carriers
 
 Namespace glyphs (e.g. `ॐ ँ` in mu.md, `⊙` in pono) prefix the **opener (SOH) only** as a visible elevated-resonance mark.
-EOT is always bare — `<<~&#x0004; -> ? >>` — regardless of trust tier.
+EOT is always bare — `<<~ &#x0004; -> ? >>` — regardless of trust tier.
 OODA-HA glyphs annotate the six-phase flow inside #ooda-ha slots.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -56,7 +55,7 @@ These roles MUST NOT be separated or overridden independently.
 **Namespace prefix**: a carrier prefixes its **opener (SOH) only** with namespace glyphs to signal
 elevated resonance visibly in plain text. The mu carrier uses `ॐ ँ`; pono uses `⊙`. Parser accepts the
 namespace prefix as optional; its presence conveys elevated trust to human and AST readers.
-EOT is always bare (`<<~&#x0004; -> ? >>`) regardless of trust tier — the namespace signal belongs on the opener.
+EOT is always bare (`<<~ &#x0004; -> ? >>`) regardless of trust tier — the namespace signal belongs on the opener.
 
 STX (&#x0002;) and ETX (&#x0003;) mark the open/close of the meme body — bare pragmas, no ahu content.
 EOT (&#x0004;) / DC4 (&#x0014;) closes the carrier throat; the return-sigil follows.
@@ -105,8 +104,8 @@ EOT  = { char = "&#x0004;", kapu-alias = "&#x0014; (DC4)", role = "carrier throa
 doctype = "<!-- <<~ !DOCTYPE = lar:///...>> -->"
 opener  = "<<~[namespace-glyphs?][SOH|DC1] ? -> lar:///URI >>"
 iam     = "<<~ ahu #iam >> ... <<~/ahu >>"
-stx     = "<<~[prefix?]&#x0002; >>"                      # meme body open
-etx     = "<<~[prefix?]&#x0003; >>"                      # meme body close
+stx     = "<<~ [prefix?]&#x0002; >>"                      # meme body open
+etx     = "<<~ [prefix?]&#x0003; >>"                      # meme body close
 eot     = "<<~[EOT|DC4] -> ? >>"                         # carrier throat close — always bare
 
 # CarrierShape — parse result, always present after extraction
@@ -172,6 +171,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

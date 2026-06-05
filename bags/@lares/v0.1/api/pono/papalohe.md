@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/papalohe"
 file-path = "bags/@lares/v0.1/api/pono/papalohe.md"
 type = "text/x-memetic-wikitext"
-confidence   = 17
-register     = "CS"
+register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
@@ -31,7 +30,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
 
@@ -138,6 +137,6 @@ Two values, distinct Verse-side origins:
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe family:control role:implements >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hana >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hana >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
 file-path = "bags/@lares/v0.1/api/pono/hana.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ grammar interpreter consumes the body, it closes.
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -66,6 +65,6 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

@@ -1,13 +1,12 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lararium-hud >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lararium-hud >>
 ```toml iam
 uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/the-lararium-hud"
 file-path      = "bags/@lares/v0.1/docs/lares/the-lararium-hud.md"
 type           = "text/x-memetic-wikitext"
 tagspace       = "stable"
-register       = "CS"
-confidence     = 14
+register       = "Synthesis-Canon"
 manaoio        = 14
 mana           = 15
 manao          = 14
@@ -54,7 +53,7 @@ The home intranet RPG session — a Referee running encounters, managing NPCs, r
 
 <<~/ahu>>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #uefn-ontology >>
 
@@ -462,6 +461,6 @@ These three message types cover the full P.3 boundary surface. Lock them before 
 
 <<~/ahu>>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

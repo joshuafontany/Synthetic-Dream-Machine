@@ -1,12 +1,11 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pono-sigil >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pono-sigil >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pono-sigil"
 file-path = "bags/@lares/v0.1/api/pono/pono-sigil.md"
 type      = "text/x-memetic-wikitext"
-confidence = 16
-register  = "S"
+register  = "Synthesis"
 role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
 cacheable = true
 retain    = true
@@ -30,7 +29,7 @@ the same word because a `pono` edge carries a claim of alignment — the naming 
 
 <<~/ahu >>
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #law >>
 
@@ -64,6 +63,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

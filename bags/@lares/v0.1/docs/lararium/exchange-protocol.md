@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol >>
 ```toml iam
 uri-path   = "ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol"
 file-path  = "bags/@lares/v0.1/docs/lararium/exchange-protocol.md"
 type       = "text/x-memetic-wikitext"
 role       = "agent-facing exchange flow meme: intent-vector/HUD bracket and HA handoff"
 tagspace   = "stable"
-register   = "S"
-confidence = 17
+register   = "Synthesis"
 retain     = false
 invariant  = false
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #exchange-flow >>
 ## Exchange Flow — Agent Contract
@@ -60,6 +59,6 @@ emit fenced CLOSE: HUD + aftermath-vector -> ?
 <<~ pranala #voices-core ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#exchange-protocol family:control role:condensed-into >>
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>

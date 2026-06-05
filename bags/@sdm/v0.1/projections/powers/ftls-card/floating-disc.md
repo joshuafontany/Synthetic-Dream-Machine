@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc >>
 ```toml iam
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc"
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/floating-disc.md"
@@ -14,8 +14,7 @@ tags = [
 ]
 
 tagspace  = "sdm"
-register  = "CS"
-confidence = 15
+register  = "Synthesis-Canon"
 mana      = 14
 manao     = 17
 manaoio   = 15
@@ -25,7 +24,7 @@ invariant = false
 role      = "FTLS card projection: Floating Disc — playable surface with clickable component pills"
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 # Floating Disc — FTLS Card
 
@@ -60,6 +59,6 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu >>
 
-<<~&#x0003; >>
+<<~ &#x0003; >>
 
-<<~&#x0004; -> ? >>
+<<~ &#x0004; -> ? >>
