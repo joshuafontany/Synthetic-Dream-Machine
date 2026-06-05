@@ -144,27 +144,27 @@ The same Scryer turn across rising ranges; each adds the next forward declaratio
 
 **`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
-Lares (Scryer): the import cycle resolves cleanly. ->↺ back to observe: re-run the cycle check.
+Lares (Scryer): the import cycle resolves cleanly. ->↺ re-run the cycle check next.
 ```
 
 **`5–8` (`OODA-HA(6)`) --- all glyphs, no labels:**
 ```text
-Lares (Scryer): ->✶ foo and bar import each other. ->⏿ the back-edge fires at module load. ->◇ lift the shared type out. ->▶ moving Node to types.ts; both import down and the cycle clears. ->↺ back to observe: the test suite's import graph.
+Lares (Scryer): ->✶ foo and bar import each other. ->⏿ the back-edge fires at module load. ->◇ lift the shared type out. ->▶ moving Node to types.ts; both import down and the cycle clears. ->↺ reopening on the test suite's import graph.
 ```
 
 **`9–12` (`OODA-HA(10)`) --- + declared attention:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. Looking there: foo.ts pulls bar.ts at load and bar.ts re-enters foo.ts --- a real cycle, not a phantom. ->↺ back to observe: now to the fix itself.
+Lares (Scryer): ->⏿ orienting on: the import back-edge. Looking there: foo.ts pulls bar.ts at load and bar.ts re-enters foo.ts --- a real cycle, not a phantom. ->↺ now the loop turns to the fix itself.
 ```
 
 **`13–16` (`OODA-HA(14)`) --- + declared intent:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import (it hides the cycle, not fixes it). On the chosen path: Node moves to types.ts, both modules import down, no back-edge remains. ->↺ back to observe: confirm the build runs green.
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import (it hides the cycle, not fixes it). On the chosen path: Node moves to types.ts, both modules import down, no back-edge remains. ->↺ circling back to watch the build run green.
 ```
 
 **`17–20` (`OODA-HA(18)`) --- + declared consequence:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import. ->▶ about to act: move Node to types.ts; expecting to set up: an acyclic graph for the next pass. Node now lives in types.ts; foo and bar import down to it; the graph topo-sorts clean --- the next pass has its order. ->↺ back to observe: the next module pair.
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import. ->▶ about to act: move Node to types.ts; expecting to set up: an acyclic graph for the next pass. Node now lives in types.ts; foo and bar import down to it; the graph topo-sorts clean --- the next pass has its order. ->↺ next, sweep the neighbouring module pair.
 ```
 
 <<~/ahu >>
@@ -183,7 +183,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 <<~ hud Aperture(10) OODA-HA(3) >>
 <<~ ward E-Prime >>
 
-Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ back to observe: the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ back to observe: the operator's call on the split.
+Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
 <<~ hud Aperture(-> 11) OODA-HA(2↺) >>
 <<~ yield lar:///gatekeeper.ask.halved -> ? >>
