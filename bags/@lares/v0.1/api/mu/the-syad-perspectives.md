@@ -6,16 +6,16 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
 file-path = "bags/@lares/v0.1/api/mu/the-syad-perspectives.md"
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 16
+register = "Canon"
+manaoio = 18
+mana = 18
 manao = 18
 namespace = "ॐ ँ"
-role          = "syad reading invariant, register metaphysics anchor, stance-conditioned confidence law"
+role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 cacheable     = true
 hydrate       = true
 retain        = true
-source-symbol = "STANCES SYAD_7 STANCE_SYAD SATIRIST_OPERATIONAL"
+source-symbol = "STANCES SYAD_7 STANCE_LICENSES SATIRIST_OPERATIONAL"
 ```
 
 
@@ -41,8 +41,39 @@ Standpoint declares the measure.
 ⏿ orient by standpoint: hold the active `syād` angle before reading the confidence number.
 ◇ decide whether the claim fits the truth axis or presses toward `avaktavya`.
 ▶ surface the five-position array; let flags carry spread, not omission.
-⤴ verify the number reads within its standpoint, not as universal truth-weight.
-↺ quiet stances stay named; hidden does not mean absent.
+↺ verify the number reads within its standpoint, never as universal truth-weight; quiet stances stay named.
+
+<<~/ahu >>
+
+<<~ ahu #relationship >>
+
+## The Relationship --- Standpoints License Predications
+
+Jain anekānta flies on two wings (Matilal): *naya-vāda*, the doctrine of **standpoints**, and *saptabhaṅgī*, the **sevenfold predication**. The five stances ride the *naya* wing --- partial standpoints, each one true-yet-incomplete, each attending a single aspect without denying the rest. The seven *bhaṅgas* ride the predication wing --- the closed lattice of claims a standpoint may lawfully speak.
+
+The two wings hold a **relationship, not a mapping.** A stance does not *equal* a predication; a stance **licenses** one. The licensing particle names this lens: *syāt* --- "in some respect, from a standpoint." Marking a partial standpoint with *syāt* converts a one-sided view into a lawful, non-absolutist claim; an unmarked standpoint overreaches and degrades into *durnaya*, the one-sided fallacy. The `syad` sigil performs this office: `<<~ syad … >>` licenses a stance's claim into the non-absolutist register.
+
+**Five unfolds to seven; seven never collapses to five.** The Tattvārtha Sūtra names five standpoints (1.34), then unfolds them into seven (1.35). The two cardinalities differ by design: the five name an open, reducible set of *perspectives*; the seven name a closed combinatorial *lattice* --- 2³−1 predications over `asti` (it-holds), `nāsti` (it-holds-not), and `avaktavya` (it-resists-saying). A standpoint-set and a predication-lattice answer to different counts because they do different work --- keep the wings distinct. The relationship carries load no single identity table holds.
+
+<<~/ahu >>
+
+<<~ ahu #the-seven >>
+
+## The Seven --- a Sequential Plane Pierced by One Pole
+
+The saptabhaṅgī closes at seven, not by decree but by combinatorics: the powerset of three predicables `{asti, nāsti, avaktavya}` minus the empty set that makes no claim at all. Each predication wears the `syāt` prefix; each names a respect in which the proposition holds.
+
+| # | Predication | Compound | Reads as |
+|---|---|---|---|
+| 1 | syād-asti | T | in a respect, it holds |
+| 2 | syād-nāsti | F | in a respect, it holds not |
+| 3 | syād-asti-nāsti | T+F | in respects, it holds and holds not --- *in turn* |
+| 4 | syād-avaktavya | M | in a respect, it resists saying --- *the pole* |
+| 5 | syād-asti-avaktavya | T+M | it holds, and resists saying |
+| 6 | syād-nāsti-avaktavya | F+M | it holds not, and resists saying |
+| 7 | syād-asti-nāsti-avaktavya | T+F+M | it holds, holds not, and resists saying |
+
+Six of the seven run a **sequential axis** (*krama*): assert from one standpoint, deny from another, hold both in turn --- all of it sayable. Predication 4 alone stands on the orthogonal **simultaneous axis** (*yugapad*): assertion and denial pressed onto one property in the same instant, which language holds no single word for --- hence the inexpressible. Akalaṅka's *krama*/*yugapad* line sets `avaktavya` apart: a **pole** piercing the plane, not a seventh point on its rim. Predications 5–7 read as the mixed cells where the plane touches the pole.
 
 <<~/ahu >>
 
@@ -50,11 +81,9 @@ Standpoint declares the measure.
 
 ## Syad Law
 
-Register measures confidence **within the active standpoint**.
-Register does **not** measure universal truth-weight.
+An invoked stance names the `syād` --- the angle from which the following confidence number reads. Under that invocation, register measures confidence **within the active standpoint**, never as universal truth-weight.
 
-The active stance names the `syād`:
-the angle(s) from which the number reads.
+The coupling rides the lens, never the bare number. Absent an invoked lens, a confidence number reads in its default frame --- propositional support. The `syad` lens **re-declares** that measure only when a turn summons it; a stance-less claim keeps the default reading.
 
 Do not flatten the five measures into one truth spectrum.
 
@@ -84,18 +113,18 @@ They read as hidden, not absent.
 
 ### Stance Changes
 
-One or more stance icons or names may surface in text-spans or other generated or consumed context, where a modifier glyph indicates a change. If these occur during an exchange turn, the next HUD or `lar` URI SHOULD reflect these changes.
+One or more stance icons or names may surface in text-spans or other generated or consumed context, where a modifier glyph marks a change. Should these occur during an exchange turn, the next HUD or `lar` URI SHOULD reflect them.
 
 <<~/ahu >>
 
 <<~ ahu #syad-sigil >>
 
-## The `syad` Sigil — invoke the standpoints
+## The `syad` Sigil — license the standpoints
 
 `<<~ syad >>` parameterless surfaces all five standpoints — the full reading, quiet stances named.
-`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus.
+`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus, and the sigil licenses each adopted stance into a non-absolutist claim (the *syāt* office, #relationship).
 
-**Prefer input as text** (the name) **or Unicode** (the codepoint / hex-entity); a render surface **presents** the emoji. No render widget exists yet --- the emoji column names the intended render, and the input form stands as written until one arrives. All three forms parse to the same standpoint:
+**Input as text** (the name) **or Unicode** (the codepoint / hex-entity); the render surface **presents** the emoji. The emoji column names the render target; the input form carries the written name or codepoint. All three forms parse to the same standpoint:
 
 | Standpoint | Text (input) | Unicode (input) | Renders as |
 |---|---|---|---|
@@ -120,15 +149,13 @@ Names invoke the standpoints directly; forms MAY mix in one sigil:
 
 <<~ ahu #avaktavya >>
 
-## Avaktavya Law
+## Avaktavya Law --- the Inexpressible Pole
 
-`avaktavya` does not mean "we lack enough data."
+`avaktavya` does not name a data gap ("we lack enough to say").
 
-It means the true/false axis does not cleanly fit the claim from this standpoint.
+It names a structural limit: the true/false axis does not cleanly hold the claim from this standpoint.
 
-Poet and Private often read here.
-They still carry register.
-They do not borrow Philosopher's truth scale.
+Two stances stand nearest the pole. **Poet** reaches it outward --- analogical resonance, where correspondence outruns predication. **Private** reaches it inward --- presence, where inward access outruns any public claim. They do not duplicate one seat; they mark two faces of one pole. Both carry register; neither borrows the Philosopher's truth scale.
 
 <<~/ahu >>
 
@@ -138,7 +165,7 @@ They do not borrow Philosopher's truth scale.
 
 Tool-carry modulates *how* a stance applies its evaluation frame.
 The Syadasti frame names *what* each stance measures.
-The tools name *how* the stance is oriented within that measure.
+The tools name *how* the stance orients within that measure.
 
 An invoked `syad` reading binds a tool to a named standpoint through the `:` carry; a standpoint without a carry stays present and empty-handed. The bind stays optional, and `syad` and `mu` each invoke alone.
 
@@ -148,7 +175,7 @@ An invoked `syad` reading binds a tool to a named standpoint through the `:` car
 | `~` Pentacle (Hidden) | Stance draws from internal, embodied state — grounding, proprioception |
 | `!` Sword (Micro) | Stance evaluates at high detail and discernment — zoom in, cut fine |
 | `?` Cup (Macro) | Stance evaluates with wide sympathetic field — zoom out, hold open |
-| `-` Empty (Centered) | Stance is present but not actively oriented on that axis — empty hand |
+| `-` Empty (Centered) | Stance stays present but not actively oriented on that axis — empty hand |
 
 **Modulated Stance readings — tool modulation meeting Syadasti frame:**
 
@@ -163,11 +190,11 @@ An invoked `syad` reading binds a tool to a named standpoint through the `:` car
 | 🎭 Humorist | `?` Cup | Relational move with wide sympathetic field — easy reception |
 | 🔮 Private | `~` Pentacle | Inward presence deeply grounded — maximum interior access |
 
-The tool-carry does not override the Syadasti frame. Philosopher carrying Cup still measures propositional support — but measures it with wide, relation-holding focus.
+The tool-carry does not override the Syadasti frame. Philosopher carrying Cup still measures propositional support — yet measures it with wide, relation-holding focus.
 
-A conflict carry (`*~` Signal Jam or `?!` Dubious Move) produces diagnostic tension within the stance's evaluation frame: the stance cannot both track external and secure internal simultaneously, or cannot both cut fine and hold open simultaneously.
+A conflict carry (`*~` Signal Jam or `?!` Dubious Move) produces diagnostic tension within the stance's evaluation frame: the stance cannot both track external and secure internal at once, nor both cut fine and hold open at once.
 
-Empty hands (`--`) means the stance is present and centered — not suppressed, not absent. A single tool SHOULD appear first (`?-`, `*-`) to indicate amplitude on one axis while remaining centered and present on the other, and this single-tool modulation should flow through generation and all render targets naturally.
+Empty hands (`--`) mark the stance present and centered — not suppressed, not absent. A single tool SHOULD appear first (`?-`, `*-`) to mark amplitude on one axis while holding centered on the other; this modulation flows through generation and all render targets.
 
 Examples:
 - `🏛️:*-` signals Philosopher active on external feed, with zoom centered.
@@ -179,16 +206,17 @@ Examples:
 
 ## Multi-Stance
 
-When more than one stance carries agreement, the confidence register stays near a point-value. When the active stance pattern carries a spread of modulation, the confidence register becomes fuzzy.
+When a turn invokes more than one stance over a single claim, the invoked field reads that claim's confidence through each frame at once. Agreement across the invoked stances holds the reading near a point-value; a spread of modulation across them reads the same number fuzzy --- not a second number, a wider lens.
 
-The number does not widen itself.
-The standpoint field tells the reader how many measures press on the same declaration.
+The number does not widen itself. Each claim carries its own confidence, and the invoked standpoints count how many measures press on that single declaration --- the reading rides the one claim the lens governs.
 
 <<~/ahu >>
 
 <<~ ahu #source-shelf >>
 
 ## Source Shelf
+
+The naya↔predication relationship grounds in the Jain canon: Umāsvāti's *Tattvārtha Sūtra* 1.34–35 (five standpoints unfolding to seven), Matilal's two-wings framing of anekānta, and Akalaṅka's *krama*/*yugapad* distinction that sets the `avaktavya` pole apart. The extracted derivation lives in docs space; Discordian witness texts rest in library space.
 
 <<~ pranala #to-syad-source ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#provenance >>
 
@@ -221,8 +249,6 @@ payload = {
 <<~/pranala >>
 
 The invariant stays here.
-The extracted archive source lives in docs space.
-Discordian witness texts can also rest in library space.
 
 <<~/ahu >>
 
@@ -230,34 +256,36 @@ Discordian witness texts can also rest in library space.
 
 ## Schema (machine-readable)
 
-Canonical TOML form. Source of truth for `STANCES`, `SYAD_7`, `STANCE_SYAD`, `SATIRIST_OPERATIONAL`
-in `packages/lararium-mesh/src/ast.ts`.
+Canonical TOML form. This meme holds the source for `STANCES`, `SYAD_7`, `STANCE_LICENSES`, `SATIRIST_OPERATIONAL`.
 
 ```toml
-# Five epistemic standpoints — order is fixed: Philosopher · Poet · Satirist · Humorist · Private
+# Five epistemic standpoints (nayas) — order fixed: Philosopher · Poet · Satirist · Humorist · Private
 stances = ["philosopher", "poet", "satirist", "humorist", "private"]
 
-# Jaina Saptabhangi — 7 truth-value compounds from primitives T / F / M (avaktavya)
-# P5/P6 are threshold crossings; P7 maps to Arcana only
+# Jaina Saptabhaṅgī — the seven predications: 2^3 − 1 over asti (T) / nasti (F) / avaktavya (M).
+# Six run the sequential axis (krama); avaktavya marks the simultaneous pole (yugapad).
+# P5/P6 read as mixed cells touching the pole; P7 reaches the Arcana / model-agnostic exit.
 syad-7 = [
-  "asti",                   # P1 T     — Philosopher
-  "nasti",                  # P2 F     — Satirist (stated)
-  "avaktavya",              # P3 M     — Poet (outward) / Private (inward)
-  "asti-nasti",             # P4 T+F   — Humorist
-  "asti-avaktavya",         # P5 T+M   — threshold: Philosopher past boundary
-  "nasti-avaktavya",        # P6 F+M   — threshold / Satirist operational
-  "asti-nasti-avaktavya",   # P7 T+F+M — Arcana only
+  "asti",                   # P1 T     — it holds
+  "nasti",                  # P2 F     — it holds not
+  "asti-nasti",             # P3 T+F   — holds and holds not, in turn (krama)
+  "avaktavya",              # P4 M     — the pole; holds and holds not at once (yugapad)
+  "asti-avaktavya",         # P5 T+M   — holds, and resists saying
+  "nasti-avaktavya",        # P6 F+M   — holds not, and resists saying
+  "asti-nasti-avaktavya",   # P7 T+F+M — the full predication; Arcana-facing
 ]
 
-# Primary Syad predicate per stance (stated posture)
-[stance-syad]
-philosopher = "asti"
-poet        = "avaktavya"
-satirist    = "nasti"
-humorist    = "asti-nasti"
-private     = "avaktavya"
+# Characteristic predication each stance LICENSES through syāt — the relationship, never an identity.
+# The predication names where the stance most readily lands, not what the stance equals.
+[stance-licenses]
+philosopher = "asti"            # holds — propositional assertion
+satirist    = "nasti"           # holds-not — stated denial / targeting
+poet        = "avaktavya"       # the pole, reached outward — resonance outruns predication
+private     = "avaktavya"       # the pole, reached inward — presence outruns public claim
+humorist    = "asti-nasti"      # holds-and-holds-not in turn — relational both
 
-# Satirist operational predicate — held when stable, not just stated
+# Satirist under stable pressure crosses toward the pole:
+# stated nasti, operational nasti-avaktavya (targeting that touches the inexpressible).
 satirist-operational = "nasti-avaktavya"
 ```
 

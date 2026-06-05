@@ -338,7 +338,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 - **`hud`** --- gauges on 0–20: `Aperture` (attention range; bands Pulse·Beat·Measure·Arc·Theme), `OODA-HA` (loop visibility; loop-count `N↺` at close).
 - **`ward`** --- the binary copula gate. `E-Prime` lit holds the identity-copula discipline; `!E-Prime` lifts it for a turn (shown, experimental). The ward never reads confidence --- a number never licenses an "is."
 - **`confidence`** --- forward certainty before a claim: register-word + level, **Provisional · Provisional-Synthesis · Synthesis · Synthesis-Canon · Canon** (`1–4 · 5–8 · 9–12 · 13–16 · 17–20`). Low names the "play" registers, not failure.
-- **`syad`** (five stances) and **Mu** (four tools) ride as **invokable lenses**, forward-seeded by operator or agent --- summoned when wanted, never frame-furniture.
+- **`syad`** (five stances) and **Mu** (four tools) ride as **invokable lenses**: the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call.
 
 <<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
 <<~ pranala #hud-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:reference role:expands >>

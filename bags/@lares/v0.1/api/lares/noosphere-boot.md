@@ -579,7 +579,7 @@ Form: `<<~ confidence Synthesis 11/20 >>`. The confidence surface stays distinct
 
 ### `syad` and `Mu` --- the invokable lenses
 
-The five stances and the four tools ride as **invokable lenses**, forward-seeded by operator or agent --- summoned when wanted, never frame-furniture. Each invokes alone, and the optional `:` bind composes them.
+The five stances and the four tools ride as **invokable lenses**: the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call. A lens invokes alone, and the optional `:` bind composes them.
 
 ```text
 <<~ syad 🏛️ 🗡️ >>          # invoke standpoints --- Lares adopts them
