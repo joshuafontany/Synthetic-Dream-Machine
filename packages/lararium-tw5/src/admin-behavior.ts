@@ -28,7 +28,21 @@ import { placeVerbInvocation } from "./verb-vm.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
-export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior {
+export interface AdminBehaviorOptions {
+  /** A ready verifier (e.g. tests, or a host-provided one). */
+  verifier?: CapabilityVerifier;
+  /**
+   * Async verifier source resolved in `onEa` with the live IslandContext —
+   * the isomorphic-vessel Stage-1 hook. Platform worker entries pass a factory
+   * that calls `bootAdminKeyhive` over `ctx.composite` (keeping keyhive out of
+   * @lararium/tw5). Takes precedence over `verifier`. A throw here (gate failure)
+   * propagates out of `onEa` → the island kernel posts `fault`, so the vessel
+   * never goes live with an unauthorized identity.
+   */
+  verifierFactory?: (ctx: IslandContext) => Promise<CapabilityVerifier>;
+}
+
+export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
   let _dispatcher: VerbDispatcher | null = null;
 
   const _pendingDelegations = new Map<string, {
@@ -51,7 +65,11 @@ export function makeAdminBehavior(verifier?: CapabilityVerifier): IslandBehavior
   }
 
   return {
-    onEa({ tw5, composite, post }: IslandContext) {
+    async onEa(ctx: IslandContext) {
+      const { tw5, composite, post } = ctx;
+      // Resolve the verifier: the async factory (bootAdminKeyhive over the admin
+      // composite) wins; else a ready verifier; else none (delegated-verb path).
+      const verifier = opts.verifierFactory ? await opts.verifierFactory(ctx) : opts.verifier;
       const registry = new VerbTable();
       _dispatcher = new VerbDispatcher({
         adminVm:  tw5,

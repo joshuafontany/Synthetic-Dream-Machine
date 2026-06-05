@@ -3,10 +3,10 @@ export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
 export { AdminAuthGate } from "./admin-auth-gate.js";
-export { openNodeVessel, createNodeSession } from "./open-node-vessel.js";
+export { openNodeVessel } from "./open-node-vessel.js";
 export { openAdminVm } from "./open-admin-vm.js";
 export type { AdminVmOptions, AdminVmResult } from "./open-admin-vm.js";
-export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase, CreateNodeSessionOptions, NodeSessionResult } from "./open-node-vessel.js";
+export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-node-vessel.js";
 
 export { loadGenesisIsland, reconcileIslandFromGenesis, readGenesisSha256, GENESIS_CID } from "./genesis-artifact.js";
 export { createSessionEventLog, seedAdminDoc } from "@lararium/mesh";

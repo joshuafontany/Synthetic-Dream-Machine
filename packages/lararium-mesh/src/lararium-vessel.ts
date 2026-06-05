@@ -37,7 +37,9 @@ export interface LarariumVesselResult<
   TRepo = unknown,
   TStore extends LarTiddlerStore = LarTiddlerStore,
 > {
-  vessel: TVessel;
+  /** Optional — the main-thread `LarVessel` wrapper is being retired (the island
+   *  pool is the live surface). Present on platforms that still construct one. */
+  vessel?: TVessel;
   pool: TPool;
   repo: TRepo;
   store: TStore;

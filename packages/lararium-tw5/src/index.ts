@@ -77,6 +77,7 @@ export type { VerbSignalRequest, VerbSignalRelayOptions } from "./verb-signal.js
 export { runLocalVerb, makeCapVerify } from "./verb-local-dispatch.js";
 export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
 export { makeAdminBehavior } from "./admin-behavior.js";
+export type { AdminBehaviorOptions } from "./admin-behavior.js";
 
 export { IslandKernel } from "./island-kernel.js";
 

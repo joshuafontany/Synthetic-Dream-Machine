@@ -11,11 +11,12 @@
  *   7. Drafts   — per-user draft sync                               [draft bag]
  *
  *   CompositeStore: system → lares → corpus:* → wiki(writable) → draft(writable)
- *   LarVessel: store = wiki AutomergeDocStore, composite = full CompositeStore
+ *   — the verb data-plane backing the admin island's delegated reactors.
  *
  * The node vessel holds no semantic privilege. It carries roads, docks, and sync;
- * it does not adjudicate content truth or wiki ritual meaning.
- * Multiple wikis → multiple openNodeVessel calls, one LarVessel per DocHandle.
+ * it does not adjudicate content truth or wiki ritual meaning. Live VM state lives
+ * in sovereign islands (admin + wiki); the main thread keeps the relay Repo, the
+ * island pool, and the bootstrap handoff.
  *
  * FPI-5 (trim tab): all Node-specific code lives here.
  *
@@ -36,7 +37,7 @@ import type {
   LarariumVesselOptions, LarariumVesselResult, LarOpenPhase,
 } from "@lararium/mesh";
 import {
-  LarVessel, LAR_VESSEL_CAPABILITIES_NODE, OpenIdentitySlot,
+  OpenIdentitySlot,
   AutomergeDocStore,
   CompositeStore, corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
@@ -50,7 +51,6 @@ import {
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
 import type { LarTiddlerRecord } from "@lararium/mesh";
-import { toLarTiddlerRecord } from "@lararium/mesh";
 import {
   ACTIVE_WIKI_URI,
   MemoryTiddlerStore,
@@ -61,7 +61,7 @@ import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers,
 } from "./genesis-artifact.js";
-import { seedLaresDoc, createSessionEventLog } from "@lararium/mesh";
+import { seedLaresDoc } from "@lararium/mesh";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
@@ -89,8 +89,6 @@ import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operat
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult, AdminVmOptions } from "./open-admin-vm.js";
 
-import { LAR_EVENT } from "@lararium/mesh";
-
 const __dir = dirname(fileURLToPath(import.meta.url));
 
 // genesis/social-bootstrap.json — written by `lararium:init`, read here as a boot-path
@@ -116,7 +114,7 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
 }
 
 export interface NodeVesselResult extends LarariumVesselResult<
-  LarVessel<VesselIslandPool>,
+  never,            // no main-thread LarVessel — the island pool is the live surface
   VesselIslandPool,
   Repo,
   CompositeStore
@@ -686,8 +684,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       (doc.tiddlers as Record<string, LarTiddlerRecord>)[wikiKey] = mutableLarRecord(wikiKey, { text: wikiHandle.url }, "lararium-boot");
     });
   }
-  const wikiBagId = activeWikiPlan.wikiBagId;
-  const wikiStore = new AutomergeDocStore(wikiHandle, wikiBagId);
   emit("wiki-ready");
 
   // ── 5. Wiki-Drafts doc — per-user, stored in catalog oracle tiddler ───────
@@ -705,14 +701,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       (doc.tiddlers as Record<string, LarTiddlerRecord>)[draftTiddlerKey] = mutableLarRecord(draftTiddlerKey, { text: draftHandle.url }, "lararium-boot");
     });
   }
-  // E.3 — per-wiki draft bagId. Composite layer encodes which wiki owns
-  // the drafts so multiple wikis can mount simultaneously without
-  // intermingling. The Automerge doc URL still lives in the catalog under
-  // ${wikiLarUri(slug)}/drafts/${vesselDid} (unchanged); only the layer
-  // bagId namespace changed from the static "draft" constant.
-  const draftBagId = activeWikiPlan.draftBagId;
-  const draftStore = new AutomergeDocStore(draftHandle, draftBagId);
-
   // @temp layer — local-VM-only MemoryTiddlerStore. Receives $:/temp/* and
   // any volatile session writes. defaultWritable:true so unbagged TW5 saves
   // land here, not in the draft CRDT. Top of cascade per WikiRecipe law.
@@ -723,15 +711,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     defaultWritable: true,
   });
   emit("draft-ready");
-
-  // ── 6. LarVessel ────────────────────────────────────────────────────────────
-  wikiStore.markSyncComplete();
-  const vessel = new LarVessel<VesselIslandPool>({
-    vesselId:     activeWikiPlan.vesselId,
-    store:        composite,
-    capabilities: LAR_VESSEL_CAPABILITIES_NODE,
-    identity,
-  });
   emit("vessel-ready");
 
   // ── 7. Event bus ─────────────────────────────────────────────────────────
@@ -826,9 +805,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   }, { pinned: true });
   emit("tw5-booted");
 
-  // ── 10. VmPool — vmManager IS the pool ────────────────────────────────────
-  vessel.attachVmPool(vmManager);
-
   // Path M.1 — wire worker.event consumer now that adminVm is live.
   // Rings drain through emit() → subscribe() handlers; subscribe on the event type directly.
   // Promise-pipelining law: island fires IslandMsg_Event without ACK; vessel routes fire-and-forget.
@@ -853,7 +829,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   return {
     activeWikiId,
     activeWikiSource,
-    vessel, pool: vmManager, repo, eventBus,
+    pool: vmManager, repo, eventBus,
     store: composite,
     vmManager,
     admin: adminVm,
@@ -863,73 +839,4 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     phase: "live",
     stopTick: () => { void vmManager.disposeAll(); },
   };
-}
-
-// ---------------------------------------------------------------------------
-// Session lifecycle — create a session + seed its event log
-// ---------------------------------------------------------------------------
-
-export interface CreateNodeSessionOptions {
-  sessionId:   string;
-  operatorDid: string;
-  agentId:     string;
-}
-
-export interface NodeSessionResult {
-  sessionTiddlerUri: string;
-  eventLogUrl:       string;
-}
-
-/**
- * Open a new session: writes a SessionTiddler into the CRDT via the composite
- * store (TW5 VM path), creates the per-session SessionEventLog child doc, and
- * wires `session.grounded` emission onto the event bus for L1 clock ticks.
- *
- * Call after `openNodeVessel` returns. One call per operator session.
- * Pass `result.store` (the CompositeStore) — session tiddler routes to the
- * sessions bag because that layer is registered as writable.
- */
-export async function createNodeSession(
-  opts:     CreateNodeSessionOptions,
-  repo:     Repo,
-  store:    CompositeStore,
-  eventBus: LarEventBusImpl,
-): Promise<NodeSessionResult> {
-  const { sessionId, operatorDid, agentId } = opts;
-  const tiddlerUri = `lar:///ha.ka.ba/@sessions/${sessionId}`;
-  const now = new Date().toISOString();
-
-  // Create the event log child doc first so its URL is available for the tiddler.
-  // repo.create() is unavoidable here (new Automerge doc). The self-ref oracle
-  // tiddler inside it is a direct write on a brand-new doc not yet in the composite.
-  const logHandle = createSessionEventLog(repo, sessionId);
-
-  // Write session tiddler through the composite store — routes to sessions bag
-  // (writable: true) because record.bag === SESSIONS_DOC_URI.
-  // This is the TW5 VM write path: composite.put() → AutomergeDocStore → CRDT.
-  await store.put(
-    toLarTiddlerRecord({
-      title: tiddlerUri,
-      text: "",
-      id:            sessionId,
-      operatorDid,
-      agentId,
-      startedAt:     now,
-      state:         "active",
-      eventLogUrl:   logHandle.url,
-      eventLogHeads: "",
-    }, { authority: "lararium-session" }),
-    { kind: "operator-import", sessionId },
-    { bag: SESSIONS_DOC_URI },
-  );
-
-  // Wire session.grounded events from the event bus so L1 clock ticks can fire.
-  eventBus.subscribe(LAR_EVENT.SESSION_GROUNDED, (e) => {
-    const ev = e as { sessionId?: string };
-    if (ev.sessionId === sessionId) {
-      console.log(`[session:${sessionId}] grounded — L1 tick fires`);
-    }
-  });
-
-  return { sessionTiddlerUri: tiddlerUri, eventLogUrl: logHandle.url };
 }

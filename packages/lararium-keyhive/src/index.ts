@@ -16,6 +16,9 @@ export type { AdminEventStoreOptions } from "./admin-event-store.js";
 
 export const KEYHIVE_PROBE_VERSION = "0.0.0-alpha.56c";
 
+export { bootAdminKeyhive } from "./boot-admin-keyhive.js";
+export type { BootAdminKeyhiveInput, BootAdminKeyhiveResult } from "./boot-admin-keyhive.js";
+
 export {
   runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload,
 } from "./ceremony-core.js";

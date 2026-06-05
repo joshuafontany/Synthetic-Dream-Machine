@@ -28,6 +28,7 @@ export * from "./social-tiddlers.js";
 export * from "./automerge-doc-store.js";
 export * from "./lar-vessel.js";
 export * from "./lararium-vessel.js";
+export * from "./vessel-platform.js";
 export type { IdentitySlot, CapabilityToken, ActorId } from "./identity-slot.js";
 export { OpenIdentitySlot } from "./identity-slot.js";
 export * from "./meme-provider.js";

@@ -116,6 +116,17 @@ export function runSovereignWorker(behaviorOrFactory: IslandBehavior | ((manifes
 
   async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
+    // Isomorphic with the browser kernel: any throw during init (incl. a
+    // behavior.onEa gate failure, e.g. bootAdminKeyhive Gate A/B/C) posts fault
+    // so the vessel times out cleanly instead of hanging without an ea.
+    try {
+      await _doManifest(msg);
+    } catch (err) {
+      _post(mkFault(msg.wikiUri, `manifest handler threw: ${String(err)}`));
+    }
+  }
+
+  async function _doManifest(msg: IslandMsg_Manifest): Promise<void> {
     const behavior = _resolveBehavior(msg);
 
     const storageAdapter = _buildStorage(msg.storage);

@@ -140,6 +140,26 @@ export interface IslandMsg_Manifest {
    * Absent = no disk projection for this island.
    */
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
+  /**
+   * ADMIN-ISLAND ONLY — operator authn/z material for in-worker keyhive boot
+   * (isomorphic-vessel epic, Stage 1). The admin worker's `onEa` calls
+   * `bootAdminKeyhive` with this + its admin CompositeStore (the cap-event
+   * EventStore backing). Populated ONLY by openAdminVm / openBrowserAdminVm;
+   * wiki manifests leave it absent, so the operator seed never reaches a wiki
+   * worker. The seed crossing the worker boundary is the deliberate custody
+   * boundary (operator-confirmed): the admin island is the authn/z home.
+   */
+  adminAuth?: {
+    /** 32-byte operator signing seed. */
+    seed:                  Uint8Array;
+    /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
+    operatorVerifyingKey:  string;
+    personGroupDocIdHex:   string;
+    personGroupAgentIdHex: string;
+    meshCabalDocIdHex:     string;
+    /** Writable bag URIs to register so verify/delegate resolve (lar: URIs). */
+    registerBags:          readonly string[];
+  };
 }
 
 /**
@@ -228,6 +248,35 @@ export interface AdminMsg_VerbResult {
   error?: string;
 }
 
+// ---------------------------------------------------------------------------
+// Auth verify proxy (isomorphic-vessel epic, Stage 1+2)
+// ---------------------------------------------------------------------------
+// Keyhive lives in the admin island after Stage 1, but inbound untrusted peers
+// land on the HOST transport (node WS server). The host's AuthVerifierSeam asks
+// the island to verify each peer; the island answers via its keyhive. Path (b).
+
+/** Vessel → island: verify an inbound peer's capability. Host has no keyhive. */
+export interface AdminMsg_VerifyRequest {
+  schema_version: ProtocolVersion;
+  type: "admin:verify-request";
+  requestId: string;
+  /** The peer's serialized Keyhive ContactCard bytes. */
+  cardBytes: Uint8Array;
+  /** The bag the peer wants to sync. */
+  bagUrl: string;
+  /** Access level required. */
+  access: "read" | "admin";
+}
+
+/** Island → vessel: the keyhive verdict for a verify-request. */
+export interface AdminMsg_VerifyResult {
+  schema_version: ProtocolVersion;
+  type: "admin:verify-result";
+  requestId: string;
+  ok: boolean;
+  reason?: string;
+}
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -235,6 +284,7 @@ export type VesselToIslandMsg =
   | IslandMsg_Teardown
   | AdminMsg_PlaceVerb
   | AdminMsg_VerbResult
+  | AdminMsg_VerifyRequest
   | WikiMsg_PlaceVerb;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
@@ -339,7 +389,8 @@ export type IslandToVesselMsg =
   | IslandMsg_Fault
   | IslandMsg_Ready
   | WikiMsg_VerbResult
-  | AdminMsg_DelegateVerb;
+  | AdminMsg_DelegateVerb
+  | AdminMsg_VerifyResult;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -354,14 +405,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -398,6 +449,7 @@ export function mkManifest(
   opts?: {
     storage?:        IslandStorageConfig;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
+    adminAuth?:      IslandMsg_Manifest["adminAuth"];
   },
 ): IslandMsg_Manifest {
   const msg: IslandMsg_Manifest = {
@@ -411,6 +463,7 @@ export function mkManifest(
   };
   if (opts?.storage)             msg.storage     = opts.storage;
   if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
+  if (opts?.adminAuth)           msg.adminAuth   = opts.adminAuth;
   return msg;
 }
 
@@ -486,6 +539,37 @@ export function mkAdminVerbResult(opts: {
   };
   if (opts.result !== undefined) msg.result = opts.result;
   if (opts.error  !== undefined) msg.error  = opts.error;
+  return msg;
+}
+
+export function mkAdminVerifyRequest(opts: {
+  requestId: string;
+  cardBytes: Uint8Array;
+  bagUrl:    string;
+  access:    "read" | "admin";
+}): AdminMsg_VerifyRequest {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:verify-request",
+    requestId: opts.requestId,
+    cardBytes: opts.cardBytes,
+    bagUrl:    opts.bagUrl,
+    access:    opts.access,
+  };
+}
+
+export function mkAdminVerifyResult(opts: {
+  requestId: string;
+  ok:        boolean;
+  reason?:   string;
+}): AdminMsg_VerifyResult {
+  const msg: AdminMsg_VerifyResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:verify-result",
+    requestId: opts.requestId,
+    ok:        opts.ok,
+  };
+  if (opts.reason !== undefined) msg.reason = opts.reason;
   return msg;
 }
 
