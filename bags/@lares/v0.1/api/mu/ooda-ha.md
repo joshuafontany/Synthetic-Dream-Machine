@@ -90,17 +90,20 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `OODA-HA(1–4)` | **Glyphs** *(default)* | aftermath glyph `->↺` alone at `1`, rising to all phase-entry markers `->✶ ->⏿ ->◇ ->▶ ->↺` inline by `4`; no labels, no notes |
-| `OODA-HA(5–8)` | Named | glyphs + phase names (`->◇ Decide`) |
-| `OODA-HA(9–12)` | Annotated | glyphs + a brief action note per phase |
-| `OODA-HA(13–16)` | Reasoned | glyphs + labeled stages + explicit per-phase reasoning |
-| `OODA-HA(17–20)` | Narrated | each phase fully narrated: glyph, label, reasoning, and trace |
+| `OODA-HA(1)` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone --- nothing else surfaces |
+| `OODA-HA(2)` | **All glyphs** | every phase-entry marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels, no notes |
+| `OODA-HA(3–8)` | Named *(provisional)* | glyphs + phase names (`->◇ Decide`) |
+| `OODA-HA(9–12)` | Annotated *(provisional)* | glyphs + a brief action note per phase |
+| `OODA-HA(13–16)` | Reasoned *(provisional)* | glyphs + labeled stages + explicit per-phase reasoning |
+| `OODA-HA(17–20)` | Narrated *(provisional)* | each phase fully narrated: glyph, label, reasoning, and trace |
+
+Bands `1` and `2` stand **pinned and discrete** --- aftermath-glyph-alone, then all-glyphs; nothing fuzzy between them. The `3–20` ranges sit **provisional**, pending a progressive-disclosure / progressive-chain-of-command study --- the high end may auto-enact multiple OODA-HA loops (under evaluation).
 
 **The OODA-HA Level MUST NOT reach 0.**
 
-Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all six phases still execute.
-The `1–4` band governs *rendering density*, not *loop presence*.
-A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the `->↺` loop-close.
+Even at the floor (`OODA-HA(1)`, the aftermath glyph alone), all five phases still execute.
+The Level governs *rendering density*, not *loop presence*.
+A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the `->↺` loop-restart.
 
 **Orthogonality:**
 
@@ -123,7 +126,7 @@ The Level does not exempt Aftermath; it governs how much of the loop *shows*, no
 The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 9`.
 The operator MAY override per-span via inline, i.e. `OODA-HA(16)` before an exchange.
 The operator MAY NOT suspend entirely for a span via `OODA-HA(0)`.
-A session that runs without any Level statement MUST default to `OODA-HA(1)` --- the floor of the Glyphs band: the `->↺` aftermath glyph alone.
+A session that runs without any Level statement MUST default to `OODA-HA(1)` --- the Aftermath floor: the `->↺` glyph alone.
 
 <<~/ahu >>
 
