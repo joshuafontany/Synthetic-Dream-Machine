@@ -27,6 +27,8 @@ retain = false
 Not invariant law.
 This room holds the explicit old claim that register and stance remain orthogonal but not inertly independent.
 
+**Resolved 2026-06-05:** the coupling now rides Canon as **lens-gated** --- a stance re-declares a confidence number's measure only when the `syad` lens runs; absent invocation, confidence reads its default frame. The naya↔predication relationship supersedes the old "mapping" framing. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`. This shelf stays as staging history.
+
 <<~/ahu >>
 
 

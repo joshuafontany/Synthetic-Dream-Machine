@@ -140,11 +140,12 @@ What follows reads as a collection note on what the stack already implements wit
   - degraded-state notes for silent drift and posturing
 
 - **Stance-conditioned register reading**  
-  `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` feels mostly done as the tight invariant for:
-  - register-within-standpoint
+  `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` stands Canon (2026-06-05) as the tight invariant for:
+  - the naya↔predication licensing relationship (five standpoints unfold to seven)
+  - register-within-standpoint, lens-gated (default frame absent invocation)
   - the five stance positions
   - multi-stance spread
-  - avaktavya handling
+  - avaktavya handling (the inexpressible pole)
   - stance flag encoding
 
 - **Maybe logic / reality tunnel / catma braid**  

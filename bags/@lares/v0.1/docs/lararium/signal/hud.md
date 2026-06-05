@@ -219,9 +219,9 @@ The state tuple is the composed reading: phase × stance × scope → one state 
 
 Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#confidence-syadasti`.
 
-Confidence measures confidence *within the active stance's evaluation frame*, not truth-weight universally.
+Under an invoked stance, register measures confidence *within that standpoint's evaluation frame*, not truth-weight universally. The coupling rides the lens: absent an invoked `syad` lens, a confidence number reads its default frame (propositional support); the lens re-declares the measure only when a turn summons it.
 The `syad` lens invokes one or more standpoints; the URI carries none.
-When more than one standpoint carries the claim, the confidence sits at the intersection of their frames.
+When more than one invoked standpoint carries the claim, the confidence reads at the intersection of their frames.
 
 | Stance | Syadasti Primitive | 0.0 Means | 0.5 Means | 1.0 Means |
 |---|---|---|---|---|

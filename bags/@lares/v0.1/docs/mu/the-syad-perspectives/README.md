@@ -63,10 +63,9 @@ The tight invariant now lives at:
 
 ## Extracted Rule
 
-Register measures confidence within the active stance's evaluation frame. Register does not measure universal truth-weight.
+Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads its default frame (propositional support); the lens re-declares the measure only when a turn summons it.
 
-The active stance names the `syād`:
-the standpoint from which the number should be read.
+The active stance names the `syād` --- the standpoint from which the number reads. The sigil performs the *syāt* office: it licenses a stance's claim, the *naya* wing licensing a *saptabhaṅgī* predication (canon: `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives#relationship`).
 
 <<~/ahu >>
 

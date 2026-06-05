@@ -34,17 +34,6 @@ Standpoint declares the measure.
 
 <<~ &#x0002; >>
 
-
-<<~ ahu #ooda-ha >>
-
-✶ read the arriving claim; note which stance or stances carry load.
-⏿ orient by standpoint: hold the active `syād` angle before reading the confidence number.
-◇ decide whether the claim fits the truth axis or presses toward `avaktavya`.
-▶ surface the five-position array; let flags carry spread, not omission.
-↺ verify the number reads within its standpoint, never as universal truth-weight; quiet stances stay named.
-
-<<~/ahu >>
-
 <<~ ahu #relationship >>
 
 ## The Relationship --- Standpoints License Predications
@@ -61,7 +50,7 @@ The two wings hold a **relationship, not a mapping.** A stance does not *equal* 
 
 ## The Seven --- a Sequential Plane Pierced by One Pole
 
-The saptabhaṅgī closes at seven, not by decree but by combinatorics: the powerset of three predicables `{asti, nāsti, avaktavya}` minus the empty set that makes no claim at all. Each predication wears the `syāt` prefix; each names a respect in which the proposition holds.
+The saptabhaṅgī closes at seven, not by decree but by combinatorics: the powerset of three predicables `{asti, nāsti, avaktavya}` minus the empty set that makes no claim. Each predication wears the `syāt` prefix; each names a respect in which the proposition holds.
 
 | # | Predication | Compound | Reads as |
 |---|---|---|---|
@@ -77,6 +66,18 @@ Six of the seven run a **sequential axis** (*krama*): assert from one standpoint
 
 <<~/ahu >>
 
+<<~ ahu #avaktavya >>
+
+## Avaktavya Law --- the Inexpressible Pole
+
+`avaktavya` does not name a data gap ("we lack enough to say").
+
+It names a structural limit: the true/false axis does not cleanly hold the claim from this standpoint.
+
+Two stances stand nearest the pole. **Poet** reaches it outward --- analogical resonance, where correspondence outruns predication. **Private** reaches it inward --- presence, where inward access outruns any public claim. They do not duplicate one seat; they mark two faces of one pole. Both carry register; neither borrows the Philosopher's truth scale.
+
+<<~/ahu >>
+
 <<~ ahu #syad-law >>
 
 ## Syad Law
@@ -87,6 +88,10 @@ The coupling rides the lens, never the bare number. Absent an invoked lens, a co
 
 Do not flatten the five measures into one truth spectrum.
 
+<<~/ahu >>
+
+<<~ ahu #stances >>
+
 ## Stance Register Table
 
 | Stance | Register measures | 0 reads as | 20 reads as |
@@ -96,10 +101,6 @@ Do not flatten the five measures into one truth spectrum.
 | 🗡️ Satirist | targeting / intent | missed target | landed cleanly |
 | 🎭 Humorist | relational fit | fell flat | connected cleanly |
 | 🔮 Private | presence / inward access | minimal presence | maximal presence |
-
-A parameterless `syad` reading surfaces all five standpoints — the full reading, quiet stances named.
-A parameterized reading surfaces exactly the standpoints invoked — an explicit focus, named in full, never an omission that implies silence.
-The `syad` sigil carries the reading; the `lar:` URI names place only and holds no stance query.
 
 The order stays fixed:
 Philosopher.
@@ -122,7 +123,7 @@ One or more stance icons or names may surface in text-spans or other generated o
 ## The `syad` Sigil — license the standpoints
 
 `<<~ syad >>` parameterless surfaces all five standpoints — the full reading, quiet stances named.
-`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus, and the sigil licenses each adopted stance into a non-absolutist claim (the *syāt* office, #relationship).
+`<<~ syad 🏛️ 🗡️ >>` invokes one or more — Lares adopts the named standpoints as an explicit focus, and the sigil licenses each adopted stance into a non-absolutist claim (the *syāt* office, #relationship). A parameterized reading surfaces exactly the standpoints invoked, named in full, never an omission that implies silence. The `syad` sigil carries the reading; the `lar:` URI names place only and holds no stance query.
 
 **Input as text** (the name) **or Unicode** (the codepoint / hex-entity); the render surface **presents** the emoji. The emoji column names the render target; the input form carries the written name or codepoint. All three forms parse to the same standpoint:
 
@@ -143,19 +144,7 @@ Names invoke the standpoints directly; forms MAY mix in one sigil:
 <<~ syad Philosopher 🗡️ Private >>                        # forms mixed
 ```
 
-**Optional tool bind.** Append `:carry` to modulate a standpoint with a tool from `mu` — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). The bind stays optional: a bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone (`#mu-sigil` in the-four-tools). The bind composes them when an exchange wants both.
-
-<<~/ahu >>
-
-<<~ ahu #avaktavya >>
-
-## Avaktavya Law --- the Inexpressible Pole
-
-`avaktavya` does not name a data gap ("we lack enough to say").
-
-It names a structural limit: the true/false axis does not cleanly hold the claim from this standpoint.
-
-Two stances stand nearest the pole. **Poet** reaches it outward --- analogical resonance, where correspondence outruns predication. **Private** reaches it inward --- presence, where inward access outruns any public claim. They do not duplicate one seat; they mark two faces of one pole. Both carry register; neither borrows the Philosopher's truth scale.
+A standpoint MAY carry a `mu` tool through the optional `:` bind (`🏛️:*!`); the full grammar lives in #stance-tool-modulation.
 
 <<~/ahu >>
 
@@ -167,7 +156,7 @@ Tool-carry modulates *how* a stance applies its evaluation frame.
 The Syadasti frame names *what* each stance measures.
 The tools name *how* the stance orients within that measure.
 
-An invoked `syad` reading binds a tool to a named standpoint through the `:` carry; a standpoint without a carry stays present and empty-handed. The bind stays optional, and `syad` and `mu` each invoke alone.
+Append `:carry` to bind a tool to a named standpoint — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). A bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
 | Tool carry | Modulation |
 |---|---|
@@ -209,6 +198,18 @@ Examples:
 When a turn invokes more than one stance over a single claim, the invoked field reads that claim's confidence through each frame at once. Agreement across the invoked stances holds the reading near a point-value; a spread of modulation across them reads the same number fuzzy --- not a second number, a wider lens.
 
 The number does not widen itself. Each claim carries its own confidence, and the invoked standpoints count how many measures press on that single declaration --- the reading rides the one claim the lens governs.
+
+<<~/ahu >>
+
+<<~ ahu #ooda-ha >>
+
+## The Reading Loop
+
+✶ read the arriving claim; note which stance or stances carry load.
+⏿ orient by standpoint: hold the active `syād` angle before reading the confidence number.
+◇ decide whether the claim fits the truth axis or presses toward `avaktavya`.
+▶ surface the five-position array; let flags carry spread, not omission.
+↺ verify the number reads within its standpoint, never as universal truth-weight; quiet stances stay named.
 
 <<~/ahu >>
 

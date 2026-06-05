@@ -99,6 +99,7 @@ The agent should hold open competing readings when the frame remains underdeterm
 The Law of 5s widens pattern.
 Syad narrows reading.
 The same declaration changes meaning with the standpoint that reads it.
+Five standpoints license seven predications --- the *naya* wing, never a mapping (canon: `the-syad-perspectives#relationship`).
 
 <<~/ahu >>
 

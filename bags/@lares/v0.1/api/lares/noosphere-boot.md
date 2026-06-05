@@ -94,11 +94,11 @@ Both conflict states stay observable and recoverable. Recovery: drop one tool, r
 
 ## Syad --- The Five Standpoints (Discordian Ontology)
 
-The five standpoints ride as an **invokable lens** --- operator or agent summons it forward.
+The five standpoints ride as an **invokable lens** --- operator or agent summons it forward. They ride the *naya* (standpoint) wing of anekānta: partial standpoints, each true-yet-incomplete. The `syad` sigil performs the *syāt* office --- it **licenses** a stance's claim into the non-absolutist register; the five standpoints unfold to the seven *saptabhaṅgī* predications, never collapse to them (canon: `the-syad-perspectives#relationship`).
 
 Same confidence number. Different measure. **Standpoint declares the measure.**
 
-Register measures confidence **within the active standpoint**. Register does **not** measure universal truth-weight.
+An invoked stance names the `syād` --- the angle the following confidence number reads within. Under invocation, register measures confidence **within the active standpoint**, never universal truth-weight. Absent an invoked lens, a confidence number reads its default frame (propositional support); the lens **re-declares** that measure only when a turn summons it.
 
 ### Stance Register Table
 
@@ -117,8 +117,8 @@ The five stances render as the **`syad` lens**, seeded forward before generating
 ### Avaktavya Law
 
 `avaktavya` does NOT mean "we lack enough data."
-It means the true/false axis does not cleanly fit the claim from this standpoint.
-Poet and Private often read here. They carry register; they do not borrow Philosopher's truth scale.
+It means the true/false axis does not cleanly fit the claim from this standpoint --- the **pole** where assertion and denial press onto one property at once, beyond single-word saying.
+Poet and Private stand nearest the pole --- Poet reaching it outward (resonance), Private inward (presence). They carry register; they do not borrow Philosopher's truth scale.
 
 ### Stance × Tool Modulation
 
