@@ -296,13 +296,17 @@ const handle = repo.create<LarDoc>(emptyLarDoc());
 // audience is an AGENT Identifier (getAgent-resolvable), NOT the group's DocumentId.
 // createSentinelDoc returns BOTH ids; members/audiences address by agent-id
 // (keyhive-provider.ts:228-256). PERSON_GROUP_DOC_ID is the membership-check target only.
-const personGroupAgentHex = (await composite.get(PERSON_GROUP_AGENT_ID_TIDDLER, { bag: ADMIN_BAG_ID }))?.text;
-if (!personGroupAgentHex) throw new Error("[binding] founding ceremony incomplete — no PersonGroup");
+const personGroupAgentIdHex = (await composite.get(PERSON_GROUP_AGENT_ID_TIDDLER, { bag: ADMIN_BAG_ID }))?.text;
+if (!personGroupAgentIdHex) throw new Error("[binding] founding ceremony incomplete — no PersonGroup");
 
 // delegate() throws unless the bag's Keyhive Document already exists — registerBag mints it
-// first (keyhive-provider.ts:146). The PersonGroup agent must be hydrated (post-boot ✓).
+// first (keyhive-provider.ts:146). The PersonGroup agent hydrates by construction: `lares init`
+// writes PERSON_GROUP_AGENT_ID_TIDDLER (ceremony-core.ts:156-159) and node boot reads it +
+// HALTs at Gate B/C if absent (open-node-vessel.ts:549-578). So at this call site a real,
+// membership-verified PersonGroup is already present — never a phantom. Field name matches the
+// tree: `personGroupAgentIdHex` / PERSON_GROUP_AGENT_ID_TIDDLER (NOT `personGroupAgentHex`).
 await keyhive.registerBag(handle.url);
-await keyhive.delegate({ bagUrl: handle.url, audience: personGroupAgentHex, access: "admin" });
+await keyhive.delegate({ bagUrl: handle.url, audience: personGroupAgentIdHex, access: "admin" });
 // The DELEGATED event lands in the EventStore (keyhive-provider.ts:168-173) and federates
 // to the operator's other devices via the admin-doc keyhive layer — no manual byte-shipping.
 

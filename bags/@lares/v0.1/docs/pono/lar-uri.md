@@ -505,36 +505,6 @@ A spanSpan record is **consistent** when:
 
 <<~/ahu >>
 
-<<~ ahu #open-questions >>
-
-## 14. Open Design Questions
-
-| Q# | Question | Current Position | Confidence | Blocks |
-|---|---|---|---|---|
-| U1 | Should `userinfo` carry operator alias in record form, or only `machine_id` in authority? | Operator alias in userinfo | `Synthesis 13/20` | Registry resolver design |
-| U2 | Where should `span_seq` be initialized and persisted: crystal-side ledger only, or mirrored into MemPalace sidecar rows too? | Mirror into sidecar, crystal remains canonical | `Synthesis 14/20` | MemPalace integration contract |
-| U4 | How does chronometer interact with `--parse` self-activation? | Provisional yes — depth increases p | `Provisional-Synthesis 9/20` | p-band model |
-| U5 | How is `world_calendar_ref` initialized when no diegetic calendar exists yet? | Mint provisional tagspace reference, mark provisional | `Synthesis 12/20` | Dream Realms bootstrap |
-| U8 | Should module section URIs carry `ffz`? | Confidence only — ffz is exchange-time, not file-time | `Synthesis 12/20` | Module URI patterns |
-| U9 | ITC stamp integration — when MCP server arrives, does ffz grow or does ITC live in calibration metadata? | Calibration metadata — ffz stays human-readable | `Synthesis 11/20` | MCP chronometer design |
-| F1–F5 | FFZ encoding open questions | See §6.5 | `Synthesis 13/20` | FFZ promotion to Canon |
-
-**Resolved (closed):**
-
-| Q# | Decision | Where documented |
-|---|---|---|
-| U2 (old) | Port slot dropped entirely. Span sequencing (`span_seq`) lives in adjacent spanSpan calibration metadata — not in URI authority. | §3.4 (host), §9.1 |
-| U3 | Phase per level per participant. LWW-Register per scale. Counter and phase are independent. | §6.4 |
-| U6 | Authority form in exchange spans. Authority-less (`///`) for stable addresses AND for module section URIs. | §8, §3.4 |
-| U7 | Stance/tool encoding moved off the URI into the `syad` / `mu` sigils; the address carries WHERE only. | the-syad-perspectives, the-four-tools |
-| U10 | Section URIs are `ahu` waypoints — no closer. Only file-level `? ->` opener and `→ ?` closer carry span semantics. | §5 |
-
-### Assessment for Promotion
-
-The core anatomy (§§2–8, 12) can promote to `Canon 19/20` independently of the open questions. The crystal integration layer (§§9–11) promotes when `lares/crystal/` settles its STATE schema. The FFZ encoding open questions (§6.5) sit at `Synthesis 13/20` and do not block the core spec.
-
-<<~/ahu >>
-
 <<~ ahu #prior-art >>
 
 ## 15. Prior Art

@@ -67,20 +67,20 @@ The `lar:` prefix remains a non-dereferenceable private identifier (RFC 4151 pre
 Most AI transparency tools cover only Agent SA (confidence scores, feature importance). Covering Taskwork SA (semantic territory) and Teamwork SA (bidirectional calibration) simultaneously appears novel in the literature.
 
 This research treats the Lares HUD as a prospective SA display.
-Retrospective explanation, parsing input text, or audits based on this signal belongs to other docs.
+Retrospective explanation, reading referenced content, or audits based on this signal belongs to other docs.
 The SA-display / XAI split matters because the HUD shows forward commitment, while audit explains what already happened.
 
-Parse boundaries and micro-trace events remain orthogonal.
+Reading referenced content and the node's own live loop remain orthogonal.
 
-- parse owns structural decomposition of input text
+- `prism` reads existing referenced content through declared lenses (`conformance`, `syad`, `mu`)
 - exchange `lar` URI vectors set SA intent
 - exchange HUD lines sync exchange boundaries in realtime
-- micro-trace marks where the governed response actually changed state during generation
+- the `OODA-HA` Level surfaces the node's own loop forward, mid-turn
 
 The exchange HUD does not replace the intent vectors.
 It surfaces vector instruments in realtime.
-The micro-trace does not replace the exchange HUD.
-It annotates the inside of a generative span.
+A `prism` reading does not replace the exchange HUD.
+It reads referenced content the node points it at.
 
 <<~/ahu >>
 
