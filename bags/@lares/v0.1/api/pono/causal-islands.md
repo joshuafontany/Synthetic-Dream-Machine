@@ -66,7 +66,7 @@ delegating an operator's `@personal`/`@draft` view-state to their own PersonGrou
 homogeneous-trust (those devices already hold `admin` on `@admin`, so marginal authority
 ≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
 `CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
-[personal-bindings](../lararium/personal-bindings.md).
+[personal-slot](../lararium/personal-slot.md).
 
 **Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups:
 `Individual ⊂ PersonGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring

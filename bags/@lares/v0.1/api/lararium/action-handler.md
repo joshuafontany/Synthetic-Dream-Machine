@@ -105,7 +105,7 @@ is shared, not duplicated (Sprint 6 parity).
 <<~ pranala #implements-residency ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model family:control role:implements >>
 <<~ pranala #effect-record ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model#effect-record family:relation role:audits-via >>
 <<~ pranala #cap-gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation role:gated-by >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal family:relation role:moves-across >>
+<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot family:relation role:moves-across >>
 
 <<~/ahu >>
 

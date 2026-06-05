@@ -24,7 +24,7 @@
  *
  * The above belong in a future `@personal` slot — a CRDT bag scoped to the
  * operator's Keyhive PersonGroup (their authorised device cabal). See:
- *   bags/@lares/v0.1/api/lararium/personal-slot-proposal.md
+ *   bags/@lares/v0.1/api/lararium/personal-slot.md
  *
  * Tombstoned titles disappear from listVisible() but remain readable via
  * get() when the record carries { deleted: true }.

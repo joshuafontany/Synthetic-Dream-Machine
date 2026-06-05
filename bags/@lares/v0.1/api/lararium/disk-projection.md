@@ -63,7 +63,7 @@ The projector enforces this structurally: **a bag absent from the mirror list ne
 
 ## @personal — wiki-instance-bound, off-disk
 
-`@personal` holds the operator's view-state for a specific wiki-instance (`$:/StoryList`, `$:/state/folded/*`, `$:/palette`), keyed per **(PersonGroup × recipe-fingerprint)** (see personal-bindings). It is NOT canon (not a `bags/` seed) and NOT wiki content (not a `wikis/` instance projection) — it is a **per-operator overlay**.
+`@personal` holds the operator's view-state for a specific wiki-instance (`$:/StoryList`, `$:/state/folded/*`, `$:/palette`), keyed per **(PersonGroup × recipe-fingerprint)** (see personal-slot). It is NOT canon (not a `bags/` seed) and NOT wiki content (not a `wikis/` instance projection) — it is a **per-operator overlay**.
 
 It carries **no disk mirror.** Rationale:
 
@@ -109,7 +109,7 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-bindings >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/save-path >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/catalog-doc >>
 

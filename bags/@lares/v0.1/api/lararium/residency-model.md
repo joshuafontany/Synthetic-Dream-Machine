@@ -160,7 +160,7 @@ Any implementation of this model MUST hold all five:
 
 ## Yang / Yin / Chao symmetry preserved
 
-The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot-proposal]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
+The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
 
 ```
               @temp          ┐
@@ -250,7 +250,7 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 ## Edges
 
 <<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:queries-over >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal family:relation role:specializes >>
+<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot family:relation role:specializes >>
 <<~ pranala #lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
 <<~ pranala #verb-tiddler ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler family:relation role:carried-by >>
 <<~ pranala #invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>

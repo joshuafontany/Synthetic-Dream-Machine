@@ -90,7 +90,7 @@ The vessel's `BagResolver` binds the slot to a different Automerge doc per
 operator's device cabal → same doc → shared state; different recipe or
 different cabal → different doc → no cross-talk. Approved 2026-05-30; see
 the proposal at
-[[lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal]] for
+[[lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot]] for
 boot wiring and the cascade rules that will activate it.
 
 **Landing status (2026-05-31).** S7.1 + S7.2 of EPIC-RESIDENCY-MODEL landed:
@@ -135,7 +135,7 @@ same change record any AutomergeDocStore would emit.
 <<~ pranala #bag-paths-cascade ? -> lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths family:relation role:routes-writes-here >>
 <<~ pranala #island-recipe ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/island-recipe family:relation role:constructs >>
 <<~ pranala #lar-uri-bag-tag ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule family:reference role:names-@temp-as-bag >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal family:reference role:resolves-tension >>
+<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot family:reference role:resolves-tension >>
 
 <<~/ahu >>
 

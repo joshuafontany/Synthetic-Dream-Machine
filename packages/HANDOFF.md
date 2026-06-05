@@ -151,7 +151,7 @@ Floating Librarians of Mu endorse (high confidence). Pono.
 
 **Sprint plan authored:** [`packages/EPIC-RESIDENCY-MODEL.md`](EPIC-RESIDENCY-MODEL.md) — ten sprints in OODA-HA cycle-flow form. Sprint 1 (memetic intent + reconciliation) closed this turn. Sprints 2–10 queued: data model + URI grammar, multi-residency at recipe layer, effect-record audit, action handlers in node + CLI, browser parity, `@personal` slot enactment coordinated with the model, coordinate-inspection UI, doc meme sweep, test golden regeneration.
 
-**Reconciliation:** [`personal-slot-proposal.md`](../bags/@lares/v0.1/api/lararium/personal-slot-proposal.md) (status remains `approved`) gains a `#reconciliation` ahu block clarifying that cascade rules become **first-write defaults** under the residency model, with +2 multi-bag residency tests added to the migration plan. Coordinated with Sprint 7 of the new Epic.
+**Reconciliation:** [`personal-slot.md`](../bags/@lares/v0.1/api/lararium/personal-slot.md) (status remains `approved`) gains a `#reconciliation` ahu block clarifying that cascade rules become **first-write defaults** under the residency model, with +2 multi-bag residency tests added to the migration plan. Coordinated with Sprint 7 of the new Epic.
 
 **Memory:** `project_residency_model_architecture.md` saved. Prior memory `project_stage_commit_push_model.md` marked SUPERSEDED with header warning; preserved for context.
 

@@ -8,7 +8,7 @@
  *   lar:///ha.ka.ba/@personal   — operator cross-device viewing state ($:/StoryList,
  *                                 $:/state/folded/*, $:/state/tab-*), CRDT, keyed per
  *                                 (PersonGroup × recipe-fingerprint) by the vessel
- *                                 resolver (see personal-slot-proposal#scoping-mechanism).
+ *                                 resolver (see personal-slot#scoping-mechanism).
  *                                 Slot URI literal here; per-recipe doc binding lives in
  *                                 BagResolver, not the URI.
  *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
@@ -216,7 +216,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * Recipe-fingerprint input — the canonical bag-doc-id set that names "the
  * same recipe" for purposes of cross-device @personal binding.
  *
- * Per Q5 (revised 2026-05-31, personal-slot-proposal): only the wiki bag
+ * Per Q4 (fingerprint algorithm, revised 2026-05-31, personal-slot): only the wiki bag
  * doc-id and the canonBags doc-ids participate. @lares and @lararium
  * doc-ids do NOT participate — switching personality or system bag does
  * not fork operator view state across devices.
@@ -240,7 +240,7 @@ export interface RecipeFingerprintInput {
  * ordering does not change the fingerprint. `canonicalJson` sorts object
  * keys for further stability.
  *
- * @see lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot-proposal#open-questions Q5
+ * @see lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot#questions Q4
  */
 export async function computeRecipeFingerprint(
   input: RecipeFingerprintInput,
