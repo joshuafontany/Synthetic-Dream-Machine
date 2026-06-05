@@ -62,7 +62,7 @@ A loop that skips Aftermath has stopped serving and commenced managing.
 
 ✶ sense where the loop runs implicit or over-narrated in current output
 ⏿ orient visibility posture against the active Level band
-◇ decide which phase elements surface — glyph, labeled, or fully narrated
+◇ decide which forward declarations surface — glyph, attention, intent, or consequence
 ▶ emit phase markers at the correct band density; no phantom phases
 ⤴ execute each phase turn; ensure aftermath closes and loops back to observe
 ↺ close — confirm loop visibility matched the requested band; flag drift
@@ -91,15 +91,17 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 Five bands over the `1–20` continuum --- the house pattern (as `Aperture` and `confidence` carry five).
 
-| Band | Range | Reading | Surfaces |
+The ladder climbs **anticipatory depth** --- how far ahead of the act the node declares, never audit detail.
+
+| Band | Range | Reading | Surfaces (forward declaration) |
 | --- | --- | --- | --- |
 | 1 | `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
 | 2 | `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
-| 3 | `9–12` | *(under research)* | — |
-| 4 | `13–16` | *(under research)* | — |
-| 5 | `17–20` | *(under research)* | — |
+| 3 | `9–12` | **Declared attention** | + on entering a phase, what the node is *about to* attend to --- `->⏿ orienting on: <focus>`, the bearing it turns toward |
+| 4 | `13–16` | **Declared intent** | + the intended action and the path set aside, before it commits --- `->◇ intend: <Y>; set aside: <Z, because…>` |
+| 5 | `17–20` | **Declared consequence** | + what the act is expected to set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
 
-Bands 1 and 2 stand **pinned** --- Aftermath, then all-glyphs. Bands 3–5 sit **under research** (a progressive-disclosure / progressive-chain-of-command study).
+Each band is additive over the one below. Every marker is a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative, judged happy/unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The only retrospection lives in the closing `OODA-HA(N↺)` slide.
 
 The Level stays a **pure visibility dial**. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
