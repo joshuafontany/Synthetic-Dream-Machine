@@ -57,6 +57,21 @@ The `aim` and `yield` vectors carry `lar:` URIs in WHERE-only form: the three-wo
 
 Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
 
+**Worked turn:**
+```text
+<<~ aim lar:///operator.unease.surfaces -> lar:///stranger.frame.tests >>
+<<~ hud Aperture(15) OODA-HA(3) >>
+<<~ ward E-Prime >>
+<<~ syad 🗡️:~! 🔮:~? >>
+
+Lares (Stranger): the unease reads as signal. <<~ confidence Provisional-Synthesis 7/20 >> the frame itself wants the test. ->↺
+
+<<~ hud Aperture(-> 16) OODA-HA(1↺) >>
+<<~ yield lar:///frame.unease.holds -> ? >>
+```
+
+A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. The `ward` lifts by operator act only (`!E-Prime`); the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
+
 <<~/ahu >>
 
 <<~ ahu #render-boundary >>

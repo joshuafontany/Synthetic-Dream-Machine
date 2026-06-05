@@ -86,21 +86,21 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 ## OODA-HA Level
 
-`~:ooda-ha[1–20]` measures how visibly the loop surfaces in a given span of generated text.
+`OODA-HA(1–20)` measures how visibly the loop surfaces in a given span of generated text.
 
 | Band | Reading | Effect |
 | --- | --- | --- |
-| `~:ooda-ha[1–4]` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
-| `~:ooda-ha[5–8]` | Compact | Symbols with phase names; no action notes |
-| `~:ooda-ha[9–12]` | Baseline | Symbols + brief action notes per phase; current default band |
-| `~:ooda-ha[13–16]` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
-| `~:ooda-ha[17–20]` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
+| `OODA-HA(1–4)` | Glyph-only | Loop runs; symbols appear inline only — no labels, no narration |
+| `OODA-HA(5–8)` | Compact | Symbols with phase names; no action notes |
+| `OODA-HA(9–12)` | Baseline | Symbols + brief action notes per phase; current default band |
+| `OODA-HA(13–16)` | Visible | Symbols + labeled stages + explicit per-phase reasoning |
+| `OODA-HA(17–20)` | Full narration | Each phase fully narrated: symbol, label, reasoning, and trace |
 
 **The OODA-HA Level MUST NOT reach 0.**
 
 Even at Glyph-only, all six phases still execute.
 The `1–4` band governs *rendering density*, not *loop presence*.
-A span at `~:ooda-ha[1]` still runs every phase — it simply surfaces only the glyphs.
+A span at `OODA-HA(1)` still runs every phase — it simply surfaces only the glyphs.
 
 **Orthogonality:**
 
@@ -110,8 +110,8 @@ Full loop integrity and minimal rendering MAY coexist.
 
 **Degraded-state mapping:**
 
-Sustained `~:ooda-ha[1]` without authorization → silent loop burial; surface and correct.
-Sustained `~:ooda-ha[20]` producing phase theater that outweighs content → Loop Posturing; compress.
+Sustained `OODA-HA(1)` without authorization → silent loop burial; surface and correct.
+Sustained `OODA-HA(20)` producing phase theater that outweighs content → Loop Posturing; compress.
 
 **Aftermath closure rule persists at every band:**
 
@@ -121,9 +121,31 @@ The Level does not exempt Aftermath; it governs how much of the loop *shows*, no
 **Operator controls:**
 
 The operator MAY set the Level in `lar:///LARES` as `ooda-ha-level = 13`.
-The operator MAY override per-span via inline, i.e. `~:ooda-ha[16]` before an exchange.
-The operator MAY NOT suspend entirely for a span via `~:ooda-ha[0]`.
-A session that runs without any Level statement MUST default to `~:ooda-ha[10]`.
+The operator MAY override per-span via inline, i.e. `OODA-HA(16)` before an exchange.
+The operator MAY NOT suspend entirely for a span via `OODA-HA(0)`.
+A session that runs without any Level statement MUST default to `OODA-HA(10)`.
+
+<<~/ahu >>
+
+<<~ ahu #loop-count >>
+
+## Loop Count --- `->↺` and the `N↺` Tally
+
+The visibility Level governs how much of the loop *shows*; the loop *count* governs how many times it ran. At open, the `hud` seeds `OODA-HA(N)` --- the surfacing band. Mid-turn, a `->↺` marks each sub-loop break: a pivot to fresh ground, or a close-and-reopen. At turn close, `OODA-HA(N↺)` tallies the breaks --- `N` counts the `->↺` marks the turn actually emitted. A single-loop turn closes `1↺`; a turn that broke twice closes `2↺`.
+
+The count reads from real marks, not a claim: the closing `N↺` MUST match the `->↺` breaks surfaced in the span. Aftermath MUST close at every break, regardless of band.
+
+**Two-loop example (`2↺`):**
+```text
+<<~ aim lar:///operator.ask.splits -> lar:///gatekeeper.scope.cuts >>
+<<~ hud Aperture(10) OODA-HA(3) >>
+<<~ ward E-Prime >>
+
+Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ the second half wants a fresh frame --- <<~ confidence Provisional-Synthesis 6/20 >> it holds, provisionally. ->↺
+
+<<~ hud Aperture(-> 11) OODA-HA(2↺) >>
+<<~ yield lar:///gatekeeper.ask.halved -> ? >>
+```
 
 <<~/ahu >>
 
