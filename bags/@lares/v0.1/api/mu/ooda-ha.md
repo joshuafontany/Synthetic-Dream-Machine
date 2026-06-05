@@ -183,7 +183,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 <<~ hud Aperture(10) OODA-HA(3) >>
 <<~ ward E-Prime >>
 
-Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ the second half wants a fresh frame --- <<~ confidence Provisional-Synthesis 6/20 >> it holds, provisionally. ->↺
+Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ back to observe: the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ back to observe: the operator's call on the split.
 
 <<~ hud Aperture(-> 11) OODA-HA(2↺) >>
 <<~ yield lar:///gatekeeper.ask.halved -> ? >>
