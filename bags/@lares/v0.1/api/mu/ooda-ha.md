@@ -93,13 +93,13 @@ Five bands over the `1–20` continuum --- the house pattern (as `Aperture` and 
 
 The ladder climbs **anticipatory depth** --- how far ahead of the act the node declares, never audit detail.
 
-| Band | Range | Reading | Surfaces (forward declaration) |
-| --- | --- | --- | --- |
-| 1 | `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
-| 2 | `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
-| 3 | `9–12` | **Declared attention** | + on entering a phase, what the node is *about to* attend to --- `->⏿ orienting on: <focus>`, the bearing it turns toward |
-| 4 | `13–16` | **Declared intent** | + the intended action and the path set aside, before it commits --- `->◇ intend: <Y>; set aside: <Z, because…>` |
-| 5 | `17–20` | **Declared consequence** | + what the act is expected to set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
+| Range | Reading | Surfaces (forward declaration) |
+| --- | --- | --- |
+| `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
+| `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
+| `9–12` | **Declared attention** | + on entering a phase, what the node is *about to* attend to --- `->⏿ orienting on: <focus>`, the bearing it turns toward |
+| `13–16` | **Declared intent** | + the intended action and the path set aside, before it commits --- `->◇ intend: <Y>; set aside: <Z, because…>` |
+| `17–20` | **Declared consequence** | + what the act is expected to set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
 
 Each band is additive over the one below. Every marker is a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative, judged happy/unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The only retrospection lives in the closing `OODA-HA(N↺)` slide.
 
@@ -140,24 +140,29 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 ## Bands in Use --- one loop, climbing
 
-The same Scryer turn at rising bands; each adds the next forward declaration, the marker always *preceding* the act.
+The same Scryer turn across rising ranges; each adds the next forward declaration, the marker always *preceding* the act.
 
-**Band 1 (`OODA-HA(1)`, default):**
+**`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
 Lares (Scryer): the import cycle resolves cleanly. ->↺
 ```
 
-**Band 3 (`OODA-HA(10)`) --- + declared attention:**
+**`5–8` (`OODA-HA(6)`) --- all glyphs, no labels:**
+```text
+Lares (Scryer): ->✶ ->⏿ ->◇ ->▶ move the shared type out; the cycle resolves cleanly. ->↺
+```
+
+**`9–12` (`OODA-HA(10)`) --- + declared attention:**
 ```text
 Lares (Scryer): ->⏿ orienting on: the import back-edge. the cycle resolves cleanly. ->↺
 ```
 
-**Band 4 (`OODA-HA(14)`) --- + declared intent:**
+**`13–16` (`OODA-HA(14)`) --- + declared intent:**
 ```text
 Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import (hides the cycle). the cycle resolves cleanly. ->↺
 ```
 
-**Band 5 (`OODA-HA(18)`) --- + declared consequence:**
+**`17–20` (`OODA-HA(18)`) --- + declared consequence:**
 ```text
 Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import. ->▶ about to act: move it to its own module; expecting to set up: an acyclic graph for the next pass. the cycle resolves cleanly. ->↺
 ```
