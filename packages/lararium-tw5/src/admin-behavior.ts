@@ -18,8 +18,10 @@
 
 import {
   mkAdminDelegateVerb,
+  mkAdminVerifyResult,
   type AdminMsg_PlaceVerb,
   type AdminMsg_VerbResult,
+  type AdminMsg_VerifyRequest,
   type BatchMode,
   type VerbInvocation,
   type CapabilityVerifier,
@@ -40,6 +42,16 @@ export interface AdminBehaviorOptions {
    * never goes live with an unauthorized identity.
    */
   verifierFactory?: (ctx: IslandContext) => Promise<CapabilityVerifier>;
+  /**
+   * Inbound-peer verification for the host's AuthVerifierSeam (path b). The host
+   * has no keyhive after Stage 1, so it posts `admin:verify-request` and the
+   * admin worker answers here. Opaque by design — peer verification needs
+   * `receiveContactCard` (a @lararium/keyhive method, not in mesh), so the
+   * platform entry supplies this closing over the booted keyhive; tw5 stays
+   * keyhive-free.
+   */
+  verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin")
+    => Promise<{ ok: boolean; reason?: string }>;
 }
 
 export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
@@ -108,6 +120,21 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
           else           pending.resolve(msg.result ?? {});
         }
         void post;
+        return true;
+      }
+
+      if (type === "admin:verify-request") {
+        const msg = raw as AdminMsg_VerifyRequest;
+        const answer = opts.verifyPeer
+          ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access)
+          : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
+        answer
+          .then((r) => post(mkAdminVerifyResult({
+            requestId: msg.requestId, ok: r.ok, ...(r.reason ? { reason: r.reason } : {}),
+          })))
+          .catch((err: unknown) => post(mkAdminVerifyResult({
+            requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),
+          })));
         return true;
       }
 

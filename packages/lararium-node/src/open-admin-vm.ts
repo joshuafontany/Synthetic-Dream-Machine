@@ -31,9 +31,9 @@ import type { LarDoc }                                  from "@lararium/mesh";
 import {
   ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
   LARARIUM_BAG, LARES_BAG,
-  mkManifest, mkAdminPlaceVerb, mkAdminVerbResult,
+  mkManifest, mkAdminPlaceVerb, mkAdminVerbResult, mkAdminVerifyRequest,
   isIslandToVesselMsg,
-  type WikiRecipe,
+  type WikiRecipe, type AuthVerifierSeam, type AdminMsg_VerifyResult,
 } from "@lararium/mesh";
 import { runLocalVerb }                                 from "@lararium/tw5";
 import type { VerbTable }                               from "@lararium/tw5";
@@ -90,6 +90,12 @@ export interface AdminVmResult {
    * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
    */
   placeVerb:    (opts: import("@lararium/tw5").VerbSignalRequest) => void;
+  /**
+   * Host-side inbound-peer verifier (path b). Proxies `verify()` to the admin
+   * island's keyhive via admin:verify-request/result. The WS AdminAuthGate arms
+   * with this once keyhive lives in-island (Stage 5); unused until then.
+   */
+  authSeam:     AuthVerifierSeam;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -103,6 +109,10 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
   let _delegationRegistry: VerbTable | null = null;
   let _verifier:      CapabilityVerifier | null  = null;
+
+  // Pending host→island verify-proxy calls (path b), keyed by requestId.
+  const _pendingVerifies = new Map<string, (ok: boolean) => void>();
+  let _verifySeq = 0;
 
   // ── Vessel admin handle (keyhive + gate reads) ───────────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
@@ -151,6 +161,16 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     if (raw.type === "fault") {
       clearTimeout(eaTimer);
       _eaReject(new Error(`[openAdminVm] admin island fault: ${(raw as { error: string }).error}`));
+      return;
+    }
+
+    if (raw.type === "admin:verify-result") {
+      const msg = raw as AdminMsg_VerifyResult;
+      const resolve = _pendingVerifies.get(msg.requestId);
+      if (resolve) {
+        _pendingVerifies.delete(msg.requestId);
+        resolve(msg.ok);
+      }
       return;
     }
 
@@ -222,6 +242,14 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => {
       _delegationRegistry = registry;
       _verifier      = verifier ?? null;
+    },
+    authSeam: {
+      verify: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin"): Promise<boolean> =>
+        new Promise<boolean>((resolve) => {
+          const requestId = `verify-${++_verifySeq}`;
+          _pendingVerifies.set(requestId, resolve);
+          worker.postMessage(mkAdminVerifyRequest({ requestId, cardBytes, bagUrl, access }));
+        }),
     },
     placeVerb: (verbOpts) => {
       worker.postMessage(mkAdminPlaceVerb({
