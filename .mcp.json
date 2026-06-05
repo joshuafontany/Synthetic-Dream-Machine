@@ -18,15 +18,6 @@
       "env": {
         "LARARIUM_HTTP_URL": "http://127.0.0.1:4321"
       }
-    },
-    "lares-probe-runner": {
-      "command": ".venv/bin/python",
-      "args": ["tests/mcp/probe_runner.py"],
-      "cwd": ".",
-      "env": {
-        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
-        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
-      }
     }
   }
 }
