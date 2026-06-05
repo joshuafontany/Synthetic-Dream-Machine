@@ -65,7 +65,6 @@ This shelf does NOT govern URI grammar. URI scheme law lives at:
 ### Source architecture docs (moved from `_todo/core/`)
 
 - [Signal_HUD_Tagspace-draft.md](Signal_HUD_Tagspace-draft.md) — 2043-line authoritative source document defining the complete HUD and crystal state machine layer. Tagspace definition, Intent Header vs In-Flow Signal, rendering across p-scale, crystal ledger format (STATE.jsonl, SNAPSHOT.json). **Design-lineage archive — superseded by the live sigil grammar.**
-- [TODO_Signal_HUD_Crystal_Plan.md](TODO_Signal_HUD_Crystal_Plan.md) — 617-line master implementation plan for Signal HUD, Tagspace, and Archive Crystals. Five epics covering Intent Header spec, Micro-trace HUD, and `--debug` target redirects.
 
 ### Sprint and handoff docs (moved from `build.lares.failed/`)
 

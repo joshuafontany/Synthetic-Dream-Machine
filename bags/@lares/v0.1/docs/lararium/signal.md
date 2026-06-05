@@ -76,7 +76,7 @@ The Agent-Operator contract reads:
 This loci explains why that loop matters on the lararium side.
 Detailed emit rules and protocol-wide render contracts still live outward.
 
-<<~ loulou packages/lares-core/memes/docs/pono/lar-uri.md >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
 
 <<~/ahu >>
 
