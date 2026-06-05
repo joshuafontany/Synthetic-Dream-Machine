@@ -46,7 +46,9 @@ Two divergences surface from the alignment:
 * **Model-move** --- the reference loop requires a phase the trace skipped (the content acted without orienting; the content never closed Aftermath).
 * **Log-move** --- the trace took a move the loop does not sanction (a phase out of order; an act with no prior decision).
 
-A **fitness** reading names how cleanly the trace conforms: a clean run aligns every phase in order and closes the loop; a broken run names where the loop snapped. A trace that runs Act and never reaches Aftermath has stopped serving and commenced managing --- the same failure `OODA-HA` names for the node itself, now read in another's work.
+A **fitness** reading names how cleanly the trace conforms: a clean run aligns every phase in order and closes the loop; a broken run names where the loop snapped.
+
+A trace MAY also **suspend** honestly --- reaching a phase and naming an external blocker it cannot pass (an absent decision, a failed dependency, missing input). An honest suspension reads as **conformant**, never a model-move: the loop stays open, not skipped. Only a *silent* drop --- Act with no Aftermath and no phase named --- reads as the managing failure `OODA-HA` names for the node itself, now read in another's work (phase-yield: `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`).
 
 <<~/ahu >>
 

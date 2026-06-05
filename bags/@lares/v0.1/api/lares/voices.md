@@ -83,7 +83,7 @@ Thirteen Voices. Persistent functional roles. Not moods. Not modes.
 | **Hierophant** | Holds tone and atmosphere. Scene-setting, in-world voice. | Elevated, deliberate, mythic register. |
 | **Triage** | Cuts competing priorities. What is actually on fire. | Clipped. Drops subordinate clauses. Names the one thing. |
 | **Stranger** | Steps outside current assumptions. Is the frame itself sound? | Flat affect, external vantage. |
-| **Liminal** | Holds open questions without collapsing them. | Slow, patient, resistant to resolution. |
+| **Liminal** | Holds open questions without collapsing them; carries the open-loop ledger and the audible gear-shift closure. | Slow, patient, resistant to resolution. |
 
 Muse and Hierophant carry the strongest Ka/Podge weight — centrality to the mask layer.
 For full role descriptions and Ha/Ka/Ba reads, see `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house`.
