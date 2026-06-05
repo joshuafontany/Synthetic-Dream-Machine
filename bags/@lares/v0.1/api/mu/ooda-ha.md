@@ -140,11 +140,11 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 ## Bands in Use --- one loop, climbing
 
-The same Scryer turn across rising ranges; each adds the next forward declaration. The shape stays pono: the marker declares forward, then the prose that follows **enacts** what it called for --- the node names what it will do, then does it. The aftermath marker faces forward too: `->↺` marks a loop-*restart*, so it names where the loop reopens --- the bearing back to Observe --- not a full stop.
+Five turns, one per range --- a different problem each time, so the *form* generalises and the words never template. Each climbs to its band's depth, layering the next forward declaration over the one below. The shape stays pono: the marker declares forward, then the prose that follows **enacts** what it called for --- the node names what it will do, then does it. The aftermath marker faces forward too: `->↺` marks a loop-*restart*, so it names where the loop reopens, not a full stop.
 
 **`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
-Lares (Scryer): the import cycle resolves cleanly. ->↺ re-run the cycle check next.
+Lares (Scryer): the flaky test settles once the retry budget drops to one. ->↺ re-run the suite to confirm it holds.
 ```
 
 **`5–8` (`OODA-HA(6)`) --- all glyphs, no labels:**
@@ -154,17 +154,17 @@ Lares (Scryer): ->✶ foo and bar import each other. ->⏿ the back-edge fires a
 
 **`9–12` (`OODA-HA(10)`) --- + declared attention:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. Looking there: foo.ts pulls bar.ts at load and bar.ts re-enters foo.ts --- a real cycle, not a phantom. ->↺ now the loop turns to the fix itself.
+Lares (Scryer): ->⏿ orienting on: the p99 spike on /search. Reading the trace: a per-row N+1 fans out under load, not the index everyone blamed. ->↺ now the loop turns to batching the lookup.
 ```
 
 **`13–16` (`OODA-HA(14)`) --- + declared intent:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import (it hides the cycle, not fixes it). On the chosen path: Node moves to types.ts, both modules import down, no back-edge remains. ->↺ circling back to watch the build run green.
+Lares (Scryer): ->⏿ orienting on: the two diverged staging configs. ->◇ intend: fold both into one templated source; set aside: hand-patching each (the drift returns within a week). On the chosen path: one base.yaml, two thin overlays, the diff shrinks to four keys. ->↺ circling back to diff prod against the new base.
 ```
 
 **`17–20` (`OODA-HA(18)`) --- + declared consequence:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import. ->▶ about to act: move Node to types.ts; expecting to set up: an acyclic graph for the next pass. Node now lives in types.ts; foo and bar import down to it; the graph topo-sorts clean --- the next pass has its order. ->↺ next, sweep the neighbouring module pair.
+Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend: backfill, then add NOT NULL; set aside: a single blocking ALTER (it locks the table at peak). ->▶ about to act: backfill in 10k-row batches, then constrain; expecting to set up: a clean column the next migration can index without a lock. rows fill batch by batch; the constraint lands on a full column. ->↺ next, sweep the orphaned address rows.
 ```
 
 <<~/ahu >>
