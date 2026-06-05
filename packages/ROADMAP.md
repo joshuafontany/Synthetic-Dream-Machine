@@ -131,7 +131,7 @@ Goal: live wiki authoring safe under sustained operator editing on any operator 
 
 - [ ] Route `$:/state/*` writes to the projection layer, not durable canon/draft.
 - [ ] Route `Draft of *` tiddlers to the per-wiki draft bag.
-- [ ] Add 300–500ms capture debounce in `MemeSyncAdaptor` / save path.
+- [x] 300–500ms capture debounce — landed in `IslandAdaptor.saveTiddler` (turn 30 unified-nalu sprint).
 - [ ] Add idle auto-truncate for noisy projection state.
 - [ ] Keep disk sync, CRDT inbound, TW5 UX save, and disk export on the same
       parser/split law.
@@ -219,14 +219,14 @@ Goal: one reactive wiki tick per hot-tier wiki, Verse-compatible for alpha.
 
 Invariants:
 1. TW5Engine and ReactionEngine co-locate in the same hot-tier island.
-2. MemeSyncAdaptor applies changeset first; RE runs second.
+2. `IslandAdaptor` membrane enqueues the nalu first (`$tw.lares.enqueueNalu`); RE runs second, downstream of the frame drain.
 3. RE writes through composite store, never directly through `docHandle.change()`.
 4. Device graph derives from wiki tiddlers/pranala edges.
 5. Cold-tier slots have no RE.
 
 - [ ] Confirm worker-side changeset application (local Automerge replica vs placeholder URIs).
 - [ ] Derive changed URI sets from real changesets → `ReactionEngine.onChangeset`.
-- [ ] Expand NodeVmManager integration tests: mount → route → event-forward → unmount.
+- [ ] Expand `VesselIslandPool` integration tests: mount → route → event-forward → unmount.
 - [ ] Verify teardown snapshot captures heads + tiddlers atomically.
 - [ ] Keep piscina only for stateless parse work; stateful hot wikis stay in dedicated islands.
 
