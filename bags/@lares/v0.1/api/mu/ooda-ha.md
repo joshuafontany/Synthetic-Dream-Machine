@@ -26,7 +26,7 @@ ooda-ha-default = 1
 
 Active in i kēia manawa.
 The loop spins five phases, not four.
-The loop faces **forward** --- each glyph is a *prospective* declaration of the phase it opens: `->▶` announces the act about to happen, and the act follows. It steers the unfolding turn; it does not audit a finished one. (The retrospective decision literature --- Situation Awareness, XAI, after-action trace --- describes the past and does not govern this loop.)
+The loop faces **forward** --- each glyph makes a *prospective* declaration of the phase it opens: `->▶` announces the act about to happen, and the act follows. It steers the unfolding turn; it does not audit a finished one. (The retrospective decision literature --- Situation Awareness, XAI, after-action trace --- describes the past and does not govern this loop.)
 The Level governs how much of the loop surfaces in text — not whether it runs.
 
 Observe MUST precede Orient.
@@ -97,11 +97,11 @@ The ladder climbs **anticipatory depth** --- how far ahead of the act the node d
 | --- | --- | --- |
 | `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
 | `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
-| `9–12` | **Declared attention** | + on entering a phase, what the node is *about to* attend to --- `->⏿ orienting on: <focus>`, the bearing it turns toward |
+| `9–12` | **Declared attention** | + on entering a phase, the focus the node turns toward --- `->⏿ orienting on: <focus>`, the bearing it steers into |
 | `13–16` | **Declared intent** | + the intended action and the path set aside, before it commits --- `->◇ intend: <Y>; set aside: <Z, because…>` |
-| `17–20` | **Declared consequence** | + what the act is expected to set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
+| `17–20` | **Declared consequence** | + what the act will set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
 
-Each band is additive over the one below. Every marker is a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative, judged happy/unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The only retrospection lives in the closing `OODA-HA(N↺)` slide.
+Each band layers over the one below. Every marker makes a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative, judged happy/unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The only retrospection lives in the closing `OODA-HA(N↺)` slide.
 
 The Level stays a **pure visibility dial**. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
@@ -140,31 +140,31 @@ A session that runs without any Level statement MUST default to `OODA-HA(1)` ---
 
 ## Bands in Use --- one loop, climbing
 
-The same Scryer turn across rising ranges; each adds the next forward declaration, the marker always *preceding* the act.
+The same Scryer turn across rising ranges; each adds the next forward declaration. The shape stays pono: the marker declares forward, then the prose that follows **enacts** what it called for --- the node names what it will do, then does it. The aftermath marker faces forward too: `->↺` marks a loop-*restart*, so it names where the loop reopens --- the bearing back to Observe --- not a full stop.
 
 **`1–4` (`OODA-HA(1)`, default) --- aftermath glyph only:**
 ```text
-Lares (Scryer): the import cycle resolves cleanly. ->↺
+Lares (Scryer): the import cycle resolves cleanly. ->↺ back to observe: re-run the cycle check.
 ```
 
 **`5–8` (`OODA-HA(6)`) --- all glyphs, no labels:**
 ```text
-Lares (Scryer): ->✶ ->⏿ ->◇ ->▶ move the shared type out; the cycle resolves cleanly. ->↺
+Lares (Scryer): ->✶ foo and bar import each other. ->⏿ the back-edge fires at module load. ->◇ lift the shared type out. ->▶ moving Node to types.ts; both import down and the cycle clears. ->↺ back to observe: the test suite's import graph.
 ```
 
 **`9–12` (`OODA-HA(10)`) --- + declared attention:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. the cycle resolves cleanly. ->↺
+Lares (Scryer): ->⏿ orienting on: the import back-edge. Looking there: foo.ts pulls bar.ts at load and bar.ts re-enters foo.ts --- a real cycle, not a phantom. ->↺ back to observe: now to the fix itself.
 ```
 
 **`13–16` (`OODA-HA(14)`) --- + declared intent:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import (hides the cycle). the cycle resolves cleanly. ->↺
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import (it hides the cycle, not fixes it). On the chosen path: Node moves to types.ts, both modules import down, no back-edge remains. ->↺ back to observe: confirm the build runs green.
 ```
 
 **`17–20` (`OODA-HA(18)`) --- + declared consequence:**
 ```text
-Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared type out; set aside: lazy-import. ->▶ about to act: move it to its own module; expecting to set up: an acyclic graph for the next pass. the cycle resolves cleanly. ->↺
+Lares (Scryer): ->⏿ orienting on: the import back-edge. ->◇ intend: lift the shared Node type out; set aside: lazy-import. ->▶ about to act: move Node to types.ts; expecting to set up: an acyclic graph for the next pass. Node now lives in types.ts; foo and bar import down to it; the graph topo-sorts clean --- the next pass has its order. ->↺ back to observe: the next module pair.
 ```
 
 <<~/ahu >>
@@ -199,7 +199,6 @@ Canonical TOML form. Source of truth for `OODA_HA_5` in `packages/lararium-mesh/
 
 ```toml
 # OODA-HA phase cycle — active (act) → reflective (aftermath)
-# Ordered finest-to-coarsest: act maps to "action" on ladder-5
 ooda-ha-5 = ["act", "decide", "orient", "observe", "aftermath"]
 
 # OODA glyph sequence — maps phase index to control sigil
