@@ -45,6 +45,8 @@ import {
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   wikiLarUri, wikiDraftLarUri, BAG_IDS, TEMP_BAG,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX,
+  computeRecipeFingerprint,
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
 import type { LarTiddlerRecord } from "@lararium/mesh";
@@ -65,6 +67,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
+import { resolveOrMintBinding }           from "./resolve-binding.js";
 import { VerbTable } from "@lararium/tw5";
 import { makeWhereReactor }                       from "./where-handler.js";
 import { makeResolveReactor }                     from "./resolve-handler.js";
@@ -777,12 +780,49 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
     { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
   ];
+  // ── 8b. @personal / @draft binding resolution (S7.5 + S7.6) ─────────────────
+  // Composition-root step: resolve (or mint+delegate) the operator's cross-device
+  // @personal + @draft docs for THIS recipe-fingerprint, then pass the URLs
+  // through WikiBootContext into the mount. Runs AFTER Gates B/C proved a real
+  // PersonGroup (personGroupAgentIdHex verified non-null above) and AFTER
+  // `await adminVm.workerEa`, BEFORE the mount that needs the URLs.
+  //
+  // Fingerprint covers wikiDocId + canonBags only (@lares/@lararium excluded per
+  // Q4). The live primary recipe carries no canonBags (`{ wikiSlug }`), so the
+  // fingerprint keys on the wiki doc URL alone today.
+  const recipeTrace = { wikiDocId: wikiHandle.url, canonBagDocIds: [] as readonly string[] };
+  const fingerprint = await computeRecipeFingerprint(recipeTrace);
+
+  const bindingCommon = {
+    fingerprint, repo,
+    adminHandle:           adminVm.adminHandle,
+    keyhive,
+    personGroupAgentIdHex,                 // verified present at Gate B/C above
+    mintedByHex:           keyhiveDid,
+    recipeTrace,
+  } as const;
+  // Q11 (slice a): @personal + @draft bind TOGETHER per-fingerprint; neither
+  // retires alone. The host-side ad-hoc draft layer (§5 above) remains for the
+  // vessel's own composite; the island mounts THIS fingerprint-keyed @draft.
+  const personalBinding = await resolveOrMintBinding({
+    ...bindingCommon, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
+  });
+  const draftBinding = await resolveOrMintBinding({
+    ...bindingCommon, kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
+  });
+  console.log(
+    `[lararium] @personal ${personalBinding.minted ? "minted" : "reused"} · ` +
+    `@draft ${draftBinding.minted ? "minted" : "reused"} · fp=${fingerprint.slice(0, 12)}…`,
+  );
+
   // Unified mount path — primary is a `wela` slot with the `pinned` flag set
   // (never LRU-evicted); pin is orthogonal to temperature (EPIC S11.5).
   await vmManager.mountWiki(activeWikiId, {
     docHandle: wikiHandle,
     coreHash,
     diskMirrors,
+    personalDocUrl: personalBinding.url,
+    draftDocUrl:    draftBinding.url,
   }, { pinned: true });
   emit("tw5-booted");
 

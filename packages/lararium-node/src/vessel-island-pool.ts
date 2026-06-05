@@ -36,8 +36,8 @@ import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
-  mkWikiPlaceVerb,  BAG_IDS,
-  LARARIUM_BAG, wikiBagUri, slugFromUri,
+  mkWikiPlaceVerb,
+  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG, wikiBagUri, slugFromUri,
   type IslandStorageConfig,
   type WikiRecipe,
 } from "@lararium/mesh";
@@ -106,6 +106,15 @@ export interface WikiBootContext {
    * Only pass for primary islands with disk write-back responsibility.
    */
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
+  /**
+   * Resolved `@personal` slot doc URL — the host's `resolveOrMintBinding` hands
+   * this through (S7.5). The pool stays envelope-only: it only adds the URL to
+   * the manifest `resolver` map. Absent → the `@personal` slot resolves to
+   * nothing and the recipe skips it cleanly.
+   */
+  personalDocUrl?: string;
+  /** Resolved `@draft` slot doc URL — same pass-through grain as personalDocUrl. */
+  draftDocUrl?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -366,6 +375,11 @@ export class VesselIslandPool {
     const resolver: Record<string, string | null> = {
       [LARARIUM_BAG]:           this._laraiumDocUrl,
       [wikiBagUri(wikiSlug)]:   rawDocUrl,
+      // @personal / @draft — present only when the host resolved a binding.
+      // expandRecipe already lists both slots at the right priority; absent a
+      // URL the slot resolves to nothing and the recipe skips it cleanly.
+      ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
+      ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
     };
 
     const storage: IslandStorageConfig | undefined = this._storageRoot

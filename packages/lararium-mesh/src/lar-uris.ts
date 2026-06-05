@@ -195,6 +195,15 @@ export const PERSON_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/person-gr
 /** Admin oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-cabal/doc-id`;
 
+// ── @personal / @draft binding tiddler prefixes ───────────────────────────
+// The (PersonGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
+// the admin doc under these prefixes. One fingerprint produces TWO bindings
+// (one @personal, one @draft) that share a lifecycle. The binding tiddler title
+// is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound Automerge URL.
+// Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot#core-claim
+export const PERSONAL_BINDINGS_PREFIX = `${ADMIN_BAG_ID}/personal-bindings`;
+export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
+
 // ── Well-known bag slot IDs ────────────────────────────────────────────────
 // Six root docs (two planes) + in-memory leaves.
 // Bag ID = lar: URI of the owning Automerge doc.
