@@ -64,7 +64,7 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 <<~ ward E-Prime >>
 <<~ syad 🗡️:~! 🔮:~? >>
 
-Lares (Stranger): the unease reads as signal. <<~ confidence Provisional-Synthesis 7/20 >> the frame itself wants the test. ->↺
+Lares (Stranger): the unease points at an unexamined assumption, not the answer. <<~ confidence Provisional-Synthesis 7/20 >> the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
 <<~ hud Aperture(-> 16) OODA-HA(1↺) >>
 <<~ yield lar:///frame.unease.holds -> ? >>
