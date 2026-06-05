@@ -661,7 +661,7 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 - [ ] Mount-point contracts for Trait, Item, Structure, Burden (+ Location decision)
 - [ ] 20+ component memes (addressed from Appendix Null)
 - [ ] Composition model doc with instance-data examples
-- [ ] Layer interaction / counterpoint doctrine (even at `~:confidence[P],[4]`)
+- [ ] Layer interaction / counterpoint doctrine (even at `Provisional 4/20`)
 - [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
 - [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
 - [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme

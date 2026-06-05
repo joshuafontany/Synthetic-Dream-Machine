@@ -37,7 +37,7 @@ The tagspace definition, HUD, micro-trace, drift, provenance, and render-target 
 This parent keeps only branch-level signal framing:
 
 - the exchange-boundary contract for `lar` URI signal
-- the split between canonical URI vectors, HUD lines, and in-span micro-trace
+- the split between the `aim` / `yield` WHERE-vectors, the sigil panel, and in-span OODA-HA surfacing
 - routing pressure toward the correct child room
 
 Long witness bundles, migration residue, drift-recovery detail, symbol tables, and research argument should leave this parent.
@@ -139,7 +139,7 @@ The render layer projects the same signal differently across surfaces without re
 
 Text that clearly belongs outward:
 
-- HUD line field tables and exchange-boundary instrument reading → `signal/hud.md`
+- sigil panel field tables and exchange-boundary instrument reading → `signal/hud.md`
 - micro-trace syntax, density bands, handoff rules, and examples → `signal/micro-trace.md`
 - drift-recovery protocol pressure → `signal/drift.md`
 - provenance, witness strands, and snapshot residue → `signal/provenance.md`
