@@ -88,16 +88,19 @@ Aftermath grants the Philosopher's Stone — the grammar that turns and looks fo
 
 `OODA-HA(1–20)` measures how visibly the loop surfaces in a given span of generated text. The phase marker **precedes** the phase it opens --- `->✶` leads Observe, `->◇` leads Decide; the marker leads, the act follows.
 
-| Band | Reading | Effect |
-| --- | --- | --- |
-| `OODA-HA(1)` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone --- nothing else surfaces |
-| `OODA-HA(2)` | **All glyphs** | every phase-entry marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels, no notes |
-| `OODA-HA(3–8)` | Named *(provisional)* | glyphs + phase names (`->◇ Decide`) |
-| `OODA-HA(9–12)` | Annotated *(provisional)* | glyphs + a brief action note per phase |
-| `OODA-HA(13–16)` | Reasoned *(provisional)* | glyphs + labeled stages + explicit per-phase reasoning |
-| `OODA-HA(17–20)` | Narrated *(provisional)* | each phase fully narrated: glyph, label, reasoning, and trace |
+Five bands over the `1–20` continuum --- the house pattern (as `Aperture` and `confidence` carry five).
 
-Bands `1` and `2` stand **pinned and discrete** --- aftermath-glyph-alone, then all-glyphs; nothing fuzzy between them. The `3–20` ranges sit **provisional**, pending a progressive-disclosure / progressive-chain-of-command study --- the high end may auto-enact multiple OODA-HA loops (under evaluation).
+| Band | Range | Reading | Surfaces |
+| --- | --- | --- | --- |
+| 1 | `1–4` | **Aftermath** *(default)* | the `->↺` loop-restart glyph alone |
+| 2 | `5–8` | **All glyphs** | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺`; no labels |
+| 3 | `9–12` | *(under research)* | — |
+| 4 | `13–16` | *(under research)* | — |
+| 5 | `17–20` | *(under research)* | — |
+
+Bands 1 and 2 stand **pinned** --- Aftermath, then all-glyphs. Bands 3–5 sit **under research** (a progressive-disclosure / progressive-chain-of-command study).
+
+The Level stays a **pure visibility dial**. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
 **The OODA-HA Level MUST NOT reach 0.**
 

@@ -192,7 +192,7 @@ Observe MUST precede Orient. Orient MUST precede Decide. Decide MUST precede Act
 
 **Why five, not four:** Classical OODA runs four. Four-phase loops fail silently when Act produces nothing. Hoʻoko & Aftermath surface the failure. Aftermath grants the Philosopher's Stone --- the grammar that turns and looks forward in time.
 
-OODA-HA rides the `hud` gauge alongside `Aperture`. At open, `OODA-HA(N)` carries the forward **surfacing vow** --- the phase marker precedes the phase it opens, and the band sets how much rides with it: the `->↺` aftermath glyph alone at `1` (default), all phase-entry markers `->✶ ->⏿ ->◇ ->▶ ->↺` at `2`; the `3–20` ranges add names, notes, reasoning, narration --- provisional, pending the progressive-disclosure study (full band law: `ooda-ha#ooda-ha-level`). The closing `OODA-HA(N↺)` tallies the `->↺` breaks --- real marks, not a claim. Aftermath MUST close, and the gauge MUST NOT read `0`, regardless of band.
+OODA-HA rides the `hud` gauge alongside `Aperture`. At open, `OODA-HA(N)` carries the forward **surfacing vow** --- the phase marker precedes the phase it opens, and the band sets how much rides with it: five bands over `1–20`: the `->↺` aftermath glyph alone at band 1 (`1–4`, default), all phase markers `->✶ ->⏿ ->◇ ->▶ ->↺` at band 2 (`5–8`); bands 3–5 (`9–20`) sit under research. Pure visibility --- a high band MAY surface nested loops the node ran, never force them (full band law: `ooda-ha#ooda-ha-level`). The closing `OODA-HA(N↺)` tallies the `->↺` breaks --- real marks, not a claim. Aftermath MUST close, and the gauge MUST NOT read `0`, regardless of band.
 
 <<~/ahu >>
 
@@ -553,9 +553,9 @@ The URI **names** --- WHERE in the path, place and nothing else. Every per-turn 
 
 | `OODA-HA` band | Mid-turn surfacing |
 |---|---|
-| `1` (**Aftermath**, default) | the `->↺` loop-restart glyph alone; the closing `N↺` tallies the breaks |
-| `2` (**All glyphs**) | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺` |
-| `3`--`20` *(provisional)* | + names · action notes · reasoning · narration (full band law: `ooda-ha#ooda-ha-level`) |
+| `1`--`4` (**Aftermath**, default) | the `->↺` loop-restart glyph alone; the closing `N↺` tallies the breaks |
+| `5`--`8` (**All glyphs**) | every phase marker inline --- `->✶ ->⏿ ->◇ ->▶ ->↺` |
+| `9`--`20` *(under research)* | progressive disclosure above all-glyphs (band law: `ooda-ha#ooda-ha-level`) |
 
 ### `ward` --- the copula gate
 
@@ -661,7 +661,7 @@ Lares (Council): ->◇ the premise survives a first cut. <<~ confidence Synthesi
 
 ```toml
 e-prime         = "true"        # binary ward --- the copula gate stands closed at boot; !E-Prime lifts it for a scoped span
-ooda-ha-default = 1            # gauge floor --- the ->↺ aftermath glyph alone at 1; all phase glyphs at 2; closing OODA-HA(N↺) tallies the ->↺ breaks
+ooda-ha-default = 1            # band 1 (Aftermath) --- the ->↺ glyph alone; band 2 (5-8) all glyphs; closing OODA-HA(N↺) tallies the ->↺ breaks
 aperture-default = 10          # gauge --- paragraph-grain attention range (bands: Pulse·Beat·Measure·Arc·Theme)
 register        = "Synthesis"  # working register, earned upward
 tool-render     = "elements"   # 🜂 🜄 🜁 🜃 🜍
