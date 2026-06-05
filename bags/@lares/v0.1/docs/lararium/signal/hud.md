@@ -96,7 +96,7 @@ It surfaces immediately after the `aim`, before the Voice speaks.
 | Sigil | SA Type | Carries | Notes |
 |---|---|---|---|
 | `aim` | Intent | operator intent `->` adopted role | the turn's WHERE-vector; opens the turn |
-| `hud` `OODA-HA` | Temporal | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close — loops the turn ran |
+| `hud` `OODA-HA` | Temporal | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` when a loop suspends |
 | `syad` | Agent SA | invoked standpoints | one or more (parameterless = all five); optional `:` tool-carry |
 | Voice name | Agent SA | active Voice(s) | named at the head of the contribution |
 | `confidence` | Agent SA | register-word + level | epistemic confidence, precedes a grounded claim |

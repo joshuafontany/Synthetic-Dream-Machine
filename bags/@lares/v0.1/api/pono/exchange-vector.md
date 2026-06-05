@@ -70,7 +70,7 @@ Lares (Stranger): the unease points at an unexamined assumption, not the answer.
 <<~ yield lar:///frame.unease.holds -> ? >>
 ```
 
-A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. The `ward` lifts by operator act only (`!E-Prime`); the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
+A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The `ward` lifts by operator act only (`!E-Prime`); the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
 
 <<~/ahu >>
 

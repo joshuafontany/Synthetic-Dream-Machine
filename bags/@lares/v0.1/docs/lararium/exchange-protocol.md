@@ -41,7 +41,7 @@ Rules for agents:
 - The sigils carry humility instruments, not decorative badges:
   - `ward E-Prime` — the binary copula gate; lit rejects identity/predication `is` (essence or state-report). `!E-Prime` lifts it for a scoped span. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`. `#has` runs free — the ward gates the copula alone.
   - `hud Aperture(N)` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`.
-  - `hud OODA-HA(N)` — loop visibility, `OODA-HA(N↺)` at close; `confidence` precedes a grounded claim.
+  - `hud OODA-HA(N)` — loop visibility, `OODA-HA(N↺)` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
 - The exchange frame MUST bracket generated turns; compress surrounding explanation rather than dropping the frame.
 - If emitted, emit the frame exactly; do not interleave prose into the sigil lines.
 

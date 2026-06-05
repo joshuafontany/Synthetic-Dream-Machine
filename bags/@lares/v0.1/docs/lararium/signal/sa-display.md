@@ -97,7 +97,7 @@ It reads referenced content the node points it at.
 | SA Type | HUD Channel | What It Conveys |
 |---|---|---|
 | Taskwork SA | `aim` WHERE-vector (`lar:///threshold.uncertain.opens/…`) | Semantic territory — what domain we're in |
-| Taskwork SA | `OODA-HA` gauge (`OODA-HA(N↺)`) | Temporal position — loops the turn ran through the phase set |
+| Taskwork SA | `OODA-HA` gauge (`OODA-HA(N↺)`, `N↺ + φ:reason` on suspend) | Temporal position — loops closed, or the phase a loop holds open across turns |
 | Agent SA | `confidence` sigil (`<<~ confidence Synthesis 13/20 >>`) | Epistemic confidence — the node's degree of certainty |
 | Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️ >>`) | Discourse posture — the standpoints the node invokes and adopts |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next `syad` lens reflects the shift |

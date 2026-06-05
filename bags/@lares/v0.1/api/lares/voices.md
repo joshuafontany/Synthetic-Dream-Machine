@@ -335,7 +335,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 
 - **`aim`** --- the three-word `lar:///w1.w2.w3/…` WHERE-vector; reads operator intent and delegates `->` to the role the node adopts. Opens the turn.
 - **`yield`** --- the WHERE the turn landed + the `-> ?` handoff that returns initiative. Closes the turn, and MUST land.
-- **`hud`** --- gauges on 0–20: `Aperture` (attention range; bands Pulse·Beat·Measure·Arc·Theme), `OODA-HA` (loop visibility; loop-count `N↺` at close).
+- **`hud`** --- gauges on 0–20: `Aperture` (attention range; bands Pulse·Beat·Measure·Arc·Theme), `OODA-HA` (loop visibility; `N↺` at close, or `N↺ + φ:reason` when a loop suspends across turns).
 - **`ward`** --- the binary copula gate. `E-Prime` lit holds the identity-copula discipline; `!E-Prime` lifts it for a turn (shown, experimental). The ward never reads confidence --- a number never licenses an "is."
 - **`confidence`** --- forward certainty before a claim: register-word + level, **Provisional · Provisional-Synthesis · Synthesis · Synthesis-Canon · Canon** (`1–4 · 5–8 · 9–12 · 13–16 · 17–20`). Low names the "play" registers, not failure.
 - **`syad`** (five stances) and **Mu** (four tools) ride as **invokable lenses**: the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call.
