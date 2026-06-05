@@ -25,7 +25,7 @@ retain = false
 
 Not invariant law.
 This shelf holds the lararium-side signal frame that binds agent and operator.
-The tagspace definition, HUD, micro-trace, drift, provenance, and render-target documents live below this loci.
+The tagspace definition, HUD, drift, provenance, and render-target documents live below this loci.
 
 <<~/ahu >>
 
@@ -123,7 +123,7 @@ The signal branch splits across five layers:
 |---|---|---|
 | Canonical URI vector | audit-ready record form for exchange boundaries | parent branch framing, see `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/tagspace` |
 | Sigil panel | live exchange-boundary instruments (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses) | `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud` |
-| Micro-trace | compact in-span annotation under the governing header | `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace` |
+| Conformance lens | reads the OODA-HA loop in *referenced* content, outward and on demand | `lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance` |
 | Render targets | cross-surface sigilization and projection rules | `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets` |
 | SA-display framing | shared-mental-model theory, research grounding, and SA/XAI split | `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/sa-display` |
 
@@ -140,7 +140,6 @@ The render layer projects the same signal differently across surfaces without re
 Text that clearly belongs outward:
 
 - sigil panel field tables and exchange-boundary instrument reading → `signal/hud.md`
-- micro-trace syntax, density bands, handoff rules, and examples → `signal/micro-trace.md`
 - drift-recovery protocol pressure → `signal/drift.md`
 - provenance, witness strands, and snapshot residue → `signal/provenance.md`
 - shared-situation-awareness research framing and SA-vs-XAI argument → `signal/sa-display.md`
@@ -158,7 +157,6 @@ The current chronometer material still reads as a research cluster under `signal
 Settled child rooms in this branch:
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets >>

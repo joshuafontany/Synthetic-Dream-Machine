@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/browser-dock >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/browser/browser-authority"
-file-path    = "bags/@lararium/v0.1/browser/browser-authority.md"
-source-file  = "packages/lararium-mesh/src/browser-authority.ts"
+uri-path     = "ha.ka.ba/@lararium/v0.1/browser/browser-dock"
+file-path    = "bags/@lararium/v0.1/browser/browser-dock.md"
+source-file  = "packages/lararium-mesh/src/browser-dock.ts"
 type         = "text/x-memetic-wikitext"
 register     = "Synthesis"
 mana         = 18

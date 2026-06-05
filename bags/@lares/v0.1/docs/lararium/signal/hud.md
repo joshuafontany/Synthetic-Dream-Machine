@@ -43,7 +43,7 @@ This room keeps the live HUD surface:
 - forward commitment at exchange boundaries
 
 Parent-branch framing now lives up at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal`.
-Micro-trace now lives at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace`.
+The in-generation loop surfacing folded into the `OODA-HA` Level; reading the loop in referenced content moved to the conformance lens (`lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance`).
 Provenance now lives at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance`.
 Drift recovery now lives at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/drift`.
 
@@ -64,12 +64,12 @@ What belongs here:
 - Dual clocks where the HUD line surfaces them
 - Unicode glyph vs machine-form rendering at the HUD line
 - Header Field Taxonomy where the line needs the field split
-- Forward vs backward trace contract at the boundary between HUD and micro-trace
+- Forward loop surfacing now rides the OODA-HA Level at the HUD boundary
 - HUD instrument symbol table
 
 What does not belong here:
 
-- full micro-trace syntax, density bands, handoff protocol, and examples → `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace`
+- reading the OODA-HA loop in referenced content → `lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance`
 - drift recovery protocol pressure → `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/drift`
 - provenance, archive witness, and snapshot residue → `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance`
 - shared-SA research framing and SA-vs-XAI theory → `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/sa-display`
@@ -477,7 +477,6 @@ Q16 (Tagspace slot shift notation) — locked.
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud >>

@@ -107,7 +107,7 @@ Empty until S1 lands.
 
 | Sprint | Code moved | From | To | Cheap check satisfied |
 |---|---|---|---|---|
-| S1 | `BrowserAuthorityId`, `BrowserAuthorityPhase`, `BrowserAuthorityBootParams`, `BrowserAuthorityCapabilities`, `BrowserAuthorityLease`, `BrowserProjectionSnapshot`, `BrowserAuthorityDebugStats`, `BrowserAuthorityReceipt`, `BrowserAuthorityPool` | (new — authored in `@lararium/mesh`) | `packages/lararium-mesh/src/browser-authority.ts` | Law test ✓ (zero DOM types); typecheck ✓ all packages |
+| S1 | `BrowserAuthorityId`, `BrowserAuthorityPhase`, `BrowserAuthorityBootParams`, `BrowserAuthorityCapabilities`, `BrowserAuthorityLease`, `BrowserProjectionSnapshot`, `BrowserAuthorityDebugStats`, `BrowserAuthorityReceipt`, `BrowserAuthorityPool` | (new — authored in `@lararium/mesh`) | `packages/lararium-mesh/src/browser-dock.ts` | Law test ✓ (zero DOM types); typecheck ✓ all packages |
 
 <<~/ahu >>
 

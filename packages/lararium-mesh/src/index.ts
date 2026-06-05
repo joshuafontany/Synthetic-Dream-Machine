@@ -37,7 +37,7 @@ export * from "./verb-tiddler.js";
 export * from "./residency-actions.js";
 export * from "./effect-record.js";
 export * from "./kumu-device.js";
-export * from "./browser-authority.js";
+export * from "./browser-dock.js";
 export * from "./genesis-doc.js";
 export * from "./island-protocol.js";
 export * from "./social-seed.js";

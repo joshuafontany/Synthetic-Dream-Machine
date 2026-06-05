@@ -1,15 +1,16 @@
 /**
- * browser-authority.ts — browser island boundary types.
+ * browser-dock.ts — browser island boundary types.
  *
- * Only data shapes that cross the island boundary live here. The pool
- * implementation in @lararium/browser manages its own internal state.
+ * The dock: where boundary-crossing shapes berth as they pass between vessel
+ * and island. Only boundary-crossing shapes live here; the pool implementation
+ * in @lararium/browser manages its own internal state.
  *
  * Under the one-recipe model, the canonical `WikiRecipe` + `BagResolver`
  * live in `wiki-recipe.ts`. This file re-exports `WikiRecipe` as a
  * convenience alias for the browser API surface and adds browser-specific
  * mount-time params and projection-snapshot shapes.
  *
- * Schema: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-authority
+ * Schema: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-dock
  */
 
 import type { Heads } from "@automerge/automerge";

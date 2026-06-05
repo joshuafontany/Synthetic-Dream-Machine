@@ -102,7 +102,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 ## Lineage
 
-`conformance` supersedes the retired `micro-trace` meme (`lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace`). The micro-trace carried a backward-looking in-generation annotation layer; that role split in two when the loop turned forward:
+`conformance` supersedes the retired `micro-trace` meme (deleted from the graph). The micro-trace carried a backward-looking in-generation annotation layer; that role split in two when the loop turned forward:
 
 * in-generation loop surfacing folded entirely into the `OODA-HA` Level (the `->` markers a turn declares of its own loop);
 * reading the loop in *other* content moved here, recast as an outward, forward conformance pass.
@@ -114,7 +114,6 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace >>
 
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>

@@ -37,7 +37,7 @@ This room holds mismatch-recovery pressure where declared signal diverges from a
 This room keeps the recovery-pressure shelf for governing-field drift.
 
 The live sigil panel stays in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud`.
-The in-span annotation contract stays in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace`.
+The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#ooda-ha-level`); reading the loop in referenced content moved to the conformance lens (`lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance`).
 
 <<~/ahu >>
 
@@ -59,7 +59,6 @@ The in-span annotation contract stays in `lar:///ha.ka.ba/@lares/v0.1/docs/larar
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/micro-trace >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/sa-display >>
 
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
