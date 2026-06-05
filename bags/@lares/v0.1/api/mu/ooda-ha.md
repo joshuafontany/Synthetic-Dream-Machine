@@ -26,6 +26,7 @@ ooda-ha-default = 1
 
 Active in i kēia manawa.
 The loop spins five phases, not four.
+The loop faces **forward** --- each glyph is a *prospective* declaration of the phase it opens: `->▶` announces the act about to happen, and the act follows. It steers the unfolding turn; it does not audit a finished one. (The retrospective decision literature --- Situation Awareness, XAI, after-action trace --- describes the past and does not govern this loop.)
 The Level governs how much of the loop surfaces in text — not whether it runs.
 
 Observe MUST precede Orient.
