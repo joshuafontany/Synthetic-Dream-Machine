@@ -215,7 +215,9 @@ result-shape = "set"
 
 ## ↺ Aftermath
 
-Before closing, check:
+Verify the guest stayed bounded, then name what the region became.
+
+Hoʻoko — before closing, check:
 
 - opener and `file-path` agree with the carrier
 - the parent invariant remains small enough to reload easily
@@ -225,7 +227,7 @@ Before closing, check:
 - parser and lowering detail live here, off the parent
 - outward links name real adjacency or real backlog
 
-Close by naming:
+Aftermath — close by naming:
 
 - what stayed in the parent
 - what left for the sidecars

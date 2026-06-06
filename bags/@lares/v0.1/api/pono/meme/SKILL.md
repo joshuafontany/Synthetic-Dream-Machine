@@ -132,7 +132,7 @@ Look for:
 - edges block
 - return throat
 - full phase sections, subloops, examples, or research notes
-- outward type claims in `implements`
+- outward composition claims in the `#has` edges
 
 Preserve the difference between absent, stubbed, and filled surfaces.
 
@@ -194,7 +194,7 @@ When writing or revising:
 - keep one-line law statements crisp
 - move skeleton blocks into this skill or docs
 - move large rating tables and research outward
-- keep `implements` truthful to the carrier actually on the page
+- keep the `#has` edges truthful to the carrier actually on the page
 - add `loulou` links so the split surfaces form one system
 
 ### Copy-Ready Skeleton
@@ -238,7 +238,9 @@ When writing or revising:
 
 ## ↺ Aftermath
 
-Before closing, check:
+Verify the carrier holds its lawful shape, then name what the pass settled.
+
+Hoʻoko — before closing, check:
 
 - opener and `file-path` agree with the carrier
 - `#iam` carries the rating cluster in a stable order
@@ -248,7 +250,7 @@ Before closing, check:
 - outward links name real adjacency or real backlog
 - subtype claims stay truthful
 
-Close by naming:
+Aftermath — close by naming:
 
 - what required shape stayed in the parent
 - what optional depth left the parent

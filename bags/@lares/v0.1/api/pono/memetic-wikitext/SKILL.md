@@ -200,17 +200,19 @@ Aim for a parent that a reader can reload quickly.
 
 ## ↺ Aftermath
 
-Before closing, check:
+Verify the surface still teaches cleanly, then name what moved and what remains.
+
+Hoʻoko — before closing, check:
 
 - opener matches `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext`
-- parent `implements` includes `meme`, `loci`, and `invariant` when the root still functions as all three
+- the parent's `#has` edges reach `meme`, `loci`, and `invariant` when the root still functions as all three
 - `constraints` appears in this skill, not `invariants`
 - docs surface states non-law posture near the top
 - named `pranala` sugar reads as surface sugar, not as a rival edge system
 - examples and long bridge notes live here, off the parent
 - unresolved references remain named rather than hidden
 
-Close by naming:
+Aftermath — close by naming:
 
 - what stayed in the parent
 - what moved to the child
