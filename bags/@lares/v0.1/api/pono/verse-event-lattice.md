@@ -291,10 +291,9 @@ In Lararium graph terms, this maps as follows:
 | `awaitable(t) := interface:` | `control` | `has` | N per conforming type |
 | `subscribable(t) := interface:` | `control` | `has` | N per conforming type |
 | `listenable(t) := interface:` | `control` | `has` | N per conforming type |
-| `event(t) := class<final>:` (extends signalable + awaitable) | `control` | `extends` | 1 (no named parent in Verse; implicit structural conformance) |
+| `event(t) := class<final>:` (carries signalable + awaitable) | `control` | `has` | N (no named parent in Verse; structural conformance) |
 
-**Key rule:** `control:has` = "this type carries capability X" (N edges allowed).
-`control:extends` = "this type has exactly one parent class" (one edge).
+**Key rule:** `control:has` = "this type carries component X" (N edges allowed) — parent class and capabilities alike; the graph holds no is-a parent (web3 composition).
 Ahu-slot children (`fragment-parent` field) = document structure — not a pranala edge.
 
 The engine-vended boundary: `listenable(t)` carries `control:has` edges to
