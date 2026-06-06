@@ -287,19 +287,19 @@ In Lararium graph terms, this maps as follows:
 
 | Verse declaration | Edge family | Role | Count |
 |---|---|---|---|
-| `signalable(t) := interface:` | `control` | `implements` (conforms to this interface) | N per conforming type |
-| `awaitable(t) := interface:` | `control` | `implements` | N per conforming type |
-| `subscribable(t) := interface:` | `control` | `implements` | N per conforming type |
-| `listenable(t) := interface:` | `control` | `implements` | N per conforming type |
+| `signalable(t) := interface:` | `control` | `has` (carries this capability) | N per conforming type |
+| `awaitable(t) := interface:` | `control` | `has` | N per conforming type |
+| `subscribable(t) := interface:` | `control` | `has` | N per conforming type |
+| `listenable(t) := interface:` | `control` | `has` | N per conforming type |
 | `event(t) := class<final>:` (extends signalable + awaitable) | `control` | `extends` | 1 (no named parent in Verse; implicit structural conformance) |
 
-**Key rule:** `control:implements` = "this type satisfies interface X" (N edges allowed).
+**Key rule:** `control:has` = "this type carries capability X" (N edges allowed).
 `control:extends` = "this type has exactly one parent class" (one edge).
 Ahu-slot children (`fragment-parent` field) = document structure — not a pranala edge.
 
-The engine-vended boundary: `listenable(t)` carries `control:implements` edges to
+The engine-vended boundary: `listenable(t)` carries `control:has` edges to
 `awaitable(t)` and `subscribable(t)` in the type graph. User code may declare
-`control:implements → listenable(t)` edges on custom type memes to signal DEB-wiring
+`control:has → listenable(t)` edges on custom type memes to signal DEB-wiring
 intent, but built-in device events own `listenable(t)` fields by engine contract.
 
 <<~/ahu >>

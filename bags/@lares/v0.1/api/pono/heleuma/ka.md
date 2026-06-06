@@ -12,7 +12,7 @@ manao        = 17
 manaoio      = 17
 cacheable    = true
 retain       = true
-role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
+role         = "invariant capability: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
 ```
 
 
@@ -21,7 +21,7 @@ role         = "invariant interface: heleuma-ka — soul/fire anchor; promotion-
 
 <<~ ahu #head >>
 
-# Heleuma-Ka Interface (Soul / Fire)
+# Heleuma-Ka (Soul / Fire)
 
 **Ka**: soul, fire, drive, energy, thrust, movement. The animating charge. In motion toward state-change.
 
@@ -44,16 +44,16 @@ A heleuma-ka anchor exists outside the corpus **by current necessity, not by nat
 
 ## Required Fields (SHALL)
 
-An implementing meme SHALL declare in `#iam` TOML:
+A carrying meme SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma       = "ka"
 source-symbol = "<standalone function or export name>"
 ```
 
-An implementing meme SHALL carry a `#source` slot with the **complete verbatim** body of the named symbol (quine property). Partial captures violate the quine. If the natural unit is embedded in a larger function, extract it to a named function first.
+A carrying meme SHALL carry a `#source` slot with the **complete verbatim** body of the named symbol (quine property). Partial captures violate the quine. If the natural unit is embedded in a larger function, extract it to a named function first.
 
-An implementing meme MAY declare `body-sha256` when ready for promotion:
+A carrying meme MAY declare `body-sha256` when ready for promotion:
 
 ```toml
 body-sha256 = "<sha256 hex of #source slot content>"
@@ -81,7 +81,7 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~ ahu #edges >>
 
-<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:sub-interface >>
+<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
 <<~ pranala #gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/boot-gate family:control role:promoted-by >>
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 

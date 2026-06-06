@@ -44,7 +44,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 
 <<~ ahu #law >>
 
-Hostless `lar:///` memes MAY carry stable law, interface shape, data, docs, or file-backed source truth.
+Hostless `lar:///` memes MAY carry stable law, capability shape, data, docs, or file-backed source truth.
 Hostful `lar://alias:tier@host/` records MAY carry live exchange intent, session context, and trajectory pressure.
 Data memes may appear as either pattern, surfaced through exploration.
 
@@ -64,7 +64,7 @@ Operator agency matters; persistence and placement still matter.
 Precedence pressure reads from most stable to most local:
 
 1. hostless invariant memes
-2. hostless interface and control-panel memes
+2. hostless capability and control-panel memes
 3. hostless data, docs, and explanatory memes
 4. branch-local implementation artifacts and data memes
 5. hostful live exchange records and data memes

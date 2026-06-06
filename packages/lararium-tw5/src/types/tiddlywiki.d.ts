@@ -813,8 +813,8 @@ export interface TW5Instance {
 // Module export — `import("tiddlywiki")`
 //
 // TW5 npm package exports `{ TiddlyWiki }` in both CJS and ESM forms.
-// The dynamic import dance in loadNodeTiddlyWiki() (node-host.ts) handles
-// the CJS default wrapping; the shim types only the resolved factory.
+// The blob-eval in tw5-host-bridge.ts (makeNodeBootEnv) handles the CJS default
+// wrapping; the shim types only the resolved factory.
 // ---------------------------------------------------------------------------
 
 declare module "tiddlywiki" {

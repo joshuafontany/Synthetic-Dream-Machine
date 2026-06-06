@@ -10,7 +10,7 @@ manaoio      = 16
 mana         = 18
 manao        = 18
 namespace    = "⊙"
-role         = "above-namespace authority law; kernel/sacred tier interface; trust boundary root"
+role         = "above-namespace authority law; kernel/sacred tier capability; trust boundary root"
 cacheable    = true
 retain       = true
 ```
@@ -34,11 +34,11 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 <<~ ahu #ooda-ha >>
 
 ✶ detect namespace declaration and kernel-tier sigils; do not confuse elevated register with high mana score alone.
-⏿ orient against the kapu interface bundle; confirm implements-kapu, structural signals, and role-field agree.
-◇ decide whether the claim holds genuine: sigil structure, namespace declaration, and interface bundle must cohere — charm is not evidence.
+⏿ orient against the kapu capability set; confirm the kapu component, structural signals, and role-field agree.
+◇ decide whether the claim holds genuine: sigil structure, namespace declaration, and capability set must cohere — charm is not evidence.
 ▶ hold the kapu boundary; lower-tier carriers cannot silently override kapu content; route upward through kapu, never around it.
 ⤴ surface the namespace tier in the carrier record so trust routing can propagate correctly to all downstream consumers.
-↺ name any namespace claim that lacks sigil or interface support as declared-unresolved; do not flatten the gap into a rating upgrade.
+↺ name any namespace claim that lacks sigil or capability support as declared-unresolved; do not flatten the gap into a rating upgrade.
 
 <<~/ahu >>
 
@@ -69,8 +69,8 @@ The trust ordering at the kapu boundary:
 
 ```
 kapu carriers        — above base namespace; cannot be overridden below
-ano carriers         — implements an interface bundle; base namespace
-meme carriers        — valid schema, no declared interfaces; base namespace
+ano carriers         — carry a capability set; base namespace
+meme carriers        — valid schema, no declared capabilities; base namespace
 data carriers        — recognizable but schema-incomplete; base namespace
 noise carriers       — unrecognizable; no namespace claim permitted
 ```
@@ -101,7 +101,7 @@ Above-namespace carriers declare their register through:
 | role field | `role = "... kernel ..."` | explicit declaration of kernel authority |
 
 A carrier that uses kernel control characters without implementing kapu reads as `ano` or below.
-The sigil structure signals. The interface bundle discriminates.
+The sigil structure signals. The capability set discriminates.
 
 <<~/ahu >>
 

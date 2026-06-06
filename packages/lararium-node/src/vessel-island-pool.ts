@@ -86,11 +86,6 @@ interface ColdSlot {
 
 type Slot = IslandSlot | ColdSlot;
 
-// WikiBootContext retired — the pool now takes the isomorphic `WikiMountSpec`
-// (@lararium/mesh): the caller builds the full `resolver` (wiki + @lararium +
-// @personal/@draft), the recipe carries `mirrorBags`, and disk-write rides as
-// this pool's held `diskMirrorGrant`. One signature, both platforms.
-
 // ---------------------------------------------------------------------------
 // VesselIslandPoolOptions
 // ---------------------------------------------------------------------------
@@ -184,14 +179,6 @@ export class VesselIslandPool {
     opts:   { pinned?: boolean } = {},
   ): Promise<void> {
     await this._mountWorker(wikiId, spec, opts.pinned ?? false);
-  }
-
-  /**
-   * @deprecated Use `mountWiki(wikiId, spec, { pinned: true })`. Kept as a named
-   * convenience alias for the PrimaryWiki mount; routes through the unified path.
-   */
-  async mountPrimaryWorker(wikiId: string, spec: WikiMountSpec): Promise<void> {
-    await this.mountWiki(wikiId, spec, { pinned: true });
   }
 
   /**

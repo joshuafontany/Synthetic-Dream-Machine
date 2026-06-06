@@ -37,7 +37,7 @@ status-date  = "2026-04-23"
 ## Core Proposition
 
 Lararium MCP exposes `lar:///` source truth to local and future remote clients through a dependency-light, read-only server.
-The server begins from lawful carriers, interface bundles, and explicit `lar:` routing rather than from generic markdown files.
+The server begins from lawful carriers, capability sets, and explicit `lar:` routing rather than from generic markdown files.
 
 The v1 spine carries four promises:
 
@@ -45,7 +45,7 @@ The v1 spine carries four promises:
 |---|---|
 | read-only first | resources, prompts, and tools inspect/compile; they do not mutate source truth |
 | canonical carrier source | `lares/AGENTS.md`, `lares/LARES.md`, and `packages/lares-core/memes/**` govern hydration |
-| interface-aware indexes | `implements`, invariant posture, and shape diagnostics remain inspectable |
+| capability-aware indexes | `has`, invariant posture, and shape diagnostics remain inspectable |
 | local stdio before remote | workspace clients come first; remote transport waits for auth/scope policy |
 
 <<~/ahu >>

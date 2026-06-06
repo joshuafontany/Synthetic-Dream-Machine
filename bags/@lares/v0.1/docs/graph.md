@@ -59,7 +59,7 @@ Three structural claims drive the redesign:
    **Three semantic layers — keep distinct:**
    - **Ahu-slot tree** (`fragment-parent` / `slot` tiddler fields) — document-level parent/child structure. One `.md` carrier file decomposes into a root tiddler and N named slot fragment tiddlers. Not a pranala edge.
    - **`control:extends`** (one edge) — single parent class. Verse `class(Parent, ...)` first position. ECS analogy: the entity's base type. `MemeGraph.memesByParent()` indexes this.
-   - **`control:implements`** (N edges) — interface composition. Verse `class(Parent, Iface1, Iface2, ...)` remaining positions. ECS analogy: the attached capability component list. `MemeGraph.memesByInterface()` indexes this.
+   - **`control:has`** (N edges) — interface composition. Verse `class(Parent, Iface1, Iface2, ...)` remaining positions. ECS analogy: the attached capability component list. `MemeGraph.memesByInterface()` indexes this.
 
 4. **Dual-index content addressing.** TiddlyWiki maintains multiple parallel indexes over the same tiddler corpus. `lar:///INDEXES/hashes` (URI → SHA256 map, lightweight poll) and `lar:///CONTENT/{hash}` (hash → carrier text, virtual resource) implement the same pattern. The boot receipt's `sha256` field becomes a stable Anthropic prompt cache key: a client that holds a matching receipt need not resend carrier text.
 

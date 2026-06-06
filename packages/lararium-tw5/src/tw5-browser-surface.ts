@@ -1,7 +1,7 @@
 /**
  * tw5-browser-surface.ts — browser-only HUD surface, split from TW5Engine.
  *
- * Moved from tw5-vm.ts (was TW5Engine#mountPanel, #setPalette, #setBootSplash).
+ * The browser-only HUD surface (mountPanel / setPalette / setBootSplash).
  * TW5Engine stays isomorphic; this sidecar carries all HTMLElement / shadowRoot
  * / window.document references.
  *

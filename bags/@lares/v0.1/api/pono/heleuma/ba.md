@@ -12,7 +12,7 @@ manao        = 17
 manaoio      = 17
 cacheable    = true
 retain       = true
-role         = "invariant interface: heleuma-ba — psyche/path anchor; quine-only trace record with no runtime corpus path"
+role         = "invariant capability: heleuma-ba — psyche/path anchor; quine-only trace record with no runtime corpus path"
 ```
 
 
@@ -21,7 +21,7 @@ role         = "invariant interface: heleuma-ba — psyche/path anchor; quine-on
 
 <<~ ahu #head >>
 
-# Heleuma-Ba Interface (Psyche / Path)
+# Heleuma-Ba (Psyche / Path)
 
 **Ba**: psyche, personality, change, path, choice. The direction enacted. The trace of motion.
 
@@ -44,23 +44,23 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 
 ## Required Fields (SHALL)
 
-An implementing meme SHALL declare in `#iam` TOML:
+A carrying meme SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma = "ba"
 ```
 
-An implementing meme SHALL carry a `#source` slot with sufficient verbatim content that the artifact could be reconstructed from the meme alone (quine property). The standard for "sufficient" is: a reader with no access to the source repository can reconstruct the artifact from the `#source` slot and the `#contract` slot together.
+A carrying meme SHALL carry a `#source` slot with sufficient verbatim content that the artifact could be reconstructed from the meme alone (quine property). The standard for "sufficient" is: a reader with no access to the source repository can reconstruct the artifact from the `#source` slot and the `#contract` slot together.
 
-An implementing meme MAY declare `source-symbol` when the source span has a clear boundary. When `source-symbol` is declared, the meme MAY also declare `body-sha256` — the SHA-256 hash of the `#source` slot's verbatim content — for drift detection at build time.
+A carrying meme MAY declare `source-symbol` when the source span has a clear boundary. When `source-symbol` is declared, the meme MAY also declare `body-sha256` — the SHA-256 hash of the `#source` slot's verbatim content — for drift detection at build time.
 
-An implementing meme SHALL NOT declare `body-sha256` without also declaring `source-symbol`.
+A carrying meme SHALL NOT declare `body-sha256` without also declaring `source-symbol`.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:sub-interface >>
+<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>

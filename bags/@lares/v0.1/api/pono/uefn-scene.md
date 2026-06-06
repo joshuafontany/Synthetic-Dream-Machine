@@ -35,16 +35,16 @@ These three relationships look similar but operate at different levels. Keep the
 **Ahu-slot tree** (document / tiddler structure) — `fragment-parent` + `slot` fields on tiddlers.
 One `.md` file decomposes into a root tiddler and N named slot fragment tiddlers. This is the
 meme parent/child/grandchild tree. It expresses *document containment*, not type relationships.
-Not a pranala edge. Never use `control:implements` to express ahu-slot ancestry.
+Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
 
 **`control:extends`** (one edge per type meme) — Verse single class inheritance.
 `my_device := class(creative_device):` → one `control:extends` edge, `toUri = creative_device URI`.
 One parent per type. This is an is-a relationship at the Verse type level.
 
-**`control:implements`** (N edges per type meme) — Verse interface composition.
+**`control:has`** (N edges per type meme) — Verse interface composition.
 `my_device := class(creative_device, challengeable, listenable_t):` →
-one `control:extends` (creative_device) + two `control:implements` (challengeable, listenable_t).
-Any number of interface edges per type. This is a can-do relationship at the Verse type level.
+one `control:extends` (creative_device) + two `control:has` (challengeable, listenable_t).
+Any number of capability edges per type. This is a can-do relationship at the Verse type level.
 
 <<~/ahu >>
 
@@ -59,7 +59,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
   - `reaction:listenable` edges: OUTPUT event pins (`listenable(T)` fields)
   - `reaction:subscribable` edges: INPUT function pins (public methods of matching arity)
   - `control:extends` edge: single parent class URI (Verse `class(Parent, ...)` — first item)
-  - `control:implements` edges: interface URIs (Verse `class(Parent, Iface1, Iface2, ...)` — remaining items)
+  - `control:has` edges: capability URIs (Verse `class(Parent, Iface1, Iface2, ...)` — remaining items)
   - `spatial:contains` edges: nested class relationships
 
 **Instance meme** (`lar:///scene-bag/instances/{placementId}`) — one per placed device.
@@ -79,7 +79,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 
 ```text
 control:extends      — single parent class (my_device ← creative_device); one edge per type meme
-control:implements   — interface composition (my_device implements challengeable); N edges per type meme
+control:has   — interface composition (my_device implements challengeable); N edges per type meme
 control:owns         — scene contains instance (spatial root → instance)
 reaction:listenable  — device emits this OUTPUT event (payload.listenable = event name;
                        payload.verseKind = "listenable"|"event";
@@ -121,7 +121,7 @@ Once the scene decomposes into a bag, TW5 filters render arbitrary views:
 # Full parent chain for a type (control:extends — single inheritance)
 [field:control-extends[lar:///types/creative_device]][transitive[control-extends]]
 
-# All types that implement a given interface (control:implements — interface composition)
+# All types that implement a given interface (control:has — interface composition)
 [field:control-implements[lar:///types/challengeable]]
 
 # All input handlers whose payload type matches agent

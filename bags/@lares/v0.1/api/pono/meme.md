@@ -94,11 +94,11 @@ Five structural buckets — law-of-5s. Rating derives from schema compliance, no
 - **Data** — structure appears, but meme law still does not bind the carrier fully
 - **Meme** — the memetic-shape now holds and the carrier reads as a lawful meme
 - **Ano** — one or more outward type laws now bind the carrier (Hawaiian: kind, type, nature)
-- **Kapu** — above base namespace; implements the kapu interface; kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
+- **Kapu** — above base namespace; carries the kapu capability; kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
 
 `confidence` gives the operator-facing band.
 `mana`, `manao`, and `manaoio` stay distinct and should not collapse into one blended score.
-An ano meme may satisfy several interfaces at once.
+An ano meme may carry several capabilities at once.
 Promotion to lares/ canon follows a separate ceremony and carries no change to rating.
 Subtype predicates belong in subtype laws.
 

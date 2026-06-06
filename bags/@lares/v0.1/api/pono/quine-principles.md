@@ -26,7 +26,7 @@ status-date = "2026-05-02"
 A **quine** is a program that produces its own source code as output.
 Lararium's target is not a literal quine — it is a **self-describing system**:
 one where the content graph contains the rules, schemas, and descriptions of its
-own structure, accessible via the same interfaces used to access any other content.
+own structure, accessible via the same capability surfaces used to access any other content.
 
 The four quine principles define when this target is reached and how to measure progress.
 
@@ -67,7 +67,7 @@ The meme IS the documentation; the documentation IS the meme.
 ## P2 — No Privileged Meta-Level
 
 **Principle:** No part of the system has special self-knowledge that other parts
-cannot obtain through the same interfaces.
+cannot obtain through the same capability surfaces.
 
 In a quine, the self-reproduction step uses the same output mechanism as everything
 else. There is no "reflection API" that works differently from the "content API."
@@ -79,7 +79,7 @@ else. There is no "reflection API" that works differently from the "content API.
 - `VmDebugSurface` on every peer — no peer has privileged debug access the others lack
 
 **Violation pattern:** A TypeScript-only introspection path that cannot be replicated
-inside the wiki. If the wiki cannot ask "what memes implement this interface?" using
+inside the wiki. If the wiki cannot ask "what memes carry this capability?" using
 the same filter syntax as external code, P2 is violated.
 
 **Rule:** Any system introspection available to external TypeScript MUST be expressible

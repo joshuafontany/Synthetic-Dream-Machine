@@ -12,7 +12,7 @@ manao        = 17
 manaoio      = 17
 cacheable    = true
 retain       = true
-role         = "invariant interface: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
+role         = "invariant capability: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
 ```
 
 
@@ -21,7 +21,7 @@ role         = "invariant interface: heleuma-ha — body/structure anchor; perma
 
 <<~ ahu #head >>
 
-# Heleuma-Ha Interface (Body / Structure)
+# Heleuma-Ha (Body / Structure)
 
 **Ha**: body, matter, structure, form, persistence. The containing form. Holds its shape across instances.
 
@@ -44,21 +44,21 @@ A heleuma-ha anchor exists outside the `lar:///` corpus **by nature, not by stag
 
 ## Required Fields (SHALL)
 
-An implementing meme SHALL declare in `#iam` TOML:
+A carrying meme SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma      = "ha"
 ```
 
-An implementing meme SHALL carry a `#source` slot with the verbatim artifact body (quine property).
+A carrying meme SHALL carry a `#source` slot with the verbatim artifact body (quine property).
 
-An implementing meme SHALL NOT declare `body-sha256` — ha does not promote.
+A carrying meme SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:sub-interface >>
+<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>

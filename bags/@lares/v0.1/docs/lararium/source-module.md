@@ -10,7 +10,7 @@ register     = "Synthesis-Canon"
 manaoio      = 15
 mana         = 16
 manao        = 16
-role         = "interface meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
+role         = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
 cacheable    = true
 retain       = true
 ```
@@ -106,7 +106,7 @@ The `write-source-memes.ts` script MUST:
 3. Use origin `{ kind: "operator-import" }` — source memes are canon-hydrate peers.
 4. Overwrite existing carrier if content-hash differs; no-op if hash matches.
 5. Never emit noise or data files — only files with named exports that implement
-   invariant interfaces or architectural law.
+   invariant capabilities or architectural law.
 
 <<~/ahu >>
 

@@ -143,7 +143,7 @@ desc  = "Any write that reaches lares/ MUST carry: actor, origin URI, target URI
 ```toml #AUTH_5_TRUST_LADDER
 id    = "AUTH_5_TRUST_LADDER"
 label = "Weaker record surfaces drift; it does not overwrite"
-desc  = "Trust order (strongest first): hostless invariant memes → hostless interface memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record surfaces a trust-boundary event — it does not silently merge upward."
+desc  = "Trust order (strongest first): hostless invariant memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record surfaces a trust-boundary event — it does not silently merge upward."
 ```
 
 <<~/ahu >>
