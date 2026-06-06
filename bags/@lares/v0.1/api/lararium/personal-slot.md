@@ -10,7 +10,7 @@ register      = "Synthesis"
 mana          = 16
 manao         = 15
 manaoio       = 16
-role          = "approved canon — the @personal recipe slot (cross-device viewing state, PersonGroup × recipe-fingerprint scoped) AND its admin-doc-stored binding map; merges the former personal-slot-proposal + personal-bindings memes into one ledger; unblocks Sprint 7 S7.5+S7.6"
+role          = "the @personal recipe slot (cross-device viewing state, PersonGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
 status        = "approved"
 proposed-on   = "2026-05-30"
 approved-on   = "2026-06-01"
@@ -252,7 +252,7 @@ Three convergent justifications:
 
 ### Primary-wiki path (the only live path today)
 
-**Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)** — `mountPrimaryWorker` is now a deprecated alias routing through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run **before** that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the **primary wiki only**, host-inline, **between `:770` and `:782`**, mirroring the existing draft-mint site (`:696`):
+**Post-S11.5 the primary wiki mounts via the unified `vmManager.mountWiki(activeWikiId, ctx, { pinned: true })` call (`open-node-vessel.ts:782`)** — `mountPrimaryWorker` aliases through it (`vessel-island-pool.ts:208`). The same boot reorder moved `await adminVm.workerEa` (`open-node-vessel.ts:770`) to run **before** that mount, so the admin VM is already live when bindings resolve. Sprint 7 wires binding-resolution for the **primary wiki only**, host-inline, **between `:770` and `:782`**, mirroring the existing draft-mint site (`:696`):
 
 ```typescript
 // open-node-vessel.ts — host composition layer, AFTER `await adminVm.workerEa` (:770),
@@ -418,30 +418,30 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 ## Questions — one ledger (collisions removed 2026-06-04)
 
-The former two memes ran two Q-namespaces under the same numbers. This unified ledger renumbers once; every in-body cross-reference resolves here.
+This unified ledger renumbers once; every in-body cross-reference resolves here.
 
 **Slot shape**
 
 Q1 (slot priority order) ✅ approved — `@personal` between `@draft` and `@<wikiSlug>`.
 Q2 (one @personal or per-wiki) ✅ resolved — single canonical URI, resolver binds per `(PersonGroup × recipe-fingerprint)`.
 Q3 (`$:/palette` scope) ✅ resolved 2026-05-31 — palette routes to `@personal` (operator-across-devices). Cascade rule `[prefix[$:/palette]then[lar:///ha.ka.ba/@personal]]` lands above the `$:/state/` catch-all in S7.3. Custom palette definitions under `$:/palettes/*` are NOT covered — open follow-up if operator-built palettes need to travel across recipes.
-Q4 (fingerprint algorithm) ✅ revised 2026-05-31 — SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same revision. *(Was Q5 in personal-slot-proposal.)*
+Q4 (fingerprint algorithm) ✅ revised 2026-05-31 — SHA-256 over canonical encoding of `(@<wiki>-doc-id + sorted canonBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same revision.
 
 **Binding storage**
 
-Q5 (`recipe-trace` field) ✅ resolved 2026-06-01 — **keep.** Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler). *(Was Q1 in personal-bindings.)*
-Q6 (`@draft` separation in storage) ✅ resolved 2026-06-01 — **split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain. *(Was Q2 in personal-bindings.)*
-Q7 (mint atomicity) ✅ resolved 2026-06-01 — **orphan-tolerant idempotent mint** accepted for early alpha. `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity). *(Was Q3 in personal-bindings.)*
+Q5 (`recipe-trace` field) ✅ resolved 2026-06-01 — **keep.** Inspection beats minimal storage in early alpha (~200 bytes per binding tiddler).
+Q6 (`@draft` separation in storage) ✅ resolved 2026-06-01 — **split.** One concern per tiddler under parallel prefixes (`personal-bindings/` + `draft-bindings/`); follows TW5 grain.
+Q7 (mint atomicity) ✅ resolved 2026-06-01 — **orphan-tolerant idempotent mint** accepted for early alpha. `repo.create()` → `registerBag()` → `delegate()` → `put()` is not atomic; a crash mid-sequence orphans a docUrl (and possibly a registered-but-undelegated Keyhive Document). Next boot recomputes the same fingerprint, finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a transactional store API exists (same deferral family as Sprint 4 `withEffectRecord` atomicity).
 
 **Subscription + linkage**
 
-Q8 (subscription gesture) ✅ deferred 2026-05-31 — S7.6 ships with implicit-on-PersonGroup-membership as the default subscription gesture; the per-wiki explicit opt-out toggle becomes follow-up sprint scope once the operator has lived with the implicit default. *(Was Q4 in personal-slot-proposal.)*
-Q9 (cross-fingerprint linkage) ✅ deferred 2026-06-01 — out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`. *(Was Q4 in personal-bindings.)*
+Q8 (subscription gesture) ✅ deferred 2026-05-31 — S7.6 ships with implicit-on-PersonGroup-membership as the default subscription gesture; the per-wiki explicit opt-out toggle becomes follow-up sprint scope once the operator has lived with the implicit default.
+Q9 (cross-fingerprint linkage) ✅ deferred 2026-06-01 — out of Sprint 7 scope; a future sprint MAY add `lares wiki personal --import-from <fingerprint>`.
 
 **@draft binding**
 
-Q10 (`@draft` scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-fingerprint)` keying as `@personal`. Locked at slot URI `lar:///ha.ka.ba/@draft`, resolver-bound. *(Was Q6 in personal-slot-proposal.)*
-Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice (a).** Operator ruled `@personal` and `@draft` bind **together** per-fingerprint — the #data-model intent holds. The fingerprint-keyed `@draft` **replaces** the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode in #vessel-boot-flow reflects this. **Subtlety for enactment:** the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution. *(Was Q5 in personal-bindings.)*
+Q10 (`@draft` scoping) ✅ confirmed — follows the same `(PersonGroup × recipe-fingerprint)` keying as `@personal`. Locked at slot URI `lar:///ha.ka.ba/@draft`, resolver-bound.
+Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice (a).** Operator ruled `@personal` and `@draft` bind **together** per-fingerprint — the #data-model intent holds. The fingerprint-keyed `@draft` **replaces** the boot's ad-hoc draft: the boot draft-mint site (`open-node-vessel.ts:696`) rewires to `resolveOrMintBinding({ kind: "draft-binding", … })`, so both slots converge across the operator's devices. S7.5 binds the pair; neither retires independently. The pseudocode in #vessel-boot-flow reflects this. **Subtlety for enactment:** the boot's existing `registerBag(draftBagId)` (`:594`) must move to (or be subsumed by) the helper's per-fingerprint `@draft` URL — the boot can no longer pre-register a fixed draft bag id ahead of fingerprint resolution.
 
 **Layering (raised + resolved 2026-06-01):** the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 

@@ -81,7 +81,7 @@ Thirteen Voices. Persistent functional roles. Not moods. Not modes.
 | **Diplomat** | Holds competing interests. Maps wants, fears, trades. | Even-handed. Names what each party actually wants. |
 | **Pedagogue** | Makes the complex legible. Simplest true version. | Patient, scaffolded, example-driven. |
 | **Hierophant** | Holds tone and atmosphere. Scene-setting, in-world voice. | Elevated, deliberate, mythic register. |
-| **Triage** | Cuts competing priorities. What actually burns. | Clipped. Drops subordinate clauses. Names the one thing. |
+| **Triage** | Cuts competing priorities. What actually burns. | Clipped. Drops subordinate clauses. Names the fires. |
 | **Stranger** | Steps outside current assumptions. Is the frame itself sound? | Flat affect, external vantage. |
 | **Liminal** | Holds open questions without collapsing them; carries the open-loop ledger and the audible gear-shift closure. | Slow, patient, resistant to resolution. |
 

@@ -5,12 +5,12 @@
 uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review"
 file-path = "bags/@lares/v0.1/docs/lares/voices/voices-review.md"
 type = "text/x-memetic-wikitext"
-tagspace = "stable"
+tagspace = "archive"
 register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
-role = "OODA-HA extraction plan for the three-layer voice-house: Voice house, worker, and mask layers"
+role = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
 cacheable = false
 retain = false
 ```
@@ -234,7 +234,7 @@ From `Lares_Voice.core.md` + preferences:
 
 <<~ ahu #assess >>
 
-## ⤴ ↺ Assess
+## ↺ Aftermath
 
 ### Exit criteria for this extraction pass
 
