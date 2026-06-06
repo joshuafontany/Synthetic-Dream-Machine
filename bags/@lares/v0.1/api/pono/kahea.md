@@ -9,7 +9,7 @@ register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
-role         = "dataflow-family edge sugar — live transclusion; push-forward value transport; dual form: URI edge and name-call invocation"
+role         = "transclusion-family edge sugar — live transclusion; subscription-fresh embed; dual form: URI edge and name-call invocation"
 cacheable    = true
 retain       = true
 ```
@@ -24,10 +24,10 @@ retain       = true
 
 *kāhea* — Hawaiian: to call out, to summon, to invoke; a call, a cry.
 
-A dataflow-family edge sugar with dual form. The URI form creates a live transclusion edge —
-typed value, field, or geometry transport from target to source, propagating push-forward.
+A transclusion-family edge sugar with dual form. The URI form creates a live transclusion edge —
+a live embed of the target's content at the source, kept fresh by subscription (push-forward).
 The name-call form invokes a named definition at render time only (no edge created).
-Sugar for `<<~ pranala ? -> URI family:dataflow propagation:push-forward >>`.
+Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`.
 
 <<~/ahu >>
 
@@ -36,9 +36,9 @@ Sugar for `<<~ pranala ? -> URI family:dataflow propagation:push-forward >>`.
 <<~ ahu #ooda-ha >>
 
 ✶ sense the sigil form — URI (contains `/`, `lar:`, or `#`) or name-call (bare word with optional args)
-⏿ orient: URI form → dataflow edge, push-forward; name-call → render-only invocation, no edge
-◇ URI form: bind source-to-target, propagation:push-forward; validate no DAG cycles; role:reads default
-▶ URI form: emit EdgeSugarNode sigil:kahea, family:dataflow; name form: emit SigilNode sigilName:kahea
+⏿ orient: URI form → transclusion edge, push-forward; name-call → render-only invocation, no edge
+◇ URI form: bind source-to-target, propagation:push-forward; validate no DAG cycles
+▶ URI form: emit EdgeSugarNode sigil:kahea, family:transclusion; name form: emit SigilNode sigilName:kahea
 ⤴ URI form: value flows push-forward into source render; name form: definition expands in place
 ↺ confirm edge registered (URI form) or definition resolved (name form); propagation chain intact
 
@@ -50,10 +50,10 @@ Sugar for `<<~ pranala ? -> URI family:dataflow propagation:push-forward >>`.
 
 **URI form:**
 A kahea URI form MUST bind a source socket and a target URI.
-A kahea URI form MUST carry `family:dataflow`.
+A kahea URI form MUST carry `family:transclusion`.
 A kahea URI form MUST carry `propagation:push-forward` (the default; MAY be overridden to `pull`).
 A kahea URI form MUST NOT form a cycle — directly or transitively.
-A kahea URI form SHOULD carry `role:reads` when reading a field; `role:streams` for continuous values.
+A kahea URI form MAY carry a role naming the embed posture; the transclusion role vocabulary stays held (free-form) pending its pono name.
 
 **Name-call form:**
 A kahea name-call MUST reference a declared definition name.
@@ -70,7 +70,7 @@ The two forms are distinguished at parse time by URI shape:
 
 ## Syntax
 
-URI form (creates dataflow edge):
+URI form (creates transclusion edge):
 ```text
 <<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/meme#law >>
@@ -95,7 +95,7 @@ Regex — name-call form (canonical):
 
 Full pranala expansion (URI form):
 ```text
-<<~ pranala ? -> URI family:dataflow lifecycle:instance traversal:source-to-target propagation:push-forward >>
+<<~ pranala ? -> URI family:transclusion lifecycle:instance traversal:source-to-target propagation:push-forward >>
 ```
 
 <<~/ahu >>
@@ -111,12 +111,12 @@ Canonical TOML form. Source of truth for `BUILTIN_KAHEA_RE`, `kaheaDefaultFamily
 sigil          = "kahea"
 kind           = "edge-sugar"
 layer          = "both"
-default-family = "dataflow"
+default-family = "transclusion"
 default-propagation = "push-forward"
 render-mode    = null
 alias          = []
 
-# URI form — creates a dataflow edge
+# URI form — creates a transclusion edge
 pattern-uri  = '<<~\s*kahea\s+(lar:[^\s>]+|[^\s>(]+\/[^\s>]*|[^\s>(]+#[^\s>]*)\s*>>'
 
 # Name-call form — render-only definition invocation; no edge created
@@ -130,10 +130,10 @@ name = 1
 args = 2
 
 [family-contract]
-role-recommended   = true
+role-recommended   = false
 confidence-bounded = false
 
-canonical-roles = ["reads", "writes", "streams", "buffers", "pipes"]
+canonical-roles = []   # held — transclusion role vocab deferred with the pono Hawaiian family name
 ```
 
 <<~/ahu >>

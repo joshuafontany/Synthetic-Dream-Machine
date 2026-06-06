@@ -14,7 +14,7 @@ role          = "canonical pranala edge-family taxonomy: eight families, role vo
 cacheable     = true
 retain        = true
 invariant     = true
-status-date   = "2026-04-30"
+status-date   = "2026-06-05"
 source-symbol = "KNOWN_FAMILIES FAMILY_ROLES FAMILY_CONTRACTS"
 ```
 
@@ -24,7 +24,7 @@ source-symbol = "KNOWN_FAMILIES FAMILY_ROLES FAMILY_CONTRACTS"
 
 # Pranala Families
 
-Eight edge families form the relational grammar of the meme graph.
+Nine edge families form the relational grammar of the meme graph.
 Each family names a category of causal or semantic relationship.
 Families carry role vocabularies and contract flags governing validation.
 
@@ -42,7 +42,7 @@ Edges with unknown families fail validation at the `error` severity level.
 `roleRecommended` families SHOULD use roles from their canonical vocabulary.
 Free-form roles are accepted but generate lint warnings.
 
-`confidenceBounded` families (observe) carry confidence constraints:
+`confidenceBounded` families (observe, transclusion) carry confidence constraints:
 the edge confidence must not exceed the source node's confidence.
 
 <<~/ahu >>
@@ -54,8 +54,8 @@ the edge confidence must not exceed the source node's confidence.
 Canonical TOML form. Source of truth for pranala family contracts.
 
 ```toml
-# Eight canonical pranala families — order is declaration order, not priority
-known-families = ["control", "relation", "observe", "dataflow", "message", "constraint", "reaction", "spatial"]
+# Nine canonical pranala families — order is declaration order, not priority
+known-families = ["control", "relation", "observe", "transclusion", "dataflow", "message", "constraint", "reaction", "spatial"]
 
 # Role vocabularies — roleRecommended families should use these; others accept free-form
 [family-roles]
@@ -64,7 +64,7 @@ dataflow   = ["reads", "writes", "streams", "buffers", "pipes"]
 message    = ["sends", "receives", "publishes", "subscribes", "replies"]
 reaction   = ["triggers", "handles", "observes", "throttles", "debounces", "subscription"]
 spatial    = ["contains", "portal", "adjacent", "layer"]
-# relation, observe, constraint: accept free-form roles
+# relation, observe, constraint, transclusion: accept free-form roles
 
 # Contract flags per family
 [family-contracts.control]
@@ -76,6 +76,10 @@ role-recommended    = false
 confidence-bounded  = false
 
 [family-contracts.observe]
+role-recommended    = false
+confidence-bounded  = true
+
+[family-contracts.transclusion]
 role-recommended    = false
 confidence-bounded  = true
 
@@ -123,8 +127,9 @@ Free-form roles; used when the relationship resists categorization.
 **observe** — monitoring, measurement, attention edges.
 confidence-bounded: an observer cannot claim more confidence than its source.
 
-**dataflow** — data movement and transformation edges.
-Used for reads/writes between corpus, store, projection, and service layers.
+**transclusion** — content embedding edges (page / Story-River surface). `aka` (frozen/shadow) and `kahea` (live/subscription-fresh) carry a *content identity* into the source, not a computed value. confidence-bounded: a frozen embed can age from its source. *(English surface name held; pono Hawaiian name deferred — to mirror-reinforce "transclusion".)*
+
+**dataflow** — value-wire edges (canvas / flow surface). Typed value or geometry transport between node pins (reads/writes/streams/buffers/pipes). Carries a computed value, not content — distinct from `transclusion`.
 
 **message** — async communication edges.
 papalohe/kukali/lele widget wiring uses message family edges.
@@ -152,6 +157,7 @@ Source of truth for `FAMILY_COLORS` in `packages/lararium-tldraw/src/tldraw-shap
 control    = "blue"
 relation   = "grey"
 observe    = "green"
+transclusion = "violet"
 dataflow   = "orange"
 message    = "yellow"
 constraint = "red"
@@ -168,6 +174,7 @@ spatial    = "light-blue"
 <<~ pranala #tiddler-sigil-family-control ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control family:control role:implements >>
 <<~ pranala #tiddler-sigil-family-relation ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation family:control role:implements >>
 <<~ pranala #tiddler-sigil-family-observe ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe family:control role:implements >>
+<<~ pranala #tiddler-sigil-family-transclusion ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion family:control role:implements >>
 <<~ pranala #tiddler-sigil-family-dataflow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow family:control role:implements >>
 <<~ pranala #tiddler-sigil-family-message ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message family:control role:implements >>
 <<~ pranala #tiddler-sigil-family-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint family:control role:implements >>

@@ -45,8 +45,8 @@ that the parser must handle.
 | Block pranala | `<<~ pranala #frag ? -> URI >> ... <<~/pranala >>` | any family, full TOML payload |
 | Inline pranala | `<<~ pranala ? -> URI family:F role:R >>` | abbreviated; family + optional role |
 | Loulou sugar | `<<~ loulou URI >>` | `relation`, `instance` |
-| Aka sugar | `<<~ aka URI >>` | `observe`, `instance` |
-| Kahea sugar | `<<~ kahea URI >>` | `dataflow`, `instance` |
+| Aka sugar | `<<~ aka URI >>` | `transclusion`, `instance` |
+| Kahea sugar | `<<~ kahea URI >>` | `transclusion`, `instance` |
 
 All five forms produce `PranalaEdge` records.
 
@@ -120,8 +120,8 @@ KAHEA_RE  = re.compile(r'<<~\s*kahea\s+(\S+)\s*>>')
 | Sigil | `family` | `lifecycle` | `role` | `traversal` | `propagation` |
 |---|---|---|---|---|---|
 | `loulou` | `relation` | `instance` | `None` | `source-to-target` | `none` |
-| `aka` | `observe` | `instance` | `None` | `source-to-target` | `none` |
-| `kahea` | `dataflow` | `instance` | `None` | `source-to-target` | `push-forward` |
+| `aka` | `transclusion` | `instance` | `None` | `source-to-target` | `none` |
+| `kahea` | `transclusion` | `instance` | `None` | `source-to-target` | `push-forward` |
 
 For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragment),
 `to_uri` = expanded target URI, `to_socket` = `""`.

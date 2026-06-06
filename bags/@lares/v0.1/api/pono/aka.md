@@ -9,7 +9,7 @@ register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 17
 manao        = 17
-role         = "observe-family edge sugar — shadow transclusion; read-only live embed; shorthand for pranala family:observe"
+role         = "transclusion-family edge sugar — frozen/shadow transclusion; read-only embed; shorthand for pranala family:transclusion"
 cacheable    = true
 retain       = true
 ```
@@ -24,10 +24,10 @@ retain       = true
 
 *aka* — Hawaiian: shadow, reflection; to be like; also-known-as.
 
-An observe-family edge sugar. Embeds a shadow of the target at the source — live inspection without
-ownership stake. TW5 shadow-tiddler semantics: the target's content shows through without being consumed.
-Sugar for `<<~ pranala ? -> URI family:observe >>`. The `observe` family is confidence-bounded:
-edges SHOULD carry a confidence rating when the observation is uncertain.
+A transclusion-family edge sugar. Embeds a frozen shadow of the target at the source — read-only,
+without ownership stake. TW5 shadow-tiddler semantics: the target's content shows through without being consumed.
+Sugar for `<<~ pranala ? -> URI family:transclusion >>`. The `transclusion` family is confidence-bounded:
+a frozen embed can age from its source, so edges SHOULD carry a confidence rating when the embed is uncertain.
 
 <<~/ahu >>
 
@@ -36,9 +36,9 @@ edges SHOULD carry a confidence rating when the observation is uncertain.
 <<~ ahu #ooda-ha >>
 
 ✶ sense the target URI — this meme observes that one; note whether confidence bound is needed
-⏿ orient: family:observe, traversal:source-to-target, propagation:none; read-only; no execution pulse
+⏿ orient: family:transclusion, traversal:source-to-target, propagation:none; read-only; no execution pulse
 ◇ confidence-bounded: if the observation carries uncertainty, SHOULD declare confidence on the edge
-▶ emit EdgeSugarNode with sigil:aka, family:observe; render shadow transclusion at source position
+▶ emit EdgeSugarNode with sigil:aka, family:transclusion; render shadow transclusion at source position
 ⤴ target content is live-readable at source; source holds no lifecycle stake in target
 ↺ confirm shadow stable; target still resolvable; no ownership or mutation transferred
 
@@ -49,17 +49,16 @@ edges SHOULD carry a confidence rating when the observation is uncertain.
 ## Law (Kānāwai)
 
 An aka MUST bind a source socket and a target URI.
-An aka MUST carry `family:observe`.
+An aka MUST carry `family:transclusion`.
 An aka MUST NOT mutate the target.
 An aka MUST NOT carry an execution pulse.
 An aka SHOULD carry `confidence` when the observation is uncertain.
 An aka MUST NOT form a cycle — directly or transitively.
 
-`family:observe` — live inspection, reveal, watch; carries shadow transclusion pressure.
-The source sees through to the target. The target does not know it is being watched.
-Propagation is none: observation is pull, not push.
+`family:transclusion` — frozen content embedding; the source shows the target's content through
+without consuming or owning it. Propagation is none: a frozen embed is pulled, not pushed.
 
-The `observe` family is `confidence-bounded: true`. This means the parser flags aka edges
+The `transclusion` family is `confidence-bounded: true`. This means the parser flags aka edges
 that lack a confidence rating when the source-side context signals uncertainty.
 
 <<~/ahu >>
@@ -85,7 +84,7 @@ Groups: `[full, target-uri]`
 
 Full pranala expansion:
 ```text
-<<~ pranala ? -> URI family:observe lifecycle:instance traversal:source-to-target propagation:none >>
+<<~ pranala ? -> URI family:transclusion lifecycle:instance traversal:source-to-target propagation:none >>
 ```
 
 <<~/ahu >>
@@ -101,7 +100,7 @@ in `packages/lararium-mesh/src/pranala-parser.ts`.
 sigil          = "aka"
 kind           = "edge-sugar"
 layer          = "both"
-default-family = "observe"
+default-family = "transclusion"
 render-mode    = null
 alias          = []
 

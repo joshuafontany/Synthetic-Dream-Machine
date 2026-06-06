@@ -83,8 +83,8 @@ Surface forms:
 
 Edge sigil syntactic sugar:
 * `<<~ loulou URI >>` — outgoing link (`family:relation`)
-* `<<~ aka URI >>` — shadow transclusion (`family:observe`)
-* `<<~ kahea URI >>` — live transclusion (`family:dataflow`)
+* `<<~ aka URI >>` — shadow transclusion (`family:transclusion`)
+* `<<~ kahea URI >>` — live transclusion (`family:transclusion`)
 
 <<~/ahu >>
 
@@ -94,10 +94,11 @@ Edge sigil syntactic sugar:
 
 * `relation` — semantic or ontological link; names what kind of connection holds; carries no execution pulse
 * `control` — execution order, branch, gate, pulse; carries structural ownership hierarchy and Entity lifetime
-* `dataflow` — typed value, field, or geometry transport; carries `kahea`-style live transclusion pressure
+* `dataflow` — typed value, field, or geometry transport between node pins (canvas value-wires)
 * `message` — routed event or signal passage; carries notification without structural ownership stake
 * `constraint` — declarative rule without execution pulse; spatial, logical, or physical
-* `observe` — live inspection, reveal, watch, or operator illumination; carries `aka`-style shadow transclusion pressure
+* `observe` — live inspection, reveal, watch, or operator illumination (monitoring)
+* `transclusion` — content embedding (page surface); carries `aka` (frozen) and `kahea` (live) transclusion pressure
 
 <<~/ahu >>
 

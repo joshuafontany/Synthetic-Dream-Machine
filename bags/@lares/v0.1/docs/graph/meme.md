@@ -94,8 +94,8 @@ An edge gates hydration order when `family == "control"`.
 
 **Sugar-form origins:**
 - `<<~ loulou URI >>` → `family="relation"`, `lifecycle="instance"`, `role=None`
-- `<<~ aka URI >>` → `family="observe"`, `lifecycle="instance"`, `role=None`
-- `<<~ kahea URI >>` → `family="dataflow"`, `lifecycle="instance"`, `role=None`
+- `<<~ aka URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
+- `<<~ kahea URI >>` → `family="transclusion"`, `lifecycle="instance"`, `role=None`
 
 <<~/ahu >>
 

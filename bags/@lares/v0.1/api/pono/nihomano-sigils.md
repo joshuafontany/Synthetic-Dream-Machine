@@ -104,8 +104,8 @@ They fall into eight families:
 
 **Edge-sugar sigils** (pranala family shortcuts):
 - `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
-- `kahea` / `\transclude` / `\import` — dataflow-family sugar; live transclusion; push-forward value transport
-- `aka` / `\shadow` — observe-family sugar; frozen read; shadow transclusion
+- `kahea` / `\transclude` / `\import` — transclusion-family sugar; live transclusion; subscription-fresh embed
+- `aka` / `\shadow` — transclusion-family sugar; frozen read; shadow transclusion
 - `loulou` / `\link` — relation-family sugar; outgoing semantic link; no execution pulse
 - `kau` — device-slot child-slot; capability hooks require JS (permanent JS exception)
 - `kapu` / `\guard` — compile-layer boundary annotation; access-control edge
@@ -166,7 +166,7 @@ the same way a stone cairn accumulates placement until it becomes a landmark.
 transclusion summons value forward, as a call summons a response.
 
 *Aka* — shadow, reflection; likeness without identity; resemblance. The shadow of a thing
-differs from the thing — it moves with it without owning it. The observe-family edge renders
+differs from the thing — it moves with it without owning it. The transclusion-family edge renders
 the shadow of a target.
 
 *Loulou* — to tie, bind, fasten; to link together. A relation edge names what kind of
