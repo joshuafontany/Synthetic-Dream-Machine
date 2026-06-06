@@ -44,7 +44,7 @@ import type { DocHandle, AutomergeUrl }      from "@automerge/automerge-repo";
 import {
   LarVessel, LAR_VESSEL_CAPABILITIES_BROWSER, OpenIdentitySlot,
   AutomergeDocStore, CompositeStore,
-  emptyLarDoc, mutableLarRecord, tiddlerText,
+  emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc,
   CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID,
   BAG_IDS, TEMP_BAG,
@@ -367,31 +367,22 @@ export async function openBrowserVessel(
   const activeWikiPlan         = planActiveWikiSlot({ hostId, wikiSlug: activeWikiId, identityDid: operatorDid });
 
   const wikiKey     = activeWikiPlan.wikiKey;
-  const wikiDocUrl  = tiddlerText(catalogHandle.doc()?.tiddlers?.[wikiKey]) ?? null;
-  const wikiHandle: DocHandle<LarDoc> = wikiDocUrl
-    ? await waitHandleLocal<LarDoc>(repo, wikiDocUrl, () => repo.create<LarDoc>(emptyLarDoc()))
-    : repo.create<LarDoc>(emptyLarDoc());
-
-  if (!wikiDocUrl) {
-    catalogHandle.change((doc) => {
-      doc.tiddlers[wikiKey] = mutableLarRecord(wikiKey, { text: wikiHandle.url }, "browser-boot");
-    });
-  }
+  const wikiHandle  = await resolveOracleDoc(
+    catalogHandle, wikiKey,
+    (url) => url ? waitHandleLocal<LarDoc>(repo, url, blankDoc) : blankDoc(),
+    "browser-boot",
+  );
 
   const wikiBagId = activeWikiPlan.wikiBagId;
   composite.addLayer({ bagId: wikiBagId, store: new AutomergeDocStore(wikiHandle, wikiBagId), writable: true, defaultWritable: true });
 
   // Draft bag — per-wiki CRDT layer; persists across tab closes (unlike scratch).
   const draftOracleTitle = activeWikiPlan.draftOracleTitle;
-  const existingDraftUrl = tiddlerText(catalogHandle.doc()?.tiddlers?.[draftOracleTitle]) ?? null;
-  const draftHandle: DocHandle<LarDoc> = existingDraftUrl
-    ? await waitHandleLocal<LarDoc>(repo, existingDraftUrl, blankDoc)
-    : blankDoc();
-  if (!existingDraftUrl) {
-    catalogHandle.change((doc) => {
-      doc.tiddlers[draftOracleTitle] = mutableLarRecord(draftOracleTitle, { text: draftHandle.url }, "browser-boot");
-    });
-  }
+  const draftHandle = await resolveOracleDoc(
+    catalogHandle, draftOracleTitle,
+    (url) => url ? waitHandleLocal<LarDoc>(repo, url, blankDoc) : blankDoc(),
+    "browser-boot",
+  );
   composite.addLayer({ bagId: activeWikiPlan.draftBagId, store: new AutomergeDocStore(draftHandle, activeWikiPlan.draftBagId), writable: true, defaultWritable: false });
 
   composite.addLayer({ bagId: TEMP_BAG, store: new MemoryTiddlerStore(), writable: true, defaultWritable: true });

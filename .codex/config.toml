@@ -1,5 +1,5 @@
 # .codex/config.toml
-model_instructions_file = "../bags/@lares/AGENTS.md"
+model_instructions_file = "../bags/@lares/v0.1/api/lares/noosphere-boot.md"
 
 [mcp_servers.lararium]
 command = "node"

@@ -40,7 +40,7 @@ import {
   OpenIdentitySlot,
   AutomergeDocStore,
   CompositeStore, corpusBagId,
-  emptyLarDoc, mutableLarRecord, tiddlerText,
+  emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc,
   LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
@@ -601,35 +601,24 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const wikiKey = activeWikiPlan.wikiKey;
 
   // ── 4. Wiki doc — oracle tiddler path ──────────────────────────────────
-  const wikiDocUrl = tiddlerText(catalog?.tiddlers?.[wikiKey]) ?? null;
   const blankRoom  = blankMemeStore(repo);
-  const wikiHandle: DocHandle<LarDoc> = wikiDocUrl
-    ? await waitHandleLocal<LarDoc>(repo, wikiDocUrl as AutomergeUrl, blankRoom)
-    : blankRoom();
-
-  if (!wikiDocUrl) {
-    // Write as oracle tiddler — same schema as browser vessel.
-    catalogHandle.change((doc) => {
-      (doc.tiddlers as Record<string, LarTiddlerRecord>)[wikiKey] = mutableLarRecord(wikiKey, { text: wikiHandle.url }, "lararium-boot");
-    });
-  }
+  const wikiHandle = await resolveOracleDoc(
+    catalogHandle, wikiKey,
+    (url) => url ? waitHandleLocal<LarDoc>(repo, url as AutomergeUrl, blankRoom) : blankRoom(),
+    "lararium-boot",
+  );
   emit("wiki-ready");
 
   // ── 5. Wiki-Drafts doc — per-user, stored in catalog oracle tiddler ───────
   // Node vessel uses hostId:wikiId identity for its own drafts (operator drafts).
   // User drafts from browser vessels are stored under each browser vessel's DID key.
   const draftTiddlerKey = activeWikiPlan.draftOracleTitle;
-  const existingDraftUrl: string | null = tiddlerText(catalog?.tiddlers?.[draftTiddlerKey]) ?? null;
   const blankDraft = blankMemeStore(repo);
-  const draftHandle: DocHandle<LarDoc> = existingDraftUrl
-    ? await waitHandleLocal<LarDoc>(repo, existingDraftUrl as AutomergeUrl, blankDraft)
-    : blankDraft();
-
-  if (!existingDraftUrl) {
-    catalogHandle.change((doc) => {
-      (doc.tiddlers as Record<string, LarTiddlerRecord>)[draftTiddlerKey] = mutableLarRecord(draftTiddlerKey, { text: draftHandle.url }, "lararium-boot");
-    });
-  }
+  const draftHandle = await resolveOracleDoc(
+    catalogHandle, draftTiddlerKey,
+    (url) => url ? waitHandleLocal<LarDoc>(repo, url as AutomergeUrl, blankDraft) : blankDraft(),
+    "lararium-boot",
+  );
   // @temp layer — local-VM-only MemoryTiddlerStore. Receives $:/temp/* and
   // any volatile session writes. defaultWritable:true so unbagged TW5 saves
   // land here, not in the draft CRDT. Top of cascade per WikiRecipe law.
