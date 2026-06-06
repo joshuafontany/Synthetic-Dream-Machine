@@ -21,8 +21,8 @@ diving). The motion commits to the leap, starts a side flow, and continues forwa
 A structured fire-and-continue sigil. Emits a message-family edge, starts the target flow, and
 continues immediately. English alias: `\branch`.
 
-Verse equivalent: `branch` — one or more async expressions start immediately and the enclosing
-flow continues immediately. The side flow remains bounded by the enclosing async context and
+Verse equivalent: `branch` — one or more async expressions start, and the enclosing
+flow continues — neither waits for the other. The side flow remains bounded by the enclosing async context and
 cancels when that context completes.
 
 Grammar only --- the fire-and-continue execution runtime awaits the async-first sprint.

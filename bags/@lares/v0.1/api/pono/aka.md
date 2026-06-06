@@ -24,8 +24,7 @@ retain       = true
 
 *aka* — Hawaiian: shadow, reflection; to be like; also-known-as.
 
-A transclusion-family edge sugar. Embeds a frozen shadow of the target at the source — read-only,
-without ownership stake. TW5 shadow-tiddler semantics: the target's content shows through without being consumed.
+A transclusion-family edge sugar. Embeds a frozen shadow of the target at the source — read-only, no ownership stake. TW5 shadow-tiddler semantics: the target's content shows through at the source position.
 Sugar for `<<~ pranala ? -> URI family:transclusion >>`. The `transclusion` family is confidence-bounded:
 a frozen embed can age from its source, so edges SHOULD carry a confidence rating when the embed is uncertain.
 

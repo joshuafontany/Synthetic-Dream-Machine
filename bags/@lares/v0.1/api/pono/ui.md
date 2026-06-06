@@ -21,8 +21,7 @@ motion of the questioner turning toward a subject — a directed inquiry, not a 
 A query surface sigil. Evaluates a TW5 filter expression and renders the result set as a list
 of tiddler titles or content. English alias: `\query`.
 
-The `ui` sigil makes the filter's result visible — it turns toward the data and surfaces what
-it finds. Unlike `kahea` (which summons a specific known target), `ui` asks an open question
+The `ui` sigil turns toward the data and renders whatever the filter returns. Unlike `kahea` (which summons a specific known target), `ui` asks an open question
 and renders whatever answers.
 
 <<~/ahu >>
