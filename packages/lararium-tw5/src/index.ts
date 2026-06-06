@@ -82,8 +82,8 @@ export type { AdminBehaviorOptions } from "./admin-behavior.js";
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
-export { mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults } from "./vessel-steps.js";
-export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles } from "./vessel-steps.js";
+export { mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki } from "./vessel-steps.js";
+export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
 export { openAdminVmCore } from "./admin-vm-core.js";
 export type {
   AdminVmHost,

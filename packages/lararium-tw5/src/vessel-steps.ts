@@ -18,11 +18,17 @@
 import {
   AutomergeDocStore,
   BAG_IDS,
+  computeRecipeFingerprint,
+  wikiBagUri,
+  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG,
+  LARES_DOC_URI, LARARIUM_DOC_URI,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
   type LarDoc,
   type CompositeStore,
+  type WikiRecipe,
+  type WikiMountSpec,
 } from "@lararium/mesh";
 import type { VerbTable } from "./verb-dispatcher.js";
 
@@ -67,6 +73,76 @@ export function seedVesselDefaults(registry: VerbTable): void {
   if (!registry.has("echo")) {
     registry.register("echo", async (args) => ({ echoed: args }));
   }
+}
+
+// ── Primary wiki mount — the isomorphic keystone step ─────────────────────────
+
+/** Any vessel island pool: one isomorphic mount signature (pair 1 cc24f3b9).
+ *  `opts.pinned` is a node residency capability; a pool without residency
+ *  ignores it (composition by capability, never a per-platform branch). */
+export interface PrimaryMountPool {
+  mountWiki(id: string, spec: WikiMountSpec, opts?: { pinned?: boolean }): Promise<void>;
+}
+
+/** Any admin vessel that can resolve the operator's @personal/@draft binding —
+ *  island-side, where keyhive lives. Both vessels expose this (pair 2). */
+export interface BindingResolver {
+  resolveBinding(
+    fingerprint: string,
+    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+  ): Promise<{ personalUrl: string; draftUrl: string }>;
+}
+
+export interface PrimaryMountInputs {
+  activeWikiId: string;
+  wikiSlug:     string;
+  coreHash:     string | null;
+  /** @lararium island doc url. */
+  islandUrl:    string;
+  /** primary wiki doc url. */
+  wikiUrl:      string;
+}
+
+/** Canonical disk-mirror DESIGNATION. A pool's held grant decides whether it
+ *  actually mirrors (node holds a disk grant; browser's empty grant ignores). */
+const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI];
+
+/**
+ * Mount the primary wiki island — the isomorphic keystone both vessels run.
+ *
+ * Every keeper, on every platform, binds its sovereign @personal/@draft slots
+ * (resolved island-side per recipe-fingerprint) and mounts a pinned primary.
+ * Persona/office divergence lives only in DATA + held capability: mirrorBags is
+ * a universal designation a pool's disk-grant may or may not honor; pinned is a
+ * residency capability a pool may or may not implement. No per-platform branch.
+ */
+export async function mountPrimaryWiki(
+  pool:    PrimaryMountPool,
+  binding: BindingResolver,
+  inputs:  PrimaryMountInputs,
+): Promise<{ personalUrl: string; draftUrl: string }> {
+  // @personal + @draft bind TOGETHER per recipe-fingerprint (Q11). Fingerprint
+  // covers wikiDocId + canonBags only (@lares/@lararium excluded per Q4); the
+  // live primary carries no canonBags, so it keys on the wiki doc url alone.
+  const recipeTrace = { wikiDocId: inputs.wikiUrl, canonBagDocIds: [] as readonly string[] };
+  const fingerprint = await computeRecipeFingerprint(recipeTrace);
+  const { personalUrl, draftUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
+
+  const resolver: Record<string, string | null> = {
+    [LARARIUM_BAG]:                 inputs.islandUrl,
+    [wikiBagUri(inputs.wikiSlug)]:  inputs.wikiUrl,
+    ...(personalUrl ? { [PERSONAL_BAG]: personalUrl } : {}),
+    ...(draftUrl    ? { [DRAFT_BAG]:    draftUrl    } : {}),
+  };
+  const recipe: WikiRecipe = { wikiSlug: inputs.wikiSlug, mirrorBags: [...PRIMARY_MIRROR_BAGS] };
+
+  await pool.mountWiki(
+    inputs.activeWikiId,
+    { coreHash: inputs.coreHash, recipe, resolver },
+    { pinned: true },
+  );
+
+  return { personalUrl, draftUrl };
 }
 
 export interface SocialPlaneUrls {

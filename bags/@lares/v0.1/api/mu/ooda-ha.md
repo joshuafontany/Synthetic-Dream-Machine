@@ -6,6 +6,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
 file-path = "bags/@lares/v0.1/api/mu/ooda-ha.md"
 type = "text/x-memetic-wikitext"
 register = "Synthesis-Canon"
+tagspace = "stable"
 manaoio = 18
 mana = 18
 manao = 18

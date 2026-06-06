@@ -60,6 +60,7 @@ import {
   addCanonLayer,
   addReadOnlyLayer,
   seedVesselDefaults,
+  mountPrimaryWiki,
 } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
@@ -691,49 +692,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // the resolved URLs). Admin was spawned at boot start; this only awaits its ea.
   await adminVm.workerEa;
 
-  // ── 9. Primary wiki island ────────────────────────────────────────────────
-  // ── 8b. @personal / @draft binding resolution (S7.5 + S7.6) ─────────────────
-  // Composition-root step: resolve (or mint+delegate) the operator's cross-device
-  // @personal + @draft docs for THIS recipe-fingerprint, then pass the URLs
-  // through WikiBootContext into the mount. The mint needs keyhive, which lives
-  // in the admin island after Stage 1 — so the host posts the fingerprint and the
-  // island answers (admin:resolve-binding-request). Runs AFTER `adminVm.workerEa`
-  // (so the in-worker keyhive cleared Gates B/C against a real PersonGroup),
-  // BEFORE the mount that needs the URLs.
-  //
-  // Fingerprint covers wikiDocId + canonBags only (@lares/@lararium excluded per
-  // Q4). The live primary recipe carries no canonBags (`{ wikiSlug }`), so the
-  // fingerprint keys on the wiki doc URL alone today.
-  const recipeTrace = { wikiDocId: wikiHandle.url, canonBagDocIds: [] as readonly string[] };
-  const fingerprint = await computeRecipeFingerprint(recipeTrace);
-
-  // Q11 (slice a): @personal + @draft bind TOGETHER per-fingerprint; neither
-  // retires alone. The host-side ad-hoc draft layer (§5 above) remains for the
-  // vessel's own composite; the island mounts THIS fingerprint-keyed @draft.
-  const { personalUrl, draftUrl } = await adminVm.resolveBinding(fingerprint, recipeTrace);
-  console.log(`[lararium] @personal/@draft resolved via admin island · fp=${fingerprint.slice(0, 12)}…`);
-
-  // Unified mount path — primary is a `wela` slot with the `pinned` flag set
-  // (never LRU-evicted); pin is orthogonal to temperature (EPIC S11.5).
-  // Caller builds the FULL resolver — isomorphic with the browser vessel — and
-  // the recipe DESIGNATES the canon bags for disk mirroring; the pool's held
-  // grant decides which it may actually write.
-  const primarySlug = slugFromUri(activeWikiId);
-  const primaryResolver: Record<string, string | null> = {
-    [LARARIUM_BAG]:            islandHandle.url,
-    [wikiBagUri(primarySlug)]: wikiHandle.url,
-    ...(personalUrl ? { [PERSONAL_BAG]: personalUrl } : {}),
-    ...(draftUrl    ? { [DRAFT_BAG]:    draftUrl    } : {}),
-  };
-  const primaryRecipe: WikiRecipe = {
-    wikiSlug:   primarySlug,
-    mirrorBags: [LARES_DOC_URI, LARARIUM_DOC_URI],
-  };
-  await vmManager.mountWiki(
+  // ── 9. Primary wiki island (S7.5 + S7.6 binding folded into the step) ──────
+  // Isomorphic keystone step — both vessels run mountPrimaryWiki: bind the
+  // sovereign @personal/@draft slots per recipe-fingerprint (island-side via
+  // keyhive, AFTER workerEa cleared Gates B/C), then mount the pinned primary
+  // with the canonical mirror designation.
+  await mountPrimaryWiki(vmManager, adminVm, {
     activeWikiId,
-    { coreHash, recipe: primaryRecipe, resolver: primaryResolver },
-    { pinned: true },
-  );
+    wikiSlug:  slugFromUri(activeWikiId),
+    coreHash,
+    islandUrl: islandHandle.url,
+    wikiUrl:   wikiHandle.url,
+  });
   emit("tw5-booted");
 
   // Path M.1 — wire worker.event consumer now that adminVm is live.

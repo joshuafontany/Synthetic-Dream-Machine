@@ -7,6 +7,8 @@
 ```toml
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue"
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
+cacheable = false
+retain = false
 content-type = "text/x-memetic-wikitext"
 tagspace = "stable"
 register = "Synthesis-Canon"

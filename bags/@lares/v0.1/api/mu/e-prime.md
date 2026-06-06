@@ -6,6 +6,7 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/mu/e-prime"
 file-path = "bags/@lares/v0.1/api/mu/e-prime.md"
 type = "text/x-memetic-wikitext"
 register = "Synthesis-Canon"
+tagspace = "stable"
 manaoio = 15
 mana = 14
 manao = 16

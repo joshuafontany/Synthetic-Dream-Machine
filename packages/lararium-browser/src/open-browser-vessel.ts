@@ -54,7 +54,7 @@ import {
 import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
-  mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults,
+  mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki,
 }                                            from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -471,14 +471,15 @@ export async function openBrowserVessel(
     admin.mountMainVerbs(registry);
 
     if (workerScriptUrl) {
-      const wikiSlug = slugFromUri(activeWikiId);
-      await pool.mountWiki(activeWikiId, {
+      // Isomorphic keystone step — identical to the node vessel: the browser
+      // keeper binds its sovereign @personal/@draft slots (admin.resolveBinding,
+      // exposed in pair 2) and mounts the pinned primary.
+      await mountPrimaryWiki(pool, admin, {
+        activeWikiId,
+        wikiSlug:  slugFromUri(activeWikiId),
         coreHash,
-        recipe: { wikiSlug } satisfies WikiRecipe,
-        resolver: {
-          [BAG_IDS.lararium]:           islandHandle.url,
-          [`lar:///ha.ka.ba/@${wikiSlug}`]: wikiHandle.url,
-        },
+        islandUrl: islandHandle.url,
+        wikiUrl:   wikiHandle.url,
       });
       emit("tw5-booted");
     }

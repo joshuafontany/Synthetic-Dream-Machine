@@ -121,10 +121,6 @@ A lawful guest region should still hand forward enough continuity for:
 
 Schema detail, fixture families, and execution procedure belong in the sidecars.
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
-
 <<~/ahu >>
 
 

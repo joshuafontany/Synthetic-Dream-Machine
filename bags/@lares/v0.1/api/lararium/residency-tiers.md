@@ -109,21 +109,15 @@ The two transitions across the `wela`/`anu` axis wear Hawaiian per the lararium 
 | **hoʻoanu** | "to cool" | wela → anu | `IslandMsg_HooAnu` worker signal (`island-protocol.ts`); `cool()` bookkeeping |
 | **hoʻowela** | "to heat" | anu → wela | `touch()` heats a bag back to live; resume = `repo.find()` + island `ea` handshake |
 
-Pin/unpin gestures carry no verb name (the state change describes itself). `hoʻoanu` releases the thread and — subject to `syncActive` + the reachability rule — the handles. `mahana` ("warm") and `hoʻomahana` retire with the warm tier (see #warm-cut).
+Pin/unpin gestures carry no verb name (the state change describes itself). `hoʻoanu` releases the thread and — subject to `syncActive` + the reachability rule — the handles. No warm tier exists yet; `mahana` / `hoʻomahana` stay undefined (see #third-tier-gate).
 
 <<~/ahu >>
 
-<<~ ahu #warm-cut >>
+<<~ ahu #third-tier-gate >>
 
-## Warm tier — cut (YIN), with the reopening condition named
+## Third tier — the gate
 
-A `warm` (mahana) middle tier — a Worker suspended-not-terminated, fast-resume by signal — was proposed and briefly committed on 2026-06-01, then **cut the same day** after three research spirits (adversarial, kupono, YIN) converged against it:
-
-- **It did not shed the memory the model exists to bound.** A suspended Worker still holds its full V8 isolate, engine, and retained handles in RAM. Warm relieved CPU, not memory. Android's app-freezer and Chrome's bfcache both prove suspend-without-memory-release is insufficient and fall back to termination/eviction under pressure.
-- **No actor-system precedent.** The most-proven virtual-actor runtimes (Orleans, Akka, Dapr) use exactly **two** states — activated / deactivated. Warm has precedent only in the cache/document lineage (bfcache, Android cached/empty, Memcached segmented-LRU), and there it earns its keep *only* when resume is provably cheaper than respawn AND it sheds memory.
-- **It was built ahead of need.** No measured resume-latency problem existed; the second cooling stage, the three-way derivation, the `onSuspend` hook, and the `IslandMsg_HooMahana` signal type all existed *only* to serve warm. Cutting warm removed all four (YAGNI).
-
-**Reopening condition (precise).** Reintroduce a third tier ONLY when BOTH hold: (a) a *measured* island resume-latency problem under real focus-rotation, AND (b) a warm definition that genuinely **sheds memory** — isolate evicted, handle-cache retained, resume re-instantiates the engine against still-warm handles and skips the `ea` handshake (the bfcache lineage done right). At that point adopt bfcache vocabulary (freeze / resume / evict) and a freeze-disqualifier discipline (mid-replication may not freeze), and add a second-chance reference bit to the sweeper (it is pure-age LRU today; see the `sweepOnce` source note).
+The model holds two tiers (`wela` live / `anu` torn down). A third (warm / frozen) tier enters ONLY when BOTH hold: (a) a *measured* island resume-latency problem under real focus-rotation, AND (b) a definition that genuinely **sheds memory** — isolate evicted, handle-cache retained, resume re-instantiates the engine against still-warm handles and skips the `ea` handshake (the bfcache lineage done right). At that point adopt bfcache vocabulary (freeze / resume / evict), a freeze-disqualifier discipline (mid-replication may not freeze), and a second-chance reference bit on the sweeper (pure-age LRU today).
 
 <<~/ahu >>
 

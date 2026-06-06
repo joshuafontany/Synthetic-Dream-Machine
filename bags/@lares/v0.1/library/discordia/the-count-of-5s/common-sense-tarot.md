@@ -7,6 +7,7 @@
 ```toml
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot"
 file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
+cacheable = false
 type = "text/x-memetic-wikitext"
 tagspace = "stable"
 register = "Synthesis"
