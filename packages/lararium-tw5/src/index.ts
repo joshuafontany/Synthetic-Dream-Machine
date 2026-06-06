@@ -80,4 +80,6 @@ export { makeAdminBehavior } from "./admin-behavior.js";
 export type { AdminBehaviorOptions } from "./admin-behavior.js";
 
 export { IslandKernel } from "./island-kernel.js";
+export { runSovereignKernel } from "./sovereign-kernel.js";
+export type { IslandHostSeam } from "./sovereign-kernel.js";
 
