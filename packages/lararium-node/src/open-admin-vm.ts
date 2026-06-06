@@ -41,7 +41,7 @@ import { runLocalVerb }                                 from "@lararium/tw5";
 import type { VerbTable }                               from "@lararium/tw5";
 import type { CapabilityVerifier }                      from "@lararium/mesh";
 import { waitHandleLocal }                              from "./repo-helpers.js";
-import type { IslandMsg_Ea, AdminMsg_DelegateVerb }      from "@lararium/mesh";
+import type { IslandMsg_Ea, AdminMsg_DelegateVerb, IslandMsg_Manifest } from "@lararium/mesh";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
@@ -59,6 +59,12 @@ export interface AdminVmOptions {
   resolver:          Readonly<Record<string, string | null>>;
   /** Optional canon bag URIs for the admin recipe. Empty by default. */
   canonBags?:        readonly string[];
+  /**
+   * Operator authn/z material delivered to the admin island so it boots keyhive
+   * in-worker (Stage 1). Seed + sentinel hexes + the bags to register. The seed
+   * crossing the worker boundary is the deliberate custody boundary.
+   */
+  adminAuth?:        IslandMsg_Manifest["adminAuth"];
   /** Optional storage dir for the admin island's NodeFS Repo. */
   storageDir?:       string;
   /** Override the admin island script URL (tests). */
@@ -114,7 +120,7 @@ export interface AdminVmResult {
 const HANDSHAKE_TIMEOUT_MS = 15_000;
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl, coreHash, resolver, canonBags, storageDir, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, resolver, canonBags, adminAuth, storageDir, workerScriptUrl } = opts;
   void adminUrl;
 
   // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
@@ -122,7 +128,8 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   let _verifier:      CapabilityVerifier | null  = null;
 
   // Pending host→island verify-proxy calls (path b), keyed by requestId.
-  const _pendingVerifies = new Map<string, (ok: boolean) => void>();
+  type VerifyVerdict = { ok: boolean; identifier?: string; reason?: string };
+  const _pendingVerifies = new Map<string, (r: VerifyVerdict) => void>();
   let _verifySeq = 0;
 
   // Pending host→island binding-resolution calls, keyed by requestId.
@@ -187,7 +194,11 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       const resolve = _pendingVerifies.get(msg.requestId);
       if (resolve) {
         _pendingVerifies.delete(msg.requestId);
-        resolve(msg.ok);
+        resolve({
+          ok: msg.ok,
+          ...(msg.identifier ? { identifier: msg.identifier } : {}),
+          ...(msg.reason ? { reason: msg.reason } : {}),
+        });
       }
       return;
     }
@@ -260,7 +271,10 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     recipe,
     resolver,
     coreHash,
-    storage ? { storage } : undefined,
+    {
+      ...(storage   ? { storage }   : {}),
+      ...(adminAuth ? { adminAuth } : {}),
+    },
   );
   worker.postMessage(manifestMsg, [syncPort as unknown as ArrayBuffer]);
 
@@ -274,8 +288,8 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       _verifier      = verifier ?? null;
     },
     authSeam: {
-      verify: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin"): Promise<boolean> =>
-        new Promise<boolean>((resolve) => {
+      verify: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin"): Promise<VerifyVerdict> =>
+        new Promise<VerifyVerdict>((resolve) => {
           const requestId = `verify-${++_verifySeq}`;
           _pendingVerifies.set(requestId, resolve);
           worker.postMessage(mkAdminVerifyRequest({ requestId, cardBytes, bagUrl, access }));

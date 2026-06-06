@@ -53,7 +53,7 @@ export interface AdminBehaviorOptions {
    * keyhive-free.
    */
   verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin")
-    => Promise<{ ok: boolean; reason?: string }>;
+    => Promise<{ ok: boolean; identifier?: string; reason?: string }>;
   /**
    * Resolve (or mint+delegate) the @personal/@draft binding pair island-side —
    * the mint needs keyhive + the island Repo. The platform entry supplies this
@@ -139,12 +139,14 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
 
       if (type === "admin:verify-request") {
         const msg = raw as AdminMsg_VerifyRequest;
-        const answer = opts.verifyPeer
+        const answer: Promise<{ ok: boolean; identifier?: string; reason?: string }> = opts.verifyPeer
           ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access)
           : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
         answer
           .then((r) => post(mkAdminVerifyResult({
-            requestId: msg.requestId, ok: r.ok, ...(r.reason ? { reason: r.reason } : {}),
+            requestId: msg.requestId, ok: r.ok,
+            ...(r.identifier ? { identifier: r.identifier } : {}),
+            ...(r.reason ? { reason: r.reason } : {}),
           })))
           .catch((err: unknown) => post(mkAdminVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),

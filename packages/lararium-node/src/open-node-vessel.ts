@@ -46,7 +46,6 @@ import {
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   wikiLarUri, wikiDraftLarUri, BAG_IDS, TEMP_BAG,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
-  PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX,
   computeRecipeFingerprint,
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
@@ -83,7 +82,6 @@ import {
   makeRegisterColdReactor,
 } from "./residency-handlers.js";
 import { BagResidencyManager }                      from "@lararium/mesh";
-import { KeyhiveProvider, AdminEventStore, resolveOrMintBinding } from "@lararium/keyhive";
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult, AdminVmOptions } from "./open-admin-vm.js";
@@ -127,10 +125,9 @@ export interface NodeVesselResult extends LarariumVesselResult<
   /** Island Pool — two-state VM lifecycle (wela/anu) + orthogonal pin flag;
    *  PrimaryWiki pinned-wela, unpinned-wela LRU-evicted, anu = torn-down snapshot. */
   vmManager:        VesselIslandPool;
-  /** Admin VM — operator-private coordinator (S5.6). */
+  /** Admin VM — operator-private coordinator (S5.6) AND the operator's authn/z
+   *  home: keyhive now boots inside the admin island, not on the host (Stage 1). */
   admin:            AdminVmResult;
-  /** Capability provider — Keyhive-backed cap layer (S7.1 D.3). */
-  keyhive:          KeyhiveProvider;
   /** Stop the N-accumulator tick loop (call on graceful shutdown). */
   stopTick:         () => void;
 }
@@ -151,7 +148,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const storage = new NodeFSStorageAdapter(storageDir);
   // Tier-3 causal-island boundary: WebSocket relay serves Automerge sync only.
   // AdminAuthGate wraps the wss: runs lar:challenge/lar:auth before Automerge
-  // join flows. Gate starts disarmed (rejects all) until keyhive boots.
+  // join flows. Gate starts disarmed (rejects all) until armed with the admin
+  // island's verify seam (the admin worker's in-worker keyhive answers each peer).
   const authGate = new AdminAuthGate(wss);
   const network  = new NodeWSServerAdapter(authGate as unknown as typeof wss);
   // peerIdentifierMap: built by the "peer-candidate" listener below; sharePolicy
@@ -356,10 +354,67 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   }
   const coreHash = coreBlobEntry.sha256 ?? null;
 
-  // Admin VM — sovereign admin island. Spawns lar-admin-island.ts; holds its own
-  // TW5 VM (recipe: @temp + @draft + @admin + @lares + @lararium) + Repo + VerbDispatcher.
-  // Vessel retains adminHandle (keyhive gates) + composite (cap-event writes).
-  // The resolver delivers AutomergeUrl capability tokens for each CRDT slot.
+  // ── Operator authn/z material — built BEFORE the admin VM ──────────────────
+  // Stage 1 of the isomorphic-vessel epic: the host no longer boots keyhive; the
+  // admin island is the authn/z home. The operator seed + sentinel hexes + the
+  // writable-bag list cross into the worker in the manifest (adminAuth), where
+  // bootAdminKeyhive clears Gates A/B/C and runs the registerBag sweep.
+  //
+  // The sentinels + active-wiki marker the manifest needs live in the admin doc.
+  // Read it directly here (idempotent with openAdminVm's own repo.find) so the
+  // manifest is complete before the worker spawns — resolving the ordering knot.
+  const operatorIdentity = await generateOrLoadOperatorKeypair(storageDir);
+  const operatorSeed     = await loadOperatorSigningSeed(storageDir);
+
+  const adminHandleEarly = await waitHandleLocal<LarDoc>(
+    repo, adminUrl as AutomergeUrl,
+    () => repo.create<LarDoc>(emptyLarDoc()),
+  );
+  const adminDocEarly = adminHandleEarly.doc();
+
+  // Sentinel oracle tiddlers written by `lares init`. Absent → never initialized.
+  const personGroupDocIdHex   = tiddlerText(adminDocEarly?.tiddlers?.[PERSON_GROUP_DOC_ID_TIDDLER])   ?? null;
+  const personGroupAgentIdHex = tiddlerText(adminDocEarly?.tiddlers?.[PERSON_GROUP_AGENT_ID_TIDDLER]) ?? null;
+  const meshCabalDocIdHex     = tiddlerText(adminDocEarly?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
+  if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
+    throw new Error(
+      `[lararium] DreamNet sentinel oracle tiddlers missing — ` +
+      `this node may not have completed initialization. Run \`lares init\`.`,
+    );
+  }
+
+  const { slug: activeWikiId, source: activeWikiSource } = selectActiveWikiSlug(
+    wikiId,
+    adminDocEarly?.tiddlers?.[ACTIVE_WIKI_URI] ?? null,
+  );
+  const identity = new OpenIdentitySlot(`${hostId}:${activeWikiId}`);
+  const activeWikiPlan = planActiveWikiSlot({
+    hostId,
+    wikiSlug: activeWikiId,
+    identityDid: identity.did,
+  });
+
+  // registerBags mirrors the operator's writable-bag set (lar: URIs, NOT
+  // automerge: URLs — same namespace dispatchers verify against).
+  const adminAuth = {
+    seed:                  operatorSeed,
+    operatorVerifyingKey:  operatorIdentity.verifyingKey,
+    personGroupDocIdHex,
+    personGroupAgentIdHex,
+    meshCabalDocIdHex,
+    registerBags: [
+      ADMIN_BAG_ID,
+      BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
+      BAG_IDS.catalog, BAG_IDS.lararium, BAG_IDS.lares,
+      activeWikiPlan.wikiBagId, activeWikiPlan.draftBagId,
+    ],
+  };
+
+  // Admin VM — sovereign admin island AND the operator's authn/z home. Spawns
+  // lar-admin-island.ts; holds its own TW5 VM + Repo + VerbDispatcher + the
+  // in-worker keyhive (seed delivered via adminAuth). Vessel retains adminHandle
+  // (gate-check reads) + composite (cap-event writes). The resolver delivers
+  // AutomergeUrl capability tokens for each CRDT slot.
   const adminVm = await openAdminVm({
     repo,
     adminUrl,
@@ -369,18 +424,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       [BAG_IDS.lararium]:          islandHandle.url,
       ...(laresHandle ? { [BAG_IDS.lares]: laresHandle.url } : {}),
     },
+    adminAuth,
     storageDir,
-  });
-
-  const { slug: activeWikiId, source: activeWikiSource } = selectActiveWikiSlug(
-    wikiId,
-    await adminVm.composite.get(ACTIVE_WIKI_URI),
-  );
-  const identity = new OpenIdentitySlot(`${hostId}:${activeWikiId}`);
-  const activeWikiPlan = planActiveWikiSlot({
-    hostId,
-    wikiSlug: activeWikiId,
-    identityDid: identity.did,
   });
 
   // Vessel delegation registry — wiki-scope job handlers whose closure dependencies
@@ -492,128 +537,28 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // now reflects real activity rather than only boot-time pins.
   composite.attachResidency(residency);
 
-  // S7.1 D.3 — Capability layer. Bridge operator-key.ts ed25519 seed into
-  // KeyhiveProvider. The same 32-byte seed deterministically derives the
-  // operator's verifying key AND the Keyhive principal — they're the same
-  // identity from two surfaces.
+  // ── Inbound WS auth gate — arm with the admin island's verify seam ─────────
+  // Stage 1: the host holds no keyhive. The gate proxies each inbound peer's
+  // ContactCard to the admin island (admin:verify-request), which verifies in its
+  // in-worker keyhive and returns the verdict + Identifier hex for the sharePolicy
+  // map. Connections arriving before this point are rejected with 4503.
   //
-  // EventStore persists every Keyhive event as a tiddler in the admin
-  // Automerge doc (lar:///...@admin/cap/<sha256>, tagged lar:///ha.ka.ba/tags/cap-event).
-  // Daemon restart re-hydrates Keyhive state from these tiddlers via
-  // ingestEventsBytes — the operator's identity and delegations survive
-  // across reboots.
+  // Sovereignty is still enforced: bootAdminKeyhive (in-worker) clears Gates A/B/C
+  // and runs the registerBag sweep over adminAuth.registerBags; a gate failure
+  // throws → the island posts `fault` → `adminVm.workerEa` rejects → boot HALTs
+  // before the gate is armed or any wiki mounts.
+  authGate.arm(adminVm.authSeam, ADMIN_BAG_ID);
+
+  // Wire the delegation registry now that the admin VM lives. The admin island's
+  // VerbDispatcher delegates unknown verbs here via admin:delegate-verb;
+  // mountMainVerbs must be called before workerEa resolves so no delegated job is
+  // dropped during the boot window.
   //
-  // D.4 minimum-viable: every event lands in the admin doc regardless of
-  // semantic scope. Per-bag routing per the D4.a decision is reserved for
-  // a future refinement; tracked in HANDOFF "Don't re-decide" + memory.
-  //
-  // D.5 wires this provider as the dispatcher's verifier, so handlers'
-  // ctx.cap closures route through real Keyhive verification.
-  const operatorIdentity   = await generateOrLoadOperatorKeypair(storageDir);
-  const operatorSeed       = await loadOperatorSigningSeed(storageDir);
-  const keyhiveEventStore  = new AdminEventStore({ admin: adminVm.composite });
-  const keyhive            = new KeyhiveProvider();
-  await keyhive.init({ seed: operatorSeed, eventStore: keyhiveEventStore });
-  // Re-ingest any events the previous daemon process persisted.
-  const hydrated = await keyhive.hydrateFromEventStore();
-  if (hydrated.ingested > 0) {
-    console.log(`[lararium] keyhive: hydrated ${hydrated.ingested} cap events from admin doc`);
-  }
-  const keyhiveDid         = await keyhive.whoami();
-  // Gate A: Keyhive and disk keypair MUST derive the same identity.
-  // Drift here indicates a corrupted event store or mismatched seed file — HALT.
-  if (!keyhiveDid.endsWith(operatorIdentity.verifyingKey)) {
-    throw new Error(
-      `[lararium] identity drift — Keyhive whoami does not match disk keypair. ` +
-      `whoami=${keyhiveDid.slice(0, 18)}… verifyingKey=${operatorIdentity.verifyingKey.slice(0, 16)}… ` +
-      `Run \`lares init --force\` to re-establish operator identity.`,
-    );
-  }
-  // ── DreamNet boot gates ────────────────────────────────────────────────
-  // Gate B: this vessel's Individual MUST belong to the operator's PersonGroup.
-  //   Proves: this device holds a key that was admitted to this operator's fleet.
-  // Gate C: the operator's PersonGroup MUST belong to the Nexus MeshCabal.
-  //   Proves: this operator holds DreamNet Nexus membership.
-  //
-  // Both gates read sentinel oracle tiddlers written by `lares init`.
-  // If tiddlers are absent, the node has never been initialized — HALT.
-  // If verification fails, the node's identity diverged — HALT.
-  //
-  // NOTE: sentinel Documents are used (not Keyhive Groups) because GroupId
-  // lacks a public constructor in alpha.56c — no round-trip from stored hex.
-  // Migrate to Group when Keyhive API exposes GroupId serialization.
-
-  const adminDoc = adminVm.adminHandle.doc();
-
-  const personGroupDocIdHex   = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_DOC_ID_TIDDLER])   ?? null;
-  const personGroupAgentIdHex = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_AGENT_ID_TIDDLER]) ?? null;
-  const meshCabalDocIdHex     = tiddlerText(adminDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
-
-  if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
-    throw new Error(
-      `[lararium] DreamNet sentinel oracle tiddlers missing — ` +
-      `this node may not have completed initialization. Run \`lares init\`.`,
-    );
-  }
-
-  // Gate B — vessel Individual membership in PersonGroup
-  const vesselIdentifierHex = keyhiveDid; // whoami = hex of IndividualId bytes (with 0x prefix)
-  const gateB = await keyhive.verifySentinelMembership(vesselIdentifierHex, personGroupDocIdHex);
-  if (!gateB.ok) {
-    throw new Error(
-      `[lararium] Gate B: this vessel (${keyhiveDid.slice(0, 18)}…) lacks PersonGroup membership. ` +
-      `${gateB.reason ?? ""} Run \`lares device-admit\` on an existing admitted vessel.`,
-    );
-  }
-  console.log(`[lararium] Gate B ✓ — vessel admitted to operator PersonGroup`);
-
-  // Gate C — PersonGroup membership in MeshCabal (Nexus adminCabal)
-  const gateC = await keyhive.verifySentinelMembership(personGroupAgentIdHex, meshCabalDocIdHex);
-  if (!gateC.ok) {
-    throw new Error(
-      `[lararium] Gate C: operator PersonGroup lacks Nexus MeshCabal membership. ` +
-      `${gateC.reason ?? ""} Run \`lares invite-receive\` with the founding operator's invitation payload.`,
-    );
-  }
-  console.log(`[lararium] Gate C ✓ — operator admitted to Nexus MeshCabal (DreamNet)`);
-
-  // Register every writable bag the operator owns with Keyhive — operator
-  // becomes implicit admin via Keyhive's generateDocument semantics. The
-  // bagId namespace MUST match what dispatchers verify against (lar: URIs,
-  // NOT automerge: URLs) — same shape as the C.4 residency-pin namespace
-  // fix. Without this, ctx.cap("admin", lar:URI) returns false because
-  // keyhive's bagToDocId map only has automerge: URL keys.
-  await keyhive.registerBag(ADMIN_BAG_ID);
-  await keyhive.registerBag(BAG_IDS.identities);
-  await keyhive.registerBag(BAG_IDS.groups);
-  await keyhive.registerBag(BAG_IDS.sessions);
-  await keyhive.registerBag(BAG_IDS.catalog);            // catalog index of wiki oracles
-  await keyhive.registerBag(BAG_IDS.lararium);           // engine corpus (canon)
-  await keyhive.registerBag(BAG_IDS.lares);              // @lares persona/doctrine (canon)
-  await keyhive.registerBag(activeWikiPlan.wikiBagId);         // active wiki canonical
-  await keyhive.registerBag(activeWikiPlan.draftBagId);        // active wiki draft
-
-  // Arm the auth gate — connections arriving after this point go through
-  // Keyhive accessForDoc verification before Automerge sync begins.
-  authGate.arm(keyhive, ADMIN_BAG_ID);
-
-  // Smoke: confirm the operator's registerBag path wires correctly.
-  // Log-only — not a gate. The real sovereignty check ran at Gates B and C above.
-  const selfVerify = await keyhive.verify({
-    presenter: keyhiveDid,
-    bagUrl:    ADMIN_BAG_ID,
-    access:    "admin",
-  });
-  console.log(
-    `[lararium] keyhive: did=${keyhiveDid.slice(0, 18)}…  admin-bag registered  ` +
-    `self-admin=${selfVerify.ok}${selfVerify.ok ? "" : ` (smoke fail: ${selfVerify.reason})`}`,
-  );
-
-  // Wire the delegation registry now that keyhive exists.
-  // The admin island's VerbDispatcher delegates unknown verbs to this registry via
-  // admin:delegate-verb messages. mountMainVerbs must be called before workerEa resolves
-  // to ensure no delegated jobs are dropped during the boot window.
-  adminVm.mountMainVerbs(jobRegistry, keyhive);
+  // No verifier is passed: the verb data-plane (jobRegistry reactors) still runs
+  // on the host, but keyhive now lives in-island, so host-delegated verbs run
+  // UNVERIFIED until 1b migrates the data-plane into the island. Accepted
+  // transitional gap (isomorphic-vessel epic, stage 1b).
+  adminVm.mountMainVerbs(jobRegistry);
 
   // Zelenka: keep oracle tiddlers current on every boot — self, ka, ba, social plane, admin.
   reconcileWellKnownTiddlers(
@@ -761,9 +706,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 8b. @personal / @draft binding resolution (S7.5 + S7.6) ─────────────────
   // Composition-root step: resolve (or mint+delegate) the operator's cross-device
   // @personal + @draft docs for THIS recipe-fingerprint, then pass the URLs
-  // through WikiBootContext into the mount. Runs AFTER Gates B/C proved a real
-  // PersonGroup (personGroupAgentIdHex verified non-null above) and AFTER
-  // `await adminVm.workerEa`, BEFORE the mount that needs the URLs.
+  // through WikiBootContext into the mount. The mint needs keyhive, which lives
+  // in the admin island after Stage 1 — so the host posts the fingerprint and the
+  // island answers (admin:resolve-binding-request). Runs AFTER `adminVm.workerEa`
+  // (so the in-worker keyhive cleared Gates B/C against a real PersonGroup),
+  // BEFORE the mount that needs the URLs.
   //
   // Fingerprint covers wikiDocId + canonBags only (@lares/@lararium excluded per
   // Q4). The live primary recipe carries no canonBags (`{ wikiSlug }`), so the
@@ -771,27 +718,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const recipeTrace = { wikiDocId: wikiHandle.url, canonBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
 
-  const bindingCommon = {
-    fingerprint, repo,
-    adminStore:            adminVm.composite,
-    keyhive,
-    personGroupAgentIdHex,                 // verified present at Gate B/C above
-    mintedByHex:           keyhiveDid,
-    recipeTrace,
-  } as const;
   // Q11 (slice a): @personal + @draft bind TOGETHER per-fingerprint; neither
   // retires alone. The host-side ad-hoc draft layer (§5 above) remains for the
   // vessel's own composite; the island mounts THIS fingerprint-keyed @draft.
-  const personalBinding = await resolveOrMintBinding({
-    ...bindingCommon, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
-  });
-  const draftBinding = await resolveOrMintBinding({
-    ...bindingCommon, kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
-  });
-  console.log(
-    `[lararium] @personal ${personalBinding.minted ? "minted" : "reused"} · ` +
-    `@draft ${draftBinding.minted ? "minted" : "reused"} · fp=${fingerprint.slice(0, 12)}…`,
-  );
+  const { personalUrl, draftUrl } = await adminVm.resolveBinding(fingerprint, recipeTrace);
+  console.log(`[lararium] @personal/@draft resolved via admin island · fp=${fingerprint.slice(0, 12)}…`);
 
   // Unified mount path — primary is a `wela` slot with the `pinned` flag set
   // (never LRU-evicted); pin is orthogonal to temperature (EPIC S11.5).
@@ -799,8 +730,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     docHandle: wikiHandle,
     coreHash,
     diskMirrors,
-    personalDocUrl: personalBinding.url,
-    draftDocUrl:    draftBinding.url,
+    personalDocUrl: personalUrl,
+    draftDocUrl:    draftUrl,
   }, { pinned: true });
   emit("tw5-booted");
 
@@ -832,7 +763,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     store: composite,
     vmManager,
     admin: adminVm,
-    keyhive,
     catalogHandleUrl: catalogHandle.url,
     larariumDocUrl: islandHandle?.url ?? null,
     phase: "live",

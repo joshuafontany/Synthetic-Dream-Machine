@@ -25,7 +25,7 @@ import {
   isIslandToVesselMsg,
   type LarDoc, type CapabilityVerifier, type WikiRecipe,
 } from "@lararium/mesh";
-import type { AdminMsg_DelegateVerb, IslandMsg_Ea } from "@lararium/mesh";
+import type { AdminMsg_DelegateVerb, IslandMsg_Ea, IslandMsg_Manifest } from "@lararium/mesh";
 import { runLocalVerb, VerbTable } from "@lararium/tw5";
 export type { VerbReactor } from "@lararium/tw5";
 
@@ -40,6 +40,11 @@ export interface BrowserAdminVmOptions {
   recipe:           WikiRecipe;
   /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
   resolver:         Readonly<Record<string, string | null>>;
+  /**
+   * Operator authn/z material delivered to the admin island for in-worker
+   * keyhive boot (Stage 1) — seed + sentinel hexes + bags to register.
+   */
+  adminAuth?:       IslandMsg_Manifest["adminAuth"];
   /** URL of the compiled browser admin island Worker script. */
   workerScriptUrl:  URL;
 }
@@ -83,7 +88,7 @@ const HANDSHAKE_TIMEOUT_MS = 15_000;
 export async function openBrowserAdminVm(
   opts: BrowserAdminVmOptions,
 ): Promise<BrowserAdminVmResult> {
-  const { repo, adminUrl, coreHash, recipe, resolver, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, recipe, resolver, adminAuth, workerScriptUrl } = opts;
 
   let _registry: VerbTable | null = null;
   let _verifier: CapabilityVerifier | null = null;
@@ -180,7 +185,8 @@ export async function openBrowserAdminVm(
   });
 
   // ── Deliver manifest ──────────────────────────────────────────────────────
-  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, resolver, coreHash);
+  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, resolver, coreHash,
+    adminAuth ? { adminAuth } : undefined);
   worker.postMessage(manifestMsg, [syncPort]);
 
   return {

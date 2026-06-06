@@ -274,6 +274,9 @@ export interface AdminMsg_VerifyResult {
   type: "admin:verify-result";
   requestId: string;
   ok: boolean;
+  /** Peer's keyhive Identifier hex (from the island's receiveContactCard), so the
+   *  host can key its sharePolicy/peer map without a local keyhive. */
+  identifier?: string;
   reason?: string;
 }
 
@@ -587,9 +590,10 @@ export function mkAdminVerifyRequest(opts: {
 }
 
 export function mkAdminVerifyResult(opts: {
-  requestId: string;
-  ok:        boolean;
-  reason?:   string;
+  requestId:   string;
+  ok:          boolean;
+  identifier?: string;
+  reason?:     string;
 }): AdminMsg_VerifyResult {
   const msg: AdminMsg_VerifyResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -597,7 +601,8 @@ export function mkAdminVerifyResult(opts: {
     requestId: opts.requestId,
     ok:        opts.ok,
   };
-  if (opts.reason !== undefined) msg.reason = opts.reason;
+  if (opts.identifier !== undefined) msg.identifier = opts.identifier;
+  if (opts.reason     !== undefined) msg.reason     = opts.reason;
   return msg;
 }
 

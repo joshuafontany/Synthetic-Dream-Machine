@@ -3,7 +3,11 @@
  *
  * Tests the pre-Automerge lar:challenge / lar:auth / lar:auth-ok wire exchange
  * using a real WebSocket server, raw WebSocket client connections, and a stub
- * CapabilityProvider. No Automerge-repo, no TW5, no filesystem.
+ * AuthVerifierSeam. No Automerge-repo, no TW5, no filesystem.
+ *
+ * Post Stage 1 the host holds no keyhive — the gate arms with an AuthVerifierSeam
+ * that proxies to the admin island, which does receiveContactCard + verify
+ * in-worker and returns the verdict plus the peer's Identifier hex.
  *
  * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/admin-auth-gate
  */
@@ -12,32 +16,30 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { createServer }                               from "node:http";
 import { WebSocketServer, WebSocket }                 from "ws";
 import { AdminAuthGate }                              from "../src/admin-auth-gate.js";
-import type { CapabilityProvider }                    from "@lararium/keyhive";
+import type { AuthVerifierSeam }                      from "@lararium/mesh";
 import {
   isLarChallengeMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
   mkLarAuth,
 } from "@lararium/mesh";
 
-// ── Stub CapabilityProvider ───────────────────────────────────────────────────
+// ── Stub AuthVerifierSeam ─────────────────────────────────────────────────────
 
 type StubVerifyResult = { ok: true } | { ok: false; reason: string };
 
-function makeStubProvider(opts: {
+// Mirrors the admin island's verify-proxy: an `ok` verdict carries the peer's
+// Identifier hex (receiveContactCard's id), which the gate keys its sharePolicy
+// map on; a denial carries only the reason.
+function makeStubSeam(opts: {
   receiveResult: { id: string };
   verifyResult:  StubVerifyResult;
-}): CapabilityProvider {
+}): AuthVerifierSeam {
   return {
-    async init()                { /* no-op */ },
-    async whoami()              { return "0xdeadbeef"; },
-    async contactCard()         { return new Uint8Array(); },
-    async receiveContactCard()  { return opts.receiveResult; },
-    async registerBag()         { return { docId: "deadbeef" }; },
-    async delegate()            { return { delegationId: "x", bytes: new Uint8Array() }; },
-    async revoke()              { return { bytes: new Uint8Array() }; },
-    async verify()              { return opts.verifyResult; },
-    async hydrateFromEventStore() { return { ingested: 0 }; },
-    async dispose()             { /* no-op */ },
-  } as unknown as CapabilityProvider;
+    async verify() {
+      return opts.verifyResult.ok
+        ? { ok: true, identifier: opts.receiveResult.id }
+        : { ok: false, reason: opts.verifyResult.reason };
+    },
+  };
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -136,7 +138,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
   });
 
   test("armed gate sends lar:challenge on connect", async () => {
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -156,7 +158,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
       gate.once("connection", () => resolve());
     });
 
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -178,7 +180,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
   });
 
   test("insufficient capability → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: false, reason: "no admin grant" },
     }));
@@ -197,7 +199,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
   });
 
   test("wrong nonce → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -215,7 +217,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
   });
 
   test("sending non-auth message → lar:auth-denied + close(4003)", async () => {
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));
@@ -233,7 +235,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
   });
 
   test("clients set decrements when authenticated connection closes", async () => {
-    gate.arm(makeStubProvider({
+    gate.arm(makeStubSeam({
       receiveResult: { id: "0xaabbcc" },
       verifyResult:  { ok: true },
     }));

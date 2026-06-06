@@ -54,9 +54,20 @@ import type { IslandContext, IslandBehavior } from "@lararium/tw5";
 
 // ── runBrowserSovereignWorker — the browser gen_island kernel ────────────
 
-export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
+export function runBrowserSovereignWorker(
+  behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior),
+): void {
   const _post = (msg: IslandToVesselMsg) => self.postMessage(msg);
   const handler = new IslandKernel(_post);
+
+  // Factory form (mirrors the node kernel): when a manifest-keyed factory is
+  // passed, the behavior resolves lazily on first manifest — so the admin entry
+  // can read manifest.adminAuth (the operator seed) at construction time.
+  let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
+  const _resolveBehavior = (msg: IslandMsg_Manifest): IslandBehavior => {
+    if (behavior === null) behavior = (behaviorOrFactory as (m: IslandMsg_Manifest) => IslandBehavior)(msg);
+    return behavior;
+  };
 
   let _repo:             Repo | null                        = null;
   let _handles:          Map<string, DocHandle<LarDoc>>     = new Map();
@@ -87,7 +98,7 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
       return;
     }
 
-    if (_ctx && behavior.onSignal(raw.type, raw, _ctx)) return;
+    if (_ctx && behavior && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 
   // Inversion of control: signal the vessel that this Worker's message handler
@@ -108,6 +119,7 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   }
 
   async function _doManifest(msg: IslandMsg_Manifest): Promise<void> {
+    const behavior = _resolveBehavior(msg);
     // Island owns its own IndexedDB partition keyed by its identity URI.
     _repo = new Repo({
       storage:     new IndexedDBStorageAdapter(msg.wikiUri),
@@ -194,7 +206,7 @@ export function runBrowserSovereignWorker(behavior: IslandBehavior): void {
   // ── Demote (OTP terminate) ────────────────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    if (_ctx) await behavior.onDemote(_ctx);
+    if (_ctx && behavior) await behavior.onDemote(_ctx);
     handler.teardown();
 
     _handles.clear();

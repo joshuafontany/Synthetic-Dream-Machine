@@ -23,6 +23,15 @@
  * to wire when it gains a relay/WebRTC connection.
  */
 export interface AuthVerifierSeam {
-  /** Resolve true iff `cardBytes` proves the access on `bagUrl`. */
-  verify(cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin"): Promise<boolean>;
+  /**
+   * Resolve the keyhive verdict for `cardBytes` against the access on `bagUrl`.
+   * `identifier` carries the peer's keyhive Identifier hex (from the island's
+   * `receiveContactCard`) so the host transport can key its peer/sharePolicy map
+   * without a local keyhive — the host has none after Stage 1.
+   */
+  verify(
+    cardBytes: Uint8Array,
+    bagUrl: string,
+    access: "read" | "admin",
+  ): Promise<{ ok: boolean; identifier?: string; reason?: string }>;
 }

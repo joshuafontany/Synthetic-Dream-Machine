@@ -13,8 +13,10 @@
  *        OR   lar:auth-denied + ws.close(4003)
  *
  * The gate starts "disarmed" — all connections are rejected with 4503 until
- * arm() is called with a live KeyhiveProvider and the admin bag URL.
- * arm() is called after keyhive.init() and keyhive.registerBag(ADMIN_BAG_ID).
+ * arm() is called with the admin island's AuthVerifierSeam and the admin bag URL.
+ * The host holds no keyhive after Stage 1; the seam proxies each verify to the
+ * admin island, which answers from its in-worker keyhive and returns the peer's
+ * Identifier hex for the sharePolicy map. arm() is called once the admin VM lives.
  *
  * After a peer authenticates:
  *   1. socketToIdentifier WeakMap records socket → identifierHex.
@@ -39,7 +41,7 @@ import {
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied, isLarAuthMsg,
   ADMIN_BAG_ID,
 } from "@lararium/mesh";
-import type { CapabilityProvider } from "@lararium/keyhive";
+import type { AuthVerifierSeam } from "@lararium/mesh";
 
 const AUTH_TIMEOUT_MS       = 5_000;
 const MAX_PENDING           = 50;     // max concurrent unauthenticated connections
@@ -49,7 +51,7 @@ const WS_CLOSE_NOT_READY     = 4503;
 const WS_CLOSE_RATE_LIMITED  = 4429;
 
 interface ArmedState {
-  keyhive:    CapabilityProvider;
+  seam:        AuthVerifierSeam;
   adminBagUrl: string;
 }
 
@@ -78,12 +80,12 @@ export class AdminAuthGate extends EventEmitter {
   }
 
   /**
-   * Arm the gate with a live keyhive provider and the admin bag URL.
-   * Call after keyhive.init() and keyhive.registerBag(adminBagUrl).
-   * Connections arriving before arm() are rejected with 4503.
+   * Arm the gate with the admin island's verify seam and the admin bag URL.
+   * Call once the admin VM lives (its in-worker keyhive answers verify-proxy
+   * queries). Connections arriving before arm() are rejected with 4503.
    */
-  arm(keyhive: CapabilityProvider, adminBagUrl: string = ADMIN_BAG_ID): void {
-    this.armed = { keyhive, adminBagUrl };
+  arm(seam: AuthVerifierSeam, adminBagUrl: string = ADMIN_BAG_ID): void {
+    this.armed = { seam, adminBagUrl };
   }
 
   /**
@@ -108,7 +110,7 @@ export class AdminAuthGate extends EventEmitter {
     }
 
     this._pending++;
-    const { keyhive, adminBagUrl } = this.armed;
+    const { seam, adminBagUrl } = this.armed;
 
     const nonce = randomBytes(32).toString("hex");
     this._send(socket, mkLarChallenge(nonce));
@@ -157,18 +159,15 @@ export class AdminAuthGate extends EventEmitter {
           // Alpha: ContactCard self-certification + accessForDoc is the primary gate.
 
           const cardBytes = new TextEncoder().encode(parsed.contactCard);
-          const { id: identHex } = await keyhive.receiveContactCard(cardBytes);
+          // Path (b): host has no keyhive — proxy to the admin island, which
+          // does receiveContactCard + verify in-worker and returns the verdict
+          // plus the peer's Identifier hex for the sharePolicy map.
+          const verdict = await seam.verify(cardBytes, adminBagUrl, "admin");
 
-          const verifyResult = await keyhive.verify({
-            presenter: identHex,
-            bagUrl:    adminBagUrl,
-            access:    "admin",
-          });
-
-          if (!verifyResult.ok) {
-            resolve({ ok: false, reason: verifyResult.reason ?? "insufficient capability" });
+          if (!verdict.ok || !verdict.identifier) {
+            resolve({ ok: false, reason: verdict.reason ?? (verdict.ok ? "verify-proxy returned no identifier" : "insufficient capability") });
           } else {
-            resolve({ ok: true, identHex });
+            resolve({ ok: true, identHex: verdict.identifier });
           }
         } catch (err) {
           resolve({
