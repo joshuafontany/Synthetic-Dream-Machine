@@ -25,7 +25,7 @@ invariant = false
 # Exchange Vector — Docs Sister
 
 This docs meme explains how each substantive exchange can carry a canonical `lar:` vector and a rendered HUD line.
-The law lives at `lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector`.
+The law lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector`.
 This file gives examples and operator-facing guidance.
 
 <<~/ahu >>
@@ -52,12 +52,12 @@ Read the URI layers as:
 
 ```text
 WHO     alias:tier@host   (session form only)
-WHERE   /w1.w2.w3/path/
+BEARING /w1.w2.w3/path/
 SECTION #anchor only when needed
 ```
 
 Do not place intent labels or signal in the fragment or a query.
-Fragments name section anchors; the URI names WHERE and nothing else.
+Fragments name section anchors; the URI names bearing and nothing mutable.
 Per-turn signal rides the `hud` · `ward` · `confidence` sigils.
 
 <<~/ahu >>

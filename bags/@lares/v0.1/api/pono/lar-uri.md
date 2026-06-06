@@ -27,7 +27,7 @@ grammar = true
 
 ## Abstract
 
-The `lar:` URI scheme names a place in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI **names; it does not fetch**: resolution runs against a local world graph, never as a network instruction. The scheme carries two forms — a **local form** for stable graph addresses and system resource names, and a **session form** that names a speaker for exchange spans — and a three-slot coordinate path rooted in a Ha-Ka-Ba (noun · adjective · verb) triple.
+The `lar:` URI scheme names an address in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI **names; it does not fetch**: resolution runs against a local world graph, never as a network instruction. The scheme carries two forms — a **local form** for stable graph addresses and system resource names, and a **session form** that names a speaker for exchange spans — and a three-slot attitude root carried by a Ha-Ka-Ba (heading · angle · dynamic) triple.
 
 This specification names the scheme syntax (a formal ABNF grammar), the path taxonomy, the `@`-bag CRDT-surface rule, the resolution model, and the conformance, scheme-registration, and security obligations a processor MUST meet. It forms a **sibling submission** to the memetic-wikitext markup specification, which addresses its content by this scheme.
 
@@ -68,7 +68,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 | **address** | one resolved `lar:` URI; the identity of a named graph unit. |
 | **local form** | `lar:///path` — authority-less; for stable addresses and system resource names. |
 | **session form** | `lar://alias:tier@host/path` — names a speaker; exchange spans only. |
-| **triple** | the three-slot `w1.w2.w3` coordinate root (Ha noun · Ka adjective · Ba verb). |
+| **triple** | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
 | **bag** | a CRDT surface (today an Automerge doc); designated by one `@`-tagged segment. |
 | **slot** | one lowercase word in the triple. |
 | **fragment** | a `#`-anchor naming a section / `ahu` / pranala within an address. |
@@ -96,7 +96,7 @@ stable-path   = "ha.ka.ba" [ "/" bag-seg ] *( "/" segment )
 unstable-path = triple [ "/" bag-seg ] *( "/" segment )
 adjacent-path = segment                    ; no triple root, no bag-seg
 
-triple        = word "." word "." word     ; Ha noun . Ka adj . Ba verb
+triple        = word "." word "." word     ; Ha heading . Ka angle . Ba dynamic
 bag-seg       = "@" name                    ; child[1] ONLY — one CRDT bag
 segment       = 1*( unreserved / pct-encoded )   ; child[2]+ : MUST NOT carry "@"
 word          = 1*( %x61-7A )              ; one slot: lowercase only
@@ -119,7 +119,7 @@ lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri
 ```
 
-**Unstable** — arbitrary three-word coordinate, session-specific territory:
+**Unstable** — arbitrary three-word attitude root, session-specific bearing:
 ```
 lar:///threshold.uncertain.opens/
 ```
@@ -131,7 +131,7 @@ lar:///AGENTS    lar:///LARES    lar:///CRYSTAL
 
 Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
 
-For stable and unstable paths: each slot holds exactly one lowercase word — Ha (NOUN), Ka (ADJECTIVE), Ba (VERB). Hyphens, underscores, and spaces within a slot MUST NOT appear. Fewer than three slots MUST NOT appear. Sub-path after the triple navigates within territory; strip it to get the named tagspace address.
+For stable and unstable paths: each slot holds exactly one lowercase word — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Hyphens, underscores, and spaces within a slot MUST NOT appear. Fewer than three slots MUST NOT appear. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
 
 ### TW5 System Boundary
 
@@ -166,7 +166,7 @@ lar:///ha.ka.ba/@temp                      ← child[1]=@temp        : the volat
 
 Law summary:
 
-1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; coordinate triple for unstable).
+1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
 2. `child[1]` MAY carry `@<name>` — names a top-level bag. Each bag has exactly one canonical address.
 3. `child[2]` and deeper MUST NOT carry `@`-prefix. Those segments name tiddlers (or path navigation) within the bag's address space — never further sub-bags.
 4. Resolution: the runtime resolves an `@`-tagged segment to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the slot identity; the resolver maps it to the live doc. Two devices binding the same slot URI to different doc URLs (different recipes, different personal docs, etc.) is the normal case — the URI is the address, the doc is the house.
@@ -194,11 +194,13 @@ Session form names the speaker through the authority. It MUST NOT appear in stab
 
 ## Signal Law
 
-The `lar:` URI names WHERE — place and nothing else, in ASCII.
+The `lar:` URI names bearing — attitude and section, nothing mutable, in ASCII.
+
+The root carries an attitude triple: **Ha** sets the heading faced, **Ka** sets the angle of approach, and **Ba** carries the dynamic underway. This runs after the manner of what3words in fixed three-word arity, not in geospatial metric. Hawaiian parallels stay visible: *hā* breathes at the threshold; hoʻokele names navigation by held bearing. The approved exchange term remains **bearing vector**.
 
 Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
 
-WHERE (path) → SECTION (fragment).
+BEARING (path) → SECTION (fragment).
 
 <<~/ahu >>
 

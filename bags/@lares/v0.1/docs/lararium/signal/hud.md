@@ -35,7 +35,7 @@ This room frames the HUD as the **situational-awareness surface** within the sig
 ## The HUD as the Signal Surface
 
 The turn HUD reads the node's situational awareness at glance-speed — the `aim`
-WHERE-vector, the `Aperture` and `OODA-HA` gauges, the `ward`, `confidence`, and the
+bearing vector, the `Aperture` and `OODA-HA` gauges, the `ward`, `confidence`, and the
 `syad` / `mu` lenses, all surfacing beside the prose before the Voice speaks.
 
 Within this branch the HUD relates to its sibling SA surfaces:

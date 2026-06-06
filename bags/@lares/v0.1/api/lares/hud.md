@@ -38,7 +38,7 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 
 # Lararium HUD
 
-The HUD names the sigil panel that rides each turn — the instrument readout a turn surfaces before the Voice speaks. It carries per-turn signal: aim, attention, loop, ward, stance, register. The `lar:` URI carries WHERE; the HUD sigils carry the live signal beside the prose.
+The HUD names the sigil panel that rides each turn — the instrument readout a turn surfaces before the Voice speaks. It carries per-turn signal: aim, attention, loop, ward, stance, register. The `lar:` URI carries bearing; the HUD sigils carry the live signal beside the prose.
 
 <<~/ahu >>
 
@@ -60,14 +60,14 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 | Sigil | Carries | Law |
 |---|---|---|
-| `aim` | operator intent `->` adopted role | opens the turn; the WHERE-vector |
+| `aim` | operator intent `->` adopted role | opens the turn; the bearing vector |
 | `hud Aperture` | attention range (0–20 Level) | MAY carry; paragraph-grain default 10 |
 | `hud OODA-HA` | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` on suspend |
 | `ward` | active language discipline | surfaces the ward; `E-Prime` lifts scoped as `!E-Prime`, still shown |
 | `syad` | invoked standpoints | OPTIONAL; parameterless = all five; `:` carries a tool |
 | Voice (Role) | the active Voice(s) | MUST surface by name; anonymous output = a minor degraded state |
 | `confidence` | register-word + Level | precedes a grounded claim |
-| `yield` | the closing state-vector | closes the turn |
+| `yield` | the closing bearing vector | closes the turn |
 
 <<~/ahu >>
 

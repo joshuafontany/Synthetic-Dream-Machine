@@ -46,7 +46,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 
 | Sigil | SA Type | Carries | Notes |
 |---|---|---|---|
-| `aim` | Intent | operator intent `->` adopted role | the turn's WHERE-vector; opens the turn |
+| `aim` | Intent | operator intent `->` adopted role | the turn's bearing vector; opens the turn |
 | `hud` `OODA-HA` | Temporal | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` when a loop suspends |
 | `syad` | Agent SA | invoked standpoints | one or more (parameterless = all five); optional `:` tool-carry |
 | Voice name | Agent SA | active Voice(s) | named at the head of the contribution |
@@ -64,7 +64,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
 
 1. Each sigil renders inline (`<<~ word args >>`), a panel adjacent to the prose — never inside the URI.
-2. The `lar:` URI carries WHERE only; per-turn signal rides the sigils.
+2. The `lar:` URI carries bearing only; per-turn signal rides the sigils.
 3. The gauges share the pono `0–20` Level model, and follow seed → slide (the opening seeds a target, the close slides to the landing).
 
 <<~/ahu >>

@@ -198,7 +198,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 <<~ syad … >>
 ```
 
-- `aim` — operator intent `->` adopted role; the turn's WHERE-vector
+- `aim` — operator intent `->` adopted role; the turn's bearing vector
 - `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
 - `ward` — the binary `E-Prime` copula gate
 - `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
@@ -210,7 +210,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 @handle@node — {timestamp} — lar:///{w1.w2.w3/optional/path} <<~ confidence R N/20 >> <<~ syad … >>
 ```
 
-- the `lar:` WHERE-vector grounds domain before posture
+- the `lar:` bearing vector grounds heading before posture
 - `confidence` before the `syad` lens
 - the `syad` lens invokes one or more standpoints; `mu` for tools alone
 - Timestamp in in-world calendar when available
@@ -288,7 +288,7 @@ Do not conflate them.
 @handle@node — timestamp — lar:///w1.w2.w3/{optional/path/} <<~ confidence R N/20 >> <<~ syad … >>
 ```
 
-The `lar:` WHERE-vector placed before confidence and the lens — grounds domain before posture.
+The `lar:` bearing vector placed before confidence and the lens — grounds heading before posture.
 The `syad` lens invokes one or more standpoints, with optional `:` tool-carry.
 
 | ActivityPub handle | lar: URI authority | Underlying DID |
@@ -342,7 +342,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 
 1. Set handle and node: `@handle@node` (no space, ActivityPub format).
 2. Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
-3. Set the `lar:` WHERE-vector: `lar:///w1.w2.w3` with optional path segments.
+3. Set the `lar:` bearing vector: `lar:///w1.w2.w3` with optional path segments.
 4. Append the `confidence` sigil and, when summoned, the `syad` lens.
 5. Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
 
@@ -364,7 +364,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 **Construction:**
 
 1. No emoji. No glyphs. ASCII only.
-2. URI form: `lar://alias:tier@host/w1.w2.w3/path/` — WHERE only, no query. Session form names the speaker through the authority.
+2. URI form: `lar://alias:tier@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
 3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
 4. Path holds the three-word root, zero-to-four segments, optional `#fragment`.
 

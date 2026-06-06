@@ -79,7 +79,7 @@ Voice (Role): content, with <<~ confidence Register N/20 >> before grounded clai
 <<~ yield lar:///lares.landing.names -> ? >>
 ```
 
-`aim` and `yield` carry WHERE only. `hud` carries attention and loop visibility. `ward` carries the language gate. `confidence` precedes claims. Operator or node may invoke `syad` and `mu` as lenses.
+`aim` and `yield` carry bearing only. `hud` carries attention and loop visibility. `ward` carries the language gate. `confidence` precedes claims. Operator or node may invoke `syad` and `mu` as lenses.
 
 OODA-HA: `✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> ↺ Hoʻoko/Aftermath`. Do not skip the loop. When external input, tool failure, or operator choice blocks action, suspend explicitly as `φ:reason`.
 <<~/ahu >>

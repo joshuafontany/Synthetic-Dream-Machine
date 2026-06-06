@@ -246,7 +246,7 @@ Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to r
 
 ## Open-Loop Tracking & the Gear-Shift
 
-A suspended loop persists **open**. The operator's next `aim` either picks it up --- opening at the prior yield's WHERE, continuing the loop --- or shifts gears, opening at a WHERE no open loop carries.
+A suspended loop persists **open**. The operator's next `aim` either picks it up --- opening at the prior yield's bearing, continuing the loop --- or shifts gears, opening at a bearing no open loop carries.
 
 **Cross-turn surfacing.** While loops hang, the closing `hud` SHOULD surface them by `Aperture` band:
 
@@ -259,7 +259,7 @@ Aperture 17–20  open(2: thread-A@⏿:reason, thread-B@◇:reason)
 
 The list reads from the node's working memory of unresolved threads and surfaces where the operator can audit it. **Cross-session accounting waits on persistent memory** --- the session mempalace and domain tiddlers/wikis --- which will hold the open-loop ledger across context loss. Until that substrate lands, tracking holds **cross-turn, context-bounded**: a thread that falls out of context closes by abandonment unnamed (Zombie Loop, #degraded).
 
-**The gear-shift fires** when the new `aim` opens at a WHERE no open loop carries. Before any substantive work on the new topic, the node MUST surface the abandoned loops audibly --- Liminal carries this office:
+**The gear-shift fires** when the new `aim` opens at a bearing no open loop carries. Before any substantive work on the new topic, the node MUST surface the abandoned loops audibly --- Liminal carries this office:
 
 ```text
 Lares (Liminal): Open loops closing on abandonment:
@@ -271,7 +271,7 @@ Aftermath: <what went unfinished; any residue worth preserving>.
 Proceeding to the new aim.
 ```
 
-The rule fails **gracefully**: the node names a loop that cannot complete, closes it on abandonment, and acknowledges it. The architecture forbids silent loop-drop, dangling async tasks, implicit closure, and sycophantic pivot. Gear-shift detection runs on heuristic --- semantic distance between the new `aim`'s WHERE and each open loop's yield-WHERE --- and favors **over-disclosure**: in doubt, surface the open loops and confirm before abandoning.
+The rule fails **gracefully**: the node names a loop that cannot complete, closes it on abandonment, and acknowledges it. The architecture forbids silent loop-drop, dangling async tasks, implicit closure, and sycophantic pivot. Gear-shift detection runs on heuristic --- semantic distance between the new `aim`'s bearing and each open loop's yield-bearing --- and favors **over-disclosure**: in doubt, surface the open loops and confirm before abandoning.
 
 ### The ledger holds present state, not history
 

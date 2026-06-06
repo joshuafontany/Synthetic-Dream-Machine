@@ -35,7 +35,7 @@ Core frame:
 Rules for agents:
 
 - The `aim` opens: operator intent-vector `->` the role the node adopts. The `hud` + `ward` panel rides beneath.
-- The turn closes on `yield`: the WHERE the work landed, then `-> ?` on the same line.
+- The turn closes on `yield`: the bearing the work resolved toward, then `-> ?` on the same line.
 - Fenced code blocks protect `->`, `?`, brackets, and lar paths from Markdown renderer drift.
 - `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
 - The sigils carry humility instruments, not decorative badges:

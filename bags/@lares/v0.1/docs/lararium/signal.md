@@ -37,7 +37,7 @@ The tagspace definition, HUD, drift, provenance, and render-target documents liv
 This parent keeps only branch-level signal framing:
 
 - the exchange-boundary contract for `lar` URI signal
-- the split between the `aim` / `yield` WHERE-vectors, the sigil panel, and in-span OODA-HA surfacing
+- the split between the `aim` / `yield` bearing vectors, the sigil panel, and in-span OODA-HA surfacing
 - routing pressure toward the correct child room
 
 Long witness bundles, migration residue, drift-recovery detail, symbol tables, and research argument should leave this parent.
@@ -54,8 +54,8 @@ Long witness bundles, migration residue, drift-recovery detail, symbol tables, a
 This doc covers the `lar` URI signal layer:
 
 - Agent-Operator exchange-boundary instrumentation
-- the `aim` / `yield` WHERE-vectors that open and close a turn
-- the relation between the `lar:` WHERE-vector, the sigil panel (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses), and adjacent protocol surfaces
+- the `aim` / `yield` bearing vectors that open and close a turn
+- the relation between the `lar:` bearing vector, the sigil panel (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses), and adjacent protocol surfaces
 
 <<~/ahu >>
 
@@ -90,8 +90,8 @@ Every substantive exchange opens with an `aim` vector, rides the `hud` · `ward`
 
 The frame runs as follows:
 
-1. Read operator intent as a provisional WHERE-vector.
-  Lares reads the operator's prompt as an implicit signal: semantic territory (HA.KA.BA) and the role it implies.
+1. Read operator intent as a provisional bearing vector.
+  Lares reads the operator's prompt as an implicit signal: semantic bearing (HA.KA.BA) and the role it implies.
   The `~` prefix may mark the HA.KA.BA when the reading stays uncertain.
 
 2. Open the turn with the `aim` vector — operator intent `->` the role the node adopts.

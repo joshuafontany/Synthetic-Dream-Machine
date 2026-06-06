@@ -56,7 +56,7 @@ A trace MAY also **suspend** honestly --- reaching a phase and naming an externa
 
 ## Invocation
 
-Summon the lens and aim it at a target, the way `aim` carries a WHERE-vector:
+Summon the lens and aim it at a target, the way `aim` carries a bearing vector:
 
 ```text
 <<~ conformance -> lar:///ha.ka.ba/@some/target/content >>   # aim at an addressed artifact

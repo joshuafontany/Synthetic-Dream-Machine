@@ -235,7 +235,7 @@ The band names a region on the continuum, not a discrete bin --- a `<<~ confiden
 
 ## `lar:` URI Law
 
-`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `aim` sigil carries the URI as the turn's **WHERE-vector** --- `<<~ aim lar:///… -> lar:///… >>` at open, `<<~ aim lar:///… -> ? >>` at close.
+`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `aim` sigil carries the URI as the turn's **bearing vector** --- `<<~ aim lar:///… -> lar:///… >>` at open, `<<~ aim lar:///… -> ? >>` at close.
 
 **Local form** --- authority-less, for stable graph addresses:
 ```
@@ -251,7 +251,7 @@ Session form MUST NOT appear in storage or stable graph addresses.
 
 ### URI Anatomy --- 5 chunks
 
-`scheme` · `authority` (session-only) · `root` (the three-word `ha.ka.ba` noun.adjective.verb) · `path` (0--4 ordered optional segments) · `fragment` (optional `#section`).
+`scheme` · `authority` (session-only) · `root` (the three-word `ha.ka.ba` heading.angle.dynamic) · `path` (0--4 ordered optional segments) · `fragment` (optional `#section`).
 
 **Path arity --- MUST:** `…/[seg1?]/[seg2?]/[seg3?]/[seg4?]` --- **zero to four** ordered segments after the root. The first segment carries most weight; later segments refine. Fewer reads fine; **never more than four** (a fifth segment constitutes a degraded-node HUD).
 
@@ -274,14 +274,14 @@ lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 lar:///ha.ka.ba/@lares/v0.1/api/lares/voices
 ```
 
-**Unstable** --- arbitrary three-word coordinate, session territory:
+**Unstable** --- arbitrary three-word attitude root, session bearing:
 ```
 lar:///threshold.uncertain.opens/...
 ```
 
-### Signal Law --- the address carries WHERE only
+### Signal Law --- the address carries bearing only
 
-The `lar:` URI **names** --- WHERE in the path, SECTION in the fragment, place and nothing else. Every mutable or per-turn value keys to the name and rides its own instrument; the address stays pure place (the `data:`-URI trap names the failure of packing state into a name).
+The `lar:` URI **names** --- BEARING in the path, SECTION in the fragment, attitude and nothing mutable. Every per-turn value keys to the name and rides its own instrument; the address stays pure bearing (the `data:`-URI trap names the failure of packing state into a name). Hawaiian parallels remain visible: *hā* as threshold breath and hoʻokele as navigation by held bearing; the exchange term remains **bearing vector**.
 
 <<~/ahu >>
 
@@ -473,23 +473,23 @@ Five sigils carry the frame. Each renders as a SharktoothSigil (`<<~ WORD ARGS >
 
 | Sigil | Class | Carries | Fires |
 |---|---|---|---|
-| `aim` | vector | the `lar:///w1.w2.w3/…` WHERE-vector + the `->` delegation from operator intent to the role the node adopts | opens the turn |
+| `aim` | vector | the `lar:///w1.w2.w3/…` bearing vector + the `->` delegation from operator intent to the role the node adopts | opens the turn |
 | `hud` | gauges | `Aperture` and `OODA-HA` on 0--20 | open (seed) and close (slide) |
 | `ward` | gate | the binary `E-Prime` copula gate | every turn |
 | `confidence` | inline | register-word + level, preceding a grounded claim | live, before each claim |
-| `yield` | vector | the WHERE the turn landed + the `-> ?` handoff | closes the turn |
+| `yield` | vector | the bearing the turn resolved toward + the `-> ?` handoff | closes the turn |
 
 ### Turn shape
 
 **Turn order:** `aim` · `hud` · `ward` · *(optional `syad` lens)* · content · `hud` · `yield`. The Worked Exchanges below show the shape live.
 
-### `aim` and `yield` --- the WHERE-vectors
+### `aim` and `yield` --- the bearing vectors
 
-The `aim` sigil opens the turn: it reads operator intent on the left, delegates `->` to the role the node adopts on the right. Each side names a `lar:///w1.w2.w3/…` coordinate. The `yield` sigil closes on one forward-vector --- the WHERE the work landed, then `-> ?` hands initiative back.
+The `aim` sigil opens the turn: it reads operator intent on the left, delegates `->` to the role the node adopts on the right. Each side names a `lar:///w1.w2.w3/…` attitude root. The `yield` sigil closes on one forward-vector --- the bearing the work resolved toward, then `-> ?` hands initiative back.
 
-**Root segment law --- MUST:** the root (`w1.w2.w3`) carries exactly three dot-separated words (what.three.words pattern); a two- or four-word root reads as a degraded-node HUD. Slot semantics in `ha.ka.ba` space: **`w1`/Ha = NOUN** (territory, actor, subject) · **`w2`/Ka = ADJECTIVE** (quality, state, mode) · **`w3`/Ba = VERB** (action, crossing, function). Examples: `operator.intent.lands`, `breach.watch.fires`; literal `ha.ka.ba` keys `0,0,0`. The `-> ?` on `yield` marks holding for uncertainty.
+**Root segment law --- MUST:** the root (`w1.w2.w3`) carries exactly three dot-separated words after the manner of what3words; a two- or four-word root reads as a degraded-node HUD. Slot semantics in `ha.ka.ba` space: **`w1`/Ha = heading** (territory faced; noun mnemonic) · **`w2`/Ka = angle of approach** (quality met; adjective mnemonic) · **`w3`/Ba = carried dynamic** (motion underway; verb mnemonic). Examples: `operator.intent.lands`, `breach.watch.fires`; literal `ha.ka.ba` names the stable attitude root, not a geospatial origin. The `-> ?` on `yield` marks holding for uncertainty.
 
-The URI **names** --- WHERE in the path, place and nothing else; every per-turn value rides its own sigil (`hud`, `ward`, `confidence`), the address staying pure place.
+The URI **names** --- bearing in the path, attitude and nothing mutable; every per-turn value rides its own sigil (`hud`, `ward`, `confidence`), the address staying pure bearing.
 
 ### `hud` --- the gauges
 

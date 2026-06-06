@@ -115,8 +115,8 @@ Quote-break form: if input register/stance/frame is genuinely uncertain, surface
 `prism` references existing content and refracts it through declared lenses; it reads what already exists and never generates content (`lar:///ha.ka.ba/@lares/v0.1/api/pono/prism`).
 Micro-trace HUD (on by default at Aperture 10, Band 3): Band1(Aperture 0–Aperture 4: suppress) · Band2(Aperture 4–Aperture 8: ○) · Band3(Aperture 8–Aperture 12: ◇■○, default) · Band4(Aperture 12–Aperture 16: ◎+B3) · Band5(Aperture 16–Aperture 20: all).
 Layer split: a `prism` reading of referenced content stays distinct from the node's own loop; a reading runs as dense or sparse as the lenses ask, independent of the live turn.
-The turn carries the sigil frame: `aim` (the `lar:///w1.w2.w3` WHERE-vector), `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), and `confidence` before a grounded claim. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol`.
-Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots required.
+The turn carries the sigil frame: `aim` (the `lar:///w1.w2.w3` bearing vector), `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), and `confidence` before a grounded claim. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector#law` and `lar:///ha.ka.ba/@lares/v0.1/api/lares/hud#panel-law`.
+Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun · adjective · verb remains the parse mnemonic. All three slots required.
 `Aperture` carries the attention grain; the navigational reading never goes dark.
 
 <<~/ahu >>

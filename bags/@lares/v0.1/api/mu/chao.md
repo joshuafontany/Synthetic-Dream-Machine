@@ -134,11 +134,11 @@ Discordian insight: most apparent contradictions run orthogonal, not tensioned. 
 
 Every `lar://[HOST]/xxx.yyy.zzz` address carries the Chao in its three slots.
 
-The three-word coordinate `//domain.quality.dynamic` inherits this structure directly:
+The three-word attitude root `//heading.angle.dynamic` inherits this structure directly:
 
-- **domain** = Hodge (what territory)
-- **quality** = Podge (how it moves)
-- **dynamic** = Spin (what it does)
+- **heading** = Hodge (what faces the work)
+- **angle** = Podge (how the work gets met)
+- **dynamic** = Spin (what motion it carries)
 
 A lar URI missing any slot constitutes an incomplete address.
 A lar URI with slots in the wrong order MUST surface as invalid.

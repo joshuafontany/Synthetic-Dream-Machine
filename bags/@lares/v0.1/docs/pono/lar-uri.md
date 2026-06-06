@@ -35,12 +35,12 @@ This surface carries the explanation.
 
 ## 1. Design Intent
 
-The `lar:` URI names WHERE a Lares node exchange sits — a shared navigational address. In live use the `aim` / `yield` vectors carry it as the turn's WHERE; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
+The `lar:` URI names the bearing a Lares node exchange takes — a shared navigational address. In live use the `aim` / `yield` vectors carry it as the turn's bearing; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
 
 Each URI component carries a distinct, non-overlapping concern across three semantic layers:
 
 1. **WHO** — authority (`alias:tier@host`) identifies speaker and machine host
-2. **WHERE** — the HA.KA.BA address (path) locates semantic territory
+2. **BEARING** — the HA.KA.BA address (path) names semantic attitude
 3. **SECTION** — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
 
 Resource-state annotations such as the mana/context-window pool are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
@@ -63,14 +63,14 @@ Named render targets: `record:full` (identity projection of the canonical form),
 
 At each exchange span, the turn opens with an `aim` vector and closes with a `yield` vector, the `hud` · `ward` panel riding beneath. The frame is **mandatory** on every substantive exchange.
 
-**Step 1 — Read operator intent as a provisional WHERE-vector.**
-Lares reads the operator's prompt as an implicit signal: semantic territory (HA.KA.BA) and the role it implies. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
+**Step 1 — Read operator intent as a provisional bearing vector.**
+Lares reads the operator's prompt as an implicit signal: semantic bearing (HA.KA.BA) and the role it implies. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
 
 ```
 lar://telarus:operator@enyalios/~schema.gap.present/
 ```
 
-**Step 2 — Lares adopts its own execution WHERE-vector.**
+**Step 2 — Lares adopts its own execution bearing vector.**
 Before generating, Lares sets the role it adopts. The `~` prefix marks it execution-provisional: generations may diverge.
 
 ```
@@ -86,7 +86,7 @@ lar://lar:node@enyalios/~schema.flow.documented/
 > **Canonical URI Rule** — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
 
 **Step 4 — Ride the panel.**
-Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries WHERE only.
+Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
 
 **Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
@@ -144,7 +144,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use th
 /ha.ka.ba/@lares/{optional/sub/path}[#anchor]
 ```
 
-This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` is the (0,0,0) of tagspace.
+This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace.
 
 <<~/ahu >>
 
@@ -161,7 +161,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` is the (
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/@lares/` | `/threshold.uncertain.opens` |
 | 6 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
 
-> **Layout validation `Canon 18/20`:** The WHERE → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
+> **Layout validation `Canon 18/20`:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
 
 <<~/ahu >>
 
@@ -202,7 +202,7 @@ The `~crossroads` tilde prefix denotes a nomadic/crossroads node — no fixed ho
 @handle@node — timestamp — //ha.ka.ba/@lares/{optional/path/} [confidence] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}
 ```
 
-Territory triple (`//ha.ka.ba`) is placed **before** other instruments like confidence and stance — grounds domain before posture (WHERE → HOW, matching URI path-first layout logic).
+Attitude triple (`//ha.ka.ba`) is placed **before** other instruments like confidence and stance — grounds bearing before posture (BEARING → HOW, matching URI path-first layout logic).
 
 **Render target name:** `chat-log:post-header` — the in-chat-log, timestamped URI render target for post headers.
 
@@ -394,9 +394,9 @@ Strip authority, query, and fragment. The HA.KA.BA territory alone:
 lar:///threshold.uncertain.opens/
 ```
 
-No authority (empty), no query, no fragment. This is the invariant semantic coordinate — unchanging across events, sessions, and machines. Suitable as a named graph identifier (SPARQL: `?`).
+No authority (empty), no query, no fragment. This is the invariant semantic bearing — unchanging across events, sessions, and machines. Suitable as a named graph identifier (SPARQL: `?`).
 
-**Origin address:** `lar:///ha.ka.ba/@lares/` is the (0,0,0) of tagspace — the root stable address from which all HA.KA.BA coordinates extend. Sub-path extensions navigate within the named territory: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri/` locates this document. The HA.KA.BA triple remains stable; the sub-path narrows scope.
+**Origin address:** `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace — the root stable address from which HA.KA.BA bearings extend. Sub-path extensions narrow the bearing within the named surface: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri/` locates this document. The HA.KA.BA triple remains stable; the sub-path narrows scope.
 
 **Comparison rule:** two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical. Query and fragment are excluded from comparison.
 
@@ -509,7 +509,7 @@ A spanSpan record is **consistent** when:
 
 ## 15. Prior Art
 
-- **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths and the WHERE-only address structure) falls within the scheme owner's authority.
+- **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths and the bearing-only address structure) falls within the scheme owner's authority.
 - **RFC 8820 (BCP 190, URI Design and Ownership)** — Obsoletes RFC 7320 (June 2020). Confirms that URI structure constraints are legitimate when issued by the scheme specification itself. Path and address structure falls within scheme-owner authority per §2.4.
 - **RFC 7595 (Guidelines and Registration Procedures for URI Schemes)** — Defines provisional registration path for schemes not part of any standard but intended for use beyond a single organization. `lar:` is currently unregistered / private-environment use.
 - **RFC 4151 (tag: scheme)** — Non-dereferenceable URIs as pure identifiers. Precedent for `lar:` never resolving to a network resource. RFC 4151 recommends human-friendly identifiers — the HA.KA.BA semantic addressing follows this guidance.
@@ -544,7 +544,7 @@ A spanSpan record is **consistent** when:
 
 ## Appendix B — How to Read an Exchange Opening
 
-A complete exchange opening, annotated by scan order. The `aim` URI carries WHERE; the sigil panel beside it carries the rest.
+A complete exchange opening, annotated by scan order. The `aim` URI carries bearing; the sigil panel beside it carries the rest.
 
 ```text
 <<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>

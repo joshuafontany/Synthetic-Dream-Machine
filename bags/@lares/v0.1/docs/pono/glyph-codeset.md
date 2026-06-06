@@ -25,7 +25,7 @@ Canonical reference for the memetic wikitext glyph set system.
 Nine non-overlapping Unicode ranges. Category identified by range check — O(1) per glyph.
 Source: `memetic-wikitext-v3.md` (Glyph Codeset v0.3), consumed 2026-05-16.
 
-The glyph set inside a sigil's opening bracket answers: WHO, WHAT PROTOCOL, WHAT PROPERTIES, WHAT SCALE, WHAT DOMAIN, WHAT RELATIONS, WHAT DIRECTION. The address path answers WHERE. The Chronometer fragment answers WHEN. Three layers, three symbol sets, no collision.
+The glyph set inside a sigil's opening bracket answers: WHO, WHAT PROTOCOL, WHAT PROPERTIES, WHAT SCALE, WHAT DOMAIN, WHAT RELATIONS, WHAT DIRECTION. The address path carries BEARING. The Chronometer fragment answers WHEN. Three layers, three symbol sets, no collision.
 
 <<~/ahu >>
 
