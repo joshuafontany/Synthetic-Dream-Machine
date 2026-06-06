@@ -114,8 +114,8 @@ confidence-bounded  = false
 The primary composition grammar. Most meme graphs lead with control edges.
 
 Role semantics (do not conflate):
-- `extends`    — single parent class (Verse single inheritance; one edge per type meme)
-- `implements` — interface composition (Verse `interface` keyword; N edges allowed per type meme)
+- `extends`    — single base meme (Verse single-inheritance position; one edge per type meme)
+- `implements` — component attachment (ECS: the component list; N per meme; each component affords a capability)
 - `owns`       — structural ownership / containment at the type level (not spatial instance placement)
 
 These are all distinct from the ahu-slot tree (`fragment-parent` tiddler field),

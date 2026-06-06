@@ -139,7 +139,7 @@ Edge sigil syntactic sugar:
 * `references` — source observes target without lifecycle stake
 * `composes` — source layers opinion over target with strength ordering
 * `constrains` — source imposes a declarative rule on target without execution pulse
-* `implements` — source realizes target interface contract; the interface defines the required surface; the carrier provides it
+* `implements` — source carries the target as a **component** (it `#has` it); the component affords its capability. Composition, not nominal-type satisfaction.
 
 `cardinality` — structural limit (MAY carry):
 * `one-to-one`

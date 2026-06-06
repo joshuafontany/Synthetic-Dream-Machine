@@ -1,12 +1,12 @@
-title: lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext
+title: lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel
 type: text/x-memetic-wikitext
 tags:
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
+<<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
 type      = "text/x-memetic-wikitext"
 tagspace  = "stable"
@@ -15,7 +15,7 @@ register  = "CS"
 manaoio   = 14
 mana      = 18
 manao     = 17
-role      = "memetic-wikitext constitutional root law + grammar kernel: authoring surface primitives, sigil registry, parse rules, family contracts, and boot grammar"
+role      = "memetic-wikitext runtime kernel face: grammar kernel, sigil registry, parse rules, family contracts, boot grammar (the specification face lives at …/api/pono/memetic-wikitext)"
 cacheable = true
 retain    = true
 ```

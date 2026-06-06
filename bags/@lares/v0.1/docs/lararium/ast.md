@@ -39,6 +39,30 @@ Parse-time AST produced by `parseMemeCarrier`. Lives in `@lararium/tw5` so it co
 
 <<~/ahu >>
 
+<<~ ahu #attrs-by-sigil >>
+
+## SigilNode attrs by sigilName
+
+`SigilNode` carries a `sigilName` and an `attrs` bag; the bag's keys vary by sigil:
+
+| sigilName | attrs keys |
+|---|---|
+| `heihei` / `kahawai` / `ui` | `filter` |
+| `huli` | `filter`, `binding` |
+| `hana` | `grammarKey` |
+| `meme` | `targetUri` |
+| `wehe` / `kumu` | `name`, `params` |
+| `helu` | `name`, `params`, `expression` |
+| `kau` | `name`, `value`, `scope` |
+| `kapu` | `qualifier`, `inline` |
+| `toml` / `iam` | `content` |
+
+**`kau` scope:** `<<~! kau name = val >>` (pragma) elevates to `scope:personal`; `<<~ kau name = val >>...<<~/kau >>` (block) reads `scope:collective`. The `!` marks the scope elevation. Full ladder: `memetic-wikitext#scope-model`.
+
+**`kumu` vs `wehe`:** `kumu` declares a new element type (a grammar node with a declared body contract); `wehe` declares a text/content template (a wikitext fragment). Different body contracts, different `sigilName` — both collapse to `SigilNode`.
+
+<<~/ahu >>
+
 <<~ &#x0003; >>
 
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/ast family:dataflow role:receives >>

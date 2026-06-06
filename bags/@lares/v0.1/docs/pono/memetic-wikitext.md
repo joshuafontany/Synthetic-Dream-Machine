@@ -113,7 +113,7 @@ The api parent now carries the submission-grade specification (abstract, conform
 - long example ladders → here (extended docs)
 - authoring profile guidance → here
 - the render pipeline → `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline`
-- per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the kernel registry)
+- per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the runtime kernel, `…/memetic-wikitext/kernel`)
 - archive-grade explanation and repetition → retired
 
 Deepen each contract in its own carrier; do not re-expand the parent submission.

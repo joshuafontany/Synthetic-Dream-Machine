@@ -23,17 +23,17 @@ retain = true
 
 # Loci
 
-Routing convention and stable-address interface law for `lar:` URI carriers.
+Routing convention and stable-address capability law for `lar:` URI carriers.
 
-A carrier implements `loci` when its `lar:` URI root path segment matches `\w\.\w\.\w` and satisfies this law's convention surfaces.
-Implementing `loci` does not foreclose other interfaces.
+A carrier carries the `loci` component when its `lar:` URI root path segment matches `\w\.\w\.\w` and satisfies this law's convention surfaces.
+Carrying `loci` does not foreclose other components.
 
 Two tagspace roots:
 
 - `lar:///ha.ka.ba/@lares/` — stable origin; files at `packages/lares-core/memes/`
 - all other `\w\.\w\.\w` roots — unstable; files at `lares/chapel-perilous-opens/{root}/`
 
-Root path segments outside `\w\.\w\.\w` MAY NOT implement `loci`.
+Root path segments outside `\w\.\w\.\w` MAY NOT carry `loci`.
 
 <<~/ahu >>
 
@@ -62,10 +62,10 @@ Five buckets mark the structural rating of a carrier (law-of-5s):
 1. **Noise** — raw signal, no stable machine-usable structure.
 2. **Data** — structured language usable without memetic wrappers.
 3. **Meme** — data with memetic wrappers, traveling as a contextual meaning-unit.
-4. **Ano** — meme satisfying one or more interfaces: `loci`, `grammar`, `skill`, `todo`. (Hawaiian: kind, type, nature)
-5. **Kapu** — above base namespace; implements the `kapu` interface; kernel/sacred tier. (Hawaiian: set apart, restricted)
+4. **Ano** — meme carrying one or more components: `loci`, `grammar`, `skill`, `todo`. (Hawaiian: kind, type, nature)
+5. **Kapu** — above base namespace; carries the `kapu` component; kernel/sacred tier. (Hawaiian: set apart, restricted)
 
-Rating derives from structure — from schema compliance and interface declaration.
+Rating derives from structure — from schema compliance and component declaration.
 Promotion to lares/ canon (live session → branch commit → hostless URI) follows a separate ceremony.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam >>
@@ -83,7 +83,7 @@ Given: lar-uri (string)
 
 1. Validate tagspace eligibility:
      match = lar-uri.match(/^lar:\/\/[^\/]*\/(\w+\.\w+\.\w+)\/(.+)$/)
-     If no match → ineligible for loci. Emit: "loci interface requires \w.\w.\w root path segment"
+     If no match → ineligible for loci. Emit: "loci capability requires \w.\w.\w root path segment"
      root     = match[1]   e.g. "ha.ka.ba" or "threshold.uncertain.opens"
      sub-path = match[2]   e.g. "v0.1/api/pono/loci"
      authority may be empty (lar:///) or full (lar://alias:tier@host/)

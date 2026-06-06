@@ -29,7 +29,7 @@ invariant    = false
 
 Memetic-wikitext (`text/x-memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the **sharktooth** `<<~ … >>` — and reads on two layers at once: a **compile-time graph** reading and a **render-time semantic** reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
 
-This specification names the lexical structure, a formal surface grammar, the dual-layer processing model, the typed-edge (pranala) system, and the conformance, media-type, and security obligations a processor MUST meet. It does **not** enumerate every sigil; the live sigil registry rides the kernel registry, and the epistemic ontology rides the `api/mu` canon.
+This specification names the lexical structure, a formal surface grammar, the dual-layer processing model, the typed-edge (pranala) system, and the conformance, media-type, and security obligations a processor MUST meet. It does **not** enumerate every sigil; the live sigil registry rides the runtime **kernel** face, and the epistemic ontology rides the `api/mu` canon.
 
 <<~/ahu >>
 
@@ -47,7 +47,9 @@ This document holds **submission-draft** maturity. The lexical structure, dual-l
 
 **Scope.** This specification covers the surface syntax of `text/x-memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get **written and processed** — never what they **mean** beyond the language.
 
-**Out of scope.** The epistemic ontology (the `syad` standpoints, `saptabhaṅgī` predications, and `mu` tools) lives in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` and `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools`; the Law of Fives and the attention scale live in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s` and `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`. The operational authoring discipline lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL`. The live TOML sigil registry rides the kernel registry meme.
+**Out of scope.** The epistemic ontology (the `syad` standpoints, `saptabhaṅgī` predications, and `mu` tools) lives in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` and `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools`; the Law of Fives and the attention scale live in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s` and `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`. The operational authoring discipline lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL`. The live TOML sigil registry rides the runtime kernel at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel`.
+
+**Two faces of one meme.** This carrier holds the **specification face** of `memetic-wikitext`; the runtime **kernel** face (`…/memetic-wikitext/kernel`) holds the live grammar kernel, sigil registry, parse rules, and boot grammar that a node loads. The tiddler-format law keeps them distinct — this `.md` documents the language; the kernel `.tid` runs it.
 
 **Relation to the `lar:` URI specification.** Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a **separate, sibling submission**: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI].
 
@@ -89,9 +91,9 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 | `<<~/` | block close | `<<~/ahu >>` |
 | `<<~!` | pragma (definition) | `<<~! wehe name(p) >>` |
 | `<<~?` | unresolved-pressure | `<<~? #fragment >>` |
-| `<<` *(bare)* | **RESERVED** — not valid memetic-wikitext | — |
+| `<<` *(bare)* | inherited TW5 macro call (superset) | `<<macroName params>>` |
 
-A processor MUST treat bare `<<name>>` as inert text. The sharktooth `~` MUST follow `<<` immediately for a construct to read as a sigil.
+Memetic-wikitext SHALL read as a **superset of TW5 wikitext**: every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
 ### Shapes
 
@@ -157,7 +159,7 @@ footer      = open LWSP %x04 LWSP "->" LWSP "?" LWSP close-mark
 text        = 1*( <any run that does not begin a sigil open> )
 ```
 
-**Normative grammar rules.** (1) An `alias` MUST map to its `canonical` before any further processing; the compiled tree MUST carry only canonical names. (2) A `block-close` MUST match the innermost unclosed `block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI].
+**Normative grammar rules.** (1) An `alias` MUST map to its `canonical` before any further processing; the compiled tree MUST carry only canonical names. (2) A `block-close` MUST match the innermost unclosed `block`/`pragma` of the same name. (3) `filter-expr` content stays opaque to the host parser; only a registered guest handler interprets it. (4) `URI-ref` structure defers to [LAR-URI]. (5) Memetic-wikitext inherits the TW5 wikitext base [TW5]; bare `<<name>>` macro calls and other TW5 constructs read as inherited content (the `text` production), defined by [TW5] and not re-specified here.
 
 <<~/ahu >>
 
@@ -368,6 +370,7 @@ A canvas reaction wire (flow surface):
 - **[RFC6838]** — media-type registration procedures.
 - **[LAR-URI]** — the `lar:` URI specification (sibling submission): `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 - **[PRANALA]** — pranala edge law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`.
+- **[TW5]** — TiddlyWiki5 WikiText grammar — the inherited base; memetic-wikitext reads as a superset.
 
 <<~/ahu >>
 
@@ -408,6 +411,7 @@ A canvas reaction wire (flow surface):
 <<~ pranala #pranala-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:governed-by >>
 <<~ pranala #sibling-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:relation role:sibling-spec >>
 <<~ pranala #render ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline family:control role:governed-by >>
+<<~ pranala #kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel family:control role:realized-by >>
 <<~ pranala #tw5-filter ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter family:observe role:references >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>

@@ -52,6 +52,31 @@ Identity sits above the AST; carriers must validate before syntax lowers.
 
 <<~/ahu >>
 
+<<~ ahu #scope-phase-resolution >>
+## TW5 ↔ Verse Type Tension — Resolution
+
+TW5's string-typed store (`Record<string,string>`) and Verse's strong types resolve through the OODA-HA loop. They never conflicted — they occupy different phases of one pipeline.
+
+### The pipeline as loop phases
+
+| phase | system role | type state | scale |
+|---|---|---|---|
+| ✶ Observe | carrier text arrives as raw string | `Record<string,string>` — `?` | Week |
+| ⏿ Orient | `parseMemeCarrier` → `MemeAstNode[]` | named shapes; attrs unresolved strings | Watch |
+| ◇ Decide | `edgesFromAst` interprets sigil attrs | `string` → `Ladder5 \| OodaHa5 \| PranalaEdge…` | Turn |
+| ▶ Act | Verse execute / render / canvas | typed, transactional, committed | Round |
+| ⤴↺ Aftermath | `validatePranalaEdge`, blame calculus | contract violations surface; loop closes | Action |
+
+**`attrs: Record<string,string>`** — the honest Observe-phase representation. Siek's `?` type at the parse boundary fits the phase. King's "parse, don't validate" fires at Decide: consume the string bag once, emit typed values, carry them forward; Act then runs as strict as Verse demands.
+
+**Blame calculus (Wadler & Findler):** when a `scope:ephemeral` value escapes its Action-scale container, blame falls on the boundary that failed to enforce the scope type — Aftermath surfaces it via `validatePranalaEdge`.
+
+**Elm's no-nested-signals rule:** scope widens only (`ephemeral → personal` valid), never silently leaks (`universal → ephemeral` reads as a contract violation). Enforced at the Decide→Act boundary.
+
+**`papalohe` and `kukali`:** `papalohe` declares the reaction wire at Orient — a named shape in the graph; Verse `suspends`/`kukali` operates at Act — execution waits until the loop advances. The wire and the wait posture belong to different phases. See `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions` Gap 5.
+
+<<~/ahu >>
+
 <<~ ahu #ast-node-schema >>
 ## AST Node Schema
 
@@ -124,7 +149,7 @@ Excluded from v1:
 | `dataflow` | AST → execution | live value transport edges |
 | `message` | execution | event routing edges |
 | `constraint` | validation layer, sometimes AST | post-resolution validation |
-| `observe` | inspection overlay | debug and shadow surfaces |
+| `observe` | inspection overlay | debug and monitoring surfaces |
 
 `role` encodes lifetime pressure: `owns`, `composes`, `implements`, `references`, `constrains`.
 `traversal` and `propagation` stay distinct; query walk direction must not collapse into invalidation direction.
