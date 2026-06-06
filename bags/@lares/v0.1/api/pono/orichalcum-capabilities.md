@@ -88,7 +88,7 @@ These are not the same object. Keep device identity below operator identity.
 
 ## Ability Ladder
 
-The ladder is the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md)
+The ladder maps onto the **ACCESS axis** (Axis 1) of the [causal-islands](causal-islands.md)
 model — a 1:1 lexical mirror of Keyhive's native Access verbs.
 
 ```
@@ -132,7 +132,7 @@ federable-ratings = ["meme", "ano", "kapu"]
 
 Caveats are Lararium-native predicates evaluated at gate time.
 A capability with no caveats is a maximally permissive grant within its ability scope.
-Rating band names are Law-of-Fives structural buckets. Stage band is a UX/rendering annotation — it is NOT a capability gate condition.
+Rating band names are Law-of-Fives structural buckets. Stage band carries a UX/rendering annotation only — it does NOT act as a capability gate condition.
 
 ### Rating Caveat (structural quality — Law of Fives)
 
@@ -278,7 +278,7 @@ UCAN hard dependency:   defer until after proof fixture + semantic alignment aud
 Lararium authority:     Orichalcum Profile governs — not UCAN alone
 ```
 
-UCAN is the external proof shape. Orichalcum is the semantic law.
+UCAN provides the external proof shape. Orichalcum holds the semantic law.
 
 Build adapters so a Lararium capability can emit and verify a UCAN wire proof.
 Do not let UCAN wire validity become the internal source of truth for Lararium authority.

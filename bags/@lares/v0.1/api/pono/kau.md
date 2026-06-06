@@ -34,9 +34,9 @@ A device placed with intention. The instance takes its own address.
 
 The navigator uses *kau* for the moment of setting an anchor — not dropping it carelessly, but placing it with deliberate force at a chosen coordinate. The anchor then holds that position: addressable, persistent, its own fixed point.
 
-In UEFN Verse terms: kau is the moment a `creative_device` descends from the class definition into the island map. The device gains its own property panel, its own event ports, its own UUID in the device hierarchy. The definition (kumu) teaches; the placement (kau) creates.
+In UEFN Verse terms: kau names the moment a `creative_device` descends from the class definition into the island map. The device gains its own property panel, its own event ports, its own UUID in the device hierarchy. The definition (kumu) teaches; the placement (kau) creates.
 
-In Ink & Switch terms: kau is the moment an automerge object earns an `{actor, counter}` identity — it existed as potential in the schema, now it exists as an addressable thing with its own causal history.
+In Ink & Switch terms: kau names the moment an automerge object earns an `{actor, counter}` identity — it existed as potential in the schema, now it exists as an addressable thing with its own causal history.
 
 In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-instance capability grants attach here. Document-scoped authority today; instance-scoped authority when the WASM lands.
 
@@ -106,7 +106,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable:Event subscribable:Handler >>`.
 
-This maps directly to the Ink & Switch island model: each automerge object is a causally independent document. Merges happen at declared sync points, not implicitly.
+This maps directly to the Ink & Switch island model: each automerge object operates as a causally independent document. Merges happen at declared sync points, not implicitly.
 
 <<~/ahu >>
 

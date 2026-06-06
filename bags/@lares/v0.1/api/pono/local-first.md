@@ -56,7 +56,7 @@ this ideal. Cache locally; sync asynchronously.
 ### Ideal 2 — Multi-Device
 
 Data lives on all devices, not just in a cloud. Sync is automatic and bidirectional.
-A device is a first-class citizen; the cloud is an optional relay.
+A device holds first-class standing; the cloud serves as an optional relay.
 
 **Lararium:** GAP. No cross-device sync architecture implemented. Automerge + Beelay
 is the target stack. Beelay's RIBLT-based set reconciliation (nested Rateless Invertible
@@ -70,14 +70,14 @@ central coordinator.
 
 ### Ideal 3 — Offline
 
-Full read/write capability without a network connection. Offline is the normal mode,
+Full read/write capability without a network connection. The system treats offline as the normal mode,
 not a degraded fallback.
 
 **Lararium:** PARTIALLY SATISFIED. TW5 works offline by construction (in-process VM).
 Lararium Node server mode adds a network dependency for initial content load.
 
 **Law:** The browser peer MUST be able to boot, read, and write from IndexedDB without
-any server present. The server is a sync accelerator, not a boot requirement.
+any server present. The server functions as a sync accelerator, not a boot requirement.
 
 ---
 
@@ -156,7 +156,7 @@ Keyhive provides the cryptographic enforcement.
 
 ## Server-as-Peer Law
 
-A lararium-node is a peer with extra capabilities:
+A lararium-node operates as a peer with extra capabilities:
 - Acts as multiple peers simultaneously (one per open room)
 - Disk access (LarDiskProjector)
 - CORS-hop web calls
@@ -208,7 +208,7 @@ not "current globally." A lararium-node MUST NOT present a fabricated global vie
 
 ## Beelay Sync Model
 
-Beelay is the sync protocol for Automerge repos. Key mechanisms:
+Beelay provides the sync protocol for Automerge repos. Key mechanisms:
 
 **RIBLT (Rateless Invertible Bloom Lookup Tables):**
 Nested set reconciliation at three levels — membership operations, document states,

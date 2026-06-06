@@ -110,7 +110,7 @@ any single node in isolation.
 - VmPool per realm: cross-realm sync behaviors (reading one room from a foreign realm
   as another VM in the pool) only exist when VMs compose across realm boundaries.
 - `ReactionEngine implements MemeProjection`: routing CRDT change events through the
-  reaction graph is a whole-system property; neither the CRDT nor the graph alone has it.
+  reaction graph produces a whole-system property; neither the CRDT nor the graph alone carries it.
 
 **Violation pattern — part-optimization:**
 Building features that only work in isolation — a node that can debug itself but cannot

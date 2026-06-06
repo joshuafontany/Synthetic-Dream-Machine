@@ -19,7 +19,7 @@ docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 
 ## Identity
 
-`IslandAdaptor` is the narrow TS membrane between `CompositeStore` and the wiki.
+`IslandAdaptor` provides the narrow TS membrane between `CompositeStore` and the wiki.
 It implements `MemeProjection` (inbound) and exposes `saveTiddler` / `deleteTiddler` (outbound).
 It does NOT implement the TW5 `syncadaptor` module contract — `$tw.syncer` does not run.
 

@@ -45,8 +45,8 @@ In neither: the description is a separate documentation artifact.
 store, addressable by the same scheme.
 
 There is no "documentation tier" separate from "code tier." A meme that describes
-what a filter operator does IS the filter operator's source of truth. A tiddler
-that holds schema rules IS the schema used at runtime validation.
+what a filter operator does SERVES AS the filter operator's source of truth. A tiddler
+that holds schema rules FUNCTIONS AS the schema used at runtime validation.
 
 **Lararium expression:**
 - `lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tiddler-record` — the schema meme
@@ -58,7 +58,7 @@ that holds schema rules IS the schema used at runtime validation.
 meme. Documentation that can drift from runtime reality violates P1.
 
 **Rule:** Any documented invariant MUST have a corresponding meme with `invariant = true`.
-The meme IS the documentation; the documentation IS the meme.
+The meme CARRIES the documentation; the documentation INHABITS the meme.
 
 <<~/ahu >>
 

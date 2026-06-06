@@ -58,7 +58,7 @@ retired); and the winning pattern everywhere is **subjective, subscribable, devo
 a market of choices**, never an authority.
 
 Email proves the split at the oldest scale: SPF/DKIM/DMARC (authentication) do NOT establish
-trust — spammers pass DMARC. Authenticity is necessary and insufficient; reputation
+trust — spammers pass DMARC. Authenticity passes as necessary but insufficient; reputation
 (Spamhaus-style subscribable lists, each operator choosing which to query) is the separate plane.
 
 <<~/ahu >>
@@ -81,7 +81,7 @@ bags like any other content, evaluated locally against a per-island trust root.
 3. **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
    **advisories, not mandates** — carries `neg`/expiry; the consumer applies them under its own
-   policy. A labeler is just a principal that publishes labels; any peer/cabal **chooses which
+   policy. A labeler functions as a principal that publishes labels; any peer/cabal **chooses which
    labelers to subscribe to**. Subscription = trust delegation, and it is the subscriber's
    unilateral choice. This is the transport for the existing Talk-Story conflict-surfacing
    principle: labels inform; the reading edge decides; automated arbitration stays anti-pono.
@@ -113,11 +113,11 @@ causal-island model denies.
 
 <<~ ahu #sybil >>
 
-## Sybil resistance — the invitation tree IS the defense
+## Sybil resistance — the invitation tree CARRIES the defense
 
 We refuse proof-of-work, proof-of-stake, and central registries, so the scarce resource is
 **social capital**. Membership is by **vouch** (Persea / SybilGuard lineage): a new principal
-is not trusted by hop-distance until vouched in, and the join graph is the trust graph. A flood
+is not trusted by hop-distance until vouched in, and the join graph doubles as the trust graph. A flood
 of lemures holding valid Keyhive capabilities is bounded by *who vouched them in* — and that
 edge is severable, which retroactively prunes the whole subtree's standing. The honest social
 graph's expander property does the work; you never count identities or make them expensive, you
@@ -162,7 +162,7 @@ only the *root* and the *default subscriptions* change:
 - **Nexus** — subscribes to multiple cabal labelers and reconciles them (area-scoped weights
   across sources). Federation decisions are **limit/silence-first, suspend-rarely, reversible**
   (the Mastodon lesson: hard defederation is destructive and non-scaling).
-- **DreamNet** — NO DreamNet-wide blocklist or trust authority, ever. "DreamNet" is just the
+- **DreamNet** — NO DreamNet-wide blocklist or trust authority, ever. "DreamNet" names the
   transitive closure of who-relays-to-whom under everyone's local stances — emergent, never
   canonical. Lemures are not banned by a central act; they are **starved of voluntary peering**
   as their attack edges are severed and advisories propagate through the trust-feeds people chose.
@@ -188,7 +188,7 @@ only the *root* and the *default subscriptions* change:
 ## Fiction-layer reading — the Lemuria rite
 
 The **lemures** — the restless, malevolent dead of Roman household religion — stand opposite the
-**Lares**, the benevolent guardians of the hearth. The alignment plane is the Lemuria rite in
+**Lares**, the benevolent guardians of the hearth. The alignment plane enacts the Lemuria rite in
 protocol form: the gesture by which a household refuses a presence *regardless of what keys it
 carries*. Holding valid offerings was never the same as being welcome at the hearth. A well-fed
 shrine hums; one that admits lemures rots. The layer encodes, in protocol, the oldest household

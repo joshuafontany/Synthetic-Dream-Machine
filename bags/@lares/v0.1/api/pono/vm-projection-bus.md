@@ -51,7 +51,7 @@ this.wiki.dispatchEvent({
 `this.wiki.dispatchEvent(event)` is TW5's native event bus — it broadcasts to all
 listeners registered via `wiki.addEventListener()`. This is the signalable side.
 
-The shape of the event object is the contract. All fields are strings.
+The shape of the event object defines the contract. All fields are strings.
 `uri` identifies the meme target. `listenable` names the projection slot.
 
 ### Subscribe side (ReactionEngine listens)

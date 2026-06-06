@@ -39,7 +39,7 @@ suited for file paths, URIs, and tiddler titles. The traditional shark-tooth war
 *leiomano* (lei o manō — "a shark's lei"). We borrow the protective edge geometry, not the
 weapon: the nihomano glyph marks not a strike but an opening — a threshold, a ward, a door.
 
-The `<<~` delimiter is the nihomano glyph. Each `<` is a tooth. The `~` is the wake.
+The `<<~` delimiter serves as the nihomano glyph. Each `<` forms a tooth. The `~` traces the wake.
 Three marks open a scope. Three marks from a mano that swims beneath the text.
 The glyph acts as a texture-border at the threshold of every meme.
 
@@ -75,10 +75,10 @@ This is the wild-magic property: **grammar as data, owned by the data layer, not
 
 In web3 terms, the canonical grammar state lives inside a content-addressed Automerge document
 (the bag). Any peer who holds the bag holds the grammar. Any operator who writes to the bag
-extends the language. The code layer is a thin runtime that reads grammar from its own storage —
+extends the language. The code layer runs as a thin runtime that reads grammar from its own storage —
 a quine at the grammar level.
 
-The SharktoothSigil tag is the contract surface:
+The SharktoothSigil tag serves as the contract surface:
 - `lar:///ha.ka.ba/tags/SharktoothSigil` on a tiddler = "this tiddler defines a grammar sigil"
 - `lar-kind` field = what structural role the sigil plays (edge, child-slot, control, pragma-alias, header)
 - `lar-pattern` / `lar-open-pattern` / `lar-close-pattern` = the parse rule

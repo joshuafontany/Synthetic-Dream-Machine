@@ -36,7 +36,7 @@ Residency decomposes into two orthogonal dimensions, the thermal axis named in �
 1. **Temperature** — a **two-state** thermal axis: **`wela`** (hot — live + reacting) / **`anu`** (cold — torn down, URL known, resume by spawn + `ea`). Names a STATE and how fast it resumes.
 2. **Pin** — an orthogonal boolean flag. `pinned` means "exempt from cooling." Not a temperature.
 
-`pinned` is therefore NOT a peer of `wela`/`anu`. The always-resident set (identity, admin, active wiki, Session Wiki) reads as **pinned-wela**: live islands the cooler never touches.
+`pinned` therefore does NOT rank among `wela`/`anu` — it crosses a separate axis. The always-resident set (identity, admin, active wiki, Session Wiki) reads as **pinned-wela**: live islands the cooler never touches.
 
 **Two states, not three (revised 2026-06-01).** A `warm` (mahana) middle tier was proposed and then **cut** the same day after an adversarial + kupono + YIN research pass — see #warm-cut. The model is `wela | anu` + pin.
 
@@ -55,7 +55,7 @@ Bag residency lives in the Island Pool concepts (operator ruling): one manager -
 | **wela** | "hot" | live Worker thread; TW5Engine + ReactionEngine running; `Enable()`d; reacting | referenced docs held in handle-cache | none — already live |
 | **anu** | "cold" | no thread, no engine; CRDT bytes only; URL known | handle MAY be dropped (no wela island references it) | dear — **spawn + `ea`** full re-boot (`hoʻowela`) |
 
-Two states. An island is live (`wela`) or torn down (`anu`); a bag's handle is held while any `wela` island references it, droppable otherwise. The defining contrast: **wela is live; anu resumes by spawn.**
+Two states. An island is live (`wela`) or torn down (`anu`); a bag's handle is held while any `wela` island references it, droppable otherwise. The defining contrast: **a `wela` island RUNS live; an `anu` island RESUMES by spawn.**
 
 <<~/ahu >>
 

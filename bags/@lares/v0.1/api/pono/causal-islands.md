@@ -110,7 +110,7 @@ private mesh of households rather than a public broadcast medium.)
 Stage band is a UX annotation — NOT a gate condition.
 
 **Membrane law** (Scale axis): joining a ring requires a capability delegation from that ring's
-Keyhive group. The delegation chain is the join-rule; there is no central admission authority.
+Keyhive group. The delegation chain functions as the join-rule; no central admission authority exists.
 
 **Alignment law** (Plane 0): trust assertions are ordinary signed content, evaluated LOCALLY
 against a per-island root. No global consensus, no central registry, no global trust score.
