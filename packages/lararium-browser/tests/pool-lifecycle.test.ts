@@ -72,11 +72,11 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     expect(pool.has(WIKI_B)).toBe(true);
     expect(pool.size).toBe(2);
 
-    const phases = pool.inspect().map((s) => s.phase);
-    expect(phases).toEqual(["live", "live"]);
+    const temps = pool.inspect().map((s) => s.temperature);
+    expect(temps).toEqual(["wela", "wela"]);
   });
 
-  test("unmountWiki removes island; has() reflects it", async () => {
+  test("unmountWiki takes island cold (anu); has() reflects it", async () => {
     repo = new Repo({ sharePolicy: async () => true });
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
@@ -84,8 +84,11 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     expect(pool.has(WIKI_A)).toBe(true);
 
     await pool.unmountWiki(WIKI_A);
+    // Unified residency: explicit unmount leaves a cold (anu) slot recorded —
+    // no longer live (has=false), but remembered (tier=anu, coldSince set).
     expect(pool.has(WIKI_A)).toBe(false);
-    expect(pool.size).toBe(0);
+    expect(pool.tier(WIKI_A)).toBe("anu");
+    expect(pool.coldSince(WIKI_A)).not.toBeNull();
   });
 
   test("unmountWiki on unknown id is a no-op", async () => {
@@ -111,7 +114,7 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
     expect(pool.has(WIKI_B)).toBe(false);
   });
 
-  test("inspect reports id and phase for each live island", async () => {
+  test("inspect reports wikiId and temperature for each island", async () => {
     repo = new Repo({ sharePolicy: async () => true });
     pool = new BrowserVesselIslandPool({ workerScriptUrl: FIXTURE_URL, mainRepo: repo });
 
@@ -119,7 +122,7 @@ describe("BrowserVesselIslandPool lifecycle contract", () => {
 
     const snapshot = pool.inspect();
     expect(snapshot).toHaveLength(1);
-    expect(snapshot[0].id).toBe(WIKI_A);
-    expect(snapshot[0].phase).toBe("live");
+    expect(snapshot[0].wikiId).toBe(WIKI_A);
+    expect(snapshot[0].temperature).toBe("wela");
   });
 });

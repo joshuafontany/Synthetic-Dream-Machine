@@ -31,6 +31,7 @@ import {
   mkAdminVerifyRequest,
   mkAdminResolveBindingRequest,
   isIslandToVesselMsg,
+  type VesselWorkerHandle,
   type Repo,
   type DocHandle,
   type LarDoc,
@@ -51,14 +52,6 @@ const HANDSHAKE_TIMEOUT_MS = 15_000;
 
 /** The MessagePort type, borrowed through the mesh manifest (no DOM-lib dep). */
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];
-
-/** Platform handle over a spawned admin-island Worker. */
-export interface VesselWorkerHandle {
-  post(msg: unknown, transfer?: unknown[]): void;
-  listen(onMessage: (raw: unknown) => void): void;
-  onError(cb: (err: Error) => void): void;
-  terminate(): void;
-}
 
 /** The two-member admin-VM host seam — platform divergence as composition. */
 export interface AdminVmHost {

@@ -89,7 +89,6 @@ export type {
   AdminVmHost,
   AdminVmCore,
   AdminVmCoreOptions,
-  VesselWorkerHandle,
   VesselPlaceVerbRequest,
 } from "./admin-vm-core.js";
 

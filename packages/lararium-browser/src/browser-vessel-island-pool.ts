@@ -1,192 +1,63 @@
 /**
- * BrowserVesselIslandPool — browser pool for wiki island authorities.
+ * BrowserVesselIslandPool — browser host construction over VesselIslandPoolCore.
  *
- * Island Sovereignty Law — vessel side:
- *   1. Spawns a dedicated Web Worker per wiki island.
- *   2. Creates a MessageChannel. Keeps mainPort; transfers syncPort to the island.
- *   3. Optionally wires mainPort to the vessel Repo via MessageChannelNetworkAdapter
- *      so the island-side Repo syncs the wiki doc automatically.
- *   4. Delivers manifest with syncPort, bagBindings, coreHash.
- *      TW5 core bytes travel via CRDT — no blob bytes in the manifest.
- *   5. Awaits ea — island declares sovereignty; island is live.
+ * The pool logic (residency, mount/unmount handshakes, placeWikiVerb, event
+ * routing) lives once in @lararium/mesh `VesselIslandPoolCore`. This file
+ * supplies only the browser platform host: Web Worker spawn, a global
+ * MessageChannel, and the ES-module worker's "ready" (WASM-load) handshake.
+ * Browser inherits the residency model by subtraction; `pinned` is honored the
+ * moment a finite hotCap creates eviction pressure.
  *
- * API mirrors VesselIslandPool (Node): mountWiki / unmountWiki / disposeAll.
+ * No storage seam: each browser island owns its IndexedDB partition keyed by
+ * its wiki URI (set inside the island kernel), so the host returns undefined.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool
  */
 
-import { Repo } from "@automerge/automerge-repo";
-import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
 import {
-  isIslandToVesselMsg,
-  mkManifest,
-  mkTeardown,
-  awaitIslandMsg,
+  VesselIslandPoolCore,
+  type Repo,
+  type IslandMsg_Event,
 } from "@lararium/mesh";
-import type {
-  IslandMsg_Ea,
-  IslandMsg_Ready,
-  IslandMsg_TeardownAck,
-  IslandMsg_Event,
-  IslandToVesselMsg,
-  WikiMountSpec,
-} from "@lararium/mesh";
-
-// ── Internal slot ──────────────────────────────────────────────────────────
-
-type SlotPhase = "booting" | "live" | "disposing" | "disposed";
-
-interface BrowserSlot {
-  worker:   Worker;
-  mainPort: MessagePort;
-  phase:    SlotPhase;
-  /** Pinned (PrimaryWiki + admin) — exempt from eviction. Recorded isomorphic
-   *  with the node pool; browser eviction (LRU) lands with browser residency,
-   *  at which point this flag becomes load-bearing. */
-  pinned:   boolean;
-}
-
-// ── Handshake ──────────────────────────────────────────────────────────────
-
-const HANDSHAKE_TIMEOUT_MS = 10_000;
-
-function _awaitMsg<T extends IslandToVesselMsg>(
-  worker: Worker,
-  type:   T["type"],
-): Promise<T> {
-  return awaitIslandMsg<T>({
-    expectedType: type,
-    timeoutMs:    HANDSHAKE_TIMEOUT_MS,
-    subscribe: (h) => {
-      const fn = (e: MessageEvent) => h(e.data);
-      worker.addEventListener("message", fn);
-      return () => worker.removeEventListener("message", fn);
-    },
-  });
-}
-
-// ── BrowserVesselIslandPool ────────────────────────────────────────────────
+import { browserWorkerHandle } from "./worker-handle.js";
 
 export interface BrowserVesselIslandPoolOptions {
   /**
-   * URL of the compiled browser-wiki-worker entry script.
-   * Optional at construction time; required before calling mountWiki.
-   * Omit when constructing a pool as a placeholder (e.g., before the genesis
-   * island is available to supply TW5 core bytes).
+   * URL of the compiled browser-wiki-worker entry script. Optional at
+   * construction; required before mountWiki (a placeholder pool may predate the
+   * genesis island that supplies TW5 core bytes).
    */
   workerScriptUrl?: URL;
-  /**
-   * Optional vessel Automerge Repo. When provided, each island's mainPort wires
-   * to this Repo via MessageChannelNetworkAdapter so the island syncs automatically.
-   */
+  /** Vessel Automerge Repo — each island's mainPort wires to it for CRDT sync. */
   mainRepo?: Repo;
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (id: string, msg: IslandMsg_Event) => void;
 }
 
-export class BrowserVesselIslandPool {
-  private readonly _slots     = new Map<string, BrowserSlot>();
-  private readonly _workerUrl: URL | null;
-  private readonly _mainRepo:  Repo | null;
-  private readonly _onEvent:   ((id: string, msg: IslandMsg_Event) => void) | null;
-
+/** Browser island pool: VesselIslandPoolCore configured with a Web Worker host. */
+export class BrowserVesselIslandPool extends VesselIslandPoolCore {
   constructor(opts: BrowserVesselIslandPoolOptions) {
-    this._workerUrl = opts.workerScriptUrl ?? null;
-    this._mainRepo  = opts.mainRepo ?? null;
-    this._onEvent   = opts.onWorkerEvent ?? null;
-  }
-
-  async mountWiki(id: string, params: WikiMountSpec, opts: { pinned?: boolean } = {}): Promise<void> {
-    if (this._slots.has(id)) return;
-    if (!this._workerUrl) {
-      throw new Error(
-        `[browser-vessel-island-pool] cannot mountWiki("${id}") — no workerScriptUrl set. ` +
-        `Pass workerScriptUrl when constructing the pool (requires genesis island for TW5 core bytes).`,
-      );
-    }
-
-    const worker = new Worker(this._workerUrl, { type: "module" });
-    worker.addEventListener("error", (e) =>
-      console.error(`[browser-vessel-island-pool] island error (${id}):`, e.message),
-    );
-
-    const { port1: mainPort, port2: syncPort } = new MessageChannel();
-
-    const slot: BrowserSlot = { worker, mainPort, phase: "booting", pinned: opts.pinned ?? false };
-    this._slots.set(id, slot);
-
-    worker.addEventListener("message", (e: MessageEvent) => {
-      if (!isIslandToVesselMsg(e.data)) return;
-      const msg = e.data as IslandToVesselMsg;
-      if (msg.type === "event" && this._onEvent) this._onEvent(id, msg as IslandMsg_Event);
-      if (msg.type === "fault") {
-        console.error(`[browser-vessel-island-pool] island fault (${id}): ${(msg as { error: string }).error}`);
-        slot.phase = "disposed";
-      }
+    const workerUrl = opts.workerScriptUrl ?? null;
+    super({
+      host: {
+        spawnWorker: () => {
+          if (!workerUrl) {
+            throw new Error(
+              "[browser-vessel-island-pool] cannot mountWiki — no workerScriptUrl set. " +
+              "Pass workerScriptUrl when constructing the pool (requires genesis island for TW5 core bytes).",
+            );
+          }
+          return browserWorkerHandle(new Worker(workerUrl, { type: "module" }));
+        },
+        newSyncChannel: () => {
+          const { port1, port2 } = new MessageChannel();
+          return { mainPort: port1, syncPort: port2 };
+        },
+        storage: () => undefined,
+        awaitReady: true,
+      },
+      mainRepo: opts.mainRepo ?? null,
+      ...(opts.onWorkerEvent ? { onWorkerEvent: opts.onWorkerEvent } : {}),
     });
-
-    // Inversion of control: wait for Worker to signal its listener is registered
-    // and WASM has finished loading before transferring the syncPort.
-    await _awaitMsg<IslandMsg_Ready>(worker, "ready");
-
-    const manifestMsg = mkManifest(
-      id,
-      syncPort,
-      params.recipe,
-      params.resolver,
-      params.coreHash,
-    );
-    worker.postMessage(manifestMsg, [syncPort]);
-
-    // Wire mainPort to vessel Repo AFTER transferring syncPort.
-    if (this._mainRepo) {
-      this._mainRepo.networkSubsystem.addNetworkAdapter(
-        new MessageChannelNetworkAdapter(mainPort),
-      );
-    }
-
-    await _awaitMsg<IslandMsg_Ea>(worker, "ea");
-    slot.phase = "live";
   }
-
-  async unmountWiki(id: string): Promise<void> {
-    const slot = this._slots.get(id);
-    if (!slot || slot.phase === "disposed") return;
-
-    slot.phase = "disposing";
-    try {
-      const ackPromise = _awaitMsg<IslandMsg_TeardownAck>(slot.worker, "teardown:ack");
-      slot.worker.postMessage(mkTeardown());
-      await ackPromise;
-    } catch {
-      // teardown timed out — terminate anyway
-    }
-
-    slot.mainPort.close();
-    slot.worker.terminate();
-    slot.phase = "disposed";
-    this._slots.delete(id);
-  }
-
-  async disposeAll(): Promise<void> {
-    await Promise.allSettled([...this._slots.keys()].map((id) => this.unmountWiki(id)));
-  }
-
-  has(id: string): boolean {
-    const slot = this._slots.get(id);
-    return !!slot && slot.phase !== "disposed";
-  }
-
-  /** True for a live pinned slot (PrimaryWiki + admin). Isomorphic with the
-   *  node pool's isPinned; eviction-exemption activates with browser residency. */
-  isPinned(id: string): boolean {
-    const slot = this._slots.get(id);
-    return !!slot && slot.phase !== "disposed" && slot.pinned;
-  }
-
-  inspect(): Array<{ id: string; phase: SlotPhase }> {
-    return [...this._slots.entries()].map(([id, slot]) => ({ id, phase: slot.phase }));
-  }
-
-  get size(): number { return this._slots.size; }
 }

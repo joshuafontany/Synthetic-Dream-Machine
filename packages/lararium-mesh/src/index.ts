@@ -47,7 +47,9 @@ export type { Repo, DocHandle, AutomergeUrl, StorageAdapterInterface } from "@au
 export { makeIslandRepo, attachMessageChannelSync } from "./island-repo.js";
 export type { IslandRepoConfig } from "./island-repo.js";
 export { awaitIslandMsg } from "./vessel-host.js";
-export type { AwaitIslandMsgOpts } from "./vessel-host.js";
+export type { AwaitIslandMsgOpts, VesselWorkerHandle, VesselIslandHost } from "./vessel-host.js";
+export { VesselIslandPoolCore } from "./vessel-island-pool-core.js";
+export type { VesselIslandPoolCoreOptions, DiskMirrorGrant } from "./vessel-island-pool-core.js";
 export {
   AUTH_WIRE_VERSION,
   mkLarChallenge, mkLarAuth, mkLarAuthOk, mkLarAuthDenied,

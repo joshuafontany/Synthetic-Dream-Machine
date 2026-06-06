@@ -27,8 +27,9 @@ import {
 import {
   openAdminVmCore,
   VerbTable,
-  type AdminVmHost, type VesselWorkerHandle,
+  type AdminVmHost,
 } from "@lararium/tw5";
+import { browserWorkerHandle } from "./worker-handle.js";
 
 export interface BrowserAdminVmOptions {
   repo:             Repo;
@@ -94,17 +95,6 @@ export interface BrowserVerbPlacementRequest {
   requestId?:   string;
   fromUri?:     string;
   listenable?:  string;
-}
-
-/** Web Worker → the platform-blind VesselWorkerHandle. */
-function browserWorkerHandle(w: Worker): VesselWorkerHandle {
-  return {
-    post:      (msg, transfer) => w.postMessage(msg, (transfer ?? []) as Transferable[]),
-    listen:    (cb) => w.addEventListener("message", (e: MessageEvent) => cb(e.data)),
-    onError:   (cb) => w.addEventListener("error", (e) =>
-      cb(new Error((e as ErrorEvent).message || "[open-browser-admin-vm] worker error"))),
-    terminate: () => w.terminate(),
-  };
 }
 
 export async function openBrowserAdminVm(

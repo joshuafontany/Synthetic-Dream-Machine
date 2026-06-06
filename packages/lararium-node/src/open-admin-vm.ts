@@ -29,10 +29,11 @@ import {
 } from "@lararium/mesh";
 import {
   openAdminVmCore,
-  type AdminVmHost, type VesselWorkerHandle,
+  type AdminVmHost,
   type VerbTable, type VerbSignalRequest,
 } from "@lararium/tw5";
 import { waitHandleLocal } from "./repo-helpers.js";
+import { nodeWorkerHandle } from "./worker-handle.js";
 
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
 
@@ -105,17 +106,6 @@ export interface AdminVmResult {
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
-}
-
-/** worker_threads Worker → the platform-blind VesselWorkerHandle. */
-function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
-  const post = w.postMessage.bind(w) as (msg: unknown, transfer?: unknown[]) => void;
-  return {
-    post:      (msg, transfer) => post(msg, transfer),
-    listen:    (cb) => w.on("message", cb),
-    onError:   (cb) => w.on("error", cb),
-    terminate: () => { void w.terminate(); },
-  };
 }
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {

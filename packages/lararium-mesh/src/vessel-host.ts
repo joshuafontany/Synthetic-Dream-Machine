@@ -14,7 +14,39 @@
  */
 
 import { isIslandToVesselMsg } from "./island-protocol.js";
-import type { IslandToVesselMsg } from "./island-protocol.js";
+import type { IslandToVesselMsg, IslandStorageConfig } from "./island-protocol.js";
+
+// ── VesselWorkerHandle — platform-blind handle over a spawned island worker ───
+//
+// One abstraction over `worker_threads.Worker` (node) and `Worker` (browser).
+// `listen`/`onError` return an unsubscribe so one-shot handshakes (awaitIslandMsg)
+// clean up without leaking listeners. The canonical home is mesh (transport,
+// no TW5) — admin VM + pool both compose it.
+
+export interface VesselWorkerHandle {
+  post(msg: unknown, transfer?: unknown[]): void;
+  listen(onMessage: (raw: unknown) => void): () => void;
+  onError(cb: (err: Error) => void): () => void;
+  terminate(): void;
+}
+
+// ── VesselIslandHost — the pool's platform seam ──────────────────────────────
+//
+// Everything platform-specific the pool needs, as composition: worker spawn,
+// sync-channel creation, per-wiki storage. `awaitReady` flags the browser ES-
+// module worker's WASM-load handshake (node omits it). Held capabilities
+// (mainRepo, diskMirrorGrant, hotCap) ride pool config, not this seam.
+
+export interface VesselIslandHost {
+  /** Spawn a fresh island worker (closes over the platform worker URL). */
+  spawnWorker(): VesselWorkerHandle;
+  /** Create a sync channel; the pool keeps mainPort, transfers syncPort. */
+  newSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort };
+  /** Per-wiki island storage (node nodefs; browser undefined → island owns IDB). */
+  storage(wikiId: string): IslandStorageConfig | undefined;
+  /** Browser ES-module workers signal "ready" before manifest; node omits. */
+  awaitReady?: boolean;
+}
 
 export interface AwaitIslandMsgOpts<T extends IslandToVesselMsg> {
   /** The island→vessel message type to wait for (e.g. "ea", "teardown:ack"). */
