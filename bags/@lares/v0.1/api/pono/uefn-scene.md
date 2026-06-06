@@ -37,14 +37,11 @@ One `.md` file decomposes into a root tiddler and N named slot fragment tiddlers
 meme parent/child/grandchild tree. It expresses *document containment*, not type relationships.
 Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
 
-**`control:extends`** (one edge per type meme) — Verse single class inheritance.
-`my_device := class(creative_device):` → one `control:extends` edge, `toUri = creative_device URI`.
-One parent per type. This is an is-a relationship at the Verse type level.
-
-**`control:has`** (N edges per type meme) — Verse interface composition.
-`my_device := class(creative_device, challengeable, listenable_t):` →
-one `control:extends` (creative_device) + two `control:has` (challengeable, listenable_t).
-Any number of capability edges per type. This is a can-do relationship at the Verse type level.
+**`control:has`** (N edges per type meme) — Verse class composition. Every URI in a Verse
+`class(...)` list becomes one `control:has` edge — the parent class and every interface alike.
+`my_device := class(creative_device, challengeable, listenable_t):` → three `control:has` edges
+(`creative_device`, `challengeable`, `listenable_t`). The graph holds no privileged is-a parent:
+a type *has* its components. Composition only — the `extends` / is-a framing stays retired (web3).
 
 <<~/ahu >>
 
@@ -58,8 +55,8 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
   - `kumu` pragma: element-type declaration
   - `reaction:listenable` edges: OUTPUT event pins (`listenable(T)` fields)
   - `reaction:subscribable` edges: INPUT function pins (public methods of matching arity)
-  - `control:extends` edge: single parent class URI (Verse `class(Parent, ...)` — first item)
-  - `control:has` edges: capability URIs (Verse `class(Parent, Iface1, Iface2, ...)` — remaining items)
+  - `control:has` edges: every URI in the Verse `class(Parent, Iface1, Iface2, ...)` list —
+    one edge per item, parent and interfaces alike (no privileged is-a parent)
   - `spatial:contains` edges: nested class relationships
 
 **Instance meme** (`lar:///scene-bag/instances/{placementId}`) — one per placed device.
@@ -69,7 +66,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 
 **Scene meme** (`lar:///scene-bag`) — one per scene / level.
   - `spatial:contains` edges: all top-level placed instances
-  - `control:extends` edge to the base world type (single class parent)
+  - `control:has` edge to the base world type (composition, not is-a)
 
 <<~/ahu >>
 
@@ -78,8 +75,8 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 ## Edge Vocabulary for Scene Graphs
 
 ```text
-control:extends      — single parent class (my_device ← creative_device); one edge per type meme
-control:has   — interface composition (my_device implements challengeable); N edges per type meme
+control:has          — Verse class composition: one edge per URI in class(...), parent and
+                       interfaces alike (no is-a parent); N edges per type meme
 control:owns         — scene contains instance (spatial root → instance)
 reaction:listenable  — device emits this OUTPUT event (payload.listenable = event name;
                        payload.verseKind = "listenable"|"event";
@@ -93,7 +90,7 @@ spatial:portal       — portal between areas
 spatial:adjacent     — neighboring areas
 
 Note: ahu-slot tree (meme parent/child/grandchild structure) lives in tiddler fields
-(fragment-parent, slot), NOT in pranala edges. Never use control:extends/implements for
+(fragment-parent, slot), NOT in pranala edges. Never use `control:has` for
 document-level containment.
 ```
 
@@ -118,11 +115,11 @@ Once the scene decomposes into a bag, TW5 filters render arbitrary views:
 # All device types that expose OnActivated
 [field:reaction-listenable[OnActivated]]
 
-# Full parent chain for a type (control:extends — single inheritance)
-[field:control-extends[lar:///types/creative_device]][transitive[control-extends]]
+# Full component chain for a type (control:has — composition, transitive)
+[field:control-has[lar:///types/creative_device]][transitive[control-has]]
 
-# All types that implement a given interface (control:has — interface composition)
-[field:control-implements[lar:///types/challengeable]]
+# All types that compose a given capability (control:has)
+[field:control-has[lar:///types/challengeable]]
 
 # All input handlers whose payload type matches agent
 [field:reaction-subscribable-payload[agent]]
