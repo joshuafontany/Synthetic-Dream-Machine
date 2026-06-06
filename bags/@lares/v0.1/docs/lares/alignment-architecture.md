@@ -200,6 +200,7 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/worker-message-protocol >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #cites-quine-principles ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles family:observe role:cites >>
