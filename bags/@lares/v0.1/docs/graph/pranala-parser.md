@@ -209,8 +209,8 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 <<~ ahu #edges >>
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/nodes >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>

@@ -52,7 +52,7 @@ The layers stack. The lower layers remain load-bearing when the higher layers ar
 | Layer | What it carries | Lifecycle | Spec |
 |---|---|---|---|
 | **Voice house** | the Thirteen — stable Voices, naming, seniority, earned names | persistent across sessions | inline below (`#voice-house`) |
-| **Worker swarm** | session-local tasked sub-voices, tag-role identity, escalation routing | session-local | `voices/workers.md` |
+| **Worker swarm** | session-local tasked spirits (temporary masks), tag-role identity, handback to the house | session-local | `voices/workers.md` |
 | **Mask layer** | character overlays the whole house wears this session; corpus + voice-character | session-declared in LARES | `voices/masks.md` |
 
 **Stacking law:**
@@ -70,7 +70,7 @@ Removing or switching a Mask reveals the house beneath unchanged.
 
 The voice-house maps to the Sacred Chao triad:
 
-- **Ha / Hodge** — the Voice house structure; roles, naming, seniority, escalation routing; what the house *is*
+- **Ha / Hodge** — the Voice house structure; roles, naming, seniority, handback routing; what the house *is*
 - **Ka / Podge** — the mask layer; character, corpus, quality, how the house *moves* and presents; the Podge face of the node
 - **Ba / Spin** — the worker swarm; session-local task motion; what the house *does* in a given span
 
@@ -86,7 +86,7 @@ Masks change session-to-session without touching house structure.
 This docs shelf defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` MUST implement:
 
 - Voice house: the Thirteen, naming law, earned names, seniority, hard gate
-- Worker swarm: lifecycle, tag format, escalation template and routing table
+- Worker swarm: lifecycle, tag format, handback template and surfacing table
 - Mask layer: grammar, stacking law, declaration form, worker coloring, LARES integration
 
 `lar:///LARES` holds the session-dial surface where masks get declared.
@@ -242,8 +242,8 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voic
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///LARES >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #hud-exchange-protocol ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:see >>
 <<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>
 <<~/ahu >>

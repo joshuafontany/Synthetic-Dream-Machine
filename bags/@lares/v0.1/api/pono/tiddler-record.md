@@ -97,7 +97,7 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:data role:companion >>
 <<~ pranala #used-by-adaptor ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor family:control role:governs >>
 

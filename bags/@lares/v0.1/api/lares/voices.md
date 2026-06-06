@@ -385,9 +385,9 @@ payload = { priority = "support", retain = false }
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #hud-e-prime ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime family:reference role:governs >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>

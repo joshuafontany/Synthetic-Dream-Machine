@@ -23,7 +23,7 @@ English alias for `nihomano-sigils`. See canonical meme:
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils >>
 
 The `<<~` outer delimiter — three marks, two teeth and a wake — is the sharktooth glyph.
-Every sigil opens with it. Every scope closes with a `>>`mirrored form.
+Every sigil opens with it. Every scope closes with a `>>` mirrored form.
 
 The SharktoothSigil tag (`lar:///ha.ka.ba/tags/SharktoothSigil`) names the grammar
 registration surface after this glyph. Tagging a tiddler with it teaches the parser a new word.

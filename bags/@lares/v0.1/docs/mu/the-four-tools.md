@@ -89,8 +89,8 @@ one clean preference for model agnosticism over paranoia.
 <<~ loulou lar:///ha.ka.ba/@lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/chapel-perilous-prologue >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -95,7 +95,7 @@ operator-visible data layer as the content itself.
 ## The First Discovered Sigil Set
 
 The nihomano discovery yielded the first coherent set of SharktoothSigil-registered sigils.
-The set now counts 47 tiddlers, each with a pono law spec, each passing the alignment check.
+The set holds 47 tiddlers, each carrying a pono law spec and passing the alignment check.
 They fall into eight families:
 
 **Structural sigils** (addressable scope boundaries):
@@ -114,7 +114,7 @@ They fall into eight families:
 
 **Pragma sigils** (declaration forms; first-class in memetic-wikitext):
 - `wehe` / `\procedure` — procedure executor; named callable body declaration
-- `\define` — legacy macro alias (prefer `\procedure`)
+- `\define` — backward-compat alias; use `\procedure` instead
 - `\widget` — widget declaration; `~` prefix convention
 - `helu` / `\function` — TW5 5.3+ filter-function declaration
 - `kumu` / `\type` / `\typos` — element-type declaration; mold precedes the cast
@@ -162,7 +162,7 @@ that Hawaiian articulates precisely where English lacks a single-word equivalent
 human intention and accumulated offering. The ahu sigil accumulates addressable child scopes
 the same way a stone cairn accumulates placement until it becomes a landmark.
 
-*Kahea* — to call out, to summon, to invoke; a cry. Dataflow-family sugar: the live
+*Kahea* — to call out, to summon, to invoke; a cry. Transclusion-family sugar: the live
 transclusion summons value forward, as a call summons a response.
 
 *Aka* — shadow, reflection; likeness without identity; resemblance. The shadow of a thing

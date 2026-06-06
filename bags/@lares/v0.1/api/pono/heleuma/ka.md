@@ -83,7 +83,7 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
 <<~ pranala #gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/boot-gate family:control role:promoted-by >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

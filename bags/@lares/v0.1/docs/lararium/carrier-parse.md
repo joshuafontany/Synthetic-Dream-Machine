@@ -78,7 +78,7 @@ export function parseCarrier(uri: string, text: string): CarrierRecord {
 
 <<~ pranala #carrier-sigils ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils family:control role:depends >>
 <<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:control role:depends >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

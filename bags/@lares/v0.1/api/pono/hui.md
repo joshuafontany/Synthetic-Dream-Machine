@@ -25,7 +25,7 @@ holds execution until every child flow completes. English alias: `\sync`.
 Verse equivalent: `sync` — all branches inside the block run concurrently and the containing
 flow resumes only after every branch settles.
 
-Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
+Grammar only --- the await-all join runtime awaits the async-first sprint.
 
 <<~/ahu >>
 

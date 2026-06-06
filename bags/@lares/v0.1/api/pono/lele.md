@@ -25,7 +25,7 @@ Verse equivalent: `branch` — one or more async expressions start immediately a
 flow continues immediately. The side flow remains bounded by the enclosing async context and
 cancels when that context completes.
 
-Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
+Grammar only --- the fire-and-continue execution runtime awaits the async-first sprint.
 
 <<~/ahu >>
 

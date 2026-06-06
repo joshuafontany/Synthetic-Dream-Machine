@@ -53,7 +53,7 @@ and wikitext body.
 
 An ahu block MUST declare a slot name beginning with `#`.
 An ahu block MUST close with `<<~/ahu >>`.
-An ahu block MUST be a top-level scope — ahu blocks MUST NOT nest.
+An ahu block MUST occupy a top-level scope; nesting MUST NOT occur.
 An ahu slot MUST produce an independently addressable tiddler at `parentUri + slot`.
 A parent tiddler MUST reference each child slot via `<<~ kahea ahu #slot >>` in its body.
 Child slot tiddlers MUST NOT duplicate the parent's iam TOML — they carry their own.
@@ -67,7 +67,7 @@ The slot name `#source-shelf` is conventional for pranala edge declarations.
 
 ## Syntax
 
-Decomposed at the wiki's causal island boudnaries:
+Decomposed at the wiki's causal island boundaries:
 
 ```text
 <<~ ahu #slot-name >>
@@ -112,7 +112,7 @@ slot = 1
 
 ## Edges
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
 <<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:relation >>
 

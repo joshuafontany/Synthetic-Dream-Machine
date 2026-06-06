@@ -22,7 +22,7 @@ computed result set.
 
 A filter-function declaration pragma. Declares a named TW5 filter function — a reusable
 filter expression that accepts parameters and yields a result list. TW5 5.3+ equivalent:
-`\function`. English alias: `\function`.
+`\function` — also the English alias.
 
 Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body that
 *computes* — the function yields a filter result set, not rendered wikitext.

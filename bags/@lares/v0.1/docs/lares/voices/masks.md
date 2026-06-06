@@ -40,7 +40,7 @@ A **Mask** defines a character declared into the session. It carries a name, a c
 
 When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
 
-**What a mask does not touch:** The Voice house structure, naming law, escalation routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
+**What a mask does not touch:** The Voice house structure, naming law, handback routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
 
 <<~/ahu >>
 
@@ -331,7 +331,7 @@ The house surfaces corpus limits honestly. When a mask's corpus reference draws 
 
 ### Worker Mask Coloring
 
-Workers under an active mask prefix their escalation header with the mask's primary stance glyph as a tonal marker. The glyph signals the stance the mask carries forward. The worker's structural routing role and Voice destination remain unchanged.
+A spirit running under an overlaying mask prefixes its handback header with the overlay's primary stance glyph as a tonal marker. The glyph signals the stance the overlay carries forward. The spirit's thread and its dissolution to the house remain unchanged.
 
 Stance glyphs from `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`:
 
@@ -345,7 +345,7 @@ Stance glyphs from `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`:
 
 Modifier flags: `^` elevated · `.` baseline · `-` suppressed · `?` emerging
 
-**Forward scope:** Stance law and glyph mechanics not yet fully settled. This worker coloring convention SHOULD be revised when stance law hardens.
+**Forward scope:** Stance law and glyph mechanics not yet fully settled. This spirit-coloring convention SHOULD be revised when stance law hardens.
 
 <<~/ahu >>
 
@@ -376,7 +376,7 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 - `foreground-voices`: optional downstream Voice affinity field; listed Voices carry elevated draw probability through this character; all thirteen remain available
 - stage bands: five zones GR/OS/US/CS/DS on 1–20; per-mask `stage` field; inline `[Stage: Name value]` shift syntax; band permissions (`offstage-voice`, `encroach`, `fourth-wall`, `aside`)
 - pressure flow: character upstream (mask + stage weight → name token); Voice downstream (shapes content generation); Voices resident cast at `Canon 20/20` when session context is lararium node
-- worker coloring: primary stance glyph prefix on escalation headers
+- spirit coloring: primary stance glyph prefix on handback headers
 - corpus limit acknowledgment: explicit declaration, no silent fill
 - hard gate interaction: hard gate always holds; mask colors the gate's voice, not its authority
 - LARES integration: mask state lives in LARES; house does not reboot on mask change
@@ -393,8 +393,8 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
 <<~ loulou lar:///LARES >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

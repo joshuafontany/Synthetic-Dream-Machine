@@ -53,7 +53,7 @@ A kahea URI form MUST bind a source socket and a target URI.
 A kahea URI form MUST carry `family:transclusion`.
 A kahea URI form MUST carry `propagation:push-forward` (the default; MAY be overridden to `pull`).
 A kahea URI form MUST NOT form a cycle — directly or transitively.
-A kahea URI form MAY carry a role naming the embed posture; the transclusion role vocabulary stays held (free-form) pending its pono name.
+A kahea URI form MAY carry a role naming the embed posture; the transclusion role vocabulary accepts free-form values until a pono name settles.
 
 **Name-call form:**
 A kahea name-call MUST reference a declared definition name.
@@ -142,8 +142,8 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 ## Edges
 
-<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
 <<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation >>

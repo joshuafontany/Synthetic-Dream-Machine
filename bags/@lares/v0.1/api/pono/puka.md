@@ -28,9 +28,9 @@ in background. Distinct from `race` (which cancels losers immediately). See `hol
 cancelling-race form.
 
 The puka metaphor holds: when a fish finds the gap in the net, it passes through. The net
-remains open — the others may pass through later or not. The outcome already settled.
+remains open — the others may pass through later or not. The outcome already holds.
 
-Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
+Grammar only --- the selecting-race execution runtime awaits the async-first sprint.
 
 <<~/ahu >>
 

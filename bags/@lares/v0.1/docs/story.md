@@ -58,8 +58,8 @@ Use this branch for:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #to-lindwyrm-ledger ? -> lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/consumption-ledger family:reference role:index >>
 
 <<~/ahu >>

@@ -66,7 +66,7 @@ The pranala sigil and inline fields are the primary grammar.
 Omit the TOML block when `family` and `role` in the sigil express the full intent.
 
 `family` — what the edge *means*: relation, control, dataflow, message, constraint, observe.
-`role` — what the edge *does to lifecycle*: owns, references, composes, constrains, implements.
+`role` — what the edge *does to lifecycle*: owns, references, composes, constrains, has.
 `traversal` — how a query *moves*: source-to-target, target-to-source, none.
 `propagation` — how invalidation *fires*: push-forward, push-back, pull, none.
 These four concerns are independent and MUST NOT collapse into each other.
@@ -195,7 +195,7 @@ known-families = ["control", "relation", "observe", "dataflow", "message", "cons
 
 # Canonical role vocabularies per family (roleRecommended families SHOULD use these)
 [family-roles]
-control  = ["owns", "implements", "extends", "configures", "delegates"]
+control  = ["owns", "has", "configures", "delegates"]
 dataflow = ["reads", "writes", "streams", "buffers", "pipes"]
 message  = ["sends", "receives", "publishes", "subscribes", "replies"]
 reaction = ["listenable", "subscribable", "observes", "throttles", "debounces"]
@@ -248,9 +248,9 @@ reaction-roles = ["subscription", "handler", "callback"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #edge-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
 <<~ pranala #edge-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
 <<~ pranala #edge-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>

@@ -326,7 +326,7 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

@@ -26,7 +26,7 @@ retain = true
 
 A meme carries the minimum lawful surface for identity, body, phase pressure, and aftermath.
 This root governs that copy-shape.
-It leaves long procedure, skeleton examples, research, and rating tables outward.
+Long procedure, skeleton examples, research, and rating tables live outward.
 
 The word *meme* entered English in 1976 via Richard Dawkins (*The Selfish Gene*), derived from
 Greek *mimeme* (that which gets imitated), shortened to rhyme with "gene". Edward Wilson and
@@ -92,7 +92,7 @@ Five structural buckets — law-of-5s. Rating derives from schema compliance, no
 
 - **Noise** — raw signal, not yet machine-usable
 - **Data** — structure appears, but meme law still does not bind the carrier fully
-- **Meme** — the memetic-shape now holds and the carrier reads as a lawful meme
+- **Meme** — the memetic-shape now holds and the carrier holds the lawful meme shape
 - **Ano** — one or more outward type laws now bind the carrier (Hawaiian: kind, type, nature)
 - **Kapu** — above base namespace; carries the kapu capability; kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
 
@@ -152,9 +152,9 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #tiddler-sigil-tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tiddler family:control role:alias >>
 <<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:has >>
 <<~/ahu >>

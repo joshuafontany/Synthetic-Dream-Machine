@@ -302,7 +302,7 @@ meant to escape):
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:has >>
 <<~ pranala #to-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:has >>
 <<~ pranala #to-alignment-layer ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer family:control role:has >>

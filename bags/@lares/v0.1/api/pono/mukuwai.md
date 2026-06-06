@@ -36,7 +36,7 @@ question itself has exhausted all candidates. The stream reaches the cut-off; th
 A mukuwai block MUST NOT carry a filter expression.
 A mukuwai block MUST appear as the final branch in a heihei/kahawai chain.
 A mukuwai block MUST render its body when no preceding condition rendered.
-At most one mukuwai block MUST appear in any heihei chain.
+A heihei chain MUST NOT contain more than one mukuwai block.
 
 <<~/ahu >>
 

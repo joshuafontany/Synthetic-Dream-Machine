@@ -26,9 +26,9 @@ Verse equivalent: `race` — parallel child flows race; first settler wins; all 
 Distinct from `puka` (`\rush`), where losers continue running in background.
 
 The holo metaphor holds: in a canoe race, when the lead boat crosses the finish line, the
-other boats stop racing. The result propagates back; the contest ends.
+other boats stop racing. The winning result propagates out; the contest closes.
 
-Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
+Grammar only --- the cancelling-race execution runtime awaits the async-first sprint.
 
 <<~/ahu >>
 

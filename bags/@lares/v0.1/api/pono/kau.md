@@ -50,7 +50,7 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 - The #fragment MUST be explicit in the sigil OR auto-generated as a UUID on first commit (write-back stub).
 - The instance URI MUST become the `currentTiddler` variable for the kumu body during render.
 - Kau MUST NOT produce a graph edge by itself (device wiring uses papalohe edges).
-- Each kau placement MUST create a distinct causal island: events cross out only via papalohe.
+- Each kau placement MUST create a distinct causal island: events exit the island only via papalohe.
 - Implementations MUST fire the `KauCapabilityHook` with the instance URI when a Keyhive authority provider registers (stub: no-op until WASM).
 - Implementations MUST fire the `KauWriteBackHook` when a UUID fragment auto-generates (stub: no-op until write-back layer wires in).
 
@@ -81,7 +81,7 @@ registerKauCapabilityHook(hook: (instanceUri: string) => unknown)
 registerKauWriteBackHook(hook: (carrierUri: string, fragment: string) => void)
 ```
 
-Both stubs are deferred pending Keyhive WASM. When they land, they surface as explicit TW5 action tiddlers (not JS module hooks), consistent with TW5 VM primacy. The kau widget itself is now a TW5-native `\widget ~kau(p1:"")` defined in `sigil-kau.tid` — no JS module.
+Both stubs are deferred pending Keyhive WASM. When they land, they surface as explicit TW5 action tiddlers (not JS module hooks), consistent with TW5 VM primacy. The kau widget runs as a TW5-native `\widget ~kau(p1:"")` defined in `sigil-kau.tid` — no JS module.
 
 <<~/ahu >>
 

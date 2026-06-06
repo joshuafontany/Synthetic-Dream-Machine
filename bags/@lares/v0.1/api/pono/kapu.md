@@ -47,7 +47,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 ## Kapu Law
 
-A carrier MUST implement `lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu` to bear the kapu rating.
+A carrier MUST carry the kapu capability (`lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu`) to bear the kapu rating.
 A kapu carrier MUST declare above-namespace authority through one or more of:
 
 - a `namespace` field in its `ahu #iam` TOML block (e.g. `namespace = "ॐ ँ"`)
@@ -134,10 +134,10 @@ This meme governs the kapu rating and above-namespace trust law.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #implements-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:has >>
 
 <<~ pranala #tiddler-sigil-guard ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-guard family:control role:alias >>
 <<~ pranala #tiddler-sigil-kapu ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu family:control role:has >>

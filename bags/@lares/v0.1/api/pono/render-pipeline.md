@@ -237,8 +237,8 @@ Trace continuity across the causal island boundary:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
 

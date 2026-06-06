@@ -241,9 +241,9 @@ the first sync message — removes the need for TLS as the transport trust layer
 
 ## Edges
 
-<<~ pranala #implements-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
-<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
-<<~ pranala #implements-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:has >>
-<<~ pranala #implements-doc-stack ? -> lar:///ha.ka.ba/@lararium/tw5/lararium-doc-stack family:control role:has >>
+<<~ pranala #has-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
+<<~ pranala #has-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
+<<~ pranala #has-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:has >>
+<<~ pranala #has-doc-stack ? -> lar:///ha.ka.ba/@lararium/tw5/lararium-doc-stack family:control role:has >>
 
 <<~/ahu >>

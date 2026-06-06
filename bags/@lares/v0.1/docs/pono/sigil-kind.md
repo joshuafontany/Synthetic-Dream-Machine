@@ -194,7 +194,7 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

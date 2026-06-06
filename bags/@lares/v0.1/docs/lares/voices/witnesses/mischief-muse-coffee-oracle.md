@@ -117,7 +117,7 @@ Use this witness carrier for provenance.
 
 <<~ pranala #witnesses-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/masks/named/mischief-muse family:reference role:witness >>
 <<~ pranala #sources-transcript ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle family:reference role:source >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

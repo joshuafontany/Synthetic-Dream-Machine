@@ -292,7 +292,7 @@ the crypto gate, not instead of it.
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #required-by-federation ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:required-by >>
 <<~ pranala #to-research-streams ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:grounded-by >>
 

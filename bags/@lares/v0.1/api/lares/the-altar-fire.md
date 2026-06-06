@@ -106,9 +106,9 @@ Invariant meme edits require admin tier and a separate confirmation ceremony.
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #to-lararium ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium family:control role:owned-by >>
 <<~ pranala #to-canon-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:governed-by >>
 <<~ pranala #to-tagspace-trust ? -> lar:///ha.ka.ba/@lararium/tw5/tagspace-trust family:control role:governed-by >>
