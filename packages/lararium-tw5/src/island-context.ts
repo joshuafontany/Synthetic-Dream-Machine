@@ -17,7 +17,7 @@
  */
 
 import type { DocHandle }                        from "@lararium/mesh";
-import type { CompositeStore, IslandToVesselMsg, LarDoc } from "@lararium/mesh";
+import type { CompositeStore, IslandToVesselMsg, LarDoc, Repo } from "@lararium/mesh";
 import type { TW5Engine }                        from "./tw5-vm.js";
 
 export interface IslandContext {
@@ -26,6 +26,12 @@ export interface IslandContext {
   tw5:       TW5Engine;
   handles:   Map<string, DocHandle<LarDoc>>;
   post:      (msg: IslandToVesselMsg) => void;
+  /**
+   * The island-side Automerge Repo. Island behaviors that mint docs (e.g. the
+   * admin island's @personal/@draft binding resolver) create them here; the docs
+   * sync to the host relay via the manifest syncPort. Isomorphic-vessel Stage 1.
+   */
+  repo:      Repo;
 }
 
 /**

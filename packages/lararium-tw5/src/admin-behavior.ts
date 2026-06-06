@@ -19,9 +19,11 @@
 import {
   mkAdminDelegateVerb,
   mkAdminVerifyResult,
+  mkAdminResolveBindingResult,
   type AdminMsg_PlaceVerb,
   type AdminMsg_VerbResult,
   type AdminMsg_VerifyRequest,
+  type AdminMsg_ResolveBindingRequest,
   type BatchMode,
   type VerbInvocation,
   type CapabilityVerifier,
@@ -52,6 +54,17 @@ export interface AdminBehaviorOptions {
    */
   verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin")
     => Promise<{ ok: boolean; reason?: string }>;
+  /**
+   * Resolve (or mint+delegate) the @personal/@draft binding pair island-side —
+   * the mint needs keyhive + the island Repo. The platform entry supplies this
+   * closing over the booted keyhive; it calls `resolveOrMintBinding` with
+   * `ctx.repo` + `ctx.composite`. Opaque so tw5 stays keyhive-free.
+   */
+  resolveBinding?: (
+    ctx: IslandContext,
+    fingerprint: string,
+    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+  ) => Promise<{ personalUrl: string; draftUrl: string }>;
 }
 
 export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
@@ -93,7 +106,8 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
       _dispatcher.start();
     },
 
-    onSignal(type: string, raw: unknown, { tw5, post }: IslandContext): boolean {
+    onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
+      const { tw5, post } = ctx;
       if (type === "admin:place-verb") {
         const msg = raw as AdminMsg_PlaceVerb;
         if (tw5) {
@@ -135,6 +149,22 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
           .catch((err: unknown) => post(mkAdminVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),
           })));
+        return true;
+      }
+
+      if (type === "admin:resolve-binding-request") {
+        const msg = raw as AdminMsg_ResolveBindingRequest;
+        if (!opts.resolveBinding) {
+          post(mkAdminResolveBindingResult({ requestId: msg.requestId, error: "no resolveBinding configured" }));
+        } else {
+          opts.resolveBinding(ctx, msg.fingerprint, msg.recipeTrace)
+            .then((r) => post(mkAdminResolveBindingResult({
+              requestId: msg.requestId, personalUrl: r.personalUrl, draftUrl: r.draftUrl,
+            })))
+            .catch((err: unknown) => post(mkAdminResolveBindingResult({
+              requestId: msg.requestId, error: err instanceof Error ? err.message : String(err),
+            })));
+        }
         return true;
       }
 

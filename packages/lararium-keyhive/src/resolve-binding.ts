@@ -1,40 +1,46 @@
 /**
- * resolve-binding — host-layer resolver/minter for the `@personal` and `@draft`
- * recipe slots, keyed by (PersonGroup × recipe-fingerprint).
+ * resolve-binding — resolver/minter for the `@personal` and `@draft` recipe
+ * slots, keyed by (PersonGroup × recipe-fingerprint).
  *
- * This is the composition-root helper Sprint 7 (S7.5 + S7.6) wires into
- * `open-node-vessel.ts` between `await adminVm.workerEa` and the primary
- * `vmManager.mountWiki(...)` call. It runs AFTER a real PersonGroup proves
- * verified (boot Gates B/C) and BEFORE the mount that needs the bound doc URLs.
- *
- * Layering law (personal-slot#vessel-boot-flow): binding-resolution MUST run at
- * the host / composition layer, NEVER inside `VesselIslandPool` — the pool stays
- * envelope-only and holds no repo/keyhive/admin-doc references. The host resolves
- * the URLs and passes them THROUGH `WikiBootContext` into the pool, which merely
- * adds them to the manifest `resolver` map.
+ * Isomorphic + island-side (isomorphic-vessel epic). Lives in @lararium/keyhive
+ * — the cap layer both platforms depend on — because the mint sequence needs
+ * keyhive (`registerBag` + `delegate`), which lives only in the admin island
+ * after Stage 1. Both platform admin-island entries call it from their
+ * `resolveBinding` callback with the island Repo + admin composite + booted
+ * keyhive. (It also still runs host-inline in `open-node-vessel` until the flip
+ * removes the host keyhive.)
  *
  * Mint sequence (Q7 — orphan-tolerant idempotent mint): `repo.create()` →
  * `registerBag()` → `delegate()` → write binding tiddler. Not atomic; a crash
  * mid-sequence orphans a docUrl. Next boot recomputes the same fingerprint,
- * finds no binding, re-mints; the orphan stays unreferenced. Acceptable until a
- * transactional store API exists.
+ * finds no binding, re-mints; the orphan stays unreferenced.
  *
- * Admin reads/writes go through `adminHandle` directly (the ceremony-core grain),
- * NOT through `CompositeStore` — the boot composite carries no `@admin` layer and
- * `CompositeStore.get` accepts no bag option.
+ * Admin reads/writes go through the admin-bag CompositeStore (`get` /
+ * `put({bag: ADMIN_BAG_ID})`) — host: `adminVm.composite`; island: `ctx.composite`.
  *
  * Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot
  */
 
-import type { Repo, DocHandle } from "@automerge/automerge-repo";
 import {
   type LarDoc,
+  type CompositeStore,
+  type ChangeOrigin,
+  ADMIN_BAG_ID,
   emptyLarDoc,
   mutableLarRecord,
   tiddlerText,
   canonicalJson,
 } from "@lararium/mesh";
-import type { CapabilityProvider } from "@lararium/keyhive";
+import type { CapabilityProvider } from "./capability-provider.js";
+
+/**
+ * Minimal Automerge-repo surface the minter needs — just `create`. Both the
+ * node and browser `Repo` satisfy it structurally, so @lararium/keyhive avoids a
+ * direct `@automerge/automerge-repo` dependency.
+ */
+export interface DocMinter {
+  create<T = LarDoc>(initialValue: T): { readonly url: string };
+}
 
 /** The two binding kinds — one tiddler `kind` field per slot. */
 export type BindingKind = "personal-binding" | "draft-binding";
@@ -46,18 +52,18 @@ export interface ResolveBindingArgs {
   readonly prefix: string;
   /** SHA-256 hex from computeRecipeFingerprint — the per-recipe binding key. */
   readonly fingerprint: string;
-  /** Vessel Automerge repo — mints the bound doc on absent. */
-  readonly repo: Repo;
-  /** Admin doc handle — reads existing bindings, writes new binding tiddlers. */
-  readonly adminHandle: DocHandle<LarDoc>;
+  /** Automerge repo that mints the bound doc on absent (host relay or island Repo). */
+  readonly repo: DocMinter;
+  /**
+   * Admin-bag composite — reads existing bindings + writes new binding tiddlers.
+   * Host-side: `adminVm.composite`; island-side: the worker's `ctx.composite`.
+   */
+  readonly adminStore: CompositeStore;
   /** Keyhive provider — registers the minted bag + delegates it to the PersonGroup. */
   readonly keyhive: CapabilityProvider;
   /**
    * PersonGroup AGENT Identifier hex (getAgent-resolvable) — the delegation
    * audience. NOT the group's DocumentId (that is the membership-check target).
-   * The boot reads this from PERSON_GROUP_AGENT_ID_TIDDLER and HALTs at Gate B/C
-   * if absent, so at this call site a real, membership-verified PersonGroup is
-   * already present — never a phantom.
    */
   readonly personGroupAgentIdHex: string;
   /** Vessel Individual hex — the binding tiddler's `minted-by` audit field. */
@@ -79,7 +85,7 @@ export interface ResolveBindingResult {
  *
  * Reuse-on-present returns the stored URL WITHOUT minting or delegating — the
  * binding (and its delegation) already federated to this device through the
- * admin-doc keyhive layer. Reuse MUST NOT block boot on a doc that is not yet
+ * admin-doc keyhive layer. Reuse MUST NOT block boot on a doc not yet
  * decryptable on this device (the two-phase Keyhive window): the caller mounts
  * the URL and the island surfaces it when sync delivers the BeeKEM key. See
  * personal-slot#lifecycle "authorized-but-undecryptable window".
@@ -88,44 +94,38 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   const key = `${args.prefix}/${args.fingerprint}`;
 
   // Reuse-on-present — the binding tiddler already replicated to this device.
-  const existing = tiddlerText(args.adminHandle.doc()?.tiddlers?.[key]);
+  const existing = tiddlerText(await args.adminStore.get(key));
   if (existing) return { url: existing, minted: false };
 
   // Mint-on-absent — Q7 idempotent sequence: create → registerBag → delegate → put.
   const handle = args.repo.create<LarDoc>(emptyLarDoc());
 
   // delegate() throws unless the bag's Keyhive Document already exists, so
-  // registerBag mints it first (keyhive-provider.ts:146). The minting device
-  // becomes implicit admin via generateDocument semantics.
+  // registerBag mints it first. The minting device becomes implicit admin.
   await args.keyhive.registerBag(handle.url);
 
-  // First non-probe delegate() caller in the repo. Bind to the STABLE agent-id
-  // (never rotating key material). access: "admin" — POLA-correct grain for
+  // Bind to the STABLE agent-id. access: "admin" — POLA-correct grain for
   // co-edited view-state is "edit", but the live Keyhive gate exposes only
-  // read | admin (keyhive-provider.ts:150), so edit-intent rounds UP to admin as
-  // documented interim debt — marginal authority ≈ 0 since every PersonGroup
-  // device already holds admin on @admin. Adopt "edit" the moment the gate
-  // accepts it. Grain debt homed in causal-islands.md.
+  // read | admin, so edit-intent rounds UP to admin as documented interim debt
+  // (marginal authority ≈ 0; every PersonGroup device already holds admin on
+  // @admin). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
   await args.keyhive.delegate({
     bagUrl:   handle.url,
     audience: args.personGroupAgentIdHex,
     access:   "admin",
   });
-  // The DELEGATED event lands in the EventStore and federates to the operator's
-  // other devices via the admin-doc keyhive layer — no manual byte-shipping.
 
   // Record the binding in the admin doc — replicates to the operator's other
   // devices, where reuse-on-present finds it next boot.
-  args.adminHandle.change((doc) => {
-    doc.tiddlers[key] = mutableLarRecord(key, {
-      text:          handle.url,
-      kind:          args.kind,
-      fingerprint:   args.fingerprint,
-      "recipe-trace": canonicalJson(args.recipeTrace),
-      "minted-on":   new Date().toISOString(),
-      "minted-by":   args.mintedByHex,
-    }, "personal-bindings");
-  });
+  const origin: ChangeOrigin = { kind: "lares-verb", requestId: `binding-${args.fingerprint.slice(0, 8)}` };
+  await args.adminStore.put(mutableLarRecord(key, {
+    text:          handle.url,
+    kind:          args.kind,
+    fingerprint:   args.fingerprint,
+    "recipe-trace": canonicalJson(args.recipeTrace),
+    "minted-on":   new Date().toISOString(),
+    "minted-by":   args.mintedByHex,
+  }, "personal-bindings"), origin, { bag: ADMIN_BAG_ID });
 
   return { url: handle.url, minted: true };
 }

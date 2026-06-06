@@ -19,6 +19,11 @@ export const KEYHIVE_PROBE_VERSION = "0.0.0-alpha.56c";
 export { bootAdminKeyhive } from "./boot-admin-keyhive.js";
 export type { BootAdminKeyhiveInput, BootAdminKeyhiveResult } from "./boot-admin-keyhive.js";
 
+export { resolveOrMintBinding } from "./resolve-binding.js";
+export type {
+  ResolveBindingArgs, ResolveBindingResult, BindingKind, DocMinter,
+} from "./resolve-binding.js";
+
 export {
   runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload,
 } from "./ceremony-core.js";

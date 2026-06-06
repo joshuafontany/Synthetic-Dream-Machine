@@ -32,8 +32,10 @@ import {
   ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
   LARARIUM_BAG, LARES_BAG,
   mkManifest, mkAdminPlaceVerb, mkAdminVerbResult, mkAdminVerifyRequest,
+  mkAdminResolveBindingRequest,
   isIslandToVesselMsg,
   type WikiRecipe, type AuthVerifierSeam, type AdminMsg_VerifyResult,
+  type AdminMsg_ResolveBindingResult,
 } from "@lararium/mesh";
 import { runLocalVerb }                                 from "@lararium/tw5";
 import type { VerbTable }                               from "@lararium/tw5";
@@ -96,6 +98,15 @@ export interface AdminVmResult {
    * with this once keyhive lives in-island (Stage 5); unused until then.
    */
   authSeam:     AuthVerifierSeam;
+  /**
+   * Resolve (or mint+delegate) the operator's @personal/@draft binding pair for
+   * a recipe fingerprint — runs island-side where keyhive lives. The vessel
+   * factory calls this between admin `workerEa` and the primary wiki mount.
+   */
+  resolveBinding: (
+    fingerprint: string,
+    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+  ) => Promise<{ personalUrl: string; draftUrl: string }>;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -113,6 +124,13 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   // Pending host→island verify-proxy calls (path b), keyed by requestId.
   const _pendingVerifies = new Map<string, (ok: boolean) => void>();
   let _verifySeq = 0;
+
+  // Pending host→island binding-resolution calls, keyed by requestId.
+  const _pendingBindings = new Map<string, {
+    resolve: (r: { personalUrl: string; draftUrl: string }) => void;
+    reject:  (e: Error) => void;
+  }>();
+  let _bindingSeq = 0;
 
   // ── Vessel admin handle (keyhive + gate reads) ───────────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
@@ -170,6 +188,18 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
       if (resolve) {
         _pendingVerifies.delete(msg.requestId);
         resolve(msg.ok);
+      }
+      return;
+    }
+
+    if (raw.type === "admin:resolve-binding-result") {
+      const msg = raw as AdminMsg_ResolveBindingResult;
+      const pending = _pendingBindings.get(msg.requestId);
+      if (pending) {
+        _pendingBindings.delete(msg.requestId);
+        if (msg.error) pending.reject(new Error(msg.error));
+        else if (msg.personalUrl && msg.draftUrl) pending.resolve({ personalUrl: msg.personalUrl, draftUrl: msg.draftUrl });
+        else pending.reject(new Error("resolve-binding-result missing urls"));
       }
       return;
     }
@@ -251,6 +281,12 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
           worker.postMessage(mkAdminVerifyRequest({ requestId, cardBytes, bagUrl, access }));
         }),
     },
+    resolveBinding: (fingerprint, recipeTrace) =>
+      new Promise<{ personalUrl: string; draftUrl: string }>((resolve, reject) => {
+        const requestId = `binding-${++_bindingSeq}`;
+        _pendingBindings.set(requestId, { resolve, reject });
+        worker.postMessage(mkAdminResolveBindingRequest({ requestId, fingerprint, recipeTrace }));
+      }),
     placeVerb: (verbOpts) => {
       worker.postMessage(mkAdminPlaceVerb({
         verb:        verbOpts.verb,

@@ -67,7 +67,6 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { resolveOrMintBinding }           from "./resolve-binding.js";
 import { VerbTable } from "@lararium/tw5";
 import { makeWhereReactor }                       from "./where-handler.js";
 import { makeResolveReactor }                     from "./resolve-handler.js";
@@ -84,7 +83,7 @@ import {
   makeRegisterColdReactor,
 } from "./residency-handlers.js";
 import { BagResidencyManager }                      from "@lararium/mesh";
-import { KeyhiveProvider, AdminEventStore }         from "@lararium/keyhive";
+import { KeyhiveProvider, AdminEventStore, resolveOrMintBinding } from "@lararium/keyhive";
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult, AdminVmOptions } from "./open-admin-vm.js";
@@ -774,7 +773,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   const bindingCommon = {
     fingerprint, repo,
-    adminHandle:           adminVm.adminHandle,
+    adminStore:            adminVm.composite,
     keyhive,
     personGroupAgentIdHex,                 // verified present at Gate B/C above
     mintedByHex:           keyhiveDid,

@@ -20,14 +20,15 @@ import { describe, test, expect } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import {
   type LarDoc,
+  CompositeStore, AutomergeDocStore, ADMIN_BAG_ID,
   emptyLarDoc,
   mutableLarRecord,
   tiddlerText,
   PERSONAL_BINDINGS_PREFIX,
   DRAFT_BINDINGS_PREFIX,
 } from "@lararium/mesh";
-import type { CapabilityProvider, DelegateArgs } from "@lararium/keyhive";
-import { resolveOrMintBinding } from "../src/resolve-binding.js";
+import type { DocHandle } from "@automerge/automerge-repo";
+import { resolveOrMintBinding, type CapabilityProvider, type DelegateArgs } from "@lararium/keyhive";
 
 const AGENT_HEX  = "0xfeedface";
 const MINTED_BY  = "0xdeadbeef";
@@ -50,11 +51,22 @@ function makeFakeKeyhive() {
   return { provider, registered, delegations };
 }
 
-function commonArgs(repo: Repo, adminHandle: ReturnType<Repo["create"]>, keyhive: CapabilityProvider) {
+/** Build an admin-bag composite (the shape both host + island pass), plus the
+ *  underlying handle for direct assertions/seeding. */
+function makeAdminStore(repo: Repo): { adminStore: CompositeStore; adminHandle: DocHandle<LarDoc> } {
+  const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+  const adminStore = new CompositeStore();
+  const layer = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
+  adminStore.addLayer({ bagId: ADMIN_BAG_ID, store: layer, writable: true });
+  layer.markSyncComplete();
+  return { adminStore, adminHandle };
+}
+
+function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityProvider) {
   return {
     fingerprint:           FINGERPRINT,
     repo,
-    adminHandle:           adminHandle as unknown as Parameters<typeof resolveOrMintBinding>[0]["adminHandle"],
+    adminStore,
     keyhive,
     personGroupAgentIdHex: AGENT_HEX,
     mintedByHex:           MINTED_BY,
@@ -65,11 +77,11 @@ function commonArgs(repo: Repo, adminHandle: ReturnType<Repo["create"]>, keyhive
 describe("resolveOrMintBinding", () => {
   test("mint-on-absent: creates a doc, registers, delegates to PersonGroup admin, records the binding", async () => {
     const repo = new Repo();
-    const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+    const { adminStore, adminHandle } = makeAdminStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     const result = await resolveOrMintBinding({
-      ...commonArgs(repo, adminHandle, provider),
+      ...commonArgs(repo, adminStore, provider),
       kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
     });
 
@@ -97,7 +109,7 @@ describe("resolveOrMintBinding", () => {
 
   test("reuse-on-present: returns the stored url, mints/delegates nothing", async () => {
     const repo = new Repo();
-    const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+    const { adminStore, adminHandle } = makeAdminStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     // Pre-seed an existing binding tiddler.
@@ -108,7 +120,7 @@ describe("resolveOrMintBinding", () => {
     });
 
     const result = await resolveOrMintBinding({
-      ...commonArgs(repo, adminHandle, provider),
+      ...commonArgs(repo, adminStore, provider),
       kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
     });
 
@@ -119,15 +131,15 @@ describe("resolveOrMintBinding", () => {
 
   test("@personal and @draft bind under parallel prefixes for the same fingerprint", async () => {
     const repo = new Repo();
-    const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+    const { adminStore, adminHandle } = makeAdminStore(repo);
     const { provider } = makeFakeKeyhive();
 
     const personal = await resolveOrMintBinding({
-      ...commonArgs(repo, adminHandle, provider),
+      ...commonArgs(repo, adminStore, provider),
       kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
     });
     const draft = await resolveOrMintBinding({
-      ...commonArgs(repo, adminHandle, provider),
+      ...commonArgs(repo, adminStore, provider),
       kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
     });
 

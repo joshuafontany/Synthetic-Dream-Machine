@@ -277,6 +277,32 @@ export interface AdminMsg_VerifyResult {
   reason?: string;
 }
 
+// ---------------------------------------------------------------------------
+// @personal / @draft binding resolution (isomorphic-vessel epic, Stage 1)
+// ---------------------------------------------------------------------------
+// resolveOrMintBinding mints + delegates via keyhive, which lives in the admin
+// island after Stage 1. The host posts a request with the recipe fingerprint;
+// the island mints/reuses against its Repo + keyhive and returns the doc URLs.
+
+/** Vessel → island: resolve (or mint+delegate) the @personal/@draft binding pair. */
+export interface AdminMsg_ResolveBindingRequest {
+  schema_version: ProtocolVersion;
+  type: "admin:resolve-binding-request";
+  requestId: string;
+  fingerprint: string;
+  recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] };
+}
+
+/** Island → vessel: the resolved binding doc URLs (or an error). */
+export interface AdminMsg_ResolveBindingResult {
+  schema_version: ProtocolVersion;
+  type: "admin:resolve-binding-result";
+  requestId: string;
+  personalUrl?: string;
+  draftUrl?: string;
+  error?: string;
+}
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -285,6 +311,7 @@ export type VesselToIslandMsg =
   | AdminMsg_PlaceVerb
   | AdminMsg_VerbResult
   | AdminMsg_VerifyRequest
+  | AdminMsg_ResolveBindingRequest
   | WikiMsg_PlaceVerb;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
@@ -390,7 +417,8 @@ export type IslandToVesselMsg =
   | IslandMsg_Ready
   | WikiMsg_VerbResult
   | AdminMsg_DelegateVerb
-  | AdminMsg_VerifyResult;
+  | AdminMsg_VerifyResult
+  | AdminMsg_ResolveBindingResult;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -405,14 +433,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -570,6 +598,37 @@ export function mkAdminVerifyResult(opts: {
     ok:        opts.ok,
   };
   if (opts.reason !== undefined) msg.reason = opts.reason;
+  return msg;
+}
+
+export function mkAdminResolveBindingRequest(opts: {
+  requestId:   string;
+  fingerprint: string;
+  recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] };
+}): AdminMsg_ResolveBindingRequest {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:resolve-binding-request",
+    requestId:   opts.requestId,
+    fingerprint: opts.fingerprint,
+    recipeTrace: opts.recipeTrace,
+  };
+}
+
+export function mkAdminResolveBindingResult(opts: {
+  requestId:    string;
+  personalUrl?: string;
+  draftUrl?:    string;
+  error?:       string;
+}): AdminMsg_ResolveBindingResult {
+  const msg: AdminMsg_ResolveBindingResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:resolve-binding-result",
+    requestId: opts.requestId,
+  };
+  if (opts.personalUrl !== undefined) msg.personalUrl = opts.personalUrl;
+  if (opts.draftUrl    !== undefined) msg.draftUrl    = opts.draftUrl;
+  if (opts.error       !== undefined) msg.error       = opts.error;
   return msg;
 }
 
