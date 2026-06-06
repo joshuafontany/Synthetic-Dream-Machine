@@ -27,8 +27,7 @@ status      = "sequence-bound; no calendar dates"
 ⏿ orient: canonical children now carry the durable design content; this ledger carries completion memory.
 ◇ decide: keep closed sprint outcomes compact and point each consumed source to its new locus.
 ▶ act: mark Sprint-00 through Sprint-02 as consumed; keep Sprint-03 live outside this ledger.
-⤴ verify: every closed-sprint exit marker appears here or in the child locus named by the map.
-↺ adapt: future sprint docs enter this ledger only after closure.
+↺ verify: every closed-sprint exit marker appears here or in the child locus named by the map; adapt: future sprint docs enter this ledger only after closure.
 <<~/ahu >>
 
 <<~ &#x0002; >>

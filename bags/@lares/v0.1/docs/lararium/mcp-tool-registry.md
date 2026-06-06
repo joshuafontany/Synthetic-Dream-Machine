@@ -119,7 +119,7 @@ env-required = ["LARARIUM_HTTP_URL"]
 
 [[tools]]
 name        = "lararium-receipt"
-phase       = "aftermath"         # ⤴
+phase       = "aftermath"         # ↺
 description = "Compile current boot receipt — SHA256 identity hash of the live closure."
 inputs      = []
 env-required = []

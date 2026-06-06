@@ -72,8 +72,8 @@ and an `ahu #iam` block with a TOML fence. Absence of any produces `carrier.iam.
 
 ```toml
 # OODA-HA glyphs — six-phase annotation, ordered ✶→↺
-ooda-glyphs = ["✶", "⏿", "◇", "▶", "⤴", "↺"]
-# ✶ observe   ⏿ orient   ◇ decide   ▶ act   ⤴ aftermath   ↺ loop
+ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
+# ✶ observe   ⏿ orient   ◇ decide   ▶ act   ↺ aftermath/loop
 
 # CarrierRating — structural quality ladder
 carrier-ratings = ["kapu", "ano", "meme", "data", "noise"]

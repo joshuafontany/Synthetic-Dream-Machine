@@ -22,8 +22,7 @@ status-date  = "2026-04-24"
 ⏿ orient: Nix derivations and Bazel action caching both hash inputs; Anthropic prompt caching requires byte-identical prefixes.
 ◇ decide: SHA256 over canonical carrier bytes plus sorted edge records; timestamp becomes metadata, not identity.
 ▶ act: specify the hash scheme, three artifact shapes, validation contract, and compaction rule.
-⤴ verify: identical source files always produce identical receipt hashes across separate compilation runs.
-↺ MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
+↺ verify: identical source files always produce identical receipt hashes across separate compilation runs; MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
 <<~/ahu >>
 
 <<~ &#x0002; >>

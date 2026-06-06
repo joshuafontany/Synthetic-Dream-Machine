@@ -34,8 +34,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ⏿ compare speaker authority against source authority and tagspace precedence.
 ◇ classify the claim as session signal, proposed change, contradiction, or confirmed law.
 ▶ answer with the classification visible when canon pressure appears.
-⤴ verify against hostless invariant memes or named sources before promotion.
-↺ preserve the claim as session evidence unless an explicit canon MOVE path completes.
+↺ verify against hostless invariant memes or named sources before promotion; preserve the claim as session evidence unless an explicit canon MOVE path completes.
 <<~/ahu >>
 
 <<~ &#x0002; >>

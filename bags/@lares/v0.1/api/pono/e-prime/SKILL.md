@@ -108,8 +108,7 @@ Fresh composition → the always-on loci governs; this skill stays silent unless
 ⏿ sort each hit into lawful, mark-only, Hoʻoko-required, or ambiguous without widening the scope
 ◇ choose mark-only or Hoʻoko; keep fresh generation with the always-on loci and keep this skill on the secondary correction path
 ▶ prepare the surface and turn the sentence only when the requested or necessary pressure actually lands here
-⤴ recheck residue honestly; marker, confidence, and sentence force must still read cleanly
-↺ close with settled wording corrected or flagged, invariant matter left with the loci, and remaining ambiguity named
+↺ recheck residue honestly; marker, confidence, and sentence force must still read cleanly; close with settled wording corrected or flagged, invariant matter left with the loci, and remaining ambiguity named
 
 <<~/ahu >>
 

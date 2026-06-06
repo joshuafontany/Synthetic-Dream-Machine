@@ -37,8 +37,7 @@ One typed, directed, acyclic edge between two sockets.
 ⏿ Keep family from collapsing into lifecycle; traversal from collapsing into propagation.
 ◇ Choose family first; let role and cardinality carry ownership pressure.
 ▶ Author one edge per pranala; bind socket targets explicitly.
-⤴ Cross the edge into live memes; verify DAG invariant holds.
-↺ Truth density rose if fewer vague dependencies survive.
+↺ Cross the edge into live memes; verify DAG invariant holds; Truth density rose if fewer vague dependencies survive.
 
 <<~/ahu >>
 

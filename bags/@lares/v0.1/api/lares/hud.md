@@ -96,7 +96,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 | ⏿ | Orient | locate pattern, relation, pressure |
 | ◇ | Decide | choose a path; the fork |
 | ▶ | Act | execute the move |
-| ⤴ ↺ | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
+| ↺ | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
 
 <<~/ahu >>
 

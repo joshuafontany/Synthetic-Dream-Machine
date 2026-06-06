@@ -36,8 +36,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 ⏿ orient dispatch mode: fireSync for view-layer; fire/fireAll for async; fireRace/fireRush reserved
 ◇ load() replaces full set; updateUri() updates one meme's bindings; occupied handler slots survive
 ▶ route fire call through (fromUri, listenable) → handlers; await or sync per mode
-⤴ subscribeOnce bridges to kukali; subscribeByFn wires view-layer actions by name not source
-↺ confirm handler slots occupied; kukali suspensions preserved across wiki-change reloads
+↺ subscribeOnce bridges to kukali; subscribeByFn wires view-layer actions by name not source; confirm handler slots occupied; kukali suspensions preserved across wiki-change reloads
 
 <<~/ahu >>
 

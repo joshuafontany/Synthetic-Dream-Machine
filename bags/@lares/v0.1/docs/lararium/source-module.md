@@ -34,8 +34,7 @@ Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
 ⏿ orient: hash the content; compare against existing carrier in the store
 ◇ hash matches → no-op; hash differs → overwrite carrier with new source text and built-at timestamp
 ▶ emit source-module meme at lar:///source/<package>/<path> with origin:operator-import
-⤴ meme graph now holds current source; agents can read, query, and react to source changes
-↺ confirm carrier written; content-hash recorded; no noise or data files emitted
+↺ meme graph now holds current source; agents can read, query, and react to source changes; confirm carrier written; content-hash recorded; no noise or data files emitted
 
 <<~/ahu >>
 

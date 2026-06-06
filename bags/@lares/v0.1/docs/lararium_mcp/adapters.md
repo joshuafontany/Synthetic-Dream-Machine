@@ -28,8 +28,7 @@ status-date  = "2026-04-23"
 ⏿ orient: adapters should translate resources/tools/prompts while preserving sidecar autonomy.
 ◇ decide: v1 adapters stay read-only and namespace-scoped; MemPalace demonstrates stdio JSON-RPC sidecar transport.
 ▶ act: preserve the interface, registry, lane map, and Mempalace operational boundary here.
-⤴ verify: unsupported writes remain explicit post-v1 residue.
-↺ adapt: when submodule health fails, the main server should keep running with that namespace absent.
+↺ verify: unsupported writes remain explicit post-v1 residue; adapt: when submodule health fails, the main server should keep running with that namespace absent.
 <<~/ahu >>
 
 <<~ &#x0002; >>

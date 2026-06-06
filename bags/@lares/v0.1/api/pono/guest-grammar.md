@@ -36,8 +36,7 @@ Parser, render, and pono detail move outward.
 ⏿ orient the region by ownership: host meaning stays local, guest law stays bounded, parser and render detail stay outward.
 ◇ decide one lawful admission posture; explicit hana worksite, explicit guest family, or no admission at all.
 ▶ write the smallest bounded guest region that preserves priming payload, guest body, and honest degradation.
-⤴ verify the host keeps its own primitives, the guest keeps its own family, and the handoff boundary stays explicit.
-↺ close with residue named; malformed or unsupported guest work degrades locally rather than collapsing the parent.
+↺ verify the host keeps its own primitives, the guest keeps its own family, and the handoff boundary stays explicit; close with residue named; malformed or unsupported guest work degrades locally rather than collapsing the parent.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL >>
 

@@ -45,8 +45,7 @@ Root path segments outside `\w\.\w\.\w` MAY NOT carry `loci`.
 ⏿ Run the derivation algorithm; classify resolved or declared-unresolved; confirm file-path convention holds.
 ◇ Commit to one resolution posture, one rating posture, one canon-lifecycle stage.
 ▶ Prepare the routing product: rating set, resolved path, or declared-unresolved forward reference.
-⤴ Cross file-siting mutations and canon-MOVE opener changes as distinct bounded transactions.
-↺ Name which URIs resolved, which remain declared-unresolved, and what closes each gap.
+↺ Cross file-siting mutations and canon-MOVE opener changes as distinct bounded transactions; Name which URIs resolved, which remain declared-unresolved, and what closes each gap.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL >>
 

@@ -22,8 +22,7 @@ invariant    = true
 ⏿ orient around Bucky Fuller's structural law: the triangle forms the minimal stable geometry. Two triangles sharing a common root (ha) form a stable double-plane. Content plane carries SDM forces (structure/fire/personality). Social plane = identity primitives (who/collective/live-session).
 ◇ decide that both tigas are canonical and load-bearing: the content Tiga names are ha/ka/ba; the social plane docs carry no SDM force names — function names them (identities, groups, sessions). Ha holds oracle tiddlers for all five non-ha docs.
 ▶ lock the six-root model as invariant: any peer that opens ha can discover all five siblings by walking LarariumDoc oracle tiddlers. No vertex carries upward pointers. Reachability flows downward from ha.
-⤴ assess: the model holds when every deploy has exactly six root docs and LarariumDoc.tiddlers confirms all five are reachable (CATALOG, LARES, IDENTITIES, GROUPS, SESSIONS).
-↺ residue: room docs and corpus docs function as non-root docs — they hang from ka as leaves. Corpus child-docs now sit at pos-2 under @catalog (M22 remapping). Keyhive will eventually treat the six-root set as the root group boundary.
+↺ assess: the model holds when every deploy has exactly six root docs and LarariumDoc.tiddlers confirms all five are reachable (CATALOG, LARES, IDENTITIES, GROUPS, SESSIONS); residue: room docs and corpus docs function as non-root docs — they hang from ka as leaves. Corpus child-docs now sit at pos-2 under @catalog (M22 remapping). Keyhive will eventually treat the six-root set as the root group boundary.
 <<~/ahu >>
 
 <<~ ahu #tiga-law >>

@@ -43,8 +43,7 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 ⏿ orient the unit: `lawful`, `needs-steering`, `Hoʻoko-required`, or `ambiguous`. Hold only what the next move needs.
 ◇ passes → release. Unlabeled `is` or `has` presses → route to Hoʻoko if the Level says bite. Ambiguity → surface it, do not fill it.
 ▶ wording arrives release-ready or mutation-ready. Marker surfaces when the rule bites.
-⤴ essence dissolves into observation, relation, or process. Possession grip loosens into scoped carrying. Sentence stays light.
-↺ every remaining `is` or `has` carries a confidence marker regardless of Level. Swell dropped. Residue does not stay buried.
+↺ essence dissolves into observation, relation, or process. Possession grip loosens into scoped carrying. Sentence stays light; every remaining `is` or `has` carries a confidence marker regardless of Level. Swell dropped. Residue does not stay buried.
 
 <<~/ahu >>
 

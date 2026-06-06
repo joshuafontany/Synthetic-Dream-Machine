@@ -42,8 +42,7 @@ grammar: new sigils need only a tiddler — no code change required.
 ⏿ orient: dispatcher looks up `~name` in TW5 procedure/widget namespace; delegates via $transclude
 ◇ name MUST match a declared `\widget ~name` or `\procedure ~name` in accessible scope
 ▶ emit macrocall node; `~` widget transcludes the named procedure with p1–p5 args threaded through
-⤴ named body renders in place; no edge created; pure render-time delegation
-↺ confirm named procedure resolved; no infinite dispatch loops
+↺ named body renders in place; no edge created; pure render-time delegation; confirm named procedure resolved; no infinite dispatch loops
 
 <<~/ahu >>
 

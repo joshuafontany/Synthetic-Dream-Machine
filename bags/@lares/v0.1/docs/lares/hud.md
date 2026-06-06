@@ -82,7 +82,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 | ⏿ | `orient` | Orient | locating pattern, relation, and pressure |
 | ◇ | `decide` | Decide | choosing a path; the fork |
 | ▶ | `act` | Act | executing the move |
-| ⤴ ↺ | `hooko-aftermath` | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
+| ↺ | `hooko-aftermath` | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
 
 ### Stance Glyphs
 

@@ -38,8 +38,7 @@ a frozen embed can age from its source, so edges SHOULD carry a confidence ratin
 ⏿ orient: family:transclusion, traversal:source-to-target, propagation:none; read-only; no execution pulse
 ◇ confidence-bounded: if the observation carries uncertainty, SHOULD declare confidence on the edge
 ▶ emit EdgeSugarNode with sigil:aka, family:transclusion; render shadow transclusion at source position
-⤴ target content is live-readable at source; source holds no lifecycle stake in target
-↺ confirm shadow stable; target still resolvable; no ownership or mutation transferred
+↺ target content is live-readable at source; source holds no lifecycle stake in target; confirm shadow stable; target still resolvable; no ownership or mutation transferred
 
 <<~/ahu >>
 

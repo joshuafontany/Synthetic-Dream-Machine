@@ -38,8 +38,7 @@ uncertainty-locus-subtype     = "Locus remains valid as the subtype name for mem
 ⏿ orient: Bazel's depset pattern informs meme structure; canonical pranala kānāwai (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) governs the full PranalaEdge field set and independence law.
 ◇ decide: frozen dataclasses for PranalaEdge and Meme; a mutable MemeGraph that builds incrementally from carrier reads.
 ▶ act: specify field-level contracts for each type and the graph's core operations.
-⤴ verify: every field carries a type, a source (where the compiler reads it from), and a default.
-↺ deeper parser/render concerns route to `pranala-parser` and `traversal` siblings.
+↺ verify: every field carries a type, a source (where the compiler reads it from), and a default; deeper parser/render concerns route to `pranala-parser` and `traversal` siblings.
 <<~/ahu >>
 
 <<~ ahu #prana-edge >>

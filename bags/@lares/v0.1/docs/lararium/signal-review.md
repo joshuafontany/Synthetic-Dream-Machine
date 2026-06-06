@@ -212,7 +212,7 @@ Use the following labels during the review:
 
 <<~ ahu #assess >>
 
-## ⤴ ↺ Assess
+## ↺ Assess
 
 ### Exit criteria for the review pass
 

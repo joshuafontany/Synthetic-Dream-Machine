@@ -26,8 +26,7 @@ status-date  = "2026-04-23"
 ⏿ orient: the canonical surface needs one small spine that names what the server does and what remains out of v1.
 ◇ decide: keep architecture law here; route detailed contracts to child loci.
 ▶ act: expose the stack, namespace posture, transport split, and source-truth priority.
-⤴ verify: every child locus preserves a bounded contract and lists its consumed sources.
-↺ adapt: active roadmap and backlog stay outside this consumed set until their sprints close.
+↺ verify: every child locus preserves a bounded contract and lists its consumed sources; adapt: active roadmap and backlog stay outside this consumed set until their sprints close.
 <<~/ahu >>
 
 <<~ &#x0002; >>

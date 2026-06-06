@@ -47,8 +47,7 @@ through a social network.
 ⏿ orient each finding against the copy-shape; required structure, optional depth, and outward type laws stay distinct.
 ◇ decide one honest posture: noise, data, meme, ano, or kapu, without flattering the carrier.
 ▶ write or revise the meme so the minimum lawful shape appears early and the governing role stays explicit.
-⤴ verify opener, `#iam`, body thresholds, phase map, edges, and return throat before the file crosses into use.
-↺ close with residue named; declared depth and unresolved paths remain visible rather than implied away.
+↺ verify opener, `#iam`, body thresholds, phase map, edges, and return throat before the file crosses into use; close with residue named; declared depth and unresolved paths remain visible rather than implied away.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL >>
 

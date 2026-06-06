@@ -35,8 +35,7 @@ A heleuma-ka anchor exists outside the corpus **by current necessity, not by nat
 ⏿ orient: could this function be loaded from a corpus meme via `_bootModules()`? If yes, this is ka.
 ◇ declare `heleuma = "ka"`, `source-symbol`; confirm the symbol is a standalone declaration.
 ▶ write `#source` slot with the verbatim extracted function; close the quine record.
-⤴ verify: `sync-heleuma` resolves the symbol, compares, reports clean; signal fields approach ceremony thresholds.
-↺ the anchor lives. The soul moves. Ceremony awaits.
+↺ verify: `sync-heleuma` resolves the symbol, compares, reports clean; signal fields approach ceremony thresholds; the anchor lives. The soul moves. Ceremony awaits.
 
 <<~/ahu >>
 

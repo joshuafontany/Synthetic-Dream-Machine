@@ -27,8 +27,7 @@ body-sha256 = "de5ced103cad1f1a5e414cabe57a2052578fa69e190baf2e2dc06fb458db9ceb"
 ⏿ orient: does this qualify as a valid carrier? does metadata align with opener? do STX/ETX/return-throat appear?
 ◇ decide rating: kapu if valid + implements kapu URI; ano if valid + implements set non-empty; meme if valid; data if opener or metadata present; noise otherwise.
 ▶ parse pranala edges; merge implements set; return CarrierRecord with shape, metadata, implements.
-⤴ verify: diagnostics surface all errors; rating reflects the worst valid state; depthState reflects loulou count.
-↺ text-in, record-out — no side effects, no I/O. Callers own persistence and routing.
+↺ verify: diagnostics surface all errors; rating reflects the worst valid state; depthState reflects loulou count; text-in, record-out — no side effects, no I/O. Callers own persistence and routing.
 
 <<~/ahu >>
 

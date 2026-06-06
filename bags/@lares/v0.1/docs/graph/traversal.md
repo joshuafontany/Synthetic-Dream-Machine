@@ -22,8 +22,7 @@ status-date  = "2026-04-24"
 ⏿ orient: three distinct graph planes require three distinct traversal tiers; collapsing them loses boot ordering guarantees.
 ◇ decide: Tier 0 declared-core as fast-path, Tier 1 control-edge DFS walk, Tier 2 one-hop relation expansion.
 ▶ act: specify each tier's algorithm, stopping condition, and artifact contribution.
-⤴ verify: Tier 0 and Tier 1 produce the same 14-locus set before any further walk proceeds.
-↺ execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
+↺ verify: Tier 0 and Tier 1 produce the same 14-locus set before any further walk proceeds; execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
 <<~/ahu >>
 
 <<~ &#x0002; >>

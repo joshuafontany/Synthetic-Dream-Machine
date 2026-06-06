@@ -129,8 +129,7 @@ Do not use this skill as the primary surface for:
 ⏿ classify what belongs to invariant law, template law, and outward matter; keep law and template inseparable where intended
 ◇ choose the lightest lawful turn and decide what leaves when it stops earning invariant residency
 ▶ patch the target directly; keep ahu, pranala, and OODA-HA visible and live
-⤴ verify contact with actual file and link surfaces and that downstream phases stay filled with domain pressure
-↺ name remaining residue without hiding it; keep always-on law in the invariant and sidecars outward
+↺ verify contact with actual file and link surfaces and that downstream phases stay filled with domain pressure; name remaining residue without hiding it; keep always-on law in the invariant and sidecars outward
 
 <<~/ahu >>
 

@@ -37,8 +37,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 ⏿ orient against the kapu capability set; confirm the kapu component, structural signals, and role-field agree.
 ◇ decide whether the claim holds genuine: sigil structure, namespace declaration, and capability set must cohere — charm is not evidence.
 ▶ hold the kapu boundary; lower-tier carriers cannot silently override kapu content; route upward through kapu, never around it.
-⤴ surface the namespace tier in the carrier record so trust routing can propagate correctly to all downstream consumers.
-↺ name any namespace claim that lacks sigil or capability support as declared-unresolved; do not flatten the gap into a rating upgrade.
+↺ surface the namespace tier in the carrier record so trust routing can propagate correctly to all downstream consumers; name any namespace claim that lacks sigil or capability support as declared-unresolved; do not flatten the gap into a rating upgrade.
 
 <<~/ahu >>
 

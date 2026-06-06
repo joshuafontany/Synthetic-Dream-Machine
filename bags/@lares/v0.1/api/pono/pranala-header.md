@@ -39,8 +39,7 @@ Permanent JS exception: the `?` token and its `->` arrow require dedicated parse
 ⏿ orient: header sigil; appears once per file at the iam block; creates no edge to an external target
 ◇ the uri is the canonical lar:/// address of this meme; all pranala edges source from this socket
 ▶ emit PranalaHeaderNode; set `currentTiddler` equivalent to the declared URI for all edges in this meme
-⤴ all `<<~ pranala ? -> target >>` edges in this meme resolve `?` to the declared canonical URI
-↺ confirm exactly one pranala-header per meme; URI matches the iam `uri-path` field
+↺ all `<<~ pranala ? -> target >>` edges in this meme resolve `?` to the declared canonical URI; confirm exactly one pranala-header per meme; URI matches the iam `uri-path` field
 
 <<~/ahu >>
 

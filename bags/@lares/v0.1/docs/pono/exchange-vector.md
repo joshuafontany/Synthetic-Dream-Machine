@@ -36,8 +36,7 @@ This file gives examples and operator-facing guidance.
 ⏿ orient the node response with its own execution URI and stance posture.
 ◇ decide the vector before prose so the operator can catch misreads early.
 ▶ emit canonical record form first, then HUD render, then content.
-⤴ verify authority order, HA.KA.BA path, query parameters, and stance count.
-↺ close trajectory only when the next state benefits from explicit marking.
+↺ verify authority order, HA.KA.BA path, query parameters, and stance count; close trajectory only when the next state benefits from explicit marking.
 <<~/ahu >>
 
 <<~ ahu #canonical-shape >>

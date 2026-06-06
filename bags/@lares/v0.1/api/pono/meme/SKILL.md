@@ -112,8 +112,7 @@ Prefer another surface when the work concerns only:
 ⏿ sort required shape from optional depth without collapsing subtype law into meme law
 ◇ choose the smallest lawful shape and the highest honest posture the carrier actually earns
 ▶ write the lightest useful change and split skeleton, subtype, or docs matter outward as needed
-⤴ verify the thresholds still hold and outward claims stay truthful
-↺ name the remaining residue plainly, including what still lacks a lawful downstream home
+↺ verify the thresholds still hold and outward claims stay truthful; name the remaining residue plainly, including what still lacks a lawful downstream home
 
 <<~/ahu >>
 
@@ -216,8 +215,7 @@ When writing or revising:
 ⏿ [orient pressure]
 ◇ [decide pressure]
 ▶ [act pressure]
-⤴ [verify or crossing pressure]
-↺ [aftermath pressure]
+↺ [verify or crossing pressure]; [aftermath pressure]
 <<~/ahu >>
 
 

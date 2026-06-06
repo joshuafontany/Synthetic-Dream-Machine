@@ -27,8 +27,7 @@ status-date  = "2026-04-23"
 ⏿ orient: minimal boot must stay deterministic; full boot waits on true pranala graph traversal.
 ◇ decide: preserve flat required-core truth now, while naming the edge taxonomy that will replace static walking.
 ▶ act: bind closure inventory, edge rules, artifact schemas, and MCP resource exposure here.
-⤴ verify: every required-core meme resolves on disk at the status date.
-↺ adapt: stale static maps receive drift tests until the pranala DAG compiler lands.
+↺ verify: every required-core meme resolves on disk at the status date; adapt: stale static maps receive drift tests until the pranala DAG compiler lands.
 <<~/ahu >>
 
 <<~ &#x0002; >>

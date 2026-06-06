@@ -39,8 +39,7 @@ A heleuma does not mark failure. It marks a **named threshold crossing** — the
 ⏿ orient heleuma tier: ha (permanent structure), ka (promotion-eligible soul/fire), ba (path marker)
 ◇ ha → no promotion fields; ka → declare source-symbol; body-sha256 optional (keyhive proof is layer 3, planned); ba → source slot sufficient
 ▶ pair artifact with API meme + doc meme; sync-heleuma.ts checks drift between #source slot and live TS
-⤴ meme graph holds the rope; the artifact holds the anchor; drift surfaces as build warning
-↺ confirm heleuma pair complete; drift check registered; promotion path declared or ruled inapplicable
+↺ meme graph holds the rope; the artifact holds the anchor; drift surfaces as build warning; confirm heleuma pair complete; drift check registered; promotion path declared or ruled inapplicable
 
 <<~/ahu >>
 

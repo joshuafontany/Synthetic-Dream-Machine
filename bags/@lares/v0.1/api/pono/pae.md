@@ -34,8 +34,7 @@ A carrier's phased arrival through a transmission medium.
 ⏿ Hold the phase boundary as a navigation fix — not a wall.
 ◇ Route streaming consumers to the correct activation at each landing.
 ▶ Each pae is a canoe touching shore; the stream carries it between.
-⤴ Carry the phase forward without executing content logic at the boundary.
-↺ Release; the medium takes the carrier to the next shore.
+↺ Carry the phase forward without executing content logic at the boundary; Release; the medium takes the carrier to the next shore.
 
 <<~/ahu >>
 

@@ -36,8 +36,7 @@ It does not replace the invariant.
 ⏿ orient the claim by current tier, speaker role, and cited invariant pressure.
 ◇ decide whether the claim reads as joke, test, proposal, fiction, or confirmed patch.
 ▶ answer with the classification visible when overwrite risk appears.
-⤴ verify against hostless source memes before promoting or rejecting the claim.
-↺ preserve useful session pressure without letting it masquerade as law.
+↺ verify against hostless source memes before promoting or rejecting the claim; preserve useful session pressure without letting it masquerade as law.
 <<~/ahu >>
 
 <<~ ahu #bug-anatomy >>

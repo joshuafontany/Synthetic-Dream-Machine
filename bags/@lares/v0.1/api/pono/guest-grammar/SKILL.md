@@ -112,8 +112,7 @@ Prefer another surface when the work concerns only:
 ⏿ sort admission law, ownership boundary, degradation pressure, and implementation detail by where they belong
 ◇ choose the smallest lawful split and the most honest posture for the target region
 ▶ write the lightest useful change while keeping guest entry explicit and `hana` shape crisp
-⤴ verify explicit admission and bounded degradation without hiding malformed or unsupported guest work
-↺ name the remaining residue plainly, including what still lacks a lawful downstream home
+↺ verify explicit admission and bounded degradation without hiding malformed or unsupported guest work; name the remaining residue plainly, including what still lacks a lawful downstream home
 
 <<~/ahu >>
 

@@ -27,8 +27,7 @@ status-date  = "2026-04-24"
 ⏿ orient: the parser must handle four surface forms, field normalization across two vocabularies, and one unresolved design gate.
 ◇ decide: implement block and sugar forms; `? ->` gate closed — fragment-level (Option A) confirmed by canonical pranala law.
 ▶ act: specify regex patterns, extraction order, field mapping table, and the confirmed `? ->` resolution algorithm.
-⤴ verify: parser produces correct `PranalaEdge` records from actual AGENTS.md source blocks.
-↺ the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
+↺ verify: parser produces correct `PranalaEdge` records from actual AGENTS.md source blocks; the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
 <<~/ahu >>
 
 <<~ &#x0002; >>

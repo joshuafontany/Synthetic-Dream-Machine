@@ -42,8 +42,7 @@ and wikitext body.
 ⏿ orient: child-slot, parent-relative addressing; slot name becomes tiddler title suffix
 ◇ parent at `lar:///uri`; this slot creates child at `lar:///uri#name`; content stays inside boundary
 ▶ emit child-slot block node; deserializer produces a separate tiddler for each slot
-⤴ parent tiddler references child via `<<~ kahea ahu #name >>`; child is independently addressable
-↺ confirm round-trip: parent body contains kahea~ahu summons; child has iam fields + content
+↺ parent tiddler references child via `<<~ kahea ahu #name >>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has iam fields + content
 
 <<~/ahu >>
 

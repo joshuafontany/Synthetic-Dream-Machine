@@ -27,8 +27,7 @@ test-count   = 77
 ⏿ orient by what a new operator needs: how to start it, what it exposes, what remains a stub.
 ◇ decide minimum honest coverage: running instructions, feature table, template stubs, known gaps.
 ▶ write a flat doc-spec that a new agent can read cold and act from.
-⤴ verify each feature claim against the test suite; mark stubs clearly.
-↺ surface residue as explicit gaps rather than silence.
+↺ verify each feature claim against the test suite; mark stubs clearly; surface residue as explicit gaps rather than silence.
 
 <<~/ahu >>
 

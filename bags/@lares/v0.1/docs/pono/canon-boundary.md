@@ -36,8 +36,7 @@ This file gives a fuller map of canon-crossing events.
 ⏿ orient the current meme trust tier against the meme tier requested by the claim.
 ◇ decide the least powerful crossing that preserves the memetic trust ladder.
 ▶ create, patch, or defer the hostless target with the boundary event named.
-⤴ verify file path, opener, interface claims, and conflict handling before the crossing holds.
-↺ leave pre-canon pressure in session records with clear next crossing conditions.
+↺ verify file path, opener, interface claims, and conflict handling before the crossing holds; leave pre-canon pressure in session records with clear next crossing conditions.
 <<~/ahu >>
 
 <<~ ahu #crossing-model >>

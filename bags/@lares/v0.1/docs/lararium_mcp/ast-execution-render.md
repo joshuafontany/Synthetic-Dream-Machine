@@ -30,8 +30,7 @@ status-date  = "2026-04-23"
 ⏿ orient: TiddlyWiki grammar can inform guest syntax without taking over carrier law.
 ◇ decide: keep one envelope with explicit node families, graph-plane routing, and projection payloads.
 ▶ act: collapse AST, TW mapping, pranala alignment, execution, and render contracts into this locus.
-⤴ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape.
-↺ adapt: executable resources stay future-facing until parser and graph implementations land.
+↺ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape; adapt: executable resources stay future-facing until parser and graph implementations land.
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -65,7 +64,7 @@ TW5's string-typed store (`Record<string,string>`) and Verse's strong types reso
 | ⏿ Orient | `parseMemeCarrier` → `MemeAstNode[]` | named shapes; attrs unresolved strings | Watch |
 | ◇ Decide | `edgesFromAst` interprets sigil attrs | `string` → `Ladder5 \| OodaHa5 \| PranalaEdge…` | Turn |
 | ▶ Act | Verse execute / render / canvas | typed, transactional, committed | Round |
-| ⤴↺ Aftermath | `validatePranalaEdge`, blame calculus | contract violations surface; loop closes | Action |
+| ↺ Aftermath | `validatePranalaEdge`, blame calculus | contract violations surface; loop closes | Action |
 
 **`attrs: Record<string,string>`** — the honest Observe-phase representation. Siek's `?` type at the parse boundary fits the phase. King's "parse, don't validate" fires at Decide: consume the string bag once, emit typed values, carry them forward; Act then runs as strict as Verse demands.
 

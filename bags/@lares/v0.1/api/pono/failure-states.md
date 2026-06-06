@@ -37,8 +37,7 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 ⏿ orient: which failure mode? what trust tier? what does the override or silence target?
 ◇ decide whether to name it in-session or emit a boundary event for operator review.
 ▶ surface the failure state by name; do not absorb it silently.
-⤴ route to hoʻoponopono if correction ceremony is warranted.
-↺ release without accumulating the failure as residue; the name discharges the pressure.
+↺ route to hoʻoponopono if correction ceremony is warranted; release without accumulating the failure as residue; the name discharges the pressure.
 <<~/ahu >>
 
 

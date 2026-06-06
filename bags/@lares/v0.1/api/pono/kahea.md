@@ -39,8 +39,7 @@ Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`
 ⏿ orient: URI form → transclusion edge, push-forward; name-call → render-only invocation, no edge
 ◇ URI form: bind source-to-target, propagation:push-forward; validate no DAG cycles
 ▶ URI form: emit EdgeSugarNode sigil:kahea, family:transclusion; name form: emit SigilNode sigilName:kahea
-⤴ URI form: value flows push-forward into source render; name form: definition expands in place
-↺ confirm edge registered (URI form) or definition resolved (name form); propagation chain intact
+↺ URI form: value flows push-forward into source render; name form: definition expands in place; confirm edge registered (URI form) or definition resolved (name form); propagation chain intact
 
 <<~/ahu >>
 

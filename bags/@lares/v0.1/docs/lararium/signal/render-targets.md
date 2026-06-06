@@ -135,7 +135,7 @@ Never store a surface-rendered sigil as the canonical record.
 
 ### OODA-HA phase glyphs
 
-`✶ -> ⏿ -> ◇ -> ▶ -> {⤴ -> ↺}`
+`✶ -> ⏿ -> ◇ -> ▶ -> ↺`
 
 | Record (ASCII) | Glyph | Phase | OODA-HA |
 |---|---|---|---|
@@ -143,7 +143,7 @@ Never store a surface-rendered sigil as the canonical record.
 | `orient` | `⏿` | Orient | Discord |
 | `decide` | `◇` | Decide | Confusion |
 | `act` | `▶` | Act | Bureaucracy |
-| `hooko-aftermath` | `⤴ ↺` | Hoʻoko & Aftermath | Grummet/Rasa |
+| `hooko-aftermath` | `↺` | Hoʻoko & Aftermath | Grummet/Rasa |
 
 ### Tool Render Modes
 

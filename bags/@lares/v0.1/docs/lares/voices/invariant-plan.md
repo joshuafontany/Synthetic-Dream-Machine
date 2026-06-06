@@ -231,7 +231,7 @@ The entry backlink writes last as a check that the pranala survives.
 
 <<~ ahu #assess >>
 
-## ⤴ ↺ Assess
+## ↺ Assess
 
 ### Exit criteria
 

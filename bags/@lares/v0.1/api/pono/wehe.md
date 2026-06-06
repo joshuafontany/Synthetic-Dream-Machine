@@ -41,8 +41,7 @@ Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a bloc
 ⏿ orient: pragma-alias; the declaration serves as the sigil; no render output; body becomes callable body
 ◇ name MUST be unique in current tiddler scope; params declare positional/named argument surface
 ▶ emit pragma declaration node; TW5 parser registers the procedure at parse-time
-⤴ `<<~ kahea name(args) >>` (name-call form) invokes the procedure at render time in any tiddler that transcludes this one
-↺ confirm callable registered; no stray render output; body round-trips correctly
+↺ `<<~ kahea name(args) >>` (name-call form) invokes the procedure at render time in any tiddler that transcludes this one; confirm callable registered; no stray render output; body round-trips correctly
 
 <<~/ahu >>
 

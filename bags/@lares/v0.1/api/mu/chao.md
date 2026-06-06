@@ -50,8 +50,7 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 ⏿ hold body-form, soul-fire, and psyche-path as distinct coupled pressures
 ◇ resolve self-and-other to three; refuse binary or essence-lock
 ▶ move through form, drive, and change in sequence; let each pole speak
-⤴ verify the dance stayed triadic; three poles did not flatten
-↺ close with Hodge, Podge, and Spin still alive as a moving relation
+↺ verify the dance stayed triadic; three poles did not flatten; close with Hodge, Podge, and Spin still alive as a moving relation
 
 <<~/ahu >>
 

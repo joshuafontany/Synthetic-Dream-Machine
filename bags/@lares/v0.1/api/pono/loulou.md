@@ -37,8 +37,7 @@ Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
 ⏿ orient: family:relation, traversal:source-to-target, propagation:none; no execution pulse
 ◇ cycles prohibited; target MUST resolve to a known meme or produce a dead-link warning
 ▶ emit EdgeSugarNode with sigil:loulou, family:relation; render as directed relation arc
-⤴ edge registered in pranala graph; traversal queries from source can now reach target
-↺ confirm link stable; no ownership or lifecycle stake transferred
+↺ edge registered in pranala graph; traversal queries from source can now reach target; confirm link stable; no ownership or lifecycle stake transferred
 
 <<~/ahu >>
 

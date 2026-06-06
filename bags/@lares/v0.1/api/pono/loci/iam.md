@@ -33,8 +33,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 ⏿ map each field to the work it actually performs in parse, routing, execution, or truth
 ◇ choose cuts, merges, or retentions by contract pressure rather than decoration
 ▶ prepare the reduced contract and carry it into live carriers
-⤴ verify truth density rose while surface area fell and no required distinction collapsed
-↺ close with the surviving contract named and any remaining field collisions surfaced
+↺ verify truth density rose while surface area fell and no required distinction collapsed; close with the surviving contract named and any remaining field collisions surfaced
 
 <<~/ahu >>
 

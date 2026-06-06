@@ -45,8 +45,7 @@ competitive-filter selection posture (serial evaluation, first non-empty result 
 ⏿ orient: heihei = first-match wins; evaluate filter; non-empty result = this body renders; else skip
 ◇ filter runs in currentTiddler context; boolean = at least one result; imperative-conditional intuition misleads here
 ▶ emit conditional block node; render body when filter passes; skip body when filter empty
-⤴ no output when filter fails; output is body content when filter passes
-↺ confirm filter semantics correct; TW5 filters produce result sets — they do not short-circuit as booleans
+↺ no output when filter fails; output is body content when filter passes; confirm filter semantics correct; TW5 filters produce result sets — they do not short-circuit as booleans
 
 <<~/ahu >>
 

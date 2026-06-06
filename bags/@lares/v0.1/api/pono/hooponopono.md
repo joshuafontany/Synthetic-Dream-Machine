@@ -38,8 +38,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 ⏿ name what must be reconciled: conflicts, prior state, residue still outstanding.
 ◇ choose the least powerful write path that preserves trust ordering and leaves nothing unnamed.
 ▶ perform the crossing — create or revise the hostless meme only under explicit authority.
-⤴ verify coherence: file-path, uri-path, capability claims, and known conflicts surface before the canon MOVE holds.
-↺ release prior state with forgiveness; leave unpromoted residue as named session records with forward pressure.
+↺ verify coherence: file-path, uri-path, capability claims, and known conflicts surface before the canon MOVE holds; release prior state with forgiveness; leave unpromoted residue as named session records with forward pressure.
 <<~/ahu >>
 
 

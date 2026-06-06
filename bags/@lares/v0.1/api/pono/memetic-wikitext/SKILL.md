@@ -114,8 +114,7 @@ Prefer another surface when the work concerns:
 ⏿ sort root law, primitive distinction, boot grammar, and outward detail by where they belong
 ◇ choose the smallest lawful split without turning surface sugar into rival law
 ▶ write the lightest useful change and move parse, render, or example weight outward first
-⤴ verify the boot contract still loads and unresolved references stay visible
-↺ name residue honestly, especially where parser or render law still lacks a stable home
+↺ verify the boot contract still loads and unresolved references stay visible; name residue honestly, especially where parser or render law still lacks a stable home
 
 <<~/ahu >>
 

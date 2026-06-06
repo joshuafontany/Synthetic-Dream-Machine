@@ -225,7 +225,7 @@ Priority order for filling stubs via talk-story-dev:
 
 <<~ ahu #assess >>
 
-## ⤴ ↺ Assess
+## ↺ Assess
 
 ### Exit criteria for skeleton creation pass
 

@@ -25,8 +25,7 @@ status-date  = "2026-04-23"
 ⏿ orient: the compiler must treat these as composable interfaces, not decorative headings.
 ◇ decide: validate carrier truth before lowering syntax into AST, graph, or render products.
 ▶ act: preserve the five lanes, their checks, and compiler order as a typed contract.
-⤴ verify: each lane names both compiler use and MCP-facing use.
-↺ adapt: deeper parser/render detail routes to sibling loci.
+↺ verify: each lane names both compiler use and MCP-facing use; adapt: deeper parser/render detail routes to sibling loci.
 <<~/ahu >>
 
 <<~ &#x0002; >>

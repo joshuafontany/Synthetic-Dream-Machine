@@ -117,8 +117,7 @@ Not for:
 ⏿ run the derivation algorithm in full step order; classify resolution state without collapse
 ◇ commit to one resolution posture and one rating posture; keep resolved and declared-unresolved distinct
 ▶ prepare the routing product and cross mutations as bounded Hoʻoko transactions
-⤴ verify ratings stay truthful under unresolved tension and transaction bounds stayed explicit
-↺ name aftermath including all residue and all declared-unresolved addresses
+↺ verify ratings stay truthful under unresolved tension and transaction bounds stayed explicit; name aftermath including all residue and all declared-unresolved addresses
 
 <<~/ahu >>
 

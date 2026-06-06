@@ -35,8 +35,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 ⏿ orient the tier: Tier 0 kumu/active memes, Tier 1 wiki room memes, Tier 2 Automerge Realms, Tier 3 Lares nodes, Tier 4 Commons/Universe horizon
 ◇ MUST promote to island: federation edges, pranala connections, canon ceremonies, epoch changes, membership changes
 ▶ authority-first sync: authenticate → authority graph → visible rooms → manifest → capability ops → CRDT → deltas
-⤴ edge island carries id, capability, offset, epoch, visibility-gate, receipt; offset belongs to the edge not the remote
-↺ confirm sync order maintained; content did not precede authority; relay holds pull not read
+↺ edge island carries id, capability, offset, epoch, visibility-gate, receipt; offset belongs to the edge not the remote; confirm sync order maintained; content did not precede authority; relay holds pull not read
 
 <<~/ahu >>
 

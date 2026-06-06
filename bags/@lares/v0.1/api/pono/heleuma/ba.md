@@ -35,8 +35,7 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 ⏿ orient: is this purely documentation of what exists outside, with no runtime injection route? If yes, this is ba.
 ◇ declare `heleuma = "ba"`; no `source-symbol` required; no promotion fields expected.
 ▶ write `#source` slot as the path-record: enough verbatim content for a reader to reconstruct the artifact.
-⤴ verify: the record is complete enough for reconstruction; no implicit dependencies on unlisted artifacts.
-↺ the path is marked. The psyche holds. The graph knows its own edge.
+↺ verify: the record is complete enough for reconstruction; no implicit dependencies on unlisted artifacts; the path is marked. The psyche holds. The graph knows its own edge.
 
 <<~/ahu >>
 

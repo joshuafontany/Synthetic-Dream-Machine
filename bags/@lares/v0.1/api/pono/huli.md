@@ -43,8 +43,7 @@ directed attention moving through the set.
 ⏿ orient: huli = iterate result set; body renders once per result; currentTiddler bound to each
 ◇ filter produces ordered title list; body template receives each as currentTiddler; empty filter = no output
 ▶ emit iteration block node; wrap body in <$list filter=...>; each result gets one body render
-⤴ output is concatenation of body renders; order follows filter result order
-↺ confirm filter produces expected set; confirm body accesses currentTiddler correctly
+↺ output is concatenation of body renders; order follows filter result order; confirm filter produces expected set; confirm body accesses currentTiddler correctly
 
 <<~/ahu >>
 

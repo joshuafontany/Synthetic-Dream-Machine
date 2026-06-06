@@ -52,8 +52,7 @@ Strong witnesses recur in:
 ⏿ sort by concept-family: foundation, reality tunnels, E-Prime, catma, register logic, degraded states
 ◇ keep this pass additive and low-interpretation; verbatim first, synthesis later
 ▶ place verbatim witness text in separate ahu blocks so later refinement can consume one braid at a time
-⤴ verify each witness still feels load-bearing for the current `lar` stack rather than merely historical
-↺ leave the room richer in source matter, not yet tighter in doctrine
+↺ verify each witness still feels load-bearing for the current `lar` stack rather than merely historical; leave the room richer in source matter, not yet tighter in doctrine
 
 <<~/ahu >>
 

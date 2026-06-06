@@ -82,10 +82,9 @@ A template for invariants to fill.
 ⏿ ???
 ◇ ???
 ▶ ???
-⤴ ???
 ↺ ???
 
-The six `???` markers stand as ritual empty-slots on this template meme only.
+The five `???` markers stand as ritual empty-slots on this template meme only.
 
 Empty-slots here MUST NOT read as unfinished work.
 Empty-slots here MUST NOT invite generative fill here at runtime.

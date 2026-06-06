@@ -35,8 +35,7 @@ A heleuma-ha anchor exists outside the `lar:///` corpus **by nature, not by stag
 ⏿ orient: does removing it break the containing form? If yes, this is ha.
 ◇ declare `heleuma = "ha"`; confirm no `body-sha256` is claimed.
 ▶ write `#source` slot with the verbatim artifact copy; close the quine record.
-⤴ verify: `sync-heleuma` finds the symbol, compares the slot, reports clean.
-↺ the anchor holds. The body persists. No ceremony expected.
+↺ verify: `sync-heleuma` finds the symbol, compares the slot, reports clean; the anchor holds. The body persists. No ceremony expected.
 
 <<~/ahu >>
 

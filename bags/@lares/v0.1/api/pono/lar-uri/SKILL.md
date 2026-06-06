@@ -106,8 +106,7 @@ Prefer another surface when the work concerns:
 ⏿ orient against the scheme law — slots, classes, the single `@`-bag, the fragment
 ◇ decide: valid → carry forward; invalid → name the violation; ambiguous → surface and hold
 ▶ write the lightest correct address or the smallest lawful repair
-⤴ verify ASCII-only path, three-slot root, one `@`-bag, anchor-only fragment
-↺ name residue — any address whose bag binding or class stays unsettled
+↺ verify ASCII-only path, three-slot root, one `@`-bag, anchor-only fragment; name residue — any address whose bag binding or class stays unsettled
 
 <<~/ahu >>
 

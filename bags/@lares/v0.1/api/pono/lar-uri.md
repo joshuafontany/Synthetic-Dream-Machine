@@ -312,8 +312,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 ⏿ orient against scheme law — slot count, path class, `@`-bag placement
 ◇ decide: valid → carry forward; invalid → surface violation; ambiguous → surface and hold
 ▶ confirm the path holds ASCII only
-⤴ verify the three-word root and the single `@`-bag segment
-↺ close — address confirmed or violation named
+↺ verify the three-word root and the single `@`-bag segment; close — address confirmed or violation named
 
 <<~/ahu >>
 

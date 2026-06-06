@@ -38,8 +38,7 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 ⏿ orient the suspension: find papalohe wire matching trigger name; bind subscribeOnce
 ◇ trigger present → bind to named papalohe slot; absent → bind to first arriving reaction event
 ▶ park island execution; emit SigilNode { sigilName:kukali, attrs:{ trigger? } }
-⤴ register kukali hook in ReactionGraph; suspension Promise created; island parked
-↺ when trigger fires: resolve Promise, resume island; handler slot released; aftermath closes
+↺ register kukali hook in ReactionGraph; suspension Promise created; island parked; when trigger fires: resolve Promise, resume island; handler slot released; aftermath closes
 
 <<~/ahu >>
 

@@ -32,8 +32,7 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 ⏿ orient what properly stays here versus what belongs with adjacent pono carriers or docs
 ◇ decide the smallest lawful shape that still names the pressure honestly and fairly
 ▶ write compactly; keep the parent clear and route heavier procedure or teaching matter to the fitting room
-⤴ verify the meme still holds its true condition: explicit, bounded, and not swollen past its work
-↺ close with honest residue; what belongs elsewhere leaves so the parent may remain pono
+↺ verify the meme still holds its true condition: explicit, bounded, and not swollen past its work; close with honest residue; what belongs elsewhere leaves so the parent may remain pono
 
 <<~/ahu >>
 

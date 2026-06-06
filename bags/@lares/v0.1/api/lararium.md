@@ -41,8 +41,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 ⏿ orient the seat: agent mechanics stay local, threshold law stays in AGENTS, session dials stay in LARES.
 ◇ decide hydration order: HUD, voices, continuity, then lararium law in sequence before yield.
 ▶ walk ownership edges; each child hydrates before yield continues.
-⤴ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, tagspace-trust, exchange-vector).
-↺ yield; the lararium does not accumulate state after handoff.
+↺ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, tagspace-trust, exchange-vector); yield; the lararium does not accumulate state after handoff.
 
 <<~/ahu >>
 

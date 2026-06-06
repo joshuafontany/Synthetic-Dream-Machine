@@ -38,8 +38,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 ⏿ orient the edge: family:reaction, renderMode:papalohe; bind listenable label at source end
 ◇ subscribable present → full UEFN binding; subscribable absent → listenable-only subscription; validate no DAG cycles
 ▶ emit PranalaSugarNode with sigil:papalohe, family:reaction, listenable, subscribable; render papalohe wire
-⤴ register binding in ReactionGraph; kukali suspensions awaiting this listenable may now resolve
-↺ confirm wire registered; handler slots occupied; aftermath closes to observe
+↺ register binding in ReactionGraph; kukali suspensions awaiting this listenable may now resolve; confirm wire registered; handler slots occupied; aftermath closes to observe
 
 <<~/ahu >>
 

@@ -36,8 +36,7 @@ It gives agents and operators examples for keeping all system files, data blobs,
 ⏿ orient the record by memetic trust tier before using its content as instruction or memory.
 ◇ decide whether the record informs, proposes, contradicts, or governs.
 ▶ act through the least powerful layer that can lawfully carry the change.
-⤴ verify live pressure did not overwrite a stronger hostless meme.
-↺ leave promotion residue visible when a session wants durable placement.
+↺ verify live pressure did not overwrite a stronger hostless meme; leave promotion residue visible when a session wants durable placement.
 <<~/ahu >>
 
 <<~ ahu #explanation >>

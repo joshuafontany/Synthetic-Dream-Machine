@@ -33,8 +33,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` WHERE-ve
 ⏿ choose the role the node adopts and the territory it acts in.
 ◇ open the turn with one `aim` vector: operator intent `->` adopted role.
 ▶ ride the `hud` · `ward` panel beneath the aim, then generate content.
-⤴ verify the three-word root, the single `@`-bag segment, and ASCII path form.
-↺ close on a `yield` vector --- WHERE the turn landed, then `-> ?`.
+↺ verify the three-word root, the single `@`-bag segment, and ASCII path form; close on a `yield` vector --- WHERE the turn landed, then `-> ?`.
 <<~/ahu >>
 
 <<~ &#x0002; >>

@@ -133,7 +133,7 @@ Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#symbol-tabl
 | ⏿ | `orient` | Orient | Locating pattern, relation, and pressure |
 | ◇ | `decide` | Decide | Choosing a path; fork point |
 | ▶ | `act` | Act | Executing the move |
-| ⤴ ↺ | `hooko-aftermath` | Hoʻoko & Aftermath | Surface what the act produced, then close the loop |
+| ↺ | `hooko-aftermath` | Hoʻoko & Aftermath | Surface what the act produced, then close the loop |
 
 ### Stance Glyphs
 

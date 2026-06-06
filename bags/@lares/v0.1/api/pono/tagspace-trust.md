@@ -35,8 +35,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 ⏿ separate hostless canonical memes from hostful exchange records from data memes without merging their force.
 ◇ choose the higher-precedence source when live session pressure collides with invariant law.
 ▶ surface the trust-boundary event instead of silently rewriting the graph.
-⤴ verify the cited meme tier outranks the live record before applying behavior.
-↺ leave promotion pressure visible when a session claim wants durable placement.
+↺ verify the cited meme tier outranks the live record before applying behavior; leave promotion pressure visible when a session claim wants durable placement.
 <<~/ahu >>
 
 <<~ &#x0002; >>

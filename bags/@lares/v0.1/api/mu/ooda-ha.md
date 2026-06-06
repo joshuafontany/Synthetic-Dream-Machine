@@ -25,7 +25,7 @@ gear-shift-disclosure = "audible"
 
 # OODA-HA
 
-`✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> { ⤴ Hoʻoko -> ↺ Aftermath }`
+`✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> ↺ Hoʻoko-Aftermath`
 
 Active in i kēia manawa.
 The loop spins five phases, not four.
@@ -54,7 +54,7 @@ A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned,
 * **⏿ Orient** — Discord — Dr. Van Van Mojo
 * **◇ Decide** — Confusion — Sri Syadasti
 * **▶ Act** — Bureaucracy — Zarathud
-* **⤴ ↺ Hoʻoko & Aftermath** — The Elder Malaclypse
+* **↺ Hoʻoko & Aftermath** — The Elder Malaclypse
 
 <<~/ahu >>
 
@@ -163,8 +163,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 ⏿ orient visibility posture against the active Level band
 ◇ decide which forward declarations surface — glyph, attention, intent, or consequence
 ▶ emit phase markers at the correct band density; no phantom phases
-⤴ execute each phase turn; ensure aftermath closes and loops back to observe
-↺ close — confirm loop visibility matched the requested band; flag drift
+↺ execute each phase turn; ensure aftermath closes and loops back to observe; close — confirm loop visibility matched the requested band; flag drift
 
 <<~/ahu >>
 
@@ -311,7 +310,7 @@ Canonical TOML form. This meme holds the source for `OODA_HA_5`.
 ooda-ha-5 = ["act", "decide", "orient", "observe", "aftermath"]
 
 # OODA glyph sequence — maps phase index to control sigil
-ooda-glyphs = ["✶", "⏿", "◇", "▶", "⤴", "↺"]
+ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 ```
 
 <<~/ahu >>

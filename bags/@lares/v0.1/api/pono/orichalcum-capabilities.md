@@ -35,8 +35,7 @@ Authority gate for rooms, edge islands, and canon MOVE.
 ⏿ orient the authority ladder: pull/read/write/sync/admin/delegate; locate the principal types
 ◇ crypto validity is necessary but not sufficient — Lararium caveats must also pass
 ▶ gate the action at the ability ladder; reject on first caveat failure; emit capability proof
-⤴ authority travels with the graph; revocation is forward-only; prior keys remain for prior sediment
-↺ confirm gate passed; principal seated; caveats cleared; no ambient authority leaks
+↺ authority travels with the graph; revocation is forward-only; prior keys remain for prior sediment; confirm gate passed; principal seated; caveats cleared; no ambient authority leaks
 
 <<~/ahu >>
 

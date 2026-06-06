@@ -26,8 +26,7 @@ body-sha256 = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"
 ⏿ orient: identical abilities trivially imply; `pull` functions as a relay-law exception — it implies only itself.
 ◇ decide: find both positions in ABILITY_LADDER; `have` implies `need` iff `haveIdx >= needIdx`.
 ▶ return true or false — one predicate, no side effects.
-⤴ verify: the relay-law exception (pull does not imply read) stands as the only non-monotonic case.
-↺ pure; runs at gate time before any corpus load; must never block on I/O.
+↺ verify: the relay-law exception (pull does not imply read) stands as the only non-monotonic case; pure; runs at gate time before any corpus load; must never block on I/O.
 
 <<~/ahu >>
 

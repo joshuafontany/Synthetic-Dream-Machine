@@ -32,8 +32,7 @@ status-date  = "2026-04-24"
 ⏿ orient: build-system depsets, temporal KG bi-temporal edges, and UEFN ECS plane separation each name the same missing structure.
 ◇ decide: three-tier traversal model, content-addressed artifacts, pranala parser over actual carrier text.
 ▶ act: write child memes for meme data model, traversal rules, parser design, and artifact contract.
-⤴ verify: Tier 0 declared-core and Tier 1 graph walk converge on the same 14 memes before proceeding.
-↺ surface one open question — `? ->` socket resolution depth — before implementing the parser.
+↺ verify: Tier 0 declared-core and Tier 1 graph walk converge on the same 14 memes before proceeding; surface one open question — `? ->` socket resolution depth — before implementing the parser.
 <<~/ahu >>
 
 <<~ &#x0002; >>

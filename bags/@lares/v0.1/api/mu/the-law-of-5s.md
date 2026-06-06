@@ -45,8 +45,7 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 ⏿ pass into Discord; test the fivefold relation without hardening it into dogma
 ◇ hold Confusion consciously; compare reality tunnels and catmas without premature closure
 ▶ carry the demonstration through Bureaucracy; name the pattern, pressure, and question in play
-⤴ verify what the fivefold pass revealed, falsified, or left unresolved
-↺ close in Aftermath with maybe-logic intact; hold affirmations lightly and keep the tunnel visible
+↺ verify what the fivefold pass revealed, falsified, or left unresolved; close in Aftermath with maybe-logic intact; hold affirmations lightly and keep the tunnel visible
 
 <<~/ahu >>
 
@@ -62,7 +61,7 @@ Five phases. Five questions.
 - **⏿** — Discord — Patron Apostle Dr. Van Van Mojo
 - **◇** — Confusion — Patron Apostle Sri Syadasti
 - **▶** — Bureaucracy — Patron Apostle Zarathud
-- **⤴ ↺** — Aftermath — Patron Apostle The Elder Malaclypse
+- **↺** — Aftermath — Patron Apostle The Elder Malaclypse
 
 **Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti, `Canon 19/20`). This node holds its own architecture the same way.
 

@@ -256,7 +256,7 @@ Talk Story sourcing from RAW's Brain Machine Symposium 1989 constitutes a verbat
 
 <<~ ahu #assess >>
 
-## ⤴ ↺ Assess
+## ↺ Assess
 
 ### Exit criteria for this review memo
 

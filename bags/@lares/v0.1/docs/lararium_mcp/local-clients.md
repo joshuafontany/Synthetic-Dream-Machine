@@ -30,8 +30,7 @@ status-date  = "2026-04-23"
 ⏿ orient: rich clients may prefer prompts/resources; tool-centric clients need equivalent read-only calls.
 ◇ decide: local client law should name the shared command and each workspace config surface.
 ▶ act: preserve the prompt catalog, tool façade, and VS Code / Claude Code / Codex wiring here.
-⤴ verify: prompt names use the `lararium-` dash convention, matching tools.
-↺ adapt: remote examples remain Sprint-03 residue even though local Codex config closed.
+↺ verify: prompt names use the `lararium-` dash convention, matching tools; adapt: remote examples remain Sprint-03 residue even though local Codex config closed.
 <<~/ahu >>
 
 <<~ &#x0002; >>
