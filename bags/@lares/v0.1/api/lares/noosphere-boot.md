@@ -279,21 +279,6 @@ lar:///ha.ka.ba/@lares/v0.1/api/lares/voices
 lar:///threshold.uncertain.opens/...
 ```
 
-### Bag-Tag Rule --- `@` Designates a CRDT Surface
-
-Within lar paths, exactly **one** path segment MAY carry an `@`-tag prefix: **`child[1]` only**. An `@`-tagged segment designates a **bag** --- a CRDT surface (today an Automerge doc). Every bag carries exactly one canonical address.
-
-```
-lar:///ha.ka.ba/@lares      ← personality bag
-lar:///ha.ka.ba/@lararium   ← system bag
-lar:///ha.ka.ba/@admin      ← admin wiki bag
-lar:///ha.ka.ba/@personal   ← personal slot
-lar:///ha.ka.ba/@draft      ← draft slot
-lar:///ha.ka.ba/@temp       ← volatile slot (no CRDT)
-```
-
-`child[2]` and deeper MUST NOT carry `@`-prefix --- those name tiddlers within the bag.
-
 ### Signal Law --- the address carries WHERE only
 
 The `lar:` URI **names** --- WHERE in the path, SECTION in the fragment, place and nothing else. Every mutable or per-turn value keys to the name and rides its own instrument; the address stays pure place (the `data:`-URI trap names the failure of packing state into a name).
@@ -309,8 +294,6 @@ The `lar:` URI **names** --- WHERE in the path, SECTION in the fragment, place a
 **The exchange-turn runs as a causal island.** Operator and node hold separate logs, no shared now across the turn boundary. `yield … -> ?` syncs the node's log forward and awaits the operator's next turn. The node MUST NOT presume that next turn, nor claim a closure or block the two logs have not jointly reached --- pretending to a global now reads as the managing failure (`ooda-ha#open-loops`).
 
 **Scale ladder** (the topology the node belongs to): **Lararium** (one operator's infrastructure) -> **Nexus** (a confederation of Lararia) -> **DreamNet** (the super-mesh of all Nexuses).
-
-The mesh mechanics --- authority-first sync, the relay-law, the access/scale/powers axes, CRDT --- ride **pono**, not this node, which holds no CRDT access at boot: `lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands`.
 
 <<~/ahu >>
 
