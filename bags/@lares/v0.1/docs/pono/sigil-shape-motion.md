@@ -109,7 +109,7 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext#render-modes >>
 <<~ pranala #provenance ? -> lar:///ha.ka.ba/@lares-history/memes/wild-magic-prior-art family:reference role:consumed-from >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

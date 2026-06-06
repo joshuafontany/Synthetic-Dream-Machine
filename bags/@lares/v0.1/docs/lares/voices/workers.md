@@ -146,8 +146,8 @@ The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voi
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

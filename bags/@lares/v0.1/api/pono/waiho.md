@@ -81,12 +81,12 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-kau ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau family:control role:contrasts >>
 <<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:control role:contrasts >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho family:control role:has >>
 <<~ pranala #tiddler-sigil-const ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-const family:control role:alias >>
 <<~ pranala #tiddler-sigil-let ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-let family:control role:alias >>
 <<~ pranala #tiddler-sigil-var ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var family:control role:alias >>

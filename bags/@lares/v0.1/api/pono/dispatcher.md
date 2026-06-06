@@ -82,7 +82,7 @@ TW5 wikitext body:
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher family:control role:has >>
 
 <<~/ahu >>
 

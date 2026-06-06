@@ -352,8 +352,8 @@ Promotion path: when the Session Wiki RE ships and the vocabulary lock passes a 
 <<~ loulou https://dev.epicgames.com/documentation/fortnite/create-custom-npc-behavior-in-unreal-editor-for-fortnite >>
 <<~ loulou https://dev.epicgames.com/documentation/fortnite/understanding-npc-behavior-in-unreal-editor-for-fortnite >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #sibling-protocols ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols family:observe role:sibling >>
 <<~ pranala #cites-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:observe role:cites >>
 <<~ pranala #cites-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:observe role:cites >>

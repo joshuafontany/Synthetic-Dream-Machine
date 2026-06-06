@@ -100,7 +100,7 @@ It governs how often copulas manifest in the first place.
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
 - `lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism`
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
 
 

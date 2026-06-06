@@ -58,7 +58,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 ## Edges
 
 <<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pono family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pono family:control role:has >>
 <<~ pranala #tiddler-sigil-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-constraint family:control role:alias >>
 
 <<~/ahu >>

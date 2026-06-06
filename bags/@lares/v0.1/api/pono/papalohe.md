@@ -129,12 +129,12 @@ Two values, distinct Verse-side origins:
 
 ## Edges
 
-<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph family:control role:implements >>
+<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph family:control role:has >>
 <<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:relation >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

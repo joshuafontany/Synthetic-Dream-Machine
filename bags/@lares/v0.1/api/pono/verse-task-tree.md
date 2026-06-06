@@ -263,7 +263,7 @@ async-aware, deterministic semantics with the concurrency operators.
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:has >>
 <<~ pranala #to-lele ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele family:relation role:defines >>
 <<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation role:defines >>
 <<~ pranala #to-puka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka family:relation role:defines >>

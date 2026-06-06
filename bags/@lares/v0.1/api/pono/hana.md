@@ -60,7 +60,7 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hana family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hana family:control role:has >>
 <<~ pranala #tiddler-sigil-task ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:alias >>
 
 <<~/ahu >>

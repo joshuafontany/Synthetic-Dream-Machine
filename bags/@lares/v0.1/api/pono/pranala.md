@@ -139,7 +139,7 @@ Edge sigil syntactic sugar:
 * `references` — source observes target without lifecycle stake
 * `composes` — source layers opinion over target with strength ordering
 * `constrains` — source imposes a declarative rule on target without execution pulse
-* `implements` — source carries the target as a **component** (it `#has` it); the component affords its capability. Composition, not nominal-type satisfaction.
+* `has` — source carries the target as a **component** (it `#has` it); composition / possession, never the `is-a` copula.
 
 `cardinality` — structural limit (MAY carry):
 * `one-to-one`
@@ -248,9 +248,9 @@ reaction-roles = ["subscription", "handler", "callback"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #edge-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
 <<~ pranala #edge-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
 <<~ pranala #edge-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
@@ -259,7 +259,7 @@ reaction-roles = ["subscription", "handler", "callback"]
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala family:control role:has >>
 <<~/ahu >>
 
 

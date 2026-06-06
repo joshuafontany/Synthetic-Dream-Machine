@@ -210,7 +210,7 @@ Run this against any new code before merging:
 
 ## Edges
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
 <<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
 <<~ pranala #to-quine ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles family:relation >>

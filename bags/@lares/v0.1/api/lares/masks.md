@@ -124,8 +124,8 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~/ahu >>
 
 

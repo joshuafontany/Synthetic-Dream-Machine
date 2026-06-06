@@ -120,12 +120,12 @@ confidence-bounded = true
 
 ## Edges
 
-<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
 <<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka family:control role:has >>
 <<~ pranala #tiddler-sigil-shadow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-shadow family:control role:alias >>
 <<~/ahu >>
 

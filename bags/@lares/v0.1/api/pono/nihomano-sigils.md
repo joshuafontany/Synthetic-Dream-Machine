@@ -251,7 +251,7 @@ lives in a tiddler.
 ## Edges
 
 <<~ pranala #spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:governs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/tags/SharktoothSigil family:control role:implements >>
+<<~ pranala #tag ? -> lar:///ha.ka.ba/tags/SharktoothSigil family:control role:has >>
 <<~ pranala #to-ahu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu family:relation >>
 <<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
 <<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>

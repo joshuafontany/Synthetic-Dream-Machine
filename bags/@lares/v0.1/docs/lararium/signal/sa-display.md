@@ -122,8 +122,8 @@ Per-position stance modifier glyph design remains in motion; current record-form
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/tagspace >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

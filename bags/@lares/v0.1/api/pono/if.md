@@ -25,7 +25,7 @@ English alias for `heihei`. See canonical spec:
 `\if` and `heihei` share identical semantics. Both test a TW5 filter condition and render
 the body only on a non-empty result. Use whichever reads more naturally in context.
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

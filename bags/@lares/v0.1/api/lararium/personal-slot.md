@@ -452,7 +452,7 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 ## Edges
 
 <<~ pranala #residency-model ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model family:relation role:builds-on >>
-<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:extends >>
+<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:has >>
 <<~ pranala #keyhive-person-group ? -> lar:///ha.ka.ba/@lares/v0.1/api/keyhive/person-group family:relation role:scoped-by >>
 <<~ pranala #lar-uri-bag-tag ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule family:relation role:governed-by >>
 <<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation role:grain-debt-homed-in >>

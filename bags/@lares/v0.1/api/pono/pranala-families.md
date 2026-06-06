@@ -59,7 +59,7 @@ known-families = ["control", "relation", "observe", "transclusion", "dataflow", 
 
 # Role vocabularies — roleRecommended families should use these; others accept free-form
 [family-roles]
-control    = ["owns", "implements", "extends", "configures", "delegates"]
+control    = ["owns", "has", "configures", "delegates"]
 dataflow   = ["reads", "writes", "streams", "buffers", "pipes"]
 message    = ["sends", "receives", "publishes", "subscribes", "replies"]
 reaction   = ["triggers", "handles", "observes", "throttles", "debounces", "subscription"]
@@ -114,8 +114,7 @@ confidence-bounded  = false
 The primary composition grammar. Most meme graphs lead with control edges.
 
 Role semantics (do not conflate):
-- `extends`    — single base meme (Verse single-inheritance position; one edge per type meme)
-- `implements` — component attachment (ECS: the component list; N per meme; each component affords a capability)
+- `has`        — composition / possession: source carries the target as a component (N per meme). Replaces the retired `implements`/`extends` — a verb (Verse-core `∃` / possession), never the `is-a` copula.
 - `owns`       — structural ownership / containment at the type level (not spatial instance placement)
 
 These are all distinct from the ahu-slot tree (`fragment-parent` tiddler field),
@@ -169,17 +168,17 @@ spatial    = "light-blue"
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:extends >>
-<<~ pranala #tiddler-sigil-family-control ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-relation ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-observe ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-transclusion ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-dataflow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-message ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-reaction ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction family:control role:implements >>
-<<~ pranala #tiddler-sigil-family-spatial ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ pranala #tiddler-sigil-family-control ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control family:control role:has >>
+<<~ pranala #tiddler-sigil-family-relation ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation family:control role:has >>
+<<~ pranala #tiddler-sigil-family-observe ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe family:control role:has >>
+<<~ pranala #tiddler-sigil-family-transclusion ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion family:control role:has >>
+<<~ pranala #tiddler-sigil-family-dataflow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow family:control role:has >>
+<<~ pranala #tiddler-sigil-family-message ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message family:control role:has >>
+<<~ pranala #tiddler-sigil-family-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint family:control role:has >>
+<<~ pranala #tiddler-sigil-family-reaction ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction family:control role:has >>
+<<~ pranala #tiddler-sigil-family-spatial ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial family:control role:has >>
 
 <<~/ahu >>
 

@@ -125,7 +125,7 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 ## Edges
 
 <<~ pranala #to-impl ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter family:control role:implemented-by >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 

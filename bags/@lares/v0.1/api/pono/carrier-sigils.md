@@ -164,8 +164,8 @@ trigger = "end of stream"
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:extends >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #to-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 <<~ pranala #to-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:depends >>
 <<~ pranala #to-mu ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu family:observe role:observes >>
 

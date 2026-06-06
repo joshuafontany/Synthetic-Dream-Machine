@@ -73,7 +73,7 @@ export function abilityImplies(have: OrichalcumAbility, need: OrichalcumAbility)
 
 <<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
 <<~ pranala #orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:depends >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

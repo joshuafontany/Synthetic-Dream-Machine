@@ -252,7 +252,7 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 ## Edges
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pattern-integrity family:relation >>
 <<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
 <<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>

@@ -65,7 +65,7 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-widget family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-widget family:control role:has >>
 <<~ pranala #to-dispatcher ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher family:relation >>
 <<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
 

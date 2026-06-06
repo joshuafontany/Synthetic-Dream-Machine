@@ -159,8 +159,8 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~/ahu >>
 
 

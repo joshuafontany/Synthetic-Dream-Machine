@@ -93,7 +93,7 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-readiness-ts ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/readiness-keys family:control role:implements >>
+<<~ pranala #to-readiness-ts ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/readiness-keys family:control role:has >>
 <<~ pranala #to-open-phases ? -> lar:///ha.ka.ba/@lararium/tw5/schema/open-phases family:control role:depends >>
 <<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
 

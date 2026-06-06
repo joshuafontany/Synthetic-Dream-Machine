@@ -166,7 +166,7 @@ Each dot-separated position corresponds to one band. Reading left to right zooms
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext#law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

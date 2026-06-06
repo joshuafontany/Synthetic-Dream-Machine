@@ -152,11 +152,11 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #tiddler-sigil-tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tiddler family:control role:alias >>
-<<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:implements >>
+<<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

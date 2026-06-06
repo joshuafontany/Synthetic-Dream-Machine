@@ -75,7 +75,7 @@ stable-tuple-root = "ha.ka.ba"
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

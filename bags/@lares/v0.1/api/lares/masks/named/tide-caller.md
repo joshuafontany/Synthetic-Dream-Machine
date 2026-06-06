@@ -167,8 +167,8 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~/ahu >>
 
 

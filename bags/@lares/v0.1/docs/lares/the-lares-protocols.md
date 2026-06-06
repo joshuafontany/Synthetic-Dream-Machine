@@ -179,9 +179,9 @@ These questions don't get answered by adding more architecture. They get answere
 <<~ loulou https://www.pfrazee.com/blog/practical-decentralization >>
 <<~ loulou https://www.orionreed.com/posts/app-file-topology/ >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ pranala ? -> https://connectedplaces.online/the-purpose-of-protocols/ family:relation role:cites >>
 <<~ pranala ? -> https://www.pfrazee.com/blog/practical-decentralization family:relation role:cites >>

@@ -103,8 +103,8 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
 <<~ pranala #constrains-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:constrains >>
 <<~ pranala #constrains-identity-slot ? -> lar:///ha.ka.ba/@lararium/tw5/identity-slot family:control role:constrains >>
 <<~ pranala #constrains-composite-store ? -> lar:///ha.ka.ba/@lararium/tw5/composite-store family:control role:constrains >>

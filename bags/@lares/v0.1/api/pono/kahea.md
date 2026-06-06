@@ -142,13 +142,13 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 ## Edges
 
-<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
 <<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea family:control role:has >>
 <<~ pranala #tiddler-sigil-transclude ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-transclude family:control role:alias >>
 <<~ pranala #tiddler-sigil-import ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-import family:control role:alias >>
 <<~/ahu >>

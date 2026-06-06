@@ -299,9 +299,9 @@ causal-island-may = [
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:depends >>
-<<~ pranala #extends-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:extends >>
+<<~ pranala #extends-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
 <<~ pranala #to-research-streams ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:grounded-by >>
 
 <<~/ahu >>

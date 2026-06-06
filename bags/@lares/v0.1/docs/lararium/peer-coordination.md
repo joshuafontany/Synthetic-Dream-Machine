@@ -200,8 +200,8 @@ island definition bundle to new nodes.
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
 <<~ pranala #requires-island-file ? -> lar:///ha.ka.ba/@lararium/tw5/island family:control role:requires >>
 <<~ pranala #constrains-reaction-engine ? -> lar:///ha.ka.ba/@lararium/tw5/reaction-engine family:control role:constrains >>
 <<~ pranala #future-keyhive ? -> lar:///ha.ka.ba/@lararium/tw5/keyhive family:future role:upgrade-path >>

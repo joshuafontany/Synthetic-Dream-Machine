@@ -208,7 +208,7 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:relation role:uses >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation role:uses >>
-<<~ pranala #to-kumu-device ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device family:control role:implements >>
+<<~ pranala #to-kumu-device ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device family:control role:has >>
 <<~ pranala #to-pranala-families ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families family:control role:governed-by >>
 
 <<~/ahu >>

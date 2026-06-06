@@ -143,8 +143,8 @@ Three-word coordinate `w1.w2.w3`: noun · adjective · verb. All three slots req
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/sa-display >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

@@ -297,8 +297,8 @@ After the extraction pass closes, these questions remain for a future consolidat
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences/proactive-surfacing >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

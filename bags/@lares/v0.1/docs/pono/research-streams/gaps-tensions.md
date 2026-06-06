@@ -125,7 +125,7 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ pranala #tracks-annex ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:observe role:references >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

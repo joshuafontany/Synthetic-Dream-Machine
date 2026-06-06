@@ -151,9 +151,9 @@ infrastructure rather than rolling a separate exporter.
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:implements >>
-<<~ pranala #extends-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:extends >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
+<<~ pranala #extends-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
 <<~ pranala #uses-composite-store ? -> lar:///ha.ka.ba/@lararium/tw5/composite-store family:control role:uses >>
 <<~ pranala #uses-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:uses >>
 

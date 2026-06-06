@@ -146,7 +146,7 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-hoolele ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele family:control role:implements >>
+<<~ pranala #tiddler-sigil-hoolele ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele family:control role:has >>
 <<~ pranala #to-lele ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele family:relation role:contrast >>
 <<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>
 

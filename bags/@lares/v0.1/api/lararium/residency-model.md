@@ -253,8 +253,8 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 <<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot family:relation role:specializes >>
 <<~ pranala #lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
 <<~ pranala #verb-tiddler ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler family:relation role:carried-by >>
-<<~ pranala #invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/nalu-engine >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
 <<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>

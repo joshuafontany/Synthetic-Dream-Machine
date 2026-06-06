@@ -144,10 +144,10 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #tiddler-record ? -> lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record family:data role:depends >>
 <<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:data role:depends >>
-<<~ pranala #source-file ? -> packages/lararium-tw5/src/corpus-sources.ts family:code role:implements >>
+<<~ pranala #source-file ? -> packages/lararium-tw5/src/corpus-sources.ts family:code role:has >>
 
 <<~/ahu >>
 

@@ -63,7 +63,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-hui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hui family:control role:implements >>
+<<~ pranala #tiddler-sigil-hui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hui family:control role:has >>
 <<~ pranala #tiddler-sigil-sync ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-sync family:control role:alias >>
 
 <<~/ahu >>

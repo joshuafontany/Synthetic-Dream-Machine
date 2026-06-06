@@ -71,7 +71,7 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-puka ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-puka family:control role:implements >>
+<<~ pranala #tiddler-sigil-puka ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-puka family:control role:has >>
 <<~ pranala #tiddler-sigil-rush ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-rush family:control role:alias >>
 <<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation role:contrast >>
 <<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>

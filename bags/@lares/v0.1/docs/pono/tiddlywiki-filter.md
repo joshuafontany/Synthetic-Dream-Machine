@@ -161,7 +161,7 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 - `lar:///ha.ka.ba/@lares/v0.1/api/grammars/x-tiddlywiki-filter`
 - `lar:///ha.ka.ba/@lares/v0.1/api/grammars/x-tiddlywiki-filter/SKILL`
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
 
 

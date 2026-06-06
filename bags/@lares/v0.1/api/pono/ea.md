@@ -71,7 +71,7 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 | Manifest delivery | courier → island | `"manifest"` |
 | Ea declaration | island → courier | `"ea"` |
 
-<<~ pranala #island-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:implements >>
+<<~ pranala #island-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:has >>
 
 <<~/ahu >>
 
@@ -110,7 +110,7 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 ## Edges
 
 <<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:parent >>
-<<~ pranala #island-protocol-impl ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:implements >>
+<<~ pranala #island-protocol-impl ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 

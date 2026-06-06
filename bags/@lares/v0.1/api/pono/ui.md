@@ -61,7 +61,7 @@ TW5 filter expansion:
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-query family:control role:alias >>
 
-<<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:implements >>
+<<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

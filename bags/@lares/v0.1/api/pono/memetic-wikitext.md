@@ -338,7 +338,7 @@ A carrier with an identity block, a worksite, and a typed edge:
 <<~ ahu #iam >> … TOML … <<~/ahu >>
 <<~ ahu #head >>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>.
-<<~ pranala #governs ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #governs ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 ```
 
@@ -388,7 +388,7 @@ A canvas reaction wire (flow surface):
 | TW5 `<$list>` filter / iterate | `<<~ heihei … >>` / `<<~ huli … >>` |
 | Verse `sync`/`race`/`rush`/`branch` | `<<~ hui >>` / `holo` / `puka` / `lele` |
 | Verse device event binding | `<<~ papalohe … >>` (reaction) |
-| Blueprint exec-wire vs data-wire | `reaction` (event) vs `dataflow` (value) |
+| Verse event (`listenable`/subscribe) vs expression value | `reaction` (event) vs `dataflow` (value) |
 
 <<~/ahu >>
 

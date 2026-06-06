@@ -113,8 +113,8 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/save-path >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/catalog-doc >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

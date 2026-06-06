@@ -32,7 +32,7 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tick family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tick family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 
 <<~/ahu >>

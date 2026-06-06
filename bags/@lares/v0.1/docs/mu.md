@@ -73,8 +73,8 @@ AST reader: read the sockets, then route.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 

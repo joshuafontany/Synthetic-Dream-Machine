@@ -78,8 +78,8 @@ Current comparison surfaces:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -117,7 +117,7 @@ close-pattern = '<<~\/wehe\s*>>'
 <<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
 <<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:control role:has >>
 <<~ pranala #tiddler-sigil-define ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define family:control role:alias >>
 <<~/ahu >>
 

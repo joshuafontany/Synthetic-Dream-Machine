@@ -112,14 +112,14 @@ This maps directly to the Ink & Switch island model: each automerge object is a 
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
+<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:control role:instantiates >>
 <<~ pranala #to-waiho ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho family:control role:contrasts >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:control role:wires-via >>
-<<~ pranala #to-widget ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/widgets/kau family:control role:implements >>
+<<~ pranala #to-widget ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/widgets/kau family:control role:has >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

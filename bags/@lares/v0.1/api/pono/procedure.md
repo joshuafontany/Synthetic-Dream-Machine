@@ -25,7 +25,7 @@ English alias for `wehe`. See canonical spec:
 `\procedure` and `wehe` share identical semantics. Both declare a named callable body.
 Use whichever reads more naturally in context.
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

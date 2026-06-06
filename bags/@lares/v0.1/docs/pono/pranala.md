@@ -109,7 +109,7 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
 
 

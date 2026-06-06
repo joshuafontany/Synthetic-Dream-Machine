@@ -203,8 +203,8 @@ exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #tier0-dispatch ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #tier0-dispatch ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:has >>
 <<~ pranala #depends-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:depends >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:dataflow role:reads >>
 <<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:dataflow role:reads >>

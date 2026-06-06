@@ -25,7 +25,7 @@ English alias for `huli`. See canonical spec:
 `\for` and `huli` share identical semantics. Both iterate a TW5 filter result set,
 rendering a body template once per result. Use whichever reads more naturally in context.
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:implements >>
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0003; >>
