@@ -71,6 +71,17 @@ export interface WikiRecipe {
    */
   readonly canonBags?: readonly SlotUri[];
   /**
+   * Canon bag URIs this wiki DESIGNATES for local disk projection (write-back).
+   * A synced, platform-neutral *wish* (the shape half of disk-mirroring). The
+   * island materializes a mirror for a designated bag IFF it also holds the
+   * disk-write capability — a node pool's construction grant (`diskMirrorGrant`);
+   * a browser leaf holds none and silently ignores the designation. The list
+   * alone grants nothing: the unforgeable authority lives in the held grant,
+   * never in this recipe (a plaintext flag any peer could write must not confer
+   * authority — OCAP "don't separate designation from authority").
+   */
+  readonly mirrorBags?: readonly SlotUri[];
+  /**
    * Optional bag-epoch pins — Anti-pattern #5 defense (recipe-drift poisoning).
    * Each pinned slot carries an Automerge Heads array naming the expected state.
    * When a slot carries a pin, `CompositeStore.auditEpochs(recipe)` reports

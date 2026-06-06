@@ -20,7 +20,7 @@ import { readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { Repo } from "@automerge/automerge-repo";
-import { automergeLoad, ENGINE_CORE_ID } from "@lararium/mesh";
+import { automergeLoad, ENGINE_CORE_ID, LARARIUM_BAG } from "@lararium/mesh";
 import type { LarDoc } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
@@ -64,14 +64,17 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
     const pool = new VesselIslandPool({
       workerScriptUrl: ISLAND_JS,
       mainRepo:        vesselRepo,
-      laraiumDocUrl:   laraiumHandle.url,
     });
 
     try {
       // mountWiki awaits ea. Timeout → island failed to resolve bytes from CRDT.
       await pool.mountWiki(WIKI_ID, {
-        docHandle: wikiHandle,
         coreHash,
+        recipe:   { wikiSlug: "test" },
+        resolver: {
+          [LARARIUM_BAG]:          laraiumHandle.url,
+          "lar:///ha.ka.ba/@test": wikiHandle.url,
+        },
       });
 
       expect(pool.tier(WIKI_ID)).toBe("wela");

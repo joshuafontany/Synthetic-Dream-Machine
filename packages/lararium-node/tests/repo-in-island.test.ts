@@ -118,19 +118,18 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change"); // filtered — the assertion target
 
     repo = new Repo({ sharePolicy: async () => true });
-    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
-      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
-      docHandle: docHandle as never,
       coreHash:  null,
+      recipe:   { wikiSlug: "test" },
+      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
     });
 
     // Wait for the fixture's change listener to be live before mutating.
@@ -161,19 +160,18 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
-    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
-      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
-      docHandle: docHandle as never,
       coreHash:  null,
+      recipe:   { wikiSlug: "test" },
+      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
     });
 
     await waitForSynced(all);
@@ -208,19 +206,18 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     const changes = eventCollector("repo:change");
 
     repo = new Repo({ sharePolicy: async () => true });
-    const laraiumHandle = repo.create({ schemaVersion: "0.1" });
     const docHandle = repo.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} });
 
     manager = new VesselIslandPool({
       workerScriptUrl: FIXTURE_URL,
       mainRepo:        repo,
-      laraiumDocUrl:   laraiumHandle.url,
       onWorkerEvent:   (id, msg) => { all.callback(id, msg); changes.callback(id, msg); },
     });
 
     await manager.mountWiki(WIKI_ID, {
-      docHandle: docHandle as never,
       coreHash:  null,
+      recipe:   { wikiSlug: "test" },
+      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
     });
 
     await waitForSynced(all);

@@ -26,20 +26,18 @@
  * Meme doc: packages/lararium-node/memes/vessel-island-pool.md
  */
 
-import type { LarDoc } from "@lararium/mesh";
 import { Worker, MessageChannel } from "worker_threads";
 import type { MessagePort } from "worker_threads";
 import { MessageChannelNetworkAdapter } from "@automerge/automerge-repo-network-messagechannel";
-import type { DocHandle, Repo } from "@automerge/automerge-repo";
+import type { Repo } from "@automerge/automerge-repo";
 import { join } from "path";
 import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
   mkWikiPlaceVerb,
-  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG, wikiBagUri, slugFromUri,
   type IslandStorageConfig,
-  type WikiRecipe,
+  type WikiMountSpec,
 } from "@lararium/mesh";
 import type {
   IslandMsg_Event,
@@ -88,34 +86,10 @@ interface ColdSlot {
 
 type Slot = IslandSlot | ColdSlot;
 
-// ---------------------------------------------------------------------------
-// WikiBootContext
-// ---------------------------------------------------------------------------
-
-export interface WikiBootContext {
-  /** Automerge doc handle — used to deliver bagBindings to the island manifest. */
-  docHandle: DocHandle<LarDoc>;
-  /**
-   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
-   * null = pre-CAS. Islands read the actual bytes from the @lararium CRDT doc.
-   */
-  coreHash: string | null;
-  /**
-   * Disk mirror configs for island-owned disk projection (Sprint 9).
-   * Each entry maps a bag to a mirrorRoot dir + scope for namedBagMirror reconstruction.
-   * Only pass for primary islands with disk write-back responsibility.
-   */
-  diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
-  /**
-   * Resolved `@personal` slot doc URL — the host's `resolveOrMintBinding` hands
-   * this through (S7.5). The pool stays envelope-only: it only adds the URL to
-   * the manifest `resolver` map. Absent → the `@personal` slot resolves to
-   * nothing and the recipe skips it cleanly.
-   */
-  personalDocUrl?: string;
-  /** Resolved `@draft` slot doc URL — same pass-through grain as personalDocUrl. */
-  draftDocUrl?: string;
-}
+// WikiBootContext retired — the pool now takes the isomorphic `WikiMountSpec`
+// (@lararium/mesh): the caller builds the full `resolver` (wiki + @lararium +
+// @personal/@draft), the recipe carries `mirrorBags`, and disk-write rides as
+// this pool's held `diskMirrorGrant`. One signature, both platforms.
 
 // ---------------------------------------------------------------------------
 // VesselIslandPoolOptions
@@ -147,11 +121,13 @@ export interface VesselIslandPoolOptions {
    */
   storageRoot?: string;
   /**
-   * AutomergeUrl of the @lararium island doc.
-   * Required — every wiki island reads TW5 core bytes from `LarDoc.blobs[ENGINE_CORE_ID]`
-   * via this binding (§6). Omitting causes every island to post fault and fail ea.
+   * Disk-write CAPABILITY this pool HOLDS — the canon bag → mirror configs it may
+   * project to local disk. A node pool's construction grant (held, local,
+   * per-device; fs access does not replicate); a browser pool holds none. The
+   * pool mirrors a bag IFF it appears here AND a mounted wiki's recipe designates
+   * it in `mirrorBags`. The unforgeable authority lives here, never in the recipe.
    */
-  laraiumDocUrl: string;
+  diskMirrorGrant?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
 }
 
 // ---------------------------------------------------------------------------
@@ -172,7 +148,7 @@ export class VesselIslandPool {
   private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
   private readonly _mainRepo:       Repo | null;
   private readonly _storageRoot:    string | null;
-  private readonly _laraiumDocUrl:  string;
+  private readonly _diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string }[];
   /** Pending wiki:place-verb results — requestId → { resolve, reject }. */
   private readonly _pendingWikiVerbs = new Map<string, {
     resolve: (r: Record<string, unknown>) => void;
@@ -184,7 +160,7 @@ export class VesselIslandPool {
     this._onWorkerEvent  = options.onWorkerEvent ?? null;
     this._mainRepo       = options.mainRepo ?? null;
     this._storageRoot    = options.storageRoot ?? null;
-    this._laraiumDocUrl  = options.laraiumDocUrl;
+    this._diskMirrorGrant = options.diskMirrorGrant ?? [];
   }
 
   // ---------------------------------------------------------------------------
@@ -204,18 +180,18 @@ export class VesselIslandPool {
    */
   async mountWiki(
     wikiId: string,
-    ctx:    WikiBootContext,
+    spec:   WikiMountSpec,
     opts:   { pinned?: boolean } = {},
   ): Promise<void> {
-    await this._mountWorker(wikiId, ctx, opts.pinned ?? false);
+    await this._mountWorker(wikiId, spec, opts.pinned ?? false);
   }
 
   /**
-   * @deprecated Use `mountWiki(wikiId, ctx, { pinned: true })`. Kept as a named
+   * @deprecated Use `mountWiki(wikiId, spec, { pinned: true })`. Kept as a named
    * convenience alias for the PrimaryWiki mount; routes through the unified path.
    */
-  async mountPrimaryWorker(wikiId: string, ctx: WikiBootContext): Promise<void> {
-    await this.mountWiki(wikiId, ctx, { pinned: true });
+  async mountPrimaryWorker(wikiId: string, spec: WikiMountSpec): Promise<void> {
+    await this.mountWiki(wikiId, spec, { pinned: true });
   }
 
   /**
@@ -350,7 +326,7 @@ export class VesselIslandPool {
   // Private helpers
   // ---------------------------------------------------------------------------
 
-  private async _mountWorker(wikiId: string, ctx: WikiBootContext, pinned: boolean): Promise<void> {
+  private async _mountWorker(wikiId: string, spec: WikiMountSpec, pinned: boolean): Promise<void> {
     const existing = this._slots.get(wikiId);
     if (existing && existing.temperature === "wela") {
       existing.lastUsedAt = Date.now();
@@ -369,18 +345,13 @@ export class VesselIslandPool {
     const worker = new Worker(this._workerUrl);
     this._wireWorkerListeners(wikiId, worker);
 
-    const rawDocUrl = ctx.docHandle.url as string | undefined ?? null;
-    const wikiSlug  = slugFromUri(wikiId);
-    const recipe: WikiRecipe = { wikiSlug };
-    const resolver: Record<string, string | null> = {
-      [LARARIUM_BAG]:           this._laraiumDocUrl,
-      [wikiBagUri(wikiSlug)]:   rawDocUrl,
-      // @personal / @draft — present only when the host resolved a binding.
-      // expandRecipe already lists both slots at the right priority; absent a
-      // URL the slot resolves to nothing and the recipe skips it cleanly.
-      ...(ctx.personalDocUrl ? { [PERSONAL_BAG]: ctx.personalDocUrl } : {}),
-      ...(ctx.draftDocUrl    ? { [DRAFT_BAG]:    ctx.draftDocUrl    } : {}),
-    };
+    // Disk-mirror = designation ∩ grant: the recipe (synced) DESIGNATES bags via
+    // `mirrorBags`; this pool's held grant names which it MAY write. Mirror only
+    // the intersection — a designation alone confers nothing (the grant is the
+    // unforgeable authority; a browser pool holds an empty grant → never mirrors).
+    const diskMirrors = this._diskMirrorGrant.filter(
+      (g) => spec.recipe.mirrorBags?.includes(g.bagId),
+    );
 
     const storage: IslandStorageConfig | undefined = this._storageRoot
       ? { type: "nodefs", dir: join(this._storageRoot, _sanitizeWikiId(wikiId)) }
@@ -389,12 +360,12 @@ export class VesselIslandPool {
     const manifestMsg = mkManifest(
       wikiId,
       syncPort as unknown as globalThis.MessagePort,
-      recipe,
-      resolver,
-      ctx.coreHash,
+      spec.recipe,
+      spec.resolver,
+      spec.coreHash,
       {
-        ...(storage             ? { storage                  } : {}),
-        ...(ctx.diskMirrors?.length ? { diskMirrors: ctx.diskMirrors } : {}),
+        ...(storage            ? { storage }      : {}),
+        ...(diskMirrors.length ? { diskMirrors }  : {}),
       },
     );
     await _sendAndAwait<IslandMsg_Ea>(

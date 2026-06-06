@@ -19,7 +19,7 @@ import { readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { Repo } from "@automerge/automerge-repo";
-import { automergeLoad, ENGINE_CORE_ID } from "@lararium/mesh";
+import { automergeLoad, ENGINE_CORE_ID, LARARIUM_BAG } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
@@ -90,7 +90,6 @@ describe.skipIf(skipReason)(
       const pool = new VesselIslandPool({
         workerScriptUrl: ISLAND_JS,
         mainRepo:        vesselRepo,
-        laraiumDocUrl:   laraiumHandle.url,
         onWorkerEvent:   (_id, msg) => { console.log("[test] onWorkerEvent:", JSON.stringify(msg)); events.push(msg); },
       });
 
@@ -99,8 +98,12 @@ describe.skipIf(skipReason)(
         // Pass the fresh plugin tiddler so reaction-router.ts runs with current code,
         // not the version baked into genesis/island.bin.
         await pool.mountWiki(WIKI_ID, {
-          docHandle: wikiHandle,
           coreHash,
+          recipe:   { wikiSlug: "test" },
+          resolver: {
+            [LARARIUM_BAG]:          laraiumHandle.url,
+            "lar:///ha.ka.ba/@test": wikiHandle.url,
+          },
         });
         expect(pool.tier(WIKI_ID)).toBe("wela");
 
@@ -163,7 +166,6 @@ describe.skipIf(skipReason)(
       const pool = new VesselIslandPool({
         workerScriptUrl: ISLAND_JS,
         mainRepo:        vesselRepo,
-        laraiumDocUrl:   laraiumHandle.url,
         onWorkerEvent:   (_id, msg) => {
           if (msg.payload["verb"]) verbEvents.push(msg);
         },
@@ -171,8 +173,12 @@ describe.skipIf(skipReason)(
 
       try {
         await pool.mountWiki(WIKI_ID + "-obs", {
-          docHandle: wikiHandle,
           coreHash,
+          recipe:   { wikiSlug: "test" },
+          resolver: {
+            [LARARIUM_BAG]:          laraiumHandle.url,
+            "lar:///ha.ka.ba/@test": wikiHandle.url,
+          },
         });
 
         // Write a tiddler WITHOUT a verb field — should not trigger verb dispatch.

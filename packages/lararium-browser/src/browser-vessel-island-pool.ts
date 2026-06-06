@@ -28,7 +28,7 @@ import type {
   IslandMsg_TeardownAck,
   IslandMsg_Event,
   IslandToVesselMsg,
-  BrowserWikiMountParams,
+  WikiMountSpec,
 } from "@lararium/mesh";
 
 // ── Internal slot ──────────────────────────────────────────────────────────
@@ -95,7 +95,7 @@ export class BrowserVesselIslandPool {
     this._onEvent   = opts.onWorkerEvent ?? null;
   }
 
-  async mountWiki(id: string, params: BrowserWikiMountParams): Promise<void> {
+  async mountWiki(id: string, params: WikiMountSpec): Promise<void> {
     if (this._slots.has(id)) return;
     if (!this._workerUrl) {
       throw new Error(

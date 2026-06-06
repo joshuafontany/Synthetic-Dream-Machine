@@ -29,6 +29,7 @@ import {
   automergeLoad,
   ENGINE_CORE_ID,
   mutableLarRecord,
+  LARARIUM_BAG,
 } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event } from "@lararium/mesh";
 import {
@@ -123,15 +124,19 @@ describe.skipIf(skipReason)(
         const pool = new VesselIslandPool({
           workerScriptUrl: ISLAND_JS,
           mainRepo:        vesselRepo,
-          laraiumDocUrl:   laraiumHandle.url,
           onWorkerEvent:   (_id, msg) => events.push(msg),
         });
 
         try {
-          // mountWiki awaits ea — island has booted TW5, seeded wiki, declared sovereignty.
+          // Caller builds the full resolver (isomorphic with the browser vessel):
+          // @lararium (TW5 core bytes) + the wiki doc. mountWiki awaits ea.
           await pool.mountWiki(WIKI_ID, {
-            docHandle: wikiHandle,
             coreHash,
+            recipe:   { wikiSlug: "test" },
+            resolver: {
+              [LARARIUM_BAG]:           laraiumHandle.url,
+              "lar:///ha.ka.ba/@test":  wikiHandle.url,
+            },
           });
 
           // ── Gate — verb event arrives at vessel boundary ───────────────

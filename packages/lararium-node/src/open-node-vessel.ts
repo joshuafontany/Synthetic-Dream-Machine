@@ -45,11 +45,12 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   wikiLarUri, wikiDraftLarUri, BAG_IDS, TEMP_BAG,
+  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG, wikiBagUri, slugFromUri,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   computeRecipeFingerprint,
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
-import type { LarTiddlerRecord } from "@lararium/mesh";
+import type { LarTiddlerRecord, WikiRecipe } from "@lararium/mesh";
 import {
   ACTIVE_WIKI_URI,
   MemoryTiddlerStore,
@@ -665,10 +666,21 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 7a. VesselIslandPool — sovereign island pool ─────────────────────────────
   // Primary wiki runs in a pinned Worker thread (makeWikiPrimaryBehavior).
   // Hot LRU islands host session wikis. All VM state lives in islands.
+  //
+  // diskMirrorGrant — the pool's HELD disk-write capability: the canon bags it MAY
+  // project to local disk (island reconstructs BagMirrorConfig via namedBagMirror).
+  // Held + local + per-device (fs access does not replicate). A mount mirrors a
+  // bag only if its recipe also DESIGNATES it in `mirrorBags`; the grant is the
+  // unforgeable authority. A browser pool holds no grant → never mirrors.
+  const workerRootDir = rootDirOpt ?? repoRoot;
+  const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
+    { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
+    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
+  ];
   vmManager = new VesselIslandPool({
     mainRepo:      repo,
     storageRoot:   storageDir,
-    laraiumDocUrl: islandHandle.url,
+    diskMirrorGrant,
     onWorkerEvent: (wikiId, msg) => {
       eventBus.enqueueToRing("vm-ring", "worker.event", {
         wikiId,
@@ -696,13 +708,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await adminVm.workerEa;
 
   // ── 9. Primary wiki island ────────────────────────────────────────────────
-  // Build disk mirror configs — @lares + @lararium corpus bags only.
-  // island reconstructs BagMirrorConfig via namedBagMirror(bagId, scope, mirrorRoot).
-  const workerRootDir = rootDirOpt ?? repoRoot;
-  const diskMirrors: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
-    { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
-    { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
-  ];
   // ── 8b. @personal / @draft binding resolution (S7.5 + S7.6) ─────────────────
   // Composition-root step: resolve (or mint+delegate) the operator's cross-device
   // @personal + @draft docs for THIS recipe-fingerprint, then pass the URLs
@@ -726,13 +731,25 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Unified mount path — primary is a `wela` slot with the `pinned` flag set
   // (never LRU-evicted); pin is orthogonal to temperature (EPIC S11.5).
-  await vmManager.mountWiki(activeWikiId, {
-    docHandle: wikiHandle,
-    coreHash,
-    diskMirrors,
-    personalDocUrl: personalUrl,
-    draftDocUrl:    draftUrl,
-  }, { pinned: true });
+  // Caller builds the FULL resolver — isomorphic with the browser vessel — and
+  // the recipe DESIGNATES the canon bags for disk mirroring; the pool's held
+  // grant decides which it may actually write.
+  const primarySlug = slugFromUri(activeWikiId);
+  const primaryResolver: Record<string, string | null> = {
+    [LARARIUM_BAG]:            islandHandle.url,
+    [wikiBagUri(primarySlug)]: wikiHandle.url,
+    ...(personalUrl ? { [PERSONAL_BAG]: personalUrl } : {}),
+    ...(draftUrl    ? { [DRAFT_BAG]:    draftUrl    } : {}),
+  };
+  const primaryRecipe: WikiRecipe = {
+    wikiSlug:   primarySlug,
+    mirrorBags: [LARES_DOC_URI, LARARIUM_DOC_URI],
+  };
+  await vmManager.mountWiki(
+    activeWikiId,
+    { coreHash, recipe: primaryRecipe, resolver: primaryResolver },
+    { pinned: true },
+  );
   emit("tw5-booted");
 
   // Path M.1 — wire worker.event consumer now that adminVm is live.

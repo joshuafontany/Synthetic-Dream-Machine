@@ -55,4 +55,4 @@ export {
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
-export type { WikiBootContext, VesselIslandPoolOptions } from "./vessel-island-pool.js";
+export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";

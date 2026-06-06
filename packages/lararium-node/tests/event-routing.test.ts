@@ -74,8 +74,9 @@ describe("M.2 event-routing — island→vessel verb payload transport", () => {
     });
 
     await manager.mountWiki(WIKI_ID, {
-      docHandle: docHandle as never,
       coreHash:  null,
+      recipe:   { wikiSlug: "test" },
+      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
     });
 
     const ev = await waitFor(
