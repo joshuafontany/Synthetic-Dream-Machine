@@ -89,8 +89,8 @@ Compiler yield:
 |---|---|---|
 | `ahu` | local worksite / anchor / context | scoped block or container node |
 | `loulou` | outward relation sugar | `pranala` relation edge |
-| `aka` | passive inclusion / shadow reveal | observe edge or passive include node |
-| `kahea` | active invocation / live transclusion pressure | dataflow edge or invoke node |
+| `aka` | passive inclusion / shadow reveal | transclusion edge or passive include node |
+| `kahea` | active invocation / live transclusion pressure | transclusion edge or invoke node |
 | `kapu` | qualification, trust, boundary, disclosure | qualification node / annotation |
 | `ui` | query surface | query node |
 | `hana` | bounded guest-work site | guest-region node |

@@ -79,8 +79,8 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 |---|---|---|
 | `ahu` | `block.ahu` | scope / container |
 | `loulou` | `edge.relation` | semantic adjacency |
-| `aka` | `include.passive` | observe / shadow include |
-| `kahea` | `invoke.active` | dataflow / invocation |
+| `aka` | `include.passive` | transclusion / shadow include |
+| `kahea` | `invoke.active` | transclusion / invocation |
 | `kapu` | `qualifier` | boundary or disclosure guard |
 | `ui` | `query` | query/exploration node |
 | `hana` | `guest.region` | bounded guest grammar parse site |
