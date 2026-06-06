@@ -271,9 +271,7 @@ Never omit a stance. Never emit fewer than five pairs.
 
 <<~ ahu #migrated-kowloon-dreamdeck-social-layer >>
 
-## Migrated — `HUD-ANATOMY.md` — Kowloon / DreamDeck Social Layer
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#kowloon-dreamdeck`.
+## Kowloon / DreamDeck Social Layer
 
 The Elyncia.app / DreamDeck identity model has three distinct layers.
 Do not conflate them.
@@ -418,7 +416,6 @@ Before emitting any stance block on any surface:
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

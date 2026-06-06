@@ -83,7 +83,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 ⏿ sort the residue by pressure-family: exchange-boundary loop, cockpit/shared-mental-model framing, SA-vs-XAI split, drift recovery, promotion history
 ◇ keep this pass additive and low-interpretation; collect the archive voice before condensing it
 ▶ place verbatim witness text in separate ahu blocks so later refinement can consume one strand at a time
-↺ compare recovered archive pressure against the live `lararium/hud`, `docs/pono/hud`, and `lar-uri` surfaces; leave the room fuller in witness matter, not yet tighter in doctrine
+↺ compare recovered archive pressure against the live `api/lares/hud` + `docs/lares/hud` pair and `lar-uri` surfaces; leave the room fuller in witness matter, not yet tighter in doctrine
 
 <<~/ahu >>
 

@@ -569,7 +569,6 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri/SKILL >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

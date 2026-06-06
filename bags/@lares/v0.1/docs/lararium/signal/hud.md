@@ -121,9 +121,7 @@ Notes:
 
 <<~ ahu #migrated-hud-anatomy-symbol-table >>
 
-## Migrated — `HUD-ANATOMY.md` — Unified Symbol Table
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#symbol-table`.
+## Unified Symbol Table
 
 ### OODA-HA Phase Glyphs
 
@@ -194,9 +192,7 @@ The `syad` lens carries the invoked standpoints; the `lar:` URI carries no stanc
 
 <<~ ahu #migrated-hud-anatomy-state-tuple >>
 
-## Migrated — `HUD-ANATOMY.md` — State Tuple Reading
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#state-tuple`.
+## State Tuple Reading
 
 In a live HUD tag, phase + stance + scope combine into a single cognitive state.
 The state tuple is the composed reading: phase × stance × scope → one state sentence.
@@ -215,9 +211,7 @@ The state tuple is the composed reading: phase × stance × scope → one state 
 
 <<~ ahu #migrated-hud-anatomy-confidence-syadasti >>
 
-## Migrated — `HUD-ANATOMY.md` — Confidence — Syadasti Reading Rule
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/HUD-ANATOMY#confidence-syadasti`.
+## Confidence — Syadasti Reading Rule
 
 Under an invoked stance, register measures confidence *within that standpoint's evaluation frame*, not truth-weight universally. The coupling rides the lens: absent an invoked `syad` lens, a confidence number reads its default frame (propositional support); the lens re-declares the measure only when a turn summons it.
 The `syad` lens invokes one or more standpoints; the URI carries none.
@@ -238,9 +232,7 @@ Amplitude tells the operator how fuzzy that intersection is.
 
 <<~ ahu #migrated-tagspace-header-field-taxonomy >>
 
-## Migrated — `Signal_HUD_Tagspace-draft.md` — Header Field Taxonomy
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/Signal_HUD_Tagspace-draft#header-field-taxonomy`.
+## Header Field Taxonomy
 
 Not every header field belongs in the flow.
 The live header currently carries:
@@ -319,9 +311,7 @@ Annotation threshold: **header-only**
 
 <<~ ahu #migrated-forward-vs-backward-trace >>
 
-## Migrated — `Signal_HUD_Tagspace-draft.md` — Forward vs Backward Trace
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/Signal_HUD_Tagspace-draft#forward-vs-backward-trace`.
+## Forward vs Backward Trace
 
 > **HUD Design Axiom:** The HUD always tracks Intent state first, then execution flow — in an auditable way. The Intent Header governs as the prospective declaration; the Micro-trace HUD serves as the backward-looking audit trail. Every design decision in this section follows from that separation.
 
@@ -358,9 +348,7 @@ The header's declared register still governed generation; the slide says "it res
 
 <<~ ahu #migrated-tagspace-in-flow-rendering-options >>
 
-## Migrated — `Signal_HUD_Tagspace-draft.md` — In-Flow Rendering Options
-
-Migrated from `lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud/Signal_HUD_Tagspace-draft#in-flow-rendering-options` and `#rendering-across-p-scale`.
+## In-Flow Rendering Options
 
 Several rendering models are possible for Micro-trace HUD behavior.
 
@@ -480,7 +468,6 @@ Q16 (Tagspace slot shift notation) — locked.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/hud >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
