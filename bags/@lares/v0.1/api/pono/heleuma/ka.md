@@ -44,16 +44,16 @@ A heleuma-ka anchor exists outside the corpus **by current necessity, not by nat
 
 ## Required Fields (SHALL)
 
-A carrying meme SHALL declare in `#iam` TOML:
+A meme that carries `heleuma-ka` SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma       = "ka"
 source-symbol = "<standalone function or export name>"
 ```
 
-A carrying meme SHALL carry a `#source` slot with the **complete verbatim** body of the named symbol (quine property). Partial captures violate the quine. If the natural unit is embedded in a larger function, extract it to a named function first.
+It SHALL hold a `#source` slot with the **complete verbatim** body of the named symbol (the quine property). Partial captures violate the quine. If the natural unit is embedded in a larger function, extract it to a named function first.
 
-A carrying meme MAY declare `body-sha256` when ready for promotion:
+It MAY declare `body-sha256` when ready for promotion:
 
 ```toml
 body-sha256 = "<sha256 hex of #source slot content>"

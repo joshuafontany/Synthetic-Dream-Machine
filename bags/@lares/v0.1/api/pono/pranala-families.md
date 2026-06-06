@@ -110,11 +110,11 @@ confidence-bounded  = false
 
 ## Family Notes
 
-**control** — structural authority edges (owns, implements, extends).
+**control** — structural authority edges (owns, has, configures, delegates).
 The primary composition grammar. Most meme graphs lead with control edges.
 
 Role semantics (do not conflate):
-- `has`        — composition / possession: source carries the target as a component (N per meme). Replaces the retired `implements`/`extends` — a verb (Verse-core `∃` / possession), never the `is-a` copula.
+- `has`        — composition / possession: a source holds the target as a component (N per meme). A verb — Verse-core `∃` — never the `is-a` copula.
 - `owns`       — structural ownership / containment at the type level (not spatial instance placement)
 
 These are all distinct from the ahu-slot tree (`fragment-parent` tiddler field),

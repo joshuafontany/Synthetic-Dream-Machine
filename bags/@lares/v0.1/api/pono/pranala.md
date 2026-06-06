@@ -139,7 +139,7 @@ Edge sigil syntactic sugar:
 * `references` — source observes target without lifecycle stake
 * `composes` — source layers opinion over target with strength ordering
 * `constrains` — source imposes a declarative rule on target without execution pulse
-* `has` — source carries the target as a **component** (it `#has` it); composition / possession, never the `is-a` copula.
+* `has` — source holds the target as a **component**; composition / possession, never the `is-a` copula.
 
 `cardinality` — structural limit (MAY carry):
 * `one-to-one`

@@ -44,15 +44,15 @@ A heleuma-ha anchor exists outside the `lar:///` corpus **by nature, not by stag
 
 ## Required Fields (SHALL)
 
-A carrying meme SHALL declare in `#iam` TOML:
+A meme that carries `heleuma-ha` SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma      = "ha"
 ```
 
-A carrying meme SHALL carry a `#source` slot with the verbatim artifact body (quine property).
+It SHALL hold a `#source` slot with the verbatim artifact body (the quine property).
 
-A carrying meme SHALL NOT declare `body-sha256` — ha does not promote.
+It SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu >>
 

@@ -44,17 +44,17 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 
 ## Required Fields (SHALL)
 
-A carrying meme SHALL declare in `#iam` TOML:
+A meme that carries `heleuma-ba` SHALL declare in `#iam` TOML:
 
 ```toml
 heleuma = "ba"
 ```
 
-A carrying meme SHALL carry a `#source` slot with sufficient verbatim content that the artifact could be reconstructed from the meme alone (quine property). The standard for "sufficient" is: a reader with no access to the source repository can reconstruct the artifact from the `#source` slot and the `#contract` slot together.
+It SHALL hold a `#source` slot with verbatim content sufficient to reconstruct the artifact from the meme alone (the quine property). "Sufficient" means: a reader with no access to the source repository can rebuild the artifact from the `#source` and `#contract` slots together.
 
-A carrying meme MAY declare `source-symbol` when the source span has a clear boundary. When `source-symbol` is declared, the meme MAY also declare `body-sha256` — the SHA-256 hash of the `#source` slot's verbatim content — for drift detection at build time.
+It MAY declare `source-symbol` when the source span has a clear boundary. When `source-symbol` is declared, the meme MAY also declare `body-sha256` — the SHA-256 hash of the `#source` slot's verbatim content — for drift detection at build time.
 
-A carrying meme SHALL NOT declare `body-sha256` without also declaring `source-symbol`.
+It SHALL NOT declare `body-sha256` without `source-symbol`.
 
 <<~/ahu >>
 

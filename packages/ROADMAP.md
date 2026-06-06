@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-06-05 (Isomorphic-vessel Stage 1 activation — keyhive host→worker on node + browser; relay-access ring design)
+> Updated: 2026-06-06 (Isomorphism-by-composition collapse — host-bridge + mountWiki unified; YIN cuts; 5 mirror pairs remain)
 > Tests: mesh 236 · tw5 73 · node 94 · browser 20/20 — all green; typecheck 10/10.
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
@@ -71,6 +71,16 @@ Do not re-open those arcs unless a test proves drift.
 - **OODA-HA boot reframe** — boot causal-islands reframed exchange-turn island, not CRDT mesh; local CRDT/bag-slot infra stripped from boot; phase-yield close-form.
 - **Isomorphic vessel — Stage 1 ACTIVATION DONE** — keyhive moved host→worker on node (`65d82084` E.5) AND browser (`b5e87384` E.6). Host keyhive boot + Gates A/B/C + registerBag sweep deleted on both; `bootAdminKeyhive` runs them in-worker (seed via `manifest.adminAuth`); WS gate arms with `adminVm.authSeam` (verify-proxy now threads peer `identifier`); `@personal/@draft` via `adminVm.resolveBinding`. Sovereignty-follows-canon: keyhive boots in `onEa` (admin worker only spins up with a core); a coreless vessel is pre-sovereign. TW5 loads in ALL cases (anon → splash/invite UI is downstream state, not a boot abort).
 - **Browser M.3 test pono rebuild** (`e73dbd0f`) — chronically-red `browser-m3-breathing` (frozen checked-in TW5 bundle) → `browser-verb-breathing` (hand-written `.mjs` fixture worker; tests worker↔pool verb-event transport; reaction-router logic stays covered by node m3-breathing).
+- **Isomorphism-by-composition collapse (web3 composable, NOT web2 interface)** — operator steer (canon: `feedback_isomorphism_by_composition` memory): a per-platform method signature IS the web2 smell; keep ONE signature, push divergence into DATA (synced recipe) + held CAPABILITIES, derive the seam BOTTOM-UP by subtraction; proof = behavioral conformance, not type-conformance. Validated by Ink&Switch + OCAP research spirits. Landed: (`77389c01`) headless TW5 boot — two `load*TiddlyWiki` → one `loadTiddlyWikiFromBlob` + emergent `HeadlessBootEnv`; (`29813d4f`) `global ??= globalThis` env-contract fix (the headless third-runtime gap); (`c5253b9b`) shared verb→event conformance spec in `@lararium/mesh` BOTH platforms run; (`cc24f3b9`) **one isomorphic `mountWiki(id, WikiMountSpec)`** — `WikiBootContext` retired, caller builds full resolver on both, disk-write rides as the node pool's held `diskMirrorGrant`, `recipe.mirrorBags` = synced designation; (`aa582f4a`/`8c975f2a`) YIN cuts — dead `mountPrimaryWorker`, `vessel-platform.ts` (rejected-DI-interface home; `AuthVerifierSeam`→`island-protocol`), `browser-dock.ts` (misnomer; `WikiMountSpec`→`wiki-recipe`; dead `BrowserProjectionSnapshot`), orphan tombstones.
+
+## Active collapse — 5 mirror pairs remain (the next campaign)
+
+The duplication is ONE seam (storage-adapter + worker-transport+spawn) duplicated 5×, not 5 problems. Collapse order (rising risk), each via bottom-up subtraction + conformance net:
+1. **island kernels** `sovereign-island-model` ⇆ `browser-sovereign-island-model` (~220 each, ~90% identical around the already-shared `IslandKernel`) — most almost-manifest.
+2. **admin VMs** `open-admin-vm` ⇆ `open-browser-admin-vm` (relay loop identical; only Worker/MessageChannel differ).
+3. **vessel factories** `open-node-vessel` ⇆ `open-browser-vessel` (highest divergence: relay-vs-leaf, founding-on-host) — last; `LarVessel` browser-wrapper removal folds in here.
+4. **pools** signature-aligned (`WikiMountSpec`) but impls still split — partly legit (node carries residency LRU/sweeper); revisit after residency lands browser-side.
+Deferred lower-confidence YIN: the `LARARIUM_DOC_URI`/`LARARIUM_BAG`/`BAG_IDS.lararium` triple-alias (may encode slot-vs-doc).
 
 ## Planning Law
 

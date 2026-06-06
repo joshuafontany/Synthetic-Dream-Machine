@@ -1,8 +1,27 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-05-30 (turn 30)
+> Updated: 2026-06-06 (isomorphism-by-composition collapse campaign)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
+
+## Current State — 2026-06-06 (read this first; older sections below are history)
+
+**Green:** typecheck 10/10 · mesh 236 · tw5 73 · node 94 · browser 20/20.
+
+**What landed this run (newest first):**
+- `8c975f2a` / `aa582f4a` — **YIN cuts**: deleted `vessel-platform.ts` (vestigial home for the rejected `VesselPlatform` DI interface — `AuthVerifierSeam` moved to `island-protocol.ts`), `browser-dock.ts` (misnomer — `WikiMountSpec` moved to `wiki-recipe.ts`, dead `BrowserProjectionSnapshot` removed), dead `mountPrimaryWorker` alias, orphan tombstone comments.
+- `cc24f3b9` — **one isomorphic `mountWiki(id, WikiMountSpec)`** both pools take. `WikiBootContext` retired; the CALLER builds the full resolver on both platforms; disk-write rides as the node pool's **held** `diskMirrorGrant`; `recipe.mirrorBags` is the **synced** designation; the island mirrors iff designation ∩ grant.
+- `c5253b9b` — **shared verb→event conformance spec** (`@lararium/mesh`) that BOTH node (real-TW5 `m3-breathing`) and browser (`browser-verb-breathing` fixture) run — isomorphism proven by *doing*.
+- `77389c01` — headless TW5 boot composed: two `load*TiddlyWiki` → one `loadTiddlyWikiFromBlob` + emergent `HeadlessBootEnv`. `29813d4f` — `global ??= globalThis` env-contract fix (TW5 in a browser Worker = a synthetic THIRD runtime).
+- `65d82084` (E.5 node) + `b5e87384` (E.6 browser) — **keyhive moved host→worker** on both vessels (Stage 1 activation). Sovereignty-follows-canon: keyhive boots in the admin worker's `onEa`, which only spins up with a core; a coreless vessel is pre-sovereign; TW5 loads in all cases (anon → UI state, not a boot abort).
+
+**The governing discipline (canon — see `feedback_isomorphism_by_composition` memory):** web3 COMPOSITION is pono, web2 INTERFACE thinking is un-pono. Keep ONE signature; push divergence into DATA (synced recipe) + held CAPABILITIES (relay/leaf, disk-write are grants you hold, not platform facts); derive each seam BOTTOM-UP by subtraction (a prior top-down `VesselPlatform` got contradicted — that's why it just died); proof = behavioral conformance, not type-conformance.
+
+**NEXT — the collapse campaign (5 mirror pairs = ONE seam ×5: storage-adapter + worker-transport+spawn).** Order, rising risk, each via subtraction + the conformance net: (1) island kernels `sovereign-island-model` ⇆ `browser-sovereign-island-model` (most almost-manifest, ~90% identical around the shared `IslandKernel`); (2) admin VMs `open-admin-vm` ⇆ `open-browser-admin-vm`; (3) vessel factories `open-node-vessel` ⇆ `open-browser-vessel` (last; `LarVessel` browser-wrapper removal folds in); (4) pools — signature-aligned, impls split (partly legit: node residency LRU/sweeper). Deferred lower-confidence: the `LARARIUM_DOC_URI`/`LARARIUM_BAG`/`BAG_IDS.lararium` triple-alias.
+
+**Open / downstream (not this campaign):** relay-access RINGS epic (`project_relay_access_rings` — anon-read is gate POLICY not a keyhive grant; tiered sharePolicy); SES/Compartment realm gate BEFORE unpinned code (mesh bags / user macros) enters the island realm (`project_headless_island_runtime`); the full keyhive-synced disk token (local fs-grant suffices today); S7.7 @personal cross-device.
+
+**Key memories:** `feedback_isomorphism_by_composition`, `project_isomorphic_vessel_epic`, `project_headless_island_runtime`, `project_relay_access_rings`.
 
 ## Bootstrap Paste
 
