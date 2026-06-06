@@ -1,49 +1,39 @@
 /**
- * openAdminVm — spawn the sovereign admin island.
+ * openAdminVm — node host wrapper over the shared admin-VM core.
  *
- * The admin island holds its own TW5 VM (full recipe: @lararium + @lares + @admin),
- * its own Repo-in-island, its own CompositeStore (CRDT + volatile + projection),
- * and its own VerbDispatcher subscribed to the TW5 wiki change event surface.
+ * The lifecycle lives in @lararium/tw5 `openAdminVmCore` — ONE core both
+ * vessels compose. This file supplies the node platform pieces:
+ *   - spawnWorker  : worker_threads Worker (.on / .postMessage)
+ *   - newSyncChannel: worker_threads MessageChannel
+ *   - adminHandle  : waitHandleLocal (merge-on-late-arrival strategy)
+ *   - recipe       : built here from canonBags; storage = nodefs dir
  *
- * Vessel responsibilities retained here:
- *   - `adminHandle`  — opened on the main Repo for keyhive event persistence and
- *                      gate-check reads (PERSON_GROUP, MESH_CABAL sentinel tiddlers).
- *   - `composite`    — single-layer admin CompositeStore for cap-event writes via
- *                      AdminEventStore and receipt writes from delegated jobs.
- *   - Delegation loop — listens for `admin:delegate-verb` from island, runs vessel
- *                      handler registry, returns `admin:verb-result`.
+ * Node-ahead capability proxies (authSeam verify-proxy, resolveBinding) compose
+ * on top via a second listener on the core's exposed worker handle — they are
+ * node-only surface the browser has not built yet, not duplication.
  *
- * Boot ordering guarantee:
- *   `workerEa` resolves only after the admin island sends `ea` — TW5 live, all
- *   CRDT bags synced, drain loop running, VerbDispatcher subscribed. `openNodeVessel`
- *   awaits `workerEa` before emitting `"live"`, enforcing the vessel ordering law:
- *   admin island must declare sovereignty before the vessel considers itself live.
+ * Boot ordering: `workerEa` resolves only after the admin island sends `ea`.
+ * `openNodeVessel` awaits it before emitting `"live"`.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/open-admin-vm
  */
 
-import { dirname, join }                                from "path";
-import { fileURLToPath }                                from "url";
-import { Worker, MessageChannel }                       from "worker_threads";
-import type { AutomergeUrl, DocHandle, Repo }           from "@automerge/automerge-repo";
-import { MessageChannelNetworkAdapter }                 from "@automerge/automerge-repo-network-messagechannel";
-import type { LarDoc }                                  from "@lararium/mesh";
+import { join }                                          from "path";
+import { Worker, MessageChannel }                        from "worker_threads";
 import {
-  ADMIN_BAG_ID, BAG_IDS, CompositeStore, AutomergeDocStore, emptyLarDoc,
-  LARARIUM_BAG, LARES_BAG,
-  mkManifest, mkAdminPlaceVerb, mkAdminVerbResult, mkAdminVerifyRequest,
-  mkAdminResolveBindingRequest,
-  isIslandToVesselMsg,
-  type WikiRecipe, type AuthVerifierSeam, type AdminMsg_VerifyResult,
-  type AdminMsg_ResolveBindingResult,
+  emptyLarDoc,
+  type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
+  type CompositeStore, type WikiRecipe, type CapabilityVerifier,
+  type AuthVerifierSeam,
+  type IslandMsg_Manifest,
 } from "@lararium/mesh";
-import { runLocalVerb }                                 from "@lararium/tw5";
-import type { VerbTable }                               from "@lararium/tw5";
-import type { CapabilityVerifier }                      from "@lararium/mesh";
-import { waitHandleLocal }                              from "./repo-helpers.js";
-import type { IslandMsg_Ea, AdminMsg_DelegateVerb, IslandMsg_Manifest } from "@lararium/mesh";
+import {
+  openAdminVmCore,
+  type AdminVmHost, type VesselWorkerHandle,
+  type VerbTable, type VerbSignalRequest,
+} from "@lararium/tw5";
+import { waitHandleLocal } from "./repo-helpers.js";
 
-const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
 
 export interface AdminVmOptions {
@@ -97,7 +87,7 @@ export interface AdminVmResult {
    * Delegates to the admin island's internal `placeVerbInvocation` via `admin:place-verb` message.
    * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
    */
-  placeVerb:    (opts: import("@lararium/tw5").VerbSignalRequest) => void;
+  placeVerb:    (opts: VerbSignalRequest) => void;
   /**
    * Host-side inbound-peer verifier (path b). Proxies `verify()` to the admin
    * island's keyhive via admin:verify-request/result. The WS AdminAuthGate arms
@@ -117,203 +107,61 @@ export interface AdminVmResult {
   dispose:      () => void;
 }
 
-const HANDSHAKE_TIMEOUT_MS = 15_000;
+/** worker_threads Worker → the platform-blind VesselWorkerHandle. */
+function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
+  const post = w.postMessage.bind(w) as (msg: unknown, transfer?: unknown[]) => void;
+  return {
+    post:      (msg, transfer) => post(msg, transfer),
+    listen:    (cb) => w.on("message", cb),
+    onError:   (cb) => w.on("error", cb),
+    terminate: () => { void w.terminate(); },
+  };
+}
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
   const { repo, adminUrl, coreHash, resolver, canonBags, adminAuth, storageDir, workerScriptUrl } = opts;
-  void adminUrl;
 
-  // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
-  let _delegationRegistry: VerbTable | null = null;
-  let _verifier:      CapabilityVerifier | null  = null;
-
-  // Pending host→island verify-proxy calls (path b), keyed by requestId.
-  type VerifyVerdict = { ok: boolean; identifier?: string; reason?: string };
-  const _pendingVerifies = new Map<string, (r: VerifyVerdict) => void>();
-  let _verifySeq = 0;
-
-  // Pending host→island binding-resolution calls, keyed by requestId.
-  const _pendingBindings = new Map<string, {
-    resolve: (r: { personalUrl: string; draftUrl: string }) => void;
-    reject:  (e: Error) => void;
-  }>();
-  let _bindingSeq = 0;
-
-  // ── Vessel admin handle (keyhive + gate reads) ───────────────────────
+  // ── Admin doc handle (node strategy: merge-on-late-arrival) ────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
     repo, adminUrl as AutomergeUrl,
     () => repo.create<LarDoc>(emptyLarDoc()),
   );
 
-  // ── Vessel composite (cap-event + relay receipt writes) ──────────────
-  const composite = new CompositeStore();
-  const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
-  composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
-  adminStore.markSyncComplete();
-
-  // ── Spawn admin island ────────────────────────────────────────────────────
-  const { port1: mainPort, port2: syncPort } = new MessageChannel();
-
-  const adapter = new MessageChannelNetworkAdapter(mainPort as unknown as globalThis.MessagePort);
-  repo.networkSubsystem.addNetworkAdapter(adapter);
-
-  const workerUrl = workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL;
-  const worker    = new Worker(workerUrl);
-
-  // ── workerEa Promise ──────────────────────────────────────────────────────
-  let _eaResolve!:  () => void;
-  let _eaReject!:   (err: Error) => void;
-  const workerEa = new Promise<void>((resolve, reject) => {
-    _eaResolve = resolve;
-    _eaReject  = reject;
-  });
-
-  const eaTimer = setTimeout(
-    () => _eaReject(new Error("[openAdminVm] admin island ea timeout")),
-    HANDSHAKE_TIMEOUT_MS,
-  );
-
-  // ── Relay loop + island message routing ───────────────────────────────────
-  worker.on("message", (raw: unknown) => {
-    if (!isIslandToVesselMsg(raw)) return;
-
-    if (raw.type === "ea") {
-      clearTimeout(eaTimer);
-      _eaResolve();
-      return;
-    }
-
-    if (raw.type === "fault") {
-      clearTimeout(eaTimer);
-      _eaReject(new Error(`[openAdminVm] admin island fault: ${(raw as { error: string }).error}`));
-      return;
-    }
-
-    if (raw.type === "admin:verify-result") {
-      const msg = raw as AdminMsg_VerifyResult;
-      const resolve = _pendingVerifies.get(msg.requestId);
-      if (resolve) {
-        _pendingVerifies.delete(msg.requestId);
-        resolve({
-          ok: msg.ok,
-          ...(msg.identifier ? { identifier: msg.identifier } : {}),
-          ...(msg.reason ? { reason: msg.reason } : {}),
-        });
-      }
-      return;
-    }
-
-    if (raw.type === "admin:resolve-binding-result") {
-      const msg = raw as AdminMsg_ResolveBindingResult;
-      const pending = _pendingBindings.get(msg.requestId);
-      if (pending) {
-        _pendingBindings.delete(msg.requestId);
-        if (msg.error) pending.reject(new Error(msg.error));
-        else if (msg.personalUrl && msg.draftUrl) pending.resolve({ personalUrl: msg.personalUrl, draftUrl: msg.draftUrl });
-        else pending.reject(new Error("resolve-binding-result missing urls"));
-      }
-      return;
-    }
-
-    if (raw.type === "admin:delegate-verb") {
-      const msg = raw as AdminMsg_DelegateVerb;
-      if (!_delegationRegistry) {
-        worker.postMessage(mkAdminVerbResult({
-          requestId: msg.requestId,
-          error: `[openAdminVm] delegate-verb received before mountMainVerbs — verb="${msg.verb}" dropped`,
-        }));
-        return;
-      }
-      const invocationLike = {
-        title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
-        requestId:   msg.requestId,
-        verb:        msg.verb,
-        args:        msg.args,
-        requestedBy: msg.requestedBy,
-        requestedAt: new Date().toISOString(),
-        targets:     msg.targets ?? [],
-        batchMode:   (msg.batchMode ?? "best-effort") as import("@lararium/mesh").BatchMode,
-        status:      "pending" as const,
-      };
-      runLocalVerb(invocationLike, {
-        admin:    composite,
-        registry: _delegationRegistry,
-        ...(_verifier ? { verifier: _verifier } : {}),
-      }).then((result) => {
-        worker.postMessage(mkAdminVerbResult({ requestId: msg.requestId, result }));
-      }).catch((err: unknown) => {
-        const message = err instanceof Error ? err.message : String(err);
-        worker.postMessage(mkAdminVerbResult({ requestId: msg.requestId, error: message }));
-      });
-      return;
-    }
-  });
-
-  worker.on("error", (err) => {
-    console.error("[openAdminVm] admin island error:", err);
-    clearTimeout(eaTimer);
-    _eaReject(err);
-  });
-
-  // ── Deliver manifest to admin island ──────────────────────────────────────
-  const storage = storageDir
-    ? { type: "nodefs" as const, dir: join(storageDir, "admin") }
-    : undefined;
-
   const recipe: WikiRecipe = {
     wikiSlug: "admin",
     ...(canonBags?.length ? { canonBags } : {}),
   };
-  void LARARIUM_BAG; void LARES_BAG; // marker — caller's resolver must include these
-  const manifestMsg = mkManifest(
-    ADMIN_BAG_ID,
-    syncPort as unknown as globalThis.MessagePort,
-    recipe,
-    resolver,
-    coreHash,
-    {
-      ...(storage   ? { storage }   : {}),
-      ...(adminAuth ? { adminAuth } : {}),
-    },
-  );
-  worker.postMessage(manifestMsg, [syncPort as unknown as ArrayBuffer]);
+  const storage = storageDir
+    ? { type: "nodefs" as const, dir: join(storageDir, "admin") }
+    : undefined;
 
-  // ── Return result — caller awaits workerEa before emit("live") ────────────
+  const host: AdminVmHost = {
+    newSyncChannel: () => {
+      const { port1, port2 } = new MessageChannel();
+      return {
+        mainPort: port1 as unknown as IslandMsg_Manifest["syncPort"],
+        syncPort: port2 as unknown as IslandMsg_Manifest["syncPort"],
+      };
+    },
+    spawnWorker: (url) => nodeWorkerHandle(new Worker(url)),
+  };
+
+  const core = openAdminVmCore(host, {
+    repo, adminHandle, recipe, resolver, coreHash,
+    ...(adminAuth ? { adminAuth } : {}),
+    ...(storage   ? { storage }   : {}),
+    workerScriptUrl: workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL,
+  });
+
+  // authSeam + resolveBinding now ride the shared core's askIsland primitive.
   return {
-    adminHandle,
-    composite,
-    workerEa,
-    mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => {
-      _delegationRegistry = registry;
-      _verifier      = verifier ?? null;
-    },
-    authSeam: {
-      verify: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin"): Promise<VerifyVerdict> =>
-        new Promise<VerifyVerdict>((resolve) => {
-          const requestId = `verify-${++_verifySeq}`;
-          _pendingVerifies.set(requestId, resolve);
-          worker.postMessage(mkAdminVerifyRequest({ requestId, cardBytes, bagUrl, access }));
-        }),
-    },
-    resolveBinding: (fingerprint, recipeTrace) =>
-      new Promise<{ personalUrl: string; draftUrl: string }>((resolve, reject) => {
-        const requestId = `binding-${++_bindingSeq}`;
-        _pendingBindings.set(requestId, { resolve, reject });
-        worker.postMessage(mkAdminResolveBindingRequest({ requestId, fingerprint, recipeTrace }));
-      }),
-    placeVerb: (verbOpts) => {
-      worker.postMessage(mkAdminPlaceVerb({
-        verb:        verbOpts.verb,
-        args:        verbOpts.args,
-        requestedBy: verbOpts.requestedBy,
-        ...(verbOpts.targets?.length ? { targets: [...verbOpts.targets] } : {}),
-        ...(verbOpts.batchMode       ? { batchMode: String(verbOpts.batchMode) } : {}),
-        ...(verbOpts.requestId       ? { requestId: verbOpts.requestId } : {}),
-      }));
-    },
-    dispose: () => {
-      clearTimeout(eaTimer);
-      void worker.terminate();
-    },
+    adminHandle:    core.adminHandle,
+    composite:      core.composite,
+    workerEa:       core.workerEa,
+    mountMainVerbs: core.mountMainVerbs,
+    placeVerb:      core.placeVerb,
+    authSeam:       core.authSeam,
+    resolveBinding: core.resolveBinding,
+    dispose:        core.dispose,
   };
 }

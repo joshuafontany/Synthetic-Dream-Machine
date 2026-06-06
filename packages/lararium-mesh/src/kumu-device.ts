@@ -12,8 +12,8 @@
  *   listenable(T) field   → KumuListenable (verseKind: "listenable"; awaitable + subscribable)
  *   event(T) field        → KumuListenable (verseKind: "event"; signalable + awaitable only)
  *   public input method   → KumuSubscribable (INPUT fn pin)
- *   class(P)              → control:extends edge → KumuDeviceSpec.extendsType
- *   class(P, I, J)        → control:implements edges → KumuDeviceSpec.implementsTypes
+ *   class(P)              → control:has edge → KumuDeviceSpec.componentTypes
+ *   class(P, I, J)        → control:has edges → KumuDeviceSpec.componentTypes
  *   DEB editor wire       → papalohe pranala edge (instance-level ReactionBinding)
  *   Await(event)<suspends>→ ReactionGraph.subscribeOnce() (kukali primitive)
  *   `using { /Path }`     → module namespace import — NOT trait composition
@@ -27,8 +27,8 @@
  * ## Three semantic layers (do not conflate)
  *
  *   Ahu-slot tree (document structure) — fragment-parent + slot tiddler fields.
- *   control:extends (one edge) — single Verse parent class → extendsType.
- *   control:implements (N edges) — Verse interface composition → implementsTypes.
+ *   control:has (N edges) — Verse class composition: parent class and interfaces alike,
+ *   every URI in class(...) → componentTypes. No privileged is-a parent.
  *
  * KumuDeviceSpec derives from pranala edges, not from a TS class hierarchy.
  * No separate registration step — authoring a type meme with reaction edges IS registration.
@@ -102,8 +102,8 @@ export interface KumuSubscribable {
  *                  payload.subscribable = handler name; payload.payloadType = Verse type string;
  *                  payload.effects = space-separated Verse effect specifiers
  *   slots        ← ahu socket URIs declared within the type meme (Verse `@editable` fields)
- *   extendsType      ← `control:extends` edge (single parent class URI; Verse single inheritance)
- *   implementsTypes  ← `control:implements` edges (interface URIs; Verse interface composition)
+ *   componentTypes   ← `control:has` edges (every URI in the Verse `class(...)` list — parent
+ *                      and interfaces alike; no privileged is-a parent; web3 composition)
  */
 export interface KumuDeviceSpec {
   /** Canonical type URI (no fragment). e.g. `lar:///sdm/devices/button` */
@@ -114,10 +114,9 @@ export interface KumuDeviceSpec {
   readonly subscribables: readonly KumuSubscribable[];
   /** Ahu slot URIs declared on this type (Verse `@editable` attributes). */
   readonly slots: readonly string[];
-  /** Single parent class URI (`control:extends` edge). Absent = no explicit parent declaration. */
-  readonly extendsType?: string;
-  /** Interface URIs this device implements (`control:implements` edges — Verse interface composition). */
-  readonly implementsTypes: readonly string[];
+  /** Component type URIs (`control:has` edges) — every URI in the Verse `class(...)` list,
+   *  parent class and interfaces alike. Composition only; no is-a parent. */
+  readonly componentTypes: readonly string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -172,8 +171,8 @@ interface EdgeLike {
  * listenables  ← `reaction:listenable` edges with `fromUri === typeUri`; name = payload.listenable
  * subscribables← `reaction:subscribable` edges with `fromUri === typeUri`; name = payload.subscribable
  * slots        ← caller must supply (no AST field for ahu socket URIs yet)
- * extendsType     ← `control:extends` edge; toUri = parent class URI (Verse single inheritance)
- * implementsTypes ← `control:implements` edges; toUri = interface URI (Verse interface composition)
+ * componentTypes  ← `control:has` edges; toUri = component URI (every item in the Verse
+ *                   `class(...)` list — parent and interfaces alike; no is-a parent)
  */
 export function kumuDeviceSpecFromEdges(
   typeUri: string,
@@ -182,8 +181,7 @@ export function kumuDeviceSpecFromEdges(
 ): KumuDeviceSpec {
   const listenables:      KumuListenable[]   = [];
   const subscribables:    KumuSubscribable[] = [];
-  const implementsTypes:  string[]           = [];
-  let   extendsType:      string | undefined;
+  const componentTypes:   string[]           = [];
 
   for (const e of edges) {
     if (e.fromUri !== typeUri) continue;
@@ -219,17 +217,13 @@ export function kumuDeviceSpecFromEdges(
     }
 
     if (e.family === "control") {
-      if (e.role === "extends" && e.toUri && e.toUri !== typeUri) {
-        extendsType = e.toUri; // single parent class (last edge wins if multiple declared)
-      } else if (e.role === "implements" && e.toUri && e.toUri !== typeUri) {
-        implementsTypes.push(e.toUri); // interface composition — N edges allowed
+      if (e.role === "has" && e.toUri && e.toUri !== typeUri) {
+        componentTypes.push(e.toUri); // Verse class composition — parent + interfaces, N edges
       }
     }
   }
 
-  const spec: KumuDeviceSpec = { typeUri, listenables, subscribables, slots, implementsTypes };
-  if (extendsType) (spec as { extendsType?: string }).extendsType = extendsType;
-  return spec;
+  return { typeUri, listenables, subscribables, slots, componentTypes };
 }
 
 // ReactionEngine removed — collapsed into reaction-router.ts TW5 startup module.

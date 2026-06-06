@@ -29,3 +29,13 @@ export function makeIslandRepo(cfg: IslandRepoConfig): Repo {
     sharePolicy: async () => true,
   });
 }
+
+/**
+ * Attach a MessageChannel sync leg to an EXISTING repo (the vessel's main Repo).
+ * The vessel keeps the main port; the island receives the transferred peer port.
+ * Network-adapter construction is a CRDT concern owned by mesh — callers compose
+ * this through the facade rather than importing @automerge/* themselves.
+ */
+export function attachMessageChannelSync(repo: Repo, mainPort: MessagePort): void {
+  repo.networkSubsystem.addNetworkAdapter(new MessageChannelNetworkAdapter(mainPort));
+}

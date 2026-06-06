@@ -82,4 +82,12 @@ export type { AdminBehaviorOptions } from "./admin-behavior.js";
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
+export { openAdminVmCore } from "./admin-vm-core.js";
+export type {
+  AdminVmHost,
+  AdminVmCore,
+  AdminVmCoreOptions,
+  VesselWorkerHandle,
+  VesselPlaceVerbRequest,
+} from "./admin-vm-core.js";
 
