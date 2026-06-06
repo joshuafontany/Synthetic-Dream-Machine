@@ -182,11 +182,11 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 | **Register** | high — significant epistemic resolution (slide) | `→ <<~ confidence Synthesis 13/20 >>` at span close |
 | **Scope** | structural — a new header, not an inline mark | (no inline scope annotations) |
 | **Tagspace** | per-slot by HAKABA role | Ka/quality + Ba/dynamic annotate most; full echo `→//domain.quality.dynamic` when all three shift |
-| **Aperture / p** | header-only | a granularity change requires a new header |
+| **Aperture** | header-only | a granularity change requires a new header |
 
 **The seed → slide contract.** The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span *landed*, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
 
-**Baseline rendering:** the header surfaces the full state; in-flow surfaces **phase** by default (`→[glyph]`); **stance** surfaces on a genuine local shift; structural changes require a new header; Tagspace fields stay out of the flow by default. The HUD's meaning holds constant across `p` — only the granularity of the trace changes.
+**Baseline rendering:** the header surfaces the full state; in-flow surfaces **phase** by default (`→[glyph]`); **stance** surfaces on a genuine local shift; structural changes require a new header; Tagspace fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
 
 <<~/ahu >>
 
