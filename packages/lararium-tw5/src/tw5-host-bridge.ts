@@ -276,6 +276,15 @@ export async function prepareHostBootInstance(
   }
 
   if (isBrowserWorker) {
+    // Headless-island environment contract (the kupono lift): TW5's core UMD +
+    // startup modules read Node's `global`. A browser Worker has none — but its
+    // globalThis IS the island's sovereign scope, so alias `global` to it,
+    // isomorphic with what a Node worker_thread exposes for free. Set permanently
+    // (not a restored boot shim): in the headless island `global` legitimately
+    // === globalThis. Completes the window/require/vm/path/fs synthetics this
+    // module already presents — the last missing Node-ism the browser must supply.
+    (globalThis as Record<string, unknown>)["global"] ??= globalThis;
+
     const instance = (await loadBrowserWorkerTiddlyWiki(coreBlob)).TiddlyWiki() as unknown as TW5Instance;
     // Neutralize node authority AFTER blob eval (which needed $tw.node={} to load vmShim),
     // but BEFORE boot.boot() so Node-specific blocks ($tw.node check) and fs access are skipped.
