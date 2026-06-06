@@ -211,9 +211,9 @@ result-shape = "set"
 
 <<~/ahu >>
 
-<<~ ahu #verify >>
+<<~ ahu #aftermath >>
 
-## ⤴ Verify
+## ↺ Aftermath
 
 Before closing, check:
 
@@ -224,12 +224,6 @@ Before closing, check:
 - no host primitive got reassigned to guest-family work
 - parser and lowering detail live here, off the parent
 - outward links name real adjacency or real backlog
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Close by naming:
 

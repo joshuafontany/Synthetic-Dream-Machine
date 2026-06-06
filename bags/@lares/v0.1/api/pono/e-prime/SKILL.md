@@ -208,9 +208,9 @@ Marker lands when the canonical rule requires it.
 
 <<~/ahu >>
 
-<<~ ahu #hooko >>
+<<~ ahu #aftermath >>
 
-## ⤴ Hoʻoko
+## ↺ Aftermath
 
 Turn the settled sentence directly.
 
@@ -235,12 +235,6 @@ Deferred placeholders:
 - `scripts/recheck-turn.*`
 
 <<~/ahu >>
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Every surviving `is` or `has` carries a marker.
 The turn did not counterfeit confidence.

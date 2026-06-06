@@ -234,9 +234,9 @@ When writing or revising:
 
 <<~/ahu >>
 
-<<~ ahu #verify >>
+<<~ ahu #aftermath >>
 
-## ⤴ Verify
+## ↺ Aftermath
 
 Before closing, check:
 
@@ -247,12 +247,6 @@ Before closing, check:
 - skeleton and checklist matter live here, off the parent
 - outward links name real adjacency or real backlog
 - subtype claims stay truthful
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Close by naming:
 

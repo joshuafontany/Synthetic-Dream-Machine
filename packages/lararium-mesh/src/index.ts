@@ -46,6 +46,8 @@ export type { CeremonyTiddler } from "./cold-boot-ceremony.js";
 export type { Repo, DocHandle, AutomergeUrl, StorageAdapterInterface } from "@automerge/automerge-repo";
 export { makeIslandRepo, attachMessageChannelSync } from "./island-repo.js";
 export type { IslandRepoConfig } from "./island-repo.js";
+export { awaitIslandMsg } from "./vessel-host.js";
+export type { AwaitIslandMsgOpts } from "./vessel-host.js";
 export {
   AUTH_WIRE_VERSION,
   mkLarChallenge, mkLarAuth, mkLarAuthOk, mkLarAuthDenied,

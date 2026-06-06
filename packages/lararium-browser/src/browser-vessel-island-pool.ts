@@ -21,6 +21,7 @@ import {
   isIslandToVesselMsg,
   mkManifest,
   mkTeardown,
+  awaitIslandMsg,
 } from "@lararium/mesh";
 import type {
   IslandMsg_Ea,
@@ -49,22 +50,18 @@ interface BrowserSlot {
 
 const HANDSHAKE_TIMEOUT_MS = 10_000;
 
-function _awaitMsg<T extends { type: string }>(
+function _awaitMsg<T extends IslandToVesselMsg>(
   worker: Worker,
-  type:   string,
+  type:   T["type"],
 ): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(
-      () => reject(new Error(`[browser-vessel-island-pool] timeout waiting for ${type}`)),
-      HANDSHAKE_TIMEOUT_MS,
-    );
-    const onMsg = (e: MessageEvent) => {
-      if (!isIslandToVesselMsg(e.data) || e.data.type !== type) return;
-      clearTimeout(timer);
-      worker.removeEventListener("message", onMsg);
-      resolve(e.data as unknown as T);
-    };
-    worker.addEventListener("message", onMsg);
+  return awaitIslandMsg<T>({
+    expectedType: type,
+    timeoutMs:    HANDSHAKE_TIMEOUT_MS,
+    subscribe: (h) => {
+      const fn = (e: MessageEvent) => h(e.data);
+      worker.addEventListener("message", fn);
+      return () => worker.removeEventListener("message", fn);
+    },
   });
 }
 

@@ -1,0 +1,60 @@
+/**
+ * vessel-host — shared vessel↔island transport primitives.
+ *
+ * The pool-collapse foundation (pair 4): the request/reply handshake logic —
+ * register listener, await a matching message, time out, clean up — lived twice
+ * (node pool `_sendAndAwait`, browser pool `_awaitMsg`). It lives once here. The
+ * platform supplies only the `subscribe`/`send` closures; the correlation logic
+ * stays platform-blind.
+ *
+ * Home: this is pure island-protocol transport (no TW5), so it lives in mesh —
+ * the package that owns the protocol — not tw5. Both pools already import mesh.
+ *
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/vessel-host
+ */
+
+import { isIslandToVesselMsg } from "./island-protocol.js";
+import type { IslandToVesselMsg } from "./island-protocol.js";
+
+export interface AwaitIslandMsgOpts<T extends IslandToVesselMsg> {
+  /** The island→vessel message type to wait for (e.g. "ea", "teardown:ack"). */
+  expectedType: T["type"];
+  /** Reject after this many ms. */
+  timeoutMs: number;
+  /** Register a message handler; return its unsubscribe. */
+  subscribe: (handler: (raw: unknown) => void) => () => void;
+  /** Optionally register an error handler; return its unsubscribe. */
+  subscribeError?: (handler: (err: Error) => void) => () => void;
+  /** Optionally fire the outbound message AFTER the listener registers (no race). */
+  send?: () => void;
+}
+
+/**
+ * Await the first island→vessel message whose `type` matches `expectedType`.
+ * Registers the listener BEFORE sending (when `send` provided) so a fast reply
+ * cannot slip the gap. Cleans up every listener + the timer on settle.
+ */
+export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsgOpts<T>): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const offs: Array<() => void> = [];
+    const cleanup = (): void => {
+      clearTimeout(timer);
+      for (const off of offs) off();
+    };
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error(`[vessel-host] timeout waiting for ${opts.expectedType}`));
+    }, opts.timeoutMs);
+
+    offs.push(opts.subscribe((raw) => {
+      if (!isIslandToVesselMsg(raw) || raw.type !== opts.expectedType) return;
+      cleanup();
+      resolve(raw as T);
+    }));
+    if (opts.subscribeError) {
+      offs.push(opts.subscribeError((err) => { cleanup(); reject(err); }));
+    }
+
+    opts.send?.();
+  });
+}

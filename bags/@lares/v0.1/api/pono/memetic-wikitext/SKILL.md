@@ -196,9 +196,9 @@ Aim for a parent that a reader can reload quickly.
 
 <<~/ahu >>
 
-<<~ ahu #verify >>
+<<~ ahu #aftermath >>
 
-## ⤴ Verify
+## ↺ Aftermath
 
 Before closing, check:
 
@@ -209,12 +209,6 @@ Before closing, check:
 - named `pranala` sugar reads as surface sugar, not as a rival edge system
 - examples and long bridge notes live here, off the parent
 - unresolved references remain named rather than hidden
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Close by naming:
 

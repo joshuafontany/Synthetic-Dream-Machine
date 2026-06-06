@@ -197,9 +197,9 @@ Do not:
 
 <<~/ahu >>
 
-<<~ ahu #hooko >>
+<<~ ahu #aftermath >>
 
-## ⤴ Hoʻoko
+## ↺ Aftermath
 
 Cross where routing state changes.
 
@@ -219,12 +219,6 @@ Migration history:
 - `ha-ka-ba/v0.1/api/pono/loci/iam/loci-iam.md` → `ha-ka-ba/v0.1/api/pono/loci/iam.md`
 
 In each case the `lar:` address held stable; file siting returned to the derived position.
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Name what resolved, what ratings hold, and what remains open.
 

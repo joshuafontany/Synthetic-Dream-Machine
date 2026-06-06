@@ -231,9 +231,9 @@ When generating a downstream invariant meme, make the phase line executable as p
 
 <<~/ahu >>
 
-<<~ ahu #hooko >>
+<<~ ahu #aftermath >>
 
-## ⤴ Hoʻoko
+## ↺ Aftermath
 
 Hoʻoko tests contact with reality.
 
@@ -247,12 +247,6 @@ Check:
 - normative keywords still carry real force and were not added decoratively
 
 If contact fails, correct the local fault before widening scope.
-
-<<~/ahu >>
-
-<<~ ahu #aftermath >>
-
-## ↺ Aftermath
 
 Name the residue honestly.
 

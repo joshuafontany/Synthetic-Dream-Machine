@@ -36,6 +36,7 @@ import {
   mkManifest,
   mkTeardown,
   mkWikiPlaceVerb,
+  awaitIslandMsg,
   type IslandStorageConfig,
   type WikiMountSpec,
 } from "@lararium/mesh";
@@ -431,35 +432,15 @@ function _sendAndAwait<T extends IslandToVesselMsg>(
   expectedType: T["type"],
   transferList: (ArrayBuffer | MessagePort)[] = [],
 ): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(
-      () => reject(new Error(`[vm-manager] handshake timeout waiting for ${expectedType}`)),
-      HANDSHAKE_TIMEOUT_MS,
-    );
-
-    const onMessage = (raw: unknown) => {
-      if (!isIslandToVesselMsg(raw) || raw.type !== expectedType) return;
-      clearTimeout(timer);
-      worker.off("message", onMessage);
-      worker.off("error",   onError);
-      resolve(raw as T);
-    };
-
-    const onError = (err: Error) => {
-      clearTimeout(timer);
-      worker.off("message", onMessage);
-      worker.off("error",   onError);
-      reject(err);
-    };
-
-    worker.on("message", onMessage);
-    worker.on("error",   onError);
-
-    if (transferList.length > 0) {
-      worker.postMessage(msg, transferList);
-    } else {
-      worker.postMessage(msg);
-    }
+  return awaitIslandMsg<T>({
+    expectedType,
+    timeoutMs: HANDSHAKE_TIMEOUT_MS,
+    subscribe:      (h) => { worker.on("message", h); return () => worker.off("message", h); },
+    subscribeError: (h) => { worker.on("error",   h); return () => worker.off("error",   h); },
+    send: () => {
+      if (transferList.length > 0) worker.postMessage(msg, transferList);
+      else                          worker.postMessage(msg);
+    },
   });
 }
 
