@@ -70,6 +70,8 @@ Other procedures SHOULD travel outward to the sidecars.
 Explanatory swell SHOULD split outward.
 Shape and pressure teachings MUST stay invariant.
 
+<<~/ahu >>
+
 <<~ ahu #ooda-ha >>
 
 A template for invariants to fill.
