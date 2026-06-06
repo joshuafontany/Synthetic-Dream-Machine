@@ -9,8 +9,8 @@
  * If the @lararium binding is absent or the blob is missing, the island posts
  * fault and ea never fires (pool times out → test fails).
  *
- * Uses the real compiled lar-wiki-island.js entry (not a fixture).
- * Requires: pnpm --filter @lararium/node build (dist/src/lar-wiki-island.js present).
+ * Uses the real compiled node-wiki-island.js entry (not a fixture).
+ * Requires: pnpm --filter @lararium/node build (dist/src/node-wiki-island.js present).
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/blob-sovereignty
  */
@@ -26,7 +26,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../genesis/island.bin");
-const ISLAND_JS   = new URL("../dist/src/lar-wiki-island.js", import.meta.url);
+const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
 const WIKI_ID = "lar:///ha.ka.ba/@test/blob-sovereignty-wiki";
 const TIMEOUT = 30_000;
@@ -37,7 +37,7 @@ const missingGenesis = !existsSync(GENESIS_BIN);
 const missingIsland  = !existsSync(fileURLToPath(ISLAND_JS));
 const skipReason =
   missingGenesis ? "genesis/island.bin absent — run: pnpm --filter @lararium/node build:genesis" :
-  missingIsland  ? "dist/src/lar-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
+  missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
   false;
 
 describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from @lararium CRDT${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`, () => {

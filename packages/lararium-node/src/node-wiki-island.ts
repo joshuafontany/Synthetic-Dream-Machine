@@ -1,5 +1,5 @@
 /**
- * lar-wiki-island — Node.js primary wiki island entry point.
+ * node-wiki-island — Node.js primary wiki island entry point.
  *
  * Sovereign wiki island. Runs the sovereign-island-model lifecycle with
  * makeWikiPrimaryBehavior: disk projection (from manifest.diskMirrors) +
@@ -15,7 +15,7 @@
  *
  * Write routing happens via the in-wiki bag-paths cascade.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-wiki-island
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-wiki-island
  */
 
 import { runSovereignWorker }      from "./sovereign-island-model.js";

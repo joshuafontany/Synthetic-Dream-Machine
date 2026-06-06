@@ -13,7 +13,7 @@
  *     → IslandMsg_Event { verb: "MOVE", listenable: "InteractedWithEvent", fromUri }
  *     → vessel VesselIslandPool.onWorkerEvent
  *
- * Uses the real compiled lar-wiki-island.js + genesis/island.bin.
+ * Uses the real compiled node-wiki-island.js + genesis/island.bin.
  * Failures are pono alignment intent vectors — they name the exact broken link
  * in the pipeline above.
  *
@@ -42,13 +42,13 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../genesis/island.bin");
-const ISLAND_JS   = new URL("../dist/src/lar-wiki-island.js", import.meta.url);
+const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
 const missingGenesis = !existsSync(GENESIS_BIN);
 const missingIsland  = !existsSync(fileURLToPath(ISLAND_JS));
 const skipReason =
   missingGenesis ? "genesis/island.bin absent — run: pnpm --filter @lararium/node build:genesis" :
-  missingIsland  ? "dist/src/lar-wiki-island.js absent — run: pnpm --filter @lararium/node build"  :
+  missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter @lararium/node build"  :
   false;
 
 // ── Helpers ────────────────────────────────────────────────────────────────

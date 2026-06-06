@@ -397,7 +397,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   };
 
   // Admin VM — sovereign admin island AND the operator's authn/z home. Spawns
-  // lar-admin-island.ts; holds its own TW5 VM + Repo + VerbDispatcher + the
+  // node-admin-island.ts; holds its own TW5 VM + Repo + VerbDispatcher + the
   // in-worker keyhive (seed delivered via adminAuth). Vessel retains adminHandle
   // (gate-check reads) + composite (cap-event writes). The resolver delivers
   // AutomergeUrl capability tokens for each CRDT slot.

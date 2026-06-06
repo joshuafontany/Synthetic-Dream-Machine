@@ -35,7 +35,7 @@ import {
 import { waitHandleLocal } from "./repo-helpers.js";
 import { nodeWorkerHandle } from "./worker-handle.js";
 
-const DEFAULT_ADMIN_WORKER_URL = new URL("./lar-admin-island.js", import.meta.url);
+const DEFAULT_ADMIN_WORKER_URL = new URL("./node-admin-island.js", import.meta.url);
 
 export interface AdminVmOptions {
   repo:              Repo;

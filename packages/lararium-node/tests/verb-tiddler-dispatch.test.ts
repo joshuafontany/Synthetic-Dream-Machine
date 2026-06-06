@@ -8,7 +8,7 @@
  *   → island-kernel posts IslandMsg_Event with payload.verb
  *   → vessel onWorkerEvent receives verb
  *
- * Uses the real compiled lar-wiki-island.js + genesis blob.
+ * Uses the real compiled node-wiki-island.js + genesis blob.
  * Requires: pnpm --filter @lararium/node build and build:genesis.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/verb-tiddler-dispatch
@@ -29,13 +29,13 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../genesis/island.bin");
-const ISLAND_JS   = new URL("../dist/src/lar-wiki-island.js", import.meta.url);
+const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
 const missingGenesis = !existsSync(GENESIS_BIN);
 const missingIsland  = !existsSync(fileURLToPath(ISLAND_JS));
 const skipReason =
   missingGenesis ? "genesis/island.bin absent — run: pnpm --filter @lararium/node build:genesis" :
-  missingIsland  ? "dist/src/lar-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
+  missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
   false;
 
 // ---------------------------------------------------------------------------

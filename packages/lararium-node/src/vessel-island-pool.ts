@@ -22,10 +22,10 @@ import {
 import { nodeWorkerHandle } from "./worker-handle.js";
 
 const HOT_CAP = 4;
-const DEFAULT_WORKER_URL = new URL("./lar-wiki-island.js", import.meta.url);
+const DEFAULT_WORKER_URL = new URL("./node-wiki-island.js", import.meta.url);
 
 export interface VesselIslandPoolOptions {
-  /** Compiled island entry script. Defaults to lar-wiki-island.js alongside this module. */
+  /** Compiled island entry script. Defaults to node-wiki-island.js alongside this module. */
   workerScriptUrl?: URL;
   /** Called when an island emits a IslandMsg_Event (RE reaction). */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
