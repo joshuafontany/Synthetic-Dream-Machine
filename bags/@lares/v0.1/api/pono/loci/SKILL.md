@@ -201,42 +201,26 @@ Do not:
 
 ## ↺ Aftermath
 
-Cross where routing state changes.
+Verify the crossing made real contact, then name what the routing pass resolved.
 
-Each transaction MUST name: `lar-uri`, the change made, and the authorizing agent or operator.
-File-siting mutation and canon-MOVE opener change MUST NOT batch silently.
+Hoʻoko — confirm before the change counts:
 
-Before crossing:
-
-- target `lar:` URI stays unchanged
-- parent meme stays at its derived filepath
+- the target `lar:` URI held stable across the move
+- the parent meme sits at its derived filepath
 - child items stay under the sibling terminal-segment directory
-- canon MOVE: all address-stability conditions hold; `?` removal only after operator confirmation
+- a canon MOVE met every address-stability condition; `?` removal followed operator confirmation
+- each transaction named its `lar-uri`, the change, and the authorizing agent or operator — file-siting and canon-MOVE never batch silently
 
-Migration history:
+Aftermath — one completeness judgment per routing pass:
 
-- `ha-ka-ba/v0.1/api/pono/loci/loci.md` → `ha-ka-ba/v0.1/api/pono/loci.md`
-- `ha-ka-ba/v0.1/api/pono/loci/iam/loci-iam.md` → `ha-ka-ba/v0.1/api/pono/loci/iam.md`
+- which URIs resolved via derivation, and which remain declared-unresolved
+- what `mana` / `manao` / `manaoio` posture holds
+- what closes each unresolved address
+- whether the remaining tension reads as authoring backlog or MCP-resolution research
 
-In each case the `lar:` address held stable; file siting returned to the derived position.
-
-Name what resolved, what ratings hold, and what remains open.
-
-One completeness judgment per routing pass:
-
-- which URIs resolved via derivation
-- which URIs remain declared-unresolved
-- what `mana`, `manao`, `manaoio` posture holds
-- whether explicit convention still holds across all surfaces
-- what closes each declared-unresolved address
-- whether remaining tension reads as authoring backlog or MCP-resolution research
-
-After one address resolves, widen: does the stack describe itself coherently after recent migrations?
-
-Aftermath that names only resolved URIs hides the pressure that matters most.
+Then widen: does the stack describe itself coherently after the pass? An Aftermath that names only resolved URIs hides the pressure that matters most.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

@@ -235,33 +235,22 @@ When generating a downstream invariant meme, make the phase line executable as p
 
 ## ↺ Aftermath
 
-Hoʻoko tests contact with reality.
+Hoʻoko tests contact with reality; Aftermath names what remains.
 
-Check:
+Hoʻoko — check the act landed:
 
-- the edited file actually holds the intended invariant surface
-- links and pranala point where the text claims they point
+- the edited file holds the intended invariant surface
+- links and pranala point where the text claims
 - visible ahu still parse as distinct surfaces
 - downstream memes carry no `???` markers
-- moved matter actually left the invariant or was explicitly deferred
-- normative keywords still carry real force and were not added decoratively
+- moved matter actually left the invariant, or left explicitly deferred
+- normative keywords carry real force — added for weight, not decoration
 
 If contact fails, correct the local fault before widening scope.
 
-Name the residue honestly.
-
-Typical residue:
-
-- sidecar matter not yet split
-- ambiguous lines that may still want constitutional clarification
-- quoted source text intentionally left non-normative
-- nearby memes that now diverge from the canonical invariant
-
-Aftermath does not sprawl.
-It marks what remains and carries pressure forward.
+Aftermath — name the residue honestly: sidecar matter not yet split, ambiguous lines that may still want constitutional clarification, quoted source left non-normative, nearby memes that now diverge from the canonical invariant. Aftermath does not sprawl — it marks what remains and carries pressure forward.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

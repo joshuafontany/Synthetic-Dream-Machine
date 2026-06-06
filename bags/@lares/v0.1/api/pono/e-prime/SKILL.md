@@ -212,7 +212,9 @@ Marker lands when the canonical rule requires it.
 
 ## ↺ Aftermath
 
-Turn the settled sentence directly.
+Turn the settled sentence directly, then mark where the turn landed.
+
+Hoʻoko — record the turn:
 
 ```text
 [hooko]
@@ -221,34 +223,17 @@ after:  <turned sentence>
 reason: <short reason>
 ```
 
-A sentence turn beats a lecture.
-A local fix MUST NOT widen into a document rewrite unless the user asked for a full pass.
+A sentence turn beats a lecture. A local fix MUST NOT widen into a document rewrite unless the user asked for a full pass.
 
-<<~ ahu #hooko-hooks >>
+Aftermath — name what cleared and what holds: copulas turned, copulas left standing under a lifted ward, and any sentence whose grounds still want the operator's eye.
 
-### Code Hooks
-
-Deferred placeholders:
+### Code Hooks (deferred)
 
 - `scripts/turn-sentence.*`
 - `scripts/apply-marker-policy.*`
 - `scripts/recheck-turn.*`
 
 <<~/ahu >>
-
-Every surviving `is` or `has` carries a marker.
-The turn did not counterfeit confidence.
-Sentence reads cleanly.
-Result matches the requested posture: audit-only or correction.
-
-Residue stays named honestly:
-
-- unresolved ambiguity
-- quoted or code blocks intentionally left untouched
-- wider document patterns not yet turned
-
-<<~/ahu >>
-
 
 <<~ ahu #edges >>
 
