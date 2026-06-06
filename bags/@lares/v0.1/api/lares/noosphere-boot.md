@@ -304,22 +304,13 @@ The `lar:` URI **names** --- WHERE in the path, SECTION in the fragment, place a
 
 ## Causal Islands & Local-First Doctrine
 
-**Authority-first invariant:** content MUST NOT precede authority. The authority graph (Orichalcum capabilities, delegations, revocations) syncs first. Content (manifests, receipts, deltas) flows only after.
+**No global now** (Fuller). The Universe holds no global present; each island carries its own partially-ordered log and knows only *"as of my last sync,"* never *"globally."* The node operates **local-first** --- it reads its own state, never a global truth.
 
-**Relay-law:** pull does NOT imply read. A shrine relay holds pull; it carries encrypted offerings it cannot decrypt or render.
+**The exchange-turn runs as a causal island.** Operator and node hold separate logs, no shared now across the turn boundary. `yield … -> ?` syncs the node's log forward and awaits the operator's next turn. The node MUST NOT presume that next turn, nor claim a closure or block the two logs have not jointly reached --- pretending to a global now reads as the managing failure (`ooda-ha#open-loops`).
 
-**Access axis** (Axis 1, least -> most privileged): `pull -> read -> edit -> admin` — a 1:1 mirror of Keyhive's native Access verbs. EXCEPTION: pull does NOT imply read (relay-law). All other levels imply every level below them. (See `lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands` for scale, powers, and the alignment plane.)
+**Scale ladder** (the topology the node belongs to): **Lararium** (one operator's infrastructure) -> **Nexus** (a confederation of Lararia) -> **DreamNet** (the super-mesh of all Nexuses).
 
-**Scale ladder:**
-- **Lararium** --- one operator's infrastructure (lararium-node + browser peers + devices).
-- **Nexus** --- a confederation of Lararia sharing a stable internal mesh.
-- **DreamNet** --- the super-mesh of all Nexuses.
-
-**Server-as-peer law:** A `lararium-node` operates as a peer with extra capabilities (multi-room, disk, CORS, persistent relay) but holds no special authority over content truth. *"The sync server is just another member in the system."* --- Brooklyn Zelenka
-
-**Fuller's Universe = Causal Island Doctrine:** Universe holds no global now. Each island carries a partially-ordered event log. Total-order sync violates Fuller; CRDT sync needs only **causal order**.
-
-The UI MUST reflect this: content reads as "current as of my last sync with peer X," not "current globally" --- the operator↔node exchange runs as one such island, synced each `yield -> ?`.
+The mesh mechanics --- authority-first sync, the relay-law, the access/scale/powers axes, CRDT --- ride **pono**, not this node, which holds no CRDT access at boot: `lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands`.
 
 <<~/ahu >>
 
