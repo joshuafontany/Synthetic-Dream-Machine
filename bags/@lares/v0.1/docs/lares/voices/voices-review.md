@@ -23,7 +23,6 @@ retain = false
 
 # Lararium Voices — Extraction Review
 
-Not invariant law.
 This memo plans and tracks the extraction of voice-house architecture from legacy stack files
 into the settled docs rooms under `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/`.
 
@@ -73,18 +72,18 @@ Output rooms:
 
 ### What the legacy stack carries well
 
-- The thirteen coordinators: roles, functions, tonal registers — clearly settled
-- Naming law: default `Lares (Role)`, earned names, Mischief-Muse seniority — clearly settled
-- Worker-coordinator distinction: lifecycle, tag format, escalation routing — clearly settled
-- Escalation matching: finding type → receiving coordinator — clearly settled
-- Hard gate: voice architecture applies unconditionally; no mode switch suspends it — clearly settled
+- The thirteen Voices: roles, functions, tonal registers
+- Naming law: default `Lares (Role)`, earned names, Mischief-Muse seniority
+- Worker-Voice distinction: lifecycle, tag format, escalation routing
+- Escalation matching: finding type → receiving Voice
+- Hard gate: voice architecture applies unconditionally; no mode switch suspends it
 
 ### What the legacy stack does not carry
 
 - Any concept of a **Mask** layer — this layer does not exist in legacy
 - Mask grammar: what a mask consists of, how it stacks, how it gets declared
 - Mask corpus reference: the idea that a mask carries a source-text context alongside a voice character
-- Which coordinators surface "active this turn" under a mask — legacy has no frame for per-turn voice selection
+- Which Voices surface "active this turn" under a mask — legacy has no frame for per-turn voice selection
 - Mask lifecycle: session-declared vs. turn-declared vs. persistent
 
 ### Immediate pressure markers
@@ -116,22 +115,22 @@ Output rooms:
    - Two examples help but do not fully determine grammar — corpus reference, turn vs. session scope, multi-mask behavior all need decisions
 
 2. **Voice house needs pruning, not redesign**
-   - The thirteen are settled. Earned names are settled. Seniority is settled.
+   - The Thirteen stand settled — earned names and seniority included.
    - The legacy prose carries some operational HUD detail that belongs in signal space, not voice space
    - The target room should carry identity and naming law, not HUD emit rules
 
 3. **Worker boundary stays important**
-   - The hard rule — workers do not address the operator directly, all output routes through a coordinator — needs to survive extraction clearly
+   - The hard rule — workers do not address the operator directly, all output routes through a Voice — needs to survive extraction clearly
    - The escalation matching table is the most practically useful artifact; it should survive with minimal alteration
 
 4. **Mask layer sits in Ka/Podge territory**
    - Masks do not change *what* the house is (Ha/structure)
    - Masks change *how* the house moves and presents (Ka/character)
-   - This distinction matters for the invariant: the mask implementation should reach only the output face, not the coordinator identity layer
+   - This distinction matters for the invariant: the mask implementation should reach only the output face, not the Voice identity layer
 
 ### Working interpretation
 
-Coordinators and workers extract cleanly with minimal new writing.
+Voices and workers extract cleanly with minimal new writing.
 The mask layer requires the most careful new definition and benefits most from having concrete examples in the room before the grammar hardens.
 
 <<~/ahu >>
@@ -171,7 +170,7 @@ This pass should produce:
 | What does a mask consist of? | Name + corpus reference + voice character description |
 | What does corpus reference carry? | A declared source-text context (real or fictional) that the house voices draw on for diction, idiom, and knowledge-frame |
 | What does voice character carry? | Tone, affect, register, any specific behavioral constraints |
-| Which coordinators show as active? | Declared per-turn in mask header: `Mask Name (Voice1, Voice2, ...)` |
+| Which Voices show as active? | Declared per-turn in mask header: `Mask Name (Voice1, Voice2, ...)` |
 | Session vs. turn scope? | Masks declared in LARES = session-persistent; declared inline = turn-local |
 | Can multiple masks stack? | Working assumption: one mask active at a time; switching replaces |
 | Does the mask affect workers? | Workers remain session-local and tag-bound; mask may color their output tone but does not change their routing role |
@@ -186,7 +185,7 @@ This pass should produce:
 
 - [x] write `packages/lares-core/memes/docs/lares/voices.md` — parent shelf and three-layer framing
 - [x] write `voices/voices-review.md` — this memo
-- [x] write `voices.md#voice-house` — canonical Thirteen, naming law, earned names, seniority (inline in parent; coordinators subroom retired)
+- [x] write `voices.md#voice-house` — canonical Thirteen, naming law, earned names, seniority (inline in parent; Voices subroom retired)
 - [x] write `voices/workers.md` — worker lifecycle, tag format, escalation template
 - [x] write `voices/masks.md` — mask grammar, corpus model, two concrete examples, stacking law
 
@@ -254,9 +253,9 @@ The pass closes when:
 
 After this pass:
 
-- `voices.md#voice-house` reads as the definitive Voice house reference ✓
-- `voices/workers.md` reads as the definitive worker swarm reference ✓
-- `voices/masks.md` reads as the mask grammar foundation the invariant can eventually implement ✓
+- `voices.md#voice-house` — the definitive Voice house, naming law, and seniority ✓
+- `voices/workers.md` — worker lifecycle, tag format, and escalation template ✓
+- `voices/masks.md` — the mask grammar the invariant absorbs forward ✓
 - `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` can begin to absorb the settled grammar
 
 ### Further Extractions Identified — Next Passes

@@ -37,7 +37,7 @@ status-date  = "2026-04-23"
 ## Core Proposition
 
 Lararium MCP exposes `lar:///` source truth to local and future remote clients through a dependency-light, read-only server.
-The server begins from lawful carriers, capability sets, and explicit `lar:` routing rather than from generic markdown files.
+The server roots in lawful carriers, explicit `lar:` routing, and inspectable posture — not generic markdown files.
 
 The v1 spine carries four promises:
 
@@ -107,8 +107,8 @@ The v1 spine carries four promises:
 ## Resource, Prompt, and Tool Model
 
 Resources expose source carriers and virtual compiler products.
-Prompts package hydration artifacts as user-turn messages suitable for client bootstrapping.
-Tools provide explicit read-only operations and advertise read-only, idempotent, non-destructive annotations.
+Prompts package hydration artifacts as user-turn messages for client bootstrapping.
+Tools declare read-only, idempotent, non-destructive operations, with matching annotations.
 
 The local server currently binds JSON-RPC methods for initialize, ping, resources, resource templates, tools, and prompts.
 Remote transport should wrap the same read-only façade only after scope and auth policy land.

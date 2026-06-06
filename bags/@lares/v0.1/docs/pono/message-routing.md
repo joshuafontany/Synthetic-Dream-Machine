@@ -25,7 +25,7 @@ invariant = false
 
 Extended docs for memetic-wikitext's two routing directions on the canvas / flow surface. The family law lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families`; this surface carries the routing treatment the submission spec abstracts.
 
-The message-up / render-down tree pattern holds as correct modern architecture, not TW5 legacy: SwiftUI (PreferenceKey) and Flutter (NotificationListener + InheritedWidget) converged on the same model independently. The improvement over TW5 — routing decouples message channels from tree position: multiple independent channels, not one `messagecatcher` per branch.
+SwiftUI (PreferenceKey) and Flutter (NotificationListener + InheritedWidget) independently converged on the same model. The advantage: routing breaks message channels free from tree position — one channel per named pranala edge, no global catcher.
 
 <<~/ahu >>
 
@@ -52,7 +52,7 @@ Both ride the canvas / flow surface (value and signal wires) — distinct from `
 ## Invariant Routing Rules
 
 1. A `family:dataflow` edge carries a value **root-ward → leaf-ward** (source pushes to its owned subtree).
-2. A `family:message` edge carries a signal **leaf-ward → root-ward** (source bubbles toward the control root).
+2. A `family:message` edge bubbles a signal **leaf-ward → root-ward**, toward the control root.
 3. Routing follows the `family:control role:owns` DAG, not `ahu` nesting depth.
 4. **Multiple independent channels** — one per named pranala edge. No global catcher. A meme declares itself a handler by carrying an inbound `family:message` edge.
 5. Message propagation stops at the nearest upstream handler. Absent a handler, the signal drops with a diagnostic, not an error.

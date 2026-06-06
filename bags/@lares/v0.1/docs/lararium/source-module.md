@@ -46,9 +46,7 @@ Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
 A source-module meme carries the verbatim source text of one TypeScript/TSX file
 as its body, with structured fields naming its package, path, and exports.
 
-Source modules are emitted by a postbuild script (`write-source-memes.ts`) that
-runs after each `pnpm build` in the monorepo. They are NOT checked into `lares/` —
-they are generated artifacts written into the Automerge store at boot.
+A postbuild script (`write-source-memes.ts`) emits source modules after each `pnpm build`. The script never checks them into `lares/` — it writes them as generated artifacts into the Automerge store at boot.
 
 This makes the monorepo's source navigable through the meme graph:
 agents can read, query, and react to source changes as memes.
@@ -103,7 +101,7 @@ The `write-source-memes.ts` script MUST:
 
 1. Run after each successful build in affected packages.
 2. For each priority source file: read, hash, emit a carrier meme into the store.
-3. Use origin `{ kind: "operator-import" }` — source memes are canon-hydrate peers.
+3. Use origin `{ kind: "operator-import" }` — source memes enter as canon-hydrate peers.
 4. Overwrite existing carrier if content-hash differs; no-op if hash matches.
 5. Never emit noise or data files — only files with named exports that implement
    invariant capabilities or architectural law.

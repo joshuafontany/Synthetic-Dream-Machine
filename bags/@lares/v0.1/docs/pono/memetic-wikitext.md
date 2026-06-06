@@ -25,7 +25,6 @@ invariant = false
 
 # Memetic Wikitext — Extended Docs
 
-This file does not bind invariant law.
 Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext`.
 This surface carries guidance, examples, and split residue.
 
@@ -63,8 +62,7 @@ Other quick chant terms may also serve as named `pranala` sugar where their own 
 | `canonical` | stable parent surfaces | the smallest lawful root, explicit thresholds, no tutorial swell |
 | `recovery` | salvage, repair, migration | residue, uncertainty, and degraded truth named plainly |
 
-Profiles tune posture.
-They do not rewrite primitive meaning.
+Profiles tune posture, not primitive meaning.
 
 <<~/ahu >>
 
@@ -125,7 +123,6 @@ Deepen each contract in its own carrier; do not re-expand the parent submission.
 ## Migration Note
 
 This docs companion formed during the 2026-04-21 yin split/refine/clean pass.
-The old parent mixed invariant law, operator procedure, examples, bridge commentary, and rating notes in one surface.
 The current shape keeps:
 
 - the submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` (morphed to submission grade 2026-06-05)
@@ -144,7 +141,7 @@ The following verdicts emerged from a formal prior-art review against W3C, IETF,
 **1. Nearest live ancestor: TiddlyWiki, not HTML.**
 Memetic sigils descend from TiddlyWiki's transclusion runtime. The sigil surface should claim descent from **transclusive text composition**, not from HTML extension. The best local analogue for `kahea` is TiddlyWiki's addressed transclusion surface, not generic macro text substitution.
 
-Sharper lineage statement: memetic wikitext inherits not only TiddlyWiki's transclusion features, but also its style of language definition — a parseable text surface described through explicit parser phases, rule classes, and structural lowering into a runtime-interpretable tree.
+Memetic wikitext inherits not only TiddlyWiki's transclusion features, but also its style of language definition — a parseable text surface described through explicit parser phases, rule classes, and structural lowering into a runtime-interpretable tree.
 
 **2. TiddlyWiki defines grammar operationally, not as one closed EBNF.**
 TW5 uses a recursive descent WikiText parser whose rules load from separate `module-type: wikirule` modules typed as `pragma`, `block`, or `inline`. Memetic wikitext inherits this operational grammar model — rule-table dispatch, not monolithic grammar file.
@@ -158,10 +155,10 @@ TW5 docs show `{{MyTiddler||Template}}` generating a `TiddlerWidget` containing 
 **2c. Hard vs soft transclusion maps to visible vs latent meme-edge distinction.**
 TW5 distinguishes hard transclusions (detectable by superficial WikiText inspection) from soft transclusions (hidden in procedures, variables, or dynamically generated widgets). The visible vs latent meme-edge distinction has direct TW5 precedent.
 
-**2d. Recursion and self-reference are a documented error seam.**
+**2d. Recursion and self-reference form a documented error seam.**
 TW5 defines `{{!!text}}` as a "Recursive transclusion error" and treats indirect cycles as the same class of failure. Memetic sigils need to define direct and indirect recursion failures explicitly: self-targeting `ahu`, recursive wrapper re-entry, and cyclic `kahea` graphs.
 
-**2e. Cascades are first-match rule stacks — `kahea -> cascade` is native.**
+**2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.**
 TW5 cascade page: a list of conditions evaluated in turn, ordered by tagged-tiddler ordering, each rule a filter expression, first non-empty result wins. `kahea -> filter://cascade...` is conceptually aligned with existing TW5 selection machinery, not an arbitrary detour.
 
 **3. Structural discipline: XML/XHTML well-formedness, not HTML looseness.**
@@ -186,9 +183,9 @@ JSON-RPC and MCP show how to specify runtime packets and capability negotiation 
 - Do we need a one-time substitution mode separate from live transclusion?
 - Do remote or cross-system calls require explicit opt-in?
 
-These design tests drove the v5 spec rebuild. They came from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki.
+These design tests emerge from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki, and shaped the v5 spec rebuild.
 
-The submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` now realizes these verdicts: TW5-transclusion lineage (#introduction), an operational rule-table model plus an ABNF surface grammar (#grammar), XML-style closure discipline (#lexical-structure), fragment + media-type semantics (#media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#scope-model). The remaining open tests ride Annex B.
+The submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` carries these verdicts: TW5-transclusion lineage (#introduction), an operational rule-table model plus an ABNF surface grammar (#grammar), XML-style closure discipline (#lexical-structure), fragment + media-type semantics (#media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#scope-model). The remaining open tests ride Annex B.
 
 <<~/ahu >>
 

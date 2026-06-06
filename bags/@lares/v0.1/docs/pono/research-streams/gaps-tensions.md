@@ -23,7 +23,7 @@ invariant = false
 
 # Gaps, Tensions, and Conflicts — Living Catalogue
 
-The design-history record for memetic-wikitext. Each entry tracks a gap (missing capability), tension (two correct pulls in friction), or conflict (a hard incompatibility). Resolved entries stay as the record of how the resolution landed; open entries sync to the submission's **Annex B** (`lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext#annex-open`).
+The design-history record for memetic-wikitext. Each entry tracks a gap (missing capability), tension (two correct pulls in friction), or conflict (a hard incompatibility). Resolved entries preserve how each item closed; open entries sync to the submission's **Annex B** (`lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext#annex-open`).
 
 Family assignments here read post the 2026-06-05 transclusion reorg: `aka` (frozen) and `kahea` (live) carry **`family:transclusion`**, not the older observe / dataflow assignments. `wai` retired into `heihei`.
 
@@ -81,7 +81,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 ### Tension 1 — `aka`: "passive inclusion" vs "frozen transclusion"
 
-An older docs guide warned "avoid treating `aka` as implying live invocation." Correct but incomplete: `aka` performs frozen (shadow) transclusion — it carries **`family:transclusion`** pressure with read-only render-time embedding, not pure passivity. The sharp statement: `aka` = frozen (read-only, non-propagating); `kahea` = live (subscription-fresh, propagating). The distinction reads as propagation and fidelity, not presence/absence of transclusion. Both sit in the `transclusion` family (page surface), distinct from `dataflow` value-wires (canvas).
+An older docs guide warned "avoid treating `aka` as implying live invocation." Correct but incomplete: `aka` performs frozen (shadow) transclusion — it carries **`family:transclusion`** pressure with read-only render-time embedding, not pure passivity. `aka` = frozen (read-only, non-propagating); `kahea` = live (subscription-fresh, propagating). The distinction reads as propagation and fidelity, not presence/absence of transclusion. Both sit in the `transclusion` family (page surface), distinct from `dataflow` value-wires (canvas).
 
 ### Tension 2 — compile-time cycle detection vs render-time recursion guard
 
@@ -97,7 +97,7 @@ Both must hold. The compile-time DAG guard (control cycles) does not prevent ren
 - **URI form** (`lar:///…`, or a path with `/`/`#`) → `EdgeSugarNode { sigil:"kahea", family:"transclusion" }` — compile-time transclusion edge + render-time live embed.
 - **Name form** (plain identifier, optionally `name(args)`) → `SigilNode { sigilName:"kahea", attrs:{ name, args } }` — render-only, no graph edge.
 
-The parser matches URI form first (anchored on `lar:` or the presence of `/`/`#`); name form catches the rest. A `wehe` parameter interpolation resolves as name form. **Invariant:** the compile layer never sees a malformed transclusion edge for a plain-name target.
+The parser matches URI form first (anchored on `lar:`, `/`, or `#`); name form catches the rest. A `wehe` parameter interpolation resolves as name form. **Invariant:** the compile layer never sees a malformed transclusion edge for a plain-name target.
 
 ### Tension 5 — inline filter vs `hana` block
 
@@ -111,7 +111,7 @@ The parser matches URI form first (anchored on `lar:` or the presence of `/`/`#`
 
 ### Conflict 1 — bare `<<name>>` — DISSOLVED (no conflict)
 
-Memetic-wikitext reads as a **superset of TW5 wikitext**: the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ … >>` adds the Lararium sigil namespace *within* the `<<` `>>` family — it does not displace TW5 macros. The two forms coexist; no conversion required. *(The earlier "must convert" framing mistook the superset for a conflict.)*
+Memetic-wikitext reads as a **superset of TW5 wikitext**: the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ … >>` adds the Lararium sigil namespace *within* the `<<` `>>` family — it does not displace TW5 macros.
 
 ### Conflict 2 — TW5 `{{Title||Template}}`
 
