@@ -153,7 +153,7 @@ infrastructure rather than rolling a separate exporter.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
-<<~ pranala #extends-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
+<<~ pranala #has-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
 <<~ pranala #uses-composite-store ? -> lar:///ha.ka.ba/@lararium/tw5/composite-store family:control role:uses >>
 <<~ pranala #uses-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:uses >>
 

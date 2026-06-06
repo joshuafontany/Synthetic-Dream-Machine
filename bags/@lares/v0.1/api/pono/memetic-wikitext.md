@@ -208,7 +208,7 @@ A pranala edge MUST declare a **family** from the canonical set. Families carry 
 
 | family | sugar | surface | carries |
 |---|---|---|---|
-| `control` | *(explicit `pranala`)* | graph | structural authority (owns / implements / extends) |
+| `control` | *(explicit `pranala`)* | graph | structural authority (`role:has`; composition only) |
 | `constraint` | `pono` | graph | a rule that MUST hold; no execution pulse |
 | `relation` | `loulou` | page | a navigable link, no auto-embed |
 | `observe` | *(monitoring)* | page | inspection / measurement / attention; confidence-bounded |

@@ -96,7 +96,7 @@ as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 ```text
 <<~ heihei [tag[invariant]sort[title]] >>
 <<~ huli [toml:tagspace[grammar]] as item >>
-<<~ ui [edge:family[control]role[implements]] >>
+<<~ ui [edge:family[control]role[has]] >>
 ```
 
 **Block** — via `hana` with an explicit grammar key when the expression is

@@ -119,8 +119,6 @@ close-pattern = '<<~\/heihei\s*>>'
 <<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
 <<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
 <<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wai-retired >>
-<!-- wai (TOML: conditional alias) retired; heihei carries the conditional-filter semantics -->
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-heihei family:control role:has >>
 <<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>

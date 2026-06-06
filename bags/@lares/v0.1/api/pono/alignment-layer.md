@@ -216,7 +216,7 @@ right — to decide whose presence the hearth refuses.
 
 <<~ ahu #edges >>
 
-<<~ pranala #extends-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:has >>
+<<~ pranala #has-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #relates-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:relation role:sits-above >>
 <<~ pranala #relates-talk-story ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model family:relation role:transports-conflict-surfacing >>

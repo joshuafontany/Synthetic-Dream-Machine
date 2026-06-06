@@ -86,7 +86,7 @@ The agent should avoid premature closure, avoid false certainty, and mark uncert
 
 The agent should hold open competing readings when the frame remains underdetermined.
 
-<<~ loulou lar:///ha.ka.ba/@lares/pono/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/e-prime >>
 
 <<~/ahu >>
 

@@ -1,4 +1,6 @@
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research >>
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research"
 file-path = "bags/@lares/v0.1/docs/pono/sigil-grammar-research.md"
@@ -416,4 +418,4 @@ When editing grammar meme or parser:
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research >>
+<<~ &#x0004; -> ? >>

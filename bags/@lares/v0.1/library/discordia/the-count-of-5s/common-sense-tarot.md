@@ -7,7 +7,7 @@
 ```toml
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot"
 file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
-content-type = "text/x-memetic-wikitext"
+type = "text/x-memetic-wikitext"
 tagspace = "stable"
 register = "Synthesis"
 manaoio = 16
@@ -3119,8 +3119,6 @@ Yes, but the results are mixed. Since I usually know what I want to happen, I te
 
 <<~/ahu >>
 
-<<~/ahu >>
-
 <<~ ahu #chapter-17 >>
 
 ## Chapter 17 **BEING THE BEST READER POSSIBLE—A REVIEW**
@@ -3234,8 +3232,6 @@ P.O. Box 7589
 Van Nuys, CA 91409
 
 Cover design: Michele Lanci-Altomare
-
-<<~/ahu >>
 
 <<~/ahu >>
 
