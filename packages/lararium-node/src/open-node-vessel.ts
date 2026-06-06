@@ -59,6 +59,7 @@ import {
   mountSocialPlane,
   addCanonLayer,
   addReadOnlyLayer,
+  seedVesselDefaults,
 } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
@@ -418,8 +419,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // The admin island's VerbDispatcher delegates unknown verbs here via admin:delegate-verb.
   // vmManager is assigned after island boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new VerbTable();
-  // Stub "echo" handler — useful for end-to-end smoke of the protocol.
-  jobRegistry.register("echo", async (args) => ({ echoed: args }));
+  seedVesselDefaults(jobRegistry);   // echo + universal base verbs; powers below
   // Read-only recipe-presence query — `lares where` previews source bag.
   jobRegistry.register("where",   makeWhereReactor({ composite }));
   // Read-only Residency Model coordinate-inspection — `lares wiki resolve`.

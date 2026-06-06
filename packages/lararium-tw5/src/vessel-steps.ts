@@ -24,6 +24,7 @@ import {
   type LarDoc,
   type CompositeStore,
 } from "@lararium/mesh";
+import type { VerbTable } from "./verb-dispatcher.js";
 
 /** Resolve one bag's doc handle. Encodes the platform/office seed policy
  *  (node relay → throw on miss; browser keeper → create blank). */
@@ -54,6 +55,18 @@ export function addCanonLayer(composite: CompositeStore, bagId: string, handle: 
 /** Read-only layer (@catalog, corpus bags): synced for reads, never written. */
 export function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
+}
+
+/**
+ * Seed the base verbs every vessel answers, regardless of platform or office.
+ * Office-specific powers (node's residency/wiki reactors, etc.) compose ON TOP
+ * by registering further verbs — the base set stays shared.
+ */
+export function seedVesselDefaults(registry: VerbTable): void {
+  // echo — universal protocol smoke verb.
+  if (!registry.has("echo")) {
+    registry.register("echo", async (args) => ({ echoed: args }));
+  }
 }
 
 export interface SocialPlaneUrls {

@@ -54,7 +54,7 @@ import {
 import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
-  mountSocialPlane, addCanonLayer, addReadOnlyLayer,
+  mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults,
 }                                            from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -467,9 +467,7 @@ export async function openBrowserVessel(
 
     // Wire verb registry — minimal browser surface (echo + verbs from caller).
     const registry: VerbTable = verbTable ?? new VerbTable();
-    if (!registry.has("echo")) {
-      registry.register("echo", async (args) => ({ echoed: args }));
-    }
+    seedVesselDefaults(registry);   // echo + universal base verbs
     admin.mountMainVerbs(registry);
 
     if (workerScriptUrl) {
