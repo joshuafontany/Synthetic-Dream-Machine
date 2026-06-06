@@ -10,7 +10,7 @@ register  = "Synthesis-Canon"
 manaoio   = 16
 mana      = 17
 manao     = 17
-role          = "render pipeline law: three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
+role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 cacheable     = true
 retain        = true
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
@@ -26,12 +26,43 @@ source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
 
 Render pipeline law names how a memetic object moves from disk surface to rendered output and back.
 
-Two distinct paths carry render work:
+Two distinct engines carry render work:
 
-1. **TW5 render path** — runs inside the TW5 VM; `lar-render-mode` variable drives mode dispatch; template cascade selects the rendering tiddler per sigil
-2. **Isomorphic parse path** — `@lararium/tw5/meme-ast`; produces typed `MemeAstNode[]` and `PranalaEdge[]` for island adaptor, deserializer, and TW5 module consumers; compiled to TW5 JS via Vite; web3-native
+1. **TW5 render engine** — runs inside the TW5 VM; the `lar-render-mode` variable drives mode dispatch; the template cascade selects the rendering tiddler per sigil
+2. **Isomorphic parse engine** — `@lararium/tw5/meme-ast`; emits typed `MemeAstNode[]` and `PranalaEdge[]` for the island adaptor, deserializer, and TW5 module consumers; compiles to TW5 JS via Vite; web3-native
 
-Both paths consume the same `text/x-memetic-wikitext` surface. The isomorphic parse path lives in `@lararium/tw5` as TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
+Both engines consume the same `text/x-memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
+
+<<~/ahu >>
+
+<<~ ahu #render-axes >>
+
+## Render Axes — Stage, Surface, and Mode held apart
+
+Render work runs along orthogonal axes; naming them apart lets each vary without dragging the others. (The two engines above name a separate, independent axis — *which engine consumes* the surface — neither a surface nor a stage.)
+
+### Stage axis — the pipeline (parse → widget → DOM)
+
+One surface passes through three trees:
+
+1. **parse tree** — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
+2. **widget tree** — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here (the middle layer named at `memetic-wikitext#gaps-tensions-conflicts`, Gap 8).
+3. **DOM tree** — the widget tree renders into a document. In this stack that document reads as a *fakeDom*, not the browser's live one.
+
+### Surface axis — the cameras (which document the stage renders into)
+
+Two cameras read the **one shared** wiki world graph and render into **separate** documents (`camera-mount` law C-2):
+
+- **Story River camera** — backed by `window.document`; the **page** surface; child-slot widgets transclude content into the DOM (the `transclusion` family lands here).
+- **TLDraw canvas camera** — backed by an `OffscreenCanvas` document; the **flow** surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
+
+The stage pipeline runs once per camera over the shared graph; only the DOM-tree target (which fakeDom) differs. **World graph shared; render surfaces separate.**
+
+### Mode axis — render posture (`lar-render-mode`)
+
+Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (frozen snapshot). A mode picks the output *form*, never the camera. Detailed at `#three-render-modes`.
+
+**Composition:** a *stage* renders the shared graph onto a *surface* (camera) under a *mode*, driven by an *engine*. Four axes, freely combined — none collapses into another.
 
 <<~/ahu >>
 
@@ -54,7 +85,7 @@ The boundary separates:
 - **wiki → disk** (carrier render collapses tiddler graph back to flat carrier text)
 - **wiki → snapshot** (projection render emits frozen `aka` references)
 
-No path should silently cross the boundary without declaring its mode.
+Every render pass MUST declare its mode before it crosses the boundary.
 
 <<~/ahu >>
 
@@ -125,7 +156,7 @@ A target adapter may replace the default template by tagging a custom tiddler wi
 
 ## Child-Slot Model
 
-`ahu` and `kau` are `lar-kind: child-slot` sigils. They produce addressable child tiddlers during deserializer expansion.
+`ahu` and `kau` carry `lar-kind: child-slot`. They produce addressable child tiddlers during deserializer expansion.
 
 **ahu** — worksite text slot. URI = `parentUri + slotName`. In HTML mode the `~ahu` widget sets `currentTiddler` to the child URI and transcludes via the ahu-template cascade.
 
@@ -146,7 +177,7 @@ The render posture difference (live vs. frozen) lives in the template cascade se
 
 ## Non-TW5 Path — Meme AST
 
-`@lararium/mesh/meme-ast` provides a typed AST for consumers outside the TW5 VM.
+`@lararium/tw5/meme-ast` provides a typed AST for consumers outside the TW5 VM.
 
 Implementation: `packages/lararium-tw5/tiddlers/src/meme-ast.js` (compiled from `meme-ast-entry.ts`)
 
@@ -173,9 +204,9 @@ This AST represents the same surface that TW5 renders, but as a traversable type
 
 ## Kapu Render Posture — Open Question
 
-`kapu` (`lar-kind: edge-sugar`) currently operates at compile layer only and emits no HTML render output. It marks a threshold, restriction, or qualification in the edge graph.
+`kapu` (`lar-kind: edge-sugar`) operates at the compile layer only and emits no HTML render output. It marks a threshold, restriction, or qualification in the edge graph.
 
-Open question: should `kapu` gain render presence in HTML mode — a visible boundary or disclosure annotation in the story river? Resolution pending mesh network testing. Until resolved, compliant renderers MUST NOT invent render output for `kapu` sigils. The compile-layer annotation behavior is stable; the render behavior is explicitly unresolved.
+Open question: should `kapu` gain render presence in HTML mode — a visible boundary or disclosure annotation in the story river? Resolution waits on mesh-network testing. Until it resolves, compliant renderers MUST NOT invent render output for `kapu` sigils. The compile-layer annotation behavior holds stable; the render behavior stays open.
 
 <<~/ahu >>
 

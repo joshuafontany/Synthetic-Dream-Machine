@@ -92,72 +92,119 @@ function makeDeniedFsShim(): Record<string, unknown> {
   });
 }
 
-async function loadNodeTiddlyWiki(coreBlob?: TW5CoreBootBlob): Promise<{ TiddlyWiki: () => unknown }> {
-  if (!coreBlob) {
-    throw new Error("TW5Engine: Node boot requires coreBlob from LarariumDoc; refusing node_modules tiddlywiki fallback.");
-  }
+/**
+ * HeadlessBootEnv — the composable seam of the headless-island TW5 boot.
+ *
+ * NOT a platform interface that node/browser "implement": it is exactly what
+ * remains after subtracting the identical boot skeleton from the two runtimes —
+ * three pieces the ONE boot flow (`loadTiddlyWikiFromBlob`) composes. The runtime
+ * is chosen in `prepareHostBootInstance`; the rest of the flow is platform-blind.
+ *
+ *  - `resolveBuiltin` — native-first/shim-fallback `require` for the core blob:
+ *    Node hands back real builtins (allowlist) via createRequire; a browser Worker
+ *    hands back synthetic vm/path shims. `fs` is denied on both; the rest rejected.
+ *  - `preSeedTw` — the `$tw` seed before blob-eval (a browser Worker pre-seeds
+ *    `node:{}` so bootprefix loads the vm shim via `_load`; Node detects via real
+ *    `process`).
+ *  - `processArg` — the `process` value handed to the blob (real on Node, `undefined`
+ *    in a browser Worker, where the eval'd core must see no Node process).
+ */
+interface HeadlessBootEnv {
+  resolveBuiltin: (id: string) => unknown;
+  preSeedTw:      Record<string, unknown>;
+  processArg:     unknown;
+}
 
+async function makeNodeBootEnv(): Promise<HeadlessBootEnv> {
   const { createRequire } = await import("module");
   const nodeRequire = createRequire(import.meta.url);
+  return {
+    // Native-first: real Node builtins from the allowlist; fs denied; rest rejected.
+    resolveBuiltin: (id: string): unknown => {
+      if (id === "../package.json")          return { engines: { node: ">=18.0.0" } };
+      if (id === "fs" || id === "node:fs")   return makeDeniedFsShim();
+      if (TW5_NODE_BOOT_BUILTINS.has(id))    return nodeRequire(id);
+      throw new Error(`TW5Engine: coreBlob attempted non-builtin require(${JSON.stringify(id)}) during boot`);
+    },
+    preSeedTw:  { boot: { suppressBoot: true } },
+    processArg: process,
+  };
+}
+
+function makeBrowserWorkerBootEnv(): HeadlessBootEnv {
+  return {
+    // Shim-fallback: a browser Worker has no createRequire/vm/path; synthesize them.
+    resolveBuiltin: (id: string): unknown => {
+      if (id === "../package.json")            return { engines: { node: ">=18.0.0" } };
+      if (id === "fs"   || id === "node:fs")   return makeDeniedFsShim();
+      if (id === "path" || id === "node:path") return makeBrowserPathShim();
+      if (id === "vm"   || id === "node:vm")   return makeBrowserVmShim();
+      throw new Error(`TW5Engine: browser Worker coreBlob attempted require(${JSON.stringify(id)}) — Node built-ins unavailable`);
+    },
+    // node:{} so bootprefix (run immediately via _load) loads the vm shim instead
+    // of detecting node=null and calling vm.createContext({}) with vm=undefined.
+    // Neutralized (node=null, loadTiddlersNode stub) after blob eval, before boot().
+    preSeedTw:  { boot: { suppressBoot: true }, node: {}, browser: null },
+    processArg: undefined,
+  };
+}
+
+/**
+ * The ONE headless boot flow: evaluate the content-addressed core blob with a
+ * CommonJS-shaped env composed from `env`, leaving the island's own `$tw` on
+ * globalThis (its sovereign TW5 instance) and restoring the eval-only shims.
+ */
+function loadTiddlyWikiFromBlob(
+  coreBlob: TW5CoreBootBlob | undefined,
+  env: HeadlessBootEnv,
+): { TiddlyWiki: () => unknown } {
+  if (!coreBlob) {
+    throw new Error("TW5Engine: headless boot requires coreBlob from LarariumDoc.");
+  }
+
   const moduleShim: { exports: Record<string, unknown>; filename: string } = {
     exports: {},
-    // TW5's node boot code derives bootPath/corePath from module.filename.
-    // Keep this virtual: the executable core arrives from coreBlob, not from an
-    // installed tiddlywiki package. Runtime disk reads stay disabled by our
-    // preloaded-tiddler boot path below.
+    // TW5's node boot derives bootPath/corePath from module.filename. Keep it
+    // virtual: the executable core arrives from coreBlob, and disk reads stay
+    // disabled by the preloaded-tiddler boot path.
     filename: "/virtual/lararium/tiddlywiki/boot/boot.js",
   };
   const exportsShim = moduleShim.exports;
-  const requireShim = (id: string): unknown => {
-    if (id === "../package.json") {
-      return { engines: { node: ">=18.0.0" } };
-    }
-    if (id === "fs" || id === "node:fs") {
-      return makeDeniedFsShim();
-    }
-    if (TW5_NODE_BOOT_BUILTINS.has(id)) {
-      return nodeRequire(id);
-    }
-    throw new Error(`TW5Engine: coreBlob attempted non-builtin require(${JSON.stringify(id)}) during boot`);
-  };
-  const priorTw = (globalThis as Record<string, unknown>)["$tw"];
-  const priorLoad = (globalThis as Record<string, unknown>)["_load"];
-  const priorWindow = (globalThis as Record<string, unknown>)["window"];
-  const priorRequire = (globalThis as Record<string, unknown>)["require"];
+  const requireShim = env.resolveBuiltin;
+
+  const g = globalThis as Record<string, unknown>;
+  const priorTw      = g["$tw"];
+  const priorLoad    = g["_load"];
+  const priorWindow  = g["window"];
+  const priorRequire = g["require"];
   let twFromBlob: unknown;
   try {
-    // Some bundled TW5 modules use browser-style UMD wrappers that read a
-    // global `window` symbol during definition even on Node. Provide a temporary
-    // virtual window only while evaluating the content-addressed core blob.
-    (globalThis as Record<string, unknown>)["window"] = globalThis;
-    (globalThis as Record<string, unknown>)["require"] = requireShim;
-    (globalThis as Record<string, unknown>)["$tw"] = { boot: { suppressBoot: true } };
-    // The standalone TW5 core blob is the browser/server boot script emitted by
-    // TiddlyWiki. Evaluating it with CommonJS-shaped `exports` makes it expose
-    // `exports.TiddlyWiki`, while the bytes themselves come from the
-    // content-addressed LarariumDoc blob, not from an installed TW5 package.
-    const source = new TextDecoder().decode(new Uint8Array(coreBlob.bytes));
+    // Temporary virtual window: some bundled TW5 UMD wrappers read a global
+    // `window` symbol during definition even on Node. (`global` is aliased to
+    // globalThis in prepareHostBootInstance for the browser Worker.)
+    g["window"]  = globalThis;
+    g["require"] = requireShim;
+    g["$tw"]     = env.preSeedTw;
+    // Evaluate with CommonJS-shaped `exports` so the standalone TW5 core (the
+    // browser/server boot script TiddlyWiki emits) exposes `exports.TiddlyWiki`;
+    // the bytes come from the content-addressed LarariumDoc blob, not a package.
+    const source   = new TextDecoder().decode(new Uint8Array(coreBlob.bytes));
     const evaluate = new Function("exports", "module", "require", "window", "process", source);
-    evaluate(exportsShim, moduleShim, requireShim, globalThis, process);
-    twFromBlob = (globalThis as Record<string, unknown>)["$tw"];
+    evaluate(exportsShim, moduleShim, requireShim, globalThis, env.processArg);
+    twFromBlob = g["$tw"];
     if (twFromBlob && typeof twFromBlob === "object") {
       const tw = twFromBlob as Record<string, unknown>;
       tw["__larariumRequireShim"] = requireShim;
-      tw["__larariumModuleShim"] = moduleShim;
+      tw["__larariumModuleShim"]  = moduleShim;
     }
   } finally {
-    // Leave $tw on globalThis — the blob evaluation establishes the island's own
-    // TW5 instance there. Startup modules (reaction-router, grammar-cache) read
-    // $tw.wiki via globalThis.$tw. In a Worker thread, globalThis is the island's
-    // isolated scope; the instance stays sovereign. Restore the other shims that
-    // were only needed during blob evaluation.
-    if (priorTw !== undefined) (globalThis as Record<string, unknown>)["$tw"] = priorTw;
-    if (priorLoad === undefined) delete (globalThis as Record<string, unknown>)["_load"];
-    else (globalThis as Record<string, unknown>)["_load"] = priorLoad;
-    if (priorWindow === undefined) delete (globalThis as Record<string, unknown>)["window"];
-    else (globalThis as Record<string, unknown>)["window"] = priorWindow;
-    if (priorRequire === undefined) delete (globalThis as Record<string, unknown>)["require"];
-    else (globalThis as Record<string, unknown>)["require"] = priorRequire;
+    // Leave the blob's $tw on globalThis — it is the island's own sovereign TW5
+    // instance; startup modules read `$tw.wiki` via globalThis.$tw. Restore only
+    // the shims that were needed during blob evaluation.
+    if (priorTw !== undefined) g["$tw"] = priorTw;
+    if (priorLoad    === undefined) delete g["_load"];   else g["_load"]   = priorLoad;
+    if (priorWindow  === undefined) delete g["window"];  else g["window"]  = priorWindow;
+    if (priorRequire === undefined) delete g["require"]; else g["require"] = priorRequire;
   }
 
   if (typeof exportsShim["TiddlyWiki"] === "function") {
@@ -187,67 +234,6 @@ exports.runInContext = function(code, ctx) { return new exports.Script(code).run
 exports.runInNewContext = function(code, ctx) { return new exports.Script(code).runInNewContext(ctx); };
 exports.runInThisContext = function(code) { try { return Function(code)(); } catch(e) { return undefined; } };
 `;
-
-// Browser Web Workers have `importScripts` but no `window` or `document`.
-// TW5 core must be evaluated via Function() — same as Node path — but without
-// Node's `createRequire`. This shim throws on any Node built-in require.
-async function loadBrowserWorkerTiddlyWiki(coreBlob?: TW5CoreBootBlob): Promise<{ TiddlyWiki: () => unknown }> {
-  if (!coreBlob) {
-    throw new Error("TW5Engine: browser Worker boot requires coreBlob from LarariumDoc.");
-  }
-
-  const moduleShim: { exports: Record<string, unknown>; filename: string } = {
-    exports: {},
-    filename: "/virtual/lararium/tiddlywiki/boot/boot.js",
-  };
-  const exportsShim = moduleShim.exports;
-  const requireShim = (id: string): unknown => {
-    if (id === "../package.json") return { engines: { node: ">=18.0.0" } };
-    if (id === "fs"   || id === "node:fs")   return makeDeniedFsShim();
-    if (id === "path" || id === "node:path") return makeBrowserPathShim();
-    if (id === "vm"   || id === "node:vm")   return makeBrowserVmShim();
-    throw new Error(`TW5Engine: browser Worker coreBlob attempted require(${JSON.stringify(id)}) — Node built-ins unavailable`);
-  };
-
-  const g = globalThis as Record<string, unknown>;
-  const priorTw      = g["$tw"];
-  const priorWindow  = g["window"];
-  const priorRequire = g["require"];
-  let twFromBlob: unknown;
-  try {
-    g["window"]  = globalThis;
-    g["require"] = requireShim;
-    // Pre-seed $tw with node:{} so bootprefix (executed immediately via _load) skips
-    // platform detection. Without this, bootprefix detects browser=null (no document)
-    // and node=null (no process), so boot.js sets vm.createContext({}) with vm=undefined.
-    // With node:{}: vm = require("vm") → makeBrowserVmShim(), vm.createContext({}) → safe.
-    // Neutralization (node=null, loadTiddlersNode stub) happens after blob eval, before boot().
-    g["$tw"]     = { boot: { suppressBoot: true }, node: {}, browser: null };
-    const source   = new TextDecoder().decode(new Uint8Array(coreBlob.bytes));
-    const evaluate = new Function("exports", "module", "require", "window", "process", source);
-    evaluate(exportsShim, moduleShim, requireShim, globalThis, undefined);
-    twFromBlob = g["$tw"];
-    if (twFromBlob && typeof twFromBlob === "object") {
-      const tw = twFromBlob as Record<string, unknown>;
-      tw["__larariumRequireShim"] = requireShim;
-      tw["__larariumModuleShim"]  = moduleShim;
-    }
-  } finally {
-    if (priorTw !== undefined) g["$tw"] = priorTw;
-    if (priorWindow  === undefined) delete g["window"];
-    else g["window"]  = priorWindow;
-    if (priorRequire === undefined) delete g["require"];
-    else g["require"] = priorRequire;
-  }
-
-  if (typeof exportsShim["TiddlyWiki"] === "function") {
-    return exportsShim as { TiddlyWiki: () => unknown };
-  }
-  if (twFromBlob && typeof twFromBlob === "object") {
-    return { TiddlyWiki: () => twFromBlob };
-  }
-  throw new Error("TW5Engine: browser Worker coreBlob did not yield a TiddlyWiki instance.");
-}
 
 function neutralizeNodeBootAuthority(instance: TW5Instance): void {
   instance.boot.argv = [];
@@ -285,7 +271,7 @@ export async function prepareHostBootInstance(
     // module already presents — the last missing Node-ism the browser must supply.
     (globalThis as Record<string, unknown>)["global"] ??= globalThis;
 
-    const instance = (await loadBrowserWorkerTiddlyWiki(coreBlob)).TiddlyWiki() as unknown as TW5Instance;
+    const instance = loadTiddlyWikiFromBlob(coreBlob, makeBrowserWorkerBootEnv()).TiddlyWiki() as unknown as TW5Instance;
     // Neutralize node authority AFTER blob eval (which needed $tw.node={} to load vmShim),
     // but BEFORE boot.boot() so Node-specific blocks ($tw.node check) and fs access are skipped.
     instance.boot.argv = [];
@@ -295,7 +281,7 @@ export async function prepareHostBootInstance(
     return { instance, isBrowser: false };
   }
 
-  const instance = (await loadNodeTiddlyWiki(coreBlob)).TiddlyWiki() as unknown as TW5Instance;
+  const instance = loadTiddlyWikiFromBlob(coreBlob, await makeNodeBootEnv()).TiddlyWiki() as unknown as TW5Instance;
   neutralizeNodeBootAuthority(instance);
   return { instance, isBrowser: false };
 }
