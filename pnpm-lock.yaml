@@ -79,6 +79,9 @@ importers:
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
+      '@lararium/tw5':
+        specifier: workspace:*
+        version: link:../lararium-tw5
 
   packages/lararium-mesh:
     dependencies:
