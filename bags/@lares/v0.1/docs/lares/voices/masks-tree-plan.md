@@ -208,7 +208,7 @@ The repeatable skeleton pattern for all nine files:
 - [ ] write `chorus/lagrange-chorus.md` — concept staked; nodes field stub; harmony protocol pending-grammar
 
 **Cross-links:**
-- [ ] update `v0.1/api/lararium/voices.md` (invariant) to reference `v0.1/api/masks/` tree once it exists
+- [ ] update `v0.1/api/lares/voices.md` (invariant) to reference `v0.1/api/masks/` tree once it exists
 - [ ] update `docs/lares/voices/masks.md` founding-examples section to note canonical homes in masks tree
 - [ ] update `docs/lares/voices/voices-review.md` — log masks tree creation
 

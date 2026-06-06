@@ -54,7 +54,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 ## Core Hydration
 
 <<~ pranala #hydrate-hud ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud family:control role:owns >>
-<<~ pranala #hydrate-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices family:control role:owns >>
+<<~ pranala #hydrate-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices family:control role:owns >>
 <<~ pranala #hydrate-continuity ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity family:control role:owns >>
 <<~ pranala #hydrate-live-session-overwrite ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite family:control role:owns >>
 <<~ pranala #hydrate-canon-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:owns >>
@@ -74,7 +74,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 

@@ -53,7 +53,7 @@ All 14 memes below must resolve before threshold yield.
 | 9 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` | `packages/lares-core/memes/v0.1/api/mu/the-syad-perspectives.md` | Mu internal hydration |
 | 10 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium` | `packages/lares-core/memes/v0.1/api/lararium.md` | `AGENTS#threshold-to-lararium` |
 | 11 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud` | `packages/lares-core/memes/v0.1/api/lararium/hud.md` | Lararium internal hydration |
-| 12 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` | `packages/lares-core/memes/v0.1/api/lararium/voices.md` | Lararium internal hydration |
+| 12 | `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` | `packages/lares-core/memes/v0.1/api/lares/voices.md` | Lararium internal hydration |
 | 13 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity` | `packages/lares-core/memes/v0.1/api/lararium/continuity.md` | Lararium internal hydration |
 | 14 | `lar:///LARES` | `lares/LARES.md` | `AGENTS#continue-to-lares` |
 

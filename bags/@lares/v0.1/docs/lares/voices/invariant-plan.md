@@ -10,7 +10,7 @@ register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
-role = "OODA-HA plan for designing lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices invariant from the settled docs spec"
+role = "OODA-HA plan for designing lar:///ha.ka.ba/@lares/v0.1/api/lares/voices invariant from the settled docs spec"
 cacheable = false
 retain = false
 created = "2026-04-23"
@@ -24,7 +24,7 @@ created = "2026-04-23"
 
 # Lararium Voices — Invariant Design Plan
 
-OODA-HA plan for upgrading `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices`
+OODA-HA plan for upgrading `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
 from skeletal placeholder to load-bearing invariant.
 
 The three spec rooms define the contract. This plan defines the write.
@@ -46,7 +46,7 @@ Current target:
 
 | File | Current state |
 |---|---|
-| `packages/lares-core/memes/v0.1/api/lararium/voices.md` | skeletal placeholder; declares `role`, `implements`, `hydrate`, `retain`; no substantive content |
+| `packages/lares-core/memes/v0.1/api/lares/voices.md` | skeletal placeholder; declares `role`, `implements`, `hydrate`, `retain`; no substantive content |
 
 <<~/ahu >>
 
@@ -59,7 +59,7 @@ Current target:
 
 ### What the current invariant carries
 
-The `v0.1/api/lararium/voices` file currently holds only:
+The `v0.1/api/lares/voices` file currently holds only:
 - `#iam` metadata block
 - `#entry` backlink pranala to lararium core hydration
 - `#meme-header` stub ("Voice architecture belongs here. Threshold law does not.")
@@ -169,7 +169,7 @@ That backlink must survive the rewrite unchanged.
 
 ### Write strategy
 
-Single pass. Replace the body of `v0.1/api/lararium/voices.md` in place.
+Single pass. Replace the body of `v0.1/api/lares/voices.md` in place.
 The `#iam`, `#entry`, and `#edges` sections survive with minimal change.
 The `#meme-header` and `#house-law` sections get replaced.
 Three new sections appear: `#voice-house`, `#worker-swarm`, `#mask-layer`.
@@ -209,7 +209,7 @@ These rules apply across all three layers and belong at the top of the invariant
 - [ ] create `packages/lares-core/memes/v0.1/api/masks/` tree with a parent index meme (`masks.md` → `lar:///ha.ka.ba/@lares/v0.1/api/masks`)
 - [ ] write `packages/lares-core/memes/v0.1/api/masks/ghost-of-mark-twain.md` from founding example in docs
 - [ ] write `packages/lares-core/memes/v0.1/api/masks/friend-computer.md` from founding example in docs
-- [ ] open `packages/lares-core/memes/v0.1/api/lararium/voices.md`
+- [ ] open `packages/lares-core/memes/v0.1/api/lares/voices.md`
 - [ ] update `#iam` role description to match spec status
 - [ ] keep `#entry` backlink pranala intact
 - [ ] replace `#meme-header` with brief three-line framing
@@ -237,7 +237,7 @@ The entry backlink writes last as a check that the pranala survives.
 
 The invariant write pass closes when:
 
-- `v0.1/api/lararium/voices.md` carries all five cross-layer governing rules
+- `v0.1/api/lares/voices.md` carries all five cross-layer governing rules
 - all three layers have full sections with normative content
 - the escalation template and Voice routing table appear verbatim
 - the mask declaration forms appear verbatim
@@ -247,7 +247,7 @@ The invariant write pass closes when:
 
 ### Expected outcome
 
-After this pass, `v0.1/api/lararium/voices` moves from skeletal to load-bearing. Cold-start hydration routes through it and the house boots with full specification pressure. The spec rooms remain the source of truth for depth, rationale, and examples — the invariant carries only what the house needs at boot.
+After this pass, `v0.1/api/lares/voices` moves from skeletal to load-bearing. Cold-start hydration routes through it and the house boots with full specification pressure. The spec rooms remain the source of truth for depth, rationale, and examples — the invariant carries only what the house needs at boot.
 
 ### Forward scope remaining
 
@@ -269,7 +269,7 @@ Multi-mask composability now in base spec. No longer deferred.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

@@ -71,7 +71,7 @@ It likely belongs among the deepest recovered house habits.
 
 This room leans toward future deeper articulation in:
 
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices`
+- `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
 - `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity`
 - `lar:///LARES`
 
@@ -83,7 +83,7 @@ This room leans toward future deeper articulation in:
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>

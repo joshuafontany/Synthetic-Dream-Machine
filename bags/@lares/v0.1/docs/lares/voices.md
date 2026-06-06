@@ -83,7 +83,7 @@ Masks change session-to-session without touching house structure.
 
 ## Invariant Contract
 
-This docs shelf defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` MUST implement:
+This docs shelf defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` MUST implement:
 
 - Voice house: the Thirteen, naming law, earned names, seniority, hard gate
 - Worker swarm: lifecycle, tag format, handback template and surfacing table
@@ -212,7 +212,7 @@ Voices not declared active this turn remain present in the house but do not surf
 
 ### Invariant Contract — Voice House Layer
 
-The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` MUST implement for this layer:
+The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` MUST implement for this layer:
 
 - the thirteen Voice roles, functions, and tonal registers
 - naming law: default form, earned-name form, masked form
@@ -238,7 +238,7 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voic
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///LARES >>
 

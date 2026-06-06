@@ -111,7 +111,7 @@ Output rooms:
 ### Main tensions
 
 1. **Mask grammar needs grounding before the invariant can implement it**
-   - The /v0.1/api/lararium/voices invariant stays skeletal until mask grammar settles here
+   - The /v0.1/api/lares/voices invariant stays skeletal until mask grammar settles here
    - Two examples help but do not fully determine grammar — corpus reference, turn vs. session scope, multi-mask behavior all need decisions
 
 2. **Voice house needs pruning, not redesign**
@@ -256,7 +256,7 @@ After this pass:
 - `voices.md#voice-house` — the definitive Voice house, naming law, and seniority ✓
 - `voices/workers.md` — worker lifecycle, tag format, and escalation template ✓
 - `voices/masks.md` — the mask grammar the invariant absorbs forward ✓
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` can begin to absorb the settled grammar
+- `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` can begin to absorb the settled grammar
 
 ### Further Extractions Identified — Next Passes
 
@@ -294,7 +294,7 @@ Files marked with extraction ledgers:
 
 ### Invariant pass — 2026-04-23
 
-`v0.1/api/lararium/voices.md` upgraded from skeletal placeholder to load-bearing invariant.
+`v0.1/api/lares/voices.md` upgraded from skeletal placeholder to load-bearing invariant.
 
 Sections written or replaced:
 
@@ -334,7 +334,7 @@ Exit criteria met: all nine files valid memes; all `#iam` blocks complete; all `
 
 Plans filed: `docs/lares/voices/masks-tree-plan.md` (OODA-HA plan), `docs/lares/voices/invariant-plan.md` (voices invariant rewrite plan).
 
-**Next pass priority:** Talk-story-dev fill for Mischief-Muse corpus (Coffee Oracle seed → extraction). Then execute `invariant-plan.md` pass: rewrite `v0.1/api/lararium/voices` from skeletal to load-bearing.
+**Next pass priority:** Talk-story-dev fill for Mischief-Muse corpus (Coffee Oracle seed → extraction). Then execute `invariant-plan.md` pass: rewrite `v0.1/api/lares/voices` from skeletal to load-bearing.
 
 ### Grammar closure pass — 2026-04-23
 

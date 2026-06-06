@@ -13,7 +13,6 @@ role = "invariant edge law"
 cacheable=true
 retain = true
 canonical-forms = ["inline", "block"]
-edge-families = ["relation", "control", "dataflow", "message", "constraint", "observe"]
 lifecycle-layers = ["template", "instance", "trace"]
 ```
 
@@ -186,57 +185,12 @@ label = "parent owns child"
 
 ## Schema (machine-readable)
 
-Canonical TOML form. Source of truth for `KNOWN_FAMILIES`, `FAMILY_ROLES`, `FAMILY_CONTRACTS`,
-`RENDER_MODES`, and `REACTION_ROLES` in `packages/lararium-mesh/src/pranala-parser.ts` and `ast.ts`.
+The family taxonomy --- `KNOWN_FAMILIES`, `FAMILY_ROLES`, `FAMILY_CONTRACTS` --- lives in the
+canonical `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families` (`#schema`); `pranala-parser.ts`
+and `ast.ts` read the taxonomy there. This block carries only the edge-render constants specific to
+`PranalaEdge`.
 
 ```toml
-# Edge family names — parser rejects any family not in this list
-known-families = ["control", "relation", "observe", "dataflow", "message", "constraint", "reaction", "spatial"]
-
-# Canonical role vocabularies per family (roleRecommended families SHOULD use these)
-[family-roles]
-control  = ["owns", "has", "configures", "delegates"]
-dataflow = ["reads", "writes", "streams", "buffers", "pipes"]
-message  = ["sends", "receives", "publishes", "subscribes", "replies"]
-reaction = ["listenable", "subscribable", "observes", "throttles", "debounces"]
-spatial  = ["contains", "portal", "adjacent", "layer"]
-
-# Family contracts — scanner alias (keyed form for constant recognition)
-family-contracts = ["control", "relation", "observe", "dataflow", "message", "constraint", "reaction", "spatial"]
-
-# Family contracts — roleRecommended + confidenceBounded flags
-[family-contracts.control]
-role-recommended    = true
-confidence-bounded  = false
-
-[family-contracts.relation]
-role-recommended    = false
-confidence-bounded  = false
-
-[family-contracts.observe]
-role-recommended    = false
-confidence-bounded  = true
-
-[family-contracts.dataflow]
-role-recommended    = true
-confidence-bounded  = false
-
-[family-contracts.message]
-role-recommended    = true
-confidence-bounded  = false
-
-[family-contracts.constraint]
-role-recommended    = false
-confidence-bounded  = false
-
-[family-contracts.reaction]
-role-recommended    = true
-confidence-bounded  = false
-
-[family-contracts.spatial]
-role-recommended    = true
-confidence-bounded  = false
-
 # PranalaEdge render modes — render layer switches on these; null = default arrow
 render-modes = ["reaction-wire"]
 

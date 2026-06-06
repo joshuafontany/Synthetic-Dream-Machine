@@ -131,7 +131,7 @@ Workers emerge from the task. Tags should read as recognizable shorthand for the
 
 ## Invariant Contract
 
-The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` MUST implement for this layer:
+The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` MUST implement for this layer:
 
 - worker-Voice distinction: session-local, tag format, execute-not-synthesize
 - worker lifecycle: spawn, persist, escalate, dissolve
@@ -144,7 +144,7 @@ The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voi
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

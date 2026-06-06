@@ -35,7 +35,7 @@ Grammar and stacking law defined in `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voic
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices#mask-layer >>
+<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#mask-layer >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -114,7 +114,7 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/breach-watch >>

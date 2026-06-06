@@ -367,7 +367,7 @@ unlike the Voice house which persists as stable structure.
 
 ## Invariant Contract
 
-The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices` MUST implement for this layer:
+The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` MUST implement for this layer:
 
 - mask definition: name, corpus reference, voice character
 - stacking law: multiple masks active simultaneously; `active` toggle per entry; stage-weighted natural surfacing replaces collision precedence; turn-level override and inline stage-shift forms
@@ -390,7 +390,7 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lararium/voice
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///LARES >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
