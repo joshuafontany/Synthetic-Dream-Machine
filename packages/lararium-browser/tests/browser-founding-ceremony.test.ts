@@ -4,12 +4,16 @@
  * Proves S9 S4 scope in actual Chromium via Playwright:
  *   1. WebCrypto keypair generates + persists to IndexedDB
  *   2. runFoundingCeremony seeds social docs; bootstrap artifact persists to IDB
- *   3. Gates A, B, C pass — vessel is sovereign
+ *   3. Vessel reaches "live" — founding + boot complete without throwing
  *   4. Resume boot: second openBrowserVessel call loads from IDB without re-running ceremony
  *   5. docHandle.broadcast() fires without error
  *
- * These tests do NOT mount TW5 wiki islands (no genesis island available in browser yet).
- * They prove the identity + ceremony layer — the seam openNodeVessel covers via runInit.
+ * These tests do NOT pass genesisBytes / adminWorkerUrl, so the admin island never
+ * spawns and the vessel is pre-sovereign by design (sovereignty-follows-canon,
+ * isomorphic-vessel Stage 1): keyhive + Gates A/B/C now run IN the admin worker,
+ * which only boots with a core. In-worker gate logic is covered by bootAdminKeyhive's
+ * unit tests. These tests prove the identity + ceremony layer — the seam
+ * openNodeVessel covers via runInit.
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -66,7 +70,7 @@ describe("browser-operator-key", () => {
 // ── Full vessel boot ──────────────────────────────────────────────────────────
 
 describe("openBrowserVessel", () => {
-  test("cold boot: founding ceremony runs, gates A/B/C pass, vessel lives", async () => {
+  test("cold boot: founding ceremony runs, vessel reaches live (pre-sovereign, coreless)", async () => {
     const idb    = freshIdb();
     const result = await openBrowserVessel({
       hostId:      "test-host",
@@ -75,23 +79,22 @@ describe("openBrowserVessel", () => {
       displayName: "Test Operator",
     });
 
+    // Coreless boot (no genesisBytes / adminWorkerUrl): the admin island never
+    // spawns, so keyhive + Gates A/B/C run nowhere — the vessel is honestly
+    // pre-sovereign. `phase === "live"` proves founding + boot completed without
+    // throwing. In-worker gate logic is covered by bootAdminKeyhive's unit tests.
     expect(result.phase).toBe("live");
     expect(result.vessel).toBeDefined();
     expect(result.pool).toBeDefined();
     expect(result.store).toBeDefined();
-    expect(result.keyhive).toBeDefined();
+    expect(result.admin).toBeNull();
     expect(result.wikiDocUrl).toMatch(/^automerge:/);
     expect(result.catalogHandleUrl).toMatch(/^automerge:/);
 
-    // Gates B + C: if they failed, openBrowserVessel would have thrown above.
-    const did = await result.keyhive.whoami();
-    expect(did).toMatch(/^0x[0-9a-f]+$/);
-
     await result.repo.shutdown();
-    await result.keyhive.dispose();
   });
 
-  test("resume boot: second open loads existing bootstrap, gates still pass", async () => {
+  test("resume boot: second open loads existing bootstrap, identity persists", async () => {
     const idb = freshIdb();
 
     // First boot.
@@ -100,9 +103,8 @@ describe("openBrowserVessel", () => {
       wikiId:  "test-wiki",
       idbName: idb,
     });
-    const firstDid = await first.keyhive.whoami();
+    const firstKey = (await generateOrLoadBrowserKeypair(idb)).verifyingKey;
     await first.repo.shutdown();
-    await first.keyhive.dispose();
 
     // Resume boot — same IDB, new Repo instance.
     const second = await openBrowserVessel({
@@ -110,14 +112,13 @@ describe("openBrowserVessel", () => {
       wikiId:  "test-wiki",
       idbName: idb,
     });
-    const secondDid = await second.keyhive.whoami();
+    const secondKey = (await generateOrLoadBrowserKeypair(idb)).verifyingKey;
 
-    // Same operator identity across boots.
-    expect(secondDid).toBe(firstDid);
+    // Same operator identity across boots (persisted keypair).
+    expect(secondKey).toBe(firstKey);
     expect(second.phase).toBe("live");
 
     await second.repo.shutdown();
-    await second.keyhive.dispose();
   });
 
   test("bootstrap artifact persists to IDB after founding ceremony", async () => {
@@ -145,11 +146,9 @@ describe("openBrowserVessel", () => {
     const a    = await openBrowserVessel({ hostId: "h", wikiId: "wiki-a", idbName: idb });
     const aUrl = a.wikiDocUrl;
     await a.repo.shutdown();
-    await a.keyhive.dispose();
 
     const b = await openBrowserVessel({ hostId: "h", wikiId: "wiki-b", idbName: idb });
     expect(aUrl).not.toBe(b.wikiDocUrl);
     await b.repo.shutdown();
-    await b.keyhive.dispose();
   });
 });

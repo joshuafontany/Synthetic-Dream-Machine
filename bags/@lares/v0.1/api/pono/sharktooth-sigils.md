@@ -38,7 +38,7 @@ discovered sigil set.
 ## Edges
 
 <<~ pranala #canonical ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils family:control role:alias >>
-<<~ pranala #spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec family:control role:governs >>
+<<~ pranala #spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:governs >>
 
 <<~/ahu >>
 

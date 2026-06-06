@@ -147,8 +147,8 @@ A stance MAY carry exactly one tool while keeping the other axis present and cen
 In single-tool carry, the active tool appears first and empty hand second. Preferred forms are `*-` for a feed-axis amplitude with zoom centered, and `?-` for a zoom-axis amplitude with feed centered. `~-` and `!-` remain valid variants when the hidden or micro axis is the only active axis.
 
 Examples:
-- `🏛️*-` signals Philosopher carrying Wand only: external feed is active, zoom is centered.
-- `🎭?-` signals Humorist carrying Cup only: relational wide-field is active, feed is centered.
+- `🏛️:*-` signals Philosopher carrying Wand only: external feed runs active, zoom stays centered.
+- `🎭:?-` signals Humorist carrying Cup only: relational wide-field runs active, feed stays centered.
 
 Cassandra Aarssen maps the same Visual/Hidden × Micro/Macro axis to four organizational types with named configurations. Those named overlays live in docs space, not here.
 

@@ -55,10 +55,7 @@ import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
 }                                            from "@lararium/tw5";
-import {
-  KeyhiveProvider, AdminEventStore,
-  runFoundingCeremony,
-}                                            from "@lararium/keyhive";
+import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
   generateOrLoadBrowserKeypair, loadBrowserSigningSeed,
@@ -172,7 +169,6 @@ export interface BrowserVesselResult extends LarariumVesselResult<
   Repo,
   CompositeStore
 > {
-  keyhive:     KeyhiveProvider;
   wikiDocUrl:  string;
   /** Resolves true when a genesis update was detected and merged on this boot. */
   engineUpdated: boolean;
@@ -364,50 +360,22 @@ export async function openBrowserVessel(
     }
   }
 
-  // ── 8. Capability layer ───────────────────────────────────────────────────
-  const keyhiveEventStore = new AdminEventStore({ admin: composite });
-  const keyhive           = new KeyhiveProvider();
-  await keyhive.init({ seed: operatorSeed, eventStore: keyhiveEventStore });
-
-  const { ingested } = await keyhive.hydrateFromEventStore();
-  if (ingested > 0) {
-    console.log(`[browser-vessel] keyhive: hydrated ${ingested} cap events`);
-  }
-
-  const keyhiveDid = await keyhive.whoami();
-
-  // Gate A: Keyhive DID MUST end with the operator verifying key.
-  if (!keyhiveDid.endsWith(operatorIdentity.verifyingKey)) {
-    throw new Error(
-      `[browser-vessel] Gate A: Keyhive DID does not match persisted verifying key. ` +
-      `whoami=${keyhiveDid.slice(0, 18)}… verifyingKey=${operatorIdentity.verifyingKey.slice(0, 16)}…`,
-    );
-  }
-
-  // Gate B: vessel Individual MUST belong to PersonGroup sentinel.
-  const gateB = await keyhive.verifySentinelMembership(keyhiveDid, bootstrap.personGroupDocIdHex);
-  if (!gateB.ok) {
-    throw new Error(
-      `[browser-vessel] Gate B: vessel lacks PersonGroup membership. ${gateB.reason ?? ""}`,
-    );
-  }
-
-  // Gate C: PersonGroup MUST belong to MeshCabal sentinel.
-  const gateC = await keyhive.verifySentinelMembership(
-    bootstrap.personGroupAgentIdHex,
-    bootstrap.meshCabalDocIdHex,
-  );
-  if (!gateC.ok) {
-    throw new Error(
-      `[browser-vessel] Gate C: PersonGroup lacks MeshCabal membership. ${gateC.reason ?? ""}`,
-    );
-  }
-
-  console.log("[browser-vessel] Gate B ✓  Gate C ✓ — vessel sovereign");
+  // ── 8. Authn/z home — keyhive boots IN the admin island worker ─────────────
+  // Isomorphic-vessel Stage 1 (mirror of the node E.5 move): the host no longer
+  // boots keyhive. The operator seed + sentinels cross into the admin worker via
+  // manifest.adminAuth, where bootAdminKeyhive clears Gates A/B/C + the registerBag
+  // sweep. Sovereignty-follows-canon: the admin worker only spins up WITH a core
+  // (the `if (islandHandle && coreHash && adminWorkerUrl)` guard below); a coreless
+  // browser boot is honestly pre-sovereign (founding done, not yet gated/live).
+  //
+  // operatorDid is the keyhive identity from the host's vantage: `whoami` returns
+  // the verifying key hex verbatim (keyhive-provider.ts:114), so the persisted
+  // verifyingKey IS the DID — used for the active-wiki identity + presence.
+  const operatorDid = operatorIdentity.verifyingKey;
 
   // ── 9. Wiki doc ───────────────────────────────────────────────────────────
   const { slug: activeWikiId } = selectActiveWikiSlug(wikiId, undefined);
-  const activeWikiPlan         = planActiveWikiSlot({ hostId, wikiSlug: activeWikiId, identityDid: keyhiveDid });
+  const activeWikiPlan         = planActiveWikiSlot({ hostId, wikiSlug: activeWikiId, identityDid: operatorDid });
 
   const wikiKey     = activeWikiPlan.wikiKey;
   const wikiDocUrl  = tiddlerText(catalogHandle.doc()?.tiddlers?.[wikiKey]) ?? null;
@@ -441,13 +409,21 @@ export async function openBrowserVessel(
 
   emit("wiki-ready");
 
-  // Register writable bags with Keyhive so cap checks resolve.
-  await keyhive.registerBag(ADMIN_BAG_ID);
-  await keyhive.registerBag(BAG_IDS.identities);
-  await keyhive.registerBag(BAG_IDS.groups);
-  await keyhive.registerBag(BAG_IDS.sessions);
-  await keyhive.registerBag(activeWikiPlan.wikiBagId);
-  await keyhive.registerBag(activeWikiPlan.draftBagId);
+  // adminAuth — delivered to the admin island so it boots keyhive in-worker and
+  // clears Gates A/B/C + the registerBag sweep (bootAdminKeyhive). registerBags
+  // mirrors the operator's writable-bag set (lar: URIs, not automerge: URLs).
+  const adminAuth = {
+    seed:                  operatorSeed,
+    operatorVerifyingKey:  operatorIdentity.verifyingKey,
+    personGroupDocIdHex:   bootstrap.personGroupDocIdHex,
+    personGroupAgentIdHex: bootstrap.personGroupAgentIdHex,
+    meshCabalDocIdHex:     bootstrap.meshCabalDocIdHex,
+    registerBags: [
+      ADMIN_BAG_ID,
+      BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
+      activeWikiPlan.wikiBagId, activeWikiPlan.draftBagId,
+    ],
+  };
 
   // ── 10. LarVessel ────────────────────────────────────────────────────────
   const identity = new OpenIdentitySlot(`${hostId}:${activeWikiId}`);
@@ -497,6 +473,7 @@ export async function openBrowserVessel(
         [BAG_IDS.lararium]:        islandHandle.url,
         "lar:///ha.ka.ba/@admin":  bootstrap.adminUrl,
       },
+      adminAuth,
     });
 
     // Wire verb registry — minimal browser surface (echo + verbs from caller).
@@ -525,7 +502,7 @@ export async function openBrowserVessel(
 
   // ── 13. Presence — broadcast operator DID on wiki doc ────────────────────
   // BV-4: ephemeral; does not travel via CRDT.
-  wikiHandle.broadcast({ did: keyhiveDid, ts: Date.now() });
+  wikiHandle.broadcast({ did: operatorDid, ts: Date.now() });
 
   emit("live");
 
@@ -534,7 +511,6 @@ export async function openBrowserVessel(
     pool,
     repo,
     store:            composite,
-    keyhive,
     admin,
     wikiDocUrl:       wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,

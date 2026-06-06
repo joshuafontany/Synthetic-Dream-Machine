@@ -1,9 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- RETIRED 2026-06-05 — superseded by memetic-wikitext-spec.md (grammar-only clean slate). Ontology evicted to api/mu canon. Kept as frozen reference; not canon, not boot-hydrated. -->
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec >>
 
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec"
+uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec-retired-20260605"
 file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext-spec.md"
 type         = "text/x-memetic-wikitext"
 tagspace     = "stable"
@@ -11,8 +12,8 @@ register     = "SC"
 mana         = 18
 manao        = 18
 role         = "holistic grammar specification — outer delimiter system, full sigil registry, TW5 parity map, dual-layer model, six families, recursion guard, gaps and tensions"
-cacheable    = true
-retain       = true
+cacheable    = false
+retain       = false
 invariant    = false
 ```
 
@@ -968,15 +969,15 @@ The tension between TW5's string-typed store (`Record<string,string>`) and Verse
 
 <<~ ahu #stances-syad-tools >>
 
-## Stances, Syad, and Tools — Three Separate Graphs
+## Syad, Saptabhaṅgī, and Tools — Three Separate Graphs
 
 Three distinct graphs whose edges intersect but do not collapse. Conflating them produces overloaded tables; separating them reveals structural properties each graph alone cannot show.
 
-**Graph 1 — Stances → Syad predicate (epistemic register):**
+**Graph 1 — Syad: the five standpoints (epistemic register):**
 
 An operator holds a stance. The stance sets what the register measures — not a phase, not a tool. Phase affinity marks where that register earns its keep most naturally; any stance can operate in any phase.
 
-| stance | Syad predicate | P# | register measures | phase affinity |
+| stance | predication licensed | P# | register measures | phase affinity |
 |--------|---------------|-----|-------------------|----------------|
 | 🏛️ Philosopher | asti | P1 | propositional support | Decide |
 | 🌊 Poet | avaktavya | P3 | analogical resonance (outward) | Observe/Orient |
@@ -984,11 +985,11 @@ An operator holds a stance. The stance sets what the register measures — not a
 | 🎭 Humorist | asti-nāsti | P4 | relational fit | Orient/Decide |
 | 🔮 Private | avaktavya | P3 | inward presence (inward) | Aftermath |
 
-Poet and Private share P3. The Syad graph alone cannot distinguish them — only the Tool graph (feed direction) separates the two avaktavya registers.
+Poet and Private share P3. The Saptabhaṅgī graph alone cannot distinguish them — only the Tool graph (feed direction) separates the two avaktavya registers.
 
 The Satirist carries a gradient: stated predicate P2 (nāsti), operational predicate P6 (nāsti+avaktavya). A Satirist stable only at P2 names absence but unsteadies when the void opens. A Satirist who can hold P6 uses the void as the targeting instrument. This gradient marks maturity within a single stance.
 
-**Graph 2 — Syad 7 predicates:**
+**Graph 2 — Saptabhaṅgī: the seven predications:**
 
 Three primitives — T (asti/affirms), F (nāsti/denies), M (avaktavya/withholds) — yield 7 compounds. `avaktavya` does not signal "insufficient data"; it signals that the T/F axis does not fit the claim from this standpoint.
 
@@ -1008,7 +1009,7 @@ Arcana maps directly to P7. No stance mediates it — an operator reaches for it
 
 **Graph 3 — Tools → feed × aperture:**
 
-Tools encode two orthogonal axes: feed direction (external/internal/release) and aperture (wide/narrow/release). This graph carries no Syad information — it encodes how an operator orients, not what they claim.
+Tools encode two orthogonal axes: feed direction (external/internal/release) and aperture (wide/narrow/release). This graph carries no Saptabhaṅgī information — it encodes how an operator orients, not what they claim.
 
 | tool | ascii | feed | aperture | phase affinity |
 |------|-------|------|----------|----------------|
@@ -1022,9 +1023,9 @@ Wand and Cup share feed=external/aperture=wide — they differ in phase affinity
 
 **Conflict pairs — Tool graph only:**
 
-Conflict pairs encode Tool-axis tensions, not Syad tensions.
+Conflict pairs encode Tool-axis tensions, not Saptabhaṅgī tensions.
 
-- `*~` **Signal Jam** — Wand+Pentacle — external feed locked against internal feed. Poet↔Private tension when not resolved. The Satirist's natural posture IS `*~`; they hold it productively as targeting instrument. Signal Jam as pressure state applies to all other stances.
+- `*~` **Signal Jam** — Wand+Pentacle — external feed locked against internal feed. Poet↔Private tension when not resolved. The Satirist's natural posture lives at `*~`; they hold it productively as targeting instrument. Signal Jam as pressure state applies to all other stances.
 - `?!` **Dubious Move** — Cup+Sword — wide aperture locked against narrow. Humorist↔Philosopher tension. No stance naturalizes this; it surfaces when relational fit asserts propositional precision it cannot support.
 
 The Satirist naturalizes one conflict pair and no other stance does. This marks the Satirist as the hinge of the Tool graph — they operate from what would jam everyone else.
@@ -1039,9 +1040,9 @@ The Satirist naturalizes one conflict pair and no other stance does. This marks 
 **Structural observations from separation:**
 
 1. The system gravitates toward M. Three of five stances live in or near avaktavya (Poet P3, Private P3, Satirist P6). Only Philosopher and Humorist operate entirely in the T/F plane.
-2. Poet and Private require the Tool graph to differentiate — Syad alone cannot separate them.
-3. Arcana exists only in the Tool graph and Syad graph; it has no Stance. It cannot be inhabited, only reached for.
-4. Conflict pairs encode Tool-axis tensions exclusively; they carry no Syad structure.
+2. Poet and Private require the Tool graph to differentiate — Saptabhaṅgī alone cannot separate them.
+3. Arcana exists only in the Tool graph and the Saptabhaṅgī graph; it has no Stance. It cannot be inhabited, only reached for.
+4. Conflict pairs encode Tool-axis tensions exclusively; they carry no Saptabhaṅgī structure.
 
 <<~/ahu >>
 
