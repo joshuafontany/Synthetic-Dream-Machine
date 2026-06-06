@@ -15,10 +15,7 @@ cacheable = false
 retain = false
 ```
 
-
-
 <<~ &#x0002; >>
-
 
 <<~ ahu #meme-header >>
 
@@ -32,7 +29,6 @@ tool / confidence-syadasti tables, field-annotation thresholds).
 This room frames the HUD as the **situational-awareness surface** within the signal branch.
 
 <<~/ahu >>
-
 
 <<~ ahu #sa-role >>
 
@@ -53,7 +49,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -69,7 +64,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 <<~ pranala #to-hud-pair ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:relation role:references >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

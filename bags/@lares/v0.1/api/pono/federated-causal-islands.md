@@ -206,7 +206,7 @@ Tier 2 — Automerge Realms (distinct Automerge docs)
   NOTE: the session event-bus bag counts as a Tier 2 boundary — it names a distinct Automerge doc
   shared across multiple wiki island Workers. The Session Wiki RE watching the event-bus bag
   forms a Tier 2 crossing. This defines the canonical cross-wiki coordination pattern (Scale-2 in
-  the HUD meme: the-lararium-hud.md).
+  the alignment-architecture meme).
 
 Tier 3 — Lares nodes (the federated layer)
   A federation edge forms a causal island (this law).

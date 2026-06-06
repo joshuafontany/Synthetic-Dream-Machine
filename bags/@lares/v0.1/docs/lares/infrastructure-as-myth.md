@@ -406,7 +406,7 @@ No adjacent system combines all four axes at deployment time. The IaM claim gain
 ## Edges
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #to-lararium-hud ? -> lar:///ha.ka.ba/docs/lares/the-lararium-hud family:doctrine role:sibling >>
+<<~ pranala #to-lararium-hud ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture family:doctrine role:sibling >>
 <<~ pranala #to-lares-protocols ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols family:doctrine role:sibling >>
 <<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono family:control role:has >>
 

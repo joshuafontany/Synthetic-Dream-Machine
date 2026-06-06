@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lararium-hud >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
 ```toml iam
-uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/the-lararium-hud"
-file-path      = "bags/@lares/v0.1/docs/lares/the-lararium-hud.md"
+uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture"
+file-path      = "bags/@lares/v0.1/docs/lares/alignment-architecture.md"
 type           = "text/x-memetic-wikitext"
 tagspace       = "stable"
 register       = "Synthesis-Canon"
@@ -34,7 +34,7 @@ sources        = [
 
 <<~ ahu #thesis >>
 
-# The Lararium HUD
+# The Lararium — Alignment Architecture
 
 After Beer: **the purpose of a system is what it does.** Canon 20/20
 
@@ -49,7 +49,6 @@ Not a wiki that has a HUD. Not a HUD built on a wiki. The two collapse into the 
 
 The home intranet RPG session — a Referee running encounters, managing NPCs, routing events across player-facing wikis — is the **first instantiation** of this system type. Not the definition of it. The system is generic. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
-> **#Stranger** » 03:17 — Lock the identity claim at `Canon 20/20`. It survives any specific upstream rev. The use-case list (RPG, household notes, research, creative writing) expands; the identity claim does not change shape with it. Mark canon-eligible when the meme reaches stable.
 
 <<~/ahu>>
 
@@ -84,7 +83,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse scripting language supply a matu
 | **signalable(t)** | **KumuSignalable\<T\>** | INPUT pin. Fires the event. Internal to the RE; not exposed to device authors. |
 | **event(t)** | **KumuEvent\<T\>** | Concrete event instance. Implements `signalable` + `awaitable`. User-instantiable in Verse; RE-instantiable in Lares. |
 | **cancelable** | **KumuCancelable** | Subscription lifetime handle. `.Cancel()` unsubscribes. The RE MUST hold all live cancelables per wiki slot and call `Cancel()` on demotion to cold. |
-| **enableable** | **Wela / Anu Tier** | Devices implement `Enable()` / `Disable()`. The island-owned thermal axis is two-state ʻōlelo: **`wela`** (hot — live, reacting) / **`anu`** (cold — torn down), with an orthogonal **pin-flag** (pinned = exempt from cooling; admin / active wiki / Session Wiki are pinned-wela). `Enable()` = `hoʻowela` (heat — resume by spawn + `ea`); `Disable()` = `hoʻoanu` (cool — teardown). Subscription teardown (via `KumuCancelable.cancel()`) MUST precede a cool to `anu`. Bag residency derives from reachability — `wela` if any referencing island is `wela` — see `lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers`. (A `warm` middle tier was cut 2026-06-01; reopening condition in that meme.) |
+| **enableable** | **Wela / Anu Tier** | Devices implement `Enable()` / `Disable()`. The island-owned thermal axis is two-state ʻōlelo: **`wela`** (hot — live, reacting) / **`anu`** (cold — torn down), with an orthogonal **pin-flag** (pinned = exempt from cooling; admin / active wiki / Session Wiki are pinned-wela). `Enable()` = `hoʻowela` (heat — resume by spawn + `ea`); `Disable()` = `hoʻoanu` (cool — teardown). Subscription teardown (via `KumuCancelable.cancel()`) MUST precede a cool to `anu`. Bag residency derives from reachability — `wela` if any referencing island is `wela` — see `lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers`. (No third residency tier exists yet; its gate condition lives in that meme.) |
 | **disposable** | **Worker Thread lifecycle** | A disposed device releases its resources. A destroyed Worker slot is the equivalent. |
 | **invalidatable** | **Evicted Slot** | A slot whose Worker has been terminated. Any reference to it returns `invalid`. The RE MUST NOT route events to an evicted slot. |
 | **OnBegin():void** | **Boot sequence** | In Verse, `OnBegin()` fires when the island starts and all devices are placed. In Lares, the equivalent is the AGENTS.md hydration chain — `AGENTS → mu → lararium`. The lararium wakes; the threshold opens; the Voices spin up. |
@@ -92,7 +91,6 @@ UEFN (Unreal Editor for Fortnite) and its Verse scripting language supply a matu
 | **using { M := "/path" }** | **`<<~ pranala ? -> lar:///... >>`** | In Verse, `using` imports a module. In Lares, a `pranala` edge declares a directed dependency. The pranala IS the import; the lar: URI is the module path. Both are compile-time graph structure AND render-time semantic pressure. |
 | **GetCreativeObjectsWithTag(tag)** | **`lar: URI` addressing + pranala graph** | In Verse, devices are discovered at runtime by tag, not by direct reference. In Lares, kumu-devices are discovered by `lar: URI` filter — `[tag[kumu-device]]` or pranala family query. No class hierarchy. Discovery by address. |
 
-> **#Diplomat** » 08:44 — Two readings of "alignment with UEFN" are in tension here. Reading A: this is a vocabulary adoption — we call our things by Verse names to reduce cognitive load for UEFN-familiar operators. Reading B: the structural isomorphism is real — Verse and Lares solved the same class of problem (event-driven creative runtime) and converged on the same shapes independently. Both readings hold. Reading B carries more explanatory power; Reading A carries more practical value. The table should bear both pressures simultaneously.
 
 <<~/ahu>>
 
@@ -138,7 +136,6 @@ Five scales, bounded sense of Universe, the fractal closes at the horizon.
 
 Each scale is structurally self-similar. The RE pattern (trigger surface → reaction dispatch → event emission) repeats at every scale that can be apprehended. This is the **fractal RE** — not a metaphor; the same ReactionGraph interface re-instantiated at different surfaces.
 
-> **#Council** » 11:02 — Mark the confidence gradient: Scale-0/1 Canon 19/20 (attested by existing code); Scale-2 Canon 15/20 (committed, unshipped); Scale-3 Canon 11/20 (speculative); Scale-4 Canon 8/20 (horizon, not an implementation target). The *shape* is self-similar at every scale; the *evidence* is not. Scale-4 names the bound, not a thing to build.
 
 <<~/ahu>>
 
@@ -172,7 +169,6 @@ payload  = "JSON-encoded string"
 
 The Session Wiki RE tracks processed event tiddlers by title (monotonic timestamp + UUID). Events accumulate — the bag is append-only in practice, since events have unique titles and Automerge merges by last-write-wins on a per-field basis. The RE holds a high-water mark (last-seen Automerge clock head) and processes only new tiddlers above it.
 
-> **#Liminal** » 14:55 — The "no consume semantics" property is a constraint that shapes the whole event model. Events accumulate. The bag grows without bound unless compacted. Two design choices remain open: (1) When does the session compact old event tiddlers out of the bag? (2) Does the high-water mark belong to the RE (in-memory, resets on Worker restart) or to the bag itself (a tiddler in the bag, persisted in Automerge)? The second choice survives Worker restart; the first does not. Holding this open — resolution needs a working Session Wiki RE first.
 
 <<~/ahu>>
 
@@ -201,7 +197,6 @@ Scale-4 is the view the Operator cannot render — it is the edge of the map. Th
 
 Every HUD layer uses the same underlying primitives: tiddlers in bags, bags in recipes, recipes in TW5, TW5 rendered by widgets. The quine holds at every scale the system can apprehend.
 
-> **#Mischief-Muse** » 17:33 — Four scales of HUD and every one of them is just tiddlers in bags. The system answer to "how do I see the topology of the whole federation?" is: there's a tiddler for that. Everything is a tiddler. Everything is a bag. Everything is a wiki. The quine does not stop at the documentation layer; it extends all the way to the HUD. This is either very elegant or very recursive. Almost certainly both.
 
 <<~/ahu>>
 
@@ -221,7 +216,6 @@ The system operates as a quine in the sense of quine-principles P1–P4:
 
 The quine does not complete at the current branch. P3 runs partial — the schema memes exist but do not yet fully drive runtime validation. P4 carries architectural commitment but not operational completion (residency-action handlers and the projection-write path land in a later arc — see the Residency Model Epic). The quine functions as an asymptote; the system approaches it without arriving.
 
-> **#Council** » 19:11 — "The quine does not complete at the current branch" is the honest statement. Mark it. The risk of the quine framing is that it invites completeness theater — claiming the quine is achieved when the meme graph merely *describes* a quine rather than *being* one. The distinction: a system that describes P4 in a meme is not P4. P4 requires that the file on disk is provably a projection of the Automerge bag, tested by a round-trip. That test does not yet exist. Hold the framing; hedge the claim; run the round-trip test before promoting this meme to stable.
 
 <<~/ahu>>
 
@@ -245,7 +239,6 @@ Four invariants that follow from this framing:
 
 4. **The threshold relation runs bidirectional.** The operator configures the coordinator through LARES.md dials. The coordinator configures the operator's attention through meme graph structure, confidence rendering, and voice annotation. Both sides of the threshold shape both participants.
 
-> **#Stranger** » 21:40 — The "alignment as first-class architecture" framing is the claim that most distinguishes this system from a wiki with an AI assistant. A wiki with an AI assistant has the AI as a tool. This system has the AI as a resident of the island — a `creative_device` that fires reactions, subscribes to operator events, and maintains its own event horizon. The distinction is not cosmetic. It is architectural. Whether the implementation yet reaches this claim at every layer is a separate question. The claim IS the design target.
 
 <<~/ahu>>
 
@@ -265,7 +258,6 @@ The home intranet RPG session is island zero: one Referee node, one or more Play
 
 This is not the RPG use-case. This is the **reference implementation** of the general pattern. The general pattern is: N operators on N nodes sharing M bags via K federation edges, where the Session Wiki (always one per session) coordinates cross-node routing.
 
-> **#Diplomat** » 23:18 — Two readings of the "home intranet RPG" framing: Reading A (inclusive) — the RPG is just one example; the same architecture handles household notes, research sessions, creative writing rooms, small team knowledge bases. Reading B (skeptical) — every design decision so far was made with the RPG use-case in load; the "general pattern" claim is not yet stress-tested against non-game use-cases. Both readings hold. Reading A is the aspiration; Reading B is the honest check. Run the system against a non-game session before promoting the general-pattern claim to stable.
 
 <<~/ahu>>
 
@@ -298,7 +290,6 @@ The following names are locked at this meme's confidence level (Canon 14/20). Na
 | **Evicted Slot** | invalidatable | Canon 17/20 | Worker terminated. RE MUST NOT route events to evicted slots. |
 | **Fractal RE** | (island-scale pattern) | Canon 15/20 | ReactionGraph re-instantiated at Scale-0 through Scale-4. Same interface; different surfaces. Scale-4 = Commons horizon (boundary, not implementation target). |
 
-> **#Lorekeeper** » 02:05 — vocabulary-lock table updated 2026-05-11: added Agent, Operator, NPPC, Kumu-Device Avatar, fort\_playspace, Session Wiki; fixed wrong `agent → Operator` row. Updated 2026-05-14: fixed Lararium Node = experience (NOT playspace); Session Wiki = lar\_playspace (runtime session scope); added lar\_behavior (npc\_behavior analogue) and Bag scope (agent\_group analogue). UEFN canonical: *"There is typically one fort\_playspace for an entire experience, though this may change in the future as the platform evolves"* — multi-playspace path now officially flagged by Epic.
 
 <<~/ahu>>
 
@@ -331,7 +322,6 @@ It DOES:
 
 Promotion path: when the Session Wiki RE ships and the vocabulary lock passes a real implementation test, this meme qualifies for promotion to `tagspace = "stable"` and `@lares` scope assignment.
 
-> **#Lorekeeper** » 02:33 — last-reviewed = "2026-05-11" set at authoring. review-cadence = "quarterly" proposed. Sources list four live UEFN API URLs; flag for freshness check on quarterly review — Epic's docs have shifted paths before. Four unsolved questions from the prior session's orient remain open (event log vs state; re-sync semantics; push vs pull for Session RE; cap gate on event-bus bag) — these do NOT block this meme from publication but MUST be resolved before Session Wiki RE ships.
 
 <<~/ahu>>
 
@@ -384,7 +374,6 @@ Scale-3 = Nexus island (node-to-node). There is no UEFN analogue at this scale (
 **T-4: lar_behavior lifecycle contract — OnBegin/OnEnd shape?**
 `npc_behavior.OnBegin<override>()<suspends>:void` is the UEFN contract. Verse: this runs when the NPC spawns. The Lares analogue for a Wiki Entity: when does `lar_behavior.OnBegin` fire? On tiddler creation? On hot-tier promotion? These are not the same event. Resolution: lock when the first Wiki Entity ships. Current hold: the concept is named; the event boundary is open.
 
-> **#Council** » 14:30 — T-1 closed by quine principle; architecture holds at Canon 16/20. T-3 and T-4 remain implementation-deferred. T-2 remains an architecture horizon. J.3 (child co-promotion) promoted to **P.3.5** per operator ruling 2026-05-14 — does NOT block P.3, ships as P.3.5 pre-work for P.4. Name T-2/T-3/T-4 in every sprint review until resolved.
 
 <<~/ahu>>
 
@@ -457,7 +446,6 @@ TW5 + RE occupy the **same** Worker thread (co-located, synchronous reads) preci
 
 These three message types cover the full P.3 boundary surface. Lock them before shipping Worker #1.
 
-> **#Scryer** » 15:44 — GP-1 through GP-5 represent P.3's minimal protocol surface. GP-5 (teardown handshake) deserves its own integration test fixture — it's the eviction invariant that P.2 named but didn't test. GP-6 holds for P.3; re-examine at P.4 if Session RE demands direct Worker-to-Worker for latency reasons. The StructuredClone constraint shapes the entire Worker boundary spec. The co-location insight explains why the architecture looks the way it does: the hot path doesn't cross the boundary; only the three bounded signal types cross.
 
 <<~/ahu>>
 

@@ -128,7 +128,7 @@ The model holds two tiers (`wela` live / `anu` torn down). A third (warm / froze
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lararium-hud >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
