@@ -674,5 +674,17 @@ export function mkWikiVerbResult(opts: {
 }
 
 
-// ── Tiddler delta extraction — island-side utility ─────────────────────────
+// ── AuthVerifierSeam — host-side verify proxy (path b) ─────────────────────
+//
+// The host transport (node WS gate) holds no keyhive after Stage 1; it asks the
+// admin island to verify each inbound peer (the AdminMsg_VerifyRequest/Result
+// pair above) and keys its sharePolicy map off the returned `identifier`. Node
+// binds this to AdminAuthGate; the browser leaves it unbound (no inbound peer yet).
+export interface AuthVerifierSeam {
+  verify(
+    cardBytes: Uint8Array,
+    bagUrl: string,
+    access: "read" | "admin",
+  ): Promise<{ ok: boolean; identifier?: string; reason?: string }>;
+}
 

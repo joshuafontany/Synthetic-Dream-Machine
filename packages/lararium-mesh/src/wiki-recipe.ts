@@ -263,3 +263,20 @@ export async function computeRecipeFingerprint(
   };
   return sha256Hex(canonicalJsonBytes(canonical), provider);
 }
+
+// ── WikiMountSpec — the isomorphic wiki-island mount spec ──────────────────
+//
+// One shape both vessel pools take (node VesselIslandPool + browser
+// BrowserVesselIslandPool). Divergence rides in the DATA (the recipe's
+// `mirrorBags` designation + the resolver's slots) and in the island's held
+// CAPABILITIES (a node pool's `diskMirrorGrant`), never in the method's shape.
+// The caller builds the full `resolver` on both platforms; no blob bytes — the
+// island reads TW5 core + plugins from the @lararium CRDT doc after sync.
+export interface WikiMountSpec {
+  /** SHA-256 hex of the TW5 core blob. null = pre-CAS; island resolves bytes from the mesh. */
+  coreHash: string | null;
+  /** WikiRecipe slot structure (wikiSlug + optional canonBags + mirrorBags). */
+  recipe: WikiRecipe;
+  /** Full slot URI → AutomergeUrl map (caller-built). Null = in-memory or cold slot. */
+  resolver: Readonly<Record<string, string | null>>;
+}
