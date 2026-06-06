@@ -54,6 +54,7 @@ import {
 import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
+  mountSocialPlane,
 }                                            from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -267,21 +268,19 @@ export async function openBrowserVessel(
   }
   emit("catalog-ready");
 
-  // ── 5. Social docs ────────────────────────────────────────────────────────
+  // ── 5. Social docs + 6. CompositeStore ─────────────────────────────────────
   const blankDoc = () => repo.create<LarDoc>(emptyLarDoc());
+  const adminHandle = await waitHandleLocal<LarDoc>(repo, bootstrap.adminUrl, blankDoc);
 
-  const identitiesHandle = await waitHandleLocal<LarDoc>(repo, bootstrap.identitiesUrl, blankDoc);
-  const circlesHandle    = await waitHandleLocal<LarDoc>(repo, bootstrap.circlesUrl,    blankDoc);
-  const sessionsHandle   = await waitHandleLocal<LarDoc>(repo, bootstrap.sessionsUrl,   blankDoc);
-  const adminHandle      = await waitHandleLocal<LarDoc>(repo, bootstrap.adminUrl,      blankDoc);
-
-  // ── 6. CompositeStore ─────────────────────────────────────────────────────
   const composite = new CompositeStore();
-  composite.addLayer({ bagId: BAG_IDS.catalog,    store: new AutomergeDocStore(catalogHandle,    BAG_IDS.catalog),    writable: false });
-  composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(identitiesHandle, BAG_IDS.identities), writable: true  });
-  composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(circlesHandle,    BAG_IDS.groups),     writable: true  });
-  composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(sessionsHandle,   BAG_IDS.sessions),   writable: true  });
-  composite.addLayer({ bagId: ADMIN_BAG_ID,       store: new AutomergeDocStore(adminHandle,      ADMIN_BAG_ID),       writable: true  });
+  composite.addLayer({ bagId: BAG_IDS.catalog, store: new AutomergeDocStore(catalogHandle, BAG_IDS.catalog), writable: false });
+  // Keeper office: may SEED — a missing social doc is created blank.
+  await mountSocialPlane(
+    composite,
+    { identitiesUrl: bootstrap.identitiesUrl, circlesUrl: bootstrap.circlesUrl, sessionsUrl: bootstrap.sessionsUrl },
+    (url) => waitHandleLocal<LarDoc>(repo, url, blankDoc),
+  );
+  composite.addLayer({ bagId: ADMIN_BAG_ID, store: new AutomergeDocStore(adminHandle, ADMIN_BAG_ID), writable: true });
 
   // ── 7. Genesis island (optional — Tier 1/2 paths) ─────────────────────────
   let islandHandle: DocHandle<LarDoc> | null = null;

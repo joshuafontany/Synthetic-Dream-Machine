@@ -56,6 +56,7 @@ import {
   MemoryTiddlerStore,
   planActiveWikiSlot,
   selectActiveWikiSlug,
+  mountSocialPlane,
 } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
@@ -331,22 +332,15 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     );
   }
 
-  const identitiesHandle = await waitHandleLocal<LarDoc>(
-    repo, identitiesUrl as AutomergeUrl,
-    () => { throw new Error(`[lararium] @identities doc not found in local storage — sync may be incomplete`); },
+  // Relay office: FINDS, never seeds — missing social doc is a fatal init gap.
+  const { identitiesHandle, groupsHandle, sessionsHandle } = await mountSocialPlane(
+    composite,
+    { identitiesUrl, circlesUrl, sessionsUrl },
+    (url, bag) => waitHandleLocal<LarDoc>(
+      repo, url,
+      () => { throw new Error(`[lararium] ${bag} doc not found in local storage — sync may be incomplete`); },
+    ),
   );
-  const groupsHandle = await waitHandleLocal<LarDoc>(
-    repo, circlesUrl as AutomergeUrl,
-    () => { throw new Error(`[lararium] @circles doc not found in local storage — sync may be incomplete`); },
-  );
-  const sessionsHandle = await waitHandleLocal<LarDoc>(
-    repo, sessionsUrl as AutomergeUrl,
-    () => { throw new Error(`[lararium] @sessions doc not found in local storage — sync may be incomplete`); },
-  );
-
-  composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(identitiesHandle, BAG_IDS.identities), writable: true });
-  composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(groupsHandle,     BAG_IDS.groups),     writable: true });
-  composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(sessionsHandle,   BAG_IDS.sessions),   writable: true });
 
   const blobs = islandHandle?.doc()?.blobs ?? {};
   const coreBlobEntry = blobs[ENGINE_CORE_ID];
