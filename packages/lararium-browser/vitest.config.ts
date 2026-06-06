@@ -20,13 +20,6 @@ export default defineConfig({
       { find: "@lararium/tw5",                   replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
     ],
   },
-  server: {
-    fs: {
-      // Allow Vite to serve genesis artifact from the adjacent node package.
-      // Required for browser-m3-breathing.test.ts to fetch island.bin.
-      allow: [path.resolve(root, "../")],
-    },
-  },
   test: {
     browser: {
       enabled: true,

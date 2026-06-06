@@ -14,7 +14,6 @@
   "scripts": {
     "prebuild": "node ../../tools/clean-output.mjs dist",
     "build": "tsc -p tsconfig.build.json",
-    "build:test-worker": "vite build --config vite.worker-test.config.ts",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "test": "vitest run"
   },
