@@ -23,8 +23,8 @@ status-date = "2026-05-02"
 
 # Quine Principles
 
-A **quine** is a program that produces its own source code as output.
-Lararium's target is not a literal quine — it is a **self-describing system**:
+A **quine** produces its own source code as output.
+Lararium's target reaches past a literal quine — it runs as a **self-describing system**:
 one where the content graph contains the rules, schemas, and descriptions of its
 own structure, accessible via the same capability surfaces used to access any other content.
 
@@ -83,7 +83,7 @@ inside the wiki. If the wiki cannot ask "what memes carry this capability?" usin
 the same filter syntax as external code, P2 is violated.
 
 **Rule:** Any system introspection available to external TypeScript MUST be expressible
-as a `filterTiddlers()` call. The filter layer is the reflection API.
+as a `filterTiddlers()` call. The filter layer serves as the reflection API.
 
 <<~/ahu >>
 

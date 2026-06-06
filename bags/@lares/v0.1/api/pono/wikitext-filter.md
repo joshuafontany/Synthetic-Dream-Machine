@@ -10,7 +10,7 @@ tagspace     = "stable"
 register     = "SC"
 mana         = 17
 manao        = 17
-role         = "wikitext-filter grammar dialect — forked from x-tiddlywiki-filter; drops legacy field/index; aligns with pranala+TOML data model and lexical meme context"
+role         = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
 grammar-key  = "wikitext-filter"
 guest-mime   = "text/x-wikitext-filter"
 cacheable    = true
@@ -26,7 +26,7 @@ invariant    = false
 `wikitext-filter` functions as the native filter dialect for memetic-wikitext.
 
 **Fork origin:** `x-tiddlywiki-filter` (`lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter`).
-`x-tiddlywiki-filter` remains available for legacy/import use. `wikitext-filter` supersedes it
+`x-tiddlywiki-filter` serves import and migration; `wikitext-filter` covers native authoring
 for new authoring.
 
 **Key departures from TW5 filter:**
@@ -198,7 +198,7 @@ result-shape = "set"
 ```
 
 The `grammar-key` value for `hana` blocks: `"wikitext-filter"`.
-The legacy key `"x-tiddlywiki-filter"` remains valid for import/migration use.
+The key `"x-tiddlywiki-filter"` serves import and migration.
 
 <<~/ahu >>
 

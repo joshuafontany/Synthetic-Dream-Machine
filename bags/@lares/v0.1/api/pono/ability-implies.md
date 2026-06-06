@@ -13,7 +13,6 @@ role          = "canonical source copy: Orichalcum ability implication — order
 status-date   = "2026-04-30"
 heleuma       = "ka"
 source-symbol = "abilityImplies"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 body-sha256 = "4eb7fd5da26c4cb5097ed713b105a0e0f8570f390a4ee7882ec7a98064faea68"
 ```
 

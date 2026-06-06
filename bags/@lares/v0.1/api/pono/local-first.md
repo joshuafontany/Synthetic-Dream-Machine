@@ -84,7 +84,7 @@ any server present. The server is a sync accelerator, not a boot requirement.
 ### Ideal 4 — Collaboration
 
 Real-time and asynchronous collaboration with conflict-free concurrent edits.
-CRDTs are the enabling mechanism — not operational transforms, not last-write-wins.
+CRDTs provide the enabling mechanism — not operational transforms, not last-write-wins.
 
 **Lararium:** GAP. Automerge is chosen (CRDT); MemeProvider / MemeStoreDoc define
 the change model. Active integration incomplete.

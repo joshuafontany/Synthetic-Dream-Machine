@@ -136,7 +136,6 @@ pretending to a global now reads as the managing failure
 access-axis       = ["pull", "read", "edit", "admin"]
 pull-implies-read = false
 implication-rule  = "ordered-except-pull"
-# retired rungs: "propose","promote" (2026-05-31); "sync","revoke" (2026-06-01)
 #   sync   = pull-at-infrastructure-scale (forward ciphertext) — a gate boolean, not a rung
 #   revoke = an ADMIN operation (roll the epoch) — carried by edge-island epoch + lifecycle
 

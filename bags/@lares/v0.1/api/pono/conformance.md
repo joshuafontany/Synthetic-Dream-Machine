@@ -104,7 +104,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 ## Lineage
 
-`conformance` supersedes the retired `micro-trace` meme (deleted from the graph). The micro-trace carried a backward-looking in-generation annotation layer; that role split in two when the loop turned forward:
+`conformance` carries the forward half of the generation loop. The in-generation annotation role splits in two when the loop turns forward:
 
 * in-generation loop surfacing folded entirely into the `OODA-HA` Level (the `->` markers a turn declares of its own loop);
 * reading the loop in *other* content moved here, recast as an outward, forward conformance pass.

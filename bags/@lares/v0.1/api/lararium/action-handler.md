@@ -26,8 +26,7 @@ status-date   = "2026-06-01"
 
 # ACTION Verb Handler Family
 
-The operator-facing residency gesture surface, replacing the retired `promote`
-ceremony. Six ACTION verbs dispatch through one handler family, each wrapped in
+The operator-facing residency gesture surface. Six ACTION verbs dispatch through one handler family, each wrapped in
 `withEffectRecord` so no bag mutation lands without an indelible audit trace.
 
 Source of truth: `packages/lararium-tw5/src/action-handler.ts`. Handlers run

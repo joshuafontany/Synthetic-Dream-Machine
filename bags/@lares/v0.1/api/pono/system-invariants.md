@@ -274,7 +274,7 @@ regrounding.
 ```toml #PENTA_1_BOUNDED_SCALE
 id    = "PENTA_1_BOUNDED_SCALE"
 label = "Five is the natural bounded scale of the FFZ system"
-desc  = "LADDER_5 / OODA_HA_5 (5 stances/tools), FPI-1–5 (Fuller's pattern integrities), FfzClock L0–L4, five SYSTEM laws, five ISLAND laws, five CODEC laws. The pentadic structure is not arbitrary decoration — it is the common bounded scale across stance, pattern, time, and law. A cluster that requires a sixth slot is a signal for redesign, not extension."
+desc  = "LADDER_5 / OODA_HA_5 (5 stances/tools), FPI-1–5 (Fuller's pattern integrities), FfzClock L0–L4, five SYSTEM laws, five ISLAND laws, five CODEC laws. The pentadic structure functions as the common bounded scale across stance, pattern, time, and law — not arbitrary decoration. A cluster that requires a sixth slot is a signal for redesign, not extension."
 ```
 
 ```toml #PENTA_2_CLOCK_ALIGNMENT

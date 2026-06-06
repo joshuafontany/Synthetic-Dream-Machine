@@ -105,7 +105,7 @@ These apply before grammar tiddlers finish loading. Grammar TOML `close_pattern`
 
 It covers: meme URIs (`lar:///ha.ka.ba/...`), child-fragment URIs (slot children), base `$:/` TW5 system titles, and any other tiddler address the VM resolves. No separate `+currentMeme` alias landed — `currentTiddler` handles the full range.
 
-Filter expressions inside `<<~ ui FILTER >>` and guest-grammar blocks operate against `currentTiddler` via standard TW5 filter semantics. The `wikitext-filter` dialect (active) and `x-tiddlywiki-filter` dialect (legacy) both resolve context through `currentTiddler`.
+Filter expressions inside `<<~ ui FILTER >>` and guest-grammar blocks operate against `currentTiddler` via standard TW5 filter semantics. Both `wikitext-filter` and `x-tiddlywiki-filter` resolve context through `currentTiddler`.
 
 <<~/ahu >>
 

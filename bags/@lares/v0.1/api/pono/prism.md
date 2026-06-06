@@ -41,7 +41,7 @@ Three moves, in order:
 2. **Apply the declared lenses.** Each lens runs as an independent pass over the referenced span.
 3. **Compose as layers.** Each lens writes its own overlay anchored to the same content; the result reads as the **union** of overlays, not a destructive rewrite. Passes run order-independent unless a lens declares it depends on another's output.
 
-The product earns a clean word: a **reading** --- a lensed interpretation of a reference. Not a *parse* (which recovers one canonical structure against one grammar), and not bare *annotation* (marginalia). Prism varies the lens; a parse fixes the grammar. That difference retired the old `--parse` language (#lineage).
+The product earns a clean word: a **reading** --- a lensed interpretation of a reference. Not a *parse* (which recovers one canonical structure against one grammar), and not bare *annotation* (marginalia). Prism varies the lens; a parse fixes the grammar.
 
 <<~/ahu >>
 
@@ -99,7 +99,7 @@ Each band carries complementary signal; the reading composes them into a fuller 
 
 Prism supersedes the old `--parse` language --- a content-decomposition tool that split input text into `lar:` coordinates by Aperture grain and "never answered content." That tool ran a true **parse**: one input, one canonical decomposition against one grammar.
 
-Prism keeps the worthwhile half --- *reference a piece of content and read its structure* --- and drops the rest: it varies the lens instead of fixing one grammar, composes layered readings instead of one tree, and reads *existing referenced* content instead of decomposing fresh input. The retired `--parse` clauses live in `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/provenance` and `…/signal/sa-display`; those re-point here.
+Prism keeps the worthwhile half --- *reference a piece of content and read its structure* --- and drops the rest: it varies the lens instead of fixing one grammar, composes layered readings instead of one tree, and reads *existing referenced* content instead of decomposing fresh input.
 
 <<~/ahu >>
 

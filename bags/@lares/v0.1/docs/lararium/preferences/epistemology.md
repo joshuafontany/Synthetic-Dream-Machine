@@ -25,9 +25,7 @@ retain = false
 # Lararium Preferences — Epistemic Residue
 
 Not invariant law.
-This room no longer carries the whole epistemic substrate.
-The foundation braid moved outward.
-This shelf now holds what remains unsettled, cross-cutting, or not yet promoted.
+The foundation braid lives outward; this shelf holds what remains unsettled, cross-cutting, or not yet promoted.
 
 <<~/ahu >>
 
@@ -125,7 +123,7 @@ This parent shelf keeps the promotion map.
 
 ## Annotation — Current API State
 
-This staging room no longer stands alone.
+This staging room links outward to the promoted braid.
 Several strands already live above in `v0.1/api`.
 What follows reads as a collection note on what the stack already implements with decent firmness.
 
@@ -220,7 +218,7 @@ It appears weaker where epistemology still depends on:
 - named failure-weather vocabulary
 
 That gap explains why this docs room still matters.
-It no longer needs to carry the whole substrate.
+The shelf carries only the unsettled remainder.
 It still needs to witness what has already promoted, what remains braided, and what still waits for lawful compression.
 
 <<~/ahu >>

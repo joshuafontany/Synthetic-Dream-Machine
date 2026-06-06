@@ -80,7 +80,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 1. **RENDER, not copy** (Fontany-Fuller-Zelenka). Disk projection re-renders the carrier through the TW5 VM (with fakeDOM) from normalized tiddler records — the same pipeline that boots the browser client. It is never a raw string copy of stored bytes.
 2. **Store → disk is one direction; ingest is another.** The projector is unidirectional (store → disk). Re-reading operator edits (disk → store) is a **separate file-watcher / ingest path**. The `writing` guard set prevents the projector's own writes from echoing back through ingest.
-3. **The git diff is the operator's signature.** When a residency **MOVE** (the canon ACTION verb — NOT a "promotion ceremony"; that ceremony is retired) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent.
+3. **The git diff is the operator's signature.** When a residency **MOVE** (the canon ACTION verb) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent.
 4. **Debounce.** Projection writes debounce per (bag, tiddler) to bound write amplification (pairs with the outbound save-path debounce).
 
 <<~/ahu >>

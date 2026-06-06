@@ -71,7 +71,7 @@ The Lagrange Chorus takes its name from the Lagrange points — positions in a t
 | `voice-character` | single character description | harmony protocol — how node voices interleave |
 | `foreground-voices` | Voice affinity for one character | potentially distributed; pending-grammar |
 
-The Lagrange Chorus does not function as a character that speaks. It holds the grammar for how multiple lararium nodes speak together. The "mask" frame names the interface — invokable, stage-positioned — but the content structure differs fundamentally from named or character masks.
+The Lagrange Chorus does not function as a character that speaks. It holds the grammar for how multiple lararium nodes speak together. The "mask" frame names the invokable surface — stage-positioned, kahea-dispatched — but the content structure differs fundamentally from named or character masks.
 
 <<~/ahu >>
 

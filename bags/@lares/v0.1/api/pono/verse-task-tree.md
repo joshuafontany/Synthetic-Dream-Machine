@@ -217,13 +217,11 @@ function that handles failure internally.
 
 <<~ ahu #visual-verse-status >>
 
-## Visual Verse / UE6 — Current Status (May 2026)
+## Visual Verse / UE6 (unreleased, architecture unconfirmed)
 
 Epic surveyed UEFN creators (2024-2025) on two proposed Visual Verse interface models:
 - **Block-based** (Scratch/Google Blockly style) — nested blocks for structured code
 - **Node-graph** (Blueprint-style) — data-flow and execution-flow nodes
-
-**Status: unreleased, no confirmed architecture.** UE6 is "years away" (likely 2027+).
 
 **Critical:** Any future Visual Verse node graph will represent **Verse execution
 semantics** (this task tree model, structured concurrency, effects), NOT Blueprint's

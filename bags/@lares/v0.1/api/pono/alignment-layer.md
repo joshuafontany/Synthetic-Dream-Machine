@@ -77,7 +77,7 @@ bags like any other content, evaluated locally against a per-island trust root.
      willing to be a peer that shares their posts"). This is the **Beelay-layer** enforcement point.
 2. **`vouch`** — a signed invitation/endorsement edge. Membership in a Cabal/Nexus is by vouch;
    the vouch edge is recorded. Severing a vouch retroactively prunes the invitee's standing in
-   the voucher's subgraph. This edge IS the Sybil defense (see #sybil).
+   the voucher's subgraph. This edge carries the Sybil defense (see #sybil).
 3. **`label`** — a signed annotation over a subject (`suspected-lemure`, `corrupt-crdt-head`,
    `off-island`, `talk-story-flagged`, …). Adopts the ATProto-labeler + FIRES model:
    **advisories, not mandates** — carries `neg`/expiry; the consumer applies them under its own
@@ -105,7 +105,7 @@ Trust propagates but does not run away:
     (kills cascade storms). Withdrawing trust **revokes inherited blocks** — the
     non-monotonicity capability cannot express.
 
-EigenTrust-style global eigenvector reputation is REJECTED: it is Sybil-vulnerable without
+EigenTrust-style global eigenvector reputation earns REJECTION: it runs Sybil-vulnerable without
 costly identity (which we refuse to mint via PoW/PoS) and it implies a global "now" the
 causal-island model denies.
 
