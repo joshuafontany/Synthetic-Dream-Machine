@@ -32,6 +32,30 @@ export type ResolveBagHandle = (
   bag: string,
 ) => Promise<DocHandle<LarDoc>>;
 
+// ── Layer-role vocabulary ─────────────────────────────────────────────────────
+// A vessel composite IS a cascade of typed layer-roles. These name the shared
+// config intent so it cannot drift across factories; handle RESOLUTION (genesis
+// sourcing etc.) stays a platform concern, passed in as the resolved handle.
+
+/**
+ * Canon layer (@lararium / @lares): writable so residency actions can land
+ * tiddlers, but `defaultWritable:false` so unbagged TW5 saves keep routing to
+ * the wiki — only an explicit `record.bag === bagId` write lands here.
+ */
+export function addCanonLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
+  composite.addLayer({
+    bagId,
+    store:           new AutomergeDocStore(handle, bagId),
+    writable:        true,
+    defaultWritable: false,
+  });
+}
+
+/** Read-only layer (@catalog, corpus bags): synced for reads, never written. */
+export function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
+  composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
+}
+
 export interface SocialPlaneUrls {
   identitiesUrl: string;
   circlesUrl:    string;

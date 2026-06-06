@@ -57,6 +57,8 @@ import {
   planActiveWikiSlot,
   selectActiveWikiSlug,
   mountSocialPlane,
+  addCanonLayer,
+  addReadOnlyLayer,
 } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
@@ -219,7 +221,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const composite = new CompositeStore();
 
   // ── 3a. LarDoc (ka) — bag = CATALOG_DOC_URI ──────────────────────────
-  composite.addLayer({ bagId: BAG_IDS.catalog, store: new AutomergeDocStore(catalogHandle, BAG_IDS.catalog), writable: false });
+  addReadOnlyLayer(composite, BAG_IDS.catalog, catalogHandle);
 
   // ── 3b. LarariumIsland doc (ha) — lararium bag ───────────────────────────
   // Genesis-first boot: load the build-time artifact, then reconcile with any
@@ -253,12 +255,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // Writable so future residency-action handlers (Sprint 5 of the Residency Model Epic) can land tiddlers here.
   // defaultWritable:false keeps unbagged TW5 saves routing to the wiki — only
   // explicit record.bag === BAG_IDS.lararium writes land here.
-  composite.addLayer({
-    bagId:           BAG_IDS.lararium,
-    store:           new AutomergeDocStore(islandHandle, BAG_IDS.lararium),
-    writable:        true,
-    defaultWritable: false,
-  });
+  addCanonLayer(composite, BAG_IDS.lararium, islandHandle);
   emit("island-ready");
 
   // ── 3b. LaresDoc (ba) — personality bag ──────────────────────────────────
@@ -277,14 +274,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     } else {
       laresHandle = seedLaresDoc(repo);
     }
-    // Writable so residency-action handlers (Sprint 5) can land tiddlers from wiki/draft into @lares canon.
-    // defaultWritable:false so unbagged TW5 saves continue routing to the wiki.
-    composite.addLayer({
-      bagId:           BAG_IDS.lares,
-      store:           new AutomergeDocStore(laresHandle, BAG_IDS.lares),
-      writable:        true,
-      defaultWritable: false,
-    });
+    addCanonLayer(composite, BAG_IDS.lares, laresHandle);
   }
 
   // ── 3b-social. Social plane docs — @identities / @circles / @sessions ─────
@@ -583,7 +573,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       blankMemeStore(repo),
     );
     const bagId = corpusBagId(entry.id);
-    composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: false });
+    addReadOnlyLayer(composite, bagId, handle);
 
     // Self-describing: corpus doc holds its own canonical bag URI as a tiddler
     // whose `text` is the AutomergeUrl. Any vessel that opens the doc can read

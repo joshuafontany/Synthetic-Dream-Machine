@@ -54,7 +54,7 @@ import {
 import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
-  mountSocialPlane,
+  mountSocialPlane, addCanonLayer, addReadOnlyLayer,
 }                                            from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -273,7 +273,7 @@ export async function openBrowserVessel(
   const adminHandle = await waitHandleLocal<LarDoc>(repo, bootstrap.adminUrl, blankDoc);
 
   const composite = new CompositeStore();
-  composite.addLayer({ bagId: BAG_IDS.catalog, store: new AutomergeDocStore(catalogHandle, BAG_IDS.catalog), writable: false });
+  addReadOnlyLayer(composite, BAG_IDS.catalog, catalogHandle);
   // Keeper office: may SEED — a missing social doc is created blank.
   await mountSocialPlane(
     composite,
@@ -328,23 +328,13 @@ export async function openBrowserVessel(
       console.warn("[browser-vessel] genesis island missing ENGINE_CORE_ID blob — skipping island layers");
       islandHandle = null;
     } else {
-      composite.addLayer({
-        bagId:           BAG_IDS.lararium,
-        store:           new AutomergeDocStore(islandHandle, BAG_IDS.lararium),
-        writable:        true,
-        defaultWritable: false,
-      });
+      addCanonLayer(composite, BAG_IDS.lararium, islandHandle);
 
       // @lares layer — oracle tiddler in island doc.
       const laresDocUrl = tiddlerText(doc?.tiddlers?.[LARES_DOC_URI]) ?? null;
       if (laresDocUrl) {
         const laresHandle = await waitHandleLocal<LarDoc>(repo, laresDocUrl, blankDoc);
-        composite.addLayer({
-          bagId:           BAG_IDS.lares,
-          store:           new AutomergeDocStore(laresHandle, BAG_IDS.lares),
-          writable:        true,
-          defaultWritable: false,
-        });
+        addCanonLayer(composite, BAG_IDS.lares, laresHandle);
       }
 
       // Write island URL oracle into catalog so island-ready state persists.
