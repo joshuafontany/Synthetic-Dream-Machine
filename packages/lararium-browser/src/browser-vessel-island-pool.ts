@@ -39,6 +39,10 @@ interface BrowserSlot {
   worker:   Worker;
   mainPort: MessagePort;
   phase:    SlotPhase;
+  /** Pinned (PrimaryWiki + admin) — exempt from eviction. Recorded isomorphic
+   *  with the node pool; browser eviction (LRU) lands with browser residency,
+   *  at which point this flag becomes load-bearing. */
+  pinned:   boolean;
 }
 
 // ── Handshake ──────────────────────────────────────────────────────────────
@@ -95,7 +99,7 @@ export class BrowserVesselIslandPool {
     this._onEvent   = opts.onWorkerEvent ?? null;
   }
 
-  async mountWiki(id: string, params: WikiMountSpec): Promise<void> {
+  async mountWiki(id: string, params: WikiMountSpec, opts: { pinned?: boolean } = {}): Promise<void> {
     if (this._slots.has(id)) return;
     if (!this._workerUrl) {
       throw new Error(
@@ -111,7 +115,7 @@ export class BrowserVesselIslandPool {
 
     const { port1: mainPort, port2: syncPort } = new MessageChannel();
 
-    const slot: BrowserSlot = { worker, mainPort, phase: "booting" };
+    const slot: BrowserSlot = { worker, mainPort, phase: "booting", pinned: opts.pinned ?? false };
     this._slots.set(id, slot);
 
     worker.addEventListener("message", (e: MessageEvent) => {
@@ -174,6 +178,13 @@ export class BrowserVesselIslandPool {
   has(id: string): boolean {
     const slot = this._slots.get(id);
     return !!slot && slot.phase !== "disposed";
+  }
+
+  /** True for a live pinned slot (PrimaryWiki + admin). Isomorphic with the
+   *  node pool's isPinned; eviction-exemption activates with browser residency. */
+  isPinned(id: string): boolean {
+    const slot = this._slots.get(id);
+    return !!slot && slot.phase !== "disposed" && slot.pinned;
   }
 
   inspect(): Array<{ id: string; phase: SlotPhase }> {

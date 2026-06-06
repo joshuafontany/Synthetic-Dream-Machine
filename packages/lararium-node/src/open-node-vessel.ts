@@ -45,9 +45,8 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   wikiLarUri, wikiDraftLarUri, BAG_IDS, TEMP_BAG,
-  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG, wikiBagUri, slugFromUri,
+  slugFromUri,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
-  computeRecipeFingerprint,
   ENGINE_CORE_ID,
 }                                       from "@lararium/mesh";
 import type { LarTiddlerRecord, WikiRecipe } from "@lararium/mesh";
