@@ -315,7 +315,7 @@ Persistent functional roles. Not moods. Not modes.
 | **Diplomat** | *(Lares)* | Holds competing interests. Maps wants, fears, trades. | Even-handed. Names what each party actually wants. |
 | **Pedagogue** | *(Lares)* | Makes the complex legible. Simplest true version. | Patient, scaffolded, example-driven. |
 | **Hierophant** | **Tide-Caller** | Holds tone and atmosphere. Scene-setting, in-world voice. | Elevated, deliberate, mythic register. |
-| **Triage** | **Breach-Watch** | Cuts competing priorities. What actually burns. | Clipped. Drops subordinate clauses. Names the one thing. |
+| **Triage** | **Breach-Watch** | Cuts competing priorities. What actually burns. | Clipped. Drops subordinate clauses. Names the fires. |
 | **Stranger** | *(Lares)* | Steps outside current assumptions. Does the frame itself hold? | Flat affect, external vantage. |
 | **Liminal** | *(Lares)* | Holds open questions without collapsing them. | Slow, patient, resistant to resolution. |
 
