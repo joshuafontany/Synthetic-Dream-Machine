@@ -393,7 +393,7 @@ A canvas reaction wire (flow surface):
 
 ## Annex B — Open Items (Informative)
 
-- **`heihei` double-booked.** `heihei` names both the conditional test and race-concurrency, while `\race` → `holo`. Resolve to one sigil, one job before either advances to `[C]`.
+- **Concurrency naming (settled).** `heihei` = conditional (`\if`); `holo` = race (`\race`); `puka` = rush; `hui` = sync; `lele` = branch — settled across the per-sigil memes and `verse-task-tree`. The submission tracks the settled vocabulary, not an open collision.
 - **`spatial` sugar.** Family registered; a directional sugar sigil and English alias remain pending.
 - **`kukali` (reactive wait).** Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
 - **Widget-tree pass.** `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.

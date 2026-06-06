@@ -26,12 +26,24 @@ import { describe, test, expect } from "vitest";
 import { Repo }                    from "@automerge/automerge-repo";
 import { mutableLarRecord } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event, LarTiddlerRecord } from "@lararium/mesh";
+import {
+  findVerbBreathingEvent, assertVerbBreathingEvent,
+  type VerbBreathingContract,
+} from "@lararium/mesh";
 import { BrowserVesselIslandPool }   from "../src/browser-vessel-island-pool.js";
 
 const FIXTURE_WORKER_URL = new URL("./fixtures/browser-verb-island.mjs", import.meta.url);
 
 const WIKI_ID    = "lar:///ha.ka.ba/@test/browser-verb-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
+
+// The shared verb→event contract — the SAME battery the node real-TW5 island runs.
+const CONTRACT = {
+  wikiUri:    WIKI_ID,
+  buttonUri:  BUTTON_URI,
+  verb:       "MOVE",
+  listenable: "InteractedWithEvent",
+} satisfies VerbBreathingContract;
 
 function waitFor<T>(check: () => T | null | undefined, timeoutMs: number, label: string): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -78,19 +90,13 @@ describe("browser verb breathing — verb tiddler surfaces as IslandMsg_Event vi
       });
 
       const hit = await waitFor(
-        () => events.find(
-          (e) => e.payload["verb"] === "MOVE" && e.listenable === "InteractedWithEvent",
-        ),
+        () => findVerbBreathingEvent(events, CONTRACT),
         8_000,
         `IslandMsg_Event { verb:"MOVE", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
       );
 
-      expect(hit.type).toBe("event");
-      expect(hit.wikiUri).toBe(WIKI_ID);
-      expect(hit.listenable).toBe("InteractedWithEvent");
-      expect(hit.payload["verb"]).toBe("MOVE");
-      expect(hit.payload["fromUri"]).toBe(BUTTON_URI);
-      expect(hit.payload["uri"]).toBe(BUTTON_URI);
+      // Shared conformance battery — identical contract on both platforms.
+      assertVerbBreathingEvent(hit, CONTRACT, (a, e, l) => expect(a, l as string).toBe(e));
     } finally {
       await pool.disposeAll();
       await vesselRepo.shutdown();

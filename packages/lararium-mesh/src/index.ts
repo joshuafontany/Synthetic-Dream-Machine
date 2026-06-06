@@ -41,6 +41,7 @@ export * from "./kumu-device.js";
 export * from "./browser-dock.js";
 export * from "./genesis-doc.js";
 export * from "./island-protocol.js";
+export * from "./conformance-verb-breathing.js";
 export * from "./social-seed.js";
 export { didKeyFromVerifyingKey, buildCeremonyTiddlers } from "./cold-boot-ceremony.js";
 export type { CeremonyTiddler } from "./cold-boot-ceremony.js";

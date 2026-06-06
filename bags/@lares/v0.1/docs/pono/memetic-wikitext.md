@@ -10,7 +10,7 @@ register = "Synthesis-Canon"
 manaoio = 14
 mana = 16
 manao = 17
-role = "extended documentation surface for memetic-wikitext examples, profile guidance, boundary notes, and migration residue"
+role = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
 cacheable = false
 retain = false
 invariant = false
@@ -40,8 +40,8 @@ This surface carries guidance, examples, and split residue.
 |---|---|---|
 | `ahu` | local worksite and anchor | using it as a generic wrapper with no locality pressure |
 | `loulou` | relation or outward path | treating it like transclusion |
-| `aka` | passive inclusion | letting it imply live invocation |
-| `kahea` | active invocation | flattening it into passive reference |
+| `aka` | frozen transclusion (page) — read-only embed | letting it imply live invocation or a value-wire |
+| `kahea` | live transclusion (page) — subscription-fresh embed | flattening it into a frozen read or a `dataflow` value |
 | `kapu` | qualification and boundary posture | letting it replace the act it qualifies |
 | `ui` | query surface | using it as generic prose emphasis |
 | `hana` | bounded guest work | letting guest grammar redefine root primitives |
@@ -108,17 +108,15 @@ Work begins before full binding settles.
 
 ## Boundary Notes
 
-The root now keeps semantic law and minimum boot grammar only.
-These concerns left the old 1285-line parent first:
+The api parent now carries the submission-grade specification (abstract, conformance, ABNF, processing model, media-type, security). These concerns live in their own carriers, never the parent:
 
-- long example ladders
-- profile guidance
-- expanded confidence and rating commentary
-- detailed parser bridge prose
-- detailed render-pipeline bridge prose
-- archive-grade explanation and repetition
+- long example ladders → here (extended docs)
+- authoring profile guidance → here
+- the render pipeline → `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline`
+- per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the kernel registry)
+- archive-grade explanation and repetition → retired
 
-When parser and render-pipeline receive their own stable carriers, deepen their contracts there instead of re-expanding the root.
+Deepen each contract in its own carrier; do not re-expand the parent submission.
 
 <<~/ahu >>
 
@@ -130,7 +128,7 @@ This docs companion formed during the 2026-04-21 yin split/refine/clean pass.
 The old parent mixed invariant law, operator procedure, examples, bridge commentary, and rating notes in one surface.
 The current shape keeps:
 
-- parent invariant at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext`
+- the submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` (morphed to submission grade 2026-06-05)
 - operational procedure at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL`
 - extended guidance here
 
@@ -188,7 +186,9 @@ JSON-RPC and MCP show how to specify runtime packets and capability negotiation 
 - Do we need a one-time substitution mode separate from live transclusion?
 - Do remote or cross-system calls require explicit opt-in?
 
-These design tests drive the v5 spec rebuild. They came from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki.
+These design tests drove the v5 spec rebuild. They came from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki.
+
+The submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` now realizes these verdicts: TW5-transclusion lineage (#introduction), an operational rule-table model plus an ABNF surface grammar (#grammar), XML-style closure discipline (#lexical-structure), fragment + media-type semantics (#media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#scope-model). The remaining open tests ride Annex B.
 
 <<~/ahu >>
 

@@ -31,6 +31,10 @@ import {
   mutableLarRecord,
 } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event } from "@lararium/mesh";
+import {
+  findVerbBreathingEvent, assertVerbBreathingEvent,
+  type VerbBreathingContract,
+} from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 // ── Artifact gates ─────────────────────────────────────────────────────────
@@ -72,6 +76,14 @@ function waitFor<T>(
 const WIKI_ID    = "lar:///ha.ka.ba/@test/m3-breathing";
 const BUTTON_URI = "lar:///test/instances/move-button-1";
 const TIMEOUT    = 30_000;
+
+// The shared verb→event contract (same battery the browser island must satisfy).
+const CONTRACT = {
+  wikiUri:    WIKI_ID,
+  buttonUri:  BUTTON_URI,
+  verb:       "MOVE",
+  listenable: "InteractedWithEvent",
+} satisfies VerbBreathingContract;
 
 // ── Suite ──────────────────────────────────────────────────────────────────
 
@@ -126,21 +138,13 @@ describe.skipIf(skipReason)(
           // The reaction-router fires on the seed tiddler via the TW5 "change" nalu.
           // The drain loop then carries it to IslandMsg_Event after ea.
           const hit = await waitFor(
-            () => events.find(
-              (e) => typeof e.payload["verb"] === "string" &&
-                     e.payload["verb"]       === "MOVE" &&
-                     e.listenable            === "InteractedWithEvent",
-            ),
+            () => findVerbBreathingEvent(events, CONTRACT),
             5_000,
             `IslandMsg_Event { verb:"MOVE", listenable:"InteractedWithEvent" } from ${WIKI_ID}`,
           );
 
-          expect(hit.type).toBe("event");
-          expect(hit.wikiUri).toBe(WIKI_ID);
-          expect(hit.listenable).toBe("InteractedWithEvent");
-          expect(hit.payload["verb"]).toBe("MOVE");
-          expect(hit.payload["fromUri"]).toBe(BUTTON_URI);
-          expect(hit.payload["uri"]).toBe(BUTTON_URI);
+          // Shared conformance battery — identical contract on both platforms.
+          assertVerbBreathingEvent(hit, CONTRACT, (a, e, l) => expect(a, l as string).toBe(e));
 
         } finally {
           await pool.disposeAll();
