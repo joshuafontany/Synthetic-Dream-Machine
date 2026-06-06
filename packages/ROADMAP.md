@@ -1,6 +1,7 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-05-29 (M.3 verb-tiddler-dispatch integration gate closed; 248/248 tests)
+> Updated: 2026-06-05 (Isomorphic-vessel Stage 1 activation — keyhive host→worker on node + browser; relay-access ring design)
+> Tests: mesh 236 · tw5 73 · node 94 · browser 20/20 — all green; typecheck 10/10.
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
 
@@ -63,6 +64,14 @@ unchanged from pre-pivot).
 
 Do not re-open those arcs unless a test proves drift.
 
+## Recent Arcs (since 2026-05-29) — closed
+
+- **S7 capability layer** — `@keyhive/keyhive` adopted; Keyhive Doc = bag 1:1; founding ceremony + boot Gates A/B/C; `AdminAuthGate` lar:challenge/lar:auth WS gate (Path L closed).
+- **@personal / @draft binding (S7.5+S7.6)** — `resolveOrMintBinding` (create→registerBag→delegate→tiddler); first live `keyhive.delegate`; @personal/@draft wired into the island resolver; `computeRecipeFingerprint` (excludes @lares/@lararium). S7.7 cross-device tests remain.
+- **OODA-HA boot reframe** — boot causal-islands reframed exchange-turn island, not CRDT mesh; local CRDT/bag-slot infra stripped from boot; phase-yield close-form.
+- **Isomorphic vessel — Stage 1 ACTIVATION DONE** — keyhive moved host→worker on node (`65d82084` E.5) AND browser (`b5e87384` E.6). Host keyhive boot + Gates A/B/C + registerBag sweep deleted on both; `bootAdminKeyhive` runs them in-worker (seed via `manifest.adminAuth`); WS gate arms with `adminVm.authSeam` (verify-proxy now threads peer `identifier`); `@personal/@draft` via `adminVm.resolveBinding`. Sovereignty-follows-canon: keyhive boots in `onEa` (admin worker only spins up with a core); a coreless vessel is pre-sovereign. TW5 loads in ALL cases (anon → splash/invite UI is downstream state, not a boot abort).
+- **Browser M.3 test pono rebuild** (`e73dbd0f`) — chronically-red `browser-m3-breathing` (frozen checked-in TW5 bundle) → `browser-verb-breathing` (hand-written `.mjs` fixture worker; tests worker↔pool verb-event transport; reaction-router logic stays covered by node m3-breathing).
+
 ## Planning Law
 
 These planning docs follow one architectural law:
@@ -105,7 +114,11 @@ These planning docs follow one architectural law:
 | — | **M.2 / verb-as-tiddler-field pipeline** | ✅ Done | `VerbInvocation` gains `fromUri`/`listenable`; `reaction-router.ts` extended with `_verbsByUri` map + verb-field dispatch; `IslandMsg_Event.payload` enriched; `event-routing.test.ts` (3 tests). 246/246 tests. |
 | — | **M.3 / full-TW5-boot reaction gate** | ✅ Done | `verb-tiddler-dispatch.test.ts` (2 tests) proves end-to-end: verb-carrying tiddler lands via CRDT → reaction-router nalu fires → `tm-verse-event` → `IslandMsg_Event` with `payload.verb === "MOVE"` at vessel. Root fix: `declare const $tw` ambient in `reaction-router.ts` + `grammar-cache.ts` — TW5's `evalSandboxed` runs in `vm.createContext({})` where `globalThis.$tw` is undefined; `$tw` parameter injection works. Genesis rebuilt (sha=a3b926…). 248/248 tests. |
 | — | **TW5-native unified nalu + WikiRecipe + in-wiki cascade routing** | ✅ Done | `nalu-engine` startup module owns unified queue + frame-aligned drain + one `wiki.transact()` per frame. IslandAdaptor narrowed to membrane (forward `LarTiddlerChange` → `$tw.lares.enqueueNalu` + cross-bag tombstone). One-model `WikiRecipe { wikiSlug, canonBags? }` for every wiki; manifest carries `recipe + resolver` instead of `bagBindings[]`. Write routing moved into the wiki via `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade tiddler — `IslandAdaptor._routeBag` walks `wiki.filterTiddlers` mirroring TW5's `$:/config/FileSystemPaths` pattern. Shadow-tiddler semantics confirmed (multi-bag occupancy by design). Retired: `IslandAccumulator`, `kernel.applyDelta`, frame-ack message, `vm-island-bridge`, `startRenderLoop`, `extractTiddlerDeltaFromPatches`, `allTiddlersFromDoc`, `ProjectionStore` alias, `BAG_IDS.scratch/projection/draft`, `BagBinding`, `IslandBehavior.writeBagId`, `routeWrite()`. `ADMIN_BAG_ID` aligned to `lar:///ha.ka.ba/@admin`. Memes: deleted `island-accumulator.md`, rewrote `island-adaptor.md`, updated `nalu.md`, wrote `nalu-engine.md`. 227/227 tests (mesh 96 + tw5 67 + node 64). Browser 19/20 (pre-existing TW5-boot shim gap, unrelated). |
-| 1 | **M / Local intent bridge** | ⬜ Next | M.1–M.3 closed. Remaining: (b) author first real wiki device tiddler (`move-button`) in genesis that fires a `reaction:listenable` edge carrying the `MOVE` ACTION verb; (c) stdio bridge for CLI/daemon local intent path. |
+| — | **Isomorphic vessel — Stage 1** | ✅ Done | keyhive host→worker on node (E.5) + browser (E.6); auth-in-admin-worker; verify-proxy threads `identifier`; sovereignty-follows-canon. See [project_isomorphic_vessel_epic] memory. |
+| 1 | **Isomorphic vessel — Stage 0b / 1b** | ⬜ Next | 0b: real `VesselPlatform` kernel extraction (collapse `openNodeVessel`+`openBrowserVessel`; `vessel-platform.ts` holds only `AuthVerifierSeam` today) + browser LarVessel-wrapper removal. 1b: main-thread `composite` verb data-plane → island (host delegated verbs run UNVERIFIED until then — `mountMainVerbs(jobRegistry)` lost its verifier). |
+| 1b | **🐛 Browser worker `global` shim** | ⬜ Bug | TW5 core UMD in `bootTw5` references Node `global`, absent in a browser Web Worker → `ReferenceError` → no `ea`. Browser admin/wiki worker hits this in PROD with a core. One-liner in `browser-sovereign-island-model.ts` before `bootTw5`: `(globalThis as {global?:unknown}).global ??= globalThis;`. Founding test (coreless) doesn't catch it. |
+| 2 | **Relay access rings (residency access model)** | ⬜ Epic | The downstream model the isomorphic-vessel work enables. bag = unit of access in 3 rings mapping keyhive membership (Nexus⊃PersonGroup⊃vessel); cascade = unit of view; **anon-read is gate POLICY, not a keyhive grant** (keyhive can't express world-readable). Tiered relay gate / ring-keyed sharePolicy ({@lararium,@lares} read-to-all; escalate auth for write+private); progressive auth not default-deny; published-wiki = residency/visibility action. See [project_relay_access_rings] memory. |
+| 3 | **M / Local intent bridge** | ⬜ Next | M.1–M.3 closed. Remaining: (b) author first real wiki device tiddler (`move-button`) in genesis that fires a `reaction:listenable` edge carrying the `MOVE` ACTION verb; (c) stdio bridge for CLI/daemon local intent path. |
 | 2 | **Residency Model Epic** | ⬜ Active | Coordinate-space + query-plan architecture. SPARQL ALL-CAPS ACTION verbs (`ADD COPY MOVE CLEAR DROP LOAD`) + archival audit annotations (`accession deaccession transfer withdrawal …`). Memetic intent: [residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md). Sprint plan: [EPIC-RESIDENCY-MODEL.md](EPIC-RESIDENCY-MODEL.md). Sprint 1 ✅ closed 2026-05-30 (memetic intent + reconciliation). Sprints 2–10 queued. |
 | 4 | **K / F-arc** | ⬜ Next | TW5 save routing, debounce, projection hygiene for sustained editing across shared peer surfaces. |
 | 5 | **R** | ⧾ Verify first | ReactionEngine wiring: changeset application, changed-URI derivation, `RE.onChangeset`, integration tests. |
@@ -136,14 +149,16 @@ Goal: live wiki authoring safe under sustained operator editing on any operator 
 - [ ] Keep disk sync, CRDT inbound, TW5 UX save, and disk export on the same
       parser/split law.
 
-## Path L — Admin Doc Ingress Trust Gate
+## Path L — Admin Doc Ingress Trust Gate — ✅ Done
 
 Goal: operator vessels federate infrastructure state; non-operator vessels cannot; invalid intent gets rejected before edge work.
 
-- [ ] Gate admin-doc WebSocket ingress on Keyhive `cap=admin` proof.
-- [ ] Operator devices only; room peers rejected.
-- [ ] Preserve job/receipt coordination surface.
-- [ ] Negative smoke: non-infrastructure peer cannot sync admin state.
+- [x] Gate admin-doc WebSocket ingress on Keyhive `cap=admin` proof — `AdminAuthGate` (lar:challenge/lar:auth → `accessForDoc`); after Stage 1 it arms with `adminVm.authSeam` and the admin worker's in-worker keyhive answers each verify (returns the peer `identifier` for the sharePolicy map).
+- [x] Operator devices only; `peerIdentifierMap` + sharePolicy admit only verified peers.
+- [x] Preserve job/receipt coordination surface (delegate-verb seam intact).
+- [x] Negative smoke: `admin-auth-gate.test.ts` (7 tests) — insufficient-cap / wrong-nonce / non-auth → 4003.
+
+Deferred: TODO L.2 nonce signing (alpha posture acceptable). Anon/ring-2 read tiers are the [Relay access rings] epic, not this path.
 
 ## Path P — Shared Operator-Vessel Contract
 
