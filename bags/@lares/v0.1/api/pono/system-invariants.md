@@ -49,13 +49,13 @@ No server-rendered CRDT projections served as HTML.
 ```toml #MIND_1_STORE_IS_MIND
 id    = "MIND_1_STORE_IS_MIND"
 label = "Store is mind; disk and HTTP are projections"
-desc  = "The Automerge store functions as the live source of truth. Disk files, HTTP responses, and canvas shapes function as unidirectional read artifacts derived from it — never the reverse."
+desc  = "The Automerge store functions as the live source of truth. Disk files, HTTP responses, and canvas shapes MUST derive from it in one direction only: store → projection."
 ```
 
 ```toml #MIND_2_NO_SNAPSHOT_SEED
 id    = "MIND_2_NO_SNAPSHOT_SEED"
-label = "A projection MUST NOT seed an Automerge doc"
-desc  = "Snapshot/HTTP/disk lanes are read artifacts. Seeding a CRDT doc from an HTTP snapshot or disk projection violates the causal-island boundary and reintroduces server authority over local state."
+label = "An Automerge doc seeds from the store alone"
+desc  = "Snapshot/HTTP/disk lanes function as read artifacts. A CRDT doc MUST seed from the Automerge store; store-only seeding holds the causal-island boundary and keeps authority local."
 ```
 
 ```toml #MIND_3_SW_SHELL
@@ -82,7 +82,7 @@ desc  = "The room doc starts empty; the corpus doc carries its own seeded conten
 ```toml #ISLAND_2_GENESIS_ROOT
 id    = "ISLAND_2_GENESIS_ROOT"
 label = "Genesis artifact is the causal root of the engine island"
-desc  = "@phase: S2+  The engine island boots from genesis/island.bin — an Automerge.save() binary embedded at build time. No peer reads engine content from a filesystem path at runtime. A peer whose artifact is absent or whose grammar tiddler hash diverges MUST halt, not fall back."
+desc  = "@phase: S2+  The engine island boots from genesis/island.bin — an Automerge.save() binary embedded at build time. No peer reads engine content from a filesystem path at runtime. A peer whose artifact is absent or whose grammar tiddler hash diverges MUST halt."
 ```
 
 ```toml #ISLAND_3_AUTHORITY_FIRST
@@ -99,8 +99,8 @@ desc  = "Automerge document IDs function as locators. Knowing a DocUrl does not 
 
 ```toml #ISLAND_5_PRESENCE_FATE
 id    = "ISLAND_5_PRESENCE_FATE"
-label = "Presence does not share fate with content"
-desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presence MUST NOT appear in durable cold-start payloads or be required for corpus readiness."
+label = "Presence holds fate apart from content"
+desc  = "Presence behaves like weather. Memory MUST survive presence loss. Durable cold-start payloads MUST exclude presence, and corpus readiness MUST stand without it."
 ```
 
 <<~/ahu >>
@@ -120,14 +120,14 @@ desc  = "Hostless lar:/// carriers under lares/ carry canon. The operator can bo
 
 ```toml #AUTH_2_PROJECTION_NEVER_WRITES_CANON
 id    = "AUTH_2_PROJECTION_NEVER_WRITES_CANON"
-label = "Projection never writes canon itself"
-desc  = "TW5, tldraw, HUD, MCP, DreamDeck, and Kowloon surfaces render and draft — they do not silently write canon. A surface write that reaches lares/ MUST pass through an explicit ACTION verb (MOVE into a canon bag)."
+label = "Canon writes through ACTION verbs alone"
+desc  = "TW5, tldraw, HUD, MCP, DreamDeck, and Kowloon surfaces render and draft. A surface write that reaches lares/ MUST pass through an explicit ACTION verb (MOVE into a canon bag)."
 ```
 
 ```toml #AUTH_3_FORK_BEFORE_OVERWRITE
 id    = "AUTH_3_FORK_BEFORE_OVERWRITE"
 label = "Fork before overwrite"
-desc  = "Live and session material may fork, annotate, propose, and request merge. It MUST NOT silently override invariant loci. Every mutation carries a visible origin class."
+desc  = "Live and session material MUST fork, annotate, propose, and request merge, leaving invariant loci intact. Every mutation MUST carry a visible origin class."
 ```
 
 ```toml #AUTH_4_CEREMONY
@@ -138,8 +138,8 @@ desc  = "Any write that reaches lares/ MUST carry: actor, origin URI, target URI
 
 ```toml #AUTH_5_TRUST_LADDER
 id    = "AUTH_5_TRUST_LADDER"
-label = "Weaker record surfaces drift; it does not overwrite"
-desc  = "Trust order (strongest first): hostless invariant memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record surfaces a trust-boundary event — it does not silently merge upward."
+label = "Weaker record surfaces drift as a trust-boundary event"
+desc  = "Trust order (strongest first): hostless invariant memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record MUST surface a trust-boundary event; canon holds in the stronger record."
 ```
 
 <<~/ahu >>
@@ -151,13 +151,13 @@ desc  = "Trust order (strongest first): hostless invariant memes → hostless ca
 ```toml #CODEC_1_GRAMMAR_AS_MEMES
 id    = "CODEC_1_GRAMMAR_AS_MEMES"
 label = "All grammar rules live as carrier memes"
-desc  = "Grammar rules, parse patterns, and template definitions SHALL live as carrier memes in lares/memes/v0.1/api/pono/. The TypeScript parser is a thin interpreter; it MUST NOT hard-code sigil semantics."
+desc  = "Grammar rules, parse patterns, and template definitions SHALL live as carrier memes in lares/memes/v0.1/api/pono/. The TypeScript parser MUST stay a thin interpreter, reading sigil semantics from the grammar memes."
 ```
 
 ```toml #CODEC_2_ROUND_TRIP
 id    = "CODEC_2_ROUND_TRIP"
 label = "Round-trip or refuse"
-desc  = "Any carrier → tiddler/widget/shape → carrier path MUST preserve law-bearing structure or emit explicit loss residue. Regex may assist parsing; it MUST NOT rule carrier semantics."
+desc  = "Any carrier → tiddler/widget/shape → carrier path MUST preserve law-bearing structure or emit explicit loss residue. Regex MAY assist parsing; the grammar memes MUST rule carrier semantics."
 ```
 
 ```toml #CODEC_3_CANONICAL_BYTES
@@ -168,14 +168,14 @@ desc  = "Convert semantic records into canonical bytes before hashing. JSON key 
 
 ```toml #CODEC_4_NO_CUSTOM_CRYPTO
 id    = "CODEC_4_NO_CUSTOM_CRYPTO"
-label = "No hand-rolled cryptographic primitives"
-desc  = "No hand-rolled hash functions, no djb2, no custom PRNG, no homegrown auth. All portable code depends on a minimal CryptoProvider interface; runtime adapters call globalThis.crypto."
+label = "Cryptography flows through the platform provider"
+desc  = "All cryptography MUST flow through a minimal CryptoProvider interface; runtime adapters call globalThis.crypto. Portable code MUST source every hash, PRNG, and auth primitive from the provider."
 ```
 
 ```toml #CODEC_5_BAG_PRIORITY
 id    = "CODEC_5_BAG_PRIORITY"
 label = "Recipe is the routing table; highest-priority bag wins"
-desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm MUST enforce this on every incoming delta. The recipe functions as the routing table — not registration order."
+desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm MUST enforce this on every incoming delta. The recipe functions as the routing table; bag priority MUST govern resolution."
 ```
 
 <<~/ahu >>
@@ -229,7 +229,7 @@ desc  = "If a design requires a privileged server to write the first byte, or re
 ```toml #SYS_2_TW5_VM_PRIMACY
 id    = "SYS_2_TW5_VM_PRIMACY"
 label = "TW5 vm primacy: if it can happen in the vm pool, it must"
-desc  = "Any operation that can run inside the TW5 vm pool (parse, render, filter, transform) MUST run there. Moving logic outside the vm introduces a parallel authority track and breaks projection fidelity."
+desc  = "Any operation that can run inside the TW5 vm pool (parse, render, filter, transform) MUST run there. In-vm execution keeps one authority track and holds projection fidelity."
 ```
 
 ```toml #SYS_3_TS_AS_PLUGIN_PROJECTION
@@ -241,13 +241,13 @@ desc  = "Vite translates TypeScript to TW5 plugin bundles at build time. TypeScr
 ```toml #SYS_4_TIDDLER_FORMAT
 id    = "SYS_4_TIDDLER_FORMAT"
 label = "Tiddler format law: all data as { title, text, fields, bag, authority }"
-desc  = "All durable data in the Lararium system takes the tiddler shape: { title, text, fields, bag, authority }. Binary assets live as blob-descriptor tiddlers. Nothing bypasses this shape except named codec exceptions."
+desc  = "All durable data in the Lararium system takes the tiddler shape: { title, text, fields, bag, authority }. Binary assets live as blob-descriptor tiddlers. Every durable datum MUST take this shape, except named codec exceptions."
 ```
 
 ```toml #SYS_5_MEME_AS_TIDDLER_PROJECTION
 id    = "SYS_5_MEME_AS_TIDDLER_PROJECTION"
 label = "Meme files as tiddler-package projections"
-desc  = "*.md carrier files are projections of parent + fragment tiddler packages. Deserialization runs in the vm via deserializeCarrier(); writes run via renderTiddler(). No agent reads meme files as raw strings at runtime except BOOTSTRAP_SCANS (named exception)."
+desc  = "*.md carrier files are projections of parent + fragment tiddler packages. Deserialization runs in the vm via deserializeCarrier(); writes run via renderTiddler(). An agent MUST read meme files through the vm deserializer at runtime, except BOOTSTRAP_SCANS (named exception)."
 ```
 
 <<~/ahu >>
@@ -307,7 +307,7 @@ desc  = "The genesis DocUrl derives from the content bytes via Automerge's docum
 ```toml #GEN_3_IMMUTABLE_SEED
 id    = "GEN_3_IMMUTABLE_SEED"
 label = "Genesis bytes are immutable; updates produce a new genesis"
-desc  = "The genesis artifact does not mutate in place. A grammar version bump, tiddler update, or blob change produces a new build with a new CID. There is no in-place upgrade path until signed migration receipts are available (see grammar-invariants.md Invariant 6)."
+desc  = "The genesis artifact stays immutable. A grammar version bump, tiddler update, or blob change MUST produce a new build with a new CID. Signed migration receipts (see grammar-invariants.md Invariant 6) gate any future in-place upgrade path."
 ```
 
 ```toml #GEN_4_QUINE_PROPERTY
@@ -337,7 +337,7 @@ desc  = "The node peer writes catalog-url to disk; the browser peer does not. Th
 ```toml #PEER_3_AUTHORITY_FROM_CAPABILITY
 id    = "PEER_3_AUTHORITY_FROM_CAPABILITY"
 label = "Authority flows from capability receipts, not boot order"
-desc  = "No peer gains write or canon-MOVE authority by being first online, by holding more history, or by writing genesis. Authority requires a capability receipt, signature, or policy (Keyhive, future work). Until Keyhive lands, all peers operate at parity below the canon residency boundary."
+desc  = "Authority flows from a capability receipt, signature, or policy (Keyhive, future work) alone. Boot order, history depth, and writing genesis grant no authority. Until Keyhive lands, all peers operate at parity below the canon residency boundary."
 ```
 
 <<~/ahu >>
