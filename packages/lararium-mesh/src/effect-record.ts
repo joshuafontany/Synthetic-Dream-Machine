@@ -12,8 +12,8 @@
  *   - ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation) — gesture
  *   - Effect-record annotations (tiddler tags, archival profession derivation) — audit
  *
- * Effect log URI shape:
- *   lar:///ha.ka.ba/@<bag>/log/residency/<event-id>
+ * Effect-record URI shape (a bag's indelible residency ledger):
+ *   lar:///ha.ka.ba/@<bag>/ledger/residency/<event-id>
  *
  * Each effect record carries a `tags` field including `LARES_EFFECT_RECORD_TAG`,
  * an `archival-verb` field with one of ARCHIVAL_VERBS, and the linking fields
@@ -60,24 +60,24 @@ export function isArchivalVerb(verb: string): verb is ArchivalVerb {
   return ARCHIVAL_VERB_SET.has(verb);
 }
 
-/** Tag carried by every effect-record tiddler in the bag's residency log. */
+/** Tag carried by every effect-record tiddler in the bag's residency ledger. */
 export const LARES_EFFECT_RECORD_TAG = stableTagUri("lares-effect-record");
 
 // ── URI shape (S4.2) ───────────────────────────────────────────────────────
 
-/** `lar:///ha.ka.ba/@<bag>/log/residency/` — effect log prefix for one bag. */
-export function effectLogPrefix(bagUri: string): string {
-  return `${bagUri}/log/residency/`;
+/** `lar:///ha.ka.ba/@<bag>/ledger/residency/` — residency-ledger prefix for one bag. */
+export function effectLedgerPrefix(bagUri: string): string {
+  return `${bagUri}/ledger/residency/`;
 }
 
-/** `lar:///ha.ka.ba/@<bag>/log/residency/<event-id>` — one effect-record tiddler. */
+/** `lar:///ha.ka.ba/@<bag>/ledger/residency/<event-id>` — one effect-record tiddler. */
 export function effectRecordUri(bagUri: string, eventId: string): string {
-  return `${effectLogPrefix(bagUri)}${eventId}`;
+  return `${effectLedgerPrefix(bagUri)}${eventId}`;
 }
 
-/** True when a title sits in any bag's residency log. */
+/** True when a title sits in any bag's residency ledger. */
 export function isEffectRecordUri(title: string): boolean {
-  return /^lar:\/\/\/[^/]+\/@[^/]+\/log\/residency\/.+$/.test(title);
+  return /^lar:\/\/\/[^/]+\/@[^/]+\/ledger\/residency\/.+$/.test(title);
 }
 
 // ── EffectRecord shape ─────────────────────────────────────────────────────

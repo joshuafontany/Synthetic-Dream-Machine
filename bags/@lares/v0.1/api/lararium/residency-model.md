@@ -92,7 +92,7 @@ The M.2 verb-as-tiddler-field pipeline carries the action surface. ACTION verbs 
 
 ```
 lar:///lararium.local.vm/verbs/<requestId>   # volatile local invocation (admin VM scratch)
-lar:///ha.ka.ba/@admin/signals/<requestId>   # Automerge-backed remote vessel signal
+lar:///ha.ka.ba/@admin/summons/<requestId>   # Automerge-backed remote vessel summons
 lar:///ha.ka.ba/@admin/outcomes/<requestId>  # Automerge-backed durable outcome
 ```
 

@@ -3,7 +3,7 @@
  *
  * Covers:
  *   - ARCHIVAL_VERBS membership + isArchivalVerb type guard
- *   - URI builders (effectLogPrefix, effectRecordUri, isEffectRecordUri)
+ *   - URI builders (effectLedgerPrefix, effectRecordUri, isEffectRecordUri)
  *   - newEventId uniqueness
  *   - buildEffectRecordTiddler ↔ parseEffectRecord roundtrip
  *   - mapActionToEffects per-verb correctness
@@ -21,7 +21,7 @@ import { describe, test, expect } from "vitest";
 import {
   ARCHIVAL_VERBS, isArchivalVerb,
   LARES_EFFECT_RECORD_TAG,
-  effectLogPrefix, effectRecordUri, isEffectRecordUri,
+  effectLedgerPrefix, effectRecordUri, isEffectRecordUri,
   newEventId,
   buildEffectRecordTiddler, parseEffectRecord,
   mapActionToEffects,
@@ -65,22 +65,22 @@ describe("ARCHIVAL_VERBS membership", () => {
 describe("effect-record URI builders", () => {
   const BAG = "lar:///ha.ka.ba/@elyncia";
 
-  test("effectLogPrefix appends /log/residency/ to the bag URI", () => {
-    expect(effectLogPrefix(BAG)).toBe("lar:///ha.ka.ba/@elyncia/log/residency/");
+  test("effectLedgerPrefix appends /ledger/residency/ to the bag URI", () => {
+    expect(effectLedgerPrefix(BAG)).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/");
   });
 
   test("effectRecordUri appends event-id to the prefix", () => {
-    expect(effectRecordUri(BAG, "abc-123")).toBe("lar:///ha.ka.ba/@elyncia/log/residency/abc-123");
+    expect(effectRecordUri(BAG, "abc-123")).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/abc-123");
   });
 
   test("isEffectRecordUri accepts well-formed log titles", () => {
-    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/log/residency/abc-123")).toBe(true);
-    expect(isEffectRecordUri("lar:///lararium.local.vm/@admin/log/residency/x")).toBe(true);
+    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/abc-123")).toBe(true);
+    expect(isEffectRecordUri("lar:///lararium.local.vm/@admin/ledger/residency/x")).toBe(true);
   });
 
   test("isEffectRecordUri rejects non-residency-log titles", () => {
     expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/some-tiddler")).toBe(false);
-    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/log/residency/")).toBe(false); // empty event-id
+    expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/")).toBe(false); // empty event-id
     expect(isEffectRecordUri("https://example.com")).toBe(false);
     expect(isEffectRecordUri("")).toBe(false);
   });
@@ -122,7 +122,7 @@ describe("EffectRecord encode/parse roundtrip", () => {
       sourceBag:    "lar:///ha.ka.ba/@personal",
     };
     const tiddler = buildEffectRecordTiddler(original);
-    expect(tiddler.tiddler.title).toBe("lar:///ha.ka.ba/@elyncia/log/residency/evt-1");
+    expect(tiddler.tiddler.title).toBe("lar:///ha.ka.ba/@elyncia/ledger/residency/evt-1");
     expect(tiddler.tiddler["tags"]).toBe(LARES_EFFECT_RECORD_TAG);
 
     const parsed = parseEffectRecord(tiddler.tiddler as Record<string, unknown>);
@@ -160,7 +160,7 @@ describe("EffectRecord encode/parse roundtrip", () => {
     expect(parseEffectRecord({ title: "some-other-tiddler" })).toBeNull();
     expect(parseEffectRecord({})).toBeNull();
     expect(parseEffectRecord({
-      title:           "lar:///ha.ka.ba/@x/log/residency/y",
+      title:           "lar:///ha.ka.ba/@x/ledger/residency/y",
       "archival-verb": "not-an-archival-verb",
       "action-verb":   "ADD",
       "event-id":      "e",
@@ -173,7 +173,7 @@ describe("EffectRecord encode/parse roundtrip", () => {
 
   test("parseEffectRecord requires all base fields (event-id, request-id, bag, actor, timestamp)", () => {
     const full: Record<string, unknown> = {
-      title:           "lar:///ha.ka.ba/@x/log/residency/y",
+      title:           "lar:///ha.ka.ba/@x/ledger/residency/y",
       "archival-verb": "accession",
       "action-verb":   "ADD",
       "event-id":      "e",

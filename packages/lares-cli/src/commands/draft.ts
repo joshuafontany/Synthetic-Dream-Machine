@@ -101,7 +101,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     console.log(`drafted: ${tiddler}`);
     console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
     console.log(`  status: ${r["status"]}`);
-    console.log(`  audit:  lar:///ha.ka.ba/@admin/log/${result.requestId}`);
+    console.log(`  receipt: lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
     return 0;
   } finally {
     await vessel.disconnect();

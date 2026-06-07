@@ -8,16 +8,16 @@
  *                 directly to the admin TW5 wiki. The dispatcher watches wiki
  *                 change events and picks these up immediately.
  *
- *   REMOTE path — external vessels write a verb-signal tiddler at
- *                 @admin/signals/<id> to the Automerge doc. IslandAdaptor flows
+ *   REMOTE path — external vessels write a verb-summons tiddler at
+ *                 @admin/summons/<id> to the Automerge doc. IslandAdaptor flows
  *                 it into the TW5 wiki. The dispatcher's Automerge subscriber
- *                 sees the signal, calls placeVerb() to create the volatile
- *                 invocation, then tombstones the signal tiddler.
- *                 The signal is edge transport, not durable coordination state.
+ *                 sees the summons, calls placeVerb() to create the volatile
+ *                 invocation, then tombstones the summons tiddler.
+ *                 The summons carries edge transport, not durable coordination state.
  *
  * Outcome flow: handler result → buildVerbOutcome → admin composite store
  *   → IslandAdaptor.saveTiddler → @admin/outcomes/<id> in Automerge → syncs.
- *   Durable shared meaning begins at the outcome, not at the signal.
+ *   Durable shared meaning begins at the outcome, not at the summons.
  *
  * Admin-only law: ONLY the admin VM runs a VerbDispatcher. Pinned wiki and
  *   warm/cold wikis are content surfaces — they do not dispatch.
@@ -47,11 +47,12 @@ import {
   type CapabilityVerifier,
   parseVerbInvocation,
   VERB_URI_PREFIX,
+  VERB_OUTCOME_URI_PREFIX,
 } from "@lararium/mesh";
 import { dispatchVerbLifecycle, placeVerbInvocation } from "./verb-vm.js";
 import type { TW5Engine } from "./tw5-vm.js";
-import { emitVerbSignal } from "./verb-signal.js";
-import type { VerbSignalRequest } from "./verb-signal.js";
+import { emitVerbSummons } from "./verb-summons.js";
+import type { VerbSummonsRequest } from "./verb-summons.js";
 import { runLocalVerb, deriveRoutedCap } from "./verb-local-dispatch.js";
 
 export interface VerbContext {
@@ -108,7 +109,12 @@ export class VerbDispatcher {
         const invocation = parseVerbInvocation(tw5Tiddler.fields);
         if (!invocation || invocation.status !== "pending" || this.inFlight.has(invocation.requestId)) continue;
         this.inFlight.add(invocation.requestId);
-        dispatchVerbLifecycle(
+        void this.opts.admin.getLive(VERB_OUTCOME_URI_PREFIX + invocation.requestId).then((prior) => {
+          // Durable idempotency — the CRDT is the dedup store: a verb whose
+          // outcome already landed has already taken effect, so skip re-execution
+          // (exactly-once EFFECT, not delivery). See project_asymmetric_peer_handoff.
+          if (prior) return undefined;
+          return dispatchVerbLifecycle(
           this.opts.adminVm,
           this.opts.admin,
           invocation,
@@ -137,8 +143,9 @@ export class VerbDispatcher {
             }
             throw new Error(`no handler registered for "${invocation.verb}"`);
           },
-        ).catch((err) => {
-          console.error("[verb-dispatcher] local handler crashed:", err);
+          );
+        }).catch((err) => {
+          console.error("[verb-dispatcher] verb dispatch crashed:", err);
         }).finally(() => this.inFlight.delete(invocation.requestId));
       }
     };
@@ -146,12 +153,12 @@ export class VerbDispatcher {
     this.unsubWiki = () => wiki.removeEventListener("change", onWikiChange);
 
     this.unsubAutomerge = this.opts.admin.subscribe((change) => {
-      emitVerbSignal(change, {
+      emitVerbSummons(change, {
         admin:      this.opts.admin,
         isInFlight: (requestId) => this.inFlight.has(requestId),
         placeVerb:  (invocation) => { this.placeVerb(invocation); },
       }).catch((err) => {
-        console.error("[verb-dispatcher] signal relay crashed:", err);
+        console.error("[verb-dispatcher] summons relay crashed:", err);
       });
     });
 
@@ -163,7 +170,7 @@ export class VerbDispatcher {
     this.unsubAutomerge?.(); this.unsubAutomerge = null;
   }
 
-  placeVerb(opts: VerbSignalRequest): string {
+  placeVerb(opts: VerbSummonsRequest): string {
     return placeVerbInvocation(this.opts.adminVm, opts);
   }
 }

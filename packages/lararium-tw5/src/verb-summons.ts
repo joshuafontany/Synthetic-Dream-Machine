@@ -1,36 +1,38 @@
 /**
- * verb-signal — CRDT verb-signal tiddler → volatile local invocation relay.
+ * verb-summons — CRDT verb-summons tiddler → volatile local invocation relay.
  *
- * External vessels write verb-signal tiddlers at @admin/signals/<id> to the
+ * External vessels write verb-summons tiddlers at @admin/summons/<id> to the
  * Automerge doc. The admin island's CompositeStore subscriber calls
- * emitVerbSignal on every change; this translates a signal tiddler into
- * a volatile local invocation and tombstones the signal entry.
- * Signal = edge transport; the volatile invocation tiddler = the durable
- * coordination unit the VerbDispatcher watches.
+ * emitVerbSummons on every change; this translates a summons tiddler into
+ * a volatile local invocation and tombstones the summons entry.
+ * The summons names edge transport — a peer calling another peer to act. (The
+ * term "signal" now names the Agent↔Operator HUD/legibility frame, a different
+ * layer; the task-transport noun reads "summons", by research verdict 2026-06-07.)
+ * The volatile invocation tiddler holds the durable coordination the dispatcher watches.
  *
  * Isomorphic: no Node or browser platform APIs. Runs in any sovereign Worker.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-signal
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-summons
  */
 
 import type { BatchMode, ChangeOrigin, CompositeStore, LarTiddlerChange } from "@lararium/mesh";
-import { VERB_SIGNAL_URI_PREFIX, parseVerbInvocation } from "@lararium/mesh";
+import { VERB_SUMMONS_URI_PREFIX, parseVerbInvocation } from "@lararium/mesh";
 import type { VerbPlacement } from "./verb-vm.js";
 
-export type VerbSignalRequest = VerbPlacement;
+export type VerbSummonsRequest = VerbPlacement;
 
-export interface VerbSignalRelayOptions {
+export interface VerbSummonsRelayOptions {
   readonly admin:       CompositeStore;
   readonly isInFlight:  (requestId: string) => boolean;
-  readonly placeVerb:   (invocation: VerbSignalRequest) => void;
+  readonly placeVerb:   (invocation: VerbSummonsRequest) => void;
 }
 
-export async function emitVerbSignal(
+export async function emitVerbSummons(
   change: LarTiddlerChange,
-  opts: VerbSignalRelayOptions,
+  opts: VerbSummonsRelayOptions,
 ): Promise<void> {
   if (!change.record) return;
-  if (!change.record.tiddler.title.startsWith(VERB_SIGNAL_URI_PREFIX)) return;
+  if (!change.record.tiddler.title.startsWith(VERB_SUMMONS_URI_PREFIX)) return;
   if (change.origin.kind === "lares-verb") return;
 
   const invocation = parseVerbInvocation(change.record.tiddler as Record<string, unknown>);

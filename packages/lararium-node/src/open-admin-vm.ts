@@ -30,7 +30,7 @@ import {
 import {
   openAdminVmCore,
   type AdminVmHost,
-  type VerbTable, type VerbSignalRequest,
+  type VerbTable, type VerbSummonsRequest,
 } from "@lararium/tw5";
 import { waitHandleLocal } from "./repo-helpers.js";
 import { nodeWorkerHandle } from "./worker-handle.js";
@@ -88,7 +88,7 @@ export interface AdminVmResult {
    * Delegates to the admin island's internal `placeVerbInvocation` via `admin:place-verb` message.
    * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
    */
-  placeVerb:    (opts: VerbSignalRequest) => void;
+  placeVerb:    (opts: VerbSummonsRequest) => void;
   /**
    * Host-side inbound-peer verifier (path b). Proxies `verify()` to the admin
    * island's keyhive via admin:verify-request/result. The WS AdminAuthGate arms

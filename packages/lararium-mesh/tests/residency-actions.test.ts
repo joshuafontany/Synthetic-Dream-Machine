@@ -11,7 +11,7 @@ import type {
   ClearAction, DropAction, LoadAction,
 } from "../src/residency-actions.js";
 import {
-  VERB_URI_PREFIX, VERB_SIGNAL_URI_PREFIX,
+  VERB_URI_PREFIX, VERB_SUMMONS_URI_PREFIX,
 } from "../src/verb-tiddler.js";
 import type { VerbInvocation } from "../src/verb-tiddler.js";
 
@@ -392,7 +392,7 @@ describe("isResidencyActionUri", () => {
   });
 
   test("accepts admin verb signal URI", () => {
-    expect(isResidencyActionUri(`${VERB_SIGNAL_URI_PREFIX}abc123`)).toBe(true);
+    expect(isResidencyActionUri(`${VERB_SUMMONS_URI_PREFIX}abc123`)).toBe(true);
   });
 
   test("rejects non-verb-tiddler URIs", () => {

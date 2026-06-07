@@ -164,7 +164,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 **Stories:**
 
 - [x] **S4.1** — `EffectRecord` interface + `ARCHIVAL_VERBS` const (`accession, deaccession, transfer, withdrawal, loan, holdings, reappraisal, disposition`) + `ArchivalVerb` type + `LARES_EFFECT_RECORD_TAG` landed in `packages/lararium-mesh/src/effect-record.ts`.
-- [x] **S4.2** — Effect log URI shape: `lar:///<bag>/log/residency/<event-id>`. Builders `effectLogPrefix(bag)` + `effectRecordUri(bag, eventId)` + predicate `isEffectRecordUri(title)` + `newEventId()` factory + `buildEffectRecordTiddler` + `parseEffectRecord` symmetric roundtrip.
+- [x] **S4.2** — Effect-record URI shape: `lar:///<bag>/ledger/residency/<event-id>` (the residency ledger; "log" → "ledger" 2026-06-07). Builders `effectLedgerPrefix(bag)` + `effectRecordUri(bag, eventId)` + predicate `isEffectRecordUri(title)` + `newEventId()` factory + `buildEffectRecordTiddler` + `parseEffectRecord` symmetric roundtrip.
 - [x] **S4.3** — Kāpae landed in `CompositeStore.resolveTopmost()` + `getLive()`: tombstone in a higher-priority bag STOPS the cascade (returns null) rather than falling through to lower bags. Anti-pattern #3 defense (kāpae resurrection — OverlayFS/Docker layer pattern adapted to multi-bag CRDT). `resolveAll()` retained as **presence report** (skips tombstones across all layers). New `listKapaeBags(title)` surfaces which bags explicitly hide a title, highest-priority-first.
 - [x] **S4.4** — `mapActionToEffects(action, opts?)` pure mapping. Per-verb table:
   - ADD → 1 accession in to-bag

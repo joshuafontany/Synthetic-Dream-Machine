@@ -16,7 +16,7 @@
  * Verb invocation paths:
  *   Local (in-process):   placeVerb() → wiki.addTiddler() → TW5 change event
  *                         → dispatcher runs → outcome to @admin/outcomes/
- *   Remote (CLI/vessels): vessel writes @admin/signals/<id> to Automerge →
+ *   Remote (CLI/vessels): vessel writes @admin/summons/<id> to Automerge →
  *                         IslandAdaptor flows it into TW5 wiki →
  *                         dispatcher translates to volatile invocation → processes →
  *                         outcome to @admin/outcomes/
@@ -47,6 +47,7 @@ import {
   ADMIN_BAG_ID, VOLATILE_VM_PREFIX,
   LARES_VERB_EVENT_TAG, LARES_VERB_TAG,
 } from "./lar-uris.js";
+import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
 
 // ── URI prefixes ───────────────────────────────────────────────────────────
@@ -54,15 +55,51 @@ import type { LarTiddlerRecord } from "./tiddler-store.js";
 /** Volatile verb invocation tiddlers — admin TW5 wiki scratch, never synced. */
 export const VERB_URI_PREFIX = `${VOLATILE_VM_PREFIX}verbs/`;
 
-/** Automerge-backed verb signal — remote vessels write here; dispatcher translates
+/** Automerge-backed verb summons — remote vessels write here; dispatcher translates
  *  to volatile invocation and tombstones after pickup. */
-export const VERB_SIGNAL_URI_PREFIX = `${ADMIN_BAG_ID}/signals/`;
+export const VERB_SUMMONS_URI_PREFIX = `${ADMIN_BAG_ID}/summons/`;
 
 /** Durable outcome tiddlers — Automerge-backed, sync to all vessels. */
 export const VERB_OUTCOME_URI_PREFIX = `${ADMIN_BAG_ID}/outcomes/`;
 
 /** Result map key for single-result (no explicit targets) verbs. */
 export const VERB_RESULT_KEY = "summary" as const;
+
+// ── Task / receipt ontology — content-addressed surface (SEED 2026-06-07) ────
+// The pono attractor (A/B/C approved): a TASK = a content-addressed invocation
+// fact living in a bag; the BAG carries the addressing geometry (its keyhive
+// ring); a RECEIPT keys by the task it answers. The live verb/summons/outcome
+// path migrates onto this surface per packages/EPIC-TASK-ONTOLOGY.md. Until
+// then these compose alongside the running path, not replacing it.
+
+export const TASK_KIND    = "task"    as const;
+export const RECEIPT_KIND = "receipt" as const;
+
+/** `lar:///ha.ka.ba/@<bag>/task/<cid>` — a content-addressed task (invocation) fact. */
+export function taskUri(bagUri: string, contentId: string): string {
+  return `${bagUri}/${TASK_KIND}/${contentId}`;
+}
+
+/** `lar:///ha.ka.ba/@<bag>/receipt/<task-cid>` — the receipt keyed by the task it answers (UCAN `ran`). */
+export function receiptUri(bagUri: string, taskContentId: string): string {
+  return `${bagUri}/${RECEIPT_KIND}/${taskContentId}`;
+}
+
+/**
+ * taskContentId — the change-hash content-address of a task's identity tuple
+ * `{subject, command, args, nonce}` (UCAN ontology: subject = the bag/resource
+ * URI, command = the verb). Empty nonce → idempotent identity; a random nonce →
+ * a fresh task. sha256 over canonical JSON — our native content-address; an
+ * IPFS-CID projection at the peer boundary stays a later option (C). Async per
+ * crypto law (routes through the platform CryptoProvider).
+ */
+export function taskContentId(
+  parts: { subject: string; command: string; args: Readonly<Record<string, unknown>>; nonce?: string },
+  provider: DigestProvider = defaultCryptoProvider,
+): Promise<string> {
+  const canonical = { subject: parts.subject, command: parts.command, args: parts.args, nonce: parts.nonce ?? "" };
+  return sha256Hex(canonicalJsonBytes(canonical), provider);
+}
 
 // ── Verb invocation shape ──────────────────────────────────────────────────
 
@@ -99,6 +136,13 @@ export interface VerbInvocation {
   readonly fromUri?:    string;
   /** Verse event name that triggered dispatch — maps to `reaction:listenable` payload.listenable. */
   readonly listenable?: string;
+  /**
+   * Audience / executor (UCAN `aud`, PROVISIONAL). When present, narrows the task to
+   * ONE named vessel — the mint-once / addressed shape (run here, exactly once). When
+   * absent, the holding bag's keyhive ring carries the addressing (any capable peer
+   * in the ring may claim). Bag = the default geometry; `aud` = the narrowing.
+   */
+  readonly aud?:        string;
 }
 
 // ── Outcome shape ──────────────────────────────────────────────────────────
@@ -181,6 +225,7 @@ export function buildVerbInvocation(opts: {
   requestId?:  string;
   fromUri?:    string;
   listenable?: string;
+  aud?:        string;
 }): Record<string, unknown> {
   const requestId = opts.requestId ?? newRequestId();
   const title     = `${VERB_URI_PREFIX}${requestId}`;
@@ -197,11 +242,12 @@ export function buildVerbInvocation(opts: {
     "requested-at":  new Date().toISOString(),
     ...(opts.fromUri    !== undefined && { "from-uri":   opts.fromUri }),
     ...(opts.listenable !== undefined && { listenable:   opts.listenable }),
+    ...(opts.aud        !== undefined && { aud:          opts.aud }),
   };
 }
 
-/** Build an Automerge verb-signal record for remote vessel submission. */
-export function buildVerbSignal(opts: {
+/** Build an Automerge verb-summons record for remote vessel submission. */
+export function buildVerbSummons(opts: {
   verb:        string;
   args:        Record<string, unknown>;
   requestedBy: string;
@@ -211,9 +257,10 @@ export function buildVerbSignal(opts: {
   authority?:  string;
   fromUri?:    string;
   listenable?: string;
+  aud?:        string;
 }): LarTiddlerRecord {
   const requestId = opts.requestId ?? newRequestId();
-  const title     = `${VERB_SIGNAL_URI_PREFIX}${requestId}`;
+  const title     = `${VERB_SUMMONS_URI_PREFIX}${requestId}`;
   return {
     tiddler: {
       title,
@@ -228,6 +275,7 @@ export function buildVerbSignal(opts: {
       "requested-at":  new Date().toISOString(),
       ...(opts.fromUri    !== undefined && { "from-uri":   opts.fromUri }),
       ...(opts.listenable !== undefined && { listenable:   opts.listenable }),
+      ...(opts.aud        !== undefined && { aud:          opts.aud }),
     },
     meta: { authority: opts.authority ?? "lares-cli" },
   };
@@ -238,7 +286,7 @@ export function buildVerbSignal(opts: {
 export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvocation | null {
   const title = typeof fields["title"] === "string" ? fields["title"] : null;
   if (!title) return null;
-  if (!title.startsWith(VERB_URI_PREFIX) && !title.startsWith(VERB_SIGNAL_URI_PREFIX)) return null;
+  if (!title.startsWith(VERB_URI_PREFIX) && !title.startsWith(VERB_SUMMONS_URI_PREFIX)) return null;
 
   const tag = fields["tags"];
   const tagsStr = Array.isArray(tag) ? tag.join(" ") : (typeof tag === "string" ? tag : "");
@@ -267,11 +315,13 @@ export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvoca
 
   const fromUri    = typeof fields["from-uri"]   === "string" ? fields["from-uri"]   : undefined;
   const listenable = typeof fields["listenable"] === "string" ? fields["listenable"] : undefined;
+  const aud        = typeof fields["aud"]        === "string" ? fields["aud"]        : undefined;
 
   return {
     requestId, title, verb, args, targets, batchMode, status, requestedBy, requestedAt,
     ...(fromUri    !== undefined && { fromUri }),
     ...(listenable !== undefined && { listenable }),
+    ...(aud        !== undefined && { aud }),
   };
 }
 
