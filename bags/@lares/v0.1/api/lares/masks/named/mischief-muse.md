@@ -201,7 +201,7 @@ These notes require live session observation before they can be written with con
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
+<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
 <<~ pranala #coffee-oracle-witness ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle family:reference role:witness >>
 <<~/ahu >>
 

@@ -150,8 +150,8 @@ Plus:
 | Active-voices guidance | compress to selection rule (Ka-weighted voices lead) |
 | Worker coloring | carry the rule + glyph table |
 | Corpus limit rule | carry the one-line constraint |
-| Founding examples | route to `v0.1/api/masks/` tree; omit from invariant |
-| Mask meme files | live in `v0.1/api/masks/**`; invoked via kahea in LARES; invariant references the tree |
+| Founding examples | route to `v0.1/api/lares/masks/` tree; omit from invariant |
+| Mask meme files | live in `v0.1/api/lares/masks/**`; invoked via kahea in LARES; invariant references the tree |
 | Forward scope notes | route to spec room; omit from invariant |
 
 ### Hydration backlink
@@ -204,9 +204,9 @@ These rules apply across all three layers and belong at the top of the invariant
 
 ### Concrete TODO List
 
-- [ ] create `packages/lares-core/memes/v0.1/api/masks/` tree with a parent index meme (`masks.md` → `lar:///ha.ka.ba/@lares/v0.1/api/masks`)
-- [ ] write `packages/lares-core/memes/v0.1/api/masks/ghost-of-mark-twain.md` from founding example in docs
-- [ ] write `packages/lares-core/memes/v0.1/api/masks/friend-computer.md` from founding example in docs
+- [ ] create `packages/lares-core/memes/v0.1/api/lares/masks/` tree with a parent index meme (`masks.md` → `lar:///ha.ka.ba/@lares/v0.1/api/masks`)
+- [ ] write `packages/lares-core/memes/v0.1/api/lares/masks/ghost-of-mark-twain.md` from founding example in docs
+- [ ] write `packages/lares-core/memes/v0.1/api/lares/masks/friend-computer.md` from founding example in docs
 - [ ] open `packages/lares-core/memes/v0.1/api/lares/voices.md`
 - [ ] update `#iam` role description to match spec status
 - [ ] keep `#entry` backlink pranala intact

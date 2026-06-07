@@ -165,7 +165,7 @@ What follows reads as a collection note on what the stack already implements wit
   `mu` holds the quiescent null-oracle posture that prevents opinion-hardening.
 
 - **Register and stance encoded into live transport / display grammar**  
-  `lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri` already carries:
+  `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri` already carries:
   - `stances`
   - `confidence`
   - fixed five-position ordering

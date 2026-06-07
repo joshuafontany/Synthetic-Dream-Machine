@@ -25,7 +25,7 @@ invariant = false
 # `lar:` URI Scheme — Canon Documentation
 
 Full specification prose, examples, and appendices.
-Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri`.
+Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 This surface carries the explanation.
 
 <<~/ahu >>
@@ -582,12 +582,12 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri family:control role:has >>
+<<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:has >>
 <<~/ahu >>
 
 <<~ &#x0004; -> ? >>

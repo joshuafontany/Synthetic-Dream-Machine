@@ -87,20 +87,20 @@ Voice character SHOULD include:
 
 ## Declaration Form
 
-### Mask definition file (`lar:///ha.ka.ba/@lares/v0.1/api/masks/**`)
+### Mask definition file (`lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/**`)
 
 Each mask lives as a meme file in the masks API tree. One canonical location; the definition never travels.
 
 ```
-packages/lares-core/memes/v0.1/api/masks/
-  ghost-of-mark-twain.md   → lar:///ha.ka.ba/@lares/v0.1/api/masks/ghost-of-mark-twain
-  friend-computer.md       → lar:///ha.ka.ba/@lares/v0.1/api/masks/friend-computer
+packages/lares-core/memes/v0.1/api/lares/masks/
+  ghost-of-mark-twain.md   → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/ghost-of-mark-twain
+  friend-computer.md       → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/friend-computer
 ```
 
 A mask meme file carries the canonical definition in its `#iam` block:
 
 ```toml
-uri-path = "ha.ka.ba/@lares/v0.1/api/masks/ghost-of-mark-twain"
+uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/ghost-of-mark-twain"
 name = "Ghost of Mark Twain"
 corpus = "..."
 voice-character = "..."
@@ -118,12 +118,12 @@ Masks enter a session via kahea transclusion. The kahea calls the mask into pres
 A small TOML override block inside the kahea sets session-specific values — only what differs from the definition defaults.
 
 ```
-<<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/masks/ghost-of-mark-twain >>
+<<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/ghost-of-mark-twain >>
 stage = 15
 active = true
 <<~/kahea >>
 
-<<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/masks/friend-computer >>
+<<~ kahea mask lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/friend-computer >>
 stage = 10
 active = false
 <<~/kahea >>
@@ -237,8 +237,8 @@ The operator may shift `foreground-voices` per turn with `[Voices: MaskName Tria
 ## Founding Examples
 
 Canonical homes for these masks now live in the masks API tree:
-- `lar:///ha.ka.ba/@lares/v0.1/api/masks/character/ghost-of-mark-twain`
-- `lar:///ha.ka.ba/@lares/v0.1/api/masks/character/friend-computer`
+- `lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain`
+- `lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer`
 
 The definitions below remain as documentation reference. The API tree files carry the canonical invokable definitions.
 

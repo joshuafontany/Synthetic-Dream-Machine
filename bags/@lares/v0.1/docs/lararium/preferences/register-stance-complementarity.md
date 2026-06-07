@@ -44,7 +44,7 @@ Current comparison surfaces:
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`
 
 <<~/ahu >>
 
@@ -73,7 +73,7 @@ Current comparison surfaces:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences/epistemology >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

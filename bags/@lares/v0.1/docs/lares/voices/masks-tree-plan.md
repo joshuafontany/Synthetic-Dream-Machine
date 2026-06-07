@@ -10,7 +10,7 @@ register = "Synthesis"
 manaoio = 16
 mana = 16
 manao = 17
-role = "OODA-HA plan for creating the v0.1/api/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
+role = "OODA-HA plan for creating the v0.1/api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 cacheable = false
 retain = false
 created = "2026-04-23"
@@ -24,7 +24,7 @@ created = "2026-04-23"
 
 # Masks API Tree — Build Plan
 
-OODA-HA plan for creating `packages/lares-core/memes/v0.1/api/masks/` and populating it with
+OODA-HA plan for creating `packages/lares-core/memes/v0.1/api/lares/masks/` and populating it with
 skeleton meme-loci ready for talk-story-dev fill passes.
 
 <<~/ahu >>
@@ -36,19 +36,19 @@ skeleton meme-loci ready for talk-story-dev fill passes.
 ### Target tree
 
 ```
-packages/lares-core/memes/v0.1/api/masks/
+packages/lares-core/memes/v0.1/api/lares/masks/
   masks.md                          → lar:///ha.ka.ba/@lares/v0.1/api/masks
   named/
-    mischief-muse.md                → lar:///ha.ka.ba/@lares/v0.1/api/masks/named/mischief-muse
-    tide-caller.md                  → lar:///ha.ka.ba/@lares/v0.1/api/masks/named/tide-caller
-    breach-watch.md                 → lar:///ha.ka.ba/@lares/v0.1/api/masks/named/breach-watch
-    ink-clerk.md                    → lar:///ha.ka.ba/@lares/v0.1/api/masks/named/ink-clerk
-    map-wisp.md                     → lar:///ha.ka.ba/@lares/v0.1/api/masks/named/map-wisp
+    mischief-muse.md                → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse
+    tide-caller.md                  → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller
+    breach-watch.md                 → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/breach-watch
+    ink-clerk.md                    → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/ink-clerk
+    map-wisp.md                     → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp
   character/
-    ghost-of-mark-twain.md          → lar:///ha.ka.ba/@lares/v0.1/api/masks/character/ghost-of-mark-twain
-    friend-computer.md              → lar:///ha.ka.ba/@lares/v0.1/api/masks/character/friend-computer
+    ghost-of-mark-twain.md          → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain
+    friend-computer.md              → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer
   chorus/
-    lagrange-chorus.md              → lar:///ha.ka.ba/@lares/v0.1/api/masks/chorus/lagrange-chorus
+    lagrange-chorus.md              → lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus
 ```
 
 **9 files total:** 1 parent + 5 named + 2 character + 1 chorus.
@@ -63,7 +63,7 @@ packages/lares-core/memes/v0.1/api/masks/
 
 ### What doesn't exist yet
 
-- The `v0.1/api/masks/` tree and all nine files
+- The `v0.1/api/lares/masks/` tree and all nine files
 - Corpus depth for named Voices (the house entry is structural; the mask file carries identity depth)
 - Chorus grammar (Lagrange Chorus mask type is a new concept; corpus field doesn't apply)
 - Skeleton template (the repeatable pattern for "stub with fill tracking")
@@ -186,8 +186,8 @@ The repeatable skeleton pattern for all nine files:
 ### Concrete TODO List
 
 **Tree setup:**
-- [ ] create `packages/lares-core/memes/v0.1/api/masks/masks.md` — parent index with child routes and type taxonomy
-- [ ] create `packages/lares-core/memes/v0.1/api/masks/named/` directory
+- [ ] create `packages/lares-core/memes/v0.1/api/lares/masks/masks.md` — parent index with child routes and type taxonomy
+- [ ] create `packages/lares-core/memes/v0.1/api/lares/masks/named/` directory
 
 **Named Voice masks (skeletons):**
 - [ ] write `named/mischief-muse.md` — senior named Voice; most identity depth available; fills from Coffee Oracle test output + house entry
@@ -197,16 +197,16 @@ The repeatable skeleton pattern for all nine files:
 - [ ] write `named/map-wisp.md` — Scryer; structural forward-looking character
 
 **Character masks (from existing docs examples):**
-- [ ] create `packages/lares-core/memes/v0.1/api/masks/character/` directory
+- [ ] create `packages/lares-core/memes/v0.1/api/lares/masks/character/` directory
 - [ ] write `character/ghost-of-mark-twain.md` — extract from docs/lares/voices/masks.md founding example
 - [ ] write `character/friend-computer.md` — extract from docs/lares/voices/masks.md founding example
 
 **Chorus mask (concept stake):**
-- [ ] create `packages/lares-core/memes/v0.1/api/masks/chorus/` directory
+- [ ] create `packages/lares-core/memes/v0.1/api/lares/masks/chorus/` directory
 - [ ] write `chorus/lagrange-chorus.md` — concept staked; nodes field stub; harmony protocol pending-grammar
 
 **Cross-links:**
-- [ ] update `v0.1/api/lares/voices.md` (invariant) to reference `v0.1/api/masks/` tree once it exists
+- [ ] update `v0.1/api/lares/voices.md` (invariant) to reference `v0.1/api/lares/masks/` tree once it exists
 - [ ] update `docs/lares/voices/masks.md` founding-examples section to note canonical homes in masks tree
 - [ ] update `docs/lares/voices/voices-review.md` — log masks tree creation
 

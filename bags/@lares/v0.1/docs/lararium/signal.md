@@ -168,7 +168,7 @@ Settled child rooms in this branch:
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

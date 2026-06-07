@@ -51,7 +51,7 @@ that holds schema rules FUNCTIONS AS the schema used at runtime validation.
 **Lararium expression:**
 - `lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tiddler-record` — the schema meme
   for tiddler records — is loaded by the same `resolveLarUri()` call used to load content
-- `lar:///ha.ka.ba/@lares/v0.1/api/pono/pattern-integrity` — this very set of principles
+- `lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity` — this very set of principles
   — resides in the same namespace as runtime configuration
 
 **Violation pattern:** A `README.md` that describes behavior that is not mirrored in a
@@ -253,7 +253,7 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 ## Edges
 
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pattern-integrity family:relation >>
+<<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity family:relation >>
 <<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
 <<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
 <<~ pranala #to-vm-projection-bus ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus family:relation >>

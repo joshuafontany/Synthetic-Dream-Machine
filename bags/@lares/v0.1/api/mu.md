@@ -60,7 +60,7 @@ The grammar appears as Mu performing itself.
 
 <<~ pranala #hydrate-e-prime ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime family:control role:owns >>
 <<~ pranala #hydrate-ooda-ha ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha family:control role:owns >>
-<<~ pranala #hydrate-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri family:control role:owns >>
+<<~ pranala #hydrate-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:owns >>
 <<~ pranala #hydrate-chao ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/chao family:control role:owns >>
 <<~ pranala #hydrate-four-tools ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools family:control role:owns >>
 <<~ pranala #hydrate-law-of-5s ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s family:control role:owns >>

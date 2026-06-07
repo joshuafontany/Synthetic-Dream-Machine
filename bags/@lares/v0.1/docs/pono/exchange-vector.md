@@ -96,7 +96,7 @@ Long-term, the server should validate the vector and render the HUD from the par
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
 

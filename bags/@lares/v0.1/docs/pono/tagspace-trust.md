@@ -23,7 +23,7 @@ invariant = false
 <<~ ahu #meme-header >>
 # Tagspace Trust — Docs Sister
 
-This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust`.
+This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust`.
 It does not outrank the invariant.
 It gives agents and operators examples for keeping all system files, data blobs, and exchange turns in one tagspace without flattening authority.
 
@@ -79,7 +79,7 @@ When that happens, the system should surface a trust-boundary event rather than 
 A stable law URI:
 
 ```text
-lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust
+lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust
 ```
 
 A live exchange URI:
@@ -138,7 +138,7 @@ Speaker role and truth tier must stay separate.
 <<~ ahu #edges >>
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>

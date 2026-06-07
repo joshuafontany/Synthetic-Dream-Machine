@@ -248,7 +248,7 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pattern-integrity family:relation >>
+<<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity family:relation >>
 <<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:relation >>
 <<~ pranala #to-research-streams ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:grounded-by >>
 <<~ pranala #to-quine ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles family:relation >>

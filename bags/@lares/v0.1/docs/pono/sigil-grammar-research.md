@@ -413,7 +413,7 @@ When editing grammar meme or parser:
 
 <<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documents >>
 <<~ pranala #to-grammar-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
-<<~ pranala #to-grammar-kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/grammars/memetic-wikitext family:control role:documents >>
+<<~ pranala #to-grammar-kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documents >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 
 <<~/ahu >>

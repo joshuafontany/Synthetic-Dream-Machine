@@ -13,7 +13,7 @@ manao = 14
 role = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
 source-path = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
 source-lines = "1-57"
-target-mask = "lar:///ha.ka.ba/@lares/v0.1/api/masks/named/mischief-muse"
+target-mask = "lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
 cacheable = false
 retain = false
 ```
@@ -43,7 +43,7 @@ Primary transcript:
 
 Support warrants:
 
-- `packages/lares-core/memes/v0.1/api/masks/named/mischief-muse.md` lines 74-81 — mask file already names Coffee Oracle output as seed
+- `packages/lares-core/memes/v0.1/api/lares/masks/named/mischief-muse.md` lines 74-81 — mask file already names Coffee Oracle output as seed
 - `packages/lares-core/memes/docs/lares/voices/masks-tree-plan.md` lines 221-224 — fill priority names Mischief-Muse corpus first
 - `packages/lares-core/memes/docs/lares/voices/voices-review.md` lines 329-342 — review log names Coffee Oracle seed extraction as next pass
 
@@ -110,10 +110,10 @@ Use this witness carrier for provenance.
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/masks/named/mischief-muse >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle >>
 
-<<~ pranala #witnesses-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/masks/named/mischief-muse family:reference role:witness >>
+<<~ pranala #witnesses-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse family:reference role:witness >>
 <<~ pranala #sources-transcript ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle family:reference role:source >>
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 

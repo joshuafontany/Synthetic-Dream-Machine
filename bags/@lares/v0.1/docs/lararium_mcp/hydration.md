@@ -43,14 +43,14 @@ All 14 memes below must resolve before threshold yield.
 | 1 | `lar:///AGENTS` | `lares/AGENTS.md` | entry |
 | 2 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime` | `packages/lares-core/memes/v0.1/api/pono/e-prime.md` | `AGENTS#preload-e-prime` |
 | 3 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha` | `packages/lares-core/memes/v0.1/api/pono/ooda-ha.md` | `AGENTS#preload-ooda-ha` |
-| 4 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri` | `packages/lares-core/memes/v0.1/api/pono/lar-uri.md` | `AGENTS#preload-lar-uri` |
+| 4 | `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri` | `packages/lares-core/memes/v0.1/api/pono/lar-uri.md` | `AGENTS#preload-lar-uri` |
 | 5 | `lar:///ha.ka.ba/@lares/v0.1/api/mu` | `packages/lares-core/memes/v0.1/api/mu.md` | `AGENTS#threshold-to-mu` |
 | 6 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/chao` | `packages/lares-core/memes/v0.1/api/mu/chao.md` | Mu internal hydration |
 | 7 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools` | `packages/lares-core/memes/v0.1/api/mu/the-four-tools.md` | Mu internal hydration |
 | 8 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s` | `packages/lares-core/memes/v0.1/api/mu/the-law-of-5s.md` | Mu internal hydration |
 | 9 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` | `packages/lares-core/memes/v0.1/api/mu/the-syad-perspectives.md` | Mu internal hydration |
 | 10 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium` | `packages/lares-core/memes/v0.1/api/lararium.md` | `AGENTS#threshold-to-lararium` |
-| 11 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/hud` | `packages/lares-core/memes/v0.1/api/lararium/hud.md` | Lararium internal hydration |
+| 11 | `lar:///ha.ka.ba/@lares/v0.1/api/lares/hud` | `packages/lares-core/memes/v0.1/api/lares/hud.md` | Lararium internal hydration |
 | 12 | `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` | `packages/lares-core/memes/v0.1/api/lares/voices.md` | Lararium internal hydration |
 | 13 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity` | `packages/lares-core/memes/v0.1/api/lararium/continuity.md` | Lararium internal hydration |
 | 14 | `lar:///LARES` | `lares/LARES.md` | `AGENTS#continue-to-lares` |

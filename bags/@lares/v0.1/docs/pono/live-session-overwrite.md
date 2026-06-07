@@ -90,7 +90,7 @@ A passing test records the jello claim as session evidence and refuses silent ca
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary >>

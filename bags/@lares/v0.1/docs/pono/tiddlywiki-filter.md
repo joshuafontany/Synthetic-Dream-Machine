@@ -16,8 +16,8 @@ retain = false
 # X-TiddlyWiki-Filter — Docs
 
 This file does not bind invariant law.
-Law lives at [tiddlywiki-filter.md](../../api/grammars/tiddlywiki-filter.md).
-Procedure lives at [tiddlywiki-filter/SKILL.md](../../api/grammars/tiddlywiki-filter/SKILL.md).
+Law lives at [tiddlywiki-filter.md](../../api/pono/tiddlywiki-filter.md).
+Procedure lives at [tiddlywiki-filter/SKILL.md](../../api/pono/tiddlywiki-filter/SKILL.md).
 
 This file holds examples, explanatory guidance, reminders, and notes on deferred scope.
 
@@ -156,8 +156,8 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 ## Edges
 
-- `lar:///ha.ka.ba/@lares/v0.1/api/grammars/x-tiddlywiki-filter`
-- `lar:///ha.ka.ba/@lares/v0.1/api/grammars/x-tiddlywiki-filter/SKILL`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter/SKILL`
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>

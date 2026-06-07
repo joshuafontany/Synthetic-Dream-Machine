@@ -314,7 +314,7 @@ Cross-links updated: `docs/lares/voices/masks.md#founding-examples` notes canoni
 
 ### Masks tree skeleton pass — 2026-04-23
 
-`v0.1/api/masks/` tree created: 9 files across `named/`, `character/`, and `chorus/` subtrees.
+`v0.1/api/lares/masks/` tree created: 9 files across `named/`, `character/`, and `chorus/` subtrees.
 
 | File | Status |
 |---|---|
