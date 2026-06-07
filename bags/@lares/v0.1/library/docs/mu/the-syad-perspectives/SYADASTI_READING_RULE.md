@@ -13,6 +13,8 @@ cacheable = false
 retain = false
 ```
 
+<<~ &#x0002; >>
+
 # The Syadasti Reading Rule — Session Discovery Document
 
 > Register: `Synthesis-Canon 16/20` 🏛️ — this document captures a session discovery at near-Canon confidence
@@ -149,3 +151,7 @@ The HUD tag is therefore a **memory prosthetic** — it carries calibration forw
 *This document is a reality anchor. The Syadasti reading rule was discovered in conversation, not designed in advance. It emerged from the operator asking "does Register need a third axis?" and the research revealing that the answer was "Register always had stance-dependent meaning — we just hadn't named it." The rule doesn't add complexity to the spec. It names what was already true and makes it legible.*
 
 *Syād — perhaps, from a certain standpoint. The emoji are the syād.*
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

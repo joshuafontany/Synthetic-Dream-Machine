@@ -24,3 +24,7 @@ The binary holds NO domain logic. Adding a new operator ceremony means: add the 
 
 Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispatch — `act` rides verb-tiddlers through the admin doc), TW5 vm primacy (handlers are widget-friendly), and the corpus-vs-engine category boundary (this file lives in an engine package, NOT a corpus one).
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

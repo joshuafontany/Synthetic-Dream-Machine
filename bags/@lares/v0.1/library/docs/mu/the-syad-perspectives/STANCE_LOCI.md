@@ -18,6 +18,8 @@ cacheable = false
 retain = false
 ```
 
+<<~ &#x0002; >>
+
 # Grammar: Stance + Syadasti Reading Rule
 
 > **Register:** `Synthesis-Canon 16/20` — grounded in the live Syadasti discovery and current HUD practice
@@ -160,4 +162,6 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 ---
 
-<!-- → ? -->
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

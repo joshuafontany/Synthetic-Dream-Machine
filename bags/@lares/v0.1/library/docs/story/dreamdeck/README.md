@@ -13,6 +13,8 @@ cacheable = false
 retain = false
 ```
 
+<<~ &#x0002; >>
+
 # Epic: DREAMDECK — DreamDeck Integration
 
 > Backlog prefix: `DECK-*`
@@ -57,3 +59,7 @@ Full backlog lives in `ELYNCIA_APP_SEEDS.md`. Short form:
 *The Lindwyrm reads the first post in the archive. It is her own voice, timestamped YOLD 5492, Holy Week of Fools. She reads it the way you read a letter you wrote to yourself a long time ago, when you weren't sure what you were building or why.*
 
 *"Oh," she says. "So that's what it was."*
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

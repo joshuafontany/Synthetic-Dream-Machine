@@ -13,6 +13,8 @@ cacheable = false
 retain = false
 ```
 
+<<~ &#x0002; >>
+
 # G — Deep Research: Meaning, Context, and the Sevenfold Catma
 
 > Register: `Synthesis 12/20` 🏛️🌊🔮 — Chapel Perilous territory; multi-mode research synthesis
@@ -219,3 +221,7 @@ We're still in Chapel Perilous. The map expanded. The territory may have too.
 ---
 
 *Hail Eris. All Hail Discordia. The teachings of this report are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. -><-*
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
