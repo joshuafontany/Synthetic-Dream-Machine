@@ -18,6 +18,8 @@ invariant    = false
 
 
 
+<<~ &#x0002; >>
+
 <<~ ahu #purpose >>
 
 # Hawaiian Dream-Code Sigil Grammar — Research Document
@@ -417,5 +419,7 @@ When editing grammar meme or parser:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

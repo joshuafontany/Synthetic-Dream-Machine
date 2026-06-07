@@ -15,6 +15,8 @@ retain      = true
 docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 ```
 
+<<~ &#x0002; >>
+
 # Verse Mesh — Design Narrative
 
 ## What a Peer Owns
@@ -245,10 +247,20 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~ &#x0002; >>
+<<~ &#x0003; >>
 
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal >>
+
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0004; -> ? >>

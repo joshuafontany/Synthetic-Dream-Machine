@@ -15,6 +15,8 @@ retain      = true
 docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 ```
 
+<<~ &#x0002; >>
+
 # IslandAdaptor — Invariant
 
 ## Identity
@@ -95,8 +97,19 @@ after `addProjection(adaptor)` registers. Each existing tiddler flows through
 The recipe then calls `$tw.lares.flushNalu(Number.MAX_SAFE_INTEGER)` so the wiki carries
 its seed state synchronously before `behavior.onEa` runs.
 
-<<~ &#x0002; >>
+<<~ &#x0003; >>
 
-<<~ &#x0004; -> lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0004; -> ? >>

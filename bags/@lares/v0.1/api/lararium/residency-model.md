@@ -96,7 +96,7 @@ lar:///ha.ka.ba/@admin/summons/<requestId>   # Automerge-backed remote vessel su
 lar:///ha.ka.ba/@admin/outcomes/<requestId>  # Automerge-backed durable outcome
 ```
 
-An ACTION arrives as a `VerbInvocation` whose `verb` field belongs to `ACTION_VERBS`. Per-verb arguments ride inside the existing JSON `args` field — kebab-case on the wire, camelCase in the TypeScript discriminated union. Example ADD invocation tiddler fields:
+An ACTION arrives as a `Verb` whose `verb` field belongs to `ACTION_VERBS` (the wire field stays "verb"; the parsed `Verb.action` carries it). Per-verb arguments ride inside the existing JSON `args` field — kebab-case on the wire, camelCase in the TypeScript discriminated union. Example ADD invocation tiddler fields:
 
 ```
 verb           = "ADD"

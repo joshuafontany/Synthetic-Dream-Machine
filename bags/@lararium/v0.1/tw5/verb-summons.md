@@ -19,7 +19,7 @@ retain       = true
 
 ## The summons relay
 
-`emitVerbSummons` carries the **edge transport** of the verb/summons/outcome surface. An external vessel writes a **summons** tiddler at `@admin/summons/<id>` to the shared Automerge doc; the admin island's CompositeStore subscriber translates it into a volatile local invocation (`lararium.local.vm/verbs/<id>`) the VerbDispatcher watches, then tombstones the summons. Edge transport — fire-and-forget, never durable coordination.
+`heedSummons` carries the **edge transport** of the verb/summons/outcome surface. An external vessel writes a **summons** tiddler at `@admin/summons/<id>` to the shared Automerge doc; the admin island's CompositeStore subscriber translates it into a volatile local invocation (`lararium.local.vm/verbs/<id>`) the VerbDispatcher watches, then tombstones the summons. Edge transport — fire-and-forget, never durable coordination.
 
 The durable result lands at `@admin/outcomes/<id>` (the outcome). The summons calls; the outcome answers; CRDT convergence on the outcome carries the meaning.
 

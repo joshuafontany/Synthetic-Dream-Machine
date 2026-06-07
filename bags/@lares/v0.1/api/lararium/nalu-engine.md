@@ -16,6 +16,8 @@ docs        = "lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu"
 implementation = "packages/lararium-tw5/src/modules/nalu-engine.ts"
 ```
 
+<<~ &#x0002; >>
+
 # nalu-engine — Invariant
 
 ## Identity
@@ -104,8 +106,19 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
-<<~ &#x0002; >>
+<<~ &#x0003; >>
 
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-adaptor >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0004; -> ? >>

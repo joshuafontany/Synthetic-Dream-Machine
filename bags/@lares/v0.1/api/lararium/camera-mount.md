@@ -15,6 +15,8 @@ retain      = true
 docs        = "lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh"
 ```
 
+<<~ &#x0002; >>
+
 # CameraMount — Invariant
 
 ## Identity
@@ -137,7 +139,18 @@ const unmount = () => { teardownLoop(); teardownMount(); };
 the shadow pane. Canvas cameras behind it each hold their own fake-DOM document.
 The `mountCamera` interface stays identical. The `document` type changes; the chain does not.
 
-<<~ &#x0002; >>
+<<~ &#x0003; >>
 
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
-<<~ &#x0004; -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
+
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0004; -> ? >>

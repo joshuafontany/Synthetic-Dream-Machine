@@ -19,6 +19,8 @@ invariant    = false
 ```
 
 
+<<~ &#x0002; >>
+
 <<~ ahu #purpose >>
 
 # Lararium Filter Grammar
@@ -230,5 +232,7 @@ Systematic find-replace for authors migrating TW5 content:
 <<~ pranala #to-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documented-in >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

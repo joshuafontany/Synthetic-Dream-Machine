@@ -246,6 +246,38 @@ Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`
 
 <<~/ahu >>
 
+<<~ ahu #stream-events >>
+
+## MemeStreamEvent — Streaming Parse Events
+
+The streaming parse surface emits one event per carrier-frame boundary; `collectEvents(text)` (#meme-ast) drives the stream. The frame boundaries are the carrier spine (`carrier-sigils`).
+
+```toml
+# Source: packages/lararium-mesh/src/meme-stream.ts
+# SOH carries 0x01 (or kapu DC1 0x11); EOT carries 0x04 (or DC4 0x14), or the return-throat <<~ -> ? >>
+[[stream-events]]
+kind    = "carrier-open"
+fields  = ["uri: string"]
+trigger = "SOH"
+
+[[stream-events]]
+kind    = "ahu-child"
+fields  = ["uri: string", "slot: string", "bodyText: string"]
+trigger = "AHU_OPEN → AHU_CLOSE"
+
+[[stream-events]]
+kind    = "carrier-close"
+fields  = ["uri: string", "fullText: string"]
+trigger = "ETX + EOT"
+
+[[stream-events]]
+kind    = "realm-done"
+fields  = []
+trigger = "end of stream"
+```
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
