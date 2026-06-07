@@ -43,7 +43,7 @@ Both families register in the grammar meme `[[families]]` array (M7). Routing li
 
 ### Gap 2 — `hana` / `kapu` / `ui` registration — RESOLVED
 
-All three register in the grammar meme (2026-04-27), alongside `meme`, `mukuwai`, `kahawai`, `huli`, `wehe`, `helu`, the English aliases, and the concurrency sigils. *(The conditional alias `wai` from this pass later retired into `heihei`.)*
+All three register in the grammar meme (2026-04-27), alongside `meme`, `mukuwai`, `kahawai`, `huli`, `wehe`, `helu`, the English aliases, and the concurrency sigils. *(`wai` now carries the wikispace `\if` cascade with `kahawai`/`mukuwai`; `heihei` carries the Verse canvasspace conditional-branch.)*
 
 ### Gap 3 — `layer` field in the sigil registry
 

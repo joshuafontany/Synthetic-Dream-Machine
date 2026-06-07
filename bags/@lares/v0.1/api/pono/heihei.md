@@ -6,10 +6,10 @@ uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
 file-path = "bags/@lares/v0.1/api/pono/heihei.md"
 type = "text/x-memetic-wikitext"
 register     = "Synthesis-Canon"
-manaoio      = 16
+manaoio      = 15
 mana         = 16
 manao        = 16
-role         = "wikispace conditional block-container — first non-empty filter renders its body; the TW5 `\\if` cascade (with kahawai=`\\elseif`, mukuwai=`\\else`); content selection on the document surface"
+role         = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
 cacheable    = true
 retain       = true
 ```
@@ -22,11 +22,11 @@ retain       = true
 
 # Heihei
 
-*heihei* — Hawaiian: race, competition; a structured contest where candidates run until one resolves.
+*heihei* — Hawaiian: race, competition; candidates contend, one prevails.
 
-The **wikispace conditional**. A block-container holds candidate bodies, each guarded by a TW5 filter; the **first body whose filter resolves non-empty renders**, the rest skip. With `kahawai` (`\elseif`) and `mukuwai` (`\else`) it forms the conditional cascade (if / elseif / else) — serial filter-evaluation, content selection on the Story-River surface. English alias: `\if` (TW5 `<%if filter%>…<%endif%>`, 5.3+).
+The **canvasspace conditional-branch**. The Verse `if` / `case` projected onto the flow surface: a **condition tests serially** and the **first arm whose condition succeeds fires its execution flow**, the rest skip. Verse grounds it in the **failure context** — the condition reads as a `<decides>` failable expression (it succeeds and yields, or fails and yields nothing), not a boolean poll. `case` extends this to value-match. On canvas it renders as a **branch node**: a condition input, and `then` / `else` execution outputs that fire as `reaction` wires (the wikispace × canvasspace canon holds no naked execution wire).
 
-**Not a concurrency race, and not the canvas conditional.** `heihei` tests filters to *select content* in the wiki (serial, by filter-match). `holo` (`\race`) races *parallel flows* on the canvas (parallel, by completion-time), cancelling losers — concurrency, not conditional. And the **Verse visual-scripting conditional** (a flow-branch on the canvas) reads as a **separate principle**: the same conditional shape, but it branches *execution flow* on the TLDraw surface rather than selecting *content* in the document. Three distinct principles; only the surface word "first" ever made them look alike.
+Three principles share only the word "first": `heihei` tests a condition to branch *execution flow* (canvasspace); `wai` (`\if`) tests a filter to select *content* (wikispace); `holo` (`\race`) races *parallel flows* and the first to **complete** wins (canvasspace concurrency). `heihei` picks by condition-success, `holo` by completion-time — failure-logic, not a race.
 
 <<~/ahu >>
 
@@ -34,11 +34,11 @@ The **wikispace conditional**. A block-container holds candidate bodies, each gu
 
 <<~ ahu #ooda-ha >>
 
-✶ sense the filter expression — what condition does this candidate test?
-⏿ orient: heihei = first-match wins; evaluate filter; non-empty result = this body renders; else skip
-◇ filter runs in currentTiddler context; boolean = at least one result; imperative-conditional intuition misleads here
-▶ emit conditional block node; render body when filter passes; skip body when filter empty
-↺ no output when filter fails; output is body content when filter passes; confirm filter semantics correct; TW5 filters produce result sets — they do not short-circuit as booleans
+✶ sense the condition — a `<decides>` failable expression on the flow node
+⏿ orient: heihei branches execution, it does not select content (that is `wai`) and it does not race (that is `holo`)
+◇ choose the arm by condition success; exactly one arm fires; `case` matches a value against ordered arms
+▶ emit the branch node; the firing arm propagates as a reaction wire to its continuation
+↺ confirm exactly one arm fired; the condition ran in a failure context, not as a boolean poll
 
 <<~/ahu >>
 
@@ -46,14 +46,13 @@ The **wikispace conditional**. A block-container holds candidate bodies, each gu
 
 ## Law (Kānāwai)
 
-A heihei block MUST carry a filter expression as its first argument.
-A heihei block MUST close with `<<~/ heihei >>` (or `<<~/ \if >>`).
-A heihei block body MUST render only when the filter yields a non-empty result.
-A heihei filter MUST be a valid TW5 filter expression.
-A heihei block MUST NOT carry mode= — control flow has no projection posture.
+A `heihei` node MUST test a `<decides>` failable condition (an `if`) or match a value against ordered arms (a `case`).
+A `heihei` node MUST fire exactly one execution arm per invocation.
+A `heihei` node's arms MUST propagate as `reaction` wires, never as a naked execution arrow (canvas execution-wire law).
+A `heihei` node MUST evaluate its arms serially by condition-success — never by completion-time (that contrast belongs to `holo`).
+A `case` form MUST carry a `_` default arm.
 
-TW5 filter semantics: `[<variable>match[value]]` for equality, `[has[field]]` for field existence.
-`[all[tiddlers]tag[MyTag]]` yields the set of matching tiddlers (truthy if non-empty).
+The condition is a failure context, not a boolean test: the `then` arm fires when the condition succeeds, the `else` arm when it fails.
 
 <<~/ahu >>
 
@@ -61,26 +60,21 @@ TW5 filter semantics: `[<variable>match[value]]` for equality, `[has[field]]` fo
 
 ## Syntax
 
-Hawaiian form:
+Verse `if` form (failable condition → one arm):
 ```text
-<<~ heihei [filter-expression] >>
-body rendered when filter passes
+<<~ heihei (Condition) >>then-flow<<~ mukuwai >>else-flow<<~/ heihei >>
+```
+
+Verse `case` form (value-match → one arm):
+```text
+<<~ heihei case(Value) >>
+  MatchA => arm-a
+  MatchB => arm-b
+  _       => default-arm
 <<~/ heihei >>
 ```
 
-English alias form (identical semantics):
-```text
-<<~ \if [filter-expression] >>
-body rendered when filter passes
-<<~/ \if >>
-```
-
-TW5 shortcut expansion:
-```text
-<%if [filter-expression]%>
-body
-<%endif%>
-```
+Verse grounding: `if (Condition): then else: else` (the condition runs in a `<decides>` failure context); `case (Value): A => …  _ => …`.
 
 <<~/ahu >>
 
@@ -92,13 +86,10 @@ body
 sigil          = "heihei"
 kind           = "control"
 layer          = "block"
-alias          = ["\\if"]
-
-open-pattern  = '<<~\s*heihei\s+([^>]+?)\s*>>'
-close-pattern = '<<~\/heihei\s*>>'
-
-[alias-map]
-"\\if" = "heihei"
+surface        = "canvasspace"
+verse-analog   = ["if", "case"]
+effect         = "<decides>"
+arm-wire       = "reaction"
 ```
 
 <<~/ahu >>
@@ -107,13 +98,12 @@ close-pattern = '<<~\/heihei\s*>>'
 
 ## Edges
 
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
-<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
-<<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
-<<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
+<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
+<<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation >>
+<<~ pranala #cites-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:observe role:cites >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-heihei family:control role:has >>
-<<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>
 <<~/ahu >>
 
 <<~ &#x0003; >>

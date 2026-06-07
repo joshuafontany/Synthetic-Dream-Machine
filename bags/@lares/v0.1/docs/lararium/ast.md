@@ -47,7 +47,7 @@ Parse-time AST produced by `parseMemeCarrier`. Lives in `@lararium/tw5` so it co
 
 | sigilName | attrs keys |
 |---|---|
-| `heihei` / `kahawai` / `ui` | `filter` |
+| `wai` / `kahawai` / `ui` | `filter` |
 | `huli` | `filter`, `binding` |
 | `hana` | `grammarKey` |
 | `meme` | `targetUri` |

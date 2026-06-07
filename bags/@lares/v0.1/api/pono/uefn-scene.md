@@ -177,7 +177,7 @@ Effect specifiers on device functions carry semantic meaning in the Lararium gra
 | Family | Specifier | Lararium role | Sigil analogue |
 |---|---|---|---|
 | Suspension | `<suspends>` | INPUT handler is async; may yield | `kukali` wait posture on subscribable |
-| Cardinality | `<decides>` | handler is failable (zero or one result) | `heihei` conditional filter |
+| Cardinality | `<decides>` | handler is failable (zero or one result) | `heihei` conditional-branch (Verse if/case) |
 | Heap | `<transacts>` | handler reads/writes/allocates; rollback-eligible | `pono` correctness assertion edge |
 | Purity | `<computes>` | pure function; no side effects; safe to parallelize | `aka` observe-family (frozen read) |
 | Divergence | `<converges>` | handler guaranteed to terminate | (future annotation) |

@@ -138,7 +138,8 @@ With chained branch-channel `[SC]`:
 | `helu` | inline (pragma) | named filter-expression function | `[SC]` |
 | `meme` | block-only | rendering context setter (the named object) | `[SC]` |
 | `hui` | block-only | wait for all parallel flows / sync | `[SC]` |
-| `heihei` | block-only | first-to-finish wins, rest continue / race | `[SC]` |
+| `wai` | block-only | wikispace conditional; first filter-match renders (kahawai/mukuwai cascade) | `[SC]` |
+| `heihei` | block-only | canvasspace conditional-branch (Verse if/case); one arm by condition | `[SC]` |
 | `puka` | block-only | first-to-finish wins, rest cancelled / rush | `[SC]` |
 | `lele` | inline | fire and forget dispatch / branch | `[SC]` |
 | `ahu` | block-only | bounded fragment / altar-worksite | `[SC]` |
@@ -365,7 +366,7 @@ When editing grammar meme or parser:
 
 1. **Concurrency sigils** — `[SC]` approved 2026-04-27. Registered in grammar meme.
    - `hui` → `sync`: wait for all parallel flows (gather, assemble)
-   - `heihei` → `race`: first-to-finish wins, others continue (race/compete)
+   - `heihei` → Verse `if`/`case`: canvasspace conditional-branch, one arm fires by condition (the race/compete sense belongs to `holo`)
    - `puka` → `rush`: first wins, rest cancelled (emerge/break through)
    - `lele` → `branch`: fire and forget (leap/fly off); only one that produces compile-time graph artifact (pranala family:message)
 

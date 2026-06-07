@@ -80,7 +80,7 @@ This follows the Svelte `setContext` model: explicit, bounded, non-leaking. The 
 
 ## Filter Context Binding
 
-Filters inside `heihei` / `huli` / `ui` evaluate against the **explicit current meme context** — set by the nearest enclosing `meme` block, or the carrier's own `#iam` URI when no `meme` runs. No ambient dynamic lookup.
+Filters inside `wai` / `huli` / `ui` evaluate against the **explicit current meme context** — set by the nearest enclosing `meme` block, or the carrier's own `#iam` URI when no `meme` runs. No ambient dynamic lookup.
 
 <<~/ahu >>
 

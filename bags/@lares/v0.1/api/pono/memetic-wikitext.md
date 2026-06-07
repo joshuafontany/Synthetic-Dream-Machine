@@ -182,7 +182,7 @@ Every sigil reads on **both layers at once** — not two sigil sets, but two rea
 │  RENDER-TIME READING (projection)                          │
 │  transclusion (aka frozen / kahea live) → embed content    │
 │  definitions (wehe/helu) → named forms                     │
-│  conditionals/iteration (heihei/huli) → control render     │
+│  conditionals/iteration (wai/huli) → control render     │
 │  concurrency (hui/heihei/puka/lele) → coordination         │
 │  output: a rendered surface (a camera, see render axes)    │
 └────────────────────────────────────────────────────────────┘
@@ -396,7 +396,7 @@ A canvas reaction wire (flow surface):
 
 ## Annex B — Open Items (Informative)
 
-- **Concurrency naming (settled).** `heihei` = conditional (`\if`); `holo` = race (`\race`); `puka` = rush; `hui` = sync; `lele` = branch — settled across the per-sigil memes and `verse-task-tree`. The submission tracks the settled vocabulary, not an open collision.
+- **Conditional + concurrency naming (settled).** `wai` = wikispace conditional (`\if`, with `kahawai`/`mukuwai`); `heihei` = canvasspace conditional-branch (Verse `if`/`case`); `holo` = race (`\race`); `puka` = rush; `hui` = sync; `lele` = branch — settled across the per-sigil memes and `verse-task-tree`.
 - **`spatial` sugar.** Family registered; a directional sugar sigil and English alias remain pending.
 - **`kukali` (reactive wait).** Awaits an async `ReactionGraph`; the wait posture has no semantics without an async execution context.
 - **Widget-tree pass.** `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.

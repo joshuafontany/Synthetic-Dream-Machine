@@ -176,11 +176,11 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 
 ## Invocation
 
-`wikitext-filter` runs as a guest grammar inside `hana` blocks, and inline in `heihei`/`huli`/`ui` sigils.
+`wikitext-filter` runs as a guest grammar inside `hana` blocks, and inline in `wai`/`huli`/`ui` sigils.
 
 ```text
-# Inline (heihei, huli, ui)
-<<~ heihei [tag[invariant]sort[toml:title]] >>
+# Inline (wai, huli, ui)
+<<~ wai [tag[invariant]sort[toml:title]] >>
 <<~ huli [edge:family[control]role[owns]] as item >>
 <<~ ui [toml:tagspace[grammar]] >>
 

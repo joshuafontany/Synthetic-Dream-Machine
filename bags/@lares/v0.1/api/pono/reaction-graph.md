@@ -82,7 +82,7 @@ Four fire semantics — all run per (fromUri, trigger):
 ```
 fire / fireAll   — hui: wait for all handlers to complete (async)
 fireSync         — UEFN fidelity: synchronous tick dispatch, subscription order
-fireRace         — heihei: first handler to settle wins; all continue
+fireRace         — holo (\race): first handler to settle wins, losers cancel
 fireRush         — puka: first to resolve wins; others receive AbortSignal
 ```
 

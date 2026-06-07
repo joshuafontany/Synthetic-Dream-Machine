@@ -121,7 +121,8 @@ They fall into eight families:
 - `waiho` / `\const` / `\let` / `\var` — variable binding; name → value in scope
 
 **Control sigils** (TW5 native flow wrapped in sigil grammar):
-- `heihei` / `\if` — conditional block; first filter-match wins
+- `wai` / `\if` — wikispace conditional cascade; first filter-match renders (with `kahawai`/`mukuwai`)
+- `heihei` — canvasspace conditional-branch; Verse `if`/`case`, one arm fires by condition
 - `kahawai` / `\elif` — conditional continuation; stream flows until it hits a match
 - `mukuwai` / `\else` — conditional fallback; the cut-off water; terminal form
 - `huli` / `\for` — iteration block; filter → body-per-result

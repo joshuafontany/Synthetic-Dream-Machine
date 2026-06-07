@@ -115,7 +115,7 @@ close-pattern = '<<~\/huli\s*>>'
 ## Edges
 
 <<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
+<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-huli family:control role:has >>
 <<~ pranala #tiddler-sigil-for ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:alias >>

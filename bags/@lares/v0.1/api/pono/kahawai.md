@@ -21,9 +21,9 @@ conditions forward — when the first path closed, kahawai opens a new channel.
 A conditional continuation sigil. Evaluates a filter expression when no preceding condition
 matched. English alias: `\elif`.
 
-Paired with `heihei` (`\if`) — heihei opens the first conditional race; kahawai enters when
-heihei's filter failed and a new filter offers the next candidate. The semantic carries serial
-evaluation with a new condition, not parallel — a branching stream, not a race.
+Paired with `wai` (`\if`) — wai opens the cascade; kahawai enters when wai's filter failed and a
+new filter offers the next candidate. Serial evaluation with a new condition — a stream joining the
+water cascade.
 
 <<~/ahu >>
 
@@ -34,7 +34,7 @@ evaluation with a new condition, not parallel — a branching stream, not a race
 ## Law (Kānāwai)
 
 A kahawai block MUST carry a filter expression as its first argument.
-A kahawai block MUST appear after a heihei or kahawai block in the same scope.
+A kahawai block MUST appear after a wai or kahawai block in the same scope.
 A kahawai block MUST render its body only when the filter yields a non-empty result
 and no preceding condition in the chain has already rendered.
 
@@ -45,7 +45,7 @@ and no preceding condition in the chain has already rendered.
 ## Syntax
 
 ```text
-<<~ heihei [first-filter] >>
+<<~ wai [first-filter] >>
   first branch
 <<~ kahawai [second-filter] >>
   second branch
@@ -66,7 +66,7 @@ English alias forms:
 
 ## Edges
 
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
+<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
 <<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-elif family:control role:alias >>
 

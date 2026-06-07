@@ -1,0 +1,123 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wai"
+file-path = "bags/@lares/v0.1/api/pono/wai.md"
+type = "text/x-memetic-wikitext"
+register     = "Synthesis-Canon"
+manaoio      = 16
+mana         = 16
+manao        = 16
+role         = "wikispace conditional block-container — the TW5 `\\if` filter cascade; first non-empty filter renders its body; the water cascade with kahawai (`\\elseif`) + mukuwai (`\\else`); content selection on the document surface"
+cacheable    = true
+retain       = true
+```
+
+
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Wai
+
+*wai* — Hawaiian: fresh water, the source; the spring from which streams run.
+
+The **wikispace conditional**. A block-container holds candidate bodies, each guarded by a TW5 filter; the **first body whose filter resolves non-empty renders**, the rest skip. With `kahawai` (stream, `\elseif`) and `mukuwai` (river-mouth, `\else`) it forms the **water cascade** — `if` / `elseif` / `else`: source pools, runs to a stream, reaches the river-mouth. Serial filter-evaluation, content selection on the Story-River surface. English alias: `\if` (TW5 `<%if filter%>…<%endif%>`, 5.3+).
+
+Water chooses its channel. `wai` selects *which content renders* in the document; it tests filters, not flows. Its canvas cousin `heihei` branches *execution flow* on the TLDraw surface (the Verse conditional); `holo` (`\race`) races parallel flows by completion-time. Three principles — `wai` tests filters (wikispace), `heihei` tests a condition to branch flow (canvasspace), `holo` races flows (canvasspace) — joined only by the surface word "first".
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #ooda-ha >>
+
+✶ sense the filter expression — what condition does this candidate test?
+⏿ orient: first non-empty filter renders; TW5 filters yield result sets (non-empty = pass), they do not short-circuit as booleans
+◇ choose the cascade shape: lone `wai`, or `wai` → `kahawai` → `mukuwai`
+▶ emit the conditional block node; render the body when the filter passes; skip when empty
+↺ no output when the filter fails; the rendered body when it passes; confirm the filter runs in `currentTiddler` context
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+A `wai` block MUST carry a TW5 filter expression as its first argument.
+A `wai` block MUST close with `<<~/ wai >>` (or `<<~/ \if >>`).
+A `wai` block body MUST render only when the filter yields a non-empty result.
+A `wai` filter MUST be a valid TW5 filter expression, evaluated in `currentTiddler` context.
+A `wai` block MUST NOT carry `mode=` — a conditional carries no projection posture.
+A `wai` cascade MAY chain `kahawai` (`\elseif`) branches and MUST close at most one `mukuwai` (`\else`).
+
+TW5 filter semantics: `[<variable>match[value]]` for equality, `[has[field]]` for field existence, `[all[tiddlers]tag[MyTag]]` for the matching set (non-empty = pass).
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+Hawaiian form:
+```text
+<<~ wai [filter-expression] >>
+body rendered when filter passes
+<<~/ wai >>
+```
+
+English alias form (identical semantics):
+```text
+<<~ \if [filter-expression] >>
+body
+<<~/ \if >>
+```
+
+Full water cascade:
+```text
+<<~ wai [filter-a] >>first<<~ kahawai [filter-b] >>second<<~ mukuwai >>default<<~/ wai >>
+```
+
+TW5 shortcut expansion: `<%if filter%>body<%endif%>`.
+
+<<~/ahu >>
+
+<<~ ahu #schema >>
+
+## Schema (machine-readable)
+
+```toml
+sigil          = "wai"
+kind           = "control"
+layer          = "block"
+surface        = "wikispace"
+alias          = ["\\if"]
+
+open-pattern  = '<<~\s*wai\s+([^>]+?)\s*>>'
+close-pattern = '<<~\/wai\s*>>'
+
+[alias-map]
+"\\if" = "wai"
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
+<<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
+<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
+<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
+
+<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wai family:control role:has >>
+<<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

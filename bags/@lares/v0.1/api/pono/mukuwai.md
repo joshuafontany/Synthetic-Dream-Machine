@@ -34,9 +34,9 @@ question itself has exhausted all candidates. The stream reaches the cut-off; th
 ## Law (Kānāwai)
 
 A mukuwai block MUST NOT carry a filter expression.
-A mukuwai block MUST appear as the final branch in a heihei/kahawai chain.
+A mukuwai block MUST appear as the final branch in a wai/kahawai chain.
 A mukuwai block MUST render its body when no preceding condition rendered.
-A heihei chain MUST NOT contain more than one mukuwai block.
+A wai chain MUST NOT contain more than one mukuwai block.
 
 <<~/ahu >>
 
@@ -45,7 +45,7 @@ A heihei chain MUST NOT contain more than one mukuwai block.
 ## Syntax
 
 ```text
-<<~ heihei [filter] >>
+<<~ wai [filter] >>
   first branch
 <<~ mukuwai >>
   fallback
@@ -62,7 +62,7 @@ English alias form:
 
 ## Edges
 
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
+<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
 <<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-else family:control role:alias >>
 
