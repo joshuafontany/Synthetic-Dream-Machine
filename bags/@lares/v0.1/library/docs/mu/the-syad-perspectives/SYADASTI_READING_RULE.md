@@ -1,12 +1,21 @@
-# The Syadasti Reading Rule — Session Discovery Document
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-> Register: `Synthesis-Canon 16/20` 🏛️ — this document captures a session discovery at near-Canon confidence
-> Date: 2026-04-08
-> Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
-> Purpose: Pin the discovery and its full derivation chain so it survives context loss.
-> Destination: URI_SCHEMA.md §5.3.3 (per S0 Refinement Plan, Improvement #1)
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
 
----
+<<~ ahu #iam >>
+
+```toml
+uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
+file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis-Canon 16/20"
+role = "session discovery — the Syadasti Reading Rule: Register measures confidence within the active stance's evaluation frame, not universal truth-weight; the full derivation chain"
+cacheable = false
+retain = false
+```
+
+<<~/ahu >>
 
 # The Syadasti Reading Rule — Session Discovery Document
 

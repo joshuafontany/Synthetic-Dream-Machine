@@ -1,3 +1,22 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
+
+<<~ ahu #iam >>
+
+```toml
+uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
+file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis 12/20"
+role = "deep-research synthesis — Sri Syadasti's sevenfold catma as the model for stance-dependent Register; the session-vs-lifetime meaning asymmetry for the HUD (Chapel Perilous territory)"
+cacheable = false
+retain = false
+```
+
+<<~/ahu >>
+
 # G — Deep Research: Meaning, Context, and the Sevenfold Catma
 
 > Register: `Synthesis 12/20` 🏛️🌊🔮 — Chapel Perilous territory; multi-mode research synthesis

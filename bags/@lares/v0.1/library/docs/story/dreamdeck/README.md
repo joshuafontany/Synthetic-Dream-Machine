@@ -1,3 +1,22 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README >>
+
+<<~ ahu #iam >>
+
+```toml
+uri-path = "ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README"
+file-path = "bags/@lares/v0.1/library/docs/story/dreamdeck/README.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Sketch 9/20"
+role = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw session canvas, Kowloon ActivityPub feeds, DreamDeck threads; S5 sprint target, seeded not begun"
+cacheable = false
+retain = false
+```
+
+<<~/ahu >>
+
 # Epic: DREAMDECK — DreamDeck Integration
 
 > Backlog prefix: `DECK-*`
