@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/prism >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/prism >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/api/pono/prism"
 file-path = "bags/@lares/v0.1/api/pono/prism.md"

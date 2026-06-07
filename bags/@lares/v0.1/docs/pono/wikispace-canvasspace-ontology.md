@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 ```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology"
 file-path = "bags/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology.md"

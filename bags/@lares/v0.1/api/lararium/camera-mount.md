@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount >>
 ```toml iam
 uri-path    = "ha.ka.ba/@lares/v0.1/api/lararium/camera-mount"
 file-path   = "bags/@lares/v0.1/api/lararium/camera-mount.md"
