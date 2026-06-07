@@ -191,7 +191,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 ## Iam Block
 
-`ahu #iam` carries the canonical identity payload for a meme.
+The **toml iam slot** (`#iam`) carries the canonical identity payload for a meme — a bare `` ```toml iam `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `carrier-sigils#carrier-spine`).
 
 Canonical form:
 ````text
@@ -206,7 +206,7 @@ type      = "text/x-memetic-wikitext"
 
 The `toml iam` fence label signals the identity block. The TOML object defines the meme's canonical metadata.
 
-`ahu #iam` dissolves into parent tiddler fields during deserializer expansion; it does not project as a child tiddler.
+The iam slot dissolves into parent tiddler fields during deserializer expansion; it does not project as a child tiddler.
 
 Implementation: `packages/lararium-tw5/src/macros/lar-iam-block.ts`
 

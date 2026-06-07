@@ -61,7 +61,7 @@ A boot-legal meme should carry these surfaces:
 
 1. memetic-wikitext doctype comment
 2. document opener with declared `lar:` address
-3. `ahu #iam` with canonical payload and role
+3. the toml `iam` slot with canonical payload and role
 4. title plus one to three sentences naming scope and boundary
 5. body-open and body-close thresholds
 6. one six-line OODA-HA phase map

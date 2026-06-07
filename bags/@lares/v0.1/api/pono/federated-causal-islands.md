@@ -220,8 +220,12 @@ the verb/outcome-over-CRDT form stays the always-correct, offline-tolerant recor
 
 **Prior art:** UCAN invocation / delegation / receipt (Brooklyn Zelenka — UCAN's
 author, now at Ink & Switch); OCapN CapTP three-party handoff; Cloudflare Cap'n Web.
-The OPEN sub-problem (a lease + fencing token for concurrent cross-vessel
-double-run) lives with the residency-model design.
+The OPEN sub-problem — a peer's **kuleana** over a task (the held right-and-duty
+to run it, time-bound) + a **precedence mark** (the monotonic guard so a
+lapsed-then-returned claimant cannot double-apply) for the concurrent cross-vessel
+double-run — lives with the residency-model design. (Names provisional 2026-06-07:
+`kuleana` reaches past the web2-laden "lease"; `precedence mark` past the
+distributed-locking "fencing token"; see `project_next_vectors`.)
 
 <<~/ahu >>
 

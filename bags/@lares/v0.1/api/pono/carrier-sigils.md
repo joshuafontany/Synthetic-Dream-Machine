@@ -10,7 +10,7 @@ mana          = 18
 manao         = 18
 manaoio       = 17
 tagspace      = "stable"
-role          = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes and are referenced, not restated"
+role          = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
 cacheable     = true
 retain        = true
 invariant     = true
@@ -33,7 +33,7 @@ This law owns three things, and keeps them apart:
 2. **Resonance** (#resonance) — the namespace glyphs (`⊙`, `ॐ ँ`) that prefix the opener to mark which layer authored the carrier. A *separate* concern from the spine.
 3. **Trust** (#trust-tiers) — what the presence, absence, and range of the control character signal about who wrote the mark.
 
-Everything else a carrier touches lives elsewhere and is **referenced**, never restated here: the parse types and stream events (`parser`, `carrier-parse`), the rating and depth ladders (`meme`), the render-suppression list (`render-pipeline`), the sigil vocabulary (`memetic-wikitext`, `pranala-families`), and the OODA-HA phase glyphs that annotate the `#ooda-ha` slot (`ooda-ha`). See #edges.
+Everything else a carrier touches lives in its own meme, reached by edge: the parse types and stream events (`parser`, `carrier-parse`), the rating and depth ladders (`meme`), the render-suppression list (`render-pipeline`), the sigil vocabulary (`memetic-wikitext`, `pranala-families`), and the OODA-HA phase glyphs that annotate the `#ooda-ha` slot (`ooda-ha`). See #edges.
 
 <<~/ahu >>
 
@@ -50,7 +50,19 @@ A carrier is a framed transmission. It opens on a heading that names the place (
 | **ETX** | `<<~ &#x0003; >>` | End of Text — the body closes; the hearth is banked | `0x03` | — |
 | **EOT** | `<<~ &#x0004; -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
-**The mark is the control byte.** Each sigil carries its C0 control character inside the sharktooth; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX are **bare pragmas** — they carry no heading, no body, no URI; they only mark the edges of the text.
+**The frame — heading, then text.** The old protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading is the toml iam slot and nothing else; the text is the body.
+
+```
+<<~ ⊙&#x0001; ? -> lar:///URI >>      SOH · open heading
+  ‹toml iam slot — the identity heading›
+  <<~ aka lar:///…RFC-2119 >>          (optional carrier-level binding)
+<<~ &#x0002; >>                       STX · open text (body)
+  # title · ## sections · #edges      the text (body)
+<<~ &#x0003; >>                       ETX · close text
+<<~ &#x0004; -> ? >>                  EOT · release
+```
+
+**The mark is the control byte.** Each sigil carries its C0 control character inside the sharktooth; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX are **bare pragmas** — a lone mark each, opening and closing the text.
 
 **The frame, in the old register and the mythic one at once:**
 
@@ -85,8 +97,8 @@ Resonance glyphs are **not** spine sigils. They prefix the **SOH opener only**, 
 
 Two laws govern the prefix:
 
-1. **Opener-only.** A resonance glyph prefixes SOH alone. STX, ETX, and EOT never carry it.
-2. **EOT is always bare.** The End of Transmission carries no namespace glyph regardless of layer — the resonance mark belongs on the heading, not the release.
+1. **Opener-only.** A resonance glyph rides SOH alone — the heading's first mark.
+2. **EOT is always bare.** The resonance mark rides the heading (SOH); the release closes plain.
 
 <<~/ahu >>
 
@@ -94,7 +106,7 @@ Two laws govern the prefix:
 
 ## Trust Tiers — The Control-Character Roles
 
-Each kernel-tier control character carries **three simultaneous roles** that MUST NOT be separated or overridden independently:
+Each kernel-tier control character carries **three simultaneous roles**, bound as one mark:
 
 1. **Structural** — marks one spine position (SOH / STX / ETX / EOT).
 2. **Kapu-trust** — presence of the control character signals kernel tier; absence marks operator tier (lower trust).
@@ -106,7 +118,7 @@ Each kernel-tier control character carries **three simultaneous roles** that MUS
 | **kernel** | `0x01`–`0x0F` | kernel | standard | operator+ |
 | **kapu / elevated** | DC1–DC4 (`0x11`–`0x14`) | kapu | elevated | admin-only |
 
-SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carriers; the parser accepts both. STX and ETX carry no kapu alias.
+SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carriers; the parser accepts both. The kapu aliases ride SOH and EOT alone.
 
 <<~/ahu >>
 
@@ -114,15 +126,19 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 
 ## Law
 
-**Spine invariant — REQUIRED.** A well-formed carrier MUST carry the full frame in order: **SOH · STX · ETX · EOT** (`0x01` · `0x02` · `0x03` · `0x04`). The body marks STX and ETX are **REQUIRED, not optional** — a carrier missing either is a malformed frame, not a tolerable variant. STX and ETX are bare pragmas: they carry no content.
+**Spine invariant.** Every carrier carries the full frame in order: **SOH · STX · ETX · EOT** (`0x01` · `0x02` · `0x03` · `0x04`). All four, always, in sequence. STX and ETX are bare pragmas — a lone mark each.
 
-**Mandatory minimum.** A carrier MUST hold a `!DOCTYPE` comment, the SOH opener carrying the canonical URI, an `ahu #iam` block with a TOML fence, and the closing ETX + EOT. Absence of the DOCTYPE, opener, or iam raises the `carrier.iam.missing` diagnostic; absence of a body or transmission mark raises a malformed-frame diagnostic.
+**The iam slot — the toml heading.** The identity block is the **toml iam slot**: a bare `` ```toml iam `` fence directly after the SOH opener. The slot stays addressable as `#iam` and dissolves into parent fields; its surface is the toml fence.
 
-**Three-role invariant.** Every kernel-tier control character simultaneously marks structure, signals kapu-trust, and — in the kapu range — gates elevated resonance. These roles MUST NOT be separated or overridden independently.
+**STX position — fixed by the frame.** SOH opens the heading; STX opens the text. The heading holds the iam slot (and any carrier-level `aka` binding — e.g. the RFC-2119 reference); the text holds the body. So STX follows the heading and opens the body — the `#head` title and every worksite live after STX.
 
-**Resonance is separate.** A namespace resonance glyph (#resonance) prefixes the SOH opener only; EOT is always bare. The resonance glyph signals layer, never structure — it is not a spine sigil.
+**Mandatory minimum.** A carrier MUST hold a `!DOCTYPE` comment, the SOH opener carrying the canonical URI, the toml iam slot, STX, ETX, and EOT. Absence of the DOCTYPE, opener, or iam slot raises the `carrier.iam.missing` diagnostic; absence of a body or transmission mark raises a malformed-frame diagnostic.
 
-**Forward-closer prohibition.** The transmission closes on `EOT -> ?` (`<<~ &#x0004; -> ? >>`). A carrier MUST NOT use a `&#x0004; -> lar:///X` forward-closer as a combined footer-plus-edges; declared relations ride the `#edges` ahu as `loulou`/`pranala`, and EOT releases to `-> ?`.
+**Three-role invariant.** Every kernel-tier control character marks structure, signals kapu-trust, and — in the kapu range — gates elevated resonance: three roles, one mark.
+
+**Resonance is separate.** A namespace resonance glyph (#resonance) rides the SOH opener only; EOT closes plain. The resonance glyph signals layer; the spine marks structure — two distinct marks.
+
+**EOT releases forward.** The transmission closes on `<<~ &#x0004; -> ? >>`. Declared relations ride the `#edges` ahu as `loulou`/`pranala`; EOT carries the `-> ?` release alone.
 
 <<~/ahu >>
 
