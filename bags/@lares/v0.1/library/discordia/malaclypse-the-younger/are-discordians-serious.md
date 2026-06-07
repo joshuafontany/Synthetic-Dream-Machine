@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious"
 file-path = "bags/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
 cacheable = false
@@ -17,8 +15,6 @@ mana = 18
 manao = 18
 role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
 ```
-
-<<~/ahu >>
 
 <<~ &#x0002; >>
 

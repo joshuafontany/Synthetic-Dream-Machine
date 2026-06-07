@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README"
 file-path = "bags/@lares/v0.1/library/docs/story/dreamdeck/README.md"
 type = "text/x-memetic-wikitext"
@@ -14,8 +12,6 @@ role = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw sess
 cacheable = false
 retain = false
 ```
-
-<<~/ahu >>
 
 # Epic: DREAMDECK — DreamDeck Integration
 

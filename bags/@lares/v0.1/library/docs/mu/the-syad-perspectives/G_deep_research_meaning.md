@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
 file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.md"
 type = "text/x-memetic-wikitext"
@@ -14,8 +12,6 @@ role = "deep-research synthesis — Sri Syadasti's sevenfold catma as the model 
 cacheable = false
 retain = false
 ```
-
-<<~/ahu >>
 
 # G — Deep Research: Meaning, Context, and the Sevenfold Catma
 

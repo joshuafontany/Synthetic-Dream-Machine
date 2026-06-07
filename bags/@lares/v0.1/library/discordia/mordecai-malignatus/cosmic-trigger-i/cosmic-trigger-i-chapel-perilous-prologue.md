@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue"
 file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
 cacheable = false
@@ -17,8 +15,6 @@ mana = 16
 manao = 17
 role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locus, verbatim provenance shelf"
 ```
-
-<<~/ahu >>
 
 <<~ &#x0002; >>
 

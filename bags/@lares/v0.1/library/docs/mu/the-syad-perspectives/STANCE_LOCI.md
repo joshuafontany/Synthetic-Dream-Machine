@@ -1,30 +1,24 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<!-- ∞ → lar:///grammar.stance.defines/stance/ -->
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI >>
+
+```toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI"
+file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis-Canon"
+role = "grammar: the five discourse stances + the Syadasti Reading Rule — stance selects the evaluation frame that gives confidence its meaning"
+phase-map = { observe = "#loop-position", orient = "#handoff", decide = "#conventions", act = "#procedures", assess = "#reading-test" }
+dependencies = ["confidence"]
+trigger = "always — grammar primitive"
+grammar = true
+invariant = true
+cacheable = false
+retain = false
+```
 
 # Grammar: Stance + Syadasti Reading Rule
-
-```yaml
----
-cacheable: false
-retain: false
-name: stance
-description: >
-  The five discourse stances and the Syadasti Reading Rule. Stance
-  selects the evaluation frame that gives confidence its meaning.
-phase-map:
-  observe: "#loop-position"
-  orient: "#handoff"
-  decide: "#conventions"
-  act: "#procedures"
-  assess: "#reading-test"
-trigger: always — grammar primitive
-invariant: true
-dependencies: [confidence]
-register: Synthesis-Canon
-grammar: true
----
-```
 
 > **Register:** `Synthesis-Canon 16/20` — grounded in the live Syadasti discovery and current HUD practice
 > **Question:** Which evaluation frame gives this claim its meaning?

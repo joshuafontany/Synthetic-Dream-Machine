@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
 file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md"
 type = "text/x-memetic-wikitext"
@@ -14,8 +12,6 @@ role = "session discovery — the Syadasti Reading Rule: Register measures confi
 cacheable = false
 retain = false
 ```
-
-<<~/ahu >>
 
 # The Syadasti Reading Rule — Session Discovery Document
 

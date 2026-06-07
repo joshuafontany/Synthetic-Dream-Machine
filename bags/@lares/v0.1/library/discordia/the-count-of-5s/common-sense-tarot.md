@@ -2,9 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
 
-<<~ ahu #iam >>
-
-```toml
+```toml iam
 uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot"
 file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
 cacheable = false
@@ -17,8 +15,6 @@ manao = 16
 role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar provenance shelf"
 retain = false
 ```
-
-<<~/ahu >>
 
 <<~ &#x0002; >>
 
