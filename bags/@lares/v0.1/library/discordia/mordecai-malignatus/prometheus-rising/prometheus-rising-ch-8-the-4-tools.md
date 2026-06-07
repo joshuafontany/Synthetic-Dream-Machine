@@ -15,6 +15,7 @@ manaoio = 16
 mana = 16
 manao = 17
 role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
+retain = false
 ```
 
 <<~/ahu >>

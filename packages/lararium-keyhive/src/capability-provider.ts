@@ -15,10 +15,9 @@ import type {
  *   * Tier 2 (application layer) — the ACCESS axis, a 1:1 lexical mirror of
  *     Keyhive's native verbs (pull, read, edit, admin), checked AFTER Keyhive's
  *     admin proof verifies. Lives in residency action handlers (Sprint 5 of the
- *     Residency Model Epic) and friends, not here. Retired rungs: "promote" +
- *     "propose" (2026-05-31, ceremonies gone); "sync" + "revoke" (2026-06-01 —
- *     sync = pull-at-scale, revoke = an admin operation). See the 3-axis model
- *     in causal-island.ts + lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands.
+ *     Residency Model Epic) and friends, not here. Not rungs: `promote`/`propose`
+ *     (no consumer), `sync` (pull-at-scale), `revoke` (an admin operation). See
+ *     the 3-axis model in causal-island.ts + lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands.
  *
  * The interface is provider-shaped so implementations can swap:
  *   * KeyhiveProvider (D.2) — wraps @keyhive/keyhive WASM

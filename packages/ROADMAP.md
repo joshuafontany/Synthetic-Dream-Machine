@@ -1,6 +1,6 @@
 # Lares Active Roadmap — Outstanding Work Only
 
-> Updated: 2026-06-06 (Isomorphism-by-composition collapse — host-bridge + mountWiki unified; YIN cuts; 5 mirror pairs remain)
+> Updated: 2026-06-06 (Isomorphism campaign COMPLETE — all 5 mirror pairs landed; `resolveOracleDoc` + bag-vocab single-source + YIN comment pass. Next: local-verifiability wall — unverified delegated verbs.)
 > Tests: mesh 236 · tw5 73 · node 94 · browser 20/20 — all green; typecheck 10/10.
 > Branch: `feature/lararium-node-4`
 > Archive source: `wikis/lares-history/last-sprint/{HANDOFF,SESSION,ROADMAP}.md`
@@ -73,14 +73,11 @@ Do not re-open those arcs unless a test proves drift.
 - **Browser M.3 test pono rebuild** (`e73dbd0f`) — chronically-red `browser-m3-breathing` (frozen checked-in TW5 bundle) → `browser-verb-breathing` (hand-written `.mjs` fixture worker; tests worker↔pool verb-event transport; reaction-router logic stays covered by node m3-breathing).
 - **Isomorphism-by-composition collapse (web3 composable, NOT web2 interface)** — operator steer (canon: `feedback_isomorphism_by_composition` memory): a per-platform method signature IS the web2 smell; keep ONE signature, push divergence into DATA (synced recipe) + held CAPABILITIES, derive the seam BOTTOM-UP by subtraction; proof = behavioral conformance, not type-conformance. Validated by Ink&Switch + OCAP research spirits. Landed: (`77389c01`) headless TW5 boot — two `load*TiddlyWiki` → one `loadTiddlyWikiFromBlob` + emergent `HeadlessBootEnv`; (`29813d4f`) `global ??= globalThis` env-contract fix (the headless third-runtime gap); (`c5253b9b`) shared verb→event conformance spec in `@lararium/mesh` BOTH platforms run; (`cc24f3b9`) **one isomorphic `mountWiki(id, WikiMountSpec)`** — `WikiBootContext` retired, caller builds full resolver on both, disk-write rides as the node pool's held `diskMirrorGrant`, `recipe.mirrorBags` = synced designation; (`aa582f4a`/`8c975f2a`) YIN cuts — dead `mountPrimaryWorker`, `vessel-platform.ts` (rejected-DI-interface home; `AuthVerifierSeam`→`island-protocol`), `browser-dock.ts` (misnomer; `WikiMountSpec`→`wiki-recipe`; dead `BrowserProjectionSnapshot`), orphan tombstones.
 
-## Active collapse — 5 mirror pairs remain (the next campaign)
+## Isomorphism collapse campaign — CLOSED (2026-06-06)
 
-The duplication is ONE seam (storage-adapter + worker-transport+spawn) duplicated 5×, not 5 problems. Collapse order (rising risk), each via bottom-up subtraction + conformance net:
-1. **island kernels** `sovereign-island-model` ⇆ `browser-sovereign-island-model` (~220 each, ~90% identical around the already-shared `IslandKernel`) — most almost-manifest.
-2. **admin VMs** `open-admin-vm` ⇆ `open-browser-admin-vm` (relay loop identical; only Worker/MessageChannel differ).
-3. **vessel factories** `open-node-vessel` ⇆ `open-browser-vessel` (highest divergence: relay-vs-leaf, founding-on-host) — last; `LarVessel` browser-wrapper removal folds in here.
-4. **pools** signature-aligned (`WikiMountSpec`) but impls still split — partly legit (node carries residency LRU/sweeper); revisit after residency lands browser-side.
-Deferred lower-confidence YIN: the `LARARIUM_DOC_URI`/`LARARIUM_BAG`/`BAG_IDS.lararium` triple-alias (may encode slot-vs-doc).
+All 5 mirror pairs landed (git `cd0122cc`…`cc3a9419`): island kernels (`runSovereignKernel`+`IslandHostSeam`), admin VMs (`openAdminVmCore`+`askIsland`), vessel-factory cascade (pair 3: `mountSocialPlane`/`addCanonLayer`/`seedVesselDefaults`/`mountPrimaryWiki`), pool (`VesselIslandPoolCore`; browser inherits residency), admin entry (`makeOperatorAdminBehavior`), wiki behavior (`makeWikiBehavior`). Post-campaign: `resolveOracleDoc` (catalog-oracle protocol, 4 sites → 1); bag-vocab single-source (`LARARIUM_BAG`/`LARES_BAG` derive from `lar-uris` — the triple-alias drift is gone). Both vessels are thin host seams over shared cores; the floor (4 worker entries + held capabilities + recipe DATA) stays by design. Do not reopen.
+
+**Next burning ticket — local-verifiability wall (= Priority 1 Stage 1b):** host-delegated verbs run UNVERIFIED. `mountMainVerbs(registry, verifier?)` is called with no verifier on both vessels (`open-node-vessel.ts:544`, `open-browser-vessel.ts:462`) → `admin:delegate-verb` runs `runLocalVerb` uncapability-checked. Design fork (A: main round-trips to the worker keyhive per verb; B: verify-then-delegate IN the worker — cleaner) awaits operator decision.
 
 ## Planning Law
 

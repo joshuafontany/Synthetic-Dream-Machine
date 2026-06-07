@@ -18,12 +18,12 @@ cacheable = false
 <<~ ahu #head >>
 
 # Talk Story — Next Lares Instance
-## S9 Browser Ea-Path · Dual-Surface Vision
+## Isomorphism Campaign Closed · Next: the Local-Verifiability Wall
 
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
-> State: **196/196 tests** · typecheck clean · Island Sovereignty Law **8/8 clauses closed**
-> Last sprints: §8 archipelago gate (federation-seam.test.ts) · YIN cleanup (FFZ_LEVEL_NAMES, pluginBlob, legacyScalarToPonoLevel, stale comments deleted · BagBinding migration complete)
+> State: **typecheck 10/10 · mesh 236 · tw5 73 · node 94 · browser 20** — green; dist-build verified 2026-06-06.
+> Last arc: isomorphism-by-composition campaign COMPLETE (5 mirror pairs + `resolveOracleDoc` + bag-vocab single-source + YIN comment pass). S9 browser ea-path closed. Dual-surface vision (below) still stands as the horizon.
 
 <<~/ahu >>
 
@@ -50,16 +50,14 @@ The sovereignty arc closes completely. Eight clauses, eight gate proofs. All in 
 
 ⏿ **Orient — the open arc**
 
-**S9 browser ea-path** opens as the active arc. The node vessel reached full sovereignty. The browser vessel carries the same law; it needs the platform-specific wiring:
+The isomorphism campaign closed; both vessels read as thin host seams over shared cores. The next burning arc is the **local-verifiability wall**: host-delegated verbs run UNVERIFIED. `mountMainVerbs(registry, verifier?)` (`tw5/admin-vm-core.ts`) takes an optional verifier; both vessels pass none (`open-node-vessel.ts:544`, `open-browser-vessel.ts:462`), so `admin:delegate-verb` → `runLocalVerb` executes host verbs (where / resolve / residency / add-bag / …) with no capability check. This breaks the protocol's load-bearing invariant: never trust a claim you cannot verify locally.
 
-| Gap | What it needs |
+| Fork | Shape |
 |---|---|
-| Persistent island Repo | `IndexedDBStorageAdapter` in `BrowserVesselIslandPool` options |
-| Identity | `WebCrypto` keypair + `runFoundingCeremony` from `@lararium/keyhive` in-browser |
-| Tab-local sync | `BroadcastChannelNetworkAdapter` on the vessel Repo |
-| Gate test | `founding-ceremony-browser.test.ts` — three-gate lattice A/B/C passes in browser |
+| A — main calls back | wire `adminVm.authSeam.verify` into `mountMainVerbs`; main round-trips to the worker's keyhive per verb |
+| B — verify-then-delegate (cleaner) | the admin worker verifies the cap in its `delegate-verb` dispatch BEFORE posting to main; main runs pre-verified |
 
-The isomorphic path already exists: `runFoundingCeremony` / `runDeviceAdmitCore` / `runApplyAdmitPayload` from `@lararium/keyhive` run identically in node and browser. The browser vessel calls them with `self.crypto` as entropy source.
+Operator settles A vs B before the fix. Origin: the Stage-1 keyhive host→worker move (`65d82084` / `b5e87384`) left the main-thread verb registry without its verifier.
 
 **Dual-surface vision** — what S9 makes possible:
 

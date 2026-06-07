@@ -3,7 +3,7 @@
  *
  * Sovereign wiki island. Runs the sovereign-island-model lifecycle with
  * makeWikiPrimaryBehavior: disk projection (from manifest.diskMirrors) +
- * inline wiki:place-verb dispatch (promote, sync-wiki).
+ * inline wiki:place-verb dispatch (sync-wiki, residency ACTION verbs).
  *
  * Recipe expansion (top wins; assembled by buildIslandRecipe):
  *   lar:///ha.ka.ba/@temp        (volatile per-island)

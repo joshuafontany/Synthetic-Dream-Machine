@@ -434,10 +434,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   let vmManager: VesselIslandPool;
   // sync-wiki is VM-native — route as placeWikiVerb to the primary wiki island.
   // vmManager is assigned after TW5 boot; jobs only execute after "live" is emitted.
-  //
-  // The "promote" registration retired 2026-05-31 under the residency-model cleanup.
-  // Residency ACTION verb handlers (ADD / COPY / MOVE / CLEAR / DROP / LOAD) land in
-  // Sprint 5 of the Residency Model Epic — see packages/EPIC-RESIDENCY-MODEL.md.
+  // (Residency ACTION verbs ADD/COPY/MOVE/CLEAR/DROP/LOAD land via Sprint 5 handlers —
+  //  see packages/EPIC-RESIDENCY-MODEL.md — not a vessel-edge registration.)
   jobRegistry.register("sync-wiki", async (args, ctx) =>
     vmManager.placeWikiVerb(activeWikiId, {
       verb:        "sync-wiki",

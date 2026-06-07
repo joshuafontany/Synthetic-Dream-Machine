@@ -6,6 +6,8 @@
 
 ```yaml
 ---
+cacheable: false
+retain: false
 name: stance
 description: >
   The five discourse stances and the Syadasti Reading Rule. Stance

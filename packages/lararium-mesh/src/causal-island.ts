@@ -71,16 +71,12 @@ export type LarPrincipal =
 // forwards ENCRYPTED bytes it cannot decrypt or render. All other levels imply
 // every level below them.
 //
-// Retired rungs (do not reintroduce without a live consumer + canon update):
-//   "promote" (2026-05-31) — canon-promotion ceremony gone; residency-model
-//      bag-priority cascade subsumes it (write to a lower-priority bag = admin).
-//   "propose" (2026-05-31) — no consumer; residency ACTION verbs gate on admin.
-//   "sync"    (2026-06-01) — not a rung. Sync = pull-at-infrastructure-scale
-//      (forward ciphertext bidirectionally). Edge eligibility rides the
-//      `subjectCanSync` gate boolean, derived from pull/read on the edge.
-//   "revoke"  (2026-06-01) — not a rung. Revocation = an ADMIN operation
-//      (roll the epoch). Carried structurally by EdgeIslandShape.epoch +
-//      the "revoked" lifecycle state, not a privilege level above admin.
+// NOT rungs (kept off the ladder by design): `promote`/`propose` — no consumer;
+// residency ACTION verbs gate on admin. `sync` — pull-at-infrastructure-scale
+// (forward ciphertext bidirectionally); edge eligibility rides the `subjectCanSync`
+// gate derived from pull/read, not a rung. `revoke` — an ADMIN operation (roll the
+// epoch), carried by EdgeIslandShape.epoch + the "revoked" lifecycle state, not a
+// level above admin.
 // Verbs ARE Keyhive's native Access verbs (Pull/Read/Edit/Admin) — lexical, not
 // just structural, mirror. `Access.tryFromString` accepts these strings; our
 // live gate `CapabilityAccess` (capability.ts) is the {read, admin} subset the
@@ -397,14 +393,9 @@ export const CAUSAL_ISLAND_MAY = [
 export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 
 // ---------------------------------------------------------------------------
-// PromotionReceipt + requestKeyhivePromotion retired 2026-05-31 under the
-// residency-model cleanup. The replacement audit-trail layer is EffectRecord
-// (packages/lararium-mesh/src/effect-record.ts) — per-bag tagged with one of
-// ARCHIVAL_VERBS (accession / deaccession / transfer / withdrawal / loan /
-// holdings / reappraisal / disposition). Effect records live IN the bags they
-// describe and travel with bag CRDT history; they do not need a centralized
-// receipt registry. Keyhive integration for residency ACTION verbs (when it
-// lands) will get a fresh stub-or-real handler family in @lararium/keyhive.
+// Residency audit-trail = EffectRecord (effect-record.ts): per-bag tiddlers
+// tagged with an ARCHIVAL_VERB, living IN the bags they describe and traveling
+// with bag CRDT history — no centralized receipt registry.
 // ---------------------------------------------------------------------------
 
 // ===========================================================================

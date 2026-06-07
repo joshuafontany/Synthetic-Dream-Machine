@@ -15,6 +15,7 @@ manaoio = 16
 mana = 16
 manao = 16
 role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar provenance shelf"
+retain = false
 ```
 
 <<~/ahu >>

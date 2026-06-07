@@ -16,7 +16,6 @@ module-type: tiddlerdeserializer
  * Non-TW5 adaptation stops at this membrane; decomposition law begins here.
  *
  * Uses parseMemeText() from @lararium/mesh/meme-ast — isomorphic, no TW5 dep.
- * Does NOT depend on carrier-split.ts (deprecated web2-era code).
  *
  * Incoming (disk → wiki):
  *   memeticWikitextDeserializer — TW5 tiddlerdeserializer contract.

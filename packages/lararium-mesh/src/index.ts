@@ -16,7 +16,6 @@ export * from "./projection-registry.js";
 export * from "./readiness.js";
 export * from "./lar-uris.js";
 export * from "./mirror-paths.js";
-// (promotion-ceremony.js retired 2026-05-31; effect-record.js replaces it.)
 export * from "./tiddler-store.js";
 export * from "./recipe.js";
 export { bagStackFromRec } from "./bag-stack-from-rec.js";

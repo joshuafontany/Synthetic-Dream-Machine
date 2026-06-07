@@ -2,7 +2,7 @@
  * wiki-handlers — verb-tiddler handlers for whole-wiki operations.
  *
  * Vessel-edge handlers: bag minting, repo/doc plumbing, residency.
- * Wiki-semantic rites (sync, promote) live in the VM islands.
+ * Wiki-semantic rites (sync-wiki, residency ACTION verbs) live in the VM islands.
  */
 
 import type { Repo, DocHandle } from "@automerge/automerge-repo";

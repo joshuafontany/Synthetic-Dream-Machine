@@ -10,6 +10,7 @@
  */
 
 import {
+  ADMIN_BAG_ID,
   type CapabilityAccess,
   type CapabilityVerifyResult,
   type CapabilityVerifier,

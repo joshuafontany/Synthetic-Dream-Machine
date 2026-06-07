@@ -54,8 +54,6 @@ export type { WikiBehaviorOptions } from "./wiki-behavior.js";
 export type { ActionHandlerOptions } from "./action-handler.js";
 
 export { exportMemeText } from "./meme-write.js";
-// (lar-promote module retired 2026-05-31 under the residency-model cleanup;
-//  ACTION verb handlers land in Sprint 5 — see packages/EPIC-RESIDENCY-MODEL.md)
 
 export { tw5ElementToVdom, tw5ElementToHtml } from "./fake-dom.js";
 export type { VDomNode, TW5FakeElement, TW5FakeTextNode, TW5FakeNode } from "./fake-dom.js";

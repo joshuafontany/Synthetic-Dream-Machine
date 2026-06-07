@@ -25,20 +25,22 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { Heads } from "@automerge/automerge";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
+import { LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
 
 /** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
 export type SlotUri = string;
 
 /**
  * Six fixed slot URIs always present in every recipe. The wiki identity slot
- * derives from `wikiSlug` via `wikiBagUri()`; the remaining five name themselves
- * here as constants.
+ * derives from `wikiSlug` via `wikiBagUri()`. @temp/@draft/@personal name
+ * themselves here (no canonical home elsewhere); @lares/@lararium single-source
+ * from the derived `lar-uris.ts` consts so the URI lives in exactly one place.
  */
 export const TEMP_BAG     = "lar:///ha.ka.ba/@temp"     as const;
 export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
 export const PERSONAL_BAG = "lar:///ha.ka.ba/@personal" as const;
-export const LARES_BAG    = "lar:///ha.ka.ba/@lares"    as const;
-export const LARARIUM_BAG = "lar:///ha.ka.ba/@lararium" as const;
+export const LARES_BAG    = LARES_DOC_URI;
+export const LARARIUM_BAG = LARARIUM_DOC_URI;
 
 /** Build a wiki identity bag URI from a slug. */
 export function wikiBagUri(slug: string): SlotUri {
