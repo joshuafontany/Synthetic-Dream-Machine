@@ -151,14 +151,7 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 ## C0 Control Sigil Roles
 
-C0 characters (`&#x0001;` through `&#x0004;`) serve as document-structure protocol markers. They appear inside `<<~ … >>` opener and closer sigils as lifecycle glyphs, not as standalone sigil operators.
-
-```
-&#x0001; (SOH)  document open — root address throat; carries "? -> uri"
-&#x0002; (STX)  body open     — marks transition into active meme body
-&#x0003; (ETX)  body close    — marks close of active meme body
-&#x0004; (EOT)  exit          — outward uncertainty discharge; "-> ?" return
-```
+The four C0 control characters (`&#x0001;`–`&#x0004;`) are the **carrier spine** — SOH · STX · ETX · EOT. Their roles, byte values, kapu aliases, and the REQUIRED-in-order law live in their one home: `carrier-sigils#carrier-spine` (#edges). This section owns only how the parser **checks** them — it does not redefine the marks.
 
 `&#x0005;` (ENQ) and `&#x0006;` (ACK) appeared in earlier research as query/response throat operators. They did not land in the live system. Live query surface uses `<<~ ui FILTER >>` (kind: `query`) instead.
 
@@ -283,6 +276,7 @@ trigger = "end of stream"
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>

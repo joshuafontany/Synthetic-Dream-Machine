@@ -145,7 +145,7 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/island-accumulator >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-accumulator >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/verse-mesh >>
 
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
