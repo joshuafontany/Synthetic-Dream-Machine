@@ -52,7 +52,7 @@ import { dispatchVerbLifecycle, placeVerbInvocation } from "./verb-vm.js";
 import type { TW5Engine } from "./tw5-vm.js";
 import { emitVerbSignal } from "./verb-signal.js";
 import type { VerbSignalRequest } from "./verb-signal.js";
-import { runLocalVerb } from "./verb-local-dispatch.js";
+import { runLocalVerb, deriveRoutedCap } from "./verb-local-dispatch.js";
 
 export interface VerbContext {
   readonly admin: CompositeStore;
@@ -112,7 +112,7 @@ export class VerbDispatcher {
           this.opts.adminVm,
           this.opts.admin,
           invocation,
-          () => {
+          async () => {
             if (this.opts.registry.has(invocation.verb)) {
               return runLocalVerb(invocation, {
                 admin:    this.opts.admin,
@@ -120,8 +120,22 @@ export class VerbDispatcher {
                 ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
               });
             }
-            if (this.opts.routeFn) return this.opts.routeFn(invocation);
-            return Promise.reject(new Error(`no handler registered for "${invocation.verb}"`));
+            if (this.opts.routeFn) {
+              // Verify-then-delegate: the keyholder worker gates the cap BEFORE
+              // routing to main; main then trusts the worker→main channel as the
+              // capability (project_verification_placement). Enforced only when a
+              // real verifier exists; a pre-sovereign/test island (no verifier)
+              // routes as before.
+              if (this.opts.verifier) {
+                const { access, bagUrl } = deriveRoutedCap(invocation);
+                const proof = await this.opts.verifier.verify({ presenter: invocation.requestedBy, bagUrl, access });
+                if (!proof.ok) {
+                  throw new Error(`[verb-dispatcher] capability denied for routed verb "${invocation.verb}" (bag=${bagUrl}, access=${access}): ${proof.reason ?? "no grant"}`);
+                }
+              }
+              return this.opts.routeFn(invocation);
+            }
+            throw new Error(`no handler registered for "${invocation.verb}"`);
           },
         ).catch((err) => {
           console.error("[verb-dispatcher] local handler crashed:", err);
