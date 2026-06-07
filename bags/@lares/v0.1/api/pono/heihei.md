@@ -9,7 +9,7 @@ register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 16
 manao        = 16
-role         = "race/compete block-container sigil — multiple candidate bodies, first match wins; Hawaiian alias for \\if"
+role         = "wikispace conditional block-container — first non-empty filter renders its body; the TW5 `\\if` cascade (with kahawai=`\\elseif`, mukuwai=`\\else`); content selection on the document surface"
 cacheable    = true
 retain       = true
 ```
@@ -22,18 +22,11 @@ retain       = true
 
 # Heihei
 
-*heihei* — Hawaiian: race, competition (foot race, canoe race); to race, to compete.
-General competitive racing — a structured contest where candidates run and the outcome depends
-on who resolves the condition. Until resolved, uncertainty holds. The competition's outcome reads
-purposeful and ordered.
+*heihei* — Hawaiian: race, competition; a structured contest where candidates run until one resolves.
 
-A block-container sigil with competitive conditional semantics. Multiple candidate bodies
-enter the race; the first body whose filter condition resolves non-empty shapes the output.
-English alias: `\if` (TW5 filter-conditional form).
+The **wikispace conditional**. A block-container holds candidate bodies, each guarded by a TW5 filter; the **first body whose filter resolves non-empty renders**, the rest skip. With `kahawai` (`\elseif`) and `mukuwai` (`\else`) it forms the conditional cascade (if / elseif / else) — serial filter-evaluation, content selection on the Story-River surface. English alias: `\if` (TW5 `<%if filter%>…<%endif%>`, 5.3+).
 
-Implements TW5's `<%if filter%>...<%endif%>` shortcut (TW5 5.3+) at the sigil grammar level.
-The `\race` concurrency sigil carries the parallel execution posture; `heihei` carries the
-competitive-filter selection posture (serial evaluation, first non-empty result wins).
+**Not a concurrency race, and not the canvas conditional.** `heihei` tests filters to *select content* in the wiki (serial, by filter-match). `holo` (`\race`) races *parallel flows* on the canvas (parallel, by completion-time), cancelling losers — concurrency, not conditional. And the **Verse visual-scripting conditional** (a flow-branch on the canvas) reads as a **separate principle**: the same conditional shape, but it branches *execution flow* on the TLDraw surface rather than selecting *content* in the document. Three distinct principles; only the surface word "first" ever made them look alike.
 
 <<~/ahu >>
 

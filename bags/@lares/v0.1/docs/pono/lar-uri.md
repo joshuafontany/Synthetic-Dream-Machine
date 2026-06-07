@@ -52,6 +52,23 @@ The system has one **canonical encoding** and multiple named **render targets**:
 
 Named render targets: `record:full` (identity projection of the canonical form), `hud:exchange-pair` (sigil-rich in-stream exchange boundary), `chat-log:post-header` (social-layer DreamDeck post header).
 
+### Lineage and Source Bind
+
+We carry a palimpsest lineage through this HA.KA.BA reinterpretation.
+
+- SDM (Luka Rejec) feeds the live HAKABA triad pressure.
+- Hawaiian *hā* lends threshold-breath resonance to `ha`.
+- Egyptian soul grammar frames `ka`/`ba` as 'standing double' and 'returning bird'.
+- Flight dynamics lends the orientation triad (yaw · pitch · roll) and keeps the reading on attitude, never mapped position.
+- what3words lends mnemonic three-word arity; `lar:` forks away from geospatial metric.
+- hoʻokele steers doctrine: hold bearing, infer position.
+
+Source bind (vessel-safe): the SDM source-shelf preface, the SDM third-party license witness, and the SDM Quickstart HAKABA section pin this lineage claim to local canon text.
+
+Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
+
+No metric sits claimed yet. The scheme names attitude-bearing only and defines no distance function over roots.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -87,12 +104,6 @@ lar://lar:node@enyalios/~schema.flow.documented/
 
 **Step 4 — Ride the panel.**
 Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
-
-**Lineage, declared.** A palimpsest, named openly: `ha` carries Luka Rejec's Synthetic Dream Machine pressure and Hawaiian *hā* (threshold breath); `ka` and `ba` carry Egyptian soul-grammar (standing double; bird that flies and returns); the three-axis orientation frame carries flight-dynamics lineage (yaw · pitch · roll --- attitude, never position); mnemonic three-word arity carries what3words lineage; navigation doctrine carries **hoʻokele** --- bearing held, position inferred.
-
-**Citation bind (local shelf).** Rejec/SDM authority and HAKABA source text bind here, from local materials: `sdm/README.md` ("This folder contains Luka Rejec's canonical Synthetic Dream Machine publications"), `sdm/Synthetic_Dream_Machine/Synthetic-Dream-Machine-3rd-Party-License.md` ("...by Luka Rejec" and "...are copyright Luka Rejec"), and `sdm/Synthetic_Dream_Machine/Synthetic_Dream_Machine_01_Quickstart.md` ("Every character... body (ha), soul (ka), and psyche (ba)"; "Ha-ka-ba is adapted from Ancient Egyptian conceptions...").
-
-No metric stands yet claimed. The scheme names attitude-bearing only and defines no distance function over roots.
 
 **Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 

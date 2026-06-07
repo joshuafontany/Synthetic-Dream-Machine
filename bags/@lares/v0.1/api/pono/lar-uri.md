@@ -200,13 +200,20 @@ The root carries an attitude triple: **Ha** sets the heading faced, **Ka** sets 
 
 Slot order carries the drift gradient: **Ha** drifts slowest, **Ka** at moderate pace, **Ba** fastest. Prefix-stability follows from this law: shared Ha clusters meaningfully while Ba churns.
 
-No metric stands yet claimed. The scheme names attitude and section; it does not define a distance function over roots.
+No metric stands yet claimed. The scheme names attitude and section; it defines no distance function over roots.
 
-**Lineage, declared.** A palimpsest, named openly: `ha` carries Luka Rejec's Synthetic Dream Machine pressure and Hawaiian *hā* (threshold breath); `ka` and `ba` carry Egyptian soul-grammar (standing double; bird that flies and returns); the three-axis orientation frame carries flight-dynamics lineage (yaw · pitch · roll --- attitude, never position); mnemonic three-word arity carries what3words lineage; navigation doctrine carries **hoʻokele** --- bearing held, position inferred.
+**Lineage and source bind.** We declare a palimpsest lineage for this reinterpretation.
 
-**Citation bind (source shelf, vessel-safe).** Rejec/SDM authority and HAKABA source text bind here from the SDM shelf carried in-repo: the SDM source-shelf preface ("Luka Rejec's canonical Synthetic Dream Machine publications"), the SDM third-party license witness ("...by Luka Rejec"; "...are copyright Luka Rejec"), and the SDM Quickstart HAKABA section ("Every character... body (ha), soul (ka), and psyche (ba)"; "Ha-ka-ba is adapted from Ancient Egyptian conceptions...").
+- SDM (Luka Rejec) supplies the living HAKABA triad pressure.
+- Hawaiian *hā* supplies threshold-breath resonance for `ha`.
+- Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
+- Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
+- what3words supplies mnemonic three-word arity; `lar:` forks away from geospatial metric.
+- hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
 
-Quoted anchors carried forward for audit: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These three phrases bind the present heading/angle/dynamic reinterpretation to the local SDM shelf without claiming a one-to-one term identity.
+Source bind (vessel-safe): the SDM source-shelf preface, the SDM third-party license witness, and the SDM Quickstart HAKABA section ground this lineage claim in local canon text.
+
+Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
 
 Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
 
