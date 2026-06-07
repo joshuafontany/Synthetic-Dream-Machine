@@ -170,6 +170,7 @@ spatial    = "light-blue"
 
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 <<~ pranala #tiddler-sigil-family-control ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control family:control role:has >>
 <<~ pranala #tiddler-sigil-family-relation ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation family:control role:has >>
 <<~ pranala #tiddler-sigil-family-observe ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe family:control role:has >>

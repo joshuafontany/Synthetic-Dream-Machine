@@ -88,6 +88,12 @@ lar://lar:node@enyalios/~schema.flow.documented/
 **Step 4 — Ride the panel.**
 Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
 
+**Lineage, declared.** A palimpsest, named openly: `ha` carries Luka Rejec's Synthetic Dream Machine pressure and Hawaiian *hā* (threshold breath); `ka` and `ba` carry Egyptian soul-grammar (standing double; bird that flies and returns); the three-axis orientation frame carries flight-dynamics lineage (yaw · pitch · roll --- attitude, never position); mnemonic three-word arity carries what3words lineage; navigation doctrine carries **hoʻokele** --- bearing held, position inferred.
+
+**Citation bind (local shelf).** Rejec/SDM authority and HAKABA source text bind here, from local materials: `sdm/README.md` ("This folder contains Luka Rejec's canonical Synthetic Dream Machine publications"), `sdm/Synthetic_Dream_Machine/Synthetic-Dream-Machine-3rd-Party-License.md` ("...by Luka Rejec" and "...are copyright Luka Rejec"), and `sdm/Synthetic_Dream_Machine/Synthetic_Dream_Machine_01_Quickstart.md` ("Every character... body (ha), soul (ka), and psyche (ba)"; "Ha-ka-ba is adapted from Ancient Egyptian conceptions...").
+
+No metric stands yet claimed. The scheme names attitude-bearing only and defines no distance function over roots.
+
 **Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
 > **SA grounding:** the `aim` is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
@@ -517,7 +523,7 @@ A spanSpan record is **consistent** when:
 - **Lamport / Vector clocks** — The chronometer shares surface resemblance (array of counters, nesting relationship) but functions as a **hierarchical scope counter** in a single process — not a distributed causality tracker across concurrent independent processes.
 - **Interval Tree Clocks** (Almeida et al., 2008) — Dynamic participant identity via interval subdivision. Deferred from URI spec; informs MCP chronometer server design.
 - **FTLS RSS Time-Scale Hierarchy** — The five levels (Week/Watch/Turn/Round/Action) are canon game rules. The chronometer's five-position structure derives from this hierarchy.
-- **what3words** — Three-word geocoding of 3m² squares. Inverse design principle: Tagspace words encode semantic content rather than randomizing for error prevention.
+- **what3words** — Mnemonic precedent for fixed three-word arity. `lar:` forks from geocoding: roots name attitude-bearing rather than surveyed position.
 - **FFZ Chronometer Protocol** (Telarus / Lares, 2026) — Fontany-Fuller-Zelenka. Vector chronometer with per-participant phase registers. Source: `lares/research/chronometer/FFZ-Chronometer-Research.md`
 - **Schneier & Raghavan, "Agentic AI's OODA Loop Problem"** (IEEE S&P, 2025) — Nested OODA loops in AI agents; integrity as architecture. Validates the chronometer's problem space independently.
 - **OODA-HA Composable Invariant Modules** (Telarus / Lares, 2026) — Phase-scoped instruction loading with section-level confidence URIs.

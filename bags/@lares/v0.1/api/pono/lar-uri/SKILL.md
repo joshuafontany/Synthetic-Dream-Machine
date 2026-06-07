@@ -20,7 +20,7 @@ covers = [
 ]
 constraints = [
   "S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it",
-  "S2: path classes stay distinct — stable (ha.ka.ba), unstable (coordinate triple), adjacent (no triple); never blur them",
+  "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them",
   "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @",
   "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch",
   "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"

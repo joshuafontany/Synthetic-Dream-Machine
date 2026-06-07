@@ -198,6 +198,16 @@ The `lar:` URI names bearing — attitude and section, nothing mutable, in ASCII
 
 The root carries an attitude triple: **Ha** sets the heading faced, **Ka** sets the angle of approach, and **Ba** carries the dynamic underway. This runs after the manner of what3words in fixed three-word arity, not in geospatial metric. Hawaiian parallels stay visible: *hā* breathes at the threshold; hoʻokele names navigation by held bearing. The approved exchange term remains **bearing vector**.
 
+Slot order carries the drift gradient: **Ha** drifts slowest, **Ka** at moderate pace, **Ba** fastest. Prefix-stability follows from this law: shared Ha clusters meaningfully while Ba churns.
+
+No metric stands yet claimed. The scheme names attitude and section; it does not define a distance function over roots.
+
+**Lineage, declared.** A palimpsest, named openly: `ha` carries Luka Rejec's Synthetic Dream Machine pressure and Hawaiian *hā* (threshold breath); `ka` and `ba` carry Egyptian soul-grammar (standing double; bird that flies and returns); the three-axis orientation frame carries flight-dynamics lineage (yaw · pitch · roll --- attitude, never position); mnemonic three-word arity carries what3words lineage; navigation doctrine carries **hoʻokele** --- bearing held, position inferred.
+
+**Citation bind (source shelf, vessel-safe).** Rejec/SDM authority and HAKABA source text bind here from the SDM shelf carried in-repo: the SDM source-shelf preface ("Luka Rejec's canonical Synthetic Dream Machine publications"), the SDM third-party license witness ("...by Luka Rejec"; "...are copyright Luka Rejec"), and the SDM Quickstart HAKABA section ("Every character... body (ha), soul (ka), and psyche (ba)"; "Ha-ka-ba is adapted from Ancient Egyptian conceptions...").
+
+Quoted anchors carried forward for audit: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These three phrases bind the present heading/angle/dynamic reinterpretation to the local SDM shelf without claiming a one-to-one term identity.
+
 Fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`, `#pranala-name`.
 
 BEARING (path) → SECTION (fragment).
@@ -304,7 +314,8 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 
 - **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
 - **Session-form authority grammar.** The `alias:tier@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
-- **Unstable-coordinate vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved coordinates remains open.
+- **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
+- **Lineage citation bind.** The palimpsest claim for `ha` includes operator-approved Rejec lineage; bind exact local citations from source materials before Canon promotion.
 
 <<~/ahu >>
 

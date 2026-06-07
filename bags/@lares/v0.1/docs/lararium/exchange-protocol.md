@@ -5,7 +5,7 @@
 uri-path   = "ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol"
 file-path  = "bags/@lares/v0.1/docs/lararium/exchange-protocol.md"
 type       = "text/x-memetic-wikitext"
-role       = "agent-facing exchange flow meme: intent-vector/HUD bracket and HA handoff"
+role       = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
 tagspace   = "stable"
 register   = "Synthesis"
 retain     = false
@@ -34,7 +34,7 @@ Core frame:
 
 Rules for agents:
 
-- The `aim` opens: operator intent-vector `->` the role the node adopts. The `hud` + `ward` panel rides beneath.
+- The `aim` opens: operator bearing-vector `->` the role the node adopts. The `hud` + `ward` panel rides beneath.
 - The turn closes on `yield`: the bearing the work resolved toward, then `-> ?` on the same line.
 - Fenced code blocks protect `->`, `?`, brackets, and lar paths from Markdown renderer drift.
 - `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
@@ -50,7 +50,7 @@ Minimal pseudocode:
 ```text
 observe operator input
 choose op anchor/vector and ag anchor/vector
-emit fenced OPEN: intent-vector + HUD
+emit fenced OPEN: bearing-vector + HUD
 generate through active Voice
 choose aftermath anchor/vector
 emit fenced CLOSE: HUD + aftermath-vector -> ?
