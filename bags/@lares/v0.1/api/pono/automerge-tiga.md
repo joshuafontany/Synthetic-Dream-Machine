@@ -141,3 +141,20 @@ Social plane opens last — authority structures sit downstream of content plane
 This ordering carries structural correctness for the SDM metaphysics — not incidental.
 
 <<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/lararium-doc-stack >>
+
+<<~ pranala #governed-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

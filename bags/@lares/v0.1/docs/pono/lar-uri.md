@@ -275,7 +275,7 @@ A `lar:` URI *names* a meme; how memes, waypoints, and transclusions get *writte
 
 <<~ ahu #stable-address >>
 
-## 8. Stable Address — Named Graph Form
+## 6. Stable Address — Named Graph Form
 
 Strip authority, query, and fragment. The HA.KA.BA territory alone:
 
@@ -293,7 +293,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 
 <<~ ahu #cache-tiers >>
 
-## 10. Invariant-Core Cache Tier Mapping
+## 7. Invariant-Core Cache Tier Mapping
 
 | Tier | Cache Strategy | Confidence Range | Volatility |
 |---|---|---|---|
@@ -305,7 +305,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 
 <<~ ahu #module-registry >>
 
-## 11. Module and Registry Metadata
+## 8. Module and Registry Metadata
 
 The `lar_uri` + `confidence` fields on module descriptors, registry records, and future boot metadata provide load-order and identity context. No compiler pipeline is implied by this section; the schema only defines how URI metadata travels with higher-level descriptors.
 
@@ -335,9 +335,9 @@ Module descriptors use `version_num` or semver-like fields for content versionin
 
 <<~ ahu #validation >>
 
-## 12. Validation Rules
+## 9. Validation Rules
 
-### 12.1 Well-Formedness
+### 9.1 Well-Formedness
 
 A `lar:` URI is **well-formed** when:
 
@@ -350,14 +350,14 @@ A `lar:` URI is **well-formed** when:
 8. `p` value is a decimal in range `[0.0, 1.0]`
 10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
 
-### 12.2 Consistency
+### 9.2 Consistency
 
 A spanSpan record is **consistent** when:
 
 1. All URI fields are canonical ASCII record form (no emoji, no non-ASCII)
 2. `lares_address` is the path-only strip of `start_uri` (no authority, no query, no fragment)
 
-### 12.3 Stable Address Derivation
+### 9.3 Stable Address Derivation
 
 `lares_address` is correctly derived from `lar_uri` when:
 
@@ -366,7 +366,7 @@ A spanSpan record is **consistent** when:
 3. Path is identical to the `lar_uri` path (record form: `/` separators)
 4. Query and fragment are absent
 
-### 12.4 Canonical Form and Comparison
+### 9.4 Canonical Form and Comparison
 
 1. Convert both to record form (apply normalization — HUD → record — before comparison)
 2. Compare path components **case-insensitively**
@@ -378,7 +378,7 @@ A spanSpan record is **consistent** when:
 
 <<~ ahu #security >>
 
-## 13. Security Considerations
+## 10. Security Considerations
 
 1. **Non-dereferenceable:** `lar:` URIs are pure identifiers. No network resolution occurs — there is no server to attack via URI injection.
 
@@ -396,7 +396,7 @@ A spanSpan record is **consistent** when:
 
 <<~ ahu #prior-art >>
 
-## 15. Prior Art
+## 11. Prior Art
 
 - **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths and the bearing-only address structure) falls within the scheme owner's authority.
 - **RFC 8820 (BCP 190, URI Design and Ownership)** — Obsoletes RFC 7320 (June 2020). Confirms that URI structure constraints are legitimate when issued by the scheme specification itself. Path and address structure falls within scheme-owner authority per §2.4.
@@ -416,7 +416,7 @@ A spanSpan record is **consistent** when:
 
 <<~ ahu #how-to-read >>
 
-## Appendix B — How to Read an Exchange Opening
+## Appendix A — How to Read an Exchange Opening
 
 A complete exchange opening, annotated by scan order. The `aim` URI carries bearing; the sigil panel beside it carries the rest.
 
@@ -449,5 +449,7 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:has >>
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
