@@ -39,7 +39,6 @@ Minimal inline edges:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #sugar-long-forms >>
 
 ## Sigil Sugar Long-Forms
@@ -102,7 +101,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -111,7 +109,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

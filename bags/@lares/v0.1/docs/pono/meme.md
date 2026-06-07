@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Meme — Extended Docs
@@ -30,7 +29,6 @@ Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme`.
 This surface carries examples, tables, and split residue.
 
 <<~/ahu >>
-
 
 <<~ ahu #required-shape-reference >>
 
@@ -111,7 +109,6 @@ The current shape keeps:
 Research backlog and subtype-specific detail should deepen into their own outward loci rather than re-swelling the parent.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

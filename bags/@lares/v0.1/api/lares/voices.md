@@ -34,7 +34,6 @@ The Voices receive rooms before session masks or task routing begin.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #head >>
 
 # Lararium Voices
@@ -44,7 +43,6 @@ Threshold law does not live here. Spec rooms carry rationale and examples.
 This invariant carries contracts — what the house runs on at boot.
 
 <<~/ahu >>
-
 
 <<~ ahu #house-law >>
 
@@ -399,7 +397,6 @@ payload = { priority = "support", retain = false }
 <<~ loulou lar:///LARES >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

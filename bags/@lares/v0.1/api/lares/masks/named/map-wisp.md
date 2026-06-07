@@ -44,7 +44,6 @@ Permanent identity home for Map-Wisp.
 
 <<~/ahu >>
 
-
 <<~ ahu #entry >>
 
 <<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
@@ -59,7 +58,6 @@ label = "parent-index-entry"
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #corpus >>
 
@@ -172,7 +170,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

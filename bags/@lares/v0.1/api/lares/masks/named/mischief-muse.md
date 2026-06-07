@@ -44,7 +44,6 @@ Permanent identity home for Mischief-Muse. The Voice house entry carries structu
 
 <<~/ahu >>
 
-
 <<~ ahu #entry >>
 
 <<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
@@ -59,7 +58,6 @@ label = "parent-index-entry"
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #corpus >>
 
@@ -206,7 +204,6 @@ These notes require live session observation before they can be written with con
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~ pranala #coffee-oracle-witness ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle family:reference role:witness >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

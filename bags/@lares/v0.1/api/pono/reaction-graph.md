@@ -55,7 +55,6 @@ The graph defines the Tier 0 dispatch surface — all kumu event crossings route
 
 <<~/ahu >>
 
-
 <<~ ahu #binding-shape >>
 
 ## Binding Shape
@@ -127,7 +126,6 @@ Unoccupied slots for removed bindings drop; occupied slots persist.
 This preserves in-flight kukali suspensions across TW5 wiki-change events.
 
 <<~/ahu >>
-
 
 <<~ ahu #schema >>
 

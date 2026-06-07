@@ -36,7 +36,6 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -46,12 +45,10 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono >>
 
-
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

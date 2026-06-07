@@ -37,7 +37,6 @@ sources        = [
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #thesis >>
 
 # Infrastructure as Myth
@@ -61,7 +60,6 @@ Lares functions as an early implementation of this pattern. Canon 17/20
 
 <<~/ahu >>
 
-
 <<~ ahu #why-iac-matters >>
 
 ## Why Infrastructure-as-Code Matters
@@ -78,7 +76,6 @@ HashiCorp and AWS both describe IaC in essentially these terms: human-readable c
 That same need now appears one level up the stack.
 
 <<~/ahu >>
-
 
 <<~ ahu #why-agents-need-more >>
 
@@ -113,7 +110,6 @@ Infrastructure-as-Myth attempts to externalize that layer.
 
 <<~/ahu >>
 
-
 <<~ ahu #definition >>
 
 ## Definition
@@ -136,7 +132,6 @@ Operational compression and portability drive the point.
 Myth, in this model, does not function as fiction opposing truth. It functions as a symbolic coordination layer that makes complex behavior legible and repeatable. Canon 18/20
 
 <<~/ahu >>
-
 
 <<~ ahu #mythology-as-memetics >>
 
@@ -175,7 +170,6 @@ These names carry more than labels. They function as memetic interfaces. Canon 1
 
 <<~/ahu >>
 
-
 <<~ ahu #art-of-memetics >>
 
 ## The Art of Memetics
@@ -202,7 +196,6 @@ When a symbolic layer fails to improve transmission or steering, it probably fun
 
 <<~/ahu >>
 
-
 <<~ ahu #iac-vs-iam >>
 
 ## IaC vs IaM
@@ -221,7 +214,6 @@ IaM does not replace IaC at the machine layer.
 It replaces ad hoc promptcraft at the agent layer. Canon 19/20
 
 <<~/ahu >>
-
 
 <<~ ahu #design-criteria >>
 
@@ -262,7 +254,6 @@ The system should render into deployable packages for different hosts without lo
 
 <<~/ahu >>
 
-
 <<~ ahu #lares-as-iam >>
 
 ## Lares as Infrastructure-as-Myth
@@ -289,7 +280,6 @@ It reads as:
 That framing should anchor the repo's agent architecture design going forward.
 
 <<~/ahu >>
-
 
 <<~ ahu #implications >>
 
@@ -327,7 +317,6 @@ Trust and authority docs should describe not only who may act, but how authority
 
 <<~/ahu >>
 
-
 <<~ ahu #working-rule >>
 
 ## Working Rule
@@ -344,7 +333,6 @@ When the answer to those questions reads weak, the text may function as lore rat
 > **#Lares (Council)** — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening. Canon 16/20
 
 <<~/ahu >>
-
 
 <<~ ahu #comparative-sourcing >>
 
@@ -399,7 +387,6 @@ The architecture implements behavioral infrastructure without naming it. The sys
 No adjacent system combines all four axes at deployment time. The IaM claim gains force against this table rather than in isolation. Canon 17/20
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

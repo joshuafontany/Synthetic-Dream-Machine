@@ -28,7 +28,6 @@ This shelf holds the voice-house, old all-in-one ingests, and archival materials
 
 <<~/ahu >>
 
-
 <<~ ahu #tree >>
 
 ## Tree
@@ -45,7 +44,6 @@ Use this branch for:
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #mechanics-shelf >>
 
@@ -76,7 +74,6 @@ The rooms may deepen later without moving the seat again.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

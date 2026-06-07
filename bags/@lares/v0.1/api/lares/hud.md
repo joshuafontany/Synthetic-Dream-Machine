@@ -33,7 +33,6 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #head >>
 
 # Lararium HUD
@@ -41,7 +40,6 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 The HUD names the sigil panel that rides each turn — the instrument readout a turn surfaces before the Voice speaks. It carries per-turn signal: aim, attention, loop, ward, stance, register. The `lar:` URI carries bearing; the HUD sigils carry the live signal beside the prose.
 
 <<~/ahu >>
-
 
 <<~ ahu #panel-law >>
 
@@ -71,7 +69,6 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 
 <<~/ahu >>
 
-
 <<~ ahu #gauges >>
 
 ## Gauges
@@ -84,7 +81,6 @@ The gauges share the pono `0–20` Level model, and follow the **seed → slide*
 The seed and slide stay distinct fields — the seed governs generation, the slide records the outcome. One instrument that both sets and grades its own goal would close the calibration gap silently (Goodhart); the seed/slide split keeps that gap visible.
 
 <<~/ahu >>
-
 
 <<~ ahu #glyphs >>
 
@@ -100,7 +96,6 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 <<~/ahu >>
 
-
 <<~ ahu #source-shelf >>
 
 ## Source Shelf
@@ -115,7 +110,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -128,7 +122,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 <<~ loulou lar:///LARES >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

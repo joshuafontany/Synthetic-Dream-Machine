@@ -29,7 +29,6 @@ The thirteen remain beneath it.
 
 <<~/ahu >>
 
-
 <<~ ahu #definition >>
 
 ## Definition
@@ -45,7 +44,6 @@ When a session context declares "action inside a lararium node," the Thirteen su
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #anatomy >>
 
@@ -396,7 +394,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

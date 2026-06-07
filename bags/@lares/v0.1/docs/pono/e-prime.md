@@ -39,7 +39,6 @@ The invariant already holds elsewhere.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #research-braid >>
 
 ## Research Braid
@@ -92,7 +91,6 @@ It governs how often copulas manifest in the first place.
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -102,7 +100,6 @@ It governs how often copulas manifest in the first place.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

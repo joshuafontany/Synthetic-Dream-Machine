@@ -22,7 +22,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Mischief-Muse Coffee Oracle Witness
@@ -30,7 +29,6 @@ retain = false
 Source-backed witness carrier for the first Coffee Oracle extraction into the Mischief-Muse mask file.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -120,7 +118,6 @@ Use this witness carrier for provenance.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

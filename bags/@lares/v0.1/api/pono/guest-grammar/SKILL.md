@@ -55,7 +55,6 @@ Keep these points active when the skill loads:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #workflow-contract >>
 
 ## Workflow Contract
@@ -236,7 +235,6 @@ Aftermath — close by naming:
 - what still lacks a lawful downstream home
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

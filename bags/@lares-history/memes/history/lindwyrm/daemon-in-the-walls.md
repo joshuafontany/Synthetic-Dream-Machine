@@ -22,7 +22,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — The Daemon in the Walls
@@ -31,7 +30,6 @@ Act II.
 The first resonance error becomes a green, wobbly teacher.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -218,7 +216,6 @@ Act III receives:
 <<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/two-axes-and-the-hoard family:relation role:precedes >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

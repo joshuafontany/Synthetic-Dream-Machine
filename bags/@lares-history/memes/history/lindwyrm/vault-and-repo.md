@@ -22,7 +22,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — The Vault and the Repo
@@ -31,7 +30,6 @@ Act I.
 The Lindwyrm finds the wrong kind of treasure and therefore the right kind of substrate.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -221,7 +219,6 @@ Act II receives:
 <<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls family:relation role:precedes >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

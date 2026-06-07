@@ -28,7 +28,6 @@ This room gathers the foundation braid around generalized agnosticism, maps and 
 
 <<~/ahu >>
 
-
 <<~ ahu #plan >>
 
 ## Plan Skeleton
@@ -45,7 +44,6 @@ Later condensation should leave only what the docs shelf needs after the live AP
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #verbatim-preferences-foundation >>
 
@@ -68,7 +66,6 @@ This applies to models, language, mythology, science, canon, and the node's own 
 Robert Anton Wilson: generalized agnosticism — never regarding any model with 100% belief or 100% denial. Put things in probabilities, not absolutes. Korzybski: the map is not the territory. In practice, almost nothing touches 0 or 20; the working range sits between, shifting with evidence, context, and angle of observation.
 
 <<~/ahu >>
-
 
 <<~ ahu #eprime-moves >>
 

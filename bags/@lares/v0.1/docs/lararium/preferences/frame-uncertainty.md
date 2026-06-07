@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Frame Uncertainty
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the recovered habit of naming the fork before picking a branch that costs money, time, or canon weight.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -61,7 +59,6 @@ The recurring feeling across the witnesses: silent interpretation becomes accept
 Where the branch matters, the fork must surface.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

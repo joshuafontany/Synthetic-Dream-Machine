@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Degraded Node States
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the old stack's habit of naming failure modes so they can be recognized before they become identity.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -71,7 +69,6 @@ This room sits behind several current smaller invariants, especially the E-Prime
 A fuller future recovery may sort the old failure lexicon by domain.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

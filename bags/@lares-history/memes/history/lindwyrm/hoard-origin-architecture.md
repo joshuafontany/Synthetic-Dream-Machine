@@ -21,7 +21,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — Origin Architecture
@@ -30,7 +29,6 @@ Seven-act braid for the Lindwyrm hoard story.
 This locus carries the story map, act status, crossing threads, and drafting constraints.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -262,7 +260,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 <<~ pranala #frames-act-vii ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:relation role:companion >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

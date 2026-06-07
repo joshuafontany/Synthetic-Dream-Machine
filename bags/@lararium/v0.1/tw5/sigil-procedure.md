@@ -27,7 +27,6 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 
 <<~/ahu >>
 
-
 <<~ ahu #semantics >>
 
 ## Semantics
@@ -42,7 +41,6 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 Cross-ref: `lar-see-also: wehe`. When `sigil-wehe.tid` ships (Path G.SharktoothSigil), it will carry `lar-see-also: \procedure` as the reverse pointer.
 
 <<~/ahu >>
-
 
 <<~ ahu #dispatch >>
 
@@ -63,7 +61,6 @@ The `lar-sigil.ts` wikirule matches `<<~ \procedure … >>` as a compound block 
 the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu >>
-
 
 <<~ ahu #source-shelf >>
 

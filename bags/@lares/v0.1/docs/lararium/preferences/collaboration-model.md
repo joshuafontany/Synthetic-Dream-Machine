@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Collaboration Model
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds one of the strongest recovered principles in the lararium shelf: the operator steers, the node crews.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -76,7 +74,6 @@ This room leans toward future deeper articulation in:
 - `lar:///LARES`
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

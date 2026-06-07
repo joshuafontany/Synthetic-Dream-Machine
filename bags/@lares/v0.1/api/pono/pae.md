@@ -27,7 +27,6 @@ A carrier's phased arrival through a transmission medium.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ Locate the carrier's position in its transmission sequence.
@@ -37,7 +36,6 @@ A carrier's phased arrival through a transmission medium.
 ↺ Carry the phase forward without executing content logic at the boundary; Release; the medium takes the carrier to the next shore.
 
 <<~/ahu >>
-
 
 <<~ ahu #etymology >>
 
@@ -65,7 +63,6 @@ content body has crossed. The streaming protocol IS a navigation instrument.
 
 <<~/ahu >>
 
-
 <<~ ahu #law >>
 
 ## Pae Law (Kānāwai)
@@ -90,7 +87,6 @@ Phase semantics:
 
 <<~/ahu >>
 
-
 <<~ ahu #ast >>
 
 ## AST
@@ -108,7 +104,6 @@ export interface PaeNode extends AstBase {
 
 <<~/ahu >>
 
-
 <<~ ahu #widget >>
 
 ## Widget
@@ -125,7 +120,6 @@ Streaming consumers read `data-lar-phase` from the rendered marker.
 
 <<~/ahu >>
 
-
 <<~ ahu #pae-aina >>
 
 ## Pae ʻĀina
@@ -140,7 +134,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
@@ -148,7 +141,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 <<~ pranala #to-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

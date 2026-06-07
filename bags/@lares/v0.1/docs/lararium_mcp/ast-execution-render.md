@@ -35,7 +35,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #stack >>
 ## Four-Layer Stack
 
@@ -219,7 +218,6 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 - Guest grammar admission should stay narrow until tests cover filter feature subsets.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

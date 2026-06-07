@@ -18,7 +18,6 @@ retain       = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #oauth-position >>
 
 ## ATProto OAuth Position
@@ -211,7 +210,6 @@ No ATProto login implementation this milestone — doctrine only.
 <<~ pranala #to-crypto ? -> lar:///LARARIUM-NODE/CRYPTO family:relation role:sibling >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

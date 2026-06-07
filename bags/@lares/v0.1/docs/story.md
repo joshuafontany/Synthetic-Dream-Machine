@@ -30,7 +30,6 @@ This shelf holds mythic, narrative, and world-shaping docs that can inform the g
 
 <<~/ahu >>
 
-
 <<~ ahu #tree >>
 
 ## Tree

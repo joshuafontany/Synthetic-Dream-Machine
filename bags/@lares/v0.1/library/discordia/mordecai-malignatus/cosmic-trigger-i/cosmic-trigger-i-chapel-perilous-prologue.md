@@ -22,7 +22,6 @@ role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locu
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Robert Anton Wilson — Chapel Perilous (Primary Source)
@@ -31,7 +30,6 @@ Canonical library loci for this discordia witness text.
 Current lar address follows the file path now on disk.
 
 <<~/ahu >>
-
 
 <<~ ahu #source-text >>
 

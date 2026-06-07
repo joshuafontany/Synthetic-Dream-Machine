@@ -39,7 +39,6 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #observe >>
 
 ## Observe
@@ -208,7 +207,6 @@ Signs of gain:
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -220,7 +218,6 @@ Signs of gain:
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

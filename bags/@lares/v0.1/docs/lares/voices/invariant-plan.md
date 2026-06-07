@@ -31,7 +31,6 @@ The three spec rooms define the contract. This plan defines the write.
 
 <<~/ahu >>
 
-
 <<~ ahu #sources >>
 
 ## Sources
@@ -51,7 +50,6 @@ Current target:
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #observe >>
 
@@ -274,7 +272,6 @@ Multi-mask composability now in base spec. No longer deferred.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

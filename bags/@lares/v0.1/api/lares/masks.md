@@ -32,7 +32,6 @@ Grammar and stacking law defined in `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voic
 
 <<~/ahu >>
 
-
 <<~ ahu #entry >>
 
 <<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#mask-layer >>
@@ -47,7 +46,6 @@ label = "parent-index-entry"
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #taxonomy >>
 
@@ -127,7 +125,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

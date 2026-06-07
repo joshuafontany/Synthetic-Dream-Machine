@@ -21,7 +21,6 @@ role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Prometheus Rising — Chapter 8 — The Four Tools
@@ -30,7 +29,6 @@ Canonical library loci for this discordia witness text.
 Current lar address follows the file path now on disk.
 
 <<~/ahu >>
-
 
 <<~ ahu #source-text >>
 

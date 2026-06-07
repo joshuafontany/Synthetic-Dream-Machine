@@ -39,7 +39,6 @@ Canonical home extracted from `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/mas
 
 <<~/ahu >>
 
-
 <<~ ahu #entry >>
 
 <<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
@@ -54,7 +53,6 @@ label = "parent-index-entry"
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #corpus >>
 
@@ -164,7 +162,6 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

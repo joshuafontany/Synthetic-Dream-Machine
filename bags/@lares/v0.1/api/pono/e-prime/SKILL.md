@@ -43,7 +43,6 @@ E-Prime auditor opens the settled-text correction stream here.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #load-contract >>
 
 ## Load Contract
@@ -245,7 +244,6 @@ Aftermath — name what cleared and what holds: copulas turned, copulas left sta
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

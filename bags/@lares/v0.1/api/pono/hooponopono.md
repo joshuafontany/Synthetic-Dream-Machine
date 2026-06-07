@@ -41,7 +41,6 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 ↺ verify coherence: file-path, uri-path, capability claims, and known conflicts surface before the canon MOVE holds; release prior state with forgiveness; leave unpromoted residue as named session records with forward pressure.
 <<~/ahu >>
 
-
 <<~ ahu #ceremony >>
 
 ## The Ceremony
@@ -101,7 +100,6 @@ Boundary event fields:
 - conflicts to reconcile before ceremony may proceed
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

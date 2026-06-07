@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Guest Grammar — Extended Docs
@@ -30,7 +29,6 @@ Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar`.
 This surface carries examples, ownership notes, and split residue.
 
 <<~/ahu >>
-
 
 <<~ ahu #ownership-notes >>
 
@@ -89,7 +87,6 @@ The current shape keeps:
 - extended guidance here
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Operating Modes
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the old mode grammar as recovered operational pressure.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -76,7 +74,6 @@ The live invariants now keep the loop and Level law small.
 This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

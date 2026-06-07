@@ -29,7 +29,6 @@ This meme holds cross-layer architecture law and the canonical Voice house spec 
 
 <<~/ahu >>
 
-
 <<~ ahu #architecture >>
 
 ## Architecture
@@ -40,7 +39,6 @@ Lower layers remain load-bearing when higher layers are absent.
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #three-layer-model >>
 
@@ -247,7 +245,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
 <<~ pranala #hud-exchange-protocol ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:see >>
 <<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

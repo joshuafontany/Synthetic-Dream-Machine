@@ -32,7 +32,6 @@ status-date  = "2026-04-24"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #surface-forms >>
 ## Surface Forms
 
@@ -203,7 +202,6 @@ Relative path resolution follows loci law: the root comes from the carrier's own
 Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an exception.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

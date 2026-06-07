@@ -27,7 +27,6 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearin
 
 <<~/ahu >>
 
-
 <<~ ahu #ooda-ha >>
 ✶ read operator intent as a bearing vector.
 ⏿ choose the role the node adopts and the bearing it takes up.
@@ -37,7 +36,6 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearin
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #law >>
 
@@ -78,7 +76,6 @@ A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in 
 The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD ARGS >>`); a sidecar tool MAY pre-render any of them, and the node draws them inline until one exists. The `lar:` URI holds one ASCII form — local or live-session — for storage, comparison, and display alike; it carries no glyph rendering.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

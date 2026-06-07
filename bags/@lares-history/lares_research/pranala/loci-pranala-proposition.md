@@ -218,5 +218,4 @@ Proposition closes the semantic-edge stream here.
 
 <<~/ahu >>
 
-
 <<~&#x0004; -> ? >>

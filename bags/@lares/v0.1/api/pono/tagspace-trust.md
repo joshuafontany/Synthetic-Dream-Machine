@@ -29,7 +29,6 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 
 <<~/ahu >>
 
-
 <<~ ahu #ooda-ha >>
 ✶ read the URI authority, path, query signal, and carrier source before trust assignment.
 ⏿ separate hostless canonical memes from hostful exchange records from data memes without merging their force.
@@ -39,7 +38,6 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #law >>
 
@@ -73,7 +71,6 @@ This list expresses default trust pressure, not an absolute metaphysical ranking
 Explicit operator-mediated promotion MAY move content upward by creating or revising the appropriate hostless meme.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

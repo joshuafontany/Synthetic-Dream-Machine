@@ -32,7 +32,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #required-core >>
 ## Required-Core Closure
 
@@ -151,7 +150,6 @@ Minimal boot should remain small enough to avoid compaction.
 - MemPalace persistence of boot receipts remains policy-gated until write lanes receive approval law.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

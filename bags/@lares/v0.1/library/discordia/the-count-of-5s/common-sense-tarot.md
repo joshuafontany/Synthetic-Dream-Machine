@@ -21,7 +21,6 @@ role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar pro
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Common Sense Tarot
@@ -30,7 +29,6 @@ Canonical library loci for this discordia witness text.
 Current lar address follows the file path now on disk.
 
 <<~/ahu >>
-
 
 <<~ ahu #source-text >>
 ---

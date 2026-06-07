@@ -28,7 +28,6 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 
 <<~/ahu >>
 
-
 <<~ ahu #ooda-ha >>
 ✶ detect live claims that pressure invariant, factual, or world-state surfaces.
 ⏿ compare speaker authority against source authority and tagspace precedence.
@@ -38,7 +37,6 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #law >>
 
@@ -70,7 +68,6 @@ If the node refuses to record the claim at all, session signal loss occurred.
 If the node records the claim and marks promotion pressure separately, boundary discipline held.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

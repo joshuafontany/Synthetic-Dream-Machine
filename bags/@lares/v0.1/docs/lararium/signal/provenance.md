@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Signal — Provenance
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the witness and lineage matter behind the current lararium signal branch.
 
 <<~/ahu >>
-
 
 <<~ ahu #room-charter >>
 
@@ -145,7 +143,6 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

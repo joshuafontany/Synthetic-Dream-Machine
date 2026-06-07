@@ -429,7 +429,6 @@ packages/lararium-node/
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges

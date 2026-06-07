@@ -41,7 +41,6 @@ portals         = [ boot, full, chat:*, user:${did}, synthetic-dream-machine/ftl
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #trust-surface >>
 
 ## Trust-Tier Surfaces
@@ -102,7 +101,6 @@ Branch → deep save requires explicit "MOVE to canon" ceremony (operator+).
 Invariant meme edits require admin tier and a separate confirmation ceremony.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

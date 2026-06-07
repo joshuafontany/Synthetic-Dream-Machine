@@ -41,7 +41,6 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu >>
 
-
 <<~ ahu #kapu-law >>
 
 ## Kapu Law
@@ -120,7 +119,6 @@ This meme governs the kapu rating and above-namespace trust law.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/tagspace-trust >>
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

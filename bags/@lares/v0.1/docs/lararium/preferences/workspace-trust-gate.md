@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Workspace Trust Gate
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds a specific recovered operational principle: trust should checkpoint before execution crosses into costly or irreversible territory.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -62,7 +60,6 @@ Identity explains who may ask.
 The workspace trust gate explains when the node must pause anyway.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

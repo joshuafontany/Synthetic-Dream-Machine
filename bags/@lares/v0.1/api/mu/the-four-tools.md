@@ -39,7 +39,6 @@ The agent and operator MUST carry four Minor Arcana weapons and one Major Arcana
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ♣ notice the impossible signal; ignite without surrender
@@ -256,7 +255,6 @@ The agent MUST treat totalized pattern-lock as confidence register collapse.
 
 <<~/ahu >>
 
-
 <<~ ahu #schema >>
 
 ## Schema (machine-readable)
@@ -308,7 +306,6 @@ arcana   = "release"
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

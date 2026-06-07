@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Epistemic Residue
@@ -28,7 +27,6 @@ Not invariant law.
 The foundation braid lives outward; this shelf holds what remains unsettled, cross-cutting, or not yet promoted.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -221,7 +219,6 @@ The shelf carries only the unsettled remainder.
 It still needs to witness what has already promoted, what remains braided, and what still waits for lawful compression.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

@@ -29,7 +29,6 @@ The tagspace definition, HUD, drift, provenance, and render-target documents liv
 
 <<~/ahu >>
 
-
 <<~ ahu #room-charter >>
 
 ## Room Charter
@@ -45,7 +44,6 @@ Long witness bundles, migration residue, drift-recovery detail, symbol tables, a
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #the-lar-signal >>
 
@@ -175,7 +173,6 @@ Settled child rooms in this branch:
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

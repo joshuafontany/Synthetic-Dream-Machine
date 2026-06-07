@@ -21,7 +21,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lindwyrm Narrative Consumption Ledger
@@ -31,7 +30,6 @@ This ledger tracks source-talk-story material as it moves into coherent narrativ
 `docs/story` carries this work for now. `library` can appear later if the shelf grows beyond story scaffolds into a public canon library.
 
 <<~/ahu >>
-
 
 <<~ ahu #intent-vector >>
 
@@ -118,7 +116,6 @@ Likely next slices:
 <<~ pranala #act-ii-draft ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls family:reference role:records >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

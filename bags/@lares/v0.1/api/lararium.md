@@ -34,7 +34,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~/ahu >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ receive threshold pressure; confirm entry edges bind.
@@ -46,7 +45,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #core-hydration >>
 
@@ -62,7 +60,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 <<~ pranala #hydrate-templates ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/templates/index family:control role:owns >>
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

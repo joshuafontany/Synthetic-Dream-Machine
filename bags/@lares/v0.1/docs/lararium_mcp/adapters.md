@@ -33,7 +33,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #adapter-interface >>
 ## Adapter Interface Contract
 
@@ -160,7 +159,6 @@ The following remain blocked until explicit policy lands:
 - any adapter tool whose effect persists outside the server process
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

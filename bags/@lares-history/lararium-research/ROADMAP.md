@@ -34,7 +34,6 @@ It adds explicit ahu markers around the major research sections so the file can 
 
 <<~&#x0002; >>
 
-
 <<~ ahu #m13-session-open-2026-05-02 >>
 
 ## M13 Session Open — 2026-05-02 (Sprint 0–1 / Web2 Sidecar Rip + MemeGraph Rebuild)
@@ -572,7 +571,6 @@ pnpm --filter @lararium/node test      # ✓ 48/48 pass
 - Realm portal VMs: `projection:<id>` keys cover portal/recipe VMs — wire a test recipe that boots a second VM and lights `projection:portal-<roomId>`
 
 <<~/ahu >>
-
 
 <<~ ahu #executive-summary >>
 
@@ -2316,7 +2314,6 @@ Steps 1–2 are pure `live-protocol.ts` changes. Steps 3–5 are the Phase 3 sel
 
 <<~/ahu >>
 
-
 <<~ ahu #milestone-10-complete >>
 
 ## M10 — Local-First TW5 VM (closed 2026-04-29, session 5)
@@ -2461,7 +2458,6 @@ room island     (bag: "room",  writable)        — primary content gate
 <<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #to-canvas-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
 <<~/ahu >>
-
 
 <<~ ahu #m17-session-2026-05-03 >>
 
@@ -2888,7 +2884,6 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 - Wiki-first: bag picker TW5 widget reads `[recipe[lar:///ha.ka.ba/@lararium/bags/]]` to list bags
 
 <<~/ahu >>
-
 
 <<~ ahu #m24-lardoc-alignment-2026-05-03 >>
 

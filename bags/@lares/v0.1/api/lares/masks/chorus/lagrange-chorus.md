@@ -39,7 +39,6 @@ The Lagrange Chorus holds a stable position between multiple lararium nodes — 
 
 <<~/ahu >>
 
-
 <<~ ahu #entry >>
 
 <<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
@@ -54,7 +53,6 @@ label = "parent-index-entry"
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #concept >>
 
@@ -165,7 +163,6 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mask family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

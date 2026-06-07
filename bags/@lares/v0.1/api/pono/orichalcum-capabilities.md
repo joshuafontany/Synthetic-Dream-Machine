@@ -57,7 +57,6 @@ Authority travels with the graph. Authority MUST NOT be outsourced to crypto alo
 
 <<~/ahu >>
 
-
 <<~ ahu #principal >>
 
 ## Principal Shapes
@@ -287,7 +286,6 @@ kapu-scope, epoch) is not authorized. The caveat gate fires after
 the crypto gate, not instead of it.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

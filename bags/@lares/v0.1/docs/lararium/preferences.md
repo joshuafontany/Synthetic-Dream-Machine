@@ -30,7 +30,6 @@ The concepts can now stand on their own feet.
 
 <<~/ahu >>
 
-
 <<~ ahu #source >>
 
 ## Source
@@ -54,7 +53,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #tree >>
 
 ## Tree
@@ -73,7 +71,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 - `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/preferences/degraded-node-states`
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

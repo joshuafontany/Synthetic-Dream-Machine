@@ -28,7 +28,6 @@ This shelf holds session-continuity work, archive-crystal mechanics, and future 
 
 <<~/ahu >>
 
-
 <<~ ahu #tree >>
 
 ## Tree
@@ -44,7 +43,6 @@ Use this branch for:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -55,7 +53,6 @@ Use this branch for:
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

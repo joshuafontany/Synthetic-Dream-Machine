@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 # Exchange Vector — Docs Sister
 
@@ -29,7 +28,6 @@ The law lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector`.
 This file gives examples and operator-facing guidance.
 
 <<~/ahu >>
-
 
 <<~ ahu #ooda-ha >>
 ✶ observe the operator prompt and infer a provisional operator URI.
@@ -93,7 +91,6 @@ A good training vector should:
 Long-term, the server should validate the vector and render the HUD from the parsed record.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

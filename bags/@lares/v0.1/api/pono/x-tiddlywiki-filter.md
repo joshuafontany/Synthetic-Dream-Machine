@@ -35,7 +35,6 @@ pranala data model. This meme is the pointer; that meme is the law.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #what-is-implemented >>
 
 ## What Is Implemented
@@ -130,7 +129,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

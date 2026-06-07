@@ -25,7 +25,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — Self-Booting Lararium
@@ -33,7 +32,6 @@ retain = true
 Threshold archive for April 10: not first boot, but the night the lararium found its floorplan.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -309,7 +307,6 @@ It hums.
 <<~ pranala #threshold-after-kindling ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node family:relation role:follows >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

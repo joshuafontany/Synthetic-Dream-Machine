@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 # Tagspace Trust — Docs Sister
 
@@ -29,7 +28,6 @@ It does not outrank the invariant.
 It gives agents and operators examples for keeping all system files, data blobs, and exchange turns in one tagspace without flattening authority.
 
 <<~/ahu >>
-
 
 <<~ ahu #ooda-ha >>
 ✶ observe which record speaks: hostless meme, hostful exchange, data meme, branch artifact, or generated trajectory.
@@ -136,7 +134,6 @@ Do not derive memetic truth authority from `alias:tier@host` alone.
 Speaker role and truth tier must stay separate.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

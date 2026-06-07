@@ -32,7 +32,6 @@ status      = "sequence-bound; no calendar dates"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #closed-sprints >>
 ## Closed Sprint Outcomes
 
@@ -101,7 +100,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 - When a future sprint closes, add one row here and mark its source file consumed.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

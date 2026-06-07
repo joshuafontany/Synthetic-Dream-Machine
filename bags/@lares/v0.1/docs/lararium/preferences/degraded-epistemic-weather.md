@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Degraded Epistemic Weather — Staging Shelf
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the old failure-language that names how epistemic discipline decays in practice.
 
 <<~/ahu >>
-
 
 <<~ ahu #plan >>
 
@@ -67,7 +65,6 @@ Current comparison surfaces:
 **Overclosure** *(premature convergence)* — collapsing open questions before the operator has steered. Offer readings; don't foreclose.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

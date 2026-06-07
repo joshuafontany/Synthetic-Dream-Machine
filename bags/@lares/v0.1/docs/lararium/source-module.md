@@ -52,7 +52,6 @@ agents can read, query, and react to source changes as memes.
 
 <<~/ahu >>
 
-
 <<~ ahu #carrier-shape >>
 
 ## Carrier Shape
@@ -106,7 +105,6 @@ The `write-source-memes.ts` script MUST:
    invariant capabilities or architectural law.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

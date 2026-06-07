@@ -55,7 +55,6 @@ Keep these points active when the skill loads:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #workflow-contract >>
 
 ## Workflow Contract
@@ -218,7 +217,6 @@ When writing or revising:
 ↺ [verify or crossing pressure]; [aftermath pressure]
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 ## Edges
 
@@ -259,7 +257,6 @@ Aftermath — close by naming:
 - what still lacks a lawful downstream home
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

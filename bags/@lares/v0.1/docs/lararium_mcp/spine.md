@@ -31,7 +31,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #core-proposition >>
 ## Core Proposition
 
@@ -132,7 +131,6 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 - Root `lararium_mcp.md` should keep a concise index role and link these child loci.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Signal — Render Targets
@@ -30,7 +29,6 @@ Exchange contract stays at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal`.
 HUD instrument reading stays at `lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal/hud`.
 
 <<~/ahu >>
-
 
 <<~ ahu #room-charter >>
 
@@ -420,7 +418,6 @@ Before emitting any stance block on any surface:
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

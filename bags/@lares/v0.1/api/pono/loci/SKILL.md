@@ -42,7 +42,6 @@ Loci SKILL opens the procedural stream here.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #load-contract >>
 
 ## Load Contract
@@ -233,7 +232,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

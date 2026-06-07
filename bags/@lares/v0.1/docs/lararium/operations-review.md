@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #provenance >>
 
 ```toml
@@ -49,7 +48,6 @@ Everything else in the legacy `Lares_Preferences.system-prompt.md` operational s
 undergoes inventory and classification here.
 
 <<~/ahu >>
-
 
 <<~ ahu #observe >>
 
@@ -300,7 +298,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

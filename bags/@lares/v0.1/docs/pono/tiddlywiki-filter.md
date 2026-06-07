@@ -115,7 +115,6 @@ result-shape = "set"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #guidance >>
 
 ## Guidance
@@ -153,7 +152,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -163,7 +161,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

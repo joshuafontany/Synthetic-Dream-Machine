@@ -55,7 +55,6 @@ Keep these points active when the skill loads:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #workflow-contract >>
 
 ## Workflow Contract
@@ -222,7 +221,6 @@ Aftermath — close by naming:
 If parser or render-pipeline law still lacks its own stable carrier, leave the boundary explicit and the residue honest.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

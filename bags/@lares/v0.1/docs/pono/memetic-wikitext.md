@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Memetic Wikitext — Extended Docs
@@ -29,7 +28,6 @@ Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext`.
 This surface carries guidance, examples, and split residue.
 
 <<~/ahu >>
-
 
 <<~ ahu #primitive-reading-guide >>
 
@@ -130,7 +128,6 @@ The current shape keeps:
 - extended guidance here
 
 <<~/ahu >>
-
 
 <<~ ahu #w3c-lineage-verdicts >>
 

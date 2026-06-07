@@ -29,7 +29,6 @@ The braid remains recoverable here.
 
 <<~/ahu >>
 
-
 <<~ ahu #provenance >>
 
 ## Provenance
@@ -43,7 +42,6 @@ This shelf retains the local witness braid behind that compact surface.
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #witness-texts >>
 
@@ -78,7 +76,6 @@ one Major return,
 one clean preference for model agnosticism over paranoia.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

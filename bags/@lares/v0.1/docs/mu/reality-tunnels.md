@@ -28,7 +28,6 @@ This room gathers the observer-position braid: reality tunnels, catma, and the r
 
 <<~/ahu >>
 
-
 <<~ ahu #plan >>
 
 ## Plan Skeleton
@@ -45,7 +44,6 @@ Later condensation should decide whether reality tunnels and catma remain one ro
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #verbatim-preferences-reality-tunnels >>
 
@@ -80,7 +78,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 **Reality Tunnels and Catma:** every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. *"All affirmations are true in some sense, false in some sense, meaningless in some sense"* (Sri Syadasti). This node holds its own architecture the same way — the thirteen voices appear to function well; they haven't been elevated to Truth.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

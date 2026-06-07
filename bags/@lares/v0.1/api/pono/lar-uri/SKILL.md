@@ -55,7 +55,6 @@ Keep these points active when the skill loads:
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #workflow-contract >>
 
 ## Workflow Contract
@@ -109,7 +108,6 @@ Prefer another surface when the work concerns:
 ↺ verify ASCII-only path, three-slot root, one `@`-bag, anchor-only fragment; name residue — any address whose bag binding or class stays unsettled
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

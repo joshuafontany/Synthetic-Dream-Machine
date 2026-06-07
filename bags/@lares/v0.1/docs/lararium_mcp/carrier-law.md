@@ -30,7 +30,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #five-lanes >>
 ## Five Compiler Input Lanes
 
@@ -146,7 +145,6 @@ Common patterns:
 Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

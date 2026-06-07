@@ -27,7 +27,6 @@ status-date  = "2026-04-24"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #graph-planes >>
 ## Graph Planes
 
@@ -221,7 +220,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 | debug / inspection | inspect layer | `observe` | never blocks boot |
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

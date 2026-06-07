@@ -51,7 +51,6 @@ Root path segments outside `\w\.\w\.\w` MAY NOT carry `loci`.
 
 <<~/ahu >>
 
-
 <<~ ahu #promotion-path >>
 
 ## Promotion Path
@@ -172,7 +171,6 @@ Convention fails when:
 - file-path evidence contradicts declared address, derived filepath, or promotion posture
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

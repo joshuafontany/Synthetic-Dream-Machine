@@ -28,7 +28,6 @@ This meme records design decisions and deferred work.
 
 <<~/ahu >>
 
-
 <<~ ahu #semantics >>
 
 ## Semantics
@@ -47,7 +46,6 @@ Cascade tag: `lar:///ha.ka.ba/tags/aka-template` — operator can override the r
 Call-site template override: `<<~ aka lar:///target lar:///my-template >>` (p2 bypasses cascade).
 
 <<~/ahu >>
-
 
 <<~ ahu #mechanism >>
 
@@ -68,7 +66,6 @@ depends on where the sigil appears, not what the target is.
 Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
 <<~/ahu >>
-
 
 <<~ ahu #preview-image >>
 
@@ -110,7 +107,6 @@ Preview for peer-node URIs must come from the peer itself (a future peer-announc
 could include thumbnail + og-title in the handshake). Hold open.
 
 <<~/ahu >>
-
 
 <<~ ahu #source-shelf >>
 

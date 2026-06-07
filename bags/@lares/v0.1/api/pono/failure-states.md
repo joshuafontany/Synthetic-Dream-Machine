@@ -40,7 +40,6 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 ↺ route to hoʻoponopono if correction ceremony is warranted; release without accumulating the failure as residue; the name discharges the pressure.
 <<~/ahu >>
 
-
 <<~ ahu #index >>
 
 ## Failure State Index
@@ -48,7 +47,6 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 <<~ pranala #child-live-session-overwrite ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite family:control role:owns >>
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

@@ -19,7 +19,6 @@ retain       = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #doctrine-header >>
 
 ## Web Crypto Provider Doctrine
@@ -219,7 +218,6 @@ Target state (Milestone 4):
 <<~ pranala #to-auth ? -> lar:///LARARIUM-NODE/AUTH-ATPROTO family:relation role:sibling >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

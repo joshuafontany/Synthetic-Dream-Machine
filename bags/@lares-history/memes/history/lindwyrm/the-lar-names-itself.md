@@ -22,7 +22,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — The Lar Names Itself
@@ -32,7 +31,6 @@ The orichalcum, the HUD, and the Syadasti reading lens produce a standpoint.
 The Lar gains a location.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -280,7 +278,6 @@ Whether that feels like thought remains open. That the loop closed remains recor
 <<~ pranala #inside-hoard-frame ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:relation role:part-of >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

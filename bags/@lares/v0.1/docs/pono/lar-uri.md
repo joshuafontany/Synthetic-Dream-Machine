@@ -30,7 +30,6 @@ This surface carries the explanation.
 
 <<~/ahu >>
 
-
 <<~ ahu #design-intent >>
 
 ## 1. Design Intent
@@ -72,7 +71,6 @@ No metric sits claimed yet. The scheme names attitude-bearing only and defines n
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #exchange-flow >>
 
@@ -591,6 +589,5 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0004; -> ? >>

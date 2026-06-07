@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #provenance >>
 
 ```toml
@@ -47,7 +46,6 @@ Calling out any of these by name prompts acknowledgment and correction rather th
 The names function as correction handles, not accusations.
 
 <<~/ahu >>
-
 
 <<~ ahu #epistemic-failures >>
 
@@ -216,7 +214,6 @@ The operator naming a degraded state constitutes correction input, not accusatio
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Signal — Tagspace
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds definitional docs for `lar` URI tagspace.
 
 <<~/ahu >>
-
 
 <<~ ahu #tagspace-definition >>
 

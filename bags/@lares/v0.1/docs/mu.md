@@ -28,7 +28,6 @@ This shelf holds interpretive docs, witness bundles, and condensed research behi
 
 <<~/ahu >>
 
-
 <<~ ahu #tree >>
 
 ## Tree
@@ -44,7 +43,6 @@ Use this branch for:
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #sigil-arrival >>
 
@@ -76,7 +74,6 @@ AST reader: read the sockets, then route.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

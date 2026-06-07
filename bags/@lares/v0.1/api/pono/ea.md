@@ -33,7 +33,6 @@ On the DreamNet, any entity that holds its own CRDT state, owns its own timing, 
 
 <<~/ahu >>
 
-
 <<~ ahu #doctrine >>
 
 ## Doctrine
@@ -49,7 +48,6 @@ Three conditions for `ea`:
 When all three hold, the island may emit `ea` — the sovereignty declaration that signals readiness to the wider mesh.
 
 <<~/ahu >>
-
 
 <<~ ahu #protocol >>
 
@@ -75,7 +73,6 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 
 <<~/ahu >>
 
-
 <<~ ahu #scope >>
 
 ## Scope — What Can Declare Ea
@@ -93,7 +90,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 
 <<~/ahu >>
 
-
 <<~ ahu #contrast >>
 
 ## Contrast — What Ea Does Not Mean
@@ -103,7 +99,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 - **Not a MOVE.** `MOVE` (and its residency ACTION siblings) in the lararium ontology means moving data between bags, gated by the capability ladder. `ea` names the island's birth, not a data migration.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 
@@ -115,7 +110,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

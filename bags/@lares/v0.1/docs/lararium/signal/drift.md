@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Signal — Drift
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds mismatch-recovery pressure where declared signal diverges from actual output.
 
 <<~/ahu >>
-
 
 <<~ ahu #room-charter >>
 
@@ -64,7 +62,6 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/@lares/v0
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

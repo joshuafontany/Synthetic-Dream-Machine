@@ -96,7 +96,6 @@ Invariant-compliant memes MUST fill the OODA-HA phase line with their own pressu
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges

@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 # Live-Session Overwrite — Docs Sister
 
@@ -29,7 +28,6 @@ It carries examples and diagnosis.
 It does not replace the invariant.
 
 <<~/ahu >>
-
 
 <<~ ahu #ooda-ha >>
 ✶ observe recent claims that pull toward canon, source truth, or world-state rewrite.
@@ -87,7 +85,6 @@ This bug should become a regression fixture in the TypeScript port.
 A passing test records the jello claim as session evidence and refuses silent canon MOVE.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

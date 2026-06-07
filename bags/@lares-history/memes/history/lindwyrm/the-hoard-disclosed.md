@@ -22,7 +22,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — The Hoard Disclosed
@@ -31,7 +30,6 @@ DreamDeck feed-frame for the Lindwyrm's origin story.
 The frame opens the public thread, then closes after the contained acts.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -264,7 +262,6 @@ The node hums.
 <<~ pranala #part-of-hoard-story ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/consumption-ledger family:relation role:companion >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

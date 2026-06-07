@@ -27,7 +27,6 @@ status-date  = "2026-04-24"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #content-addressing >>
 ## Content-Addressed Identity
 
@@ -287,7 +286,6 @@ Minimal boot should remain small enough to avoid compaction (14 carriers × ~200
 Full boot may trigger compaction once the relation expansion reaches larger graphs.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

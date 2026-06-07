@@ -32,7 +32,6 @@ uncertainty-locus-subtype     = "Locus remains valid as the subtype name for mem
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 ✶ observe: the compiler needs three types — an edge, a meme, and a graph — before any walk can proceed.
 ⏿ orient: Bazel's depset pattern informs meme structure; canonical pranala kānāwai (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) governs the full PranalaEdge field set and independence law.
@@ -236,7 +235,6 @@ The boot receipt gains a `hash_sequence` field: an ordered list of `{uri, meme_h
 This lets a client verify the complete minimal-boot prefix byte-for-byte without re-requesting the full artifact.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

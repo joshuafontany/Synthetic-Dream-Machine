@@ -35,7 +35,6 @@ status-date  = "2026-04-23"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #server-start >>
 ## Server Start
 
@@ -119,7 +118,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 - Clients with partial MCP support should call the read-only tools rather than receive weaker semantics.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

@@ -37,7 +37,6 @@ status-date  = "2026-04-24"
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #core-proposition >>
 
 ## Core Proposition
@@ -163,7 +162,6 @@ Phases 1, 3, and 4 may proceed independently.
 | Declared-unresolved relation edge does not fail compilation | `test_compiler.py::test_forward_ref_survives` |
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges

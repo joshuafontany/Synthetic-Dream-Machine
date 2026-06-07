@@ -42,7 +42,6 @@ Parser, render, and pono detail move outward.
 
 <<~/ahu >>
 
-
 <<~ ahu #admission-law >>
 
 ## Admission Law
@@ -121,7 +120,6 @@ A lawful guest region should still hand forward enough continuity for:
 Schema detail, fixture families, and execution procedure belong in the sidecars.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

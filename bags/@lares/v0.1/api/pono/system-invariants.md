@@ -22,7 +22,6 @@ retain      = true
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #head >>
 
 # System Invariants
@@ -38,7 +37,6 @@ Eight law clusters: MIND · ISLAND · AUTHORITY · CODEC · SYSTEM · PENTADIC �
 Named exceptions: CODEC_EXCEPTIONS.
 
 <<~/ahu >>
-
 
 <<~ ahu #mind-laws >>
 
@@ -67,7 +65,6 @@ desc  = "App shell serves from the Service Worker cache. Automerge islands hydra
 ```
 
 <<~/ahu >>
-
 
 <<~ ahu #island-laws >>
 
@@ -108,7 +105,6 @@ desc  = "Presence behaves like weather. Losing it MUST NOT damage memory. Presen
 
 <<~/ahu >>
 
-
 <<~ ahu #authority-laws >>
 
 ## AUTHORITY Laws — carrier canon, residency actions, trust ladder
@@ -148,7 +144,6 @@ desc  = "Trust order (strongest first): hostless invariant memes → hostless ca
 
 <<~/ahu >>
 
-
 <<~ ahu #codec-laws >>
 
 ## CODEC Laws — format, grammar, and round-trip laws
@@ -185,7 +180,6 @@ desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm 
 
 <<~/ahu >>
 
-
 <<~ ahu #codec-exceptions >>
 
 ## CODEC Exceptions — named deliberate deviations
@@ -218,7 +212,6 @@ desc  = "TW5 core JS and vendored plugin bundles live in LarariumDoc.blobs (bina
 ```
 
 <<~/ahu >>
-
 
 <<~ ahu #system-laws >>
 
@@ -259,7 +252,6 @@ desc  = "*.md carrier files are projections of parent + fragment tiddler package
 
 <<~/ahu >>
 
-
 <<~ ahu #pentadic-laws >>
 
 ## PENTADIC Laws — the Law of Fives as a structural invariant
@@ -292,7 +284,6 @@ desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, eph
 <<~ pranala #to-attention-scale ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale family:relation role:grounds >>
 
 <<~/ahu >>
-
 
 <<~ ahu #genesis-invariants >>
 
@@ -327,7 +318,6 @@ desc  = "@phase: S5 — proved Sprint 5. The genesis artifact carries the TW5 en
 
 <<~/ahu >>
 
-
 <<~ ahu #peer-invariants >>
 
 ## PEER Invariants — peer symmetry at boot and post-boot authority boundaries
@@ -352,7 +342,6 @@ desc  = "No peer gains write or canon-MOVE authority by being first online, by h
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -368,7 +357,6 @@ desc  = "No peer gains write or canon-MOVE authority by being first online, by h
 <<~ pranala #grounded-in-elyncia ? -> lar:///elyncia/Elyncia_02_The_Lares_DreamNet family:reference role:grounding-myth >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

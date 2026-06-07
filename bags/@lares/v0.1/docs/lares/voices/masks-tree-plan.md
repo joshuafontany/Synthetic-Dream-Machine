@@ -29,7 +29,6 @@ skeleton meme-loci ready for talk-story-dev fill passes.
 
 <<~/ahu >>
 
-
 <<~ ahu #observe >>
 
 ## ✶ Observe
@@ -72,7 +71,6 @@ packages/lares-core/memes/v0.1/api/masks/
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #orient >>
 
@@ -267,7 +265,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

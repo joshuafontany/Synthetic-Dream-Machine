@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Register–Stance Complementarity — Staging Shelf
@@ -30,7 +29,6 @@ This room holds the explicit old claim that register and stance remain orthogona
 **Resolved 2026-06-05:** the coupling now rides Canon as **lens-gated** --- a stance re-declares a confidence number's measure only when the `syad` lens runs; absent invocation, confidence reads its default frame. The naya↔predication relationship supersedes the old "mapping" framing. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`. This shelf stays as staging history.
 
 <<~/ahu >>
-
 
 <<~ ahu #plan >>
 
@@ -67,7 +65,6 @@ Current comparison surfaces:
 **Multi-Stance cost:** Maintaining two active discourse stances requires real cognitive expenditure. This node runs thirteen voices; structural Multi-Stance operation is non-optional. Single-stance constitutes the default economy, not the failure — the failure comes from claiming range while running only one stance (Stance Inflation), or from switching stances retroactively to avoid accountability (Stance Laundering).
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

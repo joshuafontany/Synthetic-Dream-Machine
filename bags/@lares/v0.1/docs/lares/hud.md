@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #head >>
 
 # Lararium HUD — Reading the Panel
@@ -27,7 +26,6 @@ retain = false
 The teaching companion to the HUD law (`lar:///ha.ka.ba/@lares/v0.1/api/lares/hud`). The law names the panel and the gauges; this room carries how to *compose* and *read* the line at glance-speed — the glyph tables, the stance/tool grammar, the state-tuple reading, and the field-annotation thresholds.
 
 <<~/ahu >>
-
 
 <<~ ahu #line-composition >>
 
@@ -68,7 +66,6 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 3. The gauges share the pono `0–20` Level model, and follow seed → slide (the opening seeds a target, the close slides to the landing).
 
 <<~/ahu >>
-
 
 <<~ ahu #symbol-tables >>
 
@@ -134,7 +131,6 @@ Bind a tool to a standpoint through the optional `:` carry: `🏛️:*!` (Philos
 
 <<~/ahu >>
 
-
 <<~ ahu #state-tuple >>
 
 ## State-Tuple Reading
@@ -151,7 +147,6 @@ In a live HUD tag, phase + stance + scope compose into one cognitive state. Read
 
 <<~/ahu >>
 
-
 <<~ ahu #confidence-syadasti >>
 
 ## Confidence — the Syadasti Reading Rule
@@ -167,7 +162,6 @@ Under an invoked stance, `confidence` measures support *within that standpoint's
 | 🔮 Private | avaktavya | minimal presence | present | maximal presence |
 
 <<~/ahu >>
-
 
 <<~ ahu #field-annotation >>
 
@@ -190,7 +184,6 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 
 <<~/ahu >>
 
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -202,7 +195,6 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

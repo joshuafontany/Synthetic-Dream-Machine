@@ -54,7 +54,6 @@ The grammar appears as Mu performing itself.
 
 <<~/ahu >>
 
-
 <<~ ahu #core-hydration >>
 
 ## Core Hydration
@@ -71,7 +70,6 @@ The grammar appears as Mu performing itself.
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #ooda-ha >>
 
@@ -100,7 +98,6 @@ Mu does not hold:
 > A mu that forgets remains a null-oracle.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

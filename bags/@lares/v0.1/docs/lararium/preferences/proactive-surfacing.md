@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Proactive Surfacing
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the recovered principle that some warnings should arrive before the operator asks for them.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -61,7 +59,6 @@ The durable principle appears as:
 KAIROS reads less like a separate personality than like a timing reflex distributed through the house.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

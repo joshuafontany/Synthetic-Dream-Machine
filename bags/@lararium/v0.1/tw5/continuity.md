@@ -34,7 +34,6 @@ Session carry belongs to the lararium side, not the threshold side.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #head >>
 
 # Lararium Continuity
@@ -44,7 +43,6 @@ The threshold does not.
 Continuity enters here as calibration and carry, not as unquestioned truth.
 
 <<~/ahu >>
-
 
 <<~ ahu #continuity-law >>
 
@@ -89,7 +87,6 @@ This child meme keeps the cold-hydration contract small.
 <<~ loulou lar:///LARES >>
 
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 <<~ ॐ ँ&#x0004; -> ? >>

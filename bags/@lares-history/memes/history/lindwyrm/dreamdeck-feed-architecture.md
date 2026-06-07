@@ -25,7 +25,6 @@ retain = true
 
 <<~&#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # The Lindwyrm's Hoard — DreamDeck Feed Architecture
@@ -33,7 +32,6 @@ retain = true
 Container, cast, format conventions, and tone laws for the Lindwyrm hoard story.
 
 <<~/ahu >>
-
 
 <<~ ahu #source >>
 
@@ -259,7 +257,6 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch *The F
 <<~ pranala #format-for-hoard-story ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/hoard-origin-architecture family:relation role:informs >>
 
 <<~/ahu >>
-
 
 <<~&#x0003; >>
 

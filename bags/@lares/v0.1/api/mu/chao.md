@@ -43,7 +43,6 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ sense whether work arrives as Hodge/Ha, Podge/Ka, or Spin/Ba
@@ -145,7 +144,6 @@ A lar URI with slots in the wrong order MUST surface as invalid.
 A lar URI with all three slots aligned reads the address back at the Chao's rotation.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

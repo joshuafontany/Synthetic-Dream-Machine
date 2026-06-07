@@ -30,7 +30,6 @@ One typed, directed, acyclic edge between two sockets.
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ Inventory hidden edge claims — name family, traversal, propagation, role distinctly.
@@ -40,7 +39,6 @@ One typed, directed, acyclic edge between two sockets.
 ↺ Cross the edge into live memes; verify DAG invariant holds; Truth density rose if fewer vague dependencies survive.
 
 <<~/ahu >>
-
 
 <<~ ahu #law >>
 
@@ -214,7 +212,6 @@ reaction-roles = ["subscription", "handler", "callback"]
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

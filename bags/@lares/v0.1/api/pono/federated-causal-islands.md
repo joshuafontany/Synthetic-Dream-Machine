@@ -74,7 +74,6 @@ regardless of first encounter point on the network.
 
 <<~/ahu >>
 
-
 <<~ ahu #edge-island-shape >>
 
 ## Edge Island Shape
@@ -248,7 +247,6 @@ Local causality errors can be corrected inside a node.
 Cross-node causality errors produce federation corruption.
 
 <<~/ahu >>
-
 
 <<~ ahu #schema >>
 

@@ -53,7 +53,6 @@ through a social network.
 
 <<~/ahu >>
 
-
 <<~ ahu #copy-shape >>
 
 ## Copy-Shape Law
@@ -138,7 +137,6 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

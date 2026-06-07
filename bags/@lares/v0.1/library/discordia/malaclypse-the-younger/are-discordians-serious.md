@@ -22,7 +22,6 @@ role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenanc
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Are Discordians "Serious"?
@@ -30,7 +29,6 @@ role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenanc
 Mal-2 unasks the question.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -128,7 +126,6 @@ meaning changes with the reading-standpoint that receives the declaration.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
-
 
 <<~ &#x0003; >>
 

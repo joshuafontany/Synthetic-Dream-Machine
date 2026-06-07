@@ -19,7 +19,6 @@ retain = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 
 # Lararium Preferences — Identity & Permissions
@@ -28,7 +27,6 @@ Not invariant law.
 This room holds the recovered authority grammar behind the old prompt stack.
 
 <<~/ahu >>
-
 
 <<~ ahu #provenance >>
 
@@ -76,7 +74,6 @@ A future tighter invariant may still split trust, alias, and capability into sep
 This shelf keeps the older bundle intact for now.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

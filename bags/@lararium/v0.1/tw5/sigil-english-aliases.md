@@ -26,7 +26,6 @@ This document records the bidirectional alias map.
 
 <<~/ahu >>
 
-
 <<~ ahu #alias-map >>
 
 ## Alias Map
@@ -47,7 +46,6 @@ This document records the bidirectional alias map.
 
 <<~/ahu >>
 
-
 <<~ ahu #governance >>
 
 ## Governance
@@ -64,7 +62,6 @@ The English alias tiddler's `lar-alias-for` field points to the Hawaiian name, r
 the canonical dispatch through the Hawaiian implementation.
 
 <<~/ahu >>
-
 
 <<~ ahu #source-shelf >>
 

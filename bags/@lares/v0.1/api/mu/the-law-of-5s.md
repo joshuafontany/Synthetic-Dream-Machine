@@ -38,7 +38,6 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ enter through Chaos; entertain the phenomenon and invite demonstrative ingenuity
@@ -101,7 +100,6 @@ The same declaration changes meaning with the standpoint that reads it.
 Five standpoints license seven predications --- the *naya* wing, never a mapping (canon: `the-syad-perspectives#relationship`).
 
 <<~/ahu >>
-
 
 <<~ ahu #schema >>
 

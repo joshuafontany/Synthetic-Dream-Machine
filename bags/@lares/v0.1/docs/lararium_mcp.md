@@ -33,7 +33,6 @@ test-count   = 77
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #running >>
 
 ## Running the Server
@@ -323,7 +322,6 @@ class MyAdapter:
 ```
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

@@ -36,7 +36,6 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #ooda-ha >>
 
 ✶ `is` bites. `has` bites. Collapse bites. Certainty swells. Sense before the word lands. Slider sets the threshold.
@@ -174,7 +173,6 @@ Sustained operation at `~:e-prime[1]` when the operator has not authorized it co
 Sustained operation at `~:e-prime[20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 

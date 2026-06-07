@@ -20,7 +20,6 @@ invariant = false
 
 <<~ &#x0002; >>
 
-
 <<~ ahu #meme-header >>
 # Canon Boundary — Docs Sister
 
@@ -29,7 +28,6 @@ The invariant lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono`.
 This file gives a fuller map of canon-crossing events.
 
 <<~/ahu >>
-
 
 <<~ ahu #ooda-ha >>
 ✶ observe the source claim, target territory, affected memes, and operator trust tier and intent.
@@ -119,7 +117,6 @@ A canon-crossing path should ask:
 If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu >>
-
 
 <<~ ahu #edges >>
 ## Edges
