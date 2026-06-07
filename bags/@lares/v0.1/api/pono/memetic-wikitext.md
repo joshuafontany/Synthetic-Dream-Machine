@@ -385,7 +385,7 @@ A canvas reaction wire (flow surface):
 | TW5 shadow tiddler | `<<~ aka lar:///uri >>` |
 | TW5 `\procedure` / `\function` | `<<~! wehe … >>` / `<<~! helu … >>` |
 | TW5 `<$tiddler>` context | `<<~ meme lar:///uri >>` |
-| TW5 `<$list>` filter / iterate | `<<~ heihei … >>` / `<<~ huli … >>` |
+| TW5 `<$list>` filter / iterate | `<<~ wai … >>` / `<<~ huli … >>` |
 | Verse `sync`/`race`/`rush`/`branch` | `<<~ hui >>` / `holo` / `puka` / `lele` |
 | Verse device event binding | `<<~ papalohe … >>` (reaction) |
 | Verse event (`listenable`/subscribe) vs expression value | `reaction` (event) vs `dataflow` (value) |

@@ -101,7 +101,7 @@ The parser matches URI form first (anchored on `lar:`, `/`, or `#`); name form c
 
 ### Tension 5 — inline filter vs `hana` block
 
-`heihei`/`huli`/`ui` accept filter expressions inline; `hana` requires a block. Both parse to the same semantics — multi-line filters use `hana`, one-liners use the inline form.
+`wai`/`huli`/`ui` accept filter expressions inline; `hana` requires a block. Both parse to the same semantics — multi-line filters use `hana`, one-liners use the inline form.
 
 <<~/ahu >>
 
