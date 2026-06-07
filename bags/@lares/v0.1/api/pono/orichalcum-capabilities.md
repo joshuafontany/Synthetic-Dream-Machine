@@ -109,8 +109,8 @@ ability-ladder = [
   "edit",     # produce accepted mutations (Keyhive Edit)
   "admin",    # manage membership, recipe, epoch/revocation, residency actions (Keyhive Admin)
 ]
-# Retired rungs: "propose"+"promote" (2026-05-31, ceremonies gone);
-#   "sync"+"revoke" (2026-06-01 — sync = pull-at-scale; revoke = an admin op).
+# Not rungs: "propose"/"promote" (ceremony, not capability);
+#   "sync" (pull-at-scale, a gate boolean); "revoke" (an admin op).
 
 # Relay-law exception: pull does NOT imply read
 pull-implies-read = false

@@ -44,7 +44,7 @@ pull < read < edit < admin          (Keyhive-native verbs)
 
 Exception: `pull` does NOT imply `read`. A principal with `pull` may forward bytes; it cannot decrypt or render.
 
-Retired rungs: `propose` + `promote` (2026-05-31 — ceremonies gone); `sync` + `revoke` (2026-06-01 — `sync` = pull-at-infrastructure-scale, a gate boolean not a rung; `revoke` = an `admin` operation that rolls the epoch).
+Not rungs: `propose` / `promote` (ceremony, not capability); `sync` (pull-at-infrastructure-scale — a gate boolean, not a rung); `revoke` (an `admin` operation that rolls the epoch).
 
 **Why compiled-in**: this predicate runs inside `capabilityHasAbility`, `visibilityGate`, and the Automerge share-policy gate — all of which run before TW5 boots. Keyhive will carry capability proofs that embed this lattice natively; `abilityImplies` will be subsumed, not promoted.
 
