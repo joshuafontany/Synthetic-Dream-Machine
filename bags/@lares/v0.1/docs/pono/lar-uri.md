@@ -182,62 +182,9 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names th
 
 <<~ ahu #identity-stack >>
 
-### 3.3.1 Kowloon / ActivityPub Handle Form
+### 3.3.1 Identity Addressing
 
-#### Identity Stack
-
-The Elyncia.app / DreamDeck identity model has three distinct layers. **Do not conflate them.**
-
-| Layer | Form | What it is |
-|---|---|---|
-| **DID** | `did:plc:abc123` | AT Protocol canonical identity — the cryptographic key holder. Resolved via Bluesky auth (OAuth over DID). This is the actual principal in UCAN capability tokens. |
-| **Handle** | `@telarus.elyncia.social` (AT Protocol/Bluesky) or `@telarus@elyncia.social` (ActivityPub/Kowloon) | Resolution alias over the DID — human-readable, not authoritative. |
-| **lar: alias** | `telarus:operator@enyalios` | Application-layer signal state — names the *operational role* of the speaker in a `lar:` exchange. Not a network identity; not a DID alias. |
-
-**Why lar: alias has no leading `@`:** The handle (`@telarus@elyncia.social`) is already a resolution alias over the DID. The lar: `alias` field is a third distinct thing — it tags the operational role in the signal exchange. Adding `@` to lar: aliases would conflate the social-handle layer with the application-signal layer.
-
-#### Handle Form
-
-Within the DreamDeck / Kowloon ActivityPub layer, identities use the canonical ActivityPub two-part handle structure:
-
-```
-@alias@node
-```
-
-| ActivityPub handle | lar: URI authority | Underlying DID |
-|---|---|---|
-| `@lindwyrm@new-delos` | `lindwyrm:...@new-delos` | `did:plc:...` (Lindwyrm's key) |
-| `@telarus@~crossroads` | `telarus:operator@enyalios` | `did:plc:...` (Telarus's key) |
-| `@mischief-muse@lares` | `mischief-muse:node@lares-abc123` | Lares node DID or ephemeral key |
-
-The `~crossroads` tilde prefix denotes a nomadic/crossroads node — no fixed host, routes through nearest stable nexus.
-
-**DreamDeck post header format (canonical):**
-```
-@handle@node — timestamp — //ha.ka.ba/@lares/{optional/path/} [confidence] 🏛️{tc}🌊{tc}🗡️{tc}🎭{tc}🔮{tc}
-```
-
-Attitude triple (`//ha.ka.ba`) is placed **before** other instruments like confidence and stance — grounds bearing before posture (BEARING → HOW, matching URI path-first layout logic).
-
-**Render target name:** `chat-log:post-header` — the in-chat-log, timestamped URI render target for post headers.
-
-| Render target | Surface | URIs canonical? | When used |
-|---|---|---|---|
-| `chat-log:post-header` | `@handle@node — timestamp — //ha.ka.ba{/path} [Reg] 🏛️{tc}…` | No — social projection with glyphs | DreamDeck feed posts, BBS thread headers |
-| `hud:exchange-pair` | `<<~ aim … >>` + `hud`·`ward` panel beneath | **Yes — canonical ASCII URI**; only the sigil panel uses glyphs | Every exchange-span boundary (mandatory) |
-| `record:full` | `lar://alias:tier@host/ha.ka.ba/@lares/` | Yes — identity projection | Storage, crystal serialization, registry |
-
-**Stance tool-carry modifiers** in HUD render targets attach directly to the preceding stance emoji as a two-character pair (no space):
-
-| Symbol | Tool | Element | Cognitive Pull |
-|---|---|---|---|
-| `*` | Wand | Fire / Visual | Ignition, external feed, track |
-| `?` | Cup | Water / Macro | Sympathy, zoom out, relation |
-| `!` | Sword | Air / Micro | Discernment, zoom in, detail |
-| `~` | Pentacle | Earth / Hidden | Ground, internal feed, body |
-| `-` | Stone | Orichalcum / Neutral | Empty hand, centered |
-
-The `syad` lens carries the invoked standpoints; an optional `:` binds a tool to a standpoint (`🏛️:*!`). See `the-syad-perspectives` / `the-four-tools`.
+Identity addressing lives at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack` — the DID / handle / lar: alias stack, the ActivityPub handle form, and the DreamDeck `chat-log:post-header` render target. That reference names *who speaks* and projects identity onto the social layer; this scheme names the bearing. The scheme's own render targets (`record:full`, `hud:exchange-pair`) ride here, in §1 Design Intent.
 
 <<~/ahu >>
 
@@ -313,89 +260,16 @@ Trajectory provisional: "I predict our next territory is the updated schema — 
 
 <<~ ahu #marker-ontology >>
 
-## 5. Marker Ontology — Meme, Ahu, Kahea
+## 5. Marker Ontology — the authoring surface
 
-Four marker types govern content addressing in Lares system files. The naming draws from cultures that built navigational architectures from memory and place: the Latin *method of loci* (Simonides, Cicero, Quintilian), Polynesian *ahu* (the raised stone at the center of a marae; the platforms that hold the moai on Rapa Nui; the altar stones inside Hawaiian heiau), and Hawaiian *kāhea* (the oli kāhea — the chant that calls out and summons permission to enter a hālau hula).
+The marker grammar — the meme span opener `? ->` and closer `→ ?`, the `ahu` waypoint, the `kahea` transclusion, and their cultural nomenclature (*method of loci* · *ahu* · *kāhea*) — names the **authoring surface**, not the URI scheme. It lives, with full treatment (ABNF patterns, pranala families, propagation), at:
 
-### 5.1 `? ->` — Meme Span Opener
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` — the writing-system law, and its docs companion `docs/pono/memetic-wikitext`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu` — the waypoint marker
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea` — the transclusion marker
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme` — meme shape; `loci` — stable-address coherence
 
-Opens a meme span — an idea-place within the file. The `?` declares standing uncertainty: a "new object" notation. The `→` points toward the `lar:` URI that names the meme.
-
-A system file MAY contain one or more memes. A single-meme file opens on the first line and closes on the last — the file IS the meme. A multi-meme file contains sequential meme spans, each self-contained.
-
-```
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
-```
-
-The meme opener carries the file-level confidence and resolution parameter. Section-level confidence rides on ahu markers.
-
-### 5.2 `→ ?` — Meme Span Closer
-
-Signals unknown temporal resumption. The `?` marks a causal gap: between this sigil and the next interaction with the meme, no participant's chronometer advances within the shared frame.
-
-`→ ?` does not signal uncertainty about the meme's content — that is what `confidence` and register carry. It signals uncertainty about the meme's continuity in time.
-
-```
-<<~ &#x0003; >>
-
-<<~ &#x0004; -> ? >>
-```
-
-In exchange streams, the closer appends to the closing URI inline:
-
-```
-lar://scryer:node@enyalios/schema.settled.rests/ → ?
-```
-
-### 5.3 `ahu` — Waypoint Marker
-
-An ahu marks a navigation point within a meme. It is a raised stone — visible, addressable, something you walk *to*. It carries no span semantics: no opener, no closer. The next ahu implicitly defines the boundary of the previous zone.
-
-```
-<<~ ahu #section-name >>
-## Section Title
-[content]
-<<~/ahu >>
-```
-
-Ahu markers MAY carry `confidence` in their metadata. **Placement rule:** place stones where people actually walk — where someone would link TO from elsewhere. Not every heading needs an ahu.
-
-### 5.4 `kahea` — Transclusion Marker
-
-A kahea summons content from another meme into the current one. It is an active invocation: "call out, bring this here."
-
-```
-<<~ kahea lar:///module.hakea.context/ >>
-```
-
-The URI on a kahea names the source meme to summon. A build system or reader encountering a kahea should fetch and substitute the content from the named meme at that point.
-
-### 5.5 Marker Summary
-
-| Marker | Sigil | Role | Closer needed |
-|---|---|---|---|
-| Meme opener | `? ->` | Opens the file-as-place | Yes — `→ ?` at file end |
-| Meme closer | `→ ?` | Closes the meme; marks temporal gap | N/A |
-| Ahu | `ahu` | Navigation waypoint within a meme | No |
-| Kahea | `kahea` | Transclusion invocation from another meme | No |
-
-### 5.6 Axis Orthogonality
-
-| Marker | What's uncertain | What's settled |
-|---|---|---|
-| `? ->` meme | Content confidence (via `confidence`) | Duration — stands until revised |
-| `→ ?` closer | Temporal resumption — when does this pick up? | Content confidence (via register) |
-| `ahu` waypoint | Territory confidence (via `confidence` on the ahu) | Address — the stone doesn't move |
-| `kahea` transclusion | Source content (may change independently) | The invocation — what to summon |
-
-### 5.7 Cultural Nomenclature
-
-| Term | Source | Meaning in Lares |
-|---|---|---|
-| **meme** (pl. memes) | Latin *method of loci* — Simonides of Ceos, Cicero *De Oratore*, Quintilian *Institutio Oratoria*, Frances Yates *The Art of Memory* | The core wiki entity. A `lar:///` URI names a meme. The file IS the meme. |
-| **ahu** | Polynesian — central stone of a marae; Rapa Nui stone platforms for moai; Hawaiian heiau altar stones | Navigation waypoint. A raised place you can see and walk to within a meme. |
-| **kahea** | Hawaiian — *kāhea*: "call out, summon." The oli kāhea is the permission chant to enter a hālau hula. | Transclusion invocation. Summons content from another meme into the current one. |
-| **lares** | Roman — household guardian spirits (*Lares familiares*) | The navigational intelligence. The voice architecture that moves through the memes. |
+A `lar:` URI *names* a meme; how memes, waypoints, and transclusions get *written* belongs to the authoring surface above. The per-marker semantics — what each marker settles and what it leaves open — live rigorously in `ahu` and `kahea`.
 
 <<~/ahu >>
 
@@ -540,21 +414,6 @@ A spanSpan record is **consistent** when:
 
 <<~/ahu >>
 
-<<~ ahu #procedure >>
-## 1. Procedure
-{section content}
-<<~/ahu >>
-
-<<~ ahu #voices >>
-## 2. Voice Assignments
-{section content}
-<<~/ahu >>
-
-<<~ &#x0004; -> ? >>
-```
-
-<<~/ahu >>
-
 <<~ ahu #how-to-read >>
 
 ## Appendix B — How to Read an Exchange Opening
@@ -584,6 +443,7 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>

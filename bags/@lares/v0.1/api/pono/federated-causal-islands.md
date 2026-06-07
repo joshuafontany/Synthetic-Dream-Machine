@@ -180,6 +180,51 @@ The altar does not require the relay to comprehend the offering to carry it.
 
 <<~/ahu >>
 
+<<~ ahu #task-handoff >>
+
+## Cross-Peer Task Handoff (design space)
+
+> Status: DESIGN SPACE — not yet built. The IN-PROCESS handoff (the worker→main
+> channel as the capability) stands today (`project_verification_placement`); this
+> section names the CROSS-PEER form, which rides on the relay-access-rings epic.
+> Grounded in web research (memory `project_asymmetric_peer_handoff`, 2026-06-06).
+
+Peers carry asymmetric capabilities: a node vessel holds a disk-write grant; a
+browser vessel holds none. So a peer that lacks a capability hands the task to a
+peer that holds it. The handoff follows the federation law above — authority
+crosses before content, the relay carries what it cannot read — and adds a task
+shape on top.
+
+**The shape (the pono model).**
+- A **task** travels as a *signed capability-invocation written as a CRDT fact*,
+  never an RPC — the existing verb-tiddler, extended to name an executor peer.
+  Intent. It survives the requester going offline the instant after it asks.
+- An **outcome** travels back as a *signed receipt written as a CRDT fact* — the
+  existing outcome-tiddler. The "executor crashed before replying" failure
+  dissolves: nothing exists to lose; the outcome converges or it does not, and
+  its absence reads plainly.
+- **Authority rides WITH the task** (a UCAN invocation shape over the keyhive
+  grant): the invocation carries its proof-chain back to the owner, attenuated;
+  the executor verifies the chain + the attenuation predicates against the args,
+  then acts STRICTLY within that envelope, never on its own ambient authority —
+  defeating the confused deputy by construction (no designation without authority).
+- **Attenuation only narrows** down the chain; expiry/TTL carries the only
+  fully-decentralized revocation (no global now).
+- **Selection ≠ authority.** Liveness + reputation pick WHICH capable peer
+  receives the task (a soft hint); the capability bounds the damage if the pick
+  goes wrong. No coordinator/super-peer accrues trust-authority.
+
+**Live vs store-and-forward.** Two concurrently-connected vessels MAY use a live
+capability-RPC (CapTP / Cap'n Web — designation-as-invocation, promise pipelining);
+the verb/outcome-over-CRDT form stays the always-correct, offline-tolerant record.
+
+**Prior art:** UCAN invocation / delegation / receipt (Brooklyn Zelenka — UCAN's
+author, now at Ink & Switch); OCapN CapTP three-party handoff; Cloudflare Cap'n Web.
+The OPEN sub-problem (a lease + fencing token for concurrent cross-vessel
+double-run) lives with the residency-model design.
+
+<<~/ahu >>
+
 <<~ ahu #tier-map >>
 
 ## Tier Map

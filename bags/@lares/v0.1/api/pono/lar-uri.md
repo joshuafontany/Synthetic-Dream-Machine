@@ -135,15 +135,7 @@ For stable and unstable paths: each slot holds exactly one lowercase word — Ha
 
 ### TW5 System Boundary
 
-TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local — shadow tiddlers, palette state, draft markers, plugin internals. The lararium sync filter mirrors this distinction: only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk.
-
-Lares system tiddlers — cascade configs, render templates, global mounts, plugin envelopes — MUST carry `lar:///` titles (typically under `lar:///config/...`, `lar:///mounts/...`, `lar:///plugins/...`, or `lar:///ha.ka.ba/@lararium/templates/...`). This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to disk and federate to peers; it lets residency-action handlers trust the bag state.
-
-Tag *values* may still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values are not titles and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
-
-Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/` namespace by design — those tiddlers stay browser-local until the operator's explicit promotion act.
-
-For drag-and-drop distribution to the broader TW5 community, lar-namespaced plugin envelopes MAY be re-emitted under `$:/plugins/...` titles. The plugin module code is identical; only the envelope title differs. This dual-distribution shape is a packaging convention, not a namespace exception — the canonical artifact carrying the operator's signature is always the `lar:///` form.
+The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names *what* crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the **sync-namespace** law: `lar:///ha.ka.ba/@lares/v0.1/api/lararium/sync-namespace`.
 
 <<~/ahu >>
 
@@ -342,6 +334,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/sync-namespace >>
 
 <<~ pranala #sibling-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:relation role:sibling-spec >>
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>

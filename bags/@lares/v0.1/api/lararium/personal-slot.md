@@ -369,6 +369,39 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 <<~/ahu >>
 
+<<~ ahu #persongroup-liveness >>
+
+## PersonGroup liveness — pre-delegate to an always-on device (design space)
+
+> Status: DESIGN SPACE — not yet built. Depends on @personal cross-device (S7.7)
+> + multi-device keyhive delegation. Grounded in web research (memory
+> `project_asymmetric_peer_handoff`, 2026-06-06).
+
+A PersonGroup holds a fleet of asymmetric vessels — an always-on node, an
+intermittent phone or browser tab. Capability exercise carries a liveness
+constraint (the grantor-online law, observed in Holochain): a grantee exercises a
+capability only while the grantor stays reachable, because the grant names
+authority over a resource in the grantor's keeping. A fleet whose only
+capability-grantor sleeps when the authoring device sleeps cannot act.
+
+**The pono move: pre-delegate.** The PersonGroup reads as an *owned namespace* (the
+Meadowcap pattern): the owner key mints *attenuated* delegated capabilities to each
+of its own devices. By pre-delegating the load-bearing capabilities to an
+**always-on device** (the node vessel), the fleet keeps functioning while the
+authoring device sleeps — the always-on device answers handoffs on the fleet's
+behalf, strictly within the attenuated envelope it holds.
+
+**Push vs pull by liveness.** Treat always-on, reachable devices as push targets for
+a handoff; treat intermittent leaves (phone, closed tab) as **pull / mailbox**
+consumers that drain work when they wake, never push targets. Discovery names a
+candidate; a live broker or a direct probe confirms it lives before a handoff lands.
+
+This composes with the @personal slot: the binding map already lives admin-doc-
+stored and PersonGroup-scoped; pre-delegation extends the same owned-namespace
+authority graph from *viewing state* to *task-execution authority*.
+
+<<~/ahu >>
+
 <<~ ahu #browser-deferral >>
 
 ## Browser-side deferral

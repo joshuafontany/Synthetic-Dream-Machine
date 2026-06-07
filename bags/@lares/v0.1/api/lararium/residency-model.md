@@ -136,7 +136,7 @@ Every ACTION writes an **indelible effect record** tiddler in each affected bag,
 | **reappraisal** | operator-recorded justification | the recorded reason that authorizes a coming deaccession |
 | **disposition** | final state of a deaccessioned item | where it went, when, why; never silent |
 
-Effect records live within each bag at `lar:///<bag>/log/residency/<event-id>` (URI shape design-pending). Records stay append-only and persist in perpetuity, even when a later ACTION deaccessions the underlying tiddler. **The artifact may leave; the record of its prior presence here, and of its leaving, never does.**
+Effect records live within each bag at `lar:///<bag>/ledger/residency/<event-id>` — the bag's indelible residency ledger (the web2 word "log" left the surface 2026-06-07). Records stay append-only and persist in perpetuity, even when a later ACTION deaccessions the underlying tiddler. **The artifact may leave; the record of its prior presence here, and of its leaving, never does.**
 
 This dual-surface design — ACTION verbs for the *gesture*, archival verbs for the *audit* — resonates structurally with web3 causal-islands models. The archival profession solved the identity-across-custody problem before software did; we adopt the discipline along with the vocabulary. The **Floating Librarians of Mu register** applies — Mu's stewards of memory cooperate with archivists, not with version-control engineers.
 
