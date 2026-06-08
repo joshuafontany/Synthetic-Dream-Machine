@@ -1,10 +1,27 @@
 # Lares Handoff — Active Work Only
 
-> Updated: 2026-06-06 (isomorphism-by-composition collapse campaign)
+> Updated: 2026-06-07 (task-ontology language · residency front door + V1 · V3 peer-auth halves)
 > Branch: `feature/lararium-node-4`
 > Last sprint archive: `wikis/lares-history/last-sprint/`
 
-## Current State — 2026-06-06 (read this first; older sections below are history)
+## Current State — 2026-06-07 (read this first; older sections below are history)
+
+**Green:** typecheck 6/6 · mesh 254 · tw5 73 · node 94 · browser 20. Run `pnpm test:fresh` (build-then-test) after source changes — cross-package tests import built dist, stale until rebuilt (V11 guard).
+
+**Committed `7d727c77` (`lar:///verb.kupono.flows`) — the task surface matured from mechanism into LANGUAGE, and the residency-change ask flows end-to-end:**
+- **Verb grammar (LANGUAGE-protocol frame):** internal register = **verb · summons · outcome** — a verb is *placed* locally or *summoned* to a peer; the island *heeds*; the dispatcher *dispatches*; it *concludes* in an outcome. Renames: summon · heedSummons · concludeVerb · buildVerb · parseVerb · placeVerb · dispatchVerb · `Verb` (was VerbInvocation; `.action` field, wire field "verb" retained) · OutcomeRecord · SUMMONS/OUTCOME_URI_PREFIX. signal→summons; effect log→**ledger**. UCAN task/receipt = boundary projection ONLY. Canon: `EPIC-TASK-ONTOLOGY.md`, `project_task_graph_geometry`.
+- **Residency front door (the genuine ask = "change a meme's residency"):** `registerActionReactors` mounted into BOTH vessels' job/registry — `lares act` (ADD/COPY/MOVE/CLEAR/DROP/LOAD) now reaches the reactors (the vessel composite spans the bags; mutation → the ledger). **V1**: `lares act` content-addresses the idempotent change (`taskContentId`, empty nonce; change-id = idempotency key) → exactly-once EFFECT on re-issue.
+- **Debt:** cut the dead main-side `_verifier` (V10); added `test:fresh` (V11).
+
+**Uncommitted (atop `7d727c77`) — V3 peer-boundary auth, the PURE platform-blind halves:** `authProofBytes` (the gate-bound what-to-sign — binds nonce + GATE pubkey + peer pubkey + aud + ts; signing the nonce alone stays relayable) + `buildAuthResponse` (the signed `lar:auth`) + `runPeerHandshake(PeerHandshake)` (the platform-blind peer flow — a thin seam: inject recv/send/sign/contactCard; transport per platform, identity from the isomorphic keyhive). Named **gate ↔ peer** (no server/client). SCOUT FINDING: the peer handshake DID NOT EXIST (no mkLarAuth caller). REMAINING = each edge SOURCES the seam (node/browser/CLI: their WS + a keyhive/signer from the operator seed) + the gate sends gatePubKey in `lar:challenge` + verifies via the worker seam + the ENFORCEMENT FLIP. Canon: `project_verification_placement`.
+
+**NEXT:** V3 edge composition — wire one edge (the node connector) → browser + CLI → gate gatePubKey+verify → flip enforcement. Gated on operator decisions: the **kind-noun fork** (internal house verb/outcome kinds vs UCAN — proposed resolve: internal=house, task/receipt=boundary; awaiting nod) blocks V2/V9; the **verb→capability policy table** (operator authors) blocks V7. Full ranked thread map: `project_next_vectors`.
+
+**(CLOSED) the former burning ticket — delegated verbs ran UNVERIFIED:** resolved `4834c66d` (verify-then-delegate in the keyholder worker) + the dead main-side `_verifier` cut this session. The in-process hop = channel-as-capability; crypto only at the peer boundary (= V3).
+
+---
+
+## Current State — 2026-06-06 (history)
 
 **Green:** typecheck 10/10 · mesh 236 · tw5 73 · node 94 · browser 20/20. **Dist-build VERIFIED 2026-06-06** — topo `pnpm -r build` clean; suites run against built artifacts, not only source aliases.
 
