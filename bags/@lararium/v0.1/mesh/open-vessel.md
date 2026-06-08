@@ -6,18 +6,135 @@ uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/open-vessel"
 file-path    = "bags/@lararium/v0.1/mesh/open-vessel.md"
 source-file  = "packages/lararium-mesh/src/open-vessel.ts"
 type         = "text/x-memetic-wikitext"
-register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe open-vessel.ts"
+register     = "Synthesis"
+mana         = 17
+manao        = 16
+manaoio      = 14
+role         = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations; openVesselCore owns the sequence, VesselHostSeam injects substrate atoms; role rides as a capability bundle, never a platform"
 tagspace     = "lararium"
 cacheable    = true
 retain       = true
+hydrate      = true
 ```
 <<~ &#x0002; >>
 
-<<~ ahu #contract >>
-TODO: describe the load-bearing surface this file owns.
+# The Vessel — One Composable Web3 Design
+
+The authority contract lives in [[operator-peer]] (two-lane law, ea, actor-parity).
+This meme owns the **compositional structure**: what a vessel composes FROM, and the
+ONE factory shape both platforms instance. It supersedes the per-platform factory
+drift (see #drift).
+
+<<~ ahu #the-law >>
+
+## The Law
+
+A vessel composes from **sovereign web3-protocol participations** — it never reads as
+an application with platform branches. Node and browser name two **host substrates**
+that inject atoms into the ONE vessel protocol. The factory derives by SUBTRACTION:
+the lines that differ between the working hosts name the seam, and nothing else earns
+one (Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
+
 <<~/ahu >>
+
+<<~ ahu #the-seven-participations >>
+
+## The Seven Participations (what a vessel composes)
+
+Each names a sovereign protocol already standing in the tree — the vessel COMPOSES
+them, it does not re-implement them.
+
+| # | Participation | Protocol | Source |
+|---|---|---|---|
+| 1 | **Identity** | keyhive / did:key — keypair + self-certifying ContactCard | [[operator-peer]] #actor-parity (light leaf identity) |
+| 2 | **Replica** | Automerge Repo = own log + own storage scope; no global now | [[causal-island]] #substrate-not-sovereignty |
+| 3 | **Peering** | NetworkAdapter + inbound-access policy as a **capability** | V3 peer-auth (auth-wire); sharePolicy |
+| 4 | **Recipe + residency** | CompositeStore bag-cascade + residency tiers | [[causal-island]], residency-tiers, disk-projection |
+| 5 | **Sovereign islands** | TW5-in-Worker VM pool; syncPort per island | [[project_no_vm_on_main_thread]], island-protocol |
+| 6 | **Admin island** | authn/z home; keyhive-in-worker; verb dispatch + binding | verify-then-delegate; admin-vm-core |
+| 7 | **Verb plane** | verb-tiddler invocation → outcome (UCAN-invocation shape) | verb-tiddler; [[project_asymmetric_peer_handoff]] |
+
+<<~/ahu >>
+
+<<~ ahu #the-shape >>
+
+## The Shape — A Vessel Composes Its Pieces
+
+A vessel does not read as a core that an injected host-port drives. A vessel **IS a
+composition** — a recipe that names which sovereign pieces it carries and the order
+they assemble. The open phases (`boot → repo-open → catalog-ready → island-ready →
+wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`) mark the composition
+milestones, gating on the admin island's `ea` before any wiki mounts (S11.5
+admin-first). The same shape composes one level down (admin-vm, sovereign-kernel,
+island-pool already compose this way; automerge-repo composes its Repo from pieces
+too) — this composes one level up.
+
+**The substrate resolves native-first INSIDE each piece, not in a host tower.** The
+platform difference lives within the sovereign piece that owns it — the Replica piece
+resolves NodeFS-or-IndexedDB; the Identity piece resolves disk-or-IDB; the Islands
+piece resolves worker_threads-or-Web-Worker. No fat `Host` interface sits between a
+core and the platform. What the composition receives reads as a handful of plain
+VALUES + closures, each held by its own piece, and that set derives by SUBTRACTION —
+only the lines that actually differ between two living vessels earn a place, nothing
+speculative (Rule-of-Three). Conformance proves BEHAVIORAL (both vessels walk the
+phase sequence), never type-conformance to a port.
+
+<<~/ahu >>
+
+<<~ ahu #role >>
+
+## Role Names Which Pieces the Recipe Carries (the keystone reframe)
+
+The drift's root: **role baked into platform** (node = relay, browser = keeper). Pono:
+**role names WHICH sovereign pieces a vessel's recipe composes** — decoupled from the
+runtime it runs on ([[feedback_isomorphism_by_composition]]). A role adds or omits a
+PIECE; it never toggles a flag or fills an optional port method.
+
+- The **relay** recipe carries, in addition to the seven base pieces: the inbound-peer
+  gate (V3), the disk-mirror grant, the full resident-verb plane, the residency
+  sweeper.
+- The **leaf / keeper** recipe simply OMITS those pieces and carries the outbound
+  peer-handshake instead. An omitted piece reads as absent from the cascade — no
+  no-op stub, no `if (platform)`, nothing for the composition to branch on.
+
+A node MAY compose a thin leaf recipe; a future heavy browser MAY compose relay
+pieces — because role lives in the recipe, not the substrate. **The access piece is
+always present, never a default**: the relay recipe carries the V3 gate piece; the
+browser recipe carries the `admit same-origin / in-process` piece (its only peers ride
+the MessageChannel to its own island + the same-origin BroadcastChannel — trusted by
+origin, a LEGITIMATE asymmetry, not an open hole). No recipe omits the access piece, so
+an accidental open-to-all reads as unreachable by construction.
+
+<<~/ahu >>
+
+<<~ ahu #drift >>
+
+## What Drifted (and what the clean design heals)
+
+`open-node-vessel.ts` (~735 lines) and `open-browser-vessel.ts` (~504) accreted the
+SAME protocol sequence twice, with platform divergence interleaved inline — genesis
+threading through catalog-oracle writes, bootstrap forking IDB↔file, `adminAuth`
+sharing shape but forking `registerBags`, role baked into each. No single doc owned
+the design (`open-vessel`/`lar-vessel` sat as TODO stubs), so the two drifted apart.
+
+The heal: this design names the ONE composition; both factories reduce to thin
+RECIPES — each naming its pieces (the shared seven + its role pieces) and the few
+substrate values each piece resolves native-first. Because the boot interleaves, the
+heal lands as ONE careful composition pass (not many independent slices), build-and-test
+gated by the node + browser suites (which already boot real vessels). The protocol
+SEQUENCE holds invariant; the test suites guard it.
+
+<<~ confidence Synthesis 13/20 >> The design reads pono (composition, not interface;
+role-as-capability; native-first by subtraction). The extraction's size + the absence
+of a live-daemon test keep the build itself at moderate confidence — the sequence
+invariant + the boot tests carry the safety.
+
+<<~/ahu >>
+
+<<~ pranala #governed-by-vessel-contract ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer family:control role:governed-by >>
+<<~ pranala #grounded-by-substrate-law ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island family:relation role:grounded-by >>
+<<~ pranala #depends-island-sovereignty ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:control role:depends >>
+<<~ pranala #refines-vessel-impl ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel family:relation role:references >>
 
 <<~ &#x0003; >>
 
