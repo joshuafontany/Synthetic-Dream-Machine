@@ -171,13 +171,13 @@ only the *root* and the *default subscriptions* change:
 
 <<~ ahu #must-not >>
 
-## MUST NOT (causal-islands purity constraints)
+## Purity constraints — what the alignment layer holds
 
-- MUST NOT introduce global consensus or a global trust score (EigenTrust rejected).
-- MUST NOT introduce a central registry or canonical blocklist (Oliphant/PGP-keyserver cautionary tales).
-- MUST NOT grant or deny cryptographic access — that is Keyhive's plane; alignment only governs
-  whom I voluntarily sync/relay/surface/vouch.
-- MUST NOT try to make objectionable content not-exist (Kleppmann's caveat) — subjective
+- Trust MUST stay local and per-peer — local stances only, no global consensus or global trust score (EigenTrust rejected).
+- Trust MUST live per-peer, away from any central registry or canonical blocklist (Oliphant/PGP-keyserver cautionary tales).
+- Cryptographic access MUST live in Keyhive's plane; alignment governs only whom I voluntarily
+  sync/relay/surface/vouch.
+- Objectionable content MUST surface as a per-stance filter (Kleppmann's caveat) — subjective
   filtering protects *my* island; cabal-internal governance (Talk-Story) handles "what is
   acceptable here."
 

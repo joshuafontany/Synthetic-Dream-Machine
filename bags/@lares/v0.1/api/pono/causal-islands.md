@@ -29,7 +29,7 @@ source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_
 
 A causal island carries its own trigger surface, event horizon, and capability gate.
 The doctrine partitions cross-node causality (MUST) from within-node causality (MAY).
-Content MUST NOT precede authority — this invariant has no exceptions.
+Authority MUST precede content — this invariant holds without exception.
 
 **Authority has three structural axes plus one alignment plane** (refined 2026-06-01
 against Frazee, *Practical Decentralization*, and prior-art research across ATProto,
@@ -95,10 +95,9 @@ Beelay boundary**, never by reaching into another island's data. The "lemures" p
 
 ## Law
 
-**Authority-first invariant**: content (manifests, receipts, delta payloads) MUST NOT flow
-until the authority graph (Orichalcum capabilities, delegations, revocations) has synced.
-A relay that has not completed step 2 MUST NOT receive step 4 or later.
-A peer that has not completed step 3 MUST NOT request individual meme deltas.
+**Authority-first invariant**: the authority graph (Orichalcum capabilities, delegations, revocations) MUST sync before content (manifests, receipts, delta payloads) flows.
+A relay MUST complete step 2 before receiving step 4 or later.
+A peer MUST complete step 3 before requesting individual meme deltas.
 
 **Relay-law** (Access axis, bottom rung): `pull` does NOT imply `read`. A shrine relay holds
 `pull`; it carries ENCRYPTED offerings it cannot decrypt or render. All other access levels

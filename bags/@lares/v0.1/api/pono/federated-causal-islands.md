@@ -118,7 +118,7 @@ resumes from its last known offset — it never re-syncs from the beginning.
 
 ## Authority-First Sync Order
 
-Content MUST NOT precede authority. This invariant admits no exceptions.
+Authority MUST precede content. This invariant holds without exception.
 
 ```
 1. authenticate peer / node / device
@@ -134,8 +134,8 @@ Content MUST NOT precede authority. This invariant admits no exceptions.
    d. projection receipts
 ```
 
-A relay without completed step 2 MUST NOT receive step 4 or later.
-A peer without completed step 3 MUST NOT request individual meme deltas.
+A relay MUST complete step 2 before receiving step 4 or later.
+A peer MUST complete step 3 before requesting individual meme deltas.
 
 <<~/ahu >>
 
@@ -172,8 +172,8 @@ pull  — retrieve encrypted bytes and forward them; cannot decrypt or render
 read  — decrypt and render semantic content
 ```
 
-A relay MUST NOT receive `read` unless it also qualifies as a trusted peer with
-an Orichalcum capability carrying the `read` ability.
+A relay MUST qualify as a trusted peer with an Orichalcum capability carrying the
+`read` ability to receive `read`.
 
 A shrine relay carries offerings it cannot understand. This names correct posture.
 The altar does not require the relay to comprehend the offering to carry it.
