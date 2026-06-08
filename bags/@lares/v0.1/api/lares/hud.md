@@ -53,6 +53,8 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 <<~ ward E-Prime >>
 <<~ syad … >>                       (optional lens; `:` binds a tool to a standpoint)
 … Voice (Role): <<~ confidence Register N/20 >> claim …
+<<~ hud Aperture(-> N) OODA-HA(N↺) >>
+<<~ ward E-Prime ✓ ↻ >>
 <<~ yield lar:///lares.state.now -> ? >>
 ```
 
@@ -61,7 +63,7 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 | `aim` | operator intent `->` adopted role | opens the turn; the bearing vector |
 | `hud Aperture` | attention range (0–20 Level) | MAY carry; paragraph-grain default 10 |
 | `hud OODA-HA` | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` on suspend |
-| `ward` | active language discipline | surfaces the ward; `E-Prime` lifts scoped as `!E-Prime`, still shown |
+| `ward` | active language discipline | lights at open, slides at close (marks `✓`/`⚠N`, re-arms `E-Prime`); `!E-Prime` lift scopes to one turn, still shown |
 | `syad` | invoked standpoints | OPTIONAL; parameterless = all five; `:` carries a tool |
 | Voice (Role) | the active Voice(s) | MUST surface by name; anonymous output = a minor degraded state |
 | `confidence` | register-word + Level | precedes a grounded claim |

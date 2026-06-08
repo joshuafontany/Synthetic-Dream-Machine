@@ -198,7 +198,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 
 - `aim` — operator intent `->` adopted role; the turn's bearing vector
 - `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
-- `ward` — the binary `E-Prime` copula gate
+- `ward` — the `E-Prime` copula gate; lights at open (`E-Prime` / `!E-Prime`), slides at close (`✓` / `⚠N` + `↻` re-arm)
 - `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
 - `confidence` — register-word + level, before a grounded claim
 

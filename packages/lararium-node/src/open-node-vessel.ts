@@ -73,7 +73,7 @@ import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import { VerbTable, registerActionReactors } from "@lararium/tw5";
 import {
-  makeListWikisReactor, makeInitWikiReactor,
+  makeInitWikiReactor,
   makeOpenWikiReactor,
 } from "./wiki-handlers.js";
 import { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handlers.js";
@@ -418,12 +418,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // vmManager is assigned after island boot; jobs only execute after "live" is emitted.
   const jobRegistry  = new VerbTable();
   seedVesselDefaults(jobRegistry);   // echo + universal base verbs; powers below
-  // `where` + `resolve` RELOCATED into the admin worker (sovereign-worker, verify-then-
-  // delegate gated) — see operator-admin-behavior wireWorkerVerbs. The remaining
-  // reactors below await their relocation slices.
-  // E.4 — read-only wiki jobs. write jobs (init/sync/pin/etc) land
-  // in E.5+. `list-wikis` walks the catalog for wiki oracle tiddlers.
-  jobRegistry.register("list-wikis", makeListWikisReactor({ composite }));
+  // `where` + `resolve` + `list-wikis` RELOCATED into the admin worker (sovereign-worker,
+  // verify-then-delegate gated) — see operator-admin-behavior wireWorkerVerbs. All vessels
+  // hold list-wikis in their admin VM. The remaining reactors below await their slices.
   // E.5 — wiki write jobs. operatorDid resolves lazily so the registry
   // can register before the keyhive bridge finishes booting.
   let vmManager: VesselIslandPool;

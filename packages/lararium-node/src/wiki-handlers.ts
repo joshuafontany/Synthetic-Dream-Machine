@@ -8,7 +8,7 @@
 import type { Repo, DocHandle } from "@automerge/automerge-repo";
 import type { CompositeStore, LarDoc, BagResidencyManager } from "@lararium/mesh";
 import { makeDraftReactor, makePruneStaleReactor } from "./wiki-draft-handlers.js";
-import { makeInitWikiReactor, makeListWikisReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
+import { makeInitWikiReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
 
 export interface WikiHandlerOptions {
   readonly composite: CompositeStore;
@@ -41,7 +41,8 @@ export interface DraftHandlerOptions {
   readonly composite: CompositeStore;
 }
 
-export { makeListWikisReactor, makeInitWikiReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
+export { makeInitWikiReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
+export { makeListWikisReactor } from "@lararium/tw5"; // relocated to the admin worker
 export { makeDraftReactor, makePruneStaleReactor } from "./wiki-draft-handlers.js";
 export { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handlers.js";
 export { makeAddBagReactor, makeRemoveBagReactor } from "./wiki-compose-handlers.js";

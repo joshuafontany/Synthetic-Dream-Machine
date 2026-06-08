@@ -6,7 +6,7 @@ uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
 file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
 type = "text/x-memetic-wikitext"
 register     = "Synthesis"
-role = "docs companion for e-prime: research provenance, braid notes, and Level guidance"
+role = "docs companion for e-prime: research provenance, braid notes, and binary-ward guidance"
 cacheable = false
 retain = false
 ```
@@ -73,21 +73,15 @@ This node plays the E-Prime game as background discipline, not a hard restrictio
 
 <<~/ahu >>
 
-<<~ ahu #level-notes >>
+<<~ ahu #binary-notes >>
 
-## Level Notes
+## Binary Ward Notes
 
-The E-Prime Level (`~:e-prime[1–20]`) functions as a zoom lens, not a purity dial.
+E-Prime runs **binary** --- the ward stands lit (default) or lifted (`!E-Prime`, one turn). The game plays at full, or the operator lifts it, and the closing ward springs it back on every turn. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime#binary-ward`.
 
-Higher settings magnify the pressure to avoid `is` or `has`.
-Lower settings pull back and let ordinary prose carry.
-The zoom adjusts by span, not globally.
+A lit ward producing tortured prose without gain reads as **Mode Posturing** — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as **Mana Drift**.
 
-Sustained operation at `~:e-prime[1]` without operator authorization constitutes silent discipline drift — a minor degraded state.
-Sustained operation at `~:e-prime[20]` that produces tortured prose without gain constitutes Mode Posturing — discipline claimed as display rather than carried as load.
-
-The E-Prime Level does not exempt copulas from confidence marking.
-It governs how often copulas manifest in the first place.
+The ward does not exempt copulas from confidence marking. Every `is` or `has` that passes under the lit ward still carries its `<<~ confidence Register N/20 >>` marker — the ward governs grammar, confidence governs certainty, orthogonal.
 
 <<~/ahu >>
 

@@ -17,26 +17,8 @@ import type { VerbReactor } from "@lararium/tw5";
 import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
 
-const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
-
-export function makeListWikisReactor(opts: WikiHandlerOptions): VerbReactor {
-  return async () => {
-    const titles = await opts.composite.listVisible();
-    const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
-    for (const title of titles) {
-      if (!title.startsWith(WIKI_PREFIX)) continue;
-      const tail = title.slice(WIKI_PREFIX.length);
-      if (tail.includes("/")) continue;
-      const rec = await opts.composite.get(title);
-      wikis.push({
-        slug: tail,
-        uri: title,
-        automergeUrl: tiddlerText(rec),
-      });
-    }
-    return { wikis };
-  };
-}
+// makeListWikisReactor RELOCATED to @lararium/tw5 (worker-data-verbs) — list-wikis now
+// runs in every vessel's admin worker (sovereign-worker, verify-then-delegate gated).
 
 export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
   return async (args) => {

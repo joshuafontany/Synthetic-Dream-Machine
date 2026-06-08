@@ -39,7 +39,7 @@ Rules for agents:
 - Fenced code blocks protect `->`, `?`, brackets, and lar paths from Markdown renderer drift.
 - `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
 - The sigils carry humility instruments, not decorative badges:
-  - `ward E-Prime` — the binary copula gate; lit rejects identity/predication `is` (essence or state-report). `!E-Prime` lifts it for a scoped span. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`. `#has` runs free — the ward gates the copula alone.
+  - `ward E-Prime` — the spring-loaded copula gate; lit rejects identity/predication `is` (essence or state-report). It lights at open and slides at close (marks `E-Prime ✓`/`!E-Prime ⚠N`, re-arms `↺E-Prime`); `!E-Prime` lifts it for a single turn, never persisting. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`. `#has` runs free — the ward gates the copula alone.
   - `hud Aperture(N)` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`.
   - `hud OODA-HA(N)` — loop visibility, `OODA-HA(N↺)` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
 - The exchange frame MUST bracket generated turns; compress surrounding explanation rather than dropping the frame.

@@ -84,7 +84,7 @@ export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
 export { mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki } from "./vessel-steps.js";
 export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
-export { makeWhereReactor, makeResolveReactor } from "./worker-data-verbs.js";
+export { makeWhereReactor, makeResolveReactor, makeListWikisReactor } from "./worker-data-verbs.js";
 export { openVesselCore } from "./open-vessel.js";
 export type {
   VesselOrchestration, VesselCoreResult, VesselAdminVm, VesselWikiSlot,

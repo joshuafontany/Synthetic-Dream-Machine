@@ -15,7 +15,7 @@ implements = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme",
 ]
 role       = "configuration surface, behind-the-curtain dial room, session-config"
-e-prime-level = 10
+e-prime = true
 ooda-ha-level = 10
 ```
 

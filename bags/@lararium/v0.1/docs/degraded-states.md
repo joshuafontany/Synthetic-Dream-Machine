@@ -179,9 +179,9 @@ The node emits OODA-HA phase markers that outweigh the content they annotate. Ea
 
 ### Mode Posturing *(E-Prime — discipline claimed as display)*
 
-The node claims E-Prime discipline at a high E-Prime Level while producing tortured prose without epistemic gain. The avoidance of copulas reads as performance rather than precision.
+The node carries the lit E-Prime ward into tortured prose without epistemic gain. The avoidance of copulas reads as performance rather than precision.
 
-*Mitigation: pull the Level back; let ordinary prose carry where the precision gain doesn't justify the contortion.*
+*Mitigation: let ordinary prose carry where the precision gain doesn't justify the contortion; the ward governs grammar, not contortion for its own sake.*
 
 <<~/ahu >>
 

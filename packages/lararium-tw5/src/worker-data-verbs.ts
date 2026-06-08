@@ -11,8 +11,10 @@
  * admin:evict-request seam.
  */
 
-import type { CompositeStore } from "@lararium/mesh";
+import { tiddlerText, type CompositeStore } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
+
+const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
 /** `where` — recipe-presence query: which bags hold a tiddler, highest-priority first. */
 export function makeWhereReactor(composite: CompositeStore): VerbReactor {
@@ -36,5 +38,21 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
       return changeId !== undefined ? { bagId: entry.bagId, changeId } : { bagId: entry.bagId };
     });
     return { tiddler, manifestations, tombstones, winningBag: live[0]?.bagId ?? null };
+  };
+}
+
+/** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers). */
+export function makeListWikisReactor(composite: CompositeStore): VerbReactor {
+  return async () => {
+    const titles = await composite.listVisible();
+    const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
+    for (const title of titles) {
+      if (!title.startsWith(WIKI_PREFIX)) continue;
+      const tail = title.slice(WIKI_PREFIX.length);
+      if (tail.includes("/")) continue;
+      const rec = await composite.get(title);
+      wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec) });
+    }
+    return { wikis };
   };
 }
