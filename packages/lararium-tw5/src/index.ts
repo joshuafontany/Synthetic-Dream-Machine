@@ -84,6 +84,10 @@ export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
 export { mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki } from "./vessel-steps.js";
 export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
+export { openVesselCore } from "./open-vessel.js";
+export type {
+  VesselOrchestration, VesselCoreResult, VesselAdminVm, VesselWikiSlot,
+} from "./open-vessel.js";
 export { openAdminVmCore } from "./admin-vm-core.js";
 export type {
   AdminVmHost,

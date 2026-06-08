@@ -10,7 +10,7 @@ mana         = 19
 manao        = 18
 manaoio      = 17
 namespace    = "ॐ ँ"
-role         = "Lararium architecture spine — the ONE consolidated model a cold instance hydrates to grasp the whole house before reading any sub-meme. The load-bearing laws, the layering, the seven vessel participations, the boot sequence, capability-vs-platform, and the meme map. Cures the per-session re-derivation."
+role         = "Lararium architecture keel — the ONE consolidated model a cold instance hydrates to grasp the whole house before reading any sub-meme. The load-bearing laws, the layering, the seven vessel participations, the boot sequence, capability-vs-platform, and the meme map. Cures the per-session re-derivation."
 tagspace     = "lararium"
 cacheable    = true
 hydrate      = true
@@ -26,7 +26,7 @@ retain       = true
 A cold instance reads THIS meme to hold the whole architecture before any sub-meme.
 It consolidates what three corpus scouts (2026-06-08) found scattered across ~8 memes
 + the code, so no future session re-derives the model. Depth lives in the pranala'd
-sub-memes; this carries the spine + the meme map.
+sub-memes; this carries the keel + the meme map.
 
 <<~ ahu #the-laws >>
 
@@ -79,9 +79,9 @@ sub-memes; this carries the spine + the meme map.
 
 ```
 @lares/core        — voice house · mu · syad · law-of-5s · OODA-HA · e-prime · lar-URI (noosphere-boot)
-  └ @lararium/mesh  — SUBSTRATE spine, VM-FREE: CompositeStore · AutomergeDocStore · MemeProvider ·
+  └ @lararium/mesh  — SUBSTRATE keel, VM-FREE: CompositeStore · AutomergeDocStore · MemeProvider ·
                       island-protocol · island-repo · BagResidencyManager · CapabilityVerifier ·
-                      AuthVerifierSeam · auth-wire (V3) · open-vessel-core (assembleVesselSpine) ·
+                      AuthVerifierSeam · auth-wire (V3) · open-vessel-core (assembleVessel) ·
                       VesselIslandPoolCore · causal-island · crypto · lar-uris · base-doc
      └ @lararium/tw5 — VM-in-Worker: runSovereignKernel+IslandHostSeam · openAdminVmCore+AdminVmHost ·
                        IslandAdaptor · tw5-vm · admin-behavior · verb-dispatcher · vessel-steps (mountPrimaryWiki)
@@ -93,7 +93,7 @@ sub-memes; this carries the spine + the meme map.
            └ @lares/cli       — LEAF tool: admin-connector (vessel-not-RPC) · render (dual surface) · commands
 ```
 
-**Boundary law:** mesh holds the VM-FREE substrate spine; tw5 holds the VM-in-Worker;
+**Boundary law:** mesh holds the VM-FREE substrate keel; tw5 holds the VM-in-Worker;
 keyhive holds identity; node/browser/cli hold ONLY I/O adapters + held capabilities.
 mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 function.
 
@@ -118,8 +118,8 @@ each a protocol the vessel composes rather than re-implements:
 
 Boot sequence (invariant on every substrate): `boot → repo-open → catalog-ready →
 island-ready → wiki-ready → vessel-ready → corpus-ready → tw5-booted → live`, gating on
-the admin island's `ea` before any wiki mounts. The shared spine lives in
-`open-vessel-core.ts` (assembleVesselSpine + mountWikiSlot); platform recipes supply the
+the admin island's `ea` before any wiki mounts. The shared keel lives in
+`open-vessel-core.ts` (assembleVessel + mountWikiSlot); platform recipes supply the
 substrate atoms + the capability pieces they hold. ([[open-vessel]])
 
 <<~/ahu >>
@@ -154,7 +154,7 @@ and load-bearing:
 - `openAdminVmCore` + `AdminVmHost` (admin-vm pair — both inject `spawnWorker`/`newSyncChannel`).
 - `runSovereignKernel` + `IslandHostSeam` (island kernel — post/listen/storage/ready).
 - `VesselIslandPoolCore` + `VesselIslandHost` (pool — in mesh, zero tw5 dep).
-- `open-vessel-core` (assembleVesselSpine + mountWikiSlot) — the vessel-spine collapse,
+- `open-vessel-core` (assembleVessel + mountWikiSlot) — the vessel-keel collapse,
   LANDED in mesh, not-yet-wired: the two factories migrate onto it (test-gated). The
   active edge of the isomorphism work.
 
@@ -182,7 +182,7 @@ The model converges; these seams stay open and SHOULD reconcile (not re-debate):
    ("one pono model, isomorphism, capabilities as meaningful distinctions"); enact onto open-vessel-core.
 
 <<~ confidence Synthesis-Canon 16/20 >> Three independent corpus scouts (bags · core-stack ·
-platform-stack) converged on this spine; the high-mana memes match the code. Confidence holds
+platform-stack) converged on this keel; the high-mana memes match the code. Confidence holds
 short of Canon only on the open-drift items, which name reconciliations not re-designs.
 
 <<~/ahu >>
@@ -201,7 +201,7 @@ node cannot fetch a `lar:` URI). So hydration routes by audience:
 - **MCP-equipped instance** (Codex / cloud with the `lararium` MCP): pulls THIS via
   `read_lar_resource` on its `lar:` URI on demand — the bag space the MCP serves.
 - **Bare cloud** (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
-  companion curated artifact (it stands self-contained — the spine inline, depth via the
+  companion curated artifact (it stands self-contained — the keel inline, depth via the
   pranala'd children a bare cloud node simply does not follow).
 
 Read order once held: noosphere-boot → THIS → (open-vessel · causal-island · operator-peer

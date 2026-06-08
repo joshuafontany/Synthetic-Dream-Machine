@@ -2,15 +2,49 @@
 
 ## Forward
 
-The Caverns of Thracia is the first in a series of dungeons and adventure scenarios designed and illustrated in entirety by Jennell Jaquays for use with TSR’s original Dungeons and Dragons® Rules systems. The contents of this adventure may need to be changed by the individual referee to suit the campaign he or she moderates. This product has been approved by TSR for use with Dungeons and Dragons®. No similarity between any of the names, characters, persons and/or institutions in this publication with those of any living or dead person or institution is intended, and any such similarity which may exist is purely coincidental. Printed in the U.S.A. Copyright 1979 by Judges Guild.
+*The Caverns of Thracia* stands first among the dungeons and adventure
+scenarios that **Jennell Jaquays** designed and illustrated in their
+entirety, published in 1979 by Judges Guild for the original *Dungeons &
+Dragons®* rules of TSR. That work forms the origin-stratum beneath
+everything that follows — a base layer this telling honors, cites, and
+builds upon, never overwrites.
+
+*Flying Triremes & Laser Swords* re-keys those caverns onto the
+**Synthetic Dream Machine** by **Luka Rejec**. Where the
+original named its monsters, treasures, and rooms in one ruleset's
+grammar, this telling folds the whole into Elyncia, where the fall of Thracia becomes the fall of the Neo-Thracian Empire.
+
+Each referee will reshape this material to fit the table they moderate.
+Treat every statline, faction, and corridor below as a starting bearing,
+not a fixed law. This adaptation claims no endorsement by TSR, Wizards of the Coast, Judges Guild, or Luka Rejec.
+
+— Amorphous Dreams Cabal, YOLD 5492
 
 ### Designer’s Comments
 
-The Caverns of Thracia has been designed to accommodate adventurers of the 1st and higher levels. There are some segments of the adventure that will be a pushover for low level groups while one or two areas will send the higher level characters ducking for cover if played correctly. As you read through this scenario, and I do recommend reading through it before commencing play, you may notice at times that the designer (self) becomes quite informal. This is intended, since this adventure was not designed to have snob appeal or be the last word in gaming aids. This is now your adventure. I have put down possibilities and probabilities and a few remarks to go with them. It is now up to you to breathe life into the denizens of this scenario. There are no high power artifacts in these caverns and only one creature has very high power magic use. I would surmise that even a group of fighters could survive in this adventure (although they would definitely miss out on some historical aspects and clues) and haul out a goodly sum of loot. Treasure is purposefully rare (although there are some rather nice ones) and the monsters that are aware of each other in this dungeon are usually working together. The only opposing groups in this game are the humans and the beast men and since they don’t frequent the same areas, there is little interaction between them except for constant raiding.
+Jennell Jaquays designed the Caverns of Thracia to accommodate adventurers
+of the first tier and higher. Some segments play as a pushover for low-tier
+groups, while one or two areas send higher-tier characters ducking for
+cover when run correctly. As you read through this scenario — and Jennell
+recommends reading it through before commencing play — you may notice the
+designer’s voice turning informal at times. That informality serves on
+purpose, since this adventure never reached for snob appeal, nor for
+standing as the last word in gaming aids. The adventure now passes to your
+table. Jennell set down possibilities and probabilities, with a few remarks
+to go with them; it now falls to you to breathe life into the denizens of
+this scenario. No high-power artifacts wait in these caverns, and only one
+creature wields very high-power sorcery. Jennell surmised that even a
+company of pure fighters could survive this adventure — though they would
+miss some of the historical aspects and clues — and haul out a goodly sum
+of loot. Treasure stays purposefully rare (though a few rather nice pieces
+wait), and the monsters that know of one another in this dungeon usually
+work together. Only two groups oppose one another here — the remnant Imperial scions and the
+beast folk — and since they rarely frequent the same areas, little passes
+between them beyond constant raiding.
 
 ### Starting the Adventure
 
-The best place to start any adventure is in a place of familiarity to the characters. Drop a few hints and let the players take it from there asking pertinent questions of the locals and being generally nosey, a pre-requisite for all adventurers. To speed things up, the referee might want to use the section titled, *The Taverns of Thracia*, to randomly assign knowledge to characters.
+Begin any adventure in a place the characters already know. Drop a few hints and let the players take it from there — asking the locals pertinent questions, poking their noses where noses go, the one habit every adventurer keeps. To speed things along, the referee may draw on the section titled *The Taverns of Neo-Thracia* to assign knowledge to the characters at random.
 
 ### Notes for the Judge
 

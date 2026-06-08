@@ -6,10 +6,10 @@
  * resolves native-first. Node and browser differ ONLY in capabilities, never in
  * structure (Ink & Switch): both walk this ONE protocol sequence.
  *
- * VM-FREE by design — this owns the substrate-level spine (composite cascade,
+ * VM-FREE by design — this owns the substrate-level keel (composite cascade,
  * genesis island layer, social plane, admin doc, wiki-slot layers), so it lives in
  * mesh, NOT tw5. The VM-focused pieces (admin-VM spawn, primary-wiki mount, island
- * pool) stay in the platform recipe / tw5. The one tw5-class the spine needs — the
+ * pool) stay in the platform recipe / tw5. The one tw5-class the keel needs — the
  * volatile temp store — injects as `tempStore`, so mesh holds zero tw5 dep.
  *
  * NO `if (platform)` enters here. A capability the recipe omits simply does not run.
@@ -59,7 +59,7 @@ export interface VesselRecipe {
   onPhase?:      (p: LarOpenPhase) => void;
 }
 
-/** What the spine assembles before the recipe mounts admin + wiki. */
+/** What the keel assembles before the recipe mounts admin + wiki. */
 export interface VesselCoreAssembly {
   repo:          Repo;
   composite:     CompositeStore;
@@ -81,11 +81,11 @@ function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocH
 }
 
 /**
- * Assemble the shared vessel spine: catalog floor, genesis island canon layer,
+ * Assemble the shared vessel keel: catalog floor, genesis island canon layer,
  * @lares canon, social plane, admin doc — plus the corpus capability piece when held.
  * The phase sequence holds invariant; each piece resolves its substrate via the recipe.
  */
-export async function assembleVesselSpine(recipe: VesselRecipe): Promise<VesselCoreAssembly> {
+export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAssembly> {
   const { repo, catalogHandle, bootstrap, waitHandle, loadGenesis } = recipe;
   const emit = (p: LarOpenPhase) => recipe.onPhase?.(p);
 
