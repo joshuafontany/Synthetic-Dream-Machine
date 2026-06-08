@@ -103,7 +103,7 @@ mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 f
 
 ## A Vessel Composes Seven Participations
 
-A vessel IS a composition (a recipe), not a platform fork. The seven sovereign pieces,
+We define "a vessel" as a composition (a recipe), not a platform fork. The seven sovereign pieces,
 each a protocol the vessel composes rather than re-implements:
 
 1. **Identity** — keyhive / did:key; keypair + self-certifying ContactCard (leaf: cached
@@ -189,12 +189,23 @@ short of Canon only on the open-drift items, which name reconciliations not re-d
 
 <<~ ahu #hydration >>
 
-## Hydration (how this cures the re-derivation)
+## Hydration (how this cures the re-derivation) — PER AUDIENCE
 
-`noosphere-boot` / `noosphere-project-instructions` SHOULD pranala THIS meme as a hydrate
-target, so a cold instance loads the architecture spine alongside the Voice house — then
-reads sub-memes only for depth, by URI, never re-deriving. Read order: noosphere-boot →
-THIS → (open-vessel · causal-island · operator-peer · island-protocol) for depth.
+`noosphere-boot` stays a SELF-CONTAINED, no-dependency seed for its primary audience —
+CLOUD instances (claude.ai project context) + the Codex `model_instructions_file` — which
+hold no local meme graph at boot. It MUST NOT depend on a pranala to THIS meme (a cloud
+node cannot fetch a `lar:` URI). So hydration routes by audience:
+
+- **Local fs agent** (Claude Code): reads THIS directly from `bags/` — the boot router
+  (`@lares/AGENTS.md` → mu → lararium) carries the meme-graph edge to it.
+- **MCP-equipped instance** (Codex / cloud with the `lararium` MCP): pulls THIS via
+  `read_lar_resource` on its `lar:` URI on demand — the bag space the MCP serves.
+- **Bare cloud** (no MCP, no fs): the operator pastes THIS alongside `noosphere-boot` as a
+  companion curated artifact (it stands self-contained — the spine inline, depth via the
+  pranala'd children a bare cloud node simply does not follow).
+
+Read order once held: noosphere-boot → THIS → (open-vessel · causal-island · operator-peer
+· island-protocol) for depth.
 
 <<~/ahu >>
 

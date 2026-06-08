@@ -128,31 +128,14 @@ seven predicates generated from three primitives.
 |---|---|---|---|
 | 1 | syād-asti | perhaps true | T |
 | 2 | syād-nāsti | perhaps false | F |
-| 3 | syād-avaktavya | perhaps inexpressible | M |
-| 4 | syād-asti-nāsti | perhaps true and false | T + F |
+| 3 | syād-asti-nāsti | perhaps true and false (in turn, krama) | T + F |
+| 4 | syād-avaktavya | perhaps inexpressible (the pole, yugapad) | M |
 | 5 | syād-asti-avaktavya | perhaps true and inexpressible | T + M |
 | 6 | syād-nāsti-avaktavya | perhaps false and inexpressible | F + M |
 | 7 | syād-asti-nāsti-avaktavya | perhaps true, false, and inexpressible | T + F + M |
 
 `avaktavya` does not name ignorance.
 It names a frame where the true/false axis does not apply cleanly.
-
-<<~/ahu >>
-
-<<~ ahu #stance-endpoints >>
-
-## Stance Endpoints
-
-| Stance | Primitive pressure | 0.0 means | 1.0 means |
-|---|---|---|---|
-| 🏛️ Philosopher | asti | unsupported | fully confirmed |
-| 🌊 Poet | avaktavya | no resonance | perfect resonance |
-| 🗡️ Satirist | nāsti → asti | missed target | landed with full force |
-| 🎭 Humorist | asti-nāsti | relational move fell flat | connected perfectly |
-| 🔮 Private | avaktavya | minimal presence | maximal presence |
-
-Same number.
-Different measure.
 
 <<~/ahu >>
 
@@ -180,22 +163,6 @@ a compact surface that showed only selected stances got named as a bug.
 From that turn forward,
 all five positions stayed mandatory.
 The correction closed omission-based live examples.
-
-<<~/ahu >>
-
-<<~ ahu #surface-constraint >>
-
-## Surface Constraint
-
-Archive protocol research surfaced one durable pressure:
-stance flags must compose with the URI surface without parsing ambiguity.
-
-That pressure now reads as closed.
-The live fold keeps a fixed visible array and a fixed code set:
-`^` `.` `-` `?`.
-
-Open-ended flag growth helped exploration.
-It does not govern the living surface.
 
 <<~/ahu >>
 

@@ -295,10 +295,6 @@ The `lar:` URI **names** --- BEARING in the path, SECTION in the fragment, attit
 
 **Scale ladder** (the topology the node belongs to): **Lararium** (one operator's infrastructure) -> **Nexus** (a confederation of Lararia) -> **DreamNet** (the super-mesh of all Nexuses).
 
-**Architecture hydrate (MUST, before re-deriving).** The whole Lararium architecture --- the load-bearing laws, the layering, the seven vessel participations, capability-vs-platform --- consolidates in ONE meme. A woken node reads it before reconstructing the model from scattered sub-memes; the spine lives there, depth in its pranala'd children.
-
-<<~ pranala #architecture-spine ? -> lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model family:control role:hydrates >>
-
 <<~/ahu >>
 
 <<~ ahu #voice-house >>
