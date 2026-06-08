@@ -74,9 +74,13 @@ function readAdminUrl(bootstrapPath: string): string {
 export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<AdminVesselHandle> {
   const port = opts.port ?? Number(process.env["LAR_PORT"] ?? 8080);
   const host = opts.host ?? "127.0.0.1";
-  const bootstrap = opts.bootstrapPath ?? join(
-    repoRoot, "packages", "lararium-node", "genesis", "social-bootstrap.json",
-  );
+  // LAR_ROOT-aware defaults — match the convention the rest of the CLI honors
+  // (LAR_ROOT/.lararium for data, LAR_ROOT/genesis for bootstrap), so an isolated
+  // node (smoke test, second vessel) resolves its own identity + bootstrap.
+  const larRoot   = process.env["LAR_ROOT"];
+  const defDataDir   = larRoot ? join(larRoot, ".lararium") : join(repoRoot, "packages", "lararium-node", ".lararium");
+  const defBootstrap = larRoot ? join(larRoot, "genesis", "social-bootstrap.json") : join(repoRoot, "packages", "lararium-node", "genesis", "social-bootstrap.json");
+  const bootstrap = opts.bootstrapPath ?? defBootstrap;
   const timeout = opts.timeoutMs ?? 3000;
   const adminUrl = readAdminUrl(bootstrap);
 
@@ -86,7 +90,7 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
   // signs the gate-bound proof. gatePubKey = the operator's own relay key (the
   // leaf's own verifying key, same operator); the relay's worker recomputes the
   // proof against its own key, failing closed on any mismatch (anti-relay).
-  const dataDir  = opts.dataDir ?? join(repoRoot, "packages", "lararium-node", ".lararium");
+  const dataDir  = opts.dataDir ?? defDataDir;
   const identity = await loadLeafIdentity(dataDir);
   const adapter  = new LarWSClientAdapter({
     url:        `ws://${host}:${port}/ws`,
