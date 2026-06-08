@@ -14,6 +14,7 @@ import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
+import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 function dirSizeHint(dir: string): string {
@@ -46,19 +47,25 @@ function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<b
   });
 }
 
-export async function cmdStatus(_args: ParsedArgs): Promise<number> {
+export async function cmdStatus(args: ParsedArgs): Promise<number> {
   const nodePkg   = join(REPO_ROOT, "packages", "lararium-node");
   const storage   = join(nodePkg, ".lararium");
   const bootstrap = join(nodePkg, "genesis", "social-bootstrap.json");
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);
 
-  const portInUse = await probePort(port);
+  const portInUse  = await probePort(port);
+  const hasBoot    = existsSync(bootstrap);
+  const storageStr = dirSizeHint(storage);
 
-  console.log("lares status");
-  console.log(`  bootstrap:   ${existsSync(bootstrap) ? "present" : "absent (run `lares init`)"}`);
-  console.log(`  storage:     ${dirSizeHint(storage)}`);
-  console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);
+  // Snapshot fields — the same data the prose renders, shaped for an agent.
+  const data: Record<string, unknown> = {
+    bootstrap: hasBoot ? "present" : "absent",
+    storage:   storageStr,
+    port,
+    portInUse,
+  };
+  let residencyLine: string | null = null;
 
   // C.4 — when the daemon is up, ask it for a residency snapshot. Cheap
   // call (one verb-tiddler round-trip); if anything fails, fall through
@@ -75,7 +82,8 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
           const wela    = (stats["wela"]   ?? []) as Array<{ url: string }>;
           const anuCnt  = stats["anuCount"] as number;
           const hotCap  = stats["hotCap"]   as number;
-          console.log(`  residency:   ${pinned.length} pinned · ${wela.length}/${hotCap} wela · ${anuCnt} anu`);
+          data["residency"] = { pinned: pinned.length, wela: wela.length, hotCap, anu: anuCnt };
+          residencyLine = `${pinned.length} pinned · ${wela.length}/${hotCap} wela · ${anuCnt} anu`;
         }
       } finally {
         await vessel.disconnect();
@@ -85,5 +93,16 @@ export async function cmdStatus(_args: ParsedArgs): Promise<number> {
     }
   }
 
+  emit(args, {
+    ok: true,
+    data,
+    human: () => {
+      console.log("lares status");
+      console.log(`  bootstrap:   ${hasBoot ? "present" : "absent (run `lares init`)"}`);
+      console.log(`  storage:     ${storageStr}`);
+      console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);
+      if (residencyLine) console.log(`  residency:   ${residencyLine}`);
+    },
+  });
   return 0;
 }

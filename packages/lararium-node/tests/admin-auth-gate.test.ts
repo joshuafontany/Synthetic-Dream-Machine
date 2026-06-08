@@ -16,7 +16,7 @@ import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { createServer }                               from "node:http";
 import { WebSocketServer, WebSocket }                 from "ws";
 import { AdminAuthGate }                              from "../src/admin-auth-gate.js";
-import type { AuthVerifierSeam }                      from "@lararium/mesh";
+import type { AuthVerifierSeam, AuthProofWire }       from "@lararium/mesh";
 import {
   isLarChallengeMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
   mkLarAuth,
@@ -38,6 +38,24 @@ function makeStubSeam(opts: {
       return opts.verifyResult.ok
         ? { ok: true, identifier: opts.receiveResult.id }
         : { ok: false, reason: opts.verifyResult.reason };
+    },
+  };
+}
+
+// Capturing seam — records the proof + access the gate relays, so we can assert
+// the V3 plumbing (gate forwards {nonce, sig, ts} to the keyholder worker).
+function makeCapturingSeam(id = "0xaabbcc"): {
+  seam: AuthVerifierSeam;
+  calls: Array<{ bagUrl: string; access: string; proof?: AuthProofWire }>;
+} {
+  const calls: Array<{ bagUrl: string; access: string; proof?: AuthProofWire }> = [];
+  return {
+    calls,
+    seam: {
+      async verify(_cardBytes, bagUrl, access, proof) {
+        calls.push({ bagUrl, access, ...(proof ? { proof } : {}) });
+        return { ok: true, identifier: id };
+      },
     },
   };
 }
@@ -232,6 +250,52 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
 
     const { code } = await nextClose(ws);
     expect(code).toBe(4003);
+  });
+
+  test("V3: armed with a gatePubKey, the challenge advertises it (gate-binding)", async () => {
+    const { seam } = makeCapturingSeam();
+    gate.arm(seam, "lar:///ha.ka.ba/@admin", "deadbeef".repeat(8));
+
+    const ws  = await connect(serverInfo.port);
+    const msg = await nextMessage(ws) as { nonce: string; gatePubKey?: string };
+
+    expect(isLarChallengeMsg(msg)).toBe(true);
+    expect(msg.gatePubKey).toBe("deadbeef".repeat(8));
+
+    ws.close();
+  });
+
+  test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the seam", async () => {
+    const { seam, calls } = makeCapturingSeam();
+    gate.arm(seam, "lar:///ha.ka.ba/@admin", "00".repeat(32));
+
+    const ws   = await connect(serverInfo.port);
+    const chal = await nextMessage(ws) as { nonce: string };
+
+    // mkLarAuth(card, nonce, sig) + an explicit ts → the gate should bundle a proof.
+    ws.send(JSON.stringify({ ...mkLarAuth("card", chal.nonce, "ab".repeat(64)), ts: "2026-06-07T00:00:00.000Z" }));
+    await nextMessage(ws); // auth-ok
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0]!.proof).toEqual({ nonce: chal.nonce, sig: "ab".repeat(64), ts: "2026-06-07T00:00:00.000Z" });
+
+    ws.close();
+  });
+
+  test("V3: a legacy lar:auth without ts relays NO proof (back-compat)", async () => {
+    const { seam, calls } = makeCapturingSeam();
+    gate.arm(seam); // no gatePubKey, legacy posture
+
+    const ws   = await connect(serverInfo.port);
+    const chal = await nextMessage(ws) as { nonce: string };
+
+    ws.send(JSON.stringify(mkLarAuth("card", chal.nonce, "stub-sig"))); // no ts
+    await nextMessage(ws); // auth-ok
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0]!.proof).toBeUndefined();
+
+    ws.close();
   });
 
   test("clients set decrements when authenticated connection closes", async () => {

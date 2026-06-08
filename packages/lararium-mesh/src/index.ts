@@ -50,11 +50,13 @@ export type { AwaitIslandMsgOpts, VesselWorkerHandle, VesselIslandHost } from ".
 export { VesselIslandPoolCore } from "./vessel-island-pool-core.js";
 export type { VesselIslandPoolCoreOptions, DiskMirrorGrant } from "./vessel-island-pool-core.js";
 export {
-  AUTH_WIRE_VERSION,
+  AUTH_WIRE_VERSION, AUTH_PROOF_TTL_MS,
   mkLarChallenge, mkLarAuth, mkLarAuthOk, mkLarAuthDenied,
   isLarChallengeMsg, isLarAuthMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
+  authProofBytes, buildAuthResponse, verifyAuthProof, runPeerHandshake,
 } from "./auth-wire.js";
 export type {
   AuthWireVersion,
   LarChallengeMsg, LarAuthMsg, LarAuthOkMsg, LarAuthDeniedMsg, LarAuthWireMsg,
+  AuthProofWire, PeerHandshake,
 } from "./auth-wire.js";

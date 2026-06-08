@@ -11,6 +11,15 @@
  * Attach mode only (operator-chosen for B.5): the CLI requires a daemon to
  * be up at the configured port. Ephemeral in-process boot is deferred to a
  * later sprint when contention rules around NodeFS storage are addressed.
+ *
+ * Share substrate, not sovereignty (lar:///…/mesh/causal-island #substrate-not-
+ * sovereignty): the CLI runs as a thin LEAF peer — its `Repo` carries NO storage
+ * adapter, so its replica lives only in this process's RAM and syncs from the
+ * daemon (the RELAY, which owns the canonical NodeFS replica) over the loopback
+ * WS (a real Tier-3 island boundary, guarded by the V3 auth gate). Co-location on
+ * one machine stays pono BECAUSE the boundaries hold: separate process, separate
+ * replica, own keys. The anti-pattern would collapse these into one heap / Repo /
+ * storage dir — the reason in-process boot stays deferred above.
  */
 
 import { readFileSync } from "node:fs";

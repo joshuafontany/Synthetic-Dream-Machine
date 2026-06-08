@@ -1,13 +1,17 @@
 /**
- * auth-wire — authProofBytes (V3 proof-of-possession, the canonical what-to-sign).
- * Locks the gate-bound challenge blob; the sign/verify plumbing is a later build.
+ * auth-wire — authProofBytes (V3 proof-of-possession, the canonical what-to-sign)
+ * + verifyAuthProof (the Ed25519 verifier half). Locks the gate-bound challenge
+ * blob and proves real keys round-trip + relay/replay/tamper get rejected.
  */
 
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeAll } from "vitest";
+import * as ed25519 from "@noble/ed25519";
 import {
-  authProofBytes, buildAuthResponse, runPeerHandshake,
+  authProofBytes, buildAuthResponse, verifyAuthProof, runPeerHandshake,
+  AUTH_PROOF_TTL_MS,
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied,
 } from "../src/auth-wire.js";
+import { hex } from "../src/crypto.js";
 import type { LarAuthMsg } from "../src/auth-wire.js";
 
 const base = {
@@ -93,5 +97,77 @@ describe("runPeerHandshake (platform-blind V3 peer half)", () => {
     const r = await runPeerHandshake(s);
     expect(r.ok).toBe(false);
     expect(s.sent).toHaveLength(0);
+  });
+});
+
+describe("verifyAuthProof (V3 verifier half — real Ed25519 keys)", () => {
+  // A real peer keypair; peerPubKey = the raw 32-byte verifying-key hex.
+  let peerPub: string;
+  let sign: (bytes: Uint8Array) => Promise<string>;
+
+  const challenge = {
+    nonce:      "ab12cd",
+    gatePubKey: "00".repeat(32),                 // stands for the verifier's own key
+    aud:        "lar:///ha.ka.ba/@admin",
+    ts:         "2026-06-07T00:00:00.000Z",
+  };
+
+  // Build a signed lar:auth the way a real peer would, then verify it.
+  async function signedProof(over = challenge, peer = peerPub) {
+    const msg = await buildAuthResponse({
+      ...over, peerPubKey: peer, contactCard: "card-json", sign,
+    });
+    return { sig: msg.sig, ts: msg.ts! };
+  }
+
+  beforeAll(async () => {
+    const priv = ed25519.utils.randomSecretKey();
+    peerPub = hex(await ed25519.getPublicKeyAsync(priv));
+    sign = async (bytes) => hex(await ed25519.signAsync(bytes, priv));
+  });
+
+  test("a genuine signature over the gate-bound proof clears", async () => {
+    const { sig, ts } = await signedProof();
+    expect(await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig, ts }))
+      .toEqual({ ok: true });
+  });
+
+  test("anti-relay: a proof signed for a DIFFERENT gate fails against this gate", async () => {
+    const { sig, ts } = await signedProof({ ...challenge, gatePubKey: "11".repeat(32) });
+    const r = await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig, ts });
+    expect(r.ok).toBe(false);
+  });
+
+  test("anti-replay: a proof signed for a different nonce fails", async () => {
+    const { sig, ts } = await signedProof({ ...challenge, nonce: "ff9900" });
+    expect((await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig, ts })).ok).toBe(false);
+  });
+
+  test("imposter: a signature checked against a different peer key fails", async () => {
+    const { sig, ts } = await signedProof();
+    const otherPub = hex(await ed25519.getPublicKeyAsync(ed25519.utils.randomSecretKey()));
+    expect((await verifyAuthProof({ ...challenge, peerPubKey: otherPub, sig, ts })).ok).toBe(false);
+  });
+
+  test("freshness window: a stale ts past the TTL is rejected when `now` is supplied", async () => {
+    const { sig, ts } = await signedProof();
+    const stale = Date.parse(challenge.ts) + AUTH_PROOF_TTL_MS + 1_000;
+    const r = await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig, ts, now: stale });
+    expect(r).toEqual({ ok: false, reason: "proof outside freshness window" });
+  });
+
+  test("freshness window: a ts within the TTL passes", async () => {
+    const { sig, ts } = await signedProof();
+    const fresh = Date.parse(challenge.ts) + 1_000;
+    expect(await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig, ts, now: fresh }))
+      .toEqual({ ok: true });
+  });
+
+  test("malformed material is rejected before crypto", async () => {
+    const { sig, ts } = await signedProof();
+    expect((await verifyAuthProof({ ...challenge, peerPubKey: "xyz", sig, ts })).reason)
+      .toMatch(/peerPubKey/);
+    expect((await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig: "ab", ts })).reason)
+      .toMatch(/sig/);
   });
 });

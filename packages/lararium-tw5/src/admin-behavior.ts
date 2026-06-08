@@ -24,6 +24,7 @@ import {
   type AdminMsg_VerbResult,
   type AdminMsg_VerifyRequest,
   type AdminMsg_ResolveBindingRequest,
+  type AuthProofWire,
   type BatchMode,
   type Verb,
   type CapabilityVerifier,
@@ -52,8 +53,8 @@ export interface AdminBehaviorOptions {
    * platform entry supplies this closing over the booted keyhive; tw5 stays
    * keyhive-free.
    */
-  verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin")
-    => Promise<{ ok: boolean; identifier?: string; reason?: string }>;
+  verifyPeer?: (cardBytes: Uint8Array, bagUrl: string, access: "read" | "admin", proof?: AuthProofWire)
+    => Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
   /**
    * Resolve (or mint+delegate) the @personal/@draft binding pair island-side —
    * the mint needs keyhive + the island Repo. The platform entry supplies this
@@ -139,14 +140,15 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
 
       if (type === "admin:verify-request") {
         const msg = raw as AdminMsg_VerifyRequest;
-        const answer: Promise<{ ok: boolean; identifier?: string; reason?: string }> = opts.verifyPeer
-          ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access)
+        const answer: Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }> = opts.verifyPeer
+          ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access, msg.proof)
           : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
         answer
           .then((r) => post(mkAdminVerifyResult({
             requestId: msg.requestId, ok: r.ok,
             ...(r.identifier ? { identifier: r.identifier } : {}),
             ...(r.reason ? { reason: r.reason } : {}),
+            ...(r.proofVerified !== undefined ? { proofVerified: r.proofVerified } : {}),
           })))
           .catch((err: unknown) => post(mkAdminVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),

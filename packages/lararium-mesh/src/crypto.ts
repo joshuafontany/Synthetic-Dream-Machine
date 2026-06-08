@@ -108,6 +108,24 @@ export function hex(bytes: Uint8Array): string {
 }
 
 /**
+ * Decode a lowercase/uppercase hex string into bytes. Inverse of `hex`.
+ * Throws on odd length or non-hex characters — callers pass already-validated
+ * hex (e.g. an ed25519 key or signature whose length the caller guards first).
+ */
+export function hexToBytes(hexStr: string): Uint8Array {
+  if (hexStr.length % 2 !== 0) {
+    throw new TypeError(`hexToBytes: odd-length hex (${hexStr.length})`);
+  }
+  const out = new Uint8Array(hexStr.length / 2);
+  for (let i = 0; i < out.length; i++) {
+    const byte = Number.parseInt(hexStr.slice(i * 2, i * 2 + 2), 16);
+    if (Number.isNaN(byte)) throw new TypeError(`hexToBytes: non-hex at offset ${i * 2}`);
+    out[i] = byte;
+  }
+  return out;
+}
+
+/**
  * SHA-256 digest of bytes, returned as lowercase hex.
  * Requires a DigestProvider (use defaultCryptoProvider for platform Web Crypto).
  */

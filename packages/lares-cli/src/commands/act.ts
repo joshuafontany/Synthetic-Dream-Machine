@@ -38,6 +38,7 @@ import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -114,7 +115,8 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   try {
     did = await operatorDid();
   } catch (err) {
-    console.error(`lares act: ${err instanceof Error ? err.message : String(err)}`);
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, { ok: false, error: msg, human: () => console.error(`lares act: ${msg}`) });
     return 3;
   }
 
@@ -122,21 +124,36 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   try {
     vessel = await connectAdminVessel(connectOpts);
   } catch (err) {
-    console.error(`lares act: ${err instanceof Error ? err.message : String(err)}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, {
+      ok: false, error: msg,
+      human: () => {
+        console.error(`lares act: ${msg}`);
+        console.error("  Start the daemon with `lares serve` and try again.");
+      },
+    });
     return 3;
   }
 
   // ── Confirm + submit ──────────────────────────────────────────────────
   try {
-    console.log("");
-    console.log(`  ${verb}`);
-    for (const [k, v] of Object.entries(actionArgs)) {
-      console.log(`    ${k.padEnd(12)} ${v}`);
-    }
-    console.log("");
-
+    // The confirmation prompt belongs to the HUMAN/TTY path only. An agent (JSON
+    // / off-TTY) cannot answer y/N — it MUST carry intent explicitly via --yes;
+    // refusing the prompt keeps the surface non-interactive for unattended actors.
     if (!args.flags["yes"]) {
+      if (wantsJson(args)) {
+        emit(args, {
+          ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation",
+          human: () => { /* unreachable on the JSON path */ },
+        });
+        return 1;
+      }
+      console.log("");
+      console.log(`  ${verb}`);
+      for (const [k, v] of Object.entries(actionArgs)) {
+        console.log(`    ${k.padEnd(12)} ${v}`);
+      }
+      console.log("");
       const rl = createInterface({ input: stdin, output: stdout });
       const answer = await rl.question("Proceed? [y/N] ");
       rl.close();
@@ -147,7 +164,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     }
 
     // V1 — content-address this idempotent residency change (empty nonce). The
-    // subject is the bag the change lands in; re-issuing the SAME logical change
+    // subject names the bag the change lands in; re-issuing the SAME logical change
     // (same change-id + verb + target) collapses to one requestId, and the
     // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
     // change-id (the --change-id default) means a genuinely distinct change → runs.
@@ -155,16 +172,28 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     const requestId = await taskContentId({ subject, command: verb, args: actionArgs, nonce: "" });
     const result = await submitVerb(vessel, verb, actionArgs, did, { requestId });
     if (result.status === "error") {
-      console.error(`${verb} failed: ${result.errorMessage ?? "unknown"}`);
+      const msg = result.errorMessage ?? "unknown";
+      emit(args, {
+        ok: false, requestId: result.requestId, error: msg,
+        human: () => console.error(`${verb} failed: ${msg}`),
+      });
       return 4;
     }
 
     const summary = summaryOutput(result) ?? {};
-    console.log(`${verb} done`);
-    for (const [k, v] of Object.entries(summary)) {
-      console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
-    }
-    console.log(`  audit:       lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
+    const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+    emit(args, {
+      ok: true,
+      requestId: result.requestId,
+      data: { verb, ...summary, audit: auditUri },
+      human: () => {
+        console.log(`${verb} done`);
+        for (const [k, v] of Object.entries(summary)) {
+          console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
+        }
+        console.log(`  audit:       ${auditUri}`);
+      },
+    });
     return 0;
   } finally {
     await vessel.disconnect();

@@ -53,6 +53,8 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol
  */
 
+import type { AuthProofWire } from "./auth-wire.js";
+
 export const ISLAND_PROTOCOL_VERSION = 1 as const;
 export type ProtocolVersion = typeof ISLAND_PROTOCOL_VERSION;
 
@@ -266,6 +268,13 @@ export interface AdminMsg_VerifyRequest {
   bagUrl: string;
   /** Access level required. */
   access: "read" | "admin";
+  /**
+   * V3 proof-of-possession material relayed from the peer's lar:auth, for the
+   * in-worker keyholder to verify (project_verification_placement). Optional:
+   * absent until the peer transport (C) sources it; the worker reports
+   * `proofVerified` advisory-only until the enforcement flip (D).
+   */
+  proof?: AuthProofWire;
 }
 
 /** Island → vessel: the keyhive verdict for a verify-request. */
@@ -278,6 +287,12 @@ export interface AdminMsg_VerifyResult {
    *  host can key its sharePolicy/peer map without a local keyhive. */
   identifier?: string;
   reason?: string;
+  /**
+   * V3 advisory: whether the relayed proof's Ed25519 signature verified against
+   * the card-derived key + this gate's own key. `undefined` when no proof crossed.
+   * Advisory until the enforcement flip (D) folds it into `ok`.
+   */
+  proofVerified?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -578,6 +593,7 @@ export function mkAdminVerifyRequest(opts: {
   cardBytes: Uint8Array;
   bagUrl:    string;
   access:    "read" | "admin";
+  proof?:    AuthProofWire;
 }): AdminMsg_VerifyRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -586,14 +602,16 @@ export function mkAdminVerifyRequest(opts: {
     cardBytes: opts.cardBytes,
     bagUrl:    opts.bagUrl,
     access:    opts.access,
+    ...(opts.proof ? { proof: opts.proof } : {}),
   };
 }
 
 export function mkAdminVerifyResult(opts: {
-  requestId:   string;
-  ok:          boolean;
-  identifier?: string;
-  reason?:     string;
+  requestId:      string;
+  ok:             boolean;
+  identifier?:    string;
+  reason?:        string;
+  proofVerified?: boolean;
 }): AdminMsg_VerifyResult {
   const msg: AdminMsg_VerifyResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
@@ -601,8 +619,9 @@ export function mkAdminVerifyResult(opts: {
     requestId: opts.requestId,
     ok:        opts.ok,
   };
-  if (opts.identifier !== undefined) msg.identifier = opts.identifier;
-  if (opts.reason     !== undefined) msg.reason     = opts.reason;
+  if (opts.identifier    !== undefined) msg.identifier    = opts.identifier;
+  if (opts.reason        !== undefined) msg.reason        = opts.reason;
+  if (opts.proofVerified !== undefined) msg.proofVerified = opts.proofVerified;
   return msg;
 }
 
@@ -685,6 +704,9 @@ export interface AuthVerifierSeam {
     cardBytes: Uint8Array,
     bagUrl: string,
     access: "read" | "admin",
-  ): Promise<{ ok: boolean; identifier?: string; reason?: string }>;
+    /** V3 proof material relayed from the peer's lar:auth; the in-worker
+     *  keyholder verifies it (advisory `proofVerified` until the D flip). */
+    proof?: AuthProofWire,
+  ): Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }>;
 }
 

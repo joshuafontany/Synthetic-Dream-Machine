@@ -35,6 +35,8 @@ sit above any single vessel implementation.
 |---|---|
 | **Vessel** | A lararium identity-and-runtime unit. One operator keypair. One admin VM lane. Zero or more active wiki VM lanes. |
 | **Peer** | An Automerge-layer sync participant. A vessel participates in the mesh as a peer; this word names only the sync role, never the vessel's identity. |
+| **Relay / Leaf** | Sync ROLES, held as Keyhive capability, not platform: a **relay** carries the canonical replica + substrate for co-located leaves; a **leaf** (CLI, agent) stays thin, syncing from the relay. Heavy peer = substrate, not authority. |
+| **Actor** | Whoever authors intent over the command surface — a **human** at a terminal or an **AI agent** acting programmatically. Both act as sovereign vessels (own keys, own replica); neither holds a privileged shape. |
 | **Ea** | Breath. Sovereignty. A vessel's right to hold, author, and sync its own causal state without asking permission from any authority above the operator's root key. A vessel either breathes or it does not. |
 | **Admin lane** | The always-present TW5 VM lane that carries command intake, receipt write-back, capability verification, and operator-private session state. |
 | **Active wiki lane** | A TW5 VM lane carrying a corpus-facing wiki. One or more may run concurrently; the pool manages residency. |
@@ -120,7 +122,7 @@ It carries: `id`, `commandId`, `outcome`, `resolvedAt`, and any error or diff re
 It lives in the admin doc. The mesh carries it to every operator vessel.
 
 **OP-CR3 — Bridge code transports envelopes.**
-`stdio`, Unix socket, and WebSocket are envelope carriers for the command/receipt
+`stdio`, Unix socket, and WebSocket carry envelopes for the command/receipt
 surface. They transport; they do not own ceremony meaning. Changing the bridge
 does not change the record contract.
 
@@ -128,6 +130,54 @@ does not change the record contract.
 Before any command reaches an edge adaptor (filesystem, network, process), the
 invoking vessel verifies the capability context locally. Edge adaptors may re-check
 before side effects. No round-trip to a server gates local intent.
+
+**OP-CR5 — One surface renders for human AND machine.**
+The command surface emits to whoever reads it. On a TTY it renders prose; off a TTY
+(or under `--json`) it emits a deterministic structured payload — the same
+command/receipt record shaped as data, carrying its correlatable `requestId` and an
+`ok | error` status. One core, two projections; the command surface never forks by
+audience. (The MCP tool projection exposes the same verbs as schema-typed Tools over
+the same core — see #actor-parity.)
+
+<<~/ahu >>
+
+<<~ ahu #actor-parity >>
+
+## Actor Parity — Human and AI Agent
+
+An operator surface serves two kinds of actor over **one** command/receipt surface:
+a **human** at an interactive terminal and an **AI agent** acting programmatically.
+Neither holds a privileged shape; both author intent and observe convergence.
+
+**OP-AP1 — An agent acts as a sovereign vessel, never an in-process closure.**
+An AI agent that interfaces with the mesh SHALL hold its own keys, its own replica,
+and its own causal log, reconciling over a real boundary. An agent embedded in the
+daemon's heap — a function call wearing a vessel costume — breaks the
+share-substrate-not-sovereignty law ([[causal-island]] #substrate-not-sovereignty).
+Co-location on one machine stays fine; a shared heap/Repo/storage-scope does not.
+
+**OP-AP2 — Identity by held keys, not account or session.**
+Human and agent alike present a keyed identity (operator keypair / agent DID) and act
+only through capabilities they hold — attenuated, travelling WITH the intent
+(UCAN-invocation shape over the verb-tiddler). No login, no session, no bearer token,
+no ambient authority. Authority that fails to ride the task imports web2 smell.
+
+**OP-AP3 — Intent travels as a content-addressed, self-authorizing fact.**
+A verb-summons carries `taskContentId({subject, command, args, nonce})` — the
+content address that doubles as the correlatable handle. Re-issuing the same logical
+intent collapses to one id; the receipt's convergence (not a server ACK) MARKS the
+outcome. Exactly-once **effect** rides the change-hash, never exactly-once delivery.
+
+**OP-AP4 — Eventual work returns a handle, observed by convergence.**
+No verb blocks on a synchronous return. The actor writes intent, receives the
+content-address handle, and observes the receipt fact converge in its own replica.
+Polling reads the local replica for merge arrival — convergence-observation, never
+server-state polling. (Mirrors MCP Tasks: `taskId` + receipt fetch, requestor-driven;
+status notifications accelerate but never become load-bearing.)
+
+<<~ confidence Synthesis 12/20 >> The agent-as-sovereign-vessel identity seam
+(worker-resident keys + ContactCard, never a main-thread keyhive) remains the open
+build; the surface law above stands settled.
 
 <<~/ahu >>
 

@@ -24,8 +24,12 @@
  *      PeerId → identifierHex entries when the adapter emits "peer-candidate".
  *
  * Security posture (alpha):
- *   - Nonce signature verification is stubbed (TODO L.2). Full challenge-response:
- *     sig = Ed25519Sign(identityPrivKey, nonce_bytes || serverStaticPubKey_bytes).
+ *   - V3 proof-of-possession: the gate emits its gate-binding key in lar:challenge
+ *     and relays the peer's {nonce, sig, ts} to the keyholder worker, which verifies
+ *     the Ed25519 proof (verifyAuthProof) against the card key + the gate's own key.
+ *     The worker's `proofVerified` rides back ADVISORY — admission still gates on the
+ *     capability verdict only. ENFORCEMENT FLIP (step D) folds proofVerified into
+ *     admission once every peer transport sources a real proof (none do yet).
  *   - ContactCard payload is capped at MAX_CONTACT_CARD_BYTES before TextEncoder.
  *   - Concurrent unauthenticated connections are capped at MAX_PENDING.
  *   - Auth timeout is 5 s (machine-to-machine; no human interaction path).
@@ -53,6 +57,9 @@ const WS_CLOSE_RATE_LIMITED  = 4429;
 interface ArmedState {
   seam:        AuthVerifierSeam;
   adminBagUrl: string;
+  /** The gate's verifying-key hex, emitted in lar:challenge as the gate-binding
+   *  the peer's V3 proof commits to. Omitted → no gate-binding advertised. */
+  gatePubKey?: string;
 }
 
 /**
@@ -84,8 +91,8 @@ export class AdminAuthGate extends EventEmitter {
    * Call once the admin VM lives (its in-worker keyhive answers verify-proxy
    * queries). Connections arriving before arm() are rejected with 4503.
    */
-  arm(seam: AuthVerifierSeam, adminBagUrl: string = ADMIN_BAG_ID): void {
-    this.armed = { seam, adminBagUrl };
+  arm(seam: AuthVerifierSeam, adminBagUrl: string = ADMIN_BAG_ID, gatePubKey?: string): void {
+    this.armed = { seam, adminBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
   }
 
   /**
@@ -110,10 +117,10 @@ export class AdminAuthGate extends EventEmitter {
     }
 
     this._pending++;
-    const { seam, adminBagUrl } = this.armed;
+    const { seam, adminBagUrl, gatePubKey } = this.armed;
 
     const nonce = randomBytes(32).toString("hex");
-    this._send(socket, mkLarChallenge(nonce));
+    this._send(socket, mkLarChallenge(nonce, gatePubKey));
 
     const result = await new Promise<
       { ok: true; identHex: string } | { ok: false; reason: string }
@@ -155,15 +162,26 @@ export class AdminAuthGate extends EventEmitter {
             return;
           }
 
-          // TODO(L.2): verify parsed.sig = Ed25519Sign(identityPrivKey, nonce_bytes || serverStaticPubKey_bytes)
-          // Alpha: ContactCard self-certification + accessForDoc is the primary gate.
-
           const cardBytes = new TextEncoder().encode(parsed.contactCard);
+
+          // V3 proof relay: carry the peer's signed proof material to the keyholder
+          // worker (the only verifier — project_verification_placement). The gate
+          // holds no keyhive, so it forwards {nonce, sig, ts} and the worker checks
+          // the Ed25519 signature against the card-derived key + this gate's own key.
+          const proof = parsed.sig && parsed.ts
+            ? { nonce, sig: parsed.sig, ts: parsed.ts }
+            : undefined;
+
           // Path (b): host has no keyhive — proxy to the admin island, which
           // does receiveContactCard + verify in-worker and returns the verdict
           // plus the peer's Identifier hex for the sharePolicy map.
-          const verdict = await seam.verify(cardBytes, adminBagUrl, "admin");
+          const verdict = await seam.verify(cardBytes, adminBagUrl, "admin", proof);
 
+          // ENFORCEMENT POSTURE (V3 step D, deferred): admission rides the
+          // capability verdict (`verdict.ok`) only. `verdict.proofVerified` rides
+          // back ADVISORY until every peer transport sources a real proof; the flip
+          // ANDs it into the admission test here (and/or in-worker). Until then a
+          // require-proof flip would reject every peer (none sign yet).
           if (!verdict.ok || !verdict.identifier) {
             resolve({ ok: false, reason: verdict.reason ?? (verdict.ok ? "verify-proxy returned no identifier" : "insufficient capability") });
           } else {

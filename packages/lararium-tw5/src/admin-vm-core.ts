@@ -184,6 +184,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
         ok: msg.ok,
         ...(msg.identifier ? { identifier: msg.identifier } : {}),
         ...(msg.reason ? { reason: msg.reason } : {}),
+        ...(msg.proofVerified !== undefined ? { proofVerified: msg.proofVerified } : {}),
       });
       return;
     }
@@ -252,8 +253,11 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       _registry = registry;
     },
     authSeam: {
-      verify: (cardBytes, bagUrl, access) =>
-        askIsland("verify", (requestId) => mkAdminVerifyRequest({ requestId, cardBytes, bagUrl, access })),
+      verify: (cardBytes, bagUrl, access, proof) =>
+        askIsland("verify", (requestId) => mkAdminVerifyRequest({
+          requestId, cardBytes, bagUrl, access,
+          ...(proof ? { proof } : {}),
+        })),
     },
     resolveBinding: (fingerprint, recipeTrace) =>
       askIsland("binding", (requestId) => mkAdminResolveBindingRequest({ requestId, fingerprint, recipeTrace })),

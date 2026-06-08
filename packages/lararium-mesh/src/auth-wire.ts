@@ -11,14 +11,20 @@
  *   Gate → Peer  : LarAuthOkMsg     (auth passed — Automerge join may proceed)
  *              OR      LarAuthDeniedMsg  (ws.close(4003) follows immediately)
  *
- * Alpha note: nonce signature verification (replay protection) is stubbed — the
- * ContactCard's self-certifying `signature()` plus `accessForDoc` provides the
- * primary gate. Full challenge-response signature verification lands in S9.6.
+ * Alpha note: V3 proof-of-possession. The pure platform-blind halves
+ * (`authProofBytes` · `buildAuthResponse` · `verifyAuthProof` · `runPeerHandshake`)
+ * and the VERIFY PATH have landed: the gate emits its gate-binding key in
+ * lar:challenge and relays {nonce, sig, ts} to the keyholder worker, which checks
+ * the Ed25519 proof against the card key + its own key. `proofVerified` rides back
+ * ADVISORY — admission still gates on `accessForDoc` only. REMAINING: each peer
+ * transport sources a real proof (C), then the enforcement flip ANDs proofVerified
+ * into admission (D). See `project_verification_placement`.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/auth-wire
  */
 
-import { canonicalJsonBytes } from "./crypto.js";
+import * as ed25519 from "@noble/ed25519";
+import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
 
 export const AUTH_WIRE_VERSION = "1" as const;
 export type AuthWireVersion = typeof AUTH_WIRE_VERSION;
@@ -27,7 +33,27 @@ export type AuthWireVersion = typeof AUTH_WIRE_VERSION;
 export interface LarChallengeMsg {
   type:    "lar:challenge";
   nonce:   string; // 32-byte hex, gate-generated per connection
+  /**
+   * The gate's verifying-key hex — the gate-binding the peer's proof commits to
+   * (the verifier recomputes with its OWN key, so a relay to a different gate
+   * fails). Optional for back-compat: a gate armed without it omits the field;
+   * once the peer transport (C) + enforcement flip (D) land it becomes load-bearing.
+   */
+  gatePubKey?: string;
   version: AuthWireVersion;
+}
+
+/**
+ * AuthProofWire — the V3 proof material a gate relays from the peer's `lar:auth`
+ * to the keyholder worker (the only verifier). Deliberately carries NO pubkeys:
+ * the worker supplies `gatePubKey` (its own verifying key) and `peerPubKey` (the
+ * ContactCard-derived suffix) from TRUSTED sources, never the wire (see
+ * verifyAuthProof's conservative-caller law). Only freshness/replay material crosses.
+ */
+export interface AuthProofWire {
+  nonce: string;
+  sig:   string;
+  ts:    string;
 }
 
 /** Peer → Gate: identity assertion. */
@@ -101,8 +127,12 @@ export function isLarAuthDeniedMsg(v: unknown): v is LarAuthDeniedMsg {
 
 // ── Constructors ──────────────────────────────────────────────────────────────
 
-export function mkLarChallenge(nonce: string): LarChallengeMsg {
-  return { type: "lar:challenge", nonce, version: AUTH_WIRE_VERSION };
+export function mkLarChallenge(nonce: string, gatePubKey?: string): LarChallengeMsg {
+  return {
+    type: "lar:challenge", nonce,
+    ...(gatePubKey ? { gatePubKey } : {}),
+    version: AUTH_WIRE_VERSION,
+  };
 }
 
 export function mkLarAuth(
@@ -157,6 +187,72 @@ export function authProofBytes(parts: {
     aud:        parts.aud,
     ts:         parts.ts,
   });
+}
+
+/**
+ * AUTH_PROOF_TTL_MS — the freshness window (half-width) a proof's `ts` must fall
+ * within of the verifier's clock. Bounds the replay window once the gate nonce
+ * rotates (DPoP `iat` / Beelay timestamp discipline). 60 s allows machine clock
+ * skew on a machine-to-machine path with no human interaction.
+ */
+export const AUTH_PROOF_TTL_MS = 60_000;
+
+/**
+ * verifyAuthProof — the VERIFIER half of V3 proof-of-possession: the counterpart
+ * to `buildAuthResponse`. Recompute the gate-bound proof (authProofBytes) and
+ * check the peer's Ed25519 signature against its claimed verifying key.
+ *
+ * CONSERVATIVE-CALLER LAW: this helper checks a signature over the bytes handed to
+ * it — it does NOT decide what to trust. The keyholder worker (the only place
+ * that holds the peer's real key and the gate's own key) MUST pass TRUSTED values,
+ * never wire-claimed ones: `gatePubKey` = the verifier's OWN verifying key (so the
+ * proof only clears if the peer signed for THIS gate — anti-relay), `peerPubKey` =
+ * the verifying-key suffix of the ContactCard-derived Identifier (so the proof only
+ * clears for the card actually presented). `nonce` = the gate-issued challenge value
+ * the verifier remembers. If a peer signed for a different gate or claimed a key it
+ * does not hold, the recomputed bytes diverge and the signature fails. NEVER feed
+ * this the `peerPubKey`/`gatePubKey` a peer asserts on the wire.
+ *
+ * `now` opt-in: pass the verifier clock (ms) to enforce the freshness window; omit
+ * to check the signature alone (pure-crypto unit tests). Uses `verifyAsync`, which
+ * needs no global hash injection (@noble/ed25519 v3).
+ */
+export async function verifyAuthProof(parts: {
+  nonce:       string;
+  gatePubKey:  string;
+  peerPubKey:  string;  // raw ed25519 verifying-key hex (64 chars) — the key the sig verifies against
+  aud:         string;
+  ts:          string;
+  sig:         string;  // ed25519 signature hex (128 chars)
+  now?:        number;  // verifier clock (ms); omit to skip the freshness window
+  ttlMs?:      number;  // freshness half-width (default AUTH_PROOF_TTL_MS)
+}): Promise<{ ok: boolean; reason?: string }> {
+  // Shape guards — reject malformed key/sig material before touching crypto.
+  if (!/^[0-9a-fA-F]{64}$/.test(parts.peerPubKey))  return { ok: false, reason: "peerPubKey not 32-byte hex" };
+  if (!/^[0-9a-fA-F]{128}$/.test(parts.sig))        return { ok: false, reason: "sig not 64-byte hex" };
+
+  // Freshness — bounded replay window once the nonce rotates.
+  if (parts.now !== undefined) {
+    const tsMs = Date.parse(parts.ts);
+    if (Number.isNaN(tsMs)) return { ok: false, reason: "ts not a valid timestamp" };
+    const ttl = parts.ttlMs ?? AUTH_PROOF_TTL_MS;
+    if (Math.abs(parts.now - tsMs) > ttl) return { ok: false, reason: "proof outside freshness window" };
+  }
+
+  const proof = authProofBytes({
+    nonce:      parts.nonce,
+    gatePubKey: parts.gatePubKey,
+    peerPubKey: parts.peerPubKey,
+    aud:        parts.aud,
+    ts:         parts.ts,
+  });
+  let ok = false;
+  try {
+    ok = await ed25519.verifyAsync(hexToBytes(parts.sig), proof, hexToBytes(parts.peerPubKey));
+  } catch (err) {
+    return { ok: false, reason: err instanceof Error ? err.message : "ed25519 verify threw" };
+  }
+  return ok ? { ok: true } : { ok: false, reason: "signature mismatch" };
 }
 
 /**

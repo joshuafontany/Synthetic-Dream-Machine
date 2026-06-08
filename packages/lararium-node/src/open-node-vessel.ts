@@ -537,7 +537,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // and runs the registerBag sweep over adminAuth.registerBags; a gate failure
   // throws → the island posts `fault` → `adminVm.workerEa` rejects → boot HALTs
   // before the gate is armed or any wiki mounts.
-  authGate.arm(adminVm.authSeam, ADMIN_BAG_ID);
+  // gatePubKey = the operator's verifying key — the SAME value the in-worker
+  // keyhive recomputes the V3 proof against (the gate emits it in lar:challenge;
+  // the worker checks the signature with its own key, so the two must match).
+  authGate.arm(adminVm.authSeam, ADMIN_BAG_ID, operatorIdentity.verifyingKey);
 
   // Wire the delegation registry now that the admin VM lives. The admin island's
   // VerbDispatcher delegates unknown verbs here via admin:delegate-verb;

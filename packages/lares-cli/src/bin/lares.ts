@@ -13,6 +13,11 @@
  *     (see B.3 in packages/HANDOFF.md).
  *   - No HTTP/RPC surface here. CLI ↔ live-node coordination happens through
  *     the admin Automerge doc — CRDT-native, web2-free.
+ *   - One surface, two actors (operator-peer #actor-parity): the same commands
+ *     serve a HUMAN at a TTY and an AI AGENT acting programmatically. Output
+ *     renders by audience — prose on a TTY, a deterministic structured payload
+ *     under `--json` / off-TTY (see ../render.ts). Authority rides WITH the
+ *     intent (capability-bearing verb-summons), never a session or login.
  */
 
 import { fileURLToPath } from "node:url";
@@ -65,6 +70,11 @@ function printHelp(): void {
     console.log(`  ${c.name.padEnd(14)} ${c.summary}`);
   }
   console.log(`  ${"help".padEnd(14)} Show this message.\n`);
+  console.log("Global flags:");
+  console.log(`  ${"--json".padEnd(14)} Emit a deterministic JSON result (ok|error + requestId) for agents/pipes.`);
+  console.log(`  ${"--no-json".padEnd(14)} Force human prose even when stdout is not a TTY.`);
+  console.log(`  ${"--yes".padEnd(14)} Skip confirmation prompts (required for non-interactive/agent runs).\n`);
+  console.log("Output renders by audience: prose on a TTY, JSON off-TTY or under --json.");
   console.log("Run `lares <command> --help` once a command implements its own help (TBD).");
 }
 

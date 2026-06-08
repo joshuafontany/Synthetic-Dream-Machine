@@ -27,6 +27,17 @@
  *            no matter where first encountered. Always non-simultaneous.
  *   Tier 3 — Lares nodes (federation layer): node-to-node edge islands.
  *            A pranala connection between nodes constitutes a causal island. MUST.
+ *
+ * Share substrate, not sovereignty (meme: …/mesh/causal-island #substrate-not-
+ * sovereignty): an island's identity rests on a separate log + no shared now, NOT
+ * on separate silicon. Co-located vessels MAY share a SUBSTRATE — the machine, the
+ * disk device, a relay peer, canon bags read by merge — but MUST NOT share
+ * SOVEREIGNTY — the replica, the heap/process, the storage scope, the keys/log/now.
+ * Two boundaries hold it: vessel↔vessel = CRDT over a transport (own replica each);
+ * island↔island within a vessel = MessagePort, no shared heap. The anti-pattern:
+ * many "vessels" behind one Repo/heap/storage dir (a distributed monolith). Role
+ * (relay/leaf) rides held Keyhive capability, not platform: heavy peer = substrate,
+ * not authority.
  */
 
 import { ADMIN_BAG_ID } from "./lar-uris.js";
