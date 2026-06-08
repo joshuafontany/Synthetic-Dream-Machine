@@ -13,7 +13,7 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/keyhive/operator-admin-behavior
  */
 
-import { makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor } from "@lararium/tw5";
+import { makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor, registerActionReactors } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
@@ -42,6 +42,9 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       registry.register("where",      makeWhereReactor(ctx.composite));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
       registry.register("list-wikis", makeListWikisReactor(ctx.composite));
+      // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — composite-only, now
+      // in every vessel's worker, verify-then-delegate gated. The `lares act` front door.
+      registerActionReactors(registry, { composite: ctx.composite });
     },
     verifierFactory: async (ctx: IslandContext) => {
       const { keyhive, did } = await bootAdminKeyhive({

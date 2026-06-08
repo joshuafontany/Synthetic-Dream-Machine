@@ -55,7 +55,6 @@ import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
   mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki,
-  registerActionReactors,
 }                                            from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
@@ -460,9 +459,8 @@ export async function openBrowserVessel(
     // Wire verb registry — minimal browser surface (echo + verbs from caller).
     const registry: VerbTable = verbTable ?? new VerbTable();
     seedVesselDefaults(registry);   // echo + universal base verbs
-    // Residency Model ACTION verbs — ADD/COPY/MOVE/CLEAR/DROP/LOAD, isomorphic with
-    // the node vessel: the 'lares act' / <$lar-action> front door reaches them here.
-    registerActionReactors(registry, { composite });
+    // Residency ACTION verbs RELOCATED into the admin worker (sovereign-worker) — see
+    // operator-admin-behavior wireWorkerVerbs; both vessels gain them in-worker, gated.
     admin.mountMainVerbs(registry);
 
     if (workerScriptUrl) {

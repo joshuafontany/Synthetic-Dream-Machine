@@ -71,7 +71,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { VerbTable, registerActionReactors } from "@lararium/tw5";
+import { VerbTable } from "@lararium/tw5";
 import {
   makeInitWikiReactor,
   makeOpenWikiReactor,
@@ -504,11 +504,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   jobRegistry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
   jobRegistry.register("draft",       makeDraftReactor({ composite }));
 
-  // Residency Model ACTION verbs — ADD/COPY/MOVE/CLEAR/DROP/LOAD. The 'lares act'
-  // front door (summon → @admin → routeToMain → jobRegistry) reaches the residency
-  // reactors here; the vessel composite spans the bags a residency change moves
-  // between, and each mutation wraps in withEffectRecord (the archival ledger).
-  registerActionReactors(jobRegistry, { composite });
+  // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) RELOCATED into the admin
+  // worker (sovereign-worker, verify-then-delegate gated) — see operator-admin-behavior
+  // wireWorkerVerbs. The `lares act` front door now reaches them in-worker.
 
   // C.2 — start the background sweeper. Idle eviction + LRU trim run
   // every sweepIntervalMs (default 30s). The manager's own re-entrancy
