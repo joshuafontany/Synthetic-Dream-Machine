@@ -43,7 +43,7 @@ the current prior-art stack closest to satisfying all seven simultaneously.
 ### Ideal 1 — Fast
 
 No server round-trips for reading or writing. Local state is always available.
-Network latency MUST NOT appear on the critical path for UX.
+UX MUST stay off the network-latency critical path.
 
 **Lararium:** SATISFIED. TW5Engine runs entirely in-process; tiddler store is local;
 `filterTiddlers` and `renderTiddler` are synchronous.
@@ -167,7 +167,7 @@ It does NOT have:
 - Ability to decrypt content it relays (Ideal 6 target)
 - Override capability for user-controlled data
 
-**Law:** A lararium-node MUST NOT make decisions that require it to be an authority.
+**Law:** A lararium-node MUST keep its decisions within its peer role.
 Routing, relay, and projection are peer capabilities; adjudication is not.
 
 The VmPool model enforces this isomorphically: the browser peer and the node peer
@@ -200,7 +200,7 @@ only **causal order** — Fuller-consistent by construction. BeeKEM's
 of Fuller's non-simultaneous Universe.
 
 **The UI MUST reflect this:** content is "current as of my last sync with peer X,"
-not "current globally." A lararium-node MUST NOT present a fabricated global view.
+not "current globally." A lararium-node MUST present its view as local — current as of last sync.
 
 <<~/ahu >>
 

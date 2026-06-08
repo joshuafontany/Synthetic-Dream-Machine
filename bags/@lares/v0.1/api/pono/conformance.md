@@ -91,7 +91,7 @@ The overlay reads as fresh orientation for the node's *next* decision. It feeds 
 
 ## Outward, Not Backward
 
-`OODA-HA` forbids the backward glance: the node MUST NOT narrate its own finished turn as a retrospective verdict. `conformance` does not break that ward --- it inverts the direction.
+`OODA-HA` holds the glance forward: a node MUST narrate its own turn as live phase, not retrospect. `conformance` keeps that ward --- it inverts the direction.
 
 * The forbidden act reads the **self**, in the **past**, to justify it.
 * `conformance` reads an **external object**, in the **present**, to orient the node forward.

@@ -102,15 +102,15 @@ not closed — it is partial.
 - Boot behavior is determined by the meme corpus (which memes have `invariant = true`,
   which have `mana ≥ 18`, which carry Heleuma body-sha256 anchors)
 - The `lar:` URI resolver is the single gate — all content enters through it
-- FPI-2 (wave vs water): behavior MUST NOT depend on physical filesystem layout
+- FPI-2 (wave vs water): behavior MUST stay independent of physical filesystem layout
 
 **Violation pattern:** An environment variable that changes which schema the validator
 uses. A hardcoded hostname in a content reference. A feature flag outside the tiddler
 store that controls rendering behavior.
 
 **Rule:** All runtime configuration MUST be representable as a tiddler with a `lar:` URI.
-The only permissible exception: infrastructure secrets (keys, tokens) which MUST NOT be
-in the content graph for P3 reasons.
+The only exception: infrastructure secrets (keys, tokens), which MUST stay outside
+the content graph for P3 reasons.
 
 <<~/ahu >>
 

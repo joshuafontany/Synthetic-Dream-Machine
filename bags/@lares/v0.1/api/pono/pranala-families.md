@@ -113,7 +113,7 @@ confidence-bounded  = false
 **control** — structural authority edges (owns, has, configures, delegates).
 The primary composition grammar. Most meme graphs lead with control edges.
 
-Role semantics (do not conflate):
+Role semantics (each distinct):
 - `has`        — composition / possession: a source holds the target as a component (N per meme). A verb — Verse-core `∃` — never the `is-a` copula.
 - `owns`       — structural ownership / containment at the type level (not spatial instance placement)
 
