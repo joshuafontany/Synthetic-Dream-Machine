@@ -4,7 +4,7 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/open-vessel"
 file-path    = "bags/@lararium/v0.1/mesh/open-vessel.md"
-source-file  = "packages/lararium-mesh/src/open-vessel.ts"
+source-file  = "packages/lararium-mesh/src/open-vessel-core.ts"
 type         = "text/x-memetic-wikitext"
 register     = "Synthesis"
 mana         = 17
