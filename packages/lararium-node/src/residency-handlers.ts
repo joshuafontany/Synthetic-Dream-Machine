@@ -14,52 +14,10 @@ export interface ResidencyHandlerOptions {
   readonly residency: BagResidencyManager;
 }
 
-export function makePinReactor(opts: ResidencyHandlerOptions): VerbReactor {
-  return async (args) => {
-    const url    = typeof args["url"]    === "string" ? args["url"]    : "";
-    const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
-    if (!url) throw new Error("args.url is required");
-    if (reason !== undefined) {
-      await opts.residency.pin(url, reason);
-    } else {
-      await opts.residency.pin(url);
-    }
-    const result: Record<string, unknown> = {
-      url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url),
-    };
-    if (reason !== undefined) result["reason"] = reason;
-    return result;
-  };
-}
-
-export function makeUnpinReactor(opts: ResidencyHandlerOptions): VerbReactor {
-  return async (args) => {
-    const url = typeof args["url"] === "string" ? args["url"] : "";
-    if (!url) throw new Error("args.url is required");
-    opts.residency.unpin(url);
-    return { url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url) };
-  };
-}
-
-/**
- * Mark a bag URL as known-but-not-loaded. Oracle traversal (admin VM,
- * catalog walks, recipe expansion) calls this when it discovers a URL via
- * a tiddler.text pointer that doesn't need immediate hydration. The first
- * read through that URL via the composite store (C.4) triggers
- * onHydrate → repo.find().
- *
- * Operator surface: `lares register-cold <url>` — manual stub registration,
- * useful for smoke tests and future "I know this URL exists but won't
- * touch it yet" workflows.
- */
-export function makeRegisterColdReactor(opts: ResidencyHandlerOptions): VerbReactor {
-  return async (args) => {
-    const url = typeof args["url"] === "string" ? args["url"] : "";
-    if (!url) throw new Error("args.url is required");
-    opts.residency.registerCold(url);
-    return { url, tier: opts.residency.tier(url), pinned: opts.residency.isPinned(url) };
-  };
-}
+// pin / unpin / register-cold RELOCATED to @lararium/tw5 (worker-data-verbs) — they run
+// in the admin worker (sovereign-worker, verify-then-delegate gated) and command this
+// main-resident BagResidencyManager via admin:residency-op. Only the `residency` stats
+// READ stays main (the manager lives here); the askMain research decides its eventual home.
 
 export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbReactor {
   return async () => {

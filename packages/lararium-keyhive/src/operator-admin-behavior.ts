@@ -13,7 +13,10 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/keyhive/operator-admin-behavior
  */
 
-import { makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor, registerActionReactors } from "@lararium/tw5";
+import {
+  makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
+  makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors,
+} from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
@@ -45,6 +48,12 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — composite-only, now
       // in every vessel's worker, verify-then-delegate gated. The `lares act` front door.
       registerActionReactors(registry, { composite: ctx.composite });
+      // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
+      // main-resident BagResidencyManager via admin:residency-op (ctx.post). `residency`
+      // stats (a read) stays main pending the askMain research.
+      registry.register("pin",           makePinReactor(ctx.post));
+      registry.register("unpin",         makeUnpinReactor(ctx.post));
+      registry.register("register-cold", makeRegisterColdReactor(ctx.post));
     },
     verifierFactory: async (ctx: IslandContext) => {
       const { keyhive, did } = await bootAdminKeyhive({

@@ -345,6 +345,32 @@ export interface AdminMsg_EvictResult {
   error?: string;
 }
 
+/**
+ * Island → vessel: the worker commands a residency-state op on the main-resident
+ * BagResidencyManager (sovereign-worker: the worker holds the keyhive-gated POLICY,
+ * the manager + its LRU/reachability MECHANISM stays at the resource/main). The
+ * worker's residency verbs (pin/unpin/register-cold) post this fire-and-forget — the
+ * grant records as policy; main executes. (`residency` stats — a read — stays main
+ * pending the askMain research.)
+ */
+export interface AdminMsg_ResidencyOp {
+  schema_version: ProtocolVersion;
+  type: "admin:residency-op";
+  requestId: string;
+  op: "pin" | "unpin" | "register-cold";
+  bagId: string;
+  reason?: string;
+}
+
+/** Vessel → island: ack for a residency-op. */
+export interface AdminMsg_ResidencyOpResult {
+  schema_version: ProtocolVersion;
+  type: "admin:residency-op-result";
+  requestId: string;
+  ok: boolean;
+  error?: string;
+}
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -355,6 +381,7 @@ export type VesselToIslandMsg =
   | AdminMsg_VerifyRequest
   | AdminMsg_ResolveBindingRequest
   | AdminMsg_EvictResult
+  | AdminMsg_ResidencyOpResult
   | WikiMsg_PlaceVerb;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
@@ -462,7 +489,8 @@ export type IslandToVesselMsg =
   | AdminMsg_DelegateVerb
   | AdminMsg_VerifyResult
   | AdminMsg_ResolveBindingResult
-  | AdminMsg_EvictRequest;
+  | AdminMsg_EvictRequest
+  | AdminMsg_ResidencyOp;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -477,14 +505,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "admin:residency-op-result", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -695,6 +723,34 @@ export function mkAdminEvictResult(opts: { requestId: string; ok: boolean; error
   const msg: AdminMsg_EvictResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
     type: "admin:evict-result",
+    requestId: opts.requestId,
+    ok:        opts.ok,
+  };
+  if (opts.error !== undefined) msg.error = opts.error;
+  return msg;
+}
+
+export function mkAdminResidencyOp(opts: {
+  requestId: string;
+  op: "pin" | "unpin" | "register-cold";
+  bagId: string;
+  reason?: string;
+}): AdminMsg_ResidencyOp {
+  const msg: AdminMsg_ResidencyOp = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:residency-op",
+    requestId: opts.requestId,
+    op:        opts.op,
+    bagId:     opts.bagId,
+  };
+  if (opts.reason !== undefined) msg.reason = opts.reason;
+  return msg;
+}
+
+export function mkAdminResidencyOpResult(opts: { requestId: string; ok: boolean; error?: string }): AdminMsg_ResidencyOpResult {
+  const msg: AdminMsg_ResidencyOpResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:residency-op-result",
     requestId: opts.requestId,
     ok:        opts.ok,
   };

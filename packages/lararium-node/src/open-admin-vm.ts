@@ -110,6 +110,11 @@ export interface AdminVmResult {
    * the main-thread pool. The vessel factory calls it after the pool exists.
    */
   onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
+  /**
+   * Bind the residency-op MECHANISM (sovereign-worker): the worker commands
+   * pin/unpin/register-cold (keyhive-gated); main routes to the BagResidencyManager.
+   */
+  onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -159,6 +164,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     authSeam:       core.authSeam,
     resolveBinding: core.resolveBinding,
     onEvictRequest: core.onEvictRequest,
+    onResidencyOp:  core.onResidencyOp,
     dispose:        core.dispose,
   };
 }

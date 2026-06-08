@@ -50,11 +50,10 @@ export type {
 export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
 
-export {
-  makePinReactor, makeUnpinReactor, makeResidencyStatsReactor,
-  makeRegisterColdReactor,
-} from "./residency-handlers.js";
+export { makeResidencyStatsReactor } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
+// pin/unpin/register-cold reactors relocated to the admin worker (sovereign-worker).
+export { makePinReactor, makeUnpinReactor, makeRegisterColdReactor } from "@lararium/tw5";
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
 export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";

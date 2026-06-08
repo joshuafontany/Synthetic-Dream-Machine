@@ -11,10 +11,33 @@
  * admin:evict-request seam.
  */
 
-import { tiddlerText, type CompositeStore } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, type CompositeStore, type AdminMsg_ResidencyOp } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
+
+/** A fire-and-forget poster for worker→main residency-op commands. */
+export type ResidencyOpPost = (msg: AdminMsg_ResidencyOp) => void;
+let _opSeq = 0;
+
+/** Build a residency mutator reactor: gate the verb in-worker, command main's manager. */
+function residencyVerb(op: "pin" | "unpin" | "register-cold", post: ResidencyOpPost): VerbReactor {
+  return async (args) => {
+    const bagId  = typeof args["url"] === "string" ? args["url"] : "";
+    if (!bagId) throw new Error("args.url is required");
+    const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
+    post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op, bagId, ...(reason !== undefined ? { reason } : {}) }));
+    // Policy granted in-worker (keyhive-gated); main's BagResidencyManager executes.
+    return { url: bagId, op, commanded: true, ...(reason !== undefined ? { reason } : {}) };
+  };
+}
+
+/** `pin` — grant a bag pinned residency (worker policy → main manager). */
+export const makePinReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("pin", post);
+/** `unpin` — release a pin. */
+export const makeUnpinReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("unpin", post);
+/** `register-cold` — mark a bag known-but-not-loaded. */
+export const makeRegisterColdReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("register-cold", post);
 
 /** `where` — recipe-presence query: which bags hold a tiddler, highest-priority first. */
 export function makeWhereReactor(composite: CompositeStore): VerbReactor {

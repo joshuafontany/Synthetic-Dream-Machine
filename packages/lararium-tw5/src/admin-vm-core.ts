@@ -31,6 +31,7 @@ import {
   mkAdminVerifyRequest,
   mkAdminResolveBindingRequest,
   mkAdminEvictResult,
+  mkAdminResidencyOpResult,
   isIslandToVesselMsg,
   type VesselWorkerHandle,
   type Repo,
@@ -44,6 +45,7 @@ import {
   type AdminMsg_VerifyResult,
   type AdminMsg_ResolveBindingResult,
   type AdminMsg_EvictRequest,
+  type AdminMsg_ResidencyOp,
   type BatchMode,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
@@ -120,6 +122,12 @@ export interface AdminVmCore {
    * AFTER the pool exists (post makePool). Absent → evict-requests fail closed.
    */
   onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
+  /**
+   * Register the residency-op MECHANISM: the worker commands pin/unpin/register-cold
+   * (admin:residency-op, keyhive-gated policy); main routes here to the BagResidencyManager
+   * (which stays at the resource). Set after the manager exists. Absent → fail closed.
+   */
+  onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
 }
 
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
@@ -130,6 +138,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   let _registry: VerbTable | null = null;
   // Pool eviction mechanism — set via onEvictRequest() after the pool exists.
   let _evictHandler: ((bagId: string) => Promise<void>) | null = null;
+  // Residency-op mechanism — set via onResidencyOp() after the manager exists.
+  let _residencyHandler: ((op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -223,6 +233,21 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       return;
     }
 
+    if (raw.type === "admin:residency-op") {
+      // Sovereign-worker: the worker's residency verb (pin/unpin/register-cold) granted
+      // policy; main executes the mechanism on the BagResidencyManager. Ack regardless.
+      const msg = raw as AdminMsg_ResidencyOp;
+      const run = _residencyHandler
+        ? _residencyHandler(msg.op, msg.bagId, msg.reason)
+        : Promise.reject(new Error("no residency handler bound (manager not ready)"));
+      run
+        .then(() => worker.post(mkAdminResidencyOpResult({ requestId: msg.requestId, ok: true })))
+        .catch((err: unknown) => worker.post(mkAdminResidencyOpResult({
+          requestId: msg.requestId, ok: false, error: err instanceof Error ? err.message : String(err),
+        })));
+      return;
+    }
+
     if (raw.type === "admin:delegate-verb") {
       const msg = raw as AdminMsg_DelegateVerb;
       if (!_registry) {
@@ -301,6 +326,9 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     },
     onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
       _evictHandler = fn;
+    },
+    onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => {
+      _residencyHandler = fn;
     },
     dispose: () => {
       clearTimeout(eaTimer);

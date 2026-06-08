@@ -80,10 +80,7 @@ import { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handl
 import { makeAddBagReactor, makeRemoveBagReactor } from "./wiki-compose-handlers.js";
 import { makePruneStaleReactor, makeDraftReactor } from "./wiki-draft-handlers.js";
 import { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
-import {
-  makePinReactor, makeUnpinReactor, makeResidencyStatsReactor,
-  makeRegisterColdReactor,
-} from "./residency-handlers.js";
+import { makeResidencyStatsReactor } from "./residency-handlers.js";
 import { BagResidencyManager }                      from "@lararium/mesh";
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
@@ -475,10 +472,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   await residency.pin(BAG_IDS.groups,         "boot:circles");
   await residency.pin(BAG_IDS.sessions,       "boot:sessions");
   await residency.pin(ADMIN_BAG_ID,           "boot:admin");
-  jobRegistry.register("pin",       makePinReactor({ residency }));
-  jobRegistry.register("unpin",     makeUnpinReactor({ residency }));
-  jobRegistry.register("residency",     makeResidencyStatsReactor({ residency }));
-  jobRegistry.register("register-cold", makeRegisterColdReactor({ residency }));
+  // pin / unpin / register-cold RELOCATED into the admin worker (sovereign-worker) —
+  // they post admin:residency-op to the main BagResidencyManager (see wireWorkerVerbs +
+  // adminVm.onResidencyOp). `residency` (stats, a read) stays main pending askMain research.
+  jobRegistry.register("residency", makeResidencyStatsReactor({ residency }));
   // E.6 — whole-recipe residency. Walks the wiki's bag-stack and
   // pins/unpins each bag in one shot.
   jobRegistry.register("pin-wiki",   makePinWikiReactor({ composite, residency }));
@@ -669,6 +666,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // admin worker commands an evict (admin:evict-request, keyhive-gated); the main pool
   // executes the teardown. The worker holds this capability to the pool, not the pool.
   adminVm.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
+
+  // Sovereign-worker: the worker's residency verbs (pin/unpin/register-cold, keyhive-gated)
+  // command the main-resident BagResidencyManager (the mechanism stays at the resource).
+  adminVm.onResidencyOp(async (op, bagId, reason) => {
+    if (op === "pin")               await residency.pin(bagId, reason);
+    else if (op === "unpin")        residency.unpin(bagId);
+    else                            residency.registerCold(bagId);
+  });
 
   // ── 8. Corpus bags — await before mounting primary island ─────────────────
   await corpusReadyP;
