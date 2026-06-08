@@ -20,6 +20,7 @@ import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -45,7 +46,8 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   try {
     did = await operatorDid();
   } catch (err) {
-    console.error(`lares draft: ${err instanceof Error ? err.message : String(err)}`);
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, { ok: false, error: msg, human: () => console.error(`lares draft: ${msg}`) });
     return 3;
   }
 
@@ -53,32 +55,51 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   try {
     vessel = await connectAdminVessel(connectOpts);
   } catch (err) {
-    console.error(`lares draft: ${err instanceof Error ? err.message : String(err)}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, {
+      ok: false, error: msg,
+      human: () => {
+        console.error(`lares draft: ${msg}`);
+        console.error("  Start the daemon with `lares serve` and try again.");
+      },
+    });
     return 3;
   }
 
   try {
     const where = await submitVerb(vessel, "where", { tiddler }, did);
     if (where.status === "error") {
-      console.error(`recipe-presence query failed: ${where.errorMessage ?? "unknown"}`);
+      const msg = where.errorMessage ?? "unknown";
+      emit(args, { ok: false, error: msg, human: () => console.error(`recipe-presence query failed: ${msg}`) });
       return 4;
     }
     const whereSummary = summaryOutput(where) ?? {};
     const bags    = (whereSummary["bags"] ?? []) as string[];
     const primary = whereSummary["primaryBag"] as string | null;
     if (!primary) {
-      console.error(`tiddler not found in any bag: ${tiddler}`);
+      emit(args, {
+        ok: false, error: `tiddler not found in any bag: ${tiddler}`,
+        data: { tiddler },
+        human: () => console.error(`tiddler not found in any bag: ${tiddler}`),
+      });
       return 5;
     }
 
-    console.log("");
-    console.log(`  tiddler:   ${tiddler}`);
-    console.log(`  currently: ${bags.join(", ")}`);
-    console.log(`  draft to:  ${toBag ?? "(active room draft)"}`);
-    console.log("");
-
+    // The confirmation prompt belongs to the HUMAN/TTY path only — an agent
+    // (JSON / off-TTY) MUST carry intent explicitly via --yes.
     if (!args.flags["yes"]) {
+      if (wantsJson(args)) {
+        emit(args, {
+          ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation",
+          human: () => { /* unreachable on the JSON path */ },
+        });
+        return 1;
+      }
+      console.log("");
+      console.log(`  tiddler:   ${tiddler}`);
+      console.log(`  currently: ${bags.join(", ")}`);
+      console.log(`  draft to:  ${toBag ?? "(active room draft)"}`);
+      console.log("");
       const rl = createInterface({ input: stdin, output: stdout });
       const answer = await rl.question("Proceed? [y/N] ");
       rl.close();
@@ -93,15 +114,27 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
 
     const result = await submitVerb(vessel, "draft", draftArgs, did);
     if (result.status === "error") {
-      console.error(`draft failed: ${result.errorMessage ?? "unknown"}`);
+      const msg = result.errorMessage ?? "unknown";
+      emit(args, {
+        ok: false, requestId: result.requestId, error: msg,
+        human: () => console.error(`draft failed: ${msg}`),
+      });
       return 6;
     }
 
     const r = summaryOutput(result) ?? {};
-    console.log(`drafted: ${tiddler}`);
-    console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
-    console.log(`  status: ${r["status"]}`);
-    console.log(`  receipt: lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
+    const receiptUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+    emit(args, {
+      ok: true,
+      requestId: result.requestId,
+      data: { tiddler, fromBag: r["fromBag"] ?? null, toBag: r["toBag"], status: r["status"], receipt: receiptUri },
+      human: () => {
+        console.log(`drafted: ${tiddler}`);
+        console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
+        console.log(`  status: ${r["status"]}`);
+        console.log(`  receipt: ${receiptUri}`);
+      },
+    });
     return 0;
   } finally {
     await vessel.disconnect();
