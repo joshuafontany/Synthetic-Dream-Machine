@@ -66,6 +66,14 @@ export interface AdminBehaviorOptions {
     fingerprint: string,
     recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  /**
+   * Sovereign-worker data-plane: register the residency / wiki / where / resolve
+   * reactors into the worker's VerbDispatcher, in-worker, over the IslandContext.
+   * Called in `onEa` before dispatch starts; the reactors inherit verify-then-delegate.
+   * The platform entry supplies it (closing over the reactor factories); pool-touching
+   * reactors command main via `ctx.post` (admin:evict-request). Absent → no data-plane.
+   */
+  wireWorkerVerbs?: (registry: VerbTable, ctx: IslandContext) => void;
 }
 
 export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
@@ -97,6 +105,11 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
       // composite) wins; else a ready verifier; else none (delegated-verb path).
       const verifier = opts.verifierFactory ? await opts.verifierFactory(ctx) : opts.verifier;
       const registry = new VerbTable();
+      // Sovereign-worker: the data-plane reactors register HERE, in-worker, over the
+      // IslandContext (ctx.composite/ctx.repo) — so they ride the dispatcher's
+      // verify-then-delegate gate FOR FREE (the gate the old main-thread jobRegistry
+      // lacked). Pool-touching reactors command main via ctx.post (admin:evict-request).
+      opts.wireWorkerVerbs?.(registry, ctx);
       _dispatcher = new VerbDispatcher({
         adminVm:  tw5,
         admin:    composite,
