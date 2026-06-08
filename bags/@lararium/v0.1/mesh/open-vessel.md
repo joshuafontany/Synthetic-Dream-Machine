@@ -30,10 +30,27 @@ drift (see #drift).
 ## The Law
 
 A vessel composes from **sovereign web3-protocol participations** — it never reads as
-an application with platform branches. Node and browser name two **host substrates**
-that inject atoms into the ONE vessel protocol. The factory derives by SUBTRACTION:
-the lines that differ between the working hosts name the seam, and nothing else earns
-one (Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
+an application with platform branches. The factory derives by SUBTRACTION: the lines
+that differ between the working hosts name the seam, and nothing else earns one
+(Rule-of-Three). The core holds zero platform code; no `if (platform)` enters it.
+
+### Same structure, differing capabilities (Ink & Switch)
+
+Node and browser **differ ONLY in capabilities, never in structure or
+pattern-integrity** (Ink & Switch). The composition — the seven participations, their
+order, the protocol sequence — stands IDENTICAL on every substrate. What differs reads
+as which **capability pieces a vessel currently holds**, plus the few genuinely
+substrate-bound resolutions inside each piece (storage backend, worker kind, crypto
+provider, transport). A substrate constrains how a piece resolves; it never removes the
+piece from the structure.
+
+**Hold the convergence open (MUST).** The capability set GROWS. Many capabilities wired
+on node today — founding/init, PersonGroup ceremonies, genesis authoring, corpus
+loading, residency — SHALL become composable in the browser. The design therefore
+treats no capability as structurally node-bound: each rides as a piece any vessel MAY
+compose once it holds the capability, never an `isNode`/`isBrowser` fork and never a
+permanently-absent slot. A capability absent today reads as *not-yet-held*, never
+*cannot-hold*. The seam for every such piece stays open on both substrates.
 
 <<~/ahu >>
 
@@ -86,9 +103,11 @@ phase sequence), never type-conformance to a port.
 ## Role Names Which Pieces the Recipe Carries (the keystone reframe)
 
 The drift's root: **role baked into platform** (node = relay, browser = keeper). Pono:
-**role names WHICH sovereign pieces a vessel's recipe composes** — decoupled from the
-runtime it runs on ([[feedback_isomorphism_by_composition]]). A role adds or omits a
-PIECE; it never toggles a flag or fills an optional port method.
+**role names the capability pieces a vessel CURRENTLY HOLDS** — a snapshot of a growing
+set, decoupled from the runtime it runs on ([[feedback_isomorphism_by_composition]]). A
+role adds or omits a PIECE; it never toggles a flag or fills an optional port method.
+The substrate NEVER gates which pieces a vessel MAY hold (Ink & Switch, #the-law): a
+piece absent today reads as not-yet-held, never cannot-hold.
 
 - The **relay** recipe carries, in addition to the seven base pieces: the inbound-peer
   gate (V3), the disk-mirror grant, the full resident-verb plane, the residency
