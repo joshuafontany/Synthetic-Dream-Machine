@@ -675,6 +675,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     // adminVm not yet available here — consumer wired after adminVm resolves (see below).
   });
 
+  // Sovereign-worker: bind the pool eviction MECHANISM to the worker's POLICY. The
+  // admin worker commands an evict (admin:evict-request, keyhive-gated); the main pool
+  // executes the teardown. The worker holds this capability to the pool, not the pool.
+  adminVm.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
+
   // ── 8. Corpus bags — await before mounting primary island ─────────────────
   await corpusReadyP;
   emit("corpus-ready");

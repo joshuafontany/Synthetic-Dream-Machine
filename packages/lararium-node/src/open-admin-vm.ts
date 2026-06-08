@@ -104,6 +104,12 @@ export interface AdminVmResult {
     fingerprint: string,
     recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  /**
+   * Bind the pool eviction MECHANISM (sovereign-worker): the admin worker owns
+   * residency POLICY and commands an evict via admin:evict-request; this routes it to
+   * the main-thread pool. The vessel factory calls it after the pool exists.
+   */
+  onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -152,6 +158,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     placeVerb:      core.placeVerb,
     authSeam:       core.authSeam,
     resolveBinding: core.resolveBinding,
+    onEvictRequest: core.onEvictRequest,
     dispose:        core.dispose,
   };
 }
