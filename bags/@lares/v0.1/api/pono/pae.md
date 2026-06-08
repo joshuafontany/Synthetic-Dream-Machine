@@ -68,9 +68,9 @@ content body has crossed. The streaming protocol IS a navigation instrument.
 ## Pae Law (Kānāwai)
 
 A carrier MUST emit exactly four pae nodes in sequence: soh → stx → etx → eot.
-A pae node MUST NOT carry content. Prose, edges, and sigils MUST NOT appear between soh and stx.
+A pae node MUST stay content-free. Between soh and stx, the iam heading sits alone; prose, edges, and sigils ride the body after stx.
 A streaming consumer MUST process each pae before reading the body in that phase.
-A pae node MUST NOT be nested inside an ahu slot body.
+A pae node MUST sit at carrier top level, outside any ahu slot body.
 
 Phase semantics:
 

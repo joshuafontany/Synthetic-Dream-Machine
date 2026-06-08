@@ -53,7 +53,7 @@ An Orichalcum capability answers five questions:
 
 A cryptographically valid UCAN-shaped proof that fails any Lararium caveat is NOT authorized.
 Crypto validity is necessary but not sufficient. Semantic validity requires caveat passage.
-Authority travels with the graph. Authority MUST NOT be outsourced to crypto alone.
+Authority travels with the graph. Authority MUST hold in the graph, beyond crypto alone.
 
 <<~/ahu >>
 
@@ -148,7 +148,7 @@ note    = """
 """
 ```
 
-A carrier below `Meme` rating MUST NOT federate.
+A carrier MUST reach `Meme` rating to federate.
 Noise and Data are node-local only.
 
 ### Manaoio Caveat (believability weight)

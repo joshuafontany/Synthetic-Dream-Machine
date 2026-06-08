@@ -48,13 +48,13 @@ Concurrency runtime pending (async-first sprint). Current tiddler registers gram
 ## Law (Kānāwai)
 
 A hoolele call MUST target a single function with `<suspends>` effect.
-A hoolele call MUST NOT target a function with `<decides>` (failable) effect.
+A hoolele call MUST target a non-failable function (no `<decides>` effect).
   Wrap failable work in a `<suspends>` function that handles failure internally.
 A hoolele task MUST outlive its creating scope — it is NOT cancelled when the
   creating scope exits.
 A hoolele task MUST be explicitly cancelled via `task.Cancel()` when no longer needed.
   Callers MUST retain the returned `task` handle or use a timeout/race pattern.
-A hoolele task MUST NOT be used where `lele` (`\branch`) is sufficient.
+A hoolele task MUST reserve itself for cases beyond `lele` (`\branch`).
   Prefer `lele` for any work that can be abandoned if the parent scope cancels.
 A hoolele edge MUST carry a target URI as its first argument.
 

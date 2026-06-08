@@ -52,9 +52,9 @@ A kapu carrier MUST declare above-namespace authority through one or more of:
 - kernel-tier control characters (`&#x0001;`–`&#x0004;`) on its structural sigils
 - an explicit above-namespace role in its `role` field
 
-A kapu carrier MUST NOT be silently overridden by carriers rated `ano`, `meme`, `data`, or `noise`.
+A kapu carrier MUST prevail over carriers rated `ano`, `meme`, `data`, or `noise`.
 A kapu carrier MUST remain readable by lower-tier consumers without privilege escalation.
-A kapu carrier MUST NOT inflate its mana or confidence fields to simulate kapu status.
+A kapu carrier MUST earn kapu status from structure, keeping its mana and confidence fields honest.
 Rating derives from structure, not from declared self-assessment.
 
 <<~/ahu >>
@@ -74,7 +74,7 @@ noise carriers       — unrecognizable; no namespace claim permitted
 ```
 
 A lower-tier carrier MAY reference a kapu carrier.
-A lower-tier carrier MUST NOT override or shadow a kapu carrier's declared content.
+A lower-tier carrier MUST defer to a kapu carrier's declared content.
 A kapu carrier MAY declare children that are themselves kapu, forming a kernel lineage.
 
 The `live-session-overwrite` failure mode names the specific violation: a lower-tier live exchange record claiming to override a kapu carrier by recency, repetition, or charm.
