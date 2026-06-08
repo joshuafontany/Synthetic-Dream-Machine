@@ -81,7 +81,7 @@ exits. At scope exit, all background tasks created by rush arms are cancelled by
 normal cascading rules. The distinction from `race` is that the cancellation trigger
 is the scope boundary, not the first winner.
 
-**Law:** A `puka` or `lele` block MUST NOT appear directly inside a `huli` (`\for`)
+**Law:** A `puka` or `lele` block MUST sit outside a `huli` (`\for`)
 iteration body. Placing branch/rush inside a loop accumulates unbounded background
 tasks with no clear cancellation boundary.
 
@@ -181,8 +181,8 @@ nested concurrency nodes and exits the containing function scope.
 `defer` blocks execute during scope unwinding — whether from normal completion,
 failure, or cancellation. They provide cleanup guarantees.
 
-**Critical constraint:** `defer` blocks MUST NOT contain suspending operations
-(`<suspends>` calls, `Sleep`, `Await`, etc.). This ensures cleanup happens
+**Critical constraint:** `defer` blocks MUST hold only synchronous operations
+(`<suspends>` calls, `Sleep`, `Await` belong elsewhere). This ensures cleanup happens
 immediately without delay, even when triggered by cancellation.
 
 **Exception:** `defer` blocks MAY use `spawn` to start async cleanup tasks. The
@@ -209,8 +209,8 @@ structured concurrency expressions to their parent scope. The spawned task has
 no parent effect context — therefore no parent scope boundary — therefore no
 automatic cancellation.
 
-**Constraint:** Spawned functions MUST have `<suspends>` effect and MUST NOT have
-`<decides>` (failable) effect. To spawn failable work, wrap it in a `<suspends>`
+**Constraint:** Spawned functions MUST carry the `<suspends>` effect and a
+non-failable signature. To spawn failable work, wrap it in a `<suspends>`
 function that handles failure internally.
 
 <<~/ahu >>

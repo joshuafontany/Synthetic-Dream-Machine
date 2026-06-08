@@ -113,8 +113,8 @@ When it does, keep three states distinct:
 - **declared-unresolved** — the address stands, but the child does not yet yield
 - **absent** — no outward claim appears
 
-Do not blur declared-unresolved with absent.
-Do not treat a decorative link as depth.
+Hold declared-unresolved distinct from absent.
+Treat a link as depth only when it carries real pressure, backlog, or adjacency.
 Use outward callouts only when they carry real pressure, real backlog, or real adjacency.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>

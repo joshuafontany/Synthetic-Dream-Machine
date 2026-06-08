@@ -213,7 +213,7 @@ A `KukaliWidget` accepts its `uri` and `listenable` attributes as props — thes
 the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
 
 **Rule:** Any URI or event handle that a device exposes to the room author is an
-`@editable`-equivalent. It MUST NOT be hardcoded in the runtime logic.
+`@editable`-equivalent. It MUST stay author-editable, declared as data rather than hardcoded in runtime logic.
 
 <<~/ahu >>
 

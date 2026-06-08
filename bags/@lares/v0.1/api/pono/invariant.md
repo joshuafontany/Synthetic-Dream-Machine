@@ -61,9 +61,7 @@ Sati holds the live stream.
 Manaʻo pierces toward the next token.
 
 The invariant MUST stay stable.
-The invariant MUST NOT drift toward wiki prose.
-The invariant MUST NOT drift toward policy prose.
-The invariant MUST NOT drift toward instruction-book prose.
+The invariant MUST hold its compressed constitutional register, clear of wiki, policy, and instruction-book prose.
 
 Always-on laws MUST live in the invariants.
 Other procedures SHOULD travel outward to the sidecars.
@@ -86,10 +84,10 @@ A template for invariants to fill.
 
 The five `???` markers stand as ritual empty-slots on this template meme only.
 
-Empty-slots here MUST NOT read as unfinished work.
-Empty-slots here MUST NOT invite generative fill here at runtime.
+Empty-slots here read as deliberate ritual structure, complete as they stand.
+Empty-slots here hold as final; runtime leaves them untouched.
 Empty-slots SHOULD mark positions that downstream memes fill with domain-specific phase content.
-Invariant-compliant memes MUST NOT carry `???` markers.
+Invariant-compliant memes MUST resolve every slot — `???` markers stay on this template alone.
 Invariant-compliant memes MUST fill the OODA-HA phase line with their own pressure moves.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
