@@ -56,9 +56,11 @@ The admin lane boots at vessel open and closes at vessel close. It does not susp
 between ceremonies. It carries the operator's capability context continuously.
 
 **OP-2 — Active wiki lanes serve corpus work.**
-Each active wiki lane carries one wiki URI and its recipe stack. The pool manages
-residency (pinned, hot, cold). Active lanes may pause or evict under memory pressure;
-the admin lane does not.
+Each active wiki lane carries one wiki URI and its recipe stack. The pool manages lane
+LIFECYCLE (mount/evict/teardown); RESIDENCY itself stays ISLAND-OWNED — a bag reads
+wela/anu by reachability from a live island, never by a pool-held tier ([[causal-island]],
+the island-owned residency law). Active lanes may evict under memory pressure; the admin
+lane does not.
 
 **OP-3 — Each lane holds its own authority.**
 The admin lane keeps its internal state private to itself; active wiki lanes reach
@@ -185,6 +187,10 @@ keyhive engine boots ONCE, on the always-on **relay**, which amortizes the cost 
 verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or
 nonce — mint it once (at `lares init`), re-present it forever; proof FRESHNESS rides
 the per-challenge nonce + timestamp, never the cached card (never cache the nonce).
+No contradiction with [[open-vessel]]'s equal-peer claim: leaf and relay share IDENTICAL
+STRUCTURE; they differ only in currently-held CAPABILITIES (the relay holds the keyhive
+engine piece; the leaf has not-yet-held it). Symmetric structure, asymmetric capabilities
+(Ink & Switch) — the one reconciled stance.
 
 **OP-AP6 — An agent holds its OWN did:key under a delegated, attenuated grant.**
 An AI agent mints its own keypair (a distinct DID) and receives a **scoped,

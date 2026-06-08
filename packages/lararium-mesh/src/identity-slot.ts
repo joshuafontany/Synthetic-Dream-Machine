@@ -5,7 +5,15 @@
  *
  *   BlueskyIdentitySlot    — AT Protocol DID (did:plc or did:web:user.bsky.social)
  *   GitHubIdentitySlot     — OAuth token mapped to did:web:github.com/<username>
- *   KeyhiveIdentitySlot    — Keyhive convergent capabilities (Ink & Switch, pending Rust→WASM)
+ *   KeyhiveIdentitySlot    — Keyhive convergent capabilities (Ink & Switch)
+ *
+ * STATUS NOTE (2026-06-08, drift-reconcile): Keyhive is NO LONGER pending — it runs
+ * LIVE at the OPERATOR level (bootAdminKeyhive Gates A/B/C, the V3 peer-boundary gate,
+ * resolveOrMintBinding) in @lararium/keyhive. THIS slot governs only USER-level access
+ * (Bluesky/GitHub/keyhive-user), which remains the alpha stub. The node sharePolicy
+ * already gates inbound network peers via the V3 admin-auth gate; the browser admits
+ * only same-origin/in-process peers (a legitimate asymmetry, not an open hole). See
+ * lararium-canonical-model #open-drift (point 4).
  *
  * The interface is intentionally narrow — only what LarVessel and the Automerge
  * sharePolicy need to function. Keyhive's full three-layer stack (convergent
