@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/lib/smol-toml >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml >>
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml"
 file-path    = "bags/@lararium/v0.1/tw5/lib-smol-toml.md"

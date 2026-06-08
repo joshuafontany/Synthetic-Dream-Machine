@@ -5,8 +5,8 @@
 uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/meme-graph"
 file-path    = "bags/@lararium/v0.1/mesh/meme-graph.md"
 type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 10
+register     = "Provisional"
+mana         = 3
 role         = "self-documentation: TODO describe meme-graph.ts"
 tagspace     = "lararium"
 cacheable    = true
@@ -17,3 +17,7 @@ retain       = true
 <<~ ahu #contract >>
 TODO: describe the load-bearing surface this file owns.
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

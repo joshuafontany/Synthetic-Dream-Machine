@@ -51,3 +51,7 @@ these types without an explicit entry in `deletion-map.md`.
 <<~ pranala #deletion-map ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map family:reference role:adapter-registry >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

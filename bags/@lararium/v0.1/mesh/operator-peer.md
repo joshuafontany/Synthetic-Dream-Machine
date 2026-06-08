@@ -60,10 +60,10 @@ Each active wiki lane carries one wiki URI and its recipe stack. The pool manage
 residency (pinned, hot, cold). Active lanes may pause or evict under memory pressure;
 the admin lane does not.
 
-**OP-3 — Lanes do not share authority.**
-The admin lane does not expose its internal state to active wiki lanes. Active wiki
-lanes do not read admin doc tiddlers directly. Cross-lane coordination travels through
-the command/receipt record surface.
+**OP-3 — Each lane holds its own authority.**
+The admin lane keeps its internal state private to itself; active wiki lanes reach
+admin doc tiddlers only through the command/receipt record surface. Cross-lane
+coordination travels that surface alone.
 
 **OP-4 — VM law applies within each lane.**
 TW5 as VM applies independently inside each lane. Neither lane imports tiddlywiki
@@ -82,8 +82,8 @@ handles only resource-local side effects.
 
 **OP-E1 — Local keys, local truth.**
 The operator keypair lives on the vessel's local storage (disk at 0o600 for node,
-WebCrypto non-extractable for browser). It MUST NOT enter any Automerge doc.
-It MUST NOT sync over the mesh. Identity derives from local keys — no server confers it.
+WebCrypto non-extractable for browser). It MUST stay vessel-local — held out of every
+Automerge doc, kept off the mesh. Identity derives from local keys — no server confers it.
 
 **OP-E2 — Three gates at boot.**
 Gate A: Keyhive DID matches local verifying key — throws hard on mismatch.
@@ -91,9 +91,9 @@ Gate B: vessel ∈ PersonGroup sentinel doc.
 Gate C: PersonGroup ∈ MeshCabal sentinel doc.
 All three gates pass before the vessel opens its wiki VM lanes.
 
-**OP-E3 — Vessel does not act as authority over other vessels.**
-A vessel may verify claims made by other vessels. It MUST NOT grant or revoke
-membership in a causal island it does not own. Delegation flows from the operator
+**OP-E3 — A vessel verifies; the owner governs.**
+A vessel may verify claims made by other vessels. Membership in a causal island MUST
+be granted or revoked by that island's owner alone. Delegation flows from the operator
 root key outward, never inward from a relay or server.
 
 **OP-E4 — Ea at the admin ingress.**
@@ -175,9 +175,32 @@ Polling reads the local replica for merge arrival — convergence-observation, n
 server-state polling. (Mirrors MCP Tasks: `taskId` + receipt fetch, requestor-driven;
 status notifications accelerate but never become load-bearing.)
 
-<<~ confidence Synthesis 12/20 >> The agent-as-sovereign-vessel identity seam
-(worker-resident keys + ContactCard, never a main-thread keyhive) remains the open
-build; the surface law above stands settled.
+**OP-AP5 — A leaf actor carries a LIGHT identity; the relay holds the engine.**
+A short-lived leaf (a one-shot CLI run, a single agent turn) carries only its
+Ed25519 keypair — its `did:key` — plus a **cached, pre-minted ContactCard JSON** on
+disk. With these it presents a self-certifying identity offline and signs the V3
+proof-of-possession with **bare `@noble/ed25519`** over its seed — zero keyhive on
+the leaf, honoring no-VM-on-main without a per-invocation Worker boot. The full
+keyhive engine boots ONCE, on the always-on **relay**, which amortizes the cost and
+verifies leaf proofs in its keyholder worker. The ContactCard carries no expiry or
+nonce — mint it once (at `lares init`), re-present it forever; proof FRESHNESS rides
+the per-challenge nonce + timestamp, never the cached card (never cache the nonce).
+
+**OP-AP6 — An agent holds its OWN did:key under a delegated, attenuated grant.**
+An AI agent mints its own keypair (a distinct DID) and receives a **scoped,
+short-lived capability** the operator delegates to it (device-admit-shaped: the
+operator adds the agent as a member with attenuated access). The agent signs
+invocations with its own key; authority chains back to the operator and stays
+revocable. The agent never holds the operator's key and never impersonates — effective
+authority equals the INTERSECTION of the operator's grant and the agent's attenuation
+(an agent reduces access, never expands it).
+
+<<~ confidence Synthesis-Canon 15/20 >> The leaf-identity shape (OP-AP5/6) stands
+resolved by twin scouts 2026-06-07 (light cached-card + bare-Ed25519 signer over the
+heavy worker-keyhive path; the tree's `auth-proof` tests already prove bare-Ed25519
+proofs verify). The remaining BUILD: `lares init` mints + persists the operator
+ContactCard (`.operator-card.json`, 0o600); a leaf-identity provider loads
+seed+card; then V3 C (peer transport) and the writable MCP surface compose over it.
 
 <<~/ahu >>
 

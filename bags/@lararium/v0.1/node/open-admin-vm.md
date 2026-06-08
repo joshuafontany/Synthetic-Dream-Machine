@@ -6,8 +6,8 @@ uri-path     = "ha.ka.ba/@lararium/v0.1/node/open-admin-vm"
 file-path    = "bags/@lararium/v0.1/node/open-admin-vm.md"
 source-file  = "packages/lararium-node/src/open-admin-vm.ts"
 type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 10
+register     = "Provisional"
+mana         = 3
 role         = "self-documentation: TODO describe open-admin-vm.ts"
 tagspace     = "lararium"
 cacheable    = true
@@ -18,3 +18,7 @@ retain       = true
 <<~ ahu #contract >>
 TODO: describe the load-bearing surface this file owns.
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

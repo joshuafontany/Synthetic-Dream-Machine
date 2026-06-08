@@ -6,8 +6,8 @@ uri-path     = "ha.ka.ba/@lararium/v0.1/keyhive/admin-event-store"
 file-path    = "bags/@lararium/v0.1/keyhive/admin-event-store.md"
 source-file  = "packages/lararium-keyhive/src/admin-event-store.ts"
 type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 10
+register     = "Provisional"
+mana         = 3
 role         = "self-documentation: TODO describe admin-event-store.ts"
 tagspace     = "lararium"
 cacheable    = true
@@ -18,3 +18,7 @@ retain       = true
 <<~ ahu #contract >>
 TODO: describe the load-bearing surface this file owns.
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

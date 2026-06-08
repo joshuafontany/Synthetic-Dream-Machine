@@ -57,7 +57,7 @@ marks a **causal island boundary**.
 | **0** | Active memes (kumu / UEFN device instances) | MAY become islands — own event horizon, params, trigger surface; promotion optional, correction local |
 | **1** | Memes inside a wiki (within the local doc window) | Simultaneously apprehended; peer state of the same doc remains non-simultaneous |
 | **2** | Automerge Realms (other docs reachable from this one) | Always non-simultaneous |
-| **3** | Lares nodes (federation edge) | A pranala/peer connection between nodes constitutes an island. MUST |
+| **3** | Lares nodes (federation edge) | A pranala/peer connection between nodes MUST count as an island boundary |
 
 <<~/ahu >>
 
@@ -124,5 +124,17 @@ ALIGNMENT (the non-monotonic lemures plane). See
 
 <<~/ahu >>
 
-Related: [[project_no_vm_on_main_thread]], [[feedback_isomorphism_by_composition]],
+<<~ ahu #edges >>
+
+## Edges
+
+Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorphism_by_composition]],
 [[project_asymmetric_peer_handoff]], [[project_relay_access_rings]].
+
+<<~ pranala #implemented-by-vessel ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer family:control role:implemented-by >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
