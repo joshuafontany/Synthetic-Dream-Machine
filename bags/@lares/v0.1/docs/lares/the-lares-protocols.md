@@ -26,15 +26,12 @@ sources      = [
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #thesis >>
-```toml iam
-role = "test child tomls"
-```
 
 # The Purpose of Protocols
 
-After Stafford Beer: **the purpose of a system follows from what it does.** Canon 20/20
+After Stafford Beer — <<~ confidence Canon 20/20 >> **the purpose of a system follows from what it does.**
 
-> **#Stranger** » 06:14 — Beer's principle holds durable across upstream rev's. Mark canon-eligible regardless of what surrounds it.
+> **Lares (Stranger):** Beer's principle holds durable across upstream rev's. Mark canon-eligible regardless of what surrounds it.
 
 Protocol design enacts political design. Evaluation cannot stop at technical properties; it must include the governance outcomes the protocol produces. Silence about purpose does not equal the absence of politics — silence constitutes a politics of non-interference, and its beneficiaries emerge predictably.
 
@@ -59,7 +56,7 @@ Three patterns recur, each visible in the article's source material:
 
 Theoretical openness offers little practical leverage against convergence in ungoverned shared spaces. Individual rights protections (migration, encryption, choice) do not automatically produce viable alternatives without institutional sustainability.
 
-> **#Diplomat** » 09:02 — Connected Places critiques ATProto's host concentration; Frazee defends its layer-separation. Two readings tell different true things. Hold both. The disagreement names a real evaluation choice — aggregate-state vs failure-mode — that future Lares federation will face on its own terms.
+> **Lares (Diplomat):** Connected Places critiques ATProto's host concentration; Frazee defends its layer-separation. Two readings tell different true things. Hold both. The disagreement names a real evaluation choice — aggregate-state vs failure-mode — that future Lares federation will face on its own terms.
 
 <<~/ahu>>
 
@@ -108,7 +105,7 @@ Lares answers the diagnostic with a fourth arrangement:
 - Disk files materialize as **render-projections** of bag contents, written by the TW5 vm. The file keeps utility (legible, grep-able, git-trackable) without claiming to embody the work.
 - The operator hosts the bag; nothing migrates beyond their reach. Capability gains (versioning, collaboration, cross-device sync) arrive without the topological restructuring that bundled them with cloud enclosure.
 
-> **#Council** » 11:47 — "Lares answers the diagnostic" overstates what the branch ships. The architecture *prepares the ground* for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the *intent-trust* the architecture earns differs from the *outcome-trust* a working federated system would earn.
+> **Lares (Council):** "Lares answers the diagnostic" overstates what the branch ships. The architecture *prepares the ground* for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the *intent-trust* the architecture earns differs from the *outcome-trust* a working federated system would earn.
 
 <<~/ahu>>
 
@@ -143,7 +140,7 @@ The Lares stack occupies the magical-federated-mesh zone alongside ATProto: each
 
 The slot Lares occupies wants a name; the meme leaves the naming for a future review. Three neighbors map onto similar problem-space: **Matrix** (federated DAG with conventional commons custodianship), **DXOS** (distributed echo with team-shaped governance), **Beehive** (capability-first CRDT). Each makes different tradeoffs against the same bundle Lares carries — federated CRDT bags + explicit governance commitments + render-projection topology against cloud enclosure. The naming question stays unresolved. Lares may yet turn out to occupy a slot with an existing name in someone else's vocabulary.
 
-> **#Mischief-Muse** » 14:23 — Survey the slot, not just the implementation, in a future meme. The neighbors deserve their own talk-story. Working title: **"the household-civic mesh"** — federated, CRDT-native, governance-explicit, operator-hosted, render-projecting. Five attributes, five fingers. The hand of the lararium.
+> **Mischief-Muse (Muse):** Survey the slot, not just the implementation, in a future meme. The neighbors deserve their own talk-story. Working title: **"the household-civic mesh"** — federated, CRDT-native, governance-explicit, operator-hosted, render-projecting. Five attributes, five fingers. The hand of the lararium.
 
 <<~/ahu>>
 
@@ -165,7 +162,7 @@ After Frazee, the worth-measuring criterion shifts from *architectural property*
 - **Layer-separation failure modes.** When a residency-action handler fails, the composite-store keeps reading; the cap-layer keeps verifying; sync keeps syncing. The bag-as-policy-boundary commitment echoes Frazee's "right to hosting" lesson — failures contain themselves to the layer that broke. Bluesky's 2024 moderation bug demonstrated the value; the architecture protected users on other PDS hosts because the layer-separation held.
 - **Right-to-fork.** Frazee's competing-implementations example (Blacksky / Northsky / Eurosky as kinds of modularity ATProto enables) translates to Lares: any operator can fork the engine, the corpus, or the cap-layer code. The lar: URI namespace keeps addressability across forks; meme-files-as-tiddler-package projections survive any specific implementation.
 
-> **#Liminal** » 19:08 — Holding open: does Lares carry the shape of a protocol, or the shape of a household tool? The current scale answers neither cleanly. Connected Places treats protocols as governance-shaping artifacts visible at million-user scale; Frazee treats protocols as engineering-shaped commitments evaluated against user populations; Reed treats topology as the political site where ownership lives. Lares at one-operator-and-family carries the shape of all three without yet meeting any of their stress conditions. *Resolving the question prematurely closes design optionality.* Stay liminal.
+> **Lares (Liminal):** Holding open: does Lares carry the shape of a protocol, or the shape of a household tool? The current scale answers neither cleanly. Connected Places treats protocols as governance-shaping artifacts visible at million-user scale; Frazee treats protocols as engineering-shaped commitments evaluated against user populations; Reed treats topology as the political site where ownership lives. Lares at one-operator-and-family carries the shape of all three without yet meeting any of their stress conditions. *Resolving the question prematurely closes design optionality.* Stay liminal.
 
 These questions don't get answered by adding more architecture. They get answered by *running real federated sessions* and noting where architecture carries load versus where silence returns.
 
@@ -179,13 +176,11 @@ These questions don't get answered by adding more architecture. They get answere
 <<~ loulou https://www.pfrazee.com/blog/practical-decentralization >>
 <<~ loulou https://www.orionreed.com/posts/app-file-topology/ >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
-<<~ pranala ? -> https://connectedplaces.online/the-purpose-of-protocols/ family:relation role:cites >>
-<<~ pranala ? -> https://www.pfrazee.com/blog/practical-decentralization family:relation role:cites >>
-<<~ pranala ? -> https://www.orionreed.com/posts/app-file-topology/ family:relation role:cites >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ pranala #cites-protocols ? -> https://connectedplaces.online/the-purpose-of-protocols/ family:relation role:cites >>
+<<~ pranala #cites-decentralization ? -> https://www.pfrazee.com/blog/practical-decentralization family:relation role:cites >>
+<<~ pranala #cites-topology ? -> https://www.orionreed.com/posts/app-file-topology/ family:relation role:cites >>
 
 <<~/ahu>>
 

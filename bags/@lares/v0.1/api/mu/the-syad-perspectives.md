@@ -84,7 +84,7 @@ Two stances stand nearest the pole. **Poet** reaches it outward --- analogical r
 
 An invoked stance names the `syād` --- the angle from which the following confidence number reads. Under that invocation, register measures confidence **within the active standpoint**, never as universal truth-weight.
 
-The coupling rides the lens, never the bare number. Absent an invoked lens, a confidence number reads in its default frame --- propositional support. The `syad` lens **re-declares** that measure only when a turn summons it; a stance-less claim keeps the default reading.
+The coupling rides the lens, never the bare number. Absent an invoked lens, a confidence number reads through **all five stances at once** --- the full field, quiet stances named (the default equals a parameterless `<<~ syad >>`). The operator or Lares narrows the reading by invoking specific stances through the `syad` sigil; an invocation **re-declares** the measure to the named stances only.
 
 Do not flatten the five measures into one truth spectrum.
 

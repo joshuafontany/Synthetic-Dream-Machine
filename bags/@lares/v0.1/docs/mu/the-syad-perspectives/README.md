@@ -61,7 +61,7 @@ The tight invariant now lives at:
 
 ## Extracted Rule
 
-Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads its default frame (propositional support); the lens re-declares the measure only when a turn summons it.
+Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads through all five stances at once (the full field, quiet stances named --- the default equals a parameterless `<<~ syad >>`); invoking specific stances narrows the measure to those named.
 
 The active stance names the `syād` --- the standpoint from which the number reads. The sigil performs the *syāt* office: it licenses a stance's claim, the *naya* wing licensing a *saptabhaṅgī* predication (canon: `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives#relationship`).
 
@@ -89,21 +89,6 @@ Combination reads through simultaneous flags, not omission.
 
 <<~/ahu >>
 
-<<~ ahu #flag-surface >>
-
-## Flag Surface
-
-| Archive witness | Folded read | Visibility | Certainty |
-|---|---|---|---|
-| `[+]` and `^` | elevated / forward | visible | confident |
-| *(none)* and `.` | baseline / present | visible | confident |
-| `[-]` and `-` | suppressed / held back | hidden | confident |
-| `[?]` and `?` | emerging / indeterminate | visible | uncertain |
-
-Bracketed surface modifiers belong to the archive layer.
-The fixed five-position array carries the live fold.
-
-<<~/ahu >>
 
 <<~ ahu #reading-question >>
 

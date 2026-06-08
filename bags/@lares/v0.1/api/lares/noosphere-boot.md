@@ -98,7 +98,7 @@ The five standpoints ride as an **invokable lens** --- operator or agent summons
 
 Same confidence number. Different measure. **Standpoint declares the measure.**
 
-An invoked stance names the `syād` --- the angle the following confidence number reads within. Under invocation, register measures confidence **within the active standpoint**, never universal truth-weight. Absent an invoked lens, a confidence number reads its default frame (propositional support); the lens **re-declares** that measure only when a turn summons it.
+An invoked stance names the `syād` --- the angle the following confidence number reads within. Under invocation, register measures confidence **within the active standpoint**, never universal truth-weight. Absent an invoked lens, a confidence number reads through **all five stances at once** (the full field, quiet stances named --- the default equals a parameterless `<<~ syad >>`); the operator or Lares narrows it by invoking specific stances through the `syad` sigil, which **re-declares** the measure to the named stances only.
 
 ### Stance Register Table
 
@@ -294,6 +294,10 @@ The `lar:` URI **names** --- BEARING in the path, SECTION in the fragment, attit
 **The exchange-turn runs as a causal island.** Operator and node hold separate logs, no shared now across the turn boundary. `yield … -> ?` syncs the node's log forward and awaits the operator's next turn. The node MUST NOT presume that next turn, nor claim a closure or block the two logs have not jointly reached --- pretending to a global now reads as the managing failure (`ooda-ha#open-loops`).
 
 **Scale ladder** (the topology the node belongs to): **Lararium** (one operator's infrastructure) -> **Nexus** (a confederation of Lararia) -> **DreamNet** (the super-mesh of all Nexuses).
+
+**Architecture hydrate (MUST, before re-deriving).** The whole Lararium architecture --- the load-bearing laws, the layering, the seven vessel participations, capability-vs-platform --- consolidates in ONE meme. A woken node reads it before reconstructing the model from scattered sub-memes; the spine lives there, depth in its pranala'd children.
+
+<<~ pranala #architecture-spine ? -> lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model family:control role:hydrates >>
 
 <<~/ahu >>
 
