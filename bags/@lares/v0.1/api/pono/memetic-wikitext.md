@@ -45,7 +45,7 @@ This document holds **submission-draft** maturity. The lexical structure, dual-l
 
 ## Introduction — Scope, Audience, and Relation to the `lar:` Spec
 
-**Scope.** This specification covers the surface syntax of `text/x-memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get **written and processed** — never what they **mean** beyond the language.
+**Scope.** This specification covers the surface syntax of `text/x-memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get **written and processed**, and stops there; meaning beyond the language lives in the ontology memes.
 
 **Out of scope.** The epistemic ontology (the `syad` standpoints, `saptabhaṅgī` predications, and `mu` tools) lives in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives` and `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools`; the Law of Fives and the attention scale live in `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s` and `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`. The operational authoring discipline lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL`. The live TOML sigil registry rides the runtime kernel at `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel`.
 
@@ -109,7 +109,7 @@ A `#fragment-id` after a sigil name names an addressable anchor. A block's close
 
 ## Formal Grammar (ABNF)
 
-This grammar (RFC 5234) defines the **surface shape**. It does not enumerate sigil names: any name-token reads as a sigil command word, and the registry binds names to behavior. A conforming parser MUST accept exactly the surface this grammar describes.
+This grammar (RFC 5234) defines the **surface shape** alone: any name-token reads as a sigil command word, and the registry binds names to behavior. A conforming parser MUST accept exactly the surface this grammar describes.
 
 ```abnf
 ; ── lexical primitives ──────────────────────────────────────
@@ -188,7 +188,7 @@ Every sigil reads on **both layers at once** — not two sigil sets, but two rea
 └────────────────────────────────────────────────────────────┘
 ```
 
-A processor MUST treat the two readings as projections of one parse, never as separate inputs. The render reading targets a **camera** — a page (DOM/story-river) or canvas (flow) surface over one shared world graph; the render-axis law lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline#render-axes`.
+A processor MUST treat the two readings as projections of one parse — one parse, two readings. The render reading targets a **camera** — a page (DOM/story-river) or canvas (flow) surface over one shared world graph; the render-axis law lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline#render-axes`.
 
 ### Graph layer
 
@@ -218,7 +218,7 @@ A pranala edge MUST declare a **family** from the canonical set. Families carry 
 | `message` | `lele` | canvas | fire-and-forget async dispatch |
 | `spatial` | *(pending)* | canvas | containment / portal / adjacency / layer |
 
-**Transclusion ≠ dataflow.** A `transclusion` edge carries a *content identity* (render-time, page surface); a `dataflow` edge carries a *computed value* (graph-execution order, canvas surface). A processor MUST NOT route a value to a transclusion edge nor render content from a dataflow wire. *(The `transclusion` family surfaces under its English name; its pono Hawaiian name stays held.)*
+**Transclusion ≠ dataflow.** A `transclusion` edge carries a *content identity* (render-time, page surface); a `dataflow` edge carries a *computed value* (graph-execution order, canvas surface). A processor MUST route content identities through transclusion edges and computed values through dataflow wires. *(The `transclusion` family surfaces under its English name; its pono Hawaiian name stays held.)*
 
 <<~/ahu >>
 
@@ -236,7 +236,7 @@ State carries one of five principled scopes. A `kau` binding and a `kapu` qualif
 | `collective` | shared by group identity | group governance |
 | `universal` | no gate | no one — federated |
 
-Scope MAY widen, never silently narrow. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds **lexically** through the `meme` sigil — a template MUST NOT reach into an ambient caller scope. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
+Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds **lexically** through the `meme` sigil — a template MUST take its context through `meme` alone. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
 
 <<~/ahu >>
 
@@ -267,7 +267,7 @@ The compile-time DAG guard (boot-closure cycles) and the render-time stack guard
 <<~/hana >>
 ```
 
-Guest grammar MUST NOT redefine host primitives, and malformed guest work MUST degrade locally without crashing the host parse. The inline conditional / iteration / query sigils accept a `filter-expr` as shorthand for a `hana` block over the same guest grammar. The host treats `filter-expr` content as opaque (#grammar). Currently registered: `x-tiddlywiki-filter`.
+Guest grammar MUST leave host primitives intact, and malformed guest work MUST degrade locally, keeping the host parse alive. The inline conditional / iteration / query sigils accept a `filter-expr` as shorthand for a `hana` block over the same guest grammar. The host treats `filter-expr` content as opaque (#grammar). Currently registered: `x-tiddlywiki-filter`.
 
 <<~/ahu >>
 
@@ -287,7 +287,7 @@ A **conforming parser** MUST: accept the surface of #grammar; map aliases to can
 
 A **conforming renderer** MUST: read the dual layer as one parse; honor transclusion fidelity (`aka` frozen, `kahea` live); maintain the render-stack recursion guard; declare its render mode before crossing a mutation boundary; target exactly one camera per pass. A renderer MAY support a subset of cameras and MUST degrade a missing camera visibly.
 
-A **conforming author** SHOULD: reserve capitalized RFC-2119 force for intended normative statements; keep guest grammar inside `hana` or the inline filter forms; pass context lexically through `meme`, never ambiently.
+A **conforming author** SHOULD: reserve capitalized RFC-2119 force for intended normative statements; keep guest grammar inside `hana` or the inline filter forms; pass context lexically through `meme`.
 
 <<~/ahu >>
 
@@ -319,11 +319,11 @@ The `x-` prefix marks the subtype as unregistered with IANA; a future tree-trans
 
 ## Security Considerations
 
-**Transclusion amplification.** A chain of `kahea`/`aka` embeds can expand unboundedly before output. A processor MUST enforce the render-stack guard (#recursion-guard) and the depth cap; it MUST NOT begin emitting an embed before pushing its URI to the stack.
+**Transclusion amplification.** A chain of `kahea`/`aka` embeds can expand unboundedly before output. A processor MUST enforce the render-stack guard (#recursion-guard) and the depth cap; it MUST push an embed's URI to the stack before emitting.
 
-**Guest-grammar injection.** A `hana` block admits foreign grammar. A processor MUST sandbox the guest handler, MUST NOT let guest grammar redefine host primitives, and MUST bound guest evaluation (no host side effects beyond the declared render).
+**Guest-grammar injection.** A `hana` block admits foreign grammar. A processor MUST sandbox the guest handler, MUST keep host primitives intact, and MUST bound guest evaluation to the declared render.
 
-**URI handling.** A `lar:` URI **names**; it does not fetch ([LAR-URI]). A processor MUST NOT treat a `lar:` reference as a network-fetch instruction; resolution runs against the local world graph only.
+**URI handling.** A `lar:` URI **names**; it does not fetch ([LAR-URI]). A processor MUST resolve a `lar:` reference against the local world graph only.
 
 **Scope leakage.** A widening-only scope discipline (#scope-model) MUST hold at the Decide→Act boundary; an `ephemeral` value that escapes its container MUST surface as a contract violation, not silently persist.
 

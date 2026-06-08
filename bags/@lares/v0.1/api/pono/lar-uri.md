@@ -27,7 +27,7 @@ grammar = true
 
 ## Abstract
 
-The `lar:` URI scheme names an address in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI **names; it does not fetch**: resolution runs against a local world graph, never as a network instruction. The scheme carries two forms — a **local form** for stable graph addresses and system resource names, and a **session form** that names a speaker for exchange spans — and a three-slot attitude root carried by a Ha-Ka-Ba (heading · angle · dynamic) triple.
+The `lar:` URI scheme names an address in a content-addressed meme graph — one parseable address per named unit. Like `tag:` (RFC 4151), a `lar:` URI **names; it does not fetch**: resolution runs against a local world graph alone. The scheme carries two forms — a **local form** for stable graph addresses and system resource names, and a **session form** that names a speaker for exchange spans — and a three-slot attitude root carried by a Ha-Ka-Ba (heading · angle · dynamic) triple.
 
 This specification names the scheme syntax (a formal ABNF grammar), the path taxonomy, the `@`-bag CRDT-surface rule, the resolution model, and the conformance, scheme-registration, and security obligations a processor MUST meet. It forms a **sibling submission** to the memetic-wikitext markup specification, which addresses its content by this scheme.
 
@@ -45,7 +45,7 @@ This document holds **submission-draft** maturity. The scheme law, path taxonomy
 
 ## Introduction — Scope, Audience, and Relation to memetic-wikitext
 
-**Scope.** This specification covers the syntax of the `lar:` URI scheme, the path taxonomy and slot discipline, the one-bag `@`-surface rule, and the resolution model. It governs how an address gets **written and resolved** — never what the named unit **means** beyond its identity.
+**Scope.** This specification covers the syntax of the `lar:` URI scheme, the path taxonomy and slot discipline, the one-bag `@`-surface rule, and the resolution model. It governs how an address gets **written and resolved**, and stops at identity; what the named unit **means** beyond its identity lives elsewhere.
 
 **Out of scope.** The content carried at a `lar:` address, and the markup that authors it, ride the sibling `memetic-wikitext` specification (Normative Reference [MWT]). The typed-edge grammar rides [PRANALA]. The operational addressing discipline lives at `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL`.
 
@@ -105,7 +105,7 @@ alias         = 1*( unreserved )
 tier          = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A slot MUST NOT carry a hyphen, underscore, or space. A stable or unstable path MUST carry a full three-slot root; fewer than three slots MUST NOT appear. An adjacent path MUST NOT carry HA.KA.BA dot-notation in its root.
+A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alone. A stable or unstable path MUST carry a full three-slot root. An adjacent path MUST carry a non-dotted root.
 
 <<~/ahu >>
 
@@ -131,7 +131,7 @@ lar:///AGENTS    lar:///LARES    lar:///CRYSTAL
 
 Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
 
-For stable and unstable paths: each slot holds exactly one lowercase word — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Hyphens, underscores, and spaces within a slot MUST NOT appear. Fewer than three slots MUST NOT appear. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
+For stable and unstable paths: each slot holds exactly one lowercase word — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters alone, and the root MUST carry exactly three. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
 
 ### TW5 System Boundary
 
@@ -160,7 +160,7 @@ Law summary:
 
 1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
 2. `child[1]` MAY carry `@<name>` — names a top-level bag. Each bag has exactly one canonical address.
-3. `child[2]` and deeper MUST NOT carry `@`-prefix. Those segments name tiddlers (or path navigation) within the bag's address space — never further sub-bags.
+3. `child[2]` and deeper name tiddlers (or path navigation) within the bag's address space; the `@`-prefix rides `child[1]` alone.
 4. Resolution: the runtime resolves an `@`-tagged segment to an AutomergeUrl via the `BagResolver` map carried in the island manifest. The URI is the slot identity; the resolver maps it to the live doc. Two devices binding the same slot URI to different doc URLs (different recipes, different personal docs, etc.) is the normal case — the URI is the address, the doc is the house.
 
 Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* pointing at OTHER bags. The canonical example is `@catalog`, which tracks corpus bags via entries at `lar:///ha.ka.ba/@catalog/corpus/<slug>` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/@<slug>` bag. Catalog catalogs; it does not host.
@@ -171,14 +171,14 @@ Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* poi
 
 ## Resolution Model
 
-`lar:` **names**; it does not fetch. A processor MUST NOT treat a `lar:` reference as a network-fetch instruction. Resolution runs against the local world graph only:
+`lar:` **names**; it does not fetch. A processor MUST resolve a `lar:` reference against the local world graph only:
 
 1. Parse the URI to its form (local / session), path class, and optional fragment.
 2. For an `@`-bag segment, map the bag identity to a live doc via the island manifest's `BagResolver`.
 3. Resolve the remaining path to a named unit within that bag's address space.
 4. Resolve a `#fragment` to a section / `ahu` / pranala anchor within the named unit.
 
-Session form names the speaker through the authority. It MUST NOT appear in stable graph addresses, system resource names, or other storage — exchange spans only.
+Session form names the speaker through the authority. It MUST stay within exchange spans, away from stable graph addresses, system resource names, and other storage.
 
 <<~/ahu >>
 
@@ -219,7 +219,7 @@ BEARING (path) → SECTION (fragment).
 
 A **conforming parser** MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (stable/unstable); reject a slot bearing a hyphen, underscore, space, or non-ASCII; reject an `@`-prefix outside `child[1]`; treat a `#fragment` as an opaque anchor.
 
-A **conforming resolver** MUST: resolve against the local world graph only, never as a network fetch; map an `@`-bag segment through the island manifest's `BagResolver`; treat the URI as the stable address and the doc as the bound house (one URI MAY bind different docs per device).
+A **conforming resolver** MUST: resolve against the local world graph only; map an `@`-bag segment through the island manifest's `BagResolver`; treat the URI as the stable address and the doc as the bound house (one URI MAY bind different docs per device).
 
 A **conforming author** SHOULD: use local form for stable addresses and system resource names; reserve session form for exchange spans; keep one `@`-bag per address at `child[1]`.
 
@@ -252,13 +252,13 @@ The scheme registers as **provisional**; a future submission MAY seek permanent 
 
 ## Security Considerations
 
-**Names, not fetches.** A `lar:` URI MUST NOT trigger a network fetch. A resolver runs against the local world graph; a remote address reaches a peer only through the explicit CRDT-federation path, never by URI dereference.
+**Names, not fetches.** A `lar:` URI MUST resolve against the local world graph. A remote address reaches a peer through the explicit CRDT-federation path alone.
 
-**Bag confusion.** An `@`-bag binds to a doc through the `BagResolver`. A processor MUST treat the URI as the address and the bound doc as untrusted until the manifest authorizes it; it MUST NOT promote a doc to canon on URI match alone.
+**Bag confusion.** An `@`-bag binds to a doc through the `BagResolver`. A processor MUST treat the URI as the address and the bound doc as untrusted until the manifest authorizes it; canon promotion MUST wait on manifest authorization, never on URI match alone.
 
 **Slot injection.** A slot admits lowercase ASCII only. A processor MUST reject non-ASCII, separators, or an out-of-position `@` rather than normalize them silently — silent normalization invites address spoofing.
 
-**Session-form leakage.** Session form names a speaker. A processor MUST NOT persist a session-form URI into stable storage, a graph address, or a system resource name; such a URI escaping its span MUST surface as a violation.
+**Session-form leakage.** Session form names a speaker. A processor MUST keep a session-form URI within its exchange span; a session-form URI reaching stable storage, a graph address, or a system resource name MUST surface as a violation.
 
 <<~/ahu >>
 
