@@ -31,11 +31,9 @@ export { heedSummons } from "@lararium/tw5";
 export type { SummonsRelayOptions, SummonsRequest } from "@lararium/tw5";
 export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 
-export { makeWhereReactor } from "./where-handler.js";
-export type { WhereHandlerOptions } from "./where-handler.js";
-
-export { makeResolveReactor } from "./resolve-handler.js";
-export type { ResolveHandlerOptions } from "./resolve-handler.js";
+// where + resolve reactors RELOCATED to @lararium/tw5 (worker-data-verbs) — they now
+// run in the admin worker (sovereign-worker, verify-then-delegate). Re-export from there.
+export { makeWhereReactor, makeResolveReactor } from "@lararium/tw5";
 
 export {
   makeListWikisReactor, makeInitWikiReactor,
