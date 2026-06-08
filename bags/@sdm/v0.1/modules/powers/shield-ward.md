@@ -88,7 +88,6 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward family:provenance role:witness >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
 
 <<~/ahu >>
 

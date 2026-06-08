@@ -66,13 +66,6 @@ Modules and cards tag with the **short** form. `<<tag-pill>>` reads the pointer'
 A component earns its address by serving a filter query. Tags start as TOML header entries; promote to an addressed component meme only when a query demands the address. If a promoted component proves unused, **demote it back to a header tag and delete the meme** (Principle 6). Do not split too fine — `ecm-scan` not `ecm-scan-passive`/`ecm-scan-active` (the nano-service trap).
 <<~/ahu >>
 
-<<~ ahu #edges >>
-## Edges
-
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
-
-<<~/ahu >>
-
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

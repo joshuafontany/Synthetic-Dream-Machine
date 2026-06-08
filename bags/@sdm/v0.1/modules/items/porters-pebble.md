@@ -78,7 +78,6 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 <<~ pranala #seated-via ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/item family:composition role:seated-via >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/items/uvg/porters-pebble family:provenance role:witness >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
 
 <<~/ahu >>
 

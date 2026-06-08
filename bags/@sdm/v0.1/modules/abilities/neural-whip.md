@@ -83,7 +83,6 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
 <<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip family:render role:projects >>
 <<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip family:provenance role:witness >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
 
 <<~/ahu >>
 

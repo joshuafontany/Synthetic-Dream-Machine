@@ -54,7 +54,6 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 <<~ ahu #edges >>
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model family:reference role:see >>
 <<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:see >>
 
 <<~/ahu >>
