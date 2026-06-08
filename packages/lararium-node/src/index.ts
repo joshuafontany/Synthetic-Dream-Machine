@@ -19,7 +19,11 @@ export type { InitOptions, InitResult } from "./commands/init.js";
 export { runDeviceAdmit } from "./commands/device-admit.js";
 export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-admit.js";
 
-export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-key.js";
+export { loadOperatorVerifyingKey, loadOperatorSigningSeed, loadOperatorCard, persistOperatorCard } from "./operator-key.js";
+export { loadLeafIdentity } from "./leaf-identity.js";
+export type { LeafIdentity } from "./leaf-identity.js";
+export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";
+export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";
 
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";
 export type { VerbReactor, VerbContext, VerbDispatcherOptions } from "@lararium/tw5";

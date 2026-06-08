@@ -24,12 +24,13 @@
  *      PeerId → identifierHex entries when the adapter emits "peer-candidate".
  *
  * Security posture (alpha):
- *   - V3 proof-of-possession: the gate emits its gate-binding key in lar:challenge
- *     and relays the peer's {nonce, sig, ts} to the keyholder worker, which verifies
- *     the Ed25519 proof (verifyAuthProof) against the card key + the gate's own key.
- *     The worker's `proofVerified` rides back ADVISORY — admission still gates on the
- *     capability verdict only. ENFORCEMENT FLIP (step D) folds proofVerified into
- *     admission once every peer transport sources a real proof (none do yet).
+ *   - V3 proof-of-possession (ENFORCED): the gate emits its gate-binding key in
+ *     lar:challenge and relays the peer's {nonce, sig, ts} to the keyholder worker,
+ *     which verifies the Ed25519 proof (verifyAuthProof) against the card key + the
+ *     gate's own key AND folds the result into its verdict (operator-admin-behavior,
+ *     step D). So `verdict.ok` already means capability AND a verified proof; the
+ *     gate admits on it directly and stays keyhive-free. A node operator MAY relax
+ *     to capability-only with LAR_V3_ALLOW_UNPROVEN=1 (the prior advisory posture).
  *   - ContactCard payload is capped at MAX_CONTACT_CARD_BYTES before TextEncoder.
  *   - Concurrent unauthenticated connections are capped at MAX_PENDING.
  *   - Auth timeout is 5 s (machine-to-machine; no human interaction path).
@@ -177,11 +178,10 @@ export class AdminAuthGate extends EventEmitter {
           // plus the peer's Identifier hex for the sharePolicy map.
           const verdict = await seam.verify(cardBytes, adminBagUrl, "admin", proof);
 
-          // ENFORCEMENT POSTURE (V3 step D, deferred): admission rides the
-          // capability verdict (`verdict.ok`) only. `verdict.proofVerified` rides
-          // back ADVISORY until every peer transport sources a real proof; the flip
-          // ANDs it into the admission test here (and/or in-worker). Until then a
-          // require-proof flip would reject every peer (none sign yet).
+          // ENFORCEMENT (V3 step D): the keyholder worker already folded the proof
+          // check into `verdict.ok` (it returns ok only on capability AND a verified
+          // proof; LAR_V3_ALLOW_UNPROVEN=1 relaxes it worker-side). The gate admits
+          // on the verdict directly — it never re-decides policy, staying a relay.
           if (!verdict.ok || !verdict.identifier) {
             resolve({ ok: false, reason: verdict.reason ?? (verdict.ok ? "verify-proxy returned no identifier" : "insufficient capability") });
           } else {

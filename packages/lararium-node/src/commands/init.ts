@@ -23,7 +23,7 @@ import {
   PERSON_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
-import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "../operator-key.js";
+import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed, persistOperatorCard } from "../operator-key.js";
 import {
   runFoundingCeremony, runApplyAdmitPayload, type DeviceAdmitPayload,
 } from "@lararium/keyhive";
@@ -137,13 +137,17 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
 
   const {
     identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
-    personGroupDocIdHex, meshCabalDocIdHex,
+    personGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
   } = await runFoundingCeremony({
     repo,
     operatorSeed,
     operatorVerifyingKey: operatorIdentity.verifyingKey,
     operatorDisplayName:  operatorIdentity.displayName ?? "operator",
   });
+
+  // Cache the operator ContactCard for the light leaf-identity path — a CLI/agent
+  // re-presents it on every peer handshake without booting keyhive (OP-AP5).
+  await persistOperatorCard(storageDir, contactCardJson);
 
   const bootstrapPlugin = makeBootstrapPlugin(
     identitiesUrl, circlesUrl, sessionsUrl, adminUrl,

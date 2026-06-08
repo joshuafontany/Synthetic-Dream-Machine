@@ -64,10 +64,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       //   peerPubKey = the raw ed25519 key, the suffix of the card-derived
       //     Identifier hex (the same relationship bootAdminKeyhive Gate A relies on:
       //     did.endsWith(verifyingKey)).
-      // proofVerified rides back ADVISORY-ONLY for now. ENFORCEMENT FLIP (V3 step D):
-      // change `ok` below to `verdict.ok && proofVerified` once every peer transport
-      // (C) sources a real proof — until then a flip would brick all sync.
-      let proofVerified: boolean | undefined;
+      let proofVerified = false;
       if (proof) {
         const peerPubKey = id.slice(-64); // raw 32-byte ed25519 verifying key (hex)
         const r = await verifyAuthProof({
@@ -82,11 +79,19 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         proofVerified = r.ok;
       }
 
-      return {
-        ...verdict,
-        identifier: id,
-        ...(proofVerified !== undefined ? { proofVerified } : {}),
-      };
+      // ENFORCEMENT FLIP (V3 step D): admission requires BOTH a satisfied
+      // capability (`verdict.ok`) AND a verified proof-of-possession. Every live
+      // peer transport now sources a real proof (the CLI via LarWSClientAdapter;
+      // the browser stays passive). ESCAPE HATCH: a node operator MAY set
+      // LAR_V3_ALLOW_UNPROVEN=1 to fall back to capability-only admission (the
+      // prior advisory posture) if a live handshake regression surfaces — guarded
+      // for browser-safety (no `process` there; the browser holds no inbound peer).
+      const enforce = !(typeof process !== "undefined" && process.env?.["LAR_V3_ALLOW_UNPROVEN"] === "1");
+      if (enforce && !proofVerified) {
+        return { ok: false, identifier: id, proofVerified, reason: proof ? "V3 proof verification failed" : "V3 proof required" };
+      }
+
+      return { ...verdict, identifier: id, proofVerified };
     },
 
     resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] }) => {

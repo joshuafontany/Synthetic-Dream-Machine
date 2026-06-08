@@ -157,6 +157,42 @@ export async function loadOperatorVerifyingKey(dataDir: string): Promise<string>
   return raw.verifyingKey;
 }
 
+function cardFileName(login: string | null): string {
+  return login ? `.operator-card-${login}.json` : ".operator-card.json";
+}
+
+/**
+ * Persist the operator's pre-minted Keyhive ContactCard JSON beside the keypair
+ * (mode 0o600). The founding ceremony mints it once; a short-lived LEAF actor
+ * (CLI run / agent turn) re-presents this cached card on every peer handshake
+ * WITHOUT booting keyhive — the light-identity path (operator-peer #actor-parity
+ * OP-AP5). The card carries no expiry/nonce, so the cache never goes stale; proof
+ * freshness rides the per-challenge nonce, never the card.
+ */
+export async function persistOperatorCard(dataDir: string, contactCardJson: string): Promise<void> {
+  mkdirSync(dataDir, { recursive: true });
+  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const cardFile = join(dataDir, cardFileName(hint.login));
+  writeFileSync(cardFile, contactCardJson, { mode: 0o600, encoding: "utf8" });
+  chmodSync(cardFile, 0o600);
+  console.log(`[operator-key] persisted ContactCard${hint.login ? ` for ${hint.login}` : ""}`);
+}
+
+/**
+ * Load the operator's cached ContactCard JSON. Throws when absent — the caller
+ * must run `lares init` (which mints + persists it during the founding ceremony).
+ */
+export async function loadOperatorCard(dataDir: string): Promise<string> {
+  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const cardFile = join(dataDir, cardFileName(hint.login));
+  if (!existsSync(cardFile)) {
+    throw new Error(
+      `[operator-key] no ContactCard at ${cardFile} — run \`lares init\` (it mints the card during the founding ceremony)`,
+    );
+  }
+  return readFileSync(cardFile, "utf8");
+}
+
 export async function loadOperatorSigningSeed(dataDir: string): Promise<Uint8Array> {
   const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
   const keyFile = join(dataDir, keyFileName(hint.login));

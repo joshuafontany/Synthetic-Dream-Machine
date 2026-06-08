@@ -8,7 +8,7 @@ import { describe, test, expect, beforeAll } from "vitest";
 import * as ed25519 from "@noble/ed25519";
 import {
   authProofBytes, buildAuthResponse, verifyAuthProof, runPeerHandshake,
-  AUTH_PROOF_TTL_MS,
+  ed25519SignerFromSeed, AUTH_PROOF_TTL_MS,
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied,
 } from "../src/auth-wire.js";
 import { hex } from "../src/crypto.js";
@@ -169,5 +169,28 @@ describe("verifyAuthProof (V3 verifier half — real Ed25519 keys)", () => {
       .toMatch(/peerPubKey/);
     expect((await verifyAuthProof({ ...challenge, peerPubKey: peerPub, sig: "ab", ts })).reason)
       .toMatch(/sig/);
+  });
+});
+
+describe("ed25519SignerFromSeed (the LIGHT leaf-identity signer)", () => {
+  // Proves the leaf-identity signing path end-to-end: a bare-Ed25519 signer over
+  // the operator seed (what LeafIdentity.sign + LarWSClientAdapter use) produces a
+  // proof the gate's verifier accepts — and the relay-binding still holds.
+  test("a leaf seed-signer's proof clears the gate verifier", async () => {
+    const seed   = ed25519.utils.randomSecretKey();
+    const pub    = hex(await ed25519.getPublicKeyAsync(seed));
+    const sign   = ed25519SignerFromSeed(seed);               // the leaf signer
+    const parts  = {
+      nonce: "cafe".repeat(16), gatePubKey: "00".repeat(32),
+      peerPubKey: pub, aud: "lar:///ha.ka.ba/@admin", ts: "2026-06-07T12:00:00.000Z",
+    };
+    const msg    = await buildAuthResponse({ ...parts, contactCard: "card", sign });
+    // The gate recomputes with its OWN key (= gatePubKey here) and the card-derived
+    // peer key (= pub); a genuine leaf proof clears.
+    expect(await verifyAuthProof({ ...parts, sig: msg.sig, ts: msg.ts! }))
+      .toEqual({ ok: true });
+    // Anti-relay: a gate holding a DIFFERENT key rejects the same proof.
+    expect((await verifyAuthProof({ ...parts, gatePubKey: "11".repeat(32), sig: msg.sig, ts: msg.ts! })).ok)
+      .toBe(false);
   });
 });

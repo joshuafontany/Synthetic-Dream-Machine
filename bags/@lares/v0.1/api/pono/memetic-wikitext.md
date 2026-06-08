@@ -335,11 +335,21 @@ The `x-` prefix marks the subtype as unregistered with IANA; a future tree-trans
 
 A carrier with an identity block, a worksite, and a typed edge:
 ```
-<<~ ahu #iam >> … TOML … <<~/ahu >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/example >>
+```toml iam
+… bare toml-iam slot: identity payload (uri-path, type, role, register) …
+```
+
+<<~ &#x0002; >>
+
 <<~ ahu #head >>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>.
 <<~ pranala #governs ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
 ```
 
 A definition summoned by name:

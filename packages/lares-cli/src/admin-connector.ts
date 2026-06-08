@@ -25,13 +25,13 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-repo";
-import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";
 import {
   ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
   summon, SUMMONS_URI_PREFIX, OUTCOME_URI_PREFIX, VERB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
+import { loadLeafIdentity, LarWSClientAdapter } from "@lararium/node";
 
 export interface AdminVesselHandle {
   readonly repo:      Repo;
@@ -52,6 +52,11 @@ export interface ConnectOptions {
   readonly bootstrapPath?: string;
   /** Connect timeout in ms (default 3000). */
   readonly timeoutMs?: number;
+  /**
+   * Operator key + ContactCard directory (the leaf identity). Defaults to the
+   * path `lares init` writes (packages/lararium-node/.lararium).
+   */
+  readonly dataDir?: string;
 }
 
 function readAdminUrl(bootstrapPath: string): string {
@@ -75,7 +80,20 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
   const timeout = opts.timeoutMs ?? 3000;
   const adminUrl = readAdminUrl(bootstrap);
 
-  const adapter = new WebSocketClientAdapter(`ws://${host}:${port}/ws`);
+  // Light leaf identity (cached ContactCard + bare-Ed25519 signer; no keyhive) —
+  // the CLI authenticates at the relay's V3 gate as a sovereign peer. The gate
+  // runs lar:challenge/auth on the raw socket BEFORE Automerge sync; the leaf
+  // signs the gate-bound proof. gatePubKey = the operator's own relay key (the
+  // leaf's own verifying key, same operator); the relay's worker recomputes the
+  // proof against its own key, failing closed on any mismatch (anti-relay).
+  const dataDir  = opts.dataDir ?? join(repoRoot, "packages", "lararium-node", ".lararium");
+  const identity = await loadLeafIdentity(dataDir);
+  const adapter  = new LarWSClientAdapter({
+    url:        `ws://${host}:${port}/ws`,
+    identity,
+    aud:        ADMIN_BAG_ID,
+    gatePubKey: identity.peerPubKey,
+  });
   const repo    = new Repo({ network: [adapter] });
 
   await Promise.race([

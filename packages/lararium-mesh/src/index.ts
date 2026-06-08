@@ -54,6 +54,7 @@ export {
   mkLarChallenge, mkLarAuth, mkLarAuthOk, mkLarAuthDenied,
   isLarChallengeMsg, isLarAuthMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
   authProofBytes, buildAuthResponse, verifyAuthProof, runPeerHandshake,
+  ed25519SignerFromSeed,
 } from "./auth-wire.js";
 export type {
   AuthWireVersion,

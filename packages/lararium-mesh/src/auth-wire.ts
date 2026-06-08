@@ -11,20 +11,22 @@
  *   Gate → Peer  : LarAuthOkMsg     (auth passed — Automerge join may proceed)
  *              OR      LarAuthDeniedMsg  (ws.close(4003) follows immediately)
  *
- * Alpha note: V3 proof-of-possession. The pure platform-blind halves
- * (`authProofBytes` · `buildAuthResponse` · `verifyAuthProof` · `runPeerHandshake`)
- * and the VERIFY PATH have landed: the gate emits its gate-binding key in
- * lar:challenge and relays {nonce, sig, ts} to the keyholder worker, which checks
- * the Ed25519 proof against the card key + its own key. `proofVerified` rides back
- * ADVISORY — admission still gates on `accessForDoc` only. REMAINING: each peer
- * transport sources a real proof (C), then the enforcement flip ANDs proofVerified
- * into admission (D). See `project_verification_placement`.
+ * Alpha note: V3 proof-of-possession — ENFORCED end to end. The platform-blind
+ * halves (`authProofBytes` · `buildAuthResponse` · `verifyAuthProof` ·
+ * `runPeerHandshake` · `ed25519SignerFromSeed`) compose the full path: the gate
+ * emits its gate-binding key in lar:challenge and relays {nonce, sig, ts} to the
+ * keyholder worker, which checks the Ed25519 proof against the card key + its own
+ * key and folds the result into admission (step D). The peer transport
+ * (LarWSClientAdapter, node) sources a real proof from the light leaf identity
+ * (bare-Ed25519 signer + cached ContactCard). A node operator MAY relax to
+ * capability-only with LAR_V3_ALLOW_UNPROVEN=1. See `project_verification_placement`,
+ * `operator-peer` #actor-parity. Live two-vessel smoke test remains the open verify.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/auth-wire
  */
 
 import * as ed25519 from "@noble/ed25519";
-import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
+import { canonicalJsonBytes, hex, hexToBytes } from "./crypto.js";
 
 export const AUTH_WIRE_VERSION = "1" as const;
 export type AuthWireVersion = typeof AUTH_WIRE_VERSION;
@@ -196,6 +198,18 @@ export function authProofBytes(parts: {
  * skew on a machine-to-machine path with no human interaction.
  */
 export const AUTH_PROOF_TTL_MS = 60_000;
+
+/**
+ * ed25519SignerFromSeed — a bare-Ed25519 signer (32-byte seed → `sign(bytes)=>hex`)
+ * for the LIGHT leaf-identity path (operator-peer #actor-parity OP-AP5): a
+ * short-lived leaf signs the V3 proof with NO keyhive. Pairs with
+ * `buildAuthResponse`/`runPeerHandshake`'s injected `sign`. A signature this
+ * produces verifies identically to one from `KH.Signer.memorySignerFromBytes(seed)`
+ * against the same verifying key (the @keyhive signer wraps the same key material).
+ */
+export function ed25519SignerFromSeed(seed: Uint8Array): (bytes: Uint8Array) => Promise<string> {
+  return async (bytes) => hex(await ed25519.signAsync(bytes, seed));
+}
 
 /**
  * verifyAuthProof — the VERIFIER half of V3 proof-of-possession: the counterpart

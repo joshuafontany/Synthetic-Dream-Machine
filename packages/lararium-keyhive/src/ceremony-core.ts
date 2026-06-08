@@ -74,6 +74,9 @@ export interface FoundingCeremonyResult {
   personGroupDocIdHex:   string;
   personGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
+  /** The operator's self-certifying ContactCard JSON, minted once during the
+   *  ceremony. The caller caches it for the light leaf-identity path (OP-AP5). */
+  contactCardJson:       string;
 }
 
 /**
@@ -163,6 +166,13 @@ export async function runFoundingCeremony(
     };
   });
 
+  // Mint the operator's self-certifying ContactCard ONCE, before the ceremony
+  // keyhive disposes. The card carries no expiry/nonce, so a short-lived LEAF
+  // actor (CLI run / agent turn) re-presents this cached JSON forever without
+  // booting keyhive — the light-identity path (operator-peer #actor-parity
+  // OP-AP5). The caller persists it beside the operator key (0o600).
+  const contactCardJson = new TextDecoder().decode(await keyhive.contactCard());
+
   await keyhive.dispose();
 
   return {
@@ -173,6 +183,7 @@ export async function runFoundingCeremony(
     personGroupDocIdHex:   personGroup.docIdHex,
     personGroupAgentIdHex: personGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
+    contactCardJson,
   };
 }
 
