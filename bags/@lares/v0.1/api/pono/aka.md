@@ -48,10 +48,10 @@ a frozen embed can age from its source, so edges SHOULD carry a confidence ratin
 
 An aka MUST bind a source socket and a target URI.
 An aka MUST carry `family:transclusion`.
-An aka MUST NOT mutate the target.
-An aka MUST NOT carry an execution pulse.
+An aka MUST leave the target unchanged.
+An aka MUST stay inert, carrying no execution pulse.
 An aka SHOULD carry `confidence` when the observation is uncertain.
-An aka MUST NOT form a cycle — directly or transitively.
+An aka MUST stay acyclic — directly and transitively.
 
 `family:transclusion` — frozen content embedding; the source shows the target's content through
 without consuming or owning it. Propagation is none: a frozen embed is pulled, not pushed.

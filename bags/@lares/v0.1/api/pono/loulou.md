@@ -47,10 +47,10 @@ Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
 
 A loulou MUST bind a source socket and a target URI.
 A loulou MUST carry `family:relation`.
-A loulou MUST NOT carry an execution pulse.
-A loulou MUST NOT form a cycle — directly or transitively.
+A loulou MUST stay inert, carrying no execution pulse.
+A loulou MUST stay acyclic — directly and transitively.
 A loulou MAY carry `role` when the relation encodes a specific semantic.
-A loulou SHOULD NOT be used for dataflow, control, or reaction — use the appropriate family sugar for those.
+A loulou SHOULD carry relation semantics alone; dataflow, control, and reaction ride their own family sugar.
 
 `family:relation` — names an ontological or semantic connection; traversal moves source-to-target;
 propagation is none. The edge says what holds between the sockets, not what runs between them.

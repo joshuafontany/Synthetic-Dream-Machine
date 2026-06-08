@@ -49,8 +49,8 @@ One pranala carries one typed, directed, acyclic edge between two sockets.
 A pranala MUST carry one `family`.
 A pranala MUST carry one `lifecycle`.
 A pranala MUST bind a `from` socket and a `to` socket.
-A pranala MUST NOT form a cycle — directly or transitively — in any family.
-A pranala MUST NOT carry `traversal: both`; reciprocal pressure MUST use two parallel edges with distinct families.
+A pranala MUST stay acyclic — directly and transitively, in any family.
+A pranala MUST carry single-direction traversal; reciprocal pressure MUST use two parallel edges with distinct families.
 Exception: `relation` edges MAY appear as mutual parallel pairs (A→B and B→A) to model genuinely symmetric semantics (e.g., `sibling-of`, `adjacent-to`). Each edge in the pair remains individually directed and acyclic.
 A pranala SHOULD carry `role` when the edge encodes ownership, reference, or composition semantics.
 A pranala SHOULD carry `traversal` and `propagation` when query direction and invalidation flow differ.

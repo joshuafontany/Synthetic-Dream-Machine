@@ -51,12 +51,12 @@ Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`
 A kahea URI form MUST bind a source socket and a target URI.
 A kahea URI form MUST carry `family:transclusion`.
 A kahea URI form MUST carry `propagation:push-forward` (the default; MAY be overridden to `pull`).
-A kahea URI form MUST NOT form a cycle — directly or transitively.
+A kahea URI form MUST stay acyclic — directly and transitively.
 A kahea URI form MAY carry a role naming the embed posture; the transclusion role vocabulary accepts free-form values until a pono name settles.
 
 **Name-call form:**
 A kahea name-call MUST reference a declared definition name.
-A kahea name-call MUST NOT create a pranala edge — it is render-only.
+A kahea name-call MUST stay render-only, creating no pranala edge.
 A kahea name-call MAY carry parenthesized arguments: `<<~ kahea name(arg1, arg2) >>`.
 
 The two forms are distinguished at parse time by URI shape:

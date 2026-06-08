@@ -40,7 +40,7 @@ No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for c
 
 A `\widget` declaration MUST use the `~` prefix on the widget name.
 A `\widget` declaration MUST close with `<<~/ \widget >>`.
-A `\widget` declaration MUST NOT produce render output — it functions as a declaration only.
+A `\widget` declaration MUST function as a declaration only, producing no render output.
 The declared name MUST be unique in the current tiddler scope.
 `\widget` and `\procedure` MAY be used interchangeably for render-only bodies; use `\widget` when
 the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pure wikitext.

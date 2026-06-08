@@ -51,7 +51,7 @@ Sugar for the TW5 `\procedure` pragma, first-class in memetic-wikitext as a bloc
 
 A wehe block MUST declare a name and optional parameter signature.
 A wehe block MUST close with `<<~/ wehe >>` (or `<<~/ \procedure >>`).
-A wehe block MUST NOT produce render output — it is a declaration, not a transclusion.
+A wehe block MUST function as a declaration, producing no render output (not a transclusion).
 A wehe name MUST be unique within the current tiddler's procedure namespace.
 A wehe block SHOULD use the `~` prefix convention for sigil-dispatched procedures: `<<~ wehe ~name(params) >>`.
 

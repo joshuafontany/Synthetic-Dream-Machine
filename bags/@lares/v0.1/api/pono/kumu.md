@@ -37,7 +37,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 A kumu declaration MUST carry a unique type name.
 A kumu declaration body defines the template for nodes of that type.
-A kumu declaration MUST NOT produce render output — it registers a type definition only.
+A kumu declaration MUST register a type definition only, producing no render output.
 
 <<~/ahu >>
 

@@ -38,7 +38,7 @@ the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the dec
 A `\function` declaration MUST carry a valid TW5 filter expression as its body.
 A `\function` declaration is leaf-only in practice — filter bodies are inline expressions.
 A `\function` name MUST be unique in current tiddler scope.
-A `\function` MUST NOT produce render output — it functions as a declaration only.
+A `\function` MUST function as a declaration only, producing no render output.
 
 Note: TW5 `\function` is distinct from `\procedure` — functions return filter results, procedures
 return wikitext. Do not use interchangeably.
