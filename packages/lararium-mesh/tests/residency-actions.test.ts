@@ -11,9 +11,9 @@ import type {
   ClearAction, DropAction, LoadAction,
 } from "../src/residency-actions.js";
 import {
-  VERB_URI_PREFIX, VERB_SUMMONS_URI_PREFIX,
+  VERB_URI_PREFIX, SUMMONS_URI_PREFIX, taskContentId,
 } from "../src/verb-tiddler.js";
-import type { VerbInvocation } from "../src/verb-tiddler.js";
+import type { Verb } from "../src/verb-tiddler.js";
 
 // ---------------------------------------------------------------------------
 // Test helpers
@@ -22,13 +22,13 @@ import type { VerbInvocation } from "../src/verb-tiddler.js";
 function makeInvocation(
   verb: string,
   args: Readonly<Record<string, unknown>>,
-  overrides: Partial<VerbInvocation> = {},
-): VerbInvocation {
+  overrides: Partial<Verb> = {},
+): Verb {
   const requestId = overrides.requestId ?? "test-req-1";
   return {
     requestId,
     title:       overrides.title ?? `${VERB_URI_PREFIX}${requestId}`,
-    verb,
+    action:      verb,
     args,
     targets:     overrides.targets     ?? [],
     batchMode:   overrides.batchMode   ?? "best-effort",
@@ -392,7 +392,7 @@ describe("isResidencyActionUri", () => {
   });
 
   test("accepts admin verb signal URI", () => {
-    expect(isResidencyActionUri(`${VERB_SUMMONS_URI_PREFIX}abc123`)).toBe(true);
+    expect(isResidencyActionUri(`${SUMMONS_URI_PREFIX}abc123`)).toBe(true);
   });
 
   test("rejects non-verb-tiddler URIs", () => {
@@ -423,5 +423,34 @@ describe("ResidencyAction discriminated union", () => {
       title: "T", fromBag: "A", toBag: "B", changeId: "c",
     };
     expect(describe1(add)).toBe("add T to B");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// V1 — content-addressed idempotency for residency changes (the `lares act`
+// placer contract). The placer computes taskContentId({subject: target bag,
+// command: verb, args, nonce:""}); the change-id in args IS the idempotency key.
+// Re-issuing the SAME logical change collapses to one id (→ dispatcher
+// outcome-dedup → exactly-once EFFECT); a distinct change runs.
+// ---------------------------------------------------------------------------
+
+describe("V1 — content-addressed residency identity (lares act placer contract)", () => {
+  function residencyId(verb: string, args: Record<string, string>): Promise<string> {
+    const subject = args["to-bag"] ?? args["bag"] ?? "";
+    return taskContentId({ subject, command: verb, args, nonce: "" });
+  }
+  const base = { title: "M", "from-bag": "lar:///ha.ka.ba/@a", "to-bag": "lar:///ha.ka.ba/@b", "change-id": "chg-1" };
+
+  test("same logical change → same id (re-issue dedups → exactly-once effect)", async () => {
+    expect(await residencyId("MOVE", base)).toBe(await residencyId("MOVE", { ...base }));
+  });
+  test("distinct change-id → distinct id (a genuinely different change runs)", async () => {
+    expect(await residencyId("MOVE", base)).not.toBe(await residencyId("MOVE", { ...base, "change-id": "chg-2" }));
+  });
+  test("distinct verb → distinct id (ADD ≠ MOVE of the same change)", async () => {
+    expect(await residencyId("MOVE", base)).not.toBe(await residencyId("ADD", base));
+  });
+  test("distinct target bag → distinct id", async () => {
+    expect(await residencyId("MOVE", base)).not.toBe(await residencyId("MOVE", { ...base, "to-bag": "lar:///ha.ka.ba/@c" }));
   });
 });

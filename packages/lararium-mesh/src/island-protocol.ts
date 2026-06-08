@@ -368,7 +368,7 @@ export interface IslandMsg_Fault {
  * Vessel → island: place a wiki-scope verb invocation into a wiki island's TW5 wiki.
  *
  * Parallel to AdminMsg_PlaceVerb for the admin island. Any island running a
- * wiki dispatch behavior handles this by calling placeVerbInvocation on its TW5 wiki.
+ * wiki dispatch behavior handles this by calling placeVerb on its TW5 wiki.
  * The wiki change event fires at next tick; the island's VerbDispatcher dispatches it.
  */
 export interface WikiMsg_PlaceVerb {

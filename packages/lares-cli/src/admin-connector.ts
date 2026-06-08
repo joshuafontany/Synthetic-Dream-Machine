@@ -19,7 +19,7 @@ import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-re
 import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";
 import {
   ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
-  buildVerbSummons, VERB_SUMMONS_URI_PREFIX, VERB_OUTCOME_URI_PREFIX, VERB_RESULT_KEY,
+  summon, SUMMONS_URI_PREFIX, OUTCOME_URI_PREFIX, VERB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
@@ -100,6 +100,13 @@ export interface SubmitOptions {
   readonly pollMs?:   number;
   /** Total timeout in ms (default 10000). */
   readonly timeoutMs?: number;
+  /**
+   * Content-addressed request id (V1). For an idempotent/declarative verb the
+   * caller passes `taskContentId({subject, command, args, nonce:""})` so a
+   * re-issued identical change collapses to the same id — the dispatcher's
+   * outcome-keyed dedup then gives exactly-once EFFECT. Omit → fresh `newRequestId()`.
+   */
+  readonly requestId?: string;
 }
 
 export interface SubmitTargetResult {
@@ -137,9 +144,9 @@ export async function submitVerb(
   const pollMs    = opts.pollMs    ?? 100;
   const timeoutMs = opts.timeoutMs ?? 10000;
 
-  const summonsRecord = buildVerbSummons({ verb, args, requestedBy });
+  const summonsRecord = summon({ verb, args, requestedBy, ...(opts.requestId ? { requestId: opts.requestId } : {}) });
   const requestId    = (summonsRecord.tiddler as Record<string, string>)['request-id']!;
-  const outcomeTitle = `${VERB_OUTCOME_URI_PREFIX}${requestId}`;
+  const outcomeTitle = `${OUTCOME_URI_PREFIX}${requestId}`;
 
   await vessel.composite.put(summonsRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
 
@@ -176,4 +183,4 @@ export async function submitVerb(
 }
 
 // Re-export so verb-facing helpers don't need a separate import path.
-export { VERB_SUMMONS_URI_PREFIX };
+export { SUMMONS_URI_PREFIX };

@@ -10,7 +10,7 @@
 import { describe, test, expect } from "vitest";
 import {
   taskUri, receiptUri, taskContentId, TASK_KIND, RECEIPT_KIND,
-  buildVerbInvocation, buildVerbSummons, parseVerbInvocation,
+  buildVerb, summon, parseVerb,
 } from "../src/verb-tiddler.js";
 
 const BAG = "lar:///ha.ka.ba/@admin";
@@ -37,14 +37,14 @@ describe("task/receipt URI ontology (seed)", () => {
   });
 
   test("aud round-trips through invocation build → parse", () => {
-    const fields = buildVerbInvocation({ verb: "mint-invite", args: {}, requestedBy: "did:key:zOp", aud: "did:key:zVesselA" });
-    expect(parseVerbInvocation(fields)?.aud).toBe("did:key:zVesselA");
+    const fields = buildVerb({ verb: "mint-invite", args: {}, requestedBy: "did:key:zOp", aud: "did:key:zVesselA" });
+    expect(parseVerb(fields)?.aud).toBe("did:key:zVesselA");
   });
 
   test("aud round-trips through signal; absent stays undefined", () => {
-    const sig = buildVerbSummons({ verb: "where", args: {}, requestedBy: "did:key:zOp", aud: "did:key:zVesselB" });
-    expect(parseVerbInvocation(sig.tiddler as Record<string, unknown>)?.aud).toBe("did:key:zVesselB");
-    const noAud = buildVerbInvocation({ verb: "where", args: {}, requestedBy: "did:key:zOp" });
-    expect(parseVerbInvocation(noAud)?.aud).toBeUndefined();
+    const sig = summon({ verb: "where", args: {}, requestedBy: "did:key:zOp", aud: "did:key:zVesselB" });
+    expect(parseVerb(sig.tiddler as Record<string, unknown>)?.aud).toBe("did:key:zVesselB");
+    const noAud = buildVerb({ verb: "where", args: {}, requestedBy: "did:key:zOp" });
+    expect(parseVerb(noAud)?.aud).toBeUndefined();
   });
 });

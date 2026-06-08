@@ -36,7 +36,7 @@ import { stdin, stdout } from "node:process";
 import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
-import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId } from "@lararium/mesh";
+import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -146,7 +146,14 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       }
     }
 
-    const result = await submitVerb(vessel, verb, actionArgs, did);
+    // V1 — content-address this idempotent residency change (empty nonce). The
+    // subject is the bag the change lands in; re-issuing the SAME logical change
+    // (same change-id + verb + target) collapses to one requestId, and the
+    // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
+    // change-id (the --change-id default) means a genuinely distinct change → runs.
+    const subject   = actionArgs["to-bag"] ?? actionArgs["bag"] ?? "";
+    const requestId = await taskContentId({ subject, command: verb, args: actionArgs, nonce: "" });
+    const result = await submitVerb(vessel, verb, actionArgs, did, { requestId });
     if (result.status === "error") {
       console.error(`${verb} failed: ${result.errorMessage ?? "unknown"}`);
       return 4;

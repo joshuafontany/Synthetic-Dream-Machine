@@ -23,14 +23,14 @@ import { Worker, MessageChannel }                        from "worker_threads";
 import {
   emptyLarDoc,
   type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
-  type CompositeStore, type WikiRecipe, type CapabilityVerifier,
+  type CompositeStore, type WikiRecipe,
   type AuthVerifierSeam,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
 import {
   openAdminVmCore,
   type AdminVmHost,
-  type VerbTable, type VerbSummonsRequest,
+  type VerbTable, type SummonsRequest,
 } from "@lararium/tw5";
 import { waitHandleLocal } from "./repo-helpers.js";
 import { nodeWorkerHandle } from "./worker-handle.js";
@@ -82,13 +82,13 @@ export interface AdminVmResult {
    * before awaiting workerEa. Relay jobs that arrive without a configured registry
    * are rejected with an error result back to the island.
    */
-  mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
+  mountMainVerbs: (registry: VerbTable) => void;
   /**
    * Place a volatile job tiddler in the admin island's TW5 wiki.
-   * Delegates to the admin island's internal `placeVerbInvocation` via `admin:place-verb` message.
+   * Delegates to the admin island's internal `placeVerb` via `admin:place-verb` message.
    * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
    */
-  placeVerb:    (opts: VerbSummonsRequest) => void;
+  placeVerb:    (opts: SummonsRequest) => void;
   /**
    * Host-side inbound-peer verifier (path b). Proxies `verify()` to the admin
    * island's keyhive via admin:verify-request/result. The WS AdminAuthGate arms

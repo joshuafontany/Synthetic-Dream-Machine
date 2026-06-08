@@ -38,7 +38,7 @@ export type { BuildIslandRecipeInput, RecipeReadyBinding } from "./island-recipe
 export {
   openVmCarrierSyncSession,
 } from "./wiki-sync.js";
-export { placeVerbInvocation, patchVerbInvocation, removeVerbInvocation, writeVerbOutcome, dispatchVerbLifecycle } from "./verb-vm.js";
+export { placeVerb, patchVerb, removeVerb, writeOutcome, dispatchVerb } from "./verb-vm.js";
 export type { VerbPlacement } from "./verb-vm.js";
 export type {
   VmCarrierSyncInput,
@@ -72,8 +72,8 @@ export type { CeremonyTiddler } from "@lararium/mesh";
 export type { IslandContext, IslandBehavior } from "./island-context.js";
 export { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 export type { VerbContext, VerbReactor, VerbDispatcherOptions } from "./verb-dispatcher.js";
-export { emitVerbSummons } from "./verb-summons.js";
-export type { VerbSummonsRequest, VerbSummonsRelayOptions } from "./verb-summons.js";
+export { heedSummons } from "./verb-summons.js";
+export type { SummonsRequest, SummonsRelayOptions } from "./verb-summons.js";
 export { runLocalVerb, makeCapVerify } from "./verb-local-dispatch.js";
 export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
 export { makeAdminBehavior } from "./admin-behavior.js";

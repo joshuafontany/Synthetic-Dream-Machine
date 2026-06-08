@@ -36,7 +36,7 @@ import type {
   CompositeStore,
   LarTiddlerRecord,
   ChangeOrigin,
-  VerbInvocation,
+  Verb,
   ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction,
 } from "@lararium/mesh";
 import {
@@ -86,19 +86,19 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
 // ── ResidencyAction reconstruction from VerbContext ────────────────────────
 
 /**
- * Re-shape the dispatched VerbInvocation + raw args into a typed ResidencyAction.
+ * Re-shape the dispatched Verb + raw args into a typed ResidencyAction.
  * Uses parseResidencyAction (the shared validator). The args field on the
- * VerbInvocation may have already been deserialized; we trust whatever shape
+ * Verb may have already been deserialized; we trust whatever shape
  * the dispatcher hands us as long as parseResidencyAction accepts it.
  */
 function residencyFromContext(
   verb: ActionVerb,
   args: Readonly<Record<string, unknown>>,
-  invocation: VerbInvocation,
+  invocation: Verb,
 ): ResidencyAction | null {
-  const synth: VerbInvocation = {
+  const synth: Verb = {
     ...invocation,
-    verb,
+    action: verb,
     args,
   };
   return parseResidencyAction(synth);

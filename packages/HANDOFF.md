@@ -27,6 +27,8 @@
 
 **Open / downstream (not this campaign):** relay-access RINGS epic (`project_relay_access_rings` — anon-read is gate POLICY not a keyhive grant; tiered sharePolicy); SES/Compartment realm gate BEFORE unpinned code (mesh bags / user macros) enters the island realm (`project_headless_island_runtime`); the full keyhive-synced disk token (local fs-grant suffices today); S7.7 @personal cross-device.
 
+**Asymmetric-peer task-handoff (model: `project_asymmetric_peer_handoff`).** Keystone landed (`lar:///verb.replayed.dedups` — durable verb idempotency, the CRDT as dedup store). Design space written for the two surfaced gaps: cross-peer handoff → `bags/@lares/v0.1/api/pono/federated-causal-islands.md#task-handoff`; personGroup-liveness pre-delegation → `bags/@lares/v0.1/api/lararium/personal-slot.md#persongroup-liveness`. Still open: lease + fencing token for concurrent cross-vessel double-run (lives with the residency-model design).
+
 **Key memories:** `feedback_isomorphism_by_composition`, `project_isomorphic_vessel_epic`, `project_headless_island_runtime`, `project_relay_access_rings`.
 
 ## Bootstrap Paste

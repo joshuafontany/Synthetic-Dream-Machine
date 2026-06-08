@@ -57,10 +57,10 @@ export const VERB_URI_PREFIX = `${VOLATILE_VM_PREFIX}verbs/`;
 
 /** Automerge-backed verb summons — remote vessels write here; dispatcher translates
  *  to volatile invocation and tombstones after pickup. */
-export const VERB_SUMMONS_URI_PREFIX = `${ADMIN_BAG_ID}/summons/`;
+export const SUMMONS_URI_PREFIX = `${ADMIN_BAG_ID}/summons/`;
 
 /** Durable outcome tiddlers — Automerge-backed, sync to all vessels. */
-export const VERB_OUTCOME_URI_PREFIX = `${ADMIN_BAG_ID}/outcomes/`;
+export const OUTCOME_URI_PREFIX = `${ADMIN_BAG_ID}/outcomes/`;
 
 /** Result map key for single-result (no explicit targets) verbs. */
 export const VERB_RESULT_KEY = "summary" as const;
@@ -113,10 +113,11 @@ export type VerbStatus = "pending" | "running" | "done" | "error";
 export type BatchMode = "best-effort" | "atomic";
 
 /** Parsed verb invocation tiddler. Fields are string-typed (tiddler field law). */
-export interface VerbInvocation {
+export interface Verb {
   readonly requestId:   string;
   readonly title:       string;
-  readonly verb:        string;
+  /** The verb-name — the action to enact. (Wire/tiddler field stays "verb"; parseVerb maps it here, avoiding Verb.verb recursion.) */
+  readonly action:      string;
   /** Structured args — deserialized from JSON field. */
   readonly args:        Readonly<Record<string, unknown>>;
   /**
@@ -153,7 +154,7 @@ export interface VerbTargetResult {
   readonly error?:  string;
 }
 
-export interface VerbOutcomeRecord extends LarTiddlerRecord {
+export interface OutcomeRecord extends LarTiddlerRecord {
   readonly tiddler: {
     readonly title:          string;
     readonly "request-id":   string;
@@ -170,7 +171,7 @@ export interface VerbOutcomeRecord extends LarTiddlerRecord {
   };
 }
 
-export function buildVerbOutcome(opts: {
+export function concludeVerb(opts: {
   requestId:     string;
   verb:          string;
   status:        "done" | "error";
@@ -181,7 +182,7 @@ export function buildVerbOutcome(opts: {
   errorMessage?: string;
   authority?:    string;
 }): LarTiddlerRecord {
-  const title = `${VERB_OUTCOME_URI_PREFIX}${opts.requestId}`;
+  const title = `${OUTCOME_URI_PREFIX}${opts.requestId}`;
   const base = {
     title,
     tags:            LARES_VERB_EVENT_TAG,
@@ -211,12 +212,12 @@ export function newRequestId(): string {
   return `${ms}-${rand}`;
 }
 
-export function isVerbInvocationTitle(title: string): boolean {
+export function isVerbTitle(title: string): boolean {
   return title.startsWith(VERB_URI_PREFIX);
 }
 
 /** Build a volatile verb invocation tiddler for wiki.addTiddler() (local path). */
-export function buildVerbInvocation(opts: {
+export function buildVerb(opts: {
   verb:        string;
   args:        Record<string, unknown>;
   requestedBy: string;
@@ -247,7 +248,7 @@ export function buildVerbInvocation(opts: {
 }
 
 /** Build an Automerge verb-summons record for remote vessel submission. */
-export function buildVerbSummons(opts: {
+export function summon(opts: {
   verb:        string;
   args:        Record<string, unknown>;
   requestedBy: string;
@@ -260,7 +261,7 @@ export function buildVerbSummons(opts: {
   aud?:        string;
 }): LarTiddlerRecord {
   const requestId = opts.requestId ?? newRequestId();
-  const title     = `${VERB_SUMMONS_URI_PREFIX}${requestId}`;
+  const title     = `${SUMMONS_URI_PREFIX}${requestId}`;
   return {
     tiddler: {
       title,
@@ -282,11 +283,11 @@ export function buildVerbSummons(opts: {
 }
 
 /** Parse a flat tiddler field bag (from wiki.getTiddler().fields or
- *  record.tiddler) into a VerbInvocation. Returns null when the shape doesn't match. */
-export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvocation | null {
+ *  record.tiddler) into a Verb. Returns null when the shape doesn't match. */
+export function parseVerb(fields: Record<string, unknown>): Verb | null {
   const title = typeof fields["title"] === "string" ? fields["title"] : null;
   if (!title) return null;
-  if (!title.startsWith(VERB_URI_PREFIX) && !title.startsWith(VERB_SUMMONS_URI_PREFIX)) return null;
+  if (!title.startsWith(VERB_URI_PREFIX) && !title.startsWith(SUMMONS_URI_PREFIX)) return null;
 
   const tag = fields["tags"];
   const tagsStr = Array.isArray(tag) ? tag.join(" ") : (typeof tag === "string" ? tag : "");
@@ -318,7 +319,7 @@ export function parseVerbInvocation(fields: Record<string, unknown>): VerbInvoca
   const aud        = typeof fields["aud"]        === "string" ? fields["aud"]        : undefined;
 
   return {
-    requestId, title, verb, args, targets, batchMode, status, requestedBy, requestedAt,
+    requestId, title, action: verb, args, targets, batchMode, status, requestedBy, requestedAt,
     ...(fromUri    !== undefined && { fromUri }),
     ...(listenable !== undefined && { listenable }),
     ...(aud        !== undefined && { aud }),

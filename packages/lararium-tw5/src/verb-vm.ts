@@ -7,8 +7,8 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-vm
  */
 
-import type { BatchMode, CompositeStore, VerbInvocation } from "@lararium/mesh";
-import { ADMIN_BAG_ID, VERB_RESULT_KEY, buildVerbOutcome, buildVerbInvocation, buildRunningPatch } from "@lararium/mesh";
+import type { BatchMode, CompositeStore, Verb } from "@lararium/mesh";
+import { ADMIN_BAG_ID, VERB_RESULT_KEY, concludeVerb, buildVerb, buildRunningPatch } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
 
 export interface VerbPlacement {
@@ -22,14 +22,14 @@ export interface VerbPlacement {
   readonly listenable?: string;
 }
 
-export function placeVerbInvocation(tw5: TW5Engine, opts: VerbPlacement): string {
-  const fields = buildVerbInvocation(opts);
+export function placeVerb(tw5: TW5Engine, opts: VerbPlacement): string {
+  const fields = buildVerb(opts);
   const Tiddler = tw5.$tw.Tiddler;
   tw5.$tw.wiki.addTiddler(new Tiddler(fields));
   return fields["request-id"] as string;
 }
 
-export function patchVerbInvocation(tw5: TW5Engine, title: string, patch: Record<string, string>): void {
+export function patchVerb(tw5: TW5Engine, title: string, patch: Record<string, string>): void {
   const wiki = tw5.$tw.wiki;
   const existing = wiki.getTiddler(title) as { fields: Record<string, unknown> } | undefined;
   if (!existing) return;
@@ -37,23 +37,23 @@ export function patchVerbInvocation(tw5: TW5Engine, title: string, patch: Record
   wiki.addTiddler(new Tiddler({ ...existing.fields, ...patch }));
 }
 
-export function removeVerbInvocation(tw5: TW5Engine, title: string): void {
+export function removeVerb(tw5: TW5Engine, title: string): void {
   tw5.$tw.wiki.deleteTiddler(title);
 }
 
-export async function writeVerbOutcome(
+export async function writeOutcome(
   admin: CompositeStore,
   opts: {
-    invocation:    VerbInvocation;
+    invocation:    Verb;
     status:        "done" | "error";
     result?:       Record<string, unknown>;
     errorMessage?: string;
   },
 ): Promise<void> {
   const origin = { kind: "lares-verb" as const, requestId: opts.invocation.requestId };
-  const outcome = buildVerbOutcome({
+  const outcome = concludeVerb({
     requestId:   opts.invocation.requestId,
-    verb:        opts.invocation.verb,
+    verb:        opts.invocation.action,
     status:      opts.status,
     requestedBy: opts.invocation.requestedBy,
     cause:       opts.invocation.title,
@@ -70,21 +70,21 @@ export async function writeVerbOutcome(
   await admin.put(outcome, origin, { bag: ADMIN_BAG_ID });
 }
 
-export async function dispatchVerbLifecycle(
+export async function dispatchVerb(
   tw5: TW5Engine,
   admin: CompositeStore,
-  invocation: VerbInvocation,
+  invocation: Verb,
   run: () => Promise<Record<string, unknown>>,
 ): Promise<void> {
-  patchVerbInvocation(tw5, invocation.title, buildRunningPatch());
+  patchVerb(tw5, invocation.title, buildRunningPatch());
 
   try {
     const result = await run();
-    await writeVerbOutcome(admin, { invocation, status: "done", result });
+    await writeOutcome(admin, { invocation, status: "done", result });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    await writeVerbOutcome(admin, { invocation, status: "error", errorMessage: message });
+    await writeOutcome(admin, { invocation, status: "error", errorMessage: message });
   }
 
-  removeVerbInvocation(tw5, invocation.title);
+  removeVerb(tw5, invocation.title);
 }

@@ -71,7 +71,7 @@ import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
 import { VesselIslandPool }                  from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
-import { VerbTable } from "@lararium/tw5";
+import { VerbTable, registerActionReactors } from "@lararium/tw5";
 import { makeWhereReactor }                       from "./where-handler.js";
 import { makeResolveReactor }                     from "./resolve-handler.js";
 import {
@@ -511,6 +511,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // surfaces them for operator's residency-action-or-prune decisions.
   jobRegistry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
   jobRegistry.register("draft",       makeDraftReactor({ composite }));
+
+  // Residency Model ACTION verbs — ADD/COPY/MOVE/CLEAR/DROP/LOAD. The 'lares act'
+  // front door (summon → @admin → routeToMain → jobRegistry) reaches the residency
+  // reactors here; the vessel composite spans the bags a residency change moves
+  // between, and each mutation wraps in withEffectRecord (the archival ledger).
+  registerActionReactors(jobRegistry, { composite });
+
   // C.2 — start the background sweeper. Idle eviction + LRU trim run
   // every sweepIntervalMs (default 30s). The manager's own re-entrancy
   // guard makes overlapping ticks safe.

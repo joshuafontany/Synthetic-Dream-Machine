@@ -3,13 +3,13 @@
  * model. Operator gestures over multi-bag tiddler residency.
  *
  * The ACTION verb surface composes ON TOP of verb-tiddler.ts (M.2 pipeline).
- * An ACTION arrives as a VerbInvocation whose `verb` field carries one of
+ * An ACTION arrives as a Verb whose `verb` field carries one of
  * ACTION_VERBS; per-verb arguments ride inside the existing JSON `args` field.
  * No new URI prefix exists for actions — they reuse:
  *
  *   VERB_URI_PREFIX         volatile local invocation (admin VM scratch)
- *   VERB_SUMMONS_URI_PREFIX  Automerge-backed remote vessel signal
- *   VERB_OUTCOME_URI_PREFIX Automerge-backed durable outcome
+ *   SUMMONS_URI_PREFIX  Automerge-backed remote vessel signal
+ *   OUTCOME_URI_PREFIX Automerge-backed durable outcome
  *
  * Verb semantics (SPARQL Update derivation):
  *
@@ -34,9 +34,9 @@
  */
 
 import {
-  VERB_URI_PREFIX, VERB_SUMMONS_URI_PREFIX,
+  VERB_URI_PREFIX, SUMMONS_URI_PREFIX,
 } from "./verb-tiddler.js";
-import type { VerbInvocation } from "./verb-tiddler.js";
+import type { Verb } from "./verb-tiddler.js";
 
 // ── ACTION verb set ────────────────────────────────────────────────────────
 
@@ -150,7 +150,7 @@ export function newChangeId(): string {
 // ── Args field encoding ────────────────────────────────────────────────────
 //
 // ResidencyAction fields use camelCase (TypeScript convention).
-// VerbInvocation.args fields use kebab-case (tiddler field convention).
+// Verb.args fields use kebab-case (tiddler field convention).
 // Mapping:
 //   title       <-> "title"
 //   fromBag     <-> "from-bag"
@@ -195,7 +195,7 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
 // ── Parser ─────────────────────────────────────────────────────────────────
 
 /**
- * Parse a VerbInvocation into a ResidencyAction when the verb belongs to
+ * Parse a Verb into a ResidencyAction when the verb belongs to
  * ACTION_VERBS and all required args validate. Returns null otherwise.
  *
  * Validation rules:
@@ -204,8 +204,8 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
  *   - CLEAR / DROP require bag (non-empty string).
  *   - LOAD requires source-uri, to-bag, change-id (all non-empty strings).
  */
-export function parseResidencyAction(inv: VerbInvocation): ResidencyAction | null {
-  if (!isActionVerb(inv.verb)) return null;
+export function parseResidencyAction(inv: Verb): ResidencyAction | null {
+  if (!isActionVerb(inv.action)) return null;
   const args = inv.args as Readonly<Record<string, unknown>>;
   const base = { requestId: inv.requestId, requestedBy: inv.requestedBy };
 
@@ -214,19 +214,19 @@ export function parseResidencyAction(inv: VerbInvocation): ResidencyAction | nul
     return typeof v === "string" && v.length > 0 ? v : null;
   };
 
-  if (isTransferVerb(inv.verb)) {
+  if (isTransferVerb(inv.action)) {
     const title    = str("title");
     const fromBag  = str("from-bag");
     const toBag    = str("to-bag");
     const changeId = str("change-id");
     if (!title || !fromBag || !toBag || !changeId) return null;
-    return { ...base, verb: inv.verb, title, fromBag, toBag, changeId };
+    return { ...base, verb: inv.action, title, fromBag, toBag, changeId };
   }
 
-  if (isBagVerb(inv.verb)) {
+  if (isBagVerb(inv.action)) {
     const bag = str("bag");
     if (!bag) return null;
-    return { ...base, verb: inv.verb, bag };
+    return { ...base, verb: inv.action, bag };
   }
 
   // verb === "LOAD" — only ActionVerb left after the two guards above.
@@ -245,5 +245,5 @@ export function parseResidencyAction(inv: VerbInvocation): ResidencyAction | nul
  * predicate to short-circuit obviously-non-action titles before parse.
  */
 export function isResidencyActionUri(title: string): boolean {
-  return title.startsWith(VERB_URI_PREFIX) || title.startsWith(VERB_SUMMONS_URI_PREFIX);
+  return title.startsWith(VERB_URI_PREFIX) || title.startsWith(SUMMONS_URI_PREFIX);
 }

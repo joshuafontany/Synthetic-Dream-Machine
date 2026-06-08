@@ -20,7 +20,7 @@ import {
   isEffectRecordUri,
 } from "@lararium/mesh";
 import type {
-  ActionVerb, ChangeOrigin, LarTiddlerRecord, VerbContext, VerbInvocation,
+  ActionVerb, ChangeOrigin, LarTiddlerRecord, VerbContext, Verb,
   CapabilityAccess, CapabilityVerifyResult, CapabilityVerifier,
 } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
@@ -49,10 +49,10 @@ function alwaysAllowCap(): VerbContext["cap"] {
 }
 
 function makeContext(composite: CompositeStore, verb: ActionVerb, args: Record<string, unknown>): VerbContext {
-  const invocation: VerbInvocation = {
+  const invocation: Verb = {
     requestId:   "req-1",
     title:       `lar:///lararium.local.vm/verbs/req-1`,
-    verb,
+    action:      verb,
     args,
     targets:     [],
     batchMode:   "best-effort",
@@ -336,7 +336,7 @@ describe("malformed args", () => {
 //
 // The unit blocks above hand-build VerbContext and call the reactor directly.
 // This block exercises the real dispatch seam the admin VM (open-admin-vm.ts)
-// and browser worker use: registry lookup by `invocation.verb` + the
+// and browser worker use: registry lookup by `invocation.action` + the
 // CapabilityVerifier→cap() adaptation (makeCapVerify) + handler run. A full CLI
 // binary spawn + TW5 boot roundtrip stays covered by the live `lares act`
 // command + `verb-tiddler-dispatch.test.ts` full-boot harness; this closes the
@@ -353,11 +353,11 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     };
   }
 
-  function invocation(verb: ActionVerb, args: Record<string, unknown>): VerbInvocation {
+  function invocation(verb: ActionVerb, args: Record<string, unknown>): Verb {
     return {
       requestId:   "s57-req",
       title:       "lar:///lararium.local.vm/verbs/s57-req",
-      verb,
+      action:      verb,
       args,
       targets:     [],
       batchMode:   "best-effort",

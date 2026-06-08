@@ -20,7 +20,7 @@
 import {
   emptyLarDoc,
   type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
-  type CompositeStore, type WikiRecipe, type CapabilityVerifier,
+  type CompositeStore, type WikiRecipe,
   type AuthVerifierSeam,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
@@ -64,7 +64,7 @@ export interface BrowserAdminVmResult {
    * Call after keyhive boots, before awaiting workerEa.
    * Jobs arriving before registry is set are rejected.
    */
-  mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
+  mountMainVerbs: (registry: VerbTable) => void;
   /** Place a volatile job in the admin island's TW5 wiki. */
   placeVerb:       (opts: BrowserVerbPlacementRequest) => void;
   /**

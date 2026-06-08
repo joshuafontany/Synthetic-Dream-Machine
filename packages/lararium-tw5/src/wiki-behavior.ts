@@ -16,7 +16,7 @@ import {
   mkWikiVerbResult,
   type BatchMode,
   type WikiMsg_PlaceVerb,
-  type VerbInvocation,
+  type Verb,
 } from "@lararium/mesh";
 import { registerActionReactors } from "./action-handler.js";
 import { VerbTable } from "./verb-dispatcher.js";
@@ -55,10 +55,10 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         if (msg.requestId) ctx.post(mkWikiVerbResult({ requestId, error: `no handler for "${msg.verb}"` }));
         return true;
       }
-      const invocation: VerbInvocation = {
+      const invocation: Verb = {
         requestId,
         title:       `lar:///ha.ka.ba/@wiki/verbs/${requestId}`,
-        verb:        msg.verb,
+        action:      msg.verb,
         args:        msg.args,
         targets:     msg.targets ?? [],
         batchMode:   (msg.batchMode as BatchMode) ?? "single",

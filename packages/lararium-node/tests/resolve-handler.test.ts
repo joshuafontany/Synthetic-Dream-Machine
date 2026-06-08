@@ -7,7 +7,7 @@
 
 import { describe, test, expect } from "vitest";
 import { CompositeStore } from "@lararium/mesh";
-import type { ChangeOrigin, LarTiddlerRecord, VerbInvocation, VerbContext, CapabilityAccess, CapabilityVerifyResult } from "@lararium/mesh";
+import type { ChangeOrigin, LarTiddlerRecord, Verb, VerbContext, CapabilityAccess, CapabilityVerifyResult } from "@lararium/mesh";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { makeResolveReactor } from "../src/resolve-handler.js";
 
@@ -24,8 +24,8 @@ function makeComposite(): CompositeStore {
 }
 
 function emptyContext(composite: CompositeStore): VerbContext {
-  const invocation: VerbInvocation = {
-    requestId: "r", title: "lar:///x/r", verb: "resolve", args: {}, targets: [],
+  const invocation: Verb = {
+    requestId: "r", title: "lar:///x/r", action: "resolve", args: {}, targets: [],
     batchMode: "best-effort", status: "pending", requestedBy: "test", requestedAt: "2026-05-31T00:00:00Z",
   };
   return {

@@ -36,7 +36,6 @@ import {
   type DocHandle,
   type LarDoc,
   type WikiRecipe,
-  type CapabilityVerifier,
   type AuthVerifierSeam,
   type IslandStorageConfig,
   type IslandMsg_Manifest,
@@ -94,7 +93,7 @@ export interface AdminVmCore {
   adminHandle:    DocHandle<LarDoc>;
   composite:      CompositeStore;
   workerEa:       Promise<void>;
-  mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => void;
+  mountMainVerbs: (registry: VerbTable) => void;
   placeVerb:      (opts: VesselPlaceVerbRequest) => void;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
@@ -117,9 +116,9 @@ export interface AdminVmCore {
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
   const { repo, adminHandle, recipe, resolver, coreHash, adminAuth, storage, workerScriptUrl } = opts;
 
-  // Mutable delegation config — set via mountMainVerbs() after keyhive boots.
-  let _registry: VerbTable | null          = null;
-  let _verifier: CapabilityVerifier | null = null;
+  // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
+  // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
+  let _registry: VerbTable | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -209,7 +208,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       const invocationLike = {
         title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
         requestId:   msg.requestId,
-        verb:        msg.verb,
+        action:      msg.verb,
         args:        msg.args,
         requestedBy: msg.requestedBy,
         requestedAt: new Date().toISOString(),
@@ -220,7 +219,6 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       runLocalVerb(invocationLike, {
         admin:    composite,
         registry: _registry,
-        ...(_verifier ? { verifier: _verifier } : {}),
       }).then((result) => {
         worker.post(mkAdminVerbResult({ requestId: msg.requestId, result }));
       }).catch((err: unknown) => {
@@ -250,9 +248,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     composite,
     workerEa,
     worker,
-    mountMainVerbs: (registry: VerbTable, verifier?: CapabilityVerifier) => {
+    mountMainVerbs: (registry: VerbTable) => {
       _registry = registry;
-      _verifier = verifier ?? null;
     },
     authSeam: {
       verify: (cardBytes, bagUrl, access) =>

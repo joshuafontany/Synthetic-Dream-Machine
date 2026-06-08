@@ -3,7 +3,7 @@
  *
  * External vessels write verb-summons tiddlers at @admin/summons/<id> to the
  * Automerge doc. The admin island's CompositeStore subscriber calls
- * emitVerbSummons on every change; this translates a summons tiddler into
+ * heedSummons on every change; this translates a summons tiddler into
  * a volatile local invocation and tombstones the summons entry.
  * The summons names edge transport — a peer calling another peer to act. (The
  * term "signal" now names the Agent↔Operator HUD/legibility frame, a different
@@ -16,33 +16,33 @@
  */
 
 import type { BatchMode, ChangeOrigin, CompositeStore, LarTiddlerChange } from "@lararium/mesh";
-import { VERB_SUMMONS_URI_PREFIX, parseVerbInvocation } from "@lararium/mesh";
+import { SUMMONS_URI_PREFIX, parseVerb } from "@lararium/mesh";
 import type { VerbPlacement } from "./verb-vm.js";
 
-export type VerbSummonsRequest = VerbPlacement;
+export type SummonsRequest = VerbPlacement;
 
-export interface VerbSummonsRelayOptions {
+export interface SummonsRelayOptions {
   readonly admin:       CompositeStore;
   readonly isInFlight:  (requestId: string) => boolean;
-  readonly placeVerb:   (invocation: VerbSummonsRequest) => void;
+  readonly placeVerb:   (invocation: SummonsRequest) => void;
 }
 
-export async function emitVerbSummons(
+export async function heedSummons(
   change: LarTiddlerChange,
-  opts: VerbSummonsRelayOptions,
+  opts: SummonsRelayOptions,
 ): Promise<void> {
   if (!change.record) return;
-  if (!change.record.tiddler.title.startsWith(VERB_SUMMONS_URI_PREFIX)) return;
+  if (!change.record.tiddler.title.startsWith(SUMMONS_URI_PREFIX)) return;
   if (change.origin.kind === "lares-verb") return;
 
-  const invocation = parseVerbInvocation(change.record.tiddler as Record<string, unknown>);
+  const invocation = parseVerb(change.record.tiddler as Record<string, unknown>);
   if (!invocation || invocation.status !== "pending") return;
   if (opts.isInFlight(invocation.requestId)) return;
 
   const origin: ChangeOrigin = { kind: "lares-verb", requestId: invocation.requestId };
   await opts.admin.tombstone(change.record.tiddler.title, origin);
   opts.placeVerb({
-    verb:        invocation.verb,
+    verb:        invocation.action,
     args:        invocation.args as Record<string, unknown>,
     requestedBy: invocation.requestedBy,
     targets:     [...invocation.targets],

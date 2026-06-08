@@ -23,8 +23,8 @@ export { loadOperatorVerifyingKey, loadOperatorSigningSeed } from "./operator-ke
 
 export { VerbDispatcher, VerbTable } from "@lararium/tw5";
 export type { VerbReactor, VerbContext, VerbDispatcherOptions } from "@lararium/tw5";
-export { emitVerbSummons } from "@lararium/tw5";
-export type { VerbSummonsRelayOptions, VerbSummonsRequest } from "@lararium/tw5";
+export { heedSummons } from "@lararium/tw5";
+export type { SummonsRelayOptions, SummonsRequest } from "@lararium/tw5";
 export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 
 export { makeWhereReactor } from "./where-handler.js";

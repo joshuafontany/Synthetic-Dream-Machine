@@ -15,7 +15,7 @@ import {
   type CapabilityVerifyResult,
   type CapabilityVerifier,
   type CompositeStore,
-  type VerbInvocation,
+  type Verb,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 
@@ -44,18 +44,18 @@ export function makeCapVerify(verifier: CapabilityVerifier | undefined, requeste
  * a per-verb table refines later); the target bag derives from the common arg
  * shapes; absent one it falls back to the admin bag (must-hold-admin-here).
  */
-export function deriveRoutedCap(invocation: VerbInvocation): { access: CapabilityAccess; bagUrl: string } {
+export function deriveRoutedCap(invocation: Verb): { access: CapabilityAccess; bagUrl: string } {
   const a = invocation.args as Record<string, unknown>;
   const pick = (k: string): string | null => (typeof a[k] === "string" ? (a[k] as string) : null);
   const bagUrl = pick("bagUrl") ?? pick("toBag") ?? pick("dest") ?? pick("bag") ?? pick("targetBag") ?? ADMIN_BAG_ID;
   return { access: "admin", bagUrl };
 }
 
-export async function runLocalVerb(invocation: VerbInvocation, opts: RunLocalVerbOptions): Promise<Record<string, unknown>> {
-  const handler: VerbReactor | undefined = opts.registry.get(invocation.verb);
+export async function runLocalVerb(invocation: Verb, opts: RunLocalVerbOptions): Promise<Record<string, unknown>> {
+  const handler: VerbReactor | undefined = opts.registry.get(invocation.action);
 
   if (!handler) {
-    throw new Error(`no handler registered for "${invocation.verb}"`);
+    throw new Error(`no handler registered for "${invocation.action}"`);
   }
 
   const cap = makeCapVerify(opts.verifier, invocation.requestedBy);

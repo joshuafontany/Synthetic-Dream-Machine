@@ -15,7 +15,7 @@
  *                 invocation, then tombstones the summons tiddler.
  *                 The summons carries edge transport, not durable coordination state.
  *
- * Outcome flow: handler result → buildVerbOutcome → admin composite store
+ * Outcome flow: handler result → concludeVerb → admin composite store
  *   → IslandAdaptor.saveTiddler → @admin/outcomes/<id> in Automerge → syncs.
  *   Durable shared meaning begins at the outcome, not at the summons.
  *
@@ -42,22 +42,22 @@
  */
 
 import {
-  type VerbInvocation,
+  type Verb,
   type CompositeStore,
   type CapabilityVerifier,
-  parseVerbInvocation,
+  parseVerb,
   VERB_URI_PREFIX,
-  VERB_OUTCOME_URI_PREFIX,
+  OUTCOME_URI_PREFIX,
 } from "@lararium/mesh";
-import { dispatchVerbLifecycle, placeVerbInvocation } from "./verb-vm.js";
+import { dispatchVerb, placeVerb } from "./verb-vm.js";
 import type { TW5Engine } from "./tw5-vm.js";
-import { emitVerbSummons } from "./verb-summons.js";
-import type { VerbSummonsRequest } from "./verb-summons.js";
+import { heedSummons } from "./verb-summons.js";
+import type { SummonsRequest } from "./verb-summons.js";
 import { runLocalVerb, deriveRoutedCap } from "./verb-local-dispatch.js";
 
 export interface VerbContext {
   readonly admin: CompositeStore;
-  readonly invocation: VerbInvocation;
+  readonly invocation: Verb;
   readonly cap:   (access: import("@lararium/mesh").CapabilityAccess, bagUrl: string) => Promise<import("@lararium/mesh").CapabilityVerifyResult>;
 }
 
@@ -86,7 +86,7 @@ export interface VerbDispatcherOptions {
   readonly admin:     CompositeStore;
   readonly registry:  VerbTable;
   readonly verifier?: CapabilityVerifier;
-  readonly routeFn?:  (invocation: VerbInvocation) => Promise<Record<string, unknown>>;
+  readonly routeFn?:  (invocation: Verb) => Promise<Record<string, unknown>>;
 }
 
 export class VerbDispatcher {
@@ -106,20 +106,20 @@ export class VerbDispatcher {
         if (changedTiddlers[title]?.deleted) continue;
         const tw5Tiddler = wiki.getTiddler(title) as { fields: Record<string, unknown> } | undefined;
         if (!tw5Tiddler) continue;
-        const invocation = parseVerbInvocation(tw5Tiddler.fields);
+        const invocation = parseVerb(tw5Tiddler.fields);
         if (!invocation || invocation.status !== "pending" || this.inFlight.has(invocation.requestId)) continue;
         this.inFlight.add(invocation.requestId);
-        void this.opts.admin.getLive(VERB_OUTCOME_URI_PREFIX + invocation.requestId).then((prior) => {
+        void this.opts.admin.getLive(OUTCOME_URI_PREFIX + invocation.requestId).then((prior) => {
           // Durable idempotency — the CRDT is the dedup store: a verb whose
           // outcome already landed has already taken effect, so skip re-execution
           // (exactly-once EFFECT, not delivery). See project_asymmetric_peer_handoff.
           if (prior) return undefined;
-          return dispatchVerbLifecycle(
+          return dispatchVerb(
           this.opts.adminVm,
           this.opts.admin,
           invocation,
           async () => {
-            if (this.opts.registry.has(invocation.verb)) {
+            if (this.opts.registry.has(invocation.action)) {
               return runLocalVerb(invocation, {
                 admin:    this.opts.admin,
                 registry: this.opts.registry,
@@ -136,12 +136,12 @@ export class VerbDispatcher {
                 const { access, bagUrl } = deriveRoutedCap(invocation);
                 const proof = await this.opts.verifier.verify({ presenter: invocation.requestedBy, bagUrl, access });
                 if (!proof.ok) {
-                  throw new Error(`[verb-dispatcher] capability denied for routed verb "${invocation.verb}" (bag=${bagUrl}, access=${access}): ${proof.reason ?? "no grant"}`);
+                  throw new Error(`[verb-dispatcher] capability denied for routed verb "${invocation.action}" (bag=${bagUrl}, access=${access}): ${proof.reason ?? "no grant"}`);
                 }
               }
               return this.opts.routeFn(invocation);
             }
-            throw new Error(`no handler registered for "${invocation.verb}"`);
+            throw new Error(`no handler registered for "${invocation.action}"`);
           },
           );
         }).catch((err) => {
@@ -153,7 +153,7 @@ export class VerbDispatcher {
     this.unsubWiki = () => wiki.removeEventListener("change", onWikiChange);
 
     this.unsubAutomerge = this.opts.admin.subscribe((change) => {
-      emitVerbSummons(change, {
+      heedSummons(change, {
         admin:      this.opts.admin,
         isInFlight: (requestId) => this.inFlight.has(requestId),
         placeVerb:  (invocation) => { this.placeVerb(invocation); },
@@ -170,8 +170,8 @@ export class VerbDispatcher {
     this.unsubAutomerge?.(); this.unsubAutomerge = null;
   }
 
-  placeVerb(opts: VerbSummonsRequest): string {
-    return placeVerbInvocation(this.opts.adminVm, opts);
+  placeVerb(opts: SummonsRequest): string {
+    return placeVerb(this.opts.adminVm, opts);
   }
 }
 

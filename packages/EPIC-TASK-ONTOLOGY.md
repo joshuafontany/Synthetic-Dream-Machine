@@ -39,6 +39,36 @@ infra + time-bound elevated caps. The ladder = WHICH bags a holder's caps reach,
 NEVER a URI branch. The bag's ring carries the addressing geometry; an optional
 `aud` narrows a task to ONE vessel for the mint-once shape (B).
 
+## Naming canon — the task grammar (LANGUAGE intent 2026-06-07; code enacts downstream)
+
+The wider OODA-HA pass: **"verb" RETAINS** — it names a grammatical action, deeply pono in a language-protocol house. The ship-of-Theseus awkwardness lived in the redundant `Verb<Noun>` compound, not the term. Principle: **"verb" stays where it names the action or the engine; the `Verb` prefix drops where `summons`/`outcome`/the-parsed-verb already carry the noun. "invocation" leaves entirely (it dragged the runtime register).**
+
+**Three nouns + their acts (the grammar):** a **verb** (the action: command + args) is **placed** (locally, `verbs/<id>`) or **summoned** (to a peer, `@admin/summons/<id>`); the island **heeds** the summons; the dispatcher **dispatches** the verb; it **concludes** in an **outcome** (`@admin/outcomes/<id>`).
+
+RETAINS `verb`: the `verb` field/action · `VerbDispatcher` · `VerbReactor` · `VerbTable` · `VerbContext` · `VerbStatus` · `placeVerb` · the `verbs/` scratch namespace · `LARES_VERB_TAG`.
+
+TIGHTENS (drop the redundant compound — downstream code rename):
+
+| ship-of-Theseus | pono |
+|---|---|
+| `buildVerbSummons` | `summon` |
+| `emitVerbSummons` | `heedSummons` |
+| `buildVerbOutcome` | `concludeVerb` *(prov; or `buildOutcome`)* |
+| `writeVerbOutcome` | `writeOutcome` |
+| `buildVerbInvocation` | `buildVerb` |
+| `parseVerbInvocation` | `parseVerb` |
+| `placeVerbInvocation` | `placeVerb` |
+| `dispatchVerbLifecycle` | `dispatchVerb` |
+| `VerbInvocation` (type) | `Verb` *(prov — `Verb.verb` reads recursive; the verb-name field may want `.action`/`.name`)* |
+| `VerbOutcomeRecord` | `OutcomeRecord` |
+| `VerbSummonsRequest` / `…RelayOptions` | `SummonsRequest` / `SummonsRelayOptions` |
+| `VERB_SUMMONS_URI_PREFIX` | `SUMMONS_URI_PREFIX` |
+| `VERB_OUTCOME_URI_PREFIX` | `OUTCOME_URI_PREFIX` |
+
+FORKS FIRMED (operator, 2026-06-07): (1) `VerbInvocation → Verb` with the verb-name field `.verb → .action` (the wire/tiddler field stays "verb"; `parseVerb` maps it, avoiding `Verb.verb` recursion); (2) the outcome act = `concludeVerb`.
+
+**ENACTED 2026-06-07 (the downstream code pass — green):** the full rename landed across verb-tiddler.ts / verb-vm.ts / verb-dispatcher.ts / verb-summons.ts / verb-local-dispatch.ts / admin-vm-core.ts / admin-behavior.ts / wiki-behavior.ts / action-handler.ts / residency-actions.ts + node/browser wires + admin-connector.ts + tests. `placeVerbInvocation/patchVerbInvocation/removeVerbInvocation → placeVerb/patchVerb/removeVerb` (the `placeVerb` free-fn + the `VerbDispatcher.placeVerb` method coexist cleanly — a bare `placeVerb` inside the method resolves to the module import). `Verb.action` field + readers (`invocation.action`, `inv.action`) + the `concludeVerb`/`summon`/`heedSummons` acts. Wire field "verb" preserved throughout (verb retains as the term). Dist-rebuild note: mesh+tw5 dist must rebuild before cross-package tests (tw5/node import mesh from dist; `parseVerb`/`buildVerb`/`Verb` resolved stale until rebuilt). Green: typecheck 10/10 · mesh 241 · tw5 73 · node 94 · browser 20.
+
 ## SEED landed (2026-06-07) — `packages/lararium-mesh/src/verb-tiddler.ts`
 
 - `TASK_KIND` / `RECEIPT_KIND`, `taskUri(bag, cid)`, `receiptUri(bag, taskCid)`.
@@ -65,9 +95,20 @@ The system reads as a **language/protocol**. The internal task layer keeps the *
 6. **`aud` finalization + execution honoring.** The verify-then-delegate gate (`project_verification_placement`) honors `aud` — a task with `aud` runs only on the named vessel (mint-once); without, the bag-ring carries it. Lease + fence for the mint-once concurrent-claim corner (`project_asymmetric_peer_handoff`, shape-scoped).
 7. **Determinism / managed-effect boundary.** Quarantine non-determinism (disk/net/time/sends) behind a managed-effect descriptor returning its own receipt → "signed receipt = verifiable" holds.
 
+## V3 + V1 — RESOLVED build-specs (research 2026-06-07; ready, awaiting operator ratify of one sub-choice each)
+
+### V3 — proof-of-possession at the WS admin gate
+Canon: Keyhive Notebook §05 (`aud` = pubkey-or-URL-hash = server-binding) + WebAuthn L3 + UCAN Invocation + the FIDO formal proof (arXiv 2511.06028). The peer signs `authProofBytes({nonce, gatePubKey, peerPubKey, aud, ts})` (`mesh/auth-wire.ts` — **LANDED, pure, tested**) with its Ed25519 identity key; the keyholder worker verifies the sig against the ContactCard's verifying key. Verify order: **possession → freshness (nonce single-use+TTL) → authority (existing seam cap-check)**. The server-binding (`gatePubKey`) is load-bearing — signing the nonce alone stays relayable.
+IMPL (SPIKED — the next focused build, NOT flowstate): (1) `lar:challenge` must carry the gate's pubkey (msg-schema add); (2) the CLIENT signer — the CLI/`admin-connector` holds NO seed today, so wire it to sign the blob with the operator Ed25519 seed; (3) the WORKER verify — extend `AuthVerifierSeam.verify` to also check the sig (standard Ed25519 against the card's verifying key = the identifier; keyhive exposes no bare sign/verify, so likely node:crypto / @noble). SUB-CHOICE: keyhive-API vs standard-Ed25519 for the verify.
+
+### V1 — content-address ONLY the idempotent verbs
+Canon: UCAN Invocation nonce rule — `nonce = idempotent(command) ? empty : random`. Do NOT blind-swap the live `requestId`. Tag each verb kind `idempotent?`; the declarative/idempotent class (residency ADD/MOVE — ALREADY carry `changeId`; set-state; deterministic) content-addresses (empty nonce → CID memo/dedup); imperative side-effects (send-invite, append) keep a unique id. The dedup keystone (keys on `requestId`) stays correct underneath; the residency `changeId` IS the ready idempotent-id.
+IMPL (SPIKED — the next focused build, NOT flowstate): no LIVE idempotent-verb PLACER exists yet (residency ACTION placement = Sprint 5 `lares act` / Path N widget — unbuilt), so nothing live to wire the content-id onto today. When the placer lands, it passes `requestId` = the `changeId` (or `taskContentId` empty-nonce) for idempotent verbs. SUB-CHOICE: the per-verb idempotent set (lean: residency ACTIONs first).
+
 ## Exit criteria
 
-- The live path keys tasks by content-address and receipts by task-cid.
-- One ontology (task/receipt) in code; "verb"/"outcome" retired; "signal" kept as the transport noun.
+- Idempotent verbs key by content-address; receipts re-key by task-cid; imperative verbs keep unique ids.
+- Internal grammar = verb · summons · outcome (DONE 2026-06-07); UCAN task/receipt = boundary projection only, never internal canon.
+- Proof-of-possession real at the WS peer gate (V3); the in-process channel-as-capability holds (DONE 4834c66d).
 - The persona ladder rides the scheme with zero URI branches.
-- No web2 "cmd"/"log" latent freight anywhere in the task surface.
+- No web2 "cmd" / "signal"(transport) / "log"(audit) latent freight in the task surface (DONE: summons + ledger).

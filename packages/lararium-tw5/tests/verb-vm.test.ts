@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
-import type { CompositeStore, VerbInvocation, LarTiddlerRecord } from "@lararium/mesh";
-import { VERB_OUTCOME_URI_PREFIX, VERB_RESULT_KEY, VERB_URI_PREFIX, buildVerbInvocation, parseVerbInvocation } from "@lararium/mesh";
+import type { CompositeStore, Verb, LarTiddlerRecord } from "@lararium/mesh";
+import { OUTCOME_URI_PREFIX, VERB_RESULT_KEY, VERB_URI_PREFIX, buildVerb, parseVerb } from "@lararium/mesh";
 import {
-  dispatchVerbLifecycle,
-  patchVerbInvocation,
-  placeVerbInvocation,
-  removeVerbInvocation,
-  writeVerbOutcome,
+  dispatchVerb,
+  patchVerb,
+  placeVerb,
+  removeVerb,
+  writeOutcome,
 } from "../src/verb-vm.js";
 
 type TiddlerFields = Record<string, unknown>;
@@ -49,23 +49,23 @@ class FakeAdminStore {
   }
 }
 
-function makeInvocation(overrides: Partial<VerbInvocation> = {}): VerbInvocation {
-  const fields = buildVerbInvocation({
+function makeInvocation(overrides: Partial<Verb> = {}): Verb {
+  const fields = buildVerb({
     verb: "sync-wiki",
     args: { slug: "alpha" },
     requestedBy: "did:key:test",
     requestId: "req-test-1",
   });
-  const parsed = parseVerbInvocation(fields);
+  const parsed = parseVerb(fields);
   if (!parsed) throw new Error("failed to build test invocation");
   return { ...parsed, ...overrides };
 }
 
 describe("verb-vm", () => {
-  test("placeVerbInvocation writes a pending volatile invocation into the VM wiki", () => {
+  test("placeVerb writes a pending volatile invocation into the VM wiki", () => {
     const tw5 = new FakeTW5Engine();
 
-    const requestId = placeVerbInvocation(tw5 as never, {
+    const requestId = placeVerb(tw5 as never, {
       verb: "sync-wiki",
       args: { slug: "alpha" },
       requestedBy: "did:key:test",
@@ -77,52 +77,52 @@ describe("verb-vm", () => {
     expect(placed?.fields.status).toBe("pending");
   });
 
-  test("patchVerbInvocation mutates the existing volatile invocation fields", () => {
+  test("patchVerb mutates the existing volatile invocation fields", () => {
     const tw5 = new FakeTW5Engine();
     const invocation = makeInvocation();
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
-    patchVerbInvocation(tw5 as never, invocation.title, { status: "running", "started-at": "now" });
+    patchVerb(tw5 as never, invocation.title, { status: "running", "started-at": "now" });
 
     const patched = tw5.wiki.getTiddler(invocation.title);
     expect(patched?.fields.status).toBe("running");
     expect(patched?.fields["started-at"]).toBe("now");
   });
 
-  test("removeVerbInvocation tombstones the volatile invocation from the VM wiki", () => {
+  test("removeVerb tombstones the volatile invocation from the VM wiki", () => {
     const tw5 = new FakeTW5Engine();
     const invocation = makeInvocation();
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
-    removeVerbInvocation(tw5 as never, invocation.title);
+    removeVerb(tw5 as never, invocation.title);
 
     expect(tw5.wiki.getTiddler(invocation.title)).toBeUndefined();
   });
 
-  test("writeVerbOutcome emits a durable summary outcome", async () => {
+  test("writeOutcome emits a durable summary outcome", async () => {
     const admin = new FakeAdminStore();
     const invocation = makeInvocation();
 
-    await writeVerbOutcome(admin as unknown as CompositeStore, {
+    await writeOutcome(admin as unknown as CompositeStore, {
       invocation,
       status: "done",
       result: { recordsIngested: 3 },
     });
 
     expect(admin.writes).toHaveLength(1);
-    expect(admin.writes[0]?.tiddler.title).toBe(`${VERB_OUTCOME_URI_PREFIX}${invocation.requestId}`);
+    expect(admin.writes[0]?.tiddler.title).toBe(`${OUTCOME_URI_PREFIX}${invocation.requestId}`);
     const results = JSON.parse(String(admin.writes[0]?.tiddler.results ?? "{}")) as Record<string, { ok: boolean; output?: Record<string, unknown> }>;
     expect(results[VERB_RESULT_KEY]?.ok).toBe(true);
     expect(results[VERB_RESULT_KEY]?.output?.recordsIngested).toBe(3);
   });
 
-  test("dispatchVerbLifecycle marks running, writes outcome, then removes the volatile invocation on success", async () => {
+  test("dispatchVerb marks running, writes outcome, then removes the volatile invocation on success", async () => {
     const tw5 = new FakeTW5Engine();
     const admin = new FakeAdminStore();
     const invocation = makeInvocation();
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
-    await dispatchVerbLifecycle(
+    await dispatchVerb(
       tw5 as never,
       admin as unknown as CompositeStore,
       invocation,
@@ -136,13 +136,13 @@ describe("verb-vm", () => {
     expect(results[VERB_RESULT_KEY]?.output?.status).toBe("ok");
   });
 
-  test("dispatchVerbLifecycle writes an error outcome and still removes the volatile invocation", async () => {
+  test("dispatchVerb writes an error outcome and still removes the volatile invocation", async () => {
     const tw5 = new FakeTW5Engine();
     const admin = new FakeAdminStore();
     const invocation = makeInvocation({ requestId: "req-test-2", title: `${VERB_URI_PREFIX}req-test-2` });
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
-    await dispatchVerbLifecycle(
+    await dispatchVerb(
       tw5 as never,
       admin as unknown as CompositeStore,
       invocation,

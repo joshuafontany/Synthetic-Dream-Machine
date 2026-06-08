@@ -25,10 +25,10 @@ import {
   type AdminMsg_VerifyRequest,
   type AdminMsg_ResolveBindingRequest,
   type BatchMode,
-  type VerbInvocation,
+  type Verb,
   type CapabilityVerifier,
 } from "@lararium/mesh";
-import { placeVerbInvocation } from "./verb-vm.js";
+import { placeVerb } from "./verb-vm.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
@@ -75,12 +75,12 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
     reject:  (err: Error) => void;
   }>();
 
-  function _routeToMain(invocation: VerbInvocation, post: IslandContext["post"]): Promise<Record<string, unknown>> {
+  function _routeToMain(invocation: Verb, post: IslandContext["post"]): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
       _pendingDelegations.set(invocation.requestId, { resolve, reject });
       post(mkAdminDelegateVerb({
         requestId:   invocation.requestId,
-        verb:        invocation.verb,
+        verb:        invocation.action,
         args:        invocation.args as Record<string, unknown>,
         requestedBy: invocation.requestedBy,
         ...(invocation.targets?.length ? { targets: [...invocation.targets] } : {}),
@@ -111,7 +111,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
       if (type === "admin:place-verb") {
         const msg = raw as AdminMsg_PlaceVerb;
         if (tw5) {
-          placeVerbInvocation(tw5, {
+          placeVerb(tw5, {
             verb:        msg.verb,
             args:        msg.args,
             requestedBy: msg.requestedBy,
