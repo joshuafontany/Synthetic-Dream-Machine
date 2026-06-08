@@ -30,6 +30,7 @@ import {
   mkAdminVerbResult,
   mkAdminVerifyRequest,
   mkAdminResolveBindingRequest,
+  mkAdminEvictResult,
   isIslandToVesselMsg,
   type VesselWorkerHandle,
   type Repo,
@@ -42,6 +43,7 @@ import {
   type AdminMsg_DelegateVerb,
   type AdminMsg_VerifyResult,
   type AdminMsg_ResolveBindingResult,
+  type AdminMsg_EvictRequest,
   type BatchMode,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
@@ -111,6 +113,13 @@ export interface AdminVmCore {
   dispose:        () => void;
   /** Exposed so platform wrappers compose any further capability on top. */
   worker:         VesselWorkerHandle;
+  /**
+   * Register the pool's eviction MECHANISM (sovereign-worker model): the admin worker
+   * owns residency POLICY and commands an evict via admin:evict-request; main routes it
+   * here to the pool (the worker holds a capability to the pool, not the pool). Set
+   * AFTER the pool exists (post makePool). Absent → evict-requests fail closed.
+   */
+  onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
 }
 
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
@@ -119,6 +128,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
   // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
   let _registry: VerbTable | null = null;
+  // Pool eviction mechanism — set via onEvictRequest() after the pool exists.
+  let _evictHandler: ((bagId: string) => Promise<void>) | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -197,6 +208,21 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       return;
     }
 
+    if (raw.type === "admin:evict-request") {
+      // Sovereign-worker: the worker decided (policy, keyhive-gated); main executes the
+      // mechanism (pool teardown). Route to the injected pool handler; ack regardless.
+      const msg = raw as AdminMsg_EvictRequest;
+      const run = _evictHandler
+        ? _evictHandler(msg.bagId)
+        : Promise.reject(new Error("no evict handler bound (pool not ready)"));
+      run
+        .then(() => worker.post(mkAdminEvictResult({ requestId: msg.requestId, ok: true })))
+        .catch((err: unknown) => worker.post(mkAdminEvictResult({
+          requestId: msg.requestId, ok: false, error: err instanceof Error ? err.message : String(err),
+        })));
+      return;
+    }
+
     if (raw.type === "admin:delegate-verb") {
       const msg = raw as AdminMsg_DelegateVerb;
       if (!_registry) {
@@ -272,6 +298,9 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
         ...(o.fromUri         ? { fromUri: o.fromUri } : {}),
         ...(o.listenable      ? { listenable: o.listenable } : {}),
       }));
+    },
+    onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
+      _evictHandler = fn;
     },
     dispose: () => {
       clearTimeout(eaTimer);

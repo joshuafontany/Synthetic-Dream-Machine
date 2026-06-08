@@ -321,6 +321,30 @@ export interface AdminMsg_ResolveBindingResult {
   error?: string;
 }
 
+// ── Eviction command (sovereign-worker: policy in worker, mechanism at the pool) ──
+// The admin WORKER owns residency POLICY (who/what to evict, gated by keyhive). The
+// pool MECHANISM (mount/teardown of main-thread lanes) stays main-side. So the worker
+// INITIATES an eviction by sending this command; the main pool obeys + acks. The worker
+// holds a CAPABILITY (this channel) to the pool, never the pool itself.
+
+/** Island → vessel: the worker commands the main pool to evict (unmount) a bag's lane. */
+export interface AdminMsg_EvictRequest {
+  schema_version: ProtocolVersion;
+  type: "admin:evict-request";
+  requestId: string;
+  /** The bag (lar: URI) whose live lane the pool should tear down. */
+  bagId: string;
+}
+
+/** Vessel → island: the pool's ack for an evict-request. */
+export interface AdminMsg_EvictResult {
+  schema_version: ProtocolVersion;
+  type: "admin:evict-result";
+  requestId: string;
+  ok: boolean;
+  error?: string;
+}
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -330,6 +354,7 @@ export type VesselToIslandMsg =
   | AdminMsg_VerbResult
   | AdminMsg_VerifyRequest
   | AdminMsg_ResolveBindingRequest
+  | AdminMsg_EvictResult
   | WikiMsg_PlaceVerb;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
@@ -436,7 +461,8 @@ export type IslandToVesselMsg =
   | WikiMsg_VerbResult
   | AdminMsg_DelegateVerb
   | AdminMsg_VerifyResult
-  | AdminMsg_ResolveBindingResult;
+  | AdminMsg_ResolveBindingResult
+  | AdminMsg_EvictRequest;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -451,14 +477,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "wiki:place-verb"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -653,6 +679,26 @@ export function mkAdminResolveBindingResult(opts: {
   if (opts.personalUrl !== undefined) msg.personalUrl = opts.personalUrl;
   if (opts.draftUrl    !== undefined) msg.draftUrl    = opts.draftUrl;
   if (opts.error       !== undefined) msg.error       = opts.error;
+  return msg;
+}
+
+export function mkAdminEvictRequest(opts: { requestId: string; bagId: string }): AdminMsg_EvictRequest {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:evict-request",
+    requestId: opts.requestId,
+    bagId:     opts.bagId,
+  };
+}
+
+export function mkAdminEvictResult(opts: { requestId: string; ok: boolean; error?: string }): AdminMsg_EvictResult {
+  const msg: AdminMsg_EvictResult = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "admin:evict-result",
+    requestId: opts.requestId,
+    ok:        opts.ok,
+  };
+  if (opts.error !== undefined) msg.error = opts.error;
   return msg;
 }
 
