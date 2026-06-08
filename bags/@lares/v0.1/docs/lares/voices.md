@@ -242,7 +242,7 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #hud-exchange-protocol ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:see >>
+<<~ pranala #hud-exchange-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol family:reference role:see >>
 <<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>
 <<~/ahu >>
 

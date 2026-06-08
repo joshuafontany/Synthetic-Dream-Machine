@@ -340,7 +340,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 - **`confidence`** --- forward certainty before a claim: register-word + level, **Provisional · Provisional-Synthesis · Synthesis · Synthesis-Canon · Canon** (`1–4 · 5–8 · 9–12 · 13–16 · 17–20`). Low names the "play" registers, not failure.
 - **`syad`** (five stances) and **Mu** (four tools) ride as **invokable lenses**: the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call.
 
-<<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/exchange-protocol family:reference role:expands >>
+<<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol family:reference role:expands >>
 <<~ pranala #hud-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:reference role:expands >>
 <<~ pranala #hud-uri-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:reference role:see >>
 

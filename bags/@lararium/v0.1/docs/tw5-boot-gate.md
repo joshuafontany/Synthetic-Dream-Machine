@@ -1,0 +1,80 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/tw5-boot-gate >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/v0.1/docs/tw5-boot-gate"
+file-path = "bags/@lararium/v0.1/docs/tw5-boot-gate.md"
+type = "text/x-memetic-wikitext"
+register     = "Synthesis-Canon"
+mana         = 17
+manao        = 17
+manaoio      = 17
+role         = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
+status-date  = "2026-04-30"
+```
+
+
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## TW5 Boot Gate — Contract
+
+`LarariumTW5._bootModules()` runs after `instance.boot.boot()` resolves. It attempts to register TW5 parser and widget modules from the **live corpus** (tiddlers already in the wiki from `preloadTiddlers` + early `loadFromStore`). If no corpus meme passes the gate, it falls through to the **imperative fallback** (compiled-in TypeScript classes).
+
+```
+_bootModules()
+    │
+    ├─ registerImplementorsOperator(tw)         ← always; enables implementors[] filter
+    │
+    ├─ wiki.filterTiddlers([all[tiddlers]implementors[MODULE_INTERFACE_URI]])
+    │       │  for each matching tiddler:
+    │       ├─ Layer 1: mana/manao/manaoio/confidence ≥ thresholds
+    │       ├─ Layer 2: SHA-256(text) === body-sha256 field
+    │       └─ Layer 3: keyhive capability proof (planned — not yet implemented)
+    │
+    ├─ if any pass → inject as JS modules via wiki.addTiddler()
+    │               → load lararium-tw5-modules library meme
+    │               → return (imperative fallback skipped)
+    │
+    └─ if none pass → imperative fallback:
+            MemeticParser registered in tw.Wiki.parsers
+            tiddlerDeserializerModules["text/x-memetic-wikitext"] = splitCarrierToTiddlers
+            createLarariumWidgets() → _registerWidgets()
+```
+
+**Why two paths?** The corpus path is the target steady state: all logic lives as `lar:` memes, verified by hash and keyhive capability proof. The imperative fallback ensures the app boots and is functional offline, on cold start, and before a meme has passed all gate layers.
+
+<<~/ahu >>
+
+<<~ ahu #thresholds >>
+
+## Gate Thresholds
+
+All four signal fields must meet or exceed these floor values for a meme to be injected as a live JS module. These constants live in `packages/lararium-tw5/src/tw5-module-gate.ts` as `MODULE_*_THRESHOLD` constants.
+
+| Field | Constant | Current floor |
+|---|---|---|
+| `mana` | `MODULE_MANA_THRESHOLD` | 18 |
+| `manao` | `MODULE_MANAO_THRESHOLD` | 17 |
+| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 17 |
+| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 18 |
+
+Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encoded). Gate layer 3 (keyhive capability proof) is planned but not yet implemented; the gate currently passes on layers 1–2 only.
+
+<<~/ahu >>
+
+<<~ ahu #stuck-in-ts >>
+
+## Why This Cannot Be a Meme
+
+`_bootModules()` requires a live `$tw` reference to call `wiki.filterTiddlers()`, `wiki.addTiddler()`, and `tw.modules.define()`. These are runtime calls against the TW5 instance created by `boot()`. The gate logic itself cannot be expressed in wikitext or loaded as a tiddler — it is the mechanism that decides which memes become executable.
+
+The **implementors interface** it queries IS a meme: `lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/tw5-module-interface`. Any meme that declares `implements = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/tw5-module-interface"` with content-type `application/javascript` and passing signal fields will be injected by the corpus path.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

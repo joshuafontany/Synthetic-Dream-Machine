@@ -23,7 +23,7 @@ retain       = true
 
 The durable result lands at `@admin/outcomes/<id>` (the outcome). The summons calls; the outcome answers; CRDT convergence on the outcome carries the meaning.
 
-Naming note: "signal" names a DIFFERENT layer — the Agent↔Operator HUD/legibility frame (`lar:///ha.ka.ba/@lares/v0.1/docs/lararium/signal`). The task-transport noun reads **summons** (renamed from "signal" 2026-06-07 by research verdict — grammar register, no compute-runtime freight). The fuller surface + the UCAN boundary projection live in [lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler](../mesh/verb-tiddler.md).
+Naming note: "signal" names a DIFFERENT layer — the Agent↔Operator HUD/legibility frame (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal`). The task-transport noun reads **summons** (renamed from "signal" 2026-06-07 by research verdict — grammar register, no compute-runtime freight). The fuller surface + the UCAN boundary projection live in [lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler](../mesh/verb-tiddler.md).
 
 <<~/ahu >>
 

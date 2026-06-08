@@ -1,0 +1,158 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/save-path >>
+```toml iam
+uri-path = "ha.ka.ba/@lararium/v0.1/api/save-path"
+file-path = "bags/@lararium/v0.1/api/save-path.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis-Canon"
+manaoio = 17
+mana = 18
+manao = 17
+namespace = "ॐ ँ"
+role = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
+cacheable = true
+hydrate = true
+retain = true
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Save-Path Invariants — IslandAdaptor Outbound
+
+Path K / F-arc: outbound hygiene for sustained live wiki authoring.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #problem >>
+
+## Problem Space
+
+`IslandAdaptor.saveTiddler` acts as the boundary where TW5 wiki edits cross
+into the Automerge store. Without hygiene here, sustained editing produces:
+
+- **Write amplification** — every keystroke fires a store write + CRDT patch +
+  disk-projector file write. At 5 keystrokes/sec over a 10-minute session:
+  3 000 store writes, 3 000 disk writes, all for the same tiddler.
+- **Noisy projection state** — parse-warning tiddlers, `$:/state/*` fragments,
+  and boot-splash signals accumulate in the wiki. Some carry `lar:` URIs and
+  could bleed into the store without guards.
+- **Draft routing confusion** — `"Draft of …"` tiddlers from TW5 editing UX
+  should reach the per-wiki draft bag, not get silently dropped.
+
+<<~/ahu >>
+
+<<~ ahu #invariants >>
+
+## Invariants
+
+### SP-1 — Capture Debounce
+
+`saveTiddler` MUST debounce per title. The debounce window: **400 ms**.
+
+- While the timer runs, subsequent saves for the same title cancel the
+  prior timer and restart it with the latest fields.
+- The callback fires exactly once per debounce window — at flush time, not
+  at call time. Callers MUST tolerate asynchronous callbacks.
+- `stop()` MUST cancel all pending timers and drop pending callbacks without
+  firing them.
+
+Rationale: human keystroke rate typically runs 3–8 chars/sec. A 400 ms window
+coalesces a full word or short phrase into a single store write. Stays below
+perceived lag threshold (< 1 s).
+
+### SP-2 — Ephemeral Truncation
+
+Tiddlers at `lar:///ha.ka.ba/lararium/parse-warning/…` and
+`lar:///ha.ka.ba/state/…` MUST NOT reach the Automerge store via `saveTiddler`.
+
+These get written directly into TW5 via `wiki.addTiddler()` (not through
+`saveTiddler`), so this invariant holds naturally. No explicit title guard
+needed in the save path — document it here to prevent a future regression.
+
+Auto-truncate sweep: a separate sweeper (outside this adaptor) MAY scan the
+TW5 wiki on a low-frequency timer (≥ 30 s idle) and delete stale
+parse-warning tiddlers. The adaptor owns the debounce; sweep lives in a
+TW5 startup module.
+
+### SP-3 — Draft Routing
+
+`"Draft of …"` tiddlers from TW5 editing UX MUST route to `this.targetBag`
+(the wiki's top draft bag) and MUST NOT be silently dropped.
+
+Current state: the `isDraft` guard in `saveTiddler` silently drops drafts.
+**Target:** remove the isDraft guard; let drafts write to `this.targetBag`
+like any other live edit. The per-wiki draft bag at the top of the recipe
+stack absorbs them naturally.
+
+This change deferred until the wiki-init flow ensures `this.targetBag`
+always carries a real per-wiki draft bag URI (not a placeholder). Until then,
+the silent-drop behavior SHOULD remain to prevent drafts polluting the wrong bag.
+
+### SP-4 — Ceremony Routing
+
+If `fields["bag"]` carries an explicit bag URI, `saveTiddler` MUST use it
+instead of `this.targetBag`. This is the MOVE-ceremony (canon residency) path.
+
+Live TW5 edits without an explicit bag field route to `this.targetBag`.
+
+### SP-5 — Single Parser Law
+
+All inbound meme text passes through `splitBodyTiddler()` (ONE parser,
+FOUR call sites law). `_writeMeme` upholds this; do not add a second parse
+site.
+
+<<~/ahu >>
+
+<<~ ahu #debounce-design >>
+
+## Debounce Design
+
+```
+saveTiddler(tiddler, callback)
+  → guards (echo, temp, system, draft-hold, meme-uri)
+  → cancel pending timer for title
+  → store { fields, callback } in _pending map
+  → set new timer(400ms) → _flush(title)
+
+_flush(title)
+  → retrieve + delete from _pending
+  → call _writeMeme(title, fields, origin)
+  → fire callback on resolve/reject
+```
+
+State held on the adaptor:
+
+| Field | Type | Lifecycle |
+|---|---|---|
+| `_debounce` | `Map<string, TimerHandle>` | per pending title; cleared on stop() |
+| `_pending` | `Map<string, PendingWrite>` | tracks latest fields + callback per title |
+
+`PendingWrite`:
+```ts
+{ fields: Record<string, string>; callback: SaveCallback; origin: ChangeOrigin }
+```
+
+On `stop()`: iterate `_debounce`, clearTimeout each, clear both maps.
+No callbacks fire after `stop()`.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-adaptor >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-accumulator >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

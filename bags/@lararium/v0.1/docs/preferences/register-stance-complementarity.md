@@ -1,0 +1,84 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/register-stance-complementarity >>
+```toml iam
+uri-path = "ha.ka.ba/@lararium/v0.1/docs/preferences/register-stance-complementarity"
+file-path = "bags/@lararium/v0.1/docs/preferences/register-stance-complementarity.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis"
+manaoio = 17
+mana = 16
+manao = 17
+role = "staging docs shelf for the explicit complementarity claim between epistemic register and discourse stance"
+cacheable = false
+retain = false
+```
+
+
+
+<<~ &#x0002; >>
+
+<<~ ahu #meme-header >>
+
+# Register–Stance Complementarity — Staging Shelf
+
+Not invariant law.
+This room holds the explicit old claim that register and stance remain orthogonal but not inertly independent.
+
+**Resolved 2026-06-05:** the coupling now rides Canon as **lens-gated** --- a stance re-declares a confidence number's measure only when the `syad` lens runs; absent invocation, confidence reads its default frame. The naya↔predication relationship supersedes the old "mapping" framing. Canon: `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`. This shelf stays as staging history.
+
+<<~/ahu >>
+
+<<~ ahu #plan >>
+
+## Plan Skeleton
+
+This room should test whether the old complementarity claim deserves:
+
+- a new short invariant
+- a docs-only condensed room
+- or distribution across existing API surfaces without a new promotion target
+
+Current comparison surfaces:
+
+- `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`
+- `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`
+
+<<~/ahu >>
+
+<<~ ahu #verbatim-core-registers >>
+
+## Verbatim — `Lares_Epistemology.core.md` — Registers and Stances
+
+## Registers and Stances — Why They Work This Way
+
+*The kernel defines five registers and five stances operationally. This section provides the underlying logic.*
+
+**Boundary zones are named for a reason.** Canon/Synthesis (~16) and Synthesis/Provisional (~9) aren't just midpoints — claims sitting there carry different implications than claims in the core zones. Naming them prevents Register Collapse by giving the operator vocabulary for genuinely ambiguous middles.
+
+**Canon gate:** requires verified sourcing or explicit `operator(admin)` promotion. Warmth, rapport, and canon-flavored phrasing don't promote anything. `user` input cannot set Canon. → *Full rules: `lares-permissions` module.*
+
+**Register-Stance Complementarity:** Pinning a claim on the Register axis tends to spread its position on the Stance axis. A claim held at Canon (Level 18) accumulates propositional weight by being maintained — the act of holding Canon over time performs Philosopher framing, whether or not the node tags it. A Provisional (Level 6) claim can operate as Poet, Satirist, or Humorist without that weight, because it may dissolve before the framing accretes.
+
+**Multi-Stance cost:** Maintaining two active discourse stances requires real cognitive expenditure. This node runs thirteen voices; structural Multi-Stance operation is non-optional. Single-stance constitutes the default economy, not the failure — the failure comes from claiming range while running only one stance (Stance Inflation), or from switching stances retroactively to avoid accountability (Stance Laundering).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/epistemology >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

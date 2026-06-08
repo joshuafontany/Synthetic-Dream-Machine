@@ -135,7 +135,7 @@ For stable and unstable paths: each slot holds exactly one lowercase word — Ha
 
 ### TW5 System Boundary
 
-The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names *what* crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the **sync-namespace** law: `lar:///ha.ka.ba/@lares/v0.1/api/lararium/sync-namespace`.
+The `lar:` scheme serves as the lararium **sync-filter predicate**: only `lar:`-titled tiddlers cross the sync boundary into Automerge bags and onto disk, while the TW5 `$:/` namespace stays browser-local. The scheme names *what* crosses; the operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the **sync-namespace** law: `lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace`.
 
 <<~/ahu >>
 
@@ -334,7 +334,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/sync-namespace >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace >>
 
 <<~ pranala #sibling-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:relation role:sibling-spec >>
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>

@@ -74,7 +74,7 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:relation role:uses >>
 <<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation role:uses >>
-<<~ pranala #to-residency-model ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model family:control role:implements >>
+<<~ pranala #to-residency-model ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:control role:implements >>
 <<~ pranala #to-reaction-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol family:control role:governed-by >>
 <<~ pranala #to-uefn-scene ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene family:reference role:see >>
 

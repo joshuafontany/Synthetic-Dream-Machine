@@ -1,0 +1,106 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace >>
+```toml iam
+uri-path      = "ha.ka.ba/@lararium/v0.1/api/sync-namespace"
+file-path     = "bags/@lararium/v0.1/api/sync-namespace.md"
+type          = "text/x-memetic-wikitext"
+tagspace      = "stable"
+register      = "Synthesis"
+manaoio       = 15
+mana          = 17
+manao         = 17
+namespace     = "ॐ ँ"
+role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
+status        = "draft"
+revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
+cacheable     = true
+hydrate       = true
+retain        = true
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #core-claim >>
+
+# Sync Namespace — The Title Predicate That Crosses the Boundary
+
+The lararium sync filter selects by **title namespace**. Only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk; the TW5 `$:/` namespace stays browser-local.
+
+This forms the **title-level companion** to disk-projection's bag-level law. Disk-projection names *which bags* mirror to disk or ride the mesh; this meme names *which titles*, within a synced bag, cross at all. The `lar:` URI scheme (governed-by lar-uri) supplies the predicate; the runtime sync filter applies it.
+
+<<~/ahu >>
+
+<<~ ahu #tw5-boundary >>
+
+## The TW5 `$:/` boundary, mirrored
+
+TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local — shadow tiddlers, palette state, draft markers, plugin internals. The lararium sync filter **mirrors this distinction**: only titles in the `lar:` scheme cross the sync boundary into Automerge bags and onto disk. A `$:/`-titled tiddler never reaches the store through the filter.
+
+<<~/ahu >>
+
+<<~ ahu #system-tiddlers >>
+
+## System tiddlers carry `lar:///` titles
+
+Lares system tiddlers — cascade configs, render templates, global mounts, plugin envelopes — MUST carry `lar:///` titles, typically under:
+
+```
+lar:///config/...
+lar:///mounts/...
+lar:///plugins/...
+lar:///ha.ka.ba/@lararium/templates/...
+```
+
+This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to disk and federate to peers; it lets residency-action handlers trust the bag state.
+
+<<~/ahu >>
+
+<<~ ahu #tag-values >>
+
+## Tag values stay exempt
+
+Tag *values* MAY still reference TW5-conventional `$:/tags/...` strings (`$:/tags/Global`, `$:/tags/Lar/AhuTemplate`). Tag values name no title and do not intersect the sync filter; they exist only so that cascade entries plug into TW5 core's standard tag-discovery path.
+
+The predicate reads **titles**, never tag values — the two never collide.
+
+<<~/ahu >>
+
+<<~ ahu #browser-local >>
+
+## Browser-local by design
+
+Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/` namespace by design. Those tiddlers stay browser-local until the operator's **explicit promotion act** — the same operator-agency gate that governs canon promotion across the stack. Nothing in `$:/` federates on its own.
+
+<<~/ahu >>
+
+<<~ ahu #dual-distribution >>
+
+## Dual distribution — a packaging convention
+
+For drag-and-drop distribution to the broader TW5 community, lar-namespaced plugin envelopes MAY re-emit under `$:/plugins/...` titles. The plugin module code stays identical; only the envelope title differs.
+
+This dual-distribution shape names a **packaging convention, not a namespace exception** — the canonical artifact carrying the operator's signature remains the `lar:///` form. A `$:/plugins/...` re-emission travels as a community-facing copy; it never outranks the `lar:`-titled original, and it never federates back as canon.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/save-path >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
+
+<<~ pranala #governed-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
+<<~ pranala #companion-axis ? -> lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection family:relation role:sibling-axis >>
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -178,7 +178,7 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/carrier-parse >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/carrier-parse >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>

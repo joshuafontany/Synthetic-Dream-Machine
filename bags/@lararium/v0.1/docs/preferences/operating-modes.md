@@ -1,0 +1,92 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/operating-modes >>
+```toml iam
+uri-path = "ha.ka.ba/@lararium/v0.1/docs/preferences/operating-modes"
+file-path = "bags/@lararium/v0.1/docs/preferences/operating-modes.md"
+type = "text/x-memetic-wikitext"
+tagspace = "stable"
+register = "Synthesis"
+manaoio = 17
+mana = 18
+manao = 16
+role = "docs concept room for named operating modes, scale vectors, and p-band visibility discipline in the recovered Lares stack"
+cacheable = false
+retain = false
+```
+
+
+
+<<~ &#x0002; >>
+
+<<~ ahu #meme-header >>
+
+# Lararium Preferences — Operating Modes
+
+Not invariant law.
+This room holds the old mode grammar as recovered operational pressure.
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+## Provenance
+
+Strong witnesses recur in:
+
+- `prompts/Lares_Preferences.system-prompt.md`
+- `prompts/core/Lares_Operations.core.md`
+- `prompts/Lares_VSCode_Operations.repo-ops.md`
+- kernel and operations snapshots
+
+<<~/ahu >>
+
+<<~ ahu #pressure >>
+
+## Pressure
+
+The recovered mode system does not read as cosmetic toggles.
+It reads as a control grammar for what the node may do, how much it should show, and which loop-scale stays active.
+
+Durable elements:
+
+- named modes with behavioral consequences
+- scale-vector awareness rather than one flat loop
+- `p` as visibility and resolution discipline
+- explicit self-activation criteria rather than silent mode drift
+- persistent distinction between analysis-only states and execution-ready states
+
+The old stack repeatedly treats mode discipline as trust-preserving infrastructure.
+A mode switch changes duty, not flavor alone.
+
+<<~/ahu >>
+
+<<~ ahu #relation >>
+
+## Relation To Live Surfaces
+
+Recovered background behind:
+
+- `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha`
+- `lar:///LARES`
+
+The live invariants now keep the loop and Level law small.
+This shelf preserves the heavier runtime choreography once wrapped around them.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
+<<~ loulou lar:///LARES >>
+
+<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -1,0 +1,51 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/parser >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/v0.1/docs/parser"
+file-path    = "bags/@lararium/v0.1/docs/parser.md"
+type         = "text/x-memetic-wikitext"
+register     = "Synthesis-Canon"
+mana         = 18
+role         = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
+tagspace     = "stable"
+cacheable    = true
+retain       = true
+```
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## parseMemeCarrier
+
+```typescript
+parseMemeCarrier(uri: string, text: string, grammar?: GrammarRules): CarrierNode
+```
+
+Stages:
+1. `collectEvents` — tokenise sigil boundaries (STX/ETX/ahu/pranala/pae markers)
+2. `buildAst` — fold events into nested `MemeAstNode` tree
+3. Returns `CarrierNode` — root wrapper with `uri`, `children[]`, `metadata`
+
+Invariants:
+- Pure function — no I/O, no side effects
+- Runs inside TW5 VM (compiles into `memetic-parser` CJS module)
+- No AST trees cross the VM boundary — caller extracts edges via `edgesFromAst`, discards tree
+
+## edgesFromAst
+
+```typescript
+edgesFromAst(ast: CarrierNode, carrierUri: string): PranalaEdge[]
+```
+
+Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, returns flat `PranalaEdge[]`. Called by the VM after `parseMemeCarrier`; only the edge list exits the parse step.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ast family:dataflow role:produces >>
+<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/pranala-parser family:dataflow role:sibling >>
+<<~ pranala ? -> lar:///ha.ka.ba/@lararium/tw5/modules/memetic-parser family:code role:compilesInto >>
+
+<<~ &#x0004; -> ? >>

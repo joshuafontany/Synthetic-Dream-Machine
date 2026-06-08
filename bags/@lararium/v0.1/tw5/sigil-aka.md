@@ -115,7 +115,7 @@ could include thumbnail + og-title in the handshake). Hold open.
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module family:relation role:references >>
 <<~/pranala >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-ast family:relation role:references >>
+<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast family:relation role:references >>
 <<~/pranala >>
 
 <<~/ahu >>

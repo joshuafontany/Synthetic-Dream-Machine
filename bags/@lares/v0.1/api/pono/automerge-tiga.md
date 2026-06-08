@@ -147,7 +147,7 @@ This ordering carries structural correctness for the SDM metaphysics — not inc
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium/lararium-doc-stack >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack >>
 
 <<~ pranala #governed-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>

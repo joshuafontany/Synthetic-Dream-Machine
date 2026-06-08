@@ -289,7 +289,7 @@ meant to escape):
   whole-network index to monopolize — reads project per-VM from locally-resident bags
   (island-owned residency: a two-state ʻōlelo thermal axis — `wela` (hot) / `anu` (cold) —
   plus an orthogonal pin-flag; bag residency derives by reachability from a live (`wela`)
-  referencing island — see `lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers`). Keep
+  referencing island — see `lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers`). Keep
   aggregation a swappable edge view over data the aggregator may sync but not read.
 - ✗ **Shared / highly-reused rotation keys.** Per-operator, ideally per-bag rotation/admin
   capabilities — never a shared master key over a ring's members.
