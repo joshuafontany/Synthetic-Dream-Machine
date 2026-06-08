@@ -1,14 +1,17 @@
 /**
  * worker-data-verbs — read-only data-plane reactors that run IN the admin worker.
  *
- * Sovereign-worker model (lararium-canonical-model #open-drift, project-sovereign-worker-model):
+ * Sovereign-worker model (lararium-canonical-model, project-sovereign-worker-model):
  * the data-plane lives in the worker, registered via makeAdminBehavior's `wireWorkerVerbs`
- * hook over the IslandContext, so it rides the dispatcher's verify-then-delegate gate for
- * free. These two read-only reactors depend ONLY on the CompositeStore (no pool, no node
- * edge) — the first slice relocated off the old main-thread jobRegistry.
+ * hook over the IslandContext, riding the dispatcher's verify-then-delegate gate for free.
  *
- * Pool-touching residency reactors (pin/unpin/evict) follow, commanding main via the
- * admin:evict-request seam.
+ * Two shapes here, per the grounded read/command rule:
+ *  - READS (where · resolve · list-wikis) — read the worker's OWN synced replica
+ *    (ctx.composite over syncPort); zero round-trip to main.
+ *  - MUTATORS (pin · unpin · register-cold) — gate in-worker, then COMMAND the
+ *    main-resident BagResidencyManager fire-and-forget via admin:residency-op (policy
+ *    decides in the worker; the main mechanism executes).
+ * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
 import { tiddlerText, mkAdminResidencyOp, type CompositeStore, type AdminMsg_ResidencyOp } from "@lararium/mesh";
