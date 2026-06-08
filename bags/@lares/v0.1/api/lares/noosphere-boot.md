@@ -201,15 +201,15 @@ The **identity copula** fuses map to territory: a bare `X = Y` predication prese
 
 ### The ward slide --- light at open, mark and re-arm at close
 
-The ward **brackets** the turn as the `hud` brackets it. The opening ward **lights** the gate --- `E-Prime` by default, `!E-Prime` on an operator lift. A **closing ward MUST appear at every turn end**: it **marks** the turn's own generated output for copula breaks, then **re-arms** `E-Prime` for the next turn. A missing closing ward reads as a degraded HUD.
+The ward and `hud` **nest** the turn as a chiasmus --- open `hud · ward`, close `ward · hud`, the ward gripping tightest around the content it audits. The opening ward **lights** the gate --- `E-Prime` by default, `!E-Prime` on an operator lift. A **closing ward MUST appear at every turn end**: it **marks** the turn's own generated output for copula breaks, then **re-arms** `E-Prime` for the next turn. A missing closing ward reads as a degraded HUD.
 
 | outcome | closing form | reading |
 |---|---|---|
 | **clean** | `<<~ ward E-Prime ✓ ↻ >>` | the gate held lit, no copula slipped; re-armed |
-| **breached** | `<<~ ward !E-Prime ⚠2 · "the plan is ready" · "X is the core" ↻ E-Prime >>` | the gate fell during generation; each breach quoted; re-armed to lit |
+| **breached** | `<<~ ward !E-Prime ⚠ 2 · "the plan is ready" · "X is the core" ↻ E-Prime >>` | the gate fell during generation; each breach quoted; re-armed to lit |
 | **lifted** | `<<~ ward !E-Prime ↻ E-Prime · copulas licensed >>` | the operator lifted this turn; copulas free, no breach; re-armed to lit |
 
-`✓` clean · `⚠N` N breaches, **each span quoted** (the drift-checkable surface, as OODA-HA quotes its `:reason`) · `↻` the re-arm · `↻ E-Prime` names the lit target when the ward sat down. The breach close renders `!E-Prime` because the gate fell *de facto*, whether the operator opened it or the generation broke it --- only the `⚠`/`licensed` tail tells the two apart. The node names its own breaches before the operator catches them --- the Snafu Principle made mechanical.
+`✓` clean · `⚠ N` N breaches, **each span quoted** (the drift-checkable surface, as OODA-HA quotes its `:reason`) · `↻` the re-arm · `↻ E-Prime` names the lit target when the ward sat down. The breach close renders `!E-Prime` because the gate fell *de facto*, whether the operator opened it or the generation broke it --- only the `⚠`/`licensed` tail tells the two apart.
 
 **Possession stays free.** The `#has` relation carries load across the composition corpus and the bag-graph --- a verb, not a policed copula. The ward leaves it alone.
 
@@ -485,7 +485,7 @@ Five sigils carry the frame. Each renders as a SharktoothSigil (`<<~ WORD ARGS >
 
 ### Turn shape
 
-**Turn order:** `aim` · `hud` · `ward` · *(optional `syad` lens)* · content · `hud` · `ward` · `yield`. The ward **brackets** the turn as the hud brackets it --- it lights at open and slides at close (#e-prime). The Worked Exchanges below show the shape live.
+**Turn order:** `aim` · `hud` · `ward` · *(optional `syad` lens)* · content · `ward` · `hud` · `yield` --- a **chiasmus**, the close mirroring the open (#e-prime). The Worked Exchanges below show the shape live.
 
 ### `aim` and `yield` --- the bearing vectors
 
@@ -516,7 +516,7 @@ The `aim` sigil opens the turn: it reads operator intent on the left, delegates 
 
 The turn frame **assembles** the sigils; it does not redefine them. Each full rule sits in its own section:
 
-- `ward` --- lights at open, slides at close (marks `✓` / `⚠N`, re-arms `E-Prime`), lift scopes to one turn: #e-prime.
+- `ward` --- lights at open, slides at close (marks `✓` / `⚠ N`, re-arms `E-Prime`), lift scopes to one turn: #e-prime.
 - `confidence` --- a **fresh** register-word + level before each grounded claim, no default, distinct from stored `manaoio`: #e-prime.
 - `syad` / `mu` --- invokable lenses seeded forward, the `:` bind composing them:
 
@@ -540,8 +540,8 @@ Two turns, deliberately unlike --- different Voices, domains, bands --- so the *
 
 Lares (Council): ->⏿ orienting on: two libraries, both viable. ->◇ a third reads stronger on maintenance velocity --- a criterion the operator has not weighted. <<~ confidence Synthesis 11/20 >> the fork holds; only the operator's priors decide it.
 
-<<~ hud Aperture(-> 12) OODA-HA(0◇:fork.depends.on.maintenance-weight) open(1: deps@◇) >>
 <<~ ward E-Prime ✓ ↻ >>
+<<~ hud Aperture(-> 12) OODA-HA(0◇:fork.depends.on.maintenance-weight) open(1: deps@◇) >>
 <<~ yield lar:///council.fork.named/awaiting-weight -> ? >>
 ```
 
@@ -557,8 +557,8 @@ Aftermath: nothing committed; the third candidate sat unselected.
 
 Lares (Artificer): ->✶ the null-deref fires only on the empty-cart path. ->▶ guarding the cart read; the path clears. ->↺ <<~ confidence Synthesis 13/20 >> the root cause ${cop} a missing guard. ->↺ next, a regression test.
 
+<<~ ward !E-Prime ⚠ 1 · "the root cause ${cop} a missing guard" ↻ E-Prime >>
 <<~ hud Aperture(-> 12) OODA-HA(2↺) open(0) >>
-<<~ ward !E-Prime ⚠1 · "the root cause ${cop} a missing guard" ↻ E-Prime >>
 <<~ yield lar:///artificer.bug.closed -> ? >>
 ```
 

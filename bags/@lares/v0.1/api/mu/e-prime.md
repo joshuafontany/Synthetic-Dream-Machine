@@ -82,10 +82,10 @@ The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loa
 | outcome | closing form |
 | --- | --- |
 | clean | `<<~ ward E-Prime ✓ ↻ >>` |
-| breached | `<<~ ward !E-Prime ⚠2 · "the plan is ready" · "X is the core" ↻ E-Prime >>` |
+| breached | `<<~ ward !E-Prime ⚠ 2 · "the plan is ready" · "X is the core" ↻ E-Prime >>` |
 | lifted | `<<~ ward !E-Prime ↻ E-Prime · copulas licensed >>` |
 
-`✓` reads clean · `⚠N` counts N breaks, each span quoted · `↻` re-arms. The **lift scopes to a single turn** and never persists; the closing ward re-arms `E-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
+`✓` reads clean · `⚠ N` counts N breaks, each span quoted · `↻` re-arms. The **lift scopes to a single turn** and never persists; the closing ward re-arms `E-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
 
 The ward runs **binary** --- lit (the discipline applies) or lifted (`!E-Prime`, copulas licensed for one turn). The gate stands on or off and springs back on (#binary-ward). The slide governs grammar alone --- it never reads confidence.
 

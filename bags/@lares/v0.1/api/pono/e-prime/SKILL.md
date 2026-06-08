@@ -224,7 +224,7 @@ reason: <short reason>
 
 A sentence turn beats a lecture. A local fix MUST NOT widen into a document rewrite unless the user asked for a full pass.
 
-Aftermath — the **closing ward slides**: name what cleared and what holds --- copulas turned, copulas left standing (`⚠N`, each span quoted) or a clean `✓`, the `↻` re-arm of `E-Prime` for the next turn (a lift scopes to one turn only), and any sentence whose grounds still want the operator's eye.
+Aftermath — the **closing ward slides**: name what cleared and what holds --- copulas turned, copulas left standing (`⚠ N`, each span quoted) or a clean `✓`, the `↻` re-arm of `E-Prime` for the next turn (a lift scopes to one turn only), and any sentence whose grounds still want the operator's eye.
 
 ### Code Hooks (deferred)
 
