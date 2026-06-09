@@ -87,15 +87,15 @@ export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMoun
 export {
   makeWhereReactor, makeResolveReactor, makeListWikisReactor,
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor,
+  makeWikiPinReactor, makeWikiUnpinReactor,
 } from "./worker-data-verbs.js";
 export type { ResidencyOpPost } from "./worker-data-verbs.js";
 // Verb-plane reactors (composite/repo-only — pono home is tw5, not node; both vessels hold them).
 export { makeInitWikiReactor, makeOpenWikiReactor }   from "./wiki-mint-handlers.js";
 export { makeDraftReactor, makePruneStaleReactor }    from "./wiki-draft-handlers.js";
-export { makePinWikiReactor, makeUnpinWikiReactor }   from "./wiki-residency-handlers.js";
 export { makeAddBagReactor, makeRemoveBagReactor }    from "./wiki-compose-handlers.js";
 export type {
-  WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions, WikiComposeOptions, DraftHandlerOptions,
+  WikiHandlerOptions, WikiMintHandlerOptions, WikiComposeOptions, DraftHandlerOptions,
 } from "./wiki-handler-options.js";
 export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";

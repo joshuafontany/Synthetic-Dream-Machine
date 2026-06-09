@@ -31,11 +31,7 @@ import {
   planActiveWikiSlot, selectActiveWikiSlug,
   addReadOnlyLayer, seedVesselDefaults,
   openVesselCore,
-  makePinWikiReactor, makeUnpinWikiReactor,
-  makeAddBagReactor, makeRemoveBagReactor,
-  makeEpochBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
-  makeCatalogAccessor,
 }                                            from "@lararium/tw5";
 import type { VesselWikiSlot, VesselCoreResult } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
@@ -298,23 +294,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     wireVerbs: (registry, assembly) => {
       seedVesselDefaults(registry);
-      // Verb parity with node. init-wiki / open-wiki / draft / prune-stale moved
-      // worker-ward (operator-admin-behavior wireWorkerVerbs); the residency-bound
-      // verbs below stay main-side until the manager relocates (rung 5). ONE
-      // catalog accessor (access≠load) for the catalog-writers that remain.
-      const catalog = makeCatalogAccessor(assembly.repo, catalogHandle.url);
+      // Thin main verb plane (node parity). Every catalog/recipe/residency-mutating
+      // admin verb lives in the worker now (wireWorkerVerbs) — access≠load, write-then-sync.
+      // Main keeps only sync-wiki (commands the pool's active wiki) + residency stats (a read).
       registry.register("sync-wiki", async (args, ctx) =>
         vmManager.placeWikiVerb(slotActiveWikiId, {
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
         }),
       );
-      registry.register("residency",     makeResidencyStatsReactor({ residency }));
-      registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
-      registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
-      registry.register("add-bag",       makeAddBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
-      registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
-      registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
-      registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
+      registry.register("residency", makeResidencyStatsReactor({ residency }));
     },
 
     afterAdmin: (_a, assembly) => {

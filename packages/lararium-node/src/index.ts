@@ -39,7 +39,7 @@ export { makeWhereReactor, makeResolveReactor } from "@lararium/tw5";
 // not node-specific; both vessels hold them). Re-exported here for surface stability.
 export {
   makeListWikisReactor, makeInitWikiReactor, makeOpenWikiReactor,
-  makePinWikiReactor, makeUnpinWikiReactor,
+  makeWikiPinReactor, makeWikiUnpinReactor,
   makeAddBagReactor, makeRemoveBagReactor,
   makePruneStaleReactor, makeDraftReactor,
   makeEpochBagReactor, makeRotateRecipeReactor,
@@ -47,7 +47,7 @@ export {
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor,
 } from "@lararium/tw5";
 export type {
-  WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions,
+  WikiHandlerOptions, WikiMintHandlerOptions,
   WikiComposeOptions, DraftHandlerOptions,
   EpochHandlerOptions, RotateRecipeOptions, ResidencyHandlerOptions,
 } from "@lararium/tw5";

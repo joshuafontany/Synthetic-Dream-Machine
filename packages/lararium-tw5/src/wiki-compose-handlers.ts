@@ -1,11 +1,9 @@
-import type { AutomergeUrl, Repo } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
-  type LarDoc,
-  AutomergeDocStore,
   LARARIUM_DOC_URI,
   bagStackFromRec,
   recipeUri,
+  mkAdminResidencyOp,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
@@ -57,41 +55,17 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
     };
     await opts.composite.put(updated, origin, { bag: LARARIUM_DOC_URI });
 
-    let layerAdded = false;
-    if (!opts.composite.hasBag(bagUrl)) {
-      try {
-        const oracleRec = await opts.composite.get(bagUrl);
-        const docUrl = typeof oracleRec?.tiddler.text === "string" ? oracleRec.tiddler.text : null;
-        if (docUrl) {
-          const handle = await opts.repo.find<LarDoc>(docUrl as AutomergeUrl);
-          await handle.whenReady();
-          opts.composite.addLayer({
-            bagId: bagUrl,
-            store: new AutomergeDocStore(handle, bagUrl),
-            writable: true,
-          });
-          layerAdded = true;
-        }
-      } catch (err) {
-        return {
-          slug,
-          recipeUri: recipeTitle,
-          status: "recipe-updated-layer-not-mounted",
-          bagUrl,
-          stack: nextStack,
-          error: err instanceof Error ? err.message : String(err),
-        };
-      }
-    }
-
-    await opts.residency.pin(bagUrl, `wiki:${slug}`);
+    // Pono: no live-layer mount. The recipe change syncs; each island mounts the bag
+    // when it reconciles its own stack. Command main to pin the bag's residency.
+    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "pin", bagId: bagUrl, reason: `wiki:${slug}` }));
 
     return {
       slug,
       recipeUri: recipeTitle,
-      status: layerAdded ? "added" : "added-recipe-only",
+      status: "added",
       bagUrl,
       stack: nextStack,
+      note: "recipe updated + synced; islands mount on reconcile (next boot / F-arc live-watch)",
     };
   };
 }
@@ -143,19 +117,17 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     };
     await opts.composite.put(updated, origin, { bag: LARARIUM_DOC_URI });
 
-    let layerRemoved = false;
-    if (opts.composite.hasBag(bagUrl)) {
-      opts.composite.removeLayer(bagUrl);
-      layerRemoved = true;
-    }
-    opts.residency.unpin(bagUrl);
+    // Pono: no live-layer unmount. The recipe change syncs; each island drops the bag
+    // when it reconciles. Command main to release the bag's pin.
+    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));
 
     return {
       slug,
       recipeUri: recipeTitle,
-      status: layerRemoved ? "removed" : "removed-recipe-only",
+      status: "removed",
       bagUrl,
       stack: nextStack,
+      note: "recipe updated + synced; islands drop on reconcile (StoryList drain is F-arc)",
     };
   };
 }

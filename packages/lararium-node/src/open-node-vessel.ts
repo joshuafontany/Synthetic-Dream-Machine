@@ -59,12 +59,8 @@ import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
-  makePinWikiReactor, makeUnpinWikiReactor,
-  makeAddBagReactor, makeRemoveBagReactor,
-  makeEpochBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
-  makeCatalogAccessor,
-} from "@lararium/tw5";   // verb-plane reactors — pono home is tw5 (both vessels hold them)
+} from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult } from "./open-admin-vm.js";
@@ -312,29 +308,19 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       return { workerEa: adminVm.workerEa, mountMainVerbs: adminVm.mountMainVerbs, resolveBinding: adminVm };
     },
 
-    // Residual verb plane (pool/repo-bound) — still on the main delegate path; the
-    // composite-only + residency verbs already moved into the worker (wireWorkerVerbs).
-    wireVerbs: (registry, assembly) => {
+    // Thin main verb plane. Every admin verb that touches the catalog / recipe /
+    // residency now lives in the worker (wireWorkerVerbs) — the admin holds ACCESS to
+    // all bags there and writes-then-syncs, never reaching into a mounted wiki. Main
+    // keeps only what is genuinely main-resident: sync-wiki (commands the pool's active
+    // wiki island) and residency stats (a read of the main-resident manager).
+    wireVerbs: (registry, _assembly) => {
       seedVesselDefaults(registry);
-      // ONE catalog-driven accessor for the residency-bound catalog-writers (bag-epoch
-      // / rotate-recipe) that remain main-side until rung 5 — reaches @catalog + any
-      // registered bag via repo.find (access≠load).
-      const catalog = makeCatalogAccessor(repo, catalogHandle.url);
       registry.register("sync-wiki", async (args, ctx) =>
         vmManager.placeWikiVerb(slotActiveWikiId, {
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
         }),
       );
-      // init-wiki / open-wiki / draft / prune-stale moved worker-ward (operator-admin-behavior
-      // wireWorkerVerbs) — composite+accessor only, no residency dep. The residency-bound
-      // verbs below stay main-side until the BagResidencyManager itself relocates (rung 5).
-      registry.register("residency",     makeResidencyStatsReactor({ residency }));
-      registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
-      registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
-      registry.register("add-bag",       makeAddBagReactor({ composite: assembly.composite, repo, residency }));
-      registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo, residency }));
-      registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo, residency, catalog }));
-      registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo, residency, catalog }));
+      registry.register("residency", makeResidencyStatsReactor({ residency }));
     },
 
     // After the admin VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.

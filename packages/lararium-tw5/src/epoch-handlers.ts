@@ -23,34 +23,36 @@ import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type CompositeStore,
   type LarDoc,
-  type BagResidencyManager,
-  emptyLarDoc, AutomergeDocStore, mutableLarRecord,
+  emptyLarDoc, mutableLarRecord, mkAdminResidencyOp,
   wikiLarUri, LARARIUM_DOC_URI, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import type { CatalogAccessor } from "./catalog-accessor.js";
+import type { ResidencyOpPost } from "./worker-data-verbs.js";
 import { stringArg, makeRequestId } from "./handler-args.js";
 
 export interface EpochHandlerOptions {
-  readonly composite: CompositeStore;
-  readonly repo:      Repo;
-  readonly residency: BagResidencyManager;
+  readonly repo:    Repo;
   /** Catalog accessor — updates the oracle tiddler that points at the bag's
    *  Automerge doc URL, via the registry doc (access≠load). */
-  readonly catalog:   CatalogAccessor;
+  readonly catalog: CatalogAccessor;
 }
 
 /**
  * `lares bag epoch <bag-url>` — snapshot-restart a single bag.
  *
- * Steps:
- *   1. Resolve old Automerge URL via composite read of the bag oracle.
+ * Steps (pono web3 — admin holds ACCESS, never reaches into a mounted wiki):
+ *   1. Resolve old Automerge URL via the catalog accessor (access≠load).
  *   2. Open old doc; read all tiddlers (including tombstones).
  *   3. Mint new LarDoc with the materialized tiddler set.
  *   4. Update the catalog oracle tiddler's text to the new doc URL.
- *   5. Swap composite layer: removeLayer(old) + addLayer(new).
- *   6. Re-pin residency if the old bag was pinned.
+ *
+ * The change SYNCS to every island holding the bag; each reconciles on its own
+ * cadence (live recipe-watch is F-arc; today, next boot). The admin does NOT
+ * hot-swap any running wiki's composite layer — that was web2 residue. Residency
+ * needs no re-pin: the manager keys by the bag's lar-URI, which is unchanged
+ * across the epoch (only the doc the oracle points at moves).
  *
  * Returns { bagUrl, oldDocUrl, newDocUrl, tiddlerCount, tombstoneCount }.
  */
@@ -110,24 +112,8 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
       };
     });
 
-    // Swap composite layer if the bag was mounted.
-    let layerSwapped = false;
-    if (opts.composite.hasBag(bagUrl)) {
-      opts.composite.removeLayer(bagUrl);
-      const writable = true;
-      opts.composite.addLayer({
-        bagId:    bagUrl,
-        store:    new AutomergeDocStore(newHandle, bagUrl),
-        writable,
-      });
-      layerSwapped = true;
-    }
-
-    // Re-pin if pinned (residency.pin is idempotent + name-keyed by URL,
-    // and URL stays the same — composite-bagId, not Automerge-doc-URL).
-    if (opts.residency.isPinned(bagUrl)) {
-      await opts.residency.pin(bagUrl, `epoch-rebound`);
-    }
+    // No live-composite layer swap, no residency re-pin: the oracle change syncs;
+    // islands reconcile on their own; the manager keys by the unchanged bag lar-URI.
 
     return {
       bagUrl,
@@ -135,8 +121,7 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
       newDocUrl:    newHandle.url,
       tiddlerCount,
       tombstoneCount,
-      layerSwapped,
-      note: "old doc retained in repo; prune via OS-level means or future GC",
+      note: "old doc retained in repo; oracle change syncs to islands (reconcile on next boot / F-arc live-watch); prune via OS-level means or future GC",
     };
   };
 }
@@ -151,7 +136,12 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
 // keeps the old generation accessible read-only. Mirrors Nix's
 // generation-pinning + GC pattern at the recipe granularity.
 
-export interface RotateRecipeOptions extends EpochHandlerOptions {}
+export interface RotateRecipeOptions extends EpochHandlerOptions {
+  /** Recipe lives in @lararium (a loaded layer) — read/written via the composite. */
+  readonly composite: CompositeStore;
+  /** Residency-op poster — register-cold the previous-canon underlay (worker→main). */
+  readonly post:      ResidencyOpPost;
+}
 
 /**
  * `lares wiki rotate-recipe <slug>` — fresh canonical, old retained as
@@ -256,22 +246,10 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     };
     await opts.composite.put(updatedRecipe, origin, { bag: LARARIUM_DOC_URI });
 
-    // Layer swap if mounted, residency re-pin.
-    let layerSwapped = false;
-    if (opts.composite.hasBag(wikiKey)) {
-      opts.composite.removeLayer(wikiKey);
-      opts.composite.addLayer({
-        bagId:    wikiKey,
-        store:    new AutomergeDocStore(newHandle, wikiKey),
-        writable: true,
-      });
-      layerSwapped = true;
-    }
-    if (opts.residency.isPinned(wikiKey)) {
-      await opts.residency.pin(wikiKey, `rotated-gen-${nextGen}`);
-    }
-    // Previous-canon ships cold; operator pin if they want it hot.
-    opts.residency.registerCold(previousCanonUri);
+    // No live-composite layer swap (oracle + recipe changes sync; islands reconcile),
+    // no wiki re-pin (manager keys by the unchanged wikiKey lar-URI). Previous-canon is
+    // a NEW bag → command main to register it cold via admin:residency-op.
+    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "register-cold", bagId: previousCanonUri }));
 
     return {
       slug,
@@ -280,8 +258,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       previousCanonUri,
       previousCanonDocUrl: oldDocUrl,
       stack:              nextStack,
-      layerSwapped,
-      note: "draft-drain into new canonical reserved for F-arc; operator can lift draft → new canon via a residency ACTION verb (`lares act MOVE`/`ADD`, Sprint 5)",
+      note: "oracle + recipe changes sync to islands (reconcile next boot / F-arc live-watch); draft-drain into new canonical reserved for F-arc (`lares act MOVE`/`ADD`)",
     };
   };
 }

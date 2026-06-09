@@ -14,8 +14,9 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, type CompositeStore, type AdminMsg_ResidencyOp } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type LarTiddlerRecord } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
+import type { CatalogAccessor } from "./catalog-accessor.js";
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
@@ -67,18 +68,64 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
   };
 }
 
-/** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers). */
-export function makeListWikisReactor(composite: CompositeStore): VerbReactor {
+/** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers).
+ *  Reads @catalog via the accessor (access≠load) — the registry is NOT a loaded
+ *  composite layer, so the old composite.listVisible() read returned nothing. */
+export function makeListWikisReactor(catalog: CatalogAccessor): VerbReactor {
   return async () => {
-    const titles = await composite.listVisible();
+    const cat = await catalog.handle();
+    const tiddlers = (cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>;
     const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
-    for (const title of titles) {
+    for (const [title, rec] of Object.entries(tiddlers)) {
       if (!title.startsWith(WIKI_PREFIX)) continue;
+      if (rec.meta?.deleted) continue;               // skip tombstones (listVisible parity)
       const tail = title.slice(WIKI_PREFIX.length);
       if (tail.includes("/")) continue;
-      const rec = await composite.get(title);
       wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec) });
     }
     return { wikis };
+  };
+}
+
+// ── Whole-wiki residency policy (pin-wiki / unpin-wiki) — worker-ward ──────────
+// Pure policy: read the recipe (@lararium, a loaded layer), walk its bag-stack,
+// COMMAND main's BagResidencyManager per bag via admin:residency-op (the mechanism
+// stays at the resource — the manager is pool-driven bookkeeping). No live composite
+// layer mutation here, so unlike add-bag/remove-bag these move cleanly.
+
+/** `pin-wiki` — pin every bag in the wiki's recipe (worker policy → main manager). */
+export function makeWikiPinReactor(composite: CompositeStore, post: ResidencyOpPost): VerbReactor {
+  return async (args) => {
+    const slug = typeof args["slug"] === "string" ? args["slug"] : "";
+    if (!slug) throw new Error("args.slug is required");
+    const recipeTitle = recipeUri("@lararium", slug);
+    const recipeRec = await composite.get(recipeTitle);
+    if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
+    const bagStack = bagStackFromRec(recipeRec);
+    const pinned: Array<{ bagUrl: string; reason: string }> = [];
+    for (const bagUrl of bagStack) {
+      const reason = `wiki:${slug}`;
+      post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op: "pin", bagId: bagUrl, reason }));
+      pinned.push({ bagUrl, reason });
+    }
+    return { slug, recipeUri: recipeTitle, pinned, commanded: true };
+  };
+}
+
+/** `unpin-wiki` — unpin every bag in the wiki's recipe (worker policy → main manager). */
+export function makeWikiUnpinReactor(composite: CompositeStore, post: ResidencyOpPost): VerbReactor {
+  return async (args) => {
+    const slug = typeof args["slug"] === "string" ? args["slug"] : "";
+    if (!slug) throw new Error("args.slug is required");
+    const recipeTitle = recipeUri("@lararium", slug);
+    const recipeRec = await composite.get(recipeTitle);
+    if (!recipeRec) throw new Error(`recipe not found for "${slug}"`);
+    const bagStack = bagStackFromRec(recipeRec);
+    const unpinned: string[] = [];
+    for (const bagUrl of bagStack) {
+      post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op: "unpin", bagId: bagUrl }));
+      unpinned.push(bagUrl);
+    }
+    return { slug, recipeUri: recipeTitle, unpinned, commanded: true };
   };
 }

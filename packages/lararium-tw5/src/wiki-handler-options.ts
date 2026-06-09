@@ -6,8 +6,9 @@
  * the re-export hub it grew from collapsed (YIN).
  */
 
-import type { Repo, CompositeStore, BagResidencyManager } from "@lararium/mesh";
+import type { Repo, CompositeStore } from "@lararium/mesh";
 import type { CatalogAccessor } from "./catalog-accessor.js";
+import type { ResidencyOpPost } from "./worker-data-verbs.js";
 
 export interface WikiHandlerOptions {
   readonly composite: CompositeStore;
@@ -27,17 +28,13 @@ export interface WikiMintHandlerOptions {
   readonly rootDir:     string;
 }
 
-/** Options for whole-wiki residency operations (pin/unpin). */
-export interface WikiResidencyOptions {
-  readonly composite: CompositeStore;
-  readonly residency: BagResidencyManager;
-}
-
-/** Options for recipe-composition operations (add-bag / remove-bag). */
+/** Options for recipe-composition operations (add-bag / remove-bag). Pono web3:
+ *  the admin writes the recipe (@lararium, a loaded layer) and commands residency
+ *  via admin:residency-op — it never mounts/unmounts a live wiki's composite layer.
+ *  The recipe change syncs; each island reconciles its own mount set. */
 export interface WikiComposeOptions {
   readonly composite: CompositeStore;
-  readonly repo:      Repo;
-  readonly residency: BagResidencyManager;
+  readonly post:      ResidencyOpPost;
 }
 
 export interface DraftHandlerOptions {

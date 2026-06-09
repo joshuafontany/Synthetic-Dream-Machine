@@ -16,8 +16,10 @@
 import {
   makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors,
+  makeWikiPinReactor, makeWikiUnpinReactor,
   makeCatalogAccessor,
   makeInitWikiReactor, makeOpenWikiReactor, makeDraftReactor, makePruneStaleReactor,
+  makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
@@ -46,7 +48,6 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
     wireWorkerVerbs: (registry, ctx: IslandContext) => {
       registry.register("where",      makeWhereReactor(ctx.composite));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
-      registry.register("list-wikis", makeListWikisReactor(ctx.composite));
       // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — composite-only, now
       // in every vessel's worker, verify-then-delegate gated. The `lares act` front door.
       registerActionReactors(registry, { composite: ctx.composite });
@@ -56,6 +57,15 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       registry.register("pin",           makePinReactor(ctx.post));
       registry.register("unpin",         makeUnpinReactor(ctx.post));
       registry.register("register-cold", makeRegisterColdReactor(ctx.post));
+      // Whole-wiki residency policy — read the recipe (@lararium, loaded), command
+      // main's manager per bag via admin:residency-op. Pure policy, no live-layer
+      // mechanism (unlike add-bag/remove-bag), so they move cleanly worker-ward.
+      registry.register("pin-wiki",      makeWikiPinReactor(ctx.composite, ctx.post));
+      registry.register("unpin-wiki",    makeWikiUnpinReactor(ctx.composite, ctx.post));
+      // Recipe composition — write the recipe (@lararium, loaded), command residency via
+      // admin:residency-op. NO live-layer mount/unmount: the recipe syncs, islands reconcile.
+      registry.register("add-bag",       makeAddBagReactor({ composite: ctx.composite, post: ctx.post }));
+      registry.register("remove-bag",    makeRemoveBagReactor({ composite: ctx.composite, post: ctx.post }));
 
       // Composite + accessor verbs (no residency dep) — now worker-local, reaching
       // @catalog via the accessor over ctx.repo/ctx.catalogUrl (access≠load). The
@@ -76,6 +86,13 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog }));
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
+        // list-wikis enumerates @catalog (access≠load) — needs the accessor, not the
+        // composite (the registry is not a loaded layer; the old read returned empty).
+        registry.register("list-wikis", makeListWikisReactor(catalog));
+        // Catalog-writing residency verbs — mint/oracle via accessor + repo, command
+        // residency via post. No live-layer swap (oracle/recipe sync; islands reconcile).
+        registry.register("bag-epoch",     makeEpochBagReactor({ repo: ctx.repo, catalog }));
+        registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: ctx.composite, repo: ctx.repo, catalog, post: ctx.post }));
       }
     },
     verifierFactory: async (ctx: IslandContext) => {
