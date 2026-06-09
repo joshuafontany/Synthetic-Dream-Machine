@@ -31,6 +31,12 @@ import {
   planActiveWikiSlot, selectActiveWikiSlug,
   addReadOnlyLayer, seedVesselDefaults,
   openVesselCore,
+  makeInitWikiReactor, makeOpenWikiReactor,
+  makePinWikiReactor, makeUnpinWikiReactor,
+  makeAddBagReactor, makeRemoveBagReactor,
+  makePruneStaleReactor, makeDraftReactor,
+  makeEpochBagReactor, makeRotateRecipeReactor,
+  makeResidencyStatsReactor,
 }                                            from "@lararium/tw5";
 import type { VesselWikiSlot, VesselCoreResult } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
@@ -296,12 +302,30 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       return { workerEa: admin.workerEa, mountMainVerbs: admin.mountMainVerbs, resolveBinding: admin };
     },
 
-    wireVerbs: (registry) => {
+    wireVerbs: (registry, assembly) => {
       seedVesselDefaults(registry);
-      // The composite-only + residency verbs register in the WORKER (wireWorkerVerbs,
-      // operator-admin-behavior — both vessels). The mint/compose verbs (init/open/add/
-      // bag-epoch/rotate) still live in @lararium/node; relocating them to tw5 for full
-      // browser parity is the follow (they are NOT node-specific — composite/repo only).
+      // Verb parity with node — the mint/compose/residency-stats verbs (now tw5-resident).
+      const wikiMintOpts = {
+        composite: assembly.composite, repo: assembly.repo, catalogHandle,
+        islandHandle: assembly.islandHandle, rootDir: "",
+        operatorDid: async () => "0x" + operatorDid,
+      };
+      registry.register("sync-wiki", async (args, ctx) =>
+        vmManager.placeWikiVerb(slotActiveWikiId, {
+          verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
+        }),
+      );
+      registry.register("init-wiki",     makeInitWikiReactor(wikiMintOpts));
+      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite }));
+      registry.register("residency",     makeResidencyStatsReactor({ residency }));
+      registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
+      registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
+      registry.register("add-bag",       makeAddBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
+      registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
+      registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalogHandle }));
+      registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalogHandle }));
+      registry.register("prune-stale",   makePruneStaleReactor(wikiMintOpts));
+      registry.register("draft",         makeDraftReactor({ composite: assembly.composite }));
     },
 
     afterAdmin: (_a, assembly) => {

@@ -59,14 +59,13 @@ import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
-  makeInitWikiReactor,
-  makeOpenWikiReactor,
-} from "./wiki-handlers.js";
-import { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handlers.js";
-import { makeAddBagReactor, makeRemoveBagReactor } from "./wiki-compose-handlers.js";
-import { makePruneStaleReactor, makeDraftReactor } from "./wiki-draft-handlers.js";
-import { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
-import { makeResidencyStatsReactor } from "./residency-handlers.js";
+  makeInitWikiReactor, makeOpenWikiReactor,
+  makePinWikiReactor, makeUnpinWikiReactor,
+  makeAddBagReactor, makeRemoveBagReactor,
+  makePruneStaleReactor, makeDraftReactor,
+  makeEpochBagReactor, makeRotateRecipeReactor,
+  makeResidencyStatsReactor,
+} from "@lararium/tw5";   // verb-plane reactors — pono home is tw5 (both vessels hold them)
 import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult } from "./open-admin-vm.js";

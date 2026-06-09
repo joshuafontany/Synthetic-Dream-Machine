@@ -1,4 +1,4 @@
-import type { AutomergeUrl, Repo } from "@automerge/automerge-repo";
+import type { AutomergeUrl, Repo } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type LarDoc,
@@ -7,7 +7,7 @@ import {
   bagStackFromRec,
   recipeUri,
 } from "@lararium/mesh";
-import type { VerbReactor } from "@lararium/tw5";
+import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiComposeOptions } from "./wiki-handlers.js";
 

@@ -35,25 +35,22 @@ export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 // run in the admin worker (sovereign-worker, verify-then-delegate). Re-export from there.
 export { makeWhereReactor, makeResolveReactor } from "@lararium/tw5";
 
+// Verb-plane reactors relocated to their pono home @lararium/tw5 (composite/repo-only,
+// not node-specific; both vessels hold them). Re-exported here for surface stability.
 export {
-  makeListWikisReactor, makeInitWikiReactor,
-  makeOpenWikiReactor,
+  makeListWikisReactor, makeInitWikiReactor, makeOpenWikiReactor,
   makePinWikiReactor, makeUnpinWikiReactor,
   makeAddBagReactor, makeRemoveBagReactor,
   makePruneStaleReactor, makeDraftReactor,
-} from "./wiki-handlers.js";
+  makeEpochBagReactor, makeRotateRecipeReactor,
+  makeResidencyStatsReactor,
+  makePinReactor, makeUnpinReactor, makeRegisterColdReactor,
+} from "@lararium/tw5";
 export type {
   WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions,
   WikiComposeOptions, DraftHandlerOptions,
-} from "./wiki-handlers.js";
-
-export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
-export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
-
-export { makeResidencyStatsReactor } from "./residency-handlers.js";
-export type { ResidencyHandlerOptions } from "./residency-handlers.js";
-// pin/unpin/register-cold reactors relocated to the admin worker (sovereign-worker).
-export { makePinReactor, makeUnpinReactor, makeRegisterColdReactor } from "@lararium/tw5";
+  EpochHandlerOptions, RotateRecipeOptions, ResidencyHandlerOptions,
+} from "@lararium/tw5";
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
 export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";

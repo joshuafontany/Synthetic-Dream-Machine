@@ -5,7 +5,7 @@
  * Wiki-semantic rites (sync-wiki, residency ACTION verbs) live in the VM islands.
  */
 
-import type { Repo, DocHandle } from "@automerge/automerge-repo";
+import type { Repo, DocHandle } from "@lararium/mesh";
 import type { CompositeStore, LarDoc, BagResidencyManager } from "@lararium/mesh";
 import { makeDraftReactor, makePruneStaleReactor } from "./wiki-draft-handlers.js";
 import { makeInitWikiReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
@@ -42,7 +42,7 @@ export interface DraftHandlerOptions {
 }
 
 export { makeInitWikiReactor, makeOpenWikiReactor } from "./wiki-mint-handlers.js";
-export { makeListWikisReactor } from "@lararium/tw5"; // relocated to the admin worker
+export { makeListWikisReactor } from "./worker-data-verbs.js"; // relocated to the admin worker
 export { makeDraftReactor, makePruneStaleReactor } from "./wiki-draft-handlers.js";
 export { makePinWikiReactor, makeUnpinWikiReactor } from "./wiki-residency-handlers.js";
 export { makeAddBagReactor, makeRemoveBagReactor } from "./wiki-compose-handlers.js";

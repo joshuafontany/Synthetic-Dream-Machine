@@ -89,6 +89,20 @@ export {
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor,
 } from "./worker-data-verbs.js";
 export type { ResidencyOpPost } from "./worker-data-verbs.js";
+// Verb-plane reactors (composite/repo-only — pono home is tw5, not node; both vessels hold them).
+export {
+  makeInitWikiReactor, makeOpenWikiReactor,
+  makeDraftReactor, makePruneStaleReactor,
+  makePinWikiReactor, makeUnpinWikiReactor,
+  makeAddBagReactor, makeRemoveBagReactor,
+} from "./wiki-handlers.js";
+export type {
+  WikiHandlerOptions, WikiMintHandlerOptions, WikiResidencyOptions, WikiComposeOptions, DraftHandlerOptions,
+} from "./wiki-handlers.js";
+export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
+export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
+export { makeResidencyStatsReactor } from "./residency-handlers.js";
+export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 export { openVesselCore } from "./open-vessel.js";
 export type {
   VesselOrchestration, VesselCoreResult, VesselAdminVm, VesselWikiSlot,

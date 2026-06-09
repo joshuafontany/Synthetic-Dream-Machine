@@ -18,7 +18,7 @@
  * the Epoch or the deletion gets lost on restart.
  */
 
-import type { Repo, AutomergeUrl } from "@automerge/automerge-repo";
+import type { Repo, AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type CompositeStore,
@@ -28,7 +28,7 @@ import {
   wikiLarUri, LARARIUM_DOC_URI, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
-import type { VerbReactor } from "@lararium/tw5";
+import type { VerbReactor } from "./verb-dispatcher.js";
 import { stringArg, makeRequestId } from "./handler-args.js";
 
 export interface EpochHandlerOptions {
@@ -37,7 +37,7 @@ export interface EpochHandlerOptions {
   readonly residency: BagResidencyManager;
   /** Catalog handle — needed to update the oracle tiddler that points at
    *  the bag's Automerge doc URL. */
-  readonly catalogHandle: import("@automerge/automerge-repo").DocHandle<LarDoc>;
+  readonly catalogHandle: import("@lararium/mesh").DocHandle<LarDoc>;
 }
 
 /**
