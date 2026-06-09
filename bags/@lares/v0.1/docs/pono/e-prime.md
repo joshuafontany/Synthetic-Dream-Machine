@@ -53,7 +53,7 @@ These three form the braid behind the E-Prime game law:
 - Fuller: structural honesty about observer position
 
 The game does not demand perfect E-Prime prose.
-It demands that every `is` and `has` carry its weight honestly.
+It demands that every `${copula}` carry its weight honestly.
 
 <<~/ahu >>
 
@@ -81,7 +81,7 @@ E-Prime runs **binary** --- the ward stands lit (default) or lifted (`!E-Prime`,
 
 A lit ward producing tortured prose without gain reads as **Mode Posturing** — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as **Mana Drift**.
 
-The ward does not exempt copulas from confidence marking. Every `is` or `has` that passes under the lit ward still carries its `<<~ confidence Register N/20 >>` marker — the ward governs grammar, confidence governs certainty, orthogonal.
+The ward does not exempt copulas from confidence marking. Every `${copula}` that passes under the lit ward still carries its `<<~ confidence Register N/20 >>` marker — the ward governs grammar, confidence governs certainty, orthogonal.
 
 <<~/ahu >>
 
