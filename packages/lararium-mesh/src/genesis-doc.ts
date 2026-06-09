@@ -25,7 +25,6 @@ import {
   IDENTITIES_DOC_URI,
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
-  recipeUri,
   bagDescriptorUri,
 } from "./lar-uris.js";
 import type { LarDoc, LarBlobEntry } from "./base-doc.js";
@@ -200,41 +199,10 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     });
   }
 
-  // 3. Write recipe descriptor tiddlers.
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const tiddlers = d.tiddlers as Record<string, unknown>;
-
-    tiddlers[recipeUri("@lararium", "full")] = {
-      title:  recipeUri("@lararium", "full"),
-      fields: {
-        label:     "Full (content + social plane)",
-        bagStack:  [LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
-                    IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI].join(" "),
-        authority: "genesis", bag: LARARIUM_DOC_URI,
-      },
-      authority: "genesis", bag: LARARIUM_DOC_URI,
-    };
-
-    tiddlers[recipeUri("@lararium", "default")] = {
-      title:  recipeUri("@lararium", "default"),
-      fields: {
-        label:     "Default (content Tiga)",
-        bagStack:  [LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI].join(" "),
-        authority: "genesis", bag: LARARIUM_DOC_URI,
-      },
-      authority: "genesis", bag: LARARIUM_DOC_URI,
-    };
-
-    tiddlers[recipeUri("@catalog", "default")] = {
-      title:  recipeUri("@catalog", "default"),
-      fields: {
-        label:     "Catalog default (discovery + lares)",
-        bagStack:  [CATALOG_DOC_URI, LARES_DOC_URI].join(" "),
-        authority: "genesis", bag: LARARIUM_DOC_URI,
-      },
-      authority: "genesis", bag: LARARIUM_DOC_URI,
-    };
-  });
+  // Genesis seeds NO recipe descriptors. Recipes are USER registry data — minted
+  // per-wiki into the user's @catalog by init-wiki. The old genesis-seeded
+  // "@lararium/recipes/{full,default}" + "@catalog/default" defaults were legacy
+  // web2 (protocol substrate carrying user composition templates) — deleted.
 
   // 4. Write bag descriptor tiddlers.
   doc = automergeChange(doc, { time: 0 }, d => {

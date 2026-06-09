@@ -29,12 +29,13 @@ export interface WikiMintHandlerOptions {
 }
 
 /** Options for recipe-composition operations (add-bag / remove-bag). Pono web3:
- *  the admin writes the recipe (@lararium, a loaded layer) and commands residency
- *  via admin:residency-op — it never mounts/unmounts a live wiki's composite layer.
- *  The recipe change syncs; each island reconciles its own mount set. */
+ *  the user recipe lives in @catalog (registry) — read+written via the accessor
+ *  (access≠load); residency commanded via admin:residency-op. The admin never
+ *  mounts/unmounts a live wiki's composite layer; the recipe change syncs and each
+ *  island reconciles its own mount set. */
 export interface WikiComposeOptions {
-  readonly composite: CompositeStore;
-  readonly post:      ResidencyOpPost;
+  readonly catalog: CatalogAccessor;
+  readonly post:    ResidencyOpPost;
 }
 
 export interface DraftHandlerOptions {

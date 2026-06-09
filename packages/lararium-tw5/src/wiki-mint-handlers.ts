@@ -31,14 +31,14 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     const wikiKey = wikiLarUri(slug);
     const draftBagId = wikiDraftLarUri(slug);
     const draftKey = `${wikiKey}/drafts/${encodeURIComponent(did)}`;
-    const recipeTitle = recipeUri("@lararium", slug);
+    // The user's wiki recipe is REGISTRY data (the user's composition choice) —
+    // it lives in the user's @catalog, NOT @lararium (protocol substrate). Read
+    // it through the accessor (access≠load), like the wiki/draft oracles.
+    const recipeTitle = recipeUri("@catalog", slug);
 
-    // Wiki + draft oracles live in @catalog (the registry) — read via the
-    // accessor (access≠load), NOT the composite (@catalog is never a load layer).
-    // The recipe lives in @lararium, a real composite layer — that read stays.
     const existingWikiUrl = await opts.catalog.urlOf(wikiKey);
     const existingDraftUrl = await opts.catalog.urlOf(draftKey);
-    const existingRecipeRec = await opts.composite.get(recipeTitle);
+    const existingRecipeRec = await opts.catalog.recordOf(recipeTitle);
     if (existingWikiUrl && existingDraftUrl && existingRecipeRec) {
       return {
         slug,
@@ -61,7 +61,9 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     if (!existingWikiUrl) await wikiHandle.whenReady();
     if (!existingDraftUrl) await draftHandle.whenReady();
 
+    // Oracles AND the user recipe all land in @catalog (registry) — one write.
     const catalogHandle = await opts.catalog.handle();
+    const updatedAt = new Date().toISOString();
     catalogHandle.change((doc) => {
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       tiddlers[wikiKey] = mutableLarRecord(wikiKey, {
@@ -74,15 +76,6 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
         text: draftHandle.url,
         kind: "oracle",
       }, "lares-cli:wiki-init");
-    });
-
-    // The recipe tiddler lands in @lararium (the island doc) — reached through
-    // the catalog registry, not a bespoke islandHandle (access≠load).
-    const islandHandle = await opts.catalog.find(LARARIUM_DOC_URI);
-    if (!islandHandle) throw new Error(`@lararium not registered in catalog (${LARARIUM_DOC_URI}) — cannot write recipe`);
-    const updatedAt = new Date().toISOString();
-    islandHandle.change((doc) => {
-      const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       tiddlers[recipeTitle] = mutableLarRecord(recipeTitle, {
         label: slug,
         "bag-stack": `${CATALOG_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiKey} ${draftBagId}`,

@@ -1,6 +1,5 @@
-import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
+import type { LarTiddlerRecord } from "@lararium/mesh";
 import {
-  LARARIUM_DOC_URI,
   bagStackFromRec,
   recipeUri,
   mkAdminResidencyOp,
@@ -27,8 +26,9 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
     if (!bagUrl) throw new Error("args.bagUrl is required (the bag's lar: URI)");
 
-    const recipeTitle = recipeUri("@lararium", slug);
-    const recipeRec = await opts.composite.get(recipeTitle);
+    // The user recipe lives in @catalog (registry) — read + write via the accessor.
+    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) {
       throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
     }
@@ -40,11 +40,10 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
 
     const nextStack = [...stack, bagUrl];
 
-    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
-        title: recipeRec.tiddler.title,
+        title: recipeTitle,
         "bag-stack": nextStack.join(" "),
         "updated-at": new Date().toISOString(),
       },
@@ -53,7 +52,8 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
         authority: recipeRec.meta?.authority ?? "lares-cli:wiki-add-bag",
       },
     };
-    await opts.composite.put(updated, origin, { bag: LARARIUM_DOC_URI });
+    const catalogHandle = await opts.catalog.handle();
+    catalogHandle.change((doc) => { (doc.tiddlers as Record<string, LarTiddlerRecord>)[recipeTitle] = updated; });
 
     // Pono: no live-layer mount. The recipe change syncs; each island mounts the bag
     // when it reconciles its own stack. Command main to pin the bag's residency.
@@ -89,8 +89,8 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
     if (!bagUrl) throw new Error("args.bagUrl is required");
 
-    const recipeTitle = recipeUri("@lararium", slug);
-    const recipeRec = await opts.composite.get(recipeTitle);
+    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) {
       throw new Error(`recipe not found for "${slug}"`);
     }
@@ -102,11 +102,10 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
 
     const nextStack = stack.filter((u) => u !== bagUrl);
 
-    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const updated: LarTiddlerRecord = {
       tiddler: {
         ...recipeRec.tiddler,
-        title: recipeRec.tiddler.title,
+        title: recipeTitle,
         "bag-stack": nextStack.join(" "),
         "updated-at": new Date().toISOString(),
       },
@@ -115,7 +114,8 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
         authority: recipeRec.meta?.authority ?? "lares-cli:wiki-remove-bag",
       },
     };
-    await opts.composite.put(updated, origin, { bag: LARARIUM_DOC_URI });
+    const catalogHandle = await opts.catalog.handle();
+    catalogHandle.change((doc) => { (doc.tiddlers as Record<string, LarTiddlerRecord>)[recipeTitle] = updated; });
 
     // Pono: no live-layer unmount. The recipe change syncs; each island drops the bag
     // when it reconciles. Command main to release the bag's pin.

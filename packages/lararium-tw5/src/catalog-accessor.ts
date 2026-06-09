@@ -28,6 +28,7 @@ import {
   type DocHandle,
   type AutomergeUrl,
   type LarDoc,
+  type LarTiddlerRecord,
 } from "@lararium/mesh";
 
 export interface CatalogAccessor {
@@ -35,6 +36,10 @@ export interface CatalogAccessor {
   handle(): Promise<DocHandle<LarDoc>>;
   /** The AutomergeUrl a registry entry points at, or null if unregistered. */
   urlOf(bagUri: string): Promise<string | null>;
+  /** The full registry RECORD at a title (e.g. a user wiki recipe), or null.
+   *  @catalog holds registry data — wiki recipes, bag oracles — NOT loaded as a
+   *  composite layer (access≠load); reads come through here. */
+  recordOf(title: string): Promise<LarTiddlerRecord | null>;
   /** `repo.find()` the bag the registry maps `bagUri` to (null if unregistered). */
   find(bagUri: string): Promise<DocHandle<LarDoc> | null>;
 }
@@ -69,6 +74,11 @@ export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAcce
     return tiddlerText(cat.doc()?.tiddlers?.[bagUri]) ?? null;
   };
 
+  const recordOf = async (title: string): Promise<LarTiddlerRecord | null> => {
+    const cat = await handle();
+    return (cat.doc()?.tiddlers?.[title] as LarTiddlerRecord | undefined) ?? null;
+  };
+
   const find = async (bagUri: string): Promise<DocHandle<LarDoc> | null> => {
     if (bagUri === CATALOG_DOC_URI) return handle();
     const url = await urlOf(bagUri);
@@ -81,5 +91,5 @@ export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAcce
     return h;
   };
 
-  return { handle, urlOf, find };
+  return { handle, urlOf, recordOf, find };
 }

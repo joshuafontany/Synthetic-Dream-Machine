@@ -57,23 +57,15 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       registry.register("pin",           makePinReactor(ctx.post));
       registry.register("unpin",         makeUnpinReactor(ctx.post));
       registry.register("register-cold", makeRegisterColdReactor(ctx.post));
-      // Whole-wiki residency policy — read the recipe (@lararium, loaded), command
-      // main's manager per bag via admin:residency-op. Pure policy, no live-layer
-      // mechanism (unlike add-bag/remove-bag), so they move cleanly worker-ward.
-      registry.register("pin-wiki",      makeWikiPinReactor(ctx.composite, ctx.post));
-      registry.register("unpin-wiki",    makeWikiUnpinReactor(ctx.composite, ctx.post));
-      // Recipe composition — write the recipe (@lararium, loaded), command residency via
-      // admin:residency-op. NO live-layer mount/unmount: the recipe syncs, islands reconcile.
-      registry.register("add-bag",       makeAddBagReactor({ composite: ctx.composite, post: ctx.post }));
-      registry.register("remove-bag",    makeRemoveBagReactor({ composite: ctx.composite, post: ctx.post }));
 
-      // Composite + accessor verbs (no residency dep) — now worker-local, reaching
-      // @catalog via the accessor over ctx.repo/ctx.catalogUrl (access≠load). The
-      // catalog-writers (init-wiki) + selectors (open-wiki) + draft + prune-stale
-      // ride the same verify-then-delegate gate. operatorDid matches the main
-      // reactors exactly ("0x"+operatorVerifyingKey) so draft keys never drift.
       // draft needs no catalog — register it regardless of slot.
       registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
+
+      // Every other admin verb reaches USER registry data in @catalog (wiki oracles,
+      // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The admin
+      // recipe NEVER loads @catalog as tiddlers. All ride the verify-then-delegate gate.
+      // operatorDid matches the old main reactors exactly ("0x"+operatorVerifyingKey) so
+      // draft keys never drift.
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
         const wikiMintOpts = {
@@ -86,13 +78,19 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog }));
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
-        // list-wikis enumerates @catalog (access≠load) — needs the accessor, not the
-        // composite (the registry is not a loaded layer; the old read returned empty).
-        registry.register("list-wikis", makeListWikisReactor(catalog));
+        registry.register("list-wikis",  makeListWikisReactor(catalog));
+        // Whole-wiki residency policy — read the @catalog recipe, command main's manager
+        // per bag via admin:residency-op. Pure policy, no live-layer mechanism.
+        registry.register("pin-wiki",      makeWikiPinReactor(catalog, ctx.post));
+        registry.register("unpin-wiki",    makeWikiUnpinReactor(catalog, ctx.post));
+        // Recipe composition — write the @catalog recipe, command residency via op. NO
+        // live-layer mount/unmount: the recipe syncs, islands reconcile their own stacks.
+        registry.register("add-bag",       makeAddBagReactor({ catalog, post: ctx.post }));
+        registry.register("remove-bag",    makeRemoveBagReactor({ catalog, post: ctx.post }));
         // Catalog-writing residency verbs — mint/oracle via accessor + repo, command
         // residency via post. No live-layer swap (oracle/recipe sync; islands reconcile).
         registry.register("bag-epoch",     makeEpochBagReactor({ repo: ctx.repo, catalog }));
-        registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: ctx.composite, repo: ctx.repo, catalog, post: ctx.post }));
+        registry.register("rotate-recipe", makeRotateRecipeReactor({ repo: ctx.repo, catalog, post: ctx.post }));
       }
     },
     verifierFactory: async (ctx: IslandContext) => {

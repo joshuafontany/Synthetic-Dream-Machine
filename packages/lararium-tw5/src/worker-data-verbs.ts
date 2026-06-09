@@ -88,18 +88,19 @@ export function makeListWikisReactor(catalog: CatalogAccessor): VerbReactor {
 }
 
 // ── Whole-wiki residency policy (pin-wiki / unpin-wiki) — worker-ward ──────────
-// Pure policy: read the recipe (@lararium, a loaded layer), walk its bag-stack,
-// COMMAND main's BagResidencyManager per bag via admin:residency-op (the mechanism
-// stays at the resource — the manager is pool-driven bookkeeping). No live composite
-// layer mutation here, so unlike add-bag/remove-bag these move cleanly.
+// Pure policy: read the recipe (USER registry data in @catalog, via the accessor —
+// access≠load), walk its bag-stack, COMMAND main's BagResidencyManager per bag via
+// admin:residency-op (the mechanism stays at the resource — the manager is pool-driven
+// bookkeeping). No live composite layer mutation, so unlike add-bag/remove-bag these
+// move cleanly.
 
 /** `pin-wiki` — pin every bag in the wiki's recipe (worker policy → main manager). */
-export function makeWikiPinReactor(composite: CompositeStore, post: ResidencyOpPost): VerbReactor {
+export function makeWikiPinReactor(catalog: CatalogAccessor, post: ResidencyOpPost): VerbReactor {
   return async (args) => {
     const slug = typeof args["slug"] === "string" ? args["slug"] : "";
     if (!slug) throw new Error("args.slug is required");
-    const recipeTitle = recipeUri("@lararium", slug);
-    const recipeRec = await composite.get(recipeTitle);
+    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeRec = await catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
     const bagStack = bagStackFromRec(recipeRec);
     const pinned: Array<{ bagUrl: string; reason: string }> = [];
@@ -113,12 +114,12 @@ export function makeWikiPinReactor(composite: CompositeStore, post: ResidencyOpP
 }
 
 /** `unpin-wiki` — unpin every bag in the wiki's recipe (worker policy → main manager). */
-export function makeWikiUnpinReactor(composite: CompositeStore, post: ResidencyOpPost): VerbReactor {
+export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOpPost): VerbReactor {
   return async (args) => {
     const slug = typeof args["slug"] === "string" ? args["slug"] : "";
     if (!slug) throw new Error("args.slug is required");
-    const recipeTitle = recipeUri("@lararium", slug);
-    const recipeRec = await composite.get(recipeTitle);
+    const recipeTitle = recipeUri("@catalog", slug);
+    const recipeRec = await catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}"`);
     const bagStack = bagStackFromRec(recipeRec);
     const unpinned: string[] = [];

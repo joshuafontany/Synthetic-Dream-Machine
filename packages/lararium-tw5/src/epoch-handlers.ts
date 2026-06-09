@@ -21,10 +21,9 @@
 import type { Repo, AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
-  type CompositeStore,
   type LarDoc,
   emptyLarDoc, mutableLarRecord, mkAdminResidencyOp,
-  wikiLarUri, LARARIUM_DOC_URI, recipeUri,
+  wikiLarUri, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
@@ -137,10 +136,8 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
 // generation-pinning + GC pattern at the recipe granularity.
 
 export interface RotateRecipeOptions extends EpochHandlerOptions {
-  /** Recipe lives in @lararium (a loaded layer) — read/written via the composite. */
-  readonly composite: CompositeStore;
   /** Residency-op poster — register-cold the previous-canon underlay (worker→main). */
-  readonly post:      ResidencyOpPost;
+  readonly post: ResidencyOpPost;
 }
 
 /**
@@ -169,9 +166,9 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     if (!slug) throw new Error("args.slug is required");
 
     const wikiKey     = wikiLarUri(slug);
-    const recipeTitle = recipeUri("@lararium", slug);
+    const recipeTitle = recipeUri("@catalog", slug);
 
-    const recipeRec = await opts.composite.get(recipeTitle);
+    const recipeRec = await opts.catalog.recordOf(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
 
     // Wiki oracle lives in @catalog — accessor read (recipe above stays composite,
@@ -224,27 +221,29 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       }, "lares-cli:rotate-recipe");
     });
 
-    // Mutate recipe: insert previous-canon just BELOW the wiki slot.
+    // Mutate recipe: insert previous-canon just BELOW the wiki slot. The recipe is
+    // user registry data — it lives in @catalog, written via the accessor.
     const wikiIdx = stack.indexOf(wikiKey);
     const nextStack: string[] = wikiIdx >= 0
       ? [...stack.slice(0, wikiIdx), previousCanonUri, ...stack.slice(wikiIdx)]
       : [...stack, previousCanonUri, wikiKey];
 
-    const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("rotate") };
-    const updatedRecipe: LarTiddlerRecord = {
-      tiddler: {
-        ...recipeRec.tiddler,
-        title: recipeRec.tiddler.title,
-        "bag-stack": nextStack.join(" "),
-        "updated-at": new Date().toISOString(),
-        "rotation-gen": String(nextGen),
-      },
-      meta: {
-        ...(recipeRec.meta ?? {}),
-        authority: recipeRec.meta?.authority ?? "lares-cli:rotate-recipe",
-      },
-    };
-    await opts.composite.put(updatedRecipe, origin, { bag: LARARIUM_DOC_URI });
+    catalogHandle.change((doc) => {
+      const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
+      tiddlers[recipeTitle] = {
+        tiddler: {
+          ...recipeRec.tiddler,
+          title: recipeTitle,
+          "bag-stack": nextStack.join(" "),
+          "updated-at": new Date().toISOString(),
+          "rotation-gen": String(nextGen),
+        },
+        meta: {
+          ...(recipeRec.meta ?? {}),
+          authority: recipeRec.meta?.authority ?? "lares-cli:rotate-recipe",
+        },
+      };
+    });
 
     // No live-composite layer swap (oracle + recipe changes sync; islands reconcile),
     // no wiki re-pin (manager keys by the unchanged wikiKey lar-URI). Previous-canon is
