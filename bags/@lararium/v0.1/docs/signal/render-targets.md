@@ -364,7 +364,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 1. No emoji. No glyphs. ASCII only.
 2. URI form: `lar://alias:tier@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
 3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
-4. Path holds the three-word root, zero-to-four segments, optional `#fragment`.
+4. Path holds the three-term root, zero-to-four segments, optional `#fragment`.
 
 **Closed example:**
 

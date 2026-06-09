@@ -55,14 +55,14 @@ Named render targets: `record:full` (identity projection of the canonical form),
 
 We carry a palimpsest lineage through this HA.KA.BA reinterpretation.
 
-- SDM (Luka Rejec) feeds the live HAKABA triad pressure.
+- SDM (Luka Rejec) feeds the **hakaba matrix** --- the existential trinity **Ha** (body), **Ka** (soul), **Ba** (psyche); the lar-uri inherits it directly (body → heading, soul → angle, psyche → dynamic).
 - Hawaiian *hā* lends threshold-breath resonance to `ha`.
 - Egyptian soul grammar frames `ka`/`ba` as 'standing double' and 'returning bird'.
 - Flight dynamics lends the orientation triad (yaw · pitch · roll) and keeps the reading on attitude, never mapped position.
-- what3words lends mnemonic three-word arity; `lar:` forks away from geospatial metric.
+- what3words lends mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
 - hoʻokele steers doctrine: hold bearing, infer position.
 
-Source bind (vessel-safe): the SDM source-shelf preface, the SDM third-party license witness, and the SDM Quickstart HAKABA section pin this lineage claim to local canon text.
+Source bind (on the `sdm/` shelf): Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existential trinity of body (ha), soul (ka), and psyche (ba)"*, adapted from the Egyptian *Coffin Texts* / *Book of the Dead*; indexed in *UVG 2e* pp. 230–234. Files: `sdm/Vastlands_Guidebook/`, `sdm/Ultraviolet_Grasslands_and_the_Black_City_2e/`. Hawaiian *hā* layers as palimpsest resonance.
 
 Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
 
@@ -209,7 +209,7 @@ Span sequencing is intentionally **not** encoded in URI authority. Exchange iden
 | Ka | quality | Soul / motive fire — animating charge or character | ADJECTIVE |
 | Ba | dynamic | Psyche / direction — the motion being taken | VERB |
 
-**Mandatory word-count rule:** Each slot is exactly **one lowercase word**. No hyphens, underscores, or spaces within a slot. Fewer than three slots MUST NOT appear. A HA.KA.BA is always a `noun.adjective.verb` triple.
+**Mandatory term-count rule:** Each slot holds exactly **one lowercase term** — a single word, or a hyphen-joined compound (`breach-watch`). The dot separates slots; the hyphen joins within one. No underscores or spaces within a slot. The root carries exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. A HA.KA.BA holds a `noun.adjective.verb` triple.
 
 **Optional sub-path extension:** After the mandatory three-slot HA.KA.BA, additional `/`-separated path segments may follow to navigate within the named territory. Sub-path segments are free-form routing tokens, not HA.KA.BA slots. The stable named graph address strips the sub-path; the sub-path is session-scope navigation only.
 
@@ -406,7 +406,7 @@ A spanSpan record is **consistent** when:
 - **Lamport / Vector clocks** — The chronometer shares surface resemblance (array of counters, nesting relationship) but functions as a **hierarchical scope counter** in a single process — not a distributed causality tracker across concurrent independent processes.
 - **Interval Tree Clocks** (Almeida et al., 2008) — Dynamic participant identity via interval subdivision. Deferred from URI spec; informs MCP chronometer server design.
 - **FTLS RSS Time-Scale Hierarchy** — The five levels (Week/Watch/Turn/Round/Action) are canon game rules. The chronometer's five-position structure derives from this hierarchy.
-- **what3words** — Mnemonic precedent for fixed three-word arity. `lar:` forks from geocoding: roots name attitude-bearing rather than surveyed position.
+- **what3words** — Mnemonic precedent for fixed three-slot arity (a term per slot). `lar:` forks from geocoding: roots name attitude-bearing rather than surveyed position.
 - **FFZ Chronometer Protocol** (Telarus / Lares, 2026) — Fontany-Fuller-Zelenka. Vector chronometer with per-participant phase registers. Source: `lares/research/chronometer/FFZ-Chronometer-Research.md`
 - **Schneier & Raghavan, "Agentic AI's OODA Loop Problem"** (IEEE S&P, 2025) — Nested OODA loops in AI agents; integrity as architecture. Validates the chronometer's problem space independently.
 - **OODA-HA Composable Invariant Modules** (Telarus / Lares, 2026) — Phase-scoped instruction loading with section-level confidence URIs.

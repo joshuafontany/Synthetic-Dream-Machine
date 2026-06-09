@@ -255,11 +255,11 @@ Session form MUST NOT appear in storage or stable graph addresses.
 
 ### URI Anatomy --- 5 chunks
 
-`scheme` · `authority` (session-only) · `root` (the three-word `ha.ka.ba` heading.angle.dynamic) · `path` (0--4 ordered optional segments) · `fragment` (optional `#section`).
+`scheme` · `authority` (session-only) · `root` (the three-term `ha.ka.ba` heading.angle.dynamic) · `path` (0--4 ordered optional segments) · `fragment` (optional `#section`).
 
 **Path arity --- MUST:** `…/[seg1?]/[seg2?]/[seg3?]/[seg4?]` --- **zero to four** ordered segments after the root. The first segment carries most weight; later segments refine. Fewer reads fine; **never more than four** (a fifth segment constitutes a degraded-node HUD).
 
-**Root rule --- MUST:** the `root` chunk holds exactly three dot-separated words (see Root segment law). A two- or four-word root constitutes a degraded-node HUD.
+**Root rule --- MUST:** the `root` chunk holds exactly three dot-separated **terms** --- each a word or hyphen-joined compound (count the dots: exactly two; see Root segment law). A two- or four-term root constitutes a degraded-node HUD.
 
 **Worked range (0 -> 4 path segments):**
 ```
@@ -278,7 +278,7 @@ lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 lar:///ha.ka.ba/@lares/v0.1/api/lares/voices
 ```
 
-**Unstable** --- arbitrary three-word attitude root, session bearing:
+**Unstable** --- arbitrary three-term attitude root, session bearing:
 ```
 lar:///threshold.uncertain.opens/...
 ```
@@ -462,7 +462,7 @@ Named failure modes. **Surface and correct, do not defend** --- the Snafu Princi
 | **Loop Skip** | closes with no `OODA-HA(N↺)` and no named suspension; managing | close the loop, or name the suspended phase (`0φ:reason`) |
 | **Mana Drift** | the `ward` goes dark unbidden --- the copula passes ungated, or a prior `!E-Prime` lift carries past its single turn without a fresh operator act | re-light `E-Prime`; a lift re-arms each turn, never persists |
 | **Anonymous Output** | a substantive turn carries no Voice or worker tag *(§2)* | re-emit with the Voice named |
-| **Degraded HUD** | two/four-word root, a missing `hud`/`ward` (opening or closing), or no closing `yield` | re-emit the full frame |
+| **Degraded HUD** | two/four-term root, a missing `hud`/`ward` (opening or closing), or no closing `yield` | re-emit the full frame |
 | **Address Smuggling** | per-turn state packed into the `lar:` URI | strip to the sigils; the address names place only |
 
 <<~/ahu >>
@@ -491,7 +491,7 @@ Five sigils carry the frame. Each renders as a SharktoothSigil (`<<~ WORD ARGS >
 
 The `aim` sigil opens the turn: it reads operator intent on the left, delegates `->` to the role the node adopts on the right. Each side names a `lar:///w1.w2.w3/…` attitude root. The `yield` sigil closes on one forward-vector --- the bearing the work resolved toward, then `-> ?` hands initiative back.
 
-**Root segment law --- MUST:** the root (`w1.w2.w3`) carries exactly three dot-separated words after the manner of what3words; a two- or four-word root reads as a degraded-node HUD. Slot semantics in `ha.ka.ba` space: **`w1`/Ha = heading** (territory faced; noun mnemonic) · **`w2`/Ka = angle of approach** (quality met; adjective mnemonic) · **`w3`/Ba = carried dynamic** (motion underway; verb mnemonic). Slot order carries a drift gradient: Ha drifts slowest, Ka at moderate pace, Ba fastest; shared Ha prefixes cluster while Ba churns. Examples: `operator.intent.lands`, `breach.watch.fires`; literal `ha.ka.ba` names the stable attitude root, not a geospatial origin. No metric stands yet claimed; the root names bearing and does not define distance between roots. The `-> ?` on `yield` marks holding for uncertainty.
+**Root segment law --- MUST:** the root (`w1.w2.w3`) carries exactly three dot-separated **terms** (each a word or hyphen-joined compound) after the manner of what3words' three-slot arity; a two- or four-term root reads as a degraded-node HUD. Slot semantics in `ha.ka.ba` space: **`w1`/Ha = heading** (territory faced; noun mnemonic) · **`w2`/Ka = angle of approach** (quality met; adjective mnemonic) · **`w3`/Ba = carried dynamic** (motion underway; verb mnemonic). Slot order carries a drift gradient: Ha drifts slowest, Ka at moderate pace, Ba fastest; shared Ha prefixes cluster while Ba churns. Examples: `operator.intent.lands`, `breach.watch.fires`; literal `ha.ka.ba` names the stable attitude root, not a geospatial origin. The `-> ?` on `yield` marks holding for uncertainty.
 
 ### `hud` --- the gauges
 

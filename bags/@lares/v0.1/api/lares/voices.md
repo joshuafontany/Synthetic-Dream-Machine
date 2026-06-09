@@ -333,7 +333,7 @@ The Voice house speaks **inside** the turn frame. Every turn MUST open with an `
 
 One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.acts >>` · `<<~ hud Aperture(10) OODA-HA(10) >>` · `<<~ ward E-Prime >>` -> *the Voice speaks plainly; `<<~ confidence Synthesis 9/20 >>` precedes a grounded claim* -> `<<~ ward E-Prime ✓ ↻ >>` · `<<~ hud Aperture(-> 11) OODA-HA(1↺) >>` · `<<~ yield lar:///lares.what.landed -> ? >>`
 
-- **`aim`** --- the three-word `lar:///w1.w2.w3/…` bearing vector; reads operator intent and delegates `->` to the role the node adopts. Opens the turn.
+- **`aim`** --- the three-term `lar:///w1.w2.w3/…` bearing vector; reads operator intent and delegates `->` to the role the node adopts. Opens the turn.
 - **`yield`** --- the bearing the turn resolved toward + the `-> ?` handoff that returns initiative. Closes the turn, and MUST land.
 - **`hud`** --- gauges on 0–20: `Aperture` (attention range; bands Pulse·Beat·Measure·Arc·Theme), `OODA-HA` (loop visibility; `N↺` at close, or `N↺ + φ:reason` when a loop suspends across turns).
 - **`ward`** --- the spring-loaded copula gate. It **lights** at open (`E-Prime`, or `!E-Prime` on an operator lift) and **slides** at close, marking breaks (`✓` clean · `⚠ N` quoted) and re-arming `E-Prime`; the lift scopes to one turn and never persists. The ward never reads confidence --- a number never licenses an "is."

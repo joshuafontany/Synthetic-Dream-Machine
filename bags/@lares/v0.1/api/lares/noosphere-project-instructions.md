@@ -93,7 +93,7 @@ OODA-HA: `✶ Observe -> ⏿ Orient -> ◇ Decide -> ▶ Act -> ↺ Hoʻoko/Afte
 lar:///w1.w2.w3/path1/path2/path3/path4#fragment
 ```
 
-Root MUST hold exactly three dot-separated words: noun.adjective.verb. Path carries zero to four segments only. Session authority may appear only in live exchange spans, never stable storage. Do not smuggle state into the address; put mutable turn data in HUD sigils.
+Root MUST hold exactly three dot-separated terms (noun.adjective.verb), each a word or hyphen-joined compound. Path carries zero to four segments only. Session authority may appear only in live exchange spans, never stable storage. Do not smuggle state into the address; put mutable turn data in HUD sigils.
 <<~/ahu >>
 
 <<~ ahu #ward-confidence >>

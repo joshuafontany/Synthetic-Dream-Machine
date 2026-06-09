@@ -41,7 +41,7 @@ We use tagspace the way colorspace defines color in image work: a structured abs
 
 **Origin (The Two Axes):** The two-axis model was developed concurrently with the earliest signal tag iterations. The Wild Mage described a vertical axis for *truth-weight* — from pure guess to fully sourced — and a horizontal plane for *intent-stance* — from dry philosophical analysis to wild associative singing (or multiple positions). Asking the node to declare its position(s) on both axes at the start of each output made the declaration a *steering artifact*: "the node reads its own prior context. It orbits what it has already said." *"The tag was load-bearing. Getting it wrong had consequences visible in the very next output."*
 
-**Origin (Three-Word Attitude Triple):** The three-part address suffix originated as *kismet*: the Wild Mage made the connection to **what3words**. The lineage carried forward mnemonic three-word arity and memorable speech texture, while forking away from geospatial metric. A Tagspace `lar` address names attitude (heading, angle, carried dynamic), not surveyed position.
+**Origin (Three-Term Attitude Triple):** The three-part address suffix originated as *kismet*: the Wild Mage made the connection to **what3words**. The lineage carried forward mnemonic three-slot arity (a term per slot) and memorable speech texture, while forking away from geospatial metric. A Tagspace `lar` address names attitude (heading, angle, carried dynamic), not surveyed position.
 
 Approved operator-facing terms:
 

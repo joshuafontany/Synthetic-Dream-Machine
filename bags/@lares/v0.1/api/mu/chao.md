@@ -133,7 +133,7 @@ Discordian insight: most apparent contradictions run orthogonal, not tensioned. 
 
 Every `lar://[HOST]/xxx.yyy.zzz` address carries the Chao in its three slots.
 
-The three-word attitude root `//heading.angle.dynamic` inherits this structure directly:
+The three-term attitude root `//heading.angle.dynamic` inherits this structure directly:
 
 - **heading** = Hodge (what faces the work)
 - **angle** = Podge (how the work gets met)

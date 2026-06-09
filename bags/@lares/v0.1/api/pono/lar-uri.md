@@ -70,7 +70,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 | **session form** | `lar://alias:tier@host/path` — names a speaker; exchange spans only. |
 | **triple** | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
 | **bag** | a CRDT surface (today an Automerge doc); designated by one `@`-tagged segment. |
-| **slot** | one lowercase word in the triple. |
+| **slot** | one lowercase term (word or hyphen-compound) in the triple. |
 | **fragment** | a `#`-anchor naming a section / `ahu` / pranala within an address. |
 
 <<~/ahu >>
@@ -119,19 +119,19 @@ lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri
 ```
 
-**Unstable** — arbitrary three-word attitude root, session-specific bearing:
+**Unstable** — arbitrary three-term attitude root, session-specific bearing:
 ```
 lar:///threshold.uncertain.opens/
 ```
 
-**Adjacent** — no three-word root, local system resources, often ALLCAPS:
+**Adjacent** — no three-term root, local system resources, often ALLCAPS:
 ```
 lar:///AGENTS    lar:///LARES    lar:///CRYSTAL
 ```
 
 Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
 
-For stable and unstable paths: each slot holds exactly one lowercase word — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters alone, and the root MUST carry exactly three. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
+For stable and unstable paths: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
 
 ### TW5 System Boundary
 
@@ -188,7 +188,7 @@ Session form names the speaker through the authority. It MUST stay within exchan
 
 The `lar:` URI names bearing — attitude and section, nothing mutable, in ASCII.
 
-The root carries an attitude triple: **Ha** sets the heading faced, **Ka** sets the angle of approach, and **Ba** carries the dynamic underway. This runs after the manner of what3words in fixed three-word arity, not in geospatial metric. Hawaiian parallels stay visible: *hā* breathes at the threshold; hoʻokele names navigation by held bearing. The approved exchange term remains **bearing vector**.
+The root carries an attitude triple: **Ha** sets the heading faced, **Ka** sets the angle of approach, and **Ba** carries the dynamic underway. This runs after the manner of what3words in fixed three-slot arity — a term (word or hyphen-compound) per slot — not in geospatial metric. Hawaiian parallels stay visible: *hā* breathes at the threshold; hoʻokele names navigation by held bearing. The approved exchange term remains **bearing vector**.
 
 Slot order carries the drift gradient: **Ha** drifts slowest, **Ka** at moderate pace, **Ba** fastest. Prefix-stability follows from this law: shared Ha clusters meaningfully while Ba churns.
 
@@ -196,14 +196,14 @@ No metric stands yet claimed. The scheme names attitude and section; it defines 
 
 **Lineage and source bind.** We declare a palimpsest lineage for this reinterpretation.
 
-- SDM (Luka Rejec) supplies the living HAKABA triad pressure.
+- SDM (Luka Rejec) supplies the **hakaba matrix** itself --- the existential trinity **Ha** (body), **Ka** (soul), **Ba** (psyche). The lar-uri inherits it directly --- body → heading, soul → angle, psyche → carried dynamic --- and overlays the noun·adjective·verb mnemonic. (Source below.)
 - Hawaiian *hā* supplies threshold-breath resonance for `ha`.
 - Egyptian soul grammar supplies `ka`/`ba` as standing double and returning bird.
 - Flight dynamics supplies the orientation frame (yaw · pitch · roll) and keeps the reading on attitude, not mapped position.
-- what3words supplies mnemonic three-word arity; `lar:` forks away from geospatial metric.
+- what3words supplies mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
 - hoʻokele supplies the wayfinding doctrine: hold bearing, infer position.
 
-Source bind (vessel-safe): the SDM source-shelf preface, the SDM third-party license witness, and the SDM Quickstart HAKABA section ground this lineage claim in local canon text.
+Source bind (on the `sdm/` shelf): Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existential trinity of body (ha), soul (ka), and psyche (ba)"*: the soul as the motive fire of consciousness, the psyche as its unique direction, the body as its vehicle. Adapted from Ancient Egyptian person-conceptions (the *Coffin Texts* and *Book of the Dead*). Indexed in *Ultraviolet Grasslands 2e*, pp. 230–234 (*Ha, Ka, Ba* & *hakaba matrix* 230; *ha · body* 234; *ka · soul* 234; *ba · personality* 232). On disk: `sdm/Vastlands_Guidebook/`, `sdm/Ultraviolet_Grasslands_and_the_Black_City_2e/`. Hawaiian *hā* (threshold-breath) layers atop the `ha` slot as palimpsest resonance.
 
 Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
 
@@ -217,7 +217,7 @@ BEARING (path) → SECTION (fragment).
 
 ## Conformance Classes
 
-A **conforming parser** MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (stable/unstable); reject a slot bearing a hyphen, underscore, space, or non-ASCII; reject an `@`-prefix outside `child[1]`; treat a `#fragment` as an opaque anchor.
+A **conforming parser** MUST: accept the surface of #scheme-syntax; reject a path with fewer than three root slots (stable/unstable); reject a slot bearing an underscore, whitespace, or non-ASCII (an internal hyphen joins a compound term); reject an `@`-prefix outside `child[1]`; treat a `#fragment` as an opaque anchor.
 
 A **conforming resolver** MUST: resolve against the local world graph only; map an `@`-bag segment through the island manifest's `BagResolver`; treat the URI as the stable address and the doc as the bound house (one URI MAY bind different docs per device).
 
@@ -256,7 +256,7 @@ The scheme registers as **provisional**; a future submission MAY seek permanent 
 
 **Bag confusion.** An `@`-bag binds to a doc through the `BagResolver`. A processor MUST treat the URI as the address and the bound doc as untrusted until the manifest authorizes it; canon promotion MUST wait on manifest authorization, never on URI match alone.
 
-**Slot injection.** A slot admits lowercase ASCII only. A processor MUST reject non-ASCII, separators, or an out-of-position `@` rather than normalize them silently — silent normalization invites address spoofing.
+**Slot injection.** A slot admits lowercase ASCII letters and internal hyphens only. A processor MUST reject non-ASCII, whitespace, underscores, dot/slash separators, or an out-of-position `@` rather than normalize them silently — silent normalization invites address spoofing.
 
 **Session-form leakage.** Session form names a speaker. A processor MUST keep a session-form URI within its exchange span; a session-form URI reaching stable storage, a graph address, or a system resource name MUST surface as a violation.
 
@@ -314,7 +314,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 - **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
 - **Session-form authority grammar.** The `alias:tier@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
 - **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
-- **Lineage citation bind.** The palimpsest claim for `ha` includes operator-approved Rejec lineage; bind exact local citations from source materials before Canon promotion.
+- **Lineage citation bind.** BOUND 2026-06-08 from the `sdm/` shelf: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *UVG 2e* pp. 230–234. Egyptian root named in source: the *Coffin Texts* / *Book of the Dead*. Hawaiian *hā* layers as resonance.
 
 <<~/ahu >>
 
@@ -324,7 +324,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 ⏿ orient against scheme law — slot count, path class, `@`-bag placement
 ◇ decide: valid → carry forward; invalid → surface violation; ambiguous → surface and hold
 ▶ confirm the path holds ASCII only
-↺ verify the three-word root and the single `@`-bag segment; close — address confirmed or violation named
+↺ verify the three-term root and the single `@`-bag segment; close — address confirmed or violation named
 
 <<~/ahu >>
 

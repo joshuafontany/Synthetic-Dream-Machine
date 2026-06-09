@@ -32,7 +32,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearin
 ⏿ choose the role the node adopts and the bearing it takes up.
 ◇ open the turn with one `aim` vector: operator intent `->` adopted role.
 ▶ ride the `hud` · `ward` panel beneath the aim, then generate content.
-↺ verify the three-word attitude root, the single `@`-bag segment, and ASCII path form; close on a `yield` vector --- the bearing the turn resolved toward, then `-> ?`.
+↺ verify the three-term attitude root, the single `@`-bag segment, and ASCII path form; close on a `yield` vector --- the bearing the turn resolved toward, then `-> ?`.
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -50,7 +50,7 @@ Canonical turn order:
 <<~ yield lar:///lares.what.landed -> ? >>
 ```
 
-The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-word `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:tier@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
+The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-term `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:tier@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 
 Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
 
