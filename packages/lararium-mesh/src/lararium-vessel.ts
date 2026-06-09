@@ -1,4 +1,6 @@
 import type { LarTiddlerStore } from "./tiddler-store.js";
+import type { Repo } from "@automerge/automerge-repo";
+import type { CompositeStore } from "./composite-store.js";
 
 /**
  * LarOpenPhase — canonical vessel boot sequence shared by all platform runtimes.
@@ -46,4 +48,24 @@ export interface LarariumVesselResult<
   catalogHandleUrl: string;
   larariumDocUrl: string | null;
   phase: LarOpenPhase;
+}
+
+/**
+ * VesselResult — the ONE shared vessel-open result (no vessel-by-type). Both node and
+ * browser return this; only the substrate type-params differ (TPool = the platform island
+ * pool, TAdmin = the platform admin VM). Substrate extras (node's eventBus/stopTick,
+ * browser's engineUpdated) extend this — never a fork of the common surface. The retired
+ * LarVessel wrapper has no slot here.
+ */
+export interface VesselResult<TPool, TAdmin> {
+  pool:             TPool;
+  repo:             Repo;
+  store:            CompositeStore;
+  admin:            TAdmin;
+  activeWikiId:     string;
+  activeWikiSource: "boot-arg" | "admin-marker";
+  wikiDocUrl:       string;
+  catalogHandleUrl: string;
+  larariumDocUrl:   string | null;
+  phase:            LarOpenPhase;
 }

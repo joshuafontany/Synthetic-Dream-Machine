@@ -1,7 +1,7 @@
 import { bagStackFromRec, recipeUri } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { stringArg } from "./handler-args.js";
-import type { WikiResidencyOptions } from "./wiki-handlers.js";
+import type { WikiResidencyOptions } from "./wiki-handler-options.js";
 
 /**
  * `lares wiki pin <slug>` — pin every bag in the wiki's recipe.

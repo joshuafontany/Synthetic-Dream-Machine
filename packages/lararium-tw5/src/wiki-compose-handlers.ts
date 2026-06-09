@@ -9,7 +9,7 @@ import {
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
-import type { WikiComposeOptions } from "./wiki-handlers.js";
+import type { WikiComposeOptions } from "./wiki-handler-options.js";
 
 /**
  * `lares wiki add-bag <slug> <bag-uri> [--at <position>]` — add a bag to

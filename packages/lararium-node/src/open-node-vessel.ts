@@ -23,7 +23,7 @@ import { NodeWSServerAdapter }          from "@automerge/automerge-repo-network-
 import type { WebSocketServer }         from "isomorphic-ws";
 import type {
   LarDoc,
-  LarariumVesselOptions, LarariumVesselResult, LarOpenPhase,
+  LarariumVesselOptions, VesselResult, LarOpenPhase,
   VesselBootstrap, VesselCoreAssembly,
 } from "@lararium/mesh";
 import {
@@ -88,24 +88,11 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   rootDir?: string;
 }
 
-export interface NodeVesselResult extends LarariumVesselResult<
-  never,            // no main-thread LarVessel — the island pool is the live surface
-  VesselIslandPool,
-  Repo,
-  CompositeStore
-> {
-  /** The wiki slug this vessel actually mounted after admin-marker resolution. */
-  activeWikiId:     string;
-  /** Whether the mounted wiki came from CLI boot args or the admin marker. */
-  activeWikiSource: "boot-arg" | "admin-marker";
-  /** Started event bus — ingress rings registered; tick loop running at 20 Hz. */
-  eventBus:         LarEventBusImpl;
-  /** Island Pool — two-state VM lifecycle (wela/anu) + orthogonal pin flag. */
-  vmManager:        VesselIslandPool;
-  /** Admin VM — operator-private coordinator AND the operator's authn/z home. */
-  admin:            AdminVmResult;
+export interface NodeVesselResult extends VesselResult<VesselIslandPool, AdminVmResult> {
+  /** Started event bus — ingress rings registered; tick loop running at 20 Hz (node substrate). */
+  eventBus:  LarEventBusImpl;
   /** Stop the N-accumulator tick loop (call on graceful shutdown). */
-  stopTick:         () => void;
+  stopTick:  () => void;
 }
 
 const blankMemeStore = (repo: Repo): (() => DocHandle<LarDoc>) =>
@@ -429,13 +416,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   return {
     activeWikiId: slotActiveWikiId,
     activeWikiSource,
-    pool: result.pool, repo, eventBus,
+    pool: result.pool, repo,
     store: result.assembly.composite,
-    vmManager: result.pool,
     admin: adminVm,
+    wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
-    larariumDocUrl: result.assembly.islandHandle.url,
+    larariumDocUrl:   result.assembly.islandHandle.url,
     phase: "live",
+    eventBus,
     stopTick: () => { void result.pool.disposeAll(); },
   };
 }

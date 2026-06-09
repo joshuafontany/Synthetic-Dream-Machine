@@ -3,7 +3,7 @@ import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import { type LarDoc, wikiDraftLarUri, wikiLarUri } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { numberArg, stringArg } from "./handler-args.js";
-import type { DraftHandlerOptions, WikiMintHandlerOptions } from "./wiki-handlers.js";
+import type { DraftHandlerOptions, WikiMintHandlerOptions } from "./wiki-handler-options.js";
 
 export function makeDraftReactor(opts: DraftHandlerOptions): VerbReactor {
   return async (args, ctx) => {

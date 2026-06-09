@@ -22,8 +22,8 @@ import {
   CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID, corpusBagId,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
-  BAG_IDS, slugFromUri, BagResidencyManager, CompositeStore,
-  type LarDoc, type LarariumVesselOptions, type LarariumVesselResult,
+  BAG_IDS, slugFromUri, BagResidencyManager,
+  type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly,
 }                                            from "@lararium/mesh";
 import {
@@ -120,17 +120,10 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   verbTable?:      VerbTable;
 }
 
-/** Unified vessel result (no vessel-by-type): the keel slot for the main-thread vessel
- *  stays `never` (node + browser both expose the island pool as the live surface). */
-export interface BrowserVesselResult extends LarariumVesselResult<
-  never,
-  BrowserVesselIslandPool,
-  Repo,
-  CompositeStore
-> {
-  wikiDocUrl:    string;
+/** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
+export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, BrowserAdminVmResult> {
+  /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
-  admin:         BrowserAdminVmResult;
 }
 
 async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
@@ -376,6 +369,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     repo,
     store: result.assembly.composite,
     admin,
+    activeWikiId:     slotActiveWikiId,
+    activeWikiSource: "boot-arg",
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
     larariumDocUrl:   result.assembly.islandHandle.url,
