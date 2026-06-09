@@ -59,10 +59,8 @@ import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
-  makeInitWikiReactor, makeOpenWikiReactor,
   makePinWikiReactor, makeUnpinWikiReactor,
   makeAddBagReactor, makeRemoveBagReactor,
-  makePruneStaleReactor, makeDraftReactor,
   makeEpochBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
   makeCatalogAccessor,
@@ -318,23 +316,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     // composite-only + residency verbs already moved into the worker (wireWorkerVerbs).
     wireVerbs: (registry, assembly) => {
       seedVesselDefaults(registry);
-      // ONE catalog-driven accessor replaces the per-verb catalogHandle/islandHandle
-      // plumbing — reaches @catalog (its own URL) + any registered bag via repo.find.
+      // ONE catalog-driven accessor for the residency-bound catalog-writers (bag-epoch
+      // / rotate-recipe) that remain main-side until rung 5 — reaches @catalog + any
+      // registered bag via repo.find (access≠load).
       const catalog = makeCatalogAccessor(repo, catalogHandle.url);
-      const wikiMintOpts = {
-        composite:   assembly.composite,
-        repo,
-        catalog,
-        rootDir:     rootDirOpt ?? repoRoot,
-        operatorDid: async () => "0x" + operatorIdentity.verifyingKey,
-      };
       registry.register("sync-wiki", async (args, ctx) =>
         vmManager.placeWikiVerb(slotActiveWikiId, {
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
         }),
       );
-      registry.register("init-wiki",     makeInitWikiReactor(wikiMintOpts));
-      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite, catalog }));
+      // init-wiki / open-wiki / draft / prune-stale moved worker-ward (operator-admin-behavior
+      // wireWorkerVerbs) — composite+accessor only, no residency dep. The residency-bound
+      // verbs below stay main-side until the BagResidencyManager itself relocates (rung 5).
       registry.register("residency",     makeResidencyStatsReactor({ residency }));
       registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
       registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
@@ -342,8 +335,6 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo, residency }));
       registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo, residency, catalog }));
       registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo, residency, catalog }));
-      registry.register("prune-stale",   makePruneStaleReactor(wikiMintOpts));
-      registry.register("draft",         makeDraftReactor({ composite: assembly.composite }));
     },
 
     // After the admin VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.

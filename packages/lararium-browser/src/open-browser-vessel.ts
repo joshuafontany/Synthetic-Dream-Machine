@@ -31,10 +31,8 @@ import {
   planActiveWikiSlot, selectActiveWikiSlug,
   addReadOnlyLayer, seedVesselDefaults,
   openVesselCore,
-  makeInitWikiReactor, makeOpenWikiReactor,
   makePinWikiReactor, makeUnpinWikiReactor,
   makeAddBagReactor, makeRemoveBagReactor,
-  makePruneStaleReactor, makeDraftReactor,
   makeEpochBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
   makeCatalogAccessor,
@@ -300,21 +298,16 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     wireVerbs: (registry, assembly) => {
       seedVesselDefaults(registry);
-      // Verb parity with node — the mint/compose/residency-stats verbs (now tw5-resident).
-      // ONE catalog-driven accessor (access≠load) replaces catalogHandle/islandHandle.
+      // Verb parity with node. init-wiki / open-wiki / draft / prune-stale moved
+      // worker-ward (operator-admin-behavior wireWorkerVerbs); the residency-bound
+      // verbs below stay main-side until the manager relocates (rung 5). ONE
+      // catalog accessor (access≠load) for the catalog-writers that remain.
       const catalog = makeCatalogAccessor(assembly.repo, catalogHandle.url);
-      const wikiMintOpts = {
-        composite: assembly.composite, repo: assembly.repo, catalog,
-        rootDir: "",
-        operatorDid: async () => "0x" + operatorDid,
-      };
       registry.register("sync-wiki", async (args, ctx) =>
         vmManager.placeWikiVerb(slotActiveWikiId, {
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
         }),
       );
-      registry.register("init-wiki",     makeInitWikiReactor(wikiMintOpts));
-      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite, catalog }));
       registry.register("residency",     makeResidencyStatsReactor({ residency }));
       registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
       registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
@@ -322,8 +315,6 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
       registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
       registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
-      registry.register("prune-stale",   makePruneStaleReactor(wikiMintOpts));
-      registry.register("draft",         makeDraftReactor({ composite: assembly.composite }));
     },
 
     afterAdmin: (_a, assembly) => {

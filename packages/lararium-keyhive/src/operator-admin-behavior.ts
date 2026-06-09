@@ -16,6 +16,8 @@
 import {
   makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors,
+  makeCatalogAccessor,
+  makeInitWikiReactor, makeOpenWikiReactor, makeDraftReactor, makePruneStaleReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
@@ -54,6 +56,27 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       registry.register("pin",           makePinReactor(ctx.post));
       registry.register("unpin",         makeUnpinReactor(ctx.post));
       registry.register("register-cold", makeRegisterColdReactor(ctx.post));
+
+      // Composite + accessor verbs (no residency dep) — now worker-local, reaching
+      // @catalog via the accessor over ctx.repo/ctx.catalogUrl (access≠load). The
+      // catalog-writers (init-wiki) + selectors (open-wiki) + draft + prune-stale
+      // ride the same verify-then-delegate gate. operatorDid matches the main
+      // reactors exactly ("0x"+operatorVerifyingKey) so draft keys never drift.
+      // draft needs no catalog — register it regardless of slot.
+      registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
+      if (ctx.catalogUrl) {
+        const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
+        const wikiMintOpts = {
+          composite:   ctx.composite,
+          repo:        ctx.repo,
+          catalog,
+          rootDir:     "",
+          operatorDid: async () => "0x" + adminAuth.operatorVerifyingKey,
+        };
+        registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
+        registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog }));
+        registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
+      }
     },
     verifierFactory: async (ctx: IslandContext) => {
       const { keyhive, did } = await bootAdminKeyhive({
