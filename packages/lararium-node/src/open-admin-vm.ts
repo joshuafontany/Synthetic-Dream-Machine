@@ -115,6 +115,12 @@ export interface AdminVmResult {
    * pin/unpin/register-cold (keyhive-gated); main routes to the BagResidencyManager.
    */
   onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
+  /**
+   * Bind the wiki-alert DELIVERY: the worker named a wiki whose pending change needs a
+   * reboot; main places a `system-alert` verb into that wiki's live island (skip if
+   * unmounted). Call after the pool exists.
+   */
+  onWikiAlert:  (fn: (wikiSlug: string, message: string, cause?: string) => void) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }
@@ -165,6 +171,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     resolveBinding: core.resolveBinding,
     onEvictRequest: core.onEvictRequest,
     onResidencyOp:  core.onResidencyOp,
+    onWikiAlert:    core.onWikiAlert,
     dispose:        core.dispose,
   };
 }

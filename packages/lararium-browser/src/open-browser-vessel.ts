@@ -339,6 +339,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         else if (op === "unpin") residency.unpin(bagId);
         else                     residency.registerCold(bagId);
       });
+      // Wiki-alert delivery — place a system-alert verb into the affected wiki's live
+      // island (skip if not mounted). Same isomorphic seam as node. wikiId = host:slug.
+      admin.onWikiAlert((wikiSlug, message, cause) => {
+        void vmManager.placeWikiVerb(`${hostId}:${wikiSlug}`, {
+          verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "admin",
+        }).catch(() => { /* not mounted — best-effort */ });
+      });
       return vmManager;
     },
 

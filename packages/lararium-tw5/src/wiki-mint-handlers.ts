@@ -8,6 +8,7 @@ import {
   LARARIUM_DOC_URI,
   emptyLarDoc,
   mutableLarRecord,
+  mkAdminWikiAlert,
   recipeUri,
   wikiDraftLarUri,
   wikiLarUri,
@@ -109,7 +110,8 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     }
 
     const marker = await opts.composite.get(ACTIVE_WIKI_URI);
-    if (readActiveWikiSlug(marker) === slug) {
+    const currentSlug = readActiveWikiSlug(marker);
+    if (currentSlug === slug) {
       return { slug, status: "already-active", liveApplied: true };
     }
 
@@ -117,11 +119,19 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     const record: LarTiddlerRecord = buildActiveWikiRecord(slug, "lares-cli:wiki-open");
     await opts.composite.put(record, origin, { bag: ADMIN_BAG_ID });
 
+    // Reboot-pending: the active-wiki marker lives in @admin (the running wiki doesn't
+    // load it) — the switch only takes effect on next boot. Alert the wiki being
+    // switched AWAY from (the one currently live), if any.
+    if (currentSlug) {
+      opts.post(mkAdminWikiAlert({ wikiSlug: currentSlug, message: `Active wiki will switch to "${slug}" — reboot to load it.`, cause: "open-wiki" }));
+    }
+
     return {
       slug,
       status: "selected-for-next-boot",
       liveApplied: false,
-      note: "active wiki marker updated; the current vessel keeps its mounted wiki until the next `lares serve` boot",
+      rebootRequired: true,
+      note: "active wiki marker updated; the current wiki keeps mounted until the next `lares serve` boot (alert seeded)",
     };
   };
 }

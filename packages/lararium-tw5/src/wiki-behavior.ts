@@ -14,13 +14,20 @@
 
 import {
   mkWikiVerbResult,
+  TEMP_BAG,
   type BatchMode,
   type WikiMsg_PlaceVerb,
   type Verb,
+  type ChangeOrigin,
 } from "@lararium/mesh";
 import { registerActionReactors } from "./action-handler.js";
 import { VerbTable } from "./verb-dispatcher.js";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
+
+/** The reboot-pending alert tiddler title — a volatile @temp system tiddler the
+ *  operator surface renders as a banner. Self-clearing: @temp wipes on reboot, and
+ *  the reboot is exactly what applies the pending change. */
+export const REBOOT_ALERT_TITLE = "$:/temp/lares/alert/reboot-pending";
 
 export interface WikiBehaviorOptions {
   /**
@@ -42,6 +49,28 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       // LOAD reactors wrapping each bag mutation in withEffectRecord (audit).
       _registry = new VerbTable();
       registerActionReactors(_registry, { composite: ctx.composite });
+      // system-alert — the admin worker (via main → pool.placeWikiVerb) delivers a
+      // reboot-pending notice; the island writes it into its OWN @temp (volatile,
+      // self-clearing on reboot). The admin never reaches into this composite directly.
+      _registry.register("system-alert", async (args) => {
+        const message = typeof args["message"] === "string" ? args["message"] : "A change requires a reboot to apply.";
+        const cause   = typeof args["cause"]   === "string" ? args["cause"]   : "";
+        const origin: ChangeOrigin = { kind: "lares-verb", requestId: `alert-${Date.now()}` };
+        await ctx.composite.put(
+          {
+            tiddler: {
+              title:       REBOOT_ALERT_TITLE,
+              text:        message,
+              "alert-kind": "reboot-pending",
+              cause,
+              ts:          new Date().toISOString(),
+            },
+          },
+          origin,
+          { bag: TEMP_BAG },
+        );
+        return { seeded: true, title: REBOOT_ALERT_TITLE };
+      });
       _cleanup = opts.onBoot?.(ctx);
     },
 

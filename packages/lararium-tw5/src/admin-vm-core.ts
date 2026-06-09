@@ -46,6 +46,7 @@ import {
   type AdminMsg_ResolveBindingResult,
   type AdminMsg_EvictRequest,
   type AdminMsg_ResidencyOp,
+  type AdminMsg_WikiAlert,
   type BatchMode,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
@@ -128,6 +129,13 @@ export interface AdminVmCore {
    * (which stays at the resource). Set after the manager exists. Absent → fail closed.
    */
   onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
+  /**
+   * Register the wiki-alert DELIVERY: the worker decided a change needs a reboot to
+   * apply (admin:wiki-alert) and names the affected wiki; main routes here to place a
+   * `system-alert` verb into that wiki's live island (skip if not mounted). Set after
+   * the pool exists. Fire-and-forget; absent → alerts silently dropped.
+   */
+  onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => void;
 }
 
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
@@ -140,6 +148,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   let _evictHandler: ((bagId: string) => Promise<void>) | null = null;
   // Residency-op mechanism — set via onResidencyOp() after the manager exists.
   let _residencyHandler: ((op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) | null = null;
+  // Wiki-alert delivery — set via onWikiAlert() after the pool exists.
+  let _wikiAlertHandler: ((wikiSlug: string, message: string, cause?: string) => void) | null = null;
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
@@ -248,6 +258,15 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       return;
     }
 
+    if (raw.type === "admin:wiki-alert") {
+      // Sovereign-worker: the worker decided a change needs a reboot to apply and named
+      // the affected wiki; main delivers the alert into that wiki's live island (the
+      // handler skips unmounted ones). Fire-and-forget — no result back to the worker.
+      const msg = raw as AdminMsg_WikiAlert;
+      _wikiAlertHandler?.(msg.wikiSlug, msg.message, msg.cause);
+      return;
+    }
+
     if (raw.type === "admin:delegate-verb") {
       const msg = raw as AdminMsg_DelegateVerb;
       if (!_registry) {
@@ -329,6 +348,9 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     },
     onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => {
       _residencyHandler = fn;
+    },
+    onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => {
+      _wikiAlertHandler = fn;
     },
     dispose: () => {
       clearTimeout(eaTimer);

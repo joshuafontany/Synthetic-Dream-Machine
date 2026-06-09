@@ -3,6 +3,7 @@ import {
   bagStackFromRec,
   recipeUri,
   mkAdminResidencyOp,
+  mkAdminWikiAlert,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
@@ -58,6 +59,9 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
     // Pono: no live-layer mount. The recipe change syncs; each island mounts the bag
     // when it reconciles its own stack. Command main to pin the bag's residency.
     opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "pin", bagId: bagUrl, reason: `wiki:${slug}` }));
+    // Reboot-pending: the recipe lives in @catalog (the island doesn't load it), so the
+    // mount only applies on next boot — alert the live island.
+    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag added to "${slug}" — reboot to mount it.`, cause: "add-bag" }));
 
     return {
       slug,
@@ -65,7 +69,8 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
       status: "added",
       bagUrl,
       stack: nextStack,
-      note: "recipe updated + synced; islands mount on reconcile (next boot / F-arc live-watch)",
+      rebootRequired: true,
+      note: "recipe updated + synced; islands mount on reconcile (reboot — alert seeded to live island)",
     };
   };
 }
@@ -120,6 +125,7 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     // Pono: no live-layer unmount. The recipe change syncs; each island drops the bag
     // when it reconciles. Command main to release the bag's pin.
     opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));
+    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag removed from "${slug}" — reboot to drop it.`, cause: "remove-bag" }));
 
     return {
       slug,
@@ -127,7 +133,8 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
       status: "removed",
       bagUrl,
       stack: nextStack,
-      note: "recipe updated + synced; islands drop on reconcile (StoryList drain is F-arc)",
+      rebootRequired: true,
+      note: "recipe updated + synced; islands drop on reconcile (reboot — alert seeded to live island)",
     };
   };
 }

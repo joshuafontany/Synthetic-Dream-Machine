@@ -14,14 +14,15 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type LarTiddlerRecord } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarTiddlerRecord } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import type { CatalogAccessor } from "./catalog-accessor.js";
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
-/** A fire-and-forget poster for worker→main residency-op commands. */
-export type ResidencyOpPost = (msg: AdminMsg_ResidencyOp) => void;
+/** A fire-and-forget poster for worker→main commands: residency-op (pin/unpin/
+ *  register-cold) and wiki-alert (reboot-pending notice to affected live islands). */
+export type ResidencyOpPost = (msg: AdminMsg_ResidencyOp | AdminMsg_WikiAlert) => void;
 let _opSeq = 0;
 
 /** Build a residency mutator reactor: gate the verb in-worker, command main's manager. */

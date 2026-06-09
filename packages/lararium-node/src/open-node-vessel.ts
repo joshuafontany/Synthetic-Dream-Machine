@@ -373,6 +373,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         else if (op === "unpin") residency.unpin(bagId);
         else                     residency.registerCold(bagId);
       });
+      // Wiki-alert delivery: the worker named an affected wiki; place a system-alert verb
+      // into that wiki's live island (skip silently if not mounted). wikiId = host:slug.
+      adminVm.onWikiAlert((wikiSlug, message, cause) => {
+        void vmManager.placeWikiVerb(`${hostId}:${wikiSlug}`, {
+          verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "admin",
+        }).catch(() => { /* not mounted / no live island — best-effort */ });
+      });
       return vmManager;
     },
 

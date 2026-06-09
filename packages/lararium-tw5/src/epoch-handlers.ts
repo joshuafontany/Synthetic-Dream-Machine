@@ -22,7 +22,7 @@ import type { Repo, AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type LarDoc,
-  emptyLarDoc, mutableLarRecord, mkAdminResidencyOp,
+  emptyLarDoc, mutableLarRecord, mkAdminResidencyOp, mkAdminWikiAlert,
   wikiLarUri, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
@@ -36,6 +36,9 @@ export interface EpochHandlerOptions {
   /** Catalog accessor — updates the oracle tiddler that points at the bag's
    *  Automerge doc URL, via the registry doc (access≠load). */
   readonly catalog: CatalogAccessor;
+  /** Poster for worker→main commands — residency-op (register-cold) + wiki-alert
+   *  (reboot-pending notice to affected live islands). */
+  readonly post:    ResidencyOpPost;
 }
 
 /**
@@ -114,9 +117,15 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
     // No live-composite layer swap, no residency re-pin: the oracle change syncs;
     // islands reconcile on their own; the manager keys by the unchanged bag lar-URI.
 
+    // Reboot-pending: one bag → many wikis. Scan @catalog recipes for those whose
+    // bag-stack includes this bag, and alert each (main skips unmounted ones). The
+    // oracle now points at the new doc, but a live island has the OLD doc mounted.
+    const alertedWikis = await alertWikisUsingBag(opts, bagUrl, "bag-epoch");
+
     return {
       bagUrl,
       oldDocUrl,
+      alertedWikis,
       newDocUrl:    newHandle.url,
       tiddlerCount,
       tombstoneCount,
@@ -135,10 +144,7 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
 // keeps the old generation accessible read-only. Mirrors Nix's
 // generation-pinning + GC pattern at the recipe granularity.
 
-export interface RotateRecipeOptions extends EpochHandlerOptions {
-  /** Residency-op poster — register-cold the previous-canon underlay (worker→main). */
-  readonly post: ResidencyOpPost;
-}
+export type RotateRecipeOptions = EpochHandlerOptions;
 
 /**
  * `lares wiki rotate-recipe <slug>` — fresh canonical, old retained as
@@ -249,6 +255,9 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     // no wiki re-pin (manager keys by the unchanged wikiKey lar-URI). Previous-canon is
     // a NEW bag → command main to register it cold via admin:residency-op.
     opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "register-cold", bagId: previousCanonUri }));
+    // Reboot-pending: new canonical doc + recipe change — the live island still has the
+    // old canon mounted. Alert it.
+    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Recipe rotated for "${slug}" (gen ${nextGen}) — reboot to load the new canonical.`, cause: "rotate-recipe" }));
 
     return {
       slug,
@@ -257,7 +266,8 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
       previousCanonUri,
       previousCanonDocUrl: oldDocUrl,
       stack:              nextStack,
-      note: "oracle + recipe changes sync to islands (reconcile next boot / F-arc live-watch); draft-drain into new canonical reserved for F-arc (`lares act MOVE`/`ADD`)",
+      rebootRequired:     true,
+      note: "oracle + recipe changes sync to islands (reboot — alert seeded); draft-drain into new canonical reserved for F-arc (`lares act MOVE`/`ADD`)",
     };
   };
 }
@@ -266,6 +276,37 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/** Prefix of a user wiki recipe title in @catalog: `lar:///ha.ka.ba/@catalog/recipes/`. */
+const RECIPE_PREFIX = recipeUri("@catalog", "");
+
+/**
+ * Scan @catalog recipes for wikis whose bag-stack includes `bagUrl` and post a
+ * reboot-pending wiki-alert for each (main filters to the live ones). One bag can
+ * feed many wikis — the admin computes "affected by content", main delivers to "live".
+ */
+async function alertWikisUsingBag(
+  opts: { readonly catalog: CatalogAccessor; readonly post: ResidencyOpPost },
+  bagUrl: string,
+  cause: string,
+): Promise<string[]> {
+  const cat = await opts.catalog.handle();
+  const tiddlers = (cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>;
+  const slugs: string[] = [];
+  for (const [title, rec] of Object.entries(tiddlers)) {
+    if (!title.startsWith(RECIPE_PREFIX)) continue;
+    if (rec.meta?.deleted) continue;
+    const slug = title.slice(RECIPE_PREFIX.length);
+    if (!slug || slug.includes("/")) continue;
+    if (!bagStackFromRec(rec).includes(bagUrl)) continue;
+    opts.post(mkAdminWikiAlert({
+      wikiSlug: slug,
+      message:  `Bag "${bagUrl}" was epoched — reboot "${slug}" to load the new snapshot.`,
+      cause,
+    }));
+    slugs.push(slug);
+  }
+  return slugs;
+}
 
 // Origin tag used by Epoch — reserved for future audit-log integration.
 export const EPOCH_ORIGIN: ChangeOrigin = { kind: "lares-verb", requestId: "epoch" };

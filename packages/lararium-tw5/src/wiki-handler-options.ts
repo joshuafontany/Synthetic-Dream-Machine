@@ -14,6 +14,8 @@ export interface WikiHandlerOptions {
   readonly composite: CompositeStore;
   /** Catalog accessor — wiki oracles live in @catalog (access≠load). */
   readonly catalog:   CatalogAccessor;
+  /** Worker→main poster — open-wiki alerts the wiki being switched away from. */
+  readonly post:      ResidencyOpPost;
 }
 
 /** Options for handlers that need raw repo access to mint new docs.

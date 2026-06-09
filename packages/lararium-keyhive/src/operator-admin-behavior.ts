@@ -76,7 +76,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
           operatorDid: async () => "0x" + adminAuth.operatorVerifyingKey,
         };
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
-        registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog }));
+        registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog, post: ctx.post }));
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
         registry.register("list-wikis",  makeListWikisReactor(catalog));
         // Whole-wiki residency policy — read the @catalog recipe, command main's manager
@@ -89,7 +89,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         registry.register("remove-bag",    makeRemoveBagReactor({ catalog, post: ctx.post }));
         // Catalog-writing residency verbs — mint/oracle via accessor + repo, command
         // residency via post. No live-layer swap (oracle/recipe sync; islands reconcile).
-        registry.register("bag-epoch",     makeEpochBagReactor({ repo: ctx.repo, catalog }));
+        registry.register("bag-epoch",     makeEpochBagReactor({ repo: ctx.repo, catalog, post: ctx.post }));
         registry.register("rotate-recipe", makeRotateRecipeReactor({ repo: ctx.repo, catalog, post: ctx.post }));
       }
     },

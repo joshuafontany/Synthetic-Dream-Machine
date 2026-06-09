@@ -371,6 +371,25 @@ export interface AdminMsg_ResidencyOpResult {
   error?: string;
 }
 
+/**
+ * Island (admin worker) → vessel: seed a reboot-pending alert into a live wiki's
+ * @temp. A reboot-requiring admin change (recipe/oracle/active-marker edit — all in
+ * bags the wiki island doesn't load) syncs but only applies on the wiki's next boot;
+ * the admin commands main to deliver a `system-alert` verb to the affected live
+ * island so the operator sees it. Fire-and-forget (best-effort UX); main skips wikis
+ * that aren't mounted. The admin computes "affected by content"; main filters "live".
+ */
+export interface AdminMsg_WikiAlert {
+  schema_version: ProtocolVersion;
+  type: "admin:wiki-alert";
+  /** The affected wiki's slug — main maps it to `${hostId}:${slug}` to find the island. */
+  wikiSlug: string;
+  /** Operator-facing message (e.g. "Recipe changed — reboot to apply"). */
+  message: string;
+  /** The verb that caused the change (audit/display). */
+  cause?: string;
+}
+
 /** All messages the vessel may send to a causal island. */
 export type VesselToIslandMsg =
   | IslandMsg_Manifest
@@ -490,7 +509,8 @@ export type IslandToVesselMsg =
   | AdminMsg_VerifyResult
   | AdminMsg_ResolveBindingResult
   | AdminMsg_EvictRequest
-  | AdminMsg_ResidencyOp;
+  | AdminMsg_ResidencyOp
+  | AdminMsg_WikiAlert;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -512,7 +532,7 @@ export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op"] as const).includes(
+  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op", "admin:wiki-alert"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -744,6 +764,21 @@ export function mkAdminResidencyOp(opts: {
     bagId:     opts.bagId,
   };
   if (opts.reason !== undefined) msg.reason = opts.reason;
+  return msg;
+}
+
+export function mkAdminWikiAlert(opts: {
+  wikiSlug: string;
+  message:  string;
+  cause?:   string;
+}): AdminMsg_WikiAlert {
+  const msg: AdminMsg_WikiAlert = {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type:     "admin:wiki-alert",
+    wikiSlug: opts.wikiSlug,
+    message:  opts.message,
+  };
+  if (opts.cause !== undefined) msg.cause = opts.cause;
   return msg;
 }
 

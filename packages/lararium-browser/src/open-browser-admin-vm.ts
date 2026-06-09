@@ -86,6 +86,9 @@ export interface BrowserAdminVmResult {
   /** Bind the residency-op MECHANISM: the worker commands pin/unpin/register-cold; main
    *  routes to the residency mechanism. Set after the manager/pool exists. */
   onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
+  /** Bind the wiki-alert DELIVERY: the worker named a wiki whose pending change needs a
+   *  reboot; main places a `system-alert` verb into that wiki's live island. */
+  onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => void;
   /** Terminate the admin island Worker. */
   dispose:        () => void;
 }
@@ -145,6 +148,7 @@ export async function openBrowserAdminVm(
     resolveBinding: core.resolveBinding,
     onEvictRequest: core.onEvictRequest,
     onResidencyOp:  core.onResidencyOp,
+    onWikiAlert:    core.onWikiAlert,
     dispose:        core.dispose,
   };
 }
