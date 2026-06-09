@@ -334,7 +334,7 @@ The `x-` prefix marks the subtype as unregistered with IANA; a future tree-trans
 ## Worked Examples (Non-Normative)
 
 A carrier with an identity block, a worksite, and a typed edge:
-```
+````
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/example >>
 ```toml iam
 … bare toml-iam slot: identity payload (uri-path, type, role, register) …
@@ -350,7 +350,7 @@ Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/mem
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-```
+````
 
 A definition summoned by name:
 ```

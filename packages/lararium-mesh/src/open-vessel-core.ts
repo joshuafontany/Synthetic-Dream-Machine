@@ -43,12 +43,12 @@ export interface VesselRecipe {
   // ── substrate atoms (resolved native-first by each piece) ──
   repo:          Repo;
   catalogHandle: DocHandle<LarDoc>;
-  bootstrap:     VesselBootstrap;
   /** Resolve-or-fallback a doc handle (the unified allowableStates strategy, D2). */
   waitHandle:    <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => Promise<DocHandle<T>>;
-  /** Genesis island piece → handle + coreHash. Null islandHandle = coreless boot
-   *  (pre-sovereign, D6/D19 — held open). */
-  loadGenesis:   () => Promise<{ islandHandle: DocHandle<LarDoc> | null; coreHash: string | null }>;
+  /** Genesis island piece → handle + coreHash + the social-plane bootstrap it carries.
+   *  Genesis REQUIRED (coreless boot deleted) — the vessel derives bootstrap from the
+   *  island (or the init JSON) here, so it resolves together with genesis, not before. */
+  loadGenesis:   () => Promise<{ islandHandle: DocHandle<LarDoc>; coreHash: string; bootstrap: VesselBootstrap }>;
   /** The volatile @temp store (a LarTiddlerStore — node/browser pass MemoryTiddlerStore). */
   tempStore:     () => LarTiddlerStore;
 
@@ -64,9 +64,9 @@ export interface VesselCoreAssembly {
   repo:          Repo;
   composite:     CompositeStore;
   catalogHandle: DocHandle<LarDoc>;
-  islandHandle:  DocHandle<LarDoc> | null;
+  islandHandle:  DocHandle<LarDoc>;
   laresHandle:   DocHandle<LarDoc> | null;
-  coreHash:      string | null;
+  coreHash:      string;
 }
 
 const blankDoc = (repo: Repo): DocHandle<LarDoc> => repo.create<LarDoc>(emptyLarDoc());
@@ -86,30 +86,28 @@ function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocH
  * The phase sequence holds invariant; each piece resolves its substrate via the recipe.
  */
 export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAssembly> {
-  const { repo, catalogHandle, bootstrap, waitHandle, loadGenesis } = recipe;
+  const { repo, catalogHandle, waitHandle, loadGenesis } = recipe;
   const emit = (p: LarOpenPhase) => recipe.onPhase?.(p);
 
   const composite = new CompositeStore();
   addReadOnlyLayer(composite, BAG_IDS.catalog, catalogHandle);
 
-  // ── genesis island piece (coreless boot held open) ──
-  const { islandHandle, coreHash } = await loadGenesis();
+  // ── genesis island (REQUIRED — coreless boot deleted) + the bootstrap it carries ──
+  const { islandHandle, coreHash, bootstrap } = await loadGenesis();
+  addCanonLayer(composite, BAG_IDS.lararium, islandHandle);
   let laresHandle: DocHandle<LarDoc> | null = null;
-  if (islandHandle) {
-    addCanonLayer(composite, BAG_IDS.lararium, islandHandle);
-    const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
-    if (laresUrl) {
-      laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
-      addCanonLayer(composite, BAG_IDS.lares, laresHandle);
-    }
-    const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
-    if (existingRef !== islandHandle.url) {
-      catalogHandle.change((doc) => {
-        doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle.url }, "vessel-boot");
-      });
-    }
-    emit("island-ready");
+  const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
+  if (laresUrl) {
+    laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
+    addCanonLayer(composite, BAG_IDS.lares, laresHandle);
   }
+  const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+  if (existingRef !== islandHandle.url) {
+    catalogHandle.change((doc) => {
+      doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle.url }, "vessel-boot");
+    });
+  }
+  emit("island-ready");
 
   // ── social plane (resolveHandle encodes the seed policy) + admin doc ──
   const resolve = (url: AutomergeUrl) => waitHandle<LarDoc>(url, () => blankDoc(repo));
