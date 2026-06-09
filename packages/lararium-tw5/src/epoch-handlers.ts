@@ -29,15 +29,16 @@ import {
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
+import type { CatalogAccessor } from "./catalog-accessor.js";
 import { stringArg, makeRequestId } from "./handler-args.js";
 
 export interface EpochHandlerOptions {
   readonly composite: CompositeStore;
   readonly repo:      Repo;
   readonly residency: BagResidencyManager;
-  /** Catalog handle — needed to update the oracle tiddler that points at
-   *  the bag's Automerge doc URL. */
-  readonly catalogHandle: import("@lararium/mesh").DocHandle<LarDoc>;
+  /** Catalog accessor — updates the oracle tiddler that points at the bag's
+   *  Automerge doc URL, via the registry doc (access≠load). */
+  readonly catalog:   CatalogAccessor;
 }
 
 /**
@@ -89,9 +90,10 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
       }
     });
 
-    // Update the catalog oracle tiddler. Direct catalog change — same
-    // pattern as wiki-init's oracle write.
-    opts.catalogHandle.change((doc) => {
+    // Update the catalog oracle tiddler. Reached through the registry doc —
+    // same pattern as wiki-init's oracle write.
+    const catalogHandle = await opts.catalog.handle();
+    catalogHandle.change((doc) => {
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       const existing = tiddlers[bagUrl];
       tiddlers[bagUrl] = {
@@ -206,7 +208,8 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     await newHandle.whenReady();
 
     // Update catalog: wiki oracle → new URL; previous-canon oracle → old URL.
-    opts.catalogHandle.change((doc) => {
+    const catalogHandle = await opts.catalog.handle();
+    catalogHandle.change((doc) => {
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       const existingWiki = tiddlers[wikiKey];
       tiddlers[wikiKey] = {

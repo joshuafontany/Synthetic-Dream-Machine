@@ -101,6 +101,8 @@ export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.j
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";
 export { makeResidencyStatsReactor } from "./residency-handlers.js";
 export type { ResidencyHandlerOptions } from "./residency-handlers.js";
+export { makeCatalogAccessor } from "./catalog-accessor.js";
+export type { CatalogAccessor } from "./catalog-accessor.js";
 export { openVesselCore } from "./open-vessel.js";
 export type {
   VesselOrchestration, VesselCoreResult, VesselAdminVm, VesselWikiSlot,

@@ -37,6 +37,7 @@ import {
   makePruneStaleReactor, makeDraftReactor,
   makeEpochBagReactor, makeRotateRecipeReactor,
   makeResidencyStatsReactor,
+  makeCatalogAccessor,
 }                                            from "@lararium/tw5";
 import type { VesselWikiSlot, VesselCoreResult } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
@@ -298,9 +299,11 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     wireVerbs: (registry, assembly) => {
       seedVesselDefaults(registry);
       // Verb parity with node — the mint/compose/residency-stats verbs (now tw5-resident).
+      // ONE catalog-driven accessor (access≠load) replaces catalogHandle/islandHandle.
+      const catalog = makeCatalogAccessor(assembly.repo, catalogHandle.url);
       const wikiMintOpts = {
-        composite: assembly.composite, repo: assembly.repo, catalogHandle,
-        islandHandle: assembly.islandHandle, rootDir: "",
+        composite: assembly.composite, repo: assembly.repo, catalog,
+        rootDir: "",
         operatorDid: async () => "0x" + operatorDid,
       };
       registry.register("sync-wiki", async (args, ctx) =>
@@ -315,8 +318,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
       registry.register("add-bag",       makeAddBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
       registry.register("remove-bag",    makeRemoveBagReactor({ composite: assembly.composite, repo: assembly.repo, residency }));
-      registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalogHandle }));
-      registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalogHandle }));
+      registry.register("bag-epoch",     makeEpochBagReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
+      registry.register("rotate-recipe", makeRotateRecipeReactor({ composite: assembly.composite, repo: assembly.repo, residency, catalog }));
       registry.register("prune-stale",   makePruneStaleReactor(wikiMintOpts));
       registry.register("draft",         makeDraftReactor({ composite: assembly.composite }));
     },

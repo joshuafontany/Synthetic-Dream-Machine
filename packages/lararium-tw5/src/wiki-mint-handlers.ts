@@ -61,7 +61,8 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     if (!existingWikiRec) await wikiHandle.whenReady();
     if (!existingDraftRec) await draftHandle.whenReady();
 
-    opts.catalogHandle.change((doc) => {
+    const catalogHandle = await opts.catalog.handle();
+    catalogHandle.change((doc) => {
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       tiddlers[wikiKey] = mutableLarRecord(wikiKey, {
         text: wikiHandle.url,
@@ -75,8 +76,12 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
       }, "lares-cli:wiki-init");
     });
 
+    // The recipe tiddler lands in @lararium (the island doc) — reached through
+    // the catalog registry, not a bespoke islandHandle (access≠load).
+    const islandHandle = await opts.catalog.find(LARARIUM_DOC_URI);
+    if (!islandHandle) throw new Error(`@lararium not registered in catalog (${LARARIUM_DOC_URI}) — cannot write recipe`);
     const updatedAt = new Date().toISOString();
-    opts.islandHandle.change((doc) => {
+    islandHandle.change((doc) => {
       const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
       tiddlers[recipeTitle] = mutableLarRecord(recipeTitle, {
         label: slug,
