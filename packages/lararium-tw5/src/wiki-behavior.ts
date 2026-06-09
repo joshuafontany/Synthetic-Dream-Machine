@@ -24,10 +24,14 @@ import { registerActionReactors } from "./action-handler.js";
 import { VerbTable } from "./verb-dispatcher.js";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
 
-/** The reboot-pending alert tiddler title — a volatile @temp system tiddler the
- *  operator surface renders as a banner. Self-clearing: @temp wipes on reboot, and
- *  the reboot is exactly what applies the pending change. */
+/** The reboot-pending alert tiddler title. Tagged `$:/tags/Alert` so TW5's NATIVE
+ *  alert area renders it (no custom banner needed). Stable title = one coalesced
+ *  alert, not a pile. Volatile (@temp) → self-clearing on reboot, which is exactly
+ *  what applies the pending change; the operator may also dismiss it (TW5's close
+ *  button deletes the tiddler). */
 export const REBOOT_ALERT_TITLE = "$:/temp/lares/alert/reboot-pending";
+/** TW5's built-in alert tag — tiddlers carrying it surface in the alerts area. */
+const TW5_ALERT_TAG = "$:/tags/Alert";
 
 export interface WikiBehaviorOptions {
   /**
@@ -61,6 +65,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
             tiddler: {
               title:       REBOOT_ALERT_TITLE,
               text:        message,
+              tags:        TW5_ALERT_TAG,   // surfaces in TW5's native alert area
               "alert-kind": "reboot-pending",
               cause,
               ts:          new Date().toISOString(),
