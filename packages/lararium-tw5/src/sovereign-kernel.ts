@@ -19,7 +19,7 @@
  *     @temp        (MemoryTiddlerStore, volatile)
  *     @draft       (CRDT, high-churn drafts)
  *     @<wikiSlug>  (CRDT, operator's edits)
- *     canonBags[]  (CRDT, optional content libraries)
+ *     libraryBags[]  (CRDT, optional content libraries)
  *     @lares       (CRDT, required personality)
  *     @lararium    (CRDT, required system / engine core)
  *

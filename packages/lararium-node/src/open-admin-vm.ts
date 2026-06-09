@@ -6,7 +6,7 @@
  *   - spawnWorker  : worker_threads Worker (.on / .postMessage)
  *   - newSyncChannel: worker_threads MessageChannel
  *   - adminHandle  : waitHandleLocal (merge-on-late-arrival strategy)
- *   - recipe       : built here from canonBags; storage = nodefs dir
+ *   - recipe       : built here from libraryBags; storage = nodefs dir
  *
  * Node-ahead capability proxies (authSeam verify-proxy, resolveBinding) compose
  * on top via a second listener on the core's exposed worker handle — they are
@@ -49,7 +49,7 @@ export interface AdminVmOptions {
    *  @admin (and any canon bags the operator mounts). */
   resolver:          Readonly<Record<string, string | null>>;
   /** Optional canon bag URIs for the admin recipe. Empty by default. */
-  canonBags?:        readonly string[];
+  libraryBags?:        readonly string[];
   /**
    * Operator authn/z material delivered to the admin island so it boots keyhive
    * in-worker (Stage 1). Seed + sentinel hexes + the bags to register. The seed
@@ -120,7 +120,7 @@ export interface AdminVmResult {
 }
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl, coreHash, resolver, canonBags, adminAuth, storageDir, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, resolver, libraryBags, adminAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Admin doc handle (node strategy: merge-on-late-arrival) ────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
@@ -130,7 +130,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
 
   const recipe: WikiRecipe = {
     wikiSlug: "admin",
-    ...(canonBags?.length ? { canonBags } : {}),
+    ...(libraryBags?.length ? { libraryBags } : {}),
   };
   const storage = storageDir
     ? { type: "nodefs" as const, dir: join(storageDir, "admin") }

@@ -106,7 +106,7 @@ export type IslandStorageConfig =
  * The island establishes its own sovereignty (`ea`) upon receipt.
  *
  * Prerequisite fields (island cannot think without these — not cargo):
- *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional canonBags).
+ *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional libraryBags).
  *   - `resolver` is the slot URI → AutomergeUrl map. Null entries indicate
  *     in-memory / cold slots (`@temp` always; other slots if creating fresh).
  *
@@ -122,7 +122,7 @@ export interface IslandMsg_Manifest {
    * null = pre-CAS trust-on-delivery. Islands verify on read from @lararium CRDT doc.
    */
   coreHash: string | null;
-  /** Slot structure for this wiki — wikiSlug + optional canonBags. */
+  /** Slot structure for this wiki — wikiSlug + optional libraryBags. */
   recipe: import("./wiki-recipe.js").WikiRecipe;
   /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
   resolver: Readonly<Record<string, string | null>>;

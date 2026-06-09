@@ -69,7 +69,7 @@ describe("WikiRecipe + resolver — manifest payload shape", () => {
     const { port2: syncPort } = new MessageChannel();
     const recipe: WikiRecipe = {
       wikiSlug: "test",
-      canonBags: ["lar:///ha.ka.ba/@sdm"],
+      libraryBags: ["lar:///ha.ka.ba/@sdm"],
     };
     const resolver = {
       "lar:///ha.ka.ba/@test":     "automerge:xyz",
@@ -84,7 +84,7 @@ describe("WikiRecipe + resolver — manifest payload shape", () => {
     );
     syncPort.close();
     expect(msg.recipe.wikiSlug).toBe("test");
-    expect(msg.recipe.canonBags).toHaveLength(1);
+    expect(msg.recipe.libraryBags).toHaveLength(1);
     expect(msg.resolver["lar:///ha.ka.ba/@test"]).toBe("automerge:xyz");
     expect(isVesselToIslandMsg(msg)).toBe(true);
   });

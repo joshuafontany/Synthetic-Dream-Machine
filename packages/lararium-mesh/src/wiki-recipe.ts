@@ -12,7 +12,7 @@
  *                                 Slot URI literal here; per-recipe doc binding lives in
  *                                 BagResolver, not the URI.
  *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
- *   canonBags[]                 — optional content libraries, CRDT, read-only from wiki
+ *   libraryBags[]                 — optional content libraries, CRDT, read-only from wiki
  *   lar:///ha.ka.ba/@lares      — personality, CRDT, required
  *   lar:///ha.ka.ba/@lararium   — system / engine core / plugins, CRDT, required
  *
@@ -62,16 +62,16 @@ export function slugFromUri(uri: string): string {
  *
  *   adminRecipe: { wikiSlug: "admin" }
  *   sdmRecipe:   { wikiSlug: "synthetic-dream-machine",
- *                  canonBags: ["lar:///ha.ka.ba/@sdm", "lar:///ha.ka.ba/@ftls"] }
+ *                  libraryBags: ["lar:///ha.ka.ba/@sdm", "lar:///ha.ka.ba/@ftls"] }
  */
 export interface WikiRecipe {
   /** Identity slug; expands to lar:///ha.ka.ba/@<wikiSlug>. */
   readonly wikiSlug: string;
   /**
    * Canon content bag URIs, ordered top→bottom within the canon slot —
-   * canonBags[0] wins ties over canonBags[1]. Read-only from this wiki.
+   * libraryBags[0] wins ties over libraryBags[1]. Read-only from this wiki.
    */
-  readonly canonBags?: readonly SlotUri[];
+  readonly libraryBags?: readonly SlotUri[];
   /**
    * Canon bag URIs this wiki DESIGNATES for local disk projection (write-back).
    * A synced, platform-neutral *wish* (the shape half of disk-mirroring). The
@@ -209,7 +209,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     DRAFT_BAG,
     PERSONAL_BAG,
     wikiBagUri(r.wikiSlug),
-    ...(r.canonBags ?? []),
+    ...(r.libraryBags ?? []),
     LARES_BAG,
     LARARIUM_BAG,
   ];
@@ -230,7 +230,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * same recipe" for purposes of cross-device @personal binding.
  *
  * Per Q4 (fingerprint algorithm, revised 2026-05-31, personal-slot): only the wiki bag
- * doc-id and the canonBags doc-ids participate. @lares and @lararium
+ * doc-id and the libraryBags doc-ids participate. @lares and @lararium
  * doc-ids do NOT participate — switching personality or system bag does
  * not fork operator view state across devices.
  */
@@ -277,7 +277,7 @@ export async function computeRecipeFingerprint(
 export interface WikiMountSpec {
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS; island resolves bytes from the mesh. */
   coreHash: string | null;
-  /** WikiRecipe slot structure (wikiSlug + optional canonBags + mirrorBags). */
+  /** WikiRecipe slot structure (wikiSlug + optional libraryBags + mirrorBags). */
   recipe: WikiRecipe;
   /** Full slot URI → AutomergeUrl map (caller-built). Null = in-memory or cold slot. */
   resolver: Readonly<Record<string, string | null>>;

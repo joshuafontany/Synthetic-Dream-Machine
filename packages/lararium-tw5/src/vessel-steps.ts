@@ -122,8 +122,8 @@ export async function mountPrimaryWiki(
   inputs:  PrimaryMountInputs,
 ): Promise<{ personalUrl: string; draftUrl: string }> {
   // @personal + @draft bind TOGETHER per recipe-fingerprint (Q11). Fingerprint
-  // covers wikiDocId + canonBags only (@lares/@lararium excluded per Q4); the
-  // live primary carries no canonBags, so it keys on the wiki doc url alone.
+  // covers wikiDocId + libraryBags only (@lares/@lararium excluded per Q4); the
+  // live primary carries no libraryBags, so it keys on the wiki doc url alone.
   const recipeTrace = { wikiDocId: inputs.wikiUrl, canonBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
   const { personalUrl, draftUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
