@@ -42,9 +42,12 @@ export interface VesselWikiSlot {
  */
 export interface VesselOrchestration<TPool extends PrimaryMountPool> {
   keel:        VesselRecipe;
-  wikiSlot:     VesselWikiSlot;
-  /** Open the platform admin VM once the keel resolved (needs islandUrl + coreHash). */
-  openAdmin:    (a: { assembly: VesselCoreAssembly }) => Promise<VesselAdminVm>;
+  /** Resolve the active-wiki slot AFTER the keel assembles — the slug derives from the
+   *  admin-doc marker (post-genesis), so it cannot precede assembleVessel. */
+  wikiSlot:     (assembly: VesselCoreAssembly) => VesselWikiSlot | Promise<VesselWikiSlot>;
+  /** Open the platform admin VM once the keel + slot resolved (adminAuth registers the
+   *  slot's wiki/draft bags; sentinels read from the assembled admin doc). */
+  openAdmin:    (a: { assembly: VesselCoreAssembly; slot: VesselWikiSlot }) => Promise<VesselAdminVm>;
   /** Wire the vessel's verb plane (capability piece; relay holds more). */
   wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
   /** Capability hook AFTER admin VM lives (node: arm the inbound gate). */
@@ -79,8 +82,11 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   // ── vessel: composite cascade + genesis + social + admin + corpus (mesh, VM-free) ──
   const assembly = await assembleVessel(o.keel);
 
+  // ── active-wiki slot (post-genesis: slug from the admin-doc marker) ──
+  const slot = await o.wikiSlot(assembly);
+
   // ── admin VM (platform) ──
-  const admin = await o.openAdmin({ assembly });
+  const admin = await o.openAdmin({ assembly, slot });
 
   // ── verb plane (capability piece) ──
   const registry = new VerbTable();
@@ -89,7 +95,7 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   o.afterAdmin?.(admin, assembly);
 
   // ── wiki-slot layers (mesh) ──
-  const { wikiHandle, draftHandle } = await mountWikiSlot(o.keel, assembly.composite, o.wikiSlot);
+  const { wikiHandle, draftHandle } = await mountWikiSlot(o.keel, assembly.composite, slot);
   emit("wiki-ready");
   emit("vessel-ready");
 
@@ -99,10 +105,10 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   // ── admin-first sovereignty gate → primary-wiki mount ──
   await admin.workerEa;
   await mountPrimaryWiki(pool, admin.resolveBinding, {
-    activeWikiId: o.wikiSlot.activeWikiId,
-    wikiSlug:     o.wikiSlot.wikiSlug,
+    activeWikiId: slot.activeWikiId,
+    wikiSlug:     slot.wikiSlug,
     coreHash:     assembly.coreHash,
-    islandUrl:    assembly.islandHandle?.url ?? "",
+    islandUrl:    assembly.islandHandle.url,
     wikiUrl:      wikiHandle.url,
   });
   emit("tw5-booted");
