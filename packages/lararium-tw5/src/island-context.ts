@@ -32,6 +32,14 @@ export interface IslandContext {
    * sync to the host relay via the manifest syncPort. Isomorphic-vessel Stage 1.
    */
   repo:      Repo;
+  /**
+   * The `@catalog` registry doc URL (null if the island carries no catalog slot).
+   * The isomorphic base for catalog-driven reach: a worker behavior builds
+   * `makeCatalogAccessor(ctx.repo, ctx.catalogUrl)` to reach ANY registered bag
+   * on demand — access≠load (the catalog is NOT a render layer). Carried in the
+   * manifest resolver under `CATALOG_DOC_URI`; the kernel lifts it here.
+   */
+  catalogUrl: string | null;
 }
 
 /**

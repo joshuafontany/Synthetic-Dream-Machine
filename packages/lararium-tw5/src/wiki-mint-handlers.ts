@@ -9,7 +9,6 @@ import {
   emptyLarDoc,
   mutableLarRecord,
   recipeUri,
-  tiddlerText,
   wikiDraftLarUri,
   wikiLarUri,
 } from "@lararium/mesh";
@@ -34,32 +33,33 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     const draftKey = `${wikiKey}/drafts/${encodeURIComponent(did)}`;
     const recipeTitle = recipeUri("@lararium", slug);
 
-    const existingWikiRec = await opts.composite.get(wikiKey);
-    const existingDraftRec = await opts.composite.get(draftKey);
+    // Wiki + draft oracles live in @catalog (the registry) — read via the
+    // accessor (access≠load), NOT the composite (@catalog is never a load layer).
+    // The recipe lives in @lararium, a real composite layer — that read stays.
+    const existingWikiUrl = await opts.catalog.urlOf(wikiKey);
+    const existingDraftUrl = await opts.catalog.urlOf(draftKey);
     const existingRecipeRec = await opts.composite.get(recipeTitle);
-    if (existingWikiRec && existingDraftRec && existingRecipeRec) {
+    if (existingWikiUrl && existingDraftUrl && existingRecipeRec) {
       return {
         slug,
         status: "already-exists",
         wikiUri: wikiKey,
-        wikiDocUrl: tiddlerText(existingWikiRec),
+        wikiDocUrl: existingWikiUrl,
         draftBagId,
-        draftDocUrl: tiddlerText(existingDraftRec),
+        draftDocUrl: existingDraftUrl,
         recipeUri: recipeTitle,
       };
     }
 
-    const wikiDocUrl = tiddlerText(existingWikiRec);
-    const draftDocUrl = tiddlerText(existingDraftRec);
-    const wikiHandle = wikiDocUrl
-      ? await opts.repo.find(wikiDocUrl as AutomergeUrl)
+    const wikiHandle = existingWikiUrl
+      ? await opts.repo.find(existingWikiUrl as AutomergeUrl)
       : opts.repo.create(emptyLarDoc());
-    const draftHandle = draftDocUrl
-      ? await opts.repo.find(draftDocUrl as AutomergeUrl)
+    const draftHandle = existingDraftUrl
+      ? await opts.repo.find(existingDraftUrl as AutomergeUrl)
       : opts.repo.create(emptyLarDoc());
 
-    if (!existingWikiRec) await wikiHandle.whenReady();
-    if (!existingDraftRec) await draftHandle.whenReady();
+    if (!existingWikiUrl) await wikiHandle.whenReady();
+    if (!existingDraftUrl) await draftHandle.whenReady();
 
     const catalogHandle = await opts.catalog.handle();
     catalogHandle.change((doc) => {
@@ -93,7 +93,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
 
     return {
       slug,
-      status: existingWikiRec ? "completed-partial" : "minted",
+      status: existingWikiUrl ? "completed-partial" : "minted",
       wikiUri: wikiKey,
       wikiDocUrl: wikiHandle.url,
       draftBagId,
@@ -109,8 +109,9 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
 
     const wikiKey = wikiLarUri(slug);
-    const wikiRec = await opts.composite.get(wikiKey);
-    if (!wikiRec) {
+    // Wiki oracle lives in @catalog — read via the accessor, not the composite.
+    const wikiUrl = await opts.catalog.urlOf(wikiKey);
+    if (!wikiUrl) {
       throw new Error(`wiki "${slug}" not registered — run \`lares wiki init ${slug}\` first`);
     }
 

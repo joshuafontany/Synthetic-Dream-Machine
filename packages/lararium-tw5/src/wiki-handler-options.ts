@@ -11,6 +11,8 @@ import type { CatalogAccessor } from "./catalog-accessor.js";
 
 export interface WikiHandlerOptions {
   readonly composite: CompositeStore;
+  /** Catalog accessor — wiki oracles live in @catalog (access≠load). */
+  readonly catalog:   CatalogAccessor;
 }
 
 /** Options for handlers that need raw repo access to mint new docs.

@@ -42,6 +42,7 @@
 import {
   CompositeStore,
   BAG_IDS,
+  CATALOG_DOC_URI,
   ENGINE_CORE_ID,
   TEMP_BAG,
   expandRecipe,
@@ -226,7 +227,11 @@ export function runSovereignKernel(
       ready,
     });
 
-    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo! };
+    // Isomorphic base: lift the @catalog registry URL out of the resolver (access
+    // entry, NOT a load slot — @catalog is absent from expandRecipe). Worker
+    // behaviors build a CatalogAccessor over it to reach any registered bag.
+    const catalogUrl = msg.resolver[CATALOG_DOC_URI] ?? null;
+    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl };
     await behavior.onEa(_ctx);
 
     handler.sendEa(msg.wikiUri);

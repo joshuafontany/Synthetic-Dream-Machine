@@ -59,10 +59,9 @@ export function makeEpochBagReactor(opts: EpochHandlerOptions): VerbReactor {
     const bagUrl = stringArg(args, "bagUrl");
     if (!bagUrl) throw new Error("args.bagUrl is required");
 
-    // Find the oracle for the bag — looks for a tiddler whose title equals
-    // the bag URL with `text` carrying the Automerge URL.
-    const oracleRec = await opts.composite.get(bagUrl);
-    const oldDocUrl = typeof oracleRec?.tiddler.text === "string" ? oracleRec.tiddler.text : null;
+    // Find the oracle for the bag — the bag→doc-URL mapping is a @catalog
+    // registry entry, read via the accessor (access≠load), not the composite.
+    const oldDocUrl = await opts.catalog.urlOf(bagUrl);
     if (!oldDocUrl) {
       throw new Error(`bag has no oracle: ${bagUrl}`);
     }
@@ -185,8 +184,9 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     const recipeRec = await opts.composite.get(recipeTitle);
     if (!recipeRec) throw new Error(`recipe not found for "${slug}" — run \`lares wiki init ${slug}\` first`);
 
-    const wikiOracle = await opts.composite.get(wikiKey);
-    const oldDocUrl  = typeof wikiOracle?.tiddler.text === "string" ? wikiOracle.tiddler.text : null;
+    // Wiki oracle lives in @catalog — accessor read (recipe above stays composite,
+    // it lives in @lararium, a real load layer).
+    const oldDocUrl = await opts.catalog.urlOf(wikiKey);
     if (!oldDocUrl) throw new Error(`wiki oracle missing for "${slug}"`);
 
     // Compute the previous-canon URI. Walk existing stack to find the next

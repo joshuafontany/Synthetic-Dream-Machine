@@ -304,6 +304,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           "lar:///ha.ka.ba/@admin": bootstrap.adminUrl,
           [BAG_IDS.lararium]:       assembly.islandHandle.url,
           ...(assembly.laresHandle ? { [BAG_IDS.lares]: assembly.laresHandle.url } : {}),
+          // ACCESS entry, not a LOAD slot — @catalog is absent from the admin recipe,
+          // so the kernel never layers it; the worker reaches it via the accessor.
+          [CATALOG_DOC_URI]:        catalogHandle.url,
         },
         adminAuth,
         storageDir,
@@ -331,7 +334,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         }),
       );
       registry.register("init-wiki",     makeInitWikiReactor(wikiMintOpts));
-      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite }));
+      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite, catalog }));
       registry.register("residency",     makeResidencyStatsReactor({ residency }));
       registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
       registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));

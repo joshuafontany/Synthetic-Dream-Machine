@@ -290,6 +290,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           [BAG_IDS.lararium]:       assembly.islandHandle.url,
           "lar:///ha.ka.ba/@admin": social.adminUrl,
           ...(assembly.laresHandle ? { [BAG_IDS.lares]: assembly.laresHandle.url } : {}),
+          // ACCESS entry, not a LOAD slot — the worker reaches @catalog via the accessor.
+          [CATALOG_DOC_URI]:        catalogHandle.url,
         },
         adminAuth,
       });
@@ -312,7 +314,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         }),
       );
       registry.register("init-wiki",     makeInitWikiReactor(wikiMintOpts));
-      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite }));
+      registry.register("open-wiki",     makeOpenWikiReactor({ composite: assembly.composite, catalog }));
       registry.register("residency",     makeResidencyStatsReactor({ residency }));
       registry.register("pin-wiki",      makePinWikiReactor({ composite: assembly.composite, residency }));
       registry.register("unpin-wiki",    makeUnpinWikiReactor({ composite: assembly.composite, residency }));
