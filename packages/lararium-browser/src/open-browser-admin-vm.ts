@@ -80,6 +80,12 @@ export interface BrowserAdminVmResult {
     fingerprint: string,
     recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  /** Bind the pool eviction MECHANISM (sovereign-worker): the worker commands evict via
+   *  admin:evict-request; main routes it to the pool. Set after the pool exists. */
+  onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
+  /** Bind the residency-op MECHANISM: the worker commands pin/unpin/register-cold; main
+   *  routes to the residency mechanism. Set after the manager/pool exists. */
+  onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
   /** Terminate the admin island Worker. */
   dispose:        () => void;
 }
@@ -137,6 +143,8 @@ export async function openBrowserAdminVm(
     placeVerb:      core.placeVerb,
     authSeam:       core.authSeam,
     resolveBinding: core.resolveBinding,
+    onEvictRequest: core.onEvictRequest,
+    onResidencyOp:  core.onResidencyOp,
     dispose:        core.dispose,
   };
 }
