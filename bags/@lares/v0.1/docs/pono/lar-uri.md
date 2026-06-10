@@ -38,7 +38,7 @@ The `lar:` URI names the bearing a Lares node exchange takes — a shared naviga
 
 Each URI component carries a distinct, non-overlapping concern across three semantic layers:
 
-1. **WHO** — authority (`alias:tier@host`) identifies speaker and machine host
+1. **WHO** — authority (`alias:grant@host`) identifies speaker and machine host
 2. **BEARING** — the HA.KA.BA address (path) names semantic attitude
 3. **SECTION** — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
 
@@ -89,7 +89,7 @@ lar://telarus:operator@enyalios/~schema.gap.present/
 Before generating, Lares sets the role it adopts. The `~` prefix marks it execution-provisional: generations may diverge.
 
 ```
-lar://lar:node@enyalios/~schema.flow.documented/
+lar://lares:agent@enyalios/~schema.flow.documented/
 ```
 
 **Step 3 — Open the turn with the `aim` vector.**
@@ -141,7 +141,7 @@ lar://[authority]/ha.ka.ba/@lares/optional/path/[#anchor]
 **Full form (with authority):**
 
 ```
-lar://alias:tier@host/ha.ka.ba/@lares/
+lar://alias:grant@host/ha.ka.ba/@lares/
 ```
 
 
@@ -170,7 +170,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names th
 | # | Component | RFC 3986 Role | Lares Mapping | Record Example |
 |---|---|---|---|---|
 | 1 | **scheme** | Protocol identifier | `lar:` — non-dereferenceable | `lar:` |
-| 2 | **userinfo** | Requesting party identity | `alias:tier` | `telarus:operator` |
+| 2 | **userinfo** | Requesting party identity | `alias:grant` | `telarus:operator` |
 | 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
 | 4 | **host** | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/@lares/` | `/threshold.uncertain.opens` |
@@ -192,9 +192,9 @@ Identity addressing lives at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-sta
 
 ### 3.4 Component Semantics
 
-**userinfo** (`alias:tier`) — "Who speaks, at what trust level."
+**userinfo** (`alias:grant`) — "Who speaks, at what trust level."
 
-- Two colon-delimited sub-fields: `alias` and `tier`
+- Two colon-delimited sub-fields: `alias` and `grant`
 - Parser: split on `:` — exactly two sub-fields
 
 **host** (`machine_id`) — Crystal system machine identifier. Stable across the machine's lifetime. Provisional format: `lares-{slug}` where slug is UUID, operator-assigned name, or generated handle.
@@ -247,12 +247,12 @@ lar://telarus:operator@enyalios/~uri.schema.question/
 Reading provisional: "I believe you're orienting toward URI schema territory — I may have misread your stance or HA.KA.BA."
 
 ```
-lar://scryer:node@enyalios/~s0.gap.logged/
+lar://scryer:agent@enyalios/~s0.gap.logged/
 ```
 Execution provisional: "I intend to log this S0 gap — execution may find a different path or territory."
 
 ```
-lar://scryer:node@enyalios/~s0.schema.updated/
+lar://scryer:agent@enyalios/~s0.schema.updated/
 ```
 Trajectory provisional: "I predict our next territory is the updated schema — operator may redirect entirely."
 
@@ -342,7 +342,7 @@ Module descriptors use `version_num` or semver-like fields for content versionin
 A `lar:` URI is **well-formed** when:
 
 1. Scheme is exactly `lar:`
-2. If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:tier`); no parenthetical phase sub-field
+2. If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:grant`); no parenthetical phase sub-field
 3. Host is a valid `machine_id` (alphanumeric + hyphens)
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
@@ -382,7 +382,7 @@ A spanSpan record is **consistent** when:
 
 1. **Non-dereferenceable:** `lar:` URIs are pure identifiers. No network resolution occurs — there is no server to attack via URI injection.
 
-2. **No credential transport:** The `alias:tier` userinfo encodes an application-layer signal role, not an authentication credential. Real authentication is handled by the underlying identity layer (DID, OAuth, UCAN capability tokens). A `lar:` URI MUST NOT be treated as proof of identity.
+2. **No credential transport:** The `alias:grant` userinfo encodes an application-layer signal role, not an authentication credential. Real authentication is handled by the underlying identity layer (DID, OAuth, UCAN capability tokens). A `lar:` URI MUST NOT be treated as proof of identity.
 
 3. **Fragment client-side:** Per RFC 3986 §3.5, the fragment is not sent over the wire. The fragment carries only section anchors — no chronometer, no signal state. This reduces the information exposed in client-side contexts.
 

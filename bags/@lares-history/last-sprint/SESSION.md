@@ -811,7 +811,7 @@ Full findings in `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESE
 
 **lar:// URI — three families, no grammar change:**
 - `lar:///` (triple-slash, hostless) = system/content memes. Stable tagspace: `ha.ka.ba`. Unstable: what3words-style roots.
-- `lar://alias:tier@host/` (hostful, existing) = active operators/agents on a machine (VS Code, MCP, etc.)
+- `lar://alias:grant@host/` (hostful, existing) = active operators/agents on a machine (VS Code, MCP, etc.)
 - NEW: `lar:///ha.ka.ba/@nexus/<nexus-pubkey>` = Nexus identity + registry doc. New `@nexus` scope in resolver. New kind: `"nexus-doc"`. No URI grammar change.
 
 **Presence routing — three-layer:**

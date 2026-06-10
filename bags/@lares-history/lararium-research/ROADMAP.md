@@ -595,7 +595,7 @@ This roadmap now treats the following as active migration context rather than ap
 - `meme` is the Lararium ontology term; TiddlyWiki remains a reference system, not the vocabulary source.
 - The branch-local DAG walker exists and should be ported rather than redesigned.
 - Hostless `lar:///...` URIs denote stable canonical meme addresses.
-- Hostful `lar://alias:tier@host/...` URIs denote live exchange records.
+- Hostful `lar://alias:grant@host/...` URIs denote live exchange records.
 - Live exchange records may inform interpretation and propose changes, but must not silently override invariant memes.
 - The green-jello-dinosaur bug names the Live-Session Overwrite failure mode.
 <<~/ahu >>
@@ -778,8 +778,8 @@ Additional assumptions now bind this roadmap:
 
 - `meme`, `loci meme`, `invariant meme`, `meme graph`, and `memetic-wikitext` remain the preferred Lararium terms.
 - “Tiddler” is now acceptable when naming the TW5/Automerge store contract; `meme` remains the Lararium ontology term.
-- Hostful `lar:` URIs must preserve the ordered authority grammar `alias:tier@host`.
-- Trust tier and speaker tier remain distinct; `alias:tier@host` names who speaks, not whether the claim overrides law.
+- Hostful `lar:` URIs must preserve the ordered authority grammar `alias:grant@host`.
+- Trust tier and speaker tier remain distinct; `alias:grant@host` names who speaks, not whether the claim overrides law.
 - Live-session material enters the same tagspace as system files, but carries lower override authority than hostless invariant/control memes.
 <<~/ahu >>
 
@@ -924,7 +924,7 @@ The URI parser and resolver model should treat:
 
 ```text
 lar:///ha.ka.ba/@lares/...                  canonical hostless meme
-lar://alias:tier@host/ha.ka.ba/@lares/...   live contextual exchange record
+lar://alias:grant@host/ha.ka.ba/@lares/...   live contextual exchange record
 ```
 
 as distinct identities.
@@ -1061,8 +1061,8 @@ Minimum record fields:
 
 ```ts
 type LarExchangeRecord = {
-  uri: LarUri              // hostful lar://alias:tier@host/...
-  speaker: LarAuthority   // alias, tier, host
+  uri: LarUri              // hostful lar://alias:grant@host/...
+  speaker: LarAuthority   // alias, grant, host
   signal: LarSignal       // stances, confidence, p, ffz
   trustTier: "session" | "trajectory"
   sourceSpan?: SourceSpan
@@ -1299,7 +1299,7 @@ All target outcomes delivered:
 
 - ✓ Boot receipt determinism: hash covers stable content only (excludes `compiledAt`)
 - ✓ `ClosureEntry` frozen at compiler boundary (no external mutation)
-- ✓ Hostful `lar://alias:tier@host/path` URI parsing: `parseHostfulLarUri()`, `isHostfulLarUri()` in `lararium-mesh`; hostful records always virtual, never resolve to lares/ files; `resolveLarUri()` explicitly rejects hostful form
+- ✓ Hostful `lar://alias:grant@host/path` URI parsing: `parseHostfulLarUri()`, `isHostfulLarUri()` in `lararium-mesh`; hostful records always virtual, never resolve to lares/ files; `resolveLarUri()` explicitly rejects hostful form
 - ✓ 22 property tests for nested `ahu` `? ->` resolution in `lararium-mesh`
 - ✓ **Grammar fix: `fromSlot` separated from `fromSocket`** — the critical invariant:
   - `fromSocket` = the enclosing ahu worksite (always set from the ahu stack)
@@ -2038,7 +2038,7 @@ Required context now present in-document:
 
 - meme ontology replaces tiddler terminology in Lararium core language
 - branch-local DAG walker exists and should be ported
-- hostful `lar://alias:tier@host/...` records remain distinct from hostless `lar:///...` memes
+- hostful `lar://alias:grant@host/...` records remain distinct from hostless `lar:///...` memes
 - trust-tier ordering prevents Live-Session Overwrite
 - green-jello-dinosaur becomes a named fixture and failure-mode test
 - MCP adapter should surface trust-boundary conflicts instead of resolving them silently

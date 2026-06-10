@@ -145,7 +145,7 @@ Do not infer `implements loci` without evidence.
 
 Decompose; classify resolution state.
 
-- step 1: match `^lar:\/\/[^\/]*\/(\w+\.\w+\.\w+)\/(.+)$`; extract `root` and `sub-path`; if no match, carrier ineligible — emit and stop; authority may be empty (`lar:///`) or full (`lar://alias:tier@host/`)
+- step 1: match `^lar:\/\/[^\/]*\/(\w+\.\w+\.\w+)\/(.+)$`; extract `root` and `sub-path`; if no match, carrier ineligible — emit and stop; authority may be empty (`lar:///`) or full (`lar://alias:grant@host/`)
 - step 2: if `root == "ha.ka.ba"` → `packages/lares-core/memes/` + stem + `.md`; else → `lares/chapel-perilous-opens/` + root + `/` + stem + `.md`
 - step 3: file exists → RESOLVED; file absent → DECLARED-UNRESOLVED; emit forward reference
 - read convention surfaces against the derivation result

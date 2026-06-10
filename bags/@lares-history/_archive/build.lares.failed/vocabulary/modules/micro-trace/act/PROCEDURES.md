@@ -44,11 +44,11 @@ Yes. The parse layer and the trace layer were being conflated. →■ The govern
 
 ```
 lar://council:admin@lares-sdm:7/task.research.dispatches?stances=^.-.-.-.-&confidence=CS:16&p=10#O0.O0.O0.D1.A7
-→ lar://worker(Explore):node@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O0.O7.A1
+→ lar://worker(Explore):agent@lares-sdm:7/research.corpus.reads?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O0.O7.A1
 
 [Explore agent — contents not in parent trace]
 
-lar://worker(Explore):node@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O0.O7.A1
+lar://worker(Explore):agent@lares-sdm:7/research.findings.returns?stances=^.-.-.-.-&confidence=S:13&p=10#O0.O0.O0.O7.A1
 → lar://council:admin@lares-sdm:7/task.findings.receives?stances=^.-.-.-.-&confidence=CS:16&p=10#O0.O0.O0.D1.A7
 ```
 

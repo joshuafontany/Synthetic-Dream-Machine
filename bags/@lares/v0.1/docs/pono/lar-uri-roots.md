@@ -48,7 +48,7 @@ All canonical infrastructure memes live under `lar:///ha.ka.ba/@lares/v0.1/api/`
 The tuple root does not resolve via the caps-file mechanism; it resolves
 through the Automerge doc store and lares/ hydration path.
 
-Hostful URIs (`lar://alias:tier@host/path`) carry lower trust than hostless
+Hostful URIs (`lar://alias:grant@host/path`) carry lower trust than hostless
 invariant memes. Hostful records never resolve to lares/ files.
 
 <<~/ahu >>

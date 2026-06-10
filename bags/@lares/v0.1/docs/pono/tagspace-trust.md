@@ -130,7 +130,7 @@ trust tier: invariant | interface | data | implementation | session | trajectory
 promotion state: none | proposed | crossing | confirmed
 ```
 
-Do not derive memetic truth authority from `alias:tier@host` alone.
+Do not derive memetic truth authority from `alias:grant@host` alone.
 Speaker role and truth tier must stay separate.
 
 <<~/ahu >>

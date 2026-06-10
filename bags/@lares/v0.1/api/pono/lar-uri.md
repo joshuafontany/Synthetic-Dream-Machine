@@ -67,7 +67,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 |---|---|
 | **address** | one resolved `lar:` URI; the identity of a named graph unit. |
 | **local form** | `lar:///path` — authority-less; for stable addresses and system resource names. |
-| **session form** | `lar://alias:tier@host/path` — names a speaker; exchange spans only. |
+| **session form** | `lar://alias:grant@host/path` — names a speaker; exchange spans only. |
 | **triple** | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
 | **bag** | a CRDT surface (today an Automerge doc); designated by one `@`-tagged segment. |
 | **slot** | one lowercase term (word or hyphen-compound) in the triple. |
@@ -89,7 +89,7 @@ lar-URI       = "lar:" hier-part [ "#" fragment ]
 hier-part     = local-form / session-form
 local-form    = "///" path                 ; authority-less
 session-form  = "//" authority "/" path    ; speaker named
-authority     = alias ":" tier "@" host    ; host per RFC 3986
+authority     = alias ":" grant "@" host    ; host per RFC 3986
 
 path          = stable-path / unstable-path / adjacent-path
 stable-path   = "ha.ka.ba" [ "/" bag-seg ] *( "/" segment )
@@ -102,7 +102,7 @@ segment       = 1*( unreserved / pct-encoded )   ; child[2]+ : MUST NOT carry "@
 word          = 1*( %x61-7A )              ; one slot: lowercase only
 name          = 1*( unreserved )
 alias         = 1*( unreserved )
-tier          = 1*( unreserved )
+grant          = 1*( unreserved )
 ```
 
 A `lar:` URI MUST hold ASCII only. A slot MUST hold lowercase ASCII letters alone. A stable or unstable path MUST carry a full three-slot root. An adjacent path MUST carry a non-dotted root.
@@ -283,7 +283,7 @@ lar:///LARES
 
 A session-form speaker (exchange span only):
 ```
-lar://mischief-muse:synthesis@host/ha.ka.ba/@lares/turn/current
+lar://mischief-muse:agent@host/ha.ka.ba/@lares/turn/current
 ```
 
 A registry entry pointing at another bag:
@@ -312,7 +312,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 ## Annex — Open Items (Informative)
 
 - **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
-- **Session-form authority grammar.** The `alias:tier@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
+- **Session-form authority grammar.** The `alias:grant@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
 - **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
 - **Lineage citation bind.** BOUND 2026-06-08 from the `sdm/` shelf: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *UVG 2e* pp. 230–234. Egyptian root named in source: the *Coffin Texts* / *Book of the Dead*. Hawaiian *hā* layers as resonance.
 

@@ -337,30 +337,16 @@ claude   → HTTP SSE MCP endpoint (authenticated)
 
 <<~/ahu >>
 
-<<~ ahu #the-altar-fire >>
+<<~ ahu #trust-grants >>
 
-## The Altar Fire — Main Entry Room
+**Trust-grants:**
 
-`the-altar-fire` is the canonical entry room for all trust tiers. It is the hearth: operators, users, and anon visitors all land here first. What they see and can do is governed by their current trust-tier capability set.
-
-```
-lar:///ha.ka.ba/@lares/api/v0.1/lararium/the-altar-fire
-```
-
-This is an **invariant meme** (to be authored). It owns the room contract, portal registry, and trust-tier welcome surfaces.
-
-**Trust-tier presentation at the altar fire:**
-
-| Tier | What they see | What they can do |
+| GRant | What they see | What they can do |
 |------|---------------|-----------------|
 | **anon** | Public memes only, read-only canvas, chat room surface | Browse, read, enter chat rooms |
 | **user** | Own lararium rooms + shared public rooms | Read + create in own rooms, pending edits |
 | **operator** | Full boot closure + promoted room list | Read + pending edits in boot room |
 | **admin** | Full boot closure + invariant meme surfaces | Read + write + canon-promotion |
-
-**The altar fire is not a blank lobby.** It renders the minimal boot closure — the 19 invariant memes — as the starting canvas, with portals to other rooms arranged around the perimeter. Think of it as a TiddlyWiki `DefaultTiddlers` list rendered spatially: the memes that are always open when you first arrive.
-
-**Room portal arrangement:** Portals from the altar fire are positioned at canonical compass points or cluster zones on the canvas. Their placement is itself a meme (part of the altar fire carrier) — operators can edit portal position without canonical write-back.
 
 <<~/ahu >>
 
@@ -423,15 +409,15 @@ All persistent content in Lararium receives a `lar:` URI. This is the foundation
 | RPG book meme | `lar:///synthetic-dream-machine/ftls/${slug}` | `lar:///synthetic-dream-machine/ftls/jump-drive` |
 | Imported text | `lar:///imported/${sha256-prefix}/${slug}` | `lar:///imported/3a9f/my-notes` |
 | Imported image | `lar:///imported/images/${sha256}` | `lar:///imported/images/ba78…` |
-| Live chat message | `lar://alias:tier@host/chat/${room}/${turn-id}` | `lar://joshu:operator@local/chat/the-altar-fire/turn-001` |
-| Live session meme | `lar://alias:tier@host/${path}` | `lar://joshu:operator@local/sketch/idea-draft` |
+| Live chat message | `lar://alias:grant@host/chat/${room}/${turn-id}` | `lar://joshu:operator@local/chat/the-altar-fire/turn-001` |
+| Live session meme | `lar://alias:grant@host/${path}` | `lar://joshu:operator@local/sketch/idea-draft` |
 | Committed user meme | `lar:///user/${did-fragment}/${slug}` | `lar:///user/did-key-abc123/my-meme` |
 
-**Hostless URIs** (`lar:///...`) are canonical — they name things that exist in `lares/` or are promoted canon. **Hostful URIs** (`lar://alias:tier@host/...`) are live/session-scoped — they name things that exist only in the current session's branch/room until committed.
+**Hostless URIs** (`lar:///...`) are canonical — they name things that exist in `lares/` or are promoted canon. **Hostful URIs** (`lar://alias:grant@host/...`) are live/session-scoped — they name things that exist only in the current session's branch/room until committed.
 
 **Import flow:** When a user drops a text file or image onto the canvas, the server:
 1. Computes `sha256(content)`
-2. Assigns a hostful URI: `lar://alias:tier@host/imported/${sha256-prefix}/${slug}`
+2. Assigns a hostful URI: `lar://alias:grant@host/imported/${sha256-prefix}/${slug}`
 3. Creates a tldraw shape with that URI as its `sourceUri`
 4. On commit: promotes to hostless `lar:///imported/...` and writes a carrier file
 
@@ -472,7 +458,7 @@ canvas edit (shape text field updated)
     ↓  server reseed → new room snapshot with hostless URI
 ```
 
-**Canon-promotion assigns hostless URI:** A meme drafted on canvas has a hostful URI (`lar://alias:tier@host/...`). Promotion assigns `lar:///...` (hostless) and writes the carrier file. The tldraw shape's `meta.uri` is updated to the hostless URI after promotion — this is the only moment a shape URI changes.
+**Canon-promotion assigns hostless URI:** A meme drafted on canvas has a hostful URI (`lar://alias:grant@host/...`). Promotion assigns `lar:///...` (hostless) and writes the carrier file. The tldraw shape's `meta.uri` is updated to the hostless URI after promotion — this is the only moment a shape URI changes.
 
 **TW5 renderTree and canvas shapes:** TW5's render pipeline produces HTML for the MemeDetailPanel rich-view. It does NOT create tldraw shapes directly — shape creation is server-side via `compileCascade`. The browser reads shapes from the CRDT; TW5 provides the rendered view of their content. Future: a TW5 canvas widget type could emit shape layout hints back to the server via the promote/write-back path, but it is not the authoritative shape source.
 
@@ -1157,7 +1143,7 @@ Research foundation: `lares/lararium-node/MEME-STORE-FOUNDATIONS.md`. Three laws
 
 ### Law 1: `meme-immutability`
 
-A meme object, once admitted to the confirmed layer (`lares/` hostless URIs), is never mutated. The only valid write is a full replacement producing a new URI. Session edits accumulate in the hostful tier (`lar://alias:tier@host/path`). Canon-promotion is the atomic transition.
+A meme object, once admitted to the confirmed layer (`lares/` hostless URIs), is never mutated. The only valid write is a full replacement producing a new URI. Session edits accumulate in the hostful tier (`lar://alias:grant@host/path`). Canon-promotion is the atomic transition.
 
 **Refresh corollary:** after the local-first pivot, ordinary carrier refresh should be disk/Automerge/TW5 change propagation plus selective projection diffing. `/admin/reseed` is now a legacy layout reset / receipt recompute tool, not the primary content-refresh mechanism. Shape-level mutation outside the authorized store/projection path remains illegal.
 

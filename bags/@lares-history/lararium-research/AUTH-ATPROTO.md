@@ -107,7 +107,7 @@ OAuth session                         (access token, refresh token, DPoP keys)
   ↓ application layer
 Lararium session                      (application-level session, issued by BFF/server)
   ↓ runtime addressing
-Lararium alias:tier@host              (hostful URI — runtime / deployment claim)
+Lararium alias:grant@host              (hostful URI — runtime / deployment claim)
   ↓ invariant identity
 lar:///... hostless meme URI          (canonical Lararium identity — no host, no session)
 ```
@@ -115,9 +115,9 @@ lar:///... hostless meme URI          (canonical Lararium identity — no host, 
 Rules:
 - A handle starts login but must not become final identity. Resolve and verify via OAuth.
 - The token `sub` must match the expected DID after OAuth completes.
-- `alias:tier@host` may map to an ATProto identity, but must not collapse into it.
+- `alias:grant@host` may map to an ATProto identity, but must not collapse into it.
   A deployment alias is not a DID. A DID is not an alias.
-- Hostful runtime claims (`lar://alias:tier@host/...`) must not override
+- Hostful runtime claims (`lar://alias:grant@host/...`) must not override
   hostless invariant meme identity (`lar:///...`).
 - Lararium session tokens are application-layer; they are not OAuth tokens.
 - PDS/resource server authority must be checked — do not accept unverified issuer claims.

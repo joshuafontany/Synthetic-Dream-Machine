@@ -84,7 +84,7 @@ Given: lar-uri (string)
      If no match → ineligible for loci. Emit: "loci capability requires \w.\w.\w root path segment"
      root     = match[1]   e.g. "ha.ka.ba" or "threshold.uncertain.opens"
      sub-path = match[2]   e.g. "v0.1/api/pono/loci"
-     authority may be empty (lar:///) or full (lar://alias:tier@host/)
+     authority may be empty (lar:///) or full (lar://alias:grant@host/)
 
 2. Derive candidate filepath:
      stem = sub-path.replace("_", "-")

@@ -509,7 +509,7 @@ packages/lararium-node/
 
   **Hostful instance** (peer-exchange, non-corpus):
   ```
-  lar://peer-alias:tier@host/path/to/device#instance-uuid
+  lar://peer-alias:grant@host/path/to/device#instance-uuid
   ```
   Tier 2 causal island. Never simultaneously apprehended with the local doc. Arrives via federation sync; lives in a hostful corpus bag.
 
@@ -522,7 +522,7 @@ packages/lararium-node/
 
 ◇ Bag assignment and movability:
   - Instance tiddler title: full lar URI with fragment, stored as a tiddler in the room Automerge doc.
-  - Default bag: `room` (Tier 1, simultaneously apprehended with other room tiddlers).
+  - Default bag: `wiki` (Tier 1, simultaneously apprehended with other room tiddlers).
   - Keyhive promotion: instance moves to `canon` bag (signed receipt required). Title unchanged.
   - Cross-realm federation: instance moves to a named corpus bag on the receiving peer. Title unchanged.
   - `MemeStoreDoc` handles all of this — bag is just a field on `MutableLarRecord`. No special treatment needed.

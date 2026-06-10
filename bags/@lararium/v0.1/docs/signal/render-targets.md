@@ -293,7 +293,7 @@ The `syad` lens invokes one or more standpoints, with optional `:` tool-carry.
 |---|---|---|
 | `@lindwyrm@new-delos` | `lindwyrm:...@new-delos` | `did:plc:...` |
 | `@telarus@~crossroads` | `telarus:operator@enyalios` | `did:plc:...` |
-| `@mischief-muse@lares` | `mischief-muse:node@lares-abc123` | Lares node DID or ephemeral key |
+| `@mischief-muse@lares` | `mischief-muse:agent@lares-abc123` | Lares node DID or ephemeral key |
 
 The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes through nearest stable nexus.
 
@@ -362,14 +362,14 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 **Construction:**
 
 1. No emoji. No glyphs. ASCII only.
-2. URI form: `lar://alias:tier@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
+2. URI form: `lar://alias:grant@host/w1.w2.w3/path/` — bearing only, no query. Session form names the speaker through the authority.
 3. The URI carries no stance, confidence, or chronometer signal; those ride the sigils.
 4. Path holds the three-term root, zero-to-four segments, optional `#fragment`.
 
 **Closed example:**
 
 ```
-lar://scryer:node@Enyalios/sigils.render.maps/sigilization/
+lar://scryer:agent@Enyalios/sigils.render.maps/sigilization/
 ```
 
 ### Surface 4: `tiddler:header` (S3+)

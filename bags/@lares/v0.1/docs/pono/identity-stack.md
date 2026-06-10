@@ -48,7 +48,7 @@ Within the DreamDeck / Kowloon ActivityPub layer, identities use the canonical A
 |---|---|---|
 | `@lindwyrm@new-delos` | `lindwyrm:...@new-delos` | `did:plc:...` (Lindwyrm's key) |
 | `@telarus@~crossroads` | `telarus:operator@enyalios` | `did:plc:...` (Telarus's key) |
-| `@mischief-muse@lares` | `mischief-muse:node@lares-abc123` | Lares node DID or ephemeral key |
+| `@mischief-muse@lares` | `mischief-muse:agent@lares-abc123` | Lares node DID or ephemeral key |
 
 The `~crossroads` tilde prefix denotes a nomadic/crossroads node — no fixed host, routes through the nearest stable nexus.
 
@@ -71,7 +71,7 @@ The attitude triple (`//ha.ka.ba`) sits **before** other instruments like confid
 |---|---|---|---|
 | `chat-log:post-header` | `@handle@node — timestamp — //ha.ka.ba{/path} [Reg] 🏛️{tc}…` | No — social projection with glyphs | DreamDeck feed posts, BBS thread headers |
 | `hud:exchange-pair` | `<<~ aim … >>` + `hud`·`ward` panel beneath | **Yes — canonical ASCII URI**; only the sigil panel uses glyphs | Every exchange-span boundary (mandatory) |
-| `record:full` | `lar://alias:tier@host/ha.ka.ba/@lares/` | Yes — identity projection | Storage, crystal serialization, registry |
+| `record:full` | `lar://alias:grant@host/ha.ka.ba/@lares/` | Yes — identity projection | Storage, crystal serialization, registry |
 
 The `record:full` and `hud:exchange-pair` render targets live in the lar-uri scheme itself; `chat-log:post-header` rides here because it projects identity + bearing onto the social surface.
 

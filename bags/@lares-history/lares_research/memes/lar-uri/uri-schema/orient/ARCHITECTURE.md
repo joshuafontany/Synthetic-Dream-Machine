@@ -34,7 +34,7 @@ Named render targets: `record:full`, `hud:exchange-pair`, `chat-log:post-header`
 
 At each exchange span, `lar:` URIs are used in a mandatory sequence:
 
-1. **Read operator input as a provisional URI** — Lares reads the prompt as an implicit signal: tier, cognitive phase, semantic territory (HA.KA.BA), and stance. Constructs a provisional operator URI. May carry `~` markers if reading is uncertain.
+1. **Read operator input as a provisional URI** — Lares reads the prompt as an implicit signal: noun, cognitive phase, semantic territory (HA.KA.BA), and stance. Constructs a provisional operator URI. May carry `~` markers if reading is uncertain.
 
 2. **Lares declares its own provisional execution URI** — Before generating content, Lares sets its intent with a provisional node URI. HA.KA.BA is a declared heading, not a confirmed location. `~` prefix marks it as execution-provisional.
 
@@ -57,7 +57,7 @@ At each exchange span, `lar:` URIs are used in a mandatory sequence:
 **Full form (with authority):**
 
 ```
-lar://alias:tier@host/ha.ka.ba/?stances=XXXXX&confidence=R:N&p=N#chronometer <!-- uri-ok -->
+lar://alias:grant@host/ha.ka.ba/?stances=XXXXX&confidence=R:N&p=N#chronometer <!-- uri-ok -->
 ```
 
 Where `stances=XXXXX` is the five-character stance amplitude string.
@@ -87,7 +87,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 | # | Component | RFC 3986 Role | Lares Mapping |
 |---|---|---|---|
 | 1 | **scheme** | Protocol identifier | `lar:` — non-dereferenceable |
-| 2 | **userinfo** | Requesting party identity | `alias:tier` |
+| 2 | **userinfo** | Requesting party identity | `alias:grant` |
 | 3 | **`@`** | Identity → machine delimiter | Standard |
 | 4 | **host** | Machine identity | `machine_id` from crystal system |
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/` |
@@ -104,11 +104,11 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#component-semantics -->
 ## Component Semantics
 
-### `userinfo` — `alias:tier`
+### `userinfo` — `alias:grant`
 
 "Who speaks, at what trust level."
 
-- Two colon-delimited sub-fields: `alias` and `tier`
+- Two colon-delimited sub-fields: `alias` and `grant`
 - Phase is **not** encoded in userinfo. Phase lives exclusively in the chronometer fragment per participant.
 - Parser: split on `:` — exactly two sub-fields, no parenthetical
 

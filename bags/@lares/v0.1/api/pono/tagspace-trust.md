@@ -42,7 +42,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 <<~ ahu #law >>
 
 Hostless `lar:///` memes MAY carry stable law, capability shape, data, docs, or file-backed source truth.
-Hostful `lar://alias:tier@host/` records MAY carry live exchange intent, session context, and trajectory pressure.
+Hostful `lar://alias:grant@host/` records MAY carry live exchange intent, session context, and trajectory pressure.
 Data memes may appear as either pattern, surfaced through exploration.
 
 A live exchange record MAY inform interpretation.
@@ -51,7 +51,7 @@ A live exchange record MUST NOT silently override a hostless invariant meme.
 
 When hostful live context conflicts with hostless invariant law, the node MUST surface a trust-boundary event before applying the live claim.
 
-Speaker authority (`alias:tier@host`) and memtic truth authority MUST remain distinct.
+Speaker authority (`alias:grant@host`) and memtic truth authority MUST remain distinct.
 Operator agency matters; persistence and placement still matter.
 
 <<~/ahu >>

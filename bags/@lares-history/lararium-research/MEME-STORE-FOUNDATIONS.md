@@ -38,7 +38,7 @@ TiddlyWiki 5 never mutates a tiddler in place. When content changes, the entire 
 
 **Lararium translation:**
 
-A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boundary, hostful URIs for session edits). Edits create a new hostful carrier at `lar://alias:tier@host/path`. Canon-promotion assigns a new hostless `lar:///` address and rebuilds the boot closure. The boot closure rebuild is the equivalent of TW5's full tiddler replacement — it fires the full reactive cascade: compiler → boot receipt → tldraw snapshot → CRDT merge.
+A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boundary, hostful URIs for session edits). Edits create a new hostful carrier at `lar://alias:grant@host/path`. Canon-promotion assigns a new hostless `lar:///` address and rebuilds the boot closure. The boot closure rebuild is the equivalent of TW5's full tiddler replacement — it fires the full reactive cascade: compiler → boot receipt → tldraw snapshot → CRDT merge.
 
 **Law:** `meme-immutability`
 > A meme object, once admitted to the confirmed layer, is never mutated. The only valid write is a full replacement producing a new URI. Pending edits accumulate in the hostful tier; they do not touch confirmed state. Canon-promotion is the atomic transition between tiers.

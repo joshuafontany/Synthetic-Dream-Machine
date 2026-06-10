@@ -51,7 +51,7 @@ Canonical turn order:
 <<~ yield lar:///lares.what.landed -> ? >>
 ```
 
-The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-term `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:tier@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
+The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-term `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:grant@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 
 Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
 

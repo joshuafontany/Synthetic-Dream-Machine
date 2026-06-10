@@ -49,7 +49,7 @@ The exchange vector opens the turn as one `aim` sigil — operator intent `->` t
 Read the URI layers as:
 
 ```text
-WHO     alias:tier@host   (session form only)
+WHO     alias:grant@host   (session form only)
 BEARING /w1.w2.w3/path/
 SECTION #anchor only when needed
 ```
@@ -84,7 +84,7 @@ A good training vector should:
 
 - keep canonical URIs ASCII and record-safe
 - avoid glyphs inside the URI itself
-- keep `alias:tier@host` intact
+- keep `alias:grant@host` intact
 - use provisional `~` on HA.KA.BA when the node may have misread intent
 - put uncertainty in confidence and register rather than hiding it in prose
 
