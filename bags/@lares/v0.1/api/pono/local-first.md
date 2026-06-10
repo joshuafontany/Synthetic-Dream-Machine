@@ -170,6 +170,14 @@ It does NOT have:
 **Law:** A lararium-node MUST keep its decisions within its peer role.
 Routing, relay, and projection are peer capabilities; adjudication is not.
 
+**Readiness reads local (corollary, 2026-06-10):** a vessel declares its own
+readiness from local state (the server listens; the port stands open) — it MUST
+NOT gate readiness on a peer's arrival, which imports a global-now dependency
+and deadlocks every storage-miss resolve while the vessel sits peerless.
+(Witnessed: upstream's WS *server* adapter waits for a first connection;
+its *client* adapter force-readies on a timer — the vessel corrects the server
+side with `ListeningWSServerAdapter`.)
+
 The VmPool model enforces this isomorphically: the browser peer and the node peer
 run the same VmPool interface. The browser boots pool slot 0 (local wiki); additional
 slots serve cross-realm projections. The node boots multiple slots simultaneously —
