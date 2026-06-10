@@ -51,6 +51,7 @@ export { getOriginBag } from "./residency-surface.js";
 export { registerActionReactors, makeActionReactorFor } from "./action-handler.js";
 export { makeWikiBehavior } from "./wiki-behavior.js";
 export type { WikiBehaviorOptions } from "./wiki-behavior.js";
+export { startEngineWatch, ENGINE_WAITING_ALERT_TITLE } from "./engine-watch.js";
 export type { ActionHandlerOptions } from "./action-handler.js";
 
 export { exportMemeText } from "./meme-write.js";

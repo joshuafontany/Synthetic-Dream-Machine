@@ -40,6 +40,13 @@ export interface IslandContext {
    * manifest resolver under `CATALOG_DOC_URI`; the kernel lifts it here.
    */
   catalogUrl: string | null;
+  /**
+   * The engine identity this island actually booted — sha256 the kernel computed
+   * over the core bytes it eval'd (never the blob entry's self-claim) + the blob
+   * entry's version string. The engine-watch compares the live `@lararium` doc
+   * against this to detect a waiting engine epoch (alert-only; reboot adopts).
+   */
+  engine: { sha256: string; version: string };
 }
 
 /**

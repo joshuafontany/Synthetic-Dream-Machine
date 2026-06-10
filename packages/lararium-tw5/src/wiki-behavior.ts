@@ -22,6 +22,7 @@ import {
 } from "@lararium/mesh";
 import { registerActionReactors } from "./action-handler.js";
 import { VerbTable } from "./verb-dispatcher.js";
+import { startEngineWatch } from "./engine-watch.js";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
 
 /** The reboot-pending alert tiddler title. Tagged `$:/tags/Alert` so TW5's NATIVE
@@ -46,6 +47,7 @@ export interface WikiBehaviorOptions {
 export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior {
   let _registry: VerbTable | null = null;
   let _cleanup: (() => void) | undefined;
+  let _engineWatchStop: (() => void) | undefined;
 
   return {
     onEa(ctx: IslandContext) {
@@ -77,6 +79,10 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         return { seeded: true, title: REBOOT_ALERT_TITLE };
       });
       _cleanup = opts.onBoot?.(ctx);
+      // Engine-epoch drift detection — when a new genesis merges into the live
+      // @lararium doc under this running island, self-write the engine-waiting
+      // alert (alert-only; the reboot that adopts it also clears it via @temp).
+      _engineWatchStop = startEngineWatch(ctx);
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
@@ -113,6 +119,8 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
     },
 
     onDemote() {
+      _engineWatchStop?.();
+      _engineWatchStop = undefined;
       _cleanup?.();
       _cleanup = undefined;
       _registry = null;

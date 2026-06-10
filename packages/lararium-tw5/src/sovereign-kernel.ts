@@ -50,6 +50,7 @@ import {
   isVesselToIslandMsg,
   mkTeardownAck,
   makeIslandRepo,
+  sha256HexBytesSync,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
@@ -188,6 +189,16 @@ export function runSovereignKernel(
       return;
     }
 
+    // §6 integrity gate, enforced: the manifest's coreHash names the engine the
+    // vessel intends; the kernel hashes the bytes it actually eval's. A mismatch
+    // faults before boot — the island never runs an engine it cannot witness.
+    const engineSha = sha256HexBytesSync(coreBytes);
+    if (msg.coreHash && msg.coreHash !== engineSha) {
+      _post(mkFault(msg.wikiUri, `TW5 core integrity gate failed — manifest coreHash=${msg.coreHash.slice(0, 12)}… vs eval'd bytes sha256=${engineSha.slice(0, 12)}…`));
+      return;
+    }
+    const engine = { sha256: engineSha, version: String(blobEntry?.version ?? "") };
+
     // §6b — plugin tiddlers travel via @lararium CRDT blob store (application/json
     // blobs). Islands read and apply them here — no manifest field needed.
     const pluginTiddlers: Record<string, unknown>[] = [];
@@ -231,7 +242,7 @@ export function runSovereignKernel(
     // entry, NOT a load slot — @catalog is absent from expandRecipe). Worker
     // behaviors build a CatalogAccessor over it to reach any registered bag.
     const catalogUrl = msg.resolver[CATALOG_DOC_URI] ?? null;
-    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl };
+    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine };
     await behavior.onEa(_ctx);
 
     handler.sendEa(msg.wikiUri);
