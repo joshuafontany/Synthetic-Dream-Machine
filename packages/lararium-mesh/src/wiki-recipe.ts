@@ -244,7 +244,7 @@ export interface RecipeFingerprintInput {
 /**
  * Compute the recipe-fingerprint for `@personal` / `@draft` binding.
  *
- * SHA-256 hex over canonical JSON of `{ wikiDocId, canonBagDocIds: sorted }`.
+ * SHA-256 hex over canonical JSON of `{ wikiDocId, libraryBagDocIds: sorted }`.
  * Two devices share an `@personal` binding iff their `(PersonGroup ×
  * fingerprint)` pairs match. The vessel stores `@personal` doc URLs keyed by
  * this fingerprint.
@@ -253,10 +253,6 @@ export interface RecipeFingerprintInput {
  * does not change the fingerprint. `canonicalJson` sorts object keys for
  * further stability.
  *
- * FROZEN WIRE KEY: the hashed JSON keeps the v1 literal `canonBagDocIds` even
- * though the API field renamed to `libraryBagDocIds` — changing the key would
- * silently re-key every stored `@personal` binding.
- *
  * @see lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot#questions Q4
  */
 export async function computeRecipeFingerprint(
@@ -264,8 +260,8 @@ export async function computeRecipeFingerprint(
   provider: DigestProvider = defaultCryptoProvider,
 ): Promise<string> {
   const canonical = {
-    wikiDocId:      input.wikiDocId,
-    canonBagDocIds: [...input.libraryBagDocIds].sort(),
+    wikiDocId:        input.wikiDocId,
+    libraryBagDocIds: [...input.libraryBagDocIds].sort(),
   };
   return sha256Hex(canonicalJsonBytes(canonical), provider);
 }

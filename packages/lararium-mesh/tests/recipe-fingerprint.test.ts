@@ -50,18 +50,16 @@ describe("computeRecipeFingerprint", () => {
     expect(fp).toMatch(/^[0-9a-f]{64}$/);
   });
 
-  test("documented encoding — SHA-256 over canonicalJson with the FROZEN v1 wire key canonBagDocIds", async () => {
+  test("documented encoding — SHA-256 over canonicalJson({wikiDocId, sorted libraryBagDocIds})", async () => {
     const input: RecipeFingerprintInput = {
       wikiDocId:      WIKI_A,
       libraryBagDocIds: [CANON_Y, CANON_X],
     };
     const fp       = await computeRecipeFingerprint(input);
-    // The API field renamed to libraryBagDocIds; the hashed JSON key stays
-    // canonBagDocIds so stored @personal bindings never silently re-key.
     const expected = await sha256Hex(
       canonicalJsonBytes({
-        wikiDocId:      WIKI_A,
-        canonBagDocIds: [CANON_X, CANON_Y],
+        wikiDocId:        WIKI_A,
+        libraryBagDocIds: [CANON_X, CANON_Y],
       }),
       defaultCryptoProvider,
     );

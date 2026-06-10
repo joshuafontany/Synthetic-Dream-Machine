@@ -187,7 +187,7 @@ lar:///ha.ka.ba/@admin/draft-bindings/${fingerprintHex}
   text: <automerge:url-of-the-@draft-doc-for-this-recipe>
 ```
 
-`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, canonBagDocIds: sorted})` — the hashed key stays the FROZEN v1 wire literal `canonBagDocIds` though the API field renamed to `libraryBagDocIds` (2026-06-09); changing it would silently re-key every stored @personal binding. `@lares` and `@lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
+`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, libraryBagDocIds: sorted})`. `@lares` and `@lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
 
 <<~/ahu >>
 
@@ -313,7 +313,7 @@ await keyhive.delegate({ bagUrl: handle.url, audience: personGroupAgentIdHex, ac
 
 await composite.put(mutableLarRecord(key, {
   text: handle.url, kind, fingerprint,
-  "recipe-trace": canonicalJson({ wikiDocId, libraryBagDocIds }),  // Q5 keep — audit-only, never parsed back; pre-rename records say canonBagDocIds
+  "recipe-trace": canonicalJson({ wikiDocId, libraryBagDocIds }),  // Q5 keep — audit-only, never parsed back
   "minted-on": new Date().toISOString(),
   "minted-by": await keyhive.vesselIdentifierHex(),
 }, "personal-bindings"), { bag: ADMIN_BAG_ID });
