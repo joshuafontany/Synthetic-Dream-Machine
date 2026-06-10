@@ -71,10 +71,7 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
       await pool.mountWiki(WIKI_ID, {
         coreHash,
         recipe:   { wikiSlug: "test" },
-        resolver: {
-          [LARARIUM_BAG]:          laraiumHandle.url,
-          "lar:///ha.ka.ba/@test": wikiHandle.url,
-        },
+        grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
       });
 
       expect(pool.tier(WIKI_ID)).toBe("wela");

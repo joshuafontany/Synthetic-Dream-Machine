@@ -107,6 +107,14 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
       doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle.url }, "vessel-boot");
     });
   }
+  // @lares registers in @catalog like any library layer (no laresUrl grant —
+  // islands resolve it from the registry; wiki-layer-ontology Law 2).
+  const existingLares = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
+  if (laresUrl && existingLares !== laresUrl) {
+    catalogHandle.change((doc) => {
+      doc.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: laresUrl }, "vessel-boot");
+    });
+  }
   emit("island-ready");
 
   // ── social plane (resolveHandle encodes the seed policy) + admin doc ──

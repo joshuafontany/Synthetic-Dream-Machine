@@ -122,7 +122,7 @@ export class VesselIslandPoolCore {
     const storage = this._host.storage(wikiId);
 
     const manifestMsg = mkManifest(
-      wikiId, syncPort, spec.recipe, spec.resolver, spec.coreHash,
+      wikiId, syncPort, spec.recipe, spec.grants, spec.coreHash,
       {
         ...(storage            ? { storage }     : {}),
         ...(diskMirrors.length ? { diskMirrors } : {}),

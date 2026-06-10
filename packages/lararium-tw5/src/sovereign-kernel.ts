@@ -12,9 +12,10 @@
  *
  * ## Recipe law — one model across all wikis
  *
- *   Manifest carries `recipe: WikiRecipe + resolver: { slot → docUrl }`.
- *   The kernel walks `expandRecipe(recipe)`, resolves each CRDT slot's doc
- *   handle, then `buildIslandRecipe()` lays the composite stack:
+ *   Manifest carries `recipe: WikiRecipe + grants: IslandGrants`. Structural
+ *   slots arrive as typed grants; @lares may fall back to the catalog oracle;
+ *   library bags resolve from @catalog ONLY (boot = first reconcile — the same
+ *   path recipe-watch walks live). `buildIslandRecipe()` lays the stack:
  *
  *     @temp        (MemoryTiddlerStore, volatile)
  *     @draft       (CRDT, high-churn drafts)
@@ -41,10 +42,12 @@
 
 import {
   CompositeStore,
-  BAG_IDS,
-  CATALOG_DOC_URI,
   ENGINE_CORE_ID,
   TEMP_BAG,
+  DRAFT_BAG,
+  PERSONAL_BAG,
+  LARARIUM_BAG,
+  wikiBagUri,
   expandRecipe,
   mkFault,
   isVesselToIslandMsg,
@@ -62,6 +65,7 @@ import {
 } from "@lararium/mesh";
 import { IslandKernel } from "./island-kernel.js";
 import { buildIslandRecipe } from "./island-recipe.js";
+import { makeCatalogAccessor } from "./catalog-accessor.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
 // ── The host seam — platform divergence as composition ──────────────────────
@@ -95,12 +99,11 @@ export function runSovereignKernel(
     return behavior;
   };
 
-  let _repo:             Repo | null                    = null;
-  let _handles:          Map<string, DocHandle<LarDoc>> = new Map();
-  let _writableHandleId: string | null         = null;
-  let _composite:        CompositeStore | null = null;
-  let _ctx:              IslandContext | null  = null;
-  let _activeWikiUri                           = "";
+  let _repo:      Repo | null                    = null;
+  let _handles:   Map<string, DocHandle<LarDoc>> = new Map();
+  let _composite: CompositeStore | null = null;
+  let _ctx:       IslandContext | null  = null;
+  let _activeWikiUri                    = "";
 
   // Live CRDT patches flow through AutomergeDocStore.handle.on("change") →
   // MemeProvider → IslandAdaptor → $tw.lares.enqueueNalu. The wiki's
@@ -147,6 +150,35 @@ export function runSovereignKernel(
     }
   }
 
+  // ── Slot resolution — wait with a deadline, fault loudly, never hang ───────
+  //
+  // Partition-as-normal-state: a doc that has not yet arrived over syncPort
+  // gets a bounded wait; a doc that never arrives produces a LOUD fault the
+  // vessel can read, never a mute hang the vessel must guess at by timeout.
+  const SLOT_READY_TIMEOUT_MS = 8_000;
+
+  async function _resolveSlot(
+    repo: Repo,
+    docUrl: string,
+    slot: string,
+    wikiUri: string,
+  ): Promise<DocHandle<LarDoc> | null> {
+    const handle = await repo.find<LarDoc>(
+      docUrl as AutomergeUrl,
+      { allowableStates: ["ready", "unavailable"] },
+    );
+    if (!handle.isUnavailable()) return handle;
+    // Settled "unavailable" before sync delivered — give the channel a bounded
+    // chance, then fault. whenReady(["ready"]) resolves the moment sync lands.
+    const ready = await Promise.race([
+      handle.whenReady().then(() => true),
+      new Promise<false>((res) => setTimeout(() => res(false), SLOT_READY_TIMEOUT_MS)),
+    ]);
+    if (ready) return handle;
+    _post(mkFault(wikiUri, `slot ${slot} unavailable — doc ${docUrl} never arrived over syncPort (${SLOT_READY_TIMEOUT_MS}ms)`));
+    return null;
+  }
+
   async function _doManifest(msg: IslandMsg_Manifest): Promise<void> {
     const behavior = _resolveBehavior(msg);
 
@@ -157,32 +189,44 @@ export function runSovereignKernel(
 
     _composite = new CompositeStore();
 
-    // Walk expandRecipe() and resolve each CRDT slot's doc handle via the
-    // manifest's resolver. @temp has no CRDT handle — buildIslandRecipe wires
-    // a MemoryTiddlerStore for it.
+    // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
+    // The engine grant resolves FIRST (engine bytes precede TW5 boot).
+    const laraiumHandle = await _resolveSlot(_repo, msg.grants.islandUrl, LARARIUM_BAG, msg.wikiUri);
+    if (!laraiumHandle) return;
+    _handles.set(LARARIUM_BAG, laraiumHandle);
+
+    // @catalog ACCESS (never layered) — the island resolves @lares and every
+    // library bag from the registry ITSELF: boot runs the same resolution path
+    // recipe-watch runs live (boot = first reconcile).
+    const catalogUrl = msg.grants.catalogUrl ?? null;
+    const catalog    = catalogUrl ? makeCatalogAccessor(_repo, catalogUrl) : null;
+
+    // Structural slots arrive as typed grants; @lares and library bags resolve
+    // via catalog ONLY (wiki-layer-ontology Law 2: named ⇒ registry-resolved).
+    const slotUrl = async (slot: SlotUri): Promise<string | null> => {
+      if (slot === DRAFT_BAG)                    return msg.grants.draftUrl    ?? null;
+      if (slot === PERSONAL_BAG)                 return msg.grants.personalUrl ?? null;
+      if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
+      if (slot === LARARIUM_BAG)                 return msg.grants.islandUrl;
+      return catalog ? await catalog.urlOf(slot) : null;   // @lares + library bags
+    };
+
     const slots = expandRecipe(msg.recipe);
     const ready: Array<{ slot: SlotUri; handle: DocHandle<LarDoc> }> = [];
 
     for (const slot of slots) {
       if (slot === TEMP_BAG) continue;
-      const docUrl = msg.resolver[slot];
-      if (!docUrl) continue;
-      // allowableStates: doc may arrive via syncPort after connect — not yet
-      // "ready" at find() time.
-      const handle = await _repo.find<LarDoc>(
-        docUrl as AutomergeUrl,
-        { allowableStates: ["ready", "unavailable"] },
-      );
-      await handle.whenReady();
+      if (slot === LARARIUM_BAG) { ready.push({ slot, handle: laraiumHandle }); continue; }
+      const docUrl = await slotUrl(slot);
+      if (!docUrl) continue;   // ungranted/unregistered slot — in-memory or absent
+      const handle = await _resolveSlot(_repo, docUrl, slot, msg.wikiUri);
+      if (!handle) return;     // fault already posted
       _handles.set(slot, handle);
       ready.push({ slot, handle });
     }
-    void _writableHandleId; // reserved for future M-bags writable-rotation work
 
-    // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
-    const laraiumHandle = _handles.get(BAG_IDS.lararium);
-    const laraiumDoc    = laraiumHandle?.doc();
-    const blobEntry     = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
+    const laraiumDoc = laraiumHandle.doc();
+    const blobEntry  = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
     const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
     if (!coreBytes) {
       _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
@@ -238,10 +282,10 @@ export function runSovereignKernel(
       ready,
     });
 
-    // Isomorphic base: lift the @catalog registry URL out of the resolver (access
-    // entry, NOT a load slot — @catalog is absent from expandRecipe). Worker
-    // behaviors build a CatalogAccessor over it to reach any registered bag.
-    const catalogUrl = msg.resolver[CATALOG_DOC_URI] ?? null;
+    // Isomorphic base: the @catalog grant rides into ctx (access entry, NOT a
+    // load slot — @catalog is absent from expandRecipe). Worker behaviors build
+    // a CatalogAccessor over it to reach any registered bag; recipe-watch keeps
+    // reconciling the SAME path boot just walked.
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine, recipe: msg.recipe };
     await behavior.onEa(_ctx);
 
@@ -255,10 +299,9 @@ export function runSovereignKernel(
     handler.teardown();
 
     _handles.clear();
-    _writableHandleId = null;
-    _composite        = null;
-    _ctx              = null;
-    _repo             = null;
+    _composite = null;
+    _ctx       = null;
+    _repo      = null;
 
     host.post(mkTeardownAck());
   }

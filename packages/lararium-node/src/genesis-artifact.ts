@@ -156,7 +156,7 @@ export async function reconcileIslandFromGenesis(
   }
 
   const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
-  const liveCid = handle.doc()?.tiddlers?.[GENESIS_CID_TIDDLER]?.tiddler["cid"] as string | undefined;
+  const liveCid = handle.doc()?.tiddlers?.[GENESIS_CID_TIDDLER]?.tiddler?.["cid"] as string | undefined;
 
   if (liveCid === expectedCid) {
     console.log("[genesis-artifact] reconcile: live doc current — no merge needed");

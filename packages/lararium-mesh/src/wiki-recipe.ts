@@ -9,8 +9,8 @@
  *                                 $:/state/folded/*, $:/state/tab-*), CRDT, keyed per
  *                                 (PersonGroup × recipe-fingerprint) by the vessel
  *                                 resolver (see personal-slot#scoping-mechanism).
- *                                 Slot URI literal here; per-recipe doc binding lives in
- *                                 BagResolver, not the URI.
+ *                                 Slot URI literal here; per-recipe doc binding rides
+ *                                 the manifest's typed grants, not the URI.
  *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
  *   libraryBags[]                 — optional content libraries, CRDT, read-only from wiki
  *   lar:///ha.ka.ba/@lares      — personality, CRDT, required
@@ -235,7 +235,7 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
  * not fork operator view state across devices.
  */
 export interface RecipeFingerprintInput {
-  /** The wiki identity bag's Automerge doc URL (resolver[wikiBagUri(slug)]). */
+  /** The wiki identity bag's Automerge doc URL (grants.wikiUrl). */
   readonly wikiDocId: string;
   /** Library bag doc URLs in any order — sorted internally before hashing. */
   readonly libraryBagDocIds: readonly string[];
@@ -270,15 +270,15 @@ export async function computeRecipeFingerprint(
 //
 // One shape both vessel pools take (node VesselIslandPool + browser
 // BrowserVesselIslandPool). Divergence rides in the DATA (the recipe's
-// `mirrorBags` designation + the resolver's slots) and in the island's held
-// CAPABILITIES (a node pool's `diskMirrorGrant`), never in the method's shape.
-// The caller builds the full `resolver` on both platforms; no blob bytes — the
-// island reads TW5 core + plugins from the @lararium CRDT doc after sync.
+// `mirrorBags` designation) and in the island's held CAPABILITIES (a node
+// pool's `diskMirrorGrant`), never in the method's shape. The caller hands
+// typed structural grants; the island resolves library bags from @catalog
+// itself and reads TW5 core + plugins from the @lararium CRDT doc after sync.
 export interface WikiMountSpec {
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS; island resolves bytes from the mesh. */
   coreHash: string | null;
   /** WikiRecipe slot structure (wikiSlug + optional libraryBags + mirrorBags). */
   recipe: WikiRecipe;
-  /** Full slot URI → AutomergeUrl map (caller-built). Null = in-memory or cold slot. */
-  resolver: Readonly<Record<string, string | null>>;
+  /** Typed structural capabilities (engine doc, own bag, @personal/@draft, @catalog access). */
+  grants: import("./island-protocol.js").IslandGrants;
 }

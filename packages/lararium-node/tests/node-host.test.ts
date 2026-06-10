@@ -80,7 +80,7 @@ describe("isHostfulLarUri", () => {
 
 describe("parseHostfulLarUri", () => {
   test("extracts host and path from a hostful lar: URI", () => {
-    const r = parseHostfulLarUri("lar://altar-fire:vessel@elyncia.social/rooms/altar-fire");
+    const r = parseHostfulLarUri("lar://altar-fire:agent@elyncia.social/rooms/altar-fire");
     expect(r.authority.host).toBe("elyncia.social");
     expect(r.root).toBeDefined();
   });

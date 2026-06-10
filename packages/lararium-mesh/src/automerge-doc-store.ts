@@ -153,7 +153,7 @@ export class AutomergeDocStore implements LarTiddlerStore {
     const tiddlers = this.handle.doc()?.tiddlers;
     if (!tiddlers) return [];
     return (Object.values(tiddlers) as LarTiddlerRecord[])
-      .filter((r) => r && !_isDeleted(r) && _titleOf(r) && !_titleOf(r).startsWith("$:/temp/"))
+      .filter((r) => r?.tiddler && !_isDeleted(r) && _titleOf(r) && !_titleOf(r).startsWith("$:/temp/"))
       .map((r) => _titleOf(r));
   }
 

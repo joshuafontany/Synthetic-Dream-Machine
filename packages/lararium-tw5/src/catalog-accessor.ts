@@ -52,18 +52,32 @@ export interface CatalogAccessor {
  * Asking for `CATALOG_DOC_URI` itself short-circuits to the catalog handle (the
  * registry need not register itself).
  */
+// Partition-as-normal-state: an unavailable doc gets a bounded wait for sync
+// to deliver, then a LOUD throw — never a forever-pending whenReady the caller
+// must guess at by timeout.
+const ACCESS_READY_TIMEOUT_MS = 8_000;
+
+export async function findOrThrow(repo: Repo, url: string, what: string): Promise<DocHandle<LarDoc>> {
+  const h = await repo.find<LarDoc>(
+    url as AutomergeUrl,
+    { allowableStates: ["ready", "unavailable"] },
+  );
+  if (!h.isUnavailable()) return h;
+  const ready = await Promise.race([
+    h.whenReady().then(() => true),
+    new Promise<false>((res) => setTimeout(() => res(false), ACCESS_READY_TIMEOUT_MS)),
+  ]);
+  if (ready) return h;
+  throw new Error(`[catalog-accessor] ${what} unavailable — doc ${url} never arrived (${ACCESS_READY_TIMEOUT_MS}ms)`);
+}
+
 export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAccessor {
   let _catalog: Promise<DocHandle<LarDoc>> | null = null;
   const handle = (): Promise<DocHandle<LarDoc>> => {
     if (!_catalog) {
-      _catalog = (async () => {
-        const h = await repo.find<LarDoc>(
-          catalogUrl as AutomergeUrl,
-          { allowableStates: ["ready", "unavailable"] },
-        );
-        await h.whenReady();
-        return h;
-      })();
+      _catalog = findOrThrow(repo, catalogUrl, "@catalog registry");
+      // A failed resolve must not poison the cache — the next call retries.
+      _catalog.catch(() => { _catalog = null; });
     }
     return _catalog;
   };
@@ -83,12 +97,7 @@ export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAcce
     if (bagUri === CATALOG_DOC_URI) return handle();
     const url = await urlOf(bagUri);
     if (!url) return null;
-    const h = await repo.find<LarDoc>(
-      url as AutomergeUrl,
-      { allowableStates: ["ready", "unavailable"] },
-    );
-    await h.whenReady();
-    return h;
+    return findOrThrow(repo, url, `bag ${bagUri}`);
   };
 
   return { handle, urlOf, recordOf, find };

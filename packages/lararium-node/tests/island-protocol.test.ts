@@ -62,30 +62,34 @@ function collectUntil(
   });
 }
 
-// ── WikiRecipe + resolver shape (unit) ────────────────────────────────────
+// ── WikiRecipe + grants shape (unit) ──────────────────────────────────────
 
-describe("WikiRecipe + resolver — manifest payload shape", () => {
-  test("mkManifest carries recipe + resolver in message", () => {
+describe("WikiRecipe + grants — manifest payload shape", () => {
+  test("mkManifest carries recipe + typed grants in message", () => {
     const { port2: syncPort } = new MessageChannel();
     const recipe: WikiRecipe = {
       wikiSlug: "test",
       libraryBags: ["lar:///ha.ka.ba/@sdm"],
     };
-    const resolver = {
-      "lar:///ha.ka.ba/@test":     "automerge:xyz",
-      "lar:///ha.ka.ba/@lararium": "automerge:abc",
-      "lar:///ha.ka.ba/@sdm":      "automerge:def",
+    // Library bags (@sdm) never ride the grants — the island resolves them
+    // from @catalog itself (boot = first reconcile).
+    const grants = {
+      islandUrl:  "automerge:abc",
+      wikiUrl:    "automerge:xyz",
+      catalogUrl: "automerge:cat",
     };
     const msg = mkManifest(
       "lar:///test",
       syncPort as unknown as globalThis.MessagePort,
       recipe,
-      resolver,
+      grants,
     );
     syncPort.close();
     expect(msg.recipe.wikiSlug).toBe("test");
     expect(msg.recipe.libraryBags).toHaveLength(1);
-    expect(msg.resolver["lar:///ha.ka.ba/@test"]).toBe("automerge:xyz");
+    expect(msg.grants.wikiUrl).toBe("automerge:xyz");
+    expect(msg.grants.islandUrl).toBe("automerge:abc");
+    expect(msg.grants.catalogUrl).toBe("automerge:cat");
     expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 
@@ -95,11 +99,12 @@ describe("WikiRecipe + resolver — manifest payload shape", () => {
       "lar:///test-cold",
       syncPort as unknown as globalThis.MessagePort,
       { wikiSlug: "cold" },
-      {},
+      { islandUrl: "automerge:engine" },
     );
     syncPort.close();
     expect(msg.recipe.wikiSlug).toBe("cold");
-    expect(Object.keys(msg.resolver)).toHaveLength(0);
+    expect(msg.grants.islandUrl).toBe("automerge:engine");
+    expect(msg.grants.wikiUrl).toBeUndefined();
     expect(isVesselToIslandMsg(msg)).toBe(true);
   });
 });

@@ -32,6 +32,7 @@ function fakeHandle(url: string, tiddlers: Tiddlers = {}) {
     url,
     doc: () => ({ tiddlers }),
     whenReady: async () => {},
+    isUnavailable: () => false,
     on:  (_ev: string, fn: (p: { patches: unknown[] }) => void) => { listeners.add(fn); },
     off: (_ev: string, fn: (p: { patches: unknown[] }) => void) => { listeners.delete(fn); },
   } as unknown as DocHandle<LarDoc>;

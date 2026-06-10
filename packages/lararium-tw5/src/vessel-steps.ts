@@ -19,8 +19,6 @@ import {
   AutomergeDocStore,
   BAG_IDS,
   computeRecipeFingerprint,
-  wikiBagUri,
-  LARARIUM_BAG, PERSONAL_BAG, DRAFT_BAG,
   LARES_DOC_URI, LARARIUM_DOC_URI,
   type Repo,
   type DocHandle,
@@ -29,6 +27,7 @@ import {
   type CompositeStore,
   type WikiRecipe,
   type WikiMountSpec,
+  type IslandGrants,
 } from "@lararium/mesh";
 import type { VerbTable } from "./verb-dispatcher.js";
 
@@ -101,6 +100,9 @@ export interface PrimaryMountInputs {
   islandUrl:    string;
   /** primary wiki doc url. */
   wikiUrl:      string;
+  /** @catalog registry doc url — the island's ACCESS grant (recipe-watch + library
+   *  resolution live island-side; without this the island cannot watch its recipe). */
+  catalogUrl:   string;
 }
 
 /** Canonical disk-mirror DESIGNATION. A pool's held grant decides whether it
@@ -128,17 +130,21 @@ export async function mountPrimaryWiki(
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
   const { personalUrl, draftUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
 
-  const resolver: Record<string, string | null> = {
-    [LARARIUM_BAG]:                 inputs.islandUrl,
-    [wikiBagUri(inputs.wikiSlug)]:  inputs.wikiUrl,
-    ...(personalUrl ? { [PERSONAL_BAG]: personalUrl } : {}),
-    ...(draftUrl    ? { [DRAFT_BAG]:    draftUrl    } : {}),
+  // Typed structural grants — no slot dictionary. Library bags never ride the
+  // mount: the island resolves them from @catalog itself (boot = first reconcile),
+  // so the live composition path and the boot path can never diverge.
+  const grants: IslandGrants = {
+    islandUrl:  inputs.islandUrl,
+    catalogUrl: inputs.catalogUrl,
+    wikiUrl:    inputs.wikiUrl,
+    ...(personalUrl     ? { personalUrl } : {}),
+    ...(draftUrl        ? { draftUrl    } : {}),
   };
   const recipe: WikiRecipe = { wikiSlug: inputs.wikiSlug, mirrorBags: [...PRIMARY_MIRROR_BAGS] };
 
   await pool.mountWiki(
     inputs.activeWikiId,
-    { coreHash: inputs.coreHash, recipe, resolver },
+    { coreHash: inputs.coreHash, recipe, grants },
     { pinned: true },
   );
 

@@ -10,7 +10,7 @@
  * the archipelago forms the moment the URL crosses the boundary.
  *
  * Island Sovereignty Law §8:
- *   When a slot in `manifest.resolver` carries a non-empty AutomergeUrl, the vessel
+ *   When a grant in `manifest.grants` carries a non-empty AutomergeUrl, the vessel
  *   wires MessageChannelNetworkAdapter(mainPort) before delivering manifest; the
  *   island calls repo.find(docUrl).whenReady() before declaring ea. CRDT sync
  *   carries content — the manifest carries hash only.

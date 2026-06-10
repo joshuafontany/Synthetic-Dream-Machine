@@ -56,11 +56,9 @@ self.addEventListener("message", (e) => {
       sharePolicy: async () => true,
     });
 
-    // Resolve the wiki doc from the WikiRecipe slug + resolver, then replay its
+    // Resolve the wiki doc from the typed grants, then replay its
     // verb tiddlers once synced and on every subsequent change.
-    const resolver = msg.resolver ?? {};
-    const slug = msg.recipe?.wikiSlug;
-    const wikiDocUrl = (slug && resolver[`lar:///ha.ka.ba/@${slug}`]) ?? null;
+    const wikiDocUrl = msg.grants?.wikiUrl ?? null;
     if (wikiDocUrl) {
       void repo.find(wikiDocUrl).then((handle) => {
         void handle.whenReady().then(() => {

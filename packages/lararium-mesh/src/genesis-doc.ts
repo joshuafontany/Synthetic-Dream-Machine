@@ -208,9 +208,12 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     const tiddlers = d.tiddlers as Record<string, unknown>;
     for (const { bagId, label, readPolicy, writePolicy } of ROOT_BAGS) {
       tiddlers[bagDescriptorUri(bagId)] = {
-        title:  bagDescriptorUri(bagId),
-        fields: { label, readPolicy, writePolicy, authority: "genesis", bag: LARARIUM_DOC_URI },
-        authority: "genesis", bag: LARARIUM_DOC_URI,
+        tiddler: {
+          title: bagDescriptorUri(bagId),
+          label, readPolicy, writePolicy,
+          "origin-bag": LARARIUM_DOC_URI,
+        },
+        meta: { authority: "genesis" },
       };
     }
   });
@@ -223,9 +226,9 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
       const isPlugin = blobId.startsWith("$:/plugins/") || blobId.startsWith("lar:///plugins/");
       const att = inputs.plugins.find(p => p.id === blobId)?.attestation;
       tiddlers[blobDescriptorUri(blobId)] = {
-        title:  blobDescriptorUri(blobId),
-        text:   blobId,
-        fields: {
+        tiddler: {
+          title:  blobDescriptorUri(blobId),
+          text:   blobId,
           sha256:   entry.sha256,
           version:  entry.version,
           mimeType: entry.mimeType,
@@ -248,9 +251,9 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
             pluginJsonSha256:   att.pluginJsonSha256,
           }),
           tags: isPlugin ? "blob-descriptor plugin-descriptor" : "blob-descriptor",
+          "origin-bag": LARARIUM_DOC_URI,
         },
-        bag:       LARARIUM_DOC_URI,
-        authority: "genesis",
+        meta: { authority: "genesis" },
       };
     }
   });
@@ -267,11 +270,14 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
   const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
   doc = automergeChange(doc, { time: 0 }, d => {
     (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] = {
-      title:  GENESIS_CID_TIDDLER,
-      text:   "",
-      fields: { cid: "", note: "genesis CID placeholder until island.bin is finalized" },
-      bag:    LARARIUM_DOC_URI,
-      authority: "genesis",
+      tiddler: {
+        title: GENESIS_CID_TIDDLER,
+        text:  "",
+        cid:   "",
+        note:  "genesis CID placeholder until island.bin is finalized",
+        "origin-bag": LARARIUM_DOC_URI,
+      },
+      meta: { authority: "genesis" },
     };
   });
 
@@ -279,13 +285,9 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
   const witnessCid   = cidV1Sha256(witnessBytes);
 
   doc = automergeChange(doc, { time: 0 }, d => {
-    (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] = {
-      ...(d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] as Record<string, unknown>,
-      fields: {
-        cid:  witnessCid,
-        note: "CIDv1 raw SHA-256 witness from the first post-placeholder genesis serialization",
-      },
-    };
+    const prior = (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] as { tiddler: Record<string, unknown> };
+    prior.tiddler["cid"]  = witnessCid;
+    prior.tiddler["note"] = "CIDv1 raw SHA-256 witness from the first post-placeholder genesis serialization";
   });
 
   const bytes  = automergeSave(doc);
@@ -319,8 +321,8 @@ export function verifyGenesisArtifact(
   // The final artifact.cid differs because writing witnessCid into the doc changes the bytes.
   // Invariant: storedCid is non-empty (injection ran) and is a valid CIDv1 string.
   const storedCid = (
-    doc.tiddlers?.[GENESIS_CID_TIDDLER] as { fields?: { cid?: string } } | undefined
-  )?.fields?.cid;
+    doc.tiddlers?.[GENESIS_CID_TIDDLER] as { tiddler?: { cid?: string } } | undefined
+  )?.tiddler?.cid;
 
   if (!storedCid || storedCid === "PLACEHOLDER" || storedCid.length < 10) {
     throw new Error(

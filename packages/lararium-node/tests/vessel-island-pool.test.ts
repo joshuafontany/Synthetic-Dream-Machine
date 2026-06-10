@@ -38,7 +38,7 @@ const WIKI_BAG_URI = "lar:///ha.ka.ba/@test";  // wikiBagUri(slugFromUri(WIKI_ID
 /** The isomorphic WikiMountSpec the pool now takes. Fixture workers ignore bag
  *  content; only the shape + the wiki doc URL (Repo-in-island path) matter. */
 function spec(wikiUrl: string | null): WikiMountSpec {
-  return { coreHash: null, recipe: { wikiSlug: "test" }, resolver: { [WIKI_BAG_URI]: wikiUrl } };
+  return { coreHash: null, recipe: { wikiSlug: "test" }, grants: { islandUrl: "automerge:fixture-lararium-url", wikiUrl } };
 }
 
 

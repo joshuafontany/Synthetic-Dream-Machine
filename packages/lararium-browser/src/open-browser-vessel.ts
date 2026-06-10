@@ -280,12 +280,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         repo, adminUrl: social.adminUrl, coreHash: assembly.coreHash,
         workerScriptUrl: adminWorkerUrl,
         recipe: { wikiSlug: "admin" } satisfies WikiRecipe,
-        resolver: {
-          [BAG_IDS.lararium]:       assembly.islandHandle.url,
-          "lar:///ha.ka.ba/@admin": social.adminUrl,
-          ...(assembly.laresHandle ? { [BAG_IDS.lares]: assembly.laresHandle.url } : {}),
-          // ACCESS entry, not a LOAD slot — the worker reaches @catalog via the accessor.
-          [CATALOG_DOC_URI]:        catalogHandle.url,
+        grants: {
+          islandUrl: assembly.islandHandle.url,
+          // The admin island's OWN bag (@admin = wikiBagUri("admin"), one-recipe model).
+          wikiUrl:   social.adminUrl,
+          // ACCESS grant, not a LOAD slot — the worker reaches @catalog via the accessor.
+          catalogUrl: catalogHandle.url,
         },
         adminAuth,
       });

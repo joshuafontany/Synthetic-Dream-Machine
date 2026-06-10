@@ -117,7 +117,15 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const repo = new Repo({
     storage,
     network: [network],
-    sharePolicy: async (peerId) => peerIdentifierMap.has(peerId),
+    // Two rings: WS peers (outside) must have passed the AdminAuthGate; the
+    // vessel's OWN islands (MessageChannel peers — admin + wiki workers) are
+    // house members and share freely. Without the island ring, main never
+    // relays admin-island-minted docs (@personal/@draft bindings) to the wiki
+    // island and its slot-resolve hangs at boot.
+    sharePolicy: async (peerId) => {
+      const wsSocket = (network.sockets as Record<string, unknown> | undefined)?.[peerId];
+      return wsSocket ? peerIdentifierMap.has(peerId) : true;
+    },
   });
   emit("repo-open");
 
@@ -294,13 +302,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         repo,
         adminUrl: bootstrap.adminUrl,
         coreHash: assembly.coreHash,
-        resolver: {
-          "lar:///ha.ka.ba/@admin": bootstrap.adminUrl,
-          [BAG_IDS.lararium]:       assembly.islandHandle.url,
-          ...(assembly.laresHandle ? { [BAG_IDS.lares]: assembly.laresHandle.url } : {}),
-          // ACCESS entry, not a LOAD slot — @catalog is absent from the admin recipe,
+        grants: {
+          islandUrl: assembly.islandHandle.url,
+          // The admin island's OWN bag (@admin = wikiBagUri("admin"), one-recipe model).
+          wikiUrl:   bootstrap.adminUrl,
+          // ACCESS grant, not a LOAD slot — @catalog is absent from expandRecipe,
           // so the kernel never layers it; the worker reaches it via the accessor.
-          [CATALOG_DOC_URI]:        catalogHandle.url,
+          catalogUrl: catalogHandle.url,
         },
         adminAuth,
         storageDir,

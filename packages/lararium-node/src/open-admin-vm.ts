@@ -26,6 +26,7 @@ import {
   type CompositeStore, type WikiRecipe,
   type AuthVerifierSeam,
   type IslandMsg_Manifest,
+  type IslandGrants,
 } from "@lararium/mesh";
 import {
   openAdminVmCore,
@@ -45,9 +46,9 @@ export interface AdminVmOptions {
    * null = pre-CAS. The admin island reads bytes from the @lararium CRDT doc.
    */
   coreHash:          string | null;
-  /** AutomergeUrl resolver: slot URI → doc URL. Carries @lararium / @lares /
-   *  @admin (and any canon bags the operator mounts). */
-  resolver:          Readonly<Record<string, string | null>>;
+  /** Typed structural capabilities: @lararium engine, @admin bag, @lares,
+   *  @catalog access. Library bags resolve island-side from @catalog. */
+  grants:            IslandGrants;
   /** Optional canon bag URIs for the admin recipe. Empty by default. */
   libraryBags?:        readonly string[];
   /**
@@ -126,7 +127,7 @@ export interface AdminVmResult {
 }
 
 export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
-  const { repo, adminUrl, coreHash, resolver, libraryBags, adminAuth, storageDir, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, grants, libraryBags, adminAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Admin doc handle (node strategy: merge-on-late-arrival) ────────────────
   const adminHandle = await waitHandleLocal<LarDoc>(
@@ -154,7 +155,7 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   };
 
   const core = openAdminVmCore(host, {
-    repo, adminHandle, recipe, resolver, coreHash,
+    repo, adminHandle, recipe, grants, coreHash,
     ...(adminAuth ? { adminAuth } : {}),
     ...(storage   ? { storage }   : {}),
     workerScriptUrl: workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL,

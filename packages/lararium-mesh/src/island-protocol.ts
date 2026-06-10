@@ -15,7 +15,7 @@
  *   5. Vessel oracle delta delivery is removed. CRDT sync via `syncPort` is the sole
  *      source of tiddler truth for causal islands.
  *   6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `recipe` (WikiRecipe
- *      slot structure), `resolver` (slot URI → AutomergeUrl map), and `coreHash`
+ *      slot structure), `grants` (IslandGrants — typed structural capabilities), and `coreHash`
  *      (content-address intent vector; null = pre-CAS). TW5 core bytes are NOT transferred
  *      in the manifest — islands read them from `LarDoc.blobs[ENGINE_CORE_ID]` on the
  *      @lararium CRDT doc after `handle.whenReady()`. Two vessels federating @lararium
@@ -24,7 +24,7 @@
  *      Failure to close leaks the Automerge NetworkAdapter silently. This invariant is structural:
  *      every vessel implementation (node, browser, future) holds a `mainPort: MessagePort` on its
  *      hot slot and calls `mainPort.close()` in its teardown path. No exceptions.
- *   8. Federation seam — when a slot in `resolver` carries a non-empty AutomergeUrl, two obligations
+ *   8. Federation seam — when a grant carries a non-empty AutomergeUrl, two obligations
  *      activate. Vessel: the vessel MUST wire the `MessageChannelNetworkAdapter(mainPort)` on the
  *      vessel Repo before delivering `manifest`, so the CRDT graph reaches the island-side Repo
  *      automatically. Island-side: the island MUST call `repo.find(docUrl).whenReady()` and await
@@ -79,12 +79,12 @@ export type IslandStorageConfig =
 // ── Recipe + bag resolution ────────────────────────────────────────────────
 //
 // The manifest carries a WikiRecipe (the slot structure, vessel-independent)
-// and a serialised BagResolver (slot URI → AutomergeUrl). `WikiRecipe` lives
-// in wiki-recipe.ts; the resolver is a plain `{ [slotUri]: docUrl | null }`
-// object so it survives structuredClone across worker boundaries.
+// and IslandGrants (typed structural capabilities) — plain objects so they
+// survive structuredClone across worker boundaries.
 //
 // `AutomergeUrl` IS the CapTP-style capability token for each CRDT bag's doc.
-// A slot URI without a resolver entry resolves to null (in-memory / cold).
+// A grant absent or null = in-memory / cold; library bags resolve island-side
+// from @catalog (boot = first reconcile), never from the manifest.
 
 // ── Vessel → island ──────────────────────────────────────────────────────────
 
@@ -107,12 +107,32 @@ export type IslandStorageConfig =
  *
  * Prerequisite fields (island cannot think without these — not cargo):
  *   - `recipe` is the WikiRecipe slot structure (wikiSlug + optional libraryBags).
- *   - `resolver` is the slot URI → AutomergeUrl map. Null entries indicate
- *     in-memory / cold slots (`@temp` always; other slots if creating fresh).
+ *   - `grants` carries the island's typed structural capabilities (engine doc,
+ *     own bag, keyhive-bound @personal/@draft, @catalog ACCESS). Library bags
+ *     never ride the manifest: the island resolves them itself from @catalog
+ *     (recipe-watch reconcile — boot runs the same path as live composition).
  *
  * Plugin tiddlers travel via the @lararium CRDT blob store (application/json blobs).
  * Islands read and apply them from the CRDT after `handle.whenReady()` — no manifest field needed.
  */
+
+/**
+ * IslandGrants — the typed structural capabilities a vessel HANDS an island at
+ * manifest. Each names a capability granted (ocap: arrives as a grant, never
+ * looked up from a main-owned dictionary). The island resolves everything else
+ * — @lares, library bags, oracle moves — from @catalog itself, sovereign-side.
+ */
+export interface IslandGrants {
+  /** @lararium engine/system doc — REQUIRED (engine bytes precede TW5 boot). */
+  islandUrl:    string;
+  /** @catalog registry ACCESS (never layered; access≠load). Absent/null = no watch. */
+  catalogUrl?:  string | null;
+  /** The island's OWN bag (@<wikiSlug>; @admin under the one-recipe model). */
+  wikiUrl?:     string | null;
+  /** Keyhive-bound sovereign slots (admin resolveBinding grants). */
+  personalUrl?: string | null;
+  draftUrl?:    string | null;
+}
 export interface IslandMsg_Manifest {
   schema_version: ProtocolVersion;
   type: "manifest";
@@ -124,8 +144,8 @@ export interface IslandMsg_Manifest {
   coreHash: string | null;
   /** Slot structure for this wiki — wikiSlug + optional libraryBags. */
   recipe: import("./wiki-recipe.js").WikiRecipe;
-  /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
-  resolver: Readonly<Record<string, string | null>>;
+  /** Typed structural capabilities (see IslandGrants). Libraries resolve via @catalog. */
+  grants: IslandGrants;
   /**
    * Storage adapter configuration for the island-side Automerge Repo.
    * When present, the island creates a persistent Repo (NodeFS or IDB).
@@ -553,9 +573,9 @@ export function mkTeardownAck(): IslandMsg_TeardownAck {
  * TRANSFER: caller MUST include `syncPort` in the `postMessage` transfer list:
  *   `worker.postMessage(msg, [msg.syncPort])`
  *
- * The manifest carries the WikiRecipe (slot structure) + BagResolver (slot URI →
- * AutomergeUrl). The island walks `expandRecipe(recipe)` to build its composite
- * stack and reads `resolver` to wire each CRDT slot to its doc handle.
+ * The manifest carries the WikiRecipe (slot structure) + IslandGrants (typed
+ * structural capabilities). The island wires granted slots to doc handles and
+ * resolves library bags from @catalog itself (boot = first reconcile).
  *
  * No blob bytes travel in the manifest — TW5 core bytes and plugin tiddlers live in
  * the @lararium CRDT doc. Islands read them from the CRDT after `handle.whenReady()`.
@@ -564,7 +584,7 @@ export function mkManifest(
   wikiUri:  string,
   syncPort: MessagePort,
   recipe:   import("./wiki-recipe.js").WikiRecipe,
-  resolver: Readonly<Record<string, string | null>>,
+  grants:   IslandGrants,
   coreHash: string | null = null,
   opts?: {
     storage?:        IslandStorageConfig;
@@ -578,7 +598,7 @@ export function mkManifest(
     wikiUri,
     coreHash,
     recipe,
-    resolver,
+    grants,
     syncPort,
   };
   if (opts?.storage)             msg.storage     = opts.storage;

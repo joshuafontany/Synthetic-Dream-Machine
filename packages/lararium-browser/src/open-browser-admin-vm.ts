@@ -23,6 +23,7 @@ import {
   type CompositeStore, type WikiRecipe,
   type AuthVerifierSeam,
   type IslandMsg_Manifest,
+  type IslandGrants,
 } from "@lararium/mesh";
 import {
   openAdminVmCore,
@@ -38,8 +39,8 @@ export interface BrowserAdminVmOptions {
   coreHash:         string | null;
   /** Canonical one-recipe model for the admin island. */
   recipe:           WikiRecipe;
-  /** Slot URI → AutomergeUrl. Null = in-memory or cold slot. */
-  resolver:         Readonly<Record<string, string | null>>;
+  /** Typed structural capabilities (engine doc, @admin bag, @lares, @catalog access). */
+  grants:           IslandGrants;
   /**
    * Operator authn/z material delivered to the admin island for in-worker
    * keyhive boot (Stage 1) — seed + sentinel hexes + bags to register.
@@ -109,7 +110,7 @@ export interface BrowserVerbPlacementRequest {
 export async function openBrowserAdminVm(
   opts: BrowserAdminVmOptions,
 ): Promise<BrowserAdminVmResult> {
-  const { repo, adminUrl, coreHash, recipe, resolver, adminAuth, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, recipe, grants, adminAuth, workerScriptUrl } = opts;
 
   // ── Admin doc handle (browser strategy: find-or-create) ────────────────────
   const adminHandle = await (async () => {
@@ -133,7 +134,7 @@ export async function openBrowserAdminVm(
   };
 
   const core = openAdminVmCore(host, {
-    repo, adminHandle, recipe, resolver, coreHash,
+    repo, adminHandle, recipe, grants, coreHash,
     ...(adminAuth ? { adminAuth } : {}),
     workerScriptUrl,
   });

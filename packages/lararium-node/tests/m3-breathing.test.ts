@@ -128,15 +128,12 @@ describe.skipIf(skipReason)(
         });
 
         try {
-          // Caller builds the full resolver (isomorphic with the browser vessel):
+          // Caller hands typed grants (isomorphic with the browser vessel):
           // @lararium (TW5 core bytes) + the wiki doc. mountWiki awaits ea.
           await pool.mountWiki(WIKI_ID, {
             coreHash,
             recipe:   { wikiSlug: "test" },
-            resolver: {
-              [LARARIUM_BAG]:           laraiumHandle.url,
-              "lar:///ha.ka.ba/@test":  wikiHandle.url,
-            },
+            grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
           });
 
           // ── Gate — verb event arrives at vessel boundary ───────────────

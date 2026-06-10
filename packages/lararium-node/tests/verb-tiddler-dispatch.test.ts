@@ -100,10 +100,7 @@ describe.skipIf(skipReason)(
         await pool.mountWiki(WIKI_ID, {
           coreHash,
           recipe:   { wikiSlug: "test" },
-          resolver: {
-            [LARARIUM_BAG]:          laraiumHandle.url,
-            "lar:///ha.ka.ba/@test": wikiHandle.url,
-          },
+          grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
         });
         expect(pool.tier(WIKI_ID)).toBe("wela");
 
@@ -175,10 +172,7 @@ describe.skipIf(skipReason)(
         await pool.mountWiki(WIKI_ID + "-obs", {
           coreHash,
           recipe:   { wikiSlug: "test" },
-          resolver: {
-            [LARARIUM_BAG]:          laraiumHandle.url,
-            "lar:///ha.ka.ba/@test": wikiHandle.url,
-          },
+          grants:   { islandUrl: laraiumHandle.url, wikiUrl: wikiHandle.url },
         });
 
         // Write a tiddler WITHOUT a verb field — should not trigger verb dispatch.

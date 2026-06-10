@@ -59,12 +59,12 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   const GENESIS_CID_TIDDLER = "lar:///ha.ka.ba/@lararium/genesis-cid";
   const cidRecord = doc.tiddlers?.[GENESIS_CID_TIDDLER] as
-    { fields?: { cid?: string } } | undefined;
+    { tiddler?: { cid?: string } } | undefined;
 
-  if (!cidRecord?.fields?.cid) {
+  if (!cidRecord?.tiddler?.cid) {
     throw new Error("[quine] genesis-cid tiddler missing or has no cid field — re-run build:genesis.");
   }
-  const storedCid = cidRecord.fields.cid;
+  const storedCid = cidRecord.tiddler.cid;
   console.log(`[quine] stored genesis-cid = ${storedCid.slice(0, 20)}…`);
 
   // ------------------------------------------------------------------

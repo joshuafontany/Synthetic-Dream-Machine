@@ -61,10 +61,8 @@ self.addEventListener("message", (e) => {
       sharePolicy: async () => true,
     });
 
-    // Resolve docUrl from the WikiRecipe + resolver.
-    const resolver = msg.resolver ?? {};
-    const slug = msg.recipe?.wikiSlug;
-    const resolvedDocUrl = (slug && resolver[`lar:///ha.ka.ba/@${slug}`]) ?? null;
+    // Resolve docUrl from the typed grants (the island's own wiki bag).
+    const resolvedDocUrl = msg.grants?.wikiUrl ?? null;
 
     if (resolvedDocUrl) {
       void repo.find(resolvedDocUrl).then((handle) => wireHandle(handle, true));

@@ -27,12 +27,12 @@ export interface LarResolution {
 }
 
 /**
- * Parsed hostful lar authority: `lar://alias:tier@host/...`
- * Trust tier is separate from identity — the host speaks, not overrides.
+ * Parsed hostful lar authority: `lar://alias:grant@host/...`
+ * Trust grant is separate from identity — the host speaks, not overrides.
  */
 export interface LarAuthority {
   readonly alias: string;
-  readonly tier: string;
+  readonly grant: string;
   readonly host: string;
 }
 
@@ -67,18 +67,18 @@ function splitLarUri(uri: string): { root: string; childPath: string[]; fragment
 }
 
 /**
- * Parse a hostful `lar://alias:tier@host/path` URI.
+ * Parse a hostful `lar://alias:grant@host/path` URI.
  * Returns the authority components and a virtual resolution.
  * Hostful records carry lower trust than hostless invariant memes.
  */
 export function parseHostfulLarUri(uri: string): LarHostfulResolution {
   const url = new URL(uri);
   if (url.protocol !== "lar:") throw new Error(`expected lar URI, got ${uri}`);
-  if (!url.host) throw new Error(`expected hostful lar URI (lar://alias:tier@host/...), got ${uri}`);
+  if (!url.host) throw new Error(`expected hostful lar URI (lar://alias:grant@host/...), got ${uri}`);
 
-  // URL parser splits "alias:tier@host" as username=alias, password=tier, hostname=host
+  // URL parser splits "alias:grant@host" as username=alias, password=grant, hostname=host
   const alias = decodeURIComponent(url.username);
-  const tier = decodeURIComponent(url.password);
+  const grant = decodeURIComponent(url.password);
   const host = url.hostname;
 
   const rawPath = decodeURIComponent(url.pathname);
@@ -95,7 +95,7 @@ export function parseHostfulLarUri(uri: string): LarHostfulResolution {
     engineRelPath: null,
     kind: "caps-virtual" as const,
     virtual: true as const,
-    authority: Object.freeze({ alias, tier, host }),
+    authority: Object.freeze({ alias, grant, host }),
   });
 }
 

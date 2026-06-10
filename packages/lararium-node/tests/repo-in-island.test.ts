@@ -129,7 +129,7 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     await manager.mountWiki(WIKI_ID, {
       coreHash:  null,
       recipe:   { wikiSlug: "test" },
-      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
+      grants:   { islandUrl: "automerge:fixture-lararium-url", wikiUrl: docHandle.url },
     });
 
     // Wait for the fixture's change listener to be live before mutating.
@@ -171,7 +171,7 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     await manager.mountWiki(WIKI_ID, {
       coreHash:  null,
       recipe:   { wikiSlug: "test" },
-      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
+      grants:   { islandUrl: "automerge:fixture-lararium-url", wikiUrl: docHandle.url },
     });
 
     await waitForSynced(all);
@@ -217,7 +217,7 @@ describe("Repo-in-island — CRDT sync gate (GP-3 deprecation proof)", () => {
     await manager.mountWiki(WIKI_ID, {
       coreHash:  null,
       recipe:   { wikiSlug: "test" },
-      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
+      grants:   { islandUrl: "automerge:fixture-lararium-url", wikiUrl: docHandle.url },
     });
 
     await waitForSynced(all);

@@ -110,6 +110,7 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
     coreHash:     assembly.coreHash,
     islandUrl:    assembly.islandHandle.url,
     wikiUrl:      wikiHandle.url,
+    catalogUrl:   assembly.catalogHandle.url,
   });
   emit("tw5-booted");
 

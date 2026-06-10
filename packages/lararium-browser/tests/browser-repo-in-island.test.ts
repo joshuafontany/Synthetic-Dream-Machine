@@ -67,7 +67,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     await pool.mountWiki(islandId, {
       coreHash: null,
       recipe: { wikiSlug: "test" },
-      resolver: {},
+      grants: { islandUrl: "automerge:fixture-lararium-url" },
     });
     expect(pool.has(islandId)).toBe(true);
 
@@ -95,7 +95,7 @@ describe("BrowserVesselIslandPool Repo-in-island gate", () => {
     await pool.mountWiki(islandId, {
       coreHash: null,
       recipe: { wikiSlug: "test" },
-      resolver: { "lar:///ha.ka.ba/@test": docHandle.url },
+      grants: { islandUrl: "automerge:fixture-lararium-url", wikiUrl: docHandle.url },
     });
     expect(pool.has(islandId)).toBe(true);
 

@@ -41,6 +41,7 @@ import {
   type AuthVerifierSeam,
   type IslandStorageConfig,
   type IslandMsg_Manifest,
+  type IslandGrants,
   type AdminMsg_DelegateVerb,
   type AdminMsg_VerifyResult,
   type AdminMsg_ResolveBindingResult,
@@ -70,8 +71,8 @@ export interface AdminVmCoreOptions {
   adminHandle:     DocHandle<LarDoc>;
   /** One-recipe model for the admin island. */
   recipe:          WikiRecipe;
-  /** Slot URI → AutomergeUrl. */
-  resolver:        Readonly<Record<string, string | null>>;
+  /** Typed structural capabilities (engine doc, @admin bag, @lares, @catalog access). */
+  grants:          IslandGrants;
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS. */
   coreHash:        string | null;
   /** Operator authn/z material for in-worker keyhive boot (Stage 1). */
@@ -139,7 +140,7 @@ export interface AdminVmCore {
 }
 
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
-  const { repo, adminHandle, recipe, resolver, coreHash, adminAuth, storage, workerScriptUrl } = opts;
+  const { repo, adminHandle, recipe, grants, coreHash, adminAuth, storage, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
   // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
@@ -308,7 +309,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   });
 
   // ── Deliver manifest ────────────────────────────────────────────────────────
-  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, resolver, coreHash, {
+  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
     ...(adminAuth ? { adminAuth } : {}),
   });

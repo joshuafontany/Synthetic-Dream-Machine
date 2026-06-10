@@ -37,7 +37,7 @@ export interface IslandContext {
    * The isomorphic base for catalog-driven reach: a worker behavior builds
    * `makeCatalogAccessor(ctx.repo, ctx.catalogUrl)` to reach ANY registered bag
    * on demand — access≠load (the catalog is NOT a render layer). Carried in the
-   * manifest resolver under `CATALOG_DOC_URI`; the kernel lifts it here.
+   * manifest's `grants.catalogUrl`; the kernel lifts it here.
    */
   catalogUrl: string | null;
   /**

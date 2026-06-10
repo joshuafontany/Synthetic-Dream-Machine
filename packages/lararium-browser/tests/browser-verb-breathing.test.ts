@@ -86,7 +86,7 @@ describe("browser verb breathing — verb tiddler surfaces as IslandMsg_Event vi
       await pool.mountWiki(WIKI_ID, {
         coreHash: null,
         recipe:   { wikiSlug: "test" },
-        resolver: { "lar:///ha.ka.ba/@test": (wikiHandle as unknown as { url: string }).url },
+        grants: { islandUrl: "automerge:fixture-lararium-url", wikiUrl: (wikiHandle as unknown as { url: string }).url },
       });
 
       const hit = await waitFor(

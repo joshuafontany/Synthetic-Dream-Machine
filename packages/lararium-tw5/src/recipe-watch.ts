@@ -39,7 +39,7 @@ import {
   type LarDoc,
   type LarTiddlerRecord,
 } from "@lararium/mesh";
-import { makeCatalogAccessor } from "./catalog-accessor.js";
+import { makeCatalogAccessor, findOrThrow } from "./catalog-accessor.js";
 import { REBOOT_ALERT_TITLE } from "./wiki-behavior.js";
 import type { IslandContext } from "./island-context.js";
 
@@ -65,11 +65,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     ({ kind: "canon-hydrate", receipt: `recipe-watch:${slug}` });
 
   const mountAt = async (bagId: string, docUrl: string, at: number): Promise<void> => {
-    const handle = await ctx.repo.find<LarDoc>(
-      docUrl as AutomergeUrl,
-      { allowableStates: ["ready", "unavailable"] },
-    );
-    await handle.whenReady();
+    const handle = await findOrThrow(ctx.repo, docUrl, `bag ${bagId}`);
     const store = new AutomergeDocStore(handle, bagId);
     ctx.composite.addLayer({ bagId, store, writable: true, defaultWritable: false }, at);
     ctx.handles.set(bagId, handle);

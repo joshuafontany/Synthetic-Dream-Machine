@@ -58,11 +58,9 @@ parentPort.on("message", (msg) => {
         });
       }
 
-      // Resolve docUrl from the WikiRecipe + resolver: the wiki identity slot
-      // (lar:///ha.ka.ba/@<wikiSlug>) is the writable target.
-      const resolver = msg.resolver ?? {};
-      const slug = msg.recipe?.wikiSlug;
-      const resolvedDocUrl = (slug && resolver[`lar:///ha.ka.ba/@${slug}`]) ?? null;
+      // Resolve docUrl from the typed grants: the island's own wiki bag
+      // (grants.wikiUrl) is the writable target.
+      const resolvedDocUrl = msg.grants?.wikiUrl ?? null;
 
       if (resolvedDocUrl) {
         // Explicit docUrl: island awaits repo.find() — reliable, no gossip race.
