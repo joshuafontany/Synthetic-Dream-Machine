@@ -107,7 +107,7 @@ class VmPool {
 }
 ```
 
-**Slot 0** = local room (always active).
+**Slot 0** = local wiki (always active).
 **Slot N** = foreign realm projection (activated on cross-realm sync request).
 
 Each slot has an independent projection bus wire. A kukali event in slot 0 does not

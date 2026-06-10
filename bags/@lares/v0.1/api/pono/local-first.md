@@ -146,7 +146,7 @@ a tool, not a custodian.
 **Lararium:** SATISFIED for single-user. The `lar:` URI namespace is an open addressing
 scheme; the tiddler store is inspectable and exportable.
 
-**Multi-user gap:** shared lararium-node rooms need a capability model for access
+**Multi-user gap:** shared lararium-node wiki islands need a capability model for access
 control. The Orichalcum `ABILITY_LADDER` provides the vocabulary;
 Keyhive provides the cryptographic enforcement.
 
@@ -157,7 +157,7 @@ Keyhive provides the cryptographic enforcement.
 ## Server-as-Peer Law
 
 A lararium-node operates as a peer with extra capabilities:
-- Acts as multiple peers simultaneously (one per open room)
+- Acts as multiple peers simultaneously (one per open wiki island)
 - Disk access (LarDiskProjector)
 - CORS-hop web calls
 - Persistent relay (stays online when browser peers sleep)
@@ -171,9 +171,9 @@ It does NOT have:
 Routing, relay, and projection are peer capabilities; adjudication is not.
 
 The VmPool model enforces this isomorphically: the browser peer and the node peer
-run the same VmPool interface. The browser boots pool slot 0 (local room); additional
+run the same VmPool interface. The browser boots pool slot 0 (local wiki); additional
 slots serve cross-realm projections. The node boots multiple slots simultaneously —
-one per room, one per connected realm. Same model, different capability set.
+one per wiki island, one per connected realm. Same model, different capability set.
 
 <<~/ahu >>
 

@@ -111,8 +111,6 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 
 ## Edges
 
-<<~ pranala #from-altar-fire ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/the-altar-fire family:control role:owned-by >>
-
 <<~/ahu >>
 
 <<~ ahu #hello-world >>

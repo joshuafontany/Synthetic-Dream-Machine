@@ -29,7 +29,7 @@ Two `repo.create()` calls always produce two **separate, non-merging documents**
 generates a new random UUID per import. There is no native content-addressed
 rendezvous primitive.
 
-**Corollary:** any system that lets two peers independently create "the same room"
+**Corollary:** any system that lets two peers independently create "the same wiki"
 without sharing a URL produces two hermetic worlds that never merge.
 Patching this at the ReactionEngine layer treats a coordination failure as an
 application concern — wrong layer.
@@ -43,21 +43,21 @@ project. The island file IS the rendezvous — runtime code never calls "create 
 device"; it calls "find device at this author-assigned ID."
 
 **This is the strongest design lesson for LarariumIsland:**  
-Room docUrl assignment must move from boot-time (`repo.create()`) to author-time
-(committed island definition). Peers never create predefined rooms; they join them.
+Wiki docUrl assignment must move from boot-time (`repo.create()`) to author-time
+(committed island definition). Peers never create predefined wikis; they join them.
 
 ## Canonical Architecture
 
 ```
 lararium-island.ts  ←  committed deployment artifact (the island file)
   ISLAND.catalogDocUrl  — automerge URL created once, committed to repo
-  ISLAND.rooms[id]      — automerge URL per room, created once, committed
+  ISLAND.wikis[id]      — automerge URL per wiki, created once, committed
         │
         ▼
-All peers: repo.find(ISLAND.rooms["altar-fire"])  ←  join, never create
+All peers: repo.find(ISLAND.wikis["garden"])  ←  join, never create
         │
         ▼
-AutomergeDocStore  ←  one CRDT truth per room
+AutomergeDocStore  ←  one CRDT truth per wiki
         │
         ├── MemeSyncAdaptor (per peer)  ←  TW5 VM is a read projection
         └── ReactionEngine (per peer)  ←  fires locally, writes to shared store
@@ -66,26 +66,26 @@ AutomergeDocStore  ←  one CRDT truth per room
 The island file is the deployment's rendezvous. It lives in git. It is committed
 once by the island author and never regenerated at runtime.
 
-## Dynamic Room Bootstrap Protocol
+## Dynamic Wiki Bootstrap Protocol
 
-For rooms NOT in the island file (user-created at runtime), the catalog-doc
+For wikis NOT in the island file (user-created at runtime), the catalog-doc
 pattern handles coordination:
 
 ```
 1. repo.find(ISLAND.catalogDocUrl) → catalogHandle
    (waitHandleLocal: serve from NodeFS/IndexedDB first; merge remote opportunistically)
 
-2. canonicalUrl = catalogHandle.doc().rooms[roomId]?.contentDocUrl
+2. canonicalUrl = catalogHandle.doc().wikis[wikiId]?.contentDocUrl
 
 3a. if present → repo.find(canonicalUrl)  [fast path, no race]
 
 3b. if absent →
       myHandle = repo.create({})
       catalogHandle.change(doc => {
-        doc.rooms[roomId] = { contentDocUrl: myHandle.url }
+        doc.wikis[wikiId] = { contentDocUrl: myHandle.url }
       })
       await tick  // let Automerge resolve concurrent writes by actor-ID + Lamport clock
-      canonicalUrl = catalogHandle.doc().rooms[roomId].contentDocUrl
+      canonicalUrl = catalogHandle.doc().wikis[wikiId].contentDocUrl
       if canonicalUrl !== myHandle.url →
         // lost the CRDT race — migrate writes and discard orphan
         Automerge.merge(canonicalDoc, myHandle.doc())  // rebase local changes
@@ -94,7 +94,7 @@ pattern handles coordination:
         myHandle  // won the race
 ```
 
-Automerge's LWW map resolves concurrent `rooms[roomId]` writes deterministically
+Automerge's LWW map resolves concurrent `wikis[wikiId]` writes deterministically
 by actor-ID + Lamport timestamp. The losing peer migrates via `Automerge.merge()`
 (valid because both docs share intended content), then discards its orphan URL.
 
@@ -114,14 +114,14 @@ control. Correction from prior notes:
   applied when the peer connects.
 - **Convergent Capabilities** replace UCAN JWTs with CRDT-compatible capability
   tokens. Concurrent delegation and revocation resolve without coordination.
-- **Group Management CRDT** handles room membership (who can write) as Automerge
+- **Group Management CRDT** handles wiki membership (who can write) as Automerge
   ops — self-certifying, no server vote required.
 - **Beelay** (automerge/beelay) is the companion sync protocol. It operates over
   ciphertext only (servers never see plaintext). Peers authenticate the connection
   and advertise which docs they hold capability for — the catalog problem dissolves
   into capability propagation.
 
-In a Keyhive-integrated system: **only the island author creates room docs; all
+In a Keyhive-integrated system: **only the island author creates wiki docs; all
 others receive a "add member" signed op referencing their Ed25519 key, then join
 via `repo.find(url)` where url was exchanged out-of-band (invitation link, DID
 service endpoint, or social graph record)**. The `sharePolicy` stub
@@ -129,7 +129,7 @@ service endpoint, or social graph record)**. The `sharePolicy` stub
 
 Until Keyhive stabilizes (currently experimental/Rust-only): `sharePolicy` remains
 open, the island file provides static rendezvous, and the catalog protocol handles
-dynamic rooms.
+dynamic wikis.
 
 ## ReactionEngine Write-Back Invariants
 
@@ -137,8 +137,8 @@ dynamic rooms.
 Five invariants must hold for write-back to be safe:
 
 **1. Canonical URL confirmed before any write-back.**  
-The engine must resolve catalog consensus before accepting writes for a given room.
-Rooms gate on state: `BOOTSTRAPPING → RESOLVING → OPEN`. Write-back is legal only
+The engine must resolve catalog consensus before accepting writes for a given wiki.
+Wikis gate on state: `BOOTSTRAPPING → RESOLVING → OPEN`. Write-back is legal only
 in `OPEN` state.
 
 **2. Outputs must be content-addressed (idempotent).**  

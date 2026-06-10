@@ -63,11 +63,11 @@ Browser cold-start:
 
 ## Tier 1 — URL Fragment Invitation Link
 
-Encode the catalog (or room) URL in the page URL fragment:
+Encode the catalog (or wiki) URL in the page URL fragment:
 
 ```
 https://elyncia.app/#catalog=automerge:abc123
-https://elyncia.app/#room=automerge:xyz789@altar-fire
+https://elyncia.app/#wiki=automerge:xyz789@garden
 ```
 
 On load, read `location.hash`, call `repo.find(catalogUrl)`. This is the
@@ -138,7 +138,7 @@ via the owner's DID.
 the user's PDS:
 
 ```
-lexicon: app.lararium.room (TBD NSID)
+lexicon: app.lararium.wiki (TBD NSID)
 fields: { syncUrl: "wss://...", catalogUrl: "automerge:..." }
 ```
 
@@ -168,13 +168,13 @@ Works for local dev and studio/home setups with no internet.
 
 ## Tier 5 — Social Graph Record
 
-**Nostr** — NIP-51 kind:30001 list, `r` tags containing Lararium room URLs:
+**Nostr** — NIP-51 kind:30001 list, `r` tags containing Lararium wiki URLs:
 
 ```
 r: "lararium:automerge:abc123@wss://elyncia.app/ws"
 ```
 
-Any Nostr follower fetches the list, bootstraps the room. Discovery =
+Any Nostr follower fetches the list, bootstraps the wiki. Discovery =
 side-effect of follow. **nostr-crdt** (YousefED) already does Yjs over
 kind:9001 anchor events — same pattern, different CRDT.
 
@@ -185,7 +185,7 @@ group primitive yet; land after AT Protocol "shared data" ships (2025 H2).
 
 **UCAN invitation flow** (alpha placeholder, pre-Keyhive):
 
-1. Room creator issues a UCAN: `iss=did:web:elyncia.social`, `aud=<new-peer-did>`,
+1. Wiki creator issues a UCAN: `iss=did:web:elyncia.social`, `aud=<new-peer-did>`,
    `att=[{ with: "automerge:<catalogUrl>", can: "automerge/sync" }]`.
 2. UCAN delivered as URL fragment or QR code.
 3. Recipient presents UCAN to node server's `sharePolicy`; server verifies chain.
@@ -196,11 +196,11 @@ the first sync message — removes the need for TLS as the transport trust layer
 
 **Keyhive flow** (future, when `keyhive_wasm` ships):
 
-1. Room creator calls `doc.addMember(newPeerEd25519PublicKey)` → signed op in
+1. Wiki creator calls `doc.addMember(newPeerEd25519PublicKey)` → signed op in
    doc's Keyhive ACL log.
 2. New peer's Ed25519 pubkey = their DID's key material; the signed "add" entry
    IS the invitation artifact.
-3. New peer receives the room URL + "add" op out-of-band (any tier above).
+3. New peer receives the wiki URL + "add" op out-of-band (any tier above).
 4. `beelay` sync authenticates using the key chain; ciphertext-only relay.
 
 ## Lararium Bootstrap Sequence (Current Implementation)
@@ -221,7 +221,7 @@ the first sync message — removes the need for TLS as the transport trust layer
    → programmatic discovery for non-browser clients
 
 5. URL fragment invite (Tier 1) — TODO: add ?catalog= / #catalog= reader
-   → human-shareable room invitations
+   → human-shareable wiki invitations
 ```
 
 ## What NOT to Build

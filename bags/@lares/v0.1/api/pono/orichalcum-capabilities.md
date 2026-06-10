@@ -10,7 +10,7 @@ register     = "Synthesis-Canon"
 manaoio      = 16
 mana         = 16
 manao        = 16
-role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for rooms, edge islands, and canon MOVE"
+role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for wiki islands, edge islands, and canon MOVE"
 cacheable    = true
 retain       = true
 invariant    = true
@@ -23,7 +23,7 @@ invariant    = true
 # Orichalcum Capabilities
 
 UCAN-compatible capability proof with Lararium-native semantic caveats.
-Authority gate for rooms, edge islands, and canon MOVE.
+Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~/ahu >>
 
@@ -77,7 +77,7 @@ description = "local trust alias — bootstrap identity before full DID ceremony
 ```
 
 A person is modeled as a group of device principals.
-A room, meme, or edge island may itself act as a group principal with its own access graph.
+A wiki island, meme, or edge island may itself act as a group principal with its own access graph.
 These are not the same object. Keep device identity below operator identity.
 
 <<~/ahu >>
@@ -168,7 +168,7 @@ note    = """
 
 ```toml
 [[caveats]]
-kind    = "room-recipe"
+kind    = "wiki-recipe"
 type    = "lar:/// URI — meme must satisfy this recipe's filter"
 
 [[caveats]]
@@ -192,7 +192,7 @@ type    = "epoch string"
 note    = "capability invalid after this epoch string; rolls with revocation"
 ```
 
-### Federation Defaults (operator-configurable per room recipe)
+### Federation Defaults (operator-configurable per wiki recipe)
 
 ```toml
 [federation_defaults]
@@ -205,7 +205,7 @@ min_manaoio_propose  = 12
 min_manaoio_move     = 16
 
 # Stage band is a UX/rendering annotation only.
-# Room recipes MAY include stage-based filter predicates as operator configuration,
+# Wiki recipes MAY include stage-based filter predicates as operator configuration,
 # but stage is not a hardcoded capability gate condition.
 ```
 
@@ -218,7 +218,7 @@ min_manaoio_move     = 16
 A capability MUST be evaluated at these transitions — not deferred:
 
 ```
-1. room join         — before handleSocketConnect
+1. wiki island join  — before handleSocketConnect
 2. boot receipt emit — before sending the join snapshot
 3. edge-island open  — before stream handshake
 4. per-delta accept  — capability must still be valid at delta receipt time
@@ -236,13 +236,13 @@ Gate failures at steps 5–6 reject the operation and emit a refusal receipt.
 
 ## Documents as Groups
 
-A room, meme, recipe, or edge island
+A wiki island, meme, recipe, or edge island
 MAY act as an authority-bearing group with its own access graph.
 
 This means:
 
 ```
-lar:///rooms/the-altar-fire
+lar:///wikis/some-wiki
   members:
     admin group   → move + admin
     operator group → read + sync + propose
@@ -253,7 +253,7 @@ lar:///memes/ha.ka.ba/@lares/pono/some-meme
     admin group   → write + move
     operator group → read + sync + propose
 
-edge:nodeA:nodeB:altar-fire:epoch42
+edge:nodeA:nodeB:some-wiki:epoch42
   members:
     nodeA device key → sync + pull
     nodeB device key → sync + pull

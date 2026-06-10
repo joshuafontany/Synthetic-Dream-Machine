@@ -160,8 +160,8 @@ federable-ratings = ["meme", "ano", "kapu"]
 authority-first-order = [
   "authenticate-peer",        # 1 — peer not verified until complete
   "sync-authority-graph",     # 2 — Orichalcum graph; gate for all content
-  "derive-visible-rooms",     # 3 — room recipe + visible causal islands
-  "sync-collection-manifest", # 4 — rooms, memes, edge islands, receipts
+  "derive-visible-wikis",     # 3 — wiki recipe + visible causal islands
+  "sync-collection-manifest", # 4 — wikis, memes, edge islands, receipts
   "capability-epoch-ops",     # 5a
   "sync-crdt-heads",          # 5b
   "sync-delta-payloads",      # 5c
@@ -193,12 +193,12 @@ causal-island-must = [
 # Local causality errors correctable inside a node; promotion is optional
 # automerge-realm and peer-sync-state ARE islands by topology (Fuller-Zelenka non-simultaneous apprehension)
 causal-island-may = [
-  "room",
+  "wiki",
   "meme",
   "sigil",
   "kumu-instance",
   "kahea-invocation",
-  "local-room-projection",
+  "local-wiki-projection",
   "long-lived-runtime-actor",
   "automerge-realm",
   "peer-sync-state",
@@ -208,8 +208,8 @@ causal-island-may = [
 [visibility-gate]
 conditions = [
   "rating(meme) >= meme",
-  "manaoio(meme) >= room.minManaoio",
-  "recipe(room).matches(meme)",
+  "manaoio(meme) >= wiki.minManaoio",
+  "recipe(wiki).matches(meme)",
   "subjectCanSync(subject, edge.id)",      # holds pull on the edge (forward ciphertext)
   "!edge.revoked",
   "!violatesKapu(meme, subject)",
@@ -235,7 +235,7 @@ export const ABILITY_LADDER = [
 export const AUTHORITY_FIRST_ORDER = [
   "authenticate-peer",         // 1
   "sync-authority-graph",      // 2
-  "derive-visible-rooms",      // 3
+  "derive-visible-wikis",      // 3
   "sync-collection-manifest",  // 4
   "capability-epoch-ops",      // 5a
   "sync-crdt-heads",           // 5b
@@ -253,8 +253,8 @@ export const CAUSAL_ISLAND_MUST = [
 ] as const;
 
 export const CAUSAL_ISLAND_MAY = [
-  "room", "meme", "sigil", "kumu-instance", "kahea-invocation",
-  "local-room-projection", "long-lived-runtime-actor",
+  "wiki", "meme", "sigil", "kumu-instance", "kahea-invocation",
+  "local-wiki-projection", "long-lived-runtime-actor",
   "automerge-realm", "peer-sync-state",
 ] as const;
 

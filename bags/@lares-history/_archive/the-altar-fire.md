@@ -79,39 +79,6 @@ Portal positions are expressed as `{ x: number, y: number }` relative to the can
 
 <<~/ahu >>
 
-<<~ ahu #commit-tiers >>
-
-## Commit Tiers
-
-Content on the altar fire canvas exists at one of three confidence tiers:
-
-```
-LIVE SESSION    — browser/TW5/tldraw draft surface; local-first, not canon
-BRANCH COMMIT   — Automerge room state; durable across reconnects; visible to authorized peers; not canon
-DEEP SAVE       — lares/ carrier file; git-tracked; hostless lar URI; permanent
-```
-
-The visual distinction:
-- **Live** shapes: dashed border, amber glow
-- **Branch-committed** shapes: solid border, muted color
-- **Deep-saved / canon** shapes: solid border, full color, lock icon
-
-Live → branch currently means writing the shared Automerge meme store through the TW5/store adaptor.
-Branch → deep save requires explicit "MOVE to canon" ceremony (operator+).
-Invariant meme edits require admin tier and a separate confirmation ceremony.
-
-<<~/ahu >>
-
-<<~ ahu #edges >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #to-lararium ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium family:control role:owned-by >>
-<<~ pranala #to-canon-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:governed-by >>
-<<~ pranala #to-tagspace-trust ? -> lar:///ha.ka.ba/@lararium/tw5/tagspace-trust family:control role:governed-by >>
-
-<<~/ahu >>
 
 <<~ &#x0003; >>
 

@@ -107,7 +107,7 @@ any single node in isolation.
 **Synergetic moves (correct):**
 - `VmDebugSurface` on every peer: cross-peer debugging appears because the surface is
   composed at the mesh level, not inside any single node.
-- VmPool per realm: cross-realm sync behaviors (reading one room from a foreign realm
+- VmPool per realm: cross-realm sync behaviors (reading one wiki from a foreign realm
   as another VM in the pool) only exist when VMs compose across realm boundaries.
 - `ReactionEngine implements MemeProjection`: routing CRDT change events through the
   reaction graph produces a whole-system property; neither the CRDT nor the graph alone carries it.

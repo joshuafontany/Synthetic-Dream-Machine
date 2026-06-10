@@ -66,8 +66,8 @@ The bag a tiddler lives in determines which Automerge doc it syncs through:
 | `system` | LarariumIsland doc | hostless `lar:///ha.ka.ba/...` |
 | `corpus:ha.ka.ba` | ha.ka.ba corpus doc | hostless `lar:///ha.ka.ba/...` |
 | `corpus:amorphousdream` | amorphousdream corpus doc | `lar://amorphousdream.com/...` |
-| `room` | room MemeStoreDoc | any authority (situated content) |
-| `draft` | room MemeStoreDoc (local) | any authority (draft-of-room tiddler) |
+| `wiki` | wiki MemeStoreDoc | any authority (situated content) |
+| `draft` | wiki MemeStoreDoc (local) | any authority (draft-of-wiki tiddler) |
 | `projection` | in-memory only | derived, not persisted |
 
 ## Agent-Qualified URIs (future)
@@ -75,7 +75,7 @@ The bag a tiddler lives in determines which Automerge doc it syncs through:
 The `@agent` sigil is reserved for agent-scoped tiddlers:
 
 ```
-lar://elyncia.social/@joshu/rooms/altar-fire    agent-qualified personal room
+lar://elyncia.social/@joshu/wikis/garden        agent-qualified personal wiki
 lar:///ha.ka.ba/@lares/v0.1/api/...             agent-qualified doctrine (existing)
 ```
 

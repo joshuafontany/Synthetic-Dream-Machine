@@ -42,7 +42,7 @@ This threshold carries the live core. The live core MUST stay small. The live co
 
 AGENTS owns two children: mu and LARES.
 Mu owns the invariant grammar kernel and lararium.
-Lararium owns agent mechanics, lararium law, and the-altar-fire.
+Lararium owns agent mechanics and lararium law.
 LARES is the operator control panel (session dials).
 
 - [lar:///AGENTS](AGENTS.md)
