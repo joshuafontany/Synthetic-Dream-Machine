@@ -70,7 +70,7 @@ function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityP
     keyhive,
     personGroupAgentIdHex: AGENT_HEX,
     mintedByHex:           MINTED_BY,
-    recipeTrace:           { wikiDocId: "automerge:wiki", canonBagDocIds: [] as readonly string[] },
+    recipeTrace:           { wikiDocId: "automerge:wiki", libraryBagDocIds: [] as readonly string[] },
   } as const;
 }
 

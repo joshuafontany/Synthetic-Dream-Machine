@@ -72,7 +72,7 @@ export interface VesselCoreAssembly {
 const blankDoc = (repo: Repo): DocHandle<LarDoc> => repo.create<LarDoc>(emptyLarDoc());
 
 /** Canon layer (@lararium / @lares): writable, defaultWritable:false. */
-function addCanonLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
+function addSubstrateLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: true, defaultWritable: false });
 }
 /** Read-only layer (@catalog, corpus bags). */
@@ -94,12 +94,12 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
 
   // ── genesis island (REQUIRED — coreless boot deleted) + the bootstrap it carries ──
   const { islandHandle, coreHash, bootstrap } = await loadGenesis();
-  addCanonLayer(composite, BAG_IDS.lararium, islandHandle);
+  addSubstrateLayer(composite, BAG_IDS.lararium, islandHandle);
   let laresHandle: DocHandle<LarDoc> | null = null;
   const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
   if (laresUrl) {
     laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
-    addCanonLayer(composite, BAG_IDS.lares, laresHandle);
+    addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
   }
   const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
   if (existingRef !== islandHandle.url) {

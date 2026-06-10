@@ -69,7 +69,7 @@ export interface ResolveBindingArgs {
   /** Vessel Individual hex — the binding tiddler's `minted-by` audit field. */
   readonly mintedByHex: string;
   /** Fingerprint inputs, stored verbatim as the `recipe-trace` audit field (Q5: keep). */
-  readonly recipeTrace: { readonly wikiDocId: string; readonly canonBagDocIds: readonly string[] };
+  readonly recipeTrace: { readonly wikiDocId: string; readonly libraryBagDocIds: readonly string[] };
 }
 
 export interface ResolveBindingResult {

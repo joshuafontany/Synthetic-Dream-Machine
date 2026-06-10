@@ -111,7 +111,7 @@ export interface AdminVmCore {
    */
   resolveBinding: (
     fingerprint: string,
-    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
   dispose:        () => void;
   /** Exposed so platform wrappers compose any further capability on top. */

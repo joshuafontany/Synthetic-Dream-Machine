@@ -83,7 +83,7 @@ export type { AdminBehaviorOptions } from "./admin-behavior.js";
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";
 export type { IslandHostSeam } from "./sovereign-kernel.js";
-export { mountSocialPlane, addCanonLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki } from "./vessel-steps.js";
+export { mountSocialPlane, addSubstrateLayer, addReadOnlyLayer, seedVesselDefaults, mountPrimaryWiki } from "./vessel-steps.js";
 export type { ResolveBagHandle, SocialPlaneUrls, SocialPlaneHandles, PrimaryMountPool, BindingResolver, PrimaryMountInputs } from "./vessel-steps.js";
 export {
   makeWhereReactor, makeResolveReactor, makeListWikisReactor,
@@ -96,7 +96,7 @@ export { makeInitWikiReactor, makeOpenWikiReactor }   from "./wiki-mint-handlers
 export { makeDraftReactor, makePruneStaleReactor }    from "./wiki-draft-handlers.js";
 export { makeAddBagReactor, makeRemoveBagReactor }    from "./wiki-compose-handlers.js";
 export type {
-  WikiHandlerOptions, WikiMintHandlerOptions, WikiComposeOptions, DraftHandlerOptions,
+  WikiHandlerOptions, WikiMintHandlerOptions, PruneStaleOptions, WikiComposeOptions, DraftHandlerOptions,
 } from "./wiki-handler-options.js";
 export { makeEpochBagReactor, makeRotateRecipeReactor } from "./epoch-handlers.js";
 export type { EpochHandlerOptions, RotateRecipeOptions } from "./epoch-handlers.js";

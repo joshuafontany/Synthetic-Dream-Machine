@@ -78,7 +78,7 @@ export interface BrowserAdminVmResult {
    */
   resolveBinding: (
     fingerprint: string,
-    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
   /** Bind the pool eviction MECHANISM (sovereign-worker): the worker commands evict via
    *  admin:evict-request; main routes it to the pool. Set after the pool exists. */

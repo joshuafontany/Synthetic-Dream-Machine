@@ -187,7 +187,7 @@ lar:///ha.ka.ba/@admin/draft-bindings/${fingerprintHex}
   text: <automerge:url-of-the-@draft-doc-for-this-recipe>
 ```
 
-`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, canonBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, sortedCanonBagDocIds})`. `@lares` and `@lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
+`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, canonBagDocIds: sorted})` — the hashed key stays the FROZEN v1 wire literal `canonBagDocIds` though the API field renamed to `libraryBagDocIds` (2026-06-09); changing it would silently re-key every stored @personal binding. `@lares` and `@lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
 
 <<~/ahu >>
 
@@ -220,7 +220,7 @@ title:        lar:///ha.ka.ba/@admin/personal-bindings/${fingerprintHex}
 text:         "automerge:abcdef..."   # the @personal doc URL
 kind:         "personal-binding"
 fingerprint:  "${fingerprintHex}"
-recipe-trace: { wikiDocId, canonBagDocIds }  # optional audit field, for diff/inspection
+recipe-trace: { wikiDocId, libraryBagDocIds }  # optional audit field, for diff/inspection
 minted-on:    "2026-05-31T20:00:00Z"
 minted-by:    "<vesselIndividualHex>"
 ```
@@ -261,7 +261,7 @@ Three convergent justifications:
 
 const fingerprint = await computeRecipeFingerprint({
   wikiDocId:      wikiHandle.url,
-  canonBagDocIds: canonHandles.map((h) => h.url),  // @lares/@lararium excluded per Q4
+  libraryBagDocIds: canonHandles.map((h) => h.url),  // @lares/@lararium excluded per Q4
 });
 
 const { url: personalUrl } = await resolveOrMintBinding({
@@ -313,7 +313,7 @@ await keyhive.delegate({ bagUrl: handle.url, audience: personGroupAgentIdHex, ac
 
 await composite.put(mutableLarRecord(key, {
   text: handle.url, kind, fingerprint,
-  "recipe-trace": canonicalJson({ wikiDocId, canonBagDocIds }),  // Q5 keep
+  "recipe-trace": canonicalJson({ wikiDocId, libraryBagDocIds }),  // Q5 keep — audit-only, never parsed back; pre-rename records say canonBagDocIds
   "minted-on": new Date().toISOString(),
   "minted-by": await keyhive.vesselIdentifierHex(),
 }, "personal-bindings"), { bag: ADMIN_BAG_ID });

@@ -237,8 +237,8 @@ import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvid
 export interface RecipeFingerprintInput {
   /** The wiki identity bag's Automerge doc URL (resolver[wikiBagUri(slug)]). */
   readonly wikiDocId: string;
-  /** Canon bag doc URLs in any order — sorted internally before hashing. */
-  readonly canonBagDocIds: readonly string[];
+  /** Library bag doc URLs in any order — sorted internally before hashing. */
+  readonly libraryBagDocIds: readonly string[];
 }
 
 /**
@@ -249,9 +249,13 @@ export interface RecipeFingerprintInput {
  * fingerprint)` pairs match. The vessel stores `@personal` doc URLs keyed by
  * this fingerprint.
  *
- * Sort-stability: `canonBagDocIds` get sorted before hashing so caller
- * ordering does not change the fingerprint. `canonicalJson` sorts object
- * keys for further stability.
+ * Sort-stability: the doc-ids get sorted before hashing so caller ordering
+ * does not change the fingerprint. `canonicalJson` sorts object keys for
+ * further stability.
+ *
+ * FROZEN WIRE KEY: the hashed JSON keeps the v1 literal `canonBagDocIds` even
+ * though the API field renamed to `libraryBagDocIds` — changing the key would
+ * silently re-key every stored `@personal` binding.
  *
  * @see lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot#questions Q4
  */
@@ -261,7 +265,7 @@ export async function computeRecipeFingerprint(
 ): Promise<string> {
   const canonical = {
     wikiDocId:      input.wikiDocId,
-    canonBagDocIds: [...input.canonBagDocIds].sort(),
+    canonBagDocIds: [...input.libraryBagDocIds].sort(),
   };
   return sha256Hex(canonicalJsonBytes(canonical), provider);
 }

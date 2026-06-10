@@ -49,7 +49,7 @@ export type ResolveBagHandle = (
  * tiddlers, but `defaultWritable:false` so unbagged TW5 saves keep routing to
  * the wiki — only an explicit `record.bag === bagId` write lands here.
  */
-export function addCanonLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
+export function addSubstrateLayer(composite: CompositeStore, bagId: string, handle: DocHandle<LarDoc>): void {
   composite.addLayer({
     bagId,
     store:           new AutomergeDocStore(handle, bagId),
@@ -89,7 +89,7 @@ export interface PrimaryMountPool {
 export interface BindingResolver {
   resolveBinding(
     fingerprint: string,
-    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
   ): Promise<{ personalUrl: string; draftUrl: string }>;
 }
 
@@ -124,7 +124,7 @@ export async function mountPrimaryWiki(
   // @personal + @draft bind TOGETHER per recipe-fingerprint (Q11). Fingerprint
   // covers wikiDocId + libraryBags only (@lares/@lararium excluded per Q4); the
   // live primary carries no libraryBags, so it keys on the wiki doc url alone.
-  const recipeTrace = { wikiDocId: inputs.wikiUrl, canonBagDocIds: [] as readonly string[] };
+  const recipeTrace = { wikiDocId: inputs.wikiUrl, libraryBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
   const { personalUrl, draftUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
 

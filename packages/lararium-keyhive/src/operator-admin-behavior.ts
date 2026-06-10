@@ -152,7 +152,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       return { ...verdict, identifier: id, proofVerified };
     },
 
-    resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] }) => {
+    resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
       if (!kh) throw new Error("keyhive not booted");
       const common = {
         fingerprint, repo: ctx.repo, adminStore: ctx.composite, keyhive: kh,

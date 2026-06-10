@@ -308,7 +308,7 @@ export interface AdminMsg_ResolveBindingRequest {
   type: "admin:resolve-binding-request";
   requestId: string;
   fingerprint: string;
-  recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] };
+  recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] };
 }
 
 /** Island → vessel: the resolved binding doc URLs (or an error). */
@@ -702,7 +702,7 @@ export function mkAdminVerifyResult(opts: {
 export function mkAdminResolveBindingRequest(opts: {
   requestId:   string;
   fingerprint: string;
-  recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] };
+  recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] };
 }): AdminMsg_ResolveBindingRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,

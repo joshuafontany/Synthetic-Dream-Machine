@@ -3,7 +3,7 @@ import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import { type LarDoc, wikiDraftLarUri, wikiLarUri } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { numberArg, stringArg } from "./handler-args.js";
-import type { DraftHandlerOptions, WikiMintHandlerOptions } from "./wiki-handler-options.js";
+import type { DraftHandlerOptions, PruneStaleOptions } from "./wiki-handler-options.js";
 
 export function makeDraftReactor(opts: DraftHandlerOptions): VerbReactor {
   return async (args, ctx) => {
@@ -61,7 +61,7 @@ export function makeDraftReactor(opts: DraftHandlerOptions): VerbReactor {
   };
 }
 
-export function makePruneStaleReactor(opts: WikiMintHandlerOptions): VerbReactor {
+export function makePruneStaleReactor(opts: PruneStaleOptions): VerbReactor {
   return async (args) => {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");

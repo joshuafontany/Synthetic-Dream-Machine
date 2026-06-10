@@ -23,11 +23,16 @@ export interface WikiHandlerOptions {
  *  doc itself via `catalog.handle()`, any registered bag via `catalog.find()`
  *  — collapses the old per-verb `catalogHandle` + `islandHandle` plumbing. */
 export interface WikiMintHandlerOptions {
-  readonly composite:   CompositeStore;
   readonly repo:        Repo;
   readonly catalog:     CatalogAccessor;
   readonly operatorDid: () => Promise<string> | string;
   readonly rootDir:     string;
+}
+
+/** prune-stale additionally reads the operator's draft oracle off the admin
+ *  composite; init-wiki shares the mint options without needing it. */
+export interface PruneStaleOptions extends WikiMintHandlerOptions {
+  readonly composite: CompositeStore;
 }
 
 /** Options for recipe-composition operations (add-bag / remove-bag). Pono web3:

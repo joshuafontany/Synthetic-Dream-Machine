@@ -65,7 +65,7 @@ export interface AdminBehaviorOptions {
   resolveBinding?: (
     ctx: IslandContext,
     fingerprint: string,
-    recipeTrace: { wikiDocId: string; canonBagDocIds: readonly string[] },
+    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string }>;
   /**
    * Sovereign-worker data-plane: register the residency / wiki / where / resolve
