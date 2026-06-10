@@ -92,9 +92,17 @@ export class CompositeStore implements LarTiddlerStore {
     return this.layers.some((l) => l.bagId === bagId);
   }
 
-  addLayer(layer: CompositeLayer): void {
+  /** Index of a layer in the cascade (lowest-priority = 0), or -1. */
+  layerIndexOf(bagId: string): number {
+    return this.layers.findIndex((l) => l.bagId === bagId);
+  }
+
+  /** `at` splices the layer into the cascade at that priority index (live
+   *  recipe reconcile); omitted = push to top (boot-time bottom-up order). */
+  addLayer(layer: CompositeLayer, at?: number): void {
     if (this.hasBag(layer.bagId)) throw new Error(`CompositeStore: bag "${layer.bagId}" already registered`);
-    this.layers.push(layer);
+    if (at !== undefined && at >= 0 && at < this.layers.length) this.layers.splice(at, 0, layer);
+    else this.layers.push(layer);
     // defaultWritable defaults to true. Set false for layers that accept
     // explicit-bag-routed writes but shouldn't override the default writable
     // store (the projection layer).
@@ -137,6 +145,28 @@ export class CompositeStore implements LarTiddlerStore {
     this.unsubs.get(removed.store)?.();
     this.unsubs.delete(removed.store);
     if (this.writableStore === removed.store) this.writableStore = null;
+  }
+
+  /**
+   * Remove a layer from a LIVE composite and surface the consequences: for
+   * every title the removed layer held visible, emit a synthetic change
+   * carrying what now resolves beneath it — the unshadowed lower record, or
+   * `record: null` (a tombstone) when nothing remains. Projections
+   * (IslandAdaptor) and subscribers both hear it, so the wiki view sheds the
+   * departed bag without a reboot. Plain removeLayer stays the teardown path.
+   */
+  async removeLayerLive(bagId: string): Promise<void> {
+    const layer = this.layers.find((l) => l.bagId === bagId);
+    if (!layer) return;
+    const titles = await layer.store.listVisible();
+    this.removeLayer(bagId);
+    const origin: ChangeOrigin = { kind: "canon-hydrate", receipt: `layer-removed:${bagId}` };
+    for (const title of titles) {
+      const remaining = await this.get(title);
+      const change: LarTiddlerChange = { title, record: remaining, origin, bag: bagId };
+      this.listeners.forEach((fn) => fn(change));
+      for (const projection of this.projections.keys()) projection.onUriChanged(change);
+    }
   }
 
   // ---------------------------------------------------------------------------

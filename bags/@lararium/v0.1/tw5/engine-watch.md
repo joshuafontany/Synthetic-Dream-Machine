@@ -27,7 +27,7 @@ JS-module plugins demand a reload — swapping a running module corrupts.
 
 | Class | Examples | Path |
 |---|---|---|
-| **Composition** | recipe membership, bag content, oracle moves | sync (live-watch arc, unbuilt) |
+| **Composition** | recipe membership, bag content, oracle moves | sync — LIVE via recipe-watch |
 | **Epoch** | TW5 core re-pack, JS plugin upgrade, bootstrap rewiring | alert → operator reboots |
 
 The reboot-pending alert and this watch together hold the **epoch half** of the

@@ -17,7 +17,7 @@
  */
 
 import type { DocHandle }                        from "@lararium/mesh";
-import type { CompositeStore, IslandToVesselMsg, LarDoc, Repo } from "@lararium/mesh";
+import type { CompositeStore, IslandToVesselMsg, LarDoc, Repo, WikiRecipe } from "@lararium/mesh";
 import type { TW5Engine }                        from "./tw5-vm.js";
 
 export interface IslandContext {
@@ -47,6 +47,12 @@ export interface IslandContext {
    * against this to detect a waiting engine epoch (alert-only; reboot adopts).
    */
   engine: { sha256: string; version: string };
+  /**
+   * The WikiRecipe this island mounted from (the manifest's slot structure).
+   * The recipe-watch reads `wikiSlug` to find its own `@catalog` recipe record
+   * and reconcile composition changes live.
+   */
+  recipe: WikiRecipe;
 }
 
 /**

@@ -52,6 +52,7 @@ export { registerActionReactors, makeActionReactorFor } from "./action-handler.j
 export { makeWikiBehavior } from "./wiki-behavior.js";
 export type { WikiBehaviorOptions } from "./wiki-behavior.js";
 export { startEngineWatch, ENGINE_WAITING_ALERT_TITLE } from "./engine-watch.js";
+export { startRecipeWatch } from "./recipe-watch.js";
 export type { ActionHandlerOptions } from "./action-handler.js";
 
 export { exportMemeText } from "./meme-write.js";

@@ -242,7 +242,7 @@ export function runSovereignKernel(
     // entry, NOT a load slot — @catalog is absent from expandRecipe). Worker
     // behaviors build a CatalogAccessor over it to reach any registered bag.
     const catalogUrl = msg.resolver[CATALOG_DOC_URI] ?? null;
-    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine };
+    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine, recipe: msg.recipe };
     await behavior.onEa(_ctx);
 
     handler.sendEa(msg.wikiUri);

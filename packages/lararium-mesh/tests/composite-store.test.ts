@@ -545,3 +545,51 @@ describe("CompositeStore — dynamic addProjection fan-out to future layers", ()
     expect(received).toHaveLength(0);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Live composition reconcile surface (recipe-watch substrate)
+// ---------------------------------------------------------------------------
+
+describe("CompositeStore live layer surgery", () => {
+  test("addLayer at an index splices into the cascade, not the top", () => {
+    const composite = new CompositeStore();
+    composite.addLayer({ bagId: "lar:///low",  store: new MemoryTiddlerStore("lar:///low"),  writable: false });
+    composite.addLayer({ bagId: "lar:///high", store: new MemoryTiddlerStore("lar:///high"), writable: false });
+    composite.addLayer({ bagId: "lar:///mid",  store: new MemoryTiddlerStore("lar:///mid"),  writable: false }, 1);
+    expect(composite.layerIds).toEqual(["lar:///low", "lar:///mid", "lar:///high"]);
+    expect(composite.layerIndexOf("lar:///mid")).toBe(1);
+  });
+
+  test("removeLayerLive tombstones departed titles and reveals unshadowed lower records", async () => {
+    const composite = new CompositeStore();
+    const low  = new MemoryTiddlerStore("lar:///low");
+    const high = new MemoryTiddlerStore("lar:///high");
+    await low.put({ tiddler: { title: "shared", text: "from low" } }, systemOrigin());
+    await high.put({ tiddler: { title: "shared", text: "from high" } }, systemOrigin());
+    await high.put({ tiddler: { title: "only-high", text: "departing" } }, systemOrigin());
+    composite.addLayer({ bagId: "lar:///low",  store: low,  writable: false });
+    composite.addLayer({ bagId: "lar:///high", store: high, writable: false });
+
+    const heard: LarTiddlerChange[] = [];
+    composite.subscribe((c) => heard.push(c));
+    const projected: LarTiddlerChange[] = [];
+    composite.addProjection({ onUriChanged: (c: LarTiddlerChange) => { projected.push(c); } } as never);
+
+    await composite.removeLayerLive("lar:///high");
+
+    expect(composite.hasBag("lar:///high")).toBe(false);
+    // departed-with-nothing-beneath → tombstone (record null)
+    const gone = heard.find((c) => c.title === "only-high");
+    expect(gone?.record).toBeNull();
+    // shadowed lower record resurfaces
+    const revealed = heard.find((c) => c.title === "shared");
+    expect(revealed?.record?.tiddler["text"]).toBe("from low");
+    // projections hear the same surgery
+    expect(projected.some((c) => c.title === "only-high" && c.record === null)).toBe(true);
+  });
+
+  test("removeLayerLive on an absent bag stays a no-op", async () => {
+    const composite = new CompositeStore();
+    await expect(composite.removeLayerLive("lar:///ghost")).resolves.toBeUndefined();
+  });
+});

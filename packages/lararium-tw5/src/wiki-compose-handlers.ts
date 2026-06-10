@@ -59,9 +59,9 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
     // Pono: no live-layer mount. The recipe change syncs; each island mounts the bag
     // when it reconciles its own stack. Command main to pin the bag's residency.
     opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "pin", bagId: bagUrl, reason: `wiki:${slug}` }));
-    // Reboot-pending: the recipe lives in @catalog (the island doesn't load it), so the
-    // mount only applies on next boot — alert the live island.
-    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag added to "${slug}" — reboot to mount it.`, cause: "add-bag" }));
+    // Live islands reconcile this via recipe-watch and clear the notice themselves;
+    // the alert stays the FALLBACK for islands that sleep through the change.
+    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag added to "${slug}" — live islands mount it automatically; reboot if this notice persists.`, cause: "add-bag" }));
 
     return {
       slug,
@@ -69,8 +69,8 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
       status: "added",
       bagUrl,
       stack: nextStack,
-      rebootRequired: true,
-      note: "recipe updated + synced; islands mount on reconcile (reboot — alert seeded to live island)",
+      rebootRequired: false,
+      note: "recipe updated + synced; live islands reconcile via recipe-watch (alert seeded as fallback for sleeping islands)",
     };
   };
 }
@@ -82,10 +82,9 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
  * Idempotent: if the bag URL isn't in the recipe stack, returns
  * "not-in-stack" without mutation.
  *
- * Soft remove: drops from the composite layer set; unpins residency.
- * Active StoryList reconciliation (Pattern 3 MNT_DETACH drain) lands in
- * F-arc when the TW5 vm refresh pipeline gets touched. For now, operator
- * tabs/state pointing into the removed bag may resolve to nothing.
+ * Soft remove: the recipe change syncs; live islands drop the layer via
+ * recipe-watch (departed titles tombstone, unshadowed records resurface).
+ * Operator tabs/state pointing into the removed bag may resolve to nothing.
  */
 export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
   return async (args) => {
@@ -122,10 +121,11 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     const catalogHandle = await opts.catalog.handle();
     catalogHandle.change((doc) => { (doc.tiddlers as Record<string, LarTiddlerRecord>)[recipeTitle] = updated; });
 
-    // Pono: no live-layer unmount. The recipe change syncs; each island drops the bag
-    // when it reconciles. Command main to release the bag's pin.
+    // Pono: no live-layer unmount from admin. The recipe change syncs; each island
+    // drops the bag itself (recipe-watch). Command main to release the bag's pin.
+    // The alert stays the FALLBACK for islands that sleep through the change.
     opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));
-    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag removed from "${slug}" — reboot to drop it.`, cause: "remove-bag" }));
+    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag removed from "${slug}" — live islands drop it automatically; reboot if this notice persists.`, cause: "remove-bag" }));
 
     return {
       slug,
@@ -133,8 +133,8 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
       status: "removed",
       bagUrl,
       stack: nextStack,
-      rebootRequired: true,
-      note: "recipe updated + synced; islands drop on reconcile (reboot — alert seeded to live island)",
+      rebootRequired: false,
+      note: "recipe updated + synced; live islands reconcile via recipe-watch (alert seeded as fallback for sleeping islands)",
     };
   };
 }

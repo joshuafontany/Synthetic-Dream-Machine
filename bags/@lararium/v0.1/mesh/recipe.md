@@ -47,10 +47,10 @@ Genesis seeds **no** recipes. User wiki recipes live in the user's
 catalog accessor (access≠load). `@lararium` stays pure protocol substrate —
 a recipe record landing there reads as a design smell.
 
-A recipe change syncs as ordinary data; the running island still holds the
-old mount set, so composition changes surface the reboot-pending alert until
-a live recipe-watch lands (composition class — see engine-watch for the
-epoch class it contrasts with).
+A recipe change syncs as ordinary data; running islands reconcile it LIVE
+via recipe-watch (composition class), with the reboot-pending alert as the
+fallback for islands that sleep through it — see engine-watch for the epoch
+class, where the alert stays the permanent mechanism.
 
 <<~/ahu >>
 
