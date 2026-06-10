@@ -199,10 +199,9 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     });
   }
 
-  // Genesis seeds NO recipe descriptors. Recipes are USER registry data — minted
-  // per-wiki into the user's @catalog by init-wiki. The old genesis-seeded
-  // "@lararium/recipes/{full,default}" + "@catalog/default" defaults were legacy
-  // web2 (protocol substrate carrying user composition templates) — deleted.
+  // Genesis seeds NO recipe descriptors. Recipes carry USER registry data —
+  // minted per-wiki into the user's @catalog by init-wiki. Protocol substrate
+  // stays pure of user composition.
 
   // 4. Write bag descriptor tiddlers.
   doc = automergeChange(doc, { time: 0 }, d => {
