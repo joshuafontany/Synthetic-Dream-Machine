@@ -28,8 +28,6 @@ import type {
 } from "@lararium/mesh";
 import {
   OpenIdentitySlot,
-  CompositeStore,
-  AutomergeDocStore,
   corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
   LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
@@ -67,6 +65,20 @@ import type { AdminVmResult } from "./open-admin-vm.js";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_GENESIS_DIR = join(__dir, "../genesis");
+
+/**
+ * Upstream's NodeWSServerAdapter declares ready only on its FIRST client
+ * connection — un-pono for a local-first vessel: readiness reads from local
+ * state (the server listens), never from a peer's arrival (no global now).
+ * Upstream's own CLIENT adapter force-readies on a 1s timer for the same
+ * reason. Without this, a zero-client vessel parks every storage-miss
+ * repo.find() at networkSubsystem.whenReady() and the island→main→island
+ * doc relay deadlocks silently (no reply, not even doc-unavailable).
+ */
+class ListeningWSServerAdapter extends NodeWSServerAdapter {
+  override isReady(): boolean { return true; }
+  override whenReady(): Promise<void> { return Promise.resolve(); }
+}
 /** Title of the social bootstrap plugin tiddler baked by lararium:init. */
 export const SOCIAL_BOOTSTRAP_PLUGIN_TITLE = "lar:///ha.ka.ba/@lararium/bootstrap/social";
 
@@ -103,7 +115,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── 1. Repo — NodeFS storage + WebSocket relay behind the AdminAuthGate ─────
   const storage = new NodeFSStorageAdapter(storageDir);
   const authGate = new AdminAuthGate(wss);
-  const network  = new NodeWSServerAdapter(authGate as unknown as typeof wss);
+  const network  = new ListeningWSServerAdapter(authGate as unknown as typeof wss);
   const peerIdentifierMap = new Map<string, string>();
   network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
     queueMicrotask(() => {
