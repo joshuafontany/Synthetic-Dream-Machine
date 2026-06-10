@@ -48,7 +48,7 @@ The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → Autome
 | `wikiUrl?` | the island's OWN write-layer bag | `@{wikiSlug}`; `@admin` under the one-recipe model |
 | `personalUrl?` / `draftUrl?` | keyhive-bound sovereign instance mounts | minted by admin `resolveBinding` |
 
-The `laresUrl?` grant got trimmed (keel trim, 2026-06-10): @lares registers in @catalog at vessel boot like any library layer and resolves island-side from the registry — the smallest instance of the wiki-as-bag quine, no special case (`wiki-layer-ontology#quine`).
+The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded same day on the three-plane ruling): @lares rides the **protocol-invariant plane** with @lararium — islands resolve it from the @lararium doc's own well-known tiddlers, the substrate they already hold. Three oracle planes, three authorities: protocol invariants (@lararium doc) · user bags (@catalog, ocap grants) · public/infrastructure (@crossroads, future). See `wiki-layer-ontology#oracle-planes`.
 
 **Library layers never ride the manifest.** The island resolves them itself from @catalog (recipe-watch reconcile) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
 

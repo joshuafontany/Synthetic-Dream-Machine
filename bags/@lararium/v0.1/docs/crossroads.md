@@ -1,0 +1,68 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/crossroads >>
+```toml iam
+uri-path     = "ha.ka.ba/@lararium/v0.1/docs/crossroads"
+file-path    = "bags/@lararium/v0.1/docs/crossroads.md"
+type         = "text/x-memetic-wikitext"
+tagspace     = "lararium"
+register     = "Provisional"
+manaoio      = 4
+mana         = 5
+manao        = 5
+role         = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
+cacheable    = false
+retain       = true
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #attractor >>
+
+# @crossroads — the Public Oracle Plane
+
+**UNBUILT.** This meme holds the attractor so the basin forms before the water arrives.
+
+@crossroads completes the three-plane oracle model (`wiki-layer-ontology#oracle-planes`): where the @lararium doc carries the **protocol invariants** and `@catalog` carries the **operator's** bag oracles under OCAP grants, @crossroads will carry oracles to **public and infrastructure bags** — the layers a stranger may mount without standing in any operator's grant graph.
+
+The name carries the load deliberately: the Lares Compitales kept the **crossroads shrines** — district-scale, fed by collective offering, serving travelers and neighbors rather than one household (`noosphere-boot#elyncia`, shrine tiers). The household lararium answers to its operator; the crossroads answers to whoever walks the road.
+
+<<~/ahu >>
+
+<<~ ahu #constraints >>
+
+## Constraints the build inherits (already canon)
+
+- **Ring-1 anonymous access** — read for the public group; the federation gate holds: only `meme`-rated and above federates (`noise`/`data` stay node-local).
+- **Orichalcum gates apply unchanged** — a public bag still answers the five capability questions; "public" names a generous grant to an anonymous principal, never an absence of the gate. `pull` does not imply `read`.
+- **One home per oracle** — a bag's oracle lives in exactly one plane. Promotion from @catalog to @crossroads constitutes a crossing rite (residency canon: ACTION verbs + effect records + the destination registry's accession), never a copy that leaves two authorities standing.
+- **Access ≠ load** — islands watch @crossroads the way they watch @catalog: an ACCESS capability, never a mounted layer.
+
+<<~/ahu >>
+
+<<~ ahu #open >>
+
+## Open (deliberately)
+
+Who writes @crossroads (community authority shape), how Nexus-level federation discovers it, and whether it shards per-Nexus or rides DreamNet-wide — all undecided, and this meme MUST NOT pre-narrate them. The mechanism above constrains; the outcomes emerge from use.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+
+<<~ pranala #completes-planes ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology family:relation role:completes >>
+<<~ pranala #gated-by-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:governed-by >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -53,9 +53,27 @@ The OCI column carries structure only. Our layers sync as CRDT coordinates, not 
 
 **The name names the bag; a wiki reads as that bag opened through a recipe** — write layer + library list + instance mounts. `@lares`-the-wiki and `@lares`-the-bag never compete for the name: the wiki projects the bag, the way a git repo and its checkout share a name without confusion.
 
-The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another. `@lares` stands as the smallest instance of the universal pattern, not a special case — a wiki whose bag others mount; opening `@lares`-as-wiki edits the personality, mounting `@lares`-as-bag reads it.
+The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
+
+The quine governs the **user plane**. `@lares` and `@lararium` stand *below* it as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes both — slots, not library members). `@lares` still opens as a wiki for editing the personality; it shares by *being substrate*, not by registry membership (#oracle-planes).
 
 > Two faces on one bag — library-face turned down-stack to the consumers, dwelling-face turned up-stack to the instance. The threshold looks both ways. — Tide-Caller
+
+<<~/ahu >>
+
+<<~ ahu #oracle-planes >>
+
+## Three Oracle Planes — Three Authorities
+
+An oracle (a bag-URI → doc-URL pointer) resolves from the plane that owns it; no plane projects into another (one home per oracle, zero drift surface):
+
+| Plane | Oracle home | Holds | Authority class |
+|---|---|---|---|
+| **Protocol invariants** | the @lararium doc's well-known tiddlers | @lararium, @lares — the DreamNet federation floor | genesis / engine-epoch machinery |
+| **User registry** | `@catalog` | the operator's bags, each under OCAP grants | operator composition (recipes, ACTION verbs) |
+| **Public / Infrastructure** | `@crossroads` *(unbuilt — `lar:///ha.ka.ba/@lararium/v0.1/docs/crossroads`)* | ring-1 public bags | federation / community |
+
+Islands resolve each slot from its plane: invariants from the substrate doc they already hold, library bags from @catalog, public bags (future) from @crossroads. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies), never the catalog composition class.
 
 <<~/ahu >>
 
