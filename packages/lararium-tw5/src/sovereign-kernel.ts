@@ -46,7 +46,9 @@ import {
   TEMP_BAG,
   DRAFT_BAG,
   PERSONAL_BAG,
+  LARES_BAG,
   LARARIUM_BAG,
+  tiddlerText,
   wikiBagUri,
   expandRecipe,
   mkFault,
@@ -195,20 +197,24 @@ export function runSovereignKernel(
     if (!laraiumHandle) return;
     _handles.set(LARARIUM_BAG, laraiumHandle);
 
-    // @catalog ACCESS (never layered) — the island resolves @lares and every
-    // library bag from the registry ITSELF: boot runs the same resolution path
-    // recipe-watch runs live (boot = first reconcile).
+    // @catalog ACCESS (never layered) — the island resolves library bags from
+    // the user registry ITSELF: boot runs the same resolution path recipe-watch
+    // runs live (boot = first reconcile).
     const catalogUrl = msg.grants.catalogUrl ?? null;
     const catalog    = catalogUrl ? makeCatalogAccessor(_repo, catalogUrl) : null;
 
-    // Structural slots arrive as typed grants; @lares and library bags resolve
-    // via catalog ONLY (wiki-layer-ontology Law 2: named ⇒ registry-resolved).
+    // Three oracle planes, three authorities: protocol invariants (@lares,
+    // @lararium) resolve from the @lararium doc's well-known tiddlers — the
+    // substrate the island already holds; user library bags resolve from
+    // @catalog; public bags will resolve from @crossroads. Structural instance
+    // slots arrive as typed grants.
     const slotUrl = async (slot: SlotUri): Promise<string | null> => {
       if (slot === DRAFT_BAG)                    return msg.grants.draftUrl    ?? null;
       if (slot === PERSONAL_BAG)                 return msg.grants.personalUrl ?? null;
       if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
       if (slot === LARARIUM_BAG)                 return msg.grants.islandUrl;
-      return catalog ? await catalog.urlOf(slot) : null;   // @lares + library bags
+      if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;
+      return catalog ? await catalog.urlOf(slot) : null;   // user library bags
     };
 
     const slots = expandRecipe(msg.recipe);
