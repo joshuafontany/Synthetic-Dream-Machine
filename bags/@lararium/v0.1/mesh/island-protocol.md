@@ -11,7 +11,7 @@ mana         = 14
 role         = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
 tagspace     = "lararium"
 revised-on   = "2026-06-10"
-revision-note = "rebuilt against post-keel-cut source: resolver dictionary → IslandGrants; coreBlob → @lararium blob store; demote → hoʻoanu; frame:ack retired; admin verb/verify/binding/evict/residency/alert surfaces added"
+revision-note = "rebuilt against post-keel-cut source: resolver dictionary → IslandGrants; coreBlob → @lararium blob store; demote → hoʻoanu; frame:ack retired; admin verb/verify/binding/evict/residency/alert surfaces added; laresUrl grant trimmed (keel trim — @lares resolves from @catalog)"
 cacheable    = true
 retain       = true
 ```
@@ -46,8 +46,9 @@ The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → Autome
 | `islandUrl` | @lararium engine/system doc | REQUIRED — engine bytes precede TW5 boot |
 | `catalogUrl?` | @catalog registry ACCESS | access ≠ load; never layered; absent = no watch |
 | `wikiUrl?` | the island's OWN write-layer bag | `@{wikiSlug}`; `@admin` under the one-recipe model |
-| `laresUrl?` | @lares personality doc | absent + catalog granted → island resolves it from @catalog |
 | `personalUrl?` / `draftUrl?` | keyhive-bound sovereign instance mounts | minted by admin `resolveBinding` |
+
+The `laresUrl?` grant got trimmed (keel trim, 2026-06-10): @lares registers in @catalog at vessel boot like any library layer and resolves island-side from the registry — the smallest instance of the wiki-as-bag quine, no special case (`wiki-layer-ontology#quine`).
 
 **Library layers never ride the manifest.** The island resolves them itself from @catalog (recipe-watch reconcile) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
 
