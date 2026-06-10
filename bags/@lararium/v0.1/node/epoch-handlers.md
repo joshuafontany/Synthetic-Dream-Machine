@@ -4,19 +4,24 @@
 ```toml iam
 uri-path     = "ha.ka.ba/@lararium/v0.1/node/epoch-handlers"
 file-path    = "bags/@lararium/v0.1/node/epoch-handlers.md"
-source-file  = "packages/lararium-node/src/epoch-handlers.ts"
 type         = "text/x-memetic-wikitext"
 register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe epoch-handlers.ts"
+mana         = 2
+role         = "retire-residue: epoch handlers moved node → tw5 (isomorphic); see tw5/epoch-handlers"
 tagspace     = "lararium"
-cacheable    = true
+cacheable    = false
 retain       = true
 ```
 <<~ &#x0002; >>
 
-<<~ ahu #contract >>
-TODO: describe the load-bearing surface this file owns.
+<<~ ahu #retired >>
+
+Retired 2026-06-09. The epoch handlers moved out of `@lararium/node` into
+`@lararium/tw5` during the sovereign-worker campaign — both vessels hold them
+now (isomorphic, worker-ward). The living meme:
+
+<<~ pranala #successor ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/epoch-handlers family:succession role:supersedes-this >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>
