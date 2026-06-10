@@ -5,16 +5,20 @@
 uri-path     = "ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack"
 file-path    = "bags/@lararium/v0.1/docs/lararium-doc-stack.md"
 type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 19
-manao        = 18
-manaoio      = 18
-role         = "Multi-doc Automerge stack — LarariumIsland → Catalog → Corpus* → Room → Drafts → Projections"
+register     = "Synthesis"
+mana         = 11
+manao        = 11
+manaoio      = 11
+role         = "research-era doc-stack model (six-layer) — structurally PRE-keel-cut; superseded for current law by recipe + island-protocol (IslandGrants) + wiki-layer-ontology; retained for boot-sequence and export round-trip teaching"
+revised-on   = "2026-06-10"
+revision-note = "demoted from Synthesis-Canon: the six-layer Catalog/Corpus model predates IslandGrants + recipe-watch (boot = first reconcile); terms swept room→wiki 2026-06-10"
 cacheable    = true
 retain       = true
 ```
 
 <<~ &#x0002; >>
+
+> **Supersession note (2026-06-10).** This meme records the research-era six-layer model. The current composition law lives at `lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe` (stored composition shape), `lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol` (IslandGrants — typed ocap manifest; library layers resolve island-side from @catalog, boot = first reconcile), and `lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology` (the layer stack and its laws). Read what follows as lineage, not law.
 
 # LarariumDoc Stack
 
@@ -33,7 +37,7 @@ Automerge DocHandle. Layers compose into a `CompositeStore`; TW5 recipe law
 ├─────────────────────────────────────────────────────────┤
 │  Catalog doc               bag: system                  │
 │  lar://elyncia.app/catalog  (or ISLAND.catalogDocUrl)   │
-│  Room registry: rooms[id].contentDocUrl                 │
+│  Wiki registry: wikis[id].contentDocUrl                 │
 │  Corpora registry: corpora[slug].contentDocUrl          │
 │  Read-mostly. First peer creates; rest find by URL.     │
 ├─────────────────────────────────────────────────────────┤
@@ -42,12 +46,12 @@ Automerge DocHandle. Layers compose into a `CompositeStore`; TW5 recipe law
 │  One doc per corpus island. Loaded from catalog.        │
 │  Read-only on receiving peers. Synced via federation.   │
 ├─────────────────────────────────────────────────────────┤
-│  Room doc                  bag: room                    │
-│  lar://elyncia.social/rooms/altar-fire  (creator ns)    │
-│  Situated session content. Writable by room members.    │
-│  URL registered in Catalog.rooms[id].contentDocUrl.     │
+│  Wiki doc                  bag: wiki                    │
+│  lar://elyncia.social/wikis/garden  (creator ns)        │
+│  Situated session content. Writable by wiki members.    │
+│  URL registered in Catalog.wikis[id].contentDocUrl.     │
 ├─────────────────────────────────────────────────────────┤
-│  Room-Drafts doc           bag: draft                   │
+│  Wiki-Drafts doc           bag: draft                   │
 │  Creator-namespaced. Syncs across same-user sessions    │
 │  (multi-device) via BroadcastChannel + WS identity      │
 │  scope. High-churn: "draft-of" tiddlers, unsaved edits. │
@@ -70,15 +74,15 @@ whatever is available at each phase:
    Grammar + widgets available. TW5 can parse tiddlers.
 
 2. Catalog doc         → repo.find(ISLAND.catalogUrl)  [system bag]
-   Room + corpus URLs known.
+   Wiki + corpus URLs known.
 
 3. Corpus:* docs       → repo.find(catalog.corpora[*]) [corpus bags]
    Hostful corpus tiddlers available. Reactions can scan.
 
-4. Room doc            → repo.find(catalog.rooms[id])  [room bag]
+4. Wiki doc            → repo.find(catalog.wikis[id])  [wiki bag]
    Situated content available. Full wiki operational.
 
-5. Room-Drafts doc     → repo.find or create           [draft bag]
+5. Wiki-Drafts doc     → repo.find or create           [draft bag]
    High-churn edits. Syncs across same-user sessions
    (BroadcastChannel + WS user-identity scope). Not
    shared with other users.
@@ -89,19 +93,19 @@ whatever is available at each phase:
 
 `ReactionEngine.boot(tw5)` fires after step 3 (corpus bags loaded),
 not at step 4 — reactions on system + corpus tiddlers fire first.
-The boot scan on an empty room doc passes as valid (optimistic-empty);
-incremental `onUriChanged` updates the graph as room tiddlers arrive.
+The boot scan on an empty wiki doc passes as valid (optimistic-empty);
+incremental `onUriChanged` updates the graph as wiki tiddlers arrive.
 
-## Creator-Namespaced Rooms
+## Creator-Namespaced Wikis
 
-Room doc URLs belong to their creator's DID:
+Wiki doc URLs belong to their creator's DID:
 
 ```
-lar://elyncia.social/rooms/altar-fire    → creator: did:web:elyncia.social
-lar://amorphousdream.com/rooms/cabal-1   → creator: cabal DID
+lar://elyncia.social/wikis/garden        → creator: did:web:elyncia.social
+lar://amorphousdream.com/wikis/cabal-1   → creator: cabal DID
 ```
 
-The room URL serves as the capability root (Keyhive: doc URL = public key).
+The wiki URL serves as the capability root (Keyhive: doc URL = public key).
 Other peers receive a delegation token granting read/write; the URL
 does not change when new members join.
 
@@ -110,8 +114,8 @@ does not change when new members join.
 Content moves up the priority stack via promotion:
 
 ```
-draft → room      "Publish" action: tombstone draft, put to room bag
-room  → corpus    "Canonize" action: Keyhive signed receipt required;
+draft → wiki      "Publish" action: tombstone draft, put to wiki bag
+wiki  → corpus    "Canonize" action: Keyhive signed receipt required;
                   tiddler moved to corpus doc, title unchanged
 corpus → island   "Invariant" action: island author only;
                   tiddler promoted to LarariumIsland doc

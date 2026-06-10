@@ -11,9 +11,11 @@ manaoio      = 16
 mana         = 18
 manao        = 17
 namespace    = "ॐ ँ"
-role         = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations)"
+role         = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
 status       = "approved"
 approved-on  = "2026-05-30"
+revised-on   = "2026-06-10"
+revision-note = "bag-grain verb pair (CREATE + bag-grain COPY) approved — carries the wiki-layer crossing rite; @catalog registration = holdings accession; implementation pending"
 cacheable    = true
 hydrate      = true
 retain       = true
@@ -116,6 +118,21 @@ Per-verb args:
 | `LOAD` | `source-uri`, `to-bag`, `change-id` (mints fresh) |
 
 Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
+
+### Bag-grain surface — APPROVED (operator, 2026-06-10; implementation pending)
+
+The ACTION surface carries **two grains**, both SPARQL Update derived. SPARQL's graph-management verbs operate graph-grain natively; the title-grain forms above specialize them. The approved bag-grain pair:
+
+| Verb | What it does | SPARQL Update analog |
+|---|---|---|
+| **CREATE** | Mint a new bag (new coordinate; empty; identity = fresh AutomergeUrl) | `CREATE GRAPH <g>` |
+| **COPY** (bag-grain) | Grant every title in source residency in the (new or existing) destination bag; `change-id` preserved per title; one `transfer-id` family audits the batch | `COPY <source-graph> TO <dest-graph>` |
+
+This pair carries the wiki-level crossing (`wiki-layer-ontology#crossing-law`): **CREATE** mints the coordinate, bag-grain **COPY** grants the residency, and registration lands as a `holdings` accession in `@catalog` (the union catalog — MARC MFHD analog above). No `fork` / `commit` / `push` verb exists at any grain; the coordinate-space ruling (§5 below) holds unbroken.
+
+**Sovereign-worker routing (MUST):** bag-grain ACTIONs ride the same verb-tiddler rail as title-grain (VERB → SUMMONS → OUTCOME), execute in the admin island, write-then-sync — main never reaches into a bag. Orichalcum gates: `admin` on the destination bag, `edit` on `@catalog`, evaluated at the standard gate points. Any `anu` participant heats first (`hoʻowela`, residency-tiers). Per anti-pattern #6, concurrent bag-grain COPYs into one destination surface in the per-bag queue — recorded, never arbitrated (Talk Story resolves).
+
+**Why bag-grain verbs over composed batches (operator ruling):** pono web3 models land early — a first-class coordinate-mint verb keeps the registry, capability gates, and audit ledger aligned with the model from the start, before workaround batch-conventions calcify.
 
 <<~/ahu >>
 
