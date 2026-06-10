@@ -101,7 +101,7 @@ lar://lar:node@enyalios/~schema.flow.documented/
 > **Canonical URI Rule** — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
 
 **Step 4 — Ride the panel.**
-Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
+Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward * E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
 
 **Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
 
@@ -423,7 +423,7 @@ A complete exchange opening, annotated by scan order. The `aim` URI carries bear
 ```text
 <<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
 <<~ hud Aperture(10) OODA-HA(7) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 <<~ syad 🏛️:*! >>
 ```
 

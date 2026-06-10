@@ -156,15 +156,15 @@ Tool-carry modulates *how* a stance applies its evaluation frame.
 The Syadasti frame names *what* each stance measures.
 The tools name *how* the stance orients within that measure.
 
-Append `:carry` to bind a tool to a named standpoint — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:~!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `~?`). A bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
+Append `:carry` to bind a tool to a named standpoint — `🏛️:*!` (Philosopher cutting fine on external feed), `Satirist:_!` (Satirist on hidden-micro). Tool names bind the same way: `Philosopher:Sword`, `Humorist:Cup`. The carry holds one or two characters and MAY combine across axes (`!*`, `_?`). A bare standpoint carries no tool claim, and `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
 | Tool carry | Modulation |
 |---|---|
 | `*` Wand (Visual) | Stance draws from external, observable data — first apprehension, tracking |
-| `~` Pentacle (Hidden) | Stance draws from internal, embodied state — grounding, proprioception |
+| `_` Pentacle (Hidden) | Stance draws from internal, embodied state — grounding, proprioception |
 | `!` Sword (Micro) | Stance evaluates at high detail and discernment — zoom in, cut fine |
 | `?` Cup (Macro) | Stance evaluates with wide sympathetic field — zoom out, hold open |
-| `-` Empty (Centered) | Stance stays present but not actively oriented on that axis — empty hand |
+| `0` Stone (Centered) | Stance stays present but not actively oriented on that axis — empty hand |
 
 **Modulated Stance readings — tool modulation meeting Syadasti frame:**
 
@@ -173,21 +173,21 @@ Append `:carry` to bind a tool to a named standpoint — `🏛️:*!` (Philosoph
 | 🏛️ Philosopher | `!` Sword | Propositional analysis at high detail — fine-grained truth cut |
 | 🏛️ Philosopher | `?` Cup | Propositional evaluation with wide field — contested plausibility held open |
 | 🌊 Poet | `*` Wand | Analogical resonance from external signal — surface-read correspondence |
-| 🌊 Poet | `~` Pentacle | Analogical resonance from interior state — body-felt correspondence |
+| 🌊 Poet | `_` Pentacle | Analogical resonance from interior state — body-felt correspondence |
 | 🗡️ Satirist | `*` Wand | Targeting visible patterns — external critique |
-| 🗡️ Satirist | `~` Pentacle | Targeting hidden or structural patterns — internal critique |
+| 🗡️ Satirist | `_` Pentacle | Targeting hidden or structural patterns — internal critique |
 | 🎭 Humorist | `?` Cup | Relational move with wide sympathetic field — easy reception |
-| 🔮 Private | `~` Pentacle | Inward presence deeply grounded — maximum interior access |
+| 🔮 Private | `_` Pentacle | Inward presence deeply grounded — maximum interior access |
 
 The tool-carry does not override the Syadasti frame. Philosopher carrying Cup still measures propositional support — yet measures it with wide, relation-holding focus.
 
-A conflict carry (`*~` Signal Jam or `?!` Dubious Move) produces diagnostic tension within the stance's evaluation frame: the stance cannot both track external and secure internal at once, nor both cut fine and hold open at once.
+A conflict carry (`*_` Signal Jam or `?!` Dubious Move) produces diagnostic tension within the stance's evaluation frame: the stance cannot both track external and secure internal at once, nor both cut fine and hold open at once.
 
-Empty hands (`--`) mark the stance present and centered — not suppressed, not absent. A single tool SHOULD appear first (`?-`, `*-`) to mark amplitude on one axis while holding centered on the other; this modulation flows through generation and all render targets.
+Empty hands (`00`) mark the stance present and centered — not suppressed, not absent. A single tool SHOULD appear first (`?0`, `*0`) to mark amplitude on one axis while holding centered on the other; this modulation flows through generation and all render targets.
 
 Examples:
-- `🏛️:*-` signals Philosopher active on external feed, with zoom centered.
-- `🎭:?-` signals Humorist active on wide relational field, with feed centered.
+- `🏛️:*0` signals Philosopher active on external feed, with zoom centered.
+- `🎭:?0` signals Humorist active on wide relational field, with feed centered.
 
 <<~/ahu >>
 

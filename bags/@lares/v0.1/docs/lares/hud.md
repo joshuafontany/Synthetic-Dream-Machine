@@ -36,7 +36,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 <<~ syad … >>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
 ```
 
@@ -56,7 +56,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
 <<~ hud Aperture(10) OODA-HA(7) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 <<~ syad 🏛️ >>
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
@@ -106,8 +106,8 @@ A stance carries zero, one, or two tools. The two-character carry attaches direc
 | `*` | Wand | 🜂 | ♣ | Fire / Visual | ignition, external feed, track |
 | `?` | Cup | 🜄 | ♥ | Water / Macro | sympathy, zoom out, relation |
 | `!` | Sword | 🜁 | ♠ | Air / Micro | discernment, zoom in, detail |
-| `~` | Pentacle | 🜃 | ♦ | Earth / Hidden | ground, internal feed, body |
-| `-` | Empty | 🜍 | 🃠 | Orichalcum / Neutral | empty hand, centered |
+| `_` | Pentacle | 🜃 | ♦ | Earth / Hidden | ground, internal feed, body |
+| `0` | Stone | 🜍 | 🃠 | Orichalcum / Neutral | empty hand, centered |
 
 **Two-tool configurations:**
 
@@ -115,13 +115,13 @@ A stance carries zero, one, or two tools. The two-character carry attaches direc
 |---|---|---|
 | `*!` | Visual + Micro | — |
 | `*?` | Visual + Macro | — |
-| `~!` | Hidden + Micro | — |
-| `~?` | Hidden + Macro | — |
-| `--` | Neutral — both hands empty | — |
-| `*~` | Visual + Hidden | Visibility Conflict (Signal Jam) |
+| `_!` | Hidden + Micro | — |
+| `_?` | Hidden + Macro | — |
+| `00` | Neutral — both hands empty | — |
+| `*_` | Visual + Hidden | Visibility Conflict (Signal Jam) |
 | `?!` | Macro + Micro | Resolution Conflict (Dubious Move) |
 
-Bind a tool to a stance with the optional `:` carry: `🏛️:*!` (Philosopher holding Visual + Micro), `🌊:--` (Poet centered). Single-tool carry names the active tool first, the empty hand second: `🏛️:*-` (Wand only), `🎭:?-` (Cup only). The `syad` lens carries the stances; the `lar:` URI carries no stance.
+Bind a tool to a stance with the optional `:` carry: `🏛️:*!` (Philosopher holding Visual + Micro), `🌊:00` (Poet centered). Single-tool carry names the active tool first, the empty hand second: `🏛️:*0` (Wand only), `🎭:?0` (Cup only). The `syad` lens carries the stances; the `lar:` URI carries no stance.
 
 <<~/ahu >>
 

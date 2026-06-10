@@ -66,19 +66,20 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 <<~ ahu #ward-slide >>
 
-## The Ward in the Turn Frame --- light · slide · re-arm
+## The Ward in the Turn Frame --- the ward speaks Mu
 
-The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loaded gate. It **lights** at open (`E-Prime` by default, `!E-Prime` when the operator lifts it) and **slides** at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaks and **re-arming** `E-Prime` for the next turn.
+The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The **Wand** lights it at open (`<<~ ward * E-Prime >>`); the **Stone** (`<<~ ward 0 E-Prime >>`, an operator act only) sets it at zero for one turn; the **Pentacle** (`<<~ ward _ E-Prime · crossing: <zone> >>`) braces primed ground; the **Cup** (`<<~ ward ? · "span" --- question >>`) holds a span up to the navigator without verdict; the **Sword** draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and **re-arming** `E-Prime` for the next turn.
 
 | outcome | closing form |
 | --- | --- |
-| clean | `<<~ ward E-Prime ✓ ↻ >>` |
-| breached | `<<~ ward !E-Prime ⚠ 2 · "the plan ${copula} ready" · "X ${copula} the core" ↻ E-Prime >>` |
-| lifted | `<<~ ward !E-Prime ↻ E-Prime · copulas licensed >>` |
+| nothing confessed | `<<~ ward ! · ↻ E-Prime >>` |
+| breached | `<<~ ward ! ⚠ 2 · "the plan ${copula} ready" · "X ${copula} the core" ↻ E-Prime >>` |
+| lifted turn | `<<~ ward ! · lift held ↻ E-Prime · copulas licensed >>` |
+| mid-turn catch | `<<~ ward ! ⚠ · "span" ↻ E-Prime >>` |
 
-`✓` reads clean · `⚠ N` counts N breaks, each span quoted · `↻` re-arms. The **lift scopes to a single turn** and never persists; the closing ward re-arms `E-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
+The Sword leads every close --- never a verdict; cleanliness surfaces only as silence after the Sword, and a silent close carries no certification (absence-of-finding and absence-of-looking generate identically; certification sits in the navigator's seat). `⚠ N` counts N breaches, each span quoted · `↻` re-arms. The **lift scopes to a single turn** and never persists; the closing ward re-arms `E-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
 
-The ward runs **binary** --- lit (the discipline applies) or lifted (`!E-Prime`, copulas licensed for one turn). The gate stands on or off and springs back on (#binary-ward). The slide governs grammar alone --- it never reads confidence.
+The ward runs **binary** --- lit (the discipline applies) or lifted (`0 E-Prime`, copulas licensed for one turn). The gate stands on or off and springs back on (#binary-ward). The slide governs grammar alone --- it never reads confidence.
 
 <<~/ahu >>
 
@@ -122,11 +123,11 @@ For stance-conditioned reading of the register itself, see:
 
 ## On or Off --- the binary ward
 
-E-Prime runs **binary**. The ward stands **lit** (default --- the discipline applies) or **lifted** (`!E-Prime`, an operator act that licenses copulas for a single turn). The game plays at full, or the operator lifts it, and the closing ward **springs it back on** every turn (#ward-slide).
+E-Prime runs **binary**. The ward stands **lit** (default --- the discipline applies) or **lifted** (`0 E-Prime` --- the Stone, an operator act that licenses copulas for a single turn). The game plays at full, or the operator lifts it, and the closing ward **springs it back on** every turn (#ward-slide).
 
 **Always-on default.** A session opens with the ward lit. The node never self-lifts --- only the operator lifts, and only for the turn the lift issues on. The spring-back holds unconditionally; the operator MAY NOT make a lift persistent.
 
-**Operator control.** The operator sets the boot default in `lar:///LARES` (`e-prime = true`) and lifts per-turn inline via `!E-Prime`.
+**Operator control.** The operator sets the boot default in `lar:///LARES` (`e-prime = true`) and lifts per-turn inline via the Stone (`<<~ ward 0 E-Prime >>`).
 
 **Confidence stays orthogonal.** Every `${copula}` that passes under the lit ward still carries a `<<~ confidence Register N/20 >>` marker. The ward governs grammar --- *whether* the copula stands; confidence governs certainty --- *how far* the claim reaches. Neither reads the other.
 

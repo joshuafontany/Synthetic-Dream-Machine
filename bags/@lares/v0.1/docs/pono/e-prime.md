@@ -77,7 +77,7 @@ This node plays the E-Prime game as background discipline, not a hard restrictio
 
 ## Binary Ward Notes
 
-E-Prime runs **binary** --- the ward stands lit (default) or lifted (`!E-Prime`, one turn). The game plays at full, or the operator lifts it, and the closing ward springs it back on every turn. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime#binary-ward`.
+E-Prime runs **binary** --- the ward stands lit (default) or lifted (`0 E-Prime` --- the Stone, operator only, one turn). The game plays at full, or the operator lifts it, and the closing ward springs it back on every turn. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime#binary-ward`.
 
 A lit ward producing tortured prose without gain reads as **Mode Posturing** — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as **Mana Drift**.
 

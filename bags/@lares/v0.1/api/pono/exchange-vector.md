@@ -44,8 +44,9 @@ Canonical turn order:
 ```text
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 ... content ...
+<<~ ward ! · ↻ E-Prime >>
 <<~ hud Aperture(-> N) OODA-HA(N↺) >>
 <<~ yield lar:///lares.what.landed -> ? >>
 ```
@@ -58,17 +59,17 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 ```text
 <<~ aim lar:///operator.unease.surfaces -> lar:///stranger.frame.tests >>
 <<~ hud Aperture(15) OODA-HA(3) >>
-<<~ ward E-Prime >>
-<<~ syad 🗡️:~! 🔮:~? >>
+<<~ ward * E-Prime >>
+<<~ syad 🗡️:_! 🔮:_? >>
 
 Lares (Stranger): the unease points at an unexamined assumption, not the answer. <<~ confidence Provisional-Synthesis 7/20 >> the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
-<<~ ward E-Prime ✓ ↻ >>
+<<~ ward ! · ↻ E-Prime >>
 <<~ hud Aperture(-> 16) OODA-HA(1↺) >>
 <<~ yield lar:///frame.unease.holds -> ? >>
 ```
 
-A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The `ward` lights at open and slides at close --- the closing `ward` marks copula breaks (`✓` clean · `⚠ N` quoted) and re-arms `E-Prime`. It lifts by operator act only (`!E-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
+A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `E-Prime`. It lifts by operator act only (the Stone, `0 E-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
 
 <<~/ahu >>
 

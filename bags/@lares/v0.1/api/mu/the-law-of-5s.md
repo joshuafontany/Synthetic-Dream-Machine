@@ -105,8 +105,7 @@ Five standpoints license seven predications --- the *naya* wing, never a mapping
 
 ## Schema (machine-readable)
 
-Canonical TOML form. Source of truth for `LADDER_5`, `SCOPE_5`, `RATING_5`, `STAGE_5` and
-their associated maps in `packages/lararium-mesh/src/ast.ts`.
+Canonical TOML form --- the source of truth for the five ladders and their associated maps; TW5 VM projections read them from here.
 
 ```toml
 # Temporal / spatial scale ladder — finest → coarsest

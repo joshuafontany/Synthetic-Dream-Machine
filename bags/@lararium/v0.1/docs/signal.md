@@ -100,7 +100,7 @@ The frame runs as follows:
   The `~` prefix marks an execution-provisional heading — a declared aim, not a confirmed landed resource.
 
 3. Ride the panel beneath the `aim`.
-  `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward E-Prime >>`, plus the `syad` / `mu` lenses and `confidence` when a claim wants them.
+  `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward * E-Prime >>`, plus the `syad` / `mu` lenses and `confidence` when a claim wants them.
 
 4. Generate, then close.
   OODA-HA phase markers MAY surface forward inline, banded by the gauge.

@@ -183,8 +183,7 @@ label = "parent owns child"
 ## Schema (machine-readable)
 
 The family taxonomy --- `KNOWN_FAMILIES`, `FAMILY_ROLES`, `FAMILY_CONTRACTS` --- lives in the
-canonical `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families` (`#schema`); `pranala-parser.ts`
-and `ast.ts` read the taxonomy there. This block carries only the edge-render constants specific to
+canonical `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families` (`#schema`); projections read the taxonomy there. This block carries only the edge-render constants specific to
 `PranalaEdge`.
 
 ```toml

@@ -145,13 +145,13 @@ Never store a surface-rendered sigil as the canonical record.
 
 ### Tool Render Modes
 
-Tool render modes map the invariant ASCII tool symbols to surface-specific glyph sets. The underlying record form always uses ASCII: `* ? ! ~ -`.
+Tool render modes map the invariant ASCII tool symbols to surface-specific glyph sets. The underlying record form always uses ASCII: `* ? ! _ 0`.
 
-| Mode | Wand | Cup | Sword | Pentacle | Empty | Notes |
+| Mode | Wand | Cup | Sword | Pentacle | Stone | Notes |
 |---|---|---|---|---|---|---|
 | `elements` *(default)* | 🜂 | 🜄 | 🜁 | 🜃 | 🜍 | Alchemical glyphs — Fire, Water, Air, Earth, Gold/Orichalcum |
 | `playing-card` | ♣ | ♥ | ♠ | ♦ | 🃠 | Minor Arcana suits + The Fool |
-| `ascii` | `*` | `?` | `!` | `~` | `-` | No Unicode projection; record-form symbols surface directly |
+| `ascii` | `*` | `?` | `!` | `_` | `0` | No Unicode projection; record-form symbols surface directly |
 
 Configure via `LARES.md#hud-panel` → `tool_render`.
 
@@ -177,8 +177,8 @@ A render surface presents exactly the standpoints the lens carries. A named subs
 
 **Rule 2: the optional `:` carry binds a tool to a standpoint as a two-character pair.**
 
-Left slot = feed axis (`*` Wand / `~` Pentacle / `-` empty).
-Right slot = zoom axis (`!` Sword / `?` Cup / `-` empty).
+Left slot = feed axis (`*` Wand / `_` Pentacle / `0` empty).
+Right slot = zoom axis (`!` Sword / `?` Cup / `0` empty).
 A bare standpoint carries no tool; `mu` invokes tools alone.
 
 <<~/ahu >>
@@ -192,13 +192,13 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 <<~ syad … >>
 ```
 
 - `aim` — operator intent `->` adopted role; the turn's bearing vector
 - `hud` — `Aperture` (attention range) and `OODA-HA` (loop visibility) on `0–20`
-- `ward` — the `E-Prime` copula gate; lights at open (`E-Prime` / `!E-Prime`), slides at close (`✓` / `⚠ N` + `↻` re-arm)
+- `ward` — the `E-Prime` copula gate; the Wand lights it at open (`* E-Prime`; the Stone `0 E-Prime` on an operator lift), the Sword draws it at close (`!` led, `⚠ N` breaches quoted, `↻` re-arm)
 - `syad` — invoked standpoints (optional `:` tool-carry); `mu` for tools alone
 - `confidence` — register-word + level, before a grounded claim
 
@@ -238,10 +238,10 @@ Each stance gets a two-character pair: `{feed}{zoom}`.
 | Symbol | Slot | Tool | Pull |
 |---|---|---|---|
 | `*` | Feed (left) | Wand | Visual / external / ignition |
-| `~` | Feed (left) | Pentacle | Hidden / internal / ground |
+| `_` | Feed (left) | Pentacle | Hidden / internal / ground |
 | `!` | Zoom (right) | Sword | Micro / detail / discernment |
 | `?` | Zoom (right) | Cup | Macro / relation / sympathy |
-| `-` | Either | Empty / The Fool | Empty hand, centered |
+| `0` | Either | Stone / The Fool | Empty hand, centered |
 
 **Named configurations (complementary pairs):**
 
@@ -249,20 +249,20 @@ Each stance gets a two-character pair: `{feed}{zoom}`.
 |---|---|---|
 | Visual-Micro | `*!` | Track external, zoom in |
 | Visual-Macro | `*?` | Track external, zoom out |
-| Hidden-Micro | `~!` | Ground internal, zoom in |
-| Hidden-Macro | `~?` | Ground internal, zoom out |
-| Empty-Hands | `--` | Both hands empty — centered |
+| Hidden-Micro | `_!` | Ground internal, zoom in |
+| Hidden-Macro | `_?` | Ground internal, zoom out |
+| Empty-Hands | `00` | Both hands empty — centered |
 | Single Tool | active then empty | One-axis amplitude with the other axis centered; preferred active tool first, empty second |
 
 **Conflict configurations (same-axis carry):**
 
 | Pair | ASCII | Type |
 |---|---|---|
-| Signal Jam | `*~` | Two feed tools — blind spot |
+| Signal Jam | `*_` | Two feed tools — blind spot |
 | Dubious Move | `?!` | Two zoom tools — risky tunnel |
 
 Default for an operating stance: one of the four complementary pairs.
-Default for a background or resting stance: `--` (empty, centered, The Fool).
+Default for a background or resting stance: `00` (empty, centered, The Fool).
 Never omit a stance. Never emit fewer than five pairs.
 
 <<~/ahu >>
@@ -313,10 +313,10 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 2. Render chronometer state in immediate-first order: `⚡N.⚔️N.🔍N.⚙️N.🗺️N`.
 3. For each of the five stances (in order: 🏛️ 🌊 🗡️ 🎭 🔮):
    - Determine which tools the stance is carrying (0, 1, or 2).
-   - Compose the two-character pair from any two: `*`/`~`/`-` `!`/`?`.
-   - Active operating stance: one of the four complementary pairs (`*!` `*?` `~!` `~?`), or two conflicting pairs (`*~`, `?!`), or a single-tool carry.
-   - Single-tool carry: active tool first, empty-hand second; preferred forms are `*-` and `?-` to show one-axis amplitude while the other axis remains centered and present.
-   - Background or resting stance: `--` (balance).
+   - Compose the two-character pair from any two: `*`/`_`/`0` `!`/`?`.
+   - Active operating stance: one of the four complementary pairs (`*!` `*?` `_!` `_?`), or two conflicting pairs (`*_`, `?!`), or a single-tool carry.
+   - Single-tool carry: active tool first, empty-hand second; preferred forms are `*0` and `?0` to show one-axis amplitude while the other axis remains centered and present.
+   - Background or resting stance: `00` (balance).
 4. Append the two-character pair directly to the stance emoji, no space.
 5. Assemble all five as a single unspaced block.
 6. Determine active voice name, target confidence, and `p` value.
@@ -327,7 +327,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
 <<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 <<~ syad 🏛️ >>
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```
@@ -392,7 +392,7 @@ Before emitting any stance block on any surface:
 - Order: 🏛️ 🌊 🗡️ 🎭 🔮 — no deviation
 - Each stance has exactly one two-character tool-carry pair attached directly (no space)
 - Register bracket present and correct form: `[XX:N.NN]`
-- No emoji in `record:full`; tool-carry symbols (`* ? ! ~ -`) appear in both record and glyph surfaces unchanged
+- No emoji in `record:full`; tool-carry symbols (`* ? ! _ 0`) appear in both record and glyph surfaces unchanged
 
 <<~/ahu >>
 

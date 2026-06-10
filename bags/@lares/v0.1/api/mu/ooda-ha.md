@@ -179,7 +179,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 ```text
 <<~ aim lar:///operator.ask.splits -> lar:///gatekeeper.scope.cuts >>
 <<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 
 Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
@@ -220,7 +220,7 @@ OODA-HA(0▶:tool.returned.503.from.upstream)
 ```text
 <<~ aim lar:///operator.asks.recommendation -> lar:///council.weighs.options >>
 <<~ hud Aperture(10) OODA-HA(5) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 
 Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. <<~ confidence Synthesis 11/20 >> the fork stays a fork.
 
@@ -232,7 +232,7 @@ Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the n
 ```text
 <<~ aim lar:///operator.shares.rough -> lar:///lares.threshold.holds >>
 <<~ hud Aperture(8) OODA-HA(1) >>
-<<~ ward E-Prime >>
+<<~ ward * E-Prime >>
 
 Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to read; naming the hold rather than reaching for orientation that has not arrived.
 

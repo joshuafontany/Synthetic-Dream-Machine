@@ -106,14 +106,14 @@ Each tool carries an ASCII symbol (canonical record form, URI-safe) and two oper
 | Wand | `*` | ♣ | 🜂 | Fire / Visual | Ignition, external feed, first apprehension, track |
 | Cup | `?` | ♥ | 🜄 | Water / Macro | Sympathy, zoom out, wide angle, relation |
 | Sword | `!` | ♠ | 🜁 | Air / Micro | Discernment, zoom in, high detail, BS detection |
-| Pentacle | `~` | ♦ | 🜃 | Earth / Hidden | Ground, internal feed, body, stubborn crossing |
-| Empty | `-` | 🃠 | 🜍 | Orichalcum / Neutral | Empty hand, centered, factory reset |
+| Pentacle | `_` | ♦ | 🜃 | Earth / Hidden | Ground, internal feed, body, the line held |
+| Philosopher's Stone | `0` | 🃠 | 🜍 | Orichalcum / Neutral | Empty hand, centered, reset |
 
 `playing-card` uses Minor Arcana suit symbols (♣♥♠♦) and the Fool (🃠) — the Major Arcana card at the head of the journey, standing for the open, uncommitted hand.
 `elements` uses Unicode alchemical symbols (🜂🜄🜁🜃🜍) — Fire, Water, Air, Earth, Gold/Orichalcum.
-`ascii` uses the five ASCII symbols directly with no Unicode projection: `* ? ! ~ -`.
+`ascii` uses the five ASCII symbols directly with no Unicode projection: `* ? ! _ 0` — the five pattern-match operators the corpus already carved: match-many, match-optional, assert, match-without-binding, match-nothing. `_` means *presence acknowledged, essence unclaimed* — the anti-copula wildcard.
 
-The empty hand (`-`) holds a slot open, not a tool carried but a stance present and centered, agnostic rather than absent.
+The empty hand (`0`) holds a slot open, not a tool carried but a stance present and centered, agnostic rather than absent. `_0` doubles as ground-state notation (x-naught): the Pentacle-alone carry names *where the system rests*.
 
 Render mode configuration: see `lar:///LARES#hud-panel`.
 
@@ -126,9 +126,9 @@ Render mode configuration: see `lar:///LARES#hud-panel`.
 Each stance may carry zero, one, or two tools simultaneously.
 The four canonical two-tool configurations span a two-axis field.
 
-The `*`/`~` axis sets the feed: Visual (external, tracking) or Hidden (internal, grounding).
+The `*`/`_` axis sets the feed: Visual (external, tracking) or Hidden (internal, grounding).
 The `!`/`?` axis sets the zoom: Micro (zoom in, certainty, detail) or Macro (zoom out, uncertainty, relation).
-`-` in either slot means the hand is empty on that side.
+`0` in either slot means the hand is empty on that side.
 
 **Complementary pairs** (cross-axis carry — one feed tool, one zoom tool):
 
@@ -136,18 +136,18 @@ The `!`/`?` axis sets the zoom: Micro (zoom in, certainty, detail) or Macro (zoo
 |---|---|---|---|---|
 | `*!` | ♣♠ | Visual | Micro | Track external feed, zoom in for detail |
 | `*?` | ♣♥ | Visual | Macro | Track external feed, zoom out for relation |
-| `~!` | ♦♠ | Hidden | Micro | Ground internal feed, zoom in for precision |
-| `~?` | ♦♥ | Hidden | Macro | Ground internal feed, zoom out for overview |
-| `--` | 🃠 | — | — | Neutral override; drop all zoom, reset algorithm |
+| `_!` | ♦♠ | Hidden | Micro | Ground internal feed, zoom in for precision |
+| `_?` | ♦♥ | Hidden | Macro | Ground internal feed, zoom out for overview |
+| `00` | 🃠 | — | — | Neutral override; drop all zoom, reset algorithm |
 
 ### Single-Tool Carry
 
 A stance MAY carry exactly one tool while keeping the other axis present and centered.
-In single-tool carry, the active tool appears first and empty hand second. Preferred forms are `*-` for a feed-axis amplitude with zoom centered, and `?-` for a zoom-axis amplitude with feed centered. `~-` and `!-` remain valid variants when the hidden or micro axis is the only active axis.
+In single-tool carry, the active tool appears first and empty hand second. Preferred forms are `*0` for a feed-axis amplitude with zoom centered, and `?0` for a zoom-axis amplitude with feed centered. `_0` and `!0` remain valid variants when the hidden or micro axis is the only active axis.
 
 Examples:
-- `🏛️:*-` signals Philosopher carrying Wand only: external feed runs active, zoom stays centered.
-- `🎭:?-` signals Humorist carrying Cup only: relational wide-field runs active, feed stays centered.
+- `🏛️:*0` signals Philosopher carrying Wand only: external feed runs active, zoom stays centered.
+- `🎭:?0` signals Humorist carrying Cup only: relational wide-field runs active, feed stays centered.
 
 Cassandra Aarssen maps the same Visual/Hidden × Micro/Macro axis to four organizational types with named configurations. Those named overlays live in docs space, not here.
 
@@ -161,10 +161,10 @@ Same-axis carry — two tools from the same axis in one stance — produces a co
 
 | ASCII | Unicode | Conflict Type | Algorithmic Result |
 |---|---|---|---|
-| `*~` | ♣♦ | Visibility Conflict | Signal Jam: tracking external feed while securing internally — blind spot |
+| `*_` | ♣♦ | Visibility Conflict | Signal Jam: tracking external feed while securing internally — blind spot |
 | `?!` | ♥♠ | Resolution Conflict | Dubious Move: forcing discernment onto an unmapped mystery — risky reality tunnel |
 
-The feed axis (`*`/`~`) and zoom axis (`!`/`?`) each have two poles.
+The feed axis (`*`/`_`) and zoom axis (`!`/`?`) each have two poles.
 Carrying both poles of the same axis in one stance jams that axis.
 The conflict is not invalid — it is a named state with diagnostic pressure.
 
@@ -179,20 +179,20 @@ Both conflict states are observable and recoverable. The recovery move is to dro
 
 ## Tool-Carry Encoding
 
-A standpoint's two tool slots encode as a two-character pair using ASCII symbols — the `:--` a `syad` bind appends to a standpoint.
+A standpoint's two tool slots encode as a two-character pair using ASCII symbols — the `:`-bound pair a `syad` bind appends to a standpoint.
 
 **Slot notation:** `{left}{right}` — feed-axis slot first, zoom-axis slot second.
-Slot position carries axis semantics: left = feed (`*`/`~`/`-`), right = zoom (`!`/`?`/`-`).
+Slot position carries axis semantics: left = feed (`*`/`_`/`0`), right = zoom (`!`/`?`/`0`).
 
 **Examples:**
 
 | Carry | Reading |
 |---|---|
 | `*!` | Visual-Micro — external feed, zoom in |
-| `~?` | Hidden-Macro — internal feed, zoom out |
-| `*-` | Wand only — external feed, zoom centered |
-| `--` | Philosopher's Stone — centered, empty-handed |
-| `*~` | Signal Jam — visibility conflict, feed locked |
+| `_?` | Hidden-Macro — internal feed, zoom out |
+| `*0` | Wand only — external feed, zoom centered |
+| `00` | Philosopher's Stone — centered, empty-handed |
+| `*_` | Signal Jam — visibility conflict, feed locked |
 | `?!` | Dubious Move — resolution conflict, zoom locked |
 
 For single-tool carry, the active tool goes first and empty hand goes second; this signals one-axis amplitude while the other axis remains centered and present.
@@ -216,8 +216,8 @@ For single-tool carry, the active tool goes first and empty hand goes second; th
 | Wand | `Wand` | `*` | 🜂 |
 | Cup | `Cup` | `?` | 🜄 |
 | Sword | `Sword` | `!` | 🜁 |
-| Pentacle | `Pentacle` | `~` | 🜃 |
-| Empty | `Empty` | `-` | 🜍 |
+| Pentacle | `Pentacle` | `_` | 🜃 |
+| Philosopher's Stone | `Stone` | `0` | 🜍 |
 
 Names and characters invoke the tools directly; forms MAY mix in one sigil:
 
@@ -227,7 +227,7 @@ Names and characters invoke the tools directly; forms MAY mix in one sigil:
 <<~ mu Wand ! >>           # forms mixed
 ```
 
-`<<~ mu >>` parameterless reads as Philosopher's Stone — `-`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `~?`) or double an axis as a conflict carry (`*~` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
+`<<~ mu >>` parameterless reads as Philosopher's Stone — `00`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `_?`) or double an axis as a conflict carry (`*_` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
 
 **Composition.** A tool-carry binds to a standpoint only through the `syad` sigil's optional `:` — `Philosopher:*!`. `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
@@ -259,8 +259,7 @@ The agent MUST treat totalized pattern-lock as confidence register collapse.
 
 ## Schema (machine-readable)
 
-Canonical TOML form. Source of truth for `TOOLS`, `TOOL_ASCII`, `TOOL_FEED`, `TOOL_APERTURE`
-in `packages/lararium-mesh/src/ast.ts`.
+Canonical TOML form --- the source of truth; TW5 VM projections read it from here.
 
 ```toml
 # Five orientation postures — Minor Arcana + Major Arcana (Arcana = Stone / empty hand)
@@ -271,8 +270,8 @@ tools = ["wand", "cup", "sword", "pentacle", "arcana"]
 wand     = "*"
 cup      = "?"
 sword    = "!"
-pentacle = "~"
-arcana   = "-"
+pentacle = "_"
+arcana   = "0"
 
 # Feed axis — external (wand/cup/sword) · internal (pentacle) · release (arcana)
 [tool-feed]

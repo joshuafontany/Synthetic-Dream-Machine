@@ -133,12 +133,10 @@ This preserves in-flight kukali suspensions across TW5 wiki-change events.
 
 ```toml
 # Render modes — canonical values for PranalaEdge.renderMode
-# Source: RENDER_MODES in packages/lararium-mesh/src/ast.ts
 render-modes = ["papalohe"]
 # papalohe: listenable label at source (OUTPUT pin), subscribable label at target (INPUT pin)
 
 # Canonical roles for reaction family edges
-# Source: REACTION_ROLES in packages/lararium-mesh/src/ast.ts
 reaction-roles = ["listenable", "subscribable", "observes", "throttles", "debounces"]
 ```
 

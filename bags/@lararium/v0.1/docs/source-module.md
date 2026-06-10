@@ -81,7 +81,6 @@ These files are the highest-value source-module memes:
 
 ```
 @lararium/mesh    src/parser.ts           — memetic-wikitext parser
-@lararium/mesh    src/ast.ts              — AST node types + LADDER_5/OODA_HA_5
 @lararium/mesh    src/causal-island.ts    — causal island doctrine + AuthorityFirstGuard
 @lararium/mesh    src/live-protocol.ts    — wire protocol types + ReactionGraph
 @lararium/tw5     src/lararium-tw5.ts     — TW5 integration facade
