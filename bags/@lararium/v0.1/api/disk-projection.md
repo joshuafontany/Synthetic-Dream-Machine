@@ -121,6 +121,20 @@ Write-back routes by **type**, in three rules:
 
 <<~/ahu >>
 
+<<~ ahu #write-ward >>
+
+## The disk ward — sovereign-island write confinement (operator ruling, 2026-06-11)
+
+Cascade tiddlers compose through the **recipe** — a library bag can overlay `config/disk-paths` — so every path reaching the projector counts as **untrusted input**. Policy lives in the cascade; the **mechanism** holds at the write choke-point (`confineMirrorWrite`, bag-paths), regardless of what the cascade emitted:
+
+1. **Default:** a mirror's writes confine to its OWN bag subdir (`bags/@{bagname}/…`). Absolute paths and any traversal resolving outside the root refuse.
+2. **Widened grant** (`allowBagsRootFiles` — a capability riding the manifest's `diskMirrors`, never a cascade-settable flag): the mirror MAY place files **DIRECTLY in the root-bags-dir** — one level up, the dir holding every `@{bagname}` subdir. The rule reads `dirname(candidate) === bagsDir` exactly, so the grant stays *structurally incapable* of escaping `bags` or entering another bag's subdir — no new subdirs, no depth, no siblings.
+3. **Refusals surface LOUDLY** (`[disk-ward] write refused …` with the reason) — a silent skip would hide a probing overlay from the operator.
+
+Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (12 — traversal, absolute, cross-bag, above-bags, new-subdir, grantless, inert-grant).
+
+<<~/ahu >>
+
 <<~ ahu #cli >>
 
 ## CLI capability
