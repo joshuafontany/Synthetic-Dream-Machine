@@ -14,6 +14,8 @@ namespace    = "ॐ ँ"
 role         = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status       = "approved"
 approved-on  = "2026-06-02"
+revised-on   = "2026-06-11"
+revision-note = "carrier-whole at rest: the .tid-decomposition intent burned to legacy-design-time; grain ladder canonized (disk=whole carrier, doc=record, VM=decomposed)"
 cacheable    = true
 hydrate      = true
 retain       = true
@@ -33,7 +35,7 @@ The node vessel SHALL be able to write an editable, re-readable **Artifact** of 
 
 | Surface | Role | Bags | Source of record | Format |
 |---|---|---|---|---|
-| **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | `.md` now → `.tid` later (see #granularity) |
+| **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
 | **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (CRDT authoritative; disk is the rendered artifact) | memetic-wikitext `.md` |
 
 The distinction is **definition vs instance**. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` is the source of the world; `wikis/` is a running instance's output.
@@ -87,11 +89,21 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 <<~ ahu #granularity >>
 
-## Granularity — `.md` now, `.tid` later
+## Granularity — carrier-whole at rest (operator ruling, 2026-06-11)
 
-`bags/` currently holds **one meme per `.md` file** (memetic-wikitext). The intent: **decompose into individual tiddlers** — one `*.tid` file per tiddler (`type = text/x-memetic-wikitext`) — once the full **two-vessel mesh** has arrived and per-tiddler sync is load-bearing. The `lar:` address stays stable across the granularity change (file siting is derived; the address does not move).
+**Each stratum carries its own natural grain; grain MUST NOT leak between strata:**
 
-`wikis/{slug}/` stays memetic-wikitext `.md` for now; it MAY adopt `.tid` later on the same trajectory.
+| Stratum | Grain | Why |
+|---|---|---|
+| **disk** (hands, git, editors) | **whole memetic-wikitext carriers** — one meme, one `.md` | the human edits a document; one meme, one git history |
+| **CRDT doc** (database) | record-grain ("tid-sized") | merge granularity, per-ahu fields, addressable `#fragment` children, partial sync |
+| **live wiki VM** | decomposed — parent + ahu children as tiddlers | transclusion, per-slot templates, kahea |
+
+**A meme resides on disk as one whole carrier.** Decomposition lives only between the membrane (`memeticWikitextDeserializer`) and the VM; every path back to disk MUST route through the recompose inverse (`expandMemeRefs` / `exportMemeText`). **Fragment files MUST NOT appear on any surface a human edits** — a `#ahu`-grain file on disk constitutes a grain leak (a degraded projection), and the round-trip law holds byte-faithful: anything in the operator's source survives.
+
+*Retired to legacy-design-time (the prior intent here — decompose `bags/` into one `.tid` file per tiddler — burned 2026-06-11):* tid-sized files serve the database, never the operator's hands; managing meme-sized thought as tid-swarms is the exact TW5-community friction that birthed memetic-wikitext. The kupono vectors live in `tests/e2e/carrier-roundtrip.test.ts`.
+
+`wikis/{slug}/` stays memetic-wikitext `.md` on the same law.
 
 <<~/ahu >>
 
