@@ -57,12 +57,12 @@ list-after   = "$:/core/ui/EditTemplate/body"
 
 </$list>
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

@@ -247,8 +247,6 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -262,5 +260,7 @@ The tick source changes; the drain contract does not.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

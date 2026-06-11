@@ -98,8 +98,6 @@ after `addProjection(adaptor)` registers. Each existing tiddler flows through
 The recipe then calls `$tw.lares.flushNalu(Number.MAX_SAFE_INTEGER)` so the wiki carries
 its seed state synchronously before `behavior.onEa` runs.
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -112,5 +110,7 @@ its seed state synchronously before `behavior.onEa` runs.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

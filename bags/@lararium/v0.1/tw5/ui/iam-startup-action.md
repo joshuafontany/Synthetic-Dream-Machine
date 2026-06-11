@@ -51,13 +51,13 @@ list-after   = "$:/core/ui/StartupActions/DefaultTiddlers"
 
 </$list>
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

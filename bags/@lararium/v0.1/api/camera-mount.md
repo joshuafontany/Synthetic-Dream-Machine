@@ -140,8 +140,6 @@ const unmount = () => { teardownLoop(); teardownMount(); };
 the shadow pane. Canvas cameras behind it each hold their own fake-DOM document.
 The `mountCamera` interface stays identical. The `document` type changes; the chain does not.
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -153,5 +151,7 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

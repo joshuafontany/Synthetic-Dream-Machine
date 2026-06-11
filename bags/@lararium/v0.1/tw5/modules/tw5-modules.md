@@ -24,8 +24,6 @@ body-sha256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 
 
-<<~ &#x0003; >>
-
 <<~ ahu #source >>
 
 ## Source
@@ -49,5 +47,7 @@ Run `pnpm --filter @lararium/tw5 build` to regenerate.
 <<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

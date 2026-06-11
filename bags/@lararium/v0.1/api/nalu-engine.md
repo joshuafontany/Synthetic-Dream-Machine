@@ -107,8 +107,6 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
-<<~ &#x0003; >>
-
 <<~ ahu #edges >>
 
 ## Edges
@@ -121,5 +119,7 @@ queue handles both.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
