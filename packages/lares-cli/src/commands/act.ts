@@ -28,12 +28,13 @@
  * withEffectRecord (writes the archival audit tiddlers).
  *
  * Sprint:  Residency Model Epic — S5.4
- * Meme:    lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
  */
 
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { join } from "node:path";
+import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
@@ -106,9 +107,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
 
     // The disk grant lives HERE — the operator gesture reads the carriers and
     // sends content WITH the verb (islands hold no fetch capability). A local
-    // .md file or a directory of .md memes packs into args.carriers; a
-    // non-local source-uri sends no carriers and the island refuses loudly.
-    const { statSync, readdirSync, readFileSync } = await import("node:fs");
+    // .md file or a directory of .md memes packs into args.carriers.
     try {
       const st = statSync(sourceUri);
       const files = st.isDirectory()
@@ -118,7 +117,11 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
         : [sourceUri];
       const carriers = files.map((f) => ({ text: readFileSync(f, "utf8") }));
       if (carriers.length > 0) actionArgs["carriers"] = carriers;
-    } catch { /* not a local path — provenance-only LOAD */ }
+    } catch {
+      // Honesty at the gesture: a non-resolving local path probably means a
+      // typo — the island will refuse a carrier-less LOAD loudly either way.
+      console.error(`lares act LOAD: "${sourceUri}" does not resolve locally — sending provenance-only LOAD (no carriers)`);
+    }
   }
 
   // ── Connect to the admin vessel ───────────────────────────────────────
