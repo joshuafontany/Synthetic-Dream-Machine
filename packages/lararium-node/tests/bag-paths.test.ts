@@ -13,7 +13,13 @@ describe("namedBagPath", () => {
     const toRelPath = namedBagPath("@lares");
 
     expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/mu")).toBe("api/mu.md");
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols#thesis")).toBe("docs/lares/the-lares-protocols/thesis.md");
+  });
+
+  test("fragment records never own a disk file (carrier-whole at rest)", () => {
+    const toRelPath = namedBagPath("@lares");
+
+    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols#thesis")).toBeNull();
+    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#entry")).toBeNull();
   });
 
   test("rejects @lararium titles for the @lares mirror", () => {
@@ -36,5 +42,11 @@ describe("wikiBagPath", () => {
 
     expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols")).toBe("lares/v0.1/docs/lares/the-lares-protocols.md");
     expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/nalu-engine")).toBe("lararium/v0.1/tw5/modules/nalu-engine.md");
+  });
+
+  test("fragment records never own a disk file (carrier-whole at rest)", () => {
+    const toRelPath = wikiBagPath();
+
+    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols#thesis")).toBeNull();
   });
 });

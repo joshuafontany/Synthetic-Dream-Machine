@@ -14,7 +14,7 @@ const DENY: Record<string, 1> = {
   slot: 1, "fragment-parent": 1, preamble: 1, postamble: 1, prologue: 1,
   "header-text": 1, namespace: 1,
   "source-file": 1, "synced-at": 1, "disk-projection": 1, "lar-generated": 1,
-  "ahu-parent": 1, "ahu-slot": 1, "realm-origin": 1,
+  "ahu-parent": 1, "ahu-slot": 1, "realm-origin": 1, "origin-bag": 1,
 };
 
 function fmt(v: unknown): string {

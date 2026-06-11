@@ -1,15 +1,15 @@
 title: lar:///ha.ka.ba/@lararium/templates/meme/markdown-meme
 type: text/vnd.tiddlywiki
 
-<$list filter="[<currentTiddler>has[prologue]]" variable="_"><$text text={{!!prologue}}/></$list><$text text="<<~"/><$text text={{!!namespace}}/><$text text="&#x0001; ? -> "/><$text text=<<currentTiddler>>/><$text text=" >>
+<$list filter="[<currentTiddler>has[prologue]]" variable="_"><$text text={{!!prologue}}/></$list><$text text="<<~ "/><$text text={{!!namespace}}/><$text text="&#x0001; ? -> "/><$text text=<<currentTiddler>>/><$text text=" >>
 "/><$list filter="[<currentTiddler>has[preamble]]" variable="_"><$text text={{!!preamble}}/></$list><$set name="iamBlock" value=<<lar-iam-block>>><$list filter="[<iamBlock>!match[]]" variable="_"><$text text="```toml iam
 "/><$text text=<<iamBlock>>/><$text text="```
 
-"/></$list></$set><$list filter="[<currentTiddler>has[header-text]]" variable="_"><$text text={{!!header-text}}/></$list><$text text="<<~&#x0002;>>
+"/></$list></$set><$list filter="[<currentTiddler>has[header-text]]" variable="_"><$text text={{!!header-text}}/></$list><$text text="<<~ &#x0002; >>
 
 "/><$text text={{!!text}}/><$list filter="[<currentTiddler>has[postamble]]" variable="_"><$text text={{!!postamble}}/></$list><$text text="
 
-<<~&#x0003;>>
+<<~ &#x0003; >>
 
-"/><$text text="<<~&#x0004; -> ? >>
+"/><$text text="<<~ &#x0004; -> ? >>
 "/>

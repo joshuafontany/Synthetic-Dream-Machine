@@ -1,9 +1,13 @@
 /**
  * LarDiskProjector — bag-aware unidirectional projection: store → disk.
  *
- * The Automerge store functions as the mind. Disk files project from it.
- * This projector NEVER reads from disk — that direction belongs to the ingest
- * path (file watcher → store.put).
+ * Co-projection model (operator ruling 2026-06-11): the operator's mind
+ * originates; the disk carrier and the CRDT record-set both PROJECT that
+ * origin, each in its native grain — disk holds whole markdown memes, the
+ * doc holds tid-sized records, the VM decomposes for transclusion. Merge
+ * authority routes through the CRDT alone; this projector renders the disk
+ * co-projection and NEVER reads from disk — that direction belongs to the
+ * ingest path (file watcher → store.put).
  *
  * Bag-aware: each writable bag may opt into a filesystem mirror via
  * BagMirrorConfig. Bags without a mirror config never write to disk. The two
@@ -17,18 +21,21 @@
  *
  * Projection law (Fontany-Fuller-Zelenka):
  *   Disk projection is a RENDER operation, not a string copy.
- *   The TW5 VM (with fakeDOM) re-renders the carrier from its normalized
- *   tiddler records — the same pipeline used to bootstrap the browser client.
+ *   The renderFn recomposes the whole carrier from its normalized tiddler
+ *   records inside the island VM (exportMemeText → expandMemeRefs).
  *
- * Projection triggers:
- *   Any tiddler change → debounce → flush that tiddler (renderFn)
+ * Group routing (carrier-whole at rest, disk-projection#projection-routing):
+ *   memetic-wikitext records form a tiddler-group keyed by the carrier root.
+ *   A child change climbs `fragment-parent` to the root; debounce keys per
+ *   (bag, root); the flush renders the ROOT — one carrier, one file. A
+ *   fragment URI never owns a disk path (bag-paths returns null for them).
  *
  * The writing Set guards against ingest echo:
  *   file watcher MUST check writing.has(uri) before ingesting a change.
  */
 
 import { writeFileSync, mkdirSync, unlinkSync, existsSync } from "fs";
-import { join, resolve as resolvePath, dirname } from "path";
+import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
@@ -41,7 +48,7 @@ export class LarDiskProjector {
    */
   readonly writing = new Set<string>();
 
-  /** Timer key shape: `${bagId}\0${tiddlerUri}` — debounce per (bag, tiddler). */
+  /** Timer key shape: `${bagId}\0${rootUri}` — debounce per (bag, carrier root). */
   private readonly timers = new Map<string, ReturnType<typeof setTimeout>>();
   private _firstFlushDone = false;
 
@@ -79,13 +86,30 @@ export class LarDiskProjector {
   start(tw5: TW5Engine): () => void {
     this._tw5 = tw5;
     const wiki = tw5.$tw.wiki;
+    // Group routing: a fragment record's change belongs to its carrier root.
+    // Climb `fragment-parent` one hop at a time (the field points one level
+    // up); for a deleted record the chain is gone, so fall back to the URI
+    // fragment-path law (`root#a/b` → `root`).
+    const routeToRoot = (title: string): string => {
+      let cur = title;
+      for (let hops = 0; hops < 32; hops++) {
+        const parent = (wiki.getTiddler?.(cur)?.fields as Record<string, unknown> | undefined)?.["fragment-parent"];
+        if (typeof parent !== "string" || parent.length === 0) break;
+        cur = parent;
+      }
+      const hash = cur.indexOf("#");
+      return hash > 0 ? cur.slice(0, hash) : cur;
+    };
+
     const handler = (changes: Record<string, unknown>) => {
       for (const title of Object.keys(changes)) {
         if (!title.startsWith("lar:")) continue;
-        const tiddler = wiki.getTiddler?.(title);
+        const rootUri = routeToRoot(title);
+        const tiddler = wiki.getTiddler?.(rootUri);
         if (!tiddler) {
-          // Deleted — try all mirrors for unlink.
-          this._scheduleUnlinkByTitle(title);
+          // Carrier root gone — try all mirrors for unlink. (A deleted
+          // fragment whose root survives re-flushes the root below.)
+          this._scheduleUnlinkByTitle(rootUri);
           continue;
         }
         const fields = tiddler.fields as Record<string, string | string[] | undefined>;
@@ -94,12 +118,14 @@ export class LarDiskProjector {
         if (!bagId) continue;
         if (!this.mirrors.some((m) => m.bagId === bagId)) continue;
 
-        const key = `${bagId}\0${title}`;
+        // Debounce per (bag, carrier root): a 17-record carrier LOAD
+        // coalesces into one whole-carrier flush.
+        const key = `${bagId}\0${rootUri}`;
         const existing = this.timers.get(key);
         if (existing) clearTimeout(existing);
         this.timers.set(key, setTimeout(() => {
           this.timers.delete(key);
-          void this.flush(bagId, title);
+          void this.flush(bagId, rootUri);
         }, this.debounceMs));
       }
     };
@@ -177,18 +203,23 @@ export class LarDiskProjector {
     // After writing to the current mirror, unlink stale files from all OTHER
     // mirrors that would host this URI. This handles bag promotion: when a
     // tiddler moves from wiki-bag → lares-bag, the old wiki mirror file is
-    // cleaned up on the first flush to the new mirror.
+    // cleaned up on the first flush to the new mirror. One gate, one
+    // choke-point: the unlink path routes through the ward like every other
+    // mirror touch — never an inline confinement check.
     for (const otherMirror of this.mirrors) {
       if (otherMirror.bagId === bagId) continue;
       const staleRel = otherMirror.toRelPath(tiddlerUri);
       if (!staleRel) continue;
-      const staleRoot = resolvePath(otherMirror.mirrorRoot);
-      const stalePath = resolvePath(join(staleRoot, staleRel));
-      if (!stalePath.startsWith(staleRoot + "/") && stalePath !== staleRoot) continue;
+      const staleGate = confineMirrorWrite(otherMirror.mirrorRoot, staleRel, otherMirror.allowBagsRootFiles);
+      if (!staleGate.ok) {
+        console.error(`[disk-ward] stale-unlink refused (${otherMirror.bagId}): ${staleGate.reason}`);
+        this.onRefusal?.({ bagId: otherMirror.bagId, uri: tiddlerUri, reason: staleGate.reason });
+        continue;
+      }
       try {
-        if (existsSync(stalePath)) {
+        if (existsSync(staleGate.path)) {
           this.writing.add(tiddlerUri);
-          try { unlinkSync(stalePath); } finally { this.writing.delete(tiddlerUri); }
+          try { unlinkSync(staleGate.path); } finally { this.writing.delete(tiddlerUri); }
         }
       } catch { /* best-effort */ }
     }

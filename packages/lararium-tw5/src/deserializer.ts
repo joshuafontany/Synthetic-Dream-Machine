@@ -87,11 +87,14 @@ export function memeticWikitextDeserializer(
   // (Multi-meme prologue/postamble distribution between intermediate
   // carriers lands when MemeStreamParser surfaces positional metadata on
   // carrier events.)
-  // SOH carrier sentinels begin with `<<~` then an optional phase glyph
-  // (⊙) then `&#x000<digit>;` directly. Anchoring on the control-char
-  // reference avoids matching unrelated `<<~ !DOCTYPE … >>` comments or
-  // `<<~ ? -> uri >>` pranala-headers (whose `->` arrow contains a `>`).
-  const sohIdx = text.search(/<<~(?:\s*⊙)?\s*&#x000[1-9a-fA-F]+;/);
+  // SOH carrier sentinels begin with `<<~` then optional namespace glyphs
+  // (⊙, ॐ ँ, …) then the SOH control-char reference directly — the same
+  // shape the namespace extractor below reads. Anchoring on the SOH/SOH2
+  // codes avoids matching unrelated `<<~ !DOCTYPE … >>` comments,
+  // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels (the old
+  // any-control-char form swallowed the whole header into `prologue` when
+  // the SOH carried a namespace it could not see).
+  const sohIdx = text.search(/<<~[^&\n]*&#x(?:0001|0011);/);
   const prologue = (closes.length > 0 && sohIdx > 0)
     ? text.slice(0, sohIdx)
     : "";
@@ -180,7 +183,6 @@ function splitMemeToTiddlers(
   baseFields: TiddlerFields,
 ): TiddlerFields[] {
   const warnings: string[] = [];
-  const sourceFile = typeof baseFields["source-file"] === "string" ? baseFields["source-file"] : "";
 
   // Strip structural markers to isolate header (SOH→STX) and body (STX→ETX).
   const stripped = text
@@ -231,9 +233,9 @@ function splitMemeToTiddlers(
   //   header-text = post-iam pre-STX content (with ahu blocks → kahea refs)
   //   text        = post-STX body
   const { children: headerChildren, rewrittenText: headerRewritten } =
-    splitRecursive(uri, "", postIamContent, warnings, sourceFile);
+    splitRecursive(uri, "", postIamContent, warnings);
   const { children: bodyChildren, rewrittenText: bodyRewritten } =
-    splitRecursive(uri, "", bodyRegion, warnings, sourceFile);
+    splitRecursive(uri, "", bodyRegion, warnings);
 
   const normalizedBodyRewritten = stripEdgeNewlines(bodyRewritten);
 
@@ -282,7 +284,6 @@ function splitRecursive(
   fragmentPrefix:   string,  // "" at meme root; "#a" → "#a/b" → "#a/b/c"
   text:             string,
   warnings:         string[],
-  parentSourceFile: string = "",
 ): { children: TiddlerFields[]; rewrittenText: string } {
   const allChildren: TiddlerFields[] = [];
   const enclosingUri = rootUri + fragmentPrefix;
@@ -299,13 +300,14 @@ function splitRecursive(
     const childSlotPath = composeSlotPath(fragmentPrefix, block.slot);
     const childUri      = rootUri + childSlotPath;
     const bodyText      = text.slice(block.bodyStart, block.bodyEnd);
-    const inner         = splitRecursive(rootUri, childSlotPath, bodyText, warnings, parentSourceFile);
+    const inner         = splitRecursive(rootUri, childSlotPath, bodyText, warnings);
     const childStructure = extractSlotStructure(inner.rewrittenText, warnings, childUri);
 
     const childUriPath  = childUri.startsWith("lar:///") ? childUri.slice(7) : childUri;
-    const childFilePath = parentSourceFile
-      ? parentSourceFile.replace(/\.md$/, "") + "/" + block.slot.replace(/^#/, "") + ".md"
-      : undefined;
+    // Record hygiene (carrier-whole at rest): children carry NO `file-path` —
+    // a fragment record never owns a disk file; its carrier root does. The
+    // old `parent/slot.md` stamp encoded the fragment-file law in the record
+    // stratum; it burned with hole H1 (2026-06-11).
 
     allChildren.push({
       ...childStructure.fields,
@@ -315,7 +317,6 @@ function splitRecursive(
       "uri-path":        childUriPath,
       "fragment-parent": enclosingUri,
       slot:              block.slot,
-      ...(childFilePath                ? { "file-path": childFilePath }         : {}),
       ...(childStructure.preamble      ? { preamble:    childStructure.preamble }  : {}),
       ...(childStructure.postamble     ? { postamble:   childStructure.postamble } : {}),
     });
@@ -379,7 +380,12 @@ function extractSlotStructure(
   warnings: string[],
   context:  string,
 ): SlotStructure {
-  const iamM = findIamFence(bodyText, true);
+  // Only a LABELED ```toml iam fence carries slot identity. A plain ```toml
+  // fence is operator CONTENT (teaching matter, config examples) — swallowing
+  // it into fields mutated content on round-trip (key reorder, re-alignment,
+  // the fence relabeled `toml iam`). Carrier-whole law: content bytes survive
+  // whole; allowPlain burned 2026-06-11.
+  const iamM = findIamFence(bodyText, false);
 
   let preamble = "";
   let fields: TiddlerFields = {};
@@ -489,8 +495,7 @@ export function splitBodyTiddler(
   }
 
   const warnings: string[] = [];
-  const sourceFile = typeof baseFields["source-file"] === "string" ? baseFields["source-file"] : "";
-  const { children, rewrittenText } = splitRecursive(uri, "", bodyText, warnings, sourceFile);
+  const { children, rewrittenText } = splitRecursive(uri, "", bodyText, warnings);
 
   const parent: TiddlerFields = { ...baseFields, title: uri, text: rewrittenText };
 
@@ -505,4 +510,114 @@ export function splitBodyTiddler(
   }
 
   return { parent, children };
+}
+
+// ---------------------------------------------------------------------------
+// expandMemeRefs — the recompose inverse (wiki → disk)
+//
+// Doctrine (disk-projection#granularity): every path back to disk MUST route
+// through the recompose inverse (`expandMemeRefs` / `exportMemeText`). This
+// function inverts the incoming membrane transform above: it reads the
+// parent's normalized records, splices each `<<~ kahea ahu #slot >>` marker
+// back into its child's full definition form (recursively), and reassembles
+// the carrier envelope (prologue · SOH · preamble · iam · header · STX ·
+// body · ETX · EOT · postamble).
+//
+// Canonical-form law (handoff #pattern-integrities §2) binds the output:
+//   1. idempotent render — canonical input round-trips byte-identical
+//      (sigil spacing `<<~ &#x0002; >>`, one-blank-line block margins);
+//   2. framing normalizes once — the iam block re-emits sorted + aligned
+//      from fields (authored key order and padding do not survive the
+//      record stratum; retaining bytes for them was the H2 path, dead);
+//   3. parse∘render ≡ records — proven by the round-trip harness, never
+//      by assertion.
+//
+// Pure function over a fields reader: no I/O, no TW5 dependency — the same
+// membrane module owns both directions, so the harness proves the pair.
+// ---------------------------------------------------------------------------
+
+export type FieldsReader = (title: string) => TiddlerFields | undefined;
+
+// Mirrors macros/lar-iam-block DENY: runtime/structural fields never re-emit
+// into the iam fence — they live in the envelope, the record stratum, or the
+// VM, not in the operator's TOML.
+const IAM_DENY: ReadonlySet<string> = new Set([
+  "title", "text", "type", "tags", "created", "modified", "revision", "bag",
+  "slot", "fragment-parent", "preamble", "postamble", "prologue",
+  "header-text", "namespace",
+  "source-file", "synced-at", "disk-projection", "lar-generated",
+  "ahu-parent", "ahu-slot", "realm-origin", "origin-bag",
+]);
+
+// Children additionally drop ingest-stamped coordinates: `uri-path` is
+// derived from the title, and `file-path` on a child is the burned
+// fragment-file leak (carrier-whole at rest — a fragment never owns a file).
+const CHILD_IAM_DENY: ReadonlySet<string> = new Set([...IAM_DENY, "uri-path", "file-path"]);
+
+function fmtTomlValue(v: string | string[]): string {
+  if (Array.isArray(v)) {
+    return "[" + v.map((s) =>
+      '"' + String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n") + '"'
+    ).join(", ") + "]";
+  }
+  const s = String(v);
+  if (/^-?\d+$/.test(s) || s === "true" || s === "false") return s;
+  return '"' + s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r") + '"';
+}
+
+/** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key. */
+function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
+  const keys = Object.keys(fields).sort().filter((k) => {
+    if (deny.has(k) || k.charAt(0) === "$") return false;
+    const v = fields[k];
+    return !(v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0));
+  });
+  if (keys.length === 0) return "";
+  const pad = Math.max(...keys.map((k) => k.length));
+  return keys.map((k) => k.padEnd(pad) + " = " + fmtTomlValue(fields[k] as string | string[])).join("\n") + "\n";
+}
+
+const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+)\s*>>/g;
+
+/** Splice child definition blocks back over their kahea markers, full depth. */
+function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string): string {
+  return text.replace(KAHEA_AHU_REF_RE, (marker, slot: string) => {
+    const slotPath = composeSlotPath(fragmentPrefix, slot);
+    const child = reader(rootUri + slotPath);
+    if (!child) return marker;   // missing child: keep the marker — honest residue, never invented bytes
+    const iam   = emitIamToml(child, CHILD_IAM_DENY);
+    const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""));
+    const pre   = typeof child["preamble"]  === "string" ? child["preamble"]  : "";
+    const post  = typeof child["postamble"] === "string" ? child["postamble"] : "";
+    const body  = stripEdgeNewlines(
+      pre + (iam ? "```toml iam\n" + iam + "```\n\n" : "") + inner + post
+    );
+    return `<<~ ahu ${slot} >>\n\n${body}\n\n<<~/ahu >>`;
+  });
+}
+
+/**
+ * Recompose one whole carrier from its record group.
+ *
+ * Returns null when the parent record is absent or not memetic-wikitext —
+ * the caller falls back to its own law (exportMemeText returns raw text).
+ */
+export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | null {
+  const f = reader(memeUri);
+  if (!f) return null;
+  if (f.type !== "text/x-memetic-wikitext") return null;
+
+  const str = (k: string): string => (typeof f[k] === "string" ? (f[k] as string) : "");
+  const iam = emitIamToml(f, IAM_DENY);
+
+  let out = str("prologue");
+  out += `<<~ ${str("namespace")}&#x0001; ? -> ${memeUri} >>\n`;
+  out += str("preamble");
+  if (iam) out += "```toml iam\n" + iam + "```\n\n";
+  out += expandRefs(reader, memeUri, "", str("header-text"));
+  out += "<<~ &#x0002; >>\n\n";
+  out += expandRefs(reader, memeUri, "", String(f.text ?? ""));
+  out += "\n\n<<~ &#x0003; >>\n\n<<~ &#x0004; -> ? >>\n";
+  out += str("postamble");
+  return out;
 }

@@ -47,12 +47,12 @@ describe("smoke — the vessel stands", () => {
 });
 
 describe("smoke — residency canon through the real CLI", () => {
-  test("LOAD feeds the hearth carrier-borne: boot meme → parent + 16 ahu children", async () => {
+  test("LOAD feeds the hearth carrier-borne: boot meme → parent + 17 ahu children", async () => {
     if (lar.mode !== "staged") return;   // mutating gesture — staged only
     const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
     const data = r.json?.["data"] as { count: number; titles: string[] };
-    expect(data.count).toBe(17);
+    expect(data.count).toBe(18);
     expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot");
     expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol");
   });

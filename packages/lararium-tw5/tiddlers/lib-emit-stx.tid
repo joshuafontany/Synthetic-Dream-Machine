@@ -1,6 +1,6 @@
 title: lar:///ha.ka.ba/@lararium/templates/lib/emit-stx
 type: text/vnd.tiddlywiki
 
-<$text text="<<~&#x0002;>>
+<$text text="<<~ &#x0002; >>
 
 "/>

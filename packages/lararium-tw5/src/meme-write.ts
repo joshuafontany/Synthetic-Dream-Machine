@@ -1,64 +1,51 @@
 /**
- * meme-write — disk export of memes via TW5 templates + cascades.
+ * meme-write — disk export of memes: the recompose seam.
  *
- * Architecture (rewrite, no legacy code):
- *   `exportMemeText` invokes `wiki.renderTiddler` on the tiddler URI with
- *   `lar-export-scope = "markdown-meme"`. The `meme-markdown-meme` template
- *   assembles the full meme envelope (prologue, SOH, preamble+IAM, header-text,
- *   STX, text, postamble, ETX) from the tiddler's fields using `<$text>` widgets
- *   — no wikification, no child expansion.
+ * Architecture (carrier-whole at rest, operator ruling 2026-06-11):
+ *   `exportMemeText` routes through `expandMemeRefs` (deserializer.ts) — the
+ *   recompose inverse the doctrine names (disk-projection#granularity). The
+ *   membrane module owns BOTH directions: ingest decomposes a carrier into
+ *   parent + ahu-child records; export splices every `<<~ kahea ahu #slot >>`
+ *   marker back into its child's definition form and reassembles the whole
+ *   carrier envelope. One meme, one file — a child change re-flushes its
+ *   GROUP (the projector routes to the carrier root), never its own file.
  *
- *   Per-node law: every tiddler — parent or child — renders independently
- *   through the same template. A parent's `text` field already contains literal
- *   `<<~ kahea ahu #slot >>` markers written by the deserializer at ingest time.
- *   Those markers project verbatim; the child tiddler's own flush writes the
- *   child's file when the child changes.
+ *   The retired per-node law (every record renders its own file through the
+ *   markdown-meme template) burned with hole H1. The template pipeline
+ *   (meme-markdown-meme + sigil cascades) still serves the HTML and
+ *   projection scopes; the carrier definition form recomposes in the
+ *   membrane, where the round-trip harness proves parse∘render ≡ records.
+ *   Wikifying the text field cannot carry byte-fidelity: `\rules` does not
+ *   propagate through `<$transclude>` (memetic-parser.ts, Jermolene #6712),
+ *   and the full ruleset mangles markdown under text/plain render.
  *
- *   Round-trip idempotency target: ingest → tiddler tree → per-node projection
- *   → disk tree → ingest → equivalent tiddler tree (semantic equivalence,
- *   stable section spacing).
+ * Canonical-form law (handoff #pattern-integrities §2): idempotent render;
+ * framing (iam order/alignment, sigil spacing, block margins) normalizes
+ * once; operator content bytes survive whole.
  *
  * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/meme-write
  */
 
+import { expandMemeRefs } from "./deserializer.js";
+import type { TiddlerFields } from "./deserializer.js";
 import type { TW5Engine } from "./tw5-vm.js";
 
-// ---------------------------------------------------------------------------
-// exportMemeText — disk export via TW5 templates + cascades
-// ---------------------------------------------------------------------------
-
 /**
- * Return the canonical memetic-wikitext for a meme URI.
- *
- * Routes through TW5's renderTiddler pipeline — the same path the wiki
- * shell and HTML export use — with the `lar-export-scope` variable set
- * to "markdown-meme". The wikifier walks the parent's parse tree;
- * ~ahu (wikitext widget) resolves the ahu cascade and transcludes slot
- * children through the disk-export template. Non-sigil text renders as-is.
+ * Return the canonical memetic-wikitext for a meme URI — the whole carrier,
+ * children recomposed inline at full depth.
  *
  * @param tw5     - Live TW5Engine VM instance
  * @param memeUri - lar:/// URI of the meme parent tiddler
- * @returns       - Canonical memetic-wikitext, or empty string if absent
+ * @returns       - Canonical memetic-wikitext; falls back to the raw text
+ *                  field (then empty string) when recompose cannot run
  */
-const MEME_MARKDOWN_TEMPLATE = "lar:///ha.ka.ba/@lararium/templates/meme/markdown-meme";
-
 export function exportMemeText(tw5: TW5Engine, memeUri: string): string {
   const wiki = tw5.$tw.wiki;
-  if (!wiki?.renderTiddler) return "";
+  const reader = (title: string): TiddlerFields | undefined =>
+    (wiki.getTiddler?.(title) as { fields?: TiddlerFields } | undefined)?.fields;
   try {
-    // Render through the meme-level template, which carries `\rules only
-    // transcludeinline lar-sigil lar-doctype-comment`.
-    // The pragma curates the wikitext rule set so backticks, dashes, html
-    // entities, html comments, and macrocall stay literal — only sigil and
-    // transclusion rules fire. ~ahu (wikitext widget) transcludes slot children
-    // through the cascade-resolved slot template; everything else passes verbatim.
-    return wiki.renderTiddler("text/plain", MEME_MARKDOWN_TEMPLATE, {
-      variables: {
-        currentTiddler:    memeUri,
-        "lar-export-scope": "markdown-meme",
-      },
-    }) ?? "";
-  } catch {
-    return wiki.getTiddlerText?.(memeUri, "") ?? "";
-  }
+    const carrier = expandMemeRefs(reader, memeUri);
+    if (carrier !== null) return carrier;
+  } catch { /* fall through to raw text */ }
+  return wiki.getTiddlerText?.(memeUri, "") ?? "";
 }

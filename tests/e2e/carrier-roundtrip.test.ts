@@ -9,10 +9,12 @@
  *   V1 — the doc holds record-grain (parent + ahu children) — LAWFUL
  *   V2 — the @lares disk mirror materializes some projection at all
  *   V3 — NO fragment files: no `#`-grain filename ever reaches disk
- *   V4 — the parent's projected carrier round-trips byte-faithful to source
+ *   V4 — the projected carrier round-trips content-whole; iam framing
+ *        normalizes once (canonical-form law)
  *
- * A failing vector NAMES A HOLE — the point of this file. Holes get burned
- * out and replaced with clean web3 code; the vector flips green and stays.
+ * A failing vector NAMES A HOLE — the point of this file. Holes H1/H2 got
+ * burned out 2026-06-11 (group routing + the expandMemeRefs recompose
+ * inverse); the vectors flipped green and now stand guard.
  */
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
@@ -60,7 +62,7 @@ afterAll(async () => { await lar.stop(); });
 describe("carrier-whole at rest — the kupono vectors", () => {
   test("V1 — the CRDT doc holds record-grain (parent + ahu children): lawful", () => {
     if (lar.mode !== "staged") return;
-    expect(loadOk).toBe(true);               // 17 records asserted in smoke; here: the LOAD landed
+    expect(loadOk).toBe(true);               // 18 records asserted in smoke; here: the LOAD landed
   });
 
   test("V2 — the @lares mirror materializes a disk projection after LOAD", async () => {
@@ -69,32 +71,42 @@ describe("carrier-whole at rest — the kupono vectors", () => {
     expect(files.length).toBeGreaterThan(0);
   });
 
-  // HOLE H1 (named 2026-06-11): the projector flushes every record — parent
-  // AND ahu children — to its own file (children site as parent/child.md, so
-  // a bare `#` scan misses them). The codified legacy lives in meme-write.ts
-  // ("per-node law ... the child tiddler's own flush writes the child's file").
-  // Burn: fragment-URI records never flush; a child change re-flushes its
-  // PARENT. This vector alarms (fails) the moment the burn lands — then drop
-  // the `.fails` and it stands guard.
-  test.fails("V3 — one carrier in, ONE file out: ahu children never become disk files", async () => {
-    if (lar.mode !== "staged") throw new Error("staged-only vector");
+  // Hole H1 (named 2026-06-11, BURNED same day): the projector used to flush
+  // every record — parent AND ahu children — to its own file. Now fragment
+  // URIs resolve to no disk path (bag-paths), and the projector group-routes:
+  // a child change climbs `fragment-parent` to the carrier root and re-flushes
+  // the ROOT. One carrier in, one file out. This vector stands guard.
+  test("V3 — one carrier in, ONE file out: ahu children never become disk files", async () => {
+    if (lar.mode !== "staged") return;
     const files = await awaitMirrorFiles(lar.root, 5_000);  // V2 already waited
     expect(files.filter((f) => f.includes("#") || /%23/.test(f))).toEqual([]);
     expect(files).toHaveLength(1);
   });
 
-  // HOLE H2 (named 2026-06-11): the parent's flush re-renders the envelope
-  // from FIELDS (iam re-ordered, origin-bag injected) with kahea refs in
-  // place of ahu bodies — not the operator's carrier. Burn: the membrane
-  // retains the whole carrier on the parent record (children stay derived,
-  // DB/VM grain); the parent flush emits it byte-faithful.
-  test.fails("V4 — the parent carrier round-trips byte-faithful to the operator's source", async () => {
-    if (lar.mode !== "staged") throw new Error("staged-only vector");
+  // Hole H2 (named 2026-06-11; the retain-whole-carrier direction DIED under
+  // the co-projection ruling — recomputable bytes never enter the record
+  // stratum). Byte-fidelity comes from the pipeline instead: lossless
+  // membrane + the recompose inverse (expandMemeRefs), under the
+  // canonical-form law (handoff #pattern-integrities §2):
+  //   - operator CONTENT bytes survive whole — everything outside the iam
+  //     fence compares byte-exact against the source;
+  //   - iam FRAMING normalizes once (sorted keys, aligned equals, the
+  //     namespace line re-homed to the SOH) — authored key order does not
+  //     survive the record stratum; retaining bytes for it was H2, dead;
+  //   - idempotence + parse∘render ≡ records hold in the membrane harness
+  //     (packages/lararium-tw5/tests/meme-roundtrip.test.ts).
+  test("V4 — the carrier round-trips content-whole; only iam framing normalizes", async () => {
+    if (lar.mode !== "staged") return;
     const files = await awaitMirrorFiles(lar.root, 5_000);
     const parent = files.find((f) => f.endsWith("noosphere-boot.md"));
     expect(parent, "no whole-carrier projection of the loaded meme found").toBeTruthy();
     const projected = readFileSync(parent as string, "utf8");
     const source    = readFileSync(BOOT_MEME, "utf8");
-    expect(projected).toBe(source);
+    const iamFence = /```toml iam\n[\s\S]*?```\n/g;
+    const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
+    expect(contentView(projected)).toBe(contentView(source));
+    // The normalized iam still carries the identity whole: spot-check keys.
+    expect(projected).toMatch(/^uri-path\s+= "ha\.ka\.ba\/@lares\/v0\.1\/api\/lares\/noosphere-boot"$/m);
+    expect(projected).toMatch(/^register\s+= "Synthesis-Canon"$/m);
   });
 });

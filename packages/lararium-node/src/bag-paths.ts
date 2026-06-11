@@ -85,9 +85,17 @@ function splitHash(s: string): [string, string | null] {
   return i >= 0 ? [s.slice(0, i), s.slice(i + 1)] : [s, null];
 }
 
-function toRelMd(pathPart: string, frag: string | null): string {
+/**
+ * Carrier-whole at rest (disk-projection#granularity): a fragment record
+ * (`…#slot`) never owns a disk file — its carrier root does. A fragment URI
+ * resolves to null here; the projector routes a child change to its group
+ * root before any path lookup. The old `frag → base/frag.md` ternary (hole
+ * H1) burned 2026-06-11.
+ */
+function toRelMd(pathPart: string, frag: string | null): string | null {
+  if (frag) return null;
   const base = pathPart.endsWith(".md") ? pathPart.slice(0, -3) : pathPart;
-  return frag ? `${base}/${frag}.md` : `${base}.md`;
+  return `${base}.md`;
 }
 
 function canonicalNamedBagRelPath(scope: string, uri: string): string | null {
@@ -166,7 +174,7 @@ export function wikiBagPath(): MirrorPathFn {
     if (!rest) return null;
     const [pathPart, frag] = splitHash(rest);
     const rel = toRelMd(pathPart, frag);
-    return `${dirPrefix}${rel}`;
+    return rel ? `${dirPrefix}${rel}` : null;
   };
 }
 

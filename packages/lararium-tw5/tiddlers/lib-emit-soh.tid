@@ -1,5 +1,5 @@
 title: lar:///ha.ka.ba/@lararium/templates/lib/emit-soh
 type: text/vnd.tiddlywiki
 
-<$text text="<<~"/><$text text={{!!namespace}}/><$text text="&#x0001; ? -> "/><$text text=<<currentTiddler>>/><$text text=" >>
+<$text text="<<~ "/><$text text={{!!namespace}}/><$text text="&#x0001; ? -> "/><$text text=<<currentTiddler>>/><$text text=" >>
 "/>
