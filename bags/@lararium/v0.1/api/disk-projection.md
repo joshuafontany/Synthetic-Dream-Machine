@@ -15,7 +15,7 @@ role         = "load-bearing invariant — the node vessel's two on-disk project
 status       = "approved"
 approved-on  = "2026-06-02"
 revised-on   = "2026-06-11"
-revision-note = "carrier-whole at rest: the .tid-decomposition intent burned to legacy-design-time; grain ladder canonized (disk=whole carrier, doc=record, VM=decomposed)"
+revision-note = "co-projection rewrite of #core-claim (mind originates; disk + CRDT co-project; CRDT holds the merge seat); prior: carrier-whole at rest, grain ladder canonized (disk=whole carrier, doc=record, VM=decomposed)"
 cacheable    = true
 hydrate      = true
 retain       = true
@@ -29,16 +29,16 @@ retain       = true
 
 # Disk Projection — Seed and Projection Surfaces
 
-Every **`@bag`** is one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). The CRDT store is the mind; **disk is a projection of it**.
+Every **`@bag`** maps to one Automerge document — one CRDT, one coordinate axis of the recipe query plan (see residency-model). **The operator's mind originates; the disk carrier and the CRDT record-set both *project* that origin, each in its native grain** (the co-projection model, operator ruling 2026-06-11): disk projects thought as one whole markdown meme — the way the operator writes it; the CRDT doc projects the same thought as tid-sized records — the way TW5 merges, addresses, and syncs it; the VM decomposes for transclusion (#granularity). Co-equal in dignity, single in merge seat: **merge authority routes through the CRDT alone**, never file-vs-record reconciliation — anything else opens the dual-write trap (Tonsky crdt-filesync; Kleppmann).
 
-The node vessel SHALL be able to write an editable, re-readable **Artifact** of a bag's CRDT state to disk (the "disk projection"), and re-ingest operator edits. This rides **two on-disk surfaces**, split by bag *role* — **source vs output**:
+The node vessel SHALL write an editable, re-readable **Artifact** of a bag's CRDT state to disk (the "disk projection"), and re-ingest operator edits. This rides **two on-disk surfaces**, split by bag *role* — **source vs output**:
 
 | Surface | Role | Bags | Source of record | Format |
 |---|---|---|---|---|
 | **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
-| **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (CRDT authoritative; disk is the rendered artifact) | memetic-wikitext `.md` |
+| **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
 
-The distinction is **definition vs instance**. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` is the source of the world; `wikis/` is a running instance's output.
+The distinction reads **definition vs instance**. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output.
 
 <<~/ahu >>
 
