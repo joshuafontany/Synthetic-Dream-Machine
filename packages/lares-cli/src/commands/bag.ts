@@ -14,26 +14,18 @@
  * E.1 ships these four; E.8 adds `bag epoch <url>` (DXOS-style snapshot-restart).
  */
 
-import { join } from "node:path";
-import { loadOperatorVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh/node";
+import { operatorDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-async function operatorDid(): Promise<string> {
-  const root    = process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
-  const dataDir = join(root, ".lararium");
-  return "0x" + (await loadOperatorVerifyingKey(dataDir));
-}
 
 async function tryConnect() {
   try {
-    const root = process.env["LAR_ROOT"];
-    const extra = root ? { bootstrapPath: join(root, "genesis", "social-bootstrap.json") } : {};
-    return await connectAdminVessel(extra);
+    // ONE env contract (env.ts) — the connector derives root/port/bootstrap.
+    return await connectAdminVessel({});
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares bag: ${msg}`);
@@ -49,7 +41,7 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares bag epoch <bag-url>");
     return 2;
   }
-  const did    = await operatorDid().catch(() => "lares-cli");
+  const did    = await operatorDid();
   const vessel = await tryConnect();
   if (!vessel) return 3;
   try {

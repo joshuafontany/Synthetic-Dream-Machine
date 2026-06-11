@@ -66,18 +66,24 @@ describe("smoke — residency canon through the real CLI", () => {
 
   test("wiki init + add-bag compose the user registry", async () => {
     if (lar.mode !== "staged") return;   // mints registry entries — staged only
-    // KNOWN BURR: `lares wiki` prints human output even under --json — these
-    // assertions read the human surface; tighten to JSON when the burr heals.
-    const g = await lar.cli(["wiki", "init", "garden"]);
-    expect(g.code).toBe(0);
-    expect(g.stdout).toMatch(/recipes\/garden/);
-    const v = await lar.cli(["wiki", "init", "grove"]);
-    expect(v.code).toBe(0);
+    const g = await lar.cli(["wiki", "init", "garden", "--json"]);
+    expect(g.json?.["ok"]).toBe(true);
+    expect((g.json?.["data"] as { recipeUri?: string })?.recipeUri).toMatch(/recipes\/garden/);
+    const v = await lar.cli(["wiki", "init", "grove", "--json"]);
+    expect(v.json?.["ok"]).toBe(true);
 
-    const a = await lar.cli(["wiki", "add-bag", "garden", "lar:///ha.ka.ba/@lararium/wikis/grove"]);
-    expect(a.code).toBe(0);
-    expect(a.stdout).toMatch(/added/);
-    expect(a.stdout).toMatch(/wikis\/grove/);
+    const a = await lar.cli(["wiki", "add-bag", "garden", "lar:///ha.ka.ba/@lararium/wikis/grove", "--json"]);
+    expect(a.json?.["ok"]).toBe(true);
+    const data = a.json?.["data"] as { status?: string; stack?: string[] };
+    expect(data?.status).toBe("added");
+    expect(data?.stack?.join(" ")).toMatch(/wikis\/grove/);
+  });
+
+  test("bag stats answers with the operator's real identity (no placeholder DID)", async () => {
+    if (lar.mode !== "staged") return;
+    const r = await lar.cli(["bag", "stats"]);
+    expect(r.code).toBe(0);
+    expect(r.stdout + r.stderr).not.toMatch(/bad hex length/);
   });
 });
 

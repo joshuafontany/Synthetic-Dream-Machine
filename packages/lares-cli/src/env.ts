@@ -14,6 +14,7 @@
 
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
+import { loadOperatorVerifyingKey } from "@lararium/node";
 
 /** Instance root — LAR_ROOT or the dev node home. */
 export function larRoot(): string {
@@ -33,4 +34,17 @@ export function larBootstrapPath(): string {
 /** Daemon WS port — LAR_PORT or 8080. */
 export function larPort(): number {
   return Number(process.env["LAR_PORT"] ?? 8080);
+}
+
+/**
+ * The operator's DID (0x + verifying key) from the instance's key file.
+ * Throws a CLEAN error when absent — a placeholder string would only fail
+ * later as "bad hex length" inside capability verification. No fallbacks.
+ */
+export async function operatorDid(): Promise<string> {
+  try {
+    return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
+  } catch {
+    throw new Error(`no operator key under ${larDataDir()} — run \`lares init\` (or point LAR_ROOT at an initialized instance)`);
+  }
 }
