@@ -19,6 +19,7 @@ import {
   makeWikiPinReactor, makeWikiUnpinReactor,
   makeCatalogAccessor,
   makeInitWikiReactor, makeOpenWikiReactor, makeDraftReactor, makePruneStaleReactor,
+  makeWardAlertReactor,
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
@@ -60,6 +61,10 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
 
       // draft needs no catalog — register it regardless of slot.
       registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
+
+      // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
+      // in @admin + $:/tags/Alert into the operator's pinned VM.
+      registry.register("ward-alert", makeWardAlertReactor(ctx.composite, ctx.post));
 
       // Every other admin verb reaches USER registry data in @catalog (wiki oracles,
       // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The admin

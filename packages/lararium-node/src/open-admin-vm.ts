@@ -121,7 +121,7 @@ export interface AdminVmResult {
    * reboot; main places a `system-alert` verb into that wiki's live island (skip if
    * unmounted). Call after the pool exists.
    */
-  onWikiAlert:  (fn: (wikiSlug: string, message: string, cause?: string) => void) => void;
+  onWikiAlert:  (fn: (wikiSlug: string, message: string, cause?: string, kind?: string) => void) => void;
   /** Terminate the admin island and release the vessel composite. */
   dispose:      () => void;
 }

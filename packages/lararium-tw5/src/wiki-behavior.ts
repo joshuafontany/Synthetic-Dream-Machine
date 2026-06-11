@@ -63,14 +63,18 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       _registry.register("system-alert", async (args) => {
         const message = typeof args["message"] === "string" ? args["message"] : "A change requires a reboot to apply.";
         const cause   = typeof args["cause"]   === "string" ? args["cause"]   : "";
+        // Alert kind selects the (stable, coalescing) alert tiddler. Default stays
+        // the reboot-pending title; other kinds (e.g. "disk-ward") get their own.
+        const kind    = typeof args["kind"] === "string" && args["kind"] ? args["kind"] : "reboot-pending";
+        const title   = kind === "reboot-pending" ? REBOOT_ALERT_TITLE : `$:/temp/lares/alert/${kind}`;
         const origin: ChangeOrigin = { kind: "lares-verb", requestId: `alert-${Date.now()}` };
         await ctx.composite.put(
           {
             tiddler: {
-              title:       REBOOT_ALERT_TITLE,
+              title,
               text:        message,
               tags:        TW5_ALERT_TAG,   // surfaces in TW5's native alert area
-              "alert-kind": "reboot-pending",
+              "alert-kind": kind,
               cause,
               ts:          new Date().toISOString(),
             },

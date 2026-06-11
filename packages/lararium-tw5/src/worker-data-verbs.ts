@@ -14,7 +14,8 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarTiddlerRecord } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarTiddlerRecord } from "@lararium/mesh";
+import { ACTIVE_WIKI_URI } from "./active-wiki.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import type { CatalogAccessor } from "./catalog-accessor.js";
 
@@ -129,5 +130,48 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
       unpinned.push(bagUrl);
     }
     return { slug, recipeUri: recipeTitle, unpinned, commanded: true };
+  };
+}
+
+// ── ward-alert — the disk ward's signal surfaces in the admin VM ────────────
+//
+// A wiki island's projector refused a write (sovereign-island disk ward,
+// disk-projection#write-ward). The signal rides the generic worker.event →
+// placeVerb bridge into the admin VM, which (a) writes a DURABLE audit record
+// into @admin — the operators-with-admin-grants surface — and (b) injects a
+// $:/tags/Alert into the operator's currently PINNED VM via the existing
+// wiki-alert rail (kind "disk-ward"). No cap-gate: the signal originates from
+// the island's own mechanism, grants nothing, and only writes audit + alert.
+
+/** Register as "ward-alert". `post` = ctx.post (AdminMsg_WikiAlert rides it). */
+export function makeWardAlertReactor(
+  composite: CompositeStore,
+  post: (msg: AdminMsg_WikiAlert) => void,
+): VerbReactor {
+  return async (args) => {
+    const bagId  = typeof args["bagId"]  === "string" ? args["bagId"]  : "(unknown bag)";
+    const uri    = typeof args["uri"]    === "string" ? args["uri"]    : "(unknown uri)";
+    const reason = typeof args["reason"] === "string" ? args["reason"] : "(no reason)";
+    const ts     = new Date().toISOString();
+
+    // (a) Durable audit in @admin — append-only ledger, never coalesced.
+    const auditTitle = `lar:///ha.ka.ba/@admin/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
+    await composite.put(
+      { tiddler: { title: auditTitle, "alert-kind": "disk-ward", bag: bagId, uri, reason, ts }, meta: { authority: "disk-ward" } },
+      { kind: "lares-verb", requestId: `ward-${ts}` },
+    );
+
+    // (b) Alert the operator's currently pinned VM (the active wiki marker in @admin).
+    const marker = await composite.get(ACTIVE_WIKI_URI);
+    const slug   = tiddlerText(marker) ?? null;
+    if (slug) {
+      post(mkAdminWikiAlert({
+        wikiSlug: slug,
+        message:  `Disk ward refused a write (${bagId}): ${reason}`,
+        cause:    "disk-ward",
+        kind:     "disk-ward",
+      }));
+    }
+    return { audited: auditTitle, alerted: slug ?? "none", bagId, uri };
   };
 }

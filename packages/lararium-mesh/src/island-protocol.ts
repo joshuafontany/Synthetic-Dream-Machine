@@ -408,6 +408,8 @@ export interface AdminMsg_WikiAlert {
   message: string;
   /** The verb that caused the change (audit/display). */
   cause?: string;
+  /** Alert kind — selects the alert tiddler ("reboot-pending" default; "disk-ward" etc.). */
+  kind?: string;
 }
 
 /** All messages the vessel may send to a causal island. */
@@ -791,12 +793,14 @@ export function mkAdminWikiAlert(opts: {
   wikiSlug: string;
   message:  string;
   cause?:   string;
+  kind?:    string;
 }): AdminMsg_WikiAlert {
   const msg: AdminMsg_WikiAlert = {
     schema_version: ISLAND_PROTOCOL_VERSION,
     type:     "admin:wiki-alert",
     wikiSlug: opts.wikiSlug,
     message:  opts.message,
+    ...(opts.kind ? { kind: opts.kind } : {}),
   };
   if (opts.cause !== undefined) msg.cause = opts.cause;
   return msg;

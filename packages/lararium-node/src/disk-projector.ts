@@ -57,6 +57,8 @@ export class LarDiskProjector {
     private readonly renderFn: (tiddlerUri: string) => Promise<string | null>,
     /** Debounce delay in ms. */
     private readonly debounceMs = 1000,
+    /** Fired on every disk-ward refusal — the island routes it to the admin VM. */
+    private readonly onRefusal?: (info: { bagId: string; uri: string; reason: string }) => void,
     /** Optional readiness map — lights `disk-projector` after first flush. */
     private readonly readinessMap?: ReadinessMap,
     /** Write a .json sidecar next to each .md for peek debugging. */
@@ -117,7 +119,11 @@ export class LarDiskProjector {
       const relPath = mirror.toRelPath(title);
       if (!relPath) continue;
       const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
-      if (!gate.ok) { console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`); continue; }
+      if (!gate.ok) {
+        console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`);
+        this.onRefusal?.({ bagId: mirror.bagId, uri: title, reason: gate.reason });
+        continue;
+      }
       const candidate = gate.path;
       try {
         if (existsSync(candidate)) {
@@ -140,6 +146,7 @@ export class LarDiskProjector {
     const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
     if (!gate.ok) {
       console.error(`[disk-ward] write refused (${mirror.bagId} <- ${tiddlerUri}): ${gate.reason}`);
+      this.onRefusal?.({ bagId: mirror.bagId, uri: tiddlerUri, reason: gate.reason });
       return;
     }
     const candidate = gate.path;
