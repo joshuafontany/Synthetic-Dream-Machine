@@ -65,8 +65,9 @@ export interface VesselCoreAssembly {
   composite:     CompositeStore;
   catalogHandle: DocHandle<LarDoc>;
   islandHandle:  DocHandle<LarDoc>;
-  /** Always present — assembly mints @lares if the island doc lacks the oracle. */
-  laresHandle:   DocHandle<LarDoc>;
+  /** Null until the invariant plane reaches this vessel (node home mints;
+   *  wild vessels federate it in). The keel never mints. */
+  laresHandle:   DocHandle<LarDoc> | null;
   coreHash:      string;
 }
 
@@ -96,22 +97,17 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   // ── genesis island (REQUIRED — coreless boot deleted) + the bootstrap it carries ──
   const { islandHandle, coreHash, bootstrap } = await loadGenesis();
   addSubstrateLayer(composite, BAG_IDS.lararium, islandHandle);
-  // @lares mint-if-absent — the protocol-invariant plane self-heals at assembly
-  // (boot = first reconcile). The oracle's ONE home: the @lararium doc's
-  // well-known tiddlers. Two federated vessels cold-minting concurrently race
-  // on one LWW tiddler: write, re-read, adopt the winner — an orphaned EMPTY
-  // mint needs no migration (peer-coordination doctrine). Content arrives by
-  // its own arc; the empty doc stands the structure.
-  let laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
-  if (!laresUrl) {
-    const minted = blankDoc(repo);
-    islandHandle.change((doc) => {
-      doc.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: minted.url, kind: "oracle" }, "lares-mint");
-    });
-    laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? minted.url;
+  // @lares — the keel only READS the protocol-invariant oracle. Minting rides
+  // the most-restricted grant: operator(admin), timed — held by the node home
+  // (genesis office, mintLaresIfAbsent). Wild vessels receive the invariant
+  // plane by federating the @lararium doc; absent here reads not-yet-federated,
+  // never mint-it-yourself.
+  let laresHandle: DocHandle<LarDoc> | null = null;
+  const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
+  if (laresUrl) {
+    laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
+    addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
   }
-  const laresHandle: DocHandle<LarDoc> = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
-  addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
   const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
   if (existingRef !== islandHandle.url) {
     catalogHandle.change((doc) => {

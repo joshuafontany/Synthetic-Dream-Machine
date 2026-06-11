@@ -49,7 +49,7 @@ import {
 import type { VesselWikiSlot } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
-  reconcileWellKnownTiddlers,
+  reconcileWellKnownTiddlers, mintLaresIfAbsent,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
@@ -216,6 +216,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
             }, "lararium-boot");
           });
         }
+
+        // @lares protocol-invariant mint — operator(admin) office, node home only.
+        mintLaresIfAbsent(repo, islandHandle);
 
         const coreBlobEntry = (islandHandle.doc()?.blobs ?? {})[ENGINE_CORE_ID];
         if (!coreBlobEntry?.blob) {

@@ -30,6 +30,8 @@ import {
   SESSIONS_DOC_URI,
   ADMIN_BAG_ID,
   mutableLarRecord,
+  tiddlerText,
+  emptyLarDoc,
   cidV1Sha256FromHex,
 } from "@lararium/mesh";
 
@@ -182,6 +184,30 @@ export async function reconcileIslandFromGenesis(
   });
 
   console.log("[genesis-artifact] reconcile: merge complete — genesis CID updated in live doc");
+}
+
+// ---------------------------------------------------------------------------
+// mintLaresIfAbsent — operator(admin) mint of the @lares protocol invariant
+// ---------------------------------------------------------------------------
+
+/**
+ * Gate: the most-restricted grant — operator(admin), timed. Only the node home
+ * (the base @lararium node) mints protocol invariants; wild vessels receive
+ * the plane by federating the @lararium doc, and the keel (assembleVessel)
+ * only READS the oracle. Grant-proof enforcement arrives with keyhive;
+ * placement enforces the gate today — this code runs solely in the operator's
+ * node genesis office.
+ */
+export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): string {
+  const existing = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
+  if (existing) return existing;
+  const minted = repo.create<LarDoc>(emptyLarDoc());
+  islandHandle.change((d) => {
+    d.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: minted.url, kind: "oracle" }, "operator-mint");
+  });
+  // Two node homes federating one @lararium doc may still race; LWW settles
+  // it — re-read and adopt the winner (an orphaned empty mint costs nothing).
+  return tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? minted.url;
 }
 
 // ---------------------------------------------------------------------------
