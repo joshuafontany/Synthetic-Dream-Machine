@@ -193,13 +193,6 @@ export type EpochPinState =
   | { readonly state: "opaque" };
 
 /**
- * Slot URI → AutomergeUrl. Null for @temp (no CRDT — in-memory only).
- * The vessel populates this when sending the manifest; the island reads it
- * to wire each CRDT slot to its doc handle.
- */
-export type BagResolver = ReadonlyMap<SlotUri, AutomergeUrl | null>;
-
-/**
  * Full expanded slot order — top of array = highest priority (first wins).
  * Iterating bottom→top (reverse) gives the addLayer order for CompositeStore.
  */

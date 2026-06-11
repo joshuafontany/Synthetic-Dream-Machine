@@ -45,7 +45,7 @@ import type { IslandContext } from "./island-context.js";
 
 /**
  * startRecipeWatch — subscribe to @catalog; reconcile this island's mounted
- * layer set against its live recipe record. Returns a cleanup for onDemote,
+ * layer set against its live recipe record. Returns a cleanup for onHooAnu,
  * or undefined when the island carries no catalog access.
  */
 export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void) | undefined> {

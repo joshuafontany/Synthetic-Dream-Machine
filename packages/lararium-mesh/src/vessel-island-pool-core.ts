@@ -53,7 +53,7 @@ interface IslandSlot {
 interface ColdSlot {
   temperature: "anu";
   wikiId:      string;
-  demotedAt:   number;
+  cooledAt:   number;
 }
 
 type Slot = IslandSlot | ColdSlot;
@@ -172,7 +172,7 @@ export class VesselIslandPoolCore {
 
     workerSlot.mainPort.close();
     workerSlot.worker.terminate();
-    this._slots.set(wikiId, { temperature: "anu", wikiId, demotedAt: Date.now() });
+    this._slots.set(wikiId, { temperature: "anu", wikiId, cooledAt: Date.now() });
   }
 
   /** Teardown all live islands. */
@@ -224,7 +224,7 @@ export class VesselIslandPoolCore {
 
   coldSince(wikiId: string): number | null {
     const slot = this._slots.get(wikiId);
-    return slot?.temperature === "anu" ? slot.demotedAt : null;
+    return slot?.temperature === "anu" ? slot.cooledAt : null;
   }
 
   has(wikiId: string): boolean {

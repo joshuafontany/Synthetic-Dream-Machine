@@ -66,10 +66,10 @@ export interface IslandContext {
  *
  * - `onEa`     — called after CompositeStore + IslandAdaptor wired, before ea.
  * - `onSignal` — called for every non-lifecycle message. Return true if handled.
- * - `onDemote` — called before drain loop stops.
+ * - `onHooAnu` — called before drain loop stops.
  */
 export interface IslandBehavior {
   onEa(ctx: IslandContext): void | Promise<void>;
   onSignal(type: string, raw: unknown, ctx: IslandContext): boolean;
-  onDemote(ctx: IslandContext): void | Promise<void>;
+  onHooAnu(ctx: IslandContext): void | Promise<void>;
 }

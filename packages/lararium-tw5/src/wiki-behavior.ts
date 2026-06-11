@@ -123,7 +123,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       return true;
     },
 
-    onDemote() {
+    onHooAnu() {
       _recipeWatchStop?.();
       _recipeWatchStop = undefined;
       _engineWatchStop?.();

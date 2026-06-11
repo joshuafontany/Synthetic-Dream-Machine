@@ -45,7 +45,7 @@ function compareVersions(a: string, b: string): number {
 /**
  * startEngineWatch — subscribe to the island's @lararium handle; on any change
  * whose core-blob sha256 differs from the booted engine, write the waiting
- * alert. Returns a cleanup (unsubscribe) for onDemote, or undefined when the
+ * alert. Returns a cleanup (unsubscribe) for onHooAnu, or undefined when the
  * island carries no @lararium slot (e.g. bare test recipes).
  */
 export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {

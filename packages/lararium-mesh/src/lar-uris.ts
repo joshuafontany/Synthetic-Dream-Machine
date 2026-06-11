@@ -208,9 +208,11 @@ export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
 /**
  * Vessel-wide system bag URIs. These exist once per vessel and serve all wikis.
  *
- * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, canon bags) live in
- * `wiki-recipe.ts` — they are slot URIs in the same lar:///ha.ka.ba/@<name>
- * namespace, resolved per-wiki via the manifest's `BagResolver`.
+ * Per-wiki recipe slots (`@temp`, `@draft`, `@<wiki-slug>`, library bags) live
+ * in `wiki-recipe.ts` — slot URIs in the same lar:///ha.ka.ba/@<name>
+ * namespace. Structural slots arrive as typed IslandGrants on the manifest;
+ * @lares rides the @lararium doc's well-known tiddlers; library bags resolve
+ * island-side from @catalog.
  */
 export const BAG_IDS = {
   lararium:   LARARIUM_DOC_URI,

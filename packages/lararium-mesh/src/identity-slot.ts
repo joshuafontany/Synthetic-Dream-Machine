@@ -26,7 +26,7 @@
  *   (future) to derive deterministic doc URLs per user namespace.
  *
  * URI convention:
- *   lar://did:web:user.bsky.social/wikis/altar-fire
+ *   lar://did:web:user.bsky.social/wikis/garden
  *         └─ userNamespace ──────┘└─ path ────────┘
  *
  * Quine fit:

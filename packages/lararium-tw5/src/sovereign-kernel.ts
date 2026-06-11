@@ -8,14 +8,15 @@
  * a data descriptor of four capability-pieces, not an OO platform interface.
  *
  *   generic lifecycle: boot → Repo → CompositeStore → IslandAdaptor → ea → demote
- *   caller-supplied IslandBehavior: onEa / onSignal / onDemote
+ *   caller-supplied IslandBehavior: onEa / onSignal / onHooAnu
  *
  * ## Recipe law — one model across all wikis
  *
  *   Manifest carries `recipe: WikiRecipe + grants: IslandGrants`. Structural
- *   slots arrive as typed grants; @lares may fall back to the catalog oracle;
- *   library bags resolve from @catalog ONLY (boot = first reconcile — the same
- *   path recipe-watch walks live). `buildIslandRecipe()` lays the stack:
+ *   slots arrive as typed grants; @lares resolves from the @lararium doc's
+ *   well-known tiddlers (protocol-invariant plane); library bags resolve from
+ *   @catalog ONLY (boot = first reconcile — the same path recipe-watch walks
+ *   live). `buildIslandRecipe()` lays the stack:
  *
  *     @temp        (MemoryTiddlerStore, volatile)
  *     @draft       (CRDT, high-churn drafts)
@@ -301,7 +302,7 @@ export function runSovereignKernel(
   // ── Teardown / Demote (OTP terminate) ──────────────────────────────────────
 
   async function _handleTeardown(): Promise<void> {
-    if (_ctx && behavior) await behavior.onDemote(_ctx);
+    if (_ctx && behavior) await behavior.onHooAnu(_ctx);
     handler.teardown();
 
     _handles.clear();

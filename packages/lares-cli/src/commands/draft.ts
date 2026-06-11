@@ -2,14 +2,14 @@
  * `lares draft <uri> [--to <bag>] [--yes]`
  *
  * Pull-into-draft ceremony — copies a tiddler currently resolving from a
- * lower bag into a writable draft bag (default: the active room's draft /
+ * lower bag into a writable draft bag (default: the active wiki draft /
  * composite default writable). The source bag stays intact; the new copy
  * overlays via composite priority. Operator can then edit the draft and
  * land it into another bag through a residency ACTION verb (Sprint 5 of
  * the Residency Model Epic ships `lares act` for that purpose).
  *
  * Flags:
- *   --to <bag>     target draft bag (default: active room's draft)
+ *   --to <bag>     target draft bag (default: active wiki draft)
  *   --yes          skip confirmation
  *   --port <n>     daemon port
  */
@@ -98,7 +98,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
       console.log("");
       console.log(`  tiddler:   ${tiddler}`);
       console.log(`  currently: ${bags.join(", ")}`);
-      console.log(`  draft to:  ${toBag ?? "(active room draft)"}`);
+      console.log(`  draft to:  ${toBag ?? "(active wiki draft)"}`);
       console.log("");
       const rl = createInterface({ input: stdin, output: stdout });
       const answer = await rl.question("Proceed? [y/N] ");

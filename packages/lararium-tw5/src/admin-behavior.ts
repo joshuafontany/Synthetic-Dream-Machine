@@ -193,7 +193,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
       return false;
     },
 
-    onDemote() {
+    onHooAnu() {
       _engineWatchStop?.();
       _engineWatchStop = undefined;
       _dispatcher?.stop();

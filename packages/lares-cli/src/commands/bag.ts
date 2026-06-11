@@ -7,7 +7,7 @@
  *
  * Verbs:
  *   pin <url> [--reason <text>]   — never evict this bag from RAM
- *   unpin <url>                   — demote pinned bag to hot LRU
+ *   unpin <url>                   — remove the cooling exemption (bag rejoins the LRU sweep)
  *   stats                         — pinned / wela / anu residency snapshot
  *   register-cold <url>           — mark URL as known-but-not-loaded (oracle stub)
  *
@@ -77,7 +77,7 @@ type BagSubcommand = (args: ParsedArgs) => Promise<number>;
 
 const SUBCOMMANDS: Readonly<Record<string, { handler: BagSubcommand; summary: string }>> = {
   "pin":           { handler: cmdPin,          summary: "Pin a bag URL — daemon never evicts it. Needs `lares serve`." },
-  "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — demotes from pinned to hot LRU. Needs `lares serve`." },
+  "unpin":         { handler: cmdUnpin,        summary: "Unpin a bag URL — removes the cooling exemption; the bag rejoins the LRU sweep. Needs `lares serve`." },
   "stats":         { handler: cmdResidency,    summary: "Print the daemon's bag residency snapshot. Needs `lares serve`." },
   "register-cold": { handler: cmdRegisterCold, summary: "Mark a bag URL as known-but-not-loaded (oracle stub). Needs `lares serve`." },
   "epoch":         { handler: cmdBagEpoch,     summary: "DXOS-style snapshot-restart on one bag. Bounds history; lossy by design." },
