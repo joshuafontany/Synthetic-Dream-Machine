@@ -8,6 +8,7 @@ export default defineConfig({
     alias: [
       { find: "@lararium/tw5/plugin-tiddler.generated", replacement: path.resolve(root, "../lararium-tw5/src/plugin-tiddler.generated.ts") },
       { find: "@lararium/tw5", replacement: path.resolve(root, "../lararium-tw5/src/index.ts") },
+      { find: "@lararium/mesh/lar-uris", replacement: path.resolve(root, "../lararium-mesh/src/lar-uris.ts") },
       { find: "@lararium/mesh", replacement: path.resolve(root, "../lararium-mesh/src/index.ts") },
     ],
   },

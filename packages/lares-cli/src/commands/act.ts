@@ -42,8 +42,8 @@ import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
-  const dataDir = join(repoRoot, "packages", "lararium-node", ".lararium");
-  return "0x" + (await loadOperatorVerifyingKey(dataDir));
+  const larRoot = process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
+  return "0x" + (await loadOperatorVerifyingKey(join(larRoot, ".lararium")));
 }
 
 function printUsage(): void {
@@ -70,7 +70,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   const verb = verbRaw;
 
   // Build the kebab-case args bag per residency-actions encoding.
-  const actionArgs: Record<string, string> = {};
+  const actionArgs: Record<string, unknown> = {};
   if (isTransferVerb(verb)) {
     const title    = args.options["title"];
     const fromBag  = args.options["from"];
@@ -103,6 +103,22 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     actionArgs["source-uri"] = sourceUri;
     actionArgs["to-bag"]     = toBag;
     actionArgs["change-id"]  = changeId;
+
+    // The disk grant lives HERE — the operator gesture reads the carriers and
+    // sends content WITH the verb (islands hold no fetch capability). A local
+    // .md file or a directory of .md memes packs into args.carriers; a
+    // non-local source-uri sends no carriers and the island refuses loudly.
+    const { statSync, readdirSync, readFileSync } = await import("node:fs");
+    try {
+      const st = statSync(sourceUri);
+      const files = st.isDirectory()
+        ? (readdirSync(sourceUri, { recursive: true }) as string[])
+            .filter((f) => f.endsWith(".md"))
+            .map((f) => join(sourceUri, f))
+        : [sourceUri];
+      const carriers = files.map((f) => ({ text: readFileSync(f, "utf8") }));
+      if (carriers.length > 0) actionArgs["carriers"] = carriers;
+    } catch { /* not a local path — provenance-only LOAD */ }
   }
 
   // ── Connect to the admin vessel ───────────────────────────────────────
@@ -168,7 +184,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     // (same change-id + verb + target) collapses to one requestId, and the
     // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
     // change-id (the --change-id default) means a genuinely distinct change → runs.
-    const subject   = actionArgs["to-bag"] ?? actionArgs["bag"] ?? "";
+    const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
     const requestId = await taskContentId({ subject, command: verb, args: actionArgs, nonce: "" });
     const result = await submitVerb(vessel, verb, actionArgs, did, { requestId });
     if (result.status === "error") {

@@ -261,17 +261,36 @@ describe("DROP handler", () => {
 });
 
 // ---------------------------------------------------------------------------
-// LOAD handler — explicit "not implemented" surface
+// LOAD handler — carrier-borne ingest (operator gesture supplies content)
 // ---------------------------------------------------------------------------
 
 describe("LOAD handler", () => {
-  test("throws explicit not-implemented (external fetch belongs to a later sprint)", async () => {
+  test("refuses loudly when no carriers ride the verb (islands never fetch)", async () => {
     const composite = makeComposite();
     const table = new VerbTable();
     registerActionReactors(table, { composite });
     const handler = table.get("LOAD")!;
     const args = { "source-uri": "https://example.org/seed.json", "to-bag": BAG_HIGH, "change-id": "c" };
-    await expect(handler(args, makeContext(composite, "LOAD", args))).rejects.toThrow(/not yet implemented/);
+    await expect(handler(args, makeContext(composite, "LOAD", args))).rejects.toThrow(/no carriers/);
+  });
+
+  test("lands a titled carrier into toBag under the action's changeId", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const handler = table.get("LOAD")!;
+    const args = {
+      "source-uri": "bags/@lares/v0.1/api/lares/example.md",
+      "to-bag": BAG_HIGH,
+      "change-id": "c-load-1",
+      carriers: [{ title: "lar:///ha.ka.ba/@lares/example", text: "Aloha — carrier body.\n" }],
+    };
+    const summary = await handler(args, makeContext(composite, "LOAD", args)) as { count: number; titles: string[] };
+    expect(summary.count).toBeGreaterThanOrEqual(1);
+    const all = await composite.resolveAll("lar:///ha.ka.ba/@lares/example");
+    const landed = all.find((e) => e.bagId === BAG_HIGH);
+    expect(landed).toBeTruthy();
+    expect(landed?.record.meta?.changeId).toBe("c-load-1");
   });
 });
 

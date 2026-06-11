@@ -114,12 +114,24 @@ export interface DropAction extends ResidencyActionBase {
   readonly bag:         string;
 }
 
-/** LOAD — bring external content from sourceUri into toBag. Mints fresh changeId. */
+/** One carrier of external content riding a LOAD verb. The operator-side
+ *  gesture (which holds the disk/fetch grant) reads the source and sends the
+ *  content WITH the verb — eventual-send, no island reach-back. `title` is
+ *  optional when the carrier's own iam block names its uri-path. */
+export interface LoadCarrier {
+  readonly title?: string;
+  readonly text:   string;
+}
+
+/** LOAD — bring external content from sourceUri into toBag. Mints fresh changeId.
+ *  `sourceUri` carries provenance for the audit trail; the CONTENT rides in
+ *  `carriers` (islands hold no fetch capability — web3-only law: no reach-out). */
 export interface LoadAction extends ResidencyActionBase {
   readonly verb:        "LOAD";
   readonly sourceUri:   string;
   readonly toBag:       string;
   readonly changeId:    string;
+  readonly carriers?:   readonly LoadCarrier[];
 }
 
 export type ResidencyAction =
@@ -166,6 +178,7 @@ interface ResidencyArgs {
   readonly bag?:         string;
   readonly "source-uri"?: string;
   readonly "change-id"?:  string;
+  readonly carriers?:    readonly LoadCarrier[];
 }
 
 /** Encode a ResidencyAction's verb-specific fields into the JSON args bag. */
@@ -188,6 +201,7 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
         "source-uri": action.sourceUri,
         "to-bag":     action.toBag,
         "change-id":  action.changeId,
+        ...(action.carriers ? { carriers: action.carriers } : {}),
       };
   }
 }
@@ -234,7 +248,24 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
   const toBag     = str("to-bag");
   const changeId  = str("change-id");
   if (!sourceUri || !toBag || !changeId) return null;
-  return { ...base, verb: "LOAD", sourceUri, toBag, changeId };
+
+  // Optional carriers — each MUST hold a non-empty text; a malformed carrier
+  // rejects the whole action (no partial-trust ingest).
+  const rawCarriers = args["carriers"];
+  let carriers: LoadCarrier[] | undefined;
+  if (rawCarriers !== undefined) {
+    if (!Array.isArray(rawCarriers)) return null;
+    carriers = [];
+    for (const c of rawCarriers) {
+      if (!c || typeof c !== "object") return null;
+      const text  = (c as Record<string, unknown>)["text"];
+      const title = (c as Record<string, unknown>)["title"];
+      if (typeof text !== "string" || text.length === 0) return null;
+      if (title !== undefined && typeof title !== "string") return null;
+      carriers.push({ ...(typeof title === "string" && title ? { title } : {}), text });
+    }
+  }
+  return { ...base, verb: "LOAD", sourceUri, toBag, changeId, ...(carriers ? { carriers } : {}) };
 }
 
 // ── URI predicates (compose with verb-tiddler URI grammar) ─────────────────

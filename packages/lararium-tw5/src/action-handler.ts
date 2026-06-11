@@ -37,13 +37,14 @@ import type {
   LarTiddlerRecord,
   ChangeOrigin,
   Verb,
-  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction,
+  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction,
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
+import { memeticWikitextDeserializer } from "./deserializer.js";
 
 // ── Options + registration ─────────────────────────────────────────────────
 
@@ -127,11 +128,39 @@ async function executeAction(action: ResidencyAction, composite: CompositeStore)
     case "MOVE":  return executeMove(action, composite);
     case "CLEAR": return executeClear(action, composite);
     case "DROP":  return executeDrop(action, composite);
-    case "LOAD":  throw new Error(
-      "LOAD handler not yet implemented — external content fetch + validation belongs to a later sprint. " +
-      "The verb-tiddler signal validates correctly; the dispatch fails loudly here rather than silent no-op."
+    case "LOAD":  return executeLoad(action, composite);
+  }
+}
+
+/**
+ * LOAD — land operator-supplied carriers into toBag. The island never fetches:
+ * the operator gesture (which holds the disk grant) sends content WITH the
+ * verb; `sourceUri` rides as audit provenance only. Each carrier decomposes at
+ * the memetic-wikitext membrane (FFZ: parent + ahu-slot children), and every
+ * resulting record lands under the action's fresh changeId.
+ */
+async function executeLoad(action: LoadAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+  const carriers = action.carriers ?? [];
+  if (carriers.length === 0) {
+    throw new Error(
+      "LOAD: no carriers — the operator gesture supplies content with the verb " +
+      "(islands hold no fetch capability; source-uri carries provenance, not an address to dereference)",
     );
   }
+  const titles: string[] = [];
+  for (const carrier of carriers) {
+    const fieldsList = memeticWikitextDeserializer(carrier.text, { title: carrier.title ?? "" });
+    for (const fields of fieldsList) {
+      const title = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
+      if (!title) {
+        throw new Error("LOAD: carrier produced a record without a title — supply carrier.title or an iam uri-path");
+      }
+      const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
+      await landInBag(composite, action.toBag, record, action.changeId, origin(action));
+      titles.push(title);
+    }
+  }
+  return { sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId, count: titles.length, titles };
 }
 
 function origin(action: ResidencyAction): ChangeOrigin {
