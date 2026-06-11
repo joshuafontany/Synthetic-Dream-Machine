@@ -197,7 +197,10 @@ export type EpochPinState =
  * Iterating bottom→top (reverse) gives the addLayer order for CompositeStore.
  */
 export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
-  return [
+  // Deduped: when the wiki's OWN bag coincides with a structural slot (the
+  // @lares-as-wiki quine — slug "lares" → wikiBagUri = LARES_BAG), the slot
+  // lays ONCE, at its highest-priority position.
+  return [...new Set<SlotUri>([
     TEMP_BAG,
     DRAFT_BAG,
     PERSONAL_BAG,
@@ -205,7 +208,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     ...(r.libraryBags ?? []),
     LARES_BAG,
     LARARIUM_BAG,
-  ];
+  ])];
 }
 
 // Write routing happens via the in-wiki `lar:///ha.ka.ba/@lararium/config/bag-paths` cascade

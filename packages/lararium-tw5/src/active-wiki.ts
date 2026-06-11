@@ -1,5 +1,6 @@
 import {
   ADMIN_BAG_ID,
+  LARES_DOC_URI,
   CompositeStore,
   type LarTiddlerRecord,
   type LarTiddlerStore,
@@ -63,13 +64,17 @@ export function planActiveWikiSlot(opts: {
   wikiSlug: string;
   identityDid: string;
 }): ActiveWikiSlotPlan {
-  const wikiKey = wikiLarUri(opts.wikiSlug);
+  // The @lares-as-wiki quine: slug "lares" opens the protocol-invariant bag
+  // ITSELF as the primary write layer (operator edits the personality at the
+  // hearth). Its doc is operator-minted on the invariant plane — the slot key
+  // names that bag directly, never a registry-resolved @lararium/wikis/ doc.
+  const wikiKey = opts.wikiSlug === "lares" ? LARES_DOC_URI : wikiLarUri(opts.wikiSlug);
   return {
     wikiSlug: opts.wikiSlug,
     wikiKey,
     wikiBagId: wikiKey,
     draftBagId: wikiDraftLarUri(opts.wikiSlug),
-    draftOracleTitle: `${wikiKey}/drafts/${encodeURIComponent(opts.identityDid)}`,
+    draftOracleTitle: `${wikiLarUri(opts.wikiSlug)}/drafts/${encodeURIComponent(opts.identityDid)}`,
     vesselId: `${opts.hostId}:${opts.wikiSlug}`,
   };
 }

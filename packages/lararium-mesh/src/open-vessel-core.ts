@@ -144,13 +144,20 @@ export async function mountWikiSlot(
   recipe: VesselRecipe,
   composite: CompositeStore,
   slot: { wikiKey: string; wikiBagId: string; draftOracleTitle: string; draftBagId: string },
+  /** Pre-resolved wiki doc — the @lares-as-wiki quine seats the operator-minted
+   *  invariant doc as the write layer (its oracle lives on the @lararium doc,
+   *  never in @catalog — no cross-plane resolution, no second mint). */
+  presetWikiHandle?: DocHandle<LarDoc>,
 ): Promise<{ wikiHandle: DocHandle<LarDoc>; draftHandle: DocHandle<LarDoc> }> {
   const { repo, catalogHandle, waitHandle } = recipe;
-  const wikiHandle = await resolveOracleDoc(
+  const wikiHandle = presetWikiHandle ?? await resolveOracleDoc(
     catalogHandle, slot.wikiKey,
     (url) => url ? waitHandle<LarDoc>(url as AutomergeUrl, () => blankDoc(repo)) : blankDoc(repo),
     "vessel-boot",
   );
+  // When the wiki's own bag coincides with an already-mounted substrate layer
+  // (the quine), the read-only substrate layer yields to the writable one.
+  if (composite.hasBag(slot.wikiBagId)) composite.removeLayer(slot.wikiBagId);
   composite.addLayer({ bagId: slot.wikiBagId, store: new AutomergeDocStore(wikiHandle, slot.wikiBagId), writable: true, defaultWritable: true });
 
   const draftHandle = await resolveOracleDoc(

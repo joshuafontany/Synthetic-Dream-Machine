@@ -14,7 +14,7 @@
  */
 
 import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselRecipe, VesselCoreAssembly } from "@lararium/mesh";
-import { assembleVessel, mountWikiSlot } from "@lararium/mesh";
+import { assembleVessel, mountWikiSlot, LARES_DOC_URI } from "@lararium/mesh";
 import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from "./vessel-steps.js";
 import { VerbTable } from "./verb-dispatcher.js";
 
@@ -95,7 +95,10 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   o.afterAdmin?.(admin, assembly);
 
   // ── wiki-slot layers (mesh) ──
-  const { wikiHandle, draftHandle } = await mountWikiSlot(o.keel, assembly.composite, slot);
+  // The @lares-as-wiki quine: when the active slug opens the invariant bag
+  // itself, seat the operator-minted doc as the write layer.
+  const presetWiki = slot.wikiBagId === LARES_DOC_URI ? assembly.laresHandle ?? undefined : undefined;
+  const { wikiHandle, draftHandle } = await mountWikiSlot(o.keel, assembly.composite, slot, presetWiki);
   emit("wiki-ready");
   emit("vessel-ready");
 

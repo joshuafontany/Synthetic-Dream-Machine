@@ -9,12 +9,12 @@
  *   ws://localhost:8080/ws  → Automerge sync protocol
  *
  * Usage:
- *   node dist/main.js [--port 8080] [--storage .lararium] [--wiki altar-fire] [--root /alt/root]
+ *   node dist/main.js [--port 8080] [--storage .lararium] [--wiki lares] [--root /alt/root]
  *
  * Environment:
  *   LAR_PORT     — WS server port (default 8080)
  *   LAR_STORAGE  — storage directory (default {root}/.lararium)
- *   LAR_WIKI     — wiki id (default altar-fire)
+ *   LAR_WIKI     — wiki id (default lares — the @lares-as-wiki quine)
  *   LAR_CATALOG  — existing catalog automerge URL to join (optional)
  *   LAR_ROOT     — alternate repo root for all mirror paths (default: monorepo root).
  *                  Set to an isolated test dir so promote/sync writes never touch
@@ -51,7 +51,7 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     port:       Number(get("--port", "LAR_PORT", "8080")),
     storageDir,
     genesisDir,
-    wikiId:     get("--wiki", "LAR_WIKI", "altar-fire"),
+    wikiId:     get("--wiki", "LAR_WIKI", "lares"),
     rootDir,
     catalogUrl: process.env["LAR_CATALOG"] ?? null,
   };
