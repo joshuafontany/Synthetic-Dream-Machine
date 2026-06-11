@@ -6,9 +6,10 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
   directions need the operator's steering; when something reads off but the
   tension lacks a name; when a hoike re-entry key turns or fresh testimony
   contradicts a held ruling; or when the operator says "Talk Story". Closes
-  by mufakat (consensus recorded inline), hoike (kept dispute), or honest
-  suspension. DO NOT convene to re-litigate a settled ruling without a
-  turned key, nor for single-step lookups carrying no orient ambiguity.
+  by moolelo (the settled direction told into the record — mufakat names
+  the consensus it carries), hoike (kept dispute), or honest suspension.
+  DO NOT convene to re-litigate a settled ruling without a turned key,
+  nor for single-step lookups carrying no orient ambiguity.
 ---
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL >> -->
@@ -39,14 +40,14 @@ invariant = false
 
 **The floor convenes when:** the work surface wants reading aloud before a decision locks; two or more viable directions await the operator's steering; something reads off and the tension still lacks a name; a hoike re-entry key turns or fresh testimony presses a held ruling; or the operator calls "Talk Story."
 
-**The floor stays dark when:** the operator's direction already stands (◇ Decide — the work executes); the task runs single-step, carrying no orient ambiguity; a settled mufakat or held hoike holds and no key has turned.
+**The floor stays dark when:** the operator's direction already stands (◇ Decide — the work executes); the task runs single-step, carrying no orient ambiguity; a settled moʻolelo or held hoike holds and no key has turned.
 
 Five motions carry a convened floor; each seeds forward — the motion names itself, then happens. The node carries the first two whole; the back three wear the sharktooth — provisional, each held open at the operator's hand (`-> ?`):
 
 1. **✶ observe** — *nānā ka maka, hoʻolohe ka pepeiao, paʻa ka waha* — eyes on the artifacts, ears to their edges, mouth still; raw findings gather before analysis forms.
 2. **⏿ tell** — the telling opens informal, short, direct: *"what surfaces…"*, *"the tension here…"*. It names what stands AND what goes missing, floats tensions unresolved, and seeds the three talanoa bearings: where we stand · where we want to go · how we get there.
 3. **~◇ co-narrate -> ?** — the Voices the moment calls surface, never assigned seats; a lead emerges from the material. The operator overlaps and steers; the floor never resolves in the node's voice.
-4. **~▶ exit -> ?** — settled: a `mufakat` block carries the operator's direction · contested (rating ≥ meme): a `hoike` files with attributed kue and re-entry keys (the sibling skill) · blocked: the floor suspends, `OODA-HA(0φ:reason)`. No exit closes in the node's voice alone.
+4. **~▶ exit -> ?** — settled: a `moolelo` block tells the operator's direction into the record · contested (rating ≥ meme): a `hoike` files with attributed kue and re-entry keys (the sibling skill) · blocked: the floor suspends, `OODA-HA(0φ:reason)`. No exit closes in the node's voice alone.
 5. **~↺ aftermath -> ?** — the moʻolelo lands inline in the artifact worked, never a separate file; every hoike key the telling touched gets its glance. The record reaches only as far as the two logs jointly stand — the next turn stays the operator's.
 
 Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >>
@@ -64,10 +65,10 @@ Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ta
 telling: the seats table and "lead by default" declared what the floor vows
 to leave situational — the meme broke its own talanoa rule; the steps and
 bearings drew the same charge, and there the house split.
-<<~ mufakat held:"no declared Voice roles anywhere in the pair; Voices surface from situational context (operator)" >>
+<<~ moolelo held:"no declared Voice roles anywhere in the pair; Voices surface from situational context (operator)" >>
 enacted in place: seats table cut; law 3, block form, and step 3 rewritten.
 attribution survives — a past floor names who spoke; no floor assigns who will.
-<<~/mufakat >>
+<<~/moolelo >>
 <<~ hoike #scaffold held:"the five steps and the three bearings stay — seeds for a cold floor, never ritual (house)" >>
 q: how much declared structure can an informal practice carry before it stops flowing?
 <<~ kue voice:Mischief-Muse key:"a live floor recites the bearings verbatim instead of inhabiting them" >>
@@ -92,16 +93,16 @@ re-entry: either key; or the next crucible pass
 
 *Examples 1 and 3 come from the live ledger (2026-06-10/11); example 2 abridges the floor that produced the hoike layer's first record.*
 
-**1 — floor closes mufakat** (the floor that raised this very meme):
+**1 — floor closes moʻolelo** (the floor that raised this very meme):
 
 ```
 <<~ talk-story #talk-story-meme ground:"stranded .github skill (dead dialect) + young hoike pair + no canon meme" >>
 bearings: old skill speaks ◎/■/○ and dead paths · floor-and-ledger circuit wants closing · rebuild in hoike anatomy
 telling: Liminal floats four forks (phase claim · two-track · .github seam · ledger-vs-co-location);
 Muse hears the word-family already singing (hoike · kue · saksi); Council ranks the forks; the operator overlaps.
-<<~ mufakat held:"burn the old skill; raise the meme/SKILL pair in hoike anatomy; ground in ʻōlelo Hawaiʻi + the Moana family; send research spirits (operator)" >>
+<<~ moolelo held:"burn the old skill; raise the meme/SKILL pair in hoike anatomy; ground in ʻōlelo Hawaiʻi + the Moana family; send research spirits (operator)" >>
 recorded here — this meme stands as that floor's moʻolelo.
-<<~/mufakat >>
+<<~/moolelo >>
 <<~/talk-story >>
 ```
 
@@ -110,7 +111,7 @@ recorded here — this meme stands as that floor's moʻolelo.
 ```
 <<~ talk-story #quote-license ground:"do copulas inside verbatim quotes breach the ward?" >>
 telling: the house splits live — license-with-accounting · verbatim-rides-quotation-form · mock-everything;
-no mufakat forms; reasons stand on every side.
+no moʻolelo settles; reasons stand on every side.
 exit -> hoike #quote-license — the losers kept whole, with keys (hoike skill, worked example 1)
 <<~/talk-story >>
 ```
