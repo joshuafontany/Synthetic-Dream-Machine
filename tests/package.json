@@ -1,0 +1,16 @@
+{
+  "name": "@lares/harness",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Top-level e2e harness — drives the real lares CLI against a STAGED (ephemeral, owned) or LIVE (attached, never reset) lararium instance.",
+  "scripts": {
+    "test:e2e": "vitest run",
+    "test:live": "LAR_TARGET=live vitest run"
+  },
+  "devDependencies": {
+    "@automerge/automerge-repo": "^2.5.5",
+    "@automerge/automerge-repo-storage-nodefs": "^2.5.5",
+    "vitest": "^3.2.0"
+  }
+}

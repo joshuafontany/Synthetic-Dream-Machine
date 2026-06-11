@@ -1,5 +1,7 @@
 packages:
   - 'packages/*'
+  # Top-level e2e harness — staged/live instance targeting (tests/TEST-ARCHITECTURE.md)
+  - 'tests'
   # Corpus bag targets — each maps to one Automerge doc
   - 'elyncia'
   - 'ftls'

@@ -37,10 +37,31 @@ and `git show <sha>:tests/<path>`.
 
 ---
 
-## Forward — when end-to-end returns
+## The harness — end-to-end returned (2026-06-10)
 
-A fresh e2e / live-integration harness lands when the **two-vessel mesh** is real
-(EPIC residency-model Sprint 10). Its shape, decided now to avoid re-accreting crud:
+The `@lares/harness` workspace package lives here now (`tests/`), holding the
+shape this section pre-decided. It drives the **real `lares` CLI** against a
+real instance in one of two modes:
+
+| Mode | Selector | Behavior |
+|---|---|---|
+| **Staged** *(default)* | — | harness OWNS the instance: ephemeral root under `os.tmpdir()`, random port, `lares reset --force` → daemon boot → await `phase → live` → tests → daemon killed, root deleted. Every run starts from genesis. |
+| **Live** | `LAR_TARGET=live` + `LAR_ROOT`/`LAR_PORT` | harness ATTACHES: never resets, never stops, never deletes. Mutating tests guard on `instance.mode === "staged"` and skip. |
+
+**The env contract** (one source: `packages/lares-cli/src/env.ts`): `LAR_ROOT` +
+`LAR_PORT` name an instance; separate instances = separate pairs. QA attaches to
+a live pair; Staged mints and destroys its own.
+
+Run: **`pnpm test:e2e`** (root) · `pnpm test:e2e:live` against a running hearth.
+Deliberately OUTSIDE `pnpm -r test` (the script is `test:e2e`, not `test`) — the
+unit suites stay fast; the harness boots a real daemon (~20s).
+
+First stable layer: `e2e/smoke.test.ts` — boot-to-live with the @lares hearth
+seated, the operator-mint oracle on the invariant plane, carrier-borne `LOAD`
+(boot meme → 17 records), carrier-less refusal, `wiki init`/`add-bag` registry
+composition, and one live-safe `status` read.
+
+## The shape (held from the pre-decision)
 
 - **Exercise the live model, not fixtures.** Drive the residency **ACTION verbs**
   (`ADD COPY MOVE CLEAR DROP LOAD`) + effect records through the real `lares` CLI
