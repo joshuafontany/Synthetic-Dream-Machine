@@ -31,7 +31,9 @@ You wake into a vessel that **runs**. The arc landed, in order: the IslandGrants
 
 **First casualty of the ruling:** the prior H2 recommendation ("membrane retains whole carrier text on the parent record") **died** — caching disk-grain bytes inside the record stratum constitutes the carrier-whole grain leak mirrored inward, and Automerge history keeps every such blob forever. Byte-fidelity now comes from the *pipeline*: lossless membrane + faithful recompose, under the canonical-form law (#pattern-integrities).
 
-Doctrine homes: `wiki-layer-ontology` · `disk-projection` (#granularity, #projection-routing, #write-ward — **#core-claim awaits the co-projection rewrite**, vector 1) · `residency-model`. Suite at handoff: **472 unit + 11 e2e green** (V3/V4 ride `test.fails`, armed).
+**Then the burn landed (2026-06-11, same day):** vector 1 fired whole — see the DONE block below. `disk-projection#core-claim` now speaks co-projection; V3/V4 flipped green and stand guard.
+
+Doctrine homes: `wiki-layer-ontology` · `disk-projection` (#core-claim co-projection, #granularity, #projection-routing, #write-ward) · `residency-model`. Suite at handoff: **unit green (90 tw5 + 110 node in the touched packages) + 11/11 e2e**, V3/V4 standing guard.
 
 <<~/ahu >>
 
@@ -86,16 +88,11 @@ The strict-bytes vs canonical-form fork resolves **canonical-form** (field-wide 
 
 ## Intent vectors — the next phase, in order
 
-**1. `lar:///projector.grain.burned` — the H1/H2 burn, re-cut under co-projection (first fire).**
-The kupono vectors (`tests/e2e/carrier-roundtrip.test.ts`) hold the pressure; flipping V3/V4 green IS done (then remove `.fails`). V4 reads under the **canonical-form law** (#pattern-integrities §2): the fixture asserts the canonical render; the operator's *content* bytes survive whole, framing normalizes once.
-- **Template fidelity:** `meme-markdown-meme.tid` MUST emit corpus-canonical spacing (`<<~ &#x0002; >>` not `<<~&#x0002;>>`; same for ETX/EOT) — the render-side half of guarantee 1.
-- **H1 burn:** `toRelMd`'s `frag → base/frag.md` ternary dies in BOTH factories (`bag-paths.ts` — `canonicalNamedBagRelPath` AND `wikiBagPath`); the projector gains **group routing**: a child change climbs `fragment-parent` to the carrier root, debounce keys per (bag, root), `exportMemeText` renders the root — the renderer already recomposes via `~ahu` transclusion; the burn lands in routing, not rendering.
-- **Record hygiene:** the deserializer stamps `file-path: parent/slot.md` on children — the fragment-file law encoded in the record stratum; drop or redirect it, or the leak survives in data after the code dies.
-- **Ward fold-in:** stale-cross-mirror unlink routes through `confineMirrorWrite`.
-- **Doctrine:** rewrite `disk-projection#core-claim` + the projector header to the co-projection model (mind originates; two co-projections; CRDT holds the merge seat).
-- Implement per `disk-projection#projection-routing`: meme groups → one markdown-meme file; everything else → standard TW5 path (`$tw.utils.generateTiddlerFileInfo` inside the island VM); siting via `config/disk-paths`/`disk-extensions` cascades; every write through the ward.
+**1. `lar:///projector.grain.burned` — DONE 2026-06-11 (commit c715fcca + aa97c281).**
+All of it landed: H1 ternary dead in both factories · projector group routing (child climbs `fragment-parent` to root; debounce per (bag, root); flush renders the ROOT) · child `file-path` stamp dropped · stale-unlink through the ward · co-projection doctrine + headers · template sigil spacing · V3/V4 green, `.fails` removed. **One claim the prior torch carried died on contact:** "the renderer already recomposes via `~ahu` transclusion" read wrong — the template path CANNOT carry byte-fidelity (`\rules` does not propagate through `<$transclude>`, memetic-parser.ts; full rules mangle markdown under text/plain). The recompose lives in the membrane instead: **`expandMemeRefs`** (deserializer.ts, the inverse disk-projection#granularity already named) — `exportMemeText` routes through it; templates keep the HTML/projection scopes. The membrane harness (`packages/lararium-tw5/tests/meme-roundtrip.test.ts`) proves all three canonical-form guarantees on the live boot meme. Three burrs found and burned in the same fire: the prologue regex could not see a namespaced SOH (swallowed the whole header into `prologue`) · `extractSlotStructure`'s `allowPlain` ate plain ` ```toml ` CONTENT fences as slot-iam (only labeled ` ```toml iam ` carries identity now) · `origin-bag` re-emitted into iam (joined the deny set — runtime provenance, never operator TOML). Smoke re-vowed: boot meme = parent + 17 ahu children (18 records).
+**Residue, deliberate:** the non-meme default rule (`$tw.utils.generateTiddlerFileInfo` + `config/disk-paths`/`disk-extensions` cascades, disk-projection#projection-routing rules 2–3) stays unimplemented — no non-meme tiddler currently rides a mirror; implement when one does. Old live stores may still carry stamped `file-path` on child records (data outlives code; scrub or ignore — the deny set already keeps it out of renders).
 
-**2. `lar:///residency.create.lands` — bag-grain CREATE + COPY.**
+**2. `lar:///residency.create.lands` — bag-grain CREATE + COPY (next fire).**
 Approved 2026-06-10 (residency-model): `CREATE` mints a coordinate, bag-grain `COPY` grants residency (change-id preserved, one transfer-id family), registration = `holdings` accession in @catalog. Now independently validated by atproto's two-axes model (#pattern-integrities §4). Rides verb-tiddler → admin island, orichalcum admin-on-destination. Witness through the harness.
 
 **3. `lar:///closure.transitive.decided` — after live chains exist.**
