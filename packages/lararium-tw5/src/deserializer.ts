@@ -23,8 +23,10 @@ module-type: tiddlerdeserializer
  *   Parent text model: ahu definition blocks → kahea references (children authoritative).
  *
  * Outgoing (wiki → disk):
- *   expandMemeRefs — registered on $tw.lararium; called by sync-adaptor.
- *   Inverts the incoming transform: reads child bodies, reconstructs definition form.
+ *   expandMemeRefs — registered on $tw.lares by the nalu-engine startup
+ *   module (island law: if it CAN happen in the TW5 Wiki VM causal island,
+ *   it MUST happen there). Inverts the incoming transform: reads child
+ *   bodies, reconstructs the whole definition-form carrier.
  */
 
 import { PARSE_WARNING_TAG, stableLarUri } from "@lararium/mesh/lar-uris";
@@ -549,9 +551,9 @@ export function splitBodyTiddler(
 
 export type FieldsReader = (title: string) => TiddlerFields | undefined;
 
-// Mirrors macros/lar-iam-block DENY: runtime/structural fields never re-emit
-// into the iam fence — they live in the envelope, the record stratum, or the
-// VM, not in the operator's TOML.
+// The single deny-set (the macro twin burned 2026-06-11, lar:///oldest.holder.named):
+// runtime/structural fields never re-emit into the iam fence — they live in
+// the envelope, the record stratum, or the VM, not in the operator's TOML.
 const IAM_DENY: ReadonlySet<string> = new Set([
   "title", "text", "type", "tags", "created", "modified", "revision", "bag",
   "slot", "fragment-parent", "preamble", "postamble", "prologue",

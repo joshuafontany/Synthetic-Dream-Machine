@@ -11,13 +11,15 @@
  *   GROUP (the projector routes to the carrier root), never its own file.
  *
  *   The retired per-node law (every record renders its own file through the
- *   markdown-meme template) burned with hole H1. The template pipeline
- *   (meme-markdown-meme + sigil cascades) still serves the HTML and
- *   projection scopes; the carrier definition form recomposes in the
- *   membrane, where the round-trip harness proves parse∘render ≡ records.
- *   Wikifying the text field cannot carry byte-fidelity: `\rules` does not
- *   propagate through `<$transclude>` (memetic-parser.ts, Jermolene #6712),
- *   and the full ruleset mangles markdown under text/plain render.
+ *   markdown-meme template) burned with hole H1; the whole markdown-meme
+ *   template family followed it (2026-06-11) once no caller remained — the
+ *   HTML templates serve the live story river; the projection-snapshot mode
+ *   gets built fresh when a consumer exists. The carrier definition form
+ *   recomposes in the membrane (expandMemeRefs, also on $tw.lares), where
+ *   the round-trip harness proves parse∘render ≡ records. Wikifying the
+ *   text field cannot carry byte-fidelity: `\rules` does not propagate
+ *   through `<$transclude>` (memetic-parser.ts, Jermolene #6712), and the
+ *   full ruleset mangles markdown under text/plain render.
  *
  * Canonical-form law (handoff #pattern-integrities §2): idempotent render;
  * framing (iam order/alignment, sigil spacing, block margins) normalizes

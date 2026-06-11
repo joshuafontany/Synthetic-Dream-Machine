@@ -1,5 +1,0 @@
-title: lar:///config/Lar/AkaTemplate/markdown-meme
-tags: lar:///ha.ka.ba/tags/aka-template
-list-before: lar:///config/Lar/AkaTemplate/html
-
-[<lar-export-scope>match[markdown-meme]then[lar:///ha.ka.ba/@lararium/templates/aka/markdown-meme]]

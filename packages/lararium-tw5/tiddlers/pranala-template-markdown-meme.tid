@@ -1,8 +1,0 @@
-title: lar:///ha.ka.ba/@lararium/templates/pranala/markdown-meme
-type: text/x-memetic-wikitext
-
-<$list filter="[<pranala-body>!is[blank]]" variable="_" emptyMessage="<<~ pranala <$list filter='[<pranala-slot>!is[blank]]' variable='_'><<pranala-slot>> </$list><<pranala-from>> -> <<pranala-to>><$list filter='[<pranala-family>!is[blank]]' variable='_'> family:<<pranala-family>></$list><$list filter='[<pranala-role>!is[blank]]' variable='_'> role:<<pranala-role>></$list> >>"><<~ pranala <$list filter="[<pranala-slot>!is[blank]]" variable="_"><<pranala-slot>> </$list><<pranala-from>> -> <<pranala-to>> >>
-
-<<pranala-body>>
-
-<<~/pranala >></$list>

@@ -1,9 +1,0 @@
-title: lar:///ha.ka.ba/@lararium/templates/lib/emit-section
-type: text/vnd.tiddlywiki
-
-\define emit-section(field)
-<$list filter="[<currentTiddler>has[$field$]]" variable="_"><$text text={{{[<currentTiddler>get[$field$]]}}}/><$text text="
-
-"/>
-</$list>
-\end

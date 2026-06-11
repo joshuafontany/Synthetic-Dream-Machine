@@ -1,5 +1,0 @@
-title: lar:///config/Lar/PranalaHeaderTemplate/markdown-meme
-tags: lar:///ha.ka.ba/tags/pranala-header-template
-list-before: lar:///config/Lar/PranalaHeaderTemplate/html
-
-[<lar-export-scope>match[markdown-meme]then[lar:///ha.ka.ba/@lararium/templates/pranala-header/markdown-meme]]

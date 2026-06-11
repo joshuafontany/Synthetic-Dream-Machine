@@ -1,5 +1,0 @@
-title: lar:///config/Lar/LoulouTemplate/markdown-meme
-tags: lar:///ha.ka.ba/tags/loulou-template
-list-before: lar:///config/Lar/LoulouTemplate/html
-
-[<lar-export-scope>match[markdown-meme]then[lar:///ha.ka.ba/@lararium/templates/loulou/markdown-meme]]

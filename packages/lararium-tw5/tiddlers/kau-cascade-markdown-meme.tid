@@ -1,5 +1,0 @@
-title: lar:///config/Lar/KauTemplate/markdown-meme
-tags: lar:///ha.ka.ba/tags/kau-template
-list-before: lar:///config/Lar/KauTemplate/html
-
-[<lar-export-scope>match[markdown-meme]then[lar:///ha.ka.ba/@lararium/templates/kau/markdown-meme]]

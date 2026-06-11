@@ -14,6 +14,8 @@ export interface LaresNaluAPI {
   flushNalu(budget?: number): void;
   isApplyingNalu(): boolean;
   naluPending(): number;
+  /** The recompose inverse on the VM surface — one carrier whole from its record group. */
+  expandMemeRefs(memeUri: string): string | null;
 }
 
 export interface LaresTw5Extension {
