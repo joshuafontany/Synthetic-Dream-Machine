@@ -35,6 +35,7 @@ import {
   findTopLevelAhuBlocks,
   composeSlotPath,
 } from "./meme-ast/ahu-scan.js";
+import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 export type { GrammarRules } from "./meme-ast/types.js";
@@ -94,7 +95,8 @@ export function memeticWikitextDeserializer(
   // `<<~ ? -> uri >>` pranala-headers, or later STX/ETX sentinels (the old
   // any-control-char form swallowed the whole header into `prologue` when
   // the SOH carried a namespace it could not see).
-  const sohIdx = text.search(/<<~[^&\n]*&#x(?:0001|0011);/);
+  const sohM = maskedExec(text, /<<~[^&\n]*&#x(?:0001|0011);/);
+  const sohIdx = sohM ? sohM.index : -1;
   const prologue = (closes.length > 0 && sohIdx > 0)
     ? text.slice(0, sohIdx)
     : "";
@@ -105,8 +107,7 @@ export function memeticWikitextDeserializer(
   // forward to the next `>>`.
   const etxOpenRe = /<<~(?:\s*⊙)?\s*&#x000[34];/g;
   let lastEtxEnd = -1;
-  let etxMatch: RegExpExecArray | null;
-  while ((etxMatch = etxOpenRe.exec(text)) !== null) {
+  for (const etxMatch of maskedExecAll(text, etxOpenRe)) {
     const closeIdx = text.indexOf(">>", etxMatch.index + etxMatch[0].length);
     if (closeIdx >= 0) lastEtxEnd = closeIdx + 2;
   }
@@ -129,10 +130,15 @@ export function memeticWikitextDeserializer(
     }
     // Extract namespace prefix glyph(s) from SOH line (e.g. "ॐ ँ", "⊙").
     // Stored only when non-empty; template emits it before the control char.
-    const nsM = /^<<~([^&\n]*)&#x(?:0001|0011)/.exec(ev.fullText);
+    // The Kapu SOH variant (&#x0011; DC1) carries its own semantics — the
+    // code survives on the parent as `carrier-soh`, never normalized away.
+    const nsM = /^<<~([^&\n]*)&#x(0001|0011)/.exec(ev.fullText);
     const namespace = nsM?.[1]?.trim() ?? "";
     if (namespace.length > 0 && tiddlers.length > 0) {
       for (const t of tiddlers) t["namespace"] = namespace;
+    }
+    if (nsM?.[2] === "0011" && tiddlers.length > 0) {
+      tiddlers[0]!["carrier-soh"] = "0011";
     }
     // Only store postamble when it has real content (not just trailing whitespace).
     // A whitespace-only postamble (e.g. a single trailing \n after EOT) would be
@@ -162,7 +168,6 @@ export function memeticWikitextDeserializer(
 // Structural marker patterns — strip these from parent text at ingest.
 const SOH_LINE_RE = /^<<~(?:[^>]|->)*&#x(?:0001|0011);(?:[^>]|->)*>>\n?/;
 const STX_LINE_RE = /<<~(?:[^>]|->)*&#x0002;(?:[^>]|->)*>>\n?/;
-const ETX_TAIL_RE = /\n?<<~(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>[\s\S]*$/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");
@@ -185,11 +190,14 @@ function splitMemeToTiddlers(
   const warnings: string[] = [];
 
   // Strip structural markers to isolate header (SOH→STX) and body (STX→ETX).
-  const stripped = text
-    .replace(SOH_LINE_RE, "")   // remove SOH line
-    .replace(ETX_TAIL_RE, "");  // remove ETX and everything after
+  // Fence-mask law: a QUOTED control sigil (in a code fence or inline code)
+  // never frames the carrier — before the mask, a fenced ETX mention
+  // truncated everything after it (real corpus loss, found 2026-06-11).
+  const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
+  const etxM = maskedExec(noSoh, /\n?<<~(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/);
+  const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
 
-  const stxM = STX_LINE_RE.exec(stripped);
+  const stxM = maskedExec(stripped, STX_LINE_RE);
   const headerRegion = stxM ? stripped.slice(0, stxM.index) : stripped;
   // Trim body edges at ingest. The export template owns the visual padding:
   // one blank line after STX and one blank line before ETX. Keeping the stored
@@ -337,7 +345,10 @@ const IAM_FENCE_RE   = /```toml[ \t]+iam[ \t]*\n([\s\S]*?)```\n?/;
 const PLAIN_FENCE_RE = /```toml[ \t]*\n([\s\S]*?)```\n?/;
 
 function findIamFence(text: string, allowPlain = false): { content: string; start: number; end: number } | null {
-  const m = IAM_FENCE_RE.exec(text) ?? (allowPlain ? PLAIN_FENCE_RE.exec(text) : null);
+  // The iam fence IS a fence — accept a match starting AT a span opener,
+  // reject one buried inside another span (a ````-quoted teaching example).
+  const m = maskedExec(text, IAM_FENCE_RE, undefined, true)
+    ?? (allowPlain ? maskedExec(text, PLAIN_FENCE_RE, undefined, true) : null);
   if (!m) return null;
   return { content: m[1] ?? "", start: m.index, end: m.index + m[0].length };
 }
@@ -399,11 +410,11 @@ function extractSlotStructure(
     remainder = bodyText.slice(iamM.end);
   }
 
-  // Find LAST kahea ref — trailing prose becomes postamble.
+  // Find LAST kahea ref — trailing prose becomes postamble. Quoted refs
+  // (fenced/inline-code) stay content, never structure (fence-mask law).
   const refRe = /<<~\s*kahea\s+ahu\s+#[\w-]+\s*>>/g;
   let lastEnd = -1;
-  let m: RegExpExecArray | null;
-  while ((m = refRe.exec(remainder)) !== null) {
+  for (const m of maskedExecAll(remainder, refRe)) {
     lastEnd = m.index + m[0].length;
   }
 
@@ -546,7 +557,7 @@ const IAM_DENY: ReadonlySet<string> = new Set([
   "slot", "fragment-parent", "preamble", "postamble", "prologue",
   "header-text", "namespace",
   "source-file", "synced-at", "disk-projection", "lar-generated",
-  "ahu-parent", "ahu-slot", "realm-origin", "origin-bag",
+  "ahu-parent", "ahu-slot", "realm-origin", "origin-bag", "carrier-soh",
 ]);
 
 // Children additionally drop ingest-stamped coordinates: `uri-path` is
@@ -579,9 +590,15 @@ function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
 
 const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+)\s*>>/g;
 
-/** Splice child definition blocks back over their kahea markers, full depth. */
+/**
+ * Splice child definition blocks back over their kahea markers, full depth.
+ * Quoted markers (fenced/inline-code) stay verbatim — the operator SHOWS
+ * the grammar there, the recompose never expands inside the mask.
+ */
 function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string): string {
-  return text.replace(KAHEA_AHU_REF_RE, (marker, slot: string) => {
+  const mask = fencedSpans(text);
+  return text.replace(KAHEA_AHU_REF_RE, (marker, slot: string, offset: number) => {
+    if (inMask(mask, offset)) return marker;
     const slotPath = composeSlotPath(fragmentPrefix, slot);
     const child = reader(rootUri + slotPath);
     if (!child) return marker;   // missing child: keep the marker — honest residue, never invented bytes
@@ -609,9 +626,10 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
 
   const str = (k: string): string => (typeof f[k] === "string" ? (f[k] as string) : "");
   const iam = emitIamToml(f, IAM_DENY);
+  const sohCode = f["carrier-soh"] === "0011" ? "&#x0011;" : "&#x0001;";
 
   let out = str("prologue");
-  out += `<<~ ${str("namespace")}&#x0001; ? -> ${memeUri} >>\n`;
+  out += `<<~ ${str("namespace")}${sohCode} ? -> ${memeUri} >>\n`;
   out += str("preamble");
   if (iam) out += "```toml iam\n" + iam + "```\n\n";
   out += expandRefs(reader, memeUri, "", str("header-text"));

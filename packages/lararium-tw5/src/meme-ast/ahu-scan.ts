@@ -13,6 +13,8 @@
  * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/ahu-scan
  */
 
+import { fencedSpans, maskedExecAll } from "./fence-mask.js";
+
 /**
  * Slot identifier — supports nested fragment paths via `/`-separated
  * segments per memetic-wikitext spec §nested-ahu and lar-uri.md §5.6.
@@ -58,15 +60,16 @@ export interface AhuBlock {
  * resolve by event order — opener emits before closer.
  */
 export function findTopLevelAhuBlocks(text: string): AhuBlock[] {
-  AHU_OPEN_RE.lastIndex  = 0;
-  AHU_CLOSE_RE.lastIndex = 0;
+  // Quoted sigils never open or close a block: a fenced or inline-code
+  // `<<~ ahu … >>` is the operator SHOWING the grammar, not using it
+  // (fence-mask law, 2026-06-11).
+  const mask = fencedSpans(text);
   const events: Array<{ kind: "open" | "close"; pos: number; end: number; slot: string }> = [];
-  let m: RegExpExecArray | null;
-  while ((m = AHU_OPEN_RE.exec(text)) !== null) {
-    events.push({ kind: "open", pos: m.index, end: AHU_OPEN_RE.lastIndex, slot: m[1] ?? "#" });
+  for (const m of maskedExecAll(text, AHU_OPEN_RE, mask)) {
+    events.push({ kind: "open", pos: m.index, end: m.index + m[0].length, slot: m[1] ?? "#" });
   }
-  while ((m = AHU_CLOSE_RE.exec(text)) !== null) {
-    events.push({ kind: "close", pos: m.index, end: AHU_CLOSE_RE.lastIndex, slot: "" });
+  for (const m of maskedExecAll(text, AHU_CLOSE_RE, mask)) {
+    events.push({ kind: "close", pos: m.index, end: m.index + m[0].length, slot: "" });
   }
   events.sort((a, b) => a.pos - b.pos);
 

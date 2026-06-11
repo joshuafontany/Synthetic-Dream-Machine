@@ -22,6 +22,9 @@
  * This module is isomorphic (no fs/DOM/TW5 dependencies).
  */
 
+import { fencedSpans, maskedExec } from "./meme-ast/fence-mask.js";
+import type { MaskSpan } from "./meme-ast/fence-mask.js";
+
 // ---------------------------------------------------------------------------
 // Event types
 // Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils
@@ -54,8 +57,17 @@ const AHU_CLOSE_RE = /<<~\/ahu\s*>>/;
 
 type Hit = { index: number; end: number; cap: string | undefined };
 
-function find(text: string, re: RegExp): Hit | null {
-  const m = re.exec(text);
+/**
+ * Fence-aware find (fence-mask law, 2026-06-11): quoted sigils never frame
+ * a carrier — a fenced `<<~ &#x0003; >>` in teaching text MUST NOT close
+ * the body. The parse cursor always rests outside quoted spans (a sigil
+ * inside a span never gets consumed), so masking `remaining` per call
+ * stays sound across streaming chunks. An unclosed fence masks its open
+ * tail — matches inside it wait for more data, the same posture as a
+ * partial sigil.
+ */
+function find(text: string, re: RegExp, mask?: readonly MaskSpan[]): Hit | null {
+  const m = maskedExec(text, re, mask);
   if (!m) return null;
   return { index: m.index, end: m.index + m[0].length, cap: m[1] };
 }
@@ -120,11 +132,12 @@ export class MemeStreamParser {
 
     while (safety++ < 10000) {
       const remaining = this._buf.slice(this._pos);
+      const mask = fencedSpans(remaining);
 
       // ── IDLE ─────────────────────────────────────────────────────────────
       if (this._state === "idle") {
-        const soh = find(remaining, SOH_RE);
-        const eot = find(remaining, EOT_RE);
+        const soh = find(remaining, SOH_RE, mask);
+        const eot = find(remaining, EOT_RE, mask);
 
         if (!soh && !eot) break;
 
@@ -151,8 +164,8 @@ export class MemeStreamParser {
 
       // ── HEADER ───────────────────────────────────────────────────────────
       if (this._state === "header") {
-        const stx = find(remaining, STX_RE);
-        const eot = find(remaining, EOT_RE);
+        const stx = find(remaining, STX_RE, mask);
+        const eot = find(remaining, EOT_RE, mask);
         if (!stx && !eot) break;
 
         if (eot && (!stx || eot.index < stx.index)) {
@@ -175,9 +188,9 @@ export class MemeStreamParser {
       if (this._state === "body") {
         if (!this._inAhu) {
           const hit = earliest(
-            { tag: "ahu",  h: find(remaining, AHU_OPEN_RE) },
-            { tag: "etx",  h: find(remaining, ETX_RE)      },
-            { tag: "eot",  h: find(remaining, EOT_RE)      },
+            { tag: "ahu",  h: find(remaining, AHU_OPEN_RE, mask) },
+            { tag: "etx",  h: find(remaining, ETX_RE, mask)      },
+            { tag: "eot",  h: find(remaining, EOT_RE, mask)      },
           );
           if (!hit) break;
 
@@ -201,8 +214,8 @@ export class MemeStreamParser {
         }
 
         // Inside an ahu section — track nesting depth
-        const closeH = find(remaining, AHU_CLOSE_RE);
-        const openH  = find(remaining, AHU_OPEN_RE);
+        const closeH = find(remaining, AHU_CLOSE_RE, mask);
+        const openH  = find(remaining, AHU_OPEN_RE, mask);
 
         if (openH && (!closeH || openH.index < closeH.index)) {
           this._ahuDepth++;

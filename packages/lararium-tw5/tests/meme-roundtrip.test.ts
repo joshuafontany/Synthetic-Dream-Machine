@@ -76,3 +76,94 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
     expect(rerendered).toBe(rendered);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Fence-mask law (2026-06-11): quoted sigils stay content, never structure.
+// ---------------------------------------------------------------------------
+
+const TEACHING_URI = "lar:///ha.ka.ba/@lares/v0.1/memory/fence-teaching";
+const TEACHING = `<<~ ${"&#x0001;"} ? -> ${TEACHING_URI} >>
+\`\`\`toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/memory/fence-teaching"
+type     = "text/x-memetic-wikitext"
+\`\`\`
+
+<<~ ${"&#x0002;"} >>
+
+<<~ ahu #lesson >>
+
+A fenced carrier close MUST NOT close this body:
+
+\`\`\`text
+<<~ ${"&#x0003;"} >>
+<<~ ahu #fake >>
+not a child
+<<~/ahu >>
+<<~ kahea ahu #ghost >>
+\`\`\`
+
+Inline mentions stay literal too: \`<<~ ${"&#x0003;"} >>\` and \`<<~ ahu #also-fake >>\`.
+
+\`\`\`\`md
+a four-backtick fence quoting an iam fence:
+\`\`\`toml iam
+mana = 99
+\`\`\`
+\`\`\`\`
+
+<<~/ahu >>
+
+After the fence, the carrier still runs.
+
+<<~ ${"&#x0003;"} >>
+
+<<~ ${"&#x0004;"} -> ? >>
+`;
+
+describe("fence-mask — quoted sigils never frame, split, or expand", () => {
+  const records = recordsOf(TEACHING, TEACHING_URI);
+
+  test("quoted ahu/ETX sigils produce no records and do not truncate", () => {
+    const titles = [...records.keys()];
+    expect(titles).toContain(TEACHING_URI);
+    expect(titles).toContain(`${TEACHING_URI}#lesson`);
+    expect(titles.filter((t) => t.includes("#fake") || t.includes("#also-fake") || t.includes("#ghost"))).toEqual([]);
+    // the fenced ETX did not truncate: post-fence prose survives in records
+    expect(records.get(TEACHING_URI)!.text).toContain("the carrier still runs");
+  });
+
+  test("quoted iam (four-backtick fence) never becomes the slot's identity", () => {
+    expect(records.get(`${TEACHING_URI}#lesson`)!["mana"]).toBeUndefined();
+  });
+
+  test("round-trips content-whole and idempotent", () => {
+    const rendered = expandMemeRefs(readerOf(records), TEACHING_URI)!;
+    expect(contentView(rendered)).toBe(contentView(TEACHING));
+    const again = expandMemeRefs(readerOf(recordsOf(rendered, TEACHING_URI)), TEACHING_URI);
+    expect(again).toBe(rendered);
+  });
+});
+
+describe("Kapu SOH variant survives the round trip", () => {
+  const KAPU_URI = "lar:///ha.ka.ba/@lares/v0.1/memory/kapu-carrier";
+  const KAPU = `<<~ ⊙${"&#x0011;"} ? -> ${KAPU_URI} >>
+\`\`\`toml iam
+uri-path = "ha.ka.ba/@lares/v0.1/memory/kapu-carrier"
+type     = "text/x-memetic-wikitext"
+\`\`\`
+
+<<~ ${"&#x0002;"} >>
+
+kapu body.
+
+<<~ ${"&#x0003;"} >>
+
+<<~ ${"&#x0004;"} -> ? >>
+`;
+  test("the DC1 code and namespace re-emit on the SOH line", () => {
+    const records = recordsOf(KAPU, KAPU_URI);
+    const rendered = expandMemeRefs(readerOf(records), KAPU_URI)!;
+    expect(rendered.startsWith(`<<~ ⊙${"&#x0011;"} ? -> ${KAPU_URI} >>`)).toBe(true);
+    expect(rendered).toBe(expandMemeRefs(readerOf(recordsOf(rendered, KAPU_URI)), KAPU_URI));
+  });
+});
