@@ -115,7 +115,9 @@ Per-verb args:
 |---|---|
 | `ADD` / `COPY` / `MOVE` | `title`, `from-bag`, `to-bag`, `change-id` |
 | `CLEAR` / `DROP` | `bag` |
-| `LOAD` | `source-uri`, `to-bag`, `change-id` (mints fresh) |
+| `LOAD` | `source-uri` (provenance), `to-bag`, `change-id` (mints fresh), `carriers` (the content) |
+
+**LOAD runs carrier-borne (implemented 2026-06-10).** Islands never fetch — web3-only law: the operator gesture (which holds the disk grant, node-side `lares act LOAD`) reads the source and sends content WITH the verb as `carriers: [{title?, text}]`; `source-uri` rides as audit provenance only. Each carrier decomposes at the memetic-wikitext membrane (FFZ: parent + ahu-slot children via the deserializer) and every record lands under the action's fresh change-id, audited by the standard `accession` effect record. A LOAD with no carriers refuses loudly. First live use fed the @lares hearth its own boot meme: 17 records (parent + 16 ahu children).
 
 Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
 
