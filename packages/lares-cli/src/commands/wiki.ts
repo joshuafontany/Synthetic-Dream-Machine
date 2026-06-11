@@ -14,28 +14,21 @@
  * epoch, rotate-recipe, prune-stale.
  */
 
-import { join } from "node:path";
 import { loadOperatorVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh/node";
+import { larDataDir } from "../env.js";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 type WikiSubcommand = (args: ParsedArgs) => Promise<number>;
 
-function resolveRoot(): string {
-  return process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
-}
-
 async function operatorDid(): Promise<string> {
-  const dataDir = join(resolveRoot(), ".lararium");
-  return "0x" + (await loadOperatorVerifyingKey(dataDir));
+  return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
 }
 
 async function tryConnect() {
   try {
-    const root = process.env["LAR_ROOT"];
-    const extra = root ? { bootstrapPath: join(root, "genesis", "social-bootstrap.json") } : {};
-    return await connectAdminVessel(extra);
+    // ONE env contract (env.ts) — the connector derives root/port/bootstrap.
+    return await connectAdminVessel({});
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`lares wiki: ${msg}`);

@@ -36,15 +36,14 @@ import { stdin, stdout } from "node:process";
 import { join } from "node:path";
 import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadOperatorVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh/node";
+import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
-  const larRoot = process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
-  return "0x" + (await loadOperatorVerifyingKey(join(larRoot, ".lararium")));
+  return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
 }
 
 function printUsage(): void {
