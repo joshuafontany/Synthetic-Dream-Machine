@@ -107,6 +107,20 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 <<~/ahu >>
 
+<<~ ahu #projection-routing >>
+
+## Projection routing — tiddler-groups + the standard TW5 path (operator ruling, 2026-06-11)
+
+Write-back routes by **type**, in three rules:
+
+1. **Group rule.** `type: text/x-memetic-wikitext` records form a **tiddler-group** keyed by the carrier parent (a fragment URI belongs to its parent's group). A group MUST write back as **ONE markdown-meme `.md`** — the whole carrier (#granularity). A child's change re-flushes its group, never its own file.
+2. **Default rule.** Every other tiddler follows the **standard TW5 path** — `$tw.utils.generateTiddlerFileInfo` semantics, run inside the island's own TW5 VM: `.tid` for tw5-wikitext, content-file + `.meta` sidecar for foreign types, `.json` for unsafe fields. One tiddler, one file, TW5's own format law.
+3. **Cascade rule.** Siting and format overrides ride **composable cascade tiddlers inside the wiki** — `lar:///ha.ka.ba/@lararium/config/disk-paths` and `…/config/disk-extensions`, first non-empty filter result wins, per-wiki overlays compose through the recipe (the proven `config/bag-paths` pattern; the lar-native mirror of TW5's `$:/config/FileSystemPaths` / `FileSystemExtensions`).
+
+**What this burns:** the hardcoded `canonicalNamedBagRelPath` fragment siting in `bag-paths.ts` (`toRelMd`'s `frag → base/frag.md` ternary — hole H1's birthplace) and `meme-write.ts`'s per-node flush law (every record its own file). The kupono vectors (`tests/e2e/carrier-roundtrip.test.ts` V3/V4) alarm when the burn lands.
+
+<<~/ahu >>
+
 <<~ ahu #cli >>
 
 ## CLI capability
