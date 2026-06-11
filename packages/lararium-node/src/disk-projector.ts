@@ -29,6 +29,7 @@
 
 import { writeFileSync, mkdirSync, unlinkSync, existsSync } from "fs";
 import { join, resolve as resolvePath, dirname } from "path";
+import { confineMirrorWrite } from "./bag-paths.js";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -115,9 +116,9 @@ export class LarDiskProjector {
     for (const mirror of this.mirrors) {
       const relPath = mirror.toRelPath(title);
       if (!relPath) continue;
-      const root      = resolvePath(mirror.mirrorRoot);
-      const candidate = resolvePath(join(root, relPath));
-      if (!candidate.startsWith(root + "/") && candidate !== root) continue;
+      const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
+      if (!gate.ok) { console.error(`[disk-ward] unlink refused (${mirror.bagId}): ${gate.reason}`); continue; }
+      const candidate = gate.path;
       try {
         if (existsSync(candidate)) {
           this.writing.add(title);
@@ -134,10 +135,14 @@ export class LarDiskProjector {
     const relPath = mirror.toRelPath(tiddlerUri);
     if (!relPath) return;
 
-    const root      = resolvePath(mirror.mirrorRoot);
-    const candidate = resolvePath(join(root, relPath));
-    // Path-traversal guard.
-    if (!candidate.startsWith(root + "/") && candidate !== root) return;
+    // The disk ward — sovereign-island write confinement (bag-paths). Cascade
+    // output counts as untrusted; refusals surface LOUDLY, never silently.
+    const gate = confineMirrorWrite(mirror.mirrorRoot, relPath, mirror.allowBagsRootFiles);
+    if (!gate.ok) {
+      console.error(`[disk-ward] write refused (${mirror.bagId} <- ${tiddlerUri}): ${gate.reason}`);
+      return;
+    }
+    const candidate = gate.path;
 
     const output = await this.renderFn(tiddlerUri);
     if (output === null) return;

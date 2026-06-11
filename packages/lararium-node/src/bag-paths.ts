@@ -6,6 +6,8 @@
  * needed. Factories are pure functions; no I/O, no module state.
  */
 
+import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute } from "path";
+
 export type MirrorPathFn = (uri: string) => string | null;
 
 export interface BagMirrorConfig {
@@ -15,6 +17,64 @@ export interface BagMirrorConfig {
   readonly mirrorRoot: string;
   /** URI → relative path under mirrorRoot. */
   readonly toRelPath: MirrorPathFn;
+  /**
+   * Widened grant (capability, rides the manifest's diskMirrors): the mirror
+   * MAY place files DIRECTLY in the root-bags-dir — the nearest ancestor of
+   * mirrorRoot named `bags`, the dir holding every @{bagname} subdir — one
+   * level up. It MUST NEVER escape the bags dir or write inside another
+   * bag's subdir; `confineMirrorWrite` enforces this structurally
+   * (dirname(candidate) === bagsDir exactly). Default: own subdir only.
+   */
+  readonly allowBagsRootFiles?: boolean;
+}
+
+// ── Write confinement — the sovereign-island disk ward ─────────────────────
+//
+// Cascade tiddlers (config/disk-paths overlays) compose through the RECIPE —
+// a library bag can overlay them — so every relative path reaching the
+// projector counts as UNTRUSTED input. Policy lives in the cascade; this gate
+// (the mechanism) holds at the write choke-point regardless of what the
+// cascade emitted.
+
+export type ConfineResult =
+  | { readonly ok: true; readonly path: string }
+  | { readonly ok: false; readonly reason: string };
+
+/** Nearest ancestor of `root` whose basename reads `bags`, or null. */
+function findBagsDir(root: string): string | null {
+  let dir = root;
+  for (;;) {
+    if (basename(dir) === "bags") return dir;
+    const parent = dirname(dir);
+    if (parent === dir) return null;
+    dir = parent;
+  }
+}
+
+/**
+ * Confine a mirror write. Allowed:
+ *   - any path resolving UNDER mirrorRoot (the bag's own subdir), or
+ *   - with `allowBagsRootFiles`: a file DIRECTLY in the root-bags-dir
+ *     (never inside another bag's subdir, never above bags, never deeper).
+ * Everything else refuses with a reason the projector surfaces loudly.
+ */
+export function confineMirrorWrite(
+  mirrorRoot: string,
+  relPath: string,
+  allowBagsRootFiles = false,
+): ConfineResult {
+  if (isAbsolute(relPath)) return { ok: false, reason: `absolute path refused: ${relPath}` };
+  const root      = resolvePath(mirrorRoot);
+  const candidate = resolvePath(joinPath(root, relPath));
+  if (candidate === root) return { ok: false, reason: "write to mirror root itself refused" };
+  if (candidate.startsWith(root + "/")) return { ok: true, path: candidate };
+  if (allowBagsRootFiles) {
+    const bagsDir = findBagsDir(root);
+    if (!bagsDir) return { ok: false, reason: `mirror root carries no bags ancestor; widened grant inert (${root})` };
+    if (dirname(candidate) === bagsDir) return { ok: true, path: candidate };
+    return { ok: false, reason: `widened grant covers files DIRECTLY in ${bagsDir} only — refused: ${candidate}` };
+  }
+  return { ok: false, reason: `escapes mirror root ${root}: ${candidate}` };
 }
 
 const HA_KA_BA_PREFIX = "lar:///ha.ka.ba/";
