@@ -131,7 +131,24 @@ Cascade tiddlers compose through the **recipe** — a library bag can overlay `c
 2. **Widened grant** (`allowBagsRootFiles` — a capability riding the manifest's `diskMirrors`, never a cascade-settable flag): the mirror MAY place files **DIRECTLY in the root-bags-dir** — one level up, the dir holding every `@{bagname}` subdir. The rule reads `dirname(candidate) === bagsDir` exactly, so the grant stays *structurally incapable* of escaping `bags` or entering another bag's subdir — no new subdirs, no depth, no siblings.
 3. **Refusals surface LOUDLY** (`[disk-ward] write refused …` with the reason) — a silent skip would hide a probing overlay from the operator.
 
-Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (12 — traversal, absolute, cross-bag, above-bags, new-subdir, grantless, inert-grant).
+**The alert chain (operator ruling, 2026-06-11):** every ward trip raises a `$:/tags/Alert` in the operator's eye, routed through the admin VM:
+
+```
+projector onRefusal (wiki island)
+  → IslandMsg_Event "disk-ward:refused" (payload.verb = "ward-alert")
+  → main's generic worker.event → adminVm.placeVerb bridge
+  → admin VM "ward-alert" reactor:
+      (a) DURABLE audit record  lar:///ha.ka.ba/@admin/ledger/ward/<id>
+          — the operators-with-admin-grants surface (@admin doc readers)
+      (b) reads its own active-wiki marker → the operator's PINNED VM
+  → admin:wiki-alert (kind "disk-ward") → main → system-alert verb
+  → pinned island writes $:/temp/lares/alert/disk-ward tagged $:/tags/Alert
+      — ring-0 operator surface (@temp, island-local, self-clearing on reboot)
+```
+
+Visibility holds by construction: the durable record lives in `@admin` (admin-grant readers only); the live alert lives in the pinned wiki's `@temp` (the operator's own island; never federated — `noise`/`data` stay node-local). The reactor carries no cap-gate: the signal originates from the island's own mechanism, grants nothing, and writes only audit + alert.
+
+Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (13 — traversal, absolute, cross-bag, above-bags, new-subdir, grantless, inert-grant, refusal-signal).
 
 <<~/ahu >>
 
