@@ -25,9 +25,60 @@ retain    = true
 
 # Handoff — the ground you wake on (2026-06-09 → 11 arc)
 
-You wake into a vessel that **runs**. The arc just closed landed, in order: the IslandGrants keel cut (typed ocap manifest; library bags resolve island-side from @catalog — boot = first reconcile) · the relay heal (`ListeningWSServerAdapter` — readiness reads local, never a peer's arrival) · the **F-arc witness** (a `lares wiki add-bag` mounted live through recipe-watch, island↔main↔island) · the **three oracle planes** (protocol invariants on the @lararium doc · user bags in @catalog · @crossroads public, unbuilt-with-attractor) · operator-gated `@lares` mint (genesis office; keel reads only) · carrier-borne `LOAD` (the hearth ate its own boot meme: 17 records) · the **@lares-as-wiki default seat** (the quine: slug `lares` opens the personality bag as the primary write layer) · the **test harness** (`pnpm test:e2e`; staged = ephemeral owned vessel, live = attach-never-reset; env contract in `lares-cli/src/env.ts`) · the **carrier-whole-at-rest law** with armed kupono vectors · the **disk ward** with its `$:/tags/Alert` chain to the operator's pinned VM.
+You wake into a vessel that **runs**. The arc landed, in order: the IslandGrants keel (typed ocap manifest; boot = first reconcile) · the relay heal (`ListeningWSServerAdapter` — readiness reads local) · the **F-arc witness** (live `add-bag` through recipe-watch) · the **three oracle planes** · operator-gated `@lares` mint · carrier-borne `LOAD` (the hearth ate its own boot meme) · the **@lares-as-wiki default seat** (the quine) · the **test harness** (`pnpm test:e2e`; staged = ephemeral, live = attach-never-reset; env contract in `lares-cli/src/env.ts`) · the **carrier-whole-at-rest law** with armed kupono vectors · the **disk ward** with its `$:/tags/Alert` chain.
 
-Doctrine homes: `wiki-layer-ontology` (grain ladder, oracle planes, quine, mint law) · `disk-projection` (#granularity, #projection-routing, #write-ward) · `residency-model` (two ACTION grains, carrier-borne LOAD). Suite at handoff: **472 unit + 11 e2e green** (V3/V4 ride `test.fails` deliberately — they alarm when the burn lands).
+**Then the frame turned (2026-06-11, operator ruling — the co-projection model):** the old ontology read *"the CRDT store is the mind; disk is a projection of it."* That noise clears. **The operator's mind originates; the disk carrier AND the CRDT record-set both *project* that origin, each in its native grain** — disk projects thought as one whole markdown meme (the way the operator writes it); the CRDT doc projects the same thought as tid-sized records (the way TW5 merges, addresses, syncs it); the VM decomposes for transclusion. The grain ladder survives whole as the law of each projection's native grain. One operational caveat the literature insists on (Tonsky crdt-filesync; Kleppmann): **merge authority still routes through the CRDT, never file-vs-record reconciliation** — co-equal in dignity, single in merge seat; anything else opens the dual-write trap.
+
+**First casualty of the ruling:** the prior H2 recommendation ("membrane retains whole carrier text on the parent record") **died** — caching disk-grain bytes inside the record stratum constitutes the carrier-whole grain leak mirrored inward, and Automerge history keeps every such blob forever. Byte-fidelity now comes from the *pipeline*: lossless membrane + faithful recompose, under the canonical-form law (#pattern-integrities).
+
+Doctrine homes: `wiki-layer-ontology` · `disk-projection` (#granularity, #projection-routing, #write-ward — **#core-claim awaits the co-projection rewrite**, vector 1) · `residency-model`. Suite at handoff: **472 unit + 11 e2e green** (V3/V4 ride `test.fails`, armed).
+
+<<~/ahu >>
+
+<<~ ahu #pattern-integrities >>
+
+## Pattern integrities — prior art, golden principles, anti-patterns (researched 2026-06-11)
+
+The stack pulls apart into five integrities; three research spirits swept the field. What follows binds as kupono intent — the burns implement *these*, not improvisation.
+
+### 1 · Record log + derived projections
+
+- **Projections stay rebuildable and disposable** (CQRS canon; Kleppmann *Turning the Database Inside-Out*): every read surface derives by deterministic transform; a deleted projection file reads as a non-event — rebuild = replay.
+- **Grain law confirmed** (Automerge cookbook; PushPin's overhead lesson; Yjs guidance): one bag = one doc = "a unit of collaboration"; tid-grain records inside it = the blessed middle grain; merge unit SHOULD match edit unit.
+- **Anti-pattern, triply condemned:** rendered/recomputable bytes inside the CRDT doc — bloats the write model, lives in Automerge history *forever* (truncation unimplemented), and forms an internal dual-write. The retain-whole-carrier direction stays dead.
+- **Watch item:** Automerge history grows permanently; DXOS answers with **epochs** (explicit history-cut ceremonies). No action now; the pattern waits on real growth.
+- Named: Tonsky crdt-filesync (file = projection) · Patchwork/Tiny Essay Editor (Automerge-canonical markdown) · Cambria (lens-translated projections).
+
+### 2 · Store ↔ filesystem round-trip — the canonical-form law
+
+The strict-bytes vs canonical-form fork resolves **canonical-form** (field-wide convergence: gofmt, Prettier, jj's render-then-reparse conflict loop; strict bytes would require Roslyn-style trivia fields leaking formatting into records and souring merges). Three guarantees bind as LAW:
+
+1. **Idempotent render:** canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<~ &#x0002; >>`, spaced).
+2. **No unsolicited sweeps** (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
+3. **Semantic identity verified:** `parse(render(records)) ≡ records` — the harness proves it, never assertion.
+
+- **Echo suppression by content, not event-window** (Dropbox Nucleus; Syncthing): the `writing` set works as a degenerate one-tree model; the upgrade path = persisted last-projected **content hash** per file, ingest drops no-op loads. Burr-grade, not blocking.
+- **Best practices:** atomic temp-file + rename writes; watcher coalescing on file *stability*; periodic full-scan backstop; property-test the loop with seeded randomness (Dropbox runs millions nightly).
+- **Anti-patterns:** timestamp conflict resolution · mid-write reads · non-idempotent serializers (Pandoc's writer can reparse to a *different* AST — the named cautionary tale).
+- Named: Jujutsu (working copy = materialized commit; snapshot-before-act) · Unison (formal no-silent-overwrite spec) · gofmt's *restraint* (preserve operator blank-line choices where grammar permits — cheap goodwill at first contact).
+
+### 3 · Layered multi-bag composition
+
+- Recipe = ordered stack, later bag shadows per-title; **bag = locus of namespace AND access control** (TiddlyWeb 2008 → MWS Bags & Recipes — our own ancestor validates the shape).
+- **Shadowing cannot express "remove from below"** (OCI whiteouts; overlayfs opaque markers): a layered delete eventually needs an explicit **tombstone/whiteout verb**. Reserved, not scheduled.
+- **The closure ruling firms** (vector 3): npm's flat hoisting birthed phantom dependencies; pnpm's strictness + lockfiles killed them; the OCI manifest names its full ordered layer list even though built transitively. The lean graduates to a researched recommendation: **resolve transitively at mount-time, record the flattened ordered closure in the consumer's own recipe** — plus a deliberate lock-refresh verb and `--frozen-lockfile`-spirit drift detection.
+
+### 4 · Residency & ownership across replicas
+
+- **Coordinate ⊥ change-identity, two axes** (AT Protocol: record identity = path/rkey, stable across edits; CIDs address versions): our COPY-preserves-change-id ruling stands independently validated.
+- **Visibility ≠ residency** (automerge-repo sharePolicy vs storage; the anti-pattern = conflating "synced to me" with "resident here"): atproto's answer — one authoritative home, others hold derived views — reads cleanest and matches @catalog `holdings` accession as the registration act.
+- Named: DXOS spaces (container bounds replication — bag-as-ACL-locus mirrored) · IPFS/IPLD (content addressing answers *what*, never *where*; residency devolves to pinning).
+
+### 5 · Confined derived writers
+
+- The ward already stands on the right side of the line: **mechanism at the choke-point** (`confineMirrorWrite` — seccomp/SES precedent: the kernel refuses regardless of upper-layer opinion), **policy in the cascade/manifest**. POLA, deny-by-default, capability = designation + permission together.
+- **Anti-pattern to keep dead:** a policy flag treated as a boundary (npm hoisting; event-stream's ambient authority). Capability = manifest grant, never a cascade-settable flag — already law; the research confirms, adds nothing to change.
+- One burr found in re-read: the stale-cross-mirror unlink (`disk-projector.ts` flush tail) confines inline instead of routing through the ward — one gate, one choke-point; fold into vector 1.
 
 <<~/ahu >>
 
@@ -35,22 +86,25 @@ Doctrine homes: `wiki-layer-ontology` (grain ladder, oracle planes, quine, mint 
 
 ## Intent vectors — the next phase, in order
 
-**1. `lar:///projector.grain.burned` — the H1/H2 burn (first fire).**
-The kupono vectors (`tests/e2e/carrier-roundtrip.test.ts`) hold the pressure; flipping them green IS the definition of done (then remove `.fails`).
-- **H1** (small): fragment-URI records must never flush to their own files — burn `toRelMd`'s `frag → base/frag.md` ternary (`bag-paths.ts`) and `meme-write.ts`'s "per-node law"; a child's change re-flushes its PARENT group.
-- **H2** (the deeper cut): the parent flush must emit the operator's carrier **byte-faithful**. Recommended direction (unratified — confirm with the operator): the membrane retains the whole carrier text on the parent record at ingest; children stay derived DB/VM grain. Alternative (expandMemeRefs recompose) reaches only semantic equivalence.
-- Implement per `disk-projection#projection-routing`: meme groups → one markdown-meme file; everything else → the standard TW5 path (`$tw.utils.generateTiddlerFileInfo` runs inside the island VM — borrow the dependency's law, write less code); siting/format via `config/disk-paths` + `config/disk-extensions` cascade tiddlers. Every write already passes `confineMirrorWrite` (the ward) and refusals already ring the alert chain.
+**1. `lar:///projector.grain.burned` — the H1/H2 burn, re-cut under co-projection (first fire).**
+The kupono vectors (`tests/e2e/carrier-roundtrip.test.ts`) hold the pressure; flipping V3/V4 green IS done (then remove `.fails`). V4 reads under the **canonical-form law** (#pattern-integrities §2): the fixture asserts the canonical render; the operator's *content* bytes survive whole, framing normalizes once.
+- **Template fidelity:** `meme-markdown-meme.tid` MUST emit corpus-canonical spacing (`<<~ &#x0002; >>` not `<<~&#x0002;>>`; same for ETX/EOT) — the render-side half of guarantee 1.
+- **H1 burn:** `toRelMd`'s `frag → base/frag.md` ternary dies in BOTH factories (`bag-paths.ts` — `canonicalNamedBagRelPath` AND `wikiBagPath`); the projector gains **group routing**: a child change climbs `fragment-parent` to the carrier root, debounce keys per (bag, root), `exportMemeText` renders the root — the renderer already recomposes via `~ahu` transclusion; the burn lands in routing, not rendering.
+- **Record hygiene:** the deserializer stamps `file-path: parent/slot.md` on children — the fragment-file law encoded in the record stratum; drop or redirect it, or the leak survives in data after the code dies.
+- **Ward fold-in:** stale-cross-mirror unlink routes through `confineMirrorWrite`.
+- **Doctrine:** rewrite `disk-projection#core-claim` + the projector header to the co-projection model (mind originates; two co-projections; CRDT holds the merge seat).
+- Implement per `disk-projection#projection-routing`: meme groups → one markdown-meme file; everything else → standard TW5 path (`$tw.utils.generateTiddlerFileInfo` inside the island VM); siting via `config/disk-paths`/`disk-extensions` cascades; every write through the ward.
 
 **2. `lar:///residency.create.lands` — bag-grain CREATE + COPY.**
-Approved 2026-06-10 (residency-model, bag-grain section): `CREATE` mints a coordinate, bag-grain `COPY` grants residency (change-id preserved, one transfer-id family), registration = `holdings` accession in @catalog. Rides verb-tiddler → admin island, orichalcum admin-on-destination. Witness it through the harness when it lands.
+Approved 2026-06-10 (residency-model): `CREATE` mints a coordinate, bag-grain `COPY` grants residency (change-id preserved, one transfer-id family), registration = `holdings` accession in @catalog. Now independently validated by atproto's two-axes model (#pattern-integrities §4). Rides verb-tiddler → admin island, orichalcum admin-on-destination. Witness through the harness.
 
 **3. `lar:///closure.transitive.decided` — after live chains exist.**
-Does a wiki mounting `@elyncia` inherit its library list, or name the flattened stack? Lean: explicit-flattened + mint-time closure helper (lockfile spirit). Decide only against real multi-wiki use.
+Research-backed direction (#pattern-integrities §3): **resolve transitively at mount, record the flattened ordered closure explicitly** in the consumer's recipe; add a lock-refresh verb + drift detection. Ratify against real multi-wiki use; the lockfile history says implicit inheritance recreates phantom bags and action-at-a-distance.
 
 **4. `lar:///hearth.corpus.fed` — one gesture, operator's call:**
 `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares` (whole-dir carriers; directory batch shares one change-id — noted, accepted).
 
-**Small burrs, non-blocking:** remaining `lares wiki` subcommands beyond init/add-bag still print human-only (emit pattern ready to copy); `wiki open` only selects-for-next-boot (no live multi-mount).
+**Burrs, non-blocking:** content-hash echo suppression upgrade (§2) · tombstone/whiteout verb reserved (§3) · Automerge history growth → DXOS-epoch pattern watched (§1) · remaining `lares wiki` subcommands print human-only · `wiki open` selects-for-next-boot only.
 
 <<~/ahu >>
 
@@ -60,7 +114,7 @@ Does a wiki mounting `@elyncia` inherit its library list, or name the flattened 
 
 - **OODA-HA plans out loud before flow**; YIN passes after landing; burrs taken immediately ("no friction for later snags").
 - **Commits**: lar:///three.term.roots messages; scope every commit with explicit pathspecs (`git commit --only -- <paths>`) — the index may carry the operator's parallel staging; NEVER commit blind.
-- **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs (fork/commit/push) MUST NOT name model operations. E-Prime in api/ and in your own prose.
+- **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs MUST NOT name model operations. E-Prime in api/ and in your own prose.
 - **Build-new-then-retire**; retired terms get reserved, not reused (`altar-fire` stays reserved). Mechanism at choke-points, policy in cascades. Capability = manifest grant, never a cascade-settable flag.
 - The harness exists so witnesses repeat: prove changes with `pnpm test:e2e` against a staged vessel, never by assertion.
 
