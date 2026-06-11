@@ -557,6 +557,7 @@ Lares (Artificer): ->✶ the log reads "cart ${copula} undefined" - the null-der
 Lares (Muse): raw draft - the metaphor ${copula} the engine, the engine ${copula} the metaphor; the whole figure ${copula} the point.
 <<~ ward ! · lift held ↻ E-Prime · copulas licensed >>
 ```
+
 <<~/ahu >>
 
 <<~ ahu #pono-defaults >>
