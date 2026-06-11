@@ -46,6 +46,35 @@ Hook.
 
 ---
 
+## Necromancer
+
+Across Elyncia, "necromancer" names a craft the world cannot do without. Yet, the dead keep their own names for it. Two currents run through every practitioner: the one that carries a soul home across the water, and the one that keeps the dead close, ranked, and working.The traits below braid both, so the hand that learns to send also learns to keep — and a tradition becomes a tradition by which way it leans, and feuds with the next over the difference. The friction lives inside a single practitioner too: the soul you could send home, you could also seat in your court; the night you free a beloved dead, you wonder whether mercy meant letting go or holding on.
+
+This Path runs Elyncia-wide, but it burns hottest in Neo-Thracia, where the death-god fell silent, the shadow-roads broke, and the surviving necromancers hold the most-complete passage-rites through five centuries of sealed dark. There, to know this craft means to carry a story that a whole land forgot.
+
+**The necromancer works among:** the dead (a soul in transit or at rest); the undead (a body animated — mindless shell or awoken person); and the restless dead (a soul stuck because the rites lapsed or the shroud stayed knotted). The Lar and the Lemure do not rise from dead souls. Yet a tended shrine, being a home, draws the gathering dead who need one.
+
+### Path Traits
+
+**0. Necromancer.** You read the dead the way a sailor reads weather. You know a soul from a shell, a settled rest from a stuck one, a road that runs from a road that broke. You hold the rites of passage and the rites of binding both, and you carry the names that free the dead and the names that keep them. What you do with that knowing, the road leaves to you. (Unfinished, needs actual SDM style Luka Rejec voice rules...)
+
+**1. Citizen Maintainer.** Skilled at maintaining the citizens dead. Repair and improve the undead, converse with them, know their ways and needs. Also, a bonus to saves vs all undead special attacks. Expert: You can stabilize a degrading or malfunctioning mindless undead in the field: spend a few minutes and a drop of blood (or equivalent) to prevent this week's Degrade roll for that undead or remove feral status. Master: Mindless undead recognize you as maintenance staff and will not attack you unless provoked. Once per day, you may influence an undead you can touch: for a scene it treats you as its rightful handler and obeys simple commands. If you are caught doing this "off the books," it may count as illegal activity.
+
+**2. Reanimator.** Not only learned in the hidden scriptures, you carry sparks of the Once-Living God within you. Spend 1 life to reanimate a hound-sized beast for an hour, more for larger creatures. Expert: Your reanimations are efficient. Mindless corpses you reanimate last for a watch instead of an hour, or cost 1 less Life (minimum 1). Master: You can reanimate a swarm. When you reanimate, you may split the effect into up to eight smaller mindless undead (rats, hands, skulls, crawlers, etc.) that share one duration and obey one command. Each still requires normal upkeep; if any go feral, they all do.
+
+**3. Hollow Halo.** You may attune mindless undead you have maintained this week to your Halo. Attuned undead recognize you as a handler and obey simple commands. You may keep a number of attuned undead equal to your Level + Aura; if any miss upkeep and Degrade, it immediately drops out of attunement. Expert: Your Ba rides the void-channels. You may see and hear through one attuned undead at a time, and you may shift your senses between them freely. Master: You may cast Powers through any attuned undead, as if you stood where it stands.
+
+**4. Abandoned.** When your fellow villagers went for reprocessing and repair, you remained in the rotting house shells. Old things, dead things, still talk to you. Spend 1 life to talk to any dead thing. Expert: (to be authored — toward commune: the dead cannot lie to you about their own dying.) Master: (to be authored — toward the silent god's threshold.)
+
+**5. Far Shore.** You learned to sing a soul its bearing — to carry the restless and the newly-dead across the water to the far shore. When you confront the void-mad or the feral dead, your presence causes pause (advantage on rolls). Spend 1 Life to... Expert: Your sending reaches the bound dead — spend 1 Life to trigger a Save from the target; success frees a single undead from another handler's command or attunement, or calms a mindless shell, allowing you to converse you have the skill. Master: Once per watch, open the tide-road at a threshold — every restless dead or mindless undead within (Level + Aura) yards must make a Defeat roll. See the Deathless heritage effect for full mechanics. A soul you send to the afterlife this way may, at the referee's word, return to you later as a settled ancestor-guest: willing, never bound.
+
+**6. Soul Thief.** When a nearby creature is reduced to 0 life, you can steal a little of its soul and gain 1d4 life. This reduces one of its other attributes to 0. Expert: Rather than take the fragment as Life, you may bind it back to the ha — the creature you drained rises at once as a mindless undead under your command, needing no separate reanimation, and the drained attribute equals 1. Master: When you reduce a creature to 0 Life, you may take it into your court — it rises as an awoken servant, keeping its skills and memory, bound to your will for (Level) watches or until it saves against your Aura. Your standing court grows by the dead you keep.
+
+### Necromancer Items (d12)
+conch (pū) · chant-scrolls (oli, mele) · libation bowl (ʻapu, ipu) · salt and ʻawa · a death-shroud with its knots · the iron psychopomp's lantern that never rusted · a soul-canoe wayfinding charm · ash-tea for guest-right with the dead · a slametan feast-kit · a cracked Ainos node-key · a graven skull that hoards the names of the drained · one small bell that should not be rung here.
+
+---
+
 ## Revenant
 
 *returned, void-touched*

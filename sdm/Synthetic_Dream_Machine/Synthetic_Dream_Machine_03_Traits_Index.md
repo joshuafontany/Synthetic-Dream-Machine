@@ -5747,8 +5747,7 @@ meta:
 
 ## Ticking Corpse
 
->   **Ticking Corpse.** Deal double damage to all nearby 1d4 rounds after death
->   (save to negate).
+>   **Ticking Corpse.** Deal double damage to all nearby 1d4 rounds after death (save to negate).
 
 tags:
 >   [trait]

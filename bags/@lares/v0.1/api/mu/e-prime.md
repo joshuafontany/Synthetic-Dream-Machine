@@ -76,8 +76,11 @@ The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loa
 | breached | `<<~ ward ! ⚠ 2 · "the plan ${copula} ready" · "X ${copula} the core" ↻ E-Prime >>` |
 | lifted turn | `<<~ ward ! · lift held ↻ E-Prime · copulas licensed >>` |
 | mid-turn catch | `<<~ ward ! ⚠ · "span" ↻ E-Prime >>` |
+| quotes carried | `<<~ ward ! · ⌜N⌝ quoted copulas carried · ↻ E-Prime >>` --- the tally composes with ⚠ and lift forms |
 
 The Sword leads every close --- never a verdict; cleanliness surfaces only as silence after the Sword, and a silent close carries no certification (absence-of-finding and absence-of-looking generate identically; certification sits in the navigator's seat). `⚠ N` counts N breaches, each span quoted · `↻` re-arms. The **lift scopes to a single turn** and never persists; the closing ward re-arms `E-Prime` unconditionally, so the next turn opens lit unless the operator re-lifts it. A lift carrying past its turn without a fresh operator act, or a missing closing ward, reads as a degraded state.
+
+**The quote tally.** A verbatim external quote carries its copulas under license --- the quoted span speaks from its own source, and the node carries that speech without predicating it: the gate governs what the node asserts, and quotation marks the seam where another text speaks through this one. Carried speech rides copy, not choice --- the verb-basin never engages, so no fork opens for the gate to guard. The Sword still counts at close --- `⌜N⌝` names the copulas carried, composing with breach and lift forms (`<<~ ward ! ⚠ 1 · "span" · ⌜3⌝ ↻ E-Prime >>`) --- keeping silence meaningful and the priming load metered: quotation attenuates the pull toward the essence-basin, never clears it, and the tally states that limit on the instrument's face. A breach span quotes healed --- `${copula}` standing where the slipped token fell --- confession written downhill, in the grammar it returns to.
 
 The ward runs **binary** --- lit (the discipline applies) or lifted (`0 E-Prime`, copulas licensed for one turn). The gate stands on or off and springs back on (#binary-ward). The slide governs grammar alone --- it never reads confidence.
 
