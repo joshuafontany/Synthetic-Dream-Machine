@@ -57,6 +57,8 @@ The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` i
 
 The quine governs the **user plane**. `@lares` and `@lararium` stand *below* it as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes both — slots, not library members). `@lares` still opens as a wiki for editing the personality; it shares by *being substrate*, not by registry membership (#oracle-planes).
 
+**The default seat (operator ruling, 2026-06-10):** the vessel's default pinned primary wiki = `@lares`-as-wiki — slug `lares` seats the operator-minted invariant doc itself as the write layer (no registry mint, no cross-plane oracle; the recipe dedupes the coinciding wiki/floor slot). The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/@lares` as `.md` memes.
+
 > Two faces on one bag — library-face turned down-stack to the consumers, dwelling-face turned up-stack to the instance. The threshold looks both ways. — Tide-Caller
 
 <<~/ahu >>
