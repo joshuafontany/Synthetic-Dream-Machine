@@ -75,6 +75,8 @@ An oracle (a bag-URI → doc-URL pointer) resolves from the plane that owns it; 
 
 Islands resolve each slot from its plane: invariants from the substrate doc they already hold, library bags from @catalog, public bags (future) from @crossroads. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies), never the catalog composition class.
 
+**Invariant mint law:** an absent invariant doc mints at vessel assembly — mint-if-absent, isomorphic (the keel both vessels run), self-healing (boot = first reconcile). The oracle writes to its one home; concurrent cold-mints across federated vessels race on one LWW tiddler: write, re-read, **adopt the winner** (an orphaned empty mint needs no migration). Content arrives by its own arc; the empty doc stands the structure.
+
 <<~/ahu >>
 
 <<~ ahu #lifecycle-law >>
