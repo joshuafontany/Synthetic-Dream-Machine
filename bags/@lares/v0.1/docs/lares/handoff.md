@@ -79,7 +79,7 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 - module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
 - smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
 - TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
-- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island
+- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING RULED 2026-06-12: INGEST forges the pattern integrity (record-pair verbs, replace-by-group, three-way diff, quiescence) that ALL verb-plane-into-wiki work then consumes — the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM via the module gate DURING that recut, one witness not two; ingest-gate's pure decision considers packing in-VM when the island-side INGEST verb lands
 
 <<~/ahu >>
 
