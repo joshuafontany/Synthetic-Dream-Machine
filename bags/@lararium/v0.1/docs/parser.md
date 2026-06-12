@@ -2,16 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/parser >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/parser"
-file-path    = "bags/@lararium/v0.1/docs/parser.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-role         = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
-tagspace     = "stable"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/docs/parser.md"
+mana      = 18
+register  = "Synthesis-Canon"
+retain    = true
+role      = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/parser"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
@@ -42,10 +43,10 @@ Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, retu
 
 <<~/ahu >>
 
-<<~ &#x0003; >>
-
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ast family:dataflow role:produces >>
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/pranala-parser family:dataflow role:sibling >>
 <<~ pranala ? -> lar:///ha.ka.ba/@lararium/tw5/modules/memetic-parser family:code role:compilesInto >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

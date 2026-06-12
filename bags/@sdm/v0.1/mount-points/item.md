@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/item >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/item"
-file-path = "bags/@sdm/v0.1/mount-points/item.md"
-type      = "text/x-memetic-wikitext"
-
-title     = "lar:///ha.ka.ba/@sdm/v0.1/mount-points/item"
+cacheable = true
 caption   = "item"
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+file-path = "bags/@sdm/v0.1/mount-points/item.md"
+invariant = false
 mana      = 16
 manao     = 17
 manaoio   = 16
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "mount-point: Item — Power stored in an object; container sub-rule for albums/codices"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/item"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -26,50 +24,65 @@ role      = "mount-point: Item — Power stored in an object; container sub-rule
 # Mount-Point — Item
 
 <<~ ahu #contract >>
+
 ## Contract
 
 An Item seats a Power **in an object**: spellbook, rod, idol-cartridge, living pistol. Capacity is **7 + Strength** slots (canonical, Vastlands Guidebook). Carried Powers persist — usable many times.
 
 **Container sub-rule (D2).** Power albums, technocodices, and spell books let a number of Powers ride in a **single inventory slot** (Vastlands Guidebook). This is one Item mount-point with a container sub-rule, **not** separate mount-points per container type. A container is one Item slot whose contents are a themed bundle.
+
 <<~/ahu >>
 
 <<~ ahu #activation >>
+
 ## Activation
 
 An item-seated Power activates from the object — the practitioner must hold, wear, or reach the item. An item can be dropped, stolen, sundered, or jammed. The `item` hook locks Life into the object permanently until disabled.
+
 <<~/ahu >>
 
 <<~ ahu #cost >>
+
 ## Cost
 
 Pay Life equal to P; double without the relevant skill. A container item costs one inventory slot regardless of how many Powers it bundles.
+
 <<~/ahu >>
 
 <<~ ahu #failure >>
+
 ## Failure
 
 Danger Roll → Corruption on failure. Corruption on an item degrades or curses the object rather than the practitioner — the burden travels with the gear.
+
 <<~/ahu >>
 
 <<~ ahu #removal >>
+
 ## Removal
 
 Remove by un-equipping, transferring, or disabling the object. Disabling an `item`-hooked Power releases its locked Life. A sundered container scatters its whole bundle.
+
 <<~/ahu >>
 
 <<~ ahu #overflow >>
+
 ## Overflow
 
 Past 7 + Strength carried slots, use a container item to compress many Powers into one slot, or spill to Burden.
+
 <<~/ahu >>
 
 <<~ ahu #aftermath >>
+
 ## Aftermath
 
 - Container capacity: confirm whether a single album has an internal Power cap or scales with item Level (OGA upgrade economy) when the album itself is an upgradable Hallmark.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class family:template role:uses >>

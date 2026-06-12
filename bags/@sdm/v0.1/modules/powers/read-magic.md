@@ -2,30 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
-file-path = "bags/@sdm/v0.1/modules/powers/read-magic.md"
-type      = "text/x-memetic-wikitext"
-
-title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
+cacheable = true
 caption   = "Read Magic"
-tags = [
-  "@sdm/tags/domain/divination",
-  "@sdm/tags/function/magic-decode",
-  "@sdm/tags/function/ecm-scan",
-  "@sdm/tags/function/archive",
-  "@sdm/tags/hook/dangerous",
-  "@sdm/tags/mount/trait",
-]
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+file-path = "bags/@sdm/v0.1/modules/powers/read-magic.md"
+invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 16
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "Power module: Read Magic — decode a magical inscription's interface layer; the first proof of the v0.1 composition chain"
+tags      = ["@sdm/tags/domain/divination", "@sdm/tags/function/magic-decode", "@sdm/tags/function/ecm-scan", "@sdm/tags/function/archive", "@sdm/tags/hook/dangerous", "@sdm/tags/mount/trait"]
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -35,6 +25,7 @@ role      = "Power module: Read Magic — decode a magical inscription's interfa
 # Read Magic
 
 <<~ ahu #has >>
+
 ## Composition
 
 Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
@@ -45,6 +36,7 @@ Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/archive >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
+
 <<~/ahu >>
 
 <<~ ahu #default >>
@@ -74,18 +66,22 @@ When something resists, resolve it as an `ecm-scan` contest. On a sacrificed rea
 ### Mishaps
 
 A botched read mis-recognizes: the operator marks the wrong meaning as trusted, rouses what the inscription guards, or carries an owner-trace away unknowing.
+
 <<~/ahu >>
 
 <<~ ahu #variants >>
+
 ## Variants
 
 - **Thread Reading** — silk-knot, web-vibration, and woven ward notation (spider-folk). Seats as `trait`.
 - **Archive Handshake** — a shrine, wiki, or ship-daemon service reads interface layers for authorized operators. Seats as `structure`.
 - **Grimoire Lens** — an item pays or focuses the cost through charge, attunement, or breakage risk. Seats as `item`.
 - **Cursed Literacy** — the operator cannot stop reading magical surfaces; archives may read back. Seats as `burden`, carries `hook/dangerous`.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
@@ -95,12 +91,14 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 <<~/ahu >>
 
 <<~ ahu #aftermath >>
+
 ## Aftermath
 
 - Decide whether recognition binds to the exact surface, the rune-family, or the archive lineage by default.
 - Decide whether hostile reading leaves a trace only on sacrifice/failure or whenever the target holds an owner-lock.
 - `apocrypha` domain: promote a component meme if forbidden-archive queries need the address (the v0.0 root carried it; v0.1 holds it as a header note until a query asks).
 - Split Thread Reading into a spider-folk webcraft module when that play needs it.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

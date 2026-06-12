@@ -2,29 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
-file-path = "bags/@sdm/v0.1/modules/powers/shield-ward.md"
-type      = "text/x-memetic-wikitext"
-
-title     = "lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
+cacheable = true
 caption   = "Shield Ward"
-tags = [
-  "@sdm/tags/domain/abjuration",
-  "@sdm/tags/function/ward",
-  "@sdm/tags/function/barrier",
-  "@sdm/tags/hook/imbued",
-  "@sdm/tags/mount/trait",
-]
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+file-path = "bags/@sdm/v0.1/modules/powers/shield-ward.md"
+invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "Power module: Shield Ward — a skin-close abjuration barrier that filters incoming attacks"
+tags      = ["@sdm/tags/domain/abjuration", "@sdm/tags/function/ward", "@sdm/tags/function/barrier", "@sdm/tags/hook/imbued", "@sdm/tags/mount/trait"]
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -34,6 +25,7 @@ role      = "Power module: Shield Ward — a skin-close abjuration barrier that 
 # Shield Ward
 
 <<~ ahu #has >>
+
 ## Composition
 
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration >>
@@ -41,6 +33,7 @@ role      = "Power module: Shield Ward — a skin-close abjuration barrier that 
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
+
 <<~/ahu >>
 
 <<~ ahu #default >>
@@ -71,18 +64,22 @@ Raise a magical barrier less than an inch from the body. It moves with the opera
 ### Mishaps
 
 On a botched or breached ward, choose one: it flares and reveals the operator; guards the wrong vector; rebounds a missile at a bystander; locks the operator's movement for a breath; imprints a visible sigil; or mistakes a friendly effect for an intrusion.
+
 <<~/ahu >>
 
 <<~ ahu #variants >>
+
 ## Variants
 
 - **Missile Filter** — projectile-first: arrows, bullets, rays, force darts. Seats `trait`.
 - **Skin Shell** — melee-first: grapples, claws, close blows. Seats `trait`.
 - **Armor Spirit** — armour or shield gear carries the ward without collapsing into the gear. Seats `item`.
 - **Oath Ward** — holds while an oath remains unbroken; relationship gates the protection. Seats `structure` or `burden`.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
@@ -92,11 +89,13 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 <<~/ahu >>
 
 <<~ ahu #aftermath >>
+
 ## Aftermath
 
 - SDM+ defense math for the OSR AC 2 / AC 4 language.
 - Does the Magic-Missile interaction stay module-specific, or generalise into a `negate`/`#modifies` rule (counterpoint, Sprint 4)?
 - A Dispel/anti-magic effect that drops this ward wants a `#modifies` edge, not `#has`.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

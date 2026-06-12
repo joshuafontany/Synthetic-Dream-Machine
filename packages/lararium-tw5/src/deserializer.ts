@@ -205,17 +205,30 @@ function splitMemeToTiddlers(
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
   const etxM = maskedExec(noSoh, /\n?<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
   const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
-  // Degraded-carrier surfacing: a closer that exists in the bytes but sits
-  // fence-masked (an unclosed or ambiguous fence swallowed it) would ride
-  // into the body as CONTENT — and every render would append a fresh closer
-  // pair, doubling without bound. Found live 2026-06-11 on fence-teaching
-  // docs CommonMark itself misread. Never silent: name it for the operator.
+  // Degraded-carrier surfacing: a closer swallowed by an UNCLOSED fence
+  // tail would ride into the body as CONTENT — and every render would
+  // append a fresh closer pair, doubling without bound. Found live
+  // 2026-06-11 on fence-teaching docs CommonMark itself misread. A closer
+  // inside a properly CLOSED fence reads as deliberate quotation — benign,
+  // no warning (the render adds the structural close lawfully).
   if (!etxM && /&#x0003;/.test(noSoh)) {
-    warnings.push(
-      `${uri}: carrier close (&#x0003;) present but fence-masked — an unclosed or ` +
-      `ambiguous code fence swallows it; closers will double on every round trip. ` +
-      `Check fence balance (quote fences inside fences with a LONGER outer run).`,
-    );
+    const spans = fencedSpans(noSoh);
+    const openTail = spans.length > 0 && spans[spans.length - 1]!.end === noSoh.length
+      ? spans[spans.length - 1]! : null;
+    let swallowed = false;
+    if (openTail) {
+      const g = /&#x0003;/g; let m: RegExpExecArray | null;
+      while ((m = g.exec(noSoh)) !== null) {
+        if (m.index >= openTail.start) { swallowed = true; break; }
+      }
+    }
+    if (swallowed) {
+      warnings.push(
+        `${uri}: carrier close (&#x0003;) sits inside an UNCLOSED code fence — ` +
+        `closers will double on every round trip. Check fence balance ` +
+        `(quote fences inside fences with a LONGER outer run).`,
+      );
+    }
   }
 
   const stxM = maskedExec(stripped, STX_LINE_RE);

@@ -7,30 +7,20 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/meme/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 16
-manao = 17
-role = "meme operational skill — composition, audit, conformance check, and lawful sidecar split"
-covers = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"
-]
-constraints = [
-  "S1: the parent invariant remains the copy-shape authority and this skill does not outrank it",
-  "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible",
-  "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal",
-  "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency",
-  "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"
-]
+cacheable          = true
+constraints        = ["S1: the parent invariant remains the copy-shape authority and this skill does not outrank it", "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible", "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal", "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency", "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+file-path          = "bags/@lares/v0.1/api/pono/meme/SKILL.md"
+mana               = 16
+manao              = 17
+manaoio            = 14
+register           = "Synthesis-Canon"
+retain             = true
+role               = "meme operational skill — composition, audit, conformance check, and lawful sidecar split"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/meme"
-cacheable=true
-retain = true
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL"
 ```
-
-
 
 # Meme Skill
 
@@ -266,5 +256,9 @@ Aftermath — close by naming:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
 
 <<~/ahu >>
+
+<<~ &#x0004; -> ? >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>

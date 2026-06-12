@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/divination"
-file-path = "bags/@sdm/v0.1/components/domain/divination.md"
-type      = "text/x-memetic-wikitext"
-
-title     = "lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination"
+cacheable = true
 caption   = "divination"
-tagspace  = "sdm"
-register  = "Synthesis"
+file-path = "bags/@sdm/v0.1/components/domain/divination.md"
+invariant = false
 mana      = 13
 manao     = 16
 manaoio   = 13
-cacheable = true
+register  = "Synthesis"
 retain    = true
-invariant = false
 role      = "component (domain): Divination — the school of perceiving the hidden"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/divination"
 ```
 
 <<~ &#x0002; >>
@@ -24,24 +22,31 @@ role      = "component (domain): Divination — the school of perceiving the hid
 # Divination
 
 <<~ ahu #definition >>
+
 ## Definition
 
 The domain of perceiving the hidden — reading inscriptions, scrying distance, sensing patterns, presences, and intent.
+
 <<~/ahu >>
 
 <<~ ahu #activation >>
+
 ## Activation
 
 Orients a module toward **knowing rather than changing**. It targets information, not matter — what is there, what it means, who left it. Rarely resolves as an attack.
+
 <<~/ahu >>
 
 <<~ ahu #interaction >>
+
 ## Interaction
 
 Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`. A `veil`/`spoof` effect degrades it; a `hook/dangerous` reading risks Corruption when it pierces something defended.
+
 <<~/ahu >>
 
 <<~ ahu #filters >>
+
 ## Filters
 
 ```text
@@ -49,15 +54,19 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 [tag[prefix[lar:///ha.ka.ba/@sdm/v0.1/components/domain/]]]                all domain components
 [tag[lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination]tag[lar:///ha.ka.ba/@sdm/v0.1/components/function/archive]]   divinations that archive
 ```
+
 <<~/ahu >>
 
 <<~ ahu #aftermath >>
+
 ## Aftermath
 
 - Confirm whether scrying-at-range and inscription-reading want separate sub-functions or stay one domain.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>

@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext"
-file-path = "bags/@lares/v0.1/docs/pono/memetic-wikitext.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 16
-manao = 17
-role = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/memetic-wikitext.md"
 invariant = false
+mana      = 16
+manao     = 17
+manaoio   = 14
+register  = "Synthesis-Canon"
+retain    = false
+role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -196,6 +194,11 @@ The submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
+
 <<~/ahu >>
+
+<<~ &#x0004; -> ? >>
+
+<<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
