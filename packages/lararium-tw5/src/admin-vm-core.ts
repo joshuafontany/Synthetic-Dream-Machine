@@ -25,6 +25,7 @@ import {
   CompositeStore,
   AutomergeDocStore,
   attachMessageChannelSync,
+  awaitIslandMsg,
   mkManifest,
   mkAdminPlaceVerb,
   mkAdminVerbResult,
@@ -49,7 +50,7 @@ import {
   type AdminMsg_ResidencyOp,
   type AdminMsg_WikiAlert,
   type BatchMode,
-  type IslandMsg_Breath,
+  type IslandMsg_Ea,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
 import type { VerbTable } from "./verb-dispatcher.js";
@@ -205,67 +206,32 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     else p.resolve(value);
   }
 
-  // ── workerEa Promise — the breath watchdog ──────────────────────────────────
-  // Each island breath re-arms the silence window; silence alone times out.
-  let _resolve!: () => void;
-  let _reject!:  (err: Error) => void;
-  const workerEa = new Promise<void>((res, rej) => { _resolve = res; _reject = rej; });
+  // ── workerEa — the ea-wait rides the shared hull (one-hull law, step 1) ─────
+  // awaitIslandMsg carries the whole breath watchdog: re-arm on breath, stall
+  // budget on frozen (phase, progress), silence alone times out, fault rejects
+  // immediately. No bespoke admin timer survives — the admin VM and the island
+  // pool now share ONE watchdog mechanism (vessel-host).
   const silenceMs = opts.eaSilenceMs ?? EA_SILENCE_TIMEOUT_MS;
   const stallMs   = opts.eaStallMs   ?? (opts.eaSilenceMs !== undefined ? 3 * opts.eaSilenceMs : EA_STALL_TIMEOUT_MS);
-  let _lastBreath   = "spawn";
-  let _lastAdvanceAt = Date.now();
-  let _eaSettled  = false;
-  let eaTimer: ReturnType<typeof setTimeout>;
-  const armEaTimer = (): void => {
-    eaTimer = setTimeout(
-      () => _reject(new Error(
-        `[openAdminVm] admin island ea silence timeout (${silenceMs}ms; last breath: ${_lastBreath})`,
-      )),
-      silenceMs,
-    );
-  };
-  armEaTimer();
+  const workerEa: Promise<void> = awaitIslandMsg<IslandMsg_Ea>({
+    expectedType:    "ea",
+    timeoutMs:       silenceMs,
+    progressStallMs: stallMs,
+    resetOnTypes:    ["breath"],
+    rejectOnTypes:   ["fault"],
+    subscribe:       (h) => worker.listen(h),
+    subscribeError:  (h) => worker.onError(h),
+  }).then(() => undefined);
+  // Settle-safety: a dispose() mid-boot leaves the silence timer to fire after
+  // the worker dies; this no-op handler keeps that late rejection from going
+  // unhandled while real awaiters still receive it.
+  workerEa.catch(() => {});
 
   // ── Delegation loop + island message routing ────────────────────────────────
+  // breath/ea/fault ride the awaitIslandMsg subscription above; this listener
+  // carries only the live admin surfaces.
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
-
-    if (raw.type === "breath") {
-      if (_eaSettled) return;
-      const breath   = raw as IslandMsg_Breath;
-      const evidence = `${breath.phase}#${breath.progress}`;
-      if (evidence !== _lastBreath) {
-        // Fresh evidence — phase or progress moved; the stall clock restarts.
-        _lastBreath    = evidence;
-        _lastAdvanceAt = Date.now();
-      } else if (Date.now() - _lastAdvanceAt > stallMs) {
-        // Alive but frozen past the budget: breathing-without-advancing
-        // reads dead (progress-kick over timer-kick).
-        _eaSettled = true;
-        clearTimeout(eaTimer);
-        _reject(new Error(
-          `[openAdminVm] admin island mount stalled (no progress in ${stallMs}ms; last breath: ${_lastBreath})`,
-        ));
-        return;
-      }
-      clearTimeout(eaTimer);
-      armEaTimer();
-      return;
-    }
-
-    if (raw.type === "ea") {
-      _eaSettled = true;
-      clearTimeout(eaTimer);
-      _resolve();
-      return;
-    }
-
-    if (raw.type === "fault") {
-      _eaSettled = true;
-      clearTimeout(eaTimer);
-      _reject(new Error(`[openAdminVm] admin island fault: ${(raw as { error: string }).error}`));
-      return;
-    }
 
     if (raw.type === "admin:verify-result") {
       const msg = raw as AdminMsg_VerifyResult;
@@ -360,12 +326,6 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     }
   });
 
-  worker.onError((err) => {
-    _eaSettled = true;
-    clearTimeout(eaTimer);
-    _reject(err);
-  });
-
   // ── Deliver manifest ────────────────────────────────────────────────────────
   const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
@@ -412,7 +372,6 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       _wikiAlertHandler = fn;
     },
     dispose: () => {
-      clearTimeout(eaTimer);
       worker.terminate();
     },
   };

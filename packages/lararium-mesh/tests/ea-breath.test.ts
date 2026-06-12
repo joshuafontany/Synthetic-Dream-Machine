@@ -12,7 +12,7 @@
 
 import { describe, test, expect } from "vitest";
 import { awaitIslandMsg } from "../src/vessel-host.js";
-import { mkEa, mkBreath, type IslandMsg_Ea } from "../src/island-protocol.js";
+import { mkEa, mkBreath, mkFault, type IslandMsg_Ea } from "../src/island-protocol.js";
 
 const WIKI = "lar:///ha.ka.ba/@test/wiki";
 
@@ -117,6 +117,23 @@ describe("awaitIslandMsg — the ea-breath watchdog", () => {
 
     const msg = await wait;
     expect(msg.type).toBe("ea");
+  });
+
+  test("a named fault rejects immediately — no silence budget spent on a corpse", async () => {
+    const wire = fakeWire();
+    const wait = awaitIslandMsg<IslandMsg_Ea>({
+      expectedType:  "ea",
+      timeoutMs:     5_000,
+      resetOnTypes:  ["breath"],
+      rejectOnTypes: ["fault"],
+      subscribe:     wire.subscribe,
+    });
+
+    const start = Date.now();
+    wire.emit(mkFault(WIKI, "keyhive gate B failed"));
+
+    await expect(wait).rejects.toThrow(/fault while waiting for ea: keyhive gate B failed/);
+    expect(Date.now() - start).toBeLessThan(100);
   });
 
   test("a breath never settles the wait — only the expected type resolves", async () => {

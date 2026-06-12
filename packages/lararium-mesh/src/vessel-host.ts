@@ -66,6 +66,12 @@ export interface AwaitIslandMsgOpts<T extends IslandToVesselMsg> {
    * advances reads dead, on a budget. Absent → re-arm on any reset message.
    */
   progressStallMs?: number;
+  /**
+   * Message types that settle the wait by REJECTION (e.g. "fault") — the
+   * island named its own failure; the wait surfaces it immediately instead
+   * of spending the silence budget on a corpse.
+   */
+  rejectOnTypes?: readonly IslandToVesselMsg["type"][];
   /** Register a message handler; return its unsubscribe. */
   subscribe: (handler: (raw: unknown) => void) => () => void;
   /** Optionally register an error handler; return its unsubscribe. */
@@ -103,6 +109,14 @@ export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsg
 
     offs.push(opts.subscribe((raw) => {
       if (!isIslandToVesselMsg(raw)) return;
+      if (opts.rejectOnTypes?.includes(raw.type)) {
+        cleanup();
+        const detail = (raw as { error?: string }).error;
+        reject(new Error(
+          `[vessel-host] ${raw.type} while waiting for ${opts.expectedType}${detail ? `: ${detail}` : ""}`,
+        ));
+        return;
+      }
       if (opts.resetOnTypes?.includes(raw.type)) {
         // Breath, not settlement — the island still lives. Fresh evidence
         // (phase or progress moved) restarts the stall clock; frozen evidence

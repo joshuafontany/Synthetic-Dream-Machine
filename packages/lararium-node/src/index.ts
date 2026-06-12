@@ -11,7 +11,8 @@ export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-
 export { loadGenesisIsland, reconcileIslandFromGenesis, readGenesisSha256, GENESIS_CID } from "./genesis-artifact.js";
 export { createSessionEventLog, seedAdminDoc } from "@lararium/mesh";
 export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-vessel.js";
-export { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
+// lar-event-bus-impl moved to @lararium/mesh (isomorphism sweep 2026-06-12); re-export keeps consumers whole
+export { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 
 export { runInit } from "./commands/init.js";
 export type { InitOptions, InitResult } from "./commands/init.js";

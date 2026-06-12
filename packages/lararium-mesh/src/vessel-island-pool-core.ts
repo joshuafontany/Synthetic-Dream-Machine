@@ -196,6 +196,7 @@ export class VesselIslandPoolCore {
         timeoutMs:       this._mountSilenceMs,
         progressStallMs: this._mountStallMs,
         resetOnTypes:    ["breath"],
+        rejectOnTypes:   ["fault"],
         subscribe:      (h) => worker.listen(h),
         subscribeError: (h) => worker.onError(h),
         send: () => worker.post(manifestMsg, [syncPort]),

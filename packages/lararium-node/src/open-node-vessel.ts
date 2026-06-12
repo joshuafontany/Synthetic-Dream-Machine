@@ -53,7 +53,7 @@ import {
   reconcileWellKnownTiddlers, mintLaresIfAbsent,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";
+import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal }                from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";

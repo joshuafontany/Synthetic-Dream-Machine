@@ -1,5 +1,9 @@
 /**
- * lar-event-bus-impl — concrete LarEventBus for the lararium-node tick loop.
+ * lar-event-bus-impl — the ONE concrete LarEventBus, platform-blind.
+ *
+ * Lived in lararium-node until 2026-06-12 with zero node imports — a pure
+ * mislocation; the isomorphism sweep moved it here so every vessel inherits
+ * the bus (equal vessels: capability differs by grant, never by hull).
  *
  * Architecture (from LARARIUM-TICK-CLOCK.md):
  *   Layer 1: ingress rings, one per source (crdt, vm, session, tool)
@@ -19,7 +23,7 @@
  *   3. Adapters call emit() to feed ingress events
  *   4. stop() clears the interval and cancels all branch tasks
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/lar-event-bus-impl
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-event-bus-impl
  */
 
 import type {
@@ -27,7 +31,7 @@ import type {
   LarEventStream,
   IngressRingDescriptor,
   LarEventBus,
-} from "@lararium/mesh";
+} from "./lar-event-bus.js";
 
 // ---------------------------------------------------------------------------
 // Internal types
