@@ -70,6 +70,14 @@ export interface VesselIslandPoolCoreOptions {
   hotCap?: number;
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
+  /**
+   * Called when the island's `ea` declaration lands — the island speaks
+   * "sovereignty, breath, life" and the vessel RESPONDS (never a synthetic
+   * vessel-side lifecycle event; the breath is the event). The durable
+   * mailbox drains on ea: parked verbs deliver-to-identity the moment the
+   * identity breathes again.
+   */
+  onEa?: (wikiId: string) => void;
 }
 
 const HANDSHAKE_TIMEOUT_MS = 10_000;
@@ -81,6 +89,7 @@ export class VesselIslandPoolCore {
   private readonly _diskMirrorGrant: DiskMirrorGrant;
   private readonly _hotCap:         number;
   private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
+  private readonly _onEa:           ((wikiId: string) => void) | null;
   private readonly _pendingWikiVerbs = new Map<string, {
     resolve: (r: Record<string, unknown>) => void;
     reject:  (e: Error) => void;
@@ -92,6 +101,7 @@ export class VesselIslandPoolCore {
     this._diskMirrorGrant = opts.diskMirrorGrant ?? [];
     this._hotCap          = opts.hotCap ?? Infinity;
     this._onWorkerEvent   = opts.onWorkerEvent ?? null;
+    this._onEa            = opts.onEa ?? null;
   }
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────
@@ -150,6 +160,7 @@ export class VesselIslandPoolCore {
     this._slots.set(wikiId, {
       temperature: "wela", pinned, wikiId, worker, mainPort, lastUsedAt: Date.now(),
     });
+    this._onEa?.(wikiId);   // the island breathed; respond
   }
 
   /** Unmount a live island via teardown handshake; slot goes cold (`anu`). */

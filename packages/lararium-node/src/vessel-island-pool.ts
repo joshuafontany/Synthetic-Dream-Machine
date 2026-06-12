@@ -29,6 +29,8 @@ export interface VesselIslandPoolOptions {
   workerScriptUrl?: URL;
   /** Called when an island emits a IslandMsg_Event (RE reaction). */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
+  /** Called when the island's ea declaration lands — the mailbox drain rides the breath. */
+  onEa?: (wikiId: string) => void;
   /** Vessel Automerge Repo — each island's mainPort wires to it for CRDT sync. */
   mainRepo?: Repo;
   /** Root dir for island-owned NodeFS storage partitions; absent = memory-only. */
@@ -59,6 +61,7 @@ export class VesselIslandPool extends VesselIslandPoolCore {
       diskMirrorGrant: options.diskMirrorGrant ?? [],
       hotCap: HOT_CAP,
       ...(options.onWorkerEvent ? { onWorkerEvent: options.onWorkerEvent } : {}),
+      ...(options.onEa ? { onEa: options.onEa } : {}),
     });
   }
 }
