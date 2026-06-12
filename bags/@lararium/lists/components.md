@@ -8,7 +8,7 @@ mana      = 13
 manao     = 16
 register  = "Synthesis"
 retain    = true
-role      = "TW5 procedure: render every @-bag tag on the current tiddler as a clickable tag-pill"
+role      = "TW5 procedure: render the current tiddler's has-stack as clickable tag-pills (stack filter; captions from definition memes)"
 tags      = ["$:/tags/Global"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/lists/components"
@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/@lararium/lists/components"
 
 ## Contract
 
-`<<components>>` reads the rendering context's current tiddler, selects every tag whose title begins with `@` (bag-scoped component and mount-point tags), and renders each as a clickable pill via the `tag-pill` procedure. It takes no argument — composition is declared once as the tiddler's `@`-tags; this macro renders it.
+`<<components>>` reads the rendering context's current tiddler, resolves its has-stack through the `stack` filter operator (relative tags qualify against the carrier's own bag scope; `lar:` tags pass through; system tags stay outside), and renders each component as a clickable pill via the `tag-pill` procedure. It takes no argument — composition lives once in the tiddler's tags; this macro renders the stack.
 
 <<~/ahu >>
 
@@ -28,7 +28,7 @@ uri-path  = "ha.ka.ba/@lararium/lists/components"
 
 \procedure components()
 <span class="sdm-component-list">
-<$list filter="[all[current]tags[]prefix[@]]" variable="tag">
+<$list filter="[all[current]stack[]]" variable="tag">
 <$transclude $variable="tag-pill" target=<<tag>>/>
 </$list>
 </span>

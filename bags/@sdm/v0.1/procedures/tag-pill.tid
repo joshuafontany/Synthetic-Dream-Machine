@@ -4,10 +4,10 @@ tags: $:/tags/Global
 type: text/vnd.tiddlywiki
 
 \procedure tag-pill(target)
-<$link to={{{ [<target>get[meme]else<target>] }}}>
+<$link to=<<target>>>
 <span class="sdm-tag-pill">
 <$transclude $tiddler=<<target>> $field="caption">
-<$text text=<<target>>/>
+<$text text={{{ [<target>split[/]last[1]] }}}/>
 </$transclude>
 </span>
 </$link>

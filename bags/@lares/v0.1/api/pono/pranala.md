@@ -3,17 +3,16 @@
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 ```toml iam
 cacheable        = true
-canonical-forms  = ["inline", "block"]
+canonical-forms  = ["inline"]
 file-path        = "bags/@lares/v0.1/api/pono/pranala.md"
-lifecycle-layers = ["template", "instance", "trace"]
-mana             = 16
+mana             = 15
 manao            = 16
-manaoio          = 15
+manaoio          = 14
 namespace        = "&#x2299;"
 register         = "Synthesis-Canon"
 retain           = true
-role             = "invariant edge law"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala"]
+role             = "pranala law (kānāwai): the anchored-pointer sigil — NARROWED 2026-06-12 under the has-stack model; typed-edge anatomy moved to api/pono/wire; role/family attribute vocabulary retired-reserved"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/has-stack", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala"]
 type             = "text/x-memetic-wikitext"
 uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
 ```
@@ -24,7 +23,9 @@ uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
 
 # Pranala
 
-One typed, directed, acyclic edge between two sockets.
+One anchored pointer from this carrier outward.
+
+The has-stack ruling (2026-06-12) split the old typed-edge law in three: **composition** rides the iam `tags` field (`has-stack`); **relations that do something** reify as wire entities (`wire`); pranala keeps only what remained — a named anchor pointing at a target, plus its sugar. The graph stays explicit; the types live in the things, never on the lines.
 
 <<~/ahu >>
 
@@ -32,11 +33,11 @@ One typed, directed, acyclic edge between two sockets.
 
 <<~ ahu #ooda-ha >>
 
-✶ Inventory hidden edge claims — name family, traversal, propagation, role distinctly.
-⏿ Keep family from collapsing into lifecycle; traversal from collapsing into propagation.
-◇ Choose family first; let role and cardinality carry ownership pressure.
-▶ Author one edge per pranala; bind socket targets explicitly.
-↺ Cross the edge into live memes; verify DAG invariant holds; Truth density rose if fewer vague dependencies survive.
+✶ find what the pointer really carries — composition, action, embed, or bare adjacency — before authoring.
+⏿ orient on the ladder: worn → tags · doing → wire entity · embedding → aka/kahea · pointing → loulou or anchored pranala.
+◇ decide the lightest lawful form; reach for pranala only when the anchor name earns its place.
+▶ author one pointer per sigil; bind the target explicitly.
+↺ verify no retired vocabulary rode in; fewer, lighter edges = the win condition.
 
 <<~/ahu >>
 
@@ -44,166 +45,35 @@ One typed, directed, acyclic edge between two sockets.
 
 ## Pranala Law (Kānāwai)
 
-One pranala carries one typed, directed, acyclic edge between two sockets.
-
-A pranala MUST carry one `family`.
-A pranala MUST carry one `lifecycle`.
-A pranala MUST bind a `from` socket and a `to` socket.
-A pranala MUST stay acyclic — directly and transitively, in any family.
-A pranala MUST carry single-direction traversal; reciprocal pressure MUST use two parallel edges with distinct families.
-Exception: `relation` edges MAY appear as mutual parallel pairs (A→B and B→A) to model genuinely symmetric semantics (e.g., `sibling-of`, `adjacent-to`). Each edge in the pair remains individually directed and acyclic.
-A pranala SHOULD carry `role` when the edge encodes ownership, reference, or composition semantics.
-A pranala SHOULD carry `traversal` and `propagation` when query direction and invalidation flow differ.
-A pranala MAY carry `cardinality` when the connection enforces a structural limit.
-A pranala MAY carry `payload`.
-
-TOML inside a pranala block carries payload, metadata, and template-overrides only.
-The pranala sigil and inline fields are the primary grammar.
-Omit the TOML block when `family` and `role` in the sigil express the full intent.
-
-`family` — what the edge *means*: relation, control, dataflow, message, constraint, observe.
-`role` — what the edge *does to lifecycle*: owns, references, composes, constrains, has.
-`traversal` — how a query *moves*: source-to-target, target-to-source, none.
-`propagation` — how invalidation *fires*: push-forward, push-back, pull, none.
-These four concerns are independent and MUST NOT collapse into each other.
-
-`traversal` and `propagation` operate on the same arc independently.
-A single `control` edge MAY carry `traversal: source-to-target` and `propagation: push-back` simultaneously.
-
-Surface forms:
-
-`? -> TO` — local-source; `?` resolves to the nearest enclosing socket or `#fragment-id`.
-`FROM -> TO` — explicit; both sockets named.
-
-`ahu` MUST carry the cleanest socket pressure; it MAY resolve nested and MAY act as an anchor.
-
-Edge sigil syntactic sugar:
-* `<<~ loulou URI >>` — outgoing link (`family:relation`)
-* `<<~ aka URI >>` — shadow transclusion (`family:transclusion`)
-* `<<~ kahea URI >>` — live transclusion (`family:transclusion`)
+1. A pranala carries one **anchored pointer**: `<<~ pranala #anchor ? -> TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
+2. **Retired-reserved (2026-06-12):** the `role:` vocabulary (implements, owns, governed-by, and the rest of the feral taxonomy) and `family:` as an inline edge type. The corpus-wide burn converted them to tags, loulou, and (where relations *do* something) the wire plane. Retired terms stay reserved, never reused.
+3. **One attributed form survives at rest:** the code source-pointer — `<<~ pranala #anchor ? -> packages/<path> family:code role:has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
+4. Sugar, unchanged: `<<~ loulou URI >>` (adjacency) · `<<~ aka URI >>` (shadow transclusion) · `<<~ kahea URI >>` (live transclusion).
+5. Anything heavier — direction, propagation, payload, lifecycle, arity — belongs to a **wire entity**, never to this sigil.
 
 <<~/ahu >>
 
-<<~ ahu #families >>
+<<~ ahu #handoff-boundary >>
 
-## Families
+## Handoff Boundary
 
-* `relation` — semantic or ontological link; names what kind of connection holds; carries no execution pulse
-* `control` — execution order, branch, gate, pulse; carries structural ownership hierarchy and Entity lifetime
-* `dataflow` — typed value, field, or geometry transport between node pins (canvas value-wires)
-* `message` — routed event or signal passage; carries notification without structural ownership stake
-* `constraint` — declarative rule without execution pulse; spatial, logical, or physical
-* `observe` — live inspection, reveal, watch, or operator illumination (monitoring)
-* `transclusion` — content embedding (page surface); carries `aka` (frozen) and `kahea` (live) transclusion pressure
-
-<<~/ahu >>
-
-<<~ ahu #lifecycles >>
-
-## Lifecycles
-
-* `template` — reusable edge sigil with slots and defaults
-* `instance` — one concrete edge between actual endpoints
-* `trace` — recorded edge event, failure, or firing
-
-<<~/ahu >>
-
-<<~ ahu #fields >>
-
-## Fields
-
-* `family` · `lifecycle` · `from` · `to`
-* `traversal` · `propagation`
-* `role` · `cardinality`
-* `label` · `status` · `confidence` · `payload`
-
----
-
-`traversal` — structural query direction:
-* `source-to-target`
-* `target-to-source`
-* `none`
-
-`propagation` — invalidation / notification direction:
-* `push-forward` — fires from `from` toward `to`
-* `push-back` — fires from `to` toward `from`
-* `pull` — consumer requests value from upstream on demand
-* `none`
-
-`role` — lifecycle ownership posture (SHOULD carry when ownership matters):
-* `owns` — source controls target lifetime; destroying source removes target
-* `references` — source observes target without lifecycle stake
-* `composes` — source layers opinion over target with strength ordering
-* `constrains` — source imposes a declarative rule on target without execution pulse
-* `has` — source holds the target as a **component**; composition / possession, never the `is-a` copula.
-
-`cardinality` — structural limit (MAY carry):
-* `one-to-one`
-* `one-to-many`
-* `many-to-one`
-* `many-to-many`
-
-<<~/ahu >>
-
-<<~ ahu #forms >>
-
-## Forms
-
-`FROM` and `TO` MUST mean `FROM-SOCKET` and `TO-SOCKET`.
-`? -> TO` MAY compress when enclosing pressure already carries the source socket.
-A named `#fragment` SHOULD win socket resolution before the enclosing meme URI.
-
-### Inline
-
-```text
-<<~ pranala ? -> TO-SOCKET family:relation >>
-<<~ pranala FROM-SOCKET -> TO-SOCKET family:control role:owns >>
-```
-
-### Block
-
-````text
-<<~ pranala #fragment FROM-SOCKET -> TO-SOCKET >>
-```toml
-family = "control"
-lifecycle = "instance"
-traversal = "source-to-target"
-propagation = "push-back"
-role = "owns"
-cardinality = "one-to-many"
-label = "parent owns child"
-```
-<<~/pranala >>
-````
-
-<<~/ahu >>
-
-<<~ ahu #schema >>
-
-## Schema (machine-readable)
-
-The family taxonomy --- `KNOWN_FAMILIES`, `FAMILY_ROLES`, `FAMILY_CONTRACTS` --- lives in the
-canonical `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families` (`#schema`); projections read the taxonomy there. This block carries only the edge-render constants specific to
-`PranalaEdge`.
-
-```toml
-# PranalaEdge render modes — render layer switches on these; null = default arrow
-render-modes = ["reaction-wire"]
-
-# Canonical reaction roles (informational; not exhaustive)
-reaction-roles = ["subscription", "handler", "callback"]
-```
+`has-stack` governs composition (the tags field).
+`wire` governs reified edges — the canvas and verse-messaging substrate (families, traversal, propagation, lifecycle template/instance/trace, the DAG rule — all moved there whole).
+`pranala-families` holds the family taxonomy shelf the wire components grow from.
+`papalohe` / `kukali` carry the messaging widgets; `verse-event-lattice` the engine-vended event law.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wire >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
-
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
 
 <<~/ahu >>

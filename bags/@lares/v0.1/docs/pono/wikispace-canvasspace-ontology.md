@@ -32,12 +32,12 @@ Lares fuses three traditions nobody has fused whole: a **transclude-capable wiki
 
 ## One Model, Two Cameras
 
-The meme-graph holds **all nine pranala families as model-level semantic relations**. Two cameras project that one graph (`render-pipeline#render-axes`):
+The meme-graph holds composition in the has-stack (iam tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that *does* something as a **wire entity** — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
 
 - the **Story-River camera** — `window.document`, the page/document surface;
 - the **TLDraw canvas camera** — `OffscreenCanvas`, the infinite flow surface.
 
-A family carries the **meaning**; the surface picks the **render template**. A `dataflow` edge *means* "typed value between pins" whether the canvas draws it as a wire or the Story River renders it as a dependency note. The discipline mirrors projectional editing (JetBrains MPS): **the model node carries no intrinsic surface form** — every appearance reads as a projection. Confirmed novel — no prior system fuses content-identity transclusion + infinite canvas + typed-pin dataflow under one addressed graph.
+The worn family component carries the **meaning**; the surface picks the **render template**. A `wires/dataflow` entity *means* "typed value between pins" whether the canvas draws it as a wire or the Story River renders it as a dependency note. The discipline mirrors projectional editing (JetBrains MPS): **the model node carries no intrinsic surface form** — every appearance reads as a projection. Confirmed novel — no prior system fuses content-identity transclusion + infinite canvas + typed-pin dataflow under one addressed graph.
 
 <<~/ahu >>
 
@@ -45,7 +45,7 @@ A family carries the **meaning**; the surface picks the **render template**. A `
 
 ## Graph-Primacy — the Inversion
 
-Lares runs the **opposite** of Shipman-Marshall spatial hypertext. There, canvas proximity *infers* structure (near-means-related). Here, **the explicit pranala edge comes first, and the canvas renders it**: explicit-graph → spatial-form, never spatial-arrangement → inferred-edge.
+Lares runs the **opposite** of Shipman-Marshall spatial hypertext. There, canvas proximity *infers* structure (near-means-related). Here, **the explicit graph entity (worn stack, loulou, wire) comes first, and the canvas renders it**: explicit-graph → spatial-form, never spatial-arrangement → inferred-edge.
 
 A reader may drag two node-shapes adjacent without intending a relation; bare proximity creates no edge. The canvas reads as the **reading surface**; the graph reads as the **authority surface**.
 
@@ -57,7 +57,7 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 The boundary runs not between "graph" and "not-graph" — **both sides carry `lar:` URIs**. It runs between *which entity holds what*:
 
-- **Model** — a meme and its pranala edges: identity (`lar:` URI), `family` / `role` / `confidence` / `lifecycle` / `from`/`to`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
+- **Model** — a meme, its has-stack, and its wire entities: identity (`lar:` URI), the worn components, wire records (`from`/`to` / `lifecycle` / `traversal` / `propagation`), `confidence`, the `#iam` ledger (`mana` / `manao` / `manaoio`), and pin-type declarations on `kumu` node-types.
 - **View** — stored as **its own lar-URI-addressed entities**, separate from any meme's `#iam`: canvas shape position / extent / z-order, camera pan+zoom, Story-River order, level-of-detail, render-template selection.
 
 TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette state hold view-state as system tiddlers; per `lar-uri#tw5-system-boundary`, the view-state that persists or federates carries a `lar:///` title and syncs. So a canvas node exists as a lar-URI entity (the model meme) **and** its canvas/camera state exists as lar-URI entities (the view tiddlers) — distinct, uniformly addressable. **The quine reaches into the view layer.**
@@ -89,7 +89,7 @@ The **core holds surface-invariant**: content-identity (Nelson — "the same thi
 What **splits is the content-position**:
 
 - **Into a node — coherent, no new primitive.** A node's body (an `ahu` slot) carries `aka`/`kahea`; the Story-River camera resolves the embed; the canvas camera displays the result inside the node shape.
-- **Into an edge — DEFERRED (provisional).** Embedding content *into a pranala edge* would require a schema extension (an edge-owned body slot, making the edge a compound of relation + content-position). Novel, no prior art (RDF reification and property-graphs annotate edges as new nodes, never embed content). Held provisional — **annotation *on* an edge ≠ transclusion *into* an edge**; the distinction stands, the feature waits.
+- **Into an edge — RESOLVED BY REIFICATION (2026-06-12).** The wire ruling dissolves the old hesitation: a wire reads as its own entity, so "embedding into an edge" means transcluding into a wire entity's body — ordinary kahea into an ordinary carrier, no schema extension. (RDF reification reached the same shape; here it arrives as law, not workaround.) **Annotation *on* a wire ≠ transclusion *into* a wire** — the distinction stands; both now read lawful.
 
 <<~/ahu >>
 
