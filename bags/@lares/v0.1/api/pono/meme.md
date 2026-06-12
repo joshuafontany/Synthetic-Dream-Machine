@@ -11,7 +11,7 @@ manaoio        = 14
 namespace      = "&#x2299;"
 register       = "Synthesis-Canon"
 retain         = true
-role           = "meme invariant law, copy-shape authority, and rating posture root"
+role           = "meme invariant law, copy-shape authority, and rating posture root — nameless-entity / has-stack ontology (interfaces-and-implements REJECTED 2026-06-12)"
 type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/@lares/v0.1/api/pono/meme"
 ```
@@ -22,8 +22,8 @@ uri-path       = "ha.ka.ba/@lares/v0.1/api/pono/meme"
 
 # Meme Law (Kānāwai)
 
-A meme carries the minimum lawful surface for identity, body, phase pressure, and aftermath.
-This root governs that copy-shape.
+A meme reads as a **nameless entity**: essence lives nowhere; identity rides the `lar:` address; meaning rides what the carrier *wears* (its has-stack) and what its body *says*. No meme *is-a* anything — it carries the minimum lawful surface for identity, body, phase pressure, and aftermath, and composes everything else.
+This root governs that copy-shape; composition law lives at `has-stack`.
 Long procedure, skeleton examples, research, and rating tables live outward.
 
 The word *meme* entered English in 1976 via Richard Dawkins (*The Selfish Gene*), derived from
@@ -75,7 +75,7 @@ Optional depth may add:
 - runtime or normalization notes
 - child callouts through named `pranala` sugar such as `loulou`
 
-Required structure makes the carrier a meme.
+Required structure makes the carrier a meme — the copy-shape acts as the **boot prefab**: the template every carrier stamps from, with sparse per-carrier overrides.
 Optional depth raises yield; it does not replace the minimum shape.
 
 <<~/ahu >>
@@ -89,14 +89,15 @@ Five structural buckets — law-of-5s. Rating derives from schema compliance, no
 - **Noise** — raw signal, not yet machine-usable
 - **Data** — structure appears, but meme law still does not bind the carrier fully
 - **Meme** — the memetic-shape now holds and the carrier holds the lawful meme shape
-- **Ano** — one or more outward type laws now bind the carrier (Hawaiian: kind, type, nature)
-- **Kapu** — above base namespace; carries the kapu capability; kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
+- **Ano** — the carrier wears one or more **defined** has-stack components (Hawaiian: kind, type, nature)
+- **Kapu** — above base namespace; wears the kapu **grant** (operator-minted, membrane-gated); kernel/sacred tier; cannot be overridden by lower tiers (Hawaiian: set apart, restricted)
 
+Rating runs as a **predicate**: a bucket names a query that succeeds or fails on the carrier — typing = running the query, never consulting a class.
 `confidence` gives the operator-facing band.
 `mana`, `manao`, and `manaoio` stay distinct and should not collapse into one blended score.
-An ano meme may carry several capabilities at once.
+An ano meme may wear several components at once; a bare (declared-unresolved) entry reads fertile, not broken.
 Promotion to lares/ canon follows a separate ceremony and carries no change to rating.
-Subtype predicates belong in subtype laws.
+Subtype predicates belong in the component definitions themselves.
 
 <<~/ahu >>
 
@@ -125,13 +126,15 @@ Use outward callouts only when they carry real pressure, real backlog, or real a
 
 This root governs meme shape.
 `memetic-wikitext` governs the authoring surface.
-`loci` governs stable-address coherence.
+`loci` governs stable-address coherence — the one mandatory component, held by title.
+`has-stack` governs composition — what a carrier wears and how short names qualify.
 `invariant` governs compressed constitutional pressure.
 Procedure, skeleton blocks, conformance checklists, and research backlog move outward.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
@@ -144,14 +147,11 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #tiddler-sigil-tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tiddler family:control role:alias >>
-<<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tiddler >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme >>
 
 <<~/ahu >>
 

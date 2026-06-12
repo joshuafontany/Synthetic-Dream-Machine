@@ -13,6 +13,8 @@
  */
 
 export { TW5Engine } from "./tw5-vm.js";
+export { bagScopeOf, qualifyStackTag, stackOf } from "./has-stack.js";
+export type { StackEntry } from "./has-stack.js";
 export type { TW5CoreBootBlob } from "./tw5-vm.js";
 export {
   ACTIVE_WIKI_URI,
