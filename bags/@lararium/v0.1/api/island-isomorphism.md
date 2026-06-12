@@ -62,7 +62,7 @@ Everything else in the bespoke admin stack — handshake, sync ports, `ea`, the 
 
 Incremental, witness-pointed, per the kubeadm-pivot and Chromium-servicification precedents:
 
-1. **Interface isomorphism first:** the admin island consumes the shared island stack (manifest, `ea`, sync, grants table) while keeping its bespoke spawner. Witness: existing suites green; admin reachable through the same protocol surface as any island.
+1. **Interface isomorphism first:** the admin island consumes the shared island stack (manifest, `ea`, sync, grants table) while keeping its bespoke spawner. Witness: existing suites green; admin reachable through the same protocol surface as any island. *First slice landed 2026-06-12: the admin ea-wait now rides the shared `awaitIslandMsg` watchdog (breath re-arm, stall budget, fault fast-reject) — the bespoke admin timer died; pool and admin share one watchdog mechanism.*
 2. **Derive genesis from the common emitter:** the admin genesis manifest gets produced by the same code path that emits ordinary island manifests; diff against the hand-rolled one — the fixed-point witness (stage2 ≡ stage3).
 3. **Collapse the substrate twins:** one stack + a substrate adapter (the `ListeningWSServerAdapter` precedent). The browser inherits, never re-implements.
 4. **Delete the bespoke lines last.** What remains special = the genesis manifest + loader + first-grant seed + liveness floor — small, frozen, named.

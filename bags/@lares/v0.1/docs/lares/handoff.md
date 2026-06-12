@@ -44,7 +44,7 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 
 ## The ground you stand on
 
-The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites at handoff: mesh 271 + tw5 104 + node 119 + e2e 16, all green from a cold clone (`pnpm install && pnpm -r build && pnpm test:e2e`).
+The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites at handoff: mesh 272 + tw5 104 + node 119 + e2e 16, all green from a cold clone · isomorphism sweep 2026-06-12: admin ea-wait rides the shared watchdog (one-hull step 1, first slice); `lar-event-bus-impl` moved node→mesh (zero platform imports — every vessel inherits the bus) (`pnpm install && pnpm -r build && pnpm test:e2e`).
 
 **Co-projection (the ontology, one breath):** the operator's mind originates; disk carriers and the CRDT record-set both *project* it, each in native grain; **merge authority routes through the CRDT alone**. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
 
