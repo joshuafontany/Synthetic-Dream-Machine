@@ -53,7 +53,16 @@ import {
 import { runLocalVerb } from "./verb-local-dispatch.js";
 import type { VerbTable } from "./verb-dispatcher.js";
 
-const HANDSHAKE_TIMEOUT_MS = 15_000;
+// The ea watchdog budget. A flat 15s deadline died live (2026-06-11): a
+// fed store's admin-island mount scales with stored docs and disk latency
+// (WSL, repo-rooted vessels), while fresh stores boot fast — so reboots
+// timed out where first boots succeeded. 120s matches the harness's own
+// await-live budget. Named design debt: the watchdog SHOULD listen for
+// the island's BREATH, not count a deadline — ea names the sovereign
+// island breathing inside the vessel; a mounting island that still
+// breathes (emits) never reads dead, however long the mount. The timer
+// resets on breath; silence alone times out (readiness reads local).
+const HANDSHAKE_TIMEOUT_MS = 120_000;
 
 /** The MessagePort type, borrowed through the mesh manifest (no DOM-lib dep). */
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];

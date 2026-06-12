@@ -46,6 +46,11 @@ export interface LarInstance {
   readonly cli: (args: readonly string[]) => Promise<CliResult>;
   /** Staged: kill daemon + delete root. Live: no-op (never touch a live hearth). */
   readonly stop: () => Promise<void>;
+  /**
+   * Staged: kill the daemon but PRESERVE the root — for reboot vectors that
+   * boot a second daemon on the same fed store. Live: no-op.
+   */
+  readonly stopDaemonOnly: () => Promise<void>;
 }
 
 function runCli(env: Record<string, string>, args: readonly string[]): Promise<CliResult> {
@@ -109,6 +114,10 @@ async function openStaged(): Promise<LarInstance> {
       await new Promise((r) => setTimeout(r, 500));
       rmSync(root, { recursive: true, force: true });
     },
+    stopDaemonOnly: async () => {
+      daemon.kill();
+      await new Promise((r) => setTimeout(r, 800));
+    },
   };
 }
 
@@ -127,6 +136,7 @@ function attachLive(): LarInstance {
     bootLog: () => "",                 // a live hearth's log belongs to its operator
     cli: (args) => runCli(env, args),
     stop: async () => { /* NEVER stop, reset, or delete a live instance */ },
+    stopDaemonOnly: async () => { /* NEVER touch a live hearth's daemon */ },
   };
 }
 
