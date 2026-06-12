@@ -78,12 +78,12 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
   test("a refused flush fires onRefusal with bag, uri, and reason", async () => {
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const refusals: Array<{ bagId: string; uri: string; reason: string }> = [];
-    const projector = new LarDiskProjector(
-      [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares/v0.1", toRelPath: () => "../../@sdm/poison.md" }],
-      async () => "never-rendered",
-      1,
-      (info) => refusals.push(info),
-    );
+    const projector = new LarDiskProjector({
+      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares/v0.1", toRelPath: () => "../../@sdm/poison.md" }],
+      renderFn: async () => "never-rendered",
+      debounceMs: 1,
+      onRefusal: (info) => refusals.push(info),
+    });
     await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
       .flush("@lares", "lar:///ha.ka.ba/@lares/v0.1/x");
     expect(refusals).toHaveLength(1);

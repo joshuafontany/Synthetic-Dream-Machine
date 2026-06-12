@@ -36,24 +36,21 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       // same file. mirrorRoot shape: <root>/bags/@NAME/vX → up three.
       const instanceRoot = resolvePath(mirrors[0]!.mirrorRoot, "..", "..", "..");
       const syncedTree = new SyncedTree(join(instanceRoot, ".lararium-projection", "synced-tree.json"));
-      const projector = new LarDiskProjector(
+      const projector = new LarDiskProjector({
         mirrors,
-        (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
-        undefined,
+        renderFn: (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
         // Disk-ward refusal → the admin VM (the generic worker.event → placeVerb
         // bridge routes any event whose payload carries `verb`). The admin audits
         // it durably and injects a $:/tags/Alert into the operator's pinned VM.
-        (info) => ctx.post({
+        onRefusal: (info) => ctx.post({
           schema_version: 1,
           type: "event",
           wikiUri: ctx.wikiUri,
           listenable: "disk-ward:refused",
           payload: { verb: "ward-alert", requestedBy: "disk-ward", bagId: info.bagId, uri: info.uri, reason: info.reason },
         }),
-        undefined,
-        false,
         syncedTree,
-      );
+      });
       return projector.start(ctx.tw5);
     },
   });

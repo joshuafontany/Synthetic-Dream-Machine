@@ -42,6 +42,27 @@ import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
 
+export interface LarDiskProjectorOptions {
+  /** Bag mirrors. Bags absent from this list never write to disk. */
+  readonly mirrors: readonly BagMirrorConfig[];
+  /** Render a carrier-root URI to its canonical text. Null skips the write. */
+  readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  /** Debounce delay in ms (default 1000). */
+  readonly debounceMs?: number;
+  /** Fired on every disk-ward refusal — the island routes it to the admin VM. */
+  readonly onRefusal?: (info: { bagId: string; uri: string; reason: string }) => void;
+  /** Optional readiness map — lights `disk-projector` after first flush. */
+  readonly readinessMap?: ReadinessMap;
+  /** Write a .json sidecar next to each .md for peek debugging. */
+  readonly debugJson?: boolean;
+  /**
+   * The Synced tree (§6 merge base): records the content hash of every
+   * projected carrier; arms the projection-side hash gate — a write whose
+   * bytes match disk skips silently (no event, no churn).
+   */
+  readonly syncedTree?: SyncedTree;
+}
+
 export class LarDiskProjector {
   /**
    * URIs currently being written to disk.
@@ -55,29 +76,23 @@ export class LarDiskProjector {
 
   private _tw5: TW5Engine | null = null;
 
-  constructor(
-    /** Bag mirrors. Bags absent from this list never write to disk. */
-    private readonly mirrors: readonly BagMirrorConfig[],
-    /**
-     * Render a parent URI to its carrier text string.
-     * Called after debounce. Returns null to skip writing.
-     */
-    private readonly renderFn: (tiddlerUri: string) => Promise<string | null>,
-    /** Debounce delay in ms. */
-    private readonly debounceMs = 1000,
-    /** Fired on every disk-ward refusal — the island routes it to the admin VM. */
-    private readonly onRefusal?: (info: { bagId: string; uri: string; reason: string }) => void,
-    /** Optional readiness map — lights `disk-projector` after first flush. */
-    private readonly readinessMap?: ReadinessMap,
-    /** Write a .json sidecar next to each .md for peek debugging. */
-    private readonly debugJson = false,
-    /**
-     * The Synced tree (§6 merge base): records the content hash of every
-     * projected carrier. Also arms the projection-side hash gate — a write
-     * whose bytes match disk skips silently (no event, no churn).
-     */
-    private readonly syncedTree?: SyncedTree,
-  ) {}
+  private readonly mirrors: readonly BagMirrorConfig[];
+  private readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
+  private readonly debounceMs: number;
+  private readonly onRefusal: ((info: { bagId: string; uri: string; reason: string }) => void) | undefined;
+  private readonly readinessMap: ReadinessMap | undefined;
+  private readonly debugJson: boolean;
+  private readonly syncedTree: SyncedTree | undefined;
+
+  constructor(opts: LarDiskProjectorOptions) {
+    this.mirrors      = opts.mirrors;
+    this.renderFn     = opts.renderFn;
+    this.debounceMs   = opts.debounceMs ?? 1000;
+    this.onRefusal    = opts.onRefusal;
+    this.readinessMap = opts.readinessMap;
+    this.debugJson    = opts.debugJson ?? false;
+    this.syncedTree   = opts.syncedTree;
+  }
 
   /**
    * Subscribe to TW5 wiki change events and begin projecting.

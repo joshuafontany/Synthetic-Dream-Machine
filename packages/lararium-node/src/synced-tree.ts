@@ -25,8 +25,20 @@ export function contentHash(text: string): string {
 
 export class SyncedTree {
   private map = new Map<string, string>();   // carrier-root URI → sha256 of last-projected bytes
+  private persistTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private readonly filePath: string) {
+  constructor(
+    private readonly filePath: string,
+    /**
+     * Persist coalesce window (ms). A flush wave (a corpus feed = hundreds
+     * of observations in seconds) collapses into one atomic write per
+     * quiet window instead of one per observation. 0 = persist immediately
+     * (tests). A crash inside the window forgets at most the last few
+     * observations — which degrade to fresh-adoption decisions, never
+     * corruption (the §6 recovery law).
+     */
+    private readonly coalesceMs = 250,
+  ) {
     try {
       if (existsSync(filePath)) {
         const raw = JSON.parse(readFileSync(filePath, "utf8")) as Record<string, string>;
@@ -43,18 +55,32 @@ export class SyncedTree {
     return this.map.get(uri) ?? null;
   }
 
-  /** Record a projection observation and persist atomically. */
+  /** Record a projection observation; persistence coalesces per quiet window. */
   set(uri: string, hash: string): void {
     this.map.set(uri, hash);
-    this.persist();
+    this.schedulePersist();
   }
 
   delete(uri: string): void {
-    if (this.map.delete(uri)) this.persist();
+    if (this.map.delete(uri)) this.schedulePersist();
   }
 
   get size(): number {
     return this.map.size;
+  }
+
+  /** Force any pending coalesced write to land now (shutdown hook, tests). */
+  flush(): void {
+    if (this.persistTimer) { clearTimeout(this.persistTimer); this.persistTimer = null; }
+    this.persist();
+  }
+
+  private schedulePersist(): void {
+    if (this.coalesceMs <= 0) { this.persist(); return; }
+    if (this.persistTimer) clearTimeout(this.persistTimer);
+    this.persistTimer = setTimeout(() => { this.persistTimer = null; this.persist(); }, this.coalesceMs);
+    // Never hold the process open just to remember faster.
+    (this.persistTimer as { unref?: () => void }).unref?.();
   }
 
   private persist(): void {

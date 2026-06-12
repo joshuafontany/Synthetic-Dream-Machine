@@ -75,7 +75,9 @@ function runCli(env: Record<string, string>, args: readonly string[]): Promise<C
 
 async function openStaged(): Promise<LarInstance> {
   const root = mkdtempSync(join(tmpdir(), "lares-staged-"));
-  const port = 8300 + Math.floor(Math.random() * 500);
+  // PID-derived + random offset: two parallel staged suites collided once
+  // on pure-random ports (2026-06-11) — the PID stride keeps siblings apart.
+  const port = 8300 + ((process.pid * 13) % 400) + Math.floor(Math.random() * 100);
   const env  = { LAR_ROOT: root, LAR_PORT: String(port) };
 
   // Genesis — `lares reset --force` seeds the root (init runs inside).

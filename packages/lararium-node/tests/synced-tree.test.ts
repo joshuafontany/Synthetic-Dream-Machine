@@ -13,9 +13,9 @@ describe("synced-tree — observations persist atomically", () => {
   test("set → reload reads the same observation", () => {
     const dir = mkdtempSync(join(tmpdir(), "synced-"));
     const p = join(dir, "state", "synced-tree.json");
-    const t1 = new SyncedTree(p);
+    const t1 = new SyncedTree(p, 0);
     t1.set("lar:///a", contentHash("alpha"));
-    const t2 = new SyncedTree(p);
+    const t2 = new SyncedTree(p, 0);
     expect(t2.get("lar:///a")).toBe(contentHash("alpha"));
     expect(t2.get("lar:///missing")).toBeNull();
     rmSync(dir, { recursive: true, force: true });
@@ -24,10 +24,10 @@ describe("synced-tree — observations persist atomically", () => {
   test("delete removes the observation durably", () => {
     const dir = mkdtempSync(join(tmpdir(), "synced-"));
     const p = join(dir, "synced-tree.json");
-    const t = new SyncedTree(p);
+    const t = new SyncedTree(p, 0);
     t.set("lar:///a", "h1");
     t.delete("lar:///a");
-    expect(new SyncedTree(p).get("lar:///a")).toBeNull();
+    expect(new SyncedTree(p, 0).get("lar:///a")).toBeNull();
     rmSync(dir, { recursive: true, force: true });
   });
 
@@ -35,7 +35,7 @@ describe("synced-tree — observations persist atomically", () => {
     const dir = mkdtempSync(join(tmpdir(), "synced-"));
     const p = join(dir, "synced-tree.json");
     writeFileSync(p, "{ torn json", "utf-8");
-    const t = new SyncedTree(p);
+    const t = new SyncedTree(p, 0);
     expect(t.size).toBe(0);
     expect(t.get("lar:///a")).toBeNull();
     t.set("lar:///a", "h1");                       // heals by re-persisting
