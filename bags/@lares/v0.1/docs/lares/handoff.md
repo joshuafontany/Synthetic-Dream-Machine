@@ -79,16 +79,20 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 - module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
 - smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
 - TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
-- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING PROPOSED 2026-06-12 (hoike #ingest-ordering below — crucible pending): INGEST forges the pattern integrity (record-pair verbs, replace-by-group, three-way diff, quiescence) that ALL verb-plane-into-wiki work then consumes — the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM via the module gate DURING that recut, one witness not two; ingest-gate's pure decision considers packing in-VM when the island-side INGEST verb lands
+- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING CRUCIBLE-PASSED 2026-06-12 (moʻolelo in hoike below): LOAD stands as the FIRST witness of verb-pair physics; INGEST brings the SECOND witness + the membrane forge (three-way diff, replace-by-group, quiescence, NFC); the wire compiler rides INGEST's organs; then residency (vector 2) → closure (3); the switchboard retires on two-witness verb-pair INTEGRITY, the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM during that recut (one witness not two), hull steps 2–4 follow; ingest-gate packing decided at the island-verb build
 
-<<~ hoike #ingest-ordering held:"a plan of this weight passes the work-crucible floor before it binds; the chain reads proposed until then (operator)" >>
+<<~ hoike #ingest-ordering held:"a plan of this weight passes the work-crucible floor before it binds (operator) — CONFIRMED BY DEMONSTRATION at the floor, 2026-06-12" >>
 q: does a flow-ruled sequencing chain bind, or must the plan pass the crucible discussion first?
-<<~ kue voice:"the house (Gatekeeper)" key:"the convened crucible floor produces an ordering that differs from the flow-ruled chain" >>
+<<~ kue voice:"the house (Gatekeeper)" key:"the convened crucible floor produces an ordering that differs from the flow-ruled chain — TURNED against the kue: the floor found the residency-vector omission and the overstated forge-claim in one reading" >>
 the chain composes only standing rulings — the torch's NEXT VECTOR, §7's lane law, the
 one-witness economy — so the crucible would re-derive what already stands; flow preserved
 momentum the floor would spend on ceremony.
 <<~/kue >>
-re-entry: the kue key; or the INGEST crucible floor convening (the held review condition)
+<<~ moolelo held:"the amended chain stands (operator): LOAD = first witness · INGEST = second witness + membrane forge · residency restored at vector 2 · switchboard gates on two-witness integrity · verb-plane rides its recut" >>
+the kue fell by the house's own floor — flow had sailed past a torch vector and rested a
+true order on a false load-bearing claim; the crucible earned its seat by demonstration.
+<<~/moolelo >>
+re-entry: closed — the floor convened and the held review condition met; the chain re-opens only at a torch boundary
 <<~/hoike >>
 
 <<~/ahu >>
