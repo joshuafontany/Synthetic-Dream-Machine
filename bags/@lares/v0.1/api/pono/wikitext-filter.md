@@ -35,7 +35,7 @@ for new authoring.
 | TW5 form | Reason dropped | Lararium replacement |
 |----------|---------------|----------------------|
 | `!!field` — tiddler field accessor | Legacy data model; caused dev headaches; fields are ad-hoc string bags | `[toml:key[value]]` — query against `#iam` TOML |
-| `##index` — DataTiddler JSON index | Legacy JSON-in-tiddler pattern; fragile, opaque | `[edge:family[X]role[Y]]` — query pranala edge properties |
+| `##index` — DataTiddler JSON index | Legacy JSON-in-tiddler pattern; fragile, opaque | `[stack:has[X]]` — query worn components (the has-stack law) |
 | `+currentMeme` ambient variable | Dynamic scope leaks to siblings; modern systems reject ambient lookup | Explicit `meme` sigil context; or `[self[]]` for the carrier's own URI |
 | `currentTiddler` implicit | Same as above | `[self[]]` in filter expressions |
 | `is[system]` tiddler metaphysics | TW5-specific system namespace concept | `[toml:tagspace[system]]` — explicit tagspace query |
@@ -66,18 +66,17 @@ Queries the `#iam` TOML block of each meme in the current result set.
 Replaces TW5 `!!field`. TOML keys are typed (string, float, bool, array) — the query
 engine coerces to string for comparison unless the key type permits numeric range queries.
 
-### `edge:family[X]` — pranala edge query
+### `stack:has[X]` — worn-component query (the has-stack law)
 
-Queries inbound or outbound pranala edges for the memes in the current result set.
+Queries the carrier's worn components: relative names qualify against each carrier's own bag scope. The retired `edge:` operator's successor (typed-edge attributes died 2026-06-12; relations that DO something ride wire entities — `api/pono/wire`).
 
 ```text
-[edge:family[control]]                    memes with any control-family edge
-[edge:family[dataflow]role[owns]]         memes with a dataflow edge where role=owns
-[edge:family[message]dir[inbound]]        memes that receive message-family edges
-[edge:family[control]role[implements]]    memes that implement an interface
+[stack[]]                                 a carrier's qualified worn components
+[stack:has[api/pono/invariant]]           carriers wearing the invariant component
+[stack:has[lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module]]   kernel-injectable modules
 ```
 
-Replaces TW5 `##index`. Edge queries run against the compiled PranalaEdge graph.
+Replaces TW5 `##index`. Wire queries (over reified wire records) arrive with the canvas editor.
 
 ### `self[]` — current meme URI
 
@@ -86,7 +85,7 @@ or the carrier's own `#iam.uri-path` if no `meme` is active).
 
 ```text
 [self[]]                      current meme URI — replaces +currentMeme and currentTiddler
-[self[]edge:family[control]]  current meme's control edges
+[self[]stack[]]               current meme's worn components
 ```
 
 ### `ahu:id[fragment-id]` — fragment anchor query
