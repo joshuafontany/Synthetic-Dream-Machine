@@ -38,6 +38,7 @@ export * from "./residency-actions.js";
 export * from "./effect-record.js";
 export * from "./kumu-device.js";
 export * from "./genesis-doc.js";
+export * from "./genesis-intake.js";
 export * from "./island-protocol.js";
 export * from "./conformance-verb-breathing.js";
 export * from "./social-seed.js";

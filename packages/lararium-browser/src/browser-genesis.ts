@@ -1,9 +1,11 @@
 /**
- * browser-genesis — isomorphic genesis island intake for browser vessels.
+ * browser-genesis — browser genesis byte SOURCES + IDB/OPFS persistence.
  *
- * Platform counterpart to genesis-artifact.ts (Node). Three delivery paths
- * converge here: bundled Uint8Array, content-addressed IDB cache, or peer-sync
- * via repo.find(islandDocUrl). All three produce the same DocHandle<LarDoc>.
+ * The intake core (validate → import → verify, CID reconcile) lives ONCE in
+ * @lararium/mesh `genesis-intake` (isomorphism sweep 2026-06-12). This file
+ * keeps the genuinely-browser pieces: three delivery paths (bundled
+ * Uint8Array, content-addressed IDB cache, peer-sync via repo.find) plus
+ * OPFS read/write. All paths produce the same DocHandle<LarDoc>.
  *
  * Content-addressed IDB cache pattern:
  *   On first boot, caller provides genesisBytes (from bundle or CID fetch).
@@ -24,13 +26,14 @@
 
 import type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  automergeLoad,
   ENGINE_CORE_ID,
-  LARES_MEMETIC_WIKITEXT_PLUGIN_URI,
-  LARARIUM_DOC_URI,
   cidV1Sha256,
+  importGenesisIsland,
+  reconcileGenesisCid,
+  type GenesisReconcileResult,
   type LarDoc,
 } from "@lararium/mesh";
+
 
 // ── Three-tier genesis persistence model ─────────────────────────────────────
 //
@@ -136,64 +139,15 @@ export async function loadGenesisIslandFromBytes(
   repo:  Repo,
   bytes: Uint8Array,
 ): Promise<DocHandle<LarDoc>> {
-  let preview: LarDoc;
-  try {
-    preview = automergeLoad<LarDoc>(bytes);
-  } catch (err) {
-    throw new Error(`[browser-genesis] genesis bytes failed Automerge.load(): ${err}`);
-  }
-
-  if (!preview.blobs?.[ENGINE_CORE_ID]) {
-    throw new Error(
-      `[browser-genesis] genesis artifact missing TW5 core blob (${ENGINE_CORE_ID}). ` +
-      `Verify the artifact CID matches the expected build.`,
-    );
-  }
-
-  if (!preview.blobs?.[LARES_MEMETIC_WIKITEXT_PLUGIN_URI]) {
-    throw new Error(
-      `[browser-genesis] genesis artifact missing lares memetic-wikitext plugin. ` +
-      `Rebuild genesis after build:plugin.`,
-    );
-  }
-
-  const handle = repo.import<LarDoc>(bytes);
-  await handle.whenReady();
-
-  const doc = handle.doc();
-  if (!doc?.blobs?.[ENGINE_CORE_ID]) {
-    throw new Error(
-      `[browser-genesis] handle.whenReady() resolved but TW5 core blob absent — import failed silently.`,
-    );
-  }
-
-  const blobCount    = Object.keys(doc.blobs ?? {}).length;
-  const tiddlerCount = Object.keys(doc.tiddlers ?? {}).length;
-  console.log(
-    `[browser-genesis] loaded  url=${handle.url}  blobs=${blobCount}  tiddlers=${tiddlerCount}`,
-  );
-
-  return handle;
+  // Browser byte source (bundle / CID fetch); intake rides the one core.
+  return importGenesisIsland(repo, bytes, "browser-genesis");
 }
 
 // ── reconcileGenesisUpdate ────────────────────────────────────────────────────
 
-const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
-
-export interface GenesisReconcileResult {
-  /** True when the incoming genesis CID differs from the live doc — engine update detected. */
-  updated: boolean;
-  /** CID of the incoming genesis bytes. */
-  incomingCid: string;
-  /** CID recorded in the live island doc before reconcile, or null if absent. */
-  previousCid: string | null;
-}
-
 /**
- * Compare incoming genesis bytes against the live island doc's recorded CID.
- * When they diverge: merge blobs + tiddlers from the incoming handle into the
- * live handle (same pattern as reconcileIslandFromGenesis in Node) and return
- * { updated: true } so the caller can signal the operator to reload.
+ * Compare incoming genesis bytes against the live island doc's recorded CID;
+ * the compare, merge, and cid-record write ride the one core (genesis-intake).
  *
  * Caller responsibility: when updated === true, write a TW5 alert tiddler to
  * the admin doc (tagged lar:///ha.ka.ba/tags/engine-update) so the operator
@@ -204,30 +158,5 @@ export async function reconcileGenesisUpdate(
   incomingHandle: DocHandle<LarDoc>,
   incomingBytes:  Uint8Array,
 ): Promise<GenesisReconcileResult> {
-  const incomingCid = genesisCidFromBytes(incomingBytes);
-  const previousCid =
-    (liveHandle.doc()?.tiddlers?.[GENESIS_CID_TIDDLER]?.tiddler["cid"] as string | undefined) ?? null;
-
-  if (previousCid === incomingCid) {
-    return { updated: false, incomingCid, previousCid };
-  }
-
-  // CID diverged — merge incoming into live.
-  // Automerge merge is additive: new tiddlers and blobs arrive; existing tiddlers
-  // follow Automerge LWW semantics. The live handle retains operator-authored content.
-  liveHandle.merge(incomingHandle);
-
-  // Update the genesis-cid oracle tiddler so next boot skips reconcile.
-  liveHandle.change((doc) => {
-    doc.tiddlers[GENESIS_CID_TIDDLER] = {
-      tiddler: { title: GENESIS_CID_TIDDLER, cid: incomingCid },
-      meta:    { authority: "browser-genesis-reconcile" },
-    };
-  });
-
-  console.log(
-    `[browser-genesis] engine update detected — prev=${previousCid?.slice(0, 16) ?? "none"}  new=${incomingCid.slice(0, 16)}`,
-  );
-
-  return { updated: true, incomingCid, previousCid };
+  return reconcileGenesisCid(liveHandle, incomingHandle, genesisCidFromBytes(incomingBytes));
 }

@@ -27,7 +27,6 @@ export {
   writeGenesisBytesToOpfs, readGenesisBytesFromOpfs,
   genesisCidFromBytes,
 } from "./browser-genesis.js";
-export type { GenesisReconcileResult } from "./browser-genesis.js";
 
 export { openBrowserAdminVm, VerbTable } from "./open-browser-admin-vm.js";
 export type {

@@ -16,11 +16,11 @@
  * Or via:   pnpm --filter @lararium/node test:quine
  */
 
-import { automergeLoad } from "@lararium/mesh";
+import { automergeLoad, GENESIS_CID_TIDDLER } from "@lararium/mesh";
+import { repoRoot } from "@lararium/mesh/node";
 import { createHash }      from "crypto";
 import { readFileSync, existsSync } from "fs";
-import { join, dirname }   from "path";
-import { fileURLToPath }   from "url";
+import { join }             from "path";
 
 import { TW5Engine }       from "@lararium/tw5";
 import type { TW5TiddlerFields } from "@lararium/tw5";
@@ -29,8 +29,8 @@ import { ENGINE_CORE_ID, GRAMMAR_TAG, LARES_MEMETIC_WIKITEXT_PLUGIN_URI } from "
 
 const LARES_TW5_PLUGIN_TITLE = LARES_MEMETIC_WIKITEXT_PLUGIN_URI;
 
-const __dir       = dirname(fileURLToPath(import.meta.url));
-const GENESIS_BIN = join(__dir, "../genesis/island.bin");
+// One root law: genesis lives at <root>/genesis (the repo IS the vessel).
+const GENESIS_BIN = join(repoRoot, "genesis/island.bin");
 
 function sha256hex(input: string | Uint8Array): string {
   return createHash("sha256").update(input).digest("hex");
@@ -57,7 +57,6 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------------
   // 2. Verify the genesis-cid self-ref tiddler (two-pass build check)
   // ------------------------------------------------------------------
-  const GENESIS_CID_TIDDLER = "lar:///ha.ka.ba/@lararium/genesis-cid";
   const cidRecord = doc.tiddlers?.[GENESIS_CID_TIDDLER] as
     { tiddler?: { cid?: string } } | undefined;
 

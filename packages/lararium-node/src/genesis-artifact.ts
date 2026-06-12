@@ -1,31 +1,24 @@
 /**
- * genesis-artifact — genesis binary I/O and island reconcile surface.
+ * genesis-artifact — node genesis byte SOURCE + the node genesis office.
  *
- * Exports:
- *   readGenesisSha256        — read advisory sha256 from genesis/island.sha256
- *   readGenesisCid           — derive CIDv1 from sha256 or genesis/island.cid
- *   GENESIS_CID              — cached CIDv1 of the bundled genesis artifact
- *   loadGenesisIsland        — import genesis/island.bin into a repo; return DocHandle<LarDoc>
- *   reconcileIslandFromGenesis — merge genesis into a live doc when CID diverges
- *   reconcileWellKnownTiddlers — write runtime oracle tiddlers (Tiga edges) into the island handle
- *
- * Node read path: readFileSync(genesis/island.bin) resolved relative to import.meta.url.
- * Browser path (future, @dreamdeck/app): bundler binary loader inlines island.bin as Uint8Array.
+ * The intake core (validate → import → verify, CID reconcile) lives ONCE in
+ * @lararium/mesh `genesis-intake` (isomorphism sweep 2026-06-12); this file
+ * keeps only what genuinely belongs to node:
+ *   - the fs byte source (genesis/island.bin + sha256/cid sidecars)
+ *   - GENESIS_CID — cached CIDv1 of the bundled artifact
+ *   - mintLaresIfAbsent — the operator's node genesis office (gate by placement)
+ *   - reconcileWellKnownTiddlers — runtime oracle tiddler writer
  */
 
 import { repoRoot } from "@lararium/mesh/node";
 import { readFileSync, existsSync }  from "fs";
-import { join, dirname }             from "path";
-import { fileURLToPath }             from "url";
-import { automergeLoad } from "@lararium/mesh";
+import { join }                      from "path";
 import type { Repo, DocHandle }      from "@automerge/automerge-repo";
 import type { LarDoc }               from "@lararium/mesh";
 import {
-  ENGINE_CORE_ID,
   LARARIUM_DOC_URI,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
-  LARES_MEMETIC_WIKITEXT_PLUGIN_URI,
   IDENTITIES_DOC_URI,
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
@@ -34,13 +27,14 @@ import {
   tiddlerText,
   emptyLarDoc,
   cidV1Sha256FromHex,
+  importGenesisIsland,
+  reconcileGenesisCid,
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
 // Genesis bytes source
 // ---------------------------------------------------------------------------
 
-const __dir              = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
 function genesisArtifactPaths(genesisDir?: string): { bin: string; sha: string; cid: string } {
@@ -106,41 +100,8 @@ export function GENESIS_CID(genesisDir?: string): string | undefined {
 // ---------------------------------------------------------------------------
 
 export async function loadGenesisIsland(repo: Repo, genesisDir?: string): Promise<DocHandle<LarDoc>> {
-  const bytes = readGenesisBin(genesisDir);
-
-  // Smoke-verify bytes before importing: Automerge.load() checks format.
-  try {
-    const preview = automergeLoad<LarDoc>(bytes);
-    if (!preview.blobs?.[ENGINE_CORE_ID]) {
-      throw new Error(
-        `[genesis-artifact] genesis artifact missing TW5 core blob (${ENGINE_CORE_ID}).\n` +
-        `  CID mismatch or corrupt file. Re-run: pnpm --filter @lararium/node build:genesis`,
-      );
-    }
-  } catch (err) {
-    if ((err as Error).message.includes("genesis artifact")) throw err;
-    throw new Error(`[genesis-artifact] genesis/island.bin failed Automerge.load() validation: ${err}`);
-  }
-
-  const handle = repo.import<LarDoc>(bytes);
-  await handle.whenReady();
-
-  const doc = handle.doc();
-  if (!doc?.blobs?.[ENGINE_CORE_ID]) {
-    throw new Error("[genesis-artifact] handle.whenReady() resolved but TW5 core blob is absent — import failed silently.");
-  }
-
-  const blobCount    = Object.keys(doc.blobs ?? {}).length;
-  const tiddlerCount = Object.keys(doc.tiddlers ?? {}).length;
-  const pluginOk     = Boolean(doc.blobs?.[LARES_MEMETIC_WIKITEXT_PLUGIN_URI]);
-  if (!pluginOk) {
-    throw new Error("[genesis-artifact] genesis artifact missing packed Lares TW5 plugin — run build:genesis after build:plugin.");
-  }
-  console.log(
-    `[genesis-artifact] loaded  url=${handle.url}  blobs=${blobCount}  plugin=lares-memetic-wikitext  tiddlers=${tiddlerCount}`,
-  );
-
-  return handle;
+  // Node byte source; intake (validate → import → verify) rides the one core.
+  return importGenesisIsland(repo, readGenesisBin(genesisDir), "genesis-artifact");
 }
 
 // ---------------------------------------------------------------------------
@@ -152,39 +113,19 @@ export async function reconcileIslandFromGenesis(
   genesisHandle: DocHandle<LarDoc>,
   genesisDir?: string,
 ): Promise<void> {
+  // Node derives the expected CID from the artifact sidecars; the compare,
+  // merge, and cid-record write ride the one core (genesis-intake).
   const expectedCid = GENESIS_CID(genesisDir);
   if (!expectedCid) {
     console.warn("[genesis-artifact] reconcile: genesis CID unavailable — skipping reconcile");
     return;
   }
-
-  const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
-  const liveCid = handle.doc()?.tiddlers?.[GENESIS_CID_TIDDLER]?.tiddler?.["cid"] as string | undefined;
-
-  if (liveCid === expectedCid) {
-    console.log("[genesis-artifact] reconcile: live doc current — no merge needed");
-    return;
-  }
-
-  console.log(
-    `[genesis-artifact] reconcile: merging genesis into live doc` +
-    `  live-cid=${liveCid?.slice(0, 12) ?? "absent"}  expected=${expectedCid.slice(0, 12)}`,
-  );
-
-  const genDoc = genesisHandle.doc();
-  if (!genDoc) {
+  if (!genesisHandle.doc()) {
     console.warn("[genesis-artifact] reconcile: genesisHandle.doc() null — skipping");
     return;
   }
-  handle.merge(genesisHandle);
-
-  handle.change((doc) => {
-    doc.tiddlers[GENESIS_CID_TIDDLER] = mutableLarRecord(GENESIS_CID_TIDDLER, {
-      cid: expectedCid,
-    }, "genesis");
-  });
-
-  console.log("[genesis-artifact] reconcile: merge complete — genesis CID updated in live doc");
+  const r = reconcileGenesisCid(handle, genesisHandle, expectedCid);
+  if (!r.updated) console.log("[genesis-artifact] reconcile: live doc current — no merge needed");
 }
 
 // ---------------------------------------------------------------------------
