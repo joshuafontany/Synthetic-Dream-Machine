@@ -67,6 +67,10 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     console.error(`  ACTION verbs: ${ACTION_VERBS.join(", ")}`);
     return 2;
   }
+  if (verbRaw === "INGEST") {
+    console.error("lares act INGEST: the ingest gesture carries hashes the act surface does not — use `lares ingest --source <dir> --to <bag>`");
+    return 2;
+  }
   const verb = verbRaw;
 
   // Build the kebab-case args bag per residency-actions encoding.

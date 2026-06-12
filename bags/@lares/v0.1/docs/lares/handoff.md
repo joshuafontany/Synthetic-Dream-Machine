@@ -31,8 +31,8 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 
 **Build, in order:**
 
-1. **The INGEST verb** (island side) — rides the existing summons/outcome record-pair physics; apply MUST go **replace-by-group** (LOAD never removes children that vanished from a re-parsed carrier — stale fragments would haunt the doc).
-2. **`lares ingest` CLI** — scan → three-way diff (disk-hash · synced-hash · current-render-hash) → show decisions → `--apply`. The NFC membrane assertion rides this gesture (the spec pins NFC at `memetic-wikitext #carrier-bytes`; foreign bytes first walk in here).
+1. **The INGEST verb** — DONE 2026-06-12: §6 gate composed with replace-by-group apply (uri#fragment + uri/path grains); carriers travel with diskHash+syncedHash, island computes only currentRenderHash; noop/refuse/conflict apply nothing; 4 vectors green on the live boot meme.
+2. **`lares ingest` CLI** — DONE 2026-06-12 (unit-witnessed; live staged witness rides build 3): scan → loci reverse-derivation (`bagsFileToUri`) → two-leg diff preview → `--apply` sends NEW+CHANGED with hashes; act surface guards INGEST toward the gesture. NFC membrane assertion still PENDING — rides this gesture (spec pins NFC at `memetic-wikitext #carrier-bytes`).
 3. **Quiescence vectors** over the composed loop — "zero writes after round N" makes an echo storm a one-line test failure; plus the composed fixpoints (ingest∘project = identity both ways; non-canonical input converges in ONE cycle).
 4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles.
 5. **The wire compiler** MAY ride this vector's membrane organs (ruled 2026-06-12, `wire #authoring`): anchored body pranala → wire records at `<parent>/wires/<anchor>`; shares replace-by-group + three-way diff; `edgesFromMemeAst` = the front half, standing.

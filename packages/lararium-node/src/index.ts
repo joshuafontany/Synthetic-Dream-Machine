@@ -10,6 +10,8 @@ export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-
 
 export { createSessionEventLog, seedAdminDoc } from "@lararium/mesh";
 export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-vessel.js";
+export { SyncedTree, contentHash } from "./synced-tree.js";
+export { bagsFileToUri } from "./bag-paths.js";
 
 export { runInit } from "./commands/init.js";
 export type { InitOptions, InitResult } from "./commands/init.js";

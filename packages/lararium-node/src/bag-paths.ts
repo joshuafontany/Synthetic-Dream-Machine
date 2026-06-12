@@ -6,7 +6,7 @@
  * needed. Factories are pure functions; no I/O, no module state.
  */
 
-import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute } from "path";
+import { resolve as resolvePath, join as joinPath, dirname, basename, isAbsolute, sep } from "path";
 
 export type MirrorPathFn = (uri: string) => string | null;
 
@@ -186,4 +186,21 @@ export function wikiBagPath(): MirrorPathFn {
  */
 export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string): BagMirrorConfig {
   return { bagId, mirrorRoot, toRelPath: namedBagPath(scope) };
+}
+
+// ── Loci reverse-derivation (the ingest gesture's scan leg) ─────────────────
+
+/**
+ * Derive the carrier-root lar: URI a bags/ file projects (the loci law run
+ * backward: `bags/<sub-path>.md` ⇄ `lar:///ha.ka.ba/<sub-path>`). Returns
+ * null for paths outside `<instanceRoot>/bags/` or non-.md files — the
+ * gesture reports those as skipped, never guesses.
+ */
+export function bagsFileToUri(instanceRoot: string, filePath: string): string | null {
+  const bagsRoot = resolvePath(instanceRoot, "bags");
+  const abs = resolvePath(filePath);
+  if (!abs.startsWith(bagsRoot + sep)) return null;
+  const rel = abs.slice(bagsRoot.length + 1);
+  if (!rel.endsWith(".md")) return null;
+  return `lar:///ha.ka.ba/${rel.slice(0, -3).split(sep).join("/")}`;
 }
