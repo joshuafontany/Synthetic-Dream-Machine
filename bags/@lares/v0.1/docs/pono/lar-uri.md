@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
-file-path = "bags/@lares/v0.1/docs/pono/lar-uri.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 18
-manao = 17
-role = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/lar-uri.md"
 invariant = false
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = false
+role      = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -448,6 +446,7 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

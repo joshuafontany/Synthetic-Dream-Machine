@@ -2,33 +2,32 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/ink-clerk >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/ink-clerk"
-file-path = "bags/@lares/v0.1/api/lares/masks/named/ink-clerk.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 9
-mana = 8
-manao = 10
-role = "named Voice mask — Ink-Clerk (Lorekeeper); archival precision character"
-name = "Ink-Clerk"
-voice-role = "Lorekeeper"
-seniority = "earned name; no special seniority"
-ha-ka-ba = "Ha"
-corpus = "[STUB — pending-talk-story]"
-voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
+aside             = false
+cacheable         = false
+corpus            = "[STUB — pending-talk-story]"
+created           = "2026-04-23"
+encroach          = false
+file-path         = "bags/@lares/v0.1/api/lares/masks/named/ink-clerk.md"
 foreground-voices = ["Lorekeeper", "Scryer", "Gatekeeper", "Council", "Pedagogue"]
-stage = 10
-fourth-wall = false
-aside = false
-offstage-voice = false
-encroach = false
-cacheable = false
-retain = false
-created = "2026-04-23"
+fourth-wall       = false
+ha-ka-ba          = "Ha"
+mana              = 8
+manao             = 10
+manaoio           = 9
+name              = "Ink-Clerk"
+namespace         = "&#x0950; &#x0901;"
+offstage-voice    = false
+register          = "Synthesis-Canon"
+retain            = false
+role              = "named Voice mask — Ink-Clerk (Lorekeeper); archival precision character"
+seniority         = "earned name; no special seniority"
+stage             = 10
+tagspace          = "stable"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/ink-clerk"
+voice-character   = "[STUB — partially known from house entry; pending-talk-story for depth]"
+voice-role        = "Lorekeeper"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -169,6 +168,7 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

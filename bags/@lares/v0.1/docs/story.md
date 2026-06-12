@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/story >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/story"
-file-path = "bags/@lares/v0.1/docs/story.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 15
-mana = 15
-manao = 16
-role = "parent docs shelf for Lindwyrm, Elyncia, origin-story, and other narrative scaffolds that inform but do not govern the live stack"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/story.md"
+mana      = 15
+manao     = 16
+manaoio   = 15
+register  = "Synthesis"
+retain    = false
+role      = "parent docs shelf for Lindwyrm, Elyncia, origin-story, and other narrative scaffolds that inform but do not govern the live stack"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/story"
 ```
-
-
 
 <<~ &#x0002; >>
 

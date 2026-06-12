@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/drift >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/drift"
-file-path = "bags/@lararium/v0.1/docs/signal/drift.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "docs room for governing-field drift, recovery protocol pressure, and projection-error handling across lararium signal surfaces"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/drift.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "docs room for governing-field drift, recovery protocol pressure, and projection-error handling across lararium signal surfaces"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/drift"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -61,6 +59,7 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/@lares/v0
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

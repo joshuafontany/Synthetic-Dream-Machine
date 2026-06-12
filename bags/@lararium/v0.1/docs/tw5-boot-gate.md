@@ -2,18 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/tw5-boot-gate >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/tw5-boot-gate"
-file-path = "bags/@lararium/v0.1/docs/tw5-boot-gate.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 17
-role         = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
-status-date  = "2026-04-30"
+file-path   = "bags/@lararium/v0.1/docs/tw5-boot-gate.md"
+mana        = 17
+manao       = 17
+manaoio     = 17
+register    = "Synthesis-Canon"
+role        = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
+status-date = "2026-04-30"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/docs/tw5-boot-gate"
 ```
-
-
 
 <<~ &#x0002; >>
 

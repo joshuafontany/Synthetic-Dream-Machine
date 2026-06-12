@@ -2,21 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/action-handler >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lararium/v0.1/api/action-handler"
-file-path = "bags/@lararium/v0.1/api/action-handler.md"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/api/action-handler.md"
+mana        = 16
+manao       = 16
+manaoio     = 15
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis"
+retain      = true
+role        = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch seam (Sprint 5)"
 source-file = "packages/lararium-tw5/src/action-handler.ts"
-type      = "text/x-memetic-wikitext"
-register      = "Synthesis"
-mana          = 16
-manao         = 16
-manaoio       = 15
-tagspace      = "stable"
-namespace     = "ॐ ँ"
-role          = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch seam (Sprint 5)"
-cacheable     = true
-retain        = true
-status        = "approved"
-status-date   = "2026-06-01"
+status      = "approved"
+status-date = "2026-06-01"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/api/action-handler"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

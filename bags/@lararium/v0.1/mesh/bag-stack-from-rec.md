@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/bag-stack-from-rec >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/bag-stack-from-rec"
-file-path   = "bags/@lararium/v0.1/mesh/bag-stack-from-rec.md"
-heleuma     = "ba"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 18
-manao       = 17
-manaoio     = 17
-role        = "heleuma: bag-stack extractor from a recipe LarTiddlerRecord"
-cacheable   = true
-retain      = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/bag-stack-from-rec.md"
+heleuma   = "ba"
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "heleuma: bag-stack extractor from a recipe LarTiddlerRecord"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/bag-stack-from-rec"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
@@ -36,4 +37,5 @@ parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

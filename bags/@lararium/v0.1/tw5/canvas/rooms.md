@@ -2,19 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/canvas/rooms >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/canvas/rooms"
+cacheable = true
 file-path = "bags/@lararium/v0.1/tw5/canvas/rooms.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 16
-manao        = 16
-role         = "lararium canvas room registry — default rooms, portals, layout types"
-cacheable    = true
-retain       = true
+mana      = 16
+manao     = 16
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "lararium canvas room registry — default rooms, portals, layout types"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/canvas/rooms"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

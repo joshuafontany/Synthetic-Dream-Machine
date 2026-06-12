@@ -2,16 +2,14 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-light >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-light"
 file-path = "bags/@lararium/v0.1/tw5/palette/gruvbox-light.md"
-type = "text/plain"
-tagspace     = "adjacent"
-register     = "Synthesis"
-tags   = ["$:/tags/Palette"]
-role         = "Gruvbox Light color palette for TW5 theme engine"
+register  = "Synthesis"
+role      = "Gruvbox Light color palette for TW5 theme engine"
+tags      = ["$:/tags/Palette"]
+tagspace  = "adjacent"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-light"
 ```
-
-
 
 <<~ &#x0002; >>
 

@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/docs/composition-model >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/docs/composition-model"
+cacheable = true
 file-path = "bags/@sdm/v0.1/docs/composition-model.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis"
+invariant = false
 mana      = 15
 manao     = 18
 manaoio   = 14
-cacheable = true
+register  = "Synthesis"
 retain    = true
-invariant = false
 role      = "operator/dev doctrine: the Powers composition model — entity + module + component + mount-point, one flat #has verb, pattern/instance two-layer split"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/docs/composition-model"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -24,12 +23,15 @@ role      = "operator/dev doctrine: the Powers composition model — entity + mo
 # Composition Model — Operator / Dev Doc
 
 <<~ ahu #thesis >>
+
 ## Thesis
 
 The published SDM/VLG/UVG rules already run a composition system: every Power carries P/R/T/D/Ox, carries tags, seats in a slot, and checks one activation protocol. This model **names what already exists**. It gives each piece an address, connects them with one flat verb, and makes the space navigable. It introduces **no new game mechanics**.
+
 <<~/ahu >>
 
 <<~ ahu #four-nouns >>
+
 ## Four Nouns
 
 | Noun | What it names | Address space |
@@ -40,9 +42,11 @@ The published SDM/VLG/UVG rules already run a composition system: every Power ca
 | **Mount-point** | Where a module seats on an entity, and the contract that seating implies. | `mount-points/{trait,item,structure,burden}` |
 
 One verb joins them: **`#has`**. Flat. No `family`, no `role`. The target URI path prefix carries the semantics — `components/` vs `mount-points/` — so the edge needs no metadata. A module `#has` components and `#has` a mount-point; an entity `#has` modules.
+
 <<~/ahu >>
 
 <<~ ahu #two-layers >>
+
 ## Two Layers — Pattern and Instance
 
 **Never mix layers. Instance state never enters the Pranala graph.**
@@ -66,9 +70,11 @@ sites:
     capacity-spent: { hull: 4, ward: 2, cargo: 3 }   # OGA upgrade economy
     locks: { overcharge-x4: encrypted }
 ```
+
 <<~/ahu >>
 
 <<~ ahu #mount-points >>
+
 ## Mount-Points — Where Modules Seat
 
 Four mount-points. Each changes how a seated module activates, costs, fails, and leaves. Contracts come from the canonical Vastlands Guidebook rules; this model addresses them, it does not rewrite them.
@@ -81,21 +87,27 @@ Four mount-points. Each changes how a seated module activates, costs, fails, and
 | **Structure (Site)** | **no fixed count** — base attributes + purchasable capacity (OGA upgrade economy) | shrine, ship, domicile, town ward, vehicle |
 
 **Location merges into Structure.** A forest and an airship are the same Site. **Fixed-vs-mobile is a flat `#has` component** (propulsion/mobility), not a mount-point or a type. A Site gains capacity by spending XP + referee resources per attribute, decoupled from Level (OGA "Golden Age Item Upgrading"). See `lar:///ha.ka.ba/@sdm/v0.1/mount-points/structure`.
+
 <<~/ahu >>
 
 <<~ ahu #progressive-disclosure >>
+
 ## Progressive Disclosure — Cards as Doorways
 
 Component pills on a card serve two functions at once: a **mnemonic** on paper (a player learns `[ecm-scan]` as a keyword over sessions) and a **doorway** on screen (clicking the pill follows its tag pointer's `meme` field to open the full component meme and a filter of every module that shares it). Printed cards carry the mnemonic; digital cards carry both. A card declares its components once as `@sdm/tags/…` tags; the `components` list renders each via `<<tag-pill>>` from that one source.
+
 <<~/ahu >>
 
 <<~ ahu #practitioner-state >>
+
 ## Practitioner State (open pressure)
 
 What a pattern does depends on who holds it, how they stand, and what they maintain. The instance layer MAY carry stance, relationship-state, and paradigm alongside variant/mutation/lock data. This stays open design pressure from the Hawaiian mana-kapu, Sera base-angle-lever, and Chaos Magick research — not yet settled into architecture.
+
 <<~/ahu >>
 
 <<~ ahu #lineage >>
+
 ## Design Lineage (condensed)
 
 | Source | Load it carries |
@@ -108,9 +120,11 @@ What a pattern does depends on who holds it, how they stand, and what they maint
 | Earthdawn | Kaer / citadel / flying Kila are one warded place → mobility is a property |
 
 Full lineage table lives in the epic. See edges.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite family:reference role:see >>

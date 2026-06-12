@@ -2,18 +2,19 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/render-pipeline"
-file-path = "bags/@lares/v0.1/api/pono/render-pipeline.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-manaoio   = 16
-mana      = 17
-manao     = 17
-role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 cacheable     = true
+file-path     = "bags/@lares/v0.1/api/pono/render-pipeline.md"
+mana          = 17
+manao         = 17
+manaoio       = 16
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/render-pipeline"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -256,4 +257,5 @@ Trace continuity across the causal island boundary:
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

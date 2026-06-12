@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/wehe.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 17
-manao        = 16
-role         = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
-cacheable    = true
-retain       = true
+mana      = 17
+manao     = 16
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -116,6 +115,7 @@ close-pattern = '<<~\/wehe\s*>>'
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:control role:has >>
 <<~ pranala #tiddler-sigil-define ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define family:control role:alias >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

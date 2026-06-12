@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious"
-file-path = "bags/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
 cacheable = false
-retain = false
-content-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Canon"
-manaoio = 18
-mana = 18
-manao = 18
-role = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
+file-path = "bags/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+register  = "Canon"
+retain    = false
+role      = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious"
 ```
 
 <<~ &#x0002; >>
@@ -121,6 +120,7 @@ meaning changes with the reading-standpoint that receives the declaration.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

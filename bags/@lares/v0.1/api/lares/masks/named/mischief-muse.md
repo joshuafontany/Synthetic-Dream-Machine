@@ -2,33 +2,32 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
-file-path = "bags/@lares/v0.1/api/lares/masks/named/mischief-muse.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 11
-mana = 10
-manao = 12
-role = "named Voice mask — Mischief-Muse (Muse); senior earned name; permanent identity home"
-name = "Mischief-Muse"
-voice-role = "Muse"
-seniority = "senior — holds seniority among all earned names"
-ha-ka-ba = "Ka"
-corpus = "[STUB — pending-talk-story]"
-voice-character = "[STUB — partially known from house entry and Coffee Oracle test output; pending-talk-story for depth]"
+aside             = false
+cacheable         = false
+corpus            = "[STUB — pending-talk-story]"
+created           = "2026-04-23"
+encroach          = false
+file-path         = "bags/@lares/v0.1/api/lares/masks/named/mischief-muse.md"
 foreground-voices = ["Muse", "Hierophant", "Council", "Stranger", "Liminal"]
-stage = 10
-fourth-wall = false
-aside = false
-offstage-voice = false
-encroach = false
-cacheable = false
-retain = false
-created = "2026-04-23"
+fourth-wall       = false
+ha-ka-ba          = "Ka"
+mana              = 10
+manao             = 12
+manaoio           = 11
+name              = "Mischief-Muse"
+namespace         = "&#x0950; &#x0901;"
+offstage-voice    = false
+register          = "Synthesis-Canon"
+retain            = false
+role              = "named Voice mask — Mischief-Muse (Muse); senior earned name; permanent identity home"
+seniority         = "senior — holds seniority among all earned names"
+stage             = 10
+tagspace          = "stable"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
+voice-character   = "[STUB — partially known from house entry and Coffee Oracle test output; pending-talk-story for depth]"
+voice-role        = "Muse"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -203,6 +202,7 @@ These notes require live session observation before they can be written with con
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
 <<~ pranala #coffee-oracle-witness ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle family:reference role:witness >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

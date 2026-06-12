@@ -2,44 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki >>
 ```toml iam
-uri-path = "ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki"
-file-path = "bags/@elyncia/v0.1/characters/primary-characters/lady-aki.md"
-type = "text/x-memetic-wikitext"
-
-tagspace = "stable:@elyncia"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 17
-manao = 16
-
-[sdm.daemon]
-name = "Freyja Fontany"
-uri = "lar:///ha.ka.ba/@players/freyja-fontany"
-
-[sdm.character]
-name = "Lady Aki"
-level = 2
-life = 12
-save = 13
-company = "Lindwyrm-backed Neo-Thracian expedition under Adventurer's Guild cover"
-description = "Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her potions heal. Her illusions open doors. Spores, silk, bells, and blessings follow her path."
-role = "Wandering Spider Folk miko-wizard, fungal alchemist, illusionist, shrine-field operator."
-
-[sdm.character.bonus-dice]
-hero        = 2
-comfort     = 0
-protection  = 0
-speed       = 0 
-
-
-[sdm.character.ability-scores]
-strength    = 0
-agility     = 1
-endurance   = 1
-thought     = 3
-charisma    = 2
-aura        = 2
-
+file-path                              = "bags/@elyncia/v0.1/characters/primary-characters/lady-aki.md"
+mana                                   = 17
+manao                                  = 16
+manaoio                                = 16
+register                               = "Synthesis-Canon"
+sdm-character-ability-scores-agility   = 1
+sdm-character-ability-scores-aura      = 2
+sdm-character-ability-scores-charisma  = 2
+sdm-character-ability-scores-endurance = 1
+sdm-character-ability-scores-strength  = 0
+sdm-character-ability-scores-thought   = 3
+sdm-character-bonus-dice-comfort       = 0
+sdm-character-bonus-dice-hero          = 2
+sdm-character-bonus-dice-protection    = 0
+sdm-character-bonus-dice-speed         = 0
+sdm-character-company                  = "Lindwyrm-backed Neo-Thracian expedition under Adventurer's Guild cover"
+sdm-character-description              = "Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her potions heal. Her illusions open doors. Spores, silk, bells, and blessings follow her path."
+sdm-character-level                    = 2
+sdm-character-life                     = 12
+sdm-character-name                     = "Lady Aki"
+sdm-character-role                     = "Wandering Spider Folk miko-wizard, fungal alchemist, illusionist, shrine-field operator."
+sdm-character-save                     = 13
+sdm-daemon-name                        = "Freyja Fontany"
+sdm-daemon-uri                         = "lar:///ha.ka.ba/@players/freyja-fontany"
+tagspace                               = "stable:@elyncia"
+type                                   = "text/x-memetic-wikitext"
+uri-path                               = "ha.ka.ba/@elyncia/v0.1/characters/primary-characters/lady-aki"
 ```
 
 <<~ ahu #head >>
@@ -564,3 +553,10 @@ Keep silhouettes distinct:
 Do not collapse these roles.
 
 <<~/ahu >>
+<<~ &#x0002; >>
+
+
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

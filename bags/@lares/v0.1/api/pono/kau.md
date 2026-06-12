@@ -2,16 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kau"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/kau.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis-Canon"
-manaoio   = 17
 mana      = 18
 manao     = 18
-role      = "device placement/instantiation — set down with intention, own URI, own context"
-cacheable = true
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
 retain    = true
+role      = "device placement/instantiation — set down with intention, own URI, own context"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kau"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -120,6 +121,7 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 <<~ pranala #to-widget ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/widgets/kau family:control role:has >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

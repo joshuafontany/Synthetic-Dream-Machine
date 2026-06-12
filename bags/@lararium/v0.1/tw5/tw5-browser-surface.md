@@ -2,17 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface"
-file-path    = "bags/@lararium/v0.1/tw5/tw5-browser-surface.md"
-source-file  = "packages/lararium-tw5/src/tw5-browser-surface.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-role         = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/tw5-browser-surface.md"
+mana        = 17
+register    = "Synthesis-Canon"
+retain      = true
+role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
+source-file = "packages/lararium-tw5/src/tw5-browser-surface.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

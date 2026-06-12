@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kumu"
-file-path = "bags/@lares/v0.1/api/pono/kumu.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/kumu.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kumu"
 ```
 
 <<~ ahu #head >>

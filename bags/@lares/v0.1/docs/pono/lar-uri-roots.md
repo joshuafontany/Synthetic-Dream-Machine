@@ -2,23 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-roots >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-roots"
-file-path = "bags/@lares/v0.1/docs/pono/lar-uri-roots.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lares/v0.1/docs/pono/lar-uri-roots.md"
+invariant     = true
 mana          = 18
 manao         = 17
 manaoio       = 17
-tagspace      = "stable"
-role          = "lar:/// URI namespace roots: file-resolvable caps, virtual caps, stable tuple root"
-cacheable     = true
+register      = "Synthesis-Canon"
 retain        = true
-invariant     = true
-status-date   = "2026-04-30"
+role          = "lar:/// URI namespace roots: file-resolvable caps, virtual caps, stable tuple root"
 source-symbol = "CAPS_FILE_ROOTS VIRTUAL_CAPS_ROOTS STABLE_TUPLE_ROOT"
+status-date   = "2026-04-30"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-roots"
 ```
-
-
 
 <<~ ahu #head >>
 

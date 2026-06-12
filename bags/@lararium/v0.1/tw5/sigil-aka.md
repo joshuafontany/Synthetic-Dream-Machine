@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sigil-aka >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/sigil-aka"
-file-path    = "bags/@lararium/v0.1/tw5/sigil-aka.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 16
-manao        = 16
-manaoio      = 15
-role         = "design record: ~aka sigil — shadow transclusion, template mechanism, preview image plan"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/tw5/sigil-aka.md"
+mana      = 16
+manao     = 16
+manaoio   = 15
+register  = "Synthesis"
+retain    = true
+role      = "design record: ~aka sigil — shadow transclusion, template mechanism, preview image plan"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/sigil-aka"
 ```
 
 <<~ &#x0002; >>

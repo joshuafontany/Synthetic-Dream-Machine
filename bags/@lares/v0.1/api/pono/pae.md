@@ -2,17 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pae >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pae"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/pae.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis-Canon"
-manaoio   = 16
 mana      = 18
 manao     = 17
-role      = "carrier phase boundary — transmission lifecycle law"
-cacheable = true
-retain    = true
+manaoio   = 16
+namespace = "&#x2299;"
 phases    = ["soh", "stx", "etx", "eot"]
+register  = "Synthesis-Canon"
+retain    = true
+role      = "carrier phase boundary — transmission lifecycle law"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pae"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

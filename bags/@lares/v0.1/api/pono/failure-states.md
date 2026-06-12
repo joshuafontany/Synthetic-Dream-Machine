@@ -2,20 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/failure-states"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/failure-states.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 14
-mana         = 16
-manao        = 16
-namespace    = "⊙"
-role         = "index and law for named failure modes; parent of the failure-states/ subtree"
-cacheable    = true
-retain       = true
+mana      = 16
+manao     = 16
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "index and law for named failure modes; parent of the failure-states/ subtree"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/failure-states"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -33,11 +31,13 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 <<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ detect the pattern — compare incoming pressure against the named failure-state index.
 ⏿ orient: which failure mode? what trust tier? what does the override or silence target?
 ◇ decide whether to name it in-session or emit a boundary event for operator review.
 ▶ surface the failure state by name; do not absorb it silently.
 ↺ route to hoʻoponopono if correction ceremony is warranted; release without accumulating the failure as residue; the name discharges the pressure.
+
 <<~/ahu >>
 
 <<~ ahu #index >>

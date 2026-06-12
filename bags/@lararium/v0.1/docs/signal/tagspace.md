@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/tagspace"
-file-path = "bags/@lararium/v0.1/docs/signal/tagspace.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 18
-mana = 17
-manao = 17
-role = "docs room for definitional lar tagspace semantics and address-slot framing"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/tagspace.md"
+mana      = 17
+manao     = 17
+manaoio   = 18
+register  = "Synthesis"
+retain    = false
+role      = "docs room for definitional lar tagspace semantics and address-slot framing"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/tagspace"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -75,6 +73,7 @@ Working definition:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

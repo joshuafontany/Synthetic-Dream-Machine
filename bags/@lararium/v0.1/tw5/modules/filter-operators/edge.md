@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge"
-file-path   = "bags/@lararium/v0.1/tw5/modules/filter-operators/edge.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 filter operator: edge — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c37"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/filter-operators/edge.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 filter operator: edge — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "registerEdge"
-body-sha256 = "410944ae0dd96ed55a0a91f0443532760b016f9fcbc44e0c339d74bcf97d8c37"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/edge"
 ```
 
 <<~ &#x0002; >>
@@ -60,6 +60,8 @@ export function registerEdge(tw: TW5Instance): void {
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

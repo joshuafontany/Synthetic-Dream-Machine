@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module"
-file-path = "bags/@lararium/v0.1/tw5/modules/widget-module.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-role         = "canonical source: TW5 widget module protocol — LARARIUM_WIDGETS_TIDDLER stub + prototype chain wiring"
-status-date  = "2026-04-30"
-heleuma      = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widget-module.md"
+heleuma       = true
+mana          = 17
+manao         = 17
+manaoio       = 16
+register      = "Synthesis-Canon"
+role          = "canonical source: TW5 widget module protocol — LARARIUM_WIDGETS_TIDDLER stub + prototype chain wiring"
 source-symbol = "createLarariumWidgets"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widget-module"
 ```
-
-
 
 <<~ &#x0002; >>
 

@@ -2,17 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/parser"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/parser.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-manaoio   = 16
 mana      = 18
 manao     = 17
-role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch model, grammar self-hosting, sigil kinds, closure law, C0 control-sigil roles"
-cacheable = true
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
 retain    = true
+role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch model, grammar self-hosting, sigil kinds, closure law, C0 control-sigil roles"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/parser"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -286,4 +287,5 @@ trigger = "end of stream"
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

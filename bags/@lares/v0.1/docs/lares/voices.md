@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices"
-file-path = "bags/@lares/v0.1/docs/lares/voices.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 18
-mana = 18
-manao = 18
-role = "specification for the three-layer lararium voice-house: the Thirteen, Voice house law, worker swarm, and mask layer"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/lares/voices.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+register  = "Synthesis-Canon"
+retain    = false
+role      = "specification for the three-layer lararium voice-house: the Thirteen, Voice house law, worker swarm, and mask layer"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -244,6 +242,7 @@ The Voice house spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #hud-exchange-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol family:reference role:see >>
 <<~ pranala #hud-p-aperture ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s#p-parameter-mapping family:reference role:see >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

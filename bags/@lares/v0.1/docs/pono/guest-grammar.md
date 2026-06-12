@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar"
-file-path = "bags/@lares/v0.1/docs/pono/guest-grammar.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 16
-role = "extended documentation surface for guest-grammar examples, ownership notes, fixture seeds, and migration residue"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/guest-grammar.md"
 invariant = false
+mana      = 15
+manao     = 16
+manaoio   = 14
+register  = "Synthesis-Canon"
+retain    = false
+role      = "extended documentation surface for guest-grammar examples, ownership notes, fixture seeds, and migration residue"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -97,6 +95,7 @@ The current shape keeps:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

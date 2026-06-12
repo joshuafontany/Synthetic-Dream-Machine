@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab"
-file-path = "bags/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab.md"
-type = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "ViewTemplate tab: injects #iam character sheet as a Metadata tab on all lar: tiddlers"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/ViewTemplate"]
-list-after   = "$:/core/ui/ViewTemplate/body"
+cacheable  = true
+file-path  = "bags/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab.md"
+list-after = "$:/core/ui/ViewTemplate/body"
+mana       = 18
+manao      = 18
+manaoio    = 17
+register   = "Synthesis-Canon"
+retain     = true
+role       = "ViewTemplate tab: injects #iam character sheet as a Metadata tab on all lar: tiddlers"
+tags       = ["$:/tags/ViewTemplate"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab"
 ```
-
-
 
 <<~ &#x0002; >>
 

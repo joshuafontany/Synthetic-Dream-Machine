@@ -2,19 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
 ```toml iam
-uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils"
-file-path     = "bags/@lares/v0.1/api/pono/carrier-sigils.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-manao         = 18
-manaoio       = 17
-tagspace      = "stable"
-role          = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
-cacheable     = true
-retain        = true
-invariant     = true
-status-date   = "2026-06-07"
+cacheable   = true
+file-path   = "bags/@lares/v0.1/api/pono/carrier-sigils.md"
+invariant   = true
+mana        = 18
+manao       = 18
+manaoio     = 17
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
+status-date = "2026-06-07"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

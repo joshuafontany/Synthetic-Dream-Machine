@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml"
-file-path    = "bags/@lararium/v0.1/tw5/lib-smol-toml.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 17
-manao        = 16
-manaoio      = 16
-role         = "TW5 library tiddler: smol-toml TOML parser, spec-compliant, ~26 kB, sync, no WASM"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/tw5/lib-smol-toml.md"
+mana      = 17
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = true
+role      = "TW5 library tiddler: smol-toml TOML parser, spec-compliant, ~26 kB, sync, no WASM"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/lib-smol-toml"
 ```
 
 <<~ &#x0002; >>

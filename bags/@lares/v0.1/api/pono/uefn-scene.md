@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/uefn-scene"
-file-path = "bags/@lares/v0.1/api/pono/uefn-scene.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/uefn-scene.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/uefn-scene"
 ```
 
 <<~ ahu #head >>

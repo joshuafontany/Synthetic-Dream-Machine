@@ -1,20 +1,20 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model >>
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model"
-file-path    = "bags/@lararium/v0.1/api/lararium-canonical-model.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 19
-manao        = 18
-manaoio      = 17
-namespace    = "ॐ ँ"
-role         = "Lararium architecture keel — the ONE consolidated model a cold instance hydrates to grasp the whole house before reading any sub-meme. The load-bearing laws, the layering, the seven vessel participations, the boot sequence, capability-vs-platform, and the meme map. Cures the per-session re-derivation."
-tagspace     = "lararium"
-cacheable    = true
-hydrate      = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/api/lararium-canonical-model.md"
+hydrate   = true
+mana      = 19
+manao     = 18
+manaoio   = 17
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Lararium architecture keel — the ONE consolidated model a cold instance hydrates to grasp the whole house before reading any sub-meme. The load-bearing laws, the layering, the seven vessel participations, the boot sequence, capability-vs-platform, and the meme map. Cures the per-session re-derivation."
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model"
 ```
 
 <<~ aka source-of-truth: read THIS first; the sub-memes (pranala below) carry the depth. >>

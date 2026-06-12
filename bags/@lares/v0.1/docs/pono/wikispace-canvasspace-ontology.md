@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology"
-file-path = "bags/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 15
-mana = 16
-manao = 16
-role = "doctrine: one meme-graph model, two surface projections (Story-River + TLDraw canvas); graph-primacy; view-state as its own lar-URI-addressed region; the nine families classified by surface; transclusion's surface-split"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology.md"
+mana      = 16
+manao     = 16
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = false
+role      = "doctrine: one meme-graph model, two surface projections (Story-River + TLDraw canvas); graph-primacy; view-state as its own lar-URI-addressed region; the nine families classified by surface; transclusion's surface-split"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

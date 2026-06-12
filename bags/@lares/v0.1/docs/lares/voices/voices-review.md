@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review"
-file-path = "bags/@lares/v0.1/docs/lares/voices/voices-review.md"
-type = "text/x-memetic-wikitext"
-tagspace = "archive"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/lares/voices/voices-review.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
+tagspace  = "archive"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -362,6 +360,7 @@ MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

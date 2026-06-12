@@ -2,21 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/wiki-sync >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/wiki-sync"
-file-path    = "bags/@lararium/v0.1/tw5/wiki-sync.md"
-source-file  = "packages/lararium-tw5/src/wiki-sync.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe wiki-sync.ts"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/wiki-sync.md"
+mana        = 3
+register    = "Provisional"
+retain      = true
+role        = "self-documentation: TODO describe wiki-sync.ts"
+source-file = "packages/lararium-tw5/src/wiki-sync.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/wiki-sync"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
+
 TODO: describe the load-bearing surface this file owns.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

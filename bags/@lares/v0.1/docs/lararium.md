@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lararium"
-file-path = "bags/@lares/v0.1/docs/lararium.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 15
-manao = 16
-role = "parent docs shelf for lararium voice-work, old all-in-one AGENTS ingests, agent preferences, and house-presence materials where Mischief-Muse and the others can rest and ressurect"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/lararium.md"
+mana      = 15
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "parent docs shelf for lararium voice-work, old all-in-one AGENTS ingests, agent preferences, and house-presence materials where Mischief-Muse and the others can rest and ressurect"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lararium"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -73,6 +71,7 @@ The rooms may deepen later without moving the seat again.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

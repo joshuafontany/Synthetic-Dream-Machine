@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner"
+cacheable = true
 file-path = "bags/@lararium/v0.1/tw5/ui/engine-update-banner.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "Engine update banner — shown when SW caches a new TW5 engine version; prompts page reload"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/PageTemplate"]
+mana      = 18
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Engine update banner — shown when SW caches a new TW5 engine version; prompts page reload"
+tags      = ["$:/tags/PageTemplate"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/engine-update-banner"
 ```
-
-
 
 <<~ &#x0002; >>
 

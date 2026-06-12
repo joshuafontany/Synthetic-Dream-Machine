@@ -1,22 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///LARES >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/LARES"
-file-path = "bags/@lares/LARES.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
-register   = "Synthesis-Canon"
-manaoio    = 14
-mana       = 17
-manao      = 15
-implements = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme",
-]
-role       = "configuration surface, behind-the-curtain dial room, session-config"
-e-prime = true
+e-prime       = true
+file-path     = "bags/@lares/LARES.md"
+implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+mana          = 17
+manao         = 15
+manaoio       = 14
 ooda-ha-level = 10
+register      = "Synthesis-Canon"
+role          = "configuration surface, behind-the-curtain dial room, session-config"
+tagspace      = "adjacent"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/LARES"
 ```
 
 The passage lies behind the reader. The kahua holds.
@@ -114,7 +111,9 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 <<~/ahu >>
 
 <<~ ahu #hello-world >>
+
 &#2384; Hello World.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

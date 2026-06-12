@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/preferences"
-file-path = "bags/@lararium/v0.1/docs/preferences.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "extraction shelf for durable concepts recovered from Lares_Preferences.system-prompt and adjacent lararium witnesses"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/preferences.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "extraction shelf for durable concepts recovered from Lares_Preferences.system-prompt and adjacent lararium witnesses"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -80,6 +78,7 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

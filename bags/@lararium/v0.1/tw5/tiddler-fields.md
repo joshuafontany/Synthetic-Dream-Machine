@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields"
-file-path = "bags/@lararium/v0.1/tw5/tiddler-fields.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-mana = 18
-manao = 18
-manaoio = 18
-role = "interface note: canonical TW5 core-semantic tiddler field shapes for Lararium"
 cacheable = true
-retain = true
+file-path = "bags/@lararium/v0.1/tw5/tiddler-fields.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+register  = "Synthesis-Canon"
+retain    = true
+role      = "interface note: canonical TW5 core-semantic tiddler field shapes for Lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/tiddler-fields"
 ```
 
 <<~ &#x0002; >>

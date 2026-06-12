@@ -2,17 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler"
-file-path    = "bags/@lararium/v0.1/mesh/verb-tiddler.md"
-source-file  = "packages/lararium-mesh/src/verb-tiddler.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 14
-role         = "the verb/summons/outcome task surface — verb (invocation), summons (edge transport), outcome (result); LANGUAGE-protocol register internal, the UCAN Invocation/Receipt/Task ontology held as boundary projection for lineage + interop"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/verb-tiddler.md"
+mana        = 14
+register    = "Synthesis-Canon"
+retain      = true
+role        = "the verb/summons/outcome task surface — verb (invocation), summons (edge transport), outcome (result); LANGUAGE-protocol register internal, the UCAN Invocation/Receipt/Task ontology held as boundary projection for lineage + interop"
+source-file = "packages/lararium-mesh/src/verb-tiddler.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

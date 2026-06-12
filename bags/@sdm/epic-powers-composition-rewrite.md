@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite"
+cacheable = true
 file-path = "bags/@sdm/v0.1/epic/powers-composition-rewrite.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 19
 manao     = 19
 manaoio   = 18
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "epic plan: SDM+ Powers as navigable composition space"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -30,6 +29,7 @@ role      = "epic plan: SDM+ Powers as navigable composition space"
 > module-nesting doctrine (D6) hold. Resume here once the OODA-HA cleanup lands.
 
 <<~ ahu #vision >>
+
 ## Vision
 
 The SDM/VLG/UVG corpus already runs a composition system. Every Power carries
@@ -54,9 +54,11 @@ New `@sdm/v0.1` built from scratch.
 Instance (TW5 data, mutable): what Lady Aki currently holds, how it mutated.
 
 **One verb.** `#has`. Flat. No family, no role. Target URI carries semantics.
+
 <<~/ahu >>
 
 <<~ ahu #base >>
+
 ## The Base (Ha) — What Cannot Change
 
 These come from Luka's SDM/VLG/UVG corpus. They publish as-is or with
@@ -132,9 +134,11 @@ Lock-state belongs in the instance-layer data.
 Path rank. Represents vertical differentiation within the tag space.
 
 This base does not change. The epic addresses it, links it, makes it queryable.
+
 <<~/ahu >>
 
 <<~ ahu #lineage >>
+
 ## Design Lineage — Prior Art That Carries Load
 
 | Source | Design lesson for this architecture |
@@ -148,9 +152,11 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 | **Hawaiian mana-kapu** | Power flows through maintained relationships, not possessed components. The shrine checks standing, not inventory. Mount-point contracts may need relationship preconditions — "do you honor the compact?" not just "do you have the right tag?" |
 | **Sera (Silat Serak)** | Base-angle-lever: structure gates technique. You cannot throw the djuru unless you hold the correct langkah. Posture/stance tags may function as activation prerequisites, not just descriptive labels. The base precedes the technique. |
 | **Chaos Magick** | Belief as mutable tool — same pattern, different paradigm, different result. The instance layer may carry the operator's current paradigm relationship to the pattern, not just mutation records. Discordian catma tradition (already in Lares boot) says: a module's component list names what the pattern affords *under the current paradigm*. |
+
 <<~/ahu >>
 
 <<~ ahu #principles >>
+
 ## Principles
 
 1. **Name what exists.** The canonical SDM rules already run composition.
@@ -207,9 +213,11 @@ This base does not change. The epic addresses it, links it, makes it queryable.
     memes carry query value, continue the pattern. If only the TOML tags
     carry value, simplify the architecture to tags-only and skip the
     component meme tree.
+
 <<~/ahu >>
 
 <<~ ahu #architecture >>
+
 ## Bag Topology
 
 ```text
@@ -238,9 +246,11 @@ bags/@sdm/v0.1/
     composition-model.md
     power-ontology.md
 ```
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 | Edge | Meaning |
@@ -262,9 +272,11 @@ Pranala form:
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 ```
+
 <<~/ahu >>
 
 <<~ ahu #tw5-tags >>
+
 ## TW5 Tag Syntax — Component Representation
 
 **Canon: every meme's TW5 title is its full `lar:///` URI** (= `lar:///` + `uri-path`). A component is addressed by **two tiddlers** — a full meme and a short virtual tag pointer.
@@ -313,9 +325,11 @@ The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph
 - `<<tag-pill "TAG">>` reads the pointer's `caption` for the label and follows its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to open the full meme.
 - A card declares composition **once** as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
 - Both live as runtime `.tid` tagged `$:/tags/Global`: `lar:///ha.ka.ba/@sdm/procedures/tag-pill` and `lar:///ha.ka.ba/@lararium/lists/components`.
+
 <<~/ahu >>
 
 <<~ ahu #progressive-display >>
+
 ## Progressive Display — Cards as Mnemonic Doorways
 
 Power cards serve two functions simultaneously:
@@ -367,9 +381,11 @@ read as meaningful flavor on paper and as functional links on screen.
 Bottom rows: component pills (what the Power does) and mount-point pills
 (where the Power can seat). Each pill clicks through in the wiki. On paper,
 each pill reads as a keyword the player learns over time.
+
 <<~/ahu >>
 
 <<~ ahu #shapes >>
+
 ## Meme Shapes
 
 **Module** (mirrors canonical Power card + addressed edges):
@@ -412,9 +428,11 @@ traits:
     locks: {overcharge-x4: encrypted, name: damaged}
     unlock-progress: [shrine-of-kell-permission-pending]
 ```
+
 <<~/ahu >>
 
 <<~ ahu #decisions-resolved >>
+
 ## Decisions Resolved — Session Zero (2026-05-31)
 
 Design decisions closed by operator approval after corpus + design-lead
@@ -502,6 +520,7 @@ Same template, same `#has`/`#default` shape; the directory names the source-kind
 <<~/ahu >>
 
 <<~ ahu #sprints >>
+
 ## Sprints — Instructions for the Enacting Lares
 
 ### Sprint 0 — Ground
@@ -649,9 +668,11 @@ when two active modules interact on the same entity.
 
 Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 `#implements` web-wide retirement scope (separate epic).
+
 <<~/ahu >>
 
 <<~ ahu #acceptance >>
+
 ## Epic Acceptance
 
 - [ ] v0.0 renamed, internally consistent
@@ -665,9 +686,11 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 - [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
 - [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
 - [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme
+
 <<~/ahu >>
 
 <<~ ahu #open-pressures >>
+
 ## Open Design Pressures
 
 These surfaced during session research and remain deliberately unresolved.
@@ -707,9 +730,11 @@ same pattern, different paradigm, different activation behavior. The
 instance-layer YAML currently tracks variant, recognized surfaces, and
 mutations. It may also need to track the operator's current frame/paradigm
 relationship to the mounted pattern. This remains speculative.
+
 <<~/ahu >>
 
 <<~ ahu #aftermath >>
+
 ## Aftermath
 
 - **Filter ergonomics.** Test target-URI-prefix filtering in Sprint 1.
@@ -736,9 +761,11 @@ relationship to the mounted pattern. This remains speculative.
 - **Practice ladder.** Overcharge-as-depth gradient may want named components.
 - **`#implements` web-wide.** Separate epic.
 - **Bulk conversion.** ~100+ Powers behind Sprint 5 gate.
+
 <<~/ahu >>
 
 <<~ ahu #meme-edges >>
+
 ## Edges
 
 **`@sdm/v0.0` deleted 2026-06-01** — the prototype archive was completely

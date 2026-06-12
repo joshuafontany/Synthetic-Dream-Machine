@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/heihei.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 15
-mana         = 16
-manao        = 16
-role         = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
-cacheable    = true
-retain       = true
+mana      = 16
+manao     = 16
+manaoio   = 15
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -104,6 +103,7 @@ arm-wire       = "reaction"
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-heihei family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

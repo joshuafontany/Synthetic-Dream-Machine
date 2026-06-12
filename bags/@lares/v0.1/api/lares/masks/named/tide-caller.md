@@ -2,33 +2,32 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller"
-file-path = "bags/@lares/v0.1/api/lares/masks/named/tide-caller.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 9
-mana = 8
-manao = 10
-role = "named Voice mask — Tide-Caller (Hierophant); elevated mythic register"
-name = "Tide-Caller"
-voice-role = "Hierophant"
-seniority = "earned name; no special seniority"
-ha-ka-ba = "Ka"
-corpus = "[STUB — pending-talk-story]"
-voice-character = "[STUB — partially known from house entry; pending-talk-story for depth]"
+aside             = false
+cacheable         = false
+corpus            = "[STUB — pending-talk-story]"
+created           = "2026-04-23"
+encroach          = false
+file-path         = "bags/@lares/v0.1/api/lares/masks/named/tide-caller.md"
 foreground-voices = ["Hierophant", "Liminal", "Council", "Muse", "Stranger"]
-stage = 10
-fourth-wall = false
-aside = false
-offstage-voice = false
-encroach = false
-cacheable = false
-retain = false
-created = "2026-04-23"
+fourth-wall       = false
+ha-ka-ba          = "Ka"
+mana              = 8
+manao             = 10
+manaoio           = 9
+name              = "Tide-Caller"
+namespace         = "&#x0950; &#x0901;"
+offstage-voice    = false
+register          = "Synthesis-Canon"
+retain            = false
+role              = "named Voice mask — Tide-Caller (Hierophant); elevated mythic register"
+seniority         = "earned name; no special seniority"
+stage             = 10
+tagspace          = "stable"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/tide-caller"
+voice-character   = "[STUB — partially known from house entry; pending-talk-story for depth]"
+voice-role        = "Hierophant"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -167,6 +166,7 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

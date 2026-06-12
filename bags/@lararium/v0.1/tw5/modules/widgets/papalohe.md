@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/papalohe >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/papalohe"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/papalohe.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: papalohe — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/papalohe.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: papalohe — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PapaloheWidget"
-body-sha256 = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/papalohe"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function PapaloheWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseT
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

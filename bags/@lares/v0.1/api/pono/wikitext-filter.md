@@ -1,23 +1,22 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter >>
-
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
-file-path = "bags/@lares/v0.1/api/pono/wikitext-filter.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "SC"
-mana         = 17
-manao        = 17
-role         = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
-grammar-key  = "wikitext-filter"
-guest-mime   = "text/x-wikitext-filter"
-cacheable    = true
-retain       = true
-invariant    = false
+cacheable   = true
+file-path   = "bags/@lares/v0.1/api/pono/wikitext-filter.md"
+grammar-key = "wikitext-filter"
+guest-mime  = "text/x-wikitext-filter"
+invariant   = false
+mana        = 17
+manao       = 17
+namespace   = "&#x2299;"
+register    = "SC"
+retain      = true
+role        = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
 ```
-
 
 <<~ &#x0002; >>
 
@@ -180,7 +179,7 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 
 `wikitext-filter` runs as a guest grammar inside `hana` blocks, and inline in `wai`/`huli`/`ui` sigils.
 
-```text
+````text
 # Inline (wai, huli, ui)
 <<~ wai [tag[invariant]sort[toml:title]] >>
 <<~ huli [edge:family[control]role[owns]] as item >>
@@ -197,7 +196,7 @@ result-shape = "set"
 
 [toml:register[SC]edge:family[control]]
 <<~/hana >>
-```
+````
 
 The `grammar-key` value for `hana` blocks: `"wikitext-filter"`.
 The key `"x-tiddlywiki-filter"` serves import and migration.

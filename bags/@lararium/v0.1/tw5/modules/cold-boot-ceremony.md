@@ -1,21 +1,21 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
-file-path    = "bags/@lararium/v0.1/tw5/modules/cold-boot-ceremony.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "heleuma ka: void-start operator identity tiddler builder"
-status-date  = "2026-05-04"
-heleuma      = "ka"
+body-sha256   = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a923153300"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/cold-boot-ceremony.md"
+heleuma       = "ka"
+implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
+mana          = 18
+manao         = 17
+manaoio       = 16
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "heleuma ka: void-start operator identity tiddler builder"
 source-symbol = "*"
-module-ref   = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
-implements   = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
-body-sha256 = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a923153300"
-cacheable    = true
-retain       = true
+status-date   = "2026-05-04"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
 ```
 
 <<~ &#x0002; >>

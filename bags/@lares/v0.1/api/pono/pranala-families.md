@@ -2,23 +2,22 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pranala-families"
-file-path = "bags/@lares/v0.1/api/pono/pranala-families.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lares/v0.1/api/pono/pranala-families.md"
+invariant     = true
 mana          = 18
 manao         = 17
 manaoio       = 17
-tagspace      = "stable"
-role          = "canonical pranala edge-family taxonomy: eight families, role vocabularies, contract flags"
-cacheable     = true
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
 retain        = true
-invariant     = true
-status-date   = "2026-06-05"
+role          = "canonical pranala edge-family taxonomy: eight families, role vocabularies, contract flags"
 source-symbol = "KNOWN_FAMILIES FAMILY_ROLES FAMILY_CONTRACTS"
+status-date   = "2026-06-05"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/pranala-families"
 ```
-
-
 
 <<~ ahu #head >>
 

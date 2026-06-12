@@ -2,18 +2,19 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/nalu"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/nalu.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
+invariant   = true
 mana        = 18
 manao       = 17
-tagspace    = "stable"
-role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
 retain      = true
-invariant   = true
+role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
 status-date = "2026-05-30"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/nalu"
 ```
 
 <<~ &#x0002; >>

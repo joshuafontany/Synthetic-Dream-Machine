@@ -7,29 +7,18 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/invariant/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "SC"
-manaoio = 14
-mana = 14
-manao = 15
-role = "invariant skill, conformance checker, and sidecar splitter"
-covers = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"
-]
-constraints = [
-  "S1: the canonical loci remains constitutional law and self-executing template",
-  "S2: invariant surfaces stay short, exact, stable, cacheable, and active in voice",
-  "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact",
-  "S4: downstream invariant memes fill their own OODA-HA phases and MUST NOT carry template `???` markers",
-  "S5: always-on law stays in the invariant; explanations, procedures, examples, traces, and audits split to sidecars",
-  "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"
-]
+constraints        = ["S1: the canonical loci remains constitutional law and self-executing template", "S2: invariant surfaces stay short, exact, stable, cacheable, and active in voice", "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact", "S4: downstream invariant memes fill their own OODA-HA phases and MUST NOT carry template `???` markers", "S5: always-on law stays in the invariant; explanations, procedures, examples, traces, and audits split to sidecars", "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+file-path          = "bags/@lares/v0.1/api/pono/invariant/SKILL.md"
+mana               = 14
+manao              = 15
+manaoio            = 14
+register           = "SC"
+role               = "invariant skill, conformance checker, and sidecar splitter"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/invariant"
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL"
 ```
-
-
 
 # Invariant-Meme Skill
 
@@ -40,6 +29,7 @@ This skill operationalizes that compact invariant.
 This skill does not widen, soften, or reinterpret it.
 
 <<~ &#x0002; >>
+
 Invariant-meme skill opens the pressure surface here.
 <<~/ahu >>
 
@@ -260,6 +250,7 @@ Aftermath — name the residue honestly: sidecar matter not yet split, ambiguous
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

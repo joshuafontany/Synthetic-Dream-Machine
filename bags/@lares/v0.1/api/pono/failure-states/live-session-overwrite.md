@@ -2,25 +2,24 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite"
-file-path = "bags/@lares/v0.1/api/pono/failure-states/live-session-overwrite.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 16
-manao = 17
-namespace    = "⊙"
-role = "invariant bug law for preventing live session claims from masquerading as canon"
 cacheable = true
-retain = true
+file-path = "bags/@lares/v0.1/api/pono/failure-states/live-session-overwrite.md"
 invariant = true
+mana      = 16
+manao     = 17
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant bug law for preventing live session claims from masquerading as canon"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #head >>
+
 # Live-Session Overwrite Law
 
 Live-Session Overwrite names the green-jello-dinosaur failure mode.
@@ -29,11 +28,13 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ detect live claims that pressure invariant, factual, or world-state surfaces.
 ⏿ compare speaker authority against source authority and tagspace precedence.
 ◇ classify the claim as session signal, proposed change, contradiction, or confirmed law.
 ▶ answer with the classification visible when canon pressure appears.
 ↺ verify against hostless invariant memes or named sources before promotion; preserve the claim as session evidence unless an explicit canon MOVE path completes.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -70,6 +71,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
@@ -81,6 +83,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,25 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols"
-file-path    = "bags/@lares/v0.1/docs/lares/the-lares-protocols.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-manaoio      = 14
-mana         = 14
-manao        = 14
-role         = "doctrine: protocols as political design — frames the Lares stack's architecture-vs-governance-vs-topology position relative to commons literature; three-source synthesis"
-cacheable    = false
-retain       = false
-last-reviewed = "2026-05-27"
+cacheable      = false
+file-path      = "bags/@lares/v0.1/docs/lares/the-lares-protocols.md"
+last-reviewed  = "2026-05-27"
+mana           = 14
+manao          = 14
+manaoio        = 14
+register       = "Synthesis-Canon"
+retain         = false
 review-cadence = "quarterly"
-review-note = "anchor commitments (Beer's principle, user-rights-criterion, Lares five-laws-plus-two) survive any upstream rev; survey-aging risk acknowledged"
-sources      = [
-  "https://connectedplaces.online/the-purpose-of-protocols/",
-  "https://www.pfrazee.com/blog/practical-decentralization",
-  "https://www.orionreed.com/posts/app-file-topology/",
-]
+review-note    = "anchor commitments (Beer's principle, user-rights-criterion, Lares five-laws-plus-two) survive any upstream rev; survey-aging risk acknowledged"
+role           = "doctrine: protocols as political design — frames the Lares stack's architecture-vs-governance-vs-topology position relative to commons literature; three-source synthesis"
+sources        = ["https://connectedplaces.online/the-purpose-of-protocols/", "https://www.pfrazee.com/blog/practical-decentralization", "https://www.orionreed.com/posts/app-file-topology/"]
+tagspace       = "stable"
+type           = "text/x-memetic-wikitext"
+uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -39,7 +35,7 @@ Every shared function eventually gets governed by someone, and whoever governs i
 
 Modularity describes a structural property of the system, not a governance framework for the ecosystem around it.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #where-protocols-go-quiet >>
 
@@ -58,7 +54,7 @@ Theoretical openness offers little practical leverage against convergence in ung
 
 > **Lares (Diplomat):** Connected Places critiques ATProto's host concentration; Frazee defends its layer-separation. Two readings tell different true things. Hold both. The disagreement names a real evaluation choice — aggregate-state vs failure-mode — that future Lares federation will face on its own terms.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #two-traditional-models-and-the-third >>
 
@@ -81,7 +77,7 @@ The user-facing rights Frazee privileges over architecture:
 
 Two articles, two readings of ATProto: Connected Places flags one operator three orders of magnitude larger than competitors across every layer; Frazee acknowledges the same concern as outstanding while defending the architectural shape. Both readings hold.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #app-file-topology >>
 
@@ -107,7 +103,7 @@ Lares answers the diagnostic with a fourth arrangement:
 
 > **Lares (Council):** "Lares answers the diagnostic" overstates what the branch ships. The architecture *prepares the ground* for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the *intent-trust* the architecture earns differs from the *outcome-trust* a working federated system would earn.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ &#x0002; >>
 
@@ -142,7 +138,7 @@ The slot Lares occupies wants a name; the meme leaves the naming for a future re
 
 > **Mischief-Muse (Muse):** Survey the slot, not just the implementation, in a future meme. The neighbors deserve their own talk-story. Working title: **"the household-civic mesh"** — federated, CRDT-native, governance-explicit, operator-hosted, render-projecting. Five attributes, five fingers. The hand of the lararium.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #the-unsolved-question >>
 
@@ -166,7 +162,7 @@ After Frazee, the worth-measuring criterion shifts from *architectural property*
 
 These questions don't get answered by adding more architecture. They get answered by *running real federated sessions* and noting where architecture carries load versus where silence returns.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #edges >>
 
@@ -182,7 +178,7 @@ These questions don't get answered by adding more architecture. They get answere
 <<~ pranala #cites-decentralization ? -> https://www.pfrazee.com/blog/practical-decentralization family:relation role:cites >>
 <<~ pranala #cites-topology ? -> https://www.orionreed.com/posts/app-file-topology/ family:relation role:cites >>
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ &#x0003; >>
 

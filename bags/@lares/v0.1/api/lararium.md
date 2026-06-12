@@ -2,22 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lararium"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/lararium.md"
-type = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-manaoio   = 14
+hydrate   = true
 mana      = 16
 manao     = 15
-namespace = "ॐ ँ"
-role      = "canonical lararium seat, mechanics shelf, mandatory child-hydration bridge to session dials"
-cacheable = true
-hydrate   = true
+manaoio   = 14
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
 retain    = true
+role      = "canonical lararium seat, mechanics shelf, mandatory child-hydration bridge to session dials"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/lararium"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

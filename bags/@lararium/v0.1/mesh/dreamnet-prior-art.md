@@ -2,19 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
-file-path    = "bags/@lararium/v0.1/mesh/dreamnet-prior-art.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 16
-manao        = 15
-manaoio      = 14
-role         = "prior art research synthesis: best practices and golden principles for DreamNet five-layer topology"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/mesh/dreamnet-prior-art.md"
+mana          = 16
+manao         = 15
+manaoio       = 14
+register      = "Synthesis-Canon"
 research-date = "2026-05-28"
+retain        = true
+role          = "prior art research synthesis: best practices and golden principles for DreamNet five-layer topology"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
 ```
+
 <<~ &#x0002; >>
 
 # DreamNet/Lares: Prior Art Research Synthesis

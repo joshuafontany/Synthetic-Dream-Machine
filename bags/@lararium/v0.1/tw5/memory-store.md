@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/memory-store"
-file-path    = "bags/@lararium/v0.1/tw5/memory-store.md"
-source-file  = "packages/lararium-tw5/src/memory-store.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-role         = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/memory-store.md"
+mana        = 17
+manao       = 17
+register    = "Synthesis-Canon"
+retain      = true
+role        = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
+source-file = "packages/lararium-tw5/src/memory-store.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/memory-store"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

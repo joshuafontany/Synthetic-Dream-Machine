@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/edge >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/filters/edge"
-file-path = "bags/@lararium/v0.1/tw5/filters/edge.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: registerEdgeOperator — heleuma ka"
-heleuma       = "ka"
-source-symbol = "registerEdgeOperator"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/edge"
-body-sha256 = "345931be1ee68fb47617f6db9f999e6fffee4a8ead521139f67ed127a557fbc4"
+body-sha256   = "345931be1ee68fb47617f6db9f999e6fffee4a8ead521139f67ed127a557fbc4"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/filters/edge.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/edge"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: registerEdgeOperator — heleuma ka"
+source-symbol = "registerEdgeOperator"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/filters/edge"
 ```
 
 <<~ &#x0002; >>

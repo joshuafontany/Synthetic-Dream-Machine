@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-startup-action >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-startup-action"
-file-path = "bags/@lararium/v0.1/tw5/ui/iam-startup-action.md"
-type = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "startup action: routes lar:///...#slot URL fragments to parent tiddler + correct tab state"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/StartupAction"]
-list-after   = "$:/core/ui/StartupActions/DefaultTiddlers"
+cacheable  = true
+file-path  = "bags/@lararium/v0.1/tw5/ui/iam-startup-action.md"
+list-after = "$:/core/ui/StartupActions/DefaultTiddlers"
+mana       = 18
+manao      = 17
+manaoio    = 16
+register   = "Synthesis-Canon"
+retain     = true
+role       = "startup action: routes lar:///...#slot URL fragments to parent tiddler + correct tab state"
+tags       = ["$:/tags/StartupAction"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-startup-action"
 ```
-
-
 
 <<~ &#x0002; >>
 

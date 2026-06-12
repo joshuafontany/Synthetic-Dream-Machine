@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/provenance >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/provenance"
-file-path = "bags/@lararium/v0.1/docs/signal/provenance.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "docs room for lararium signal lineage, archive witness, source shelves, and migration residue that still pressures the branch"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/provenance.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "docs room for lararium signal lineage, archive witness, source shelves, and migration residue that still pressures the branch"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/provenance"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -95,7 +93,6 @@ The remaining task here is not to restate the root contract, but to preserve and
 | `../../_todo/LIMINAL_PERSPECTIVES.md` | `Synthesis 13/20` — GlassFloor outsider analysis: CRM/HUD framing, emoji instrument symbols, token budget hypothesis, progressive disclosure model. Not a primary design source — a perspective document. Feeds SHD-01 through SHD-03 open decisions and S2 p-band scope. |
 | `../../_todo/E-deep-research-report.md` | `Synthesis 14/20` — 40+ source research synthesis (Endsley 2023, Ji-An 2025, Steyvers 2025, Lee 2024, Li 2024, Gao 2023). Academic grounding for the CRM/SA framing adopted in this subdomain. Key feeds: §1.2 SA type mapping (all 7 HUD channels classified); §2 SA vs XAI distinction (prospective vs retrospective; SAOD not XAI principles); §3 LLM metacognitive scaffold hypothesis; §4.1 cognitive capture / attentional tunneling → SHD-02 register bump; §5.2 ATSA bidirectional model → S2 BIDIRECTIONAL_PROTOCOL.md. Not primary design source — research grounding. |
 
-
 <<~/ahu >>
 
 <<~ ahu #snapshot-witness-kernel-claude >>
@@ -142,6 +139,7 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

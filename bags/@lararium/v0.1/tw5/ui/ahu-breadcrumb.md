@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-breadcrumb >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-breadcrumb"
-file-path = "bags/@lararium/v0.1/tw5/ui/ahu-breadcrumb.md"
-type = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "ViewTemplate: slot badge + parent link shown at top of any ahu child tiddler"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/ViewTemplate"]
-list-before  = "$:/core/ui/ViewTemplate/body"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/ui/ahu-breadcrumb.md"
+list-before = "$:/core/ui/ViewTemplate/body"
+mana        = 18
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+retain      = true
+role        = "ViewTemplate: slot badge + parent link shown at top of any ahu child tiddler"
+tags        = ["$:/tags/ViewTemplate"]
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-breadcrumb"
 ```
-
-
 
 <<~ &#x0002; >>
 

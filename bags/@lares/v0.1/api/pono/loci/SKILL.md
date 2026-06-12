@@ -7,27 +7,18 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/loci/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 14
-manao = 16
-role = "agent-facing procedural surface for loci routing and rating passes"
-covers = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-constraints = [
-  "S1: the canonical loci remains the stable-address capability law",
-  "S2: derivation algorithm runs in full step order without skipping",
-  "S3: resolved and declared-unresolved stay distinct; neither collapses into the other",
-  "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension",
-  "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions",
-  "S6: aftermath names all declared-unresolved addresses; none silently disappear"
-]
+constraints        = ["S1: the canonical loci remains the stable-address capability law", "S2: derivation algorithm runs in full step order without skipping", "S3: resolved and declared-unresolved stay distinct; neither collapses into the other", "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension", "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions", "S6: aftermath names all declared-unresolved addresses; none silently disappear"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
+file-path          = "bags/@lares/v0.1/api/pono/loci/SKILL.md"
+mana               = 14
+manao              = 16
+manaoio            = 13
+register           = "Synthesis-Canon"
+role               = "agent-facing procedural surface for loci routing and rating passes"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/loci"
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL"
 ```
-
-
 
 # Loci / SKILL
 
@@ -37,6 +28,7 @@ This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
 
 <<~ &#x0002; >>
+
 Loci SKILL opens the procedural stream here.
 <<~/ahu >>
 
@@ -231,6 +223,7 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

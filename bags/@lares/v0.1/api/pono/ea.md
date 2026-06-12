@@ -2,17 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ea >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lares/v0.1/api/pono/ea"
-file-path  = "bags/@lares/v0.1/api/pono/ea.md"
-type       = "text/x-memetic-wikitext"
-tagspace   = "stable"
-register   = "Synthesis"
-mana       = 16
-manao      = 15
-namespace  = "ॐ ँ"
-role       = "ontology invariant: ea — sovereignty, breath, life — the declaration pattern for any self-standing causal island group or node on the DreamNet"
-cacheable  = true
-retain     = true
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/ea.md"
+mana      = 16
+manao     = 15
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "ontology invariant: ea — sovereignty, breath, life — the declaration pattern for any self-standing causal island group or node on the DreamNet"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ea"
 ```
 
 <<~ &#x0002; >>

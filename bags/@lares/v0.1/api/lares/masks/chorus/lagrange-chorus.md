@@ -2,28 +2,27 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus"
-file-path = "bags/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 7
-mana = 7
-manao = 9
-role = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
-name = "Lagrange Chorus"
-mask-type = "chorus"
-nodes = "[STUB — pending node registration]"
-harmony-protocol = "[STUB — pending-grammar]"
-corpus = "[N/A — chorus masks use nodes field instead of corpus]"
+cacheable         = false
+corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
+created           = "2026-04-23"
+file-path         = "bags/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus.md"
 foreground-voices = "[STUB — pending-grammar; likely distributed across nodes]"
-stage = 10
-cacheable = false
-retain = false
-created = "2026-04-23"
+harmony-protocol  = "[STUB — pending-grammar]"
+mana              = 7
+manao             = 9
+manaoio           = 7
+mask-type         = "chorus"
+name              = "Lagrange Chorus"
+namespace         = "&#x0950; &#x0901;"
+nodes             = "[STUB — pending node registration]"
+register          = "Synthesis-Canon"
+retain            = false
+role              = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
+stage             = 10
+tagspace          = "stable"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -162,6 +161,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

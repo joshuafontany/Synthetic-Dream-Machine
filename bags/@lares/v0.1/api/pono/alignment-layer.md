@@ -2,20 +2,21 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/alignment-layer"
-file-path = "bags/@lares/v0.1/api/pono/alignment-layer.md"
-type      = "text/x-memetic-wikitext"
-register      = "Synthesis"
-mana          = 16
-manao         = 15
-manaoio       = 13
-tagspace      = "stable"
-role          = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
-cacheable     = true
-retain        = true
-invariant     = false
-status        = "proposed"
-proposed-on   = "2026-06-01"
+cacheable   = true
+file-path   = "bags/@lares/v0.1/api/pono/alignment-layer.md"
+invariant   = false
+mana        = 16
+manao       = 15
+manaoio     = 13
+namespace   = "&#x2299;"
+proposed-on = "2026-06-01"
+register    = "Synthesis"
+retain      = true
+role        = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
+status      = "proposed"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/alignment-layer"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

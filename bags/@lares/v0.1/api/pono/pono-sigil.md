@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pono-sigil >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pono-sigil"
-file-path = "bags/@lares/v0.1/api/pono/pono-sigil.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/pono-sigil.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pono-sigil"
 ```
 
 <<~ ahu #head >>

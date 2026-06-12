@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/toml-field >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/toml-field"
-file-path   = "bags/@lararium/v0.1/tw5/modules/filter-operators/toml-field.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 filter operator: toml-field — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "cc83e7dcde3bedd78f80de35ab3b8adc8d25af6aa39d64afc348355138d957b5"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/filter-operators/toml-field.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 filter operator: toml-field — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "registerTomlField"
-body-sha256 = "cc83e7dcde3bedd78f80de35ab3b8adc8d25af6aa39d64afc348355138d957b5"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/toml-field"
 ```
 
 <<~ &#x0002; >>
@@ -55,6 +55,8 @@ export function registerTomlField(tw: TW5Instance): void {
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

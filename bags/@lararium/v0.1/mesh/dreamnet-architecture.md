@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture"
-file-path    = "bags/@lararium/v0.1/mesh/dreamnet-architecture.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 16
-manaoio      = 15
-role         = "DreamNet five-layer topology: vessel → personGroup → cabalGroup → nexusGroup → DreamNet"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/dreamnet-architecture.md"
+mana      = 17
+manao     = 16
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = true
+role      = "DreamNet five-layer topology: vessel → personGroup → cabalGroup → nexusGroup → DreamNet"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture"
 ```
+
 <<~ &#x0002; >>
 
 # DreamNet Architecture

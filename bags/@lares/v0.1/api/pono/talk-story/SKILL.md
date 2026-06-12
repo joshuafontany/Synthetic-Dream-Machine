@@ -15,21 +15,20 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL >>
-
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/talk-story/SKILL.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-status    = "draft"
+invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16
-role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
+role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
+status    = "draft"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL"
 ```
 
 <<~ &#x0002; >>

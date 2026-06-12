@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-provider >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/meme-provider"
-file-path = "bags/@lararium/v0.1/docs/meme-provider.md"
-type = "text/x-typescript"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "coalescing fan-out layer between Automerge DocHandle and typed projections — isomorphic, zero Automerge dep"
-cacheable    = true
-retain       = true
-body-sha256  = "0d482f4f018ba241ba5d582c02b282741306053d9a2fed9c8614bb7a0d6036b1"
-docs         = "lar:///ha.ka.ba/@lararium/v0.1/docs/meme-provider"
+body-sha256 = "0d482f4f018ba241ba5d582c02b282741306053d9a2fed9c8614bb7a0d6036b1"
+cacheable   = true
+docs        = "lar:///ha.ka.ba/@lararium/v0.1/docs/meme-provider"
+file-path   = "bags/@lararium/v0.1/docs/meme-provider.md"
+mana        = 18
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+retain      = true
+role        = "coalescing fan-out layer between Automerge DocHandle and typed projections — isomorphic, zero Automerge dep"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/docs/meme-provider"
 ```
-
-
 
 <<~ &#x0002; >>
 

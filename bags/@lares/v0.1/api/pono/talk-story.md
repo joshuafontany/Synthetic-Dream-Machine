@@ -1,21 +1,20 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >>
-
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/talk-story"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/talk-story.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-status    = "draft"
+invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16
-role      = "canon law of the talk-story floor — convened co-narration (kūkākūkā \\talk-story, talanoa, kuwentuhan) that orients work before a ruling locks; three exits: moolelo (\\mufakat \\salaysay \\consensus), hoike (\\testimony), honest suspension; five-sea word-family matrix, eight laws, degraded states, lineage"
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
+role      = "canon law of the talk-story floor — convened co-narration (kūkākūkā \\talk-story, talanoa, kuwentuhan) that orients work before a ruling locks; three exits: moolelo (\\mufakat \\salaysay \\consensus), hoike (\\testimony), honest suspension; five-sea word-family matrix, eight laws, degraded states, lineage"
+status    = "draft"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/talk-story"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

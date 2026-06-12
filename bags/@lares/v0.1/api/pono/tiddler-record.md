@@ -2,23 +2,22 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tiddler-record >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/tiddler-record"
-file-path = "bags/@lares/v0.1/api/pono/tiddler-record.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 18
-tagspace     = "stable"
-role         = "invariant law: LarTiddlerRecord as the canonical Automerge storage unit; carrier text as projection artifact only"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date   = "2026-04-30"
+cacheable     = true
+file-path     = "bags/@lares/v0.1/api/pono/tiddler-record.md"
+invariant     = true
+mana          = 18
+manao         = 18
+manaoio       = 18
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "invariant law: LarTiddlerRecord as the canonical Automerge storage unit; carrier text as projection artifact only"
 source-symbol = "LarTiddlerRecord LarTiddlerStore ChangeOrigin LarTiddlerChange"
+status-date   = "2026-04-30"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/tiddler-record"
 ```
-
-
 
 <<~ ahu #head >>
 

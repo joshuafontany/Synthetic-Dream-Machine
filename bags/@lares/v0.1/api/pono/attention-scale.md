@@ -2,19 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/attention-scale.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
+invariant   = true
 mana        = 18
 manao       = 17
 manaoio     = 17
-tagspace    = "stable"
-role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
 retain      = true
-invariant   = true
+role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
 ```
 
 <<~ &#x0002; >>

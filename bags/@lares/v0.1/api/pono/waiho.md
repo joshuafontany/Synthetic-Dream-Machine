@@ -2,16 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/waiho.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis-Canon"
-manaoio   = 17
 mana      = 18
 manao     = 17
-role      = "ephemeral variable binding — deposit without graph identity"
-cacheable = true
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
 retain    = true
+role      = "ephemeral variable binding — deposit without graph identity"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -90,6 +91,7 @@ In the Kumulipo creation chant, *waiho* appears in the context of primal materia
 <<~ pranala #tiddler-sigil-const ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-const family:control role:alias >>
 <<~ pranala #tiddler-sigil-let ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-let family:control role:alias >>
 <<~ pranala #tiddler-sigil-var ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-var family:control role:alias >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

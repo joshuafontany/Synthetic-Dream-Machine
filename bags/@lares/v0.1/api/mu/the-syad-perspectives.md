@@ -2,23 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
-file-path = "bags/@lares/v0.1/api/mu/the-syad-perspectives.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Canon"
-manaoio = 18
-mana = 18
-manao = 18
-namespace = "ॐ ँ"
-role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 cacheable     = true
+file-path     = "bags/@lares/v0.1/api/mu/the-syad-perspectives.md"
 hydrate       = true
+mana          = 18
+manao         = 18
+manaoio       = 18
+namespace     = "&#x0950; &#x0901;"
+register      = "Canon"
 retain        = true
+role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 source-symbol = "STANCES SYAD_7 STANCE_LICENSES SATIRIST_OPERATIONAL"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

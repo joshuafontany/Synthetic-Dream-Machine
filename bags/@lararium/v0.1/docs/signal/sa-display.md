@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/sa-display"
-file-path = "bags/@lararium/v0.1/docs/signal/sa-display.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/sa-display.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/sa-display"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -122,6 +120,7 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

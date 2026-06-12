@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/disk-projection-law >>
 ```toml iam
-uri-path      = "ha.ka.ba/@lararium/v0.1/docs/disk-projection-law"
+cacheable     = true
 file-path     = "bags/@lararium/v0.1/docs/disk-projection-law.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+last-reviewed = "2026-05-11"
 mana          = 18
 manao         = 18
 manaoio       = 18
+register      = "Synthesis-Canon"
+retain        = true
 role          = "council law: single-template plain-text per-node projection as the canonical disk export model for markdown-meme"
 tagspace      = "stable"
-cacheable     = true
-retain        = true
-last-reviewed = "2026-05-11"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/disk-projection-law"
 ```
 
 <<~ &#x0002; >>

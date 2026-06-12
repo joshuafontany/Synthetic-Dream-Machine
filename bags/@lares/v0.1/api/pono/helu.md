@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/helu >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/helu"
-file-path = "bags/@lares/v0.1/api/pono/helu.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/helu.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/helu"
 ```
 
 <<~ ahu #head >>

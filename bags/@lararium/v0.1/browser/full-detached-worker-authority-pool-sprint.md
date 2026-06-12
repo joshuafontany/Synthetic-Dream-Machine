@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint"
-file-path    = "bags/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "Next-thread sprint handoff for lararium-browser detached worker-authority pool alpha reboot"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Next-thread sprint handoff for lararium-browser detached worker-authority pool alpha reboot"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint"
 ```
 
 <<~ &#x0002; >>

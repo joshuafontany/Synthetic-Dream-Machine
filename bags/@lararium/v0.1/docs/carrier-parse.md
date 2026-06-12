@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/carrier-parse >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/carrier-parse"
-file-path = "bags/@lararium/v0.1/docs/carrier-parse.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+body-sha256   = "de5ced103cad1f1a5e414cabe57a2052578fa69e190baf2e2dc06fb458db9ceb"
+file-path     = "bags/@lararium/v0.1/docs/carrier-parse.md"
+heleuma       = "ka"
+implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 mana          = 17
 manao         = 17
 manaoio       = 17
+register      = "Synthesis-Canon"
 role          = "canonical source copy: carrier ingress gate — text-in, CarrierRecord-out; validates shape, extracts metadata and implements bundle"
-status-date   = "2026-04-30"
-heleuma       = "ka"
 source-symbol = "parseCarrier"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
-body-sha256 = "de5ced103cad1f1a5e414cabe57a2052578fa69e190baf2e2dc06fb458db9ceb"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/carrier-parse"
 ```
-
-
 
 <<~ &#x0002; >>
 

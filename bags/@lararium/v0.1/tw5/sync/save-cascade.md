@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
-file-path = "bags/@lararium/v0.1/tw5/sync/save-cascade.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 17
-tagspace     = "adjacent"
-role         = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor: ordered TW5 filter rules mapping tiddler titles to save strategies"
-cacheable    = true
-retain       = true
-status-date   = "2026-04-30"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/sync/save-cascade.md"
+mana          = 18
+manao         = 17
+manaoio       = 17
+register      = "Synthesis-Canon"
+retain        = true
+role          = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor: ordered TW5 filter rules mapping tiddler titles to save strategies"
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
+status-date   = "2026-04-30"
+tagspace      = "adjacent"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -43,6 +41,7 @@ Each tagged child tiddler contributes one rule via its `tw5-filter` and `save-st
 <<~/ahu >>
 
 <<~ ahu #skip-system >>
+
 ```toml
 ahu-slot      = "#skip-system"
 ahu-parent    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
@@ -51,9 +50,11 @@ tw5-filter    = "[is[system]]"
 save-strategy = "skip"
 rationale     = "TW5 $:/ system tiddlers are internal housekeeping — never propagate to shared state"
 ```
+
 <<~/ahu >>
 
 <<~ ahu #skip-temp >>
+
 ```toml
 ahu-slot      = "#skip-temp"
 ahu-parent    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
@@ -62,9 +63,11 @@ tw5-filter    = "[prefix[$:/temp/]]"
 save-strategy = "skip"
 rationale     = "session-local scratch tiddlers — browser-only, not canonical"
 ```
+
 <<~/ahu >>
 
 <<~ ahu #sync-draft >>
+
 ```toml
 ahu-slot      = "#sync-draft"
 ahu-parent    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
@@ -73,9 +76,11 @@ tw5-filter    = "[prefix[Draft of ]]"
 save-strategy = "direct"
 rationale     = "TW5 edit-draft tiddlers — synced across all devices for this user identity; a draft begun on one device should appear on another"
 ```
+
 <<~/ahu >>
 
 <<~ ahu #direct >>
+
 ```toml
 ahu-slot      = "#direct"
 ahu-parent    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
@@ -84,6 +89,7 @@ tw5-filter    = "[prefix[lar:]]"
 save-strategy = "direct"
 rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tiddler directly to the Automerge store; ahu slot children included as independent records"
 ```
+
 <<~/ahu >>
 
 <<~ ahu #edges >>

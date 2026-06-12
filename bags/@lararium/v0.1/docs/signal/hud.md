@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/hud"
-file-path = "bags/@lararium/v0.1/docs/signal/hud.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 16
-role = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/hud.md"
+mana      = 16
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/hud"
 ```
 
 <<~ &#x0002; >>

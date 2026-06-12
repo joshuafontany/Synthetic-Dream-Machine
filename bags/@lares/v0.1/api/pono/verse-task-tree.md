@@ -2,17 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/verse-task-tree.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
 mana        = 18
 manao       = 17
-tagspace    = "stable"
-role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
 retain      = true
+role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
 status-date = "2026-05-15"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree"
 ```
 
 <<~ &#x0002; >>

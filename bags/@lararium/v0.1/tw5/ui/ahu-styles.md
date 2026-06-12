@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles"
+cacheable = true
 file-path = "bags/@lararium/v0.1/tw5/ui/ahu-styles.md"
-type = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "CSS stylesheet: ahu section view/edit layout, slot badges, inline edit reveal"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/Stylesheet"]
+mana      = 18
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "CSS stylesheet: ahu section view/edit layout, slot badges, inline edit reveal"
+tags      = ["$:/tags/Stylesheet"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles"
 ```
-
-
 
 <<~ &#x0002; >>
 

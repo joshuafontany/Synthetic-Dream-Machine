@@ -2,21 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol"
-file-path    = "bags/@lararium/v0.1/mesh/reaction-protocol.md"
-source-file  = "packages/lararium-mesh/src/reaction-graph.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-tagspace     = "lararium"
-role         = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date  = "2026-05-28"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/reaction-protocol.md"
+invariant   = true
+mana        = 17
+manao       = 17
+manaoio     = 16
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
+source-file = "packages/lararium-mesh/src/reaction-graph.ts"
+status-date = "2026-05-28"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #head >>

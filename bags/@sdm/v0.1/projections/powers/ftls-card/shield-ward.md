@@ -2,26 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
+cacheable = true
 file-path = "bags/@sdm/v0.1/projections/powers/ftls-card/shield-ward.md"
-type      = "text/x-memetic-wikitext"
-tags = [
-  "@sdm/tags/domain/abjuration",
-  "@sdm/tags/function/ward",
-  "@sdm/tags/function/barrier",
-  "@sdm/tags/hook/imbued",
-  "@sdm/tags/mount/trait",
-]
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
+tags      = ["@sdm/tags/domain/abjuration", "@sdm/tags/function/ward", "@sdm/tags/function/barrier", "@sdm/tags/hook/imbued", "@sdm/tags/mount/trait"]
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
 ```
 
 <<~ &#x0002; >>
@@ -29,28 +22,35 @@ role      = "FTLS card projection: Shield Ward — playable surface with clickab
 # Shield Ward — FTLS Card
 
 <<~ ahu #card >>
+
 ## Shield Ward
 *Skin-Close Barrier, Missile Filter*
 
 **P:** 2 · **R:** self · **T:** operator · **D:** 20 minutes
 
 A barrier less than an inch from your skin, moving with you. Strong cover against missiles, modest against the rest. A Magic-Missile strike lets you save per missile; on success it evaporates on the barrier. Your paid Life stays locked (`imbued`) while it holds.
+
 <<~/ahu >>
 
 <<~ ahu #overcharge >>
+
 ## Overcharge
 
 - **x2 (P:4)** — extend to one adjacent ally, or harden one named channel.
 - **x4 (P:8)** — hold through one breach, then flicker (mishap check to maintain).
+
 <<~/ahu >>
 
 <<~ ahu #components >>
+
 ## Components
 
 <<~ kahea lar:///ha.ka.ba/@lararium/lists/components >>
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>

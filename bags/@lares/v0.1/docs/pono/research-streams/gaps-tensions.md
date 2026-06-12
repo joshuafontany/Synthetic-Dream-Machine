@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions"
+cacheable = false
 file-path = "bags/@lares/v0.1/docs/pono/research-streams/gaps-tensions.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
+invariant = false
 mana      = 15
 manao     = 15
-role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
-cacheable = false
+register  = "Synthesis"
 retain    = false
-invariant = false
+role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

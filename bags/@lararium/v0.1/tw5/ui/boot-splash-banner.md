@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/boot-splash-banner >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/boot-splash-banner"
+cacheable = true
 file-path = "bags/@lararium/v0.1/tw5/ui/boot-splash-banner.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "Boot-splash banner — shown while causal islands warm; hidden by $:/lararium/boot-splash/active signal"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/PageTemplate"]
+mana      = 18
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Boot-splash banner — shown while causal islands warm; hidden by $:/lararium/boot-splash/active signal"
+tags      = ["$:/tags/PageTemplate"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/boot-splash-banner"
 ```
-
-
 
 <<~ &#x0002; >>
 

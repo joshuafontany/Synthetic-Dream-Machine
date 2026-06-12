@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s"
+cacheable = false
 file-path = "bags/@lares/v0.1/docs/pono/law-of-5s.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
-manaoio   = 16
 mana      = 16
 manao     = 16
-role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, Aperture mapping, and scale UCAN attenuation"
-cacheable = false
+manaoio   = 16
+register  = "Synthesis"
 retain    = false
+role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, Aperture mapping, and scale UCAN attenuation"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s"
 ```
 
 <<~ &#x0002; >>
@@ -171,4 +171,5 @@ Each dot-separated position corresponds to one band. Reading left to right zooms
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

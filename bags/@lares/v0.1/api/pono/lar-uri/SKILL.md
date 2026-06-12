@@ -7,30 +7,20 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/lar-uri/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 16
-role = "lar: URI operational skill — authoring, validation, and audit of addresses against the scheme law"
-covers = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
-]
-constraints = [
-  "S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it",
-  "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them",
-  "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @",
-  "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch",
-  "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"
-]
+cacheable          = true
+constraints        = ["S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it", "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them", "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @", "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch", "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri"]
+file-path          = "bags/@lares/v0.1/api/pono/lar-uri/SKILL.md"
+mana               = 15
+manao              = 16
+manaoio            = 14
+register           = "Synthesis-Canon"
+retain             = true
+role               = "lar: URI operational skill — authoring, validation, and audit of addresses against the scheme law"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/lar-uri"
-cacheable=true
-retain = true
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL"
 ```
-
-
 
 # lar: URI Skill
 
@@ -118,6 +108,7 @@ Prefer another surface when the work concerns:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

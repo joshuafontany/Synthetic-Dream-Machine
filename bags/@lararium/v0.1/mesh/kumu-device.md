@@ -2,21 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/kumu-device"
-file-path    = "bags/@lararium/v0.1/mesh/kumu-device.md"
-source-file  = "packages/lararium-mesh/src/kumu-device.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-tagspace     = "lararium"
-role         = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef — the @editable boundary for kumu devices; spec derives from pranala edges, not TS class hierarchy"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date  = "2026-05-28"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/kumu-device.md"
+invariant   = true
+mana        = 17
+manao       = 17
+manaoio     = 16
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef — the @editable boundary for kumu devices; spec derives from pranala edges, not TS class hierarchy"
+source-file = "packages/lararium-mesh/src/kumu-device.ts"
+status-date = "2026-05-28"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/kumu-device"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #head >>

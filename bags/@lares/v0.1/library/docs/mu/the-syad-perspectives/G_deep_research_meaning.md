@@ -1,16 +1,15 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
-file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis 12/20"
-role = "deep-research synthesis — Sri Syadasti's sevenfold catma as the model for stance-dependent Register; the session-vs-lifetime meaning asymmetry for the HUD (Chapel Perilous territory)"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.md"
+register  = "Synthesis 12/20"
+retain    = false
+role      = "deep-research synthesis — Sri Syadasti's sevenfold catma as the model for stance-dependent Register; the session-vs-lifetime meaning asymmetry for the HUD (Chapel Perilous territory)"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
 ```
 
 <<~ &#x0002; >>

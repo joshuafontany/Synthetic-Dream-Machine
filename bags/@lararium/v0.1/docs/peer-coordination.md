@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/peer-coordination >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/peer-coordination"
-file-path    = "bags/@lararium/v0.1/docs/peer-coordination.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "Peer rendezvous + doc coordination doctrine — island-file model, CRDT reconcile, Keyhive path, ReactionEngine invariants"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/docs/peer-coordination.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Peer rendezvous + doc coordination doctrine — island-file model, CRDT reconcile, Keyhive path, ReactionEngine invariants"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/peer-coordination"
 ```
 
 <<~ &#x0002; >>
@@ -195,7 +195,6 @@ island definition bundle to new nodes.
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-
 <<~ ahu #edges >>
 
 ## Edges

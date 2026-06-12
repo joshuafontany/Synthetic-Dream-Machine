@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/recipe"
-file-path    = "bags/@lararium/v0.1/mesh/recipe.md"
-source-file  = "packages/lararium-mesh/src/recipe.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 12
-manao        = 12
-role         = "RecipeTiddler schema + bag-stack parsing — the stored shape of a wiki's composition record"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/recipe.md"
+mana        = 12
+manao       = 12
+register    = "Synthesis"
+retain      = true
+role        = "RecipeTiddler schema + bag-stack parsing — the stored shape of a wiki's composition record"
+source-file = "packages/lararium-mesh/src/recipe.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/recipe"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

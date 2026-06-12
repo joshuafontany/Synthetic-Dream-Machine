@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/heleuma.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-cacheable    = true
-retain       = true
-role         = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
+mana      = 18
+manao     = 18
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma"
 ```
-
-
 
 <<~ ahu #head >>
 

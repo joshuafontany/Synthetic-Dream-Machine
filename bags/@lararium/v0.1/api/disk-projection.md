@@ -2,23 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/api/disk-projection"
-file-path    = "bags/@lararium/v0.1/api/disk-projection.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis"
-manaoio      = 15
-mana         = 17
-manao        = 17
-namespace    = "ॐ ँ"
-role         = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
-status       = "approved"
-approved-on  = "2026-06-02"
-revised-on   = "2026-06-11"
+approved-on   = "2026-06-02"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/api/disk-projection.md"
+hydrate       = true
+mana          = 17
+manao         = 17
+manaoio       = 15
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis"
+retain        = true
+revised-on    = "2026-06-11"
 revision-note = "co-projection rewrite of #core-claim (mind originates; disk + CRDT co-project; CRDT holds the merge seat); prior: carrier-whole at rest, grain ladder canonized (disk=whole carrier, doc=record, VM=decomposed)"
-cacheable    = true
-hydrate      = true
-retain       = true
+role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
+status        = "approved"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/api/disk-projection"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

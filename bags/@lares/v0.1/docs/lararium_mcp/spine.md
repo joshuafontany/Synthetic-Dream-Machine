@@ -2,36 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/spine.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 16
-manaoio      = 16
-manao        = 17
-role         = "canonical Lararium MCP program spine and architecture contraction"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/README.md",
-  "packages/lares-core/memes/docs/mcp/ARCHITECTURE.md"
-]
-status-date  = "2026-04-23"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/spine.md"
+mana            = 16
+manao           = 17
+manaoio         = 16
+register        = "Synthesis-Canon"
+role            = "canonical Lararium MCP program spine and architecture contraction"
+source-consumes = ["packages/lares-core/memes/docs/mcp/README.md", "packages/lares-core/memes/docs/mcp/ARCHITECTURE.md"]
+status-date     = "2026-04-23"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: the MCP shelf began as planning prose around a read-only Lararium server.
 ⏿ orient: the canonical surface needs one small spine that names what the server does and what remains out of v1.
 ◇ decide: keep architecture law here; route detailed contracts to child loci.
 ▶ act: expose the stack, namespace posture, transport split, and source-truth priority.
 ↺ verify: every child locus preserves a bounded contract and lists its consumed sources; adapt: active roadmap and backlog stay outside this consumed set until their sprints close.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #core-proposition >>
+
 ## Core Proposition
 
 Lararium MCP exposes `lar:///` source truth to local and future remote clients through a dependency-light, read-only server.
@@ -49,6 +46,7 @@ The v1 spine carries four promises:
 <<~/ahu >>
 
 <<~ ahu #crucible-boundary >>
+
 ## Crucible Boundary
 
 ### In scope for the closed slice
@@ -73,6 +71,7 @@ The v1 spine carries four promises:
 <<~/ahu >>
 
 <<~ ahu #stack >>
+
 ## Proposed Stack
 
 | Layer | Canonical responsibility | Child locus |
@@ -88,6 +87,7 @@ The v1 spine carries four promises:
 <<~/ahu >>
 
 <<~ ahu #namespace-posture >>
+
 ## Namespace Posture
 
 | Namespace | Resolution posture |
@@ -102,6 +102,7 @@ The v1 spine carries four promises:
 <<~/ahu >>
 
 <<~ ahu #resource-prompt-tool-model >>
+
 ## Resource, Prompt, and Tool Model
 
 Resources expose source carriers and virtual compiler products.
@@ -114,6 +115,7 @@ Remote transport should wrap the same read-only façade only after scope and aut
 <<~/ahu >>
 
 <<~ ahu #submodule-contribution-model >>
+
 ## Submodule Contribution Model
 
 Submodules contribute through adapters, not direct imports into the carrier compiler.
@@ -124,6 +126,7 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 <<~/ahu >>
 
 <<~ ahu #residue >>
+
 ## Residue
 
 - Sprint-03 remote transport, auth, and drift evals remain live work.
@@ -133,6 +136,7 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law >>
@@ -144,6 +148,7 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

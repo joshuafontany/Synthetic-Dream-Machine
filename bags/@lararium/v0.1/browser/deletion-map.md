@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/browser/deletion-map"
-file-path    = "bags/@lararium/v0.1/browser/deletion-map.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "Inventory of web2/singleton residue in the browser seam: classify, quarantine, migrate, or delete"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/browser/deletion-map.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis"
+retain    = true
+role      = "Inventory of web2/singleton residue in the browser seam: classify, quarantine, migrate, or delete"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/browser/deletion-map"
 ```
 
 <<~ &#x0002; >>

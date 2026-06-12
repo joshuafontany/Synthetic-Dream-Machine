@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/browser-dock >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/browser/browser-dock"
-file-path    = "bags/@lararium/v0.1/browser/browser-dock.md"
-source-file  = "packages/lararium-mesh/src/browser-dock.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 18
-manao        = 18
-manaoio      = 18
-role         = "Browser island boundary types: BrowserWikiMountParams, BrowserProjectionSnapshot"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/browser/browser-dock.md"
+mana        = 18
+manao       = 18
+manaoio     = 18
+register    = "Synthesis"
+retain      = true
+role        = "Browser island boundary types: BrowserWikiMountParams, BrowserProjectionSnapshot"
+source-file = "packages/lararium-mesh/src/browser-dock.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/browser/browser-dock"
 ```
 
 <<~ &#x0002; >>

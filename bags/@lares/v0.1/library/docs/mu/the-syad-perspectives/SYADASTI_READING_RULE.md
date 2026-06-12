@@ -1,16 +1,15 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
-file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon 16/20"
-role = "session discovery — the Syadasti Reading Rule: Register measures confidence within the active stance's evaluation frame, not universal truth-weight; the full derivation chain"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md"
+register  = "Synthesis-Canon 16/20"
+retain    = false
+role      = "session discovery — the Syadasti Reading Rule: Register measures confidence within the active stance's evaluation frame, not universal truth-weight; the full derivation chain"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
 ```
 
 <<~ &#x0002; >>

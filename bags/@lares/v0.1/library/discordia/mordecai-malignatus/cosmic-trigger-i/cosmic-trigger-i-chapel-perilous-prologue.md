@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue"
-file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
 cacheable = false
-retain = false
-content-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 16
-manao = 17
-role = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locus, verbatim provenance shelf"
+file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = false
+role      = "discordian source witness meme, Robert Anton Wilson Chapel Perilous locus, verbatim provenance shelf"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue"
 ```
 
 <<~ &#x0002; >>

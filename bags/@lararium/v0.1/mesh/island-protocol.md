@@ -2,19 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/island-protocol"
-file-path    = "bags/@lararium/v0.1/mesh/island-protocol.md"
-source-file  = "packages/lararium-mesh/src/island-protocol.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 14
-role         = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
-tagspace     = "lararium"
-revised-on   = "2026-06-10"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/mesh/island-protocol.md"
+mana          = 14
+register      = "Synthesis-Canon"
+retain        = true
+revised-on    = "2026-06-10"
 revision-note = "rebuilt against post-keel-cut source: resolver dictionary → IslandGrants; coreBlob → @lararium blob store; demote → hoʻoanu; frame:ack retired; admin verb/verify/binding/evict/residency/alert surfaces added; laresUrl grant trimmed (keel trim — @lares resolves from @catalog)"
-cacheable    = true
-retain       = true
+role          = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
+source-file   = "packages/lararium-mesh/src/island-protocol.ts"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/island-protocol"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

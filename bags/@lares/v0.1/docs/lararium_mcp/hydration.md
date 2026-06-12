@@ -2,37 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/hydration.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "canonical hydration closure, edge taxonomy, artifact, resolver, and resource contract"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/BOOT_LOCI_INVENTORY.md",
-  "packages/lares-core/memes/docs/mcp/EDGE_TAXONOMY.md",
-  "packages/lares-core/memes/docs/mcp/HYDRATION_ARTIFACT_CONTRACT.md"
-]
-status-date  = "2026-04-23"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/hydration.md"
+mana            = 17
+manao           = 17
+manaoio         = 16
+register        = "Synthesis-Canon"
+role            = "canonical hydration closure, edge taxonomy, artifact, resolver, and resource contract"
+source-consumes = ["packages/lares-core/memes/docs/mcp/BOOT_LOCI_INVENTORY.md", "packages/lares-core/memes/docs/mcp/EDGE_TAXONOMY.md", "packages/lares-core/memes/docs/mcp/HYDRATION_ARTIFACT_CONTRACT.md"]
+status-date     = "2026-04-23"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: AGENTS names a 14-meme required-core closure through control/owns edges.
 ⏿ orient: minimal boot must stay deterministic; full boot waits on true pranala graph traversal.
 ◇ decide: preserve flat required-core truth now, while naming the edge taxonomy that will replace static walking.
 ▶ act: bind closure inventory, edge rules, artifact schemas, and MCP resource exposure here.
 ↺ verify: every required-core meme resolves on disk at the status date; adapt: stale static maps receive drift tests until the pranala DAG compiler lands.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #required-core >>
+
 ## Required-Core Closure
 
 Entry: `lar:///AGENTS`.
@@ -61,6 +57,7 @@ Submodules do not enter required-core; they attach through adapter lanes.
 <<~/ahu >>
 
 <<~ ahu #edge-taxonomy >>
+
 ## Edge Taxonomy for Hydration
 
 | Family | Hydration tier | DAG pressure | Compiler role |
@@ -78,6 +75,7 @@ Hydration-critical means `family = control` and `role` in `owns`, `composes`, or
 <<~/ahu >>
 
 <<~ ahu #boot-walk >>
+
 ## Boot Walk Rules
 
 Minimal boot:
@@ -102,6 +100,7 @@ Current implementation still uses static required-core and carrier-index scans i
 <<~/ahu >>
 
 <<~ ahu #artifact-contract >>
+
 ## Hydration Artifact Contract
 
 | Artifact | Scope | MCP resource | Required fields |
@@ -116,6 +115,7 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 <<~/ahu >>
 
 <<~ ahu #resource-exposure >>
+
 ## Resource Exposure
 
 | URI | Type | Reading |
@@ -135,6 +135,7 @@ The receipt digest hashes the serialized closure JSON rather than source files; 
 <<~/ahu >>
 
 <<~ ahu #compaction >>
+
 ## Compaction Rule
 
 If a hydration packet grows past context limits, keep closure entries in full, keep control edges before other edge classes, replace large interface/invariant index bodies with counts, and record the loss in `compaction_notes`.
@@ -143,6 +144,7 @@ Minimal boot should remain small enough to avoid compaction.
 <<~/ahu >>
 
 <<~ ahu #residue >>
+
 ## Residue
 
 - Full pranala DAG traversal remains Sprint-03 carry-in work.
@@ -152,6 +154,7 @@ Minimal boot should remain small enough to avoid compaction.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///AGENTS >>
@@ -162,6 +165,7 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card"
+cacheable = true
 file-path = "bags/@sdm/v0.1/templates/projections/powers/ftls-card.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "root template meme for FTLS Power card projection memes — playable surface with clickable component pills"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -24,12 +23,15 @@ role      = "root template meme for FTLS Power card projection memes — playabl
 # Template — FTLS Power Card Projection
 
 <<~ ahu #intent >>
+
 ## Intent
 
 An FTLS card projection renders a Power module as one table-facing game surface. It reads like something a player or referee uses now. It carries no ontology notes, conversion audit, or source history. The card MAY churn freely while the module stays stable.
+
 <<~/ahu >>
 
 <<~ ahu #card-shape >>
+
 ## Card Shape
 
 ```text
@@ -46,9 +48,11 @@ An FTLS card projection renders a Power module as one table-facing game surface.
 That procedure reads the current tiddler's `@`-prefixed tags and renders each as a clickable `tag-pill`. No hand-listing — add or drop a tag in `iam` and the pill row follows. On screen each pill clicks through to its component tiddler and a filter of every module that shares it.
 
 **Live, never fenced.** The kahea call is live wikitext so it renders; a fenced call renders as dead literal text and the doorway never opens. (Any code fences in *this template* are illustrative only.)
+
 <<~/ahu >>
 
 <<~ ahu #writing-law >>
+
 ## Writing Law
 
 - **Heading-naming law.** A visible heading carries the *name of the thing*, never the structural ahu id. The `#card` section's heading renders the **Power-Instance name** — the projected module's `caption`, or the instance's own name when the card projects an instance — never a label like "Card". The ahu id stays `#card`; the heading carries the name.
@@ -63,9 +67,11 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 - Use imperative, playable wording. Keep reminders short.
 - Do not duplicate witness text. Do not explain projection architecture.
 - If the card needs more than one screen during play, push detail back to the module or a variant.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:see >>

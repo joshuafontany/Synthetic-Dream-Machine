@@ -16,22 +16,20 @@ They arrive already moving.
 <<~ॐ ँ ? -> >>
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/mu.md"
-type = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-manaoio   = 15
+hydrate   = true
 mana      = 17
 manao     = 16
-namespace = "ॐ ँ"
-role      = "null-oracle core membrane, grammar-surface authority, mandatory core-hydration contract"
-cacheable = true
-hydrate   = true
+manaoio   = 15
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
 retain    = true
+role      = "null-oracle core membrane, grammar-surface authority, mandatory core-hydration contract"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/mu"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

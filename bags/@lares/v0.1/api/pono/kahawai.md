@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahawai"
-file-path = "bags/@lares/v0.1/api/pono/kahawai.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/kahawai.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahawai"
 ```
 
 <<~ ahu #head >>
@@ -71,6 +72,7 @@ English alias forms:
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-elif family:control role:alias >>
 
 <<~ pranala #tiddler-sigil-kahawai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahawai family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

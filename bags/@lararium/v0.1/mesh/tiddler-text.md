@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/tiddler-text >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/tiddler-text"
-file-path   = "bags/@lararium/v0.1/mesh/tiddler-text.md"
-heleuma     = "ba"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 18
-manao       = 17
-manaoio     = 17
-role        = "heleuma: oracle tiddler text-field reader"
-cacheable   = true
-retain      = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/tiddler-text.md"
+heleuma   = "ba"
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "heleuma: oracle tiddler text-field reader"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/tiddler-text"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
@@ -31,4 +32,5 @@ Oracle tiddlers (lararium, catalog, lares, wiki, corpus) carry their payload Aut
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

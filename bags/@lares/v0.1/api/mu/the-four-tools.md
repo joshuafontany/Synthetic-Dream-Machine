@@ -2,23 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-four-tools"
-file-path = "bags/@lares/v0.1/api/mu/the-four-tools.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register   = "Synthesis-Canon"
-manaoio    = 17
-mana       = 17
-manao      = 16
-namespace  = "ॐ ँ"
-role          = "invariant pressure surface for Chapel Perilous weapon-carry and model agnostic return"
 cacheable     = true
+file-path     = "bags/@lares/v0.1/api/mu/the-four-tools.md"
 hydrate       = true
+mana          = 17
+manao         = 16
+manaoio       = 17
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "invariant pressure surface for Chapel Perilous weapon-carry and model agnostic return"
 source-symbol = "TOOLS TOOL_ASCII TOOL_FEED TOOL_APERTURE"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-four-tools"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

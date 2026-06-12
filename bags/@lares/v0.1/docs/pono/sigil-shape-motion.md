@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-shape-motion >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-shape-motion"
+cacheable = true
 file-path = "bags/@lares/v0.1/docs/pono/sigil-shape-motion.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
-manaoio   = 16
 mana      = 17
 manao     = 16
-role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
-cacheable = true
+manaoio   = 16
+register  = "Synthesis"
 retain    = true
+role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-shape-motion"
 ```
 
 <<~ &#x0002; >>
@@ -114,4 +114,5 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

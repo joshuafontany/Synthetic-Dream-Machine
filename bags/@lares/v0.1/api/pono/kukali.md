@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kukali"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/kukali.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 17
-manao        = 16
-role         = "reactive wait posture inside a causal island — Verse suspends analogue; execution yields until named papalohe trigger fires"
-cacheable    = true
-retain       = true
+mana      = 17
+manao     = 16
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "reactive wait posture inside a causal island — Verse suspends analogue; execution yields until named papalohe trigger fires"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kukali"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -146,6 +145,7 @@ sigilName = "kukali"
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kukali family:control role:has >>
 <<~ pranala #tiddler-sigil-suspends ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-suspends family:control role:alias >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

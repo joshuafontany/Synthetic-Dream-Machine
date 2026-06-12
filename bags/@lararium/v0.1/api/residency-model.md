@@ -2,23 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/api/residency-model"
-file-path    = "bags/@lararium/v0.1/api/residency-model.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis"
-manaoio      = 16
-mana         = 18
-manao        = 17
-namespace    = "ॐ ँ"
-role         = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
-status       = "approved"
-approved-on  = "2026-05-30"
-revised-on   = "2026-06-10"
+approved-on   = "2026-05-30"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/api/residency-model.md"
+hydrate       = true
+mana          = 18
+manao         = 17
+manaoio       = 16
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis"
+retain        = true
+revised-on    = "2026-06-10"
 revision-note = "bag-grain verb pair (CREATE + bag-grain COPY) approved — carries the wiki-layer crossing rite; @catalog registration = holdings accession; implementation pending"
-cacheable    = true
-hydrate      = true
-retain       = true
+role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
+status        = "approved"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-model"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

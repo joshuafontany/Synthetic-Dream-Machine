@@ -2,21 +2,19 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/meme"
-file-path = "bags/@lares/v0.1/api/pono/meme.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 17
-manao = 17
-namespace    = "⊙"
-role = "meme invariant law, copy-shape authority, and rating posture root"
+cacheable      = true
 control-glyphs = ["&#x0001;", "&#x0002;", "&#x0003;", "&#x0004;", "&#x0005;", "&#x0006;"]
-cacheable=true
-retain = true
+file-path      = "bags/@lares/v0.1/api/pono/meme.md"
+mana           = 17
+manao          = 17
+manaoio        = 14
+namespace      = "&#x2299;"
+register       = "Synthesis-Canon"
+retain         = true
+role           = "meme invariant law, copy-shape authority, and rating posture root"
+type           = "text/x-memetic-wikitext"
+uri-path       = "ha.ka.ba/@lares/v0.1/api/pono/meme"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -154,6 +152,7 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ pranala #tiddler-sigil-tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tiddler family:control role:alias >>
 <<~ pranala #tiddler-sigil-meme ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-meme family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

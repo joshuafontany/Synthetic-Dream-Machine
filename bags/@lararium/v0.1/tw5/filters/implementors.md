@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/implementors >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/filters/implementors"
-file-path = "bags/@lararium/v0.1/tw5/filters/implementors.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: registerImplementorsOperator — heleuma ka"
-heleuma       = "ka"
-source-symbol = "registerImplementors"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/implementors"
-body-sha256 = "9ab080c221b2718c55b20fba140693f779c2e71e1392c0196316cd93773461d1"
+body-sha256   = "9ab080c221b2718c55b20fba140693f779c2e71e1392c0196316cd93773461d1"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/filters/implementors.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/implementors"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: registerImplementorsOperator — heleuma ka"
+source-symbol = "registerImplementors"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/filters/implementors"
 ```
 
 <<~ &#x0002; >>

@@ -2,22 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/voices"
-file-path = "bags/@lares/v0.1/api/lares/voices.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 17
-manao = 17
-namespace    = "ॐ ँ"
-role = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
 cacheable = true
-hydrate = true
-retain = true
+file-path = "bags/@lares/v0.1/api/lares/voices.md"
+hydrate   = true
+mana      = 17
+manao     = 17
+manaoio   = 16
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis"
+retain    = true
+role      = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/voices"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -170,7 +168,6 @@ The house surfaces the matching Voice to *lead* the handback; the finding still 
 | Frame questions | `Lares (Stranger)` |
 
 For worker lifecycle detail and examples, see `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers`.
-
 
 <<~/ahu >>
 

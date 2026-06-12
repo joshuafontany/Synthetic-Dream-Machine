@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/meme-view-children >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/ui/meme-view-children"
-file-path = "bags/@lararium/v0.1/tw5/ui/meme-view-children.md"
-type = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "ViewTemplate: slot-name headers + inline-edit overlay for non-body ahu sections"
-cacheable    = true
-retain       = true
-tags         = ["$:/tags/ViewTemplate"]
-list-after   = "$:/core/ui/ViewTemplate/body"
+cacheable  = true
+file-path  = "bags/@lararium/v0.1/tw5/ui/meme-view-children.md"
+list-after = "$:/core/ui/ViewTemplate/body"
+mana       = 18
+manao      = 17
+manaoio    = 16
+register   = "Synthesis-Canon"
+retain     = true
+role       = "ViewTemplate: slot-name headers + inline-edit overlay for non-body ahu sections"
+tags       = ["$:/tags/ViewTemplate"]
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/ui/meme-view-children"
 ```
-
-
 
 <<~ &#x0002; >>
 

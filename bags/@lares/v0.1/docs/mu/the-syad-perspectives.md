@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives"
-file-path = "bags/@lares/v0.1/docs/mu/the-syad-perspectives.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 15
-manao = 17
-role = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/mu/the-syad-perspectives.md"
+mana      = 15
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -120,6 +118,7 @@ The archive-derived research bundle lives at:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

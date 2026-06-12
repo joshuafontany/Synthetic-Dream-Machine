@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/peer-discovery >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/peer-discovery"
-file-path    = "bags/@lararium/v0.1/docs/peer-discovery.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "Web3 peer discovery doctrine — cold bootstrap, six-tier ladder, DID service endpoints, social-graph discovery, Keyhive add-member"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/docs/peer-discovery.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "Web3 peer discovery doctrine — cold bootstrap, six-tier ladder, DID service endpoints, social-graph discovery, Keyhive add-member"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/peer-discovery"
 ```
 
 <<~ &#x0002; >>
@@ -236,7 +236,6 @@ the first sync message — removes the need for TLS as the transport trust layer
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-
 <<~ ahu #edges >>
 
 ## Edges

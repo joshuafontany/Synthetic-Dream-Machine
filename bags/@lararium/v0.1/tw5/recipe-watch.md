@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/recipe-watch >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/recipe-watch"
-file-path    = "bags/@lararium/v0.1/tw5/recipe-watch.md"
-source-file  = "packages/lararium-tw5/src/recipe-watch.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 11
-manao        = 11
-role         = "recipe-watch — island-side LIVE composition reconcile; the composition class sheds its reboot"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/recipe-watch.md"
+mana        = 11
+manao       = 11
+register    = "Synthesis"
+retain      = true
+role        = "recipe-watch — island-side LIVE composition reconcile; the composition class sheds its reboot"
+source-file = "packages/lararium-tw5/src/recipe-watch.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/recipe-watch"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

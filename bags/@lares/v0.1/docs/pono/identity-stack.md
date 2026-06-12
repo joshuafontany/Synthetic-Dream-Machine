@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack >>
 ```toml iam
-uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/identity-stack"
-file-path     = "bags/@lares/v0.1/docs/pono/identity-stack.md"
-type          = "text/x-memetic-wikitext"
-tagspace      = "stable"
-register      = "Synthesis"
-mana          = 15
-role          = "reference: the Elyncia/DreamDeck identity stack — DID / handle / lar: alias — the ActivityPub handle form, and the chat-log:post-header render target. The lar: scheme contributes the bearing these social surfaces project"
-revision-note = "minted 2026-06-07 — holds the lar: scheme's identity-addressing surfaces (who-speaks, distinct from bearing); provenance docs/pono/lar-uri §3.3.1"
 cacheable     = false
+file-path     = "bags/@lares/v0.1/docs/pono/identity-stack.md"
+mana          = 15
+register      = "Synthesis"
 retain        = true
+revision-note = "minted 2026-06-07 — holds the lar: scheme's identity-addressing surfaces (who-speaks, distinct from bearing); provenance docs/pono/lar-uri §3.3.1"
+role          = "reference: the Elyncia/DreamDeck identity stack — DID / handle / lar: alias — the ActivityPub handle form, and the chat-log:post-header render target. The lar: scheme contributes the bearing these social surfaces project"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/identity-stack"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

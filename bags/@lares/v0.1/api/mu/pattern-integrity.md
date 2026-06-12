@@ -2,19 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/mu/pattern-integrity.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
+invariant   = true
 mana        = 18
 manao       = 18
 manaoio     = 17
-tagspace    = "stable"
-role        = "invariant doctrine: Fuller's 5 pattern integrities applied to Lararium — tensegrity, wave/water, synergy, ephemeralization, trim tab"
-cacheable   = true
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
 retain      = true
-invariant   = true
+role        = "invariant doctrine: Fuller's 5 pattern integrities applied to Lararium — tensegrity, wave/water, synergy, ephemeralization, trim tab"
 status-date = "2026-05-02"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"
 ```
 
 <<~ &#x0002; >>

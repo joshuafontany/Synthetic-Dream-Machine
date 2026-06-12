@@ -2,20 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/heleuma/ha.md"
-type = "text/x-memetic-wikitext"
-namespace    = "⊙"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 17
-cacheable    = true
-retain       = true
-role         = "invariant capability: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant capability: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"
 ```
-
-
 
 <<~ &#x0002; >>
 

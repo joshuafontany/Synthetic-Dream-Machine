@@ -2,22 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/chao"
-file-path = "bags/@lares/v0.1/api/mu/chao.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register   = "Synthesis-Canon"
-manaoio    = 14
-mana       = 17
-manao      = 16
-namespace  = "ॐ ँ"
-role       = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
 cacheable = true
-hydrate = true
-retain = true
+file-path = "bags/@lares/v0.1/api/mu/chao.md"
+hydrate   = true
+mana      = 17
+manao     = 16
+manaoio   = 14
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/mu/chao"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

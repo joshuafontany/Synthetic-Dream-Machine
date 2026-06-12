@@ -2,20 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/heleuma/ka.md"
-type = "text/x-memetic-wikitext"
-namespace    = "⊙"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 17
-cacheable    = true
-retain       = true
-role         = "invariant capability: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant capability: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"
 ```
-
-
 
 <<~ &#x0002; >>
 

@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol"
-file-path = "bags/@lararium/v0.1/docs/worker-message-protocol.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 14
-mana = 15
-manao = 16
-role = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/worker-message-protocol.md"
+mana      = 15
+manao     = 16
+manaoio   = 14
+register  = "Synthesis"
+retain    = false
+role      = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

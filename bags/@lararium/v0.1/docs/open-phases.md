@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/open-phases >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/open-phases"
-file-path = "bags/@lararium/v0.1/docs/open-phases.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/docs/open-phases.md"
 mana          = 17
 manao         = 17
 manaoio       = 16
-tagspace      = "stable"
-role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion seam"
-cacheable     = true
+register      = "Synthesis-Canon"
 retain        = true
-status-date   = "2026-04-30"
+role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion seam"
 source-symbol = "LarariumOpenPhase LarariumAuthorityEnvelope"
+status-date   = "2026-04-30"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/open-phases"
 ```
-
-
 
 <<~ ahu #head >>
 

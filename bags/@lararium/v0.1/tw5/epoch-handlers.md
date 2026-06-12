@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/epoch-handlers >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/epoch-handlers"
-file-path    = "bags/@lararium/v0.1/tw5/epoch-handlers.md"
-source-file  = "packages/lararium-tw5/src/epoch-handlers.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 12
-manao        = 12
-role         = "bag-epoch + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/epoch-handlers.md"
+mana        = 12
+manao       = 12
+register    = "Synthesis"
+retain      = true
+role        = "bag-epoch + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
+source-file = "packages/lararium-tw5/src/epoch-handlers.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/epoch-handlers"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

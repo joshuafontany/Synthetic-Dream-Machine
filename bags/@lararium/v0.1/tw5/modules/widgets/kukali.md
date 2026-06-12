@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/kukali >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/kukali"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/kukali.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: kukali — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "25b731ca70383716143b2f99cbd668393b00b78eb23f0ea82974dea5f0105f27"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/kukali.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: kukali — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "KukaliWidget"
-body-sha256 = "25b731ca70383716143b2f99cbd668393b00b78eb23f0ea82974dea5f0105f27"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/kukali"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTre
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-header >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pranala-header"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/pranala-header.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 17
-mana         = 18
-manao        = 17
-role         = "meme header sigil — <<~ ? -> uri >> declares this carrier's canonical URI; permanent JS exception"
-cacheable    = true
-retain       = true
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "meme header sigil — <<~ ? -> uri >> declares this carrier's canonical URI; permanent JS exception"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pranala-header"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

@@ -2,20 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loci"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/loci.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 15
-manao = 17
-namespace    = "⊙"
-role = "loci-rating law (kānāwai), routing convention authority, address stability authority, canon-MOVE rule"
-cacheable=true
-retain = true
+mana      = 15
+manao     = 17
+manaoio   = 13
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "loci-rating law (kānāwai), routing convention authority, address stability authority, canon-MOVE rule"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/loci"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -183,6 +181,7 @@ Convention fails when:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

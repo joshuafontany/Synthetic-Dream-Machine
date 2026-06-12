@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/memes >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/memes"
-file-path   = "bags/@lararium/v0.1/tw5/modules/filter-operators/memes.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 filter operator: memes — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ba"
+body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/filter-operators/memes.md"
+heleuma       = "ba"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 filter operator: memes — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "collectMemes registerMemes registerMemesSource"
-body-sha256 = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/filter-operators/memes"
 ```
 
 <<~ &#x0002; >>
@@ -79,6 +79,8 @@ export function registerMemesSource(tw: TW5Instance): void {
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

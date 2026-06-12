@@ -2,19 +2,19 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/nalu-engine >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/api/nalu-engine"
-file-path   = "bags/@lararium/v0.1/api/nalu-engine.md"
-type        = "text/x-typescript"
-register    = "Synthesis-Canon"
-mana        = 18
-manao       = 18
-manaoio     = 17
-namespace   = "ॐ ँ"
-role        = "TW5 startup module — unified nalu queue across all CRDT bags + frame-aligned wiki.transact() drain + apply-time echo guard; the in-wiki embodiment of the nalu wave"
-cacheable   = true
-retain      = true
-docs        = "lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu"
+cacheable      = true
+docs           = "lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu"
+file-path      = "bags/@lararium/v0.1/api/nalu-engine.md"
 implementation = "packages/lararium-tw5/src/modules/nalu-engine.ts"
+mana           = 18
+manao          = 18
+manaoio        = 17
+namespace      = "&#x0950; &#x0901;"
+register       = "Synthesis-Canon"
+retain         = true
+role           = "TW5 startup module — unified nalu queue across all CRDT bags + frame-aligned wiki.transact() drain + apply-time echo guard; the in-wiki embodiment of the nalu wave"
+type           = "text/x-memetic-wikitext"
+uri-path       = "ha.ka.ba/@lararium/v0.1/api/nalu-engine"
 ```
 
 <<~ &#x0002; >>

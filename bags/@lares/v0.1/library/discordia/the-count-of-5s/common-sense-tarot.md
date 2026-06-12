@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot"
-file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
 cacheable = false
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 16
-role = "discordian book witness meme, Common Sense Tarot locus, suit-grammar provenance shelf"
-retain = false
+file-path = "bags/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot.md"
+mana      = 16
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "discordian book witness meme, Common Sense Tarot locus, suit-grammar provenance shelf"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot"
 ```
 
 <<~ &#x0002; >>

@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/crossroads >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/crossroads"
-file-path    = "bags/@lararium/v0.1/docs/crossroads.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "lararium"
-register     = "Provisional"
-manaoio      = 4
-mana         = 5
-manao        = 5
-role         = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
-cacheable    = false
-retain       = true
+cacheable = false
+file-path = "bags/@lararium/v0.1/docs/crossroads.md"
+mana      = 5
+manao     = 5
+manaoio   = 4
+register  = "Provisional"
+retain    = true
+role      = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/crossroads"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

@@ -2,19 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/verse-event-lattice.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
+invariant   = true
 mana        = 18
 manao       = 18
 manaoio     = 17
-tagspace    = "stable"
-role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
 retain      = true
-invariant   = true
+role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
 status-date = "2026-05-15"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice"
 ```
 
 <<~ &#x0002; >>

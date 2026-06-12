@@ -2,17 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoolele >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/hoolele.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis"
 mana        = 16
 manao       = 16
-tagspace    = "stable"
-role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis"
 retain      = true
+role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
 status-date = "2026-05-15"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
 ```
 
 <<~ ahu #head >>

@@ -2,21 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/crypto >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/crypto"
-file-path    = "bags/@lararium/v0.1/mesh/crypto.md"
-source-file  = "packages/lararium-mesh/src/crypto.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe crypto.ts"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/crypto.md"
+mana        = 3
+register    = "Provisional"
+retain      = true
+role        = "self-documentation: TODO describe crypto.ts"
+source-file = "packages/lararium-mesh/src/crypto.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/crypto"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
+
 TODO: describe the load-bearing surface this file owns.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

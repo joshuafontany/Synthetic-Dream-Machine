@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/guest-grammar.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 16
-role = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
-cacheable=true
-retain = true
+mana      = 15
+manao     = 16
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -134,6 +133,7 @@ Schema detail, fixture families, and execution procedure belong in the sidecars.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

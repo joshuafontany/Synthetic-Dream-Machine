@@ -2,22 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/masks"
-file-path = "bags/@lares/v0.1/api/lares/masks.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 16
-role = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
 cacheable = true
-hydrate = false
-retain = false
-created = "2026-04-23"
+created   = "2026-04-23"
+file-path = "bags/@lares/v0.1/api/lares/masks.md"
+hydrate   = false
+mana      = 16
+manao     = 16
+manaoio   = 16
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis"
+retain    = false
+role      = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/masks"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -124,6 +123,7 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

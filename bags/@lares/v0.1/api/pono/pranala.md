@@ -2,21 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
-file-path = "bags/@lares/v0.1/api/pono/pranala.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 15
-mana = 16
-manao = 16
-role = "invariant edge law"
-cacheable=true
-retain = true
-canonical-forms = ["inline", "block"]
+cacheable        = true
+canonical-forms  = ["inline", "block"]
+file-path        = "bags/@lares/v0.1/api/pono/pranala.md"
 lifecycle-layers = ["template", "instance", "trace"]
+mana             = 16
+manao            = 16
+manaoio          = 15
+namespace        = "&#x2299;"
+register         = "Synthesis-Canon"
+retain           = true
+role             = "invariant edge law"
+type             = "text/x-memetic-wikitext"
+uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -210,6 +209,7 @@ reaction-roles = ["subscription", "handler", "callback"]
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -1,16 +1,15 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README"
-file-path = "bags/@lares/v0.1/library/docs/story/dreamdeck/README.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Sketch 9/20"
-role = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw session canvas, Kowloon ActivityPub feeds, DreamDeck threads; S5 sprint target, seeded not begun"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/library/docs/story/dreamdeck/README.md"
+register  = "Sketch 9/20"
+retain    = false
+role      = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw session canvas, Kowloon ActivityPub feeds, DreamDeck threads; S5 sprint target, seeded not begun"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README"
 ```
 
 <<~ &#x0002; >>

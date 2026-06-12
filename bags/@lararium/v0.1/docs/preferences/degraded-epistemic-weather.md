@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/degraded-epistemic-weather >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/preferences/degraded-epistemic-weather"
-file-path = "bags/@lararium/v0.1/docs/preferences/degraded-epistemic-weather.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 17
-mana = 16
-manao = 17
-role = "staging docs shelf for named epistemic failure-weather, collapse patterns, and possible short-invariant promotion targets"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/preferences/degraded-epistemic-weather.md"
+mana      = 16
+manao     = 17
+manaoio   = 17
+register  = "Synthesis"
+retain    = false
+role      = "staging docs shelf for named epistemic failure-weather, collapse patterns, and possible short-invariant promotion targets"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/degraded-epistemic-weather"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -77,6 +75,7 @@ Current comparison surfaces:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

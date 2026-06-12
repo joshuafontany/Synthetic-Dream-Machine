@@ -2,15 +2,16 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/devices/move-button >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/devices/move-button"
-file-path  = "bags/@lararium/v0.1/tw5/devices/move-button.md"
-type       = "text/x-memetic-wikitext"
-register   = "Synthesis"
-role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
 cacheable  = true
-retain     = true
-verb       = "MOVE"
+file-path  = "bags/@lararium/v0.1/tw5/devices/move-button.md"
 listenable = "InteractedWithEvent"
+namespace  = "&#x2299;"
+register   = "Synthesis"
+retain     = true
+role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
+type       = "text/x-memetic-wikitext"
+uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/devices/move-button"
+verb       = "MOVE"
 ```
 
 <<~ ahu #head >>

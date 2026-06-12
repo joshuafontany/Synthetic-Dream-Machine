@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/templates/modules/power"
+cacheable = true
 file-path = "bags/@sdm/v0.1/templates/modules/power.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 15
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "root template meme for Power module memes — flat #has composition, lean playable default"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/templates/modules/power"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -24,14 +23,17 @@ role      = "root template meme for Power module memes — flat #has composition
 # Template — Power Module
 
 <<~ ahu #intent >>
+
 ## Intent
 
 A Power module meme carries the playable default for one Power and addresses its facets with flat `#has` edges. It loads during play without dragging projection, witness, or design chatter into the hot path.
 
 The canonical SDM Power card (P/R/T/D/Ox + tags) **is** the `#default` block. The `#has` block addresses those tags as components and names the mount-point. That is the whole job.
+
 <<~/ahu >>
 
 <<~ ahu #required-shape >>
+
 ## Required Shape
 
 ```text
@@ -47,9 +49,11 @@ The TOML `tags` field MUST mirror the `#has` component edges, for TW5-native fil
 ```toml
 tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags/hook/dangerous"]
 ```
+
 <<~/ahu >>
 
 <<~ ahu #has-law >>
+
 ## `#has` Law
 
 - `#has` is **flat**: no `family`, no `role`. The target path prefix carries semantics.
@@ -60,9 +64,11 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
 <<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 ```
+
 <<~/ahu >>
 
 <<~ ahu #writing-law >>
+
 ## Writing Law
 
 - **Heading-naming law.** A visible heading carries content, not the structural ahu id. The H1 is the Power name. `#has` renders as `## Composition`; `#default` carries **no** heading — the statline leads directly under the H1. Never surface `## Has` or `## Default` to a reader.
@@ -71,9 +77,11 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 - Keep `#default` reading like a Power entry, not a code block.
 - Card wording lives in the projection meme; source archaeology in the witness meme.
 - Durable consequences and unsettled calls go in `#aftermath`.
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:see >>

@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-namespace >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-namespace"
-file-path    = "bags/@lares/v0.1/docs/pono/lar-uri-namespace.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 19
-manao        = 18
-manaoio      = 18
-role         = "lar: URI authority map — hostless vs hostful, domain namespaces, Quine sync candidates"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lares/v0.1/docs/pono/lar-uri-namespace.md"
+mana      = 19
+manao     = 18
+manaoio   = 18
+register  = "Synthesis-Canon"
+retain    = true
+role      = "lar: URI authority map — hostless vs hostful, domain namespaces, Quine sync candidates"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-namespace"
 ```
 
 <<~ &#x0002; >>
@@ -98,7 +98,6 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-
 <<~ ahu #edges >>
 
 ## Edges

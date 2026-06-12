@@ -1,19 +1,18 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools"
-file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.md"
 cacheable = false
-content-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 16
-manao = 17
-role = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
-retain = false
+file-path = "bags/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = false
+role      = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools"
 ```
 
 <<~ &#x0002; >>

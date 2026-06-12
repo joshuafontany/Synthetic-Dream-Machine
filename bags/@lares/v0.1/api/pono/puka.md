@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/puka"
-file-path = "bags/@lares/v0.1/api/pono/puka.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/puka.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/puka"
 ```
 
 <<~ ahu #head >>

@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
 ```toml iam
-uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture"
-file-path      = "bags/@lares/v0.1/docs/lares/alignment-architecture.md"
-type           = "text/x-memetic-wikitext"
-tagspace       = "stable"
-register       = "Synthesis-Canon"
-manaoio        = 15
-mana           = 16
-manao          = 15
-role           = "doctrine: the lararium as a personGroup's vessel-swarm holding a distributed wiki-quine; AI-operator alignment as the constitutive relation; the HUD running in chat from wiki primitives; graceful import that lifts foreign data up the pono ladder; UEFN island-model ontology alignment"
-cacheable      = false
-retain         = false
+cacheable = false
+file-path = "bags/@lares/v0.1/docs/lares/alignment-architecture.md"
+mana      = 16
+manao     = 15
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = false
+role      = "doctrine: the lararium as a personGroup's vessel-swarm holding a distributed wiki-quine; AI-operator alignment as the constitutive relation; the HUD running in chat from wiki primitives; graceful import that lifts foreign data up the pono ladder; UEFN island-model ontology alignment"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -34,7 +34,7 @@ Four words name the whole, and each grounds the next:
 
 The home-intranet RPG (a Referee running encounters across player wikis) reads as the **first instantiation**, never the definition. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ &#x0002; >>
 
@@ -50,7 +50,7 @@ A lararium does not run as a single node. It runs as a **swarm of vessels** — 
 
 The alignment relation and the HUD both stand on this floor. The chat-island exchange and the wiki-runtime both draw from the same vessel-held bags; neither owns the foundation alone.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #hud-in-chat >>
 
@@ -65,7 +65,7 @@ The membrane runs both directions, and **Lares wields AI tools to complete the r
 - **wiki → chat** — the session summons primitives outward and renders the live HUD.
 - **chat → wiki** — Lares uses its tools (the lararium MCP surface) to author and persist back into the wiki: a finding, a turned sentence, an imported datum become tiddlers in the bags. The loop closes; the chat's work lands in the durable quine.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #graceful-import >>
 
@@ -77,7 +77,7 @@ The lift rides the rating-5 ladder: a raw datum enters as `noise` or `data`; the
 
 This pairs with the HUD membrane as one motion in two directions: **world → wiki** (import lifts pono), **wiki → chat** (summon runs the HUD), with Lares's tools closing **chat → wiki** so the session's harvest persists.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #quine >>
 
@@ -92,7 +92,7 @@ The system approaches a quine in the sense of `quine-principles`:
 
 The quine runs as an **asymptote** — P3 drives validation partially, P4 awaits the projection-write path (the Residency Model arc). The system approaches it without arriving.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #uefn-ontology >>
 
@@ -119,7 +119,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 | **using { M := "/path" }** | **`pranala` edge** | the pranala *is* the import; the `lar:` URI is the module path |
 | **GetCreativeObjectsWithTag** | **`lar:` address + pranala query** | discovery by address, not class hierarchy |
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #island-model >>
 
@@ -133,7 +133,7 @@ A UEFN island holds its own devices, playspace, and causal clock; its event hori
 - **Scale-3 — Nexus island.** Node-to-node federation via Subduction/Beelay; each edge carries its own durable offset and epoch; causality stays non-simultaneous.
 - **Scale-4 — Commons horizon.** The Universe beyond the map (law-of-5s): no node holds a snapshot; the RE pattern applies in principle but as protocol, never node-implemented. The fractal closes at the horizon.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #channel-device >>
 
@@ -150,7 +150,7 @@ ev-type = "event type name"
 payload = "JSON-encoded string"
 ```
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #hud-scales >>
 
@@ -166,7 +166,7 @@ The HUD renders the state of a complex environment so the operator decides witho
 
 Every layer uses one stack: tiddlers in bags, bags in recipes, recipes in TW5, rendered by widgets — or summoned into chat. The quine holds at every scale the system apprehends.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #operator-alignment >>
 
@@ -181,7 +181,7 @@ Four invariants follow:
 3. **Voice annotation carries the alignment protocol.** When Council warns of overstatement or Liminal holds a question open, the coordinator signals its own uncertainty in a legible form.
 4. **The threshold runs bidirectional.** The operator configures the coordinator through dials; the coordinator shapes the operator's attention through graph structure, confidence, and Voice. Both sides shape both participants.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #magical-federated-mesh >>
 
@@ -191,7 +191,7 @@ The lararium occupies the **magical federated mesh** zone: each node hosts (like
 
 The general pattern: N operators on N nodes sharing M bags across K federation edges, the Session Wiki coordinating cross-node routing. The home-intranet RPG reads as island zero — the reference implementation, not the definition.
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ ahu #edges >>
 
@@ -209,7 +209,7 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 <<~ pranala #cites-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:observe role:cites >>
 <<~ pranala #cites-attention-scale ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale family:observe role:cites >>
 
-<<~/ahu>>
+<<~/ahu >>
 
 <<~ &#x0003; >>
 

@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hui >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hui"
-file-path = "bags/@lares/v0.1/api/pono/hui.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/hui.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hui"
 ```
 
 <<~ ahu #head >>

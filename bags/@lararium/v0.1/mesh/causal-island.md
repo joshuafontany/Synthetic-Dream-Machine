@@ -2,20 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/causal-island"
-file-path    = "bags/@lararium/v0.1/mesh/causal-island.md"
-source-file  = "packages/lararium-mesh/src/causal-island.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "Causal-island ontological law: the four-tier boundary model, the ACCESS axis, and the share-substrate-not-sovereignty law that governs co-located vessels"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
-hydrate      = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/causal-island.md"
+hydrate     = true
+mana        = 18
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+retain      = true
+role        = "Causal-island ontological law: the four-tier boundary model, the ACCESS axis, and the share-substrate-not-sovereignty law that governs co-located vessels"
+source-file = "packages/lararium-mesh/src/causal-island.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/causal-island"
 ```
+
 <<~ &#x0002; >>
 
 # Causal Island — Ontological Law

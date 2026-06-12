@@ -2,23 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/api/residency-tiers"
-file-path    = "bags/@lararium/v0.1/api/residency-tiers.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis"
-manaoio      = 15
-mana         = 17
-manao        = 17
-namespace    = "ॐ ँ"
-role         = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
-status       = "approved"
-approved-on  = "2026-06-01"
-revised-on   = "2026-06-01"
+approved-on   = "2026-06-01"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/api/residency-tiers.md"
+hydrate       = true
+mana          = 17
+manao         = 17
+manaoio       = 15
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis"
+retain        = true
+revised-on    = "2026-06-01"
 revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; two states (wela/anu) only"
-cacheable    = true
-hydrate      = true
-retain       = true
+role          = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
+status        = "approved"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-tiers"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

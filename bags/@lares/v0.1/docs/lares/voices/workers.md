@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/workers"
-file-path = "bags/@lares/v0.1/docs/lares/voices/workers.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 18
-manao = 17
-role = "specification for the worker swarm: tasked spirits as temporary masks, lifecycle, tag format, handback dissolving to the full house"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/lares/voices/workers.md"
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = false
+role      = "specification for the worker swarm: tasked spirits as temporary masks, lifecycle, tag format, handback dissolving to the full house"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/workers"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -146,6 +144,7 @@ The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

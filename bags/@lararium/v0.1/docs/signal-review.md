@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal-review >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal-review"
-file-path = "bags/@lararium/v0.1/docs/signal-review.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 17
-mana = 16
-manao = 17
-role = "review memo for lararium signal branch boundaries, settlement pressure, and rewrite sequencing"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal-review.md"
+mana      = 16
+manao     = 17
+manaoio   = 17
+register  = "Synthesis"
+retain    = false
+role      = "review memo for lararium signal branch boundaries, settlement pressure, and rewrite sequencing"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal-review"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -253,6 +251,7 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

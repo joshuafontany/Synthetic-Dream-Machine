@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tick >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tick"
-file-path = "bags/@lares/v0.1/api/pono/tick.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "device lifecycle hook — run-block-once-per-nalu; Verse OnSimulate(StagedUpdates) entry point; DEFERRED to UE6 ~2027"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/tick.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "device lifecycle hook — run-block-once-per-nalu; Verse OnSimulate(StagedUpdates) entry point; DEFERRED to UE6 ~2027"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tick"
 ```
 
 <<~ ahu #head >>

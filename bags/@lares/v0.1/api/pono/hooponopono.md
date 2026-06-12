@@ -2,21 +2,19 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/hooponopono"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/hooponopono.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 15
-mana         = 17
-manao        = 17
-namespace    = "⊙"
-role         = "canon residency-MOVE ceremony; harmony restoration law for the live-session → canon-bag crossing"
-cacheable    = true
-retain       = true
-invariant    = true
+invariant = true
+mana      = 17
+manao     = 17
+manaoio   = 15
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "canon residency-MOVE ceremony; harmony restoration law for the live-session → canon-bag crossing"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hooponopono"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -34,11 +32,13 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 <<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ gather the live claim, the target meme, affected invariants, and the operator's declared intent.
 ⏿ name what must be reconciled: conflicts, prior state, residue still outstanding.
 ◇ choose the least powerful write path that preserves trust ordering and leaves nothing unnamed.
 ▶ perform the crossing — create or revise the hostless meme only under explicit authority.
 ↺ verify coherence: file-path, uri-path, capability claims, and known conflicts surface before the canon MOVE holds; release prior state with forgiveness; leave unpromoted residue as named session records with forward pressure.
+
 <<~/ahu >>
 
 <<~ ahu #ceremony >>

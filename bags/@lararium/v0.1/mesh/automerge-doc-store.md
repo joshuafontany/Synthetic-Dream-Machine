@@ -2,21 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/automerge-doc-store >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/automerge-doc-store"
-file-path    = "bags/@lararium/v0.1/mesh/automerge-doc-store.md"
-source-file  = "packages/lararium-mesh/src/automerge-doc-store.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe automerge-doc-store.ts"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/automerge-doc-store.md"
+mana        = 3
+register    = "Provisional"
+retain      = true
+role        = "self-documentation: TODO describe automerge-doc-store.ts"
+source-file = "packages/lararium-mesh/src/automerge-doc-store.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/automerge-doc-store"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
+
 TODO: describe the load-bearing surface this file owns.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

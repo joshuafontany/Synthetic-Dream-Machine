@@ -2,22 +2,21 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/reaction-graph"
-file-path = "bags/@lares/v0.1/api/pono/reaction-graph.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 17
-manao        = 17
-role          = "invariant capability: in-memory reaction graph — subscribe, fire, load, UEFN dispatch semantics"
 cacheable     = true
-retain        = true
+file-path     = "bags/@lares/v0.1/api/pono/reaction-graph.md"
 invariant     = true
+mana          = 17
+manao         = 17
+manaoio       = 16
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "invariant capability: in-memory reaction graph — subscribe, fire, load, UEFN dispatch semantics"
 source-symbol = "ReactionGraph RENDER_MODES REACTION_ROLES"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/reaction-graph"
 ```
-
-
 
 <<~ ahu #head >>
 

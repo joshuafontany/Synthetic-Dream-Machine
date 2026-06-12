@@ -2,24 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 16
-manaoio      = 15
-manao        = 16
-role         = "docs-spec parent locus for the Lararium MCP server — index, running state, canonical child loci, known gaps"
-status      = "living docs-spec; test count verified"
-server-version = "0.1.0"
+entry-point       = "python3 -m lares.lararium_mcp"
+file-path         = "bags/@lares/v0.1/docs/lararium_mcp.md"
+mana              = 16
+manao             = 16
+manaoio           = 15
 protocol-versions = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"]
-entry-point  = "python3 -m lares.lararium_mcp"
-test-suite   = "python3 -m unittest discover -s lares/lararium_mcp/tests"
-test-count   = 77
+register          = "Synthesis-Canon"
+role              = "docs-spec parent locus for the Lararium MCP server — index, running state, canonical child loci, known gaps"
+server-version    = "0.1.0"
+status            = "living docs-spec; test count verified"
+test-count        = 77
+test-suite        = "python3 -m unittest discover -s lares/lararium_mcp/tests"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp"
 ```
-
-
-
 
 <<~ ahu #ooda-ha >>
 
@@ -338,6 +335,7 @@ class MyAdapter:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

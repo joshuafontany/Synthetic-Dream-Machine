@@ -7,30 +7,20 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 16
-role = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
-covers = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
-]
-constraints = [
-  "S1: the parent invariant stays the semantic root; this skill does not widen or outrank it",
-  "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs",
-  "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it",
-  "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue",
-  "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"
-]
+cacheable          = true
+constraints        = ["S1: the parent invariant stays the semantic root; this skill does not widen or outrank it", "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs", "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it", "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue", "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"]
+file-path          = "bags/@lares/v0.1/api/pono/memetic-wikitext/SKILL.md"
+mana               = 15
+manao              = 16
+manaoio            = 14
+register           = "Synthesis-Canon"
+retain             = true
+role               = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/memetic-wikitext"
-cacheable=true
-retain = true
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
 ```
-
-
 
 # Memetic-Wikitext Skill
 
@@ -231,6 +221,7 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

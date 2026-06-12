@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ui >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ui"
-file-path = "bags/@lares/v0.1/api/pono/ui.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "query surface sigil — evaluates TW5 filter and renders result list; English alias: \\query"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/ui.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "query surface sigil — evaluates TW5 filter and renders result list; English alias: \\query"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ui"
 ```
 
 <<~ ahu #head >>
@@ -61,6 +62,7 @@ TW5 filter expansion:
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-query family:control role:alias >>
 
 <<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

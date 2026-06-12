@@ -2,21 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research"
+cacheable = false
 file-path = "bags/@lares/v0.1/docs/pono/sigil-grammar-research.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 16
-role         = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
-cacheable    = false
-retain       = false
-invariant    = false
+invariant = false
+mana      = 17
+manao     = 16
+register  = "Synthesis-Canon"
+retain    = false
+role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research"
 ```
-
-
-
 
 <<~ &#x0002; >>
 

@@ -2,19 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol >>
 ```toml iam
-uri-path   = "ha.ka.ba/@lararium/v0.1/docs/exchange-protocol"
-file-path  = "bags/@lararium/v0.1/docs/exchange-protocol.md"
-type       = "text/x-memetic-wikitext"
-role       = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
-tagspace   = "stable"
-register   = "Synthesis"
-retain     = false
-invariant  = false
+file-path = "bags/@lararium/v0.1/docs/exchange-protocol.md"
+invariant = false
+register  = "Synthesis"
+retain    = false
+role      = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/exchange-protocol"
 ```
 
 <<~ &#x0002; >>
 
 <<~ ahu #exchange-flow >>
+
 ## Exchange Flow — Agent Contract
 
 AI agent: use this only when the session requests lararium exchange framing or when a local invariant imports it. Do not swell every conversation with full HUD ritual.
@@ -58,6 +59,7 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 ```
 
 <<~ pranala #voices-core ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#exchange-protocol family:control role:condensed-into >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/mukuwai"
-file-path = "bags/@lares/v0.1/api/pono/mukuwai.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/mukuwai.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/mukuwai"
 ```
 
 <<~ ahu #head >>
@@ -67,6 +68,7 @@ English alias form:
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-else family:control role:alias >>
 
 <<~ pranala #tiddler-sigil-mukuwai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-mukuwai family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

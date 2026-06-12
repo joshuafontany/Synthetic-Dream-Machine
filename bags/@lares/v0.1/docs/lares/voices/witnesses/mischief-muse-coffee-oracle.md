@@ -2,23 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle"
-file-path = "bags/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 14
-role = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
-source-path = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
+cacheable    = false
+file-path    = "bags/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle.md"
+mana         = 15
+manao        = 14
+manaoio      = 14
+register     = "Synthesis-Canon"
+retain       = false
+role         = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
 source-lines = "1-57"
-target-mask = "lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
-cacheable = false
-retain = false
+source-path  = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
+tagspace     = "stable"
+target-mask  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
+type         = "text/x-memetic-wikitext"
+uri-path     = "ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle"
 ```
-
-
 
 <<~ &#x0002; >>
 

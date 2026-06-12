@@ -2,37 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/sprint-ledger.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 16
-manaoio      = 15
-manao        = 16
-role         = "canonical closed-sprint ledger and consumption map for Lararium MCP planning documents"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md",
-  "packages/lares-core/memes/docs/mcp/sprints/SPRINT-01_HYDRATION_SLICE.md",
-  "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md"
-]
-status      = "sequence-bound; no calendar dates"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/sprint-ledger.md"
+mana            = 16
+manao           = 16
+manaoio         = 15
+register        = "Synthesis-Canon"
+role            = "canonical closed-sprint ledger and consumption map for Lararium MCP planning documents"
+source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-01_HYDRATION_SLICE.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md"]
+status          = "sequence-bound; no calendar dates"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: the closed sprint docs mostly name exits and pointers to design contracts.
 ⏿ orient: canonical children now carry the durable design content; this ledger carries completion memory.
 ◇ decide: keep closed sprint outcomes compact and point each consumed source to its new locus.
 ▶ act: mark Sprint-00 through Sprint-02 as consumed; keep Sprint-03 live outside this ledger.
 ↺ verify: every closed-sprint exit marker appears here or in the child locus named by the map; adapt: future sprint docs enter this ledger only after closure.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #closed-sprints >>
+
 ## Closed Sprint Outcomes
 
 Sprint IDs mark ordered work slices, not wall-clock promises.
@@ -46,6 +42,7 @@ Sprint IDs mark ordered work slices, not wall-clock promises.
 <<~/ahu >>
 
 <<~ ahu #consumption-map >>
+
 ## Consumed Source Map
 
 | Source | Canonical locus |
@@ -75,6 +72,7 @@ Active or not-yet-consumed sources: `SPRINT-03_REMOTE_SURFACES.md`, `SPRINT-04_H
 <<~/ahu >>
 
 <<~ ahu #done-story-index >>
+
 ## Done Story Index
 
 These done stories have their durable content represented by the canonical loci above or by the implemented code they point at:
@@ -93,6 +91,7 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 <<~/ahu >>
 
 <<~ ahu #residue >>
+
 ## Residue
 
 - Sprint-03 carries remote transport, auth/scope policy, evals, and pranala DAG walking.
@@ -102,6 +101,7 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine >>
@@ -110,6 +110,7 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

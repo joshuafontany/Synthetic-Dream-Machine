@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/hud >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/hud"
-file-path = "bags/@lares/v0.1/docs/lares/hud.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 14
-manao = 14
-role = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/lares/hud.md"
+mana      = 14
+manao     = 14
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/hud"
 ```
-
-
 
 <<~ &#x0002; >>
 

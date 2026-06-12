@@ -2,37 +2,27 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph"
-file-path = "bags/@lares/v0.1/docs/graph.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
-research-sources = [
-  "Bazel depsets and Skyframe (Google 2024)",
-  "Buck2 architecture (Meta 2024)",
-  "Nix derivations and lazy evaluation",
-  "Graphiti temporal knowledge graph (Zep 2025, arXiv:2501.13956)",
-  "TerminusDB append-only delta model",
-  "UEFN Scene Graph ECS model (entity/component/prefab, Fortnite dev 2025)",
-  "Anthropic context engineering (2025)",
-  "Context7 / Upstash (2025)"
-]
-status-date  = "2026-04-24"
+file-path        = "bags/@lares/v0.1/docs/graph.md"
+mana             = 17
+manao            = 17
+manaoio          = 16
+register         = "Synthesis-Canon"
+research-sources = ["Bazel depsets and Skyframe (Google 2024)", "Buck2 architecture (Meta 2024)", "Nix derivations and lazy evaluation", "Graphiti temporal knowledge graph (Zep 2025, arXiv:2501.13956)", "TerminusDB append-only delta model", "UEFN Scene Graph ECS model (entity/component/prefab, Fortnite dev 2025)", "Anthropic context engineering (2025)", "Context7 / Upstash (2025)"]
+role             = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
+status-date      = "2026-04-24"
+tagspace         = "stable"
+type             = "text/x-memetic-wikitext"
+uri-path         = "ha.ka.ba/@lares/v0.1/docs/graph"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: static `_SOCKET`/`_DEPTH` maps and carrier-index scans stand in for a real graph walk.
 ⏿ orient: build-system depsets, temporal KG bi-temporal edges, and UEFN ECS plane separation each name the same missing structure.
 ◇ decide: three-tier traversal model, content-addressed artifacts, pranala parser over actual carrier text.
 ▶ act: write child memes for meme data model, traversal rules, parser design, and artifact contract.
 ↺ verify: Tier 0 declared-core and Tier 1 graph walk converge on the same 14 memes before proceeding; surface one open question — `? ->` socket resolution depth — before implementing the parser.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -63,6 +53,7 @@ Three structural claims drive the redesign:
 <<~/ahu >>
 
 <<~ ahu #decisions >>
+
 ## Committed Design Decisions
 
 The following decisions closed during the OODA-HA planning session on 2026-04-24.
@@ -80,6 +71,7 @@ They do not require further operator input.
 <<~/ahu >>
 
 <<~ ahu #open-question >>
+
 ## `? ->` Socket Resolution — Closed
 
 The canonical pranala law (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) settles this:
@@ -96,6 +88,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 <<~/ahu >>
 
 <<~ ahu #child-loci >>
+
 ## Child Loci
 
 | Meme | Role |
@@ -108,6 +101,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 <<~/ahu >>
 
 <<~ ahu #terminology-alignment >>
+
 ## Deferred — Terminology Alignment
 
 The canonical loci law (`lar:///ha.ka.ba/@lares/v0.1/api/pono/loci`) uses **locus / loci** for a carrier in the graph.
@@ -130,6 +124,7 @@ The rename in the server awaits Phase 1 implementation. Until then, current code
 <<~/ahu >>
 
 <<~ ahu #implementation-phases >>
+
 ## Implementation Phases
 
 | Phase | New file | Key deliverable |
@@ -148,6 +143,7 @@ Phases 1, 3, and 4 may proceed independently.
 <<~/ahu >>
 
 <<~ ahu #validation-markers >>
+
 ## Validation Markers
 
 | Marker | Test or check |
@@ -164,6 +160,7 @@ Phases 1, 3, and 4 may proceed independently.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/nodes >>
@@ -176,6 +173,7 @@ Phases 1, 3, and 4 may proceed independently.
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

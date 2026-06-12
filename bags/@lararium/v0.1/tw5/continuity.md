@@ -2,22 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/continuity"
-file-path = "bags/@lararium/v0.1/tw5/continuity.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 14
-mana = 14
-manao = 14
-namespace    = "ॐ ँ"
-role = "lararium child invariant for continuity, crystal carry, and memory-as-hint boundaries"
 cacheable = true
-hydrate = true
-retain = true
+file-path = "bags/@lararium/v0.1/tw5/continuity.md"
+hydrate   = true
+mana      = 14
+manao     = 14
+manaoio   = 14
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis"
+retain    = true
+role      = "lararium child invariant for continuity, crystal carry, and memory-as-hint boundaries"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/continuity"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -89,4 +87,6 @@ This child meme keeps the cold-hydration contract small.
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
 <<~ ॐ ँ&#x0004; -> ? >>

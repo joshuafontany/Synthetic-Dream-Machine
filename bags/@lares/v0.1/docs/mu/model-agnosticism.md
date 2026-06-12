@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism"
-file-path = "bags/@lares/v0.1/docs/mu/model-agnosticism.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "staging docs shelf for Wilson/Korzybski model-agnosticism braid behind Mu-facing invariants"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/mu/model-agnosticism.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "staging docs shelf for Wilson/Korzybski model-agnosticism braid behind Mu-facing invariants"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -136,6 +134,7 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,19 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/tw5-deserializer >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/tw5-deserializer"
-file-path = "bags/@lararium/v0.1/docs/tw5-deserializer.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-role         = "design doc: TW5 tiddlerDeserializerModules registration for text/x-memetic-wikitext"
-status-date  = "2026-04-30"
-source       = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer"
+file-path   = "bags/@lararium/v0.1/docs/tw5-deserializer.md"
+mana        = 17
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+role        = "design doc: TW5 tiddlerDeserializerModules registration for text/x-memetic-wikitext"
+source      = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer"
+status-date = "2026-04-30"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/docs/tw5-deserializer"
 ```
-
-
 
 <<~ &#x0002; >>
 

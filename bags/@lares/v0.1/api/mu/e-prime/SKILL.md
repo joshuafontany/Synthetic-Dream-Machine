@@ -7,24 +7,19 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/e-prime/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "SC"
-manaoio = 13
-cacheable = true
-retain = true
-mana = 14
-manao = 15
-role = "deliberate post-hoc E-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
-covers = ["lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime"]
-constraints = [
-  "any copula left standing carries a confidence marker",
-  "smallest lawful intervention; never widen a local fix into a rewrite",
-  "quotations, code, and literal examples never normalize silently",
-  "has runs free --- never policed"
-]
+cacheable          = true
+constraints        = ["any copula left standing carries a confidence marker", "smallest lawful intervention; never widen a local fix into a rewrite", "quotations, code, and literal examples never normalize silently", "has runs free --- never policed"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime"]
+file-path          = "bags/@lares/v0.1/api/pono/e-prime/SKILL.md"
+mana               = 14
+manao              = 15
+manaoio            = 13
+register           = "SC"
+retain             = true
+role               = "deliberate post-hoc E-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/e-prime"
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
 ```
 
 <<~ &#x0002; >>
@@ -98,6 +93,7 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

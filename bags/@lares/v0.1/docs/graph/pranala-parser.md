@@ -6,33 +6,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser"
-file-path = "bags/@lares/v0.1/docs/graph/pranala-parser.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
-open-gate    = "closed: fragment-level resolution (Option A) confirmed by canonical pranala kānāwai"
-status-date  = "2026-04-24"
+file-path   = "bags/@lares/v0.1/docs/graph/pranala-parser.md"
+mana        = 17
+manao       = 17
+manaoio     = 16
+open-gate   = "closed: fragment-level resolution (Option A) confirmed by canonical pranala kānāwai"
+register    = "Synthesis-Canon"
+role        = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
+status-date = "2026-04-24"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: carrier files carry pranala edges in block and inline forms; `loulou`, `aka`, `kahea` sugar collapses to edges too.
 ⏿ orient: the parser must handle four surface forms, field normalization across two vocabularies, and one unresolved design gate.
 ◇ decide: implement block and sugar forms; `? ->` gate closed — fragment-level (Option A) confirmed by canonical pranala law.
 ▶ act: specify regex patterns, extraction order, field mapping table, and the confirmed `? ->` resolution algorithm.
 ↺ verify: parser produces correct `PranalaEdge` records from actual AGENTS.md source blocks; the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #surface-forms >>
+
 ## Surface Forms
 
 The pranala law (source: `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) names four surface forms
@@ -51,6 +51,7 @@ All five forms produce `PranalaEdge` records.
 <<~/ahu >>
 
 <<~ ahu #block-form >>
+
 ## Block Form Parsing
 
 Block pranala spans multiple lines. The parser extracts blocks with:
@@ -85,6 +86,7 @@ Same regex the carrier ingress already uses. The result gets parsed with `tomlli
 <<~/ahu >>
 
 <<~ ahu #inline-form >>
+
 ## Inline Form Parsing
 
 Inline pranala fits on one line. The parser uses:
@@ -105,6 +107,7 @@ Inline pranala does not carry a `payload`; `payload` defaults to `{}`.
 <<~/ahu >>
 
 <<~ ahu #sugar-forms >>
+
 ## Sugar Form Expansion
 
 The three sugar sigils expand into `PranalaEdge` records without a TOML body.
@@ -127,6 +130,7 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 <<~/ahu >>
 
 <<~ ahu #question-mark-resolution >>
+
 ## `? ->` Socket Resolution — Closed (Option A)
 
 **Authority:** canonical pranala kānāwai (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`):
@@ -157,6 +161,7 @@ When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root
 <<~/ahu >>
 
 <<~ ahu #field-normalization >>
+
 ## Field Normalization Table
 
 The source carrier TOML vocabulary and the compiler's `PranalaEdge` vocabulary diverge in two places.
@@ -187,6 +192,7 @@ Unknown fields not in this table get stored in `payload` under their original ke
 <<~/ahu >>
 
 <<~ ahu #uri-resolution >>
+
 ## TO Expression URI Resolution
 
 The TO expression in both block and inline forms takes three shapes:
@@ -204,6 +210,7 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>

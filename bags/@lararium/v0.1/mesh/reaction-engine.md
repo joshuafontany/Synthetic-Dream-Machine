@@ -2,20 +2,22 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"
-file-path    = "bags/@lararium/v0.1/mesh/reaction-engine.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-tagspace     = "lararium"
-role         = "canonical pipeline invariant: five-layer reactive architecture from CRDT patch to observable outcome — nalu, live-query, IslandMsg_Event, CRDT-as-distributed-promise"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date  = "2026-05-28"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/reaction-engine.md"
+invariant   = true
+mana        = 17
+manao       = 17
+manaoio     = 16
+namespace   = "&#x0950; &#x0901;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "canonical pipeline invariant: five-layer reactive architecture from CRDT patch to observable outcome — nalu, live-query, IslandMsg_Event, CRDT-as-distributed-promise"
+status-date = "2026-05-28"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #head >>

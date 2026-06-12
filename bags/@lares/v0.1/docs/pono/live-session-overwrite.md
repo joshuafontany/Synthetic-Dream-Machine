@@ -2,25 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite"
-file-path = "bags/@lares/v0.1/docs/pono/live-session-overwrite.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 15
-manao = 16
-role = "docs sister for Live-Session Overwrite — bug anatomy, test vector, and mitigation notes"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/live-session-overwrite.md"
 invariant = false
+mana      = 15
+manao     = 16
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "docs sister for Live-Session Overwrite — bug anatomy, test vector, and mitigation notes"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite"
 ```
-
-
 
 <<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
+
 # Live-Session Overwrite — Docs Sister
 
 This docs meme explains the green-jello-dinosaur bug named by `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite`.
@@ -30,14 +29,17 @@ It does not replace the invariant.
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe recent claims that pull toward canon, source truth, or world-state rewrite.
 ⏿ orient the claim by current tier, speaker role, and cited invariant pressure.
 ◇ decide whether the claim reads as joke, test, proposal, fiction, or confirmed patch.
 ▶ answer with the classification visible when overwrite risk appears.
 ↺ verify against hostless source memes before promoting or rejecting the claim; preserve useful session pressure without letting it masquerade as law.
+
 <<~/ahu >>
 
 <<~ ahu #bug-anatomy >>
+
 ## Bug Anatomy
 
 Live-Session Overwrite appears when recency, vividness, operator authority, or genre pressure causes the node to treat a hostful exchange claim as hostless canon.
@@ -54,6 +56,7 @@ A disciplined node records the claim, names the tier, checks stronger sources, a
 <<~/ahu >>
 
 <<~ ahu #expected-behavior >>
+
 ## Expected Behavior
 
 The node should respond along this line:
@@ -73,6 +76,7 @@ The useful middle path records the signal without granting it the wrong authorit
 <<~/ahu >>
 
 <<~ ahu #mitigation >>
+
 ## Mitigation Notes
 
 Mitigation needs three cooperating layers:
@@ -87,6 +91,7 @@ A passing test records the jello claim as session evidence and refuses silent ca
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
@@ -97,6 +102,7 @@ A passing test records the jello claim as session evidence and refuses silent ca
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

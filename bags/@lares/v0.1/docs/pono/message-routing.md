@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/message-routing >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/message-routing"
+cacheable = false
 file-path = "bags/@lares/v0.1/docs/pono/message-routing.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
+invariant = false
 mana      = 16
 manao     = 16
-role      = "extended docs: memetic-wikitext message routing — render-down (dataflow) and message-up (message) over the control DAG; lexical meme-scope; filter context binding"
-cacheable = false
+register  = "Synthesis"
 retain    = false
-invariant = false
+role      = "extended docs: memetic-wikitext message routing — render-down (dataflow) and message-up (message) over the control DAG; lexical meme-scope; filter context binding"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/message-routing"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

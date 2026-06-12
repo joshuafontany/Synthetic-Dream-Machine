@@ -2,35 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/carrier-law.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "canonical carrier-law bundle for Lararium MCP compiler planning"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/CARRIER_LAW_BUNDLE.md"
-]
-status-date  = "2026-04-23"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/carrier-law.md"
+mana            = 17
+manao           = 17
+manaoio         = 16
+register        = "Synthesis-Canon"
+role            = "canonical carrier-law bundle for Lararium MCP compiler planning"
+source-consumes = ["packages/lares-core/memes/docs/mcp/CARRIER_LAW_BUNDLE.md"]
+status-date     = "2026-04-23"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: source law already names meme, invariant, memetic-wikitext, loci, and implements lanes.
 ⏿ orient: the compiler must treat these as composable interfaces, not decorative headings.
 ◇ decide: validate carrier truth before lowering syntax into AST, graph, or render products.
 ▶ act: preserve the five lanes, their checks, and compiler order as a typed contract.
 ↺ verify: each lane names both compiler use and MCP-facing use; adapt: deeper parser/render detail routes to sibling loci.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #five-lanes >>
+
 ## Five Compiler Input Lanes
 
 | Lane | Source law | Compiler use | MCP-facing use |
@@ -47,6 +45,7 @@ It should not begin from markdown files plus links.
 <<~/ahu >>
 
 <<~ ahu #meme-shape >>
+
 ## Meme Copy-Shape Contract
 
 | Surface | Compiler check | Artifact consequence |
@@ -66,6 +65,7 @@ Depth states remain distinct: resolved, declared-unresolved, absent.
 <<~/ahu >>
 
 <<~ ahu #invariant-pressure >>
+
 ## Invariant Pressure Contract
 
 Invariant carriers stay short, exact, stable, cacheable, and sidecar-aware.
@@ -81,6 +81,7 @@ Compiler yield:
 <<~/ahu >>
 
 <<~ ahu #memetic-wikitext-primitives >>
+
 ## Memetic-Wikitext Primitive Contract
 
 | Primitive | Lawful job | First lowering target |
@@ -100,6 +101,7 @@ Parser legality and render machinery stay separate.
 <<~/ahu >>
 
 <<~ ahu #loci-routing >>
+
 ## Loci Routing Contract
 
 | Concern | Compiler use | MCP use |
@@ -115,6 +117,7 @@ Parser legality and render machinery stay separate.
 <<~/ahu >>
 
 <<~ ahu #interface-bundles >>
+
 ## Implements as Composable Interface Bundles
 
 `implements` must name real outward type law.
@@ -132,6 +135,7 @@ Common patterns:
 <<~/ahu >>
 
 <<~ ahu #compiler-order >>
+
 ## Recommended Compiler Order
 
 1. validate `meme` copy-shape
@@ -147,6 +151,7 @@ Carrier truth stays ahead of syntax swell.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
@@ -157,6 +162,7 @@ Carrier truth stays ahead of syntax swell.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

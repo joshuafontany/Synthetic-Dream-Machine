@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/sigil >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/sigil"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/sigil.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: sigil — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec11"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/sigil.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: sigil — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "SigilWidget"
-body-sha256 = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec11"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/sigil"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function SigilWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTree
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

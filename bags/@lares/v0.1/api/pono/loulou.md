@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/loulou"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/loulou.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 17
-manao        = 17
-role         = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
-cacheable    = true
-retain       = true
+mana      = 17
+manao     = 17
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/loulou"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -122,6 +121,7 @@ confidence-bounded = false
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-loulou family:control role:has >>
 <<~ pranala #tiddler-sigil-link ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-link family:control role:alias >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

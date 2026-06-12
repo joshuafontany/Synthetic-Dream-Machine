@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor"
-file-path = "bags/@lararium/v0.1/tw5/modules/sync-adaptor.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 17
-role         = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
-status-date  = "2026-04-30"
-heleuma      = "ha"
+file-path     = "bags/@lararium/v0.1/tw5/modules/sync-adaptor.md"
+heleuma       = "ha"
+implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
+mana          = 18
+manao         = 17
+manaoio       = 17
+register      = "Synthesis-Canon"
+role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 source-symbol = "_applyChange"
-implements   = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor"
 ```
-
-
 
 <<~ &#x0002; >>
 

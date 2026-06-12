@@ -1,21 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~⊙&#x0011; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu >>
+<<~ ⊙&#x0011; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/kapu"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/kapu.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 18
-manao        = 18
-namespace    = "⊙"
-role         = "above-namespace authority law; kernel/sacred tier capability; trust boundary root"
-cacheable    = true
-retain       = true
+mana      = 18
+manao     = 18
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "above-namespace authority law; kernel/sacred tier capability; trust boundary root"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kapu"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -138,7 +136,10 @@ This meme governs the kapu rating and above-namespace trust law.
 
 <<~ pranala #tiddler-sigil-guard ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-guard family:control role:alias >>
 <<~ pranala #tiddler-sigil-kapu ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
 <<~&#x0014; -> ? >>

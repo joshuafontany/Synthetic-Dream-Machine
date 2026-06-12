@@ -2,25 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s"
-file-path = "bags/@lares/v0.1/api/mu/the-law-of-5s.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register   = "Synthesis-Canon"
-manaoio    = 16
-mana       = 18
-manao      = 17
-namespace  = "ॐ ँ"
-role        = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
-cacheable   = true
-hydrate     = true
-retain      = true
-heleuma     = "ba"
+body-sha256   = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
+cacheable     = true
+file-path     = "bags/@lares/v0.1/api/mu/the-law-of-5s.md"
+heleuma       = "ba"
+hydrate       = true
+mana          = 18
+manao         = 17
+manaoio       = 16
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
 source-symbol = "LADDER_5 OODA_HA_5 SCOPE_5 SCOPE_TO_LADDER RATING_5 STAGE_5 STAGE_BAND_MID RATING_COLOR"
-body-sha256 = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

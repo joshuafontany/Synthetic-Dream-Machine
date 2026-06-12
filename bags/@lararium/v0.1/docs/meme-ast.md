@@ -2,22 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/meme-ast"
-file-path = "bags/@lararium/v0.1/docs/meme-ast.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 17
-manaoio      = 16
-role         = "heleuma ka: isomorphic memetic-wikitext AST parser bundle"
-status-date  = "2026-05-01"
-heleuma      = "ka"
+body-sha256   = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
+file-path     = "bags/@lararium/v0.1/docs/meme-ast.md"
+heleuma       = "ka"
+implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
+mana          = 18
+manao         = 17
+manaoio       = 16
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast"
+register      = "Synthesis-Canon"
+role          = "heleuma ka: isomorphic memetic-wikitext AST parser bundle"
 source-symbol = "parseMemeText"
-module-ref   = "lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast"
-implements   = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
-body-sha256 = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
+status-date   = "2026-05-01"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/meme-ast"
 ```
-
 
 <<~ &#x0002; >>
 
@@ -57,6 +56,8 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 <<~/ahu >>
 
 <<~ ahu #source >>
+
+
 
 <<~/ahu >>
 

@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
 ```toml iam
-uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
-file-path        = "bags/@lares/v0.1/api/pono/x-tiddlywiki-filter.md"
-type             = "text/x-memetic-wikitext"
-register         = "Synthesis-Canon"
-mana             = 18
-grammar-key      = "x-tiddlywiki-filter"
-guest-mime       = "text/x-tiddlywiki-filter"
-role             = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
-cacheable        = true
-retain           = true
+cacheable   = true
+file-path   = "bags/@lares/v0.1/api/pono/x-tiddlywiki-filter.md"
+grammar-key = "x-tiddlywiki-filter"
+guest-mime  = "text/x-tiddlywiki-filter"
+mana        = 18
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
+retain      = true
+role        = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

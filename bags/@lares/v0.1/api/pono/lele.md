@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lele"
-file-path = "bags/@lares/v0.1/api/pono/lele.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/lele.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lele"
 ```
 
 <<~ ahu #head >>

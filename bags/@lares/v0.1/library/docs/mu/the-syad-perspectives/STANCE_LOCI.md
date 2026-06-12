@@ -1,21 +1,24 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI >>
-
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI"
-file-path = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-role = "grammar: the five discourse stances + the Syadasti Reading Rule — stance selects the evaluation frame that gives confidence its meaning"
-phase-map = { observe = "#loop-position", orient = "#handoff", decide = "#conventions", act = "#procedures", assess = "#reading-test" }
-dependencies = ["confidence"]
-trigger = "always — grammar primitive"
-grammar = true
-invariant = true
-cacheable = false
-retain = false
+cacheable         = false
+dependencies      = ["confidence"]
+file-path         = "bags/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI.md"
+grammar           = true
+invariant         = true
+phase-map-act     = "#procedures"
+phase-map-assess  = "#reading-test"
+phase-map-decide  = "#conventions"
+phase-map-observe = "#loop-position"
+phase-map-orient  = "#handoff"
+register          = "Synthesis-Canon"
+retain            = false
+role              = "grammar: the five discourse stances + the Syadasti Reading Rule — stance selects the evaluation frame that gives confidence its meaning"
+tagspace          = "stable"
+trigger           = "always — grammar primitive"
+type              = "text/x-memetic-wikitext"
+uri-path          = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI"
 ```
 
 <<~ &#x0002; >>

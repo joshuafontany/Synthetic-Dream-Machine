@@ -2,19 +2,19 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/save-path >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/api/save-path"
-file-path = "bags/@lararium/v0.1/api/save-path.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 18
-manao = 17
-namespace = "ॐ ँ"
-role = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
 cacheable = true
-hydrate = true
-retain = true
+file-path = "bags/@lararium/v0.1/api/save-path.md"
+hydrate   = true
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/api/save-path"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

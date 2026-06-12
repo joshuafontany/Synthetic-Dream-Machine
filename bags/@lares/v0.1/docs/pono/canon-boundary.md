@@ -2,25 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary"
-file-path = "bags/@lares/v0.1/docs/pono/canon-boundary.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 15
-manao = 16
-role = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/canon-boundary.md"
 invariant = false
+mana      = 15
+manao     = 16
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary"
 ```
-
-
 
 <<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
+
 # Canon Boundary — Docs Sister
 
 This docs meme explains the crossing from hostful live exchange pressure into hostless durable meme space.
@@ -30,14 +29,17 @@ This file gives a fuller map of canon-crossing events.
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe the source claim, target territory, affected memes, and operator trust tier and intent.
 ⏿ orient the current meme trust tier against the meme tier requested by the claim.
 ◇ decide the least powerful crossing that preserves the memetic trust ladder.
 ▶ create, patch, or defer the hostless target with the boundary event named.
 ↺ verify file path, opener, interface claims, and conflict handling before the crossing holds; leave pre-canon pressure in session records with clear next crossing conditions.
+
 <<~/ahu >>
 
 <<~ ahu #crossing-model >>
+
 ## Crossing Model
 
 A canon crossing does not need to feel bureaucratic.
@@ -55,6 +57,7 @@ The boundary keeps all five available without collapsing them.
 <<~/ahu >>
 
 <<~ ahu #boundary-event-shape >>
+
 ## Boundary Event Shape
 
 A useful boundary event can carry:
@@ -75,6 +78,7 @@ For now, they define the shape of explicit thinking.
 <<~/ahu >>
 
 <<~ ahu #examples >>
+
 ## Examples
 
 Agent pushback, `mu?`:
@@ -104,6 +108,7 @@ Operator confirms the canon MOVE target. Patch hostless meme, cite source live e
 <<~/ahu >>
 
 <<~ ahu #review-pressure >>
+
 ## Review Pressure
 
 A canon-crossing path should ask:
@@ -119,6 +124,7 @@ If the answers remain vague, the claim should stay as session pressure.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
@@ -129,6 +135,7 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

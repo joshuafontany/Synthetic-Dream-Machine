@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/source-module >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/source-module"
+cacheable = true
 file-path = "bags/@lararium/v0.1/docs/source-module.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-manaoio      = 15
-mana         = 16
-manao        = 16
-role         = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
-cacheable    = true
-retain       = true
+mana      = 16
+manao     = 16
+manaoio   = 15
+register  = "Synthesis-Canon"
+retain    = true
+role      = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/source-module"
 ```
-
-
 
 <<~ ahu #head >>
 

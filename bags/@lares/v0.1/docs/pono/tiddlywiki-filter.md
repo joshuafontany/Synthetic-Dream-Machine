@@ -2,16 +2,14 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
-file-path = "bags/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
-role = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
+register  = "Synthesis"
+retain    = false
+role      = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
 ```
-
-
 
 # X-TiddlyWiki-Filter — Docs
 
@@ -30,7 +28,7 @@ This file holds examples, explanatory guidance, reminders, and notes on deferred
 
 Find all sigils that link to the current meme:
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "x-tiddlywiki-filter"
@@ -41,13 +39,13 @@ result-shape = "set"
 
 [all[sigils]links:to[+currentMeme]]
 <<~/hana >>
-```
+````
 
 ### Example B — tag-based filtering
 
 Find all sigils tagged `task` excluding the current meme:
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "x-tiddlywiki-filter"
@@ -58,13 +56,13 @@ result-shape = "set"
 
 [tag[task]!title[+currentMeme]]
 <<~/hana >>
-```
+````
 
 ### Example C — metadata extraction
 
 Get the `status` field of the current meme:
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "x-tiddlywiki-filter"
@@ -75,13 +73,13 @@ result-shape = "scalar"
 
 [+currentMeme] [get[status]]
 <<~/hana >>
-```
+````
 
 ### Example D — hierarchy discovery
 
 Get the parent-list of the current meme:
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "x-tiddlywiki-filter"
@@ -92,13 +90,13 @@ result-shape = "list"
 
 [list[+currentMeme!!parent-list]]
 <<~/hana >>
-```
+````
 
 ### Example E — orphaned-sigil batch filtering
 
 Find all untagged non-system sigils:
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "x-tiddlywiki-filter"
@@ -109,7 +107,7 @@ result-shape = "set"
 
 [all[sigils]untagged[]!is[system]]
 <<~/hana >>
-```
+````
 
 <<~/ahu >>
 
@@ -160,6 +158,7 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 - `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter/SKILL`
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

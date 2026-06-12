@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/holo"
-file-path = "bags/@lares/v0.1/api/pono/holo.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/holo.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/holo"
 ```
 
 <<~ ahu #head >>

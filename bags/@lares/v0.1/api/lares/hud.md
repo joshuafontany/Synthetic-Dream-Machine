@@ -2,22 +2,20 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/lares/hud"
-file-path = "bags/@lares/v0.1/api/lares/hud.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 17
-manao = 17
-namespace    = "ॐ ँ"
-role = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
 cacheable = true
-hydrate = true
-retain = true
+file-path = "bags/@lares/v0.1/api/lares/hud.md"
+hydrate   = true
+mana      = 17
+manao     = 17
+manaoio   = 16
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/hud"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

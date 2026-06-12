@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/sigil >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/sigil"
-file-path = "bags/@lararium/v0.1/tw5/widgets/sigil.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: SigilWidget — heleuma ka"
-heleuma       = "ka"
-source-symbol = "SigilWidget"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/sigil"
-body-sha256 = "466661b14ac6fd3d3b560f87f698927c6857905c5ff020e21b965a05a24cf902"
+body-sha256   = "466661b14ac6fd3d3b560f87f698927c6857905c5ff020e21b965a05a24cf902"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/widgets/sigil.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/sigil"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: SigilWidget — heleuma ka"
+source-symbol = "SigilWidget"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/sigil"
 ```
 
 <<~ &#x0002; >>

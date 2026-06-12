@@ -2,19 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/tw5-widget-module >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/tw5-widget-module"
-file-path = "bags/@lararium/v0.1/docs/tw5-widget-module.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-role         = "design doc: TW5 widget module protocol — two-phase stub preload + prototype chain wiring"
-status-date  = "2026-04-30"
-source       = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/widget-module"
+file-path   = "bags/@lararium/v0.1/docs/tw5-widget-module.md"
+mana        = 17
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+role        = "design doc: TW5 widget module protocol — two-phase stub preload + prototype chain wiring"
+source      = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/widget-module"
+status-date = "2026-04-30"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/docs/tw5-widget-module"
 ```
-
-
 
 <<~ &#x0002; >>
 

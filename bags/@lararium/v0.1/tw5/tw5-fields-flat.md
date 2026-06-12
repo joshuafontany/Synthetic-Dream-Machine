@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-fields-flat >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/tw5-fields-flat"
-file-path   = "bags/@lararium/v0.1/tw5/tw5-fields-flat.md"
-heleuma     = "ka"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 17
-manao       = 17
-manaoio     = 16
-role        = "heleuma: TW5TiddlerFields → Record<string,string> normaliser"
-cacheable   = true
-retain      = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/tw5/tw5-fields-flat.md"
+heleuma   = "ka"
+mana      = 17
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "heleuma: TW5TiddlerFields → Record<string,string> normaliser"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/tw5-fields-flat"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
@@ -39,4 +40,5 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

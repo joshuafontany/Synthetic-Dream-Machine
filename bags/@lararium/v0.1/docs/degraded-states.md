@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/degraded-states >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/degraded-states"
-file-path = "bags/@lararium/v0.1/docs/degraded-states.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 18
-manao = 17
-role = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/degraded-states.md"
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = false
+role      = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/degraded-states"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -213,6 +211,7 @@ The operator naming a degraded state constitutes correction input, not accusatio
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

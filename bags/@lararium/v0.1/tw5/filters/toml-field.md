@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/toml-field >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/filters/toml-field"
-file-path = "bags/@lararium/v0.1/tw5/filters/toml-field.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: registerTomlFieldOperator — heleuma ka"
-heleuma       = "ka"
-source-symbol = "registerTomlFieldOperator"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/toml-field"
-body-sha256 = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"
+body-sha256   = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/filters/toml-field.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/toml-field"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: registerTomlFieldOperator — heleuma ka"
+source-symbol = "registerTomlFieldOperator"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/filters/toml-field"
 ```
 
 <<~ &#x0002; >>

@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/signal/render-targets"
-file-path = "bags/@lararium/v0.1/docs/signal/render-targets.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 15
-manao = 16
-role = "docs room for lararium-side render-target law, glyph conventions, and cross-surface verification"
 cacheable = false
-retain = false
+file-path = "bags/@lararium/v0.1/docs/signal/render-targets.md"
+mana      = 15
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "docs room for lararium-side render-target law, glyph conventions, and cross-surface verification"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/render-targets"
 ```
-
-
 
 <<~ &#x0002; >>
 
@@ -417,6 +415,7 @@ Before emitting any stance block on any surface:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

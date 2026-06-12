@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/lar-hud >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/ui/lar-hud"
-file-path    = "bags/@lararium/v0.1/tw5/ui/lar-hud.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 18
-role         = "LarHUD doctrine — VSCode-style right-docked TW5 wiki panel; flex-sibling push model; 3-state machine"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/tw5/ui/lar-hud.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+register  = "Synthesis-Canon"
+retain    = true
+role      = "LarHUD doctrine — VSCode-style right-docked TW5 wiki panel; flex-sibling push model; 3-state machine"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/lar-hud"
 ```
 
 <<~ &#x0002; >>
@@ -119,7 +119,6 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-
 <<~ ahu #edges >>
 
 ## Edges

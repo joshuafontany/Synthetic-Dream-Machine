@@ -2,27 +2,23 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/meme >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/meme"
-file-path = "bags/@lares/v0.1/docs/graph/meme.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "PranalaEdge, Meme, and MemeGraph data model contracts for the pranala-edge DAG compiler"
-status-date  = "2026-04-24"
-renamed-from = "ha.ka.ba/@lares/v0.1/docs/graph/loci"
-
-uncertainty-meme-class-name   = "Meme preferred over CarrierMeme or Locus; not yet ratified in code"
-uncertainty-graph-class-name  = "MemeGraph preferred over LociGraph, CarrierGraph, or Graph; not yet ratified in code"
-uncertainty-locus-subtype     = "Locus remains valid as the subtype name for memes that implement the pono loci interface; distinct from graph node terminology"
+file-path                    = "bags/@lares/v0.1/docs/graph/meme.md"
+mana                         = 17
+manao                        = 17
+manaoio                      = 16
+register                     = "Synthesis-Canon"
+renamed-from                 = "ha.ka.ba/@lares/v0.1/docs/graph/loci"
+role                         = "PranalaEdge, Meme, and MemeGraph data model contracts for the pranala-edge DAG compiler"
+status-date                  = "2026-04-24"
+tagspace                     = "stable"
+type                         = "text/x-memetic-wikitext"
+uncertainty-graph-class-name = "MemeGraph preferred over LociGraph, CarrierGraph, or Graph; not yet ratified in code"
+uncertainty-locus-subtype    = "Locus remains valid as the subtype name for memes that implement the pono loci interface; distinct from graph node terminology"
+uncertainty-meme-class-name  = "Meme preferred over CarrierMeme or Locus; not yet ratified in code"
+uri-path                     = "ha.ka.ba/@lares/v0.1/docs/graph/meme"
 ```
 
-
-
-
-<<~ ahu #terminology-note>>
+<<~ ahu #terminology-note >>
 
 ## Terminology Note
 
@@ -33,14 +29,17 @@ uncertainty-locus-subtype     = "Locus remains valid as the subtype name for mem
 <<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe: the compiler needs three types — an edge, a meme, and a graph — before any walk can proceed.
 ⏿ orient: Bazel's depset pattern informs meme structure; canonical pranala kānāwai (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) governs the full PranalaEdge field set and independence law.
 ◇ decide: frozen dataclasses for PranalaEdge and Meme; a mutable MemeGraph that builds incrementally from carrier reads.
 ▶ act: specify field-level contracts for each type and the graph's core operations.
 ↺ verify: every field carries a type, a source (where the compiler reads it from), and a default; deeper parser/render concerns route to `pranala-parser` and `traversal` siblings.
+
 <<~/ahu >>
 
 <<~ ahu #prana-edge >>
+
 ## PranalaEdge
 
 One typed, directed, acyclic edge between two sockets.
@@ -98,6 +97,7 @@ An edge gates hydration order when `family == "control"`.
 <<~/ahu >>
 
 <<~ ahu #locus >>
+
 ## Meme
 
 One resolved carrier in the graph. Class name `Meme` preferred; `CarrierMeme` is a fallback if module namespace collision requires disambiguation. Decision deferred to Phase 1.
@@ -136,6 +136,7 @@ The URI prefix prevents hash collisions between memes with identical content.
 <<~/ahu >>
 
 <<~ ahu #declared-unresolved >>
+
 ## DeclaredUnresolved
 
 A pranala edge pointing to a URI that the resolver cannot locate on disk.
@@ -155,6 +156,7 @@ Neither causes the compilation to abort; the artifact remains valid with a `Fals
 <<~/ahu >>
 
 <<~ ahu #meme-graph >>
+
 ## MemeGraph
 
 Adjacency structure over all reachable memes.
@@ -194,6 +196,7 @@ The boot compiler uses `topological` for artifact production.
 <<~/ahu >>
 
 <<~ ahu #content-store >>
+
 ## Content Store — Dual-Index Design
 
 Two virtual MCP resources form the content-address lookup surface.
@@ -237,6 +240,7 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
@@ -247,6 +251,7 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

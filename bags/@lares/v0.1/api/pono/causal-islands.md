@@ -2,26 +2,23 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
-file-path = "bags/@lares/v0.1/api/pono/causal-islands.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lares/v0.1/api/pono/causal-islands.md"
+heleuma       = "ba"
+invariant     = true
 mana          = 18
 manao         = 17
 manaoio       = 17
-tagspace      = "stable"
-role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
-cacheable     = true
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
 retain        = true
-invariant     = true
-status-date   = "2026-06-01"
-heleuma       = "ba"
+role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
-# confidence restored to 18 on operator move-confirm 2026-06-01 (the 3-axis rewrite holds).
-# body-sha256 pending regen by the canon-MOVE tooling (owns the parser-canonical byte form).
+status-date   = "2026-06-01"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
 ```
-
-
 
 <<~ ahu #head >>
 

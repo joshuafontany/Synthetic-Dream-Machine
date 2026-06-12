@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/ahu >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/ahu"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/ahu.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: ahu — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "12b3869aa70d01761a960fe2bc881fa66b007d8b6559676b0de68e85508f52fc"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/ahu.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: ahu — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "AhuWidget"
-body-sha256 = "12b3869aa70d01761a960fe2bc881fa66b007d8b6559676b0de68e85508f52fc"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/ahu"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function AhuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

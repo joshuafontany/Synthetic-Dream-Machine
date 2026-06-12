@@ -2,23 +2,23 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot >>
 ```toml iam
-uri-path      = "ha.ka.ba/@lararium/v0.1/api/personal-slot"
-file-path     = "bags/@lararium/v0.1/api/personal-slot.md"
-type          = "text/x-memetic-wikitext"
-tagspace      = "stable"
-register      = "Synthesis"
-mana          = 16
-manao         = 15
-manaoio       = 16
-namespace     = "ॐ ँ"
-role          = "the @personal recipe slot (cross-device viewing state, PersonGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
-status        = "approved"
-proposed-on   = "2026-05-30"
-approved-on   = "2026-06-01"
-merged-on     = "2026-06-04"   # personal-slot-proposal + personal-bindings welded; one Q-ledger, collisions removed
-uri-shape     = "lar:///ha.ka.ba/@personal"
-cacheable     = true
-retain        = true
+approved-on = "2026-06-01"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/api/personal-slot.md"
+mana        = 16
+manao       = 15
+manaoio     = 16
+merged-on   = "2026-06-04"
+namespace   = "&#x0950; &#x0901;"
+proposed-on = "2026-05-30"
+register    = "Synthesis"
+retain      = true
+role        = "the @personal recipe slot (cross-device viewing state, PersonGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
+status      = "approved"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/api/personal-slot"
+uri-shape   = "lar:///ha.ka.ba/@personal"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

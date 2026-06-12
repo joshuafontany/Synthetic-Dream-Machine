@@ -2,16 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils"
-file-path    = "bags/@lares/v0.1/api/pono/sharktooth-sigils.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-manaoio      = 18
-mana         = 18
-manao        = 18
-role         = "English alias redirect for nihomano-sigils; same meme, English face"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/sharktooth-sigils.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "English alias redirect for nihomano-sigils; same meme, English face"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils"
 ```
 
 <<~ &#x0002; >>

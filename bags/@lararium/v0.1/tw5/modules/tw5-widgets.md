@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets"
-file-path = "bags/@lararium/v0.1/tw5/modules/tw5-widgets.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/tw5-widgets.md"
 mana          = 17
 manao         = 17
 manaoio       = 16
-tagspace      = "adjacent"
-role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
-cacheable     = true
+register      = "Synthesis-Canon"
 retain        = true
-status-date   = "2026-04-30"
+role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
+status-date   = "2026-04-30"
+tagspace      = "adjacent"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets"
 ```
-
-
 
 <<~ ahu #head >>
 

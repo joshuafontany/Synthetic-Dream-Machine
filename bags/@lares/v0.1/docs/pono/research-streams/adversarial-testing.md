@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing"
-file-path = "bags/@lares/v0.1/docs/pono/research-streams/adversarial-testing.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 16
-manao = 16
-role = "adversarial witness stream with literal quotes for distributed failure, authz automation, websocket abuse cases, and formal verification corpus"
-cacheable = false
-retain = false
-invariant = false
+cacheable   = false
+file-path   = "bags/@lares/v0.1/docs/pono/research-streams/adversarial-testing.md"
+invariant   = false
+mana        = 16
+manao       = 16
+manaoio     = 16
+register    = "Synthesis-Canon"
+retain      = false
+role        = "adversarial witness stream with literal quotes for distributed failure, authz automation, websocket abuse cases, and formal verification corpus"
 status-date = "2026-05-25"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing"
 ```
 
 <<~ &#x0002; >>

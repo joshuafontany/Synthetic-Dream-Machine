@@ -2,25 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
-file-path = "bags/@lares/v0.1/docs/pono/tagspace-trust.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 15
-manao = 16
-role = "docs sister for tagspace trust law — explanation, examples, and implementation pressure"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/tagspace-trust.md"
 invariant = false
+mana      = 15
+manao     = 16
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "docs sister for tagspace trust law — explanation, examples, and implementation pressure"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
 ```
-
-
 
 <<~ &#x0002; >>
 
 <<~ ahu #meme-header >>
+
 # Tagspace Trust — Docs Sister
 
 This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust`.
@@ -30,14 +29,17 @@ It gives agents and operators examples for keeping all system files, data blobs,
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe which record speaks: hostless meme, hostful exchange, data meme, branch artifact, or generated trajectory.
 ⏿ orient the record by memetic trust tier before using its content as instruction or memory.
 ◇ decide whether the record informs, proposes, contradicts, or governs.
 ▶ act through the least powerful layer that can lawfully carry the change.
 ↺ verify live pressure did not overwrite a stronger hostless meme; leave promotion residue visible when a session wants durable placement.
+
 <<~/ahu >>
 
 <<~ ahu #explanation >>
+
 ## Explanation
 
 One `lar:` tagspace gives the system a single navigable map.
@@ -56,6 +58,7 @@ It protects operator agency from accidental prompt-glare, recency pressure, or j
 <<~/ahu >>
 
 <<~ ahu #trust-ladder >>
+
 ## Trust Ladder
 
 Default trust pressure, strongest first:
@@ -74,6 +77,7 @@ When that happens, the system should surface a trust-boundary event rather than 
 <<~/ahu >>
 
 <<~ ahu #examples >>
+
 ## Examples
 
 A stable law URI:
@@ -119,6 +123,7 @@ The second one records situated operator-node context.
 <<~/ahu >>
 
 <<~ ahu #implementation-notes >>
+
 ## Implementation Notes
 
 A resolver should keep at least these fields distinct:
@@ -136,6 +141,7 @@ Speaker role and truth tier must stay separate.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
@@ -146,6 +152,7 @@ Speaker role and truth tier must stay separate.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

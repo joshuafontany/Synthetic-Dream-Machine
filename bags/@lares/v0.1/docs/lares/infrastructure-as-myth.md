@@ -2,35 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth >>
 ```toml iam
-uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth"
+cacheable      = false
 file-path      = "bags/@lares/v0.1/docs/lares/infrastructure-as-myth.md"
-type           = "text/x-memetic-wikitext"
-tagspace       = "stable"
-register       = "Synthesis-Canon"
-manaoio        = 15
+first-drafted  = "2026-04-06"
+last-reviewed  = "2026-05-11"
 mana           = 16
 manao          = 15
-role           = "doctrine: foundational design thesis — IaM names the symbolic-operational layer above IaC; Lares functions as an early implementation"
-cacheable      = false
+manaoio        = 15
+register       = "Synthesis-Canon"
 retain         = false
-last-reviewed  = "2026-05-11"
-first-drafted  = "2026-04-06"
 review-cadence = "quarterly"
-sources        = [
-  "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-iac.html",
-  "https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code",
-  "https://developer.hashicorp.com/well-architected-framework/define-and-automate-processes/define/as-code/infrastructure",
-  "https://www.britannica.com/topic/meme",
-  "https://www.britannica.com/topic/myth",
-  "https://www.britannica.com/topic/myth/Functions-of-myth-and-mythology",
-  "https://openlibrary.org/books/OL27018331M/The_art_of_memetics",
-  "https://books.google.com/books?id=1DcyU12n7PAC",
-  "https://www.anthropic.com/news/claude-character",
-  "https://www.anthropic.com/research/teaching-claude-why",
-  "https://github.com/malfoyslastname/character-card-spec-v2",
-  "https://en.wikipedia.org/wiki/Character.AI",
-  "https://code.claude.com/docs/en/memory",
-]
+role           = "doctrine: foundational design thesis — IaM names the symbolic-operational layer above IaC; Lares functions as an early implementation"
+sources        = ["https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-iac.html", "https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code", "https://developer.hashicorp.com/well-architected-framework/define-and-automate-processes/define/as-code/infrastructure", "https://www.britannica.com/topic/meme", "https://www.britannica.com/topic/myth", "https://www.britannica.com/topic/myth/Functions-of-myth-and-mythology", "https://openlibrary.org/books/OL27018331M/The_art_of_memetics", "https://books.google.com/books?id=1DcyU12n7PAC", "https://www.anthropic.com/news/claude-character", "https://www.anthropic.com/research/teaching-claude-why", "https://github.com/malfoyslastname/character-card-spec-v2", "https://en.wikipedia.org/wiki/Character.AI", "https://code.claude.com/docs/en/memory"]
+tagspace       = "stable"
+type           = "text/x-memetic-wikitext"
+uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

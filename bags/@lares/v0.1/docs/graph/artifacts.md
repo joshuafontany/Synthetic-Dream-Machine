@@ -2,32 +2,32 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/artifacts >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
-file-path = "bags/@lares/v0.1/docs/graph/artifacts.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 16
-manao        = 17
-role         = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
-status-date  = "2026-04-24"
+file-path   = "bags/@lares/v0.1/docs/graph/artifacts.md"
+mana        = 17
+manao       = 17
+manaoio     = 16
+register    = "Synthesis-Canon"
+role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
+status-date = "2026-04-24"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: the current boot receipt uses a compilation timestamp as its identity — not content addressing.
 ⏿ orient: Nix derivations and Bazel action caching both hash inputs; Anthropic prompt caching requires byte-identical prefixes.
 ◇ decide: SHA256 over canonical carrier bytes plus sorted edge records; timestamp becomes metadata, not identity.
 ▶ act: specify the hash scheme, three artifact shapes, validation contract, and compaction rule.
 ↺ verify: identical source files always produce identical receipt hashes across separate compilation runs; MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #content-addressing >>
+
 ## Content-Addressed Identity
 
 **Problem with timestamp-keyed receipts:**
@@ -69,6 +69,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 <<~/ahu >>
 
 <<~ ahu #artifact-minimal >>
+
 ## Artifact: Minimal Boot
 
 **Scope:** Tier 0 declared-core closure (14 memes from control/owns edges rooted at `AGENTS`).
@@ -122,6 +123,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 <<~/ahu >>
 
 <<~ ahu #artifact-full >>
+
 ## Artifact: Full Boot
 
 **Scope:** Tier 1 control closure + Tier 2 one-hop relation expansion.
@@ -180,6 +182,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 <<~/ahu >>
 
 <<~ ahu #artifact-receipt >>
+
 ## Artifact: Boot Receipt
 
 **Scope:** digest summary of the most recent minimal boot compilation.
@@ -227,6 +230,7 @@ If the hash matches, the LLM context prefix already cached at Anthropic remains 
 <<~/ahu >>
 
 <<~ ahu #dual-index >>
+
 ## Dual-Index Content Resources
 
 Two virtual MCP resources extend the content-address surface beyond the boot artifacts.
@@ -255,6 +259,7 @@ This supports cache miss fills and cross-session identity verification without r
 <<~/ahu >>
 
 <<~ ahu #validation-contract >>
+
 ## Validation Contract
 
 Every artifact carries a `validation` object.
@@ -273,6 +278,7 @@ A **valid artifact** carries `dag_violations = []`. All other validation fields 
 <<~/ahu >>
 
 <<~ ahu #compaction >>
+
 ## Compaction Rule
 
 When a hydration packet grows past context limits, the compaction pass applies in order:
@@ -288,6 +294,7 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
@@ -299,6 +306,7 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

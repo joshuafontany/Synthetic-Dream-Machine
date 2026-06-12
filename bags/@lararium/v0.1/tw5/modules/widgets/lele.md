@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/lele >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/lele"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/lele.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: lele — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f1"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/lele.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: lele — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "LeleWidget"
-body-sha256 = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f1"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/lele"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function LeleWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

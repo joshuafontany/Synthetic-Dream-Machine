@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack"
-file-path    = "bags/@lararium/v0.1/docs/lararium-doc-stack.md"
-type         = "text/vnd.tiddlywiki"
-register     = "Synthesis"
-mana         = 11
-manao        = 11
-manaoio      = 11
-role         = "research-era doc-stack model (six-layer) — structurally PRE-keel-cut; superseded for current law by recipe + island-protocol (IslandGrants) + wiki-layer-ontology; retained for boot-sequence and export round-trip teaching"
-revised-on   = "2026-06-10"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/docs/lararium-doc-stack.md"
+mana          = 11
+manao         = 11
+manaoio       = 11
+register      = "Synthesis"
+retain        = true
+revised-on    = "2026-06-10"
 revision-note = "demoted from Synthesis-Canon: the six-layer Catalog/Corpus model predates IslandGrants + recipe-watch (boot = first reconcile); terms swept room→wiki 2026-06-10"
-cacheable    = true
-retain       = true
+role          = "research-era doc-stack model (six-layer) — structurally PRE-keel-cut; superseded for current law by recipe + island-protocol (IslandGrants) + wiki-layer-ontology; retained for boot-sequence and export round-trip teaching"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack"
 ```
 
 <<~ &#x0002; >>
@@ -150,7 +150,6 @@ infrastructure rather than rolling a separate exporter.
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
-
 <<~ ahu #edges >>
 
 ## Edges

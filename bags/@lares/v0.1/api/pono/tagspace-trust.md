@@ -2,25 +2,24 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust"
-file-path = "bags/@lares/v0.1/api/pono/tagspace-trust.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 16
-manao = 17
-namespace = "ॐ ँ"
-role = "invariant law for shared lar tagspace precedence across system memes and live exchange records"
 cacheable = true
-retain = true
+file-path = "bags/@lares/v0.1/api/pono/tagspace-trust.md"
 invariant = true
+mana      = 16
+manao     = 17
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant law for shared lar tagspace precedence across system memes and live exchange records"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #head >>
+
 # Tagspace Trust Law
 
 All system memes, imported data memes, and all exchange turns inhabit one `lar:` tagspace.
@@ -30,11 +29,13 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ read the URI authority, path, query signal, and carrier source before trust assignment.
 ⏿ separate hostless canonical memes from hostful exchange records from data memes without merging their force.
 ◇ choose the higher-precedence source when live session pressure collides with invariant law.
 ▶ surface the trust-boundary event instead of silently rewriting the graph.
 ↺ verify the cited meme tier outranks the live record before applying behavior; leave promotion pressure visible when a session claim wants durable placement.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -73,6 +74,7 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
@@ -85,6 +87,7 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

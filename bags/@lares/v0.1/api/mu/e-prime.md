@@ -2,21 +2,19 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/e-prime"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/mu/e-prime.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-tagspace = "stable"
-manaoio = 15
-mana = 14
-manao = 16
-namespace = "ॐ ँ"
-role = "active language-discipline law (kānāwai), certainty-pressure regulator, and forward generation-pressure surface --- seeds wording toward verb-relations as it forms"
-cacheable=true
-retain = true
+mana      = 14
+manao     = 16
+manaoio   = 15
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "active language-discipline law (kānāwai), certainty-pressure regulator, and forward generation-pressure surface --- seeds wording toward verb-relations as it forms"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/mu/e-prime"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -34,7 +32,6 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 <<~/ahu >>
 
 <<~ &#x0002; >>
-
 
 <<~ ahu #e-prime-law >>
 
@@ -149,6 +146,7 @@ E-Prime runs **binary**. The ward stands **lit** (default --- the discipline app
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

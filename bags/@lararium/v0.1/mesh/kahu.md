@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kahu >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/kahu"
-file-path    = "bags/@lararium/v0.1/mesh/kahu.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 16
-manaoio      = 16
-role         = "protocol governance concept: kahu as grammar-guardian role in DreamNet topology"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/kahu.md"
+mana      = 17
+manao     = 16
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "protocol governance concept: kahu as grammar-guardian role in DreamNet topology"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/kahu"
 ```
+
 <<~ &#x0002; >>
 
 # Kahu

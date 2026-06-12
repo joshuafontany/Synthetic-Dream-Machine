@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward"
+cacheable = true
 file-path = "bags/@sdm/v0.1/witness/powers/osr-spells/shield-ward.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 12
 manao     = 16
 manaoio   = 17
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "OSR spell witness for Shield (source alias of SDM+ Shield Ward) — cold-load provenance"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward"
 ```
 
 <<~ &#x0002; >>
@@ -22,6 +21,7 @@ role      = "OSR spell witness for Shield (source alias of SDM+ Shield Ward) —
 # OSR Witness — Shield Ward
 
 <<~ ahu #alias >>
+
 ## Alias Note
 
 ```toml witness
@@ -29,9 +29,11 @@ source-name = "Shield"
 sdm-power-slot = "Shield Ward"
 reason = "SDM+ reserves bare `Shield` for gear, item, and general defense ontology; `Shield Ward` names this Power slot."
 ```
+
 <<~/ahu >>
 
 <<~ ahu #basic >>
+
 ## Basic
 
 ```toml witness
@@ -44,9 +46,11 @@ reversible = false
 ```
 
 A magical barrier all around the magic-user, less than an inch away, moving with them. While it lasts, the caster is **AC 2 against missiles, AC 4 against all other attacks**. A Magic Missile shot at the warded caster allows a Saving Throw vs. Spells per missile; on success the missile has no effect — it strikes the barrier and evaporates.
+
 <<~/ahu >>
 
 <<~ ahu #expert >>
+
 ## Expert
 
 ```toml witness
@@ -57,9 +61,11 @@ standalone-description = false
 ```
 
 The Expert Set lists MU1 only; the Basic description governs.
+
 <<~/ahu >>
 
 <<~ ahu #cyclopedia >>
+
 ## Rules Cyclopedia
 
 ```toml witness
@@ -72,9 +78,11 @@ reversible = false
 ```
 
 As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missiles and AC 4 vs all else, with the per-missile save that evaporates a Magic Missile against the barrier.
+
 <<~/ahu >>
 
 <<~ ahu #analysis >>
+
 ## Conversion Analysis
 
 - Source name `Shield` → SDM+ Power slot `Shield Ward` (the alias protects bare `Shield` for gear/effect ontology).
@@ -82,9 +90,11 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 - Distinct AC vs missiles / other → typed defensive filtering; surfaces as the `ward`'s "named channel" overcharge.
 - The Magic-Missile save → a special anti-spell-projectile interaction, not general immunity. Candidate for a `negate`/`#modifies` rule at counterpoint (Sprint 4).
 - `2 turns` → **D: 20 minutes**. The paid Life reads as `imbued` (locked while the ward holds).
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells family:template role:uses >>

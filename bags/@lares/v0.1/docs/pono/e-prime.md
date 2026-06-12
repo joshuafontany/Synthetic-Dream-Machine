@@ -2,16 +2,14 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/e-prime >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
-file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
-role = "docs companion for e-prime: research provenance, braid notes, and binary-ward guidance"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
+register  = "Synthesis"
+retain    = false
+role      = "docs companion for e-prime: research provenance, braid notes, and binary-ward guidance"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
 ```
-
-
 
 # E-Prime — Docs
 
@@ -93,6 +91,7 @@ The ward does not exempt copulas from confidence marking. Every `${copula}` that
 - `lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism`
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

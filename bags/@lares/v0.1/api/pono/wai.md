@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/wai"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/wai.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 16
-manao        = 16
-role         = "wikispace conditional block-container — the TW5 `\\if` filter cascade; first non-empty filter renders its body; the water cascade with kahawai (`\\elseif`) + mukuwai (`\\else`); content selection on the document surface"
-cacheable    = true
-retain       = true
+mana      = 16
+manao     = 16
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "wikispace conditional block-container — the TW5 `\\if` filter cascade; first non-empty filter renders its body; the water cascade with kahawai (`\\elseif`) + mukuwai (`\\else`); content selection on the document surface"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/wai"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -116,6 +115,7 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wai family:control role:has >>
 <<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

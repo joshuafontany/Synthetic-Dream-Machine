@@ -1,21 +1,20 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike >>
-
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hoike"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/hoike.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-status    = "draft"
+invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16
-role      = "canon law of the hoike layer — kept records of contested rulings: hoike (\\testimony), kue (\\dissent), saksi (\\witness); the eight laws, the witness law, degraded states, lineage"
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
+role      = "canon law of the hoike layer — kept records of contested rulings: hoike (\\testimony), kue (\\dissent), saksi (\\witness); the eight laws, the witness law, degraded states, lineage"
+status    = "draft"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hoike"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

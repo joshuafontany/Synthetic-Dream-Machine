@@ -7,30 +7,20 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
-file-path = "bags/@lares/v0.1/api/pono/guest-grammar/SKILL.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 15
-manao = 16
-role = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
-covers = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
-]
-constraints = [
-  "S1: the parent invariant remains the admission law and this skill does not outrank it",
-  "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar",
-  "S3: root primitives stay host-side and do not become guest-family proxies",
-  "S4: hana keeps opener, optional priming payload, and guest body distinct",
-  "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"
-]
+cacheable          = true
+constraints        = ["S1: the parent invariant remains the admission law and this skill does not outrank it", "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar", "S3: root primitives stay host-side and do not become guest-family proxies", "S4: hana keeps opener, optional priming payload, and guest body distinct", "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"]
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"]
+file-path          = "bags/@lares/v0.1/api/pono/guest-grammar/SKILL.md"
+mana               = 15
+manao              = 16
+manaoio            = 14
+register           = "Synthesis-Canon"
+retain             = true
+role               = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/guest-grammar"
-cacheable=true
-retain = true
+type               = "text/x-memetic-wikitext"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
 ```
-
-
 
 # Guest-Grammar Skill
 
@@ -245,6 +235,7 @@ Aftermath — close by naming:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,18 +2,18 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/island-adaptor >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/api/island-adaptor"
-file-path   = "bags/@lararium/v0.1/api/island-adaptor.md"
-type        = "text/x-typescript"
-register    = "Synthesis-Canon"
-mana        = 18
-manao       = 18
-manaoio     = 17
-namespace   = "ॐ ँ"
-role        = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
-cacheable   = true
-retain      = true
-docs        = "lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
+cacheable = true
+docs      = "lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
+file-path = "bags/@lararium/v0.1/api/island-adaptor.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-adaptor"
 ```
 
 <<~ &#x0002; >>

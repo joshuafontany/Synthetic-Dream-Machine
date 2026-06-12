@@ -2,19 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 ```toml iam
-uri-path  = "ha.ka.ba/@sdm/v0.1/templates/components/tag"
+cacheable = true
 file-path = "bags/@sdm/v0.1/templates/components/tag.md"
-type      = "text/x-memetic-wikitext"
-
-tagspace  = "sdm"
-register  = "Synthesis-Canon"
+invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
 role      = "root template meme for component memes — an addressed facet a module #has (domain/function/hook/posture)"
+tagspace  = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/v0.1/templates/components/tag"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -24,12 +23,15 @@ role      = "root template meme for component memes — an addressed facet a mod
 # Template — Component
 
 <<~ ahu #intent >>
+
 ## Intent
 
 A component meme gives one facet — a domain, function, hook, or posture — an address, a readable caption, and a small contract for how it modifies any module that `#has` it. Modules carry components flat. Following a component reveals every module that shares it (the Jaquayed cross-section).
+
 <<~/ahu >>
 
 <<~ ahu #required-shape >>
+
 ## Required Shape
 
 ```text
@@ -58,12 +60,15 @@ meme: lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan
 ```
 
 Modules and cards tag with the **short** form. `<<tag-pill>>` reads the pointer's `caption` for the label and follows its `meme` field to open the full meme. Filters harvest `[tags[]prefix[@]]`.
+
 <<~/ahu >>
 
 <<~ ahu #promote-demote-law >>
+
 ## Promote / Demote Law
 
 A component earns its address by serving a filter query. Tags start as TOML header entries; promote to an addressed component meme only when a query demands the address. If a promoted component proves unused, **demote it back to a header tag and delete the meme** (Principle 6). Do not split too fine — `ecm-scan` not `ecm-scan-passive`/`ecm-scan-active` (the nano-service trap).
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

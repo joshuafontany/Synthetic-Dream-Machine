@@ -2,32 +2,32 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/graph/traversal"
-file-path = "bags/@lares/v0.1/docs/graph/traversal.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 17
-manaoio      = 17
-manao        = 17
-role         = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
-status-date  = "2026-04-24"
+file-path   = "bags/@lares/v0.1/docs/graph/traversal.md"
+mana        = 17
+manao       = 17
+manaoio     = 17
+register    = "Synthesis-Canon"
+role        = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
+status-date = "2026-04-24"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/traversal"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: current compiler walks no edges — it enumerates a static list, then scans a carrier index.
 ⏿ orient: three distinct graph planes require three distinct traversal tiers; collapsing them loses boot ordering guarantees.
 ◇ decide: Tier 0 declared-core as fast-path, Tier 1 control-edge DFS walk, Tier 2 one-hop relation expansion.
 ▶ act: specify each tier's algorithm, stopping condition, and artifact contribution.
 ↺ verify: Tier 0 and Tier 1 produce the same 14-locus set before any further walk proceeds; execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #graph-planes >>
+
 ## Graph Planes
 
 Pranala families form separate graph planes.
@@ -49,6 +49,7 @@ not a sub-graph inside the actor containment tree.
 <<~/ahu >>
 
 <<~ ahu #tier-0 >>
+
 ## Tier 0 — Declared Core (Fast Path)
 
 **Source:** control-family pranala edges with `role:owns` parsed directly from the entry carrier (AGENTS).
@@ -74,6 +75,7 @@ Discrepancies surface as `validation.declared_vs_walked` with three fields: `in_
 <<~/ahu >>
 
 <<~ ahu #tier-1 >>
+
 ## Tier 1 — Control Closure (Graph Walk)
 
 **Source:** pranala edges parsed from carrier text, family `control`, any lifecycle.
@@ -126,6 +128,7 @@ Walk(entry_uri):
 <<~/ahu >>
 
 <<~ ahu #tier-2 >>
+
 ## Tier 2 — Relation Expansion (One-Hop)
 
 **Source:** pranala edges parsed from carrier text, family `relation`, any lifecycle.
@@ -164,6 +167,7 @@ Recursive expansion belongs to a future graph query surface, not the boot compil
 <<~/ahu >>
 
 <<~ ahu #cycle-law >>
+
 ## Cycle Detection Law
 
 Every pranala edge MUST remain acyclic — directly and transitively — within its family.
@@ -188,6 +192,7 @@ The cycle path records every GRAY node from the current node back to the re-enco
 <<~/ahu >>
 
 <<~ ahu #forward-refs >>
+
 ## Declared-Unresolved Forward References
 
 Following TerminusDB's temporal model: forward references get asserted as `DeclaredUnresolved` records
@@ -208,6 +213,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 <<~/ahu >>
 
 <<~ ahu #phase-table >>
+
 ## Boot Phase → Graph Plane Assignment
 
 | Phase | Planes active | Families walked | Tier |
@@ -222,6 +228,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>

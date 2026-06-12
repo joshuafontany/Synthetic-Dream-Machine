@@ -2,20 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/system-invariants >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
-file-path   = "bags/@lares/v0.1/api/pono/system-invariants.md"
-type        = "text/x-memetic-wikitext"
-tagspace    = "stable"
-register    = "Synthesis-Canon"
-mana        = 19
-manao       = 19
-manaoio     = 19
-namespace   = "⊙"
-role        = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
-invariant   = true
-cacheable   = true
-hydrate     = true
-retain      = true
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/system-invariants.md"
+hydrate   = true
+invariant = true
+mana      = 19
+manao     = 19
+manaoio   = 19
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

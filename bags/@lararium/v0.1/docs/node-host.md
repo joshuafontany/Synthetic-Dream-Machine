@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/node-host >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/node-host"
-file-path = "bags/@lararium/v0.1/docs/node-host.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/docs/node-host.md"
 mana          = 17
 manao         = 17
 manaoio       = 16
-tagspace      = "stable"
-role          = "lararium-node host: lares/ walker, meme graph loader, interface URI bootstrap list"
-cacheable     = true
+register      = "Synthesis-Canon"
 retain        = true
-status-date   = "2026-04-30"
+role          = "lararium-node host: lares/ walker, meme graph loader, interface URI bootstrap list"
 source-symbol = "*"
+status-date   = "2026-04-30"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/node-host"
 ```
-
-
 
 <<~ ahu #head >>
 

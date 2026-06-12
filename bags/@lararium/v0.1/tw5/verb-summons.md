@@ -2,17 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-summons >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/verb-summons"
-file-path    = "bags/@lararium/v0.1/tw5/verb-summons.md"
-source-file  = "packages/lararium-tw5/src/verb-summons.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 12
-role         = "the summons relay — CRDT verb-summons tiddler (@admin/summons/<id>) → volatile local invocation; edge transport, not durable coordination"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/verb-summons.md"
+mana        = 12
+register    = "Synthesis"
+retain      = true
+role        = "the summons relay — CRDT verb-summons tiddler (@admin/summons/<id>) → volatile local invocation; edge transport, not durable coordination"
+source-file = "packages/lararium-tw5/src/verb-summons.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/verb-summons"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>

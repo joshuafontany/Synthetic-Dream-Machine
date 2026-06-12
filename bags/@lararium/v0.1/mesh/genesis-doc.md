@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/genesis-doc"
-file-path    = "bags/@lararium/v0.1/mesh/genesis-doc.md"
-source-file  = "packages/lararium-mesh/src/genesis-doc.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "Platform-neutral genesis island builder: GenesisInputs → GenesisArtifact. No filesystem, no DOM."
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/genesis-doc.md"
+mana        = 18
+manao       = 18
+manaoio     = 17
+register    = "Synthesis"
+retain      = true
+role        = "Platform-neutral genesis island builder: GenesisInputs → GenesisArtifact. No filesystem, no DOM."
+source-file = "packages/lararium-mesh/src/genesis-doc.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/genesis-doc"
 ```
 
 <<~ &#x0002; >>

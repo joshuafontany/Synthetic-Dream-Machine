@@ -2,22 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/invariant"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/invariant.md"
-type = "text/x-memetic-wikitext"
-register = "SC"
-manaoio = 10
-mana = 10
-manao = 10
-namespace    = "⊙" #pono
-role = "invariant law and cache-stable pressure surface"
-cacheable=true
-retain = true
-# Template note: memes that implement an invariant pattern SHOULD
-# implement = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+mana      = 10
+manao     = 10
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "SC"
+retain    = true
+role      = "invariant law and cache-stable pressure surface"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/invariant"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -103,6 +99,7 @@ Invariant-compliant memes MUST fill the OODA-HA phase line with their own pressu
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

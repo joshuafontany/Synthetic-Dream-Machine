@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/toml >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/toml"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/toml.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: toml — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a022"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/toml.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: toml — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "TomlWidget"
-body-sha256 = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a022"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/toml"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function TomlWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

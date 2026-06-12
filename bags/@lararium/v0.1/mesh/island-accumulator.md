@@ -2,21 +2,24 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-accumulator >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/island-accumulator"
-file-path    = "bags/@lararium/v0.1/mesh/island-accumulator.md"
-source-file  = "packages/lararium-mesh/src/island-accumulator.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Provisional"
-mana         = 3
-role         = "self-documentation: TODO describe island-accumulator.ts"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/mesh/island-accumulator.md"
+mana        = 3
+register    = "Provisional"
+retain      = true
+role        = "self-documentation: TODO describe island-accumulator.ts"
+source-file = "packages/lararium-mesh/src/island-accumulator.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/island-accumulator"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
+
 TODO: describe the load-bearing surface this file owns.
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,19 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/local-first"
+cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/local-first.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
+invariant   = true
 mana        = 18
 manao       = 18
 manaoio     = 17
-tagspace    = "stable"
-role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
-cacheable   = true
+namespace   = "&#x2299;"
+register    = "Synthesis-Canon"
 retain      = true
-invariant   = true
+role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
 status-date = "2026-05-02"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/local-first"
 ```
 
 <<~ &#x0002; >>

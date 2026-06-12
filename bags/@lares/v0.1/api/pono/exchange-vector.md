@@ -2,25 +2,24 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/exchange-vector"
-file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 14
-mana = 16
-manao = 16
-namespace = "ॐ ँ"
-role = "invariant law for canonical lar URI exchange vectors and HUD emission order"
 cacheable = true
-retain = true
+file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
 invariant = true
+mana      = 16
+manao     = 16
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant law for canonical lar URI exchange vectors and HUD emission order"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/exchange-vector"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
 <<~ ahu #head >>
+
 # Exchange Vector Law
 
 Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearing vector** that reads operator intent on the left and delegates `->` to the role the node adopts on the right. The turn closes on a `yield` vector. Full frame law: `lar:///ha.ka.ba/@lares/v0.1/api/lares/hud#panel-law`.
@@ -28,11 +27,13 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` **bearin
 <<~/ahu >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ read operator intent as a bearing vector.
 ⏿ choose the role the node adopts and the bearing it takes up.
 ◇ open the turn with one `aim` vector: operator intent `->` adopted role.
 ▶ ride the `hud` · `ward` panel beneath the aim, then generate content.
 ↺ verify the three-term attitude root, the single `@`-bag segment, and ASCII path form; close on a `yield` vector --- the bearing the turn resolved toward, then `-> ?`.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
@@ -80,6 +81,7 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/lar-uri >>
@@ -91,6 +93,7 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

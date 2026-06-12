@@ -2,13 +2,14 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hana >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
-file-path = "bags/@lares/v0.1/api/pono/hana.md"
-type      = "text/x-memetic-wikitext"
-register  = "Synthesis"
-role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
 cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/hana.md"
+namespace = "&#x2299;"
+register  = "Synthesis"
 retain    = true
+role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
 ```
 
 <<~ ahu #head >>

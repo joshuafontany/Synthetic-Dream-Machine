@@ -2,17 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/prism >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/prism"
-file-path = "bags/@lares/v0.1/api/pono/prism.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 15
-mana = 16
-manao = 16
-namespace = "ॐ ँ"
-role = "the lens-harness --- references existing content and refracts it through declared lenses into composed readings"
 cacheable = true
-retain = true
+file-path = "bags/@lares/v0.1/api/pono/prism.md"
+mana      = 16
+manao     = 16
+manaoio   = 15
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the lens-harness --- references existing content and refracts it through declared lenses into composed readings"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/prism"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -113,6 +113,7 @@ Prism keeps the worthwhile half --- *reference a piece of content and read its s
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/handoff >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/handoff"
+cacheable = true
 file-path = "bags/@lares/v0.1/docs/lares/handoff.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
-manaoio   = 11
+hydrate   = true
 mana      = 12
 manao     = 12
-role      = "live handoff — context + intent vectors for the next Lares instance; updated at each phase boundary, never archived in place"
-written   = "2026-06-11"
-cacheable = true
-hydrate   = true
+manaoio   = 11
+register  = "Synthesis"
 retain    = true
+role      = "live handoff — context + intent vectors for the next Lares instance; updated at each phase boundary, never archived in place"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/handoff"
+written   = "2026-06-11"
 ```
 
 <<~ aka RFC-2119 normative-language: MUST, MUST NOT, SHOULD, MAY carry IETF semantics. >>
@@ -104,7 +104,7 @@ Research-backed direction (#pattern-integrities §3): **resolve transitively at 
 The live hearth (re-genesis'd dev root `packages/lararium-node`, operator-blessed — the old genesis predated @admin and could not boot) ate the corpus whole: **1,464 records from 189 carriers, one change-id family**; the co-projection wrote 187 files under `LAR_ROOT/bags/@lares/v0.1`. Deep diff vs source, every file classified: 34 iam-only · 139 +margins · 14 normalize-toward-law (STX/ETX inserted per glyph-ward; same set the corpus sweep named — the live pipeline added ZERO new drift; the origin-bag deny held through Automerge) · **0 orphans, count math exact**. Three findings only the live feed could surface — two FIXED same day (pono corrections): (a) `the-lares-protocols.md` + `infrastructure-as-myth.md` authored pre-@lares SOH URIs and projected nowhere — re-addressed to their iam-true `@lares/v0.1` seats; (b) `sigil-shape-motion.md` authored `api/pono/…` against three witnesses (iam uri-path, file-path, location) — SOH re-seated to `docs/pono/…`; (c) **OPEN — the root fork:** the disk co-projection lands under LAR_ROOT; rooting the vessel at the REPO (`LAR_ROOT=<repo>`) would make the corpus itself the mirror surface and git the witness — the model the doctrine implies. The 2026-06-11 feed ran on the re-genesis'd dev root and its projection output got cleaned as noise; the NEXT feed should land on the operator-chosen root.
 `tests/e2e/corpus-feed.test.ts` proves the shape repeatably: the whole 189-carrier corpus rides ONE directory-batch LOAD into a staged vessel — F1 the batch ACKs (the CLI's flat 10s verb timeout died at scale; the ACK budget now scales with carrier count, act.ts) · F2 group routing at scale: one file per carrier root, ZERO fragment files, count parity · F3 content-whole projection · F4 **live-pipeline idempotence** (re-feeding a projection leaves it byte-stable). The live hearth feed = `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares` — expect a one-time normalize-once diff wave (~360 files, framing only: margins, iam order, missing STX/ETX inserted) for the operator's review; zero content loss (corpus-sweep proven).
 
-**Burrs, non-blocking:** content-hash echo suppression upgrade (§2) · tombstone/whiteout verb reserved (§3) · Automerge history growth → DXOS-epoch pattern watched (§1) · remaining `lares wiki` subcommands print human-only · `wiki open` selects-for-next-boot only.
+**Burrs, non-blocking:** content-hash echo suppression upgrade (§2) · tombstone/whiteout verb reserved (§3) · Automerge history growth → DXOS-epoch pattern watched (§1) · remaining `lares wiki` subcommands print human-only · `wiki open` selects-for-next-boot only · **pin Unicode NFC in the memetic-wikitext spec, not code** (work-lab dragon-list; corpus runs thick with ʻokina/candrabindu/ॐ — untested) · atomic temp-file+rename writes (named §2, unimplemented) · CRLF/BOM boundary policy untested (matters at the Nexus rung) · iam resurrections ruled: type verbatim, namespace Unicode-escaped, created preserved (deny-set = machine stamps only; resurrections: type · namespace as &#x____; entity codes · created · source-file (71 doc memes) · tags (23)) · engine-swap wants a fresh store (genesis reconcile answered current against a stale engine — epoch-design finding) · **vessel RESTART on a fed store fails (openAdminVm ea timeout) — fresh stores boot, reboots do not; restart-recovery bug, blocking for any long-lived hearth**.
 
 <<~/ahu >>
 

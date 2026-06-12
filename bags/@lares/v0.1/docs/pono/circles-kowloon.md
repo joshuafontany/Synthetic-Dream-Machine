@@ -2,14 +2,14 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon"
-file-path = "bags/@lares/v0.1/docs/pono/circles-kowloon.md"
-type      = "text/x-memetic-wikitext"
-register  = "SC"
-mana      = 16
-role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
 cacheable = true
+file-path = "bags/@lares/v0.1/docs/pono/circles-kowloon.md"
+mana      = 16
+register  = "SC"
 retain    = true
+role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for CirclesDoc"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

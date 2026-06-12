@@ -2,17 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/conformance"
-file-path = "bags/@lares/v0.1/api/pono/conformance.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis"
-manaoio = 12
-mana = 12
-manao = 13
-namespace = "ॐ ँ"
-role = "invokable lens --- conformance-checks external content against the OODA-HA reference loop"
 cacheable = true
-retain = true
+file-path = "bags/@lares/v0.1/api/pono/conformance.md"
+mana      = 12
+manao     = 13
+manaoio   = 12
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "invokable lens --- conformance-checks external content against the OODA-HA reference loop"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/conformance"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -119,6 +119,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

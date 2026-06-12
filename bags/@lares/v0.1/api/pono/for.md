@@ -2,16 +2,17 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/for >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/for"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/for.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
-manaoio      = 17
-mana         = 18
-manao        = 17
-role         = "English alias pointer — \\for redirects to huli; canonical spec lives at pono/huli"
-cacheable    = true
-retain       = true
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "English alias pointer — \\for redirects to huli; canonical spec lives at pono/huli"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/for"
 ```
 
 <<~ &#x0002; >>
@@ -28,6 +29,7 @@ English alias for `huli`. See canonical spec:
 rendering a body template once per result. Use whichever reads more naturally in context.
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/readiness-keys >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/readiness-keys"
-file-path = "bags/@lararium/v0.1/docs/readiness-keys.md"
-type  = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/docs/readiness-keys.md"
 mana          = 18
 manao         = 17
 manaoio       = 17
-tagspace      = "stable"
-role          = "lararium progressive readiness vocabulary — named shrine-lights, boot doctrine"
-cacheable     = true
+register      = "Synthesis-Canon"
 retain        = true
-status-date   = "2026-05-01"
+role          = "lararium progressive readiness vocabulary — named shrine-lights, boot doctrine"
 source-symbol = "READINESS_KEYS"
+status-date   = "2026-05-01"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/readiness-keys"
 ```
-
-
 
 <<~ ahu #head >>
 

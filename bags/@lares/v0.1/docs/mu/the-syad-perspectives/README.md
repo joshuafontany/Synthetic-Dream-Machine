@@ -2,20 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives/README >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives/README"
-file-path = "bags/@lares/v0.1/docs/mu/the-syad-perspectives/README.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 17
-mana = 16
-manao = 17
-role = "extracted syad source shelf, archive-consumed derivation store, register-metaphysics provenance locus"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/mu/the-syad-perspectives/README.md"
+mana      = 16
+manao     = 17
+manaoio   = 17
+register  = "Synthesis"
+retain    = false
+role      = "extracted syad source shelf, archive-consumed derivation store, register-metaphysics provenance locus"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives/README"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -191,6 +189,7 @@ They do not govern the live fold.
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

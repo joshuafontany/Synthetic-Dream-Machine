@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind"
+cacheable = true
 file-path = "bags/@lares/v0.1/docs/pono/sigil-kind.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-manaoio   = 17
 mana      = 18
 manao     = 18
-role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
-cacheable = true
+manaoio   = 17
+register  = "Synthesis-Canon"
 retain    = true
+role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind"
 ```
 
 <<~ &#x0002; >>
@@ -124,14 +124,14 @@ Appears near the document top, declaring the canonical address of this carrier. 
 
 `hana` carries `lar-kind: guest-grammar`. It produces a compound block whose body contains foreign grammar selected by a grammar key in the priming TOML payload.
 
-```text
+````text
 <<~ hana #work >>
 ```toml
 grammar = "wikitext-filter"
 ```
 [tag[active]] [sort[title]]
 <<~/hana >>
-```
+````
 
 The body does not parse as TW5 wikitext — it delegates to the interpreter registered for the declared grammar key. In the live TW5 VM, full native filter access renders `hana` unnecessary for simple filter work. `hana` holds its place for:
 - Verse scripting (when a Verse grammar key lands)
@@ -199,4 +199,5 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

@@ -2,27 +2,31 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga"
-file-path    = "bags/@lares/v0.1/api/pono/automerge-tiga.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 19
-manao        = 19
-manaoio      = 18
-role         = "invariant: six base docs in two tigas — content plane (ha/ka/ba) + social plane (identities/groups/sessions)"
-tagspace     = "stable"
-cacheable    = true
-retain       = true
-invariant    = true
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/automerge-tiga.md"
+invariant = true
+mana      = 19
+manao     = 19
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant: six base docs in two tigas — content plane (ha/ka/ba) + social plane (identities/groups/sessions)"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #ooda-ha >>
+
 ✶ observe that the doc stack has grown to six root Automerge docs in two parallel planes: the content Tiga (ha/ka/ba) and the social Tiga (identities/groups/sessions). Six roots. Two triangles. One oracle chain through ha.
 ⏿ orient around Bucky Fuller's structural law: the triangle forms the minimal stable geometry. Two triangles sharing a common root (ha) form a stable double-plane. Content plane carries SDM forces (structure/fire/personality). Social plane = identity primitives (who/collective/live-session).
 ◇ decide that both tigas are canonical and load-bearing: the content Tiga names are ha/ka/ba; the social plane docs carry no SDM force names — function names them (identities, groups, sessions). Ha holds oracle tiddlers for all five non-ha docs.
 ▶ lock the six-root model as invariant: any peer that opens ha can discover all five siblings by walking LarariumDoc oracle tiddlers. No vertex carries upward pointers. Reachability flows downward from ha.
 ↺ assess: the model holds when every deploy has exactly six root docs and LarariumDoc.tiddlers confirms all five are reachable (CATALOG, LARES, IDENTITIES, GROUPS, SESSIONS); residue: room docs and corpus docs function as non-root docs — they hang from ka as leaves. Corpus child-docs now sit at pos-2 under @catalog (M22 remapping). Keyhive will eventually treat the six-root set as the root group boundary.
+
 <<~/ahu >>
 
 <<~ ahu #tiga-law >>

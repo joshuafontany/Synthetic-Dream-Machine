@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
-file-path = "bags/@lares/v0.1/docs/lares/voices/masks-tree-plan.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis"
-manaoio = 16
-mana = 16
-manao = 17
-role = "OODA-HA plan for creating the v0.1/api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 cacheable = false
-retain = false
-created = "2026-04-23"
+created   = "2026-04-23"
+file-path = "bags/@lares/v0.1/docs/lares/voices/masks-tree-plan.md"
+mana      = 16
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "OODA-HA plan for creating the v0.1/api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -264,6 +262,7 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

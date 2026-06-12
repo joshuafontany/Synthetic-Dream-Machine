@@ -2,21 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/federated-causal-islands.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 17
-manao        = 16
-role         = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
-cacheable    = true
-retain       = true
-invariant    = true
+invariant = true
+mana      = 17
+manao     = 16
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
 ```
-
-
 
 <<~ ahu #head >>
 

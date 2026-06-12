@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider"
-file-path    = "bags/@lararium/v0.1/keyhive/keyhive-provider.md"
-source-file  = "packages/lararium-keyhive/src/keyhive-provider.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 16
-manaoio      = 15
-role         = "isomorphic keyhive ceremony provider: founding, device-admit, and apply-admit functions; three-gate identity lattice"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/keyhive/keyhive-provider.md"
+mana        = 17
+manao       = 16
+manaoio     = 15
+register    = "Synthesis-Canon"
+retain      = true
+role        = "isomorphic keyhive ceremony provider: founding, device-admit, and apply-admit functions; three-gate identity lattice"
+source-file = "packages/lararium-keyhive/src/keyhive-provider.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider"
 ```
 
 <<~ &#x0002; >>

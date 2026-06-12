@@ -2,16 +2,16 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/lists/components >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lararium/lists/components"
+cacheable = true
 file-path = "bags/@lararium/lists/components.md"
-type      = "text/vnd.tiddlywiki"
-register  = "Synthesis"
 mana      = 13
 manao     = 16
-role      = "TW5 procedure: render every @-bag tag on the current tiddler as a clickable tag-pill"
-cacheable = true
+register  = "Synthesis"
 retain    = true
+role      = "TW5 procedure: render every @-bag tag on the current tiddler as a clickable tag-pill"
 tags      = ["$:/tags/Global"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/lists/components"
 ```
 
 <<~ &#x0002; >>

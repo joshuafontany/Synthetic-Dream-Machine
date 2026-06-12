@@ -2,21 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/orichalcum-capabilities.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-manaoio      = 16
-mana         = 16
-manao        = 16
-role         = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for wiki islands, edge islands, and canon MOVE"
-cacheable    = true
-retain       = true
-invariant    = true
+invariant = true
+mana      = 16
+manao     = 16
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for wiki islands, edge islands, and canon MOVE"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
 ```
-
-
 
 <<~ ahu #head >>
 

@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/widget >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/widget"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/widget.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
-manaoio      = 17
-mana         = 17
-manao        = 17
-role         = "\\widget pragma-alias sigil — declares a named ~widget callable via the ~ dispatcher; operator extension point"
-cacheable    = true
-retain       = true
+mana      = 17
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "\\widget pragma-alias sigil — declares a named ~widget callable via the ~ dispatcher; operator extension point"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/widget"
 ```
-
-
 
 <<~ ahu #head >>
 

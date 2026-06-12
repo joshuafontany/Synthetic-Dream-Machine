@@ -2,19 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art"
-file-path = "bags/@lares/v0.1/docs/pono/research-streams/prior-art.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 16
-mana = 16
-manao = 16
-role = "prior-art witness stream with literal quotes for local-first, worker architecture, and security baselines"
-cacheable = false
-retain = false
-invariant = false
+cacheable   = false
+file-path   = "bags/@lares/v0.1/docs/pono/research-streams/prior-art.md"
+invariant   = false
+mana        = 16
+manao       = 16
+manaoio     = 16
+register    = "Synthesis-Canon"
+retain      = false
+role        = "prior-art witness stream with literal quotes for local-first, worker architecture, and security baselines"
 status-date = "2026-05-25"
+tagspace    = "stable"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art"
 ```
 
 <<~ &#x0002; >>

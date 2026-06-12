@@ -2,21 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace >>
 ```toml iam
-uri-path      = "ha.ka.ba/@lararium/v0.1/api/sync-namespace"
+cacheable     = true
 file-path     = "bags/@lararium/v0.1/api/sync-namespace.md"
-type          = "text/x-memetic-wikitext"
-tagspace      = "stable"
-register      = "Synthesis"
-manaoio       = 15
+hydrate       = true
 mana          = 17
 manao         = 17
-namespace     = "ॐ ँ"
+manaoio       = 15
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis"
+retain        = true
+revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
 role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
 status        = "draft"
-revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
-cacheable     = true
-hydrate       = true
-retain        = true
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/api/sync-namespace"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

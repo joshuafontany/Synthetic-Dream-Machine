@@ -1,20 +1,20 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
-file-path    = "bags/@lares/v0.1/api/pono/memetic-wikitext.md"
-type         = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "SC"
-status       = "submission-draft"
-mana         = 19
-manao        = 19
-role         = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submission to the lar: URI spec."
-cacheable    = true
-retain       = true
-invariant    = false
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext.md"
+invariant = false
+mana      = 19
+manao     = 19
+namespace = "&#x2299;"
+register  = "SC"
+retain    = true
+role      = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submission to the lar: URI spec."
+status    = "submission-draft"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

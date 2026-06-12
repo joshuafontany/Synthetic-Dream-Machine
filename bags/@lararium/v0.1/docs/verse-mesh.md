@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
-file-path   = "bags/@lararium/v0.1/docs/verse-mesh.md"
-type        = "text/vnd.tiddlywiki"
-register    = "DS"
-mana        = 18
-manao       = 18
-manaoio     = 17
-role        = "design narrative for the Verse polychronous CRDT mesh — peer model, VM pool, camera model, accumulator wiring"
-cacheable   = true
-retain      = true
-docs        = "lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
+cacheable = true
+docs      = "lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
+file-path = "bags/@lararium/v0.1/docs/verse-mesh.md"
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "DS"
+retain    = true
+role      = "design narrative for the Verse polychronous CRDT mesh — peer model, VM pool, camera model, accumulator wiring"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
 ```
 
 <<~ &#x0002; >>

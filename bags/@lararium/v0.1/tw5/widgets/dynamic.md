@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic"
-file-path = "bags/@lararium/v0.1/tw5/widgets/dynamic.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: DynamicWidget — heleuma ka"
-heleuma       = "ka"
-source-symbol = "DynamicWidget"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic"
-body-sha256 = "f215c3518f1c876508cedb636c7dd2f34acd16a538248a7a28c03ed894f3e4ee"
+body-sha256   = "f215c3518f1c876508cedb636c7dd2f34acd16a538248a7a28c03ed894f3e4ee"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/widgets/dynamic.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: DynamicWidget — heleuma ka"
+source-symbol = "DynamicWidget"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic"
 ```
 
 <<~ &#x0002; >>

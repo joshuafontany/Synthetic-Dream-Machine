@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/browser/pono-charter"
-file-path    = "bags/@lararium/v0.1/browser/pono-charter.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 19
-manao        = 18
-manaoio      = 18
-role         = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/browser/pono-charter.md"
+mana      = 19
+manao     = 18
+manaoio   = 18
+register  = "Synthesis"
+retain    = true
+role      = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/browser/pono-charter"
 ```
 
 <<~ &#x0002; >>

@@ -2,23 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/corpus-sources >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/docs/corpus-sources"
-file-path = "bags/@lararium/v0.1/docs/corpus-sources.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-tagspace     = "stable"
-role         = "invariant registry: all corpus bag targets in the monorepo; each maps to one Automerge doc"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date  = "2026-04-30"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/docs/corpus-sources.md"
+invariant     = true
+mana          = 18
+manao         = 18
+manaoio       = 17
+register      = "Synthesis-Canon"
+retain        = true
+role          = "invariant registry: all corpus bag targets in the monorepo; each maps to one Automerge doc"
 source-symbol = "CORPUS_SOURCES"
+status-date   = "2026-04-30"
+tagspace      = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/docs/corpus-sources"
 ```
-
-
 
 <<~ ahu #head >>
 

@@ -12,21 +12,20 @@ description: File or reopen a hoike (\testimony) — a kept record of a conteste
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL >>
-
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/hoike/SKILL.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
-status    = "draft"
+invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16
-role      = "practice face of hoike — triggers, the five steps, three worked examples; law lives at the parent meme"
-cacheable = true
+register  = "Synthesis-Canon"
 retain    = true
-invariant = false
+role      = "practice face of hoike — triggers, the five steps, three worked examples; law lives at the parent meme"
+status    = "draft"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL"
 ```
 
 <<~ &#x0002; >>

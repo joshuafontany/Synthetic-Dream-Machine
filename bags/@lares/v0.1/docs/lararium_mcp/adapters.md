@@ -2,38 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/adapters.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 16
-manaoio      = 15
-manao        = 17
-role         = "canonical submodule adapter and sidecar integration contract for Lararium MCP"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/SUBMODULE_ADAPTER_INTERFACE.md",
-  "packages/lares-core/memes/docs/mcp/SUBMODULE_INTEGRATION_MATRIX.md",
-  "packages/lares-core/memes/docs/mcp/mempalace.md",
-  "packages/lares-core/memes/docs/mcp/subtasks/MCP-SUBTASK-007_MEMPALACE_LANE.md"
-]
-status-date  = "2026-04-23"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/adapters.md"
+mana            = 16
+manao           = 17
+manaoio         = 15
+register        = "Synthesis-Canon"
+role            = "canonical submodule adapter and sidecar integration contract for Lararium MCP"
+source-consumes = ["packages/lares-core/memes/docs/mcp/SUBMODULE_ADAPTER_INTERFACE.md", "packages/lares-core/memes/docs/mcp/SUBMODULE_INTEGRATION_MATRIX.md", "packages/lares-core/memes/docs/mcp/mempalace.md", "packages/lares-core/memes/docs/mcp/subtasks/MCP-SUBTASK-007_MEMPALACE_LANE.md"]
+status-date     = "2026-04-23"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: every submodule needs a named lane, but direct imports would couple source truths too tightly.
 ⏿ orient: adapters should translate resources/tools/prompts while preserving sidecar autonomy.
 ◇ decide: v1 adapters stay read-only and namespace-scoped; MemPalace demonstrates stdio JSON-RPC sidecar transport.
 ▶ act: preserve the interface, registry, lane map, and Mempalace operational boundary here.
 ↺ verify: unsupported writes remain explicit post-v1 residue; adapt: when submodule health fails, the main server should keep running with that namespace absent.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #adapter-interface >>
+
 ## Adapter Interface Contract
 
 Every adapter exposes this surface:
@@ -62,6 +57,7 @@ V1 constraints:
 <<~/ahu >>
 
 <<~ ahu #namespaces >>
+
 ## Adapter Namespaces
 
 | Adapter | Resource URI prefix | Tool prefix |
@@ -78,6 +74,7 @@ The earlier dotted tool-prefix draft has yielded to the dash convention used by 
 <<~/ahu >>
 
 <<~ ahu #submodule-lanes >>
+
 ## Current Submodule Lanes
 
 | Submodule | Pin | Core reading | Near-term lanes |
@@ -94,6 +91,7 @@ All current submodules count as core pieces of the MCP program, though not all e
 <<~/ahu >>
 
 <<~ ahu #mempalace-sidecar >>
+
 ## MemPalace Sidecar Contract
 
 Lares talks to MemPalace across the MCP protocol boundary rather than importing MemPalace Python modules.
@@ -133,6 +131,7 @@ Implementation landed as `lares/lararium_mcp/adapters/mempalace.py` with mocked 
 <<~/ahu >>
 
 <<~ ahu #registry >>
+
 ## Adapter Registry
 
 Server start should build a registry of healthy adapters:
@@ -148,6 +147,7 @@ This keeps core hydration available when a sidecar or submodule breaks.
 <<~/ahu >>
 
 <<~ ahu #post-v1-writes >>
+
 ## Post-v1 Write Gates
 
 The following remain blocked until explicit policy lands:
@@ -161,6 +161,7 @@ The following remain blocked until explicit policy lands:
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine >>
@@ -169,6 +170,7 @@ The following remain blocked until explicit policy lands:
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

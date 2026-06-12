@@ -2,22 +2,20 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/lar-uri.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-manaoio = 17
-mana = 18
-manao = 17
-namespace = "ॐ ँ"
-role = "submission-grade specification for the lar: URI scheme — abstract, ABNF, resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
-status = "submission-draft"
-cacheable=true
-retain = true
-grammar = true
+grammar   = true
+mana      = 18
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
+status    = "submission-draft"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 

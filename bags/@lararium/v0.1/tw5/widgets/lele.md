@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/lele >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/lele"
-file-path = "bags/@lararium/v0.1/tw5/widgets/lele.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: LeleWidget — heleuma ka"
-heleuma       = "ka"
-source-symbol = "LeleWidget"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/lele"
-body-sha256 = "c8ea0534b4b3f0a660ee5eadfc0144d3f1555b3944e645bbfb17e504f3ad9970"
+body-sha256   = "c8ea0534b4b3f0a660ee5eadfc0144d3f1555b3944e645bbfb17e504f3ad9970"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/widgets/lele.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/lele"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: LeleWidget — heleuma ka"
+source-symbol = "LeleWidget"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/lele"
 ```
 
 <<~ &#x0002; >>

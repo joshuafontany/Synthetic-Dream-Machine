@@ -2,40 +2,33 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render"
-file-path = "bags/@lares/v0.1/docs/lararium_mcp/ast-execution-render.md"
-type = "text/x-memetic-wikitext"
-tagspace     = "stable"
-register     = "Synthesis-Canon"
-mana         = 16
-manaoio      = 15
-manao        = 17
-role         = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
-source-consumes = [
-  "packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md",
-  "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md",
-  "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md",
-  "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md",
-  "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md",
-  "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"
-]
-status-date  = "2026-04-23"
+file-path       = "bags/@lares/v0.1/docs/lararium_mcp/ast-execution-render.md"
+mana            = 16
+manao           = 17
+manaoio         = 15
+register        = "Synthesis-Canon"
+role            = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
+source-consumes = ["packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md", "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md", "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md", "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md", "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md", "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"]
+status-date     = "2026-04-23"
+tagspace        = "stable"
+type            = "text/x-memetic-wikitext"
+uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render"
 ```
 
-
-
-
 <<~ ahu #ooda-ha >>
+
 ✶ observe: the design stack separates identity, AST, execution, render, and inspection planes.
 ⏿ orient: TiddlyWiki grammar can inform guest syntax without taking over carrier law.
 ◇ decide: keep one envelope with explicit node families, graph-plane routing, and projection payloads.
 ▶ act: collapse AST, TW mapping, pranala alignment, execution, and render contracts into this locus.
 ↺ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape; adapt: executable resources stay future-facing until parser and graph implementations land.
+
 <<~/ahu >>
 
 <<~ &#x0002; >>
 
 <<~ ahu #stack >>
+
 ## Four-Layer Stack
 
 | Plane | Responsibility |
@@ -51,6 +44,7 @@ Identity sits above the AST; carriers must validate before syntax lowers.
 <<~/ahu >>
 
 <<~ ahu #scope-phase-resolution >>
+
 ## TW5 ↔ Verse Type Tension — Resolution
 
 TW5's string-typed store (`Record<string,string>`) and Verse's strong types resolve through the OODA-HA loop. They never conflicted — they occupy different phases of one pipeline.
@@ -76,6 +70,7 @@ TW5's string-typed store (`Record<string,string>`) and Verse's strong types reso
 <<~/ahu >>
 
 <<~ ahu #ast-node-schema >>
+
 ## AST Node Schema
 
 Core fields:
@@ -96,6 +91,7 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 <<~/ahu >>
 
 <<~ ahu #primitive-map >>
+
 ## Primitive-to-Node Map
 
 | Primitive | AST node family | Execution hint |
@@ -113,6 +109,7 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 <<~/ahu >>
 
 <<~ ahu #tiddlywiki-boundary >>
+
 ## TiddlyWiki Filter Boundary
 
 The v1 direct-import surface admits TiddlyWiki filter language as a guest grammar, not as host law.
@@ -138,6 +135,7 @@ Excluded from v1:
 <<~/ahu >>
 
 <<~ ahu #pranala-planes >>
+
 ## Pranala Graph-Plane Alignment
 
 | Family | Primary plane | Compiler action |
@@ -156,6 +154,7 @@ Every family remains acyclic, except symmetric relation pairs may appear as two 
 <<~/ahu >>
 
 <<~ ahu #execution-graph >>
+
 ## Execution Graph Contract
 
 Execution nodes derive from validated AST and identity metadata.
@@ -179,6 +178,7 @@ Owned hierarchy follows control edges; parents resolve before owned children, an
 <<~/ahu >>
 
 <<~ ahu #render-projection >>
+
 ## Render Projection Contract
 
 Render projections transform execution/AST facts into target payloads without mutating source truth.
@@ -196,6 +196,7 @@ The v1 posture stays read-only; write-back to tldraw, Kowloon, or DOM remains bl
 <<~/ahu >>
 
 <<~ ahu #mcp-exposure >>
+
 ## MCP Exposure Targets
 
 Future resources may include:
@@ -210,6 +211,7 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 <<~/ahu >>
 
 <<~ ahu #residue >>
+
 ## Residue
 
 - Parser implementation has not yet landed.
@@ -220,6 +222,7 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law >>
@@ -229,6 +232,7 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

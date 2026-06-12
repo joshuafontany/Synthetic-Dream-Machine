@@ -2,22 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec"
-file-path = "bags/@lararium/v0.1/tw5/schema/projection-codec.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-tagspace     = "invariant"
-role         = "invariant law: carrier-codec as projection layer; import and export paths between disk carrier format and canonical LarTiddlerRecord entries"
-cacheable    = true
-retain       = true
-invariant    = true
-status-date  = "2026-04-30"
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/schema/projection-codec.md"
+invariant   = true
+mana        = 18
+manao       = 18
+manaoio     = 17
+register    = "Synthesis-Canon"
+retain      = true
+role        = "invariant law: carrier-codec as projection layer; import and export paths between disk carrier format and canonical LarTiddlerRecord entries"
+status-date = "2026-04-30"
+tagspace    = "invariant"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec"
 ```
-
-
 
 <<~ ahu #head >>
 

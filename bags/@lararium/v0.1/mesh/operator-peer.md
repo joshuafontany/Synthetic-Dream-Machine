@@ -2,18 +2,18 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/operator-peer"
-file-path    = "bags/@lararium/v0.1/mesh/operator-peer.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 19
-manao        = 19
-manaoio      = 18
-role         = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
-hydrate      = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/operator-peer.md"
+hydrate   = true
+mana      = 19
+manao     = 19
+manaoio   = 18
+register  = "Synthesis"
+retain    = true
+role      = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/operator-peer"
 ```
 
 <<~ &#x0002; >>

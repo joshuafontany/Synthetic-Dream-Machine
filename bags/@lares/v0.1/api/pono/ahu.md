@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/ahu"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/ahu.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 18
-mana         = 18
-manao        = 18
-role         = "child-slot sigil — addressable worksite scope boundary; named ahu slots form the meme's tiddler structure"
-cacheable    = true
-retain       = true
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "child-slot sigil — addressable worksite scope boundary; named ahu slots form the meme's tiddler structure"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ahu"
 ```
-
-
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
 
@@ -116,6 +115,7 @@ slot = 1
 <<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:relation >>
 
 <<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

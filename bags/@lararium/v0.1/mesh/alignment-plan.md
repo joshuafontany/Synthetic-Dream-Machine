@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/alignment-plan >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/mesh/alignment-plan"
-file-path    = "bags/@lararium/v0.1/mesh/alignment-plan.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 19
-manao        = 18
-manaoio      = 18
-role         = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/mesh/alignment-plan.md"
+mana      = 19
+manao     = 18
+manaoio   = 18
+register  = "Synthesis"
+retain    = true
+role      = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/alignment-plan"
 ```
 
 <<~ &#x0002; >>

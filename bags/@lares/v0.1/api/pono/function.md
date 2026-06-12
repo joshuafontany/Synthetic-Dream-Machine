@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/function >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/pono/function"
+cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/function.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis"
-manaoio      = 17
-mana         = 17
-manao        = 17
-role         = "\\function pragma-alias sigil — declares a named TW5 filter function (TW5 5.3+); leaf-only"
-cacheable    = true
-retain       = true
+mana      = 17
+manao     = 17
+manaoio   = 17
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "\\function pragma-alias sigil — declares a named TW5 filter function (TW5 5.3+); leaf-only"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/function"
 ```
-
-
 
 <<~ ahu #head >>
 

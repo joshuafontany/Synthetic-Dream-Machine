@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/engine-watch >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lararium/v0.1/tw5/engine-watch"
-file-path    = "bags/@lararium/v0.1/tw5/engine-watch.md"
-source-file  = "packages/lararium-tw5/src/engine-watch.ts"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis"
-mana         = 12
-manao        = 12
-role         = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable   = true
+file-path   = "bags/@lararium/v0.1/tw5/engine-watch.md"
+mana        = 12
+manao       = 12
+register    = "Synthesis"
+retain      = true
+role        = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself"
+source-file = "packages/lararium-tw5/src/engine-watch.ts"
+tagspace    = "lararium"
+type        = "text/x-memetic-wikitext"
+uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/engine-watch"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #change-classes >>

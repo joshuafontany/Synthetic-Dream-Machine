@@ -2,21 +2,21 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
-file-path = "bags/@lares/v0.1/api/mu/ooda-ha.md"
-type = "text/x-memetic-wikitext"
-register = "Synthesis-Canon"
-tagspace = "stable"
-manaoio = 18
-mana = 18
-manao = 18
-namespace = "ॐ ँ"
-role = "invariant OODA-HA loop law, loop-visibility Level, and the loop-spans-turns phase-yield grammar"
-cacheable=true
-retain = true
-ooda-ha-default = 1
-ooda-ha-loop-span = "multi-turn"
+cacheable             = true
+file-path             = "bags/@lares/v0.1/api/mu/ooda-ha.md"
 gear-shift-disclosure = "audible"
+mana                  = 18
+manao                 = 18
+manaoio               = 18
+namespace             = "&#x0950; &#x0901;"
+ooda-ha-default       = 1
+ooda-ha-loop-span     = "multi-turn"
+register              = "Synthesis-Canon"
+retain                = true
+role                  = "invariant OODA-HA loop law, loop-visibility Level, and the loop-spans-turns phase-yield grammar"
+tagspace              = "stable"
+type                  = "text/x-memetic-wikitext"
+uri-path              = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -323,6 +323,7 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

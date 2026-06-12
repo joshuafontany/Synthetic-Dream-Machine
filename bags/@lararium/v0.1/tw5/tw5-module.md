@@ -2,19 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
+cacheable = true
 file-path = "bags/@lararium/v0.1/tw5/tw5-module.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 18
-manao        = 18
-manaoio      = 17
-role         = "interface bundle: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
-cacheable    = true
-retain       = true
+mana      = 18
+manao     = 18
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "interface bundle: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
 ```
-
-
 
 <<~ &#x0002; >>
 

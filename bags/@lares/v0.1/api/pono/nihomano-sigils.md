@@ -2,19 +2,18 @@
 
 <<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils"
-file-path    = "bags/@lares/v0.1/api/pono/nihomano-sigils.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-manaoio      = 18
-mana         = 18
-manao        = 18
-role         = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lares/v0.1/api/pono/nihomano-sigils.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils"
 ```
-
-
 
 <<~ ahu #head >>
 

@@ -2,17 +2,17 @@
 
 <<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis-Canon"
+cacheable = true
+hydrate   = true
 mana      = 17
 manao     = 17
 manaoio   = 17
-namespace = "ॐ ँ"
-cacheable = true
-hydrate   = true
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
 retain    = true
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

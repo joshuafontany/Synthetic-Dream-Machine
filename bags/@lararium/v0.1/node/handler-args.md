@@ -2,18 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/node/handler-args >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/node/handler-args"
-file-path   = "bags/@lararium/v0.1/node/handler-args.md"
-heleuma     = "ba"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 17
-manao       = 17
-manaoio     = 16
-role        = "heleuma: command-handler argument coercers + requestId factory"
-cacheable   = true
-retain      = true
+cacheable = true
+file-path = "bags/@lararium/v0.1/node/handler-args.md"
+heleuma   = "ba"
+mana      = 17
+manao     = 17
+manaoio   = 16
+register  = "Synthesis-Canon"
+retain    = true
+role      = "heleuma: command-handler argument coercers + requestId factory"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/node/handler-args"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
@@ -38,4 +39,5 @@ These helpers carry no side effects or platform assumptions. They could become a
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

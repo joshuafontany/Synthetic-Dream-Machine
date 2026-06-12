@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset >>
 ```toml iam
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset"
+cacheable = true
 file-path = "bags/@lares/v0.1/docs/pono/glyph-codeset.md"
-type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
-register  = "Synthesis"
-manaoio   = 16
 mana      = 17
 manao     = 16
-role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
-cacheable = true
+manaoio   = 16
+register  = "Synthesis"
 retain    = true
+role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset"
 ```
 
 <<~ &#x0002; >>
@@ -331,4 +331,5 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 <<~/ahu >>
 
 <<~ &#x0003; >>
+
 <<~ &#x0004; -> ? >>

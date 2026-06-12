@@ -2,20 +2,20 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/pranala >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/pranala"
-file-path   = "bags/@lararium/v0.1/tw5/modules/widgets/pranala.md"
-type        = "text/x-memetic-wikitext"
-register    = "Synthesis-Canon"
-mana        = 14
-manao       = 14
-manaoio     = 13
-tagspace    = "lararium"
-role        = "TW5 widget: pranala — scaffolded by sync-heleuma --scan-decorators --commit"
-heleuma     = "ka"
+body-sha256   = "34f5ea4f58ba8153be0ffd6b4d06dc7611795e8d609afc78ed0f7fa8bc7a98c1"
+cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/modules/widgets/pranala.md"
+heleuma       = "ka"
+mana          = 14
+manao         = 14
+manaoio       = 13
+register      = "Synthesis-Canon"
+role          = "TW5 widget: pranala — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PranalaWidget"
-body-sha256 = "34f5ea4f58ba8153be0ffd6b4d06dc7611795e8d609afc78ed0f7fa8bc7a98c1"
-cacheable   = true
-status-date = "2026-05-03"
+status-date   = "2026-05-03"
+tagspace      = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/pranala"
 ```
 
 <<~ &#x0002; >>
@@ -45,6 +45,8 @@ export function PranalaWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 <<~/ahu >>
 
 <<~ ahu #edges >>
+
+
 
 <<~/ahu >>
 

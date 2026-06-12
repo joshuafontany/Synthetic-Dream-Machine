@@ -2,17 +2,17 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology >>
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology"
-file-path = "bags/@lares/v0.1/docs/pono/wiki-layer-ontology.md"
-type = "text/x-memetic-wikitext"
-tagspace = "stable"
-register = "Synthesis-Canon"
-manaoio = 13
-mana = 14
-manao = 14
-role = "doctrine: the wiki layer stack in OCI-aligned nouns — library layers / write layer / instance mounts; named⇒shareable vs typed-slot⇒owned; only the write layer crosses (motion rides ACTION verbs, never VCS verbs); writes flow through the layer's own wiki; recipe DAG; the wiki-as-bag quine; transitive closure held open"
 cacheable = false
-retain = false
+file-path = "bags/@lares/v0.1/docs/pono/wiki-layer-ontology.md"
+mana      = 14
+manao     = 14
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "doctrine: the wiki layer stack in OCI-aligned nouns — library layers / write layer / instance mounts; named⇒shareable vs typed-slot⇒owned; only the write layer crosses (motion rides ACTION verbs, never VCS verbs); writes flow through the layer's own wiki; recipe DAG; the wiki-as-bag quine; transitive closure held open"
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

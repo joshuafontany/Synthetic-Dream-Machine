@@ -1,17 +1,17 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/pranala >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/widgets/pranala"
-file-path = "bags/@lararium/v0.1/tw5/widgets/pranala.md"
-type          = "text/x-memetic-wikitext"
-register      = "Synthesis-Canon"
-mana          = 18
-role          = "anchor: PranalaWidget — heleuma ka"
-heleuma       = "ka"
-source-symbol = "PranalaWidget"
-module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/pranala"
-body-sha256 = "c024548a4d09384a9d5df111d3b73b712a2951f3287975efd6140790e2a3ab3d"
+body-sha256   = "c024548a4d09384a9d5df111d3b73b712a2951f3287975efd6140790e2a3ab3d"
 cacheable     = true
+file-path     = "bags/@lararium/v0.1/tw5/widgets/pranala.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/pranala"
+register      = "Synthesis-Canon"
 retain        = true
+role          = "anchor: PranalaWidget — heleuma ka"
+source-symbol = "PranalaWidget"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/pranala"
 ```
 
 <<~ &#x0002; >>

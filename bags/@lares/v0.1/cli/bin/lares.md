@@ -2,19 +2,21 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/cli/bin/lares >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/cli/bin/lares"
-file-path    = "bags/@lares/v0.1/cli/bin/lares.md"
-type         = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 10
-role         = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
-tagspace     = "lararium"
-cacheable    = true
-retain       = true
+cacheable = true
+file-path = "bags/@lares/v0.1/cli/bin/lares.md"
+mana      = 10
+register  = "Synthesis-Canon"
+retain    = true
+role      = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
+tagspace  = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/cli/bin/lares"
 ```
+
 <<~ &#x0002; >>
 
 <<~ ahu #contract >>
+
 The `lares` binary holds the operator's only top-level ceremony surface. It dispatches subcommands registered in a single COMMANDS table (init, status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma, act, help). Each command is a thin async handler:
 * Library commands (init, act) import their logic from `@lararium/node` so the same operations can run inside a TW5 vm via the verb-tiddler protocol.
 * Scripted commands shell out to the existing tsx scripts via `runTsxScript` / `runCommand`.
@@ -23,6 +25,7 @@ The `lares` binary holds the operator's only top-level ceremony surface. It disp
 The binary holds NO domain logic. Adding a new operator ceremony means: add the handler, add the COMMANDS row, optionally add a meme anchor.
 
 Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispatch — `act` rides verb-tiddlers through the admin doc), TW5 vm primacy (handlers are widget-friendly), and the corpus-vs-engine category boundary (this file lives in an engine package, NOT a corpus one).
+
 <<~/ahu >>
 
 <<~ &#x0003; >>

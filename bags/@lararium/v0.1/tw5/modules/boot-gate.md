@@ -2,21 +2,19 @@
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate >>
 ```toml iam
-uri-path = "ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate"
-file-path = "bags/@lararium/v0.1/tw5/modules/boot-gate.md"
-type = "text/x-memetic-wikitext"
-register     = "Synthesis-Canon"
-mana         = 17
-manao        = 17
-manaoio      = 16
-role         = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
-status-date   = "2026-04-30"
+file-path     = "bags/@lararium/v0.1/tw5/modules/boot-gate.md"
 heleuma       = "ha"
-source-symbol = "_bootModules"
 implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
+mana          = 17
+manao         = 17
+manaoio       = 16
+register      = "Synthesis-Canon"
+role          = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
+source-symbol = "_bootModules"
+status-date   = "2026-04-30"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate"
 ```
-
-
 
 <<~ &#x0002; >>
 
