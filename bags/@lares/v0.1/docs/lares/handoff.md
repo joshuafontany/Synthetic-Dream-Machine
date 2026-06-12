@@ -100,8 +100,8 @@ Approved 2026-06-10 (residency-model): `CREATE` mints a coordinate, bag-grain `C
 **3. `lar:///closure.transitive.decided` — after live chains exist.**
 Research-backed direction (#pattern-integrities §3): **resolve transitively at mount, record the flattened ordered closure explicitly** in the consumer's recipe; add a lock-refresh verb + drift detection. Ratify against real multi-wiki use; the lockfile history says implicit inheritance recreates phantom bags and action-at-a-distance.
 
-**4. `lar:///hearth.corpus.fed` — one gesture, operator's call:**
-`lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares` (whole-dir carriers; directory batch shares one change-id — noted, accepted).
+**4. `lar:///hearth.corpus.fed` — STAGED WITNESS DONE 2026-06-11; the live gesture stays the operator's call.**
+`tests/e2e/corpus-feed.test.ts` proves the shape repeatably: the whole 189-carrier corpus rides ONE directory-batch LOAD into a staged vessel — F1 the batch ACKs (the CLI's flat 10s verb timeout died at scale; the ACK budget now scales with carrier count, act.ts) · F2 group routing at scale: one file per carrier root, ZERO fragment files, count parity · F3 content-whole projection · F4 **live-pipeline idempotence** (re-feeding a projection leaves it byte-stable). The live hearth feed = `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares` — expect a one-time normalize-once diff wave (~360 files, framing only: margins, iam order, missing STX/ETX inserted) for the operator's review; zero content loss (corpus-sweep proven).
 
 **Burrs, non-blocking:** content-hash echo suppression upgrade (§2) · tombstone/whiteout verb reserved (§3) · Automerge history growth → DXOS-epoch pattern watched (§1) · remaining `lares wiki` subcommands print human-only · `wiki open` selects-for-next-boot only.
 

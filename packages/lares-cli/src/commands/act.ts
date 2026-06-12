@@ -71,6 +71,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
 
   // Build the kebab-case args bag per residency-actions encoding.
   const actionArgs: Record<string, unknown> = {};
+  let carrierCount = 0;
   if (isTransferVerb(verb)) {
     const title    = args.options["title"];
     const fromBag  = args.options["from"];
@@ -115,7 +116,10 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
             .map((f) => join(sourceUri, f))
         : [sourceUri];
       const carriers = files.map((f) => ({ text: readFileSync(f, "utf8") }));
-      if (carriers.length > 0) actionArgs["carriers"] = carriers;
+      if (carriers.length > 0) {
+        actionArgs["carriers"] = carriers;
+        carrierCount = carriers.length;
+      }
     } catch {
       // Honesty at the gesture: a non-resolving local path probably means a
       // typo — the island will refuse a carrier-less LOAD loudly either way.
@@ -188,7 +192,11 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     // change-id (the --change-id default) means a genuinely distinct change → runs.
     const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
     const requestId = await taskContentId({ subject, command: verb, args: actionArgs, nonce: "" });
-    const result = await submitVerb(vessel, verb, actionArgs, did, { requestId });
+    // The ACK budget scales with the gesture: a directory-batch LOAD chews
+    // one island frame per carrier — a flat 10s ACK died on the first
+    // 189-carrier corpus feed (2026-06-11) while the verb itself succeeded.
+    const timeoutMs = Math.max(10_000, 10_000 + carrierCount * 400);
+    const result = await submitVerb(vessel, verb, actionArgs, did, { requestId, timeoutMs });
     if (result.status === "error") {
       const msg = result.errorMessage ?? "unknown";
       emit(args, {
