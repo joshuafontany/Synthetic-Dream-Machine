@@ -68,3 +68,4 @@ tests/.lararium/
 tests/genesis/
 tests/results/
 tests/runs/
+.lararium-projection/

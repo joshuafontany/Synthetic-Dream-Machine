@@ -34,9 +34,10 @@
  *   file watcher MUST check writing.has(uri) before ingesting a change.
  */
 
-import { writeFileSync, mkdirSync, unlinkSync, existsSync } from "fs";
+import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync } from "fs";
 import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
+import { contentHash, type SyncedTree } from "./synced-tree.js";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -70,6 +71,12 @@ export class LarDiskProjector {
     private readonly readinessMap?: ReadinessMap,
     /** Write a .json sidecar next to each .md for peek debugging. */
     private readonly debugJson = false,
+    /**
+     * The Synced tree (§6 merge base): records the content hash of every
+     * projected carrier. Also arms the projection-side hash gate — a write
+     * whose bytes match disk skips silently (no event, no churn).
+     */
+    private readonly syncedTree?: SyncedTree,
   ) {}
 
   /**
@@ -156,6 +163,7 @@ export class LarDiskProjector {
           this.writing.add(title);
           try { unlinkSync(candidate); } finally { this.writing.delete(title); }
         }
+        this.syncedTree?.delete(title);   // the observation leaves with the file
       } catch { /* best-effort — operator can clean up manually */ }
     }
   }
@@ -180,10 +188,22 @@ export class LarDiskProjector {
     const output = await this.renderFn(tiddlerUri);
     if (output === null) return;
 
+    // Projection-side hash gate (§6): bytes already on disk == would-write
+    // bytes → skip the write entirely (no event for any watcher, no mtime
+    // churn) — but still record the observation in the Synced tree.
+    const outputHash = contentHash(output);
+    try {
+      if (existsSync(candidate) && contentHash(readFileSync(candidate, "utf-8")) === outputHash) {
+        this.syncedTree?.set(tiddlerUri, outputHash);
+        return;
+      }
+    } catch { /* unreadable existing file — fall through to the write */ }
+
     this.writing.add(tiddlerUri);
     try {
       mkdirSync(dirname(candidate), { recursive: true });
       writeFileSync(candidate, output, "utf-8");
+      this.syncedTree?.set(tiddlerUri, outputHash);
       if (this.debugJson && this._tw5) {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })
           .getTiddlerAsJson?.(tiddlerUri);
