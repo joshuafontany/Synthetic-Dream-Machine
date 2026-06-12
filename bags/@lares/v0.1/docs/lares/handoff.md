@@ -35,6 +35,7 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 2. **`lares ingest` CLI** — scan → three-way diff (disk-hash · synced-hash · current-render-hash) → show decisions → `--apply`. The NFC membrane assertion rides this gesture (the spec pins NFC at `memetic-wikitext #carrier-bytes`; foreign bytes first walk in here).
 3. **Quiescence vectors** over the composed loop — "zero writes after round N" makes an echo storm a one-line test failure; plus the composed fixpoints (ingest∘project = identity both ways; non-canonical input converges in ONE cycle).
 4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles.
+5. **The wire compiler** MAY ride this vector's membrane organs (ruled 2026-06-12, `wire #authoring`): anchored body pranala → wire records at `<parent>/wires/<anchor>`; shares replace-by-group + three-way diff; `edgesFromMemeAst` = the front half, standing.
 
 **Design pre-fed — read before building:** `pattern-integrities` §6 (the ingest laws + twillm deltas) and §7 (the lane law: verbs = record pairs; bus history bounded per-epoch; events = hints, scan = truth — the relay law applied to the filesystem-as-peer).
 

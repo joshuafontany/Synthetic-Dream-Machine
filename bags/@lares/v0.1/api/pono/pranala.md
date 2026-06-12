@@ -50,6 +50,7 @@ The has-stack ruling (2026-06-12) split the old typed-edge law in three: **compo
 3. **One attributed form survives at rest:** the code source-pointer — `<<~ pranala #anchor ? -> packages/<path> family:code role:has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
 4. Sugar, unchanged: `<<~ loulou URI >>` (adjacency) · `<<~ aka URI >>` (shadow transclusion) · `<<~ kahea URI >>` (live transclusion).
 5. Anything heavier — direction, propagation, payload, lifecycle, arity — belongs to a **wire entity**, never to this sigil.
+6. **The carrier-grain wire form.** An anchored body pranala MAY author a wire (`wire #authoring`): the sigil = the carrier-grain projection, the wire entity = the existence, the compiler (INGEST-era) = the membrane between. Until the compiler lands, such sigils stand as declared-unresolved wires — lawful memory-palace placeholders, never errors.
 
 <<~/ahu >>
 

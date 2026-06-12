@@ -55,6 +55,27 @@ A wire that merely *points* stays a `loulou`; embedding stays `aka`/`kahea`; com
 
 <<~/ahu >>
 
+<<~ ahu #authoring >>
+
+## Authoring — two gestures, one existence (ratified 2026-06-12)
+
+Co-projection applied to wires: the operator's mind originates; the carrier body and the record set both *project* the wire, each in native grain; **merge authority routes through the CRDT alone**. The dichotomy "text-authored sigils vs reified entities" dissolves — both hold, at different grains:
+
+| grain | a wire appears as | authority | gesture |
+|---|---|---|---|
+| disk carrier | body pranala sigil (memory-palace form) | projection only | text editing |
+| CRDT records | the wire entity | **merge authority** | the compile target |
+| canvas | rendered wire + drag-authoring | view; writes records | direct manipulation |
+| runtime | engine-vended `ReactionBinding` | ephemeral | compiled from records |
+
+1. **The text authors; the record exists; the CRDT merges.** A body sigil MUST NOT carry runtime authority — the same boundary Verse itself draws between source text and scene entities.
+2. **Deterministic identity.** A body-authored wire derives its address as `<parent-uri>/wires/<anchor>` — the `#anchor` names the wire; re-ingest converges (normalize-once). A sigil without an anchor never compiles; `loulou` stays adjacency forever.
+3. **Hierarchy = lifetime, applied.** A body-authored wire lives as its carrier's child: dies with it, projects back into that carrier's file alone (projection follows lifetime; a wire never re-renders into a body it did not originate from). Cross-carrier wires owned by neither endpoint get authored as their own entities — the canvas gesture's native case.
+4. **Declared-unresolved wires read fertile.** A body pranala whose wire entity has not yet materialized stands as a lawful placeholder — the memory-palace form — awaiting the compiler, exactly as a bare tag awaits its definition.
+5. **The compiler rides INGEST.** Body-sigil → wire-record compilation shares the membrane's organs (replace-by-group apply, three-way diff, echo-proof round-trip) and SHALL ride that vector, never precede it. `edgesFromMemeAst` already walks sigils into flat edge records — the compiler's front half, standing.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
