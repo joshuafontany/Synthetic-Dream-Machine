@@ -79,7 +79,17 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 - module gate positive-path vector absent (bootTrustedModules via stack:has witnessed only indirectly) — rides the next lararium-tw5 touch
 - smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
 - TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
-- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING RULED 2026-06-12: INGEST forges the pattern integrity (record-pair verbs, replace-by-group, three-way diff, quiescence) that ALL verb-plane-into-wiki work then consumes — the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM via the module gate DURING that recut, one witness not two; ingest-gate's pure decision considers packing in-VM when the island-side INGEST verb lands
+- island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island. ORDERING PROPOSED 2026-06-12 (hoike #ingest-ordering below — crucible pending): INGEST forges the pattern integrity (record-pair verbs, replace-by-group, three-way diff, quiescence) that ALL verb-plane-into-wiki work then consumes — the platform-free handlers (verb-dispatcher/summons/vm, action-handler, wiki-compose/draft/mint) migrate in-VM via the module gate DURING that recut, one witness not two; ingest-gate's pure decision considers packing in-VM when the island-side INGEST verb lands
+
+<<~ hoike #ingest-ordering held:"a plan of this weight passes the work-crucible floor before it binds; the chain reads proposed until then (operator)" >>
+q: does a flow-ruled sequencing chain bind, or must the plan pass the crucible discussion first?
+<<~ kue voice:"the house (Gatekeeper)" key:"the convened crucible floor produces an ordering that differs from the flow-ruled chain" >>
+the chain composes only standing rulings — the torch's NEXT VECTOR, §7's lane law, the
+one-witness economy — so the crucible would re-derive what already stands; flow preserved
+momentum the floor would spend on ceremony.
+<<~/kue >>
+re-entry: the kue key; or the INGEST crucible floor convening (the held review condition)
+<<~/hoike >>
 
 <<~/ahu >>
 
