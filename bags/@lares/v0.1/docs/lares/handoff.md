@@ -48,7 +48,7 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 
 **Co-projection (the ontology, one breath):** the operator's mind originates; disk carriers and the CRDT record-set both *project* it, each in native grain; **merge authority routes through the CRDT alone**. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
 
-**Doctrine homes:** `disk-projection` · `residency-model` · `island-isomorphism` (the one-hull law, PROPOSED — islands differ by grant, never by hull; hoike #full-uniformity kept inside it) · `memetic-wikitext #carrier-bytes` · `api/pono/nalu` + `federated-causal-islands` (the communication model) · `pattern-integrities` (the research shelf, §1–7).
+**Doctrine, by pointer:** every law lives in its own meme — walk #edges.
 
 **Live hearth:** boot a vessel with `node packages/lararium-node/dist/src/main.js --root <repo> --port 8080`; feed with `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares`. Known: a REBOOT on a fed store wants the 120s ea budget (the ea-breath debt, #burrs); `tests/e2e/vessel-reboot.test.ts` stands guard.
 
@@ -56,13 +56,11 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 
 <<~ ahu #vectors-after >>
 
-## Vectors after ingest, in order
+## Vectors after ingest, in order — each lives whole in its design meme
 
-**2. `lar:///residency.create.lands`** — CREATE mints a coordinate; bag-grain COPY grants residency (change-id preserved); registration = `holdings` accession in @catalog. Approved 2026-06-10; atproto-validated (§4). Verb-tiddler → admin island; witness through the harness.
-
-**3. `lar:///closure.transitive.decided`** — resolve transitively at mount, record the flattened ordered closure in the consumer's recipe; lock-refresh verb + drift detection (§3). Ratify against real multi-wiki use only.
-
-**4. `lar:///admin.hull.unified`** — the one-hull migration, pivot playbook (witness-pointed, no flag day): interface isomorphism first → genesis derived from the common emitter (fixed-point witness) → substrate twins collapse → bespoke lines die. Law + hoike at `island-isomorphism`.
+- **2. `lar:///residency.create.lands`** — design: `@lararium/api/residency-model` (CREATE + bag-grain COPY, approved; @catalog holdings accession)
+- **3. `lar:///closure.transitive.decided`** — ruling: `pattern-integrities` §3 (resolve-transitive, record-flattened; ratify against real multi-wiki use only)
+- **4. `lar:///admin.hull.unified`** — law + hoike + migration playbook: `@lararium/api/island-isomorphism`
 
 <<~/ahu >>
 
@@ -101,6 +99,9 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-isomorphism >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~ pranala #hands-to ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot family:control role:hands-to >>
 
