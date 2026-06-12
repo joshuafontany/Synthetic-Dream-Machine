@@ -7,8 +7,8 @@ file-path     = "bags/@lararium/v0.1/mesh/island-protocol.md"
 mana          = 14
 register      = "Synthesis-Canon"
 retain        = true
-revised-on    = "2026-06-10"
-revision-note = "rebuilt against post-keel-cut source: resolver dictionary → IslandGrants; coreBlob → @lararium blob store; demote → hoʻoanu; frame:ack retired; admin verb/verify/binding/evict/residency/alert surfaces added; laresUrl grant trimmed (keel trim — @lares resolves from @catalog)"
+revised-on    = "2026-06-12"
+revision-note = "ea-breath law lands: breath message (phase + monotonic progress) added island→vessel; watchdogs re-arm on breath, judge frozen evidence by stall budget, silence alone times out; mkBreath factory"
 role          = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
 source-file   = "packages/lararium-mesh/src/island-protocol.ts"
 tagspace      = "lararium"
@@ -80,6 +80,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded same day o
 | Type | Purpose |
 |---|---|
 | `ea` | Sovereignty declaration — TW5 live, Repo synced, first frame ready. |
+| `breath` | Mount progress — `phase` + monotonic `progress` counter, from manifest receipt to settle. Watchdogs re-arm on breath (silence alone times out) and bound frozen evidence by a stall budget (the ea-breath law, 2026-06-12). |
 | `ready` | Worker-up signal preceding `ea`. |
 | `teardown:ack` | Handshake complete; vessel calls `worker.terminate()`. Carries optional `docBytes`. |
 | `event` | Verse-event reaction — `listenable` + payload (string/number/boolean values only). |
@@ -93,7 +94,7 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded same day o
 
 ### Factories
 
-`mkManifest` · `mkEa` · `mkReady` · `mkTeardown` · `mkTeardownAck` · `mkFault` ·
+`mkManifest` · `mkEa` · `mkBreath` · `mkReady` · `mkTeardown` · `mkTeardownAck` · `mkFault` ·
 `mkAdminPlaceVerb` · `mkAdminDelegateVerb` · `mkAdminVerbResult` ·
 `mkAdminVerifyRequest` · `mkAdminVerifyResult` ·
 `mkAdminResolveBindingRequest` · `mkAdminResolveBindingResult` ·

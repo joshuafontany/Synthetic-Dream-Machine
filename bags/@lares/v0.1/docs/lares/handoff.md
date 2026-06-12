@@ -44,13 +44,13 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 
 ## The ground you stand on
 
-The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites at handoff: tw5 103 + node 113 + e2e 16, all green from a cold clone (`pnpm install && pnpm -r build && pnpm test:e2e`).
+The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites at handoff: mesh 271 + tw5 104 + node 119 + e2e 16, all green from a cold clone (`pnpm install && pnpm -r build && pnpm test:e2e`).
 
 **Co-projection (the ontology, one breath):** the operator's mind originates; disk carriers and the CRDT record-set both *project* it, each in native grain; **merge authority routes through the CRDT alone**. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
 
 **Doctrine, by pointer:** every law lives in its own meme — walk #edges.
 
-**Live hearth:** boot a vessel with `node packages/lararium-node/dist/src/main.js --root <repo> --port 8080`; feed with `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares`. Known: a REBOOT on a fed store wants the 120s ea budget (the ea-breath debt, #burrs); `tests/e2e/vessel-reboot.test.ts` stands guard.
+**Live hearth:** boot a vessel with `node packages/lararium-node/dist/src/main.js --root <repo> --port 8080`; feed with `lares act LOAD --source-uri bags/@lares/v0.1 --to lar:///ha.ka.ba/@lares`. The ea-breath debt RESOLVED + HARDENED 2026-06-12 (prior-art witnessed: sd_notify/startupProbe/Koopman/OTP): the mounting island breathes with monotonic `(phase, progress)` evidence (`sovereign-kernel` — stage ticks + 1s interval); both watchdogs (admin VM, island pool) re-arm on breath, judge frozen evidence by a stall budget (3x silence), and silence alone times out, naming the last breath heard; the pool caps mount-failure intensity per wiki (OTP MaxR/MaxT) and a failed mount terminates its worker (leak fixed). `tests/e2e/vessel-reboot.test.ts` stands guard.
 
 <<~/ahu >>
 
@@ -71,7 +71,6 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 - tombstone/whiteout verb — reserved (§3); wakes when layered delete needs it
 - Automerge history growth — DXOS-epoch pattern watched (§1); wakes on real growth; the §7 bus-doc law = a second consumer
 - `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
-- ea-breath watchdog — the admin island SHOULD emit breath during mount (timer resets on breath; silence alone times out); budget meanwhile 120s; wants worker-side emission
 - engine-swap reconcile answered "current" against a stale engine — epoch-design seam
 - e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
 - NFC assertion at the membrane — rides the INGEST gesture (spec already pins NFC)

@@ -59,6 +59,7 @@ Any vessel that implements the manifest/ea handshake follows this shape:
 
 ```text
 courier → island:  manifest  (materials: syncPort, docUrl, coreBlob, …)
+island  → courier: breath    (mount progress: phase + monotonic counter, repeating until settle)
 island  → courier: ea        (sovereignty declaration: island breathes, stands ready)
 ```
 
@@ -69,7 +70,10 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 | Message | Direction | Type string |
 |---|---|---|
 | Manifest delivery | courier → island | `"manifest"` |
+| Mount breath | island → courier | `"breath"` |
 | Ea declaration | island → courier | `"ea"` |
+
+**The ea-breath law (2026-06-12):** between manifest and settle, a mounting island breathes — `(phase, progress)` evidence on a steady interval. The courier's watchdog re-arms on each breath and judges frozen evidence by a stall budget; **silence alone reads dead**, never elapsed mount time. A deadline counts the courier's clock; breath listens to the island's own act — readiness reads local.
 
 <<~ pranala #island-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:has >>
 
