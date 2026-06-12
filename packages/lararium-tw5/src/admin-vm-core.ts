@@ -3,7 +3,7 @@
  *
  * ONE core both vessels compose (mirror pair 2/5). Subtracts the identical
  * skeleton from open-admin-vm.ts (node) ⇆ open-browser-admin-vm.ts (browser):
- * composite wiring, MessageChannel sync, ea-promise + timeout, the delegation
+ * composite wiring, MessageChannel sync, ea-promise + breath watchdog, the delegation
  * loop, manifest delivery, placeVerb/mountMainVerbs/dispose. The platform
  * divergence remains as a two-member host seam (spawnWorker + newSyncChannel);
  * the resolved admin doc handle is passed in by the caller (the two platforms
@@ -49,20 +49,27 @@ import {
   type AdminMsg_ResidencyOp,
   type AdminMsg_WikiAlert,
   type BatchMode,
+  type IslandMsg_Breath,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
 import type { VerbTable } from "./verb-dispatcher.js";
 
-// The ea watchdog budget. A flat 15s deadline died live (2026-06-11): a
-// fed store's admin-island mount scales with stored docs and disk latency
-// (WSL, repo-rooted vessels), while fresh stores boot fast — so reboots
-// timed out where first boots succeeded. 120s matches the harness's own
-// await-live budget. Named design debt: the watchdog SHOULD listen for
-// the island's BREATH, not count a deadline — ea names the sovereign
-// island breathing inside the vessel; a mounting island that still
-// breathes (emits) never reads dead, however long the mount. The timer
-// resets on breath; silence alone times out (readiness reads local).
-const HANDSHAKE_TIMEOUT_MS = 120_000;
+// The ea watchdog budget — a SILENCE window, not a mount deadline (debt
+// resolved 2026-06-12). The mounting island emits breath (sovereign-kernel:
+// stage marks + a steady interval); each breath re-arms this timer, so a
+// long live mount never reads dead — silence alone times out, and the
+// rejection names the last breath heard (readiness reads local). History:
+// a flat 15s deadline died live (2026-06-11) because a fed store's mount
+// scales with stored docs and disk latency; 120s stays as the silence
+// budget — tightening it reads as a later knob, never a correctness cut.
+const EA_SILENCE_TIMEOUT_MS = 120_000;
+
+// The progress-stall budget — bounds breathing-without-advancing (the
+// embedded-systems timer-kick anti-pattern: an interval breath proves the
+// event loop turns, not that mount advances). Fresh (phase, progress)
+// evidence restarts this clock; frozen evidence spends it down even while
+// breaths keep re-arming the silence window.
+const EA_STALL_TIMEOUT_MS = 3 * EA_SILENCE_TIMEOUT_MS;
 
 /** The MessagePort type, borrowed through the mesh manifest (no DOM-lib dep). */
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];
@@ -90,6 +97,10 @@ export interface AdminVmCoreOptions {
   storage?:        IslandStorageConfig;
   /** Compiled admin-island Worker script URL. */
   workerScriptUrl: URL;
+  /** Override the ea silence budget in ms (tests). */
+  eaSilenceMs?:    number;
+  /** Override the ea progress-stall budget in ms (default 3x silence). */
+  eaStallMs?:      number;
 }
 
 /** Unified placeVerb request — union of node + browser fields. */
@@ -194,26 +205,63 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     else p.resolve(value);
   }
 
-  // ── workerEa Promise ────────────────────────────────────────────────────────
+  // ── workerEa Promise — the breath watchdog ──────────────────────────────────
+  // Each island breath re-arms the silence window; silence alone times out.
   let _resolve!: () => void;
   let _reject!:  (err: Error) => void;
   const workerEa = new Promise<void>((res, rej) => { _resolve = res; _reject = rej; });
-  const eaTimer = setTimeout(
-    () => _reject(new Error("[openAdminVm] admin island ea timeout")),
-    HANDSHAKE_TIMEOUT_MS,
-  );
+  const silenceMs = opts.eaSilenceMs ?? EA_SILENCE_TIMEOUT_MS;
+  const stallMs   = opts.eaStallMs   ?? (opts.eaSilenceMs !== undefined ? 3 * opts.eaSilenceMs : EA_STALL_TIMEOUT_MS);
+  let _lastBreath   = "spawn";
+  let _lastAdvanceAt = Date.now();
+  let _eaSettled  = false;
+  let eaTimer: ReturnType<typeof setTimeout>;
+  const armEaTimer = (): void => {
+    eaTimer = setTimeout(
+      () => _reject(new Error(
+        `[openAdminVm] admin island ea silence timeout (${silenceMs}ms; last breath: ${_lastBreath})`,
+      )),
+      silenceMs,
+    );
+  };
+  armEaTimer();
 
   // ── Delegation loop + island message routing ────────────────────────────────
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
 
+    if (raw.type === "breath") {
+      if (_eaSettled) return;
+      const breath   = raw as IslandMsg_Breath;
+      const evidence = `${breath.phase}#${breath.progress}`;
+      if (evidence !== _lastBreath) {
+        // Fresh evidence — phase or progress moved; the stall clock restarts.
+        _lastBreath    = evidence;
+        _lastAdvanceAt = Date.now();
+      } else if (Date.now() - _lastAdvanceAt > stallMs) {
+        // Alive but frozen past the budget: breathing-without-advancing
+        // reads dead (progress-kick over timer-kick).
+        _eaSettled = true;
+        clearTimeout(eaTimer);
+        _reject(new Error(
+          `[openAdminVm] admin island mount stalled (no progress in ${stallMs}ms; last breath: ${_lastBreath})`,
+        ));
+        return;
+      }
+      clearTimeout(eaTimer);
+      armEaTimer();
+      return;
+    }
+
     if (raw.type === "ea") {
+      _eaSettled = true;
       clearTimeout(eaTimer);
       _resolve();
       return;
     }
 
     if (raw.type === "fault") {
+      _eaSettled = true;
       clearTimeout(eaTimer);
       _reject(new Error(`[openAdminVm] admin island fault: ${(raw as { error: string }).error}`));
       return;
@@ -313,6 +361,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   });
 
   worker.onError((err) => {
+    _eaSettled = true;
     clearTimeout(eaTimer);
     _reject(err);
   });

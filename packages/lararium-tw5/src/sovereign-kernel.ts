@@ -52,6 +52,7 @@ import {
   tiddlerText,
   wikiBagUri,
   expandRecipe,
+  mkBreath,
   mkFault,
   isVesselToIslandMsg,
   mkTeardownAck,
@@ -86,10 +87,17 @@ export interface IslandHostSeam {
 
 // ── runSovereignKernel — the OTP gen_island kernel ──────────────────────────
 
+// The mount-breath interval. While a manifest mounts, the island emits a
+// breath this often (plus a stage mark before each long stretch) so the
+// vessel's watchdog re-arms on breath and silence alone reads dead.
+const BREATH_INTERVAL_MS = 1_000;
+
 export function runSovereignKernel(
   host: IslandHostSeam,
   behaviorOrFactory: IslandBehavior | ((manifest: IslandMsg_Manifest) => IslandBehavior),
+  opts?: { breathEveryMs?: number },
 ): void {
+  const breathEveryMs = opts?.breathEveryMs ?? BREATH_INTERVAL_MS;
   const _post = (msg: IslandToVesselMsg) => host.post(msg);
   const handler = new IslandKernel(_post);
 
@@ -143,13 +151,33 @@ export function runSovereignKernel(
   async function _handleManifest(msg: IslandMsg_Manifest): Promise<void> {
     _activeWikiUri = msg.wikiUri;
     void _activeWikiUri;
+    // The ea-breath law: the island breathes while it mounts — one breath at
+    // receipt, a stage mark before each long stretch, and a steady interval
+    // between awaits. Settle (ea or fault) ends the breathing. The interval
+    // breath repeats the LAST evidence (alive); only tick() advances the
+    // progress counter (advancing) — the vessel's stall budget judges the gap
+    // (progress-kick over timer-kick).
+    let _phase    = "manifest";
+    let _progress = 0;
+    const breathe = (): void => {
+      _post(mkBreath(msg.wikiUri, _phase, _progress));
+    };
+    const tick = (next?: string): void => {
+      if (next) _phase = next;
+      _progress++;
+      breathe();
+    };
+    breathe();
+    const breathTimer = setInterval(() => breathe(), breathEveryMs);
     // Any throw during init (incl. a behavior.onEa gate failure, e.g.
     // bootAdminKeyhive Gate A/B/C) posts fault so the vessel times out cleanly
     // instead of hanging without an ea.
     try {
-      await _doManifest(msg);
+      await _doManifest(msg, tick);
     } catch (err) {
       _post(mkFault(msg.wikiUri, `manifest handler threw: ${String(err)}`));
+    } finally {
+      clearInterval(breathTimer);
     }
   }
 
@@ -182,7 +210,10 @@ export function runSovereignKernel(
     return null;
   }
 
-  async function _doManifest(msg: IslandMsg_Manifest): Promise<void> {
+  async function _doManifest(
+    msg: IslandMsg_Manifest,
+    tick: (next?: string) => void = () => {},
+  ): Promise<void> {
     const behavior = _resolveBehavior(msg);
 
     // Repo construction + network wiring is a CRDT concern owned by mesh; the
@@ -194,6 +225,7 @@ export function runSovereignKernel(
 
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     // The engine grant resolves FIRST (engine bytes precede TW5 boot).
+    tick("slots");
     const laraiumHandle = await _resolveSlot(_repo, msg.grants.islandUrl, LARARIUM_BAG, msg.wikiUri);
     if (!laraiumHandle) return;
     _handles.set(LARARIUM_BAG, laraiumHandle);
@@ -230,6 +262,7 @@ export function runSovereignKernel(
       if (!handle) return;     // fault already posted
       _handles.set(slot, handle);
       ready.push({ slot, handle });
+      tick();                  // one slot resolved — real progress evidence
     }
 
     const laraiumDoc = laraiumHandle.doc();
@@ -270,6 +303,7 @@ export function runSovereignKernel(
       return;
     }
 
+    tick("tw5-boot");
     try {
       await handler.bootTw5(msg.wikiUri, coreBytes, pluginTiddlers);
     } catch (err) {
@@ -281,7 +315,10 @@ export function runSovereignKernel(
     const tw5 = handler.tw5()!;
     // One recipe model — buildIslandRecipe walks expandRecipe(msg.recipe),
     // wires @temp + every resolved CRDT slot, registers the adaptor, drains
-    // initial replay synchronously through the in-wiki nalu engine.
+    // initial replay synchronously through the in-wiki nalu engine. The replay
+    // blocks this thread (no interval breath fires), so the stage mark lands
+    // first — the watchdog's window restarts right before the long stretch.
+    tick("recipe");
     buildIslandRecipe({
       tw5,
       composite: _composite,
@@ -294,6 +331,7 @@ export function runSovereignKernel(
     // a CatalogAccessor over it to reach any registered bag; recipe-watch keeps
     // reconciling the SAME path boot just walked.
     _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine, recipe: msg.recipe };
+    tick("behavior");
     await behavior.onEa(_ctx);
 
     handler.sendEa(msg.wikiUri);

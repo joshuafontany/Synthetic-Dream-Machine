@@ -78,9 +78,23 @@ export interface VesselIslandPoolCoreOptions {
    * identity breathes again.
    */
   onEa?: (wikiId: string) => void;
+  /** Override the mount silence budget in ms (tests). */
+  mountSilenceMs?: number;
+  /** Override the mount progress-stall budget in ms (default 3x silence). */
+  mountStallMs?: number;
+  /** Mount failures tolerated per wiki inside the window before the cap trips. */
+  maxMountFailures?: number;
+  /** The intensity window in ms (OTP MaxR/MaxT discipline). */
+  mountFailureWindowMs?: number;
 }
 
-const HANDSHAKE_TIMEOUT_MS = 10_000;
+// A SILENCE budget, not a mount deadline: the ea-wait re-arms on each island
+// breath (resetOnTypes), so a slow mount that keeps breathing never times out.
+// The stall budget (3x) bounds breathing-without-advancing; the intensity cap
+// (MaxR/MaxT) bounds restart storms on a deterministically failing mount.
+const HANDSHAKE_TIMEOUT_MS        = 10_000;
+const MAX_MOUNT_FAILURES          = 3;
+const MOUNT_FAILURE_WINDOW_MS     = 60_000;
 
 export class VesselIslandPoolCore {
   private readonly _slots = new Map<string, Slot>();
@@ -94,6 +108,12 @@ export class VesselIslandPoolCore {
     resolve: (r: Record<string, unknown>) => void;
     reject:  (e: Error) => void;
   }>();
+  // OTP intensity bookkeeping — per-wiki failure timestamps inside the window.
+  private readonly _mountFailures = new Map<string, number[]>();
+  private readonly _mountSilenceMs:       number;
+  private readonly _mountStallMs:         number;
+  private readonly _maxMountFailures:     number;
+  private readonly _mountFailureWindowMs: number;
 
   constructor(opts: VesselIslandPoolCoreOptions) {
     this._host            = opts.host;
@@ -102,6 +122,10 @@ export class VesselIslandPoolCore {
     this._hotCap          = opts.hotCap ?? Infinity;
     this._onWorkerEvent   = opts.onWorkerEvent ?? null;
     this._onEa            = opts.onEa ?? null;
+    this._mountSilenceMs       = opts.mountSilenceMs ?? HANDSHAKE_TIMEOUT_MS;
+    this._mountStallMs         = opts.mountStallMs ?? 3 * this._mountSilenceMs;
+    this._maxMountFailures     = opts.maxMountFailures ?? MAX_MOUNT_FAILURES;
+    this._mountFailureWindowMs = opts.mountFailureWindowMs ?? MOUNT_FAILURE_WINDOW_MS;
   }
 
   // ── Lifecycle ──────────────────────────────────────────────────────────────
@@ -115,6 +139,20 @@ export class VesselIslandPoolCore {
     }
 
     const pinned = opts.pinned ?? false;
+    // Intensity gate (MaxR/MaxT): a wiki that keeps failing its mount inside
+    // the window fails FAST and NAMED — never another full silence budget per
+    // attempt, never a restart storm. The window prunes itself; success clears.
+    const failures = (this._mountFailures.get(wikiId) ?? [])
+      .filter((t) => Date.now() - t < this._mountFailureWindowMs);
+    if (failures.length >= this._maxMountFailures) {
+      this._mountFailures.set(wikiId, failures);
+      throw new Error(
+        `[vessel-pool] mount intensity cap for ${wikiId} — ` +
+        `${failures.length} failures inside ${this._mountFailureWindowMs}ms; ` +
+        `retry after the window clears`,
+      );
+    }
+
     if (!pinned) await this._evictLruIfNeeded();
 
     const { mainPort, syncPort } = this._host.newSyncChannel();
@@ -139,24 +177,41 @@ export class VesselIslandPoolCore {
       },
     );
 
-    // Browser ES-module workers signal "ready" (WASM loaded) before manifest.
-    if (this._host.awaitReady) {
-      await awaitIslandMsg<IslandMsg_Ready>({
-        expectedType: "ready",
-        timeoutMs:    HANDSHAKE_TIMEOUT_MS,
+    try {
+      // Browser ES-module workers signal "ready" (WASM loaded) before manifest.
+      if (this._host.awaitReady) {
+        await awaitIslandMsg<IslandMsg_Ready>({
+          expectedType: "ready",
+          timeoutMs:    this._mountSilenceMs,
+          subscribe:      (h) => worker.listen(h),
+          subscribeError: (h) => worker.onError(h),
+        });
+      }
+
+      // The ea-breath law: the mounting island breathes; each breath re-arms
+      // the silence window — a long live mount never reads dead; silence alone
+      // does. The stall budget bounds breathing-without-advancing.
+      await awaitIslandMsg<IslandMsg_Ea>({
+        expectedType:    "ea",
+        timeoutMs:       this._mountSilenceMs,
+        progressStallMs: this._mountStallMs,
+        resetOnTypes:    ["breath"],
         subscribe:      (h) => worker.listen(h),
         subscribeError: (h) => worker.onError(h),
+        send: () => worker.post(manifestMsg, [syncPort]),
       });
+    } catch (err) {
+      // A failed mount cleans up after itself: the spawned worker dies, the
+      // sync port closes, the failure lands in the intensity ledger. Without
+      // the terminate, every ea timeout stranded a live worker thread.
+      worker.terminate();
+      mainPort.close();
+      failures.push(Date.now());
+      this._mountFailures.set(wikiId, failures);
+      throw err;
     }
 
-    await awaitIslandMsg<IslandMsg_Ea>({
-      expectedType: "ea",
-      timeoutMs:    HANDSHAKE_TIMEOUT_MS,
-      subscribe:      (h) => worker.listen(h),
-      subscribeError: (h) => worker.onError(h),
-      send: () => worker.post(manifestMsg, [syncPort]),
-    });
-
+    this._mountFailures.delete(wikiId);   // a clean mount clears the ledger
     this._slots.set(wikiId, {
       temperature: "wela", pinned, wikiId, worker, mainPort, lastUsedAt: Date.now(),
     });

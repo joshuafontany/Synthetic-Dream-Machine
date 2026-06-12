@@ -463,6 +463,29 @@ export interface IslandMsg_Ea {
 }
 
 /**
+ * Mount-progress breath — the island signals it still breathes while mounting.
+ *
+ * The ea-breath law: a mounting island that still emits never reads dead,
+ * however long the mount. Vessel watchdogs (admin VM, island pool) re-arm
+ * their silence window on each breath; silence alone times out. `phase`
+ * names the mount stage underway, so a silence timeout can say where the
+ * breathing stopped. Emission ends at settle (`ea` or `fault`).
+ *
+ * `progress` carries a monotonic work counter (slots resolved, stages
+ * entered) — the progress-kick law: a breath whose (phase, progress) pair
+ * freezes proves only that the event loop turns, not that mount advances;
+ * watchdogs bound that state with a stall budget. (The embedded-systems
+ * "timer-ISR kick" anti-pattern, guarded.)
+ */
+export interface IslandMsg_Breath {
+  schema_version: ProtocolVersion;
+  type: "breath";
+  wikiUri: string;
+  phase: string;
+  progress: number;
+}
+
+/**
  * Island fault signal. Vessel MUST mark the slot as evicted.
  */
 export interface IslandMsg_Fault {
@@ -524,6 +547,7 @@ export type IslandToVesselMsg =
   | IslandMsg_Event
   | IslandMsg_TeardownAck
   | IslandMsg_Ea
+  | IslandMsg_Breath
   | IslandMsg_Fault
   | IslandMsg_Ready
   | WikiMsg_VerbResult
@@ -554,7 +578,7 @@ export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op", "admin:wiki-alert"] as const).includes(
+  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op", "admin:wiki-alert"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -617,6 +641,11 @@ export function mkReady(): IslandMsg_Ready {
 /** Build an ea sovereignty declaration — the island signals it breathes and stands ready. */
 export function mkEa(wikiUri: string): IslandMsg_Ea {
   return { schema_version: ISLAND_PROTOCOL_VERSION, type: "ea", wikiUri };
+}
+
+/** Build a mount-progress breath — `phase` names the stage, `progress` the monotonic work counter. */
+export function mkBreath(wikiUri: string, phase: string, progress = 0): IslandMsg_Breath {
+  return { schema_version: ISLAND_PROTOCOL_VERSION, type: "breath", wikiUri, phase, progress };
 }
 
 export function mkFault(wikiUri: string, error: string): IslandMsg_Fault {

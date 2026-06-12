@@ -14,7 +14,7 @@
  */
 
 import { isIslandToVesselMsg } from "./island-protocol.js";
-import type { IslandToVesselMsg, IslandStorageConfig } from "./island-protocol.js";
+import type { IslandToVesselMsg, IslandMsg_Breath, IslandStorageConfig } from "./island-protocol.js";
 
 // ── VesselWorkerHandle — platform-blind handle over a spawned island worker ───
 //
@@ -51,8 +51,21 @@ export interface VesselIslandHost {
 export interface AwaitIslandMsgOpts<T extends IslandToVesselMsg> {
   /** The island→vessel message type to wait for (e.g. "ea", "teardown:ack"). */
   expectedType: T["type"];
-  /** Reject after this many ms. */
+  /** Reject after this many ms of SILENCE — a `resetOnTypes` match re-arms it. */
   timeoutMs: number;
+  /**
+   * Message types that re-arm the timeout instead of settling (the ea-breath
+   * law: a mounting island that still emits never reads dead — silence alone
+   * times out). The rejection names the last breath heard.
+   */
+  resetOnTypes?: readonly IslandToVesselMsg["type"][];
+  /**
+   * Bound on breathing-without-advancing (the progress-kick law): when reset
+   * messages keep arriving but their (phase, progress) evidence freezes for
+   * this many ms, reject as STALLED — a live event loop whose work never
+   * advances reads dead, on a budget. Absent → re-arm on any reset message.
+   */
+  progressStallMs?: number;
   /** Register a message handler; return its unsubscribe. */
   subscribe: (handler: (raw: unknown) => void) => () => void;
   /** Optionally register an error handler; return its unsubscribe. */
@@ -69,17 +82,53 @@ export interface AwaitIslandMsgOpts<T extends IslandToVesselMsg> {
 export function awaitIslandMsg<T extends IslandToVesselMsg>(opts: AwaitIslandMsgOpts<T>): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const offs: Array<() => void> = [];
+    let timer: ReturnType<typeof setTimeout>;
+    let lastBreath: string | null = null;
+    let lastEvidence: string | null = null;
+    let lastAdvanceAt = Date.now();
     const cleanup = (): void => {
       clearTimeout(timer);
       for (const off of offs) off();
     };
-    const timer = setTimeout(() => {
-      cleanup();
-      reject(new Error(`[vessel-host] timeout waiting for ${opts.expectedType}`));
-    }, opts.timeoutMs);
+    const arm = (): void => {
+      timer = setTimeout(() => {
+        cleanup();
+        reject(new Error(
+          `[vessel-host] timeout waiting for ${opts.expectedType}` +
+          ` (${opts.timeoutMs}ms of silence${lastBreath ? `; last breath: ${lastBreath}` : ""})`,
+        ));
+      }, opts.timeoutMs);
+    };
+    arm();
 
     offs.push(opts.subscribe((raw) => {
-      if (!isIslandToVesselMsg(raw) || raw.type !== opts.expectedType) return;
+      if (!isIslandToVesselMsg(raw)) return;
+      if (opts.resetOnTypes?.includes(raw.type)) {
+        // Breath, not settlement — the island still lives. Fresh evidence
+        // (phase or progress moved) restarts the stall clock; frozen evidence
+        // spends down the stall budget even while breaths keep the silence
+        // window re-armed (progress-kick over timer-kick).
+        const breath  = raw.type === "breath" ? (raw as IslandMsg_Breath) : null;
+        lastBreath    = breath ? `${breath.phase}#${breath.progress}` : raw.type;
+        if (lastBreath !== lastEvidence) {
+          lastEvidence  = lastBreath;
+          lastAdvanceAt = Date.now();
+        } else if (
+          opts.progressStallMs !== undefined &&
+          Date.now() - lastAdvanceAt > opts.progressStallMs
+        ) {
+          cleanup();
+          reject(new Error(
+            `[vessel-host] ${opts.expectedType} wait stalled` +
+            ` (no progress in ${opts.progressStallMs}ms; last breath: ${lastBreath})`,
+          ));
+          return;
+        }
+        clearTimeout(timer);
+        arm();
+        return;
+      }
+      if (raw.type !== opts.expectedType) return;
       cleanup();
       resolve(raw as T);
     }));
