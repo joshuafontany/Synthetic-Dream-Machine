@@ -72,7 +72,7 @@ Promotion to lares/ canon (live session → branch commit → hostless URI) foll
 
 ## Derivation Algorithm — siting
 
-Converts a `lar:` URI to its stable relative filepath candidate. One root law: the repo IS the vessel; stable carriers live under `bags/`.
+Converts a `lar:` URI to its stable relative filepath candidate — the **canon-mirror convention, one projection rule among possible many** (`lar-uri #five-planes`: siting ⊥ name ⊥ residency; multi-bag projection stands as a named open crack). One root law: the repo IS the vessel; stable carriers live under `bags/`.
 
 ```
 Given: lar-uri (string)

@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
+role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, five-planes reading (Provisional), resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
 status    = "submission-draft"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
@@ -166,6 +166,22 @@ Registry pattern. A bag MAY hold tiddlers whose titles are *paths inside it* poi
 
 <<~/ahu >>
 
+<<~ ahu #five-planes >>
+
+## The Five Planes (Provisional, ratified to the floor 2026-06-12)
+
+The schema carries five independent planes; conflating them trips residency, projection, and federation work. Held at **register Provisional** — this reading runs ahead of field vocabulary and stays open to better words.
+
+1. **NAME** — the URI identifies, full stop. An `@`-shaped path segment reads as **namespace of minting** (the authority that named the unit), never a residency claim. The name survives COPY, MOVE, multi-bag presence, deletion, and federation unchanged (coordinate ⊥ change-identity).
+2. **RESIDENCY** — which bags hold a manifestation NOW = a queried relation (`listBagsHolding`, @catalog holdings, recipe stacks), never derived from the path. The same URI lawfully exists in @draft AND a canon bag AND @personal at once, shadowed by layer order. Name-prefix and holding bag coincide only by canon convention.
+3. **SITING** — where a projection of a manifestation lands on disk: a per-bag mirror convention (`loci` derivation = the canon-bag rule, one projection rule among possible many), gated by the disk-mirror GRANT, never implied by the name.
+4. **SPEECH** — the hostful session form (`lar://alias:grant@host/...`): who speaks, under what grant, from where — a speech-act envelope for exchange spans, never storage.
+5. **STABILITY** — literal `ha.ka.ba` (settled namespace) vs unstable attitude roots (session bearing, declared-unresolved until adopted into a bag).
+
+The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable names; adoption moves a unit to NAME-stable; LOAD/INGEST set RESIDENCY; the mirror grant sets SITING. No plane ever answers for another.
+
+<<~/ahu >>
+
 <<~ ahu #resolution >>
 
 ## Resolution Model
@@ -313,6 +329,8 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 - **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
 - **Session-form authority grammar.** The `alias:grant@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
 - **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
+- **Multi-bag disk projection (named crack, 2026-06-12).** Per-bag mirrors today project only URIs within the bag's own namespace prefix; a manifestation held by a bag whose name differs from the URI prefix has no ruled disk path. Repair rides the siting-function sprint (handoff).
+- **Turn-as-meme-graph (named seed, 2026-06-12).** Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; the INGEST organ can one day decompose session logs into corpus.
 - **Lineage citation bind.** BOUND 2026-06-08 from the `sdm/` shelf: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *UVG 2e* pp. 230–234. Egyptian root named in source: the *Coffin Texts* / *Book of the Dead*. Hawaiian *hā* layers as resonance.
 
 <<~/ahu >>
