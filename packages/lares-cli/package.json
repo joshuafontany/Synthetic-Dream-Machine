@@ -2,15 +2,15 @@
   "name": "@lares/cli",
   "version": "0.1.0",
   "private": true,
-  "description": "Lares operator CLI — lares init, lares act (Residency Model ACTION verbs), lares wiki, lares bag, lares heleuma, … One entry point for every operator-facing ceremony.",
+  "description": "Lares operator CLI \u2014 lares init, lares act (Residency Model ACTION verbs), lares wiki, lares bag, lares heleuma, \u2026 One entry point for every operator-facing ceremony.",
   "type": "module",
   "bin": {
-    "lares": "./dist/src/bin/lares.js"
+    "lares": "./bin/lares.mjs"
   },
   "scripts": {
     "prebuild": "node ../../tools/clean-output.mjs dist",
-    "build":     "tsc -p tsconfig.build.json",
-    "dev":       "tsx src/bin/lares.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx src/bin/lares.ts",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {

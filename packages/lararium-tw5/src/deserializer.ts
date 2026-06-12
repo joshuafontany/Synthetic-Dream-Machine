@@ -72,6 +72,11 @@ export function memeticWikitextDeserializer(
   text:   string,
   fields: Record<string, unknown>,
 ): TiddlerFields[] {
+  // Carrier-bytes law (spec #carrier-bytes): carriers rest as UTF-8, LF, no
+  // BOM. The boundary normalizes foreign line endings and a leading BOM at
+  // ingest — once, here, so every stratum downstream sees one byte law.
+  if (text.charCodeAt(0) === 0xfeff) text = text.slice(1);
+  if (text.includes("\r")) text = text.replace(/\r\n?/g, "\n");
   const baseUri = String(fields?.["title"] ?? "");
   const result: TiddlerFields[] = [];
 

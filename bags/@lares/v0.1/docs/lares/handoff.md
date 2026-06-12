@@ -124,28 +124,20 @@ Burrs live in their own ledger now: #burrs.
 
 <<~ ahu #burrs >>
 
-## Burr ledger — non-blocking, named so they never surprise
+## Burr ledger — live burrs only; rulings live in doctrine, done work in git
 
-- content-hash echo suppression upgrade (§2)
-- tombstone/whiteout verb reserved (§3)
-- Automerge history growth → DXOS-epoch pattern watched (§1)
-- remaining `lares wiki` subcommands print human-only
-- `wiki open` selects-for-next-boot only
-- **pin Unicode NFC in the memetic-wikitext spec, not code** (work-lab dragon-list; corpus runs thick with ʻokina/candrabindu/ॐ — untested)
-- atomic temp-file+rename writes (named §2, unimplemented)
-- CRLF/BOM boundary policy untested (matters at the Nexus rung)
-- iam resurrections ruled: type verbatim, namespace Unicode-escaped, created preserved (deny-set = machine stamps only; resurrections: type
-- namespace as &#x____; entity codes
-- created
-- source-file (71 doc memes)
-- tags (23))
-- engine-swap wants a fresh store (genesis reconcile answered current against a stale engine — epoch-design finding)
-- **frozen-archive law**: @lares-history round-trips LOSSY (44 pre-law dialect files) — it NEVER rides the daily LOAD; if it ever feeds, it feeds through a deliberate per-file migration ceremony with operator review
-- **vessel restart watchdog**: the live ea timeouts traced to a flat 15s handshake deadline vs store-scaled mount time — budget raised to 120s; `tests/e2e/vessel-reboot.test.ts` stands guard (corpus-scale, same-port); named debt: the watchdog SHOULD listen for the island's ea — breath, not deadline; a mounting island that still breathes never reads dead; the timer resets on breath, silence alone times out
-- projector Synced-tree key = URI alone; a carrier projecting to MULTIPLE mirrors records only the last surface — dormant until multi-mirror wakes
-- genesis-path seam: CLI env reads `root/genesis`, main.ts special-cases repo-root to the package dir — the symlink bridges; one shared resolution function wants to replace the bridge
-- `$tw.lares.expandMemeRefs` stands registered with no consumer yet (the law holds in form; the first caller = the INGEST verb)
+Cleared 2026-06-11 evening (lar:///ledger.combed.clean): content-hash echo suppression → DONE (both §6 hash gates live) · atomic temp+rename writes → DONE (projector) · CRLF/BOM boundary policy → DONE (membrane normalizes once; vectors) · NFC → PINNED in spec (memetic-wikitext #carrier-bytes) · multi-mirror Synced-tree key → DONE ((bag,uri)) · genesis-path seam → DONE (one law: root/genesis; the main.ts special case died) · `lares` bin cold-start wart → DONE (committed shim). The iam-resurrection and frozen-archive RULINGS moved home to doctrine notes above; the engine-swap and restart findings live in their own entries.
+
+Still live:
+
+- tombstone/whiteout verb — reserved (§3), wakes when layered delete needs it
+- Automerge history growth — DXOS-epoch pattern watched (§1), wakes on real growth
+- `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
+- ea-breath watchdog — the admin island SHOULD emit breath during mount so the timer resets on breath, silence alone times out (wants worker-side emission; budget meanwhile 120s, reboot vector guards)
+- engine-swap reconcile answered "current" against a stale engine — epoch-design seam, feeds project-engine-epoch
+- `$tw.lares.expandMemeRefs` registered, first consumer = the INGEST verb
 - e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
+- NFC assertion at the membrane — the spec pins NFC; the boundary MAY assert/normalize when a non-NFC carrier arrives (do with the INGEST gesture, where foreign bytes first walk in)
 
 <<~/ahu >>
 

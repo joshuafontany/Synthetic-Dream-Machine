@@ -167,3 +167,18 @@ kapu body.
     expect(rendered).toBe(expandMemeRefs(readerOf(recordsOf(rendered, KAPU_URI)), KAPU_URI));
   });
 });
+
+describe("carrier-bytes law — the boundary normalizes once (spec #carrier-bytes)", () => {
+  test("BOM strips and CRLF normalizes to LF; the carrier reads canonical", () => {
+    const foreign = "﻿" + TEACHING.replace(/\n/g, "\r\n");
+    const records = recordsOf(foreign, TEACHING_URI);
+    expect([...records.keys()]).toContain(`${TEACHING_URI}#lesson`);
+    const rendered = expandMemeRefs(readerOf(records), TEACHING_URI)!;
+    expect(rendered.includes("\r")).toBe(false);
+    expect(rendered.charCodeAt(0)).not.toBe(0xfeff);
+    // a CRLF+BOM carrier and its LF original parse to identical records
+    const native = recordsOf(TEACHING, TEACHING_URI);
+    expect([...records.keys()].sort()).toEqual([...native.keys()].sort());
+    expect(records.get(TEACHING_URI)!.text).toBe(native.get(TEACHING_URI)!.text);
+  });
+});

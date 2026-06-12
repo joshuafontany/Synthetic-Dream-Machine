@@ -414,6 +414,21 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
+<<~ ahu #carrier-bytes >>
+
+## Carrier Bytes Law
+
+A carrier at rest carries one byte law (pinned here in the spec, per the canonical-form discipline — the boundary enforces, the spec declares):
+
+- **Encoding:** UTF-8, no BOM. A leading BOM strips at the membrane boundary, once.
+- **Line endings:** LF. Foreign CRLF/CR normalize to LF at the boundary, once.
+- **Unicode normalization: NFC.** The corpus runs thick with composed forms (ʻokina, candrabindu, ॐ, alchemical glyphs); NFC names the canonical form so semantically-identical, byte-different carriers never fail parity honestly-but-uselessly. Authoring surfaces SHOULD emit NFC; the membrane MAY assert and normalize at the boundary when a non-NFC carrier arrives — never silently mid-stream.
+- **Trailing newline:** a carrier ends with exactly one LF after its final closer.
+
+The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees normalized bytes; every projection outward emits them. Mid-pipeline re-normalization constitutes a degraded membrane.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

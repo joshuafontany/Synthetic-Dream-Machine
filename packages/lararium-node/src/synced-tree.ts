@@ -24,7 +24,7 @@ export function contentHash(text: string): string {
 }
 
 export class SyncedTree {
-  private map = new Map<string, string>();   // carrier-root URI → sha256 of last-projected bytes
+  private map = new Map<string, string>();   // `${bagId}\0${carrier-root URI}` → sha256 of last-projected bytes (a carrier may project to multiple mirrors)
   private persistTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(

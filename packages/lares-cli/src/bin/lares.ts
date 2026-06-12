@@ -103,9 +103,14 @@ const invokedAsScript = (() => {
   }
 })();
 
-if (invokedAsScript) {
+/** Entry for the committed bin shim (bin/lares.mjs) — same path as direct invocation. */
+export function runCli(): void {
   dispatch(process.argv.slice(2)).then(
     (code) => process.exit(code),
     (err)  => { console.error(err); process.exit(1); },
   );
+}
+
+if (invokedAsScript) {
+  runCli();
 }
