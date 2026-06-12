@@ -124,9 +124,7 @@ These items name known inconsistencies in the current tree. Each carries a resol
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/vm-pool >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/browser-dock >>
 
 <<~/ahu >>
 

@@ -108,7 +108,6 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded same day o
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ea >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-accumulator >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology >>

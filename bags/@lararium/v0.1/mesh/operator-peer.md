@@ -240,7 +240,6 @@ identical ea rights.
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/open-vessel >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/vm-pool >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider >>
 <<~ pranala #implements-vessel-law ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel family:control role:implements >>

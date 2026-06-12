@@ -18,9 +18,9 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "fs";
-import { join, dirname, basename, resolve }                                 from "path";
-import { fileURLToPath }                                                    from "url";
+import { join, basename, resolve }                                          from "path";
 
+import { repoRoot } from "@lararium/mesh/node";
 import {
   sha256HexBytesSync,
   utf8Bytes,
@@ -39,9 +39,9 @@ import { tw5PluginsRoot } from "@lararium/tw5/tw5-memes-root";
 // Path constants
 // ---------------------------------------------------------------------------
 
-const __dir                   = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_GENESIS_DIR     = join(__dir, "../../../genesis");   // repo-root genesis (one root law)
-const REPO_ROOT               = join(__dir, "../../..");
+// One root law: the repo IS the vessel — repoRoot from mesh, never path arithmetic.
+const REPO_ROOT               = repoRoot;
+const DEFAULT_GENESIS_DIR     = join(REPO_ROOT, "genesis");
 const BAGS_ROOT               = join(REPO_ROOT, "bags");
 const LARARIUM_TW5_DIST_PLUGIN = join(REPO_ROOT, "packages", "lararium-tw5", "dist-plugin");
 const LARES_TW5_PLUGIN_ATTESTATION = join(LARARIUM_TW5_DIST_PLUGIN, "lares-memetic-wikitext.attestation.json");

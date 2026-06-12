@@ -105,7 +105,8 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~ pranala #tiddler-record ? -> lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record family:data role:companion >>
-<<~ pranala #source-file ? -> packages/lararium-tw5/src/carrier-codec.ts family:code role:implements >>
+<<~ pranala #source-import ? -> packages/lararium-tw5/src/meme-stream.ts family:code role:implements >>
+<<~ pranala #source-export ? -> packages/lararium-node/src/disk-projector.ts family:code role:implements >>
 
 <<~/ahu >>
 

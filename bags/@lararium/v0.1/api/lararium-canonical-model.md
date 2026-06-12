@@ -166,9 +166,9 @@ and load-bearing:
 
 The model converges; these seams stay open and SHOULD reconcile (not re-debate):
 
-1. **Stub memes vs load-bearing code** — recipe / resolver / capability / lar-uris / vm-pool /
+1. **Stub memes vs load-bearing code** — recipe / resolver / capability / lar-uris /
    tiddler-store memes sit at mana 3 (TODO) while their code carries load. Fill them or fold
-   into this model.
+   into this model. (Dead-pointer stubs burned 2026-06-12 — the YIN shelf sweep.)
 2. **VM-pool vs island-owned residency** — operator-peer says "pool manages residency";
    residency-tiers says residency flows from islands. Island-owned wins (law #8); reconcile
    operator-peer's wording.

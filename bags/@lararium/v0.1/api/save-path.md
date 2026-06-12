@@ -148,7 +148,6 @@ No callbacks fire after `stop()`.
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-adaptor >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-accumulator >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh >>
 
 <<~/ahu >>
