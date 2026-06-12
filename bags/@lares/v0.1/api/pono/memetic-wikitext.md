@@ -15,6 +15,8 @@ status    = "submission-draft"
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"
+revised-on    = "2026-06-11"
+revision-note = "#carrier-bytes law added: UTF-8 no-BOM, LF, Unicode NFC pinned as canonical form; boundary normalizes once"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>

@@ -13,7 +13,7 @@ namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-11"
-revision-note = "co-projection rewrite of #core-claim (mind originates; disk + CRDT co-project; CRDT holds the merge seat); prior: carrier-whole at rest, grain ladder canonized (disk=whole carrier, doc=record, VM=decomposed)"
+revision-note = "projection-law trued to the running code (membrane recompose via expandMemeRefs; debounce per bag+root; hash-gate skip); prior: co-projection rewrite of #core-claim; carrier-whole at rest, grain ladder canonized"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "approved"
 tagspace      = "stable"
@@ -80,10 +80,10 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 ## Projection law
 
-1. **RENDER, not copy** (Fontany-Fuller-Zelenka). Disk projection re-renders the carrier through the TW5 VM (with fakeDOM) from normalized tiddler records — the same pipeline that boots the browser client. It is never a raw string copy of stored bytes.
+1. **RENDER, not copy** (Fontany-Fuller-Zelenka). Disk projection recomposes the whole carrier from normalized tiddler records via the membrane's recompose inverse (`expandMemeRefs`, registered on `$tw.lares`, running inside the island VM). It never copies stored bytes raw — byte-fidelity comes from the proven parse∘render fixed point, not retention.
 2. **Store → disk is one direction; ingest is another.** The projector is unidirectional (store → disk). Re-reading operator edits (disk → store) is a **separate file-watcher / ingest path**. The `writing` guard set prevents the projector's own writes from echoing back through ingest.
 3. **The git diff is the operator's signature.** When a residency **MOVE** (the canon ACTION verb) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent.
-4. **Debounce.** Projection writes debounce per (bag, tiddler) to bound write amplification (pairs with the outbound save-path debounce).
+4. **Debounce per (bag, carrier root).** A child change climbs `fragment-parent` to its root; the group flushes as ONE carrier write (carrier-whole at rest). The projection-side content-hash gate skips byte-identical writes entirely — no event, no mtime churn.
 
 <<~/ahu >>
 

@@ -30,8 +30,11 @@
  *   (bag, root); the flush renders the ROOT — one carrier, one file. A
  *   fragment URI never owns a disk path (bag-paths returns null for them).
  *
- * The writing Set guards against ingest echo:
- *   file watcher MUST check writing.has(uri) before ingesting a change.
+ * Echo suppression ranks (§6): the CONTENT-HASH gates carry the law —
+ * ingest drops disk-hash == synced-hash; projection skips byte-identical
+ * writes. The `writing` Set survives beneath them as a latency
+ * optimization only (skip re-statting our own in-flight writes); no
+ * correctness rests on it.
  */
 
 import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameSync } from "fs";
@@ -159,6 +162,12 @@ export class LarDiskProjector {
     for (const timer of this.timers.values()) clearTimeout(timer);
     this.timers.clear();
     this.writing.clear();
+    // Shutdown grace: pending coalesced observations land before the
+    // island unmounts. (Un-rendered debounced flushes lawfully die — the
+    // records hold truth; the next change or the ingest gesture's full
+    // scan re-projects. Losing an OBSERVATION costs a fresh-adoption
+    // decision; losing a render costs nothing durable.)
+    this.syncedTree?.flush();
   }
 
   /** Unlink by trying all mirrors whose path strategy resolves the URI. */
