@@ -117,7 +117,10 @@ export function maskedExec(text: string, re: RegExp, spans?: readonly MaskSpan[]
   while ((m = g.exec(text)) !== null) {
     const blocked = allowSpanStart ? inMaskInterior(mask, m.index) : inMask(mask, m.index);
     if (!blocked) return m;
-    if (g.lastIndex === m.index) g.lastIndex++;   // zero-width guard
+    // A masked match may have swallowed text containing a real later match
+    // (greedy patterns) — re-seek from just past the masked START, never
+    // past the whole match.
+    g.lastIndex = m.index + 1;
   }
   return null;
 }
@@ -129,8 +132,12 @@ export function maskedExecAll(text: string, re: RegExp, spans?: readonly MaskSpa
   const out: RegExpExecArray[] = [];
   let m: RegExpExecArray | null;
   while ((m = g.exec(text)) !== null) {
-    if (!inMask(mask, m.index)) out.push(m);
-    if (g.lastIndex === m.index) g.lastIndex++;
+    if (!inMask(mask, m.index)) {
+      out.push(m);
+      if (g.lastIndex === m.index) g.lastIndex++;   // zero-width guard
+    } else {
+      g.lastIndex = m.index + 1;                    // masked: re-seek, don't overshoot
+    }
   }
   return out;
 }

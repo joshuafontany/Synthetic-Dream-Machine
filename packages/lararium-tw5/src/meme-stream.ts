@@ -46,13 +46,16 @@ export type MemeStreamEvent =
 // ---------------------------------------------------------------------------
 
 // SOH: both standard &#x0001; and Kapu DC1 &#x0011;
-// All control sigils use (?:[^>]|->) to allow resonance markers (ॐ, ⊙, etc.) and -> sequences.
-const SOH_RE  = /<<~(?:[^>]|->)*&#x(?:0001|0011);(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
-const STX_RE  = /<<~(?:[^>]|->)*&#x0002;(?:[^>]|->)*>>/;
-const ETX_RE  = /<<~(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/;
+// All control sigils use (?:[^>\n]|->) — resonance markers (ॐ, ⊙) and ->
+// sequences allowed, but a sigil NEVER crosses a line: the multi-line form
+// once let a quoted `<<~` mention swallow text down to a distant real sigil
+// (loci.md, 2026-06-11).
+const SOH_RE  = /<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
+const STX_RE  = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
+const ETX_RE  = /<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
 // EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
-const EOT_RE  = /<<~(?:(?:[^>]|->)*&#x(?:0004|0014);(?:[^>]|->)*|\s*->\s*\?)\s*>>/;
-const AHU_OPEN_RE  = /<<~(?:[^>]|->)*\bahu\s+(#[\w-]+)\s*>>/;
+const EOT_RE  = /<<~(?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
+const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#[\w-]+)\s*>>/;
 const AHU_CLOSE_RE = /<<~\/ahu\s*>>/;
 
 type Hit = { index: number; end: number; cap: string | undefined };

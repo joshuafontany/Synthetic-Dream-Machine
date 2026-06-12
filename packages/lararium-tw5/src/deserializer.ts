@@ -38,6 +38,10 @@ import {
   composeSlotPath,
 } from "./meme-ast/ahu-scan.js";
 import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
+// The fence-mask law surfaces through the membrane: consumers (tests, the
+// projector layer) read quoted-sigil semantics from HERE, never from
+// meme-ast internals (vm-grammar-boundary law).
+export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 export type { GrammarRules } from "./meme-ast/types.js";
@@ -168,8 +172,11 @@ export function memeticWikitextDeserializer(
 // ---------------------------------------------------------------------------
 
 // Structural marker patterns — strip these from parent text at ingest.
-const SOH_LINE_RE = /^<<~(?:[^>]|->)*&#x(?:0001|0011);(?:[^>]|->)*>>\n?/;
-const STX_LINE_RE = /<<~(?:[^>]|->)*&#x0002;(?:[^>]|->)*>>\n?/;
+// Control sigils live on ONE line by law — `[^>\n]` keeps the scan from
+// crossing lines (a greedy multi-line match once swallowed from a quoted
+// `<<~` mention down to the real closer; found on loci.md, 2026-06-11).
+const SOH_LINE_RE = /^<<~(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
+const STX_LINE_RE = /<<~(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");
@@ -196,8 +203,20 @@ function splitMemeToTiddlers(
   // never frames the carrier — before the mask, a fenced ETX mention
   // truncated everything after it (real corpus loss, found 2026-06-11).
   const noSoh = text.replace(SOH_LINE_RE, "");   // anchored at 0 — never fenced
-  const etxM = maskedExec(noSoh, /\n?<<~(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/);
+  const etxM = maskedExec(noSoh, /\n?<<~(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/);
   const stripped = etxM ? noSoh.slice(0, etxM.index) : noSoh;
+  // Degraded-carrier surfacing: a closer that exists in the bytes but sits
+  // fence-masked (an unclosed or ambiguous fence swallowed it) would ride
+  // into the body as CONTENT — and every render would append a fresh closer
+  // pair, doubling without bound. Found live 2026-06-11 on fence-teaching
+  // docs CommonMark itself misread. Never silent: name it for the operator.
+  if (!etxM && /&#x0003;/.test(noSoh)) {
+    warnings.push(
+      `${uri}: carrier close (&#x0003;) present but fence-masked — an unclosed or ` +
+      `ambiguous code fence swallows it; closers will double on every round trip. ` +
+      `Check fence balance (quote fences inside fences with a LONGER outer run).`,
+    );
+  }
 
   const stxM = maskedExec(stripped, STX_LINE_RE);
   const headerRegion = stxM ? stripped.slice(0, stxM.index) : stripped;
@@ -555,17 +574,30 @@ export type FieldsReader = (title: string) => TiddlerFields | undefined;
 // runtime/structural fields never re-emit into the iam fence — they live in
 // the envelope, the record stratum, or the VM, not in the operator's TOML.
 const IAM_DENY: ReadonlySet<string> = new Set([
-  "title", "text", "type", "tags", "created", "modified", "revision", "bag",
+  "title", "text", "modified", "revision", "bag",
   "slot", "fragment-parent", "preamble", "postamble", "prologue",
-  "header-text", "namespace",
-  "source-file", "synced-at", "disk-projection", "lar-generated",
+  "header-text",
+  "synced-at", "disk-projection", "lar-generated",
   "ahu-parent", "ahu-slot", "realm-origin", "origin-bag", "carrier-soh",
 ]);
+// Authored-identity resurrections (operator rulings 2026-06-11): the deny-set
+// holds MACHINE stamps only. `type` re-emits verbatim — the carrier
+// self-describes its dialect at rest (TW5's content-type field shares the
+// name exactly; round trip = identity). `namespace` re-emits as explicit
+// Unicode escapes — glyphs render on the SOH line, the TOML lists their
+// codepoints. `created` re-emits because 11 corpus carriers author it as a
+// human date and the LOAD→project path stamps it nowhere (a future
+// wiki-edit stamping created would surface in the projection diff — the
+// operator's signature surface — not silently). `source-file` re-emits
+// for the same reason: 71 doc memes author it to name the TS source they
+// document; the membrane path stamps it nowhere.
 
 // Children additionally drop ingest-stamped coordinates: `uri-path` is
 // derived from the title, and `file-path` on a child is the burned
 // fragment-file leak (carrier-whole at rest — a fragment never owns a file).
-const CHILD_IAM_DENY: ReadonlySet<string> = new Set([...IAM_DENY, "uri-path", "file-path"]);
+const CHILD_IAM_DENY: ReadonlySet<string> = new Set([
+  ...IAM_DENY, "uri-path", "file-path", "namespace", "type", "created", "source-file", "tags",
+]);
 
 function fmtTomlValue(v: string | string[]): string {
   if (Array.isArray(v)) {
@@ -578,6 +610,25 @@ function fmtTomlValue(v: string | string[]): string {
   return '"' + s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r") + '"';
 }
 
+/**
+ * The namespace's canonical iam form: every non-ASCII codepoint as an
+ * HTML-entity hexcode — the same idiom the carrier's control sigils speak
+ * (`&#x0950;` beside `&#x0004;`). The glyphs render on the SOH line; the
+ * TOML lists their codes. The SOH extraction holds field authority at
+ * parse (glyphs), so the entity string re-derives stably each render.
+ */
+function fmtNamespaceEntities(v: string): string {
+  let out = '"';
+  for (const ch of String(v)) {
+    const cp = ch.codePointAt(0)!;
+    if (ch === "\\") out += "\\\\";
+    else if (ch === '"') out += '\\"';
+    else if (cp >= 0x20 && cp < 0x7f) out += ch;
+    else out += "&#x" + cp.toString(16).toUpperCase().padStart(4, "0") + ";";
+  }
+  return out + '"';
+}
+
 /** Canonical iam TOML: sorted keys, equals-signs aligned to the longest key. */
 function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
   const keys = Object.keys(fields).sort().filter((k) => {
@@ -587,7 +638,13 @@ function emitIamToml(fields: TiddlerFields, deny: ReadonlySet<string>): string {
   });
   if (keys.length === 0) return "";
   const pad = Math.max(...keys.map((k) => k.length));
-  return keys.map((k) => k.padEnd(pad) + " = " + fmtTomlValue(fields[k] as string | string[])).join("\n") + "\n";
+  return keys.map((k) => {
+    const v = fields[k] as string | string[];
+    const rendered = k === "namespace" && typeof v === "string"
+      ? fmtNamespaceEntities(v)
+      : fmtTomlValue(v);
+    return k.padEnd(pad) + " = " + rendered;
+  }).join("\n") + "\n";
 }
 
 const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+)\s*>>/g;
@@ -638,6 +695,10 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += "<<~ &#x0002; >>\n\n";
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""));
   out += "\n\n<<~ &#x0003; >>\n\n<<~ &#x0004; -> ? >>\n";
-  out += str("postamble");
+  // The EOT→postamble seam normalizes to a stable fixed point: the EOT line
+  // already ends with one newline; a postamble's own leading newlines would
+  // stack a fresh blank line every round trip (found on the Kapu &#x0014;
+  // trailing closer, 2026-06-11).
+  out += stripLeadingNewlines(str("postamble"));
   return out;
 }
