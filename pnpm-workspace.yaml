@@ -7,3 +7,6 @@ packages:
   - 'ftls'
   - 'sdm'
   - 'wtf'
+allowBuilds:
+  cbor-extract: true
+  esbuild: true
