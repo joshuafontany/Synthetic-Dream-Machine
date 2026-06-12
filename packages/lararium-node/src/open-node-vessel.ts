@@ -27,6 +27,7 @@ import type {
   VesselBootstrap, VesselCoreAssembly,
 } from "@lararium/mesh";
 import {
+  makeDurableMailbox,
   OpenIdentitySlot,
   corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
@@ -371,50 +372,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
     // Island pool (worker_threads) + the event bus + the sovereign-worker command bindings.
     makePool: (_admin, assembly) => {
-      // ── Durable mailbox (lane law §7): a verb for an island that isn't
-      // live PARKS as a record in @admin keyed by island identity; the
-      // island's next EA (its own breath declaration) drains it —
-      // deliver-to-identity: the message survives the island and arrives
-      // when the identity breathes again.
-      // The outcome status on the same record = idempotency ledger = audit.
-      const MAILBOX_PREFIX = "lar:///ha.ka.ba/@admin/mailbox/";
-      const parkWikiVerb = async (wikiId: string, v: { verb: string; args: Record<string, unknown>; requestedBy: string }): Promise<void> => {
-        const id = crypto.randomUUID();
-        await assembly.composite.put({
-          tiddler: {
-            title: `${MAILBOX_PREFIX}${wikiId}/${id}`,
-            "wiki-id": wikiId,
-            verb: v.verb,
-            args: JSON.stringify(v.args),
-            "requested-by": v.requestedBy,
-            status: "parked",
-            "parked-at": new Date().toISOString(),
-          },
-          meta: {},
-        }, { kind: "lares-verb", requestId: id }, { bag: ADMIN_BAG_ID });
-        console.log(`[mailbox] parked ${v.verb} for ${wikiId} (island not live)`);
-      };
-      const drainMailbox = async (wikiId: string): Promise<void> => {
-        const prefix = `${MAILBOX_PREFIX}${wikiId}/`;
-        const titles = (await assembly.composite.listVisible()).filter((t) => t.startsWith(prefix));
-        for (const title of titles) {
-          const rec = await assembly.composite.get(title);
-          const f = rec?.tiddler as Record<string, string> | undefined;
-          if (!rec || !f || f["status"] !== "parked") continue;
-          try {
-            await vmManager.placeWikiVerb(wikiId, {
-              verb: f["verb"]!,
-              args: JSON.parse(f["args"] ?? "{}") as Record<string, unknown>,
-              requestedBy: f["requested-by"] ?? "mailbox",
-            });
-            await assembly.composite.put({
-              tiddler: { ...f, title, status: "delivered", "delivered-at": new Date().toISOString() },
-              meta: rec.meta ?? {},
-            }, { kind: "lares-verb", requestId: `${title}#delivered` }, { bag: ADMIN_BAG_ID });
-            console.log(`[mailbox] delivered ${f["verb"]} to ${wikiId}`);
-          } catch { /* island died mid-drain — record stays parked for the next mount */ }
-        }
-      };
+      // ── Durable mailbox (lane law §7) — keel mechanism (vessel-mailbox.ts,
+      // substrate-agnostic); this vessel supplies only its live-delivery path.
+      const mailbox = makeDurableMailbox(
+        assembly.composite,
+        (wikiId, v) => vmManager.placeWikiVerb(wikiId, v),
+        (line) => console.log(line),
+      );
       eventBus = new LarEventBusImpl(20);
       for (const ring of DEFAULT_RINGS) eventBus.registerRing(ring);
       eventBus.start();
@@ -431,7 +395,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         onWorkerEvent: (wikiId, msg) => {
           eventBus.enqueueToRing("vm-ring", "worker.event", { wikiId, listenable: msg.listenable, payload: msg.payload });
         },
-        onEa: (wikiId) => { void drainMailbox(wikiId); },   // breath → parked verbs deliver
+        onEa: (wikiId) => { void mailbox.drain(wikiId); },   // breath → parked verbs deliver
       });
 
       // Sovereign-worker: bind the pool MECHANISM to the worker's POLICY commands.
@@ -450,7 +414,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           // Not live → the verb PARKS durably and delivers on next mount —
           // the silent skip died 2026-06-12 (Akka /deadLetters lesson:
           // undeliverables go somewhere visible, never nowhere).
-          .catch(() => parkWikiVerb(wikiId, verbOpts));
+          .catch(() => mailbox.park(wikiId, verbOpts));
       });
       return vmManager;
     },
