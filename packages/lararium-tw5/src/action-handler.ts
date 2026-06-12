@@ -37,14 +37,15 @@ import type {
   LarTiddlerRecord,
   ChangeOrigin,
   Verb,
-  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction,
+  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction, IngestAction,
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
-  parseResidencyAction, withEffectRecord,
+  parseResidencyAction, withEffectRecord, sha256HexSync,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
-import { memeticWikitextDeserializer } from "./deserializer.js";
+import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
+import { decideIngest } from "./ingest-gate.js";
 
 // ── Options + registration ─────────────────────────────────────────────────
 
@@ -112,6 +113,7 @@ function destinationBag(action: ResidencyAction): string {
     case "COPY":
     case "MOVE":
     case "LOAD":
+    case "INGEST":
       return action.toBag;
     case "CLEAR":
     case "DROP":
@@ -129,6 +131,7 @@ async function executeAction(action: ResidencyAction, composite: CompositeStore)
     case "CLEAR": return executeClear(action, composite);
     case "DROP":  return executeDrop(action, composite);
     case "LOAD":  return executeLoad(action, composite);
+    case "INGEST": return executeIngest(action, composite);
   }
 }
 
@@ -161,6 +164,71 @@ async function executeLoad(action: LoadAction, composite: CompositeStore): Promi
     }
   }
   return { sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId, count: titles.length, titles };
+}
+
+
+/**
+ * INGEST — disk -> records through the §6 gate, replace-by-group apply.
+ * The gesture supplies diskHash + syncedHash with each carrier (it holds the
+ * disk grant and the Synced tree); the island computes only the
+ * currentRenderHash from its own merge seat. On an ingest decision the fresh
+ * records land under the action's changeId and group members that vanished
+ * from the re-parsed carrier tombstone (LOAD never removes; INGEST must).
+ * noop/refuse/conflict apply NOTHING — the decision rides the outcome.
+ */
+async function executeIngest(action: IngestAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+  const o = origin(action);
+  const results: Array<Record<string, unknown>> = [];
+  for (const carrier of action.carriers) {
+    const uri = carrier.uri;
+    const all = await listLiveTitlesInBag(composite, action.toBag);
+    // The carrier group: the root + its fragment children (FFZ decomposition
+    // emits `uri#slot` titles) + any path children (`uri/wires/...` era).
+    const groupTitles = all.filter((t) => t === uri || t.startsWith(`${uri}#`) || t.startsWith(`${uri}/`));
+    const current = new Map<string, Record<string, unknown>>();
+    for (const t of groupTitles) {
+      const rec = await readFromBag(composite, action.toBag, t);
+      if (rec) current.set(t, rec.tiddler as unknown as Record<string, unknown>);
+    }
+    const currentText = expandMemeRefs((t) => current.get(t) as never, uri) ?? "";
+    const decision = decideIngest({
+      uri,
+      diskText:          carrier.text,
+      diskHash:          carrier.diskHash,
+      syncedHash:        carrier.syncedHash,
+      currentRenderHash: sha256HexSync(currentText),
+      hash:              sha256HexSync,
+    });
+    if (decision.kind === "noop") {
+      results.push({ uri, decision: "noop", reason: decision.reason });
+      continue;
+    }
+    if (decision.kind === "refuse") {
+      results.push({ uri, decision: "refuse", warnings: [...decision.warnings] });
+      continue;
+    }
+    if (decision.kind === "conflict") {
+      results.push({ uri, decision: "conflict" });
+      continue;
+    }
+    const freshTitles = new Set<string>();
+    for (const fields of decision.records) {
+      const title = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
+      if (!title) throw new Error(`INGEST: carrier ${uri} produced a record without a title`);
+      const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
+      await landInBag(composite, action.toBag, record, action.changeId, o);
+      freshTitles.add(title);
+    }
+    const tombstoned: string[] = [];
+    for (const t of groupTitles) {
+      if (!freshTitles.has(t)) {
+        await composite.tombstoneInBag(action.toBag, t, o);
+        tombstoned.push(t);
+      }
+    }
+    results.push({ uri, decision: "ingest", landed: freshTitles.size, tombstoned });
+  }
+  return { sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId, carriers: results };
 }
 
 function origin(action: ResidencyAction): ChangeOrigin {

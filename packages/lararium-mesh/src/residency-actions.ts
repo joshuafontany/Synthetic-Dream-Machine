@@ -41,7 +41,7 @@ import type { Verb } from "./verb-tiddler.js";
 // ── ACTION verb set ────────────────────────────────────────────────────────
 
 /** Canonical ACTION verb tuple. ALL-CAPS by convention. */
-export const ACTION_VERBS = ["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD"] as const;
+export const ACTION_VERBS = ["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST"] as const;
 export type ActionVerb = typeof ACTION_VERBS[number];
 
 const ACTION_VERB_SET: ReadonlySet<string> = new Set(ACTION_VERBS);
@@ -134,13 +134,41 @@ export interface LoadAction extends ResidencyActionBase {
   readonly carriers?:   readonly LoadCarrier[];
 }
 
+/** One carrier riding an INGEST verb — the §6 triangle's inputs travel WITH
+ *  the content: the gesture (which holds the disk grant + the Synced tree)
+ *  computes diskHash and reads syncedHash; the island computes only the
+ *  currentRenderHash from its own merge seat (readiness reads local). */
+export interface IngestCarrier {
+  /** The carrier-root lar: URI this disk path projects. */
+  readonly uri:        string;
+  /** Settled disk bytes (quiet + stat-stable + hash-confirmed by the gesture). */
+  readonly text:       string;
+  /** Hash of text, computed gesture-side. */
+  readonly diskHash:   string;
+  /** Last-projected hash from the Synced tree; null = never projected. */
+  readonly syncedHash: string | null;
+}
+
+/** INGEST — disk → records through the §6 gate, replace-by-group apply.
+ *  LOAD lands unconditionally and never removes; INGEST decides (echo-noop ·
+ *  refuse · canonical-equivalent · ingest · conflict) and tombstones group
+ *  members that vanished from the re-parsed carrier. */
+export interface IngestAction extends ResidencyActionBase {
+  readonly verb:      "INGEST";
+  readonly sourceUri: string;
+  readonly toBag:     string;
+  readonly changeId:  string;
+  readonly carriers:  readonly IngestCarrier[];
+}
+
 export type ResidencyAction =
   | AddAction
   | CopyAction
   | MoveAction
   | ClearAction
   | DropAction
-  | LoadAction;
+  | LoadAction
+  | IngestAction;
 
 // ── changeId factory ───────────────────────────────────────────────────────
 
@@ -203,6 +231,13 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
         "change-id":  action.changeId,
         ...(action.carriers ? { carriers: action.carriers } : {}),
       };
+    case "INGEST":
+      return {
+        "source-uri": action.sourceUri,
+        "to-bag":     action.toBag,
+        "change-id":  action.changeId,
+        carriers:     action.carriers,
+      };
   }
 }
 
@@ -243,7 +278,28 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
     return { ...base, verb: inv.action, bag };
   }
 
-  // verb === "LOAD" — only ActionVerb left after the two guards above.
+  if (inv.action === "INGEST") {
+    const sourceUri = str("source-uri");
+    const toBag     = str("to-bag");
+    const changeId  = str("change-id");
+    if (!sourceUri || !toBag || !changeId) return null;
+    const raw = args["carriers"];
+    if (!Array.isArray(raw) || raw.length === 0) return null;
+    const carriers: IngestCarrier[] = [];
+    for (const c of raw) {
+      if (!c || typeof c !== "object") return null;
+      const o = c as Record<string, unknown>;
+      const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"];
+      if (typeof uri !== "string" || !uri) return null;
+      if (typeof text !== "string" || !text) return null;
+      if (typeof diskHash !== "string" || !diskHash) return null;
+      if (syncedHash !== null && typeof syncedHash !== "string") return null;
+      carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null });
+    }
+    return { ...base, verb: "INGEST", sourceUri, toBag, changeId, carriers };
+  }
+
+  // verb === "LOAD" — only ActionVerb left after the guards above.
   const sourceUri = str("source-uri");
   const toBag     = str("to-bag");
   const changeId  = str("change-id");

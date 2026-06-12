@@ -43,12 +43,12 @@ function makeInvocation(
 // ---------------------------------------------------------------------------
 
 describe("ACTION_VERBS membership", () => {
-  test("exactly six canonical verbs", () => {
-    expect(ACTION_VERBS).toEqual(["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD"]);
-    expect(ACTION_VERBS).toHaveLength(6);
+  test("exactly seven canonical verbs", () => {
+    expect(ACTION_VERBS).toEqual(["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST"]);
+    expect(ACTION_VERBS).toHaveLength(7);
   });
 
-  test("isActionVerb accepts all six canonical verbs", () => {
+  test("isActionVerb accepts all seven canonical verbs", () => {
     for (const v of ACTION_VERBS) expect(isActionVerb(v)).toBe(true);
   });
 
@@ -407,7 +407,7 @@ describe("isResidencyActionUri", () => {
 // ---------------------------------------------------------------------------
 
 describe("ResidencyAction discriminated union", () => {
-  test("exhaustive switch covers all six variants", () => {
+  test("exhaustive switch covers all seven variants", () => {
     function describe1(action: ResidencyAction): string {
       switch (action.verb) {
         case "ADD":   return `add ${action.title} to ${action.toBag}`;
@@ -416,6 +416,7 @@ describe("ResidencyAction discriminated union", () => {
         case "CLEAR": return `clear ${action.bag}`;
         case "DROP":  return `drop ${action.bag}`;
         case "LOAD":  return `load ${action.sourceUri} -> ${action.toBag}`;
+        case "INGEST": return `ingest ${action.carriers.length} carriers -> ${action.toBag}`;
       }
     }
     const add: AddAction = {

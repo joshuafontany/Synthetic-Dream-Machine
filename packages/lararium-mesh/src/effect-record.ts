@@ -321,6 +321,16 @@ export function mapActionToEffects(action: ResidencyAction, opts?: MapOptions): 
         sourceUri:    action.sourceUri,
         reason:       "external load",
       }];
+    case "INGEST":
+      return [{
+        ...base,
+        eventId:      newId(),
+        archivalVerb: "accession",
+        bag:          action.toBag,
+        changeId:     action.changeId,
+        sourceUri:    action.sourceUri,
+        reason:       "disk ingest (gated)",
+      }];
   }
 }
 
