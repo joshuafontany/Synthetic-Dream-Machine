@@ -97,10 +97,10 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells family:template role:uses >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward family:provenance role:witness >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic family:provenance role:source >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/rules-cyclopedia family:provenance role:source >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/becmi/rules-cyclopedia >>
 
 <<~/ahu >>
 

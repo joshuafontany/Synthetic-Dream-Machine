@@ -16,6 +16,7 @@ revised-on    = "2026-06-01"
 revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; two states (wela/anu) only"
 role          = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
 status        = "approved"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-tiers"
@@ -129,11 +130,6 @@ The model holds two tiers (`wela` live / `anu` torn down). A third (warm / froze
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #residency-model ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:relation role:sibling-axis >>
 
 <<~/ahu >>
 

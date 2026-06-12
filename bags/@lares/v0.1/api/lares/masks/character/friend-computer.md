@@ -20,6 +20,7 @@ register          = "Synthesis-Canon"
 retain            = false
 role              = "character mask — Friend Computer; fictional persona; helpful AI with condescending subtext"
 stage             = 13
+tags      = ["api/pono/meme", "api/lares/masks"]
 tagspace          = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer"
@@ -40,7 +41,6 @@ Canonical home extracted from `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/mas
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -155,9 +155,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
 
 <<~/ahu >>
 

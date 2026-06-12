@@ -12,7 +12,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo and tilts into a barrier"
-tags      = ["@sdm/tags/domain/stuckforce", "@sdm/tags/function/cargo", "@sdm/tags/function/barrier", "@sdm/tags/hook/sustained", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
@@ -27,12 +27,6 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
 <<~ ahu #has >>
 
 ## Composition
-
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/cargo >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/sustained >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 
 <<~/ahu >>
 
@@ -79,9 +73,9 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc family:render role:projects >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/floating-disc family:provenance role:witness >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/floating-disc >>
 
 <<~/ahu >>
 

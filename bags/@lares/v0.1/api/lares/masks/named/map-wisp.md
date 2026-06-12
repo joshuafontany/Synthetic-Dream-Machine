@@ -22,6 +22,7 @@ retain            = false
 role              = "named Voice mask — Map-Wisp (Scryer); structural forward-looking character"
 seniority         = "earned name; no special seniority"
 stage             = 10
+tags      = ["api/pono/meme", "api/lares/masks"]
 tagspace          = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/map-wisp"
@@ -45,7 +46,6 @@ Permanent identity home for Map-Wisp.
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -165,9 +165,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
 
 <<~/ahu >>
 

@@ -10,6 +10,7 @@ manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
 role      = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/hud"
@@ -186,9 +187,7 @@ The opening header declares the state that *governs* a span (prospective). In-fl
 
 ## Edges
 
-<<~ pranala #hud-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:control role:governed-by >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 

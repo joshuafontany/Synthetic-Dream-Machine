@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahawai"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahawai"
 ```
@@ -67,11 +68,9 @@ English alias forms:
 
 ## Edges
 
-<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
-<<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-elif family:control role:alias >>
-
-<<~ pranala #tiddler-sigil-kahawai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahawai family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-elif >>
 
 <<~/ahu >>
 

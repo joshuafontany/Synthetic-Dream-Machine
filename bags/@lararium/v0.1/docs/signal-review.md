@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "review memo for lararium signal branch boundaries, settlement pressure, and rewrite sequencing"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal-review"
@@ -248,9 +249,6 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

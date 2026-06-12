@@ -10,6 +10,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "ontology invariant: ea — sovereignty, breath, life — the declaration pattern for any self-standing causal island group or node on the DreamNet"
+tags      = ["lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ea"
@@ -75,8 +76,6 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 
 **The ea-breath law (2026-06-12):** between manifest and settle, a mounting island breathes — `(phase, progress)` evidence on a steady interval. The courier's watchdog re-arms on each breath and judges frozen evidence by a stall budget; **silence alone reads dead**, never elapsed mount time. A deadline counts the courier's clock; breath listens to the island's own act — readiness reads local.
 
-<<~ pranala #island-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:has >>
-
 <<~/ahu >>
 
 <<~ ahu #scope >>
@@ -110,8 +109,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the *live
 
 ## Edges
 
-<<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:parent >>
-<<~ pranala #island-protocol-impl ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:reference role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 

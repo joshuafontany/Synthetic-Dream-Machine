@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Web3 peer discovery doctrine — cold bootstrap, six-tier ladder, DID service endpoints, social-graph discovery, Keyhive add-member"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/peer-coordination", "lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first", "lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace", "lar:///ha.ka.ba/@lararium/tw5/lararium-doc-stack"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/peer-discovery"
 ```
@@ -239,10 +240,5 @@ the first sync message — removes the need for TLS as the transport trust layer
 <<~ ahu #edges >>
 
 ## Edges
-
-<<~ pranala #has-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
-<<~ pranala #has-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
-<<~ pranala #has-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:has >>
-<<~ pranala #has-doc-stack ? -> lar:///ha.ka.ba/@lararium/tw5/lararium-doc-stack family:control role:has >>
 
 <<~/ahu >>

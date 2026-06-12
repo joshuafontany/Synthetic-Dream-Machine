@@ -195,11 +195,11 @@ Byte-equivalence is not required for one-file-per-decomposed-tiddler projection.
 
 ## Edges
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/templates/meme/markdown-meme family:control role:governs >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/templates/ahu/markdown-meme family:control role:governs >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/templates/lib/emit-soh family:control role:governs >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/templates/lib/emit-iam-block family:control role:governs >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast family:relation role:supplements >>
+<<~ loulou lar:///ha.ka.ba/@lararium/templates/meme/markdown-meme >>
+<<~ loulou lar:///ha.ka.ba/@lararium/templates/ahu/markdown-meme >>
+<<~ loulou lar:///ha.ka.ba/@lararium/templates/lib/emit-soh >>
+<<~ loulou lar:///ha.ka.ba/@lararium/templates/lib/emit-iam-block >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast >>
 
 <<~/ahu >>
 

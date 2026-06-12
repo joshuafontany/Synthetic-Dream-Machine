@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "witness shelf and source braid for the four tools of Chapel Perilous"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/the-four-tools"
@@ -83,9 +84,6 @@ one clean preference for model agnosticism over paranoia.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-four-tools >>
 <<~ loulou lar:///ha.ka.ba/@lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/chapel-perilous-prologue >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/library/discordia/the-count-of-5s/common-sense-tarot >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

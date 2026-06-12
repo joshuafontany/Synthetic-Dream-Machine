@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for interpretive frames, stance-conditioned reading, and Chapel Perilous witness bundles"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu"
@@ -68,9 +69,6 @@ AST reader: read the sockets, then route.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

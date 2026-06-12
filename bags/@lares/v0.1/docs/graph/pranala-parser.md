@@ -3,7 +3,6 @@
 
 *A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme that implements the loci interface (see canonical interface at its own URI). Use "meme/memes" for general graph structure, reserving "locus/loci" for interface boundaries and in "implements" blocks as required by canonical law. This distinction is intentional and should be preserved in all design docs and specs.*
 
-
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser >>
 ```toml iam
 file-path   = "bags/@lares/v0.1/docs/graph/pranala-parser.md"
@@ -14,6 +13,7 @@ open-gate   = "closed: fragment-level resolution (Option A) confirmed by canonic
 register    = "Synthesis-Canon"
 role        = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
 status-date = "2026-04-24"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser"
@@ -213,8 +213,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/nodes >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>

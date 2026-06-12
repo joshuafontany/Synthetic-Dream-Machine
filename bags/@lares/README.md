@@ -12,9 +12,6 @@ cacheable    = true
 retain       = true
 ```
 
-
-
-
 <<~ ahu #identity-frame >>
 
 # Lares — The Lararium
@@ -122,11 +119,11 @@ lares/
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-agents ? -> lar:///AGENTS family:control role:governed-by >>
-<<~ pranala #to-lares ? -> lar:///LARES family:control role:governed-by >>
-<<~ pranala #to-mu ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu family:observe role:documents >>
-<<~ pranala #to-grammars ? -> lar:///ha.ka.ba/@lares/v0.1/api/grammars/memetic-wikitext family:observe role:references >>
-<<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:observe role:references >>
+<<~ loulou lar:///AGENTS >>
+<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/grammars/memetic-wikitext >>
+<<~ loulou lar:///lararium-node/ROADMAP >>
 
 <<~/ahu >>
 

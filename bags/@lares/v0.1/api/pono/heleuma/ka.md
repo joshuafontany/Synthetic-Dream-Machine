@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
+tags      = ["api/pono/heleuma", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"
 ```
@@ -78,9 +79,7 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~ ahu #edges >>
 
-<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
-<<~ pranala #gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/boot-gate family:control role:promoted-by >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/boot-gate >>
 
 <<~/ahu >>
 

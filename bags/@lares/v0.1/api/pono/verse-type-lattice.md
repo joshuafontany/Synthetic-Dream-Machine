@@ -182,12 +182,12 @@ See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribab
 
 ## Edges
 
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-uefn-scene ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene family:relation >>
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation role:uses >>
-<<~ pranala #to-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:relation role:uses >>
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pono family:control role:governs >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pono >>
 
 <<~/ahu >>
 

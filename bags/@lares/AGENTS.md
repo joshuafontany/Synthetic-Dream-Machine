@@ -11,6 +11,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "threshold constitution, operator-agent alignment membrane, boot router"
+tags      = ["api/pono/meme", "api/pono/invariant"]
 tagspace  = "adjacent"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/AGENTS"
@@ -77,10 +78,8 @@ Human reader: watch Mu teach itself. Agent reader: carry threshold law forward. 
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-mu ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu family:control role:owns >>
-<<~ pranala #to-lares ? -> lar:///LARES family:control role:owns >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
+<<~ loulou lar:///LARES >>
 
 <<~/ahu >>
 

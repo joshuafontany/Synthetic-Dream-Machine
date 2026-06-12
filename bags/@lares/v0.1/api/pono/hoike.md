@@ -102,9 +102,9 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 ## Edges
 
-<<~ pranala #skill ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL family:control role:realized-by >>
-<<~ pranala #observe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families family:relation role:saksi-rides-observe >>
-<<~ pranala #talk-story ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story family:relation role:floor-births-ledger >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 

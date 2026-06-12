@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: quine principles P1-P4; TiddlyWiki vs Smalltalk comparison; if-it-CAN-live-in-the-wiki-it-MUST rule; IPLD bridge; Heleuma anchor system"
 status-date = "2026-05-02"
+tags      = ["api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/quine-principles"
@@ -253,11 +254,10 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-pattern-integrity ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity family:relation >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-vm-projection-bus ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus >>
 
 <<~/ahu >>
 

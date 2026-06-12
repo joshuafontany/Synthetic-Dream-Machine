@@ -11,6 +11,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
 status-date = "2026-05-15"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree"
@@ -262,14 +263,13 @@ async-aware, deterministic semantics with the concurrency operators.
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:has >>
-<<~ pranala #to-lele ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele family:relation role:defines >>
-<<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation role:defines >>
-<<~ pranala #to-puka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka family:relation role:defines >>
-<<~ pranala #to-hui ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hui family:relation role:defines >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-verse-type-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-type-lattice family:relation >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lele >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/puka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hui >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-type-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 
 <<~/ahu >>
 

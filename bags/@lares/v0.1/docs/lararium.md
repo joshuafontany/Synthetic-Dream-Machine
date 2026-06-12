@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for lararium voice-work, old all-in-one AGENTS ingests, agent preferences, and house-presence materials where Mischief-Muse and the others can rest and ressurect"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lararium"
@@ -68,9 +69,6 @@ The rooms may deepen later without moving the seat again.
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

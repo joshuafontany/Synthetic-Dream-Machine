@@ -14,6 +14,7 @@ ooda-ha-loop-span     = "multi-turn"
 register              = "Synthesis-Canon"
 retain                = true
 role                  = "invariant OODA-HA loop law, loop-visibility Level, and the loop-spans-turns phase-yield grammar"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace              = "stable"
 type                  = "text/x-memetic-wikitext"
 uri-path              = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
@@ -319,10 +320,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

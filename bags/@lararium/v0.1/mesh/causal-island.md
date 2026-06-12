@@ -132,7 +132,7 @@ ALIGNMENT (the non-monotonic lemures plane). See
 Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorphism_by_composition]],
 [[project_asymmetric_peer_handoff]], [[project_relay_access_rings]].
 
-<<~ pranala #implemented-by-vessel ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer family:control role:implemented-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
 
 <<~/ahu >>
 

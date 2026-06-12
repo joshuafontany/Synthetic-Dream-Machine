@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: ~kau TW5 wikitext widget — heleuma ka"
 source-symbol = "~kau"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/kau", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/kau"
 ```
@@ -52,10 +53,8 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kau family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-sigil-tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:module >>
-<<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu family:control role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu >>
 
 <<~/ahu >>
 

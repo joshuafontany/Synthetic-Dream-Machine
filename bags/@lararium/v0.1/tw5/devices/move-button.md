@@ -9,6 +9,7 @@ namespace  = "&#x2299;"
 register   = "Synthesis"
 retain     = true
 role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
+tags      = ["api/residency-model"]
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/devices/move-button"
 verb       = "MOVE"
@@ -73,11 +74,10 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~ reaction:listenable ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/devices/move-button listenable:InteractedWithEvent verseKind:listenable payloadType:agent verb:MOVE >>
 
-<<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:relation role:uses >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation role:uses >>
-<<~ pranala #to-residency-model ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:control role:implements >>
-<<~ pranala #to-reaction-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol family:control role:governed-by >>
-<<~ pranala #to-uefn-scene ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
 
 <<~/ahu >>
 

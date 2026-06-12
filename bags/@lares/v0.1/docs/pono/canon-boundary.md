@@ -11,6 +11,7 @@ manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary"
@@ -132,9 +133,6 @@ If the answers remain vague, the claim should stay as session pressure.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

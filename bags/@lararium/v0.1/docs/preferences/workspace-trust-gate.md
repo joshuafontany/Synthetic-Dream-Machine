@@ -10,6 +10,7 @@ manaoio   = 18
 register  = "Synthesis"
 retain    = false
 role      = "docs concept room for trust checkpoints before costly shell, git, and workspace actions"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/workspace-trust-gate"
@@ -65,9 +66,6 @@ The workspace trust gate explains when the node must pause anyway.
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/identity-permissions >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

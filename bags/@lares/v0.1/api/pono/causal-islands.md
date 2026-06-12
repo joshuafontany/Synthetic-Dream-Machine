@@ -15,6 +15,7 @@ retain        = true
 role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
 status-date   = "2026-06-01"
+tags      = ["api/pono/invariant", "api/pono/orichalcum-capabilities", "api/pono/federated-causal-islands", "api/pono/alignment-layer"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
@@ -296,11 +297,6 @@ meant to escape):
 <<~/ahu >>
 
 <<~ ahu #edges >>
-
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:has >>
-<<~ pranala #to-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:has >>
-<<~ pranala #to-alignment-layer ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer family:control role:has >>
 
 <<~/ahu >>
 

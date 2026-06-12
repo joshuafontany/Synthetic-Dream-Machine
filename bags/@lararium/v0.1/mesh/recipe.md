@@ -59,9 +59,9 @@ class, where the alert stays the permanent mechanism.
 
 ## Edges
 
-<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:runtime-slot-sibling >>
-<<~ pranala #genesis-doc ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc family:relation role:seeds-no-recipes >>
-<<~ pranala #engine-watch ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/engine-watch family:reference role:epoch-class-contrast >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/engine-watch >>
 
 <<~/ahu >>
 

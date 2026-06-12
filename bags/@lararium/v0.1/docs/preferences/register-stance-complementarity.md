@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for the explicit complementarity claim between epistemic register and discourse stance"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/register-stance-complementarity"
@@ -72,9 +73,6 @@ Current comparison surfaces:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

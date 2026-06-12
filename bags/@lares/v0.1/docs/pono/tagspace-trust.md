@@ -11,6 +11,7 @@ manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for tagspace trust law — explanation, examples, and implementation pressure"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
@@ -149,9 +150,6 @@ Speaker role and truth tier must stay separate.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

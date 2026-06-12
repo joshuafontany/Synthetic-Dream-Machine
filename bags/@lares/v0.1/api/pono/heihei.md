@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-heihei"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heihei"
 ```
@@ -97,12 +98,10 @@ arm-wire       = "reaction"
 
 ## Edges
 
-<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
-<<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation >>
-<<~ pranala #cites-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:observe role:cites >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-heihei family:control role:has >>
 
 <<~/ahu >>
 

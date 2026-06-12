@@ -60,7 +60,7 @@ The v0.1 **Porter's Pebble** is the epic's first **module-nesting** proof:
 
 ## Edges
 
-<<~ pranala #witnesses ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble family:provenance role:witnesses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble >>
 
 <<~/ahu >>
 

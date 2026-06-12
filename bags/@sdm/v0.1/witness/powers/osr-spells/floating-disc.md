@@ -85,10 +85,10 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells family:template role:uses >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc family:provenance role:witness >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic family:provenance role:source >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/uvg2e/floating-disc family:provenance role:source >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/uvg2e/floating-disc >>
 
 <<~/ahu >>
 

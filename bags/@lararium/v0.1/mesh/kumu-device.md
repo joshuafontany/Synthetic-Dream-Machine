@@ -14,6 +14,7 @@ retain      = true
 role        = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef — the @editable boundary for kumu devices; spec derives from pranala edges, not TS class hierarchy"
 source-file = "packages/lararium-mesh/src/kumu-device.ts"
 status-date = "2026-05-28"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace    = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/kumu-device"
@@ -186,11 +187,8 @@ See: `lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu#yin-collapse-law`
 
 ## Edges
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-reaction-engine ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:type-layer >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:reference role:grounds >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:reference role:see >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-graph family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-graph >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
 

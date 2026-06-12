@@ -108,10 +108,10 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
-<<~ pranala #to-node-host ? -> lar:///ha.ka.ba/@lararium/tw5/modules/node-host family:control role:depends >>
-<<~ pranala #to-catalog-doc ? -> lar:///ha.ka.ba/@lararium/tw5/schema/catalog-doc family:control role:depends >>
-<<~ pranala #to-readiness-keys ? -> lar:///ha.ka.ba/@lararium/tw5/schema/readiness-keys family:control role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/node-host >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/catalog-doc >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/readiness-keys >>
 
 <<~/ahu >>
 

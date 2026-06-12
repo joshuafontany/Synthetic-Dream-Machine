@@ -435,11 +435,11 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 ## Edges
 
-<<~ pranala #pranala-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:governed-by >>
-<<~ pranala #sibling-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:relation role:sibling-spec >>
-<<~ pranala #render ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline family:control role:governed-by >>
-<<~ pranala #kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel family:control role:realized-by >>
-<<~ pranala #tw5-filter ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter family:observe role:references >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>

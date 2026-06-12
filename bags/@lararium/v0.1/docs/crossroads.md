@@ -58,9 +58,6 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 
-<<~ pranala #completes-planes ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology family:relation role:completes >>
-<<~ pranala #gated-by-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:governed-by >>
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

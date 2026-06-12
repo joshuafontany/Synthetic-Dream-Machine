@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: VmPool→Projection Messaging Standard; dispatchEvent/addEventListener pattern; TW5Engine.onVerseEvent design"
 status-date = "2026-05-02"
+tags      = ["api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus"
@@ -172,10 +173,9 @@ The asymmetry is preserved:
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 
 <<~/ahu >>
 

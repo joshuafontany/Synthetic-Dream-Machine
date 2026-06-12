@@ -11,6 +11,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = false
 role      = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/lar-uri"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
@@ -141,7 +142,6 @@ lar://[authority]/ha.ka.ba/@lares/optional/path/[#anchor]
 ```
 lar://alias:grant@host/ha.ka.ba/@lares/
 ```
-
 
 **Authority-less form** (no `user@host` segment — territory or resource reference without a named speaker):
 
@@ -442,10 +442,6 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher `confid
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:has >>
 
 <<~/ahu >>
 

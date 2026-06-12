@@ -13,6 +13,7 @@ retain        = true
 role          = "lar:/// URI namespace roots: file-resolvable caps, virtual caps, stable tuple root"
 source-symbol = "CAPS_FILE_ROOTS VIRTUAL_CAPS_ROOTS STABLE_TUPLE_ROOT"
 status-date   = "2026-04-30"
+tags      = ["api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri-roots"
@@ -72,8 +73,6 @@ stable-tuple-root = "ha.ka.ba"
 <<~/ahu >>
 
 <<~ ahu #edges >>
-
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

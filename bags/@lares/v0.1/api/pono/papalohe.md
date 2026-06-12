@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "reaction-family edge sugar — UEFN device graph event wire; listenable at source, subscribable at target"
+tags      = ["api/pono/pranala", "api/pono/invariant", "api/pono/reaction-graph", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/papalohe"
 ```
@@ -127,12 +128,7 @@ Two values, distinct Verse-side origins:
 
 ## Edges
 
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph family:control role:has >>
-<<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:relation >>
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-papalohe family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
 
 <<~/ahu >>
 

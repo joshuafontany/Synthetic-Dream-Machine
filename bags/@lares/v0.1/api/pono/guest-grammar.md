@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
 ```
@@ -129,10 +130,6 @@ Schema detail, fixture families, and execution procedure belong in the sidecars.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

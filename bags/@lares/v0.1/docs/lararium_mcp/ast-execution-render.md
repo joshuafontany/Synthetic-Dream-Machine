@@ -10,6 +10,7 @@ register        = "Synthesis-Canon"
 role            = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
 source-consumes = ["packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md", "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md", "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md", "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md", "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md", "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"]
 status-date     = "2026-04-23"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace        = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render"
@@ -229,9 +230,6 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/grammars/tiddlywiki-filter >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

@@ -14,6 +14,7 @@ retain        = true
 role          = "invariant law: LarTiddlerRecord as the canonical Automerge storage unit; carrier text as projection artifact only"
 source-symbol = "LarTiddlerRecord LarTiddlerStore ChangeOrigin LarTiddlerChange"
 status-date   = "2026-04-30"
+tags      = ["api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/tiddler-record"
@@ -96,9 +97,8 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:data role:companion >>
-<<~ pranala #used-by-adaptor ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor family:control role:governs >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor >>
 
 <<~/ahu >>
 

@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for lararium-side signal framing, extracted README residue, and branch routing"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal"
@@ -167,9 +168,6 @@ Settled child rooms in this branch:
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

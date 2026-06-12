@@ -14,6 +14,7 @@ role        = "source-of-truth: the Residency Model ACTION verb handler family â
 source-file = "packages/lararium-tw5/src/action-handler.ts"
 status      = "approved"
 status-date = "2026-06-01"
+tags      = ["api/residency-model"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/api/action-handler"
@@ -102,10 +103,9 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-residency ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:control role:has >>
-<<~ pranala #effect-record ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model#effect-record family:relation role:audits-via >>
-<<~ pranala #cap-gate ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation role:gated-by >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot family:relation role:moves-across >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model#effect-record >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot >>
 
 <<~/ahu >>
 

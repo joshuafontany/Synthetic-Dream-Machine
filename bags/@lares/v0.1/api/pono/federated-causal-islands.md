@@ -12,6 +12,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
+tags      = ["api/pono/invariant", "api/pono/pranala"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
@@ -344,10 +345,8 @@ causal-island-may = [
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:depends >>
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #to-research-streams ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:grounded-by >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
 
 <<~/ahu >>
 

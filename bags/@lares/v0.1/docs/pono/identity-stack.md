@@ -9,6 +9,7 @@ register      = "Synthesis"
 retain        = true
 revision-note = "minted 2026-06-07 — holds the lar: scheme's identity-addressing surfaces (who-speaks, distinct from bearing); provenance docs/pono/lar-uri §3.3.1"
 role          = "reference: the Elyncia/DreamDeck identity stack — DID / handle / lar: alias — the ActivityPub handle form, and the chat-log:post-header render target. The lar: scheme contributes the bearing these social surfaces project"
+tags      = ["api/pono/meme"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/identity-stack"
@@ -95,8 +96,7 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 
-<<~ pranala #projects-bearing ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 
 <<~/ahu >>
 

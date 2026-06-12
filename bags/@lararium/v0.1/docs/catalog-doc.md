@@ -122,10 +122,10 @@ fields = [
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-readiness-keys ? -> lar:///ha.ka.ba/@lararium/tw5/schema/readiness-keys family:control role:depends >>
-<<~ pranala #to-open-phases ? -> lar:///ha.ka.ba/@lararium/tw5/schema/open-phases family:control role:depends >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
-<<~ pranala #to-auth-providers ? -> lar:///ha.ka.ba/@lararium/tw5/schema/auth-providers family:control role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/readiness-keys >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/open-phases >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/auth-providers >>
 
 <<~/ahu >>
 

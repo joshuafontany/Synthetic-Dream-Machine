@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "English alias pointer — \\procedure redirects to wehe; canonical spec lives at pono/wehe"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/procedure"
 ```
@@ -27,8 +28,6 @@ English alias for `wehe`. See canonical spec:
 
 `\procedure` and `wehe` share identical semantics. Both declare a named callable body.
 Use whichever reads more naturally in context.
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure family:control role:has >>
 
 <<~/ahu >>
 

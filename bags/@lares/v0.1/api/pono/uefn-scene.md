@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
+tags      = ["lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/uefn-scene"
 ```
@@ -204,10 +205,9 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 ## Edges
 
-<<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:relation role:uses >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation role:uses >>
-<<~ pranala #to-kumu-device ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device family:control role:has >>
-<<~ pranala #to-pranala-families ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families family:control role:governed-by >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 
 <<~/ahu >>
 

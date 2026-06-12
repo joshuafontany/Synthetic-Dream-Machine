@@ -11,6 +11,7 @@ namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
 role        = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
+tags      = ["api/pono/meme"]
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter"
 ```
@@ -122,8 +123,7 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 ## Edges
 
-<<~ pranala #to-impl ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter family:control role:implemented-by >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 

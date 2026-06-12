@@ -85,7 +85,7 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class >>
 
 <<~/ahu >>
 

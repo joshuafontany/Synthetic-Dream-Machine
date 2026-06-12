@@ -68,7 +68,7 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 
 <<~/ahu >>
 

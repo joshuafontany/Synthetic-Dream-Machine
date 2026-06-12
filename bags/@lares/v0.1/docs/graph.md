@@ -10,6 +10,7 @@ register         = "Synthesis-Canon"
 research-sources = ["Bazel depsets and Skyframe (Google 2024)", "Buck2 architecture (Meta 2024)", "Nix derivations and lazy evaluation", "Graphiti temporal knowledge graph (Zep 2025, arXiv:2501.13956)", "TerminusDB append-only delta model", "UEFN Scene Graph ECS model (entity/component/prefab, Fortnite dev 2025)", "Anthropic context engineering (2025)", "Context7 / Upstash (2025)"]
 role             = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
 status-date      = "2026-04-24"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace         = "stable"
 type             = "text/x-memetic-wikitext"
 uri-path         = "ha.ka.ba/@lares/v0.1/docs/graph"
@@ -169,10 +170,6 @@ Phases 1, 3, and 4 may proceed independently.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/artifacts >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

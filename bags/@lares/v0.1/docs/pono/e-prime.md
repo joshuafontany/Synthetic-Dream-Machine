@@ -7,6 +7,7 @@ file-path = "bags/@lares/v0.1/docs/pono/e-prime.md"
 register  = "Synthesis"
 retain    = false
 role      = "docs companion for e-prime: research provenance, braid notes, and binary-ward guidance"
+tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/e-prime"
 ```
@@ -17,7 +18,6 @@ This file does not bind invariant law.
 Law lives at [e-prime.md](../../api/pono/e-prime.md).
 
 This file holds research provenance and extended Level guidance.
-
 
 <<~ ahu #plan >>
 
@@ -89,8 +89,6 @@ The ward does not exempt copulas from confidence marking. Every `${copula}` that
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
 - `lar:///ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism`
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

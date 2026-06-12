@@ -14,6 +14,7 @@ retain        = true
 revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5 System Boundary; lar-uri retains only the scheme-intrinsic clause + a loulou here"
 role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
 status        = "draft"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/sync-namespace"
@@ -94,10 +95,7 @@ This dual-distribution shape names a **packaging convention, not a namespace exc
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/save-path >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
 
-<<~ pranala #governed-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
-<<~ pranala #companion-axis ? -> lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection family:relation role:sibling-axis >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 
 <<~/ahu >>
 

@@ -67,8 +67,8 @@ Source: https://owasp.org/www-project-application-security-verification-standard
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-hub ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:part-of >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation role:witnesses >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 
 <<~/ahu >>
 

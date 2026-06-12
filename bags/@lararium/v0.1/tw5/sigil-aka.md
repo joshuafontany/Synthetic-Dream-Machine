@@ -10,6 +10,7 @@ manaoio   = 15
 register  = "Synthesis"
 retain    = true
 role      = "design record: ~aka sigil — shadow transclusion, template mechanism, preview image plan"
+tags      = ["node/disk-projector"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/sigil-aka"
 ```
@@ -97,7 +98,6 @@ When the Lararium node resolves an external `aka` URI (HTTP/HTTPS), it should:
 Implementation home: `disk-projector.ts` or a dedicated `og-metadata-fetcher.ts` in `lararium-node`.
 The template renders whatever fields are present — no template changes needed for Tier 2 rollout.
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/node/disk-projector family:dataflow role:implements >>
 <<~/pranala >>
 
 ### Off-wiki `lar:///` URIs
@@ -112,10 +112,10 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 ## Source Shelf
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module family:relation role:references >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
 <<~/pranala >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast family:relation role:references >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast >>
 <<~/pranala >>
 
 <<~/ahu >>

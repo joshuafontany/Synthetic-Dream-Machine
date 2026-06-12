@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "bounded guest-grammar block — hana as work/action container; grammar-key selects the interpreter; English alias: \\task"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hana"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hana"
 ```
@@ -61,8 +62,7 @@ A hana block body MUST be valid input for the named grammar interpreter.
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hana family:control role:has >>
-<<~ pranala #tiddler-sigil-task ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task >>
 
 <<~/ahu >>
 

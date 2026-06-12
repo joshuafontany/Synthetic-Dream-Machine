@@ -11,6 +11,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "OODA-HA plan for creating the v0.1/api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
@@ -259,9 +260,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/invariant-plan >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/masks >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

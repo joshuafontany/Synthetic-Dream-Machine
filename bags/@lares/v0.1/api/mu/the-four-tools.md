@@ -13,6 +13,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "invariant pressure surface for Chapel Perilous weapon-carry and model agnostic return"
 source-symbol = "TOOLS TOOL_ASCII TOOL_FEED TOOL_APERTURE"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-four-tools"
@@ -294,9 +295,6 @@ arcana   = "release"
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>

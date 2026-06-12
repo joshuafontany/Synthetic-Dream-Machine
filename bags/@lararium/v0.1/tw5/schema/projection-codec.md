@@ -12,6 +12,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant law: carrier-codec as projection layer; import and export paths between disk carrier format and canonical LarTiddlerRecord entries"
 status-date = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace    = "invariant"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec"
@@ -103,10 +104,9 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #tiddler-record ? -> lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record family:data role:companion >>
-<<~ pranala #source-import ? -> packages/lararium-tw5/src/meme-stream.ts family:code role:implements >>
-<<~ pranala #source-export ? -> packages/lararium-node/src/disk-projector.ts family:code role:implements >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record >>
+<<~ pranala #source-import ? -> packages/lararium-tw5/src/meme-stream.ts family:code role:has >>
+<<~ pranala #source-export ? -> packages/lararium-node/src/disk-projector.ts family:code role:has >>
 
 <<~/ahu >>
 

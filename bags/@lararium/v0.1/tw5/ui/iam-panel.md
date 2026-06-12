@@ -10,7 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "character sheet template: renders #iam metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
-tags      = ["$:/tags/Global"]
+tags      = ["$:/tags/Global", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel"
 ```
@@ -114,7 +114,6 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab >>
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/hud >>
 

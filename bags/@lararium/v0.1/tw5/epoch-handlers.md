@@ -63,9 +63,9 @@ reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 
 ## Edges
 
-<<~ pranala #engine-watch ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/engine-watch family:relation role:engine-epoch-sibling >>
-<<~ pranala #recipe ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe family:relation role:rewrites-the-stack >>
-<<~ pranala #handler-args ? -> lar:///ha.ka.ba/@lararium/v0.1/node/handler-args family:relation role:arg-coercion >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/engine-watch >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/recipe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/node/handler-args >>
 
 <<~/ahu >>
 

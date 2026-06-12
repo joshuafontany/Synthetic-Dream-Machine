@@ -12,6 +12,7 @@ register          = "Synthesis-Canon"
 role              = "docs-spec parent locus for the Lararium MCP server — index, running state, canonical child loci, known gaps"
 server-version    = "0.1.0"
 status            = "living docs-spec; test count verified"
+tags      = ["api/pono/meme"]
 test-count        = 77
 test-suite        = "python3 -m unittest discover -s lares/lararium_mcp/tests"
 type              = "text/x-memetic-wikitext"
@@ -333,8 +334,6 @@ class MyAdapter:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

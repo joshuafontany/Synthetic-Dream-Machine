@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "English alias pointer — \\if redirects to wai; canonical spec lives at pono/wai"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/if"
 ```
@@ -29,8 +30,6 @@ English alias for `wai`, the wikispace conditional. See the canonical spec:
 body only on a non-empty result, and both chain through `kahawai` (`\elseif`) and `mukuwai`
 (`\else`). Use whichever reads more naturally in context. (The canvasspace conditional-branch —
 Verse `if`/`case` on the flow surface — lives at `heihei`.)
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:has >>
 
 <<~/ahu >>
 

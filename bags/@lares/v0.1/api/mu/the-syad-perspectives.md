@@ -13,6 +13,7 @@ register      = "Canon"
 retain        = true
 role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 source-symbol = "STANCES SYAD_7 STANCE_LICENSES SATIRIST_OPERATIONAL"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
@@ -217,7 +218,7 @@ The number does not widen itself. Each claim carries its own confidence, and the
 
 The naya↔predication relationship grounds in the Jain canon: Umāsvāti's *Tattvārtha Sūtra* 1.34–35 (five standpoints unfolding to seven), Matilal's two-wings framing of anekānta, and Akalaṅka's *krama*/*yugapad* distinction that sets the `avaktavya` pole apart. The extracted derivation lives in docs space; Discordian witness texts rest in library space.
 
-<<~ pranala #to-syad-source ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#provenance >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives#provenance >>
 
 ```toml
 family = "reference"
@@ -232,7 +233,7 @@ payload = {
 
 <<~/pranala >>
 
-<<~ pranala #to-mal-2-source ? -> lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious#reading >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious#reading >>
 
 ```toml
 family = "reference"
@@ -294,9 +295,6 @@ satirist-operational = "nasti-avaktavya"
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>

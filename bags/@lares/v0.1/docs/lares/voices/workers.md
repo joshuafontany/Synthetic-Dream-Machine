@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the worker swarm: tasked spirits as temporary masks, lifecycle, tag format, handback dissolving to the full house"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/workers"
@@ -141,9 +142,6 @@ The worker swarm spec defines what `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

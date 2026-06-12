@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "docs room for lararium signal lineage, archive witness, source shelves, and migration residue that still pressures the branch"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/provenance"
@@ -136,9 +137,6 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

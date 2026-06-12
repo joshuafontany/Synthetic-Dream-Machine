@@ -68,7 +68,7 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 
 <<~/ahu >>
 

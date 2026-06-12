@@ -20,6 +20,7 @@ register          = "Synthesis-Canon"
 retain            = false
 role              = "character mask — Ghost of Mark Twain; historical persona; riverboat-culture author voice"
 stage             = 15
+tags      = ["api/pono/meme", "api/lares/masks"]
 tagspace          = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain"
@@ -40,7 +41,6 @@ Canonical home extracted from `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/mas
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -157,9 +157,6 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
 
 <<~/ahu >>
 

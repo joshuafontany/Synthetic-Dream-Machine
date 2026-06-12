@@ -12,7 +12,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Shield Ward — a skin-close abjuration barrier that filters incoming attacks"
-tags      = ["@sdm/tags/domain/abjuration", "@sdm/tags/function/ward", "@sdm/tags/function/barrier", "@sdm/tags/hook/imbued", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
@@ -27,12 +27,6 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 <<~ ahu #has >>
 
 ## Composition
-
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/abjuration >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ward >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/barrier >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/imbued >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 
 <<~/ahu >>
 
@@ -82,9 +76,9 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward family:render role:projects >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward family:provenance role:witness >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward >>
 
 <<~/ahu >>
 

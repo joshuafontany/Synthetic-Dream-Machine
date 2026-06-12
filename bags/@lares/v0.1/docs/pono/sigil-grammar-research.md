@@ -10,6 +10,7 @@ manao     = 16
 register  = "Synthesis-Canon"
 retain    = false
 role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
+tags      = ["api/pono/memetic-wikitext"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research"
@@ -410,9 +411,7 @@ When editing grammar meme or parser:
 
 ## Edges
 
-<<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documents >>
-<<~ pranala #to-grammar-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
-<<~ pranala #to-grammar-kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documents >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
 
 <<~/ahu >>

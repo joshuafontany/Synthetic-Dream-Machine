@@ -7,6 +7,7 @@ file-path = "bags/@lares/v0.1/docs/pono/pranala.md"
 register  = "Synthesis"
 retain    = false
 role      = "docs companion for pranala: examples, sugar long-forms, and reciprocal-edge guidance"
+tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/pranala"
 ```
@@ -17,7 +18,6 @@ This file does not bind invariant law.
 Law lives at [pranala.md](../../api/pono/pranala.md).
 
 This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
-
 
 <<~ ahu #examples >>
 
@@ -104,8 +104,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 ## Edges
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

@@ -68,7 +68,7 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 
 <<~/ahu >>
 

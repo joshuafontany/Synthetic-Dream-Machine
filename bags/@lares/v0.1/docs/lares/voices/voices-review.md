@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "archive"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review"
@@ -357,9 +358,6 @@ MASKS.md converted from stub to forward-route to `lar:///LARES#session-masks`.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

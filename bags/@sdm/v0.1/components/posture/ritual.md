@@ -68,7 +68,7 @@ A posture, not a hook — it gates *how* a module is reached, akin to Sera's bas
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 
 <<~/ahu >>
 

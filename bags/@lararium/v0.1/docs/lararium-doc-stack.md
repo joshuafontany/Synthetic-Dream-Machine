@@ -12,6 +12,7 @@ retain        = true
 revised-on    = "2026-06-10"
 revision-note = "demoted from Synthesis-Canon: the six-layer Catalog/Corpus model predates IslandGrants + recipe-watch (boot = first reconcile); terms swept room→wiki 2026-06-10"
 role          = "research-era doc-stack model (six-layer) — structurally PRE-keel-cut; superseded for current law by recipe + island-protocol (IslandGrants) + wiki-layer-ontology; retained for boot-sequence and export round-trip teaching"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first", "lar:///ha.ka.ba/@lararium/tw5/peer-coordination"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack"
 ```
@@ -154,10 +155,7 @@ infrastructure rather than rolling a separate exporter.
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
-<<~ pranala #has-peer-coordination ? -> lar:///ha.ka.ba/@lararium/tw5/peer-coordination family:control role:has >>
-<<~ pranala #uses-composite-store ? -> lar:///ha.ka.ba/@lararium/tw5/composite-store family:control role:uses >>
-<<~ pranala #uses-lar-uri-namespace ? -> lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace family:control role:uses >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/composite-store >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/lar-uri-namespace >>
 
 <<~/ahu >>

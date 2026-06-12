@@ -132,11 +132,11 @@ same change record any AutomergeDocStore would emit.
 
 ## Edges
 
-<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:hosts-@temp-slot >>
-<<~ pranala #bag-paths-cascade ? -> lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths family:relation role:routes-writes-here >>
-<<~ pranala #island-recipe ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/island-recipe family:relation role:constructs >>
-<<~ pranala #lar-uri-bag-tag ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule family:reference role:names-@temp-as-bag >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot family:reference role:resolves-tension >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/island-recipe >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot >>
 
 <<~/ahu >>
 

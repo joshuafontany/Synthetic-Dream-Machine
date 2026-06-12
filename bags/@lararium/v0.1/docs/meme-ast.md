@@ -45,19 +45,17 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~ ahu #edges >>
 
-<<~ pranala #types ? -> lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/types family:data role:defines >>
-<<~ pranala #scanner ? -> lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/scanner family:data role:defines >>
-<<~ pranala #builder ? -> lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/builder family:data role:defines >>
-<<~ pranala #edges ? -> lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/edges family:data role:defines >>
-<<~ pranala #parse ? -> lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/parse family:data role:defines >>
-<<~ pranala #module ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast family:control role:compiles-to >>
-<<~ pranala #deserializer ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer family:control role:consumed-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/types >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/scanner >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/builder >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/edges >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/core/meme-ast/parse >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/meme-ast >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer >>
 
 <<~/ahu >>
 
 <<~ ahu #source >>
-
-
 
 <<~/ahu >>
 

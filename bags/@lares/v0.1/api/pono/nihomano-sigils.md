@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
+tags      = ["lar:///ha.ka.ba/tags/SharktoothSigil"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/nihomano-sigils"
 ```
@@ -250,17 +251,16 @@ lives in a tiddler.
 
 ## Edges
 
-<<~ pranala #spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:governs >>
-<<~ pranala #tag ? -> lar:///ha.ka.ba/tags/SharktoothSigil family:control role:has >>
-<<~ pranala #to-ahu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu family:relation >>
-<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
-<<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
-<<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
-<<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:relation >>
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
-<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
-<<~ pranala #english-alias ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils family:relation role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/huli >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/sharktooth-sigils >>
 
 <<~/ahu >>
 

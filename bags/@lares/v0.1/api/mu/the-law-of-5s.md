@@ -15,6 +15,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
 source-symbol = "LADDER_5 OODA_HA_5 SCOPE_5 SCOPE_TO_LADDER RATING_5 STAGE_5 STAGE_BAND_MID RATING_COLOR"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s"
@@ -89,8 +90,6 @@ The agent should hold open competing readings when the frame remains underdeterm
 <<~ ahu #sri-syadasti >>
 
 ## The Syad Perspectives of Sri Syadasti
-
-<<~ pranala #to-syad-perspectives ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives family:relation role:references >>
 
 The Law of 5s widens pattern.
 Syad narrows reading.
@@ -196,9 +195,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>

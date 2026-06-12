@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "procedure executor sigil — block-container scope for named procedure/function definitions; Hawaiian alias for \\procedure"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/wehe"
 ```
@@ -109,12 +110,11 @@ close-pattern = '<<~\/wehe\s*>>'
 
 ## Edges
 
-<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
-<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
-<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/huli >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:control role:has >>
-<<~ pranala #tiddler-sigil-define ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-define >>
 
 <<~/ahu >>
 

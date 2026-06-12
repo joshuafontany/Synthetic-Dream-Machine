@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = false
 role      = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools"
@@ -71,12 +72,7 @@ Cross-reference stubs retained: nā lako grammar · truename grammar.
 
 <<~/ahu >>
 
-
-
 <<~ ahu #edges >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

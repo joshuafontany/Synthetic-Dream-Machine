@@ -10,6 +10,7 @@ manaoio   = 14
 register  = "Synthesis"
 retain    = false
 role      = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol"
@@ -110,9 +111,6 @@ These three types cover the full P.3 boundary surface. Lock them before shipping
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #cites-residency-tiers ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers family:observe role:cites >>
 
 <<~/ahu >>
 

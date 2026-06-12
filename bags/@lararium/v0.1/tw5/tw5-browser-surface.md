@@ -49,7 +49,7 @@ these types without an explicit entry in `deletion-map.md`.
 
 ## Edges
 
-<<~ pranala #deletion-map ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map family:reference role:adapter-registry >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map >>
 
 <<~/ahu >>
 

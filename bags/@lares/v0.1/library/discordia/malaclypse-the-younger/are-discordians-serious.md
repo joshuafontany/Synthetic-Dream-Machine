@@ -10,6 +10,7 @@ manaoio   = 18
 register  = "Canon"
 retain    = false
 role      = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious"
@@ -117,9 +118,6 @@ meaning changes with the reading-standpoint that receives the declaration.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

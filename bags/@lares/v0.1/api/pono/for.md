@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "English alias pointer — \\for redirects to huli; canonical spec lives at pono/huli"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/for"
 ```
@@ -27,8 +28,6 @@ English alias for `huli`. See canonical spec:
 
 `\for` and `huli` share identical semantics. Both iterate a TW5 filter result set,
 rendering a body template once per result. Use whichever reads more naturally in context.
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-for family:control role:has >>
 
 <<~/ahu >>
 

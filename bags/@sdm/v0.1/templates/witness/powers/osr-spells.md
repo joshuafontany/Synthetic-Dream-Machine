@@ -61,7 +61,7 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 
 <<~/ahu >>
 

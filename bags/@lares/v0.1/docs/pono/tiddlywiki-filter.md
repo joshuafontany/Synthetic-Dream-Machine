@@ -7,6 +7,7 @@ file-path = "bags/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
 register  = "Synthesis"
 retain    = false
 role      = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
+tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
 ```
@@ -18,7 +19,6 @@ Law lives at [tiddlywiki-filter.md](../../api/pono/tiddlywiki-filter.md).
 Procedure lives at [tiddlywiki-filter/SKILL.md](../../api/pono/tiddlywiki-filter/SKILL.md).
 
 This file holds examples, explanatory guidance, reminders, and notes on deferred scope.
-
 
 <<~ ahu #canonical-examples >>
 
@@ -156,8 +156,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter`
 - `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter/SKILL`
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

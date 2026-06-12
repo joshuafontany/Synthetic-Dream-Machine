@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Neural Whip — playable surface with clickable component pills"
-tags      = ["@sdm/tags/domain/stuckforce", "@sdm/tags/function/restrain", "@sdm/tags/hook/attack", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip"
@@ -53,8 +53,8 @@ A neural tentacle of stuckforce lashes out and strikes **against Defense** — n
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip family:render role:projects >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

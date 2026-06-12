@@ -10,7 +10,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "CSS stylesheet: ahu section view/edit layout, slot badges, inline edit reveal"
-tags      = ["$:/tags/Stylesheet"]
+tags      = ["$:/tags/Stylesheet", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/ahu-styles"
 ```
@@ -160,8 +160,6 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
 }
 
 <<~ ahu #edges >>
-
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 
 <<~/ahu >>
 

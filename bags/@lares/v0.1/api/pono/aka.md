@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "transclusion-family edge sugar — frozen/shadow transclusion; read-only embed; shorthand for pranala family:transclusion"
+tags      = ["api/pono/pranala", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/aka"
 ```
@@ -117,13 +118,10 @@ confidence-bounded = true
 
 ## Edges
 
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
-<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka family:control role:has >>
-<<~ pranala #tiddler-sigil-shadow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-shadow family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-shadow >>
 
 <<~/ahu >>
 

@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = true
 role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/glyph-codeset"
@@ -326,7 +327,6 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

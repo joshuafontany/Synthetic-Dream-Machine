@@ -14,6 +14,7 @@ retain        = true
 role          = "canonical pranala edge-family taxonomy: eight families, role vocabularies, contract flags"
 source-symbol = "KNOWN_FAMILIES FAMILY_ROLES FAMILY_CONTRACTS"
 status-date   = "2026-06-05"
+tags      = ["api/pono/invariant", "api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/pranala-families"
@@ -167,18 +168,7 @@ spatial    = "light-blue"
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
-<<~ pranala #tiddler-sigil-family-control ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control family:control role:has >>
-<<~ pranala #tiddler-sigil-family-relation ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation family:control role:has >>
-<<~ pranala #tiddler-sigil-family-observe ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe family:control role:has >>
-<<~ pranala #tiddler-sigil-family-transclusion ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion family:control role:has >>
-<<~ pranala #tiddler-sigil-family-dataflow ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow family:control role:has >>
-<<~ pranala #tiddler-sigil-family-message ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message family:control role:has >>
-<<~ pranala #tiddler-sigil-family-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint family:control role:has >>
-<<~ pranala #tiddler-sigil-family-reaction ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction family:control role:has >>
-<<~ pranala #tiddler-sigil-family-spatial ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial family:control role:has >>
 
 <<~/ahu >>
 

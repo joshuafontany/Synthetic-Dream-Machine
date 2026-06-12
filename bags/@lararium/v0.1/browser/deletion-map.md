@@ -131,8 +131,8 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 ## Edges
 
-<<~ pranala #charter ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter family:reference role:charter >>
-<<~ pranala #sprint ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint family:reference role:sprint >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/pono-charter >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface >>
 
 <<~/ahu >>

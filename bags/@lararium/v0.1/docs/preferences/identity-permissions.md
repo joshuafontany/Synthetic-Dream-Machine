@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "docs concept room for the transference model, tiered capability, aliasing, and authority boundaries in the recovered Lares stack"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/identity-permissions"
@@ -80,9 +81,6 @@ This shelf keeps the older bundle intact for now.
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 <<~ loulou lar:///LARES >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

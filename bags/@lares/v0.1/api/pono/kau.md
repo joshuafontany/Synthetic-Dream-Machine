@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "device placement/instantiation — set down with intention, own URI, own context"
+tags      = ["api/pono/meme", "api/pono/invariant", "api/lararium/widgets/kau", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kau"
 ```
@@ -113,14 +114,9 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-kumu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:control role:instantiates >>
-<<~ pranala #to-waiho ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho family:control role:contrasts >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:control role:wires-via >>
-<<~ pranala #to-widget ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/widgets/kau family:control role:has >>
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
 
 <<~/ahu >>
 

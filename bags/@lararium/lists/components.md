@@ -38,8 +38,8 @@ uri-path  = "ha.ka.ba/@lararium/lists/components"
 
 <<~ ahu #edges >>
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/procedures/tag-pill family:reference role:see >>
-<<~ pranala #to-tw5-ui ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/procedures/tag-pill >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel >>
 
 <<~/ahu >>
 

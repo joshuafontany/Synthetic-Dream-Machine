@@ -10,6 +10,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: the lararium as a personGroup's vessel-swarm holding a distributed wiki-quine; AI-operator alignment as the constitutive relation; the HUD running in chat from wiki primitives; graceful import that lifts foreign data up the pono ladder; UEFN island-model ontology alignment"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture"
@@ -202,12 +203,11 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol >>
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #cites-quine-principles ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles family:observe role:cites >>
-<<~ pranala #cites-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:observe role:cites >>
-<<~ pranala #cites-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:observe role:cites >>
-<<~ pranala #cites-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:observe role:cites >>
-<<~ pranala #cites-attention-scale ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale family:observe role:cites >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale >>
 
 <<~/ahu >>
 

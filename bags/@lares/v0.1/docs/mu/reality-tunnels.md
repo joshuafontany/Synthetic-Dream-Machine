@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for reality tunnels, catma, and observer-position pressure behind Mu-facing invariants"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels"
@@ -84,9 +85,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

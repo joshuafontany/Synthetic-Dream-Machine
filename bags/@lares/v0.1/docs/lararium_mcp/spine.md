@@ -10,6 +10,7 @@ register        = "Synthesis-Canon"
 role            = "canonical Lararium MCP program spine and architecture contraction"
 source-consumes = ["packages/lares-core/memes/docs/mcp/README.md", "packages/lares-core/memes/docs/mcp/ARCHITECTURE.md"]
 status-date     = "2026-04-23"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace        = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine"
@@ -145,9 +146,6 @@ MemPalace currently demonstrates the sidecar pattern: Lares launches or talks to
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/local-clients >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

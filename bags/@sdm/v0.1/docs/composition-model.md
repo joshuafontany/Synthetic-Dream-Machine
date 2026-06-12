@@ -127,7 +127,7 @@ Full lineage table lives in the epic. See edges.
 
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/mount-points/structure >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>

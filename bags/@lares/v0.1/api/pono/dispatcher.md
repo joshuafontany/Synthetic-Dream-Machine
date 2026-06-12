@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "~ dispatcher sigil — routes <<~ name args >> to the named ~procedure; the entry point for all sigil dispatch"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/dispatcher"
 ```
@@ -79,8 +80,6 @@ TW5 wikitext body:
 <<~ ahu #edges >>
 
 ## Edges
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-dispatcher family:control role:has >>
 
 <<~/ahu >>
 

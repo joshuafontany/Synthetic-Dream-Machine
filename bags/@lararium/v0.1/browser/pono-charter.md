@@ -133,8 +133,8 @@ These questions do not block charter adoption. They require measurement before r
 
 ## Edges
 
-<<~ pranala #sprint ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint family:reference role:sprint >>
-<<~ pranala #deletion-map ? -> lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map family:reference role:deletion >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/browser/deletion-map >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface >>
 

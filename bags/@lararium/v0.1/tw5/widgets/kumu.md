@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: KumuWidget — heleuma ka"
 source-symbol = "KumuWidget"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu"
 ```
@@ -38,9 +39,7 @@ export function KumuWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeN
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kumu family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kumu >>
 
 <<~/ahu >>
 

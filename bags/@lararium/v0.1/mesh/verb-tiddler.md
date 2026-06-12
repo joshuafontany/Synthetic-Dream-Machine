@@ -55,8 +55,8 @@ Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<ev
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-ipvm-adoption ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/task-graph-geometry family:relation role:boundary-projects-to >>
-<<~ pranala #to-verification ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verification-placement family:control role:gated-by >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/task-graph-geometry >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verification-placement >>
 
 <<~/ahu >>
 

@@ -18,6 +18,7 @@ register           = "SC"
 retain             = true
 role               = "deliberate post-hoc E-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/e-prime"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
 ```
@@ -90,9 +91,6 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

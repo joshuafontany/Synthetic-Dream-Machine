@@ -12,6 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "canonical lararium seat, mechanics shelf, mandatory child-hydration bridge to session dials"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lararium"
@@ -48,14 +49,11 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 ## Core Hydration
 
-<<~ pranala #hydrate-hud ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:control role:owns >>
-<<~ pranala #hydrate-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices family:control role:owns >>
-<<~ pranala #hydrate-continuity ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity family:control role:owns >>
-<<~ pranala #hydrate-live-session-overwrite ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite family:control role:owns >>
-<<~ pranala #hydrate-canon-boundary ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono family:control role:owns >>
-<<~ pranala #hydrate-tagspace-trust ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust family:control role:owns >>
-<<~ pranala #hydrate-exchange-vector ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector family:control role:owns >>
-<<~ pranala #hydrate-templates ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/templates/index family:control role:owns >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/templates/index >>
 
 <<~/ahu >>
 
@@ -63,9 +61,6 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>

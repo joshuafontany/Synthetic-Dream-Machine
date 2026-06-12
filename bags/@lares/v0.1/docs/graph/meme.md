@@ -10,6 +10,7 @@ register                     = "Synthesis-Canon"
 renamed-from                 = "ha.ka.ba/@lares/v0.1/docs/graph/loci"
 role                         = "PranalaEdge, Meme, and MemeGraph data model contracts for the pranala-edge DAG compiler"
 status-date                  = "2026-04-24"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace                     = "stable"
 type                         = "text/x-memetic-wikitext"
 uncertainty-graph-class-name = "MemeGraph preferred over LociGraph, CarrierGraph, or Graph; not yet ratified in code"
@@ -248,9 +249,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

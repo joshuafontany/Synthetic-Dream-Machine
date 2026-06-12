@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Read Magic — playable surface with clickable component pills"
-tags      = ["@sdm/tags/domain/divination", "@sdm/tags/function/magic-decode", "@sdm/tags/function/ecm-scan", "@sdm/tags/function/archive", "@sdm/tags/hook/dangerous", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/divination", "components/function/magic-decode", "components/function/ecm-scan", "components/function/archive", "components/hook/dangerous", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic"
@@ -54,8 +54,8 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic family:render role:projects >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

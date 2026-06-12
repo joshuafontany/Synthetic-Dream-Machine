@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "transclusion-family edge sugar — live transclusion; subscription-fresh embed; dual form: URI edge and name-call invocation"
+tags      = ["api/pono/pranala", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahea"
 ```
@@ -140,15 +141,12 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 ## Edges
 
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
-<<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea family:control role:has >>
-<<~ pranala #tiddler-sigil-transclude ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-transclude family:control role:alias >>
-<<~ pranala #tiddler-sigil-import ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-import family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-transclude >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-import >>
 
 <<~/ahu >>
 

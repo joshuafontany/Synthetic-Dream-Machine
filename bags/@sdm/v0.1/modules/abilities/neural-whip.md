@@ -12,7 +12,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tentacle-lash; first proof the Power template covers a non-spell monster affordance, first exerciser of hook/attack"
-tags      = ["@sdm/tags/domain/stuckforce", "@sdm/tags/function/restrain", "@sdm/tags/hook/attack", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip"
@@ -27,11 +27,6 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip"
 <<~ ahu #has >>
 
 ## Composition
-
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/stuckforce >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/restrain >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/attack >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 
 <<~/ahu >>
 
@@ -78,9 +73,9 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip family:render role:projects >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip family:provenance role:witness >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip >>
 
 <<~/ahu >>
 

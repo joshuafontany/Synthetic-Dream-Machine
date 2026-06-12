@@ -161,12 +161,9 @@ One wave. All observers. Same synchronous context.
 
 ## Edges
 
-<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu family:control role:grounds >>
-<<~ pranala #to-reaction-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol family:control role:within-island >>
-<<~ pranala #to-island-protocol ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:control role:cross-island >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:reference role:see >>
-<<~ pranala #to-kumu-device ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device family:reference role:type-layer >>
-<<~ pranala #to-dreamnet-prior-art ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art family:reference role:grounds >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>

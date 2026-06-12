@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Peer rendezvous + doc coordination doctrine — island-file model, CRDT reconcile, Keyhive path, ReactionEngine invariants"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/peer-coordination"
 ```
@@ -199,11 +200,9 @@ island definition bundle to new nodes.
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:control role:has >>
-<<~ pranala #requires-island-file ? -> lar:///ha.ka.ba/@lararium/tw5/island family:control role:requires >>
-<<~ pranala #constrains-reaction-engine ? -> lar:///ha.ka.ba/@lararium/tw5/reaction-engine family:control role:constrains >>
-<<~ pranala #future-keyhive ? -> lar:///ha.ka.ba/@lararium/tw5/keyhive family:future role:upgrade-path >>
-<<~ pranala #future-beelay ? -> lar:///ha.ka.ba/@lararium/tw5/beelay family:future role:upgrade-path >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/island >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/reaction-engine >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/keyhive >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/beelay >>
 
 <<~/ahu >>

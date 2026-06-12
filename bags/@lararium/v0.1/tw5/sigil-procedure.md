@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = true
 role      = "design record: \\procedure English alias sigil — pragma-alias, wehe cross-ref, declaration form"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/sigil-procedure"
 ```
@@ -66,10 +67,9 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 ## Source Shelf
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-procedure family:dataflow role:implements >>
 <<~/pranala >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe family:relation role:hawaiian-equiv >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wehe >>
 <<~/pranala >>
 
 <<~/ahu >>

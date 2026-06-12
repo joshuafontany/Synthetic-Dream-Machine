@@ -13,6 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
 status    = "submission-draft"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
 ```
@@ -334,10 +335,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace >>
 
-<<~ pranala #sibling-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:relation role:sibling-spec >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
 

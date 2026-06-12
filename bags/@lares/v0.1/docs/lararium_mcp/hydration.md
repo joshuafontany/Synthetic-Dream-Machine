@@ -10,6 +10,7 @@ register        = "Synthesis-Canon"
 role            = "canonical hydration closure, edge taxonomy, artifact, resolver, and resource contract"
 source-consumes = ["packages/lares-core/memes/docs/mcp/BOOT_LOCI_INVENTORY.md", "packages/lares-core/memes/docs/mcp/EDGE_TAXONOMY.md", "packages/lares-core/memes/docs/mcp/HYDRATION_ARTIFACT_CONTRACT.md"]
 status-date     = "2026-04-23"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace        = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration"
@@ -162,9 +163,6 @@ Minimal boot should remain small enough to avoid compaction.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/carrier-law >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/ast-execution-render >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ba — psyche/path anchor; quine-only trace record with no runtime corpus path"
+tags      = ["api/pono/heleuma", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma/ba"
 ```
@@ -56,9 +57,6 @@ It SHALL NOT declare `body-sha256` without `source-symbol`.
 <<~/ahu >>
 
 <<~ ahu #edges >>
-
-<<~ pranala #parent ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

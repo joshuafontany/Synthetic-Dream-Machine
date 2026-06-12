@@ -11,6 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the one-hull law: every island rides the same isomorphic stack; authority = grants, never architecture; the genesis exception named and bounded; field-grounded 2026-06-12"
 status    = "proposed"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-isomorphism"
@@ -93,8 +94,6 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/disk-projection >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ea >>
-
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

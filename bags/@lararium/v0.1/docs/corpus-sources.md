@@ -13,6 +13,7 @@ retain        = true
 role          = "invariant registry: all corpus bag targets in the monorepo; each maps to one Automerge doc"
 source-symbol = "CORPUS_SOURCES"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/corpus-sources"
@@ -142,9 +143,8 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #tiddler-record ? -> lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record family:data role:depends >>
-<<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:data role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/tiddler-record >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec >>
 <<~ pranala #source-file ? -> packages/lararium-tw5/src/corpus-sources.ts family:code role:has >>
 
 <<~/ahu >>

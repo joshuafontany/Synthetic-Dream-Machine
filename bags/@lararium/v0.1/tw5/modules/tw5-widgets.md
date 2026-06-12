@@ -12,6 +12,7 @@ retain        = true
 role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe", "lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali"]
 tagspace      = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets"
@@ -111,10 +112,8 @@ export function createLarariumWidgets(_tw: TW5Instance): Record<string, WidgetCt
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-node-host ? -> lar:///ha.ka.ba/@lararium/tw5/modules/node-host family:control role:depends >>
-<<~ pranala #to-carrier-sigils ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils family:control role:depends >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:control role:implements >>
-<<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:control role:implements >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/node-host >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
 
 <<~/ahu >>
 

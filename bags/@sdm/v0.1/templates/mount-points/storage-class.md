@@ -60,7 +60,7 @@ A mount-point meme names **where a module seats on an entity** and the contract 
 
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 
 <<~/ahu >>
 

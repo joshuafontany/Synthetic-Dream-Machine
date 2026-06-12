@@ -18,6 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "lar: URI operational skill — authoring, validation, and audit of addresses against the scheme law"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/lar-uri"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL"
 ```
@@ -26,7 +27,6 @@ uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL"
 
 [lar-uri.md](../lar-uri.md) holds the scheme law.
 This skill carries the working procedure.
-
 
 <<~ ahu #load-contract >>
 
@@ -105,9 +105,6 @@ Prefer another surface when the work concerns:
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

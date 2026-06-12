@@ -10,6 +10,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: one meme-graph model, two surface projections (Story-River + TLDraw canvas); graph-primacy; view-state as its own lar-URI-addressed region; the nine families classified by surface; transclusion's surface-split"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology"
@@ -140,10 +141,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #cites-pranala-families ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families family:observe role:cites >>
-<<~ pranala #cites-render-pipeline ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline family:observe role:cites >>
 
 <<~/ahu >>
 

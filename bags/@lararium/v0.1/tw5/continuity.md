@@ -12,6 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis"
 retain    = true
 role      = "lararium child invariant for continuity, crystal carry, and memory-as-hint boundaries"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/continuity"
@@ -62,7 +63,6 @@ More detailed crystal and MemPalace work can gather in docs space until it harde
 
 ## Source Shelf
 
-<<~ pranala #to-crystal-docs ? -> lar:///ha.ka.ba/@lares/v0.1/docs/crystal family:relation role:references >>
 ```toml
 when = ["need crystal mechanics", "need continuity research", "need memory-system archaeology"]
 ```
@@ -77,9 +77,6 @@ This child meme keeps the cold-hydration contract small.
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/crystal >>
 <<~ loulou lar:///LARES >>

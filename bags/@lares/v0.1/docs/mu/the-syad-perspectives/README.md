@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = false
 role      = "extracted syad source shelf, archive-consumed derivation store, register-metaphysics provenance locus"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives/README"
@@ -86,7 +87,6 @@ The array therefore shows both load and restraint.
 Combination reads through simultaneous flags, not omission.
 
 <<~/ahu >>
-
 
 <<~ ahu #reading-question >>
 
@@ -186,9 +186,6 @@ They do not govern the live fold.
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

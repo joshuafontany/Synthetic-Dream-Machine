@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "wikispace conditional block-container — the TW5 `\\if` filter cascade; first non-empty filter renders its body; the water cascade with kahawai (`\\elseif`) + mukuwai (`\\else`); content selection on the document surface"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wai"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/wai"
 ```
@@ -107,14 +108,13 @@ close-pattern = '<<~\/wai\s*>>'
 
 ## Edges
 
-<<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
-<<~ pranala #to-mukuwai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai family:relation >>
-<<~ pranala #to-heihei ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei family:relation >>
-<<~ pranala #to-huli ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/huli family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/mukuwai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/huli >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wikispace-canvasspace-ontology >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-wai family:control role:has >>
-<<~ pranala #tiddler-sigil-if ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if >>
 
 <<~/ahu >>
 

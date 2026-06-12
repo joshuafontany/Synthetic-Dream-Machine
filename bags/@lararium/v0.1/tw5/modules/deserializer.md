@@ -226,9 +226,9 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
 
 <<~ ahu #edges >>
 
-<<~ pranala #splits ? -> lar:///ha.ka.ba/@lararium/tw5/carrier-split family:data role:uses >>
-<<~ pranala #streams ? -> lar:///ha.ka.ba/@lararium/tw5/meme-stream family:data role:uses >>
-<<~ pranala #module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer family:control role:compiles-to >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/carrier-split >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/meme-stream >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer >>
 
 <<~/ahu >>
 

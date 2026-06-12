@@ -16,6 +16,7 @@ revised-on    = "2026-06-10"
 revision-note = "bag-grain verb pair (CREATE + bag-grain COPY) approved — carries the wiki-layer crossing rite; @catalog registration = holdings accession; implementation pending"
 role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
 status        = "approved"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-model"
@@ -268,12 +269,10 @@ Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-que
 
 ## Edges
 
-<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:queries-over >>
-<<~ pranala #personal-slot ? -> lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot family:relation role:specializes >>
-<<~ pranala #lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:governed-by >>
-<<~ pranala #verb-tiddler ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler family:relation role:carried-by >>
-<<~ pranala #invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/nalu-engine >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-adaptor >>
 <<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>

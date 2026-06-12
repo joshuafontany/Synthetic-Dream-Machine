@@ -13,6 +13,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
+tags      = ["api/pono/invariant", "api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
@@ -281,7 +282,7 @@ label = "The five FPIs and the five SYSTEM laws are the same invariant in two re
 desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, ephemeralization, trim tab) and the five architecture SYSTEM laws (web3 smell test, TW5 vm primacy, TS-as-projection, tiddler format, meme-as-projection) are not separate lists. They are the same structural pattern expressed in different registers: Fuller's in geometry/physics, FFZ's in code architecture. Neither list supersedes the other; violations in one register typically produce violations in the other."
 ```
 
-<<~ pranala #to-attention-scale ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale family:relation role:grounds >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale >>
 
 <<~/ahu >>
 
@@ -346,15 +347,13 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/grammar-invariants >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>
-<<~ pranala #grounded-in-elyncia ? -> lar:///elyncia/Elyncia_02_The_Lares_DreamNet family:reference role:grounding-myth >>
+<<~ loulou lar:///elyncia/Elyncia_02_The_Lares_DreamNet >>
 
 <<~/ahu >>
 

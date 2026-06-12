@@ -102,7 +102,7 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
-<<~ pranala #hands-to ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot family:control role:hands-to >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 
 <<~/ahu >>
 

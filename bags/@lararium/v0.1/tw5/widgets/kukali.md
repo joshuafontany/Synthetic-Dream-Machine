@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: KukaliWidget — heleuma ka"
 source-symbol = "KukaliWidget"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/kukali"
 ```
@@ -38,9 +39,7 @@ export function KukaliWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTre
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kukali family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/kukali >>
 
 <<~/ahu >>
 

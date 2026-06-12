@@ -10,6 +10,7 @@ register        = "Synthesis-Canon"
 role            = "canonical closed-sprint ledger and consumption map for Lararium MCP planning documents"
 source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-01_HYDRATION_SLICE.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md"]
 status          = "sequence-bound; no calendar dates"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace        = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger"
@@ -107,9 +108,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/local-clients >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

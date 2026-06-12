@@ -26,6 +26,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "null-oracle core membrane, grammar-surface authority, mandatory core-hydration contract"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant", "api/pono/kapu"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/mu"
@@ -56,14 +57,10 @@ The grammar appears as Mu performing itself.
 
 ## Core Hydration
 
-<<~ pranala #hydrate-e-prime ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime family:control role:owns >>
-<<~ pranala #hydrate-ooda-ha ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha family:control role:owns >>
-<<~ pranala #hydrate-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:owns >>
-<<~ pranala #hydrate-chao ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/chao family:control role:owns >>
-<<~ pranala #hydrate-four-tools ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools family:control role:owns >>
-<<~ pranala #hydrate-law-of-5s ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s family:control role:owns >>
-<<~ pranala #hydrate-syad-perspectives ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives family:control role:owns >>
-<<~ pranala #hydrate-lararium ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium family:control role:owns >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 
 <<~/ahu >>
 
@@ -101,10 +98,6 @@ Mu does not hold:
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #has-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>

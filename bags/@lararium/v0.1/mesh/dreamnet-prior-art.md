@@ -568,7 +568,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ---
 
-<<~ pranala #to-dreamnet-architecture ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture family:research role:grounds >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
 
 <<~ &#x0003; >>
 

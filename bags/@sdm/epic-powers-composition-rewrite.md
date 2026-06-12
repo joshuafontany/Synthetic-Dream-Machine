@@ -776,8 +776,6 @@ history if ever needed.
 
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/architecture/v0.0-transition >>
 
-<<~ pranala #retires ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/architecture/v0.0-transition family:lifecycle role:retires >>
-
 <<~/ahu >>
 
 <<~ &#x0003; >>

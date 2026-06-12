@@ -11,6 +11,7 @@ register    = "Synthesis"
 retain      = true
 role        = "Platform-neutral genesis island builder: GenesisInputs → GenesisArtifact. No filesystem, no DOM."
 source-file = "packages/lararium-mesh/src/genesis-doc.ts"
+tags      = ["mesh/alignment-plan"]
 tagspace    = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/genesis-doc"
@@ -86,7 +87,6 @@ The three-layer split that governs where genesis code lives:
 
 ## Edges
 
-<<~ pranala #alignment-plan ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/alignment-plan family:reference role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/base-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-uris >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/crypto >>

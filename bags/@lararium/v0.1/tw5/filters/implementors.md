@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: registerImplementorsOperator — heleuma ka"
 source-symbol = "registerImplementors"
+tags      = ["tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/filters/implementors"
 ```
@@ -48,8 +49,7 @@ export function registerImplementors(tw: TW5Instance): void {
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/implementors family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/implementors >>
 
 <<~/ahu >>
 

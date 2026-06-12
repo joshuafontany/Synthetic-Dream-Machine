@@ -12,7 +12,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Read Magic — decode a magical inscription's interface layer; the first proof of the v0.1 composition chain"
-tags      = ["@sdm/tags/domain/divination", "@sdm/tags/function/magic-decode", "@sdm/tags/function/ecm-scan", "@sdm/tags/function/archive", "@sdm/tags/hook/dangerous", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/divination", "components/function/magic-decode", "components/function/ecm-scan", "components/function/archive", "components/hook/dangerous", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
@@ -29,13 +29,6 @@ uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/read-magic"
 ## Composition
 
 Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
-
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/domain/divination >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/magic-decode >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/ecm-scan >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/function/archive >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/components/hook/dangerous >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/@sdm/v0.1/mount-points/trait >>
 
 <<~/ahu >>
 
@@ -84,9 +77,9 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic family:render role:projects >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic family:provenance role:witness >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic >>
 
 <<~/ahu >>
 

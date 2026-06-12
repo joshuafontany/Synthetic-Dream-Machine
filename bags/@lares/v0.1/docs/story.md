@@ -10,6 +10,7 @@ manaoio   = 15
 register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for Lindwyrm, Elyncia, origin-story, and other narrative scaffolds that inform but do not govern the live stack"
+tags      = ["api/pono/meme", "api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/story"
@@ -41,8 +42,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-
-
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/consumption-ledger >>
@@ -54,10 +53,6 @@ Use this branch for:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/dreamdeck-feed-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/daemon-in-the-walls >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #to-lindwyrm-ledger ? -> lar:///ha.ka.ba/@lares/v0.1/docs/story/lindwyrm/consumption-ledger family:reference role:index >>
 
 <<~/ahu >>
 

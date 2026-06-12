@@ -209,12 +209,12 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 
 <<~/ahu >>
 
-<<~ pranala #grounds-vessel ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/open-vessel family:control role:owns >>
-<<~ pranala #grounds-islands ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island family:control role:owns >>
-<<~ pranala #grounds-authority ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer family:control role:owns >>
-<<~ pranala #grounds-sovereignty ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:control role:owns >>
-<<~ pranala #grounds-topology ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture family:relation role:references >>
-<<~ pranala #hydrated-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot family:relation role:governed-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/open-vessel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 
 <<~ &#x0003; >>
 

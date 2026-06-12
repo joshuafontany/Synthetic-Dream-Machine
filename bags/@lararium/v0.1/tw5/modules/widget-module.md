@@ -100,8 +100,8 @@ export function createLarariumWidgets(_tw: any): Record<string, WidgetCtor> {
 
 <<~ ahu #edges >>
 
-<<~ pranala #bundle ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules family:control role:corpus-path >>
-<<~ pranala #gate ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate family:control role:wired-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate >>
 
 <<~/ahu >>
 

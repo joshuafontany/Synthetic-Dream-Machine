@@ -86,10 +86,10 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells family:template role:uses >>
-<<~ pranala #witness ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic family:provenance role:witness >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic family:provenance role:source >>
-<<~ pranala #source ? -> lar:///ha.ka.ba/@sdm/v0.1/source/becmi/rules-cyclopedia family:provenance role:source >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/read-magic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/becmi/basic >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/source/becmi/rules-cyclopedia >>
 
 <<~/ahu >>
 

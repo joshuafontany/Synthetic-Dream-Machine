@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium canvas room registry — default rooms, portals, layout types"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/lararium"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/canvas/rooms"
 ```
@@ -130,8 +131,7 @@ label      = "← System"
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-lararium ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium family:control role:implements >>
-<<~ pranala #to-canvas-zoom ? -> lar:///ha.ka.ba/@lararium/tw5/canvas/zoom-levels family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/canvas/zoom-levels >>
 
 <<~/ahu >>
 

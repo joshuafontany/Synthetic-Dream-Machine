@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-helu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/helu"
 ```
@@ -66,8 +67,7 @@ TW5 equivalent:
 
 ## Edges
 
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-helu family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
 
 <<~/ahu >>
 

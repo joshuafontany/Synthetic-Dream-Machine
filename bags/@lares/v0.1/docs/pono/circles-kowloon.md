@@ -158,7 +158,7 @@ Nexus authorization circles (seeded by nexus admin at nexus boot):
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
-<<~ pranala #to-circles-doc ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka family:control role:documents >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka >>
 
 <<~/ahu >>
 

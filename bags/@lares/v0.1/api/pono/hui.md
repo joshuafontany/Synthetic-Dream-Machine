@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hui"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hui"
 ```
@@ -64,8 +65,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-hui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hui family:control role:has >>
-<<~ pranala #tiddler-sigil-sync ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-sync family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-sync >>
 
 <<~/ahu >>
 

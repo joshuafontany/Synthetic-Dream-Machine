@@ -10,6 +10,7 @@ manaoio   = 12
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 role      = "core invariant example of a pono meme: right-sized law surface, bounded self-description, and outward routing pressure"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono"
 ```
@@ -23,7 +24,6 @@ A core invariant example of a pono meme.
 In Hawaiian, *pono* carries rightness, properness, equity, and true condition. Here that pressure becomes a writing law: the meme stays in right proportion, names its boundary clearly, and sends heavier matter to the carrier that properly holds it.
 
 This folder already shows the family shape around it: `meme`, `invariant`, `memetic-wikitext`, `loci`, `lar-uri`, `pranala`, `e-prime`, `guest-grammar`, and their skill surfaces. Pono ties to that shape not by swallowing those laws into itself, but by staying small enough that each child may keep its own true work.
-
 
 <<~ ahu #ooda-ha >>
 
@@ -43,10 +43,6 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Floating Disc — playable surface with clickable component pills"
-tags      = ["@sdm/tags/domain/stuckforce", "@sdm/tags/function/cargo", "@sdm/tags/function/barrier", "@sdm/tags/hook/sustained", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc"
@@ -53,8 +53,8 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc family:render role:projects >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

@@ -14,6 +14,7 @@ role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch mod
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/parser"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext"]
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -281,8 +282,6 @@ trigger = "end of stream"
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
 

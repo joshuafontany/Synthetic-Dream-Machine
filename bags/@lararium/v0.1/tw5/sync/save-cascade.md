@@ -12,6 +12,7 @@ retain        = true
 role          = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor: ordered TW5 filter rules mapping tiddler titles to save strategies"
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 tagspace      = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
@@ -94,8 +95,7 @@ rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tid
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #used-by ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor family:control role:read-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor >>
 
 <<~/ahu >>
 

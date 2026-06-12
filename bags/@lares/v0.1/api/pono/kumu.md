@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kumu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kumu"
 ```
@@ -61,10 +62,9 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 ## Edges
 
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kumu family:control role:has >>
-<<~ pranala #tiddler-sigil-type ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-type family:control role:alias >>
-<<~ pranala #tiddler-sigil-typos ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-typos family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-type >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-typos >>
 
 <<~/ahu >>
 

@@ -75,9 +75,9 @@ Source: https://github.com/tlaplus/Examples
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-hub ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:part-of >>
-<<~ pranala #to-federated-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:relation role:witnesses >>
-<<~ pranala #to-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:relation role:witnesses >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 
 <<~/ahu >>
 

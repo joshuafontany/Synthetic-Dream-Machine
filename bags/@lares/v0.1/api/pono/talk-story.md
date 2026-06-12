@@ -120,8 +120,8 @@ Beneath the triad two grounds rhyme: **kapwa** (Filipino — the other met as sh
 
 ## Edges
 
-<<~ pranala #skill ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL family:control role:realized-by >>
-<<~ pranala #hoike ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike family:relation role:contested-exit-files >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hoike >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 

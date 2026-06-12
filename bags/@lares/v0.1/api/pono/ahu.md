@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "child-slot sigil — addressable worksite scope boundary; named ahu slots form the meme's tiddler structure"
+tags      = ["api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ahu"
 ```
@@ -110,11 +111,8 @@ slot = 1
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:relation >>
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 
 <<~/ahu >>
 

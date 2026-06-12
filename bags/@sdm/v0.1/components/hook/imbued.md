@@ -68,7 +68,7 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/components/tag >>
 
 <<~/ahu >>
 

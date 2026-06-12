@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
-tags      = ["@sdm/tags/mount/item", "@sdm/tags/domain/stuckforce"]
+tags      = ["mount-points/item", "components/domain/stuckforce"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble"
@@ -38,7 +38,7 @@ A warm, palm-sized pebble of Long Ago make. Press it and it unfolds the **Floati
 
 This item carries one Power. The card shows it as a doorway — tap through to the live module:
 
-<<~ pranala #holds ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc family:composition role:holds >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc >>
 
 The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point · D:1 hour); the relic changes only who sources it and how it is held.
 
@@ -56,8 +56,8 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble family:render role:projects >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

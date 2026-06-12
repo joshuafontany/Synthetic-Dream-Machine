@@ -13,6 +13,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis"
 retain    = false
 role      = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
+tags      = ["api/pono/meme", "api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/masks"
@@ -33,7 +34,7 @@ Grammar and stacking law defined in `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voic
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#mask-layer >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#mask-layer >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -120,9 +121,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/ghost-of-mark-twain >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/character/friend-computer >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

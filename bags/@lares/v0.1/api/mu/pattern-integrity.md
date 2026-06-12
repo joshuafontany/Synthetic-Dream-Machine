@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: Fuller's 5 pattern integrities applied to Lararium — tensegrity, wave/water, synergy, ephemeralization, trim tab"
 status-date = "2026-05-02"
+tags      = ["api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"
@@ -211,10 +212,9 @@ Run this against any new code before merging:
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
-<<~ pranala #to-quine ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles >>
 
 <<~/ahu >>
 

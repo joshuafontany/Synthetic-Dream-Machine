@@ -12,6 +12,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
+tags      = ["api/pono/meme", "api/pono/memetic-wikitext"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/render-pipeline"
@@ -251,8 +252,6 @@ Trace continuity across the causal island boundary:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
 

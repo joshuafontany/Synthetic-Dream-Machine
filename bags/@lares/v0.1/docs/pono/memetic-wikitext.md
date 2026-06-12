@@ -11,6 +11,7 @@ manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/memetic-wikitext"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext"
@@ -190,10 +191,6 @@ The submission-grade specification at `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
 

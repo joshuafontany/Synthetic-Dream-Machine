@@ -10,6 +10,7 @@ manao     = 15
 register  = "Synthesis"
 retain    = false
 role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions"
@@ -124,8 +125,6 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ pranala #tracks-annex ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:observe role:references >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

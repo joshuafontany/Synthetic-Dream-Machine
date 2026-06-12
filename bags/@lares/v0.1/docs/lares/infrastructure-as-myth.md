@@ -14,6 +14,7 @@ retain         = false
 review-cadence = "quarterly"
 role           = "doctrine: foundational design thesis — IaM names the symbolic-operational layer above IaC; Lares functions as an early implementation"
 sources        = ["https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-iac.html", "https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code", "https://developer.hashicorp.com/well-architected-framework/define-and-automate-processes/define/as-code/infrastructure", "https://www.britannica.com/topic/meme", "https://www.britannica.com/topic/myth", "https://www.britannica.com/topic/myth/Functions-of-myth-and-mythology", "https://openlibrary.org/books/OL27018331M/The_art_of_memetics", "https://books.google.com/books?id=1DcyU12n7PAC", "https://www.anthropic.com/news/claude-character", "https://www.anthropic.com/research/teaching-claude-why", "https://github.com/malfoyslastname/character-card-spec-v2", "https://en.wikipedia.org/wiki/Character.AI", "https://code.claude.com/docs/en/memory"]
+tags      = ["api/pono/meme", "api/pono"]
 tagspace       = "stable"
 type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth"
@@ -378,10 +379,8 @@ No adjacent system combines all four axes at deployment time. The IaM claim gain
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #to-lararium-hud ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture family:doctrine role:sibling >>
-<<~ pranala #to-lares-protocols ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols family:doctrine role:sibling >>
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture >>
+<<~ loulou lar:///ha.ka.ba/docs/lares/the-lares-protocols >>
 
 <<~/ahu >>
 

@@ -9,6 +9,7 @@ manaoio     = 17
 register    = "Synthesis-Canon"
 role        = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
 status-date = "2026-04-24"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/traversal"
@@ -231,9 +232,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/nodes >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/artifacts >>

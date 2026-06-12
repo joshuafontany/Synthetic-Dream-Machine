@@ -16,6 +16,7 @@ revised-on    = "2026-06-11"
 revision-note = "projection-law trued to the running code (membrane recompose via expandMemeRefs; debounce per bag+root; hash-gate skip); prior: co-projection rewrite of #core-claim; carrier-whole at rest, grain ladder canonized"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "approved"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/disk-projection"
@@ -170,9 +171,6 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/save-path >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/sync-namespace >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/catalog-doc >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
+tags      = ["api/pono/pranala", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-loulou"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/loulou"
 ```
@@ -113,14 +114,11 @@ confidence-bounded = false
 
 ## Edges
 
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
-<<~ pranala #to-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-loulou family:control role:has >>
-<<~ pranala #tiddler-sigil-link ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-link family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-link >>
 
 <<~/ahu >>
 

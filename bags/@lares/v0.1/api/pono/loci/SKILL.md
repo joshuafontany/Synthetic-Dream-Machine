@@ -16,6 +16,7 @@ manaoio            = 13
 register           = "Synthesis-Canon"
 role               = "agent-facing procedural surface for loci routing and rating passes"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/loci"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/loci/SKILL"
 ```
@@ -220,9 +221,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

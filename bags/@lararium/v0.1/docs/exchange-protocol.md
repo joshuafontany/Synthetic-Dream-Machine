@@ -58,7 +58,7 @@ choose aftermath anchor/vector
 emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 ```
 
-<<~ pranala #voices-core ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#exchange-protocol family:control role:condensed-into >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices#exchange-protocol >>
 
 <<~/ahu >>
 

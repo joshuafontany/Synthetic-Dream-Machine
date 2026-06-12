@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-holo"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/holo"
 ```
@@ -69,10 +70,9 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-holo ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-holo family:control role:has >>
-<<~ pranala #tiddler-sigil-race ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-race family:control role:alias >>
-<<~ pranala #to-puka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/puka family:relation role:contrast >>
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-race >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/puka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
 
 <<~/ahu >>
 

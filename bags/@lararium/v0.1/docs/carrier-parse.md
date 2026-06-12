@@ -13,6 +13,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: carrier ingress gate — text-in, CarrierRecord-out; validates shape, extracts metadata and implements bundle"
 source-symbol = "parseCarrier"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/carrier-parse"
 ```
@@ -73,9 +74,8 @@ export function parseCarrier(uri: string, text: string): CarrierRecord {
 
 <<~ ahu #edges >>
 
-<<~ pranala #carrier-sigils ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils family:control role:depends >>
-<<~ pranala #projection-codec ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec family:control role:depends >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec >>
 
 <<~/ahu >>
 

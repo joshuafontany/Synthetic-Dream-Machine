@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "\\widget pragma-alias sigil — declares a named ~widget callable via the ~ dispatcher; operator extension point"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-widget"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/widget"
 ```
@@ -64,9 +65,8 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-widget family:control role:has >>
-<<~ pranala #to-dispatcher ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher family:relation >>
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/dispatcher >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
 
 <<~/ahu >>
 

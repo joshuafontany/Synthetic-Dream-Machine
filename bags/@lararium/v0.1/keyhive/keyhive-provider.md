@@ -120,7 +120,7 @@ enters the PersonGroup doc. The private scalar never leaves the memory of the fu
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/keyhive/capability-provider >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/keyhive/event-store >>
-<<~ pranala #two-vessel-test ? -> lar:///ha.ka.ba/@lararium/v0.1/node/two-vessel-mesh family:reference role:proves >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/node/two-vessel-mesh >>
 
 <<~/ahu >>
 

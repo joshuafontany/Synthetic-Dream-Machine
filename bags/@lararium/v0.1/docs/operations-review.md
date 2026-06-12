@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "OODA-HA extraction plan for lararium interaction protocols — frame-uncertainty, talk story, session init, and related surfaces"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/operations-review"
@@ -292,9 +293,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/collaboration-model >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences/proactive-surfacing >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

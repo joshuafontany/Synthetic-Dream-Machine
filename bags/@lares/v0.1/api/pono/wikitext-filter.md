@@ -226,9 +226,8 @@ Systematic find-replace for authors migrating TW5 content:
 
 ## Edges
 
-<<~ pranala #to-tw5-filter ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter family:relation role:forks >>
-<<~ pranala #to-grammar-kernel ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:registered-in >>
-<<~ pranala #to-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:documented-in >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
 

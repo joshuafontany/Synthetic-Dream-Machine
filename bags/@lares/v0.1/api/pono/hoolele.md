@@ -11,6 +11,7 @@ register    = "Synthesis"
 retain      = true
 role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
 status-date = "2026-05-15"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
@@ -147,9 +148,8 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-hoolele ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele family:control role:has >>
-<<~ pranala #to-lele ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lele family:relation role:contrast >>
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lele >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
 
 <<~/ahu >>
 

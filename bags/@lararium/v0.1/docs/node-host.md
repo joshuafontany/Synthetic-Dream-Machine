@@ -12,6 +12,7 @@ retain        = true
 role          = "lararium-node host: lares/ walker, meme graph loader, interface URI bootstrap list"
 source-symbol = "*"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/node-host"
@@ -128,10 +129,7 @@ export interface CorpusSource {
 
 <<~ ahu #edges >>
 
-<<~ pranala #corpus-sources ? -> lar:///ha.ka.ba/@lararium/tw5/schema/corpus-sources family:control role:depends >>
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #to-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #to-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/corpus-sources >>
 
 <<~/ahu >>
 

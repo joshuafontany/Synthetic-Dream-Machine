@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
 status-date = "2026-05-15"
+tags      = ["api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice"
@@ -361,11 +362,10 @@ via TW5's own event bus.
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-vm-projection-bus ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus family:relation >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
-<<~ pranala #to-uefn-scene ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
 
 <<~/ahu >>
 

@@ -90,7 +90,7 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class family:template role:uses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/mount-points/storage-class >>
 
 <<~/ahu >>
 

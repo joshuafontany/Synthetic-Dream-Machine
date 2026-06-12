@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "query surface sigil — evaluates TW5 filter and renders result list; English alias: \\query"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ui"
 ```
@@ -59,9 +60,7 @@ TW5 filter expansion:
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-query family:control role:alias >>
-
-<<~ pranala #tiddler-sigil-ui ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ui family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-query >>
 
 <<~/ahu >>
 

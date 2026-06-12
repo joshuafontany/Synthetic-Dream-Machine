@@ -12,6 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-adaptor"
 ```
@@ -105,9 +106,6 @@ its seed state synchronously before `behavior.onEa` runs.
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/nalu-engine >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/verse-mesh >>
-
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

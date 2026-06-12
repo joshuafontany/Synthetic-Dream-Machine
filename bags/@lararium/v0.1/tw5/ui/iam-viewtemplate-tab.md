@@ -11,7 +11,7 @@ manaoio    = 17
 register   = "Synthesis-Canon"
 retain     = true
 role       = "ViewTemplate tab: injects #iam character sheet as a Metadata tab on all lar: tiddlers"
-tags       = ["$:/tags/ViewTemplate"]
+tags      = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab"
 ```
@@ -26,7 +26,6 @@ uri-path   = "ha.ka.ba/@lararium/v0.1/tw5/ui/iam-viewtemplate-tab"
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel >>
 
 <<~/ahu >>

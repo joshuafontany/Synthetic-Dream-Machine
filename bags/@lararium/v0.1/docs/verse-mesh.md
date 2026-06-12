@@ -11,6 +11,7 @@ manaoio   = 17
 register  = "DS"
 retain    = true
 role      = "design narrative for the Verse polychronous CRDT mesh — peer model, VM pool, camera model, accumulator wiring"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/verse-mesh"
 ```
@@ -255,8 +256,6 @@ The tick source changes; the drain contract does not.
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/camera-mount >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/meme-provider >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

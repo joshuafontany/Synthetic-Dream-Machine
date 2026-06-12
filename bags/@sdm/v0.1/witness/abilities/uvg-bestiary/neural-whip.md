@@ -64,7 +64,7 @@ The v0.1 **Neural Whip** module abstracts the creature's signature tentacle into
 
 ## Edges
 
-<<~ pranala #witnesses ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip family:provenance role:witnesses >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip >>
 
 <<~/ahu >>
 

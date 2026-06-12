@@ -14,6 +14,7 @@ retain      = true
 role        = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
 source-file = "packages/lararium-mesh/src/reaction-graph.ts"
 status-date = "2026-05-28"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
 tagspace    = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol"
@@ -162,11 +163,9 @@ appears in production paths.
 
 ## Edges
 
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #to-reaction-engine ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine family:control role:within-island >>
-<<~ pranala #to-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:reference role:see >>
-<<~ pranala #to-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:reference role:see >>
-<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine >>
 
 <<~/ahu >>

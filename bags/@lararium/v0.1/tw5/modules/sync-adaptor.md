@@ -12,6 +12,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor"
 ```
@@ -88,9 +89,8 @@ private _applyChange(change: LarTiddlerChange): void {
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #reads-cascade ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade family:data role:reads >>
-<<~ pranala #gate ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate family:control role:registered-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate >>
 
 <<~/ahu >>
 

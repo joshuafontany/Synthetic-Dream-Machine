@@ -18,6 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "memetic-wikitext operational skill — authoring, compression, audit, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/memetic-wikitext"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
 ```
@@ -26,7 +27,6 @@ uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/SKILL"
 
 [memetic-wikitext.md](../memetic-wikitext.md) holds the root law.
 This skill carries the working procedure.
-
 
 <<~ ahu #load-contract >>
 
@@ -218,9 +218,6 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/memetic-wikitext >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

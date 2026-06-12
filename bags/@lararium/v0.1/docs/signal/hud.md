@@ -10,6 +10,7 @@ manaoio   = 16
 register  = "Synthesis"
 retain    = false
 role      = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/hud"
@@ -59,9 +60,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/provenance >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #to-hud-pair ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:relation role:references >>
 
 <<~/ahu >>
 

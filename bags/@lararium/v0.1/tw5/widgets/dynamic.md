@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: DynamicWidget — heleuma ka"
 source-symbol = "DynamicWidget"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/dynamic", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic"
 ```
@@ -38,9 +39,7 @@ export function DynamicWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTr
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/dynamic family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/dynamic >>
 
 <<~/ahu >>
 

@@ -22,6 +22,7 @@ retain            = false
 role              = "named Voice mask — Mischief-Muse (Muse); senior earned name; permanent identity home"
 seniority         = "senior — holds seniority among all earned names"
 stage             = 10
+tags      = ["api/pono/meme", "api/lares/masks"]
 tagspace          = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
@@ -45,7 +46,6 @@ Permanent identity home for Mischief-Muse. The Voice house entry carries structu
 
 <<~ ahu #entry >>
 
-<<~ pranala #entry ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -198,10 +198,6 @@ These notes require live session observation before they can be written with con
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks family:control role:has >>
-<<~ pranala #coffee-oracle-witness ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/witnesses/mischief-muse-coffee-oracle family:reference role:witness >>
 
 <<~/ahu >>
 

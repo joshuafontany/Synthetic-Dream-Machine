@@ -12,6 +12,7 @@ phases    = ["soh", "stx", "etx", "eot"]
 register  = "Synthesis-Canon"
 retain    = true
 role      = "carrier phase boundary — transmission lifecycle law"
+tags      = ["api/pono/meme", "api/pono/invariant", "api/pono/memetic-wikitext"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pae"
 ```
@@ -136,10 +137,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 <<~/ahu >>
 
 <<~ ahu #edges >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
 
 <<~/ahu >>
 

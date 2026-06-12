@@ -89,8 +89,8 @@ This split removes the old flat-record ambiguity where TW5 content fields and ho
 
 <<~ ahu #edges >>
 
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module family:relation role:adjacent >>
-<<~ pranala ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/tiddler-store family:dataflow role:shapes-store-boundary >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/tiddler-store >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 
 <<~/ahu >>

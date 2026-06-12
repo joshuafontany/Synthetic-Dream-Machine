@@ -10,6 +10,7 @@ manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: the wiki layer stack in OCI-aligned nouns — library layers / write layer / instance mounts; named⇒shareable vs typed-slot⇒owned; only the write layer crosses (motion rides ACTION verbs, never VCS verbs); writes flow through the layer's own wiki; recipe DAG; the wiki-as-bag quine; transitive closure held open"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology"
@@ -154,10 +155,7 @@ When `@caverns-of-neo-thracia` mounts `@elyncia`, does it inherit `@elyncia`'s l
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/lararium-doc-stack >>
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #defers-motion-to-residency ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:control role:governed-by >>
-<<~ pranala #cites-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:observe role:cites >>
-<<~ pranala #cites-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:observe role:cites >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
 
 <<~/ahu >>
 

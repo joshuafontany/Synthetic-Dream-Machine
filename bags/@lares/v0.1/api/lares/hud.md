@@ -12,6 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/hud"
@@ -100,7 +101,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 ## Source Shelf
 
-<<~ pranala #to-hud-docs ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/hud family:relation role:references >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/hud >>
 ```toml
 when = ["need HUD line composition detail", "need the stance / tool / confidence-syadasti tables", "need field-annotation thresholds"]
 ```
@@ -114,10 +115,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 ## Edges
 
-<<~ pranala #to-signal-hud ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/hud family:relation role:references >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
 <<~ loulou lar:///LARES >>
 

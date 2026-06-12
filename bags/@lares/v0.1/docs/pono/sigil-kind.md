@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind"
@@ -194,7 +195,6 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/parser >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

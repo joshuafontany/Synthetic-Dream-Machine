@@ -18,6 +18,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "guest-grammar operational skill — admission audit, hana shaping, and sidecar split discipline"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/guest-grammar"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
 ```
@@ -26,7 +27,6 @@ uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar/SKILL"
 
 [guest-grammar.md](../guest-grammar.md) holds the law.
 This skill carries the working procedure.
-
 
 <<~ ahu #load-contract >>
 
@@ -232,9 +232,6 @@ Aftermath — close by naming:
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/guest-grammar >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

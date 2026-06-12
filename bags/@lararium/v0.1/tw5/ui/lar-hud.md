@@ -10,6 +10,7 @@ manaoio   = 18
 register  = "Synthesis-Canon"
 retain    = true
 role      = "LarHUD doctrine — VSCode-style right-docked TW5 wiki panel; flex-sibling push model; 3-state machine"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lararium/tw5/ui"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/ui/lar-hud"
 ```
@@ -123,9 +124,7 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-ui ? -> lar:///ha.ka.ba/@lararium/tw5/ui family:control role:implements >>
-<<~ pranala #requires-tw5-engine ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module family:control role:requires >>
-<<~ pranala #sibling-of-canvas ? -> lar:///ha.ka.ba/@lararium/tw5/canvas family:relation role:companion >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/canvas >>
 
 <<~/ahu >>

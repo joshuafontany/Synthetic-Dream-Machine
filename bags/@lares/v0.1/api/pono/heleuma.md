@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
+tags      = ["api/pono/invariant"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma"
 ```
@@ -81,8 +82,6 @@ A heleuma API meme that acquires:
 <<~/ahu >>
 
 <<~ ahu #edges >>
-
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

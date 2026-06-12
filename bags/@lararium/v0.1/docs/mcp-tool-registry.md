@@ -138,8 +138,8 @@ inputs      = ["uri: string"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-node-host ? -> lar:///ha.ka.ba/@lararium/tw5/modules/node-host family:control role:depends >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph family:control role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/node-host >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph >>
 
 <<~/ahu >>
 

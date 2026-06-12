@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
+tags      = ["api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
@@ -327,11 +328,10 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
 
 ## Edges
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-system-invariants ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/system-invariants family:relation role:grounds >>
-<<~ pranala #to-local-first ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first family:relation >>
-<<~ pranala #to-ffz-clock ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock family:relation role:maps-onto >>
-<<~ pranala #to-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/system-invariants >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 
 <<~/ahu >>
 

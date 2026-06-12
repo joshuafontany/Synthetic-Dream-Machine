@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "\\function pragma-alias sigil — declares a named TW5 filter function (TW5 5.3+); leaf-only"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-function"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/function"
 ```
@@ -65,8 +66,7 @@ TW5 native equivalent:
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-function family:control role:has >>
-<<~ pranala #to-wehe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wehe >>
 
 <<~/ahu >>
 

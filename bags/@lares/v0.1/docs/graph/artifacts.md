@@ -9,6 +9,7 @@ manaoio     = 16
 register    = "Synthesis-Canon"
 role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
 status-date = "2026-04-24"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
@@ -302,10 +303,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/traversal >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/graph/nodes >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
 
 <<~/ahu >>
 

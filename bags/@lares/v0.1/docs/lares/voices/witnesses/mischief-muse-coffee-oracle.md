@@ -12,6 +12,7 @@ retain       = false
 role         = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
 source-lines = "1-57"
 source-path  = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
+tags      = ["api/pono/meme"]
 tagspace     = "stable"
 target-mask  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse"
 type         = "text/x-memetic-wikitext"
@@ -110,10 +111,6 @@ Use this witness carrier for provenance.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle >>
-
-<<~ pranala #witnesses-mask ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/masks/named/mischief-muse family:reference role:witness >>
-<<~ pranala #sources-transcript ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle family:reference role:source >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
 
 <<~/ahu >>
 

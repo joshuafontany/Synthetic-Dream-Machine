@@ -15,6 +15,7 @@ register    = "Synthesis"
 retain      = true
 role        = "the @personal recipe slot (cross-device viewing state, PersonGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
 status      = "approved"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/api/personal-slot"
@@ -485,13 +486,12 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — **slice
 
 ## Edges
 
-<<~ pranala #residency-model ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:relation role:builds-on >>
-<<~ pranala #wiki-recipe ? -> lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe family:relation role:has >>
-<<~ pranala #keyhive-person-group ? -> lar:///ha.ka.ba/@lares/v0.1/api/keyhive/person-group family:relation role:scoped-by >>
-<<~ pranala #lar-uri-bag-tag ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule family:relation role:governed-by >>
-<<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation role:grain-debt-homed-in >>
-<<~ pranala #memory-store ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store family:relation role:resolves-tension-from >>
-<<~ pranala #bag-paths ? -> lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths family:relation role:adds-rules-to >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/keyhive/person-group >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/config/bag-paths >>
 
 <<~/ahu >>
 

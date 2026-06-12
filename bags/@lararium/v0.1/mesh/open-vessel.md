@@ -151,10 +151,10 @@ invariant + the boot tests carry the safety.
 
 <<~/ahu >>
 
-<<~ pranala #governed-by-vessel-contract ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer family:control role:governed-by >>
-<<~ pranala #grounded-by-substrate-law ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island family:relation role:grounded-by >>
-<<~ pranala #depends-island-sovereignty ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol family:control role:depends >>
-<<~ pranala #refines-vessel-impl ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel family:relation role:references >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/causal-island >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-vessel >>
 
 <<~ &#x0003; >>
 

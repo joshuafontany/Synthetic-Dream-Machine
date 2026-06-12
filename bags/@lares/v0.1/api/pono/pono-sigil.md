@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pono"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pono-sigil"
 ```
@@ -58,9 +59,8 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 ## Edges
 
-<<~ pranala #to-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pono family:control role:has >>
-<<~ pranala #tiddler-sigil-constraint ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-constraint family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-constraint >>
 
 <<~/ahu >>
 

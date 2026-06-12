@@ -10,6 +10,7 @@ manao     = 16
 register  = "Synthesis"
 retain    = false
 role      = "extended docs: memetic-wikitext message routing — render-down (dataflow) and message-up (message) over the control DAG; lexical meme-scope; filter context binding"
+tags      = ["api/pono/meme"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/message-routing"
@@ -89,8 +90,7 @@ Filters inside `wai` / `huli` / `ui` evaluate against the **explicit current mem
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ pranala #governed-by ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families family:control role:governed-by >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 
 <<~/ahu >>
 

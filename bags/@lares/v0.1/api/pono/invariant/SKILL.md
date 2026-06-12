@@ -16,6 +16,7 @@ manaoio            = 14
 register           = "SC"
 role               = "invariant skill, conformance checker, and sidecar splitter"
 skill-package-root = "packages/lares-core/memes/v0.1/api/pono/invariant"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
 uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL"
 ```
@@ -247,9 +248,6 @@ Aftermath — name the residue honestly: sidecar matter not yet split, ambiguous
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

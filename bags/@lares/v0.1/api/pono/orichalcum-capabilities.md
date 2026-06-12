@@ -12,6 +12,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for wiki islands, edge islands, and canon MOVE"
+tags      = ["api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
@@ -288,9 +289,8 @@ the crypto gate, not instead of it.
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #required-by-federation ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands family:control role:required-by >>
-<<~ pranala #to-research-streams ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams family:relation role:grounded-by >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
 
 <<~/ahu >>
 

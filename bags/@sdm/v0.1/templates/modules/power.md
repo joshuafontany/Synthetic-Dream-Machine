@@ -84,8 +84,8 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:see >>
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells family:template role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells >>
 
 <<~/ahu >>
 

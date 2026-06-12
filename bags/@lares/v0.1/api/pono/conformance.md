@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "invokable lens --- conformance-checks external content against the OODA-HA reference loop"
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/conformance"
 ```
@@ -116,9 +117,6 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
-
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
 
 <<~/ahu >>
 

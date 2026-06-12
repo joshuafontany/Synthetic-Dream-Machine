@@ -87,10 +87,10 @@ watch trusts the `@lararium` doc's write-capability story as it stands.
 
 ## Edges
 
-<<~ pranala #sovereign-kernel ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/sovereign-kernel family:relation role:witnesses-booted-engine >>
-<<~ pranala #genesis-doc ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc family:relation role:carries-the-epoch >>
-<<~ pranala #epoch-handlers ? -> lar:///ha.ka.ba/@lararium/v0.1/node/epoch-handlers family:relation role:bag-epoch-sibling-alert >>
-<<~ pranala #memory-store ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store family:relation role:hosts-the-alert-@temp >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/sovereign-kernel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/genesis-doc >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/node/epoch-handlers >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/memory-store >>
 
 <<~/ahu >>
 

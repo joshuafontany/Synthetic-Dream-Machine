@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: AhuWidget — heleuma ka"
 source-symbol = "AhuWidget"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu"
 ```
@@ -78,9 +79,7 @@ AhuWidget.prototype.refresh = function (this: TW5WidgetInstance, changedTiddlers
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/ahu >>
 
 <<~/ahu >>
 

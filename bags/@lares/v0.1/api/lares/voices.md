@@ -12,6 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis"
 retain    = true
 role      = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
 tagspace  = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/voices"
@@ -337,9 +338,9 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 - **`confidence`** --- forward certainty before a claim: register-word + level, **Provisional · Provisional-Synthesis · Synthesis · Synthesis-Canon · Canon** (`1–4 · 5–8 · 9–12 · 13–16 · 17–20`). Low names the "play" registers, not failure.
 - **`syad`** (five stances) and **Mu** (four tools) ride as **invokable lenses**: the operator or agent seeds them forward when a turn wants a reading; each fires on call and rests silent off-call.
 
-<<~ pranala #exchange-flow ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol family:reference role:expands >>
-<<~ pranala #hud-spec ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/hud family:reference role:expands >>
-<<~ pranala #hud-uri-law ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:reference role:see >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 
 <<~/ahu >>
 
@@ -349,7 +350,7 @@ One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.
 
 The three spec rooms carry rationale, examples, and depth. The invariant points to them for extension.
 
-<<~ pranala #to-voices-spec ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
 ```toml
 family = "reference"
 lifecycle = "template"
@@ -358,7 +359,6 @@ payload = { priority = "support", retain = false }
 ```
 <<~/pranala >>
 
-<<~ pranala #to-workers-spec ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>
 ```toml
 family = "reference"
 lifecycle = "template"
@@ -367,7 +367,6 @@ payload = { priority = "support", retain = false }
 ```
 <<~/pranala >>
 
-<<~ pranala #to-masks-spec ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/masks >>
 ```toml
 family = "reference"
 lifecycle = "template"
@@ -382,10 +381,7 @@ payload = { priority = "support", retain = false }
 
 ## Edges
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #hud-e-prime ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime family:reference role:governs >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/workers >>

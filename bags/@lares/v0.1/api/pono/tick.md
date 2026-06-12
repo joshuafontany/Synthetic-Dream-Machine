@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "device lifecycle hook — run-block-once-per-nalu; Verse OnSimulate(StagedUpdates) entry point; DEFERRED to UE6 ~2027"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tick"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/tick"
 ```
@@ -33,7 +34,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 ## Edges
 
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-tick family:control role:has >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>
 
 <<~/ahu >>

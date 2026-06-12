@@ -13,6 +13,7 @@ namespace        = "&#x2299;"
 register         = "Synthesis-Canon"
 retain           = true
 role             = "invariant edge law"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala"]
 type             = "text/x-memetic-wikitext"
 uri-path         = "ha.ka.ba/@lares/v0.1/api/pono/pranala"
 ```
@@ -197,18 +198,13 @@ reaction-roles = ["subscription", "handler", "callback"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #edge-loulou ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou family:relation >>
-<<~ pranala #edge-aka ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/aka family:relation >>
-<<~ pranala #edge-kahea ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea family:relation >>
-<<~ pranala #edge-papalohe ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe family:relation >>
-<<~ pranala #edge-kukali ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali >>
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/pranala >>
-
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala family:control role:has >>
 
 <<~/ahu >>
 

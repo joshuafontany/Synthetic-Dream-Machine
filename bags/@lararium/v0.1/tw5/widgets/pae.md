@@ -10,6 +10,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: PaeWidget — heleuma ka"
 source-symbol = "PaeWidget"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/pae", "tw5/modules/tw5-widgets"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/widgets/pae"
 ```
@@ -38,9 +39,7 @@ export function PaeWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNo
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-pono ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pae family:control role:implements >>
-<<~ pranala #to-tw5-widgets ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets family:control role:implements >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/pae family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/widgets/pae >>
 
 <<~/ahu >>
 

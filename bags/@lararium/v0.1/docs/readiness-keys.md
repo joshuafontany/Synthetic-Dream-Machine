@@ -12,6 +12,7 @@ retain        = true
 role          = "lararium progressive readiness vocabulary — named shrine-lights, boot doctrine"
 source-symbol = "READINESS_KEYS"
 status-date   = "2026-05-01"
+tags      = ["docs/readiness-keys"]
 tagspace      = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/readiness-keys"
@@ -91,9 +92,8 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-readiness-ts ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/readiness-keys family:control role:has >>
-<<~ pranala #to-open-phases ? -> lar:///ha.ka.ba/@lararium/tw5/schema/open-phases family:control role:depends >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/schema/open-phases >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 
 <<~/ahu >>
 

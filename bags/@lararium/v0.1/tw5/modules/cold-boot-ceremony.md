@@ -193,9 +193,9 @@ export function buildCeremonyTiddlers(
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-social-doc ? -> lar:///ha.ka.ba/@lararium/v0.1/mesh/social-doc family:control role:writes >>
-<<~ pranala #to-did-key ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools family:alignment role:aligns >>
-<<~ pranala #to-module ? -> lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony family:control role:module >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/social-doc >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony >>
 
 <<~/ahu >>
 

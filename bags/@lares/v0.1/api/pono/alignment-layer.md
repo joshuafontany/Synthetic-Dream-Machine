@@ -14,6 +14,7 @@ register    = "Synthesis"
 retain      = true
 role        = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
 status      = "proposed"
+tags      = ["api/pono/causal-islands", "api/pono/invariant"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/alignment-layer"
@@ -217,10 +218,8 @@ right — to decide whose presence the hearth refuses.
 
 <<~ ahu #edges >>
 
-<<~ pranala #has-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:has >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #relates-orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:relation role:sits-above >>
-<<~ pranala #relates-talk-story ? -> lar:///ha.ka.ba/@lararium/v0.1/api/residency-model family:relation role:transports-conflict-surfacing >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/residency-model >>
 
 <<~/ahu >>
 

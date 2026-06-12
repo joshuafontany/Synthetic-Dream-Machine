@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-lele"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lele"
 ```
@@ -59,8 +60,7 @@ A lele edge MUST NOT wait for a response from the target.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-lele ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-lele family:control role:has >>
-<<~ pranala #tiddler-sigil-branch ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-branch family:control role:alias >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-branch >>
 
 <<~/ahu >>
 

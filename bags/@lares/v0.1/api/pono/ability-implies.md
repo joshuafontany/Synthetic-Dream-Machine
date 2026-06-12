@@ -13,6 +13,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: Orichalcum ability implication — ordered capability lattice with relay-law exception (pull does not imply read)"
 source-symbol = "abilityImplies"
 status-date   = "2026-04-30"
+tags      = ["api/pono/invariant"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/ability-implies"
 ```
@@ -68,9 +69,8 @@ export function abilityImplies(have: OrichalcumAbility, need: OrichalcumAbility)
 
 <<~ ahu #edges >>
 
-<<~ pranala #causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:control role:depends >>
-<<~ pranala #orichalcum ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities family:control role:depends >>
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
 
 <<~/ahu >>
 

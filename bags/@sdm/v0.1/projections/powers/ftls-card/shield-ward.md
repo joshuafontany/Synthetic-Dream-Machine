@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
-tags      = ["@sdm/tags/domain/abjuration", "@sdm/tags/function/ward", "@sdm/tags/function/barrier", "@sdm/tags/hook/imbued", "@sdm/tags/mount/trait"]
+tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
 tagspace  = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
@@ -53,8 +53,8 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 ## Edges
 
-<<~ pranala #template ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card family:template role:uses >>
-<<~ pranala #projects ? -> lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward family:render role:projects >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/projections/powers/ftls-card >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

@@ -11,6 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "meme header sigil — <<~ ? -> uri >> declares this carrier's canonical URI; permanent JS exception"
+tags      = ["api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala-header"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/pranala-header"
 ```
@@ -91,9 +92,6 @@ uri = 1
 <<~ ahu #edges >>
 
 ## Edges
-
-<<~ pranala #has-pranala ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala family:control role:has >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala-header family:control role:has >>
 
 <<~/ahu >>
 

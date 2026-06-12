@@ -10,6 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "interface bundle: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
 ```
@@ -64,8 +65,6 @@ boots correctly in offline or cold-start conditions before the corpus is loaded.
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:implements >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules >>
 

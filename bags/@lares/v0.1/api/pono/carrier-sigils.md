@@ -13,6 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
 status-date = "2026-06-07"
+tags      = ["api/pono/invariant", "api/pono/memetic-wikitext"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils"
@@ -184,11 +185,9 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala-families >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 
-<<~ pranala #has-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:has >>
-<<~ pranala #to-memetic-wikitext ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:has >>
-<<~ pranala #to-kapu ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu family:control role:depends >>
-<<~ pranala #to-mu ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu family:observe role:observes >>
-<<~ pranala #to-ooda-ha ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha family:relation role:references >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 
 <<~/ahu >>
 

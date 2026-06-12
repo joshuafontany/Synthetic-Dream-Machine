@@ -66,9 +66,9 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 ## Edges
 
-<<~ pranala #to-toml-ast ? -> lar:///ha.ka.ba/@lararium/tw5/modules/toml-ast family:data role:consumed-by >>
-<<~ pranala #to-sigil-toml ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml family:data role:parsed-by >>
-<<~ pranala #to-plugin ? -> lar:///plugins/lares/memetic-wikitext family:control role:contained-in >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/toml-ast >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml >>
+<<~ loulou lar:///plugins/lares/memetic-wikitext >>
 
 <<~/ahu >>
 

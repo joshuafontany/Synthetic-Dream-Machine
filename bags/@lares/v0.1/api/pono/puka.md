@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "first-through-the-opening sigil — puka as the gap; Verse rush: first wins, losers continue until enclosing scope exits (NOT cancelled by winner); English alias: \\rush; async-first concurrency sprint pending"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-puka"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/puka"
 ```
@@ -72,10 +73,9 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 ## Edges
 
-<<~ pranala #tiddler-sigil-puka ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-puka family:control role:has >>
-<<~ pranala #tiddler-sigil-rush ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-rush family:control role:alias >>
-<<~ pranala #to-holo ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/holo family:relation role:contrast >>
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation role:governed-by >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-rush >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/holo >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
 
 <<~/ahu >>
 

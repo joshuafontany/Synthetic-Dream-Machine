@@ -243,12 +243,12 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 ## Edges
 
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree family:relation >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-vm-projection-bus ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus family:relation role:supersedes >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph family:relation role:governs >>
-<<~ pranala #to-causal-islands ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands family:relation >>
-<<~ pranala #to-uefn-scene ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene family:relation >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/reaction-graph >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/uefn-scene >>
 
 <<~/ahu >>
 

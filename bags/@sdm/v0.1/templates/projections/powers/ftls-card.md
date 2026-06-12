@@ -74,7 +74,7 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 ## Edges
 
-<<~ pranala #see ? -> lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power family:template role:see >>
+<<~ loulou lar:///ha.ka.ba/@sdm/v0.1/templates/modules/power >>
 <<~ loulou lar:///ha.ka.ba/@sdm/v0.1/procedures/tag-pill >>
 
 <<~/ahu >>

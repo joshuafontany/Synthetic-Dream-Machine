@@ -8,6 +8,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-mukuwai"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/mukuwai"
 ```
@@ -63,11 +64,9 @@ English alias form:
 
 ## Edges
 
-<<~ pranala #to-wai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/wai family:relation >>
-<<~ pranala #to-kahawai ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai family:relation >>
-<<~ pranala #tiddler ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-else family:control role:alias >>
-
-<<~ pranala #tiddler-sigil-mukuwai ? -> lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-mukuwai family:control role:has >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kahawai >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-else >>
 
 <<~/ahu >>
 
