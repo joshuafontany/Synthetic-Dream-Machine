@@ -126,7 +126,7 @@ Burrs live in their own ledger now: #burrs.
 
 ## Burr ledger — live burrs only; rulings live in doctrine, done work in git
 
-Cleared 2026-06-11 evening (lar:///ledger.combed.clean): content-hash echo suppression → DONE (both §6 hash gates live) · atomic temp+rename writes → DONE (projector) · CRLF/BOM boundary policy → DONE (membrane normalizes once; vectors) · NFC → PINNED in spec (memetic-wikitext #carrier-bytes) · multi-mirror Synced-tree key → DONE ((bag,uri)) · genesis-path seam → DONE (one law: root/genesis; the main.ts special case died) · `lares` bin cold-start wart → DONE (committed shim). The iam-resurrection and frozen-archive RULINGS moved home to doctrine notes above; the engine-swap and restart findings live in their own entries.
+Cleared 2026-06-11 evening (lar:///ledger.combed.clean): content-hash echo suppression → DONE (both §6 hash gates live) · atomic temp+rename writes → DONE (projector) · CRLF/BOM boundary policy → DONE (membrane normalizes once; vectors) · NFC → PINNED in spec (memetic-wikitext #carrier-bytes) · multi-mirror Synced-tree key → DONE ((bag,uri)) · genesis-path seam → DONE WHOLE (one law: root/genesis; the main.ts special case, the repo symlink, AND the package-dir genesis home all died — genesis/ lives REAL at the repo root; default LAR_ROOT = the repo root; reset builds each instance's engine into its own root via LAR_GENESIS) · `lares` bin cold-start wart → DONE (committed shim). The iam-resurrection and frozen-archive RULINGS moved home to doctrine notes above; the engine-swap and restart findings live in their own entries.
 
 Still live:
 

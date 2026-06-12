@@ -46,10 +46,9 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
   };
   const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));
   const storageDir = resolve(get("--storage", "LAR_STORAGE", join(rootDir, ".lararium")));
-  // One genesis law, shared with the CLI env contract: <root>/genesis.
-  // (The repo root carries a committed `genesis` symlink into the package
-  // dir, so repo-rooted vessels resolve identically — the old special case
-  // that disagreed with the CLI died 2026-06-11.)
+  // One genesis law, shared with the CLI env contract: <root>/genesis —
+  // the repo root carries the REAL tracked genesis dir (the symlink and the
+  // package-dir home both died 2026-06-11; early alpha keeps no compatibility).
   const genesisDir = resolve(get("--genesis", "LAR_GENESIS", join(rootDir, "genesis")));
   return {
     port:       Number(get("--port", "LAR_PORT", "8080")),

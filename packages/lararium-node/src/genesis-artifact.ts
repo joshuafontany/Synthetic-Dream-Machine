@@ -13,6 +13,7 @@
  * Browser path (future, @dreamdeck/app): bundler binary loader inlines island.bin as Uint8Array.
  */
 
+import { repoRoot } from "@lararium/mesh/node";
 import { readFileSync, existsSync }  from "fs";
 import { join, dirname }             from "path";
 import { fileURLToPath }             from "url";
@@ -40,7 +41,7 @@ import {
 // ---------------------------------------------------------------------------
 
 const __dir              = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_GENESIS_DIR = join(__dir, "../genesis");
+const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
 function genesisArtifactPaths(genesisDir?: string): { bin: string; sha: string; cid: string } {
   const root = genesisDir ?? DEFAULT_GENESIS_DIR;

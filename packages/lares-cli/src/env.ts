@@ -16,9 +16,9 @@ import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 
-/** Instance root — LAR_ROOT or the dev node home. */
+/** Instance root — LAR_ROOT or the REPO ROOT (the vessel and the corpus share one root; early-alpha law, no dev-home compatibility). */
 export function larRoot(): string {
-  return process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
+  return process.env["LAR_ROOT"] ?? repoRoot;
 }
 
 /** Instance data dir — <root>/.lararium. */

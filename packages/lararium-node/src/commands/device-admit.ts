@@ -39,11 +39,10 @@ export interface DeviceAdmitOptions {
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
-  const root    = process.env["LAR_ROOT"] ?? join(repoRoot, "packages", "lararium-node");
-  const pkgRoot = join(repoRoot, "packages", "lararium-node");
+  const root = process.env["LAR_ROOT"] ?? repoRoot;   // one root law: the repo IS the vessel
   return {
     storageDir: join(root, ".lararium"),
-    genesisDir: process.env["LAR_ROOT"] ? join(root, "genesis") : join(pkgRoot, "genesis"),
+    genesisDir: join(root, "genesis"),
   };
 }
 

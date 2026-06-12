@@ -40,7 +40,7 @@ import { tw5PluginsRoot } from "@lararium/tw5/tw5-memes-root";
 // ---------------------------------------------------------------------------
 
 const __dir                   = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_GENESIS_DIR     = join(__dir, "../genesis");
+const DEFAULT_GENESIS_DIR     = join(__dir, "../../../genesis");   // repo-root genesis (one root law)
 const REPO_ROOT               = join(__dir, "../../..");
 const BAGS_ROOT               = join(REPO_ROOT, "bags");
 const LARARIUM_TW5_DIST_PLUGIN = join(REPO_ROOT, "packages", "lararium-tw5", "dist-plugin");

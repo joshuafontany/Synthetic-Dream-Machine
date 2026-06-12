@@ -28,7 +28,7 @@ import { VesselIslandPool } from "../src/vessel-island-pool.js";
 // ---------------------------------------------------------------------------
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
-const GENESIS_BIN = join(__dir, "../genesis/island.bin");
+const GENESIS_BIN = join(__dir, "../../../genesis/island.bin");
 const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
 const missingGenesis = !existsSync(GENESIS_BIN);

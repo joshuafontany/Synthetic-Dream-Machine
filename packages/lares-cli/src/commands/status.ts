@@ -10,6 +10,7 @@
  * can run it freely during a session.
  */
 
+import { larRoot } from "../env.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
@@ -48,9 +49,9 @@ function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<b
 }
 
 export async function cmdStatus(args: ParsedArgs): Promise<number> {
-  const nodePkg   = join(REPO_ROOT, "packages", "lararium-node");
-  const storage   = join(nodePkg, ".lararium");
-  const bootstrap = join(nodePkg, "genesis", "social-bootstrap.json");
+  const root      = larRoot();   // one root law: LAR_ROOT or the repo root
+  const storage   = join(root, ".lararium");
+  const bootstrap = join(root, "genesis", "social-bootstrap.json");
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);
 

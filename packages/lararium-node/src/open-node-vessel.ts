@@ -64,7 +64,7 @@ import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult } from "./open-admin-vm.js";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_GENESIS_DIR = join(__dir, "../genesis");
+const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
 /**
  * Upstream's NodeWSServerAdapter declares ready only on its FIRST client

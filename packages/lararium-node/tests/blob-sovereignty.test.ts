@@ -25,7 +25,7 @@ import type { LarDoc } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
-const GENESIS_BIN = join(__dir, "../genesis/island.bin");
+const GENESIS_BIN = join(__dir, "../../../genesis/island.bin");
 const ISLAND_JS   = new URL("../dist/src/node-wiki-island.js", import.meta.url);
 
 const WIKI_ID = "lar:///ha.ka.ba/@test/blob-sovereignty-wiki";
