@@ -7,9 +7,8 @@ module-type: startup
  * md-file-router — sniff .md files at import time and route carriers to
  * text/x-memetic-wikitext; all others fall through to text/x-markdown.
  *
- * A carrier .md file has the SOH DOCTYPE sigil on its first line:
- *   <<~ ... &#x0011; ... >>   (namespace-phase SOH)
- *   <<~ ... &#x0001; ... >>   (bare SOH, legacy)
+ * A carrier .md file opens with the !DOCTYPE comment (canonical) or a
+ * line-bound SOH sigil within the head bytes.
  *
  * TW5's registerFileType last-write-wins. This startup module runs after
  * core boot and re-registers .md → text/x-md-auto. The paired
@@ -24,8 +23,14 @@ const SNIFF_TYPE    = "text/x-md-auto";
 const MEMETIC_TYPE  = "text/x-memetic-wikitext";
 const MARKDOWN_TYPE = "text/x-markdown";
 
-// SOH carrier sentinel on line 1 — matches &#x0001; or &#x0011; variant.
-const DOCTYPE_RE = /^<<~[^>]*&#x(?:0001|0011);/;
+// Carrier sniff: canonical carriers open with the !DOCTYPE comment on
+// line 1 and the SOH on line ~3 — the old line-1-only SOH peek misrouted
+// EVERY canonical corpus meme to plain markdown (found 2026-06-11). The
+// sniffer reads the head: DOCTYPE comment fast-path, else a line-bound
+// SOH within the first few lines.
+const DOCTYPE_COMMENT_RE = /^<!--\s*<<~\s*!DOCTYPE/;
+const SOH_LINE_RE        = /^<<~[^>\n]*&#x(?:0001|0011);/m;
+const SNIFF_HEAD_BYTES   = 512;
 
 interface TwUtils {
   registerFileType(type: string, encoding: string, extensions: string[], options?: Record<string, unknown>): void;
@@ -80,8 +85,9 @@ function mdAutoDeserializer(
 ): Array<Record<string, unknown>> {
   const tw = (globalThis as { $tw?: TwGlobal }).$tw;
 
-  const firstLine = text.slice(0, text.indexOf("\n") + 1 || text.length);
-  const targetType = DOCTYPE_RE.test(firstLine) ? MEMETIC_TYPE : MARKDOWN_TYPE;
+  const head = text.slice(0, SNIFF_HEAD_BYTES);
+  const isCarrier = DOCTYPE_COMMENT_RE.test(head) || SOH_LINE_RE.test(head);
+  const targetType = isCarrier ? MEMETIC_TYPE : MARKDOWN_TYPE;
 
   if (tw) {
     const fn = resolveDeserializer(tw, targetType);

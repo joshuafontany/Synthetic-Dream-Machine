@@ -124,8 +124,6 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
 }
 
 export interface SubmitOptions {
-  /** Polling interval in ms (default 100). */
-  readonly pollMs?:   number;
   /** Total timeout in ms (default 10000). */
   readonly timeoutMs?: number;
   /**
@@ -155,9 +153,11 @@ export function summaryOutput(result: SubmitResult): Record<string, unknown> | u
 }
 
 /**
- * Write a verb-summons tiddler to the shared admin CRDT doc, then poll for
- * the durable @admin/outcomes/<requestId> tiddler — its appearance IS the
- * "done" signal (CRDT convergence = result).
+ * Write a verb-summons tiddler to the shared admin CRDT doc, then SUBSCRIBE
+ * to admin-doc changes for the durable @admin/outcomes/<requestId> tiddler —
+ * its arrival IS the "done" signal (CRDT convergence = result; the change
+ * event = the wake). The old 100ms poll loop died 2026-06-11: a busy-wait
+ * wearing a web3 coat — the doc already knew how to call back.
  *
  * Summons tiddler is fire-and-forget; the dispatcher tombstones it.
  * CLI never tombstones; a CLI crash leaves no namespace residue.
@@ -169,7 +169,6 @@ export async function submitVerb(
   requestedBy: string,
   opts:        SubmitOptions = {},
 ): Promise<SubmitResult> {
-  const pollMs    = opts.pollMs    ?? 100;
   const timeoutMs = opts.timeoutMs ?? 10000;
 
   const summonsRecord = summon({ verb, args, requestedBy, ...(opts.requestId ? { requestId: opts.requestId } : {}) });
@@ -178,14 +177,12 @@ export async function submitVerb(
 
   await vessel.composite.put(summonsRecord, { kind: "operator-import", sessionId: `lares-cli-${requestId}` });
 
-  const start = Date.now();
-  while (Date.now() - start < timeoutMs) {
-    await new Promise((r) => setTimeout(r, pollMs));
+  const readOutcome = async (): Promise<SubmitResult | null> => {
     const event = await vessel.composite.get(outcomeTitle);
-    if (!event || event.meta?.deleted) continue;
+    if (!event || event.meta?.deleted) return null;
     const fields = event.tiddler as Record<string, string>;
     const status = fields["status"];
-    if (status !== "done" && status !== "error") continue;
+    if (status !== "done" && status !== "error") return null;
 
     let results: Record<string, SubmitTargetResult> | undefined;
     if (typeof fields["results"] === "string" && fields["results"].length > 0) {
@@ -205,9 +202,23 @@ export async function submitVerb(
       ...(results      !== undefined && { results }),
       ...(errorMessage !== undefined && { errorMessage }),
     };
-  }
+  };
 
-  throw new Error(`verb "${verb}" timed out after ${timeoutMs}ms`);
+  return await new Promise<SubmitResult>((resolve, reject) => {
+    let settled = false;
+    const settle = (fn: () => void) => { if (!settled) { settled = true; cleanup(); fn(); } };
+    const check = () => {
+      void readOutcome().then((r) => { if (r) settle(() => resolve(r)); });
+    };
+    const onChange = () => check();
+    vessel.admin.on("change", onChange);
+    const timer = setTimeout(
+      () => settle(() => reject(new Error(`verb "${verb}" timed out after ${timeoutMs}ms`))),
+      timeoutMs,
+    );
+    const cleanup = () => { vessel.admin.off("change", onChange); clearTimeout(timer); };
+    check();   // the outcome may already exist (idempotent re-submission)
+  });
 }
 
 // Re-export so verb-facing helpers don't need a separate import path.
