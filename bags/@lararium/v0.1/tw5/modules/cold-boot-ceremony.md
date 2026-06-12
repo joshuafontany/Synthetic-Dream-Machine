@@ -4,7 +4,6 @@ body-sha256   = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a92315330
 cacheable     = true
 file-path     = "bags/@lararium/v0.1/tw5/modules/cold-boot-ceremony.md"
 heleuma       = "ka"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 mana          = 18
 manao         = 17
 manaoio       = 16
@@ -14,6 +13,7 @@ retain        = true
 role          = "heleuma ka: void-start operator identity tiddler builder"
 source-symbol = "*"
 status-date   = "2026-05-04"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/cold-boot-ceremony"
 ```

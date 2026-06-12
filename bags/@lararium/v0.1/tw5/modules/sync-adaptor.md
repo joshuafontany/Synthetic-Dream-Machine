@@ -4,7 +4,6 @@
 ```toml iam
 file-path     = "bags/@lararium/v0.1/tw5/modules/sync-adaptor.md"
 heleuma       = "ha"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -12,7 +11,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/sync-adaptor"
 ```

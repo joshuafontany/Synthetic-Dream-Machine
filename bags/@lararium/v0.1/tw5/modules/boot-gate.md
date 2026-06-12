@@ -4,7 +4,6 @@
 ```toml iam
 file-path     = "bags/@lararium/v0.1/tw5/modules/boot-gate.md"
 heleuma       = "ha"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -12,6 +11,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
 source-symbol = "_bootModules"
 status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ha"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate"
 ```
@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/boot-gate"
 
 ## Boot Gate
 
-Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. Queries all tiddlers that declare `implements = "lar:///ha.ka.ba/@lararium/tw5/modules/tw5-module-interface"` and applies three layers of trust before injecting them as live JS modules.
+Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. Queries all tiddlers that WEAR the tw5-module component (`[stack:has[lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module]]` — the has-stack model) and applies three layers of trust before injecting them as live JS modules.
 
 **This code cannot be loaded from a meme.** It requires a live `$tw` instance and operates as the mechanism that promotes memes into executables. It lives in `packages/lararium-tw5/src/lararium-tw5.ts` as `_bootModules()`.
 

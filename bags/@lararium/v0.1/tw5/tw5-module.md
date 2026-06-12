@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/tw5-module"
 ## TW5 Module Interface
 
 A carrier that implements `lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module` declares itself as a
-kernel-injectable TW5 module. The kernel's `_bootModules()` gate queries for all implementors,
+kernel-injectable TW5 module. The kernel's `_bootModules()` gate queries for every carrier wearing this component (`stack:has`),
 evaluates the capability threshold, and injects passing memes as TW5 shadow tiddlers after
 corpus load.
 

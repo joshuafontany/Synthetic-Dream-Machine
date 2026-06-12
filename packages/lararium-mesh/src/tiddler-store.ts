@@ -74,19 +74,6 @@ export interface ITW5TiddlerFields extends Omit<ITW5TiddlerInputFields, "title" 
 
 export type TW5TiddlerFields = ITW5TiddlerFields;
 
-export interface ClosureEntry {
-  uri: string; laresRelPath: string | null; kind: string; virtual: boolean;
-  exists: boolean; role: string; hydrationSocket: string;
-  implements: string[]; extendsType?: string; tags: string[];
-  contentHash: string; depth: number; confidence: number; register: string;
-  manaoio: number; mana: number; manao: number;
-}
-
-export interface EdgeRecord {
-  readonly fromUri: string; readonly fromSocket: string;
-  readonly toUri: string; readonly family: string; readonly role: string | null;
-}
-
 // ---------------------------------------------------------------------------
 // LarTiddlerRecord — host-envelope entry in a bag doc
 // Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tiddler-record
@@ -247,21 +234,3 @@ export interface LarTiddlerStore {
   addProjection?(p: MemeProjection): () => void;
 }
 
-// ---------------------------------------------------------------------------
-// FilterEngineFn — TW5-neutral injectable filter type
-//
-// Defined here so @lararium/mesh/cascade can import it without depending on
-// @lararium/tw5 (which would create a circular dependency). @lararium/tw5
-// re-exports this type from @lararium/mesh.
-// ---------------------------------------------------------------------------
-
-/**
- * Injectable async filter engine — consumed by compileCascade in cascade.ts.
- * Implemented by @lararium/tw5's filterMemesWikitext / LarariumTW5.filterClosure.
- * The edges param enables the edge: wikitext-filter operator.
- */
-export type FilterEngineFn = (
-  expr:    string,
-  closure: readonly ClosureEntry[],
-  edges?:  readonly EdgeRecord[],
-) => Promise<ClosureEntry[]>;

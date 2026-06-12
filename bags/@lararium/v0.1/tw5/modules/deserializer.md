@@ -3,7 +3,6 @@
 body-sha256   = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
 file-path     = "bags/@lararium/v0.1/tw5/modules/deserializer.md"
 heleuma       = "ka"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 mana          = 18
 manao         = 17
 manaoio       = 16
@@ -12,6 +11,7 @@ register      = "Synthesis-Canon"
 role          = "heleuma ka: TW5 tiddlerdeserializer for text/x-memetic-wikitext"
 source-symbol = "*"
 status-date   = "2026-05-01"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer"
 ```

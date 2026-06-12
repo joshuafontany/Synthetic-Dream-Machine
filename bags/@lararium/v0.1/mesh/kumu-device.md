@@ -60,7 +60,7 @@ Lararium maps this directly:
 | Verse | Lararium |
 |---|---|
 | `class(creative_device)` | `control:extends` edge → `KumuDeviceSpec.extendsType` |
-| `class(P, I, J)` implements | `control:implements` edges → `KumuDeviceSpec.implementsTypes` |
+| `class(P, I, J)` composition | worn components (`control:has` edges) → `KumuDeviceSpec.componentTypes` |
 | `listenable(T)` field | `KumuListenable` (`verseKind: "listenable"`) |
 | `event(T)` field | `KumuListenable` (`verseKind: "event"`) |
 | public input method | `KumuSubscribable` |
@@ -122,7 +122,7 @@ listenables      — OUTPUT pins (reaction:listenable edges)
 subscribables    — INPUT pins (reaction:subscribable edges)
 slots            — ahu slot URIs (@editable analogue; caller supplies)
 extendsType?     — single parent class URI (control:extends edge; Verse single inheritance)
-implementsTypes  — interface URIs (control:implements edges; Verse interface composition)
+componentTypes   — worn component URIs (control:has edges; Verse class(...) composition, no privileged is-a parent)
 ```
 
 **Three semantic layers — do not conflate:**
@@ -131,7 +131,7 @@ implementsTypes  — interface URIs (control:implements edges; Verse interface c
 
 2. **`control:extends`** (one edge) — the single Verse parent class. `my_device := class(creative_device)` → one edge, `toUri = creative_device URI`. Maps to `extendsType`.
 
-3. **`control:implements`** (N edges) — Verse interface composition. Maps to `implementsTypes`. N edges allowed.
+3. **`control:has`** (N edges) — Verse class(...) composition as worn components. Maps to `componentTypes`. N edges allowed.
 
 ---
 

@@ -5,7 +5,6 @@
 body-sha256   = "a31316c2e25c7209328b72006b8cfa76a65365403452a630b397508083e9a2ad"
 file-path     = "bags/@lararium/v0.1/docs/meme-ast.md"
 heleuma       = "ka"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 mana          = 18
 manao         = 17
 manaoio       = 16
@@ -14,6 +13,7 @@ register      = "Synthesis-Canon"
 role          = "heleuma ka: isomorphic memetic-wikitext AST parser bundle"
 source-symbol = "parseMemeText"
 status-date   = "2026-05-01"
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/meme-ast"
 ```

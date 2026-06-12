@@ -4,13 +4,13 @@
 ```toml iam
 e-prime       = true
 file-path     = "bags/@lares/LARES.md"
-implements    = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 mana          = 17
 manao         = 15
 manaoio       = 14
 ooda-ha-level = 10
 register      = "Synthesis-Canon"
 role          = "configuration surface, behind-the-curtain dial room, session-config"
+tags      = ["api/pono/meme"]
 tagspace      = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/LARES"

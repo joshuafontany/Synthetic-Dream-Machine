@@ -7,7 +7,9 @@ const MODULE_MANA_THRESHOLD = 18;
 const MODULE_MANAO_THRESHOLD = 17;
 const MODULE_MANAOIO_THRESHOLD = 17;
 const MODULE_CONFIDENCE_THRESHOLD = 18;
-const MODULE_INTERFACE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module";
+// The has-stack model (2026-06-12): a kernel-injectable module WEARS the
+// tw5-module component in its stack (tags), never "implements an interface".
+const MODULE_COMPONENT_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module";
 const MODULE_AGGREGATE_URI = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules";
 
 export async function bootTrustedModules(tw: TW5Instance): Promise<void> {
@@ -15,7 +17,7 @@ export async function bootTrustedModules(tw: TW5Instance): Promise<void> {
 
   let injected = 0;
   try {
-    const titles: string[] = wiki.filterTiddlers(`[all[tiddlers]implementors[${MODULE_INTERFACE_URI}]]`) ?? [];
+    const titles: string[] = wiki.filterTiddlers(`[all[tiddlers]stack:has[${MODULE_COMPONENT_URI}]]`) ?? [];
     for (const title of titles) {
       const t = wiki.getTiddler(title);
       if (!t) continue;
