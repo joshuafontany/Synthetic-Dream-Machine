@@ -74,6 +74,8 @@ The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/
 - engine-swap reconcile answered "current" against a stale engine — epoch-design seam
 - e2e trends long (reboot vector 73s) — split a slow lane when the suite hurts
 - NFC assertion at the membrane — rides the INGEST gesture (spec already pins NFC)
+- smoke-plugin-boot.ts fails on surfaces lagging the plugin (kau templates, parser registration) — pre-existing; wakes when plugin smoke matters or at the next plugin recut
+- TimeoutNegativeWarning (-15/-26) in e2e runs — pre-existing, un-localized (no computed setTimeout in src); wakes on next firing under node --trace-warnings
 - island→admin verb plane still rides the postMessage switchboard — retires onto record pairs per §7's lane law; the durable mailbox (vessel-mailbox.ts, keel-resident, drains on ea) already carries admin→island
 
 <<~/ahu >>
