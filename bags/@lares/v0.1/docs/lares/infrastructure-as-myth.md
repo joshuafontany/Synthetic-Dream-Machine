@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/docs/lares/infrastructure-as-myth >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth >>
 ```toml iam
 uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth"
 file-path      = "bags/@lares/v0.1/docs/lares/infrastructure-as-myth.md"

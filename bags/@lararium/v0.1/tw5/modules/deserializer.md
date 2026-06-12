@@ -70,7 +70,7 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
  *   Parent text model: ahu definition blocks → kahea references (children authoritative).
  *
  * Outgoing (wiki → disk):
- *   expandMemeRefs — registered on $tw.lararium; called by sync-adaptor.
+ *   expandMemeRefs — registered on $tw.lares; called by sync-adaptor.
  *   Inverts the incoming transform: reads child bodies, reconstructs definition form.
  */
 
