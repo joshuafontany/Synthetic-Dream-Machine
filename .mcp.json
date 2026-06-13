@@ -10,14 +10,6 @@
       "env": {
         "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": "/home/joshu/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome"
       }
-    },
-"lararium-mcp": {
-      "command": "/home/joshu/.nvm/versions/node/v24.13.1/bin/node",
-      "args": ["packages/lararium-mcp/dist/stdio.js"],
-      "cwd": "/home/joshu/Synthetic-Dream-Machine",
-      "env": {
-        "LARARIUM_HTTP_URL": "http://127.0.0.1:4321"
-      }
     }
   }
 }
