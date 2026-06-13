@@ -41,6 +41,7 @@ import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameS
 import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
 import { contentHash, type SyncedTree } from "./synced-tree.js";
+import { isEffectRecordUri } from "@lararium/mesh";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -195,6 +196,13 @@ export class LarDiskProjector {
   private async flush(bagId: string, tiddlerUri: string): Promise<void> {
     const mirror = this.mirrors.find((m) => m.bagId === bagId);
     if (!mirror) return;
+
+    // Projection FILTER ⊥ siting (lar-uri #five-planes): the siting function
+    // carries every name; WHAT projects = carriers only. Ledger/observation
+    // records (residency effect log) stay off disk — audit data, never
+    // carrier surface. (The general type-filter — project only
+    // text/x-memetic-wikitext — arrives with the migration wave.)
+    if (isEffectRecordUri(tiddlerUri)) return;
 
     const relPath = mirror.toRelPath(tiddlerUri);
     if (!relPath) return;

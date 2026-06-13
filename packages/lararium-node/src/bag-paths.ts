@@ -98,109 +98,58 @@ function toRelMd(pathPart: string, frag: string | null): string | null {
   return `${base}.md`;
 }
 
-function canonicalNamedBagRelPath(scope: string, uri: string): string | null {
-  if (!uri.startsWith(HA_KA_BA_PREFIX)) return null;
-
-  const bare = uri.slice(HA_KA_BA_PREFIX.length);
-  if (!bare) return null;
-
-  if (scope === "@lares") {
-    const prefix = `${scope}/${BAG_VERSION}/`;
-    if (!bare.startsWith(prefix)) return null;
-    const rest = bare.slice(prefix.length);
-
-    const [pathPart, frag] = splitHash(rest);
-    return pathPart ? toRelMd(pathPart, frag) : null;
-  }
-
-  if (scope === "@lararium") {
-    const prefix = `${scope}/${BAG_VERSION}/`;
-    if (!bare.startsWith(prefix)) return null;
-    const [pathPart, frag] = splitHash(bare.slice(prefix.length));
-    return pathPart ? toRelMd(pathPart, frag) : null;
-  }
-
-  return null;
-}
-
 /**
- * Factory for single-scope named bags (e.g. "@lares", "@lararium").
+ * The siting function (RULED 2026-06-12, lar-uri #five-planes): every file
+ * on disk lives at its FULL uri-path inside its holding bag's mirror —
+ * directory = residency, interior path = the name, whole. Any bag projects
+ * any stable name losslessly; reverse derivation = strip root, read name.
  *
- * Maps `lar:///ha.ka.ba/@SCOPE/v0.1/X` → `X.md` relative to the bag mirror root.
- * Returns null for any URI outside the scope.
+ *   lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
+ *     → ha.ka.ba/@lares/v0.1/api/pono/meme.md   (relative to the bag mirror root)
+ *
+ * Fragments (#children) live inside their parent carrier file → null.
+ * Unstable roots carry no siting → null (loci law).
  */
-export function namedBagPath(scope: string): MirrorPathFn {
-  const prefix = `${HA_KA_BA_PREFIX}${scope}/${BAG_VERSION}/`;
+export function fullPathBagPath(): MirrorPathFn {
   return (uri) => {
-    const canonical = canonicalNamedBagRelPath(scope, uri);
-    if (canonical) return canonical;
-    if (!uri.startsWith(prefix)) return null;
-    const rest = uri.slice(prefix.length);
-    if (!rest) return null;
-    const [pathPart, frag] = splitHash(rest);
-    return toRelMd(pathPart, frag);
+    if (!uri.startsWith("lar:///")) return null;
+    const bare = uri.slice("lar:///".length);
+    if (!/^\w+\.\w+\.\w+\//.test(bare)) return null;
+    const [pathPart, frag] = splitHash(bare);
+    return pathPart ? toRelMd(pathPart, frag) : null;
   };
 }
 
 /**
- * Factory for wiki shadow bags (corpus view inside a wiki).
- *
- * Maps:
- *   `lar:///ha.ka.ba/@lares/v0.1/X`      → `lares/v0.1/X.md`
- *   `lar:///ha.ka.ba/@lararium/v0.1/X`   → `lararium/v0.1/X.md`
- *
- * Returns null for URIs outside `lar:///ha.ka.ba/`.
- */
-export function wikiBagPath(): MirrorPathFn {
-  const LARES_SCOPE    = `@lares/${BAG_VERSION}/`;
-  const LARARIUM_SCOPE = `@lararium/${BAG_VERSION}/`;
-  return (uri) => {
-    if (!uri.startsWith(HA_KA_BA_PREFIX)) return null;
-    let rest = uri.slice(HA_KA_BA_PREFIX.length);
-    let dirPrefix: string;
-
-    if (rest.startsWith(LARES_SCOPE)) {
-      rest = rest.slice(LARES_SCOPE.length);
-      dirPrefix = `lares/${BAG_VERSION}/`;
-    } else if (rest.startsWith(LARARIUM_SCOPE)) {
-      rest = rest.slice(LARARIUM_SCOPE.length);
-      dirPrefix = `lararium/${BAG_VERSION}/`;
-    } else if (rest.startsWith("@")) {
-      return null;
-    } else {
-      return null;
-    }
-
-    if (!rest) return null;
-    const [pathPart, frag] = splitHash(rest);
-    const rel = toRelMd(pathPart, frag);
-    return rel ? `${dirPrefix}${rel}` : null;
-  };
-}
-
-/**
- * Construct a BagMirrorConfig for a named-scope bag.
- *
- * Used by islands to reconstruct mirror configs from the serializable
- * `diskMirrors` manifest field (which carries `{ bagId, mirrorRoot, scope }`).
+ * Construct a BagMirrorConfig for a named bag. `scope` rides as grant
+ * metadata only — the siting function carries every stable name whole
+ * (full-path-inside-bag ruling); the mirrorRoot = the bag's residency dir.
  */
 export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string): BagMirrorConfig {
-  return { bagId, mirrorRoot, toRelPath: namedBagPath(scope) };
+  void scope;
+  return { bagId, mirrorRoot, toRelPath: fullPathBagPath() };
 }
 
 // ── Loci reverse-derivation (the ingest gesture's scan leg) ─────────────────
 
 /**
- * Derive the carrier-root lar: URI a bags/ file projects (the loci law run
- * backward: `bags/<sub-path>.md` ⇄ `lar:///ha.ka.ba/<sub-path>`). Returns
- * null for paths outside `<instanceRoot>/bags/` or non-.md files — the
+ * Derive the carrier-root lar: URI a bags/ file projects — the loci law run
+ * backward under the full-path-inside-bag ruling:
+ *   `bags/<residency-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
+ * The first segment under bags/ names the HOLDING BAG (residency plane) and
+ * never enters the name. Returns null outside `<instanceRoot>/bags/`, for
+ * non-.md files, or when the interior path carries no w.w.w root — the
  * gesture reports those as skipped, never guesses.
  */
 export function bagsFileToUri(instanceRoot: string, filePath: string): string | null {
   const bagsRoot = resolvePath(instanceRoot, "bags");
   const abs = resolvePath(filePath);
   if (!abs.startsWith(bagsRoot + sep)) return null;
-  const rel = abs.slice(bagsRoot.length + 1);
-  if (!rel.endsWith(".md")) return null;
-  return `lar:///ha.ka.ba/${rel.slice(0, -3).split(sep).join("/")}`;
+  const rel = abs.slice(bagsRoot.length + 1).split(sep);
+  if (rel.length < 2) return null;                       // needs residency dir + interior
+  const interior = rel.slice(1).join("/");
+  if (!interior.endsWith(".md")) return null;
+  const namePath = interior.slice(0, -3);
+  if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;  // loci: stable names carry a w.w.w root
+  return `lar:///${namePath}`;
 }

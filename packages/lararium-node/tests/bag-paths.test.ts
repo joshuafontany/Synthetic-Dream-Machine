@@ -1,52 +1,30 @@
-import { describe, expect, test } from "vitest";
-import { namedBagPath, wikiBagPath } from "../src/bag-paths.js";
+import { describe, test, expect } from "vitest";
+import { fullPathBagPath, bagsFileToUri } from "../src/bag-paths.js";
 
-describe("namedBagPath", () => {
-  test("rejects bare canon titles for the @lares mirror", () => {
-    const toRelPath = namedBagPath("@lares");
+describe("fullPathBagPath — the full-path-inside-bag siting function", () => {
+  const toRelPath = fullPathBagPath();
 
-    expect(toRelPath("lar:///ha.ka.ba/docs/lares/the-lares-protocols")).toBeNull();
-    expect(toRelPath("lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis")).toBeNull();
+  test("a stable name sites at its full uri-path", () => {
+    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"))
+      .toBe("ha.ka.ba/@lares/v0.1/api/pono/meme.md");
   });
 
-  test("maps explicit versioned @lares titles", () => {
-    const toRelPath = namedBagPath("@lares");
-
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/mu")).toBe("api/mu.md");
+  test("a FOREIGN name sites whole — any bag holds any name (the crack, closed)", () => {
+    expect(toRelPath("lar:///ha.ka.ba/@other/v2/notes/thing"))
+      .toBe("ha.ka.ba/@other/v2/notes/thing.md");
   });
 
-  test("fragment records never own a disk file (carrier-whole at rest)", () => {
-    const toRelPath = namedBagPath("@lares");
-
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols#thesis")).toBeNull();
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#entry")).toBeNull();
+  test("fragments live inside their parent carrier — null", () => {
+    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme#head")).toBeNull();
   });
 
-  test("rejects @lararium titles for the @lares mirror", () => {
-    const toRelPath = namedBagPath("@lares");
-
-    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/nalu-engine")).toBeNull();
-  });
-});
-
-describe("wikiBagPath", () => {
-  test("rejects bare ha.ka.ba titles", () => {
-    const toRelPath = wikiBagPath();
-
-    expect(toRelPath("lar:///ha.ka.ba/docs/lares/the-lares-protocols")).toBeNull();
-    expect(toRelPath("lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis")).toBeNull();
+  test("unstable or rootless forms carry no siting", () => {
+    expect(toRelPath("lar:///nope/x")).toBeNull();
+    expect(toRelPath("$:/temp/x")).toBeNull();
   });
 
-  test("maps versioned named bags into the wiki shadow tree", () => {
-    const toRelPath = wikiBagPath();
-
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols")).toBe("lares/v0.1/docs/lares/the-lares-protocols.md");
-    expect(toRelPath("lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/nalu-engine")).toBe("lararium/v0.1/tw5/modules/nalu-engine.md");
-  });
-
-  test("fragment records never own a disk file (carrier-whole at rest)", () => {
-    const toRelPath = wikiBagPath();
-
-    expect(toRelPath("lar:///ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols#thesis")).toBeNull();
+  test("unstable attitude roots DO site when projected (session-bag adoption path)", () => {
+    expect(toRelPath("lar:///threshold.uncertain.opens/note"))
+      .toBe("threshold.uncertain.opens/note.md");
   });
 });

@@ -385,8 +385,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
       const workerRootDir = rootDirOpt ?? repoRoot;
       const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
-        { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares/v0.1"),    scope: "@lares" },
-        { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium/v0.1"), scope: "@lararium" },
+        { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
+        { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
       ];
       vmManager = new VesselIslandPool({
         mainRepo:    repo,

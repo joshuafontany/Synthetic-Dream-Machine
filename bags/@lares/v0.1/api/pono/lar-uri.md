@@ -329,7 +329,7 @@ lar:///ha.ka.ba/@catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.k
 - **Permanent registration.** The scheme registers as provisional; permanent status awaits a deliberate submission pass.
 - **Session-form authority grammar.** The `alias:grant@host` shape reads stable for exchange; a fuller authority profile (capability proof, key binding) waits for the keyhive pass.
 - **Unstable attitude-root vocabulary.** The Ha-Ka-Ba slot discipline holds; a registry of reserved attitude roots remains open.
-- **Multi-bag disk projection (named crack, 2026-06-12).** Per-bag mirrors today project only URIs within the bag's own namespace prefix; a manifestation held by a bag whose name differs from the URI prefix has no ruled disk path. Repair rides the siting-function sprint (handoff).
+- **Multi-bag disk projection — RULED 2026-06-12 (operator): full-path-inside-bag.** Every file lives at its full uri-path inside its holding bag's mirror (`bags/<bag>/<full-name>.md`): directory = residency, interior = the name, whole. Any bag holds any name losslessly; the committed canon tree migrates by the load→write wave.
 - **Turn-as-meme-graph (named seed, 2026-06-12).** Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; the INGEST organ can one day decompose session logs into corpus.
 - **Lineage citation bind.** BOUND 2026-06-08 from the `sdm/` shelf: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" (the trinity body·soul·psyche), indexed in *UVG 2e* pp. 230–234. Egyptian root named in source: the *Coffin Texts* / *Book of the Dead*. Hawaiian *hā* layers as resonance.
 

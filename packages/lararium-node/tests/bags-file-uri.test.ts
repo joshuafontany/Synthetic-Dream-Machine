@@ -9,21 +9,21 @@ import { bagsFileToUri } from "../src/bag-paths.js";
 
 const ROOT = "/srv/vessel";
 
-describe("bagsFileToUri — loci reverse-derivation", () => {
-  test("a bags/ carrier derives its lar: URI", () => {
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/v0.1/api/pono/meme.md"))
+describe("bagsFileToUri — loci reverse-derivation (full-path-inside-bag)", () => {
+  test("residency dir strips; the interior IS the name", () => {
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/meme.md"))
       .toBe("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme");
   });
 
-  test("relative paths resolve before derivation", () => {
-    const here = process.cwd();
-    expect(bagsFileToUri(here, "bags/@sdm/v0.1/components/posture/ritual.md"))
-      .toBe("lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual");
+  test("a foreign name held in another bag derives losslessly", () => {
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@draft/ha.ka.ba/@lares/v0.1/api/pono/meme.md"))
+      .toBe("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme");
   });
 
-  test("outside bags/ or non-.md reads null (skipped, never guessed)", () => {
+  test("pre-migration (rootless interior), non-.md, outside bags/ → null", () => {
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/v0.1/api/pono/meme.md")).toBeNull();
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@sdm/ha.ka.ba/@sdm/v0.1/tags/x.tid")).toBeNull();
+    expect(bagsFileToUri(ROOT, "/elsewhere/bags/@x/ha.ka.ba/@x/v1/y.md")).toBeNull();
     expect(bagsFileToUri(ROOT, "/srv/vessel/genesis/island.bin")).toBeNull();
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@sdm/v0.1/tags/x.tid")).toBeNull();
-    expect(bagsFileToUri(ROOT, "/elsewhere/bags/@x/v1/y.md")).toBeNull();
   });
 });

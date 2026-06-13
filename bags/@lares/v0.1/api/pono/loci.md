@@ -72,7 +72,7 @@ Promotion to lares/ canon (live session → branch commit → hostless URI) foll
 
 ## Derivation Algorithm — siting
 
-Converts a `lar:` URI to its stable relative filepath candidate — the **canon-mirror convention, one projection rule among possible many** (`lar-uri #five-planes`: siting ⊥ name ⊥ residency; multi-bag projection stands as a named open crack). One root law: the repo IS the vessel; stable carriers live under `bags/`.
+Converts a (holding-bag, `lar:` URI) pair to its filepath — **the full-path-inside-bag ruling (2026-06-12, operator)**: directory = residency, interior path = the name, whole (`lar-uri #five-planes`). Any bag holds any name losslessly; the multi-bag crack closes. One root law: the repo IS the vessel; mirrors live under `bags/`.
 
 ```
 Given: lar-uri (string)
@@ -84,13 +84,14 @@ Given: lar-uri (string)
      sub-path = match[2]   e.g. "@lares/v0.1/api/pono/loci"
      authority may be empty (lar:///) or full (lar://alias:grant@host/)
 
-2. Derive candidate filepath:
-     If root == "ha.ka.ba":
-       candidate = "bags/" + sub-path + ".md"
-       e.g. "bags/@lares/v0.1/api/pono/loci.md"
-     Else:
-       UNSTABLE — session bearing only; no disk siting.
-       Classification: DECLARED-UNRESOLVED until adopted into a bag.
+2. Derive candidate filepath (holding-bag REQUIRED — siting = f(bag, uri)):
+     candidate = "bags/" + <holding-bag-scope> + "/" + root + "/" + sub-path + ".md"
+       e.g. (@lares, …api/pono/loci) → "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/loci.md"
+       e.g. (@draft, same name)      → "bags/@draft/ha.ka.ba/@lares/v0.1/api/pono/loci.md"
+     The CANON candidate (no bag context) reads the minting namespace as the
+     holding bag: child[1] of the name → the bag scope.
+     Unstable roots: no canon siting; they site only when a bag adopts and
+     projects them (session-bag path) — DECLARED-UNRESOLVED until then.
 
 3. Check whether candidate exists.
      If YES → RESOLVED. Return candidate. Done.
@@ -102,7 +103,7 @@ Given: lar-uri (string)
 ```
 
 Child items resolve under the sibling directory named for the parent's terminal path segment.
-`lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL` → `bags/@lares/v0.1/api/pono/invariant/SKILL.md`
+`lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL` → `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL.md`
 
 <<~/ahu >>
 
@@ -134,19 +135,19 @@ Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter ope
 
 | carrier form | rule | example |
 |---|---|---|
-| primary meme | derivation algorithm (step 2) | `bags/@lares/v0.1/api/pono/loci.md` |
-| child item | sibling directory named for parent's terminal path segment | `bags/@lares/v0.1/api/pono/loci/iam.md` |
+| primary meme | derivation algorithm (step 2) | `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/loci.md` |
+| child item | sibling directory named for parent's terminal path segment | `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/loci/iam.md` |
 
 Any carrier outside this rule reads as repair pressure, not a second lawful siting convention.
-This file at `bags/@lares/v0.1/api/pono/loci.md` serves as live specimen.
+MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`bags/<sub-path>.md`); the operator's load→write wave migrates it — the projector now writes only the ruled form. The iam `file-path` field = a named dual-write of this derivable fact; it retires at the migration wave.
 
 ### Live Examples
 
 | lar: URI | derived candidate | outcome |
 |---|---|---|
-| `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci` | `bags/@lares/v0.1/api/pono/loci.md` | resolved |
-| `lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack` | `bags/@lares/v0.1/api/pono/has-stack.md` | resolved |
-| `lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual` | `bags/@sdm/v0.1/components/posture/ritual.md` | resolved |
+| (@lares, `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci`) | `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/loci.md` | canon |
+| (@draft, the same name) | `bags/@draft/ha.ka.ba/@lares/v0.1/api/pono/loci.md` | residency-true |
+| (@sdm, `lar:///ha.ka.ba/@sdm/v0.1/components/posture/ritual`) | `bags/@sdm/ha.ka.ba/@sdm/v0.1/components/posture/ritual.md` | canon |
 
 <<~/ahu >>
 

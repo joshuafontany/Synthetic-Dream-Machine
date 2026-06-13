@@ -15,7 +15,7 @@
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import { execSync } from "node:child_process";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
@@ -23,6 +23,8 @@ const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CORPUS    = join(REPO_ROOT, "bags/@lares/v0.1");
 const LARES_URI = "lar:///ha.ka.ba/@lares";
 const BOOT_REL  = "api/lares/noosphere-boot.md";
+// Projected (staged) siting under the full-path-inside-bag ruling (2026-06-12):
+const BOOT_PROJ = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
 
 let lar: LarInstance;
 let loadOk = false;
@@ -52,7 +54,7 @@ function expectedRoots(): Set<string> {
 
 /** Poll the staged mirror until the projected file count stabilizes. */
 async function awaitStableMirror(root: string, capMs = 120_000): Promise<string[]> {
-  const mirrorRoot = join(root, "bags/@lares/v0.1");
+  const mirrorRoot = join(root, "bags/@lares");
   const start = Date.now();
   let last = -1;
   let stableSince = Date.now();
@@ -85,13 +87,22 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
     if (lar.mode !== "staged") return;
     const files = await awaitStableMirror(lar.root);
     expect(files.filter((f) => f.includes("#") || /%23/.test(f))).toEqual([]);
+    // Full-path-inside-bag ruling: the mirror carries EVERY name the bag
+    // holds (lawful residents outside the corpus namespace included), so the
+    // law reads as membership: every corpus root projects to exactly one
+    // file at its full-name path; fragments never surface.
+    const mirrorRoot = join(lar.root, "bags/@lares");
+    const fileUris = new Set(files.map((f) =>
+      "lar:///" + relative(mirrorRoot, f).split(sep).join("/").replace(/\.md$/, ""),
+    ));
     const roots = expectedRoots();
-    expect(files.length).toBe(roots.size);
+    for (const r of roots) expect(fileUris.has(r), `missing projection for ${r}`).toBe(true);
+    expect(fileUris.size).toBe(files.length);   // one file, one name — no aliasing
   }, 180_000);
 
   test("F3 — the boot meme projects content-whole (iam framing normalizes once)", async () => {
     if (lar.mode !== "staged") return;
-    const projected = join(lar.root, "bags/@lares/v0.1", BOOT_REL);
+    const projected = join(lar.root, "bags/@lares", BOOT_PROJ);
     expect(existsSync(projected)).toBe(true);
     const iamFence = /```toml iam\n[\s\S]*?```\n/g;
     const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
@@ -101,7 +112,7 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
 
   test("F4 — pipeline idempotence: re-feeding a projection leaves it byte-stable", async () => {
     if (lar.mode !== "staged") return;
-    const projected = join(lar.root, "bags/@lares/v0.1", BOOT_REL);
+    const projected = join(lar.root, "bags/@lares", BOOT_PROJ);
     const before = readFileSync(projected, "utf8");
     const r = await lar.cli(["act", "LOAD", "--source-uri", projected, "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
