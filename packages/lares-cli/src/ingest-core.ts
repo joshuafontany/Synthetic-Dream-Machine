@@ -1,0 +1,147 @@
+/**
+ * ingest-core — the disk→records gesture, factored out of `cmdIngest` so the
+ * one-shot CLI command AND the long-lived watcher daemon run the SAME proven
+ * path (NEXT VECTOR build 4 reuses build 2, never re-implements it).
+ *
+ * Two legs live here; the third leg lives on the island:
+ *   scan  — walk source for .md carriers, derive each uri by the loci law,
+ *           NFC-assert at the membrane, hash, diff disk-hash vs synced-hash
+ *   submit — pack NEW+CHANGED carriers (hashes riding with the text) into one
+ *            INGEST verb; the island's gate supplies currentRenderHash (leg 3)
+ *
+ * The gesture holds the disk grant and the Synced tree; the island holds
+ * neither (readiness reads local on both sides of the membrane). A watcher is
+ * just this gesture fired on a settle instead of on an operator keystroke.
+ *
+ * Meme: lar:///ha.ka.ba/@lares/v0.1/docs/lares/handoff (NEXT VECTOR, builds 2 & 4)
+ */
+
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { newChangeId, taskContentId } from "@lararium/mesh";
+import { SyncedTree, contentHash, bagsFileToUri } from "@lararium/node";
+import {
+  submitVerb,
+  type AdminVesselHandle,
+  type SubmitResult,
+} from "./admin-connector.js";
+
+export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc";
+
+export interface ScanRow {
+  readonly file:       string;
+  readonly uri:        string;
+  readonly text:       string;
+  readonly diskHash:   string;
+  readonly syncedHash: string | null;
+  readonly status:     ScanStatus;
+}
+
+export interface ScanResult {
+  readonly rows:    ScanRow[];
+  readonly skipped: string[];
+}
+
+/** Open the Synced tree at the canonical projection path under a root. */
+export function openSyncedTree(root: string): SyncedTree {
+  return new SyncedTree(join(root, ".lararium-projection", "synced-tree.json"));
+}
+
+/**
+ * List the .md carriers under a source — a directory walks recursively, a
+ * single file lists itself. Returns null when the source does not resolve.
+ * Observations only, never a work queue (§6: scan is truth, events are hints).
+ */
+export function listCarriers(source: string): string[] | null {
+  let st;
+  try { st = statSync(source); } catch { return null; }
+  if (!st.isDirectory()) return [source];
+  return (readdirSync(source, { recursive: true }) as string[])
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => join(source, f));
+}
+
+/**
+ * The two-leg diff over an explicit carrier list: derive uri, NFC-assert, hash,
+ * compare against the Synced tree. The watcher feeds the buffered changed paths
+ * here; the CLI feeds the whole walked source.
+ */
+export function scanFiles(
+  root:  string,
+  files: readonly string[],
+  toBag: string,
+  tree:  SyncedTree,
+): ScanResult {
+  const rows: ScanRow[] = [];
+  const skipped: string[] = [];
+  for (const file of files) {
+    const uri = bagsFileToUri(root, file);
+    if (!uri) { skipped.push(file); continue; }
+    let text: string;
+    try { text = readFileSync(file, "utf8"); } catch { skipped.push(file); continue; }
+    // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) —
+    // foreign bytes first walk in HERE; non-NFC refuses loudly, never enters.
+    if (text !== text.normalize("NFC")) {
+      rows.push({ file, uri, text, diskHash: "", syncedHash: null, status: "non-nfc" });
+      continue;
+    }
+    const diskHash   = contentHash(text);
+    const syncedHash = tree.get(`${toBag} ${uri}`);
+    const status: ScanStatus =
+      syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
+    rows.push({ file, uri, text, diskHash, syncedHash, status });
+  }
+  return { rows, skipped };
+}
+
+/** Walk a source and scan it whole. Returns null when the source does not resolve. */
+export function scanSource(
+  root:   string,
+  source: string,
+  toBag:  string,
+  tree:   SyncedTree,
+): ScanResult | null {
+  const files = listCarriers(source);
+  if (files === null) return null;
+  return scanFiles(root, files, toBag, tree);
+}
+
+/** The rows an INGEST submission carries — NEW and CHANGED only. */
+export function candidatesOf(rows: readonly ScanRow[]): ScanRow[] {
+  return rows.filter((r) => r.status === "new" || r.status === "changed");
+}
+
+export interface SubmitIngestOpts {
+  readonly source:    string;
+  readonly toBag:     string;
+  readonly candidates: readonly ScanRow[];
+  readonly did:       string;
+  /** Omit for a fresh change-id; pass one to thread a known id. */
+  readonly changeId?: string;
+}
+
+/**
+ * Submit NEW+CHANGED carriers as ONE INGEST verb on an already-connected
+ * vessel — hashes travel WITH the content; the island runs the full §6 gate
+ * and answers per-carrier decisions. One call = one wave.
+ *
+ * The vessel stays the caller's to open and close: the CLI opens one per
+ * gesture; the watcher holds one open across every wave of its lifetime.
+ */
+export async function submitIngestOn(
+  vessel: AdminVesselHandle,
+  opts:   SubmitIngestOpts,
+): Promise<SubmitResult> {
+  const changeId = opts.changeId ?? newChangeId();
+  const actionArgs: Record<string, unknown> = {
+    "source-uri": opts.source,
+    "to-bag":     opts.toBag,
+    "change-id":  changeId,
+    carriers: opts.candidates.map((r) => ({
+      uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash,
+    })),
+  };
+  const requestId = await taskContentId({ subject: opts.toBag, command: "INGEST", args: actionArgs, nonce: "" });
+  const timeoutMs = Math.max(10_000, 10_000 + opts.candidates.length * 400);
+  return await submitVerb(vessel, "INGEST", actionArgs, opts.did, { requestId, timeoutMs });
+}

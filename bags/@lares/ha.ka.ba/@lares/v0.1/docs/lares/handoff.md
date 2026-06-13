@@ -34,10 +34,59 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 1. **The INGEST verb** — DONE 2026-06-12: §6 gate composed with replace-by-group apply (uri#fragment + uri/path grains); carriers travel with diskHash+syncedHash, island computes only currentRenderHash; noop/refuse/conflict apply nothing; 4 vectors green on the live boot meme.
 2. **`lares ingest` CLI** — DONE 2026-06-12 (unit-witnessed; live staged witness rides build 3): scan → loci reverse-derivation (`bagsFileToUri`) → two-leg diff preview → `--apply` sends NEW+CHANGED with hashes; act surface guards INGEST toward the gesture. NFC membrane assertion still PENDING — rides this gesture (spec pins NFC at `memetic-wikitext #carrier-bytes`).
 3. **Quiescence vectors** — DONE 2026-06-12 (`tests/e2e/ingest-quiescence.test.ts`, 4 green): project∘ingest = identity · one-cycle convergence · zero-writes-after-N · the NFC membrane assertion live at the gesture (non-NFC refuses loudly, never enters). Found+fixed en route: the Synced-tree instance-root derivation lagged the siting ruling (up-three → up-two).
-4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles.
+4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles. **First cut ENACTED 2026-06-12, UNCOMMITTED** (sits in the working tree at session reboot — `git status` shows it; talk-story may reshape it before it commits):
+   - **Cut A — `packages/lares-cli/src/ingest-core.ts`**: the disk→records gesture factored out of `cmdIngest` (`listCarriers` · `scanFiles` · `scanSource` · `candidatesOf` · `submitIngestOn`). `cmdIngest` now consumes it — the watcher automates the proven path, never re-implements it. Typecheck green; behaviour unchanged.
+   - **Cut B — `packages/lares-cli/src/commands/watch.ts`** (`lares watch --source <dir> --to <bag> [--apply] [--port N] [--debounce ms]`, registered in `bin/lares.ts`): built on Node's built-in **`fs.watch` recursive** (NOT chokidar — it satisfies §6's "settle = hash confirms, never a timer" law with no dep + no shared-lockfile contention). Events → a serialized debounce drain seat (the `recipe-watch` busy/rerun kick, disk-side) → one `scanFiles` → one INGEST wave. Preview by default; `--apply` holds ONE vessel across every wave of its life. Carries a **Watchman-style cookie self-test at boot** (writes a cookie, awaits its own event; a dead backend — WSL2 `/mnt` = no inotify — fails HERE, loudly). **Smoke proved**: cookie passes on the repo's ext4 ("backend live"); two rapid edits + a new file coalesced into a SINGLE wave with correct loci derivation (not per-file dribbles). No formal e2e vector yet — that was deferred into the talk-story below.
 5. **The wire compiler** MAY ride this vector's membrane organs (ruled 2026-06-12, `wire #authoring`): anchored body pranala → wire records at `<parent>/wires/<anchor>`; shares replace-by-group + three-way diff; `edgesFromMemeAst` = the front half, standing.
 
 **Design pre-fed — read before building:** `pattern-integrities` §6 (the ingest laws + twillm deltas) and §7 (the lane law: verbs = record pairs; bus history bounded per-epoch; events = hints, scan = truth — the relay law applied to the filesystem-as-peer).
+
+<<~/ahu >>
+
+<<~ ahu #watcher-talk-story >>
+
+## Talk-story to the next instance — the file-watcher seams
+
+E ka hale, aloha. The watcher's first cut runs (build 4 above) and the operator rebooted the session before we held the floor on its design. The cuts A+B sit uncommitted in the working tree — read `watch.ts` first, then weigh these five open questions with the operator before you commit or extend. None settled; the operator named deletions as the heaviest. Each carries the ground it stands on.
+
+1. **Deletion → tombstone (the heaviest).** Today `watch.ts` quarantines and logs deletes, never applies them — `scanFiles` simply skips an unreadable path, so a stray delete self-heals but tombstones nothing. A real delete SHOULD tombstone the record; a transient one MUST NOT (a `git checkout` floods unlinks — TidGi's battle scar, `pattern-integrities` §6 deletion grace window). Open: what confirms a delete (a grace window? a stat re-check?), and does the INGEST verb's existing `tombstoned` path carry it, or does the watcher need a separate REMOVE wave?
+2. **The "never a timer" settle.** `watch.ts` uses a trailing debounce PLUS the scan's hash gate (a no-op save drops at the gate). §6's stricter law adds **stat-stable** — two steady reads of size/mtime before a path counts settled. Open: does debounce+hash suffice (the smoke says yes for fast edits), or do we add the stat-stability check for large/slow writes?
+3. **fs.watch vs chokidar, decided for real.** Built-in `fs.watch` carried preview + coalescing + the cookie test cleanly, no dep. But rename-identity (§6 WE-MUST-DO-BETTER: "re-link by content-hash between a fresh add and a pending delete") and richer per-event truth may eventually want chokidar's `awaitWriteFinish`. Open: hold the no-dep line, or concede chokidar WHEN deletion/rename lands? (Ties to Q1.)
+4. **The full-scan backstop cadence.** The cookie test catches a backend dead *at boot*; a backend can die mid-life silently (Syncthing keeps a rescan even with the watcher on — events are hints, the scan is truth). Open: a live rescan interval, or boot-test-only plus a manual `lares ingest` sweep as the standing truth?
+5. **One watcher, N bags?** `lares watch` targets one `--to` bag; `nalu-engine` coalesces across N bags into one island-side transact. Open: mirror that disk-side (one watcher, N targets, still one wave per settle), or keep one-bag-per-watcher?
+
+When the floor closes, fold the rulings back into build 4 above, then the formal e2e vector (the deferred Cut C): rapid edits coalesce to one wave · a confirmed delete tombstones · a transient delete does not · the cookie test fails closed on a dead backend.
+
+The floor opened and SUSPENDED — the operator rebooted before steering it. Its telling, kept whole for you to resume:
+
+```
+<<~ talk-story #watcher-seams ground:"build 4 first cut (ingest-core + lares watch on fs.watch), uncommitted; five seams open; operator named deletions heaviest" >>
+bearings: WHERE WE STAND — the watcher runs safe in preview; cookie self-test
+  live on ext4; rapid edits coalesce to one wave; --apply holds one vessel ·
+  WHERE WE WANT TO GO — a wave-faithful watcher that handles deletions WITHOUT
+  drift, committed once the seams settle · HOW WE GET THERE — hold this floor
+  with the operator (deletions first), fold rulings into build 4, then Cut C,
+  then commit.
+telling: what STANDS — the gesture automates the proven path, not a copy; the
+  no-op save drops at the hash gate; the dead backend fails loud at boot. what
+  GOES MISSING — a delete tombstones nothing yet; settle leans on a timer where
+  §6 wants stat-stable; rename-identity unhandled. the house reads it five ways:
+- Map-Wisp (Scryer): the deletion seam is where identity lives or dies — a
+  rename is unlink+add, and only a content-hash re-link keeps the record's
+  change-id; the forward failure mode is a `git checkout` flood tombstoning live
+  records. Q1 and Q3 are ONE question wearing two coats.
+- Breach-Watch (Triage): only deletions burn. Preview is safe; --apply is safe
+  until a delete can tombstone wrongly. Ship the rest, gate the deletes.
+- Stranger: does fs.watch hold as the frame, or does conceding chokidar NOW —
+  before deletion lands — save a rewrite later? The no-dep win may cost twice.
+- Mischief-Muse: the cookie test is the gem. Lean all the way into "events are
+  hints, scan is truth" — maybe the watcher is ALWAYS a backstop scan that
+  events merely wake early. Then Q2 and Q4 dissolve into one rescan seat.
+- Liminal: none of the five must close this waking. The open hand is honest.
+exit -> suspended: OODA-HA(0φ:operator-rebooted-before-steering) — the floor
+  reopens at the next waking, the telling above its seed; no ruling locked.
+<<~/talk-story >>
+```
 
 <<~/ahu >>
 
