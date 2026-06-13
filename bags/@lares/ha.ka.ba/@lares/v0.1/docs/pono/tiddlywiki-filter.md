@@ -1,0 +1,164 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter >>
+```toml iam
+cacheable = false
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter.md"
+register  = "Synthesis"
+retain    = false
+role      = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
+tags      = ["api/pono/meme"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tiddlywiki-filter"
+```
+
+# X-TiddlyWiki-Filter — Docs
+
+This file does not bind invariant law.
+Law lives at [tiddlywiki-filter.md](../../api/pono/tiddlywiki-filter.md).
+Procedure lives at [tiddlywiki-filter/SKILL.md](../../api/pono/tiddlywiki-filter/SKILL.md).
+
+This file holds examples, explanatory guidance, reminders, and notes on deferred scope.
+
+<<~ ahu #canonical-examples >>
+
+## Canonical Examples
+
+### Example A — contextual relation query
+
+Find all sigils that link to the current meme:
+
+````text
+<<~ hana #work >>
+```toml
+grammar = "x-tiddlywiki-filter"
+context = "+currentMeme"
+degrade = "no-op"
+result-shape = "set"
+```
+
+[all[sigils]links:to[+currentMeme]]
+<<~/hana >>
+````
+
+### Example B — tag-based filtering
+
+Find all sigils tagged `task` excluding the current meme:
+
+````text
+<<~ hana #work >>
+```toml
+grammar = "x-tiddlywiki-filter"
+context = "+currentMeme"
+degrade = "no-op"
+result-shape = "set"
+```
+
+[tag[task]!title[+currentMeme]]
+<<~/hana >>
+````
+
+### Example C — metadata extraction
+
+Get the `status` field of the current meme:
+
+````text
+<<~ hana #work >>
+```toml
+grammar = "x-tiddlywiki-filter"
+context = "+currentMeme"
+degrade = "empty-set"
+result-shape = "scalar"
+```
+
+[+currentMeme] [get[status]]
+<<~/hana >>
+````
+
+### Example D — hierarchy discovery
+
+Get the parent-list of the current meme:
+
+````text
+<<~ hana #work >>
+```toml
+grammar = "x-tiddlywiki-filter"
+context = "+currentMeme"
+degrade = "empty-set"
+result-shape = "list"
+```
+
+[list[+currentMeme!!parent-list]]
+<<~/hana >>
+````
+
+### Example E — orphaned-sigil batch filtering
+
+Find all untagged non-system sigils:
+
+````text
+<<~ hana #work >>
+```toml
+grammar = "x-tiddlywiki-filter"
+context = "+currentMeme"
+degrade = "no-op"
+result-shape = "set"
+```
+
+[all[sigils]untagged[]!is[system]]
+<<~/hana >>
+````
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #guidance >>
+
+## Guidance
+
+### Why the translation stays deterministic
+
+The host ontology centers on Sigils and Memes rather than tiddlers.
+Leaving TW metaphysical vocabulary in host-facing prose creates ambiguity about which model governs a given claim.
+Deterministic substitution keeps the boundary sharp without requiring authors to relearn the filter syntax itself — only the nouns change.
+
+### Why `operator` stays reserved
+
+`operator` already carries authn/authz meaning in this host.
+Borrowing it for the imported grammar code surface would force readers to context-shift every time they see the word.
+**Function sigil** names the concept accurately without collision.
+
+### Why ha/ka/ba sub-blocks were not carried into the parent
+
+The original `constitutional-charge-ha`, `sigil-centric-translation-ka`, and similar sub-blocks described what their parent sections "hold" or "govern" rather than holding or governing anything themselves.
+Eighteen sub-blocks, zero additional binding content.
+They added bulk without adding law and were cut rather than moved.
+
+### Deferred scope
+
+The following remain outside this invariant and stay parser/render territory:
+
+- full legality table for every TiddlyWiki filter function sigil
+- AST node schema beyond the minimum lowering expectations
+- widget and render schema for specific result shapes
+- target-specific lowering rules for each render backend
+- fixture execution detail
+- conformance test suite
+
+A future parser meme and render-pipeline meme should absorb these when they are ready to be written.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/x-tiddlywiki-filter/SKILL`
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

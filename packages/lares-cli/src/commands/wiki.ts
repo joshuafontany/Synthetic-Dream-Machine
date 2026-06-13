@@ -467,7 +467,7 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
       }
       console.log("");
       console.log("  Note: a kāpae mark in a higher-priority bag stops the cascade.");
-      console.log("        See bags/@lares/v0.1/api/lararium/residency-model.md #conflict-resolution");
+      console.log("        See bags/@lares/ha.ka.ba/@lares/v0.1/api/lararium/residency-model.md #conflict-resolution");
       console.log("        — resolution surfaces to operator / cabal Talk Story.");
       console.log("");
     }

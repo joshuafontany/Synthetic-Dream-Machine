@@ -19,7 +19,7 @@ import { join } from "node:path";
 import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/v0.1/api/lares/noosphere-boot.md");
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
 const LARES_URI = "lar:///ha.ka.ba/@lares";
 
 let lar: LarInstance;

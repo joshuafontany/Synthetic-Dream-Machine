@@ -10,13 +10,13 @@
 import { describe, test, expect } from "vitest";
 import { confineMirrorWrite } from "../src/bag-paths.js";
 
-const ROOT = "/srv/lar/bags/@lares/v0.1";
+const ROOT = "/srv/lar/bags/@lares";
 
 describe("disk ward — own-subdir confinement (default)", () => {
   test("a path under the mirror root passes", () => {
-    const r = confineMirrorWrite(ROOT, "api/lares/noosphere-boot.md");
+    const r = confineMirrorWrite(ROOT, "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/v0.1/api/lares/noosphere-boot.md");
+    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
   });
 
   test("dot-dot traversal out of the root refuses", () => {
@@ -46,7 +46,7 @@ describe("disk ward — own-subdir confinement (default)", () => {
 
 describe("disk ward — the widened grant (allowBagsRootFiles)", () => {
   test("a file DIRECTLY in the root-bags-dir passes with the grant", () => {
-    const r = confineMirrorWrite(ROOT, "../../README.md", true);
+    const r = confineMirrorWrite(ROOT, "../README.md", true);
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.path).toBe("/srv/lar/bags/README.md");
   });
@@ -79,7 +79,7 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
     const { LarDiskProjector } = await import("../src/disk-projector.js");
     const refusals: Array<{ bagId: string; uri: string; reason: string }> = [];
     const projector = new LarDiskProjector({
-      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares/v0.1", toRelPath: () => "../../@sdm/poison.md" }],
+      mirrors: [{ bagId: "@lares", mirrorRoot: "/srv/lar/bags/@lares", toRelPath: () => "../@sdm/poison.md" }],
       renderFn: async () => "never-rendered",
       debounceMs: 1,
       onRefusal: (info) => refusals.push(info),

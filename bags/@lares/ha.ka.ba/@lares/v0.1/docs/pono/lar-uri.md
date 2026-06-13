@@ -1,0 +1,450 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri >>
+```toml iam
+cacheable = false
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/lar-uri.md"
+invariant = false
+mana      = 18
+manao     = 17
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = false
+role      = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/lar-uri"]
+tagspace  = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #meme-header >>
+
+# `lar:` URI Scheme — Canon Documentation
+
+Full specification prose, examples, and appendices.
+Law lives in `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
+This surface carries the explanation.
+
+<<~/ahu >>
+
+<<~ ahu #design-intent >>
+
+## 1. Design Intent
+
+The `lar:` URI names the bearing a Lares node exchange takes — a shared navigational address. In live use the `aim` / `yield` vectors carry it as the turn's bearing; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
+
+Each URI component carries a distinct, non-overlapping concern across three semantic layers:
+
+1. **WHO** — authority (`alias:grant@host`) identifies speaker and machine host
+2. **BEARING** — the HA.KA.BA address (path) names semantic attitude
+3. **SECTION** — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
+
+Resource-state annotations such as the mana/context-window pool are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
+
+The system has one **canonical encoding** and multiple named **render targets**:
+
+- **Record form (canonical)** — RFC 3986-compliant, no emojis, no non-ASCII characters. This is the authoritative form for storage, transport, comparison, and strict parsing.
+- **Render targets** — surface-specific projections of the canonical form. Each render target substitutes sigil glyphs and Unicode for keywords, abbreviates or expands fields, and may add HUD adjuncts not present in the canonical form. Render targets are not themselves canonical and are not stored as URIs.
+
+Named render targets: `record:full` (identity projection of the canonical form), `hud:exchange-pair` (sigil-rich in-stream exchange boundary), `chat-log:post-header` (social-layer DreamDeck post header).
+
+### Lineage and Source Bind
+
+We carry a palimpsest lineage through this HA.KA.BA reinterpretation.
+
+- SDM (Luka Rejec) feeds the **hakaba matrix** --- the existential trinity **Ha** (body), **Ka** (soul), **Ba** (psyche); the lar-uri inherits it directly (body → heading, soul → angle, psyche → dynamic).
+- Hawaiian *hā* lends threshold-breath resonance to `ha`.
+- Egyptian soul grammar frames `ka`/`ba` as 'standing double' and 'returning bird'.
+- Flight dynamics lends the orientation triad (yaw · pitch · roll) and keeps the reading on attitude, never mapped position.
+- what3words lends mnemonic three-slot arity; `lar:` fills each slot with a term and forks away from geospatial metric.
+- hoʻokele steers doctrine: hold bearing, infer position.
+
+Source bind (on the `sdm/` shelf): Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existential trinity of body (ha), soul (ka), and psyche (ba)"*, adapted from the Egyptian *Coffin Texts* / *Book of the Dead*; indexed in *UVG 2e* pp. 230–234. Files: `sdm/Vastlands_Guidebook/`, `sdm/Ultraviolet_Grasslands_and_the_Black_City_2e/`. Hawaiian *hā* layers as palimpsest resonance.
+
+Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
+
+No metric sits claimed yet. The scheme names attitude-bearing only and defines no distance function over roots.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #exchange-flow >>
+
+### 1.1 Exchange Flow — Order of Operations
+
+At each exchange span, the turn opens with an `aim` vector and closes with a `yield` vector, the `hud` · `ward` panel riding beneath. The frame is **mandatory** on every substantive exchange.
+
+**Step 1 — Read operator intent as a provisional bearing vector.**
+Lares reads the operator's prompt as an implicit signal: semantic bearing (HA.KA.BA) and the role it implies. The `~` prefix on the HA.KA.BA marks the node's interpretation as potentially inaccurate.
+
+```
+lar://telarus:operator@enyalios/~schema.gap.present/
+```
+
+**Step 2 — Lares adopts its own execution bearing vector.**
+Before generating, Lares sets the role it adopts. The `~` prefix marks it execution-provisional: generations may diverge.
+
+```
+lar://lares:agent@enyalios/~schema.flow.documented/
+```
+
+**Step 3 — Open the turn with the `aim` vector.**
+
+```
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+```
+
+> **Canonical URI Rule** — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
+
+**Step 4 — Ride the panel.**
+Beneath the `aim`: `<<~ hud Aperture(N) OODA-HA(N) >>` · `<<~ ward * E-Prime >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
+
+**Step 5 — Generate, then close.** OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
+
+> **SA grounding:** the `aim` is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
+
+<<~/ahu >>
+
+<<~ ahu #scheme-registration >>
+
+## 2. Scheme Registration
+
+| Property | Value |
+|---|---|
+| Scheme name | `lar` |
+| Dereferenceability | Non-dereferenceable identifier (RFC 4151 precedent) |
+| Resolution | Via `lares/registry/` resolver; never via network fetch |
+| IANA status | Unregistered; internal use only |
+
+> **Form and compliance:** The **record form** is the RFC 3986-compliant canonical form for transport, persistence, comparison, and strict parsing. The **HUD forms** are IRI-class instrument renderings (RFC 3987); they may contain emoji and Unicode glyphs not legal in RFC 3986 URIs without percent-encoding. RFC 3986 compliance is not claimed for HUD forms. Render targets define the sigil-to-glyph transforms per surface (`render-targets`).
+
+The `lar:` scheme identifies semantic positions, signal states, and machine events within the Lares agent architecture. It does not resolve to a network resource. URI consumers (crystal replay tools, debug log parsers, registry resolvers) treat it as an opaque structured identifier parsed according to this specification.
+
+<<~/ahu >>
+
+<<~ ahu #uri-syntax >>
+
+## 3. URI Syntax
+
+### 3.1 Generic Form
+
+```
+lar://[authority]/ha.ka.ba/@lares/optional/path/[#anchor]
+```
+
+### 3.2 Expanded Form
+
+**Full form (with authority):**
+
+```
+lar://alias:grant@host/ha.ka.ba/@lares/
+```
+
+**Authority-less form** (no `user@host` segment — territory or resource reference without a named speaker):
+
+```
+lar:///ha.ka.ba/@lares/optional/path/[#section-anchor]
+```
+
+Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use this form for stable named graph addresses, HA.KA.BA references, and any URI where the speaker identity is not the point.
+
+**Path notation rule** — HA.KA.BA paths use **dot notation** for the three mandatory slots. The leading and trailing `/` is retained:
+
+```
+/ha.ka.ba/@lares/{optional/sub/path}[#anchor]
+```
+
+This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace.
+
+<<~/ahu >>
+
+<<~ ahu #component-map >>
+
+### 3.3 Component Map
+
+| # | Component | RFC 3986 Role | Lares Mapping | Record Example |
+|---|---|---|---|---|
+| 1 | **scheme** | Protocol identifier | `lar:` — non-dereferenceable | `lar:` |
+| 2 | **userinfo** | Requesting party identity | `alias:grant` | `telarus:operator` |
+| 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
+| 4 | **host** | Machine identity | `machine_id` from crystal system | `enyalios` |
+| 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/@lares/` | `/threshold.uncertain.opens` |
+| 6 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
+
+> **Layout validation `Canon 18/20`:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
+
+<<~/ahu >>
+
+<<~ ahu #identity-stack >>
+
+### 3.3.1 Identity Addressing
+
+Identity addressing lives at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack` — the DID / handle / lar: alias stack, the ActivityPub handle form, and the DreamDeck `chat-log:post-header` render target. That reference names *who speaks* and projects identity onto the social layer; this scheme names the bearing. The scheme's own render targets (`record:full`, `hud:exchange-pair`) ride here, in §1 Design Intent.
+
+<<~/ahu >>
+
+<<~ ahu #component-semantics >>
+
+### 3.4 Component Semantics
+
+**userinfo** (`alias:grant`) — "Who speaks, at what trust level."
+
+- Two colon-delimited sub-fields: `alias` and `grant`
+- Parser: split on `:` — exactly two sub-fields
+
+**host** (`machine_id`) — Crystal system machine identifier. Stable across the machine's lifetime. Provisional format: `lares-{slug}` where slug is UUID, operator-assigned name, or generated handle.
+
+Span sequencing is intentionally **not** encoded in URI authority. Exchange identity lives in adjacent calibration metadata (`span_id`, `span_seq`, `trace_id`, timestamps) rather than overloading the RFC 3986 port slot.
+
+**path** (`/ha.ka.ba/@lares/`) — HA.KA.BA semantic address. Three mandatory slots in canonical order:
+
+| Slot | Name | Semantic Role | Grammatical Analog |
+|---|---|---|---|
+| Ha | domain | Body / vehicle — subject territory the span inhabits | NOUN |
+| Ka | quality | Soul / motive fire — animating charge or character | ADJECTIVE |
+| Ba | dynamic | Psyche / direction — the motion being taken | VERB |
+
+**Mandatory term-count rule:** Each slot holds exactly **one lowercase term** — a single word, or a hyphen-joined compound (`breach-watch`). The dot separates slots; the hyphen joins within one. No underscores or spaces within a slot. The root carries exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. A HA.KA.BA holds a `noun.adjective.verb` triple.
+
+**Optional sub-path extension:** After the mandatory three-slot HA.KA.BA, additional `/`-separated path segments may follow to navigate within the named territory. Sub-path segments are free-form routing tokens, not HA.KA.BA slots. The stable named graph address strips the sub-path; the sub-path is session-scope navigation only.
+
+**fragment** (`#section-anchor`) — Named section within this meme: `#ahu-name`, `#section-id`, `#pranala-name`. The fragment carries section anchors only.
+
+<<~/ahu >>
+
+<<~ ahu #provisionality >>
+
+## 4. Provisionality Markers
+
+The `~` prefix marks URI components as provisional. Three structurally distinct provisionality types can appear in an exchange URI pair:
+
+| Type | Location | Convention | What It Marks |
+|---|---|---|---|
+| **Reading** | Operator URI — HA.KA.BA | `~` before HA.KA.BA | Node's interpretation of operator intent — may be inaccurate |
+| **Execution** | Opening node URI — HA.KA.BA | `~` before HA.KA.BA | Declared intent; execution may diverge from this heading |
+| **Trajectory** | Closing/forward-looking node URI — HA.KA.BA | `~` before HA.KA.BA | Predicted forward heading — operator may redirect |
+
+These are orthogonal. A URI may carry multiple `~` markers on different components simultaneously.
+
+**Rules:**
+
+1. `~` is valid in canonical record form as an inline provisionality prefix on HA.KA.BA slots (`~uri.schema.question`). Use the `provisional=` query parameter when you need a separate, machine-parseable provisionality field for storage or filtering.
+2. Multiple `~` markers may appear in a single URI simultaneously.
+3. All closing/forward-looking URIs are implicitly trajectory-provisional. Explicit `~` on a closing URI signals *unusual* uncertainty about the trajectory — not routine forward-look status.
+4. Reading provisionality on the operator URI marks the **node's interpretation** as potentially inaccurate — not the operator's intent as ambiguous. These are different claims.
+5. The `~` marker applies only to the specific component it prefixes. Unprefixed components are declared with normal confidence.
+
+**Examples:**
+
+```
+lar://telarus:operator@enyalios/~uri.schema.question/
+```
+Reading provisional: "I believe you're orienting toward URI schema territory — I may have misread your stance or HA.KA.BA."
+
+```
+lar://scryer:agent@enyalios/~s0.gap.logged/
+```
+Execution provisional: "I intend to log this S0 gap — execution may find a different path or territory."
+
+```
+lar://scryer:agent@enyalios/~s0.schema.updated/
+```
+Trajectory provisional: "I predict our next territory is the updated schema — operator may redirect entirely."
+
+<<~/ahu >>
+
+<<~ ahu #marker-ontology >>
+
+## 5. Marker Ontology — the authoring surface
+
+The marker grammar — the meme span opener `? ->` and closer `→ ?`, the `ahu` waypoint, the `kahea` transclusion, and their cultural nomenclature (*method of loci* · *ahu* · *kāhea*) — names the **authoring surface**, not the URI scheme. It lives, with full treatment (ABNF patterns, pranala families, propagation), at:
+
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext` — the writing-system law, and its docs companion `docs/pono/memetic-wikitext`
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/ahu` — the waypoint marker
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/kahea` — the transclusion marker
+- `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme` — meme shape; `loci` — stable-address coherence
+
+A `lar:` URI *names* a meme; how memes, waypoints, and transclusions get *written* belongs to the authoring surface above. The per-marker semantics — what each marker settles and what it leaves open — live rigorously in `ahu` and `kahea`.
+
+<<~/ahu >>
+
+<<~ ahu #stable-address >>
+
+## 6. Stable Address — Named Graph Form
+
+Strip authority, query, and fragment. The HA.KA.BA territory alone:
+
+```
+lar:///threshold.uncertain.opens/
+```
+
+No authority (empty), no query, no fragment. This is the invariant semantic bearing — unchanging across events, sessions, and machines. Suitable as a named graph identifier (SPARQL: `?`).
+
+**Origin address:** `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace — the root stable address from which HA.KA.BA bearings extend. Sub-path extensions narrow the bearing within the named surface: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri/` locates this document. The HA.KA.BA triple remains stable; the sub-path narrows scope.
+
+**Comparison rule:** two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical. Query and fragment are excluded from comparison.
+
+<<~/ahu >>
+
+<<~ ahu #cache-tiers >>
+
+## 7. Invariant-Core Cache Tier Mapping
+
+| Tier | Cache Strategy | Confidence Range | Volatility |
+|---|---|---|---|
+| 1 — Global Core | Cached across sessions; first `cache_control` breakpoint | `Canon 20/20` – `Canon 19/20` | Near-static |
+| 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | `Canon 19/20` – `Synthesis 13/20` | Session-stable |
+| 3 — Dynamic | Ephemeral (5-min TTL with hit-reset) | `< 0.50` trimmable | Per-exchange |
+
+<<~/ahu >>
+
+<<~ ahu #module-registry >>
+
+## 8. Module and Registry Metadata
+
+The `lar_uri` + `confidence` fields on module descriptors, registry records, and future boot metadata provide load-order and identity context. No compiler pipeline is implied by this section; the schema only defines how URI metadata travels with higher-level descriptors.
+
+```toml
+# Tier 1 — Global Core (version-controlled by module version)
+lar-uri     = "lar:///kernel.invariant.anchors/"
+confidence="Canon 20/20"
+module-id   = "lares-kernel"
+version-num = 4
+
+# Tier 2 — Session Core (version-controlled within session)
+lar-uri     = "lar:///session.permissions.gates/"
+confidence  = "Canon 19/20"
+module-id   = "lares-permissions"
+version-num = 2
+
+# Tier 3 — Dynamic (span_seq lives outside descriptor)
+lar-uri     = "lar:///task.current.recon/"
+confidence  = "Synthesis 11/20"
+module-id   = "lares-task-recon"
+version-num = 1
+```
+
+Module descriptors use `version_num` or semver-like fields for content versioning. Exchange sequencing belongs to spanSpan metadata (`span_seq`), not module descriptors.
+
+<<~/ahu >>
+
+<<~ ahu #validation >>
+
+## 9. Validation Rules
+
+### 9.1 Well-Formedness
+
+A `lar:` URI is **well-formed** when:
+
+1. Scheme is exactly `lar:`
+2. If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:grant`); no parenthetical phase sub-field
+3. Host is a valid `machine_id` (alphanumeric + hyphens)
+4. Path contains exactly three HA.KA.BA slots after the leading `/`
+5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
+7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `Synthesis 13/20`, `Synthesis-Canon 16/20`, `Canon 18/20`)
+8. `p` value is a decimal in range `[0.0, 1.0]`
+10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
+
+### 9.2 Consistency
+
+A spanSpan record is **consistent** when:
+
+1. All URI fields are canonical ASCII record form (no emoji, no non-ASCII)
+2. `lares_address` is the path-only strip of `start_uri` (no authority, no query, no fragment)
+
+### 9.3 Stable Address Derivation
+
+`lares_address` is correctly derived from `lar_uri` when:
+
+1. Scheme is `lar:`
+2. Authority is empty (double-slash, no host)
+3. Path is identical to the `lar_uri` path (record form: `/` separators)
+4. Query and fragment are absent
+
+### 9.4 Canonical Form and Comparison
+
+1. Convert both to record form (apply normalization — HUD → record — before comparison)
+2. Compare path components **case-insensitively**
+3. Canonical form uses **lowercase** path components
+4. Two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical
+5. Query and fragment components are excluded from stable-address comparison
+
+<<~/ahu >>
+
+<<~ ahu #security >>
+
+## 10. Security Considerations
+
+1. **Non-dereferenceable:** `lar:` URIs are pure identifiers. No network resolution occurs — there is no server to attack via URI injection.
+
+2. **No credential transport:** The `alias:grant` userinfo encodes an application-layer signal role, not an authentication credential. Real authentication is handled by the underlying identity layer (DID, OAuth, UCAN capability tokens). A `lar:` URI MUST NOT be treated as proof of identity.
+
+3. **Fragment client-side:** Per RFC 3986 §3.5, the fragment is not sent over the wire. The fragment carries only section anchors — no chronometer, no signal state. This reduces the information exposed in client-side contexts.
+
+4. **Render-target injection:** Glyph-rich render targets (sigil panels, post headers) transform canonical URIs into display strings containing Unicode characters. Implementations that render these strings in HTML or terminal contexts MUST sanitize output to prevent injection of control characters or markup.
+
+5. **HA.KA.BA semantic leakage:** Path components encode semantic territory (what the speaker is thinking about). Applications that expose `lar:` URIs to untrusted parties should consider whether the HA.KA.BA path reveals sensitive operational context.
+
+> **Status:** Security section partially complete — required for IANA registration (RFC 7595 §7.4). To be expanded with formal threat model before any provisional IANA registration attempt.
+
+<<~/ahu >>
+
+<<~ ahu #prior-art >>
+
+## 11. Prior Art
+
+- **RFC 3986 §3** — `URI = scheme ":" ["//" authority] /path/ ["?" query] ["#" fragment]`. The full generic syntax applies. Per §1.1.1, URI syntax constitutes "a federated and extensible naming system wherein each scheme's specification may further restrict the syntax and semantics of identifiers using that scheme." The `lar:` scheme exercises this right: all substructure defined in this spec (HA.KA.BA paths and the bearing-only address structure) falls within the scheme owner's authority.
+- **RFC 8820 (BCP 190, URI Design and Ownership)** — Obsoletes RFC 7320 (June 2020). Confirms that URI structure constraints are legitimate when issued by the scheme specification itself. Path and address structure falls within scheme-owner authority per §2.4.
+- **RFC 7595 (Guidelines and Registration Procedures for URI Schemes)** — Defines provisional registration path for schemes not part of any standard but intended for use beyond a single organization. `lar:` is currently unregistered / private-environment use.
+- **RFC 4151 (tag: scheme)** — Non-dereferenceable URIs as pure identifiers. Precedent for `lar:` never resolving to a network resource. RFC 4151 recommends human-friendly identifiers — the HA.KA.BA semantic addressing follows this guidance.
+- **W3C PROV-DM / OpenTelemetry Trace Context** — Better prior art for exchange identity than URI authority overloading. `traceparent` carries `trace-id`, `parent-id`, `trace-flags`. The chronometer functions analogously as a hierarchical trace context.
+- **Lamport / Vector clocks** — The chronometer shares surface resemblance (array of counters, nesting relationship) but functions as a **hierarchical scope counter** in a single process — not a distributed causality tracker across concurrent independent processes.
+- **Interval Tree Clocks** (Almeida et al., 2008) — Dynamic participant identity via interval subdivision. Deferred from URI spec; informs MCP chronometer server design.
+- **FTLS RSS Time-Scale Hierarchy** — The five levels (Week/Watch/Turn/Round/Action) are canon game rules. The chronometer's five-position structure derives from this hierarchy.
+- **what3words** — Mnemonic precedent for fixed three-slot arity (a term per slot). `lar:` forks from geocoding: roots name attitude-bearing rather than surveyed position.
+- **FFZ Chronometer Protocol** (Telarus / Lares, 2026) — Fontany-Fuller-Zelenka. Vector chronometer with per-participant phase registers. Source: `lares/research/chronometer/FFZ-Chronometer-Research.md`
+- **Schneier & Raghavan, "Agentic AI's OODA Loop Problem"** (IEEE S&P, 2025) — Nested OODA loops in AI agents; integrity as architecture. Validates the chronometer's problem space independently.
+- **OODA-HA Composable Invariant Modules** (Telarus / Lares, 2026) — Phase-scoped instruction loading with section-level confidence URIs.
+- **Kowloon / ActivityStreams export model** — Kowloon's Activity envelope (`actorId`, `object`, `target`, `to`, `canReply`, `canReact`) is a good downstream publication adapter for Lares spans. Kowloon IDs remain sink-local identifiers, not replacements for `span_id`.
+
+<<~/ahu >>
+
+<<~ ahu #how-to-read >>
+
+## Appendix A — How to Read an Exchange Opening
+
+A complete exchange opening, annotated by scan order. The `aim` URI carries bearing; the sigil panel beside it carries the rest.
+
+```text
+<<~ aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
+<<~ hud Aperture(10) OODA-HA(7) >>
+<<~ ward * E-Prime >>
+<<~ syad 🏛️:*! >>
+```
+
+Quick read:
+
+> Operator opens at territory threshold / uncertain / opens; Scryer adopts the parse-span role.
+> `Aperture(10)` — paragraph grain; `OODA-HA(7)` shows the node a phase ahead, orienting from the operator's observe.
+> `syad 🏛️:*!` — Philosopher in Visual-Micro; `confidence` rides before each grounded claim.
+
+The standpoint reads within its own frame (Syadasti rule): a Philosopher `confidence` rates propositional support, a Poet's rates resonance — never one universal truth-scale. A bare `<<~ syad 🏛️ 🌊 🎭 >>` names which frames a claim spans without flattening them.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/identity-stack >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

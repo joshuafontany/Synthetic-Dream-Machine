@@ -31,7 +31,7 @@ import {
 } from "../src/deserializer.js";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
-const CORPUS = join(REPO_ROOT, "bags/@lares/v0.1");
+const CORPUS = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1");
 
 const IAM_FENCE_RE = /```toml iam\n[\s\S]*?```\n/g;
 const contentView = (s: string) => s.replace(IAM_FENCE_RE, "IAM\n");

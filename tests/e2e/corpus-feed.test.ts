@@ -1,6 +1,6 @@
 /**
  * e2e/corpus-feed — vector 4's staged witness: the WHOLE @lares corpus
- * (bags/@lares/v0.1, ~189 carriers) rides one directory-batch LOAD into a
+ * (bags/@lares/ha.ka.ba/@lares/v0.1, ~189 carriers) rides one directory-batch LOAD into a
  * staged vessel, and the disk co-projection writes back carrier-whole.
  *
  * What this soaks (first contact at scale for the 2026-06-11 grain burn):
@@ -20,7 +20,7 @@ import { execSync } from "node:child_process";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
-const CORPUS    = join(REPO_ROOT, "bags/@lares/v0.1");
+const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1");
 const LARES_URI = "lar:///ha.ka.ba/@lares";
 const BOOT_REL  = "api/lares/noosphere-boot.md";
 // Projected (staged) siting under the full-path-inside-bag ruling (2026-06-12):

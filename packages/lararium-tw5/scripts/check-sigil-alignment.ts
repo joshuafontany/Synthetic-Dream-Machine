@@ -5,7 +5,7 @@
  *
  * Checks:
  *   1. Every sigil-*.tid has a lar-pono-uri field.
- *   2. The lar-pono-uri target file exists at bags/@lares/v0.1/api/pono/{slug}.md.
+ *   2. The lar-pono-uri target file exists at bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/{slug}.md.
  *   3. Every sigil pono spec has a <<~ pranala #tiddler ? -> …/sigil-* … >> edge.
  *
  * Exit 1 if any check fails (for CI integration).
@@ -16,7 +16,7 @@ import { join, basename } from "path";
 
 const ROOT = join(import.meta.dirname, "../../..");
 const TIDDLERS_DIR = join(ROOT, "packages/lararium-tw5/tiddlers");
-const PONO_DIR = join(ROOT, "bags/@lares/v0.1/api/pono");
+const PONO_DIR = join(ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono");
 
 interface CheckResult {
   tiddler: string;

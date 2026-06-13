@@ -29,7 +29,7 @@
  * store: prefix rules send those four above the `$:/state/` → @temp catch-all.
  * S7.1–S7.4 landed (slot, cascade, computeRecipeFingerprint); S7.5+ wires the
  * PersonGroup binding map. See:
- *   bags/@lares/v0.1/api/lararium/personal-slot.md
+ *   bags/@lares/ha.ka.ba/@lares/v0.1/api/lararium/personal-slot.md
  *
  * Tombstoned titles disappear from listVisible() but remain readable via
  * get() when the record carries { deleted: true }.
