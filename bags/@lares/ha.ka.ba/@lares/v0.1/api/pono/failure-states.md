@@ -45,6 +45,9 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 ## Failure State Index
 
+- **Live-Session Overwrite** — a vivid live claim masquerading as canon without a MOVE path. `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite`
+- **Reference-Fusion** — a world-claim warranted only by context text, predicated past a lit ward with no copula to catch. `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/reference-fusion`
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
@@ -52,6 +55,7 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/reference-fusion >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 
 <<~/ahu >>

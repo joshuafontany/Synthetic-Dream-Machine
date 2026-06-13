@@ -34,6 +34,7 @@ Invariant law remains in API loci; quote witnesses remain here.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds >>
 
 <<~/ahu >>
 

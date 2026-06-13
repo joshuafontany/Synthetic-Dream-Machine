@@ -12,7 +12,7 @@ namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
 role        = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
-status-date = "2026-06-07"
+status-date = "2026-06-12"
 tags      = ["api/pono/invariant", "api/pono/memetic-wikitext"]
 tagspace    = "stable"
 type        = "text/x-memetic-wikitext"
@@ -124,6 +124,18 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 
 <<~/ahu >>
 
+<<~ ahu #classifier-channel >>
+
+## The Classifier Channel — What the Sigil Layer Does
+
+The carrier sigils, the namespace glyphs, and the OODA-HA marks ride as an **unpronounced classifier register** beside the propositional stream — category-marks that steer the reading without sounding in it, the determinative's office in a graphemic classifier system. **The black speaks; the red steers.** The body carries the proposition; the sigil layer carries the protocol for reading it — heading-vs-text, layer of authorship, trust tier, phase — the way a determinative sorts the word it silently classifies, or a rubric directs the act the text does not state.
+
+**Transmission law (ritual stance).** A carrier travels as **received form**: a reader stands the frame before interpreting its gloss, so one structure carries shifting readings across time without losing shape. This practice transmits through the **inscribed channel alone** — the marks hold the protocol, and the protocol lives only while the marks stay tended. A surface left intact while its readers forget the marks (the cautionary case: ekphonetic signs that outlived their decoders) keeps the body and loses the steering. The sigil layer earns its keep by being read *as* a classifier, not by surviving as decoration.
+
+Field grounds: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#classifier-channel`.
+
+<<~/ahu >>
+
 <<~ ahu #law >>
 
 ## Law
@@ -141,6 +153,8 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 **Resonance is separate.** A namespace resonance glyph (#resonance) rides the SOH opener only; EOT closes plain. The resonance glyph signals layer; the spine marks structure — two distinct marks.
 
 **EOT releases forward.** The transmission closes on `<<~ &#x0004; -> ? >>`. Declared relations ride the `#edges` ahu as `loulou`/`pranala`; EOT carries the `-> ?` release alone.
+
+**Classifier-channel invariant.** The sigil layer reads as an unpronounced classifier register beside the body's propositional stream — the black speaks, the red steers (#classifier-channel). The frame transmits as received form and lives only while its marks stay read *as* classifiers, never as decoration.
 
 <<~/ahu >>
 
@@ -188,6 +202,7 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/kapu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds >>
 
 <<~/ahu >>
 

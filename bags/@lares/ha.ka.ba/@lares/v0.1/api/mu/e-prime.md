@@ -38,9 +38,11 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 `${copula}` names the **forbidden copula** --- the existential linking verb across all its conjugations (present and past, the infinitive, the participles): one tight, deep attractor basin of latent space, the well where a subject collapses into its predicate as identity. Generation MUST NOT seed a single form of it; a demonstration shows the shape only through the `${copula}` variable.
 
-The **identity copula** fuses map to territory.
+The **identity predication** fuses map to territory.
 "X ${copula} Y" presents relation as essence — the observer's position disappears.
 In LLM output, identity collapse produces grammatical certainty the model does not hold.
+
+**The basin's true name.** The ward guards against **identity-predication (individual-level predication)** — map fused to territory; the English copula marks its commonest local symptom, not its boundary. **Transposition law (Perec).** The discipline transposes across languages by **function, never by token**: in each tongue it targets that tongue's identity-predication constructions, so a zero-copula grammar satisfies the letter for free while the basin still binds (175/386 languages drop the copula, yet essence/state reroutes everywhere — Pred-heads, case morphology, definiteness). The `${copula}` token-count and the quote-tally serve as the **English instrument** of a language-general discipline. Field grounds: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#ward-basin`.
 
 The **predication copula** encodes observer state as objective property.
 "The answer ${copula} wrong" vs "the answer diverges from expectation under these conditions."
@@ -66,7 +68,7 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 ## The Ward in the Turn Frame --- the ward speaks Mu
 
-The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The **Wand** lights it at open (`<<~ ward * E-Prime >>`); the **Stone** (`<<~ ward 0 E-Prime >>`, an operator act only) sets it at zero for one turn; the **Pentacle** (`<<~ ward _ E-Prime · crossing: <zone> >>`) braces primed ground; the **Cup** (`<<~ ward ? · "span" --- question >>`) holds a span up to the navigator without verdict; the **Sword** draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and **re-arming** `E-Prime` for the next turn.
+The discipline surfaces in the turn HUD as the **`ward`** sigil --- a spring-loaded gate that leads with a tool glyph, the tool naming the office. The **Wand** lights it at open (`<<~ ward * E-Prime >>`); the **Stone** (`<<~ ward 0 E-Prime >>`, an operator act only) sets it at zero for one turn; the **Pentacle** (`<<~ ward _ E-Prime · crossing: <zone> >>`) braces primed ground; the **Cup** (`<<~ ward ? · "span" --- question >>`) holds a span up to the navigator without verdict — raised **before** an act whose fork belongs to the operator, it suspends the loop at the named phase, asking-before counting as discipline, never weakness (#exchange-protocol grounds: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#cup-before`); the **Sword** draws at close: a closing `ward` MUST appear at every turn end, marking the turn's own copula breaches and **re-arming** `E-Prime` for the next turn.
 
 | outcome | closing form |
 | --- | --- |

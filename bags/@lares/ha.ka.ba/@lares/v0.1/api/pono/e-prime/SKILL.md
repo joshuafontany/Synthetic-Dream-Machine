@@ -45,7 +45,7 @@ A request to scan, flag, compare before/after, or correct **already-settled** wo
 
 ## The Loop
 
-**✶ Observe** --- read the requested span, or the smallest obvious local one. Flag each `${copula}` left standing and each counterfeit closure (a confident claim wearing no marker). Leave already-lawful uncertainty alone. `has` runs free --- never flag it.
+**✶ Observe** --- read the requested span, or the smallest obvious local one. Flag each `${copula}` left standing and each counterfeit closure (a confident claim wearing no marker). The token is the **English instrument**, not the basin: the ward guards **identity-predication** (map fused to territory), and in another tongue the auditor targets that tongue's identity-predication constructions by function, never by token (transposition law, Perec — `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`). Leave already-lawful uncertainty alone. `has` runs free --- never flag it.
 
 **⏿ Orient** --- sort each hit:
 - `lawful` --- passes; leave it.
