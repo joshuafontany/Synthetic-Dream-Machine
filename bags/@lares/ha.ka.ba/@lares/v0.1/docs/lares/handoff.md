@@ -33,7 +33,7 @@ The disk→records direction opens, **gesture first** (operator-ruled): the watc
 
 1. **The INGEST verb** — DONE 2026-06-12: §6 gate composed with replace-by-group apply (uri#fragment + uri/path grains); carriers travel with diskHash+syncedHash, island computes only currentRenderHash; noop/refuse/conflict apply nothing; 4 vectors green on the live boot meme.
 2. **`lares ingest` CLI** — DONE 2026-06-12 (unit-witnessed; live staged witness rides build 3): scan → loci reverse-derivation (`bagsFileToUri`) → two-leg diff preview → `--apply` sends NEW+CHANGED with hashes; act surface guards INGEST toward the gesture. NFC membrane assertion still PENDING — rides this gesture (spec pins NFC at `memetic-wikitext #carrier-bytes`).
-3. **Quiescence vectors** over the composed loop — "zero writes after round N" makes an echo storm a one-line test failure; plus the composed fixpoints (ingest∘project = identity both ways; non-canonical input converges in ONE cycle).
+3. **Quiescence vectors** — DONE 2026-06-12 (`tests/e2e/ingest-quiescence.test.ts`, 4 green): project∘ingest = identity · one-cycle convergence · zero-writes-after-N · the NFC membrane assertion live at the gesture (non-NFC refuses loudly, never enters). Found+fixed en route: the Synced-tree instance-root derivation lagged the siting ruling (up-three → up-two).
 4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles.
 5. **The wire compiler** MAY ride this vector's membrane organs (ruled 2026-06-12, `wire #authoring`): anchored body pranala → wire records at `<parent>/wires/<anchor>`; shares replace-by-group + three-way diff; `edgesFromMemeAst` = the front half, standing.
 

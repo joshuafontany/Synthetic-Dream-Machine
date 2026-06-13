@@ -33,8 +33,9 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       // The Synced tree (§6 merge base) sits at the INSTANCE ROOT (the dir
       // holding bags/) under .lararium-projection/ — observation state,
       // never a meme surface, never inside bags/; the ingest gate reads the
-      // same file. mirrorRoot shape: <root>/bags/@NAME/vX → up three.
-      const instanceRoot = resolvePath(mirrors[0]!.mirrorRoot, "..", "..", "..");
+      // same file. mirrorRoot shape under the full-path-inside-bag ruling:
+      // <root>/bags/<scope> → up two.
+      const instanceRoot = resolvePath(mirrors[0]!.mirrorRoot, "..", "..");
       const syncedTree = new SyncedTree(join(instanceRoot, ".lararium-projection", "synced-tree.json"));
       const projector = new LarDiskProjector({
         mirrors,

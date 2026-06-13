@@ -16,6 +16,7 @@ import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { join } from "node:path";
+import { readFileSync } from "node:fs";
 import { targetInstance, bootDocUrl, type LarInstance } from "../harness/instance.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
@@ -47,12 +48,15 @@ describe("smoke — the vessel stands", () => {
 });
 
 describe("smoke — residency canon through the real CLI", () => {
-  test("LOAD feeds the hearth carrier-borne: boot meme → parent + 17 ahu children", async () => {
+  test("LOAD feeds the hearth carrier-borne: boot meme → parent + every ahu child", async () => {
     if (lar.mode !== "staged") return;   // mutating gesture — staged only
     const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
     const data = r.json?.["data"] as { count: number; titles: string[] };
-    expect(data.count).toBe(18);
+    // Derive the expectation from the source itself — the boot grows; the law
+    // (parent + one record per ahu block) stays.
+    const ahuCount = (readFileSync(BOOT_MEME, "utf8").match(/<<~ ahu #/g) ?? []).length;
+    expect(data.count).toBe(1 + ahuCount);
     expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot");
     expect(data.titles).toContain("lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#exchange-protocol");
   });

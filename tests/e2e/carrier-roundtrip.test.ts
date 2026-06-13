@@ -21,10 +21,19 @@ import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
+import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
 const LARES_URI = "lar:///ha.ka.ba/@lares";
+const BOOT_URI  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot";
+
+/** Canonical render of carrier text through the membrane (the V4 law's left side). */
+function renderOf(text: string, uri: string): string {
+  const records = memeticWikitextDeserializer(text, { title: uri });
+  const map = new Map(records.map((r) => [String(r.title), r] as const));
+  return expandMemeRefs((t) => map.get(t), uri) ?? "";
+}
 
 let lar: LarInstance;
 let loadOk = false;
@@ -101,7 +110,11 @@ describe("carrier-whole at rest — the kupono vectors", () => {
     const parent = files.find((f) => f.endsWith("noosphere-boot.md"));
     expect(parent, "no whole-carrier projection of the loaded meme found").toBeTruthy();
     const projected = readFileSync(parent as string, "utf8");
-    const source    = readFileSync(BOOT_MEME, "utf8");
+    // Compare against the CANONICAL RENDER of the source — the law under
+    // witness reads render(parse(source)) == projected, and it must hold even
+    // while the source file sits mid-edit under the operator's other hand
+    // (tests witness laws, never police WIP).
+    const source    = renderOf(readFileSync(BOOT_MEME, "utf8"), BOOT_URI);
     const iamFence = /```toml iam\n[\s\S]*?```\n/g;
     const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
     expect(contentView(projected)).toBe(contentView(source));

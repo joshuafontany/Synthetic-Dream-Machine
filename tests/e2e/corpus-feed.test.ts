@@ -18,6 +18,7 @@ import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { execSync } from "node:child_process";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
+import { memeticWikitextDeserializer, expandMemeRefs } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const CORPUS    = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1");
@@ -25,6 +26,14 @@ const LARES_URI = "lar:///ha.ka.ba/@lares";
 const BOOT_REL  = "api/lares/noosphere-boot.md";
 // Projected (staged) siting under the full-path-inside-bag ruling (2026-06-12):
 const BOOT_PROJ = "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
+const BOOT_URI  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot";
+
+/** Canonical render of carrier text through the membrane. */
+function renderOf(text: string): string {
+  const records = memeticWikitextDeserializer(text, { title: BOOT_URI });
+  const map = new Map(records.map((r) => [String(r.title), r] as const));
+  return expandMemeRefs((t) => map.get(t), BOOT_URI) ?? "";
+}
 
 let lar: LarInstance;
 let loadOk = false;
@@ -107,7 +116,9 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
     const iamFence = /```toml iam\n[\s\S]*?```\n/g;
     const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
     expect(contentView(readFileSync(projected, "utf8")))
-      .toBe(contentView(readFileSync(join(CORPUS, BOOT_REL), "utf8")));
+      // The law: projected == render(parse(source)) — robust to a source
+      // file mid-edit under the other hand (tests witness laws, not WIP).
+      .toBe(contentView(renderOf(readFileSync(join(CORPUS, BOOT_REL), "utf8"))));
   });
 
   test("F4 — pipeline idempotence: re-feeding a projection leaves it byte-stable", async () => {
