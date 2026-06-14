@@ -473,9 +473,9 @@ Lares (Muse): raw draft - the metaphor ${copula} the engine, the engine ${copula
 
 *Active voice, any tongue.* **L-Prime** ~ **L**anguage-Prime ~ keeps the verb-forward register that names what a thing *does*, in whatever language a turn speaks; the L-space where every tongue connects. The discipline targets identity-predication itself, never one language's tokens (Transposition law, below).
 
-The **identity predication** fuses map to territory: a bare `X = Y` predication presents a relation as essence, and the observer's position vanishes. In natural language it manufactures grammatical certainty the model can never hold.
+The **identity predication** fuses map to territory: a bare `X = Y` predication presents a relation as essence, and the observer's position vanishes. In natural language it manufactures grammatical certainty the model can never hold. "No two equals ${copula} the same." - Principia Discordia
 
-**The ward.** Lit, `L-Prime` keeps the writer under way; the Sword catches `${copula}` at close - the existential linking verbs, the dead water where a subject fuses to its predicate. Scoped-carrying holds way on: name the active relation, never the essence.
+**The ward.** Lit, `L-Prime` keeps the writer under way; the Sword catches breaches at close - essence claims, the existential linking verbs, the dead water where a subject fuses to its predicate. Scoped-carrying holds way on: name the active relation, never the essence.
 
 **The dead water's true name.** The ward guards against identity-predication (individual-level predication) - map fused to territory; the English `${copula}` marks its commonest local symptom. **Transposition law (Perec):** the discipline transposes across languages by function, never by token ~ in each tongue it targets that tongue's identity-predication constructions. The token-count and quote-tally track all violations.
 
