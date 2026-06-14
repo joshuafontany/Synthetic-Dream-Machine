@@ -59,15 +59,15 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 ## Five clauses hold the law
 
-1. **Holds carries composition, refuses essence.** `<<~ holds … x … >>` places x
+1. **Holds carries composition, refuses essence.** `<<~holds … x … >>` places x
    into a carrier's stack; the carrier wears x, the carrier never turns
    into x. A line that reads `X holds Y` where prose fused `X ${copula} Y`
    clears the ward only once Y resolves to a carrier of its own. The held
    thing speaks; the edge keeps silent.
 
 2. **A holding resolves to a carrier, never to an adjective.** Every
-   `<<~ holds x >>` demands x name a component meme — a thing holding its own
-   definition. A bare quality (`<<~ holds hot >>`, `<<~ holds stable >>`) smuggles the
+   `<<~holds x >>` demands x name a component meme — a thing holding its own
+   definition. A bare quality (`<<~holds hot >>`, `<<~holds stable >>`) smuggles the
    dead water back through a quiet door; refuse it. A quality enters a
    stack only by reifying: the quality mints a meme, the carrier holds
    *that*. A holding's own steering data rides the `~` red aside instead
@@ -75,7 +75,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    the one berth a quality keeps — red annotates the holding, never
    black-asserts it, and the aside stays out of the carrier's canonical bytes.
 
-3. **A bare holding reads fertile.** A `<<~ holds x >>` whose definition meme has
+3. **A bare holding reads fertile.** A `<<~holds x >>` whose definition meme has
    not yet landed stands **declared-unresolved** — lawful, promotable, no
    error sounds (the rating ladder governs, per has-stack §4). An absent
    holding reads open-world: the carrier knows nothing of x yet, the
@@ -84,7 +84,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 4. **Tables fall to holds by one rule.** A header-and-rows table rewrites
    mechanically: the header vows the families (the column grain); each body
-   row authors one carrier, adding one `family/cell` to its `<<~ holds … >>` set
+   row authors one carrier, adding one `family/cell` to its `<<~holds … >>` set
    per column it fills. A row skips the columns it leaves empty — open-world omission,
    never a null. The boot's carrier-tables fall to this rule untouched by
    hand; `meme` governs the copy-shape that results.
@@ -97,10 +97,10 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    past a holds-flattening; `#when-not-holds` routes each to its verb —
    `flows`/`loops`, `moves`, `ranks`.
 
-**Two faces, one verb.** `<<~ holds f/m f/m … >>` authors a carrier's
-whole set (the definition face). `<<~ holds? f/m >>` asks the predicate
-(the query face) — the `*` wildcard folds the old shapes: `<<~ holds? * >>`
-holds anything, `<<~ holds? element/* >>` any member of a family. The query
+**Two faces, one verb.** `<<~holds f/m f/m … >>` authors a carrier's
+whole set (the definition face). `<<~holds? f/m >>` asks the predicate
+(the query face) — the `*` wildcard folds the old shapes: `<<~holds? * >>`
+holds anything, `<<~holds? element/* >>` any member of a family. The query
 sigil compiles to the runtime filter operator `[holds[]]` /
 `[holds:family[<name>]]` / `holdsOf`, which stays the pipeline engine — a
 sharktooth never rides inside a filter run, so the brackets keep the query
@@ -119,26 +119,25 @@ The Mu table, before — the header vows, the cells honor by position:
 | name | ascii | element | glyph | pull |
 |---|---|---|---|---|
 
-The Wand-row, after — one carrier wears one holds-set:
+After — one **family constructor** sets the pattern, then each carrier invokes
+it as a named sigil. The constructor takes two params: `~Type` (the name,
+defaulting to the family's ground member) and `~Params` (the whole holds-body
+as one string — an absent slot just stays unwritten). It hands `~Params` to the
+`holds` verb by backtick filtered transclusion, never a nested
+`<<macro <<macro>> >>` (the parser refuses that):
 
-\procedure ~Mu-Wand()
-  <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/mu/wand >>
-  <<~ holds ascii/* element/Fire glyph/🜂 pull/ignition >>
-\end
+\procedure ~Mu(~Type:Stone ~Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<~Type>> <<~holds `[<~Params>]`>>
 
-The Stone-row wears four, skips the fifth — the open world reads it absent:
+<<~Mu Wand "ascii/* glyph/🜂 element/Fire pull/ignition" >>
+<<~Mu Stone >>
 
-\procedure ~Mu-Stone()
-  <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/mu/stone >>
-  <<~ holds ascii/0 element/Orichalcum glyph/🜍 pull/reset >>
-\end
-
-The rule, spoken once for all thirteen: **the header vows families; each
-row wears one `<<~ holds … >>` set; each filled cell adds one `family/member`;
-each empty cell wears nothing, and the open world reads it absent.** No
-table needs a hand the rule does not already carry. A stack too wide for one
-line wears the block form — `<<~ holds >>`, one `family/member` per line,
-`<<~/holds >>` — the same set, the same canonical bytes.
+The Wand-row wears all five; the Stone-row rides the constructor's default and
+needs no params — the open world reads each unwritten slot absent. Every `<<~`
+sigil binds its first param tight — `<<~Mu`, `<<~holds`, no space — the sigil
+redirecting to its first word. The rule, spoken once for all thirteen: **one
+constructor per family sets the verb; each row invokes the named family sigil.**
+A stack too wide for one line wears the block form — `<<~holds >>`, one
+`family/member` per line, `<<~/holds >>` — the same set, the same canonical bytes.
 
 <<~/ahu >>
 
@@ -158,10 +157,10 @@ Ask of the row's relation: **what does it DO?** The answer routes the verb.
 
 | when the relation... | rides... | authors as... | and cures the dead water of... |
 |---|---|---|---|
-| **composes · wears** *(default)* | a holds-set | `<<~ holds family/member … >>` | identity |
-| **follows · flows** | a flow-chain | `<<~ flows a -> b -> c >>` · `<<~ loops … >>` | sequence-fused-as-identity |
-| **moves across** | a transition | `<<~ moves X -> Y on/trigger if/guard do/effect >>` | before-welded-to-after |
-| **grades · ranks** | a gradation | `<<~ ranks family a -> b -> c >>` | level-welded-to-meaning |
+| **composes · wears** *(default)* | a holds-set | `<<~holds family/member … >>` | identity |
+| **follows · flows** | a flow-chain | `<<~flows a -> b -> c >>` · `<<~loops … >>` | sequence-fused-as-identity |
+| **moves across** | a transition | `<<~moves X -> Y on/trigger if/guard do/effect >>` | before-welded-to-after |
+| **grades · ranks** | a gradation | `<<~ranks family a -> b -> c >>` | level-welded-to-meaning |
 
 `holds` carries most of the boot; the other three carry a minority — the
 ordered loops, the graded registers. Default to `holds`; reach past it
@@ -176,10 +175,10 @@ and never folds inside-out. TW5 carries this in the `list` field (which
 runs apart from `tags`), walked first-to-last.
 
 ```
-<<~ loops ✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ aftermath >>
+<<~loops ✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ aftermath >>
 ```
 
-Author as `<<~ flows … >>` (terminating) or `<<~ loops … >>` (the tail
+Author as `<<~flows … >>` (terminating) or `<<~loops … >>` (the tail
 re-enters the head — OODA-HA keeps its ↺ Aftermath glyph as a phase). The
 arrow *moves*; nothing welds to anything. (Each ladder earns its own meme;
 `loci` carries the address.)
@@ -193,10 +192,10 @@ The state-machine grammar runs verb-forward by nature: a transition names
 after welded to the before.
 
 ```
-<<~ moves managing -> serving on/honest-suspension >>
+<<~moves managing -> serving on/honest-suspension >>
 ```
 
-Author as `<<~ moves X -> Y on/trigger if/guard do/effect >>` — `on/` fires,
+Author as `<<~moves X -> Y on/trigger if/guard do/effect >>` — `on/` fires,
 `if/` gates, `do/` acts. The before and the after stay apart; the trigger
 does the work the dead water would have smuggled.
 
@@ -208,12 +207,12 @@ a rank *exceeds* another by an unknown span; no level *welds* to its
 meaning. The Evidence Question — *how do I know?* — hands over the verb.
 
 ```
-<<~ ranks syad literal@0 ~ unsupported -> figurative@20 ~ fully-confirmed >>
-<<~ ranks stage green-room@1..4 -> wings@5..12 -> downstage@13..20 >>
-<<~ ranks rating noise -> data -> meme -> ano -> kapu >>
+<<~ranks syad literal@0 ~ unsupported -> figurative@20 ~ fully-confirmed >>
+<<~ranks stage green-room@1..4 -> wings@5..12 -> downstage@13..20 >>
+<<~ranks rating noise -> data -> meme -> ano -> kapu >>
 ```
 
-Author as `<<~ ranks family a -> b -> c >>` — anchors `member[@coord][~ descriptor]`,
+Author as `<<~ranks family a -> b -> c >>` — anchors `member[@coord][~ descriptor]`,
 `@n` a point, `@lo..hi` a band; the order ascends, never sorted. A
 descriptor *describes* what a level looks like; it rides the droppable red
 aside and never welds the number to the meaning.
@@ -226,7 +225,7 @@ sorted, deduped) carries `holds`. The *arrow-chain* spine (order-preserving,
 never sorted) carries `flows`/`loops` and `ranks` alike — one bytes-law, two
 readings: the arrow sequences for `flows`, ascends ordinally for `ranks`
 (a poset's `a -> b` already means `a ≤ b`). The *transition* spine carries
-`moves`. Comparison folds into the query face — `<<~ ranks? a -> b >>` asks
+`moves`. Comparison folds into the query face — `<<~ranks? a -> b >>` asks
 "a ranks at-or-below b?" — so no `compares` verb mints now; a non-linear
 order or lattice would later mint it, the floor unbuilt until a usage demands.
 
