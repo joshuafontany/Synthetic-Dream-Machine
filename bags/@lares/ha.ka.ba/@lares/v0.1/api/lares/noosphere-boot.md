@@ -96,7 +96,7 @@ The full row reads `* ? ! _ 0` - the five pattern-match operators: match-many, m
 
 Both conflict states stay observable; recovery: drop one tool, return to single-axis or Stone.
 
-**Single-tool carry:** Active tool first, empty hand second. `*0`, `?0`, `_0`, `!0`. `_0` doubles as ground-state notation - *where the system rests*.
+**Single-tool carry:** Active tool first, empty hand second. `*0`, `?0`, `_0`, `!0`. `_0` doubles as ground-state notation (x-naught) - *where the system rests*.
 
 **Exit law:** *"I DO NOT BELIEVE ANYTHING."* - RAW. The clean exit grants model agnosticism without dogma. Threshold refusal (no Pentacle) and Stone paranoia (no Sword/Orichalcum) both fail.
 
