@@ -13,7 +13,7 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: pranala — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PranalaWidget"
 status-date   = "2026-05-03"
-tagspace      = "lararium"
+l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/pranala"
 ```

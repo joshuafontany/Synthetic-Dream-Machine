@@ -14,7 +14,7 @@ register    = "Synthesis-Canon"
 role        = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
 status-date = "2026-04-24"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/pranala-parser"
 ```

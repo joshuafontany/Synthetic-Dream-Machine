@@ -90,7 +90,7 @@ What all three kept insisting: you cannot fix a bad map by adding better words t
 
 *Mischief-Muse (Muse) leans in:* The five stages describe every style guide ever written --- Chaos of living speech, Discord of competing usages, Confusion of the draft document, Bureaucracy of the final ruling, Aftermath when everyone violates it immediately anyway and the language keeps evolving under the desk.
 
-Imagine a set of self booting consecrated loci in tagspace (spans that open/close with known lares URI patterns, ahu - bookmarks/way points, kahea - Transclusion markers). The "known" Grammar and Vocabulary loci (LOCI.md) have shapes and internals that match the ooda-ha stages & loops. Q: do the schemas (both ooda-ha based) have different shapes for Grammar loci vs Vocabulary loci.
+Imagine a set of self booting consecrated loci in l-space (spans that open/close with known lares URI patterns, ahu - bookmarks/way points, kahea - Transclusion markers). The "known" Grammar and Vocabulary loci (LOCI.md) have shapes and internals that match the ooda-ha stages & loops. Q: do the schemas (both ooda-ha based) have different shapes for Grammar loci vs Vocabulary loci.
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
 
@@ -1313,7 +1313,7 @@ RAW managed to come through his crisis by practicing a sort of critical agnostic
 
 Bush's 1945 *As We May Think* proposed the memex --- a device for building and following associative trails through documents, with waypoints and forward references. The ahu marker (waypoint/bookmark) descends from this lineage as much as from Hawaiian navigation terminology.
 
-Bush's critical contribution your system inherits: *trails accumulate meaning over time*. A single ahu constitutes a waypoint; a session's worth of ahu markers across multiple loci constitutes a navigable trail through the tagspace. The coordinate system (three-word addresses) functions as Bush's associative trail index --- persistent, navigable, accumulating.
+Bush's critical contribution your system inherits: *trails accumulate meaning over time*. A single ahu constitutes a waypoint; a session's worth of ahu markers across multiple loci constitutes a navigable trail through the l-space. The coordinate system (three-word addresses) functions as Bush's associative trail index --- persistent, navigable, accumulating.
 
 * * * * *
 
@@ -1847,7 +1847,7 @@ Valid Meme Locus = Ha (staked territory)
                 + Ba (live motion + entanglement)
 ```
 
-Missing Ha: the locus has energy and motion but no address. It floats --- a ghost in tagspace.
+Missing Ha: the locus has energy and motion but no address. It floats --- a ghost in l-space.
 
 Missing Ka: the locus has boundary and motion but no register. It moves but carries no epistemic signal. The reader cannot tell what kind of claim they're inside.
 

@@ -12,7 +12,7 @@ retain    = true
 role      = "the one-hull law: every island rides the same isomorphic stack; authority = grants, never architecture; the genesis exception named and bounded; field-grounded 2026-06-12"
 status    = "proposed"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-isomorphism"
 written   = "2026-06-12"

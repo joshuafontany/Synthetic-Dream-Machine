@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Neural Whip — playable surface with clickable component pills"
 tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip"
 ```

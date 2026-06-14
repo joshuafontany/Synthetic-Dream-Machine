@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/degraded-states"
 ```

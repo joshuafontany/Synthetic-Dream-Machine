@@ -26,7 +26,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "practice face of talk-story — triggers, the five steps, three worked exits, crucible record; law lives at the parent meme"
 status    = "draft"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/talk-story/SKILL"
 ```

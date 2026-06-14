@@ -172,7 +172,7 @@ register     = "CS"
 confidence   = 10
 mana         = 10
 role         = "self-documentation: TODO describe ${opts.sourceBaseName}"
-tagspace     = "lararium"
+l-space      = "lararium"
 cacheable    = true
 retain       = true
 \`\`\`

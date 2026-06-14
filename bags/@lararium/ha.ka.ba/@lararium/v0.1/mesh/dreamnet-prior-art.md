@@ -11,7 +11,7 @@ register      = "Synthesis-Canon"
 research-date = "2026-05-28"
 retain        = true
 role          = "prior art research synthesis: best practices and golden principles for DreamNet five-layer topology"
-tagspace      = "lararium"
+l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
 ```

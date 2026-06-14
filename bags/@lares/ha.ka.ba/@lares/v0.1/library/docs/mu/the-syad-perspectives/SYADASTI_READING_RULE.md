@@ -7,7 +7,7 @@ file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspecti
 register  = "Synthesis-Canon 16/20"
 retain    = false
 role      = "session discovery — the Syadasti Reading Rule: Register measures confidence within the active stance's evaluation frame, not universal truth-weight; the full derivation chain"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
 ```

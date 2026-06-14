@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "capability meme for source-module carrier: package TypeScript source files emitted as memes into the graph"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/source-module"
 ```

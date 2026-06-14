@@ -13,7 +13,7 @@ register  = "Synthesis"
 retain    = true
 role      = "load-bearing invariant for the three-layer lararium voice-house: Voice house (the Thirteen), worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/voices"
 ```

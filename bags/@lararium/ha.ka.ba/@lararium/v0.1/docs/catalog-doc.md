@@ -12,7 +12,7 @@ retain        = true
 role          = "catalog island doc schema — hallway doc naming all rooms, corpora, recipes, snapshots, projection receipts"
 source-symbol = "CatalogDoc"
 status-date   = "2026-05-01"
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/catalog-doc"
 ```

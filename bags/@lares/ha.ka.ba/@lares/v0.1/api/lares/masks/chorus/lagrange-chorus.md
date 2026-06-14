@@ -20,7 +20,7 @@ retain            = false
 role              = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
 stage             = 10
 tags      = ["api/pono/meme", "api/lares/masks"]
-tagspace          = "stable"
+l-space           = "stable"
 type              = "text/x-memetic-wikitext"
 uri-path          = "ha.ka.ba/@lares/v0.1/api/lares/masks/chorus/lagrange-chorus"
 ```

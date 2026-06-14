@@ -12,7 +12,7 @@ retain        = true
 role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion seam"
 source-symbol = "LarariumOpenPhase LarariumAuthorityEnvelope"
 status-date   = "2026-04-30"
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/open-phases"
 ```

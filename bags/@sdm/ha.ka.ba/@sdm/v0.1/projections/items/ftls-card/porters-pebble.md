@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
 tags      = ["mount-points/item", "components/domain/stuckforce"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/items/ftls-card/porters-pebble"
 ```

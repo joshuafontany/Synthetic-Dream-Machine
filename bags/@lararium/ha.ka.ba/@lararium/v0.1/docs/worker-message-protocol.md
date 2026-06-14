@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/worker-message-protocol"
 ```

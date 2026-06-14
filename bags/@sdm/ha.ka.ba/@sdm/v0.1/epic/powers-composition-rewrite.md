@@ -11,7 +11,7 @@ manaoio   = 18
 register  = "Synthesis-Canon"
 retain    = true
 role      = "epic plan: SDM+ Powers as navigable composition space"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite"
 ```

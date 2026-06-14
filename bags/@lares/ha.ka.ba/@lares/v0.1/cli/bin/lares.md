@@ -8,7 +8,7 @@ mana      = 10
 register  = "Synthesis-Canon"
 retain    = true
 role      = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/cli/bin/lares"
 ```

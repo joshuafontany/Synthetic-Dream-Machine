@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe genesis-artifact.ts"
 source-file = "packages/lararium-node/src/genesis-artifact.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/node/genesis-artifact"
 ```

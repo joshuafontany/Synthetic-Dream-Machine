@@ -12,7 +12,7 @@ register    = "Synthesis-Canon"
 retain      = false
 role        = "grounding witness stream for the 2026-06-12 boot ratification — the literal-quote field grounds under the five discipline-layer changes (ward basin, classifier channel, Reference-Fusion, Cup-before, the loose thread); consumed from the boot-ripple letter, words given whole"
 status-date = "2026-06-12"
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds"
 ```

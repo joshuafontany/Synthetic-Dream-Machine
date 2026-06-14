@@ -12,7 +12,7 @@ manaoio   = 12
 register  = "Synthesis"
 retain    = true
 role      = "component (function): Ward — a selective protection against a named category"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ward"
 ```

@@ -10,7 +10,7 @@ manaoio   = 18
 register  = "Synthesis"
 retain    = true
 role      = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/browser/pono-charter"
 ```

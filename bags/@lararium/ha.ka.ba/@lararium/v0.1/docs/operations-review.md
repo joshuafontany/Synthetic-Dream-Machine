@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA extraction plan for lararium interaction protocols — frame-uncertainty, talk story, session init, and related surfaces"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/operations-review"
 ```

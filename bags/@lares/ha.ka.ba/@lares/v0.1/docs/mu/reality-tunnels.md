@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for reality tunnels, catma, and observer-position pressure behind Mu-facing invariants"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/reality-tunnels"
 ```

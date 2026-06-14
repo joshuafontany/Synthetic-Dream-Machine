@@ -31,7 +31,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 <<~ ahu #ooda-ha >>
 
 ✶ detect live claims that pressure invariant, factual, or world-state surfaces.
-⏿ compare speaker authority against source authority and tagspace precedence.
+⏿ compare speaker authority against source authority and l-space precedence.
 ◇ classify the claim as session signal, proposed change, contradiction, or confirmed law.
 ▶ answer with the classification visible when canon pressure appears.
 ↺ verify against hostless invariant memes or named sources before promotion; preserve the claim as session evidence unless an explicit canon MOVE path completes.
@@ -75,7 +75,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/canon-boundary >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>

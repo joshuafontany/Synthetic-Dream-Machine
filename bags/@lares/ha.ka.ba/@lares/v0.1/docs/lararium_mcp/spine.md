@@ -11,7 +11,7 @@ role            = "canonical Lararium MCP program spine and architecture contrac
 source-consumes = ["packages/lares-core/memes/docs/mcp/README.md", "packages/lares-core/memes/docs/mcp/ARCHITECTURE.md"]
 status-date     = "2026-04-23"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace        = "stable"
+l-space         = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/spine"
 ```

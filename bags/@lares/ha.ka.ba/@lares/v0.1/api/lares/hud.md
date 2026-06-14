@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lares/hud"
 ```

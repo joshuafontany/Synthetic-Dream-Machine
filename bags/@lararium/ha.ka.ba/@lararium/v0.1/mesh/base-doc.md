@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe base-doc.ts"
 source-file = "packages/lararium-mesh/src/base-doc.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/base-doc"
 ```

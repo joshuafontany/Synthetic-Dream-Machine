@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe event-store.ts"
 source-file = "packages/lararium-keyhive/src/event-store.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/keyhive/event-store"
 ```

@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "discordian source witness meme, Prometheus Rising chapter 8 locus, four-tools correspondence shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/mordecai-malignatus/prometheus-rising/prometheus-rising-ch-8-the-4-tools"
 ```

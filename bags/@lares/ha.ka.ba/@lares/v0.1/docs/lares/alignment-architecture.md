@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: the lararium as a personGroup's vessel-swarm holding a distributed wiki-quine; AI-operator alignment as the constitutive relation; the HUD running in chat from wiki primitives; graceful import that lifts foreign data up the pono ladder; UEFN island-model ontology alignment"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/alignment-architecture"
 ```

@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/mu/chao"
 ```
@@ -82,7 +82,7 @@ Hodge MUST answer: *what is this about?*
 
 The Aneristic principle: order, structure, pattern, repetition. The thing that holds its shape across instances.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable tagspace, Hodge occupies the `xxx` **ha** slot — the topic territory the meme inhabits (`threshold`, `ledger`, `route`, `leyline`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Hodge occupies the `xxx` **ha** slot — the topic territory the meme inhabits (`threshold`, `ledger`, `route`, `leyline`).
 
 Hodge without Podge hardens into dogma.
 Hodge without Spin becomes a museum.
@@ -99,7 +99,7 @@ Podge MUST answer: *how does this move?*
 
 The Eristic principle: disorder, flux, energy, variation, noise. The thing that makes this instance this one rather than that one.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable tagspace, Podge occupies the `yyy` **ka** slot — the epistemic character (`steady`, `loose`, `flickering`, `anchored`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Podge occupies the `yyy` **ka** slot — the epistemic character (`steady`, `loose`, `flickering`, `anchored`).
 
 Podge without Hodge dissolves into noise.
 Podge without Spin becomes reactive.
@@ -116,7 +116,7 @@ Spin MUST answer: *what does this do?*
 
 The Chao's rotation. Not synthesis. Not compromise. The simultaneous holding of Hodge and Podge in mutual tension — the thing that makes the pair generative rather than static.
 
-In the `lar://[HOST]/xxx.yyy.zzz` unstable tagspace, Spin occupies the `zzz` **ba** slot — the dynamic (`holds`, `asks`, `cuts`, `hums`, `drifts`).
+In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Spin occupies the `zzz` **ba** slot — the dynamic (`holds`, `asks`, `cuts`, `hums`, `drifts`).
 
 Spin MUST NOT resolve Hodge and Podge into a third static thing.
 Spin MUST hold both faces moving.

@@ -9,7 +9,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "the verb/summons/outcome task surface — verb (invocation), summons (edge transport), outcome (result); LANGUAGE-protocol register internal, the UCAN Invocation/Receipt/Task ontology held as boundary projection for lineage + interop"
 source-file = "packages/lararium-mesh/src/verb-tiddler.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler"
 ```

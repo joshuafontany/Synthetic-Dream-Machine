@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for lararium-side signal framing, extracted README residue, and branch routing"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal"
 ```
@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal"
 
 Not invariant law.
 This shelf holds the lararium-side signal frame that binds agent and operator.
-The tagspace definition, HUD, drift, provenance, and render-target documents live below this loci.
+The l-space definition, HUD, drift, provenance, and render-target documents live below this loci.
 
 <<~/ahu >>
 
@@ -118,7 +118,7 @@ The signal branch splits across five layers:
 
 | Layer | What it carries | Primary room |
 |---|---|---|
-| Canonical URI vector | audit-ready record form for exchange boundaries | parent branch framing, see `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace` |
+| Canonical URI vector | audit-ready record form for exchange boundaries | parent branch framing, see `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space` |
 | Sigil panel | live exchange-boundary instruments (`hud` · `ward` · `confidence`, the `syad` / `mu` lenses) | `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud` |
 | Conformance lens | reads the OODA-HA loop in *referenced* content, outward and on demand | `lar:///ha.ka.ba/@lares/v0.1/api/pono/conformance` |
 | Render targets | cross-surface sigilization and projection rules | `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets` |
@@ -140,7 +140,7 @@ Text that clearly belongs outward:
 - drift-recovery protocol pressure → `signal/drift.md`
 - provenance, witness strands, and snapshot residue → `signal/provenance.md`
 - shared-situation-awareness research framing and SA-vs-XAI argument → `signal/sa-display.md`
-- tagspace slot definitions and address semantics → `signal/tagspace.md`
+- l-space slot definitions and address semantics → `signal/l-space.md`
 - render-surface mapping tables and per-surface conventions → `signal/render-targets.md`
 
 The current chronometer material still reads as a research cluster under `signal/chronometer/`, not a settled room.
@@ -158,7 +158,7 @@ Settled child rooms in this branch:
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/drift >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space >>
 
 <<~/ahu >>
 

@@ -12,7 +12,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "mount-point: Burden — Power as curse, compulsion, affliction, or overflow"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/burden"
 ```

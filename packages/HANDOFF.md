@@ -1510,7 +1510,7 @@ These two arcs together complete the isomorphic vessel law across all vessel typ
 - **Memetic wikitext = TW5 superset.** No deny-list items without a carrier-stream justification.
 - **Sigil dispatch via wikitext.** All sigil widgets live as TW5 `\widget` tiddlers. JS widgets only for JS-level semantics (async device I/O, future Keyhive WASM hooks).
 - **Every first-class record id uses `lar:`.** Hostful ids name live session artifacts; hostless ids name stored artifacts.
-- **`lar:///ha.ka.ba/*` names stable tagspace.** `lar:///haWord.kaWord.baWord/*` names unstable tagspace.
+- **`lar:///ha.ka.ba/*` names stable l-space.** `lar:///haWord.kaWord.baWord/*` names unstable l-space.
 
 ## Path M / Lares Local Intent Bridge
 

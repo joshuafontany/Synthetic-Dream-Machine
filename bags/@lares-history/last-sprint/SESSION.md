@@ -88,7 +88,7 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 ```toml iam
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#thesis"
 file-path = "wikis/scratch/memes/docs/lares/the-lares-protocols/thesis.md"
-tagspace = "draft"
+l-space  = "draft"
 …
 ```
 
@@ -810,7 +810,7 @@ Full findings in `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESE
 ### Settled Design Decisions (2026-05-06 talk-story)
 
 **lar:// URI — three families, no grammar change:**
-- `lar:///` (triple-slash, hostless) = system/content memes. Stable tagspace: `ha.ka.ba`. Unstable: what3words-style roots.
+- `lar:///` (triple-slash, hostless) = system/content memes. Stable l-space: `ha.ka.ba`. Unstable: what3words-style roots.
 - `lar://alias:grant@host/` (hostful, existing) = active operators/agents on a machine (VS Code, MCP, etc.)
 - NEW: `lar:///ha.ka.ba/@nexus/<nexus-pubkey>` = Nexus identity + registry doc. New `@nexus` scope in resolver. New kind: `"nexus-doc"`. No URI grammar change.
 

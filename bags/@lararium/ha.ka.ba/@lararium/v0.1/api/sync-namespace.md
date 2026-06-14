@@ -15,7 +15,7 @@ revision-note = "minted 2026-06-06 — extracted from lar-uri #path-taxonomy TW5
 role          = "load-bearing invariant — the title-namespace sync-filter predicate: only lar:-titled tiddlers cross the lararium sync boundary; $:/ stays browser-local. The title-level companion to disk-projection's bag-level rule"
 status        = "draft"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/sync-namespace"
 ```

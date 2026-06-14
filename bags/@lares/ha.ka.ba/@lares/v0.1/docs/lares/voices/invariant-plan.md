@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA plan for designing lar:///ha.ka.ba/@lares/v0.1/api/lares/voices invariant from the settled docs spec"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/invariant-plan"
 ```

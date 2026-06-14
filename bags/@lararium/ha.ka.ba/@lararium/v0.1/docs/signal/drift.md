@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs room for governing-field drift, recovery protocol pressure, and projection-error handling across lararium signal surfaces"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/drift"
 ```

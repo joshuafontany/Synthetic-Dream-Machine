@@ -11,7 +11,7 @@ ooda-ha-level = 10
 register      = "Synthesis-Canon"
 role          = "configuration surface, behind-the-curtain dial room, session-config"
 tags      = ["api/pono/meme"]
-tagspace      = "adjacent"
+l-space       = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/LARES"
 ```

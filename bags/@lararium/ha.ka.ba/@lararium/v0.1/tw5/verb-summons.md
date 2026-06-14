@@ -9,7 +9,7 @@ register    = "Synthesis"
 retain      = true
 role        = "the summons relay — CRDT verb-summons tiddler (@admin/summons/<id>) → volatile local invocation; edge transport, not durable coordination"
 source-file = "packages/lararium-tw5/src/verb-summons.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/verb-summons"
 ```

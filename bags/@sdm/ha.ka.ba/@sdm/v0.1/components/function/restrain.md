@@ -12,7 +12,7 @@ manaoio   = 12
 register  = "Synthesis"
 retain    = true
 role      = "component (function): Restrain — grip, hold, or immobilise a target; the first offensive function the attack-hook surfaced"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/restrain"
 ```

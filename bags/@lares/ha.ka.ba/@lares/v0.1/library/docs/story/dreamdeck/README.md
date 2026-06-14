@@ -7,7 +7,7 @@ file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/READM
 register  = "Sketch 9/20"
 retain    = false
 role      = "epic backlog DECK-* — DREAMDECK / elyncia.app integration: tldraw session canvas, Kowloon ActivityPub feeds, DreamDeck threads; S5 sprint target, seeded not begun"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/story/dreamdeck/README"
 ```

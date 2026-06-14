@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for named epistemic failure-weather, collapse patterns, and possible short-invariant promotion targets"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/degraded-epistemic-weather"
 ```

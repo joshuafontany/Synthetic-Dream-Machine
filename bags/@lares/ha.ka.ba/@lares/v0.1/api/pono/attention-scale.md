@@ -14,7 +14,7 @@ retain      = true
 role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
 tags      = ["api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
 ```

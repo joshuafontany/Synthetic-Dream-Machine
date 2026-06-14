@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "UVG relic witness for Porter's Pebble — pebble-machine provenance + the Floating Disc 'Stuckforce Relic' variant, cold-load"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/witness/items/uvg/porters-pebble"
 ```

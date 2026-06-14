@@ -7,7 +7,7 @@ file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspecti
 register  = "Synthesis 12/20"
 retain    = false
 role      = "deep-research synthesis — Sri Syadasti's sevenfold catma as the model for stance-dependent Register; the session-vs-lifetime meaning asymmetry for the HUD (Chapel Perilous territory)"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
 ```

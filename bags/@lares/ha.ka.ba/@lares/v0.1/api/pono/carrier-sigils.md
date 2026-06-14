@@ -14,7 +14,7 @@ retain      = true
 role        = "carrier spine law — the four REQUIRED transmission-frame sigils (SOH · STX · ETX · EOT), the namespace resonance glyphs, and the kapu-trust tiers. Parse types, ratings, render suppression, and sigil vocabulary live in their own memes, reached by edge"
 status-date = "2026-06-12"
 tags      = ["api/pono/invariant", "api/pono/memetic-wikitext"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils"
 ```

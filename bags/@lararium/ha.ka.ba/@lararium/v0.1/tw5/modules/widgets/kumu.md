@@ -13,7 +13,7 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: kumu — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "KumuWidget"
 status-date   = "2026-05-03"
-tagspace      = "lararium"
+l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/widgets/kumu"
 ```

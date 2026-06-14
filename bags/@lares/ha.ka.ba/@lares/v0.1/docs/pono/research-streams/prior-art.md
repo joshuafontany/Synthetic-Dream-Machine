@@ -12,7 +12,7 @@ register    = "Synthesis-Canon"
 retain      = false
 role        = "prior-art witness stream with literal quotes for local-first, worker architecture, and security baselines"
 status-date = "2026-05-25"
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/prior-art"
 ```

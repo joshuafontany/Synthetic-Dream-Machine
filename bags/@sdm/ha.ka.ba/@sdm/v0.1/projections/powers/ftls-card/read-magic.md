@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Read Magic — playable surface with clickable component pills"
 tags      = ["components/domain/divination", "components/function/magic-decode", "components/function/ecm-scan", "components/function/archive", "components/hook/dangerous", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/read-magic"
 ```

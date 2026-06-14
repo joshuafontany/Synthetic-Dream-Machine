@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
 status-date = "2026-05-15"
 tags      = ["api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-event-lattice"
 ```

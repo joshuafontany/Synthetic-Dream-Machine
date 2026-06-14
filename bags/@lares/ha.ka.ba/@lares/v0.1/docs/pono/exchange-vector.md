@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for exchange vector law — record form, HUD example, and pattern-training guidance"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/exchange-vector"
 ```
@@ -104,7 +104,7 @@ Long-term, the server should validate the vector and render the HUD from the par
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust >>
 
 <<~/ahu >>
 

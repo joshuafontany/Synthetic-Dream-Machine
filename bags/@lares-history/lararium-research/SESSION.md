@@ -6,7 +6,7 @@
 uri-path     = "SESSION"
 file-path = "packages/lares-core/memes/SESSION.md"
 type         = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 confidence   = 18
 register     = "CS"
 manaoio      = 17
@@ -385,7 +385,7 @@ All 62 unit tests green after removal.
 - Draft guard: `$:/temp/*` never reaches shared store ✓
 - Server is sync peer, not authority ✓
 - KumuWidget is TW5-native: filter lookup → variable injection → makeTranscludeWidget ✓
-- Kumu defs are first-class memes in tagspace ($:/tags/LarariumKumu + kumu-name field) ✓
+- Kumu defs are first-class memes in l-space ($:/tags/LarariumKumu + kumu-name field) ✓
 - `edge:`, `toml:`, `all[memes]` are native TW5 filter operators ✓
 - Ahu child tiddlers carry typed content via TOML metadata fence ✓
 - `ReactionGraph` stable-ref: `subscribeByFn` handlers never re-subscribed ✓

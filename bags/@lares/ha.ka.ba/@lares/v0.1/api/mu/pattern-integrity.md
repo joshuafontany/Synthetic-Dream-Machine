@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: Fuller's 5 pattern integrities applied to Lararium — tensegrity, wave/water, synergy, ephemeralization, trim tab"
 status-date = "2026-05-02"
 tags      = ["api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"
 ```

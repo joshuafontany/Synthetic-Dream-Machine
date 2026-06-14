@@ -10,7 +10,7 @@
 
 | Epic | Folder | Backlog Prefix | Domain |
 |---|---|---|---|
-| Signal / HUD | [`SIGNAL/`](SIGNAL/README.md) | `SIG-*` | HUD annotation grammar, `lar:` URI, p-band model, micro-trace, tagspace |
+| Signal / HUD | [`SIGNAL/`](SIGNAL/README.md) | `SIG-*` | HUD annotation grammar, `lar:` URI, p-band model, micro-trace, l-space |
 | Crystal State Machine | [`CRYSTAL/`](CRYSTAL/README.md) | `CRY-*` | STATE.jsonl schema, MemPalace state layer, seal/fork/resume, tick-span |
 | Invariants & Trust | [`INVARIANTS/`](INVARIANTS/README.md) | `INV-*` | `lares.core.*` behavioral invariants, trust model, register guard, priority layers |
 | Registry | [`REGISTRY/`](REGISTRY/README.md) | `REG-*` | `lar:` URI registry, resolver rules, promotion ledger, content-addressed identity |

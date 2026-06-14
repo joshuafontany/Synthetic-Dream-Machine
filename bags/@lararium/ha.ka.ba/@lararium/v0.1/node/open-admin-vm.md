@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe open-admin-vm.ts"
 source-file = "packages/lararium-node/src/open-admin-vm.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/node/open-admin-vm"
 ```

@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Floating Disc — playable surface with clickable component pills"
 tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/floating-disc"
 ```

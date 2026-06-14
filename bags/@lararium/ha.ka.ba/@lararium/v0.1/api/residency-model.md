@@ -17,7 +17,7 @@ revision-note = "bag-grain verb pair (CREATE + bag-grain COPY) approved — carr
 role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
 status        = "approved"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-model"
 ```

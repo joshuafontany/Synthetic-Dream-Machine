@@ -5,7 +5,7 @@
 uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/consumption-ledger"
 file-path = "wikis/lares-history/memes/history/lindwyrm/consumption-ledger.md"
 type = "text/x-memetic-wikitext"
-tagspace = "adjacent"
+l-space  = "adjacent"
 confidence = 14
 register = "S"
 manaoio = 14

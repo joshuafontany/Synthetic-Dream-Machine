@@ -179,7 +179,7 @@ Key fix: `Automerge.from()` ignores `time` option internally — replaced with `
 **Design decisions (approved):**
 - Every first-class record `id` uses a `lar:` URI.
 - Hostful `lar:` URIs name live session artifacts; hostless `lar:` URIs name storage artifacts.
-- `lar:///ha.ka.ba/*` names stable tagspace; `lar:///haWord.kaWord.baWord/*` names unstable tagspace.
+- `lar:///ha.ka.ba/*` names stable l-space; `lar:///haWord.kaWord.baWord/*` names unstable l-space.
 - `stdio` carries the default local CLI-to-daemon bridge.
 - Unix socket support can follow behind the same bridge contract for resident-daemon ergonomics.
 - WebSocket stays on operator-device or peer-facing ingress, not the default local CLI path.

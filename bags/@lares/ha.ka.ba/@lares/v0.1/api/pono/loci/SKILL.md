@@ -45,7 +45,7 @@ Loci SKILL opens the procedural stream here.
 - rating commitment stays truthful; a path hit never overrides unresolved tension
 - file-siting mutations and canon-MOVE opener changes cross as distinct bounded Hoʻoko transactions
 - aftermath names all declared-unresolved addresses
-- stable tagspace: `lar:///ha.ka.ba/@lares/` → `packages/lares-core/memes/`; all other `\w\.\w\.\w` roots → `lares/chapel-perilous-opens/{root}/`
+- stable l-space: `lar:///ha.ka.ba/@lares/` → `packages/lares-core/memes/`; all other `\w\.\w\.\w` roots → `lares/chapel-perilous-opens/{root}/`
 - `loci` eligibility requires `\w\.\w\.\w` root path segment; outside that pattern, MAY NOT implement
 - MCP resolution remains research backlog; no live resolver operates today
 

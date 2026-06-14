@@ -13,7 +13,7 @@ role          = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
 status-date   = "2026-04-30"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
-tagspace      = "adjacent"
+l-space       = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/sync/save-cascade"
 ```

@@ -10,7 +10,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "Next-thread sprint handoff for lararium-browser detached worker-authority pool alpha reboot"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/browser/full-detached-worker-authority-pool-sprint"
 ```

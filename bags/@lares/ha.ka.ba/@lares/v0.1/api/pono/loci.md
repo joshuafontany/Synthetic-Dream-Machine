@@ -26,7 +26,7 @@ The **mandatory component** — the one intrinsic every placed carrier holds, af
 Routing convention and stable-address law for `lar:` URI carriers.
 A carrier holds `loci` when its `lar:` URI root segment matches `\w.\w.\w` and satisfies this law's convention surfaces. An entity without loci reads as not-yet-placed; the rating ladder prices that honestly.
 
-Two tagspace postures:
+Two l-space postures:
 
 - `lar:///ha.ka.ba/...` — stable origin; carriers sited on disk under `bags/`
 - all other `\w.\w.\w` roots — unstable session bearing; no disk siting (declared-unresolved until adopted into a bag)
@@ -77,7 +77,7 @@ Converts a (holding-bag, `lar:` URI) pair to its filepath — **the full-path-in
 ```
 Given: lar-uri (string)
 
-1. Validate tagspace eligibility:
+1. Validate l-space eligibility:
      match = lar-uri.match(/^lar:\/\/[^\/]*\/(\w+\.\w+\.\w+)\/(.+)$/)
      If no match → ineligible for loci. Emit: "loci requires a \w.\w.\w root segment"
      root     = match[1]   e.g. "ha.ka.ba" or "threshold.uncertain.opens"

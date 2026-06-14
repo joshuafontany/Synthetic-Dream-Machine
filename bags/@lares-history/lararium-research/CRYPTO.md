@@ -3,7 +3,7 @@
 uri-path     = "LARARIUM-NODE/CRYPTO"
 file-path = "packages/lares-core/memes/lararium-node/CRYPTO.md"
 type = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 confidence   = 19
 register     = "CS"
 manaoio      = 18

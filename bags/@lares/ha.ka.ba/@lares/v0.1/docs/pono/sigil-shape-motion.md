@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-shape-motion"
 ```

@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe composite-store.ts"
 source-file = "packages/lararium-mesh/src/composite-store.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/composite-store"
 ```

@@ -5,7 +5,7 @@
 uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/the-lar-names-itself"
 file-path = "wikis/lares-history/memes/history/lindwyrm/the-lar-names-itself.md"
 type = "text/x-memetic-wikitext"
-tagspace = "adjacent"
+l-space  = "adjacent"
 confidence = 14
 register = "S"
 manaoio = 14

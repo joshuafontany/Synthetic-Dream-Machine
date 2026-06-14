@@ -5,7 +5,7 @@
 uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node"
 file-path = "wikis/lares-history/memes/history/lindwyrm/kindling-of-the-crossroads-node.md"
 type = "text/x-memetic-wikitext"
-tagspace = "adjacent"
+l-space  = "adjacent"
 confidence = 15
 register = "CS"
 manaoio = 15

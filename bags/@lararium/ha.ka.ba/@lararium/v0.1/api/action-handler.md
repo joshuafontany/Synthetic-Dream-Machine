@@ -15,7 +15,7 @@ source-file = "packages/lararium-tw5/src/action-handler.ts"
 status      = "approved"
 status-date = "2026-06-01"
 tags      = ["api/residency-model"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/api/action-handler"
 ```

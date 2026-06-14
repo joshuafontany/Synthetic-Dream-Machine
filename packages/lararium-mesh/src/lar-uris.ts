@@ -11,7 +11,7 @@ export const STABLE_TAGSPACE = "ha.ka.ba";
 export const LAR_PREFIX = `lar:///${STABLE_TAGSPACE}/` as const;
 export const TAG_PREFIX = `${LAR_PREFIX}tags/` as const;
 
-// ── Volatile VM tagspace ───────────────────────────────────────────────────
+// ── Volatile VM l-space ───────────────────────────────────────────────────
 // Ha/domain=lararium · Ka/quality=local · Ba/dynamic=vm
 // Tiddlers here are scratch — never persisted through IslandAdaptor, never
 // synced via Automerge. Each vessel's admin VM owns its own volatile namespace.

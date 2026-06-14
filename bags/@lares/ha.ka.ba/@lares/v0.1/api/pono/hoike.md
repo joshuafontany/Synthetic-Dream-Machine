@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canon law of the hoike layer — kept records of contested rulings: hoike (\\testimony), kue (\\dissent), saksi (\\witness); the eight laws, the witness law, degraded states, lineage"
 status    = "draft"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hoike"
 ```

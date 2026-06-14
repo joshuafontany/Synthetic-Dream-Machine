@@ -12,7 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/save-path"
 ```

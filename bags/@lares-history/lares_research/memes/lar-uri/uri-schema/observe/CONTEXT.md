@@ -97,7 +97,7 @@ The following questions are `~:confidence[SP],[9]` – `~:confidence[S],[13]`. T
 | U1 | Operator alias in userinfo vs machine_id only? | Operator alias in userinfo | ~:confidence[S],[13] |
 | U2 | span_seq in crystal ledger only vs mirrored to MemPalace? | Mirror into sidecar | ~:confidence[S],[14] |
 | U4 | Chronometer interaction with `--parse` self-activation? | Provisional yes — depth increases p | ~:confidence[SP],[9] |
-| U5 | world_calendar_ref when no diegetic calendar yet? | Mint provisional tagspace reference | ~:confidence[S],[12] |
+| U5 | world_calendar_ref when no diegetic calendar yet? | Mint provisional l-space reference | ~:confidence[S],[12] |
 | U8 | Module section URIs: carry chronometer fragments or just confidence? | Confidence only | ~:confidence[S],[12] |
 | U9 | ITC stamps in fragment when MCP server arrives? | Calibration metadata — fragment stays human-readable | ~:confidence[S],[11] |
 | U10 | `chat-log:post-header` render target: all five stances, or active stances only? | **CLOSED 2026-04-10.** Resolution: all five stances always. Consistency with HUD invariant; amplitude provides readability gradation. Active stances use `+`/`++`; suppressed stances use `-`/`--`. Normative rule codified in `lares/modules/sigilization/decide/CONVENTIONS.md`. All story draft post headers corrected. | ~:confidence[CS],[17] |

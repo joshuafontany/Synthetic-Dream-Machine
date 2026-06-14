@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "extended docs: memetic-wikitext message routing — render-down (dataflow) and message-up (message) over the control DAG; lexical meme-scope; filter context binding"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/message-routing"
 ```

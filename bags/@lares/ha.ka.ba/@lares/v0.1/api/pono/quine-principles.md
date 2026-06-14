@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: quine principles P1-P4; TiddlyWiki vs Smalltalk comparison; if-it-CAN-live-in-the-wiki-it-MUST rule; IPLD bridge; Heleuma anchor system"
 status-date = "2026-05-02"
 tags      = ["api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/quine-principles"
 ```

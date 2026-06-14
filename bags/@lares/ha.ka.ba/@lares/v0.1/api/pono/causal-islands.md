@@ -16,7 +16,7 @@ role          = "invariant law: causal island doctrine — three structural axes
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
 status-date   = "2026-06-01"
 tags      = ["api/pono/invariant", "api/pono/orichalcum-capabilities", "api/pono/federated-causal-islands", "api/pono/alignment-layer"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/causal-islands"
 ```

@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo and tilts into a barrier"
 tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc"
 ```

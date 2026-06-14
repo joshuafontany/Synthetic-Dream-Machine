@@ -11,7 +11,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for OSR spell witness memes — cold provenance and conversion anchors"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/witness/powers/osr-spells"
 ```

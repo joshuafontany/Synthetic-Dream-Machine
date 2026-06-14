@@ -11,7 +11,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "UVG bestiary witness for Neural Whip — Cave Octopus provenance, cold-load"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip"
 ```

@@ -11,7 +11,7 @@ register  = "Canon"
 retain    = false
 role      = "discordian witness meme, Mal-2 reading locus, stance-plurality provenance shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious"
 ```

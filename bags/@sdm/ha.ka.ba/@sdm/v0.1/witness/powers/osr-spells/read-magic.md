@@ -11,7 +11,7 @@ manaoio   = 17
 register  = "Synthesis-Canon"
 retain    = true
 role      = "OSR spell witness for Read Magic — Basic/Expert/Rules-Cyclopedia provenance, cold-load"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/read-magic"
 ```

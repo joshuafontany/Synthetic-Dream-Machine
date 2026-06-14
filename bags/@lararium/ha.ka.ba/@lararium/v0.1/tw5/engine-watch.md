@@ -10,7 +10,7 @@ register    = "Synthesis"
 retain      = true
 role        = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself"
 source-file = "packages/lararium-tw5/src/engine-watch.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/engine-watch"
 ```

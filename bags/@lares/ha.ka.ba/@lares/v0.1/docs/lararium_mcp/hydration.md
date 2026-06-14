@@ -11,7 +11,7 @@ role            = "canonical hydration closure, edge taxonomy, artifact, resolve
 source-consumes = ["packages/lares-core/memes/docs/mcp/BOOT_LOCI_INVENTORY.md", "packages/lares-core/memes/docs/mcp/EDGE_TAXONOMY.md", "packages/lares-core/memes/docs/mcp/HYDRATION_ARTIFACT_CONTRACT.md"]
 status-date     = "2026-04-23"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace        = "stable"
+l-space         = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration"
 ```

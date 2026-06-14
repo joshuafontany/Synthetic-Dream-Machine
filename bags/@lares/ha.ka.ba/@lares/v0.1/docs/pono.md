@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for protocol reference, law-adjacent explanation, and stable operator guidance"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono"
 ```

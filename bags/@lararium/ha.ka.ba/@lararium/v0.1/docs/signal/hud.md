@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/hud"
 ```
@@ -44,7 +44,7 @@ Within this branch the HUD relates to its sibling SA surfaces:
 - **drift** — recovery when situational awareness degrades (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal/drift`)
 - **provenance** — the audit trail behind a reading (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal/provenance`)
 - **sa-display** — shared-SA theory and the SA-vs-XAI framing (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display`)
-- **tagspace** — the HAKABA address the HUD reads (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace`)
+- **l-space** — the HAKABA address the HUD reads (`lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space`)
 
 The instrument grammar itself stays in the pair; this room holds only the signal-branch relation.
 

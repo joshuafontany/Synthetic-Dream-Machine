@@ -12,7 +12,7 @@ manaoio   = 12
 register  = "Synthesis"
 retain    = true
 role      = "component (posture): Ritual — activation requires extended procedure and time, not an instant"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/posture/ritual"
 ```

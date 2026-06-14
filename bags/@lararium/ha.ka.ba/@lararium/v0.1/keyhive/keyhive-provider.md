@@ -11,7 +11,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "isomorphic keyhive ceremony provider: founding, device-admit, and apply-admit functions; three-gate identity lattice"
 source-file = "packages/lararium-keyhive/src/keyhive-provider.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider"
 ```

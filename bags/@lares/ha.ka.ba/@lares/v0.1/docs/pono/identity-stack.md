@@ -10,7 +10,7 @@ retain        = true
 revision-note = "minted 2026-06-07 — holds the lar: scheme's identity-addressing surfaces (who-speaks, distinct from bearing); provenance docs/pono/lar-uri §3.3.1"
 role          = "reference: the Elyncia/DreamDeck identity stack — DID / handle / lar: alias — the ActivityPub handle form, and the chat-log:post-header render target. The lar: scheme contributes the bearing these social surfaces project"
 tags      = ["api/pono/meme"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/identity-stack"
 ```

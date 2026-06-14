@@ -8,7 +8,7 @@
 uri-path     = "packages/AGENTS"
 file-path    = "packages/AGENTS.md"
 content-type = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 confidence   = 17
 register     = "CS"
 manaoio      = 16

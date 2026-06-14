@@ -8,7 +8,7 @@ mana      = 18
 register  = "Synthesis-Canon"
 retain    = true
 role      = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/parser"
 ```

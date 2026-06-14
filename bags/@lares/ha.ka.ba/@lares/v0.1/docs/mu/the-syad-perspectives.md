@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives"
 ```

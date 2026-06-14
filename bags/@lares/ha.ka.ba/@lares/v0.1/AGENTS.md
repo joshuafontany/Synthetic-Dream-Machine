@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "threshold constitution, operator-agent alignment membrane, boot router"
 tags      = ["api/pono/meme", "api/pono/invariant"]
-tagspace  = "adjacent"
+l-space   = "adjacent"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/AGENTS"
 ```

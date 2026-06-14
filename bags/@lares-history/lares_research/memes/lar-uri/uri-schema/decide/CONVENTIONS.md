@@ -203,7 +203,7 @@ lar:///threshold.uncertain.opens/
 
 No authority (empty), no query, no fragment. Invariant semantic coordinate — unchanging across events, sessions, and machines.
 
-Origin address: `lar:///ha.ka.ba/` is the (0,0,0) of tagspace.
+Origin address: `lar:///ha.ka.ba/` is the (0,0,0) of l-space.
 
 ---
 

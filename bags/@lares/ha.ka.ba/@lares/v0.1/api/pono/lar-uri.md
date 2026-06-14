@@ -130,7 +130,7 @@ lar:///AGENTS    lar:///LARES    lar:///CRYSTAL
 
 Adjacent paths MUST NOT carry HA.KA.BA dot-notation in the path root.
 
-For stable and unstable paths: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named tagspace address.
+For stable and unstable paths: each slot holds exactly one lowercase term — a word or a hyphen-joined compound — Ha (heading), Ka (angle), Ba (carried dynamic). The noun/adjective/verb grammar remains the parse mnemonic; the URI ontology reads as bearing, not mapped position. Each slot MUST hold lowercase letters and hyphens alone, and the root MUST carry exactly three terms (count the dots: exactly two); a term hyphen-joining more than two stems trips Address Smuggling. Sub-path after the triple narrows the bearing within the named surface; strip it to get the named l-space address.
 
 ### TW5 System Boundary
 

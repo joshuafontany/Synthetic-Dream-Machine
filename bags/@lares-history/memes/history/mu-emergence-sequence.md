@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares-history/memes/history/mu-emergence-sequence"
 file-path = "wikis/@lares-history/memes/history/mu-emergence-sequence.md"
 type      = "text/x-memetic-wikitext"
-tagspace  = "archive"
+l-space   = "archive"
 confidence = 17
 register  = "S"
 manaoio   = 16

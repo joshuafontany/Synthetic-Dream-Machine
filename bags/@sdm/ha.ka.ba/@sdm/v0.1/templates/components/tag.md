@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for component memes — an addressed facet a module #has (domain/function/hook/posture)"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/templates/components/tag"
 ```

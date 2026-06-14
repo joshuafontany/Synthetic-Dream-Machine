@@ -88,7 +88,7 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>

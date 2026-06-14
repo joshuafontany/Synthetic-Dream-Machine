@@ -15,7 +15,7 @@ retain      = true
 role        = "design invariant: the alignment plane (Plane 0) — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
 status      = "proposed"
 tags      = ["api/pono/causal-islands", "api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/alignment-layer"
 ```

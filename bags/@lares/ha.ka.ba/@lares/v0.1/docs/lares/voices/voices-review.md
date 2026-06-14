@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "closed extraction memo (witness) — three-layer voice-house migration complete 2026-04; all targets extracted"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "archive"
+l-space   = "archive"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/voices-review"
 ```

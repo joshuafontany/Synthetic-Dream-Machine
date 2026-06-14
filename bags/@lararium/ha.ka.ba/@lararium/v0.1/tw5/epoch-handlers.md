@@ -10,7 +10,7 @@ register    = "Synthesis"
 retain      = true
 role        = "bag-epoch + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
 source-file = "packages/lararium-tw5/src/epoch-handlers.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/epoch-handlers"
 ```

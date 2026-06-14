@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/hud"
 ```

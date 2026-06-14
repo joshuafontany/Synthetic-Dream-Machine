@@ -11,7 +11,7 @@ research-sources = ["Bazel depsets and Skyframe (Google 2024)", "Buck2 architect
 role             = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
 status-date      = "2026-04-24"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace         = "stable"
+l-space          = "stable"
 type             = "text/x-memetic-wikitext"
 uri-path         = "ha.ka.ba/@lares/v0.1/docs/graph"
 ```

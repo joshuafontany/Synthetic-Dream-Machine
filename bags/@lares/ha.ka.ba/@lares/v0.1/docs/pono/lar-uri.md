@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "canon documentation surface — full spec prose, examples, and appendices for the lar: URI scheme"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/lar-uri"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/lar-uri"
 ```
@@ -157,7 +157,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use th
 /ha.ka.ba/@lares/{optional/sub/path}[#anchor]
 ```
 
-This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace.
+This applies to authority-less forms as well: `lar:///ha.ka.ba/@lares/` names the stable attitude root of l-space.
 
 <<~/ahu >>
 
@@ -283,7 +283,7 @@ lar:///threshold.uncertain.opens/
 
 No authority (empty), no query, no fragment. This is the invariant semantic bearing — unchanging across events, sessions, and machines. Suitable as a named graph identifier (SPARQL: `?`).
 
-**Origin address:** `lar:///ha.ka.ba/@lares/` names the stable attitude root of tagspace — the root stable address from which HA.KA.BA bearings extend. Sub-path extensions narrow the bearing within the named surface: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri/` locates this document. The HA.KA.BA triple remains stable; the sub-path narrows scope.
+**Origin address:** `lar:///ha.ka.ba/@lares/` names the stable attitude root of l-space — the root stable address from which HA.KA.BA bearings extend. Sub-path extensions narrow the bearing within the named surface: `lar:///ha.ka.ba/@lares/v0.1/docs/pono/lar-uri/` locates this document. The HA.KA.BA triple remains stable; the sub-path narrows scope.
 
 **Comparison rule:** two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical. Query and fragment are excluded from comparison.
 

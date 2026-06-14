@@ -12,7 +12,7 @@ register    = "Synthesis-Canon"
 retain      = false
 role        = "adversarial witness stream with literal quotes for distributed failure, authz automation, websocket abuse cases, and formal verification corpus"
 status-date = "2026-05-25"
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing"
 ```

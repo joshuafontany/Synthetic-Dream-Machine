@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Item module: Porter's Pebble — a found stuckforce relic that holds the Floating Disc Power; first proof an item is an entity that #has a Power through the item mount-point (module nesting)"
 tags      = ["mount-points/item", "components/domain/stuckforce", "modules/powers/floating-disc"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble"
 ```

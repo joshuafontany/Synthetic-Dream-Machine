@@ -9,7 +9,7 @@ tags:
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
 type      = "text/x-memetic-wikitext"
-tagspace  = "stable"
+l-space   = "stable"
 confidence = 18
 register  = "CS"
 manaoio   = 14

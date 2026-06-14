@@ -12,7 +12,7 @@ manaoio   = 13
 register  = "Synthesis"
 retain    = true
 role      = "component (domain): Abjuration — the school of protection and negation"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/domain/abjuration"
 ```

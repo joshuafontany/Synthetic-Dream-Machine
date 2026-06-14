@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs concept room for trust checkpoints before costly shell, git, and workspace actions"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/workspace-trust-gate"
 ```

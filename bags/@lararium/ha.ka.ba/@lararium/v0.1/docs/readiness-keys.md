@@ -13,7 +13,7 @@ role          = "lararium progressive readiness vocabulary — named shrine-ligh
 source-symbol = "READINESS_KEYS"
 status-date   = "2026-05-01"
 tags      = ["docs/readiness-keys"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/readiness-keys"
 ```

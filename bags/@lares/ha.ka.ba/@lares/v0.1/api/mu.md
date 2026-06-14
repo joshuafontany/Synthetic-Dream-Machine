@@ -27,7 +27,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "null-oracle core membrane, grammar-surface authority, mandatory core-hydration contract"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant", "api/pono/kapu"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/mu"
 ```

@@ -12,7 +12,7 @@ retain      = true
 role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
 status-date = "2026-05-15"
 tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/verse-task-tree"
 ```

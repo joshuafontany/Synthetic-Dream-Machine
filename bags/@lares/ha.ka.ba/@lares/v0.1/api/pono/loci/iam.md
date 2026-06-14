@@ -99,7 +99,7 @@ These fields should stay ordered and dense:
 - `register`
 - `structure`
 
-Optional structural qualifiers may remain when they change routing or boot truth. `tagspace` counts as such a qualifier in the current corpus.
+Optional structural qualifiers may remain when they change routing or boot truth. `l-space` counts as such a qualifier in the current corpus.
 
 <<~/ahu >>
 

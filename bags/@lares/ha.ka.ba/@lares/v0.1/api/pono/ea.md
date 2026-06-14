@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "ontology invariant: ea — sovereignty, breath, life — the declaration pattern for any self-standing causal island group or node on the DreamNet"
 tags      = ["lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ea"
 ```

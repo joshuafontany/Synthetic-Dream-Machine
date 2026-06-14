@@ -10,7 +10,7 @@ register    = "Synthesis"
 retain      = true
 role        = "RecipeTiddler schema + bag-stack parsing — the stored shape of a wiki's composition record"
 source-file = "packages/lararium-mesh/src/recipe.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/recipe"
 ```

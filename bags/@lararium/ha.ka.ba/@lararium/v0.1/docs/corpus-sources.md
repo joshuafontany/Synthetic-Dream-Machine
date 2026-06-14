@@ -14,7 +14,7 @@ role          = "invariant registry: all corpus bag targets in the monorepo; eac
 source-symbol = "CORPUS_SOURCES"
 status-date   = "2026-04-30"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/corpus-sources"
 ```
@@ -68,7 +68,7 @@ note  = "infrastructure-as-myth corpus; quine-corpus; hydrates first"
 name  = "@lares/chapel-perilous-opens"
 path  = "packages/lares-chapel-perilous-opens/memes"
 bag   = "lares"
-note  = "unstable tagspace; three-segment tuple-root memes not yet stabilised; URI: lar:///{a.b.c}/**"
+note  = "unstable l-space; three-segment tuple-root memes not yet stabilised; URI: lar:///{a.b.c}/**"
 
 [[corpus]]
 name  = "@lararium/corpus-elyncia"
@@ -125,7 +125,7 @@ note     = "engine self-doc memes for @lararium/node TypeScript symbols"
 ```
 system bag    ← invariant TW5 boot corpus (read-only)
 lararium bag    ← TypeScript self-doc memes + compiled CJS tiddlers; URI: lar:///ha.ka.ba/@lararium/{pkg}/v{ver}/**
-lares bag     ← infrastructure-as-myth + chapel-perilous-opens unstable tagspace; quine-corpus; read at runtime by machinery
+lares bag     ← infrastructure-as-myth + chapel-perilous-opens unstable l-space; quine-corpus; read at runtime by machinery
 elyncia bag   ← setting content
 ftls bag      ← FTLS rules
 sdm bag       ← SDM core rules

@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/sigil-kind"
 ```

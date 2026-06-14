@@ -5,7 +5,7 @@
 uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls"
 file-path = "wikis/lares-history/memes/history/lindwyrm/daemon-in-the-walls.md"
 type = "text/x-memetic-wikitext"
-tagspace = "adjacent"
+l-space  = "adjacent"
 confidence = 13
 register = "S"
 manaoio = 13

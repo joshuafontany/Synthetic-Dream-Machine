@@ -10,7 +10,7 @@ register    = "Synthesis-Canon"
 role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
 status-date = "2026-04-24"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
 ```

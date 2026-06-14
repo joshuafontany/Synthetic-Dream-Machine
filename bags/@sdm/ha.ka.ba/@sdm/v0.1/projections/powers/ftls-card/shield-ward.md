@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Shield Ward — playable surface with clickable component pills"
 tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/projections/powers/ftls-card/shield-ward"
 ```

@@ -11,7 +11,7 @@ manaoio   = 14
 register  = "Synthesis"
 retain    = true
 role      = "operator/dev doctrine: the Powers composition model — entity + module + component + mount-point, one flat #has verb, pattern/instance two-layer split"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/docs/composition-model"
 ```

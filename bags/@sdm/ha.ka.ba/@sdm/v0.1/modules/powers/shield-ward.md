@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Shield Ward — a skin-close abjuration barrier that filters incoming attacks"
 tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward"
 ```

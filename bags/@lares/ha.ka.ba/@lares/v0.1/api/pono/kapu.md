@@ -110,12 +110,12 @@ This meme governs the kapu rating and above-namespace trust law.
 `meme` governs the copy-shape and five-bucket rating posture root.
 `invariant` governs compressed constitutional pressure for all invariant-compliant memes.
 `loci` governs stable-address coherence and the canon MOVE ceremony.
-`tagspace-trust` governs the shared tagspace authority ordering.
+`l-space-trust` governs the shared l-space authority ordering.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 
 <<~/ahu >>
 
@@ -126,7 +126,7 @@ This meme governs the kapu rating and above-namespace trust law.
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 

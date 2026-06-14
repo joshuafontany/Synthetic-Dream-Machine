@@ -12,7 +12,7 @@ retain      = true
 role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
 status-date = "2026-05-15"
 tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hoolele"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/hoolele"
 ```

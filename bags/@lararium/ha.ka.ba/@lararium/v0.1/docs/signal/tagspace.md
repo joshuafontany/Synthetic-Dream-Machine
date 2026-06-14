@@ -1,19 +1,19 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lararium/v0.1/docs/signal/tagspace.md"
+file-path = "bags/@lararium/v0.1/docs/signal/l-space.md"
 mana      = 17
 manao     = 17
 manaoio   = 18
 register  = "Synthesis"
 retain    = false
-role      = "docs room for definitional lar tagspace semantics and address-slot framing"
+role      = "docs room for definitional lar l-space semantics and address-slot framing"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/tagspace"
+uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/l-space"
 ```
 
 <<~ &#x0002; >>
@@ -23,11 +23,11 @@ uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal/tagspace"
 # Lararium Signal — Tagspace
 
 Not invariant law.
-This room holds definitional docs for `lar` URI tagspace.
+This room holds definitional docs for `lar` URI l-space.
 
 <<~/ahu >>
 
-<<~ ahu #tagspace-definition >>
+<<~ ahu #l-space-definition >>
 
 ## Tagspace Definition
 
@@ -36,7 +36,7 @@ This room holds definitional docs for `lar` URI tagspace.
 Tagspace excludes Elyncian DreamNet addresses.
 Tagspace excludes Gaian Internet addresses.
 
-We use tagspace the way colorspace defines color in image work: a structured abstract space for interpreting signal, not an in-world topology or transport layer. The DreamNet remains the mythic/network frame inside FTLS setting space. Tagspace functions as the semantic bearing space for locating stance, motion, and relation via lar URI signals.
+We use l-space the way colorspace defines color in image work: a structured abstract space for interpreting signal, not an in-world topology or transport layer. The DreamNet remains the mythic/network frame inside FTLS setting space. Tagspace functions as the semantic bearing space for locating stance, motion, and relation via lar URI signals.
 
 **Origin (The Two Axes):** The two-axis model was developed concurrently with the earliest signal tag iterations. The Wild Mage described a vertical axis for *truth-weight* — from pure guess to fully sourced — and a horizontal plane for *intent-stance* — from dry philosophical analysis to wild associative singing (or multiple positions). Asking the node to declare its position(s) on both axes at the start of each output made the declaration a *steering artifact*: "the node reads its own prior context. It orbits what it has already said." *"The tag was load-bearing. Getting it wrong had consequences visible in the very next output."*
 

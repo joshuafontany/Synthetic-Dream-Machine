@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for Lindwyrm, Elyncia, origin-story, and other narrative scaffolds that inform but do not govern the live stack"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/story"
 ```

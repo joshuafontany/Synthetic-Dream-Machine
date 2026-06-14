@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs concept room for named failure modes, collapse patterns, and diagnostic language in the recovered Lares stack"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/degraded-node-states"
 ```

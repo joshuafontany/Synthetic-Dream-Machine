@@ -9,7 +9,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser seam"
 source-file = "packages/lararium-tw5/src/tw5-browser-surface.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/tw5-browser-surface"
 ```

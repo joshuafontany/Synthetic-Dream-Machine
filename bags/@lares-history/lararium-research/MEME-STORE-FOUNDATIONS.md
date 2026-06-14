@@ -3,7 +3,7 @@
 uri-path     = "lararium-node/MEME-STORE-FOUNDATIONS"
 file-path = "packages/lares-core/memes/lararium-node/MEME-STORE-FOUNDATIONS.md"
 type = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 confidence   = 18
 register     = "CS"
 mana         = 17

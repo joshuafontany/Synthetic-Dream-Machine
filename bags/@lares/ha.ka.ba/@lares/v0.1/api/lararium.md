@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "canonical lararium seat, mechanics shelf, mandatory child-hydration bridge to session dials"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/lararium"
 ```
@@ -39,7 +39,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 ⏿ orient the seat: agent mechanics stay local, threshold law stays in AGENTS, session dials stay in LARES.
 ◇ decide hydration order: HUD, voices, continuity, then lararium law in sequence before yield.
 ▶ walk ownership edges; each child hydrates before yield continues.
-↺ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, tagspace-trust, exchange-vector); yield; the lararium does not accumulate state after handoff.
+↺ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, l-space-trust, exchange-vector); yield; the lararium does not accumulate state after handoff.
 
 <<~/ahu >>
 
@@ -51,7 +51,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/exchange-vector >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/templates/index >>
 

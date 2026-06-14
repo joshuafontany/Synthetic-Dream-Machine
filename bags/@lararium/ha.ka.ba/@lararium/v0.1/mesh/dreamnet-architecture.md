@@ -10,7 +10,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "DreamNet five-layer topology: vessel → personGroup → cabalGroup → nexusGroup → DreamNet"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture"
 ```

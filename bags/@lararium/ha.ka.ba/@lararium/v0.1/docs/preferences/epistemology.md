@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for epistemic residue, promotion planning, and the still-unsettled register/stance and degraded-weather material left after foundation-braid migration"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/preferences/epistemology"
 ```

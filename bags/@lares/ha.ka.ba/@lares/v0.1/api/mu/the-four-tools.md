@@ -14,7 +14,7 @@ retain        = true
 role          = "invariant pressure surface for Chapel Perilous weapon-carry and model agnostic return"
 source-symbol = "TOOLS TOOL_ASCII TOOL_FEED TOOL_APERTURE"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-four-tools"
 ```

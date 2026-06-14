@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: the wiki layer stack in OCI-aligned nouns — library layers / write layer / instance mounts; named⇒shareable vs typed-slot⇒owned; only the write layer crosses (motion rides ACTION verbs, never VCS verbs); writes flow through the layer's own wiki; recipe DAG; the wiki-as-bag quine; transitive closure held open"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology"
 ```

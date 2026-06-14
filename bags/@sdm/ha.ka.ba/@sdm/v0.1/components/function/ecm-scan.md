@@ -12,7 +12,7 @@ manaoio   = 13
 register  = "Synthesis"
 retain    = true
 role      = "component (function): ECM Scan — sensing and analyzing active Powers and noospheric signatures"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/function/ecm-scan"
 ```

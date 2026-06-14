@@ -780,7 +780,7 @@ Additional assumptions now bind this roadmap:
 - “Tiddler” is now acceptable when naming the TW5/Automerge store contract; `meme` remains the Lararium ontology term.
 - Hostful `lar:` URIs must preserve the ordered authority grammar `alias:grant@host`.
 - Trust tier and speaker tier remain distinct; `alias:grant@host` names who speaks, not whether the claim overrides law.
-- Live-session material enters the same tagspace as system files, but carries lower override authority than hostless invariant/control memes.
+- Live-session material enters the same l-space as system files, but carries lower override authority than hostless invariant/control memes.
 <<~/ahu >>
 
 <<~ ahu #repo-inventory-contract >>
@@ -1055,7 +1055,7 @@ This trust ordering should affect conflict handling, resolver diagnostics, and p
 
 ### Live Exchange Record Model
 
-Every exchange turn can be represented in the same tagspace as system files.
+Every exchange turn can be represented in the same l-space as system files.
 
 Minimum record fields:
 
@@ -1153,13 +1153,13 @@ AGENTS (threshold router only)
   │         └─owns─→ lararium (agent mechanics seat)
   │                   ├─owns─→ hud, voices, continuity
   │                   └─owns─→ live-session-overwrite, canon-boundary,
-  │                             tagspace-trust, exchange-vector   (lararium law)
+  │                             l-space-trust, exchange-vector   (lararium law)
   └─owns─→ LARES (operator dials — threshold yields directly)
 ```
 
 ### Rationale
 
-`AGENTS` is a threshold membrane, not an execution owner. Routing and yielding are its only jobs. `mu` is the living practice kernel — it owns every discipline and law meme the agent carries into execution. `lararium` is the agent mechanics seat; the four new pono invariant memes (`live-session-overwrite`, `canon-boundary`, `tagspace-trust`, `exchange-vector`) are lararium law, not kernel law, so they land under `lararium`. `LARES` stays at the threshold — operator dials are not the kernel's to own.
+`AGENTS` is a threshold membrane, not an execution owner. Routing and yielding are its only jobs. `mu` is the living practice kernel — it owns every discipline and law meme the agent carries into execution. `lararium` is the agent mechanics seat; the four new pono invariant memes (`live-session-overwrite`, `canon-boundary`, `l-space-trust`, `exchange-vector`) are lararium law, not kernel law, so they land under `lararium`. `LARES` stays at the threshold — operator dials are not the kernel's to own.
 
 The dead-weight `lararium → LARES` owns edge was removed. LARES is reached once, cleanly, from AGENTS.
 
@@ -1176,7 +1176,7 @@ The dead-weight `lararium → LARES` owns edge was removed. LARES is reached onc
 |---|---|
 | `lar:///ha.ka.ba/@lares/api/v0.1/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
 | `lar:///ha.ka.ba/@lares/api/v0.1/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
-| `lar:///ha.ka.ba/@lares/api/v0.1/lararium/tagspace-trust` | Shared `lar:` tagspace MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
+| `lar:///ha.ka.ba/@lares/api/v0.1/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
 | `lar:///ha.ka.ba/@lares/api/v0.1/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
 
 All four implement `meme`, `loci`, and `invariant` interfaces. All four appear in the minimal boot closure at depth 3 under lararium.

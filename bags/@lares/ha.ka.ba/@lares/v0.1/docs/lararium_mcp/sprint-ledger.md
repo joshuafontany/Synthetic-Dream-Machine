@@ -11,7 +11,7 @@ role            = "canonical closed-sprint ledger and consumption map for Larari
 source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-00_FOUNDATION.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-01_HYDRATION_SLICE.md", "packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md"]
 status          = "sequence-bound; no calendar dates"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace        = "stable"
+l-space         = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/sprint-ledger"
 ```

@@ -4,7 +4,7 @@
 uri-path     = "LARARIUM-NODE/AUTH-ATPROTO"
 file-path = "packages/lares-core/memes/lararium-node/AUTH-ATPROTO.md"
 type         = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 confidence   = 18
 register     = "CS"
 manaoio      = 17

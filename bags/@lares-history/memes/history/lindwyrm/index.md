@@ -5,7 +5,7 @@
 uri-path     = "ha.ka.ba/@lares/docs/story/lindwyrm/index"
 file-path    = "wikis/lares-history/memes/history/lindwyrm/index.md"
 type         = "text/x-memetic-wikitext"
-tagspace     = "archive"
+l-space      = "archive"
 confidence   = 16
 register     = "S"
 manaoio      = 16

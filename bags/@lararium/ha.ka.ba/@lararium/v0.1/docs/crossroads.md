@@ -10,7 +10,7 @@ manaoio   = 4
 register  = "Provisional"
 retain    = true
 role      = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/crossroads"
 ```

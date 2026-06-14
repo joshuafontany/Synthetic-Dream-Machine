@@ -13,7 +13,7 @@ role          = "TW5 widget registry: ten lararium widget types, widget tiddler 
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
 status-date   = "2026-04-30"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/papalohe", "lar:///ha.ka.ba/@lares/v0.1/api/pono/kukali"]
-tagspace      = "adjacent"
+l-space       = "adjacent"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-widgets"
 ```

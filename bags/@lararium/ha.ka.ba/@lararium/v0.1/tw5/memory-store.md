@@ -10,7 +10,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
 source-file = "packages/lararium-tw5/src/memory-store.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/memory-store"
 ```

@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "review memo for lararium signal branch boundaries, settlement pressure, and rewrite sequencing"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/docs/signal-review"
 ```
@@ -37,7 +37,7 @@ Primary review target:
 
 Child rooms under review:
 
-- `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace`
+- `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space`
 - `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud`
 - `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets`
 - `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display`
@@ -64,7 +64,7 @@ This memo does not attempt chronometer closure.
 | File | Current reading | Pressure level |
 |---|---|---|
 | `signal.md` | compact parent router | low |
-| `signal/tagspace.md` | compact definitional room | low |
+| `signal/l-space.md` | compact definitional room | low |
 | `signal/sa-display.md` | compact theory room | low-medium |
 | `signal/render-targets.md` | surface-law room with a few future-facing gaps | medium |
 | `signal/hud.md` | overloaded witness and residue room | high |
@@ -73,7 +73,7 @@ This memo does not attempt chronometer closure.
 ### Strong readings from the current corpus
 
 - `signal.md` already routes well and stays relatively lean.
-- `tagspace.md` keeps a clear definitional job.
+- `l-space.md` keeps a clear definitional job.
 - `sa-display.md` keeps theory pressure mostly contained.
 - `render-targets.md` owns per-surface rules, though a few target definitions still wait for later closure.
 - `hud.md` carries too many burdens at once: witness, migration residue, open decisions, field rules, symbol tables, and snapshot archaeology.
@@ -98,7 +98,7 @@ The branch already suggests a clean five-room split:
 | Room | Proper burden |
 |---|---|
 | `signal.md` | parent charter, exchange-boundary contract, routing |
-| `signal/tagspace.md` | address semantics and slot framing |
+| `signal/l-space.md` | address semantics and slot framing |
 | `signal/hud.md` | sigil panel, micro-trace, annotation thresholds, witness bundle kept to what still drives decisions |
 | `signal/render-targets.md` | surface registry, glyph projection, fallback behavior, per-surface rules |
 | `signal/sa-display.md` | theory, research framing, SA-vs-XAI distinction |
@@ -147,7 +147,7 @@ This review pass should produce:
 Read and decide in this order:
 
 1. `signal.md`
-2. `signal/tagspace.md`
+2. `signal/l-space.md`
 3. `signal/sa-display.md`
 4. `signal/render-targets.md`
 5. `signal/hud.md`
@@ -181,7 +181,7 @@ Use the following labels during the review:
 - [ ] separate settled HUD contract text from snapshot and archaeology text
 - [ ] mark every branch claim that depends on unresolved FFZ format or lifecycle work
 - [ ] keep `signal.md` lean; move surplus explanation downward rather than upward
-- [ ] keep `tagspace.md` definitional; avoid drift into transport, parsing, or chronometer detail
+- [ ] keep `l-space.md` definitional; avoid drift into transport, parsing, or chronometer detail
 - [ ] keep `sa-display.md` theory-facing; avoid operational duplication with `hud.md`
 - [ ] tighten `render-targets.md` around current surfaces; mark future targets clearly as future-facing
 - [ ] draft a reduced target outline for `hud.md` before any rewrite begins
@@ -191,7 +191,7 @@ Use the following labels during the review:
 ### Suggested rewrite order
 
 1. tighten `signal.md`
-2. tighten `signal/tagspace.md`
+2. tighten `signal/l-space.md`
 3. tighten `signal/sa-display.md`
 4. tighten `signal/render-targets.md`
 5. reduce and restructure `signal/hud.md`
@@ -226,7 +226,7 @@ The review pass can close when all of the following land:
 After this pass:
 
 - `signal.md` should remain short and directional
-- `tagspace.md` should remain compact
+- `l-space.md` should remain compact
 - `sa-display.md` should carry theory pressure cleanly
 - `render-targets.md` should carry surface rules cleanly
 - `hud.md` should shrink toward a more legible live room
@@ -245,7 +245,7 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/tagspace >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/l-space >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/hud >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/sa-display >>

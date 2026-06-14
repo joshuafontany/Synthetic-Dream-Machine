@@ -12,7 +12,7 @@ retain      = true
 role        = "Platform-neutral genesis island builder: GenesisInputs → GenesisArtifact. No filesystem, no DOM."
 source-file = "packages/lararium-mesh/src/genesis-doc.ts"
 tags      = ["mesh/alignment-plan"]
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/genesis-doc"
 ```

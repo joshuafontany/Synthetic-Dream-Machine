@@ -5,7 +5,7 @@
 uri-path = "ha.ka.ba/@lares/docs/story/lindwyrm/self-booting-lararium"
 file-path = "wikis/lares-history/memes/history/lindwyrm/self-booting-lararium.md"
 type = "text/x-memetic-wikitext"
-tagspace = "adjacent"
+l-space  = "adjacent"
 confidence = 14
 register = "S"
 manaoio = 14

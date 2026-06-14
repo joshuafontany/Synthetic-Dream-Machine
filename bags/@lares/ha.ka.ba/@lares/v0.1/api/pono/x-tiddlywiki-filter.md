@@ -57,7 +57,7 @@ tiddler). Filters work the same way; the labels change.
 | `tiddler` | meme (same thing — URI-addressed tiddler in the wiki store) |
 | `currentTiddler` | use `[self[]]` |
 | `all[tiddlers]` | `all[memes]` (or `all[tiddlers]` — both accepted) |
-| `is[system]` | `[toml:tagspace[system]]` preferred; `is[system]` accepted |
+| `is[system]` | `[toml:l-space[system]]` preferred; `is[system]` accepted |
 
 <<~/ahu >>
 
@@ -94,7 +94,7 @@ as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 
 ```text
 <<~ wai [tag[invariant]sort[title]] >>
-<<~ huli [toml:tagspace[grammar]] as item >>
+<<~ huli [toml:l-space[grammar]] as item >>
 <<~ ui [edge:family[control]role[has]] >>
 ```
 

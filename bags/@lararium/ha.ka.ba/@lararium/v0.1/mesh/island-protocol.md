@@ -11,7 +11,7 @@ revised-on    = "2026-06-12"
 revision-note = "ea-breath law lands: breath message (phase + monotonic progress) added island→vessel; watchdogs re-arm on breath, judge frozen evidence by stall budget, silence alone times out; mkBreath factory"
 role          = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
 source-file   = "packages/lararium-mesh/src/island-protocol.ts"
-tagspace      = "lararium"
+l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/island-protocol"
 ```

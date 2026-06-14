@@ -10,7 +10,7 @@ manaoio   = 17
 register  = "Synthesis"
 retain    = true
 role      = "Inventory of web2/singleton residue in the browser seam: classify, quarantine, migrate, or delete"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/browser/deletion-map"
 ```

@@ -8,7 +8,7 @@ mana      = 3
 register  = "Provisional"
 retain    = true
 role      = "self-documentation: TODO describe grammar-invariants.ts"
-tagspace  = "lararium"
+l-space   = "lararium"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/mesh/grammar-invariants"
 ```

@@ -3,7 +3,7 @@
 uri-path     = "ha.ka.ba/@lares/v0.1/README"
 file-path = "bags/@lares/README.md"
 type = "text/x-memetic-wikitext"
-tagspace     = "adjacent"
+l-space      = "adjacent"
 register     = "Synthesis-Canon"
 mana         = 17
 manao        = 16

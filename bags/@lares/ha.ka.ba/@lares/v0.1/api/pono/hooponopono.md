@@ -106,7 +106,7 @@ Boundary event fields:
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>

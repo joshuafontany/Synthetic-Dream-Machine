@@ -9,7 +9,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe cold-boot-ceremony.ts"
 source-file = "packages/lararium-tw5/src/cold-boot-ceremony.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/cold-boot-ceremony"
 ```

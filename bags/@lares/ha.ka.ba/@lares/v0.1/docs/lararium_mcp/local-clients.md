@@ -11,7 +11,7 @@ role            = "canonical local client exposure contract for Lararium MCP"
 source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-202_HYDRATION_PROMPTS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-203_PORTABILITY_TOOLS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-401_VSCODE_COPILOT.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-402_CLAUDE_CODE.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-403_CODEX.md"]
 status-date     = "2026-04-23"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace        = "stable"
+l-space         = "stable"
 type            = "text/x-memetic-wikitext"
 uri-path        = "ha.ka.ba/@lares/v0.1/docs/lararium_mcp/local-clients"
 ```

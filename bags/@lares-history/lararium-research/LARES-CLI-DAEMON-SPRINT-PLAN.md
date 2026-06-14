@@ -32,12 +32,12 @@ Examples:
 - hostless stable storage artifact: `lar:///ha.ka.ba/@lares/commands/promote/2026-05-18/...`
 - hostful live session artifact: `lar://node.alpha.local/ha.ka.ba/@sessions/live/...`
 
-### 4. tagspace law
+### 4. l-space law
 
-Lares keeps two root tagspaces, both following the what.three.words pattern:
+Lares keeps two root l-spaces, both following the what.three.words pattern:
 
-- `lar:///ha.ka.ba/*` for stable tagspace
-- `lar:///haWord.kaWord.baWord/*` for unstable tagspace
+- `lar:///ha.ka.ba/*` for stable l-space
+- `lar:///haWord.kaWord.baWord/*` for unstable l-space
 
 Each word participates in HA / KA / BA ontology measurement. Stable roots carry canonical contracts. Unstable roots carry hot experiments, session-local overlays, or volatile projections.
 

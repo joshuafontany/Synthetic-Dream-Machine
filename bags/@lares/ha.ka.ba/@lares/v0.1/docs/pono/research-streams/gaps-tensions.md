@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
 tags      = ["api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions"
 ```

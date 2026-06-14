@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/canon-boundary"
 ```
@@ -129,9 +129,9 @@ If the answers remain vague, the claim should stay as session pressure.
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>
 
 <<~/ahu >>

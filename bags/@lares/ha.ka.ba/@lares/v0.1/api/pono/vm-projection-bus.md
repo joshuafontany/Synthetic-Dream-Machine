@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: VmPool→Projection Messaging Standard; dispatchEvent/addEventListener pattern; TW5Engine.onVerseEvent design"
 status-date = "2026-05-02"
 tags      = ["api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/vm-projection-bus"
 ```

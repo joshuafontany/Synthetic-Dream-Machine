@@ -15,7 +15,7 @@ review-note    = "anchor commitments (Beer's principle, user-rights-criterion, L
 role           = "doctrine: protocols as political design — frames the Lares stack's architecture-vs-governance-vs-topology position relative to commons literature; three-source synthesis"
 sources        = ["https://connectedplaces.online/the-purpose-of-protocols/", "https://www.pfrazee.com/blog/practical-decentralization", "https://www.orionreed.com/posts/app-file-topology/"]
 tags      = ["api/pono/meme", "api/pono/invariant"]
-tagspace       = "stable"
+l-space        = "stable"
 type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/@lares/v0.1/docs/lares/the-lares-protocols"
 ```

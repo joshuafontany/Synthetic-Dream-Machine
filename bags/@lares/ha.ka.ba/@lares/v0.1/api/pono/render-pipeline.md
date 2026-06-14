@@ -13,7 +13,7 @@ retain        = true
 role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
 tags      = ["api/pono/meme", "api/pono/memetic-wikitext"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/render-pipeline"
 ```

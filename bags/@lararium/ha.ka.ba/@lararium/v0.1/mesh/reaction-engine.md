@@ -13,7 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical pipeline invariant: five-layer reactive architecture from CRDT patch to observable outcome — nalu, live-query, IslandMsg_Event, CRDT-as-distributed-promise"
 status-date = "2026-05-28"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"
 ```

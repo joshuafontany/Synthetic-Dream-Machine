@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA plan for creating the v0.1/api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices/masks-tree-plan"
 ```

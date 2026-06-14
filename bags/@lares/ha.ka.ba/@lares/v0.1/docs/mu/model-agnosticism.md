@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for Wilson/Korzybski model-agnosticism braid behind Mu-facing invariants"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/mu/model-agnosticism"
 ```

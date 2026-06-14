@@ -14,7 +14,7 @@ retain        = true
 role          = "syad reading invariant --- five naya standpoints licensing the saptabhaṅgī predications; stance-conditioned confidence law"
 source-symbol = "STANCES SYAD_7 STANCE_LICENSES SATIRIST_OPERATIONAL"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives"
 ```

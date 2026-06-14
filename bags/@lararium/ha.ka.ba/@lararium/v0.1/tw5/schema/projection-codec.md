@@ -13,7 +13,7 @@ retain      = true
 role        = "invariant law: carrier-codec as projection layer; import and export paths between disk carrier format and canonical LarTiddlerRecord entries"
 status-date = "2026-04-30"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
-tagspace    = "invariant"
+l-space     = "invariant"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/schema/projection-codec"
 ```

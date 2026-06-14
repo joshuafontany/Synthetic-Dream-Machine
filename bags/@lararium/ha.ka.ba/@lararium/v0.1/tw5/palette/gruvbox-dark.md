@@ -6,7 +6,7 @@ file-path = "bags/@lararium/v0.1/tw5/palette/gruvbox-dark.md"
 register  = "Synthesis"
 role      = "Gruvbox Dark color palette for TW5 theme engine"
 tags      = ["$:/tags/Palette"]
-tagspace  = "adjacent"
+l-space   = "adjacent"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/tw5/palette/gruvbox-dark"
 ```

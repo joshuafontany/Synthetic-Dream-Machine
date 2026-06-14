@@ -5,7 +5,7 @@
 uri-path  = "ha.ka.ba/@lares-history/memes/history"
 file-path = "wikis/@lares-history/memes/history/README.md"
 type      = "text/x-memetic-wikitext"
-tagspace  = "archive"
+l-space   = "archive"
 confidence = 18
 register  = "S"
 manaoio   = 17

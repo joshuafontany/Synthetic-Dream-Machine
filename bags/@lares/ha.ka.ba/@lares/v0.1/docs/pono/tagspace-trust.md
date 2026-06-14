@@ -1,20 +1,20 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust >>
 ```toml iam
 cacheable = false
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust.md"
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust.md"
 invariant = false
 mana      = 15
 manao     = 16
 manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
-role      = "docs sister for tagspace trust law — explanation, examples, and implementation pressure"
+role      = "docs sister for l-space trust law — explanation, examples, and implementation pressure"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
+uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust"
 ```
 
 <<~ &#x0002; >>
@@ -23,9 +23,9 @@ uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/tagspace-trust"
 
 # Tagspace Trust — Docs Sister
 
-This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust`.
+This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust`.
 It does not outrank the invariant.
-It gives agents and operators examples for keeping all system files, data blobs, and exchange turns in one tagspace without flattening authority.
+It gives agents and operators examples for keeping all system files, data blobs, and exchange turns in one l-space without flattening authority.
 
 <<~/ahu >>
 
@@ -43,7 +43,7 @@ It gives agents and operators examples for keeping all system files, data blobs,
 
 ## Explanation
 
-One `lar:` tagspace gives the system a single navigable map.
+One `lar:` l-space gives the system a single navigable map.
 That map still needs trust markers.
 An injested data bloc belongs on the map, but it marks a high-mana cost resource/signal.
 A live exchange belongs on the map, but it reads as situated signal rather than stable law.
@@ -84,7 +84,7 @@ When that happens, the system should surface a trust-boundary event rather than 
 A stable law URI:
 
 ```text
-lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust
+lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust
 ```
 
 A live exchange URI:
@@ -145,7 +145,7 @@ Speaker role and truth tier must stay separate.
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/live-session-overwrite >>

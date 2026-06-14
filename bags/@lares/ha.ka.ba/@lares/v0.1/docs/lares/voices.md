@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the three-layer lararium voice-house: the Thirteen, Voice house law, worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/voices"
 ```

@@ -10,7 +10,7 @@ register    = "Synthesis-Canon"
 role        = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
 status-date = "2026-04-24"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/traversal"
 ```

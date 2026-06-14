@@ -10,7 +10,7 @@ register    = "Synthesis"
 retain      = true
 role        = "recipe-watch — island-side LIVE composition reconcile; the composition class sheds its reboot"
 source-file = "packages/lararium-tw5/src/recipe-watch.ts"
-tagspace    = "lararium"
+l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/recipe-watch"
 ```

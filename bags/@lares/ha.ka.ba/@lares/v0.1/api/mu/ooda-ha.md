@@ -15,7 +15,7 @@ register              = "Synthesis-Canon"
 retain                = true
 role                  = "invariant OODA-HA loop law, loop-visibility Level, and the loop-spans-turns phase-yield grammar"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
-tagspace              = "stable"
+l-space               = "stable"
 type                  = "text/x-memetic-wikitext"
 uri-path              = "ha.ka.ba/@lares/v0.1/api/mu/ooda-ha"
 ```

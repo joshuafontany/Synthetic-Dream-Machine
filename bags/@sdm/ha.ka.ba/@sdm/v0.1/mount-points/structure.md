@@ -12,7 +12,7 @@ manaoio   = 6
 register  = "Provisional-Synthesis"
 retain    = true
 role      = "mount-point: Structure (Site) — Power bound to a place; absorbs the former Location class; mobility is a flat component"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/mount-points/structure"
 ```

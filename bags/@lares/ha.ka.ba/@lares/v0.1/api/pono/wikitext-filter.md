@@ -13,7 +13,7 @@ namespace   = "&#x2299;"
 register    = "SC"
 retain      = true
 role        = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
-tagspace    = "stable"
+l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/wikitext-filter"
 ```
@@ -38,7 +38,7 @@ for new authoring.
 | `##index` — DataTiddler JSON index | Legacy JSON-in-tiddler pattern; fragile, opaque | `[stack:has[X]]` — query worn components (the has-stack law) |
 | `+currentMeme` ambient variable | Dynamic scope leaks to siblings; modern systems reject ambient lookup | Explicit `meme` sigil context; or `[self[]]` for the carrier's own URI |
 | `currentTiddler` implicit | Same as above | `[self[]]` in filter expressions |
-| `is[system]` tiddler metaphysics | TW5-specific system namespace concept | `[toml:tagspace[system]]` — explicit tagspace query |
+| `is[system]` tiddler metaphysics | TW5-specific system namespace concept | `[toml:l-space[system]]` — explicit l-space query |
 
 **Preserved from TW5 filter** (all standard filter operators remain valid):
 `tag`, `title`, `field` (renamed — see below), `links`, `backlinks`, `all`, `each`,
@@ -58,7 +58,7 @@ Queries the `#iam` TOML block of each meme in the current result set.
 
 ```text
 [toml:confidence[18]]           memes whose confidence = 18
-[toml:tagspace[grammar]]        memes in the grammar tagspace
+[toml:l-space[grammar]]        memes in the grammar l-space
 [toml:register[SC]]             memes at SC register
 [toml:role[contains:kernel]]    memes whose role field contains "kernel"
 ```
@@ -150,7 +150,7 @@ each[key]       — one representative per unique TOML key value
 `!!field` → use `[toml:key[field]]`
 `##index` → use `[edge:family[X]role[Y]]`
 `currentTiddler` → use `[self[]]`
-`is[system]` → use `[toml:tagspace[system]]`
+`is[system]` → use `[toml:l-space[system]]`
 
 <<~/ahu >>
 
@@ -182,7 +182,7 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 # Inline (wai, huli, ui)
 <<~ wai [tag[invariant]sort[toml:title]] >>
 <<~ huli [edge:family[control]role[owns]] as item >>
-<<~ ui [toml:tagspace[grammar]] >>
+<<~ ui [toml:l-space[grammar]] >>
 
 # Block (hana with grammar-key)
 <<~ hana #work >>
@@ -216,7 +216,7 @@ Systematic find-replace for authors migrating TW5 content:
 | `##index-key` | `[edge:family[dataflow]role[index-key]]` or `[toml:key[index-key]]` |
 | `+currentMeme` | `[self[]]` |
 | `currentTiddler` | `[self[]]` |
-| `is[system]` | `[toml:tagspace[system]]` |
+| `is[system]` | `[toml:l-space[system]]` |
 | `all[tiddlers]` | `all[memes]` |
 
 <<~/ahu >>

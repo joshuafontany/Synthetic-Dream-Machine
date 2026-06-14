@@ -12,7 +12,7 @@ manaoio   = 13
 register  = "Synthesis"
 retain    = true
 role      = "component (hook): Attack — resolves against Defense rather than as a save"
-tagspace  = "sdm"
+l-space   = "sdm"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@sdm/v0.1/components/hook/attack"
 ```

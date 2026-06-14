@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Orichalcum capability profile — UCAN-compatible at wire boundary, Lararium-native semantic caveats; authority-gate law for wiki islands, edge islands, and canon MOVE"
 tags      = ["api/pono/invariant"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities"
 ```

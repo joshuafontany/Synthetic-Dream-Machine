@@ -14,7 +14,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
 tags      = ["api/pono/invariant", "api/pono/meme"]
-tagspace  = "stable"
+l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
 ```
@@ -111,7 +111,7 @@ desc  = "Presence behaves like weather. Memory MUST survive presence loss. Durab
 ## AUTHORITY Laws — carrier canon, residency actions, trust ladder
 
 Sources: lares/lararium-research/PRINCIPLES.md (Canon 20/20)
-         pono/tagspace-trust · pono/canon-boundary
+         pono/l-space-trust · pono/canon-boundary
 
 ```toml #AUTH_1_CARRIER_CANON_FIRST
 id    = "AUTH_1_CARRIER_CANON_FIRST"
@@ -349,7 +349,7 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/grammar-invariants >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/tagspace-trust >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity >>

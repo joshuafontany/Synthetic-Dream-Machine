@@ -17,7 +17,7 @@ revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; t
 role          = "load-bearing architectural invariant — ONE island-owned residency model: two-state ʻōlelo thermal axis wela/anu + orthogonal pin-flag; bag residency DERIVED from referencing islands"
 status        = "approved"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
-tagspace      = "stable"
+l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/api/residency-tiers"
 ```
