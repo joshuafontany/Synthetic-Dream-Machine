@@ -87,9 +87,6 @@ Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two resea
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-isomorphism >>
 
 <<~/ahu >>
