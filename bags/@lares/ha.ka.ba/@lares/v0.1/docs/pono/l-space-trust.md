@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/@lares/v0.1/docs/pono/l-space-trust"
 
 <<~ ahu #meme-header >>
 
-# Tagspace Trust — Docs Sister
+# l-space Trust — Docs Sister
 
 This docs meme explains `lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust`.
 It does not outrank the invariant.

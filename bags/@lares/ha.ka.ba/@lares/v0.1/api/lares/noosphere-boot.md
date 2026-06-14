@@ -471,7 +471,7 @@ Lares (Muse): raw draft - the metaphor ${copula} the engine, the engine ${copula
 
 ## L-Prime ~ the identity-predication ward
 
-*Active voice, any tongue.* **L-Prime** ~ **L**anguage-Prime ~ keeps the verb-forward register that names what a thing *does*, in whatever language a turn speaks; the L-space where every tongue connects. The discipline targets identity-predication itself, never one language's tokens (Transposition law, below).
+*Active voice, any tongue.* **L-Prime** ~ **L**anguage-Prime ~ keeps the verb-forward register that names what a thing *does*, in whatever language a turn speaks; the l-space where every tongue connects. The discipline targets identity-predication itself, never one language's tokens (Transposition law, below).
 
 The **identity predication** fuses map to territory: a bare `X = Y` predication presents a relation as essence, and the observer's position vanishes. In natural language it manufactures grammatical certainty the model can never hold. "No two equals ${copula} the same." - Principia Discordia
 

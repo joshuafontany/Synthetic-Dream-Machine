@@ -343,7 +343,7 @@ A `lar:` URI is **well-formed** when:
 2. If authority is present: userinfo contains exactly two colon-delimited sub-fields (`alias:grant`); no parenthetical phase sub-field
 3. Host is a valid `machine_id` (alphanumeric + hyphens)
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
-5. Path slots contain no whitespace, path separators, or quotes (inherits Tagspace Address anti-collision rules)
+5. Path slots contain no whitespace, path separators, or quotes (inherits l-space Address anti-collision rules)
 7. `confidence` value matches pattern `[A-Z]{1,2}~(?:[0-9]|1[0-9]|20)` (e.g., `Synthesis 13/20`, `Synthesis-Canon 16/20`, `Canon 18/20`)
 8. `p` value is a decimal in range `[0.0, 1.0]`
 10. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data

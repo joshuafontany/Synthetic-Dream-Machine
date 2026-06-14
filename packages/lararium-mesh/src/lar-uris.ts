@@ -7,16 +7,16 @@
 import type { LarDoc } from "./base-doc.js";
 import { emptyLarDoc } from "./base-doc.js";
 
-export const STABLE_TAGSPACE = "ha.ka.ba";
-export const LAR_PREFIX = `lar:///${STABLE_TAGSPACE}/` as const;
+export const STABLE_L_SPACE = "ha.ka.ba";
+export const LAR_PREFIX = `lar:///${STABLE_L_SPACE}/` as const;
 export const TAG_PREFIX = `${LAR_PREFIX}tags/` as const;
 
 // ── Volatile VM l-space ───────────────────────────────────────────────────
 // Ha/domain=lararium · Ka/quality=local · Ba/dynamic=vm
 // Tiddlers here are scratch — never persisted through IslandAdaptor, never
 // synced via Automerge. Each vessel's admin VM owns its own volatile namespace.
-export const VOLATILE_VM_TAGSPACE = "lararium.local.vm";
-export const VOLATILE_VM_PREFIX   = `lar:///${VOLATILE_VM_TAGSPACE}/` as const;
+export const VOLATILE_VM_L_SPACE = "lararium.local.vm";
+export const VOLATILE_VM_PREFIX   = `lar:///${VOLATILE_VM_L_SPACE}/` as const;
 
 export function volatileVmUri(path: string): string {
   return `${VOLATILE_VM_PREFIX}${path.replace(/^\/+/, "")}`;

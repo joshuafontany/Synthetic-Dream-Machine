@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/l-space-trust"
 
 <<~ ahu #head >>
 
-# Tagspace Trust Law
+# l-space Trust Law
 
 All system memes, imported data memes, and all exchange turns inhabit one `lar:` l-space.
 Shared addressability MUST NOT imply shared authority.
