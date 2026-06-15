@@ -40,7 +40,7 @@
 import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameSync } from "fs";
 import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
-import { contentHash, type SyncedTree } from "./synced-tree.js";
+import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri } from "@lararium/mesh";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
@@ -188,7 +188,7 @@ export class LarDiskProjector {
           this.writing.add(title);
           try { unlinkSync(candidate); } finally { this.writing.delete(title); }
         }
-        this.syncedTree?.delete(`${mirror.bagId}\0${title}`);   // the observation leaves with the file
+        this.syncedTree?.delete(syncedTreeKey(mirror.bagId, title));   // the observation leaves with the file
       } catch { /* best-effort — operator can clean up manually */ }
     }
   }
@@ -226,7 +226,7 @@ export class LarDiskProjector {
     const outputHash = contentHash(output);
     try {
       if (existsSync(candidate) && contentHash(readFileSync(candidate, "utf-8")) === outputHash) {
-        this.syncedTree?.set(`${bagId}\0${tiddlerUri}`, outputHash);
+        this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
         return;
       }
     } catch { /* unreadable existing file — fall through to the write */ }
@@ -239,7 +239,7 @@ export class LarDiskProjector {
       const tmp = `${candidate}.lar-tmp-${process.pid}`;
       writeFileSync(tmp, output, "utf-8");
       renameSync(tmp, candidate);
-      this.syncedTree?.set(`${bagId}\0${tiddlerUri}`, outputHash);
+      this.syncedTree?.set(syncedTreeKey(bagId, tiddlerUri), outputHash);
       if (this.debugJson && this._tw5) {
         const jsonStr = (this._tw5.$tw.wiki as { getTiddlerAsJson?: (t: string) => string })
           .getTiddlerAsJson?.(tiddlerUri);

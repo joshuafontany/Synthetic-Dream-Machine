@@ -23,6 +23,14 @@ export function contentHash(text: string): string {
   return createHash("sha256").update(text, "utf8").digest("hex");
 }
 
+/** The canonical Synced-tree key: bag-id + carrier-root URI, NUL-joined.
+ *  ONE source of truth — readers (ingest) and writers (projector) MUST call
+ *  this, never hand-build the key (a separator drift silently reads every
+ *  carrier as `new`; that bug cost the ingest-quiescence vectors 2026-06-15). */
+export function syncedTreeKey(bagId: string, uri: string): string {
+  return `${bagId}\0${uri}`;
+}
+
 export class SyncedTree {
   private map = new Map<string, string>();   // `${bagId}\0${carrier-root URI}` → sha256 of last-projected bytes (a carrier may project to multiple mirrors)
   private persistTimer: ReturnType<typeof setTimeout> | null = null;

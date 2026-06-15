@@ -78,10 +78,12 @@ describe("ingest quiescence — the composed loop holds still", () => {
   test("Q2 — a disk content edit converges in ONE cycle", async () => {
     if (lar.mode !== "staged") return;
     const before = readFileSync(projected, "utf8");
-    writeFileSync(projected, before.replace(
-      "# Entry - Lararium Cold Boot",
-      "# Entry - Lararium Cold Boot (quiescence-edit)",
-    ));
+    const edited = before.replace(
+      "# Entry ~ Lararium Boot",
+      "# Entry ~ Lararium Boot (quiescence-edit)",
+    );
+    expect(edited).not.toBe(before); // guard: heading drift must fail loud, not collapse to a no-op edit
+    writeFileSync(projected, edited);
 
     const r = await ingest(["--apply", "--yes"]);
     const d = r.json?.["data"] as Record<string, unknown>;
