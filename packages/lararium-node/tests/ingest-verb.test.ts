@@ -96,8 +96,9 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     const blockEnd   = source.indexOf("<<~/ahu >>", blockStart) + "<<~/ahu >>".length;
     expect(blockStart).toBeGreaterThan(0);
     const edited = (source.slice(0, blockStart) + source.slice(blockEnd))
-      .replace("# Entry - Lararium Cold Boot", "# Entry - Lararium Cold Boot (ingested)")
+      .replace("# Entry ~ Lararium Boot", "# Entry ~ Lararium Boot (ingested)")
       .replace(/\n{3,}/g, "\n\n");
+    expect(edited).toContain("(ingested)"); // guard: heading drift must fail loud, not collapse to noop
 
     const table = new VerbTable();
     registerActionReactors(table, { composite });
@@ -139,7 +140,8 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     await seedBoot(composite);
     const before = await liveGroup(composite);
 
-    const edited = source.replace("# Entry - Lararium Cold Boot", "# Entry - DISK EDIT");
+    const edited = source.replace("# Entry ~ Lararium Boot", "# Entry - DISK EDIT");
+    expect(edited).not.toBe(source);
     const table = new VerbTable();
     registerActionReactors(table, { composite });
     // syncedHash names a THIRD state: disk moved AND the merge seat moved.
