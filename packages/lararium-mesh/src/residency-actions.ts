@@ -149,16 +149,32 @@ export interface IngestCarrier {
   readonly syncedHash: string | null;
 }
 
+/** One vanished carrier riding an INGEST wave — a path gone from disk that the
+ *  Synced tree still projects. The watcher confirms it (grace window + scan)
+ *  before it rides; the gate splits the wave into renames vs tombstones. */
+export interface IngestDeletion {
+  /** The carrier-root lar: URI absent from disk, present in the Synced tree. */
+  readonly uri:        string;
+  /** Its last-projected canonical hash (the Synced tree value). */
+  readonly syncedHash: string;
+}
+
 /** INGEST — disk → records through the §6 gate, replace-by-group apply.
  *  LOAD lands unconditionally and never removes; INGEST decides (echo-noop ·
  *  refuse · canonical-equivalent · ingest · conflict) and tombstones group
- *  members that vanished from the re-parsed carrier. */
+ *  members that vanished from the re-parsed carrier. A wave MAY also carry
+ *  whole-carrier `deletions` (vanished files): the gate re-links unique
+ *  hash-matched renames and tombstones the rest, under a mass-delete brake. */
 export interface IngestAction extends ResidencyActionBase {
   readonly verb:      "INGEST";
   readonly sourceUri: string;
   readonly toBag:     string;
   readonly changeId:  string;
   readonly carriers:  readonly IngestCarrier[];
+  readonly deletions?: readonly IngestDeletion[];
+  /** Operator dial (0,1]: a wave whose tombstones exceed this fraction of the
+   *  bag's carriers SUSPENDS (mass-delete brake). Absent → island default. */
+  readonly massDeleteFraction?: number;
 }
 
 export type ResidencyAction =
@@ -237,6 +253,8 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
         "to-bag":     action.toBag,
         "change-id":  action.changeId,
         carriers:     action.carriers,
+        ...(action.deletions ? { deletions: action.deletions } : {}),
+        ...(action.massDeleteFraction !== undefined ? { massDeleteFraction: action.massDeleteFraction } : {}),
       };
   }
 }
@@ -283,20 +301,43 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
     const toBag     = str("to-bag");
     const changeId  = str("change-id");
     if (!sourceUri || !toBag || !changeId) return null;
-    const raw = args["carriers"];
-    if (!Array.isArray(raw) || raw.length === 0) return null;
     const carriers: IngestCarrier[] = [];
-    for (const c of raw) {
-      if (!c || typeof c !== "object") return null;
-      const o = c as Record<string, unknown>;
-      const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"];
-      if (typeof uri !== "string" || !uri) return null;
-      if (typeof text !== "string" || !text) return null;
-      if (typeof diskHash !== "string" || !diskHash) return null;
-      if (syncedHash !== null && typeof syncedHash !== "string") return null;
-      carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null });
+    const rawCarriers = args["carriers"];
+    if (rawCarriers !== undefined) {
+      if (!Array.isArray(rawCarriers)) return null;
+      for (const c of rawCarriers) {
+        if (!c || typeof c !== "object") return null;
+        const o = c as Record<string, unknown>;
+        const uri = o["uri"]; const text = o["text"]; const diskHash = o["diskHash"]; const syncedHash = o["syncedHash"];
+        if (typeof uri !== "string" || !uri) return null;
+        if (typeof text !== "string" || !text) return null;
+        if (typeof diskHash !== "string" || !diskHash) return null;
+        if (syncedHash !== null && typeof syncedHash !== "string") return null;
+        carriers.push({ uri, text, diskHash, syncedHash: syncedHash as string | null });
+      }
     }
-    return { ...base, verb: "INGEST", sourceUri, toBag, changeId, carriers };
+    const deletions: IngestDeletion[] = [];
+    const rawDeletions = args["deletions"];
+    if (rawDeletions !== undefined) {
+      if (!Array.isArray(rawDeletions)) return null;
+      for (const d of rawDeletions) {
+        if (!d || typeof d !== "object") return null;
+        const o = d as Record<string, unknown>;
+        const uri = o["uri"]; const syncedHash = o["syncedHash"];
+        if (typeof uri !== "string" || !uri) return null;
+        if (typeof syncedHash !== "string" || !syncedHash) return null;
+        deletions.push({ uri, syncedHash });
+      }
+    }
+    // A wave MUST carry at least one carrier or one deletion.
+    if (carriers.length === 0 && deletions.length === 0) return null;
+    const fracRaw = args["massDeleteFraction"];
+    const massDeleteFraction = typeof fracRaw === "number" && fracRaw > 0 && fracRaw <= 1 ? fracRaw : undefined;
+    return {
+      ...base, verb: "INGEST", sourceUri, toBag, changeId, carriers,
+      ...(deletions.length > 0 ? { deletions } : {}),
+      ...(massDeleteFraction !== undefined ? { massDeleteFraction } : {}),
+    };
   }
 
   // verb === "LOAD" — only ActionVerb left after the guards above.

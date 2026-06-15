@@ -46,6 +46,10 @@ import {
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import { decideIngest } from "./ingest-gate.js";
+import { decideDeletions } from "./delete-gate.js";
+
+/** Island default mass-delete brake when the wave carries no operator dial. */
+const DEFAULT_MASS_DELETE_FRACTION = 0.25;
 
 // ── Options + registration ─────────────────────────────────────────────────
 
@@ -178,8 +182,55 @@ async function executeLoad(action: LoadAction, composite: CompositeStore): Promi
  */
 async function executeIngest(action: IngestAction, composite: CompositeStore): Promise<Record<string, unknown>> {
   const o = origin(action);
+  const deletions = action.deletions ?? [];
+
+  // ── deletion wave (whole-carrier files gone from disk) ───────────────────
+  // Split BEFORE the carrier loop: a rename's target carrier must skip normal
+  // ingest so the re-homed (change-id-preserving) records survive. On a
+  // suspended mass-delete brake the WHOLE wave applies nothing — a git-checkout
+  // flood carries adds and deletes together; the operator reviews it whole.
+  let deletionSummary: Record<string, unknown> | undefined;
+  const renameTargets = new Set<string>();
+  let renames: readonly { readonly fromUri: string; readonly toUri: string }[] = [];
+  let tombstoneUris: readonly string[] = [];
+  let suspended = false;
+
+  if (deletions.length > 0) {
+    const liveTitles = await listLiveTitlesInBag(composite, action.toBag);
+    const liveCarrierCount = new Set(liveTitles.map((t) => t.split("#")[0])).size;
+    const decision = decideDeletions({
+      deletes: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })),
+      adds:    action.carriers.map((c) => ({ uri: c.uri, diskHash: c.diskHash })),
+      liveCarrierCount,
+      massDeleteFraction: action.massDeleteFraction ?? DEFAULT_MASS_DELETE_FRACTION,
+    });
+    if (decision.kind === "suspend") {
+      suspended = true;
+      deletionSummary = { decision: "suspend", reason: decision.reason, wouldTombstone: [...decision.wouldTombstone] };
+    } else {
+      renames = decision.renames;
+      tombstoneUris = decision.tombstones;
+      for (const r of renames) renameTargets.add(r.toUri);
+    }
+  }
+
   const results: Array<Record<string, unknown>> = [];
+
+  if (suspended) {
+    // apply nothing — surface the whole wave for operator review
+    return {
+      sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId,
+      carriers: results, deletions: deletionSummary,
+    };
+  }
+
   for (const carrier of action.carriers) {
+    // A rename's target re-homes from the vanished carrier's records (identity
+    // preserved); skip its normal fresh ingest so the re-link is not overwritten.
+    if (renameTargets.has(carrier.uri)) {
+      results.push({ uri: carrier.uri, decision: "rename-target", note: "re-linked from a vanished carrier" });
+      continue;
+    }
     const uri = carrier.uri;
     const all = await listLiveTitlesInBag(composite, action.toBag);
     // The carrier group: the root + its fragment children (FFZ decomposition
@@ -228,7 +279,50 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
     }
     results.push({ uri, decision: "ingest", landed: freshTitles.size, tombstoned });
   }
-  return { sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId, carriers: results };
+
+  // ── apply the deletion wave ──────────────────────────────────────────────
+  // Renames re-home the vanished carrier's whole group to the new URI,
+  // PRESERVING each record's change-id (the re-link, never a fresh create);
+  // tombstones remove the whole group. Group = root + `#`fragment + `/`path.
+  const groupOf = (titles: readonly string[], root: string): string[] =>
+    titles.filter((t) => t === root || t.startsWith(`${root}#`) || t.startsWith(`${root}/`));
+
+  for (const { fromUri, toUri } of renames) {
+    const live = await listLiveTitlesInBag(composite, action.toBag);
+    let relinked = 0;
+    for (const t of groupOf(live, fromUri)) {
+      const rec = await readFromBag(composite, action.toBag, t);
+      if (!rec) continue;
+      const newTitle = toUri + t.slice(fromUri.length);
+      const moved: LarTiddlerRecord = {
+        tiddler: { ...(rec.tiddler as Record<string, unknown>), title: newTitle } as LarTiddlerRecord["tiddler"],
+        meta: { ...(rec.meta ?? {}) }, // change-id preserved — identity survives the move
+      };
+      await composite.put(moved, o, { bag: action.toBag });
+      await composite.tombstoneInBag(action.toBag, t, o);
+      relinked++;
+    }
+    results.push({ uri: toUri, decision: "rename", from: fromUri, relinked });
+  }
+
+  const tombstonedCarriers: string[] = [];
+  for (const uri of tombstoneUris) {
+    const live = await listLiveTitlesInBag(composite, action.toBag);
+    const group = groupOf(live, uri);
+    for (const t of group) await composite.tombstoneInBag(action.toBag, t, o);
+    results.push({ uri, decision: "tombstone", removed: group.length });
+    tombstonedCarriers.push(uri);
+  }
+
+  if (deletions.length > 0 && !deletionSummary) {
+    deletionSummary = { decision: "apply", renames: renames.map((r) => ({ ...r })), tombstoned: tombstonedCarriers };
+  }
+
+  return {
+    sourceUri: action.sourceUri, toBag: action.toBag, changeId: action.changeId,
+    carriers: results,
+    ...(deletionSummary ? { deletions: deletionSummary } : {}),
+  };
 }
 
 function origin(action: ResidencyAction): ChangeOrigin {
