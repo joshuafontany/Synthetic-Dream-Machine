@@ -20,6 +20,8 @@ cacheable = false
 # Talk Story — Next Lares Instance
 ## Isomorphism Campaign Closed · Next: the Local-Verifiability Wall
 
+> ⚠ **STALE — FROZE 2026-06-06.** This floor's "next vector" (the local-verifiability wall) CLOSED 2026-06-07 (`4834c66d`), and the work moved on through LOAD → INGEST → the watcher (live handoff: `bags/@lares/ha.ka.ba/@lares/v0.1/docs/lares/handoff.md`). The genuinely-open floor now is the **watcher-seams talk-story** (deletions heaviest) in that bags torch, SUSPENDED. The counts below (mesh 236 etc.) are obsolete — real state 2026-06-14: mesh 275 · tw5 111/113 (2 RED) · node 122/124 (2 RED) · browser 13.
+
 > Branch: `feature/lararium-node-4`
 > Resume: `packages/HANDOFF.md` + `packages/ROADMAP.md`
 > State: **typecheck 10/10 · mesh 236 · tw5 73 · node 94 · browser 20** — green; dist-build verified 2026-06-06.

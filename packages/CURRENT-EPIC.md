@@ -1,5 +1,7 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
+> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/@lares/v0.1/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
+
 > Updated: 2026-05-27
 > Branch: feature/lararium-node-4
 > Sprints 0–5: ✅ Complete
