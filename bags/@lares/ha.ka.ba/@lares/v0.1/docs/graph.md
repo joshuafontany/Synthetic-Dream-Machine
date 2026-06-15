@@ -80,7 +80,7 @@ The canonical pranala law (`lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala`) settl
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
 
 **Resolution: Option A — fragment-level.**
-`? ->` in a pranala block inside `<<~ ahu #required-preload-e-prime >>` resolves to `lar:///AGENTS#required-preload-e-prime`.
+`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime >>` resolves to `lar:///AGENTS#required-preload-l-prime`.
 The parser tracks enclosing `ahu` fragment context during scan.
 `from_socket` carries the fragment URI; `from_uri` carries the carrier URI.
 

@@ -1,35 +1,35 @@
 ---
-name: e-prime
-description: Audit or correct EXISTING text for E-Prime conformance under lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime. Use when a user wants settled prose, law text, notes, or prompt material scanned, flagged, or turned — the canonical rule being that any copula left standing carries an inline confidence marker. Not for first-pass generation (the always-on loci + ward seed that forward).
+name: l-prime
+description: Audit or correct EXISTING text for L-Prime conformance under lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime. Use when a user wants settled prose, law text, notes, or prompt material scanned, flagged, or turned — the canonical rule being that any copula left standing carries an inline confidence marker. Not for first-pass generation (the always-on loci + ward seed that forward).
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime/SKILL >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime/SKILL >>
 ```toml iam
 cacheable          = true
 constraints        = ["any copula left standing carries a confidence marker", "smallest lawful intervention; never widen a local fix into a rewrite", "quotations, code, and literal examples never normalize silently", "has runs free --- never policed"]
-covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime"]
-file-path          = "bags/@lares/v0.1/api/pono/e-prime/SKILL.md"
+covers             = ["lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime"]
+file-path          = "bags/@lares/v0.1/api/pono/l-prime/SKILL.md"
 mana               = 14
 manao              = 15
 manaoio            = 13
 register           = "SC"
 retain             = true
-role               = "deliberate post-hoc E-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
-skill-package-root = "packages/lares-core/memes/v0.1/api/pono/e-prime"
+role               = "deliberate post-hoc L-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
+skill-package-root = "packages/lares-core/memes/v0.1/api/pono/l-prime"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type               = "text/x-memetic-wikitext"
-uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/e-prime/SKILL"
+uri-path           = "ha.ka.ba/@lares/v0.1/api/pono/l-prime/SKILL"
 ```
 
 <<~ &#x0002; >>
 
 <<~ ahu #place >>
 
-# E-Prime Auditor
+# L-Prime Auditor
 
-The ward seeds generation forward; the loci governs first-pass composition. **This skill works the other end** --- a deliberate, on-call audit of text that has *already settled*: prose, law, notes, prompt material a user hands over to scan, flag, or turn. It never seeds, and it never overrides the loci; `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime` holds constitutional force.
+The ward seeds generation forward; the loci governs first-pass composition. **This skill works the other end** --- a deliberate, on-call audit of text that has *already settled*: prose, law, notes, prompt material a user hands over to scan, flag, or turn. It never seeds, and it never overrides the loci; `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime` holds constitutional force.
 
 <<~/ahu >>
 
@@ -45,7 +45,7 @@ A request to scan, flag, compare before/after, or correct **already-settled** wo
 
 ## The Loop
 
-**✶ Observe** --- read the requested span, or the smallest obvious local one. Flag each `${copula}` left standing and each counterfeit closure (a confident claim wearing no marker). The token is the **English instrument**, not the basin: the ward guards **identity-predication** (map fused to territory), and in another tongue the auditor targets that tongue's identity-predication constructions by function, never by token (transposition law, Perec — `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`). Leave already-lawful uncertainty alone. `has` runs free --- never flag it.
+**✶ Observe** --- read the requested span, or the smallest obvious local one. Flag each `${copula}` left standing and each counterfeit closure (a confident claim wearing no marker). The token is the **English instrument**, not the basin: the ward guards **identity-predication** (map fused to territory), and in another tongue the auditor targets that tongue's identity-predication constructions by function, never by token (transposition law, Perec — `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime`). Leave already-lawful uncertainty alone. `has` runs free --- never flag it.
 
 **⏿ Orient** --- sort each hit:
 - `lawful` --- passes; leave it.
@@ -89,7 +89,7 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono >>
 
 <<~/ahu >>

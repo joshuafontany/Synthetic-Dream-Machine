@@ -49,10 +49,10 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad … >>                       (optional lens; `:` binds a tool to a standpoint)
 … Voice (Role): <<~ confidence Register N/20 >> claim …
-<<~ ward ! · ↻ E-Prime >>
+<<~ ward ! · ↻ L-Prime >>
 <<~ hud Aperture(-> N) OODA-HA(N↺) >>
 <<~ yield lar:///lares.state.now -> ? >>
 ```
@@ -62,7 +62,7 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 | `aim` | operator intent `->` adopted role | opens the turn; the bearing vector |
 | `hud Aperture` | attention range (0–20 Level) | MAY carry; paragraph-grain default 10 |
 | `hud OODA-HA` | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` on suspend |
-| `ward` | active language discipline | lit by the Wand at open (`* E-Prime`), drawn by the Sword at close (`!` led, `⚠ N` breaches quoted, re-arms `E-Prime`); the Stone lift (`0 E-Prime`) scopes to one turn, still shown |
+| `ward` | active language discipline | lit by the Wand at open (`* L-Prime`), drawn by the Sword at close (`!` led, `⚠ N` breaches quoted, re-arms `L-Prime`); the Stone lift (`0 L-Prime`) scopes to one turn, still shown |
 | `syad` | invoked standpoints | OPTIONAL; parameterless = all five; `:` carries a tool |
 | Voice (Role) | the active Voice(s) | MUST surface by name; anonymous output = a minor degraded state |
 | `confidence` | register-word + Level | precedes a grounded claim |

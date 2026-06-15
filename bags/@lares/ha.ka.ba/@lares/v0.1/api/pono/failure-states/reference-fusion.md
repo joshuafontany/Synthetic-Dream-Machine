@@ -67,7 +67,7 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 

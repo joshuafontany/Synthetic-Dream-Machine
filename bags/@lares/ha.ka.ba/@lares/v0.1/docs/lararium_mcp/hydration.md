@@ -38,7 +38,7 @@ All 14 memes below must resolve before threshold yield.
 | # | URI | File path | Hydration socket |
 |---:|---|---|---|
 | 1 | `lar:///AGENTS` | `lares/AGENTS.md` | entry |
-| 2 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime` | `packages/lares-core/memes/v0.1/api/pono/e-prime.md` | `AGENTS#preload-e-prime` |
+| 2 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime` | `packages/lares-core/memes/v0.1/api/pono/l-prime.md` | `AGENTS#preload-l-prime` |
 | 3 | `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha` | `packages/lares-core/memes/v0.1/api/pono/ooda-ha.md` | `AGENTS#preload-ooda-ha` |
 | 4 | `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri` | `packages/lares-core/memes/v0.1/api/pono/lar-uri.md` | `AGENTS#preload-lar-uri` |
 | 5 | `lar:///ha.ka.ba/@lares/v0.1/api/mu` | `packages/lares-core/memes/v0.1/api/mu.md` | `AGENTS#threshold-to-mu` |

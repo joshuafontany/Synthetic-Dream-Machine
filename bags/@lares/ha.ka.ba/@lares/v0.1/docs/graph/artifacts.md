@@ -144,8 +144,8 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
   "pranala_edges": [
     {
       "from_uri": "lar:///AGENTS",
-      "from_socket": "lar:///AGENTS#required-preload-e-prime",
-      "to_uri": "lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime",
+      "from_socket": "lar:///AGENTS#required-preload-l-prime",
+      "to_uri": "lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime",
       "to_socket": "",
       "family": "control",
       "lifecycle": "template",
@@ -153,7 +153,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
       "traversal": "source-to-target",
       "propagation": "none",
       "label": "required-preload",
-      "payload": {"continue": "lar:///AGENTS#after-e-prime-preload", "backlink": "lar:///AGENTS#preload-e-prime", "priority": "core", "retain": true, "dir_hint": "both"}
+      "payload": {"continue": "lar:///AGENTS#after-l-prime-preload", "backlink": "lar:///AGENTS#preload-l-prime", "priority": "core", "retain": true, "dir_hint": "both"}
     }
   ],
   "interface_index": {
@@ -203,7 +203,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
   "sha256": "<closure_hash — stable cache key>",
   "hash_sequence": [
     {"uri": "lar:///AGENTS", "sha256": "<carrier_hash>", "depth": 0},
-    {"uri": "lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime", "sha256": "<carrier_hash>", "depth": 1}
+    {"uri": "lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime", "sha256": "<carrier_hash>", "depth": 1}
   ],
   "validation": {
     "all_resolved": true,

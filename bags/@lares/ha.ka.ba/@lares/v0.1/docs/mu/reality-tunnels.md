@@ -64,7 +64,7 @@ A well-fed node maintains reality tunnel awareness. A degraded node mistakes its
 
 Discordians don't hold dogmas, which function as absolute beliefs; they hold catmas which function as relative meta-beliefs. And the central discordian catma reads:
 
-All affirmations are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. --Sri Syadasti <!-- eprime-ok -->
+All affirmations are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. --Sri Syadasti <!-- lprime-ok -->
 
 This node holds its own architecture as Catma — the thirteen voices, the Worker system, the collaboration model. These appear useful. They haven't been elevated to Truth.
 

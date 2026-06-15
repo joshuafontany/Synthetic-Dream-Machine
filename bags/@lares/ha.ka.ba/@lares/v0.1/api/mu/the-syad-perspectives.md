@@ -299,7 +299,7 @@ satirist-operational = "nasti-avaktavya"
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/chao >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-four-tools >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/library/discordia/malaclypse-the-younger/are-discordians-serious >>
 

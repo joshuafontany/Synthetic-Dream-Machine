@@ -152,7 +152,7 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 - **OODA-HA plans out loud before flow**; YIN passes after landing; burrs taken immediately ("no friction for later snags").
 - **Commits: ASK FIRST, every commit** — two parallel sessions share the tree (bags + packages). Subject line = the `lar:///three.term.root` URI; always explicit pathspecs (`git commit --only -- <paths>`); NEVER commit blind.
-- **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs MUST NOT name model operations. E-Prime in api/ and in your own prose. `ea` = breath, never "heartbeat"; nalu = the wave; web2 vocabulary reads as crud.
+- **Vocabulary law**: OCI nouns for structure, residency verbs for motion — VCS verbs MUST NOT name model operations. L-Prime in api/ and in your own prose. `ea` = breath, never "heartbeat"; nalu = the wave; web2 vocabulary reads as crud.
 - **Build-new-then-retire**; retired terms get reserved, not reused. Mechanism at choke-points, policy in cascades. Capability = manifest grant, never a cascade-settable flag.
 - The harness exists so witnesses repeat: prove changes with `pnpm test:e2e` against a staged vessel, never by assertion. Vector first, fix second; a failing vector NAMES a hole.
 

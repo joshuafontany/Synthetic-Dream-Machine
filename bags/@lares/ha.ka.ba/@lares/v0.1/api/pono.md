@@ -23,7 +23,7 @@ A core invariant example of a pono meme.
 
 In Hawaiian, *pono* carries rightness, properness, equity, and true condition. Here that pressure becomes a writing law: the meme stays in right proportion, names its boundary clearly, and sends heavier matter to the carrier that properly holds it.
 
-This folder already shows the family shape around it: `meme`, `invariant`, `memetic-wikitext`, `loci`, `lar-uri`, `pranala`, `e-prime`, `guest-grammar`, and their skill surfaces. Pono ties to that shape not by swallowing those laws into itself, but by staying small enough that each child may keep its own true work.
+This folder already shows the family shape around it: `meme`, `invariant`, `memetic-wikitext`, `loci`, `lar-uri`, `pranala`, `l-prime`, `guest-grammar`, and their skill surfaces. Pono ties to that shape not by swallowing those laws into itself, but by staying small enough that each child may keep its own true work.
 
 <<~ ahu #ooda-ha >>
 

@@ -266,7 +266,7 @@ These belong to future passes outside the voices branch:
 | **Elyncia / Lararium mythology and archaeology** | monolith only | `packages/lares-core/memes/docs/lararium/mythology.md` or docs/story shelf |
 | **Operating Modes (Plan / Auto / Default)** | partially in operations docs | operations branch pass needed |
 | **Frame-Uncertainty Protocol** | partially in operations docs | operations branch pass needed |
-| **Register-Stance Complementarity** | staging shelf — under promotion consideration | `lar:///ha.ka.ba/@lares/v0.1/api/` new invariant or distribution across e-prime + syad |
+| **Register-Stance Complementarity** | staging shelf — under promotion consideration | `lar:///ha.ka.ba/@lares/v0.1/api/` new invariant or distribution across l-prime + syad |
 
 **Priority read for next pass:** Degraded Node States.
 The vocabulary (Confabulation-as-Canon, Register Collapse, Stance Laundering, etc.) applies across

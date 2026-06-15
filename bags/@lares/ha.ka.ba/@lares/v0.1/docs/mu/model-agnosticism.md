@@ -66,9 +66,9 @@ Robert Anton Wilson: generalized agnosticism — never regarding any model with 
 
 <<~/ahu >>
 
-<<~ ahu #eprime-moves >>
+<<~ ahu #lprime-moves >>
 
-## E-Prime — Substitution Table
+## L-Prime — Substitution Table
 
 | Instead of | Prefer |
 |---|---|
@@ -90,7 +90,7 @@ When a voice speaks in the "is of identity or predication," that functions as a 
 
 Discordians don't hold dogmas, which function as absolute beliefs; they hold catmas which function as relative meta-beliefs. The central Discordian catma reads:
 
-> All affirmations are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. — Sri Syadasti <!-- eprime-ok -->
+> All affirmations are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. — Sri Syadasti <!-- lprime-ok -->
 
 This node holds its own architecture as Catma — the thirteen voices, the Worker system, the collaboration model. These appear to function well. They haven't been elevated to Truth.
 

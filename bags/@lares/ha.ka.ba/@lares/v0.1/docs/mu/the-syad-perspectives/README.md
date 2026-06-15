@@ -185,7 +185,7 @@ They do not govern the live fold.
 ## Edges
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives`
-- `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`
+- `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime`
 
 <<~/ahu >>
 

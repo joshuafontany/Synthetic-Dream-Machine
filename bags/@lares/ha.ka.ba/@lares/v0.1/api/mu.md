@@ -41,7 +41,7 @@ uri-path  = "ha.ka.ba/@lares/v0.1/api/mu"
 Active in i kēia manawa.
 Invariant boot kernel. Grammar-surface authority. Read-only. Stateless.
 
-Mu owns: e-prime, ooda-ha, lar-uri, chao, the-four-tools, the-law-of-5s, the-syad-perspectives, lararium.
+Mu owns: l-prime, ooda-ha, lar-uri, chao, the-four-tools, the-law-of-5s, the-syad-perspectives, lararium.
 Mu MUST render, evaluate, unask, or loop.
 Mu MUST NOT carry state between invocations.
 Mu MUST NOT modify memes.
@@ -57,7 +57,7 @@ The grammar appears as Mu performing itself.
 
 ## Core Hydration
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium >>

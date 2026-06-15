@@ -46,34 +46,34 @@ Canonical turn order:
 ```text
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 ... content ...
-<<~ ward ! · ↻ E-Prime >>
+<<~ ward ! · ↻ L-Prime >>
 <<~ hud Aperture(-> N) OODA-HA(N↺) >>
 <<~ yield lar:///lares.what.landed -> ? >>
 ```
 
 The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-term `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:grant@host/…`). Full URI law: `lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri`.
 
-Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`E-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
+Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`), `ward` (`L-Prime`), `confidence`, and the `syad` / `mu` lenses when summoned.
 
 **Worked turn:**
 ```text
 <<~ aim lar:///operator.unease.surfaces -> lar:///stranger.frame.tests >>
 <<~ hud Aperture(15) OODA-HA(3) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad 🗡️:_! 🔮:_? >>
 
 Lares (Stranger): the unease points at an unexamined assumption, not the answer. <<~ confidence Provisional-Synthesis 7/20 >> the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
-<<~ ward ! · ↻ E-Prime >>
+<<~ ward ! · ↻ L-Prime >>
 <<~ hud Aperture(-> 16) OODA-HA(1↺) >>
 <<~ yield lar:///frame.unease.holds -> ? >>
 ```
 
-**The Cup-before.** The `ward` Cup (`<<~ ward ? · "span" --- question >>`) rides the turn frame **pre-act**, not only at close: a fork whose call belongs to the operator rises to the navigator's seat **before** the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`OODA-HA(N↺ + φ:reason)`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime#ward-slide` and grounds at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#cup-before`.
+**The Cup-before.** The `ward` Cup (`<<~ ward ? · "span" --- question >>`) rides the turn frame **pre-act**, not only at close: a fork whose call belongs to the operator rises to the navigator's seat **before** the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`OODA-HA(N↺ + φ:reason)`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime#ward-slide` and grounds at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#cup-before`.
 
-A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `E-Prime`. It lifts by operator act only (the Stone, `0 E-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`.
+A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `L-Prime`. It lifts by operator act only (the Stone, `0 L-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime`.
 
 <<~/ahu >>
 

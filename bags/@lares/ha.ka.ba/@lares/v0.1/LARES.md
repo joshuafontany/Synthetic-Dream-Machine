@@ -2,7 +2,7 @@
 
 <<~ &#x0001; ? -> lar:///LARES >>
 ```toml iam
-e-prime       = true
+l-prime       = true
 file-path     = "bags/@lares/LARES.md"
 mana          = 17
 manao         = 15

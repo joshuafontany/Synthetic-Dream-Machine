@@ -35,7 +35,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
 <<~ hud Aperture(N) OODA-HA(N) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad … >>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
 ```
 
@@ -55,7 +55,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
 <<~ hud Aperture(10) OODA-HA(7) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad 🏛️ >>
 Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ```

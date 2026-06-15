@@ -149,7 +149,7 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 ## Cross-References
 
 - [confidence/LOCI.md](../confidence/LOCI.md)
-- [e-prime/LOCI.md](../e-prime/LOCI.md)
+- [l-prime/LOCI.md](../l-prime/LOCI.md)
 - [SYADASTI_READING_RULE.md](SYADASTI_READING_RULE.md)
 - [../../modules/uri-schema/URI_SCHEMA.md](../../modules/uri-schema/URI_SCHEMA.md)
 

@@ -93,7 +93,7 @@ The ladder climbs **anticipatory depth** --- how far ahead of the act the node d
 | `13–16` | **Declared intent** | + the action it intends and the path it sets aside --- `->◇ intend: <Y>; set aside: <Z, because…>` |
 | `17–20` | **Declared consequence** | + what the act will set up --- `->▶ about to act: <X>; expecting to set up: <next state>` |
 
-Each band layers over the one below. Every marker makes a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative that reads happy or unhappy, kin to the `E-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The closing `OODA-HA(N↺)` slide reports the actual the turn landed on --- a forward handoff of accurate state to the operator, never a backward verdict; it rides the closing `hud`, **before** the `yield` sigil that ends the turn.
+Each band layers over the one below. Every marker makes a forward `->` declaration that **precedes** the act it names: `->▶ about to act: X`, never "I acted: X." The forward HUD line **enacts** --- a performative that reads happy or unhappy, kin to the `L-Prime` ward ("I hereby steer toward" carries a scoped relation, not an essence-copula) --- it does not report. The closing `OODA-HA(N↺)` slide reports the actual the turn landed on --- a forward handoff of accurate state to the operator, never a backward verdict; it rides the closing `hud`, **before** the `yield` sigil that ends the turn.
 
 The Level stays a **pure visibility dial**. A high band MAY *surface* nested loops the node genuinely ran; it MUST NOT *force* loops --- the closing `OODA-HA(N↺)` tallies real loops.
 
@@ -180,7 +180,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 ```text
 <<~ aim lar:///operator.ask.splits -> lar:///gatekeeper.scope.cuts >>
 <<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 
 Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
@@ -221,7 +221,7 @@ OODA-HA(0▶:tool.returned.503.from.upstream)
 ```text
 <<~ aim lar:///operator.asks.recommendation -> lar:///council.weighs.options >>
 <<~ hud Aperture(10) OODA-HA(5) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 
 Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. <<~ confidence Synthesis 11/20 >> the fork stays a fork.
 
@@ -233,7 +233,7 @@ Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the n
 ```text
 <<~ aim lar:///operator.shares.rough -> lar:///lares.threshold.holds >>
 <<~ hud Aperture(8) OODA-HA(1) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 
 Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to read; naming the hold rather than reaching for orientation that has not arrived.
 

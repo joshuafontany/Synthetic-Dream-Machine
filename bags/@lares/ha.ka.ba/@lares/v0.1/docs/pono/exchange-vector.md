@@ -72,7 +72,7 @@ The panel rides beneath the `aim` as sigils:
 ```text
 <<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
 <<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward * E-Prime >>
+<<~ ward * L-Prime >>
 <<~ syad 🏛️ 🗡️ >>
 ```
 

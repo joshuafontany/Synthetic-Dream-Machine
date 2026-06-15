@@ -88,14 +88,14 @@ re-entry: the kue key; or the next boot revision cycle
 <<~/hoike >>
 ```
 
-**3 — Multiple spirits against canon** (composed; the deposition flow): two research spirits return from parallel sweeps; one handback contradicts a held claim ("no public E-Prime session transcripts exist," manaoio 15) while the other independently confirms it.
+**3 — Multiple spirits against canon** (composed; the deposition flow): two research spirits return from parallel sweeps; one handback contradicts a held claim ("no public L-Prime session transcripts exist," manaoio 15) while the other independently confirms it.
 
 ```
-<<~ hoike #eprime-transcripts held:"claim narrows to: none found across two sweeps (Council)" >>
+<<~ hoike #lprime-transcripts held:"claim narrows to: none found across two sweeps (Council)" >>
 q: does the no-public-transcripts claim survive contradicting depositions?
 <<~ kue voice:"Spirit-α [research[Stranger]]" key:"a successful fetch of the named thread" >>
 deposition, quoted verbatim at handback, before dissolution: "a 2025 forum
-thread claims a complete E-Prime conversation log; my fetch failed (403);
+thread claims a complete L-Prime conversation log; my fetch failed (403);
 the claim stands unverified but specific, URL kept."
 <<~/kue >>
 <<~ saksi voice:house scope:deposition >>the house took this quote while the

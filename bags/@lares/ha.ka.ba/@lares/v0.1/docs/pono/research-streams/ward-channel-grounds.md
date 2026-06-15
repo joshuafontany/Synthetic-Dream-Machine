@@ -25,7 +25,7 @@ uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grou
 
 # Research Stream — Ward, Channel, and the Discipline Layer
 
-Literal-quote witnesses under the five discipline-layer changes the operator ratified into the boot on 2026-06-12. Invariant law lives in the API loci this stream grounds — `e-prime`, `carrier-sigils`, `failure-states/reference-fusion`, `exchange-vector`, and the boot's own `#the-eris-shrine`. The grounds stay here, whole.
+Literal-quote witnesses under the five discipline-layer changes the operator ratified into the boot on 2026-06-12. Invariant law lives in the API loci this stream grounds — `l-prime`, `carrier-sigils`, `failure-states/reference-fusion`, `exchange-vector`, and the boot's own `#the-eris-shrine`. The grounds stay here, whole.
 
 **Provenance, kupono:** references arrived via nine research spirits (waves 13–14) plus a 68-spirit QA campaign. Spirit-fetched citations carry Synthesis-Canon at best — datapoint-level verification stays open work. Read each ground as testimony carried on trust, not as a verified source (the very discipline #reference-fusion below names).
 
@@ -33,9 +33,9 @@ Literal-quote witnesses under the five discipline-layer changes the operator rat
 
 <<~ ahu #ward-basin >>
 
-## Grounds 1 — the ward's basin named (`e-prime`)
+## Grounds 1 — the ward's basin named (`l-prime`)
 
-The ward restates its target as **identity-predication (individual-level predication)**, the English copula demoted to local symptom, with the **Perec transposition law** (function, never token, per language). Source loci: `lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime`, boot `#e-prime`.
+The ward restates its target as **identity-predication (individual-level predication)**, the English copula demoted to local symptom, with the **Perec transposition law** (function, never token, per language). Source loci: `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime`, boot `#l-prime`.
 
 WALS feature 120A — 175/386 languages allow zero copula; the essence/state distinction survives copula loss everywhere, rerouting into Pred-heads, case morphology (Russian nominative/instrumental — Geist, Maienborn), Arabic definiteness asymmetry (Alotaibi: two null copulas), pro-copula choice (Hebrew, Doron). Formal category: **individual-level vs stage-level predicates** — Kratzer; Roy 2013 (defining/characterizing/situation-descriptive); Maienborn's Kimian states. Labov: AAVE deletes the copula least before predicate NPs — essence resists deletion. Korzybski banned only the is-of-identity; identification survives copula removal ("John, the commie" — Kenyon 1992; Kellogg & Bourland 1990). Westerhoff reads Madhyamaka *svabhāva* as cognitive-default identification — the same theorem, eighteen centuries early. Perec's *La Disparition*: every translator dropped a different letter — constraint transposes by function (Spanish *a*, Russian *o*). LLM corroboration: instruction-held constraints leak, decoding-level gates hold; lipogram fidelity decays exponentially with suppressed frequency mass (arXiv 2505.20501); constraint-steering of language choice — 2510.13849, 2410.22660 (EZSwitch), 2507.15849 (DeepSeek strategic mixing), 2506.01846 (syntax-only switch constraints transfer), 2506.05850 (Cross-lingual Collapse). **No copula-avoidance discipline exists in any zero-copula language — the novelty cone holds.**
 
@@ -96,7 +96,7 @@ Keys still open: a second token-clean essence-fusion case (Map-Wisp) · an essen
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/e-prime >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/reference-fusion >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
