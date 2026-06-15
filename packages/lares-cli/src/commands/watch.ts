@@ -15,12 +15,16 @@
  * vessel connection across every wave of its life; the gesture re-opened one
  * per keystroke.
  *
- * Seams held open for talk-story (not yet committed here):
- *   - deletion → tombstone: deletes are quarantined and logged, never applied
- *     (a git checkout floods unlinks; §6 deletion grace window).
- *   - periodic full-scan backstop: events are hints, the scan is truth — a
- *     watch backend can die silently (the cookie self-test catches a dead one
- *     at boot; a live rescan cadence stays a design choice).
+ * Deletion (moʻolelo 2026-06-14): a vanished carrier enters a ~60s grace window
+ * (separate from the edit debounce); a transient delete (git checkout flood)
+ * self-heals when its path scans present again; a real delete rides the wave as
+ * a `deletions[]` entry once due, OR rides EARLY when a candidate add shares its
+ * synced-hash (a rename — the island re-links rather than tombstone+create).
+ * The island gate applies the mass-delete brake (`--delete-fraction`).
+ *
+ * OWED: the file-grain rolling backup (`.stversions`-style) belongs at the
+ * PROJECTOR (backup-on-write) — content is gone from disk by the time a delete
+ * is seen here. Tracked as a burr; the CRDT op-log covers recovery until epoch.
  *
  * Meme: lar:///ha.ka.ba/@lares/v0.1/docs/lares/handoff (NEXT VECTOR, build 4)
  */
@@ -31,10 +35,12 @@ import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
 import { connectAdminVessel, summaryOutput, type AdminVesselHandle } from "../admin-connector.js";
 import { larRoot, operatorDid } from "../env.js";
-import { openSyncedTree, scanFiles, candidatesOf, submitIngestOn } from "../ingest-core.js";
+import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngestOn, type PendingDeletion } from "../ingest-core.js";
 
 const DEFAULT_DEBOUNCE_MS = 400;   // twillm's field-tested trailing window
 const COOKIE_TIMEOUT_MS   = 2_000; // a live backend echoes our own write well under this
+const DEFAULT_DELETE_GRACE_MS = 60_000;     // Syncthing's delete-pairing window (moʻolelo 2026-06-14)
+const DEFAULT_MASS_DELETE_FRACTION = 0.25;  // tombstones above this fraction of the bag suspend
 
 /** Editor litter and our own projection sidecar never count as carrier events. */
 function isNoise(rel: string): boolean {
@@ -47,9 +53,11 @@ function isNoise(rel: string): boolean {
 }
 
 function printUsage(): void {
-  console.log("usage: lares watch --source <dir> --to <bagUri> [--apply] [--port N] [--debounce ms]");
+  console.log("usage: lares watch --source <dir> --to <bagUri> [--apply] [--port N] [--debounce ms] [--delete-grace ms] [--delete-fraction f]");
   console.log("  default = preview (logs what each settle WOULD ingest, submits nothing);");
-  console.log("  --apply submits each settled wave through the island's INGEST gate.");
+  console.log("  --apply submits each settled wave through the island's INGEST gate;");
+  console.log("  --delete-grace ms  hold a vanished carrier before tombstoning (default 60000);");
+  console.log("  --delete-fraction f  suspend a wave whose tombstones exceed f of the bag (default 0.25).");
 }
 
 export async function cmdWatch(args: ParsedArgs): Promise<number> {
@@ -60,6 +68,8 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
   const root      = larRoot();
   const apply     = Boolean(args.flags["apply"]);
   const debounceMs = args.options["debounce"] ? Number(args.options["debounce"]) : DEFAULT_DEBOUNCE_MS;
+  const deleteGraceMs = args.options["delete-grace"] ? Number(args.options["delete-grace"]) : DEFAULT_DELETE_GRACE_MS;
+  const massDeleteFraction = args.options["delete-fraction"] ? Number(args.options["delete-fraction"]) : DEFAULT_MASS_DELETE_FRACTION;
 
   // One vessel + one operator identity for the whole life of the watch (the
   // gesture re-opened these per keystroke; the daemon holds them open).
@@ -83,44 +93,73 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
 
   // ── the drain seat — one wave at a time (recipe-watch kick, disk-side) ──
   const buffer = new Set<string>();        // absolute carrier paths pending a wave
-  const quarantinedDeletes = new Set<string>(); // held, never applied (talk-story seam)
+  // Vanished carriers held in the grace window: a real delete waits for a
+  // possibly-lagging paired add (rename) before it tombstones; a transient
+  // delete (git checkout flood) self-heals when its path scans present again.
+  const pendingDeletes = new Map<string, { syncedHash: string; deadline: number }>();
   let busy  = false;
   let rerun = false;
   let timer: NodeJS.Timeout | null = null;
   let waveNo = 0;
 
   const drain = async (): Promise<void> => {
-    if (buffer.size === 0) return;
+    const now = Date.now();
     const files = [...buffer];
     buffer.clear();
 
     const tree = openSyncedTree(root);     // fresh read — the projection moves under us
     const { rows, skipped } = scanFiles(root, files, toBag, tree);
     const candidates = candidatesOf(rows);
-    const n = ++waveNo;
 
-    if (candidates.length === 0) {
-      console.log(`  wave ${n}: ${rows.length} touched · 0 changed (all match the Synced tree)`);
-      return;
+    // A pending delete whose path scanned present again has RETURNED — drop it
+    // (the transient-delete self-heal: a checkout that re-creates the file).
+    for (const r of rows) if (r.status !== "deleted" && pendingDeletes.has(r.uri)) pendingDeletes.delete(r.uri);
+    // Newly-vanished carriers enter the grace window; wake to flush at expiry.
+    for (const d of deletionsOf(rows)) {
+      if (!pendingDeletes.has(d.uri)) {
+        pendingDeletes.set(d.uri, { syncedHash: d.syncedHash, deadline: now + deleteGraceMs });
+        setTimeout(kick, deleteGraceMs + 50);
+      }
     }
 
+    // Which pending deletes ride THIS wave: DUE (grace expired) OR PAIRED (a
+    // candidate add shares its synced-hash — a rename; ride together so the
+    // island re-links rather than tombstone+create).
+    const addHashes = new Set(candidates.map((c) => c.diskHash));
+    const ride: PendingDeletion[] = [];
+    for (const [uri, p] of pendingDeletes) {
+      if (p.deadline <= now || addHashes.has(p.syncedHash)) ride.push({ uri, syncedHash: p.syncedHash });
+    }
+    for (const d of ride) pendingDeletes.delete(d.uri);
+
+    if (candidates.length === 0 && ride.length === 0) {
+      if (rows.length > 0) console.log(`  ${rows.length} touched · 0 changed (all match the Synced tree)`);
+      return;
+    }
+    const n = ++waveNo;
+
     if (!apply || !vessel) {
-      console.log(`  wave ${n} (preview): would submit ${candidates.length} of ${rows.length} touched`);
+      console.log(`  wave ${n} (preview): ${candidates.length} change(s), ${ride.length} deletion(s) of ${rows.length} touched`);
       for (const r of candidates) console.log(`    ${r.status.toUpperCase().padEnd(8)} ${r.uri}`);
+      for (const d of ride)       console.log(`    DELETE   ${d.uri}`);
       if (skipped.length) console.log(`    (${skipped.length} skipped — outside bags/ or unreadable)`);
       return;
     }
 
     try {
-      const result = await submitIngestOn(vessel, { source, toBag, candidates, did });
+      const result = await submitIngestOn(vessel, { source, toBag, candidates, did, deletions: ride, massDeleteFraction });
       if (result.status === "error") {
         console.error(`  wave ${n}: INGEST failed — ${result.errorMessage ?? "unknown"}`);
         return;
       }
       const summary  = summaryOutput(result) ?? {};
       const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
-      console.log(`  wave ${n}: ${candidates.length} submitted · audit lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
+      const del      = (summary as { deletions?: Record<string, unknown> })["deletions"];
+      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
       for (const c of carriers) console.log(`    ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}`);
+      if (del && (del as { decision?: string })["decision"] === "suspend") {
+        console.error(`    ⚠ mass-delete brake TRIPPED — ${String((del as { reason?: string })["reason"] ?? "")}; nothing applied, re-run to confirm.`);
+      }
     } catch (err) {
       console.error(`  wave ${n}: ${err instanceof Error ? err.message : String(err)}`);
     }
@@ -149,9 +188,9 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       const rel = filename.toString();
       if (isNoise(rel)) return;
       const abs = isAbsolute(rel) ? rel : join(source, rel);
-      // A 'rename' that no longer stat-resolves reads as a delete: quarantine,
-      // never apply (the talk-story seam). scanFiles already skips unreadable
-      // paths, so a stray delete in the buffer self-heals, but we log it.
+      // Every event is a hint; the drain's scan is truth (it classifies the
+      // path as add / unchanged / vanished). A vanished carrier enters the
+      // grace window there, not here.
       buffer.add(abs);
       scheduleDrain();
     });
@@ -186,7 +225,6 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
 
   if (vessel) await vessel.disconnect();
   console.log(`\nlares watch: stopped after ${waveNo} wave(s).`);
-  void quarantinedDeletes; // reserved for the deletion-tombstone seam
   return 0;
 }
 

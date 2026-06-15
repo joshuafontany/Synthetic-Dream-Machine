@@ -19,14 +19,21 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { newChangeId, taskContentId } from "@lararium/mesh";
-import { SyncedTree, contentHash, bagsFileToUri } from "@lararium/node";
+import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri } from "@lararium/node";
 import {
   submitVerb,
   type AdminVesselHandle,
   type SubmitResult,
 } from "./admin-connector.js";
 
-export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc";
+export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted";
+
+/** A vanished carrier the Synced tree still projects — rides an INGEST wave's
+ *  `deletions[]`; the island gate splits rename re-links from tombstones. */
+export interface PendingDeletion {
+  readonly uri:        string;
+  readonly syncedHash: string;
+}
 
 export interface ScanRow {
   readonly file:       string;
@@ -78,7 +85,15 @@ export function scanFiles(
     const uri = bagsFileToUri(root, file);
     if (!uri) { skipped.push(file); continue; }
     let text: string;
-    try { text = readFileSync(file, "utf8"); } catch { skipped.push(file); continue; }
+    try { text = readFileSync(file, "utf8"); } catch {
+      // A path gone from disk that the Synced tree still projects = a deletion
+      // candidate (the watcher feeds vanished paths; the grace window + the
+      // island gate confirm before any tombstone). An unknown gone path skips.
+      const goneSynced = tree.get(syncedTreeKey(toBag, uri));
+      if (goneSynced !== null) rows.push({ file, uri, text: "", diskHash: "", syncedHash: goneSynced, status: "deleted" });
+      else skipped.push(file);
+      continue;
+    }
     // The NFC membrane assertion (spec: memetic-wikitext #carrier-bytes) —
     // foreign bytes first walk in HERE; non-NFC refuses loudly, never enters.
     if (text !== text.normalize("NFC")) {
@@ -86,7 +101,7 @@ export function scanFiles(
       continue;
     }
     const diskHash   = contentHash(text);
-    const syncedHash = tree.get(`${toBag} ${uri}`);
+    const syncedHash = tree.get(syncedTreeKey(toBag, uri));
     const status: ScanStatus =
       syncedHash === null ? "new" : diskHash === syncedHash ? "unchanged" : "changed";
     rows.push({ file, uri, text, diskHash, syncedHash, status });
@@ -111,6 +126,13 @@ export function candidatesOf(rows: readonly ScanRow[]): ScanRow[] {
   return rows.filter((r) => r.status === "new" || r.status === "changed");
 }
 
+/** The vanished carriers in a scan — DELETED rows, as INGEST `deletions[]`. */
+export function deletionsOf(rows: readonly ScanRow[]): PendingDeletion[] {
+  return rows
+    .filter((r) => r.status === "deleted" && r.syncedHash !== null)
+    .map((r) => ({ uri: r.uri, syncedHash: r.syncedHash as string }));
+}
+
 export interface SubmitIngestOpts {
   readonly source:    string;
   readonly toBag:     string;
@@ -118,6 +140,10 @@ export interface SubmitIngestOpts {
   readonly did:       string;
   /** Omit for a fresh change-id; pass one to thread a known id. */
   readonly changeId?: string;
+  /** Vanished carriers riding the same wave (rename re-link or tombstone). */
+  readonly deletions?: readonly PendingDeletion[];
+  /** Operator mass-delete brake dial (0,1]; omitted → island default. */
+  readonly massDeleteFraction?: number;
 }
 
 /**
@@ -133,6 +159,7 @@ export async function submitIngestOn(
   opts:   SubmitIngestOpts,
 ): Promise<SubmitResult> {
   const changeId = opts.changeId ?? newChangeId();
+  const deletions = opts.deletions ?? [];
   const actionArgs: Record<string, unknown> = {
     "source-uri": opts.source,
     "to-bag":     opts.toBag,
@@ -140,8 +167,10 @@ export async function submitIngestOn(
     carriers: opts.candidates.map((r) => ({
       uri: r.uri, text: r.text, diskHash: r.diskHash, syncedHash: r.syncedHash,
     })),
+    ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
+    ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),
   };
   const requestId = await taskContentId({ subject: opts.toBag, command: "INGEST", args: actionArgs, nonce: "" });
-  const timeoutMs = Math.max(10_000, 10_000 + opts.candidates.length * 400);
+  const timeoutMs = Math.max(10_000, 10_000 + (opts.candidates.length + deletions.length) * 400);
   return await submitVerb(vessel, "INGEST", actionArgs, opts.did, { requestId, timeoutMs });
 }
