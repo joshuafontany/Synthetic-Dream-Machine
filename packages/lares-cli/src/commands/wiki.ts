@@ -49,6 +49,7 @@ export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
       slug: string;
       uri: string;
       automergeUrl: string | null;
+      kind?: string;
     }>;
     console.log("");
     if (wikis.length === 0) {
@@ -59,7 +60,8 @@ export async function cmdWikiList(_args: ParsedArgs): Promise<number> {
     console.log(`wikis (${wikis.length}):`);
     for (const w of wikis) {
       const url = w.automergeUrl ? w.automergeUrl.slice(0, 40) + "…" : "(no doc)";
-      console.log(`  ${w.slug.padEnd(20)} ${w.uri}`);
+      const tag = w.kind ? ` [${w.kind}]` : "";
+      console.log(`  ${w.slug.padEnd(20)}${tag} ${w.uri}`);
       console.log(`    ↳ ${url}`);
     }
     console.log("");

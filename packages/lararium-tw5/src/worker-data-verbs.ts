@@ -14,7 +14,7 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarDoc, type LarTiddlerRecord, type Repo } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, wikiBagUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarDoc, type LarTiddlerRecord, type Repo } from "@lararium/mesh";
 import { ACTIVE_WIKI_URI } from "./active-wiki.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeCatalogAccessor, type CatalogAccessor } from "./catalog-accessor.js";
@@ -114,17 +114,31 @@ export function makeResolveReactor(composite: CompositeStore): VerbReactor {
 /** `list-wikis` — enumerate the wikis registered in the catalog (oracle tiddlers).
  *  Reads @catalog via the accessor (access≠load) — the registry is NOT a loaded
  *  composite layer, so the old composite.listVisible() read returned nothing. */
-export function makeListWikisReactor(catalog: CatalogAccessor): VerbReactor {
+export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: CatalogAccessor): VerbReactor {
   return async () => {
+    const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null; kind: string }> = [];
+    // User wikis — @catalog WIKI_PREFIX oracle pointers.
     const cat = await catalog.handle();
-    const tiddlers = (cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>;
-    const wikis: Array<{ slug: string; uri: string; automergeUrl: string | null }> = [];
-    for (const [title, rec] of Object.entries(tiddlers)) {
+    for (const [title, rec] of Object.entries((cat.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {
       if (!title.startsWith(WIKI_PREFIX)) continue;
       if (rec.meta?.deleted) continue;               // skip tombstones (listVisible parity)
       const tail = title.slice(WIKI_PREFIX.length);
       if (tail.includes("/")) continue;
-      wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec) });
+      wikis.push({ slug: tail, uri: title, automergeUrl: tiddlerText(rec), kind: "user" });
+    }
+    // System wikis — @oracle recipes (the @lares/@lararium quine system bags; two-plane
+    // ruling 2026-06-16). Their recipe lives in @oracle, the wiki bag IS the @ bag.
+    if (sysPlane) {
+      const sys = await sysPlane.handle();
+      const recipePrefix = recipeUri("@oracle", "");
+      for (const [title, rec] of Object.entries((sys.doc()?.tiddlers ?? {}) as Record<string, LarTiddlerRecord>)) {
+        if (!title.startsWith(recipePrefix)) continue;
+        if (rec.meta?.deleted) continue;
+        const slug = title.slice(recipePrefix.length);
+        if (!slug || slug.includes("/")) continue;
+        const bagUri = wikiBagUri(slug);
+        wikis.push({ slug, uri: bagUri, automergeUrl: await sysPlane.urlOf(bagUri), kind: "system" });
+      }
     }
     return { wikis };
   };

@@ -78,6 +78,9 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       // draft keys never drift.
       if (ctx.catalogUrl) {
         const catalog = makeCatalogAccessor(ctx.repo, ctx.catalogUrl);
+        // System plane (@oracle) accessor — list-wikis reads system wiki-recipes
+        // (@lares/@lararium) from here, user recipes from @catalog (two-plane, 2026-06-16).
+        const sysPlane = ctx.oracleUrl ? makeCatalogAccessor(ctx.repo, ctx.oracleUrl) : undefined;
         const wikiMintOpts = {
           composite:   ctx.composite,
           repo:        ctx.repo,
@@ -88,7 +91,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog, post: ctx.post }));
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
-        registry.register("list-wikis",  makeListWikisReactor(catalog));
+        registry.register("list-wikis",  makeListWikisReactor(catalog, sysPlane));
         // Whole-wiki residency policy — read the @catalog recipe, command main's manager
         // per bag via admin:residency-op. Pure policy, no live-layer mechanism.
         registry.register("pin-wiki",      makeWikiPinReactor(catalog, ctx.post));
