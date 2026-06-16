@@ -49,7 +49,7 @@ function compareVersions(a: string, b: string): number {
  * island carries no @lararium slot (e.g. bare test recipes).
  */
 export function startEngineWatch(ctx: IslandContext): (() => void) | undefined {
-  const handle = ctx.handles.get(BAG_IDS.lararium) as DocHandle<LarDoc> | undefined;
+  const handle = ctx.handles.get(BAG_IDS.oracle) as DocHandle<LarDoc> | undefined;
   if (!handle) return undefined;
 
   let lastAlertedSha: string | null = null;

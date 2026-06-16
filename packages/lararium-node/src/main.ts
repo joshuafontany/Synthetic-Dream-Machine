@@ -102,9 +102,10 @@ async function main(): Promise<void> {
   }
   console.log(`[lararium] live — wiki: ${result.activeWikiId} | storage: ${storageDir} | root: ${rootDir}`);
   console.log(`[lararium] catalog:  ${result.catalogHandleUrl ?? "(none)"}`);
+  console.log(`[lararium] oracle:   ${result.oracleDocUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
   console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);
-  console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.larariumDocUrl ?? result.catalogHandleUrl ?? ""}`);
+  console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
   const shutdown = () => {
     console.log("[lararium] shutting down");

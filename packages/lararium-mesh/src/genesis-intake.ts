@@ -19,12 +19,12 @@ import { load as automergeLoad } from "@automerge/automerge";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, ENGINE_CORE_ID } from "./base-doc.js";
 import {
-  LARARIUM_DOC_URI,
+  ORACLE_DOC_URI,
   LARES_MEMETIC_WIKITEXT_PLUGIN_URI,
 } from "./lar-uris.js";
 
 /** The oracle tiddler recording which genesis CID a live island doc carries. */
-export const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
+export const GENESIS_CID_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid`;
 
 /**
  * Validate genesis bytes before any import: Automerge format, TW5 core blob,

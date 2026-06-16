@@ -21,12 +21,18 @@ uri-path    = "ha.ka.ba/@lararium/v0.1/tw5/recipe-watch"
 
 ## Contract
 
-`startRecipeWatch(ctx)` subscribes the island to the `@catalog` registry doc
+`startRecipeWatch(ctx)` subscribes the island to its registry plane
 (access≠load — watched, never rendered as a layer), reads the island's own
-recipe record (`recipeUri("@catalog", slug)`, field `bag-stack`), and applies
-the diff to the island's own composite:
+recipe record (field `bag-stack`), and applies the diff to the island's own
+composite. The recipe + bag-oracle reach run **two-source** (operator ruling,
+2026-06-16, `wiki-layer-ontology#oracle-planes`): a **system** wiki
+(`@lares`/`@lararium`) reads its recipe from the **`@oracle`** doc
+(`recipeUri("@oracle", slug)`) and resolves system bags from `@oracle`; a
+**user** wiki reads `recipeUri("@catalog", slug)` and resolves user bags from
+`@catalog`. *(Code reads single-source `@catalog` today; the plane split is
+ruled, enactment tracked at the live handoff torch.)*
 
-- **bag added** → resolve via the catalog oracle, insert the layer above
+- **bag added** → resolve via the owning plane's oracle, insert the layer above
   `@lares` (library position, below the wiki bag), replay its content into
   the running wiki.
 - **bag removed** → `CompositeStore.removeLayerLive`: departed titles
@@ -58,9 +64,12 @@ resolves to nothing gets skipped — the admin's alert stays standing until the
 oracle lands or the operator reboots.
 
 **RW-4 — Structural slots stay structural.** Membership reconcile touches
-library bags only; `@temp`/`@draft`/`@personal`/wiki/`@lares`/`@lararium`
-never mount or unmount by stack diff. Oracle-move swaps apply to any mounted
-CRDT slot the catalog oracles.
+library bags only; `@temp`/`@draft`/`@personal`/wiki/`@lares`/`@oracle`
+never mount or unmount by stack diff (the structural set in code —
+`ORACLE_BAG` is the floor since the 2026-06-16 carve). `@lararium` is **not**
+structural: it mounts as a **library layer** (above `@lares`), so the corpus
+composes into a recipe that names it. Oracle-move swaps apply to any mounted
+CRDT slot the oracles point at.
 
 <<~/ahu >>
 

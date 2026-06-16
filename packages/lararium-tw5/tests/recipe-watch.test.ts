@@ -3,7 +3,7 @@ import {
   CompositeStore,
   TEMP_BAG,
   LARES_BAG,
-  LARARIUM_BAG,
+  ORACLE_BAG,
   wikiBagUri,
   recipeUri,
   type DocHandle,
@@ -68,7 +68,9 @@ function harness(opts: { stack: string[]; libMounted?: boolean; libTiddlers?: Ti
 
   const composite = new CompositeStore();
   const laresStore = new MemoryTiddlerStore(LARES_BAG);
-  composite.addLayer({ bagId: LARARIUM_BAG, store: new MemoryTiddlerStore(LARARIUM_BAG), writable: true, defaultWritable: false });
+  // @oracle is the structural floor (operator ruling 2026-06-16); @lararium is a
+  // library, not a structural pre-mount. The floor + @lares persona seat here.
+  composite.addLayer({ bagId: ORACLE_BAG, store: new MemoryTiddlerStore(ORACLE_BAG), writable: true, defaultWritable: false });
   composite.addLayer({ bagId: LARES_BAG,    store: laresStore,                            writable: true, defaultWritable: false });
   const handles = new Map<string, DocHandle<LarDoc>>([[WIKI_BAG, wikiDoc.handle]]);
   if (opts.libMounted) {

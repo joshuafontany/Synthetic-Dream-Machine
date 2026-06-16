@@ -46,6 +46,7 @@ export interface LarariumVesselResult<
   repo: TRepo;
   store: TStore;
   catalogHandleUrl: string;
+  oracleDocUrl: string | null;
   larariumDocUrl: string | null;
   phase: LarOpenPhase;
 }
@@ -66,6 +67,7 @@ export interface VesselResult<TPool, TAdmin> {
   activeWikiSource: "boot-arg" | "admin-marker";
   wikiDocUrl:       string;
   catalogHandleUrl: string;
+  oracleDocUrl:     string | null;
   larariumDocUrl:   string | null;
   phase:            LarOpenPhase;
 }

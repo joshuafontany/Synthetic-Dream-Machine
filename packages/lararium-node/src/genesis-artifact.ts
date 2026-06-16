@@ -16,9 +16,10 @@ import { join }                      from "path";
 import type { Repo, DocHandle }      from "@automerge/automerge-repo";
 import type { LarDoc }               from "@lararium/mesh";
 import {
-  LARARIUM_DOC_URI,
+  ORACLE_DOC_URI,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
+  LARARIUM_DOC_URI,
   IDENTITIES_DOC_URI,
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
@@ -147,9 +148,27 @@ export function mintLaresIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): 
   islandHandle.change((d) => {
     d.tiddlers[LARES_DOC_URI] = mutableLarRecord(LARES_DOC_URI, { text: minted.url, kind: "oracle" }, "operator-mint");
   });
-  // Two node homes federating one @lararium doc may still race; LWW settles
+  // Two node homes federating one @oracle doc may still race; LWW settles
   // it — re-read and adopt the winner (an orphaned empty mint costs nothing).
   return tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? minted.url;
+}
+
+/**
+ * mintLarariumIfAbsent — the @lararium memetic corpus as its OWN doc (operator
+ * ruling 2026-06-16: @oracle, @lararium, @lares are three separate docs). Mirror
+ * of mintLaresIfAbsent: the corpus pointer rides the @oracle system plane (the
+ * island doc), never @catalog. The minted doc starts empty; corpus content fills
+ * it by LOAD/ingest (`lares act LOAD … --to lar:///ha.ka.ba/@lararium`) and the
+ * disk mirror carries it back to `bags/@lararium`. Node genesis office only.
+ */
+export function mintLarariumIfAbsent(repo: Repo, islandHandle: DocHandle<LarDoc>): string {
+  const existing = tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+  if (existing) return existing;
+  const minted = repo.create<LarDoc>(emptyLarDoc());
+  islandHandle.change((d) => {
+    d.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: minted.url, kind: "oracle" }, "operator-mint");
+  });
+  return tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? minted.url;
 }
 
 // ---------------------------------------------------------------------------
@@ -167,7 +186,7 @@ export function reconcileWellKnownTiddlers(
 ): void {
   const doc      = handle.doc();
   const tiddlers = doc?.tiddlers ?? {};
-  const selfOk = tiddlers[LARARIUM_DOC_URI]?.tiddler.text === handle.url;
+  const selfOk = tiddlers[ORACLE_DOC_URI]?.tiddler.text === handle.url;
   const catOk  = tiddlers[CATALOG_DOC_URI]?.tiddler.text  === catalogUrl;
   const baOk   = laresUrl        ? tiddlers[LARES_DOC_URI]?.tiddler.text      === laresUrl       : true;
   const idOk   = identitiesUrl   ? tiddlers[IDENTITIES_DOC_URI]?.tiddler.text === identitiesUrl  : true;
@@ -177,7 +196,7 @@ export function reconcileWellKnownTiddlers(
   if (selfOk && catOk && baOk && idOk && grOk && seOk && adOk) return;
 
   handle.change((d) => {
-    if (!selfOk) d.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: handle.url, kind: "oracle" }, "lararium-seed");
+    if (!selfOk) d.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, { text: handle.url, kind: "oracle" }, "lararium-seed");
     if (!catOk)  d.tiddlers[CATALOG_DOC_URI]  = mutableLarRecord(CATALOG_DOC_URI, { text: catalogUrl, kind: "oracle" }, "lararium-seed");
     if (!baOk  && laresUrl)      d.tiddlers[LARES_DOC_URI]      = mutableLarRecord(LARES_DOC_URI, { text: laresUrl, kind: "oracle" }, "lararium-seed");
     if (!idOk  && identitiesUrl) d.tiddlers[IDENTITIES_DOC_URI] = mutableLarRecord(IDENTITIES_DOC_URI, { text: identitiesUrl }, "lararium-seed");

@@ -14,7 +14,7 @@ role      = "live handoff — the next vector and the ground it stands on; updat
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/handoff"
-written   = "2026-06-12"
+written   = "2026-06-16"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -23,23 +23,42 @@ written   = "2026-06-12"
 
 <<~ ahu #next-vector >>
 
-# NEXT VECTOR — `lar:///ingest.gesture.lands`
+# NEXT VECTOR — `lar:///oracle.planes.enact`
 
-The disk→records direction opens, **gesture first** (operator-ruled): the watcher daemon comes LAST, as automation of a proven gesture.
+The **two-plane oracle** lands in canon (operator ruling, 2026-06-16); the code-enactment is the open edge. `@oracle` = the **system** plane (DreamNet system bags `@oracle`/`@lararium`/`@lares` — their pointers + wiki-recipes); `@catalog` = the **user** plane (user bags + user recipes). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, each its own **quine wiki**. Full law: `wiki-layer-ontology#oracle-planes`.
 
-**Already standing (use, don't rebuild):** the **ingest gate** (`packages/lararium-tw5/src/ingest-gate.ts` — pure five-branch triangle decision: echo-noop · refuse-loudly · canonical-equivalent-noop · clean-ingest · conflict-surfaced; 6/6 vectors green — fixture-drift fixed 2026-06-14, see #burrs) · the **Synced tree** (`packages/lararium-node/src/synced-tree.ts` — per-(bag,uri) last-projected hash at `<root>/.lararium-projection/`; corrupt ⇒ never-projected ⇒ safe) · **both content-hash gates** (projection-side skip lives in the projector; echo storms read structurally impossible) · `$tw.lares.expandMemeRefs` registered, awaiting this its first consumer.
+**Already standing (the @oracle carve — DONE 2026-06-16, use don't rebuild):** engine BLOBs key to `@oracle` (`base-doc.blobDescriptorUri`) · `@oracle` = sole `expandRecipe` floor (`wiki-recipe.ts`) · `ROOT_BAGS` restored the `@lararium` corpus descriptor + relabelled `@oracle` (`genesis-doc.ts`) · minted-wiki bag-stack carries `@lararium` (`wiki-mint-handlers.ts`) · build green (6 pkgs) · vessel boots `live` · **the MUST-not blob-stub bug structurally closed** — a fresh re-genesis+boot leaves `bags/@lararium` clean (no `/blobs`, no `@oracle` projection), because `@oracle` holds no `diskMirrorGrant`. Also done this session: automerge 3.2.6 + repo 2.6.0-alpha.2 upgrade; the **self-merge boot crash** fixed (`genesis-intake.reconcileGenesisCid` guard — a doc merged into itself trips the 3.x wasm borrow-checker).
 
-**Build, in order:**
+**Build, in order (the ruled two-plane wiring; memes already carry the model):**
 
-1. **The INGEST verb** — DONE 2026-06-12: §6 gate composed with replace-by-group apply (uri#fragment + uri/path grains); carriers travel with diskHash+syncedHash, island computes only currentRenderHash; noop/refuse/conflict apply nothing; 4/4 vectors green on the live boot meme (fixture-drift fixed 2026-06-14, #burrs).
-2. **`lares ingest` CLI** — DONE 2026-06-12 (unit-witnessed; live staged witness rides build 3): scan → loci reverse-derivation (`bagsFileToUri`) → two-leg diff preview → `--apply` sends NEW+CHANGED with hashes; act surface guards INGEST toward the gesture. NFC membrane assertion still PENDING — rides this gesture (spec pins NFC at `memetic-wikitext #carrier-bytes`).
-3. **Quiescence vectors** — DONE 2026-06-12 (`tests/e2e/ingest-quiescence.test.ts`, 4 green): project∘ingest = identity · one-cycle convergence · zero-writes-after-N · the NFC membrane assertion live at the gesture (non-NFC refuses loudly, never enters). Found+fixed en route: the Synced-tree instance-root derivation lagged the siting ruling (up-three → up-two).
-4. **The watcher daemon**, last — a nalu-builder for the disk peer: settle-window drain delivers WAVES (one batch, one transact, one projection wave), never per-file dribbles. **First cut ENACTED + COMMITTED 2026-06-12** (`e38bbd22 watcher.floor.suspends` — `ingest-core.ts` + `commands/watch.ts` are in the tree, NOT uncommitted; the talk-story below stays SUSPENDED, operator never steered it):
-   - **Cut A — `packages/lares-cli/src/ingest-core.ts`**: the disk→records gesture factored out of `cmdIngest` (`listCarriers` · `scanFiles` · `scanSource` · `candidatesOf` · `submitIngestOn`). `cmdIngest` now consumes it — the watcher automates the proven path, never re-implements it. Typecheck green; behaviour unchanged.
-   - **Cut B — `packages/lares-cli/src/commands/watch.ts`** (`lares watch --source <dir> --to <bag> [--apply] [--port N] [--debounce ms]`, registered in `bin/lares.ts`): built on Node's built-in **`fs.watch` recursive** (NOT chokidar — it satisfies §6's "settle = hash confirms, never a timer" law with no dep + no shared-lockfile contention). Events → a serialized debounce drain seat (the `recipe-watch` busy/rerun kick, disk-side) → one `scanFiles` → one INGEST wave. Preview by default; `--apply` holds ONE vessel across every wave of its life. Carries a **Watchman-style cookie self-test at boot** (writes a cookie, awaits its own event; a dead backend — WSL2 `/mnt` = no inotify — fails HERE, loudly). **Smoke proved**: cookie passes on the repo's ext4 ("backend live"); two rapid edits + a new file coalesced into a SINGLE wave with correct loci derivation (not per-file dribbles). No formal e2e vector yet — that was deferred into the talk-story below.
-5. **The wire compiler** MAY ride this vector's membrane organs (ruled 2026-06-12, `wire #authoring`): anchored body pranala → wire records at `<parent>/wires/<anchor>`; shares replace-by-group + three-way diff; `edgesFromMemeAst` = the front half, standing.
+1. **System-recipe seeding** — `genesis-doc.ts` seeds the two **system wiki-recipes** into the `@oracle` genesis doc beside `ROOT_BAGS`: `@lares` wiki (`@oracle`+`@lararium`+`@lares`+`@draft`) and `@lararium` wiki (`@oracle`+`@lararium`+`@draft`). Quine wikis — the wiki bag IS the `@` bag. Revise GD-6 (genesis-doc#system-plane): system recipes ARE substrate; user recipes still mint to `@catalog`.
+2. **Pointer-plane routing** — `open-vessel-core.ts` hands `resolveOracleDoc` the `@oracle` island handle as the registry for system bags (`@oracle`/`@lararium`/`@lares`), `@catalog` for user bags. `base-doc.resolveOracleDoc` stays plane-blind (it writes wherever the handed registry points — base-doc#two-plane).
+3. **Two-source resolution** — `catalog-accessor.ts` `urlOf`/`recordOf` check `@oracle` for system bags, `@catalog` for user; `recipe-watch.ts` reads a system wiki's recipe via `recipeUri("@oracle", slug)` and resolves system bags from `@oracle` (recipe-watch#contract carries the target; code reads single-source `@catalog` today).
+4. **`@admin` owns `@catalog`** (operator constraint, 2026-06-16) — user-recipe writes ride the admin plane (the `init-wiki` verb already owns `@catalog`); system-recipe seeding rides genesis/`@oracle`, never the admin runtime.
 
-**Design pre-fed — read before building:** `pattern-integrities` §6 (the ingest laws + twillm deltas) and §7 (the lane law: verbs = record pairs; bus history bounded per-epoch; events = hints, scan = truth — the relay law applied to the filesystem-as-peer).
+**Status — ENACTED + GREEN 2026-06-16** (steps 1–3 + the write-facet of 4): three separate docs (mint @lararium); system recipes seeded in @oracle; kernel slotUrl + recipe-watch two-source; admin island mounts @lares/@lararium from @oracle (write-facet — restored the 6 mirror e2e). **Suites: mesh 275 · tw5 118 · node 127 · browser 13 · e2e 20/20.** Re-genesis leaves the seed tree clean (gitignore bandaid reverted, debris structurally gone). LOAD --to @lararium witnessed (128 records, separate doc) + the corpus composes live in @lares.
+**REMAINING (the kept friction, handoff #oracle-planes-verb-execution):** the **read-facet** — `where`/`resolve` should query all hot wikis (directive #2), and the north-star **verb-routing-to-hot-wikis** rail that retires the admin's system-bag mounts (Council kue). `lares wiki list` two-source display (still reads "(no wikis registered)" — it reads @catalog only; system recipes live in @oracle).
+
+**Prior vector's owed tail** — `lar:///ingest.gesture.lands` is substantially DONE (gate · INGEST verb · `lares ingest` CLI · quiescence e2e · whole-carrier deletion decision+verb, all green); the only remainder is the **watcher disk-side Cut C** (the e2e vector + `watch.ts` quarantine wiring) — see #watcher-talk-story (floor closed by moʻolelo 2026-06-14) and #vessel-state.
+
+### The verb-execution friction (kept ruling, 2026-06-16)
+
+The carve dropped `@lares`/`@lararium` from the `expandRecipe` floor, but the admin island executes ACTION + READ verbs in its OWN composite (where they rode the old floor). `LOAD --to @lares` now misroutes (admin composite lacks the layer → lands in `@temp`); `where` shows `@temp`; the `@lares` mirror projects 0 files (6 e2e RED). The fix splits write/read; the friction is kept:
+
+<<~ hoike #oracle-planes-verb-execution held:"both facets ship (operator-blessed pono) — WRITE: admin mounts system bags @lares/@lararium from @oracle as writable layers (shared doc, sync carries to the wiki); READ: admin queries the hot wikis. Holding: Diplomat · Triage · Artificer" >>
+q: should the admin execute verbs against system bags it mounts itself, or route every verb to the island that owns the bag?
+<<~ kue voice:Stranger key:"a witnessed divergence/conflict between the admin's @lares mount and the @lares wiki-island mount" >>
+mounting @lares/@lararium writable in the admin re-seats the floor-everywhere the carve removed, and puts TWO writers on one system doc. CRDT merges it, but "who owns @lares writes" loses its single answer. The clean model routes the write to the one island that owns the bag and leaves the admin holding none.
+<<~/kue >>
+<<~ kue voice:Council key:"the verb-routing-to-hot-wikis rail lands (directive #2 full form)" >>
+routing a verb to the bag-owning island honors BOTH "system bags ride recipes" (admin mounts none) AND §9 island sovereignty (each island executes its own). the admin's system-bag mount is the interim; routing is the north star — retire the mount when routing lands.
+<<~/kue >>
+<<~ kue voice:Liminal key:"a where query that must answer for a COLD (non-resident) bag" >>
+"query all hot wikis" answers only as-of the resident set — no global now (causal islands). where over the hot set reads honest-but-partial; a cold bag holding the title returns absent. name the horizon or the answer misleads.
+<<~/kue >>
+stand-aside: Diplomat — the admin writes the @lares BAG (data-plane, access≠load); the wiki receives it by sync, never the admin reaching into its live composite (kahu doctrine). No §9 breach.
+re-entry: a double-write conflict on a system bag | the verb-routing-to-hot-wikis rail | the next boot of this vector
+<<~/hoike >>
 
 <<~/ahu >>
 
@@ -107,6 +126,8 @@ exit -> suspended: OODA-HA(0φ:operator-rebooted-before-steering) — the floor
 The vessel **runs, repo-rooted**: one root law (`LAR_ROOT` or the repo; `<root>/genesis`; the repo IS the vessel) · the corpus reads **canonical at rest** — a proven fixed point of its own membrane (the second pass writes zero bytes; **any diff in `bags/` = a real change**) · suites (2026-06-15): mesh 275✓ · tw5 118✓ · node 127✓ · browser 13✓ · **e2e 20/20✓** — ingest unit RED fixed (fixture drift) AND the e2e ingest-quiescence Q1/Q2/Q4 RED fixed: root was a **synced-tree key-separator drift** (projector wrote `bag\0uri`, ingest read `bag uri` → every carrier scanned `new`); unified behind `syncedTreeKey()` (one source of truth, node/synced-tree.ts). Whole-carrier deletion (decision+verb) landed; watcher disk-wiring done, Cut C (watcher e2e) still owed · isomorphism sweep 2026-06-12: admin ea-wait rides the shared watchdog (one-hull step 1, first slice); `lar-event-bus-impl` moved node→mesh; genesis intake collapsed to mesh `genesis-intake` beside the emitter (validate→import→verify + CID reconcile live ONCE; node/browser keep byte sources; record-shape drift healed). Non-gated reorg rungs now spent — remaining: operator-key pair (custody, patience), full hull pivot + switchboard retirement (torch-gated after INGEST) (`pnpm install && pnpm -r build && pnpm test:e2e`).
 
 **Co-projection (the ontology, one breath):** the operator's mind originates; disk carriers and the CRDT record-set both *project* it, each in native grain; **merge authority routes through the CRDT alone**. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
+
+**The @oracle carve (2026-06-16):** the runtime system island split from the corpus is ENACTED in code — `@oracle` carries the engine + system oracle, `@lararium` is pure tracked corpus, the seed tree stays clean across re-genesis. The two-plane pointer/recipe wiring (#next-vector) is RULED + canon-carried, code-enactment owed. Automerge upgraded to 3.2.6 / repo 2.6.0-alpha.2 (self-merge boot crash fixed).
 
 **Doctrine, by pointer:** every law lives in its own meme — walk #edges.
 

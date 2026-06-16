@@ -13,8 +13,12 @@
  *                                 the manifest's typed grants, not the URI.
  *   lar:///ha.ka.ba/@<slug>     — wiki identity bag, CRDT, operator's edits land here
  *   libraryBags[]                 — optional content libraries, CRDT, read-only from wiki
- *   lar:///ha.ka.ba/@lares      — personality, CRDT, required
- *   lar:///ha.ka.ba/@lararium   — system / engine core / plugins, CRDT, required
+ *                                 (the @lares wiki-recipe carries @lararium + @lares here)
+ *   lar:///ha.ka.ba/@oracle     — runtime system island: engine core + plugins + grammar +
+ *                                 bag-oracle; the UNIVERSAL FLOOR of every recipe, CRDT, required
+ *
+ * @lares (personality) and @lararium (engine corpus) are NOT the floor — they
+ * ride a wiki's libraryBags. The @lares wiki-recipe = @oracle + @lararium + @lares.
  *
  * Above-stack projections defer (separate concern). When they land they will
  * subscribe to nalu events, not participate in the cascade.
@@ -25,7 +29,7 @@
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import type { Heads } from "@automerge/automerge";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
-import { LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
+import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
 
 /** A slot URI in the lar:///ha.ka.ba/@<name> namespace. */
 export type SlotUri = string;
@@ -41,6 +45,8 @@ export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
 export const PERSONAL_BAG = "lar:///ha.ka.ba/@personal" as const;
 export const LARES_BAG    = LARES_DOC_URI;
 export const LARARIUM_BAG = LARARIUM_DOC_URI;
+/** @oracle — the runtime system island; the universal floor of every recipe. */
+export const ORACLE_BAG   = ORACLE_DOC_URI;
 
 /** Build a wiki identity bag URI from a slug. */
 export function wikiBagUri(slug: string): SlotUri {
@@ -206,8 +212,10 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     PERSONAL_BAG,
     wikiBagUri(r.wikiSlug),
     ...(r.libraryBags ?? []),
-    LARES_BAG,
-    LARARIUM_BAG,
+    // @oracle = the universal floor (engine + grammar + bag-oracle). @lares and
+    // @lararium are NOT the floor — they ride a wiki's libraryBags (the @lares
+    // wiki-recipe = @oracle floor + @lararium + @lares). Operator ruling 2026-06-16.
+    ORACLE_BAG,
   ])];
 }
 

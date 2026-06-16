@@ -271,7 +271,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         meshCabalDocIdHex: social.meshCabalDocIdHex,
         registerBags: [
           ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
-          BAG_IDS.catalog, BAG_IDS.lararium, BAG_IDS.lares,
+          BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
       };
@@ -306,7 +306,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
     afterAdmin: (_a, assembly) => {
       void residency.pin(BAG_IDS.catalog,    "boot:catalog");
-      void residency.pin(BAG_IDS.lararium,   "boot:lararium-island");
+      void residency.pin(BAG_IDS.oracle,   "boot:lararium-island");
       if (assembly.laresHandle) void residency.pin(BAG_IDS.lares, "boot:lares-corpus");
       void residency.pin(BAG_IDS.identities, "boot:identities");
       void residency.pin(BAG_IDS.groups,     "boot:circles");
@@ -363,7 +363,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     activeWikiSource: "boot-arg",
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
-    larariumDocUrl:   result.assembly.islandHandle.url,
+    oracleDocUrl:     result.assembly.islandHandle.url,
+    larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",
     engineUpdated,
   };

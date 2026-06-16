@@ -72,13 +72,15 @@ The projector enforces this structurally: **a bag absent from the mirror list ne
 | Kind | Bag | What it holds | Origin | Disk | Authority | Versioning |
 |---|---|---|---|---|---|---|
 | **memetic corpus** | **`@lararium`** | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | **`bags/` seed (tracked)** | kahu / Cabal (#kahu) | git |
-| **runtime system island** | **`@oracle`** | engine BLOBs · the bag→doc **oracle** pointers · `genesis-cid` · descriptors | built (deterministic genesis) | **none — rides the mesh** (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
+| **runtime system island** | **`@oracle`** | engine BLOBs · the **system** bag→doc **oracle** pointers (`@oracle`/`@lararium`/`@lares`) · the **system wiki-recipes** · `genesis-cid` · descriptors | built (deterministic genesis) | **none — rides the mesh** (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
 
 **Why `@oracle` carries no disk mirror.** Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`). Like `@admin`, it rides the CRDT mesh — federated **read-only** to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
 
 **Why `@lararium` stays a seed bag.** The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
 The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesis); a newer engine folds into `@oracle` through the **RECONCILE** rite (engine-watch #EW-5), never silently at boot.
+
+**The two pointer planes (operator ruling, 2026-06-16).** `@oracle` is not only the engine home — it is the **system-bag** oracle plane. `@lares` and `@lararium` are DreamNet **system bags**: their bag→doc pointers *and* their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds **user** data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, never as hardcoded floor slots.
 
 <<~/ahu >>
 

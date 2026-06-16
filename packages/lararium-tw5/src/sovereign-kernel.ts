@@ -13,7 +13,7 @@
  * ## Recipe law — one model across all wikis
  *
  *   Manifest carries `recipe: WikiRecipe + grants: IslandGrants`. Structural
- *   slots arrive as typed grants; @lares resolves from the @lararium doc's
+ *   slots arrive as typed grants; the bag-oracle resolves from the @oracle doc's
  *   well-known tiddlers (protocol-invariant plane); library bags resolve from
  *   @catalog ONLY (boot = first reconcile — the same path recipe-watch walks
  *   live). `buildIslandRecipe()` lays the stack:
@@ -21,9 +21,9 @@
  *     @temp        (MemoryTiddlerStore, volatile)
  *     @draft       (CRDT, high-churn drafts)
  *     @<wikiSlug>  (CRDT, operator's edits)
- *     libraryBags[]  (CRDT, optional content libraries)
- *     @lares       (CRDT, required personality)
- *     @lararium    (CRDT, required system / engine core)
+ *     libraryBags[]  (CRDT, optional content libraries — @lares persona +
+ *                     @lararium corpus ride here, resolved island-side from @catalog)
+ *     @oracle      (CRDT, required — the universal floor: engine core + grammar + bag-oracle)
  *
  *   Write routing happens via the in-wiki cascade
  *   (`lar:///ha.ka.ba/@lararium/config/bag-paths`), not by behavior config.
@@ -49,6 +49,7 @@ import {
   PERSONAL_BAG,
   LARES_BAG,
   LARARIUM_BAG,
+  ORACLE_BAG,
   tiddlerText,
   wikiBagUri,
   expandRecipe,
@@ -222,9 +223,9 @@ export function runSovereignKernel(
     // §6 — bytes travel via @lararium CRDT; manifest carries only integrity gate.
     // The engine grant resolves FIRST (engine bytes precede TW5 boot).
     tick("slots");
-    const laraiumHandle = await _resolveSlot(_repo, msg.grants.islandUrl, LARARIUM_BAG, msg.wikiUri);
+    const laraiumHandle = await _resolveSlot(_repo, msg.grants.islandUrl, ORACLE_BAG, msg.wikiUri);
     if (!laraiumHandle) return;
-    _handles.set(LARARIUM_BAG, laraiumHandle);
+    _handles.set(ORACLE_BAG, laraiumHandle);
 
     // @catalog ACCESS (never layered) — the island resolves library bags from
     // the user registry ITSELF: boot runs the same resolution path recipe-watch
@@ -232,17 +233,21 @@ export function runSovereignKernel(
     const catalogUrl = msg.grants.catalogUrl ?? null;
     const catalog    = catalogUrl ? makeCatalogAccessor(_repo, catalogUrl) : null;
 
-    // Three oracle planes, three authorities: protocol invariants (@lares,
-    // @lararium) resolve from the @lararium doc's well-known tiddlers — the
-    // substrate the island already holds; user library bags resolve from
-    // @catalog; public bags will resolve from @crossroads. Structural instance
-    // slots arrive as typed grants.
+    // Three oracle planes, three authorities: system bags (@lares, @lararium)
+    // resolve from the @oracle doc's well-known tiddlers — the system plane the
+    // island already holds; user library bags resolve from @catalog; public bags
+    // will resolve from @crossroads. Structural instance slots arrive as typed
+    // grants.
     const slotUrl = async (slot: SlotUri): Promise<string | null> => {
       if (slot === DRAFT_BAG)                    return msg.grants.draftUrl    ?? null;
       if (slot === PERSONAL_BAG)                 return msg.grants.personalUrl ?? null;
       if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
-      if (slot === LARARIUM_BAG)                 return msg.grants.islandUrl;
+      if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;
+      // System bags (@lares, @lararium) resolve from the @oracle doc's well-known
+      // tiddlers — the system plane the island already holds (operator ruling
+      // 2026-06-16). User library bags fall through to @catalog.
       if (slot === LARES_BAG)                    return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARES_BAG]) ?? null;
+      if (slot === LARARIUM_BAG)                 return tiddlerText(laraiumHandle.doc()?.tiddlers?.[LARARIUM_BAG]) ?? null;
       return catalog ? await catalog.urlOf(slot) : null;   // user library bags
     };
 
@@ -251,7 +256,7 @@ export function runSovereignKernel(
 
     for (const slot of slots) {
       if (slot === TEMP_BAG) continue;
-      if (slot === LARARIUM_BAG) { ready.push({ slot, handle: laraiumHandle }); continue; }
+      if (slot === ORACLE_BAG) { ready.push({ slot, handle: laraiumHandle }); continue; }
       const docUrl = await slotUrl(slot);
       if (!docUrl) continue;   // ungranted/unregistered slot — in-memory or absent
       const handle = await _resolveSlot(_repo, docUrl, slot, msg.wikiUri);
@@ -326,7 +331,7 @@ export function runSovereignKernel(
     // load slot — @catalog is absent from expandRecipe). Worker behaviors build
     // a CatalogAccessor over it to reach any registered bag; recipe-watch keeps
     // reconciling the SAME path boot just walked.
-    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, engine, recipe: msg.recipe };
+    _ctx = { wikiUri: msg.wikiUri, composite: _composite, tw5, handles: _handles, post: _post, repo: _repo!, catalogUrl, oracleUrl: msg.grants.islandUrl, engine, recipe: msg.recipe };
     tick("behavior");
     await behavior.onEa(_ctx);
 

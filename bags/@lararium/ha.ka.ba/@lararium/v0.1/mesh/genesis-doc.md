@@ -69,6 +69,32 @@ Two builds from identical source produce identical `island.sha256`.
 
 <<~/ahu >>
 
+<<~ ahu #system-plane >>
+
+## The `@oracle` System Plane — what genesis seeds
+
+The genesis doc **is** the `@oracle` runtime system island (the system-bag
+oracle plane, `wiki-layer-ontology#oracle-planes`). It carries the protocol
+substrate, never user composition:
+
+| Seeded | Held as |
+|---|---|
+| engine BLOBs | TW5 core + vendored plugins (`lares-memetic-wikitext`, `sq/streams`, boot-shadows) in `.blobs`; descriptors at `lar:///ha.ka.ba/@oracle/blobs/*` |
+| system bag descriptors | `ROOT_BAGS`: `@oracle`, `@lararium`, `@catalog`, `@lares`, `@identities`, `@circles`, `@sessions` |
+| system wiki-recipes | the **`@lares` wiki** (`@oracle`+`@lararium`+`@lares`) and the **`@lararium` wiki** (`@oracle`+`@lararium`) — DreamNet system bags as quine wikis |
+| genesis-cid | `lar:///ha.ka.ba/@oracle/genesis-cid` (two-pass CID, GD-4) |
+
+**GD-6 — System recipes are substrate; user recipes are not (operator ruling,
+2026-06-16).** Genesis seeds the **system** wiki-recipes (`@lares`, `@lararium`)
+because system bags' recipes ride the `@oracle` plane. Genesis seeds **no user
+recipes** — those mint into the user's `@catalog` by init-wiki. A user recipe
+in genesis, or a system recipe in `@catalog`, reads as a plane-leak. *(Descriptor
+restore for `@lararium` corpus + blob→`@oracle` keying: enacted in code
+2026-06-16; system-recipe seeding: ruled, enactment tracked at the live handoff
+torch.)*
+
+<<~/ahu >>
+
 <<~ ahu #layer-split >>
 
 ## Layer Split

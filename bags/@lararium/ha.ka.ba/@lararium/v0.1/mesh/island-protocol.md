@@ -44,14 +44,14 @@ The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → Autome
 
 | Grant | Carries | Law |
 |---|---|---|
-| `islandUrl` | @lararium engine/system doc | REQUIRED — engine bytes precede TW5 boot |
+| `islandUrl` | `@oracle` runtime system-island doc | REQUIRED — engine bytes precede TW5 boot |
 | `catalogUrl?` | @catalog registry ACCESS | access ≠ load; never layered; absent = no watch |
 | `wikiUrl?` | the island's OWN write-layer bag | `@{wikiSlug}`; `@admin` under the one-recipe model |
 | `personalUrl?` / `draftUrl?` | keyhive-bound sovereign instance mounts | minted by admin `resolveBinding` |
 
-The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded same day on the three-plane ruling): @lares rides the **protocol-invariant plane** with @lararium — islands resolve it from the @lararium doc's own well-known tiddlers, the substrate they already hold. Three oracle planes, three authorities: protocol invariants (@lararium doc) · user bags (@catalog, ocap grants) · public/infrastructure (@crossroads, future). See `wiki-layer-ontology#oracle-planes`.
+The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the oracle-plane rulings 2026-06-15/06-16): `@lares` and `@lararium` are **DreamNet system bags** — islands resolve their pointers + wiki-recipes from the **`@oracle`** runtime system-island doc's own well-known tiddlers, the substrate they already hold (the bag-oracle moved out of the `@lararium` corpus in the carve). Three oracle planes, three authorities: **system bags** (`@oracle` doc — `@oracle`/`@lararium`/`@lares` pointers + system recipes) · **user bags** (`@catalog`, ocap grants) · public/infrastructure (`@crossroads`, future). See `wiki-layer-ontology#oracle-planes`.
 
-**Library layers never ride the manifest.** The island resolves them itself from @catalog (recipe-watch reconcile) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
+**Library layers never ride the manifest.** The island resolves them itself from its registry plane (recipe-watch reconcile — system bags from `@oracle`, user bags from `@catalog`) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
 
 ### Guarantee grades
 

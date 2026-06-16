@@ -23,7 +23,7 @@ import { CompositeStore } from "./composite-store.js";
 import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
-import { BAG_IDS, ADMIN_BAG_ID, LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
+import { BAG_IDS, ADMIN_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { TEMP_BAG } from "./wiki-recipe.js";
 
 /** The social-plane + admin doc URLs a vessel's bootstrap resolves (founding done). */
@@ -68,6 +68,10 @@ export interface VesselCoreAssembly {
   /** Null until the invariant plane reaches this vessel (node home mints;
    *  wild vessels federate it in). The keel never mints. */
   laresHandle:   DocHandle<LarDoc> | null;
+  /** The @lararium memetic corpus — its OWN doc (operator ruling 2026-06-16:
+   *  @oracle/@lararium/@lares are three separate docs). Pointer rides the
+   *  @oracle system plane; null until federated/minted. */
+  larariumHandle: DocHandle<LarDoc> | null;
   coreHash:      string;
 }
 
@@ -96,7 +100,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
 
   // ── genesis island (REQUIRED — coreless boot deleted) + the bootstrap it carries ──
   const { islandHandle, coreHash, bootstrap } = await loadGenesis();
-  addSubstrateLayer(composite, BAG_IDS.lararium, islandHandle);
+  addSubstrateLayer(composite, BAG_IDS.oracle, islandHandle);
   // @lares — the keel only READS the protocol-invariant oracle. Minting rides
   // the most-restricted grant: operator(admin), timed — held by the node home
   // (genesis office, mintLaresIfAbsent). Wild vessels receive the invariant
@@ -108,10 +112,21 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
     laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
     addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
   }
-  const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+  // @lararium — the memetic corpus as its OWN doc (operator ruling 2026-06-16:
+  // three separate docs). Its pointer rides the @oracle system plane (the island
+  // doc), resolved the same way as @lares — never the conflated island URL. The
+  // wiki-cascade composition (corpus as a library in a recipe) rides the island
+  // composite via recipe-watch; this keel layer carries vessel-level access.
+  let larariumHandle: DocHandle<LarDoc> | null = null;
+  const larariumUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+  if (larariumUrl) {
+    larariumHandle = await waitHandle<LarDoc>(larariumUrl as AutomergeUrl, () => blankDoc(repo));
+    addSubstrateLayer(composite, BAG_IDS.lararium, larariumHandle);
+  }
+  const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[ORACLE_DOC_URI]) ?? null;
   if (existingRef !== islandHandle.url) {
     catalogHandle.change((doc) => {
-      doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, { text: islandHandle.url }, "vessel-boot");
+      doc.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, { text: islandHandle.url }, "vessel-boot");
     });
   }
   // @lares does NOT register in @catalog: it rides the protocol-invariant
@@ -133,7 +148,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
     emit("corpus-ready");
   }
 
-  return { repo, composite, catalogHandle, islandHandle, laresHandle, coreHash };
+  return { repo, composite, catalogHandle, islandHandle, laresHandle, larariumHandle, coreHash };
 }
 
 /**

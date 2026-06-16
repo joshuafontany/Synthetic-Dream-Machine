@@ -121,9 +121,10 @@ export const ENGINE_CORE_ID = "tiddlywikicore";
 /**
  * Stable lar: URI for a blob descriptor tiddler.
  * Each blob MUST have a descriptor tiddler at this URI carrying sha256/version/mimeType.
- * e.g. blobDescriptorUri("tiddlywikicore") → "lar:///ha.ka.ba/@lararium/blobs/tiddlywikicore"
+ * Blobs live in the runtime SYSTEM ISLAND (@oracle), beside the core engine bytes.
+ * e.g. blobDescriptorUri("tiddlywikicore") → "lar:///ha.ka.ba/@oracle/blobs/tiddlywikicore"
  */
 export function blobDescriptorUri(blobId: string): string {
   const safe = blobId.replace(/^\$:\//, "").replace(/[^a-zA-Z0-9/_.-]/g, "_");
-  return `lar:///ha.ka.ba/@lararium/blobs/${safe}`;
+  return `lar:///ha.ka.ba/@oracle/blobs/${safe}`;
 }

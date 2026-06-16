@@ -37,10 +37,12 @@ describe("smoke — the vessel stands", () => {
 
   test("the invariant plane carries the operator-minted @lares oracle", async () => {
     if (lar.mode !== "staged") return;   // raw-storage read assumes an owned root
-    const larariumUrl = bootDocUrl(lar, "lararium");
-    expect(larariumUrl).toBeTruthy();
+    // The @lares oracle pointer rides the @oracle system plane (operator ruling
+    // 2026-06-16: @oracle/@lararium/@lares are three separate docs).
+    const oracleUrl = bootDocUrl(lar, "oracle");
+    expect(oracleUrl).toBeTruthy();
     const repo = new Repo({ storage: new NodeFSStorageAdapter(join(lar.root, ".lararium")) });
-    const isle = await repo.find(larariumUrl as never);
+    const isle = await repo.find(oracleUrl as never);
     const rec  = (isle.doc() as { tiddlers?: Record<string, { tiddler?: { text?: string }; meta?: { authority?: string } }> })?.tiddlers?.[LARES_URI];
     expect(rec?.tiddler?.text).toMatch(/^automerge:/);
     expect(rec?.meta?.authority).toBe("operator-mint");

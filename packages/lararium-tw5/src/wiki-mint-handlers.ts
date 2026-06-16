@@ -6,6 +6,7 @@ import {
   CATALOG_DOC_URI,
   LARES_DOC_URI,
   LARARIUM_DOC_URI,
+  ORACLE_DOC_URI,
   emptyLarDoc,
   mutableLarRecord,
   mkAdminWikiAlert,
@@ -79,7 +80,7 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
       }, "lares-cli:wiki-init");
       tiddlers[recipeTitle] = mutableLarRecord(recipeTitle, {
         label: slug,
-        "bag-stack": `${CATALOG_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiKey} ${draftBagId}`,
+        "bag-stack": `${CATALOG_DOC_URI} ${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiKey} ${draftBagId}`,
         "writable-bag": draftBagId,
         "updated-at": updatedAt,
       }, "lares-cli:wiki-init");

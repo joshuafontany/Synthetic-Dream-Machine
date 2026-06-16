@@ -19,6 +19,7 @@ import {
 } from "@automerge/automerge";
 import { cidV1Sha256, sha256HexBytesSync } from "./crypto.js";
 import {
+  ORACLE_DOC_URI,
   LARARIUM_DOC_URI,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
@@ -26,6 +27,8 @@ import {
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
   bagDescriptorUri,
+  recipeUri,
+  wikiDraftLarUri,
 } from "./lar-uris.js";
 import type { LarDoc, LarBlobEntry } from "./base-doc.js";
 import { ENGINE_CORE_ID, blobDescriptorUri } from "./base-doc.js";
@@ -128,7 +131,8 @@ export interface GenesisArtifact {
 // ---------------------------------------------------------------------------
 
 const ROOT_BAGS = [
-  { bagId: LARARIUM_DOC_URI,   label: "ha — engine & grammar (Lararium)",         readPolicy: "public",  writePolicy: "private" },
+  { bagId: ORACLE_DOC_URI,     label: "ha — runtime system island (Oracle)",       readPolicy: "public",  writePolicy: "private" },
+  { bagId: LARARIUM_DOC_URI,   label: "ha — memetic corpus (Lararium)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: CATALOG_DOC_URI,    label: "ka — corpus discovery (Catalog)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: LARES_DOC_URI,      label: "ba — persona & doctrine (Lares)",            readPolicy: "public",  writePolicy: "private" },
   { bagId: IDENTITIES_DOC_URI, label: "ha — principals (Identities)",               readPolicy: "private", writePolicy: "private" },
@@ -199,9 +203,11 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     });
   }
 
-  // Genesis seeds NO recipe descriptors. Recipes carry USER registry data —
-  // minted per-wiki into the user's @catalog by init-wiki. Protocol substrate
-  // stays pure of user composition.
+  // Genesis seeds the SYSTEM wiki-recipes (operator ruling 2026-06-16, GD-6):
+  // @lares and @lararium are DreamNet system bags, each a quine wiki; their
+  // recipes ride the @oracle system plane (this genesis doc), never @catalog.
+  // USER recipes still mint into @catalog by init-wiki — genesis stays pure of
+  // user composition.
 
   // 4. Write bag descriptor tiddlers.
   doc = automergeChange(doc, { time: 0 }, d => {
@@ -211,11 +217,36 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
         tiddler: {
           title: bagDescriptorUri(bagId),
           label, readPolicy, writePolicy,
-          "origin-bag": LARARIUM_DOC_URI,
+          "origin-bag": ORACLE_DOC_URI,
         },
         meta: { authority: "genesis" },
       };
     }
+  });
+
+  // 4b. Write the SYSTEM wiki-recipes into the @oracle plane. Quine wikis — the
+  // wiki bag IS the @ bag. @lares wiki = @oracle floor + @lararium library +
+  // @lares write-layer; @lararium wiki = @oracle floor + @lararium write-layer.
+  // recipe-watch reads these via recipeUri("@oracle", slug) for system wikis.
+  doc = automergeChange(doc, { time: 0 }, d => {
+    const tiddlers = d.tiddlers as Record<string, unknown>;
+    const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
+      const title = recipeUri("@oracle", slug);
+      tiddlers[title] = {
+        tiddler: { title, label: slug, "bag-stack": bagStack, "writable-bag": writableBag },
+        meta: { authority: "genesis" },
+      };
+    };
+    systemRecipe(
+      "lares",
+      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiDraftLarUri("lares")}`,
+      wikiDraftLarUri("lares"),
+    );
+    systemRecipe(
+      "lararium",
+      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${wikiDraftLarUri("lararium")}`,
+      wikiDraftLarUri("lararium"),
+    );
   });
 
   // 5. Write blob descriptor tiddlers.
@@ -251,7 +282,7 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
             pluginJsonSha256:   att.pluginJsonSha256,
           }),
           tags: isPlugin ? "blob-descriptor plugin-descriptor" : "blob-descriptor",
-          "origin-bag": LARARIUM_DOC_URI,
+          "origin-bag": ORACLE_DOC_URI,
         },
         meta: { authority: "genesis" },
       };
@@ -267,7 +298,7 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
   const preBytes   = automergeSave(doc);
   const preSha256  = sha256HexBytesSync(preBytes);
 
-  const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
+  const GENESIS_CID_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid`;
   doc = automergeChange(doc, { time: 0 }, d => {
     (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] = {
       tiddler: {
@@ -275,7 +306,7 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
         text:  "",
         cid:   "",
         note:  "genesis CID placeholder until island.bin is finalized",
-        "origin-bag": LARARIUM_DOC_URI,
+        "origin-bag": ORACLE_DOC_URI,
       },
       meta: { authority: "genesis" },
     };
@@ -310,7 +341,7 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
 export function verifyGenesisArtifact(
   artifact: GenesisArtifact,
 ): { blobCount: number; tiddlerCount: number } {
-  const GENESIS_CID_TIDDLER = `${LARARIUM_DOC_URI}/genesis-cid`;
+  const GENESIS_CID_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid`;
   const doc = automergeLoad<LarDoc>(artifact.bytes);
 
   if (!doc.blobs?.[ENGINE_CORE_ID]) {

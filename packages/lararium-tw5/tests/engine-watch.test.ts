@@ -7,7 +7,8 @@ import type { IslandContext } from "../src/island-context.js";
 
 const BOOTED = { sha256: "aaa111", version: "5.3.6" };
 
-/** A minimal fake @lararium DocHandle: mutable doc + manual change firing. */
+/** A minimal fake @oracle DocHandle: mutable doc + manual change firing.
+ *  (The engine BLOBs live in @oracle since the 2026-06-16 carve.) */
 function fakeLarariumHandle(initial: { sha256: string; version: string }) {
   let core = { ...initial };
   const listeners = new Set<() => void>();
@@ -27,7 +28,7 @@ function makeCtx(handle?: DocHandle<LarDoc>) {
   const composite = new CompositeStore();
   composite.addLayer({ bagId: TEMP_BAG, store: new MemoryTiddlerStore(TEMP_BAG), writable: true });
   const handles = new Map<string, DocHandle<LarDoc>>();
-  if (handle) handles.set(BAG_IDS.lararium, handle);
+  if (handle) handles.set(BAG_IDS.oracle, handle);
   return {
     composite,
     ctx: { composite, handles, engine: { ...BOOTED } } as unknown as IslandContext,
@@ -37,7 +38,7 @@ function makeCtx(handle?: DocHandle<LarDoc>) {
 const settle = () => new Promise((r) => setTimeout(r, 0));
 
 describe("engine-watch", () => {
-  test("no @lararium slot → no watch, no alert", async () => {
+  test("no @oracle slot → no watch, no alert", async () => {
     const { composite, ctx } = makeCtx();
     expect(startEngineWatch(ctx)).toBeUndefined();
     await settle();

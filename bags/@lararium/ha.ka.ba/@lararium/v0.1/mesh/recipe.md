@@ -41,17 +41,31 @@ island mounts from.
 
 <<~ ahu #where-recipes-live >>
 
-## Where recipes live
+## Where recipes live — two planes (operator ruling, 2026-06-16)
 
-Genesis seeds **no** recipes. User wiki recipes live in the user's
-`@catalog` (registry), minted per-wiki by init-wiki and read+written via the
-catalog accessor (access≠load). `@lararium` stays pure protocol substrate —
-a recipe record landing there reads as a design smell.
+Recipes split by bag tier, each plane its own home:
+
+- **System wiki-recipes** (`@lares` wiki, `@lararium` wiki) live in the
+  **`@oracle`** runtime-system-island plane — protocol substrate, seeded at
+  genesis beside the system bag→doc oracle. `@lares`/`@lararium` are DreamNet
+  **system bags**; their recipes are substrate, not user composition.
+- **User wiki-recipes** live in the user's **`@catalog`** (registry), minted
+  per-wiki by init-wiki and read+written via the catalog accessor (access≠load).
+
+The bag-oracle reach runs **two-source**: system bags resolve from the
+`@oracle` doc, user bags from `@catalog` (`wiki-layer-ontology#oracle-planes`).
+A recipe record for a system bag landing in `@catalog` — or a user recipe in
+`@oracle` — reads as a plane-leak. `@lararium`-the-corpus stays pure tracked
+source; its *runtime* recipe pointer lives in `@oracle`, never the seed tree.
 
 A recipe change syncs as ordinary data; running islands reconcile it LIVE
 via recipe-watch (composition class), with the reboot-pending alert as the
 fallback for islands that sleep through it — see engine-watch for the epoch
 class, where the alert stays the permanent mechanism.
+
+*(Pointer-plane split + system-recipe seeding: ruled; code-enactment tracked
+at the live handoff torch. Source-file `recipe.ts` carries the schema today;
+the plane routing lands in `genesis-doc` / `base-doc` / `catalog-accessor`.)*
 
 <<~/ahu >>
 

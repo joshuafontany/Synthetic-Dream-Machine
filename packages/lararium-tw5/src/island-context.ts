@@ -41,6 +41,14 @@ export interface IslandContext {
    */
   catalogUrl: string | null;
   /**
+   * The `@oracle` runtime system-island doc URL (= `grants.islandUrl`). The
+   * **system** oracle plane (operator ruling 2026-06-16): system bags (`@oracle`,
+   * `@lararium`, `@lares`) + the system wiki-recipes resolve from here, the way
+   * user bags resolve from `@catalog`. recipe-watch reads a system wiki's recipe
+   * via `recipeUri("@oracle", slug)` and resolves system bags from this doc.
+   */
+  oracleUrl: string | null;
+  /**
    * The engine identity this island actually booted — sha256 the kernel computed
    * over the core bytes it eval'd (never the blob entry's self-claim) + the blob
    * entry's version string. The engine-watch compares the live `@lararium` doc

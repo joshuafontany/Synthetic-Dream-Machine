@@ -31,7 +31,7 @@ import {
   OpenIdentitySlot,
   corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   BAG_IDS, slugFromUri,
@@ -50,7 +50,7 @@ import {
 import type { VesselWikiSlot } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
-  reconcileWellKnownTiddlers, mintLaresIfAbsent,
+  reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
@@ -201,7 +201,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       loadGenesis: async () => {
         const genesisHandle = await loadGenesisIsland(repo, genesisDir);
         const catalog = catalogHandle.doc();
-        const islandDocUrl = tiddlerText(catalog?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
+        const islandDocUrl = tiddlerText(catalog?.tiddlers?.[ORACLE_DOC_URI]) ?? null;
         let islandHandle: DocHandle<LarDoc>;
         if (islandDocUrl) {
           islandHandle = await waitHandleLocal<LarDoc>(repo, islandDocUrl as AutomergeUrl, () => genesisHandle);
@@ -210,16 +210,20 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           islandHandle = genesisHandle;
           const blobEntry = islandHandle.doc()?.blobs?.["tiddlywikicore"];
           catalogHandle.change((doc) => {
-            doc.tiddlers[LARARIUM_DOC_URI] = mutableLarRecord(LARARIUM_DOC_URI, {
+            doc.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, {
               text: islandHandle.url,
               ...(blobEntry?.version ? { version: blobEntry.version } : {}),
               ...(blobEntry?.sha256 ? { sha256: blobEntry.sha256 } : {}),
-            }, "lararium-boot");
+            }, "oracle-boot");
           });
         }
 
-        // @lares protocol-invariant mint — operator(admin) office, node home only.
+        // @lares + @lararium system-bag mint — operator(admin) office, node home
+        // only. Both pointers ride the @oracle system plane (the island doc);
+        // @oracle/@lararium/@lares stand as three separate docs (operator ruling
+        // 2026-06-16). The corpus doc starts empty; LOAD/ingest fills it.
         mintLaresIfAbsent(repo, islandHandle);
+        mintLarariumIfAbsent(repo, islandHandle);
 
         const coreBlobEntry = (islandHandle.doc()?.blobs ?? {})[ENGINE_CORE_ID];
         if (!coreBlobEntry?.blob) {
@@ -310,7 +314,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         personGroupDocIdHex, personGroupAgentIdHex, meshCabalDocIdHex,
         registerBags: [
           ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
-          BAG_IDS.catalog, BAG_IDS.lararium, BAG_IDS.lares,
+          BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lararium, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
       };
@@ -350,7 +354,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     // After the admin VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.
     afterAdmin: (_admin, assembly) => {
       void residency.pin(BAG_IDS.catalog,    "boot:catalog");
-      void residency.pin(BAG_IDS.lararium,   "boot:lararium-island");
+      void residency.pin(BAG_IDS.oracle,     "boot:oracle-island");
+      void residency.pin(BAG_IDS.lararium,   "boot:lararium-corpus");
       if (assembly.laresHandle) void residency.pin(BAG_IDS.lares, "boot:lares-corpus");
       void residency.pin(BAG_IDS.identities, "boot:identities");
       void residency.pin(BAG_IDS.groups,     "boot:circles");
@@ -447,7 +452,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     admin: adminVm,
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
-    larariumDocUrl:   result.assembly.islandHandle.url,
+    oracleDocUrl:     result.assembly.islandHandle.url,
+    larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase: "live",
     eventBus,
     stopTick: () => { void result.pool.disposeAll(); },

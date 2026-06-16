@@ -41,9 +41,17 @@ export function stableTagUri(name: string): string {
 
 // ── Content plane ─────────────────────────────────────────────────────────
 
+// @oracle = the runtime SYSTEM ISLAND (genesis-loaded: engine BLOBs + bag→doc
+// oracle + genesis-cid); the universal floor of every wiki-recipe. Split from
+// the @lararium memetic corpus (disk-projection #oracle-split, 2026-06-15).
+export const ORACLE_DOC_URI    = stableLarUri("@oracle");
+// @lararium = the engine's memetic CORPUS (authored self-doc memes; a library bag).
 export const LARARIUM_DOC_URI  = stableLarUri("@lararium");
 export const CATALOG_DOC_URI   = stableLarUri("@catalog");
 export const LARES_DOC_URI     = stableLarUri("@lares");
+// The memetic-wikitext engine plugin — a named blob CARRIED IN @oracle's blobs,
+// but its identity-title keeps the @lararium namespace (plugin.info + the TW5
+// pack pipeline key on this exact title; the doc that holds the blob is @oracle).
 export const LARES_MEMETIC_WIKITEXT_PLUGIN_URI = stableLarUri("@lararium/plugins/lares/memetic-wikitext");
 
 // Shared tag/state law — consumed by vessel projections, not owned by any one runtime.
@@ -215,6 +223,7 @@ export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
  * island-side from @catalog.
  */
 export const BAG_IDS = {
+  oracle:     ORACLE_DOC_URI,
   lararium:   LARARIUM_DOC_URI,
   catalog:    CATALOG_DOC_URI,
   lares:      LARES_DOC_URI,

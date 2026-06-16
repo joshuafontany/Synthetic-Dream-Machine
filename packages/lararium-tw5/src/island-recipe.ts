@@ -3,7 +3,7 @@
  *
  * Canonical assembly:
  *   1) `expandRecipe(recipe)` → ordered slot URIs (top of array = highest priority)
- *   2) addLayer for each slot in cascade order (bottom-up): @lararium first, @temp last
+ *   2) addLayer for each slot in cascade order (bottom-up): @oracle floor first, @temp last
  *   3) @temp slot uses a MemoryTiddlerStore; all other slots use AutomergeDocStore
  *   4) IslandAdaptor projection registers
  *   5) initial replay + sync complete + synchronous flushNalu so the wiki carries
@@ -46,8 +46,8 @@ export interface BuildIslandRecipeInput {
  * Build the sovereign island recipe and return the adaptor.
  *
  * Cascade layering: walks `expandRecipe()` in reverse so the lowest-priority
- * slot (@lararium) registers first via `addLayer`. CompositeStore's "first wins"
- * read order matches the slot array's top-first orientation.
+ * slot (@oracle, the floor) registers first via `addLayer`. CompositeStore's
+ * "first wins" read order matches the slot array's top-first orientation.
  */
 export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   adaptor: IslandAdaptor;
@@ -59,7 +59,7 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   const slots        = expandRecipe(recipe);
   const stores: Array<{ slot: SlotUri; store: AutomergeDocStore | MemoryTiddlerStore }> = [];
 
-  // Bottom-up addLayer order. Slot at index slots.length-1 (@lararium) lands first.
+  // Bottom-up addLayer order. Slot at index slots.length-1 (@oracle, the floor) lands first.
   let tempStore: MemoryTiddlerStore | null = null;
   for (let i = slots.length - 1; i >= 0; i--) {
     const slot = slots[i]!;
