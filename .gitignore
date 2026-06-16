@@ -70,3 +70,23 @@ tests/results/
 tests/runs/
 .lararium-projection/
 genesis/social-bootstrap.json
+
+# Runtime system-island co-projection (per-deployment automerge URLs, genesis-cid, engine blobs).
+# Regenerable, never source (disk-projection #oracle-split). NOT @lararium/.../v0.1 (authored corpus).
+bags/@lararium/ha.ka.ba/@admin.md
+bags/@lararium/ha.ka.ba/@catalog.md
+bags/@lararium/ha.ka.ba/@catalog/
+bags/@lararium/ha.ka.ba/@circles.md
+bags/@lararium/ha.ka.ba/@circles/
+bags/@lararium/ha.ka.ba/@identities.md
+bags/@lararium/ha.ka.ba/@identities/
+bags/@lararium/ha.ka.ba/@lares.md
+bags/@lararium/ha.ka.ba/@lares/
+bags/@lararium/ha.ka.ba/@sessions.md
+bags/@lararium/ha.ka.ba/@sessions/
+bags/@lararium/ha.ka.ba/@lararium.md
+bags/@lararium/ha.ka.ba/@lararium/blobs/
+bags/@lararium/ha.ka.ba/@lararium/descriptor.md
+bags/@lararium/ha.ka.ba/@lararium/genesis-cid.md
+bags/@lararium/ha.ka.ba/@oracle.md
+bags/@lararium/ha.ka.ba/@oracle/
