@@ -202,10 +202,27 @@ export class CompositeStore implements LarTiddlerStore {
   }
 
   async put(record: LarTiddlerRecord, origin: ChangeOrigin, options?: { bag?: string }): Promise<void> {
-    // Route to the explicitly named writable bag when provided.
+    // Explicit-target routing — the overlayfs decision tree (operator ruling
+    // 2026-06-16, prior-art-grounded; wiki-layer-ontology#write-law):
     if (options?.bag) {
-      const bagLayer = this.layers.find((l) => l.bagId === options.bag && l.writable);
-      if (bagLayer) return bagLayer.store.put(record, origin, options);
+      //  a) a matching WRITABLE layer → write it (the upper).
+      const writableLayer = this.layers.find((l) => l.bagId === options.bag && l.writable);
+      if (writableLayer) return writableLayer.store.put(record, origin, options);
+      //  b) a READ-ONLY layer for that bag IS mounted → shadow-up (copy-up): an
+      //     edit seen through a read-only library lands in the writable store
+      //     (Law 4 / overlayfs copy-up). Falls through below.
+      //  c) NO layer at all → an explicit write to an unmounted bag. Never guess
+      //     a default — that is the confused-deputy / silent-misroute bug. Fail
+      //     loud; the caller must reach the bag by access (registry) first
+      //     (overlayfs EROFS / git pathspec-did-not-match).
+      const hasAnyLayer = this.layers.some((l) => l.bagId === options.bag);
+      if (!hasAnyLayer) {
+        throw new Error(
+          `CompositeStore.put: explicit target bag "${options.bag}" has no layer — ` +
+          `reach it by access (registry) before writing, or it is unregistered. ` +
+          `Refusing to fall through to the default writable (no silent misroute).`,
+        );
+      }
     }
     if (!this.writableStore) throw new Error("CompositeStore: no writable layer registered");
     return this.writableStore.put(record, origin, options);

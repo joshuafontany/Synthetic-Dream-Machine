@@ -22,7 +22,6 @@ import { join }                                          from "path";
 import { Worker, MessageChannel }                        from "worker_threads";
 import {
   emptyLarDoc,
-  LARES_DOC_URI, LARARIUM_DOC_URI,
   type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
   type CompositeStore, type WikiRecipe,
   type AuthVerifierSeam,
@@ -136,15 +135,13 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     () => repo.create<LarDoc>(emptyLarDoc()),
   );
 
-  // The admin island executes ACTION verbs (LOAD/ADD/...) against system bags;
-  // it mounts @lares + @lararium as writable layers, resolved from @oracle (the
-  // kernel's slotUrl resolves system bags from the @oracle doc the island holds).
-  // The carve dropped these from the universal floor, so the admin names them
-  // explicitly here (operator-blessed write-facet, 2026-06-16; the friction —
-  // mount vs route-to-hot-wiki — is kept at handoff #oracle-planes-verb-execution).
+  // The admin holds NO standing system-bag mount: it reaches a deep target bag
+  // by ACCESS per residency action (ephemeral mount, released after — the
+  // edit/action split, wiki-layer-ontology#write-law; the interim write-facet
+  // mount retired 2026-06-16). The admin's own composite stays its recipe alone.
   const recipe: WikiRecipe = {
     wikiSlug: "admin",
-    libraryBags: [LARES_DOC_URI, LARARIUM_DOC_URI, ...(libraryBags ?? [])],
+    ...(libraryBags?.length ? { libraryBags } : {}),
   };
   const storage = storageDir
     ? { type: "nodefs" as const, dir: join(storageDir, "admin") }

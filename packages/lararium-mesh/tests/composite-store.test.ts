@@ -500,6 +500,23 @@ describe("CompositeStore — put() bag routing", () => {
     const inWrite = await writeMem.get("lar:///fallback2");
     expect(inWrite).not.toBeNull();
   });
+
+  test("put() with explicit bag option naming an UNMOUNTED bag (no layer) throws — no silent misroute", async () => {
+    // The confused-deputy guard (operator ruling 2026-06-16, prior-art-grounded):
+    // an explicit {bag} with no layer at all must FAIL LOUD (overlayfs EROFS /
+    // git pathspec), never fall through to the default writable. Distinct from
+    // the read-only-layer case above, which shadows up (copy-up).
+    const writeMem = new MemoryTiddlerStore();
+    const store    = new CompositeStore();
+    store.addLayer({ bagId: TEST_WIKI_URI, store: writeMem, writable: true });
+
+    await expect(
+      store.put(record("lar:///nowhere", "v"), systemOrigin(), { bag: BAG_IDS.lararium }),
+    ).rejects.toThrow(/no layer/i);
+
+    // and nothing leaked into the default writable
+    expect(await writeMem.get("lar:///nowhere")).toBeNull();
+  });
 });
 
 // ---------------------------------------------------------------------------

@@ -37,13 +37,16 @@ import type {
   LarTiddlerRecord,
   ChangeOrigin,
   Verb,
+  Repo,
   ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction, IngestAction,
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord, sha256HexSync,
+  AutomergeDocStore,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
+import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import { decideIngest } from "./ingest-gate.js";
 import { decideDeletions } from "./delete-gate.js";
@@ -55,6 +58,57 @@ const DEFAULT_MASS_DELETE_FRACTION = 0.25;
 
 export interface ActionHandlerOptions {
   readonly composite: CompositeStore;
+  /**
+   * Registry reach for **access-based** writes (operator ruling 2026-06-16, the
+   * edit/action split, `wiki-layer-ontology#write-law`): a residency action whose
+   * target/source bag is not a mounted layer resolves it by ACCESS across both
+   * oracle planes — mounted ephemerally for the action, released after. This
+   * retires the admin's standing system-bag mount: deep-bag writes become
+   * explicit, audited, access-scoped events, never a floor re-seated. Absent =
+   * composite-only (the wiki island, which holds its own write layer).
+   */
+  readonly reach?: { repo: Repo; catalogUrl: string | null; oracleUrl: string | null };
+}
+
+/** Bags a residency action reads or writes — the set that must be reachable. */
+function bagsOfAction(action: ResidencyAction): string[] {
+  switch (action.verb) {
+    case "ADD":
+    case "COPY":
+    case "MOVE":  return [action.fromBag, action.toBag];
+    case "LOAD":
+    case "INGEST": return [action.toBag];
+    case "CLEAR":
+    case "DROP":  return [action.bag];
+  }
+}
+
+/**
+ * Ensure every named bag is reachable in the composite, mounting absent ones
+ * EPHEMERALLY by access (resolve via the registry accessor — catalog plane then
+ * oracle plane). Returns the bag IDs added, for the caller to release after the
+ * action. A bag that resolves nowhere is left absent: the executor then fails
+ * loud (composite.put no longer falls through silently).
+ */
+async function ensureReachable(
+  composite: CompositeStore,
+  reach: NonNullable<ActionHandlerOptions["reach"]>,
+  bagIds: readonly string[],
+): Promise<string[]> {
+  const planes = [reach.catalogUrl, reach.oracleUrl].filter((u): u is string => !!u)
+    .map((u) => makeCatalogAccessor(reach.repo, u));
+  const added: string[] = [];
+  for (const bagId of bagIds) {
+    if (composite.hasBag(bagId)) continue;
+    for (const accessor of planes) {
+      const handle = await accessor.find(bagId).catch(() => null);
+      if (!handle) continue;
+      composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: true, defaultWritable: false });
+      added.push(bagId);
+      break;
+    }
+  }
+  return added;
 }
 
 /**
@@ -84,8 +138,29 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
       if (!srcProof.ok) throw new Error(`cap-denied: admin on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
     }
 
-    const summary = await withEffectRecord(action, opts.composite, () => executeAction(action, opts.composite));
-    return { verb, ...summary };
+    // Access-reach: mount the action's bags ephemerally if they are not already
+    // layers (the admin reaches deep bags by access, holding no standing mount);
+    // release them after. The wiki island (no `reach`) writes its own mounted
+    // layers as before.
+    const ephemeral = opts.reach
+      ? await ensureReachable(opts.composite, opts.reach, bagsOfAction(action))
+      : [];
+    try {
+      // Defense in depth (B): after access-reach, the destination MUST be reachable.
+      // If access resolved nothing, fail loud here with a domain error rather than
+      // let the write misroute — the confused-deputy guard, paired with C's throw
+      // in composite.put (the store core).
+      if (opts.reach && !opts.composite.hasBag(destBag)) {
+        throw new Error(
+          `action-handler/${verb}: destination bag "${destBag}" unreachable — ` +
+          `not registered, or access resolved nothing. No silent fall-through.`,
+        );
+      }
+      const summary = await withEffectRecord(action, opts.composite, () => executeAction(action, opts.composite));
+      return { verb, ...summary };
+    } finally {
+      for (const bagId of ephemeral) opts.composite.removeLayer(bagId);
+    }
   };
 }
 

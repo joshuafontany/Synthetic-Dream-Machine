@@ -125,6 +125,8 @@ When `@sdm` injects into `@elyncia`, exactly one thing travels: `@sdm`'s write l
 
 The write layer marks the write boundary. From a consuming wiki's vantage, every library layer mounts **read-only**; writes land at or above the consumer's own write layer. A local override of an upstream record (an `@elyncia` shadow of an `@sdm` entry) lands in the consumer's write layer — cascade shadowing exists for exactly this, and the read MUST surface `origin-bag` (`residency-model`, anti-pattern #4). CRDT multi-writer makes down-stack writes *possible*; this law names them a degraded act. To change upstream canon, open the upstream bag as its own wiki and write at *its* write layer.
 
+**The edit/action split (operator ruling, 2026-06-16).** A **user edit MUST land in a TOP-LEVEL bag**, even when the base-tiddler comes from a bag deeper in the stack — the deep record **shadows up**, never written back down. *Which* top-level bag follows the tiddler **type**, routed by the bag-paths cascade: a normal tiddler belonging to the wiki → the wiki's own top bag; a draft/volatile tiddler → `@temp`; and so on. Writes to **deeper** bags happen **only** as explicit operator **residency actions** (`ADD`/`COPY`/`MOVE`/`LOAD`), each effect-record audited — never as a side-effect of an edit. Mechanism consequence: a write with **no explicit bag** routes top-level by type (this law); a write naming an explicit deeper `{bag}` reaches it **by access** (the registry accessor) + audit, or fails loud — it MUST NOT silently fall through to the default writable layer.
+
 <<~/ahu >>
 
 <<~ ahu #dag-law >>

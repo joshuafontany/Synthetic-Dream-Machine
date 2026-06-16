@@ -52,9 +52,11 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       // #oracle-planes-verb-execution, 2026-06-16). resolve stays cascade-scoped.
       registry.register("where",      makeWhereReactor(ctx.composite, { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl }));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
-      // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — composite-only, now
-      // in every vessel's worker, verify-then-delegate gated. The `lares act` front door.
-      registerActionReactors(registry, { composite: ctx.composite });
+      // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — verify-then-delegate
+      // gated, the `lares act` front door. The admin reaches a deep target bag by
+      // ACCESS (ephemeral mount, released after — no standing system-bag mount; the
+      // edit/action split, wiki-layer-ontology#write-law).
+      registerActionReactors(registry, { composite: ctx.composite, reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl } });
       // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
       // main-resident BagResidencyManager via admin:residency-op (ctx.post). `residency`
       // stats (a read) stays main pending the askMain research.
