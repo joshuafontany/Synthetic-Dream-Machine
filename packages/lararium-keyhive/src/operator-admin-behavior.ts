@@ -47,7 +47,10 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
     // IslandContext composite (verify-then-delegate gate inherited). The first slice
     // off the old main-thread jobRegistry; pool-touching residency reactors follow.
     wireWorkerVerbs: (registry, ctx: IslandContext) => {
-      registry.register("where",      makeWhereReactor(ctx.composite));
+      // `where` reaches every registered bag across both oracle planes by ACCESS
+      // (access≠load) — the admin queries all bags, mounts none (reopened hoike
+      // #oracle-planes-verb-execution, 2026-06-16). resolve stays cascade-scoped.
+      registry.register("where",      makeWhereReactor(ctx.composite, { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl }));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
       // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — composite-only, now
       // in every vessel's worker, verify-then-delegate gated. The `lares act` front door.

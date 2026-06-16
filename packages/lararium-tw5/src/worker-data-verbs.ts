@@ -14,10 +14,29 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarTiddlerRecord } from "@lararium/mesh";
+import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarDoc, type LarTiddlerRecord, type Repo } from "@lararium/mesh";
 import { ACTIVE_WIKI_URI } from "./active-wiki.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
-import type { CatalogAccessor } from "./catalog-accessor.js";
+import { makeCatalogAccessor, type CatalogAccessor } from "./catalog-accessor.js";
+
+/** Registry options for access-based reads: the admin reaches ANY registered bag
+ *  across both oracle planes (@catalog user + @oracle system) without mounting it. */
+export interface RegistryReach {
+  repo:       Repo;
+  catalogUrl: string | null;
+  oracleUrl:  string | null;
+}
+
+/** Titles in a registry doc that point at a resolvable doc (an `automerge:` URL) —
+ *  the bags/wikis/drafts the accessor can reach. */
+function listRegisteredDocUris(doc: LarDoc | undefined): string[] {
+  const out: string[] = [];
+  for (const [title, rec] of Object.entries(doc?.tiddlers ?? {})) {
+    const text = tiddlerText(rec as LarTiddlerRecord);
+    if (text && text.startsWith("automerge:")) out.push(title);
+  }
+  return out;
+}
 
 const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
@@ -45,13 +64,35 @@ export const makeUnpinReactor = (post: ResidencyOpPost): VerbReactor => residenc
 /** `register-cold` — mark a bag known-but-not-loaded. */
 export const makeRegisterColdReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("register-cold", post);
 
-/** `where` — recipe-presence query: which bags hold a tiddler, highest-priority first. */
-export function makeWhereReactor(composite: CompositeStore): VerbReactor {
+/** `where` — global membership query: which registered bags hold a tiddler.
+ *  Access≠load (operator ruling, reopened hoike 2026-06-16): the admin reaches
+ *  EVERY registered bag across both oracle planes (@catalog user + @oracle
+ *  system) plus its mounted composite — no mounting required. Returns membership.
+ *  `scope` names the horizon: THIS operator's registry, never the DreamNet
+ *  universe (no global now). Cascade-`primaryBag` only means something inside a
+ *  recipe — it lives in `resolve`, recipe-scoped; here `primaryBag` is just the
+ *  first holder found (membership convenience, not a cascade verdict). */
+export function makeWhereReactor(composite: CompositeStore, reach?: RegistryReach): VerbReactor {
   return async (args) => {
     const tiddler = typeof args["tiddler"] === "string" ? args["tiddler"] : "";
     if (!tiddler) throw new Error("args.tiddler is required");
-    const bags = await composite.listBagsHolding(tiddler);
-    return { tiddler, bags, primaryBag: bags[0] ?? null };
+    // Fast base: the mounted composite (cascade order preserved here).
+    const holding = new Set<string>(await composite.listBagsHolding(tiddler));
+    // Extend by ACCESS across both registry planes — reach each registered doc.
+    const planes = [reach?.catalogUrl, reach?.oracleUrl].filter((u): u is string => !!u);
+    for (const planeUrl of planes) {
+      if (!reach?.repo) break;
+      const accessor = makeCatalogAccessor(reach.repo, planeUrl);
+      const regDoc   = (await accessor.handle().catch(() => null))?.doc();
+      for (const bagUri of listRegisteredDocUris(regDoc)) {
+        if (holding.has(bagUri) || composite.hasBag(bagUri)) continue;
+        const h   = await accessor.find(bagUri).catch(() => null);
+        const rec = h?.doc()?.tiddlers?.[tiddler] as LarTiddlerRecord | undefined;
+        if (rec && !rec.meta?.deleted) holding.add(bagUri);
+      }
+    }
+    const bags = [...holding];
+    return { tiddler, bags, primaryBag: bags[0] ?? null, scope: "operator-registry" };
   };
 }
 

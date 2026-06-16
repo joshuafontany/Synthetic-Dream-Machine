@@ -37,7 +37,7 @@ The **two-plane oracle** lands in canon (operator ruling, 2026-06-16); the code-
 4. **`@admin` owns `@catalog`** (operator constraint, 2026-06-16) — user-recipe writes ride the admin plane (the `init-wiki` verb already owns `@catalog`); system-recipe seeding rides genesis/`@oracle`, never the admin runtime.
 
 **Status — ENACTED + GREEN 2026-06-16** (steps 1–3 + the write-facet of 4): three separate docs (mint @lararium); system recipes seeded in @oracle; kernel slotUrl + recipe-watch two-source; admin island mounts @lares/@lararium from @oracle (write-facet — restored the 6 mirror e2e). **Suites: mesh 275 · tw5 118 · node 127 · browser 13 · e2e 20/20.** Re-genesis leaves the seed tree clean (gitignore bandaid reverted, debris structurally gone). LOAD --to @lararium witnessed (128 records, separate doc) + the corpus composes live in @lares.
-**REMAINING (the kept friction, handoff #oracle-planes-verb-execution):** the **read-facet** — `where`/`resolve` should query all hot wikis (directive #2), and the north-star **verb-routing-to-hot-wikis** rail that retires the admin's system-bag mounts (Council kue). `lares wiki list` two-source display (still reads "(no wikis registered)" — it reads @catalog only; system recipes live in @oracle).
+**REMAINING (the kept friction, handoff #oracle-planes-verb-execution):** the **read-facet ENACTED 2026-06-16** — `where` now queries ALL registered bags by ACCESS across both planes (access≠load; the reopened hoike chose query-all-bags over query-hot-wikis), witnessed green. **Still open:** the **write-facet retirement** — access-based `LOAD` (resolve the target doc via the accessor + write directly) that drops the admin's interim system-bag mount; `lares wiki list` two-source display (still reads "(no wikis registered)" — it reads @catalog only; system recipes live in @oracle).
 
 **Prior vector's owed tail** — `lar:///ingest.gesture.lands` is substantially DONE (gate · INGEST verb · `lares ingest` CLI · quiescence e2e · whole-carrier deletion decision+verb, all green); the only remainder is the **watcher disk-side Cut C** (the e2e vector + `watch.ts` quarantine wiring) — see #watcher-talk-story (floor closed by moʻolelo 2026-06-14) and #vessel-state.
 
@@ -45,19 +45,20 @@ The **two-plane oracle** lands in canon (operator ruling, 2026-06-16); the code-
 
 The carve dropped `@lares`/`@lararium` from the `expandRecipe` floor, but the admin island executes ACTION + READ verbs in its OWN composite (where they rode the old floor). `LOAD --to @lares` now misroutes (admin composite lacks the layer → lands in `@temp`); `where` shows `@temp`; the `@lares` mirror projects 0 files (6 e2e RED). The fix splits write/read; the friction is kept:
 
-<<~ hoike #oracle-planes-verb-execution held:"both facets ship (operator-blessed pono) — WRITE: admin mounts system bags @lares/@lararium from @oracle as writable layers (shared doc, sync carries to the wiki); READ: admin queries the hot wikis. Holding: Diplomat · Triage · Artificer" >>
-q: should the admin execute verbs against system bags it mounts itself, or route every verb to the island that owns the bag?
-<<~ kue voice:Stranger key:"a witnessed divergence/conflict between the admin's @lares mount and the @lares wiki-island mount" >>
-mounting @lares/@lararium writable in the admin re-seats the floor-everywhere the carve removed, and puts TWO writers on one system doc. CRDT merges it, but "who owns @lares writes" loses its single answer. The clean model routes the write to the one island that owns the bag and leaves the admin holding none.
+<<~ hoike #oracle-planes-verb-execution held:"REOPENED + RE-HELD 2026-06-16 (access≠load). The admin operates on bags by ACCESS (catalog-accessor reaches ANY registered bag's doc — mounts nothing): READ — where queries ALL registered bags via the accessor (cascade-resolve stays recipe-scoped, no global cascade) — ENACTED + GREEN (worker-data-verbs makeWhereReactor + RegistryReach; witnessed: where on a @lararium tiddler resolves @lararium across the registry, not @temp; unit+e2e 20/20); WRITE — LOAD resolves the target doc via the accessor and writes it directly: STILL OPEN, the admin-mounts-system-bags write-facet stands as the INTERIM the access-LOAD retires. Holding: Council · Map-Wisp · Stranger (block resolved into access)" >>
+q (reopen): should the admin operate on bags by ACCESS (access≠load, mount nothing — query/write ALL registered bags via the accessor), rather than mounting system bags or routing to the owning island?
+<<~ kue voice:Map-Wisp key:"a where result that must report a single cascade-primary across bags with no shared recipe" >>
+where = membership ("which bags hold X") resolves cleanly across all registered bags. but `primary`/highest-priority only means something INSIDE a recipe cascade — there is no global cascade. split it: where → global membership; cascade-resolve → recipe-scoped.
 <<~/kue >>
-<<~ kue voice:Council key:"the verb-routing-to-hot-wikis rail lands (directive #2 full form)" >>
-routing a verb to the bag-owning island honors BOTH "system bags ride recipes" (admin mounts none) AND §9 island sovereignty (each island executes its own). the admin's system-bag mount is the interim; routing is the north star — retire the mount when routing lands.
+<<~ kue voice:Liminal key:"a bag outside this operator's registry (unfederated) that holds the title" >>
+access reaches all REGISTERED bags (cold ones sync on demand) — closing the hot-set gap. but "all bags" = this operator's registry, never the DreamNet universe; no global now at the federation horizon. name the horizon or where overclaims.
 <<~/kue >>
-<<~ kue voice:Liminal key:"a where query that must answer for a COLD (non-resident) bag" >>
-"query all hot wikis" answers only as-of the resident set — no global now (causal islands). where over the hot set reads honest-but-partial; a cold bag holding the title returns absent. name the horizon or the answer misleads.
+<<~ kue voice:Triage key:"a where scan over a large registry that stalls on cold-bag sync" >>
+all-registered-bags = find/sync each doc; bounded by registry size, cold bags sync on demand. a diagnostic query, never a hot path — acceptable, but the cost is real; cap or stream if it bites.
 <<~/kue >>
-stand-aside: Diplomat — the admin writes the @lares BAG (data-plane, access≠load); the wiki receives it by sync, never the admin reaching into its live composite (kahu doctrine). No §9 breach.
-re-entry: a double-write conflict on a system bag | the verb-routing-to-hot-wikis rail | the next boot of this vector
+stand-aside: Diplomat — the access path IS the kahu doctrine: the admin reaches a bag's doc (data-plane), the owning island keeps composition (recipe/cascade); access≠load draws the line cleanly.
+prior held (superseded): "both facets ship — WRITE admin mounts system bags; READ admin queries hot wikis." Stranger's block (mount = floor-everywhere / two-writers) RESOLVED into the access path (no mount, no second writer). Council's route-to-owning-island softened (island owns composition; admin owns access).
+re-entry: the access-based where lands | the access-based LOAD retires the mount | a federation-horizon case where registry-scope misleads
 <<~/hoike >>
 
 <<~/ahu >>
