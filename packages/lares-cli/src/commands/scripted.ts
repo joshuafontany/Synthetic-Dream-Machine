@@ -11,7 +11,6 @@ import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");
-const TSX_BIN  = join(REPO_ROOT, "node_modules", ".bin", "tsx");
 
 export async function cmdBuildGenesis(args: ParsedArgs): Promise<number> {
   const genesisDir = args.options["genesis"] ?? (args.options["root"] ? join(args.options["root"], "genesis") : process.env["LAR_GENESIS"]);
@@ -29,15 +28,28 @@ export async function cmdHeleuma(args: ParsedArgs): Promise<number> {
   return runTsxScript(join(REPO_ROOT, "scripts", "heleuma.ts"), scriptArgs);
 }
 
-/** `lares serve` — boot the lararium node only (no Vite). */
+/** `lares serve` — boot the lararium node only (no Vite).
+ *
+ *  Runs the BUILT dist, never tsx-source: the sovereign island workers spawn from
+ *  compiled `.js` siblings (`node-admin-island.js` / `node-wiki-island.js`, no
+ *  `execArgv`), so a tsx-source run produces a half-dead vessel (port bound, admin
+ *  worker ERR_MODULE_NOT_FOUND). `node dist/src/main.js` is the design boot (= the
+ *  package `start` script, the handoff's canonical hearth, the e2e harness). Scouted
+ *  2026-06-16; hoike #dev-loop-restart. */
 export async function cmdServe(args: ParsedArgs): Promise<number> {
+  const { existsSync } = await import("node:fs");
+  const distMain = join(NODE_PKG, "dist", "src", "main.js");
+  if (!existsSync(distMain)) {
+    console.error(`[lares serve] ${distMain} not found — run \`pnpm -r build\` first (the island workers are compiled; tsx-source cannot spawn them).`);
+    return 1;
+  }
   const extraArgs: string[] = [];
   if (args.options["wiki"])    extraArgs.push("--wiki",    args.options["wiki"]);
   if (args.options["port"])    extraArgs.push("--port",    args.options["port"]);
   if (args.options["storage"]) extraArgs.push("--storage", args.options["storage"]);
   if (args.options["root"])    extraArgs.push("--root",    args.options["root"]);
   if (args.flags["debug"])     extraArgs.push("--debug");
-  return runCommand(TSX_BIN, [join(NODE_PKG, "src", "main.ts"), ...extraArgs], NODE_PKG);
+  return runCommand("node", [distMain, ...extraArgs], NODE_PKG);
 }
 
 /** `lares dev` — boot node + Vite app concurrently (full dev experience). */
@@ -94,5 +106,31 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
 export async function cmdFresh(args: ParsedArgs): Promise<number> {
   const resetCode = await cmdReset({ ...args, flags: { ...args.flags, force: true } });
   if (resetCode !== 0) return resetCode;
+  return cmdServe(args);
+}
+
+/**
+ * `lares reconcile` — converge to ONE live vessel for the dev/test loop. Idempotent
+ * from ANY prior state (running / stale / none): stop the incumbent by ACCESS to the
+ * OS port-table (graceful SIGTERM → poll port-free → bounded SIGKILL fallback — no PID
+ * file, no supervisor), optional `--fresh` wipe, then serve. The port is the single-
+ * instance capability; the EADDRINUSE bite that kept hitting us dies here.
+ * Operator ruling 2026-06-16 (hoike #dev-loop-restart). `serve` stays fail-fast.
+ */
+export async function cmdReconcile(args: ParsedArgs): Promise<number> {
+  const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
+  const { stopIncumbent } = await import("../port-control.js");
+  try {
+    const r = await stopIncumbent(port);
+    if (r.stopped) console.log(`[lares reconcile] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
+    else           console.log(`[lares reconcile] :${port} already free`);
+  } catch (e) {
+    console.error(`[lares reconcile] ${e instanceof Error ? e.message : String(e)}`);
+    return 1;
+  }
+  if (args.flags["fresh"]) {
+    const resetCode = await cmdReset({ ...args, flags: { ...args.flags, force: true } });
+    if (resetCode !== 0) return resetCode;
+  }
   return cmdServe(args);
 }

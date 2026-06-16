@@ -33,7 +33,7 @@ import { cmdIngest }                  from "../commands/ingest.js";
 import { cmdWatch }                   from "../commands/watch.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
-  cmdServe, cmdDev, cmdReset, cmdFresh,
+  cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile,
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
 
@@ -58,6 +58,7 @@ const COMMANDS: readonly Command[] = [
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "reset",         summary: "Wipe .lararium/ + bootstrap, then re-init. Requires --force.",                  handler: cmdReset         },
   { name: "fresh",         summary: "reset --force, then serve.",                                                    handler: cmdFresh         },
+  { name: "reconcile",     summary: "Idempotent dev/test restart: stop the incumbent on the port (graceful→force), [--fresh] wipe, then serve.", handler: cmdReconcile     },
   { name: "build-genesis", summary: "Build the deterministic genesis-island artifact.",                              handler: cmdBuildGenesis  },
   { name: "test-quine",    summary: "Verify the quine round-trip: genesis → boot → render → hash.",                  handler: cmdTestQuine     },
   { name: "heleuma",       summary: "Audit / scaffold load-bearing source-file memes. Pass --write to scaffold.",    handler: cmdHeleuma       },

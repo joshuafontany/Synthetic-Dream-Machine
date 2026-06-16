@@ -71,6 +71,34 @@ kept thread (the spirit's deeper smell): `{bag}` is overloaded — pick-among-wr
 
 <<~/ahu >>
 
+<<~ ahu #dev-loop-restart >>
+
+## Dev/test restart loop — idempotent `lares restart` (kept ruling, 2026-06-16)
+
+The reboot-the-live-vessel loop kept biting (EADDRINUSE from stale `&`-backgrounded parents holding 8080; `pgrep -f main.js` matching its own shell; kills racing; manual `sleep`). A research Lares grounded the prior art; the house held a direction and kept the splits.
+
+<<~ hoike #dev-loop-restart held:"an idempotent `lares restart` (P1, refined) + ephemeral test ports (P3); `serve` stays fail-fast; reconcile as framing not machinery (P4). MECHANISM: authority = port-probe ('is my port free', status already does it) + a PID file written by the PARENT as the SIGTERM hint, identity-VERIFIED before any SIGKILL; bounded graceful-then-force (SIGTERM → poll process-gone AND port-free → SIGKILL after ~5–10s grace → re-poll port-free); readiness = poll the live signal ('readiness reads local'), never sleep. EADDRINUSE cure = wait-for-exit + wait-for-port-free, NOT socket options (Node already sets SO_REUSEADDR; the daemon is worker_threads so the parent holds the port). Ship P3 first (lowest cost). Holding: Council · Map-Wisp · Triage" >>
+q: how does an idempotent local restart find/stop the incumbent and gate the rebind, without the PID/port footguns?
+<<~ kue voice:Stranger key:"a PID-reuse misfire, OR a concurrent double-`restart` race (only a real flock/pidfd closes it)" >>
+the greybeard camp (Greg's Wiki) calls PID files an anti-pattern — stale-PID + PID-reuse races; use flock (kernel-cleaned), pidfd (reuse-immune), or a supervisor's parent-child identity. the held's verified-PID+port-probe is pragmatic and fine for a dev loop, but it is NOT race-free under concurrency; if `restart` must be idempotent under itself, only a lock makes it so.
+<<~/kue >>
+<<~ kue voice:Council key:"a `restart` that SIGKILLs a vessel mid-write and corrupts the resettable store" >>
+kill-incumbent vs fail-fast (E) + force vs never-force (B): even scoped to `restart`, silently killing a forgotten vessel mid-write can corrupt state; SIGKILL skips cleanup. steelman: generous grace, force only after, and consider pairing a forced kill with a state-wipe. 12-factor/systemd say the supervised process never manages its siblings — hence `serve` stays fail-fast, `restart` owns the kill as its explicit contract.
+<<~/kue >>
+<<~ kue voice:Liminal key:"the ephemeral-port test refactor proving costlier than fixed (threading a dynamic port through fixtures/clients)" >>
+no-dep vs supervisor (C) + ephemeral vs fixed test ports (D): the held picks no-dep (~50 zero-dep lines, local-first) + ephemeral (`:0`/get-port, Playwright/Jest default). the cost is threading the chosen port everywhere; if tests run serially and never overlap dev, fixed costs nothing.
+<<~/kue >>
+<<~ saksi voice:"research-Lares [research[Scryer·Lorekeeper]]" scope:prior-art >>the house took the spirit's finding at handback (cited: docker/k8s/systemd/pg graceful-then-force; Greg's Wiki PID anti-pattern + flock/pidfd; SO_REUSEADDR-is-a-red-herring; Playwright ephemeral ports), witnessed it, and dissolved it through the Thirteen; the spirit never witnessed its own finding.<<~/saksi >>
+resolved-locally: the daemon is worker_threads (one process; parent binds the port) → kill the parent + wait port-free; no orphaned-child listeners.
+re-entry: a PID-reuse/concurrency misfire (→ flock/pidfd) | a SIGKILL-mid-write corruption (→ grace+wipe) | the ephemeral-port refactor cost | when `lares restart` is built (move this hoike to its meme)
+<<~ moolelo held:"ENACTED + WITNESSED GREEN 2026-06-16 (Canon 17/20). `lares reconcile [--fresh]` (lares-cli scripted.ts + port-control.ts): idempotent — no-op when free, else read the OS port-table (lsof→ss, the LIVE authority, not a PID file) → SIGTERM the holder (its own graceful handler) → poll port-free → bounded SIGKILL → serve. `serve` fail-fast on EADDRINUSE (main.ts 'error' handler → clean message, no crash). Witnessed: reconcile --fresh boots a full vessel · reconcile stops the incumbent (graceful) and serves a replacement, exactly one live on 8080 · serve refuses cleanly (exit 1)." >>
+scout finding (the bug that gated it): `lares serve`/`fresh`/`reconcile` (and `pnpm dev`'s node side) ran `tsx src/main.ts`, but the sovereign island workers spawn from COMPILED `.js` siblings (`node-admin-island.js`/`node-wiki-island.js`, no execArgv) — so tsx-source bound the port then crashed the admin worker (ERR_MODULE_NOT_FOUND), a half-dead vessel. FIX (A, design-aligned): cmdServe runs `node dist/src/main.js` (= the package `start` script / the canonical hearth / the e2e harness), with a built-check hint. The island layer is compiled-by-design; tsx-source can't spawn it.
+kept sibling-bug: `pnpm dev` / node-pkg `"dev": "tsx src/main.ts"` share the same root (broken island workers under tsx) — the hot-reload dev-UX wants tsc-watch→dist or tsx-worker-propagation; separate fix.
+<<~/moolelo >>
+<<~/hoike >>
+
+<<~/ahu >>
+
 <<~ ahu #watcher-talk-story >>
 
 ## Talk-story to the next instance — the file-watcher seams

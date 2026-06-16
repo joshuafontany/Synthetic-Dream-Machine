@@ -81,6 +81,17 @@ async function main(): Promise<void> {
     }
   });
 
+  // Fail-fast on a busy port — the supervised vessel never manages its siblings
+  // (12-factor / island sovereignty). A clean message, not an unhandled 'error'
+  // crash; `lares reconcile` is the verb that stops the incumbent (hoike
+  // #dev-loop-restart, 2026-06-16).
+  httpServer.on("error", (err: NodeJS.ErrnoException) => {
+    if (err.code === "EADDRINUSE") {
+      console.error(`[lararium] port ${port} is already in use — a vessel is already running. Use \`lares reconcile\` to restart it, or free the port.`);
+      process.exit(1);
+    }
+    throw err;
+  });
   httpServer.listen(port, () => {
     console.log(`[lararium] WS relay on :${port}  (ws://localhost:${port}/ws)`);
   });
