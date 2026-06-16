@@ -102,10 +102,8 @@ export async function findGenesisIsland(
   storedUrl:  string,
 ): Promise<DocHandle<LarDoc> | null> {
   try {
-    const handle = await repo.find<LarDoc>(storedUrl as AutomergeUrl, {
-      allowableStates: ["ready", "unavailable"],
-    });
-    if (handle.isUnavailable()) return null;
+    // automerge-repo 2.6: find() rejects on unavailable → caught below.
+    const handle = await repo.find<LarDoc>(storedUrl as AutomergeUrl);
     const doc = handle.doc();
     if (!doc?.blobs?.[ENGINE_CORE_ID]) return null;
     return handle;

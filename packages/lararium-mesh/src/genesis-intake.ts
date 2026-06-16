@@ -99,6 +99,14 @@ export function reconcileGenesisCid(
   incomingHandle: DocHandle<LarDoc>,
   incomingCid:    string,
 ): GenesisReconcileResult {
+  // Self-merge guard: a fresh boot falls the island back to the genesis handle
+  // itself (the bootstrap path — open-node-vessel waitHandleLocal fallback). A
+  // doc merged into itself trips automerge 3.x's wasm borrow-checker ("recursive
+  // use of an object … unsafe aliasing"); automerge 2.x silently no-op'd it.
+  // When the live doc IS the genesis doc there is nothing to reconcile.
+  if (liveHandle.url === incomingHandle.url) {
+    return { updated: false, incomingCid, previousCid: incomingCid };
+  }
   const previousCid =
     (liveHandle.doc()?.tiddlers?.[GENESIS_CID_TIDDLER]?.tiddler?.["cid"] as string | undefined) ?? null;
 

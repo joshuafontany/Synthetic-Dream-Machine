@@ -115,11 +115,8 @@ export async function openBrowserAdminVm(
   // ── Admin doc handle (browser strategy: find-or-create) ────────────────────
   const adminHandle = await (async () => {
     try {
-      const h = await repo.find<LarDoc>(adminUrl as AutomergeUrl, {
-        allowableStates: ["ready", "unavailable"],
-      });
-      if (h.isUnavailable()) return repo.create<LarDoc>(emptyLarDoc());
-      return h;
+      // automerge-repo 2.6: find() rejects on unavailable → caught below.
+      return await repo.find<LarDoc>(adminUrl as AutomergeUrl);
     } catch {
       return repo.create<LarDoc>(emptyLarDoc());
     }

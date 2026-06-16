@@ -194,18 +194,14 @@ export function runSovereignKernel(
     slot: string,
     wikiUri: string,
   ): Promise<DocHandle<LarDoc> | null> {
-    const handle = await repo.find<LarDoc>(
-      docUrl as AutomergeUrl,
-      { allowableStates: ["ready", "unavailable"] },
-    );
-    if (!handle.isUnavailable()) return handle;
-    // Settled "unavailable" before sync delivered — give the channel a bounded
-    // chance, then fault. whenReady(["ready"]) resolves the moment sync lands.
-    const ready = await Promise.race([
-      handle.whenReady().then(() => true),
-      new Promise<false>((res) => setTimeout(() => res(false), SLOT_READY_TIMEOUT_MS)),
+    // automerge-repo 2.6: find() resolves only when READY and REJECTS on
+    // unavailable (allowableStates + isUnavailable retired). Race the find
+    // against a bounded timeout; fault if the doc never arrives over syncPort.
+    const handle = await Promise.race([
+      repo.find<LarDoc>(docUrl as AutomergeUrl).catch(() => null),
+      new Promise<null>((res) => setTimeout(() => res(null), SLOT_READY_TIMEOUT_MS)),
     ]);
-    if (ready) return handle;
+    if (handle) return handle;
     _post(mkFault(wikiUri, `slot ${slot} unavailable — doc ${docUrl} never arrived over syncPort (${SLOT_READY_TIMEOUT_MS}ms)`));
     return null;
   }

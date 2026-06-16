@@ -123,9 +123,8 @@ export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPoo
 
 async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
   try {
-    const handle = await repo.find<T>(url as AutomergeUrl, { allowableStates: ["ready", "unavailable"] });
-    if (handle.isUnavailable()) return fallback();
-    return handle;
+    // automerge-repo 2.6: find() resolves when ready and rejects on unavailable.
+    return await repo.find<T>(url as AutomergeUrl);
   } catch {
     return fallback();
   }

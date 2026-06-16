@@ -24,7 +24,8 @@
  */
 
 import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";
-import WebSocket from "isomorphic-ws";
+// automerge-repo 2.6's WebSocket adapter types its socket as the DOM WebSocket
+// (Node 22+ ships a global, spec-compliant WebSocket); use that, not isomorphic-ws.
 import type { PeerId, PeerMetadata } from "@automerge/automerge-repo";
 import { runPeerHandshake } from "@lararium/mesh";
 import type { PeerHandshake } from "@lararium/mesh";

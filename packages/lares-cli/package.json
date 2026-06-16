@@ -2,7 +2,7 @@
   "name": "@lares/cli",
   "version": "0.1.0",
   "private": true,
-  "description": "Lares operator CLI \u2014 lares init, lares act (Residency Model ACTION verbs), lares wiki, lares bag, lares heleuma, \u2026 One entry point for every operator-facing ceremony.",
+  "description": "Lares operator CLI — lares init, lares act (Residency Model ACTION verbs), lares wiki, lares bag, lares heleuma, … One entry point for every operator-facing ceremony.",
   "type": "module",
   "bin": {
     "lares": "./bin/lares.mjs"
@@ -14,8 +14,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
-    "@automerge/automerge-repo": "^2.5.5",
-    "@automerge/automerge-repo-network-websocket": "^2.5.5",
+    "@automerge/automerge-repo": "2.6.0-alpha.2",
+    "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.2",
     "@lararium/mesh": "workspace:*",
     "@lararium/node": "workspace:*"
   },

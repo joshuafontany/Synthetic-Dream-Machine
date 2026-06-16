@@ -82,10 +82,11 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
   // Open admin doc to read cap events + personGroupAgentIdHex.
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   const progress    = repo.findWithProgress(adminUrl as AutomergeUrl);
-  const adminHandle = progress.handle;
-  await Promise.race([
-    adminHandle.whenReady(),
-    new Promise<void>((_, reject) =>
+  // automerge-repo 2.6: whenReady() resolves the handle when ready, rejects on
+  // unavailable; race it against a 5s timeout.
+  const adminHandle = await Promise.race([
+    progress.whenReady(),
+    new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error("[lares device-admit] admin doc not ready after 5s")), 5000),
     ),
   ]);

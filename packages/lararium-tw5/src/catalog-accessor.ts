@@ -58,16 +58,13 @@ export interface CatalogAccessor {
 const ACCESS_READY_TIMEOUT_MS = 8_000;
 
 export async function findOrThrow(repo: Repo, url: string, what: string): Promise<DocHandle<LarDoc>> {
-  const h = await repo.find<LarDoc>(
-    url as AutomergeUrl,
-    { allowableStates: ["ready", "unavailable"] },
-  );
-  if (!h.isUnavailable()) return h;
-  const ready = await Promise.race([
-    h.whenReady().then(() => true),
-    new Promise<false>((res) => setTimeout(() => res(false), ACCESS_READY_TIMEOUT_MS)),
+  // automerge-repo 2.6: find() resolves only when READY and REJECTS on
+  // unavailable. Race against a bounded timeout; throw LOUD if it never arrives.
+  const h = await Promise.race([
+    repo.find<LarDoc>(url as AutomergeUrl).catch(() => null),
+    new Promise<DocHandle<LarDoc> | null>((res) => setTimeout(() => res(null), ACCESS_READY_TIMEOUT_MS)),
   ]);
-  if (ready) return h;
+  if (h) return h;
   throw new Error(`[catalog-accessor] ${what} unavailable — doc ${url} never arrived (${ACCESS_READY_TIMEOUT_MS}ms)`);
 }
 

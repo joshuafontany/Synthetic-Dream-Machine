@@ -38,13 +38,13 @@
     "dev": "tsx src/index.ts"
   },
   "devDependencies": {
-    "vitest": "^3.2.0",
-    "tsx": "^4.19.0"
+    "tsx": "^4.19.0",
+    "vitest": "^3.2.0"
   },
   "dependencies": {
     "@automerge/automerge": "^3.2.6",
-    "@automerge/automerge-repo": "^2.5.5",
-    "@automerge/automerge-repo-network-messagechannel": "^2.5.1",
+    "@automerge/automerge-repo": "2.6.0-alpha.2",
+    "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.2",
     "@noble/ed25519": "^3.1.0",
     "@noble/hashes": "^2.2.0"
   }
