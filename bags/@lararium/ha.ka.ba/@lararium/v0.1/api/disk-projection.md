@@ -12,8 +12,8 @@ manaoio       = 15
 namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
-revised-on    = "2026-06-11"
-revision-note = "projection-law trued to the running code (membrane recompose via expandMemeRefs; debounce per bag+root; hash-gate skip); prior: co-projection rewrite of #core-claim; carrier-whole at rest, grain ladder canonized"
+revised-on    = "2026-06-15"
+revision-note = "@oracle/@lararium split (#oracle-split): the runtime system island (@oracle — genesis BLOBs, bag-oracle, genesis-cid; off-disk, mesh-synced) separates from the memetic corpus (@lararium — authored engine self-docs, bags/ seed, git-tracked); prior: projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "approved"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
@@ -51,14 +51,34 @@ Disk projection is for **content** bags (definitions + instances). **State / vie
 
 | Bag | Role | Disk surface |
 |---|---|---|
-| `@lares` / `@lararium` / `@sdm` | seed / canon (definitions) | `bags/` |
+| `@lares` / `@lararium` / `@sdm` | seed / canon (definitions; `@lararium` = the engine's **memetic corpus** — see #oracle-split) | `bags/` |
 | `@<wikiSlug>` | wiki content (instance) | `wikis/{slug}/` |
+| `@oracle` | **runtime system island** — genesis-loaded engine BLOBs + bag→doc oracle + genesis-cid | **none** — genesis-loaded + federated read-only; regenerable (see #oracle-split) |
 | `@personal` | operator view-state, wiki-instance-bound | **none** — mesh-synced (see #personal) |
 | `@draft` | per-wiki working layer | **none** — runtime |
 | `@temp` | volatile session layer | **none** — runtime |
 | `@admin` | operator's sovereign authority doc | **none** — private; syncs to operator devices via the admin-doc surface |
 
 The projector enforces this structurally: **a bag absent from the mirror list never writes to disk.** A tiddler MAY also opt out per-record with `disk-projection: no`.
+
+<<~/ahu >>
+
+<<~ ahu #oracle-split >>
+
+## @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
+
+`@lararium` once carried **two ontological kinds under one bag** — and that conflation made it fit *neither* on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
+
+| Kind | Bag | What it holds | Origin | Disk | Authority | Versioning |
+|---|---|---|---|---|---|---|
+| **memetic corpus** | **`@lararium`** | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | **`bags/` seed (tracked)** | kahu / Cabal (#kahu) | git |
+| **runtime system island** | **`@oracle`** | engine BLOBs · the bag→doc **oracle** pointers · `genesis-cid` · descriptors | built (deterministic genesis) | **none — rides the mesh** (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
+
+**Why `@oracle` carries no disk mirror.** Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`). Like `@admin`, it rides the CRDT mesh — federated **read-only** to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
+
+**Why `@lararium` stays a seed bag.** The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
+
+The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesis); a newer engine folds into `@oracle` through the **RECONCILE** rite (engine-watch #EW-5), never silently at boot.
 
 <<~/ahu >>
 

@@ -40,7 +40,9 @@ operated from the CLI by `lares act`.
 
 <<~ ahu #verbs >>
 
-## The Six Verbs
+## The verb family
+
+Six residency verbs (SPARQL set-algebra) + a **non-residency tier** (INGEST, RECONCILE) that rides the same rail.
 
 | Verb | Effect | Effect record(s) | Required args |
 |---|---|---|---|
@@ -49,11 +51,11 @@ operated from the CLI by `lares act`.
 | **MOVE** | ADD into `to-bag` + tombstone the title in `from-bag` | transfer pair: accession (`to-bag`) + deaccession (`from-bag`) | title, from-bag, to-bag, change-id |
 | **CLEAR** | enumerate live titles in bag, tombstone each | disposition (bag-level) | bag |
 | **DROP** | tombstone every live title in bag + mark the bag retired | disposition (bag retired) | bag |
-| **LOAD** | external content fetch — **not in Sprint 5 scope**; throws explicit not-implemented | — | (deferred) |
+| **LOAD** | land operator-supplied carriers into `to-bag` (carrier-borne; islands never fetch — `source-uri` = provenance) | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
+| **INGEST** | disk→records through the §6 gate (three-way diff, replace-by-group, NFC; + whole-carrier `deletions`) — the non-residency precedent | accession (`to-bag`) | source-uri, to-bag, change-id, carriers |
+| **RECONCILE** *(design)* | fold a newer engine genesis forward into `@oracle` (operator-admin engine rite; preview → conflict-surface → confirm → idempotent) | engine-version record (`@oracle` ledger) | see residency-model #non-residency-verbs |
 
-ALL CAPS by convention (SPARQL Update derivation). The verb vocabulary comes
-from set-algebra + cataloging, never version control. See
-[residency-model](residency-model.md) `#action-verb-surface`.
+ALL CAPS by convention. The first six draw from set-algebra + cataloging, **never version control**. **INGEST + RECONCILE** form the non-residency tier — the same VERB → SUMMONS → OUTCOME rail, `withEffectRecord` audit, and cap-gate, with no tiddler-between-bags move. See [residency-model](residency-model.md) `#action-verb-surface` + `#non-residency-verbs`.
 
 <<~/ahu >>
 

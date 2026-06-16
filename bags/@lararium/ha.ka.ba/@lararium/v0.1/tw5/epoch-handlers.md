@@ -59,6 +59,40 @@ reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 
 <<~/ahu >>
 
+<<~ ahu #deferred-design >>
+
+## Deferred design — EPOCH as an operator rite (proposed 2026-06-15)
+
+EPOCH is the *cut behind*, paired with RECONCILE's *fold forward* (residency-model
+#non-residency-verbs): **two verbs, sequenced `reconcile → epoch`, never
+auto-coupled** — the fold stays op-log-recoverable; the cut destroys recovery.
+The implemented reactors above (`epoch-bag`, `rotate-recipe`) carry the
+mechanism; promoting it to a deliberate operator verb adds:
+
+- **Two acts, not one.** The irreversible **CUT** (snapshot-restart into a fresh
+  history-less doc) and the **RECLAIM** (delete the frozen pre-epoch doc, EP-4)
+  separate — the reclaim **grace-gated**, never destroy-in-place (Nix
+  generations / git `gc` reflog-expiry). EP-4's "operator prune" becomes the
+  gated second act.
+- **Backup AT THE CUT (non-negotiable).** `save()` the pre-epoch doc atomically
+  with the rebuild (single-process, writes quiesced) + emit the legible `.md`
+  companion. The frozen **doc** is archive-of-record; the `.md` is the legible
+  companion (it is a disposable projection, disk-projection #projection-law — the
+  doc holds recovery).
+- **Honor EP-1.** The "irreversible cut" MUST carry tombstones through as
+  first-class state, or it breaks the Cassandra rule.
+- **Federation cost is content-only.** Peers offline across a *content* epoch
+  cannot merge (lossy by design, #contract). An **engine** update carries no
+  such cost — it rides RECONCILE on `@oracle`, operator(admin)-authored +
+  federated read-only (engine-watch EW-5); a peer just adopts what it receives.
+  Do not let the engine's cheapness set the content-epoch safety budget.
+
+Necessity is not urgent: `save()` compresses but never truncates, so the op-log
+is free recovery until growth on a long-lived high-churn bag actually bites
+(automerge#799). EPOCH waits on its own floor + that growth signal.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges

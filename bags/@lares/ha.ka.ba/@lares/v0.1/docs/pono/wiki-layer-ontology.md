@@ -72,13 +72,15 @@ An oracle (a bag-URI → doc-URL pointer) resolves from the plane that owns it; 
 
 | Plane | Oracle home | Holds | Authority class |
 |---|---|---|---|
-| **Protocol invariants** | the @lararium doc's well-known tiddlers | @lararium, @lares — the DreamNet federation floor | genesis / engine-epoch machinery |
+| **Protocol invariants** | the **`@oracle`** runtime-island doc's well-known tiddlers | the bag→doc oracle + engine BLOBs + genesis-cid; the `@lararium`/`@lares` corpus federates beneath as the floor | genesis / engine-epoch (operator-admin; engine-watch EW-5) |
 | **User registry** | `@catalog` | the operator's bags, each under OCAP grants | operator composition (recipes, ACTION verbs) |
 | **Public / Infrastructure** | `@crossroads` *(unbuilt — `lar:///ha.ka.ba/@lararium/v0.1/docs/crossroads`)* | ring-1 public bags | federation / community |
 
-Islands resolve each slot from its plane: invariants from the substrate doc they already hold, library bags from @catalog, public bags (future) from @crossroads. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies), never the catalog composition class.
+**The runtime island splits from the corpus (operator ruling, 2026-06-15).** The protocol-invariant oracle (and the engine BLOBs + genesis-cid it sits beside) lives in **`@oracle`** — the genesis-loaded runtime system island, off-disk, federated read-only. **`@lararium`** is now purely the **memetic corpus** (the engine's authored self-docs, `bags/` seed, git-tracked). Full grain: disk-projection #oracle-split. The conflation that put per-deployment `automerge:` pointers + BLOBs in the `@lararium` seed surface is resolved by the split — `@oracle` rides the mesh (regenerable), `@lararium` stays tracked source.
 
-**Invariant mint law (operator-gated, 2026-06-10):** minting a protocol invariant rides the **most-restricted grant — operator(admin), timed**. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the @lararium doc — absent reads *not-yet-federated*, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @lararium doc settle a concurrent mint by LWW: write, re-read, **adopt the winner**. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
+Islands resolve each slot from its plane: invariants from the `@oracle` doc they already hold, library bags from @catalog, public bags (future) from @crossroads. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the **RECONCILE** rite, engine-watch EW-6), never the catalog composition class.
+
+**Invariant mint law (operator-gated, 2026-06-10):** minting a protocol invariant rides the **most-restricted grant — operator(admin), timed**. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the **@oracle** runtime-island doc — absent reads *not-yet-federated*, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @oracle doc settle a concurrent mint by LWW: write, re-read, **adopt the winner**. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
 
 <<~/ahu >>
 

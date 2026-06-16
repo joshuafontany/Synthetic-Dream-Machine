@@ -12,9 +12,9 @@ manaoio       = 16
 namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
-revised-on    = "2026-06-10"
-revision-note = "bag-grain verb pair (CREATE + bag-grain COPY) approved — carries the wiki-layer crossing rite; @catalog registration = holdings accession; implementation pending"
-role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag: CREATE / bag-grain COPY)"
+revised-on    = "2026-06-15"
+revision-note = "non-residency verb tier seated (#non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
+role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag); a non-residency verb tier (INGEST, RECONCILE) rides the same rail"
 status        = "approved"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 l-space       = "stable"
@@ -172,7 +172,29 @@ Any implementation of this model MUST hold all five:
 2. **Work-identity preserved across residencies.** FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
 3. **Operator-visible coordinate surface.** Every read MUST surface origin-bag the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
 4. **Audit-trail discipline.** Every residency change writes an indelible effect record. Silent unlink violates the model.
-5. **Verb vocabulary from set-algebra + cataloging.** ACTION surface SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. Verbs from version control (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter the canonical surface — they import a timeline mental model that does not fit.
+5. **Verb vocabulary from set-algebra + cataloging.** The *residency* ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry **non-residency** verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that *folds* state (RECONCILE) MUST stay **conflict-SURFACING, never merge-arbitrating** (#conflict-resolution), or it reads as a banned merge verb.
+
+<<~/ahu >>
+
+<<~ ahu #non-residency-verbs >>
+
+## The non-residency tier — verbs that ride the rail, not the coordinate space
+
+The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/DROP) are SPARQL-Update set-algebra over `(title × bag)`; **INGEST** was the first to break that frame — a disk→records membrane gesture (three-way diff, replace-by-group, NFC), with no SPARQL analog, riding the same VERB → SUMMONS → OUTCOME rail with the same `withEffectRecord` audit + cap-gate. The tier is open: a verb belongs here when it carries an operator gesture through the rail + audit + authority machinery, even if it moves no tiddler between bags.
+
+### RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
+
+`lares act RECONCILE` adopts a newer engine genesis into the living **`@oracle`** runtime island (disk-projection #oracle-split) — the deliberate rite that replaces the old silent boot-time fold (engine-watch EW-6).
+
+- **Authority:** cap-verify an **operator(admin)** grant on `@oracle` (engine-watch EW-5; the mint-gate pattern — node genesis office). Peers federate `@oracle` read-only; they never RECONCILE.
+- **Mechanism (additive, never arbitrating):** fold the genesis doc forward into `@oracle` (Automerge merge, additive — operator content survives). Because automerge LWW resolves by **op-id, not wall-clock**, the verb MUST **enforce the fold direction** (the newer engine intended-wins) and **SURFACE every operator field it would shadow** (#conflict-resolution: detect + record, never silently pick) — it never auto-resolves a contended field.
+- **v1 safety envelope:** dry-run **preview** (clone → merge → diff → render the Patch[]; the `lares watch` preview precedent) → **conflict-surface** (the shadowed fields) → **confirm-gate** (`--force` for agents, the `lares act` y/N precedent) → **idempotent** (an applied-engine-version marker; reconcile with content-addressed `taskContentId` so the two dedup paths agree) → **indelible effect record** (`lar:///@oracle/ledger/residency/<id>` — engine-version-id · genesis-checksum · timestamp · outcome; the ledger doubles as the idempotency gate, Flyway-style).
+- **No down-script.** An additive CRDT merge has no inverse; rollback rides the **retained pre-fold generation** (Nix-style; the op-log holds it until an epoch — never a reverse migration).
+- **Boot warns, never folds** (engine-watch EW-1/EW-6).
+
+### EPOCH — cut history behind (DEFERRED, named here for the pair)
+
+RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a *content* epoch (peers offline across a content cut cannot merge).
 
 <<~/ahu >>
 

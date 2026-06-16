@@ -4,11 +4,13 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/v0.1/tw5/engine-watch.md"
-mana        = 12
-manao       = 12
+mana        = 14
+manao       = 14
 register    = "Synthesis"
 retain      = true
-role        = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself"
+revised-on  = "2026-06-15"
+revision-note = "EW-5 SEATED (was held-open): engine-genesis update = operator(admin) on @oracle, peers federate read-only; the fold rides the RECONCILE rite. EW-6 added: boot warns, never auto-folds (relocates the boot auto-merge to the rite). Watch subscribes to @oracle (the runtime island), split from the @lararium corpus."
+role        = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself; carries the seated engine-update authority (EW-5/6)"
 source-file = "packages/lararium-tw5/src/engine-watch.ts"
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
@@ -45,11 +47,12 @@ bytes it eval's (never trusting the blob entry's self-claim), faults on a
 manifest `coreHash` mismatch, and lifts `{ sha256, version }` into
 `IslandContext.engine`.
 
-`startEngineWatch(ctx)` then subscribes to the island's own `@lararium`
-handle. When a new genesis merges into that live doc under the running island
-(`reconcileIslandFromGenesis` on a vessel carrying a newer artifact — the
-CRDT carries the change to every peer "as of my last sync"), the watch
-compares `blobs[tiddlywikicore].sha256` against the booted engine and writes
+`startEngineWatch(ctx)` then subscribes to the island's own **`@oracle`**
+handle (the runtime system island — engine BLOBs + bag-oracle + genesis-cid;
+disk-projection #oracle-split). When a newer engine enters that live doc —
+through the operator's **RECONCILE** rite, or CRDT propagation from a peer
+that ran it "as of my last sync" — the watch compares
+`blobs[tiddlywikicore].sha256` against the booted engine and writes
 `$:/temp/lares/alert/engine-waiting` tagged `$:/tags/Alert` — TW5's native
 alert area renders it; `@temp` volatility clears it on the reboot that adopts
 the epoch. Both island behaviors (wiki and admin) run the watch; demote
@@ -77,9 +80,28 @@ upgrade.
 **EW-4 — One alert per epoch.** A stable title coalesces; repeated change
 events for the same waiting sha write once.
 
-**EW-5 — Authority held open.** Who may move the engine pointer (signing,
-threshold, cabal capability) stays undecided until the wiki-mesh lives; the
-watch trusts the `@lararium` doc's write-capability story as it stands.
+**EW-5 — Authority seated (operator ruling, 2026-06-15).** Only an
+**operator(admin)** grant MAY update the engine genesis — the `@oracle`
+runtime-island doc (engine BLOBs + bag-oracle + genesis-cid). Peers
+**federate `@oracle` read-only** (the kahu doctrine: the protocol distributes
+by CRDT propagation, never command), so an old peer in the wild never
+reconciles the engine itself — it adopts what it receives, and a missed
+update is no loss. The operator's engine-fold rides the **RECONCILE** rite
+(a `lares act RECONCILE` operator(admin) verb — residency-model
+#non-residency-verbs), never a silent merge. At the Lararium layer this is the
+single-operator seat; at DreamNet the kahu/Cabal holds the shared-protocol
+grant — the two compose (#kahu). This closes the seam this invariant once
+held open (and engine-epoch hazard 4).
+
+**EW-6 — The fold is a rite, not a boot reflex (operator ruling, 2026-06-15).**
+Boot reads its engine from `@oracle`'s own blobs and only **WARNS** on a
+waiting newer engine (EW-1) — it does NOT fold genesis in. Adopting a newer
+engine into the living `@oracle` doc is the deliberate **RECONCILE** act
+(preview → conflict-surface → confirm → idempotent → effect-record;
+residency-model #conflict-resolution). *Behavior change:* the prior boot path
+auto-merged genesis on CID divergence (`reconcileIslandFromGenesis` inside
+`loadGenesis`); that auto-fold relocates to the rite, leaving boot to warn
+only. The running engine still swaps only on reboot (EW-2).
 
 <<~/ahu >>
 
