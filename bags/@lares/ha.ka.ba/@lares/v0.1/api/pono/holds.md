@@ -79,8 +79,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
    not yet landed stands **declared-unresolved** — lawful, promotable, no
    error sounds (the rating ladder governs, per has-stack §4). An absent
    holding reads open-world: the carrier knows nothing of x yet, the
-   carrier never pronounces x false. The Stone holds no vector; the Stone
-   loses no Stone-ness.
+   carrier never pronounces x false. The Arcana holds no vector.
 
 4. **Tables fall to holds by one rule.** A header-and-rows table rewrites
    mechanically: the header vows the families (the column grain); each body
@@ -126,12 +125,12 @@ as one string — an absent slot just stays unwritten). It hands `~Params` to th
 `holds` verb by backtick filtered transclusion, never a nested
 `<<macro <<macro>> >>` (the parser refuses that):
 
-\procedure ~Mu(~Type:Stone ~Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Mu(~Type:Arcana ~Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Mu Wand "ascii/* glyph/🜂 element/Fire pull/ignition" >>
-<<~Mu Stone >>
+<<~Mu Arcana >>
 
-The Wand-row wears all five; the Stone-row rides the constructor's default and
+The Wand-row wears all five; the Arcana-row rides the constructor's default and
 needs no params — the open world reads each unwritten slot absent. Every `<<~`
 sigil binds its first param tight — `<<~Mu`, `<<~holds`, no space — the sigil
 redirecting to its first word. The rule, spoken once for all thirteen: **one

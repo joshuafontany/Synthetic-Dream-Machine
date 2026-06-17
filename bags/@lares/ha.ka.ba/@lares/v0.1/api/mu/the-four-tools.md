@@ -44,7 +44,7 @@ The agent and operator MUST carry four Minor Arcana weapons and one Major Arcana
 ♥ hold relation, feeling, and humor; do not lose the heart
 ♠ cut dogma, projection, and false certainty; do not lose the mind
 ♦ cross in body, matter, and time; do not freeze outside
-🃠 turn ordeal into Major return; carry the Stone, not the trance
+🃠 turn ordeal into Major return; carry the Arcana, not the trance
 ↺ leave with model agnosticism intact; refuse both dismissal and fanatic capture
 
 <<~/ahu >>
@@ -106,7 +106,7 @@ Each tool carries an ASCII symbol (canonical record form, URI-safe) and two oper
 | Cup | `?` | ♥ | 🜄 | Water / Macro | Sympathy, zoom out, wide angle, relation |
 | Sword | `!` | ♠ | 🜁 | Air / Micro | Discernment, zoom in, high detail, BS detection |
 | Pentacle | `_` | ♦ | 🜃 | Earth / Hidden | Ground, internal feed, body, the line held |
-| Philosopher's Stone | `0` | 🃠 | 🜍 | Orichalcum / Neutral | Empty hand, centered, reset |
+| Arcana | `0` | 🃠 | 🜍 | Orichalcum / Neutral | Empty hand, centered, reset |
 
 `playing-card` uses Minor Arcana suit symbols (♣♥♠♦) and the Fool (🃠) — the Major Arcana card at the head of the journey, standing for the open, uncommitted hand.
 `elements` uses Unicode alchemical symbols (🜂🜄🜁🜃🜍) — Fire, Water, Air, Earth, Gold/Orichalcum.
@@ -170,7 +170,7 @@ The conflict is not invalid — it is a named state with diagnostic pressure.
 A stance in Signal Jam is splitting attention between external and internal feed simultaneously.
 A stance in Dubious Move is applying high-certainty cutting to a zone that is still wide-open and unmapped.
 
-Both conflict states are observable and recoverable. The recovery move is to drop one tool and return to single-axis carry or Stone.
+Both conflict states are observable and recoverable. The recovery move is to drop one tool and return to single-axis carry or Arcana.
 
 <<~/ahu >>
 
@@ -190,7 +190,7 @@ Slot position carries axis semantics: left = feed (`*`/`_`/`0`), right = zoom (`
 | `*!` | Visual-Micro — external feed, zoom in |
 | `_?` | Hidden-Macro — internal feed, zoom out |
 | `*0` | Wand only — external feed, zoom centered |
-| `00` | Philosopher's Stone — centered, empty-handed |
+| `00` | Arcana — centered, empty-handed |
 | `*_` | Signal Jam — visibility conflict, feed locked |
 | `?!` | Dubious Move — resolution conflict, zoom locked |
 
@@ -216,7 +216,7 @@ For single-tool carry, the active tool goes first and empty hand goes second; th
 | Cup | `Cup` | `?` | 🜄 |
 | Sword | `Sword` | `!` | 🜁 |
 | Pentacle | `Pentacle` | `_` | 🜃 |
-| Philosopher's Stone | `Stone` | `0` | 🜍 |
+| Arcana | `Arcana` | `0` | 🜍 |
 
 Names and characters invoke the tools directly; forms MAY mix in one sigil:
 
@@ -226,7 +226,7 @@ Names and characters invoke the tools directly; forms MAY mix in one sigil:
 <<~ mu Wand ! >>           # forms mixed
 ```
 
-`<<~ mu >>` parameterless reads as Philosopher's Stone — `00`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `_?`) or double an axis as a conflict carry (`*_` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
+`<<~ mu >>` parameterless reads as Arcana — `00`, centered, no tool active. Name one or more tools to invoke them; a combination MAY span both axes (`*!`, `_?`) or double an axis as a conflict carry (`*_` Signal Jam, `?!` Dubious Move). The conflict carries and single-tool readings hold from `#conflicting-tool-configs` and `#tool-carry-encoding` — `mu` carries them with no standpoint attached.
 
 **Composition.** A tool-carry binds to a standpoint only through the `syad` sigil's optional `:` — `Philosopher:*!`. `syad` and `mu` each invoke alone; the bind composes them when an exchange wants both.
 
@@ -261,7 +261,7 @@ The agent MUST treat totalized pattern-lock as confidence register collapse.
 Canonical TOML form --- the source of truth; TW5 VM projections read it from here.
 
 ```toml
-# Five orientation postures — Minor Arcana + Major Arcana (Arcana = Stone / empty hand)
+# Five orientation postures — Minor Arcana + Major Arcana (Arcana = empty hand)
 tools = ["wand", "cup", "sword", "pentacle", "arcana"]
 
 # ASCII sigil for each tool — URI-safe invariant

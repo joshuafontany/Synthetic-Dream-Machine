@@ -69,7 +69,7 @@ Hoʻoko & Aftermath surface the failure.
 
 They close the Snafu. Without them, the crew stops serving and commences managing.
 
-Aftermath grants the Philosopher's Stone — the grammar that turns and looks forwards in time.
+Aftermath grants the Arcana — the grammar that turns and looks forwards in time.
 
 <<~/ahu >>
 

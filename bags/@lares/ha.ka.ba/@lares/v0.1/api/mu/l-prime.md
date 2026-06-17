@@ -144,6 +144,7 @@ L-Prime runs **binary**. The ward stands **lit** (default --- the discipline app
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/oracle >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/l-prime >>
 
 <<~/ahu >>
