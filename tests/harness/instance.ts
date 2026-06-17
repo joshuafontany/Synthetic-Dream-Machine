@@ -19,6 +19,7 @@
  */
 
 import { spawn, type ChildProcess } from "node:child_process";
+import { createServer } from "node:net";
 import { mkdtempSync, rmSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -73,11 +74,27 @@ function runCli(env: Record<string, string>, args: readonly string[]): Promise<C
   });
 }
 
+/** An OS-assigned free port (bind :0 → read the assigned port → close). Collision-
+ *  FREE at that instant — strictly better than the old PID-stride guess (which only
+ *  reduced collisions). Tiny TOCTOU before the daemon binds; acceptable for tests. */
+function freePort(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const srv = createServer();
+    srv.unref();
+    srv.once("error", reject);
+    srv.listen(0, "127.0.0.1", () => {
+      const addr = srv.address();
+      const p = typeof addr === "object" && addr ? addr.port : 0;
+      srv.close(() => (p ? resolve(p) : reject(new Error("freePort: no port assigned"))));
+    });
+  });
+}
+
 async function openStaged(): Promise<LarInstance> {
   const root = mkdtempSync(join(tmpdir(), "lares-staged-"));
-  // PID-derived + random offset: two parallel staged suites collided once
-  // on pure-random ports (2026-06-11) — the PID stride keeps siblings apart.
-  const port = 8300 + ((process.pid * 13) % 400) + Math.floor(Math.random() * 100);
+  // OS-assigned free port — each staged island its own port, collision-free
+  // (causal-island isolation; was a PID-stride guess that only reduced collisions).
+  const port = await freePort();
   const env  = { LAR_ROOT: root, LAR_PORT: String(port) };
 
   // Genesis — `lares reset --force` seeds the root (init runs inside).
