@@ -147,6 +147,27 @@ describe("ADD handler", () => {
     const args = { title: "missing", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
     await expect(handler(args, makeContext(composite, "ADD", args))).rejects.toThrow(/does not hold/);
   });
+
+  test("fails loud on an unmounted destination — no silent fall-through, no auto-mount", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    const cid = newChangeId();
+    await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
+
+    // A deep target bag with no writable layer: a residency write MUST fail loud
+    // (Law 4 / confused-deputy guard) and MUST NOT mount the bag ephemerally —
+    // the access-reach path resolves the bag's own doc, never a standing mount.
+    const handler = table.get("ADD")!;
+    const UNMOUNTED = "lar:///ha.ka.ba/@unmounted-deep-bag";
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": UNMOUNTED, "change-id": cid };
+    await expect(handler(args, makeContext(composite, "ADD", args)))
+      .rejects.toThrow(/unreachable|no silent fall-through/i);
+
+    expect(composite.hasBag(UNMOUNTED)).toBe(false);
+    // The source copy is untouched; nothing landed in the default writable either.
+    expect((await composite.resolveAll("T")).map((e) => e.bagId)).toEqual([BAG_LOW]);
+  });
 });
 
 // ---------------------------------------------------------------------------

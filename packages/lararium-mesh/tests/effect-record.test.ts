@@ -28,6 +28,7 @@ import {
   writeEffectRecord, withEffectRecord,
 } from "../src/effect-record.js";
 import type { EffectRecord } from "../src/effect-record.js";
+import type { LarTiddlerStore } from "../src/tiddler-store.js";
 import type { ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction } from "../src/residency-actions.js";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import { CompositeStore } from "../src/composite-store.js";
@@ -315,7 +316,7 @@ describe("mapActionToEffects", () => {
 // ---------------------------------------------------------------------------
 
 describe("writeEffectRecord", () => {
-  test("writes the effect tiddler into the target bag through the composite", async () => {
+  test("writes the effect tiddler into the affected bag's own store", async () => {
     const composite = new CompositeStore();
     const BAG = "lar:///ha.ka.ba/@elyncia";
     composite.addLayer({ bagId: BAG, store: new MemoryTiddlerStore(), writable: true });
@@ -330,31 +331,52 @@ describe("writeEffectRecord", () => {
       tiddlerTitle: "T",
       changeId:     "c",
     };
-    await writeEffectRecord(composite, effect);
+    await writeEffectRecord(async (bag) => composite.writableStoreForBag(bag), effect);
     const got = await composite.get(effectRecordUri(BAG, "evt-1"));
     expect(got).not.toBeNull();
     expect((got?.tiddler as Record<string, unknown>)["archival-verb"]).toBe("accession");
   });
+
+  test("throws loud when the affected bag is unreachable (no silent unlink)", async () => {
+    const effect: EffectRecord = {
+      eventId:      "evt-x",
+      archivalVerb: "accession",
+      actionVerb:   "ADD",
+      requestId:    "req-x",
+      bag:          "lar:///ha.ka.ba/@nowhere",
+      actor:        "op",
+      timestamp:    "2026-05-31T00:00:00Z",
+      tiddlerTitle: "T",
+      changeId:     "c",
+    };
+    await expect(writeEffectRecord(async () => null, effect)).rejects.toThrow(/unreachable/);
+  });
 });
 
 describe("withEffectRecord", () => {
-  async function setupComposite(): Promise<{ composite: CompositeStore; bagA: string; bagB: string }> {
+  async function setupComposite(): Promise<{
+    composite: CompositeStore; bagA: string; bagB: string;
+    resolve: (bag: string) => Promise<LarTiddlerStore | null>;
+  }> {
     const composite = new CompositeStore();
     const bagA = "lar:///ha.ka.ba/@aleph";
     const bagB = "lar:///ha.ka.ba/@beth";
     composite.addLayer({ bagId: bagA, store: new MemoryTiddlerStore(), writable: true, defaultWritable: false });
     composite.addLayer({ bagId: bagB, store: new MemoryTiddlerStore(), writable: true });
-    return { composite, bagA, bagB };
+    // Effect records ride each affected bag's OWN store (residency-model
+    // #effect-record-surface) — resolved per bag, not the composite default writable.
+    const resolve = async (bag: string) => composite.writableStoreForBag(bag);
+    return { composite, bagA, bagB, resolve };
   }
 
   test("runs mutate then writes effect records (ADD = one accession)", async () => {
-    const { composite, bagA, bagB } = await setupComposite();
+    const { composite, bagA, bagB, resolve } = await setupComposite();
     let mutateCalled = false;
     const action: AddAction = {
       verb: "ADD", requestId: "r-1", requestedBy: "op",
       title: "T", fromBag: bagA, toBag: bagB, changeId: "c-1",
     };
-    const result = await withEffectRecord(action, composite, async () => {
+    const result = await withEffectRecord(action, resolve, async () => {
       mutateCalled = true;
       return "result-payload";
     });
@@ -371,12 +393,12 @@ describe("withEffectRecord", () => {
   });
 
   test("MOVE writes paired effects (one accession + one deaccession)", async () => {
-    const { composite, bagA, bagB } = await setupComposite();
+    const { composite, bagA, bagB, resolve } = await setupComposite();
     const action: MoveAction = {
       verb: "MOVE", requestId: "r-1", requestedBy: "op",
       title: "T", fromBag: bagA, toBag: bagB, changeId: "c-1",
     };
-    await withEffectRecord(action, composite, async () => undefined);
+    await withEffectRecord(action, resolve, async () => undefined);
 
     const titles = await composite.listVisible();
     const effectTitles = titles.filter(isEffectRecordUri);
@@ -393,12 +415,12 @@ describe("withEffectRecord", () => {
   });
 
   test("when mutate throws, no effect records get written", async () => {
-    const { composite, bagA, bagB } = await setupComposite();
+    const { composite, bagA, bagB, resolve } = await setupComposite();
     const action: AddAction = {
       verb: "ADD", requestId: "r-1", requestedBy: "op",
       title: "T", fromBag: bagA, toBag: bagB, changeId: "c-1",
     };
-    await expect(withEffectRecord(action, composite, async () => {
+    await expect(withEffectRecord(action, resolve, async () => {
       throw new Error("mutate failed");
     })).rejects.toThrow("mutate failed");
 
@@ -408,12 +430,12 @@ describe("withEffectRecord", () => {
   });
 
   test("mutate result type passes through unchanged", async () => {
-    const { composite, bagA, bagB } = await setupComposite();
+    const { composite, bagA, bagB, resolve } = await setupComposite();
     const action: AddAction = {
       verb: "ADD", requestId: "r-1", requestedBy: "op",
       title: "T", fromBag: bagA, toBag: bagB, changeId: "c-1",
     };
-    const result = await withEffectRecord(action, composite, async () => ({ id: 42, ok: true }));
+    const result = await withEffectRecord(action, resolve, async () => ({ id: 42, ok: true }));
     expect(result).toEqual({ id: 42, ok: true });
   });
 });

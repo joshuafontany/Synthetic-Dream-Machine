@@ -183,6 +183,36 @@ describe("CompositeStore — write routing", () => {
 });
 
 // ---------------------------------------------------------------------------
+// Per-bag store getters — the no-`reach` residency resolver's foundation.
+// A residency WRITE targets a writable layer only (read-only → null → the
+// executor fails loud, never a shadow-up misroute); a residency READ reaches
+// any mounted layer (a source bag MAY be a read-only library).
+// ---------------------------------------------------------------------------
+
+describe("CompositeStore — per-bag store getters", () => {
+  test("writableStoreForBag returns the writable layer's store; null for read-only or absent", () => {
+    const lib  = new MemoryTiddlerStore();
+    const wiki = new MemoryTiddlerStore();
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_IDS.lararium, store: lib,  writable: false });
+    store.addLayer({ bagId: TEST_WIKI_URI,    store: wiki, writable: true });
+
+    expect(store.writableStoreForBag(TEST_WIKI_URI)).toBe(wiki);
+    expect(store.writableStoreForBag(BAG_IDS.lararium)).toBeNull();           // read-only → no write store
+    expect(store.writableStoreForBag("lar:///ha.ka.ba/@unmounted")).toBeNull();
+  });
+
+  test("storeForBag returns ANY layer's store (read reaches a read-only library)", () => {
+    const lib = new MemoryTiddlerStore();
+    const store = new CompositeStore();
+    store.addLayer({ bagId: BAG_IDS.lararium, store: lib, writable: false });
+
+    expect(store.storeForBag(BAG_IDS.lararium)).toBe(lib);
+    expect(store.storeForBag("lar:///ha.ka.ba/@unmounted")).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Subscribe — fan-out and synthetic events on addLayer
 // ---------------------------------------------------------------------------
 

@@ -24,11 +24,13 @@
 import {
   CATALOG_DOC_URI,
   tiddlerText,
+  AutomergeDocStore,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
   type LarDoc,
   type LarTiddlerRecord,
+  type LarTiddlerStore,
 } from "@lararium/mesh";
 
 export interface CatalogAccessor {
@@ -42,6 +44,12 @@ export interface CatalogAccessor {
   recordOf(title: string): Promise<LarTiddlerRecord | null>;
   /** `repo.find()` the bag the registry maps `bagUri` to (null if unregistered). */
   find(bagUri: string): Promise<DocHandle<LarDoc> | null>;
+  /** A read+write store over the bag's own doc, resolved by access (null if
+   *  unregistered). The access-WRITE surface (`wiki-layer-ontology#write-law`):
+   *  a deep-bag residency write reaches the bag's doc directly and writes-then-
+   *  syncs — it MOUNTS nothing into a composite (access≠load). Authority rides
+   *  the cap-gate upstream, never a composite read-only flag. */
+  storeOf(bagUri: string): Promise<LarTiddlerStore | null>;
 }
 
 /**
@@ -97,5 +105,10 @@ export function makeCatalogAccessor(repo: Repo, catalogUrl: string): CatalogAcce
     return findOrThrow(repo, url, `bag ${bagUri}`);
   };
 
-  return { handle, urlOf, recordOf, find };
+  const storeOf = async (bagUri: string): Promise<LarTiddlerStore | null> => {
+    const h = await find(bagUri);
+    return h ? new AutomergeDocStore(h, bagUri) : null;
+  };
+
+  return { handle, urlOf, recordOf, find, storeOf };
 }

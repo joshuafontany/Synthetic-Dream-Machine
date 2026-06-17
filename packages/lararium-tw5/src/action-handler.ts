@@ -35,6 +35,7 @@
 import type {
   CompositeStore,
   LarTiddlerRecord,
+  LarTiddlerStore,
   ChangeOrigin,
   Verb,
   Repo,
@@ -43,7 +44,6 @@ import type {
 import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord, sha256HexSync,
-  AutomergeDocStore,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
@@ -70,45 +70,51 @@ export interface ActionHandlerOptions {
   readonly reach?: { repo: Repo; catalogUrl: string | null; oracleUrl: string | null };
 }
 
-/** Bags a residency action reads or writes — the set that must be reachable. */
-function bagsOfAction(action: ResidencyAction): string[] {
-  switch (action.verb) {
-    case "ADD":
-    case "COPY":
-    case "MOVE":  return [action.fromBag, action.toBag];
-    case "LOAD":
-    case "INGEST": return [action.toBag];
-    case "CLEAR":
-    case "DROP":  return [action.bag];
-  }
+/**
+ * Read/write access to a bag's OWN store, resolved per action — never a mount.
+ *
+ * The reach path (the `@admin` wiki VM) reaches a deep bag's doc by ACCESS across
+ * the two registry planes (system → `@oracle`, user → `@catalog`) and writes-then-
+ * syncs; it mounts nothing into a composite (access≠load; `wiki-layer-ontology#write-law`,
+ * `residency-model` sovereign-worker MUST). The no-reach wiki island resolves its
+ * OWN recipe-mounted layers: a source bag MAY be a read-only library layer (read),
+ * a target MUST be a writable layer (write). Authority rides the cap-gate upstream.
+ */
+interface BagAccess {
+  read(bag: string): Promise<LarTiddlerStore | null>;
+  write(bag: string): Promise<LarTiddlerStore | null>;
 }
 
-/**
- * Ensure every named bag is reachable in the composite, mounting absent ones
- * EPHEMERALLY by access (resolve via the registry accessor — catalog plane then
- * oracle plane). Returns the bag IDs added, for the caller to release after the
- * action. A bag that resolves nowhere is left absent: the executor then fails
- * loud (composite.put no longer falls through silently).
- */
-async function ensureReachable(
-  composite: CompositeStore,
-  reach: NonNullable<ActionHandlerOptions["reach"]>,
-  bagIds: readonly string[],
-): Promise<string[]> {
-  const planes = [reach.catalogUrl, reach.oracleUrl].filter((u): u is string => !!u)
-    .map((u) => makeCatalogAccessor(reach.repo, u));
-  const added: string[] = [];
-  for (const bagId of bagIds) {
-    if (composite.hasBag(bagId)) continue;
-    for (const accessor of planes) {
-      const handle = await accessor.find(bagId).catch(() => null);
-      if (!handle) continue;
-      composite.addLayer({ bagId, store: new AutomergeDocStore(handle, bagId), writable: true, defaultWritable: false });
-      added.push(bagId);
-      break;
-    }
+function makeBagAccess(opts: ActionHandlerOptions): BagAccess {
+  if (opts.reach) {
+    const reach = opts.reach;
+    const planes = [reach.catalogUrl, reach.oracleUrl].filter((u): u is string => !!u)
+      .map((u) => makeCatalogAccessor(reach.repo, u));
+    const cache = new Map<string, LarTiddlerStore | null>();
+    // Reach a bag's store: prefer one the admin already mounts writable (its own
+    // @admin bag — no find latency), else resolve the bag's doc by access across
+    // the two planes. Cached per action (find() is bounded-async). Read and write
+    // share the store: the doc carries no read-only flag — the cap-gate is the authority.
+    const resolve = async (bag: string): Promise<LarTiddlerStore | null> => {
+      const hit = cache.get(bag);
+      if (hit !== undefined) return hit;
+      let store: LarTiddlerStore | null = opts.composite.writableStoreForBag(bag);
+      if (!store) {
+        for (const accessor of planes) {
+          store = await accessor.storeOf(bag).catch(() => null);
+          if (store) break;
+        }
+      }
+      cache.set(bag, store);
+      return store;
+    };
+    return { read: resolve, write: resolve };
   }
-  return added;
+  // No reach: the wiki island operates on its own mounted layers only.
+  return {
+    read:  async (bag) => opts.composite.storeForBag(bag),
+    write: async (bag) => opts.composite.writableStoreForBag(bag),
+  };
 }
 
 /**
@@ -138,29 +144,23 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
       if (!srcProof.ok) throw new Error(`cap-denied: admin on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
     }
 
-    // Access-reach: mount the action's bags ephemerally if they are not already
-    // layers (the admin reaches deep bags by access, holding no standing mount);
-    // release them after. The wiki island (no `reach`) writes its own mounted
-    // layers as before.
-    const ephemeral = opts.reach
-      ? await ensureReachable(opts.composite, opts.reach, bagsOfAction(action))
-      : [];
-    try {
-      // Defense in depth (B): after access-reach, the destination MUST be reachable.
-      // If access resolved nothing, fail loud here with a domain error rather than
-      // let the write misroute — the confused-deputy guard, paired with C's throw
-      // in composite.put (the store core).
-      if (opts.reach && !opts.composite.hasBag(destBag)) {
-        throw new Error(
-          `action-handler/${verb}: destination bag "${destBag}" unreachable — ` +
-          `not registered, or access resolved nothing. No silent fall-through.`,
-        );
-      }
-      const summary = await withEffectRecord(action, opts.composite, () => executeAction(action, opts.composite));
-      return { verb, ...summary };
-    } finally {
-      for (const bagId of ephemeral) opts.composite.removeLayer(bagId);
+    // Resolve each bag's store by ACCESS — the admin mounts nothing, it reaches
+    // the bag's own doc and writes-then-syncs; the wiki island resolves its own
+    // layers. Content writes AND the effect-record ledger both ride these per-bag
+    // stores, so each record lands in its affected bag (residency-model#effect-record-surface).
+    const access = makeBagAccess(opts);
+
+    // Defense in depth: the destination MUST resolve to a writable store. If
+    // access resolved nothing, fail loud — a residency write never falls through
+    // to the default writable (wiki-layer-ontology#write-law; the confused-deputy guard).
+    if (!(await access.write(destBag))) {
+      throw new Error(
+        `action-handler/${verb}: destination bag "${destBag}" unreachable — ` +
+        `not registered, or access resolved nothing. No silent fall-through.`,
+      );
     }
+    const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access));
+    return { verb, ...summary };
   };
 }
 
@@ -202,15 +202,15 @@ function destinationBag(action: ResidencyAction): string {
 
 // ── Per-verb executors ─────────────────────────────────────────────────────
 
-async function executeAction(action: ResidencyAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+async function executeAction(action: ResidencyAction, access: BagAccess): Promise<Record<string, unknown>> {
   switch (action.verb) {
-    case "ADD":   return executeAdd(action, composite);
-    case "COPY":  return executeCopy(action, composite);
-    case "MOVE":  return executeMove(action, composite);
-    case "CLEAR": return executeClear(action, composite);
-    case "DROP":  return executeDrop(action, composite);
-    case "LOAD":  return executeLoad(action, composite);
-    case "INGEST": return executeIngest(action, composite);
+    case "ADD":   return executeAdd(action, access);
+    case "COPY":  return executeCopy(action, access);
+    case "MOVE":  return executeMove(action, access);
+    case "CLEAR": return executeClear(action, access);
+    case "DROP":  return executeDrop(action, access);
+    case "LOAD":  return executeLoad(action, access);
+    case "INGEST": return executeIngest(action, access);
   }
 }
 
@@ -221,7 +221,7 @@ async function executeAction(action: ResidencyAction, composite: CompositeStore)
  * the memetic-wikitext membrane (FFZ: parent + ahu-slot children), and every
  * resulting record lands under the action's fresh changeId.
  */
-async function executeLoad(action: LoadAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+async function executeLoad(action: LoadAction, access: BagAccess): Promise<Record<string, unknown>> {
   const carriers = action.carriers ?? [];
   if (carriers.length === 0) {
     throw new Error(
@@ -238,7 +238,7 @@ async function executeLoad(action: LoadAction, composite: CompositeStore): Promi
         throw new Error("LOAD: carrier produced a record without a title — supply carrier.title or an iam uri-path");
       }
       const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
-      await landInBag(composite, action.toBag, record, action.changeId, origin(action));
+      await landInBag(access, action.toBag, record, action.changeId, origin(action));
       titles.push(title);
     }
   }
@@ -255,7 +255,7 @@ async function executeLoad(action: LoadAction, composite: CompositeStore): Promi
  * from the re-parsed carrier tombstone (LOAD never removes; INGEST must).
  * noop/refuse/conflict apply NOTHING — the decision rides the outcome.
  */
-async function executeIngest(action: IngestAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+async function executeIngest(action: IngestAction, access: BagAccess): Promise<Record<string, unknown>> {
   const o = origin(action);
   const deletions = action.deletions ?? [];
 
@@ -271,7 +271,7 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
   let suspended = false;
 
   if (deletions.length > 0) {
-    const liveTitles = await listLiveTitlesInBag(composite, action.toBag);
+    const liveTitles = await listLiveTitlesInBag(access, action.toBag);
     const liveCarrierCount = new Set(liveTitles.map((t) => t.split("#")[0])).size;
     const decision = decideDeletions({
       deletes: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })),
@@ -307,13 +307,13 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
       continue;
     }
     const uri = carrier.uri;
-    const all = await listLiveTitlesInBag(composite, action.toBag);
+    const all = await listLiveTitlesInBag(access, action.toBag);
     // The carrier group: the root + its fragment children (FFZ decomposition
     // emits `uri#slot` titles) + any path children (`uri/wires/...` era).
     const groupTitles = all.filter((t) => t === uri || t.startsWith(`${uri}#`) || t.startsWith(`${uri}/`));
     const current = new Map<string, Record<string, unknown>>();
     for (const t of groupTitles) {
-      const rec = await readFromBag(composite, action.toBag, t);
+      const rec = await readFromBag(access, action.toBag, t);
       if (rec) current.set(t, rec.tiddler as unknown as Record<string, unknown>);
     }
     const currentText = expandMemeRefs((t) => current.get(t) as never, uri) ?? "";
@@ -342,13 +342,13 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
       const title = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
       if (!title) throw new Error(`INGEST: carrier ${uri} produced a record without a title`);
       const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
-      await landInBag(composite, action.toBag, record, action.changeId, o);
+      await landInBag(access, action.toBag, record, action.changeId, o);
       freshTitles.add(title);
     }
     const tombstoned: string[] = [];
     for (const t of groupTitles) {
       if (!freshTitles.has(t)) {
-        await composite.tombstoneInBag(action.toBag, t, o);
+        await tombstoneIn(access, action.toBag, t, o);
         tombstoned.push(t);
       }
     }
@@ -363,18 +363,18 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
     titles.filter((t) => t === root || t.startsWith(`${root}#`) || t.startsWith(`${root}/`));
 
   for (const { fromUri, toUri } of renames) {
-    const live = await listLiveTitlesInBag(composite, action.toBag);
+    const live = await listLiveTitlesInBag(access, action.toBag);
     let relinked = 0;
     for (const t of groupOf(live, fromUri)) {
-      const rec = await readFromBag(composite, action.toBag, t);
+      const rec = await readFromBag(access, action.toBag, t);
       if (!rec) continue;
       const newTitle = toUri + t.slice(fromUri.length);
       const moved: LarTiddlerRecord = {
         tiddler: { ...(rec.tiddler as Record<string, unknown>), title: newTitle } as LarTiddlerRecord["tiddler"],
         meta: { ...(rec.meta ?? {}) }, // change-id preserved — identity survives the move
       };
-      await composite.put(moved, o, { bag: action.toBag });
-      await composite.tombstoneInBag(action.toBag, t, o);
+      await writeIn(access, action.toBag, moved, o);
+      await tombstoneIn(access, action.toBag, t, o);
       relinked++;
     }
     results.push({ uri: toUri, decision: "rename", from: fromUri, relinked });
@@ -382,9 +382,9 @@ async function executeIngest(action: IngestAction, composite: CompositeStore): P
 
   const tombstonedCarriers: string[] = [];
   for (const uri of tombstoneUris) {
-    const live = await listLiveTitlesInBag(composite, action.toBag);
+    const live = await listLiveTitlesInBag(access, action.toBag);
     const group = groupOf(live, uri);
-    for (const t of group) await composite.tombstoneInBag(action.toBag, t, o);
+    for (const t of group) await tombstoneIn(access, action.toBag, t, o);
     results.push({ uri, decision: "tombstone", removed: group.length });
     tombstonedCarriers.push(uri);
   }
@@ -404,15 +404,30 @@ function origin(action: ResidencyAction): ChangeOrigin {
   return { kind: "lares-verb", requestId: action.requestId };
 }
 
-/** Read fromBag's Manifestation of title (or null if absent). */
-async function readFromBag(composite: CompositeStore, fromBag: string, title: string): Promise<LarTiddlerRecord | null> {
-  const all = await composite.resolveAll(title);
-  return all.find((e) => e.bagId === fromBag)?.record ?? null;
+/** Read a bag's OWN Manifestation of title (or null if absent / bag unreachable). */
+async function readFromBag(access: BagAccess, fromBag: string, title: string): Promise<LarTiddlerRecord | null> {
+  const store = await access.read(fromBag);
+  return store ? store.get(title) : null;
+}
+
+/** Write a record directly into the target bag's store. Fails loud when the bag
+ *  has no writable store (no silent fall-through to the default writable). */
+async function writeIn(access: BagAccess, bag: string, record: LarTiddlerRecord, o: ChangeOrigin): Promise<void> {
+  const store = await access.write(bag);
+  if (!store) throw new Error(`action-handler: target bag "${bag}" unreachable — no writable store (no silent misroute).`);
+  await store.put(record, o);
+}
+
+/** Tombstone a title in the bag's own store. Fails loud when unreachable. */
+async function tombstoneIn(access: BagAccess, bag: string, title: string, o: ChangeOrigin): Promise<void> {
+  const store = await access.write(bag);
+  if (!store) throw new Error(`action-handler: target bag "${bag}" unreachable — cannot tombstone (no silent misroute).`);
+  await store.tombstone(title, o);
 }
 
 /** Copy a record into the target bag preserving change-id (Anti-pattern #1 defense). */
 async function landInBag(
-  composite: CompositeStore,
+  access: BagAccess,
   toBag: string,
   source: LarTiddlerRecord,
   changeId: string,
@@ -422,65 +437,63 @@ async function landInBag(
     tiddler: source.tiddler,
     meta: { ...(source.meta ?? {}), changeId },
   };
-  await composite.put(record, o, { bag: toBag });
+  await writeIn(access, toBag, record, o);
 }
 
-async function executeAdd(action: AddAction, composite: CompositeStore): Promise<Record<string, unknown>> {
-  const source = await readFromBag(composite, action.fromBag, action.title);
+async function executeAdd(action: AddAction, access: BagAccess): Promise<Record<string, unknown>> {
+  const source = await readFromBag(access, action.fromBag, action.title);
   if (!source) throw new Error(`ADD: source bag ${action.fromBag} does not hold ${action.title}`);
-  await landInBag(composite, action.toBag, source, action.changeId, origin(action));
+  await landInBag(access, action.toBag, source, action.changeId, origin(action));
   return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId };
 }
 
-async function executeCopy(action: CopyAction, composite: CompositeStore): Promise<Record<string, unknown>> {
-  const source = await readFromBag(composite, action.fromBag, action.title);
+async function executeCopy(action: CopyAction, access: BagAccess): Promise<Record<string, unknown>> {
+  const source = await readFromBag(access, action.fromBag, action.title);
   if (!source) throw new Error(`COPY: source bag ${action.fromBag} does not hold ${action.title}`);
-  await landInBag(composite, action.toBag, source, action.changeId, origin(action));
+  await landInBag(access, action.toBag, source, action.changeId, origin(action));
   return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId, mode: "overwrite" };
 }
 
-async function executeMove(action: MoveAction, composite: CompositeStore): Promise<Record<string, unknown>> {
-  const source = await readFromBag(composite, action.fromBag, action.title);
+async function executeMove(action: MoveAction, access: BagAccess): Promise<Record<string, unknown>> {
+  const source = await readFromBag(access, action.fromBag, action.title);
   if (!source) throw new Error(`MOVE: source bag ${action.fromBag} does not hold ${action.title}`);
   const o = origin(action);
   // Order: land destination first, then tombstone source. If land fails, source
   // stays intact (no orphaned deaccession); if tombstone fails after land, the
   // bag carries inconsistent residency — same Sprint 4 atomicity gap, surfaces
   // the error to the operator.
-  await landInBag(composite, action.toBag, source, action.changeId, o);
-  await composite.tombstoneInBag(action.fromBag, action.title, o);
+  await landInBag(access, action.toBag, source, action.changeId, o);
+  await tombstoneIn(access, action.fromBag, action.title, o);
   return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId };
 }
 
-async function executeClear(action: ClearAction, composite: CompositeStore): Promise<Record<string, unknown>> {
-  const titles = await listLiveTitlesInBag(composite, action.bag);
+async function executeClear(action: ClearAction, access: BagAccess): Promise<Record<string, unknown>> {
+  const titles = await listLiveTitlesInBag(access, action.bag);
   const o = origin(action);
   for (const title of titles) {
-    await composite.tombstoneInBag(action.bag, title, o);
+    await tombstoneIn(access, action.bag, title, o);
   }
   return { bag: action.bag, clearedCount: titles.length };
 }
 
-async function executeDrop(action: DropAction, composite: CompositeStore): Promise<Record<string, unknown>> {
+async function executeDrop(action: DropAction, access: BagAccess): Promise<Record<string, unknown>> {
   // DROP currently tombstones contents (same as CLEAR) and lets the
   // effect-record disposition mark the bag retired. True recipe-removal
   // is a separate operator gesture (recipe edit / `lares wiki remove-bag`).
-  const titles = await listLiveTitlesInBag(composite, action.bag);
+  const titles = await listLiveTitlesInBag(access, action.bag);
   const o = origin(action);
   for (const title of titles) {
-    await composite.tombstoneInBag(action.bag, title, o);
+    await tombstoneIn(access, action.bag, title, o);
   }
   return { bag: action.bag, retiredCount: titles.length, note: "bag tombstoned; recipe-edit removes the slot" };
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-/** Enumerate live tiddler titles that currently reside in `bag` only. */
-async function listLiveTitlesInBag(composite: CompositeStore, bag: string): Promise<string[]> {
-  const out: string[] = [];
-  for (const title of await composite.listVisible()) {
-    const bags = await composite.listBagsHolding(title);
-    if (bags.includes(bag)) out.push(title);
-  }
-  return out;
+/** Enumerate live tiddler titles residing in `bag` — read from the bag's OWN
+ *  store (its Manifestations), independent of any cascade shadowing. Empty when
+ *  the bag is unreachable. */
+async function listLiveTitlesInBag(access: BagAccess, bag: string): Promise<string[]> {
+  const store = await access.read(bag);
+  return store ? store.listVisible() : [];
 }

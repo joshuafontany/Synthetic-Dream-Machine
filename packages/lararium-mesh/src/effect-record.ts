@@ -337,21 +337,37 @@ export function mapActionToEffects(action: ResidencyAction, opts?: MapOptions): 
 // ── Writer (S4.5) ──────────────────────────────────────────────────────────
 
 /**
+ * Resolve the writable store for a bag — the access-reach surface. An effect
+ * record "lives within each affected bag" (residency-model#effect-record-surface),
+ * so the record for an ADD into bag B lands in B's own ledger, MOVE's paired
+ * accession/deaccession each in their own bag. The resolver reaches the bag's
+ * doc by access (mounting nothing); a bag with no writable store fails loud.
+ */
+export type EffectStoreResolver = (bag: string) => Promise<LarTiddlerStore | null>;
+
+/**
  * Write a single EffectRecord into its target bag's residency log.
  *
- * The target bag MUST be a writable layer registered on the store. Effect
- * records ride the bag's CRDT — they federate with the bag, survive bag
- * rotation, and persist in perpetuity (per the SAA "deaccession record
- * never leaves" principle).
+ * The record rides the affected bag's OWN doc, resolved by access — it federates
+ * with the bag, survives bag rotation, and persists in perpetuity (per the SAA
+ * "deaccession record never leaves" principle). A bag the resolver cannot reach
+ * throws loud (no silent unlink, no misroute to the default writable).
  */
 export async function writeEffectRecord(
-  store: LarTiddlerStore,
+  resolveStore: EffectStoreResolver,
   effect: EffectRecord,
   origin?: ChangeOrigin,
 ): Promise<void> {
+  const store = await resolveStore(effect.bag);
+  if (!store) {
+    throw new Error(
+      `writeEffectRecord: affected bag "${effect.bag}" unreachable — ` +
+      `cannot land the ${effect.archivalVerb} ledger record (no silent unlink).`,
+    );
+  }
   const record = buildEffectRecordTiddler(effect);
   const o: ChangeOrigin = origin ?? { kind: "lares-verb", requestId: effect.requestId };
-  await store.put(record, o, { bag: effect.bag });
+  await store.put(record, o);
 }
 
 /**
@@ -372,14 +388,14 @@ export async function writeEffectRecord(
  */
 export async function withEffectRecord<T>(
   action: ResidencyAction,
-  store: LarTiddlerStore,
+  resolveStore: EffectStoreResolver,
   mutate: () => Promise<T>,
   opts?: MapOptions,
 ): Promise<T> {
   const effects = mapActionToEffects(action, opts);
   const result  = await mutate();
   for (const effect of effects) {
-    await writeEffectRecord(store, effect);
+    await writeEffectRecord(resolveStore, effect);
   }
   return result;
 }

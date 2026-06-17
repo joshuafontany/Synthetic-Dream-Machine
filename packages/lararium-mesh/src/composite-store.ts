@@ -205,7 +205,12 @@ export class CompositeStore implements LarTiddlerStore {
     // Explicit-target routing — the overlayfs decision tree (operator ruling
     // 2026-06-16, prior-art-grounded; wiki-layer-ontology#write-law):
     if (options?.bag) {
-      //  a) a matching WRITABLE layer → write it (the upper).
+      //  a) a matching WRITABLE layer → write it (the upper). Serves only
+      //     genuinely-mounted writable layers the wiki owns — the projection
+      //     layer (E.2), the admin bag, draft routing. Residency-target writes
+      //     into a DEEP bag no longer route here: they reach the bag's own doc
+      //     by access (catalog-accessor.storeOf) + write-then-sync, mounting
+      //     nothing (action-handler resolveBagStores; wiki-layer-ontology#write-law).
       const writableLayer = this.layers.find((l) => l.bagId === options.bag && l.writable);
       if (writableLayer) return writableLayer.store.put(record, origin, options);
       //  b) a READ-ONLY layer for that bag IS mounted → shadow-up (copy-up): an
@@ -248,6 +253,22 @@ export class CompositeStore implements LarTiddlerStore {
   /** True when a writable layer for the given bag is registered. */
   hasWritableBag(bagId: string): boolean {
     return this.layers.some((l) => l.bagId === bagId && l.writable);
+  }
+
+  /** The store of ANY registered layer for the bag (writable or read-only), or
+   *  null. Reads a specific bag's own Manifestation — the no-`reach` wiki-island
+   *  residency READ path (a source bag MAY be a read-only library layer). */
+  storeForBag(bagId: string): LarTiddlerStore | null {
+    return this.layers.find((l) => l.bagId === bagId)?.store ?? null;
+  }
+
+  /** The store of the bag's WRITABLE layer, or null — the no-`reach` wiki-island
+   *  residency WRITE path. A residency write to a bag with no writable layer
+   *  resolves null: the executor fails loud (a residency ACTION MUST NOT shadow
+   *  up to the default writable — that is the misroute, distinct from a user
+   *  edit's Law-4 copy-up which still rides put()'s case-(b)). */
+  writableStoreForBag(bagId: string): LarTiddlerStore | null {
+    return this.layers.find((l) => l.bagId === bagId && l.writable)?.store ?? null;
   }
 
   /** BagId of the layer that receives unbagged writes — i.e. the last-

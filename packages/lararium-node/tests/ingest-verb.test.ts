@@ -91,8 +91,8 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     const seeded = await seedBoot(composite);
     expect(seeded.length).toBeGreaterThan(10);
 
-    // Edit: change a heading AND remove the #harness-skills ahu block whole.
-    const blockStart = source.indexOf("<<~ ahu #harness-skills >>");
+    // Edit: change a heading AND remove the #classifier-channel ahu block whole.
+    const blockStart = source.indexOf("<<~ ahu #classifier-channel >>");
     const blockEnd   = source.indexOf("<<~/ahu >>", blockStart) + "<<~/ahu >>".length;
     expect(blockStart).toBeGreaterThan(0);
     const edited = (source.slice(0, blockStart) + source.slice(blockEnd))
@@ -108,10 +108,10 @@ describe("INGEST — the gate composed with replace-by-group", () => {
 
     const carriers = result["carriers"] as Array<Record<string, unknown>>;
     expect(carriers[0]!["decision"]).toBe("ingest");
-    expect(carriers[0]!["tombstoned"]).toContain(`${URI}#harness-skills`);
+    expect(carriers[0]!["tombstoned"]).toContain(`${URI}#classifier-channel`);
 
     const after = await liveGroup(composite);
-    expect(after).not.toContain(`${URI}#harness-skills`);
+    expect(after).not.toContain(`${URI}#classifier-channel`);
     // The heading lives in the #entry child (FFZ grain); the fresh changeId
     // rides every landed record.
     const entry = (await composite.resolveAll(`${URI}#entry`)).find((e) => e.bagId === BAG)!.record;
