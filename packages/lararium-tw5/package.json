@@ -12,6 +12,10 @@
       "import": "./dist/node.js",
       "types": "./dist/node.d.ts"
     },
+    "./meme-normalize": {
+      "import": "./dist/meme-normalize.js",
+      "types": "./dist/meme-normalize.d.ts"
+    },
     "./tw5-worker-script": {
       "import": "./dist/tw5-worker-script.js",
       "types": "./dist/tw5-worker-script.d.ts"

@@ -17,7 +17,8 @@
     "@automerge/automerge-repo": "2.6.0-alpha.2",
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.2",
     "@lararium/mesh": "workspace:*",
-    "@lararium/node": "workspace:*"
+    "@lararium/node": "workspace:*",
+    "@lararium/tw5": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.0"

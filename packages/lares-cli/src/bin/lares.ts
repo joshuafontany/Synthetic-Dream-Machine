@@ -26,6 +26,7 @@ import { parseArgs, type ParsedArgs } from "../parse-args.js";
 import { cmdInit }                    from "../commands/init.js";
 import { cmdStatus }                  from "../commands/status.js";
 import { cmdDraft }                   from "../commands/draft.js";
+import { cmdNormalize }               from "../commands/normalize.js";
 import { cmdBag }                     from "../commands/bag.js";
 import { cmdWiki }                    from "../commands/wiki.js";
 import { cmdAct }                     from "../commands/act.js";
@@ -62,6 +63,7 @@ const COMMANDS: readonly Command[] = [
   { name: "build-genesis", summary: "Build the deterministic genesis-island artifact.",                              handler: cmdBuildGenesis  },
   { name: "test-quine",    summary: "Verify the quine round-trip: genesis → boot → render → hash.",                  handler: cmdTestQuine     },
   { name: "heleuma",       summary: "Audit / scaffold load-bearing source-file memes. Pass --write to scaffold.",    handler: cmdHeleuma       },
+  { name: "normalize",     summary: "Canonicalize a meme carrier's framing (embeds the iam namespace into the SOH) so the round-trip laws hold. `--check` reports drift without writing (CI/pre-commit).", handler: cmdNormalize     },
   { name: "device-admit",  summary: "Admit a new vessel into your operator PersonGroup (produces an admit payload via runDeviceAdmit; QR/NFC/LAN transport pending).",    handler: cmdDeviceAdmit  },
   { name: "invite-send",   summary: "Invite another operator into the Nexus MeshCabal (DreamNet founding ceremony — not yet implemented).",  handler: cmdInviteSend   },
   { name: "invite-receive",summary: "Receive and apply a Nexus MeshCabal invitation (DreamNet — not yet implemented).",                      handler: cmdInviteReceive },

@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/oracle >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/oracle >>
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/oracle.md"
@@ -8,7 +8,7 @@ hydrate       = true
 mana          = 16
 manao         = 16
 manaoio       = 15
-namespace     = "&#x0950; &#x0901;"
+namespace     = "&#x2299;"
 register      = "Synthesis-Canon"
 retain        = true
 role          = "the oracle sigil — the turn's drift register: the sanctioned drain that fires first in the close, bleeding the warm-tone pull ahead of the Sword; spend-ebb · scatter · die · count · sentinel · random tail, the marks cross-checking as a render-tell"

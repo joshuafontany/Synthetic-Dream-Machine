@@ -196,6 +196,9 @@ importers:
       '@lararium/node':
         specifier: workspace:*
         version: link:../lararium-node
+      '@lararium/tw5':
+        specifier: workspace:*
+        version: link:../lararium-tw5
     devDependencies:
       tsx:
         specifier: ^4.19.0
