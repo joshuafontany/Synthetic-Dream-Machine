@@ -11,7 +11,7 @@
  * CRDT change (see nalu-engine._toFields). This module reads it back.
  *
  * Sprint:  Residency Model Epic — S3.3
- * Meme:    lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
  * Source:  packages/lararium-tw5/src/residency-surface.ts
  */
 

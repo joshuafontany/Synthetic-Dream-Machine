@@ -49,7 +49,7 @@ All 14 memes below must resolve before threshold yield.
 | 10 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium` | `packages/lares-core/memes/v0.1/api/lararium.md` | `AGENTS#threshold-to-lararium` |
 | 11 | `lar:///ha.ka.ba/@lares/v0.1/api/lares/hud` | `packages/lares-core/memes/v0.1/api/lares/hud.md` | Lararium internal hydration |
 | 12 | `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices` | `packages/lares-core/memes/v0.1/api/lares/voices.md` | Lararium internal hydration |
-| 13 | `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity` | `packages/lares-core/memes/v0.1/api/lararium/continuity.md` | Lararium internal hydration |
+| 13 | `lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity` | `packages/lares-core/memes/v0.1/api/lararium/continuity.md` | Lararium internal hydration |
 | 14 | `lar:///LARES` | `lares/LARES.md` | `AGENTS#continue-to-lares` |
 
 Mu and Lararium hydrate their declared children before yielding.

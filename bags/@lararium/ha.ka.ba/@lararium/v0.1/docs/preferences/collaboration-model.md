@@ -69,7 +69,7 @@ It likely belongs among the deepest recovered house habits.
 This room leans toward future deeper articulation in:
 
 - `lar:///ha.ka.ba/@lares/v0.1/api/lares/voices`
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity`
+- `lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity`
 - `lar:///LARES`
 
 <<~/ahu >>
@@ -80,7 +80,7 @@ This room leans toward future deeper articulation in:
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
 
 <<~/ahu >>
 

@@ -6,7 +6,7 @@
  * (listBagsHolding existed pre-sprint; resolveAll/resolveTopmost return
  * (bagId, record) pairs for operator-visible coordinate inspection).
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";

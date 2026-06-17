@@ -53,7 +53,7 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
  * deserializer — TW5 causal-island boundary module for text/x-memetic-wikitext.
  *
  * Heleuma ba: this TS source compiles to an CJS plugin tiddler at
- * lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer
+ * lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer
  * (module-type: tiddlerdeserializer, key: text/x-memetic-wikitext).
  *
  * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).

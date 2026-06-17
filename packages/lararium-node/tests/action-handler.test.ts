@@ -9,7 +9,7 @@
  *   - change-id preserves across ADD / COPY / MOVE transfers
  *   - LOAD throws not-implemented (Sprint 5 scope honest about external fetch)
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";

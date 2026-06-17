@@ -6,12 +6,13 @@
  * still call these "wikis" while the architectural noun stays "wiki"
  * (Kowloon wiki=Group mapping).
  *
- * Verbs (E.4 ships read-only; E.5+ adds write/composition/GC):
- *   list                     — enumerate wikis registered in the catalog
- *   which <uri>              — recipe-presence query for a tiddler
- *
- * Coming in E.5+: init, open, sync, pin, unpin, add-bag, remove-bag,
- * epoch, rotate-recipe, prune-stale.
+ * Verbs (full E-arc surface ships; the `lares act` residency verbs land next):
+ *   list / which / resolve   — read & inspect: enumerate, presence-query, coordinate-resolve
+ *   init / open / sync       — lifecycle: mint, set-active, ingest memes
+ *   pin / unpin              — whole-recipe residency
+ *   add-bag / remove-bag     — recipe composition (hot-reload via composite.addLayer)
+ *   epoch / rotate-recipe    — bound history (snapshot-restart, Nix-generations)
+ *   prune-stale              — surface stale drafts for residency-action-or-prune
  */
 
 import { operatorDid } from "../env.js";
@@ -393,7 +394,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
         console.log(`    ${s.title}  (${idleStr})`);
       }
       console.log("");
-      console.log("  Decide each through a residency ACTION verb (Sprint 5 — lares act ADD/COPY/MOVE/DROP).");
+      console.log("  Decide each through a residency ACTION verb (lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD).");
     }
     console.log("");
     return 0;
@@ -410,7 +411,7 @@ export async function cmdWikiPruneStale(args: ParsedArgs): Promise<number> {
  * (origin-bag for any current read) gets a `→` marker.
  *
  * Sprint:  Residency Model Epic — S8.2
- * Meme:    lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
  *
  * Reuses the `where` verb on the node side (composite.listBagsHolding —
  * live-only). Tombstone-inspection across bags waits on a sibling `resolve`
@@ -469,7 +470,7 @@ export async function cmdWikiResolve(args: ParsedArgs): Promise<number> {
       }
       console.log("");
       console.log("  Note: a kāpae mark in a higher-priority bag stops the cascade.");
-      console.log("        See bags/@lares/ha.ka.ba/@lares/v0.1/api/lararium/residency-model.md #conflict-resolution");
+      console.log("        See bags/@lararium/ha.ka.ba/@lararium/v0.1/api/residency-model.md #conflict-resolution");
       console.log("        — resolution surfaces to operator / cabal Talk Story.");
       console.log("");
     }

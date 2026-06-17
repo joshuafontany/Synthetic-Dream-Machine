@@ -305,7 +305,7 @@ export class CompositeStore implements LarTiddlerStore {
    * and for downstream tooling that needs the full set of Manifestations.
    * Pairs with resolveTopmost() which returns only the winning pair.
    *
-   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
    */
   async resolveAll(title: string): Promise<Array<{ bagId: string; record: LarTiddlerRecord }>> {
     const out: Array<{ bagId: string; record: LarTiddlerRecord }> = [];
@@ -331,7 +331,7 @@ export class CompositeStore implements LarTiddlerStore {
    * defense (kāpae resurrection). For multi-residency presence-reporting
    * that ignores the shadow, call `resolveAll(title)` instead.
    *
-   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
    */
   async resolveTopmost(title: string): Promise<{ bagId: string; record: LarTiddlerRecord } | null> {
     for (let i = this.layers.length - 1; i >= 0; i--) {
@@ -385,7 +385,7 @@ export class CompositeStore implements LarTiddlerStore {
    * cannot verify.
    *
    * Anti-pattern #5 defense (recipe-drift poisoning).
-   * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-model
+   * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
    */
   async auditEpochs(recipe: WikiRecipe): Promise<Map<string, EpochPinState>> {
     const out = new Map<string, EpochPinState>();

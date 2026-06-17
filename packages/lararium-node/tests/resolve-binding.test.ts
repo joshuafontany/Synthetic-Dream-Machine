@@ -13,7 +13,7 @@
  * The cross-device + eventual-consistency matrix (S7.7) needs a two-vessel
  * harness and lives separately; this suite locks the single-vessel contract.
  *
- * Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot
+ * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot
  */
 
 import { describe, test, expect } from "vitest";

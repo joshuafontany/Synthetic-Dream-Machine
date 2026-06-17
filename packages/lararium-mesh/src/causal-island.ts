@@ -419,7 +419,7 @@ export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 //
 // NOTE: this RESIDENCY temperature (wela/anu) is DISTINCT from the ontological
 // causal-island Tier 0-3 in this file's header doctrine.
-// Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers
+// Canon: lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers
 // ===========================================================================
 /** A bag's URL — Automerge doc URL, e.g. "automerge:abc123…". */
 export type BagUrl = string;
@@ -427,7 +427,7 @@ export type BagUrl = string;
 /**
  * Residency TEMPERATURE of an island/bag — the thermal axis, in ʻōlelo Hawaiʻi.
  *
- * Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/residency-tiers
+ * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers
  *
  *   wela ("hot")  — live + reacting; handle in cache; the island's Worker runs.
  *   anu  ("cold") — torn down; URL known, doc not loaded; resume by spawn + `ea`.

@@ -66,7 +66,7 @@ The old stack wanted the house to know who may ask for what, and under what proo
 
 Recovered background behind:
 
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity`
+- `lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity`
 - `lar:///LARES`
 
 A future tighter invariant may still split trust, alias, and capability into separate live rooms.
@@ -80,7 +80,7 @@ This shelf keeps the older bundle intact for now.
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/preferences >>
 <<~ loulou lar:///LARES >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
 
 <<~/ahu >>
 

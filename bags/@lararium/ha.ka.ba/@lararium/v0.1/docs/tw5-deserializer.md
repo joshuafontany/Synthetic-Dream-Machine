@@ -8,7 +8,7 @@ manao       = 17
 manaoio     = 16
 register    = "Synthesis-Canon"
 role        = "design doc: TW5 tiddlerDeserializerModules registration for text/x-memetic-wikitext"
-source      = "lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer"
+source      = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer"
 status-date = "2026-04-30"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/docs/tw5-deserializer"
@@ -22,7 +22,7 @@ uri-path    = "ha.ka.ba/@lararium/v0.1/docs/tw5-deserializer"
 
 TW5 parses tiddler content by content-type. The deserializer for `text/x-memetic-wikitext` is registered in the `TW5.Wiki.tiddlerDeserializerModules` map at boot time. When TW5 encounters a tiddler with this type, it calls the deserializer to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split performed on the Node side by the disk projector.
 
-The canonical source is at `lar:///ha.ka.ba/@lares/v0.1/api/lararium/modules/deserializer`.
+The canonical source is at `lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer`.
 
 <<~/ahu >>
 

@@ -205,7 +205,7 @@ export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-caba
 // the admin doc under these prefixes. One fingerprint produces TWO bindings
 // (one @personal, one @draft) that share a lifecycle. The binding tiddler title
 // is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound Automerge URL.
-// Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot#core-claim
+// Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${ADMIN_BAG_ID}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
 

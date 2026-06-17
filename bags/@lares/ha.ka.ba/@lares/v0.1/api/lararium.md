@@ -64,7 +64,7 @@ The lararium prepares the handoff to `lar:///LARES` by hydrating the smallest li
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/hud >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/voices >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lararium/continuity >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/continuity >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium >>
 
 <<~/ahu >>

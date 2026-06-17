@@ -18,7 +18,7 @@
  * Admin reads/writes go through the admin-bag CompositeStore (`get` /
  * `put({bag: ADMIN_BAG_ID})`) — host: `adminVm.composite`; island: `ctx.composite`.
  *
- * Canon: lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot
+ * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot
  */
 
 import {

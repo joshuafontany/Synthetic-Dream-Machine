@@ -9,7 +9,7 @@
  * Future multi-wiki visualization (one TW5 engine per camera) composes by
  * mounting each camera onto its own engine — no shared accumulator surface.
  *
- * Spec: lar:///ha.ka.ba/@lares/v0.1/api/lararium/camera-mount
+ * Spec: lar:///ha.ka.ba/@lararium/v0.1/api/camera-mount
  */
 
 import type {
