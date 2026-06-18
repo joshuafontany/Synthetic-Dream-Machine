@@ -24,7 +24,7 @@ import {
 } from "@lararium/tw5";
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
-import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
+import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
 import { bootAdminKeyhive } from "./boot-admin-keyhive.js";
 import { AdminEventStore } from "./admin-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
@@ -173,7 +173,8 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       } as const;
       const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
       const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });
-      return { personalUrl: personal.url, draftUrl: draft.url };
+      const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
+      return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
     },
   });
 }

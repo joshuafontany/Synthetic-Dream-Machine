@@ -341,6 +341,7 @@ export interface AdminMsg_ResolveBindingResult {
   requestId: string;
   personalUrl?: string;
   draftUrl?: string;
+  workingUrl?: string;
   error?: string;
 }
 
@@ -771,6 +772,7 @@ export function mkAdminResolveBindingResult(opts: {
   requestId:    string;
   personalUrl?: string;
   draftUrl?:    string;
+  workingUrl?:  string;
   error?:       string;
 }): AdminMsg_ResolveBindingResult {
   const msg: AdminMsg_ResolveBindingResult = {
@@ -780,6 +782,7 @@ export function mkAdminResolveBindingResult(opts: {
   };
   if (opts.personalUrl !== undefined) msg.personalUrl = opts.personalUrl;
   if (opts.draftUrl    !== undefined) msg.draftUrl    = opts.draftUrl;
+  if (opts.workingUrl  !== undefined) msg.workingUrl  = opts.workingUrl;
   if (opts.error       !== undefined) msg.error       = opts.error;
   return msg;
 }

@@ -134,7 +134,7 @@ export interface AdminVmCore {
   resolveBinding: (
     fingerprint: string,
     recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
   dispose:        () => void;
   /** Exposed so platform wrappers compose any further capability on top. */
   worker:         VesselWorkerHandle;
@@ -247,7 +247,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     if (raw.type === "admin:resolve-binding-result") {
       const msg = raw as AdminMsg_ResolveBindingResult;
       if (msg.error) settleAsk(msg.requestId, undefined, msg.error);
-      else if (msg.personalUrl && msg.draftUrl) settleAsk(msg.requestId, { personalUrl: msg.personalUrl, draftUrl: msg.draftUrl });
+      else if (msg.personalUrl && msg.draftUrl && msg.workingUrl) settleAsk(msg.requestId, { personalUrl: msg.personalUrl, draftUrl: msg.draftUrl, workingUrl: msg.workingUrl });
       else settleAsk(msg.requestId, undefined, "resolve-binding-result missing urls");
       return;
     }

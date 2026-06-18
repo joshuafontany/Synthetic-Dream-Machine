@@ -83,13 +83,13 @@ export interface PrimaryMountPool {
   mountWiki(id: string, spec: WikiMountSpec, opts?: { pinned?: boolean }): Promise<void>;
 }
 
-/** Any admin vessel that can resolve the operator's @personal/@draft binding —
- *  island-side, where keyhive lives. Both vessels expose this (pair 2). */
+/** Any admin vessel that can resolve the operator's @personal/@draft/@working
+ *  binding — island-side, where keyhive lives. Both vessels expose this (pair 2). */
 export interface BindingResolver {
   resolveBinding(
     fingerprint: string,
     recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ): Promise<{ personalUrl: string; draftUrl: string }>;
+  ): Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
 }
 
 export interface PrimaryMountInputs {
@@ -122,13 +122,14 @@ export async function mountPrimaryWiki(
   pool:    PrimaryMountPool,
   binding: BindingResolver,
   inputs:  PrimaryMountInputs,
-): Promise<{ personalUrl: string; draftUrl: string }> {
-  // @personal + @draft bind TOGETHER per recipe-fingerprint (Q11). Fingerprint
-  // covers wikiDocId + libraryBags only (@lares/@lararium excluded per Q4); the
-  // live primary carries no libraryBags, so it keys on the wiki doc url alone.
+): Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }> {
+  // @personal + @draft + @working bind TOGETHER per recipe-fingerprint (Q11).
+  // Fingerprint covers wikiDocId + libraryBags only (@lares/@lararium excluded
+  // per Q4); the live primary carries no libraryBags, so it keys on the wiki
+  // doc url alone.
   const recipeTrace = { wikiDocId: inputs.wikiUrl, libraryBagDocIds: [] as readonly string[] };
   const fingerprint = await computeRecipeFingerprint(recipeTrace);
-  const { personalUrl, draftUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
+  const { personalUrl, draftUrl, workingUrl } = await binding.resolveBinding(fingerprint, recipeTrace);
 
   // Typed structural grants — no slot dictionary. Library bags never ride the
   // mount: the island resolves them from @catalog itself (boot = first reconcile),
@@ -139,6 +140,7 @@ export async function mountPrimaryWiki(
     wikiUrl:    inputs.wikiUrl,
     ...(personalUrl     ? { personalUrl } : {}),
     ...(draftUrl        ? { draftUrl    } : {}),
+    ...(workingUrl      ? { workingUrl  } : {}),
   };
   const recipe: WikiRecipe = { wikiSlug: inputs.wikiSlug, mirrorBags: [...PRIMARY_MIRROR_BAGS] };
 
@@ -148,7 +150,7 @@ export async function mountPrimaryWiki(
     { pinned: true },
   );
 
-  return { personalUrl, draftUrl };
+  return { personalUrl, draftUrl, workingUrl };
 }
 
 export interface SocialPlaneUrls {

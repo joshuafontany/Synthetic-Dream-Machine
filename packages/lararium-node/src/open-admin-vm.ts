@@ -104,7 +104,7 @@ export interface AdminVmResult {
   resolveBinding: (
     fingerprint: string,
     recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
   /**
    * Bind the pool eviction MECHANISM (sovereign-worker): the admin worker owns
    * residency POLICY and commands an evict via admin:evict-request; this routes it to

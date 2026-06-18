@@ -23,7 +23,9 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
 import { IslandAdaptor }      from "../src/island-adaptor.js";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
-import type { LarTiddlerChange, ChangeOrigin } from "@lararium/mesh";
+import { WORKING_BAG, type LarTiddlerChange, type ChangeOrigin } from "@lararium/mesh";
+
+const CURRENT_WIKI_BAG = "lar:///ha.ka.ba/@lararium/config/current-wiki-bag";
 
 // ---------------------------------------------------------------------------
 // FakeTW5Engine — minimal surface used by IslandAdaptor under unified-nalu
@@ -347,6 +349,24 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     await done;
 
     expect(bags).toContain("lar:///ha.ka.ba/@lares");
+  });
+
+  // The working/canon split (shore-law): a LIVE edit (no explicit bag) routes
+  // via the cascade to the @working write layer — NOT straight into canon. The
+  // wiring lives in island-recipe.ts (current-wiki-bag → WORKING_BAG); this
+  // witnesses the routing semantics with the real constant.
+  test("live lar: edit (no explicit bag) → cascade routes to @working, not canon", async () => {
+    tw5.tiddlerTexts.set(CURRENT_WIKI_BAG, WORKING_BAG);
+    const bags: string[] = [];
+    const orig = store.put.bind(store);
+    store.put = async (rec, origin, options) => { bags.push(options?.bag ?? ""); return orig(rec, origin, options); };
+
+    const done = adaptor.saveTiddler({ fields: { title: LAR_URI, text: "a live working edit" } });
+    await flush();
+    await done;
+
+    expect(bags).toContain(WORKING_BAG);                  // saved to the live write layer
+    expect(bags).not.toContain("lar:///ha.ka.ba/@lares"); // never straight into canon
   });
 
   test("$:/temp/ title → cascade routes to @temp", async () => {

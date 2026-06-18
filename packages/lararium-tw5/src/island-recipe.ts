@@ -17,8 +17,8 @@ import {
   CompositeStore,
   AutomergeDocStore,
   expandRecipe,
-  wikiBagUri,
   TEMP_BAG,
+  WORKING_BAG,
   type LarDoc,
   type DocHandle,
   type WikiRecipe,
@@ -81,14 +81,17 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
 
   // Per-wiki cascade reference — the default `lar:///ha.ka.ba/@lararium/config/bag-paths`
   // reads this value via `{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}` to
-  // resolve `lar:` writes to the active wiki's bag. Volatile (lives in @temp),
-  // set once at boot, shadows any @lararium fallback by cascade priority.
+  // resolve `lar:` writes to the wiki's live WRITE LAYER. Points at @working (the
+  // saved live layer, projecting wikis/{slug}); the wiki's own @{slug} bag rides
+  // below as read-only canon, published to only by a promotion MOVE
+  // (wiki-layer-ontology#shore-law). Volatile (lives in @temp), set once at boot,
+  // shadows any @lararium fallback by cascade priority.
   if (tempStore) {
     void tempStore.put(
       {
         tiddler: {
           title: "lar:///ha.ka.ba/@lararium/config/current-wiki-bag",
-          text:  wikiBagUri(recipe.wikiSlug),
+          text:  WORKING_BAG,
         },
       },
       { kind: "canon-hydrate", receipt: "recipe-boot" },

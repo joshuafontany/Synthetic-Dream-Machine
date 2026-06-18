@@ -66,7 +66,7 @@ export interface AdminBehaviorOptions {
     ctx: IslandContext,
     fingerprint: string,
     recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ) => Promise<{ personalUrl: string; draftUrl: string }>;
+  ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
   /**
    * Sovereign-worker data-plane: register the residency / wiki / where / resolve
    * reactors into the worker's VerbDispatcher, in-worker, over the IslandContext.
@@ -181,7 +181,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
         } else {
           opts.resolveBinding(ctx, msg.fingerprint, msg.recipeTrace)
             .then((r) => post(mkAdminResolveBindingResult({
-              requestId: msg.requestId, personalUrl: r.personalUrl, draftUrl: r.draftUrl,
+              requestId: msg.requestId, personalUrl: r.personalUrl, draftUrl: r.draftUrl, workingUrl: r.workingUrl,
             })))
             .catch((err: unknown) => post(mkAdminResolveBindingResult({
               requestId: msg.requestId, error: err instanceof Error ? err.message : String(err),

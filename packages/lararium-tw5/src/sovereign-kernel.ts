@@ -46,6 +46,7 @@ import {
   ENGINE_CORE_ID,
   TEMP_BAG,
   DRAFT_BAG,
+  WORKING_BAG,
   PERSONAL_BAG,
   LARES_BAG,
   LARARIUM_BAG,
@@ -240,6 +241,7 @@ export function runSovereignKernel(
     // grants.
     const slotUrl = async (slot: SlotUri): Promise<string | null> => {
       if (slot === DRAFT_BAG)                    return msg.grants.draftUrl    ?? null;
+      if (slot === WORKING_BAG)                  return msg.grants.workingUrl  ?? null;
       if (slot === PERSONAL_BAG)                 return msg.grants.personalUrl ?? null;
       if (slot === wikiBagUri(msg.recipe.wikiSlug)) return msg.grants.wikiUrl ?? null;
       if (slot === ORACLE_BAG)                 return msg.grants.islandUrl;

@@ -42,13 +42,13 @@ export interface DocMinter {
   create<T = LarDoc>(initialValue: T): { readonly url: string };
 }
 
-/** The two binding kinds — one tiddler `kind` field per slot. */
-export type BindingKind = "personal-binding" | "draft-binding";
+/** The binding kinds — one tiddler `kind` field per slot. */
+export type BindingKind = "personal-binding" | "draft-binding" | "working-binding";
 
 export interface ResolveBindingArgs {
-  /** Tiddler `kind` field value — distinguishes @personal from @draft bindings. */
+  /** Tiddler `kind` field value — distinguishes @personal / @draft / @working bindings. */
   readonly kind: BindingKind;
-  /** Admin tiddler-title prefix (PERSONAL_BINDINGS_PREFIX | DRAFT_BINDINGS_PREFIX). */
+  /** Admin tiddler-title prefix (PERSONAL_ | DRAFT_ | WORKING_BINDINGS_PREFIX). */
   readonly prefix: string;
   /** SHA-256 hex from computeRecipeFingerprint — the per-recipe binding key. */
   readonly fingerprint: string;

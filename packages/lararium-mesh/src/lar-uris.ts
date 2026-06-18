@@ -202,12 +202,15 @@ export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-caba
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
 // The (PersonGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
-// the admin doc under these prefixes. One fingerprint produces TWO bindings
-// (one @personal, one @draft) that share a lifecycle. The binding tiddler title
-// is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound Automerge URL.
+// the admin doc under these prefixes. One fingerprint produces THREE bindings
+// (@personal, @draft, @working) that share a lifecycle. The binding tiddler
+// title is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${ADMIN_BAG_ID}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
+// @working binds like @personal (PersonGroup×fingerprint, cross-device) — the
+// SAVED live write layer; normal edits route here, canon publishes on promotion.
+export const WORKING_BINDINGS_PREFIX  = `${ADMIN_BAG_ID}/working-bindings`;
 
 // ── Well-known bag slot IDs ────────────────────────────────────────────────
 // Six root docs (two planes) + in-memory leaves.
