@@ -1,5 +1,21 @@
 name: CI
 
+# Golden-principle gates for the Lararium monorepo, mapped to the project's
+# domains + models (web3 local-first · causal-islands · the meme graph):
+#   typecheck       — every package's types hold
+#   build-freshness — `build` is deterministic AND emits no stale tracked source:
+#                     the checked-in generated plugin artifacts must match a fresh
+#                     build (the canonical "regenerate + git diff --exit-code" gate;
+#                     catches a hand-edited / forgotten-regen generated file)
+#   test            — every package's suite, incl. the meme round-trip laws
+#                     (meme-corpus-roundtrip) and the plugin-artifact parity gate
+#   e2e             — the residency/ingest witnesses through the real CLI + vessels
+#   boot-budget     — the cache-stable boot stays under its char ceiling
+#
+# Defense-in-depth, not a single flag: build-freshness (CI, authoritative) is
+# backed by the always-on plugin-artifact-parity unit test in `test` (local-first,
+# runs in every `pnpm test`). Dropping one gate does not open the hole.
+
 on:
   push:
     branches: ["**"]
@@ -12,126 +28,110 @@ concurrency:
 
 env:
   NODE_VERSION: "24"
-  PNPM_VERSION: "10"
+  PNPM_VERSION: "11"
 
 jobs:
-
-  # ─── typecheck ──────────────────────────────────────────────────────────────
+  # ─── typecheck ────────────────────────────────────────────────────────────
   typecheck:
     name: Typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
       - name: Typecheck all packages
         run: pnpm -r typecheck
 
-  # ─── build ──────────────────────────────────────────────────────────────────
-  build:
-    name: Build
+  # ─── build + generated-artifact freshness ─────────────────────────────────
+  build-freshness:
+    name: Build + generated freshness
     runs-on: ubuntu-latest
-    needs: typecheck
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
-      - name: Build TW5 browser filter bundle
-        run: pnpm --filter @lararium/mesh tw:build-browser
-
       - name: Build all packages
         run: pnpm -r build
+      - name: Generated artifacts must be fresh (build emits no tracked diff)
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::A fresh build changed tracked files — committed generated artifacts are stale."
+            echo "Regenerate and commit them: pnpm --filter @lararium/tw5 build"
+            git --no-pager diff --stat
+            git --no-pager diff
+            exit 1
+          fi
+          echo "Generated artifacts are fresh."
 
-      - name: Build snapshot.json
-        run: pnpm --filter @lararium/node build-snapshot
-
-      - name: Upload dist artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: |
-            packages/lararium-mesh/dist
-            packages/lararium-node/dist
-            packages/lararium-mcp/dist
-            packages/lararium-tldraw/dist
-            packages/lararium-web/dist
-            lares/lararium-node/snapshot.json
-          retention-days: 1
-
-  # ─── parity-tests ───────────────────────────────────────────────────────────
-  parity-tests:
-    name: Parity Tests
+  # ─── test (all package suites) ─────────────────────────────────────────────
+  test:
+    name: Test
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
+      - name: Install Playwright Chromium (browser-vessel suite)
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run all package suites
+        run: pnpm -r test
 
-      - name: Download dist
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: packages
-
-      - name: Run parity tests (lararium-node)
-        run: pnpm --filter @lararium/node test
-
-  # ─── mcp-stdio-smoke ────────────────────────────────────────────────────────
-  mcp-stdio-smoke:
-    name: MCP stdio smoke
+  # ─── e2e (residency / ingest witnesses) ────────────────────────────────────
+  e2e:
+    name: E2E
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
-
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
+      - name: Build (vessels run from dist)
+        run: pnpm -r build
+      - name: Run e2e suite
+        run: pnpm test:e2e
+        timeout-minutes: 10
 
-      - name: Download dist
-        uses: actions/download-artifact@v4
+  # ─── boot budget (cache-stable boot ceiling) ───────────────────────────────
+  boot-budget:
+    name: Boot budget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: dist
-          path: packages
-
-      - name: Run MCP stdio smoke
-        run: NODE_OPTIONS=--experimental-vm-modules pnpm exec jest --config jest.config.cjs --testPathPattern=tests/stdio-smoke
-        working-directory: packages/lararium-mcp
-        timeout-minutes: 2
+          node-version: ${{ env.NODE_VERSION }}
+      - name: noosphere-boot.md must stay under the 40000-char ceiling
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const p = "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md";
+            const n = [...fs.readFileSync(p, "utf8")].length;
+            console.log("boot chars:", n, "/ 40000");
+            if (n >= 40000) {
+              console.error("::error::" + p + " is " + n + " chars — over the cache-stable boot budget (40000). Reclaim before editing.");
+              process.exit(1);
+            }
+          '
