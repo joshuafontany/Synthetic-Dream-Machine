@@ -132,6 +132,9 @@ export interface IslandGrants {
   /** Keyhive-bound sovereign slots (admin resolveBinding grants). */
   personalUrl?: string | null;
   draftUrl?:    string | null;
+  /** @working — the SAVED live write layer (PersonGroup×fingerprint-bound, like
+   *  @personal); normal edits route here, canon publishes on a promotion MOVE. */
+  workingUrl?:  string | null;
 }
 export interface IslandMsg_Manifest {
   schema_version: ProtocolVersion;

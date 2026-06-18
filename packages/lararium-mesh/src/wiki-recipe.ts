@@ -35,13 +35,17 @@ import { ORACLE_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI } from "./lar-uris.js";
 export type SlotUri = string;
 
 /**
- * Six fixed slot URIs always present in every recipe. The wiki identity slot
- * derives from `wikiSlug` via `wikiBagUri()`. @temp/@draft/@personal name
- * themselves here (no canonical home elsewhere); @lares/@lararium single-source
- * from the derived `lar-uris.ts` consts so the URI lives in exactly one place.
+ * Seven fixed slot URIs always present in every recipe. The wiki identity slot
+ * derives from `wikiSlug` via `wikiBagUri()`. @temp/@draft/@working/@personal
+ * name themselves here (no canonical home elsewhere); @lares/@lararium
+ * single-source from the derived `lar-uris.ts` consts so the URI lives once.
  */
 export const TEMP_BAG     = "lar:///ha.ka.ba/@temp"     as const;
 export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
+/** @working — the wiki's SAVED live write layer (PersonGroup×fingerprint-bound,
+ *  cross-device); normal edits route here, canon publishes on a promotion MOVE
+ *  (wiki-layer-ontology#shore-law). Distinct from @draft's unsaved drafts. */
+export const WORKING_BAG  = "lar:///ha.ka.ba/@working"  as const;
 export const PERSONAL_BAG = "lar:///ha.ka.ba/@personal" as const;
 export const LARES_BAG    = LARES_DOC_URI;
 export const LARARIUM_BAG = LARARIUM_DOC_URI;
@@ -210,6 +214,11 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
     TEMP_BAG,
     DRAFT_BAG,
     PERSONAL_BAG,
+    // @working = the live write layer (normal edits route here via the
+    // current-wiki-bag cascade); the wiki's own @{slug} bag rides BELOW as the
+    // read-only canon library member, published to only by a promotion MOVE
+    // (wiki-layer-ontology#shore-law). The quine no longer collapses them.
+    WORKING_BAG,
     wikiBagUri(r.wikiSlug),
     ...(r.libraryBags ?? []),
     // @oracle = the universal floor (engine + grammar + bag-oracle). @lares and
