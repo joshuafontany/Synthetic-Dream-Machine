@@ -54,6 +54,8 @@ The OCI column carries structure only. Our layers sync as CRDT coordinates, not 
 
 **The name names the bag; a wiki reads as that bag opened through a recipe** — write layer + library list + instance mounts. `@lares`-the-wiki and `@lares`-the-bag never compete for the name: the wiki projects the bag, the way a git repo and its checkout share a name without confusion.
 
+**The write layer rides live; the canon rides below (operator ruling, 2026-06-18).** A wiki's saved edits land in its **`@working`** layer — a typed instance mount (Law 2), persisted, projecting to the live surface (`wikis/{slug}`), distinct from `@draft`'s *unsaved* drafts — never straight into canon. The wiki's `@{slug}` bag mounts **read-only as a library member**; its canon (`bags/{slug}`) is reached only by a cap-gated promotion `MOVE` (`@working → @{slug}`, the working↔canon shore — #shore-law). This dissolves the old quine collapse where a system wiki wrote into its own canon: write layer and canon stay distinct coordinates for **every** wiki, system and user alike — saved content lives, canon publishes on promotion. The checkout/repo image holds: `@working` reads as the working tree, `@{slug}` as the committed canon, promotion as the commit.
+
 The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
 
 The quine governs **every** wiki — user and system alike. `@oracle` *alone* stands *below* as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, **operator ruling 2026-06-16**). `@lares` and `@lararium` are **DreamNet system bags**, each opening as its own **quine wiki** carrying a wiki-recipe of its own — `@lares` wiki = `@oracle` + `@lararium` + `@lares`; `@lararium` wiki = `@oracle` + `@lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers **and** their wiki-recipes live in the **`@oracle` system plane**, never `@catalog` (#oracle-planes).
@@ -125,7 +127,7 @@ When `@sdm` injects into `@elyncia`, exactly one thing travels: `@sdm`'s write l
 
 The write layer marks the write boundary. From a consuming wiki's vantage, every library layer mounts **read-only**; writes land at or above the consumer's own write layer. A local override of an upstream record (an `@elyncia` shadow of an `@sdm` entry) lands in the consumer's write layer — cascade shadowing exists for exactly this, and the read MUST surface `origin-bag` (`residency-model`, anti-pattern #4). CRDT multi-writer makes down-stack writes *possible*; this law names them a degraded act. To change upstream canon, open the upstream bag as its own wiki and write at *its* write layer.
 
-**The edit/action split (operator ruling, 2026-06-16).** A **user edit MUST land in a TOP-LEVEL bag**, even when the base-tiddler comes from a bag deeper in the stack — the deep record **shadows up**, never written back down. *Which* top-level bag follows the tiddler **type**, routed by the bag-paths cascade: a normal tiddler belonging to the wiki → the wiki's own top bag; a draft/volatile tiddler → `@temp`; and so on. Writes to **deeper** bags happen **only** as explicit operator **residency actions** (`ADD`/`COPY`/`MOVE`/`LOAD`), each effect-record audited — never as a side-effect of an edit. Mechanism consequence: a write with **no explicit bag** routes top-level by type (this law); a write naming an explicit deeper `{bag}` reaches it **by access** (the registry accessor) + audit, or fails loud — it MUST NOT silently fall through to the default writable layer.
+**The edit/action split (operator ruling, 2026-06-16).** A **user edit MUST land in a TOP-LEVEL bag**, even when the base-tiddler comes from a bag deeper in the stack — the deep record **shadows up**, never written back down. *Which* top-level bag follows the tiddler **type**, routed by the bag-paths cascade: a normal tiddler belonging to the wiki → the wiki's own **`@working`** live write layer (saved, pre-promotion — never its canon directly); a draft/volatile tiddler → `@temp`; and so on. Writes to **deeper** bags happen **only** as explicit operator **residency actions** (`ADD`/`COPY`/`MOVE`/`LOAD`), each effect-record audited — never as a side-effect of an edit. Mechanism consequence: a write with **no explicit bag** routes top-level by type (this law); a write naming an explicit deeper `{bag}` reaches it **by access** (the registry accessor) + audit, or fails loud — it MUST NOT silently fall through to the default writable layer.
 
 <<~/ahu >>
 
@@ -134,6 +136,20 @@ The write layer marks the write boundary. From a consuming wiki's vantage, every
 ## Law 5 — The Recipe Graph Stays a DAG
 
 The moment layers mount layers, cycles become expressible. Recipe-watch MUST refuse a composition whose closure revisits a bag. Cheap at reconcile; ugly after.
+
+<<~/ahu >>
+
+<<~ ahu #shore-law >>
+
+## The Lararium Shore Law — loose interop across causal islands (operator ruling, 2026-06-18)
+
+Every boundary a lararium holds reads as a **causal-island shore** (`causal-islands`): two sides, each its own partially-ordered log, no shared "now." Three shores wear one law:
+
+- **working ↔ canon** — the `@working` live layer crosses to its `@{slug}` canon by a cap-gated promotion `MOVE`.
+- **plane ↔ plane** — a bag's pointer crosses `@catalog` (user) ⇄ `@oracle` (system) by an admin `MOVE` that sets a new meshwise surface. **Plane membership stays mutable, never hardcoded** — composability across planes holds first-class; the split scopes by *role*, never by a frozen plane.
+- **host ↔ lararium** *(deferred horizon)* — a lararium may embed as a **guest** causal island inside a host that owns its own integration layer (UE5.6/6+ Verse / SceneGraph; MUDlet's Lua object-model). The guest never assumes it sits at the top, never claims a global now across the shore.
+
+**The law.** A shore crosses ONLY by a deliberate, audited residency `MOVE` carrying `change-id` and landing an effect record — never a synchronous bridge, never a shared-now coupling, never a silent drift. Each side stays authoritative for its own state. **Do not overconstrain a shore:** the surface and crossing contract stays **host-agnostic** — a projection surface reads as disk today, a SceneGraph node or a MUD buffer tomorrow, with no surface-kind baked in. Design the seam; build no host adapter until a real host arrives.
 
 <<~/ahu >>
 

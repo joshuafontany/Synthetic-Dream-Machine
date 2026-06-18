@@ -12,8 +12,8 @@ manaoio       = 15
 namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
-revised-on    = "2026-06-15"
-revision-note = "@oracle/@lararium split (#oracle-split): the runtime system island (@oracle — genesis BLOBs, bag-oracle, genesis-cid; off-disk, mesh-synced) separates from the memetic corpus (@lararium — authored engine self-docs, bags/ seed, git-tracked); prior: projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
+revised-on    = "2026-06-18"
+revision-note = "working↔canon split (shore-law): a wiki's saved edits land in the typed @working live layer (wikis/, tracked); canon (bags/) is reached only by a cap-gated promotion MOVE; the general lararium shore law (working↔canon · plane↔plane · host↔lararium) governs every causal-island crossing, host-agnostic surface contract; prior: @oracle/@lararium split (#oracle-split) — the runtime system island (@oracle) separates from the memetic corpus (@lararium); projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "approved"
 tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
@@ -39,7 +39,7 @@ The node vessel SHALL write an editable, re-readable **Artifact** of a bag's CRD
 | **`bags/`** | **seed / canon** — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
 | **`wikis/{slug}/`** | **projection / output** — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
 
-The distinction reads **definition vs instance**. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output.
+The distinction reads **definition vs instance**. An FTLS Power Card *definition* (its rules, its template) lives in `bags/@sdm/`; a character's *filled-in* card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the **live working surface** — saved-but-unpromoted content, fed by the typed **`@working`** write layer (saved tiddlers, never drafts) — and `bags/` reads as **canon**, reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this **working↔canon shore** (`wiki-layer-ontology#shore-law`).
 
 <<~/ahu >>
 
@@ -55,7 +55,8 @@ Disk projection is for **content** bags (definitions + instances). **State / vie
 | `@<wikiSlug>` | wiki content (instance) | `wikis/{slug}/` |
 | `@oracle` | **runtime system island** — genesis-loaded engine BLOBs + bag→doc oracle + genesis-cid | **none** — genesis-loaded + federated read-only; regenerable (see #oracle-split) |
 | `@personal` | operator view-state, wiki-instance-bound | **none** — mesh-synced (see #personal) |
-| `@draft` | per-wiki working layer | **none** — runtime |
+| `@working` | per-wiki **saved** working layer (saved tiddlers, pre-promotion) | `wikis/{slug}/` — live, tracked |
+| `@draft` | per-wiki **unsaved** drafts (TW5 draft state) | **none** — runtime |
 | `@temp` | volatile session layer | **none** — runtime |
 | `@admin` | operator's sovereign authority doc | **none** — private; syncs to operator devices via the admin-doc surface |
 
@@ -105,7 +106,7 @@ A future debug-only sidecar projection MAY be added behind an explicit flag; it 
 
 1. **RENDER, not copy** (Fontany-Fuller-Zelenka). Disk projection recomposes the whole carrier from normalized tiddler records via the membrane's recompose inverse (`expandMemeRefs`, registered on `$tw.lares`, running inside the island VM). It never copies stored bytes raw — byte-fidelity comes from the proven parse∘render fixed point, not retention.
 2. **Store → disk is one direction; ingest is another.** The projector is unidirectional (store → disk). Re-reading operator edits (disk → store) is a **separate file-watcher / ingest path**. The `writing` guard set prevents the projector's own writes from echoing back through ingest.
-3. **The git diff is the operator's signature.** When a residency **MOVE** (the canon ACTION verb) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent.
+3. **The git diff is the operator's signature.** When a residency **MOVE** (the canon ACTION verb) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent. **Promotion** rides this rite — a cap-gated `MOVE` from the `@working` live layer to canon crosses the **working↔canon shore**, and a `MOVE` of a bag's pointer between planes (`@catalog ⇄ @oracle`) crosses the **plane shore**. Both stay loose causal-island crossings — no shared-now, no synchronous bridge (`wiki-layer-ontology#shore-law`).
 4. **Debounce per (bag, carrier root).** A child change climbs `fragment-parent` to its root; the group flushes as ONE carrier write (carrier-whole at rest). The projection-side content-hash gate skips byte-identical writes entirely — no event, no mtime churn.
 
 <<~/ahu >>
