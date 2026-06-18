@@ -369,9 +369,16 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
       const rec = await readFromBag(access, action.toBag, t);
       if (!rec) continue;
       const newTitle = toUri + t.slice(fromUri.length);
+      // DETACH before re-writing: a rename re-homes within the SAME bag/doc, so
+      // rec's nested values (e.g. a `tags` array) ride as live doc references —
+      // Automerge 3.x refuses to re-link an existing document object. Deep-clone
+      // to plain data so the move writes a fresh value (cross-bag ADD reads a
+      // foreign doc, which clones fine, so only this same-doc path needs it).
+      const movedTiddler = JSON.parse(JSON.stringify(rec.tiddler)) as Record<string, unknown>;
+      movedTiddler["title"] = newTitle;
       const moved: LarTiddlerRecord = {
-        tiddler: { ...(rec.tiddler as Record<string, unknown>), title: newTitle } as LarTiddlerRecord["tiddler"],
-        meta: { ...(rec.meta ?? {}) }, // change-id preserved — identity survives the move
+        tiddler: movedTiddler as LarTiddlerRecord["tiddler"],
+        meta: JSON.parse(JSON.stringify(rec.meta ?? {})), // change-id preserved — identity survives the move
       };
       await writeIn(access, action.toBag, moved, o);
       await tombstoneIn(access, action.toBag, t, o);
