@@ -27,6 +27,7 @@ import {
   AutomergeDocStore,
   TEMP_BAG,
   DRAFT_BAG,
+  WORKING_BAG,
   PERSONAL_BAG,
   LARES_BAG,
   LARARIUM_BAG,
@@ -77,9 +78,14 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     ?? (catHandle?.doc()?.tiddlers?.[userRecipeTitle] as LarTiddlerRecord | undefined);
 
   // Slots the recipe model owns structurally — everything else in the cascade
-  // counts as a library bag for membership reconcile.
+  // counts as a library bag for membership reconcile. @working is a per-
+  // (PersonGroup×fingerprint) GRANT slot (peer to @personal/@draft) threaded
+  // through the manifest, never named in a recipe's bag-stack — so it MUST be
+  // exempt, else this reconcile evicts the live write layer buildIslandRecipe
+  // just mounted (the OCI writable-upper-layer law: keep the scratch layer out
+  // of the membership diff, never a member of it).
   const structural = new Set<string>([
-    TEMP_BAG, DRAFT_BAG, PERSONAL_BAG, wikiBagUri(slug), LARES_BAG, ORACLE_BAG,
+    TEMP_BAG, DRAFT_BAG, WORKING_BAG, PERSONAL_BAG, wikiBagUri(slug), LARES_BAG, ORACLE_BAG,
   ]);
 
   const origin = (): ChangeOrigin =>

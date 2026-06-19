@@ -64,9 +64,13 @@ resolves to nothing gets skipped — the admin's alert stays standing until the
 oracle lands or the operator reboots.
 
 **RW-4 — Structural slots stay structural.** Membership reconcile touches
-library bags only; `@temp`/`@draft`/`@personal`/wiki/`@lares`/`@oracle`
+library bags only; `@temp`/`@draft`/`@working`/`@personal`/wiki/`@lares`/`@oracle`
 never mount or unmount by stack diff (the structural set in code —
-`ORACLE_BAG` is the floor since the 2026-06-16 carve). `@lararium` is **not**
+`ORACLE_BAG` is the floor since the 2026-06-16 carve). `@working` joined the
+structural set 2026-06-19: it is a per-(PersonGroup×fingerprint) grant slot
+(peer to `@personal`/`@draft`) threaded through the manifest, never named in a
+recipe `bag-stack` — so the reconcile MUST exempt it, else it evicts the live
+write layer the island just mounted (the OCI writable-upper-layer law). `@lararium` is **not**
 structural: it mounts as a **library layer** (above `@lares`), so the corpus
 composes into a recipe that names it. Oracle-move swaps apply to any mounted
 CRDT slot the oracles point at.

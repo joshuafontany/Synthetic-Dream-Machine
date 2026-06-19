@@ -348,6 +348,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           verb: "sync-wiki", args: args as Record<string, unknown>, requestedBy: ctx.invocation.requestedBy,
         }),
       );
+      // wiki-act: command a residency ACTION verb to run IN the active wiki
+      // island over ITS composite (operator ruling 2026-06-19: promotion executes
+      // where @working + canon both live — the island owns its composition; the
+      // admin commands, never reaches the per-fingerprint @working binding). The
+      // inner verb (MOVE/LOAD/…) routes to the island's own action reactors.
+      registry.register("wiki-act", async (args, ctx) =>
+        vmManager.placeWikiVerb(slotActiveWikiId, {
+          verb: String(args["verb"]),
+          args: (args["args"] as Record<string, unknown>) ?? {},
+          requestedBy: ctx.invocation.requestedBy,
+        }),
+      );
       registry.register("residency", makeResidencyStatsReactor({ residency }));
     },
 

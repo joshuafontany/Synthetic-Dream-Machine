@@ -195,12 +195,19 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
     // change-id (the --change-id default) means a genuinely distinct change → runs.
     const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
-    const requestId = await taskContentId({ subject, command: verb, args: actionArgs, nonce: "" });
+    // --in-wiki: run the ACTION IN the active wiki island over ITS composite
+    // (where @working + canon both live) — the admin commands via `wiki-act`,
+    // never reaching the per-fingerprint @working binding (operator ruling B,
+    // 2026-06-19). The default path executes admin-side (write-then-sync).
+    const inWiki     = Boolean(args.flags["in-wiki"]);
+    const submitName = inWiki ? "wiki-act" : verb;
+    const submitArgs = inWiki ? { verb, args: actionArgs } : actionArgs;
+    const requestId = await taskContentId({ subject, command: submitName, args: submitArgs, nonce: "" });
     // The ACK budget scales with the gesture: a directory-batch LOAD chews
     // one island frame per carrier — a flat 10s ACK died on the first
     // 189-carrier corpus feed (2026-06-11) while the verb itself succeeded.
     const timeoutMs = Math.max(10_000, 10_000 + carrierCount * 400);
-    const result = await submitVerb(vessel, verb, actionArgs, did, { requestId, timeoutMs });
+    const result = await submitVerb(vessel, submitName, submitArgs, did, { requestId, timeoutMs });
     if (result.status === "error") {
       const msg = result.errorMessage ?? "unknown";
       emit(args, {
