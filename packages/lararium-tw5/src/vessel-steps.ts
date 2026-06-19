@@ -20,6 +20,7 @@ import {
   BAG_IDS,
   computeRecipeFingerprint,
   LARES_DOC_URI, LARARIUM_DOC_URI, WORKING_BAG,
+  wikiBagUri,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
@@ -142,7 +143,14 @@ export async function mountPrimaryWiki(
     ...(draftUrl        ? { draftUrl    } : {}),
     ...(workingUrl      ? { workingUrl  } : {}),
   };
-  const recipe: WikiRecipe = { wikiSlug: inputs.wikiSlug, mirrorBags: [...PRIMARY_MIRROR_BAGS] };
+  // Designate the wiki's OWN canon (@{slug}) for disk projection alongside the
+  // primaries. The pool's self-canon grant authorizes a minted user wiki to
+  // bags/@{slug}; for the system wikis (@lares/@lararium) the slug-bag already
+  // sits in PRIMARY via a literal grant, so resolveDiskMirrors skips the dup.
+  const recipe: WikiRecipe = {
+    wikiSlug: inputs.wikiSlug,
+    mirrorBags: [...PRIMARY_MIRROR_BAGS, wikiBagUri(inputs.wikiSlug)],
+  };
 
   await pool.mountWiki(
     inputs.activeWikiId,

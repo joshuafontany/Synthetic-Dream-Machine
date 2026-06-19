@@ -7,12 +7,12 @@
  * entire and never orphans a fragment. Here @lares→@lararium (both already
  * disk-mirrored) stands in for the working→canon crossing.
  *
- * THE OPEN HOLE: the true @working → wikis/{slug} → bags/{slug} round-trip needs
- * three unbuilt pieces — V3 (the @working disk mirror), minted-@{slug} canon
- * projection, and @working/@{slug} CLI-reachability (the admin CLI cannot
- * resolve a per-fingerprint @working binding by slot URI). This vector witnesses
- * the MOVE gate + change-id + effect-record + the disk publish-diff, short of
- * that round-trip.
+ * THE round-trip's three once-unbuilt pieces are now CLOSED, each witnessed:
+ *   - V3 (the @working disk mirror) — working-loop.test.ts
+ *   - @working CLI-reachability + ingest-back — wikis-ingest-back.test.ts (--in-wiki)
+ *   - minted-@{slug} canon projection — minted-canon-projection.test.ts
+ * This vector keeps its own focus: the MOVE gate + change-id + effect-record +
+ * the disk publish-diff, with @lares→@lararium standing in for the crossing.
  */
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";

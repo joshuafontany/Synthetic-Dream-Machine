@@ -36,7 +36,7 @@ export interface VesselIslandPoolOptions {
   /** Root dir for island-owned NodeFS storage partitions; absent = memory-only. */
   storageRoot?: string;
   /** Held disk-write capability: canon bag → mirror configs this pool MAY project. */
-  diskMirrorGrant?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
+  diskMirrorGrant?: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[];
   /** Override the mount silence budget in ms (tests). */
   mountSilenceMs?: number;
   /** Override the mount progress-stall budget in ms (default 3x silence). */

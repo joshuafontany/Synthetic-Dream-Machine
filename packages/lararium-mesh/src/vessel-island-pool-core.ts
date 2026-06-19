@@ -18,6 +18,7 @@
 
 import { attachMessageChannelSync } from "./island-repo.js";
 import { awaitIslandMsg } from "./vessel-host.js";
+import { wikiBagUri } from "./wiki-recipe.js";
 import type { VesselWorkerHandle, VesselIslandHost } from "./vessel-host.js";
 import {
   isIslandToVesselMsg,
@@ -58,21 +59,42 @@ interface ColdSlot {
 
 type Slot = IslandSlot | ColdSlot;
 
-export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean }[];
+export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[];
 
 /** Resolve a mount's disk mirrors: intersect the held grant (authority) with the
  *  recipe's `mirrorBags` (designation), then fill a per-wiki-slug grant's leaf —
  *  e.g. `@working` projecting to `wikis/@{slug}` — from the recipe's `wikiSlug`
- *  at mount time. OCAP-clean: authority stays in the static grant, designation in
- *  the synced recipe, the per-instance subdir resolved here. */
+ *  at mount time.
+ *
+ *  A `selfCanon` entry is the per-wiki CANON authority: it expands BOTH its
+ *  bagId and its leaf from the slug (the wiki's own `@{slug}` bag → `bags/@{slug}`),
+ *  and yields only when the recipe designates that canon AND no literal grant
+ *  already covers it — so a minted user wiki projects its canon to `bags/@{slug}`
+ *  while the system wikis (@lares/@lararium, literal grants) keep their static
+ *  roots and never double-project.
+ *
+ *  OCAP-clean: authority stays in the static grant, designation in the synced
+ *  recipe, the per-instance bag + subdir resolved here. */
 export function resolveDiskMirrors(
   grant: DiskMirrorGrant,
   mirrorBags: readonly string[] | undefined,
   wikiSlug: string,
 ): DiskMirrorGrant {
+  const selfCanonBag = wikiBagUri(wikiSlug);
+  const literalBags = new Set(grant.filter((g) => !g.selfCanon).map((g) => g.bagId));
   return grant
-    .filter((g) => mirrorBags?.includes(g.bagId))
-    .map((g) => (g.perWikiSlug ? { ...g, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` } : g));
+    .filter((g) =>
+      g.selfCanon
+        ? Boolean(mirrorBags?.includes(selfCanonBag)) && !literalBags.has(selfCanonBag)
+        : Boolean(mirrorBags?.includes(g.bagId)),
+    )
+    .map((g) =>
+      g.selfCanon
+        ? { ...g, bagId: selfCanonBag, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
+        : g.perWikiSlug
+          ? { ...g, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` }
+          : g,
+    );
 }
 
 export interface VesselIslandPoolCoreOptions {

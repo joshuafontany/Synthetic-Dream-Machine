@@ -401,13 +401,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       eventBus.start();
 
       const workerRootDir = rootDirOpt ?? repoRoot;
-      const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean }[] = [
+      const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[] = [
         { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
         { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
         // @working = the live write layer; projects per-wiki to wikis/@{slug} (the
         // leaf slug fills at mount time — perWikiSlug). The authority (the wikis
         // base) stays static here; designation rides the recipe's mirrorBags.
         { bagId: WORKING_BAG,      mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", perWikiSlug: true },
+        // self-canon = the per-wiki CANON authority: a minted user wiki's own
+        // @{slug} bag projects to bags/@{slug} (both bagId and leaf fill from the
+        // slug at mount). System wikis (@lares/@lararium) carry literal grants
+        // above, so resolveDiskMirrors skips this for them — no double-project.
+        { bagId: "@self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "@self",    perWikiSlug: true, selfCanon: true },
       ];
       vmManager = new VesselIslandPool({
         mainRepo:    repo,
