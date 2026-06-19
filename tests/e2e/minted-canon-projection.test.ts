@@ -17,6 +17,7 @@
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { spawn, type ChildProcess } from "node:child_process";
+import { createServer } from "node:net";
 import { existsSync, readdirSync, statSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { targetInstance, type LarInstance } from "../harness/instance.js";
@@ -40,6 +41,27 @@ function walk(dir: string): string[] {
     const p = join(dir, n);
     return statSync(p).isDirectory() ? walk(p) : [p];
   });
+}
+
+/** True once `port` accepts a bind — the old daemon released it. The reboot
+ *  reuses lar.port (lar.cli targets it), so we MUST wait for release after
+ *  stopDaemonOnly (which only sleeps 800ms) before spawning the second daemon —
+ *  else it dies fast on EADDRINUSE under suite load (the dev-loop-restart cure:
+ *  wait-for-port-free, never a fixed sleep). */
+function portFree(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const srv = createServer();
+    srv.once("error", () => resolve(false));
+    srv.listen(port, "127.0.0.1", () => srv.close(() => resolve(true)));
+  });
+}
+
+async function awaitPortFree(port: number, timeoutMs = 20_000): Promise<void> {
+  const start = Date.now();
+  while (!(await portFree(port))) {
+    if (Date.now() - start > timeoutMs) throw new Error(`port ${port} never freed after stopDaemonOnly`);
+    await sleep(300);
+  }
 }
 
 async function awaitCarrier(dir: string, timeoutMs = 60_000): Promise<boolean> {
@@ -71,6 +93,7 @@ describe("minted-canon projection — a user wiki's @{slug} canon reaches bags/@
 
     // 3) REBOOT — the active-wiki marker only takes on boot (open does not remount)
     await lar.stopDaemonOnly();
+    await awaitPortFree(lar.port);   // the reboot reuses lar.port — wait for the old daemon to release it
     second = spawn(process.execPath, [NODE_MAIN, "--root", lar.root, "--port", String(lar.port)], {
       cwd: NODE_CWD,
       env: { ...process.env, LAR_ROOT: lar.root, LAR_PORT: String(lar.port) },
