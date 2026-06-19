@@ -14,7 +14,7 @@ role      = "live handoff — the next vector and the ground it stands on; updat
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/docs/lares/handoff"
-written   = "2026-06-17"
+written   = "2026-06-19"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -23,7 +23,24 @@ written   = "2026-06-17"
 
 <<~ ahu #next-vector >>
 
-# NEXT VECTOR — `lar:///oracle.planes.enact`
+# NEXT VECTOR — `lar:///working-canon.live-loop.completes`
+
+**The working/canon SPINE is BUILT and LIVE-WITNESSED (this session, 2026-06-17→19, ~14 commits).** A wiki's live edits land in `@working` (→ `wikis/{slug}`); canon publishes by a cap-gated, audited, carrier-group `MOVE` (→ `bags/`, the git diff). DONE + green end-to-end:
+- **Doctrine:** `wiki-layer-ontology` #shore-law (working↔canon · plane↔plane · host↔lararium), Law 4 sharpened, the **kāpae-vs-absent** model (`residency-model` anti-pattern #3 — a tombstone SHADOWS lower cascade bags; a MOVE/promotion source RETRACTS-to-absent via the `remove` primitive, falls through to canon).
+- **Residency:** `@working` typed slot + PersonGroup×fingerprint binding · carrier-group `MOVE` · the `remove` primitive · destination `bag`-field stamp.
+- **Projection:** level-triggered per-root reconcile · survivor-provenance (`resolveTopmost`, not `change.bag`) · V3 `@working → wikis/{slug}` mirror · **the recipe-watch eviction fix** (`@working` added to the structural set — it mounted then got evicted on the first reconcile, the bug that hid because nothing tested a LIVE `@working`).
+- **Locus B:** promotion runs IN the wiki island over its own composite (commanded via `lares act --in-wiki` → the `wiki-act` forwarder → `placeWikiVerb`); the admin never reaches the per-fingerprint `@working` binding, accessor stays clean.
+- **Witnesses (LIVE, not fixtures):** `tests/e2e/working-loop.test.ts` (LOAD→`@working`→`wikis/`; MOVE `@working→@lares`→`bags/` + retract, 3/3 deterministic) · `promotion-publish-diff` · `watcher-cut-c`. Suites: mesh 282 · tw5 129 · node 128 · e2e 29/29. Validated TWICE throughout (pono memes + web prior-art) via ~5 research-spirit dispatches; lessons → memory `[[kapae-vs-absent-move]]`.
+
+**REMAINING to fully close the live loop (open threads):**
+1. **minted-`@{slug}` canon projection** — a minted USER wiki's `@{slug}` canon doesn't project to `bags/{slug}` yet (the disk grant mirrors only `@lares`/`@lararium` + per-wiki `@working`). The promotion witness used `@lares→@lararium` (both mirror).
+2. **`wikisFileToUri` ingest-back** — `wikis/` projects OUT only; editing a `wikis/{slug}` file on disk doesn't ingest back to `@working` (no reverse-derivation; `bagsFileToUri` covers `bags/` only).
+3. **The VM-cascade live edit** — a true UI edit (no explicit bag) routing to `@working` is witnessed only at the island-adaptor UNIT level; the e2e drives `@working` via explicit `--in-wiki` LOAD/MOVE (the cascade is a live-VM path, not CLI-reachable by design).
+
+**Broader torch (untouched this session):** T3 (~13 stale `api/lararium/` pointers — author `schema/*` memes vs retire) · residency-create (vector 2) · transitive-closure (3) · hull-unification (4) + switchboard retirement · host horizon (UE5/6 Verse, MUDlet — shore-law is host-general for it).
+
+---
+**PRIOR VECTOR — `lar:///oracle.planes.enact` (DONE 2026-06-16):**
 
 The **two-plane oracle** lands in canon (operator ruling, 2026-06-16); the code-enactment is the open edge. `@oracle` = the **system** plane (DreamNet system bags `@oracle`/`@lararium`/`@lares` — their pointers + wiki-recipes); `@catalog` = the **user** plane (user bags + user recipes). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, each its own **quine wiki**. Full law: `wiki-layer-ontology#oracle-planes`.
 
