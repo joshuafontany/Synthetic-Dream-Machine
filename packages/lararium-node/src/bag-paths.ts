@@ -133,23 +133,47 @@ export function namedBagMirror(bagId: string, scope: string, mirrorRoot: string)
 // ── Loci reverse-derivation (the ingest gesture's scan leg) ─────────────────
 
 /**
- * Derive the carrier-root lar: URI a bags/ file projects — the loci law run
- * backward under the full-path-inside-bag ruling:
- *   `bags/<residency-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
- * The first segment under bags/ names the HOLDING BAG (residency plane) and
- * never enters the name. Returns null outside `<instanceRoot>/bags/`, for
- * non-.md files, or when the interior path carries no w.w.w root — the
- * gesture reports those as skipped, never guesses.
+ * One mirror plane's reverse-derivation — the loci law run backward under the
+ * full-path-inside-bag ruling, shared by every disk mirror:
+ *   `<root>/<rootDirName>/<holding-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
+ * The first segment under the plane dir names the HOLDING SLOT (a residency
+ * bag under bags/, a wiki slug under wikis/) and never enters the name; the
+ * interior IS the name, whole. Returns null outside the plane dir, for non-.md
+ * files, or when the interior carries no w.w.w root — the gesture reports
+ * those as skipped, never guesses.
  */
-export function bagsFileToUri(instanceRoot: string, filePath: string): string | null {
-  const bagsRoot = resolvePath(instanceRoot, "bags");
+function mirrorRootFileToUri(instanceRoot: string, filePath: string, rootDirName: string): string | null {
+  const mirrorRoot = resolvePath(instanceRoot, rootDirName);
   const abs = resolvePath(filePath);
-  if (!abs.startsWith(bagsRoot + sep)) return null;
-  const rel = abs.slice(bagsRoot.length + 1).split(sep);
-  if (rel.length < 2) return null;                       // needs residency dir + interior
+  if (!abs.startsWith(mirrorRoot + sep)) return null;
+  const rel = abs.slice(mirrorRoot.length + 1).split(sep);
+  if (rel.length < 2) return null;                       // needs holding dir + interior
   const interior = rel.slice(1).join("/");
   if (!interior.endsWith(".md")) return null;
   const namePath = interior.slice(0, -3);
   if (!/^\w+\.\w+\.\w+\//.test(namePath)) return null;  // loci: stable names carry a w.w.w root
   return `lar:///${namePath}`;
+}
+
+/**
+ * Derive the carrier-root lar: URI a bags/ file projects — the canon plane:
+ *   `bags/<residency-dir>/<full-uri-path>.md` ⇄ `lar:///<full-uri-path>`
+ * The first segment under bags/ names the HOLDING BAG (residency plane).
+ */
+export function bagsFileToUri(instanceRoot: string, filePath: string): string | null {
+  return mirrorRootFileToUri(instanceRoot, filePath, "bags");
+}
+
+/**
+ * Derive the carrier-root lar: URI a wikis/ file projects — the @working
+ * write-layer's disk surface run backward (the ingest-BACK leg). @working
+ * projects per-wiki to `wikis/@{slug}/<full-uri-path>.md`; the first segment
+ * under wikis/ names the WIKI SLUG (the write-layer instance), never the
+ * carrier name. The derived records home to @working (the editing plane), not
+ * the named bag — the ingest caller carries that designation in `--to`.
+ * Symmetric with the disk-projector's @working projection: strip wikis/ + the
+ * @{slug} leaf, read the interior whole.
+ */
+export function wikisFileToUri(instanceRoot: string, filePath: string): string | null {
+  return mirrorRootFileToUri(instanceRoot, filePath, "wikis");
 }

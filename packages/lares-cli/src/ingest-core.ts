@@ -17,9 +17,9 @@
  */
 
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve, sep } from "node:path";
 import { newChangeId, taskContentId } from "@lararium/mesh";
-import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri } from "@lararium/node";
+import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri } from "@lararium/node";
 import {
   submitVerb,
   type AdminVesselHandle,
@@ -68,21 +68,40 @@ export function listCarriers(source: string): string[] | null {
     .map((f) => join(source, f));
 }
 
+/** Derive a file's carrier-root URI for one mirror plane (bags/ canon vs
+ *  wikis/ @working write-layer). The watcher and CLI both feed a source; this
+ *  names which loci reverse-derivation a row carries. */
+export type FileToUriFn = (root: string, file: string) => string | null;
+
+/**
+ * Pick the loci reverse-derivation by which mirror plane the source sits in.
+ * Under `<root>/wikis/` → the @working write-layer ingest-back derivation
+ * (the editing plane); else the bags/ canon derivation. Designation of the
+ * target bag stays the caller's (`--to`); the plane only drives the URI.
+ */
+export function fileToUriForSource(root: string, source: string): FileToUriFn {
+  const wikisRoot = join(root, "wikis");
+  const abs = resolve(source);
+  return abs === wikisRoot || abs.startsWith(wikisRoot + sep) ? wikisFileToUri : bagsFileToUri;
+}
+
 /**
  * The two-leg diff over an explicit carrier list: derive uri, NFC-assert, hash,
  * compare against the Synced tree. The watcher feeds the buffered changed paths
- * here; the CLI feeds the whole walked source.
+ * here; the CLI feeds the whole walked source. `fileToUri` names the mirror
+ * plane (default bags/ canon; wikis/ for @working ingest-back).
  */
 export function scanFiles(
   root:  string,
   files: readonly string[],
   toBag: string,
   tree:  SyncedTree,
+  fileToUri: FileToUriFn = bagsFileToUri,
 ): ScanResult {
   const rows: ScanRow[] = [];
   const skipped: string[] = [];
   for (const file of files) {
-    const uri = bagsFileToUri(root, file);
+    const uri = fileToUri(root, file);
     if (!uri) { skipped.push(file); continue; }
     let text: string;
     try { text = readFileSync(file, "utf8"); } catch {
@@ -109,16 +128,18 @@ export function scanFiles(
   return { rows, skipped };
 }
 
-/** Walk a source and scan it whole. Returns null when the source does not resolve. */
+/** Walk a source and scan it whole. Returns null when the source does not
+ *  resolve. `fileToUri` defaults to the source's mirror plane (bags/ vs wikis/). */
 export function scanSource(
   root:   string,
   source: string,
   toBag:  string,
   tree:   SyncedTree,
+  fileToUri: FileToUriFn = fileToUriForSource(root, source),
 ): ScanResult | null {
   const files = listCarriers(source);
   if (files === null) return null;
-  return scanFiles(root, files, toBag, tree);
+  return scanFiles(root, files, toBag, tree, fileToUri);
 }
 
 /** The rows an INGEST submission carries — NEW and CHANGED only. */
@@ -144,6 +165,13 @@ export interface SubmitIngestOpts {
   readonly deletions?: readonly PendingDeletion[];
   /** Operator mass-delete brake dial (0,1]; omitted → island default. */
   readonly massDeleteFraction?: number;
+  /**
+   * Run the INGEST IN the active wiki island over ITS composite — the path
+   * for `@working` (the per-fingerprint write layer the admin never reaches,
+   * operator ruling B 2026-06-19). The admin commands via `wiki-act` wrapping
+   * the INGEST; the default path executes admin-side (canon bags).
+   */
+  readonly inWiki?: boolean;
 }
 
 /**
@@ -170,7 +198,12 @@ export async function submitIngestOn(
     ...(deletions.length > 0 ? { deletions: deletions.map((d) => ({ uri: d.uri, syncedHash: d.syncedHash })) } : {}),
     ...(opts.massDeleteFraction !== undefined ? { massDeleteFraction: opts.massDeleteFraction } : {}),
   };
-  const requestId = await taskContentId({ subject: opts.toBag, command: "INGEST", args: actionArgs, nonce: "" });
+  // --in-wiki: wrap the INGEST so it runs IN the active wiki island over its
+  // composite (where @working lives), mirroring `lares act --in-wiki`. The
+  // default submits admin-side for canon bags.
+  const submitName = opts.inWiki ? "wiki-act" : "INGEST";
+  const submitArgs = opts.inWiki ? { verb: "INGEST", args: actionArgs } : actionArgs;
+  const requestId = await taskContentId({ subject: opts.toBag, command: submitName, args: submitArgs, nonce: "" });
   const timeoutMs = Math.max(10_000, 10_000 + (opts.candidates.length + deletions.length) * 400);
-  return await submitVerb(vessel, "INGEST", actionArgs, opts.did, { requestId, timeoutMs });
+  return await submitVerb(vessel, submitName, submitArgs, opts.did, { requestId, timeoutMs });
 }

@@ -24,9 +24,11 @@ import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngestOn } from "../ingest-core.js";
 
 function printUsage(): void {
-  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--yes] [--port N]");
-  console.log("  default = preview (scan + two-leg diff, no submission);");
-  console.log("  --apply sends NEW+CHANGED carriers through the island's INGEST gate.");
+  console.log("usage: lares ingest --source <dir|file> --to <bagUri> [--apply] [--in-wiki] [--yes] [--port N]");
+  console.log("  default  = preview (scan + two-leg diff, no submission);");
+  console.log("  --apply  sends NEW+CHANGED carriers through the island's INGEST gate;");
+  console.log("  --in-wiki runs the INGEST in the active wiki island (the path for @working");
+  console.log("           ingest-back — a wikis/ source derives its URIs off the @working plane).");
 }
 
 export async function cmdIngest(args: ParsedArgs): Promise<number> {
@@ -62,7 +64,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
       },
       human: () => {
         for (const r of rows) console.log(`  ${r.status.toUpperCase().padEnd(10)} ${r.uri}`);
-        for (const f of skipped) console.log(`  SKIPPED    ${f} (outside bags/ — no loci derivation)`);
+        for (const f of skipped) console.log(`  SKIPPED    ${f} (no loci derivation — outside bags//wikis/, non-.md, or rootless interior)`);
         console.log(`\n  ${rows.length} scanned · ${candidates.length} would submit · preview only (pass --apply)`);
       },
     });
@@ -107,6 +109,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   try {
     const result = await submitIngestOn(vessel, {
       source, toBag, candidates, did,
+      inWiki: Boolean(args.flags["in-wiki"]),
       ...(args.options["change-id"] ? { changeId: args.options["change-id"] } : {}),
     });
     if (result.status === "error") {
