@@ -422,11 +422,21 @@ async function writeIn(access: BagAccess, bag: string, record: LarTiddlerRecord,
   await store.put(record, o);
 }
 
-/** Tombstone a title in the bag's own store. Fails loud when unreachable. */
+/** Tombstone (KĀPAE hide — shadows lower bags) a title in the bag's own store.
+ *  For deliberate deletes (DELETE/DROP/CLEAR). Fails loud when unreachable. */
 async function tombstoneIn(access: BagAccess, bag: string, title: string, o: ChangeOrigin): Promise<void> {
   const store = await access.write(bag);
   if (!store) throw new Error(`action-handler: target bag "${bag}" unreachable — cannot tombstone (no silent misroute).`);
   await store.tombstone(title, o);
+}
+
+/** HARD-remove (ABSENT — falls through to a lower bag) a title in the bag's own
+ *  store, NOT a kāpae tombstone. The retract a MOVE source uses so a canonical
+ *  copy beneath surfaces (residency-model anti-pattern #3). Fails loud unreachable. */
+async function removeIn(access: BagAccess, bag: string, title: string, o: ChangeOrigin): Promise<void> {
+  const store = await access.write(bag);
+  if (!store) throw new Error(`action-handler: target bag "${bag}" unreachable — cannot remove (no silent misroute).`);
+  await store.remove(title, o);
 }
 
 /** Copy a record into the target bag preserving change-id (Anti-pattern #1 defense). */
@@ -443,7 +453,7 @@ async function landInBag(
     // or copied record MUST carry its new bag — else it never projects under the
     // destination mirror (it kept the source's bag). Cross-bag = cross-doc, so
     // the spread clones into a foreign doc cleanly (no same-doc aliasing).
-    tiddler: { ...(source.tiddler as Record<string, unknown>), bag: toBag } as LarTiddlerRecord["tiddler"],
+    tiddler: { ...source.tiddler, bag: toBag },
     meta: { ...(source.meta ?? {}), changeId },
   };
   await writeIn(access, toBag, record, o);
@@ -494,7 +504,11 @@ async function executeMove(action: MoveAction, access: BagAccess): Promise<Recor
     await landInBag(access, action.toBag, source, changeId, o);
   }
   for (const t of group) {
-    await tombstoneIn(access, action.fromBag, t, o);
+    // RETRACT (hard-remove → ABSENT), never a kāpae tombstone: a MOVE relocates,
+    // so the source falls through to wherever the carrier now lives below —
+    // promotion @working → canon reveals the canon copy, not a hide
+    // (residency-model anti-pattern #3; kāpae shadows, absent falls through).
+    await removeIn(access, action.fromBag, t, o);
     moved++;
   }
   return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId, moved };

@@ -204,6 +204,18 @@ export class AutomergeDocStore implements LarTiddlerStore {
     this.provider.fireImmediate({ title, record: _tombstoneRecord(title), origin, ...(this.bagId !== undefined ? { bag: this.bagId } : {}) });
   }
 
+  /** HARD-remove: delete the key so `get` returns null (ABSENT — falls through
+   *  the cascade), never a kāpae tombstone. The MOVE/promotion source retract. */
+  async remove(title: string, origin: ChangeOrigin): Promise<void> {
+    this.handle.change((doc) => {
+      const tiddlers = doc.tiddlers as Record<string, MutableLarTiddlerRecord>;
+      delete tiddlers[title];
+    });
+    // Fire record:null — absence; the adaptor's cross-bag resolution surfaces
+    // whatever lower-bag copy now resolves beneath (vs a kāpae stop).
+    this.provider.fireImmediate({ title, record: null, origin, ...(this.bagId !== undefined ? { bag: this.bagId } : {}) });
+  }
+
   subscribe(fn: (change: LarTiddlerChange) => void): () => void {
     return this.provider.addProjection({ onUriChanged: fn });
   }

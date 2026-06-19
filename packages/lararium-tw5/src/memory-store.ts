@@ -77,6 +77,13 @@ export class MemoryTiddlerStore implements LarTiddlerStore {
     this._emit({ title, record: null, origin, ...(this.bagId !== undefined ? { bag: this.bagId } : {}) });
   }
 
+  /** HARD-remove: drop the record entirely (get → null = ABSENT, falls through),
+   *  distinct from tombstone's kāpae hide. The MOVE/promotion source retract. */
+  async remove(title: string, origin: ChangeOrigin): Promise<void> {
+    this._records.delete(title);
+    this._emit({ title, record: null, origin, ...(this.bagId !== undefined ? { bag: this.bagId } : {}) });
+  }
+
   subscribe(fn: (change: LarTiddlerChange) => void): () => void {
     this._subscribers.push(fn);
     return () => {

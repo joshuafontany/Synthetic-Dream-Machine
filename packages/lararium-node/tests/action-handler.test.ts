@@ -186,10 +186,12 @@ describe("MOVE handler", () => {
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
     await handler(args, makeContext(composite, "MOVE", args));
 
-    // toBag holds; fromBag tombstone-shadows but resolveAll only sees live entries.
+    // toBag holds; fromBag is RETRACTED (hard-removed → ABSENT, not a kāpae hide):
+    // a MOVE relocates, it never shadows. resolveAll sees only the live dest, and
+    // the source kāpae-set is empty (residency-model anti-pattern #3 — absent, not kāpae).
     const all = await composite.resolveAll("T");
     expect(all.map((e) => e.bagId)).toEqual([BAG_HIGH]);
-    expect(await composite.listKapaeBags("T")).toEqual([BAG_LOW]);
+    expect(await composite.listKapaeBags("T")).toEqual([]);
 
     // Two effect records — one accession in BAG_HIGH + one deaccession in BAG_LOW.
     const effects = await effectRecordsIn(composite);
@@ -434,7 +436,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     await runLocalVerb(invocation("MOVE", args), { admin: composite, registry, verifier: verifier() });
 
     expect((await composite.resolveAll("T")).map((e) => e.bagId)).toEqual([BAG_HIGH]);
-    expect(await composite.listKapaeBags("T")).toEqual([BAG_LOW]);
+    expect(await composite.listKapaeBags("T")).toEqual([]); // MOVE retracts source to absent, not kāpae
     expect((await effectRecordsIn(composite)).length).toBe(2);
   });
 

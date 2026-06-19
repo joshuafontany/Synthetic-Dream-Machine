@@ -208,11 +208,21 @@ export interface LarTiddlerStore {
   put(record: LarTiddlerRecord, origin: ChangeOrigin, options?: LarWriteOptions): Promise<void>;
 
   /**
-   * Mark a title deleted in live wiki state.
-   * Does not hard-delete. Tombstoned titles disappear from listVisible() by default.
-   * origin carries the audit trail.
+   * Mark a title deleted in live wiki state (a KĀPAE tombstone, meta.deleted).
+   * Does not hard-delete. Tombstoned titles disappear from listVisible() by
+   * default AND SHADOW lower-priority bags in the cascade (kāpae semantics — a
+   * deliberate hide; anti-pattern #3, residency-model). origin carries audit.
    */
   tombstone(title: string, origin: ChangeOrigin): Promise<void>;
+
+  /**
+   * HARD-remove a title (delete the record so `get` returns null = ABSENT),
+   * distinct from `tombstone`'s kāpae hide. Absent FALLS THROUGH the cascade to
+   * a lower bag (vs kāpae, which shadows it). The retract a MOVE/promotion uses
+   * on its source so a lower-bag canonical copy surfaces — "tombstone distinct
+   * from absent" (residency-model anti-pattern #3). Audit lives in the ledger.
+   */
+  remove(title: string, origin: ChangeOrigin): Promise<void>;
 
   /**
    * Subscribe to store changes. Returns an unsubscribe function.

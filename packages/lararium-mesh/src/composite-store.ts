@@ -238,6 +238,11 @@ export class CompositeStore implements LarTiddlerStore {
     return this.writableStore.tombstone(title, origin);
   }
 
+  async remove(title: string, origin: ChangeOrigin): Promise<void> {
+    if (!this.writableStore) throw new Error("CompositeStore: no writable layer registered");
+    return this.writableStore.remove(title, origin);
+  }
+
   /**
    * Tombstone a tiddler in a specific writable bag — used by ceremonies that
    * need to delete from a non-default writable layer (e.g. the MOVE residency
@@ -248,6 +253,14 @@ export class CompositeStore implements LarTiddlerStore {
     const layer = this.layers.find((l) => l.bagId === bagId && l.writable);
     if (!layer) throw new Error(`CompositeStore: no writable layer for bag "${bagId}"`);
     return layer.store.tombstone(title, origin);
+  }
+
+  /** HARD-remove a title from one bag (ABSENT — falls through), distinct from
+   *  tombstoneInBag's kāpae hide. The retract a MOVE/promotion uses on its source. */
+  async removeInBag(bagId: string, title: string, origin: ChangeOrigin): Promise<void> {
+    const layer = this.layers.find((l) => l.bagId === bagId && l.writable);
+    if (!layer) throw new Error(`CompositeStore: no writable layer for bag "${bagId}"`);
+    return layer.store.remove(title, origin);
   }
 
   /** True when a writable layer for the given bag is registered. */
@@ -564,6 +577,7 @@ export function bagScopedStore(composite: CompositeStore, bagId: string): LarTid
     get:           (title) => composite.getLive(title),
     put:           (record, origin, options) => composite.put(record, origin, { bag: options?.bag ?? bagId }),
     tombstone:     (title, origin) => composite.tombstoneInBag(bagId, title, origin),
+    remove:        (title, origin) => composite.removeInBag(bagId, title, origin),
     subscribe:     (fn) => composite.subscribe(fn),
     addProjection: (p) => composite.addProjection(p),
   };
