@@ -21,9 +21,23 @@
  */
 
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import { IslandAdaptor }      from "../src/island-adaptor.js";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
 import { WORKING_BAG, type LarTiddlerChange, type ChangeOrigin } from "@lararium/mesh";
+
+const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/@lararium/config/bag-paths";
+const SHIPPED_TID = join(dirname(fileURLToPath(import.meta.url)), "..", "tiddlers", "lar-bag-paths.tid");
+
+/** The cascade body (filter rules) of the SHIPPED lar-bag-paths.tid — the
+ *  frontmatter ends at the first blank line; the rest is the tiddler text. */
+function shippedCascadeBody(): string {
+  const raw = readFileSync(SHIPPED_TID, "utf8");
+  const blank = raw.indexOf("\n\n");
+  return raw.slice(blank + 2).trim();
+}
 
 const CURRENT_WIKI_BAG = "lar:///ha.ka.ba/@lararium/config/current-wiki-bag";
 
@@ -404,6 +418,30 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
 
     await adaptor.saveTiddler({ fields: { title: "Some Plain Tiddler" } });
     expect(puts).toHaveLength(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Cascade drift guard — the outbound tests above route against an in-test copy
+// of the cascade; bind that copy to the SHIPPED lar-bag-paths.tid so the
+// "live edit → @working" witness can never silently drift from the real config.
+// (The live-VM saveTiddler path is unit-witnessed only — the cascade runs in
+// the wiki VM, worker-bound in node and dropped from the browser harness, so
+// no clean e2e surface drives it; the @working→wikis/ disk leg is e2e-witnessed
+// in tests/e2e/working-loop. This guard keeps the unit witness truthful.)
+// ---------------------------------------------------------------------------
+
+describe("IslandAdaptor — cascade config drift guard", () => {
+  test("the in-test cascade mirrors the SHIPPED lar-bag-paths.tid exactly", () => {
+    const tw5 = new FakeTW5Engine();
+    const inTest = (tw5.wiki.getTiddlerText(BAG_PATHS_CONFIG, "") ?? "").trim();
+    expect(inTest).toBe(shippedCascadeBody());
+  });
+
+  test("the shipped cascade routes a bare lar: edit to {current-wiki-bag} (the write-layer invariant)", () => {
+    // island-recipe seeds current-wiki-bag → @working for a granted content wiki;
+    // this rule is what carries a live lar: edit there instead of straight to canon.
+    expect(shippedCascadeBody()).toContain(`[prefix[lar:]then{${CURRENT_WIKI_BAG}}]`);
   });
 });
 
