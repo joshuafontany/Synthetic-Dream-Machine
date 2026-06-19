@@ -74,7 +74,8 @@ export class LarDiskProjector {
    */
   readonly writing = new Set<string>();
 
-  /** Timer key shape: `${bagId}\0${rootUri}` — debounce per (bag, carrier root). */
+  /** Timer key = the carrier root URI — debounce + coalesce per root, so a MOVE's
+   *  source-tombstone and destination-add settle into ONE level-triggered reconcile. */
   private readonly timers = new Map<string, ReturnType<typeof setTimeout>>();
   private _firstFlushDone = false;
 
@@ -131,27 +132,19 @@ export class LarDiskProjector {
       for (const title of Object.keys(changes)) {
         if (!title.startsWith("lar:")) continue;
         const rootUri = routeToRoot(title);
-        const tiddler = wiki.getTiddler?.(rootUri);
-        if (!tiddler) {
-          // Carrier root gone — try all mirrors for unlink. (A deleted
-          // fragment whose root survives re-flushes the root below.)
-          this._scheduleUnlinkByTitle(rootUri);
-          continue;
-        }
-        const fields = tiddler.fields as Record<string, string | string[] | undefined>;
-        if (fields["disk-projection"] === "no") continue;
-        const bagId = typeof fields["bag"] === "string" ? fields["bag"] : undefined;
-        if (!bagId) continue;
-        if (!this.mirrors.some((m) => m.bagId === bagId)) continue;
-
-        // Debounce per (bag, carrier root): a 17-record carrier LOAD
-        // coalesces into one whole-carrier flush.
-        const key = `${bagId}\0${rootUri}`;
+        // LEVEL-TRIGGERED (K8s reconciliation; prior-art 2026-06-19): every
+        // change is a NUDGE to reconcile this carrier root against the CURRENT
+        // settled VM state — never an edge that licenses a destructive action
+        // off a transient view. Debounce per ROOT (not per bag+root) so a MOVE's
+        // source-tombstone and destination-add COALESCE into ONE reconcile that
+        // sees the final owner — closing the unlink/write race structurally
+        // (the old per-(bag,root) flush + immediate gone-unlink never coalesced).
+        const key = rootUri;
         const existing = this.timers.get(key);
         if (existing) clearTimeout(existing);
         this.timers.set(key, setTimeout(() => {
           this.timers.delete(key);
-          void this.flush(bagId, rootUri);
+          void this.reconcile(rootUri);
         }, this.debounceMs));
       }
     };
@@ -169,6 +162,28 @@ export class LarDiskProjector {
     // scan re-projects. Losing an OBSERVATION costs a fresh-adoption
     // decision; losing a render costs nothing durable.)
     this.syncedTree?.flush();
+  }
+
+  /**
+   * Level-triggered reconcile of ONE carrier root against the settled VM state
+   * (the projector's authoritative view, per VM-Primacy). Live (a `bag` field
+   * naming a mirror) → flush that owner (render + write + cross-mirror cleanup).
+   * Gone → unlink from every mirror (a true delete; a MOVE shows its new owner
+   * here, the add having merged within the debounce). Idempotent: a later nudge
+   * re-reconciles, so a transient "gone" self-heals when the destination lands —
+   * the destructive unlink can never be the final word for a live carrier.
+   */
+  private async reconcile(rootUri: string): Promise<void> {
+    const tiddler = this._tw5?.$tw.wiki.getTiddler?.(rootUri);
+    if (!tiddler) {
+      this._scheduleUnlinkByTitle(rootUri);
+      return;
+    }
+    const fields = tiddler.fields as Record<string, string | string[] | undefined>;
+    if (fields["disk-projection"] === "no") return;
+    const bagId = typeof fields["bag"] === "string" ? fields["bag"] : undefined;
+    if (!bagId || !this.mirrors.some((m) => m.bagId === bagId)) return;
+    await this.flush(bagId, rootUri);
   }
 
   /** Unlink by trying all mirrors whose path strategy resolves the URI. */

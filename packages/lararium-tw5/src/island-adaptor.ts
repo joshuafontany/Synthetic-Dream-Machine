@@ -155,9 +155,9 @@ export class IslandAdaptor implements MemeProjection {
     if (change.origin.kind === "tw-local" && change.origin.instanceId === this.instanceId) return;
 
     if (change.record === null || change.record.meta?.deleted) {
-      const store = this.store as { getLive?: (t: string) => Promise<LarTiddlerRecord | null> };
-      if (typeof store.getLive === "function") {
-        void this._resolveCrossBagTombstone(change, store.getLive.bind(store));
+      const store = this.store as { resolveTopmost?: (t: string) => Promise<{ bagId: string; record: LarTiddlerRecord } | null> };
+      if (typeof store.resolveTopmost === "function") {
+        void this._resolveCrossBagTombstone(change, store.resolveTopmost.bind(store));
         return;
       }
     }
@@ -277,12 +277,18 @@ export class IslandAdaptor implements MemeProjection {
    * record from another bag (one of the other layers still holds it).
    */
   private async _resolveCrossBagTombstone(
-    change:  LarTiddlerChange,
-    getLive: (t: string) => Promise<LarTiddlerRecord | null>,
+    change:        LarTiddlerChange,
+    resolveTopmost: (t: string) => Promise<{ bagId: string; record: LarTiddlerRecord } | null>,
   ): Promise<void> {
-    const live = await getLive(change.title);
-    if (live) {
-      this._enqueue({ title: change.title, record: live, origin: change.origin, ...(change.bag !== undefined ? { bag: change.bag } : {}) });
+    const survivor = await resolveTopmost(change.title);
+    if (survivor) {
+      // Stamp the SURVIVOR's bag — where the carrier NOW lives — never change.bag
+      // (the bag it just LEFT). On a cross-bag MOVE the record retracts from the
+      // source and surfaces in a lower bag; tagging it with the source's bag left
+      // the projector targeting the stale source mirror (byte-identical → silent
+      // hash-skip) and never publishing the destination. resolveTopmost carries
+      // the origin-bag the read path needs (residency-model S3.2 / anti-pattern #4).
+      this._enqueue({ title: change.title, record: survivor.record, origin: change.origin, bag: survivor.bagId });
     } else {
       this._enqueue(change);
     }

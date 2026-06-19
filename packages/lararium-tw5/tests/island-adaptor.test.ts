@@ -257,11 +257,12 @@ describe("IslandAdaptor — inbound forwarding", () => {
 // ---------------------------------------------------------------------------
 
 describe("IslandAdaptor — cross-bag tombstone resolution", () => {
-  test("tombstone forwards the live record from another bag when one exists", async () => {
+  test("tombstone forwards the live record from another bag, stamped with the SURVIVOR's bag", async () => {
     const tw5   = new FakeTW5Engine();
     const store = new MemoryTiddlerStore();
     const liveRecord = { tiddler: { title: LAR_URI, bag: "other", text: "still-here" } };
-    (store as unknown as Record<string, unknown>)["getLive"] = async () => liveRecord;
+    // resolveTopmost carries {bagId, record} — the survivor's ACTUAL bag.
+    (store as unknown as Record<string, unknown>)["resolveTopmost"] = async () => ({ bagId: "other", record: liveRecord });
 
     const adaptor = new IslandAdaptor(tw5 as never, store, INSTANCE_ID, TARGET_BAG);
     adaptor.start();
@@ -271,12 +272,15 @@ describe("IslandAdaptor — cross-bag tombstone resolution", () => {
 
     expect(tw5.enqueueCalls).toHaveLength(1);
     expect(tw5.enqueueCalls[0]?.record).toEqual(liveRecord);
+    // The cross-bag MOVE fix: stamp the bag the record NOW lives in (the survivor),
+    // never the source bag it just left — else the projector targets the stale mirror.
+    expect(tw5.enqueueCalls[0]?.bag).toBe("other");
   });
 
   test("tombstone forwards the tombstone when no live copy remains elsewhere", async () => {
     const tw5   = new FakeTW5Engine();
     const store = new MemoryTiddlerStore();
-    (store as unknown as Record<string, unknown>)["getLive"] = async () => null;
+    (store as unknown as Record<string, unknown>)["resolveTopmost"] = async () => null;
 
     const adaptor = new IslandAdaptor(tw5 as never, store, INSTANCE_ID, TARGET_BAG);
     adaptor.start();
