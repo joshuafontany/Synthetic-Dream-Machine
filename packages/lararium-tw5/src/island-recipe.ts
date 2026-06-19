@@ -17,6 +17,7 @@ import {
   CompositeStore,
   AutomergeDocStore,
   expandRecipe,
+  wikiBagUri,
   TEMP_BAG,
   WORKING_BAG,
   type LarDoc,
@@ -81,17 +82,21 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
 
   // Per-wiki cascade reference — the default `lar:///ha.ka.ba/@lararium/config/bag-paths`
   // reads this value via `{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}` to
-  // resolve `lar:` writes to the wiki's live WRITE LAYER. Points at @working (the
-  // saved live layer, projecting wikis/{slug}); the wiki's own @{slug} bag rides
-  // below as read-only canon, published to only by a promotion MOVE
-  // (wiki-layer-ontology#shore-law). Volatile (lives in @temp), set once at boot,
-  // shadows any @lararium fallback by cascade priority.
+  // resolve `lar:` writes to the wiki's live WRITE LAYER. An operator content wiki
+  // points at @working (the saved live layer, projecting wikis/{slug}); its @{slug}
+  // canon rides below as read-only, published only by a promotion MOVE
+  // (wiki-layer-ontology#shore-law). A grant-less mount — the @admin administrative
+  // DAEMON, a control plane with no working/canon split — has no @working layer, so
+  // it falls back to its OWN bag (wikiBagUri(slug) = @admin, granted), keeping a
+  // writable default path instead of throwing on the first cascade-routed edit.
+  // Volatile (lives in @temp), set once at boot, shadows any fallback by priority.
   if (tempStore) {
+    const writeLayer = handleBySlot.has(WORKING_BAG) ? WORKING_BAG : wikiBagUri(recipe.wikiSlug);
     void tempStore.put(
       {
         tiddler: {
           title: "lar:///ha.ka.ba/@lararium/config/current-wiki-bag",
-          text:  WORKING_BAG,
+          text:  writeLayer,
         },
       },
       { kind: "canon-hydrate", receipt: "recipe-boot" },
