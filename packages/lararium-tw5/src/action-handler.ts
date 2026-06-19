@@ -358,10 +358,7 @@ async function executeIngest(action: IngestAction, access: BagAccess): Promise<R
   // ── apply the deletion wave ──────────────────────────────────────────────
   // Renames re-home the vanished carrier's whole group to the new URI,
   // PRESERVING each record's change-id (the re-link, never a fresh create);
-  // tombstones remove the whole group. Group = root + `#`fragment + `/`path.
-  const groupOf = (titles: readonly string[], root: string): string[] =>
-    titles.filter((t) => t === root || t.startsWith(`${root}#`) || t.startsWith(`${root}/`));
-
+  // tombstones remove the whole group (`groupOf`, the shared carrier-group law).
   for (const { fromUri, toUri } of renames) {
     const live = await listLiveTitlesInBag(access, action.toBag);
     let relinked = 0;
@@ -441,7 +438,12 @@ async function landInBag(
   o: ChangeOrigin,
 ): Promise<void> {
   const record: LarTiddlerRecord = {
-    tiddler: source.tiddler,
+    // Stamp the DESTINATION residency: the disk projector routes a record to its
+    // mirror by the `bag` field (disk-projector reads fields["bag"]), so a moved
+    // or copied record MUST carry its new bag — else it never projects under the
+    // destination mirror (it kept the source's bag). Cross-bag = cross-doc, so
+    // the spread clones into a foreign doc cleanly (no same-doc aliasing).
+    tiddler: { ...(source.tiddler as Record<string, unknown>), bag: toBag } as LarTiddlerRecord["tiddler"],
     meta: { ...(source.meta ?? {}), changeId },
   };
   await writeIn(access, toBag, record, o);
@@ -461,17 +463,41 @@ async function executeCopy(action: CopyAction, access: BagAccess): Promise<Recor
   return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId, mode: "overwrite" };
 }
 
+/** A memetic-wikitext carrier is a tiddler-GROUP keyed by its root: the root
+ *  title itself plus every `#fragment` child and `/path` segment. Residency ops
+ *  that touch a carrier MUST carry the whole group so a fragment never orphans
+ *  from its root (the shared law the deletion, rename, and MOVE paths enforce). */
+function groupOf(titles: readonly string[], root: string): string[] {
+  return titles.filter((t) => t === root || t.startsWith(`${root}#`) || t.startsWith(`${root}/`));
+}
+
 async function executeMove(action: MoveAction, access: BagAccess): Promise<Record<string, unknown>> {
-  const source = await readFromBag(access, action.fromBag, action.title);
-  if (!source) throw new Error(`MOVE: source bag ${action.fromBag} does not hold ${action.title}`);
   const o = origin(action);
-  // Order: land destination first, then tombstone source. If land fails, source
-  // stays intact (no orphaned deaccession); if tombstone fails after land, the
-  // bag carries inconsistent residency — same Sprint 4 atomicity gap, surfaces
-  // the error to the operator.
-  await landInBag(access, action.toBag, source, action.changeId, o);
-  await tombstoneIn(access, action.fromBag, action.title, o);
-  return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId };
+  // Carrier-group MOVE (operator ruling 2026-06-18): a MOVE of a carrier root
+  // carries its WHOLE group — root + #fragment + /path — so promotion publishes
+  // a meme entire and never orphans a fragment from its root (#shore-law). The
+  // same group law the deletion/rename path uses; a single-title move of one
+  // record of a carrier was the latent bug this closes.
+  const live  = await listLiveTitlesInBag(access, action.fromBag);
+  const group = groupOf(live, action.title);
+  if (group.length === 0) throw new Error(`MOVE: source bag ${action.fromBag} does not hold ${action.title}`);
+  // Order: land the whole group first, then tombstone the source group. If a
+  // land fails, the source stays intact (no orphaned deaccession); a tombstone
+  // failure after land surfaces the error (the Sprint 4 atomicity gap stands).
+  let moved = 0;
+  for (const t of group) {
+    const source = await readFromBag(access, action.fromBag, t);
+    if (!source) continue;
+    // change-id identity survives the move: the root keys on the action's
+    // change-id (the operation), each child keeps its own (its record identity).
+    const changeId = t === action.title ? action.changeId : (source.meta?.changeId ?? action.changeId);
+    await landInBag(access, action.toBag, source, changeId, o);
+  }
+  for (const t of group) {
+    await tombstoneIn(access, action.fromBag, t, o);
+    moved++;
+  }
+  return { title: action.title, fromBag: action.fromBag, toBag: action.toBag, changeId: action.changeId, moved };
 }
 
 async function executeClear(action: ClearAction, access: BagAccess): Promise<Record<string, unknown>> {
