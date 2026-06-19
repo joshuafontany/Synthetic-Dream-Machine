@@ -31,7 +31,7 @@ import {
   OpenIdentitySlot,
   corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
-  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI,
+  ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, WORKING_BAG,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   BAG_IDS, slugFromUri,
@@ -389,9 +389,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       eventBus.start();
 
       const workerRootDir = rootDirOpt ?? repoRoot;
-      const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string }[] = [
+      const diskMirrorGrant: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean }[] = [
         { bagId: LARES_DOC_URI,    mirrorRoot: join(workerRootDir, "bags/@lares"),    scope: "@lares" },
         { bagId: LARARIUM_DOC_URI, mirrorRoot: join(workerRootDir, "bags/@lararium"), scope: "@lararium" },
+        // @working = the live write layer; projects per-wiki to wikis/@{slug} (the
+        // leaf slug fills at mount time — perWikiSlug). The authority (the wikis
+        // base) stays static here; designation rides the recipe's mirrorBags.
+        { bagId: WORKING_BAG,      mirrorRoot: join(workerRootDir, "wikis"),          scope: "@working", perWikiSlug: true },
       ];
       vmManager = new VesselIslandPool({
         mainRepo:    repo,

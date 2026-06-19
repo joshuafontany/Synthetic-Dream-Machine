@@ -58,7 +58,22 @@ interface ColdSlot {
 
 type Slot = IslandSlot | ColdSlot;
 
-export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string }[];
+export type DiskMirrorGrant = readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean }[];
+
+/** Resolve a mount's disk mirrors: intersect the held grant (authority) with the
+ *  recipe's `mirrorBags` (designation), then fill a per-wiki-slug grant's leaf —
+ *  e.g. `@working` projecting to `wikis/@{slug}` — from the recipe's `wikiSlug`
+ *  at mount time. OCAP-clean: authority stays in the static grant, designation in
+ *  the synced recipe, the per-instance subdir resolved here. */
+export function resolveDiskMirrors(
+  grant: DiskMirrorGrant,
+  mirrorBags: readonly string[] | undefined,
+  wikiSlug: string,
+): DiskMirrorGrant {
+  return grant
+    .filter((g) => mirrorBags?.includes(g.bagId))
+    .map((g) => (g.perWikiSlug ? { ...g, mirrorRoot: `${g.mirrorRoot}/@${wikiSlug}` } : g));
+}
 
 export interface VesselIslandPoolCoreOptions {
   host: VesselIslandHost;
@@ -164,9 +179,9 @@ export class VesselIslandPoolCore {
     // Disk-mirror = designation ∩ grant: the recipe (synced) DESIGNATES bags;
     // this pool's held grant names which it MAY write. A browser pool's empty
     // grant → never mirrors. The unforgeable authority lives in the grant.
-    const diskMirrors = this._diskMirrorGrant.filter(
-      (g) => spec.recipe.mirrorBags?.includes(g.bagId),
-    );
+    // Authority ∩ designation, with per-wiki-slug leaves filled from the recipe
+    // (e.g. @working → wikis/@{slug}). See resolveDiskMirrors.
+    const diskMirrors = resolveDiskMirrors(this._diskMirrorGrant, spec.recipe.mirrorBags, spec.recipe.wikiSlug);
     const storage = this._host.storage(wikiId);
 
     const manifestMsg = mkManifest(

@@ -19,7 +19,7 @@ import {
   AutomergeDocStore,
   BAG_IDS,
   computeRecipeFingerprint,
-  LARES_DOC_URI, LARARIUM_DOC_URI,
+  LARES_DOC_URI, LARARIUM_DOC_URI, WORKING_BAG,
   type Repo,
   type DocHandle,
   type AutomergeUrl,
@@ -107,7 +107,7 @@ export interface PrimaryMountInputs {
 
 /** Canonical disk-mirror DESIGNATION. A pool's held grant decides whether it
  *  actually mirrors (node holds a disk grant; browser's empty grant ignores). */
-const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI];
+const PRIMARY_MIRROR_BAGS: readonly string[] = [LARES_DOC_URI, LARARIUM_DOC_URI, WORKING_BAG];
 
 /**
  * Mount the primary wiki island — the isomorphic keystone both vessels run.
