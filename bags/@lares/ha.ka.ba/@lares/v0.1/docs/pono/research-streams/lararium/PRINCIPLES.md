@@ -1,10 +1,10 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///lararium-node/PRINCIPLES >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES >>
 
 ```toml iam
-uri-path = "lararium-node/PRINCIPLES"
-file-path = "packages/lares-core/memes/lararium-node/PRINCIPLES.md"
+uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES"
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES.md"
 type = "text/x-memetic-wikitext"
 confidence = 20
 register = "CS"
@@ -117,7 +117,7 @@ carrier canon
 
 <<~ ahu #edges >>
 <<~ pranala #implements ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:principles >>
-<<~ pranala #guards ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:authority-law >>
+<<~ pranala #guards ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:authority-law >>
 <<~/ahu >>
 
 <<~&#x0004; -> ? >>

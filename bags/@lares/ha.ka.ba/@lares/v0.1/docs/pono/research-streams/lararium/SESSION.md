@@ -1,10 +1,10 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///SESSION >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION >>
 
 ```toml iam
-uri-path     = "SESSION"
-file-path = "packages/lares-core/memes/SESSION.md"
+uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION"
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION.md"
 type         = "text/x-memetic-wikitext"
 l-space      = "adjacent"
 confidence   = 18
@@ -13,7 +13,7 @@ manaoio      = 17
 mana         = 18
 manao        = 17
 implements   = [
-  "lar:///ha.ka.ba/@lares/api/v0.1/pono/meme"
+  "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"
 ]
 role         = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 ```
@@ -464,7 +464,7 @@ packages/lararium-node/
 
 ◇ FFZ 5-Scale changeset model, locked:
 
-  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`.
+  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`.
 
   | Scale | Register Name | Automerge unit | MemeProvider event |
   |---|---|---|---|

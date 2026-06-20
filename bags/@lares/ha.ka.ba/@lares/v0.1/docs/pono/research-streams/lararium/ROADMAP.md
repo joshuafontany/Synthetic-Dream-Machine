@@ -1,10 +1,10 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///LARARIUM-NODE/ROADMAP >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/ROADMAP >>
 
 ```toml iam
-uri-path = "LARARIUM-NODE/ROADMAP"
-file-path = "wikis/@lares-history/lararium-research/ROADMAP.md"
+uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/ROADMAP"
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/ROADMAP.md"
 type = "text/x-memetic-wikitext"
 confidence = 18
 register = "S"
@@ -1174,8 +1174,8 @@ The dead-weight `lararium → LARES` owns edge was removed. LARES is reached onc
 
 | URI | Role |
 |---|---|
-| `lar:///ha.ka.ba/@lares/api/v0.1/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
-| `lar:///ha.ka.ba/@lares/api/v0.1/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
+| `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
+| `lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
 | `lar:///ha.ka.ba/@lares/api/v0.1/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
 | `lar:///ha.ka.ba/@lares/api/v0.1/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
 
@@ -2215,7 +2215,7 @@ M9 closed the projection-cache authority arc and browser opening sequence. M10 t
 
 ### M10 Priority 2: Orichalcum ceremony surface
 
-`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/@lares/api/v0.1/pono/orichalcum-capabilities`.
+`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities`.
 
 ### M10 Priority 3: Wiki-recipe carriers
 
@@ -2260,7 +2260,7 @@ The `ReactionGraph` IS the causal island manager. `fire(fromUri, trigger, payloa
 
 ### FFZ Chronometer as causal timestamp
 
-> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`
+> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`
 > The `scale` field in the fragment below maps to these register names: Pulse=L0, Beat=L1, Measure=L2 (default band), Arc=L3, Theme=L4.
 
 The FFZ Chronometer fragment (`#O0.O3.D2.A7`) encodes `{ scale: Ladder5, phase: OodaHa5, counter: number }`. In the async model, each `fire()` call carries an implicit causal timestamp derived from the Chronometer — not a wall-clock time, but a logical position in the OODA-HA loop.
@@ -2446,9 +2446,9 @@ room island     (bag: "room",  writable)        — primary content gate
 ## Edges
 
 <<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/lararium/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/lararium/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/traversal >>

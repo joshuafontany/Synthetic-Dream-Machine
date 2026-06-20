@@ -1,7 +1,7 @@
-<<~ ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml iam
-uri-path     = "lararium-node/MEME-STORE-FOUNDATIONS"
-file-path = "packages/lares-core/memes/lararium-node/MEME-STORE-FOUNDATIONS.md"
+uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MEME-STORE-FOUNDATIONS"
+file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MEME-STORE-FOUNDATIONS.md"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
 confidence   = 18
@@ -213,4 +213,4 @@ The identity and UCAN layer is now in place:
 
 <<~/ahu >>
 
-<<~ ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
