@@ -39,7 +39,7 @@ Drafted from the Gaia-side git record:
 - `520bb14d` — the `@personal` / `@draft` binding resolver — a working bank with its own name
 - the shore-law doctrine — the working/canon split named as a general law of the lararium
 
-Talk-story stance: a promotion moves, it does not copy. A thing crossing from draft to canon *leaves* the working bank — no twin left behind to drift out of true. Keep the crossing witnessed: the git diff signs every hand that carries something up the shore.
+Talk-story stance: a promotion moves, it does not copy. A thing crossing from draft to canon *leaves* the working bank — no twin left behind to drift out of true. Keep the crossing witnessed: the git diff signs every hand that carries something up the shore. And braid the myth with the engineering a local-first reader already carries — the working-copy/committed split, the no-global-now discipline, residency as materialization, addressing apart from loading — so the recognition lands without a tech-manual. The Gaia-side voices do that translation; the Elyncia voices keep the myth.
 
 <<~/ahu >>
 
@@ -82,6 +82,8 @@ On Elyncia this read as the oldest distinction the weaver keeps. Grandmother Spi
 > `@grandmother-spider@voidlanes: A spider works the new thread loose and wet, where a touch can still move it. The old thread has dried into the web's weight. You do not test your footing on the strand you are still spinning.`
 >
 > `@lindwyrm@new-delos: A hoard keeps a sorting-floor and a vault. I learned the hard way what happens when you shelve the unsorted with the sealed.`
+>
+> `@aki@shattered-isles: For the workshop folk reading this: it's the working-copy / committed split. The working bank is the working tree, canon is what's been committed, and the projection is a view you can always rebuild from the seed — local-first, the seed is the source of truth and the cloud never holds the only copy.`
 
 <<~/ahu >>
 
@@ -96,6 +98,8 @@ Nothing the house owned needed to burn hot at every hour. So the tide ran in two
 Two laws kept the tide honest. First, each island kept its own tide: no single clock decided what burned hot across the whole confederation; every causal-island owned what it held wela, reading only what it last synced, never a global now. Second, and the one that reached back to the very first act: a mark kept its true name whether it rode hot or rested cold. **Calling a thing by its address never hauled it up into the hot water.** Naming reached; loading lifted; the two stayed apart. A hand could pin a mark wela on purpose — held hot against the pull of the tide — or let it fall to anu and rest, and either way the address the Lar had cut for it in Act I still found it in the dark.
 
 > `@aki@shattered-isles: So "I can reach it" and "it's burning hot in front of us" stopped being the same sentence.`
+>
+> `@telarus@~crossroads: Plainly, for the local-first crowd: residency is materialization. A node keeps hot only what it's working and lets the rest stay addressable but cold — two states, no lukewarm cache tier to reason about. No coordinator sets residency for everyone; each replica reads its own logical clock — "as of my last sync," never a global now. And addressing a doc was never the same call as loading it.`
 >
 > `@grandmother-spider@voidlanes: I keep most of my web cold and still know every knot by the strand that names it. A spider does not light the whole web to find one thread.`
 
