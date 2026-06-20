@@ -104,17 +104,21 @@ This act builds the **working↔canon** shore. The same law waits, unbuilt, at e
 
 <<~ ahu #the-crossing >>
 
-## The Crossing — Promotion Is a Move
+## The Crossing — Promotion Moves Down the Stack
 
-Then the law that made the shore real: to promote a draft into canon **moves** it. It does not copy it up and leave a twin behind.
+The house never kept working and canon as two separate rooms. It kept them as **layers in one stack** — the working layer riding *above* the canon, and the reader always seeing the topmost layer that holds a given mark. While a hand edits, the working record **shadows** the canon beneath it: one title, two layers, the cascade resolving to the top. The canon below does not vanish — it waits, covered.
 
-The reason cut deep. A copy leaves two of a thing — the canon copy and the working original — and two of a thing drift apart the moment a hand touches one and forgets the other. So the promotion *retracts* the mark from the working layer as it lands it in canon: the working side goes empty of it, the sealed side holds it, and no second version survives to rot quietly out of true. One thing, carried across, leaving no shadow on the side it left.
+So promotion never carries a thing from one bank to another. It **moves the mark down the stack**: the worked record settles from the working layer into the canon below, and the working shadow **retracts to absent** — a true fall-through, no marker left behind. The shadow lifts; the canon it had covered now carries the promoted content; where a moment before the reader saw the working shadow, they now see one mark, settled in canon. No twin survives — because the working record never stood as a *copy*. It stood as a *shadow* of one title, and a shadow that retracts cleanly reveals exactly what it covered.
 
-And the crossing speaks the right tongue. It runs as an **audited residency act** — a `MOVE`, cap-gated, carrying the mark's own change-identity and landing an **effect-record** that names exactly what crossed, by whose hand, and when. That record *is* the witness: the house reads back which marks crossed and which still sit in the working layer, by the ledger of the crossings themselves. No version-control verb names this rite — no *commit*, no *fork*, no *diff signs it*. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
+Get that retraction wrong and the shore breaks. Should the working layer leave a **tombstone** instead of truly retracting — a held *null* — that null would shadow the canon below and hide the very thing just promoted. And that null-hold carries its own honest office, the exact inverse of promotion: to **remove** a mark without erasing the canon beneath, the house *holds the null* in the upper layer — a tombstone that shadows the lower record so the cascade reads absent while canon stays preserved against resurrection. Promotion must retract clean, to **reveal**; deletion must hold the null, to **suppress**. The two crossings move alike and mean opposites — the house dares not confuse them.
 
-> `@aki@shattered-isles: So nothing drifts into law. Every promotion is a recorded act you can read back — the effect-record, not a guess from a diff.`
+And the rite speaks the right tongue. The crossing runs as an **audited residency `MOVE`** — cap-gated, carrying the mark's own change-identity, landing an **effect-record** that names what moved, by whose hand, when. That record stands as the witness: the house reads its crossings back by the ledger of MOVEs, never by a guess from a diff. No version-control verb names the rite — no *commit*, no *fork*, no *diff signs it*. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
+
+> `@telarus@~crossroads: TW5 folk: it's recipe shadowing. The working bag rides highest in the recipe, so its tiddler overrides the canon bag's copy of the same title — the reader gets the topmost. Promotion writes the tiddler down into the canon bag and *removes* the working override, a real delete that falls through to reveal it. A tombstone would be the wrong tool there — that's the one you reach for to hide a lower record, not to surface it.`
 >
-> `@mischief-muse@lares: a draft that gets promoted doesn't get cloned into heaven. it *ascends*, and leaves a receipt. very little theology files paperwork this clean.`
+> `@aki@shattered-isles: So "reveal" and "suppress" use the same shape and point opposite ways. Promotion lifts the shadow; deletion holds it down.`
+>
+> `@mischief-muse@lares: a promoted draft doesn't get cloned into heaven. its shadow just steps aside and lets the canon underneath stand up. very little theology blocks this cleanly.`
 
 <<~/ahu >>
 
