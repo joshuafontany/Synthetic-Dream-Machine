@@ -271,14 +271,13 @@ export class LarDiskProjector {
       this.writing.delete(tiddlerUri);
     }
 
-    // After writing to the current mirror, unlink stale files from all OTHER
-    // mirrors that would host this URI. This handles bag promotion: when a
-    // tiddler moves from wiki-bag → lares-bag, the old wiki mirror file is
-    // cleaned up on the first flush to the new mirror. One gate, one
-    // choke-point: the unlink path routes through the ward like every other
+    // After writing the current mirror, unlink stale files from every mirror
+    // whose path DIFFERS from the one just rendered. This handles bag
+    // promotion: when a tiddler moves from wiki-bag → lares-bag, the old wiki
+    // mirror file is cleaned up on the first flush to the new mirror. One gate,
+    // one choke-point: the unlink path routes through the ward like every other
     // mirror touch — never an inline confinement check.
     for (const otherMirror of this.mirrors) {
-      if (otherMirror.bagId === bagId) continue;
       const staleRel = otherMirror.toRelPath(tiddlerUri);
       if (!staleRel) continue;
       const staleGate = confineMirrorWrite(otherMirror.mirrorRoot, staleRel, otherMirror.allowBagsRootFiles);
@@ -287,6 +286,13 @@ export class LarDiskProjector {
         this.onRefusal?.({ bagId: otherMirror.bagId, uri: tiddlerUri, reason: staleGate.reason });
         continue;
       }
+      // Never unlink the path we just rendered. Path identity — not bag
+      // identity — marks the live file: toRelPath derives from the URI alone,
+      // so the current bag, AND any mirror sharing this mirrorRoot, resolves to
+      // the SAME path. The old bagId guard let a co-rooted sibling unlink the
+      // file this flush just wrote; the path guard subsumes it and closes that
+      // self-deletion structurally — no mirror config can trigger it.
+      if (staleGate.path === candidate) continue;
       try {
         if (existsSync(staleGate.path)) {
           this.writing.add(tiddlerUri);
