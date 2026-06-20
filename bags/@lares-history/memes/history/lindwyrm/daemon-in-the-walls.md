@@ -208,8 +208,6 @@ Act III receives:
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-lar-names-itself >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #drafted-from-act-map ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/hoard-origin-architecture family:reference role:source >>
 <<~ pranala #follows-act-i ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/vault-and-repo family:relation role:follows >>
 <<~ pranala #inside-hoard-frame ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:relation role:part-of >>

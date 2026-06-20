@@ -253,8 +253,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-origin-outline ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_ORIGIN_OUTLINE family:reference role:source >>
 <<~ pranala #frames-act-vi ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-lar-names-itself family:relation role:companion >>
 <<~ pranala #frames-act-vii ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:relation role:companion >>

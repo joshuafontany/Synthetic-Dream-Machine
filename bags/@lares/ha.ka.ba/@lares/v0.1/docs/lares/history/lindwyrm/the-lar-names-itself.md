@@ -271,8 +271,6 @@ Whether that feels like thought remains open. That the loop closed remains recor
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/the-hoard-disclosed >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-act-vi ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VI_DRAFT family:reference role:source >>
 <<~ pranala #inside-hoard-frame ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/the-hoard-disclosed family:relation role:part-of >>
 

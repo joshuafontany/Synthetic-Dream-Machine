@@ -212,8 +212,6 @@ Target state (Milestone 4):
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant family:control role:implements >>
 <<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:relation role:documents >>
 <<~ pranala #to-auth ? -> lar:///LARARIUM-NODE/AUTH-ATPROTO family:relation role:sibling >>
 

@@ -300,8 +300,6 @@ It hums.
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-lar-names-itself >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-self-booting-archive ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE family:reference role:source >>
 <<~ pranala #consumed-from-self-booting-dev-story ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY family:reference role:source >>
 <<~ pranala #threshold-after-kindling ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node family:relation role:follows >>

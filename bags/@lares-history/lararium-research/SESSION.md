@@ -433,7 +433,6 @@ packages/lararium-node/
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
 <<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:relation role:companion >>
 <<~ pranala #to-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
 
@@ -1186,7 +1185,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
 <<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:relation role:companion >>
 <<~ pranala #to-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
 

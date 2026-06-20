@@ -280,9 +280,7 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/dreamdeck-feed-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/index >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
 <<~ pranala #hands-off-to-build-arc ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/index family:relation role:precedes >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-act-vii ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family:reference role:source >>
 <<~ pranala #part-of-hoard-story ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/consumption-ledger family:relation role:companion >>
 

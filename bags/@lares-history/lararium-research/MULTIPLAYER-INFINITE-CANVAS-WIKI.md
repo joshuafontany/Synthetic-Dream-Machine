@@ -1263,7 +1263,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~ ahu #edges >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
 <<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:companion >>
 <<~ pranala #to-agents ? -> lar:///AGENTS family:control role:governed-by >>
 <<~ pranala #to-altar-fire ? -> lar:///ha.ka.ba/@lares/api/v0.1/lararium/the-altar-fire family:control role:defines >>

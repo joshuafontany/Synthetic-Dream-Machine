@@ -103,8 +103,6 @@ Likely next slices:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/loci family:control role:implements >>
 <<~ pranala #first-consumption ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/the-hoard-disclosed family:reference role:records >>
 <<~ pranala #second-consumption ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/the-lar-names-itself family:reference role:records >>
 <<~ pranala #third-consumption ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/lindwyrm/kindling-of-the-crossroads-node family:reference role:records >>

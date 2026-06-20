@@ -212,8 +212,6 @@ Act II receives:
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #drafted-from-act-map ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/hoard-origin-architecture family:reference role:source >>
 <<~ pranala #inside-hoard-frame ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:relation role:part-of >>
 <<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls family:relation role:precedes >>

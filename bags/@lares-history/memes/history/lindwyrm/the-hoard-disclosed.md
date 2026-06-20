@@ -256,8 +256,6 @@ The node hums.
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/consumption-ledger >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/dreamdeck-feed-architecture >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-act-vii ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family:reference role:source >>
 <<~ pranala #part-of-hoard-story ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/consumption-ledger family:relation role:companion >>
 

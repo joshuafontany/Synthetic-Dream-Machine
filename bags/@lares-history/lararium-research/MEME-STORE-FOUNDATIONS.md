@@ -209,9 +209,7 @@ The identity and UCAN layer is now in place:
 
 <<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:control role:informs >>
 <<~ pranala #to-multiplayer ? -> lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family:control role:informs >>
-<<~ pranala #to-mu ? -> lar:///ha.ka.ba/@lares/api/v0.1/mu family:control role:implements-law >>
 <<~ pranala #to-agents ? -> lar:///AGENTS family:control role:receives-law >>
-<<~ pranala #to-crdt-research ? -> lar:///lararium-node/lararium-crdt-federation-research family:control role:implements >>
 
 <<~/ahu >>
 

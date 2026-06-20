@@ -104,8 +104,6 @@ Likely next slices:
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #first-consumption ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed family:reference role:records >>
 <<~ pranala #second-consumption ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-lar-names-itself family:reference role:records >>
 <<~ pranala #third-consumption ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/kindling-of-the-crossroads-node family:reference role:records >>

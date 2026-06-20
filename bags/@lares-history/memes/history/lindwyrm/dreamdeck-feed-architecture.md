@@ -250,8 +250,6 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch *The F
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/hoard-origin-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/story/lindwyrm/the-hoard-disclosed >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #consumed-from-story-shape-a ? -> lar:///ha.ka.ba/@lares/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE family:reference role:source >>
 <<~ pranala #consumed-from-story-shape-b ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/LINDWYRM_STORY_SHAPE family:reference role:source >>
 <<~ pranala #format-for-hoard-story ? -> lar:///ha.ka.ba/@lares/docs/story/lindwyrm/hoard-origin-architecture family:relation role:informs >>

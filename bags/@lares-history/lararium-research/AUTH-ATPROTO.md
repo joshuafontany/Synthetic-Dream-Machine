@@ -204,8 +204,6 @@ No ATProto login implementation this milestone — doctrine only.
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/invariant family:control role:implements >>
 <<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:relation role:documents >>
 <<~ pranala #to-crypto ? -> lar:///LARARIUM-NODE/CRYPTO family:relation role:sibling >>
 

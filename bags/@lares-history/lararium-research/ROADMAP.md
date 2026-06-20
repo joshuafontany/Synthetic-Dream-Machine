@@ -2454,8 +2454,6 @@ room island     (bag: "room",  writable)        — primary content gate
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/traversal >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/pranala-parser >>
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/meme family:control role:implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/loci family:control role:implements >>
 <<~ pranala #to-canvas-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
 <<~/ahu >>
 
