@@ -28,8 +28,8 @@ import {
   SESSIONS_DOC_URI,
   bagDescriptorUri,
   recipeUri,
-  wikiDraftLarUri,
 } from "./lar-uris.js";
+import { wikiDraftBagUri } from "./wiki-recipe.js";
 import type { LarDoc, LarBlobEntry } from "./base-doc.js";
 import { ENGINE_CORE_ID, blobDescriptorUri } from "./base-doc.js";
 
@@ -239,13 +239,13 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     };
     systemRecipe(
       "lares",
-      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiDraftLarUri("lares")}`,
-      wikiDraftLarUri("lares"),
+      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiDraftBagUri("lares")}`,
+      wikiDraftBagUri("lares"),
     );
     systemRecipe(
       "lararium",
-      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${wikiDraftLarUri("lararium")}`,
-      wikiDraftLarUri("lararium"),
+      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${wikiDraftBagUri("lararium")}`,
+      wikiDraftBagUri("lararium"),
     );
   });
 

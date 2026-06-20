@@ -23,7 +23,7 @@ import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type LarDoc,
   emptyLarDoc, mutableLarRecord, mkAdminResidencyOp, mkAdminWikiAlert,
-  wikiLarUri, recipeUri,
+  wikiBagUri, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
@@ -152,7 +152,7 @@ export type RotateRecipeOptions = EpochHandlerOptions;
  *
  * Steps:
  *   1. Mint a NEW canonical Automerge doc (fresh, empty).
- *   2. Compute the previous-canon underlay URI: wikiLarUri/canon/vN.
+ *   2. Compute the previous-canon underlay URI: wikiBagUri/canon/vN.
  *   3. Update catalog: wiki oracle's text → new doc URL; mint a
  *      previous-canon oracle whose text → old doc URL.
  *   4. Mutate recipe: keep wiki URI in stack at the same position
@@ -171,7 +171,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
 
-    const wikiKey     = wikiLarUri(slug);
+    const wikiKey     = wikiBagUri(slug);
     const recipeTitle = recipeUri("@catalog", slug);
 
     const recipeRec = await opts.catalog.recordOf(recipeTitle);

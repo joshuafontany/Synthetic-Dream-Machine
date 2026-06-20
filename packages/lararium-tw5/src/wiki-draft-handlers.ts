@@ -1,6 +1,6 @@
 import type { AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
-import { type LarDoc, wikiDraftLarUri, wikiLarUri } from "@lararium/mesh";
+import { type LarDoc, wikiBagUri, wikiDraftBagUri } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { numberArg, stringArg } from "./handler-args.js";
 import type { DraftHandlerOptions, PruneStaleOptions } from "./wiki-handler-options.js";
@@ -67,9 +67,9 @@ export function makePruneStaleReactor(opts: PruneStaleOptions): VerbReactor {
     if (!slug) throw new Error("args.slug is required");
     const daysThreshold = numberArg(args, "daysThreshold", 7);
 
-    const draftBagId = wikiDraftLarUri(slug);
+    const draftBagId = wikiDraftBagUri(slug);
     const did = await opts.operatorDid();
-    const draftKey = `${wikiLarUri(slug)}/drafts/${encodeURIComponent(did)}`;
+    const draftKey = `${wikiBagUri(slug)}/drafts/${encodeURIComponent(did)}`;
     const draftOracle = await opts.composite.get(draftKey);
     if (!draftOracle || typeof draftOracle.tiddler.text !== "string") {
       throw new Error(`draft bag oracle missing for "${slug}" — run \`lares wiki init ${slug}\` first`);

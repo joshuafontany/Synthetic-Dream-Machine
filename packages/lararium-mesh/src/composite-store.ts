@@ -24,13 +24,12 @@ import type { RecipeTiddler } from "./recipe.js";
 import { parseBagStack, parsePlugins } from "./recipe.js";
 import {
   corpusLarUri,
-  wikiLarUri,
 } from "./lar-uris.js";
 import { headsEqual } from "./wiki-recipe.js";
 import type { WikiRecipe, EpochPinState } from "./wiki-recipe.js";
 
 // Re-export so callers get bag IDs and URI helpers from a single import.
-export { corpusLarUri as corpusBagId, wikiLarUri as wikiBagId };
+export { corpusLarUri as corpusBagId };
 // BAG_IDS lives in lar-uris.ts; re-exported from the package index via `export * from "./lar-uris.js"`.
 
 export interface CompositeLayer {

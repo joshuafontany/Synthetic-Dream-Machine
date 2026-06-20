@@ -16,7 +16,8 @@
 
 import { describe, test, expect, beforeEach } from "vitest";
 import { CompositeStore, corpusBagId } from "../src/composite-store.js";
-import { BAG_IDS, wikiLarUri, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI } from "../src/lar-uris.js";
+import { BAG_IDS, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI } from "../src/lar-uris.js";
+import { wikiBagUri } from "../src/wiki-recipe.js";
 import { MemoryTiddlerStore } from "../../lararium-tw5/src/memory-store.js";
 import type { LarTiddlerChange, ChangeOrigin } from "../src/tiddler-store.js";
 
@@ -24,7 +25,7 @@ import type { LarTiddlerChange, ChangeOrigin } from "../src/tiddler-store.js";
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const TEST_WIKI_URI  = wikiLarUri("test-wiki");
+const TEST_WIKI_URI  = wikiBagUri("test-wiki");
 const TEST_DRAFT_URI = "draft";
 
 function systemOrigin(): ChangeOrigin { return { kind: "canon-hydrate", receipt: "system" }; }

@@ -73,7 +73,7 @@ class FakeTW5Engine {
         "[prefix[lar:]then{lar:///ha.ka.ba/@lararium/config/current-wiki-bag}]",
       ].join("\n"),
     ],
-    ["lar:///ha.ka.ba/@lararium/config/current-wiki-bag", "lar:///ha.ka.ba/@lararium/wikis/test-wiki/draft"],
+    ["lar:///ha.ka.ba/@lararium/config/current-wiki-bag", "lar:///ha.ka.ba/@test-wiki/draft"],
   ]);
 
   readonly wiki = {
@@ -137,7 +137,7 @@ class FakeTW5Engine {
 // ---------------------------------------------------------------------------
 
 const INSTANCE_ID = "test-adaptor";
-const TARGET_BAG  = "lar:///ha.ka.ba/@lararium/wikis/test-wiki/draft";
+const TARGET_BAG  = "lar:///ha.ka.ba/@test-wiki/draft";
 const LAR_URI     = "lar:///ha.ka.ba/@lares/memes/SESSION";
 
 function crdtRemote(islandId = "automerge"): ChangeOrigin {

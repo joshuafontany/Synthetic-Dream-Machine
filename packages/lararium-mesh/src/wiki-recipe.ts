@@ -52,9 +52,16 @@ export const LARARIUM_BAG = LARARIUM_DOC_URI;
 /** @oracle — the runtime system island; the universal floor of every recipe. */
 export const ORACLE_BAG   = ORACLE_DOC_URI;
 
-/** Build a wiki identity bag URI from a slug. */
+/** Build a wiki identity bag URI from a slug. The quine: a wiki's canon IS the
+ *  `@{slug}` bag (a user bag in @catalog, a system bag in @oracle) — never nested
+ *  under the @lararium corpus (that was pre-plane-split ontology). */
 export function wikiBagUri(slug: string): SlotUri {
   return `lar:///ha.ka.ba/@${slug}`;
+}
+
+/** The per-wiki draft bag, rooted at the wiki's own `@{slug}` canon. */
+export function wikiDraftBagUri(slug: string): SlotUri {
+  return `${wikiBagUri(slug)}/draft`;
 }
 
 /**

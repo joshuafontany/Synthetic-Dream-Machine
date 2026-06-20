@@ -33,7 +33,6 @@ import {
   LARARIUM_BAG,
   ORACLE_BAG,
   wikiBagUri,
-  wikiLarUri,
   recipeUri,
   bagStackFromRec,
   type AutomergeUrl,
@@ -84,17 +83,11 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
   // through the manifest, never named in a recipe's bag-stack — so it MUST be
   // exempt, else this reconcile evicts the live write layer buildIslandRecipe
   // just mounted (the OCI writable-upper-layer law: keep the scratch layer out
-  // of the membership diff, never a member of it).
-  //
-  // The wiki's OWN canon carries two names: the structural slot mounts it as
-  // wikiBagUri(slug) (`@{slug}`), while the mint's catalog bag-stack names it
-  // wikiLarUri(slug) (`@lararium/wikis/{slug}`) — the SAME Automerge doc. Exempt
-  // BOTH, else this reconcile re-mounts the own-canon doc a second time as a
-  // library layer; that duplicate re-tags the wiki's carriers with the
-  // @lararium/wikis name and the @{slug} self-canon disk mirror never matches
-  // (minted-canon-projection: a wiki's own canon must project to bags/@{slug}).
+  // of the membership diff, never a member of it). The wiki's OWN canon
+  // (wikiBagUri(slug) = `@{slug}`) is structural too — the mint registers it
+  // under that one name now, so the bag-stack names no duplicate to re-mount.
   const structural = new Set<string>([
-    TEMP_BAG, DRAFT_BAG, WORKING_BAG, PERSONAL_BAG, wikiBagUri(slug), wikiLarUri(slug), LARES_BAG, ORACLE_BAG,
+    TEMP_BAG, DRAFT_BAG, WORKING_BAG, PERSONAL_BAG, wikiBagUri(slug), LARES_BAG, ORACLE_BAG,
   ]);
 
   const origin = (): ChangeOrigin =>

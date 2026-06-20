@@ -4,8 +4,8 @@ import {
   CompositeStore,
   type LarTiddlerRecord,
   type LarTiddlerStore,
-  wikiDraftLarUri,
-  wikiLarUri,
+  wikiBagUri,
+  wikiDraftBagUri,
 } from "@lararium/mesh";
 
 export const ACTIVE_WIKI_URI = `${ADMIN_BAG_ID}/active-wiki`;
@@ -68,13 +68,13 @@ export function planActiveWikiSlot(opts: {
   // ITSELF as the primary write layer (operator edits the personality at the
   // hearth). Its doc is operator-minted on the invariant plane — the slot key
   // names that bag directly, never a registry-resolved @lararium/wikis/ doc.
-  const wikiKey = opts.wikiSlug === "lares" ? LARES_DOC_URI : wikiLarUri(opts.wikiSlug);
+  const wikiKey = opts.wikiSlug === "lares" ? LARES_DOC_URI : wikiBagUri(opts.wikiSlug);
   return {
     wikiSlug: opts.wikiSlug,
     wikiKey,
     wikiBagId: wikiKey,
-    draftBagId: wikiDraftLarUri(opts.wikiSlug),
-    draftOracleTitle: `${wikiLarUri(opts.wikiSlug)}/drafts/${encodeURIComponent(opts.identityDid)}`,
+    draftBagId: wikiDraftBagUri(opts.wikiSlug),
+    draftOracleTitle: `${wikiBagUri(opts.wikiSlug)}/drafts/${encodeURIComponent(opts.identityDid)}`,
     vesselId: `${opts.hostId}:${opts.wikiSlug}`,
   };
 }

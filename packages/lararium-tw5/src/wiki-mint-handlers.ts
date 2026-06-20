@@ -11,8 +11,8 @@ import {
   mutableLarRecord,
   mkAdminWikiAlert,
   recipeUri,
-  wikiDraftLarUri,
-  wikiLarUri,
+  wikiBagUri,
+  wikiDraftBagUri,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
@@ -30,8 +30,8 @@ export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
     }
 
     const did = await opts.operatorDid();
-    const wikiKey = wikiLarUri(slug);
-    const draftBagId = wikiDraftLarUri(slug);
+    const wikiKey = wikiBagUri(slug);            // the quine: a user wiki's canon IS @{slug}
+    const draftBagId = wikiDraftBagUri(slug);
     const draftKey = `${wikiKey}/drafts/${encodeURIComponent(did)}`;
     // The user's wiki recipe is REGISTRY data (the user's composition choice) —
     // it lives in the user's @catalog, NOT @lararium (protocol substrate). Read
@@ -103,7 +103,7 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
     const slug = stringArg(args, "slug");
     if (!slug) throw new Error("args.slug is required");
 
-    const wikiKey = wikiLarUri(slug);
+    const wikiKey = wikiBagUri(slug);
     // Wiki oracle lives in @catalog — read via the accessor, not the composite.
     const wikiUrl = await opts.catalog.urlOf(wikiKey);
     if (!wikiUrl) {

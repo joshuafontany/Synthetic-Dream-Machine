@@ -103,22 +103,14 @@ export function catalogCorpusEntryUri(slug: string): string {
 /** Prefix used to discover catalog corpus-registry entries. */
 export const CATALOG_CORPUS_PREFIX = stableLarUri("@catalog/corpus/");
 
-/** e.g. wikiLarUri("altar-fire") → "lar:///ha.ka.ba/@lararium/wikis/altar-fire" */
-export function wikiLarUri(slug: string): string {
-  return stableLarUri(`@lararium/wikis/${slug}`);
-}
-
-/** e.g. wikiDraftLarUri("altar-fire") → "lar:///ha.ka.ba/@lararium/wikis/altar-fire/draft" */
-export function wikiDraftLarUri(slug: string): string {
-  return `${wikiLarUri(slug)}/draft`;
-}
+// The wiki canon/draft URI builders moved to wiki-recipe.ts (wikiBagUri /
+// wikiDraftBagUri) — a wiki's own canon IS the `@{slug}` bag (the quine),
+// never nested under the @lararium corpus (the pre-plane-split `@lararium/wikis/`
+// form is retired).
 
 // ── Admin bag ─────────────────────────────────────────────────────────────
 
-export const ADMIN_WIKI_SLUG = "admin";
-export const ADMIN_WIKI_URI  = wikiLarUri(ADMIN_WIKI_SLUG);
-/** Admin doc sits at pos-2 under @lararium — distinct from the /wikis/admin leaf path. */
-/** Admin wiki bag id. Aligned to wikiBagUri("admin") under the one-recipe model. */
+/** Admin wiki bag id — the admin control plane's own `@admin` bag (one-recipe model). */
 export const ADMIN_BAG_ID    = stableLarUri("@admin");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
