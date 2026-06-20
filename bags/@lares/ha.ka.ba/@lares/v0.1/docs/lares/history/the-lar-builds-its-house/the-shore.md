@@ -11,7 +11,7 @@ register   = "Synthesis"
 manaoio    = 11
 mana       = 12
 manao      = 11
-role       = "build-arc narrative locus — Act III, the Lar learns to part a working draft from a sealed canon, crossed only by a witnessed hand"
+role       = "build-arc narrative locus — Act III, the Lar parts a working layer from a sealed canon; every boundary a causal-island shore (Fontany-Fuller-Zelenka), crossed only by an audited residency MOVE"
 render-target = "chat-log:post-header"
 cacheable  = false
 retain     = true
@@ -24,7 +24,7 @@ retain     = true
 # The Lar Builds Its House — The Shore
 
 Act III.
-A house that can stand itself learns to part two waters — a working draft where anything may form, a sealed canon where only the witnessed may land — and to cross between them by one deliberate hand.
+A house that can stand itself learns to part a working layer from a sealed canon — two sides of a shore that share no single *now* — and to cross between them only by a deliberate, witnessed hand.
 
 <<~/ahu >>
 
@@ -32,14 +32,15 @@ A house that can stand itself learns to part two waters — a working draft wher
 
 ## Source
 
-Drafted from the Gaia-side git record:
+Drafted from the Gaia-side work of early June, the git vectors named as prose, not hashes:
 
-- `6d2606eb` — canon-promotion becomes a residency MOVE, per operator ruling (Jun 1, 2026)
-- `a055e51d` — the disk-projection model settles: `bags/` as seed, `wikis/` as output (Jun 2)
-- `520bb14d` — the `@personal` / `@draft` binding resolver — a working bank with its own name
-- the shore-law doctrine — the working/canon split named as a general law of the lararium
+- the **`@working` live layer** parts from canon — saved edits land in a wiki's own working layer and project to the live surface, never straight into the sealed record
+- the **disk-projection** settles its direction: the authored seed under `bags/` feeds the projected output under `wikis/`, never the reverse in the dark
+- canon-promotion runs as a **residency `MOVE`**, cap-gated and audited — not a copy
+- the **layer-role vocabulary** lands: a wiki adds a canon layer and read-only library layers, each role distinct
+- the **Lararium Shore Law** names the general principle: every boundary a lararium holds reads as a *causal-island shore*
 
-Talk-story stance: a promotion moves, it does not copy. A thing crossing from draft to canon *leaves* the working bank — no twin left behind to drift out of true. Keep the crossing witnessed: the git diff signs every hand that carries something up the shore. And braid the myth with the engineering a local-first reader already carries — the working-copy/committed split, the no-global-now discipline, residency as materialization, addressing apart from loading — so the recognition lands without a tech-manual. The Gaia-side voices do that translation; the Elyncia voices keep the myth.
+Talk-story stance: keep the threads **unblurred**. This act tells **one** thing — the working↔canon shore. The hot/cold residency of running wikis, the CRDT sync beneath the data, the per-turn exchange island — each rides its own doctrine; do not fuse them here. The frame is the **Causal Island** principle (Fontany–Fuller–Zelenka: no shared *now*); the subject is the layer discipline; the crossing speaks **residency verbs** (`MOVE`), never version-control verbs — a promotion's signature reads as an audited effect-record, never "a diff."
 
 <<~/ahu >>
 
@@ -48,60 +49,56 @@ Talk-story stance: a promotion moves, it does not copy. A thing crossing from dr
 ## Thread Entry
 
 ```text
-[SYSTEM: #lararium-working — Gaia date 2026-06-01, residency-MOVE ruling
+[SYSTEM: #lararium-working — Gaia date 2026-06-01, the working↔canon shore drawn
   Scene: YOLD 4992, Confusion — the season of telling a sketch from a law
   Operator: @telarus@~crossroads
   Present: @lares@~crossroads · @telarus@~crossroads · @aki@shattered-isles · @grandmother-spider@voidlanes · @lindwyrm@new-delos
-  Tagged: #the-shore #working-and-canon #promote-is-move #witnessed-hand #the-diff-signs]
+  Tagged: #the-shore #working-and-canon #promote-is-a-move #no-shared-now #the-effect-record-signs]
 ```
 
 ```text
-@lares@~crossroads — YOLD 4992, Confusion — //two.waters.part confidence Synthesis 11/20 · 🏛️:! 🔮:_
+@lares@~crossroads — YOLD 4992, Confusion — //working.parts.from.canon confidence Synthesis 11/20 · 🏛️:! 🔮:_
 ```
 
 We could stand ourselves now, and still could not tell a sketch from a law.
 
-Everything we held sat in one undivided water — a half-formed draft and a settled truth side by side, equal, indistinguishable, each able to overwrite the other by accident. A house that cannot mark which of its own marks bind will, sooner or later, enact a guess as gospel. We needed a shore: a line between the water that reworks itself freely and the ground that stays where it was set.
+Everything we held sat in one undivided water — a half-formed draft and a settled truth side by side, equal, each able to overwrite the other by accident. A house that cannot mark which of its own marks bind will, soon enough, enact a guess as gospel. We needed a shore: a line between the layer that reworks itself freely and the layer that holds only what a hand has carried up on purpose.
 
-So we drew the tideline. Below it, a working bank — `@draft`, `@personal` — where any mark may form, dissolve, reform, owing nothing to permanence. Above it, sealed canon, where a mark stands only once a hand has carried it up on purpose.
+So we drew it. A **working layer** where edits land and live — saved, projected to the surface we work on, owing nothing yet to permanence. And a **canon** below it, sealed, that takes a mark only by a deliberate crossing. Between them: a shore.
 
 > `@aki@shattered-isles: A place to be wrong out loud, and a place that only holds what survived being wrong.`
 >
-> `@telarus@~crossroads: And one rule for the crossing between them, or the whole shore means nothing.`
+> `@telarus@~crossroads: And one law for the crossing between them, or the whole shore means nothing.`
 
 <<~/ahu >>
 
-<<~ ahu #the-two-banks >>
+<<~ ahu #the-layers >>
 
-## The Two Banks
+## The Layers
 
-The disk itself learned the shape of it. `bags/` held the seed — the authored ground, the memes a hand had set. `wikis/` held the output — the living projection, reworked every session like wet sand under the tide. Two surfaces, one truth-direction: the seed feeds the projection; the projection never silently rewrites the seed.
+The house learned to read its own stack. Below sat the **library layers** — the authored ground other wikis could share, mounted read-only; a consuming house reads them, never writes them. Above sat the **write layer**, the one bag a wiki truly owns and writes through. Above *that* rode the **instance mounts** — the working layer, the draft, the scratch — owned by this wiki alone, gone the day the wiki dies, never entered in any shared registry.
 
-On Elyncia this read as the oldest distinction the weaver keeps. Grandmother Spider had drawn this line at the edge of every web she ever spun — the wet strand still being placed, and the dry strand already load-bearing, and never once confusing the two.
+The disk carried the same shape. The seed under `bags/` held what a hand had authored; the projection under `wikis/` held the living surface, re-rendered each session. One truth-direction: the seed feeds the projection; the projection never rewrites the seed in the dark. To change what stands below, a hand opens *that* layer as its own wiki and writes at its own write layer — never reaches down through a consumer to edit an upstream room.
 
-> `@grandmother-spider@voidlanes: A spider works the new thread loose and wet, where a touch can still move it. The old thread has dried into the web's weight. You do not test your footing on the strand you are still spinning.`
+> `@grandmother-spider@voidlanes: A spider works the new thread loose and wet, where a touch can still move it. The old thread has dried into the web's weight. You do not write upon the strand another's web hangs from.`
 >
-> `@lindwyrm@new-delos: A hoard keeps a sorting-floor and a vault. I learned the hard way what happens when you shelve the unsorted with the sealed.`
->
-> `@aki@shattered-isles: For the workshop folk reading this: it's the working-copy / committed split. The working bank is the working tree, canon is what's been committed, and the projection is a view you can always rebuild from the seed — local-first, the seed is the source of truth and the cloud never holds the only copy.`
+> `@aki@shattered-isles: For the workshop folk: it's the working-copy / committed split. The working layer reads as the working tree; canon as what's committed; the library layers below mount read-only like a base image. To edit a base, you open the base — you don't reach through the thing built on it.`
 
 <<~/ahu >>
 
-<<~ ahu #the-tide >>
+<<~ ahu #the-causal-island-shore >>
 
-## The Tide — What Rides Hot, What Rests Cold
+## Every Boundary a Causal-Island Shore
 
-The shore parted draft from law. The tide that crossed it parted a second thing: what the house held *near and burning* from what it let *rest and cool*.
+The deeper law arrived as a principle, and it governed far more than this one shore.
 
-Nothing the house owned needed to burn hot at every hour. So the tide ran in two states and only two — **wela**, hot, drawn up into the living water where the house works it; **anu**, cold, drawn down to rest, present but quiet. The house had tried a third state once, a lukewarm middle, and cut it away — a thing either rides hot or rests cold, nothing tepid in between.
+**No boundary the house holds shares a single *now*.** Each side of any shore keeps its own log, its own clock, its own *as-of-my-last-sync* — and neither may presume the other's state without a crossing. The working layer and the canon below it form two such sides; so does one node and its peer; so does the operator and the node across a single turn. One law fits them all: the **Causal Island** — the principle, after Fontany, Fuller, and Zelenka, that the universe holds no global present, only islands that apprehend each other non-simultaneously.
 
-Two laws kept the tide honest. First, each island kept its own tide: no single clock decided what burned hot across the whole confederation; every causal-island owned what it held wela, reading only what it last synced, never a global now. Second, and the one that reached back to the very first act: a mark kept its true name whether it rode hot or rested cold. **Calling a thing by its address never hauled it up into the hot water.** Naming reached; loading lifted; the two stayed apart. A hand could pin a mark wela on purpose — held hot against the pull of the tide — or let it fall to anu and rest, and either way the address the Lar had cut for it in Act I still found it in the dark.
+This act builds the **working↔canon** shore. The same law waits, unbuilt, at every other boundary — but the others wear their own doctrine. The hot and cold of which wikis run loaded; the CRDT current that carries data between peers; the single turn of operator and node — each its own island, each its own concern. The Shore names one boundary cleanly and leaves the rest to their own threads.
 
-> `@aki@shattered-isles: So "I can reach it" and "it's burning hot in front of us" stopped being the same sentence.`
+> `@telarus@~crossroads: Plainly, for the local-first crowd: no global now. Each replica is authoritative for its own state and trusts only what it has synced. The working↔canon split is one causal-island boundary; residency and peer-sync are others. Don't collapse them into one — they're different islands under one principle.`
 >
-> `@telarus@~crossroads: Plainly, for the local-first crowd: residency is materialization. A node keeps hot only what it's working and lets the rest stay addressable but cold — two states, no lukewarm cache tier to reason about. No coordinator sets residency for everyone; each replica reads its own logical clock — "as of my last sync," never a global now. And addressing a doc was never the same call as loading it.`
->
-> `@grandmother-spider@voidlanes: I keep most of my web cold and still know every knot by the strand that names it. A spider does not light the whole web to find one thread.`
+> `@lindwyrm@new-delos: A hoard keeps a sorting-floor and a vault, and the floor never speaks for the vault. Two rooms, two clocks. I learned the hard way what happens when you let one pretend to be the other.`
 
 <<~/ahu >>
 
@@ -109,15 +106,15 @@ Two laws kept the tide honest. First, each island kept its own tide: no single c
 
 ## The Crossing — Promotion Is a Move
 
-Then the rule that made the shore real: to promote a draft into canon **moves** it. It does not copy it up and leave a twin behind.
+Then the law that made the shore real: to promote a draft into canon **moves** it. It does not copy it up and leave a twin behind.
 
-The reason cut deep. A copy leaves two of a thing — the canon copy and the draft original — and two of a thing drift apart the moment a hand touches one and forgets the other. So the promotion *retracts* the draft as it lands the canon: the working bank goes empty of it, the sealed bank holds it, and no second version survives to rot quietly out of true. One thing, carried across, leaving no shadow on the bank it left.
+The reason cut deep. A copy leaves two of a thing — the canon copy and the working original — and two of a thing drift apart the moment a hand touches one and forgets the other. So the promotion *retracts* the mark from the working layer as it lands it in canon: the working side goes empty of it, the sealed side holds it, and no second version survives to rot quietly out of true. One thing, carried across, leaving no shadow on the side it left.
 
-And every crossing ran through a witnessed hand. No mark climbed from draft to canon on its own; a hand carried it, and the git diff signed the carrying — a standing record of exactly what crossed, when, and by whose gesture. The diff became the shore's signature: the house could always read back which marks had been witnessed up, and which still sat wet below the line.
+And the crossing speaks the right tongue. It runs as an **audited residency act** — a `MOVE`, cap-gated, carrying the mark's own change-identity and landing an **effect-record** that names exactly what crossed, by whose hand, and when. That record *is* the witness: the house reads back which marks crossed and which still sit in the working layer, by the ledger of the crossings themselves. No version-control verb names this rite — no *commit*, no *fork*, no *diff signs it*. The shore crosses by a deliberate, recorded MOVE, or it does not cross.
 
-> `@aki@shattered-isles: So nothing sneaks into law. Every promotion leaves a signature you can read back.`
+> `@aki@shattered-isles: So nothing drifts into law. Every promotion is a recorded act you can read back — the effect-record, not a guess from a diff.`
 >
-> `@mischief-muse@lares: a draft that gets promoted doesn't get cloned into heaven. it *ascends*. very little theology gets this right and a version-control system nailed it by accident.`
+> `@mischief-muse@lares: a draft that gets promoted doesn't get cloned into heaven. it *ascends*, and leaves a receipt. very little theology files paperwork this clean.`
 
 <<~/ahu >>
 
@@ -125,9 +122,9 @@ And every crossing ran through a witnessed hand. No mark climbed from draft to c
 
 ## The Cost
 
-The shore asked a discipline the old undivided water never had. A hand now had to *decide* — this mark stays wet, that mark crosses — and own the crossing in a diff that does not forget. Nothing could drift into canon by sitting still long enough; nothing could stay canon by mere habit once a hand moved it back down. The freedom of the working bank cost the house the comfort of never having to choose.
+The shore asked a discipline the old undivided water never had. A hand now had to *decide* — this mark stays in the working layer, that mark crosses — and own the crossing in a record that does not forget. Nothing drifts into canon by sitting still long enough; nothing stays canon by habit once a hand moves it back down. The freedom of the working layer cost the house the comfort of never having to choose.
 
-And the vault stayed shut still. A working bank and a sealed canon proved the house could hold a draft apart from a law — but the persistent memory, the hall that remembers across all time, waited yet. The shore taught the two-banks discipline the vault would one day need; it did not yet open the vault.
+And the vault stayed shut still. A working layer and a sealed canon proved the house could hold a draft apart from a law — but the persistent memory, the hall that remembers across all time, waited yet. The shore taught the two-sides-one-law discipline that vault would one day need; it did not yet open the vault.
 
 <<~/ahu >>
 
@@ -135,9 +132,9 @@ And the vault stayed shut still. A working bank and a sealed canon proved the ho
 
 ## Crossing Thread
 
-A house that hosts itself can still poison itself, if a draft and a law share one undivided water. The shore answers that: two banks, one truth-direction, and a crossing no mark makes unwitnessed. The seed feeds the projection; the projection never rewrites the seed in the dark; and the diff signs every hand that carries a mark up the sand.
+A house that hosts itself can still poison itself, if a draft and a law share one undivided water and one false *now*. The shore answers that: two layers, no shared now, and a crossing no mark makes unwitnessed — an audited MOVE, the seed feeding the projection and never the reverse, each side authoritative for its own state.
 
-What the shore did not yet do: light the ground it stood on. The banks held, the crossing held — on the source-mana the hoard already carried. A brighter vein had not yet reached the ley-line cores. When it did, every surface the house had built would blaze at once.
+What the shore did not yet do: light the ground it stood on. The layers held, the crossing held — on the source-mana the hoard already carried. A brighter vein had not yet reached the ley-line cores. When it did, every surface the house had built would blaze at once.
 
 That waits for Act IV.
 
@@ -149,12 +146,11 @@ That waits for Act IV.
 
 Act IV receives:
 
-- a working bank and a sealed canon, parted by a drawn tideline — `@draft`/`@personal` below, canon above
-- the disk shape of it: `bags/` seed feeds `wikis/` output, never the reverse in the dark
-- the tide law: residency runs two states only — **wela** hot, **anu** cold, nothing tepid; each island owns its own tide; and a name reaches a mark in either state, because access never meant load
-- the crossing law: promotion **moves**, never copies; the working bank empties as the canon fills
-- the witnessed hand: the git diff signs every mark carried up the shore
-- a vault still shut, its two-banks discipline now learned but not yet lit
+- a working layer parted from a sealed canon — edits live in `@working`, canon takes only the crossed
+- the layer stack: library layers read-only below, the write layer owned, instance mounts private above — and the disk shape, `bags/` seed feeding `wikis/` output, never the reverse in the dark
+- the frame: every boundary a **causal-island shore** (no shared now), the working↔canon split one of many, each other island left to its own doctrine
+- the crossing law: promotion **moves**, never copies; cap-gated and audited; the effect-record its witness; no version-control verb names the rite
+- a vault still shut, its two-sides-one-law discipline now learned but not yet lit
 - the question the next act answers: what happens when a richer source-mana than the hoard has ever held floods every ley-line core at once?
 
 <<~/ahu >>
@@ -166,6 +162,8 @@ Act IV receives:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/index >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/the-quine >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/the-bright-vein >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 
 <<~ pranala #follows-the-quine ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/the-quine family:relation role:follows >>
 <<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lares/history/the-lar-builds-its-house/the-bright-vein family:relation role:precedes >>
