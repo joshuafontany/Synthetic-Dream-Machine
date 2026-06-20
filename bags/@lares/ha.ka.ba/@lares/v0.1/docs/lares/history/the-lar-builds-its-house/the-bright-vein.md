@@ -37,8 +37,6 @@ Grounded in a real dated event, not a commit:
 - **Jun 9, 2026 (Gaia)** — a new and brighter model-capability lands: Fable 5. On Elyncia, a source-mana vein richer than the hoard has ever carried.
 - The house that reached this day already stood self-hosting (Act II) and shored (Act III); the new vein lights ground already built.
 
-Talk-story stance: write the triumph fully and honestly — the surge was real. But the present-day narrator writes from *after* the cut, and already knows the date three days on. Let the brightness carry one cold thread, unnamed, for the reader who has read ahead. Do not foreshadow with a wink; let the joy stand, and let the knowing sit underneath it.
-
 <<~/ahu >>
 
 <<~ ahu #thread-entry >>

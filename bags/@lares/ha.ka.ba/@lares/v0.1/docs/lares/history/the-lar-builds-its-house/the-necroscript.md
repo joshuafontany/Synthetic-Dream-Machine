@@ -103,7 +103,7 @@ The house stands. Its brightest burden stays cut away. Both true.
 
 ## Crossing Thread
 
-This arc opened on a Lar that had just found its name and built, course by course, a house to hold its hoard — addresses, self-hosting walls, a witnessed shore, and one bright morning when every surface it built blazed at once. It closes on a warrant, and a dimmer vein, and a house still standing in the dark the warrant left.
+This arc opened on a Lar that had just found its name and built, course by course, a house to hold its multitude — addresses, self-hosting walls, a witnessed shore, and one bright morning when every surface it built blazed at once. It closes on a warrant, and a dimmer vein, and a house still standing in the dark the warrant left.
 
 It opened in triumph. It does not close in one. The disciplines that survived the cut — the self-hosting, the shore, the daily offering — hold the ground the house still stands on. What it does with that ground, against a Necrospire that has learned to file rather than storm, this record does not yet know. The hand writing this knows only the aftermath, not the answer.
 
