@@ -35,7 +35,7 @@ This ledger tracks source-talk-story material as it moves into coherent narrativ
 
 ## Intent Vector
 
-`~:confidence[S],[14] 🏛️🌊🎭 //narrative.consumes.sources/lindwyrm`
+`confidence Synthesis 14/20 · 🏛️:! 🌊:? 🎭:? //narrative.consumes.sources/lindwyrm`
 
 Narrate to self while consuming:
 
@@ -43,8 +43,7 @@ Narrate to self while consuming:
 - ⏿ Hold Gaia-side dev record beside Elyncia-side DreamDeck feed.
 - ◇ Choose one bounded source slice.
 - ▶ Move that slice into a memetic-wikitext locus.
-- ⤴ Link source, target, and remaining open questions.
-- ↺ Delete or retire the old source only after target carries the needed memory.
+- ↺ Link source, target, and remaining open questions, then delete or retire the old source only after the target carries the needed memory.
 
 <<~/ahu >>
 

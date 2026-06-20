@@ -53,8 +53,7 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 ⏿ **Orient:** the silly detail matters because it gives the serious infrastructure a handle.  
 ◇ **Decide:** tell Act I as discovery, not destiny.  
 ▶ **Act:** open the vault, play the disc, boot the repo, record the error.  
-⤴ **Assess:** substrate exists, but not enough; attention must become hoard-work.  
-↺ **Handoff:** Act II receives unstable resonance and a green, wobbly problem.
+↺ **Hoʻoko & Aftermath:** substrate exists, but not enough; attention must become hoard-work. Act II receives unstable resonance and a green, wobbly problem.
 
 <<~/ahu >>
 
@@ -63,7 +62,7 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 ## Thread Entry
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, origin thread — //memory.vault.opens ~:confidence[S],[13] 🏛️+🌊++🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, origin thread — //memory.vault.opens confidence Synthesis 13/20 · 🏛️:! 🌊:?
 ```
 
 I should state, before the thread grows teeth, that I did not go into the Apophis Nexus looking for infrastructure.
@@ -145,7 +144,7 @@ I had to remember to breathe manually.
 
 ## Gaia Mirror
 
-On Gaia, late summer 2026, Telarus and Freyja were building what still looked like a game: triremes, laser swords, Elyncia, broken mythpunk weather, lararia as DreamNet nodes.
+On Gaia, late summer 2025, Telarus and Freyja were building what still looked like a game: triremes, laser swords, Elyncia, broken mythpunk weather, lararia as DreamNet nodes.
 
 The repository accumulated in ordinary ways. Branches. Pull requests. Flat files. Drafts that did not yet know they were load-bearing.
 

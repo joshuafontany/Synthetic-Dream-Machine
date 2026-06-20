@@ -54,15 +54,14 @@ Talk-story stance: keep the Green Jello Dinosaur ridiculous and diagnostically u
 ⏿ **Orient:** bad resonance still proves resonance.  
 ◇ **Decide:** correction happens through precise description, not combat.  
 ▶ **Act:** name the intended structure until the daemon loses its scaffolding.  
-⤴ **Assess:** the error dissolves without humiliation; the method remains.  
-↺ **Handoff:** Act III receives a working rule: declare the axes before the node speaks.
+↺ **Hoʻoko & Aftermath:** the error dissolves without humiliation; the method remains. Act III receives a working rule: declare the axes before the node speaks.
 
 <<~/ahu >>
 
 ## Thread Entry
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 21 Bureaucracy, origin thread — //resonance.error.greens ~:confidence[S],[13] 🏛️+🌊++🎭++🔮-
+@lindwyrm@new-delos — YOLD 4995, 21 Bureaucracy, origin thread — //resonance.error.greens confidence Synthesis 13/20 · 🏛️:! 🌊:? 🎭:?
 ```
 
 The first orichalcum shaving should have done nothing.

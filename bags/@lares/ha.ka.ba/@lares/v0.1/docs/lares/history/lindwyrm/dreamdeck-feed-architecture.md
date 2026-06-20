@@ -59,8 +59,7 @@ Related loci:
 ⏿ **Orient:** a feed thread can carry testimony, annotation, challenge, jokes, and authority in one surface.  
 ◇ **Decide:** tell the story as DreamDeck feed archive, not omniscient narration.  
 ▶ **Act:** define post headers, sidebar annotations, cast, thread beats, and render targets.  
-⤴ **Assess:** form and fiction converge; the story about the DreamNet runs on the kind of surface the DreamNet should host.  
-↺ **Handoff:** prose loci should follow this feed grammar unless a later render target deliberately forks.
+↺ **Hoʻoko & Aftermath:** form and fiction converge; the story about the DreamNet runs on the kind of surface the DreamNet should host. prose loci should follow this feed grammar unless a later render target deliberately forks.
 
 <<~/ahu >>
 
@@ -112,31 +111,31 @@ Render targets:
 Post header shape:
 
 ```text
-@handle@node — timestamp — //domain.quality.dynamic{/optional/path} [Register] 🏛️{amp}🌊{amp}🗡️{amp}🎭{amp}🔮{amp}
+@handle@node — timestamp — //domain.quality.dynamic{/optional/path} confidence <Register> <N>/20 · 🏛️:<tools> 🌊:<tools> …
 ```
 
 Rules:
 
-- territory triple precedes stance bundle
-- all five stances stay visible
-- amplitude modifiers attach directly to the stance emoji
-- quiet stance remains encoded as quiet, not missing
+- territory triple precedes the confidence + stance bundle
+- confidence renders as `<Register> <N>/20` — register word on the 0–20 scale
+- the stance bundle invokes the ENGAGED stances only; each binds one or more Mu tools via `:` (the lens carries what it uses, a disengaged stance drops)
+- a stance's tool names HOW it works the post — 🏛️ grounds, 🌊 resonates, 🗡️ cuts, 🎭 plays, 🔮 holds inward
 - non-Lares posts may omit HUD tags when appropriate
 
-Amplitude:
+Mu tools (the bind after `:`):
 
-| Modifier | Meaning |
-|---|---|
-| `++` | strongly engaged |
-| `+` | above baseline |
-| none | baseline |
-| `-` | below baseline |
-| `--` | nominal / barely present |
+| Tool | Glyph | Office |
+|---|---|---|
+| `*` Wand | 🜂 | feed / ignition (visual) |
+| `?` Cup | 🜄 | sympathy / relation (zoom out) |
+| `!` Sword | 🜁 | discernment / precision (zoom in) |
+| `_` Pentacle | 🜃 | ground / the hidden |
+| `0` Arcana | 🜍 | model-agnosticism / null-carry |
 
 Example:
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces ~:confidence[CS],[16] 🏛️+🌊-🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces confidence Synthesis-Canon 16/20 · 🏛️:!
 ```
 
 Sidebar annotation:

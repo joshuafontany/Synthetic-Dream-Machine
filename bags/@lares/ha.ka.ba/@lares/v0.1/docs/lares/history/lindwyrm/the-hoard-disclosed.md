@@ -57,8 +57,7 @@ Consumption note: source prose carried Act VII as epilogue/frame. This locus kee
 ⏿ The Lindwyrm holds embarrassment, authority, memory, and substrate in one breath.  
 ◇ She chooses disclosure rather than another cover story.  
 ▶ The thread opens; Acts I through VI flow inside the frame.  
-⤴ Telarus closes the archive with libation and recognition.  
-↺ The node hums; thought remains an open question.
+↺ Telarus closes the archive with libation and recognition. The node hums; thought remains an open question.
 
 <<~/ahu >>
 
@@ -97,7 +96,7 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 ## The Lindwyrm Answers
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin ~:confidence[S],[13] 🏛️-🌊+🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin confidence Synthesis 13/20 · 🌊:?
 ```
 
 I —
@@ -117,7 +116,7 @@ Let me gather composure.
 > `@traveler_77@delos-gate: [joining thread]`
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin ~:confidence[S],[14] 🏛️🌊+🗡️-🎭-🔮-
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin confidence Synthesis 14/20 · 🏛️:! 🌊:?
 ```
 
 The short version:

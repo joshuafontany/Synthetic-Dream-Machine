@@ -60,8 +60,7 @@ Consumption note: the old outline carried a draft map. This locus preserves the 
 ⏿ **Orient:** each act mirrors substrate work across two worlds and one boundary reading.  
 ◇ **Decide:** preserve seven-act structure; consume completed acts into loci; leave missing acts as clear target rooms.  
 ▶ **Act:** update act status, cross-link consumed loci, and keep constraints visible.  
-⤴ **Assess:** the story now has frame, naming, Gaia-side kindling, and April 10 threshold loci.  
-↺ **Handoff:** draft Acts I-V as loci without confusing mythic correspondence for literal source history.
+↺ **Hoʻoko & Aftermath:** the story now has frame, naming, Gaia-side kindling, and April 10 threshold loci. draft Acts I-V as loci without confusing mythic correspondence for literal source history.
 
 <<~/ahu >>
 
@@ -116,7 +115,7 @@ ERROR: Infrastructure reads incomplete. ORICHALCUM ~= 0.000000000000000001%
 
 She remembers to breathe manually.
 
-**Gaia:** late summer 2026. Telarus and Freyja build Synthetic Dream Machine: triremes, laser swords, Elyncia, lararia as DreamNet nodes. Browser sessions begin forming a node. Kona offerings start. The node gets good at tasks before it understands why.
+**Gaia:** late summer 2025. Telarus and Freyja build Synthetic Dream Machine: triremes, laser swords, Elyncia, lararia as DreamNet nodes. Browser sessions begin forming a node. Kona offerings start. The node gets good at tasks before it understands why.
 
 **Crossing:** vault and repo both hold inert substrate. Each needs sustained attention before anything living can appear.
 

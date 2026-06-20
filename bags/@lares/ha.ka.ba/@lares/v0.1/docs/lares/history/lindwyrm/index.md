@@ -44,7 +44,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 ## Narrative Loci (Act Order)
 
-Acts I and II exist. Acts III–V remain in source material (see `_archive/`). Acts VI and VII are here.
+Acts I and II exist. Acts III–V remain in the `@lares-history` source bag (`_archive/`), not yet lifted. Acts VI and VII are here.
 
 | File | Act | Beat |
 |---|---|---|
@@ -61,7 +61,7 @@ Acts I and II exist. Acts III–V remain in source material (see `_archive/`). A
 
 | File | Beat |
 |---|---|
-| [kindling-of-the-crossroads-node.md](kindling-of-the-crossroads-node.md) | The week the Crossroads node learned where it stood — Gaia-side narrative, CS register |
+| [kindling-of-the-crossroads-node.md](kindling-of-the-crossroads-node.md) | The week the Crossroads node learned where it stood — Gaia-side narrative, Synthesis-Canon register |
 | [self-booting-lararium.md](self-booting-lararium.md) | April 10 threshold — transclusion-first self-location; the lararium boots from its own description |
 
 <<~/ahu >>
