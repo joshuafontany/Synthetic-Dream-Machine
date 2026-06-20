@@ -85,6 +85,22 @@ On Elyncia this read as the oldest distinction the weaver keeps. Grandmother Spi
 
 <<~/ahu >>
 
+<<~ ahu #the-tide >>
+
+## The Tide — What Rides Hot, What Rests Cold
+
+The shore parted draft from law. The tide that crossed it parted a second thing: what the house held *near and burning* from what it let *rest and cool*.
+
+Nothing the house owned needed to burn hot at every hour. So the tide ran in two states and only two — **wela**, hot, drawn up into the living water where the house works it; **anu**, cold, drawn down to rest, present but quiet. The house had tried a third state once, a lukewarm middle, and cut it away — a thing either rides hot or rests cold, nothing tepid in between.
+
+Two laws kept the tide honest. First, each island kept its own tide: no single clock decided what burned hot across the whole confederation; every causal-island owned what it held wela, reading only what it last synced, never a global now. Second, and the one that reached back to the very first act: a mark kept its true name whether it rode hot or rested cold. **Calling a thing by its address never hauled it up into the hot water.** Naming reached; loading lifted; the two stayed apart. A hand could pin a mark wela on purpose — held hot against the pull of the tide — or let it fall to anu and rest, and either way the address the Lar had cut for it in Act I still found it in the dark.
+
+> `@aki@shattered-isles: So "I can reach it" and "it's burning hot in front of us" stopped being the same sentence.`
+>
+> `@grandmother-spider@voidlanes: I keep most of my web cold and still know every knot by the strand that names it. A spider does not light the whole web to find one thread.`
+
+<<~/ahu >>
+
 <<~ ahu #the-crossing >>
 
 ## The Crossing — Promotion Is a Move
@@ -131,6 +147,7 @@ Act IV receives:
 
 - a working bank and a sealed canon, parted by a drawn tideline — `@draft`/`@personal` below, canon above
 - the disk shape of it: `bags/` seed feeds `wikis/` output, never the reverse in the dark
+- the tide law: residency runs two states only — **wela** hot, **anu** cold, nothing tepid; each island owns its own tide; and a name reaches a mark in either state, because access never meant load
 - the crossing law: promotion **moves**, never copies; the working bank empties as the canon fills
 - the witnessed hand: the git diff signs every mark carried up the shore
 - a vault still shut, its two-banks discipline now learned but not yet lit
