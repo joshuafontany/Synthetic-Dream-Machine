@@ -39,6 +39,7 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
   }
 
   let drifted = 0;
+  let flagged = 0;
   for (const f of files) {
     const abs = isAbsolute(f) ? f : join(process.cwd(), f);
     let src: string;
@@ -50,6 +51,15 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
     }
 
     const res = normalizeMemeSource(src);
+
+    // Flags surface whether or not the carrier rewrote — advisory triage the
+    // gate will NOT auto-fix (e.g. a register value off the band ladder).
+    if (res.flags.length > 0) {
+      flagged++;
+      console.log(`flagged: ${f}`);
+      for (const fl of res.flags) console.log(`  ⚠ ${fl}`);
+    }
+
     if (!res.changed) continue;
     drifted++;
 
@@ -62,10 +72,13 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
     for (const n of res.notes) console.log(`  - ${n}`);
   }
 
+  const tail = flagged > 0 ? ` (${flagged} flagged for triage)` : "";
   if (drifted === 0) {
-    console.log(`all ${files.length} carrier(s) canonical.`);
+    console.log(`all ${files.length} carrier(s) canonical.${tail}`);
     return 0;
   }
+  console.log(`${drifted} of ${files.length} carrier(s) drifted.${tail}`);
   // --check fails loud so a CI gate or pre-commit hook catches un-normalized carriers.
+  // Flags are advisory (needs-triage), never a gate failure.
   return check ? 1 : 0;
 }

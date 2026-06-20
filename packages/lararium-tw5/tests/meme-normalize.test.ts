@@ -61,3 +61,67 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     expect(normalizeMemeSource(src).changed).toBe(false);
   });
 });
+
+describe("normalizeMemeSource — SOH opener spacing", () => {
+  test("homes a missing space in a no-namespace opener (the lifted-corpus form)", () => {
+    const src = HEAD("<<~&#x0001; ? -> lar:///x >>", "");
+    const { text, changed, notes } = normalizeMemeSource(src);
+    expect(changed).toBe(true);
+    expect(text).toContain("<<~ &#x0001; ? -> lar:///x >>");
+    expect(notes.join()).toMatch(/spacing canonicalized/);
+  });
+
+  test("idempotent — a correctly-spaced bare opener is left untouched", () => {
+    const src = HEAD("<<~ &#x0001; ? -> lar:///x >>", "");
+    expect(normalizeMemeSource(src).changed).toBe(false);
+  });
+});
+
+// iam head with a register field, for the register-band class.
+const REG_HEAD = (register: string) =>
+  `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n<<~ &#x0001; ? -> lar:///x >>\n` +
+  "```toml iam\n" +
+  `cacheable = true\n` +
+  `register = "${register}"\n` +
+  "```\n\n<<~ &#x0002; >>\n\nbody\n\n<<~ &#x0003; >>\n";
+
+describe("normalizeMemeSource — register band", () => {
+  test("expands the S code to the canonical band word", () => {
+    const { text, changed, notes } = normalizeMemeSource(REG_HEAD("S"));
+    expect(changed).toBe(true);
+    expect(text).toContain(`register = "Synthesis"`);
+    expect(notes.join()).toMatch(/register "S" expanded to "Synthesis"/);
+  });
+
+  test("expands SC to Synthesis-Canon", () => {
+    expect(normalizeMemeSource(REG_HEAD("SC")).text).toContain(`register = "Synthesis-Canon"`);
+  });
+
+  test("expands CS (old transposed SC) to Synthesis-Canon", () => {
+    expect(normalizeMemeSource(REG_HEAD("CS")).text).toContain(`register = "Synthesis-Canon"`);
+  });
+
+  test("a full band word is already canonical — no change, no flag", () => {
+    const r = normalizeMemeSource(REG_HEAD("Synthesis-Canon"));
+    expect(r.changed).toBe(false);
+    expect(r.flags).toHaveLength(0);
+  });
+
+  test("a genuine stage code in the register slot (US) is FLAGGED, never guessed into a band", () => {
+    const r = normalizeMemeSource(REG_HEAD("US"));
+    expect(r.changed).toBe(false);              // text untouched
+    expect(r.text).toContain(`register = "US"`);
+    expect(r.flags.join()).toMatch(/register "US" off the band ladder/);
+  });
+
+  test("a freeform register phrase is flagged, not rewritten", () => {
+    const r = normalizeMemeSource(REG_HEAD("elevated but practical"));
+    expect(r.changed).toBe(false);
+    expect(r.flags).toHaveLength(1);
+  });
+
+  test("idempotent — expand then re-run leaves it put", () => {
+    const once = normalizeMemeSource(REG_HEAD("S")).text;
+    expect(normalizeMemeSource(once).changed).toBe(false);
+  });
+});
