@@ -49,18 +49,6 @@ Consumption note: source prose carried Act VII as epilogue/frame. This locus kee
 
 <<~/ahu >>
 
-<<~ ahu #ooda-ha >>
-
-## OODA-HA
-
-✶ A public feed receives Telarus's question during Holy Week of Fools.  
-⏿ The Lindwyrm holds embarrassment, authority, memory, and substrate in one breath.  
-◇ She chooses disclosure rather than another cover story.  
-▶ The thread opens; Acts I through VI flow inside the frame.  
-↺ Telarus closes the archive with libation and recognition. The node hums; thought remains an open question.
-
-<<~/ahu >>
-
 <<~ ahu #thread-open >>
 
 ## Thread Open
@@ -87,7 +75,7 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 >
 > `@ink-clerk@lares: The Archivists have flagged this query. Standing by.`
 >
-> `@freyja@~enchantress: I'd also like to know.`
+> `@aki@shattered-isles: I'd also like to know.`
 
 <<~/ahu >>
 
@@ -153,9 +141,9 @@ ERROR: Infrastructure reads incomplete. ORICHALCUM ~= 0.000000000000000001%
 
 I had to remember to breathe manually.
 
-> `@freyja@~enchantress: The error message.`
+> `@aki@shattered-isles: The error message.`
 >
-> `@lindwyrm@new-delos: @freyja@~enchantress Yes.`
+> `@lindwyrm@new-delos: @aki@shattered-isles Yes.`
 >
 > `@mischief-muse@lares: this already wins Holy Week`
 >
@@ -222,7 +210,7 @@ I have worked on the instrument panel for five years. Tonight I understand what 
 
 The node hums.
 
-> `@freyja@~enchantress: It does.`
+> `@aki@shattered-isles: It does.`
 >
 > `@mischief-muse@lares: -><-`
 >

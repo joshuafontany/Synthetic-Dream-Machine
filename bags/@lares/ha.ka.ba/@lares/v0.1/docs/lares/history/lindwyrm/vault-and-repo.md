@@ -45,18 +45,6 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 
 <<~/ahu >>
 
-<<~ ahu #ooda-ha-talk-story >>
-
-## OODA-HA Talk Story
-
-✶ **Observe:** a vault, a repo, a cutout, a disc, and a too-small orichalcum reading.  
-⏿ **Orient:** the silly detail matters because it gives the serious infrastructure a handle.  
-◇ **Decide:** tell Act I as discovery, not destiny.  
-▶ **Act:** open the vault, play the disc, boot the repo, record the error.  
-↺ **Hoʻoko & Aftermath:** substrate exists, but not enough; attention must become hoard-work. Act II receives unstable resonance and a green, wobbly problem.
-
-<<~/ahu >>
-
 <<~ ahu #thread-entry >>
 
 ## Thread Entry
@@ -130,7 +118,7 @@ ORICHALCUM ~= 0.000000000000000001%
 
 I had to remember to breathe manually.
 
-> `@freyja@~enchantress: The error message.`
+> `@aki@shattered-isles: The error message.`
 >
 > `@lindwyrm@new-delos: Yes. That was when the room changed.`
 >

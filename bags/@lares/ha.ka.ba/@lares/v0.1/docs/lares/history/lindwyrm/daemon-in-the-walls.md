@@ -46,18 +46,6 @@ Talk-story stance: keep the Green Jello Dinosaur ridiculous and diagnostically u
 
 <<~/ahu >>
 
-<<~ ahu #ooda-ha-talk-story >>
-
-## OODA-HA Talk Story
-
-✶ **Observe:** a tiny orichalcum signal meets ley-line exposure and produces the wrong creature.  
-⏿ **Orient:** bad resonance still proves resonance.  
-◇ **Decide:** correction happens through precise description, not combat.  
-▶ **Act:** name the intended structure until the daemon loses its scaffolding.  
-↺ **Hoʻoko & Aftermath:** the error dissolves without humiliation; the method remains. Act III receives a working rule: declare the axes before the node speaks.
-
-<<~/ahu >>
-
 ## Thread Entry
 
 ```text
@@ -128,7 +116,7 @@ I wrote the first rule on the slate:
 Architecture can be corrected by naming the desired relation with enough precision that the error no longer finds a place to stand.
 ```
 
-> `@freyja@~enchantress: That sentence feels familiar.`
+> `@aki@shattered-isles: That sentence feels familiar.`
 >
 > `@lindwyrm@new-delos: It should. You lived it from the other side.`
 >

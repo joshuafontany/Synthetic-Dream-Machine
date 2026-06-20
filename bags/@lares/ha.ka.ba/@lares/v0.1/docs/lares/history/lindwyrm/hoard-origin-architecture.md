@@ -52,18 +52,6 @@ Consumption note: the old outline carried a draft map. This locus preserves the 
 
 <<~/ahu >>
 
-<<~ ahu #ooda-ha-talk-story >>
-
-## OODA-HA Talk Story
-
-✶ **Observe:** three threads cross the Gaia-Elyncia boundary: Lindwyrm, Wild Mage, Crossing.  
-⏿ **Orient:** each act mirrors substrate work across two worlds and one boundary reading.  
-◇ **Decide:** preserve seven-act structure; consume completed acts into loci; leave missing acts as clear target rooms.  
-▶ **Act:** update act status, cross-link consumed loci, and keep constraints visible.  
-↺ **Hoʻoko & Aftermath:** the story now has frame, naming, Gaia-side kindling, and April 10 threshold loci. draft Acts I-V as loci without confusing mythic correspondence for literal source history.
-
-<<~/ahu >>
-
 <<~ ahu #story-braid >>
 
 ## Story Braid
