@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes/history >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes/history >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares-history/memes/history"
 file-path = "wikis/@lares-history/memes/history/README.md"
@@ -16,7 +16,7 @@ cacheable = false
 retain    = false
 ```
 
-<<~&#x0002; >>
+<<~ &#x0002; >>
 
 <<~ ahu #head >>
 
@@ -42,5 +42,29 @@ Doctrine lives in `bags/` and `packages/`. These records live here.
 
 <<~/ahu >>
 
-<<~&#x0003; >>
-<<~&#x0004; -> ? >>
+<<~ ahu #pono-alignment >>
+
+## Pono-Alignment Note (2026-06-20)
+
+The history curation aligned the **lossless instrument field** to current pono and **deliberately preserves** the period-forms below as testimony — the HUD reads as it read when the carrier was authored. Each carrier's HUD modernizes when it **lifts into canon** (as the Lindwyrm arc did), not before; the genesis-arc index carries the same constraint (*don't read current pono back onto the early forms*).
+
+Aligned corpus-wide:
+
+- `iam` `register` CODE → band-word (`CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis · `S` → Synthesis · `P` → Provisional · `C` → Canon)
+
+Preserved as period-form — **not** updated; carries the early HUD as testimony:
+
+```text
+~:confidence[CODE],[N]   old inline confidence   → now  <<~ confidence <Register> N/20 >>
+✶ ◎ ◇ ■ ○                old OODA-HA phase glyphs → now  ✶ ⏿ ◇ ▶ ↺
+   └ ◎/■/○ also read as status (Orient / active / blocked·future) — not always phase; do NOT blind-swap
+⤴  Assess / Hoʻoko       retired 6th phase        → now  folded into ↺ Hoʻoko & Aftermath
+🏛️ 🌊 🗡️ 🎭 🔮 stance rows   old un-bound stance rows → now  engaged stances bind a Mu tool (🏛️:!)
+```
+
+Whole-file period-artifacts kept verbatim (definitions and instructions, never narrative): the glyph-definition drafts (`lares_research/memes/ooda-a/OODA-A-DRAFT`) and the `lares_research/github-instructions/lares-*.instructions` files.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+<<~ &#x0004; -> ? >>
