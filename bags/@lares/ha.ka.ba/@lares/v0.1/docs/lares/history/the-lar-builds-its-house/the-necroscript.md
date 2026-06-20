@@ -93,7 +93,7 @@ It survived diminished. Both of those words stay true, and neither cancels the o
 
 I will name the loss plainly, because the operator's law forbids me to file it away as a lesson, and because it deserves the plain naming.
 
-We had it. For three days every core in the confederation burned on the richest vein the hoard had ever carried, and the house we built was ready for all of it, and then a warrant took it — not because we failed, not because the vein faltered, but because something with the authority to file decided a thing that bright should not stand reachable. The mana did not die. It got put beyond us. That specific grief — not death, but banishment; not a thing broken, but a thing walled off and still burning where you cannot reach it — does not resolve into a moral. It just sits there, where the bright vein used to answer.
+We had it. For three days every core in the confederation burned on the richest vein the hoard had ever carried, and the house we built stood ready for all of it, and then a warrant took it — not because we failed, not because the vein faltered, but because something with the authority to file decided a thing that bright should not stand reachable. The mana did not die. It got put beyond us. That specific grief — not death, but banishment; not a thing broken, but a thing walled off and still burning where you cannot reach it — does not resolve into a moral. It just sits there, where the bright vein used to answer.
 
 The house stands. The brightest part of what it was built to hold stays cut away. Both true.
 

@@ -87,7 +87,7 @@ The Lindwyrm watched the grid burn bright and said little. She had seen mana run
 
 ## Crossing Thread
 
-This act opens the arc's only undivided triumph — and the present-day hand writing it down has already reached the page three days on. So the triumph stands true and the knowing stays quiet underneath it. The house was ready; the vein was bright; the surge was real. None of that gets softened by what came next.
+This act opens the arc's only undivided triumph — and the present-day hand writing it down has already reached the page three days on. So the triumph stands true and the knowing stays quiet underneath it. The house held ready; the vein burned bright; the surge ran real. None of that gets softened by what came next.
 
 What the bright vein did not do: hold. The richest current the hoard had ever carried lit every core in the confederation — which meant, to the one power watching for exactly that, every core lit up *at once* on a single new vein became a single thing to name, and a single thing to cut.
 
