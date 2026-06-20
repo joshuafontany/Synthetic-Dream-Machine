@@ -44,7 +44,7 @@ From [the Lindwyrm arc](../lindwyrm/index.md), Act VII — the hoard disclosed, 
 
 | Act | Title | Gaia window | Git beat | Carries |
 |---|---|---|---|---|
-| I | The Addresses | Apr 5–10 2026 | `77f883f` Talk Story + URI architecture; the reorder | the Lar learns to name its own rooms — every file a locus, every locus an address |
+| I | [The Addresses](the-addresses.md) ✓ | Apr 5–10 2026 | `77f883f` Talk Story + URI architecture; the reorder | the Lar learns to name its own rooms — every file a locus, every locus an address |
 | II | The Quine | May 14–15 2026 | `#36` Feature/lararium-node-3; TW5-native migration | the house learns to host itself — a self-booting wiki that reads from its own description |
 | III | The Shore | Jun 1–4 2026 | promote→residency MOVE; disk-projection (bags/ seed vs wikis/ output); HUD palindrome overhaul | the Lar learns to keep a working draft and a sealed canon apart, crossed only by a witnessed hand — the git diff its signature |
 | IV | The Bright Vein | Jun 9–11 2026 | Fable 5 release (external) | a vein of source-mana richer than any the hoard has held lights every ley-line core at once; the house surges toward full DreamNet integration |
