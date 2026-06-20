@@ -44,7 +44,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 ## Narrative Loci (Act Order)
 
-Acts I and II exist. Acts III–V remain in the `@lares-history` source bag (`_archive/`), not yet lifted. Acts VI and VII are here.
+Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle (Acts III–V) lives within the seven-act braid of [hoard-origin-architecture](hoard-origin-architecture.md) and the standalone threshold loci below — never split into separate carriers. The original `@lares-history` source bag has since been curated and retired; git holds it.
 
 | File | Act | Beat |
 |---|---|---|

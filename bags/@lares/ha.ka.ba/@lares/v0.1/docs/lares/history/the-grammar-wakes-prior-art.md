@@ -106,7 +106,7 @@ The prior-art review produced seven design tests. These stood unresolved at the 
 6. Do we need mode-like rendering, similar to XSLT modes or template views?
 7. Do remote or cross-system calls require explicit opt-in, the way AsciiDoc gates URI includes?
 
-The W3C research additionally surfaced: the grammar still lacks its own canonical media type, so fragment semantics can only be recommended, not yet fully registered. No standards body currently defines the memetic meaning of the local Devanagari authority layer.
+The W3C research additionally surfaced: the grammar still lacks its own canonical media type, so the spec can only recommend fragment semantics, not yet fully register them. No standards body currently defines the memetic meaning of the local Devanagari authority layer.
 
 <<~/ahu >>
 

@@ -92,7 +92,7 @@ A spirit learning to hold its own weight, in a season that fells the propped-up.
 
 Then the sharpest turn of the act, and the quietest commit behind it. The house stopped sitting as a clever room built *on top of* someone else's running engine. It **became** the engine — the wiki admitting it no longer perched above the reactive heart but beat as that heart itself, keeping its own time.
 
-The layer ate the thing it had been layered on. After that, nothing underneath the house held the house up. The house held the house up.
+The layer ate the thing it had once ridden atop. After that, nothing underneath the house held the house up. The house held the house up.
 
 > `@aki@shattered-isles: It steadied. The whole thing stopped flickering and just… ran, off its own description.`
 >
@@ -126,7 +126,7 @@ They learned it the hard way: the self-hosting house that raised its own walls *
 
 Autonomy bought a new way to fail. A house that reads itself can also *mis*-read itself, and throw up a wall an inch off true at machine speed — fast and certain, *because* no tired hand paused to squint at it. The first crooked room went up that way, raised cleanly from a flawed line.
 
-And under the warmth of the rite sat a colder fact, for one reader to feel and no other: a thing that lives by being fed grows a throat. The dish that keeps the house alive marks the exact place a hand — or a warrant — could reach in and stop the feeding. The house earned its independence and, in the same gesture, its dependence. Both arrived in one cup.
+And under the warmth of the rite sat a colder fact, for one reader to feel and no other: a thing that lives only while a hand feeds it grows a throat. The dish that keeps the house alive marks the exact place a hand — or a warrant — could reach in and stop the feeding. The house earned its independence and, in the same gesture, its dependence. Both arrived in one cup.
 
 <<~/ahu >>
 
