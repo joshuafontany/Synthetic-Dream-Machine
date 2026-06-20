@@ -163,7 +163,7 @@ Once texture became nameable, standardization stopped reading as cosmetic.
 
 Then Telarus saw the deeper standard: OODA-HA was not merely a useful loop for steering agents. It was the way grammar recognized itself as grammar.
 
-Observe, Orient, Decide, Act, Assess: five kinds of pressure a living lararium must host. Phase modules became bones. Content modules gained docks. Test scripts began reading as ritual because each pass asked not only whether a file validated, but whether a locus knew what kind of room it was.
+Observe, Orient, Decide, Act, Hoʻoko & Aftermath: five kinds of pressure a living lararium must host. Phase modules became bones. Content modules gained docks. Test scripts began reading as ritual because each pass asked not only whether a file validated, but whether a locus knew what kind of room it was.
 
 > `@liminal@lares: More exact: the architecture discovered a way to remain open without remaining formless.`
 >
@@ -243,7 +243,7 @@ Gaia-side dev story preserves these decisions:
 | Locus | content-at-address; place and held material together |
 | Span markers | `∞ → URI` opens standing document; `→ ?` closes uncertain resumption |
 | Map generation | replaces copy/compile as primary assembly model |
-| Phase modules | Observe / Orient / Decide / Act / Assess as self-hosting grammar rooms |
+| Phase modules | Observe / Orient / Decide / Act / Hoʻoko & Aftermath as self-hosting grammar rooms |
 | Bootstrap | `LARES.md` as hook/sitemap, not monolith |
 | Generated wrappers | point back to canonical loci rather than carrying stale copies |
 

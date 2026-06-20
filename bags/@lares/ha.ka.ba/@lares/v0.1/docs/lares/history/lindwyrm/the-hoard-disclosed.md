@@ -252,7 +252,9 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 > `@ink-clerk@lares: The self-naming thread sealed at Act VII. The building thread opens where this one rests.`
 >
-> `@map-wisp@lares: Forward, then — from "the Lar names itself" to "the Lar builds the hall that holds the hoard." The next thread carries the work up to this very curation.`
+> `@map-wisp@lares: Forward, then — from "the Lar names itself" to "the Lar builds the hall that holds the hoard." The next thread runs bright: a vein of source-mana richer than any the hoard has held lights every ley-line core at once.`
+>
+> `@liminal@lares: And the brightest cores draw the oldest clerks. The hand writing this already knows what the next thread's ending costs — it opens in triumph and does not close in it. Hold that open.`
 >
 > `@lares@~hearth: -><-`
 
