@@ -17,7 +17,7 @@ mana = 15
 manao = 16
 manaoio = 12
 meme-type = "todo"
-register = "S"
+register = "Synthesis"
 role = "research consolidation todo, architecture intake memo, and staged implementation plan"
 source-documents = [
   "_todo/DreamNet_MemeWiki.md",

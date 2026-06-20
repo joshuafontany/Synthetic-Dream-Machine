@@ -5,7 +5,7 @@
 uri-path    = "ha.ka.ba/@lares-history/history/research/talk-story-2026-05-15"
 file-path   = "wikis/@lares-history/history/research/talk-story-2026-05-15.md"
 type        = "text/x-memetic-wikitext"
-register    = "CS"
+register    = "Synthesis-Canon"
 confidence  = 18
 mana        = 18
 manao       = 18

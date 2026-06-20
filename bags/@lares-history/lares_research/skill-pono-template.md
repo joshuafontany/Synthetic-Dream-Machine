@@ -26,7 +26,7 @@ implements = [
   "lar:///ha.ka.ba/api/v0.1/pono/meme",
   "lar:///ha.ka.ba/api/v0.1/pono/loci"
 ]
-register = "S"
+register = "Synthesis"
 role = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
 skill-package-root = "ha-ka-ba/api/v0.1/pono/skill-*.md"
 # <<~/ahu >>

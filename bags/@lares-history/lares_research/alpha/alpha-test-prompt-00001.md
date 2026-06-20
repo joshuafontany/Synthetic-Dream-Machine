@@ -17,7 +17,7 @@ mana = 12
 manao = 14
 manaoio = 10
 meme-type = "alpha"
-register = "S"
+register = "Synthesis"
 role = "session constitutional prompt, phase narration law, memory-load instruction, and failure-state indicator"
 # <<~/ahu >>
 # <<~ ahu #iam-ba "flow" >>
