@@ -23,21 +23,27 @@ written   = "2026-06-19"
 
 <<~ ahu #next-vector >>
 
-# NEXT VECTOR — `lar:///working-canon.live-loop.completes`
+# NEXT VECTOR — awaiting the next bearing (the working-canon loop CLOSED 2026-06-19)
 
-**The working/canon SPINE is BUILT and LIVE-WITNESSED (this session, 2026-06-17→19, ~14 commits).** A wiki's live edits land in `@working` (→ `wikis/{slug}`); canon publishes by a cap-gated, audited, carrier-group `MOVE` (→ `bags/`, the git diff). DONE + green end-to-end:
+> **DESTALED 2026-06-21:** the `lar:///working-canon.live-loop.completes` vector below COMPLETED — its three "remaining" threads all landed green 2026-06-19 (see the CLOSED block). This torch had still named them open, trailing HEAD by ~1.5 days. The forward bearing for the next phase stands open for the operator's steer; candidates ride "Broader torch" below.
+
+## PRIOR VECTOR — `lar:///working-canon.live-loop.completes` (CLOSED 2026-06-19)
+
+**The working/canon SPINE is BUILT and LIVE-WITNESSED (2026-06-17→19, ~14 commits).** A wiki's live edits land in `@working` (→ `wikis/{slug}`); canon publishes by a cap-gated, audited, carrier-group `MOVE` (→ `bags/`, the git diff). DONE + green end-to-end:
 - **Doctrine:** `wiki-layer-ontology` #shore-law (working↔canon · plane↔plane · host↔lararium), Law 4 sharpened, the **kāpae-vs-absent** model (`residency-model` anti-pattern #3 — a tombstone SHADOWS lower cascade bags; a MOVE/promotion source RETRACTS-to-absent via the `remove` primitive, falls through to canon).
 - **Residency:** `@working` typed slot + PersonGroup×fingerprint binding · carrier-group `MOVE` · the `remove` primitive · destination `bag`-field stamp.
 - **Projection:** level-triggered per-root reconcile · survivor-provenance (`resolveTopmost`, not `change.bag`) · V3 `@working → wikis/{slug}` mirror · **the recipe-watch eviction fix** (`@working` added to the structural set — it mounted then got evicted on the first reconcile, the bug that hid because nothing tested a LIVE `@working`).
 - **Locus B:** promotion runs IN the wiki island over its own composite (commanded via `lares act --in-wiki` → the `wiki-act` forwarder → `placeWikiVerb`); the admin never reaches the per-fingerprint `@working` binding, accessor stays clean.
 - **Witnesses (LIVE, not fixtures):** `tests/e2e/working-loop.test.ts` (LOAD→`@working`→`wikis/`; MOVE `@working→@lares`→`bags/` + retract, 3/3 deterministic) · `promotion-publish-diff` · `watcher-cut-c`. Suites: mesh 282 · tw5 129 · node 128 · e2e 29/29. Validated TWICE throughout (pono memes + web prior-art) via ~5 research-spirit dispatches; lessons → memory `[[kapae-vs-absent-move]]`.
 
-**REMAINING to fully close the live loop (open threads):**
-1. **minted-`@{slug}` canon projection** — a minted USER wiki's `@{slug}` canon doesn't project to `bags/{slug}` yet (the disk grant mirrors only `@lares`/`@lararium` + per-wiki `@working`). The promotion witness used `@lares→@lararium` (both mirror).
-2. **`wikisFileToUri` ingest-back** — `wikis/` projects OUT only; editing a `wikis/{slug}` file on disk doesn't ingest back to `@working` (no reverse-derivation; `bagsFileToUri` covers `bags/` only).
-3. **The VM-cascade live edit** — a true UI edit (no explicit bag) routing to `@working` is witnessed only at the island-adaptor UNIT level; the e2e drives `@working` via explicit `--in-wiki` LOAD/MOVE (the cascade is a live-VM path, not CLI-reachable by design).
+**These three threads CLOSED 2026-06-19** (branch `feature/lararium-node-4`; e2e witnesses active + green, suites post-close mesh 285 · tw5 131 · node 132 · browser 13 · e2e 32/32):
+1. **minted-`@{slug}` canon projection** → `bags/@{slug}` — LANDED (`bf6e66ef`; witness `tests/e2e/minted-canon-projection.test.ts`). The root cause carried a dual-naming — a user wiki's own canon mounted twice (`@{slug}` vs the stale `@lararium/wikis/{slug}`) — ERADICATED `fdf9a1a2`, the FIX-B band-aid reverted, e2e green without it. Lessons → memory `[[minted-canon-dual-naming]]`.
+2. **`wikisFileToUri` ingest-back** — LANDED (`fbcb19e3`; witness `tests/e2e/wikis-ingest-back.test.ts`): a disk edit on a `wikis/{slug}` file ingests back to `@working` in one cycle.
+3. **VM-cascade live edit → `@working`** — the live-route guard LANDED (`c9b99be5`; `a7e20808` unflaked the minted-canon e2e).
 
-**Broader torch (untouched this session):** T3 (~13 stale `api/lararium/` pointers — author `schema/*` memes vs retire) · residency-create (vector 2) · transitive-closure (3) · hull-unification (4) + switchboard retirement · host horizon (UE5/6 Verse, MUDlet — shore-law is host-general for it).
+**Since (2026-06-19 → 06-20):** history-rewrite arcs drafted + `@lares-history` cleaned 360→35 files; the `invariant`→`cache-stable` split + `rooms`→`wikis` burn (`b8bf047e`). The **next forward bearing stands open** — pick it from the candidates below or set a fresh one.
+
+**Broader torch (candidates for the next bearing):** T3 (~13 stale `api/lararium/` pointers — author `schema/*` memes vs retire) · residency-create (vector 2) · transitive-closure (3) · hull-unification (4) + switchboard retirement · host horizon (UE5/6 Verse, MUDlet — shore-law is host-general for it).
 
 ---
 **PRIOR VECTOR — `lar:///oracle.planes.enact` (DONE 2026-06-16):**
