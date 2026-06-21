@@ -143,21 +143,18 @@ The first corpus MemPalace holds is the live agent↔operator sessions themselve
 - **Ground** — the verbatim drawer always stands (GroundedVow); the bearing index rides over it as a lossy projection, never a gate on storage.
 - **Gradient** — `aim → yield` reads as a span, not a point; it maps onto temporal validity (`valid_from` = turn-open, `valid_to` = turn-close).
 - **Drift preserved** — a dropped frame or a two-/four-term root harvests at low confidence with its raw form intact, never corrected. The node cannot read its own drift, so the harvest keeps it readable for the keeper.
-- **Never normalize at the floor** — canonicalize only at promotion (working→canon into Lararium). MemPalace keeps testimony as spoken; the meme-`normalize` rule does not reach this floor.
-- **Bridge** — the bearing joins MemPalace (what we *said* at a bearing) to Lararium canon (what we *hold* there) over one shared `lar:` namespace.
+- **Never normalize at the floor** — MemPalace keeps testimony as spoken; the meme-`normalize` rule does not reach this floor.
+- **Two organs, one namespace — NOT a pipeline** — MemPalace ("what we *said*", episodic/verbatim/local) and the Lararium ("what we *mean / hold*", semantic/standing/federatable) serve genuinely different purposes; they share the `lar:` namespace but hold two distinct *registers* of it (operator ruling, 2026-06-21). GroundedVow is a *grounding relation*, not a promotion: the Lararium may *consult* the bearing index to ground a claim ("what did we actually say at this bearing?"), never feed from it into canon.
 <<~/moolelo >>
-<<~ moolelo held:"WHERE the bearing lives = packages/ as isomorphic causal-island web3 code, NOT the mempalace submodule (operator law: no code enters submodules; mempalace stays a READ-ONLY sidecar)" >>
-The 4-lens swarm converged on a `bearings` table inside mempalace's `knowledge_graph.sqlite3` — but it answered a MIS-FRAMED fork: the packages-vs-submodule boundary was never put to it, so its in-mempalace verdict is VOID on locus (it would edit the submodule). The harvest is Lararium-side bridge machinery — it READS verbatim drawers across the read-only sidecar boundary and writes bearings to the Lararium's own web3 substrate, never into mempalace.
-What TRANSPOSES, substrate-independent, to the web3 side:
-- **Raw, never normalized** — aim/yield URIs stored verbatim, byte-stable; drift survives.
-- **Append-only, keyed per turn** — never deduped on `(aim, yield)`; the aim→yield gradient across turns survives.
-- **Confidence grades DOWN for drift** — an ungraded bearing never reads as trusted; the drift-trend is the keeper's gauge.
+<<~ moolelo held:"WHERE the bearing index lives = a LOCAL-ONLY store in packages/@lararium/mempalace (the integration layer), NOT the submodule and NOT the Lararium domain substrate — mempalace-realm, never federated (operator: option A, 2026-06-21)" >>
+The 4-lens swarm's in-mempalace `bearings`-table verdict was VOID on locus (it would edit the read-only submodule). RE-SEATED + BUILT: the integration layer reads verbatim drawers across the read-only sidecar boundary and appends to a plain NDJSON file under `<LAR_ROOT>/.lararium/mempalace/` — it never enters a CRDT Repo, so it is *structurally unfederatable* (the operator-key guarantee). It is a witness/grounding organ — NOT Lararium working state, NOT a canon feedstock.
+- **Raw, never normalized** — aim/yield URIs verbatim, byte-stable; drift survives.
+- **Append-only, keyed per turn** — never deduped on `(aim, yield)`; the gradient survives.
+- **Confidence grades DOWN for drift** — the drift-trend is the keeper's gauge.
 - **Gradient = a temporal span** (turn-open → turn-close).
-- **Canon only at promotion** — drift lives in the working event-log; only blessed bearings graduate working→canon.
+- **Grounding, not promotion** — the index stays mempalace-realm. The Lararium's own working→canon shore (the `MOVE` ceremony, `loci#…`, operator-gated) is INTERNAL to the domain graph and acts on *authored* memes; it never runs *from* this index. A bearing may serve as *grounds the operator consults* while authoring canon — never as material that flows across.
 <<~/moolelo >>
-<<~ hoike #web3-substrate held:"the packages/ home (which bag/CRDT, the TS isomorphic shape, how the read-only sidecar feeds the harvest) stays PROPOSED until a packages/ scout grounds it" >>
-re-entry: the packages/ scout, then a re-ruling on the web3 side
-<<~/hoike >>
+Built + witnessed (2026-06-21): `@lararium/mesh` `bearing-harvest` parser (the grammar) + `@lararium/mempalace` (local-only NDJSON store · harvest glue · read-leg stdio client) — 7/7 + 14/14 vitest, plus a live protocol handshake against the real sidecar.
 <<~/talk-story >>
 
 Residue: the namespace table above still reads `lar:///submodules/mempalace/` — a one-term root by the arity law. Re-founding it on a three-term bearing root awaits a separate pass; flagged here, not yet enacted.
