@@ -38,13 +38,13 @@ import { CompositeStore } from "../src/composite-store.js";
 // ---------------------------------------------------------------------------
 
 describe("ARCHIVAL_VERBS membership", () => {
-  test("exactly eight canonical archival verbs", () => {
+  test("exactly nine canonical archival verbs", () => {
     expect(ARCHIVAL_VERBS).toEqual([
       "accession", "deaccession", "transfer",
       "withdrawal", "loan", "holdings",
-      "reappraisal", "disposition",
+      "reappraisal", "disposition", "creation",
     ]);
-    expect(ARCHIVAL_VERBS).toHaveLength(8);
+    expect(ARCHIVAL_VERBS).toHaveLength(9);
   });
 
   test("isArchivalVerb accepts all canonical verbs", () => {

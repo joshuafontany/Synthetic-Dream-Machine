@@ -120,6 +120,17 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       return 2;
     }
     actionArgs["bag"] = bag;
+  } else if (verb === "CREATE") {
+    const bag = args.options["bag"];
+    if (!bag) {
+      console.error(`lares act CREATE: --bag required`);
+      return 2;
+    }
+    // TODO(name): the plane-signal flag is co-designed with the operator;
+    // `--plane <catalog|oracle>` is a provisional placeholder (default catalog).
+    const plane = args.options["plane"] === "oracle" ? "oracle" : "catalog";
+    actionArgs["bag"]   = bag;
+    actionArgs["plane"] = plane;
   } else {
     // verb === "LOAD"
     const sourceUri = args.options["source-uri"];

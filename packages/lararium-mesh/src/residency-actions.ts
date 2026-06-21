@@ -41,7 +41,7 @@ import type { Verb } from "./verb-tiddler.js";
 // ── ACTION verb set ────────────────────────────────────────────────────────
 
 /** Canonical ACTION verb tuple. ALL-CAPS by convention. */
-export const ACTION_VERBS = ["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST"] as const;
+export const ACTION_VERBS = ["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST", "CREATE"] as const;
 export type ActionVerb = typeof ACTION_VERBS[number];
 
 const ACTION_VERB_SET: ReadonlySet<string> = new Set(ACTION_VERBS);
@@ -112,6 +112,16 @@ export interface ClearAction extends ResidencyActionBase {
 export interface DropAction extends ResidencyActionBase {
   readonly verb:        "DROP";
   readonly bag:         string;
+}
+
+/** CREATE — mint a NEW empty bag at `bag` (fresh AutomergeUrl), register it in
+ *  the plane's registry. `plane` designates the authority root: `catalog`
+ *  (user/household plane, default) vs `oracle` (system/temple plane). The cap-gate
+ *  reads the plane (read@catalog / admin@oracle). */
+export interface CreateAction extends ResidencyActionBase {
+  readonly verb:        "CREATE";
+  readonly bag:         string;
+  readonly plane:       "catalog" | "oracle";
 }
 
 /** One carrier of external content riding a LOAD verb. The operator-side
@@ -188,7 +198,8 @@ export type ResidencyAction =
   | ClearAction
   | DropAction
   | LoadAction
-  | IngestAction;
+  | IngestAction
+  | CreateAction;
 
 // ── changeId factory ───────────────────────────────────────────────────────
 
@@ -227,6 +238,7 @@ interface ResidencyArgs {
   readonly "source-uri"?: string;
   readonly "change-id"?:  string;
   readonly carriers?:    readonly LoadCarrier[];
+  readonly plane?:       "catalog" | "oracle";
 }
 
 /** Encode a ResidencyAction's verb-specific fields into the JSON args bag. */
@@ -244,6 +256,8 @@ export function encodeResidencyArgs(action: ResidencyAction): ResidencyArgs {
     case "CLEAR":
     case "DROP":
       return { bag: action.bag };
+    case "CREATE":
+      return { bag: action.bag, plane: action.plane };
     case "LOAD":
       return {
         "source-uri": action.sourceUri,
@@ -342,6 +356,16 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       ...(deletions.length > 0 ? { deletions } : {}),
       ...(massDeleteFraction !== undefined ? { massDeleteFraction } : {}),
     };
+  }
+
+  if (inv.action === "CREATE") {
+    const bag = str("bag");
+    if (!bag) return null;
+    // PLANE DECLARATION (by designation): default catalog; explicit "oracle" signal
+    // designates the system/temple plane. TODO(name): plane-signal name co-designed
+    // with the operator (the `--plane` flag below is a provisional placeholder).
+    const plane = str("plane") === "oracle" ? "oracle" : "catalog";
+    return { ...base, verb: "CREATE", bag, plane };
   }
 
   // verb === "LOAD" — only ActionVerb left after the guards above.

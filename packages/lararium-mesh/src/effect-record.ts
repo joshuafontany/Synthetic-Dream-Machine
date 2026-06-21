@@ -52,6 +52,7 @@ export const ARCHIVAL_VERBS = [
   "holdings",
   "reappraisal",
   "disposition",
+  "creation",
 ] as const;
 export type ArchivalVerb = typeof ARCHIVAL_VERBS[number];
 
@@ -330,6 +331,14 @@ export function mapActionToEffects(action: ResidencyAction, opts?: MapOptions): 
         changeId:     action.changeId,
         sourceUri:    action.sourceUri,
         reason:       "disk ingest (gated)",
+      }];
+    case "CREATE":
+      return [{
+        ...base,
+        eventId:      newId(),
+        archivalVerb: "creation",
+        bag:          action.bag,
+        reason:       `bag minted in @${action.plane} plane`,
       }];
   }
 }

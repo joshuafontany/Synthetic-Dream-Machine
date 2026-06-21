@@ -43,12 +43,12 @@ function makeInvocation(
 // ---------------------------------------------------------------------------
 
 describe("ACTION_VERBS membership", () => {
-  test("exactly seven canonical verbs", () => {
-    expect(ACTION_VERBS).toEqual(["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST"]);
-    expect(ACTION_VERBS).toHaveLength(7);
+  test("exactly eight canonical verbs", () => {
+    expect(ACTION_VERBS).toEqual(["ADD", "COPY", "MOVE", "CLEAR", "DROP", "LOAD", "INGEST", "CREATE"]);
+    expect(ACTION_VERBS).toHaveLength(8);
   });
 
-  test("isActionVerb accepts all seven canonical verbs", () => {
+  test("isActionVerb accepts all eight canonical verbs", () => {
     for (const v of ACTION_VERBS) expect(isActionVerb(v)).toBe(true);
   });
 
@@ -177,6 +177,25 @@ describe("parseResidencyAction — valid cases", () => {
     expect(load.sourceUri).toBe("https://example.org/seed.json");
     expect(load.toBag).toBe("lar:///ha.ka.ba/@elyncia");
     expect(load.changeId).toBe("c-load-1");
+  });
+
+  test("parses CREATE with bag, defaulting plane to catalog (household)", () => {
+    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/@mybag" });
+    const action = parseResidencyAction(inv);
+    expect(action?.verb).toBe("CREATE");
+    expect((action as { bag: string }).bag).toBe("lar:///ha.ka.ba/@mybag");
+    expect((action as { plane: string }).plane).toBe("catalog");
+  });
+
+  test("parses CREATE with an explicit oracle plane (temple)", () => {
+    const inv = makeInvocation("CREATE", { bag: "lar:///ha.ka.ba/@sysbag", plane: "oracle" });
+    const action = parseResidencyAction(inv);
+    expect(action?.verb).toBe("CREATE");
+    expect((action as { plane: string }).plane).toBe("oracle");
+  });
+
+  test("CREATE missing bag returns null", () => {
+    expect(parseResidencyAction(makeInvocation("CREATE", {}))).toBeNull();
   });
 });
 

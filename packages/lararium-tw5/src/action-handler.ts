@@ -39,11 +39,12 @@ import type {
   ChangeOrigin,
   Verb,
   Repo,
-  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction, IngestAction,
+  ResidencyAction, AddAction, CopyAction, MoveAction, ClearAction, DropAction, LoadAction, IngestAction, CreateAction,
 } from "@lararium/mesh";
 import {
   ACTION_VERBS, type ActionVerb,
   parseResidencyAction, withEffectRecord, sha256HexSync,
+  emptyLarDoc, mutableLarRecord, CATALOG_DOC_URI, ORACLE_DOC_URI,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
@@ -164,6 +165,21 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     const action = residencyFromContext(verb, args, ctx.invocation);
     if (!action) throw new Error(`action-handler/${verb}: malformed args — required fields missing or wrong type`);
 
+    // CREATE — mint a NEW bag; the destination doesn't exist yet, so it bypasses
+    // the generic destBag cap + writable-store check. The cap is PLANE-AWARE
+    // (operator ruling): @catalog (household) -> read; @oracle (temple) -> admin.
+    // This is the existing-primitive expression of the user<admin ladder; tighten
+    // to verifySentinelMembership / Keyhive-native membership when that surface lands.
+    if (action.verb === "CREATE") {
+      const grade: "read" | "admin" = action.plane === "oracle" ? "admin" : "read";
+      const root  = action.plane === "oracle" ? ORACLE_DOC_URI : CATALOG_DOC_URI;
+      const proof = await ctx.cap(grade, root);
+      if (!proof.ok) {
+        throw new Error(`cap-denied: ${grade} on ${root} required to CREATE in @${action.plane} plane (${proof.reason ?? "no reason"})`);
+      }
+      return { verb, ...(await executeCREATE(action, makeBagAccess(opts), opts)) };
+    }
+
     // Cap-verify destination bag (every verb)
     const destBag = destinationBag(action);
     const destProof = await ctx.cap("admin", destBag);
@@ -227,6 +243,7 @@ function destinationBag(action: ResidencyAction): string {
       return action.toBag;
     case "CLEAR":
     case "DROP":
+    case "CREATE":
       return action.bag;
   }
 }
@@ -242,7 +259,44 @@ async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: T
     case "DROP":  return executeDrop(action, access);
     case "LOAD":  return executeLoad(action, access, tw5);
     case "INGEST": return executeIngest(action, access);
+    case "CREATE": throw new Error("action-handler: CREATE is handled in the reactor (plane-aware gate + mint), not executeAction");
   }
+}
+
+/**
+ * CREATE — mint a NEW empty bag at `action.bag` and register it in the plane's
+ * registry (@catalog for the household plane, @oracle for the system plane).
+ * Conflict-checks first (never double-mints a registered bag). Writes a `creation`
+ * effect-record into the new bag. Requires the admin `reach` (repo + plane registry).
+ */
+async function executeCREATE(action: CreateAction, access: BagAccess, opts: ActionHandlerOptions): Promise<Record<string, unknown>> {
+  const reach = opts.reach;
+  if (!reach) {
+    throw new Error("action-handler/CREATE: no reach — minting + registering a bag requires the admin reach (repo + plane registry)");
+  }
+  const registryUrl = action.plane === "oracle" ? reach.oracleUrl : reach.catalogUrl;
+  if (!registryUrl) {
+    throw new Error(`action-handler/CREATE: the reach carries no ${action.plane} registry url`);
+  }
+  const registry = makeCatalogAccessor(reach.repo, registryUrl);
+  // Conflict-check FIRST — an already-registered bag is a conflict, never a double-mint.
+  const existing = await registry.urlOf(action.bag).catch(() => null);
+  if (existing) {
+    throw new Error(`conflict: bag "${action.bag}" already registered in @${action.plane} (CREATE is idempotent — no double-mint)`);
+  }
+  // Mint + register inside withEffectRecord so the `creation` ledger record lands
+  // after the new bag is reachable (the effect-record rides the new bag's own doc).
+  return withEffectRecord(action, (bag) => access.write(bag), async () => {
+    const handle = reach.repo.create(emptyLarDoc());
+    await handle.whenReady();
+    const docUrl = String(handle.url);
+    const regHandle = await registry.handle();
+    regHandle.change((doc) => {
+      const tiddlers = doc.tiddlers as Record<string, LarTiddlerRecord>;
+      tiddlers[action.bag] = mutableLarRecord(action.bag, { text: docUrl, kind: "oracle" }, "lares-verb:CREATE");
+    });
+    return { bag: action.bag, plane: action.plane, docUrl, count: 1 };
+  });
 }
 
 /**
