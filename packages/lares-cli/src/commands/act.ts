@@ -39,7 +39,7 @@ import { loadOperatorVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
-import { emit, wantsJson } from "../render.js";
+import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
@@ -184,8 +184,8 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     did = await operatorDid();
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: msg, human: () => console.error(`lares act: ${msg}`) });
-    return 3;
+    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares act: ${msg}`) });
+    return exitFor("not-found");
   }
 
   let vessel;
@@ -194,13 +194,13 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
-      ok: false, error: msg,
+      ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." },
       human: () => {
         console.error(`lares act: ${msg}`);
         console.error("  Start the daemon with `lares serve` and try again.");
       },
     });
-    return 3;
+    return exitFor("daemon-unreachable");
   }
 
   // ── Confirm + submit ──────────────────────────────────────────────────
@@ -211,10 +211,10 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     if (!args.flags["yes"]) {
       if (wantsJson(args)) {
         emit(args, {
-          ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation",
+          ok: false, error: { code: "usage", message: "confirmation required", hint: "pass --yes for non-interactive (agent) invocation" },
           human: () => { /* unreachable on the JSON path */ },
         });
-        return 1;
+        return exitFor("usage");
       }
       console.log("");
       console.log(`  ${verb}`);
@@ -252,11 +252,15 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     const result = await submitVerb(vessel, submitName, submitArgs, did, { requestId, timeoutMs });
     if (result.status === "error") {
       const msg = result.errorMessage ?? "unknown";
+      // The island names a cap/ward denial as `cap-denied: …`; give it its own
+      // class (exit 5) so an agent can tell "I lack authority" from a plain
+      // verb failure. Everything else stays a verb-error (exit 4).
+      const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
       emit(args, {
-        ok: false, requestId: result.requestId, error: msg,
+        ok: false, requestId: result.requestId, error: { code, message: msg },
         human: () => console.error(`${verb} failed: ${msg}`),
       });
-      return 4;
+      return exitFor(code);
     }
 
     const summary = summaryOutput(result) ?? {};
@@ -266,7 +270,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       requestId: result.requestId,
       data: { verb, ...summary, audit: auditUri },
       human: () => {
-        console.log(`${verb} done`);
+        console.log(`${verb} ✓ applied locally (req ${result.requestId.slice(0, 8)})`);
         for (const [k, v] of Object.entries(summary)) {
           console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
         }

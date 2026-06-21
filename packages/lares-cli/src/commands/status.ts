@@ -98,7 +98,7 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
     ok: true,
     data,
     human: () => {
-      console.log("lares status");
+      console.log("lares status (local node)");
       console.log(`  bootstrap:   ${hasBoot ? "present" : "absent (run `lares init`)"}`);
       console.log(`  storage:     ${storageStr}`);
       console.log(`  port ${port}:  ${portInUse ? "in use (node likely running)" : "free"}`);

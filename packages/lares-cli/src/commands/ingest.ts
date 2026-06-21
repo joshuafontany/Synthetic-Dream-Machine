@@ -18,7 +18,7 @@
 import { createInterface } from "readline/promises";
 import { stdin, stdout } from "process";
 import type { ParsedArgs } from "../parse-args.js";
-import { emit, wantsJson } from "../render.js";
+import { emit, wantsJson, exitFor } from "../render.js";
 import { connectAdminVessel, summaryOutput } from "../admin-connector.js";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngestOn } from "../ingest-core.js";
@@ -42,8 +42,8 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   // scan — observations only, never a work queue
   const scan = scanSource(root, source, toBag, tree);
   if (scan === null) {
-    emit(args, { ok: false, error: `source "${source}" does not resolve`, human: () => console.error(`lares ingest: source "${source}" does not resolve`) });
-    return 2;
+    emit(args, { ok: false, error: { code: "usage", message: `source "${source}" does not resolve` }, human: () => console.error(`lares ingest: source "${source}" does not resolve`) });
+    return exitFor("usage");
   }
   const { rows, skipped } = scan;
   const candidates = candidatesOf(rows);
@@ -79,8 +79,8 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   // ── confirm (HUMAN path; agents carry --yes) ───────────────────────────
   if (!args.flags["yes"]) {
     if (wantsJson(args)) {
-      emit(args, { ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation", human: () => { /* unreachable */ } });
-      return 1;
+      emit(args, { ok: false, error: { code: "usage", message: "confirmation required", hint: "pass --yes for non-interactive (agent) invocation" }, human: () => { /* unreachable */ } });
+      return exitFor("usage");
     }
     for (const r of candidates) console.log(`  ${r.status.toUpperCase().padEnd(8)} ${r.uri}`);
     const rl = createInterface({ input: stdin, output: stdout });
@@ -93,8 +93,8 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   let did: string;
   try { did = await operatorDid(); } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: msg, human: () => console.error(`lares ingest: ${msg}`) });
-    return 3;
+    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares ingest: ${msg}`) });
+    return exitFor("not-found");
   }
   let vessel;
   try {
@@ -102,8 +102,8 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     vessel = await connectAdminVessel(portOpt ? { port: Number(portOpt) } : {});
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: msg, human: () => { console.error(`lares ingest: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
-    return 3;
+    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." }, human: () => { console.error(`lares ingest: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
+    return exitFor("daemon-unreachable");
   }
 
   try {
@@ -114,8 +114,9 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     });
     if (result.status === "error") {
       const msg = result.errorMessage ?? "unknown";
-      emit(args, { ok: false, requestId: result.requestId, error: msg, human: () => console.error(`INGEST failed: ${msg}`) });
-      return 4;
+      const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
+      emit(args, { ok: false, requestId: result.requestId, error: { code, message: msg }, human: () => console.error(`INGEST failed: ${msg}`) });
+      return exitFor(code);
     }
     const summary = summaryOutput(result) ?? {};
     const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
@@ -124,6 +125,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
       requestId: result.requestId,
       data: { verb: "INGEST", scanned: rows.length, submitted: candidates.length, ...summary, audit: auditUri },
       human: () => {
+        console.log(`INGEST ✓ applied locally — ${candidates.length} carrier(s) submitted (req ${result.requestId.slice(0, 8)})`);
         const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
         for (const c of carriers) {
           const extra = c["reason"] ?? (Array.isArray(c["tombstoned"]) && (c["tombstoned"] as unknown[]).length ? `tombstoned ${(c["tombstoned"] as unknown[]).length}` : "");

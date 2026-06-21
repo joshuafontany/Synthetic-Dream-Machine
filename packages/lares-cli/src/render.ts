@@ -31,6 +31,40 @@ export function wantsJson(args: ParsedArgs): boolean {
   return !stdout.isTTY;
 }
 
+/**
+ * A failure an agent can branch on: a STABLE class `code`, a human `message`,
+ * and an optional actionable `hint`. The `code` pairs with the process exit
+ * (see `exitFor`), so the machine reads the same verdict two ways. Errors travel
+ * as one parseable object on stdout, never a stack trace.
+ */
+export interface LaresError {
+  /** Stable class: usage · not-found · daemon-unreachable · conflict · verb-error · cap-denied · error. */
+  readonly code:    string;
+  readonly message: string;
+  /** One actionable sentence, when the fix is obvious; omitted otherwise (never fabricated). */
+  readonly hint?:   string;
+}
+
+/**
+ * Error class → process exit code, the single source of truth the commands
+ * return through `exitFor` so the JSON `error.code` and the exit never drift.
+ */
+export const EXIT_FOR: Readonly<Record<string, number>> = {
+  ok:                  0,
+  usage:               2,
+  "not-found":         3,
+  "daemon-unreachable": 3,
+  conflict:            4,
+  "verb-error":        4,
+  "cap-denied":        5,
+  error:               1,
+};
+
+/** The process exit code for an error class (unknown → 1, generic failure). */
+export function exitFor(code: string): number {
+  return EXIT_FOR[code] ?? 1;
+}
+
 export interface Emission {
   /** The `ok | error` union — the machine-facing verdict. */
   readonly ok:         boolean;
@@ -38,8 +72,8 @@ export interface Emission {
   readonly requestId?: string;
   /** Structured result payload for an agent to reason over. */
   readonly data?:      Record<string, unknown>;
-  /** Error message when `ok` reads false (emitted as data, not a trace). */
-  readonly error?:     string;
+  /** Failure when `ok` reads false. A bare string upgrades to `{code:"error",…}`. */
+  readonly error?:     string | LaresError;
   /** Human projection — invoked ONLY on the prose path. */
   readonly human:      () => void;
 }
@@ -53,6 +87,7 @@ export function emit(args: ParsedArgs, e: Emission): void {
   const payload: Record<string, unknown> = { ok: e.ok };
   if (e.requestId !== undefined) payload["requestId"] = e.requestId;
   if (e.data      !== undefined) payload["data"]      = e.data;
-  if (e.error     !== undefined) payload["error"]     = e.error;
+  if (e.error     !== undefined) payload["error"]     =
+    typeof e.error === "string" ? { code: "error", message: e.error } : e.error;
   stdout.write(JSON.stringify(payload) + "\n");
 }
