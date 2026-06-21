@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/sigil-grammar-research.md"
-invariant = false
 mana      = 17
 manao     = 16
 register  = "Synthesis-Canon"

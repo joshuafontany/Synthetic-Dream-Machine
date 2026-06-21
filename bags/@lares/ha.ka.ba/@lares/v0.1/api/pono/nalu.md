@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/nalu.md"
-invariant   = true
 mana        = 18
 manao       = 17
 namespace   = "&#x2299;"

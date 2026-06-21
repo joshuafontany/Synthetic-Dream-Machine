@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
-tags      = ["api/pono/invariant"]
+tags      = ["api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/heleuma"
 ```

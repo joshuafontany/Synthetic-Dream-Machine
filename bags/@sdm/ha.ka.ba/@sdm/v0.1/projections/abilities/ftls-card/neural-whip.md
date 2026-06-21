@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/projections/abilities/ftls-card/neural-whip.md"
-invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15

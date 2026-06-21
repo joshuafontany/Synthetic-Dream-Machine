@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = false
 file-path   = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/adversarial-testing.md"
-invariant   = false
 mana        = 16
 manao       = 16
 manaoio     = 16

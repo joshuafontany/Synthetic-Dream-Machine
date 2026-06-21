@@ -12,7 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "parse→widget→fakeDOM chain spec per camera — pairs with CameraRegistration for the full camera contract"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/camera-mount"
 ```

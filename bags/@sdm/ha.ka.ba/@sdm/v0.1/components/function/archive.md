@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "archive"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/function/archive.md"
-invariant = false
 mana      = 13
 manao     = 16
 manaoio   = 12

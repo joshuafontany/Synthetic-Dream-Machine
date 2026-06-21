@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/v0.1/mesh/reaction-engine.md"
-invariant   = true
 mana        = 17
 manao       = 17
 manaoio     = 16

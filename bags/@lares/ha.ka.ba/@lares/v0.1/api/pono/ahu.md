@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "child-slot sigil — addressable worksite scope boundary; named ahu slots form the meme's tiddler structure"
-tags      = ["api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu"]
+tags      = ["lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-ahu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/ahu"
 ```

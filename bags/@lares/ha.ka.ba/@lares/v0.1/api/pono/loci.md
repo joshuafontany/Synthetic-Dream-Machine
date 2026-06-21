@@ -103,7 +103,7 @@ Given: lar-uri (string)
 ```
 
 Child items resolve under the sibling directory named for the parent's terminal path segment.
-`lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL` → `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL.md`
+`lar:///ha.ka.ba/@lares/v0.1/api/pono/cache-stable/SKILL` → `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/cache-stable/SKILL.md`
 
 <<~/ahu >>
 

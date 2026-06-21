@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "ephemeral variable binding — deposit without graph identity"
-tags      = ["api/pono/meme", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho"]
+tags      = ["api/pono/meme", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-waiho"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/waiho"
 ```

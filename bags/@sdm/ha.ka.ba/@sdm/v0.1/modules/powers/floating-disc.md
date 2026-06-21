@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "Floating Disc"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/modules/powers/floating-disc.md"
-invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 16

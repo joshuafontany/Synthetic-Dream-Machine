@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/witness/powers/osr-spells/shield-ward.md"
-invariant = false
 mana      = 12
 manao     = 16
 manaoio   = 17

@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/guest-grammar"
 ```

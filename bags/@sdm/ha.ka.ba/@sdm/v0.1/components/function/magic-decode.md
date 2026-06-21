@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "magic-decode"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/function/magic-decode.md"
-invariant = false
 mana      = 13
 manao     = 16
 manaoio   = 13

@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "burden"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/mount-points/burden.md"
-invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 16

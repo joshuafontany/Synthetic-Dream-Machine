@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/failure-states/live-session-overwrite.md"
-invariant = true
 mana      = 16
 manao     = 17
 manaoio   = 14
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant bug law for preventing live session claims from masquerading as canon"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite"
 ```
@@ -79,7 +78,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/canon-boundary >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 
 <<~/ahu >>
 

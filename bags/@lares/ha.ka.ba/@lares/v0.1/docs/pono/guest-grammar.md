@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/guest-grammar.md"
-invariant = false
 mana      = 15
 manao     = 16
 manaoio   = 14

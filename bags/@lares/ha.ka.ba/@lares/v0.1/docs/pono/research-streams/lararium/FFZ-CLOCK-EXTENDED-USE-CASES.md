@@ -203,7 +203,7 @@ Canonical reference: `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`
 
 ## Section 7: PENTA_2_CLOCK_ALIGNMENT Revision
 
-The existing `PENTA_2_CLOCK_ALIGNMENT` invariant in `system-invariants.md` describes L1 as "orient-act / action/gesture." The sharper statement:
+The existing `PENTA_2_CLOCK_ALIGNMENT` pattern-integrity in `system-pattern-integrities.md` describes L1 as "orient-act / action/gesture." The sharper statement:
 
 > **L1 Beat = operator perceptual grain**
 

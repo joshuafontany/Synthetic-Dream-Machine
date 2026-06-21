@@ -15,7 +15,6 @@ description: File or reopen a hoike (\testimony) — a kept record of a conteste
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/hoike/SKILL.md"
-invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16

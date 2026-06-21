@@ -3,7 +3,6 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/docs/exchange-protocol >>
 ```toml iam
 file-path = "bags/@lararium/v0.1/docs/exchange-protocol.md"
-invariant = false
 register  = "Synthesis"
 retain    = false
 role      = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"

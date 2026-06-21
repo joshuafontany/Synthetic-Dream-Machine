@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "dangerous"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/hook/dangerous.md"
-invariant = false
 mana      = 14
 manao     = 16
 manaoio   = 13

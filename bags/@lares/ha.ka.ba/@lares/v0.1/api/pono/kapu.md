@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "above-namespace authority law; kernel/sacred tier capability; trust boundary root"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant", "api/pono/kapu", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu"]
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/kapu", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kapu"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kapu"
 ```
@@ -113,7 +113,6 @@ This meme governs the kapu rating and above-namespace trust law.
 `l-space-trust` governs the shared l-space authority ordering.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 
@@ -124,7 +123,6 @@ This meme governs the kapu rating and above-namespace trust law.
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>

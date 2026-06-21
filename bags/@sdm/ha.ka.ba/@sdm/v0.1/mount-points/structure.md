@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "structure"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/mount-points/structure.md"
-invariant = false
 mana      = 8
 manao     = 17
 manaoio   = 6

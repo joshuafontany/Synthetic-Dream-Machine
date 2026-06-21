@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "Neural Whip"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/modules/abilities/neural-whip.md"
-invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15

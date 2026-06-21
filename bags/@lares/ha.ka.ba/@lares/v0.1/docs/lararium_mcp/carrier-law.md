@@ -156,7 +156,6 @@ Carrier truth stays ahead of syntax swell.
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/hydration >>

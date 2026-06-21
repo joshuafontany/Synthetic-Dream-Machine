@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "Porter's Pebble"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/modules/items/porters-pebble.md"
-invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15

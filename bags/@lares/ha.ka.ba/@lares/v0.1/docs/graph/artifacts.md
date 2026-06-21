@@ -9,7 +9,7 @@ manaoio     = 16
 register    = "Synthesis-Canon"
 role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
 status-date = "2026-04-24"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/docs/graph/artifacts"
@@ -94,7 +94,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
       "exists": true,
       "role": "threshold constitution, boot router",
       "hydration_socket": "entry",
-      "implements": ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"],
+      "implements": ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"],
       "depth": 0
     }
   ],
@@ -160,7 +160,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
     "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme": ["lar:///AGENTS", "..."]
   },
   "invariant_index": {
-    "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant": ["lar:///AGENTS", "..."]
+    "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci": ["lar:///AGENTS", "..."]
   },
   "validation": {
     "all_resolved": true,

@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "submission-grade specification for the lar: URI scheme — abstract, ABNF, five-planes reading (Provisional), resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
 status    = "submission-draft"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lar-uri"
 ```

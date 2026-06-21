@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/v0.1/mesh/kumu-device.md"
-invariant   = true
 mana        = 17
 manao       = 17
 manaoio     = 16
@@ -14,7 +13,7 @@ retain      = true
 role        = "type-level device contract: KumuDeviceSpec, KumuListenable, KumuSubscribable, KumuInstanceRef — the @editable boundary for kumu devices; spec derives from pranala edges, not TS class hierarchy"
 source-file = "packages/lararium-mesh/src/kumu-device.ts"
 status-date = "2026-05-28"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+tags      = ["api/pono/meme"]
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/kumu-device"

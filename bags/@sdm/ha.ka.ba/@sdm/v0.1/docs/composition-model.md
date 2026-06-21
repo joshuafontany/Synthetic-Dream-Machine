@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/docs/composition-model.md"
-invariant = false
 mana      = 15
 manao     = 18
 manaoio   = 14

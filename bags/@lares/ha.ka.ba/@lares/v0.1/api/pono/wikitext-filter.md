@@ -6,7 +6,6 @@ cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/wikitext-filter.md"
 grammar-key = "wikitext-filter"
 guest-mime  = "text/x-wikitext-filter"
-invariant   = false
 mana        = 17
 manao       = 17
 namespace   = "&#x2299;"
@@ -72,7 +71,7 @@ Queries the carrier's worn components: relative names qualify against each carri
 
 ```text
 [stack[]]                                 a carrier's qualified worn components
-[stack:has[api/pono/invariant]]           carriers wearing the invariant component
+[stack:has[api/pono/loci]]           carriers wearing the invariant component
 [stack:has[lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module]]   kernel-injectable modules
 ```
 

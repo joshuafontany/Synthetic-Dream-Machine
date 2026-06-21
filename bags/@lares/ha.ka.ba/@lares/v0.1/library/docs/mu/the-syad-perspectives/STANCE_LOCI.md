@@ -6,7 +6,6 @@ cacheable         = false
 dependencies      = ["confidence"]
 file-path         = "bags/@lares/ha.ka.ba/@lares/v0.1/library/docs/mu/the-syad-perspectives/STANCE_LOCI.md"
 grammar           = true
-invariant         = true
 phase-map-act     = "#procedures"
 phase-map-assess  = "#reading-test"
 phase-map-decide  = "#conventions"

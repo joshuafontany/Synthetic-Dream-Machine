@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "ecm-scan"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/function/ecm-scan.md"
-invariant = false
 mana      = 13
 manao     = 16
 manaoio   = 13

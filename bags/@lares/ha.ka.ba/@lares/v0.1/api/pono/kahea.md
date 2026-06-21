@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "transclusion-family edge sugar — live transclusion; subscription-fresh embed; dual form: URI edge and name-call invocation"
-tags      = ["api/pono/pranala", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea"]
+tags      = ["api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kahea"
 ```

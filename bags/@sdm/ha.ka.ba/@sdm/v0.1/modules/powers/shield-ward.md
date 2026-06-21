@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "Shield Ward"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/modules/powers/shield-ward.md"
-invariant = false
 mana      = 14
 manao     = 17
 manaoio   = 15

@@ -4,7 +4,6 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/v0.1/api/pono/reaction-graph.md"
-invariant     = true
 mana          = 17
 manao         = 17
 manaoio       = 16
@@ -13,7 +12,7 @@ register      = "Synthesis-Canon"
 retain        = true
 role          = "invariant capability: in-memory reaction graph — subscribe, fire, load, UEFN dispatch semantics"
 source-symbol = "ReactionGraph RENDER_MODES REACTION_ROLES"
-tags      = ["api/pono/invariant", "lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"]
+tags      = ["lar:///ha.ka.ba/@lararium/v0.1/mesh/reaction-engine"]
 l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/reaction-graph"

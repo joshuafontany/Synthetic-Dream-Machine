@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/epic/powers-composition-rewrite.md"
-invariant = false
 mana      = 19
 manao     = 19
 manaoio   = 18

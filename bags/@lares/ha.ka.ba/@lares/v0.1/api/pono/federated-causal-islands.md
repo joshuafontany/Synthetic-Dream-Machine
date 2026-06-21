@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/federated-causal-islands.md"
-invariant = true
 mana      = 17
 manao     = 16
 manaoio   = 16
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
-tags      = ["api/pono/invariant", "api/pono/pranala"]
+tags      = ["api/pono/pranala"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands"
@@ -32,9 +31,9 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 <<~ ahu #ooda-ha >>
 
 ✶ locate the causal boundary — where can causality not be guaranteed simultaneously?
-⏿ orient the tier: Tier 0 kumu/active memes, Tier 1 wiki room memes, Tier 2 Automerge Realms, Tier 3 Lares nodes, Tier 4 Commons/Universe horizon
+⏿ orient the tier: Tier 0 kumu/active memes, Tier 1 wiki wiki memes, Tier 2 Automerge Realms, Tier 3 Lares nodes, Tier 4 Commons/Universe horizon
 ◇ MUST promote to island: federation edges, pranala connections, canon ceremonies, epoch changes, membership changes
-▶ authority-first sync: authenticate → authority graph → visible rooms → manifest → capability ops → CRDT → deltas
+▶ authority-first sync: authenticate → authority graph → visible wikis → manifest → capability ops → CRDT → deltas
 ↺ edge island carries id, capability, offset, epoch, visibility-gate, receipt; offset belongs to the edge not the remote; confirm sync order maintained; content did not precede authority; relay holds pull not read
 
 <<~/ahu >>
@@ -66,7 +65,7 @@ It does not operate as transport. It does not operate as socket. It names a capa
 boundary between two Lares nodes carrying its own identity, durable offset, stream
 log, reconciliation state, visibility predicate, revocation epoch, and receipt history.
 
-A room WebSocket connection does NOT count as an edge island. A room connection keeps session scope
+A wiki WebSocket connection does NOT count as an edge island. A wiki connection keeps session scope
 and ephemerality. An edge island holds persistence, naming, and authority.
 
 An Automerge Realm (a distinct Automerge doc) stays ALWAYS non-simultaneously apprehended,
@@ -85,7 +84,7 @@ id                = "edge:${sourceNode}:${targetNode}:${epoch}"
 capability        = "Orichalcum proof authorizing this connection"
 offset            = "monotonic frame count — belongs to the edge island, not the remote node"
 epoch             = "revocation generation; rolling epoch terminates prior live-tail access"
-visibility-gate   = "canFederate(meme, room, edge, subject) — see gate law below"
+visibility-gate   = "canFederate(meme, wiki, edge, subject) — see gate law below"
 receipt           = "issued after each meaningful transition; hash-stable for prompt cache"
 ```
 
@@ -95,8 +94,8 @@ A meme passes the federation gate when ALL of the following hold:
 
 ```
 rating(meme)    >= Meme           # structural ladder: Noise/Data/Meme/Ano/Kapu
-manaoio(meme)   >= room.minManaoio
-recipe(room).matches(meme)
+manaoio(meme)   >= wiki.minManaoio
+recipe(wiki).matches(meme)
 hasAbility(subject, "sync", edge.id)
 !edge.revoked
 !violatesKapu(meme, subject)
@@ -106,7 +105,7 @@ hasAbility(subject, "sync", edge.id)
 Noise and Data stay node-local only. They never federate regardless of any other condition.
 
 Stage band (GR/OS/US/CS/DS) provides a UX rendering annotation — it governs visual presentation
-in the masks/voices layer, not federation eligibility. Room recipes MAY filter by stage
+in the masks/voices layer, not federation eligibility. Wiki recipes MAY filter by stage
 as an operator-configured predicate, but stage does not act as a hardcoded gate condition here.
 
 The offset belongs to the edge island. An edge island that reconnects after downtime
@@ -124,9 +123,9 @@ Authority MUST precede content. This invariant holds without exception.
 1. authenticate peer / node / device
 2. sync Orichalcum authority graph
    (membership, capabilities, delegations, revocations)
-3. derive visible room recipe + visible causal islands
+3. derive visible wiki recipe + visible causal islands
 4. sync collection manifest
-   (rooms, memes, edge islands, receipts)
+   (wikis, memes, edge islands, receipts)
 5. for each visible island:
    a. capability / epoch ops
    b. CRDT heads
@@ -241,10 +240,10 @@ Tier 0 — active programming memes (kumu instances, UEFN device analogues, kahe
   Instance identity provisioned on first papalohe edge declaration, not on kahea invocation.
   Promotion to island stays optional; local causality errors stay correctable inside the node.
 
-Tier 1 — memes inside rooms (within your local Automerge doc window)
+Tier 1 — memes inside wikis (within your local Automerge doc window)
   Simultaneously apprehended within your local doc snapshot.
-  A room applies a filter recipe over the meme graph — not a data partition.
-  Rating (≥Meme) gates which room recipes include a meme. Stage band provides rendering annotation only.
+  A wiki applies a filter recipe over the meme graph — not a data partition.
+  Rating (≥Meme) gates which wiki recipes include a meme. Stage band provides rendering annotation only.
   Peer state of the SAME doc does NOT qualify as simultaneously apprehended — you see their last sync.
 
 Tier 2 — Automerge Realms (distinct Automerge docs)
@@ -278,9 +277,9 @@ Tier 4 — Commons / Universe horizon Canon 18/20 (after law-of-5s)
 
 ### MAY promote to causal islands
 
-- rooms, memes, sigils
+- wikis, memes, sigils
 - kumu instances, kahea invocations (Tier 0 prime candidates)
-- local room projections, long-lived runtime actors
+- local wiki projections, long-lived runtime actors
 - automerge-realm, peer-sync-state (non-simultaneous by topology)
 
 ### MUST promote to causal islands
@@ -309,7 +308,7 @@ in `packages/lararium-mesh/src/causal-island.ts`.
 authority-first-order = [
   "authenticate-peer",
   "sync-authority-graph",
-  "derive-visible-rooms",
+  "derive-visible-wikis",
   "sync-collection-manifest",
   "capability-epoch-ops",
   "sync-crdt-heads",
@@ -329,12 +328,12 @@ causal-island-must = [
 
 # MAY promote to causal islands — local errors correctable inside node; promotion optional
 causal-island-may = [
-  "room",
+  "wiki",
   "meme",
   "sigil",
   "kumu-instance",
   "kahea-invocation",
-  "local-room-projection",
+  "local-wiki-projection",
   "long-lived-runtime-actor",
   "automerge-realm",
   "peer-sync-state",

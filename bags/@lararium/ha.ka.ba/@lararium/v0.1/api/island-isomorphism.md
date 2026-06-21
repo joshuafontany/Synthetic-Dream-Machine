@@ -3,7 +3,7 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/island-isomorphism >>
 ```toml iam
 file-path = "bags/@lararium/v0.1/api/island-isomorphism.md"
-invariant = true
+cacheable = true
 mana      = 14
 manao     = 15
 manaoio   = 13
@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the one-hull law: every island rides the same isomorphic stack; authority = grants, never architecture; the genesis exception named and bounded; field-grounded 2026-06-12"
 status    = "proposed"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+tags      = ["api/pono/meme"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-isomorphism"

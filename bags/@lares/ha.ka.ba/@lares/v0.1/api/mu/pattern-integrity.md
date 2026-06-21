@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/v0.1/api/mu/pattern-integrity.md"
-invariant   = true
 mana        = 18
 manao       = 18
 manaoio     = 17
@@ -13,7 +12,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: Fuller's 5 pattern integrities applied to Lararium — tensegrity, wave/water, synergy, ephemeralization, trim tab"
 status-date = "2026-05-02"
-tags      = ["api/pono/invariant"]
+tags      = ["api/pono/meme"]
 l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/mu/pattern-integrity"

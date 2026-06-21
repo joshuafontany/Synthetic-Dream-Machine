@@ -12,7 +12,7 @@ retain        = true
 role          = "lararium-node host: lares/ walker, meme graph loader, interface URI bootstrap list"
 source-symbol = "*"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci", "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme", "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci"]
 l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/node-host"
@@ -54,7 +54,7 @@ they define the structural classification vocabulary the index depends on.
 interface-uris = [
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme",
   "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci",
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant",
+  "lar:///ha.ka.ba/@lares/v0.1/api/pono/loci",
 ]
 
 # Compiler entry point — first meme loaded by the graph compiler

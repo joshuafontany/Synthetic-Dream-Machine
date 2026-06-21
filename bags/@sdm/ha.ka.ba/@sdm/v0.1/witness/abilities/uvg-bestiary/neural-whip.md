@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/witness/abilities/uvg-bestiary/neural-whip.md"
-invariant = false
 mana      = 11
 manao     = 16
 manaoio   = 17

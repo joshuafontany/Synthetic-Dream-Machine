@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
-invariant = true
 mana      = 16
 manao     = 16
 manaoio   = 14
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law for canonical lar URI exchange vectors and HUD emission order"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/exchange-vector"
 ```
@@ -91,7 +90,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/docs/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 
 <<~/ahu >>
 

@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/templates/modules/power.md"
-invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 15

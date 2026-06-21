@@ -4,7 +4,6 @@
 ```toml iam
 cacheable     = true
 file-path     = "bags/@lares/v0.1/api/pono/pranala-families.md"
-invariant     = true
 mana          = 18
 manao         = 17
 manaoio       = 17
@@ -14,7 +13,7 @@ retain        = true
 role          = "canonical pranala edge-family taxonomy: eight families, role vocabularies, contract flags"
 source-symbol = "KNOWN_FAMILIES FAMILY_ROLES FAMILY_CONTRACTS"
 status-date   = "2026-06-05"
-tags      = ["api/pono/invariant", "api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial"]
+tags      = ["api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-control", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-relation", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-observe", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-transclusion", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-dataflow", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-message", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-constraint", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-reaction", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-family-spatial"]
 l-space       = "stable"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/pranala-families"

@@ -12,7 +12,7 @@ namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "TS membrane between CompositeStore and the wiki's in-process nalu engine — forwards CRDT-remote changes, owns outbound saveTiddler/deleteTiddler, delegates apply-time echo guard to $tw.lares.isApplyingNalu"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lararium/v0.1/api/island-adaptor"
 ```

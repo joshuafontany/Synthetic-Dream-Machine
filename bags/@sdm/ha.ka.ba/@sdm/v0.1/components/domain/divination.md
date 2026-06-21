@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "divination"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/domain/divination.md"
-invariant = false
 mana      = 13
 manao     = 16
 manaoio   = 13

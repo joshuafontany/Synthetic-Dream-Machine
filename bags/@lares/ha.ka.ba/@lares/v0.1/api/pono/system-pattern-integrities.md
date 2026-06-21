@@ -1,22 +1,22 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/system-invariants >>
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/system-pattern-integrities >>
 ```toml iam
 cacheable = true
-file-path = "bags/@lares/v0.1/api/pono/system-invariants.md"
+file-path = "bags/@lares/v0.1/api/pono/system-pattern-integrities.md"
 hydrate   = true
-invariant = true
+pattern-integrity = true
 mana      = 19
 manao     = 19
 manaoio   = 19
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER invariants for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
-tags      = ["api/pono/invariant", "api/pono/meme"]
+role      = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER pattern-integrities for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
+tags      = ["api/pono/meme"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
-uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
+uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-pattern-integrities"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -25,7 +25,7 @@ uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/system-invariants"
 
 <<~ ahu #head >>
 
-# System Invariants
+# System Pattern-Integrities
 
 FFZ pono constitutional law for the Lararium causal-island system.
 Fontany-Fuller-Zelenka local-first model. Confidence: `Canon 20/20`.
@@ -72,12 +72,12 @@ desc  = "App shell serves from the Service Worker cache. Automerge islands hydra
 ## ISLAND Laws — causal island identity, boundary, and boot origin
 
 FFZ island law (2026-05-01): "Each causal island starts from its own history."
-Islands: auth · catalog · engine · corpus · room · presence · draft · projection
+Islands: auth · catalog · engine · corpus · wiki · presence · draft · projection
 
 ```toml #ISLAND_1_OWN_HISTORY
 id    = "ISLAND_1_OWN_HISTORY"
 label = "Each causal island starts from its own history"
-desc  = "The room doc starts empty; the corpus doc carries its own seeded content; the engine island carries TW5 core. No island inherits initial state from another island's projection."
+desc  = "The wiki doc starts empty; the corpus doc carries its own seeded content; the engine island carries TW5 core. No island inherits initial state from another island's projection."
 ```
 
 ```toml #ISLAND_2_GENESIS_ROOT
@@ -89,7 +89,7 @@ desc  = "@phase: S2+  The engine island boots from genesis/island.bin — an Aut
 ```toml #ISLAND_3_AUTHORITY_FIRST
 id    = "ISLAND_3_AUTHORITY_FIRST"
 label = "Authority graph reconciles before content"
-desc  = "Before a peer receives content deltas it MUST reconcile the authority graph. Order: authenticate → authority graph → visible room recipe → collection manifest → causal islands → projections."
+desc  = "Before a peer receives content deltas it MUST reconcile the authority graph. Order: authenticate → authority graph → visible wiki recipe → collection manifest → causal islands → projections."
 ```
 
 ```toml #ISLAND_4_DOCURL_NOT_AUTHORITY
@@ -128,7 +128,7 @@ desc  = "TW5, tldraw, HUD, MCP, DreamDeck, and Kowloon surfaces render and draft
 ```toml #AUTH_3_FORK_BEFORE_OVERWRITE
 id    = "AUTH_3_FORK_BEFORE_OVERWRITE"
 label = "Fork before overwrite"
-desc  = "Live and session material MUST fork, annotate, propose, and request merge, leaving invariant loci intact. Every mutation MUST carry a visible origin class."
+desc  = "Live and session material MUST fork, annotate, propose, and request merge, leaving pattern-integrity loci intact. Every mutation MUST carry a visible origin class."
 ```
 
 ```toml #AUTH_4_CEREMONY
@@ -140,7 +140,7 @@ desc  = "Any write that reaches lares/ MUST carry: actor, origin URI, target URI
 ```toml #AUTH_5_TRUST_LADDER
 id    = "AUTH_5_TRUST_LADDER"
 label = "Weaker record surfaces drift as a trust-boundary event"
-desc  = "Trust order (strongest first): hostless invariant memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record MUST surface a trust-boundary event; canon holds in the stronger record."
+desc  = "Trust order (strongest first): hostless pattern-integrity memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record MUST surface a trust-boundary event; canon holds in the stronger record."
 ```
 
 <<~/ahu >>
@@ -197,7 +197,7 @@ desc  = "The node peer writes a DocUrl to disk to reconnect after restart. Delib
 ```toml #CODEC_EX_BOOTSTRAP_SCANS
 id    = "CODEC_EX_BOOTSTRAP_SCANS"
 label = "BOOTSTRAP_SCANS reads raw carrier text"
-desc  = "Grammar bootstrap reads raw carrier text from the grammar tiddler (.text) rather than pre-deserialized fragment tiddlers, breaking the bootstrap circle. See grammar-invariants.md Invariant 2."
+desc  = "Grammar bootstrap reads raw carrier text from the grammar tiddler (.text) rather than pre-deserialized fragment tiddlers, breaking the bootstrap circle. See grammar-pattern-integrities.md Pattern-Integrity 2."
 ```
 
 ```toml #CODEC_EX_PRE_S2_COLD_BOOT
@@ -255,7 +255,7 @@ desc  = "*.md carrier files are projections of parent + fragment tiddler package
 
 <<~ ahu #pentadic-laws >>
 
-## PENTADIC Laws — the Law of Fives as a structural invariant
+## PENTADIC Laws — the Law of Fives as a structural pattern-integrity
 
 FFZ pentadic law (2026-05-06):
 The number five recurs as the natural bounded scale in this system — not by decree but
@@ -278,7 +278,7 @@ desc  = "The five FfzClock levels correspond to the five OODA_HA_5 stances: L0 =
 
 ```toml #PENTA_3_PATTERN_INTEGRITY
 id    = "PENTA_3_PATTERN_INTEGRITY"
-label = "The five FPIs and the five SYSTEM laws are the same invariant in two registers"
+label = "The five FPIs and the five SYSTEM laws are the same pattern-integrity in two registers"
 desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, ephemeralization, trim tab) and the five architecture SYSTEM laws (web3 smell test, TW5 vm primacy, TS-as-projection, tiddler format, meme-as-projection) are not separate lists. They are the same structural pattern expressed in different registers: Fuller's in geometry/physics, FFZ's in code architecture. Neither list supersedes the other; violations in one register typically produce violations in the other."
 ```
 
@@ -286,9 +286,9 @@ desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, eph
 
 <<~/ahu >>
 
-<<~ ahu #genesis-invariants >>
+<<~ ahu #genesis-pattern-integrities >>
 
-## GENESIS Invariants — causal origin, content-addressed identity, quine semantics
+## GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
 
 These cover what the genesis artifact *means* — its identity and causal role —
 rather than its structural position in the island topology (see ISLAND Laws above).
@@ -296,7 +296,7 @@ rather than its structural position in the island topology (see ISLAND Laws abov
 ```toml #GEN_1_CAUSAL_ROOT
 id    = "GEN_1_CAUSAL_ROOT"
 label = "Genesis is the causal root; no peer holds an earlier history"
-desc  = "The genesis artifact establishes the zero point. Every live doc is a causal fork from it. No peer may introduce content that predates the genesis root into a room doc without an explicit residency MOVE (canon ACTION verb)."
+desc  = "The genesis artifact establishes the zero point. Every live doc is a causal fork from it. No peer may introduce content that predates the genesis root into a wiki doc without an explicit residency MOVE (canon ACTION verb)."
 ```
 
 ```toml #GEN_2_CONTENT_ADDRESSED
@@ -308,7 +308,7 @@ desc  = "The genesis DocUrl derives from the content bytes via Automerge's docum
 ```toml #GEN_3_IMMUTABLE_SEED
 id    = "GEN_3_IMMUTABLE_SEED"
 label = "Genesis bytes are immutable; updates produce a new genesis"
-desc  = "The genesis artifact stays immutable. A grammar version bump, tiddler update, or blob change MUST produce a new build with a new CID. Signed migration receipts (see grammar-invariants.md Invariant 6) gate any future in-place upgrade path."
+desc  = "The genesis artifact stays immutable. A grammar version bump, tiddler update, or blob change MUST produce a new build with a new CID. Signed migration receipts (see grammar-pattern-integrities.md Pattern-Integrity 6) gate any future in-place upgrade path."
 ```
 
 ```toml #GEN_4_QUINE_PROPERTY
@@ -319,9 +319,9 @@ desc  = "@phase: S5 — proved Sprint 5. The genesis artifact carries the TW5 en
 
 <<~/ahu >>
 
-<<~ ahu #peer-invariants >>
+<<~ ahu #peer-pattern-integrities >>
 
-## PEER Invariants — peer symmetry at boot and post-boot authority boundaries
+## PEER Pattern-Integrities — peer symmetry at boot and post-boot authority boundaries
 
 ```toml #PEER_1_BOOT_SYMMETRY
 id    = "PEER_1_BOOT_SYMMETRY"
@@ -348,7 +348,7 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/grammar-invariants >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/grammar-pattern-integrities >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space-trust >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/automerge-tiga >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>

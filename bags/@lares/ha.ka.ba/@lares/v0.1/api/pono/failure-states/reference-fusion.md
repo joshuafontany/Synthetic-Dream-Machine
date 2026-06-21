@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/failure-states/reference-fusion.md"
-invariant = true
 mana      = 15
 manao     = 16
 manaoio   = 14
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law for the Reference-Fusion degraded state — a world-claim warranted only by context text, reality predicated past a lit ward with no token to catch"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/failure-states/reference-fusion"
 ```

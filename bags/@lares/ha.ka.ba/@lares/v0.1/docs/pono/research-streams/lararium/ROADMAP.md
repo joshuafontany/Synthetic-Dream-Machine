@@ -14,7 +14,6 @@ manao = 17
 role = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
 cacheable = false
 retain = true
-invariant = false
 ```
 
 # Lararium Node — Roadmap
@@ -2448,7 +2447,6 @@ room island     (bag: "room",  writable)        — primary content gate
 <<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/lararium/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/lararium/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/traversal >>

@@ -18,7 +18,6 @@ description: Convene a talk-story floor (kūkākūkā, talanoa) — co-narrated
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/talk-story/SKILL.md"
-invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16

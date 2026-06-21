@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/talk-story.md"
-invariant = false
 mana      = 16
 manao     = 16
 manaoio   = 16

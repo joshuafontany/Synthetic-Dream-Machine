@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/memetic-wikitext.md"
-invariant = false
 mana      = 19
 manao     = 19
 namespace = "&#x2299;"

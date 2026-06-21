@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/hooponopono.md"
-invariant = true
 mana      = 17
 manao     = 17
 manaoio   = 15
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "canon residency-MOVE ceremony; harmony restoration law for the live-session → canon-bag crossing"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/hooponopono"
 ```
@@ -111,7 +110,6 @@ Boundary event fields:
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 
 <<~/ahu >>
 

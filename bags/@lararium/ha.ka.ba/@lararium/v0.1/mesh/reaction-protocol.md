@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lararium/v0.1/mesh/reaction-protocol.md"
-invariant   = true
 mana        = 17
 manao       = 17
 manaoio     = 16
@@ -14,7 +13,7 @@ retain      = true
 role        = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
 source-file = "packages/lararium-mesh/src/reaction-graph.ts"
 status-date = "2026-05-28"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant"]
+tags      = ["api/pono/meme"]
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/reaction-protocol"

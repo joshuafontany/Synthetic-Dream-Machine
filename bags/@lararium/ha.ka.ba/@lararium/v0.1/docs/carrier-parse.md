@@ -12,7 +12,7 @@ register      = "Synthesis-Canon"
 role          = "canonical source copy: carrier ingress gate — text-in, CarrierRecord-out; validates shape, extracts metadata and implements bundle"
 source-symbol = "parseCarrier"
 status-date   = "2026-04-30"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/heleuma/ka"]
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/docs/carrier-parse"
 ```

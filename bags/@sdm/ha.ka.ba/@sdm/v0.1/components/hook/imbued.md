@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "imbued"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/hook/imbued.md"
-invariant = false
 mana      = 14
 manao     = 16
 manaoio   = 13

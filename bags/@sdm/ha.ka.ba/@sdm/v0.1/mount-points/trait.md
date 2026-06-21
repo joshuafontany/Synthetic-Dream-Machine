@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "trait"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/mount-points/trait.md"
-invariant = false
 mana      = 16
 manao     = 17
 manaoio   = 16

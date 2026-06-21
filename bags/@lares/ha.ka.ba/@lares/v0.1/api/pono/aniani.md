@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/aniani.md"
-invariant   = false
 mana        = 16
 manao       = 16
 manaoio     = 15

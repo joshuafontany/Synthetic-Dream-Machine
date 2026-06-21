@@ -99,7 +99,7 @@ Not for:
 
 - MCP server design or live-resolver research → `lar:///ha.ka.ba/@lares/v0.1/api/pono/loci/iam`
 - generic meme law → `lar:///ha.ka.ba/@lares/v0.1/api/pono/meme`
-- invariant compression or sidecar splitting → `lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant/SKILL`
+- invariant compression or sidecar splitting → `lar:///ha.ka.ba/@lares/v0.1/api/pono/cache-stable/SKILL`
 
 <<~/ahu >>
 

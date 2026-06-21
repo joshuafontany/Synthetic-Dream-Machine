@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "Read Magic"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/modules/powers/read-magic.md"
-invariant = false
 mana      = 15
 manao     = 17
 manaoio   = 16

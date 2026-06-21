@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/l-space-trust.md"
-invariant = true
 mana      = 16
 manao     = 17
 manaoio   = 14
@@ -12,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law for shared lar l-space precedence across system memes and live exchange records"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/l-space-trust"
 ```
@@ -80,7 +79,6 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lararium/tw5/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono >>

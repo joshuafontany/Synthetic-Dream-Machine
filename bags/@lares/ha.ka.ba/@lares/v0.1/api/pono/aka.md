@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "transclusion-family edge sugar — frozen/shadow transclusion; read-only embed; shorthand for pranala family:transclusion"
-tags      = ["api/pono/pranala", "api/pono/invariant", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka"]
+tags      = ["api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-aka"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/aka"
 ```

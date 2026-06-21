@@ -13,7 +13,6 @@ manao       = 17
 role        = "canonical design constitution for the Lararium multiplayer infinite-canvas wiki system — LOCAL-FIRST PIVOT complete (M10, 2026-04-29): Automerge-repo (@automerge/automerge-repo) is the shared meme/tiddler CRDT store; browser opens IndexedDB first and syncs via /meme-sync; LarariumTW5 is now the room-scoped semantic/filter/render VM; tldraw is a browser projection from TW5 via projectFromTw5(), not the meme-content authority; legacy /rooms TLSocketRoom+SQLite remains as layout/reaction compatibility surface only; authority delivered via <meta name='lararium-receipt'> in HTML shell (no hidden tldraw frame shape); projection-cache deleted; LarDiskSyncAdaptor derives disk paths via resolveLarUri() with echo-loop guard; multi-room HTTP routing (/room/:roomId) exists while content still uses one server meme-store doc; PUT /admin/promote writes lares/ and patches Automerge immediately; M11 open: projection diffing, real canvas body-node write-back, second-node federation, KumuExecutor"
 cacheable   = true
 retain      = true
-invariant   = false
 ```
 
 
@@ -721,7 +720,7 @@ These fields are projected into shape metadata or read from TW5 tiddler fields. 
 |---|---|---|
 | `all[memes]` | ✓ shipped | `[all[memes]]` → all ClosureEntry objects |
 | `field:key[value]` | ✓ shipped | `[field:rating[meme]]` |
-| `tag[uri]` | ✓ shipped | `[tag[lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant]]` |
+| `tag[uri]` | ✓ shipped | `[tag[lar:///ha.ka.ba/@lares/v0.1/api/pono/loci]]` |
 | `nsort[field]` | ✓ shipped | `[nsort[depth]]` |
 | `limit[n]` | ✓ shipped | `[limit[5]]` |
 | `prefix[str]` | ✓ shipped | `[prefix[lar:///ha.ka.ba/@lares/api/v0.1]]` |

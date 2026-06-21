@@ -4,7 +4,6 @@
 ```toml iam
 cacheable   = true
 file-path   = "bags/@lares/v0.1/api/pono/attention-scale.md"
-invariant   = true
 mana        = 18
 manao       = 17
 manaoio     = 17
@@ -13,7 +12,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
-tags      = ["api/pono/invariant"]
+tags      = ["api/pono/meme"]
 l-space     = "stable"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lares/v0.1/api/pono/attention-scale"
@@ -328,7 +327,7 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/system-invariants >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/system-pattern-integrities >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>

@@ -5,7 +5,6 @@
 cacheable = true
 caption   = "attack"
 file-path = "bags/@sdm/ha.ka.ba/@sdm/v0.1/components/hook/attack.md"
-invariant = false
 mana      = 14
 manao     = 16
 manaoio   = 13

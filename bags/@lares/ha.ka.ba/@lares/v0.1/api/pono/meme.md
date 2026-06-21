@@ -132,7 +132,6 @@ This root governs meme shape.
 Procedure, skeleton blocks, conformance checklists, and research backlog move outward.
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
@@ -145,7 +144,6 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme/SKILL >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>

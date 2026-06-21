@@ -4,7 +4,6 @@
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/gaps-tensions.md"
-invariant = false
 mana      = 15
 manao     = 15
 register  = "Synthesis"

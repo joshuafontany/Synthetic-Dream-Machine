@@ -13,7 +13,7 @@ namespace      = "&#x0950; &#x0901;"
 register       = "Synthesis-Canon"
 retain         = true
 role           = "TW5 startup module — unified nalu queue across all CRDT bags + frame-aligned wiki.transact() drain + apply-time echo guard; the in-wiki embodiment of the nalu wave"
-tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant", "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
+tags      = ["lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"]
 type           = "text/x-memetic-wikitext"
 uri-path       = "ha.ka.ba/@lararium/v0.1/api/nalu-engine"
 ```

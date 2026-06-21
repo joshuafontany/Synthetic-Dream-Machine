@@ -10,7 +10,7 @@ manaoio   = 12
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 role      = "core invariant example of a pono meme: right-sized law surface, bounded self-description, and outward routing pressure"
-tags      = ["api/pono/meme", "api/pono/loci", "api/pono/invariant"]
+tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono"
 ```
@@ -41,7 +41,6 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono >>
 
 <<~/ahu >>

@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "device placement/instantiation — set down with intention, own URI, own context"
-tags      = ["api/pono/meme", "api/pono/invariant", "api/lararium/widgets/kau", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau"]
+tags      = ["api/pono/meme", "api/lararium/widgets/kau", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kau"]
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/kau"
 ```

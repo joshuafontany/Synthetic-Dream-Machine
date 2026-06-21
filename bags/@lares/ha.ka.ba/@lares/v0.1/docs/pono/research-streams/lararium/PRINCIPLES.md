@@ -14,7 +14,6 @@ manao = 19
 role = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
 cacheable = true
 retain = true
-invariant = true
 ```
 
 <<~&#x0002; >>
