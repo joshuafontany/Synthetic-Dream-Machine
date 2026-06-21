@@ -184,6 +184,10 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     }
   }
 
+  // --dry-run / preview: capture the projected effect, commit nothing. Rides the
+  // raw args; the island reactor reads it and runs the verb through a capturing access.
+  if (args.flags["dry-run"]) actionArgs["dry-run"] = true;
+
   // ── Connect to the admin vessel ───────────────────────────────────────
   const portOpt = args.options["port"];
   const connectOpts: Parameters<typeof connectAdminVessel>[0] = portOpt
@@ -219,7 +223,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     // The confirmation prompt belongs to the HUMAN/TTY path only. An agent (JSON
     // / off-TTY) cannot answer y/N — it MUST carry intent explicitly via --yes;
     // refusing the prompt keeps the surface non-interactive for unattended actors.
-    if (!args.flags["yes"]) {
+    if (!args.flags["yes"] && !args.flags["dry-run"]) {
       if (wantsJson(args)) {
         emit(args, {
           ok: false, error: { code: "usage", message: "confirmation required", hint: "pass --yes for non-interactive (agent) invocation" },
@@ -281,7 +285,13 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
       requestId: result.requestId,
       data: { verb, ...summary, audit: auditUri },
       human: () => {
-        console.log(`${verb} ✓ applied locally (req ${result.requestId.slice(0, 8)})`);
+        if (summary["dryRun"]) {
+          const wl = Array.isArray(summary["wouldLand"]) ? summary["wouldLand"].length : 0;
+          const wt = Array.isArray(summary["wouldTombstone"]) ? summary["wouldTombstone"].length : 0;
+          console.log(`${verb} --dry-run: would land ${wl}, tombstone ${wt} — NOTHING committed (req ${result.requestId.slice(0, 8)})`);
+        } else {
+          console.log(`${verb} ✓ applied locally (req ${result.requestId.slice(0, 8)})`);
+        }
         for (const [k, v] of Object.entries(summary)) {
           console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
         }

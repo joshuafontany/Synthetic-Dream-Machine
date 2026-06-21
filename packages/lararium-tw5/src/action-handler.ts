@@ -149,6 +149,54 @@ function makeBagAccess(opts: ActionHandlerOptions): BagAccess {
   };
 }
 
+/** What a dry-run captured — the records a verb WOULD land / tombstone / remove,
+ *  per bag. The store is never touched; this is the projected effect. */
+export interface CapturedEffect {
+  readonly puts: ReadonlyArray<{ readonly bag: string; readonly title: string }>;
+  readonly tombstones: ReadonlyArray<{ readonly bag: string; readonly title: string }>;
+  readonly removes: ReadonlyArray<{ readonly bag: string; readonly title: string }>;
+}
+
+/**
+ * A read-through, write-capture `BagAccess` for `--dry-run` / preview. Reads
+ * delegate to the real store (so an executor sees real source/dest state);
+ * writes (`put`/`tombstone`/`remove`) RECORD the would-land effect and COMMIT
+ * NOTHING. Because every residency write — content AND the effect-record ledger —
+ * rides `access.write(bag).{put,tombstone,remove}`, passing this captures the
+ * whole projected effect while the executor runs UNCHANGED. (CREATE's mint +
+ * registry write live OUTSIDE access — its executor guards on `dryRun` itself.)
+ */
+function makeCapturingBagAccess(real: BagAccess): { access: BagAccess; captured: CapturedEffect } {
+  const puts: Array<{ bag: string; title: string }> = [];
+  const tombstones: Array<{ bag: string; title: string }> = [];
+  const removes: Array<{ bag: string; title: string }> = [];
+  const access: BagAccess = {
+    read: (bag) => real.read(bag),
+    write: async (bag) => {
+      const realStore = await real.write(bag).catch(() => null);
+      const capturing: LarTiddlerStore = {
+        listVisible: () => (realStore ? realStore.listVisible() : Promise.resolve([])),
+        get: (title) => (realStore ? realStore.get(title) : Promise.resolve(null)),
+        put: async (record) => { puts.push({ bag, title: String(record.tiddler.title) }); },
+        tombstone: async (title) => { tombstones.push({ bag, title }); },
+        remove: async (title) => { removes.push({ bag, title }); },
+        subscribe: () => () => {},
+      };
+      return capturing;
+    },
+  };
+  return { access, captured: { puts, tombstones, removes } };
+}
+
+/** Shape a CapturedEffect into the dry-run result payload (the titles a verb WOULD land/tombstone/remove). */
+function projectedEffect(c: CapturedEffect): Record<string, unknown> {
+  return {
+    wouldLand: c.puts.map((p) => p.title),
+    wouldTombstone: c.tombstones.map((t) => t.title),
+    ...(c.removes.length ? { wouldRemove: c.removes.map((r) => r.title) } : {}),
+  };
+}
+
 /**
  * Register every ACTION verb (ADD / COPY / MOVE / CLEAR / DROP / LOAD) on a
  * VerbTable. Called from island-behaviors.ts during `onEa`.
@@ -165,6 +213,11 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     const action = residencyFromContext(verb, args, ctx.invocation);
     if (!action) throw new Error(`action-handler/${verb}: malformed args — required fields missing or wrong type`);
 
+    // `--dry-run` / preview: the cap-gate STILL runs (a preview you're not
+    // authorized for fails loud the same); only the WRITES are captured + nothing
+    // commits. The flag rides the raw args, ignored by the validator.
+    const dryRun = args["dry-run"] === true;
+
     // CREATE — mint a NEW bag; the destination doesn't exist yet, so it bypasses
     // the generic destBag cap + writable-store check. The cap is PLANE-AWARE
     // (operator ruling): @catalog (household) -> read; @oracle (temple) -> admin.
@@ -176,6 +229,11 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
       const proof = await ctx.cap(grade, root);
       if (!proof.ok) {
         throw new Error(`cap-denied: ${grade} on ${root} required to CREATE in @${action.plane} plane (${proof.reason ?? "no reason"})`);
+      }
+      if (dryRun) {
+        const cap = makeCapturingBagAccess(makeBagAccess(opts));
+        const summary = await executeCREATE(action, cap.access, opts, true);
+        return { verb, dryRun: true, ...summary, ...projectedEffect(cap.captured) };
       }
       return { verb, ...(await executeCREATE(action, makeBagAccess(opts), opts)) };
     }
@@ -206,6 +264,15 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
         `not registered, or access resolved nothing. No silent fall-through.`,
       );
     }
+
+    // `--dry-run`: run the executor through the capturing access — content writes
+    // AND the effect-record ledger are captured, nothing commits.
+    if (dryRun) {
+      const cap = makeCapturingBagAccess(access);
+      const summary = await withEffectRecord(action, (bag) => cap.access.write(bag), () => executeAction(action, cap.access, opts.tw5));
+      return { verb, dryRun: true, ...summary, ...projectedEffect(cap.captured) };
+    }
+
     const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access, opts.tw5));
     return { verb, ...summary };
   };
@@ -269,7 +336,7 @@ async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: T
  * Conflict-checks first (never double-mints a registered bag). Writes a `creation`
  * effect-record into the new bag. Requires the admin `reach` (repo + plane registry).
  */
-async function executeCREATE(action: CreateAction, access: BagAccess, opts: ActionHandlerOptions): Promise<Record<string, unknown>> {
+async function executeCREATE(action: CreateAction, access: BagAccess, opts: ActionHandlerOptions, dryRun = false): Promise<Record<string, unknown>> {
   const reach = opts.reach;
   if (!reach) {
     throw new Error("action-handler/CREATE: no reach — minting + registering a bag requires the admin reach (repo + plane registry)");
@@ -287,6 +354,12 @@ async function executeCREATE(action: CreateAction, access: BagAccess, opts: Acti
   // Mint + register inside withEffectRecord so the `creation` ledger record lands
   // after the new bag is reachable (the effect-record rides the new bag's own doc).
   return withEffectRecord(action, (bag) => access.write(bag), async () => {
+    if (dryRun) {
+      // Preview: skip the mint + registry write; report the would-mint. The
+      // `creation` effect-record (written via access.write) is captured by the
+      // dry-run access, so it surfaces in wouldLand — nothing commits.
+      return { bag: action.bag, plane: action.plane, docUrl: "(dry-run: would mint)", wouldRegister: true, count: 1 };
+    }
     const handle = reach.repo.create(emptyLarDoc());
     await handle.whenReady();
     const docUrl = String(handle.url);

@@ -58,4 +58,28 @@ describe("residency CREATE — mint + register + plane-aware gate (staged witnes
     expect(r.json?.["ok"], `CREATE @oracle failed: ${JSON.stringify(r.json)}`).toBe(true);
     expect((r.json?.["data"] as Record<string, unknown> | undefined)?.["verb"]).toBe("CREATE");
   }, 90_000);
+
+  // ── --dry-run / preview: see the projected effect, commit NOTHING ──────────
+  const DRY_BAG = "lar:///ha.ka.ba/@witness-dry";
+
+  test("D1 — CREATE --dry-run reports the projected effect (and needs no --yes)", async () => {
+    if (lar.mode !== "staged") return;
+    // No --yes: a dry-run is read-only, so it bypasses the confirmation gate.
+    const r = await lar.cli(["act", "CREATE", "--bag", DRY_BAG, "--dry-run", "--json"]);
+    expect(r.json?.["ok"], `dry-run CREATE failed: ${JSON.stringify(r.json)}`).toBe(true);
+    const data = r.json?.["data"] as Record<string, unknown> | undefined;
+    expect(data?.["dryRun"], "result not flagged dryRun").toBe(true);
+    expect(String(data?.["docUrl"] ?? ""), "dry-run minted a real doc").toContain("dry-run");
+    expect(Array.isArray(data?.["wouldLand"]), "no wouldLand projection").toBe(true);
+  }, 60_000);
+
+  test("D2 — the dry-run committed NOTHING: a real CREATE of the same bag still mints fresh", async () => {
+    if (lar.mode !== "staged") return;
+    // If D1 had registered @witness-dry, this real CREATE would conflict (the
+    // executeCREATE conflict-check). It MINTS instead → the dry-run wrote nothing.
+    const r = await lar.cli(["act", "CREATE", "--bag", DRY_BAG, "--yes", "--json"]);
+    expect(r.json?.["ok"], `real CREATE after dry-run failed (dry-run leaked a write?): ${JSON.stringify(r.json)}`).toBe(true);
+    const data = r.json?.["data"] as Record<string, unknown> | undefined;
+    expect(String(data?.["docUrl"] ?? ""), "real CREATE did not mint a fresh doc").toMatch(/^automerge:/);
+  }, 90_000);
 });
