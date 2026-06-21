@@ -15,7 +15,7 @@
 
 import {
   makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
-  makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors,
+  makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors, makeTw5Deserializer,
   makeWikiPinReactor, makeWikiUnpinReactor,
   makeCatalogAccessor,
   makeInitWikiReactor, makeOpenWikiReactor, makeDraftReactor, makePruneStaleReactor,
@@ -56,7 +56,13 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       // gated, the `lares act` front door. The admin reaches a deep target bag by
       // ACCESS (ephemeral mount, released after — no standing system-bag mount; the
       // edit/action split, wiki-layer-ontology#write-law).
-      registerActionReactors(registry, { composite: ctx.composite, reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl } });
+      registerActionReactors(registry, {
+        composite: ctx.composite,
+        reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl },
+        // LOAD lands every legal TW5 filetype via TW5's own deserializer registry,
+        // resolved lazily through the admin island's live $tw at action time.
+        tw5: makeTw5Deserializer(ctx.tw5),
+      });
       // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
       // main-resident BagResidencyManager via admin:residency-op (ctx.post). `residency`
       // stats (a read) stays main pending the askMain research.

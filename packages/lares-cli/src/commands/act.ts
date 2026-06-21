@@ -33,7 +33,7 @@
 
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
-import { join } from "node:path";
+import { join, extname, resolve, relative, sep } from "node:path";
 import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadOperatorVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
@@ -44,6 +44,30 @@ import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
   return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
+}
+
+/**
+ * The loci title a LOADed file carries — used when the file is NOT a memetic
+ * carrier (a memetic carrier self-titles from its own heading; this rides as the
+ * fallback baseUri). Two derivations:
+ *   1. A file under a `bags/<holding>/…` or `wikis/<slug>/…` mirror tree carries
+ *      its stable lar: name — the interior after the holding dir, any extension
+ *      stripped, when it bears a `w.w.w` loci root.
+ *   2. Otherwise the file namespaces under the destination bag by its path
+ *      relative to the LOAD source (extension stripped) — unique + projectable.
+ */
+function lociTitleForLoad(source: string, file: string, toBag: string): string {
+  const parts = resolve(file).split(sep);
+  for (const plane of ["bags", "wikis"]) {
+    const i = parts.lastIndexOf(plane);
+    if (i >= 0 && i + 2 < parts.length) {
+      const interior = parts.slice(i + 2).join("/").replace(/\.[^/.]+$/, "");
+      if (/^\w+\.\w+\.\w+\//.test(interior)) return `lar:///${interior}`;
+    }
+  }
+  const rel = relative(source, file).split(sep).join("/").replace(/\.[^/.]+$/, "");
+  const base = toBag.replace(/\/+$/, "");
+  return rel ? `${base}/${rel}` : base;
 }
 
 function printUsage(): void {
@@ -114,12 +138,30 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     // .md file or a directory of .md memes packs into args.carriers.
     try {
       const st = statSync(sourceUri);
-      const files = st.isDirectory()
+      const isDir = st.isDirectory();
+      const paths = isDir
         ? (readdirSync(sourceUri, { recursive: true }) as string[])
-            .filter((f) => f.endsWith(".md"))
             .map((f) => join(sourceUri, f))
+            .filter((f) => { try { return statSync(f).isFile(); } catch { return false; } })
         : [sourceUri];
-      const carriers = files.map((f) => ({ text: readFileSync(f, "utf8") }));
+      // The feed lands BOTH memetic-wikitext memes AND every other legal TW5
+      // filetype: each carrier rides its text + a loci title + its extension, and
+      // the island routes by content (an SOH heading → the memetic membrane; else
+      // TW5's own deserializer registry, keyed by extension). Only an empty /
+      // whitespace-only file is skipped — it holds no carrier and would reject the
+      // whole batch (the validator forbids an empty-text carrier).
+      // TODO(binary): read per TW5's content-type encoding (base64 for images/PDF)
+      //   and carry an `encoding` field; today the feed reads utf8 (text filetypes).
+      const carriers = paths
+        .map((f) => ({ f, text: readFileSync(f, "utf8") }))
+        .filter(({ f, text }) => {
+          if (text.trim().length === 0) {
+            console.error(`lares act LOAD: skipping empty file "${f}" — no content to land`);
+            return false;
+          }
+          return true;
+        })
+        .map(({ f, text }) => ({ text, title: lociTitleForLoad(sourceUri, f, toBag), ext: extname(f) }));
       if (carriers.length > 0) {
         actionArgs["carriers"] = carriers;
         carrierCount = carriers.length;

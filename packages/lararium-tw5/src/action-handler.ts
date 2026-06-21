@@ -46,6 +46,7 @@ import {
   parseResidencyAction, withEffectRecord, sha256HexSync,
 } from "@lararium/mesh";
 import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
+import type { TW5Instance } from "./types/tiddlywiki.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
 import { decideIngest } from "./ingest-gate.js";
@@ -56,8 +57,38 @@ const DEFAULT_MASS_DELETE_FRACTION = 0.25;
 
 // ── Options + registration ─────────────────────────────────────────────────
 
+/**
+ * Native-filetype deserialization, injected from the island's live `$tw`. LOAD
+ * routes a non-memetic carrier through TW5's OWN deserializer registry by
+ * content-type — so an engine bump or a hand-rolled deserializer just works, no
+ * hardcoded filetype list. Absent → LOAD treats every carrier as memetic
+ * (back-compat for hosts without a booted $tw, e.g. unit fakes).
+ */
+export interface Tw5Deserializer {
+  /** Run TW5's registered deserializer over `text`. `typeOrExt` may be a content-type
+   *  ("application/json") OR a file extension (".tid") — TW5 resolves an extension
+   *  through its own fileExtensionInfo → contentTypeInfo chain, falling back to
+   *  text/plain. Passing the raw extension defers wholly to TW5's registry. */
+  deserialize(typeOrExt: string, text: string, baseFields: Record<string, unknown>): Array<Record<string, unknown>>;
+}
+
+/**
+ * The standard `Tw5Deserializer`, closing over an island's live engine. Both the
+ * wiki island and the admin island wire LOAD's native-filetype path through this —
+ * one source of truth, deferring wholly to TW5's own deserializer registry. The
+ * `$tw` is read lazily (at action time, post-boot).
+ */
+export function makeTw5Deserializer(engine: { readonly $tw: TW5Instance }): Tw5Deserializer {
+  return {
+    deserialize: (typeOrExt, text, fields) =>
+      (engine.$tw.wiki.deserializeTiddlers(typeOrExt, text, fields) ?? []) as Array<Record<string, unknown>>,
+  };
+}
+
 export interface ActionHandlerOptions {
   readonly composite: CompositeStore;
+  /** Native TW5 filetype deserialization (LOAD), closing over the island's $tw. */
+  readonly tw5?: Tw5Deserializer;
   /**
    * Registry reach for **access-based** writes (operator ruling 2026-06-16, the
    * edit/action split, `wiki-layer-ontology#write-law`): a residency action whose
@@ -159,7 +190,7 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
         `not registered, or access resolved nothing. No silent fall-through.`,
       );
     }
-    const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access));
+    const summary = await withEffectRecord(action, (bag) => access.write(bag), () => executeAction(action, access, opts.tw5));
     return { verb, ...summary };
   };
 }
@@ -202,14 +233,14 @@ function destinationBag(action: ResidencyAction): string {
 
 // ── Per-verb executors ─────────────────────────────────────────────────────
 
-async function executeAction(action: ResidencyAction, access: BagAccess): Promise<Record<string, unknown>> {
+async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
   switch (action.verb) {
     case "ADD":   return executeAdd(action, access);
     case "COPY":  return executeCopy(action, access);
     case "MOVE":  return executeMove(action, access);
     case "CLEAR": return executeClear(action, access);
     case "DROP":  return executeDrop(action, access);
-    case "LOAD":  return executeLoad(action, access);
+    case "LOAD":  return executeLoad(action, access, tw5);
     case "INGEST": return executeIngest(action, access);
   }
 }
@@ -221,7 +252,16 @@ async function executeAction(action: ResidencyAction, access: BagAccess): Promis
  * the memetic-wikitext membrane (FFZ: parent + ahu-slot children), and every
  * resulting record lands under the action's fresh changeId.
  */
-async function executeLoad(action: LoadAction, access: BagAccess): Promise<Record<string, unknown>> {
+/**
+ * A memetic-wikitext carrier opens with the SOH classifier (&#x0001; / &#x0011;).
+ * NOTE: TW5's md-file-router does NOT reproduce the direct memetic decomposition
+ * in this integration (witnessed: routing a memetic `.md` through the registry
+ * drops the heading-titled records) — so SOH carriers MUST take the direct
+ * memetic path, never the registry. The de-dup toward md-file-router is un-pono here.
+ */
+const CARRIER_SOH = /<<~[^&\n]*&#x(?:0001|0011);/;
+
+async function executeLoad(action: LoadAction, access: BagAccess, tw5?: Tw5Deserializer): Promise<Record<string, unknown>> {
   const carriers = action.carriers ?? [];
   if (carriers.length === 0) {
     throw new Error(
@@ -231,13 +271,26 @@ async function executeLoad(action: LoadAction, access: BagAccess): Promise<Recor
   }
   const titles: string[] = [];
   for (const carrier of carriers) {
-    const fieldsList = memeticWikitextDeserializer(carrier.text, { title: carrier.title ?? "" });
+    // Route by content: a memetic-wikitext carrier (SOH heading) decomposes at the
+    // membrane via the direct memetic deserializer; any other legal TW5 filetype
+    // lands through TW5's OWN deserializer registry, resolved from its extension.
+    // Absent a native resolver (no booted $tw), every carrier falls back to memetic.
+    let fieldsList: Array<Record<string, unknown>>;
+    if (!tw5 || CARRIER_SOH.test(carrier.text)) {
+      fieldsList = memeticWikitextDeserializer(carrier.text, { title: carrier.title ?? "" });
+    } else {
+      // Pass the extension straight to TW5's registry — it resolves the content-type
+      // and the right deserializer, or falls back to text/plain. No hardcoded map.
+      fieldsList = tw5.deserialize(carrier.ext || "text/plain", carrier.text, carrier.title ? { title: carrier.title } : {});
+    }
     for (const fields of fieldsList) {
-      const title = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
+      const own = typeof fields["title"] === "string" ? (fields["title"] as string) : "";
+      const title = own || (carrier.title ?? "");
       if (!title) {
         throw new Error("LOAD: carrier produced a record without a title — supply carrier.title or an iam uri-path");
       }
-      const record: LarTiddlerRecord = { tiddler: fields as LarTiddlerRecord["tiddler"], meta: {} };
+      const tiddler = { ...fields, title } as LarTiddlerRecord["tiddler"];
+      const record: LarTiddlerRecord = { tiddler, meta: {} };
       await landInBag(access, action.toBag, record, action.changeId, origin(action));
       titles.push(title);
     }

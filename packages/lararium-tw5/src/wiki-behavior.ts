@@ -20,7 +20,7 @@ import {
   type Verb,
   type ChangeOrigin,
 } from "@lararium/mesh";
-import { registerActionReactors } from "./action-handler.js";
+import { registerActionReactors, makeTw5Deserializer } from "./action-handler.js";
 import { VerbTable } from "./verb-dispatcher.js";
 import { startEngineWatch } from "./engine-watch.js";
 import { startRecipeWatch } from "./recipe-watch.js";
@@ -56,7 +56,13 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       // Residency Model ACTION verb family — ADD / COPY / MOVE / CLEAR / DROP /
       // LOAD reactors wrapping each bag mutation in withEffectRecord (audit).
       _registry = new VerbTable();
-      registerActionReactors(_registry, { composite: ctx.composite });
+      // Native TW5 filetype deserialization for LOAD — resolved lazily through the
+      // island's live $tw at action time (post-boot), so LOAD lands every legal TW5
+      // filetype via TW5's own registry. The memetic carriers stay on their own path.
+      registerActionReactors(_registry, {
+        composite: ctx.composite,
+        tw5: makeTw5Deserializer(ctx.tw5),
+      });
       // system-alert — the admin worker (via main → pool.placeWikiVerb) delivers a
       // reboot-pending notice; the island writes it into its OWN @temp (volatile,
       // self-clearing on reboot). The admin never reaches into this composite directly.

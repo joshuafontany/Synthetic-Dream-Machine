@@ -120,6 +120,10 @@ export interface DropAction extends ResidencyActionBase {
  *  optional when the carrier's own iam block names its uri-path. */
 export interface LoadCarrier {
   readonly title?: string;
+  /** File extension (e.g. ".tid", ".json", ".md") — lets the island route a
+   *  non-memetic carrier through TW5's own deserializer registry by content-type.
+   *  Absent → the island treats the text as a memetic-wikitext carrier. */
+  readonly ext?:   string;
   readonly text:   string;
 }
 
@@ -357,9 +361,15 @@ export function parseResidencyAction(inv: Verb): ResidencyAction | null {
       if (!c || typeof c !== "object") return null;
       const text  = (c as Record<string, unknown>)["text"];
       const title = (c as Record<string, unknown>)["title"];
+      const ext   = (c as Record<string, unknown>)["ext"];
       if (typeof text !== "string" || text.length === 0) return null;
       if (title !== undefined && typeof title !== "string") return null;
-      carriers.push({ ...(typeof title === "string" && title ? { title } : {}), text });
+      if (ext !== undefined && typeof ext !== "string") return null;
+      carriers.push({
+        ...(typeof title === "string" && title ? { title } : {}),
+        ...(typeof ext === "string" && ext ? { ext } : {}),
+        text,
+      });
     }
   }
   return { ...base, verb: "LOAD", sourceUri, toBag, changeId, ...(carriers ? { carriers } : {}) };

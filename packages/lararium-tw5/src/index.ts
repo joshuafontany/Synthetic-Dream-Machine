@@ -50,7 +50,7 @@ export type {
 } from "./wiki-sync.js";
 export { MemoryTiddlerStore } from "./memory-store.js";
 export { getOriginBag } from "./residency-surface.js";
-export { registerActionReactors, makeActionReactorFor } from "./action-handler.js";
+export { registerActionReactors, makeActionReactorFor, makeTw5Deserializer } from "./action-handler.js";
 export { makeWikiBehavior } from "./wiki-behavior.js";
 export type { WikiBehaviorOptions } from "./wiki-behavior.js";
 export { startEngineWatch, ENGINE_WAITING_ALERT_TITLE } from "./engine-watch.js";
