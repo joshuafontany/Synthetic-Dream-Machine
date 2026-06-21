@@ -1,0 +1,27 @@
+{
+  "name": "@lararium/mempalace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-only integration layer: consumes the pinned mempalace sidecar (read-only) and harvests a never-federated session-memory bearing index.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "vitest": "^3.2.0"
+  },
+  "dependencies": {
+    "@lararium/mesh": "workspace:*"
+  }
+}
