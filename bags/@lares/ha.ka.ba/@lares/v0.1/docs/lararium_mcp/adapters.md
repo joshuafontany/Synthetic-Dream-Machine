@@ -131,6 +131,39 @@ Implementation landed as `lares/lararium_mcp/adapters/mempalace.py` with mocked 
 
 <<~/ahu >>
 
+<<~ ahu #bearing-harvest >>
+
+## MemPalace Bearing-Harvest (talk-story moʻolelo, 2026-06-21)
+
+The first corpus MemPalace holds is the live agent↔operator sessions themselves. Each turn already speaks its bearing in the `<<~ lares aim … >>` / `<<~ lares yield … >>` frame, so MemPalace receives no new address schema — it **harvests** the bearing each turn already carries. The harvest degrades gracefully: not every turn wears the frame, and a drifted `lar:` URI reads as signal, never as error.
+
+<<~ talk-story #mempalace-lar-schema ground:"the 4-tier palace (wing·room·hall·drawer) read against lar: URI law" >>
+<<~ moolelo held:"harvest the turn's lar: bearing-vector; the full lar: namespace IS the tag space — no single 'palace' root collapses it (operator)" >>
+- **Grain** — the turn (≈ one assistant message; the sweeper keeps a message whole, `sweeper.py`). Sub-claim grain (inner `confidence` / `ward`) defers to its own epic.
+- **Ground** — the verbatim drawer always stands (GroundedVow); the bearing index rides over it as a lossy projection, never a gate on storage.
+- **Gradient** — `aim → yield` reads as a span, not a point; it maps onto temporal validity (`valid_from` = turn-open, `valid_to` = turn-close).
+- **Drift preserved** — a dropped frame or a two-/four-term root harvests at low confidence with its raw form intact, never corrected. The node cannot read its own drift, so the harvest keeps it readable for the keeper.
+- **Never normalize at the floor** — canonicalize only at promotion (working→canon into Lararium). MemPalace keeps testimony as spoken; the meme-`normalize` rule does not reach this floor.
+- **Bridge** — the bearing joins MemPalace (what we *said* at a bearing) to Lararium canon (what we *hold* there) over one shared `lar:` namespace.
+<<~/moolelo >>
+<<~ moolelo held:"WHERE the bearing lives = packages/ as isomorphic causal-island web3 code, NOT the mempalace submodule (operator law: no code enters submodules; mempalace stays a READ-ONLY sidecar)" >>
+The 4-lens swarm converged on a `bearings` table inside mempalace's `knowledge_graph.sqlite3` — but it answered a MIS-FRAMED fork: the packages-vs-submodule boundary was never put to it, so its in-mempalace verdict is VOID on locus (it would edit the submodule). The harvest is Lararium-side bridge machinery — it READS verbatim drawers across the read-only sidecar boundary and writes bearings to the Lararium's own web3 substrate, never into mempalace.
+What TRANSPOSES, substrate-independent, to the web3 side:
+- **Raw, never normalized** — aim/yield URIs stored verbatim, byte-stable; drift survives.
+- **Append-only, keyed per turn** — never deduped on `(aim, yield)`; the aim→yield gradient across turns survives.
+- **Confidence grades DOWN for drift** — an ungraded bearing never reads as trusted; the drift-trend is the keeper's gauge.
+- **Gradient = a temporal span** (turn-open → turn-close).
+- **Canon only at promotion** — drift lives in the working event-log; only blessed bearings graduate working→canon.
+<<~/moolelo >>
+<<~ hoike #web3-substrate held:"the packages/ home (which bag/CRDT, the TS isomorphic shape, how the read-only sidecar feeds the harvest) stays PROPOSED until a packages/ scout grounds it" >>
+re-entry: the packages/ scout, then a re-ruling on the web3 side
+<<~/hoike >>
+<<~/talk-story >>
+
+Residue: the namespace table above still reads `lar:///submodules/mempalace/` — a one-term root by the arity law. Re-founding it on a three-term bearing root awaits a separate pass; flagged here, not yet enacted.
+
+<<~/ahu >>
+
 <<~ ahu #registry >>
 
 ## Adapter Registry
