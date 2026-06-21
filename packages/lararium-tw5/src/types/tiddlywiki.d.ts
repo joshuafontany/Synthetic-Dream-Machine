@@ -292,6 +292,8 @@ export interface TW5Wiki {
   // ── Filter engine ─────────────────────────────────────────────────────────
 
   filterTiddlers(filterExpr: string, widget?: TW5WidgetInstance, source?: TW5FilterSource): string[];
+  /** Build a filter source iterator over an explicit title list. */
+  makeTiddlerIterator(titles: string[]): TW5FilterSource;
   compileFilter(filterExpr: string): TW5CompiledFilter;
   parseFilter(filterExpr: string): TW5FilterRunSpec[];
 
@@ -586,6 +588,8 @@ export interface TW5Utils {
   trim(str: string): string;
   trimPrefix(str: string, unwanted: string): string;
   trimSuffix(str: string, unwanted: string): string;
+  /** Transliterate non-ASCII to ASCII (filesystem path sanitization). */
+  transliterate(str: string): string;
   toSentenceCase(str: string): string;
   toTitleCase(str: string): string;
   escapeRegExp(str: string): string;
@@ -762,6 +766,7 @@ export interface TW5Config {
   maxEditFileSize:    number;
   contentTypeInfo:    Record<string, TW5ContentTypeInfo>;
   fileExtensionInfo:  Record<string, { type: string }>;
+  preferences?:       { jsonSpaces?: number };
 }
 
 // ---------------------------------------------------------------------------
