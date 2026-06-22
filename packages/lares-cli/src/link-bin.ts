@@ -28,12 +28,15 @@ export function linkLaresGlobal(): LinkResult {
   if (!existsSync(BIN)) return { ok: false, detail: `${BIN} not found — build first` };
 
   if (process.platform === "win32") {
-    // A .cmd shim beside the bin; the operator adds its dir (or runs `pnpm setup`) to PATH.
-    const cmd = join(repoRoot, "packages", "lares-cli", "bin", "lares.cmd");
+    // Shim TRIO beside the bin (npm cmd-shim pattern): .cmd for cmd.exe, .ps1 for
+    // PowerShell (the modern default shell). The operator adds the dir to PATH.
+    const dir = join(repoRoot, "packages", "lares-cli", "bin");
+    const cmd = join(dir, "lares.cmd");
+    const ps1 = join(dir, "lares.ps1");
     try {
       writeFileSync(cmd, '@echo off\r\nnode "%~dp0lares.mjs" %*\r\n', "utf8");
-      const dir = join(repoRoot, "packages", "lares-cli", "bin");
-      return { ok: true, detail: `wrote ${cmd}${onPath(dir) ? "" : ` — add ${dir} to PATH`}` };
+      writeFileSync(ps1, '#!/usr/bin/env pwsh\r\nnode "$PSScriptRoot\\lares.mjs" @args\r\nexit $LASTEXITCODE\r\n', "utf8");
+      return { ok: true, detail: `wrote lares.cmd + lares.ps1 in ${dir}${onPath(dir) ? "" : ` — add ${dir} to PATH`}` };
     } catch (e) {
       return { ok: false, detail: e instanceof Error ? e.message : String(e) };
     }

@@ -12,11 +12,34 @@
  * before any change, and the result is JSON-validated before it replaces the file.
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, renameSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, renameSync, openSync, closeSync, rmSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
+
+/**
+ * Acquire an exclusive write-lock (git-lockfile pattern: O_CREAT|O_EXCL) to serialize
+ * concurrent writers — Claude's home JSON has a logged corruption-under-concurrency
+ * bug (anthropics/claude-code#28842), and parallel sessions share this tree. Steals a
+ * stale lock (>30s, a crashed holder); throws after a bounded wait rather than corrupt.
+ */
+function acquireLock(lockPath: string): void {
+  const sab = new Int32Array(new SharedArrayBuffer(4));
+  for (let i = 0; i < 20; i++) {
+    try {
+      closeSync(openSync(lockPath, "wx"));
+      return;
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code !== "EEXIST") throw e;
+      try {
+        if (Date.now() - statSync(lockPath).mtimeMs > 30_000) { rmSync(lockPath, { force: true }); continue; }
+      } catch { /* lock vanished — retry */ }
+      Atomics.wait(sab, 0, 0, 100);
+    }
+  }
+  throw new Error(`${lockPath} held by another writer — another \`lares wake --claude\` is running; retry shortly`);
+}
 
 /** Resolve the mempalace-mcp executable's absolute path (prefer ~/.local/bin, then PATH). */
 function resolveMempalaceMcp(): string | null {
@@ -109,7 +132,17 @@ export function wireClaudeHome(opts: { home?: string } = {}): ClaudeWireResult {
   const claudeDir = join(home, ".claude");
   mkdirSync(claudeDir, { recursive: true });
   const settingsPath = join(claudeDir, "settings.json");
+  const lockPath = settingsPath + ".lock";
+  acquireLock(lockPath);
+  try {
+    return wireUnderLock(settingsPath);
+  } finally {
+    rmSync(lockPath, { force: true });
+  }
+}
 
+/** The read-modify-write body, run under the settings.json lock. */
+function wireUnderLock(settingsPath: string): ClaudeWireResult {
   let settings: ClaudeSettings = {};
   let backedUp = false;
   if (existsSync(settingsPath)) {
