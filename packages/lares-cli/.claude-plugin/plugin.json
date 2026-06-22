@@ -1,0 +1,19 @@
+{
+  "name": "lares-wake",
+  "version": "0.1.0",
+  "description": "Lares boot entry point — on every SessionStart, auto-boot the live Lararium + mempalace and hand the session a live hydration frame.",
+  "author": {
+    "name": "amorphous-dreams"
+  },
+  "license": "MIT",
+  "commands": [],
+  "keywords": [
+    "lares",
+    "lararium",
+    "dreamnet",
+    "boot",
+    "session-start",
+    "memory"
+  ],
+  "repository": "https://github.com/amorphous-dreams/Synthetic-Dream-Machine"
+}

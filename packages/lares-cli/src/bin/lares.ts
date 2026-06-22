@@ -24,6 +24,7 @@ import { fileURLToPath } from "node:url";
 import { realpathSync }  from "node:fs";
 import { parseArgs, type ParsedArgs } from "../parse-args.js";
 import { cmdInit }                    from "../commands/init.js";
+import { cmdWake }                    from "../commands/wake.js";
 import { cmdStatus }                  from "../commands/status.js";
 import { cmdDraft }                   from "../commands/draft.js";
 import { cmdNormalize }               from "../commands/normalize.js";
@@ -47,6 +48,7 @@ interface Command {
 }
 
 const COMMANDS: readonly Command[] = [
+  { name: "wake",          summary: "Boot ENTRY POINT (idempotent, every awakening): check (--install) the mempalace integration, ensure the node up (attach if healthy, start detached if down), emit a live hydration frame.", handler: cmdWake },
   { name: "init",          summary: "Bootstrap a new Lararium node (seed identities/circles/sessions/admin docs).", handler: cmdInit          },
   { name: "act",           summary: "Residency Model ACTION verb (ADD/COPY/MOVE/CLEAR/DROP/LOAD). Run `lares act` for usage.", handler: cmdAct          },
   { name: "ingest",        summary: "Disk→records through the §6 gate: scan + diff (preview) or --apply through the island's INGEST verb.", handler: cmdIngest       },
