@@ -18,6 +18,7 @@ import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
 import { checkMempalaceIntegration } from "../integration-check.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
+import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -36,6 +37,14 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   const doStandup = args.flags["install"] === true || args.options["admit"] !== undefined;
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
   const integration = checkMempalaceIntegration();
+
+  // 1b. Wire the Claude harness home (~/.claude) on --claude — composable with
+  //     --install / --admit / bare. Idempotent; preserves existing settings.
+  let claude: ClaudeWireResult | undefined;
+  if (args.flags["claude"]) {
+    try { claude = wireClaudeHome(); }
+    catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
+  }
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
   let nodeUp = await probePort(port);
@@ -60,6 +69,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       });
       child.unref();
       started = true;
+      const log = join(dataDir, "wake-serve.log");
       const deadline = Date.now() + 12_000;
       while (Date.now() < deadline) {
         if (await probePort(port)) {
@@ -68,9 +78,18 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         }
         await sleep(250);
       }
-      nodeNote = nodeUp
-        ? `started detached (pid ${child.pid ?? "?"})`
-        : `starting detached (pid ${child.pid ?? "?"}); not ready within 12s — see ${join(dataDir, "wake-serve.log")}`;
+      // Confirm the node STAYS up — a boot that faults (e.g. a keyhive membership
+      // gate) binds the port then exits, so a single bind is not "live" (GroundedVow:
+      // never report up for a node that died). Settle, then re-probe.
+      if (nodeUp) {
+        await sleep(1500);
+        nodeUp = await probePort(port);
+        nodeNote = nodeUp
+          ? `started detached (pid ${child.pid ?? "?"})`
+          : `bound :${port} then exited — boot fault (see ${log})`;
+      } else {
+        nodeNote = `starting detached (pid ${child.pid ?? "?"}); not ready within 12s — see ${log}`;
+      }
     }
   }
 
@@ -82,6 +101,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       node: { up: nodeUp, started, port, note: nodeNote },
       mempalace: { ok: integration.ok, checks: integration.checks },
       ...(founding !== undefined ? { founding } : {}),
+      ...(claude !== undefined ? { claude } : {}),
       root,
       bootstrap: existsSync(bootstrap) ? "present" : "absent",
       timestamp: new Date().toISOString(),
@@ -96,6 +116,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       if (founding !== undefined) {
         console.log("  founding (--install):");
         for (const s of founding) console.log(`    ${s.action.padEnd(6)} ${s.step}: ${s.detail}`);
+      }
+      if (claude !== undefined) {
+        console.log(`  claude (--claude): ${claude.changed ? "wired" : "already wired"}${claude.backedUp ? " (settings.json backed up)" : ""}`);
+        for (const s of claude.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
       }
       console.log(`  root:        ${root}`);
       console.log(`  bootstrap:   ${existsSync(bootstrap) ? "present" : "absent"}`);
