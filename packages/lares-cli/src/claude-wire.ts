@@ -12,7 +12,7 @@
  * before any change, and the result is JSON-validated before it replaces the file.
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, copyFileSync, renameSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, renameSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
@@ -92,7 +92,8 @@ export function wireClaudeHome(opts: { home?: string } = {}): ClaudeWireResult {
       steps.push({ item: spec.event, action: "missing-script", detail: `${abs} not found — skipped` });
       continue;
     }
-    try { chmodSync(abs, 0o755); } catch { /* non-POSIX — best effort */ }
+    // No chmod: the hooks run via `bash "<path>"` (settings.json + hooks.json), so +x
+    // is not required — and chmod'ing would dirty the read-only mempalace submodule.
     const groups = (hooks[spec.event] ??= []);
     const already = groups.some((g) => g.hooks?.some((h) => typeof h.command === "string" && h.command.includes(base)));
     if (already) {
