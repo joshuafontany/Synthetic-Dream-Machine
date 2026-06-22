@@ -35,7 +35,7 @@ import { cmdIngest }                  from "../commands/ingest.js";
 import { cmdWatch }                   from "../commands/watch.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
-  cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile,
+  cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
 
@@ -59,7 +59,8 @@ const COMMANDS: readonly Command[] = [
   { name: "status",        summary: "Print local node health: bootstrap presence, storage size, port in use.",      handler: cmdStatus        },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
-  { name: "reset",         summary: "Wipe .lararium/ + bootstrap, then re-init. Requires --force.",                  handler: cmdReset         },
+  { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },
+  { name: "reset",         summary: "Wipe .lararium/ + bootstrap, then re-init (identity in .lararium-identity/ is preserved). Requires --force.",        handler: cmdReset         },
   { name: "fresh",         summary: "reset --force, then serve.",                                                    handler: cmdFresh         },
   { name: "reconcile",     summary: "Idempotent dev/test restart: stop the incumbent on the port (graceful→force), [--fresh] wipe, then serve.", handler: cmdReconcile     },
   { name: "build-genesis", summary: "Build the deterministic genesis-island artifact.",                              handler: cmdBuildGenesis  },

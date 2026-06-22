@@ -7,22 +7,55 @@
  *   - did:key derivation happens in the TW5 VM (cold-boot-ceremony module)
  *   - displayName derives from `git config user.name` — local truth, no network call
  *
- * Key file naming:
- *   git email configured:  {dataDir}/.operator-key-{email-slug}.json
- *   git email absent:      {dataDir}/.operator-key.json
+ * Storage law — identity lives OUTSIDE the wipe zone:
+ *   callers pass the storage dir (`<root>/.lararium`); the keypair + card persist to
+ *   a SIBLING `<root>/.lararium-identity/`, structurally unreachable by any `reset`/
+ *   `rebuild` that rmSyncs `<root>/.lararium`. This realizes the law below (the key
+ *   MUST NOT sit inside an Automerge doc storage path) and the keypair-wipe lesson:
+ *   a destructive storage verb can no longer reach identity.
+ *
+ * Key file naming (inside the identity dir):
+ *   git email configured:  .operator-key-{email-slug}.json
+ *   git email absent:      .operator-key.json
  *
  * Different developers on the same machine each get their own keypair.
  * The keypair derives from a local CSPRNG — fully device-local, no external service.
  *
  * MUST NOT be placed inside any Automerge doc storage path — MUST NOT sync.
- * Mode 0o600 at write time; caller must ensure dataDir is not world-readable.
+ * Mode 0o600 at write time; caller must ensure the identity dir is not world-readable.
  */
 
 import { generateKeyPairSync } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, renameSync } from "node:fs";
+import { join, dirname } from "node:path";
+
+/**
+ * The identity dir — a SIBLING of the storage dir, structurally OUTSIDE any
+ * `.lararium/` wipe. `reset`/`rebuild` rmSync `<root>/.lararium`; the key + card
+ * live in `<root>/.lararium-identity` and no storage verb can reach them.
+ */
+function identityDir(dataDir: string): string {
+  return join(dirname(dataDir), ".lararium-identity");
+}
+
+/**
+ * One-time, best-effort migration of a legacy in-storage identity file into the
+ * sibling identity dir: moves `<dataDir>/<file>` → `<identityDir>/<file>` when the
+ * new location lacks it but the legacy one holds it. Idempotent — a no-op once moved.
+ */
+function migrateLegacyIdentity(dataDir: string, fileName: string): void {
+  const idDir   = identityDir(dataDir);
+  const nextLoc = join(idDir, fileName);
+  const legacy  = join(dataDir, fileName);
+  if (!existsSync(nextLoc) && existsSync(legacy)) {
+    mkdirSync(idDir, { recursive: true });
+    renameSync(legacy, nextLoc);
+    chmodSync(nextLoc, 0o600);
+    console.log(`[operator-key] migrated ${fileName} → .lararium-identity (out of the wipe zone)`);
+  }
+}
 
 // ── Local operator identity hint ──────────────────────────────────────────
 // Fully local-first: reads git config only. No network calls, no server tokens.
@@ -88,10 +121,16 @@ function keyFileName(login: string | null): string {
 export async function generateOrLoadOperatorKeypair(
   dataDir: string,
 ): Promise<OperatorIdentity> {
-  mkdirSync(dataDir, { recursive: true });
+  const idDir = identityDir(dataDir);
+  mkdirSync(idDir, { recursive: true });
 
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const keyFile  = join(dataDir, keyFileName(hint.login));
+  // Sweep BOTH identity files out of the wipe zone on every boot/init — the card
+  // is re-mintable but still identity; move it eagerly alongside the key so a
+  // `reset` between CLI identity loads can never strand it in `.lararium/`.
+  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
+  migrateLegacyIdentity(dataDir, cardFileName(hint.login));
+  const keyFile  = join(idDir, keyFileName(hint.login));
 
   let verifyingKey: string;
 
@@ -144,7 +183,8 @@ export async function generateOrLoadOperatorKeypair(
  */
 export async function loadOperatorVerifyingKey(dataDir: string): Promise<string> {
   const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const keyFile = join(dataDir, keyFileName(hint.login));
+  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
+  const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
       `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
@@ -170,9 +210,10 @@ function cardFileName(login: string | null): string {
  * freshness rides the per-challenge nonce, never the card.
  */
 export async function persistOperatorCard(dataDir: string, contactCardJson: string): Promise<void> {
-  mkdirSync(dataDir, { recursive: true });
+  const idDir = identityDir(dataDir);
+  mkdirSync(idDir, { recursive: true });
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const cardFile = join(dataDir, cardFileName(hint.login));
+  const cardFile = join(idDir, cardFileName(hint.login));
   writeFileSync(cardFile, contactCardJson, { mode: 0o600, encoding: "utf8" });
   chmodSync(cardFile, 0o600);
   console.log(`[operator-key] persisted ContactCard${hint.login ? ` for ${hint.login}` : ""}`);
@@ -184,7 +225,8 @@ export async function persistOperatorCard(dataDir: string, contactCardJson: stri
  */
 export async function loadOperatorCard(dataDir: string): Promise<string> {
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const cardFile = join(dataDir, cardFileName(hint.login));
+  migrateLegacyIdentity(dataDir, cardFileName(hint.login));
+  const cardFile = join(identityDir(dataDir), cardFileName(hint.login));
   if (!existsSync(cardFile)) {
     throw new Error(
       `[operator-key] no ContactCard at ${cardFile} — run \`lares init\` (it mints the card during the founding ceremony)`,
@@ -195,7 +237,8 @@ export async function loadOperatorCard(dataDir: string): Promise<string> {
 
 export async function loadOperatorSigningSeed(dataDir: string): Promise<Uint8Array> {
   const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  const keyFile = join(dataDir, keyFileName(hint.login));
+  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
+  const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
       `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,

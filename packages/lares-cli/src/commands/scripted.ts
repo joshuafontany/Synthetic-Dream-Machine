@@ -68,8 +68,13 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
  */
 export async function cmdReset(args: ParsedArgs): Promise<number> {
   const { rmSync, existsSync } = await import("node:fs");
-  // Isolated root: --root flag > LAR_ROOT env > default package dir.
-  const root      = args.options["root"] ?? process.env["LAR_ROOT"] ?? NODE_PKG;
+  // Root resolution MUST match the live node (main.ts: --root › LAR_ROOT › REPO_ROOT).
+  // The old `NODE_PKG` default was a confused-deputy bug: `reset` wiped the package
+  // sandbox while the node served the repo hearth — `fresh` reset one dir and booted
+  // another. Resolve once, then thread the SAME root through init + genesis so all
+  // three operate on one explicitly-designated root.
+  const root      = args.options["root"] ?? process.env["LAR_ROOT"] ?? REPO_ROOT;
+  const rootedArgs: ParsedArgs = { ...args, options: { ...args.options, root } };
   const storage   = join(root, ".lararium");
   const bootstrap = join(root, "genesis", "social-bootstrap.json");
   const islandBin = join(root, "genesis", "island.bin");
@@ -94,12 +99,13 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandSha, { force: true });
   rmSync(islandShaPre, { force: true });
   rmSync(islandCid, { force: true });
+  console.log(`[lares reset] preserved identity: ${join(root, ".lararium-identity")} (out of the wipe zone)`);
   console.log("[lares reset] cleared. Running lares init…");
   const { cmdInit } = await import("./init.js");
-  const initCode = await cmdInit(args);
+  const initCode = await cmdInit(rootedArgs);
   if (initCode !== 0) return initCode;
   console.log("[lares reset] rebuilding genesis artifact…");
-  return cmdBuildGenesis(args);
+  return cmdBuildGenesis(rootedArgs);
 }
 
 /** `lares fresh` — reset (--force implied) then serve. */
@@ -133,4 +139,36 @@ export async function cmdReconcile(args: ParsedArgs): Promise<number> {
     if (resetCode !== 0) return resetCode;
   }
   return cmdServe(args);
+}
+
+/**
+ * `lares rebuild` — the identity-safe dep-bump cure (Tier 0).
+ *
+ * When a dependency bump (keyhive / automerge / beelay / TW5) skews the on-disk
+ * serde format, the vessel-host can't deserialize the stored genesis engine and
+ * faults (`tag for enum is not valid`). The cure is to REBUILD the genesis engine
+ * under the current deps — NOT to wipe storage and NEVER to touch identity.
+ *
+ * Idempotent: stop the incumbent on the port (graceful→force, like reconcile),
+ * rebuild genesis under the explicitly-resolved root, then serve. No `.lararium`
+ * wipe, no key/card touch — the operator's DID survives untouched. Reserve `reset`/
+ * `fresh` for true re-founding; reach for `rebuild` first on a dep-bump fault.
+ */
+export async function cmdRebuild(args: ParsedArgs): Promise<number> {
+  const root       = args.options["root"] ?? process.env["LAR_ROOT"] ?? REPO_ROOT;
+  const rootedArgs: ParsedArgs = { ...args, options: { ...args.options, root } };
+  const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
+  const { stopIncumbent } = await import("../port-control.js");
+  try {
+    const r = await stopIncumbent(port);
+    if (r.stopped) console.log(`[lares rebuild] stopped incumbent on :${port} (${r.forced ? "forced" : "graceful"})`);
+    else           console.log(`[lares rebuild] :${port} already free`);
+  } catch (e) {
+    console.error(`[lares rebuild] ${e instanceof Error ? e.message : String(e)}`);
+    return 1;
+  }
+  console.log("[lares rebuild] rebuilding genesis engine under current deps (storage + identity untouched)…");
+  const genesisCode = await cmdBuildGenesis(rootedArgs);
+  if (genesisCode !== 0) return genesisCode;
+  return cmdServe(rootedArgs);
 }

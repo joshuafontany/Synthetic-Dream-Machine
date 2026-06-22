@@ -48,6 +48,8 @@ packages/lararium-node/playwright-report
 # Lararium node storage — per-deployment, never committed
 .lararium
 packages/lararium-node/.lararium/
+# Operator identity — keypair + contact card, 0600 secrets, OUT of the wipe zone
+.lararium-identity/
 
 # scratch wiki — operator's live editable surface, never committed.
 # Named wikis (e.g. wikis/@lares-history/) are checked in.

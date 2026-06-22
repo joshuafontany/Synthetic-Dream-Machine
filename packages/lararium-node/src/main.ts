@@ -128,7 +128,26 @@ async function main(): Promise<void> {
   process.on("SIGTERM", shutdown);
 }
 
+/**
+ * Serde-skew detector — a dependency bump (keyhive / automerge / beelay / TW5) can
+ * leave the on-disk genesis engine serialized in a format the new deserializer cannot
+ * read; the vessel-host then faults with a Rust enum-tag error. Rather than a bare
+ * boot-loop `fatal:`, name the condition and point at the identity-safe cure.
+ */
+function isSerdeSkewFault(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err);
+  return /tag for enum is not valid|manifest handler threw|\[vessel-host\] fault/i.test(msg);
+}
+
 main().catch((err) => {
+  if (isSerdeSkewFault(err)) {
+    console.error("[lararium] STORED-BYTES SERDE SKEW — the vessel could not deserialize the stored genesis engine.");
+    console.error("[lararium]   Cause: stored bytes predate a dependency bump (keyhive / automerge / beelay / TW5).");
+    console.error("[lararium]   Cure (identity-safe, no data loss): run `lares rebuild`");
+    console.error("[lararium]         — rebuilds the genesis engine under current deps; your operator key/card are untouched.");
+    console.error("[lararium]   underlying:", err instanceof Error ? err.message : String(err));
+    process.exit(75);  // EX_TEMPFAIL — recoverable, distinct from a generic fatal(1)
+  }
   console.error("[lararium] fatal:", err);
   process.exit(1);
 });
