@@ -96,12 +96,21 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
     steps.push({ step: "mempalace", action: ok ? "ran" : "failed", detail: r.map((s) => `${s.step}:${s.ok ? "ok" : "fail"}`).join(" ") });
   }
 
-  // 3. Init — keypair + bootstrap + ceremony. Self-guards on bootstrap; keypair never wiped.
+  // 3. Init — FOUND a new PersonGroup, or JOIN an existing one when an admit payload
+  //    is provided (--admit FILE → cmdInit routes admitPayloadPath). Self-guards on the
+  //    bootstrap (idempotent: already founded/joined → skip); the keypair is never wiped.
   if (present("init")) {
-    steps.push({ step: "init", action: "skip", detail: "bootstrap present — keypair + ceremony intact" });
+    steps.push({ step: "init", action: "skip", detail: "bootstrap present — already founded/joined; keypair intact" });
   } else {
+    const admit = args.options["admit"];
     const code = await cmdInit(args);
-    steps.push({ step: "init", action: code === 0 ? "ran" : "failed", detail: code === 0 ? "lares init (founded)" : `init exited ${code}` });
+    const detail =
+      code !== 0
+        ? `init exited ${code}`
+        : admit
+          ? `JOINED PersonGroup via admit payload (${admit}) — own keypair, same group`
+          : "lares init (founded a new PersonGroup)";
+    steps.push({ step: "init", action: code === 0 ? "ran" : "failed", detail });
     if (code !== 0) return steps;
   }
 

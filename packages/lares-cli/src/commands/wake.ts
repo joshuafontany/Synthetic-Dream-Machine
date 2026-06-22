@@ -31,7 +31,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //    Each step is a no-op when its artifact is present; genesis is never rebuilt; the
   //    keypair is never wiped; --install never passes --force.
   let founding: FoundStep[] | undefined;
-  if (args.flags["install"]) founding = await foundIfAbsent(args, { root, bootstrap });
+  // The full standup runs under --install (found a first vessel) OR --admit FILE
+  // (join an existing PersonGroup — own fresh keypair, same group). Both idempotent.
+  const doStandup = args.flags["install"] === true || args.options["admit"] !== undefined;
+  if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
   const integration = checkMempalaceIntegration();
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.

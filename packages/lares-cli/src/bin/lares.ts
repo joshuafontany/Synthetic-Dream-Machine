@@ -48,7 +48,7 @@ interface Command {
 }
 
 const COMMANDS: readonly Command[] = [
-  { name: "wake",          summary: "Boot ENTRY POINT (idempotent, every awakening): check (--install) the mempalace integration, ensure the node up (attach if healthy, start detached if down), emit a live hydration frame.", handler: cmdWake },
+  { name: "wake",          summary: "Boot ENTRY POINT (idempotent, every awakening): ensure the node up (attach if healthy, start detached if down) + emit a live hydration frame. --install founds the whole stack from a cold pull; --admit FILE joins an existing operator PersonGroup (own keypair, same group) from a device-admit payload.", handler: cmdWake },
   { name: "init",          summary: "Bootstrap a new Lararium node (seed identities/circles/sessions/admin docs).", handler: cmdInit          },
   { name: "act",           summary: "Residency Model ACTION verb (ADD/COPY/MOVE/CLEAR/DROP/LOAD). Run `lares act` for usage.", handler: cmdAct          },
   { name: "ingest",        summary: "Disk→records through the §6 gate: scan + diff (preview) or --apply through the island's INGEST verb.", handler: cmdIngest       },
