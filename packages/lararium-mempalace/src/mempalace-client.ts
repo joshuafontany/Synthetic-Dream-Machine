@@ -43,6 +43,7 @@ export interface ListDrawersResult {
 export interface DrawerContent {
   drawer_id: string;
   content: string;
+  metadata?: Record<string, unknown>;
   [key: string]: unknown;
 }
 
