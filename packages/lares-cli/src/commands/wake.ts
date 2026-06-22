@@ -9,7 +9,7 @@
  * never hard-fails the session (the `ok` field tells the truth).
  */
 
-import { existsSync, mkdirSync, openSync } from "node:fs";
+import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
@@ -60,7 +60,14 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     } else {
       const dataDir = join(root, ".lararium");
       mkdirSync(dataDir, { recursive: true });
-      const logFd = openSync(join(dataDir, "wake-serve.log"), "a");
+      const log = join(dataDir, "wake-serve.log");
+      // Readiness is SELF-ATTESTED, not requested (no web2 /health probe): the node
+      // writes its boot phases to this log — `phase → vessel-ready` on success,
+      // `fatal:` on a boot fault. We read that attestation, local-first, from the byte
+      // offset we start appending at. (Fuller CRDT form later: a heartbeat tick in the
+      // node's oracle doc, read via the change-feed.)
+      const startOffset = existsSync(log) ? statSync(log).size : 0;
+      const logFd = openSync(log, "a");
       // Detached + unref so the hook never blocks on the long-lived daemon.
       const child = spawn("node", [distMain, "--port", String(port), "--root", root], {
         cwd: join(repoRoot, "packages", "lararium-node"),
@@ -70,27 +77,33 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       });
       child.unref();
       started = true;
-      const log = join(dataDir, "wake-serve.log");
-      const deadline = Date.now() + 12_000;
+
+      const readAttestation = (): string => {
+        try { return readFileSync(log, "utf8").slice(startOffset); } catch { return ""; }
+      };
+      const deadline = Date.now() + 15_000;
+      let phase: "starting" | "ready" | "fault" = "starting";
       while (Date.now() < deadline) {
-        if (await probePort(port)) {
-          nodeUp = true;
-          break;
-        }
-        await sleep(250);
+        const tail = readAttestation();
+        if (/fatal:/.test(tail)) { phase = "fault"; break; }
+        if (tail.includes("vessel-ready")) { phase = "ready"; break; }
+        await sleep(200);
       }
-      // Confirm the node STAYS up — a boot that faults (e.g. a keyhive membership
-      // gate) binds the port then exits, so a single bind is not "live" (GroundedVow:
-      // never report up for a node that died). Settle, then re-probe.
-      if (nodeUp) {
+      // `vessel-ready` is attested BEFORE the admin-keyhive gates settle, so a gate
+      // fault (e.g. Gate B) surfaces as a LATE `fatal:`. After a ready attestation,
+      // settle and re-read for that late fault — never report up for a node that died.
+      if (phase === "ready") {
         await sleep(1500);
-        nodeUp = await probePort(port);
-        nodeNote = nodeUp
-          ? `started detached (pid ${child.pid ?? "?"})`
-          : `bound :${port} then exited — boot fault (see ${log})`;
-      } else {
-        nodeNote = `starting detached (pid ${child.pid ?? "?"}); not ready within 12s — see ${log}`;
+        if (/fatal:/.test(readAttestation())) phase = "fault";
       }
+      // `ready` = attested vessel-ready, no late fault, and the port is actually bound.
+      nodeUp = phase === "ready" && (await probePort(port));
+      nodeNote =
+        phase === "ready"
+          ? `started detached (pid ${child.pid ?? "?"}); attested vessel-ready`
+          : phase === "fault"
+            ? `started then attested a boot fault — see ${log}`
+            : `starting detached (pid ${child.pid ?? "?"}); no vessel-ready attestation within 15s — see ${log}`;
     }
   }
 
