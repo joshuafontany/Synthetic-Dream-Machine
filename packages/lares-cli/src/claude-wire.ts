@@ -13,9 +13,46 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, renameSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
+
+/** Resolve the mempalace-mcp executable's absolute path (prefer ~/.local/bin, then PATH). */
+function resolveMempalaceMcp(): string | null {
+  const win = process.platform === "win32";
+  const exe = win ? "mempalace-mcp.exe" : "mempalace-mcp";
+  const dirs = [join(homedir(), ".local", "bin"), ...(process.env["PATH"] ?? "").split(win ? ";" : ":")];
+  for (const d of dirs) {
+    if (!d) continue;
+    const p = join(d, exe);
+    if (existsSync(p)) return p;
+  }
+  return null;
+}
+
+/**
+ * Register the mempalace MCP in the store Claude Code actually reads (~/.claude.json,
+ * via `claude mcp add`) — NOT settings.json, which Claude ignores for mcpServers.
+ * Idempotent (skips if already registered); graceful if the `claude` CLI is absent.
+ */
+function registerMempalaceMcp(): ClaudeWireStep {
+  const mcpCmd = resolveMempalaceMcp();
+  if (mcpCmd === null) {
+    return { item: "mcp:mempalace", action: "missing-script", detail: "mempalace-mcp not on PATH — run `lares wake --install`" };
+  }
+  const got = spawnSync("claude", ["mcp", "get", "mempalace"], { encoding: "utf8", timeout: 10_000 });
+  if (got.error !== undefined) {
+    return { item: "mcp:mempalace", action: "missing-script", detail: `\`claude\` CLI not found — register: claude mcp add --scope user mempalace -- ${mcpCmd}` };
+  }
+  if (got.status === 0) {
+    return { item: "mcp:mempalace", action: "present", detail: "already registered (claude mcp / ~/.claude.json)" };
+  }
+  const r = spawnSync("claude", ["mcp", "add", "--scope", "user", "mempalace", "--", mcpCmd], { encoding: "utf8", timeout: 15_000 });
+  return r.status === 0
+    ? { item: "mcp:mempalace", action: "wired", detail: `claude mcp add — ${mcpCmd}` }
+    : { item: "mcp:mempalace", action: "missing-script", detail: `claude mcp add failed: ${(r.stderr ?? "").trim().slice(0, 80)}` };
+}
 
 interface HookCommand {
   readonly type: string;
@@ -120,14 +157,14 @@ export function wireClaudeHome(opts: { home?: string } = {}): ClaudeWireResult {
     changed = true;
   }
 
-  const mcp = (settings.mcpServers ??= {});
-  if (mcp["mempalace"] !== undefined) {
-    steps.push({ item: "mcp:mempalace", action: "present", detail: "mempalace MCP already registered" });
-  } else {
-    mcp["mempalace"] = { command: "mempalace-mcp" };
-    steps.push({ item: "mcp:mempalace", action: "wired", detail: "mempalace-mcp (must be on PATH; `pip install -e ./mempalace`)" });
+  // MCP lives in ~/.claude.json (via `claude mcp add`), NOT settings.json — Claude
+  // ignores mcpServers here. Clean up any dead settings.json entry from earlier wiring,
+  // then register through the real store.
+  if (settings.mcpServers !== undefined && settings.mcpServers["mempalace"] !== undefined) {
+    delete settings.mcpServers["mempalace"];
     changed = true;
   }
+  steps.push(registerMempalaceMcp());
 
   if (changed) {
     const tmp = settingsPath + ".tmp";
