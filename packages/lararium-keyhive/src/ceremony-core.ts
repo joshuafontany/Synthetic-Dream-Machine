@@ -252,6 +252,88 @@ export async function runDeviceAdmitCore(
 }
 
 // ---------------------------------------------------------------------------
+// Device-admit ACCEPT (Model-B: delegate a DISTINCT new-device key into the group)
+// ---------------------------------------------------------------------------
+
+export interface DeviceAdmitAcceptInput {
+  /** The FOUNDER's operator seed (the admitting vessel). */
+  operatorSeed:          Uint8Array;
+  personGroupDocIdHex:   string;
+  personGroupAgentIdHex: string;
+  meshCabalDocIdHex:     string;
+  /** The founder's existing cap events (base64 bytes + variant), from its admin doc. */
+  capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
+  /** The JOINEE's self-certifying ContactCard JSON (its public identity), out-of-band. */
+  newDeviceContactCardJson: string;
+  syncUrl:               string | null;
+  islandDocUrl?:         string | null;
+}
+
+/**
+ * Model-B accept: the founder receives a NEW device's public ContactCard, delegates
+ * that distinct DID into the PersonGroup (a fresh DELEGATED event), and repackages
+ * ALL cap events (existing + the new delegation) as a device-admit/v1 payload.
+ *
+ * ⚠ PROVISIONAL — founder-side only; NOT a complete cross-peer admit (witnessed
+ * 2026-06-21). The delegation is correct (delegated id == joinee Individual, the
+ * DELEGATED + CGKA events fire). BUT a joinee that ingests these cap events still
+ * FAILS Gate B: the key-chain/membership is necessary but NOT sufficient — the joinee
+ * also needs the encrypted DOCUMENT content, which keyhive moves via sedimentree/Beelay
+ * (Rust-only; NOT in the keyhive_wasm JS surface). From JS the gap closes only by
+ * transporting the document ourselves — ship an `Archive` (Archive.toBytes →
+ * ingestArchive, whole keyhive state incl. the CiphertextStore) or the ciphertext
+ * blobs over our own transport, then `tryDecrypt`. Until that (or a Beelay JS binding)
+ * lands, Model-A (shared key = same Individual) is the working federation path; this
+ * accept stands as the founder-side foundation. (substrate map: lar:///…/docs/lares/federation)
+ *
+ * No secret crosses the wire: in = the joinee's public card; out = public cap events.
+ */
+export async function runDeviceAdmitAccept(
+  input: DeviceAdmitAcceptInput,
+): Promise<DeviceAdmitPayload> {
+  const keyhive = new KeyhiveProvider();
+  const store   = new InMemoryEventStore();
+
+  // Rehydrate the founder's group state from its existing cap events.
+  for (const r of input.capEvents) {
+    const bytes   = base64ToBytes(r.bytes);
+    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.slice());
+    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    await store.put({ hash, variant: r.variant, bytes });
+  }
+  await keyhive.init({ seed: input.operatorSeed, eventStore: store });
+  await keyhive.hydrateFromEventStore();
+
+  // Founder self-check: it must actually hold the PersonGroup before it can admit.
+  const vesselHex = await keyhive.vesselIdentifierHex();
+  const gateB = await keyhive.verifySentinelMembership(vesselHex, input.personGroupDocIdHex);
+  if (!gateB.ok) throw new Error(`[ceremony] accept refused: founder not a PersonGroup member (${gateB.reason})`);
+
+  // Import the joinee's public Individual, then DELEGATE it into the PersonGroup —
+  // this fires the new DELEGATED event that makes the joinee a member.
+  const { id: newDeviceHex } = await keyhive.receiveContactCard(
+    new TextEncoder().encode(input.newDeviceContactCardJson),
+  );
+  await keyhive.addSentinelMember(newDeviceHex, input.personGroupDocIdHex);
+
+  // Collect ALL events (existing + the new delegation) into the payload.
+  const all = await store.list();
+  const capEvents = all.map((e) => ({ variant: e.variant, bytes: bytesToBase64(e.bytes) }));
+
+  await keyhive.dispose();
+
+  return {
+    kind: "device-admit/v1",
+    personGroupDocIdHex:   input.personGroupDocIdHex,
+    personGroupAgentIdHex: input.personGroupAgentIdHex,
+    meshCabalDocIdHex:     input.meshCabalDocIdHex,
+    capEvents,
+    syncUrl: input.syncUrl,
+    ...(input.islandDocUrl != null ? { islandDocUrl: input.islandDocUrl } : {}),
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Apply admit payload (vessel-admission path)
 // ---------------------------------------------------------------------------
 

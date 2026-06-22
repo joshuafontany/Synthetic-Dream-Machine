@@ -74,8 +74,8 @@ importers:
   packages/lararium-keyhive:
     dependencies:
       '@keyhive/keyhive':
-        specifier: 0.0.0-alpha.58b
-        version: 0.0.0-alpha.58b
+        specifier: 0.1.0-alpha.3
+        version: 0.1.0-alpha.3
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
@@ -468,8 +468,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@keyhive/keyhive@0.0.0-alpha.58b':
-    resolution: {integrity: sha512-WAQorh73QDZYIVYukoaAGC3oyj2nqVk7XwrTHIr/wzbAnjqtuyKxaVfvSJ40YeR+R7divpJZysIfGIbOpE6RLA==}
+  '@keyhive/keyhive@0.1.0-alpha.3':
+    resolution: {integrity: sha512-nDwhd7Uff7SgyuLXPioJ5MD8rOBS+aja592ix/OvQcANHTTW+sbBoinHIgV8RYKOa3zZanYVF0jumFSSp3a/5g==}
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
@@ -1686,7 +1686,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@keyhive/keyhive@0.0.0-alpha.58b': {}
+  '@keyhive/keyhive@0.1.0-alpha.3': {}
 
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
@@ -1961,6 +1961,26 @@ snapshots:
   '@types/ws@8.18.1':
     dependencies:
       '@types/node': 22.19.17
+
+  '@vitest/browser@3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)':
+    dependencies:
+      '@testing-library/dom': 10.4.1
+      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
+      '@vitest/mocker': 3.2.4(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))
+      '@vitest/utils': 3.2.4
+      magic-string: 0.30.21
+      sirv: 3.0.2
+      tinyrainbow: 2.0.0
+      vitest: 3.2.4(@types/node@24.12.3)(@vitest/browser@3.2.4)(lightningcss@1.32.0)(tsx@4.21.0)
+      ws: 8.20.0
+    optionalDependencies:
+      playwright: 1.59.1
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+    optional: true
 
   '@vitest/browser@3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)':
     dependencies:
@@ -2543,7 +2563,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.12.3
-      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)
+      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)
     transitivePeerDependencies:
       - jiti
       - less

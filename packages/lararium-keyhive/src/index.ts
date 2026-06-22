@@ -32,11 +32,11 @@ export type {
 // import it.
 
 export {
-  runFoundingCeremony, runDeviceAdmitCore, runApplyAdmitPayload,
+  runFoundingCeremony, runDeviceAdmitCore, runDeviceAdmitAccept, runApplyAdmitPayload,
 } from "./ceremony-core.js";
 export type {
   FoundingCeremonyInput, FoundingCeremonyResult,
-  DeviceAdmitCoreInput,
+  DeviceAdmitCoreInput, DeviceAdmitAcceptInput,
   ApplyAdmitInput, ApplyAdmitResult,
 } from "./ceremony-core.js";
 

@@ -22,7 +22,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {
-    "@keyhive/keyhive": "0.0.0-alpha.58b",
+    "@keyhive/keyhive": "0.1.0-alpha.3",
     "@lararium/mesh": "workspace:*",
     "@lararium/tw5": "workspace:*"
   }

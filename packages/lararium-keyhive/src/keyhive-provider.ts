@@ -99,7 +99,12 @@ export class KeyhiveProvider implements CapabilityProvider {
       }
     };
 
-    this.kh = await KH.Keyhive.init(signer, store, handler);
+    // forward_secrecy: false — documents carry the CGKA predecessor key chain, so a
+    // LATER-admitted device derives the doc key by replaying events (the multi-vessel
+    // admit path / Model-B). `true` would rotate keys forward and lock new readers out
+    // of prior state, requiring explicit rekey delivery. For one operator's own device
+    // swarm, replayable access is the right default (threat model = the operator's devices).
+    this.kh = await KH.Keyhive.init(signer, store, handler, false);
   }
 
   private requireKh(): KH.Keyhive {
@@ -157,21 +162,16 @@ export class KeyhiveProvider implements CapabilityProvider {
     const doc = await this.requireKh().getDocument(docId);
     if (!doc) throw new Error(`document not in scope (lost from local state?): ${args.bagUrl}`);
 
-    const signedDelegation = await this.requireKh().addMember(
+    // 0.1.0: addMember returns AddMemberUpdate { delegation: SignedDelegation, leafSecrets }.
+    const update = await this.requireKh().addMember(
       audienceAgent, doc.toMembered(), access, [],
     );
 
-    // SignedDelegation in alpha.56c does NOT expose .toBytes(). It DOES
-    // expose .signature: Uint8Array which is unique per delegation. We use
-    // the signature hex as a stable delegationId for revocation.
-    //
-    // Transport bytes for the audience peer flow through the event_handler
-    // callback (DELEGATED variant). Callers that need to ship the
-    // delegation across the wire pull events from the EventStore. The
-    // DelegateResult.bytes field returns the signature (for now); D.4
-    // tightens this up by exposing the full event set captured during the
-    // addMember call.
-    const sigBytes = signedDelegation.signature;
+    // SignedDelegation exposes .signature: Uint8Array (unique per delegation) — we use
+    // its hex as a stable delegationId for revocation. The transport bytes for the
+    // audience peer flow through the event_handler (DELEGATED + the CGKA ops addMember
+    // also fires) into the EventStore; callers ship those to admit a peer.
+    const sigBytes = update.delegation.signature;
     const delegationId = bytesToHex(sigBytes);
     this.delegations.set(delegationId, sigBytes);
     // Track audience+bag+access for revoke().

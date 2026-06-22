@@ -49,7 +49,7 @@ async function makePeer(label: string): Promise<KH.Keyhive> {
   const store  = KH.CiphertextStore.newInMemory();
   const events: unknown[] = [];
   const handler = (event: unknown): void => { events.push(event); };
-  const kh = await KH.Keyhive.init(signer, store, handler);
+  const kh = await KH.Keyhive.init(signer, store, handler, false);
   const t1 = performance.now();
   console.log(`[probe] ${label} init done in ${(t1 - t0).toFixed(1)}ms; whoami=${kh.idString}`);
   return kh;

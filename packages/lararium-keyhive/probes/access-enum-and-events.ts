@@ -79,6 +79,7 @@ const operator = await KH.Keyhive.init(
   KH.Signer.memorySignerFromBytes(seedA),
   KH.CiphertextStore.newInMemory(),
   captureHandler,
+  false,
 );
 console.log(`[probe] operator init done; events captured so far: ${events.length}`);
 
@@ -86,6 +87,7 @@ const device = await KH.Keyhive.init(
   KH.Signer.memorySignerFromBytes(seedB),
   KH.CiphertextStore.newInMemory(),
   captureHandler,
+  false,
 );
 console.log(`[probe] device init done; events captured so far: ${events.length}`);
 
