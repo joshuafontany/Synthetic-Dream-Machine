@@ -26,7 +26,7 @@ export interface BearingRecord {
   aim: string | null;
   /** Raw yield payload, verbatim. Null if no yield frame. */
   yield: string | null;
-  /** 0..1, low = drifted (the keeper's gauge). */
+  /** 0..20 (the house Maybe-Logic continuum), low = drifted (the keeper's gauge). */
   confidence: number;
   /** e.g. ["arity:2"], ["session-form"], ["frame:no-yield"]. */
   driftFlags: string[];
@@ -43,7 +43,7 @@ export interface BearingQuery {
   aimLike?: string;
   /** Substring match on the raw yield URI. */
   yieldLike?: string;
-  /** The keeper's drift-gauge: `<= 0.4` surfaces the turns whose frame drifted. */
+  /** The keeper's drift-gauge: `<= 8` (provisional bands) surfaces the turns whose frame drifted. */
   maxConfidence?: number;
   minConfidence?: number;
   /** Point-in-time: keep bearings whose [validFrom, validTo] span contains this instant. */

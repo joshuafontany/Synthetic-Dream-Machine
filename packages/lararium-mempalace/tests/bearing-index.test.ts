@@ -11,7 +11,7 @@ function rec(over: Partial<BearingRecord>): BearingRecord {
     turn: "m1",
     aim: "lar:///operator.weighs.deps",
     yield: "lar:///council.fork.named",
-    confidence: 0.9,
+    confidence: 18,
     driftFlags: [],
     validFrom: null,
     validTo: null,
@@ -60,8 +60,8 @@ describe("bearing-index (local-only NDJSON store)", () => {
   });
 
   it("keeps both drifted spellings distinct, and matches verbatim (case-sensitive)", () => {
-    appendBearing(file, rec({ turn: "m1", aim: "lar:///Breach.Watch.Fires", confidence: 0.4 }));
-    appendBearing(file, rec({ turn: "m2", aim: "lar:///breach.watch.fires", confidence: 0.4 }));
+    appendBearing(file, rec({ turn: "m1", aim: "lar:///Breach.Watch.Fires", confidence: 8 }));
+    appendBearing(file, rec({ turn: "m2", aim: "lar:///breach.watch.fires", confidence: 8 }));
     // both stored distinctly — a case-identical substring finds both (no collision)
     expect(queryBearings(file, { aimLike: "reach." })).toHaveLength(2);
     // verbatim: matching is case-sensitive, so the drift is never folded away
@@ -70,9 +70,9 @@ describe("bearing-index (local-only NDJSON store)", () => {
   });
 
   it("drift-gauge: maxConfidence surfaces only drifted bearings", () => {
-    appendBearing(file, rec({ turn: "m1", confidence: 0.9 }));
-    appendBearing(file, rec({ turn: "m2", confidence: 0.4, driftFlags: ["arity:2"] }));
-    const drifted = queryBearings(file, { maxConfidence: 0.5 });
+    appendBearing(file, rec({ turn: "m1", confidence: 18 }));
+    appendBearing(file, rec({ turn: "m2", confidence: 8, driftFlags: ["arity:2"] }));
+    const drifted = queryBearings(file, { maxConfidence: 12 });
     expect(drifted).toHaveLength(1);
     expect(drifted[0].driftFlags).toEqual(["arity:2"]);
   });

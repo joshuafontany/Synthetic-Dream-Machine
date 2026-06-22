@@ -54,7 +54,7 @@ describe("mempalace-client (read leg, against a fake NDJSON sidecar)", () => {
         });
         if (record) appendBearing(file, record);
       }
-      const clean = queryBearings(file, { minConfidence: 0.9 });
+      const clean = queryBearings(file, { minConfidence: 18 });
       expect(clean).toHaveLength(1);
       expect(clean[0].aim).toContain("operator.weighs.deps");
       expect(clean[0].yield).toContain("council.fork.named");

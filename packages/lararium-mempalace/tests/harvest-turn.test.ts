@@ -12,7 +12,7 @@ describe("harvest-turn (glue: @lararium/mesh parser -> bearing record)", () => {
     expect(r).not.toBeNull();
     expect(r!.aim).toContain("operator.weighs.deps");
     expect(r!.yield).toContain("council.fork.named");
-    expect(r!.confidence).toBe(0.9);
+    expect(r!.confidence).toBe(18);
     expect(r!.sourceDrawerId).toBe("sweep_s1_m1");
   });
 
@@ -22,7 +22,7 @@ describe("harvest-turn (glue: @lararium/mesh parser -> bearing record)", () => {
 
   it("carries drift through to the record (low confidence + flags)", () => {
     const r = harvestTurn("<<~ lares aim lar:///two.terms -> x >>\n<<~ lares yield lar:///two.terms -> ? >>", CTX);
-    expect(r!.confidence).toBe(0.4);
+    expect(r!.confidence).toBe(8);
     expect(r!.driftFlags).toContain("arity:2");
   });
 });
