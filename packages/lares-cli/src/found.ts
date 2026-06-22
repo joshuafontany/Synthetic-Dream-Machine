@@ -21,7 +21,7 @@ import { runCommand } from "./spawn.js";
 import { cmdInit } from "./commands/init.js";
 import { cmdBuildGenesis } from "./commands/scripted.js";
 import { checkMempalaceIntegration, installMempalaceIntegration } from "./integration-check.js";
-import { linkLaresGlobal } from "./link-bin.js";
+import { linkLaresGlobal, linkMempalaceBins } from "./link-bin.js";
 import type { ParsedArgs } from "./parse-args.js";
 
 const NODE_DIST_MAIN = join(repoRoot, "packages", "lararium-node", "dist", "src", "main.js");
@@ -103,6 +103,18 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
     const r = installMempalaceIntegration();
     const ok = r.every((s) => s.ok);
     steps.push({ step: "mempalace", action: ok ? "ran" : "failed", detail: r.map((s) => `${s.step}:${s.ok ? "ok" : "fail"}`).join(" ") });
+  }
+
+  // 2b. Link the mempalace console scripts into ~/.local/bin so Claude's hook + MCP
+  //     environment finds them WITHOUT the venv active (the venv-on-PATH gap that broke
+  //     the Stop keep-hook and recall). Idempotent; non-fatal.
+  {
+    const bins = linkMempalaceBins();
+    steps.push({
+      step: "link-mempalace",
+      action: bins.every((b) => b.ok) ? "ran" : "failed",
+      detail: bins.map((b) => b.detail).join(" · "),
+    });
   }
 
   // 3. Init — FOUND a new PersonGroup, or JOIN an existing one when an admit payload

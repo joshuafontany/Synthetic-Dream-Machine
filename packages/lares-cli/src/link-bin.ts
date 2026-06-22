@@ -24,6 +24,50 @@ function onPath(dir: string): boolean {
   return (process.env["PATH"] ?? "").split(sep).some((d) => d.length > 0 && norm(d) === norm(dir));
 }
 
+/** Resolve a console script's source abs path from PATH (skipping ~/.local/bin so we
+ *  never symlink to our own target). Used to find the venv-installed mempalace bins. */
+function resolveBin(name: string): string | null {
+  const win = process.platform === "win32";
+  const exe = win ? `${name}.exe` : name;
+  const localBin = join(homedir(), ".local", "bin").replace(/[/\\]+$/, "").toLowerCase();
+  for (const d of (process.env["PATH"] ?? "").split(win ? ";" : ":")) {
+    if (!d || d.replace(/[/\\]+$/, "").toLowerCase() === localBin) continue;
+    const p = join(d, exe);
+    if (existsSync(p)) return p;
+  }
+  return null;
+}
+
+/**
+ * Symlink a mempalace console script (mempalace / mempalace-mcp) into ~/.local/bin so
+ * Claude's hook + MCP environment finds it WITHOUT the venv active — the venv-on-PATH
+ * gap that broke the Stop hook and recall. The script's shebang pins the venv python
+ * (with chromadb), so it still runs correctly. Idempotent; non-fatal.
+ */
+export function linkConsoleScript(name: string): LinkResult {
+  const src = resolveBin(name);
+  if (src === null) return { ok: false, detail: `${name} not on PATH — run \`lares wake --install\` (pip install)` };
+  if (process.platform === "win32") {
+    // pip writes <name>.exe into its Scripts dir (on PATH at install); not a symlink idiom.
+    return { ok: true, detail: `${name} at ${src} (ensure its dir is on PATH)` };
+  }
+  const target = join(homedir(), ".local", "bin");
+  mkdirSync(target, { recursive: true });
+  const link = join(target, name);
+  try {
+    if (existsSync(link)) rmSync(link);
+    symlinkSync(src, link);
+    return { ok: true, detail: `symlinked ${link} -> ${src}` };
+  } catch (e) {
+    return { ok: false, detail: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+/** Link both mempalace console scripts so the keep-hooks + recall MCP resolve venv-free. */
+export function linkMempalaceBins(): LinkResult[] {
+  return ["mempalace", "mempalace-mcp"].map(linkConsoleScript);
+}
+
 export function linkLaresGlobal(): LinkResult {
   if (!existsSync(BIN)) return { ok: false, detail: `${BIN} not found — build first` };
 
