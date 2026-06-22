@@ -16,7 +16,8 @@ import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath } from "../env.js";
 import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
-import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
+import { checkMempalaceIntegration } from "../integration-check.js";
+import { foundIfAbsent, type FoundStep } from "../found.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -26,9 +27,11 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   const root = larRoot();
   const bootstrap = larBootstrapPath();
 
-  // 1. Integration: install on demand (one-time), then always report the cheap check.
-  let installed: InstallStep[] | undefined;
-  if (args.flags["install"]) installed = installMempalaceIntegration();
+  // 1. Found-if-absent (the whole shebang) under --install; else just report the cheap check.
+  //    Each step is a no-op when its artifact is present; genesis is never rebuilt; the
+  //    keypair is never wiped; --install never passes --force.
+  let founding: FoundStep[] | undefined;
+  if (args.flags["install"]) founding = await foundIfAbsent(args, { root, bootstrap });
   const integration = checkMempalaceIntegration();
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
@@ -75,7 +78,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     data: {
       node: { up: nodeUp, started, port, note: nodeNote },
       mempalace: { ok: integration.ok, checks: integration.checks },
-      ...(installed !== undefined ? { installed } : {}),
+      ...(founding !== undefined ? { founding } : {}),
       root,
       bootstrap: existsSync(bootstrap) ? "present" : "absent",
       timestamp: new Date().toISOString(),
@@ -87,8 +90,9 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       for (const c of integration.checks) {
         console.log(`    ${c.ok ? "ok     " : "MISSING"} ${c.name}: ${c.detail}`);
       }
-      if (installed !== undefined) {
-        for (const s of installed) console.log(`    install ${s.ok ? "ok " : "FAIL"} ${s.step}: ${s.detail}`);
+      if (founding !== undefined) {
+        console.log("  founding (--install):");
+        for (const s of founding) console.log(`    ${s.action.padEnd(6)} ${s.step}: ${s.detail}`);
       }
       console.log(`  root:        ${root}`);
       console.log(`  bootstrap:   ${existsSync(bootstrap) ? "present" : "absent"}`);
