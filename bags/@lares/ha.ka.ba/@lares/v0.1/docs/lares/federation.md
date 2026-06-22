@@ -82,7 +82,19 @@ A joining vessel proves itself on every boot through three keyhive gates: its DI
 
 A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key.
 
--><-
+<<~/ahu >>
+
+<<~ ahu #windows >>
+
+## The Windows Surface
+
+A QA vessel on native Windows 11 (PowerShell, not WSL) stands up through the same `lares wake --install` / `--admit`, with these surface notes:
+
+- **`lares` global** — `--install`/`--admit` writes a `lares.cmd` shim beside the bin (on Unix it symlinks into `~/.local/bin`). Add that directory to PATH so `lares` runs bare. The link step is self-contained — it does not depend on `pnpm setup`/`PNPM_HOME`.
+- **Python** — the integration check resolves `python3` → `python` → `py`, so Windows' `python`/`py` is found.
+- **The wake hook is portable** — it runs node exec-form (`node lares-wake-hook.mjs`), no shell, identical on Windows and Unix.
+- **mempalace's keep-hooks are bash** (`Stop` / `PreCompact`) — on native Windows they need **Git for Windows** (which Claude Code already requires for its bash tool). With Git Bash present, `lares wake --claude` wires them as `bash "<path>"`; without it, the verbatim keep-leg stays dark until Git for Windows is installed.
+- **`lares reconcile`** (the dev restart) uses `lsof`/`ss` — Unix-only; it does not run during a normal wake, but the restart loop awaits a Windows (netstat/taskkill) path.
 
 <<~/ahu >>
 

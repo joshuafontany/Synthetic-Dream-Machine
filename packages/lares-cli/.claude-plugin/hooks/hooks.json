@@ -1,12 +1,13 @@
 {
-  "description": "Lares wake — boot the live Lararium + mempalace on session start, hydrate the chat with a live-delta frame.",
+  "description": "Lares wake — boot the live Lararium + mempalace on session start, hydrate the chat with a live-delta frame. Portable (node exec-form, no bash).",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lares-wake-hook.sh\"",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/lares-wake-hook.mjs"],
             "timeout": 15
           }
         ]

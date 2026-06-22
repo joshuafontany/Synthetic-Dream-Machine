@@ -65,6 +65,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       const child = spawn("node", [distMain, "--port", String(port), "--root", root], {
         cwd: join(repoRoot, "packages", "lararium-node"),
         detached: true,
+        windowsHide: true, // no console window on Windows; harmless on Unix
         stdio: ["ignore", logFd, logFd],
       });
       child.unref();

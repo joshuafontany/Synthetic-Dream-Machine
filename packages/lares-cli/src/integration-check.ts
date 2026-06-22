@@ -17,6 +17,28 @@ const MEMPALACE_SIDECAR = join(MEMPALACE_DIR, "mempalace", "mcp_server.py");
 const MEMPALACE_PKG = join(repoRoot, "packages", "lararium-mempalace");
 const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 
+/**
+ * Resolve the Python interpreter cross-platform: `python3` (Unix), then `python` /
+ * `py` (Windows). Cached. Returns null when none responds to `--version`.
+ */
+let _python: string | null | undefined;
+export function resolvePython(): string | null {
+  if (_python !== undefined) return _python;
+  for (const cand of ["python3", "python", "py"]) {
+    try {
+      const r = spawnSync(cand, ["--version"], { timeout: 5_000, stdio: "ignore" });
+      if (r.error === undefined && r.status === 0) {
+        _python = cand;
+        return _python;
+      }
+    } catch {
+      /* try next */
+    }
+  }
+  _python = null;
+  return _python;
+}
+
 export interface IntegrationCheck {
   readonly name: string;
   readonly ok: boolean;
@@ -47,22 +69,25 @@ export function checkMempalaceIntegration(): IntegrationReport {
   });
 
   // find_spec does NOT execute the module (no heavy chromadb import) — wake-cheap.
+  const py = resolvePython();
   let sidecarOk = false;
-  let sidecarDetail = "python3 not found — install Python to reach the sidecar";
-  try {
-    const probe = spawnSync(
-      "python3",
-      ["-c", "import importlib.util as u, sys; sys.exit(0 if (u.find_spec('mempalace') and u.find_spec('chromadb')) else 1)"],
-      { cwd: MEMPALACE_DIR, timeout: 10_000 },
-    );
-    if (probe.error === undefined) {
-      sidecarOk = probe.status === 0;
-      sidecarDetail = sidecarOk
-        ? "python -m mempalace.mcp_server importable"
-        : "sidecar deps absent — `lares wake --install` (pip install -e ./mempalace)";
+  let sidecarDetail = "no python (python3/python/py) on PATH — install Python to reach the sidecar";
+  if (py !== null) {
+    try {
+      const probe = spawnSync(
+        py,
+        ["-c", "import importlib.util as u, sys; sys.exit(0 if (u.find_spec('mempalace') and u.find_spec('chromadb')) else 1)"],
+        { cwd: MEMPALACE_DIR, timeout: 10_000 },
+      );
+      if (probe.error === undefined) {
+        sidecarOk = probe.status === 0;
+        sidecarDetail = sidecarOk
+          ? `${py} -m mempalace.mcp_server importable`
+          : "sidecar deps absent — `lares wake --install` (pip install -e ./mempalace)";
+      }
+    } catch {
+      /* leave the not-found default */
     }
-  } catch {
-    /* leave the not-found default */
   }
   checks.push({ name: "sidecar-deps", ok: sidecarOk, detail: sidecarDetail });
 
@@ -100,10 +125,16 @@ export function installMempalaceIntegration(): InstallStep[] {
     steps.push({ step: "submodule-init", ran: false, ok: true, detail: "already present" });
   }
 
+  const py = resolvePython();
+  if (py === null) {
+    steps.push({ step: "pip-install", ran: false, ok: false, detail: "no python (python3/python/py) on PATH — install Python first" });
+    return steps;
+  }
+
   let sidecarOk = false;
   try {
     sidecarOk =
-      spawnSync("python3", ["-c", "import importlib.util as u,sys; sys.exit(0 if u.find_spec('chromadb') else 1)"], {
+      spawnSync(py, ["-c", "import importlib.util as u,sys; sys.exit(0 if u.find_spec('chromadb') else 1)"], {
         cwd: MEMPALACE_DIR,
         timeout: 10_000,
       }).status === 0;
@@ -112,8 +143,8 @@ export function installMempalaceIntegration(): InstallStep[] {
   }
   if (!sidecarOk) {
     try {
-      execFileSync("python3", ["-m", "pip", "install", "-e", "."], { cwd: MEMPALACE_DIR, stdio: "pipe", timeout: 600_000 });
-      steps.push({ step: "pip-install", ran: true, ok: true, detail: "pip install -e ./mempalace" });
+      execFileSync(py, ["-m", "pip", "install", "-e", "."], { cwd: MEMPALACE_DIR, stdio: "pipe", timeout: 600_000 });
+      steps.push({ step: "pip-install", ran: true, ok: true, detail: `${py} -m pip install -e ./mempalace` });
     } catch (e) {
       steps.push({ step: "pip-install", ran: true, ok: false, detail: errText(e).slice(0, 160) });
     }

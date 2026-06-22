@@ -21,6 +21,7 @@ import { runCommand } from "./spawn.js";
 import { cmdInit } from "./commands/init.js";
 import { cmdBuildGenesis } from "./commands/scripted.js";
 import { checkMempalaceIntegration, installMempalaceIntegration } from "./integration-check.js";
+import { linkLaresGlobal } from "./link-bin.js";
 import type { ParsedArgs } from "./parse-args.js";
 
 const NODE_DIST_MAIN = join(repoRoot, "packages", "lararium-node", "dist", "src", "main.js");
@@ -85,6 +86,14 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
       detail: built === 0 ? "pnpm install && pnpm -r build" : `build exited ${built}`,
     });
     if (built !== 0) return steps; // nothing downstream can serve without dist
+  }
+
+  // 1b. Global link — make `lares` runnable from anywhere (symlink into a user bin
+  //     on Unix, a .cmd shim on Windows). Self-contained, no pnpm/PNPM_HOME dependency.
+  //     Idempotent; non-fatal — a link failure never blocks the standup.
+  {
+    const r = linkLaresGlobal();
+    steps.push({ step: "link", action: r.ok ? "ran" : "failed", detail: r.detail });
   }
 
   // 2. Mempalace integration (idempotent internally).

@@ -20,6 +20,7 @@ import { repoRoot } from "@lararium/mesh/node";
 interface HookCommand {
   readonly type: string;
   readonly command: string;
+  readonly args?: string[];
   readonly timeout?: number;
 }
 interface HookGroup {
@@ -35,14 +36,19 @@ interface ClaudeSettings {
 
 interface HookSpec {
   readonly event: string;
-  readonly script: string; // repo-relative path to the hook .sh
+  readonly script: string; // repo-relative path to the hook
   readonly timeout: number;
+  /** node = exec-form, fully cross-platform; bash = needs Git-for-Windows on native Windows. */
+  readonly runner: "node" | "bash";
 }
 
 const HOOK_SPECS: readonly HookSpec[] = [
-  { event: "SessionStart", script: "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.sh", timeout: 15 },
-  { event: "Stop", script: "mempalace/.claude-plugin/hooks/mempal-stop-hook.sh", timeout: 30 },
-  { event: "PreCompact", script: "mempalace/.claude-plugin/hooks/mempal-precompact-hook.sh", timeout: 90 },
+  // Our wake hook is node (exec-form) → no shell, identical on Windows + Unix.
+  { event: "SessionStart", script: "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.mjs", timeout: 15, runner: "node" },
+  // mempalace's keep-hooks are bash (the submodule's own; we don't edit it) → on
+  // native Windows they need Git-for-Windows (which Claude Code already requires for bash).
+  { event: "Stop", script: "mempalace/.claude-plugin/hooks/mempal-stop-hook.sh", timeout: 30, runner: "bash" },
+  { event: "PreCompact", script: "mempalace/.claude-plugin/hooks/mempal-precompact-hook.sh", timeout: 90, runner: "bash" },
 ];
 
 export type WireAction = "wired" | "present" | "missing-script";
@@ -86,23 +92,32 @@ export function wireClaudeHome(opts: { home?: string } = {}): ClaudeWireResult {
 
   const hooks = (settings.hooks ??= {});
   for (const spec of HOOK_SPECS) {
-    const abs = join(repoRoot, spec.script);
+    // Forward-slash the absolute path: works in JSON, node, and bash on every OS
+    // (Windows backslashes break bash-arg + JSON-string handling).
+    const abs = join(repoRoot, spec.script).replace(/\\/g, "/");
     const base = spec.script.slice(spec.script.lastIndexOf("/") + 1);
     if (!existsSync(abs)) {
       steps.push({ item: spec.event, action: "missing-script", detail: `${abs} not found — skipped` });
       continue;
     }
-    // No chmod: the hooks run via `bash "<path>"` (settings.json + hooks.json), so +x
-    // is not required — and chmod'ing would dirty the read-only mempalace submodule.
+    // No chmod: node/bash invoke the file by path, so +x is not required — and
+    // chmod'ing would dirty the read-only mempalace submodule.
     const groups = (hooks[spec.event] ??= []);
-    const already = groups.some((g) => g.hooks?.some((h) => typeof h.command === "string" && h.command.includes(base)));
+    const mentions = (h: HookCommand): boolean =>
+      (typeof h.command === "string" && h.command.includes(base)) ||
+      (Array.isArray(h.args) && h.args.some((a) => typeof a === "string" && a.includes(base)));
+    const already = groups.some((g) => g.hooks?.some(mentions));
     if (already) {
-      steps.push({ item: spec.event, action: "present", detail: `${base} already wired` });
-    } else {
-      groups.push({ hooks: [{ type: "command", command: `bash "${abs}"`, timeout: spec.timeout }] });
-      steps.push({ item: spec.event, action: "wired", detail: `bash "${abs}"` });
-      changed = true;
+      steps.push({ item: spec.event, action: "present", detail: `${base} already wired (${spec.runner})` });
+      continue;
     }
+    const entry: HookCommand =
+      spec.runner === "node"
+        ? { type: "command", command: "node", args: [abs], timeout: spec.timeout }
+        : { type: "command", command: `bash "${abs}"`, timeout: spec.timeout };
+    groups.push({ hooks: [entry] });
+    steps.push({ item: spec.event, action: "wired", detail: `${spec.runner}: ${abs}` });
+    changed = true;
   }
 
   const mcp = (settings.mcpServers ??= {});
