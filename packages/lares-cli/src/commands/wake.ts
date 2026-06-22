@@ -64,8 +64,14 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       // Readiness is SELF-ATTESTED, not requested (no web2 /health probe): the node
       // writes its boot phases to this log — `phase → vessel-ready` on success,
       // `fatal:` on a boot fault. We read that attestation, local-first, from the byte
-      // offset we start appending at. (Fuller CRDT form later: a heartbeat tick in the
-      // node's oracle doc, read via the change-feed.)
+      // offset we start appending at.
+      //   Cross-peer presence (who is breathing in the mesh) is a SEPARATE organ and
+      //   never lives in a persisted/synced doc — least of all @oracle, the cache-stable
+      //   federation floor. Per canon (api/pono/ea#not-a-heartbeat;
+      //   DREAMNET-FEDERATION-RESEARCH "never write presence into the Automerge document"):
+      //   presence rides an EPHEMERAL channel — `ea` once at establishment, then CRDT
+      //   sync / frame:ack, or an ephemeral broadcast() with TTL derived locally. Presence
+      //   ≠ record. This local log-sentinel is exactly the right node-local readiness organ.
       const startOffset = existsSync(log) ? statSync(log).size : 0;
       const logFd = openSync(log, "a");
       // Detached + unref so the hook never blocks on the long-lived daemon.
