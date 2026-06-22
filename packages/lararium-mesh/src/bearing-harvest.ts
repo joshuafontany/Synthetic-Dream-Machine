@@ -28,18 +28,22 @@ export interface Bearing {
   aimUri: string | null;
   /** Raw yield payload, or null if no yield frame. */
   yieldUri: string | null;
-  /** 0..1, low = drifted. Grades DOWN; an ungraded/absent frame never reads as trusted. */
+  /** 0..20 (the house Maybe-Logic continuum), low = drifted. Grades DOWN; a clean frame reads canon-high, a drifted one falls to provisional. */
   confidence: number;
   /** e.g. ["arity:2"], ["session-form"], ["frame:no-yield"], ["root:unparsed"]. */
   driftFlags: string[];
 }
 
-/** Confidence bands (0..1; low = drifted). Tunable — thresholds deferred to in-flight tuning. */
+/**
+ * Confidence bands on the 0..20 Maybe-Logic continuum (low = drifted). The bands
+ * land on the house register ladder: clean → canon (17-20), the drift grades →
+ * provisional-synthesis / provisional (1-8). Tunable; thresholds deferred to in-flight tuning.
+ */
 export const BEARING_CONFIDENCE = {
-  clean: 0.9, // both frames, primary root is 3-term
-  arityDrift: 0.4, // a root broke the 3-term arity law
-  partialFrame: 0.3, // only one of aim/yield present
-  rootUnparsed: 0.2, // a frame, but no parseable lar: URI inside
+  clean: 18, // both frames, primary root is 3-term → canon band
+  arityDrift: 8, // a root broke the 3-term arity law → provisional-synthesis
+  partialFrame: 6, // only one of aim/yield present → provisional-synthesis
+  rootUnparsed: 4, // a frame, but no parseable lar: URI inside → provisional
 } as const;
 
 const AIM_RE = /<<~\s*lares\s+aim\s+([\s\S]*?)>>/i;
@@ -97,11 +101,11 @@ export function harvest(text: string): Bearing | null {
   const yieldM = YIELD_RE.exec(text);
   if (!aimM && !yieldM) return null;
 
-  const aimUri = aimM ? aimM[1].trim() : null;
-  const yieldUri = yieldM ? yieldM[1].trim() : null;
+  const aimUri = aimM ? (aimM[1] ?? "").trim() : null;
+  const yieldUri = yieldM ? (yieldM[1] ?? "").trim() : null;
 
   const driftFlags: string[] = [];
-  let confidence = BEARING_CONFIDENCE.clean;
+  let confidence: number = BEARING_CONFIDENCE.clean;
 
   if (!aimM) {
     driftFlags.push("frame:no-aim");
