@@ -1,10 +1,16 @@
 {
     // Point Python tooling at the project venv.
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-    // Do NOT let the Python extension TYPE `source .../activate` into terminals —
+    // Do NOT let the Python extensions TYPE `source .../activate` into terminals —
     // that text leaks into whatever foreground process is reading stdin (e.g. Claude Code)
     // when VSCode reloads. Instead we put the venv on PATH via the terminal env below.
+    // `python.terminal.activateEnvironment` governs the CLASSIC ms-python.python ext.
     "python.terminal.activateEnvironment": false,
+    // The NEW ms-python.vscode-python-envs ext IGNORES the setting above and has its own:
+    // it ran `source .../activate` as a shell-execution that timed out and leaked into
+    // Claude's terminal on reload. "off" stops its auto-activation; the env below already
+    // puts the venv on PATH, so nothing is lost.
+    "python-envs.terminal.autoActivationType": "off",
     "terminal.integrated.env.linux": {
         "VIRTUAL_ENV": "${workspaceFolder}/.venv",
         "PATH": "${workspaceFolder}/.venv/bin:${env:PATH}"
