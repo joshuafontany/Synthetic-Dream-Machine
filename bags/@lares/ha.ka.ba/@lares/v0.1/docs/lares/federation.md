@@ -45,7 +45,12 @@ These travel **out-of-band** (a secure channel you control), never the public re
 
 **Model A — one operator identity across devices (works today).** Every vessel carries the *same* operator key, so every vessel presents the *same* DID — already a member of the PersonGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
 
-**Model B — a distinct key per device, delegated in (pending).** Each vessel forges its *own* key and the founding vessel signs a delegation admitting that key into the group. This needs a Keyhive contact-card exchange (the joinee's public key reaches the admitter first) — **not yet implemented** (`lares device-admit` packages the existing group state but does not yet delegate a new DID; a fresh-key join fails the boot's PersonGroup-membership gate). Track it under <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/mesh-governance >>.
+**Model B — a distinct key per device, delegated in (pending the sync layer).** Each vessel forges its *own* key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs **two** things to read the group, and only one reaches it from JS today:
+
+1. the **key-chain + membership** (CGKA + delegation ops) — JS-available via `eventsForAgent` / ingest; necessary but not sufficient; and
+2. the encrypted **Document content** itself — which Keyhive moves via **sedimentree** (content-addressed strata sync) under **Beelay** (the auth-sync RPC; zero-knowledge server). **Both are Rust-only — not exposed in the `keyhive_wasm` JS surface** (and the `automerge/beelay` repo is dead; the live code is `beelay-core` inside the keyhive monorepo).
+
+So a fresh-key join still fails the boot membership gate because the Document never arrives. Closing it from JS means transporting the document ourselves — ship an `Archive` (`Archive.toBytes` → `ingestArchive`) or the ciphertext blobs over our own transport — or binding Beelay to WASM. The cross-peer admit + offline-device work is **actively in-flight** in the keyhive repo (PRs #205 prekey-archives / offline-admit, #116 doc-sync listener, #110 reachable-docs). The grain: **stay on Model A; adopt Beelay's sync when it gets a JS binding** rather than fork a fragile archive-sync against a churning pre-alpha API. Track under <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/mesh-governance >>.
 
 The procedure below enacts **Model A**.
 
