@@ -22,6 +22,15 @@
  * At t=0, founding operator's PersonGroup is the only MeshCabal member.
  * invite-send adds co-operators. The MeshCabal grows; this path never re-runs.
  *
+ * Identity planes (5-scale): the seed mints the Vessel Individual = Plane 0
+ * (device-vessel, the user×vessel bond); the PersonGroup = Plane 1 (the OPERATOR,
+ * a group of vessels). TODAY one seed is SHARED across a user's vessels (Model A —
+ * a temporary stopgap, the copy-the-key antipattern); the target mints a DISTINCT
+ * per-vessel seed delegated into the PersonGroup by a signed edge. runDeviceAdmitAccept
+ * sketches that path (Model B) but waits on encrypted-content transport (Beelay,
+ * Rust-only) — to be stood in temporarily behind a swap surface. See
+ * lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation.
+ *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/keyhive/ceremony-core
  */
 

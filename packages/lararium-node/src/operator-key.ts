@@ -7,6 +7,17 @@
  *   - did:key derivation happens in the TW5 VM (cold-boot-ceremony module)
  *   - displayName derives from `git config user.name` — local truth, no network call
  *
+ * Identity plane (5-scale model): this keypair is the VESSEL's key — Plane 0
+ * (device-vessel), the user×vessel bond. The OPERATOR identity is Plane 1, the
+ * PersonGroup (the group of a user's vessels). TODAY the two CONFLATE: one key is
+ * COPIED across a user's vessels (Model A) and the IdentityTiddler brands it
+ * `kind="operator"`. Model A is a TEMPORARY stopgap — the copy-the-key antipattern;
+ * the target mints a DISTINCT key per vessel, delegated into the PersonGroup by a
+ * signed edge (the delegation IS the relationship). The behavioral Plane 0/1 split
+ * is held for the genesis refactor (crucible-gated). See
+ * lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation (Model A/B) and
+ * lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture (the 5-scale).
+ *
  * Storage law — identity lives OUTSIDE the wipe zone:
  *   callers pass the storage dir (`<root>/.lararium`); the keypair + card persist to
  *   a SIBLING `<root>/.lararium-identity/`, structurally unreachable by any `reset`/
