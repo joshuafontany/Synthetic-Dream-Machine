@@ -22,6 +22,7 @@ import { foundIfAbsent, type FoundStep } from "../found.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
 import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
+import { wireVscode, type VscodeWireResult } from "../vscode-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -70,6 +71,13 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   if (args.flags["copilot"]) {
     try { copilot = wireCopilotHome(); }
     catch (e) { copilot = { home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
+  }
+  // --vscode: register the mempalace MCP (recall) into every present VS Code variant
+  // (stable + Insiders, remote-server + local-profile). Idempotent.
+  let vscode: VscodeWireResult | undefined;
+  if (args.flags["vscode"]) {
+    try { vscode = wireVscode(); }
+    catch (e) { vscode = { changed: false, steps: [{ item: "vscode", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
@@ -151,6 +159,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       ...(claude !== undefined ? { claude } : {}),
       ...(codex !== undefined ? { codex } : {}),
       ...(copilot !== undefined ? { copilot } : {}),
+      ...(vscode !== undefined ? { vscode } : {}),
       root,
       bootstrap: existsSync(bootstrap) ? "present" : "absent",
       timestamp: new Date().toISOString(),
@@ -182,6 +191,10 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       if (copilot !== undefined) {
         console.log(`  copilot (--copilot): ${copilot.changed ? "wired" : "already wired / nothing to do"}`);
         for (const s of copilot.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
+      }
+      if (vscode !== undefined) {
+        console.log(`  vscode (--vscode): ${vscode.changed ? "wired" : "already wired / nothing to do"}`);
+        for (const s of vscode.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
       }
       console.log(`  root:        ${root}`);
       console.log(`  bootstrap:   ${existsSync(bootstrap) ? "present" : "absent"}`);
