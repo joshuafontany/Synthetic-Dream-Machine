@@ -32,7 +32,7 @@ A Lararium runs as a **swarm of one operator's vessels** (a PersonGroup) — eac
 - `genesis/island.bin` — the self-booting wiki-quine (engine + memes; no private identity).
 
 **What NEVER enters github** (identity-bearing — gitignored):
-- `.lararium/.operator-key-*.json` — the operator's private signing key.
+- `.lararium/.vessel-key-*.json` — the operator's private signing key.
 - `genesis/social-bootstrap.json` — the PersonGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonGroup / MeshCabal IDs).
 
 These travel **out-of-band** (a secure channel you control), never the public remote. A clone alone cannot join a PersonGroup; joining requires what the founding vessel hands over deliberately.
@@ -68,7 +68,7 @@ The procedure below enacts **Model A** (the current stopgap).
 lares device-admit --out admit.json
 ```
 
-Transmit **out-of-band** to the new vessel: `admit.json`, and the operator key (`.lararium/.operator-key-*.json`). Never the public remote.
+Transmit **out-of-band** to the new vessel: `admit.json`, and the operator key (`.lararium/.vessel-key-*.json`). Never the public remote.
 
 **On the new vessel** — bootstrap the CLI once (it cannot build itself into existence), place the operator key under `<LAR_ROOT>/.lararium/`, then stand up and join:
 

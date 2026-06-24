@@ -88,7 +88,7 @@ sub-memes; this carries the keel + the meme map.
         └ @lararium/keyhive — identity/capability: KeyhiveProvider · bootAdminKeyhive (Gates A/B/C) ·
                               resolveOrMintBinding · ceremony-core · operator-admin-behavior
            └ @lararium/node  — EDGE: NodeFS · WS server + AdminAuthGate · worker_threads pool ·
-                               LarWSClientAdapter · leaf-identity · operator-key · genesis-artifact
+                               LarWSClientAdapter · leaf-identity · node-vessel-identity · genesis-artifact
            └ @lararium/browser — EDGE: IndexedDB · DedicatedWorker pool · BroadcastChannel · WebCrypto
            └ @lares/cli       — LEAF tool: admin-connector (vessel-not-RPC) · render (dual surface) · commands
 ```

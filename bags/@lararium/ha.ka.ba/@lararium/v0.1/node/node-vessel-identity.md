@@ -1,17 +1,17 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/node/operator-key >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/node/node-vessel-identity >>
 ```toml iam
 cacheable   = true
-file-path   = "bags/@lararium/v0.1/node/operator-key.md"
+file-path   = "bags/@lararium/v0.1/node/node-vessel-identity.md"
 mana        = 3
 register    = "Provisional"
 retain      = true
-role        = "self-documentation: TODO describe operator-key.ts"
-source-file = "packages/lararium-node/src/operator-key.ts"
+role        = "self-documentation: TODO describe node-vessel-identity.ts"
+source-file = "packages/lararium-node/src/node-vessel-identity.ts"
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
-uri-path    = "ha.ka.ba/@lararium/v0.1/node/operator-key"
+uri-path    = "ha.ka.ba/@lararium/v0.1/node/node-vessel-identity"
 ```
 
 <<~ &#x0002; >>
