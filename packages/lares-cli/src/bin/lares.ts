@@ -34,6 +34,7 @@ import { cmdAct }                     from "../commands/act.js";
 import { cmdIngest }                  from "../commands/ingest.js";
 import { cmdWatch }                   from "../commands/watch.js";
 import { cmdHarvest }                 from "../commands/harvest.js";
+import { cmdRecall }                  from "../commands/recall.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
@@ -59,6 +60,7 @@ const COMMANDS: readonly Command[] = [
   { name: "wiki",          summary: "Operate on whole wikis: init/open/sync/pin/unpin/add-bag/remove-bag/list/which. Run `lares wiki help`.", handler: cmdWiki },
   { name: "status",        summary: "Print local node health: bootstrap presence, storage size, port in use.",      handler: cmdStatus        },
   { name: "harvest",       summary: "Idempotent session-history harvest (the @admin memory-shore). `--all`: sweep EVERY transcript surface — Claude (~/.claude/projects), Codex (~/.codex/sessions, incl. the VS Code ChatGPT ext), Copilot Chat (VS Code workspaceStorage + CLI, normalized) — group by project wing, mine convos + write lar_* metadata, idempotent. Transcripts only (never curated MD). `--writeback --wing <w>`: enrich one wing's drawers. Default: turns → gradient parser → bearing index. Re-runnable (lar_hv). `lares harvest [--all | --writeback --wing <w>] [--dry-run]`.", handler: cmdHarvest },
+  { name: "recall",        summary: "Read the verbatim PLACE memory (mempalace) THROUGH the @admin seat — semantic recall over the journey, web3-only (a capability-bearing verb-summons, never a direct subprocess). `lares recall <keywords...>` searches; `--wing <w>` filters to a project; `--limit <n>` caps (default 5); `--drawer <id>` fetches one verbatim; `--list` lists drawers.", handler: cmdRecall },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },

@@ -141,6 +141,9 @@ importers:
       '@lararium/keyhive':
         specifier: workspace:*
         version: link:../lararium-keyhive
+      '@lararium/mempalace':
+        specifier: workspace:*
+        version: link:../lararium-mempalace
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
@@ -1962,26 +1965,6 @@ snapshots:
     dependencies:
       '@types/node': 22.19.17
 
-  '@vitest/browser@3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)':
-    dependencies:
-      '@testing-library/dom': 10.4.1
-      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
-      '@vitest/mocker': 3.2.4(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))
-      '@vitest/utils': 3.2.4
-      magic-string: 0.30.21
-      sirv: 3.0.2
-      tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/node@24.12.3)(@vitest/browser@3.2.4)(lightningcss@1.32.0)(tsx@4.21.0)
-      ws: 8.20.0
-    optionalDependencies:
-      playwright: 1.59.1
-    transitivePeerDependencies:
-      - bufferutil
-      - msw
-      - utf-8-validate
-      - vite
-    optional: true
-
   '@vitest/browser@3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)':
     dependencies:
       '@testing-library/dom': 10.4.1
@@ -2563,7 +2546,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.12.3
-      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)
+      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)
     transitivePeerDependencies:
       - jiti
       - less

@@ -53,6 +53,7 @@ import {
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
+import { MempalaceClient, resolveMempalaceSpawn } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
@@ -361,6 +362,32 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         }),
       );
       registry.register("residency", makeResidencyStatsReactor({ residency }));
+      // recall — the mempalace READ membrane (Option D, slice 1). The @admin host
+      // reaches the verbatim PLACE memory THROUGH the seat: a read-only sidecar,
+      // spawned per call, semantic-search | list | get. mempalace stays a vendored
+      // web2 sibling behind the causal-island shore (web3-only law) — only its REACH
+      // moves from a raw CLI subprocess to this mediated, capability-gated verb (it
+      // rides the worker's verify-then-delegate gate for free, routed to main as the
+      // sidecar I/O lives here). A persistent/pooled client is a later optimization.
+      registry.register("recall", async (args) => {
+        const spawn = resolveMempalaceSpawn();
+        if (!spawn.sidecarPresent) throw new Error("mempalace submodule absent — run `lares wake --install`");
+        if (!spawn.python)         throw new Error("no python holds mempalace — create ~/.venv and pip install the sidecar (`lares wake --install`)");
+        const drawerId = typeof args["drawer"] === "string" ? (args["drawer"] as string) : "";
+        const query    = typeof args["query"]  === "string" ? (args["query"]  as string) : "";
+        const wing     = typeof args["wing"]   === "string" ? (args["wing"]   as string) : undefined;
+        const limitRaw = args["limit"];
+        const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
+        const client = new MempalaceClient({ submoduleRoot: spawn.submoduleRoot, python: spawn.python });
+        try {
+          await client.start();
+          if (drawerId) return { mode: "drawer", drawer: await client.getDrawer(drawerId) };
+          if (query)    return { mode: "search", ...(await client.search({ query, ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
+          return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
+        } finally {
+          await client.stop();
+        }
+      });
     },
 
     // After the admin VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.

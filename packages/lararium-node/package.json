@@ -28,6 +28,7 @@
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.2",
     "@automerge/automerge-repo-storage-nodefs": "2.6.0-alpha.2",
     "@lararium/keyhive": "workspace:*",
+    "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "@lararium/tw5": "workspace:*",
     "@octokit/rest": "^22.0.1",

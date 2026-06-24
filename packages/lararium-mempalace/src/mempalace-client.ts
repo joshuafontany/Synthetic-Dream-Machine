@@ -54,6 +54,37 @@ export interface ListDrawersArgs {
   offset?: number;
 }
 
+export interface SearchArgs {
+  /** Keywords or a question ONLY — max 250 chars (the sidecar embeds this verbatim). */
+  query: string;
+  wing?: string;
+  room?: string;
+  /** Max results (default 5, max 100). */
+  limit?: number;
+  /** Cosine-distance ceiling; hits beyond are dropped (default 1.5; 0 disables). */
+  maxDistance?: number;
+}
+
+export interface SearchHit {
+  /** Verbatim drawer text — the PLACE memory. */
+  text: string;
+  wing?: string;
+  room?: string;
+  source_file?: string;
+  source_path?: string;
+  created_at?: string;
+  similarity?: number;
+  distance?: number;
+  [key: string]: unknown;
+}
+
+export interface SearchResult {
+  query: string;
+  total_before_filter?: number;
+  results: SearchHit[];
+  [key: string]: unknown;
+}
+
 interface Pending {
   resolve: (value: unknown) => void;
   reject: (err: Error) => void;
@@ -192,6 +223,17 @@ export class MempalaceClient {
 
   getDrawer(drawerId: string): Promise<DrawerContent> {
     return this.callTool("mempalace_get_drawer", { drawer_id: drawerId }) as Promise<DrawerContent>;
+  }
+
+  /** Semantic recall — read-only `mempalace_search`. Returns verbatim hits with
+   *  similarity/distance. The query carries ONLY keywords (the sidecar embeds it). */
+  search(args: SearchArgs): Promise<SearchResult> {
+    const payload: Record<string, unknown> = { query: args.query };
+    if (args.wing !== undefined) payload["wing"] = args.wing;
+    if (args.room !== undefined) payload["room"] = args.room;
+    if (args.limit !== undefined) payload["limit"] = args.limit;
+    if (args.maxDistance !== undefined) payload["max_distance"] = args.maxDistance;
+    return this.callTool("mempalace_search", payload) as Promise<SearchResult>;
   }
 
   private rejectAll(err: Error): void {
