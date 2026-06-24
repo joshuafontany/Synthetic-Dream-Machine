@@ -26,7 +26,7 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { harvestTurnGradient, type TurnHarvest } from "@lararium/mesh";
@@ -206,13 +206,15 @@ function buildPatch(h: TurnHarvest): Record<string, string | number> {
   return patch;
 }
 
-function runWriteback(args: ParsedArgs, wing: string): number {
-  const limit = args.options["limit"] ? Number(args.options["limit"]) : 0;
-  if (!existsSync(DRAWER_IO)) {
-    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${DRAWER_IO}` };
-    emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}`) });
-    return 3;
-  }
+interface WritebackResult {
+  readonly drawers: number;
+  readonly framed: number;
+  readonly applied: number;
+  readonly bands: Record<string, number>;
+}
+
+/** The per-wing writeback core: export drawers-needing-harvest → parse → upsert metadata. Idempotent (lar_hv). */
+function writebackWing(wing: string, limit = 0): WritebackResult {
   // 1) export drawers needing harvest (idempotent — skips those at current hv)
   const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
   const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { maxBuffer: 1 << 30, encoding: "utf8" });
@@ -236,21 +238,125 @@ function runWriteback(args: ParsedArgs, wing: string): number {
     const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { maxBuffer: 1 << 30, encoding: "utf8" });
     try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
   }
+  return { drawers: drawers.length, framed, applied, bands };
+}
 
+function runWriteback(args: ParsedArgs, wing: string): number {
+  if (!existsSync(DRAWER_IO)) {
+    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${DRAWER_IO}` };
+    emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}`) });
+    return 3;
+  }
+  const limit = args.options["limit"] ? Number(args.options["limit"]) : 0;
+  const r = writebackWing(wing, limit);
   emit(args, {
     ok: true,
-    data: { wing, drawers: drawers.length, framed, applied, bands, mode: "writeback" },
+    data: { wing, ...r, mode: "writeback" },
     human: () => {
       console.log(`lares harvest --writeback → ${wing}`);
-      console.log(`  drawers harvested: ${drawers.length}  (${framed} framed)`);
-      console.log(`  metadata written:  ${applied}`);
-      console.log(`  bands:             canon ${bands["canon"]} · synthesis ${bands["synthesis"]} · provisional ${bands["provisional"]} · raw ${bands["raw"]}`);
+      console.log(`  drawers harvested: ${r.drawers}  (${r.framed} framed)`);
+      console.log(`  metadata written:  ${r.applied}`);
+      console.log(`  bands:             canon ${r.bands["canon"]} · synthesis ${r.bands["synthesis"]} · provisional ${r.bands["provisional"]} · raw ${r.bands["raw"]}`);
+    },
+  });
+  return 0;
+}
+
+// --- `lares harvest --all` — the backfill feeder over EVERY project ---------
+// Discover every ~/.claude/projects/<proj>, derive its per-project wing (from a
+// transcript's own cwd, matching the live hook), then run BOTH legs idempotently:
+// drawer mine (mempalace convos) + lar_* declared writeback. Staged into a STABLE
+// per-wing dir so mempalace's source_file dedup holds across runs.
+
+const MP = existsSync(join(homedir(), ".local", "bin", "mempalace"))
+  ? join(homedir(), ".local", "bin", "mempalace")
+  : "mempalace";
+
+/** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
+function readCwdFromTranscript(jsonl: string): string | null {
+  try {
+    const lines = readFileSync(jsonl, "utf8").split("\n");
+    for (let i = 0; i < Math.min(lines.length, 60); i++) {
+      const l = lines[i];
+      if (!l || !l.trim()) continue;
+      try {
+        const r = JSON.parse(l) as Record<string, unknown>;
+        if (typeof r["cwd"] === "string" && r["cwd"]) return r["cwd"];
+      } catch { /* skip torn line */ }
+    }
+  } catch { /* fall through */ }
+  return null;
+}
+
+interface ProjectHarvest {
+  readonly wing: string;
+  readonly transcripts: number;
+  readonly mined: number | string;
+  readonly writeback: WritebackResult;
+}
+
+function runHarvestAll(args: ParsedArgs): number {
+  const dryRun = args.flags["dry-run"] === true;
+  const projectsRoot = join(homedir(), ".claude", "projects");
+  if (!existsSync(projectsRoot) || !existsSync(DRAWER_IO)) {
+    const error: LaresError = { code: "not-found", message: `missing ${!existsSync(projectsRoot) ? projectsRoot : DRAWER_IO}` };
+    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    return 3;
+  }
+  const stageRoot = join(homedir(), ".lares", "harvest-stage");
+  const projects: ProjectHarvest[] = [];
+
+  for (const ent of readdirSync(projectsRoot, { withFileTypes: true })) {
+    if (!ent.isDirectory()) continue;
+    const dir = join(projectsRoot, ent.name);
+    // top-level transcripts only = the user's main sessions (subagent files stay out of drawers)
+    const jsonls = readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => join(dir, f));
+    const first = jsonls[0];
+    if (first === undefined) continue;
+    const cwd = readCwdFromTranscript(first);
+    const wing = cwd
+      ? wingFromDir(cwd)
+      : `wing_${ent.name.replace(/^-+/, "").replace(/[^a-zA-Z0-9]+/g, "_").toLowerCase() || "unsorted"}`;
+
+    // stable per-wing staging so mempalace's source_file dedup is idempotent across runs
+    const stage = join(stageRoot, wing);
+    mkdirSync(stage, { recursive: true });
+    for (const j of jsonls) {
+      const dst = join(stage, basename(j));
+      if (!existsSync(dst)) { try { linkSync(j, dst); } catch { try { copyFileSync(j, dst); } catch { /* skip */ } } }
+    }
+
+    let mined: number | string = "dry-run";
+    if (!dryRun) {
+      // leg 1 — drawer mine (idempotent: mempalace file-level dedup skips already-mined)
+      try {
+        const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { maxBuffer: 1 << 30, encoding: "utf8" });
+        mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
+      } catch { mined = "mine-failed"; }
+    }
+    // leg 2 — lar_* declared writeback (idempotent: lar_hv)
+    const writeback = dryRun ? { drawers: 0, framed: 0, applied: 0, bands: {} } : writebackWing(wing);
+    projects.push({ wing, transcripts: jsonls.length, mined, writeback });
+  }
+
+  const totalApplied = projects.reduce((n, p) => n + p.writeback.applied, 0);
+  emit(args, {
+    ok: true,
+    data: { projects, totalApplied, dryRun, mode: "all" },
+    human: () => {
+      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${projects.length} project(s)`);
+      for (const p of projects)
+        console.log(`  ${p.wing.padEnd(36)} ${String(p.transcripts).padStart(4)} transcripts · mined ${p.mined} · lar_ written ${p.writeback.applied}`);
+      console.log(`  total lar_ metadata written: ${totalApplied}`);
     },
   });
   return 0;
 }
 
 export async function cmdHarvest(args: ParsedArgs): Promise<number> {
+  // --all: the backfill feeder — discover EVERY project, mine + writeback each. Idempotent.
+  if (args.flags["all"] === true) return runHarvestAll(args);
+
   // --writeback: operate on mempalace DRAWERS (the tensegrity shore), not JSONL.
   if (args.flags["writeback"] === true) {
     const wing = args.options["wing"] ?? wingFromDir(larRoot());
