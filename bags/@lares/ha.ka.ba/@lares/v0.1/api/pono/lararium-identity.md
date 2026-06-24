@@ -121,9 +121,11 @@ invocation** — never at delegation time. **Designation carries authority**; an
 or bad-signature edge **fails loud**, never falls through to ambient trust (the
 confused-deputy guard).
 
-Revocation leans on **short TTL** as the spine + a **per-group epoch** bump for an
-emergency subtree-kill; a revocation list stays deferred (revocation serves as the last
-line, never the primary control).
+Revocation rides **Keyhive concap** — delegation + revocation as **convergent CRDT membership-graph
+state** (an observed-remove op that converges offline, no bolted-on blocklist) — the model Ink&Switch
+moved *to*, away from UCAN's external-state revocation. The standing edge carries a generous `exp` as a
+backstop; an epoch bump stays the heavy hammer for re-founding only. Revocation is first-class and
+convergent, never the deferred afterthought.
 
 <<~/ahu >>
 
@@ -137,6 +139,23 @@ lore made literal). A Lar binds to a place **reached by a capability**, never a 
 The per-vessel key (#vessel-key) is *what holds and signs* capabilities; a **delegation edge
 (#delegation-edge) IS a capability grant**; compromise heals by **revoking the capability** — the
 per-vessel-key + delegation + revocation lineage we already hold — not by rotating a global identity.
+
+**The offline-correct form of capability-is-identity is Keyhive CONCAP** — every Goblins primitive
+becomes a signed CRDT edge in a membership graph (classic ocap/CapTP is fail-stop on partition; concap
+converges). We **ride Keyhive's membership graph** (already a `keyhive` dep) for delegation + revocation,
+not a hand-rolled or UCAN-modeled chain. **UCAN was inspiration, not the model** — the delegation/use
+split and the walk-the-chain-at-use discipline are worth stealing, but Ink&Switch moved away from UCAN
+(certificate-cap revocation needs external state); we follow their concap. KERI pre-rotation rides
+orthogonally as the rare root-rotation sub-lever (#provenance).
+
+**Wire-C (Keyhive 0.1.0 scout, 2026-06-24) — the two layers COMPOSE, not duplicate.** Keyhive's
+**membership graph is authoritative** for the operator↔device binding + revocation: the operator
+PersonGroup sentinel (`addSentinelMember`/`accessForDoc` LIVE; `revokeMember` live in Keyhive's WASM,
+our wrapper's `revoke()` the open D.3 bridge to convergent revocation). The **`device-delegation` edge
+stands beside it as the OFFLINE projection** — verifiable against the pinned operator root with no
+Keyhive boot (the light leaf path), place-bound, synchronously `exp`-bounded; a lossy offline witness
+of the authoritative graph, never a parallel authority. (Group still can't round-trip in 0.1.0-alpha.3
+→ a Document-sentinel stands in; the Beelay JS ciphertext transport still blocks full multi-vessel.)
 
 **Petnames are the human/place layer** — a vessel's *local* name for a reference it holds, resolving
 Zooko's triangle by layering (the unforgeable capability stays the root; the petname rides locally,
