@@ -24,11 +24,22 @@ function onPath(dir: string): boolean {
   return (process.env["PATH"] ?? "").split(sep).some((d) => d.length > 0 && norm(d) === norm(dir));
 }
 
-/** Resolve a console script's source abs path from PATH (skipping ~/.local/bin so we
- *  never symlink to our own target). Used to find the venv-installed mempalace bins. */
+/** Resolve a console script's source abs path. Checks the VENV bin first (where
+ *  `pip install -e` writes the mempalace scripts — and the venv is usually NOT on
+ *  PATH, the very gap this linking exists to bridge), then PATH (skipping
+ *  ~/.local/bin so we never symlink to our own target). */
 function resolveBin(name: string): string | null {
   const win = process.platform === "win32";
   const exe = win ? `${name}.exe` : name;
+  const binSub = win ? "Scripts" : "bin";
+  // venv source dirs first — pip-editable installs land here, off-PATH.
+  const venvDirs: string[] = [];
+  if (process.env["VIRTUAL_ENV"]) venvDirs.push(join(process.env["VIRTUAL_ENV"], binSub));
+  venvDirs.push(join(homedir(), ".venv", binSub));
+  for (const d of venvDirs) {
+    const p = join(d, exe);
+    if (existsSync(p)) return p;
+  }
   const localBin = join(homedir(), ".local", "bin").replace(/[/\\]+$/, "").toLowerCase();
   for (const d of (process.env["PATH"] ?? "").split(win ? ";" : ":")) {
     if (!d || d.replace(/[/\\]+$/, "").toLowerCase() === localBin) continue;
