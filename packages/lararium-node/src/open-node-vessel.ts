@@ -55,7 +55,7 @@ import {
 import { repoRoot }                       from "@lararium/mesh/node";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { waitHandleLocal }                from "./repo-helpers.js";
+import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -157,8 +157,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     return h;
   };
   const catalogHandle: DocHandle<LarDoc> = resolvedCatalogUrl
-    ? await waitHandleLocal(repo, resolvedCatalogUrl as AutomergeUrl, blankCatalog)
-    : blankCatalog();
+    ? await resolveBootDoc<LarDoc>(repo, resolvedCatalogUrl as AutomergeUrl, { tideline: "hearth-private", label: "@catalog" })
+    : blankCatalog();  // first boot (no url yet): legitimate founder-mint, not a ghost fallback
   if (resolvedCatalogUrl && resolvedCatalogUrl !== catalogUrl) {
     try { mkdirSync(storageDir, { recursive: true }); writeFileSync(catalogUrlFile, catalogHandle.url, "utf8"); } catch { /* quota */ }
   }
@@ -189,7 +189,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   // Read the admin doc (idempotent re-resolve; openAdminVm finds the same handle).
   const readAdminDoc = async (): Promise<DocHandle<LarDoc>> =>
-    waitHandleLocal<LarDoc>(repo, bootstrap.adminUrl as AutomergeUrl, () => repo.create<LarDoc>(emptyLarDoc()));
+    resolveBootDoc<LarDoc>(repo, bootstrap.adminUrl as AutomergeUrl, { tideline: "hearth-private", label: "@admin" });
 
   const result = await openVesselCore<VesselIslandPool>({
     keel: {

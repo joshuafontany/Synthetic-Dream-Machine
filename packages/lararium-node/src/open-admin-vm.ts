@@ -33,7 +33,7 @@ import {
   type AdminVmHost,
   type VerbTable, type SummonsRequest,
 } from "@lararium/tw5";
-import { waitHandleLocal } from "./repo-helpers.js";
+import { resolveBootDoc } from "./repo-helpers.js";
 import { nodeWorkerHandle } from "./worker-handle.js";
 
 const DEFAULT_ADMIN_WORKER_URL = new URL("./node-admin-island.js", import.meta.url);
@@ -130,9 +130,9 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
   const { repo, adminUrl, coreHash, grants, libraryBags, adminAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Admin doc handle (node strategy: merge-on-late-arrival) ────────────────
-  const adminHandle = await waitHandleLocal<LarDoc>(
+  const adminHandle = await resolveBootDoc<LarDoc>(
     repo, adminUrl as AutomergeUrl,
-    () => repo.create<LarDoc>(emptyLarDoc()),
+    { tideline: "hearth-private", label: "@admin" },
   );
 
   // The admin holds NO standing system-bag mount: it reaches a deep target bag
