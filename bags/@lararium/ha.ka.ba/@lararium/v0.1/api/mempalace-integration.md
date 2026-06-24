@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/@lararium/v0.1/api/mempalace-integration"
 
 # mempalace ~ the lararium's memory-library
 
-**mempalace holds the journey; the lararium holds the canon; the curated notes hold the conclusions.** Three strands of memory pull against each other — and the work tends the pulling, never any one strand alone.
+**mempalace holds the journey; the lararium holds the canon; the curated notes hold the conclusions.** Three strands of memory pull against each other — and the work tends the pulling, never any one strand alone. In Elyncian terms: **mempalace keeps the PLACE memory** (the hearth's verbatim record, for the Lar guards place), the **quine keeps the astral ley-line-mesh memory** (the canon that runs between shrines). The whole topology — four registers, two peers, one mesh — stands at <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>.
 
 mempalace serves as a **library-kind member of the bag stack**, accessed-not-loaded: the keeper reaches its verbatim drawers on demand, never hydrates 27k drawers into the VM. It rides **behind the causal-island boundary** — web2 substrate (ChromaDB/SQLite/Python), a vendored sibling, never a citizen of the Lares stack proper (web3-only law). The `@admin` island keeps it; the rest of the house never touches it directly.
 
@@ -92,7 +92,7 @@ The curation files (CLAUDE.md · AGENTS.md · MEMORY.md · Copilot `memory-tool`
 
 Mining `bags/` design memes through `--mode projects` clears, as docs-substrate. Mining `MEMORY.md` / `project_*.md` does not.
 
-**Held question (the operator's hand):** the curated notes and mempalace both reach for *recall* — name which holds canon for recall, or they drift. The bearing: notes keep the distilled conclusions, mempalace keeps the verbatim journey, and the two never merge.
+**Settled (the operator's hand, 2026-06-24):** the question MU'd — not *which* layer owns recall but **what context each owns**. The curated notes (Agent.MEMORY) keep the distilled conclusions; mempalace keeps the verbatim PLACE journey; the quine keeps the ley-line canon. Recall **composes across all four registers** and surfaces conflict to Talk-Story, never arbitrating one over another. Full model: <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory#shared-mesh >>.
 
 <<~/ahu >>
 

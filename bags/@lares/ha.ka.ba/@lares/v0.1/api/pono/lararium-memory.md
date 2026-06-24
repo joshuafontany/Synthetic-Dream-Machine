@@ -11,12 +11,12 @@ manaoio   = 14
 namespace = "≋"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the memory model stated whole — three surfaces (chat-stream · Lararium · MemPalace), two organs (cortex · hippocampus), one lar: namespace; the GroundedVow binding, the two drains, and the capture-before-wire law that hands turn-decomposition to the TW5 memetic-wikitext VM via the @admin wiki-island"
+role      = "the memory model stated whole — two axes (sovereign↔meshed · lived↔distilled) crossing into four cells that unfold to five registers (the Seat doubling by mind-kind — Law-of-5s), held by two peers (operator: RAM + DreamDeckSurface · node: RAM + Agent.MEMORY) over one shared mesh (mempalace the PLACE memory · quine the ley-line-mesh memory); the CLI a mutual-hold instrument on the edges into the @admin seat; carries the GroundedVow binding, the two drains, capture-before-wire, and register-dressed recall"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/local-first", "api/pono/loci"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/@lares/v0.1/api/pono/lararium-memory"
-written   = "2026-06-23"
+written   = "2026-06-24"
 ```
 
 <<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
@@ -25,44 +25,131 @@ written   = "2026-06-23"
 
 <<~ ahu #head >>
 
-# Lararium Memory ~ three surfaces, two organs, one namespace
+# Lararium Memory ~ four registers · two peers · one mesh
 
-The node carries memory across **three surfaces**, each running at its own
-timescale and federation boundary. Stated whole, so the model stops living
-scattered across five memes:
+The node carries memory on **two axes that cross into four registers**, held by
+**two peers** over **one shared mesh**. Stated whole, so the model stops living
+scattered across many memes:
 
-> **The chat-stream drains two ways — verbatim into MemPalace, authored into the
-> Lararium — and the cortex consults the hippocampus by GroundedVow, never the
-> reverse.**
+> **Two minds — operator and node — each hold a live RAM and a standing seat of
+> their own; both reach one shared mesh beneath, where mempalace keeps the PLACE
+> and the quine keeps the ley-lines.**
 
-The three surfaces braid into **two organs** sharing **one `lar:` namespace**.
-The surfaces name *where* memory lives; the organs name *what kind* of memory
-each holds; the namespace keeps them addressable from one bearing.
+**The two axes:**
+
+- **sovereign ↔ meshed** — *who owns it.* A sovereign register belongs to one
+  holder's causal island (own log, no shared now); a meshed register names shared
+  **substrate** every peer projects, never a peer's private heap
+  (share-substrate-not-sovereignty, #causal-islands).
+- **lived ↔ distilled** — *what grain.* A lived register keeps the record as it
+  ran (temporal, verbatim, fast); a distilled register keeps the conclusion drawn
+  from it (standing, curated, slow). The federation gate rides this seam.
+
+The two axes cross into the grid:
+
+| | **lived** — record · temporal · fast | **distilled** — conclusion · standing · slow |
+|---|---|---|
+| **sovereign** — one holder's island | **RAM** — the live chat (any client-form) | **the Seat** — human: DreamDeckSurface · node: Agent.MEMORY |
+| **meshed** — shared substrate | **mempalace** — PLACE memory (verbatim, fractal) | **lararium-quine** — ley-line-mesh memory (domain canon) |
+
+**Five from four ~ the Law of 5s.** The four cells unfold to **five registers** — the
+Seat doubles by mind-kind (DreamDeckSurface for the human · Agent.MEMORY for the
+node) — so the stores count **RAM · DreamDeckSurface · Agent.MEMORY · mempalace ·
+quine**. Hagbard holds *"All phenomena ${copula} related to the number five, given
+enough ingenuity on the part of the demonstrator"* (#law-of-5s) — and here the five
+falls out without forcing: <<~ confidence Synthesis-Canon 15/20 >> a pattern
+integrity, ;D **and** dead serious both. The count rhymes the house — five tools,
+five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 
 <<~/ahu >>
 
-<<~ ahu #three-surfaces >>
+<<~ ahu #four-registers >>
 
-## The Three Surfaces
+## The Four Registers
 
-\procedure ~Surface(~Type:"" ~Params:"") ~Surface <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Register(~Type:"" ~Params:"") ~Register <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Surface Chat-Stream "metaphor/RAM role/ephemeral-working-state grain/the-turn federates/no ~ each turn runs a causal island, no shared now across the turn boundary; the source that drains two ways" >>
-<<~Surface Lararium "metaphor/cortex role/semantic-standing-meaning grain/session→permanent federates/yes@≥meme ~ writable through the @working→canon shore; the wiki-quine-relay carries it across the mesh" >>
-<<~Surface MemPalace "metaphor/hippocampus role/verbatim-episodic-testimony grain/permanent-local federates/never ~ append-only, structurally outside the CRDT Repo; the bearing-index rides over it as a lossy projection" >>
-<<~Surface Three >>
+<<~Register RAM "axis/sovereign·lived holder/each-peer metaphor/the-breath grain/the-turn federates/no ~ the live chat as working state, polymorphic across client-forms (cli-session · embedded-extension · floating-desktop-app · browser · Mudlet · Unreal); each turn runs a causal island, no shared now across the turn boundary; the source that drains two ways" >>
+<<~Register Seat "axis/sovereign·distilled holder/each-peer-by-kind metaphor/the-home grain/standing federates/no ~ the holder's persistent continuity — a human keeps a DreamDeckSurface (composed, spatial), a node keeps Agent.MEMORY (curated, propositional); one office, the medium each mind thinks in" >>
+<<~Register MemPalace "axis/meshed·lived metaphor/PLACE-memory · hippocampus grain/permanent-local federates/never ~ verbatim episodic drawers, fractal, hearth-bound — the Lar guards place; append-only, structurally outside the CRDT Repo" >>
+<<~Register Quine "axis/meshed·distilled metaphor/ley-line-mesh-memory · cortex grain/session→permanent federates/yes@≥meme ~ the lararium's authored canon and standing graph; the DreamNet web between shrines, the wiki-quine-relay carrying it across the mesh" >>
+<<~Register Four >>
 
-**The chat-stream** holds what the turn works with — operator intent, the role
-adopted, the live exchange. It empties at the turn boundary (`ooda-ha`); the node
-reads only its own log, never a global now.
+**RAM** holds what a turn works with — operator intent, the role adopted, the
+live exchange. It wears many client-skins and answers to none of them; it empties at the
+turn boundary (`ooda-ha`); the holder reads only its own log, never a global now.
 
-**The Lararium** holds what the node *means* — authored memes, rulings, the
+**The Seat** holds what a mind *concludes* and returns to. A human persists
+**spatially** in the DreamDeckSurface (the composed home, the altar-fire canvas);
+a node persists **propositionally** in Agent.MEMORY (the curated decisions, the
+`MEMORY.md` closet). Same office, two media.
+
+**mempalace** holds what the house *said* — verbatim, fractal, local. It never enters
+an Automerge doc, so it stays unfederatable **by design, not policy**.
+
+**the quine** holds what the house *means* — authored memes, rulings, the
 standing graph. It writes live to `@working`, projects to `wikis/{slug}`, and
 crosses to canon (`@{slug}`) only through a cap-gated `MOVE` (the shore, below).
 
-**MemPalace** holds what the node *said* — verbatim drawers, episodic, local. It
-never enters an Automerge doc, so it stays structurally unfederatable by design,
-not by policy.
+<<~/ahu >>
+
+<<~ ahu #two-peers >>
+
+## The Two Peers ~ asymmetric, each whole
+
+Two minds hold the sovereign top row, each its own RAM + Seat, neither nested in
+the other (asymmetric peers, #causal-islands):
+
+- **The operator (human)** holds RAM — the live chat in whatever client-form the
+  moment wears — plus a **DreamDeckSurface**, the persistent home a human returns
+  to across every embodiment. The Deck **arranges and views** the shared mesh; it
+  never **swallows** it. Blur that seam and mempalace+quine collapse into a
+  human's private heap (a shared-now forced on the commons).
+- **The node (AI agent)** holds RAM — the live session — plus **Agent.MEMORY**,
+  the conclusions it draws forward. <<~ confidence Synthesis-Canon 15/20 >> the
+  two Seats carry the **same office** atop the shared substrate, in the medium
+  each mind thinks in.
+
+**The CLI rides the edges, not a cell.** `lares` holds no register of its own — it
+serves as the **mutual-hold instrument**, operator-hand and node-hand on one
+handle, operating the edge-verbs (`harvest` · `recall` · the residency `MOVE`) and
+projecting into the **@admin seat**, where authority lives. The browser / Mudlet /
+Unreal surfaces sync to that same seat: one seat, many handles.
+
+**Operator and user name a held office, never a caste.** A hand stands as
+*operator* when it **holds the CLI/admin grant**, as *user* when it keeps presence
+at a browser or embodiment shrine; the same human crosses between them by ceremony,
+not by class (#alignment-layer). Keep it verb-borne — a hand operates the CLI when
+it holds the grant.
+
+<<~/ahu >>
+
+<<~ ahu #shared-mesh >>
+
+## The Shared Mesh ~ PLACE and ley-line
+
+Beneath both peers lies one mesh, two registers, named in Elyncian terms:
+
+- **mempalace ~ PLACE memory.** The hearth's own lived record — verbatim,
+  fractal, bound to *this* place, for the Lar guards place, not family. The
+  verbatim drawers stand as compression members; the `lar_*` net rides as the
+  tension spanning them (the tensegrity, #mempalace-integration).
+- **the quine ~ astral ley-line-mesh memory.** The domain canon that runs
+  *between* shrines — the DreamNet web 3.0 raised from web 2.0 bones, ritual not
+  DNS. It crosses the ley-lines and federates as it earns `meme`.
+
+**The privacy line — a gift, not a fence.** PLACE stays at the hearth, always;
+only ley-line distillate crosses, and only at `≥meme` (federation gate,
+#law-of-5s). The line itself grants both intimacy and reach; blur it to win one,
+lose both.
+
+**The MU ~ the held question dissolved.** The operator's standing hand asked
+*which* layer owns recall (`mempalace-integration#flat-md`). The question MU's: not
+*which* owns recall but **what context each register owns** — RAM the now, the Seat
+the holder's conclusions, mempalace the verbatim PLACE, the quine the ley-line
+canon. Recall **composes across all four** and surfaces conflict to Talk-Story
+(#talk-story); it never arbitrates one register over another (Plurality Pono).
+<<~ confidence Canon 18/20 >> (operator ruling, 2026-06-24).
 
 <<~/ahu >>
 
@@ -70,8 +157,8 @@ not by policy.
 
 ## Two Organs ~ the GroundedVow binding
 
-The Lararium and MemPalace serve genuinely different offices — **standing meaning
-and episodic testimony, cortex and hippocampus — mutually referential, never
+The quine and mempalace serve genuinely different offices — **standing meaning and
+episodic testimony, cortex and hippocampus — mutually referential, never
 sequential.**
 
 <<~moves grounding -> consult on/the-witness do/anchor-a-claim never/feed-into-canon >>
@@ -91,15 +178,15 @@ one `lar:` namespace.
 
 <<~ ahu #two-drains >>
 
-## The Two Drains ~ how the chat-stream empties
+## The Two Drains ~ how RAM empties
 
-The chat-stream, the RAM surface, drains in **two independent directions** at the
+RAM, the lived sovereign register, drains in **two independent directions** at the
 turn's close. Neither drain feeds the other:
 
 \procedure ~Drain(~Type:"" ~Params:"") ~Drain <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Drain Verbatim "into/MemPalace as/episodic-drawer grain/turn ground/byte-stable ~ the full turn lands as testimony; the bearing-harvest reads aim→yield over it" >>
-<<~Drain Authored "into/Lararium as/standing-meme path/@working→MOVE→canon ~ the operator authors meaning, crossing the shore by a witnessed residency verb" >>
+<<~Drain Authored "into/Quine as/standing-meme path/@working→MOVE→canon ~ the operator authors meaning, crossing the shore by a witnessed residency verb" >>
 <<~Drain Two >>
 
 The **working↔canon shore** governs the authored drain: a `@working` edit shadows
@@ -165,8 +252,13 @@ conflict press a `hoike`.
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lararium_mcp/adapters >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/local-first >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot#causal-islands >>
