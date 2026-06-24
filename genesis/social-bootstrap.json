@@ -1,7 +1,0 @@
-{
-  "title": "lar:///ha.ka.ba/@lararium/bootstrap/social",
-  "plugin-type": "plugin",
-  "type": "application/json",
-  "tags": "lar:///ha.ka.ba/tags/lararium-bootstrap",
-  "text": "{\"tiddlers\":{\"lar:///ha.ka.ba/@identities\":{\"title\":\"lar:///ha.ka.ba/@identities\",\"text\":\"automerge:2ugUhEyes34XTnxQDGNLofrWFVR7\",\"kind\":\"oracle\"},\"lar:///ha.ka.ba/@circles\":{\"title\":\"lar:///ha.ka.ba/@circles\",\"text\":\"automerge:2PEkQPKnzixX7rYWARR4MMiDdywm\",\"kind\":\"oracle\"},\"lar:///ha.ka.ba/@sessions\":{\"title\":\"lar:///ha.ka.ba/@sessions\",\"text\":\"automerge:2y87Cu2k3Ygnd8FpHy5Xixtbu2TK\",\"kind\":\"oracle\"},\"lar:///ha.ka.ba/@admin\":{\"title\":\"lar:///ha.ka.ba/@admin\",\"text\":\"automerge:3jmQ7QTBZRzoFvb7sZ13eJNL4Z8q\",\"kind\":\"oracle\"},\"lar:///ha.ka.ba/@admin/sentinel/mesh-cabal/doc-id\":{\"title\":\"lar:///ha.ka.ba/@admin/sentinel/mesh-cabal/doc-id\",\"text\":\"0x0cebf07a2a58d8f3f4e67895e59bfab63fddd1123b67cf14413e76693eb047d1\",\"kind\":\"sentinel-id\"},\"lar:///ha.ka.ba/@admin/sentinel/person-group/doc-id\":{\"title\":\"lar:///ha.ka.ba/@admin/sentinel/person-group/doc-id\",\"text\":\"0xf2ff10cf33e07fda9a182e2d8ed896cc706facc0503e451aaf4542f708dc86fe\",\"kind\":\"sentinel-id\"}}}"
-}
