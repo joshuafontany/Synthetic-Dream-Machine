@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///packages/AGENTS >>
+<<~ &#x0001; ? -> lar:///packages/AGENTS >>
 
 <<~ ahu #iam >>
 
@@ -51,9 +51,9 @@ Within-Nexus sync = Automerge CRDT (reliable). Cross-Nexus = explicit treaty, wi
 
 ## Package Map (active)
 
-Six packages carry the stack. Each owns one boundary; cross-cutting work travels through the contracts in `@lararium/mesh`.
+Seven packages carry the stack. Each owns one boundary; cross-cutting work travels through the contracts in `@lararium/mesh`.
 
-`@lararium/mesh` carries contracts and graph law. Keep this package TW5-neutral, browser-neutral, and Node-neutral. Put shared types, parsers, `browser-dock` boundary shapes, `lar-uris` resolution, Nexus identity primitives, `FfzClock`, presence slot types, `capability` schemas, `AutomergeDocStore` + `composite-store`, `bag-residency` tiers, `LarEventBus`, `MemeProvider`, `Recipe` + `WikiRecipe`, `LarProjectionRegistry`, `PromotionCeremony`, `ReactionGraph`, `CausalIsland` + `island-protocol`, `KumuDevice`, `social-seed` + `social-tiddlers`, and the shared `cold-boot-ceremony` bones here.
+`@lararium/mesh` carries contracts and graph law. Keep this package TW5-neutral, browser-neutral, and Node-neutral. Put shared types, parsers, `browser-dock` boundary shapes, `lar-uris` resolution, Nexus identity primitives, `FfzClock`, presence slot types, `capability` schemas, `AutomergeDocStore` + `composite-store`, `bag-residency` tiers, `LarEventBus`, `MemeProvider`, `Recipe` + `WikiRecipe`, `LarProjectionRegistry`, `PromotionCeremony`, `ReactionGraph`, `CausalIsland` + `island-protocol`, `KumuDevice`, `social-seed` + `social-tiddlers`, `bearing-harvest` + `turn-harvest` (the sovereign, isomorphic session gradient parser the memory integration enriches with), and the shared `cold-boot-ceremony` bones here.
 
 `@lararium/tw5` carries TiddlyWiki runtime integration. Put the TW5 VM surface (`tw5-vm`, `tw5-host-bridge`, `tw5-browser-surface`, `tw5-module-gate`, `tw5-camera`), island layer (`island-kernel`, `island-adaptor`, `island-recipe`, `island-context`, `cold-boot-ceremony`, `active-wiki`, `admin-behavior`), memetic-wikitext machinery (`memetic-parser`, `meme-ast`, `meme-stream`, `meme-write`, `meme-worker-script`, `deserializer`, `grammar-cache`), verb pipeline (`verb-vm`, `verb-dispatcher`, `verb-local-dispatch`, `verb-summons`), TW5-side stores (`memory-store`, `wiki-sync`), generated TW5 core metadata (`generated-tw5-version`, `plugin-tiddler.generated`), and `wikirules` / `macros` / `modules` / `filters` here. Treat disk projection as Node-shaped even when the barrel export exposes it.
 
@@ -63,7 +63,9 @@ Six packages carry the stack. Each owns one boundary; cross-cutting work travels
 
 `@lararium/keyhive` carries the capability layer. Pre-alpha integration of `@keyhive/keyhive` WASM bindings. Put `capability-provider`, `keyhive-provider`, `ceremony-core`, `event-store`, `admin-event-store` here. One Keyhive Doc = one bag (1:1). Binary read/admin gate, with `ABILITY_LADDER` caveats riding on top. Cap-event home and γ-with-operator-α-mirror sync stay in design flux — touch with care.
 
-`@lares/cli` carries the operator-facing surface. Put the `lares` binary (`bin/lares`), arg parsing (`parse-args`), process spawn (`spawn`), `admin-connector`, and the verb family in `commands/` (`bag`, `ceremony`, `draft`, `init`, `residency`, `scripted`, `status`, `wiki`) here. Sprint 5 of the Residency Model Epic adds `commands/act.ts` for the ACTION verb surface (`lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD`). The CLI carries no protocol logic — every verb dispatches to `@lararium/node` handlers through the admin WS gate.
+`@lararium/mempalace` carries the session-memory integration — a local-only read leg over the pinned mempalace sidecar plus the declared `lar_*` writeback (the tensegrity that binds verbatim drawers to domain bearings). Put the bearing index (`bearing-index`, `harvest-turn`, `harvest-all`), the read-only `mempalace-client`, the substrate boundary I/O (`scripts/drawer_io.py`), the Copilot transcript normalizer (`scripts/copilot_normalize.py`), and the RFC-002 schema declaration (`mempalace_source_lares/`) here. mempalace itself rides **behind a causal-island boundary** as a vendored substrate — the memory-library, accessed-not-loaded — never a citizen of the stack. See `packages/MEMPALACE-INTEGRATION.md` + `lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration`.
+
+`@lares/cli` carries the operator-facing surface. Put the `lares` binary (`bin/lares`), arg parsing (`parse-args`), process spawn (`spawn`), `admin-connector`, and the verb family in `commands/` (`bag`, `ceremony`, `draft`, `init`, `residency`, `scripted`, `status`, `wiki`) here. Sprint 5 of the Residency Model Epic adds `commands/act.ts` for the ACTION verb surface (`lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD`). The memory integration adds `commands/harvest.ts` (the gradient-parser sweep + declared `lar_*` writeback), the harness-wiring on `wake` (`--init` palace setup + `--claude/--codex/--copilot/--vscode` via `{claude,codex,copilot,vscode}-wire.ts`, `setup-mempalace.ts`, `mcp-resolve.ts`), and the live `.claude-plugin/hooks/lares-mempalace-ingest-hook.sh`. The CLI carries no protocol logic — every verb dispatches to `@lararium/node` handlers through the admin WS gate.
 
 ## Package Map (planned, not yet implemented)
 
@@ -219,6 +221,7 @@ Watch these current weak spots:
 * **Generated files** in `@lararium/tw5/src/generated-*` come from `scripts/`; do not hand-edit unless you intend to replace the generator output.
 * **Empty package directories** (`dreamdeck-app`, `dreamdeck-tldraw`, `lares-mcp`) live in `pnpm-workspace.yaml`'s `packages/*` glob; pnpm tolerates them today, but adding a `package.json` without source will surface install errors.
 * **Open IDE tabs** may name stale files; trust filesystem scans over editor ghosts.
+* **mempalace stays vendored.** Never edit the `mempalace/` submodule; it rides behind the causal-island boundary. Tune behavior through `~/.mempalace/config.json` (e.g. `hooks.auto_save=false`) and our `@lararium/mempalace` layer. Bumping the `lar_*` enrichment ⇒ bump `lar_hv` in lockstep (`harvest.ts buildPatch` ⟷ `drawer_io.py HARVEST_VERSION`). Run `lares harvest --all` only on a **fresh** palace — re-staging existing drawers under a new `source_file` duplicates them.
 
 <<~/ahu >>
 
@@ -251,6 +254,7 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 <<~ pranala #to-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices family:reference role:governs >>
 <<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider family:reference role:describes >>
 <<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mesh/dreamnet-architecture family:reference role:describes >>
+<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration family:reference role:describes >>
 
 <<~/ahu >>
 
