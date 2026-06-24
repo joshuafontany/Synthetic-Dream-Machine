@@ -1,7 +1,7 @@
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SELF-HOSTING-RESEARCH"
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SELF-HOSTING-RESEARCH.md"
+uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
+file-path = "bags/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.md"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
 confidence   = 18
@@ -142,4 +142,4 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~/ahu >>
 
-<<~ ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>

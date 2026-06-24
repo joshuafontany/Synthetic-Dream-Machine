@@ -1,8 +1,8 @@
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/AUTH-ATPROTO >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO >>
 
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/AUTH-ATPROTO"
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/AUTH-ATPROTO.md"
+uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO"
+file-path = "bags/@lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO.md"
 type         = "text/x-memetic-wikitext"
 l-space      = "adjacent"
 confidence   = 18

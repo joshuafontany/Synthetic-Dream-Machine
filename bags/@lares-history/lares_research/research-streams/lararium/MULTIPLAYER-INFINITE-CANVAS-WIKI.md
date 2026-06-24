@@ -1,9 +1,9 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI >>
 ```toml iam
-uri-path    = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.md"
+uri-path    = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
+file-path = "bags/@lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI.md"
 type = "text/x-memetic-wikitext"
 confidence  = 18
 register    = "Synthesis"

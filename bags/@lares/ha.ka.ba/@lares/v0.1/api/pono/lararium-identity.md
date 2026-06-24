@@ -265,8 +265,8 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/S7-CIRCLES-IDENTITIES-REDESIGN >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/CAPABILITY-LAYER >>
+<<~ loulou lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/S7-CIRCLES-IDENTITIES-REDESIGN >>
+<<~ loulou lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/CAPABILITY-LAYER >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>

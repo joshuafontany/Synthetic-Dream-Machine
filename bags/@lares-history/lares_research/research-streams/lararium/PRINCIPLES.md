@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
 
 ```toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES"
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/PRINCIPLES.md"
+uri-path = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/PRINCIPLES"
+file-path = "bags/@lares-history/lares_research/research-streams/lararium/PRINCIPLES.md"
 type = "text/x-memetic-wikitext"
 confidence = 20
 register = "Synthesis-Canon"

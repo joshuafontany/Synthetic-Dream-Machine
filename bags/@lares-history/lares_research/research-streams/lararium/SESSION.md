@@ -1,10 +1,10 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SESSION >>
 
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION"
-file-path = "bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/research-streams/lararium/SESSION.md"
+uri-path     = "ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SESSION"
+file-path = "bags/@lares-history/lares_research/research-streams/lararium/SESSION.md"
 type         = "text/x-memetic-wikitext"
 l-space      = "adjacent"
 confidence   = 18
