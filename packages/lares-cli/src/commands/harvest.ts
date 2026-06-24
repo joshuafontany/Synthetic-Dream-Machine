@@ -292,65 +292,199 @@ function readCwdFromTranscript(jsonl: string): string | null {
   return null;
 }
 
-interface ProjectHarvest {
+const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");
+
+/** One discovered transcript: where it is, which wing it routes to, and whether it needs normalizing. */
+interface HarvestEntry {
+  readonly file: string;
+  readonly wing: string;
+  readonly normalize: boolean; // true → copilot events.jsonl → run copilot_normalize.py
+  readonly stageName: string;  // stable filename in the per-wing stage dir
+  readonly source: string;     // claude | codex | copilot-vscode | copilot-cli
+}
+
+/** Recursively collect `.jsonl` files under a root whose basename passes `match`. */
+function walkJsonl(root: string, match: (name: string) => boolean, depth = 0, out: string[] = []): string[] {
+  if (depth > 8 || !existsSync(root)) return out;
+  let ents;
+  try { ents = readdirSync(root, { withFileTypes: true }); } catch { return out; }
+  for (const e of ents) {
+    const full = join(root, e.name);
+    if (e.isDirectory()) walkJsonl(full, match, depth + 1, out);
+    else if (e.name.endsWith(".jsonl") && match(e.name)) out.push(full);
+  }
+  return out;
+}
+
+/** Codex rollout cwd lives in the first `session_meta` line's payload. */
+function readCodexCwd(file: string): string | null {
+  try {
+    const lines = readFileSync(file, "utf8").split("\n");
+    for (let i = 0; i < Math.min(lines.length, 5); i++) {
+      const l = lines[i];
+      if (!l || !l.trim()) continue;
+      try {
+        const r = JSON.parse(l) as { type?: string; payload?: { cwd?: string } };
+        if (r.type === "session_meta" && r.payload?.cwd) return r.payload.cwd;
+      } catch { /* skip */ }
+    }
+  } catch { /* fall through */ }
+  return null;
+}
+
+/** Copilot transcripts carry no cwd — scrape the most-frequent `<home>/<project>` from tool-call paths. */
+function scrapeWing(file: string): string | null {
+  let content: string;
+  try { content = readFileSync(file, "utf8"); } catch { return null; }
+  const home = homedir().replace(/\\/g, "/").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`${home}/([A-Za-z0-9][A-Za-z0-9._-]*)`, "g");
+  const counts = new Map<string, number>();
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(content)) !== null) {
+    const seg = m[1];
+    if (!seg || seg.startsWith(".")) continue; // skip ~/.config, ~/.vscode-server, dotfiles
+    counts.set(seg, (counts.get(seg) ?? 0) + 1);
+  }
+  let best: string | null = null, bestN = 0;
+  for (const [seg, n] of counts) if (n > bestN) { best = seg; bestN = n; }
+  return best ? `wing_${best.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "")}` : null;
+}
+
+function discoverClaude(): HarvestEntry[] {
+  const root = join(homedir(), ".claude", "projects");
+  const out: HarvestEntry[] = [];
+  if (!existsSync(root)) return out;
+  for (const ent of readdirSync(root, { withFileTypes: true })) {
+    if (!ent.isDirectory()) continue;
+    const dir = join(root, ent.name);
+    const jsonls = readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => join(dir, f));
+    const first = jsonls[0];
+    if (first === undefined) continue;
+    const cwd = readCwdFromTranscript(first);
+    const wing = cwd ? wingFromDir(cwd) : `wing_${ent.name.replace(/^-+/, "").replace(/[^a-zA-Z0-9]+/g, "_").toLowerCase() || "unsorted"}`;
+    for (const j of jsonls) out.push({ file: j, wing, normalize: false, stageName: basename(j), source: "claude" });
+  }
+  return out;
+}
+
+function discoverCodex(): HarvestEntry[] {
+  // ~/.codex/sessions covers BOTH the Codex CLI and the VS Code ChatGPT extension
+  // (originator:codex_vscode) — same store. mempalace parses rollouts natively.
+  const out: HarvestEntry[] = [];
+  for (const f of walkJsonl(join(homedir(), ".codex", "sessions"), (n) => n.startsWith("rollout-"))) {
+    const cwd = readCodexCwd(f);
+    out.push({ file: f, wing: cwd ? wingFromDir(cwd) : "wing_codex_unsorted", normalize: false, stageName: basename(f), source: "codex" });
+  }
+  return out;
+}
+
+function discoverCopilotVscode(): HarvestEntry[] {
+  const home = homedir();
+  const wsRoots = [
+    join(home, ".vscode-server", "data", "User", "workspaceStorage"),
+    join(home, ".vscode-server-insiders", "data", "User", "workspaceStorage"),
+    join(home, ".config", "Code", "User", "workspaceStorage"),
+    join(home, ".config", "Code - Insiders", "User", "workspaceStorage"),
+    ...(process.platform === "win32" && process.env["APPDATA"]
+      ? [join(process.env["APPDATA"], "Code", "User", "workspaceStorage"), join(process.env["APPDATA"], "Code - Insiders", "User", "workspaceStorage")]
+      : []),
+  ];
+  const out: HarvestEntry[] = [];
+  for (const ws of wsRoots) {
+    if (!existsSync(ws)) continue;
+    for (const hash of readdirSync(ws, { withFileTypes: true })) {
+      if (!hash.isDirectory()) continue;
+      const tdir = join(ws, hash.name, "GitHub.copilot-chat", "transcripts");
+      if (!existsSync(tdir)) continue;
+      for (const n of readdirSync(tdir).filter((f) => f.endsWith(".jsonl"))) {
+        const f = join(tdir, n);
+        out.push({ file: f, wing: scrapeWing(f) ?? "wing_copilot_unsorted", normalize: true, stageName: n, source: "copilot-vscode" });
+      }
+    }
+  }
+  return out;
+}
+
+function discoverCopilotCli(): HarvestEntry[] {
+  const root = join(homedir(), ".copilot", "session-state");
+  const out: HarvestEntry[] = [];
+  if (!existsSync(root)) return out;
+  for (const d of readdirSync(root, { withFileTypes: true })) {
+    if (!d.isDirectory()) continue;
+    const f = join(root, d.name, "events.jsonl");
+    if (!existsSync(f)) continue;
+    out.push({ file: f, wing: scrapeWing(f) ?? "wing_copilot_unsorted", normalize: true, stageName: `${d.name}.jsonl`, source: "copilot-cli" });
+  }
+  return out;
+}
+
+interface WingHarvest {
   readonly wing: string;
   readonly transcripts: number;
+  readonly sources: string;
   readonly mined: number | string;
   readonly writeback: WritebackResult;
 }
 
 function runHarvestAll(args: ParsedArgs): number {
   const dryRun = args.flags["dry-run"] === true;
-  const projectsRoot = join(homedir(), ".claude", "projects");
-  if (!existsSync(projectsRoot) || !existsSync(DRAWER_IO)) {
-    const error: LaresError = { code: "not-found", message: `missing ${!existsSync(projectsRoot) ? projectsRoot : DRAWER_IO}` };
+  if (!existsSync(DRAWER_IO)) {
+    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${DRAWER_IO}` };
     emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
     return 3;
   }
-  const stageRoot = join(homedir(), ".lares", "harvest-stage");
-  const projects: ProjectHarvest[] = [];
-
-  for (const ent of readdirSync(projectsRoot, { withFileTypes: true })) {
-    if (!ent.isDirectory()) continue;
-    const dir = join(projectsRoot, ent.name);
-    // top-level transcripts only = the user's main sessions (subagent files stay out of drawers)
-    const jsonls = readdirSync(dir).filter((f) => f.endsWith(".jsonl")).map((f) => join(dir, f));
-    const first = jsonls[0];
-    if (first === undefined) continue;
-    const cwd = readCwdFromTranscript(first);
-    const wing = cwd
-      ? wingFromDir(cwd)
-      : `wing_${ent.name.replace(/^-+/, "").replace(/[^a-zA-Z0-9]+/g, "_").toLowerCase() || "unsorted"}`;
-
-    // stable per-wing staging so mempalace's source_file dedup is idempotent across runs
-    const stage = join(stageRoot, wing);
-    mkdirSync(stage, { recursive: true });
-    for (const j of jsonls) {
-      const dst = join(stage, basename(j));
-      if (!existsSync(dst)) { try { linkSync(j, dst); } catch { try { copyFileSync(j, dst); } catch { /* skip */ } } }
-    }
-
-    let mined: number | string = "dry-run";
-    if (!dryRun) {
-      // leg 1 — drawer mine (idempotent: mempalace file-level dedup skips already-mined)
-      try {
-        const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { maxBuffer: 1 << 30, encoding: "utf8" });
-        mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
-      } catch { mined = "mine-failed"; }
-    }
-    // leg 2 — lar_* declared writeback (idempotent: lar_hv)
-    const writeback = dryRun ? { drawers: 0, framed: 0, applied: 0, bands: {} } : writebackWing(wing);
-    projects.push({ wing, transcripts: jsonls.length, mined, writeback });
+  // EVERY transcript surface — but transcripts ONLY (never curated MD / memory-tool notes).
+  const entries = [...discoverClaude(), ...discoverCodex(), ...discoverCopilotVscode(), ...discoverCopilotCli()];
+  if (entries.length === 0) {
+    const error: LaresError = { code: "not-found", message: "no transcripts found (claude/codex/copilot)" };
+    emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
+    return 3;
   }
 
-  const totalApplied = projects.reduce((n, p) => n + p.writeback.applied, 0);
+  const stageRoot = join(homedir(), ".lares", "harvest-stage");
+  const byWing = new Map<string, HarvestEntry[]>();
+  for (const e of entries) {
+    const arr = byWing.get(e.wing);
+    if (arr) arr.push(e); else byWing.set(e.wing, [e]);
+  }
+
+  const results: WingHarvest[] = [];
+  for (const [wing, es] of byWing) {
+    const sources = [...new Set(es.map((e) => e.source))].sort().join("+");
+    if (dryRun) {
+      results.push({ wing, transcripts: es.length, sources, mined: "dry-run", writeback: { drawers: 0, framed: 0, applied: 0, bands: {} } });
+      continue;
+    }
+    // stage into a stable per-wing dir (normalize copilot, hardlink the rest) so
+    // mempalace's source_file dedup keeps the mine idempotent across runs.
+    const stage = join(stageRoot, wing);
+    mkdirSync(stage, { recursive: true });
+    for (const e of es) {
+      const dst = join(stage, e.stageName);
+      if (existsSync(dst)) continue;
+      if (e.normalize) {
+        try { writeFileSync(dst, execFileSync(PY, [COPILOT_NORM, e.file], { maxBuffer: 1 << 30, encoding: "utf8" })); } catch { /* skip */ }
+      } else {
+        try { linkSync(e.file, dst); } catch { try { copyFileSync(e.file, dst); } catch { /* skip */ } }
+      }
+    }
+    let mined: number | string = 0;
+    try {
+      const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares"], { maxBuffer: 1 << 30, encoding: "utf8" });
+      mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
+    } catch { mined = "mine-failed"; }
+    results.push({ wing, transcripts: es.length, sources, mined, writeback: writebackWing(wing) });
+  }
+
+  results.sort((a, b) => b.transcripts - a.transcripts);
+  const totalApplied = results.reduce((n, r) => n + r.writeback.applied, 0);
   emit(args, {
     ok: true,
-    data: { projects, totalApplied, dryRun, mode: "all" },
+    data: { wings: results, totalApplied, dryRun, mode: "all" },
     human: () => {
-      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${projects.length} project(s)`);
-      for (const p of projects)
-        console.log(`  ${p.wing.padEnd(36)} ${String(p.transcripts).padStart(4)} transcripts · mined ${p.mined} · lar_ written ${p.writeback.applied}`);
+      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts`);
+      for (const r of results)
+        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · mined ${r.mined} · lar_ ${r.writeback.applied}`);
       console.log(`  total lar_ metadata written: ${totalApplied}`);
     },
   });
