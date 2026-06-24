@@ -7,6 +7,7 @@
  */
 
 import type { AutomergeUrl, DocHandle, Repo } from "@automerge/automerge-repo";
+import type { MeshScale } from "@lararium/mesh";
 
 const LOCAL_READY_MS = 3000;
 
@@ -47,8 +48,9 @@ export async function waitHandleLocal<T>(
 // Stable-bytes origins (the genesis island — reconstructable locally with a shared id)
 // keep their own genesisHandle fallback; they are not ghosts and do not route here.
 
-/** The five DreamNet federation scales <-> the five aperture bands; reach (so patience) grows. */
-export type MeshScale = "vessel" | "person-group" | "cabal" | "nexus" | "dreamnet";
+/** The five DreamNet federation scales <-> the five aperture bands; reach (so patience) grows.
+ *  Defined in @lararium/mesh (the residency-bag layer that governs federation); re-exported for resolver callers. */
+export type { MeshScale };
 /** Which side of the tideline a required boot doc lives on. */
 export type Tideline = "hearth-private" | "mesh-shared";
 

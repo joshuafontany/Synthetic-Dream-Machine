@@ -134,6 +134,20 @@ export function catalogCorpusEntryUri(slug: string): string {
 /** Prefix used to discover catalog corpus-registry entries. */
 export const CATALOG_CORPUS_PREFIX = stableLarUri("@catalog/corpus/");
 
+// ── Federation scale (the RESIDENCY-BAG axis) ─────────────────────────────
+// A catalog/residency entry MAY declare the federation scale of the bag it
+// registers — what controls how far the bag federates and (at boot) how long a
+// joiner waits for it. The five scales map to the five aperture bands; reach
+// (so patience) grows. Federation is governed HERE, on the bag's residency
+// entry — never by the lar: namespace (which is the naming layer above).
+export type MeshScale = "vessel" | "person-group" | "cabal" | "nexus" | "dreamnet";
+export const MESH_SCALES: readonly MeshScale[] = ["vessel", "person-group", "cabal", "nexus", "dreamnet"];
+
+/** Read a declared scale off a catalog entry; undefined when absent or unrecognized (the caller then defaults patience). */
+export function parseMeshScale(s: string | null | undefined): MeshScale | undefined {
+  return typeof s === "string" && (MESH_SCALES as readonly string[]).includes(s) ? (s as MeshScale) : undefined;
+}
+
 // The wiki canon/draft URI builders moved to wiki-recipe.ts (wikiBagUri /
 // wikiDraftBagUri) — a wiki's own canon IS the `@{slug}` bag (the quine),
 // never nested under the @lararium corpus (the pre-plane-split `@lararium/wikis/`

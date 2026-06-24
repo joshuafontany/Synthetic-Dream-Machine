@@ -21,6 +21,8 @@ import {
   stableLarUri,
   volatileVmUri,
   STABLE_L_SPACE,
+  MESH_SCALES,
+  parseMeshScale,
 } from "../src/lar-uris.js";
 
 describe("lar-uris petname regions", () => {
@@ -68,5 +70,20 @@ describe("lar-uris petname regions", () => {
       const flags = [isStableLarUri(uri), isVolatileVmUri(uri), isUnstablePetnameUri(uri)];
       expect(flags.filter(Boolean)).toHaveLength(1);
     }
+  });
+});
+
+describe("parseMeshScale — federation scale declared on a residency entry", () => {
+  test("accepts each of the five scales verbatim", () => {
+    for (const s of MESH_SCALES) expect(parseMeshScale(s)).toBe(s);
+    expect(MESH_SCALES).toHaveLength(5);
+  });
+
+  test("returns undefined for absent or unrecognized — caller defaults patience", () => {
+    expect(parseMeshScale(undefined)).toBeUndefined();
+    expect(parseMeshScale(null)).toBeUndefined();
+    expect(parseMeshScale("")).toBeUndefined();
+    expect(parseMeshScale("planet")).toBeUndefined();
+    expect(parseMeshScale("Vessel")).toBeUndefined(); // case-sensitive, exact match
   });
 });
