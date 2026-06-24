@@ -61,26 +61,32 @@ stands **PROPOSED** until that settles.
 
 <<~ ahu #five-scale >>
 
-## The 5-Scale (the group axis)
+## The Five Scales (the group axis)
 
 \procedure ~Scale(~Type:"" ~Params:"") ~Scale <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Scale Device-Vessel "plane/0 holds/a distinct on-device key — the user×vessel bond ~ node · browser session · QA box; each a causal island, each self-signing" >>
-<<~Scale PersonGroup "plane/1 holds/the OPERATOR identity — a group of one user's vessels ~ the delegation edges land here; NOT the device key itself" >>
-<<~Scale CabalGroup "plane/— holds/a neighborhood — several PersonGroups under a shared charter ~ a per-cabal registry, co-admin authored" >>
-<<~Scale NexusGroup "plane/3 holds/a confederation — cabals + independent operators in mesh" >>
-<<~Scale DreamNet "plane/4 holds/the super-mesh — no central authority; trust by treaty" >>
+<<~Scale Device-Vessel "holds/a distinct on-device key — the user×vessel bond; the base principal, a nameless #has-stack of its own caps ~ node · browser session · QA box; each a causal island, each self-signing" >>
+<<~Scale PersonGroup "holds/the operator — a principal that #has a stack of its own vessels ~ the delegation edges land here, NOT the device key itself" >>
+<<~Scale CabalGroup "holds/a neighborhood — a principal that #has a stack of PersonGroups under a shared charter ~ co-admin authored" >>
+<<~Scale NexusGroup "holds/a confederation — a principal that #has cabals + independent operators in the mesh" >>
+<<~Scale DreamNet "holds/the super-mesh — the widest principal; no central authority, trust by treaty" >>
 
-Intent composes **up** the scale through the **same ability-ladder** (pull → read →
-edit → admin) at every tier; a vessel writes local intent first, sync carries it
+**Nameless principals, not numbered planes** (operator ruling 2026-06-24). Each scale stands
+as a **nameless entity carrying a `#has`-stack of capabilities** (`has-stack-ontology`) that
+**contains the scale beneath it**: a principal **#has** a stack of the principals below — a
+person #has a stack of vessels; a cabal #has a stack of persons. The scales nest **recursively**
+and scope **by reach, relatively** — never by an absolute global plane-index. Prior art rules the
+index an anti-pattern: SDSI links *local* namespaces, Matrix refuses an ordered version-hierarchy,
+Keyhive models the whole ladder as one recursive primitive (principal-contains-principals). So no
+Plane 0/1/2 survives — only nameless `#has`-stacks, each composing **up** through the **same
+ability-ladder** (pull → read → edit → admin); a vessel writes local intent first, sync carries it
 outward, capability proofs verify the crossing (#causal-islands, local-first law).
 
-**Circles ride orthogonal — never a rung.** The S7 plane-list seats Circle at Plane 2;
-this meme parts the two axes: the **scale** above names the federation/group nesting,
-while a **Circle** names a Kowloon local-membership set that **never federates**
-(`circles-kowloon`). A vessel holds circles *within* its Lararium; circles do not
-stack between operators. <<~ confidence Provisional-Synthesis 7/20 >> the reconciliation
-(plane-list vs group-scale) rides the hoike as a named open question (#provenance).
+**Circles ride orthogonal — never a rung.** A **Circle** names a Kowloon local-membership set that
+**never federates** (`circles-kowloon`); a vessel holds circles *within* its Lararium, and circles
+do not stack between operators. <<~ confidence Synthesis 13/20 >> The earlier plane-list-vs-group-scale
+question closes with the ruling above — no numbered plane survives to reconcile; the group-scale
+(nameless `#has`-stacks) stands, Circles stay orthogonal to it.
 
 <<~/ahu >>
 
@@ -255,7 +261,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 - **The FS-limit is the substrate's nature** (kue, security spirit) — a leaked vessel key reads all history it held; the only forward lever is epoch group-key rotation (BeeKEM, future chunks only). Puncturable encryption does NOT retire it (single-holder; refuted by the neg-entropy swarm for a replicated mesh).
 - **The blast-radius kue is answered by per-vessel-key + delegation + revocation** — already our lineage (Keyhive/Beelay; p2panda-auth converged independently), NOT by threshold. CORRECTION (neg-entropy swarm 2026-06-23): the earlier "threshold pays the kue" was wrong — threshold signing needs a synchronous quorum per signature, which "no global now" forbids. **Threshold fits only the rare ROOT ceremony** (Shamir-of-root for admit/rotate/recover, transient reassembly; swaps to FROST/DKG later).
 - **The identity MODEL — RULED (operator, 2026-06-24): Goblins/OCapN capability-is-identity + petnames** (see #capability-and-petnames). The capability IS the identity; petnames ride the `lar:` l-space regions (stable `ha.ka.ba` / unstable `t1.t2.t3`, ± authority chunk). **KERI pre-rotation is retained as a sub-lever** — not the base model, but the tool for rotating the place's *secret root* (the hearth's private face) in the rare root ceremony; it composes under capability-is-identity (rotate the root, keep the capabilities). did:peer's pairwise-root idea folds into unstable petnames.
-- **Circle as Plane-2 (S7) vs orthogonal** (this meme) — needs a ruling.
+- **Circle vs scale** — RULED (operator 2026-06-24): no numbered planes survive (nameless `#has`-stacks replace plane-indices, #five-scale); Circles stay orthogonal to the group-scale, never a rung.
 - **Registry-as-island** — keep each registry a causal island; resist a global registry re-growing (the web2 smell).
 - **Two ratchets, never conflated** — the public grammar ratchet (engine-epochs, shared) vs the private key ratchet (per-place); see #head.
 
