@@ -48,9 +48,14 @@ a secret in the public content-seed — would hand every git-cloner the same roo
 Two ratchets ride these faces, never conflated: a **public grammar ratchet** (engine-epochs,
 shared, everyone upgrades) and a **private key ratchet** (forward-secrecy, per-place).
 
-<<~ confidence Synthesis 12/20 >> **PROPOSED** — the foundation (5-scale, per-vessel key,
-delegation edge, two-faced hearth) restates near-settled canon; the encrypt-from-start
-keying carries the amendments the hoike (#provenance) filed.
+The base model **rules capability-is-identity** (Goblins/OCapN) with **petnames** as the human/place
+layer — the capability *is* the identity, the petname its local name, both riding the `lar:` l-space
+regions (#capability-and-petnames).
+
+<<~ confidence Synthesis 13/20 >> The foundation (5-scale, per-vessel key, delegation edge,
+two-faced hearth, capability-is-identity + petnames — operator-ruled 2026-06-24) firms toward canon;
+the encrypt-from-start keying still carries the hoike's kept dissent (#provenance), so the meme
+stands **PROPOSED** until that settles.
 
 <<~/ahu >>
 
@@ -119,6 +124,37 @@ confused-deputy guard).
 Revocation leans on **short TTL** as the spine + a **per-group epoch** bump for an
 emergency subtree-kill; a revocation list stays deferred (revocation serves as the last
 line, never the primary control).
+
+<<~/ahu >>
+
+<<~ ahu #capability-and-petnames >>
+
+## Capability-is-Identity + Petnames ~ the ruled base (operator, 2026-06-24)
+
+The base model **rules Goblins/OCapN: a capability IS the identity.** No account to look up — a
+**reference reaches a place and carries its grant in one** ("capability not account", the Elyncia
+lore made literal). A Lar binds to a place **reached by a capability**, never a row in a registry.
+The per-vessel key (#vessel-key) is *what holds and signs* capabilities; a **delegation edge
+(#delegation-edge) IS a capability grant**; compromise heals by **revoking the capability** — the
+per-vessel-key + delegation + revocation lineage we already hold — not by rotating a global identity.
+
+**Petnames are the human/place layer** — a vessel's *local* name for a reference it holds, resolving
+Zooko's triangle by layering (the unforgeable capability stays the root; the petname rides locally,
+no global registry). The petname namespace **needs no new infrastructure — it IS the `lar:` grammar
+already in code** (`STABLE_L_SPACE = "ha.ka.ba"`, `lar-uris.ts`):
+
+\procedure ~Petname(~Type:"" ~Params:"") ~Petname <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Petname Stable "region/lar:///ha.ka.ba/** holds/canonical · permanent · shared · persistable ~ the well-known @oracle·@lares·@catalog·@lararium ARE stable petnames already" >>
+<<~Petname Unstable "region/lar:///t1.t2.t3/** holds/per-session · per-relationship · per-place · living ~ never persisted to the stable graph; the local names a vessel grows for the peers and places it meets" >>
+<<~Petname Authority "chunk/lar://alias:grant@host/… marks/capability-BEARING ~ the session-form authority chunk carries the live grant (the sturdyref); the authority-less local form names without granting" >>
+<<~Petname Petname >>
+
+So the whole space sits in one grammar — **{stable · unstable} × {bare-name · capability-bearing}**:
+stable+bare = the canonical public names; unstable+bare = a living local handle; the authority chunk
+turns either into a capability-bearing reference (the sturdyref itself). **The petname IS a `lar:`
+address; the capability IS a `lar:` address that carries a grant.** Two regions of l-space, a place
+for stable and unstable petnames both.
 
 <<~/ahu >>
 
@@ -199,7 +235,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 - **The FS-limit is the substrate's nature** (kue, security spirit) — a leaked vessel key reads all history it held; the only forward lever is epoch group-key rotation (BeeKEM, future chunks only). Puncturable encryption does NOT retire it (single-holder; refuted by the neg-entropy swarm for a replicated mesh).
 - **The blast-radius kue is answered by per-vessel-key + delegation + revocation** — already our lineage (Keyhive/Beelay; p2panda-auth converged independently), NOT by threshold. CORRECTION (neg-entropy swarm 2026-06-23): the earlier "threshold pays the kue" was wrong — threshold signing needs a synchronous quorum per signature, which "no global now" forbids. **Threshold fits only the rare ROOT ceremony** (Shamir-of-root for admit/rotate/recover, transient reassembly; swaps to FROST/DKG later).
-- **The unchosen layer is the identity MODEL** (the swarm's meta-find — we gathered primitives, never chose a model). Fork: **KERI self-certifying AID + pre-rotation** (content-addressed, ceremonial inception, ledgerless rotation, witnesses=Nexus — fills the rotation/recovery gap none of the surveyed set had) vs **Goblins/OCapN capability-is-identity** ("capability not account" — our lore); + the human/place layer: **petnames** (Zooko-via-layering) + **did:peer** pairwise roots ("a Lar binds to a place"). Operator ruling pending.
+- **The identity MODEL — RULED (operator, 2026-06-24): Goblins/OCapN capability-is-identity + petnames** (see #capability-and-petnames). The capability IS the identity; petnames ride the `lar:` l-space regions (stable `ha.ka.ba` / unstable `t1.t2.t3`, ± authority chunk). **KERI pre-rotation is retained as a sub-lever** — not the base model, but the tool for rotating the place's *secret root* (the hearth's private face) in the rare root ceremony; it composes under capability-is-identity (rotate the root, keep the capabilities). did:peer's pairwise-root idea folds into unstable petnames.
 - **Circle as Plane-2 (S7) vs orthogonal** (this meme) — needs a ruling.
 - **Registry-as-island** — keep each registry a causal island; resist a global registry re-growing (the web2 smell).
 - **Two ratchets, never conflated** — the public grammar ratchet (engine-epochs, shared) vs the private key ratchet (per-place); see #head.

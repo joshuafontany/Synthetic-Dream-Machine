@@ -97,6 +97,25 @@ export function GENESIS_CID(genesisDir?: string): string | undefined {
 }
 
 // ---------------------------------------------------------------------------
+// hearthTrueName — the hearth's PUBLIC true-name (the place's public face).
+// ---------------------------------------------------------------------------
+//
+// The hearth wears two faces, never fused (lar:///ha.ka.ba/@lares/v0.1/api/pono/
+// lararium-identity#head). The PUBLIC face = the content-address of the place's
+// grammar (the genesis CID, sha256(engine+memes+plugins)) — shared DreamNet-wide,
+// ratcheting by engine-epoch, checked into git, holding NO secret. The PRIVATE
+// face = a secret root minted per-founding (operator-key, gitignored), NEVER derived
+// from this public content. This accessor surfaces the public face ONLY.
+//
+// Under capability-is-identity + petnames (#capability-and-petnames), this is the
+// hearth's canonical STABLE petname — a content-addressed name for "which grammar/
+// lineage this place speaks," legible across the mesh with no registry. It returns
+// `undefined` when the genesis artifact is absent (mirrors GENESIS_CID).
+export function hearthTrueName(genesisDir?: string): string | undefined {
+  return GENESIS_CID(genesisDir);
+}
+
+// ---------------------------------------------------------------------------
 // loadGenesisIsland
 // ---------------------------------------------------------------------------
 
