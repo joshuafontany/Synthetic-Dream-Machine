@@ -180,16 +180,45 @@ export class KeyhiveProvider implements CapabilityProvider {
     return { delegationId, bytes: sigBytes };
   }
 
+  /**
+   * Revoke a delegation by its id (the delegation's signature hex from `delegate()`).
+   *
+   * Bridges our wrapper to Keyhive's live `revokeMember` — the concap promise made real:
+   * revocation is a CONVERGENT CRDT op (it fires REVOKED events into the event_handler/
+   * EventStore that converge across replicas; offline peers stay authorized locally until
+   * they sync the revocation — eventual, per concap, never synchronous). `retain_all_other_
+   * members=true` revokes ONLY this audience's membership, leaving the rest intact.
+   */
   async revoke(delegationId: string): Promise<{ bytes: Uint8Array }> {
     if (!this.delegations.has(delegationId)) {
       throw new Error(`unknown delegationId: ${delegationId}`);
     }
-    // Parse out the audience + bag from the delegationId we minted; or
-    // walk the docMemberCapabilities to find the audience-agent and call
-    // revokeMember(agent, retain_others=true, doc.toMembered()).
-    // TODO(D.3): full revocation path lives here; D.2 records the API
-    // surface but punts the implementation behind a clear marker.
-    throw new Error("revoke(): full path lands in D.3 (needs delegationId → audience+bag mapping)");
+    const audience = this.delegationAudience.get(delegationId);
+    const bagUrl   = this.delegationBag.get(delegationId);
+    if (!audience || !bagUrl) {
+      throw new Error(`revoke(): no audience/bag tracked for delegationId ${delegationId.slice(0, 16)}…`);
+    }
+    const docIdHex = this.bagToDocId.get(bagUrl);
+    if (!docIdHex) throw new Error(`revoke(): bag not registered: ${bagUrl}`);
+    const docId = new KH.DocumentId(hexToBytes(docIdHex));
+    const doc   = await this.requireKh().getDocument(docId);
+    if (!doc) throw new Error(`revoke(): document not in scope: ${bagUrl}`);
+
+    const audienceId    = new KH.Identifier(hexToBytes(audience));
+    const audienceAgent = await this.requireKh().getAgent(audienceId);
+    if (!audienceAgent) throw new Error(`revoke(): audience agent not known: ${audience.slice(0, 16)}…`);
+
+    const revocations = await this.requireKh().revokeMember(audienceAgent, true, doc.toMembered());
+    if (!revocations || revocations.length === 0) {
+      throw new Error("revoke(): revokeMember produced no revocation events");
+    }
+    // Mirror delegate()'s "signature as id"; the events themselves ride the event_handler → EventStore.
+    const bytes = revocations[0]!.signature;
+    // This delegation is revoked — drop local tracking so a re-revoke fails loud rather than re-firing.
+    this.delegations.delete(delegationId);
+    this.delegationAudience.delete(delegationId);
+    this.delegationBag.delete(delegationId);
+    return { bytes };
   }
 
   async verify(args: VerifyArgs): Promise<VerifyResult> {

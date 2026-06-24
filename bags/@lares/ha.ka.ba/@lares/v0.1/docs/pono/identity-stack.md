@@ -23,6 +23,13 @@ uri-path      = "ha.ka.ba/@lares/v0.1/docs/pono/identity-stack"
 
 # Identity Stack — DID / Handle / lar: Alias
 
+> **PRE-KEYHIVE MODEL — superseded, rewrite deferred (operator, 2026-06-24).** This stack predates the
+> ruled identity model. The live model is **capability-is-identity + Keyhive concap** (the capability IS
+> the identity; petnames over the lar: l-space regions) — <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity >>.
+> What this file describes (Elyncia.app / DreamDeck on AT Protocol `did:plc` + UCAN) reads as a **web2-bridge
+> app layer** behind a causal-island boundary (Web3-only law), NOT the Lares-stack-proper identity. Held for a
+> later rewrite pass.
+
 The Elyncia.app / DreamDeck identity model holds three distinct layers. **Do not conflate them.**
 
 | Layer | Form | What it holds |
