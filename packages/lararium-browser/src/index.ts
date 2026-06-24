@@ -16,10 +16,10 @@ export { openBrowserVessel } from "./open-browser-vessel.js";
 export type { BrowserVesselOptions, BrowserVesselResult } from "./open-browser-vessel.js";
 
 export {
-  generateOrLoadBrowserKeypair, loadBrowserSigningSeed,
+  generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
   openVesselIdb, idbGet, idbPut,
-} from "./browser-operator-key.js";
-export type { BrowserOperatorIdentity } from "./browser-operator-key.js";
+} from "./browser-vessel-identity.js";
+export type { BrowserVesselIdentity } from "./browser-vessel-identity.js";
 
 export {
   loadGenesisIslandFromBytes, findGenesisIsland,

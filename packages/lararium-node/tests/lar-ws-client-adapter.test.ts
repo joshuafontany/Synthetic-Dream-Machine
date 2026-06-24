@@ -30,7 +30,7 @@ import type { LeafIdentity } from "../src/leaf-identity.js";
 
 const AUD = "lar:///ha.ka.ba/@admin";
 
-// Generate an Ed25519 keypair via node:crypto (the operator-key pattern): returns
+// Generate an Ed25519 keypair via node:crypto (the node-vessel-identity pattern): returns
 // the raw 32-byte seed (for ed25519SignerFromSeed) + the verifying-key hex.
 function genKey(): { seed: Uint8Array; pub: string } {
   const { publicKey, privateKey } = generateKeyPairSync("ed25519");

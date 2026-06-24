@@ -104,7 +104,7 @@ export function GENESIS_CID(genesisDir?: string): string | undefined {
 // lararium-identity#head). The PUBLIC face = the content-address of the place's
 // grammar (the genesis CID, sha256(engine+memes+plugins)) — shared DreamNet-wide,
 // ratcheting by engine-epoch, checked into git, holding NO secret. The PRIVATE
-// face = a secret root minted per-founding (operator-key, gitignored), NEVER derived
+// face = a secret root minted per-founding (node-vessel-identity, gitignored), NEVER derived
 // from this public content. This accessor surfaces the public face ONLY.
 //
 // Under capability-is-identity + petnames (#capability-and-petnames), this is the

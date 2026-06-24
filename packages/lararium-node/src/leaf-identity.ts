@@ -17,7 +17,7 @@
  */
 
 import { ed25519SignerFromSeed } from "@lararium/mesh";
-import { loadOperatorSigningSeed, loadOperatorVerifyingKey, loadOperatorCard } from "./operator-key.js";
+import { loadVesselSigningSeed, loadVesselVerifyingKey, loadVesselCard } from "./node-vessel-identity.js";
 
 export interface LeafIdentity {
   /** The cached self-certifying ContactCard JSON, re-presented each handshake. */
@@ -36,9 +36,9 @@ export interface LeafIdentity {
  */
 export async function loadLeafIdentity(dataDir: string): Promise<LeafIdentity> {
   const [seed, peerPubKey, contactCard] = await Promise.all([
-    loadOperatorSigningSeed(dataDir),
-    loadOperatorVerifyingKey(dataDir),
-    loadOperatorCard(dataDir),
+    loadVesselSigningSeed(dataDir),
+    loadVesselVerifyingKey(dataDir),
+    loadVesselCard(dataDir),
   ]);
   return { contactCard, peerPubKey, sign: ed25519SignerFromSeed(seed) };
 }

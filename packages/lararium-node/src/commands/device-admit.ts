@@ -4,7 +4,7 @@
  * Node-specific seams (only these belong here):
  *   - readFileSync for genesis/social-bootstrap.json
  *   - NodeFSStorageAdapter + findWithProgress for admin doc access
- *   - loadOperatorSigningSeed (disk keypair)
+ *   - loadVesselSigningSeed (disk keypair)
  *   - writeFileSync / process.stdout.write for output
  *
  * All ceremony logic (Keyhive hydration, Gate B/C self-check, payload construction)
@@ -25,7 +25,7 @@ import {
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 import { runDeviceAdmitCore, type DeviceAdmitPayload } from "@lararium/keyhive";
-import { loadOperatorSigningSeed } from "../operator-key.js";
+import { loadVesselSigningSeed } from "../node-vessel-identity.js";
 
 export type { DeviceAdmitPayload } from "@lararium/keyhive";
 
@@ -113,7 +113,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
   await repo.flush();
 
   // Delegate to isomorphic ceremony core.
-  const operatorSeed = await loadOperatorSigningSeed(storageDir);
+  const operatorSeed = await loadVesselSigningSeed(storageDir);
   const payload = await runDeviceAdmitCore({
     operatorSeed,
     personGroupDocIdHex,

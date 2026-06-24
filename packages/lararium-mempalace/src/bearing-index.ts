@@ -3,7 +3,7 @@
  *
  * A plain append-only NDJSON file (one record per turn). It deliberately never
  * enters an Automerge Repo, so it is *structurally impossible to federate* — the
- * same guarantee operator-key leans on. mempalace-realm: what we *said*, kept
+ * same guarantee node-vessel-identity leans on. mempalace-realm: what we *said*, kept
  * node-local. Promotion of a blessed bearing into Lararium domain canon is a
  * separate, operator-gated step (MOVE), not this file's concern.
  *

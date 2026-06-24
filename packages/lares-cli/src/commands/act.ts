@@ -35,7 +35,7 @@ import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { join, extname, resolve, relative, sep } from "node:path";
 import { statSync, readdirSync, readFileSync } from "node:fs";
-import { loadOperatorVerifyingKey } from "@lararium/node";
+import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
@@ -43,7 +43,7 @@ import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
-  return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
+  return "0x" + (await loadVesselVerifyingKey(larDataDir()));
 }
 
 /**

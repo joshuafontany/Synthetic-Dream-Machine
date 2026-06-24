@@ -7,7 +7,7 @@
  *
  * Safety law (the keypair-wipe lesson generalized):
  *  - the plan is computed by file PRESENCE alone (read-only); only absent steps run;
- *  - the operator keypair is load-or-create — never wiped (operator-key.ts);
+ *  - the operator keypair is load-or-create — never wiped (node-vessel-identity.ts);
  *  - `lares init` self-guards on the bootstrap (skips the ceremony if present);
  *  - genesis is BUILD-IF-ABSENT ONLY — a rebuild can shift the CID and diverge a
  *    founded identity, so re-founding stays an explicit operator act (reset), never

@@ -1,7 +1,7 @@
 /**
- * browser-operator-key — WebCrypto Ed25519 keypair lifecycle for browser vessels.
+ * browser-vessel-identity — WebCrypto Ed25519 keypair lifecycle for browser vessels.
  *
- * Browser analog of operator-key.ts (Node). Platform deltas:
+ * Browser analog of node-vessel-identity.ts (Node). Platform deltas:
  *   - crypto.subtle.generateKey({name:"Ed25519"}) instead of Node generateKeyPairSync
  *   - IndexedDB for persistence instead of NodeFS (mode 0o600)
  *   - No git-config lookup; displayName passed by caller
@@ -9,10 +9,10 @@
  * Key material lives only in the origin's IndexedDB under `<idbName>` / "keystore".
  * Never transferred to island Workers.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-operator-key
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-identity
  */
 
-const KEY_RECORD = "operator-key";
+const KEY_RECORD = "vessel-key";
 
 interface PersistedBrowserKey {
   /** Hex-encoded 32-byte Ed25519 verifying key. */
@@ -21,7 +21,7 @@ interface PersistedBrowserKey {
   signingKey: string;
 }
 
-export interface BrowserOperatorIdentity {
+export interface BrowserVesselIdentity {
   verifyingKey: string;
   displayName?: string;
 }
@@ -89,16 +89,16 @@ function hexToBytes(hex: string): Uint8Array {
  * @param idbName  IDB database name (default "lares:vessel")
  * @param displayName  Optional operator display name for identity tiddler.
  */
-export async function generateOrLoadBrowserKeypair(
+export async function generateOrLoadBrowserVesselIdentity(
   idbName    = "lares:vessel",
   displayName?: string,
-): Promise<BrowserOperatorIdentity> {
+): Promise<BrowserVesselIdentity> {
   const db      = await openVesselIdb(idbName);
   const existing = await idbGet<PersistedBrowserKey>(db, "keystore", KEY_RECORD);
 
   if (existing) {
     db.close();
-    const base: BrowserOperatorIdentity = { verifyingKey: existing.verifyingKey };
+    const base: BrowserVesselIdentity = { verifyingKey: existing.verifyingKey };
     return displayName ? { ...base, displayName } : base;
   }
 
@@ -113,7 +113,7 @@ export async function generateOrLoadBrowserKeypair(
   const pubJwk  = await crypto.subtle.exportKey("jwk", keyPair.publicKey)  as JsonWebKey;
 
   if (!privJwk.d || !pubJwk.x) {
-    throw new Error("[browser-operator-key] WebCrypto exportKey produced unexpected JWK shape");
+    throw new Error("[browser-vessel-identity] WebCrypto exportKey produced unexpected JWK shape");
   }
 
   const signingKey   = base64urlToHex(privJwk.d);
@@ -123,13 +123,13 @@ export async function generateOrLoadBrowserKeypair(
   await idbPut(db, "keystore", KEY_RECORD, record);
   db.close();
 
-  const base: BrowserOperatorIdentity = { verifyingKey };
+  const base: BrowserVesselIdentity = { verifyingKey };
   return displayName ? { ...base, displayName } : base;
 }
 
 /**
  * Load the operator's 32-byte Ed25519 signing seed from IDB.
- * Throws when no keypair exists — call generateOrLoadBrowserKeypair first.
+ * Throws when no keypair exists — call generateOrLoadBrowserVesselIdentity first.
  */
 export async function loadBrowserSigningSeed(idbName = "lares:vessel"): Promise<Uint8Array> {
   const db      = await openVesselIdb(idbName);
@@ -137,7 +137,7 @@ export async function loadBrowserSigningSeed(idbName = "lares:vessel"): Promise<
   db.close();
 
   if (!existing) {
-    throw new Error("[browser-operator-key] no keypair in IDB — call generateOrLoadBrowserKeypair first");
+    throw new Error("[browser-vessel-identity] no keypair in IDB — call generateOrLoadBrowserVesselIdentity first");
   }
   return hexToBytes(existing.signingKey);
 }

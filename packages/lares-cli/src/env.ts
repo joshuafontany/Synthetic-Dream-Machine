@@ -14,7 +14,7 @@
 
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import { loadOperatorVerifyingKey } from "@lararium/node";
+import { loadVesselVerifyingKey } from "@lararium/node";
 
 /** Instance root — LAR_ROOT or the REPO ROOT (the vessel and the corpus share one root; early-alpha law, no dev-home compatibility). */
 export function larRoot(): string {
@@ -43,7 +43,7 @@ export function larPort(): number {
  */
 export async function operatorDid(): Promise<string> {
   try {
-    return "0x" + (await loadOperatorVerifyingKey(larDataDir()));
+    return "0x" + (await loadVesselVerifyingKey(larDataDir()));
   } catch {
     throw new Error(`no operator key under ${larDataDir()} — run \`lares init\` (or point LAR_ROOT at an initialized instance)`);
   }

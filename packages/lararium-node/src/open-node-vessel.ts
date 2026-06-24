@@ -60,7 +60,7 @@ import { openAdminVm }                    from "./open-admin-vm.js";
 import {
   makeResidencyStatsReactor,
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
-import { generateOrLoadOperatorKeypair, loadOperatorSigningSeed } from "./operator-key.js";
+import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 import type { AdminVmResult } from "./open-admin-vm.js";
 
@@ -165,8 +165,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   emit("catalog-ready");
 
   // ── Operator identity (node-held) ──────────────────────────────────────────
-  const operatorIdentity = await generateOrLoadOperatorKeypair(storageDir);
-  const operatorSeed     = await loadOperatorSigningSeed(storageDir);
+  const operatorIdentity = await generateOrLoadVesselIdentity(storageDir);
+  const operatorSeed     = await loadVesselSigningSeed(storageDir);
 
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──

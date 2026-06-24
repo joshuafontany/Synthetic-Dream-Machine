@@ -17,7 +17,7 @@
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { join } from "node:path";
-import { loadOperatorVerifyingKey } from "@lararium/node";
+import { loadVesselVerifyingKey } from "@lararium/node";
 import { repoRoot } from "@lararium/mesh/node";
 import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
 import { emit, wantsJson } from "../render.js";
@@ -25,7 +25,7 @@ import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
   const dataDir = join(repoRoot, "packages", "lararium-node", ".lararium");
-  return "0x" + (await loadOperatorVerifyingKey(dataDir));
+  return "0x" + (await loadVesselVerifyingKey(dataDir));
 }
 
 export async function cmdDraft(args: ParsedArgs): Promise<number> {

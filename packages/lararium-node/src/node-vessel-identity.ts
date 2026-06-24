@@ -1,5 +1,5 @@
 /**
- * operator-key — device Ed25519 keypair lifecycle.
+ * node-vessel-identity — device Ed25519 keypair lifecycle.
  *
  * Local-first identity root (Brooklyn Zelenka / UCAN / Keyhive alignment):
  *   - keypair is generated device-local, persists to disk with mode 0o600
@@ -26,8 +26,8 @@
  *   a destructive storage verb can no longer reach identity.
  *
  * Key file naming (inside the identity dir):
- *   git email configured:  .operator-key-{email-slug}.json
- *   git email absent:      .operator-key.json
+ *   git email configured:  .vessel-key-{email-slug}.json
+ *   git email absent:      .vessel-key.json
  *
  * Different developers on the same machine each get their own keypair.
  * The keypair derives from a local CSPRNG — fully device-local, no external service.
@@ -39,7 +39,7 @@
 import { generateKeyPairSync, createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, renameSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from "node:fs";
 import { join, dirname } from "node:path";
 
 /**
@@ -56,17 +56,6 @@ function identityDir(dataDir: string): string {
  * sibling identity dir: moves `<dataDir>/<file>` → `<identityDir>/<file>` when the
  * new location lacks it but the legacy one holds it. Idempotent — a no-op once moved.
  */
-function migrateLegacyIdentity(dataDir: string, fileName: string): void {
-  const idDir   = identityDir(dataDir);
-  const nextLoc = join(idDir, fileName);
-  const legacy  = join(dataDir, fileName);
-  if (!existsSync(nextLoc) && existsSync(legacy)) {
-    mkdirSync(idDir, { recursive: true });
-    renameSync(legacy, nextLoc);
-    chmodSync(nextLoc, 0o600);
-    console.log(`[operator-key] migrated ${fileName} → .lararium-identity (out of the wipe zone)`);
-  }
-}
 
 // ── Local operator identity hint ──────────────────────────────────────────
 // Fully local-first: reads git config only. No network calls, no server tokens.
@@ -107,7 +96,7 @@ interface PersistedKey {
   gitEmail?: string;
 }
 
-export interface OperatorIdentity {
+export interface VesselIdentity {
   /** Hex-encoded 32-byte Ed25519 verifying key. */
   verifyingKey: string;
   /** Display name from git config user.name. Enriches IdentityTiddler only. */
@@ -115,7 +104,7 @@ export interface OperatorIdentity {
 }
 
 function keyFileName(login: string | null): string {
-  return login ? `.operator-key-${login}.json` : ".operator-key.json";
+  return login ? `.vessel-key-${login}.json` : ".vessel-key.json";
 }
 
 // ── KERI-style pre-rotation (the can't-retrofit root-rotation hook) ──────────
@@ -137,10 +126,10 @@ function keyFileName(login: string | null): string {
 // follow-on. The commitment (`n`) is load-bearing now; it upgrades when the seed
 // moves offline.
 function kelFileName(login: string | null): string {
-  return login ? `.operator-kel-${login}.json` : ".operator-kel.json";
+  return login ? `.vessel-kel-${login}.json` : ".vessel-kel.json";
 }
 function nextSeedFileName(login: string | null): string {
-  return login ? `.operator-next-${login}.json` : ".operator-next.json";
+  return login ? `.vessel-next-${login}.json` : ".vessel-next.json";
 }
 
 interface InceptionKel {
@@ -186,9 +175,9 @@ function mintInceptionCommitment(currentVerifyingKey: string): {
  * cold-boot ceremony which writes the IdentityTiddler into IdentitiesDoc via
  * direct handle.change() — not through the TW5 sync adaptor (wrong island).
  */
-export async function generateOrLoadOperatorKeypair(
+export async function generateOrLoadVesselIdentity(
   dataDir: string,
-): Promise<OperatorIdentity> {
+): Promise<VesselIdentity> {
   const idDir = identityDir(dataDir);
   mkdirSync(idDir, { recursive: true });
 
@@ -196,8 +185,6 @@ export async function generateOrLoadOperatorKeypair(
   // Sweep BOTH identity files out of the wipe zone on every boot/init — the card
   // is re-mintable but still identity; move it eagerly alongside the key so a
   // `reset` between CLI identity loads can never strand it in `.lararium/`.
-  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
-  migrateLegacyIdentity(dataDir, cardFileName(hint.login));
   const keyFile  = join(idDir, keyFileName(hint.login));
 
   let verifyingKey: string;
@@ -205,11 +192,11 @@ export async function generateOrLoadOperatorKeypair(
   if (existsSync(keyFile)) {
     const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
     verifyingKey = raw.verifyingKey;
-    console.log(`[operator-key] loaded keypair${hint.login ? ` for ${hint.login}` : ""}`);
+    console.log(`[vessel-identity] loaded keypair${hint.login ? ` for ${hint.login}` : ""}`);
     // No-retrofit guard: a key minted before pre-rotation has no valid inception window —
     // NEVER fake one (it has already signed; the thief-can't-rotate guarantee is unrecoverable).
     if (!existsSync(join(idDir, kelFileName(hint.login)))) {
-      console.log(`[operator-key] key predates pre-rotation — non-pre-rotating (not retrofitted)`);
+      console.log(`[vessel-identity] key predates pre-rotation — non-pre-rotating (not retrofitted)`);
     }
   } else {
     const { publicKey, privateKey } = generateKeyPairSync("ed25519");
@@ -222,7 +209,7 @@ export async function generateOrLoadOperatorKeypair(
 
     writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
     chmodSync(keyFile, 0o600);
-    console.log(`[operator-key] generated new Ed25519 keypair${hint.login ? ` for ${hint.login}` : ""}`);
+    console.log(`[vessel-identity] generated new Ed25519 keypair${hint.login ? ` for ${hint.login}` : ""}`);
 
     // Pre-rotation: commit the next-root key's digest NOW — before this key ever signs
     // (first use is `keyhive.init`, downstream of founding). The only valid window; cannot
@@ -234,56 +221,55 @@ export async function generateOrLoadOperatorKeypair(
     writeFileSync(nextFile, JSON.stringify(nextSeed, null, 2), { mode: 0o600, encoding: "utf8" });
     chmodSync(kelFile, 0o600);
     chmodSync(nextFile, 0o600);
-    console.log(`[operator-key] committed pre-rotation inception (next-key digest sealed)${hint.login ? ` for ${hint.login}` : ""}`);
+    console.log(`[vessel-identity] committed pre-rotation inception (next-key digest sealed)${hint.login ? ` for ${hint.login}` : ""}`);
   }
 
-  const base: OperatorIdentity = { verifyingKey };
+  const base: VesselIdentity = { verifyingKey };
   return hint.displayName ? { ...base, displayName: hint.displayName } : base;
 }
 
 /**
  * Load the operator's 32-byte Ed25519 SIGNING seed (private key bytes).
  *
- * Separate from `generateOrLoadOperatorKeypair` — that function returns only
+ * Separate from `generateOrLoadVesselIdentity` — that function returns only
  * the public verifying key (sufficient for IdentityTiddler), while this one
  * surfaces the private seed needed by KeyhiveProvider.init({ seed }) and any
  * other capability layer that signs on the operator's behalf.
  *
  * SECURITY: the returned bytes ARE the operator's private signing key. Treat
- * with care: don't log it, don't write it anywhere outside the operator-key
+ * with care: don't log it, don't write it anywhere outside the vessel-identity
  * file, and don't pass it across process boundaries that aren't already
  * inside the operator's trust domain.
  *
  * Throws when no key file exists — caller must call
- * `generateOrLoadOperatorKeypair(dataDir)` first to ensure one is on disk.
+ * `generateOrLoadVesselIdentity(dataDir)` first to ensure one is on disk.
  */
 /**
  * Load the operator's hex-encoded Ed25519 PUBLIC verifying key from disk.
  * Cheap read — no crypto. Returns the same `verifyingKey` field
- * generateOrLoadOperatorKeypair surfaces, without regenerating if missing.
+ * generateOrLoadVesselIdentity surfaces, without regenerating if missing.
  *
  * Used by the CLI to populate verb-tiddler `requested-by` with a
  * Keyhive-recognizable DID (`0x` + verifyingKey hex). Throws when no key
  * file exists.
  */
-export async function loadOperatorVerifyingKey(dataDir: string): Promise<string> {
+export async function loadVesselVerifyingKey(dataDir: string): Promise<string> {
   const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
   const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
-      `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
+      `[vessel-identity] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
     );
   }
   const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
   if (typeof raw.verifyingKey !== "string" || raw.verifyingKey.length !== 64) {
-    throw new Error(`[operator-key] malformed verifyingKey in ${keyFile}`);
+    throw new Error(`[vessel-identity] malformed verifyingKey in ${keyFile}`);
   }
   return raw.verifyingKey;
 }
 
 function cardFileName(login: string | null): string {
-  return login ? `.operator-card-${login}.json` : ".operator-card.json";
+  return login ? `.vessel-card-${login}.json` : ".vessel-card.json";
 }
 
 /**
@@ -294,44 +280,42 @@ function cardFileName(login: string | null): string {
  * OP-AP5). The card carries no expiry/nonce, so the cache never goes stale; proof
  * freshness rides the per-challenge nonce, never the card.
  */
-export async function persistOperatorCard(dataDir: string, contactCardJson: string): Promise<void> {
+export async function persistVesselCard(dataDir: string, contactCardJson: string): Promise<void> {
   const idDir = identityDir(dataDir);
   mkdirSync(idDir, { recursive: true });
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
   const cardFile = join(idDir, cardFileName(hint.login));
   writeFileSync(cardFile, contactCardJson, { mode: 0o600, encoding: "utf8" });
   chmodSync(cardFile, 0o600);
-  console.log(`[operator-key] persisted ContactCard${hint.login ? ` for ${hint.login}` : ""}`);
+  console.log(`[vessel-identity] persisted ContactCard${hint.login ? ` for ${hint.login}` : ""}`);
 }
 
 /**
  * Load the operator's cached ContactCard JSON. Throws when absent — the caller
  * must run `lares init` (which mints + persists it during the founding ceremony).
  */
-export async function loadOperatorCard(dataDir: string): Promise<string> {
+export async function loadVesselCard(dataDir: string): Promise<string> {
   const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  migrateLegacyIdentity(dataDir, cardFileName(hint.login));
   const cardFile = join(identityDir(dataDir), cardFileName(hint.login));
   if (!existsSync(cardFile)) {
     throw new Error(
-      `[operator-key] no ContactCard at ${cardFile} — run \`lares init\` (it mints the card during the founding ceremony)`,
+      `[vessel-identity] no ContactCard at ${cardFile} — run \`lares init\` (it mints the card during the founding ceremony)`,
     );
   }
   return readFileSync(cardFile, "utf8");
 }
 
-export async function loadOperatorSigningSeed(dataDir: string): Promise<Uint8Array> {
+export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array> {
   const hint    = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
-  migrateLegacyIdentity(dataDir, keyFileName(hint.login));
   const keyFile = join(identityDir(dataDir), keyFileName(hint.login));
   if (!existsSync(keyFile)) {
     throw new Error(
-      `[operator-key] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
+      `[vessel-identity] no key file at ${keyFile} — run \`lares init\` first to generate the keypair`,
     );
   }
   const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
   if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
-    throw new Error(`[operator-key] malformed signingKey in ${keyFile}`);
+    throw new Error(`[vessel-identity] malformed signingKey in ${keyFile}`);
   }
   const bytes = new Uint8Array(32);
   for (let i = 0; i < 32; i++) {

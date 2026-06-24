@@ -32,7 +32,7 @@ export type KeyhiveAccess = CapabilityAccess;
 export type PeerDID = CapabilityPresenter;
 
 export interface CapabilityProviderInitOpts {
-  /** 32-byte ed25519 seed. Matches operator-key.ts shape so the operator's
+  /** 32-byte ed25519 seed. Matches node-vessel-identity.ts shape so the operator's
    *  existing identity feeds straight in. */
   readonly seed:        Uint8Array;
   /** Where Keyhive events get persisted. */

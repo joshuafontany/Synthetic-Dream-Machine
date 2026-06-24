@@ -19,7 +19,7 @@ export type { InitOptions, InitResult } from "./commands/init.js";
 export { runDeviceAdmit } from "./commands/device-admit.js";
 export type { DeviceAdmitOptions, DeviceAdmitPayload } from "./commands/device-admit.js";
 
-export { loadOperatorVerifyingKey, loadOperatorSigningSeed, loadOperatorCard, persistOperatorCard } from "./operator-key.js";
+export { loadVesselVerifyingKey, loadVesselSigningSeed, loadVesselCard, persistVesselCard } from "./node-vessel-identity.js";
 export { loadLeafIdentity } from "./leaf-identity.js";
 export type { LeafIdentity } from "./leaf-identity.js";
 export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";

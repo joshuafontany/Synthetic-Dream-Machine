@@ -37,9 +37,9 @@ import type { VesselWikiSlot, VesselCoreResult } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
-  generateOrLoadBrowserKeypair, loadBrowserSigningSeed,
+  generateOrLoadBrowserVesselIdentity, loadBrowserSigningSeed,
   openVesselIdb, idbGet, idbPut,
-}                                            from "./browser-operator-key.js";
+}                                            from "./browser-vessel-identity.js";
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
 import {
   loadGenesisIslandFromBytes, findGenesisIsland,
@@ -149,7 +149,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   emit("repo-open");
 
   // ── Keypair (WebCrypto substrate) + founding (the personGroup capability) ───
-  const operatorIdentity = await generateOrLoadBrowserKeypair(idbName, displayName);
+  const operatorIdentity = await generateOrLoadBrowserVesselIdentity(idbName, displayName);
   const operatorSeed     = await loadBrowserSigningSeed(idbName);
   const operatorDid      = operatorIdentity.verifyingKey;
 
