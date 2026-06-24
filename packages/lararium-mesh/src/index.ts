@@ -15,6 +15,7 @@ export * from "./crypto.js";
 export * from "./projection-registry.js";
 export * from "./readiness.js";
 export * from "./lar-uris.js";
+export * from "./boot-resolver.js";
 export * from "./bearing-harvest.js";
 export * from "./turn-harvest.js";
 export * from "./mirror-paths.js";
