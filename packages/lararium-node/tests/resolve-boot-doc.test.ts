@@ -9,7 +9,7 @@
 
 import { describe, it, expect } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
-import { resolveBootDoc } from "../src/repo-helpers.js";
+import { resolveBootDoc, isStillJoining } from "../src/repo-helpers.js";
 
 describe("resolveBootDoc — tideline-class boot resolution", () => {
   it("returns the real handle for a doc present in the local store", async () => {
@@ -28,12 +28,16 @@ describe("resolveBootDoc — tideline-class boot resolution", () => {
     ).rejects.toThrow(/hearth-private doc unavailable/);
   });
 
-  it("mesh-shared: waits scale-patience then surfaces 'still joining' — still never invents", async () => {
+  it("mesh-shared: waits scale-patience then returns a typed StillJoining — never throws, never invents", async () => {
     const origin = new Repo();
     const url = origin.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} }).url;
     const node = new Repo();
-    await expect(
-      resolveBootDoc(node, url, { tideline: "mesh-shared", label: "@wiki", scale: "vessel" }),
-    ).rejects.toThrow(/still joining the mesh/);
+    const got = await resolveBootDoc(node, url, { tideline: "mesh-shared", label: "@wiki", scale: "vessel" });
+    expect(isStillJoining(got)).toBe(true);
+    if (!isStillJoining(got)) throw new Error("expected StillJoining");
+    expect(got.scale).toBe("vessel");
+    expect(got.label).toBe("@wiki");
+    expect(got.url).toBe(url);          // the SAME id — never a fresh ghost
+    expect(got.waitedMs).toBe(3_000);   // vessel-scale patience
   });
 });

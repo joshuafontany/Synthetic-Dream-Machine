@@ -26,7 +26,38 @@ export function isVolatileVmUri(uri: string): boolean {
   return uri.startsWith(VOLATILE_VM_PREFIX);
 }
 
-/** A lar: URI is persistable when it is stable (ha.ka.ba) — volatile VM URIs are not. */
+// ── Petname l-space regions (the NAMING / addressing layer) ───────────────
+// Petnames and TW5 titles ride the lar: grammar as their own abstraction layer,
+// SEPARATE from both federation and persistence
+// (lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity#capability-and-petnames).
+// This layer classifies an address by NAME-STABILITY only:
+//   STABLE   — root ha.ka.ba — a canonical, permanent, shared address.
+//   UNSTABLE — any other three-term attitude root — a session/per-relationship/
+//              per-place LOCAL name a vessel grows for the peers and places it meets.
+// Two axes stay ORTHOGONAL to this naming layer — neither is decided by the namespace:
+//   · FEDERATION  — what crosses to peers — is controlled by the RESIDENCY BAG
+//                   (which bag holds the content) + capability, never by the name.
+//   · PERSISTENCE — local-store writes — covers every meme; only the reserved
+//                   volatile VM root (lararium.local.vm) is pure scratch (see below).
+
+/** The authority-less root token of a local-form `lar:///<root>/…` URI; undefined for session-form or non-lar. */
+export function larRoot(uri: string): string | undefined {
+  const m = /^lar:\/\/\/([^/]+)(?:\/|$)/.exec(uri);
+  return m ? m[1] : undefined;
+}
+
+/** Stable l-space (ha.ka.ba) — a canonical, permanent, shared address (NAMING only; says nothing about federation or persistence). */
+export function isStableLarUri(uri: string): boolean {
+  return larRoot(uri) === STABLE_L_SPACE;
+}
+
+/** An unstable petname — a session/per-relationship/per-place LOCAL name (any three-term root but the reserved volatile VM). NAMING only. */
+export function isUnstablePetnameUri(uri: string): boolean {
+  const root = larRoot(uri);
+  return root !== undefined && root !== STABLE_L_SPACE && root !== VOLATILE_VM_L_SPACE;
+}
+
+/** A lar: URI persists to the local store unless it is pure volatile-VM scratch — every meme persists, stable and unstable alike. */
 export function isPersistableLarUri(uri: string): boolean {
   return uri.startsWith("lar:") && !isVolatileVmUri(uri);
 }

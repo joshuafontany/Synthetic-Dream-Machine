@@ -66,15 +66,48 @@ const SCALE_PATIENCE_MS: Record<MeshScale, number> = {
 };
 const HEARTH_READY_MS = 3_000;
 
+/**
+ * A mesh-shared required doc that has not arrived within its scale-patience.
+ * NOT an error and NOT a blank — a typed signal that the doc still joins the
+ * mesh. The caller degrades gracefully and reconciles in the background once a
+ * peer at this scale delivers it (the never-invent-a-blank doctrine carried
+ * past boot, instead of a thrown error the joiner would have to catch).
+ */
+export interface StillJoining {
+  readonly stillJoining: true;
+  readonly scale: MeshScale;
+  readonly label: string;
+  readonly url: AutomergeUrl;
+  readonly waitedMs: number;
+}
+
+/** Narrow a resolveBootDoc result to the still-joining signal. */
+export function isStillJoining<T>(r: DocHandle<T> | StillJoining): r is StillJoining {
+  return (r as Partial<StillJoining>).stillJoining === true;
+}
+
+// hearth-private resolves to a handle or throws (fail loud — no peer carries it);
+// mesh-shared resolves to a handle or a typed StillJoining (never throws on
+// absence). The overloads keep existing hearth-private callers on the un-widened
+// DocHandle return — only mesh-shared consumers narrow the union.
+export function resolveBootDoc<T>(
+  repo: Repo, url: AutomergeUrl,
+  opts: { tideline: "hearth-private"; label: string; scale?: MeshScale },
+): Promise<DocHandle<T>>;
+export function resolveBootDoc<T>(
+  repo: Repo, url: AutomergeUrl,
+  opts: { tideline: "mesh-shared"; label: string; scale?: MeshScale },
+): Promise<DocHandle<T> | StillJoining>;
 export async function resolveBootDoc<T>(
   repo: Repo,
   url: AutomergeUrl,
   opts: { tideline: Tideline; label: string; scale?: MeshScale },
-): Promise<DocHandle<T>> {
+): Promise<DocHandle<T> | StillJoining> {
+  const scale = opts.scale ?? "dreamnet";
   const q = repo.findWithProgress<T>(url);
   const deadlineMs = opts.tideline === "hearth-private"
     ? HEARTH_READY_MS
-    : SCALE_PATIENCE_MS[opts.scale ?? "dreamnet"];
+    : SCALE_PATIENCE_MS[scale];
 
   // The handle rides the READY QueryState (whenReady resolves to it; subscribe carries
   // it on the ready transition). Watch BOTH: whenReady() catches an already-ready doc;
@@ -103,8 +136,7 @@ export async function resolveBootDoc<T>(
       `re-found via \`lares rebuild\`: ${opts.label} (${url})`,
     );
   }
-  throw new Error(
-    `[boot] mesh-shared doc not delivered within ${opts.scale ?? "dreamnet"} patience — ` +
-    `still joining the mesh; retry once a peer at this scale reaches you: ${opts.label} (${url})`,
-  );
+  // mesh-shared: never throw, never blank — surface the typed still-joining signal
+  // so the joiner proceeds and reconciles in the background.
+  return { stillJoining: true, scale, label: opts.label, url, waitedMs: deadlineMs };
 }
