@@ -32,8 +32,19 @@ export interface VscodeWireResult {
 
 interface McpFile { servers?: Record<string, unknown>; [k: string]: unknown }
 
-/** Every VS Code config root we'd wire — stable/Insiders × remote-server/local-profile. */
+/** Every VS Code config root we'd wire — stable/Insiders, per platform. */
 function variantRoots(home: string): Array<{ name: string; dir: string }> {
+  if (process.platform === "win32") {
+    // Native Win11 VS Code keeps user config under %APPDATA%; no .vscode-server
+    // (that's the remote/WSL server side, handled in the Linux branch below).
+    const appdata = process.env["APPDATA"] ?? join(home, "AppData", "Roaming");
+    return [
+      { name: "Code (stable)", dir: join(appdata, "Code", "User") },
+      { name: "Code - Insiders", dir: join(appdata, "Code - Insiders", "User") },
+    ];
+  }
+  // Linux / WSL2: the remote-server side (under a WSL/SSH window — where the
+  // mempalace-mcp binary actually lives) AND the local Linux profile.
   return [
     { name: "vscode-server (stable/remote)", dir: join(home, ".vscode-server", "data", "User") },
     { name: "vscode-server-insiders (remote)", dir: join(home, ".vscode-server-insiders", "data", "User") },

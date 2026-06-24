@@ -40,8 +40,8 @@ slug="$(printf '%s' "$base" | tr '[:upper:]' '[:lower:]' | tr ' -' '__' | sed 's
 [ -n "$slug" ] || slug="unsorted"
 wing="wing_${slug}"
 
-MP="/home/joshu/.local/bin/mempalace"; [ -x "$MP" ] || MP="mempalace"
-LARES="/home/joshu/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
+MP="$HOME/.local/bin/mempalace"; [ -x "$MP" ] || MP="mempalace"
+LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
 
 # Stage just this transcript so sibling scratch / memory / json never get swept.
 # Claude .jsonl + Codex rollout are mined as-is (mempalace parses both); Copilot

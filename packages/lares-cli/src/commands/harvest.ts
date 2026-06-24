@@ -30,6 +30,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, write
 import { homedir, tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { harvestTurnGradient, type TurnHarvest } from "@lararium/mesh";
+import { resolvePython } from "../integration-check.js";
 import { larRoot } from "../env.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -171,7 +172,9 @@ function listTranscripts(target: string, depth = 0): string[] {
 // Read mempalace drawer content, harvest it with the sovereign parser, and write
 // our domain metadata (the tension) back ONTO the drawer (the compression strut).
 
-const PY = existsSync("/home/joshu/.venv/bin/python3") ? "/home/joshu/.venv/bin/python3" : "python3";
+// Venv-aware + cross-platform: prefers $VIRTUAL_ENV / ~/.venv (where mempalace +
+// chromadb live), else python3/python/py. NEVER a machine-specific hardcode.
+const PY = resolvePython() ?? "python3";
 const DRAWER_IO = join(larRoot(), "packages", "lararium-mempalace", "scripts", "drawer_io.py");
 
 /** Deterministic function-hall routing from the authored sigils (no LLM). */
@@ -268,8 +271,9 @@ function runWriteback(args: ParsedArgs, wing: string): number {
 // drawer mine (mempalace convos) + lar_* declared writeback. Staged into a STABLE
 // per-wing dir so mempalace's source_file dedup holds across runs.
 
-const MP = existsSync(join(homedir(), ".local", "bin", "mempalace"))
-  ? join(homedir(), ".local", "bin", "mempalace")
+const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
+const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
+  ? join(homedir(), ".local", "bin", MP_EXE)
   : "mempalace";
 
 /** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
