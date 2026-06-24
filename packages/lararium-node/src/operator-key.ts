@@ -36,7 +36,7 @@
  * Mode 0o600 at write time; caller must ensure the identity dir is not world-readable.
  */
 
-import { generateKeyPairSync } from "node:crypto";
+import { generateKeyPairSync, createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, renameSync } from "node:fs";
@@ -118,6 +118,63 @@ function keyFileName(login: string | null): string {
   return login ? `.operator-key-${login}.json` : ".operator-key.json";
 }
 
+// ── KERI-style pre-rotation (the can't-retrofit root-rotation hook) ──────────
+//
+// At key GENERATION (the only window before the key ever signs), commit the DIGEST
+// of the NEXT root key. A thief of the current key still cannot rotate the identifier,
+// because a rotation must reveal a pre-image hashing to this committed digest — which
+// the thief never saw. Pre-rotation CANNOT be retrofitted: a key that has already
+// signed has no valid inception window.
+//
+// MINIMAL hook (operator ruling 2026-06-24): the load-bearing part is the
+// commit-the-next-key-digest-BEFORE-first-use ordering, captured here. The full KERI
+// KEL / CESR / SAID encoding + the `lares rotate-root` ceremony land later (the
+// `digestAlgo` field keeps the digest swappable to blake3-256 SAID at KERI-interop).
+//
+// CUSTODY CAVEAT: this minimal hook persists the next-root private seed on the SAME
+// disk (0o600, in .lararium-identity). Full pre-rotation (a thief of the CURRENT key
+// cannot rotate) needs the next seed in OFFLINE/cold custody — an operator-arranged
+// follow-on. The commitment (`n`) is load-bearing now; it upgrades when the seed
+// moves offline.
+function kelFileName(login: string | null): string {
+  return login ? `.operator-kel-${login}.json` : ".operator-kel.json";
+}
+function nextSeedFileName(login: string | null): string {
+  return login ? `.operator-next-${login}.json` : ".operator-next.json";
+}
+
+interface InceptionKel {
+  v:          string;   // "lares-prerotation/v1" — minimal; full KERI KEL/CESR lands later
+  t:          string;   // "icp" — inception (KEL entry 0)
+  s:          string;   // sequence — "0" at inception
+  k:          string[]; // current verifying key(s), revealed (hex)
+  nt:         string;   // next signing threshold
+  n:          string[]; // DIGEST(s) of the next key(s) — the pre-rotation commitment
+  digestAlgo: string;   // "sha256" now; swappable to "blake3-256-said" at KERI-interop
+  createdAt:  string;   // ISO-8601
+}
+
+/** Generate the next-root keypair + the pre-rotation inception commitment. */
+function mintInceptionCommitment(currentVerifyingKey: string): {
+  kel: InceptionKel;
+  nextSeed: { nextVerifyingKey: string; nextSigningKey: string };
+} {
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  const pubJwk  = publicKey.export({ format: "jwk" })  as { x: string };
+  const privJwk = privateKey.export({ format: "jwk" }) as { d: string };
+  const nextVerifyingKey = Buffer.from(pubJwk.x,  "base64url").toString("hex");
+  const nextSigningKey   = Buffer.from(privJwk.d, "base64url").toString("hex");
+  const nextDigest = createHash("sha256").update(Buffer.from(nextVerifyingKey, "hex")).digest("hex");
+  return {
+    kel: {
+      v: "lares-prerotation/v1", t: "icp", s: "0",
+      k: [currentVerifyingKey], nt: "1", n: [nextDigest],
+      digestAlgo: "sha256", createdAt: new Date().toISOString(),
+    },
+    nextSeed: { nextVerifyingKey, nextSigningKey },
+  };
+}
+
 /**
  * Generate or load the device Ed25519 operator keypair.
  *
@@ -149,6 +206,11 @@ export async function generateOrLoadOperatorKeypair(
     const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
     verifyingKey = raw.verifyingKey;
     console.log(`[operator-key] loaded keypair${hint.login ? ` for ${hint.login}` : ""}`);
+    // No-retrofit guard: a key minted before pre-rotation has no valid inception window —
+    // NEVER fake one (it has already signed; the thief-can't-rotate guarantee is unrecoverable).
+    if (!existsSync(join(idDir, kelFileName(hint.login)))) {
+      console.log(`[operator-key] key predates pre-rotation — non-pre-rotating (not retrofitted)`);
+    }
   } else {
     const { publicKey, privateKey } = generateKeyPairSync("ed25519");
     const pubJwk  = publicKey.export({ format: "jwk" }) as { x: string };
@@ -161,6 +223,18 @@ export async function generateOrLoadOperatorKeypair(
     writeFileSync(keyFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
     chmodSync(keyFile, 0o600);
     console.log(`[operator-key] generated new Ed25519 keypair${hint.login ? ` for ${hint.login}` : ""}`);
+
+    // Pre-rotation: commit the next-root key's digest NOW — before this key ever signs
+    // (first use is `keyhive.init`, downstream of founding). The only valid window; cannot
+    // be retrofitted. Minimal commitment; full KERI KEL/ceremony later (see kelFileName note).
+    const { kel, nextSeed } = mintInceptionCommitment(verifyingKey);
+    const kelFile  = join(idDir, kelFileName(hint.login));
+    const nextFile = join(idDir, nextSeedFileName(hint.login));
+    writeFileSync(kelFile,  JSON.stringify(kel, null, 2),      { mode: 0o600, encoding: "utf8" });
+    writeFileSync(nextFile, JSON.stringify(nextSeed, null, 2), { mode: 0o600, encoding: "utf8" });
+    chmodSync(kelFile, 0o600);
+    chmodSync(nextFile, 0o600);
+    console.log(`[operator-key] committed pre-rotation inception (next-key digest sealed)${hint.login ? ` for ${hint.login}` : ""}`);
   }
 
   const base: OperatorIdentity = { verifyingKey };
