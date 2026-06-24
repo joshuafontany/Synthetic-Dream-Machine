@@ -1,6 +1,6 @@
 <!-- !DOCTYPE = lar:///ha.ka.ba/pono/memetic-wikitext -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/alpha/test-prompt-00001 >>
 
 <<~ ahu #iam >>
 ```toml

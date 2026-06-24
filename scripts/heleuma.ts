@@ -162,7 +162,7 @@ function template(opts: {
   const sourceRel = relative(WORKSPACE, opts.sourceFile);
   return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///${uriPath} >>
+<<~ &#x0001; ? -> lar:///${uriPath} >>
 \`\`\`toml iam
 uri-path     = "${uriPath}"
 file-path    = "${memeRel}"

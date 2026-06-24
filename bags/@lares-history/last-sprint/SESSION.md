@@ -84,7 +84,7 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 
 **Five-layer child file structure confirmed:**
 ```
-<<~&#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/docs/lares/the-lares-protocols#thesis >>
 ```toml iam
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#thesis"
 file-path = "wikis/scratch/memes/docs/lares/the-lares-protocols/thesis.md"
@@ -877,7 +877,7 @@ Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / *
 |---|---|---|
 | `pono/` | `<<~⊙&#x0001;` | `<<~⊙&#x0004;` |
 | `mu/`, `lares/` | `<<~ॐ ँ&#x0001;` | `<<~ॐ ँ&#x0004;` |
-| `docs/` | `<<~&#x0001;` | `<<~&#x0004;` |
+| `docs/` | `<<~ &#x0001;` | `<<~&#x0004;` |
 | `kapu.md` | `<<~⊙&#x0011;` | `<<~⊙&#x0014;` (DC1/DC4 — intentional) |
 
 **Misfile audit — five moves:**

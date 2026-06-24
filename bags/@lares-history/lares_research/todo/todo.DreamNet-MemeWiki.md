@@ -1,6 +1,6 @@
 <!-- !DOCTYPE = lar:///ha.ka.ba/pono/memetic-wikitext -->
 
-<<~&#x0001; ? -> lar:///todo/DreamNet_MemeWiki >>
+<<~ &#x0001; ? -> lar:///todo/DreamNet_MemeWiki >>
 
 <<~ ahu #iam >>
 ```toml

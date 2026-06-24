@@ -8,7 +8,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/api/v0.1/pono/skill-template >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/api/v0.1/pono/skill-template >>
 
 <<~ ahu #iam >>
 ```toml

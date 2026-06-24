@@ -106,7 +106,7 @@ async function main(): Promise<void> {
   const memeWithFraming = [
     "<!-- <<~ !DOCTYPE = lar:///probe-meme >> -->",
     "",
-    "<<~&#x0001; ? -> lar:///probe-meme >>",
+    "<<~ &#x0001; ? -> lar:///probe-meme >>",
     "<<~ ahu #head >>",
     "body",
     "<<~/ahu >>",
@@ -132,7 +132,7 @@ async function main(): Promise<void> {
   // whose slot body has prose before its iam toml and trailing prose
   // after its inner kahea ref.
   const slotMeme = [
-    "<<~&#x0001; ? -> lar:///probe-slot-meme >>",
+    "<<~ &#x0001; ? -> lar:///probe-slot-meme >>",
     "<<~ ahu #parent >>",
     "leading slot prose",
     "```toml iam",

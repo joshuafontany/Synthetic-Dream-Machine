@@ -1,6 +1,6 @@
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
 
-<<~&#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes >>
 ```toml iam
 uri-path  = "ha.ka.ba/@lares-history/memes"
 file-path = "wikis/@lares-history/memes/README.md"

@@ -216,7 +216,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 |---|---|---|
 | `pono/` | `<<~⊙&#x0001;` | `<<~⊙&#x0004;` |
 | `mu/`, `lares/` | `<<~ॐ ँ&#x0001;` | `<<~ॐ ँ&#x0004;` |
-| `docs/` | `<<~&#x0001;` | `<<~&#x0004;` |
+| `docs/` | `<<~ &#x0001;` | `<<~&#x0004;` |
 | `kapu.md` | `<<~⊙&#x0011;` | `<<~⊙&#x0014;` (DC1/DC4 — intentional) |
 
 ### Known Forward Pointers (not blocking S6)

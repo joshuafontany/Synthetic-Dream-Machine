@@ -12,7 +12,7 @@
  *      — one space after `<<~`, then the iam-declared namespace as LITERAL glyphs
  *      (or none), then the SOH char. Two drifts trip it: a missing/stale namespace
  *      (the renderer re-injects → round-trip breaks), and a missing space
- *      (`<<~&#x0001;`, the lifted-corpus form — 10 stragglers against 102 canonical
+ *      (`<<~ &#x0001;`, the lifted-corpus form — 10 stragglers against 102 canonical
  *      siblings). The iam field is authoritative; the SOH is derived from it.
  *   2. **Register band.** The iam `register` expands its band CODE (P · PS · S ·
  *      SC · C) to the canonical band word (Provisional … Canon). A value OFF the
@@ -85,7 +85,7 @@ export function normalizeMemeSource(src: string): NormalizeResult {
     const have = soh[2]!;
     // Canonical opener: `<<~ ` + literal namespace glyphs + the SOH char. Compare
     // the WHOLE matched opener, not just the namespace — so a missing space
-    // (`<<~&#x0001;`) canonicalizes even when the namespace already matches.
+    // (`<<~ &#x0001;`) canonicalizes even when the namespace already matches.
     const rebuilt = `${soh[1]} ${want}${soh[3]}`;
     if (soh[0]! !== rebuilt) {
       text = text.slice(0, soh.index) + rebuilt + text.slice(soh.index + soh[0]!.length);
