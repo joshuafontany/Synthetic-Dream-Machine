@@ -29,7 +29,7 @@ from mempalace.palace import get_collection
 PALACE = os.path.expanduser("~/.mempalace/palace")
 # Current harvest version — bump when the harvester's output shape changes, so a
 # re-harvest re-processes every drawer; unchanged, it skips already-done drawers.
-HARVEST_VERSION = 2  # bump in lockstep with lar_hv in harvest.ts buildPatch
+HARVEST_VERSION = 3  # bump in lockstep with lar_hv in harvest.ts buildPatch (v3 = +lar_surface)
 READ_BATCH = 2000
 WRITE_BATCH = 1000
 
@@ -56,6 +56,9 @@ def cmd_export(args):
     col = _col()
     got = col.get(where={"wing": args.wing}, include=["metadatas"])
     ids, metas = got["ids"], got["metadatas"]
+    # source_file → lets the TS writeback derive lar_surface (the staged name is
+    # prefixed `<surface>__…`); existing un-prefixed drawers default to claude.
+    srcmap = {i: (m or {}).get("source_file", "") for i, m in zip(ids, metas)}
     todo = [i for i, m in zip(ids, metas) if (m or {}).get("lar_hv") != HARVEST_VERSION]
     if args.limit:
         todo = todo[: args.limit]
@@ -64,7 +67,7 @@ def cmd_export(args):
         batch = todo[k : k + READ_BATCH]
         d = col.get(ids=batch, include=["documents"])
         for i, doc in zip(d["ids"], d["documents"]):
-            out.write(json.dumps({"id": i, "content": doc or ""}) + "\n")
+            out.write(json.dumps({"id": i, "content": doc or "", "source_file": srcmap.get(i, "")}) + "\n")
     sys.stderr.write(f"exported {len(todo)} drawers (of {len(ids)} in {args.wing})\n")
 
 

@@ -185,13 +185,25 @@ function hallForHarvest(h: TurnHarvest): string {
   return ""; // leave the substrate's own hall untouched
 }
 
+const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
+
+/** Derive the originating harness from a staged source_file (prefixed `<surface>__…`). */
+function deriveSurface(sourceFile?: string): string {
+  if (!sourceFile) return "claude";
+  const base = (sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
+  const pfx = base.split("__")[0] ?? "";
+  return SURFACES.includes(pfx) ? pfx : "claude"; // un-prefixed legacy drawers = claude
+}
+
 /** Build the `lar_*` metadata patch (chroma metadata = str/int/float/bool only). */
-function buildPatch(h: TurnHarvest): Record<string, string | number> {
+function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, string | number> {
   const patch: Record<string, string | number> = {
     // lar_hv = enrich-logic version (the Kappa upgrade gate). Bump in lockstep
     // with HARVEST_VERSION in drawer_io.py when the enrichment changes, so a
-    // backfill re-processes every drawer; v2 added the declared adapter stamp.
-    lar_hv: 2,
+    // backfill re-processes every drawer; v2 added the declared adapter stamp,
+    // v3 added lar_surface.
+    lar_hv: 3,
+    lar_surface: deriveSurface(sourceFile),
     lar_band: h.band,
     lar_bearing_conf: h.confidence,
     lar_sigils: h.sigilCount,
@@ -221,7 +233,7 @@ function writebackWing(wing: string, limit = 0): WritebackResult {
   // 1) export drawers needing harvest (idempotent — skips those at current hv)
   const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
   const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { maxBuffer: 1 << 30, encoding: "utf8" });
-  const drawers = exportOut.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { id: string; content: string });
+  const drawers = exportOut.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { id: string; content: string; source_file?: string });
 
   // 2) harvest each drawer's verbatim content (the sovereign TS parser)
   const bands: Record<string, number> = { canon: 0, synthesis: 0, provisional: 0, raw: 0 };
@@ -230,7 +242,7 @@ function writebackWing(wing: string, limit = 0): WritebackResult {
     const h = harvestTurnGradient(d.content);
     bands[h.band] = (bands[h.band] ?? 0) + 1;
     if (h.bearing) framed += 1;
-    return { id: d.id, patch: buildPatch(h) };
+    return { id: d.id, patch: buildPatch(h, d.source_file) };
   });
 
   // 3) write the patches back onto the drawers (merge), via the substrate helper
@@ -460,7 +472,8 @@ function runHarvestAll(args: ParsedArgs): number {
     const stage = join(stageRoot, wing);
     mkdirSync(stage, { recursive: true });
     for (const e of es) {
-      const dst = join(stage, e.stageName);
+      // surface-prefixed so the drawer's source_file → lar_surface in the writeback
+      const dst = join(stage, `${e.source}__${e.stageName}`);
       if (existsSync(dst)) continue;
       if (e.normalize) {
         try { writeFileSync(dst, execFileSync(PY, [COPILOT_NORM, e.file], { maxBuffer: 1 << 30, encoding: "utf8" })); } catch { /* skip */ }

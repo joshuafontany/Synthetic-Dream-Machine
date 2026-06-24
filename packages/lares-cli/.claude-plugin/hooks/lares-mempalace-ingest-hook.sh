@@ -47,15 +47,22 @@ LARES="$HOME/.local/bin/lares"; [ -x "$LARES" ] || LARES="lares"
 # Claude .jsonl + Codex rollout are mined as-is (mempalace parses both); Copilot
 # events.jsonl has no mempalace parser → normalize it to a Claude-shaped jsonl first.
 stage="$(mktemp -d 2>/dev/null)" || exit 0
+# Surface the drawer's origin (staged name prefixed `<surface>__…` → lar_surface).
+case "$transcript" in
+  */.codex/sessions/*)        surface=codex ;;
+  */.copilot/session-state/*) surface=copilot-cli ;;
+  *)                          surface=claude ;;
+esac
 case "$transcript" in
   */.copilot/session-state/*)
     HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"
     NORM="$HOOK_DIR/../../../../packages/lararium-mempalace/scripts/copilot_normalize.py"
     sid="$(basename "$(dirname "$transcript")")"
-    python3 "$NORM" "$transcript" > "$stage/$sid.jsonl" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    python3 "$NORM" "$transcript" > "$stage/${surface}__$sid.jsonl" 2>/dev/null || { rm -rf "$stage"; exit 0; }
     ;;
   *)
-    ln "$transcript" "$stage/" 2>/dev/null || cp "$transcript" "$stage/" 2>/dev/null || { rm -rf "$stage"; exit 0; }
+    dst="$stage/${surface}__$(basename "$transcript")"
+    ln "$transcript" "$dst" 2>/dev/null || cp "$transcript" "$dst" 2>/dev/null || { rm -rf "$stage"; exit 0; }
     ;;
 esac
 

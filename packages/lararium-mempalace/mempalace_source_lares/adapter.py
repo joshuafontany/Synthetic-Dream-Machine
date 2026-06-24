@@ -64,6 +64,8 @@ LAR_SCHEMA = AdapterSchema(
                                description="drift flags from the gradient parse"),
         "lar_hall": FieldSpec(type="string", required=False, indexed=True,
                               description="function-hall routed by sigil: hall_facts|events|discoveries"),
+        "lar_surface": FieldSpec(type="string", required=False, indexed=True,
+                                 description="originating harness surface: claude|codex|copilot-vscode|copilot-cli"),
     },
 )
 
