@@ -16,6 +16,7 @@ export * from "./projection-registry.js";
 export * from "./readiness.js";
 export * from "./lar-uris.js";
 export * from "./bearing-harvest.js";
+export * from "./turn-harvest.js";
 export * from "./mirror-paths.js";
 export * from "./tiddler-store.js";
 export * from "./recipe.js";

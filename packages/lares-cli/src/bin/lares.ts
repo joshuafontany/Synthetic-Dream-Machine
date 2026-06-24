@@ -33,6 +33,7 @@ import { cmdWiki }                    from "../commands/wiki.js";
 import { cmdAct }                     from "../commands/act.js";
 import { cmdIngest }                  from "../commands/ingest.js";
 import { cmdWatch }                   from "../commands/watch.js";
+import { cmdHarvest }                 from "../commands/harvest.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
@@ -57,6 +58,7 @@ const COMMANDS: readonly Command[] = [
   { name: "bag",           summary: "Operate on individual bags: pin / unpin / stats / register-cold. Run `lares bag help`.",      handler: cmdBag          },
   { name: "wiki",          summary: "Operate on whole wikis: init/open/sync/pin/unpin/add-bag/remove-bag/list/which. Run `lares wiki help`.", handler: cmdWiki },
   { name: "status",        summary: "Print local node health: bootstrap presence, storage size, port in use.",      handler: cmdStatus        },
+  { name: "harvest",       summary: "Idempotent session-history harvest (the @admin memory-shore). Default: read transcript turns → graceful-gradient sigil parser → watermarked bearing index. `--writeback --wing <w>`: read mempalace drawers, harvest content, write domain metadata (lar_*) back ONTO the drawers (tensegrity) + deterministic hall routing. Re-runnable/resume-safe (lar_hv). `lares harvest [--writeback] --wing <w> [--limit N] [--dry-run]`.", handler: cmdHarvest },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },
