@@ -16,7 +16,8 @@ import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath } from "../env.js";
 import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
-import { checkMempalaceIntegration } from "../integration-check.js";
+import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
+import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -32,10 +33,20 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //    Each step is a no-op when its artifact is present; genesis is never rebuilt; the
   //    keypair is never wiped; --install never passes --force.
   let founding: FoundStep[] | undefined;
-  // The full standup runs under --install (found a first vessel) OR --admit FILE
-  // (join an existing PersonGroup — own fresh keypair, same group). Both idempotent.
-  const doStandup = args.flags["install"] === true || args.options["admit"] !== undefined;
+  // The full standup runs under --init / --install (found a first vessel) OR
+  // --admit FILE (join an existing PersonGroup — own fresh keypair, same group).
+  // All idempotent. `--init` and `--install` are synonyms for the full standup.
+  const doStandup =
+    args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined;
   if (doStandup) founding = await foundIfAbsent(args, { root, bootstrap });
+
+  // Under --init / --install: install the mempalace deps (submodule + pip, idempotent)
+  // AND stand up the palace itself (init if absent + pin hooks.auto_save=false — the
+  // re-pollution gate). Both no-op when already done. Bare `lares wake` only CHECKS.
+  let mempalaceSetup: { install: InstallStep[]; palace: PalaceSetupStep[] } | undefined;
+  if (args.flags["init"] === true || args.flags["install"] === true) {
+    mempalaceSetup = { install: installMempalaceIntegration(), palace: setupMempalacePalace() };
+  }
   const integration = checkMempalaceIntegration();
 
   // 1b. Wire the Claude harness home (~/.claude) on --claude — composable with
@@ -120,6 +131,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     data: {
       node: { up: nodeUp, started, port, note: nodeNote },
       mempalace: { ok: integration.ok, checks: integration.checks },
+      ...(mempalaceSetup !== undefined ? { mempalaceSetup } : {}),
       ...(founding !== undefined ? { founding } : {}),
       ...(claude !== undefined ? { claude } : {}),
       root,
@@ -132,6 +144,11 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       console.log(`  mempalace:   ${integration.ok ? "integrated" : "incomplete"}`);
       for (const c of integration.checks) {
         console.log(`    ${c.ok ? "ok     " : "MISSING"} ${c.name}: ${c.detail}`);
+      }
+      if (mempalaceSetup !== undefined) {
+        console.log("  mempalace setup (--init):");
+        for (const s of [...mempalaceSetup.install, ...mempalaceSetup.palace])
+          console.log(`    ${(s.ran ? (s.ok ? "ran" : "FAIL") : "skip").padEnd(6)} ${s.step}: ${s.detail}`);
       }
       if (founding !== undefined) {
         console.log("  founding (--install):");

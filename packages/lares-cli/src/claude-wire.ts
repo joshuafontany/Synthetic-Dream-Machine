@@ -105,10 +105,13 @@ interface HookSpec {
 const HOOK_SPECS: readonly HookSpec[] = [
   // Our wake hook is node (exec-form) → no shell, identical on Windows + Unix.
   { event: "SessionStart", script: "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.mjs", timeout: 15, runner: "node" },
-  // mempalace's keep-hooks are bash (the submodule's own; we don't edit it) → on
-  // native Windows they need Git-for-Windows (which Claude Code already requires for bash).
-  { event: "Stop", script: "mempalace/.claude-plugin/hooks/mempal-stop-hook.sh", timeout: 30, runner: "bash" },
-  { event: "PreCompact", script: "mempalace/.claude-plugin/hooks/mempal-precompact-hook.sh", timeout: 90, runner: "bash" },
+  // OUR two-leg ingest hook (per-project mine + lar_* declared writeback), NOT the
+  // submodule's hardcoded `--wing sessions` hook. mempalace's own plugin hooks still
+  // fire, but `hooks.auto_save=false` (set by `--init`) makes them no-ops, so only
+  // ours mines — into the right per-project wing. Stop catches mid-session; SessionEnd
+  // finalizes. bash → needs Git-for-Windows on native Windows (Claude Code requires it).
+  { event: "Stop", script: "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh", timeout: 30, runner: "bash" },
+  { event: "SessionEnd", script: "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh", timeout: 60, runner: "bash" },
 ];
 
 export type WireAction = "wired" | "present" | "missing-script";

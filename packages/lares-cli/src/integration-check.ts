@@ -9,6 +9,7 @@
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { homedir } from "node:os";
 import { execFileSync, spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
 
@@ -18,13 +19,21 @@ const MEMPALACE_PKG = join(repoRoot, "packages", "lararium-mempalace");
 const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 
 /**
- * Resolve the Python interpreter cross-platform: `python3` (Unix), then `python` /
- * `py` (Windows). Cached. Returns null when none responds to `--version`.
+ * Resolve the Python interpreter, preferring a VENV that holds mempalace over the
+ * (often PEP-668 externally-managed) system python — `$VIRTUAL_ENV`, then `~/.venv`,
+ * then `python3` / `python` / `py`. A venv is pip-installable; the system python on
+ * Debian/Ubuntu is not. Cached. Returns null when none responds to `--version`.
  */
 let _python: string | null | undefined;
 export function resolvePython(): string | null {
   if (_python !== undefined) return _python;
-  for (const cand of ["python3", "python", "py"]) {
+  const win = process.platform === "win32";
+  const venvPy = (base: string): string => join(base, win ? "Scripts" : "bin", win ? "python.exe" : "python3");
+  const cands: string[] = [];
+  if (process.env["VIRTUAL_ENV"]) cands.push(venvPy(process.env["VIRTUAL_ENV"]));
+  cands.push(venvPy(join(homedir(), ".venv")));
+  cands.push("python3", "python", "py");
+  for (const cand of cands) {
     try {
       const r = spawnSync(cand, ["--version"], { timeout: 5_000, stdio: "ignore" });
       if (r.error === undefined && r.status === 0) {
