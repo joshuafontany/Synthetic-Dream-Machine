@@ -20,8 +20,15 @@
 set -uo pipefail
 
 input="$(cat)"
+# Harness-aware: Claude Code + Codex Stop hooks deliver `transcript_path` on stdin;
+# Copilot CLI sessionEnd delivers `sessionId` only — resolve its events.jsonl.
 transcript="$(printf '%s' "$input" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("transcript_path",""))' 2>/dev/null)"
-cwd="$(printf '%s' "$input" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("cwd",""))' 2>/dev/null)"
+cwd="$(printf '%s' "$input" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("cwd",""))' 2>/dev/null)"
+
+if [ -z "${transcript:-}" ]; then
+  sid="$(printf '%s' "$input" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("sessionId",d.get("session_id","")))' 2>/dev/null)"
+  [ -n "${sid:-}" ] && [ -f "$HOME/.copilot/session-state/$sid/events.jsonl" ] && transcript="$HOME/.copilot/session-state/$sid/events.jsonl"
+fi
 
 [ -n "${transcript:-}" ] && [ -f "$transcript" ] || exit 0
 

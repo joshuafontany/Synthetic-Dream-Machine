@@ -20,6 +20,8 @@ import { checkMempalaceIntegration, installMempalaceIntegration, type InstallSte
 import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
+import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
+import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -55,6 +57,19 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   if (args.flags["claude"]) {
     try { claude = wireClaudeHome(); }
     catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
+  }
+
+  // 1c. Other harnesses — same recall MCP + ingest hook, in each tool's own config
+  //     format. Composable, idempotent, graceful when the tool isn't set up here.
+  let codex: CodexWireResult | undefined;
+  if (args.flags["codex"]) {
+    try { codex = wireCodexHome(); }
+    catch (e) { codex = { configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
+  }
+  let copilot: CopilotWireResult | undefined;
+  if (args.flags["copilot"]) {
+    try { copilot = wireCopilotHome(); }
+    catch (e) { copilot = { home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
@@ -134,6 +149,8 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       ...(mempalaceSetup !== undefined ? { mempalaceSetup } : {}),
       ...(founding !== undefined ? { founding } : {}),
       ...(claude !== undefined ? { claude } : {}),
+      ...(codex !== undefined ? { codex } : {}),
+      ...(copilot !== undefined ? { copilot } : {}),
       root,
       bootstrap: existsSync(bootstrap) ? "present" : "absent",
       timestamp: new Date().toISOString(),
@@ -157,6 +174,14 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       if (claude !== undefined) {
         console.log(`  claude (--claude): ${claude.changed ? "wired" : "already wired"}${claude.backedUp ? " (settings.json backed up)" : ""}`);
         for (const s of claude.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
+      }
+      if (codex !== undefined) {
+        console.log(`  codex (--codex): ${codex.changed ? "wired" : "already wired / nothing to do"}`);
+        for (const s of codex.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
+      }
+      if (copilot !== undefined) {
+        console.log(`  copilot (--copilot): ${copilot.changed ? "wired" : "already wired / nothing to do"}`);
+        for (const s of copilot.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
       }
       console.log(`  root:        ${root}`);
       console.log(`  bootstrap:   ${existsSync(bootstrap) ? "present" : "absent"}`);
