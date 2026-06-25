@@ -19,7 +19,10 @@
 **✓ SPRINT 1 COMPLETE.** Petnames (`P1`) + the full read-arm (`M1·M2a·M2b·M2c·M3`) shipped, witnessed, committed; the model triangulated across 7+ research dives, survived two adversarial refutations (FFZ-as-causal, epoch-as-revoker), and now lives in the memegraph (`api/pono/convergent-mesh.md` + corrected FFZ/identity memes). The base-canon joiner resolves without ever minting a ghost.
 
 **↯ SPRINT 2 — the converged-model build arm** *(research-complete, unblocked — the proposed next floor)*:
-1. `▢` **Epoch-lease primitive** — `boundEpoch` on `device-delegation` **v2** · max-register epoch tiddler · `cap-renew` verb · OPTIONAL `expectedEpoch` verify (epoch=lease, not revoker). The first new DreamNet primitive; routes the public mesh's revocation around Beelay. *(See Beelay-bypass §.)*
+1. `◐` **Epoch-lease primitive** *(the first new DreamNet primitive; routes public revocation around Beelay)*:
+   - `▣` **part 1** — `boundEpoch` lease on `device-delegation` **v2** + OPTIONAL `expectedEpoch` verify (epoch=authority, wall-clock=backstop; forging the field fails the signature). `f6a5994d`. 12/12 tests.
+   - `▣` **part 2** — the coordinator-free **max-register** counter (`epoch-lease.ts`): per-writer slots, effective=max, never-decreases (no bare-scalar resurrection). `56a9af63`. 5/5 tests.
+   - `▢` **part 3** — the **`cap-renew`** verb in `operator-admin-behavior.ts` (sibling to `bag-epoch`): read the effective epoch off the `@admin/lease-epoch/{resource}/*` slots, re-mint the `device-delegation` at that epoch. *(Scout the verb registry + admin-doc write before building.)* Targeted revoke stays on Keyhive `revoke()`.
 2. `▢` **Anchor BeeKEM at the contract** — wire Keyhive's existing BeeKEM into the delegation handshake (the private-content forward-secrecy leg; `convergent-mesh#contract-key-agreement`).
 3. `▢ M5` — background reconcile (the read-arm's follow-on; mount a still-joining doc when a peer delivers it post-boot).
 4. `▢` **YIN + grounding** — the plane-numbering corpus sweep (other plane-numbered memes, e.g. `dreamnet-architecture.md`) · name the **Amorphous Dreams Cabal** (the kahu) in code at the `@mesh/admin-cabal` sentinel.
