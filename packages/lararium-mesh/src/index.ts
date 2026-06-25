@@ -16,6 +16,7 @@ export * from "./projection-registry.js";
 export * from "./readiness.js";
 export * from "./lar-uris.js";
 export * from "./boot-resolver.js";
+export * from "./epoch-lease.js";
 export * from "./bearing-harvest.js";
 export * from "./turn-harvest.js";
 export * from "./mirror-paths.js";
