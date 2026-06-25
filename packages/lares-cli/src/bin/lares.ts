@@ -42,6 +42,7 @@ import {
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
+import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
 
 type Handler = (args: ParsedArgs) => Promise<number>;
 
@@ -106,6 +107,12 @@ export async function dispatch(argv: readonly string[]): Promise<number> {
   if (!cmd) {
     console.error(`lares: unknown command "${args.command}".  Run \`lares help\` for the list.`);
     return 2;
+  }
+  // Fresh-Build Invariant — a daemon-lifecycle verb (found/boot/mutate-identity) never runs
+  // from stale dist: build the workspace, then re-exec this command in a fresh process.
+  if (FRESH_BUILD_COMMANDS.has(cmd.name)) {
+    const gate = freshBuildGate(argv, args);
+    if (gate !== null) return gate;
   }
   return await cmd.handler(args);
 }
