@@ -25,6 +25,7 @@ import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
 import { BAG_IDS, ADMIN_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { TEMP_BAG } from "./wiki-recipe.js";
+import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 
 /** The social-plane + admin doc URLs a vessel's bootstrap resolves (founding done). */
 export interface VesselBootstrap {
@@ -109,8 +110,18 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   let laresHandle: DocHandle<LarDoc> | null = null;
   const laresUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARES_DOC_URI]) ?? null;
   if (laresUrl) {
-    laresHandle = await waitHandle<LarDoc>(laresUrl as AutomergeUrl, () => blankDoc(repo));
-    addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
+    // @lares is EXPECTED base canon (the operator's "fail gracefully but expect them"):
+    // resolve via the tideline resolver, NOT the blank-mint fallback the comment above
+    // forbids. On the node the disk-fed doc resolves READY at once; on a wild vessel whose
+    // @lares has not yet federated, a typed StillJoining surfaces — skip the layer, never
+    // mint a ghost (it reconciles in the background once a peer at dreamnet-scale delivers it).
+    const resolved = await resolveBootDoc<LarDoc>(repo, laresUrl as AutomergeUrl, {
+      tideline: "mesh-shared", scale: "dreamnet", label: "@lares (expected base canon)",
+    });
+    if (!isStillJoining(resolved)) {
+      laresHandle = resolved;
+      addSubstrateLayer(composite, BAG_IDS.lares, laresHandle);
+    }
   }
   // @lararium — the memetic corpus as its OWN doc (operator ruling 2026-06-16:
   // three separate docs). Its pointer rides the @oracle system plane (the island
@@ -120,8 +131,14 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   let larariumHandle: DocHandle<LarDoc> | null = null;
   const larariumUrl = tiddlerText(islandHandle.doc()?.tiddlers?.[LARARIUM_DOC_URI]) ?? null;
   if (larariumUrl) {
-    larariumHandle = await waitHandle<LarDoc>(larariumUrl as AutomergeUrl, () => blankDoc(repo));
-    addSubstrateLayer(composite, BAG_IDS.lararium, larariumHandle);
+    // @lararium base canon — same expected-but-graceful resolution as @lares (never mint).
+    const resolved = await resolveBootDoc<LarDoc>(repo, larariumUrl as AutomergeUrl, {
+      tideline: "mesh-shared", scale: "dreamnet", label: "@lararium (expected base canon)",
+    });
+    if (!isStillJoining(resolved)) {
+      larariumHandle = resolved;
+      addSubstrateLayer(composite, BAG_IDS.lararium, larariumHandle);
+    }
   }
   const existingRef = tiddlerText(catalogHandle.doc()?.tiddlers?.[ORACLE_DOC_URI]) ?? null;
   if (existingRef !== islandHandle.url) {
