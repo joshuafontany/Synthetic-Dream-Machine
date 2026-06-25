@@ -206,6 +206,9 @@ importers:
       '@automerge/automerge-repo-network-websocket':
         specifier: 2.6.0-alpha.2
         version: 2.6.0-alpha.2
+      '@lararium/mempalace':
+        specifier: workspace:*
+        version: link:../lararium-mempalace
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh

@@ -41,6 +41,19 @@ function deriveSurface(sourceFile?: string): string {
   return SURFACES.includes(pfx) ? pfx : "claude"; // un-prefixed legacy drawers = claude
 }
 
+/**
+ * Derive the tasked-spirit name from a subagent-staged source_file
+ * (`<name>__agent-<id>.jsonl`, the convention from subagent-mine.ts), else null.
+ * A drawer with a name reads as a spirit turn (lar_sidechain), kept queryable by
+ * actor in the spirits wing — distinct from the main agent's verbatim.
+ */
+function deriveAgent(sourceFile?: string): string | null {
+  if (!sourceFile) return null;
+  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  const m = /^(.+?)__agent-[^/]+\.jsonl$/.exec(base);
+  return m ? (m[1] ?? null) : null;
+}
+
 /** Deterministic function-hall routing from the authored instruments (no LLM). */
 function hallForHarvest(h: TurnHarvest): string {
   if (h.bearing && h.confidence >= 13) return "hall_facts"; // a decision landed, high-confidence
@@ -68,6 +81,8 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   if (h.driftFlags.length) patch["lar_drift"] = h.driftFlags.join("|").slice(0, 200);
   const hall = hallForHarvest(h);
   if (hall) patch["lar_hall"] = hall;
+  const agent = deriveAgent(sourceFile);
+  if (agent) { patch["lar_agent"] = agent.slice(0, 60); patch["lar_sidechain"] = 1; }
   return patch;
 }
 

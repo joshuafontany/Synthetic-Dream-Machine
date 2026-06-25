@@ -16,6 +16,7 @@
   "dependencies": {
     "@automerge/automerge-repo": "2.6.0-alpha.2",
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.2",
+    "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",
     "@lararium/node": "workspace:*",
     "@lararium/tw5": "workspace:*"

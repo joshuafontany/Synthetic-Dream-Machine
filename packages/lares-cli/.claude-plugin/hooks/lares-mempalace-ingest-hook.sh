@@ -75,7 +75,14 @@ esac
 #   lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
 (
   "$MP" mine "$stage" --mode convos --extract exchange --wing "$wing" --agent claude >/dev/null 2>&1
+  # Tasked-spirit (sub-agent) verbatim, DISTINCT from the main agent — mines
+  # <session>/subagents/agent-*.jsonl into wing_<w>__spirits, named from each
+  # handoff (Mask → Pet-Name-by-role), both sides. Reads the ORIGINAL transcript
+  # (not the staged copy) to find the subagents/ dir. Non-Claude → no-op.
+  "$LARES" subagents "$transcript" --wing "$wing" >/dev/null 2>&1
+  # Gradient readings (lar-telemetry through @admin) on both wings — parent + spirits.
   "$LARES" telemetry --wing "$wing" >/dev/null 2>&1
+  "$LARES" telemetry --wing "${wing}__spirits" >/dev/null 2>&1
   rm -rf "$stage"
 ) >/dev/null 2>&1 &
 
