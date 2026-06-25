@@ -143,11 +143,13 @@ YIN first, then unblocked builds, genesis gated on rulings:
 
 ---
 
-## Decision gates awaiting the operator
+## Decision gates — RULED 2026-06-24 ("invert the control. Mu.") → [[kahu-owned-genesis-personGroup]]
 
-| Gate | Question |
+| Gate | Ruling |
 |---|---|
-| `G-D1` | Delegation edge: keyhive `DELEGATED` event vs signed edge tiddler in Identities? |
-| `G-D2` | Blob split: two automerge docs vs one doc + two CID witnesses? |
-| `G-D3` | `hearthTrueName` after split: `engineCid` alone vs `engineCid+pluginCid`? |
+| `G-D1` ✓ | **Signed EDGE TIDDLER** (= `device-delegation.ts`, already built). Mesh into **current** Keyhive/Beelay, never deprecated; the edge is the offline projection of Keyhive's live membership graph. |
+| `G-D2` ✓ | **ONE doc, kahu-OWNED** — engine (TW5) byte-ratchets SLOW + plugins blob ratchets FASTER; two CID witnesses (`genesis-cid-engine`/`genesis-cid-plugins`) in one causal island. *(The inversion: one doc, one owner = the kahu, two ratchet-SCALES — not two owners.)* |
+| `G-D3` ✓ | **`hearthTrueName = engineCid` ALONE** — the engine IS the grammar; plugins compose per-operator (DreamNet-offered), so they never pin the hearth identity. |
 | *(carried from shelf)* | `EPIC-TASK-ONTOLOGY` kind-noun fork; `EPIC-VESSEL-COLLAPSE` node/browser divergences. |
+
+**The kahu** = the Amorphous Dream Cabal = the operator's solo personGroup (+ Freyja placeholder), **scaling to consensus/mycelium** as Cabal keys grow. It **owns the genesis doc**; plugins are its DreamNet-wide offerings (Family A: curate, never command). **The genesis rebuild is now UNGATED** — the complete rebuild (operator-granted rewrite-freedom) re-founds with the meshed model; first concrete federation = **node + browser vessels, one personGroup, local relay (no Beelay)**.
