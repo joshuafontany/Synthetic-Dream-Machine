@@ -66,8 +66,8 @@ stands **PROPOSED** until that settles.
 \procedure ~Scale(~Type:"" ~Params:"") ~Scale <<~Type>> <<~holds `[<~Params>]`>>
 
 <<~Scale Device-Vessel "holds/a distinct on-device key — the user×vessel bond; the base principal, a nameless #has-stack of its own caps ~ node · browser session · QA box; each a causal island, each self-signing" >>
-<<~Scale PersonGroup "holds/the operator — a principal that #has a stack of its own vessels ~ the delegation edges land here, NOT the device key itself" >>
-<<~Scale CabalGroup "holds/a neighborhood — a principal that #has a stack of PersonGroups under a shared charter ~ co-admin authored" >>
+<<~Scale PersonaGroup "holds/the operator — a principal that #has a stack of its own vessels ~ the delegation edges land here, NOT the device key itself" >>
+<<~Scale CabalGroup "holds/a neighborhood — a principal that #has a stack of PersonaGroups under a shared charter ~ co-admin authored" >>
 <<~Scale NexusGroup "holds/a confederation — a principal that #has cabals + independent operators in the mesh" >>
 <<~Scale DreamNet "holds/the super-mesh — the widest principal; no central authority, trust by treaty" >>
 
@@ -101,7 +101,7 @@ derives a `did:key`. The literature converges: **admit by signing, never by shar
 warns against (SSB-fusion, Veilid lose per-device revocation by it; Keybase built its
 per-device model to escape it).
 
-So genesis mints a **distinct vessel key** (Plane 0) **and** an operator **PersonGroup**
+So genesis mints a **distinct vessel key** (Plane 0) **and** an operator **PersonaGroup**
 (Plane 1); the vessel stands as the group's first member, never as the group itself.
 The behavioral split (drop the `kind="operator"` brand on the device tiddler; mint the
 Plane-1 group) rides the genesis refactor — single-vessel-correct, no Beelay needed.
@@ -156,7 +156,7 @@ orthogonally as the rare root-rotation sub-lever (#provenance).
 
 **Wire-C (Keyhive 0.1.0 scout, 2026-06-24) — the two layers COMPOSE, not duplicate.** Keyhive's
 **membership graph is authoritative** for the operator↔device binding + revocation: the operator
-PersonGroup sentinel (`addSentinelMember`/`accessForDoc` LIVE; `revokeMember` live in Keyhive's WASM,
+PersonaGroup sentinel (`addSentinelMember`/`accessForDoc` LIVE; `revokeMember` live in Keyhive's WASM,
 our wrapper's `revoke()` the open D.3 bridge to convergent revocation). The **`device-delegation` edge
 stands beside it as the OFFLINE projection** — verifiable against the pinned operator root with no
 Keyhive boot (the light leaf path), place-bound, synchronously `exp`-bounded; a lossy offline witness
@@ -215,12 +215,12 @@ no sender; an unsigned wrap invites key-substitution). The content layer mandate
 **XChaCha20-Poly1305 with a random nonce**, each DEK minted **once** by a deterministic owner
 — a CRDT merges concurrent writes, so a counter nonce or per-replica DEK mint is a reuse bomb.
 
-**Tier gate** — the temporary layer serves **PersonGroup** + a **Cabal that
+**Tier gate** — the temporary layer serves **PersonaGroup** + a **Cabal that
 DEK-encrypts content**; an untrusted-relay tier never rides a plaintext path. The bond
 between trust-domains always crosses encrypted.
 
 **The contract performs the key-agreement** (deep-domain grounded, 2026-06-24). Private docs
-spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonGroup
+spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonaGroup
 ONLY when vessels mutually **contract** (the delegation handshake). That handshake, and only it,
 runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks,
 a fresh group secret seals **to current members only** — the joiner derives keys **from that epoch

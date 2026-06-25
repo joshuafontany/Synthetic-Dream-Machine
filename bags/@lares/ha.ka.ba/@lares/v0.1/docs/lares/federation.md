@@ -11,7 +11,7 @@ manao      = 14
 manaoio    = 13
 register   = "Synthesis"
 retain     = true
-role       = "operator how-to: federate a second vessel into your PersonGroup via lares wake --admit — what github carries vs what travels out-of-band, the two identity models (same-key works today; per-device-key pending contact-card exchange), the witnessed procedure"
+role       = "operator how-to: federate a second vessel into your PersonaGroup via lares wake --admit — what github carries vs what travels out-of-band, the two identity models (same-key works today; per-device-key pending contact-card exchange), the witnessed procedure"
 type       = "text/x-memetic-wikitext"
 uri-path   = "ha.ka.ba/@lares/v0.1/docs/lares/federation"
 written    = "2026-06-21"
@@ -25,7 +25,7 @@ written    = "2026-06-21"
 
 # Federating a Vessel
 
-A Lararium runs as a **swarm of one operator's vessels** (a PersonGroup) — each device an equal peer, each holding the operator's bags, syncing as a causal island. This carrier walks how a *second* vessel (say, a QA-lab box) joins the swarm.
+A Lararium runs as a **swarm of one operator's vessels** (a PersonaGroup) — each device an equal peer, each holding the operator's bags, syncing as a causal island. This carrier walks how a *second* vessel (say, a QA-lab box) joins the swarm.
 
 **What github carries** (public, shared by clone):
 - the source, and
@@ -33,9 +33,9 @@ A Lararium runs as a **swarm of one operator's vessels** (a PersonGroup) — eac
 
 **What NEVER enters github** (identity-bearing — gitignored):
 - `.lararium/.vessel-key-*.json` — the operator's private signing key.
-- `genesis/social-bootstrap.json` — the PersonGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonGroup / MeshCabal IDs).
+- `genesis/social-bootstrap.json` — the PersonaGroup pointers (admin/identities/circles/sessions doc-URLs + the sentinel PersonaGroup / MeshCabal IDs).
 
-These travel **out-of-band** (a secure channel you control), never the public remote. A clone alone cannot join a PersonGroup; joining requires what the founding vessel hands over deliberately.
+These travel **out-of-band** (a secure channel you control), never the public remote. A clone alone cannot join a PersonaGroup; joining requires what the founding vessel hands over deliberately.
 
 <<~/ahu >>
 
@@ -43,9 +43,9 @@ These travel **out-of-band** (a secure channel you control), never the public re
 
 ## Two Identity Models
 
-> **Model A is a TEMPORARY stopgap, not the target.** Copying one key across vessels names the **antipattern** the multi-device literature warns against — SSB-fusion and Veilid both copy-the-key and both lose per-device revocation; Keybase built its per-device model precisely to escape "one PGP key everywhere." The pono target rides the **5-scale model**: each vessel mints its OWN distinct key — the **user×vessel bond** (Plane 0) — delegated into the operator **PersonGroup** (Plane 1) by a signed edge, and intent composes up `device-vessel → PersonGroup → CabalGroup → NexusGroup → DreamNet`. The key is the node; the **delegation is the relationship**. Canon: <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >> · <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>.
+> **Model A is a TEMPORARY stopgap, not the target.** Copying one key across vessels names the **antipattern** the multi-device literature warns against — SSB-fusion and Veilid both copy-the-key and both lose per-device revocation; Keybase built its per-device model precisely to escape "one PGP key everywhere." The pono target rides the **5-scale model**: each vessel mints its OWN distinct key — the **user×vessel bond** (Plane 0) — delegated into the operator **PersonaGroup** (Plane 1) by a signed edge, and intent composes up `device-vessel → PersonaGroup → CabalGroup → NexusGroup → DreamNet`. The key is the node; the **delegation is the relationship**. Canon: <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >> · <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>.
 
-**Model A — one operator identity across devices (works today).** Every vessel carries the *same* operator key, so every vessel presents the *same* DID — already a member of the PersonGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
+**Model A — one operator identity across devices (works today).** Every vessel carries the *same* operator key, so every vessel presents the *same* DID — already a member of the PersonaGroup. The QA box receives the operator key and a device-admit payload out-of-band, loads them, and boots as the same operator on another device.
 
 **Model B — a distinct key per device, delegated in (pending the sync layer).** Each vessel forges its *own* key; the founder receives the joinee's contact-card and delegates that DID into the group (`runDeviceAdmitAccept` — built, founder-side correct). But a joining device needs **two** things to read the group, and only one reaches it from JS today:
 
@@ -77,7 +77,7 @@ pnpm install && pnpm -r build      # bootstrap the lares CLI + node
 lares wake --admit admit.json      # idempotent join-standup
 ```
 
-`lares wake --admit` runs the same found-if-absent standup as `--install` — build, mempalace, genesis (skipped; `island.bin` rides the clone) — but the init step **joins** the PersonGroup from the payload instead of founding a new one: it loads the operator key (same DID = a member), applies the cap-events, writes the local `social-bootstrap.json`, and stands the node up. The keyhive boot gates then verify membership and the vessel goes live. Re-running is a no-op (the bootstrap already lives).
+`lares wake --admit` runs the same found-if-absent standup as `--install` — build, mempalace, genesis (skipped; `island.bin` rides the clone) — but the init step **joins** the PersonaGroup from the payload instead of founding a new one: it loads the operator key (same DID = a member), applies the cap-events, writes the local `social-bootstrap.json`, and stands the node up. The keyhive boot gates then verify membership and the vessel goes live. Re-running is a no-op (the bootstrap already lives).
 
 <<~/ahu >>
 
@@ -85,7 +85,7 @@ lares wake --admit admit.json      # idempotent join-standup
 
 ## The Gate, Honestly
 
-A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonGroup (B), and the PersonGroup is a member of the Nexus MeshCabal (C). Under Model A all three pass because the vessel *is* the same operator. Under Model B, gate B fails until the new key is delegated in — which is why Model B waits on the contact-card exchange.
+A joining vessel proves itself on every boot through three keyhive gates: its DID matches its key (A), its Individual is a member of the PersonaGroup (B), and the PersonaGroup is a member of the Nexus MeshCabal (C). Under Model A all three pass because the vessel *is* the same operator. Under Model B, gate B fails until the new key is delegated in — which is why Model B waits on the contact-card exchange.
 
 A vessel never joins by pulling a repo; it joins by receiving — deliberately, out-of-band — what the founder hands it. The public clone carries the house; the operator carries the key.
 

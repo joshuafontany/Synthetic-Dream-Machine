@@ -50,8 +50,8 @@ export type {
  */
 export interface DeviceAdmitPayload {
   readonly kind:                   "device-admit/v1";
-  readonly personGroupDocIdHex:    string;
-  readonly personGroupAgentIdHex:  string;
+  readonly personaGroupDocIdHex:    string;
+  readonly personaGroupAgentIdHex:  string;
   readonly meshCabalDocIdHex:      string;
   readonly capEvents:              ReadonlyArray<{ variant: string; bytes: string }>;
   readonly syncUrl:                string | null;

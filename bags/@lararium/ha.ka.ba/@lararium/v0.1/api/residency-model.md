@@ -105,7 +105,7 @@ An ACTION arrives as a `Verb` whose `verb` field belongs to `ACTION_VERBS` (the 
 verb           = "ADD"
 args           = '{"title":"MyTiddler","from-bag":"lar:///ha.ka.ba/@personal","to-bag":"lar:///ha.ka.ba/@elyncia","change-id":"c-stable-1"}'
 request-id     = <requestId>
-requested-by   = <PersonGroup-id>
+requested-by   = <PersonaGroup-id>
 listenable     = "OnActivated"     # optional Verse event source
 from-uri       = "lar:///.../button-1"  # optional papalohe edge origin
 ```
@@ -208,7 +208,7 @@ The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[per
               @temp          ┐
               @draft         │  YIN / Podge — coordinates ABOVE @<wiki>
               @personal      │  carry operator-private scope; keyed by
-                             ┘  (PersonGroup × recipe-fingerprint)
+                             ┘  (PersonaGroup × recipe-fingerprint)
         ┌───  @<wiki-named-bag>  ── CHAO / spin / Taiji ─────────────────────┐
         │     the live coordinate where shared activity accumulates —       │
         │     multiplayer, multi-session, the spinning surface              │

@@ -46,7 +46,7 @@ provider, transport). A substrate constrains how a piece resolves; it never remo
 piece from the structure.
 
 **Hold the convergence open (MUST).** The capability set GROWS. Many capabilities wired
-on node today — founding/init, PersonGroup ceremonies, genesis authoring, corpus
+on node today — founding/init, PersonaGroup ceremonies, genesis authoring, corpus
 loading, residency — SHALL become composable in the browser. The design therefore
 treats no capability as structurally node-bound: each rides as a piece any vessel MAY
 compose once it holds the capability, never an `isNode`/`isBrowser` fork and never a

@@ -66,7 +66,7 @@ export type LarPrincipal =
 // federation scaffolding. The other dimensions live elsewhere:
 //
 //   Axis 1 — ACCESS   (this ladder) — monotonic, cryptographic, per bag.
-//   Axis 2 — SCALE    — Keyhive group nesting (PersonGroup ⊂ Cabal ⊂ … ⊂ DreamNet).
+//   Axis 2 — SCALE    — Keyhive group nesting (PersonaGroup ⊂ Cabal ⊂ … ⊂ DreamNet).
 //   Axis 3 — POWERS   — separation of host/relay/aggregate/address/moderate;
 //                       lar:/// host-independent addressing is the lever.
 //   Plane 0 — ALIGNMENT — non-monotonic, subjective trust (the "lemures" plane).

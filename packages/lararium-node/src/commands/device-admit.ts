@@ -21,7 +21,7 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
   ADMIN_BAG_ID,
-  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 import { runDeviceAdmitCore, type DeviceAdmitPayload } from "@lararium/keyhive";
@@ -65,11 +65,11 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
     tiddlers?: Record<string, { text?: string }>;
   }).tiddlers ?? {};
 
-  const personGroupDocIdHex = tiddlers[PERSON_GROUP_DOC_ID_TIDDLER]?.text ?? null;
+  const personaGroupDocIdHex = tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text ?? null;
   const meshCabalDocIdHex   = tiddlers[MESH_CABAL_DOC_ID_TIDDLER]?.text   ?? null;
   const adminUrl            = tiddlers[ADMIN_BAG_ID]?.text                 ?? null;
 
-  if (!personGroupDocIdHex || !meshCabalDocIdHex) {
+  if (!personaGroupDocIdHex || !meshCabalDocIdHex) {
     throw new Error(
       `[lares device-admit] sentinel oracle IDs missing from social-bootstrap.json.\n` +
       `  Run \`lares init --force\` to re-establish the founding ceremony.`,
@@ -79,7 +79,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
     throw new Error(`[lares device-admit] admin doc URL missing from social-bootstrap.json.`);
   }
 
-  // Open admin doc to read cap events + personGroupAgentIdHex.
+  // Open admin doc to read cap events + personaGroupAgentIdHex.
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   const progress    = repo.findWithProgress(adminUrl as AutomergeUrl);
   // automerge-repo 2.6: whenReady() resolves the handle when ready, rejects on
@@ -93,10 +93,10 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
   const adminDoc    = adminHandle.doc();
   const tiddlerMap  = ((adminDoc as Record<string,unknown>)?.["tiddlers"] ?? {}) as Record<string, unknown>;
 
-  const agentEntry         = tiddlerMap[PERSON_GROUP_AGENT_ID_TIDDLER] as Record<string,unknown> | undefined;
-  const personGroupAgentIdHex = (agentEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
-  if (!personGroupAgentIdHex) {
-    throw new Error(`[lares device-admit] PersonGroup agent ID missing from admin doc — run \`lares init --force\`.`);
+  const agentEntry         = tiddlerMap[PERSONA_GROUP_AGENT_ID_TIDDLER] as Record<string,unknown> | undefined;
+  const personaGroupAgentIdHex = (agentEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
+  if (!personaGroupAgentIdHex) {
+    throw new Error(`[lares device-admit] PersonaGroup agent ID missing from admin doc — run \`lares init --force\`.`);
   }
 
   const capEventPrefix = `${ADMIN_BAG_ID}/cap/`;
@@ -116,8 +116,8 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
   const operatorSeed = await loadVesselSigningSeed(storageDir);
   const payload = await runDeviceAdmitCore({
     operatorSeed,
-    personGroupDocIdHex,
-    personGroupAgentIdHex,
+    personaGroupDocIdHex,
+    personaGroupAgentIdHex,
     meshCabalDocIdHex,
     capEvents,
     syncUrl:      opts.syncUrl      ?? null,

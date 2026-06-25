@@ -42,7 +42,7 @@ sub-memes; this carries the keel + the meme map.
    native-first resolution, seams derived by SUBTRACTION. Web2 ports/adapters/DI towers =
    un-pono. Proof = behavioral conformance, not type-conformance. ([[feedback_isomorphism_by_composition]])
 4. **Same structure, differing capabilities (Ink & Switch).** Node and browser differ
-   ONLY in capabilities, never in structure. The capability set GROWS — init/PersonGroup/
+   ONLY in capabilities, never in structure. The capability set GROWS — init/PersonaGroup/
    genesis/corpus/residency SHALL become browser-composable. Absent reads not-yet-held,
    never cannot-hold; no `isNode` fork, no permanently-absent slot. ([[open-vessel]])
 5. **No VM on the main thread.** Every TW5 VM / reaction engine boots in a Worker
@@ -67,7 +67,7 @@ sub-memes; this carries the keel + the meme map.
 11. **Tiddler-format law + disk projection.** Documentation memes live in `bags/` as `.md`
     memetic-wikitext; `.tid` carry runtime TW5 code only. `@bag`=automerge doc; bags/=seed/
     canon, wikis/=projection; RENDER not copy. ([[feedback_bags_docs_over_tids]], [[project_disk_projection_model]])
-12. **DreamNet topology.** device-vessel → PersonGroup → Cabal → Nexus → DreamNet. Each
+12. **DreamNet topology.** device-vessel → PersonaGroup → Cabal → Nexus → DreamNet. Each
     layer holds sovereignty within; outer layers carry RECOGNITION via shared grammar
     (lar:/// · SharktoothSigil · ABILITY_LADDER · genesis CID), no central authority. ([[project_dreamnet_architecture]])
 
@@ -132,7 +132,7 @@ substrate atoms + the capability pieces they hold. ([[open-vessel]])
   crypto · transport · genesis source · catalog anchor). A browser cannot be NodeFS — this
   difference holds legitimately; it never branches the core.
 - **Capability pieces** ride as recipe pieces a vessel MAY hold (inbound peering · disk/OPFS
-  mirror · corpus · resident verbs · residency sweeper · founding/PersonGroup/genesis). Wired
+  mirror · corpus · resident verbs · residency sweeper · founding/PersonaGroup/genesis). Wired
   on node today, structurally browser-composable; the seam stays OPEN on both substrates.
 - **Role** (relay/leaf/keeper) names the capability pieces a vessel CURRENTLY holds — a
   growing set, never a platform identity. A node MAY run thin; a browser MAY grow heavy.

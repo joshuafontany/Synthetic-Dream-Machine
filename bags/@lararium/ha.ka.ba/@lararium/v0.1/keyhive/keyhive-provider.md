@@ -34,8 +34,8 @@ Three ceremony functions. All three run in any vessel context (node, browser, wo
 
 Produces the three-doc identity lattice:
 - `Individual` — Ed25519 device keypair derived from seed; the Keyhive identity for this vessel.
-- `PersonGroup` — sentinel Automerge doc proving "this device belongs to this operator."
-- `MeshCabal` — sentinel Automerge doc proving "this PersonGroup belongs to this mesh."
+- `PersonaGroup` — sentinel Automerge doc proving "this device belongs to this operator."
+- `MeshCabal` — sentinel Automerge doc proving "this PersonaGroup belongs to this mesh."
 
 Gate B and Gate C tiddlers write into the admin doc. Gate A verifies the Keyhive DID
 matches the local verifying key; throws on mismatch — no silent drift.
@@ -43,7 +43,7 @@ matches the local verifying key; throws on mismatch — no silent drift.
 **`runDeviceAdmitCore(repo: Repo, operatorSeed: Uint8Array): AdmitPayload`**
 
 Produces an out-of-band admission payload (`admit.json`) for a second vessel.
-The payload carries the MeshCabal and PersonGroup doc URLs, the founding Keyhive
+The payload carries the MeshCabal and PersonaGroup doc URLs, the founding Keyhive
 Individual's public keys, and a signed delegation token.
 Vessels transfer this payload out-of-band: QR code, file, direct message.
 
@@ -61,17 +61,17 @@ lattice membership from cold — no network request, no authority server.
 
 ```text
 Vessel Individual (Ed25519 device keypair, local storage only)
-  └─▶ PersonGroup sentinel Document   ← Gate B: vessel ∈ PersonGroup
-           └─▶ MeshCabal sentinel Document  ← Gate C: PersonGroup ∈ MeshCabal
+  └─▶ PersonaGroup sentinel Document   ← Gate B: vessel ∈ PersonaGroup
+           └─▶ MeshCabal sentinel Document  ← Gate C: PersonaGroup ∈ MeshCabal
 ```
 
 Gate A — local key integrity: Keyhive DID MUST match disk or WebCrypto verifying key.
 Throws `EaKeyMismatch` on any divergence. No silent corruption path.
 
-Gate B — device membership: PersonGroup sentinel doc carries this vessel's Individual as a member.
+Gate B — device membership: PersonaGroup sentinel doc carries this vessel's Individual as a member.
 Verified by reading the oracle tiddler written at founding or admit-apply time.
 
-Gate C — cabal membership: MeshCabal sentinel doc carries this PersonGroup as a member.
+Gate C — cabal membership: MeshCabal sentinel doc carries this PersonaGroup as a member.
 Verified by the same oracle tiddler chain.
 
 All three gates pass before a vessel may open wiki VM lanes or sync its admin doc
@@ -109,7 +109,7 @@ same doc that syncs only to `cap=admin` vessels.
 
 The operator seed MUST NOT enter any Automerge doc. The ceremony reads it to derive
 the Individual keypair and then releases it. The keypair itself (public material only)
-enters the PersonGroup doc. The private scalar never leaves the memory of the function call.
+enters the PersonaGroup doc. The private scalar never leaves the memory of the function call.
 
 <<~/ahu >>
 

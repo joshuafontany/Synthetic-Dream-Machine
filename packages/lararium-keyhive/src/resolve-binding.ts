@@ -1,6 +1,6 @@
 /**
  * resolve-binding — resolver/minter for the `@personal` and `@draft` recipe
- * slots, keyed by (PersonGroup × recipe-fingerprint).
+ * slots, keyed by (PersonaGroup × recipe-fingerprint).
  *
  * Isomorphic + island-side (isomorphic-vessel epic). Lives in @lararium/keyhive
  * — the cap layer both platforms depend on — because the mint sequence needs
@@ -59,13 +59,13 @@ export interface ResolveBindingArgs {
    * Host-side: `adminVm.composite`; island-side: the worker's `ctx.composite`.
    */
   readonly adminStore: CompositeStore;
-  /** Keyhive provider — registers the minted bag + delegates it to the PersonGroup. */
+  /** Keyhive provider — registers the minted bag + delegates it to the PersonaGroup. */
   readonly keyhive: CapabilityProvider;
   /**
-   * PersonGroup AGENT Identifier hex (getAgent-resolvable) — the delegation
+   * PersonaGroup AGENT Identifier hex (getAgent-resolvable) — the delegation
    * audience. NOT the group's DocumentId (that is the membership-check target).
    */
-  readonly personGroupAgentIdHex: string;
+  readonly personaGroupAgentIdHex: string;
   /** Vessel Individual hex — the binding tiddler's `minted-by` audit field. */
   readonly mintedByHex: string;
   /** Fingerprint inputs, stored verbatim as the `recipe-trace` audit field (Q5: keep). */
@@ -80,7 +80,7 @@ export interface ResolveBindingResult {
 }
 
 /**
- * Resolve the bound doc URL for a (PersonGroup × recipe-fingerprint) slot, or
+ * Resolve the bound doc URL for a (PersonaGroup × recipe-fingerprint) slot, or
  * mint + delegate + record it when absent.
  *
  * Reuse-on-present returns the stored URL WITHOUT minting or delegating — the
@@ -107,11 +107,11 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   // Bind to the STABLE agent-id. access: "admin" — POLA-correct grain for
   // co-edited view-state is "edit", but the live Keyhive gate exposes only
   // read | admin, so edit-intent rounds UP to admin as documented interim debt
-  // (marginal authority ≈ 0; every PersonGroup device already holds admin on
+  // (marginal authority ≈ 0; every PersonaGroup device already holds admin on
   // @admin). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
   await args.keyhive.delegate({
     bagUrl:   handle.url,
-    audience: args.personGroupAgentIdHex,
+    audience: args.personaGroupAgentIdHex,
     access:   "admin",
   });
 

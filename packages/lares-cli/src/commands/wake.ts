@@ -86,7 +86,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //    keypair is never wiped; --install never passes --force.
   let founding: FoundStep[] | undefined;
   // The full standup runs under --init / --install (found a first vessel) OR
-  // --admit FILE (join an existing PersonGroup — own fresh keypair, same group).
+  // --admit FILE (join an existing PersonaGroup — own fresh keypair, same group).
   // All idempotent. `--init` and `--install` are synonyms for the full standup.
   const doStandup =
     args.flags["init"] === true || args.flags["install"] === true || args.options["admit"] !== undefined;

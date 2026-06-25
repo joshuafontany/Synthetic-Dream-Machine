@@ -140,8 +140,8 @@ export const CATALOG_CORPUS_PREFIX = stableLarUri("@catalog/corpus/");
 // joiner waits for it. The five scales map to the five aperture bands; reach
 // (so patience) grows. Federation is governed HERE, on the bag's residency
 // entry — never by the lar: namespace (which is the naming layer above).
-export type MeshScale = "vessel" | "person-group" | "cabal" | "nexus" | "dreamnet";
-export const MESH_SCALES: readonly MeshScale[] = ["vessel", "person-group", "cabal", "nexus", "dreamnet"];
+export type MeshScale = "vessel" | "persona-group" | "cabal" | "nexus" | "dreamnet";
+export const MESH_SCALES: readonly MeshScale[] = ["vessel", "persona-group", "cabal", "nexus", "dreamnet"];
 
 /** Read a declared scale off a catalog entry; undefined when absent or unrecognized (the caller then defaults patience). */
 export function parseMeshScale(s: string | null | undefined): MeshScale | undefined {
@@ -222,18 +222,18 @@ export function emptySessionsDoc(): SessionsDoc     { return emptyLarDoc(); }
 // EphemeralSigner (CSPRNG) — the URI is a semantic label only.
 //
 // Two-level identity lattice:
-//   PersonGroup  — vessels belonging to one operator (Vessel Individual → PersonGroup)
-//   MeshCabal    — operators participating in one Nexus (PersonGroup → MeshCabal)
+//   PersonaGroup  — vessels belonging to one operator (Vessel Individual → PersonaGroup)
+//   MeshCabal    — operators participating in one Nexus (PersonaGroup → MeshCabal)
 
-/** Sentinel URI for a vessel's PersonGroup membership document. */
-export const PERSON_GROUP_SENTINEL_URI = stableLarUri("@operator/person-group");
+/** Sentinel URI for a vessel's PersonaGroup membership document. */
+export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("@operator/persona-group");
 /** Sentinel URI for a Nexus's MeshCabal membership document. */
 export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
 
-/** Admin oracle tiddler: PersonGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
-export const PERSON_GROUP_DOC_ID_TIDDLER   = `${ADMIN_BAG_ID}/sentinel/person-group/doc-id`;
-/** Admin oracle tiddler: PersonGroup agent Identifier (hex). Used by boot Gate C. */
-export const PERSON_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/person-group/agent-id`;
+/** Admin oracle tiddler: PersonaGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
+export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${ADMIN_BAG_ID}/sentinel/persona-group/doc-id`;
+/** Admin oracle tiddler: PersonaGroup agent Identifier (hex). Used by boot Gate C. */
+export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/persona-group/agent-id`;
 /** Admin oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-cabal/doc-id`;
 /** Admin oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
@@ -245,14 +245,14 @@ export const HEARTH_TRUE_NAME_TIDDLER      = `${ADMIN_BAG_ID}/hearth/true-name`;
 export const DEVICE_DELEGATION_SELF_TIDDLER = `${ADMIN_BAG_ID}/delegation/self`;
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
-// The (PersonGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
+// The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
 // the admin doc under these prefixes. One fingerprint produces THREE bindings
 // (@personal, @draft, @working) that share a lifecycle. The binding tiddler
 // title is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${ADMIN_BAG_ID}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
-// @working binds like @personal (PersonGroup×fingerprint, cross-device) — the
+// @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the
 // SAVED live write layer; normal edits route here, canon publishes on promotion.
 export const WORKING_BINDINGS_PREFIX  = `${ADMIN_BAG_ID}/working-bindings`;
 

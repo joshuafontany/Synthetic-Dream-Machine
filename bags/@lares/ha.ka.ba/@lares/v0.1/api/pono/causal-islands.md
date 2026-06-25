@@ -58,7 +58,7 @@ relay-law exception governs the bottom rung.
 **Grain debt (POLA, 2026-06-03).** Because the live gate collapses to `read | admin`, an
 `edit`-intent delegation — the POLA-correct grain for a surface a principal co-edits but
 should NOT re-delegate — currently rounds **up** to `admin`. Documented over-grant: e.g.
-delegating an operator's `@personal`/`@draft` view-state to their own PersonGroup grants
+delegating an operator's `@personal`/`@draft` view-state to their own PersonaGroup grants
 `admin` where `edit` is the true least-authority. Acceptable while the principal set is
 homogeneous-trust (those devices already hold `admin` on `@admin`, so marginal authority
 ≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
@@ -66,7 +66,7 @@ homogeneous-trust (those devices already hold `admin` on `@admin`, so marginal a
 [personal-slot](../lararium/personal-slot.md).
 
 **Axis 2 — Scale.** Membership nests as Keyhive groups-within-groups:
-`Individual ⊂ PersonGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring
+`Individual ⊂ PersonaGroup ⊂ Cabal ⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet`. Each ring
 forms a causal island with a **cryptographic membrane** — the Keyhive delegation chain
 IS the join-rule. "DreamNet" names no registry and no canonical graph; it is the emergent
 transitive closure of who-relays-to-whom under everyone's local stances.
@@ -136,7 +136,7 @@ implication-rule  = "ordered-except-pull"
 #   revoke = an ADMIN operation (roll the epoch) — carried by edge-island epoch + lifecycle
 
 # ── Axis 2 — SCALE (membership nesting; Keyhive group composition) ──────────
-scale-lattice = ["individual", "person-group", "cabal", "neighborhood", "city", "nexus", "dreamnet"]
+scale-lattice = ["individual", "persona-group", "cabal", "neighborhood", "city", "nexus", "dreamnet"]
 membrane-rule = "delegation-chain-is-the-join-rule"   # each ring = a causal island membrane
 
 # ── Axis 3 — POWERS (separable faculties; each devolvable to a distinct provider) ─

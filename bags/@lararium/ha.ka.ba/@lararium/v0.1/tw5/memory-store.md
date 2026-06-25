@@ -87,7 +87,7 @@ wider mesh:
 These belong in a **`@personal` slot** — a CRDT bag at the canonical URI
 `lar:///ha.ka.ba/@personal` (one address, per the bag-tag rule in lar-uri.md).
 The vessel's `BagResolver` binds the slot to a different Automerge doc per
-`(PersonGroup × recipe-fingerprint)` pair at boot — same recipe + same
+`(PersonaGroup × recipe-fingerprint)` pair at boot — same recipe + same
 operator's device cabal → same doc → shared state; different recipe or
 different cabal → different doc → no cross-talk. Approved 2026-05-30; see
 the proposal at
@@ -101,7 +101,7 @@ gracefully skip the slot when no resolver entry maps it (per the optional-
 slot semantics in `island-recipe.ts` and `sovereign-island-model.ts`), so the
 floor stays green pending the remaining S7 stories. Until S7.3 (cascade
 rules), S7.4 (recipe-fingerprint), S7.5 (resolver binding), and S7.6 (Keyhive
-PersonGroup grant) land, the `$:/state/*` catch-all in the cascade routes
+PersonaGroup grant) land, the `$:/state/*` catch-all in the cascade routes
 the operator's viewing state to `@temp` — it doesn't yet survive device
 boundaries.
 

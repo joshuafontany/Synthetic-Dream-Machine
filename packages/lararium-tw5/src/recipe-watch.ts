@@ -79,7 +79,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
 
   // Slots the recipe model owns structurally — everything else in the cascade
   // counts as a library bag for membership reconcile. @working is a per-
-  // (PersonGroup×fingerprint) GRANT slot (peer to @personal/@draft) threaded
+  // (PersonaGroup×fingerprint) GRANT slot (peer to @personal/@draft) threaded
   // through the manifest, never named in a recipe's bag-stack — so it MUST be
   // exempt, else this reconcile evicts the live write layer buildIslandRecipe
   // just mounted (the OCI writable-upper-layer law: keep the scratch layer out

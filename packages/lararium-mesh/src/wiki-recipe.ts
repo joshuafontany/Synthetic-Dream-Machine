@@ -7,7 +7,7 @@
  *   lar:///ha.ka.ba/@draft      — "Draft of …" tiddlers, CRDT, high-churn
  *   lar:///ha.ka.ba/@personal   — operator cross-device viewing state ($:/StoryList,
  *                                 $:/state/folded/*, $:/state/tab-*), CRDT, keyed per
- *                                 (PersonGroup × recipe-fingerprint) by the vessel
+ *                                 (PersonaGroup × recipe-fingerprint) by the vessel
  *                                 resolver (see personal-slot#scoping-mechanism).
  *                                 Slot URI literal here; per-recipe doc binding rides
  *                                 the manifest's typed grants, not the URI.
@@ -42,7 +42,7 @@ export type SlotUri = string;
  */
 export const TEMP_BAG     = "lar:///ha.ka.ba/@temp"     as const;
 export const DRAFT_BAG    = "lar:///ha.ka.ba/@draft"    as const;
-/** @working — the wiki's SAVED live write layer (PersonGroup×fingerprint-bound,
+/** @working — the wiki's SAVED live write layer (PersonaGroup×fingerprint-bound,
  *  cross-device); normal edits route here, canon publishes on a promotion MOVE
  *  (wiki-layer-ontology#shore-law). Distinct from @draft's unsaved drafts. */
 export const WORKING_BAG  = "lar:///ha.ka.ba/@working"  as const;
@@ -265,7 +265,7 @@ export interface RecipeFingerprintInput {
  * Compute the recipe-fingerprint for `@personal` / `@draft` binding.
  *
  * SHA-256 hex over canonical JSON of `{ wikiDocId, libraryBagDocIds: sorted }`.
- * Two devices share an `@personal` binding iff their `(PersonGroup ×
+ * Two devices share an `@personal` binding iff their `(PersonaGroup ×
  * fingerprint)` pairs match. The vessel stores `@personal` doc URLs keyed by
  * this fingerprint.
  *

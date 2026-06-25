@@ -42,7 +42,7 @@ the gardens can recognize each other even when they cannot read each other.
 │  │  │  CabalGroup  (neighborhood shrine)                │ │ │
 │  │  │  shared charter, shared ontology surface          │ │ │
 │  │  │  ┌──────────────────────────────────────────────┐ │ │ │
-│  │  │  │  PersonGroup                                 │ │ │ │
+│  │  │  │  PersonaGroup                                 │ │ │ │
 │  │  │  │  one operator, N device-vessels              │ │ │ │
 │  │  │  │  ┌─────────────────────────────────────────┐ │ │ │ │
 │  │  │  │  │  device-vessel                          │ │ │ │ │
@@ -85,7 +85,7 @@ three-gate lattice, the same capability layer.
 
 ### personGroup
 
-One operator, N device-vessels. The Keyhive `PersonGroup` sentinel document proves
+One operator, N device-vessels. The Keyhive `PersonaGroup` sentinel document proves
 which vessels belong to the same human operator. Device-admit ceremony transfers
 membership out-of-band (QR code, file, direct message) — no server participates.
 
@@ -206,8 +206,8 @@ The grammar makes them legible to each other. Nothing else does.
 The admin-doc WebSocket ingress gate needs a Keyhive-backed mechanism to reject
 non-operator vessels from syncing admin state. Three candidate approaches:
 
-**A — PersonGroup sentinel membership check**: at WebSocket upgrade, verify the
-connecting peer's Individual key appears as a member of a known PersonGroup that
+**A — PersonaGroup sentinel membership check**: at WebSocket upgrade, verify the
+connecting peer's Individual key appears as a member of a known PersonaGroup that
 carries `cap=admin` on the admin doc. Requires a peerId ↔ DID binding at the
 network layer.
 

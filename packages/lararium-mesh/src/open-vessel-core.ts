@@ -14,7 +14,7 @@
  *
  * NO `if (platform)` enters here. A capability the recipe omits simply does not run.
  * The seam for every capability stays open on both substrates so the browser SHALL
- * grow into init/PersonGroup/genesis/corpus/residency.
+ * grow into init/PersonaGroup/genesis/corpus/residency.
  */
 
 import type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";

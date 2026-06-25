@@ -100,7 +100,7 @@ export interface EffectRecord {
   readonly requestId:     string;
   /** Bag URI this effect record describes. The tiddler lives in this bag. */
   readonly bag:           string;
-  /** PersonGroup / operator id from the action's requested-by. */
+  /** PersonaGroup / operator id from the action's requested-by. */
   readonly actor:         string;
   /** ISO 8601 timestamp. */
   readonly timestamp:     string;

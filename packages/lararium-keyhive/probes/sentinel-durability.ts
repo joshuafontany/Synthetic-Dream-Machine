@@ -8,7 +8,7 @@
  * still holds for both gates.
  *
  * What this closes:
- *   - hydrateFromEventStore actually restores PersonGroup + MeshCabal sentinels
+ *   - hydrateFromEventStore actually restores PersonaGroup + MeshCabal sentinels
  *   - verifySentinelMembership works on a hydrated (not fresh-authored) instance
  *   - The docIdHex oracle values round-trip through hex encoding correctly
  *
@@ -16,7 +16,7 @@
  */
 
 import { KeyhiveProvider, InMemoryEventStore } from "@lararium/keyhive";
-import { PERSON_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI } from "@lararium/mesh";
+import { PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI } from "@lararium/mesh";
 
 function pass(msg: string) { console.log(`  ✓ ${msg}`); }
 function fail(msg: string) { console.error(`  ✗ ${msg}`); process.exitCode = 1; }
@@ -33,18 +33,18 @@ async function main() {
   const vesselHex = await founding.vesselIdentifierHex();
   console.log(`  vessel   ${vesselHex.slice(0, 20)}…`);
 
-  const personGroup = await founding.createSentinelDoc(PERSON_GROUP_SENTINEL_URI);
-  await founding.addSentinelMember(vesselHex, personGroup.docIdHex);
-  console.log(`  PersonGroup doc  ${personGroup.docIdHex.slice(0, 20)}…`);
-  console.log(`  PersonGroup agent ${personGroup.agentIdHex.slice(0, 20)}…`);
+  const personaGroup = await founding.createSentinelDoc(PERSONA_GROUP_SENTINEL_URI);
+  await founding.addSentinelMember(vesselHex, personaGroup.docIdHex);
+  console.log(`  PersonaGroup doc  ${personaGroup.docIdHex.slice(0, 20)}…`);
+  console.log(`  PersonaGroup agent ${personaGroup.agentIdHex.slice(0, 20)}…`);
 
   const meshCabal = await founding.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
-  await founding.addSentinelMember(personGroup.agentIdHex, meshCabal.docIdHex);
+  await founding.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
   console.log(`  MeshCabal doc    ${meshCabal.docIdHex.slice(0, 20)}…`);
 
   // Verify on the founding instance (baseline)
-  const baseB = await founding.verifySentinelMembership(vesselHex, personGroup.docIdHex);
-  const baseC = await founding.verifySentinelMembership(personGroup.agentIdHex, meshCabal.docIdHex);
+  const baseB = await founding.verifySentinelMembership(vesselHex, personaGroup.docIdHex);
+  const baseC = await founding.verifySentinelMembership(personaGroup.agentIdHex, meshCabal.docIdHex);
   baseB.ok ? pass("Gate B on founding instance") : fail(`Gate B baseline: ${baseB.reason}`);
   baseC.ok ? pass("Gate C on founding instance") : fail(`Gate C baseline: ${baseC.reason}`);
 
@@ -66,11 +66,11 @@ async function main() {
 
   console.log("\n[sentinel-durability] === Phase 3: gate verification on rehydrated instance ===");
 
-  const gateB = await rehydrated.verifySentinelMembership(vesselHex, personGroup.docIdHex);
-  const gateC = await rehydrated.verifySentinelMembership(personGroup.agentIdHex, meshCabal.docIdHex);
+  const gateB = await rehydrated.verifySentinelMembership(vesselHex, personaGroup.docIdHex);
+  const gateC = await rehydrated.verifySentinelMembership(personaGroup.agentIdHex, meshCabal.docIdHex);
 
-  gateB.ok ? pass("Gate B ✓ — vessel holds PersonGroup membership after restart") : fail(`Gate B failed: ${gateB.reason}`);
-  gateC.ok ? pass("Gate C ✓ — PersonGroup holds MeshCabal membership after restart") : fail(`Gate C failed: ${gateC.reason}`);
+  gateB.ok ? pass("Gate B ✓ — vessel holds PersonaGroup membership after restart") : fail(`Gate B failed: ${gateB.reason}`);
+  gateC.ok ? pass("Gate C ✓ — PersonaGroup holds MeshCabal membership after restart") : fail(`Gate C failed: ${gateC.reason}`);
 
   await rehydrated.dispose();
 

@@ -155,7 +155,7 @@ only the *root* and the *default subscriptions* change:
 
 - **Relay** — alignment-blind and mechanical. Carries encrypted ops, honors `relay`-stance
   blocks, makes no content judgments. Keeps the dumb-pipe layer dumb.
-- **PersonGroup (household)** — the individual is their own trust root (SSB: "you are your own
+- **PersonaGroup (household)** — the individual is their own trust root (SSB: "you are your own
   central authority on truth"). Personal stances + a few subscribed labelers.
 - **Cabal** — runs/curates a labeler (advisory feed) for members; members inherit via
   *propagated* mode but retain personal override. Vouching governs membership. The natural home

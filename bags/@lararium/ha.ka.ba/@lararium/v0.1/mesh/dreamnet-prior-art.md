@@ -126,9 +126,9 @@ uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
 **Core Golden Principles (reconstructed from secondary references):**
 
 1. **Group membership as CRDT**: Rather than a central server managing membership, group state replicates as a CRDT across all members.
-2. **Device admission via out-of-band ceremony**: Adding a new device to a PersonGroup does not require any server. A signed message from an existing device provides sufficient proof. This follows the "Seitan token exchange" pattern.
+2. **Device admission via out-of-band ceremony**: Adding a new device to a PersonaGroup does not require any server. A signed message from an existing device provides sufficient proof. This follows the "Seitan token exchange" pattern.
 3. **Sentinel documents as group anchors**: Each group level (person, cabal, nexus) carries a sentinel document — a CID-addressed genesis artifact that defines the group's charter.
-4. **Capability delegation through the group hierarchy**: A Keyhive PersonGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonGroups.
+4. **Capability delegation through the group hierarchy**: A Keyhive PersonaGroup grants capabilities that can be delegated to devices. A MeshCabal grants capabilities to PersonaGroups.
 
 **Design Decisions:**
 - **Local-first membership**: Group state replicates via the same CRDT mechanism as application data. No separate membership server.
@@ -345,7 +345,7 @@ uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
 | Sentinel genesis document | UCAN root CID, Hypercore writer key | Pattern well-known |
 | Capability delegation per device | UCAN attenuation chain | Production spec |
 
-**Assessment**: PersonGroup draws strong support from prior art. The Seitan/Local-First Auth pattern for ceremony-based device admission offers the closest analogue. Primary risk: no single system combines all three (CRDT membership + ceremony + UCAN delegation) in production.
+**Assessment**: PersonaGroup draws strong support from prior art. The Seitan/Local-First Auth pattern for ceremony-based device admission offers the closest analogue. Primary risk: no single system combines all three (CRDT membership + ceremony + UCAN delegation) in production.
 
 ---
 

@@ -133,7 +133,7 @@ export interface IslandGrants {
   /** Keyhive-bound sovereign slots (admin resolveBinding grants). */
   personalUrl?: string | null;
   draftUrl?:    string | null;
-  /** @working — the SAVED live write layer (PersonGroup×fingerprint-bound, like
+  /** @working — the SAVED live write layer (PersonaGroup×fingerprint-bound, like
    *  @personal); normal edits route here, canon publishes on a promotion MOVE. */
   workingUrl?:  string | null;
 }
@@ -180,8 +180,8 @@ export interface IslandMsg_Manifest {
     seed:                  Uint8Array;
     /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
     operatorVerifyingKey:  string;
-    personGroupDocIdHex:   string;
-    personGroupAgentIdHex: string;
+    personaGroupDocIdHex:   string;
+    personaGroupAgentIdHex: string;
     meshCabalDocIdHex:     string;
     /** Writable bag URIs to register so verify/delegate resolve (lar: URIs). */
     registerBags:          readonly string[];

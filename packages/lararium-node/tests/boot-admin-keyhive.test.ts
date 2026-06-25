@@ -70,8 +70,8 @@ beforeAll(async () => {
     bootArgs: {
       seed: SEED, eventStore,
       operatorVerifyingKey:  verifyingKey,
-      personGroupDocIdHex:   cer.personGroupDocIdHex,
-      personGroupAgentIdHex: cer.personGroupAgentIdHex,
+      personaGroupDocIdHex:   cer.personaGroupDocIdHex,
+      personaGroupAgentIdHex: cer.personaGroupAgentIdHex,
       meshCabalDocIdHex:     cer.meshCabalDocIdHex,
       registerBags:          [ADMIN_BAG_ID],
       signerDid:             cer.signerDid,
@@ -81,7 +81,7 @@ beforeAll(async () => {
 });
 
 describe("bootAdminKeyhive", () => {
-  test("clears Gates A/B/C, registers the admin bag, and verifies operator admin", async () => {
+  test("clears Gate A + the Binding Gate, registers the admin bag, and verifies operator admin", async () => {
     const { keyhive, did } = await bootAdminKeyhive(founded.bootArgs);
 
     expect(did).toMatch(/^0x/);

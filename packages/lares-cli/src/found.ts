@@ -117,7 +117,7 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
     });
   }
 
-  // 3. Init — FOUND a new PersonGroup, or JOIN an existing one when an admit payload
+  // 3. Init — FOUND a new PersonaGroup, or JOIN an existing one when an admit payload
   //    is provided (--admit FILE → cmdInit routes admitPayloadPath). Self-guards on the
   //    bootstrap (idempotent: already founded/joined → skip); the keypair is never wiped.
   if (present("init")) {
@@ -129,8 +129,8 @@ export async function foundIfAbsent(args: ParsedArgs, ctx: FoundContext): Promis
       code !== 0
         ? `init exited ${code}`
         : admit
-          ? `JOINED PersonGroup via admit payload (${admit}) — own keypair, same group`
-          : "lares init (founded a new PersonGroup)";
+          ? `JOINED PersonaGroup via admit payload (${admit}) — own keypair, same group`
+          : "lares init (founded a new PersonaGroup)";
     steps.push({ step: "init", action: code === 0 ? "ran" : "failed", detail });
     if (code !== 0) return steps;
   }

@@ -1,11 +1,11 @@
 /**
  * resolve-binding.test.ts — S7.5/S7.6 @personal/@draft binding resolver.
  *
- * Proves the host-layer mint/reuse contract for the (PersonGroup ×
+ * Proves the host-layer mint/reuse contract for the (PersonaGroup ×
  * recipe-fingerprint) → docUrl bindings:
  *
  *   - mint-on-absent: create → registerBag → delegate → write binding tiddler
- *   - delegation binds to the PersonGroup AGENT id with access "admin"
+ *   - delegation binds to the PersonaGroup AGENT id with access "admin"
  *     (edit-intent rounds up — grain debt, keyhive-provider.ts:150)
  *   - the binding tiddler carries the audit fields (kind/fingerprint/trace/by)
  *   - reuse-on-present: returns the stored url, mints/delegates nothing
@@ -68,14 +68,14 @@ function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityP
     repo,
     adminStore,
     keyhive,
-    personGroupAgentIdHex: AGENT_HEX,
+    personaGroupAgentIdHex: AGENT_HEX,
     mintedByHex:           MINTED_BY,
     recipeTrace:           { wikiDocId: "automerge:wiki", libraryBagDocIds: [] as readonly string[] },
   } as const;
 }
 
 describe("resolveOrMintBinding", () => {
-  test("mint-on-absent: creates a doc, registers, delegates to PersonGroup admin, records the binding", async () => {
+  test("mint-on-absent: creates a doc, registers, delegates to PersonaGroup admin, records the binding", async () => {
     const repo = new Repo();
     const { adminStore, adminHandle } = makeAdminStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
@@ -93,7 +93,7 @@ describe("resolveOrMintBinding", () => {
     expect(delegations).toHaveLength(1);
     expect(delegations[0]).toEqual({
       bagUrl:   result.url,
-      audience: AGENT_HEX,    // stable PersonGroup agent id
+      audience: AGENT_HEX,    // stable PersonaGroup agent id
       access:   "admin",      // edit-intent rounds up to admin (grain debt)
     });
 

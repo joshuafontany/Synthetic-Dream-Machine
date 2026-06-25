@@ -16,17 +16,17 @@
  *
  * Identity lattice produced by runFoundingCeremony:
  *   Vessel Individual (from seed)
- *     └─▶ PersonGroup sentinel Document (Gate B at boot)
+ *     └─▶ PersonaGroup sentinel Document (Gate B at boot)
  *              └─▶ MeshCabal sentinel Document (Gate C at boot)
  *
- * At t=0, founding operator's PersonGroup is the only MeshCabal member.
+ * At t=0, founding operator's PersonaGroup is the only MeshCabal member.
  * invite-send adds co-operators. The MeshCabal grows; this path never re-runs.
  *
  * Identity planes (5-scale): the seed mints the Vessel Individual = Plane 0
- * (device-vessel, the user×vessel bond); the PersonGroup = Plane 1 (the OPERATOR,
+ * (device-vessel, the user×vessel bond); the PersonaGroup = Plane 1 (the OPERATOR,
  * a group of vessels). TODAY one seed is SHARED across a user's vessels (Model A —
  * a temporary stopgap, the copy-the-key antipattern); the target mints a DISTINCT
- * per-vessel seed delegated into the PersonGroup by a signed edge. runDeviceAdmitAccept
+ * per-vessel seed delegated into the PersonaGroup by a signed edge. runDeviceAdmitAccept
  * sketches that path (Model B) but waits on encrypted-content transport (Beelay,
  * Rust-only) — to be stood in temporarily behind a swap surface. See
  * lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation.
@@ -37,8 +37,8 @@
 import type { Repo } from "@lararium/mesh";
 import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  PERSON_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
-  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
+  PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
   CAP_EVENT_TAG,
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
@@ -95,8 +95,8 @@ export interface FoundingCeremonyResult {
   circlesUrl:            string;
   sessionsUrl:           string;
   adminUrl:              string;
-  personGroupDocIdHex:   string;
-  personGroupAgentIdHex: string;
+  personaGroupDocIdHex:   string;
+  personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
   /** The operator's self-certifying ContactCard JSON, minted once during the
    *  ceremony. The caller caches it for the light leaf-identity path (OP-AP5). */
@@ -151,11 +151,11 @@ export async function runFoundingCeremony(
 
   const vesselIdentifierHex = await keyhive.vesselIdentifierHex();
 
-  const personGroup = await keyhive.createSentinelDoc(PERSON_GROUP_SENTINEL_URI);
-  await keyhive.addSentinelMember(vesselIdentifierHex, personGroup.docIdHex);
+  const personaGroup = await keyhive.createSentinelDoc(PERSONA_GROUP_SENTINEL_URI);
+  await keyhive.addSentinelMember(vesselIdentifierHex, personaGroup.docIdHex);
 
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
-  await keyhive.addSentinelMember(personGroup.agentIdHex, meshCabal.docIdHex);
+  await keyhive.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
 
   // Flush Keyhive events to admin doc in AdminEventStore-compatible format.
   const initEvents = await store.list();
@@ -182,12 +182,12 @@ export async function runFoundingCeremony(
 
   // Write sentinel oracle tiddlers so boot gates can reconstruct DocumentIds.
   adminHandle.change((doc) => {
-    doc.tiddlers[PERSON_GROUP_DOC_ID_TIDDLER] = {
-      tiddler: { title: PERSON_GROUP_DOC_ID_TIDDLER, text: personGroup.docIdHex, kind: "sentinel-id" },
+    doc.tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER] = {
+      tiddler: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroup.docIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init" },
     };
-    doc.tiddlers[PERSON_GROUP_AGENT_ID_TIDDLER] = {
-      tiddler: { title: PERSON_GROUP_AGENT_ID_TIDDLER, text: personGroup.agentIdHex, kind: "sentinel-id" },
+    doc.tiddlers[PERSONA_GROUP_AGENT_ID_TIDDLER] = {
+      tiddler: { title: PERSONA_GROUP_AGENT_ID_TIDDLER, text: personaGroup.agentIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init" },
     };
     doc.tiddlers[MESH_CABAL_DOC_ID_TIDDLER] = {
@@ -241,8 +241,8 @@ export async function runFoundingCeremony(
     circlesUrl:            circlesHandle.url    as string,
     sessionsUrl:           sessionsHandle.url   as string,
     adminUrl:              adminHandle.url      as string,
-    personGroupDocIdHex:   personGroup.docIdHex,
-    personGroupAgentIdHex: personGroup.agentIdHex,
+    personaGroupDocIdHex:   personaGroup.docIdHex,
+    personaGroupAgentIdHex: personaGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
     contactCardJson,
     signerDid,
@@ -256,8 +256,8 @@ export async function runFoundingCeremony(
 
 export interface DeviceAdmitCoreInput {
   operatorSeed:          Uint8Array;
-  personGroupDocIdHex:   string;
-  personGroupAgentIdHex: string;
+  personaGroupDocIdHex:   string;
+  personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
   /** Cap events in AdminEventStore-compatible form: base64 bytes + variant string. */
   capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
@@ -275,7 +275,7 @@ export async function runDeviceAdmitCore(
   input: DeviceAdmitCoreInput,
 ): Promise<DeviceAdmitPayload> {
   const {
-    operatorSeed, personGroupDocIdHex, personGroupAgentIdHex,
+    operatorSeed, personaGroupDocIdHex, personaGroupAgentIdHex,
     meshCabalDocIdHex, capEvents, syncUrl, islandDocUrl,
   } = input;
 
@@ -294,8 +294,8 @@ export async function runDeviceAdmitCore(
   console.log(`[ceremony] hydrated ${ingested} events — verifying sentinel state`);
 
   const vesselHex = await keyhive.vesselIdentifierHex();
-  const gateB = await keyhive.verifySentinelMembership(vesselHex, personGroupDocIdHex);
-  const gateC = await keyhive.verifySentinelMembership(personGroupAgentIdHex, meshCabalDocIdHex);
+  const gateB = await keyhive.verifySentinelMembership(vesselHex, personaGroupDocIdHex);
+  const gateC = await keyhive.verifySentinelMembership(personaGroupAgentIdHex, meshCabalDocIdHex);
 
   if (!gateB.ok) throw new Error(`[ceremony] Gate B self-check failed: ${gateB.reason}`);
   if (!gateC.ok) throw new Error(`[ceremony] Gate C self-check failed: ${gateC.reason}`);
@@ -305,8 +305,8 @@ export async function runDeviceAdmitCore(
 
   return {
     kind: "device-admit/v1",
-    personGroupDocIdHex,
-    personGroupAgentIdHex,
+    personaGroupDocIdHex,
+    personaGroupAgentIdHex,
     meshCabalDocIdHex,
     capEvents,
     syncUrl,
@@ -321,8 +321,8 @@ export async function runDeviceAdmitCore(
 export interface DeviceAdmitAcceptInput {
   /** The FOUNDER's operator seed (the admitting vessel). */
   operatorSeed:          Uint8Array;
-  personGroupDocIdHex:   string;
-  personGroupAgentIdHex: string;
+  personaGroupDocIdHex:   string;
+  personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
   /** The founder's existing cap events (base64 bytes + variant), from its admin doc. */
   capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
@@ -334,7 +334,7 @@ export interface DeviceAdmitAcceptInput {
 
 /**
  * Model-B accept: the founder receives a NEW device's public ContactCard, delegates
- * that distinct DID into the PersonGroup (a fresh DELEGATED event), and repackages
+ * that distinct DID into the PersonaGroup (a fresh DELEGATED event), and repackages
  * ALL cap events (existing + the new delegation) as a device-admit/v1 payload.
  *
  * ⚠ PROVISIONAL — founder-side only; NOT a complete cross-peer admit (witnessed
@@ -375,17 +375,17 @@ export async function runDeviceAdmitAccept(
   await keyhive.init({ seed: input.operatorSeed, eventStore: store });
   await keyhive.hydrateFromEventStore();
 
-  // Founder self-check: it must actually hold the PersonGroup before it can admit.
+  // Founder self-check: it must actually hold the PersonaGroup before it can admit.
   const vesselHex = await keyhive.vesselIdentifierHex();
-  const gateB = await keyhive.verifySentinelMembership(vesselHex, input.personGroupDocIdHex);
-  if (!gateB.ok) throw new Error(`[ceremony] accept refused: founder not a PersonGroup member (${gateB.reason})`);
+  const gateB = await keyhive.verifySentinelMembership(vesselHex, input.personaGroupDocIdHex);
+  if (!gateB.ok) throw new Error(`[ceremony] accept refused: founder not a PersonaGroup member (${gateB.reason})`);
 
-  // Import the joinee's public Individual, then DELEGATE it into the PersonGroup —
+  // Import the joinee's public Individual, then DELEGATE it into the PersonaGroup —
   // this fires the new DELEGATED event that makes the joinee a member.
   const { id: newDeviceHex } = await keyhive.receiveContactCard(
     new TextEncoder().encode(input.newDeviceContactCardJson),
   );
-  await keyhive.addSentinelMember(newDeviceHex, input.personGroupDocIdHex);
+  await keyhive.addSentinelMember(newDeviceHex, input.personaGroupDocIdHex);
 
   // Collect ALL events (existing + the new delegation) into the payload.
   const all = await store.list();
@@ -395,8 +395,8 @@ export async function runDeviceAdmitAccept(
 
   return {
     kind: "device-admit/v1",
-    personGroupDocIdHex:   input.personGroupDocIdHex,
-    personGroupAgentIdHex: input.personGroupAgentIdHex,
+    personaGroupDocIdHex:   input.personaGroupDocIdHex,
+    personaGroupAgentIdHex: input.personaGroupAgentIdHex,
     meshCabalDocIdHex:     input.meshCabalDocIdHex,
     capEvents,
     syncUrl: input.syncUrl,
@@ -479,12 +479,12 @@ export async function runApplyAdmitPayload(
 
   // Write sentinel oracle tiddlers.
   adminHandle.change((doc) => {
-    doc.tiddlers[PERSON_GROUP_DOC_ID_TIDDLER] = {
-      tiddler: { title: PERSON_GROUP_DOC_ID_TIDDLER, text: payload.personGroupDocIdHex, kind: "sentinel-id" },
+    doc.tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER] = {
+      tiddler: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: payload.personaGroupDocIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init-admit" },
     };
-    doc.tiddlers[PERSON_GROUP_AGENT_ID_TIDDLER] = {
-      tiddler: { title: PERSON_GROUP_AGENT_ID_TIDDLER, text: payload.personGroupAgentIdHex, kind: "sentinel-id" },
+    doc.tiddlers[PERSONA_GROUP_AGENT_ID_TIDDLER] = {
+      tiddler: { title: PERSONA_GROUP_AGENT_ID_TIDDLER, text: payload.personaGroupAgentIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init-admit" },
     };
     doc.tiddlers[MESH_CABAL_DOC_ID_TIDDLER] = {

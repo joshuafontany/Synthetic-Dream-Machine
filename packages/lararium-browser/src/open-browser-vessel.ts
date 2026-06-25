@@ -11,7 +11,7 @@
  * BagResidencyManager mechanism, corpus loading, the verb plane, presence.
  *
  * Genesis REQUIRED (coreless deleted). The not-yet-held axis sits at anon↔keeper
- * (PersonGroup/admin), not genesis — see project-sovereign-worker-model.
+ * (PersonaGroup/admin), not genesis — see project-sovereign-worker-model.
  */
 
 import { Repo }                              from "@automerge/automerge-repo";
@@ -58,8 +58,8 @@ const BOOTSTRAP_KEY  = "social-bootstrap";
 const ISLAND_URL_KEY = "island-doc-url";
 
 interface BrowserBootstrap extends VesselBootstrap {
-  personGroupDocIdHex:   string;
-  personGroupAgentIdHex: string;
+  personaGroupDocIdHex:   string;
+  personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
   /** The signer DID the Binding Gate pins the edge to — self-DID for an anon (self-signed). */
   signerDid:             string;
@@ -153,7 +153,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   });
   emit("repo-open");
 
-  // ── Keypair (WebCrypto substrate) + founding (the personGroup capability) ───
+  // ── Keypair (WebCrypto substrate) + founding (the personaGroup capability) ───
   const operatorIdentity = await generateOrLoadBrowserVesselIdentity(idbName, displayName);
   const operatorSeed     = await loadBrowserSigningSeed(idbName);
   const operatorDid      = operatorIdentity.verifyingKey;
@@ -171,7 +171,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     });
     bootstrap = {
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, adminUrl: f.adminUrl,
-      personGroupDocIdHex: f.personGroupDocIdHex, personGroupAgentIdHex: f.personGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
+      personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, deviceEdge: f.founderEdge,
     };
     bootKeyWrites.bootstrap = bootstrap;
@@ -288,8 +288,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       if (!adminWorkerUrl) throw new Error("[openBrowserVessel] adminWorkerUrl REQUIRED (genesis present → sovereign admin island)");
       const adminAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
-        personGroupDocIdHex: social.personGroupDocIdHex,
-        personGroupAgentIdHex: social.personGroupAgentIdHex,
+        personaGroupDocIdHex: social.personaGroupDocIdHex,
+        personaGroupAgentIdHex: social.personaGroupAgentIdHex,
         meshCabalDocIdHex: social.meshCabalDocIdHex,
         registerBags: [
           ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,

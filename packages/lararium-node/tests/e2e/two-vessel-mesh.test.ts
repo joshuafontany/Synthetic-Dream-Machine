@@ -34,7 +34,7 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
   ADMIN_BAG_ID,
-  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   CAP_EVENT_TAG,
 } from "@lararium/mesh";
 import { InMemoryEventStore } from "@lararium/keyhive";
@@ -130,15 +130,15 @@ beforeAll(async () => {
 // ---------------------------------------------------------------------------
 
 describe("Vessel A — founding ceremony", () => {
-  test("social-bootstrap.json exists and carries PersonGroup + MeshCabal oracle IDs", () => {
+  test("social-bootstrap.json exists and carries PersonaGroup + MeshCabal oracle IDs", () => {
     const bootstrap = readBootstrap(VESSEL_A.genesis);
-    expect(bootstrap[PERSON_GROUP_DOC_ID_TIDDLER]?.text).toMatch(HEX_RE);
+    expect(bootstrap[PERSONA_GROUP_DOC_ID_TIDDLER]?.text).toMatch(HEX_RE);
     expect(bootstrap[MESH_CABAL_DOC_ID_TIDDLER]?.text).toMatch(HEX_RE);
   });
 
   test("admin doc carries all three sentinel oracle tiddlers", () => {
-    expect(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_DOC_ID_TIDDLER)).toMatch(HEX_RE);
-    expect(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_AGENT_ID_TIDDLER)).toMatch(HEX_RE);
+    expect(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER)).toMatch(HEX_RE);
+    expect(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER)).toMatch(HEX_RE);
     expect(adminTiddlerText(vesselAAdminTiddlers, MESH_CABAL_DOC_ID_TIDDLER)).toMatch(HEX_RE);
   });
 
@@ -164,8 +164,8 @@ describe("Vessel A — founding ceremony", () => {
 describe("device-admit payload", () => {
   test("payload carries kind, sentinel IDs, cap events, and syncUrl", () => {
     expect(admitPayload["kind"]).toBe("device-admit/v1");
-    expect(String(admitPayload["personGroupDocIdHex"])).toMatch(HEX_RE);
-    expect(String(admitPayload["personGroupAgentIdHex"])).toMatch(HEX_RE);
+    expect(String(admitPayload["personaGroupDocIdHex"])).toMatch(HEX_RE);
+    expect(String(admitPayload["personaGroupAgentIdHex"])).toMatch(HEX_RE);
     expect(String(admitPayload["meshCabalDocIdHex"])).toMatch(HEX_RE);
     expect(Array.isArray(admitPayload["capEvents"])).toBe(true);
     expect((admitPayload["capEvents"] as unknown[]).length).toBeGreaterThan(0);
@@ -173,10 +173,10 @@ describe("device-admit payload", () => {
   });
 
   test("sentinel IDs in payload match Vessel A admin doc", () => {
-    expect(admitPayload["personGroupDocIdHex"])
-      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_DOC_ID_TIDDLER));
-    expect(admitPayload["personGroupAgentIdHex"])
-      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_AGENT_ID_TIDDLER));
+    expect(admitPayload["personaGroupDocIdHex"])
+      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
+    expect(admitPayload["personaGroupAgentIdHex"])
+      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
     expect(admitPayload["meshCabalDocIdHex"])
       .toBe(adminTiddlerText(vesselAAdminTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
   });
@@ -189,15 +189,15 @@ describe("device-admit payload", () => {
 describe("Vessel B — admitted vessel", () => {
   test("bootstrap carries sentinel IDs matching the admit payload", () => {
     const bootstrap = readBootstrap(VESSEL_B.genesis);
-    expect(bootstrap[PERSON_GROUP_DOC_ID_TIDDLER]?.text).toBe(admitPayload["personGroupDocIdHex"]);
+    expect(bootstrap[PERSONA_GROUP_DOC_ID_TIDDLER]?.text).toBe(admitPayload["personaGroupDocIdHex"]);
     expect(bootstrap[MESH_CABAL_DOC_ID_TIDDLER]?.text).toBe(admitPayload["meshCabalDocIdHex"]);
   });
 
   test("Vessel B admin doc oracle tiddlers match Vessel A sentinel IDs", () => {
-    expect(adminTiddlerText(vesselBAdminTiddlers, PERSON_GROUP_DOC_ID_TIDDLER))
-      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_DOC_ID_TIDDLER));
-    expect(adminTiddlerText(vesselBAdminTiddlers, PERSON_GROUP_AGENT_ID_TIDDLER))
-      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSON_GROUP_AGENT_ID_TIDDLER));
+    expect(adminTiddlerText(vesselBAdminTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER))
+      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
+    expect(adminTiddlerText(vesselBAdminTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER))
+      .toBe(adminTiddlerText(vesselAAdminTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
     expect(adminTiddlerText(vesselBAdminTiddlers, MESH_CABAL_DOC_ID_TIDDLER))
       .toBe(adminTiddlerText(vesselAAdminTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
   });

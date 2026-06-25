@@ -264,8 +264,8 @@ export class KeyhiveProvider implements CapabilityProvider {
 
   /**
    * Add an agent (by its Identifier hex) as an Admin member of a sentinel Document.
-   * Used during the founding ceremony to wire vessel Individual → PersonGroup
-   * and PersonGroup → MeshCabal chains.
+   * Used during the founding ceremony to wire vessel Individual → PersonaGroup
+   * and PersonaGroup → MeshCabal chains.
    */
   async addSentinelMember(
     memberIdentifierHex: string,
@@ -287,8 +287,8 @@ export class KeyhiveProvider implements CapabilityProvider {
 
   /**
    * Verify that an agent (by Identifier hex) holds any access on a sentinel Document.
-   * Gate B: vesselIndividualHex vs personGroupDocIdHex
-   * Gate C: personGroupAgentIdHex vs meshCabalDocIdHex
+   * Gate B: vesselIndividualHex vs personaGroupDocIdHex
+   * Gate C: personaGroupAgentIdHex vs meshCabalDocIdHex
    *
    * Returns VerifyResult shape for consistency with verify().
    */
@@ -305,7 +305,7 @@ export class KeyhiveProvider implements CapabilityProvider {
 
   /**
    * Return the operator vessel's IndividualId as a hex Identifier string.
-   * Used during init to wire the founding vessel into the PersonGroup sentinel.
+   * Used during init to wire the founding vessel into the PersonaGroup sentinel.
    */
   async vesselIdentifierHex(): Promise<string> {
     const individual = await this.requireKh().individual;

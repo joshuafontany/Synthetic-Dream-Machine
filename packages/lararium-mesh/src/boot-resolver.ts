@@ -33,7 +33,7 @@ export type Tideline = "hearth-private" | "mesh-shared";
 // to the widest patience so a slow-but-real delivery never reads as missing.
 const SCALE_PATIENCE_MS: Record<MeshScale, number> = {
   vessel:         3_000,
-  "person-group": 8_000,
+  "persona-group": 8_000,
   cabal:          20_000,
   nexus:          45_000,
   dreamnet:       90_000,

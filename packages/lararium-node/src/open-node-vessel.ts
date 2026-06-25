@@ -36,7 +36,7 @@ import {
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
   parseMeshScale, type MeshScale,
   BAG_IDS, slugFromUri,
-  PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager,
 }                                       from "@lararium/mesh";
@@ -324,10 +324,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     // Admin VM — sovereign admin island + the operator's authn/z home.
     openAdmin: async ({ assembly, slot }) => {
       const adminDoc = (await readAdminDoc()).doc();
-      const personGroupDocIdHex   = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_DOC_ID_TIDDLER])   ?? null;
-      const personGroupAgentIdHex = tiddlerText(adminDoc?.tiddlers?.[PERSON_GROUP_AGENT_ID_TIDDLER]) ?? null;
+      const personaGroupDocIdHex   = tiddlerText(adminDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? null;
+      const personaGroupAgentIdHex = tiddlerText(adminDoc?.tiddlers?.[PERSONA_GROUP_AGENT_ID_TIDDLER]) ?? null;
       const meshCabalDocIdHex     = tiddlerText(adminDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
-      if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
+      if (!personaGroupDocIdHex || !personaGroupAgentIdHex || !meshCabalDocIdHex) {
         throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares init\`.`);
       }
       // The binding signer-pin + edge — the Binding Gate's authority. FAIL-CLOSED: a missing pin or
@@ -341,7 +341,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       const adminAuth = {
         seed:                 operatorSeed,
         operatorVerifyingKey: operatorIdentity.verifyingKey,
-        personGroupDocIdHex, personGroupAgentIdHex, meshCabalDocIdHex,
+        personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
         registerBags: [
           ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lararium, BAG_IDS.lares,

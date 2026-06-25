@@ -20,12 +20,12 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  PERSON_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
-  generateOrLoadPersonGroupRoot, loadPersonGroupRootSeed,
+  generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
 } from "../node-vessel-identity.js";
 import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
 import {
@@ -39,7 +39,7 @@ export interface InitOptions {
   readonly force?:      boolean;
   /**
    * Path to a device-admit/v1 JSON payload. When provided, skips the founding
-   * ceremony and admits this vessel to the operator's existing PersonGroup + MeshCabal.
+   * ceremony and admits this vessel to the operator's existing PersonaGroup + MeshCabal.
    * Use for same-operator second vessel. Multi-operator join uses invite-receive.
    */
   readonly admitPayloadPath?: string;
@@ -62,7 +62,7 @@ function defaultDirs(): { storageDir: string; genesisDir: string } {
 
 function makeBootstrapPlugin(
   identitiesUrl: string, circlesUrl: string, sessionsUrl: string, adminUrl: string,
-  personGroupDocIdHex: string, meshCabalDocIdHex: string,
+  personaGroupDocIdHex: string, meshCabalDocIdHex: string,
 ): object {
   const packedTiddlers = {
     [IDENTITIES_DOC_URI]:        { title: IDENTITIES_DOC_URI,        text: identitiesUrl,         kind: "oracle" },
@@ -70,7 +70,7 @@ function makeBootstrapPlugin(
     [SESSIONS_DOC_URI]:          { title: SESSIONS_DOC_URI,          text: sessionsUrl,             kind: "oracle" },
     [ADMIN_BAG_ID]:              { title: ADMIN_BAG_ID,              text: adminUrl,                kind: "oracle" },
     [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex,     kind: "sentinel-id" },
-    [PERSON_GROUP_DOC_ID_TIDDLER]:{ title: PERSON_GROUP_DOC_ID_TIDDLER, text: personGroupDocIdHex, kind: "sentinel-id" },
+    [PERSONA_GROUP_DOC_ID_TIDDLER]:{ title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroupDocIdHex, kind: "sentinel-id" },
   };
   return {
     title:         SOCIAL_BOOTSTRAP_PLUGIN_TITLE,
@@ -117,12 +117,12 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // ── Founding ceremony path ───────────────────────────────────────────────
   const operatorSeed = await loadVesselSigningSeed(storageDir);
 
-  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonGroup ROOT
+  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonaGroup ROOT
   // signs the edge that binds it to the hearth true-name. Founder-only — mint/load the
   // root + its seed, and read the hearth true-name (engine CID). A founding with no place
   // to bind to is no founding, so both are required (pono — we are the first node).
-  await generateOrLoadPersonGroupRoot(storageDir);
-  const signerSeed = await loadPersonGroupRootSeed(storageDir);
+  await generateOrLoadPersonaGroupRoot(storageDir);
+  const signerSeed = await loadPersonaGroupRootSeed(storageDir);
   const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
   if (!hearthTrueName) {
     throw new Error(
@@ -133,7 +133,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
 
   const {
     identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
-    personGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
+    personaGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
     signerDid,
   } = await runFoundingCeremony({
     repo,
@@ -150,7 +150,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
 
   const bootstrapPlugin = makeBootstrapPlugin(
     identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
-    personGroupDocIdHex, meshCabalDocIdHex,
+    personaGroupDocIdHex, meshCabalDocIdHex,
   );
   writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
   await repo.flush();
@@ -160,7 +160,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   console.log(`  @circles     ${circlesUrl}`);
   console.log(`  @sessions    ${sessionsUrl}`);
   console.log(`  @admin       ${adminUrl}`);
-  console.log(`  PersonGroup  ${personGroupDocIdHex.slice(0, 20)}…`);
+  console.log(`  PersonaGroup  ${personaGroupDocIdHex.slice(0, 20)}…`);
   console.log(`  MeshCabal    ${meshCabalDocIdHex.slice(0, 20)}…`);
   console.log(`  operator-root ${signerDid.slice(0, 20)}…`);
   console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);

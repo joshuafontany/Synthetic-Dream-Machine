@@ -30,10 +30,10 @@ export interface BootAdminKeyhiveInput {
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
   readonly operatorVerifyingKey: string;
-  /** PersonGroup sentinel Document id hex — legacy sentinel target (the Binding Gate superseded it). */
-  readonly personGroupDocIdHex: string;
-  /** PersonGroup agent id hex — Gate C membership subject. */
-  readonly personGroupAgentIdHex: string;
+  /** PersonaGroup sentinel Document id hex — legacy sentinel target (the Binding Gate superseded it). */
+  readonly personaGroupDocIdHex: string;
+  /** PersonaGroup agent id hex — Gate C membership subject. */
+  readonly personaGroupAgentIdHex: string;
   /** MeshCabal sentinel Document id hex — Gate C membership target. */
   readonly meshCabalDocIdHex: string;
   /** Writable bag URIs to register so `verify`/`delegate` resolve (lar: URIs). */
@@ -65,7 +65,7 @@ export async function bootAdminKeyhive(input: BootAdminKeyhiveInput): Promise<Bo
   await keyhive.init({ seed: input.seed, eventStore: input.eventStore });
 
   // Re-ingest cap events the founding ceremony (or a prior boot) persisted to
-  // the admin doc — reconstructs the PersonGroup / MeshCabal sentinels + edges.
+  // the admin doc — reconstructs the PersonaGroup / MeshCabal sentinels + edges.
   await keyhive.hydrateFromEventStore();
 
   const did = await keyhive.whoami();
@@ -96,11 +96,14 @@ export async function bootAdminKeyhive(input: BootAdminKeyhiveInput): Promise<Bo
     );
   }
 
-  // Gate C — the operator's PersonGroup belongs to the Nexus MeshCabal.
-  const gateC = await keyhive.verifySentinelMembership(input.personGroupAgentIdHex, input.meshCabalDocIdHex);
-  if (!gateC.ok) {
-    throw new Error(`[admin-keyhive] Gate C: PersonGroup lacks MeshCabal membership. ${gateC.reason ?? ""}`);
-  }
+  // Cabal/Nexus membership (the former "Gate C") has LEFT the boot path — it is AFFILIATION,
+  // not identity (research-grounded 2026-06-25, api/pono/identity-vs-affiliation). A PersonaGroup
+  // belongs to MANY cabals/nexuses or none (M:N), so membership is a HELD CAPABILITY checked at
+  // ACCESS to a cabal's shared canon, local-first — never a single boot gate (a boot gate
+  // conflated ID-with-authz, assumed single-membership, and read a global "now"). Boot proves
+  // IDENTITY ONLY: Gate A (key self-consistency) + the Binding Gate (the signed delegation edge).
+  // `personaGroupAgentIdHex` / `meshCabalDocIdHex` stay on the input for the founding sentinel
+  // dance + the future affiliation layer; boot no longer reads them.
 
   // Register the operator's writable bags so cap checks resolve against lar: URIs.
   for (const bagUrl of input.registerBags) {

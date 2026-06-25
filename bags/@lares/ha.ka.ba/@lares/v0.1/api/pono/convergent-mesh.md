@@ -62,7 +62,7 @@ Revocation runs two modes, and conflating them ships an unsafe gate:
 
 ## The contract performs the key-agreement
 
-Private docs spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonGroup ONLY when vessels mutually **contract** (the delegation handshake). That handshake, and only it, runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks, a fresh group secret seals **to current members only**, and the joiner derives keys **from that epoch forward**. A membership break advances the epoch and blanks the removed leaf's path — future derivation drops it, coordinator-free. **Forward-only ceiling, stated honestly:** keys already handed stay handed (endosymbiotic, permanent) — forward-secrecy here ratchets *past* the broken party, never re-seals the past (full statement: `lararium-identity#encrypt-from-start`).
+Private docs spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonaGroup ONLY when vessels mutually **contract** (the delegation handshake). That handshake, and only it, runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks, a fresh group secret seals **to current members only**, and the joiner derives keys **from that epoch forward**. A membership break advances the epoch and blanks the removed leaf's path — future derivation drops it, coordinator-free. **Forward-only ceiling, stated honestly:** keys already handed stay handed (endosymbiotic, permanent) — forward-secrecy here ratchets *past* the broken party, never re-seals the past (full statement: `lararium-identity#encrypt-from-start`).
 
 <<~/ahu >>
 

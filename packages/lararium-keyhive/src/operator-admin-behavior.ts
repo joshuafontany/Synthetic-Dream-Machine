@@ -117,8 +117,8 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         seed:                  adminAuth.seed,
         eventStore:            new AdminEventStore({ admin: ctx.composite }),
         operatorVerifyingKey:  adminAuth.operatorVerifyingKey,
-        personGroupDocIdHex:   adminAuth.personGroupDocIdHex,
-        personGroupAgentIdHex: adminAuth.personGroupAgentIdHex,
+        personaGroupDocIdHex:   adminAuth.personaGroupDocIdHex,
+        personaGroupAgentIdHex: adminAuth.personaGroupAgentIdHex,
         meshCabalDocIdHex:     adminAuth.meshCabalDocIdHex,
         registerBags:          adminAuth.registerBags,
         signerDid:       adminAuth.signerDid,
@@ -177,7 +177,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       if (!kh) throw new Error("keyhive not booted");
       const common = {
         fingerprint, repo: ctx.repo, adminStore: ctx.composite, keyhive: kh,
-        personGroupAgentIdHex: adminAuth.personGroupAgentIdHex, mintedByHex, recipeTrace,
+        personaGroupAgentIdHex: adminAuth.personaGroupAgentIdHex, mintedByHex, recipeTrace,
       } as const;
       const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
       const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });

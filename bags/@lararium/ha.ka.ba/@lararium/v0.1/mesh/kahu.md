@@ -119,8 +119,8 @@ These may name adjacent roles as the DreamNet social layer develops:
 The Keyhive three-gate lattice (Gates A/B/C) bootstraps vessel identity but does not
 itself encode kahu. A vessel that clears all three gates knows:
 - it holds a valid Individual keypair (Gate A)
-- that keypair belongs to a PersonGroup (Gate B)
-- that PersonGroup belongs to a MeshCabal (Gate C)
+- that keypair belongs to a PersonaGroup (Gate B)
+- that PersonaGroup belongs to a MeshCabal (Gate C)
 
 Gate C proves the vessel belongs to *some* cabal. Whether that cabal holds kahu over
 the corpus bags is a separate claim, encoded in the Keyhive docs for `@lararium` and

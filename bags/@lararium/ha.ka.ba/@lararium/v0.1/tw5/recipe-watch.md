@@ -67,7 +67,7 @@ oracle lands or the operator reboots.
 library bags only; `@temp`/`@draft`/`@working`/`@personal`/wiki/`@lares`/`@oracle`
 never mount or unmount by stack diff (the structural set in code —
 `ORACLE_BAG` is the floor since the 2026-06-16 carve). `@working` joined the
-structural set 2026-06-19: it is a per-(PersonGroup×fingerprint) grant slot
+structural set 2026-06-19: it is a per-(PersonaGroup×fingerprint) grant slot
 (peer to `@personal`/`@draft`) threaded through the manifest, never named in a
 recipe `bag-stack` — so the reconcile MUST exempt it, else it evicts the live
 write layer the island just mounted (the OCI writable-upper-layer law). `@lararium` is **not**
