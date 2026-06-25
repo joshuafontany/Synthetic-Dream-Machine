@@ -335,29 +335,22 @@ So @oracle wears **two faces**, joined by a publish-bridge:
 <<~OraclePlane Publish "runs/the kahu signs a new CID into the manifest + updates the pointer doc ~ the public grammar ratchet, the working→canon shore; anon reads as-of-the-last-publish (causal-islands, never a half-written CRDT)" >>
 <<~OraclePlane OraclePlane >>
 
-**The relay tier enforces the live pointer** — the binary gate (auth-or-refuse) splits in two:
-**`ANON_READ`** (the socket lands, a ReadOnlyAdapter forwards OUTBOUND sync and silently DROPS inbound
-`sync`/`request` frames before the Repo sees them, rate-limited) · **`AUTH_WRITE`** (the current
-Ed25519 challenge + signed delegation edge). The rhyme runs tightest to **iroh-docs `Capability`** —
-NamespaceId (pubkey) = read, NamespaceSecret (possession) = write — a **gate-split, not a new
-primitive** (the secret-possession proof already lives in `AdminAuthGate`). The LIFT crosses a vessel
-from read-face to write-face: the cost buys WRITE, the @catalog merges (#the-siege-gate).
+**The Two-Faced Substrate** (swarm-ruled 2026-06-25, four lenses converged — content-address · append-log · stay-in-stack · pattern-integrity). The read face carries a **content-addressed snapshot, never a sync peer**: the node serves the @oracle doc as an **immutable blob** — `Automerge.save(@oracle)` bytes, named by their content hash (the doc *heads* serve as that hash), served whole over the node's existing HTTP server. An anon fetches by hash, `load()`s read-only, verifies by rehash. Write-refusal needs no check — a hash-named blob holds no mutable surface: no write verb, no sync session, no inbound frame to refuse. This **removes** the residual the earlier two-Repo relay-tier only narrowed (anon-tier Automerge sync stayed bidirectional → transient cross-anon vandalism); the snapshot face carries no sync protocol at all. The earlier `ReadOnlyAdapter` relay-tier **retires** — `sharePolicy` gates the offer but never request-by-id (Canon 17/20), and bidirectional sync exposes no "receive-but-not-write" frame, so a frame-filter never holds.
 
-**Two invariants, two homes** (avaktavya — neither alone completes "who may write"): the relay-tier
-holds the line in BEHAVIOR (~150 lines, no Beelay — but a hostile relay passes everything); the
-content-addressed core holds it in DATA (a CID anon cannot mutate — but no live concurrent edit). The
-hybrid rides both — **relay-tier first** (the live pointer), **content-addressed core second** (the
-canon hardened from relay-behavior into data).
+**The pointer face carries a signed monotone lineage-linked record.** The read face self-refuses writes but cannot, alone, name *which* snapshot stands current — so a thin **pointer** rides the existing channel: `{ cid, version, prev_pointer_cid, expiry, sig }`. The reader rule: verify the signature → reject any `version` below its remembered high-water (anti-rollback rides the **epoch-lease / max-register** already in the stack) → check `prev` links the last-known head (anti-equivocation rides Keyhive/Automerge causal ancestry, gossiped) → fetch + hash-verify the cid. Freshness leans on the **local** clock (the `expiry`), never a global now. Prior art: Git (object+ref), IPNS (signed record + sequence), TUF (layered freshness + explicit rollback-refusal), Certificate Transparency (gossiped extends-proofs). The hard engineering lives in the thin pointer; the heavy artifact stays a dumb immutable blob, fetch-from-anyone (Nix-style source-agnostic).
 
-**The honest limit** — relay-tiering buys this ONLY for the PUBLIC plane. It SHALL NOT generalize to
-private/encrypted bags (the relay reads no ciphertext to judge a write), to forward-secrecy on
-revocation, or to per-change invariants a peer verifies without trusting the relay — those keep
-Keyhive/Beelay's seat (#four-port-swap). And the open anon socket reads as a DoS vector: the
-per-socket rate-limit + max-concurrent **rides the SAME commit** as the ANON tier, never a follow-on.
+\procedure ~Substrate(~Type:"" ~Params:"") ~Substrate <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~ confidence Synthesis 13/20 >> The shape seats on operator-insight + a scout's grounding (the
-automerge-repo `sharePolicy` limit = Canon 17/20; the iroh-docs rhyme; the relay-tier build shape).
-One drift-line stays UNWITNESSED — a pubkey-as-ActorId shim the scout sketched but never tested.
+<<~Substrate Floor "holds/the content-addressed snapshot — Automerge.save blob by hash, served whole over the node's HTTP server; read-only by the hash; always-on, cheapest ~ the floor every reader falls back to" >>
+<<~Substrate Pointer "holds/the signed monotone lineage-linked pointer {cid·version·prev·expiry·sig} ~ currency + anti-rollback + anti-equivocation in one small object, riding the existing channel" >>
+<<~Substrate LiveStream "holds/THE END-GOAL above the floor — real-time append-streaming (Hypercore: read-only by keypair even while live, the property Automerge-sync lacks) ~ DEFERRED; the orichalcum-bandwidth luxury, offered when mana allows, falling to the snapshot floor when not (the faerie-game broadcast)" >>
+<<~Substrate Substrate >>
+
+**The honest seam** (named, not papered): anti-equivocation runs **detect-not-prevent** — a single-publisher @oracle with no cross-island gossip gets solid rollback + freshness, but cannot *prove* the publisher held one constitution for every reader until a second island compares notes. Inherent to no-global-now; the many test lararia spawning here stand as exactly the second islands that activate the proof.
+
+**The honest limit** — this buys read-only ONLY for the PUBLIC plane. Private/encrypted bags, forward-secrecy on revocation, per-change invariants a peer verifies without trusting the relay keep Keyhive/Beelay's seat (#four-port-swap).
+
+<<~ confidence Synthesis-Canon 15/20 >> The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seats on a four-lens swarm convergence with zero new tech — `Automerge.save` over the node's existing HTTP server, the pointer on the existing channel. **Real-time streaming (Hypercore — read-only by keypair, live)** rides as the named END-GOAL above the floor, deferred until a live feed waits to be watched.
 
 <<~/ahu >>
 
