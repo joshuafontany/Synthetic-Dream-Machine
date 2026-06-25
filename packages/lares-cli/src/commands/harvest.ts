@@ -230,6 +230,10 @@ function readCwdFromTranscript(jsonl: string): string | null {
 }
 
 const COPILOT_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_normalize.py");
+// New copilot format: the conversation moved from per-session events.jsonl (gone in
+// CLI 1.0.6x) to a global SQLite store ~/.copilot/session-store.db. This exporter
+// reads it → per-session Claude-shaped jsonl (Scrivener, 2026-06-25).
+const COPILOT_SQLITE_NORM = join(larRoot(), "packages", "lararium-mempalace", "scripts", "copilot_sqlite_normalize.py");
 
 /** One discovered transcript: where it is, which wing it routes to, and whether it needs normalizing. */
 interface HarvestEntry {
@@ -343,8 +347,28 @@ function discoverCopilotVscode(): HarvestEntry[] {
 }
 
 function discoverCopilotCli(): HarvestEntry[] {
-  const root = join(homedir(), ".copilot", "session-state");
   const out: HarvestEntry[] = [];
+  // New format (CLI 1.0.6x): one global SQLite store. Export each session to a
+  // Claude-shaped jsonl via the python helper (python owns the sqlite read);
+  // wing routing comes from sessions.cwd — no path-scraping. The exported jsonl
+  // is already Claude-shaped, so normalize:false (no second pass).
+  const db = join(homedir(), ".copilot", "session-store.db");
+  if (existsSync(db)) {
+    const exportDir = join(homedir(), ".lares", "harvest-stage", ".copilot-export");
+    try {
+      mkdirSync(exportDir, { recursive: true });
+      const manifest = execFileSync(PY, [COPILOT_SQLITE_NORM, db, exportDir], { maxBuffer: 1 << 30, encoding: "utf8" });
+      for (const line of manifest.split("\n").filter(Boolean)) {
+        let m: { id: string; cwd?: string; path: string };
+        try { m = JSON.parse(line) as { id: string; cwd?: string; path: string }; } catch { continue; }
+        if (!m.path) continue;
+        out.push({ file: m.path, wing: m.cwd ? wingFromDir(m.cwd) : "wing_copilot_unsorted", normalize: false, stageName: `${m.id}.jsonl`, source: "copilot-cli" });
+      }
+      return out; // db is canonical — skip the legacy walk
+    } catch { /* fall through to legacy events.jsonl */ }
+  }
+  // Legacy fallback: older installs still write per-session events.jsonl.
+  const root = join(homedir(), ".copilot", "session-state");
   if (!existsSync(root)) return out;
   for (const d of readdirSync(root, { withFileTypes: true })) {
     if (!d.isDirectory()) continue;
