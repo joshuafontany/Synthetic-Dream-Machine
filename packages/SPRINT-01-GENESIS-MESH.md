@@ -14,6 +14,24 @@
 
 ---
 
+## Sprint Status — re-oriented 2026-06-24
+
+**✓ SPRINT 1 COMPLETE.** Petnames (`P1`) + the full read-arm (`M1·M2a·M2b·M2c·M3`) shipped, witnessed, committed; the model triangulated across 7+ research dives, survived two adversarial refutations (FFZ-as-causal, epoch-as-revoker), and now lives in the memegraph (`api/pono/convergent-mesh.md` + corrected FFZ/identity memes). The base-canon joiner resolves without ever minting a ghost.
+
+**↯ SPRINT 2 — the converged-model build arm** *(research-complete, unblocked — the proposed next floor)*:
+1. `▢` **Epoch-lease primitive** — `boundEpoch` on `device-delegation` **v2** · max-register epoch tiddler · `cap-renew` verb · OPTIONAL `expectedEpoch` verify (epoch=lease, not revoker). The first new DreamNet primitive; routes the public mesh's revocation around Beelay. *(See Beelay-bypass §.)*
+2. `▢` **Anchor BeeKEM at the contract** — wire Keyhive's existing BeeKEM into the delegation handshake (the private-content forward-secrecy leg; `convergent-mesh#contract-key-agreement`).
+3. `▢ M5` — background reconcile (the read-arm's follow-on; mount a still-joining doc when a peer delivers it post-boot).
+4. `▢` **YIN + grounding** — the plane-numbering corpus sweep (other plane-numbered memes, e.g. `dreamnet-architecture.md`) · name the **Amorphous Dreams Cabal** (the kahu) in code at the `@mesh/admin-cabal` sentinel.
+
+**⚑ OPERATOR-GATED — Genesis G-arm:** `G-D1`/`G-D2`/`G-D3` rulings unlock `G1`+`G2` (the founding-ceremony rewrite). The **kahu constitutional core** (the keystone the convergence named — the small unamendable revision-set) pairs here as a design+doc piece.
+
+**⏸ BLOCKED — SHRUNK:** the Beelay block now covers only *private-content forward-secrecy* (and `M4` dynamic-patience + the browser-vessel loop). The **public layer** routes around it (Beelay-bypass §).
+
+*The detailed epics + research record (R1–R7, the syntheses) stay below — now also canon in the memegraph, kept here as the build's reasoning trail.*
+
+---
+
 ## EPIC P — Petnames *(YIN: collapses to confirm-and-document)*
 
 The model sits **RULED** (capability-is-identity + petnames, 2026-06-24). The parser already carries both regions — `lar:///ha.ka.ba/**` (stable) and `lar:///t1.t2.t3/**` (unstable) — in `packages/lararium-mesh/src/lar-uris.ts`. No new infra births here; the epic *subtracts* to documentation.
@@ -100,9 +118,9 @@ The heavy half. Rewrites the founding ceremony, so it waits on three rulings bef
 
 ---
 
-## ⏸ Blocked — Beelay JS ciphertext transport
+## ⏸ Blocked — Beelay JS ciphertext transport *(SHRUNK 2026-06-24)*
 
-Beelay's JS transport (Keyhive doc-sync, Rust/WASM gap; PRs in flight) gates real multi-vessel federation. Parked:
+**The block shrank** (Beelay-bypass §): the **public layer** (base canon, capability-as-identity public *signatures*, the epoch-lease, Keyhive convergent-revoke) routes around Beelay over the WS relay. Beelay's one irreplaceable job = **forward-secrecy of private encrypted content's data-keys** — and **Keyhive already carries BeeKEM**, so even that is *anchor-at-the-contract*, not invent. Still genuinely Beelay-gated:
 
 - `⏸` Model-B device admission (`ceremony-core.ts:300-343 runDeviceAdmitAccept`, sketched).
 - `⏸` M4 dynamic patience (peer reality).
