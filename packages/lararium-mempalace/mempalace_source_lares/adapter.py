@@ -66,6 +66,12 @@ LAR_SCHEMA = AdapterSchema(
                               description="function-hall routed by sigil: hall_facts|events|discoveries"),
         "lar_surface": FieldSpec(type="string", required=False, indexed=True,
                                  description="originating harness surface: claude|codex|copilot-vscode|copilot-cli"),
+        "lar_agent": FieldSpec(type="string", required=False, indexed=True,
+                               description="tasked-spirit pet-name LABEL on sidechain drawers (not the identity)"),
+        "lar_sidechain": FieldSpec(type="int", required=False, indexed=True,
+                                   description="1 = a tasked-spirit (sub-agent) turn, distinct from the main agent"),
+        "lar_agent_handle": FieldSpec(type="string", required=False, indexed=True,
+                                      description="worldline lineage-path handle <run>.<agentId> — derived at spawn, no registry; carries identity (pet-name only labels)"),
     },
 )
 

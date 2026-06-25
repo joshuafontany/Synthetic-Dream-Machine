@@ -129,7 +129,7 @@ happened-before child**; two children of one parent with **no edge between them*
 **concurrent** (the Lightcone "elsewhere"); the **handback** edge closes the
 valid-interval — the twin-reunion, the worldline's one sync point. So the worldline's
 partial causal order needs no separate structure: it **projects from the provenance
-DAG**. (How that order also rides the per-handle FfzClock's merge-topology: #time.)
+DAG** — the edge-DAG IS the worldline's happened-before (FfzClock carries only its rhythmic grain: #time).
 
 ### The correlation-id ~ the only token that crosses wings
 
@@ -157,7 +157,7 @@ the actor-boundary, not a preference: where Automerge owns an actorId it owns th
 order; where nothing does (agents · the outside world) the worldline-DAG and FfzClock
 carry it.
 
-<<~ranks domain inside-automerge ~ docs · wiki-CRDTs (the proximal/internal order): Automerge logical time owns causal order — `<counter,actorId>` · `getHeads` · the `drifted` frontier. FfzClock NEVER carries causal order here, and an `ffzCompare` LWW total-order MUST NOT drive a fork/revocation verdict inside the CRDT (that manufactures a global-now the mesh cannot hold) -> the-worldline ~ the agent worldline (NO Automerge actor — spirits mine into the daemon's sole replica): owns a per-handle FfzClock (`actorId = THE HANDLE`). Its causal PARTIAL order rides the MERGE TOPOLOGY — tick on local progress, `ffzMerge` ONLY at handback-to-parent (the twin-reunion), siblings never merge sibling-to-sibling so they stay concurrent by construction. The reified provenance edges PROJECT this same order (#attribution). FfzClock's LWW `ffzCompare` serves the RHYTHMIC grain — "as of last sync", the manaoio register — never a causal verdict -> other-domains ~ all other non-Automerge domains (external streams: game · Mudlet · video · DAW · market feed; capability-leases): FfzClock carries the rhythmic grain per FFZ_PROFILE, pulled across the causal-island boundary inward. The domain-general primitive lives at [[mesh/ffz-clock]] >>
+<<~ranks domain inside-automerge ~ docs · wiki-CRDTs (the proximal/internal order): Automerge logical time owns causal order — `<counter,actorId>` · `getHeads` · the `drifted` frontier. FfzClock NEVER carries causal order here, and an `ffzCompare` LWW total-order MUST NOT drive a fork/revocation verdict inside the CRDT (that manufactures a global-now the mesh cannot hold) -> the-worldline ~ the agent worldline (NO Automerge actor — spirits mine into the daemon's sole replica): its causal PARTIAL order rides the **reified edge-DAG** (#attribution) — a `spawned` edge = happened-before, no-edge-between-siblings = concurrent, handback closes the interval (the twin-reunion). FfzClock keyed on the HANDLE carries the worldline's RHYTHMIC grain only ("as of last sync", the manaoio register), never the causal verdict — by code its `ffzCompare` is a total-order LWW and `ffzMerge` a max-join (no concurrency, no merge-ancestry), so causal CANNOT ride it. **Code divergence (2026-06-25 read):** `FfzClock.actorId` still keys on the Automerge actor — re-key to the handle when the worldline clock is wired (the actorId slip, live in code). A separate `LarTickCounter` already carries a monotonic cross-source join key -> other-domains ~ all other non-Automerge domains (external streams: game · Mudlet · video · DAW · market feed; capability-leases): FfzClock carries the rhythmic grain per FFZ_PROFILE, pulled across the causal-island boundary inward. The domain-general primitive lives at [[mesh/ffz-clock]] >>
 
 **The retired over-claim stays retired** (across both domains): FfzClock measures
 *tempo/grain*, never *who-acted-first* as a CRDT verdict. Inside Automerge, Automerge
@@ -247,7 +247,7 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 
 **Build sequence — the handle first; the edge and the rhythm both ride it:**
 
-<<~ranks build handle ~ derive + stamp the lineage-path handle at spawn (in-process: from agentId/parentUuid on disk; cross-surface: the launcher shim mints trace-id/span-id) — the keystone -> edge ~ stamp the reified Delegation node (appointed-by + root-principal), bi-temporal valid/tx; the same DAG projects the worldline happened-before -> rhythm ~ give each handle an FfzClock; tick local, merge at handback; stamp drawers with lar_ffz; recall orders by the merge-DAG, paces by ffzCompare -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
+<<~ranks build handle ~ derive + stamp the lineage-path handle at spawn (in-process: from agentId/parentUuid on disk; cross-surface: the launcher shim mints trace-id/span-id) — the keystone -> edge ~ stamp the reified Delegation node (appointed-by + root-principal), bi-temporal valid/tx; the same DAG projects the worldline happened-before -> rhythm ~ give each handle an FfzClock RE-KEYED on the handle (not the Automerge actor — fix the live slip); stamp drawers with lar_ffz; recall orders CAUSALLY by the edge-DAG and paces by ffzCompare (rhythm) -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
 
 <<~/ahu >>
 
@@ -255,11 +255,12 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 
 ## Open ~ held, not papered over
 
-- **`ffzCompare` partial-order vs LWW** — the worldline needs a *concurrent* verdict
-  when two clocks share no merge-ancestry; FfzClock's documented `ffzCompare` imposes an
-  LWW total-order. Confirm the wire-time API separates the causal partial-order read
-  (from merge-ancestry) from the rhythmic LWW read. If a domain genuinely needs FfzClock
-  to carry happened-before as a verdict, the two-domain cut (#time) reopens.
+- **The actorId slip — live in code** (`ffz-clock.ts` read 2026-06-25): `FfzClock.actorId`
+  keys on the Automerge actor (header + field doc both say so); the worldline clock MUST
+  re-key on the HANDLE. The concrete first fix when the rhythm road is wired. No
+  `ffzCompare` change needed — causal rides the edge-DAG, FfzClock stays a rhythmic
+  total-order. The existing `LarTickCounter` already carries a monotonic cross-source
+  join key; reconcile whether the worldline reuses it or the edge-DAG alone.
 - **The cross-surface launcher shim** — `gh copilot` ignores `TRACEPARENT`; build the
   `lares`-driven wrapper that mints + injects the trace-id and writes both sides, or
   only half the tunnel exists.

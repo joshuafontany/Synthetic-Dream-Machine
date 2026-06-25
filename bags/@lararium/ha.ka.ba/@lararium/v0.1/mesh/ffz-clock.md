@@ -127,9 +127,10 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 - **Coprime-prime bound tuning** — shared factors (192 = 2⁶·3, 4, 32 all ÷4) collide in
   hash-based merge paths; choose primes near natural domain rhythms (191 / 5 / 31).
   Per-profile values need empirical validation against CRDT merge collision rates.
-- **`ffzCompare` partial-order vs LWW** — for a worldline, two clocks sharing no
-  merge-ancestry should read *concurrent*, not an LWW tiebreak. Confirm the wire-time API
-  separates the causal partial-order read from the rhythmic LWW read ([[agent-worldline]]#open).
+- **The actorId slip** — `FfzClock.actorId` keys on the Automerge actor (code header +
+  field doc); for a worldline clock it must re-key on the handle ([[agent-worldline]]#open).
+  `ffzCompare` stays a rhythmic total-order — causal never rides it (it rides Automerge
+  inside a CRDT, or the edge-DAG on a worldline), so no concurrency verdict is owed here.
 - **`ExchangeState` FSM** — a held exchange (`agent-responded`, awaiting grounding) carries
   the same clock tuple as an unadvanced one; the FSM field lives on `PresenceSlot`, not in
   the clock. Grounded in Clark-Brennan · Ginzburg DGB · MCP SEP-1686 · A2A `input-required`.

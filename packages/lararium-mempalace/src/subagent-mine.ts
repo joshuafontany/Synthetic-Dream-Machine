@@ -109,6 +109,10 @@ export interface SubagentMineResult {
  */
 export function mineSubagentsForSession(transcriptPath: string, wing: string, mpExe = resolveMempalaceExe()): SubagentMineResult {
   const sw = spiritsWing(wing);
+  // The session IS the worldline run-root; each spirit's lineage-path handle reads
+  // `<run>.<agentId>` (agent-worldline#name). Threaded through the staged filename
+  // so lar-telemetry's buildPatch can derive lar_agent_handle off it.
+  const runId = basename(transcriptPath).replace(/\.jsonl$/, "");
   const mined: Array<{ name: string; agentId: string; drawers: number | string }> = [];
   const dir = transcriptPath.replace(/\.jsonl$/, "") + "/subagents";
   if (!existsSync(dir)) return { spirits: 0, wing: sw, mined };
@@ -122,11 +126,12 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
     const agentId = agentIdOf(af);
     // Stage this ONE spirit alone — `mine` takes a directory, and isolating each
     // spirit (a) keeps the parent pass from ever re-collecting it and (b) makes
-    // the staged source_file carry the name (`<name>__agent-<id>.jsonl`) so
-    // lar-telemetry's buildPatch reads lar_agent off it.
+    // the staged source_file carry the lineage (`<name>__agent-<id>__run-<run>.jsonl`)
+    // so lar-telemetry's buildPatch reads BOTH lar_agent (the pet-name label) and
+    // lar_agent_handle (the `<run>.<id>` worldline path) off it.
     const stage = join(tmpdir(), `lar-spirit-${agentId}`);
     mkdirSync(stage, { recursive: true });
-    const dst = join(stage, `${name}__agent-${agentId}.jsonl`);
+    const dst = join(stage, `${name}__agent-${agentId}__run-${runId}.jsonl`);
     try { linkSync(af, dst); } catch { try { copyFileSync(af, dst); } catch { continue; } }
     let drawers: number | string = 0;
     try {

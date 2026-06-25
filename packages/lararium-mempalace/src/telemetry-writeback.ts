@@ -29,7 +29,7 @@ import { resolveMempalacePython } from "./spawn-resolve.js";
  * with `HARVEST_VERSION` in `drawer_io.py` when the reading logic changes, so the
  * next sweep re-reads exactly the stale drawers. THE single source for this number.
  */
-export const LAR_HV = 3;
+export const LAR_HV = 4;
 
 const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
 
@@ -52,6 +52,23 @@ function deriveAgent(sourceFile?: string): string | null {
   const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
   const m = /^(.+?)__agent-[^/]+\.jsonl$/.exec(base);
   return m ? (m[1] ?? null) : null;
+}
+
+/**
+ * Derive the worldline lineage-path HANDLE from a subagent-staged source_file
+ * (`<name>__agent-<id>__run-<run>.jsonl`, the convention from subagent-mine.ts).
+ * Returns `<run>.<agentId>` — the run-root . span, the trace-id/span-id formalized
+ * (lar:///…/agent-worldline#name) — or null. Identity rides this handle; the
+ * pet-name (deriveAgent) only labels. Legacy two-part names (no `__run-`) predate
+ * the handle and yield null; they earn one on the next mine.
+ * Flat `subagents/` gives a `run.child` path; deep parentUuid nesting is a
+ * documented extension (agent-worldline#open).
+ */
+function deriveHandle(sourceFile?: string): string | null {
+  if (!sourceFile) return null;
+  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  const m = /__agent-([^/]+?)__run-([^/]+)\.jsonl$/.exec(base);
+  return m ? `${m[2]}.${m[1]}` : null;
 }
 
 /** Deterministic function-hall routing from the authored instruments (no LLM). */
@@ -83,6 +100,8 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   if (hall) patch["lar_hall"] = hall;
   const agent = deriveAgent(sourceFile);
   if (agent) { patch["lar_agent"] = agent.slice(0, 60); patch["lar_sidechain"] = 1; }
+  const handle = deriveHandle(sourceFile);
+  if (handle) patch["lar_agent_handle"] = handle.slice(0, 120);
   return patch;
 }
 
