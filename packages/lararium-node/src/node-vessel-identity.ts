@@ -7,16 +7,17 @@
  *   - did:key derivation happens in the TW5 VM (cold-boot-ceremony module)
  *   - displayName derives from `git config user.name` — local truth, no network call
  *
- * Identity plane (5-scale model): this keypair is the VESSEL's key — Plane 0
- * (device-vessel), the user×vessel bond. The OPERATOR identity is Plane 1, the
- * PersonGroup (the group of a user's vessels). TODAY the two CONFLATE: one key is
- * COPIED across a user's vessels (Model A) and the IdentityTiddler brands it
- * `kind="operator"`. Model A is a TEMPORARY stopgap — the copy-the-key antipattern;
- * the target mints a DISTINCT key per vessel, delegated into the PersonGroup by a
- * signed edge (the delegation IS the relationship). The behavioral Plane 0/1 split
- * is held for the genesis refactor (crucible-gated). See
- * lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation (Model A/B) and
- * lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture (the 5-scale).
+ * Identity capabilities (#has-stack ontology — a nameless entity carries a stack of
+ * capabilities, never a numbered plane): this keypair is the VESSEL's own signing
+ * capability, the user×vessel bond. The OPERATOR identity is a DISTINCT capability —
+ * the PersonGroup root that delegates membership to a user's vessels. TODAY the two
+ * CONFLATE: one key is COPIED across a user's vessels (Model A) and the IdentityTiddler
+ * brands it `kind="operator"`. Model A is a TEMPORARY stopgap — the copy-the-key
+ * antipattern; the target mints a DISTINCT key per vessel, delegated into the
+ * PersonGroup by a signed edge (the delegation IS the relationship — the vessel's stack
+ * #has the edge). The behavioral vessel/operator-root split is held for the genesis
+ * refactor (crucible-gated). See lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation
+ * (Model A/B) and the #has-stack ontology (api/pono/has-stack-ontology).
  *
  * Storage law — identity lives OUTSIDE the wipe zone:
  *   callers pass the storage dir (`<root>/.lararium`); the keypair + card persist to
@@ -316,6 +317,110 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
   const raw = JSON.parse(readFileSync(keyFile, "utf8")) as PersistedKey;
   if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
     throw new Error(`[vessel-identity] malformed signingKey in ${keyFile}`);
+  }
+  const bytes = new Uint8Array(32);
+  for (let i = 0; i < 32; i++) {
+    bytes[i] = parseInt(raw.signingKey.slice(i * 2, i * 2 + 2), 16);
+  }
+  return bytes;
+}
+
+// ── PersonGroup root key custody (the operator-root delegation capability) ──────
+//
+// Two DISTINCT capabilities, never two numbered planes (#has-stack ontology — a
+// nameless entity carries a stack of capabilities, not a layer index):
+//   · the per-vessel device key above = the capability a vessel #has to sign AS
+//     ITSELF (its own leaf identity).
+//   · the PersonGroup root here        = the operator-root capability that SIGNS the
+//     device-delegation edges granting vessels membership. Its public key is the
+//     operator-root DID (`0x`+hex) peers PIN to verify those edges offline at Gate B
+//     (no Beelay). A vessel joins the PersonGroup by holding a signed edge from this
+//     root — membership is a capability the vessel's stack #has, not a plane it sits on.
+//
+// The root lives ONLY on the founding vessel: a joining vessel holds the founder's
+// public DID + a signed edge, NEVER the root seed (two roots = two operators, not one
+// PersonGroup).
+//
+// Custody law (same as the vessel key): persists into the SIBLING
+// `.lararium-identity/` dir, mode 0o600, structurally outside any `reset`/`rebuild`
+// wipe. A root seed inside `.lararium/` would mean operator-identity loss on `lares
+// reset` — the same keypair-wipe lesson, now for the operator-root capability.
+//
+// Pre-rotation for the root is a follow-on (same register as the vessel KERI hook
+// above): the root is the MORE pin-worthy identity, so its inception commitment +
+// offline next-seed custody upgrade lands with the full `lares rotate-root` ceremony.
+function personGroupRootFileName(login: string | null): string {
+  return login ? `.person-group-root-${login}.json` : ".person-group-root.json";
+}
+
+export interface PersonGroupRoot {
+  /** Hex-encoded 32-byte Ed25519 verifying key — the operator-root DID peers pin (`0x`+hex). */
+  verifyingKey: string;
+  /** True when this call minted a fresh root; false when it loaded an existing one. */
+  created: boolean;
+}
+
+/**
+ * Generate or load the PersonGroup-root keypair (the operator-root delegation capability).
+ *
+ * Idempotent: loads an existing root, mints one only on first call. FOUNDER-ONLY —
+ * a joining vessel must NEVER call this; it receives the founder's public DID + a
+ * signed delegation edge at admit (Phase 3) instead.
+ *
+ * Returns only the public verifyingKey; the signing seed surfaces via
+ * `loadPersonGroupRootSeed` for the founding ceremony's edge-minting.
+ */
+export async function generateOrLoadPersonGroupRoot(
+  dataDir: string,
+): Promise<PersonGroupRoot> {
+  const idDir = identityDir(dataDir);
+  mkdirSync(idDir, { recursive: true });
+
+  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const rootFile = join(idDir, personGroupRootFileName(hint.login));
+
+  if (existsSync(rootFile)) {
+    const raw = JSON.parse(readFileSync(rootFile, "utf8")) as PersistedKey;
+    if (typeof raw.verifyingKey !== "string" || raw.verifyingKey.length !== 64) {
+      throw new Error(`[vessel-identity] malformed verifyingKey in ${rootFile}`);
+    }
+    console.log(`[vessel-identity] loaded PersonGroup root${hint.login ? ` for ${hint.login}` : ""}`);
+    return { verifyingKey: raw.verifyingKey, created: false };
+  }
+
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  const pubJwk  = publicKey.export({ format: "jwk" }) as { x: string };
+  const privJwk = privateKey.export({ format: "jwk" }) as { d: string };
+  const verifyingKey = Buffer.from(pubJwk.x,  "base64url").toString("hex");
+  const signingKey   = Buffer.from(privJwk.d, "base64url").toString("hex");
+  const persisted: PersistedKey = { verifyingKey, signingKey, ...(hint.login ? { gitEmail: hint.login } : {}) };
+
+  writeFileSync(rootFile, JSON.stringify(persisted, null, 2), { mode: 0o600, encoding: "utf8" });
+  chmodSync(rootFile, 0o600);
+  console.log(`[vessel-identity] minted PersonGroup root${hint.login ? ` for ${hint.login}` : ""}`);
+  return { verifyingKey, created: true };
+}
+
+/**
+ * Load the PersonGroup-root 32-byte Ed25519 SIGNING seed (founder-only).
+ *
+ * The founding ceremony signs device-delegation edges with this seed. SECURITY: the
+ * returned bytes ARE the operator-root private key — the most sensitive secret on the
+ * vessel (it authorizes PersonGroup membership). Same handling rules as
+ * `loadVesselSigningSeed`. Throws when absent — call `generateOrLoadPersonGroupRoot`
+ * first (founding only; a joinee never holds this).
+ */
+export async function loadPersonGroupRootSeed(dataDir: string): Promise<Uint8Array> {
+  const hint     = await readLocalOperatorHint().catch(() => ({ login: null, displayName: null }));
+  const rootFile = join(identityDir(dataDir), personGroupRootFileName(hint.login));
+  if (!existsSync(rootFile)) {
+    throw new Error(
+      `[vessel-identity] no PersonGroup root at ${rootFile} — mint it via the founding ceremony first (founder-only; a joining vessel never holds the root seed)`,
+    );
+  }
+  const raw = JSON.parse(readFileSync(rootFile, "utf8")) as PersistedKey;
+  if (typeof raw.signingKey !== "string" || raw.signingKey.length !== 64) {
+    throw new Error(`[vessel-identity] malformed signingKey in ${rootFile}`);
   }
   const bytes = new Uint8Array(32);
   for (let i = 0; i < 32; i++) {

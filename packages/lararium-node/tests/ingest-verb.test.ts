@@ -39,6 +39,12 @@ function renderOf(text: string, uri: string): string {
 }
 const canonical = renderOf(source, URI);
 
+// The entry H1 heading, read FROM the live meme — so a heading rename (Boot→Hearth→…)
+// never re-stales this fixture. The edit tests below mutate THIS heading to prove INGEST
+// lands a changed heading; hardcoding the literal is what drifted them red.
+const ENTRY_H1 = source.match(/^# Entry\b.*$/m)?.[0];
+if (!ENTRY_H1) throw new Error("ingest-verb test: entry H1 heading not found in boot meme");
+
 function makeComposite(): CompositeStore {
   const c = new CompositeStore();
   c.addLayer({ bagId: BAG, store: new MemoryTiddlerStore(), writable: true });
@@ -96,7 +102,7 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     const blockEnd   = source.indexOf("<<~/ahu >>", blockStart) + "<<~/ahu >>".length;
     expect(blockStart).toBeGreaterThan(0);
     const edited = (source.slice(0, blockStart) + source.slice(blockEnd))
-      .replace("# Entry ~ Lararium Boot", "# Entry ~ Lararium Boot (ingested)")
+      .replace(ENTRY_H1, `${ENTRY_H1} (ingested)`)
       .replace(/\n{3,}/g, "\n\n");
     expect(edited).toContain("(ingested)"); // guard: heading drift must fail loud, not collapse to noop
 
@@ -140,7 +146,7 @@ describe("INGEST — the gate composed with replace-by-group", () => {
     await seedBoot(composite);
     const before = await liveGroup(composite);
 
-    const edited = source.replace("# Entry ~ Lararium Boot", "# Entry - DISK EDIT");
+    const edited = source.replace(ENTRY_H1, "# Entry - DISK EDIT");
     expect(edited).not.toBe(source);
     const table = new VerbTable();
     registerActionReactors(table, { composite });
