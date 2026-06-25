@@ -12,7 +12,8 @@
  */
 
 import { operatorDid } from "../env.js";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../admin-connector.js";
+import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 export async function cmdPin(args: ParsedArgs): Promise<number> {
@@ -50,63 +51,56 @@ export async function cmdRegisterCold(args: ParsedArgs): Promise<number> {
 }
 
 export async function cmdResidency(_args: ParsedArgs): Promise<number> {
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
+  // UDS fast path, WS fallback (the lares↔lararium binding).
+  let r;
   try {
-    const r = await submitVerb(vessel, "residency", {}, await operatorDid());
-    if (r.status === "error") {
-      console.error(`residency query failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const stats = summaryOutput(r) ?? {};
-    const pinned = (stats["pinned"] ?? []) as string[];
-    const wela   = (stats["wela"]   ?? []) as Array<{ url: string; lastTouched: number; syncActive?: boolean }>;
-    const anuCount = stats["anuCount"] as number;
-    const hotCap   = stats["hotCap"]   as number;
-
-    console.log("");
-    console.log(`pinned (${pinned.length}):`);
-    for (const u of pinned) console.log(`  ${u}`);
-    console.log("");
-    console.log(`wela (${wela.length}/${hotCap}):`);
-    for (const e of wela) {
-      const age   = Date.now() - e.lastTouched;
-      const human = age < 60_000 ? `${Math.round(age/1000)}s ago` : `${Math.round(age/60_000)}m ago`;
-      const sync  = e.syncActive ? "  (syncing)" : "";
-      console.log(`  ${e.url}  — touched ${human}${sync}`);
-    }
-    console.log("");
-    console.log(`anu count: ${anuCount}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+    r = await runVerb("residency", {}, await operatorDid());
+  } catch (err) {
+    console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
+    console.error("  Start the daemon with `lares serve` and try again.");
+    return 3;
   }
+  if (r.status === "error") {
+    console.error(`residency query failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const stats = summaryOutput(r) ?? {};
+  const pinned = (stats["pinned"] ?? []) as string[];
+  const wela   = (stats["wela"]   ?? []) as Array<{ url: string; lastTouched: number; syncActive?: boolean }>;
+  const anuCount = stats["anuCount"] as number;
+  const hotCap   = stats["hotCap"]   as number;
+
+  console.log("");
+  console.log(`pinned (${pinned.length}):`);
+  for (const u of pinned) console.log(`  ${u}`);
+  console.log("");
+  console.log(`wela (${wela.length}/${hotCap}):`);
+  for (const e of wela) {
+    const age   = Date.now() - e.lastTouched;
+    const human = age < 60_000 ? `${Math.round(age/1000)}s ago` : `${Math.round(age/60_000)}m ago`;
+    const sync  = e.syncActive ? "  (syncing)" : "";
+    console.log(`  ${e.url}  — touched ${human}${sync}`);
+  }
+  console.log("");
+  console.log(`anu count: ${anuCount}`);
+  console.log("");
+  return 0;
 }
 
 async function runResidencyCommand(name: string, args: Record<string, unknown>): Promise<number> {
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
+  // UDS fast path, WS fallback (the lares↔lararium binding).
+  let r;
   try {
-    const r = await submitVerb(vessel, name, args, await operatorDid());
-    if (r.status === "error") {
-      console.error(`${name} failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    console.log(`${name}: ${JSON.stringify(summaryOutput(r) ?? {}, null, 2)}`);
-    return 0;
-  } finally {
-    await vessel.disconnect();
-  }
-}
-
-async function tryConnect() {
-  try {
-    return await connectAdminVessel({});
+    r = await runVerb(name, args, await operatorDid());
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error(`lares: ${msg}`);
+    console.error(`lares: ${err instanceof Error ? err.message : String(err)}`);
     console.error("  Start the daemon with `lares serve` and try again.");
-    return null;
+    return 3;
   }
+  if (r.status === "error") {
+    console.error(`${name} failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  console.log(`${name}: ${JSON.stringify(summaryOutput(r) ?? {}, null, 2)}`);
+  return 0;
 }

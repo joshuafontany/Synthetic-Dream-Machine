@@ -16,16 +16,17 @@
 
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
-import { join } from "node:path";
 import { loadVesselVerifyingKey } from "@lararium/node";
-import { repoRoot } from "@lararium/mesh/node";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { larDataDir } from "../env.js";
+import { summaryOutput } from "../admin-connector.js";
+import { runVerb } from "../verb-call.js";
 import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 async function operatorDid(): Promise<string> {
-  const dataDir = join(repoRoot, "packages", "lararium-node", ".lararium");
-  return "0x" + (await loadVesselVerifyingKey(dataDir));
+  // The env-contract data dir (LAR_ROOT/.lararium) — not the old package-local path,
+  // which left draft unable to find the operator key (surfaced during the rollout).
+  return "0x" + (await loadVesselVerifyingKey(larDataDir()));
 }
 
 export async function cmdDraft(args: ParsedArgs): Promise<number> {
@@ -38,9 +39,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   }
 
   const portOpt = args.options["port"];
-  const connectOpts: Parameters<typeof connectAdminVessel>[0] = portOpt
-    ? { port: Number(portOpt) }
-    : {};
+  const connectOpts = portOpt ? { port: Number(portOpt) } : {};
 
   let did: string;
   try {
@@ -51,9 +50,10 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     return 3;
   }
 
-  let vessel;
+  // UDS fast path, WS fallback (the lares↔lararium binding).
+  let where;
   try {
-    vessel = await connectAdminVessel(connectOpts);
+    where = await runVerb("where", { tiddler }, did, connectOpts);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
@@ -65,78 +65,72 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
     });
     return 3;
   }
-
-  try {
-    const where = await submitVerb(vessel, "where", { tiddler }, did);
-    if (where.status === "error") {
-      const msg = where.errorMessage ?? "unknown";
-      emit(args, { ok: false, error: msg, human: () => console.error(`recipe-presence query failed: ${msg}`) });
-      return 4;
-    }
-    const whereSummary = summaryOutput(where) ?? {};
-    const bags    = (whereSummary["bags"] ?? []) as string[];
-    const primary = whereSummary["primaryBag"] as string | null;
-    if (!primary) {
-      emit(args, {
-        ok: false, error: `tiddler not found in any bag: ${tiddler}`,
-        data: { tiddler },
-        human: () => console.error(`tiddler not found in any bag: ${tiddler}`),
-      });
-      return 5;
-    }
-
-    // The confirmation prompt belongs to the HUMAN/TTY path only — an agent
-    // (JSON / off-TTY) MUST carry intent explicitly via --yes.
-    if (!args.flags["yes"]) {
-      if (wantsJson(args)) {
-        emit(args, {
-          ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation",
-          human: () => { /* unreachable on the JSON path */ },
-        });
-        return 1;
-      }
-      console.log("");
-      console.log(`  tiddler:   ${tiddler}`);
-      console.log(`  currently: ${bags.join(", ")}`);
-      console.log(`  draft to:  ${toBag ?? "(active wiki draft)"}`);
-      console.log("");
-      const rl = createInterface({ input: stdin, output: stdout });
-      const answer = await rl.question("Proceed? [y/N] ");
-      rl.close();
-      if (answer.trim().toLowerCase() !== "y") {
-        console.log("aborted.");
-        return 0;
-      }
-    }
-
-    const draftArgs: Record<string, string> = { tiddler };
-    if (toBag) draftArgs["toBag"] = toBag;
-
-    const result = await submitVerb(vessel, "draft", draftArgs, did);
-    if (result.status === "error") {
-      const msg = result.errorMessage ?? "unknown";
-      emit(args, {
-        ok: false, requestId: result.requestId, error: msg,
-        human: () => console.error(`draft failed: ${msg}`),
-      });
-      return 6;
-    }
-
-    const r = summaryOutput(result) ?? {};
-    const receiptUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
-    emit(args, {
-      ok: true,
-      requestId: result.requestId,
-      data: { tiddler, fromBag: r["fromBag"] ?? null, toBag: r["toBag"], status: r["status"], receipt: receiptUri },
-      human: () => {
-        console.log(`drafted: ${tiddler}`);
-        console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
-        console.log(`  status: ${r["status"]}`);
-        console.log(`  receipt: ${receiptUri}`);
-      },
-    });
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  if (where.status === "error") {
+    const msg = where.errorMessage ?? "unknown";
+    emit(args, { ok: false, error: msg, human: () => console.error(`recipe-presence query failed: ${msg}`) });
+    return 4;
   }
+  const whereSummary = summaryOutput(where) ?? {};
+  const bags    = (whereSummary["bags"] ?? []) as string[];
+  const primary = whereSummary["primaryBag"] as string | null;
+  if (!primary) {
+    emit(args, {
+      ok: false, error: `tiddler not found in any bag: ${tiddler}`,
+      data: { tiddler },
+      human: () => console.error(`tiddler not found in any bag: ${tiddler}`),
+    });
+    return 5;
+  }
+
+  // The confirmation prompt belongs to the HUMAN/TTY path only — an agent
+  // (JSON / off-TTY) MUST carry intent explicitly via --yes.
+  if (!args.flags["yes"]) {
+    if (wantsJson(args)) {
+      emit(args, {
+        ok: false, error: "confirmation required: pass --yes for non-interactive (agent) invocation",
+        human: () => { /* unreachable on the JSON path */ },
+      });
+      return 1;
+    }
+    console.log("");
+    console.log(`  tiddler:   ${tiddler}`);
+    console.log(`  currently: ${bags.join(", ")}`);
+    console.log(`  draft to:  ${toBag ?? "(active wiki draft)"}`);
+    console.log("");
+    const rl = createInterface({ input: stdin, output: stdout });
+    const answer = await rl.question("Proceed? [y/N] ");
+    rl.close();
+    if (answer.trim().toLowerCase() !== "y") {
+      console.log("aborted.");
+      return 0;
+    }
+  }
+
+  const draftArgs: Record<string, string> = { tiddler };
+  if (toBag) draftArgs["toBag"] = toBag;
+
+  const result = await runVerb("draft", draftArgs, did, connectOpts);
+  if (result.status === "error") {
+    const msg = result.errorMessage ?? "unknown";
+    emit(args, {
+      ok: false, requestId: result.requestId, error: msg,
+      human: () => console.error(`draft failed: ${msg}`),
+    });
+    return 6;
+  }
+
+  const r = summaryOutput(result) ?? {};
+  const receiptUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  emit(args, {
+    ok: true,
+    requestId: result.requestId,
+    data: { tiddler, fromBag: r["fromBag"] ?? null, toBag: r["toBag"], status: r["status"], receipt: receiptUri },
+    human: () => {
+      console.log(`drafted: ${tiddler}`);
+      console.log(`  ${r["fromBag"] ?? "(none)"} → ${r["toBag"]}`);
+      console.log(`  status: ${r["status"]}`);
+      console.log(`  receipt: ${receiptUri}`);
+    },
+  });
+  return 0;
 }

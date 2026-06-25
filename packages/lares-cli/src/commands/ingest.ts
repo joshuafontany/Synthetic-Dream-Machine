@@ -19,7 +19,7 @@ import { createInterface } from "readline/promises";
 import { stdin, stdout } from "process";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit, wantsJson, exitFor } from "../render.js";
-import { connectAdminVessel, summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../admin-connector.js";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngestOn } from "../ingest-core.js";
 
@@ -96,46 +96,40 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares ingest: ${msg}`) });
     return exitFor("not-found");
   }
-  let vessel;
+  // ── submit — UDS fast path, WS fallback (the lares↔lararium binding); one-shot ──
+  let result;
   try {
-    const portOpt = args.options["port"];
-    vessel = await connectAdminVessel(portOpt ? { port: Number(portOpt) } : {});
+    result = await submitIngestOn(null, {
+      source, toBag, candidates, did,
+      inWiki: Boolean(args.flags["in-wiki"]),
+      ...(args.options["change-id"] ? { changeId: args.options["change-id"] } : {}),
+    });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares serve` and try again." }, human: () => { console.error(`lares ingest: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
     return exitFor("daemon-unreachable");
   }
-
-  try {
-    const result = await submitIngestOn(vessel, {
-      source, toBag, candidates, did,
-      inWiki: Boolean(args.flags["in-wiki"]),
-      ...(args.options["change-id"] ? { changeId: args.options["change-id"] } : {}),
-    });
-    if (result.status === "error") {
-      const msg = result.errorMessage ?? "unknown";
-      const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
-      emit(args, { ok: false, requestId: result.requestId, error: { code, message: msg }, human: () => console.error(`INGEST failed: ${msg}`) });
-      return exitFor(code);
-    }
-    const summary = summaryOutput(result) ?? {};
-    const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
-    emit(args, {
-      ok: true,
-      requestId: result.requestId,
-      data: { verb: "INGEST", scanned: rows.length, submitted: candidates.length, ...summary, audit: auditUri },
-      human: () => {
-        console.log(`INGEST ✓ applied locally — ${candidates.length} carrier(s) submitted (req ${result.requestId.slice(0, 8)})`);
-        const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
-        for (const c of carriers) {
-          const extra = c["reason"] ?? (Array.isArray(c["tombstoned"]) && (c["tombstoned"] as unknown[]).length ? `tombstoned ${(c["tombstoned"] as unknown[]).length}` : "");
-          console.log(`  ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}${extra ? `  (${extra})` : ""}`);
-        }
-        console.log(`\n  audit: ${auditUri}`);
-      },
-    });
-    return 0;
-  } finally {
-    await vessel.disconnect();
+  if (result.status === "error") {
+    const msg = result.errorMessage ?? "unknown";
+    const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
+    emit(args, { ok: false, requestId: result.requestId, error: { code, message: msg }, human: () => console.error(`INGEST failed: ${msg}`) });
+    return exitFor(code);
   }
+  const summary = summaryOutput(result) ?? {};
+  const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  emit(args, {
+    ok: true,
+    requestId: result.requestId,
+    data: { verb: "INGEST", scanned: rows.length, submitted: candidates.length, ...summary, audit: auditUri },
+    human: () => {
+      console.log(`INGEST ✓ applied locally — ${candidates.length} carrier(s) submitted (req ${result.requestId.slice(0, 8)})`);
+      const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
+      for (const c of carriers) {
+        const extra = c["reason"] ?? (Array.isArray(c["tombstoned"]) && (c["tombstoned"] as unknown[]).length ? `tombstoned ${(c["tombstoned"] as unknown[]).length}` : "");
+        console.log(`  ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}${extra ? `  (${extra})` : ""}`);
+      }
+      console.log(`\n  audit: ${auditUri}`);
+    },
+  });
+  return 0;
 }

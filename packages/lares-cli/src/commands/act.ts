@@ -38,7 +38,8 @@ import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../admin-connector.js";
+import { runVerb } from "../verb-call.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -188,11 +189,9 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   // raw args; the island reactor reads it and runs the verb through a capturing access.
   if (args.flags["dry-run"]) actionArgs["dry-run"] = true;
 
-  // ── Connect to the admin vessel ───────────────────────────────────────
+  // ── Operator identity ─────────────────────────────────────────────────
   const portOpt = args.options["port"];
-  const connectOpts: Parameters<typeof connectAdminVessel>[0] = portOpt
-    ? { port: Number(portOpt) }
-    : {};
+  const connectOpts = portOpt ? { port: Number(portOpt) } : {};
 
   let did: string;
   try {
@@ -203,9 +202,54 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     return exitFor("not-found");
   }
 
-  let vessel;
+  // ── Confirm (HUMAN/TTY path only; agents carry --yes) ─────────────────
+  // An agent (JSON / off-TTY) cannot answer y/N — it MUST carry intent via --yes;
+  // refusing the prompt keeps the surface non-interactive for unattended actors.
+  if (!args.flags["yes"] && !args.flags["dry-run"]) {
+    if (wantsJson(args)) {
+      emit(args, {
+        ok: false, error: { code: "usage", message: "confirmation required", hint: "pass --yes for non-interactive (agent) invocation" },
+        human: () => { /* unreachable on the JSON path */ },
+      });
+      return exitFor("usage");
+    }
+    console.log("");
+    console.log(`  ${verb}`);
+    for (const [k, v] of Object.entries(actionArgs)) {
+      console.log(`    ${k.padEnd(12)} ${v}`);
+    }
+    console.log("");
+    const rl = createInterface({ input: stdin, output: stdout });
+    const answer = await rl.question("Proceed? [y/N] ");
+    rl.close();
+    if (!/^y(es)?$/i.test(answer.trim())) {
+      console.log("aborted");
+      return 1;
+    }
+  }
+
+  // ── Submit (UDS fast path, WS fallback — the lares↔lararium binding) ───
+  // V1 — content-address this idempotent residency change (empty nonce). The
+  // subject names the bag the change lands in; re-issuing the SAME logical change
+  // (same change-id + verb + target) collapses to one requestId, and the
+  // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
+  // change-id (the --change-id default) means a genuinely distinct change → runs.
+  const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
+  // --in-wiki: run the ACTION IN the active wiki island over ITS composite
+  // (where @working + canon both live) — the admin commands via `wiki-act`,
+  // never reaching the per-fingerprint @working binding (operator ruling B,
+  // 2026-06-19). The default path executes admin-side (write-then-sync).
+  const inWiki     = Boolean(args.flags["in-wiki"]);
+  const submitName = inWiki ? "wiki-act" : verb;
+  const submitArgs = inWiki ? { verb, args: actionArgs } : actionArgs;
+  const requestId = await taskContentId({ subject, command: submitName, args: submitArgs, nonce: "" });
+  // The ACK budget scales with the gesture: a directory-batch LOAD chews
+  // one island frame per carrier — a flat 10s ACK died on the first
+  // 189-carrier corpus feed (2026-06-11) while the verb itself succeeded.
+  const timeoutMs = Math.max(10_000, 10_000 + carrierCount * 400);
+  let result;
   try {
-    vessel = await connectAdminVessel(connectOpts);
+    result = await runVerb(submitName, submitArgs, did, { ...connectOpts, requestId, timeoutMs });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     emit(args, {
@@ -217,89 +261,38 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
     });
     return exitFor("daemon-unreachable");
   }
-
-  // ── Confirm + submit ──────────────────────────────────────────────────
-  try {
-    // The confirmation prompt belongs to the HUMAN/TTY path only. An agent (JSON
-    // / off-TTY) cannot answer y/N — it MUST carry intent explicitly via --yes;
-    // refusing the prompt keeps the surface non-interactive for unattended actors.
-    if (!args.flags["yes"] && !args.flags["dry-run"]) {
-      if (wantsJson(args)) {
-        emit(args, {
-          ok: false, error: { code: "usage", message: "confirmation required", hint: "pass --yes for non-interactive (agent) invocation" },
-          human: () => { /* unreachable on the JSON path */ },
-        });
-        return exitFor("usage");
-      }
-      console.log("");
-      console.log(`  ${verb}`);
-      for (const [k, v] of Object.entries(actionArgs)) {
-        console.log(`    ${k.padEnd(12)} ${v}`);
-      }
-      console.log("");
-      const rl = createInterface({ input: stdin, output: stdout });
-      const answer = await rl.question("Proceed? [y/N] ");
-      rl.close();
-      if (!/^y(es)?$/i.test(answer.trim())) {
-        console.log("aborted");
-        return 1;
-      }
-    }
-
-    // V1 — content-address this idempotent residency change (empty nonce). The
-    // subject names the bag the change lands in; re-issuing the SAME logical change
-    // (same change-id + verb + target) collapses to one requestId, and the
-    // dispatcher's outcome-keyed dedup then gives exactly-once EFFECT. A fresh
-    // change-id (the --change-id default) means a genuinely distinct change → runs.
-    const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
-    // --in-wiki: run the ACTION IN the active wiki island over ITS composite
-    // (where @working + canon both live) — the admin commands via `wiki-act`,
-    // never reaching the per-fingerprint @working binding (operator ruling B,
-    // 2026-06-19). The default path executes admin-side (write-then-sync).
-    const inWiki     = Boolean(args.flags["in-wiki"]);
-    const submitName = inWiki ? "wiki-act" : verb;
-    const submitArgs = inWiki ? { verb, args: actionArgs } : actionArgs;
-    const requestId = await taskContentId({ subject, command: submitName, args: submitArgs, nonce: "" });
-    // The ACK budget scales with the gesture: a directory-batch LOAD chews
-    // one island frame per carrier — a flat 10s ACK died on the first
-    // 189-carrier corpus feed (2026-06-11) while the verb itself succeeded.
-    const timeoutMs = Math.max(10_000, 10_000 + carrierCount * 400);
-    const result = await submitVerb(vessel, submitName, submitArgs, did, { requestId, timeoutMs });
-    if (result.status === "error") {
-      const msg = result.errorMessage ?? "unknown";
-      // The island names a cap/ward denial as `cap-denied: …`; give it its own
-      // class (exit 5) so an agent can tell "I lack authority" from a plain
-      // verb failure. Everything else stays a verb-error (exit 4).
-      const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
-      emit(args, {
-        ok: false, requestId: result.requestId, error: { code, message: msg },
-        human: () => console.error(`${verb} failed: ${msg}`),
-      });
-      return exitFor(code);
-    }
-
-    const summary = summaryOutput(result) ?? {};
-    const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  if (result.status === "error") {
+    const msg = result.errorMessage ?? "unknown";
+    // The island names a cap/ward denial as `cap-denied: …`; give it its own
+    // class (exit 5) so an agent can tell "I lack authority" from a plain
+    // verb failure. Everything else stays a verb-error (exit 4).
+    const code = /^cap-denied/.test(msg) ? "cap-denied" : /conflict/i.test(msg) ? "conflict" : "verb-error";
     emit(args, {
-      ok: true,
-      requestId: result.requestId,
-      data: { verb, ...summary, audit: auditUri },
-      human: () => {
-        if (summary["dryRun"]) {
-          const wl = Array.isArray(summary["wouldLand"]) ? summary["wouldLand"].length : 0;
-          const wt = Array.isArray(summary["wouldTombstone"]) ? summary["wouldTombstone"].length : 0;
-          console.log(`${verb} --dry-run: would land ${wl}, tombstone ${wt} — NOTHING committed (req ${result.requestId.slice(0, 8)})`);
-        } else {
-          console.log(`${verb} ✓ applied locally (req ${result.requestId.slice(0, 8)})`);
-        }
-        for (const [k, v] of Object.entries(summary)) {
-          console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
-        }
-        console.log(`  audit:       ${auditUri}`);
-      },
+      ok: false, requestId: result.requestId, error: { code, message: msg },
+      human: () => console.error(`${verb} failed: ${msg}`),
     });
-    return 0;
-  } finally {
-    await vessel.disconnect();
+    return exitFor(code);
   }
+
+  const summary = summaryOutput(result) ?? {};
+  const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  emit(args, {
+    ok: true,
+    requestId: result.requestId,
+    data: { verb, ...summary, audit: auditUri },
+    human: () => {
+      if (summary["dryRun"]) {
+        const wl = Array.isArray(summary["wouldLand"]) ? summary["wouldLand"].length : 0;
+        const wt = Array.isArray(summary["wouldTombstone"]) ? summary["wouldTombstone"].length : 0;
+        console.log(`${verb} --dry-run: would land ${wl}, tombstone ${wt} — NOTHING committed (req ${result.requestId.slice(0, 8)})`);
+      } else {
+        console.log(`${verb} ✓ applied locally (req ${result.requestId.slice(0, 8)})`);
+      }
+      for (const [k, v] of Object.entries(summary)) {
+        console.log(`  ${k.padEnd(12)} ${typeof v === "string" ? v : JSON.stringify(v)}`);
+      }
+      console.log(`  audit:       ${auditUri}`);
+    },
+  });
+  return 0;
 }

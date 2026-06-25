@@ -18,21 +18,9 @@ import { operatorDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../admin-connector.js";
+import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
-
-
-async function tryConnect() {
-  try {
-    // ONE env contract (env.ts) — the connector derives root/port/bootstrap.
-    return await connectAdminVessel({});
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error(`lares bag: ${msg}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
-    return null;
-  }
-}
 
 /** `lares bag epoch <bag-url>` — DXOS-style snapshot-restart on one bag. */
 export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
@@ -41,28 +29,30 @@ export async function cmdBagEpoch(args: ParsedArgs): Promise<number> {
     console.error("usage: lares bag epoch <bag-url>");
     return 2;
   }
-  const did    = await operatorDid();
-  const vessel = await tryConnect();
-  if (!vessel) return 3;
+  const did = await operatorDid();
+  let r;
   try {
-    const r = await submitVerb(vessel, "bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
-    if (r.status === "error") {
-      console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
-      return 4;
-    }
-    const result = summaryOutput(r) ?? {};
-    console.log("");
-    console.log(`bag epoch: ${result["bagUrl"]}`);
-    console.log(`  old doc:  ${result["oldDocUrl"]}`);
-    console.log(`  new doc:  ${result["newDocUrl"]}`);
-    console.log(`  tiddlers: ${result["tiddlerCount"]}  tombstones: ${result["tombstoneCount"]}`);
-    console.log(`  layer:    ${result["layerSwapped"] ? "swapped in composite" : "not mounted"}`);
-    if (result["note"]) console.log(`  note:     ${result["note"]}`);
-    console.log("");
-    return 0;
-  } finally {
-    await vessel.disconnect();
+    // UDS fast path, WS fallback (the lares↔lararium binding).
+    r = await runVerb("bag-epoch", { bagUrl }, did, { timeoutMs: 30_000 });
+  } catch (err) {
+    console.error(`lares bag: ${err instanceof Error ? err.message : String(err)}`);
+    console.error("  Start the daemon with `lares serve` and try again.");
+    return 3;
   }
+  if (r.status === "error") {
+    console.error(`bag epoch failed: ${r.errorMessage ?? "unknown"}`);
+    return 4;
+  }
+  const result = summaryOutput(r) ?? {};
+  console.log("");
+  console.log(`bag epoch: ${result["bagUrl"]}`);
+  console.log(`  old doc:  ${result["oldDocUrl"]}`);
+  console.log(`  new doc:  ${result["newDocUrl"]}`);
+  console.log(`  tiddlers: ${result["tiddlerCount"]}  tombstones: ${result["tombstoneCount"]}`);
+  console.log(`  layer:    ${result["layerSwapped"] ? "swapped in composite" : "not mounted"}`);
+  if (result["note"]) console.log(`  note:     ${result["note"]}`);
+  console.log("");
+  return 0;
 }
 
 type BagSubcommand = (args: ParsedArgs) => Promise<number>;

@@ -17,21 +17,32 @@
 
 import { operatorDid } from "../env.js";
 import { emit } from "../render.js";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { summaryOutput, type SubmitResult, type SubmitOptions } from "../admin-connector.js";
+import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 type WikiSubcommand = (args: ParsedArgs) => Promise<number>;
 
+// The whole wiki surface runs over the lares↔lararium binding (UDS fast path, WS
+// fallback). Each subcommand keeps its connect+submit shape unchanged: tryConnect
+// is now a no-op handle (no per-command leaf replica) and the local submitVerb
+// routes a one-shot invocation through runVerb, surfacing a transport failure as an
+// error-result so each handler's `r.status === "error"` path reports it.
+async function tryConnect(): Promise<{ disconnect: () => Promise<void> }> {
+  return { disconnect: async () => { /* one-shot — nothing to close */ } };
+}
 
-async function tryConnect() {
+async function submitVerb(
+  _vessel: { disconnect: () => Promise<void> },
+  name:    string,
+  args:    Record<string, unknown>,
+  did:     string,
+  opts:    SubmitOptions = {},
+): Promise<SubmitResult> {
   try {
-    // ONE env contract (env.ts) — the connector derives root/port/bootstrap.
-    return await connectAdminVessel({});
+    return await runVerb(name, args, did, opts);
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error(`lares wiki: ${msg}`);
-    console.error("  Start the daemon with `lares serve` and try again.");
-    return null;
+    return { status: "error", requestId: "", errorMessage: err instanceof Error ? err.message : String(err) };
   }
 }
 

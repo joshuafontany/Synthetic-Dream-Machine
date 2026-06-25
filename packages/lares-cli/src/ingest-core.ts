@@ -25,6 +25,7 @@ import {
   type AdminVesselHandle,
   type SubmitResult,
 } from "./admin-connector.js";
+import { runVerb } from "./verb-call.js";
 
 export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted";
 
@@ -183,7 +184,9 @@ export interface SubmitIngestOpts {
  * gesture; the watcher holds one open across every wave of its lifetime.
  */
 export async function submitIngestOn(
-  vessel: AdminVesselHandle,
+  // A persistent vessel (the watcher holds one across waves) → WS. `null` (the
+  // one-shot `lares ingest`) → the UDS fast path via runVerb. Same summons either way.
+  vessel: AdminVesselHandle | null,
   opts:   SubmitIngestOpts,
 ): Promise<SubmitResult> {
   const changeId = opts.changeId ?? newChangeId();
@@ -205,5 +208,7 @@ export async function submitIngestOn(
   const submitArgs = opts.inWiki ? { verb: "INGEST", args: actionArgs } : actionArgs;
   const requestId = await taskContentId({ subject: opts.toBag, command: submitName, args: submitArgs, nonce: "" });
   const timeoutMs = Math.max(10_000, 10_000 + (opts.candidates.length + deletions.length) * 400);
-  return await submitVerb(vessel, submitName, submitArgs, opts.did, { requestId, timeoutMs });
+  return vessel
+    ? await submitVerb(vessel, submitName, submitArgs, opts.did, { requestId, timeoutMs })
+    : await runVerb(submitName, submitArgs, opts.did, { requestId, timeoutMs });
 }
