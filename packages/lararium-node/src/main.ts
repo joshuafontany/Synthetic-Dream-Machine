@@ -30,6 +30,7 @@ import { createServer }  from "http";
 import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { openNodeVessel }               from "./open-node-vessel.js";
+import { startUdsChannel }              from "./uds-channel.js";
 import { join } from "path";
 import { REPO_ROOT }   from "./node-host.js";
 
@@ -118,8 +119,19 @@ async function main(): Promise<void> {
   console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);
   console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
+  // Co-located fast path: a Unix-domain verb-channel for the local `lares` CLI —
+  // no per-command leaf replica / WS handshake. The WS relay above stays the path
+  // for remote mesh peers. (lar:///…/api/lares-lararium-binding)
+  const socketPath = join(storageDir, "lares.sock");
+  const uds = startUdsChannel({
+    adminHandle: result.admin.adminHandle,
+    socketPath,
+    onLog: (line) => console.log(`[lararium] ${line}`),
+  });
+
   const shutdown = () => {
     console.log("[lararium] shutting down");
+    uds.close();
     result.admin.dispose();
     httpServer.close();
     process.exit(0);

@@ -73,21 +73,19 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
   // silently — `lares status` stays cheap and never errors.
   if (portInUse) {
     try {
-      const { connectAdminVessel, submitVerb, summaryOutput } = await import("../admin-connector.js");
-      const vessel = await connectAdminVessel({});
-      try {
-        const r = await submitVerb(vessel, "residency", {}, "lares-status", { timeoutMs: 2000 });
-        if (r.status === "done") {
-          const stats   = summaryOutput(r) ?? {};
-          const pinned  = (stats["pinned"] ?? []) as string[];
-          const wela    = (stats["wela"]   ?? []) as Array<{ url: string }>;
-          const anuCnt  = stats["anuCount"] as number;
-          const hotCap  = stats["hotCap"]   as number;
-          data["residency"] = { pinned: pinned.length, wela: wela.length, hotCap, anu: anuCnt };
-          residencyLine = `${pinned.length} pinned · ${wela.length}/${hotCap} wela · ${anuCnt} anu`;
-        }
-      } finally {
-        await vessel.disconnect();
+      const { summaryOutput } = await import("../admin-connector.js");
+      const { runVerb } = await import("../verb-call.js");
+      // UDS fast path, WS fallback (the lares↔lararium binding). Cheap probe;
+      // any failure falls through silently — `lares status` never errors.
+      const r = await runVerb("residency", {}, "lares-status", { timeoutMs: 2000 });
+      if (r.status === "done") {
+        const stats   = summaryOutput(r) ?? {};
+        const pinned  = (stats["pinned"] ?? []) as string[];
+        const wela    = (stats["wela"]   ?? []) as Array<{ url: string }>;
+        const anuCnt  = stats["anuCount"] as number;
+        const hotCap  = stats["hotCap"]   as number;
+        data["residency"] = { pinned: pinned.length, wela: wela.length, hotCap, anu: anuCnt };
+        residencyLine = `${pinned.length} pinned · ${wela.length}/${hotCap} wela · ${anuCnt} anu`;
       }
     } catch {
       // Daemon up but residency probe failed — quiet.

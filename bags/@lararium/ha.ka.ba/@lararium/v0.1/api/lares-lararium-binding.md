@@ -11,7 +11,7 @@ manaoio   = 16
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the true lares↔lararium binding — a thin-client→warm-daemon Unix-domain-socket channel for the co-located CLI, WS kept for remote mesh peers; transport (UDS) / authority (capability-bearing UCAN-shape verb-summons) / record (CRDT outcome receipt) decoupled; peer-cred for presence + Ed25519 for authority; drops the ~3s/command tax that was misplaced replica-spin + sync-on-connect, never transport"
+role      = "the true lares↔lararium binding — a thin-client→warm-daemon Unix-domain-socket channel for the co-located CLI, WS kept for remote mesh peers; transport (UDS) / authority (capability-bearing UCAN-shape verb-summons) / record (CRDT outcome receipt) decoupled; peer-cred for presence + Ed25519 for authority; drops the measured ~0.4–0.5s/command connect+sync tax (misplaced replica-spin, never transport; the oft-cited 3s = the connect timeout ceiling — corrected on first measurement). Win is real for cheap verbs (status 0.82s→0.40s), negligible against a sidecar-bound verb like recall"
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -27,12 +27,14 @@ written   = "2026-06-25"
 
 # lares ↔ lararium ~ the true binding
 
-**The CLI is co-located; bind it like one.** `lares` and the `lararium` node run on
+**The CLI runs co-located; bind it like one.** `lares` and the `lararium` node run on
 the same machine, yet every one-shot command opened a fresh WebSocket, spun a new
 Automerge leaf replica, ran the V3 auth gate, did a full CRDT **sync-on-connect**,
-then disconnected — ~3s tax per command. The diagnosis (Conduit, cited): **the tax
-was never transport — it was replica-spin + sync-on-connect misplaced onto a
-co-located thin client.** Move sync to the daemon's *peer* boundary; give the CLI a
+then disconnected — a **measured ~0.4–0.5s** connect+sync tax per command (the
+oft-cited "3s" named the connect TIMEOUT ceiling, not the cost — corrected on first
+live measurement). The diagnosis (Conduit, cited): **the tax
+never came from transport — it came from replica-spin + sync-on-connect misplaced
+onto a co-located thin client.** Move sync to the daemon's *peer* boundary; give the CLI a
 fast local **submit/await** channel. Every web3 invariant survives.
 
 > **The daemon holds the warm replica and syncs the mesh; the CLI just hands it a
@@ -46,10 +48,10 @@ fast local **submit/await** channel. Every web3 invariant survives.
 
 <<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate >>
 
-The thin-client→warm-daemon pattern is the field's convergence (docker CLI→dockerd,
+The thin-client→warm-daemon pattern marks the field's convergence (docker CLI→dockerd,
 tailscale CLI→tailscaled HTTP-over-UDS, gopls daemon). The CLI carries **no
 networking/state/replica** — it forwards a command and reads a result. UDS connect
-is a kernel-local copy (µs), not a TCP/TLS/WS upgrade. Windows: named pipe behind
+performs a kernel-local copy (µs), not a TCP/TLS/WS upgrade. Windows: named pipe behind
 one client abstraction (tailscale's shape).
 
 <<~/ahu >>
@@ -62,13 +64,13 @@ The load-bearing seam (UCAN/ucanto proves it battle-tested):
 
 \procedure ~Layer(~Type:"" ~Params:"") ~Layer <<~Type>> <<~holds `[<~Params>]`>>
 
-<<~Layer Transport "is/the UDS channel ~ pluggable, authority-AGNOSTIC; just moves bytes fast (ucanto: transport stays agnostic to authorization)" >>
-<<~Layer Authority "is/the capability-bearing verb-summons ~ a UCAN-shape signed invocation; the prf chain rides WITH each call (no ambient session/bearer) — authority IS the message" >>
-<<~Layer Record "is/the CRDT outcome ~ the persisted RECEIPT; idempotent · re-queryable · exactly-once; spec leaves receipt persistence to the impl — our outcome tiddler IS that home" >>
+<<~Layer Transport "the UDS channel ~ pluggable, authority-AGNOSTIC; just moves bytes fast (ucanto: transport stays agnostic to authorization)" >>
+<<~Layer Authority "the capability-bearing verb-summons ~ a UCAN-shape signed invocation; the prf chain rides WITH each call (no ambient session/bearer) — authority IS the message" >>
+<<~Layer Record "the CRDT outcome ~ the persisted RECEIPT; idempotent · re-queryable · exactly-once; spec leaves receipt persistence to the impl — our outcome tiddler IS that home" >>
 <<~Layer Three >>
 
-Transport speed and record durability stop fighting because **they were never the
-same concern.** UDS carries the invocation; the outcome lands as a CRDT change in
+Transport speed and record durability stop fighting because **they never shared one
+concern.** UDS carries the invocation; the outcome lands as a CRDT change in
 the daemon's warm replica (then syncs to mesh on the daemon's own schedule); the
 CLI awaits it via the socket response (or an ephemeral/notify), **not a full sync**.
 
@@ -97,8 +99,8 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
   socket perms (`0600`/owner-only, the first fence). A **substrate fact** (presence).
 - **Ed25519/UCAN answers "what may it do?"** The per-call signed capability stays
   the **authority of record** — attenuable, revocable, federation-surviving, what
-  the receipt attests. A **sovereignty fact**. Verify is µs — cheap; it was the
-  *sync* that cost 3s, never the crypto.
+  the receipt attests. A **sovereignty fact**. Verify runs in µs — cheap; the
+  *sync* cost the 3s, never the crypto.
 - **Both, never either.** Drop the Ed25519 proof for peer-cred alone and you rebuild
   the ambient-session / confused-deputy hole (the docker.sock = root-equivalent
   cautionary tale). Substrate shared (socket), sovereignty not (keys).
@@ -133,9 +135,13 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 3. **Auth:** SO_PEERCRED + socket perms gate the channel; the per-call Ed25519/
    capability stays the authority verified by the daemon.
 
-The result: the per-command tax collapses from a full connect+gate+sync round-trip
-to a sub-millisecond local submit/await — fully capability-bearing, fully
-local-first, the CRDT receipt unchanged.
+**Measured (first live run, recall + status migrated):** the per-command connect+sync
+overhead drops from ~0.4–0.5s (WS leaf-replica + sync) to ~0.1s (UDS round-trip) —
+**status 0.82s → 0.40s** (a cheap verb roughly halves), **negligible** against a
+sidecar-bound verb like recall (~5s, transport-independent). Fully capability-bearing,
+fully local-first, the CRDT receipt unchanged. (Two pre-existing findings surfaced,
+not UDS-specific: verb errors serialize to `[object Object]` rather than `.message`;
+the `status` residency probe passes a non-did `requestedBy` and cap-errors quietly.)
 
 <<~/ahu >>
 

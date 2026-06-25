@@ -1,0 +1,144 @@
+/**
+ * uds-channel — the co-located fast path of the lares↔lararium binding.
+ *
+ * The daemon already holds the WARM admin replica and the worker VerbDispatcher.
+ * A co-located `lares` CLI never needed its own leaf replica + sync-on-connect (the
+ * ~3s/command tax) — it only needs to hand the daemon a capability-bearing
+ * invocation and await the receipt. This Unix-domain socket carries exactly that:
+ * the CLI writes one invocation line, the daemon writes the summons into its warm
+ * admin doc (the SAME tiddler the worker reacts to from a WS peer), awaits the
+ * durable @admin/outcomes/<id> receipt, and returns it over the socket.
+ *
+ *   transport  = this socket (kernel-local, authority-agnostic)
+ *   authority  = the invocation's requestedBy → the worker's verify-then-delegate
+ *   record     = the CRDT outcome tiddler (unchanged — idempotent, re-queryable)
+ *
+ * Auth (v1): socket perms 0600 (owner-only) gate PRESENCE — only the operator's own
+ * uid opens it; the requestedBy did rides the summons for cap-derivation. A signed
+ * Ed25519 proof over the socket is the federation/attenuation hardening (follow-on);
+ * the WS path keeps the full V3 gate for genuine remote peers.
+ * See lar:///ha.ka.ba/@lararium/v0.1/api/lares-lararium-binding.
+ */
+
+import { createServer, type Server } from "node:net";
+import { existsSync, unlinkSync, chmodSync } from "node:fs";
+import type { DocHandle } from "@automerge/automerge-repo";
+import {
+  ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
+  summon, OUTCOME_URI_PREFIX, type LarDoc,
+} from "@lararium/mesh";
+
+export interface UdsChannelOptions {
+  /** The daemon's warm admin doc handle (result.admin.adminHandle). */
+  readonly adminHandle: DocHandle<LarDoc>;
+  /** Socket path — both sides agree on <dataDir>/lares.sock via the env contract. */
+  readonly socketPath: string;
+  /** Per-verb await budget (default 30s — recall cold-starts chromadb). */
+  readonly timeoutMs?: number;
+  readonly onLog?: (line: string) => void;
+}
+
+interface Invocation {
+  verb: string;
+  args?: Record<string, unknown>;
+  requestedBy: string;
+  requestId?: string;
+}
+
+export interface UdsChannel { close: () => void; }
+
+export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
+  const { adminHandle, socketPath } = opts;
+  const timeoutMs = opts.timeoutMs ?? 30_000;
+  const log = opts.onLog ?? (() => { /* quiet */ });
+
+  // Stale-socket cleanup — bind fails on a leftover path (daemon crash / restart).
+  try { if (existsSync(socketPath)) unlinkSync(socketPath); } catch { /* ignore */ }
+
+  // One writable composite over the warm admin handle — same shape the CLI leaf
+  // builds, but against the daemon's own replica (no Repo, no sync).
+  const composite = new CompositeStore();
+  composite.addLayer({
+    bagId:    ADMIN_BAG_ID,
+    store:    new AutomergeDocStore(adminHandle, ADMIN_BAG_ID),
+    writable: true,
+  });
+
+  // Write the summons into the warm admin doc; await the durable outcome via the
+  // doc's own change event (the worker dispatches + writes it back). Mirrors the
+  // CLI submitVerb body — minus the network.
+  const runVerb = async (inv: Invocation): Promise<Record<string, unknown>> => {
+    const summonsRecord = summon({
+      verb:        inv.verb,
+      args:        inv.args ?? {},
+      requestedBy: inv.requestedBy,
+      ...(inv.requestId ? { requestId: inv.requestId } : {}),
+    });
+    const requestId    = (summonsRecord.tiddler as Record<string, string>)["request-id"]!;
+    const outcomeTitle = `${OUTCOME_URI_PREFIX}${requestId}`;
+
+    await composite.put(summonsRecord, { kind: "operator-import", sessionId: `lares-uds-${requestId}` });
+
+    const readOutcome = async (): Promise<Record<string, unknown> | null> => {
+      const event = await composite.get(outcomeTitle);
+      if (!event || event.meta?.deleted) return null;
+      const fields = event.tiddler as Record<string, string>;
+      const status = fields["status"];
+      if (status !== "done" && status !== "error") return null;
+      let results: unknown;
+      if (typeof fields["results"] === "string" && fields["results"].length > 0) {
+        try { results = JSON.parse(fields["results"]); } catch { /* malformed — leave */ }
+      }
+      return {
+        status, requestId,
+        ...(results !== undefined ? { results } : {}),
+        ...(fields["error-message"] !== undefined ? { errorMessage: fields["error-message"] } : {}),
+      };
+    };
+
+    return await new Promise<Record<string, unknown>>((resolve, reject) => {
+      let settled = false;
+      const settle = (fn: () => void) => { if (!settled) { settled = true; cleanup(); fn(); } };
+      const check = () => { void readOutcome().then((r) => { if (r) settle(() => resolve(r)); }); };
+      const onChange = () => check();
+      adminHandle.on("change", onChange);
+      const timer = setTimeout(() => settle(() => reject(new Error(`verb "${inv.verb}" timed out after ${timeoutMs}ms`))), timeoutMs);
+      const cleanup = () => { adminHandle.off("change", onChange); clearTimeout(timer); };
+      check(); // the outcome may already exist (idempotent re-submission)
+    });
+  };
+
+  const server: Server = createServer((sock) => {
+    let buf = "";
+    sock.setEncoding("utf8");
+    const fail = (msg: string) => { try { sock.end(JSON.stringify({ status: "error", errorMessage: msg }) + "\n"); } catch { /* gone */ } };
+    sock.on("data", (chunk: string) => {
+      buf += chunk;
+      const nl = buf.indexOf("\n");
+      if (nl === -1) return;          // one invocation per connection, line-delimited
+      const line = buf.slice(0, nl);
+      buf = "";
+      let inv: Invocation;
+      try { inv = JSON.parse(line) as Invocation; } catch { return fail("bad invocation json"); }
+      if (!inv.verb || !inv.requestedBy) return fail("verb + requestedBy required");
+      runVerb(inv).then(
+        (outcome) => { try { sock.end(JSON.stringify(outcome) + "\n"); } catch { /* gone */ } },
+        (err)     => fail(err instanceof Error ? err.message : String(err)),
+      );
+    });
+    sock.on("error", () => { /* client vanished mid-call — nothing to do */ });
+  });
+
+  server.on("error", (e) => log(`uds error: ${e instanceof Error ? e.message : String(e)}`));
+  server.listen(socketPath, () => {
+    try { chmodSync(socketPath, 0o600); } catch { /* best effort — perms gate presence */ }
+    log(`uds verb-channel on ${socketPath} (perms 0600)`);
+  });
+
+  return {
+    close: () => {
+      try { server.close(); } catch { /* ignore */ }
+      try { if (existsSync(socketPath)) unlinkSync(socketPath); } catch { /* ignore */ }
+    },
+  };
+}
