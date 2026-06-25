@@ -209,7 +209,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           const incoming = await loadGenesisIslandFromBytes(repo, genesisBytes);
           if (bootKeys.storedIslandUrl) {
             const live = await findGenesisIsland(repo, bootKeys.storedIslandUrl);
-            if (live) { const r = await reconcileGenesisUpdate(live, incoming, genesisBytes); engineUpdated = r.updated; islandHandle = live; }
+            if (live) { const r = await reconcileGenesisUpdate(live, incoming); engineUpdated = r.updated; islandHandle = live; }
             else islandHandle = incoming;
           } else {
             islandHandle = incoming;

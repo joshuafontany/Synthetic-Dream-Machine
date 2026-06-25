@@ -17,7 +17,7 @@ import {
   save   as automergeSave,
   load   as automergeLoad,
 } from "@automerge/automerge";
-import { cidV1Sha256, sha256HexBytesSync } from "./crypto.js";
+import { cidV1Sha256, sha256HexBytesSync, utf8Bytes } from "./crypto.js";
 import {
   ORACLE_DOC_URI,
   LARARIUM_DOC_URI,
@@ -115,15 +115,53 @@ export interface GenesisInputs {
  * GenesisArtifact — output of buildGenesisDoc().
  *
  * bytes: the final island.bin content.
- * sha256: hex hash of the final bytes.
- * cid: CIDv1 raw-sha256 of the final bytes.
- * preSha256: hash of the pre-CID-injection bytes (verifiable without fixpoint).
+ * sha256: hex hash of the final bytes (forward integrity over the finished doc).
+ * cid: CIDv1 raw-sha256 of the final bytes (forward integrity).
+ * engineCid: content-CID of the engine region (TW5 core + version) — the hearth
+ *   TRUE-NAME (G-D3) and the SLOW ratchet. A pure function of inputs, never of doc bytes.
+ * pluginsCid: content-CID of the plugins region (sorted plugin id/version/sha256) —
+ *   the FAST ratchet. A plugin-only change bumps this, leaving engineCid stable.
+ *
+ * The two region CIDs are INPUTS (content functions), not derived from the saved
+ * bytes — so the witness tiddlers carry them in a SINGLE write pass. No self-referential
+ * fixpoint: the old "strip the genesis-cid tiddler → hash === preSha256" dance is gone.
  */
 export interface GenesisArtifact {
   readonly bytes:      Uint8Array;
   readonly sha256:     string;
   readonly cid:        string;
-  readonly preSha256:  string;
+  readonly engineCid:  string;
+  readonly pluginsCid: string;
+}
+
+// ---------------------------------------------------------------------------
+// Region content-CIDs (G-D2: one doc, two ratchets; G-D3: engineCid = true-name)
+// ---------------------------------------------------------------------------
+
+/** The two genesis witness tiddlers — one per ratchet region, both in the @oracle plane. */
+export const GENESIS_CID_ENGINE_TIDDLER  = `${ORACLE_DOC_URI}/genesis-cid-engine`;
+export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugins`;
+
+/**
+ * engineCid — content-CID of the engine region. A pure function of the TW5 core
+ * version + its sha256 (which binds the core blob); deterministic, no doc bytes.
+ * This IS the hearth true-name (G-D3) — a plugin change must NEVER perturb it.
+ */
+export function computeEngineCid(coreVersion: string, coreSha256: string): string {
+  return cidV1Sha256(utf8Bytes(`engine/v1\ncore-version:${coreVersion}\ncore-sha256:${coreSha256}`));
+}
+
+/**
+ * pluginsCid — content-CID of the plugins region: the sorted {id,version,sha256}
+ * triples, canonical-JSON. Sorted by id so plugin write-order never perturbs it.
+ */
+export function computePluginsCid(
+  plugins: readonly { readonly id: string; readonly version: string; readonly sha256: string }[],
+): string {
+  const triples = plugins
+    .map((p) => ({ id: p.id, version: p.version, sha256: p.sha256 }))
+    .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+  return cidV1Sha256(utf8Bytes(`plugins/v1\n${JSON.stringify(triples)}`));
 }
 
 // ---------------------------------------------------------------------------
@@ -155,7 +193,7 @@ const ROOT_BAGS = [
  *   2. Write schema, blobs (core + plugins), systemTitles.
  *   3. Write recipe and bag descriptor tiddlers.
  *   4. Write blob descriptor tiddlers.
- *   5. Two-pass CID injection.
+ *   5. Witness the two region content-CIDs (engine + plugins, single pass).
  *   6. Return artifact.
  */
 export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
@@ -289,43 +327,44 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     }
   });
 
-  // 6. Two-pass CID injection.
+  // 6. Witness the two region content-CIDs in a SINGLE pass.
   //
-  //   Pass 1: serialize without the self-ref tiddler → preSha256.
-  //   Pass 2: inject genesis-cid tiddler with witness CID → final bytes.
-  //
-  //   Invariant: strip genesis-cid tiddler → hash result === preSha256.
-  const preBytes   = automergeSave(doc);
-  const preSha256  = sha256HexBytesSync(preBytes);
+  //   The region CIDs are pure functions of the INPUTS (engine: core version + sha;
+  //   plugins: sorted id/version/sha256), never of the saved bytes — so they carry
+  //   their real values on first write. No placeholder, no two-pass fixpoint.
+  //   engineCid = the hearth true-name (slow ratchet); pluginsCid = the fast ratchet.
+  const engineCid  = computeEngineCid(coreVersion, coreSha);
+  const pluginsCid = computePluginsCid(inputs.plugins);
 
-  const GENESIS_CID_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid`;
   doc = automergeChange(doc, { time: 0 }, d => {
-    (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] = {
+    const t = d.tiddlers as Record<string, unknown>;
+    t[GENESIS_CID_ENGINE_TIDDLER] = {
       tiddler: {
-        title: GENESIS_CID_TIDDLER,
+        title: GENESIS_CID_ENGINE_TIDDLER,
         text:  "",
-        cid:   "",
-        note:  "genesis CID placeholder until island.bin is finalized",
+        cid:   engineCid,
+        note:  "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
+        "origin-bag": ORACLE_DOC_URI,
+      },
+      meta: { authority: "genesis" },
+    };
+    t[GENESIS_CID_PLUGINS_TIDDLER] = {
+      tiddler: {
+        title: GENESIS_CID_PLUGINS_TIDDLER,
+        text:  "",
+        cid:   pluginsCid,
+        note:  "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
         "origin-bag": ORACLE_DOC_URI,
       },
       meta: { authority: "genesis" },
     };
   });
 
-  const witnessBytes = automergeSave(doc);
-  const witnessCid   = cidV1Sha256(witnessBytes);
-
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const prior = (d.tiddlers as Record<string, unknown>)[GENESIS_CID_TIDDLER] as { tiddler: Record<string, unknown> };
-    prior.tiddler["cid"]  = witnessCid;
-    prior.tiddler["note"] = "CIDv1 raw SHA-256 witness from the first post-placeholder genesis serialization";
-  });
-
   const bytes  = automergeSave(doc);
   const sha256 = sha256HexBytesSync(bytes);
   const cid    = cidV1Sha256(bytes);
 
-  return { bytes, sha256, cid, preSha256 };
+  return { bytes, sha256, cid, engineCid, pluginsCid };
 }
 
 // ---------------------------------------------------------------------------
@@ -333,7 +372,10 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
 // ---------------------------------------------------------------------------
 
 /**
- * verifyGenesisArtifact() — reload and assert core blob + CID tiddler present.
+ * verifyGenesisArtifact() — reload and assert the core blob + BOTH region witness
+ * tiddlers present, then RECOMPUTE each region content-CID from the reloaded content
+ * and assert it matches the witness AND the artifact. A content-CID is a pure function
+ * of inputs, so a mismatch names a corrupt or tampered artifact — never a fixpoint wobble.
  *
  * Throws on failure. Returns tiddler/blob counts for diagnostics.
  * Platform-neutral — uses automergeLoad from mesh.
@@ -341,23 +383,36 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
 export function verifyGenesisArtifact(
   artifact: GenesisArtifact,
 ): { blobCount: number; tiddlerCount: number } {
-  const GENESIS_CID_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid`;
   const doc = automergeLoad<LarDoc>(artifact.bytes);
 
-  if (!doc.blobs?.[ENGINE_CORE_ID]) {
+  const core = doc.blobs?.[ENGINE_CORE_ID];
+  if (!core) {
     throw new Error("[genesis] verify FAILED: TW5 core blob not found after reload");
   }
 
-  // The two-pass injection stores the witnessCid (CID of bytes before final CID write).
-  // The final artifact.cid differs because writing witnessCid into the doc changes the bytes.
-  // Invariant: storedCid is non-empty (injection ran) and is a valid CIDv1 string.
-  const storedCid = (
-    doc.tiddlers?.[GENESIS_CID_TIDDLER] as { tiddler?: { cid?: string } } | undefined
-  )?.tiddler?.cid;
+  const readWitness = (title: string): string => {
+    const cid = (doc.tiddlers?.[title] as { tiddler?: { cid?: string } } | undefined)?.tiddler?.cid;
+    if (!cid || cid.length < 10) {
+      throw new Error(`[genesis] verify FAILED: witness tiddler ${title} absent or empty — stored=${cid}`);
+    }
+    return cid;
+  };
+  const storedEngineCid  = readWitness(GENESIS_CID_ENGINE_TIDDLER);
+  const storedPluginsCid = readWitness(GENESIS_CID_PLUGINS_TIDDLER);
 
-  if (!storedCid || storedCid === "PLACEHOLDER" || storedCid.length < 10) {
+  const recomputedEngineCid = computeEngineCid(core.version, core.sha256);
+  if (recomputedEngineCid !== storedEngineCid || recomputedEngineCid !== artifact.engineCid) {
     throw new Error(
-      `[genesis] verify FAILED: genesis-cid tiddler absent or uninjected — stored=${storedCid}`,
+      `[genesis] verify FAILED: engineCid (hearth true-name) mismatch — ` +
+      `recomputed=${recomputedEngineCid} stored=${storedEngineCid} artifact=${artifact.engineCid}`,
+    );
+  }
+  const pluginEntries = Object.values(doc.blobs ?? {}).filter((b) => b.id !== ENGINE_CORE_ID);
+  const recomputedPluginsCid = computePluginsCid(pluginEntries);
+  if (recomputedPluginsCid !== storedPluginsCid || recomputedPluginsCid !== artifact.pluginsCid) {
+    throw new Error(
+      `[genesis] verify FAILED: pluginsCid mismatch — ` +
+      `recomputed=${recomputedPluginsCid} stored=${storedPluginsCid} artifact=${artifact.pluginsCid}`,
     );
   }
 

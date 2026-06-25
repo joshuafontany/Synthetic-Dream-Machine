@@ -38,12 +38,16 @@ import {
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
-function genesisArtifactPaths(genesisDir?: string): { bin: string; sha: string; cid: string } {
+function genesisArtifactPaths(genesisDir?: string): {
+  bin: string; sha: string; cid: string; cidEngine: string; cidPlugins: string;
+} {
   const root = genesisDir ?? DEFAULT_GENESIS_DIR;
   return {
     bin: join(root, "island.bin"),
     sha: join(root, "island.sha256"),
-    cid: join(root, "island.cid"),
+    cid: join(root, "island.cid"),            // whole-doc forward CID (integrity)
+    cidEngine:  join(root, "island.cid-engine"),   // engine content-CID = the hearth true-name
+    cidPlugins: join(root, "island.cid-plugins"),  // plugins content-CID = the fast ratchet
   };
 }
 
@@ -97,22 +101,60 @@ export function GENESIS_CID(genesisDir?: string): string | undefined {
 }
 
 // ---------------------------------------------------------------------------
+// Region content-CIDs (G-D2 two ratchets; G-D3 engineCid = the hearth true-name).
+// ---------------------------------------------------------------------------
+
+function readSidecar(path: string): string | undefined {
+  try {
+    const t = readFileSync(path, "utf8").trim();
+    if (t) return t;
+  } catch { /* sidecar absent */ }
+  return undefined;
+}
+
+export function readGenesisEngineCid(genesisDir?: string): string | undefined {
+  return readSidecar(genesisArtifactPaths(genesisDir).cidEngine);
+}
+export function readGenesisPluginsCid(genesisDir?: string): string | undefined {
+  return readSidecar(genesisArtifactPaths(genesisDir).cidPlugins);
+}
+
+const _engineCid  = new Map<string, string | undefined>();
+const _pluginsCid = new Map<string, string | undefined>();
+
+/** The engine content-CID (slow ratchet) — the hearth's stable true-name (G-D3). */
+export function GENESIS_ENGINE_CID(genesisDir?: string): string | undefined {
+  const key = genesisDir ?? DEFAULT_GENESIS_DIR;
+  if (!_engineCid.has(key)) _engineCid.set(key, readGenesisEngineCid(genesisDir));
+  return _engineCid.get(key);
+}
+/** The plugins content-CID (fast ratchet) — a per-operator composition, never the true-name. */
+export function GENESIS_PLUGINS_CID(genesisDir?: string): string | undefined {
+  const key = genesisDir ?? DEFAULT_GENESIS_DIR;
+  if (!_pluginsCid.has(key)) _pluginsCid.set(key, readGenesisPluginsCid(genesisDir));
+  return _pluginsCid.get(key);
+}
+
+// ---------------------------------------------------------------------------
 // hearthTrueName — the hearth's PUBLIC true-name (the place's public face).
 // ---------------------------------------------------------------------------
 //
 // The hearth wears two faces, never fused (lar:///ha.ka.ba/@lares/v0.1/api/pono/
 // lararium-identity#head). The PUBLIC face = the content-address of the place's
-// grammar (the genesis CID, sha256(engine+memes+plugins)) — shared DreamNet-wide,
-// ratcheting by engine-epoch, checked into git, holding NO secret. The PRIVATE
-// face = a secret root minted per-founding (node-vessel-identity, gitignored), NEVER derived
-// from this public content. This accessor surfaces the public face ONLY.
+// GRAMMAR — the engine content-CID ALONE (G-D3), the TW5 core + version, NOT the
+// plugins. Plugins compose per-operator (DreamNet-offered) and ride their own fast
+// ratchet, so a plugin change MUST NEVER perturb the true-name. The engine face is
+// shared DreamNet-wide, ratchets by engine-epoch, checked into git, holds NO secret.
+// The PRIVATE face = a secret root minted per-founding (node-vessel-identity,
+// gitignored), NEVER derived from this public content. This accessor surfaces the
+// public engine face ONLY.
 //
 // Under capability-is-identity + petnames (#capability-and-petnames), this is the
 // hearth's canonical STABLE petname — a content-addressed name for "which grammar/
 // lineage this place speaks," legible across the mesh with no registry. It returns
-// `undefined` when the genesis artifact is absent (mirrors GENESIS_CID).
+// `undefined` when the genesis artifact is absent (mirrors GENESIS_ENGINE_CID).
 export function hearthTrueName(genesisDir?: string): string | undefined {
-  return GENESIS_CID(genesisDir);
+  return GENESIS_ENGINE_CID(genesisDir);
 }
 
 // ---------------------------------------------------------------------------
@@ -133,18 +175,14 @@ export async function reconcileIslandFromGenesis(
   genesisHandle: DocHandle<LarDoc>,
   genesisDir?: string,
 ): Promise<void> {
-  // Node derives the expected CID from the artifact sidecars; the compare,
-  // merge, and cid-record write ride the one core (genesis-intake).
-  const expectedCid = GENESIS_CID(genesisDir);
-  if (!expectedCid) {
-    console.warn("[genesis-artifact] reconcile: genesis CID unavailable — skipping reconcile");
-    return;
-  }
+  // The expected region CIDs ride the incoming genesis doc's own witness tiddlers
+  // now (engine + plugins); the compare, merge, and cid-record write ride the one
+  // core (genesis-intake). No sidecar lookup needed for the reconcile.
   if (!genesisHandle.doc()) {
     console.warn("[genesis-artifact] reconcile: genesisHandle.doc() null — skipping");
     return;
   }
-  const r = reconcileGenesisCid(handle, genesisHandle, expectedCid);
+  const r = reconcileGenesisCid(handle, genesisHandle);
   if (!r.updated) console.log("[genesis-artifact] reconcile: live doc current — no merge needed");
 }
 

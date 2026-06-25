@@ -212,23 +212,27 @@ function main(): void {
     plugins,
   };
   const artifact = buildGenesisDoc(inputs);
-  console.log(`[genesis] sha256-pre = ${artifact.preSha256}`);
+  console.log(`[genesis] engineCid (true-name) = ${artifact.engineCid}`);
+  console.log(`[genesis] pluginsCid            = ${artifact.pluginsCid}`);
 
-  // Verify integrity before writing.
+  // Verify integrity before writing (recomputes + matches both region CIDs).
   const counts = verifyGenesisArtifact(artifact);
 
-  // Layer C: write outputs.
+  // Layer C: write outputs. Two region sidecars (engine = the true-name, slow ratchet;
+  // plugins = fast ratchet) alongside the whole-doc forward integrity sidecars.
   mkdirSync(genesisDir, { recursive: true });
-  writeFileSync(join(genesisDir, "island.bin"),        artifact.bytes);
-  writeFileSync(join(genesisDir, "island.sha256"),     artifact.sha256    + "\n", "utf8");
-  writeFileSync(join(genesisDir, "island.sha256-pre"), artifact.preSha256 + "\n", "utf8");
-  writeFileSync(join(genesisDir, "island.cid"),        artifact.cid       + "\n", "utf8");
+  writeFileSync(join(genesisDir, "island.bin"),         artifact.bytes);
+  writeFileSync(join(genesisDir, "island.sha256"),      artifact.sha256     + "\n", "utf8");
+  writeFileSync(join(genesisDir, "island.cid"),         artifact.cid        + "\n", "utf8");
+  writeFileSync(join(genesisDir, "island.cid-engine"),  artifact.engineCid  + "\n", "utf8");
+  writeFileSync(join(genesisDir, "island.cid-plugins"), artifact.pluginsCid + "\n", "utf8");
 
   console.log(`[genesis] ✓ island.bin  ${(artifact.bytes.byteLength / 1024).toFixed(0)} KB`);
   console.log(`[genesis] ✓ blobs=${counts.blobCount}  tiddlers=${counts.tiddlerCount}`);
-  console.log(`[genesis] ✓ sha256=${artifact.sha256}  cid=${artifact.cid}  sha256-pre=${artifact.preSha256}`);
+  console.log(`[genesis] ✓ sha256=${artifact.sha256}  cid=${artifact.cid}`);
+  console.log(`[genesis] ✓ engineCid=${artifact.engineCid}  pluginsCid=${artifact.pluginsCid}`);
   console.log(`[genesis] wrote ${join(genesisDir, "island.bin")}`);
-  console.log("[genesis] S5 gate A satisfied — plugin blobs wired + genesis-cid tiddler injected.");
+  console.log("[genesis] S5 gate A satisfied — plugin blobs wired + two region witness tiddlers injected.");
 }
 
 try {

@@ -16,12 +16,13 @@ import {
   validateGenesisBytes,
   importGenesisIsland,
   reconcileGenesisCid,
-  GENESIS_CID_TIDDLER,
 } from "../src/genesis-intake.js";
 import {
   emptyLarDoc,
   ENGINE_CORE_ID,
   LARES_MEMETIC_WIKITEXT_PLUGIN_URI,
+  GENESIS_CID_ENGINE_TIDDLER,
+  GENESIS_CID_PLUGINS_TIDDLER,
   cidV1Sha256,
   type LarDoc,
 } from "../src/index.js";
@@ -87,26 +88,37 @@ describe("genesis-intake — the one intake core", () => {
     expect(() => validateGenesisBytes(bytes, "test-intake")).toThrow(new RegExp(ENGINE_CORE_ID));
   });
 
-  test("CID reconcile: divergence merges and records; equality no-ops", async () => {
-    const bytes = await genesisBytes();
-    const cid   = cidV1Sha256(bytes);
+  test("CID reconcile: divergence merges + records both regions; equality no-ops", async () => {
+    const engineCid  = cidV1Sha256(new TextEncoder().encode("engine-region"));
+    const pluginsCid = cidV1Sha256(new TextEncoder().encode("plugins-region"));
+    // The incoming genesis carries both region witness tiddlers (the source of truth).
+    const bytes = await genesisBytes((d) => {
+      const t = (d as { tiddlers: Record<string, unknown> }).tiddlers;
+      t[GENESIS_CID_ENGINE_TIDDLER]  = { tiddler: { title: GENESIS_CID_ENGINE_TIDDLER,  cid: engineCid  }, meta: { authority: "genesis" } };
+      t[GENESIS_CID_PLUGINS_TIDDLER] = { tiddler: { title: GENESIS_CID_PLUGINS_TIDDLER, cid: pluginsCid }, meta: { authority: "genesis" } };
+    });
 
     const repo     = newRepo();
     const live     = repo.create<LarDoc>(emptyLarDoc());
     const incoming = await importGenesisIsland(repo, bytes, "test-intake");
 
-    // Divergence: live carries no recorded cid → merge + record.
-    const first = reconcileGenesisCid(live, incoming, cid);
+    // Divergence: live carries no recorded region CIDs → merge + record both.
+    const first = reconcileGenesisCid(live, incoming);
     expect(first.updated).toBe(true);
-    expect(first.previousCid).toBeNull();
+    expect(first.previousEngineCid).toBeNull();
+    expect(first.previousPluginsCid).toBeNull();
+    expect(first.incomingEngineCid).toBe(engineCid);
+    expect(first.incomingPluginsCid).toBe(pluginsCid);
     expect(live.doc()?.blobs?.[ENGINE_CORE_ID]).toBeTruthy();             // merge landed
-    const rec = live.doc()?.tiddlers?.[GENESIS_CID_TIDDLER];
-    expect(rec?.tiddler?.["cid"]).toBe(cid);                              // cid recorded
-    expect(rec?.meta?.["authority"]).toBe("genesis-reconcile");           // ONE record shape
+    const engRec = live.doc()?.tiddlers?.[GENESIS_CID_ENGINE_TIDDLER];
+    expect(engRec?.tiddler?.["cid"]).toBe(engineCid);                     // engine cid recorded
+    expect(engRec?.meta?.["authority"]).toBe("genesis-reconcile");        // ONE record shape
+    expect(live.doc()?.tiddlers?.[GENESIS_CID_PLUGINS_TIDDLER]?.tiddler?.["cid"]).toBe(pluginsCid);
 
     // Equality: second pass reads current → no-op.
-    const second = reconcileGenesisCid(live, incoming, cid);
+    const second = reconcileGenesisCid(live, incoming);
     expect(second.updated).toBe(false);
-    expect(second.previousCid).toBe(cid);
+    expect(second.previousEngineCid).toBe(engineCid);
+    expect(second.previousPluginsCid).toBe(pluginsCid);
   });
 });

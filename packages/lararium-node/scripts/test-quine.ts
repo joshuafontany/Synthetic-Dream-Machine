@@ -16,7 +16,7 @@
  * Or via:   pnpm --filter @lararium/node test:quine
  */
 
-import { automergeLoad, GENESIS_CID_TIDDLER } from "@lararium/mesh";
+import { automergeLoad, GENESIS_CID_ENGINE_TIDDLER, GENESIS_CID_PLUGINS_TIDDLER } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
 import { createHash }      from "crypto";
 import { readFileSync, existsSync } from "fs";
@@ -55,16 +55,18 @@ async function main(): Promise<void> {
   console.log(`[quine] artifact loaded  blobs=${blobCount}  tiddlers=${tiddlerCount}`);
 
   // ------------------------------------------------------------------
-  // 2. Verify the genesis-cid self-ref tiddler (two-pass build check)
+  // 2. Verify both region witness tiddlers (engine = true-name, plugins = fast ratchet)
   // ------------------------------------------------------------------
-  const cidRecord = doc.tiddlers?.[GENESIS_CID_TIDDLER] as
-    { tiddler?: { cid?: string } } | undefined;
-
-  if (!cidRecord?.tiddler?.cid) {
-    throw new Error("[quine] genesis-cid tiddler missing or has no cid field — re-run build:genesis.");
-  }
-  const storedCid = cidRecord.tiddler.cid;
-  console.log(`[quine] stored genesis-cid = ${storedCid.slice(0, 20)}…`);
+  const readWitnessCid = (title: string): string => {
+    const rec = doc.tiddlers?.[title] as { tiddler?: { cid?: string } } | undefined;
+    if (!rec?.tiddler?.cid) {
+      throw new Error(`[quine] witness tiddler ${title} missing or has no cid field — re-run build:genesis.`);
+    }
+    return rec.tiddler.cid;
+  };
+  const engineCid  = readWitnessCid(GENESIS_CID_ENGINE_TIDDLER);
+  const pluginsCid = readWitnessCid(GENESIS_CID_PLUGINS_TIDDLER);
+  console.log(`[quine] engineCid (true-name) = ${engineCid.slice(0, 20)}…  pluginsCid = ${pluginsCid.slice(0, 20)}…`);
 
   // ------------------------------------------------------------------
   // 3. Extract TW5 core blob + compiled plugin blob

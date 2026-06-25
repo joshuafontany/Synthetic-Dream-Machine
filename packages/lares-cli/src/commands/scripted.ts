@@ -79,8 +79,10 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const bootstrap = join(root, "genesis", "social-bootstrap.json");
   const islandBin = join(root, "genesis", "island.bin");
   const islandSha = join(root, "genesis", "island.sha256");
-  const islandShaPre = join(root, "genesis", "island.sha256-pre");
+  const islandShaPre = join(root, "genesis", "island.sha256-pre");  // legacy (pre-split); cleaned for migration
   const islandCid = join(root, "genesis", "island.cid");
+  const islandCidEngine  = join(root, "genesis", "island.cid-engine");
+  const islandCidPlugins = join(root, "genesis", "island.cid-plugins");
 
   console.log("[lares reset] will delete:");
   if (existsSync(storage))   console.log(`  ${storage}`);
@@ -89,6 +91,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (existsSync(islandSha)) console.log(`  ${islandSha}`);
   if (existsSync(islandShaPre)) console.log(`  ${islandShaPre}`);
   if (existsSync(islandCid)) console.log(`  ${islandCid}`);
+  if (existsSync(islandCidEngine))  console.log(`  ${islandCidEngine}`);
+  if (existsSync(islandCidPlugins)) console.log(`  ${islandCidPlugins}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
@@ -99,6 +103,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandSha, { force: true });
   rmSync(islandShaPre, { force: true });
   rmSync(islandCid, { force: true });
+  rmSync(islandCidEngine,  { force: true });
+  rmSync(islandCidPlugins, { force: true });
   console.log(`[lares reset] preserved identity: ${join(root, ".lararium-identity")} (out of the wipe zone)`);
   console.log("[lares reset] cleared. Running lares init…");
   const { cmdInit } = await import("./init.js");

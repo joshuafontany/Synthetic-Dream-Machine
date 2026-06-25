@@ -144,8 +144,10 @@ export async function loadGenesisIslandFromBytes(
 // ── reconcileGenesisUpdate ────────────────────────────────────────────────────
 
 /**
- * Compare incoming genesis bytes against the live island doc's recorded CID;
- * the compare, merge, and cid-record write ride the one core (genesis-intake).
+ * Compare the incoming genesis doc's region CIDs against the live island doc's
+ * recorded ones; the compare, merge, and cid-record write ride the one core
+ * (genesis-intake), which reads both region witness tiddlers straight from the
+ * incoming handle — no bytes/CID need pass in.
  *
  * Caller responsibility: when updated === true, write a TW5 alert tiddler to
  * the admin doc (tagged lar:///ha.ka.ba/tags/engine-update) so the operator
@@ -154,7 +156,6 @@ export async function loadGenesisIslandFromBytes(
 export async function reconcileGenesisUpdate(
   liveHandle:     DocHandle<LarDoc>,
   incomingHandle: DocHandle<LarDoc>,
-  incomingBytes:  Uint8Array,
 ): Promise<GenesisReconcileResult> {
-  return reconcileGenesisCid(liveHandle, incomingHandle, genesisCidFromBytes(incomingBytes));
+  return reconcileGenesisCid(liveHandle, incomingHandle);
 }
