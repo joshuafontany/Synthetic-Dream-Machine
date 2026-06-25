@@ -37,6 +37,7 @@ import { cmdHarvest }                 from "../commands/harvest.js";
 import { cmdRecall }                  from "../commands/recall.js";
 import { cmdTelemetry }               from "../commands/telemetry.js";
 import { cmdSubagents }               from "../commands/subagents.js";
+import { cmdPalaceTeardown }          from "../commands/palace-teardown.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
   cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
@@ -66,6 +67,7 @@ const COMMANDS: readonly Command[] = [
   { name: "recall",        summary: "Read the verbatim PLACE memory (mempalace) THROUGH the @admin seat — semantic recall over the journey, web3-only (a capability-bearing verb-summons, never a direct subprocess). `lares recall <keywords...>` searches; `--wing <w>` filters to a project; `--limit <n>` caps (default 5); `--drawer <id>` fetches one verbatim; `--list` lists drawers.", handler: cmdRecall },
   { name: "telemetry",     summary: "lar-telemetry — read a wing's turn instruments (the gradient chat sigils) THROUGH the @admin seat and project lar_* onto its mempalace drawers (mempalace through the seat, web3-only). `lares telemetry --wing <w> [--limit <n>]`. Idempotent (lar_hv gate). The capture hook calls this beside the verbatim mine; daemon down → no-op, the sweep backstops (verbatim-always / telemetry-eventual).", handler: cmdTelemetry },
   { name: "subagents",     summary: "Capture tasked-spirit (sub-agent) transcripts DISTINCT from the main agent — each `<session>/subagents/agent-*.jsonl` mines into `wing_<w>__spirits`, named from its handoff (Mask → Pet-Name-by-role → spirit-<id>), both sides of the exchange. A direct mine (no daemon). `lares subagents <session-transcript.jsonl> --wing <w>`. Named spirits are re-callable; run `lares telemetry --wing <w>__spirits` for their gradient.", handler: cmdSubagents },
+  { name: "palace-teardown", summary: "Completely tear down the local mempalace store + harvest idempotency (chroma store, config, entities, `lar_hv` watermark, stage) so a re-pave starts from zero — the clean cure for a partial/interrupted re-pave. Preview by default; `--confirm` removes; REFUSES under live MCP/mine unless `--force`. Re-pave after with `lares harvest --all`.", handler: cmdPalaceTeardown },
   { name: "serve",         summary: "Run the lararium node in foreground (no Vite).",                                handler: cmdServe         },
   { name: "dev",           summary: "Run node + Vite app concurrently (full dev experience).",                       handler: cmdDev           },
   { name: "rebuild",       summary: "Identity-safe dep-bump cure: rebuild the genesis engine under current deps, then serve. No wipe, keypair untouched.", handler: cmdRebuild       },
