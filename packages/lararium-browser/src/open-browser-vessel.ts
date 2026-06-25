@@ -22,6 +22,7 @@ import {
   CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID, corpusBagId,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
+  parseMeshScale, type MeshScale, resolveBootDoc, isStillJoining,
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly,
@@ -236,10 +237,24 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       loadCorpora: async (composite) => {
         const entries = Object.entries(catalogHandle.doc()?.tiddlers ?? {})
           .filter(([uri]) => uri.startsWith(CATALOG_CORPUS_PREFIX))
-          .map(([uri, t]) => ({ id: uri.slice(CATALOG_CORPUS_PREFIX.length), docUrl: tiddlerText(t) }))
-          .filter((e): e is { id: string; docUrl: string } => Boolean(e.docUrl));
+          .map(([uri, t]) => ({
+            id: uri.slice(CATALOG_CORPUS_PREFIX.length),
+            docUrl: tiddlerText(t),
+            scale: parseMeshScale((t.tiddler as Record<string, unknown> | undefined)?.["scale"] as string | undefined),
+          }))
+          .filter((e): e is { id: string; docUrl: string; scale: MeshScale | undefined } => Boolean(e.docUrl));
         await Promise.all(entries.map(async (entry) => {
-          const h = await waitHandleLocal<LarDoc>(repo, entry.docUrl, () => repo.create<LarDoc>(emptyLarDoc()));
+          let h: DocHandle<LarDoc>;
+          if (entry.scale) {
+            // declared mesh scale → tideline resolver; StillJoining skips (no blank), reconciles later.
+            const resolved = await resolveBootDoc<LarDoc>(repo, entry.docUrl as AutomergeUrl, {
+              tideline: "mesh-shared", scale: entry.scale, label: `@${entry.id} (joined corpus)`,
+            });
+            if (isStillJoining(resolved)) return;
+            h = resolved;
+          } else {
+            h = await waitHandleLocal<LarDoc>(repo, entry.docUrl, () => repo.create<LarDoc>(emptyLarDoc()));
+          }
           addReadOnlyLayer(composite, corpusBagId(entry.id), h);
           const cu = corpusLarUri(entry.id);
           if (tiddlerText(h.doc()?.tiddlers?.[cu]) !== h.url) h.change((doc) => { doc.tiddlers[cu] = mutableLarRecord(cu, { text: h.url }, "browser-boot"); });

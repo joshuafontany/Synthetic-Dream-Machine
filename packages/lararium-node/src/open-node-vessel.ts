@@ -34,6 +34,7 @@ import {
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, WORKING_BAG,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
+  parseMeshScale, type MeshScale,
   BAG_IDS, slugFromUri,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   ENGINE_CORE_ID, BagResidencyManager,
@@ -56,7 +57,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { MempalaceClient, resolveMempalaceSpawn } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
+import { waitHandleLocal, resolveBootDoc, isStillJoining } from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -264,10 +265,29 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         const catalog = catalogHandle.doc();
         const entries = Object.entries(catalog?.tiddlers ?? {})
           .filter(([uri]) => uri.startsWith(CATALOG_CORPUS_PREFIX))
-          .map(([uri, tiddler]) => ({ id: uri.slice(CATALOG_CORPUS_PREFIX.length), docUrl: tiddlerText(tiddler) }))
-          .filter((e): e is { id: string; docUrl: string } => Boolean(e.docUrl));
+          .map(([uri, tiddler]) => ({
+            id: uri.slice(CATALOG_CORPUS_PREFIX.length),
+            docUrl: tiddlerText(tiddler),
+            // a corpus entry MAY declare its federation scale (the residency-bag layer);
+            // absent → a local/genesis-backed corpus on the current path.
+            scale: parseMeshScale((tiddler.tiddler as Record<string, unknown> | undefined)?.["scale"] as string | undefined),
+          }))
+          .filter((e): e is { id: string; docUrl: string; scale: MeshScale | undefined } => Boolean(e.docUrl));
         await Promise.all(entries.map(async (entry) => {
-          const handle = await waitHandleLocal<LarDoc>(repo, entry.docUrl as AutomergeUrl, blankMemeStore(repo));
+          let handle: DocHandle<LarDoc>;
+          if (entry.scale) {
+            // a corpus DECLARING a mesh scale federates — resolve via the tideline resolver,
+            // never the blank-mint fallback. On StillJoining the optional corpus skips its
+            // layer (reconciles in the background once a peer delivers), never mints a ghost.
+            const resolved = await resolveBootDoc<LarDoc>(repo, entry.docUrl as AutomergeUrl, {
+              tideline: "mesh-shared", scale: entry.scale, label: `@${entry.id} (joined corpus)`,
+            });
+            if (isStillJoining(resolved)) return;
+            handle = resolved;
+          } else {
+            // no declared scale → local/genesis-backed corpus, current behavior unchanged.
+            handle = await waitHandleLocal<LarDoc>(repo, entry.docUrl as AutomergeUrl, blankMemeStore(repo));
+          }
           addReadOnlyLayer(composite, corpusBagId(entry.id), handle);
           const corpusUri = corpusLarUri(entry.id);
           if (tiddlerText(handle.doc()?.tiddlers?.[corpusUri]) !== handle.url) {
