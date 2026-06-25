@@ -219,6 +219,22 @@ no sender; an unsigned wrap invites key-substitution). The content layer mandate
 DEK-encrypts content**; an untrusted-relay tier never rides a plaintext path. The bond
 between trust-domains always crosses encrypted.
 
+**The contract performs the key-agreement** (deep-domain grounded, 2026-06-24). Private docs
+spawn fresh and isolated per vessel — they hide in `@catalog` — and converge across a PersonGroup
+ONLY when vessels mutually **contract** (the delegation handshake). That handshake, and only it,
+runs the key-agreement: the joining vessel's leaf enters the group tree, the path-to-root blanks,
+a fresh group secret seals **to current members only** — the joiner derives keys **from that epoch
+forward** (BeeKEM "new members never decrypt pre-existing docs"; community-property's "shared =
+acquired *under* the contract"). A membership break advances the epoch and blanks the removed leaf's
+path — **future** derivation drops it, coordinator-free; keys already handed stay handed (the
+endosymbiotic, forward-only ceiling — ratchet past, never re-seal). The cross-domain rhyme runs
+deep: fungal **hyphal anastomosis within a vegetative-compatibility group** — recognition-before-fusion,
+**fail-closed** (death at an incompatible junction → a failed delegation seals and aborts the merge,
+never ambient-falls-through, `orichalcum-capabilities`) — and bacterial **entry-exclusion**
+(already-holds → refuse re-transfer = the per-resource epoch-lease). The one piece with no natural
+ancestor — the key-agreement primitive itself — rides **BeeKEM**, which Keyhive already carries; the
+architecture's task: anchor it at the contract, never re-invent it.
+
 <<~/ahu >>
 
 <<~ ahu #four-port-swap >>
