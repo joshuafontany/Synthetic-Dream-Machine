@@ -102,7 +102,20 @@ The cruxes collapse to a single pattern: **local · decaying-lease · graded-bel
 
 ## EPIC G — Genesis Ceremony *(boot-critical · operator-gated · moves the hearth true-name)*
 
-The heavy half. Rewrites the founding ceremony, so it waits on three rulings before code. The **KERI pre-rotation hook already sits seated** at keygen (`packages/lararium-node/src/node-vessel-identity.ts:110-165`) — no change.
+The heavy half — now **UNGATED** (G-D1/2/3 ruled). The **KERI pre-rotation hook already sits seated** at keygen (`node-vessel-identity.ts:110-165`) — no change.
+
+### Genesis Rebuild — execution plan *(architect 2026-06-24; transcript `ad9b4f03`)*
+
+**Keystone move:** the signed `device-delegation` edge = the **public, offline-verifiable projection of PersonGroup membership** → **Gate B for a delegated 2nd vessel verifies the edge over public CRDT state, no Beelay** (closes the pre-red two-vessel boot). The Keyhive sentinel docs stay the live graph; the edge is its offline shadow.
+
+- `▣ Phase 0.1` — **DONE.** Export `device-delegation` from the mesh barrel (was built-but-unexported — my v2 was unreachable). mesh tc+build clean.
+- `▢ Phase 0.2` — PersonGroup-root key custody: `generateOrLoadPersonGroupRoot(dataDir)` in `node-vessel-identity.ts` → `.lararium-identity/.person-group-root-{login}.json` (wipe-safe, founder-only).
+- `▢ Phase 1 (G2+G3)` — `genesis-doc.ts`: split engine/plugins into **two content-CID witnesses** (`genesis-cid-engine`/`genesis-cid-plugins`), **drop the two-pass fixpoint** (region CIDs are inputs); `hearthTrueName=engineCid` (`genesis-artifact.ts`); kahu-ownership stamped on `ROOT_BAGS` + a `@oracle/kahu` witness; split `deriveActorSeed` (engine slow / plugin fast); mirror in `genesis-intake.ts` + `browser-genesis.ts`; `scripted.ts` cleans 2 sidecars.
+- `▢ Phase 2 (G1)` — drop `kind="operator"`→`"device"` at `cold-boot-ceremony.ts:105` **AND the tw5 CJS mirror** + the `social-tiddlers.ts:40 ?? "operator"` default; `ceremony-core.ts runFoundingCeremony` mints a signed edge (root→vessel) into the IdentitiesDoc instead of copying the key; `boot-admin-keyhive.ts` Gate B verifies the edge for delegated leaves (`verifyDeviceDelegation` + `expectedEpoch` from `epoch-lease`).
+- `▢ Phase 3` — two-vessel personGroup over the **local relay**: `init.ts` mints/persists the root + pins it in `social-bootstrap.json`; `runDeviceAdmitAccept` returns the signed edge (no Beelay); browser receives root-DID + edge, mints its own per-vessel key, boots.
+- `▢ Phase 4` — tests: **rewrite `two-vessel-mesh.test.ts`** to the delegated path (proves the pre-red fixed); `blob-sovereignty`/`island-protocol` read two CIDs (plugin tweak bumps `pluginsCid`, `engineCid` stable).
+
+**Landmines:** the CJS cold-boot mirror (tw5) · `?? "operator"` reader default · drop the fixpoint (no clean 2-region fixpoint) · **root seed in `.lararium-identity/` not the wipe zone** · founder-only root (browser never mints its own) · **this fixes PUBLIC 2nd-vessel boot, NOT private forward-secrecy** (still BeeKEM-at-contract, Sprint 2 item 2) — don't misread the green e2e.
 
 ### G1 — Plane-0/1 split *(drop the `kind="operator"` conflation)*
 
