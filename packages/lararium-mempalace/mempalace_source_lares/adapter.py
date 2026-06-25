@@ -72,6 +72,10 @@ LAR_SCHEMA = AdapterSchema(
                                    description="1 = a tasked-spirit (sub-agent) turn, distinct from the main agent"),
         "lar_agent_handle": FieldSpec(type="string", required=False, indexed=True,
                                       description="worldline lineage-path handle <run>.<agentId> — derived at spawn, no registry; carries identity (pet-name only labels)"),
+        "lar_parent_handle": FieldSpec(type="string", required=False, indexed=True,
+                                       description="projected attribution edge: the appointed-by parent handle (immediate parent; flat subagents = the run)"),
+        "lar_root_handle": FieldSpec(type="string", required=False, indexed=True,
+                                     description="projected attribution edge: the root-principal handle (paramount; flat subagents = the run)"),
     },
 )
 

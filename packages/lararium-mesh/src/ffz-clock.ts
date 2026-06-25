@@ -112,8 +112,12 @@ export interface FfzClock {
    */
   readonly bounds:  FfzLevel;
   /**
-   * Automerge actor ID — tie-breaker when two clocks have identical level tuples.
-   * Matches the actor ID on the Automerge repo that produced this clock.
+   * The worldline IDENTITY this clock ticks for — the logical lineage-path HANDLE,
+   * NOT the Automerge actor (agents hold none; the daemon owns the sole replica, so
+   * keying on its actorId would collapse every worldline into one clock). ITC-style:
+   * the ticking identity stays decoupled from the persisting replica (Almeida/Baquero,
+   * Interval Tree Clocks 2008). Also the tie-breaker when two clocks carry identical
+   * level tuples. Named `actorId` for wire-compat; reads as the worldline handle.
    */
   readonly actorId: string;
 }
@@ -123,7 +127,8 @@ export interface FfzClock {
 // ---------------------------------------------------------------------------
 
 /**
- * Create a zero clock for the given actor, using default bounds.
+ * Create a zero clock for the given worldline handle (the `actorId` slot — the
+ * lineage-path identity, NOT an Automerge actor), using default bounds.
  * Pass custom `bounds` to override (e.g., coprime-prime set).
  */
 export function ffzZero(actorId: string, bounds: FfzLevel = FFZ_DEFAULT_BOUNDS): FfzClock {

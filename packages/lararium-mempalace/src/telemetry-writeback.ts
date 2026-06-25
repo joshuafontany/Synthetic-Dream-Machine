@@ -29,7 +29,7 @@ import { resolveMempalacePython } from "./spawn-resolve.js";
  * with `HARVEST_VERSION` in `drawer_io.py` when the reading logic changes, so the
  * next sweep re-reads exactly the stale drawers. THE single source for this number.
  */
-export const LAR_HV = 4;
+export const LAR_HV = 5;
 
 const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
 
@@ -101,7 +101,17 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   const agent = deriveAgent(sourceFile);
   if (agent) { patch["lar_agent"] = agent.slice(0, 60); patch["lar_sidechain"] = 1; }
   const handle = deriveHandle(sourceFile);
-  if (handle) patch["lar_agent_handle"] = handle.slice(0, 120);
+  if (handle) {
+    patch["lar_agent_handle"] = handle.slice(0, 120);
+    // The projected attribution edge (child→parent), single-source. Flat `subagents/`:
+    // the spirit is a direct child of the run, so appointed-by (immediate parent) =
+    // root-principal = the run. Deep parentUuid nesting splits the two later
+    // (agent-worldline#open). The reified bi-temporal prov:Delegation NODE awaits a
+    // code-reachable KG (MCP/tunnel-only today); this edge stays the sole record until
+    // then, so the future node re-projects it rather than double-writing.
+    const run = handle.split(".")[0] ?? "";
+    if (run) { patch["lar_parent_handle"] = run; patch["lar_root_handle"] = run; }
+  }
   return patch;
 }
 

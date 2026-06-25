@@ -29,7 +29,7 @@ from mempalace.palace import get_collection
 PALACE = os.path.expanduser("~/.mempalace/palace")
 # Current harvest version — bump when the harvester's output shape changes, so a
 # re-harvest re-processes every drawer; unchanged, it skips already-done drawers.
-HARVEST_VERSION = 4  # bump in lockstep with LAR_HV in telemetry-writeback.ts buildPatch (v4 = +lar_agent_handle, +declare lar_agent/lar_sidechain)
+HARVEST_VERSION = 5  # bump in lockstep with LAR_HV in telemetry-writeback.ts buildPatch (v5 = +lar_parent_handle/lar_root_handle, the projected attribution edge)
 READ_BATCH = 2000
 WRITE_BATCH = 1000
 

@@ -247,7 +247,7 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 
 **Build sequence — the handle first; the edge and the rhythm both ride it:**
 
-<<~ranks build handle ~ derive + stamp the lineage-path handle at spawn (in-process: from agentId/parentUuid on disk; cross-surface: the launcher shim mints trace-id/span-id) — the keystone -> edge ~ stamp the reified Delegation node (appointed-by + root-principal), bi-temporal valid/tx; the same DAG projects the worldline happened-before -> rhythm ~ give each handle an FfzClock RE-KEYED on the handle (not the Automerge actor — fix the live slip); stamp drawers with lar_ffz; recall orders CAUSALLY by the edge-DAG and paces by ffzCompare (rhythm) -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
+<<~ranks build handle ~ derive + stamp the lineage-path handle at spawn (in-process: from agentId/parentUuid on disk; cross-surface: the launcher shim mints trace-id/span-id) — the keystone -> edge ~ PROJECTED form LIVE (2026-06-25): stamp `lar_parent_handle` (appointed-by) + `lar_root_handle` (root-principal) on spirit drawers, single-source. The reified bi-temporal `prov:Delegation` NODE (valid/tx · status · times) awaits a code-reachable KG — MCP/tunnel-only today; when it lands the edge RE-PROJECTS from it (never a double-write) -> rhythm ~ MECHANISM LIVE (`worldline-clock.ts`, 2026-06-25): per-handle FfzClock keyed on the HANDLE (slip fixed at source) · construct-on-first-event · grounding-tick (L1 Beat on the operator's acknowledging move, NEVER on emission) · rollover-checkpoint to the durable SessionEventLog. DEFERRED: the live grounding trigger (no exchange loop yet), ephemeral PresenceSlot live-tick, and the `lar_ffz` drawer stamp (depends on the live clock). Grounded by the Horologe spirit — ITC identity/event split (bearer≠replica) · Clark-Brennan/Ginzburg grounding (Pending→Moves) · Automerge/Yjs ephemeral convention · event-sourcing checkpoints -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
 
 <<~/ahu >>
 
@@ -264,6 +264,10 @@ ships complete** (ffzZero · ffzTick · ffzCompare · ffzMerge), wired nowhere y
 - **The cross-surface launcher shim** — `gh copilot` ignores `TRACEPARENT`; build the
   `lares`-driven wrapper that mints + injects the trace-id and writes both sides, or
   only half the tunnel exists.
+- **The reified node is substrate-gated** — tunnels + KG triples live MCP-only (no
+  `mempalace` CLI subcommand); the disconnected MCP blocks a code-path reified
+  `prov:Delegation` node. The projected metadata edge (`lar_parent_handle`/`lar_root_handle`)
+  carries who-drove-whom meanwhile, single-source; wire the node when the KG is code-reachable.
 - **Chain `parent_edge_id`** or a grandchild generation goes dark.
 - **Ephemeral blind-dir hardening** — sandbox tiers · cleanup · resource/leak
   containment · the egress fork (#lifecycle) — under a dedicated research pass.
