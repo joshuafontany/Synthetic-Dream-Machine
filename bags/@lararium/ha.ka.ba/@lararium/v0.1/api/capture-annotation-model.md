@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "THE holistic capture & annotation model — the implement-from keel that fills mempalace's holes (multi-agent topology · subagent/swarm capture · gradient annotation · ephemeral noise · agent identity). Ties lar-telemetry + agent-provenance + lararium-memory into one layered spec: capture (surfaces·membranes·verbatim-always/gradient-eventual) → annotation (lar_* instrument readings, gradient-not-verdict) → multi-agent (identity·provenance·relationship spawn-graph) → ephemeral (lares ephemeral launcher·blind dir·hardening). Carries the operator rulings ledger + the implementation backlog (built/specified/blocked)."
+role      = "THE holistic capture & annotation model — the implement-from keel that fills mempalace's holes (multi-agent topology · subagent/swarm capture · gradient annotation · ephemeral noise · agent identity). Ties lar-telemetry + agent-worldline + lararium-memory into one layered spec: capture (surfaces·membranes·verbatim-always/gradient-eventual) → annotation (lar_* instrument readings, gradient-not-verdict) → multi-agent (identity·provenance·relationship spawn-graph) → ephemeral (lares ephemeral launcher·blind dir·hardening). Carries the operator rulings ledger + the implementation backlog (built/specified/blocked)."
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -33,7 +33,7 @@ surfaces, scores every turn on a 0–20 gradient, and spawns throwaway swarms �
 mempalace's native model has **holes** at exactly those seams. This meme states the
 whole capture & annotation model as ONE layered spec, so it can be built later
 without re-derivation. The focused depth lives in the sibling memes
-(`lar-telemetry`, `agent-provenance`, `lararium-memory`); this is the keel that
+(`lar-telemetry`, `agent-worldline`, `lararium-memory`); this is the keel that
 holds them together.
 
 > **Capture keeps the journey; annotation dresses it in gradient; the multi-agent
@@ -120,7 +120,7 @@ gradient `\procedure`; `$wikify`/`renderTiddler` extracts → `lar_*`). Depth:
 
 ## Layer 3 ~ Multi-Agent (who-drove-whom)
 
-Three sub-layers, two nesting kinds, one correlation key. Depth: `agent-provenance`.
+Three sub-layers, two nesting kinds, one correlation key. Depth: `agent-worldline`.
 
 **Sub-layers:**
 
@@ -165,7 +165,7 @@ self-judging) → T1 bubblewrap (--ro-bind repo · --tmpfs · --unshare-net) →
 container → T3 microVM (untrusted code). **Blast-radius:** systemd-run scope caps
 (mem/cpu/wall + orphan-reap), credential isolation (inject only the model key).
 **Disposal:** `--cleanup` opt-in (OFF by default — the dir PERSISTS for inspection;
-tmpfs is the never-touch-disk option). Depth: `agent-provenance#ephemeral-hardening`.
+tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~/ahu >>
 
@@ -225,7 +225,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-provenance#ephemeral-harden
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/agent-provenance >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/agent-worldline >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu >>

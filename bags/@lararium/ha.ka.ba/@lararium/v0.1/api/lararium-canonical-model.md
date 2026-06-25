@@ -214,6 +214,8 @@ Read order once held: noosphere-boot → THIS → (open-vessel · causal-island 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/agent-worldline >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot >>
 
 <<~ &#x0003; >>
