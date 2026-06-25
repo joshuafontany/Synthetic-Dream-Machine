@@ -102,37 +102,16 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const repo = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
 
   if (opts.admitPayloadPath) {
-    // ── Vessel-admission path ────────────────────────────────────────────────
-    if (!existsSync(opts.admitPayloadPath)) {
-      throw new Error(`[lares init --admit] payload file not found: ${opts.admitPayloadPath}`);
-    }
-    const payload = JSON.parse(readFileSync(opts.admitPayloadPath, "utf8")) as DeviceAdmitPayload;
-    if (payload.kind !== "device-admit/v1") {
-      throw new Error(`[lares init --admit] unexpected payload kind: ${payload.kind}`);
-    }
-    console.log(`[lares init --admit] PersonGroup  ${payload.personGroupDocIdHex.slice(0, 20)}…`);
-    console.log(`[lares init --admit] MeshCabal    ${payload.meshCabalDocIdHex.slice(0, 20)}…`);
-    console.log(`[lares init --admit] cap events   ${payload.capEvents.length}`);
-
-    const { identitiesUrl, circlesUrl, sessionsUrl, adminUrl } =
-      await runApplyAdmitPayload({
-        repo,
-        operatorVerifyingKey: operatorIdentity.verifyingKey,
-        operatorDisplayName:  operatorIdentity.displayName ?? "operator",
-        payload,
-      });
-
-    const bootstrapPlugin = makeBootstrapPlugin(
-      identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
-      payload.personGroupDocIdHex, payload.meshCabalDocIdHex,
+    // ── Vessel-admission path = the UPGRADE event (anon/fresh vessel → group member) ──
+    // PLACEHOLD-THROW — intention recorded, not yet built. Under the signed-edge binding the
+    // upgrade rides a root→joinee device-delegation edge (the founder's signer signs the joinee's
+    // vessel key + hearthTrueName); the payload carries the pin + edge; the joinee persists them
+    // and verifies at Gate B over the local relay (no Beelay). The cap-event repackaging below is
+    // the superseded Model-A path. A fresh node founds from null today; this upgrade is the next arc.
+    throw new Error(
+      "[lares init --admit] the delegated upgrade path is not yet built — the next arc carries a " +
+      "root→joinee device-delegation edge in the payload and verifies it at Gate B.",
     );
-    writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
-    await repo.flush();
-
-    console.log("[lares init --admit] sentinel oracle tiddlers written");
-    if (payload.syncUrl) console.log(`  founding vessel sync URL: ${payload.syncUrl}`);
-    console.log("[lares init --admit] done — vessel admitted to operator PersonGroup. Start with: lares dev");
-    return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
 
   // ── Founding ceremony path ───────────────────────────────────────────────

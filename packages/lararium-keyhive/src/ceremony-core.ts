@@ -354,6 +354,14 @@ export interface DeviceAdmitAcceptInput {
 export async function runDeviceAdmitAccept(
   input: DeviceAdmitAcceptInput,
 ): Promise<DeviceAdmitPayload> {
+  // PLACEHOLD-THROW — the founder-side admit re-founds on the signed edge (the next arc): the
+  // signer signs a root→joinee device-delegation edge (joinee vessel key × hearthTrueName) and
+  // ships pin + edge in the payload. The Keyhive-sentinel delegation below is superseded.
+  throw new Error(
+    "[ceremony] runDeviceAdmitAccept: the edge-based delegated upgrade is not yet built — " +
+    "mint a root→joinee device-delegation edge and carry it in DeviceAdmitPayload.",
+  );
+  // eslint-disable-next-line no-unreachable
   const keyhive = new KeyhiveProvider();
   const store   = new InMemoryEventStore();
 
