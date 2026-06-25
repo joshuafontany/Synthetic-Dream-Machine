@@ -193,6 +193,14 @@ Each exchange a knowledge graph triple?
 
 ---
 
+## 2.5 RESOLVED — The Three-Clocks Model (2026-06-24) `~:confidence[S],[14]`
+
+A later deep-domain research arc resolves several questions above. **The mesh keeps time on three clocks, never one:** Automerge logical time (causal order + fork-detection — `getHeads`/`drifted`), the Keyhive epoch (revocation authority), and the FFZ Chronometer (rhythmic decay/freshness grain). **FFZ is RHYTHMIC, never causal.**
+
+- **Q2 (merge):** the counter merges via CRDT max and the OODA-HA phase carries per-participant (LWW-Register, no merge) — but *neither is the causal authority*. Causal order rides Automerge's `<counter, actorId>` OpId. The chronometer's merge is alignment annotation, not happened-before.
+- **Q8 (single point of failure):** confirmed — the notary model holds. FFZ records ticks; it never constitutes "the" time. Keeping FFZ *off* the causal and revocation decisions (those ride Automerge + Keyhive) is exactly what preserves non-simultaneous apprehension — no single clock rules.
+- **The Chapel Perilous note (a vs b):** answered empirically — reading **(a) holds**. The converged model (of which this chronometer is the rhythmic layer) proved a **real cross-domain pattern integrity**, corroborated by five *falsifiable* independent fields (soft-state networking, garbage-collection reachability-from-roots, Schmitt-trigger hysteresis, speciation, costly-signaling). RAW's counsel lands as: **weight the falsifiable engineering/biology rhymes; treat the metaphysics (process philosophy, Markov-blanket literalism) as vocabulary, never evidence.** Synthesis, not self-flattery.
+
 ## 3. Prior Art to Investigate
 
 ### Distributed Systems (confirmed relevant)

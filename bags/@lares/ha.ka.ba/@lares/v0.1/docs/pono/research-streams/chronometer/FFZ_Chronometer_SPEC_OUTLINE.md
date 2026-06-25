@@ -131,6 +131,26 @@ testable. Ready for community review.
 
 ---
 
+# GROUNDED FINDINGS — The Three-Clocks Resolution (2026-06-24) `~:confidence[S],[14]`
+
+A later deep-domain research arc — the DreamNet convergence over revocation · membership · revision-adjudication — resolves the chronometer's load-bearing ambiguity and several Phase-0 / Part-III open questions. The finding, stated whole:
+
+**The mesh keeps time on THREE clocks, never one — and FFZ holds only the third.**
+
+| Clock | Job | Mechanism |
+|---|---|---|
+| **Automerge logical time** | causal order + fork-detection | `<counter, actorId>` OpId · `getHeads` / `headsEqual` · a partitioned frontier (`drifted`) **is** a fork |
+| **Keyhive epoch** | revocation authority | forward-only epoch on the edge + convergent revoke |
+| **FFZ Chronometer** | rhythmic decay/freshness GRAIN | Pulse→Theme rhythmic position; the cadence a lease decays over; the grain a reading carries ("as of last sync") |
+
+**FFZ is RHYTHMIC, never causal.** This resolves seed-**Q2** (phase/counter merge) and the Phase-0 item "cross-reference UCAN delegation with ITC fork": the ITC counter and the OODA-HA phase carry *rhythmic position and alignment*, never the happened-before authority. Causal order rides Automerge's OpId; the chronometer rides *alongside* as semantic annotation (matching `ffz-clock.ts` and the notary model of seed-**Q8** — the clock records, it does not rule). The earlier reading of FFZ epoch-dominance as *"universal causal ordering"* is **RETIRED**; `ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision — that manufactures a global-now the mesh cannot hold.
+
+**The convergence connection.** The same FFZ rhythmic grain serves the DreamNet's converged time-model: a **capability-lease decays over the FFZ cadence** (soft-state — state lives only while refreshed), **membership freshness reads in the FFZ grain** ("verified weight within reach, as of last sync"), while **fork-detection rides Automerge `drifted`** and **revocation authority rides the Keyhive epoch**. One rhythmic instrument; three time-flows it touches; never the causal authority for any.
+
+This finding lifts the document's *foundation* toward Synthesis. The conversation-chronometer placeholders below (HUD, ITC stamps, exchange wrapping) remain open spec-authoring — they were already rhythmic-correct and need no correction, only completion.
+
+---
+
 # SPECIFICATION OUTLINE — Placeholder Structure
 
 ## Abstract
