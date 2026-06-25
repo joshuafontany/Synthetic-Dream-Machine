@@ -236,6 +236,11 @@ export class MempalaceClient {
     return this.callTool("mempalace_search", payload) as Promise<SearchResult>;
   }
 
+  /** True while the sidecar process is spawned and has not exited — for pooling. */
+  isAlive(): boolean {
+    return this.proc !== null && this.proc.exitCode === null && this.proc.signalCode === null && !this.proc.killed;
+  }
+
   private rejectAll(err: Error): void {
     for (const p of this.pending.values()) {
       clearTimeout(p.timer);

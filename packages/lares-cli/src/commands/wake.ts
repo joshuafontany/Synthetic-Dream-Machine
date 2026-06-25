@@ -13,9 +13,11 @@ import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
-import { larRoot, larBootstrapPath } from "../env.js";
+import { larRoot, larBootstrapPath, larDataDir } from "../env.js";
 import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
+import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
 import { foundIfAbsent, type FoundStep } from "../found.js";
@@ -26,6 +28,53 @@ import { wireVscode, type VscodeWireResult } from "../vscode-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+
+/** This project's wing slug, from the session's cwd (matches the harvest wing). */
+function wakeWing(): string {
+  const base = (process.cwd().replace(/\\/g, "/").split("/").pop() ?? "").toLowerCase().replace(/[ -]/g, "_").replace(/[^a-z0-9_]/g, "");
+  return `wing_${base || "unsorted"}`;
+}
+
+interface WakeRecall {
+  readonly ok: boolean;
+  readonly wing: string;
+  readonly drawers?: number;
+  readonly recent?: ReadonlyArray<{ room: string; preview: string }>;
+  readonly note?: string;
+}
+
+/**
+ * recall-into-wake — pull this project's recent journey THROUGH the @admin seat so
+ * the woken session climbs already-remembering. Best-effort by construction: any
+ * miss (no identity, daemon unreachable, recall error) returns {ok:false,note} and
+ * the wake proceeds. A short timeout keeps it inside the SessionStart hook budget.
+ */
+async function recallIntoWake(port: number): Promise<WakeRecall> {
+  const wing = wakeWing();
+  let did: string;
+  try { did = "0x" + (await loadVesselVerifyingKey(larDataDir())); }
+  catch { return { ok: false, wing, note: "no operator identity" }; }
+  let vessel;
+  try { vessel = await connectAdminVessel({ port }); }
+  catch { return { ok: false, wing, note: "daemon unreachable" }; }
+  try {
+    // One cold sidecar start can take ~8s; after that the @admin pool is warm and
+    // recall is sub-second. Give the first wake room; warm wakes return instantly.
+    const r = await submitVerb(vessel, "recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
+    if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };
+    const out = summaryOutput(r) ?? {};
+    const rows = Array.isArray(out["drawers"]) ? (out["drawers"] as Array<Record<string, unknown>>) : [];
+    const recent = rows.slice(0, 5).map((d) => ({
+      room: typeof d["room"] === "string" ? d["room"] : "",
+      preview: String(d["content_preview"] ?? d["content"] ?? d["preview"] ?? d["text"] ?? "").replace(/\s+/g, " ").trim().slice(0, 140),
+    }));
+    return { ok: true, wing, drawers: typeof out["total"] === "number" ? out["total"] : rows.length, recent };
+  } catch (e) {
+    return { ok: false, wing, note: e instanceof Error ? e.message : String(e) };
+  } finally {
+    try { await vessel.disconnect(); } catch { /* best effort */ }
+  }
+}
 
 export async function cmdWake(args: ParsedArgs): Promise<number> {
   const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
@@ -147,12 +196,18 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     }
   }
 
+  // 2b. Recall-into-wake — pull this project's recent journey so the woken session
+  //     climbs already-remembering. Best-effort: never breaks the wake; skipped when
+  //     the node isn't up (verbatim-always / recall-eventual).
+  const recall = nodeUp ? await recallIntoWake(port) : undefined;
+
   // 3. Emit the live-delta frame (dual output). Graceful: never hard-fail the wake.
   const ok = integration.ok && nodeUp;
   emit(args, {
     ok,
     data: {
       node: { up: nodeUp, started, port, note: nodeNote },
+      ...(recall !== undefined ? { recall } : {}),
       mempalace: { ok: integration.ok, checks: integration.checks },
       ...(mempalaceSetup !== undefined ? { mempalaceSetup } : {}),
       ...(founding !== undefined ? { founding } : {}),
@@ -171,6 +226,8 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
       for (const c of integration.checks) {
         console.log(`    ${c.ok ? "ok     " : "MISSING"} ${c.name}: ${c.detail}`);
       }
+      if (recall?.ok) console.log(`  recall:      ${recall.drawers ?? 0} drawers in ${recall.wing} — recent journey surfaced into the wake`);
+      else if (recall) console.log(`  recall:      skipped (${recall.note})`);
       if (mempalaceSetup !== undefined) {
         console.log("  mempalace setup (--init):");
         for (const s of [...mempalaceSetup.install, ...mempalaceSetup.palace])
