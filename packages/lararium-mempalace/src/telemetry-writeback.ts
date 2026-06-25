@@ -112,9 +112,15 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   const DRAWER_IO = resolveDrawerIo();
   if (!existsSync(DRAWER_IO)) throw new TelemetryUnavailable(`drawer_io.py missing at ${DRAWER_IO}`);
 
+  // drawer_io.py does `from mempalace.palace import …`. mempalace isn't pip-installed;
+  // it lives at <submoduleRoot>/mempalace/. `python script.py` sets sys.path[0] to the
+  // SCRIPT dir (not cwd), so cwd alone can't find it — PYTHONPATH=submoduleRoot makes
+  // `import mempalace` resolve, while the venv python supplies chromadb/sqlite.
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const pyEnv = { ...process.env, PYTHONPATH: submoduleRoot + (process.env["PYTHONPATH"] ? `:${process.env["PYTHONPATH"]}` : "") };
   const limit = opts.limit ?? 0;
   const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
-  const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { maxBuffer: 1 << 30, encoding: "utf8" });
+  const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
   const drawers = exportOut.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { id: string; content: string; source_file?: string });
 
   const bands: Record<string, number> = { canon: 0, synthesis: 0, provisional: 0, raw: 0 };
@@ -130,7 +136,7 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
   if (patches.length > 0) {
     const pf = join(tmpdir(), `lar-telemetry-patch-${wing}.ndjson`);
     writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
-    const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { maxBuffer: 1 << 30, encoding: "utf8" });
+    const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
     try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
   }
   return { drawers: drawers.length, framed, applied, bands };
