@@ -17,13 +17,14 @@ const PLACE   = "bafkreic7r3jrao44srh5bp47uryotaqp62bnmovzpqccbfy2kclf447bra";
 const vkOf = async (s: Uint8Array): Promise<string> => hex(await ed25519.getPublicKeyAsync(s));
 const opDidP = vkOf(opSeed).then((vk) => `0x${vk}`);
 
-async function mint(): Promise<DeviceDelegationTiddler> {
+async function mint(boundEpoch = 5): Promise<DeviceDelegationTiddler> {
   return buildDeviceDelegation({
     operatorSeed: opSeed,
     deviceVerifyingKey: await vkOf(devSeed),
     placeId: PLACE,
     issuedAt: ISSUED,
     expiresAt: EXPIRES,
+    boundEpoch,
   });
 }
 
@@ -38,7 +39,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
     // attacker mints their OWN edge under their OWN root: internally valid, but not the pin.
     const attackerSeed = new Uint8Array(32).fill(13);
     const attackerEdge = await buildDeviceDelegation({
-      operatorSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES,
+      operatorSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
     });
     const res = await verifyDeviceDelegation(attackerEdge, await opDidP); // pin = the REAL operator
     expect(res.ok).toBe(false);
@@ -93,7 +94,31 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
 
   it("rejects an edge with an illegal-character placeId at mint", async () => {
     await expect(buildDeviceDelegation({
-      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES,
+      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
     })).rejects.toThrow(/placeId/);
+  });
+
+  it("enforces the LEASE epoch when `expectedEpoch` is supplied (non-renewal)", async () => {
+    const edge = await mint(5);  // grant binds to lease epoch 5
+    // fresh — the resource's epoch has not rolled past 5
+    expect((await verifyDeviceDelegation(edge, await opDidP, { expectedEpoch: 5 })).ok).toBe(true);
+    expect((await verifyDeviceDelegation(edge, await opDidP, { expectedEpoch: 3 })).ok).toBe(true);
+    // stale — the resource rolled to 6; the grant must re-mint or expire
+    const stale = await verifyDeviceDelegation(edge, await opDidP, { expectedEpoch: 6 });
+    expect(stale.ok).toBe(false);
+    expect(stale.reason).toMatch(/lease stale/);
+    // omitting expectedEpoch leaves the lease unenforced (signature + pin only) — single-vessel/pure-crypto path
+    expect((await verifyDeviceDelegation(edge, await opDidP)).ok).toBe(true);
+  });
+
+  it("rejects a forged boundEpoch (signature mismatch — can't outlive a roll by editing the field)", async () => {
+    const edge = await mint(5);
+    expect((await verifyDeviceDelegation({ ...edge, boundEpoch: "999" }, await opDidP)).ok).toBe(false);
+  });
+
+  it("rejects a non-numeric boundEpoch at mint", async () => {
+    await expect(buildDeviceDelegation({
+      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: -1,
+    })).rejects.toThrow(/boundEpoch/);
   });
 });

@@ -9,12 +9,14 @@
  * The edge is a STANDING MEMBERSHIP grant (long-lived, revocable), NOT a per-use proof:
  * per-use replay defense (nonce + short exp + seen-cache) rides a separate INVOCATION
  * (the UCAN delegation/invocation split) — a follow-on, not this module. Revocation rides
- * the CRDT membership graph (observed-remove) + a backstop edge-id blocklist + the epoch
- * hammer for re-founding — wiring concerns, noted at the verify site.
+ * the CRDT membership graph (observed-remove — the PRIMARY targeted revoke). NON-renewal
+ * rides the `boundEpoch` LEASE below: the grant names a per-resource max-register epoch and
+ * goes stale when that epoch rolls past it (coordinator-free; the epoch is a LEASE, not a
+ * targeted revoker — adversarial research 2026-06-24, api/pono/convergent-mesh).
  *
  * Canonical signed string (domain + version tagged for separation; every field strict-
  * charset so no `|` can shift a boundary):
- *   lar-device-delegation/v1|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{placeId}|{issuedAt}|{expiresAt}
+ *   lar-device-delegation/v2|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{placeId}|{issuedAt}|{expiresAt}|{boundEpoch}
  *
  * Trust rides the SIGNATURE + the PINNED root, never a doc's write-ACL (confused-deputy
  * guard). Hardened against the verification swarm's kue (2026-06-24): never throws on
@@ -26,7 +28,7 @@
 import * as ed25519 from "@noble/ed25519";
 import { hex, hexToBytes } from "./crypto.js";
 
-export const DEVICE_DELEGATION_DOMAIN = "lar-device-delegation/v1" as const;
+export const DEVICE_DELEGATION_DOMAIN = "lar-device-delegation/v2" as const;
 
 /** Clock drift tolerance for the freshness window (matches the V3 auth-proof posture / UCAN ±60s). */
 export const DELEGATION_CLOCK_DRIFT_MS = 60_000;
@@ -36,6 +38,7 @@ const VK_RE   = /^[0-9a-f]{64}$/;          // raw 32-byte verifying-key hex, low
 const SIG_RE  = /^[0-9a-f]{128}$/;         // 64-byte Ed25519 signature hex, lowercase
 const ISO_RE  = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/;
 const PLACE_RE = /^[A-Za-z0-9._:/@-]*$/;   // CID / lar:-name safe; no `|`, no whitespace; "" allowed (place-agnostic)
+const EPOCH_RE = /^\d{1,15}$/;             // decimal lease epoch; 1-15 digits, bounded < Number.MAX_SAFE_INTEGER
 
 /** "0x" + raw 32-byte Ed25519 verifying-key hex (lowercase). */
 export type LarDid = string;
@@ -52,8 +55,12 @@ export interface DeviceDelegationTiddler {
   readonly placeId:             string;
   /** ISO-8601 issue instant (caller-supplied; no ambient clock). */
   readonly issuedAt:            string;
-  /** ISO-8601 expiry instant — bounds the replay window even absent synchronous revocation. */
+  /** ISO-8601 expiry instant — bounds the replay window even absent synchronous revocation (now a replay BACKSTOP, not the lease authority). */
   readonly expiresAt:           string;
+  /** the LEASE epoch this grant binds to — a per-resource max-register value (1-15 decimal digits).
+   *  The grant goes stale when the resource's epoch rolls past it (non-renewal). The epoch is a
+   *  LEASE, never a targeted revoker (targeted revoke rides the Keyhive membership graph). */
+  readonly boundEpoch:          string;
   /** Ed25519 signature hex (128) over the canonical proof string, by the operator root. */
   readonly signature:           string;
 }
@@ -63,12 +70,12 @@ const verifyingKeyFromDid = (did: string): string => (did.startsWith("0x") ? did
 
 type ProofFields = Pick<
   DeviceDelegationTiddler,
-  "operatorDid" | "deviceDid" | "deviceVerifyingKey" | "placeId" | "issuedAt" | "expiresAt"
+  "operatorDid" | "deviceDid" | "deviceVerifyingKey" | "placeId" | "issuedAt" | "expiresAt" | "boundEpoch"
 >;
 
 function delegationProofBytes(d: ProofFields): Uint8Array {
   return new TextEncoder().encode(
-    `${DEVICE_DELEGATION_DOMAIN}|${d.operatorDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.placeId}|${d.issuedAt}|${d.expiresAt}`,
+    `${DEVICE_DELEGATION_DOMAIN}|${d.operatorDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.placeId}|${d.issuedAt}|${d.expiresAt}|${d.boundEpoch}`,
   );
 }
 
@@ -85,6 +92,7 @@ function fieldError(d: Partial<DeviceDelegationTiddler>): string | null {
   if (typeof d.placeId !== "string" || !PLACE_RE.test(d.placeId))                       return "placeId has illegal characters";
   if (typeof d.issuedAt !== "string" || !ISO_RE.test(d.issuedAt))                       return "issuedAt not strict ISO-8601";
   if (typeof d.expiresAt !== "string" || !ISO_RE.test(d.expiresAt))                     return "expiresAt not strict ISO-8601";
+  if (typeof d.boundEpoch !== "string" || !EPOCH_RE.test(d.boundEpoch))                 return "boundEpoch not a 1-15 digit decimal";
   if (typeof d.signature !== "string" || !SIG_RE.test(d.signature))                     return "signature not 64-byte lowercase hex";
   return null;
 }
@@ -100,7 +108,8 @@ export async function buildDeviceDelegation(args: {
   deviceVerifyingKey: string;     // raw Ed25519 verifying-key hex (64, lowercase) of the delegate
   placeId:            string;     // hearth true-name (genesis CID), or "" if place-agnostic
   issuedAt:           string;     // ISO-8601
-  expiresAt:          string;     // ISO-8601 — bound the validity window (generous is fine; bounded matters)
+  expiresAt:          string;     // ISO-8601 — replay backstop (generous is fine; the epoch is the authority)
+  boundEpoch:         number;     // the per-resource lease epoch this grant binds to (non-negative integer)
 }): Promise<DeviceDelegationTiddler> {
   const operatorDid = didFromVerifyingKey(hex(await ed25519.getPublicKeyAsync(args.operatorSeed)));
   const fields: ProofFields = {
@@ -110,6 +119,7 @@ export async function buildDeviceDelegation(args: {
     placeId:            args.placeId,
     issuedAt:           args.issuedAt,
     expiresAt:          args.expiresAt,
+    boundEpoch:         String(args.boundEpoch),
   };
   const candidate = { kind: "device-delegation" as const, ...fields, signature: "0".repeat(128) };
   const err = fieldError(candidate);
@@ -134,7 +144,7 @@ export async function buildDeviceDelegation(args: {
 export async function verifyDeviceDelegation(
   edge: DeviceDelegationTiddler,
   expectedOperatorDid: string,
-  opts?: { now?: number; driftMs?: number },
+  opts?: { now?: number; driftMs?: number; expectedEpoch?: number },
 ): Promise<{ ok: boolean; reason?: string }> {
   const err = fieldError(edge);
   if (err) return { ok: false, reason: err };
@@ -156,6 +166,17 @@ export async function verifyDeviceDelegation(
     if (expires <= issued)              return { ok: false, reason: "expiresAt not after issuedAt" };
     if (opts.now > expires + drift)     return { ok: false, reason: "delegation expired" };
     if (opts.now < issued - drift)      return { ok: false, reason: "delegation not yet valid" };
+  }
+
+  // Lease (non-renewal) — the epoch the grant binds to must not have rolled past. OPTIONAL
+  // (like opts.now): pass expectedEpoch (the resource's current max-register epoch the verifier
+  // holds) to enforce the lease; omit to check signature + pin alone. The epoch is the lease
+  // AUTHORITY; the wall-clock window above is only a replay backstop. Targeted revocation rides
+  // the Keyhive membership graph, never this counter.
+  if (opts?.expectedEpoch !== undefined) {
+    const bound = Number(edge.boundEpoch);
+    if (!Number.isFinite(bound))        return { ok: false, reason: "unparseable boundEpoch" };
+    if (bound < opts.expectedEpoch)     return { ok: false, reason: "delegation lease stale (resource epoch rolled past boundEpoch)" };
   }
 
   try {
