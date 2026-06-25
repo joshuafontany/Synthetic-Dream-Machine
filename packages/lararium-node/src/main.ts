@@ -31,7 +31,10 @@ import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { openNodeVessel }               from "./open-node-vessel.js";
 import { startUdsChannel }              from "./uds-channel.js";
+import { mountOracleReadFace }          from "./oracle-read-face.js";
+import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
+import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
 import { REPO_ROOT }   from "./node-host.js";
 
@@ -120,6 +123,25 @@ async function main(): Promise<void> {
   console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);
   console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
+  // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
+  // floor) — served over THIS http server: GET /oracle/pointer · /oracle/<cid>.bin.
+  // Write-refusing by construction (GET-only, hash-named, no sync). Best-effort: a
+  // read-face failure logs and never crashes boot. lar:///…/lararium-identity#the-oracle-plane.
+  let oracleReadFace: { dispose: () => void } | null = null;
+  if (result.oracleDocUrl) {
+    try {
+      const oracleHandle = await result.repo.find(result.oracleDocUrl as AutomergeUrl);
+      const signerSeed   = await loadVesselSigningSeed(storageDir);
+      oracleReadFace = await mountOracleReadFace({
+        httpServer, oracleHandle, signerSeed, storageDir,
+        onLog: (line) => console.log(`[lararium] ${line}`),
+      });
+      console.log(`[lararium] oracle read-face: GET /oracle/pointer · /oracle/<cid>.bin`);
+    } catch (e) {
+      console.log(`[lararium] oracle read-face skipped: ${e instanceof Error ? e.message : String(e)}`);
+    }
+  }
+
   // Co-located fast path: a Unix-domain verb-channel for the local `lares` CLI —
   // no per-command leaf replica / WS handshake. The WS relay above stays the path
   // for remote mesh peers. (lar:///…/api/lares-lararium-binding)
@@ -140,6 +162,7 @@ async function main(): Promise<void> {
 
   const shutdown = () => {
     console.log("[lararium] shutting down");
+    oracleReadFace?.dispose();
     uds.close();
     result.admin.dispose();
     httpServer.close();
