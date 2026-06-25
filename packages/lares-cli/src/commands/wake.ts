@@ -105,7 +105,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
   //     --install / --admit / bare. Idempotent; preserves existing settings.
   let claude: ClaudeWireResult | undefined;
   if (args.flags["claude"]) {
-    try { claude = wireClaudeHome(); }
+    try { claude = await wireClaudeHome(); }
     catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
 

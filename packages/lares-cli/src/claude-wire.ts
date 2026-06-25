@@ -24,8 +24,9 @@ import { repoRoot } from "@lararium/mesh/node";
  * bug (anthropics/claude-code#28842), and parallel sessions share this tree. Steals a
  * stale lock (>30s, a crashed holder); throws after a bounded wait rather than corrupt.
  */
-function acquireLock(lockPath: string): void {
-  const sab = new Int32Array(new SharedArrayBuffer(4));
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+
+async function acquireLock(lockPath: string): Promise<void> {
   for (let i = 0; i < 20; i++) {
     try {
       closeSync(openSync(lockPath, "wx"));
@@ -35,7 +36,7 @@ function acquireLock(lockPath: string): void {
       try {
         if (Date.now() - statSync(lockPath).mtimeMs > 30_000) { rmSync(lockPath, { force: true }); continue; }
       } catch { /* lock vanished — retry */ }
-      Atomics.wait(sab, 0, 0, 100);
+      await sleep(100); // async backoff — never blocks the main thread (no Atomics.wait / SharedArrayBuffer)
     }
   }
   throw new Error(`${lockPath} held by another writer — another \`lares wake --claude\` is running; retry shortly`);
@@ -130,13 +131,13 @@ export interface ClaudeWireResult {
 }
 
 /** Wire the plugin hooks + mempalace MCP into ~/.claude/settings.json. Idempotent; preserves existing settings. */
-export function wireClaudeHome(opts: { home?: string } = {}): ClaudeWireResult {
+export async function wireClaudeHome(opts: { home?: string } = {}): Promise<ClaudeWireResult> {
   const home = opts.home ?? homedir();
   const claudeDir = join(home, ".claude");
   mkdirSync(claudeDir, { recursive: true });
   const settingsPath = join(claudeDir, "settings.json");
   const lockPath = settingsPath + ".lock";
-  acquireLock(lockPath);
+  await acquireLock(lockPath);
   try {
     return wireUnderLock(settingsPath);
   } finally {

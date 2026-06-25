@@ -31,6 +31,7 @@ import WebSocket                         from "isomorphic-ws";
 import { resolve }                       from "path";
 import { openNodeVessel }               from "./open-node-vessel.js";
 import { startUdsChannel }              from "./uds-channel.js";
+import { getMempalaceClient }           from "@lararium/mempalace";
 import { join } from "path";
 import { REPO_ROOT }   from "./node-host.js";
 
@@ -128,6 +129,14 @@ async function main(): Promise<void> {
     socketPath,
     onLog: (line) => console.log(`[lararium] ${line}`),
   });
+
+  // Pre-warm the mempalace read sidecar so the FIRST recall / recall-into-wake skips
+  // the ~8s cold chromadb start (the pool then stays warm for the daemon's life).
+  // Background + best-effort: never blocks boot, never fails it if mempalace is absent.
+  void getMempalaceClient().then(
+    () => console.log("[lararium] mempalace sidecar pre-warmed"),
+    (e) => console.log(`[lararium] mempalace pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
+  );
 
   const shutdown = () => {
     console.log("[lararium] shutting down");

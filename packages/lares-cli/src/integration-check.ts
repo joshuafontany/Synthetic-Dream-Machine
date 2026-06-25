@@ -9,9 +9,9 @@
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { homedir } from "node:os";
 import { execFileSync, spawnSync } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
+import { resolveMempalacePython } from "@lararium/mempalace";
 
 const MEMPALACE_DIR = join(repoRoot, "mempalace");
 const MEMPALACE_SIDECAR = join(MEMPALACE_DIR, "mempalace", "mcp_server.py");
@@ -19,34 +19,12 @@ const MEMPALACE_PKG = join(repoRoot, "packages", "lararium-mempalace");
 const MEMPALACE_PLUGIN = join(MEMPALACE_DIR, ".claude-plugin", "plugin.json");
 
 /**
- * Resolve the Python interpreter, preferring a VENV that holds mempalace over the
- * (often PEP-668 externally-managed) system python — `$VIRTUAL_ENV`, then `~/.venv`,
- * then `python3` / `python` / `py`. A venv is pip-installable; the system python on
- * Debian/Ubuntu is not. Cached. Returns null when none responds to `--version`.
+ * The Python interpreter that holds mempalace (venv-aware). ONE source of truth:
+ * @lararium/mempalace owns the resolver; this re-export keeps `lares wake`'s cheap
+ * check on the exact same logic — the former duplicate "kept in lockstep" is gone
+ * (YIN cut, 2026-06-25).
  */
-let _python: string | null | undefined;
-export function resolvePython(): string | null {
-  if (_python !== undefined) return _python;
-  const win = process.platform === "win32";
-  const venvPy = (base: string): string => join(base, win ? "Scripts" : "bin", win ? "python.exe" : "python3");
-  const cands: string[] = [];
-  if (process.env["VIRTUAL_ENV"]) cands.push(venvPy(process.env["VIRTUAL_ENV"]));
-  cands.push(venvPy(join(homedir(), ".venv")));
-  cands.push("python3", "python", "py");
-  for (const cand of cands) {
-    try {
-      const r = spawnSync(cand, ["--version"], { timeout: 5_000, stdio: "ignore" });
-      if (r.error === undefined && r.status === 0) {
-        _python = cand;
-        return _python;
-      }
-    } catch {
-      /* try next */
-    }
-  }
-  _python = null;
-  return _python;
-}
+export const resolvePython = resolveMempalacePython;
 
 export interface IntegrationCheck {
   readonly name: string;
