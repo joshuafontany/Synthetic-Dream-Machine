@@ -75,9 +75,13 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
     try {
       const { summaryOutput } = await import("../admin-connector.js");
       const { runVerb } = await import("../verb-call.js");
+      const { loadVesselVerifyingKey } = await import("@lararium/node");
       // UDS fast path, WS fallback (the lares↔lararium binding). Cheap probe;
-      // any failure falls through silently — `lares status` never errors.
-      const r = await runVerb("residency", {}, "lares-status", { timeoutMs: 2000 });
+      // any failure falls through silently — `lares status` never errors. The
+      // residency verb is cap-gated, so it needs the real operator did (a non-did
+      // requestedBy cap-errors quietly — the old "lares-status" label always did).
+      const did = "0x" + (await loadVesselVerifyingKey(join(root, ".lararium")));
+      const r = await runVerb("residency", {}, did, { timeoutMs: 2000 });
       if (r.status === "done") {
         const stats   = summaryOutput(r) ?? {};
         const pinned  = (stats["pinned"] ?? []) as string[];

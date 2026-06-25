@@ -70,6 +70,24 @@ export async function writeOutcome(
   await admin.put(outcome, origin, { bag: ADMIN_BAG_ID });
 }
 
+/**
+ * Render any thrown value to a readable message. A non-Error throw (a plain object,
+ * e.g. a `{ok:false,reason}` verify result) used to stringify to "[object Object]";
+ * prefer its message/reason/error field, else a compact JSON, never the bare cast.
+ */
+function errorText(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  if (err && typeof err === "object") {
+    const o = err as Record<string, unknown>;
+    for (const k of ["message", "reason", "error"]) {
+      if (typeof o[k] === "string" && o[k]) return o[k] as string;
+    }
+    try { return JSON.stringify(err); } catch { /* circular — fall through */ }
+  }
+  return String(err);
+}
+
 export async function dispatchVerb(
   tw5: TW5Engine,
   admin: CompositeStore,
@@ -82,8 +100,7 @@ export async function dispatchVerb(
     const result = await run();
     await writeOutcome(admin, { invocation, status: "done", result });
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    await writeOutcome(admin, { invocation, status: "error", errorMessage: message });
+    await writeOutcome(admin, { invocation, status: "error", errorMessage: errorText(err) });
   }
 
   removeVerb(tw5, invocation.title);
