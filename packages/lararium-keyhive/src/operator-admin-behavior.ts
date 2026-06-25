@@ -121,6 +121,8 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
         personGroupAgentIdHex: adminAuth.personGroupAgentIdHex,
         meshCabalDocIdHex:     adminAuth.meshCabalDocIdHex,
         registerBags:          adminAuth.registerBags,
+        signerDid:       adminAuth.signerDid,
+        deviceEdge:            adminAuth.deviceEdge,
       });
       kh = keyhive;
       mintedByHex = did;

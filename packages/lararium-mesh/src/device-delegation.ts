@@ -16,7 +16,7 @@
  *
  * Canonical signed string (domain + version tagged for separation; every field strict-
  * charset so no `|` can shift a boundary):
- *   lar-device-delegation/v2|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{placeId}|{issuedAt}|{expiresAt}|{boundEpoch}
+ *   lar-device-delegation/v2|{operatorDid}|{deviceDid}|{deviceVerifyingKey}|{hearthTrueName}|{issuedAt}|{expiresAt}|{boundEpoch}
  *
  * Trust rides the SIGNATURE + the PINNED root, never a doc's write-ACL (confused-deputy
  * guard). Hardened against the verification swarm's kue (2026-06-24): never throws on
@@ -37,7 +37,7 @@ const DID_RE  = /^0x[0-9a-f]{64}$/;       // "0x" + raw 32-byte Ed25519 verifyin
 const VK_RE   = /^[0-9a-f]{64}$/;          // raw 32-byte verifying-key hex, lowercase
 const SIG_RE  = /^[0-9a-f]{128}$/;         // 64-byte Ed25519 signature hex, lowercase
 const ISO_RE  = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/;
-const PLACE_RE = /^[A-Za-z0-9._:/@-]*$/;   // CID / lar:-name safe; no `|`, no whitespace; "" allowed (place-agnostic)
+const TRUE_NAME_RE = /^[A-Za-z0-9._:/@-]*$/;   // CID / lar:-name safe; no `|`, no whitespace; "" allowed (place-agnostic)
 const EPOCH_RE = /^\d{1,15}$/;             // decimal lease epoch; 1-15 digits, bounded < Number.MAX_SAFE_INTEGER
 
 /** "0x" + raw 32-byte Ed25519 verifying-key hex (lowercase). */
@@ -51,8 +51,9 @@ export interface DeviceDelegationTiddler {
   readonly deviceDid:           LarDid;
   /** raw 32-byte Ed25519 verifying-key hex (64, lowercase) of the delegate vessel. */
   readonly deviceVerifyingKey:  string;
-  /** the place this edge is bound to — the hearth's public true-name (genesis CID), or "" if place-agnostic. */
-  readonly placeId:             string;
+  /** the hearth true-name this edge binds the vessel TO — the engine blob's public True Name
+   *  (the genesis engineCid), or "" if hearth-agnostic. The binding IS (vessel × hearthTrueName). */
+  readonly hearthTrueName:             string;
   /** ISO-8601 issue instant (caller-supplied; no ambient clock). */
   readonly issuedAt:            string;
   /** ISO-8601 expiry instant — bounds the replay window even absent synchronous revocation (now a replay BACKSTOP, not the lease authority). */
@@ -70,12 +71,12 @@ const verifyingKeyFromDid = (did: string): string => (did.startsWith("0x") ? did
 
 type ProofFields = Pick<
   DeviceDelegationTiddler,
-  "operatorDid" | "deviceDid" | "deviceVerifyingKey" | "placeId" | "issuedAt" | "expiresAt" | "boundEpoch"
+  "operatorDid" | "deviceDid" | "deviceVerifyingKey" | "hearthTrueName" | "issuedAt" | "expiresAt" | "boundEpoch"
 >;
 
 function delegationProofBytes(d: ProofFields): Uint8Array {
   return new TextEncoder().encode(
-    `${DEVICE_DELEGATION_DOMAIN}|${d.operatorDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.placeId}|${d.issuedAt}|${d.expiresAt}|${d.boundEpoch}`,
+    `${DEVICE_DELEGATION_DOMAIN}|${d.operatorDid}|${d.deviceDid}|${d.deviceVerifyingKey}|${d.hearthTrueName}|${d.issuedAt}|${d.expiresAt}|${d.boundEpoch}`,
   );
 }
 
@@ -89,7 +90,7 @@ function fieldError(d: Partial<DeviceDelegationTiddler>): string | null {
   if (typeof d.operatorDid !== "string" || !DID_RE.test(d.operatorDid))                 return "operatorDid not 0x+32-byte lowercase hex";
   if (typeof d.deviceVerifyingKey !== "string" || !VK_RE.test(d.deviceVerifyingKey))    return "deviceVerifyingKey not 32-byte lowercase hex";
   if (typeof d.deviceDid !== "string" || d.deviceDid !== didFromVerifyingKey(d.deviceVerifyingKey)) return "deviceDid not bound to deviceVerifyingKey";
-  if (typeof d.placeId !== "string" || !PLACE_RE.test(d.placeId))                       return "placeId has illegal characters";
+  if (typeof d.hearthTrueName !== "string" || !TRUE_NAME_RE.test(d.hearthTrueName))                       return "hearthTrueName has illegal characters";
   if (typeof d.issuedAt !== "string" || !ISO_RE.test(d.issuedAt))                       return "issuedAt not strict ISO-8601";
   if (typeof d.expiresAt !== "string" || !ISO_RE.test(d.expiresAt))                     return "expiresAt not strict ISO-8601";
   if (typeof d.boundEpoch !== "string" || !EPOCH_RE.test(d.boundEpoch))                 return "boundEpoch not a 1-15 digit decimal";
@@ -99,14 +100,14 @@ function fieldError(d: Partial<DeviceDelegationTiddler>): string | null {
 
 /**
  * Mint a signed device-delegation edge. The operator's 32-byte seed signs; operatorDid
- * derives from that same seed (self-attribution). `issuedAt`/`expiresAt`/`placeId` are
+ * derives from that same seed (self-attribution). `issuedAt`/`expiresAt`/`hearthTrueName` are
  * caller-supplied (pure, no ambient clock). Throws on malformed inputs — it is the
  * controlled minter, never fed untrusted data.
  */
 export async function buildDeviceDelegation(args: {
   operatorSeed:       Uint8Array; // operator root 32-byte Ed25519 seed (the signer)
   deviceVerifyingKey: string;     // raw Ed25519 verifying-key hex (64, lowercase) of the delegate
-  placeId:            string;     // hearth true-name (genesis CID), or "" if place-agnostic
+  hearthTrueName:            string;     // hearth true-name (genesis CID), or "" if place-agnostic
   issuedAt:           string;     // ISO-8601
   expiresAt:          string;     // ISO-8601 — replay backstop (generous is fine; the epoch is the authority)
   boundEpoch:         number;     // the per-resource lease epoch this grant binds to (non-negative integer)
@@ -116,7 +117,7 @@ export async function buildDeviceDelegation(args: {
     operatorDid,
     deviceDid:          didFromVerifyingKey(args.deviceVerifyingKey),
     deviceVerifyingKey: args.deviceVerifyingKey,
-    placeId:            args.placeId,
+    hearthTrueName:            args.hearthTrueName,
     issuedAt:           args.issuedAt,
     expiresAt:          args.expiresAt,
     boundEpoch:         String(args.boundEpoch),

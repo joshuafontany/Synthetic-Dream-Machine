@@ -39,9 +39,16 @@ import {
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
   PERSON_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
   CAP_EVENT_TAG,
   seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
+  buildDeviceDelegation, type DeviceDelegationTiddler,
 } from "@lararium/mesh";
+
+// A device-delegation edge's expiry is a generous replay BACKSTOP only — the
+// epoch-lease is the live authority (device-delegation.ts). 100 years keeps the
+// founding edge well clear of the wall while the lease does the real work.
+const EDGE_BACKSTOP_MS = 100 * 365 * 24 * 60 * 60 * 1000;
 
 function bytesToBase64(bytes: Uint8Array): string {
   let bin = "";
@@ -67,11 +74,19 @@ import type { DeviceAdmitPayload } from "./index.js";
 
 export interface FoundingCeremonyInput {
   repo:                Repo;
+  /** The PER-VESSEL device signing seed — inits Keyhive (this vessel IS the Individual). */
   operatorSeed:        Uint8Array;
-  /** Hex-encoded 32-byte Ed25519 verifying key — used to build the operator identity tiddler. */
+  /** Hex-encoded 32-byte Ed25519 verifying key of the per-vessel device — the delegate. */
   operatorVerifyingKey: string;
-  /** Display name for the operator identity tiddler. */
+  /** Display name for the device identity tiddler. */
   operatorDisplayName:  string;
+  /** The SIGNER 32-byte seed — SIGNS the device-delegation edge. For an anon this IS the vessel's
+   *  own seed (self-signed; signerDid == deviceDid); for a delegated/operator vessel it is a granting
+   *  root. It NEVER inits Keyhive (the per-vessel key stays the Individual). REQUIRED: every founding binds. */
+  signerSeed: Uint8Array;
+  /** The hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName).
+   *  REQUIRED: a founding with no place to bind to is no founding. */
+  hearthTrueName:      string;
 }
 
 export interface FoundingCeremonyResult {
@@ -86,6 +101,12 @@ export interface FoundingCeremonyResult {
   /** The operator's self-certifying ContactCard JSON, minted once during the
    *  ceremony. The caller caches it for the light leaf-identity path (OP-AP5). */
   contactCardJson:       string;
+  /** The PINNED signer DID ("0x"+hex) every Gate B verifies the edge against — self for an anon,
+   *  a granting root for a delegated/operator vessel. */
+  signerDid:       string;
+  /** This vessel's OWN signed device-delegation edge (signer→vessel) — the public binding
+   *  (vessel × hearthTrueName). */
+  founderEdge:           DeviceDelegationTiddler;
 }
 
 /**
@@ -175,6 +196,37 @@ export async function runFoundingCeremony(
     };
   });
 
+  // ── The binding edge (the ONE TRUE PATH): the signer SIGNS (vessel × hearthTrueName) ──
+  // The signer seed only signs — it NEVER inits Keyhive (the per-vessel key stays the Individual).
+  // Self-signed when signerSeed == the vessel seed (an anon: signerDid == deviceDid); root-signed
+  // when a granting root delegates (known-user / operator). The cap-TIER is a DERIVED read over the
+  // edge's lease-freshness — the boundEpoch below is the decay hook — never a stamped field.
+  const edgeIssuedAt  = new Date().toISOString();
+  const edgeExpiresAt = new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString();
+  const founderEdge = await buildDeviceDelegation({
+    operatorSeed:       input.signerSeed,   // the root SIGNS
+    deviceVerifyingKey: operatorVerifyingKey,        // the per-vessel device is the delegate
+    hearthTrueName:     input.hearthTrueName,         // the place this binds TO
+    issuedAt:           edgeIssuedAt,
+    expiresAt:          edgeExpiresAt,
+    boundEpoch:         0,                            // genesis lease epoch (effectiveLeaseEpoch starts at 0)
+  });
+  const signerDid = founderEdge.operatorDid;
+  adminHandle.change((doc) => {
+    doc.tiddlers[SIGNER_DID_TIDDLER] = {
+      tiddler: { title: SIGNER_DID_TIDDLER, text: signerDid, kind: "operator-root-did" },
+      meta: { authority: "lares-init" },
+    };
+    doc.tiddlers[HEARTH_TRUE_NAME_TIDDLER] = {
+      tiddler: { title: HEARTH_TRUE_NAME_TIDDLER, text: input.hearthTrueName, kind: "hearth-true-name" },
+      meta: { authority: "lares-init" },
+    };
+    doc.tiddlers[DEVICE_DELEGATION_SELF_TIDDLER] = {
+      tiddler: { title: DEVICE_DELEGATION_SELF_TIDDLER, ...founderEdge },
+      meta: { authority: "lares-init" },
+    };
+  });
+
   // Mint the operator's self-certifying ContactCard ONCE, before the ceremony
   // keyhive disposes. The card carries no expiry/nonce, so a short-lived LEAF
   // actor (CLI run / agent turn) re-presents this cached JSON forever without
@@ -193,6 +245,8 @@ export async function runFoundingCeremony(
     personGroupAgentIdHex: personGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
     contactCardJson,
+    signerDid,
+    founderEdge,
   };
 }
 

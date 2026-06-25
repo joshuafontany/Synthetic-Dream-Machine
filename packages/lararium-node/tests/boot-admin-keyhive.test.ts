@@ -53,6 +53,8 @@ beforeAll(async () => {
     repo, operatorSeed: SEED,
     operatorVerifyingKey: verifyingKey,
     operatorDisplayName:  "Test Operator",
+    signerSeed: SEED,          // self-signed (signerDid == deviceDid) for the test founder
+    hearthTrueName: "",         // hearth-agnostic in the unit test
   });
 
   // Build the admin composite the worker's onEa would receive in ctx.
@@ -72,6 +74,8 @@ beforeAll(async () => {
       personGroupAgentIdHex: cer.personGroupAgentIdHex,
       meshCabalDocIdHex:     cer.meshCabalDocIdHex,
       registerBags:          [ADMIN_BAG_ID],
+      signerDid:             cer.signerDid,
+      deviceEdge:            cer.founderEdge,
     },
   };
 });
@@ -96,9 +100,10 @@ describe("bootAdminKeyhive", () => {
     })).rejects.toThrow(/Gate A/);
   });
 
-  test("HALTs on a non-member sentinel (Gate B)", async () => {
+  test("HALTs on a forged binding edge (Gate B, fail-closed)", async () => {
     await expect(bootAdminKeyhive({
-      ...founded.bootArgs, personGroupDocIdHex: "00".repeat(32),
-    })).rejects.toThrow(/Gate B|Gate C/);
+      ...founded.bootArgs,
+      deviceEdge: { ...founded.bootArgs.deviceEdge, signature: "00".repeat(64) },
+    })).rejects.toThrow(/Gate B/);
   });
 });

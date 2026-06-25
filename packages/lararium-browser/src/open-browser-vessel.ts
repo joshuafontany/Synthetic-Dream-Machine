@@ -25,7 +25,7 @@ import {
   parseMeshScale, type MeshScale, resolveBootDoc, isStillJoining,
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
-  type VesselBootstrap, type VesselCoreAssembly,
+  type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
 }                                            from "@lararium/mesh";
 import {
   MemoryTiddlerStore,
@@ -61,6 +61,10 @@ interface BrowserBootstrap extends VesselBootstrap {
   personGroupDocIdHex:   string;
   personGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
+  /** The signer DID Gate B pins the edge to — self-DID for an anon (self-signed). */
+  signerDid:             string;
+  /** This vessel's self-signed device-delegation edge — the public Gate B binding. */
+  deviceEdge:            DeviceDelegationTiddler;
 }
 
 interface BootKeyReads {
@@ -162,10 +166,13 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       repo, operatorSeed,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  displayName ?? "Browser Operator",
+      signerSeed: operatorSeed,   // self-signed anon (signerDid == deviceDid) — the floor tier
+      hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
     });
     bootstrap = {
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, adminUrl: f.adminUrl,
       personGroupDocIdHex: f.personGroupDocIdHex, personGroupAgentIdHex: f.personGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
+      signerDid: f.signerDid, deviceEdge: f.founderEdge,
     };
     bootKeyWrites.bootstrap = bootstrap;
   }
@@ -289,6 +296,8 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
+        signerDid: social.signerDid,
+        deviceEdge: social.deviceEdge,
       };
       admin = await openBrowserAdminVm({
         repo, adminUrl: social.adminUrl, coreHash: assembly.coreHash,

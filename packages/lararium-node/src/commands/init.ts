@@ -23,7 +23,11 @@ import {
   PERSON_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
-import { generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard } from "../node-vessel-identity.js";
+import {
+  generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
+  generateOrLoadPersonGroupRoot, loadPersonGroupRootSeed,
+} from "../node-vessel-identity.js";
+import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
 import {
   runFoundingCeremony, runApplyAdmitPayload, type DeviceAdmitPayload,
 } from "@lararium/keyhive";
@@ -134,14 +138,31 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // ── Founding ceremony path ───────────────────────────────────────────────
   const operatorSeed = await loadVesselSigningSeed(storageDir);
 
+  // The binding: the per-vessel key (operatorSeed) is the DEVICE; the PersonGroup ROOT
+  // signs the edge that binds it to the hearth true-name. Founder-only — mint/load the
+  // root + its seed, and read the hearth true-name (engine CID). A founding with no place
+  // to bind to is no founding, so both are required (pono — we are the first node).
+  await generateOrLoadPersonGroupRoot(storageDir);
+  const signerSeed = await loadPersonGroupRootSeed(storageDir);
+  const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
+  if (!hearthTrueName) {
+    throw new Error(
+      "[lares init] cannot found: hearth true-name (engine CID) absent — " +
+      "run `pnpm --filter @lararium/node build:genesis` first.",
+    );
+  }
+
   const {
     identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
     personGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
+    signerDid,
   } = await runFoundingCeremony({
     repo,
     operatorSeed,
     operatorVerifyingKey: operatorIdentity.verifyingKey,
     operatorDisplayName:  operatorIdentity.displayName ?? "operator",
+    signerSeed,
+    hearthTrueName,
   });
 
   // Cache the operator ContactCard for the light leaf-identity path — a CLI/agent
@@ -162,6 +183,8 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   console.log(`  @admin       ${adminUrl}`);
   console.log(`  PersonGroup  ${personGroupDocIdHex.slice(0, 20)}…`);
   console.log(`  MeshCabal    ${meshCabalDocIdHex.slice(0, 20)}…`);
+  console.log(`  operator-root ${signerDid.slice(0, 20)}…`);
+  console.log(`  hearth-name   ${hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
   console.log("[lares init] done — Nexus node ready. Start with: lares dev");
 
   return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };

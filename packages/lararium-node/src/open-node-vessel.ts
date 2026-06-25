@@ -37,6 +37,7 @@ import {
   parseMeshScale, type MeshScale,
   BAG_IDS, slugFromUri,
   PERSON_GROUP_DOC_ID_TIDDLER, PERSON_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
+  SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager,
 }                                       from "@lararium/mesh";
 import {
@@ -329,6 +330,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
         throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares init\`.`);
       }
+      // The binding signer-pin + edge — Gate B's authority. FAIL-CLOSED: a missing pin or edge
+      // MUST halt the boot, NEVER fall through to skip Gate B (the confused-deputy / PCD cure).
+      const signerDid  = tiddlerText(adminDoc?.tiddlers?.[SIGNER_DID_TIDDLER]) ?? null;
+      const edgeRecord = adminDoc?.tiddlers?.[DEVICE_DELEGATION_SELF_TIDDLER];
+      if (!signerDid || !edgeRecord?.tiddler) {
+        throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from admin doc — run \`lares init\`.`);
+      }
+      const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
       const adminAuth = {
         seed:                 operatorSeed,
         operatorVerifyingKey: operatorIdentity.verifyingKey,
@@ -338,6 +347,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lararium, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
+        signerDid,
+        deviceEdge,
       };
       adminVm = await openAdminVm({
         repo,

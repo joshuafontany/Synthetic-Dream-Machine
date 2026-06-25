@@ -37,7 +37,7 @@ export function readIdentityTiddler(raw: LarTiddlerRecord): IdentityTiddler | nu
     did:            didValue,
     displayName:    typeof fields["displayName"] === "string" ? fields["displayName"] : didValue,
     createdAt:      (fields["createdAt"] as string | undefined) ?? (fields["created"] as string | undefined) ?? "",
-    kind:           (fields["kind"] as IdentityTiddler["kind"] | undefined) ?? "operator",
+    kind:           (fields["kind"] as IdentityTiddler["kind"] | undefined) ?? "device",
     ...(typeof fields["verifyingKey"] === "string" ? { verifyingKey: fields["verifyingKey"] } : {}),
     ...(typeof fields["readPolicy"] === "string" ? { readPolicy: fields["readPolicy"] } : {}),
   };

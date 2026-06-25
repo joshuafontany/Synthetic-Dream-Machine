@@ -54,6 +54,7 @@
  */
 
 import type { AuthProofWire } from "./auth-wire.js";
+import type { DeviceDelegationTiddler } from "./device-delegation.js";
 
 export const ISLAND_PROTOCOL_VERSION = 1 as const;
 export type ProtocolVersion = typeof ISLAND_PROTOCOL_VERSION;
@@ -184,6 +185,10 @@ export interface IslandMsg_Manifest {
     meshCabalDocIdHex:     string;
     /** Writable bag URIs to register so verify/delegate resolve (lar: URIs). */
     registerBags:          readonly string[];
+    /** The PINNED signer DID — Gate B verifies the device edge against THIS (self for an anon). */
+    signerDid:             string;
+    /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free Gate B. */
+    deviceEdge:            DeviceDelegationTiddler;
   };
 }
 

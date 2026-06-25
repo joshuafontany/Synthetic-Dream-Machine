@@ -21,7 +21,7 @@ async function mint(boundEpoch = 5): Promise<DeviceDelegationTiddler> {
   return buildDeviceDelegation({
     operatorSeed: opSeed,
     deviceVerifyingKey: await vkOf(devSeed),
-    placeId: PLACE,
+    hearthTrueName: PLACE,
     issuedAt: ISSUED,
     expiresAt: EXPIRES,
     boundEpoch,
@@ -39,7 +39,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
     // attacker mints their OWN edge under their OWN root: internally valid, but not the pin.
     const attackerSeed = new Uint8Array(32).fill(13);
     const attackerEdge = await buildDeviceDelegation({
-      operatorSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
+      operatorSeed: attackerSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
     });
     const res = await verifyDeviceDelegation(attackerEdge, await opDidP); // pin = the REAL operator
     expect(res.ok).toBe(false);
@@ -52,9 +52,9 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
     expect((await verifyDeviceDelegation({ ...edge, deviceVerifyingKey: otherVk, deviceDid: `0x${otherVk}` }, await opDidP)).ok).toBe(false);
   });
 
-  it("rejects tampered placeId / issuedAt / expiresAt (signature mismatch)", async () => {
+  it("rejects tampered hearthTrueName / issuedAt / expiresAt (signature mismatch)", async () => {
     const edge = await mint();
-    expect((await verifyDeviceDelegation({ ...edge, placeId: "bafotherplace" }, await opDidP)).ok).toBe(false);
+    expect((await verifyDeviceDelegation({ ...edge, hearthTrueName: "bafotherplace" }, await opDidP)).ok).toBe(false);
     expect((await verifyDeviceDelegation({ ...edge, issuedAt: "2030-01-01T00:00:00.000Z" }, await opDidP)).ok).toBe(false);
     expect((await verifyDeviceDelegation({ ...edge, expiresAt: "2099-01-01T00:00:00.000Z" }, await opDidP)).ok).toBe(false);
   });
@@ -92,10 +92,10 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
     expect(tooEarly.reason).toMatch(/not yet valid/);
   });
 
-  it("rejects an edge with an illegal-character placeId at mint", async () => {
+  it("rejects an edge with an illegal-character hearthTrueName at mint", async () => {
     await expect(buildDeviceDelegation({
-      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
-    })).rejects.toThrow(/placeId/);
+      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: "evil|injection", issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: 5,
+    })).rejects.toThrow(/hearthTrueName/);
   });
 
   it("enforces the LEASE epoch when `expectedEpoch` is supplied (non-renewal)", async () => {
@@ -118,7 +118,7 @@ describe("device-delegation — the signed capability edge (v2, post-verificatio
 
   it("rejects a non-numeric boundEpoch at mint", async () => {
     await expect(buildDeviceDelegation({
-      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), placeId: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: -1,
+      operatorSeed: opSeed, deviceVerifyingKey: await vkOf(devSeed), hearthTrueName: PLACE, issuedAt: ISSUED, expiresAt: EXPIRES, boundEpoch: -1,
     })).rejects.toThrow(/boundEpoch/);
   });
 });

@@ -102,7 +102,7 @@ export function buildCeremonyTiddlers(
       did:          did,
       displayName:  name,
       createdAt:    now,
-      kind:         "operator",
+      kind:         "device",   // the per-vessel device leaf; the operator identity is the PersonGroup root that delegates to it
       verifyingKey: verifyingKeyHex,
       readPolicy:   "private",
     },
