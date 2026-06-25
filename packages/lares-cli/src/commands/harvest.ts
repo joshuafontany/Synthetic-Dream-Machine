@@ -27,9 +27,10 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
-import { homedir, tmpdir } from "node:os";
+import { homedir } from "node:os";
 import { basename, join } from "node:path";
-import { harvestTurnGradient, type TurnHarvest } from "@lararium/mesh";
+import { harvestTurnGradient } from "@lararium/mesh";
+import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot } from "../env.js";
 import { emit, type LaresError } from "../render.js";
@@ -175,95 +176,19 @@ function listTranscripts(target: string, depth = 0): string[] {
 // Venv-aware + cross-platform: prefers $VIRTUAL_ENV / ~/.venv (where mempalace +
 // chromadb live), else python3/python/py. NEVER a machine-specific hardcode.
 const PY = resolvePython() ?? "python3";
-const DRAWER_IO = join(larRoot(), "packages", "lararium-mempalace", "scripts", "drawer_io.py");
-
-/** Deterministic function-hall routing from the authored sigils (no LLM). */
-function hallForHarvest(h: TurnHarvest): string {
-  if (h.bearing && h.confidence >= 13) return "hall_facts"; // a decision landed, high-confidence
-  if (h.huds.some((x) => (x.oodaHa ?? "").includes("↺"))) return "hall_events"; // an OODA loop closed
-  if (h.sigilCount > 0 || h.voices.length > 0) return "hall_discoveries"; // structured exploration
-  return ""; // leave the substrate's own hall untouched
-}
-
-const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
-
-/** Derive the originating harness from a staged source_file (prefixed `<surface>__…`). */
-function deriveSurface(sourceFile?: string): string {
-  if (!sourceFile) return "claude";
-  const base = (sourceFile.replace(/\\/g, "/").split("/").pop() ?? "");
-  const pfx = base.split("__")[0] ?? "";
-  return SURFACES.includes(pfx) ? pfx : "claude"; // un-prefixed legacy drawers = claude
-}
-
-/** Build the `lar_*` metadata patch (chroma metadata = str/int/float/bool only). */
-function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, string | number> {
-  const patch: Record<string, string | number> = {
-    // lar_hv = enrich-logic version (the Kappa upgrade gate). Bump in lockstep
-    // with HARVEST_VERSION in drawer_io.py when the enrichment changes, so a
-    // backfill re-processes every drawer; v2 added the declared adapter stamp,
-    // v3 added lar_surface.
-    lar_hv: 3,
-    lar_surface: deriveSurface(sourceFile),
-    lar_band: h.band,
-    lar_bearing_conf: h.confidence,
-    lar_sigils: h.sigilCount,
-    lar_water: h.waterCount,
-  };
-  if (h.bearing?.aimUri) patch["lar_aim"] = h.bearing.aimUri.slice(0, 300);
-  if (h.bearing?.yieldUri) patch["lar_yield"] = h.bearing.yieldUri.slice(0, 300);
-  if (h.voices.length)
-    patch["lar_voices"] = h.voices.map((v) => (v.role ? `${v.name} (${v.role})` : v.name)).join("|").slice(0, 400);
-  if (h.confidences.length)
-    patch["lar_confidence"] = h.confidences.map((c) => `${c.register ?? "?"}:${c.value ?? "?"}/${c.max}`).join("|").slice(0, 300);
-  if (h.driftFlags.length) patch["lar_drift"] = h.driftFlags.join("|").slice(0, 200);
-  const hall = hallForHarvest(h);
-  if (hall) patch["lar_hall"] = hall;
-  return patch;
-}
-
-interface WritebackResult {
-  readonly drawers: number;
-  readonly framed: number;
-  readonly applied: number;
-  readonly bands: Record<string, number>;
-}
-
-/** The per-wing writeback core: export drawers-needing-harvest → parse → upsert metadata. Idempotent (lar_hv). */
-function writebackWing(wing: string, limit = 0): WritebackResult {
-  // 1) export drawers needing harvest (idempotent — skips those at current hv)
-  const exportArgs = ["export", "--wing", wing, ...(limit ? ["--limit", String(limit)] : [])];
-  const exportOut = execFileSync(PY, [DRAWER_IO, ...exportArgs], { maxBuffer: 1 << 30, encoding: "utf8" });
-  const drawers = exportOut.split("\n").filter(Boolean).map((l) => JSON.parse(l) as { id: string; content: string; source_file?: string });
-
-  // 2) harvest each drawer's verbatim content (the sovereign TS parser)
-  const bands: Record<string, number> = { canon: 0, synthesis: 0, provisional: 0, raw: 0 };
-  let framed = 0;
-  const patches = drawers.map((d) => {
-    const h = harvestTurnGradient(d.content);
-    bands[h.band] = (bands[h.band] ?? 0) + 1;
-    if (h.bearing) framed += 1;
-    return { id: d.id, patch: buildPatch(h, d.source_file) };
-  });
-
-  // 3) write the patches back onto the drawers (merge), via the substrate helper
-  let applied = 0;
-  if (patches.length > 0) {
-    const pf = join(tmpdir(), `lar-harvest-patch-${wing}.ndjson`);
-    writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
-    const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { maxBuffer: 1 << 30, encoding: "utf8" });
-    try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
-  }
-  return { drawers: drawers.length, framed, applied, bands };
-}
+// The writeback core (buildPatch + writebackWing + lar_hv) lives ONCE in
+// @lararium/mempalace/telemetry-writeback (the lar-telemetry shared core) — both
+// this CLI leg and the @admin `lar-telemetry` verb call it. No local copy here.
 
 function runWriteback(args: ParsedArgs, wing: string): number {
-  if (!existsSync(DRAWER_IO)) {
-    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${DRAWER_IO}` };
+  const drawerIo = resolveDrawerIo();
+  if (!existsSync(drawerIo)) {
+    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${drawerIo}` };
     emit(args, { ok: false, error, human: () => console.error(`lares harvest: ${error.message}`) });
     return 3;
   }
   const limit = args.options["limit"] ? Number(args.options["limit"]) : 0;
-  const r = writebackWing(wing, limit);
+  const r = writebackWing(wing, limit ? { limit } : {});
   emit(args, {
     ok: true,
     data: { wing, ...r, mode: "writeback" },
@@ -440,8 +365,8 @@ interface WingHarvest {
 
 function runHarvestAll(args: ParsedArgs): number {
   const dryRun = args.flags["dry-run"] === true;
-  if (!existsSync(DRAWER_IO)) {
-    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${DRAWER_IO}` };
+  if (!existsSync(resolveDrawerIo())) {
+    const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${resolveDrawerIo()}` };
     emit(args, { ok: false, error, human: () => console.error(`lares harvest --all: ${error.message}`) });
     return 3;
   }
