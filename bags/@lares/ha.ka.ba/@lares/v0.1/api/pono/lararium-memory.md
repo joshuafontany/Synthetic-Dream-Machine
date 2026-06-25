@@ -256,6 +256,7 @@ conflict press a `hoike`.
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/talk-story >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>

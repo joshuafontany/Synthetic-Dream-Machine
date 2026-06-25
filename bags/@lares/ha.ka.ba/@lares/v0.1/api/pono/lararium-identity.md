@@ -472,6 +472,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/federation >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/pono/circles-kowloon >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>
 

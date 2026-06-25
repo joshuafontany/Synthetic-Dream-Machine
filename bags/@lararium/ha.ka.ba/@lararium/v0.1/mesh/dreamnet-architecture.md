@@ -65,6 +65,8 @@ capability proof chains, shared meme-graph reachability.
 
 ## Layer Definitions
 
+**The group-axis identity model lives whole elsewhere.** The five scales *as an identity structure* — each a nameless `#has`-stack of capabilities, the per-vessel key that bonds a vessel to its operator, the signed delegation edge that carries that bond up the scale — stand stated whole at <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity#five-scale >>. This meme renders those same five layers as **mesh topology**: how they nest, recognize, sync, and gate capability across the network. The definitions below carry the topology, not the identity model — that one cites home.
+
 ### device-vessel
 
 The unit of runtime sovereignty. One process: either a node server or a browser tab.
@@ -227,6 +229,7 @@ Design decision pending. Path L is Priority 2 on the active roadmap.
 
 ## Edges
 
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/kahu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/capability >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/keyhive/keyhive-provider >>
