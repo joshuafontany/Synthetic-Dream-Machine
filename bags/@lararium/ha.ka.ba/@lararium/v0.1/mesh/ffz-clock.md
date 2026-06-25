@@ -44,13 +44,15 @@ L1 (Beat) ticks on the **grounding act** — the operator's acknowledgment — n
 
 ## Three clocks, three jobs
 
-The DreamNet mesh keeps time on three instruments, never one — and FfzClock holds only the third:
+The DreamNet mesh keeps time on three instruments, never one — and FfzClock is one of the three:
 
 - **Automerge logical time** — carries causal order + fork-detection (`getHeads` · `headsEqual`; a partitioned frontier `drifted` stands as a fork).
-- **Keyhive epoch** — carries revocation authority (a forward-only epoch on the edge + convergent revoke; a grant names its epoch and goes stale when the edge rolls forward).
-- **FfzClock** — carries the rhythmic decay + freshness grain (the cadence a lease decays over; the grain a membership reads "as of last sync").
+- **The epoch-counter** — carries the LEASE / liveness ratchet: a per-resource **max-register** (merge = max, coordinator-free) that a grant names a `boundEpoch` against; the grant goes stale when the counter rolls past it (*re-mint or expire*). Safe without a coordinator *because* it only ever ratchets the whole resource forward — never to single out one principal.
+- **FfzClock** — carries the rhythmic decay + freshness grain: the cadence the epoch-lease rolls on, the grain a reading carries "as of last sync".
 
-A lease rides the Keyhive epoch for its *authority* and FfzClock's cadence for its *decay*; a wall-clock `exp` stays a replay backstop only, never the source of truth.
+A lease rides the **epoch-counter** for its value and **FfzClock** for its cadence; a wall-clock `exp` stays a replay backstop only, never the source of truth.
+
+**Revocation is NOT a clock — and the epoch is a lease, not a revoker.** Two modes ride beside the instruments: **non-renewal** (the epoch-lease above — a grant expires when un-refreshed) and **targeted** (Keyhive **convergent membership-removal**, `revoke()` — a tombstone in the membership graph, never an epoch). <<~ confidence Synthesis-Canon 15/20 >> A device that re-mints concurrently with a roll rides the max-register *up* and survives, so **targeted** revocation MUST ride Keyhive's convergent removal, never the counter (Kleppmann · p2panda · Keyhive converge on this; adversarial research 2026-06-24).
 
 <<~/ahu >>
 

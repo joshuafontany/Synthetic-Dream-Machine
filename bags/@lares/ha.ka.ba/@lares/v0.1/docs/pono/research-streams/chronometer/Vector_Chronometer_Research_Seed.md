@@ -195,7 +195,7 @@ Each exchange a knowledge graph triple?
 
 ## 2.5 RESOLVED — The Three-Clocks Model (2026-06-24) `~:confidence[S],[14]`
 
-A later deep-domain research arc resolves several questions above. **The mesh keeps time on three clocks, never one:** Automerge logical time (causal order + fork-detection — `getHeads`/`drifted`), the Keyhive epoch (revocation authority), and the FFZ Chronometer (rhythmic decay/freshness grain). **FFZ is RHYTHMIC, never causal.**
+A later deep-domain research arc resolves several questions above. **The mesh keeps time on three clocks, never one:** Automerge logical time (causal order + fork-detection — `getHeads`/`drifted`), the **epoch-counter** (a coordinator-free **LEASE** — *targeted* revocation rides Keyhive convergent membership-removal, NOT the epoch), and the FFZ Chronometer (rhythmic decay/freshness grain). **FFZ is RHYTHMIC, never causal.**
 
 - **Q2 (merge):** the counter merges via CRDT max and the OODA-HA phase carries per-participant (LWW-Register, no merge) — but *neither is the causal authority*. Causal order rides Automerge's `<counter, actorId>` OpId. The chronometer's merge is alignment annotation, not happened-before.
 - **Q8 (single point of failure):** confirmed — the notary model holds. FFZ records ticks; it never constitutes "the" time. Keeping FFZ *off* the causal and revocation decisions (those ride Automerge + Keyhive) is exactly what preserves non-simultaneous apprehension — no single clock rules.
