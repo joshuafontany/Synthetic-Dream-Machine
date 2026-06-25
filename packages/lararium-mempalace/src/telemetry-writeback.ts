@@ -29,7 +29,7 @@ import { resolveMempalacePython } from "./spawn-resolve.js";
  * with `HARVEST_VERSION` in `drawer_io.py` when the reading logic changes, so the
  * next sweep re-reads exactly the stale drawers. THE single source for this number.
  */
-export const LAR_HV = 5;
+export const LAR_HV = 6;
 
 const SURFACES = ["claude", "codex", "copilot-vscode", "copilot-cli"];
 
@@ -71,6 +71,23 @@ function deriveHandle(sourceFile?: string): string | null {
   return m ? `${m[2]}.${m[1]}` : null;
 }
 
+/**
+ * Derive the ROOT worldline handle from a MAIN-agent staged source_file
+ * (`<surface>__<run>.jsonl` — the convention for a top-level session transcript,
+ * NO `__agent-` segment). Returns the run (= the session id), or null for a spirit
+ * (handled by deriveHandle) or a legacy un-prefixed name. The run a main drawer
+ * yields here EQUALS the run-part of every spirit it spawned, so a spirit's
+ * `lar_parent_handle` resolves back to the main agent's `lar_agent_handle` — the
+ * attribution graph closes (agent-worldline#attribution).
+ */
+function deriveRootHandle(sourceFile?: string): string | null {
+  if (!sourceFile) return null;
+  const base = sourceFile.replace(/\\/g, "/").split("/").pop() ?? "";
+  if (base.includes("__agent-")) return null; // a spirit — not a root
+  const m = /^[^_]+__([^/]+)\.jsonl$/.exec(base); // <surface>__<run>.jsonl
+  return m ? (m[1] ?? null) : null;
+}
+
 /** Deterministic function-hall routing from the authored instruments (no LLM). */
 function hallForHarvest(h: TurnHarvest): string {
   if (h.bearing && h.confidence >= 13) return "hall_facts"; // a decision landed, high-confidence
@@ -102,15 +119,20 @@ export function buildPatch(h: TurnHarvest, sourceFile?: string): Record<string, 
   if (agent) { patch["lar_agent"] = agent.slice(0, 60); patch["lar_sidechain"] = 1; }
   const handle = deriveHandle(sourceFile);
   if (handle) {
+    // A SPIRIT worldline. The projected attribution edge (child→parent), single-source.
+    // Flat `subagents/`: the spirit is a direct child of the run, so appointed-by
+    // (immediate parent) = root-principal = the run. Deep parentUuid nesting splits the
+    // two later (agent-worldline#open). The reified bi-temporal prov:Delegation NODE
+    // awaits a code-reachable KG (MCP/tunnel-only today); this edge stays the sole
+    // record until then, so the future node re-projects it rather than double-writing.
     patch["lar_agent_handle"] = handle.slice(0, 120);
-    // The projected attribution edge (child→parent), single-source. Flat `subagents/`:
-    // the spirit is a direct child of the run, so appointed-by (immediate parent) =
-    // root-principal = the run. Deep parentUuid nesting splits the two later
-    // (agent-worldline#open). The reified bi-temporal prov:Delegation NODE awaits a
-    // code-reachable KG (MCP/tunnel-only today); this edge stays the sole record until
-    // then, so the future node re-projects it rather than double-writing.
     const run = handle.split(".")[0] ?? "";
     if (run) { patch["lar_parent_handle"] = run; patch["lar_root_handle"] = run; }
+  } else {
+    // A MAIN-agent worldline — its own root, no parent above it. Its handle = the run,
+    // which a spirit's lar_parent_handle points back to (the graph closes).
+    const root = deriveRootHandle(sourceFile);
+    if (root) { patch["lar_agent_handle"] = root.slice(0, 120); patch["lar_root_handle"] = root.slice(0, 120); }
   }
   return patch;
 }
