@@ -54,7 +54,7 @@ import {
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { MempalaceClient, resolveMempalaceSpawn } from "@lararium/mempalace";
+import { MempalaceClient, resolveMempalaceSpawn, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal, resolveBootDoc, isStillJoining } from "./repo-helpers.js";
@@ -406,6 +406,25 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
         } finally {
           await client.stop();
+        }
+      });
+      // lar-telemetry — the mempalace WRITE membrane (Option D, slice 2). The @admin
+      // host reads a wing's drawers' instrument readings (the gradient parser) and
+      // projects lar_* back ONTO them THROUGH the seat (capability-gated, witnessed),
+      // never a raw CLI subprocess. MVP flushes on invocation; the nalu-batched
+      // hold/flush (worker enqueueNalu → on-nalu command main) is the next refinement
+      // (lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
+      registry.register("lar-telemetry", async (args) => {
+        const wing = typeof args["wing"] === "string" ? (args["wing"] as string) : "";
+        if (!wing) throw new Error("args.wing is required");
+        const limitRaw = args["limit"];
+        const limit    = typeof limitRaw === "number" ? limitRaw : typeof limitRaw === "string" ? Number(limitRaw) : undefined;
+        try {
+          const r = writebackWing(wing, limit !== undefined ? { limit } : {});
+          return { wing, ...r };
+        } catch (err) {
+          if (err instanceof TelemetryUnavailable) throw new Error(`lar-telemetry unavailable: ${err.message}`);
+          throw err;
         }
       });
     },

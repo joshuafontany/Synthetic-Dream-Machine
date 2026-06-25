@@ -66,10 +66,16 @@ case "$transcript" in
     ;;
 esac
 
-# Detached: drawer mine (leg 1) THEN tensegrity writeback (leg 2), then clean up.
+# Detached: drawer mine (leg 1, verbatim — VM-free, ALWAYS lands) THEN lar-telemetry
+# (leg 2, the gradient readings) THROUGH the @admin seat, then clean up.
+#   lar-telemetry routes the lar_* projection through the running @admin daemon
+#   (mempalace through the seat, Option D). Daemon down → telemetry no-ops; the
+#   verbatim drawer already landed and the `lares harvest --all` lar_hv sweep
+#   re-enriches it later (verbatim-always / telemetry-eventual,
+#   lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
 (
   "$MP" mine "$stage" --mode convos --extract exchange --wing "$wing" --agent claude >/dev/null 2>&1
-  "$LARES" harvest --writeback --wing "$wing" >/dev/null 2>&1
+  "$LARES" telemetry --wing "$wing" >/dev/null 2>&1
   rm -rf "$stage"
 ) >/dev/null 2>&1 &
 
