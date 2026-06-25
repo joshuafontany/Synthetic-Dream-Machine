@@ -30,7 +30,7 @@ export interface BootAdminKeyhiveInput {
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
   readonly operatorVerifyingKey: string;
-  /** PersonGroup sentinel Document id hex — Gate B membership target. */
+  /** PersonGroup sentinel Document id hex — legacy sentinel target (the Binding Gate superseded it). */
   readonly personGroupDocIdHex: string;
   /** PersonGroup agent id hex — Gate C membership subject. */
   readonly personGroupAgentIdHex: string;
@@ -38,10 +38,10 @@ export interface BootAdminKeyhiveInput {
   readonly meshCabalDocIdHex: string;
   /** Writable bag URIs to register so `verify`/`delegate` resolve (lar: URIs). */
   readonly registerBags: readonly string[];
-  /** The PINNED signer DID — Gate B verifies the edge against THIS (self for an anon, a
+  /** The PINNED signer DID — the Binding Gate verifies the edge against THIS (self for an anon, a
    *  granting root for a delegated/operator vessel). */
   readonly signerDid: string;
-  /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free Gate B. */
+  /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
   readonly deviceEdge: DeviceDelegationTiddler;
 }
 
@@ -78,19 +78,20 @@ export async function bootAdminKeyhive(input: BootAdminKeyhiveInput): Promise<Bo
     );
   }
 
-  // Gate B — the vessel's binding edge, verified against the PINNED signer (self for an anon,
-  // a granting root for a delegated/operator vessel). The edge IS Gate B: a self-contained signed
-  // (vessel × hearthTrueName) proof that rides public CRDT state — no Beelay, no encrypted-graph
-  // walk. Fail-closed: verify returns {ok:false} on bad signature / expiry / unpinned signer, HALT.
-  const gateB = await verifyDeviceDelegation(input.deviceEdge, input.signerDid, { now: Date.now() });
-  if (!gateB.ok) {
-    throw new Error(`[admin-keyhive] Gate B: device-delegation edge failed verification against the pinned signer. ${gateB.reason ?? ""}`);
+  // THE BINDING GATE — the canon identity path. The vessel's signed device-delegation edge,
+  // verified against the PINNED signer (self for an anon, a granting root for a delegated/operator
+  // vessel). The edge IS the binding: a self-contained signed (vessel × hearthTrueName) proof that
+  // rides public CRDT state — no Beelay, no encrypted-graph walk. Fail-closed: verify returns
+  // {ok:false} on bad signature / expiry / unpinned signer, and we HALT.
+  const binding = await verifyDeviceDelegation(input.deviceEdge, input.signerDid, { now: Date.now() });
+  if (!binding.ok) {
+    throw new Error(`[admin-keyhive] Binding Gate: device-delegation edge failed verification against the pinned signer. ${binding.reason ?? ""}`);
   }
   // Bind-check: the edge MUST delegate to THIS vessel's key (designation carries authority —
   // a valid edge for a DIFFERENT vessel is not authority for this one).
   if (input.deviceEdge.deviceVerifyingKey !== input.operatorVerifyingKey) {
     throw new Error(
-      `[admin-keyhive] Gate B: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
+      `[admin-keyhive] Binding Gate: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
       `not this vessel ${input.operatorVerifyingKey.slice(0, 16)}…`,
     );
   }

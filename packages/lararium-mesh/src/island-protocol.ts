@@ -185,9 +185,9 @@ export interface IslandMsg_Manifest {
     meshCabalDocIdHex:     string;
     /** Writable bag URIs to register so verify/delegate resolve (lar: URIs). */
     registerBags:          readonly string[];
-    /** The PINNED signer DID — Gate B verifies the device edge against THIS (self for an anon). */
+    /** The PINNED signer DID — the Binding Gate verifies the device edge against THIS (self for an anon). */
     signerDid:             string;
-    /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free Gate B. */
+    /** This vessel's signed device-delegation edge (root→vessel) — the public, Beelay-free binding. */
     deviceEdge:            DeviceDelegationTiddler;
   };
 }

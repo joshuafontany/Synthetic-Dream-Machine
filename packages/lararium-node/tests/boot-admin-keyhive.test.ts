@@ -5,7 +5,7 @@
  * platform's admin island worker:
  *   - re-hydrates cap state from the admin doc and clears Gates A/B/C
  *   - registers the operator's writable bags so verify() resolves
- *   - HALTs (throws) on a drifted identity (Gate A) or a wrong sentinel (Gate B)
+ *   - HALTs (throws) on a drifted identity (Gate A) or a forged binding edge (the Binding Gate)
  *
  * Runs entirely in-process (no worker) because the logic is extracted pure —
  * that is the whole point: the worker is just the caller. Founds a real operator
@@ -100,10 +100,10 @@ describe("bootAdminKeyhive", () => {
     })).rejects.toThrow(/Gate A/);
   });
 
-  test("HALTs on a forged binding edge (Gate B, fail-closed)", async () => {
+  test("HALTs on a forged binding edge (Binding Gate, fail-closed)", async () => {
     await expect(bootAdminKeyhive({
       ...founded.bootArgs,
       deviceEdge: { ...founded.bootArgs.deviceEdge, signature: "00".repeat(64) },
-    })).rejects.toThrow(/Gate B/);
+    })).rejects.toThrow(/Binding Gate/);
   });
 });

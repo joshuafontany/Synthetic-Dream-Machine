@@ -330,8 +330,8 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       if (!personGroupDocIdHex || !personGroupAgentIdHex || !meshCabalDocIdHex) {
         throw new Error(`[lararium] DreamNet sentinel oracle tiddlers missing — run \`lares init\`.`);
       }
-      // The binding signer-pin + edge — Gate B's authority. FAIL-CLOSED: a missing pin or edge
-      // MUST halt the boot, NEVER fall through to skip Gate B (the confused-deputy / PCD cure).
+      // The binding signer-pin + edge — the Binding Gate's authority. FAIL-CLOSED: a missing pin or
+      // edge MUST halt the boot, NEVER fall through to skip the Binding Gate (the confused-deputy / PCD cure).
       const signerDid  = tiddlerText(adminDoc?.tiddlers?.[SIGNER_DID_TIDDLER]) ?? null;
       const edgeRecord = adminDoc?.tiddlers?.[DEVICE_DELEGATION_SELF_TIDDLER];
       if (!signerDid || !edgeRecord?.tiddler) {

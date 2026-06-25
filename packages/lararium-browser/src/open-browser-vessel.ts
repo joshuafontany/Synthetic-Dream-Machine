@@ -61,9 +61,9 @@ interface BrowserBootstrap extends VesselBootstrap {
   personGroupDocIdHex:   string;
   personGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
-  /** The signer DID Gate B pins the edge to — self-DID for an anon (self-signed). */
+  /** The signer DID the Binding Gate pins the edge to — self-DID for an anon (self-signed). */
   signerDid:             string;
-  /** This vessel's self-signed device-delegation edge — the public Gate B binding. */
+  /** This vessel's self-signed device-delegation edge — the public binding the Binding Gate verifies. */
   deviceEdge:            DeviceDelegationTiddler;
 }
 

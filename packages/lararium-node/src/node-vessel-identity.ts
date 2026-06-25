@@ -333,7 +333,7 @@ export async function loadVesselSigningSeed(dataDir: string): Promise<Uint8Array
 //     ITSELF (its own leaf identity).
 //   · the PersonGroup root here        = the operator-root capability that SIGNS the
 //     device-delegation edges granting vessels membership. Its public key is the
-//     operator-root DID (`0x`+hex) peers PIN to verify those edges offline at Gate B
+//     operator-root DID (`0x`+hex) peers PIN to verify those edges offline at the Binding Gate
 //     (no Beelay). A vessel joins the PersonGroup by holding a signed edge from this
 //     root — membership is a capability the vessel's stack #has, not a plane it sits on.
 //

@@ -106,11 +106,11 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     // PLACEHOLD-THROW — intention recorded, not yet built. Under the signed-edge binding the
     // upgrade rides a root→joinee device-delegation edge (the founder's signer signs the joinee's
     // vessel key + hearthTrueName); the payload carries the pin + edge; the joinee persists them
-    // and verifies at Gate B over the local relay (no Beelay). The cap-event repackaging below is
+    // and verifies at the Binding Gate over the local relay (no Beelay). The cap-event repackaging below is
     // the superseded Model-A path. A fresh node founds from null today; this upgrade is the next arc.
     throw new Error(
       "[lares init --admit] the delegated upgrade path is not yet built — the next arc carries a " +
-      "root→joinee device-delegation edge in the payload and verifies it at Gate B.",
+      "root→joinee device-delegation edge in the payload and verifies it at the Binding Gate.",
     );
   }
 

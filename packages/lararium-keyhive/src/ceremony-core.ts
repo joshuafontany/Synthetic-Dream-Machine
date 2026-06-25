@@ -101,7 +101,7 @@ export interface FoundingCeremonyResult {
   /** The operator's self-certifying ContactCard JSON, minted once during the
    *  ceremony. The caller caches it for the light leaf-identity path (OP-AP5). */
   contactCardJson:       string;
-  /** The PINNED signer DID ("0x"+hex) every Gate B verifies the edge against — self for an anon,
+  /** The PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against — self for an anon,
    *  a granting root for a delegated/operator vessel. */
   signerDid:       string;
   /** This vessel's OWN signed device-delegation edge (signer→vessel) — the public binding

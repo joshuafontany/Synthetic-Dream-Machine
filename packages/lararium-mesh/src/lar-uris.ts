@@ -230,18 +230,18 @@ export const PERSON_GROUP_SENTINEL_URI = stableLarUri("@operator/person-group");
 /** Sentinel URI for a Nexus's MeshCabal membership document. */
 export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
 
-/** Admin oracle tiddler: PersonGroup Document ID (hex). Used by boot Gate B. */
+/** Admin oracle tiddler: PersonGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
 export const PERSON_GROUP_DOC_ID_TIDDLER   = `${ADMIN_BAG_ID}/sentinel/person-group/doc-id`;
 /** Admin oracle tiddler: PersonGroup agent Identifier (hex). Used by boot Gate C. */
 export const PERSON_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/person-group/agent-id`;
 /** Admin oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
 export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-cabal/doc-id`;
-/** Admin oracle tiddler: the PINNED signer DID ("0x"+hex) Gate B verifies the edge against —
+/** Admin oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
  *  self-DID for an anon (self-signed), a granting root-DID for a delegated/operator vessel. */
 export const SIGNER_DID_TIDDLER            = `${ADMIN_BAG_ID}/binding/signer-did`;
 /** Admin oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
 export const HEARTH_TRUE_NAME_TIDDLER      = `${ADMIN_BAG_ID}/hearth/true-name`;
-/** Admin oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding Gate B verifies. */
+/** Admin oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
 export const DEVICE_DELEGATION_SELF_TIDDLER = `${ADMIN_BAG_ID}/delegation/self`;
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
