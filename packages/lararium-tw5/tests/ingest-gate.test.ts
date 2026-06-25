@@ -56,7 +56,7 @@ describe("ingest-gate — the §6 triangle decides", () => {
   });
 
   test("clean content edit, records unmoved → ingest", () => {
-    const edited = source.replace("# Entry ~ Lararium Boot", "# Entry ~ Lararium Boot (edited)");
+    const edited = source.replace("# Entry ~ Lararium Hearth", "# Entry ~ Lararium Hearth (edited)");
     expect(edited).not.toBe(source); // guard: heading drift must fail loud, not collapse to noop
     const d = decideIngest({
       uri: URI, diskText: edited, diskHash: sha(edited),
@@ -83,8 +83,8 @@ describe("ingest-gate — the §6 triangle decides", () => {
   });
 
   test("both moved → conflict, surfaced never overwritten", () => {
-    const diskEdit = source.replace("# Entry ~ Lararium Boot", "# Entry (disk hand)");
-    const recordsMovedRender = canonical.replace("# Entry ~ Lararium Boot", "# Entry (record hand)");
+    const diskEdit = source.replace("# Entry ~ Lararium Hearth", "# Entry (disk hand)");
+    const recordsMovedRender = canonical.replace("# Entry ~ Lararium Hearth", "# Entry (record hand)");
     expect(diskEdit).not.toBe(source);
     expect(recordsMovedRender).not.toBe(canonical);
     const d = decideIngest({
