@@ -5,13 +5,13 @@
 cacheable = true
 file-path = "bags/@lararium/v0.1/api/agent-provenance.md"
 hydrate   = true
-mana      = 18
-manao     = 17
+mana      = 19
+manao     = 18
 manaoio   = 16
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the model for making inter-agent relationships CLEAR in mempalace memory — three layers (identity = wing-per-actor named by role/handoff; provenance = added_by per drawer; relationship = directional bi-temporal KG predicate between actor-entities, keyed by a correlation-id) over two nesting kinds (in-process subagents · cross-surface orchestration); grounded in W3C Trace Context + W3C PROV + OTel GenAI by a 4-spirit research swarm"
+role      = "the model for making inter-agent relationships CLEAR in mempalace memory — three layers (identity = wing-per-actor named by role/handoff; provenance = added_by per drawer; relationship = a REIFIED PROV-qualified node — Delegation/Communication-shaped — carrying parent·child·driver·correlation, WITH a projected direct edge for traversal; bi-temporally stamped: mutable valid-interval + append-only transaction-interval; keyed on (trace-id · parent-span-id · child-span-id) so in-process spawns and cross-surface handoffs share ONE model) over two nesting kinds (in-process subagents · cross-surface orchestration); grounded in W3C Trace Context + W3C PROV + PROV-AGENT + OTel GenAI by a research swarm (the edge-vs-node fork RESOLVED toward reification, 2026-06-25)"
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -50,7 +50,7 @@ W3C PROV, and the OpenTelemetry GenAI conventions. Working name **agent-provenan
 
 <<~Layer Identity "organ/wing + #has grain/the-actor ~ PERSISTENT actors (operator, recurring specialists) keep a NAMED wing. EPHEMERAL tasked spirits go NAMELESS — identity IS their #has stack (capabilities · role · task), pet-name only a handle; they land in the project __spirits wing and recall by #has-query (capability-routed), never name-exact. The run-id is never the key." >>
 <<~Layer Provenance "organ/added_by grain/the-chunk ~ every drawer carries its actor (who-said-what). PROV wasAttributedTo; mem0 agent_id/name. The episodic provenance layer." >>
-<<~Layer Relationship "organ/KG-predicate grain/the-edge ~ a DIRECTIONAL, bi-temporal triple between actor-ENTITIES: (parent) —spawned/actedOnBehalfOf→ (child), valid_from=spawn, valid_to=handback, INVALIDATE-don't-delete. NOT primarily a tunnel. A tunnel MAY mirror it for browsing; the KG edge owns the truth." >>
+<<~Layer Relationship "organ/reified-node+projected-edge grain/the-relation ~ the spawn/handoff REIFIES to its own node (a PROV Delegation/Communication shape) carrying parent·child·driver·correlation, WITH a projected (parent)—spawned/actedOnBehalfOf→(child) edge for cheap traversal. Bi-temporal: mutable valid-interval [spawn,handback) + append-only transaction-interval; INVALIDATE-don't-delete. NOT a tunnel — a tunnel MAY mirror it for browsing, but the reified node owns the truth (see #the-edge-as-node)." >>
 <<~Layer Three >>
 
 **Why the edge is a KG predicate, not a tunnel** (Graphwright, grounded in
@@ -178,6 +178,56 @@ Querying `actedOnBehalfOf` transitively reconstructs the whole spawn-tree.
 
 <<~/ahu >>
 
+<<~ ahu #the-edge-as-node >>
+
+## The Edge as a Node ~ reify (Graphwright, cited 2026-06-25)
+
+**The fork resolves: reify the spawn/handoff as its own NODE, and project a direct
+edge for traversal.** Not a close call — three standards converge (PROV's qualified
+pattern, RDF-star quoted triples, Neo4j's intermediate-node guidance all say "when
+the relation needs attributes, make it a thing").
+
+**The decision rule** — promote a relation to a node when ANY holds; else keep a
+property-edge:
+
+<<~ranks reify queryable-attrs ~ you'd want to index a relation property (Neo4j: relations index poorly → factor to a node) -> n-ary ~ binds >2 arms (parent · child · driver · correlation · times); an edge holds only two -> provenance-of-provenance ~ the fact "A spawned B" needs its own recording-time · author · validity >>
+
+A spawn/handoff trips all three → **node**. A trivial structural link
+(`agent —memberOf→ wing`) stays an edge.
+
+**The PROV gift — both forms in one standard.** Every PROV influence relation has a
+*qualified twin*: `actedOnBehalfOf` ⇄ **`prov:Delegation`**, `wasAssociatedWith` ⇄
+`prov:Association`, `wasInformedBy` ⇄ **`prov:Communication`**. So the reified node
+IS a `prov:Delegation` (spawn) / `prov:Communication` (handoff) instance, the direct
+edge riding alongside. **PROV-AGENT** (arXiv 2508.02866) already extends PROV for
+exactly this — direct prior art the model matches.
+
+**Bi-temporal stamp** — two interval pairs on the node (and projected edge):
+
+<<~ranks time valid ~ [validFrom,validTo) — when the spawn was TRUE in the world; MUTABLE (may insert into the past); close the prior interval when superseding -> transaction ~ [txFrom,txTo) — when the STORE recorded it; IMMUTABLE + monotonic; corrections APPEND a new tx-version, never overwrite >>
+
+As-of query: `validFrom ≤ T_v < validTo AND txFrom ≤ T_t < txTo`.
+
+**The universal key — ONE model, two transports.** Every spawn/handoff keys on
+**`(trace-id, parent-span-id, child-span-id)`** with `relationKind ∈ {spawned,
+handedOff}`. The 16-byte trace-id groups the whole run (the island id); the span-id
+pair orients the arrow. In-process spawns mint the child span-id in-band;
+cross-surface handoffs carry it in `traceparent` (env inject/extract). The fork
+dissolves at the substrate, not the schema.
+
+**Failure modes to design against** (Graphwright): broken propagation → orphan
+children (a missing inbound trace-id is a logged new-root, never a silent drop);
+trace-id reuse → cross-contaminated islands (16 random bytes, never derived from
+low-entropy session data); bitemporal scan blowup on an un-indexed property graph
+(provision a temporal index / bitemporal store); reification double-write drift
+(DERIVE the edge as a projection of the node — one atomic write, never two sources);
+mutating transaction-time (destroys the audit — corrections are new tx-versions);
+n-ary squashed to binary (the qualified node holds every arm).
+
+<<~ confidence Synthesis-Canon 17/20 >>
+
+<<~/ahu >>
+
 <<~ ahu #standards-anchor >>
 
 ## Standards Anchor ~ stand on the ratified, skip the unfinished
@@ -188,7 +238,12 @@ Querying `actedOnBehalfOf` transitively reconstructs the whole spawn-tree.
   `wasAttributedTo` · `actedOnBehalfOf` (delegation) · `wasDerivedFrom`. The edge
   vocabulary. The provenance of an entity forms a DAG — a knowledge graph.
 - **OTel GenAI** — `gen_ai.agent.id/name`, `gen_ai.conversation.id`,
-  `gen_ai.operation.name=invoke_agent`, `gen_ai.provider.name`. Node identity.
+  `gen_ai.operation.name=invoke_agent`, `gen_ai.provider.name`. Node identity. A span
+  is a NODE; parent-child is a by-reference edge (`parent_span_id`); fan-in / cross-trace
+  causality rides span *links* (reified edges) — confirming the dual node+edge treatment.
+- **PROV-AGENT** (arXiv 2508.02866) — W3C PROV extended for agentic systems: agents/
+  tools = Agents, reasoning/tool/LLM calls = Activities, prompts/outputs = Entities;
+  spawn via delegation, handoff via `wasGeneratedBy`→`used`. The model matches it 1:1.
 - **Do NOT wait** on the OTel multi-agent handoff spec (issue #2664, unratified) —
   rest the EDGE on stable trace-context + PROV, use `gen_ai.*` only for node
   identity. Tag drawers with the standard keys so the store stays OTel-interoperable.
@@ -214,9 +269,13 @@ Querying `actedOnBehalfOf` transitively reconstructs the whole spawn-tree.
 
 ## Open Decisions ~ held for the operator
 
-- **`task` as edge-attribute vs its own entity-node** — a task-entity lets multiple
-  edges hang off it (`A spawned-for taskX`, `B completed taskX`), weighed against
-  the over-graphing tax (Graphwright).
+- **`task`/spawn as edge vs entity-node — RESOLVED (2026-06-25): REIFY** (see
+  #the-edge-as-node). The relation carries indexed metadata, is n-ary (parent · child ·
+  driver · correlation · times), and needs its own bi-temporal validity +
+  provenance-of-provenance — every published threshold for promotion to a node. Model
+  it as a `prov:Delegation`/`prov:Communication` node + a projected direct edge; key on
+  (trace-id · parent-span-id · child-span-id). The over-graphing tax stays bounded by
+  the decision rule (reify relations that need traversal/attrs; structural links stay edges).
 - **Capability-routed recall — RESOLVED (2026-06-24):** native via the #has-stack
   reframe (#spirits-nameless-and-tracked). Spirits are nameless, recalled by `#has`;
   pet-names label, never key. No separate ANS-style taxonomy needed.
