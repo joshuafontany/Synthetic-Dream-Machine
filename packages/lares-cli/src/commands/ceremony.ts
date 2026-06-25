@@ -18,7 +18,12 @@ import type { ParsedArgs } from "../parse-args.js";
 import { runDeviceAdmit } from "@lararium/node";
 
 export async function cmdDeviceAdmit(args: ParsedArgs): Promise<number> {
-  const opts: Parameters<typeof runDeviceAdmit>[0] = {};
+  const joineeKey = args.options["joinee-key"];
+  if (!joineeKey) {
+    console.error("[lares device-admit] --joinee-key <hex> required — the joining vessel's PUBLIC verifying key.");
+    return 2;
+  }
+  const opts: Parameters<typeof runDeviceAdmit>[0] = { joineeVerifyingKey: joineeKey };
   if (args.options["out"])      Object.assign(opts, { outPath: args.options["out"] });
   if (args.options["sync-url"]) Object.assign(opts, { syncUrl: args.options["sync-url"] });
   await runDeviceAdmit(opts);

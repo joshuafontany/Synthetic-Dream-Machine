@@ -24,8 +24,9 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
-import { runDeviceAdmitCore, type DeviceAdmitPayload } from "@lararium/keyhive";
-import { loadVesselSigningSeed } from "../node-vessel-identity.js";
+import { runDeviceAdmitEdge, type DeviceAdmitPayload } from "@lararium/keyhive";
+import { loadPersonaGroupRootSeed } from "../node-vessel-identity.js";
+import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
 
 export type { DeviceAdmitPayload } from "@lararium/keyhive";
 
@@ -34,6 +35,8 @@ export interface DeviceAdmitOptions {
   readonly genesisDir?:    string;
   readonly outPath?:       string;
   readonly syncUrl?:       string;
+  /** The joining vessel's PUBLIC Ed25519 verifying-key hex — the delegate the founder's root signs. */
+  readonly joineeVerifyingKey: string;
   /** Automerge URL of this vessel's genesis island — included in payload for peer-sync delivery. */
   readonly islandDocUrl?:  string | null;
 }
@@ -46,7 +49,7 @@ function defaultDirs(): { storageDir: string; genesisDir: string } {
   };
 }
 
-export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<DeviceAdmitPayload> {
+export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAdmitPayload> {
   const defaults   = defaultDirs();
   const storageDir = opts.storageDir ?? defaults.storageDir;
   const genesisDir = opts.genesisDir ?? defaults.genesisDir;
@@ -99,27 +102,25 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions = {}): Promise<Dev
     throw new Error(`[lares device-admit] PersonaGroup agent ID missing from admin doc — run \`lares init --force\`.`);
   }
 
-  const capEventPrefix = `${ADMIN_BAG_ID}/cap/`;
-  const capEvents: Array<{ variant: string; bytes: string }> = [];
-  for (const [title, entry] of Object.entries(tiddlerMap)) {
-    if (!title.startsWith(capEventPrefix)) continue;
-    const t       = (entry as Record<string,unknown>)?.["tiddler"] as Record<string,unknown>;
-    const variant = t?.["variant"] as string | undefined;
-    const text    = t?.["text"]    as string | undefined;
-    if (variant && text) capEvents.push({ variant, bytes: text });
-  }
-  console.log(`[lares device-admit] found ${capEvents.length} cap events in admin doc`);
-
   await repo.flush();
 
-  // Delegate to isomorphic ceremony core.
-  const operatorSeed = await loadVesselSigningSeed(storageDir);
-  const payload = await runDeviceAdmitCore({
-    operatorSeed,
+  // The founder's PersonaGroup ROOT signs the joinee's edge (the upgrade event). The root seed
+  // is founder-only (.lararium-identity); the joinee supplies ONLY its PUBLIC verifying key.
+  if (!opts.joineeVerifyingKey) {
+    throw new Error("[lares device-admit] --joinee-key <hex> required — the joining vessel's public verifying key.");
+  }
+  const signerSeed     = await loadPersonaGroupRootSeed(storageDir);
+  const hearthTrueName = GENESIS_ENGINE_CID(genesisDir);
+  if (!hearthTrueName) {
+    throw new Error("[lares device-admit] hearth true-name (engine CID) absent — run `lares init` first.");
+  }
+  const payload = await runDeviceAdmitEdge({
+    signerSeed,
+    joineeVerifyingKey: opts.joineeVerifyingKey.toLowerCase(),
+    hearthTrueName,
     personaGroupDocIdHex,
     personaGroupAgentIdHex,
     meshCabalDocIdHex,
-    capEvents,
     syncUrl:      opts.syncUrl      ?? null,
     islandDocUrl: opts.islandDocUrl ?? null,
   });

@@ -1,5 +1,7 @@
 // @lararium/keyhive — capability layer wrapping @keyhive/keyhive (Ink & Switch concap, pre-alpha).
 
+import type { DeviceDelegationTiddler } from "@lararium/mesh";
+
 export type {
   CapabilityProvider, CapabilityProviderInitOpts,
   DelegateArgs, DelegateResult, VerifyArgs, VerifyResult,
@@ -32,11 +34,11 @@ export type {
 // import it.
 
 export {
-  runFoundingCeremony, runDeviceAdmitCore, runDeviceAdmitAccept, runApplyAdmitPayload,
+  runFoundingCeremony, runDeviceAdmitEdge, runApplyAdmitPayload,
 } from "./ceremony-core.js";
 export type {
   FoundingCeremonyInput, FoundingCeremonyResult,
-  DeviceAdmitCoreInput, DeviceAdmitAcceptInput,
+  DeviceAdmitEdgeInput,
   ApplyAdmitInput, ApplyAdmitResult,
 } from "./ceremony-core.js";
 
@@ -50,10 +52,17 @@ export type {
  */
 export interface DeviceAdmitPayload {
   readonly kind:                   "device-admit/v1";
+  /** The PINNED signer DID — the joinee's Binding Gate verifies its edge against THIS. */
+  readonly signerDid:              string;
+  /** The signed root→joinee device-delegation edge (the founder's signer signs the joinee's
+   *  vessel key × hearthTrueName) — the joinee's binding, verified at its Binding Gate. No Beelay. */
+  readonly deviceEdge:             DeviceDelegationTiddler;
+  /** The hearth true-name (engine CID) the joinee binds TO. */
+  readonly hearthTrueName:         string;
+  /** Founder sentinel oracle IDs — for the founding sentinel dance + the future affiliation layer. */
   readonly personaGroupDocIdHex:    string;
   readonly personaGroupAgentIdHex:  string;
   readonly meshCabalDocIdHex:      string;
-  readonly capEvents:              ReadonlyArray<{ variant: string; bytes: string }>;
   readonly syncUrl:                string | null;
   /**
    * Automerge URL of the genesis island doc on the issuing vessel's Repo.

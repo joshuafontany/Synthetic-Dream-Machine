@@ -254,152 +254,54 @@ export async function runFoundingCeremony(
 // Device-admit payload production
 // ---------------------------------------------------------------------------
 
-export interface DeviceAdmitCoreInput {
-  operatorSeed:          Uint8Array;
+export interface DeviceAdmitEdgeInput {
+  /** The founder's PersonaGroup ROOT 32-byte seed — SIGNS the joinee's edge (never inits Keyhive). */
+  signerSeed:             Uint8Array;
+  /** The joinee's raw Ed25519 verifying-key hex (64, lowercase) — the delegate (its PUBLIC key). */
+  joineeVerifyingKey:     string;
+  /** The hearth true-name (engine CID) the joinee binds TO. */
+  hearthTrueName:         string;
+  /** Founder sentinel oracle IDs — carried through for the founding sentinel + future affiliation layer. */
   personaGroupDocIdHex:   string;
   personaGroupAgentIdHex: string;
-  meshCabalDocIdHex:     string;
-  /** Cap events in AdminEventStore-compatible form: base64 bytes + variant string. */
-  capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
-  syncUrl:               string | null;
+  meshCabalDocIdHex:      string;
+  syncUrl:                string | null;
   /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
-  islandDocUrl?:         string | null;
+  islandDocUrl?:          string | null;
 }
 
 /**
- * Self-verify Gates B + C, then produce a device-admit/v1 payload.
- * The caller loads cap events from its admin doc and provides the oracle IDs.
- * Throws if either gate fails (sentinel state inconsistent — re-run lares init).
+ * Produce a device-admit/v1 payload for the UPGRADE event: the founder's PersonaGroup root SIGNS
+ * a root→joinee device-delegation edge (joinee vessel key × hearthTrueName). The joinee verifies
+ * that edge at its Binding Gate against the pinned signer — no Keyhive cap events, no Beelay. No
+ * secret crosses the wire: in = the joinee's PUBLIC verifying key; out = the public signed edge +
+ * the pinned signer DID. Fail-closed: a malformed joinee key throws BEFORE signing.
  */
-export async function runDeviceAdmitCore(
-  input: DeviceAdmitCoreInput,
+export async function runDeviceAdmitEdge(
+  input: DeviceAdmitEdgeInput,
 ): Promise<DeviceAdmitPayload> {
-  const {
-    operatorSeed, personaGroupDocIdHex, personaGroupAgentIdHex,
-    meshCabalDocIdHex, capEvents, syncUrl, islandDocUrl,
-  } = input;
-
-  const keyhive = new KeyhiveProvider();
-  const store   = new InMemoryEventStore();
-
-  for (const r of capEvents) {
-    const bytes   = base64ToBytes(r.bytes);
-    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.buffer as ArrayBuffer);
-    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
-    await store.put({ hash, variant: r.variant, bytes });
+  if (!/^[0-9a-f]{64}$/.test(input.joineeVerifyingKey)) {
+    throw new Error("[ceremony] runDeviceAdmitEdge: joineeVerifyingKey must be 64-char lowercase hex");
   }
-
-  await keyhive.init({ seed: operatorSeed, eventStore: store });
-  const { ingested } = await keyhive.hydrateFromEventStore();
-  console.log(`[ceremony] hydrated ${ingested} events — verifying sentinel state`);
-
-  const vesselHex = await keyhive.vesselIdentifierHex();
-  const gateB = await keyhive.verifySentinelMembership(vesselHex, personaGroupDocIdHex);
-  const gateC = await keyhive.verifySentinelMembership(personaGroupAgentIdHex, meshCabalDocIdHex);
-
-  if (!gateB.ok) throw new Error(`[ceremony] Gate B self-check failed: ${gateB.reason}`);
-  if (!gateC.ok) throw new Error(`[ceremony] Gate C self-check failed: ${gateC.reason}`);
-  console.log(`[ceremony] self-check: Gates B + C ✓`);
-
-  await keyhive.dispose();
-
+  const issuedAt  = new Date().toISOString();
+  const expiresAt = new Date(Date.now() + EDGE_BACKSTOP_MS).toISOString();
+  const deviceEdge = await buildDeviceDelegation({
+    operatorSeed:       input.signerSeed,          // the founder's PersonaGroup root SIGNS
+    deviceVerifyingKey: input.joineeVerifyingKey,  // the joinee's vessel key is the delegate
+    hearthTrueName:     input.hearthTrueName,
+    issuedAt,
+    expiresAt,
+    boundEpoch:         0,
+  });
   return {
-    kind: "device-admit/v1",
-    personaGroupDocIdHex,
-    personaGroupAgentIdHex,
-    meshCabalDocIdHex,
-    capEvents,
-    syncUrl,
-    ...(islandDocUrl != null ? { islandDocUrl } : {}),
-  };
-}
-
-// ---------------------------------------------------------------------------
-// Device-admit ACCEPT (Model-B: delegate a DISTINCT new-device key into the group)
-// ---------------------------------------------------------------------------
-
-export interface DeviceAdmitAcceptInput {
-  /** The FOUNDER's operator seed (the admitting vessel). */
-  operatorSeed:          Uint8Array;
-  personaGroupDocIdHex:   string;
-  personaGroupAgentIdHex: string;
-  meshCabalDocIdHex:     string;
-  /** The founder's existing cap events (base64 bytes + variant), from its admin doc. */
-  capEvents:             ReadonlyArray<{ variant: string; bytes: string }>;
-  /** The JOINEE's self-certifying ContactCard JSON (its public identity), out-of-band. */
-  newDeviceContactCardJson: string;
-  syncUrl:               string | null;
-  islandDocUrl?:         string | null;
-}
-
-/**
- * Model-B accept: the founder receives a NEW device's public ContactCard, delegates
- * that distinct DID into the PersonaGroup (a fresh DELEGATED event), and repackages
- * ALL cap events (existing + the new delegation) as a device-admit/v1 payload.
- *
- * ⚠ PROVISIONAL — founder-side only; NOT a complete cross-peer admit (witnessed
- * 2026-06-21). The delegation is correct (delegated id == joinee Individual, the
- * DELEGATED + CGKA events fire). BUT a joinee that ingests these cap events still
- * FAILS Gate B: the key-chain/membership is necessary but NOT sufficient — the joinee
- * also needs the encrypted DOCUMENT content, which keyhive moves via sedimentree/Beelay
- * (Rust-only; NOT in the keyhive_wasm JS surface). From JS the gap closes only by
- * transporting the document ourselves — ship an `Archive` (Archive.toBytes →
- * ingestArchive, whole keyhive state incl. the CiphertextStore) or the ciphertext
- * blobs over our own transport, then `tryDecrypt`. Until that (or a Beelay JS binding)
- * lands, Model-A (shared key = same Individual) is the working federation path; this
- * accept stands as the founder-side foundation. (substrate map: lar:///…/docs/lares/federation)
- *
- * No secret crosses the wire: in = the joinee's public card; out = public cap events.
- */
-export async function runDeviceAdmitAccept(
-  input: DeviceAdmitAcceptInput,
-): Promise<DeviceAdmitPayload> {
-  // PLACEHOLD-THROW — the founder-side admit re-founds on the signed edge (the next arc): the
-  // signer signs a root→joinee device-delegation edge (joinee vessel key × hearthTrueName) and
-  // ships pin + edge in the payload. The Keyhive-sentinel delegation below is superseded.
-  throw new Error(
-    "[ceremony] runDeviceAdmitAccept: the edge-based delegated upgrade is not yet built — " +
-    "mint a root→joinee device-delegation edge and carry it in DeviceAdmitPayload.",
-  );
-  // eslint-disable-next-line no-unreachable
-  const keyhive = new KeyhiveProvider();
-  const store   = new InMemoryEventStore();
-
-  // Rehydrate the founder's group state from its existing cap events.
-  for (const r of input.capEvents) {
-    const bytes   = base64ToBytes(r.bytes);
-    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.slice());
-    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
-    await store.put({ hash, variant: r.variant, bytes });
-  }
-  await keyhive.init({ seed: input.operatorSeed, eventStore: store });
-  await keyhive.hydrateFromEventStore();
-
-  // Founder self-check: it must actually hold the PersonaGroup before it can admit.
-  const vesselHex = await keyhive.vesselIdentifierHex();
-  const gateB = await keyhive.verifySentinelMembership(vesselHex, input.personaGroupDocIdHex);
-  if (!gateB.ok) throw new Error(`[ceremony] accept refused: founder not a PersonaGroup member (${gateB.reason})`);
-
-  // Import the joinee's public Individual, then DELEGATE it into the PersonaGroup —
-  // this fires the new DELEGATED event that makes the joinee a member.
-  const { id: newDeviceHex } = await keyhive.receiveContactCard(
-    new TextEncoder().encode(input.newDeviceContactCardJson),
-  );
-  await keyhive.addSentinelMember(newDeviceHex, input.personaGroupDocIdHex);
-
-  // Collect ALL events (existing + the new delegation) into the payload.
-  const all = await store.list();
-  const capEvents = all.map((e) => ({ variant: e.variant, bytes: bytesToBase64(e.bytes) }));
-
-  await keyhive.dispose();
-
-  return {
-    kind: "device-admit/v1",
+    kind:                   "device-admit/v1",
+    signerDid:              deviceEdge.operatorDid,
+    deviceEdge,
+    hearthTrueName:         input.hearthTrueName,
     personaGroupDocIdHex:   input.personaGroupDocIdHex,
     personaGroupAgentIdHex: input.personaGroupAgentIdHex,
-    meshCabalDocIdHex:     input.meshCabalDocIdHex,
-    capEvents,
-    syncUrl: input.syncUrl,
+    meshCabalDocIdHex:      input.meshCabalDocIdHex,
+    syncUrl:                input.syncUrl,
     ...(input.islandDocUrl != null ? { islandDocUrl: input.islandDocUrl } : {}),
   };
 }
@@ -432,6 +334,12 @@ export async function runApplyAdmitPayload(
 ): Promise<ApplyAdmitResult> {
   const { repo, operatorVerifyingKey, operatorDisplayName, payload } = input;
 
+  // Fail-closed: the binding is the joinee's whole authority — a missing field MUST halt,
+  // never write a half-bound admin doc (the confused-deputy / mycelium-PCD hole).
+  if (!payload.signerDid || !payload.deviceEdge || !payload.hearthTrueName) {
+    throw new Error("[ceremony] runApplyAdmitPayload: payload lacks signerDid/deviceEdge/hearthTrueName — refusing to admit.");
+  }
+
   const identitiesHandle = seedIdentitiesDoc(repo);
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
@@ -454,28 +362,23 @@ export async function runApplyAdmitPayload(
     }
   }
 
-  // Write cap events from payload into admin doc.
-  for (const evt of payload.capEvents) {
-    const bytes   = base64ToBytes(evt.bytes);
-    const hashBuf = await crypto.subtle.digest("SHA-256", bytes.buffer as ArrayBuffer);
-    const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
-    const title   = capEventTitle(hash);
-    adminHandle.change((doc) => {
-      if (!doc.tiddlers[title]) {
-        doc.tiddlers[title] = {
-          tiddler: {
-            title,
-            text:        evt.bytes,
-            tags:        CAP_EVENT_TAG,
-            variant:     evt.variant,
-            hash,
-            "bytes-len": String(bytes.length),
-          },
-          meta: { authority: "lares-init-admit" },
-        };
-      }
-    });
-  }
+  // Write the joinee's BINDING into its own admin doc — the pinned signer, the hearth true-name,
+  // and the root→joinee edge (mirrors the founding write). The joinee boots through its Binding
+  // Gate on these alone: verifyDeviceDelegation(edge, signerDid) — no cap events, no Beelay.
+  adminHandle.change((doc) => {
+    doc.tiddlers[SIGNER_DID_TIDDLER] = {
+      tiddler: { title: SIGNER_DID_TIDDLER, text: payload.signerDid, kind: "operator-root-did" },
+      meta: { authority: "lares-init-admit" },
+    };
+    doc.tiddlers[HEARTH_TRUE_NAME_TIDDLER] = {
+      tiddler: { title: HEARTH_TRUE_NAME_TIDDLER, text: payload.hearthTrueName, kind: "hearth-true-name" },
+      meta: { authority: "lares-init-admit" },
+    };
+    doc.tiddlers[DEVICE_DELEGATION_SELF_TIDDLER] = {
+      tiddler: { title: DEVICE_DELEGATION_SELF_TIDDLER, ...payload.deviceEdge },
+      meta: { authority: "lares-init-admit" },
+    };
+  });
 
   // Write sentinel oracle tiddlers.
   adminHandle.change((doc) => {

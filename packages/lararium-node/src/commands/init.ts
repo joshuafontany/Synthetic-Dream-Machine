@@ -102,16 +102,37 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   const repo = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
 
   if (opts.admitPayloadPath) {
-    // ── Vessel-admission path = the UPGRADE event (anon/fresh vessel → group member) ──
-    // PLACEHOLD-THROW — intention recorded, not yet built. Under the signed-edge binding the
-    // upgrade rides a root→joinee device-delegation edge (the founder's signer signs the joinee's
-    // vessel key + hearthTrueName); the payload carries the pin + edge; the joinee persists them
-    // and verifies at the Binding Gate over the local relay (no Beelay). The cap-event repackaging below is
-    // the superseded Model-A path. A fresh node founds from null today; this upgrade is the next arc.
-    throw new Error(
-      "[lares init --admit] the delegated upgrade path is not yet built — the next arc carries a " +
-      "root→joinee device-delegation edge in the payload and verifies it at the Binding Gate.",
+    // ── Vessel-admission path = the UPGRADE event (a fresh vessel joins a PersonaGroup) ──
+    // The joinee's vessel key (above) is the DELEGATE; the payload carries the pinned signer +
+    // the root→joinee edge (the founder's PersonaGroup root signed it). The joinee writes that
+    // binding into its OWN admin doc and boots through its Binding Gate — no Beelay, no cap events.
+    if (!existsSync(opts.admitPayloadPath)) {
+      throw new Error(`[lares init --admit] payload file not found: ${opts.admitPayloadPath}`);
+    }
+    const payload = JSON.parse(readFileSync(opts.admitPayloadPath, "utf8")) as DeviceAdmitPayload;
+    if (payload.kind !== "device-admit/v1") {
+      throw new Error(`[lares init --admit] unexpected payload kind: ${payload.kind}`);
+    }
+    const { identitiesUrl, circlesUrl, sessionsUrl, adminUrl } = await runApplyAdmitPayload({
+      repo,
+      operatorVerifyingKey: operatorIdentity.verifyingKey,
+      operatorDisplayName:  operatorIdentity.displayName ?? "operator",
+      payload,
+    });
+
+    const bootstrapPlugin = makeBootstrapPlugin(
+      identitiesUrl, circlesUrl, sessionsUrl, adminUrl,
+      payload.personaGroupDocIdHex, payload.meshCabalDocIdHex,
     );
+    writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
+    await repo.flush();
+
+    console.log(`[lares init --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
+    console.log(`  PersonaGroup ${payload.personaGroupDocIdHex.slice(0, 20)}…`);
+    console.log(`  signer pin   ${payload.signerDid.slice(0, 20)}…`);
+    console.log(`  hearth-name  ${payload.hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
+    console.log("[lares init --admit] done — joined the PersonaGroup. Start with: lares dev");
+    return { skipped: false, bootstrapPath: bootstrap, storageDir, genesisDir };
   }
 
   // ── Founding ceremony path ───────────────────────────────────────────────
