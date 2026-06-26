@@ -34,7 +34,9 @@ const COALESCE_MS = 24;
  * Mount the projection on a live wiki island. Returns a teardown (the `onBoot` contract).
  */
 export function mountProjection(ctx: IslandContext): () => void {
-  const tw = (ctx.tw5 as unknown as { $tw: Record<string, any> }).$tw;
+  // Widen the booted $tw for the loose internal TW5 surface (fakeDocument, Tiddler) the typed
+  // engine facade does not expose — the same loose-access the cameras take.
+  const tw = ctx.tw5.$tw as unknown as Record<string, any>;
   const fakeDoc = tw.fakeDocument;
   // ($:/SiteTitle "Lararium" + $:/SiteSubtitle "Welcome to the DreamNet" ride the lares plugin
   //  blob as source tiddlers — tiddlers/site-{title,subtitle}.tid — CID-carried, ratchet via
@@ -70,7 +72,7 @@ export function mountProjection(ctx: IslandContext): () => void {
         wikiUri:        ctx.wikiUri,
         listenable:     PROJECTION_FRAME,
         payload: {
-          html: tw5ElementToHtml(storyContainer as { innerHTML: string }),
+          html: tw5ElementToHtml(storyContainer),
           css:  styleContainer.textContent ?? "",
           rev,
         },

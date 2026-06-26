@@ -236,10 +236,11 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
 
-    // TRIAGE relay — surface the worker's breath/fault/ea on the MAIN console (the worker's
-    // own console doesn't bubble to Playwright). Low-noise; useful telemetry to keep.
-    if (raw.type === "breath" || raw.type === "fault" || raw.type === "ea") {
-      console.log(`[admin-worker:${raw.type}] ${JSON.stringify(raw).slice(0, 240)}`);
+    // Surface island FAULTS on the main console (the worker's own console doesn't bubble). The
+    // Awake signal (ea) rides workerEa → the vessel's "live" phase, and breath rides the
+    // awaitIslandMsg subscription — neither needs a console echo.
+    if (raw.type === "fault") {
+      console.error(`[admin-island:fault] ${JSON.stringify(raw).slice(0, 240)}`);
     }
 
     if (raw.type === "admin:verify-result") {

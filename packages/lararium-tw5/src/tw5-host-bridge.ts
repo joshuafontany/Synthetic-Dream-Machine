@@ -248,25 +248,6 @@ function loadTiddlyWikiFromBlob(
   throw new Error("TW5Engine: coreBlob did not yield a TiddlyWiki instance.");
 }
 
-// vm polyfill tiddler text — injected into TW5's module registry before boot.
-// When $:/boot/boot.js re-executes as a startup module it overwrites
-// $tw.boot.commonJsRequire with TW5's internal _load, which cannot resolve Node
-// built-ins. Preloading a "vm" tiddler with module-type "library" makes
-// _load("vm") find this polyfill instead.
-const BROWSER_VM_TIDDLER_TEXT = `\
-exports.createContext = function(ctx) { return ctx || Object.create(null); };
-exports.Script = function Script(code) { this.code = code; };
-exports.Script.prototype.runInContext = function(ctx) {
-  var keys = Object.keys(ctx || {}), vals = keys.map(function(k) { return ctx[k]; });
-  try { return Function.apply(null, keys.concat([this.code])).apply(null, vals); } catch(e) { return undefined; }
-};
-exports.Script.prototype.runInNewContext = function(ctx) { return this.runInContext(ctx || Object.create(null)); };
-exports.Script.prototype.runInThisContext = function() { try { return Function(this.code)(); } catch(e) { return undefined; } };
-exports.runInContext = function(code, ctx) { return new exports.Script(code).runInContext(ctx); };
-exports.runInNewContext = function(code, ctx) { return new exports.Script(code).runInNewContext(ctx); };
-exports.runInThisContext = function(code) { try { return Function(code)(); } catch(e) { return undefined; } };
-`;
-
 function neutralizeNodeBootAuthority(instance: TW5Instance): void {
   instance.boot.argv = [];
   // Null both platform flags: prevents TW5 from reading filesystem (node path)
