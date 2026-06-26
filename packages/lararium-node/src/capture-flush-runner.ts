@@ -24,6 +24,9 @@ export interface CaptureFlushOptions {
   readonly palacePath: string;
   /** the mempalace executable (default "mempalace") */
   readonly mempalaceBin?: string;
+  /** flush timeout (ms) — the writer-liveness guard so a wedged `mine` never blinds
+   *  telemetry under load (neuro depolarization-block). Default 30 s. */
+  readonly timeoutMs?: number;
   /** injected spawn for tests; defaults to execFile(mempalace ...) */
   readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
 }
@@ -40,7 +43,8 @@ export function makeCaptureFlushRunner(opts: CaptureFlushOptions): {
   run: CaptureFlushRunner;
 } {
   const bin = opts.mempalaceBin ?? "mempalace";
-  const spawn = opts.spawn ?? ((b, a) => execFileAsync(b, [...a]));
+  const timeout = opts.timeoutMs ?? 30_000;
+  const spawn = opts.spawn ?? ((b, a) => execFileAsync(b, [...a], { timeout }));
   let seq = 0;
 
   const writeNdjson: CaptureNdjsonWriter = async (records) => {

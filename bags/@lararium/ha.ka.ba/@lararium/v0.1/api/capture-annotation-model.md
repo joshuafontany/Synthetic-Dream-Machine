@@ -117,6 +117,33 @@ adapter), never the miner.
 
 <<~/ahu >>
 
+<<~ ahu #nalu-flush-hardening >>
+
+## Nalu-Flush Hardening ~ the four-domain survey (2026-06-25)
+
+**Pattern integrities rhyme across domains.** A four-spirit survey — CS/observability ·
+neurophysiology · hydrology · lean/queueing — read the capture-nalu against each domain's
+hard-won laws. The verdict: the design stands **field-canonical** in its bones (the
+size-OR-time dual trigger — Kafka `linger.ms` / OTel `scheduledDelay` · Hering-Breuer
+volume-or-rhythm · tipping-bucket · EBQ+takt; the single-writer drain — LMAX + group-commit ·
+the absolute refractory period; the content-keyed idempotent sink; and the snapshot-then-
+clear that already closes hydrology's tipping-bucket blind window — mid-drain arrivals ride
+the next wave). ALL FOUR domains named ONE missing joint, plus four refinements:
+
+<<~ranks golden-principle ceiling ~ ALL FOUR converge: bound the hot pool + spill the overflow to a DURABLE reserve — never grow, never silently drop (CS bounded-buffer+backpressure-or-spill · hydrology spillway-with-a-destination + surge-tank headroom sized for the BURST not the mean · lean WIP-cap · neuro bounded-RRP + depress-don't-crash) -> backoff ~ CS+lean+neuro: a failed flush re-queues FIFO with exponential full-jitter backoff; a batch past maxRetries dead-letters to durable quarantine — never head-of-line-blocks the one writer (the relative-refractory damping) -> liveness ~ neuro depolarization-block: over-stimulate and the system goes SILENT — the single writer IS the inhibitory restraint; a wedged flush blinds telemetry exactly when load peaks. Guard it with a flush timeout — the observer MUST survive the storm it observes -> two-tier ~ neuro RRP←reserve: the hot pool refills from the reserve as room frees -> derive-then-adapt ~ lean EBQ+Little's-Law + neuro homeostasis: 32/2000 are a batch-size and a wait-bound GUESSED; derive them from flush-cost·holding-cost·arrival-rate, then SERVO the gate to a latency set-point (every biological collect-then-fire system adapts its threshold; ours does not — held, deferred) >>
+
+**Enacted** (`CaptureNalu`, lararium-mesh + `makeCaptureFlushRunner`, lararium-node): the
+ceiling (`maxDepth` + spill-to-reserve), exponential full-jitter backoff + retry-cap →
+dead-letter, the writer-liveness flush timeout, and the two-tier RRP←reserve refill.
+Surfaced counters (spilled · dead-lettered) — never silent. Reserve + quarantine durability
+= the daemon's injected WAL, **resolving the held queue-durability dial: bounded memory +
+disk reserve, not one or the other.** **Deferred (held, not built):** EBQ/Little's-Law-derived constants +
+an adaptive homeostatic servo + tick-jitter (a global 20 Hz crest can phase-align producer
+bursts into one thundering-herd — jitter it, lead with the time cadence; depth = the
+Hering-Breuer safety valve).
+
+<<~/ahu >>
+
 <<~ ahu #layer-capture >>
 
 ## Layer 1 ~ Capture (what was said)
@@ -229,7 +256,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 ## Operator Rulings Ledger
 
-<<~ranks rulings R1 ~ memory = 4 registers · 2 peers · 1 mesh; mempalace = PLACE, quine = ley-line (2026-06-24) -> R2 ~ @admin engine is the ONE decomposer; render→project to drawer, never tids; @admin owns it (2026-06-24) -> R3 ~ name the process lar-telemetry, not "decompose" (analogy); instruments report readings, never verdicts -> R4 ~ hold ≡ enqueueNalu, flush on next nalu; verbatim-always / gradient-eventual -> R5 ~ subagents captured DISTINCT (spirit wing), named from handoff, BOTH sides -> R6 ~ spirits are NAMELESS #has-stack entities with pet-names; recall by semantic search, #has not deterministically enforced -> R7 ~ capture ON by default (main + all subagents, every surface) -> R8 ~ ephemeral work LAUNCHED isolated (blind dir), not gated; mu-reframe -> R9 ~ --cleanup off by default (blind dir persists for inspection) -> R10 ~ relationship edge = bi-temporal KG predicate, not a tunnel -> R11 ~ FORWARD-FACING (2026-06-25): process each turn forward (verbatim+gradient born together) → enqueue → flush; mempalace = FILER not miner; the race-behind retires; no legacy path (no outside consumers) -> R12 ~ the capture-nalu writer = a SEPARATE LOCAL non-federated worker-VM, NOT the federated @admin (work-memory is a local island); the user-root daemon hosts it beside @admin -> R13 ~ flush crests on the daemon's SERVER TICK (20 Hz setInterval lar-event-bus loop = LarTickCounter, server-side where the palace lives; the browser rAF crests the OTHER, federated in-wiki nalu — do not conflate the two engines' boundaries), backpressure-gated -> R14 ~ TWO instruments never conflated: LarTickCounter (physical flush cadence) vs FfzClock (felt lar_ffz stamp) -> R15 ~ flush-gate CONFIGURABLE via a lar-URI-tagged system config tiddler (cascade = upgrade path); pono default at our scale: flush when depth ≥ 32 OR ≥ 2000 ms -> R16 ~ mempalace ingest via the RFC-002 source-adapter (mempalace-source-lares sibling pkg); the `mine --source` CLI seam authored in the fork >>
+<<~ranks rulings R1 ~ memory = 4 registers · 2 peers · 1 mesh; mempalace = PLACE, quine = ley-line (2026-06-24) -> R2 ~ @admin engine is the ONE decomposer; render→project to drawer, never tids; @admin owns it (2026-06-24) -> R3 ~ name the process lar-telemetry, not "decompose" (analogy); instruments report readings, never verdicts -> R4 ~ hold ≡ enqueueNalu, flush on next nalu; verbatim-always / gradient-eventual -> R5 ~ subagents captured DISTINCT (spirit wing), named from handoff, BOTH sides -> R6 ~ spirits are NAMELESS #has-stack entities with pet-names; recall by semantic search, #has not deterministically enforced -> R7 ~ capture ON by default (main + all subagents, every surface) -> R8 ~ ephemeral work LAUNCHED isolated (blind dir), not gated; mu-reframe -> R9 ~ --cleanup off by default (blind dir persists for inspection) -> R10 ~ relationship edge = bi-temporal KG predicate, not a tunnel -> R11 ~ FORWARD-FACING (2026-06-25): process each turn forward (verbatim+gradient born together) → enqueue → flush; mempalace = FILER not miner; the race-behind retires; no legacy path (no outside consumers) -> R12 ~ the capture-nalu writer = a SEPARATE LOCAL non-federated worker-VM, NOT the federated @admin (work-memory is a local island); the user-root daemon hosts it beside @admin -> R13 ~ flush crests on the daemon's SERVER TICK (20 Hz setInterval lar-event-bus loop = LarTickCounter, server-side where the palace lives; the browser rAF crests the OTHER, federated in-wiki nalu — do not conflate the two engines' boundaries), backpressure-gated -> R14 ~ TWO instruments never conflated: LarTickCounter (physical flush cadence) vs FfzClock (felt lar_ffz stamp) -> R15 ~ flush-gate CONFIGURABLE via a lar-URI-tagged system config tiddler (cascade = upgrade path); pono default at our scale: flush when depth ≥ 32 OR ≥ 2000 ms -> R16 ~ mempalace ingest via the RFC-002 source-adapter (mempalace-source-lares sibling pkg); the `mine --source` CLI seam authored in the fork -> R17 ~ nalu-flush HARDENED by a four-domain survey (CS·neuro·hydro·lean, 2026-06-25, #nalu-flush-hardening): the CEILING (maxDepth + spill-to-durable-reserve, the all-four-domain converge) · backoff+retry-cap→dead-letter (never head-of-line-block the one writer) · writer-liveness flush-timeout (neuro depolarization-block — the observer survives the storm) · two-tier RRP←reserve. Durability dial RESOLVED: bounded memory + disk reserve, not one or the other. Surfaced counters, never silent -> R18 ~ the gate constants 32/2000 are GUESSED (an EBQ batch-size + a Little's-Law wait-bound); DERIVE from flush-cost·holding-cost·arrival-rate + an adaptive homeostatic servo + tick-jitter = DEFERRED (held, not built) >>
 
 <<~/ahu >>
 

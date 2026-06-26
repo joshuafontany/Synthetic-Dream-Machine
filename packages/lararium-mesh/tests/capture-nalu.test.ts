@@ -1,70 +1,127 @@
 /**
- * capture-nalu — the forward-facing collect-then-flush mechanism: enqueue, the
- * backpressure gate (depth OR max-wait), gated tick-flush, re-queue on failure.
- *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#forward-facing-nalu
+ * capture-nalu — the hardened collect-then-flush mechanism: the gate (depth OR max-wait),
+ * the ceiling + spill-to-reserve, exponential backoff, retry-cap → dead-letter, and the
+ * RRP<-reserve refill. Grounded by the four-domain survey (capture keel #nalu-flush-hardening).
  */
 
-import { describe, test, expect } from "vitest";
-import { CaptureNalu, PONO_FLUSH_GATE } from "../src/index.js";
-import type { CaptureRecord } from "../src/index.js";
+import { describe, expect, test } from "vitest";
+
+import { CaptureNalu } from "../src/index.js";
+import type { CaptureRecord, CaptureSinks, FlushGate } from "../src/index.js";
+
+const GATE: FlushGate = {
+  depth: 3,
+  maxWaitMs: 2000,
+  maxDepth: 5,
+  maxRetries: 2,
+  backoffBaseMs: 100,
+  backoffMaxMs: 1000,
+};
 
 const rec = (i: number): CaptureRecord => ({ content: `r${i}`, source_file: `nalu://x/${i}` });
 
-/** A flush harness that records the batches it drained (parsed back from the NDJSON). */
-function harness(opts: { fail?: boolean; gate?: typeof PONO_FLUSH_GATE; now?: number } = {}) {
+function harness(opts: { failTimes?: number; gate?: FlushGate; now?: number } = {}) {
+  let runCalls = 0;
   const drained: CaptureRecord[][] = [];
+  const overflow: CaptureRecord[] = [];
+  const deadLettered: CaptureRecord[] = [];
+  const reserve: CaptureRecord[] = [];
   let lastBatch: readonly CaptureRecord[] = [];
-  const writeNdjson = async (records: readonly CaptureRecord[]) => {
-    lastBatch = records;
-    return "/tmp/fake.ndjson";
+  const sinks: CaptureSinks = {
+    writeNdjson: async (records) => {
+      lastBatch = records;
+      return "/tmp/fake.ndjson";
+    },
+    run: async () => {
+      runCalls++;
+      if (opts.failTimes && runCalls <= opts.failTimes) throw new Error("flush failed");
+      drained.push([...lastBatch]);
+      return lastBatch.length;
+    },
+    onOverflow: (recs) => {
+      overflow.push(...recs);
+      reserve.push(...recs);
+    },
+    onDeadLetter: (recs) => deadLettered.push(...recs),
+    refill: (room) => reserve.splice(0, room), // mutate in place — keep the array ref live
+    rng: () => 1, // deterministic full backoff
   };
-  const run = async (_path: string) => {
-    if (opts.fail) throw new Error("flush failed");
-    drained.push([...lastBatch]);
-    return lastBatch.length;
+  const nalu = new CaptureNalu(sinks, opts.gate ?? GATE, opts.now ?? 0);
+  return {
+    nalu,
+    drained,
+    overflow,
+    deadLettered,
+    get reserve() {
+      return reserve;
+    },
   };
-  const nalu = new CaptureNalu(writeNdjson, run, opts.gate ?? PONO_FLUSH_GATE, opts.now ?? 0);
-  return { nalu, drained };
 }
 
-describe("the backpressure gate — flush when depth OR max-wait crests", () => {
+describe("the gate — flush when depth OR max-wait crests", () => {
   test("below depth and within max-wait → no flush", async () => {
-    const { nalu, drained } = harness({ now: 0 });
-    for (let i = 0; i < 10; i++) nalu.enqueue(rec(i)); // < 32
-    expect(await nalu.tick(1000)).toBe(0); // 1s < 2000ms
-    expect(drained).toEqual([]);
-    expect(nalu.depth()).toBe(10);
-  });
-
-  test("depth >= threshold crests immediately", async () => {
-    const { nalu, drained } = harness({ now: 0 });
-    for (let i = 0; i < 32; i++) nalu.enqueue(rec(i));
-    expect(await nalu.tick(50)).toBe(32); // depth crest, well within max-wait
-    expect(drained).toHaveLength(1);
-    expect(drained[0]).toHaveLength(32);
-    expect(nalu.depth()).toBe(0);
-  });
-
-  test("a shallow queue crests on max-wait", async () => {
-    const { nalu, drained } = harness({ now: 0 });
+    const { nalu, drained } = harness();
     nalu.enqueue(rec(1));
-    expect(await nalu.tick(1999)).toBe(0); // not yet
-    expect(await nalu.tick(2000)).toBe(1); // max-wait crest
-    expect(drained[0]).toHaveLength(1);
+    nalu.enqueue(rec(2));
+    expect(await nalu.tick(1000)).toBe(0);
+    expect(drained).toEqual([]);
   });
 
-  test("an empty queue never crests, even past max-wait", async () => {
-    const { nalu } = harness({ now: 0 });
-    expect(await nalu.tick(9999)).toBe(0);
+  test("depth crest flushes; a shallow queue crests on max-wait; empty never crests", async () => {
+    const a = harness();
+    for (let i = 0; i < 3; i++) a.nalu.enqueue(rec(i));
+    expect(await a.nalu.tick(50)).toBe(3);
+    expect(a.nalu.depth()).toBe(0);
+
+    const b = harness();
+    b.nalu.enqueue(rec(1));
+    expect(await b.nalu.tick(1999)).toBe(0);
+    expect(await b.nalu.tick(2000)).toBe(1);
+
+    const c = harness();
+    expect(await c.nalu.tick(9999)).toBe(0);
   });
 });
 
-describe("durability — never drop", () => {
-  test("a failed flush re-queues the batch ahead of new arrivals", async () => {
-    const { nalu } = harness({ fail: true, now: 0 });
-    for (let i = 0; i < 32; i++) nalu.enqueue(rec(i));
-    await expect(nalu.tick(50)).rejects.toThrow("flush failed");
-    expect(nalu.depth()).toBe(32); // re-queued, nothing lost
+describe("the ceiling — bounded hot pool + spill-to-reserve (4-domain)", () => {
+  test("enqueue past maxDepth spills the overflow, never grows the pool", () => {
+    const { nalu, overflow } = harness();
+    for (let i = 0; i < 7; i++) nalu.enqueue(rec(i)); // maxDepth 5
+    expect(nalu.depth()).toBe(5);
+    expect(overflow).toHaveLength(2);
+    expect(nalu.stats().spilled).toBe(0); // routed to onOverflow, not dropped
+  });
+});
+
+describe("failure — backoff, FIFO re-queue, retry-cap → dead-letter", () => {
+  test("a transient failure re-queues with backoff, then recovers", async () => {
+    const { nalu, drained } = harness({ failTimes: 1 });
+    for (let i = 0; i < 3; i++) nalu.enqueue(rec(i));
+    await expect(nalu.tick(0)).rejects.toThrow("flush failed");
+    expect(nalu.depth()).toBe(3); // re-queued, nothing lost
+    expect(await nalu.tick(50)).toBe(0); // in backoff (until 100)
+    expect(await nalu.tick(100)).toBe(3); // backoff elapsed → recovers
+    expect(drained).toHaveLength(1);
+  });
+
+  test("a batch failing past maxRetries is dead-lettered (durable), unblocking the writer", async () => {
+    const { nalu, deadLettered } = harness({ failTimes: 99 });
+    for (let i = 0; i < 3; i++) nalu.enqueue(rec(i));
+    await expect(nalu.tick(0)).rejects.toThrow(); // failures 1
+    await expect(nalu.tick(100)).rejects.toThrow(); // failures 2
+    await expect(nalu.tick(300)).rejects.toThrow(); // failures 3 > maxRetries 2 → dead-letter
+    expect(deadLettered).toHaveLength(3);
+    expect(nalu.depth()).toBe(0); // poison batch out of the hot path
+  });
+});
+
+describe("two-tier RRP <- reserve refill", () => {
+  test("after a drain, the hot pool refills from the reserve", async () => {
+    const { nalu, reserve } = harness();
+    for (let i = 0; i < 6; i++) nalu.enqueue(rec(i)); // 5 in pool, 1 spilled to reserve
+    expect(reserve).toHaveLength(1);
+    expect(await nalu.tick(50)).toBe(5); // drain the 5
+    expect(nalu.depth()).toBe(1); // the reserved record refilled the pool
+    expect(reserve).toHaveLength(0);
   });
 });

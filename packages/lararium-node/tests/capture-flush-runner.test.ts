@@ -60,7 +60,15 @@ describe("capture-flush-runner", () => {
       palacePath: "/tmp/palace",
       spawn: async () => ({ stdout: "Drawers filed: 3" }),
     });
-    const nalu = new CaptureNalu(writeNdjson, run, { depth: 3, maxWaitMs: 2000 }, 0);
+    const gate = {
+      depth: 3,
+      maxWaitMs: 2000,
+      maxDepth: 16,
+      maxRetries: 5,
+      backoffBaseMs: 100,
+      backoffMaxMs: 5000,
+    };
+    const nalu = new CaptureNalu({ writeNdjson, run }, gate, 0);
     for (let i = 0; i < 3; i++) nalu.enqueue({ content: `r${i}`, source_file: `nalu://x/${i}` });
 
     expect(await nalu.tick(10)).toBe(3);
