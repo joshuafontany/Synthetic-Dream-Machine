@@ -108,3 +108,58 @@ export class CoalesceGate {
     this.dirty = false;
   }
 }
+
+/**
+ * The COALESCE-family gate, KEYED + DEBOUNCE — the disk projection's gate. Where {@link
+ * CoalesceGate} runs one window-from-first-mark over a single source, this runs a DEBOUNCE timer
+ * PER KEY: each `mark(key)` resets that key's timer, so a burst of changes to one carrier root
+ * settles into ONE flush after the changes stop (the trailing-debounce trigger — it lets a MOVE's
+ * source-tombstone and destination-add coalesce into one reconcile that sees the final owner). The
+ * flush reconciles the live source for that key lazily, so `mark(key)` carries no value. Same
+ * coalesce family: newest-state-per-key wins, intermediates drop, no reserve.
+ */
+export interface KeyedCoalesceGateOptions<K> {
+  /** debounce delay (ms): a key's flush fires this long after its LAST mark (settle, not window). */
+  readonly debounceMs: number;
+  /** the crest for one key — reconcile/snapshot the live source for `key` against the sink. */
+  readonly onFlush: (key: K) => void;
+  /** timer seam (deterministic tests); defaults to setTimeout / clearTimeout. */
+  readonly setTimer?: (fn: () => void, ms: number) => TimerHandle;
+  readonly clearTimer?: (h: TimerHandle) => void;
+}
+
+export class KeyedCoalesceGate<K> {
+  private readonly timers = new Map<K, TimerHandle>();
+  private readonly debounceMs: number;
+  private readonly onFlush: (key: K) => void;
+  private readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
+  private readonly clearTimer: (h: TimerHandle) => void;
+
+  constructor(opts: KeyedCoalesceGateOptions<K>) {
+    this.debounceMs = opts.debounceMs;
+    this.onFlush = opts.onFlush;
+    this.setTimer = opts.setTimer ?? ((fn, ms) => setTimeout(fn, ms));
+    this.clearTimer = opts.clearTimer ?? ((h) => clearTimeout(h));
+  }
+
+  /** The source moved at `key` — DEBOUNCE: reset the key's timer so a burst settles into one flush. */
+  mark(key: K): void {
+    const existing = this.timers.get(key);
+    if (existing !== undefined) this.clearTimer(existing);
+    this.timers.set(key, this.setTimer(() => {
+      this.timers.delete(key);
+      this.onFlush(key);
+    }, this.debounceMs));
+  }
+
+  /** Count of keys with a flush still armed (in flight). */
+  pending(): number {
+    return this.timers.size;
+  }
+
+  /** Stop the gate — clears every armed flush; pending coalesced flushes lawfully drop (teardown). */
+  dispose(): void {
+    for (const t of this.timers.values()) this.clearTimer(t);
+    this.timers.clear();
+  }
+}

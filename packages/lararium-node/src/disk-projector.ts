@@ -41,7 +41,7 @@ import { writeFileSync, mkdirSync, unlinkSync, existsSync, readFileSync, renameS
 import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
-import { isEffectRecordUri } from "@lararium/mesh";
+import { isEffectRecordUri, KeyedCoalesceGate } from "@lararium/mesh";
 import type { ReadinessMap } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
@@ -74,9 +74,9 @@ export class LarDiskProjector {
    */
   readonly writing = new Set<string>();
 
-  /** Timer key = the carrier root URI — debounce + coalesce per root, so a MOVE's
-   *  source-tombstone and destination-add settle into ONE level-triggered reconcile. */
-  private readonly timers = new Map<string, ReturnType<typeof setTimeout>>();
+  /** The keyed coalesce gate (mesh/projection-nalu) — debounce per carrier-root URI, so a MOVE's
+   *  source-tombstone and destination-add settle into ONE level-triggered reconcile. Born in start(). */
+  private gate: KeyedCoalesceGate<string> | null = null;
   private _firstFlushDone = false;
 
   private _tw5: TW5Engine | null = null;
@@ -128,24 +128,21 @@ export class LarDiskProjector {
       return hash > 0 ? cur.slice(0, hash) : cur;
     };
 
+    // LEVEL-TRIGGERED (K8s reconciliation; prior-art 2026-06-19): every change is a NUDGE to
+    // reconcile this carrier root against the CURRENT settled VM state — never an edge that
+    // licenses a destructive action off a transient view. The keyed gate debounces per ROOT (not
+    // per bag+root) so a MOVE's source-tombstone and destination-add COALESCE into ONE reconcile
+    // that sees the final owner — closing the unlink/write race structurally (the old per-(bag,root)
+    // flush + immediate gone-unlink never coalesced).
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: this.debounceMs,
+      onFlush: (rootUri) => void this.reconcile(rootUri),
+    });
+    this.gate = gate;
     const handler = (changes: Record<string, unknown>) => {
       for (const title of Object.keys(changes)) {
         if (!title.startsWith("lar:")) continue;
-        const rootUri = routeToRoot(title);
-        // LEVEL-TRIGGERED (K8s reconciliation; prior-art 2026-06-19): every
-        // change is a NUDGE to reconcile this carrier root against the CURRENT
-        // settled VM state — never an edge that licenses a destructive action
-        // off a transient view. Debounce per ROOT (not per bag+root) so a MOVE's
-        // source-tombstone and destination-add COALESCE into ONE reconcile that
-        // sees the final owner — closing the unlink/write race structurally
-        // (the old per-(bag,root) flush + immediate gone-unlink never coalesced).
-        const key = rootUri;
-        const existing = this.timers.get(key);
-        if (existing) clearTimeout(existing);
-        this.timers.set(key, setTimeout(() => {
-          this.timers.delete(key);
-          void this.reconcile(rootUri);
-        }, this.debounceMs));
+        gate.mark(routeToRoot(title));
       }
     };
     wiki.addEventListener?.("change", handler);
@@ -153,8 +150,7 @@ export class LarDiskProjector {
   }
 
   stop(): void {
-    for (const timer of this.timers.values()) clearTimeout(timer);
-    this.timers.clear();
+    this.gate?.dispose();
     this.writing.clear();
     // Shutdown grace: pending coalesced observations land before the
     // island unmounts. (Un-rendered debounced flushes lawfully die — the

@@ -7,7 +7,7 @@
 
 import { describe, expect, test } from "vitest";
 
-import { CoalesceGate } from "../src/index.js";
+import { CoalesceGate, KeyedCoalesceGate } from "../src/index.js";
 
 type Fire = (() => void) | null;
 
@@ -58,5 +58,49 @@ describe("CoalesceGate", () => {
     expect(wasCleared()).toBe(true);
     crest();                                  // even if the timer leaked through, dirty was cleared
     expect(flushes).toEqual([]);              // no flush after dispose
+  });
+});
+
+/** A manual timer registry: setTimer records the callback under a fresh id, clearTimer drops it. */
+function manualRegistry() {
+  let nextId = 1;
+  const pending = new Map<number, () => void>();
+  return {
+    setTimer:   (fn: () => void) => { const id = nextId++; pending.set(id, fn); return id as unknown as ReturnType<typeof setTimeout>; },
+    clearTimer: (h: ReturnType<typeof setTimeout>) => { pending.delete(h as unknown as number); },
+    fireAll:    () => { [...pending.values()].forEach((fn) => fn()); },
+    size:       () => pending.size,
+  };
+}
+
+describe("KeyedCoalesceGate", () => {
+  test("debounces per key — a burst on one key resets to ONE armed flush; keys stay independent", () => {
+    const reg = manualRegistry();
+    const flushes: string[] = [];
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 10, onFlush: (k) => flushes.push(k), setTimer: reg.setTimer, clearTimer: reg.clearTimer,
+    });
+
+    gate.mark("A"); gate.mark("A"); gate.mark("A");   // burst on A — debounce RESETS, never accumulates
+    expect(reg.size()).toBe(1);                        // one live timer for A, not three
+    expect(gate.pending()).toBe(1);
+    gate.mark("B");                                    // independent key arms its own timer
+    expect(gate.pending()).toBe(2);
+
+    reg.fireAll();
+    expect(flushes.sort()).toEqual(["A", "B"]);        // exactly one flush per key
+    expect(gate.pending()).toBe(0);
+  });
+
+  test("dispose clears every armed flush", () => {
+    const reg = manualRegistry();
+    const flushes: string[] = [];
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 10, onFlush: (k) => flushes.push(k), setTimer: reg.setTimer, clearTimer: reg.clearTimer,
+    });
+    gate.mark("A"); gate.mark("B");
+    expect(gate.pending()).toBe(2);
+    gate.dispose();
+    expect(gate.pending()).toBe(0);
   });
 });

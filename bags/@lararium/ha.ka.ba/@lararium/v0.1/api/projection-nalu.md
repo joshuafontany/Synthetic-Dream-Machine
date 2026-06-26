@@ -99,15 +99,15 @@ The survey named more than the engines yet carry. Held here, built when a sink n
 
 ## Enaction ~ where the form lives in code
 
-`mesh/projection-nalu.ts` stands the single door to the nalus: the family vocabulary, the `CoalesceGate` (coalesce engine, extracted from the DOM nalu's open-coded gate), and the doc that holds this canon. The accumulate sibling `CaptureNalu` (`capture-nalu.ts`, hardened by the prior four-domain survey) sits beside it, referenced not merged.
+`mesh/projection-nalu.ts` stands the single door to the nalus: the family vocabulary plus two coalesce engines — **`CoalesceGate`** (single source, window-from-first-mark, extracted from the DOM nalu) and **`KeyedCoalesceGate`** (per-key, debounce-trailing, extracted from the disk projector's per-carrier-root timer). The accumulate sibling `CaptureNalu` (`capture-nalu.ts`, hardened by the prior four-domain survey) sits beside them, referenced not merged.
 
-The three instances map cleanly:
+The three instances map cleanly — **note: a scout corrected the disk's family from the first guess (it reconciles the latest settled state per root, never delivers every change → coalesce, not accumulate):**
 
-- **disk** — accumulate · event-trigger · sink → fs
-- **DOM** — coalesce · periodic · supersede-decay · sink → shadow-DOM
+- **disk** — coalesce · keyed-debounce-per-carrier-root · reconcile-latest · sink → fs
+- **DOM** — coalesce · single-window · supersede-decay · sink → shadow-DOM
 - **mempalace** — accumulate · threshold-or-periodic · reserve:WAL · sink → mempalace
 
-The DOM nalu (`tw5-projection.ts`) draws its gate from here; the mempalace nalu (`capture-engine.ts`) keeps its hardened path. The refactor folds the disk nalu onto the shared seam as a clean next tide.
+The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-projector.ts`) draws `KeyedCoalesceGate` (its hardened reconcile/flush/ward untouched — only the timer bookkeeping moved); the mempalace nalu (`capture-engine.ts`) keeps its hardened accumulate path. Two of three coalesce instances now share the seam; the accumulate engine stays referenced.
 
 <<~/ahu >>
 
