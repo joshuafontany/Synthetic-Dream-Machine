@@ -10,7 +10,7 @@ manao       = 16
 manaoio     = 17
 register    = "Synthesis-Canon"
 retain      = true
-role        = "FfzClock (Fuller-Fontany-Zelenka Chronometer) — the domain-general RHYTHMIC pattern integrity: a 5-level bounded hierarchical clock (Pulse→Theme) carrying the tempo/freshness GRAIN — 'as of last sync', the manaoio register — for EVERY non-Automerge domain (agent-worldline cadence · external streams: game·Mudlet·video·DAW·market·CI/CD·IoT · capability-leases), profile-scoped by FFZ_PROFILES. The two-domain boundary: FfzClock NEVER carries causal order INSIDE Automerge docs/wiki-CRDTs (Automerge logical time owns that); it carries the grain everywhere else. NOT a causality court — the worldline's happened-before rides the reified edge-DAG, not ffzCompare's LWW"
+role        = "FfzClock (Fuller-Fontany-Zelenka Chronometer) — the domain-general RHYTHMIC pattern integrity: a 5-level bounded hierarchical clock (Pulse→Theme) carrying the tempo/freshness GRAIN — 'as of last sync', the manaoio register — for EVERY non-Automerge domain (agent-worldline cadence · external streams: game·Mudlet·video·DAW·market·CI/CD·IoT · capability-leases), profile-scoped by FFZ_PROFILES. The two-domain boundary: FfzClock NEVER carries causal order INSIDE Automerge docs/wiki-CRDTs (Automerge logical time owns that); it carries the grain everywhere else. NOT a causality court — the worldline's happened-before rides the reified edge-DAG, not ffzCompare's LWW. Stamps a prefix-truncatable rhythmic ADDRESS (lar_ffz = Theme.Arc.Measure.Beat.Segment.block) onto local work-memory drawers — segment ticks, block addresses (Loom-grounded, #rhythmic-address)"
 source-file = "packages/lararium-mesh/src/ffz-clock.ts"
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
@@ -49,7 +49,7 @@ it up).
 **FfzClock measures tempo — a decay/freshness GRAIN — never causal order as a CRDT
 verdict.** The boundary follows the actor-boundary; it splits clean in two:
 
-<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: **Automerge logical time** owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, [[causal-islands]]) -> everywhere-else ~ all non-Automerge domains where its pono manaoio applies: the **agent-worldline cadence** (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see [[agent-worldline]]#time; FfzClock paces the worldline's grain only) · **external streams** pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · **capability-leases** (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
+<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: **Automerge logical time** owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its pono manaoio applies: the **agent-worldline cadence** (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/@lararium/v0.1/api/agent-worldline#time; FfzClock paces the worldline's grain only) · **external streams** pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · **capability-leases** (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
 
 **The retired over-claim stays retired.** Earlier chronometer research read FfzClock's
 epoch-dominance as *"universal causal ordering across all instances."* That reading
@@ -77,7 +77,7 @@ unbounded outer counter**; **hierarchical phase nesting** (2–4 levels, never m
 below the epoch); **continuous-to-discrete duality** (a 120 Hz engine ticks L0 only
 when a step produces an operator-meaningful event, not 120×/s).
 
-<<~ranks profile operator-agent ~ default Lares · L0/L1/L2/L3 = 64/256/4096/65536; the exchange turn = Beat, ticking on the operator grounding act -> ttrpg ~ 128/512/2048/32768; scene-beat = Beat -> strategy ~ 256/1024/8192/131072; turn-resolution = Beat -> action-rpg ~ 512/2048/16384/262144; encounter-beat = Beat -> physics-sandbox ~ Katamari-style 1024/256/4096/65536; rolling-decision-burst = Beat -> rhythm-daw ~ 191/5/31/1024 (coprime-prime near 192/4/32 — shared factors collide in hash-merge paths); measure/bar = Beat -> ci-cd ~ 64/128/1024/16384; pipeline-stage = Beat -> market-iot ~ 1024/512/4096/65536; candle-close / sensor-threshold = Beat -> async-social ~ PR/Slack 32/64/512/8192; review-round = Beat >>
+<<~ranks profile operator-agent ~ default Lares (the Claude-agent profile) · L0/L1/L2/L3 = 64/512/64/128 (Loom-grounded @ 100+-turn scale; SHAPE grounded, constants SEEDED — calibrate against real transcript histograms): L0 Pulse = one generation SEGMENT (`stop_reason`/tool_use round) ≤64/Beat, with a block sub-offset ≤16 (index, not a tick); L1 Beat = one grounded exchange turn ≤512/Measure; L2 Measure = session ≤64/Arc; L3 Arc = day ≤128/Theme. Ticks on the operator grounding act, read from the HARNESS transcript (#rhythmic-address) -> ttrpg ~ 128/512/2048/32768; scene-beat = Beat -> strategy ~ 256/1024/8192/131072; turn-resolution = Beat -> action-rpg ~ 512/2048/16384/262144; encounter-beat = Beat -> physics-sandbox ~ Katamari-style 1024/256/4096/65536; rolling-decision-burst = Beat -> rhythm-daw ~ 191/5/31/1024 (coprime-prime near 192/4/32 — shared factors collide in hash-merge paths); measure/bar = Beat -> ci-cd ~ 64/128/1024/16384; pipeline-stage = Beat -> market-iot ~ 1024/512/4096/65536; candle-close / sensor-threshold = Beat -> async-social ~ PR/Slack 32/64/512/8192; review-round = Beat >>
 
 All profiles leave L4 = ∞ (operator-declared epoch). The register names
 (Pulse/Beat/Measure/Arc/Theme) apply uniformly; only the bounds differ.
@@ -90,7 +90,66 @@ clock's Theme (L4) advances:
 <<~ranks world week@W0 ~ ticks when exploration Theme ticks -> month@W1 ~ 4 World Pulses -> season@W2 ~ ~3 World Beats -> year@W3 ~ 4 Measures -> era@W4 ~ unbounded, operator-declared >>
 
 Applies in campaign worlds, persistent simulations, any domain needing a calendar
-above the session clock. Canonical grain reference: [[attention-scale]].
+above the session clock. Canonical grain reference:
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale >>
+
+<<~/ahu >>
+
+<<~ ahu #rhythmic-address >>
+
+## The rhythmic address ~ `lar_ffz`, a stamp that names where-in-the-cadence (2026-06-25)
+
+**A drawer's `lar_ffz` is the worldline clock's PHASE, frozen at that turn's grounding
+boundary** — the agent-work analogue of somitogenesis (the wavefront freezes a free-running
+oscillator's phase into a permanent ordered address; the clock runs on and stores nothing,
+the boundary samples it). It stamps onto LOCAL work-memory drawers (never the mesh —
+lar:///ha.ka.ba/@lararium/v0.1/api/agent-worldline#time), and answers *"where in the felt cadence did this sit?"* — a query
+`filed_at` (wall-clock) cannot.
+
+### The address ~ a prefix-truncatable mixed-radix path
+
+<<~ranks ffz-address theme ~ epoch -> arc ~ day -> measure ~ session -> beat ~ one grounded exchange turn -> segment ~ one generation step (the tick) -> block ~ a sub-offset, index NOT a tick >>
+
+`lar_ffz = Theme.Arc.Measure.Beat.Segment[.block]` — a positional address, **prefix-valid at
+every cut** (Geohash/Plus-Codes): drop `.block` → the segment; drop `.Segment` → the Beat —
+zoom out by truncation. The same `lar:`-shaped grammar as the URI root (`ha.ka.ba` drifts
+coarse→fine), derived locally, no registry.
+
+### The grain ~ segment ticks, block addresses (Loom-grounded, 7-spirit swarm + observability)
+
+**The tick fires at the SEGMENT, the block is an OFFSET.** <<~ confidence Synthesis-Canon 16/20 >>
+Every dominant agent-observability standard (OTel GenAI, Langfuse, LangSmith, Phoenix) draws
+the same line: the finest *durably-recorded, independently-addressable* unit is the **span =
+one LLM call / one tool call = one generation segment** (`stop_reason` boundary). Content-blocks
+exist durably (`message.content[]`) but model as **intra-span structure addressed by offset**,
+never their own node — "one choice cannot split across messages; parts nest inside." And the
+rhythm clinches it: blocks in one inference **share a single emission instant** — a finer
+*address*, no finer *beat*. So tick L0 on the segment; carry the block as a sub-Pulse offset.
+This delivers "address the specific block" (operator's need, validated — 100+ turn worldlines
+reach thousands of segments) WITHOUT the cardinality of block-grain ticks. Tatum/tactus made
+literal: **store at the block, navigate at the segment.**
+
+### The harness-not-grammar rule (load-bearing)
+
+**The clock ticks on the HARNESS transcript's deterministic events — never on the rendered
+grammar.** L0 reads each generation segment (`stop_reason`); L1 reads the operator's grounding
+turn (the recorded next user-message). The HUD / `lares yield` is a **render** of the clock, a
+*map*, not its *source*; it degrades, partial-renders, drifts — and loses no tick, because the
+*territory* (the transcript) persists. **Lose the HUD, keep the clock.** (L-Prime's map/territory,
+applied to time.)
+
+### Recall by contiguity
+
+Stamped, `lar_ffz` is a *retrieval cue*, not just a label (Temporal Context Model): recall by
+**reinstating the position** — "what else sat near here in the felt cadence" — surfaces neighbors
+(the contiguity effect), a query wall-clock can't answer.
+
+**Grounded** by a 7-spirit swarm (physics·law·biology·linguistics·CS-Web3·music·horology·geo·
+cognition + observability/Loom; the findings live recallable in the `__spirits` wing). Key
+transferable integrities: mixed-radix odometer with **carry-on-lap** (timing wheels ≡ the
+cascade); per-level radix is a **profile**, never uniform; an **unbounded linear epoch beneath**
+the cyclic levels (Julian Day · `LarTickCounter`) for total-order + anti-alias; **coprime/composite
+radix** per the level's job; **local instances, no global clock** (ITC fork = the spawn-baptism).
 
 <<~/ahu >>
 
@@ -128,7 +187,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
   hash-based merge paths; choose primes near natural domain rhythms (191 / 5 / 31).
   Per-profile values need empirical validation against CRDT merge collision rates.
 - **The actorId slip** — `FfzClock.actorId` keys on the Automerge actor (code header +
-  field doc); for a worldline clock it must re-key on the handle ([[agent-worldline]]#open).
+  field doc); for a worldline clock it must re-key on the handle (lar:///ha.ka.ba/@lararium/v0.1/api/agent-worldline#open).
   `ffzCompare` stays a rhythmic total-order — causal never rides it (it rides Automerge
   inside a CRDT, or the edge-DAG on a worldline), so no concurrency verdict is owed here.
 - **`ExchangeState` FSM** — a held exchange (`agent-responded`, awaiting grounding) carries
@@ -136,6 +195,11 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
   the clock. Grounded in Clark-Brennan · Ginzburg DGB · MCP SEP-1686 · A2A `input-required`.
 - **`tool-context` profile-selector placement** — `SessionTiddler` vs a new
   `ToolConnectionTiddler` (depends on whether one session spans multiple tool-connections).
+- **`lar_ffz` capture-path wiring** — the address SERIALIZER + Claude-agent profile stand
+  built/tested (worldline-clock.ts); the live STAMP needs a stateful transcript pass mapping
+  each drawer back to its `(turn, segment)` position (mempalace chunks ≠ transcript segments),
+  threaded to the writeback the way the handle rode the staged filename. The grain is RESOLVED
+  (#rhythmic-address); the mapping is the next slice.
 
 <<~/ahu >>
 

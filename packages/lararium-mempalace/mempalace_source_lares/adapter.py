@@ -76,6 +76,8 @@ LAR_SCHEMA = AdapterSchema(
                                        description="projected attribution edge: the appointed-by parent handle (immediate parent; flat subagents = the run)"),
         "lar_root_handle": FieldSpec(type="string", required=False, indexed=True,
                                      description="projected attribution edge: the root-principal handle (paramount; flat subagents = the run)"),
+        "lar_ffz": FieldSpec(type="string", required=False, indexed=True,
+                             description="rhythmic ADDRESS — the worldline clock's phase frozen at this turn's grounding boundary: Theme.Arc.Measure.Beat.Segment[.block], prefix-truncatable (segment ticks, block offsets; ffz-clock#rhythmic-address)"),
     },
 )
 
