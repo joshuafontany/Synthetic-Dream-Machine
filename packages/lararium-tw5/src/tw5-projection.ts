@@ -36,10 +36,12 @@ export function mountProjection(ctx: IslandContext): () => void {
   const tw = (ctx.tw5 as unknown as { $tw: Record<string, any> }).$tw;
   const fakeDoc = tw.fakeDocument;
 
-  // Brand the wiki — it presents as the Lararium, not the TW5 default site title. Seeded into
-  // the live $tw.wiki before the first render so the projection opens with the hearth's name.
-  tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteTitle",    text: "Lararium" }));
-  tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteSubtitle", text: "Welcome to the DreamNet" }));
+  // Brand the hearth: set $:/SiteTitle/$:/SiteSubtitle as ORDINARY tiddlers (they outrank the
+  // $:/core "My TiddlyWiki" shadow) unless the user already set their own. NOTE: the pono home is
+  // the CID-carried boot-shadows blob — but its agnostic startup does not yet execute in the wiki
+  // worker (a plugin-loading-path gap, the next investigation); seeded here meanwhile.
+  if (!tw.wiki.tiddlerExists("$:/SiteTitle"))    tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteTitle",    text: "Lararium" }));
+  if (!tw.wiki.tiddlerExists("$:/SiteSubtitle")) tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteSubtitle", text: "Welcome to the DreamNet" }));
 
   // Story camera — the default TW5 view frustum, rendered into the fake DOM. mountCamera owns
   // the live `change → widget.refresh()` loop; we re-snapshot on the same change beat.
