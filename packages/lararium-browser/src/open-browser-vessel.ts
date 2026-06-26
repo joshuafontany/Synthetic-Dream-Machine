@@ -33,6 +33,7 @@ import {
   addReadOnlyLayer, seedVesselDefaults,
   openVesselCore,
   makeResidencyStatsReactor,
+  PROJECTION_FRAME,
 }                                            from "@lararium/tw5";
 import type { VesselWikiSlot, VesselCoreResult, AdminVmCore } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
@@ -117,6 +118,9 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   workerScriptUrl?: URL;
   /** Optional verb registry for admin delegation. */
   verbTable?:      VerbTable;
+  /** Projection-nalu sink: a `projection:frame` (rendered HTML+CSS) from the hot wiki island.
+   *  The app applies it to a shadow root — the live wiki made visible. */
+  onProjection?:   (frame: { html: string; css: string; rev: number }) => void;
 }
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
@@ -150,7 +154,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
     genesisBytes, islandDocUrl: admitIslandDocUrl,
-    adminWorkerUrl, workerScriptUrl, verbTable,
+    adminWorkerUrl, workerScriptUrl, verbTable, onProjection,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -367,6 +371,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         mainRepo: repo,
         ...(pluginCids.length ? { pluginCids } : {}),
         onWorkerEvent: (_id, msg) => {
+          // Projection-nalu frames route to the display, not the verb plane.
+          if (msg.listenable === PROJECTION_FRAME) {
+            onProjection?.({
+              html: String(msg.payload["html"] ?? ""),
+              css:  String(msg.payload["css"]  ?? ""),
+              rev:  Number(msg.payload["rev"]  ?? 0),
+            });
+            return;
+          }
           const verb    = typeof msg.payload["verb"]    === "string" ? msg.payload["verb"]    : undefined;
           const fromUri = typeof msg.payload["fromUri"] === "string" ? msg.payload["fromUri"] : undefined;
           if (!verb) return;

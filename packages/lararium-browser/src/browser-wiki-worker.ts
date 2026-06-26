@@ -17,6 +17,8 @@
  */
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";
-import { makeWikiBehavior } from "@lararium/tw5";
+import { makeWikiBehavior, mountProjection } from "@lararium/tw5";
 
-runBrowserSovereignWorker(makeWikiBehavior());
+// onBoot = the projection-nalu, the browser twin of node's disk projector: the island renders
+// its story river into $tw.fakeDocument and emits `projection:frame` events to the main thread.
+runBrowserSovereignWorker(makeWikiBehavior({ onBoot: (ctx) => mountProjection(ctx) }));

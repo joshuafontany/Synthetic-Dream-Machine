@@ -59,6 +59,23 @@ async function readOracle(): Promise<void> {
   }
 }
 
+// The projection-nalu sink — apply a rendered wiki frame into an isolated shadow root (the live
+// wiki made visible). Read-only first beat: TW5 widget handlers stay in the worker on the fake
+// DOM, so the projected HTML is inert; interactivity (the worker-dom event round-trip) is deferred.
+let _projRev = 0;
+function applyProjection(frame: { html: string; css: string; rev: number }): void {
+  if (frame.rev < _projRev) return;            // drop a stale frame (coalesce ordering)
+  _projRev = frame.rev;
+  const host = $("projection");
+  const shadow = host.shadowRoot ?? host.attachShadow({ mode: "open" });
+  let style = shadow.querySelector("style");
+  if (!style) { style = document.createElement("style"); shadow.appendChild(style); }
+  style.textContent = frame.css;
+  let pane = shadow.querySelector(".lar-projection") as HTMLElement | null;
+  if (!pane) { pane = document.createElement("div"); pane.className = "lar-projection"; shadow.appendChild(pane); }
+  pane.innerHTML = frame.html;
+}
+
 async function bootVessel(): Promise<void> {
   const phasesEl = $("phases");
   const paint = (p: string): void => {
@@ -83,6 +100,7 @@ async function bootVessel(): Promise<void> {
       adminWorkerUrl,
       workerScriptUrl,
       onPhase: paint,
+      onProjection: applyProjection,
     });
     const vesselEl = $("vessel"); vesselEl.replaceChildren();
     row(vesselEl, "status", "live — sovereign local island", "ok");
