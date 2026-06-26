@@ -61,3 +61,10 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
 // @lararium/mesh (the isomorphic core); defaultAnnotate stays unexported (the daemon
 // imports it directly) so the package index never pulls the mempalace barrel.
+export { makeNodeCaptureEngine } from "./node-capture-engine.js";
+export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
+// The telemetry-VM worker (separate local non-federated worker_thread). The host is safe to
+// export (references the worker by URL); the worker module itself is NEVER imported here —
+// it has top-level worker side-effects and pulls defaultAnnotate at runtime in its own thread.
+export { spawnTelemetryWorker } from "./telemetry-worker-host.js";
+export type { TelemetryWorkerConfig, TelemetryWorkerHandle } from "./telemetry-worker-host.js";
