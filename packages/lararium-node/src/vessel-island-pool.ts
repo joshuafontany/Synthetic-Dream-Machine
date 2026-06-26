@@ -11,7 +11,6 @@
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
  */
 
-import { Worker, MessageChannel } from "worker_threads";
 import { join } from "path";
 import {
   VesselIslandPoolCore,
@@ -19,7 +18,7 @@ import {
   type IslandMsg_Event,
   type IslandStorageConfig,
 } from "@lararium/mesh";
-import { nodeWorkerHandle } from "./worker-handle.js";
+import { nodeNewSyncChannel, nodeSpawnWorker } from "./worker-handle.js";
 
 const HOT_CAP = 4;
 const DEFAULT_WORKER_URL = new URL("./node-wiki-island.js", import.meta.url);
@@ -54,14 +53,8 @@ export class VesselIslandPool extends VesselIslandPoolCore {
     const storageRoot = options.storageRoot ?? null;
     super({
       host: {
-        spawnWorker: () => nodeWorkerHandle(new Worker(workerUrl)),
-        newSyncChannel: () => {
-          const { port1, port2 } = new MessageChannel();
-          return {
-            mainPort: port1 as unknown as globalThis.MessagePort,
-            syncPort: port2 as unknown as globalThis.MessagePort,
-          };
-        },
+        spawnWorker: () => nodeSpawnWorker(workerUrl),
+        newSyncChannel: nodeNewSyncChannel,
         storage: (wikiId): IslandStorageConfig | undefined =>
           storageRoot ? { type: "nodefs", dir: join(storageRoot, _sanitizeWikiId(wikiId)) } : undefined,
       },

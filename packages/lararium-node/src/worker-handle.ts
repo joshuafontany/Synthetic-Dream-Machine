@@ -3,7 +3,7 @@
  * VesselWorkerHandle (mesh). Shared by the admin VM wrapper and the island pool.
  */
 
-import type { Worker } from "worker_threads";
+import { Worker, MessageChannel } from "worker_threads";
 import type { VesselWorkerHandle } from "@lararium/mesh";
 
 export function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
@@ -14,4 +14,16 @@ export function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
     onError:   (cb) => { w.on("error",   cb); return () => { w.off("error",   cb); }; },
     terminate: () => { void w.terminate(); },
   };
+}
+
+/** The node island-host parts shared by the admin VM and the pool: a worker_threads
+ *  MessageChannel port pair (the host seam types ports as the global MessagePort), and a
+ *  worker_threads Worker spawned + wrapped as a VesselWorkerHandle. */
+export function nodeNewSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort } {
+  const { port1, port2 } = new MessageChannel();
+  return { mainPort: port1 as unknown as MessagePort, syncPort: port2 as unknown as MessagePort };
+}
+
+export function nodeSpawnWorker(url: string | URL): VesselWorkerHandle {
+  return nodeWorkerHandle(new Worker(url));
 }

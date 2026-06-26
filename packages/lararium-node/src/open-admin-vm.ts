@@ -19,7 +19,6 @@
  */
 
 import { join }                                          from "path";
-import { Worker, MessageChannel }                        from "worker_threads";
 import {
   type Repo, type AutomergeUrl, type LarDoc,
   type WikiRecipe,
@@ -32,7 +31,7 @@ import {
   type AdminVmCore,
 } from "@lararium/tw5";
 import { resolveBootDoc } from "./repo-helpers.js";
-import { nodeWorkerHandle } from "./worker-handle.js";
+import { nodeNewSyncChannel, nodeSpawnWorker } from "./worker-handle.js";
 
 const DEFAULT_ADMIN_WORKER_URL = new URL("./node-admin-island.js", import.meta.url);
 
@@ -83,14 +82,8 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmCore> {
     : undefined;
 
   const host: AdminVmHost = {
-    newSyncChannel: () => {
-      const { port1, port2 } = new MessageChannel();
-      return {
-        mainPort: port1 as unknown as IslandMsg_Manifest["syncPort"],
-        syncPort: port2 as unknown as IslandMsg_Manifest["syncPort"],
-      };
-    },
-    spawnWorker: (url) => nodeWorkerHandle(new Worker(url)),
+    newSyncChannel: nodeNewSyncChannel,
+    spawnWorker:    nodeSpawnWorker,
   };
 
   // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival adminHandle;

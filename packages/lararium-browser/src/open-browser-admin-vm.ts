@@ -30,7 +30,7 @@ import {
   type AdminVmHost,
   type AdminVmCore,
 } from "@lararium/tw5";
-import { browserWorkerHandle } from "./worker-handle.js";
+import { browserNewSyncChannel, browserSpawnWorker } from "./worker-handle.js";
 
 export interface BrowserAdminVmOptions {
   repo:             Repo;
@@ -81,11 +81,8 @@ export async function openBrowserAdminVm(
   })();
 
   const host: AdminVmHost = {
-    newSyncChannel: () => {
-      const { port1, port2 } = new MessageChannel();
-      return { mainPort: port1, syncPort: port2 };
-    },
-    spawnWorker: (url) => browserWorkerHandle(new Worker(url, { type: "module" })),
+    newSyncChannel: browserNewSyncChannel,
+    spawnWorker:    browserSpawnWorker,
   };
 
   // The wrapper IS the seam — host pieces + find-or-create adminHandle; the lifecycle and the

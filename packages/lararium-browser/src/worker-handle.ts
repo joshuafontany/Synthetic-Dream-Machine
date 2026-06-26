@@ -27,3 +27,14 @@ export function browserWorkerHandle(w: Worker): VesselWorkerHandle {
     terminate: () => w.terminate(),
   };
 }
+
+/** The browser island-host parts shared by the admin VM and the pool: a global MessageChannel
+ *  port pair, and a module-Worker spawned + wrapped as a VesselWorkerHandle. */
+export function browserNewSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort } {
+  const { port1, port2 } = new MessageChannel();
+  return { mainPort: port1, syncPort: port2 };
+}
+
+export function browserSpawnWorker(url: string | URL): VesselWorkerHandle {
+  return browserWorkerHandle(new Worker(url, { type: "module" }));
+}

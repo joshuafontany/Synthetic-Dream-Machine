@@ -19,7 +19,7 @@ import {
   type Repo,
   type IslandMsg_Event,
 } from "@lararium/mesh";
-import { browserWorkerHandle } from "./worker-handle.js";
+import { browserNewSyncChannel, browserSpawnWorker } from "./worker-handle.js";
 
 export interface BrowserVesselIslandPoolOptions {
   /**
@@ -51,12 +51,9 @@ export class BrowserVesselIslandPool extends VesselIslandPoolCore {
               "Pass workerScriptUrl when constructing the pool (requires genesis island for TW5 core bytes).",
             );
           }
-          return browserWorkerHandle(new Worker(workerUrl, { type: "module" }));
+          return browserSpawnWorker(workerUrl);
         },
-        newSyncChannel: () => {
-          const { port1, port2 } = new MessageChannel();
-          return { mainPort: port1, syncPort: port2 };
-        },
+        newSyncChannel: browserNewSyncChannel,
         storage: () => undefined,
         awaitReady: true,
       },
