@@ -20,17 +20,23 @@ Byte-preserving: we touch only metadata, never drawer content
 """
 from __future__ import annotations
 
+import json
+import logging
 from typing import Iterator, Optional
 
 from mempalace.sources.base import (
     AdapterSchema,
     BaseSourceAdapter,
+    DrawerRecord,
     FieldSpec,
     IngestResult,
+    RouteHint,
     SourceItemMetadata,  # noqa: F401  (part of the contract vocabulary)
     SourceRef,
     SourceSummary,
 )
+
+logger = logging.getLogger(__name__)
 
 ADAPTER_NAME = "lares"
 ADAPTER_VERSION = "0.1.0"
@@ -109,9 +115,50 @@ class LaresAdapter(BaseSourceAdapter):
         return SourceSummary(description=f"Lares session harvest: {source.local_path or source.uri}")
 
     def ingest(self, *, source: SourceRef, palace) -> Iterator[IngestResult]:  # noqa: ARG002
-        raise NotImplementedError(
-            "lares ingest() is not wired: the sovereign runner is the TS gradient "
-            "parser via `lares harvest --writeback --wing <w>` (RFC 002 `--source` "
-            "is not yet connected to `mempalace mine`). This adapter supplies the "
-            "declared schema (describe_schema); flesh ingest() in when `--source` lands."
-        )
+        """Drain an NDJSON nalu-queue file into ``DrawerRecord``s (the forward flush).
+
+        The forward-facing capture writer — a SEPARATE local non-federated worker-VM —
+        processes each turn forward (verbatim + ``lar_*`` gradient + handle/edge/ffz
+        born together) and enqueues ONE JSON object per line::
+
+            {"content": "...", "source_file": "...", "metadata": {...}, "chunk_index": 0}
+
+        The daemon's 20 Hz server-tick flush rotates the queue and runs
+        ``mine --source lares <queue>`` to drain it. This adapter touches ONLY metadata;
+        the drawer content rides verbatim (``declared_transformations`` stays empty —
+        byte-preserving). Routing rides ``adapter_owns_routing``: the ``RouteHint`` comes
+        from the record's ``metadata.wing/room/hall`` or an explicit ``route_hint``.
+        Depth: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#forward-facing-nalu.
+        """
+        queue_path = source.local_path or source.uri
+        if not queue_path:
+            raise FileNotFoundError("lares ingest needs a queue path (SourceRef.local_path)")
+        with open(queue_path, encoding="utf-8", errors="replace") as fh:
+            for lineno, raw in enumerate(fh, 1):
+                line = raw.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    logger.warning("lares ingest: skipping malformed NDJSON at %s:%d", queue_path, lineno)
+                    continue
+                content = rec.get("content")
+                source_file = rec.get("source_file")
+                if not isinstance(content, str) or not isinstance(source_file, str):
+                    logger.warning("lares ingest: record missing content/source_file at %s:%d", queue_path, lineno)
+                    continue
+                meta = dict(rec.get("metadata") or {})
+                hint = rec.get("route_hint") or {}
+                route = RouteHint(
+                    wing=meta.get("wing") or hint.get("wing"),
+                    room=meta.get("room") or hint.get("room"),
+                    hall=meta.get("hall") or hint.get("hall"),
+                )
+                yield DrawerRecord(
+                    content=content,
+                    source_file=source_file,
+                    chunk_index=int(rec.get("chunk_index", 0) or 0),
+                    metadata=meta,
+                    route_hint=route,
+                )
