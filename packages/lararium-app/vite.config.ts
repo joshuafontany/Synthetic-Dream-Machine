@@ -29,7 +29,11 @@ export default defineConfig({
     esbuildOptions: { target: "esnext" },
   },
 
-  build: { target: "esnext" },
+  // assetsInlineLimit:0 — the admin/wiki worker shims are referenced by `new URL(...,
+  // import.meta.url)` passed indirectly to openBrowserVessel; small, Vite would INLINE them
+  // as `data:` URIs, where dynamic `import()` (keyhive-WASM-first, the chain) cannot resolve
+  // (no base URL). Forcing a file asset keeps the worker's dynamic imports resolvable.
+  build: { target: "esnext", assetsInlineLimit: 0 },
 
   server: {
     host: true,        // also bind LAN — the home / intranet serving topology

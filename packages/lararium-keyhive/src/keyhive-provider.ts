@@ -18,7 +18,14 @@
  *   - PREKEY_ROTATED fires often; production EventStore should batch
  */
 
-import * as KH from "@keyhive/keyhive";
+// SLIM build (manual init) — NOT the default "." export, whose wasm-bindgen auto-init
+// (`new URL(keyhive_wasm_bg.wasm, import.meta.url)`) mis-resolves in a Web Worker bundle
+// and kills the module at evaluation. The slim build does NOT auto-init on import; we feed
+// its wasm as CONTENT (off the module graph), the same law the engine bytes obey.
+import * as KH from "@keyhive/keyhive/slim";
+// @ts-expect-error — keyhive's base64 .d.ts is a `declare module` augmentation, not a module
+// (TS2306); the runtime export `wasmBase64` (a base64 string) resolves fine in node + vite.
+import { wasmBase64 } from "@keyhive/keyhive/keyhive_wasm.base64.js";
 import type {
   CapabilityProvider, CapabilityProviderInitOpts,
   DelegateArgs, DelegateResult, VerifyArgs, VerifyResult,
@@ -33,6 +40,28 @@ function ensurePanicHook(): void {
   if (panicHookInstalled) return;
   try { (KH as unknown as { setPanicHook?: () => void }).setPanicHook?.(); } catch { /* already installed */ }
   panicHookInstalled = true;
+}
+
+/** The keyhive WASM must instantiate before ANY KH call (including setPanicHook). The slim
+ *  build is fed content, never an asset URL — default the inlined base64; a host MAY feed
+ *  content-addressed bytes (CID/CAS, the engine-bytes law) via setKeyhiveWasmBytes() first. */
+let keyhiveWasmReady = false;
+let keyhiveWasmBytesOverride: Uint8Array | undefined;
+export function setKeyhiveWasmBytes(bytes: Uint8Array): void { keyhiveWasmBytesOverride = bytes; }
+export function ensureKeyhiveWasm(): void {
+  if (keyhiveWasmReady) return;
+  keyhiveWasmReady = true; // set first — re-entry + double-init are both no-ops
+  try {
+    if (keyhiveWasmBytesOverride) {
+      (KH as unknown as { initSync: (o: { module: Uint8Array }) => void }).initSync({ module: keyhiveWasmBytesOverride });
+    } else {
+      KH.initFromBase64Wasm(wasmBase64);
+    }
+  } catch {
+    // The worker entry may have already instantiated this same bundled wasm instance
+    // (init-before-chain-eval). A second init throws ("already initialized") — harmless;
+    // the module's wasm is live either way.
+  }
 }
 
 function bytesToHex(bytes: Uint8Array): string {
@@ -77,6 +106,7 @@ export class KeyhiveProvider implements CapabilityProvider {
   async init(opts: CapabilityProviderInitOpts): Promise<void> {
     if (this.kh) throw new Error("KeyhiveProvider: already initialized");
     if (opts.seed.length !== 32) throw new Error(`seed must be 32 bytes (got ${opts.seed.length})`);
+    ensureKeyhiveWasm();
     ensurePanicHook();
     this.eventStore = opts.eventStore;
 

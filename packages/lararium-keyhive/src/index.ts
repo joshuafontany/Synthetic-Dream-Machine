@@ -8,7 +8,7 @@ export type {
   PeerDID, KeyhiveAccess, EventStoreRef,
 } from "./capability-provider.js";
 
-export { KeyhiveProvider } from "./keyhive-provider.js";
+export { KeyhiveProvider, ensureKeyhiveWasm, setKeyhiveWasmBytes } from "./keyhive-provider.js";
 
 export { InMemoryEventStore } from "./event-store.js";
 export type { EventStore, EventRecord } from "./event-store.js";

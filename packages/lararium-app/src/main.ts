@@ -10,11 +10,15 @@
 import { openBrowserVessel, generateOrLoadBrowserVesselIdentity } from "@lararium/browser";
 import { pullAndVerifyOracle } from "@lararium/mesh";
 import genesisBytes from "../../../genesis/island.bin?uint8array";
+// `?worker&url` — Vite builds each worker shim through its worker pipeline and yields the built
+// bundle's URL (a real /assets file). A standalone `new URL("./x.ts", import.meta.url)` passed
+// INDIRECTLY to the vessel got inlined as a `data:` URI, where the worker's dynamic imports
+// (keyhive-WASM-first, then the chain) cannot resolve — the admin/wiki boot's silent death.
+import adminWorkerUrlStr from "./workers/admin.worker.ts?worker&url";
+import wikiWorkerUrlStr  from "./workers/wiki.worker.ts?worker&url";
 
-// Local worker shims — Vite cannot resolve a worker URL into a dependency package
-// (vitejs/vite#10837); the URL must be a first-party literal the bundler statically sees.
-const workerScriptUrl = new URL("./workers/wiki.worker.ts",  import.meta.url);
-const adminWorkerUrl  = new URL("./workers/admin.worker.ts", import.meta.url);
+const adminWorkerUrl  = new URL(adminWorkerUrlStr, import.meta.url);
+const workerScriptUrl = new URL(wikiWorkerUrlStr,  import.meta.url);
 
 const IDB = "lares:vessel";
 const $ = (id: string): HTMLElement => document.getElementById(id) as HTMLElement;

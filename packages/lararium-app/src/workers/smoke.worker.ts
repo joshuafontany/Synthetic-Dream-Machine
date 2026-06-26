@@ -17,6 +17,22 @@ const run = async (): Promise<void> => {
   const handle = repo.create<{ x: number }>();
   handle.change((d) => { d.x = 42; });
   console.log("[smoke] Repo + doc change OK — automerge WASM instantiated, x=", handle.doc()?.x);
-  self.postMessage({ type: "smoke-ready", x: handle.doc()?.x });
+
+  // PROOF: keyhive via SLIM + base64 manual init (NO static auto-init, NO asset URL to
+  // mis-resolve) — the off-the-module-graph, content-fed path the operator approved.
+  console.log("[smoke] keyhive SLIM + base64 init…");
+  const KH = await import("@keyhive/keyhive/slim");
+  const { wasmBase64 } = await import("@keyhive/keyhive/keyhive_wasm.base64.js");
+  KH.initFromBase64Wasm(wasmBase64);
+  const KeyhiveType = typeof (KH as unknown as { Keyhive?: unknown }).Keyhive;
+  console.log("[smoke] keyhive SLIM init OK — Keyhive:", KeyhiveType);
+
+  // BISECT 3: import the FULL admin chain — catches whatever in browser-admin-island throws
+  // at module-eval (the run().catch below logs the stack — the real admin-worker error).
+  console.log("[smoke] importing @lararium/browser/browser-admin-island (admin chain)…");
+  await import("@lararium/browser/browser-admin-island");
+  console.log("[smoke] admin chain imported OK — instantiates");
+
+  self.postMessage({ type: "smoke-ready", x: handle.doc()?.x, keyhive: KeyhiveType });
 };
 void run().catch((e) => { console.error("[smoke] run threw", e instanceof Error ? e.stack : String(e)); });
