@@ -54,9 +54,10 @@ export type {
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
 export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";
-export { makeCaptureFlushRunner } from "./capture-flush-runner.js";
-export type { CaptureFlushOptions } from "./capture-flush-runner.js";
+export { makeSubprocessFlush } from "./capture-flush.js";
+export type { SubprocessFlushOptions } from "./capture-flush.js";
 export { makeCaptureReserve } from "./capture-reserve.js";
-export type { CaptureReserve, CaptureReserveOptions } from "./capture-reserve.js";
-export { makeCaptureEngine } from "./capture-engine.js";
-export type { CaptureEngine, CaptureEngineOptions } from "./capture-engine.js";
+export type { CaptureReserveOptions } from "./capture-reserve.js";
+// makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
+// @lararium/mesh (the isomorphic core); defaultAnnotate stays unexported (the daemon
+// imports it directly) so the package index never pulls the mempalace barrel.

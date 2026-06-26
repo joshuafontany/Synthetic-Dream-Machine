@@ -71,19 +71,17 @@ export const PONO_FLUSH_GATE: FlushGate = {
 };
 
 /**
- * Drains a batch to the palace. Injected so the daemon supplies the real
- * `mine --source lares <ndjson>` runner and tests supply a stub. Returns the count
- * filed; THROWS to signal the batch failed (CaptureNalu re-queues with backoff).
+ * Drains a batch to its memory-home and returns the count filed; THROWS to signal the
+ * batch failed (CaptureNalu re-queues with backoff). ONE verb — the isomorphic seam: a
+ * node vessel composes it from an NDJSON spool + `mine --source lares`, a browser vessel
+ * from an IndexedDB write or a relay-send. CaptureNalu never knows which substrate filed
+ * the batch (role = capability ≠ platform).
  */
-export type CaptureFlushRunner = (ndjsonPath: string) => Promise<number>;
+export type CaptureFlush = (batch: readonly CaptureRecord[]) => Promise<number>;
 
-/** Serializes a batch to an NDJSON file (the daemon writes fs; tests stub it). */
-export type CaptureNdjsonWriter = (records: readonly CaptureRecord[]) => Promise<string>;
-
-/** The substrate edges CaptureNalu injects — fs flush + the durable reserve/quarantine. */
+/** The substrate edges CaptureNalu injects — the flush verb + the durable reserve/quarantine. */
 export interface CaptureSinks {
-  readonly writeNdjson: CaptureNdjsonWriter;
-  readonly run: CaptureFlushRunner;
+  readonly flush: CaptureFlush;
   /** spill overflow past maxDepth to the durable reserve (WAL). Default: surfaced drop. */
   readonly onOverflow?: (records: readonly CaptureRecord[]) => void;
   /** quarantine a batch that exceeded maxRetries (durable, never lost). Default: surfaced count. */
@@ -167,8 +165,7 @@ export class CaptureNalu {
     this.queue = [];
     this.flushing = true;
     try {
-      const path = await this.sinks.writeNdjson(batch);
-      const filed = await this.sinks.run(path);
+      const filed = await this.sinks.flush(batch);
       this.failures = 0;
       this.lastFlushMs = nowMs;
       this.refillFromReserve();

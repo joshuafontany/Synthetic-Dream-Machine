@@ -30,6 +30,7 @@ export * from "./composite-store.js";
 export * from "./ffz-clock.js";
 export * from "./worldline-clock.js";
 export * from "./capture-nalu.js";
+export * from "./capture-engine.js";
 export * from "./pono-level.js";
 export * from "./lar-event-bus.js";
 export { LarEventBusImpl, DEFAULT_RINGS } from "./lar-event-bus-impl.js";

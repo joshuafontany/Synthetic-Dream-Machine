@@ -8,9 +8,8 @@
  */
 
 import { harvestTurnGradient } from "@lararium/mesh";
+import type { CaptureAnnotate } from "@lararium/mesh";
 import { buildPatch } from "@lararium/mempalace";
-
-import type { CaptureAnnotate } from "./capture-engine.js";
 
 /** harvestTurnGradient (the gradient parse) → buildPatch (the lar_* projection). */
 export const defaultAnnotate: CaptureAnnotate = (turnText, sourceFile) =>

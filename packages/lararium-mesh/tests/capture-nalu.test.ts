@@ -26,17 +26,12 @@ function harness(opts: { failTimes?: number; gate?: FlushGate; now?: number } = 
   const overflow: CaptureRecord[] = [];
   const deadLettered: CaptureRecord[] = [];
   const reserve: CaptureRecord[] = [];
-  let lastBatch: readonly CaptureRecord[] = [];
   const sinks: CaptureSinks = {
-    writeNdjson: async (records) => {
-      lastBatch = records;
-      return "/tmp/fake.ndjson";
-    },
-    run: async () => {
+    flush: async (batch) => {
       runCalls++;
       if (opts.failTimes && runCalls <= opts.failTimes) throw new Error("flush failed");
-      drained.push([...lastBatch]);
-      return lastBatch.length;
+      drained.push([...batch]);
+      return batch.length;
     },
     onOverflow: (recs) => {
       overflow.push(...recs);

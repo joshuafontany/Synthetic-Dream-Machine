@@ -18,7 +18,7 @@ import { appendFile, appendFileSync, mkdir, mkdirSync, readFile, writeFile } fro
 import { dirname } from "node:path";
 import { promisify } from "node:util";
 
-import type { CaptureRecord } from "@lararium/mesh";
+import type { CaptureRecord, CaptureReserve } from "@lararium/mesh";
 
 const appendFileAsync = promisify(appendFile);
 const readFileAsync = promisify(readFile);
@@ -32,26 +32,8 @@ export interface CaptureReserveOptions {
   readonly quarantinePath: string;
 }
 
-export interface CaptureReserve {
-  /** Write-ahead: durably log a record BEFORE it enters the hot pool. The daemon awaits
-   *  this in the capture-enqueue verb, so the producer's ack means "durable". */
-  append(record: CaptureRecord): Promise<void>;
-  /** CaptureNalu's overflow sink — the hot pool was full; the record already rode `append`
-   *  to the WAL, so this only tracks the working reserve tail (sync, no disk). */
-  onOverflow(records: readonly CaptureRecord[]): void;
-  /** CaptureNalu's refill — pull up to `room` records from the reserve tail into the hot pool. */
-  refill(room: number): readonly CaptureRecord[];
-  /** CaptureNalu's dead-letter — quarantine a poison batch durably (it stays in the WAL too,
-   *  but quarantine marks it as "do not auto-retry"). */
-  onDeadLetter(records: readonly CaptureRecord[]): void;
-  /** Replay the WAL on boot → the records to re-enqueue (idempotent re-file makes this safe). */
-  replay(): Promise<readonly CaptureRecord[]>;
-  /** Truncate the WAL once everything's filed — call when the nalu is fully drained AND the
-   *  palace is healthy (all records durably filed; idempotency tolerates a stale tail). */
-  compact(): Promise<void>;
-}
-
-/** Build the durable reserve. The in-memory tail is rebuilt from the WAL on `replay`. */
+/** Build the node fs implementation of the mesh `CaptureReserve` contract — an append-only
+ *  WAL + a quarantine file. The in-memory tail is rebuilt from the WAL on `replay`. */
 export function makeCaptureReserve(opts: CaptureReserveOptions): CaptureReserve {
   const reserve: CaptureRecord[] = [];
   let dirReady: Promise<unknown> | null = null;
