@@ -1,0 +1,121 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/v0.1/api/network-edge >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/v0.1/api/network-edge.md"
+hydrate   = true
+mana      = 18
+manao     = 17
+manaoio   = 16
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "THE undefined-network-edge doctrine — how a local-first causal-island mesh connects, crosses, and admits at an edge no census reaches. Grounds the second-spore / federation frontier in a 4-spirit convergence (Erdős/random-graph · network-edge SOTA · biology · physics/social): the edge connects as a PHASE TRANSITION reasoned PROBABILISTICALLY; the crossing is the weak-tie/anastomosis carried cheap+optimistic; membership is admit-then-test-then-SEVER at the seam via distributed challenge + per-edge anergy; dependence is a buildable resource; the lease is a pheromone. Adopt Beelay/Iroh/Keyhive; invent the admission semantics."
+tags      = ["api/pono/meme", "api/lararium"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/v0.1/api/network-edge"
+written   = "2026-06-26"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #entry >>
+
+# The Undefined Network Edge ~ how a mesh of sovereign islands connects, crosses, and admits
+
+A lararium sits at the edge of an **unbounded, only-partially-known** peer set — no registry, no global census, only "as of my last sync." Four research spirits (Erdős/random-graph · local-first SOTA · biology · physics/social, 2026-06-26) swept this edge and **converged on one shape**:
+
+<<~ranks edge-law connects-as-a-PHASE-TRANSITION -> reasoned-PROBABILISTICALLY -> carried-by-the-WEAK-CROSSING -> admitted-by-admit-then-SEVER >>
+
+The federated core is **not built** — past a threshold of local crossings it **cannot help but exist**, the way a giant component crystallizes in a random graph. Design *for the threshold*, never for the census.
+
+<<~/ahu >>
+
+<<~ ahu #phase-transition >>
+
+## The edge connects as a phase transition
+
+The same law wears four masks across the domains, all naming a **sharp threshold** where local crossings suddenly yield a spanning whole:
+
+- **Erdős–Rényi random graph** — a **giant component** crystallizes at average-degree 1 (`p=1/n`); **full connectivity** at `p=ln(n)/n` when the last isolated node is absorbed. The gap between them = a giant core + a **ragged rim** of stragglers.
+- **Percolation** (physics) — below `p_c` only small clusters; cross `p_c` and a spanning cluster appears *abruptly*; the correlation length diverges (no characteristic scale); **universality** (the law transcends the exact topology).
+- **SIR epidemic** (biology) — maps EXACTLY onto bond percolation; an **epidemic threshold** (critical `R₀`) decides percolate-to-all vs die-local.
+- **Kuramoto** (physics) — global coherence emerges past a **critical coupling `K_c`**; the same transition on the *time* axis.
+
+**The design number:** keep each island's **live crossing-degree ~ `ln(n)`** (leases above the connectivity line) and the mesh connects w.h.p. — the gossip result `reach = e^(−e^(−c))` for view-size `c`. Three phase transitions on three axes — **space (percolation) · time (Kuramoto) · information (markets)**. And the edge may **self-organize to criticality** (SOC, the sandpile): the cost of living at the critical edge is that *a local crossing cannot know its own global consequence* — "no global now" made physical.
+
+<<~/ahu >>
+
+<<~ ahu #no-global-now-is-probabilistic >>
+
+## "No global now" IS the probabilistic method
+
+The house's own doctrine and Paul Erdős's 1947 method are **one renunciation wearing two masks**. Erdős proves a structure *exists* by reasoning about the whole unenumerable space through a single **expectation** — never building it, never enumerating the `2^(n choose 2)` colorings. A causal island can take no global census of the mesh, so it proves what it needs — *a crossing forms · a path to the core exists · an update reaches all* — **with high probability**, from local/distributional facts, never by enumeration.
+
+<<~moves global-census -> w.h.p.-claim on/no-global-now do/hold-as-Maybe-Logic >>
+
+The rhyme runs wide: **Hayek's knowledge problem** (a global price emerges from local-only trades, no central auctioneer — "as of my last sync" is the price-signal made causal) and **bacterial quorum sensing** (an autoinducer threshold stands in for a global count) are the same move. Connectivity claims become **Maybe Logic** — a confidence band, the Law of 5s applied to topology — never a global certainty stamped after.
+
+<<~/ahu >>
+
+<<~ ahu #the-crossing >>
+
+## The crossing ~ the weak tie, carried cheap and optimistic
+
+The second spore — two sovereign islands meeting and syncing for the first time — is named exactly twice:
+
+- **Granovetter's strength of weak ties** — *all bridges are weak ties.* A **strong** tie cannot bridge (triadic closure would merge the clusters it spans). The first-meeting crossing is the low-weight, high-structural-value conduit of **non-redundant** state. **Protect and proliferate the weak crossings** — they, not the dense intra-island mesh, decide whether the whole connects.
+- **Hyphal anastomosis** (fungal) — two hyphae meet tip-to-tip and **fuse** into one continuous network, exploring first through thin **conidial anastomosis tubes (CATs)** before commitment. The crossing exists *for* the merge; many local fusions become one shared interior with no center.
+
+**Transferable:** make the first crossing **cheap and optimistic** — fuse on contact (a thin exploratory feeler first), and place the cost *after* the merge, at the seam.
+
+<<~/ahu >>
+
+<<~ ahu #membership >>
+
+## Membership ~ admit-then-test-then-SEVER at the seam
+
+Biology inverts authenticate-then-admit. **Hyphal anastomosis + vegetative incompatibility** folds crossing AND membership-gate into one mechanism: two mycelia **fuse first**, then **vegetative incompatibility** triggers a *localized programmed cell death* that kills the fusion seam if they mismatch — recognition **distributed across `het` loci** (≈6–11 polymorphic challenge-points, no registry); fuse-and-stay only if matched at every locus (same **vegetative compatibility group**). The gate evolved against **somatic parasitism** (freeloaders draining the network) and **mycovirus** transmission riding the fusion — *precisely the veil/vouch threat model.*
+
+<<~moves crossing -> fuse-on-contact then/challenge-at-the-seam reject/SEVER-the-local-junction never/ban-the-peer >>
+
+**The build pattern (biologically literal, and = BeeKEM "blank the tree path"):**
+1. **Admit optimistically** — fuse on contact (cheap weak-tie crossing).
+2. **Test at the seam** — mutual challenge across **distributed** identity-points (`het` loci ↔ the immune **repertoire**; no central friend-list — "self" is the **negative space** clonal-deletion leaves; cheap **PAMP**-style signature-gates before expensive vouching; **danger-model** context-gating — tolerate the unknown until it co-presents an alarm).
+3. **Reject by SEVERING the junction** — kill the *fused edge*, not the peer (**anergy, not ban** — biologically literal per-edge revocation). A non-match harms neither island; it kills the channel between them.
+4. **Memory** — a vouched/burned crossing leaves a faster, cheaper secondary response (the decaying lease that **re-arms faster** on a known peer).
+
+<<~/ahu >>
+
+<<~ ahu #the-dials >>
+
+## The dials ~ dependence is a resource, the lease is a pheromone
+
+- **Dependence is a buildable resource (the spherical move).** The 2026 Erdős upgrade (Ma–Shen–Xie) beat the 80-year-old bound by replacing independent coin-flips with points on a high-dimensional sphere colored by distance — *structured randomness with engineered dependence* suppresses bad structure better than i.i.d. can. Pure-anon crossings are the i.i.d. coin; **vouching · petname-locality · latency-clustering are correlations to DESIGN**, buying Sybil-resistance the memoryless mesh can't reach.
+- **The lease is a pheromone (stigmergy).** Physarum and ant trails build optimal networks with no architect: **reinforce-by-use, decay-by-disuse**. The decaying lease is not mere expiry — it is the **trail the mesh self-prunes by**; reinforce edges carrying real sync/gossip, let unused crossings evaporate. Topology emerges and self-optimizes from local reinforce/decay alone.
+- **Tune propagation by the contact graph, not a registry.** Push a critical announcement's effective `R₀` **above** threshold (seed via high-degree relays — superspreaders) to guarantee reach; push a compromise/spam signal **below** threshold to contain it. **Herd immunity** = revocation saturation: enough islands hold a revocation that a forged credential can no longer percolate.
+
+<<~/ahu >>
+
+<<~ ahu #the-build >>
+
+## The build ~ adopt the machinery, invent the admission semantics
+
+The local-first field converged hard (2024–2026) and ships the crossing's machinery — **adopt it, don't re-roll:**
+- **Beelay** (next Automerge sync, co-designed with Keyhive) — the literal template for the crossing: **three-phase sync** (reconcile the membership graph → compare the doc-*set* → sync per-doc), each stage rateless/coordination-free (**RIBLT** set-reconciliation + **sedimentree** hash-boundary chunking) so a partial sync still progresses — assumes an untrusted relay. *This is "no global now" codified.*
+- **Iroh** (n0) — **"dial the key, not the IP"** (ed25519), NAT-traversal + **home-relay fallback** — the "browser dials a relay and crosses" pattern, already built.
+- **Keyhive** — **Concap** (convergent capabilities) + **transitive groups** + **BeeKEM** (decentralized CGKA; revocation = blank the tree path) — the veil+lease+vouch+capability model formalized by the lineage we already track. **OCapN / petnames / zcaps** (Spritely) for the authority grammar.
+
+**Avoid (anti-pono):** global DHT as primary discovery (the bootstrap node is an implicit registry); blockchain/staking Sybil-resistance (a global now); SSB full-feed replication (set-reconciliation supersedes it); pure web-of-trust as the only gate (hub-centralization — pair it with the siege-gate cost).
+
+**The frontier is genuinely ours to invent** — the field hands no answer: Byzantine eventual consistency (access-control-as-CRDT surviving *malicious* replicas — Kleppmann), concurrent admin revocation, backdating from revoked agents, new-member-past-access, the **bootstrap/first-contact paradox** (seed without the seed becoming an authority), Sybil-resistance without a global ledger. And the biology above *is the design language* for exactly these: admit-then-test-then-sever, distributed challenge, per-edge anergy, the lease-as-pheromone.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
