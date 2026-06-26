@@ -18,11 +18,9 @@ import { Repo }                              from "@automerge/automerge-repo";
 import { IndexedDBStorageAdapter }           from "@automerge/automerge-repo-storage-indexeddb";
 import type { DocHandle, AutomergeUrl }      from "@automerge/automerge-repo";
 import {
-  emptyLarDoc, mutableLarRecord, tiddlerText,
-  CATALOG_DOC_URI, LARARIUM_DOC_URI, LARES_DOC_URI, ADMIN_BAG_ID,
-  ENGINE_CORE_ID, corpusBagId,
-  corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
-  parseMeshScale, type MeshScale, resolveBootDoc, isStillJoining,
+  emptyLarDoc, mutableLarRecord,
+  CATALOG_DOC_URI, ADMIN_BAG_ID,
+  ENGINE_CORE_ID,
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -30,7 +28,7 @@ import {
 import {
   MemoryTiddlerStore,
   planActiveWikiSlot, selectActiveWikiSlug,
-  addReadOnlyLayer, seedVesselDefaults,
+  loadCatalogCorpora, seedVesselDefaults,
   openVesselCore,
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
@@ -48,7 +46,7 @@ import {
   reconcileGenesisUpdate, writeGenesisBytesToOpfs, writeBlobsToCasOpfs,
 }                                            from "./browser-genesis.js";
 import {
-  openBrowserAdminVm, VerbTable,
+  openBrowserAdminVm,
 }                                            from "./open-browser-admin-vm.js";
 import type { WikiRecipe }                   from "@lararium/mesh";
 
@@ -116,8 +114,6 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   adminWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
   workerScriptUrl?: URL;
-  /** Optional verb registry for admin delegation. */
-  verbTable?:      VerbTable;
   /** Projection-nalu sink: a `projection:frame` (rendered HTML+CSS) from the hot wiki island.
    *  The app applies it to a shadow root — the live wiki made visible. */
   onProjection?:   (frame: { html: string; css: string; rev: number }) => void;
@@ -154,7 +150,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
     genesisBytes, islandDocUrl: admitIslandDocUrl,
-    adminWorkerUrl, workerScriptUrl, verbTable, onProjection,
+    adminWorkerUrl, workerScriptUrl, onProjection,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -257,35 +253,12 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
       tempStore: () => new MemoryTiddlerStore(),
 
-      // Corpus capability (parity — browser syncs corpus bags too).
-      loadCorpora: async (composite) => {
-        const entries = Object.entries(catalogHandle.doc()?.tiddlers ?? {})
-          .filter(([uri]) => uri.startsWith(CATALOG_CORPUS_PREFIX))
-          .map(([uri, t]) => ({
-            id: uri.slice(CATALOG_CORPUS_PREFIX.length),
-            docUrl: tiddlerText(t),
-            scale: parseMeshScale((t.tiddler as Record<string, unknown> | undefined)?.["scale"] as string | undefined),
-          }))
-          .filter((e): e is { id: string; docUrl: string; scale: MeshScale | undefined } => Boolean(e.docUrl));
-        await Promise.all(entries.map(async (entry) => {
-          let h: DocHandle<LarDoc>;
-          if (entry.scale) {
-            // declared mesh scale → tideline resolver; StillJoining skips (no blank), reconciles later.
-            const resolved = await resolveBootDoc<LarDoc>(repo, entry.docUrl as AutomergeUrl, {
-              tideline: "mesh-shared", scale: entry.scale, label: `@${entry.id} (joined corpus)`,
-            });
-            if (isStillJoining(resolved)) return;
-            h = resolved;
-          } else {
-            h = await waitHandleLocal<LarDoc>(repo, entry.docUrl, () => repo.create<LarDoc>(emptyLarDoc()));
-          }
-          addReadOnlyLayer(composite, corpusBagId(entry.id), h);
-          const cu = corpusLarUri(entry.id);
-          if (tiddlerText(h.doc()?.tiddlers?.[cu]) !== h.url) h.change((doc) => { doc.tiddlers[cu] = mutableLarRecord(cu, { text: h.url }, "browser-boot"); });
-          const ru = catalogCorpusEntryUri(entry.id);
-          if (tiddlerText(catalogHandle.doc()?.tiddlers?.[ru]) !== entry.docUrl) catalogHandle.change((doc) => { doc.tiddlers[ru] = mutableLarRecord(ru, { text: entry.docUrl }, "browser-boot"); });
-        }));
-      },
+      // Corpus capability (parity — browser syncs corpus bags too; shared loader).
+      loadCorpora: (composite) => loadCatalogCorpora({
+        repo, catalogHandle,
+        mintLocalHandle: (docUrl) => waitHandleLocal<LarDoc>(repo, docUrl, () => repo.create<LarDoc>(emptyLarDoc())),
+        source: "browser-boot",
+      }, composite),
 
       ...(onPhase ? { onPhase } : {}),
     },
@@ -336,7 +309,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       return { workerEa: admin.workerEa, mountMainVerbs: admin.mountMainVerbs, resolveBinding: admin };
     },
 
-    wireVerbs: (registry, assembly) => {
+    wireVerbs: (registry, _assembly) => {
       seedVesselDefaults(registry);
       // Thin main verb plane (node parity). Every catalog/recipe/residency-mutating
       // admin verb lives in the worker now (wireWorkerVerbs) — access≠load, write-then-sync.

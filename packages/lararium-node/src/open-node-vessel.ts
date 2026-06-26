@@ -14,8 +14,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
-import { join, dirname }                from "path";
-import { fileURLToPath }                from "url";
+import { join }                         from "path";
 import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import { Repo }                         from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter }         from "@automerge/automerge-repo-storage-nodefs";
@@ -29,12 +28,9 @@ import type {
 import {
   makeDurableMailbox,
   OpenIdentitySlot,
-  corpusBagId,
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, WORKING_BAG,
   IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
-  corpusLarUri, catalogCorpusEntryUri, CATALOG_CORPUS_PREFIX,
-  parseMeshScale, type MeshScale,
   BAG_IDS, slugFromUri,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
@@ -46,7 +42,7 @@ import {
   planActiveWikiSlot,
   selectActiveWikiSlug,
   seedVesselDefaults,
-  addReadOnlyLayer,
+  loadCatalogCorpora,
   openVesselCore,
 } from "@lararium/tw5";
 import type { VesselWikiSlot, AdminVmCore } from "@lararium/tw5";
@@ -58,7 +54,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { waitHandleLocal, resolveBootDoc, isStillJoining } from "./repo-helpers.js";
+import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openAdminVm }                    from "./open-admin-vm.js";
 import {
   makeResidencyStatsReactor,
@@ -66,7 +62,6 @@ import {
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
 
-const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
 /**
@@ -260,45 +255,12 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
       tempStore: () => new MemoryTiddlerStore(),
 
-      // Corpus capability piece — one top-level bag per catalog corpus entry.
-      loadCorpora: async (composite) => {
-        const catalog = catalogHandle.doc();
-        const entries = Object.entries(catalog?.tiddlers ?? {})
-          .filter(([uri]) => uri.startsWith(CATALOG_CORPUS_PREFIX))
-          .map(([uri, tiddler]) => ({
-            id: uri.slice(CATALOG_CORPUS_PREFIX.length),
-            docUrl: tiddlerText(tiddler),
-            // a corpus entry MAY declare its federation scale (the residency-bag layer);
-            // absent → a local/genesis-backed corpus on the current path.
-            scale: parseMeshScale((tiddler.tiddler as Record<string, unknown> | undefined)?.["scale"] as string | undefined),
-          }))
-          .filter((e): e is { id: string; docUrl: string; scale: MeshScale | undefined } => Boolean(e.docUrl));
-        await Promise.all(entries.map(async (entry) => {
-          let handle: DocHandle<LarDoc>;
-          if (entry.scale) {
-            // a corpus DECLARING a mesh scale federates — resolve via the tideline resolver,
-            // never the blank-mint fallback. On StillJoining the optional corpus skips its
-            // layer (reconciles in the background once a peer delivers), never mints a ghost.
-            const resolved = await resolveBootDoc<LarDoc>(repo, entry.docUrl as AutomergeUrl, {
-              tideline: "mesh-shared", scale: entry.scale, label: `@${entry.id} (joined corpus)`,
-            });
-            if (isStillJoining(resolved)) return;
-            handle = resolved;
-          } else {
-            // no declared scale → local/genesis-backed corpus, current behavior unchanged.
-            handle = await waitHandleLocal<LarDoc>(repo, entry.docUrl as AutomergeUrl, blankMemeStore(repo));
-          }
-          addReadOnlyLayer(composite, corpusBagId(entry.id), handle);
-          const corpusUri = corpusLarUri(entry.id);
-          if (tiddlerText(handle.doc()?.tiddlers?.[corpusUri]) !== handle.url) {
-            handle.change((doc) => { doc.tiddlers[corpusUri] = mutableLarRecord(corpusUri, { text: handle.url }, "lararium-seed"); });
-          }
-          const registryUri = catalogCorpusEntryUri(entry.id);
-          if (tiddlerText(catalogHandle.doc()?.tiddlers?.[registryUri]) !== entry.docUrl) {
-            catalogHandle.change((doc) => { doc.tiddlers[registryUri] = mutableLarRecord(registryUri, { text: entry.docUrl }, "lararium-seed"); });
-          }
-        }));
-      },
+      // Corpus capability piece — one top-level bag per catalog corpus entry (shared loader).
+      loadCorpora: (composite) => loadCatalogCorpora({
+        repo, catalogHandle,
+        mintLocalHandle: (docUrl) => waitHandleLocal<LarDoc>(repo, docUrl as AutomergeUrl, blankMemeStore(repo)),
+        source: "lararium-seed",
+      }, composite),
 
       ...(onPhase ? { onPhase } : {}),
     },
