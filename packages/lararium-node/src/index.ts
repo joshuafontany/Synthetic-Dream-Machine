@@ -54,3 +54,5 @@ export type {
 
 export { VesselIslandPool } from "./vessel-island-pool.js";
 export type { VesselIslandPoolOptions } from "./vessel-island-pool.js";
+export { makeCaptureFlushRunner } from "./capture-flush-runner.js";
+export type { CaptureFlushOptions } from "./capture-flush-runner.js";
