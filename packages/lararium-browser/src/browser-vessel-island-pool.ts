@@ -32,6 +32,9 @@ export interface BrowserVesselIslandPoolOptions {
   mainRepo?: Repo;
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (id: string, msg: IslandMsg_Event) => void;
+  /** The engine's plugin-tiddler CIDs — every wiki island pulls them by CID from the local
+   *  CAS (the breath path), the same set the admin island gets. Constant per genesis. */
+  pluginCids?: readonly string[];
 }
 
 /** Browser island pool: VesselIslandPoolCore configured with a Web Worker host. */
@@ -39,6 +42,7 @@ export class BrowserVesselIslandPool extends VesselIslandPoolCore {
   constructor(opts: BrowserVesselIslandPoolOptions) {
     const workerUrl = opts.workerScriptUrl ?? null;
     super({
+      ...(opts.pluginCids?.length ? { pluginCids: opts.pluginCids } : {}),
       host: {
         spawnWorker: () => {
           if (!workerUrl) {

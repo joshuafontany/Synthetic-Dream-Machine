@@ -135,6 +135,17 @@ async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHa
   }
 }
 
+/** The engine's plugin-tiddler CIDs from an island doc's blobs (non-engine JSON blobs, by
+ *  sha256). The admin AND every wiki island resolve these by CID from the local CAS (the breath
+ *  path), never CRDT-syncing the bytes. One derivation, fed to every island of the runtime. */
+function pluginCidsFromIslandBlobs(
+  blobs: Record<string, { id?: string; sha256?: string; mimeType?: string }> | undefined,
+): readonly string[] {
+  return Object.values(blobs ?? {})
+    .filter((b) => b.id !== ENGINE_CORE_ID && b.mimeType === "application/json" && typeof b.sha256 === "string")
+    .map((b) => b.sha256 as string);
+}
+
 export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<BrowserVesselResult> {
   const {
     hostId, wikiId,
@@ -302,12 +313,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         signerDid: social.signerDid,
         deviceEdge: social.deviceEdge,
       };
-      // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the
-      // breath path), never CRDT-syncing the @oracle blob doc over the port.
-      const islandBlobs = (assembly.islandHandle.doc()?.blobs ?? {}) as Record<string, { id?: string; sha256?: string; mimeType?: string }>;
-      const pluginCids = Object.values(islandBlobs)
-        .filter((b) => b.id !== ENGINE_CORE_ID && b.mimeType === "application/json" && typeof b.sha256 === "string")
-        .map((b) => b.sha256 as string);
+      // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the breath
+      // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
+      const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       admin = await openBrowserAdminVm({
         repo, adminUrl: social.adminUrl, coreHash: assembly.coreHash,
         ...(pluginCids.length ? { pluginCids } : {}),
@@ -351,9 +359,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // NB: no inbound WS gate — a browser cannot listen on a socket (substrate floor).
     },
 
-    makePool: (_a, _assembly) => {
+    makePool: (_a, assembly) => {
+      // Every wiki island resolves the SAME engine plugin-CIDs from the local CAS as the admin
+      // island does — one derivation, fed to both (role = capability ≠ platform; the wiki and
+      // admin are the one island runtime, differing only by their capability stack).
+      const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       vmManager = new BrowserVesselIslandPool({
         mainRepo: repo,
+        ...(pluginCids.length ? { pluginCids } : {}),
         onWorkerEvent: (_id, msg) => {
           const verb    = typeof msg.payload["verb"]    === "string" ? msg.payload["verb"]    : undefined;
           const fromUri = typeof msg.payload["fromUri"] === "string" ? msg.payload["fromUri"] : undefined;

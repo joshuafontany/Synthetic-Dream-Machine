@@ -287,7 +287,7 @@ function neutralizeNodeBootAuthority(instance: TW5Instance): void {
  * seam — the rest of the surface belongs to injected/shadowing tiddlers. (`avaktavya`: the
  * third predication, neither-A-nor-B held as a first-class standpoint.)
  */
-function configureIslandRuntime(instance: TW5Instance): void {
+function configureIslandRuntime(instance: TW5Instance, engineCid?: string): void {
   const tw = instance as unknown as Record<string, any>;
   tw.boot.argv = [];
   // Both platform flags null → the platform filter hands the post-kernel surface to our tiddlers.
@@ -303,6 +303,13 @@ function configureIslandRuntime(instance: TW5Instance): void {
   // readBrowserTiddlers:true steers initStartup AWAY from the node block (process/path/module);
   // paired with the no-op loadTiddlersBrowser above, it reads nothing from a (absent) DOM.
   tw.boot.tasks = { trapErrors: false, readBrowserTiddlers: true };
+  // The ONE agnostic global-`document` leak: utils.extractVersionInfo() (startup.js) reads
+  // `$tw.packageInfo.version` when set, else falls to `document.getElementsByTagName("meta")`.
+  // Node sets packageInfo before startup; the island does the same — the version guard, not a
+  // queryable fake DOM, is the root cure (every other `document.*` sits behind `if($tw.browser)`).
+  // The version IS the engine's content-address (its CID = hearthTrueName) — source-ridden-along,
+  // not a magic semver. A content-addressed engine has no version but the hash of its own bytes.
+  tw.packageInfo ??= { name: "tiddlywiki", version: engineCid ?? "island-engine" };
   // The error reporter is the browser-XOR-node crash: `else if(!$tw.browser){ process.exit(1) }`.
   // Headless surfaces and continues — the island never aborts the worker on a boot warning.
   if (tw.utils) tw.utils.error = (err: unknown): void => {
@@ -345,37 +352,11 @@ export async function prepareHostBootInstance(
     // and `??=` respects any the bundler already provides.
     (globalThis as Record<string, unknown>)["Buffer"]  ??= {};
     (globalThis as Record<string, unknown>)["process"] ??= makeBrowserProcessShim();
-    // The island renders into TW5's own `$tw.fakeDocument` — the projection-sync surface (the
-    // node-instance capability, the operator's reframe). Expose it AS the global `document` so
-    // agnostic startups (info.js/extractVersionInfo) read the fake, not an absent real DOM.
-    // Lazy getter: fakeDocument wires during load-modules, before the startup tasks resolve it.
-    if (!("document" in globalThis)) {
-      let docProxy: unknown;
-      Object.defineProperty(globalThis, "document", {
-        configurable: true,
-        get(): unknown {
-          if (docProxy) return docProxy;
-          const t = (globalThis as Record<string, any>)["$tw"];
-          const fake = t?.fakeDocument ?? t?.utils?.fakeDocument;
-          if (!fake) return undefined; // not yet wired (pre-load-modules)
-          // The fakeDocument is a render-OUT target; agnostic startups also QUERY it
-          // (extractVersionInfo → getElementsByTagName("meta")). Headless has no real DOM to
-          // read, so missing methods no-op to an empty NodeList. The island writes the
-          // projection; it never reads a live page.
-          docProxy = new Proxy(fake as object, {
-            get(target, prop, receiver): unknown {
-              if (prop in target) return Reflect.get(target, prop, receiver);
-              return () => [];
-            },
-          });
-          return docProxy;
-        },
-      });
-    }
 
     const instance = loadTiddlyWikiFromBlob(coreBlob, makeBrowserWorkerBootEnv()).TiddlyWiki() as unknown as TW5Instance;
-    // Forge the THIRD runtime AFTER blob eval, BEFORE boot.boot().
-    configureIslandRuntime(instance);
+    // Forge the THIRD runtime AFTER blob eval, BEFORE boot.boot(). The engine's own content-
+    // address (= the coreHash the kernel's integrity gate witnesses) rides along as its version.
+    configureIslandRuntime(instance, coreBlob ? sha256HexBytesSync(coreBlob.bytes) : undefined);
 
     return { instance, isBrowser: false };
   }

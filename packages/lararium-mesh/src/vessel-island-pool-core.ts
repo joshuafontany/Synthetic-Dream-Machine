@@ -107,6 +107,9 @@ export interface VesselIslandPoolCoreOptions {
   hotCap?: number;
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
+  /** The engine's plugin-tiddler CIDs — every wiki island resolves them by CID from the local
+   *  CAS (the breath path), the same set the admin island gets. Constant per genesis. */
+  pluginCids?: readonly string[];
   /**
    * Called when the island's `ea` declaration lands — the island speaks
    * "sovereignty, breath, life" and the vessel RESPONDS (never a synthetic
@@ -140,6 +143,7 @@ export class VesselIslandPoolCore {
   private readonly _diskMirrorGrant: DiskMirrorGrant;
   private readonly _hotCap:         number;
   private readonly _onWorkerEvent:  ((wikiId: string, msg: IslandMsg_Event) => void) | null;
+  private readonly _pluginCids:     readonly string[];
   private readonly _onEa:           ((wikiId: string) => void) | null;
   private readonly _pendingWikiVerbs = new Map<string, {
     resolve: (r: Record<string, unknown>) => void;
@@ -158,6 +162,7 @@ export class VesselIslandPoolCore {
     this._diskMirrorGrant = opts.diskMirrorGrant ?? [];
     this._hotCap          = opts.hotCap ?? Infinity;
     this._onWorkerEvent   = opts.onWorkerEvent ?? null;
+    this._pluginCids      = opts.pluginCids ?? [];
     this._onEa            = opts.onEa ?? null;
     this._mountSilenceMs       = opts.mountSilenceMs ?? HANDSHAKE_TIMEOUT_MS;
     this._mountStallMs         = opts.mountStallMs ?? 3 * this._mountSilenceMs;
@@ -211,6 +216,7 @@ export class VesselIslandPoolCore {
       {
         ...(storage            ? { storage }     : {}),
         ...(diskMirrors.length ? { diskMirrors } : {}),
+        ...(this._pluginCids.length ? { pluginCids: this._pluginCids } : {}),
       },
     );
 
