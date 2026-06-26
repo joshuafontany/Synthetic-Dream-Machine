@@ -116,6 +116,29 @@ The local-first field converged hard (2024–2026) and ships the crossing's mach
 
 <<~/ahu >>
 
+<<~ ahu #the-wire >>
+
+## The wire ~ the gate-model IS the transport kernel (a peer moʻolelo, 2026-06-26)
+
+A sibling Lares (tending the intra-island gate-models) handed this ring across the tideline: **the network ring is not a new invention — it is the projection-nalu gate-model with the SINK moved `local → peer → many`.** The mapping (mirror: `projection-nalu#network-ring`, `dreamnet-architecture#transport-kernel`, `federated-causal-islands#task-handoff`):
+
+<<~ranks transport-kernel accumulate=reliable-ordered -> coalesce=gossip-epidemic -> servo=congestion-control >>
+
+- **accumulate → reliable-ordered** (TCP/ARQ; the reserve = the retransmit buffer; CRDT-as-dedup = at-least-once + idempotent; vector clocks order across peers — never a global now).
+- **coalesce → gossip / epidemic** (newest-wins → last-write-wins; one → many; eventual; the lossy drop stays the correct dual at scale).
+- **servo → congestion control** (AIMD · Nagle · Net-DIM — already the idiom).
+- **The one piece the ring adds that the local gates lack: end-to-end backpressure** (the wire-answers below).
+
+**LAW — FLOW ⊥ AUTHORITY.** The gates pace *how-much / how-often*; the Keyhive **concap** (the UCAN-shaped signed invocation — concap per the canon ruling, not raw UCAN) + lease+fence clears *who-may / exactly-once*. **Authority before flow**, the two kept as distinct as the two gate-families — that orthogonality is the whole not-overcollapse.
+
+### The wire-answers ~ the three questions the ring left open
+
+1. **Correlated dissemination splits what the servo measures.** Pure-random gossip gives the AIMD loop a near-uniform load; **geometry-correlated** fanout gives it a *bimodal* one — dense intra-cluster gossip (low-variance, cheap → coalesce hard) + rare cross-cluster **weak-tie bridges** (high-variance, high-value, the bottleneck → *protect, never coalesce away the non-redundant state they carry*). A single servo averaging both mis-tunes; **the coalesce servo measures per-geometry-class**, not globally.
+2. **The correlation geometry is the STIGMERGY trail — NOT the authority rings.** Correlate the fanout to the **lease-as-pheromone** (reinforce-by-use, decay-by-disuse), which self-organizes toward the useful crossings *without reading the keyhive rings*. Usage ≠ permission: flow follows the trail, authority follows the concap; they **correlate in practice** (members gossip more, so trails thicken between them) yet **neither mechanism reads the other** — FLOW ⊥ AUTHORITY held. This is the 2026 Erdős "spherical move" **grown, not imposed**: the geometry is emergent + self-tuned (SOC), never the designed topology and never the authority graph. Correlating fanout to the authority geometry directly **IS** the overcollapse trap — refused.
+3. **Backpressure rides the BREATH (`ea`).** A gossip channel has no single sender to signal, so backpressure is **local + emergent**: each node modulates its own fanout-degree / pull-rate from its *local* congestion (the quorum-sensing autoinducer; SOC self-tuning) and carries its capacity in its **`ea` heartbeat**; a congested node's breath signals reduced capacity → peers reduce fanout to it → its trails decay (Physarum routes around). End-to-end backpressure becomes **emergent regional backpressure with no global signal** — "no global now" flow-control. *The ring's backpressure is a payload of the `ea`/breath cycle — the two rings meet at the breath.*
+
+<<~/ahu >>
+
 <<~ &#x0003; >>
 
 <<~ &#x0004; -> ? >>
