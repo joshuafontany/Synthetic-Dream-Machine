@@ -106,6 +106,9 @@ The three instances map cleanly — **note: a scout corrected the disk's family 
 - **disk** — coalesce · keyed-debounce-per-carrier-root · reconcile-latest · sink → fs
 - **DOM** — coalesce · single-window · supersede-decay · sink → shadow-DOM
 - **mempalace** — accumulate · threshold-or-periodic · reserve:WAL · sink → mempalace
+- **DOM-events (interactivity)** — accumulate · per-event fire-and-forget (postMessage IS the ordered queue, sink synchronous → no reserve built) · main→worker · dispatched by render-id into TW5's NATIVE handler — the IN **axon** to the DOM projection's OUT **dendrite**: both gate-families on one substrate (the worker seam), the canon's neuron rhyme made flesh
+
+The interactivity return leg (`tw5-projection.ts` `dispatchProjectedEvent` + the render-id patch) restores the one binding TW5's fakedom drops (`addEventListener` is a platform no-op); the widget tree never learns it's split. role = capability ≠ platform — inject the listener-storage the platform lacks.
 
 The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-projector.ts`) draws `KeyedCoalesceGate` (its hardened reconcile/flush/ward untouched — only the timer bookkeeping moved); the mempalace nalu (`capture-engine.ts`) keeps its hardened accumulate path. Two of three coalesce instances now share the seam; the accumulate engine stays referenced.
 
