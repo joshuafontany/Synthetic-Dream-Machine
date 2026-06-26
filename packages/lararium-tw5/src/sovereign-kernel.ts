@@ -85,6 +85,13 @@ export interface IslandHostSeam {
   storage(msg: IslandMsg_Manifest): StorageAdapterInterface | undefined;
   /** Optional IoC handshake fired after the listener registers (browser mkReady). */
   ready?(): void;
+  /**
+   * Resolve content-addressed bytes by CID (sha256 hex) from the platform's LOCAL CAS
+   * (browser OPFS · node FS). The breath path: the worker PULLS its TW5 engine + plugin
+   * tiddlers by CID, never CRDT-syncing a 2.3 MB blob doc over the port. Returns null
+   * when the CID is absent. Omitted → the kernel falls back to reading @oracle-doc blobs.
+   */
+  resolveByCid?(cid: string): Promise<Uint8Array | null>;
 }
 
 // ── runSovereignKernel — the OTP gen_island kernel ──────────────────────────
@@ -268,41 +275,66 @@ export function runSovereignKernel(
       tick();                  // one slot resolved — real progress evidence
     }
 
-    const laraiumDoc = laraiumHandle.doc();
-    const blobEntry  = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
-    const coreBytes: Uint8Array | null = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
-    if (!coreBytes) {
-      _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
-      return;
+    // ── Resolve the TW5 engine + plugin tiddlers ──────────────────────────────
+    // PREFERRED (the breath path): content-addressed pull from the platform's LOCAL CAS
+    // (host.resolveByCid) — immutable bytes fetched by CID + verified by rehash, NEVER
+    // CRDT-synced through the port. FALLBACK: read the blobs off the @oracle doc
+    // (node / pre-CAS) when the host supplies no CAS resolver.
+    let coreBytes: Uint8Array | null = null;
+    let coreVersion = "";
+    const pluginTiddlers: Record<string, unknown>[] = [];
+
+    if (host.resolveByCid && msg.coreHash) {
+      coreBytes = await host.resolveByCid(msg.coreHash);
+      if (!coreBytes) {
+        _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core by CID ${msg.coreHash.slice(0, 12)}… from the local CAS`));
+        return;
+      }
+      for (const cid of msg.pluginCids ?? []) {
+        const bytes = await host.resolveByCid(cid);
+        if (!bytes) {
+          _post(mkFault(msg.wikiUri, `island cannot resolve plugin tiddler by CID ${cid.slice(0, 12)}… from the local CAS`));
+          return;
+        }
+        try {
+          pluginTiddlers.push(JSON.parse(new TextDecoder().decode(bytes)) as Record<string, unknown>);
+        } catch { /* malformed — skip */ }
+      }
+    } else {
+      const laraiumDoc = laraiumHandle.doc();
+      const blobEntry  = laraiumDoc?.blobs?.[ENGINE_CORE_ID];
+      coreBytes   = blobEntry?.blob ? new Uint8Array(blobEntry.blob) : null;
+      coreVersion = String(blobEntry?.version ?? "");
+      if (!coreBytes) {
+        _post(mkFault(msg.wikiUri, `island cannot resolve TW5 core bytes — @lararium binding missing or blob absent (ENGINE_CORE_ID=${ENGINE_CORE_ID})`));
+        return;
+      }
+      const blobs = laraiumDoc?.blobs ?? {};
+      for (const [id, entry] of Object.entries(blobs)) {
+        if (id === ENGINE_CORE_ID) continue;
+        const mime = (entry as unknown as Record<string, unknown>)["mimeType"];
+        if (mime !== "application/json") continue;
+        const blobBytes = (entry as unknown as Record<string, unknown>)["blob"];
+        if (!blobBytes) continue;
+        try {
+          pluginTiddlers.push(JSON.parse(new TextDecoder().decode(new Uint8Array(blobBytes as Uint8Array))) as Record<string, unknown>);
+        } catch { /* malformed blob — skip */ }
+      }
     }
 
-    // §6 integrity gate, enforced: the manifest's coreHash names the engine the
-    // vessel intends; the kernel hashes the bytes it actually eval's. A mismatch
-    // faults before boot — the island never runs an engine it cannot witness.
+    // §6 integrity gate, enforced: the manifest's coreHash names the engine the vessel
+    // intends; the kernel hashes the bytes it actually eval's. A mismatch faults before
+    // boot — the island never runs an engine it cannot witness. (Free on the CAS path:
+    // the CID IS the hash.)
     const engineSha = sha256HexBytesSync(coreBytes);
     if (msg.coreHash && msg.coreHash !== engineSha) {
       _post(mkFault(msg.wikiUri, `TW5 core integrity gate failed — manifest coreHash=${msg.coreHash.slice(0, 12)}… vs eval'd bytes sha256=${engineSha.slice(0, 12)}…`));
       return;
     }
-    const engine = { sha256: engineSha, version: String(blobEntry?.version ?? "") };
+    const engine = { sha256: engineSha, version: coreVersion };
 
-    // §6b — plugin tiddlers travel via @lararium CRDT blob store (application/json
-    // blobs). Islands read and apply them here — no manifest field needed.
-    const pluginTiddlers: Record<string, unknown>[] = [];
-    const blobs = laraiumDoc?.blobs ?? {};
-    for (const [id, entry] of Object.entries(blobs)) {
-      if (id === ENGINE_CORE_ID) continue;
-      const mime = (entry as unknown as Record<string, unknown>)["mimeType"];
-      if (mime !== "application/json") continue;
-      const blobBytes = (entry as unknown as Record<string, unknown>)["blob"];
-      if (!blobBytes) continue;
-      try {
-        const json = JSON.parse(new TextDecoder().decode(new Uint8Array(blobBytes as Uint8Array))) as Record<string, unknown>;
-        pluginTiddlers.push(json);
-      } catch { /* malformed blob — skip */ }
-    }
     if (!pluginTiddlers.length) {
-      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — no application/json blobs in @lararium CRDT doc"));
+      _post(mkFault(msg.wikiUri, "island cannot load plugin tiddlers — none resolved (CAS by CID, or @lararium blobs)"));
       return;
     }
 

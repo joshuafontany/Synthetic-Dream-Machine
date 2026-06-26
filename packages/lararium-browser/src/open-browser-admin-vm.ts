@@ -37,6 +37,8 @@ export interface BrowserAdminVmOptions {
   adminUrl:         string;
   /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
   coreHash:         string | null;
+  /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from OPFS. */
+  pluginCids?:      readonly string[];
   /** Canonical one-recipe model for the admin island. */
   recipe:           WikiRecipe;
   /** Typed structural capabilities (engine doc, @admin bag, @lares, @catalog access). */
@@ -110,7 +112,7 @@ export interface BrowserVerbPlacementRequest {
 export async function openBrowserAdminVm(
   opts: BrowserAdminVmOptions,
 ): Promise<BrowserAdminVmResult> {
-  const { repo, adminUrl, coreHash, recipe, grants, adminAuth, workerScriptUrl } = opts;
+  const { repo, adminUrl, coreHash, pluginCids, recipe, grants, adminAuth, workerScriptUrl } = opts;
 
   // ── Admin doc handle (browser strategy: find-or-create) ────────────────────
   const adminHandle = await (async () => {
@@ -132,6 +134,7 @@ export async function openBrowserAdminVm(
 
   const core = openAdminVmCore(host, {
     repo, adminHandle, recipe, grants, coreHash,
+    ...(pluginCids?.length ? { pluginCids } : {}),
     ...(adminAuth ? { adminAuth } : {}),
     workerScriptUrl,
   });

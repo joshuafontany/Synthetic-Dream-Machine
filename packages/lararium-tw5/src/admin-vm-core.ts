@@ -92,6 +92,9 @@ export interface AdminVmCoreOptions {
   grants:          IslandGrants;
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS. */
   coreHash:        string | null;
+  /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from its
+   *  local CAS (the breath path). Absent → the worker reads blobs off the @oracle doc. */
+  pluginCids?:     readonly string[];
   /** Operator authn/z material for in-worker keyhive boot (Stage 1). */
   adminAuth?:      IslandMsg_Manifest["adminAuth"];
   /** Storage config delivered in the manifest (node nodefs; browser omits). */
@@ -161,7 +164,7 @@ export interface AdminVmCore {
 }
 
 export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
-  const { repo, adminHandle, recipe, grants, coreHash, adminAuth, storage, workerScriptUrl } = opts;
+  const { repo, adminHandle, recipe, grants, coreHash, pluginCids, adminAuth, storage, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
   // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
@@ -330,6 +333,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
     ...(adminAuth ? { adminAuth } : {}),
+    ...(pluginCids?.length ? { pluginCids } : {}),
   });
   worker.post(manifestMsg, [syncPort]);
 

@@ -30,6 +30,7 @@ import {
 import { mkReady } from "@lararium/mesh";
 import type { IslandMsg_Manifest, IslandToVesselMsg } from "@lararium/mesh";
 import type { IslandBehavior } from "@lararium/tw5";
+import { readCasBlobFromOpfs } from "./browser-genesis.js";
 
 // ── runBrowserSovereignWorker — browser host seam over the shared kernel ────
 
@@ -41,6 +42,9 @@ export function runBrowserSovereignWorker(
     listen:  (onMessage) => self.addEventListener("message", (e: MessageEvent) => onMessage(e.data)),
     storage: (msg) => new IndexedDBStorageAdapter(msg.wikiUri),
     ready:   () => self.postMessage(mkReady()),
+    // The breath path: pull engine + plugin bytes by CID from the OPFS CAS the vessel
+    // populated on genesis-load — never CRDT-synced over the port.
+    resolveByCid: (cid) => readCasBlobFromOpfs(cid),
   };
 
   runSovereignKernel(host, behaviorOrFactory);

@@ -44,7 +44,7 @@ import {
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
 import {
   loadGenesisIslandFromBytes, findGenesisIsland,
-  reconcileGenesisUpdate, writeGenesisBytesToOpfs,
+  reconcileGenesisUpdate, writeGenesisBytesToOpfs, writeBlobsToCasOpfs,
 }                                            from "./browser-genesis.js";
 import {
   openBrowserAdminVm, VerbTable,
@@ -235,6 +235,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         }
         const coreHash = islandHandle.doc()?.blobs?.[ENGINE_CORE_ID]?.sha256 ?? null;
         if (!coreHash) throw new Error("[openBrowserVessel] genesis island missing ENGINE_CORE_ID blob");
+        // Populate the OPFS CAS — the worker pulls engine + plugin bytes by CID from here
+        // (the breath path), never CRDT-syncing the 2.3 MB @oracle blob doc over the port.
+        await writeBlobsToCasOpfs((islandHandle.doc()?.blobs ?? {}) as Record<string, { sha256?: string; blob?: unknown }>);
         return { islandHandle, coreHash, bootstrap: social };
       },
 
@@ -299,8 +302,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         signerDid: social.signerDid,
         deviceEdge: social.deviceEdge,
       };
+      // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the
+      // breath path), never CRDT-syncing the @oracle blob doc over the port.
+      const islandBlobs = (assembly.islandHandle.doc()?.blobs ?? {}) as Record<string, { id?: string; sha256?: string; mimeType?: string }>;
+      const pluginCids = Object.values(islandBlobs)
+        .filter((b) => b.id !== ENGINE_CORE_ID && b.mimeType === "application/json" && typeof b.sha256 === "string")
+        .map((b) => b.sha256 as string);
       admin = await openBrowserAdminVm({
         repo, adminUrl: social.adminUrl, coreHash: assembly.coreHash,
+        ...(pluginCids.length ? { pluginCids } : {}),
         workerScriptUrl: adminWorkerUrl,
         recipe: { wikiSlug: "admin" } satisfies WikiRecipe,
         grants: {

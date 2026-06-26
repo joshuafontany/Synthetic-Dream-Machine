@@ -90,6 +90,56 @@ export async function readGenesisBytesFromOpfs(): Promise<Uint8Array | null> {
   }
 }
 
+// ── OPFS content-addressed store (CAS) — engine + plugin bytes by CID ──────────
+//
+// The breath path: heavy immutable engine bytes (TW5 core + plugin tiddlers) live here,
+// keyed by sha256 (CID), written once by the vessel on genesis-load and pulled by each
+// worker via resolveByCid — NEVER CRDT-synced over the port. OPFS is origin-shared, so a
+// worker reads what the main thread wrote. Canon: lararium-identity#the-oracle-plane.
+
+const OPFS_CAS_DIR = "cas";
+
+/** Write each blob entry to the OPFS CAS, keyed by its sha256 (CID). No-ops if OPFS is
+ *  unavailable. Returns the count written. */
+export async function writeBlobsToCasOpfs(
+  blobs: Record<string, { sha256?: string; blob?: unknown }>,
+): Promise<number> {
+  let written = 0;
+  try {
+    const root = await navigator.storage.getDirectory();
+    const cas  = await root.getDirectoryHandle(OPFS_CAS_DIR, { create: true });
+    for (const entry of Object.values(blobs)) {
+      if (!entry.sha256 || !entry.blob) continue;
+      const bytes = new Uint8Array(entry.blob as ArrayBufferLike);
+      const fileH = await cas.getFileHandle(entry.sha256, { create: true });
+      const w = await (fileH as FileSystemFileHandle & {
+        createWritable(): Promise<FileSystemWritableFileStream>;
+      }).createWritable();
+      await w.write(bytes.slice());
+      await w.close();
+      written += 1;
+    }
+    console.log(`[browser-genesis] OPFS CAS: wrote ${written} blob(s) by CID`);
+  } catch {
+    // OPFS unavailable — the worker falls back to @oracle-doc blobs.
+  }
+  return written;
+}
+
+/** Read content-addressed bytes by CID from the OPFS CAS. Null if absent/unavailable.
+ *  This IS the worker's resolveByCid seam (OPFS origin-shared, no IPC). */
+export async function readCasBlobFromOpfs(cid: string): Promise<Uint8Array | null> {
+  try {
+    const root  = await navigator.storage.getDirectory();
+    const cas   = await root.getDirectoryHandle(OPFS_CAS_DIR);
+    const fileH = await cas.getFileHandle(cid);
+    const file  = await fileH.getFile();
+    return new Uint8Array(await file.arrayBuffer());
+  } catch {
+    return null;
+  }
+}
+
 // ── Tier 2: findGenesisIsland ─────────────────────────────────────────────────
 
 /**

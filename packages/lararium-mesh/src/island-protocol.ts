@@ -146,6 +146,13 @@ export interface IslandMsg_Manifest {
    * null = pre-CAS trust-on-delivery. Islands verify on read from @lararium CRDT doc.
    */
   coreHash: string | null;
+  /**
+   * CIDs (sha256) of the engine's plugin-tiddler blobs (application/json). The worker
+   * resolves these — and the core (coreHash) — via the host's content-addressed
+   * `resolveByCid` (local CAS), NOT by reading a CRDT-synced blob doc. Absent → the
+   * worker falls back to reading blobs off the @oracle doc (node / pre-CAS path).
+   */
+  pluginCids?: readonly string[];
   /** Slot structure for this wiki — wikiSlug + optional libraryBags. */
   recipe: import("./wiki-recipe.js").WikiRecipe;
   /** Typed structural capabilities (see IslandGrants). Libraries resolve via @catalog. */
@@ -625,6 +632,7 @@ export function mkManifest(
     storage?:        IslandStorageConfig;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
     adminAuth?:      IslandMsg_Manifest["adminAuth"];
+    pluginCids?:     readonly string[];
   },
 ): IslandMsg_Manifest {
   const msg: IslandMsg_Manifest = {
@@ -639,6 +647,7 @@ export function mkManifest(
   if (opts?.storage)             msg.storage     = opts.storage;
   if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
   if (opts?.adminAuth)           msg.adminAuth   = opts.adminAuth;
+  if (opts?.pluginCids?.length)  msg.pluginCids  = opts.pluginCids;
   return msg;
 }
 
