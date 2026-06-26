@@ -11,13 +11,10 @@ self.addEventListener("error", (e) => report("error", (e as ErrorEvent).message 
 self.addEventListener("unhandledrejection", (e) => report("reject", (e as PromiseRejectionEvent).reason?.stack || (e as PromiseRejectionEvent).reason?.message || (e as PromiseRejectionEvent).reason));
 
 const run = async (): Promise<void> => {
-  console.log("[admin-shim] run start");
   const KH = await import("@keyhive/keyhive/slim");
   // @ts-expect-error — keyhive's base64 .d.ts is a `declare module` augmentation, not a module
   const { wasmBase64 } = await import("@keyhive/keyhive/keyhive_wasm.base64.js");
   (KH as unknown as { initFromBase64Wasm: (s: string) => void }).initFromBase64Wasm(wasmBase64);
-  console.log("[admin-shim] keyhive wasm init OK — importing admin-island");
   await import("@lararium/browser/browser-admin-island");
-  console.log("[admin-shim] admin-island imported OK (kernel now running)");
 };
 void run().catch((e) => report("run-threw", e instanceof Error ? e.stack : String(e)));
