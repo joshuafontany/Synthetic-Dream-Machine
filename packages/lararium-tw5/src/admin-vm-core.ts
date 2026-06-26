@@ -236,6 +236,12 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
 
+    // TRIAGE relay — surface the worker's breath/fault/ea on the MAIN console (the worker's
+    // own console doesn't bubble to Playwright). Low-noise; useful telemetry to keep.
+    if (raw.type === "breath" || raw.type === "fault" || raw.type === "ea") {
+      console.log(`[admin-worker:${raw.type}] ${JSON.stringify(raw).slice(0, 240)}`);
+    }
+
     if (raw.type === "admin:verify-result") {
       const msg = raw as AdminMsg_VerifyResult;
       settleAsk(msg.requestId, {

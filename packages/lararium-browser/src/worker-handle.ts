@@ -14,7 +14,13 @@ export function browserWorkerHandle(w: Worker): VesselWorkerHandle {
       return () => w.removeEventListener("message", fn);
     },
     onError: (cb) => {
-      const fn = (e: Event): void => cb(new Error((e as ErrorEvent).message || "[browser-worker] error"));
+      const fn = (e: Event): void => {
+        const ev = e as ErrorEvent;
+        // Surface the real worker throw on the MAIN console (the worker's own console
+        // doesn't bubble reliably; ErrorEvent.message is often empty for module workers).
+        console.error("[worker-handle] worker error:", ev.message, "@", ev.filename, ev.lineno, ev.error);
+        cb(new Error(ev.message || (ev.error instanceof Error ? ev.error.message : "") || "[browser-worker] error"));
+      };
       w.addEventListener("error", fn);
       return () => w.removeEventListener("error", fn);
     },

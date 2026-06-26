@@ -249,11 +249,13 @@ export async function prepareHostBootInstance(
   coreBlob?: TW5CoreBootBlob,
 ): Promise<{ instance: TW5Instance; isBrowser: boolean }> {
   const isBrowserMain = typeof window !== "undefined" && typeof document !== "undefined";
-  // ES module Workers lack `importScripts` (only classic Workers have it) and lack
-  // `process` (Node global). Use absence of `process` to distinguish browser Workers
-  // from Node Worker threads. Vite browser bundles do not inject a process polyfill.
+  // Distinguish a browser Worker from a Node worker_thread by a POSITIVE browser signal:
+  // `WorkerGlobalScope` exists in every browser worker context (dedicated/module/shared)
+  // and is absent in Node + the browser main thread. Process-absence is NOT reliable —
+  // Vite 8 / rolldown injects a `process` shim into the worker bundle, which made this
+  // mis-detect as Node and call `await import("module")` (throws in a browser Worker).
   const isBrowserWorker = !isBrowserMain &&
-    typeof (globalThis as Record<string, unknown>)["process"] === "undefined";
+    typeof (globalThis as Record<string, unknown>)["WorkerGlobalScope"] !== "undefined";
 
   if (isBrowserMain) {
     // §9 sovereignty law: TW5 SHALL NOT instantiate on the main thread.
