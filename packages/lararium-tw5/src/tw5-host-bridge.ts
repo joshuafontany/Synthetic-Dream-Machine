@@ -44,7 +44,10 @@ function makeBrowserVmShim(): Record<string, unknown> {
     const keys = Object.keys(c);
     const vals = keys.map((k) => c[k]);
     try {
-      return (new Function(...keys, code) as (...args: unknown[]) => unknown)(...vals);
+      // RETURN the script's completion value (vm.runInContext semantics). TW5's evalGlobal
+      // passes a `(function(){…})` expression and then `.apply()`s the result — so the value
+      // must come back; `new Function(...keys, code)` (no `return`) would discard it → undefined.
+      return (new Function(...keys, "return " + code) as (...args: unknown[]) => unknown)(...vals);
     } catch { return undefined; }
   }
   class BrowserVmScript {
@@ -52,7 +55,7 @@ function makeBrowserVmShim(): Record<string, unknown> {
     constructor(code: string, _options?: unknown) { this.code = code; }
     runInContext(ctx: Record<string, unknown>): unknown { return runInCtx(this.code, ctx); }
     runInNewContext(ctx?: Record<string, unknown>): unknown { return runInCtx(this.code, ctx); }
-    runInThisContext(): unknown { try { return new Function(this.code)(); } catch { return undefined; } }
+    runInThisContext(): unknown { try { return new Function("return " + this.code)(); } catch { return undefined; } }
   }
   return {
     Script: BrowserVmScript,
@@ -61,7 +64,10 @@ function makeBrowserVmShim(): Record<string, unknown> {
     },
     runInContext(code: string, ctx: Record<string, unknown>): unknown { return runInCtx(code, ctx); },
     runInNewContext(code: string, ctx?: Record<string, unknown>): unknown { return runInCtx(code, ctx); },
-    runInThisContext(code: string): unknown { try { return new Function(code)(); } catch { return undefined; } },
+    // vm.runInThisContext RETURNS the script's completion value — for TW5's evalGlobal the
+    // code is a `(function(){…})` expression it then `.apply()`s. `new Function(code)()` would
+    // discard that value (→ undefined → `undefined.apply` → every module dies); `return ` keeps it.
+    runInThisContext(code: string): unknown { try { return new Function("return " + code)(); } catch { return undefined; } },
   };
 }
 
@@ -299,7 +305,9 @@ function configureIslandRuntime(instance: TW5Instance): void {
   tw.boot.tasks = { trapErrors: false, readBrowserTiddlers: true };
   // The error reporter is the browser-XOR-node crash: `else if(!$tw.browser){ process.exit(1) }`.
   // Headless surfaces and continues — the island never aborts the worker on a boot warning.
-  if (tw.utils) tw.utils.error = (err: unknown): void => { console.error("[island-tw5]", String(err)); };
+  if (tw.utils) tw.utils.error = (err: unknown): void => {
+    console.error("[island-tw5]", err instanceof Error ? (err.stack ?? err.message) : String(err));
+  };
 }
 
 export async function prepareHostBootInstance(
@@ -337,6 +345,33 @@ export async function prepareHostBootInstance(
     // and `??=` respects any the bundler already provides.
     (globalThis as Record<string, unknown>)["Buffer"]  ??= {};
     (globalThis as Record<string, unknown>)["process"] ??= makeBrowserProcessShim();
+    // The island renders into TW5's own `$tw.fakeDocument` — the projection-sync surface (the
+    // node-instance capability, the operator's reframe). Expose it AS the global `document` so
+    // agnostic startups (info.js/extractVersionInfo) read the fake, not an absent real DOM.
+    // Lazy getter: fakeDocument wires during load-modules, before the startup tasks resolve it.
+    if (!("document" in globalThis)) {
+      let docProxy: unknown;
+      Object.defineProperty(globalThis, "document", {
+        configurable: true,
+        get(): unknown {
+          if (docProxy) return docProxy;
+          const t = (globalThis as Record<string, any>)["$tw"];
+          const fake = t?.fakeDocument ?? t?.utils?.fakeDocument;
+          if (!fake) return undefined; // not yet wired (pre-load-modules)
+          // The fakeDocument is a render-OUT target; agnostic startups also QUERY it
+          // (extractVersionInfo → getElementsByTagName("meta")). Headless has no real DOM to
+          // read, so missing methods no-op to an empty NodeList. The island writes the
+          // projection; it never reads a live page.
+          docProxy = new Proxy(fake as object, {
+            get(target, prop, receiver): unknown {
+              if (prop in target) return Reflect.get(target, prop, receiver);
+              return () => [];
+            },
+          });
+          return docProxy;
+        },
+      });
+    }
 
     const instance = loadTiddlyWikiFromBlob(coreBlob, makeBrowserWorkerBootEnv()).TiddlyWiki() as unknown as TW5Instance;
     // Forge the THIRD runtime AFTER blob eval, BEFORE boot.boot().
