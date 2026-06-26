@@ -91,6 +91,14 @@ async function bootVessel(): Promise<void> {
   }
 }
 
+// BISECT: automerge-only smoke worker — does automerge WASM instantiate in THIS build?
+// (isolates the nested-worker-wasm build from keyhive/TW5). Diagnostic; remove once green.
+try {
+  const smoke = new Worker(new URL("./workers/smoke.worker.ts", import.meta.url), { type: "module" });
+  smoke.addEventListener("message", (e) => console.log("[smoke<-]", JSON.stringify(e.data)));
+  smoke.addEventListener("error", (e) => console.error("[smoke ERR]", (e as ErrorEvent).message, (e as ErrorEvent).filename, (e as ErrorEvent).error));
+} catch (e) { console.error("[smoke spawn]", e); }
+
 // Run both independently — the @oracle read never waits on the vessel boot.
 void readOracle();
 void bootVessel();
