@@ -7,7 +7,7 @@
 
 import { describe, expect, test } from "vitest";
 
-import { CoalesceGate, KeyedCoalesceGate } from "../src/index.js";
+import { CoalesceGate, KeyedCoalesceGate, CaptureNalu } from "../src/index.js";
 
 type Fire = (() => void) | null;
 
@@ -102,5 +102,13 @@ describe("KeyedCoalesceGate", () => {
     expect(gate.pending()).toBe(2);
     gate.dispose();
     expect(gate.pending()).toBe(0);
+  });
+});
+
+describe("ProjectionGate family discriminant", () => {
+  test("the two coalesce engines tag coalesce; the accumulate engine tags accumulate", () => {
+    expect(new CoalesceGate({ windowMs: 10, onFlush: () => {} }).family).toBe("coalesce");
+    expect(new KeyedCoalesceGate<string>({ debounceMs: 10, onFlush: () => {} }).family).toBe("coalesce");
+    expect(new CaptureNalu({ flush: async () => 0 }).family).toBe("accumulate");
   });
 });

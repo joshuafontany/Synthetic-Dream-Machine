@@ -45,6 +45,16 @@
 /** Which family a projection's gate belongs to — the conserved dichotomy. */
 export type GateFamily = "accumulate" | "coalesce";
 
+/**
+ * The one thing every projection-nalu gate shares — its family discriminant. A MARKER only: no
+ * base class, no shared behavior (the engines stay distinct — accumulate's `enqueue(value)` + WAL
+ * reserve vs coalesce's valueless `mark()` + decay are the correct duals, never to be force-merged).
+ * The tag lets a holder reason about the dichotomy in types rather than only in canon prose.
+ */
+export interface ProjectionGate {
+  readonly family: GateFamily;
+}
+
 type TimerHandle = ReturnType<typeof setTimeout>;
 
 /**
@@ -67,7 +77,8 @@ export interface CoalesceGateOptions {
   readonly clearTimer?: (h: TimerHandle) => void;
 }
 
-export class CoalesceGate {
+export class CoalesceGate implements ProjectionGate {
+  readonly family: GateFamily = "coalesce";
   private dirty = false;
   private rev = 0;
   private timer: TimerHandle | null = null;
@@ -128,7 +139,8 @@ export interface KeyedCoalesceGateOptions<K> {
   readonly clearTimer?: (h: TimerHandle) => void;
 }
 
-export class KeyedCoalesceGate<K> {
+export class KeyedCoalesceGate<K> implements ProjectionGate {
+  readonly family: GateFamily = "coalesce";
   private readonly timers = new Map<K, TimerHandle>();
   private readonly debounceMs: number;
   private readonly onFlush: (key: K) => void;

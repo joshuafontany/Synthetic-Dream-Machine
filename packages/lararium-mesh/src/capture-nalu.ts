@@ -29,6 +29,8 @@
  * nalu's browser rAF). Each record carries its lar_ffz (felt) — set by the producer.
  */
 
+import type { GateFamily, ProjectionGate } from "./projection-nalu.js";
+
 /** One born-annotated record a producer enqueues (one NDJSON line at flush). */
 export interface CaptureRecord {
   readonly content: string;
@@ -105,7 +107,8 @@ export interface CaptureStats {
  * all producers). `enqueue` is non-blocking and bounded; `tick` runs on each server tick
  * and flushes only when the gate crests and no backoff/flush is in flight.
  */
-export class CaptureNalu {
+export class CaptureNalu implements ProjectionGate {
+  readonly family: GateFamily = "accumulate";
   private queue: CaptureRecord[] = [];
   private lastFlushMs: number;
   private flushing = false;
