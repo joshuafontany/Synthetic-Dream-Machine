@@ -43,6 +43,15 @@ four-spirit grounding pass over the live parser and the TW5 framework).
 
 > **The black speaks; the red steers — lar-telemetry reads the red's own gauges.**
 
+**FORWARD-FACING + LOCAL (2026-06-25 inversion).** The gradient no longer races BEHIND
+the mine. A producer reads the instruments AND the verbatim in ONE forward pass — a
+born-annotated record enqueued to the unified capture-nalu and flushed on the local tick
+through the RFC-002 source-adapter; mempalace FILES, never mines. And the writer is a
+SEPARATE LOCAL **non-federated** worker-VM, NOT the federated @admin — work-memory is a
+local island; @admin's part here retires to the federated mesh plane. The `lar_hv` sweep
+stays only as a legacy-drawer backfill. Depth:
+lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#forward-facing-nalu.
+
 <<~/ahu >>
 
 <<~ ahu #one-instrument-reader >>

@@ -69,6 +69,19 @@ boundary per tick across heterogeneous sources beats N boundaries with the casca
 + FRP-glitch anti-pattern. Our widget filter is O(1) hash-lookup, so the cost scales with
 *changed* hashes, not bag count — no fan-out objection applies.
 
+**A second nalu instance — local capture** (2026-06-25): the same collect-then-flush
+shape drives forward-facing capture, in a SEPARATE local **non-federated** worker-VM.
+Producers (parallel sessions · worker swarms · Codex/Claude/Copilot) enqueue
+born-annotated records into one unified queue; the **server tick** (the daemon's 20 Hz
+`setInterval` lar-event-bus loop — the `LarTickCounter`, server-side where the palace
+lives) crests, backpressure-gated; one drain files the batch to the mempalace web2
+sidecar via the RFC-002 source-adapter. Two nalu engines, one pattern, **two cadences**:
+the **federated** in-wiki nalu crests on `requestAnimationFrame` (CRDT waves → the widget
+shore); the **local capture** nalu crests on the server tick (CAPTURE waves → the palace
+— lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#forward-facing-nalu). Do
+not conflate their boundaries: rAF rides the federated/browser engine, the 20 Hz server
+tick rides the local/daemon engine.
+
 **The invariant:** The nalu is not one tiddler change. It is the atomic delivery
 of a *batch* of changes to all observers simultaneously. Every observer — every
 widget, every reaction handler — receives the same `changedTiddlers` set in the
