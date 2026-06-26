@@ -33,7 +33,9 @@ const STATE_FILE = "oracle-pointer-state.json";
 
 interface PersistedPointerState {
   readonly version:       number;
-  readonly lastPointerId: string | null;
+  readonly lastPointerId: string | null;  // id of the current version's pointer (lineage anchor)
+  readonly prevId:        string | null;  // its prev — kept so a heartbeat re-signs the same identity
+  readonly cid:           string | null;  // the last published content hash (detect a real change vs a reboot)
 }
 
 export interface OracleReadFace {
@@ -61,37 +63,47 @@ export async function mountOracleReadFace(args: {
 
   // Load the persisted monotone counter — a fresh-from-1 counter after a reboot would
   // read as a rollback to every peer that already saw a higher version.
-  let persisted: PersistedPointerState = { version: 0, lastPointerId: null };
+  let persisted: PersistedPointerState = { version: 0, lastPointerId: null, prevId: null, cid: null };
   try {
     const raw = JSON.parse(readFileSync(statePath, "utf8")) as PersistedPointerState;
     if (Number.isInteger(raw.version) && raw.version >= 0) persisted = raw;
   } catch { /* first boot — start at 0 */ }
 
-  async function refresh(): Promise<void> {
+  // Re-publish the pointer. A CONTENT change bumps the monotone version + advances the
+  // lineage; an EA (the breath — force, no content change) renews the freshness lease on
+  // the SAME version+prev — the pointer is a LEASE, so a static @oracle must keep being
+  // fed or readers reject it stale (the gap the first live cross-vessel read surfaced).
+  async function reissue(force: boolean): Promise<void> {
     const doc = oracleHandle.doc();
     if (!doc) return;
     const snap = await exportOracleSnapshot(doc);
-    if (snapshot && snap.cid === snapshot.cid) return; // unchanged → no new pointer
-    const version = persisted.version + 1;
+    const changed = snap.cid !== persisted.cid;
+    if (!changed && !force) return;
+    const version = changed ? persisted.version + 1 : persisted.version;
+    const prev    = changed ? persisted.lastPointerId : persisted.prevId;
     const expiry  = Date.now() + POINTER_TTL_MS;
-    const ptr = await buildOraclePointer({
-      snapshot: snap, version, prev: persisted.lastPointerId, expiry, signerSeed,
-    });
-    const id = await oraclePointerId(ptr);
+    const ptr = await buildOraclePointer({ snapshot: snap, version, prev, expiry, signerSeed });
     snapshot = snap;
     pointer  = ptr;
-    persisted = { version, lastPointerId: id };
-    try {
-      mkdirSync(storageDir, { recursive: true });
-      writeFileSync(statePath, JSON.stringify(persisted));
-    } catch { /* quota — the in-memory pointer still serves this run */ }
-    onLog?.(`@oracle read-face: v${version} cid=${snap.cid.slice(0, 12)}… (${snap.bytes.byteLength}B)`);
+    if (changed) {
+      const id = await oraclePointerId(ptr);
+      persisted = { version, lastPointerId: id, prevId: prev, cid: snap.cid };
+      try {
+        mkdirSync(storageDir, { recursive: true });
+        writeFileSync(statePath, JSON.stringify(persisted));
+      } catch { /* quota — the in-memory pointer still serves this run */ }
+      onLog?.(`@oracle read-face: v${version} cid=${snap.cid.slice(0, 12)}… (${snap.bytes.byteLength}B)`);
+    }
   }
 
   await oracleHandle.whenReady();
-  await refresh();
-  const onChange = (): void => { void refresh(); };
+  await reissue(true);
+  const onChange = (): void => { void reissue(false); };
   oracleHandle.on("change", onChange);
+  // Ea — the breath that renews the lease before it lapses, even with no content change
+  // (feed-the-Lar: a static @oracle still breathes, so its pointer never reads stale).
+  const ea = setInterval(() => { void reissue(true); }, Math.floor(POINTER_TTL_MS / 2));
+  ea.unref();
 
   const onRequest = (req: IncomingMessage, res: ServerResponse): void => {
     const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -123,6 +135,7 @@ export async function mountOracleReadFace(args: {
 
   return {
     dispose: () => {
+      clearInterval(ea);
       oracleHandle.off("change", onChange);
       httpServer.off("request", onRequest);
     },

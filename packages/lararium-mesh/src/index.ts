@@ -19,6 +19,7 @@ export * from "./boot-resolver.js";
 export * from "./epoch-lease.js";
 export * from "./device-delegation.js";
 export * from "./oracle-substrate.js";
+export * from "./oracle-read-client.js";
 export * from "./bearing-harvest.js";
 export * from "./turn-harvest.js";
 export * from "./mirror-paths.js";

@@ -72,30 +72,40 @@ export async function verifyOracleSnapshotBytes(
 }
 
 /**
- * The canonical signing string — domain+version tagged, `|`-delimited, every field
- * strict-charset so no separator can shift a boundary (the device-delegation pattern).
+ * The pointer's IDENTITY string — the CONTENT fields only, NO expiry/sig. A lease
+ * renewal (same content, fresh expiry + new sig) keeps the SAME identity, so the
+ * lineage stays stable across heartbeats. Domain+version tagged, `|`-delimited, every
+ * field strict-charset so no separator can shift a boundary (device-delegation pattern).
  */
-function pointerSigningString(p: Omit<OraclePointer, "sig">): string {
+function pointerIdentityString(p: Pick<OraclePointer, "cid" | "heads" | "version" | "prev" | "pub">): string {
   return [
     ORACLE_POINTER_DOMAIN,
     p.cid,
     p.heads.join(","),
     String(p.version),
     p.prev ?? "",
-    String(p.expiry),
     p.pub,
   ].join("|");
 }
 
 /**
+ * The SIGNED string — the identity PLUS the expiry lease, because the signature MUST
+ * cover freshness (a peer must not be able to extend a stale pointer's life).
+ */
+function pointerSigningString(p: Omit<OraclePointer, "sig">): string {
+  return pointerIdentityString(p) + "|" + String(p.expiry);
+}
+
+/**
  * The pointer's stable id — what the NEXT pointer names in its `prev` (the lineage
- * link). sha256 over the full signed record, so a tampered field changes the id.
+ * link). Computed over the IDENTITY (not expiry/sig), so renewing the lease never
+ * forks the lineage; a changed content field (cid/version/prev) does change the id.
  */
 export async function oraclePointerId(
   p: OraclePointer,
   provider: DigestProvider = defaultCryptoProvider,
 ): Promise<string> {
-  return sha256Hex(utf8Bytes(pointerSigningString(p) + "|" + p.sig), provider);
+  return sha256Hex(utf8Bytes(pointerIdentityString(p)), provider);
 }
 
 /** Build + sign the next pointer. `version` MUST exceed the prior pointer's (monotone). */
