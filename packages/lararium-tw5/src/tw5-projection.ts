@@ -21,6 +21,7 @@
 import type { IslandContext } from "./island-context.js";
 import { mountCamera } from "./tw5-camera.js";
 import { tw5ElementToHtml } from "./fake-dom.js";
+import { CoalesceGate } from "@lararium/mesh";
 
 /** The `IslandMsg_Event.listenable` discriminator for a rendered projection frame. */
 export const PROJECTION_FRAME = "projection:frame";
@@ -57,36 +58,37 @@ export function mountProjection(ctx: IslandContext): () => void {
   const styleContainer = fakeDoc.createElement("style");
   styleWidget.render(styleContainer, null);
 
-  // Coalesce-to-latest gate.
-  let rev = 0;
-  let timer: ReturnType<typeof setTimeout> | null = null;
-  const flush = (): void => {
-    timer = null;
-    ctx.post({
-      schema_version: 1,
-      type:           "event",
-      wikiUri:        ctx.wikiUri,
-      listenable:     PROJECTION_FRAME,
-      payload: {
-        html: tw5ElementToHtml(storyContainer as { innerHTML: string }),
-        css:  styleContainer.textContent ?? "",
-        rev:  ++rev,
-      },
-    });
-  };
-  const arm = (): void => { if (timer === null) timer = setTimeout(flush, COALESCE_MS); };
+  // Coalesce-family gate (mesh/projection-nalu): a burst of wiki changes collapses to one frame;
+  // the newest snapshot wins, intermediates fade (the decay-envelope). The flush snapshots the
+  // live fakeDOM lazily at the crest — `mark()` only says "the source moved".
+  const gate = new CoalesceGate({
+    windowMs: COALESCE_MS,
+    onFlush: (rev) => {
+      ctx.post({
+        schema_version: 1,
+        type:           "event",
+        wikiUri:        ctx.wikiUri,
+        listenable:     PROJECTION_FRAME,
+        payload: {
+          html: tw5ElementToHtml(storyContainer as { innerHTML: string }),
+          css:  styleContainer.textContent ?? "",
+          rev,
+        },
+      });
+    },
+  });
 
   const onChange = (changes: Record<string, unknown>): void => {
     styleWidget.refresh(changes, styleContainer, null);
-    arm();
+    gate.mark();
   };
   tw.wiki.addEventListener("change", onChange);
 
   // First frame — the island's content the moment it breathes.
-  arm();
+  gate.mark();
 
   return () => {
-    if (timer !== null) clearTimeout(timer);
+    gate.dispose();
     tw.wiki.removeEventListener("change", onChange);
     stopStory();
   };
