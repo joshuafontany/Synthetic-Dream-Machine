@@ -80,6 +80,28 @@ function makeBrowserPathShim(): Record<string, unknown> {
   return { sep, dirname, basename, extname, join, resolve, normalize };
 }
 
+/** A neutral `os` for the island runtime — TW5's `$:/core/modules/startup.js` reads
+ *  `os.platform()` on the non-browser branch. The island is platform-agnostic. */
+function makeBrowserOsShim(): Record<string, unknown> {
+  return {
+    platform: () => "browser", arch: () => "wasm", EOL: "\n",
+    hostname: () => "lararium-island", tmpdir: () => "/tmp", type: () => "Lararium", release: () => "",
+  };
+}
+
+/** A capability-shim `process` handed to the core blob's eval scope (the WASI law: the host
+ *  injects the capability; the guest never assumes ambient authority). Eval-scoped via
+ *  `processArg` — NOT a globalThis stub — and `exit` is a no-op: the island never aborts. */
+function makeBrowserProcessShim(): Record<string, unknown> {
+  return {
+    env: {}, argv: [], platform: "browser", browser: true, version: "", versions: {},
+    cwd: () => "/", exit: () => { /* the island never aborts a worker */ },
+    nextTick: (cb: (...a: unknown[]) => void, ...a: unknown[]) => queueMicrotask(() => cb(...a)),
+    on: () => {}, once: () => {}, off: () => {},
+    stdout: { write: () => true }, stderr: { write: () => true },
+  };
+}
+
 function makeDeniedFsShim(): Record<string, unknown> {
   return new Proxy(Object.create(null) as Record<string, unknown>, {
     get(_target, prop) {
@@ -139,13 +161,17 @@ function makeBrowserWorkerBootEnv(): HeadlessBootEnv {
       if (id === "fs"   || id === "node:fs")   return makeDeniedFsShim();
       if (id === "path" || id === "node:path") return makeBrowserPathShim();
       if (id === "vm"   || id === "node:vm")   return makeBrowserVmShim();
+      if (id === "os"   || id === "node:os")   return makeBrowserOsShim();
       throw new Error(`TW5Engine: browser Worker coreBlob attempted require(${JSON.stringify(id)}) — Node built-ins unavailable`);
     },
     // node:{} so bootprefix (run immediately via _load) loads the vm shim instead
     // of detecting node=null and calling vm.createContext({}) with vm=undefined.
     // Neutralized (node=null, loadTiddlersNode stub) after blob eval, before boot().
     preSeedTw:  { boot: { suppressBoot: true }, node: {}, browser: null },
-    processArg: undefined,
+    // The eval-scoped `process` capability (the third runtime is neither browser nor node;
+    // the host injects what the kernel's module-execute sandbox closes over). NOT undefined —
+    // that was the 77389c01 regression that routed boot into the node `process.exit` branch.
+    processArg: makeBrowserProcessShim(),
   };
 }
 
@@ -245,6 +271,37 @@ function neutralizeNodeBootAuthority(instance: TW5Instance): void {
   (instance as unknown as { loadTiddlersNode?: () => void }).loadTiddlersNode = () => {};
 }
 
+/**
+ * Forge the THIRD TW5 runtime — the island VM, neither browser nor node. TW5's OWN platform
+ * filter (`doesTaskMatchPlatform`) already builds it: with `$tw.browser` AND `$tw.node` both
+ * null, the `["browser"]`/`["node"]` startup modules SKIP and the agnostic ones (load-modules,
+ * startup, info, plugins, story) RUN — building `$tw.wiki` with no DOM and no render. The
+ * engine stays byte-identical; we only inject the kernel's irreducible capabilities (the WASI
+ * law) and neutralize the two platform tails the kernel calls unconditionally. A thin, named
+ * seam — the rest of the surface belongs to injected/shadowing tiddlers. (`avaktavya`: the
+ * third predication, neither-A-nor-B held as a first-class standpoint.)
+ */
+function configureIslandRuntime(instance: TW5Instance): void {
+  const tw = instance as unknown as Record<string, any>;
+  tw.boot.argv = [];
+  // Both platform flags null → the platform filter hands the post-kernel surface to our tiddlers.
+  tw.node = null;
+  tw.browser = null;
+  // The two platform-gated loaders the kernel calls regardless (undefined in the third runtime).
+  // Tiddlers arrive via preload, never from the DOM or the filesystem.
+  tw.loadTiddlersBrowser = () => {};
+  tw.loadTiddlersNode = () => {};
+  // `boot.boot()` calls decryptEncryptedTiddlers unconditionally; it is defined only inside the
+  // browser/node blocks. Headless: no crypt UI — proceed straight through.
+  tw.boot.decryptEncryptedTiddlers = (cb: () => void) => cb();
+  // readBrowserTiddlers:true steers initStartup AWAY from the node block (process/path/module);
+  // paired with the no-op loadTiddlersBrowser above, it reads nothing from a (absent) DOM.
+  tw.boot.tasks = { trapErrors: false, readBrowserTiddlers: true };
+  // The error reporter is the browser-XOR-node crash: `else if(!$tw.browser){ process.exit(1) }`.
+  // Headless surfaces and continues — the island never aborts the worker on a boot warning.
+  if (tw.utils) tw.utils.error = (err: unknown): void => { console.error("[island-tw5]", String(err)); };
+}
+
 export async function prepareHostBootInstance(
   coreBlob?: TW5CoreBootBlob,
 ): Promise<{ instance: TW5Instance; isBrowser: boolean }> {
@@ -272,13 +329,18 @@ export async function prepareHostBootInstance(
     // === globalThis. Completes the window/require/vm/path/fs synthetics this
     // module already presents — the last missing Node-ism the browser must supply.
     (globalThis as Record<string, unknown>)["global"] ??= globalThis;
+    // The browser vessel's TW5-platform capability seam (role = capability ≠ platform, the
+    // isomorphic-worker-VM law — cf. makeCaptureEngine's CaptureFlush/Reserve seams). The
+    // kernel's module-execute sandbox (boot.js §execute) runs each module global-scoped via
+    // `new Function`, so its bare `process`/`Buffer`/`global` references resolve to globalThis,
+    // NOT the boot eval's processArg. The island injects them here — not detected, supplied —
+    // and `??=` respects any the bundler already provides.
+    (globalThis as Record<string, unknown>)["Buffer"]  ??= {};
+    (globalThis as Record<string, unknown>)["process"] ??= makeBrowserProcessShim();
 
     const instance = loadTiddlyWikiFromBlob(coreBlob, makeBrowserWorkerBootEnv()).TiddlyWiki() as unknown as TW5Instance;
-    // Neutralize node authority AFTER blob eval (which needed $tw.node={} to load vmShim),
-    // but BEFORE boot.boot() so Node-specific blocks ($tw.node check) and fs access are skipped.
-    instance.boot.argv = [];
-    (instance as unknown as { node: null }).node = null;
-    (instance as unknown as { loadTiddlersNode?: () => void }).loadTiddlersNode = () => {};
+    // Forge the THIRD runtime AFTER blob eval, BEFORE boot.boot().
+    configureIslandRuntime(instance);
 
     return { instance, isBrowser: false };
   }

@@ -335,13 +335,24 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     }
   });
 
-  // ── Deliver manifest ────────────────────────────────────────────────────────
+  // ── Deliver manifest, AFTER the worker's ready IoC ──────────────────────────────
+  // The browser kernel posts mkReady only AFTER its message listener registers (late —
+  // after the worker shim's keyhive base64-WASM init + chain import). Posting the manifest
+  // before that delivers it to the worker's event loop while no listener exists → it's
+  // DROPPED, and the kernel then waits forever (no breath, no fault). So wait for ready,
+  // then post; node omits ready → a short timeout proceeds. Deferred (not awaited) so the
+  // synchronous return holds — workerEa resolves once the worker boots off this manifest.
   const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
     ...(adminAuth ? { adminAuth } : {}),
     ...(pluginCids?.length ? { pluginCids } : {}),
   });
-  worker.post(manifestMsg, [syncPort]);
+  void new Promise<void>((resolve) => {
+    let settled = false;
+    const finish = (): void => { if (!settled) { settled = true; resolve(); } };
+    worker.listen((raw: unknown) => { if (isIslandToVesselMsg(raw) && raw.type === "ready") finish(); });
+    setTimeout(finish, 1500);
+  }).then(() => { worker.post(manifestMsg, [syncPort]); });
 
   return {
     adminHandle,
