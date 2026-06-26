@@ -123,6 +123,8 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
 export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, AdminVmCore> {
   /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
+  /** Relay a main-thread DOM event to the active wiki island (interactivity RETURN leg). */
+  sendDomEvent: (renderId: string, eventType: string, fields: Record<string, number | boolean>) => void;
 }
 
 async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHandle<T>): Promise<DocHandle<T>> {
@@ -399,5 +401,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     larariumDocUrl:   result.assembly.larariumHandle?.url ?? null,
     phase:            "live",
     engineUpdated,
+    sendDomEvent: (renderId, eventType, fields) =>
+      vmManager.placeWikiEvent(slotActiveWikiId, { renderId, eventType, fields }),
   };
 }

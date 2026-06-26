@@ -51,6 +51,9 @@ importers:
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
+      idiomorph:
+        specifier: ^0.7.3
+        version: 0.7.4
     devDependencies:
       '@keyhive/keyhive':
         specifier: 0.1.0-alpha.3
@@ -1082,6 +1085,9 @@ packages:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
 
+  idiomorph@0.7.4:
+    resolution: {integrity: sha512-uCdSpLo3uMfqOmrwXTpR1k/sq4sSmKC7l4o/LdJOEU+MMMq+wkevRqOQYn3lP7vfz9Mv+USBEqPvi0XhdL9ENw==}
+
   is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
@@ -2005,26 +2011,6 @@ snapshots:
     dependencies:
       '@types/node': 22.19.17
 
-  '@vitest/browser@3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)':
-    dependencies:
-      '@testing-library/dom': 10.4.1
-      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
-      '@vitest/mocker': 3.2.4(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))
-      '@vitest/utils': 3.2.4
-      magic-string: 0.30.21
-      sirv: 3.0.2
-      tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/node@24.12.3)(@vitest/browser@3.2.4)(lightningcss@1.32.0)(tsx@4.21.0)
-      ws: 8.20.0
-    optionalDependencies:
-      playwright: 1.59.1
-    transitivePeerDependencies:
-      - bufferutil
-      - msw
-      - utf-8-validate
-      - vite
-    optional: true
-
   '@vitest/browser@3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)':
     dependencies:
       '@testing-library/dom': 10.4.1
@@ -2256,6 +2242,8 @@ snapshots:
       resolve-pkg-maps: 1.0.0
 
   has-flag@4.0.0: {}
+
+  idiomorph@0.7.4: {}
 
   is-fullwidth-code-point@3.0.0: {}
 
@@ -2608,7 +2596,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.12.3
-      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@7.3.3(@types/node@24.12.3)(lightningcss@1.32.0)(tsx@4.21.0))(vitest@3.2.4)
+      '@vitest/browser': 3.2.4(playwright@1.59.1)(vite@8.0.10(@types/node@24.12.3)(esbuild@0.27.7)(tsx@4.21.0))(vitest@3.2.4)
     transitivePeerDependencies:
       - jiti
       - less

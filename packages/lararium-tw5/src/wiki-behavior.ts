@@ -17,10 +17,12 @@ import {
   TEMP_BAG,
   type BatchMode,
   type WikiMsg_PlaceVerb,
+  type WikiMsg_DomEvent,
   type Verb,
   type ChangeOrigin,
 } from "@lararium/mesh";
 import { registerActionReactors, makeTw5Deserializer } from "./action-handler.js";
+import { dispatchProjectedEvent } from "./tw5-projection.js";
 import { VerbTable } from "./verb-dispatcher.js";
 import { startEngineWatch } from "./engine-watch.js";
 import { startRecipeWatch } from "./recipe-watch.js";
@@ -101,6 +103,12 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
+      // Interactivity RETURN leg: a relayed main-thread DOM event → TW5's native handler path.
+      if (type === "wiki:dom-event") {
+        const ev = raw as WikiMsg_DomEvent;
+        dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
+        return true;
+      }
       if (type !== "wiki:place-verb") return false;
       if (!_registry) return false;
       const msg = raw as WikiMsg_PlaceVerb;

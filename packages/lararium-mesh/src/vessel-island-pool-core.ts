@@ -25,6 +25,7 @@ import {
   mkManifest,
   mkTeardown,
   mkWikiPlaceVerb,
+  mkWikiDomEvent,
 } from "./island-protocol.js";
 import type {
   Repo,
@@ -319,6 +320,18 @@ export class VesselIslandPoolCore {
       });
       worker.post(mkWikiPlaceVerb({ ...opts, requestId }));
     });
+  }
+
+  /** Relay a main-thread DOM event to the wiki island — the interactivity RETURN leg. Accumulate-
+   *  family but fire-and-forget: postMessage IS the ordered queue, the sink (TW5's own handler) is
+   *  synchronous, so no requestId/timeout/reserve. A cooled slot drops it (Hiatus drop-honesty). */
+  placeWikiEvent(
+    wikiId: string,
+    ev: { renderId: string; eventType: string; fields: Record<string, number | boolean> },
+  ): void {
+    const slot = this._slots.get(wikiId);
+    if (!slot || slot.temperature === "anu") return;
+    slot.worker.post(mkWikiDomEvent(ev));
   }
 
   // ── Accessors ────────────────────────────────────────────────────────────────

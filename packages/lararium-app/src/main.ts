@@ -9,6 +9,7 @@
  */
 import { openBrowserVessel, generateOrLoadBrowserVesselIdentity } from "@lararium/browser";
 import { pullAndVerifyOracle } from "@lararium/mesh";
+import { Idiomorph } from "idiomorph";
 import genesisBytes from "../../../genesis/island.bin?uint8array";
 // `?worker&url` — Vite builds each worker shim through its worker pipeline and yields the built
 // bundle's URL (a real /assets file). A standalone `new URL("./x.ts", import.meta.url)` passed
@@ -59,10 +60,13 @@ async function readOracle(): Promise<void> {
   }
 }
 
-// The projection-nalu sink — apply a rendered wiki frame into an isolated shadow root (the live
-// wiki made visible). Read-only first beat: TW5 widget handlers stay in the worker on the fake
-// DOM, so the projected HTML is inert; interactivity (the worker-dom event round-trip) is deferred.
+// The projection-nalu sink — apply a rendered wiki frame into an isolated shadow root, MORPHED in
+// place (idiomorph) so focus/caret/scroll survive a re-projection. A delegated click relays back to
+// the worker's TW5 by render-id (the interactivity RETURN leg): TW5's own handler fires, navigates,
+// and re-projects — the widget tree never learns the click crossed a thread.
 let _projRev = 0;
+let _sendDomEvent: ((renderId: string, eventType: string, fields: Record<string, number | boolean>) => void) | null = null;
+let _clickWired = false;
 function applyProjection(frame: { html: string; css: string; rev: number }): void {
   if (frame.rev < _projRev) return;            // drop a stale frame (coalesce ordering)
   _projRev = frame.rev;
@@ -73,7 +77,21 @@ function applyProjection(frame: { html: string; css: string; rev: number }): voi
   style.textContent = frame.css;
   let pane = shadow.querySelector(".lar-projection") as HTMLElement | null;
   if (!pane) { pane = document.createElement("div"); pane.className = "lar-projection"; shadow.appendChild(pane); }
-  pane.innerHTML = frame.html;
+  // Morph (not innerHTML=) — id-set matching keeps unchanged nodes in place; the in-progress value
+  // is preserved (ignoreActiveValue). The render-id attributes ride the HTML untouched.
+  Idiomorph.morph(pane, frame.html, { morphStyle: "innerHTML", ignoreActiveValue: true });
+  if (!_clickWired) {
+    _clickWired = true;
+    pane.addEventListener("click", (e) => {
+      const el = (e.target as Element)?.closest?.("[data-lar-rid]");
+      if (!el || !_sendDomEvent) return;
+      e.preventDefault();                        // a projected <a href> must not navigate the host page
+      const me = e as MouseEvent;
+      _sendDomEvent(el.getAttribute("data-lar-rid")!, "click", {
+        metaKey: me.metaKey, ctrlKey: me.ctrlKey, altKey: me.altKey, shiftKey: me.shiftKey, button: me.button,
+      });
+    });
+  }
 }
 
 async function bootVessel(): Promise<void> {
@@ -102,6 +120,7 @@ async function bootVessel(): Promise<void> {
       onPhase: paint,
       onProjection: applyProjection,
     });
+    _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg
     const vesselEl = $("vessel"); vesselEl.replaceChildren();
     row(vesselEl, "status", "live — sovereign local island", "ok");
     row(vesselEl, "did", did);

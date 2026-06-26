@@ -439,7 +439,8 @@ export type VesselToIslandMsg =
   | AdminMsg_ResolveBindingRequest
   | AdminMsg_EvictResult
   | AdminMsg_ResidencyOpResult
-  | WikiMsg_PlaceVerb;
+  | WikiMsg_PlaceVerb
+  | WikiMsg_DomEvent;
 
 // ── Island → vessel ──────────────────────────────────────────────────────────
 
@@ -530,6 +531,21 @@ export interface WikiMsg_PlaceVerb {
 }
 
 /**
+ * Vessel → wiki island: a main-thread DOM event relayed back to the projected wiki — the
+ * interactivity RETURN leg (the accumulate-family inbound twin of the coalesce projection OUT).
+ * The worker resolves `renderId` to the fake DOM node TW5 bound a listener to and invokes TW5's
+ * OWN stored handler; from `tm-navigate` onward the widget tree runs as if the event were local.
+ * `fields` is an explicit allowlist of primitive event properties (GP-2: primitives only).
+ */
+export interface WikiMsg_DomEvent {
+  schema_version: ProtocolVersion;
+  type:           "wiki:dom-event";
+  renderId:       string;
+  eventType:      string;
+  fields:         Record<string, number | boolean>;
+}
+
+/**
  * Island → vessel: wiki-scope verb result.
  *
  * Sent by a wiki island's dispatch behavior after completing a verb whose result
@@ -587,7 +603,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "admin:residency-op-result", "wiki:place-verb"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "admin:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
@@ -885,6 +901,20 @@ export function mkWikiPlaceVerb(opts: {
   if (opts.batchMode)        msg.batchMode = opts.batchMode;
   if (opts.requestId)        msg.requestId = opts.requestId;
   return msg;
+}
+
+export function mkWikiDomEvent(opts: {
+  renderId: string;
+  eventType: string;
+  fields: Record<string, number | boolean>;
+}): WikiMsg_DomEvent {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "wiki:dom-event",
+    renderId: opts.renderId,
+    eventType: opts.eventType,
+    fields: opts.fields,
+  };
 }
 
 export function mkWikiVerbResult(opts: {

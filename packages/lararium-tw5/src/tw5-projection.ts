@@ -30,6 +30,56 @@ export const PROJECTION_FRAME = "projection:frame";
  *  (one display frame-ish) — interactive display, not the capture-nalu's 2 s recall budget. */
 const COALESCE_MS = 24;
 
+/** A patched fake-DOM element: TW5's fakedom drops `addEventListener` (a no-op), severing only the
+ *  DOM-node→widget binding. We patch it to STORE the handler TW5 builds + stamp a `data-lar-rid`
+ *  (which rides the serialized HTML), so a relayed main-thread event maps back to the live node. */
+interface RidNode {
+  attributes: Record<string, string | undefined>;
+  setAttribute(name: string, value: string): void;
+  _larListeners?: { type: string; handler: (ev: unknown) => void }[];
+}
+const ridMap = new Map<string, RidNode>();
+let ridSeq = 0;
+
+/** Patch the fake-element prototype once per worker (the RETURN-leg capability the fakedom platform
+ *  lacks): restore listener-storage + render-id stamping + the two reads TW5's click handler makes
+ *  on the now-live node (getBoundingClientRect, hasAttribute). role = capability ≠ platform. */
+function patchFakeElementForEvents(fakeDoc: { createElement(t: string): RidNode }): void {
+  const proto = Object.getPrototypeOf(fakeDoc.createElement("div")) as Record<string, unknown>;
+  if (proto["_larEventsPatched"]) return;
+  proto["_larEventsPatched"] = true;
+  proto["addEventListener"] = function (this: RidNode, type: string, handler: (ev: unknown) => void): void {
+    let rid = this.attributes["data-lar-rid"];
+    if (rid === undefined) {
+      rid = String(++ridSeq);
+      this.setAttribute("data-lar-rid", rid);
+    }
+    (this._larListeners ??= []).push({ type, handler });
+    ridMap.set(rid, this);
+  };
+  proto["getBoundingClientRect"] = function (): unknown {
+    return { top: 0, left: 0, right: 0, bottom: 0, width: 0, height: 0, x: 0, y: 0 };
+  };
+  proto["hasAttribute"] = function (this: RidNode, name: string): boolean {
+    return this.attributes[name] !== undefined;
+  };
+}
+
+/**
+ * Dispatch a relayed main-thread DOM event into TW5's NATIVE path: resolve the fake node by its
+ * render-id and invoke the handler TW5 itself stored. From there (handleClickEvent → tm-navigate →
+ * navigator → story change → re-project) the widget tree runs as if the event were local — TW5
+ * never learns it crossed a thread. A miss = a stale frame (Hiatus): drop silently, never throw.
+ */
+export function dispatchProjectedEvent(renderId: string, eventType: string, fields: Record<string, number | boolean>): void {
+  const el = ridMap.get(renderId);
+  if (!el) return;
+  const ev = { type: eventType, target: el, currentTarget: el, ...fields, preventDefault() {}, stopPropagation() {} };
+  for (const l of el._larListeners ?? []) {
+    if (l.type === eventType) l.handler(ev);
+  }
+}
+
 /**
  * Mount the projection on a live wiki island. Returns a teardown (the `onBoot` contract).
  */
@@ -38,6 +88,9 @@ export function mountProjection(ctx: IslandContext): () => void {
   // engine facade does not expose — the same loose-access the cameras take.
   const tw = ctx.tw5.$tw as unknown as Record<string, any>;
   const fakeDoc = tw.fakeDocument;
+  // Arm the interactivity RETURN leg before the camera renders (so every widget that binds a
+  // listener gets its render-id stamped + handler stored).
+  patchFakeElementForEvents(fakeDoc);
   // ($:/SiteTitle "Lararium" + $:/SiteSubtitle "Welcome to the DreamNet" ride the lares plugin
   //  blob as source tiddlers — tiddlers/site-{title,subtitle}.tid — CID-carried, ratchet via
   //  re-genesis, user-overridable (a plugin shadow loaded after $:/core, overridden by ordinary).)

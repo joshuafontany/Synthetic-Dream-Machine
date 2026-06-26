@@ -14,7 +14,8 @@
     "@automerge/automerge-repo": "2.6.0-alpha.2",
     "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.2",
     "@lararium/browser": "workspace:*",
-    "@lararium/mesh": "workspace:*"
+    "@lararium/mesh": "workspace:*",
+    "idiomorph": "^0.7.3"
   },
   "devDependencies": {
     "@keyhive/keyhive": "0.1.0-alpha.3",
