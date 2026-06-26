@@ -34,7 +34,7 @@ import {
   openVesselCore,
   makeResidencyStatsReactor,
 }                                            from "@lararium/tw5";
-import type { VesselWikiSlot, VesselCoreResult } from "@lararium/tw5";
+import type { VesselWikiSlot, VesselCoreResult, AdminVmCore } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
@@ -48,7 +48,6 @@ import {
 }                                            from "./browser-genesis.js";
 import {
   openBrowserAdminVm, VerbTable,
-  type BrowserAdminVmResult,
 }                                            from "./open-browser-admin-vm.js";
 import type { WikiRecipe }                   from "@lararium/mesh";
 
@@ -121,7 +120,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
 }
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
-export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, BrowserAdminVmResult> {
+export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, AdminVmCore> {
   /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
 }
@@ -206,7 +205,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
-  let admin!:     BrowserAdminVmResult;      // set in openAdmin
+  let admin!:     AdminVmCore;      // set in openAdmin
   let slotActiveWikiId = "";
   let engineUpdated = false;
   const residency = new BagResidencyManager({

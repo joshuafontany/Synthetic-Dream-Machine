@@ -21,17 +21,15 @@
 import { join }                                          from "path";
 import { Worker, MessageChannel }                        from "worker_threads";
 import {
-  emptyLarDoc,
-  type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
-  type CompositeStore, type WikiRecipe,
-  type AuthVerifierSeam,
+  type Repo, type AutomergeUrl, type LarDoc,
+  type WikiRecipe,
   type IslandMsg_Manifest,
   type IslandGrants,
 } from "@lararium/mesh";
 import {
   openAdminVmCore,
   type AdminVmHost,
-  type VerbTable, type SummonsRequest,
+  type AdminVmCore,
 } from "@lararium/tw5";
 import { resolveBootDoc } from "./repo-helpers.js";
 import { nodeWorkerHandle } from "./worker-handle.js";
@@ -63,70 +61,7 @@ export interface AdminVmOptions {
   workerScriptUrl?:  URL;
 }
 
-export interface AdminVmResult {
-  /** Live admin doc handle on the main Repo — for keyhive and gate-check reads. */
-  adminHandle:  DocHandle<LarDoc>;
-  /**
-   * Single-layer CompositeStore backed by the main Repo's admin handle.
-   * Used by AdminEventStore (cap-event writes) and relay receipt writes.
-   */
-  composite:    CompositeStore;
-  /**
-   * Resolves when the admin island has sent `ea` — TW5 live, bags synced,
-   * drain loop running, VerbDispatcher subscribed to the wiki change surface.
-   * `openNodeVessel` MUST await this before emitting `"live"`.
-   */
-  workerEa:     Promise<void>;
-  /**
-   * Wire the vessel delegation registry and verifier.
-   * MUST be called before any job can be dispatched — call after keyhive boots,
-   * before awaiting workerEa. Relay jobs that arrive without a configured registry
-   * are rejected with an error result back to the island.
-   */
-  mountMainVerbs: (registry: VerbTable) => void;
-  /**
-   * Place a volatile job tiddler in the admin island's TW5 wiki.
-   * Delegates to the admin island's internal `placeVerb` via `admin:place-verb` message.
-   * The wiki change event fires at the island's next tick; VerbDispatcher dispatches it.
-   */
-  placeVerb:    (opts: SummonsRequest) => void;
-  /**
-   * Host-side inbound-peer verifier (path b). Proxies `verify()` to the admin
-   * island's keyhive via admin:verify-request/result. The WS AdminAuthGate arms
-   * with this once keyhive lives in-island (Stage 5); unused until then.
-   */
-  authSeam:     AuthVerifierSeam;
-  /**
-   * Resolve (or mint+delegate) the operator's @personal/@draft binding pair for
-   * a recipe fingerprint — runs island-side where keyhive lives. The vessel
-   * factory calls this between admin `workerEa` and the primary wiki mount.
-   */
-  resolveBinding: (
-    fingerprint: string,
-    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
-  /**
-   * Bind the pool eviction MECHANISM (sovereign-worker): the admin worker owns
-   * residency POLICY and commands an evict via admin:evict-request; this routes it to
-   * the main-thread pool. The vessel factory calls it after the pool exists.
-   */
-  onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
-  /**
-   * Bind the residency-op MECHANISM (sovereign-worker): the worker commands
-   * pin/unpin/register-cold (keyhive-gated); main routes to the BagResidencyManager.
-   */
-  onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
-  /**
-   * Bind the wiki-alert DELIVERY: the worker named a wiki whose pending change needs a
-   * reboot; main places a `system-alert` verb into that wiki's live island (skip if
-   * unmounted). Call after the pool exists.
-   */
-  onWikiAlert:  (fn: (wikiSlug: string, message: string, cause?: string, kind?: string) => void) => void;
-  /** Terminate the admin island and release the vessel composite. */
-  dispose:      () => void;
-}
-
-export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> {
+export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmCore> {
   const { repo, adminUrl, coreHash, grants, libraryBags, adminAuth, storageDir, workerScriptUrl } = opts;
 
   // ── Admin doc handle (node strategy: merge-on-late-arrival) ────────────────
@@ -158,25 +93,12 @@ export async function openAdminVm(opts: AdminVmOptions): Promise<AdminVmResult> 
     spawnWorker: (url) => nodeWorkerHandle(new Worker(url)),
   };
 
-  const core = openAdminVmCore(host, {
+  // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival adminHandle;
+  // the lifecycle and the whole result surface (AdminVmCore) live once in the core.
+  return openAdminVmCore(host, {
     repo, adminHandle, recipe, grants, coreHash,
     ...(adminAuth ? { adminAuth } : {}),
     ...(storage   ? { storage }   : {}),
     workerScriptUrl: workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL,
   });
-
-  // authSeam + resolveBinding now ride the shared core's askIsland primitive.
-  return {
-    adminHandle:    core.adminHandle,
-    composite:      core.composite,
-    workerEa:       core.workerEa,
-    mountMainVerbs: core.mountMainVerbs,
-    placeVerb:      core.placeVerb,
-    authSeam:       core.authSeam,
-    resolveBinding: core.resolveBinding,
-    onEvictRequest: core.onEvictRequest,
-    onResidencyOp:  core.onResidencyOp,
-    onWikiAlert:    core.onWikiAlert,
-    dispose:        core.dispose,
-  };
 }

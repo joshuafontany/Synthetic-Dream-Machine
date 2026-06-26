@@ -49,7 +49,7 @@ import {
   addReadOnlyLayer,
   openVesselCore,
 } from "@lararium/tw5";
-import type { VesselWikiSlot } from "@lararium/tw5";
+import type { VesselWikiSlot, AdminVmCore } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
@@ -65,7 +65,6 @@ import {
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
 import { AdminAuthGate }                           from "./admin-auth-gate.js";
-import type { AdminVmResult } from "./open-admin-vm.js";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
@@ -99,7 +98,7 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   rootDir?: string;
 }
 
-export interface NodeVesselResult extends VesselResult<VesselIslandPool, AdminVmResult> {
+export interface NodeVesselResult extends VesselResult<VesselIslandPool, AdminVmCore> {
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz (node substrate). */
   eventBus:  LarEventBusImpl;
   /** Stop the N-accumulator tick loop (call on graceful shutdown). */
@@ -174,7 +173,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
   let vmManager!: VesselIslandPool;        // set in makePool
-  let adminVm!:   AdminVmResult;           // set in openAdmin
+  let adminVm!:   AdminVmCore;           // set in openAdmin
   let eventBus!:  LarEventBusImpl;         // set in makePool
   let bootstrap!: VesselBootstrap;         // captured in loadGenesis
   let slotActiveWikiId = "";               // captured in wikiSlot

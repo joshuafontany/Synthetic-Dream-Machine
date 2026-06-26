@@ -19,9 +19,8 @@
 
 import {
   emptyLarDoc,
-  type Repo, type AutomergeUrl, type DocHandle, type LarDoc,
-  type CompositeStore, type WikiRecipe,
-  type AuthVerifierSeam,
+  type Repo, type AutomergeUrl, type LarDoc,
+  type WikiRecipe,
   type IslandMsg_Manifest,
   type IslandGrants,
 } from "@lararium/mesh";
@@ -29,6 +28,7 @@ import {
   openAdminVmCore,
   VerbTable,
   type AdminVmHost,
+  type AdminVmCore,
 } from "@lararium/tw5";
 import { browserWorkerHandle } from "./worker-handle.js";
 
@@ -52,50 +52,6 @@ export interface BrowserAdminVmOptions {
   workerScriptUrl:  URL;
 }
 
-export interface BrowserAdminVmResult {
-  /** Live admin doc handle — for keyhive gate reads and cap-event writes. */
-  adminHandle:    DocHandle<LarDoc>;
-  /** Single-layer CompositeStore backed by adminHandle. */
-  composite:      CompositeStore;
-  /**
-   * Resolves when the admin island sends "ea" — TW5 live, bags synced,
-   * drain loop running, VerbDispatcher subscribed. Vessel awaits this before "live".
-   */
-  workerEa:       Promise<void>;
-  /**
-   * Wire the vessel delegation registry and verifier.
-   * Call after keyhive boots, before awaiting workerEa.
-   * Jobs arriving before registry is set are rejected.
-   */
-  mountMainVerbs: (registry: VerbTable) => void;
-  /** Place a volatile job in the admin island's TW5 wiki. */
-  placeVerb:       (opts: BrowserVerbPlacementRequest) => void;
-  /**
-   * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
-   * keyhive. Symmetric with the node vessel; the browser island already answers.
-   */
-  authSeam:       AuthVerifierSeam;
-  /**
-   * Resolve (or mint+delegate) the operator's @personal/@draft binding pair for
-   * a recipe fingerprint — runs island-side where keyhive lives.
-   */
-  resolveBinding: (
-    fingerprint: string,
-    recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
-  ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
-  /** Bind the pool eviction MECHANISM (sovereign-worker): the worker commands evict via
-   *  admin:evict-request; main routes it to the pool. Set after the pool exists. */
-  onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
-  /** Bind the residency-op MECHANISM: the worker commands pin/unpin/register-cold; main
-   *  routes to the residency mechanism. Set after the manager/pool exists. */
-  onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
-  /** Bind the wiki-alert DELIVERY: the worker named a wiki whose pending change needs a
-   *  reboot; main places a `system-alert` verb into that wiki's live island. */
-  onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => void;
-  /** Terminate the admin island Worker. */
-  dispose:        () => void;
-}
-
 export { VerbTable };
 export type { VerbTable as BrowserVerbTable };
 export type { VerbReactor } from "@lararium/tw5";
@@ -111,7 +67,7 @@ export interface BrowserVerbPlacementRequest {
 
 export async function openBrowserAdminVm(
   opts: BrowserAdminVmOptions,
-): Promise<BrowserAdminVmResult> {
+): Promise<AdminVmCore> {
   const { repo, adminUrl, coreHash, pluginCids, recipe, grants, adminAuth, workerScriptUrl } = opts;
 
   // ── Admin doc handle (browser strategy: find-or-create) ────────────────────
@@ -132,24 +88,12 @@ export async function openBrowserAdminVm(
     spawnWorker: (url) => browserWorkerHandle(new Worker(url, { type: "module" })),
   };
 
-  const core = openAdminVmCore(host, {
+  // The wrapper IS the seam — host pieces + find-or-create adminHandle; the lifecycle and the
+  // whole result surface (AdminVmCore) live once in the core. Return it directly, no re-spread.
+  return openAdminVmCore(host, {
     repo, adminHandle, recipe, grants, coreHash,
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(adminAuth ? { adminAuth } : {}),
     workerScriptUrl,
   });
-
-  return {
-    adminHandle:    core.adminHandle,
-    composite:      core.composite,
-    workerEa:       core.workerEa,
-    mountMainVerbs: core.mountMainVerbs,
-    placeVerb:      core.placeVerb,
-    authSeam:       core.authSeam,
-    resolveBinding: core.resolveBinding,
-    onEvictRequest: core.onEvictRequest,
-    onResidencyOp:  core.onResidencyOp,
-    onWikiAlert:    core.onWikiAlert,
-    dispose:        core.dispose,
-  };
 }

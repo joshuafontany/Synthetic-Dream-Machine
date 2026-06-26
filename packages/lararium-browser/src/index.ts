@@ -30,6 +30,6 @@ export {
 
 export { openBrowserAdminVm, VerbTable } from "./open-browser-admin-vm.js";
 export type {
-  BrowserAdminVmOptions, BrowserAdminVmResult,
+  BrowserAdminVmOptions,
   BrowserVerbTable, VerbReactor, BrowserVerbPlacementRequest,
 } from "./open-browser-admin-vm.js";

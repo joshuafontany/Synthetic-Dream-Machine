@@ -5,7 +5,7 @@ export { LarDiskProjector } from "./disk-projector.js";
 export { AdminAuthGate } from "./admin-auth-gate.js";
 export { openNodeVessel } from "./open-node-vessel.js";
 export { openAdminVm } from "./open-admin-vm.js";
-export type { AdminVmOptions, AdminVmResult } from "./open-admin-vm.js";
+export type { AdminVmOptions } from "./open-admin-vm.js";
 export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-node-vessel.js";
 
 export { createSessionEventLog, seedAdminDoc } from "@lararium/mesh";
