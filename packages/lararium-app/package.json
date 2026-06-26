@@ -1,0 +1,24 @@
+{
+  "name": "@lararium/app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser-lararium app shell — boots a sovereign browser vessel and (when reachable) reads the public @oracle read-face. Location-agnostic: served from localhost / LAN / elyncia.app, the vessel always runs local; the origin is a static host, never an authority.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lararium/browser": "workspace:*",
+    "@lararium/mesh": "workspace:*",
+    "@automerge/automerge": "^3.2.6",
+    "@automerge/automerge-repo": "2.6.0-alpha.2",
+    "@automerge/automerge-repo-storage-indexeddb": "2.6.0-alpha.2"
+  },
+  "devDependencies": {
+    "vite": "^8.0.10",
+    "vite-plugin-wasm": "^3.6.0",
+    "vite-plugin-arraybuffer": "^0.1.0"
+  }
+}

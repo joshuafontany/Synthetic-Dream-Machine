@@ -1,4 +1,4 @@
-import { createHash } from "crypto";
+import { sha256HexBytesSync } from "@lararium/mesh";
 
 import type { TW5Instance } from "./types/tiddlywiki.js";
 
@@ -27,7 +27,7 @@ export function normalizeCoreBootBlob(input?: TW5CoreBootInput): TW5CoreBootBlob
 
 export function verifyCoreBootBlob(core: TW5CoreBootBlob): void {
   if (!core.sha256) return;
-  const actual = createHash("sha256").update(core.bytes).digest("hex");
+  const actual = sha256HexBytesSync(core.bytes);
   if (actual.toLowerCase() !== core.sha256.toLowerCase()) {
     throw new Error(
       `TW5Engine: coreBlob sha256 mismatch` +

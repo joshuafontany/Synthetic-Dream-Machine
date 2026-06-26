@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lararium — browser vessel</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        font: 15px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: #0d0f14;
+        color: #c9d1d9;
+      }
+      main { max-width: 760px; margin: 6vh auto; padding: 0 1.25rem; }
+      h1 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+      h1 .glyph { opacity: 0.85; }
+      .sub { color: #768390; margin-top: -0.4rem; }
+      .panel {
+        margin-top: 1.5rem; border: 1px solid #21262d; border-radius: 10px;
+        background: #11151c; overflow: hidden;
+      }
+      .panel h2 {
+        margin: 0; padding: 0.6rem 1rem; font-size: 0.78rem; text-transform: uppercase;
+        letter-spacing: 0.08em; color: #768390; border-bottom: 1px solid #21262d; background: #0f1319;
+      }
+      .rows { padding: 0.5rem 1rem 0.9rem; }
+      .row { display: flex; gap: 0.75rem; padding: 0.15rem 0; }
+      .row .k { color: #768390; min-width: 9rem; }
+      .row .v { color: #c9d1d9; word-break: break-all; }
+      #phases .phase { padding: 0.12rem 0; color: #58a6ff; }
+      #phases .phase::before { content: "→ "; color: #3fb950; }
+      .ok { color: #3fb950; } .warn { color: #d29922; } .err { color: #f85149; }
+      .veil { color: #d2a8ff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><span class="glyph">🏛️</span> Lararium — browser vessel</h1>
+      <p class="sub">a sovereign causal island, booting in your browser</p>
+
+      <section class="panel">
+        <h2>boot</h2>
+        <div class="rows" id="phases"></div>
+      </section>
+
+      <section class="panel">
+        <h2>vessel</h2>
+        <div class="rows" id="vessel">
+          <div class="row"><span class="k">status</span><span class="v" id="status">starting…</span></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>@oracle read-face</h2>
+        <div class="rows" id="oracle">
+          <div class="row"><span class="k">status</span><span class="v" id="oracle-status">—</span></div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
