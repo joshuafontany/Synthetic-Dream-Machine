@@ -105,30 +105,40 @@ export async function mountOracleReadFace(args: {
   const ea = setInterval(() => { void reissue(true); }, Math.floor(POINTER_TTL_MS / 2));
   ea.unref();
 
+  // The read-face is the PUBLIC read-only plane — it reads to ANY origin (a node-less
+  // browser vessel on elyncia.app / localhost dev reads cross-origin). Open CORS is
+  // correct + pono here: no credentials, no writes, content verified by hash + signature.
+  const CORS: Record<string, string> = {
+    "access-control-allow-origin":  "*",
+    "access-control-allow-methods": "GET, HEAD, OPTIONS",
+    "access-control-allow-headers": "*",
+  };
   const onRequest = (req: IncomingMessage, res: ServerResponse): void => {
     const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
     if (!pathname.startsWith("/oracle/")) return; // not ours — leave for other handlers
+    if (req.method === "OPTIONS") { res.writeHead(204, CORS); res.end(); return; } // preflight
     if (req.method !== "GET" && req.method !== "HEAD") {
-      res.writeHead(405, { "content-type": "text/plain" });
+      res.writeHead(405, { ...CORS, "content-type": "text/plain" });
       res.end("method not allowed");
       return;
     }
     if (pathname === "/oracle/pointer") {
-      if (!pointer) { res.writeHead(503); res.end("no pointer yet"); return; }
-      res.writeHead(200, { "content-type": "application/json", "cache-control": "no-store" });
+      if (!pointer) { res.writeHead(503, CORS); res.end("no pointer yet"); return; }
+      res.writeHead(200, { ...CORS, "content-type": "application/json", "cache-control": "no-store" });
       res.end(JSON.stringify(pointer));
       return;
     }
     const m = pathname.match(/^\/oracle\/([0-9a-f]{64})\.bin$/);
     if (m && snapshot && m[1] === snapshot.cid) {
       res.writeHead(200, {
+        ...CORS,
         "content-type":  "application/octet-stream",
         "cache-control": "public, immutable, max-age=31536000", // content-addressed → never stale
       });
       res.end(Buffer.from(snapshot.bytes));
       return;
     }
-    res.writeHead(404, { "content-type": "text/plain" });
+    res.writeHead(404, { ...CORS, "content-type": "text/plain" });
     res.end("unknown or stale oracle cid");
   };
   httpServer.on("request", onRequest);

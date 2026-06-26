@@ -31,7 +31,31 @@ function set(id: string, text: string, cls = ""): void {
   const el = $(id); el.textContent = text; el.className = "v " + cls;
 }
 
-async function main(): Promise<void> {
+// The @oracle read-face — the node-less anon-read path. INDEPENDENT of the vessel boot
+// (it reads a public read-face; it must not be gated behind the local vessel coming up).
+// Config-supplied via ?oracle=…, default the local dev node; elyncia.app → a public one.
+async function readOracle(): Promise<void> {
+  const readFace = new URLSearchParams(location.search).get("oracle") ?? "http://localhost:8080";
+  set("oracle-status", `reading ${readFace} …`);
+  try {
+    const r = await pullAndVerifyOracle<{ tiddlers?: Record<string, unknown> }>(readFace);
+    if (r.ok && r.pointer) {
+      const n = r.doc?.tiddlers ? Object.keys(r.doc.tiddlers).length : 0;
+      const oracleEl = $("oracle"); oracleEl.replaceChildren();
+      row(oracleEl, "status", "✓ verified + loaded", "ok");
+      row(oracleEl, "version", `v${r.pointer.version}`);
+      row(oracleEl, "tiddlers", String(n));
+      row(oracleEl, "cid", r.cid ?? "—");
+      row(oracleEl, "publisher", r.pointer.pub.slice(0, 16) + "…");
+    } else {
+      set("oracle-status", `✗ ${r.reason ?? "unavailable"}`, "warn");
+    }
+  } catch (e) {
+    set("oracle-status", `✗ ${e instanceof Error ? e.message : String(e)}`, "warn");
+  }
+}
+
+async function bootVessel(): Promise<void> {
   const phasesEl = $("phases");
   const paint = (p: string): void => {
     const d = document.createElement("div"); d.className = "phase"; d.textContent = p;
@@ -65,27 +89,8 @@ async function main(): Promise<void> {
   } catch (e) {
     set("status", `boot failed: ${e instanceof Error ? e.message : String(e)}`, "err");
   }
-
-  // The @oracle read-face — the node-less anon-read path. Config-supplied via ?oracle=…,
-  // default the local dev node; elyncia.app would point this at a public read-face.
-  const readFace = new URLSearchParams(location.search).get("oracle") ?? "http://localhost:8080";
-  set("oracle-status", `reading ${readFace} …`);
-  try {
-    const r = await pullAndVerifyOracle<{ tiddlers?: Record<string, unknown> }>(readFace);
-    if (r.ok && r.pointer) {
-      const n = r.doc?.tiddlers ? Object.keys(r.doc.tiddlers).length : 0;
-      const oracleEl = $("oracle"); oracleEl.replaceChildren();
-      row(oracleEl, "status", "✓ verified + loaded", "ok");
-      row(oracleEl, "version", `v${r.pointer.version}`);
-      row(oracleEl, "tiddlers", String(n));
-      row(oracleEl, "cid", r.cid ?? "—");
-      row(oracleEl, "publisher", r.pointer.pub.slice(0, 16) + "…");
-    } else {
-      set("oracle-status", `✗ ${r.reason ?? "unavailable"}`, "warn");
-    }
-  } catch (e) {
-    set("oracle-status", `✗ ${e instanceof Error ? e.message : String(e)}`, "warn");
-  }
 }
 
-void main();
+// Run both independently — the @oracle read never waits on the vessel boot.
+void readOracle();
+void bootVessel();
