@@ -35,13 +35,9 @@ const COALESCE_MS = 24;
 export function mountProjection(ctx: IslandContext): () => void {
   const tw = (ctx.tw5 as unknown as { $tw: Record<string, any> }).$tw;
   const fakeDoc = tw.fakeDocument;
-
-  // Brand the hearth: set $:/SiteTitle/$:/SiteSubtitle as ORDINARY tiddlers (they outrank the
-  // $:/core "My TiddlyWiki" shadow) unless the user already set their own. NOTE: the pono home is
-  // the CID-carried boot-shadows blob — but its agnostic startup does not yet execute in the wiki
-  // worker (a plugin-loading-path gap, the next investigation); seeded here meanwhile.
-  if (!tw.wiki.tiddlerExists("$:/SiteTitle"))    tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteTitle",    text: "Lararium" }));
-  if (!tw.wiki.tiddlerExists("$:/SiteSubtitle")) tw.wiki.addTiddler(new tw.Tiddler({ title: "$:/SiteSubtitle", text: "Welcome to the DreamNet" }));
+  // ($:/SiteTitle "Lararium" + $:/SiteSubtitle "Welcome to the DreamNet" ride the lares plugin
+  //  blob as source tiddlers — tiddlers/site-{title,subtitle}.tid — CID-carried, ratchet via
+  //  re-genesis, user-overridable (a plugin shadow loaded after $:/core, overridden by ordinary).)
 
   // Story camera — the default TW5 view frustum, rendered into the fake DOM. mountCamera owns
   // the live `change → widget.refresh()` loop; we re-snapshot on the same change beat.
