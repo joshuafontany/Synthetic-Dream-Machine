@@ -48,6 +48,8 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 <<~Lock 7-idempotency "content-key watermark (sha of exchange text, NOT uuid) = re-ingest is a no-op + survives across surfaces; mempalace source_file dedup backs it. version-gate (lar_hv) governs re-derivation, ORTHOGONAL" >>
 <<~Lock 8-busy-is-retryable "the palace lock is the cross-process coordination — a held lock (MineAlreadyRunning) is a BUSY signal (= SQLITE_BUSY), not an error; every writer retries with backoff+jitter. live+bulk coexist through the one lock (verified: 0 failures, pave 33619)" >>
 <<~Lock 9-one-runtime "ONE RUNTIME — the @daemon TW5 VM is the SOLE ingest + gradient runtime. DROP every outside-VM path: turn-harvest.ts/harvestTurnGradient RETIRES (no regex shadow, no VM-free projection, no fallback), no CLI-side annotate, no daemon-down direct-mine. Verbatim-always rides the DURABLE TRANSCRIPT (harness-written, always on disk) REPLAYED through the VM when it wakes — never an outside-VM mine. One grammar, one runtime, no fork to keep in lockstep" >>
+<<~Lock 10-superset "memetic-wikitext ⊃ TW5 wikitext — THREE NESTED TIERS: host TW5 wikitext (Jeremy's grammar, untouched) ⊂ +OVERLAY (our `<<~` SharktoothSigils, tokenizer-claimed FIRST) ⊂ +GUEST grammars (nakama, `hana`-bounded blocks). TWO realizations: (R) RENDER — the lares plugin registers `<<~` as a wikirule in TW5's own $tw wikiparser so TW5 parses ALL native wikitext, our overlay claims only sigil tokens (the Markdoc/MDX tokenizer-overlay pattern, host untouched); (A) meme-ast PARSE-TREE — standalone, opaque to TW5: only sigils are typed nodes, host wikitext rides as verbatim TextNodes (byte-exact raw slice). The host-passthrough is BY DESIGN, not a gap — host wikitext round-trips byte-exact via TextNode+verbatim; TW5-typed nodes deferred (no consumer needs structural queries over host wikitext). Guest grammar plugs in via an interpreter tiddler at lar:///…/hana-interpreter/<key>; the bounded hana block fences it from host+overlay tokens" >>
+<<~Lock 11-drawer-schema "DROP the flat lar_* index. DRAWER = { verbatim content (the document/embedding) + metadata{ `lar_hv`:int · `lar_ast`:JSON-string of the GRADED meme-ast } }. The AST holds the whole gradient (buildPatch only PROJECTED from it — flat fields were redundant+lossy). KEEP FLAT only: `lar_hv` (the idempotency watermark, read every sweep client-side — never re-parse the tree for a version#) + the existing non-lar `wing` (the one chroma `where` filter). chroma metadata is flat (str|num|bool) so the AST rides as a JSON STRING (unfilterable by `where` — and nothing filters lar_* today, blast radius ~0). EXTRINSIC provenance (lar_surface · lar_agent_handle · lar_parent_handle · lar_root_handle · lar_sidechain · lar_ffz — NOT parse-derivable from prose) folds into the AST as an `envelope` provenance node, so the tree stays the single structural source. READ: semantic vector recall on verbatim (+ optional where{wing}) → re-hydrate `lar_ast` in the VM island → structural predicates (band≥X, voice∈{}, drift, aim) POST-recall — strictly MORE capable than today's flat filter" >>
 
 <<~/ahu >>
 
@@ -55,18 +57,27 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 
 ## Migration (the circle-back work, after FFZ)
 
-**BUILD:** (1) an exchange-assembler producer (`readExchanges` — pairs user+assistant into one
-`CaptureRecord`) feeding the `capture` verb, replacing `readTurns` for the DRAWER leg (keep
-`readTurns` for the separate per-message bearing-index) · (2) route ALL historical ingest through
-the nalu (Kappa replay: `runHarvestAll` → the `capture` verb per wing, not `convo_miner` directly) ·
-(3) `mine_palace_lock` + busy-retry around `drawer_io.py cmd_apply` + the `writebackWing` apply leg ·
-(4) gate `writebackWing` on a `lar_hv` bump only (remove the per-ingest call from `runHarvestAll`).
+**BUILD (ordered):** (1) **register the turn sigils** as gradient-valued SharktoothSigil tids —
+`lares aim/yield · confidence · hud · ward · oracle · syad` (word + gradient-reading + render) so the
+engine parses TURNS, not just documents. (2) **the VM gradient module** (lararium-tw5): `parseMemeText`
+→ walk the graded AST → grade-on-a-gradient (emit `MalformedSigil`/`PartialNode` w/ parse-confidence
+for drifted/unclosed sigils) → the graded meme-ast + an `envelope` provenance node (surface/handles/
+sidechain/ffz). (3) **wire the cap→VM seam** — thread `ctx.tw5` to the annotate; the cap calls the VM
+module (annotate is sync, `parseMemeText` sync in-worker). (4) **drawer-write** — `buildPatch` →
+`lar_ast = JSON.stringify(graded AST + envelope)` + `lar_hv`; DROP the flat `lar_*`; rewrite
+`LAR_SCHEMA` (adapter.py) to declare only `lar_hv`+`lar_ast`; bump `LAR_HV` 6→7 (lockstep
+telemetry-writeback.ts:32 + drawer_io.py:32) → next harvest re-projects stale drawers' METADATA
+(verbatim untouched — a metadata re-harvest, not a re-ingest). (5) **read-side helper** (lararium-tw5):
+re-hydrate `lar_ast` + structural-filter POST-recall. (6) **exchange-assembler** (`readExchanges` —
+done for live; route historical through the VM, Kappa replay). (7) `mine_palace_lock`+busy-retry around
+the version-gated `writebackWing`/`drawer_io cmd_apply` re-derive ceremony.
 
 **RETIRE (one runtime — no fallback):** `turn-harvest.ts`/`harvestTurnGradient` (the VM-free regex
-shadow) ENTIRELY · `convo_miner --extract exchange` (pairing moves into the producer; the VM is the
-sole decomposer) · the daemon-down direct-mine fallback (verbatim-always = the durable transcript
-replayed through the VM, not an outside-VM mine) · `writebackWing`-as-per-ingest (→ version-bump
-backfill only). No outside-VM path survives.
+shadow) ENTIRELY · the FLAT `lar_*` projection (band/voices/aim/… → all in the AST now) · `convo_miner
+--extract exchange` (pairing moves into the producer; the VM is the sole decomposer) · the daemon-down
+direct-mine fallback (verbatim-always = the durable transcript replayed through the VM, not an
+outside-VM mine) · `writebackWing`-as-per-ingest (→ version-bump backfill only). No outside-VM path,
+no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter · the `wing` filter: unchanged.)
 
 <<~/ahu >>
 
