@@ -50,7 +50,9 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
     const path = join(opts.spoolDir, `batch-${seq++}.ndjson`);
     await writeFile(path, batch.map((r) => JSON.stringify(r)).join("\n") + "\n", "utf-8");
     try {
-      const { stdout } = await spawn(bin, ["mine", "--source", "ndjson", "--palace", opts.palacePath, path]);
+      // `--palace` is a GLOBAL option — it MUST precede the `mine` subcommand
+      // (`mempalace --palace <p> mine …`); after the subcommand argparse rejects it.
+      const { stdout } = await spawn(bin, ["--palace", opts.palacePath, "mine", "--source", "ndjson", path]);
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
     } finally {

@@ -80,7 +80,14 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
       const e = makeEngine(post);
       engine = e;
       await e.recover(); // open sessions survive a restart (WAL replay)
-      timer = setInterval(() => void e.tick(Date.now()), tickMs);
+      // The tick RE-THROWS a flush failure (engine signals the caller); the driver MUST catch it —
+      // a telemetry flush error rides the nalu's WAL/backoff and MUST NEVER crash the vessel (an
+      // unhandled rejection from `void e.tick()` killed the daemon: drop-honesty over silent death).
+      timer = setInterval(() => {
+        e.tick(Date.now()).catch((err: unknown) => {
+          console.warn(`[has-capture] tick flush failed — WAL/backoff will retry: ${err instanceof Error ? err.message : String(err)}`);
+        });
+      }, tickMs);
       return async () => {
         if (timer) clearInterval(timer);
         try {
