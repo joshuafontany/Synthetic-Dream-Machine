@@ -27,6 +27,38 @@ We are not inventing — we are NAMING what we already half-do (island grammar +
 
 <<~/ahu >>
 
+<<~ ahu #the-tower >>
+
+## The superset tower ~ HTML ⊂ TW5 wikitext ⊂ memetic-wikitext
+
+The grammar is a NESTED SUPERSET TOWER — each layer a strict superset of the one below — and the
+WHOLE stack degrades on the same gradient:
+
+- **HTML** — the base. TW5 wikitext parses raw HTML inline (VERIFIED: the core `html.js` · `entity.js`
+  · `commentblock.js` · `commentinline.js` wikirules), so **TW5 wikitext ⊃ HTML**.
+- **TW5 wikitext** ⊃ HTML — and memetic INHERITS it: the `MemeticParser` subclass filters the core
+  rule arrays by a deny-list that defaults EMPTY (`memetic-parser.ts:88`), so every core rule (incl.
+  `html`) fires in a memetic doc.
+- **memetic-wikitext** ⊃ TW5 wikitext (lock 10: the `<<~` overlay, disjoint-match) — an ISLAND
+  GRAMMAR that panics-to-water.
+
+**The never-fail FLOOR (the deep elegance).** Panic-to-water at the memetic layer yields VERBATIM
+TEXT; verbatim text renders as escaped HTML text; **HTML text always renders.** So water falls all the
+way down the tower to HTML-text, which cannot fail — the tower has a GUARANTEED never-fail ground.
+Every malformation, however severe, degrades to "verbatim bytes shown as text," never a crash. The
+gradient and its floor are now structural, not aspirational.
+
+**HTML5 is the canonical exemplar.** The HTML5 parsing algorithm (tag-soup → a valid DOM, explicit
+error-recovery for every malformation, the browser NEVER fails to parse) is THE gold-standard
+never-fail parser — the property our whole tower emulates upward. We make TW5 wikitext + memetic match
+the never-fail guarantee HTML already holds at the base.
+
+*Precision:* the nesting is SYNTACTIC containment; TW5 parses HTML via its own `html` wikirule, not the
+literal HTML5 tree-construction algorithm. The never-fail GUARANTEE at our floor rests on "water =
+verbatim text always renders," with HTML5 as the conceptual exemplar — not on running the HTML5 parser.
+
+<<~/ahu >>
+
 <<~ ahu #the-model >>
 
 ## The model ~ the five production invariants (the keel)
