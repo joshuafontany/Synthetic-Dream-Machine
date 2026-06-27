@@ -93,10 +93,17 @@ already-island-shaped parser.
 3. **phrase-level recovery** in `findCloseEnd` (`lar-sigil-shared.ts:202`) + the builder EOF sweep —
    bound a force-closed frame at the next blank line / next opener instead of swallowing to EOF.
 
-**WRAP** for full TW5 core wikitext (can't edit `$:/core` rule classes = fork-in-disguise): the
-`MemeticParser` subclass already owns the seam (`memetic-parser.ts:85-103`) — run the standard parse
-inside a tolerant guard that catches throws + downgrades the malformed span to a graded `Error`/Text
-node before it reaches the widget renderer (panic-mode-to-water at the WHOLE-parser boundary).
+**WRAP** for full TW5 core wikitext — **NO FORK NEEDED, plugin-override-preload (VERIFIED).** TW5
+builds its parser registry at `wiki.js:1030` via `forEachModuleOfType("parser", … $tw.Wiki.parsers[f]
+= module[f])` — **LAST-REGISTERED WINS** on a duplicate content-type, and plugin modules load AFTER
+core. So a plugin `module-type: parser` that does `exports["text/vnd.tiddlywiki"] = TolerantWikiParser`
+(subclass the core `WikiParser` — `wikiparser.js:494` — and run `parse()` inside a tolerant guard that
+catches throws + downgrades the malformed span to a graded `Error`/Text node) **OVERRIDES core for ALL
+standard wikitext** — identical to how `memetic-parser.ts:106` already registers ours for
+`text/x-memetic-wikitext`, just aimed at the default type. Panic-mode-to-water at the WHOLE-parser
+boundary, zero `$:/core` edits. FINER per-rule recovery (recovery-sets in the block/inline rules) is
+ALSO plugin-overridable by the same last-wins rule — a `module-type: wikirule` exporting an existing
+rule name shadows it. The operator's submodule-fork grant is a held SAFETY-NET, expected UNUSED.
 
 **THE REUSABLE MODULE (the operator's "lift complexity into another module"):** extract a tolerant-
 parse substrate — `meme-ast/recover.ts` (or `@lararium/parse-substrate`) — exporting: Water/Island/Lake
