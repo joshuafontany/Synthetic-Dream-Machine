@@ -53,9 +53,43 @@ error-recovery for every malformation, the browser NEVER fails to parse) is THE 
 never-fail parser — the property our whole tower emulates upward. We make TW5 wikitext + memetic match
 the never-fail guarantee HTML already holds at the base.
 
-*Precision:* the nesting is SYNTACTIC containment; TW5 parses HTML via its own `html` wikirule, not the
-literal HTML5 tree-construction algorithm. The never-fail GUARANTEE at our floor rests on "water =
-verbatim text always renders," with HTML5 as the conceptual exemplar — not on running the HTML5 parser.
+**The floor becomes LITERAL — adopt parse5 (research-locked, spirit a95eec97).** We make the base the
+*real* WHATWG algorithm instead of an exemplar: **parse5** (v8.0.1, pure-JS WHATWG-compliant, isomorphic
+ESM — the engine under jsdom/Angular/Cheerio; fits Vite/worker/browser/edge). DOMParser (browser-only,
+absent in worker_threads/CLI/edge), jsdom (heavy, edge-hostile), htmlparser2 (forgiving but NO real
+tree-construction) all disqualified for the base. parse5 is a PURE PARSING SUBSTRATE (string→AST, no
+network/accounts/ontology) — same class as Automerge/keyhive → PONO, sits inside the stack, no
+causal-island boundary.
+
+**Integration — parse5 at the FLOOR, NOT a wholesale `html`-rule replacement.** Load-bearing reason
+(from the code): TW5's `html` wikirule is WIKITEXT-AWARE — it parses an element's children as wikitext
+(`html.js:59` `parseBlocks`, `:62` `parseInlineRun`), so `<div>''bold'' and a <$widget/></div>`
+interleaves HTML + wikitext + widgets. A whole-subtree parse5 pass would swallow that interior as opaque
+HTML and DESTROY widget invocation. parse5 governs the HTML LAYER, never the layer above. So:
+- PRIMARY: parse5 IS the never-fail FLOOR — the water→verbatim-text→HTML path + any pure-HTML fragment
+  ingest route through parse5's fragment parser (at the floor you've panicked OUT of wikitext → pure
+  HTML → no interleaving to preserve → tag-soup→valid-DOM is the never-fail guarantee). Bridge = a
+  post-parse TRANSFORM (parse5 AST → TW5 `{type:"element",tag,attributes,children}` nodes), NOT a custom
+  tree-adapter (version-stable + gives the sanitizer one clean walk). Plugin-override (`module-type`,
+  last-wins, like `memetic-parser.ts`); isomorphic (fakeDocument only, no `window.document`).
+- SECONDARY (optional, later): upgrade ONLY the wikirule's tag SCANNER (`html.js:93,103,161` — the thin
+  `reTagName` regex = the "TW5-era HTML" surface) with parse5's tokenizer, keeping TW5's wikitext
+  child-recursion. HTML5 attribute/error-recovery without touching interleaving.
+
+**Sanitize seam (CRITICAL) — allowlist tree-walk IN the transform, NOT DOMPurify.** A spec parser parses
+`<script>`/`onerror=`/`javascript:`/`<iframe srcdoc>` faithfully → XSS surface. DOMPurify needs a real
+DOM/`window` (not Worker-safe; `isomorphic-dompurify` drags jsdom = heavy + a 2nd redundant parser). The
+parse5→TW5 transform ALREADY walks every node → fold an allowlist sanitizer into that one walk (tag
+allowlist + per-tag attribute allowlist + URL-protocol check dropping `javascript:`/`data:` except image
+data-URLs + drop `on*`), seeded from sanitize-html's default set but as our own pure function over the
+AST (zero DOM, zero extra parser, isomorphic). KEEP TW5's existing render gate as layer 2 (`element.js:31`
+script-neuter · `widget.js:521` `on*`-strip · `config.js:36`); the allowlist closes TW5's open holes
+(`javascript:`/`data:` URLs, `iframe`/`object`/`embed`, `srcdoc`, `form action`, SVG/MathML script vectors).
+
+**Modern HTML5 gained** (TW5's `html.js` has NO insertion-mode state machine): real tag-soup recovery
+(insertion modes + adoption agency), foreign content (inline SVG/MathML namespaces), `<template>` ·
+`<slot>` · custom elements (TW5 rejects leading-dash `html.js:187` + strips non-alphanumeric tag names
+`element.js:34`), raw-text/RCDATA elements (`<style>`/`<textarea>`/`<title>`).
 
 <<~/ahu >>
 
