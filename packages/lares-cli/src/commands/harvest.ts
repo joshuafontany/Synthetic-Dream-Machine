@@ -143,6 +143,29 @@ function readTurns(file: string): RawTurn[] {
   return turns;
 }
 
+/**
+ * The EXCHANGE-ASSEMBLER (the ingest canon's drawer grain): pair each user turn with the assistant
+ * response(s) that follow into ONE unit — the self-contained recall drawer (a bare "yes do it" or an
+ * answer shorn of its question retrieves poorly). The user side carries a `>` quote prefix (the convo
+ * grain mempalace already uses); the assistant side carries the authored sigil instruments the
+ * gradient reads. Orphan turns (user with no answer, answer with no question) flush as-is.
+ */
+function readExchanges(file: string): RawTurn[] {
+  const out: RawTurn[] = [];
+  let q: RawTurn | null = null;
+  for (const t of readTurns(file)) {
+    if (t.role === "user") {
+      if (q) out.push(q); // a prior question never got an answer — flush it alone
+      q = { ...t, text: "> " + t.text.replace(/\n/g, "\n> ") };
+    } else {
+      if (q) { q.text += "\n\n" + t.text; out.push(q); q = null; }
+      else out.push(t); // an answer with no preceding question
+    }
+  }
+  if (q) out.push(q);
+  return out;
+}
+
 function sha(s: string): string {
   return createHash("sha256").update(s).digest("hex").slice(0, 16);
 }
@@ -464,14 +487,13 @@ function runHarvestAll(args: ParsedArgs): number {
     }
     let mined: number | string = 0;
     try {
-      // The BULK backfill is the SOLE bulk writer (isolated re-pave) — it BYPASSES the daemon seam
-      // (the seam serializes CONCURRENT live writers; funnelling the batch through one long-lived
-      // process choked on cumulative chroma/HNSW state). Direct fresh-process-per-wing + retry on
-      // the palace-lock busy signal: a rare overlap with a live flush is a retryable MineAlreadyRunning.
+      // INTERIM (committed-functional): direct convo mine + retry-on-lock. The CANON target is to
+      // route this through the @daemon WORKER's nalu (the worker holds the grammar to annotate inside
+      // the TW5 VM) — born-annotated single-write through the nalu gates, not a CLI-side annotate.
+      // Pending the worker-routing build (scale decision: per-exchange capture verbs vs a batch verb).
       const out = mineWithRetry(["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares"]);
       mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
     } catch (e) {
-      // Surface the real reason (the spirit's guard — failures used to vanish into a bare string).
       mined = "mine-failed: " + String((e as { stderr?: unknown }).stderr ?? (e as Error).message ?? "").trim().slice(0, 160);
     }
     results.push({ wing, transcripts: es.length, sources, mined, writeback: writebackWing(wing) });
@@ -631,7 +653,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
   outer:
   for (const file of files) {
     const src = basename(file);
-    for (const turn of readTurns(file)) {
+    for (const turn of readExchanges(file)) {       // exchange-grain drawer (the ingest canon)
       const key  = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);
       if (state[key] === hash) continue;            // already captured (idempotent)
@@ -664,8 +686,8 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       // backfill or another session's fallback may hold it) — graceful, no lost drawer.
       mineWithRetry(["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"]);
       fellBack = true;
-      // The direct mine landed these turns — mark them so the nalu won't double next run.
-      for (const file of files) for (const turn of readTurns(file)) {
+      // The direct mine landed these exchanges — mark them so the nalu won't double next run.
+      for (const file of files) for (const turn of readExchanges(file)) {
         const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
         next[key] = sha(turn.text);
       }
