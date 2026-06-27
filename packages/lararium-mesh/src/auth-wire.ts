@@ -362,3 +362,18 @@ export async function runPeerHandshake(h: PeerHandshake): Promise<{ ok: boolean;
   if (isLarAuthDeniedMsg(verdict)) return { ok: false, reason: verdict.reason };
   return { ok: false, reason: "unexpected message after lar:auth" };
 }
+
+/**
+ * LeafIdentity — the LIGHT sovereign identity a leaf actor carries to the peer gate: a cached
+ * self-certifying ContactCard + a bare-Ed25519 signer (no keyhive). Platform-blind: the node loads
+ * it from disk (`loadLeafIdentity`), the browser builds it from its operatorSeed + founding card.
+ * Lifted here (from node) so both vessels — and the isomorphic LarWSClientAdapter — share one core.
+ */
+export interface LeafIdentity {
+  /** The cached self-certifying ContactCard JSON, re-presented each handshake. */
+  contactCard: string;
+  /** The operator verifying-key hex — the leaf's claimed identity. */
+  peerPubKey:  string;
+  /** Bare-Ed25519 signer over the operator seed → hex. No keyhive. */
+  sign:        (bytes: Uint8Array) => Promise<string>;
+}

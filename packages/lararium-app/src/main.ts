@@ -110,6 +110,8 @@ async function bootVessel(): Promise<void> {
   } catch { /* surfaced via boot status if it also fails */ }
 
   set("status", "booting…");
+  // ?relay=ws://host:port/ws → the node↔browser spore crossing (opt-in; absent = pure local boot).
+  const relayUrl = new URLSearchParams(location.search).get("relay") ?? undefined;
   try {
     const result = await openBrowserVessel({
       hostId: "elyncia-browser",
@@ -119,6 +121,7 @@ async function bootVessel(): Promise<void> {
       workerScriptUrl,
       onPhase: paint,
       onProjection: applyProjection,
+      ...(relayUrl ? { relayUrl } : {}),
     });
     _sendDomEvent = result.sendDomEvent;        // arm the interactivity RETURN leg
     const vesselEl = $("vessel"); vesselEl.replaceChildren();

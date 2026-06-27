@@ -76,5 +76,7 @@ export {
 export type {
   AuthWireVersion,
   LarChallengeMsg, LarAuthMsg, LarAuthOkMsg, LarAuthDeniedMsg, LarAuthWireMsg,
-  AuthProofWire, PeerHandshake,
+  AuthProofWire, PeerHandshake, LeafIdentity,
 } from "./auth-wire.js";
+export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";
+export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";

@@ -17,17 +17,12 @@
  */
 
 import { ed25519SignerFromSeed } from "@lararium/mesh";
+import type { LeafIdentity } from "@lararium/mesh";
 import { loadVesselSigningSeed, loadVesselVerifyingKey, loadVesselCard } from "./node-vessel-identity.js";
 
-export interface LeafIdentity {
-  /** The cached self-certifying ContactCard JSON, re-presented each handshake. */
-  contactCard: string;
-  /** The operator verifying-key hex — the leaf's claimed identity (the relay's
-   *  keyhive derives the same key as the suffix of the card-resolved Identifier). */
-  peerPubKey:  string;
-  /** Bare-Ed25519 signer over the operator seed → hex. No keyhive. */
-  sign:        (bytes: Uint8Array) => Promise<string>;
-}
+// LeafIdentity lifted to platform-blind mesh (both vessels + the isomorphic adapter share it);
+// re-exported here for back-compat with node consumers.
+export type { LeafIdentity } from "@lararium/mesh";
 
 /**
  * Load the operator's light leaf identity from disk (seed + cached card). Throws

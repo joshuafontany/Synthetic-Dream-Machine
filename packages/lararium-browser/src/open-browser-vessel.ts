@@ -21,6 +21,7 @@ import {
   emptyLarDoc, mutableLarRecord,
   CATALOG_DOC_URI, ADMIN_BAG_ID,
   ENGINE_CORE_ID,
+  ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
@@ -63,6 +64,8 @@ interface BrowserBootstrap extends VesselBootstrap {
   signerDid:             string;
   /** This vessel's self-signed device-delegation edge — the public binding the Binding Gate verifies. */
   deviceEdge:            DeviceDelegationTiddler;
+  /** Cached self-certifying ContactCard JSON (founding) — the leaf identity for the V3 peer gate. */
+  contactCard?:          string;
 }
 
 interface BootKeyReads {
@@ -110,6 +113,10 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   genesisBytes?:   Uint8Array;
   /** Automerge URL of a peer's genesis island doc (Tier-1 peer-sync; from DeviceAdmitPayload). */
   islandDocUrl?:   string | null;
+  /** Relay gate URL (ws://host:port/ws) to dial for the node↔browser spore crossing. When set (and
+   *  a founding card is cached), the vessel composes the V3 leaf transport (LarWSClientAdapter) and
+   *  adds it to the Repo — the browser's outbound crossing. */
+  relayUrl?:       string;
   /** URL of the compiled browser admin island Worker script. */
   adminWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
@@ -152,7 +159,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
     genesisBytes, islandDocUrl: admitIslandDocUrl,
-    adminWorkerUrl, workerScriptUrl, onProjection,
+    adminWorkerUrl, workerScriptUrl, onProjection, relayUrl,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -185,10 +192,30 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, adminUrl: f.adminUrl,
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, deviceEdge: f.founderEdge,
+      contactCard: f.contactCardJson,
     };
     bootKeyWrites.bootstrap = bootstrap;
   }
   const social = bootstrap;   // narrowed (defined past this point)
+
+  // ── The spore crossing — the outbound V3 leaf transport (opt-in via relayUrl) ──────────────
+  // When a relay URL is given AND a founding card is cached, compose the platform-blind
+  // LarWSClientAdapter and add it to the Repo: the browser dials the node's gate, runs the V3
+  // handshake on the socket, and — on a passing verdict — syncs shared docs (the second spore).
+  // FLOW ⊥ AUTHORITY: this is pure authority+sync; the nalu servo / ea-backpressure rides later.
+  // NOTE: the gate admits only a peer holding cap=admin on the node's @admin — a same-operator leaf
+  // (gatePubKey == own DID) or a device-admitted key. An un-admitted anon dials + fails closed.
+  if (relayUrl && social.contactCard) {
+    const leaf: LeafIdentity = {
+      contactCard: social.contactCard,
+      peerPubKey:  operatorDid,
+      sign:        ed25519SignerFromSeed(operatorSeed),
+    };
+    const relayAdapter = new LarWSClientAdapter({
+      url: relayUrl, identity: leaf, aud: ADMIN_BAG_ID, gatePubKey: operatorDid,
+    });
+    repo.networkSubsystem.addNetworkAdapter(relayAdapter);
+  }
 
   // ── Catalog ────────────────────────────────────────────────────────────────
   const blankCatalog = (): DocHandle<LarDoc> => {
