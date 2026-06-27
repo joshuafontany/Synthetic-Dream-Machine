@@ -433,7 +433,10 @@ function runHarvestAll(args: ParsedArgs): number {
     }
     let mined: number | string = 0;
     try {
-      const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares"], { maxBuffer: 1 << 30, encoding: "utf8" });
+      // --daemon routes the backfill mine through the write-daemon seam (serialized against one
+      // palace handle) so it never races a live per-session hook mine. (The capture FALLBACK at
+      // the daemon-DOWN path stays a direct mine — there's no daemon to hand off to there.)
+      const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares", "--daemon"], { maxBuffer: 1 << 30, encoding: "utf8" });
       mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
     } catch { mined = "mine-failed"; }
     results.push({ wing, transcripts: es.length, sources, mined, writeback: writebackWing(wing) });

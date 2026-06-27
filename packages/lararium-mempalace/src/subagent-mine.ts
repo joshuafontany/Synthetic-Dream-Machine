@@ -135,9 +135,12 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
     try { linkSync(af, dst); } catch { try { copyFileSync(af, dst); } catch { continue; } }
     let drawers: number | string = 0;
     try {
+      // --daemon HANDS OFF to the write-daemon's single palace handle (the seam) — the subagents
+      // leg was the confirmed racer that grabbed the lock and blocked the telemetry-nalu flush.
+      // Every writer through the seam = nothing races. (--mode convos --daemon is daemon-supported.)
       const out = execFileSync(
         mpExe,
-        ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name],
+        ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
         { maxBuffer: 1 << 30, encoding: "utf8" },
       );
       drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
