@@ -91,6 +91,31 @@ script-neuter · `widget.js:521` `on*`-strip · `config.js:36`); the allowlist c
 `<slot>` · custom elements (TW5 rejects leading-dash `html.js:187` + strips non-alphanumeric tag names
 `element.js:34`), raw-text/RCDATA elements (`<style>`/`<textarea>`/`<title>`).
 
+**GROUND STATE — ENACTED + TESTED (2026-06-27, commit d0ef291c).** The ground-state logic ships now,
+before CID/consumers ratchet the tree shape: `packages/lararium-tw5/src/wikirules/lar-html5-tag.ts`
+(`module-type: library`) — `parseHtml5OpenTag(source,pos)` (parse5 → TW5 parse-tree shape, full HTML5
+attrs + error-recovery, never throws) + `sanitizeHtml5Tag` (parse-time safe-by-construction; verbatim
+stays lossless). **9/9 unit tests green** (modern attrs · recovery · self-closing · all XSS vectors).
+parse5 added to @lararium/tw5.
+
+**SECURITY AUDIT (enacted in the sanitizer).** TW5's only render gates: `script`→`safe-script`
+(`element.js:31`, `config.js:36` — `script` ALONE), `on*`-strip (`widget.js:521`), tag-name clean to
+`[0-9a-zA-Z-]` (`element.js:35`). OPEN HOLES TW5 leaves: `javascript:`/`vbscript:`/non-image-`data:`
+URLs in href/src/xlink:href/action/srcdoc/…, and `iframe`/`object`/`embed`/`base`/`form`/`frame*`/
+`noscript`. `sanitizeHtml5Tag` closes all of them (unsafe → `safe-*`, dangerous schemes emptied seeing
+through control-char obfuscation, `on*` dropped) — defense-in-depth layered over TW5's render gates.
+
+**LIVE WIRING — designed, GATED on a VM integration test (NOT yet activated).** The `html`-rule shadow
+(`module-type: wikirule`, `name:"html"`, last-wins) = DELEGATION: re-export TW5's `parse`/`findNextMatch`/
+`findNextTag`/`isLegalTag` VERBATIM (zero copy), override ONLY `parseTag` → if the tag is `$`-prefixed
+(a widget) or parse5 declines, call `stdHtml.parseTag` (widget dispatch + child-recursion EXACTLY
+preserved); else `parseHtml5OpenTag` + re-apply `requireLineBreak` (block mode). The shadow re-exports
+`require("$:/core/.../html.js")` members, which resolve ONLY inside a booted VM — so it CANNOT be
+unit-tested; it MUST pass a full-VM integration test (widgets + HTML + modern attrs + malformed all
+render correctly) before the plugin is rebuilt to activate it. A `wikirule`-typed file auto-activates
+via `discoverModules()` on the next plugin build, so the file is deliberately NOT created until that
+test rides with it — never a latent, untested override of the rule that dispatches EVERY widget.
+
 <<~/ahu >>
 
 <<~ ahu #the-model >>
