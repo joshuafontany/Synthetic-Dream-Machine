@@ -11,7 +11,7 @@ manaoio   = 17
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "lar-telemetry — the process by which the @admin TW5 engine reads a turn's instrument sigils (the gauges) into gradient-valued readings, holds them on the nalu queue, and flushes on the next wave to project lar_* onto the mempalace drawer; the chat sigils as SharktoothSigil instruments; gradient readings never verdicts; verbatim-always / telemetry-eventual; @admin owns it all"
+role      = "lar-telemetry — the process by which the @daemon TW5 engine reads a turn's instrument sigils (the gauges) into gradient-valued readings, holds them on the nalu queue, and flushes on the next wave to project lar_* onto the mempalace drawer; the chat sigils as SharktoothSigil instruments; gradient readings never verdicts; verbatim-always / telemetry-eventual; @daemon owns it all"
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -30,7 +30,7 @@ written   = "2026-06-24"
 **A turn carries instruments; lar-telemetry reads them.** The HUD sigils gauge
 the turn — `hud` the aperture/loop dials, `confidence` the certainty vow, `ward`
 the L-Prime drift-register, `oracle` the entropy meter, `lares` the bearing. The
-@admin TiddlyWiki engine reads those instruments into **gradient-valued
+@daemon TiddlyWiki engine reads those instruments into **gradient-valued
 readings**, holds them on the nalu queue, and on the next wave flushes them across
 the shore as `lar_*` onto the mempalace drawer.
 
@@ -47,8 +47,8 @@ four-spirit grounding pass over the live parser and the TW5 framework).
 the mine. A producer reads the instruments AND the verbatim in ONE forward pass — a
 born-annotated record enqueued to the unified capture-nalu and flushed on the local tick
 through the RFC-002 source-adapter; mempalace FILES, never mines. And the writer is a
-SEPARATE LOCAL **non-federated** worker-VM, NOT the federated @admin — work-memory is a
-local island; @admin's part here retires to the federated mesh plane. The `lar_hv` sweep
+SEPARATE LOCAL **non-federated** worker-VM, NOT the federated @daemon — work-memory is a
+local island; @daemon's part here retires to the federated mesh plane. The `lar_hv` sweep
 stays only as a legacy-drawer backfill. Depth:
 lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#forward-facing-nalu.
 
@@ -71,11 +71,11 @@ Two readers parse the exchange today; one survives.
   it also **duplicates the engine's grammar in regex** — the second reader the
   `ONE-parser` law forbids.
 
-<<~moves second-reader -> engine-grammar on/the-@admin-VM if/it-can-read-in-the-engine do/retire-the-regex >>
+<<~moves second-reader -> engine-grammar on/the-@daemon-VM if/it-can-read-in-the-engine do/retire-the-regex >>
 
 <<~ confidence Synthesis-Canon 15/20 >> **The ruling: if it CAN happen in the wiki
 engine, it DOES.** `turn-harvest`'s regex retires into the engine grammar. One
-grammar SOURCE (the instrument `.tids`), one runtime (the @admin VM).
+grammar SOURCE (the instrument `.tids`), one runtime (the @daemon VM).
 
 ### Leaf and block
 
@@ -143,15 +143,15 @@ never gating whether it surfaces.
 
 lar-telemetry fires at the **same hook timing as mempalace** (Stop / SessionEnd /
 PreCompact). The hook adds a leg beside the verbatim mine: it hands the turn to
-@admin through the verb spine (the `lar-telemetry` verb, riding the
+@daemon through the verb spine (the `lar-telemetry` verb, riding the
 summons/outcome rail slice-1 `recall` proved).
 
-<<~flows turn -> @admin-reads-the-instruments -> hold(enqueueNalu) -> next-nalu-flush -> Cmd-projects-lar_*-across-the-shore -> mempalace-drawer >>
+<<~flows turn -> @daemon-reads-the-instruments -> hold(enqueueNalu) -> next-nalu-flush -> Cmd-projects-lar_*-across-the-shore -> mempalace-drawer >>
 
-1. **Read** — the @admin VM wikifies the turn through the instrument `\procedures`;
+1. **Read** — the @daemon VM wikifies the turn through the instrument `\procedures`;
    `$wikify output="parsetree"` (or `wiki.renderTiddler("text/html")` + read the
    `data-*` attributes) yields the structured gradient readings.
-2. **Hold** — @admin **`enqueueNalu`**s the readings: they sit on the shared queue,
+2. **Hold** — @daemon **`enqueueNalu`**s the readings: they sit on the shared queue,
    scheduled, undelivered. *The swell builds.* (`nalu` = the changeset wave;
    `lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu`.)
 3. **Flush on the next nalu** — the frame-aligned drain delivers the readings
@@ -164,7 +164,7 @@ annotation finds its drawer present. *The nalu is the pulse that makes "eventual
 concrete* — "hold" ≡ `enqueueNalu`, "flush" ≡ the wave.
 
 **The nalu delivers in-wiki; the drawer lives across the shore.** The wave makes
-the readings consistent inside @admin's wiki; the cross-shore drawer write rides a
+the readings consistent inside @daemon's wiki; the cross-shore drawer write rides a
 `Cmd` effect the wave fires — distinct engines, one pulse. **Never as tids**
 (operator ruling): the readings stay transient computation; the drawer holds the
 only durable home. A queryable `<<~ ui >>` filter layer reads the drawers later.
@@ -175,15 +175,15 @@ only durable home. A queryable `<<~ ui >>` filter layer reads the drawers later.
 
 ## Verbatim Always, Telemetry Eventual ~ the robust seam
 
-"One runtime in @admin" pressing against "capture must never lose a turn" resolves
+"One runtime in @daemon" pressing against "capture must never lose a turn" resolves
 on one seam:
 
-<<~ranks capture verbatim ~ VM-free · the drawer body · ALWAYS lands -> telemetry ~ @admin-owned · the lar_* readings · EVENTUAL >>
+<<~ranks capture verbatim ~ VM-free · the drawer body · ALWAYS lands -> telemetry ~ @daemon-owned · the lar_* readings · EVENTUAL >>
 
 - **Verbatim capture** (the mine leg) stays VM-free and lands every turn — the
-  journey is never lost, @admin up or down.
-- **lar-telemetry** runs **@admin-owned and eventual** — held, flushed on the wave;
-  if @admin sleeps, the readings wait for its next breath and the `lar_hv` sweep
+  journey is never lost, @daemon up or down.
+- **lar-telemetry** runs **@daemon-owned and eventual** — held, flushed on the wave;
+  if @daemon sleeps, the readings wait for its next breath and the `lar_hv` sweep
   re-enriches stale drawers (the backstop).
 - **Flush resilience** — a flush that finds the drawer not-yet-present (the mine
   leg still running) **re-holds to a later nalu**; the sweep is the final net. No
@@ -193,10 +193,10 @@ on one seam:
 
 <<~ ahu #ownership >>
 
-## @admin Owns It All
+## @daemon Owns It All
 
-lar-telemetry runs in the **@admin VM** — the always-resident admin lane, the
-operator's authority home — never in a hot content wiki island. @admin owns
+lar-telemetry runs in the **@daemon VM** — the always-resident admin lane, the
+operator's authority home — never in a hot content wiki island. @daemon owns
 read · hold · flush · project, behind the causal-island shore; mempalace stays a
 vendored web2 sibling reached through the seat, never a citizen of the stack
 (web3-only law). One grammar, one runtime, one owner, one wave.

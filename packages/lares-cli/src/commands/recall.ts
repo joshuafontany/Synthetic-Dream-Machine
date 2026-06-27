@@ -1,5 +1,5 @@
 /**
- * `lares recall` — read the verbatim PLACE memory (mempalace) THROUGH the @admin
+ * `lares recall` — read the verbatim PLACE memory (mempalace) THROUGH the @daemon
  * seat (Option D, the read membrane).
  *
  * The CLI never touches mempalace directly: it submits a `recall` verb-summons to
@@ -20,7 +20,7 @@
 
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";

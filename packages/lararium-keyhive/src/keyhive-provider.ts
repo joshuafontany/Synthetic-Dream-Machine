@@ -293,7 +293,7 @@ export class KeyhiveProvider implements CapabilityProvider {
   }
 
   /**
-   * Add an agent (by its Identifier hex) as an Admin member of a sentinel Document.
+   * Add an agent (by its Identifier hex) as an Daemon member of a sentinel Document.
    * Used during the founding ceremony to wire vessel Individual → PersonaGroup
    * and PersonaGroup → MeshCabal chains.
    */

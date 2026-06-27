@@ -1,8 +1,8 @@
 /**
- * admin-vm-core — the platform-blind admin-island vessel lifecycle.
+ * daemon-vm-core — the platform-blind admin-island vessel lifecycle.
  *
  * ONE core both vessels compose (mirror pair 2/5). Subtracts the identical
- * skeleton from open-admin-vm.ts (node) ⇆ open-browser-admin-vm.ts (browser):
+ * skeleton from open-daemon-vm.ts (node) ⇆ open-browser-daemon-vm.ts (browser):
  * composite wiring, MessageChannel sync, ea-promise + breath watchdog, the delegation
  * loop, manifest delivery, placeVerb/mountMainVerbs/dispose. The platform
  * divergence remains as a two-member host seam (spawnWorker + newSyncChannel);
@@ -17,22 +17,22 @@
  * Network-adapter wiring routes through mesh (attachMessageChannelSync); the
  * core holds zero @automerge/* imports — same facade law as sovereign-kernel.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/admin-vm-core
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/daemon-vm-core
  */
 
 import {
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   CompositeStore,
   AutomergeDocStore,
   attachMessageChannelSync,
   awaitIslandMsg,
   mkManifest,
-  mkAdminPlaceVerb,
-  mkAdminVerbResult,
-  mkAdminVerifyRequest,
-  mkAdminResolveBindingRequest,
-  mkAdminEvictResult,
-  mkAdminResidencyOpResult,
+  mkDaemonPlaceVerb,
+  mkDaemonVerbResult,
+  mkDaemonVerifyRequest,
+  mkDaemonResolveBindingRequest,
+  mkDaemonEvictResult,
+  mkDaemonResidencyOpResult,
   isIslandToVesselMsg,
   type VesselWorkerHandle,
   type Repo,
@@ -43,12 +43,12 @@ import {
   type IslandStorageConfig,
   type IslandMsg_Manifest,
   type IslandGrants,
-  type AdminMsg_DelegateVerb,
-  type AdminMsg_VerifyResult,
-  type AdminMsg_ResolveBindingResult,
-  type AdminMsg_EvictRequest,
-  type AdminMsg_ResidencyOp,
-  type AdminMsg_WikiAlert,
+  type DaemonMsg_DelegateVerb,
+  type DaemonMsg_VerifyResult,
+  type DaemonMsg_ResolveBindingResult,
+  type DaemonMsg_EvictRequest,
+  type DaemonMsg_ResidencyOp,
+  type DaemonMsg_WikiAlert,
   type BatchMode,
   type IslandMsg_Ea,
 } from "@lararium/mesh";
@@ -76,19 +76,19 @@ const EA_STALL_TIMEOUT_MS = 3 * EA_SILENCE_TIMEOUT_MS;
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];
 
 /** The two-member admin-VM host seam — platform divergence as composition. */
-export interface AdminVmHost {
+export interface DaemonVmHost {
   spawnWorker(scriptUrl: URL): VesselWorkerHandle;
   newSyncChannel(): { mainPort: VesselMessagePort; syncPort: VesselMessagePort };
 }
 
-export interface AdminVmCoreOptions {
+export interface DaemonVmCoreOptions {
   /** Vessel main Repo — gains the island sync leg. */
   repo:            Repo;
-  /** Admin doc handle, already resolved by the platform wrapper. */
-  adminHandle:     DocHandle<LarDoc>;
+  /** Daemon doc handle, already resolved by the platform wrapper. */
+  daemonHandle:     DocHandle<LarDoc>;
   /** One-recipe model for the admin island. */
   recipe:          WikiRecipe;
-  /** Typed structural capabilities (engine doc, @admin bag, @lares, @catalog access). */
+  /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
   grants:          IslandGrants;
   /** SHA-256 hex of the TW5 core blob. null = pre-CAS. */
   coreHash:        string | null;
@@ -96,7 +96,7 @@ export interface AdminVmCoreOptions {
    *  local CAS (the breath path). Absent → the worker reads blobs off the @oracle doc. */
   pluginCids?:     readonly string[];
   /** Operator authn/z material for in-worker keyhive boot (Stage 1). */
-  adminAuth?:      IslandMsg_Manifest["adminAuth"];
+  daemonAuth?:      IslandMsg_Manifest["daemonAuth"];
   /** Storage config delivered in the manifest (node nodefs; browser omits). */
   storage?:        IslandStorageConfig;
   /** Compiled admin-island Worker script URL. */
@@ -119,8 +119,8 @@ export interface VesselPlaceVerbRequest {
   listenable?:  string;
 }
 
-export interface AdminVmCore {
-  adminHandle:    DocHandle<LarDoc>;
+export interface DaemonVmCore {
+  daemonHandle:    DocHandle<LarDoc>;
   composite:      CompositeStore;
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
@@ -163,8 +163,8 @@ export interface AdminVmCore {
   onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string, kind?: string) => void) => void;
 }
 
-export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): AdminVmCore {
-  const { repo, adminHandle, recipe, grants, coreHash, pluginCids, adminAuth, storage, workerScriptUrl } = opts;
+export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions): DaemonVmCore {
+  const { repo, daemonHandle, recipe, grants, coreHash, pluginCids, daemonAuth, storage, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
   // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
@@ -178,8 +178,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
-  const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
-  composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
+  const adminStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
+  composite.addLayer({ bagId: DAEMON_BAG_ID, store: adminStore, writable: true });
   adminStore.markSyncComplete();
 
   // ── MessageChannel — island ↔ vessel Repo sync (wiring owned by mesh) ───────
@@ -243,8 +243,8 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       console.error(`[admin-island:fault] ${JSON.stringify(raw).slice(0, 240)}`);
     }
 
-    if (raw.type === "admin:verify-result") {
-      const msg = raw as AdminMsg_VerifyResult;
+    if (raw.type === "daemon:verify-result") {
+      const msg = raw as DaemonMsg_VerifyResult;
       settleAsk(msg.requestId, {
         ok: msg.ok,
         ...(msg.identifier ? { identifier: msg.identifier } : {}),
@@ -254,64 +254,64 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
       return;
     }
 
-    if (raw.type === "admin:resolve-binding-result") {
-      const msg = raw as AdminMsg_ResolveBindingResult;
+    if (raw.type === "daemon:resolve-binding-result") {
+      const msg = raw as DaemonMsg_ResolveBindingResult;
       if (msg.error) settleAsk(msg.requestId, undefined, msg.error);
       else if (msg.personalUrl && msg.draftUrl && msg.workingUrl) settleAsk(msg.requestId, { personalUrl: msg.personalUrl, draftUrl: msg.draftUrl, workingUrl: msg.workingUrl });
       else settleAsk(msg.requestId, undefined, "resolve-binding-result missing urls");
       return;
     }
 
-    if (raw.type === "admin:evict-request") {
+    if (raw.type === "daemon:evict-request") {
       // Sovereign-worker: the worker decided (policy, keyhive-gated); main executes the
       // mechanism (pool teardown). Route to the injected pool handler; ack regardless.
-      const msg = raw as AdminMsg_EvictRequest;
+      const msg = raw as DaemonMsg_EvictRequest;
       const run = _evictHandler
         ? _evictHandler(msg.bagId)
         : Promise.reject(new Error("no evict handler bound (pool not ready)"));
       run
-        .then(() => worker.post(mkAdminEvictResult({ requestId: msg.requestId, ok: true })))
-        .catch((err: unknown) => worker.post(mkAdminEvictResult({
+        .then(() => worker.post(mkDaemonEvictResult({ requestId: msg.requestId, ok: true })))
+        .catch((err: unknown) => worker.post(mkDaemonEvictResult({
           requestId: msg.requestId, ok: false, error: err instanceof Error ? err.message : String(err),
         })));
       return;
     }
 
-    if (raw.type === "admin:residency-op") {
+    if (raw.type === "daemon:residency-op") {
       // Sovereign-worker: the worker's residency verb (pin/unpin/register-cold) granted
       // policy; main executes the mechanism on the BagResidencyManager. Ack regardless.
-      const msg = raw as AdminMsg_ResidencyOp;
+      const msg = raw as DaemonMsg_ResidencyOp;
       const run = _residencyHandler
         ? _residencyHandler(msg.op, msg.bagId, msg.reason)
         : Promise.reject(new Error("no residency handler bound (manager not ready)"));
       run
-        .then(() => worker.post(mkAdminResidencyOpResult({ requestId: msg.requestId, ok: true })))
-        .catch((err: unknown) => worker.post(mkAdminResidencyOpResult({
+        .then(() => worker.post(mkDaemonResidencyOpResult({ requestId: msg.requestId, ok: true })))
+        .catch((err: unknown) => worker.post(mkDaemonResidencyOpResult({
           requestId: msg.requestId, ok: false, error: err instanceof Error ? err.message : String(err),
         })));
       return;
     }
 
-    if (raw.type === "admin:wiki-alert") {
+    if (raw.type === "daemon:wiki-alert") {
       // Sovereign-worker: the worker decided a change needs a reboot to apply and named
       // the affected wiki; main delivers the alert into that wiki's live island (the
       // handler skips unmounted ones). Fire-and-forget — no result back to the worker.
-      const msg = raw as AdminMsg_WikiAlert;
+      const msg = raw as DaemonMsg_WikiAlert;
       _wikiAlertHandler?.(msg.wikiSlug, msg.message, msg.cause, msg.kind);
       return;
     }
 
-    if (raw.type === "admin:delegate-verb") {
-      const msg = raw as AdminMsg_DelegateVerb;
+    if (raw.type === "daemon:delegate-verb") {
+      const msg = raw as DaemonMsg_DelegateVerb;
       if (!_registry) {
-        worker.post(mkAdminVerbResult({
+        worker.post(mkDaemonVerbResult({
           requestId: msg.requestId,
-          error: `[openAdminVm] delegate-verb received before mountMainVerbs — verb="${msg.verb}" dropped`,
+          error: `[openDaemonVm] delegate-verb received before mountMainVerbs — verb="${msg.verb}" dropped`,
         }));
         return;
       }
       const invocationLike = {
-        title:       `${ADMIN_BAG_ID}/delegate/${msg.requestId}`,
+        title:       `${DAEMON_BAG_ID}/delegate/${msg.requestId}`,
         requestId:   msg.requestId,
         action:      msg.verb,
         args:        msg.args,
@@ -325,9 +325,9 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
         admin:    composite,
         registry: _registry,
       }).then((result) => {
-        worker.post(mkAdminVerbResult({ requestId: msg.requestId, result }));
+        worker.post(mkDaemonVerbResult({ requestId: msg.requestId, result }));
       }).catch((err: unknown) => {
-        worker.post(mkAdminVerbResult({
+        worker.post(mkDaemonVerbResult({
           requestId: msg.requestId,
           error: err instanceof Error ? err.message : String(err),
         }));
@@ -343,9 +343,9 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   // DROPPED, and the kernel then waits forever (no breath, no fault). So wait for ready,
   // then post; node omits ready → a short timeout proceeds. Deferred (not awaited) so the
   // synchronous return holds — workerEa resolves once the worker boots off this manifest.
-  const manifestMsg = mkManifest(ADMIN_BAG_ID, syncPort, recipe, grants, coreHash, {
+  const manifestMsg = mkManifest(DAEMON_BAG_ID, syncPort, recipe, grants, coreHash, {
     ...(storage   ? { storage }   : {}),
-    ...(adminAuth ? { adminAuth } : {}),
+    ...(daemonAuth ? { daemonAuth } : {}),
     ...(pluginCids?.length ? { pluginCids } : {}),
   });
   void new Promise<void>((resolve) => {
@@ -356,7 +356,7 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
   }).then(() => { worker.post(manifestMsg, [syncPort]); });
 
   return {
-    adminHandle,
+    daemonHandle,
     composite,
     workerEa,
     worker,
@@ -365,15 +365,15 @@ export function openAdminVmCore(host: AdminVmHost, opts: AdminVmCoreOptions): Ad
     },
     authSeam: {
       verify: (cardBytes, bagUrl, access, proof) =>
-        askIsland("verify", (requestId) => mkAdminVerifyRequest({
+        askIsland("verify", (requestId) => mkDaemonVerifyRequest({
           requestId, cardBytes, bagUrl, access,
           ...(proof ? { proof } : {}),
         })),
     },
     resolveBinding: (fingerprint, recipeTrace) =>
-      askIsland("binding", (requestId) => mkAdminResolveBindingRequest({ requestId, fingerprint, recipeTrace })),
+      askIsland("binding", (requestId) => mkDaemonResolveBindingRequest({ requestId, fingerprint, recipeTrace })),
     placeVerb: (o: VesselPlaceVerbRequest) => {
-      worker.post(mkAdminPlaceVerb({
+      worker.post(mkDaemonPlaceVerb({
         verb:        o.verb,
         args:        o.args,
         requestedBy: o.requestedBy ?? "vessel",

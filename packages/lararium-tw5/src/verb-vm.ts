@@ -8,7 +8,7 @@
  */
 
 import type { BatchMode, CompositeStore, Verb } from "@lararium/mesh";
-import { ADMIN_BAG_ID, VERB_RESULT_KEY, concludeVerb, buildVerb, buildRunningPatch } from "@lararium/mesh";
+import { DAEMON_BAG_ID, VERB_RESULT_KEY, concludeVerb, buildVerb, buildRunningPatch } from "@lararium/mesh";
 import type { TW5Engine } from "./tw5-vm.js";
 
 export interface VerbPlacement {
@@ -67,7 +67,7 @@ export async function writeOutcome(
     },
     ...(opts.errorMessage !== undefined && { errorMessage: opts.errorMessage }),
   });
-  await admin.put(outcome, origin, { bag: ADMIN_BAG_ID });
+  await admin.put(outcome, origin, { bag: DAEMON_BAG_ID });
 }
 
 /**

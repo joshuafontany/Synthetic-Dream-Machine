@@ -17,7 +17,7 @@
 
 import { operatorDid } from "../env.js";
 import { emit } from "../render.js";
-import { summaryOutput, type SubmitResult, type SubmitOptions } from "../admin-connector.js";
+import { summaryOutput, type SubmitResult, type SubmitOptions } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 

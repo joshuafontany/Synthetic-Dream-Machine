@@ -15,10 +15,10 @@ import genesisBytes from "../../../genesis/island.bin?uint8array";
 // bundle's URL (a real /assets file). A standalone `new URL("./x.ts", import.meta.url)` passed
 // INDIRECTLY to the vessel got inlined as a `data:` URI, where the worker's dynamic imports
 // (keyhive-WASM-first, then the chain) cannot resolve — the admin/wiki boot's silent death.
-import adminWorkerUrlStr from "./workers/admin.worker.ts?worker&url";
+import daemonWorkerUrlStr from "./workers/daemon.worker.ts?worker&url";
 import wikiWorkerUrlStr  from "./workers/wiki.worker.ts?worker&url";
 
-const adminWorkerUrl  = new URL(adminWorkerUrlStr, import.meta.url);
+const daemonWorkerUrl  = new URL(daemonWorkerUrlStr, import.meta.url);
 const workerScriptUrl = new URL(wikiWorkerUrlStr,  import.meta.url);
 
 const IDB = "lares:vessel";
@@ -117,7 +117,7 @@ async function bootVessel(): Promise<void> {
       hostId: "elyncia-browser",
       wikiId: "lares",
       genesisBytes,
-      adminWorkerUrl,
+      daemonWorkerUrl,
       workerScriptUrl,
       onPhase: paint,
       onProjection: applyProjection,

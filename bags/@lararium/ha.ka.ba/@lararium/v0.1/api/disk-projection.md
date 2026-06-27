@@ -58,7 +58,7 @@ Disk projection is for **content** bags (definitions + instances). **State / vie
 | `@working` | per-wiki **saved** working layer (saved tiddlers, pre-promotion) | `wikis/{slug}/` — live, tracked |
 | `@draft` | per-wiki **unsaved** drafts (TW5 draft state) | **none** — runtime |
 | `@temp` | volatile session layer | **none** — runtime |
-| `@admin` | operator's sovereign authority doc | **none** — private; syncs to operator devices via the admin-doc surface |
+| `@daemon` | operator's sovereign authority doc | **none** — private; syncs to operator devices via the admin-doc surface |
 
 The projector enforces this structurally: **a bag absent from the mirror list never writes to disk.** A tiddler MAY also opt out per-record with `disk-projection: no`.
 
@@ -75,7 +75,7 @@ The projector enforces this structurally: **a bag absent from the mirror list ne
 | **memetic corpus** | **`@lararium`** | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | **`bags/` seed (tracked)** | kahu / Cabal (#kahu) | git |
 | **runtime system island** | **`@oracle`** | engine BLOBs · the **system** bag→doc **oracle** pointers (`@oracle`/`@lararium`/`@lares`) · the **system wiki-recipes** · `genesis-cid` · descriptors | built (deterministic genesis) | **none — rides the mesh** (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#epoch-handlers) |
 
-**Why `@oracle` carries no disk mirror.** Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`). Like `@admin`, it rides the CRDT mesh — federated **read-only** to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
+**Why `@oracle` carries no disk mirror.** Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`). Like `@daemon`, it rides the CRDT mesh — federated **read-only** to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, is the gitignored runtime sidecar (matching `genesis/social-bootstrap.json`), never the `bags/` seed surface.
 
 **Why `@lararium` stays a seed bag.** The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
@@ -162,15 +162,15 @@ projector onRefusal (wiki island)
   → IslandMsg_Event "disk-ward:refused" (payload.verb = "ward-alert")
   → main's generic worker.event → adminVm.placeVerb bridge
   → admin VM "ward-alert" reactor:
-      (a) DURABLE audit record  lar:///ha.ka.ba/@admin/ledger/ward/<id>
-          — the operators-with-admin-grants surface (@admin doc readers)
+      (a) DURABLE audit record  lar:///ha.ka.ba/@daemon/ledger/ward/<id>
+          — the operators-with-admin-grants surface (@daemon doc readers)
       (b) reads its own active-wiki marker → the operator's PINNED VM
   → admin:wiki-alert (kind "disk-ward") → main → system-alert verb
   → pinned island writes $:/temp/lares/alert/disk-ward tagged $:/tags/Alert
       — ring-0 operator surface (@temp, island-local, self-clearing on reboot)
 ```
 
-Visibility holds by construction: the durable record lives in `@admin` (admin-grant readers only); the live alert lives in the pinned wiki's `@temp` (the operator's own island; never federated — `noise`/`data` stay node-local). The reactor carries no cap-gate: the signal originates from the island's own mechanism, grants nothing, and writes only audit + alert.
+Visibility holds by construction: the durable record lives in `@daemon` (admin-grant readers only); the live alert lives in the pinned wiki's `@temp` (the operator's own island; never federated — `noise`/`data` stay node-local). The reactor carries no cap-gate: the signal originates from the island's own mechanism, grants nothing, and writes only audit + alert.
 
 Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (13 — traversal, absolute, cross-bag, above-bags, new-subdir, grantless, inert-grant, refusal-signal).
 

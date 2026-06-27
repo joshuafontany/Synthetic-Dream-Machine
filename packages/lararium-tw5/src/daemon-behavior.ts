@@ -1,11 +1,11 @@
 /**
- * admin-behavior — isomorphic admin island behavior for all platforms.
+ * daemon-behavior — isomorphic admin island behavior for all platforms.
  *
- * makeAdminBehavior() returns an IslandBehavior that:
+ * makeDaemonBehavior() returns an IslandBehavior that:
  *   - Starts a VerbDispatcher subscribed to TW5 wiki change events (local path)
  *     and to the admin CompositeStore (remote/signal path).
- *   - Routes wiki-scope verbs to the vessel via AdminMsg_DelegateVerb /
- *     AdminMsg_VerbResult, holding Promise resolvers in a pending delegation map.
+ *   - Routes wiki-scope verbs to the vessel via DaemonMsg_DelegateVerb /
+ *     DaemonMsg_VerbResult, holding Promise resolvers in a pending delegation map.
  *   - Handles admin:place-verb from the vessel (main-thread → island).
  *   - Handles admin:verb-result from the vessel (island delegation round-trip).
  *
@@ -13,17 +13,17 @@
  *
  * Island Sovereignty Law §9 applies: this behavior always runs inside a Worker.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/admin-behavior
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/daemon-behavior
  */
 
 import {
-  mkAdminDelegateVerb,
-  mkAdminVerifyResult,
-  mkAdminResolveBindingResult,
-  type AdminMsg_PlaceVerb,
-  type AdminMsg_VerbResult,
-  type AdminMsg_VerifyRequest,
-  type AdminMsg_ResolveBindingRequest,
+  mkDaemonDelegateVerb,
+  mkDaemonVerifyResult,
+  mkDaemonResolveBindingResult,
+  type DaemonMsg_PlaceVerb,
+  type DaemonMsg_VerbResult,
+  type DaemonMsg_VerifyRequest,
+  type DaemonMsg_ResolveBindingRequest,
   type AuthProofWire,
   type BatchMode,
   type Verb,
@@ -36,13 +36,13 @@ import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
-export interface AdminBehaviorOptions {
+export interface DaemonBehaviorOptions {
   /** A ready verifier (e.g. tests, or a host-provided one). */
   verifier?: CapabilityVerifier;
   /**
    * Async verifier source resolved in `onEa` with the live IslandContext —
    * the isomorphic-vessel Stage-1 hook. Platform worker entries pass a factory
-   * that calls `bootAdminKeyhive` over `ctx.composite` (keeping keyhive out of
+   * that calls `bootDaemonKeyhive` over `ctx.composite` (keeping keyhive out of
    * @lararium/tw5). Takes precedence over `verifier`. A throw here (gate failure)
    * propagates out of `onEa` → the island kernel posts `fault`, so the vessel
    * never goes live with an unauthorized identity.
@@ -79,7 +79,7 @@ export interface AdminBehaviorOptions {
   wireWorkerVerbs?: (registry: VerbTable, ctx: IslandContext) => void;
 }
 
-export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
+export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBehavior {
   let _dispatcher: VerbDispatcher | null = null;
 
   const _pendingDelegations = new Map<string, {
@@ -90,7 +90,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
   function _routeToMain(invocation: Verb, post: IslandContext["post"]): Promise<Record<string, unknown>> {
     return new Promise((resolve, reject) => {
       _pendingDelegations.set(invocation.requestId, { resolve, reject });
-      post(mkAdminDelegateVerb({
+      post(mkDaemonDelegateVerb({
         requestId:   invocation.requestId,
         verb:        invocation.action,
         args:        invocation.args as Record<string, unknown>,
@@ -108,7 +108,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
     name: "admin-dispatch",
     async onEa(ctx: IslandContext) {
       const { tw5, composite, post } = ctx;
-      // Resolve the verifier: the async factory (bootAdminKeyhive over the admin
+      // Resolve the verifier: the async factory (bootDaemonKeyhive over the admin
       // composite) wins; else a ready verifier; else none (delegated-verb path).
       const verifier = opts.verifierFactory ? await opts.verifierFactory(ctx) : opts.verifier;
       const registry = new VerbTable();
@@ -118,7 +118,7 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
       // lacked). Pool-touching reactors command main via ctx.post (admin:evict-request).
       opts.wireWorkerVerbs?.(registry, ctx);
       _dispatcher = new VerbDispatcher({
-        adminVm:  tw5,
+        daemonVm:  tw5,
         admin:    composite,
         registry,
         routeFn:  (invocation) => _routeToMain(invocation, post),
@@ -133,8 +133,8 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
       const { tw5, post } = ctx;
-      if (type === "admin:place-verb") {
-        const msg = raw as AdminMsg_PlaceVerb;
+      if (type === "daemon:place-verb") {
+        const msg = raw as DaemonMsg_PlaceVerb;
         if (tw5) {
           placeVerb(tw5, {
             verb:        msg.verb,
@@ -150,8 +150,8 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
         return true;
       }
 
-      if (type === "admin:verb-result") {
-        const msg = raw as AdminMsg_VerbResult;
+      if (type === "daemon:verb-result") {
+        const msg = raw as DaemonMsg_VerbResult;
         const pending = _pendingDelegations.get(msg.requestId);
         if (pending) {
           _pendingDelegations.delete(msg.requestId);
@@ -162,34 +162,34 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
         return true;
       }
 
-      if (type === "admin:verify-request") {
-        const msg = raw as AdminMsg_VerifyRequest;
+      if (type === "daemon:verify-request") {
+        const msg = raw as DaemonMsg_VerifyRequest;
         const answer: Promise<{ ok: boolean; identifier?: string; reason?: string; proofVerified?: boolean }> = opts.verifyPeer
           ? opts.verifyPeer(msg.cardBytes, msg.bagUrl, msg.access, msg.proof)
           : Promise.resolve({ ok: false, reason: "no verifyPeer configured" });
         answer
-          .then((r) => post(mkAdminVerifyResult({
+          .then((r) => post(mkDaemonVerifyResult({
             requestId: msg.requestId, ok: r.ok,
             ...(r.identifier ? { identifier: r.identifier } : {}),
             ...(r.reason ? { reason: r.reason } : {}),
             ...(r.proofVerified !== undefined ? { proofVerified: r.proofVerified } : {}),
           })))
-          .catch((err: unknown) => post(mkAdminVerifyResult({
+          .catch((err: unknown) => post(mkDaemonVerifyResult({
             requestId: msg.requestId, ok: false, reason: err instanceof Error ? err.message : String(err),
           })));
         return true;
       }
 
-      if (type === "admin:resolve-binding-request") {
-        const msg = raw as AdminMsg_ResolveBindingRequest;
+      if (type === "daemon:resolve-binding-request") {
+        const msg = raw as DaemonMsg_ResolveBindingRequest;
         if (!opts.resolveBinding) {
-          post(mkAdminResolveBindingResult({ requestId: msg.requestId, error: "no resolveBinding configured" }));
+          post(mkDaemonResolveBindingResult({ requestId: msg.requestId, error: "no resolveBinding configured" }));
         } else {
           opts.resolveBinding(ctx, msg.fingerprint, msg.recipeTrace)
-            .then((r) => post(mkAdminResolveBindingResult({
+            .then((r) => post(mkDaemonResolveBindingResult({
               requestId: msg.requestId, personalUrl: r.personalUrl, draftUrl: r.draftUrl, workingUrl: r.workingUrl,
             })))
-            .catch((err: unknown) => post(mkAdminResolveBindingResult({
+            .catch((err: unknown) => post(mkDaemonResolveBindingResult({
               requestId: msg.requestId, error: err instanceof Error ? err.message : String(err),
             })));
         }

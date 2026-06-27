@@ -9,17 +9,17 @@
  *                 change events and picks these up immediately.
  *
  *   REMOTE path — external vessels write a verb-summons tiddler at
- *                 @admin/summons/<id> to the Automerge doc. IslandAdaptor flows
+ *                 @daemon/summons/<id> to the Automerge doc. IslandAdaptor flows
  *                 it into the TW5 wiki. The dispatcher's Automerge subscriber
  *                 sees the summons, calls placeVerb() to create the volatile
  *                 invocation, then tombstones the summons tiddler.
  *                 The summons carries edge transport, not durable coordination state.
  *
  * Outcome flow: handler result → concludeVerb → admin composite store
- *   → IslandAdaptor.saveTiddler → @admin/outcomes/<id> in Automerge → syncs.
+ *   → IslandAdaptor.saveTiddler → @daemon/outcomes/<id> in Automerge → syncs.
  *   Durable shared meaning begins at the outcome, not at the summons.
  *
- * Admin-only law: ONLY the admin VM runs a VerbDispatcher. Pinned wiki and
+ * Daemon-only law: ONLY the admin VM runs a VerbDispatcher. Pinned wiki and
  *   warm/cold wikis are content surfaces — they do not dispatch.
  *
  * Federation model: every lararium vessel runs its own admin VM + VerbDispatcher.
@@ -82,7 +82,7 @@ export class VerbTable {
 }
 
 export interface VerbDispatcherOptions {
-  readonly adminVm:   TW5Engine;
+  readonly daemonVm:   TW5Engine;
   readonly admin:     CompositeStore;
   readonly registry:  VerbTable;
   readonly verifier?: CapabilityVerifier;
@@ -99,7 +99,7 @@ export class VerbDispatcher {
   start(): void {
     if (this.unsubWiki) return;
 
-    const wiki = this.opts.adminVm.$tw.wiki;
+    const wiki = this.opts.daemonVm.$tw.wiki;
     const onWikiChange = (changedTiddlers: Record<string, { deleted?: boolean }>) => {
       for (const title of Object.keys(changedTiddlers)) {
         if (!title.startsWith(VERB_URI_PREFIX)) continue;
@@ -115,7 +115,7 @@ export class VerbDispatcher {
           // (exactly-once EFFECT, not delivery). See project_asymmetric_peer_handoff.
           if (prior) return undefined;
           return dispatchVerb(
-          this.opts.adminVm,
+          this.opts.daemonVm,
           this.opts.admin,
           invocation,
           async () => {
@@ -171,7 +171,7 @@ export class VerbDispatcher {
   }
 
   placeVerb(opts: SummonsRequest): string {
-    return placeVerb(this.opts.adminVm, opts);
+    return placeVerb(this.opts.daemonVm, opts);
   }
 }
 

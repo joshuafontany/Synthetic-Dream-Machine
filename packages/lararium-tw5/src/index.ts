@@ -85,8 +85,8 @@ export { heedSummons } from "./verb-summons.js";
 export type { SummonsRequest, SummonsRelayOptions } from "./verb-summons.js";
 export { runLocalVerb, makeCapVerify } from "./verb-local-dispatch.js";
 export type { CapVerify, RunLocalVerbOptions } from "./verb-local-dispatch.js";
-export { makeAdminBehavior } from "./admin-behavior.js";
-export type { AdminBehaviorOptions } from "./admin-behavior.js";
+export { makeDaemonBehavior } from "./daemon-behavior.js";
+export type { DaemonBehaviorOptions } from "./daemon-behavior.js";
 
 export { IslandKernel } from "./island-kernel.js";
 export { runSovereignKernel } from "./sovereign-kernel.js";
@@ -117,13 +117,13 @@ export { makeCatalogAccessor } from "./catalog-accessor.js";
 export type { CatalogAccessor } from "./catalog-accessor.js";
 export { openVesselCore } from "./open-vessel.js";
 export type {
-  VesselOrchestration, VesselCoreResult, VesselAdminVm, VesselWikiSlot,
+  VesselOrchestration, VesselCoreResult, VesselDaemonVm, VesselWikiSlot,
 } from "./open-vessel.js";
-export { openAdminVmCore } from "./admin-vm-core.js";
+export { openDaemonVmCore } from "./daemon-vm-core.js";
 export type {
-  AdminVmHost,
-  AdminVmCore,
-  AdminVmCoreOptions,
+  DaemonVmHost,
+  DaemonVmCore,
+  DaemonVmCoreOptions,
   VesselPlaceVerbRequest,
-} from "./admin-vm-core.js";
+} from "./daemon-vm-core.js";
 

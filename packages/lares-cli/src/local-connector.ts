@@ -16,7 +16,7 @@ import { createConnection } from "node:net";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { larDataDir } from "./env.js";
-import type { SubmitResult, SubmitOptions } from "./admin-connector.js";
+import type { SubmitResult, SubmitOptions } from "./daemon-connector.js";
 
 /** The agreed socket path — both sides resolve <dataDir>/lares.sock (env contract). */
 export function udsSocketPath(dataDir?: string): string {

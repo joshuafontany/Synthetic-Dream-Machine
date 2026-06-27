@@ -1,5 +1,5 @@
 import {
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   LARES_DOC_URI,
   CompositeStore,
   type LarTiddlerRecord,
@@ -8,7 +8,7 @@ import {
   wikiDraftBagUri,
 } from "@lararium/mesh";
 
-export const ACTIVE_WIKI_URI = `${ADMIN_BAG_ID}/active-wiki`;
+export const ACTIVE_WIKI_URI = `${DAEMON_BAG_ID}/active-wiki`;
 
 export type ActiveWikiSelectionSource = "boot-arg" | "admin-marker";
 

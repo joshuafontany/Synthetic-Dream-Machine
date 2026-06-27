@@ -7,7 +7,7 @@
  * drawer via `drawer_io.py`. Idempotent: already-current drawers skip.
  *
  * Lives HERE (beside the mempalace boundary) so ONE core serves both surfaces:
- *   - the @admin `lar-telemetry` verb (mempalace through the seat)
+ *   - the @daemon `lar-telemetry` verb (mempalace through the seat)
  *   - the `lares harvest --writeback` CLI leg
  * The dependency points node/cli → mempalace, never the reverse.
  *

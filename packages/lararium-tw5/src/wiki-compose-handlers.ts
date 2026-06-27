@@ -2,8 +2,8 @@ import type { LarTiddlerRecord } from "@lararium/mesh";
 import {
   bagStackFromRec,
   recipeUri,
-  mkAdminResidencyOp,
-  mkAdminWikiAlert,
+  mkDaemonResidencyOp,
+  mkDaemonWikiAlert,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeRequestId, stringArg } from "./handler-args.js";
@@ -58,10 +58,10 @@ export function makeAddBagReactor(opts: WikiComposeOptions): VerbReactor {
 
     // Pono: no live-layer mount. The recipe change syncs; each island mounts the bag
     // when it reconciles its own stack. Command main to pin the bag's residency.
-    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "pin", bagId: bagUrl, reason: `wiki:${slug}` }));
+    opts.post(mkDaemonResidencyOp({ requestId: makeRequestId("resop"), op: "pin", bagId: bagUrl, reason: `wiki:${slug}` }));
     // Live islands reconcile this via recipe-watch and clear the notice themselves;
     // the alert stays the FALLBACK for islands that sleep through the change.
-    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag added to "${slug}" — live islands mount it automatically; reboot if this notice persists.`, cause: "add-bag" }));
+    opts.post(mkDaemonWikiAlert({ wikiSlug: slug, message: `Bag added to "${slug}" — live islands mount it automatically; reboot if this notice persists.`, cause: "add-bag" }));
 
     return {
       slug,
@@ -124,8 +124,8 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     // Pono: no live-layer unmount from admin. The recipe change syncs; each island
     // drops the bag itself (recipe-watch). Command main to release the bag's pin.
     // The alert stays the FALLBACK for islands that sleep through the change.
-    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));
-    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Bag removed from "${slug}" — live islands drop it automatically; reboot if this notice persists.`, cause: "remove-bag" }));
+    opts.post(mkDaemonResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));
+    opts.post(mkDaemonWikiAlert({ wikiSlug: slug, message: `Bag removed from "${slug}" — live islands drop it automatically; reboot if this notice persists.`, cause: "remove-bag" }));
 
     return {
       slug,

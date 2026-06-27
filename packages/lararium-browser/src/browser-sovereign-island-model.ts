@@ -15,7 +15,7 @@
  *
  * ## VM Pool alignment
  *
- *   Browser vessel: Admin island (sovereign island) + Pinned (primary wiki)
+ *   Browser vessel: Daemon island (sovereign island) + Pinned (primary wiki)
  *                   + N hot islands (session wikis, LRU-evicted to cold)
  *   Every hot island runs via runBrowserSovereignWorker(behavior).
  *

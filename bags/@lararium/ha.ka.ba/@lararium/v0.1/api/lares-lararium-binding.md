@@ -80,10 +80,10 @@ CLI awaits it via the socket response (or an ephemeral/notify), **not a full syn
 
 ## The Flow
 
-<<~flows lares -> invokeLocal{verb,args,cap} -> UDS -> daemon VerbDispatcher (warm @admin · verify-then-delegate · keyhive) -> CRDT outcome receipt -> return over the socket >>
+<<~flows lares -> invokeLocal{verb,args,cap} -> UDS -> daemon VerbDispatcher (warm @daemon · verify-then-delegate · keyhive) -> CRDT outcome receipt -> return over the socket >>
 
-The daemon reuses the **existing** verb path (the warm `@admin` VerbDispatcher +
-`runLocalVerb` + the durable `@admin/outcomes/<requestId>` receipt). Only the
+The daemon reuses the **existing** verb path (the warm `@daemon` VerbDispatcher +
+`runLocalVerb` + the durable `@daemon/outcomes/<requestId>` receipt). Only the
 *ingress* changes: a UDS listener accepts the invocation instead of a WS summons.
 The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 (connect socket · write invocation · read receipt). No leaf replica, no sync.

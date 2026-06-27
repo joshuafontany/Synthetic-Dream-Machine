@@ -22,9 +22,9 @@ import { newChangeId, taskContentId } from "@lararium/mesh";
 import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri } from "@lararium/node";
 import {
   submitVerb,
-  type AdminVesselHandle,
+  type DaemonVesselHandle,
   type SubmitResult,
-} from "./admin-connector.js";
+} from "./daemon-connector.js";
 import { runVerb } from "./verb-call.js";
 
 export type ScanStatus = "new" | "unchanged" | "changed" | "non-nfc" | "deleted";
@@ -186,7 +186,7 @@ export interface SubmitIngestOpts {
 export async function submitIngestOn(
   // A persistent vessel (the watcher holds one across waves) → WS. `null` (the
   // one-shot `lares ingest`) → the UDS fast path via runVerb. Same summons either way.
-  vessel: AdminVesselHandle | null,
+  vessel: DaemonVesselHandle | null,
   opts:   SubmitIngestOpts,
 ): Promise<SubmitResult> {
   const changeId = opts.changeId ?? newChangeId();

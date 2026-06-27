@@ -431,7 +431,7 @@ punctured" unprovable), and **threshold does not touch the encryption-history ga
 rotation/recovery rides **KERI-style pre-rotation** + **Kintsugi-style** guardian-threshold
 recovery (#provenance).
 
-**Swap-back stays clean** — `@admin` already carries Keyhive cap-events as records, so the
+**Swap-back stays clean** — `@daemon` already carries Keyhive cap-events as records, so the
 delegations doc wears a near-compatible shape; `rotateDocKey` becomes a CGKA Commit and
 callers never change.
 

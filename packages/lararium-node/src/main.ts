@@ -120,7 +120,7 @@ async function main(): Promise<void> {
   console.log(`[lararium] catalog:  ${result.catalogHandleUrl ?? "(none)"}`);
   console.log(`[lararium] oracle:   ${result.oracleDocUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
-  console.log(`[lararium] admin:    ${result.admin.adminHandle.url}`);
+  console.log(`[lararium] admin:    ${result.admin.daemonHandle.url}`);
   console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
   // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
@@ -147,7 +147,7 @@ async function main(): Promise<void> {
   // for remote mesh peers. (lar:///…/api/lares-lararium-binding)
   const socketPath = join(storageDir, "lares.sock");
   const uds = startUdsChannel({
-    adminHandle: result.admin.adminHandle,
+    daemonHandle: result.admin.daemonHandle,
     socketPath,
     onLog: (line) => console.log(`[lararium] ${line}`),
   });

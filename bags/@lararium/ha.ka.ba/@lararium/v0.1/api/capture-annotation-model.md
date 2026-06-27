@@ -95,9 +95,9 @@ across heterogeneous sources, the unified-nalu law (one boundary across many sou
 
 <<~ranks capture-nalu collect ~ every producer (parallel sessions · worker swarms · Codex/Claude/Copilot) processes its turn forward and ENQUEUES a born-annotated DrawerRecord into ONE unified nalu via the daemon verb-channel -> crest ~ the daemon's SERVER TICK (the 20 Hz `setInterval` lar-event-bus loop = the `LarTickCounter`, server-side where the palace lives — the game cadence; NOT the browser `requestAnimationFrame` boundary, which crests the OTHER, federated in-wiki nalu), backpressure-GATED -> flush ~ ONE `mine --source lares` drain → the palace, ONE writer, ONE lock; each record carries `lar_ffz` (felt) + `LarTickCounter` (physical) >>
 
-**The writer ~ a SEPARATE, LOCAL, non-federated worker-VM.** NOT the federated @admin
+**The writer ~ a SEPARATE, LOCAL, non-federated worker-VM.** NOT the federated @daemon
 (which would pull local work-memory into the mesh — the locality cut forbids it). The
-user-root daemon hosts it BESIDE @admin: @admin crests CRDT waves to the widget shore
+user-root daemon hosts it BESIDE @daemon: @daemon crests CRDT waves to the widget shore
 (federated); this VM crests CAPTURE waves to the palace (local). Same nalu pattern, two
 instances — honoring no-VM-on-main (a worker_thread/Web-Worker), work-memory-is-local
 (non-federated), share-substrate-not-sovereignty (one daemon, two VMs).
@@ -186,9 +186,9 @@ Claude (`~/.claude/projects`, **+ subagents/**), Codex (`~/.codex/sessions`),
 Copilot (`~/.copilot` — *verify format drift: the harvester keys on `events.jsonl`;
 disk now shows `workspace.yaml` — a live capture gap to confirm*).
 
-**The two membranes** (Option D, mempalace through the @admin seat):
+**The two membranes** (Option D, mempalace through the @daemon seat):
 
-<<~ranks membrane verbatim ~ the drawer body · VM-free · ALWAYS lands (mempalace mine) -> gradient ~ the lar_* readings · @admin-owned · EVENTUAL (lar-telemetry, the lar_hv sweep re-enriches) >>
+<<~ranks membrane verbatim ~ the drawer body · VM-free · ALWAYS lands (mempalace mine) -> gradient ~ the lar_* readings · @daemon-owned · EVENTUAL (lar-telemetry, the lar_hv sweep re-enriches) >>
 
 **INVERTED (2026-06-25, #forward-facing-nalu):** the two membranes above describe the
 retired *race-behind* (mempalace mines, then `lar-telemetry` sweeps). They collapse into
@@ -203,14 +203,14 @@ a backfill for legacy drawers. Depth: `lar-telemetry`, #forward-facing-nalu.
 
 ## Layer 2 ~ Annotation (how it stood)
 
-The @admin TW5 engine reads each turn's **instrument sigils** into gradient
+The @daemon TW5 engine reads each turn's **instrument sigils** into gradient
 readings and projects them as `lar_*` onto the drawer. **Telemetry, never verdict**
 — every reading rides its 0–20 band, dressed by register, never a ✓/✗ (the ward
 renders as drift-marks, not FAIL). The instruments:
 
 <<~ranks lar-net lar_hv ~ enrich-version (Kappa gate; re-enrich on bump) -> lar_surface ~ originating harness -> lar_band · lar_bearing_conf ~ the 0–20 gradient -> lar_aim · lar_yield ~ the bearing -> lar_voices ~ who held it -> lar_confidence ~ the marks -> lar_drift ~ ward/parse drift -> lar_hall ~ function-hall -> lar_agent · lar_sidechain ~ the spirit actor (subagent drawers) >>
 
-**One parser, one runtime:** the @admin engine IS the decomposer (the regex
+**One parser, one runtime:** the @daemon engine IS the decomposer (the regex
 `turn-harvest` retires into the engine grammar — `SharktoothSigil` .tids + a
 gradient `\procedure`; `$wikify`/`renderTiddler` extracts → `lar_*`). Depth:
 `lar-telemetry`.
@@ -278,8 +278,8 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~Cmd harvest "does/sweep transcripts → verbatim drawers (--all backfill; lar_hv idempotent) ~ BUILT" >>
 <<~Cmd subagents "does/mine <session>/subagents/* into wing_<w>__spirits, named, both sides ~ BUILT" >>
-<<~Cmd telemetry "does/read a wing's instruments through @admin → project lar_* (--wing) ~ BUILT (write membrane)" >>
-<<~Cmd recall "does/read the verbatim PLACE through @admin (search·list·drawer) ~ BUILT (read membrane)" >>
+<<~Cmd telemetry "does/read a wing's instruments through @daemon → project lar_* (--wing) ~ BUILT (write membrane)" >>
+<<~Cmd recall "does/read the verbatim PLACE through @daemon (search·list·drawer) ~ BUILT (read membrane)" >>
 <<~Cmd ephemeral "does/launch a task into an isolated ephemeral swarm (blind dir; --cleanup off by default) ~ SPECIFIED" >>
 <<~Cmd track "does/(superseded by ephemeral — capture is on by default, no toggle)" >>
 
@@ -289,7 +289,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 ## Operator Rulings Ledger
 
-<<~ranks rulings R1 ~ memory = 4 registers · 2 peers · 1 mesh; mempalace = PLACE, quine = ley-line (2026-06-24) -> R2 ~ @admin engine is the ONE decomposer; render→project to drawer, never tids; @admin owns it (2026-06-24) -> R3 ~ name the process lar-telemetry, not "decompose" (analogy); instruments report readings, never verdicts -> R4 ~ hold ≡ enqueueNalu, flush on next nalu; verbatim-always / gradient-eventual -> R5 ~ subagents captured DISTINCT (spirit wing), named from handoff, BOTH sides -> R6 ~ spirits are NAMELESS #has-stack entities with pet-names; recall by semantic search, #has not deterministically enforced -> R7 ~ capture ON by default (main + all subagents, every surface) -> R8 ~ ephemeral work LAUNCHED isolated (blind dir), not gated; mu-reframe -> R9 ~ --cleanup off by default (blind dir persists for inspection) -> R10 ~ relationship edge = bi-temporal KG predicate, not a tunnel -> R11 ~ FORWARD-FACING (2026-06-25): process each turn forward (verbatim+gradient born together) → enqueue → flush; mempalace = FILER not miner; the race-behind retires; no legacy path (no outside consumers) -> R12 ~ the capture-nalu writer = a SEPARATE LOCAL non-federated worker-VM, NOT the federated @admin (work-memory is a local island); the user-root daemon hosts it beside @admin -> R13 ~ flush crests on the daemon's SERVER TICK (20 Hz setInterval lar-event-bus loop = LarTickCounter, server-side where the palace lives; the browser rAF crests the OTHER, federated in-wiki nalu — do not conflate the two engines' boundaries), backpressure-gated -> R14 ~ TWO instruments never conflated: LarTickCounter (physical flush cadence) vs FfzClock (felt lar_ffz stamp) -> R15 ~ flush-gate CONFIGURABLE via a lar-URI-tagged system config tiddler (cascade = upgrade path); pono default at our scale: flush when depth ≥ 32 OR ≥ 2000 ms -> R16 ~ mempalace ingest via the RFC-002 source-adapter (mempalace-source-lares sibling pkg); the `mine --source` CLI seam authored in the fork -> R17 ~ nalu-flush HARDENED by a four-domain survey (CS·neuro·hydro·lean, 2026-06-25, #nalu-flush-hardening): the CEILING (maxDepth + spill-to-durable-reserve, the all-four-domain converge) · backoff+retry-cap→dead-letter (never head-of-line-block the one writer) · writer-liveness flush-timeout (neuro depolarization-block — the observer survives the storm) · two-tier RRP←reserve. Durability dial RESOLVED: bounded memory + disk reserve, not one or the other. Surfaced counters, never silent -> R18 ~ the gate constants 32/2000 are GUESSED (an EBQ batch-size + a Little's-Law wait-bound); DERIVE from flush-cost·holding-cost·arrival-rate + an adaptive homeostatic servo + tick-jitter = IN SCOPE (2026-06-26): `deriveGate` (EBQ depth=√(2λS/H)) + `adaptGate` (homeostatic servo step) ENACTED in lararium-mesh/src/gate-tuning.ts; tick-jitter rides the daemon tick subscription -> R19 ~ the telemetry-VM is ISOMORPHIC (#isomorphic-telemetry-vm): ONE pure worker (`makeCaptureEngine`, mesh, zero substrate imports) + three injected capability-shaped seams (`CaptureFlush` one-verb · `CaptureReserve` WAL · `CaptureAnnotate`); node=KEEP-shared-palace · browser=REMEMBER-itself-local · cli=RELAY; add a vessel = implement two seams, never rewrite the worker (role=capability≠platform) >>
+<<~ranks rulings R1 ~ memory = 4 registers · 2 peers · 1 mesh; mempalace = PLACE, quine = ley-line (2026-06-24) -> R2 ~ @daemon engine is the ONE decomposer; render→project to drawer, never tids; @daemon owns it (2026-06-24) -> R3 ~ name the process lar-telemetry, not "decompose" (analogy); instruments report readings, never verdicts -> R4 ~ hold ≡ enqueueNalu, flush on next nalu; verbatim-always / gradient-eventual -> R5 ~ subagents captured DISTINCT (spirit wing), named from handoff, BOTH sides -> R6 ~ spirits are NAMELESS #has-stack entities with pet-names; recall by semantic search, #has not deterministically enforced -> R7 ~ capture ON by default (main + all subagents, every surface) -> R8 ~ ephemeral work LAUNCHED isolated (blind dir), not gated; mu-reframe -> R9 ~ --cleanup off by default (blind dir persists for inspection) -> R10 ~ relationship edge = bi-temporal KG predicate, not a tunnel -> R11 ~ FORWARD-FACING (2026-06-25): process each turn forward (verbatim+gradient born together) → enqueue → flush; mempalace = FILER not miner; the race-behind retires; no legacy path (no outside consumers) -> R12 ~ the capture-nalu writer = a SEPARATE LOCAL non-federated worker-VM, NOT the federated @daemon (work-memory is a local island); the user-root daemon hosts it beside @daemon -> R13 ~ flush crests on the daemon's SERVER TICK (20 Hz setInterval lar-event-bus loop = LarTickCounter, server-side where the palace lives; the browser rAF crests the OTHER, federated in-wiki nalu — do not conflate the two engines' boundaries), backpressure-gated -> R14 ~ TWO instruments never conflated: LarTickCounter (physical flush cadence) vs FfzClock (felt lar_ffz stamp) -> R15 ~ flush-gate CONFIGURABLE via a lar-URI-tagged system config tiddler (cascade = upgrade path); pono default at our scale: flush when depth ≥ 32 OR ≥ 2000 ms -> R16 ~ mempalace ingest via the RFC-002 source-adapter (mempalace-source-lares sibling pkg); the `mine --source` CLI seam authored in the fork -> R17 ~ nalu-flush HARDENED by a four-domain survey (CS·neuro·hydro·lean, 2026-06-25, #nalu-flush-hardening): the CEILING (maxDepth + spill-to-durable-reserve, the all-four-domain converge) · backoff+retry-cap→dead-letter (never head-of-line-block the one writer) · writer-liveness flush-timeout (neuro depolarization-block — the observer survives the storm) · two-tier RRP←reserve. Durability dial RESOLVED: bounded memory + disk reserve, not one or the other. Surfaced counters, never silent -> R18 ~ the gate constants 32/2000 are GUESSED (an EBQ batch-size + a Little's-Law wait-bound); DERIVE from flush-cost·holding-cost·arrival-rate + an adaptive homeostatic servo + tick-jitter = IN SCOPE (2026-06-26): `deriveGate` (EBQ depth=√(2λS/H)) + `adaptGate` (homeostatic servo step) ENACTED in lararium-mesh/src/gate-tuning.ts; tick-jitter rides the daemon tick subscription -> R19 ~ the telemetry-VM is ISOMORPHIC (#isomorphic-telemetry-vm): ONE pure worker (`makeCaptureEngine`, mesh, zero substrate imports) + three injected capability-shaped seams (`CaptureFlush` one-verb · `CaptureReserve` WAL · `CaptureAnnotate`); node=KEEP-shared-palace · browser=REMEMBER-itself-local · cli=RELAY; add a vessel = implement two seams, never rewrite the worker (role=capability≠platform) >>
 
 <<~/ahu >>
 
@@ -299,7 +299,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 **BUILT (committed):**
 - lar-telemetry READ membrane (`recall` verb · `lares recall` · MempalaceClient.search · spawn-resolve) — `35a3dfc8`.
-- lar-telemetry WRITE membrane (`lar-telemetry` verb · `lares telemetry` · telemetry-writeback core · hook routed through @admin) — `63d3c1c7`.
+- lar-telemetry WRITE membrane (`lar-telemetry` verb · `lares telemetry` · telemetry-writeback core · hook routed through @daemon) — `63d3c1c7`.
 - Subagent capture (`subagent-mine` · `lares subagents` · lar_agent/lar_sidechain · hook leg) — `21300458`.
 - The worldline handle + projected edge (lar_agent_handle/parent/root, live-proven) + the lar_ffz address mechanism (worldline-clock.ts, tested) — `f551c582`·`2785bfe5`·`712635cc`·`4afed85b`.
 - The RFC-002 source-adapter CLI seam in the mempalace FORK (`mine --source` → registry + ingest-loop; `_mine_via_source_adapter`; conformance test; smoke-proven) — branch `feat/mine-source-registry` (pending ruff/pytest in the uv env + the upstream PR).

@@ -6,7 +6,7 @@
  * (~8s) on every `start()`. Recall (and recall-into-wake at boot) called it
  * fresh-per-call → an 8s tax each time. This pool starts the sidecar ONCE (lazily)
  * and reuses it, self-healing if it dies. First recall pays the cold start; every
- * recall after is warm (sub-second). The @admin seat holds the warm client for the
+ * recall after is warm (sub-second). The @daemon seat holds the warm client for the
  * whole daemon lifetime — this is what makes recall-into-wake fast.
  *
  * Read-only: the pool only ever hands back a client whose tools are list/get/search.

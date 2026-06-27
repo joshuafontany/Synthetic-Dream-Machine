@@ -40,7 +40,7 @@
  * not authority.
  */
 
-import { ADMIN_BAG_ID } from "./lar-uris.js";
+import { DAEMON_BAG_ID } from "./lar-uris.js";
 
 // ---------------------------------------------------------------------------
 // Principal
@@ -73,7 +73,7 @@ export type LarPrincipal =
 //                       lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer
 //
 // The ACCESS axis is a 1:1 mirror of Keyhive's native Access enum (Pull, Read,
-// Edit, Admin) — NOT a parallel Lararium-invented ladder. The live gate is
+// Edit, Daemon) — NOT a parallel Lararium-invented ladder. The live gate is
 // `CapabilityVerifier.verify({ access: "read" | "admin" })` (capability.ts);
 // this ordered tuple gives the edge-island federation scaffolding a typed
 // vocabulary for the same four levels, with the relay-law exception.
@@ -88,7 +88,7 @@ export type LarPrincipal =
 // gate derived from pull/read, not a rung. `revoke` — an ADMIN operation (roll the
 // epoch), carried by EdgeIslandShape.epoch + the "revoked" lifecycle state, not a
 // level above admin.
-// Verbs ARE Keyhive's native Access verbs (Pull/Read/Edit/Admin) — lexical, not
+// Verbs ARE Keyhive's native Access verbs (Pull/Read/Edit/Daemon) — lexical, not
 // just structural, mirror. `Access.tryFromString` accepts these strings; our
 // live gate `CapabilityAccess` (capability.ts) is the {read, admin} subset the
 // KeyhiveProvider delegates today. Use `edit`, not a coined `write`.
@@ -807,5 +807,5 @@ export class BagResidencyManager {
 
 /** Build the URI for a pin tiddler under the admin doc. */
 export function pinTiddlerUri(bagUrl: BagUrl): string {
-  return `${ADMIN_BAG_ID}/pin/${encodeURIComponent(bagUrl)}`;
+  return `${DAEMON_BAG_ID}/pin/${encodeURIComponent(bagUrl)}`;
 }

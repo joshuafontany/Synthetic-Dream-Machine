@@ -38,7 +38,7 @@ import { statSync, readdirSync, readFileSync } from "node:fs";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
 import { ACTION_VERBS, isActionVerb, isTransferVerb, isBagVerb, newChangeId, taskContentId } from "@lararium/mesh";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -275,7 +275,7 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   }
 
   const summary = summaryOutput(result) ?? {};
-  const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  const auditUri = `lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`;
   emit(args, {
     ok: true,
     requestId: result.requestId,

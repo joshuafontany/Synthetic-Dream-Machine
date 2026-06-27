@@ -13,23 +13,23 @@ export { KeyhiveProvider, ensureKeyhiveWasm, setKeyhiveWasmBytes } from "./keyhi
 export { InMemoryEventStore } from "./event-store.js";
 export type { EventStore, EventRecord } from "./event-store.js";
 
-export { AdminEventStore, capEventTitle } from "./admin-event-store.js";
-export type { AdminEventStoreOptions } from "./admin-event-store.js";
+export { DaemonEventStore, capEventTitle } from "./daemon-event-store.js";
+export type { DaemonEventStoreOptions } from "./daemon-event-store.js";
 
 export const KEYHIVE_PROBE_VERSION = "0.0.0-alpha.56c";
 
-export { bootAdminKeyhive } from "./boot-admin-keyhive.js";
-export type { BootAdminKeyhiveInput, BootAdminKeyhiveResult } from "./boot-admin-keyhive.js";
+export { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
+export type { BootDaemonKeyhiveInput, BootDaemonKeyhiveResult } from "./boot-daemon-keyhive.js";
 
 export { resolveOrMintBinding } from "./resolve-binding.js";
 export type {
   ResolveBindingArgs, ResolveBindingResult, BindingKind, DocMinter,
 } from "./resolve-binding.js";
 
-// makeOperatorAdminBehavior is NOT re-exported here — it couples to @lararium/tw5
-// (makeAdminBehavior), and dragging tw5's index through the keyhive core index
+// makeOperatorDaemonBehavior is NOT re-exported here — it couples to @lararium/tw5
+// (makeDaemonBehavior), and dragging tw5's index through the keyhive core index
 // would pull tw5's browser-surface into keyhive consumers. It lives on its own
-// subpath ("@lararium/keyhive/operator-admin-behavior") so the keyhive core
+// subpath ("@lararium/keyhive/operator-daemon-behavior") so the keyhive core
 // index stays tw5-free; only the admin worker entries (which need tw5 anyway)
 // import it.
 

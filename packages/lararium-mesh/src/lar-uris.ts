@@ -153,10 +153,10 @@ export function parseMeshScale(s: string | null | undefined): MeshScale | undefi
 // never nested under the @lararium corpus (the pre-plane-split `@lararium/wikis/`
 // form is retired).
 
-// ── Admin bag ─────────────────────────────────────────────────────────────
+// ── Daemon bag ─────────────────────────────────────────────────────────────
 
-/** Admin wiki bag id — the admin control plane's own `@admin` bag (one-recipe model). */
-export const ADMIN_BAG_ID    = stableLarUri("@admin");
+/** Daemon wiki bag id — the lararium's own central daemon `@daemon` bag (one-recipe model). */
+export const DAEMON_BAG_ID    = stableLarUri("@daemon");
 
 // ── Recipe + bag descriptor URI builders ──────────────────────────────────
 
@@ -230,19 +230,19 @@ export const PERSONA_GROUP_SENTINEL_URI = stableLarUri("@operator/persona-group"
 /** Sentinel URI for a Nexus's MeshCabal membership document. */
 export const MESH_CABAL_SENTINEL_URI   = stableLarUri("@mesh/admin-cabal");
 
-/** Admin oracle tiddler: PersonaGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
-export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${ADMIN_BAG_ID}/sentinel/persona-group/doc-id`;
-/** Admin oracle tiddler: PersonaGroup agent Identifier (hex). Used by boot Gate C. */
-export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${ADMIN_BAG_ID}/sentinel/persona-group/agent-id`;
-/** Admin oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
-export const MESH_CABAL_DOC_ID_TIDDLER     = `${ADMIN_BAG_ID}/sentinel/mesh-cabal/doc-id`;
-/** Admin oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
+/** Daemon oracle tiddler: PersonaGroup Document ID (hex). Legacy sentinel target (the Binding Gate superseded it). */
+export const PERSONA_GROUP_DOC_ID_TIDDLER   = `${DAEMON_BAG_ID}/sentinel/persona-group/doc-id`;
+/** Daemon oracle tiddler: PersonaGroup agent Identifier (hex). Used by boot Gate C. */
+export const PERSONA_GROUP_AGENT_ID_TIDDLER = `${DAEMON_BAG_ID}/sentinel/persona-group/agent-id`;
+/** Daemon oracle tiddler: MeshCabal Document ID (hex). Used by boot Gate C. */
+export const MESH_CABAL_DOC_ID_TIDDLER     = `${DAEMON_BAG_ID}/sentinel/mesh-cabal/doc-id`;
+/** Daemon oracle tiddler: the PINNED signer DID ("0x"+hex) the Binding Gate verifies the edge against —
  *  self-DID for an anon (self-signed), a granting root-DID for a delegated/operator vessel. */
-export const SIGNER_DID_TIDDLER            = `${ADMIN_BAG_ID}/binding/signer-did`;
-/** Admin oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
-export const HEARTH_TRUE_NAME_TIDDLER      = `${ADMIN_BAG_ID}/hearth/true-name`;
-/** Admin oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
-export const DEVICE_DELEGATION_SELF_TIDDLER = `${ADMIN_BAG_ID}/delegation/self`;
+export const SIGNER_DID_TIDDLER            = `${DAEMON_BAG_ID}/binding/signer-did`;
+/** Daemon oracle tiddler: the hearth true-name (engine content-CID) this vessel binds TO — the place in (vessel × hearthTrueName). */
+export const HEARTH_TRUE_NAME_TIDDLER      = `${DAEMON_BAG_ID}/hearth/true-name`;
+/** Daemon oracle tiddler: this vessel's OWN signed device-delegation edge (signer→vessel) — the public binding the Binding Gate verifies. */
+export const DEVICE_DELEGATION_SELF_TIDDLER = `${DAEMON_BAG_ID}/delegation/self`;
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
@@ -250,11 +250,11 @@ export const DEVICE_DELEGATION_SELF_TIDDLER = `${ADMIN_BAG_ID}/delegation/self`;
 // (@personal, @draft, @working) that share a lifecycle. The binding tiddler
 // title is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim
-export const PERSONAL_BINDINGS_PREFIX = `${ADMIN_BAG_ID}/personal-bindings`;
-export const DRAFT_BINDINGS_PREFIX    = `${ADMIN_BAG_ID}/draft-bindings`;
+export const PERSONAL_BINDINGS_PREFIX = `${DAEMON_BAG_ID}/personal-bindings`;
+export const DRAFT_BINDINGS_PREFIX    = `${DAEMON_BAG_ID}/draft-bindings`;
 // @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the
 // SAVED live write layer; normal edits route here, canon publishes on promotion.
-export const WORKING_BINDINGS_PREFIX  = `${ADMIN_BAG_ID}/working-bindings`;
+export const WORKING_BINDINGS_PREFIX  = `${DAEMON_BAG_ID}/working-bindings`;
 
 // ── Well-known bag slot IDs ────────────────────────────────────────────────
 // Six root docs (two planes) + in-memory leaves.

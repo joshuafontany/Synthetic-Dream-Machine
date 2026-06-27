@@ -9,9 +9,9 @@
       "import": "./dist/src/index.js",
       "types": "./dist/src/index.d.ts"
     },
-    "./operator-admin-behavior": {
-      "import": "./dist/src/operator-admin-behavior.js",
-      "types": "./dist/src/operator-admin-behavior.d.ts"
+    "./operator-daemon-behavior": {
+      "import": "./dist/src/operator-daemon-behavior.js",
+      "types": "./dist/src/operator-daemon-behavior.d.ts"
     }
   },
   "main": "./dist/src/index.js",

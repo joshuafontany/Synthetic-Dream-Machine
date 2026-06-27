@@ -2,14 +2,14 @@ import type { AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import { ACTIVE_WIKI_URI, buildActiveWikiRecord, readActiveWikiSlug } from "./active-wiki.js";
 import {
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   CATALOG_DOC_URI,
   LARES_DOC_URI,
   LARARIUM_DOC_URI,
   ORACLE_DOC_URI,
   emptyLarDoc,
   mutableLarRecord,
-  mkAdminWikiAlert,
+  mkDaemonWikiAlert,
   recipeUri,
   wikiBagUri,
   wikiDraftBagUri,
@@ -118,13 +118,13 @@ export function makeOpenWikiReactor(opts: WikiHandlerOptions): VerbReactor {
 
     const origin: ChangeOrigin = { kind: "lares-verb", requestId: makeRequestId("wiki") };
     const record: LarTiddlerRecord = buildActiveWikiRecord(slug, "lares-cli:wiki-open");
-    await opts.composite.put(record, origin, { bag: ADMIN_BAG_ID });
+    await opts.composite.put(record, origin, { bag: DAEMON_BAG_ID });
 
-    // Reboot-pending: the active-wiki marker lives in @admin (the running wiki doesn't
+    // Reboot-pending: the active-wiki marker lives in @daemon (the running wiki doesn't
     // load it) — the switch only takes effect on next boot. Alert the wiki being
     // switched AWAY from (the one currently live), if any.
     if (currentSlug) {
-      opts.post(mkAdminWikiAlert({ wikiSlug: currentSlug, message: `Active wiki will switch to "${slug}" — reboot to load it.`, cause: "open-wiki" }));
+      opts.post(mkDaemonWikiAlert({ wikiSlug: currentSlug, message: `Active wiki will switch to "${slug}" — reboot to load it.`, cause: "open-wiki" }));
     }
 
     return {

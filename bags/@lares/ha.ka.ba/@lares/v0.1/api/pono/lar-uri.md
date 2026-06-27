@@ -147,7 +147,7 @@ Within lar paths (`lar:///ha.ka.ba/...` OR `lar:///w1.w2.w3/...` style), exactly
 ```
 lar:///ha.ka.ba/@lares                     ← child[1]=@lares       : the personality bag
 lar:///ha.ka.ba/@lararium                  ← child[1]=@lararium    : the system bag
-lar:///ha.ka.ba/@admin                     ← child[1]=@admin       : the admin wiki bag
+lar:///ha.ka.ba/@daemon                     ← child[1]=@daemon       : the admin wiki bag
 lar:///ha.ka.ba/@synthetic-dream-machine   ← child[1]=@<wiki-slug> : a wiki bag
 lar:///ha.ka.ba/@elyncia                   ← child[1]=@<corpus>    : a canon content bag
 lar:///ha.ka.ba/@personal                  ← child[1]=@personal    : the personal slot

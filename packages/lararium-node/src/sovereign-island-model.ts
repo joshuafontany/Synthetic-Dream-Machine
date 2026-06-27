@@ -13,7 +13,7 @@
  *
  * ## VM Pool alignment
  *
- *   Node vessel: Admin island (sovereign island) + Pinned (PrimaryWiki in-process)
+ *   Node vessel: Daemon island (sovereign island) + Pinned (PrimaryWiki in-process)
  *                + N hot islands (session wikis, LRU-evicted to cold).
  *   Every hot island runs via runSovereignWorker(behavior).
  *

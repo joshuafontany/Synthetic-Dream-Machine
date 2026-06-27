@@ -1,5 +1,5 @@
 /**
- * admin-auth-gate — pre-sync WebSocket authentication gate for the admin doc.
+ * daemon-auth-gate — pre-sync WebSocket authentication gate for the admin doc.
  *
  * Wraps a WebSocketServer as an EventEmitter proxy compatible with
  * NodeWSServerAdapter. The adapter calls .on("connection") and .on("close")
@@ -27,7 +27,7 @@
  *   - V3 proof-of-possession (ENFORCED): the gate emits its gate-binding key in
  *     lar:challenge and relays the peer's {nonce, sig, ts} to the keyholder worker,
  *     which verifies the Ed25519 proof (verifyAuthProof) against the card key + the
- *     gate's own key AND folds the result into its verdict (operator-admin-behavior,
+ *     gate's own key AND folds the result into its verdict (operator-daemon-behavior,
  *     step D). So `verdict.ok` already means capability AND a verified proof; the
  *     gate admits on it directly and stays keyhive-free. A node operator MAY relax
  *     to capability-only with LAR_V3_ALLOW_UNPROVEN=1 (the prior advisory posture).
@@ -35,7 +35,7 @@
  *   - Concurrent unauthenticated connections are capped at MAX_PENDING.
  *   - Auth timeout is 5 s (machine-to-machine; no human interaction path).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/admin-auth-gate
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/daemon-auth-gate
  */
 
 import { EventEmitter }  from "node:events";
@@ -44,7 +44,7 @@ import type WebSocket    from "isomorphic-ws";
 import type { WebSocketServer as WSSType } from "isomorphic-ws";
 import {
   mkLarChallenge, mkLarAuthOk, mkLarAuthDenied, isLarAuthMsg,
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
 } from "@lararium/mesh";
 import type { AuthVerifierSeam } from "@lararium/mesh";
 
@@ -68,7 +68,7 @@ interface ArmedState {
  * WebSocketServer. Intercepts raw connections, runs the auth exchange,
  * and only forwards authenticated sockets to the adapter.
  */
-export class AdminAuthGate extends EventEmitter {
+export class DaemonAuthGate extends EventEmitter {
   /** Mirrors the set of authenticated, live WebSocket connections.
    *  NodeWSServerAdapter reads .clients for keep-alive sweeps. */
   readonly clients: Set<WebSocket> = new Set();
@@ -92,7 +92,7 @@ export class AdminAuthGate extends EventEmitter {
    * Call once the admin VM lives (its in-worker keyhive answers verify-proxy
    * queries). Connections arriving before arm() are rejected with 4503.
    */
-  arm(seam: AuthVerifierSeam, adminBagUrl: string = ADMIN_BAG_ID, gatePubKey?: string): void {
+  arm(seam: AuthVerifierSeam, adminBagUrl: string = DAEMON_BAG_ID, gatePubKey?: string): void {
     this.armed = { seam, adminBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
   }
 

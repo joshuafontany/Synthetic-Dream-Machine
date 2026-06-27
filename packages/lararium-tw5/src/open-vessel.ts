@@ -19,7 +19,7 @@ import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from ".
 import { VerbTable } from "./verb-dispatcher.js";
 
 /** The admin VM surface the orchestrator drives (node + browser both satisfy it). */
-export interface VesselAdminVm {
+export interface VesselDaemonVm {
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
   resolveBinding: BindingResolver;
@@ -45,15 +45,15 @@ export interface VesselOrchestration<TPool extends PrimaryMountPool> {
   /** Resolve the active-wiki slot AFTER the keel assembles — the slug derives from the
    *  admin-doc marker (post-genesis), so it cannot precede assembleVessel. */
   wikiSlot:     (assembly: VesselCoreAssembly) => VesselWikiSlot | Promise<VesselWikiSlot>;
-  /** Open the platform admin VM once the keel + slot resolved (adminAuth registers the
+  /** Open the platform admin VM once the keel + slot resolved (daemonAuth registers the
    *  slot's wiki/draft bags; sentinels read from the assembled admin doc). */
-  openAdmin:    (a: { assembly: VesselCoreAssembly; slot: VesselWikiSlot }) => Promise<VesselAdminVm>;
+  openDaemon:    (a: { assembly: VesselCoreAssembly; slot: VesselWikiSlot }) => Promise<VesselDaemonVm>;
   /** Wire the vessel's verb plane (capability piece; relay holds more). */
   wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
   /** Capability hook AFTER admin VM lives (node: arm the inbound gate). */
-  afterAdmin?:  (admin: VesselAdminVm, assembly: VesselCoreAssembly) => void;
+  afterDaemon?:  (admin: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
   /** Build the island pool (platform: VesselIslandPool ↔ BrowserVesselIslandPool). */
-  makePool:     (admin: VesselAdminVm, assembly: VesselCoreAssembly) => TPool | Promise<TPool>;
+  makePool:     (admin: VesselDaemonVm, assembly: VesselCoreAssembly) => TPool | Promise<TPool>;
   /** Capability hook AFTER `live` (browser: broadcast presence). */
   afterLive?:   (ctx: { pool: TPool; assembly: VesselCoreAssembly; wikiHandle: DocHandle<LarDoc> }) => void;
 }
@@ -62,7 +62,7 @@ export interface VesselCoreResult<TPool extends PrimaryMountPool> {
   repo:         Repo;
   assembly:     VesselCoreAssembly;
   pool:         TPool;
-  admin:        VesselAdminVm;
+  admin:        VesselDaemonVm;
   wikiHandle:   DocHandle<LarDoc>;
   draftHandle:  DocHandle<LarDoc>;
 }
@@ -86,13 +86,13 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   const slot = await o.wikiSlot(assembly);
 
   // ── admin VM (platform) ──
-  const admin = await o.openAdmin({ assembly, slot });
+  const admin = await o.openDaemon({ assembly, slot });
 
   // ── verb plane (capability piece) ──
   const registry = new VerbTable();
   o.wireVerbs?.(registry, assembly);
   admin.mountMainVerbs(registry);
-  o.afterAdmin?.(admin, assembly);
+  o.afterDaemon?.(admin, assembly);
 
   // ── wiki-slot layers (mesh) ──
   // The @lares-as-wiki quine: when the active slug opens the invariant bag

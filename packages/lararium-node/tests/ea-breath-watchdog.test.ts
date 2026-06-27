@@ -6,10 +6,10 @@
  * breath; silence alone times out. A mounting island that still breathes
  * never reads dead, however long the mount — the flat 120s deadline retires.
  *
- * Runs openAdminVmCore against a scripted fake worker (no real island), with
+ * Runs openDaemonVmCore against a scripted fake worker (no real island), with
  * a small injected silence budget so the vectors stay fast.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/admin-vm-core
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/daemon-vm-core
  */
 
 import { describe, test, expect, afterEach } from "vitest";
@@ -21,7 +21,7 @@ import {
   type LarDoc,
   type IslandMsg_Manifest,
 } from "@lararium/mesh";
-import { openAdminVmCore, type AdminVmHost } from "@lararium/tw5";
+import { openDaemonVmCore, type DaemonVmHost } from "@lararium/tw5";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
@@ -39,7 +39,7 @@ function fakeWorker() {
   };
 }
 
-describe("openAdminVmCore — the ea-breath watchdog", () => {
+describe("openDaemonVmCore — the ea-breath watchdog", () => {
   const cleanups: Array<() => void | Promise<void>> = [];
 
   afterEach(async () => {
@@ -48,11 +48,11 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
 
   function openCore(eaSilenceMs: number, eaStallMs?: number) {
     const repo        = new Repo({ sharePolicy: async () => true });
-    const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+    const daemonHandle = repo.create<LarDoc>(emptyLarDoc());
     const fw          = fakeWorker();
     const ports: NodeMessagePort[] = [];
 
-    const host: AdminVmHost = {
+    const host: DaemonVmHost = {
       spawnWorker: () => fw.handle,
       newSyncChannel: () => {
         const { port1, port2 } = new MessageChannel();
@@ -64,11 +64,11 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
       },
     };
 
-    const core = openAdminVmCore(host, {
+    const core = openDaemonVmCore(host, {
       repo,
-      adminHandle,
-      recipe:          { wikiSlug: "admin" },
-      grants:          { islandUrl: adminHandle.url },
+      daemonHandle,
+      recipe:          { wikiSlug: "daemon" },
+      grants:          { islandUrl: daemonHandle.url },
       coreHash:        null,
       workerScriptUrl: new URL("file:///unused-fake-worker"),
       eaSilenceMs,
@@ -88,9 +88,9 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
     // Breathe every 50ms for 400ms — far past the 150ms silence budget.
     for (let i = 0; i < 8; i++) {
       await sleep(50);
-      fw.emit(mkBreath("lar:///ha.ka.ba/@admin", "recipe"));
+      fw.emit(mkBreath("lar:///ha.ka.ba/@daemon", "recipe"));
     }
-    fw.emit(mkEa("lar:///ha.ka.ba/@admin"));
+    fw.emit(mkEa("lar:///ha.ka.ba/@daemon"));
 
     await expect(core.workerEa).resolves.toBeUndefined();
   });
@@ -100,7 +100,7 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
 
     // Frozen (phase, progress) every 30ms — alive, never advancing.
     const breather = setInterval(
-      () => fw.emit(mkBreath("lar:///ha.ka.ba/@admin", "slots", 2)),
+      () => fw.emit(mkBreath("lar:///ha.ka.ba/@daemon", "slots", 2)),
       30,
     );
     cleanups.push(() => clearInterval(breather));
@@ -113,9 +113,9 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
 
     for (let i = 0; i < 8; i++) {
       await sleep(40);
-      fw.emit(mkBreath("lar:///ha.ka.ba/@admin", "recipe", i + 1));
+      fw.emit(mkBreath("lar:///ha.ka.ba/@daemon", "recipe", i + 1));
     }
-    fw.emit(mkEa("lar:///ha.ka.ba/@admin"));
+    fw.emit(mkEa("lar:///ha.ka.ba/@daemon"));
 
     await expect(core.workerEa).resolves.toBeUndefined();
   });
@@ -123,8 +123,8 @@ describe("openAdminVmCore — the ea-breath watchdog", () => {
   test("silence alone rejects, naming the last breath heard", async () => {
     const { core, fw } = openCore(120);
 
-    fw.emit(mkBreath("lar:///ha.ka.ba/@admin", "slots"));
-    fw.emit(mkBreath("lar:///ha.ka.ba/@admin", "tw5-boot"));
+    fw.emit(mkBreath("lar:///ha.ka.ba/@daemon", "slots"));
+    fw.emit(mkBreath("lar:///ha.ka.ba/@daemon", "tw5-boot"));
     // ...then breathing stops.
 
     await expect(core.workerEa).rejects.toThrow(/silence.*tw5-boot/s);

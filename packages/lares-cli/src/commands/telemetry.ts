@@ -1,7 +1,7 @@
 /**
- * `lares telemetry` — run lar-telemetry over a wing THROUGH the @admin seat.
+ * `lares telemetry` — run lar-telemetry over a wing THROUGH the @daemon seat.
  *
- * The turn's instrument readings (the gradient chat sigils) are read by the @admin
+ * The turn's instrument readings (the gradient chat sigils) are read by the @daemon
  * engine and projected as `lar_*` onto the wing's mempalace drawers — mempalace
  * through the seat, web3-only (a capability-bearing verb-summons, never a direct
  * subprocess). The same-timing capture hook calls this beside the verbatim mine.
@@ -19,7 +19,7 @@
 
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -84,7 +84,7 @@ export async function cmdTelemetry(args: ParsedArgs): Promise<number> {
     requestId: result.requestId,
     data: out,
     human: () => {
-      console.log(`lares telemetry → ${String(out["wing"] ?? wing)} (via @admin seat)`);
+      console.log(`lares telemetry → ${String(out["wing"] ?? wing)} (via @daemon seat)`);
       console.log(`  drawers read:   ${out["drawers"] ?? 0}  (${out["framed"] ?? 0} framed)`);
       console.log(`  lar_* written:  ${out["applied"] ?? 0}`);
       console.log(`  bands:          canon ${bands["canon"] ?? 0} · synthesis ${bands["synthesis"] ?? 0} · provisional ${bands["provisional"] ?? 0} · raw ${bands["raw"] ?? 0}`);

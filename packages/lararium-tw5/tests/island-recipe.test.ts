@@ -3,7 +3,7 @@
  *
  * buildIslandRecipe points config/current-wiki-bag at the wiki's LIVE write
  * layer. An operator content wiki (a @working grant resolved) routes live edits
- * to @working; a grant-less mount — the @admin administrative DAEMON, a control
+ * to @working; a grant-less mount — the @daemon administrative DAEMON, a control
  * plane with no working/canon split — falls back to its OWN bag, keeping a
  * writable default path instead of throwing on the first cascade-routed edit
  * (the gate fix; the grant→layer→seed chain the adaptor flip witness skips).
@@ -72,15 +72,15 @@ describe("buildIslandRecipe — the write-layer seed gate", () => {
     expect(await currentWikiBag(stores)).toBe(WORKING_BAG);
   });
 
-  test("no @working grant (the @admin daemon) → falls back to its OWN bag, never throws", async () => {
+  test("no @working grant (the @daemon daemon) → falls back to its OWN bag, never throws", async () => {
     const composite = new CompositeStore();
     const { stores } = buildIslandRecipe({
       tw5: fakeTw5(),
       composite,
-      recipe: { wikiSlug: "admin" },
+      recipe: { wikiSlug: "daemon" },
       ready: [],
     });
     // The control-plane daemon keeps its own bag as the default write path.
-    expect(await currentWikiBag(stores)).toBe(wikiBagUri("admin"));
+    expect(await currentWikiBag(stores)).toBe(wikiBagUri("daemon"));
   });
 });

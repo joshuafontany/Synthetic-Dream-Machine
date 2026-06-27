@@ -2,7 +2,7 @@
  * openNodeVessel — local-first Node.js vessel factory.
  *
  * A thin RECIPE over `openVesselCore` (the one keel, both substrates). Node supplies
- * the platform atoms (NodeFS storage, WS relay + AdminAuthGate, worker_threads pool)
+ * the platform atoms (NodeFS storage, WS relay + DaemonAuthGate, worker_threads pool)
  * and the capability pieces it holds (the inbound gate, the corpus loader, the residual
  * pool/repo verbs, the main-resident BagResidencyManager mechanism). The keel sequences
  * the substrate (composite cascade, genesis, social plane, admin doc, wiki-slot) VM-free
@@ -30,7 +30,7 @@ import {
   OpenIdentitySlot,
   emptyLarDoc, mutableLarRecord, tiddlerText,
   ORACLE_DOC_URI, LARARIUM_DOC_URI, CATALOG_DOC_URI, LARES_DOC_URI, WORKING_BAG,
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
+  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
   BAG_IDS, slugFromUri,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
@@ -45,7 +45,7 @@ import {
   loadCatalogCorpora,
   openVesselCore,
 } from "@lararium/tw5";
-import type { VesselWikiSlot, AdminVmCore } from "@lararium/tw5";
+import type { VesselWikiSlot, DaemonVmCore } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
@@ -55,12 +55,12 @@ import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/me
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
-import { openAdminVm }                    from "./open-admin-vm.js";
+import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
   makeResidencyStatsReactor,
 } from "@lararium/tw5";   // residency stats — the lone read that stays main-resident
 import { generateOrLoadVesselIdentity, loadVesselSigningSeed } from "./node-vessel-identity.js";
-import { AdminAuthGate }                           from "./admin-auth-gate.js";
+import { DaemonAuthGate }                           from "./daemon-auth-gate.js";
 
 const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early alpha, no package-dir compatibility)
 
@@ -93,7 +93,7 @@ export interface NodeVesselOptions extends LarariumVesselOptions {
   rootDir?: string;
 }
 
-export interface NodeVesselResult extends VesselResult<VesselIslandPool, AdminVmCore> {
+export interface NodeVesselResult extends VesselResult<VesselIslandPool, DaemonVmCore> {
   /** Started event bus — ingress rings registered; tick loop running at 20 Hz (node substrate). */
   eventBus:  LarEventBusImpl;
   /** Stop the N-accumulator tick loop (call on graceful shutdown). */
@@ -110,9 +110,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
   emit("boot");
 
-  // ── 1. Repo — NodeFS storage + WebSocket relay behind the AdminAuthGate ─────
+  // ── 1. Repo — NodeFS storage + WebSocket relay behind the DaemonAuthGate ─────
   const storage = new NodeFSStorageAdapter(storageDir);
-  const authGate = new AdminAuthGate(wss);
+  const authGate = new DaemonAuthGate(wss);
   const network  = new ListeningWSServerAdapter(authGate as unknown as typeof wss);
   const peerIdentifierMap = new Map<string, string>();
   network.on("peer-candidate", ({ peerId }: { peerId: string }) => {
@@ -127,7 +127,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   const repo = new Repo({
     storage,
     network: [network],
-    // Two rings: WS peers (outside) must have passed the AdminAuthGate; the
+    // Two rings: WS peers (outside) must have passed the DaemonAuthGate; the
     // vessel's OWN islands (MessageChannel peers — admin + wiki workers) are
     // house members and share freely. Without the island ring, main never
     // relays admin-island-minted docs (@personal/@draft bindings) to the wiki
@@ -168,7 +168,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
   // ── Main-resident residency MECHANISM (sovereign-worker: policy in the worker,
   //    mechanism here). onEvict commands the pool via the forward `vmManager` ref. ──
   let vmManager!: VesselIslandPool;        // set in makePool
-  let adminVm!:   AdminVmCore;           // set in openAdmin
+  let daemonVm!:   DaemonVmCore;           // set in openDaemon
   let eventBus!:  LarEventBusImpl;         // set in makePool
   let bootstrap!: VesselBootstrap;         // captured in loadGenesis
   let slotActiveWikiId = "";               // captured in wikiSlot
@@ -184,9 +184,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     },
   });
 
-  // Read the admin doc (idempotent re-resolve; openAdminVm finds the same handle).
-  const readAdminDoc = async (): Promise<DocHandle<LarDoc>> =>
-    resolveBootDoc<LarDoc>(repo, bootstrap.adminUrl as AutomergeUrl, { tideline: "hearth-private", label: "@admin" });
+  // Read the admin doc (idempotent re-resolve; openDaemonVm finds the same handle).
+  const readDaemonDoc = async (): Promise<DocHandle<LarDoc>> =>
+    resolveBootDoc<LarDoc>(repo, bootstrap.daemonUrl as AutomergeUrl, { tideline: "hearth-private", label: "@daemon" });
 
   const result = await openVesselCore<VesselIslandPool>({
     keel: {
@@ -242,14 +242,14 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         const identitiesUrl = bootstrapTiddlers[IDENTITIES_DOC_URI]?.text ?? tiddlerText(id?.[IDENTITIES_DOC_URI]) ?? null;
         const circlesUrl    = bootstrapTiddlers[CIRCLES_DOC_URI]?.text    ?? tiddlerText(id?.[CIRCLES_DOC_URI])    ?? null;
         const sessionsUrl   = bootstrapTiddlers[SESSIONS_DOC_URI]?.text   ?? tiddlerText(id?.[SESSIONS_DOC_URI])   ?? null;
-        const adminUrl      = bootstrapTiddlers[ADMIN_BAG_ID]?.text       ?? tiddlerText(id?.[ADMIN_BAG_ID])       ?? null;
-        if (!identitiesUrl || !circlesUrl || !sessionsUrl || !adminUrl) {
+        const daemonUrl      = bootstrapTiddlers[DAEMON_BAG_ID]?.text       ?? tiddlerText(id?.[DAEMON_BAG_ID])       ?? null;
+        if (!identitiesUrl || !circlesUrl || !sessionsUrl || !daemonUrl) {
           throw new Error(
             `[lararium] social plane not initialised — run: pnpm --filter @lararium/node lararium:init\n` +
-            `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !adminUrl && "@admin"].filter(Boolean).join(", ")}`,
+            `  missing: ${[!identitiesUrl && "@identities", !circlesUrl && "@circles", !sessionsUrl && "@sessions", !daemonUrl && "@daemon"].filter(Boolean).join(", ")}`,
           );
         }
-        bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, adminUrl };
+        bootstrap = { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl };
         return { islandHandle, coreHash, bootstrap };
       },
 
@@ -267,7 +267,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
     // Active-wiki slot — slug from the admin-doc marker (post-genesis).
     wikiSlot: async (_assembly: VesselCoreAssembly): Promise<VesselWikiSlot> => {
-      const sel = selectActiveWikiSlug(wikiId, (await readAdminDoc()).doc()?.tiddlers?.[ACTIVE_WIKI_URI] ?? null);
+      const sel = selectActiveWikiSlug(wikiId, (await readDaemonDoc()).doc()?.tiddlers?.[ACTIVE_WIKI_URI] ?? null);
       activeWikiSource = sel.source;
       slotActiveWikiId = sel.slug;
       const identity = new OpenIdentitySlot(`${hostId}:${sel.slug}`);
@@ -282,9 +282,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       };
     },
 
-    // Admin VM — sovereign admin island + the operator's authn/z home.
-    openAdmin: async ({ assembly, slot }) => {
-      const adminDoc = (await readAdminDoc()).doc();
+    // Daemon VM — sovereign admin island + the operator's authn/z home.
+    openDaemon: async ({ assembly, slot }) => {
+      const adminDoc = (await readDaemonDoc()).doc();
       const personaGroupDocIdHex   = tiddlerText(adminDoc?.tiddlers?.[PERSONA_GROUP_DOC_ID_TIDDLER])   ?? null;
       const personaGroupAgentIdHex = tiddlerText(adminDoc?.tiddlers?.[PERSONA_GROUP_AGENT_ID_TIDDLER]) ?? null;
       const meshCabalDocIdHex     = tiddlerText(adminDoc?.tiddlers?.[MESH_CABAL_DOC_ID_TIDDLER])     ?? null;
@@ -299,34 +299,34 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         throw new Error(`[lararium] DreamNet binding (signer pin + device edge) missing from admin doc — run \`lares init\`.`);
       }
       const deviceEdge = edgeRecord.tiddler as unknown as DeviceDelegationTiddler;
-      const adminAuth = {
+      const daemonAuth = {
         seed:                 operatorSeed,
         operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex, personaGroupAgentIdHex, meshCabalDocIdHex,
         registerBags: [
-          ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
+          DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lararium, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
         signerDid,
         deviceEdge,
       };
-      adminVm = await openAdminVm({
+      daemonVm = await openDaemonVm({
         repo,
-        adminUrl: bootstrap.adminUrl,
+        daemonUrl: bootstrap.daemonUrl,
         coreHash: assembly.coreHash,
         grants: {
           islandUrl: assembly.islandHandle.url,
-          // The admin island's OWN bag (@admin = wikiBagUri("admin"), one-recipe model).
-          wikiUrl:   bootstrap.adminUrl,
+          // The admin island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
+          wikiUrl:   bootstrap.daemonUrl,
           // ACCESS grant, not a LOAD slot — @catalog is absent from expandRecipe,
           // so the kernel never layers it; the worker reaches it via the accessor.
           catalogUrl: catalogHandle.url,
         },
-        adminAuth,
+        daemonAuth,
         storageDir,
       });
-      return { workerEa: adminVm.workerEa, mountMainVerbs: adminVm.mountMainVerbs, resolveBinding: adminVm };
+      return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };
     },
 
     // Thin main verb plane. Every admin verb that touches the catalog / recipe /
@@ -354,7 +354,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         }),
       );
       registry.register("residency", makeResidencyStatsReactor({ residency }));
-      // recall — the mempalace READ membrane (Option D, slice 1). The @admin host
+      // recall — the mempalace READ membrane (Option D, slice 1). The @daemon host
       // reaches the verbatim PLACE memory THROUGH the seat: a read-only sidecar,
       // spawned per call, semantic-search | list | get. mempalace stays a vendored
       // web2 sibling behind the causal-island shore (web3-only law) — only its REACH
@@ -375,7 +375,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           return { mode: "list", ...(await client.listDrawers({ ...(wing !== undefined ? { wing } : {}), ...(limit !== undefined ? { limit } : {}) })) };
         });
       });
-      // lar-telemetry — the mempalace WRITE membrane (Option D, slice 2). The @admin
+      // lar-telemetry — the mempalace WRITE membrane (Option D, slice 2). The @daemon
       // host reads a wing's drawers' instrument readings (the gradient parser) and
       // projects lar_* back ONTO them THROUGH the seat (capability-gated, witnessed),
       // never a raw CLI subprocess. MVP flushes on invocation; the nalu-batched
@@ -397,7 +397,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     },
 
     // After the admin VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.
-    afterAdmin: (_admin, assembly) => {
+    afterDaemon: (_daemon, assembly) => {
       void residency.pin(BAG_IDS.catalog,    "boot:catalog");
       void residency.pin(BAG_IDS.oracle,     "boot:oracle-island");
       void residency.pin(BAG_IDS.lararium,   "boot:lararium-corpus");
@@ -405,23 +405,23 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       void residency.pin(BAG_IDS.identities, "boot:identities");
       void residency.pin(BAG_IDS.groups,     "boot:circles");
       void residency.pin(BAG_IDS.sessions,   "boot:sessions");
-      void residency.pin(ADMIN_BAG_ID,       "boot:admin");
+      void residency.pin(DAEMON_BAG_ID,       "boot:daemon");
       residency.startSweeper();
       assembly.composite.attachResidency(residency);
 
       // Inbound WS gate — the admin island's in-worker keyhive answers each peer.
-      authGate.arm(adminVm.authSeam, ADMIN_BAG_ID, operatorIdentity.verifyingKey);
+      authGate.arm(daemonVm.authSeam, DAEMON_BAG_ID, operatorIdentity.verifyingKey);
 
       // Keep oracle tiddlers current — self, ka, ba, social plane, admin.
       reconcileWellKnownTiddlers(
         assembly.islandHandle, catalogHandle.url, assembly.laresHandle?.url,
         bootstrap.identitiesUrl, bootstrap.circlesUrl, bootstrap.sessionsUrl,
-        adminVm.adminHandle.url,
+        daemonVm.daemonHandle.url,
       );
     },
 
     // Island pool (worker_threads) + the event bus + the sovereign-worker command bindings.
-    makePool: (_admin, assembly) => {
+    makePool: (_daemon, assembly) => {
       // ── Durable mailbox (lane law §7) — keel mechanism (vessel-mailbox.ts,
       // substrate-agnostic); this vessel supplies only its live-delivery path.
       const mailbox = makeDurableMailbox(
@@ -458,17 +458,17 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       });
 
       // Sovereign-worker: bind the pool MECHANISM to the worker's POLICY commands.
-      adminVm.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
-      adminVm.onResidencyOp(async (op, bagId, reason) => {
+      daemonVm.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
+      daemonVm.onResidencyOp(async (op, bagId, reason) => {
         if (op === "pin")        await residency.pin(bagId, reason);
         else if (op === "unpin") residency.unpin(bagId);
         else                     residency.registerCold(bagId);
       });
       // Wiki-alert delivery: the worker named an affected wiki; place a system-alert verb
       // into that wiki's live island (skip silently if not mounted). wikiId = host:slug.
-      adminVm.onWikiAlert((wikiSlug, message, cause, kind) => {
+      daemonVm.onWikiAlert((wikiSlug, message, cause, kind) => {
         const wikiId = `${hostId}:${wikiSlug}`;
-        const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "admin" };
+        const verbOpts = { verb: "system-alert", args: { message, cause: cause ?? "", kind: kind ?? "" }, requestedBy: "daemon" };
         void vmManager.placeWikiVerb(wikiId, verbOpts)
           // Not live → the verb PARKS durably and delivers on next mount —
           // the silent skip died 2026-06-12 (Akka /deadLetters lesson:
@@ -486,7 +486,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           const verb    = typeof payload["verb"]    === "string" ? payload["verb"]    : undefined;
           const fromUri = typeof payload["fromUri"] === "string" ? payload["fromUri"] : undefined;
           if (!verb) return;
-          adminVm.placeVerb({
+          daemonVm.placeVerb({
             verb,
             args:        payload as unknown as Record<string, unknown>,
             requestedBy: typeof payload["requestedBy"] === "string" ? payload["requestedBy"] : listenable,
@@ -503,7 +503,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
     activeWikiSource,
     pool: result.pool, repo,
     store: result.assembly.composite,
-    admin: adminVm,
+    admin: daemonVm,
     wikiDocUrl:       result.wikiHandle.url,
     catalogHandleUrl: catalogHandle.url,
     oracleDocUrl:     result.assembly.islandHandle.url,

@@ -9,7 +9,7 @@
  * See lar:///ha.ka.ba/@lararium/v0.1/api/lares-lararium-binding.
  */
 
-import { connectAdminVessel, submitVerb, type SubmitResult, type SubmitOptions } from "./admin-connector.js";
+import { connectDaemonVessel, submitVerb, type SubmitResult, type SubmitOptions } from "./daemon-connector.js";
 import { invokeLocal, udsAvailable, UdsUnreachable } from "./local-connector.js";
 
 export interface RunVerbOptions extends SubmitOptions {
@@ -41,7 +41,7 @@ export async function runVerb(
     ...(opts.host    !== undefined ? { host:    opts.host }    : {}),
     ...(opts.dataDir !== undefined ? { dataDir: opts.dataDir } : {}),
   };
-  const vessel = await connectAdminVessel(connectOpts);
+  const vessel = await connectDaemonVessel(connectOpts);
   try {
     return await submitVerb(vessel, verb, args, requestedBy, opts);
   } finally {

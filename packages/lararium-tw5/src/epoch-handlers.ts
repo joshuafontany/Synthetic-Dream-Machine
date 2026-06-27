@@ -22,7 +22,7 @@ import type { Repo, AutomergeUrl } from "@lararium/mesh";
 import type { ChangeOrigin, LarTiddlerRecord } from "@lararium/mesh";
 import {
   type LarDoc,
-  emptyLarDoc, mutableLarRecord, mkAdminResidencyOp, mkAdminWikiAlert,
+  emptyLarDoc, mutableLarRecord, mkDaemonResidencyOp, mkDaemonWikiAlert,
   wikiBagUri, recipeUri,
 } from "@lararium/mesh";
 import { bagStackFromRec } from "@lararium/mesh";
@@ -254,10 +254,10 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
     // No live-composite layer swap (oracle + recipe changes sync; islands reconcile),
     // no wiki re-pin (manager keys by the unchanged wikiKey lar-URI). Previous-canon is
     // a NEW bag → command main to register it cold via admin:residency-op.
-    opts.post(mkAdminResidencyOp({ requestId: makeRequestId("resop"), op: "register-cold", bagId: previousCanonUri }));
+    opts.post(mkDaemonResidencyOp({ requestId: makeRequestId("resop"), op: "register-cold", bagId: previousCanonUri }));
     // Reboot-pending: new canonical doc + recipe change — the live island still has the
     // old canon mounted. Alert it.
-    opts.post(mkAdminWikiAlert({ wikiSlug: slug, message: `Recipe rotated for "${slug}" (gen ${nextGen}) — reboot to load the new canonical.`, cause: "rotate-recipe" }));
+    opts.post(mkDaemonWikiAlert({ wikiSlug: slug, message: `Recipe rotated for "${slug}" (gen ${nextGen}) — reboot to load the new canonical.`, cause: "rotate-recipe" }));
 
     return {
       slug,
@@ -298,7 +298,7 @@ async function alertWikisUsingBag(
     const slug = title.slice(RECIPE_PREFIX.length);
     if (!slug || slug.includes("/")) continue;
     if (!bagStackFromRec(rec).includes(bagUrl)) continue;
-    opts.post(mkAdminWikiAlert({
+    opts.post(mkDaemonWikiAlert({
       wikiSlug: slug,
       message:  `Bag "${bagUrl}" was epoched — reboot "${slug}" to load the new snapshot.`,
       cause,

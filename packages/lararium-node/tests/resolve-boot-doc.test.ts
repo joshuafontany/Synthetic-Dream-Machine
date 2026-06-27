@@ -24,7 +24,7 @@ describe("resolveBootDoc — tideline-class boot resolution", () => {
     const url = origin.create<{ tiddlers: Record<string, unknown> }>({ tiddlers: {} }).url; // lives in `origin`
     const node = new Repo();                                                                 // separate, no network
     await expect(
-      resolveBootDoc(node, url, { tideline: "hearth-private", label: "@admin" }),
+      resolveBootDoc(node, url, { tideline: "hearth-private", label: "@daemon" }),
     ).rejects.toThrow(/hearth-private doc unavailable/);
   });
 

@@ -28,9 +28,9 @@ written   = "2026-06-12"
 
 **Islands differ by grant, never by hull.**
 
-Every wiki island — `@lares`-as-wiki, any content wiki, and **`@admin` itself** — MUST comprise the same isomorphic stack: the keel's manifest handshake, capability grants, CRDT sync ports, the `ea` breath declaration, the same worker lifecycle, the same protocol surface. Like the turn-exchange chiasmus, one frame carries every exchange; what a turn *may do* rides its content, never a different frame.
+Every wiki island — `@lares`-as-wiki, any content wiki, and **`@daemon` itself** — MUST comprise the same isomorphic stack: the keel's manifest handshake, capability grants, CRDT sync ports, the `ea` breath declaration, the same worker lifecycle, the same protocol surface. Like the turn-exchange chiasmus, one frame carries every exchange; what a turn *may do* rides its content, never a different frame.
 
-`@admin` differs ONLY by its endowment: additional capability grants for managing the island mesh internally (mount/evict/residency policy) and mesh connections externally (relay, federation edges). The ocap powerbox names this shape: a normal object holding extraordinary grants. Authority = designation + permission, never architecture.
+`@daemon` differs ONLY by its endowment: additional capability grants for managing the island mesh internally (mount/evict/residency policy) and mesh connections externally (relay, federation edges). The ocap powerbox names this shape: a normal object holding extraordinary grants. Authority = designation + permission, never architecture.
 
 **The hole this law names (drawn around 2026-06-12):** the admin island rides a bespoke 370-line twin of the pool's island stack (`admin-vm-core` — own spawn, own sync channel, own handshake with its own private timeout), duplicated again per substrate in the browser. Four copies of one hull. Every stack divergence found this week (the 15s/120s watchdog split) grew in this gap — the path off the common road accumulates silent breakage proportional to its specialness.
 

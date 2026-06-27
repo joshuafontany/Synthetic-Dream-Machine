@@ -176,15 +176,15 @@ authoritative routing (see #residency-reconciliation).
 
 ## Binding storage — admin-doc-stored
 
-The `(personGroupHex × recipe-fingerprint) → @personal-docUrl` mapping (and the parallel mapping for `@draft`) MUST live as tiddlers inside the operator's **admin doc** (`lar:///ha.ka.ba/@admin`), under a deterministic prefix. The admin doc already carries Keyhive PersonaGroup membership gating and already replicates across the operator's own devices through the founding/admit ceremonies. Storing the bindings there gives cross-device convergence for free and avoids inventing a parallel storage layer.
+The `(personGroupHex × recipe-fingerprint) → @personal-docUrl` mapping (and the parallel mapping for `@draft`) MUST live as tiddlers inside the operator's **admin doc** (`lar:///ha.ka.ba/@daemon`), under a deterministic prefix. The admin doc already carries Keyhive PersonaGroup membership gating and already replicates across the operator's own devices through the founding/admit ceremonies. Storing the bindings there gives cross-device convergence for free and avoids inventing a parallel storage layer.
 
 **Tiddler key shape:**
 
 ```
-lar:///ha.ka.ba/@admin/personal-bindings/${fingerprintHex}
+lar:///ha.ka.ba/@daemon/personal-bindings/${fingerprintHex}
   text: <automerge:url-of-the-@personal-doc-for-this-recipe>
 
-lar:///ha.ka.ba/@admin/draft-bindings/${fingerprintHex}
+lar:///ha.ka.ba/@daemon/draft-bindings/${fingerprintHex}
   text: <automerge:url-of-the-@draft-doc-for-this-recipe>
 ```
 
@@ -217,7 +217,7 @@ Five forces converge here. Each one rules out a parallel storage option.
 ### Binding tiddler shape
 
 ```toml
-title:        lar:///ha.ka.ba/@admin/personal-bindings/${fingerprintHex}
+title:        lar:///ha.ka.ba/@daemon/personal-bindings/${fingerprintHex}
 text:         "automerge:abcdef..."   # the @personal doc URL
 kind:         "personal-binding"
 fingerprint:  "${fingerprintHex}"
@@ -341,7 +341,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 - **Document-as-group is the *intended* Keyhive shape, not a workaround smell.** A Keyhive Document *is* a Group plus CGKA; every principal carries a stable signing-key `Identifier`; delegation records over those stable ids in an operation graph **orthogonal to BeeKEM key rotation**. Representing the PersonaGroup as a sentinel Document and delegating to its agent-id uses Keyhive as designed. Two invariants it imposes — both already honored: **bind to the stable agent-id** (never rotating key material), and **keep that id stable for the group's whole lifetime** (the sentinel mints once at founding). Sources: Ink & Switch Keyhive notebook, BeeKEM (notebook/02), DeepWiki keyhive_core.
 - **Group-as-audience is object-capability-idiomatic.** Delegating to the PersonaGroup (one shared facet) rather than enumerating each device gives a single attenuation/revocation point — sound precisely because group membership is itself capability-gated. Source: Miller, *Capability Myths Demolished*.
 - **Access cascades transitively and retroactively** through the membership graph: every transitive member device of the PersonaGroup gains the delegated access, including devices admitted *after* the delegation, with no per-document re-grant.
-- **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@admin` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
+- **Grain debt (POLA).** `admin` over-grants: the POLA-correct grain for co-edited view-state a principal should NOT re-delegate is `edit`. The live Keyhive gate exposes only `read | admin` (`keyhive-provider.ts:150`), so `edit`-intent rounds **up** to `admin` as documented interim debt — acceptable because every PersonaGroup device already holds `admin` on `@daemon` (marginal authority ≈ 0). Adopt `edit` at this call site the moment `CapabilityVerifier.verify` accepts it. Debt homed in the access-ladder canon: [causal-islands](../pono/causal-islands.md).
 
 ### Session-wiki path (deferred — additional hot-tier mounts)
 

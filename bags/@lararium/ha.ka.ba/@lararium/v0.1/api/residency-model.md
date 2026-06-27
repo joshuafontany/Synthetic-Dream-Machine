@@ -95,8 +95,8 @@ The M.2 verb-as-tiddler-field pipeline carries the action surface. ACTION verbs 
 
 ```
 lar:///lararium.local.vm/verbs/<requestId>   # volatile local invocation (admin VM scratch)
-lar:///ha.ka.ba/@admin/summons/<requestId>   # Automerge-backed remote vessel summons
-lar:///ha.ka.ba/@admin/outcomes/<requestId>  # Automerge-backed durable outcome
+lar:///ha.ka.ba/@daemon/summons/<requestId>   # Automerge-backed remote vessel summons
+lar:///ha.ka.ba/@daemon/outcomes/<requestId>  # Automerge-backed durable outcome
 ```
 
 An ACTION arrives as a `Verb` whose `verb` field belongs to `ACTION_VERBS` (the wire field stays "verb"; the parsed `Verb.action` carries it). Per-verb arguments ride inside the existing JSON `args` field — kebab-case on the wire, camelCase in the TypeScript discriminated union. Example ADD invocation tiddler fields:

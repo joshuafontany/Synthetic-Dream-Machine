@@ -1,7 +1,7 @@
 /**
- * boot-admin-keyhive.test.ts — the isomorphic admin-island authn/z boot.
+ * boot-daemon-keyhive.test.ts — the isomorphic admin-island authn/z boot.
  *
- * Proves the pure `bootAdminKeyhive` sequence that Stage 1 moves into every
+ * Proves the pure `bootDaemonKeyhive` sequence that Stage 1 moves into every
  * platform's admin island worker:
  *   - re-hydrates cap state from the admin doc and clears Gates A/B/C
  *   - registers the operator's writable bags so verify() resolves
@@ -20,19 +20,19 @@ import { Repo } from "@automerge/automerge-repo";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
   type LarDoc,
-  CompositeStore, AutomergeDocStore, ADMIN_BAG_ID,
+  CompositeStore, AutomergeDocStore, DAEMON_BAG_ID,
 } from "@lararium/mesh";
 import {
-  KeyhiveProvider, AdminEventStore, bootAdminKeyhive, runFoundingCeremony,
-  type BootAdminKeyhiveInput,
+  KeyhiveProvider, DaemonEventStore, bootDaemonKeyhive, runFoundingCeremony,
+  type BootDaemonKeyhiveInput,
 } from "@lararium/keyhive";
 
 const SEED = new Uint8Array(32).fill(7);
 
 interface Founded {
   verifyingKey: string;
-  eventStore:   AdminEventStore;
-  bootArgs:     BootAdminKeyhiveInput;
+  eventStore:   DaemonEventStore;
+  bootArgs:     BootDaemonKeyhiveInput;
 }
 
 let founded: Founded;
@@ -58,13 +58,13 @@ beforeAll(async () => {
   });
 
   // Build the admin composite the worker's onEa would receive in ctx.
-  const adminHandle = await repo.find<LarDoc>(cer.adminUrl as AutomergeUrl);
+  const daemonHandle = await repo.find<LarDoc>(cer.daemonUrl as AutomergeUrl);
   const composite = new CompositeStore();
-  const adminStore = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
-  composite.addLayer({ bagId: ADMIN_BAG_ID, store: adminStore, writable: true });
+  const adminStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
+  composite.addLayer({ bagId: DAEMON_BAG_ID, store: adminStore, writable: true });
   adminStore.markSyncComplete();
 
-  const eventStore = new AdminEventStore({ admin: composite });
+  const eventStore = new DaemonEventStore({ admin: composite });
   founded = {
     verifyingKey, eventStore,
     bootArgs: {
@@ -73,35 +73,35 @@ beforeAll(async () => {
       personaGroupDocIdHex:   cer.personaGroupDocIdHex,
       personaGroupAgentIdHex: cer.personaGroupAgentIdHex,
       meshCabalDocIdHex:     cer.meshCabalDocIdHex,
-      registerBags:          [ADMIN_BAG_ID],
+      registerBags:          [DAEMON_BAG_ID],
       signerDid:             cer.signerDid,
       deviceEdge:            cer.founderEdge,
     },
   };
 });
 
-describe("bootAdminKeyhive", () => {
+describe("bootDaemonKeyhive", () => {
   test("clears Gate A + the Binding Gate, registers the admin bag, and verifies operator admin", async () => {
-    const { keyhive, did } = await bootAdminKeyhive(founded.bootArgs);
+    const { keyhive, did } = await bootDaemonKeyhive(founded.bootArgs);
 
     expect(did).toMatch(/^0x/);
     expect(did.endsWith(founded.verifyingKey)).toBe(true);
 
     // The operator is implicit admin of every bag it registered (generateDocument).
-    const v = await keyhive.verify({ presenter: did, bagUrl: ADMIN_BAG_ID, access: "admin" });
+    const v = await keyhive.verify({ presenter: did, bagUrl: DAEMON_BAG_ID, access: "admin" });
     expect(v.ok).toBe(true);
 
     await keyhive.dispose();
   });
 
   test("HALTs on identity drift (Gate A)", async () => {
-    await expect(bootAdminKeyhive({
+    await expect(bootDaemonKeyhive({
       ...founded.bootArgs, operatorVerifyingKey: "deadbeefdeadbeef",
     })).rejects.toThrow(/Gate A/);
   });
 
   test("HALTs on a forged binding edge (Binding Gate, fail-closed)", async () => {
-    await expect(bootAdminKeyhive({
+    await expect(bootDaemonKeyhive({
       ...founded.bootArgs,
       deviceEdge: { ...founded.bootArgs.deviceEdge, signature: "00".repeat(64) },
     })).rejects.toThrow(/Binding Gate/);

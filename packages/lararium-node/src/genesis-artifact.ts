@@ -23,7 +23,7 @@ import {
   IDENTITIES_DOC_URI,
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   mutableLarRecord,
   tiddlerText,
   emptyLarDoc,
@@ -239,7 +239,7 @@ export function reconcileWellKnownTiddlers(
   identitiesUrl?: string,
   groupsUrl?:     string,
   sessionsUrl?:   string,
-  adminUrl?:      string,
+  daemonUrl?:      string,
 ): void {
   const doc      = handle.doc();
   const tiddlers = doc?.tiddlers ?? {};
@@ -249,7 +249,7 @@ export function reconcileWellKnownTiddlers(
   const idOk   = identitiesUrl   ? tiddlers[IDENTITIES_DOC_URI]?.tiddler.text === identitiesUrl  : true;
   const grOk   = groupsUrl       ? tiddlers[CIRCLES_DOC_URI]?.tiddler.text    === groupsUrl      : true;
   const seOk   = sessionsUrl     ? tiddlers[SESSIONS_DOC_URI]?.tiddler.text   === sessionsUrl    : true;
-  const adOk   = adminUrl        ? tiddlers[ADMIN_BAG_ID]?.tiddler.text       === adminUrl       : true;
+  const adOk   = daemonUrl        ? tiddlers[DAEMON_BAG_ID]?.tiddler.text       === daemonUrl       : true;
   if (selfOk && catOk && baOk && idOk && grOk && seOk && adOk) return;
 
   handle.change((d) => {
@@ -259,7 +259,7 @@ export function reconcileWellKnownTiddlers(
     if (!idOk  && identitiesUrl) d.tiddlers[IDENTITIES_DOC_URI] = mutableLarRecord(IDENTITIES_DOC_URI, { text: identitiesUrl }, "lararium-seed");
     if (!grOk  && groupsUrl)     d.tiddlers[CIRCLES_DOC_URI]    = mutableLarRecord(CIRCLES_DOC_URI, { text: groupsUrl }, "lararium-seed");
     if (!seOk  && sessionsUrl)   d.tiddlers[SESSIONS_DOC_URI]   = mutableLarRecord(SESSIONS_DOC_URI, { text: sessionsUrl }, "lararium-seed");
-    if (!adOk  && adminUrl)      d.tiddlers[ADMIN_BAG_ID]       = mutableLarRecord(ADMIN_BAG_ID, { text: adminUrl }, "lararium-seed");
+    if (!adOk  && daemonUrl)      d.tiddlers[DAEMON_BAG_ID]       = mutableLarRecord(DAEMON_BAG_ID, { text: daemonUrl }, "lararium-seed");
   });
 
   const flags = [
@@ -269,7 +269,7 @@ export function reconcileWellKnownTiddlers(
     `identities=${idOk  ? "ok" : identitiesUrl  ? "patched" : "pending"}`,
     `circles=${grOk     ? "ok" : groupsUrl       ? "patched" : "pending"}`,
     `sessions=${seOk    ? "ok" : sessionsUrl     ? "patched" : "pending"}`,
-    `admin=${adOk       ? "ok" : adminUrl        ? "patched" : "pending"}`,
+    `admin=${adOk       ? "ok" : daemonUrl        ? "patched" : "pending"}`,
   ].join("  ");
   console.log(`[genesis-artifact] oracle tiddlers  ${flags}`);
 }

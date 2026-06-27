@@ -41,7 +41,7 @@
  *      `TW5Engine` outside a Worker constitutes a sovereignty violation.
  *      Boot sites (all inside Workers): `lar-admin-island.ts` (Node admin),
  *      `lar-wiki-island.ts` (Node wiki), `browser-wiki-worker.ts` (browser wiki),
- *      `browser-admin-island.ts` (browser admin). Main-thread entry files carry no TW5 import.
+ *      `browser-daemon-island.ts` (browser admin). Main-thread entry files carry no TW5 import.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.
@@ -128,7 +128,7 @@ export interface IslandGrants {
   islandUrl:    string;
   /** @catalog registry ACCESS (never layered; access≠load). Absent/null = no watch. */
   catalogUrl?:  string | null;
-  /** The island's OWN bag (@<wikiSlug>; @admin under the one-recipe model). */
+  /** The island's OWN bag (@<wikiSlug>; @daemon under the one-recipe model). */
   wikiUrl?:     string | null;
   /** Keyhive-bound sovereign slots (admin resolveBinding grants). */
   personalUrl?: string | null;
@@ -176,13 +176,13 @@ export interface IslandMsg_Manifest {
   /**
    * ADMIN-ISLAND ONLY — operator authn/z material for in-worker keyhive boot
    * (isomorphic-vessel epic, Stage 1). The admin worker's `onEa` calls
-   * `bootAdminKeyhive` with this + its admin CompositeStore (the cap-event
-   * EventStore backing). Populated ONLY by openAdminVm / openBrowserAdminVm;
+   * `bootDaemonKeyhive` with this + its admin CompositeStore (the cap-event
+   * EventStore backing). Populated ONLY by openDaemonVm / openBrowserDaemonVm;
    * wiki manifests leave it absent, so the operator seed never reaches a wiki
    * worker. The seed crossing the worker boundary is the deliberate custody
    * boundary (operator-confirmed): the admin island is the authn/z home.
    */
-  adminAuth?: {
+  daemonAuth?: {
     /** 32-byte operator signing seed. */
     seed:                  Uint8Array;
     /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
@@ -233,23 +233,23 @@ export interface IslandMsg_Teardown {
   type: "teardown";
 }
 
-// ── Admin island protocol ─────────────────────────────────────────────────
+// ── Daemon island protocol ─────────────────────────────────────────────────
 //
 // Three-message round-trip for admin island verb coordination.
 //
-// Vessel → island: AdminMsg_PlaceVerb   — place a volatile verb invocation in the admin TW5 wiki.
-// Island → vessel: AdminMsg_DelegateVerb — delegate a wiki-scope verb whose handler lives on main.
-// Vessel → island: AdminMsg_VerbResult  — deliver delegation result or error back to island.
+// Vessel → island: DaemonMsg_PlaceVerb   — place a volatile verb invocation in the admin TW5 wiki.
+// Island → vessel: DaemonMsg_DelegateVerb — delegate a wiki-scope verb whose handler lives on main.
+// Vessel → island: DaemonMsg_VerbResult  — deliver delegation result or error back to island.
 //
 // The admin island owns the TW5 wiki event surface (kumu device law).
 // All verbs pass through the admin wiki change event → VerbDispatcher tick.
 // Wiki-scope handlers that need vessel resources (repo, catalogHandle, etc.)
-// delegate via AdminMsg_DelegateVerb; the island awaits AdminMsg_VerbResult before writing outcome.
+// delegate via DaemonMsg_DelegateVerb; the island awaits DaemonMsg_VerbResult before writing outcome.
 
 /** Vessel → island: place a volatile verb invocation in the admin island's TW5 wiki. */
-export interface AdminMsg_PlaceVerb {
+export interface DaemonMsg_PlaceVerb {
   schema_version: ProtocolVersion;
-  type: "admin:place-verb";
+  type: "daemon:place-verb";
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
@@ -263,11 +263,11 @@ export interface AdminMsg_PlaceVerb {
 /**
  * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
  * Emitted when the admin island's VerbDispatcher encounters a verb not in its local registry.
- * The vessel executes the handler and posts AdminMsg_VerbResult back.
+ * The vessel executes the handler and posts DaemonMsg_VerbResult back.
  */
-export interface AdminMsg_DelegateVerb {
+export interface DaemonMsg_DelegateVerb {
   schema_version: ProtocolVersion;
-  type: "admin:delegate-verb";
+  type: "daemon:delegate-verb";
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
@@ -276,10 +276,10 @@ export interface AdminMsg_DelegateVerb {
   batchMode?: string;
 }
 
-/** Vessel → island: delegation result or error. Admin island resolves the in-flight delegation promise. */
-export interface AdminMsg_VerbResult {
+/** Vessel → island: delegation result or error. Daemon island resolves the in-flight delegation promise. */
+export interface DaemonMsg_VerbResult {
   schema_version: ProtocolVersion;
-  type: "admin:verb-result";
+  type: "daemon:verb-result";
   requestId: string;
   result?: Record<string, unknown>;
   error?: string;
@@ -293,9 +293,9 @@ export interface AdminMsg_VerbResult {
 // the island to verify each peer; the island answers via its keyhive. Path (b).
 
 /** Vessel → island: verify an inbound peer's capability. Host has no keyhive. */
-export interface AdminMsg_VerifyRequest {
+export interface DaemonMsg_VerifyRequest {
   schema_version: ProtocolVersion;
-  type: "admin:verify-request";
+  type: "daemon:verify-request";
   requestId: string;
   /** The peer's serialized Keyhive ContactCard bytes. */
   cardBytes: Uint8Array;
@@ -313,9 +313,9 @@ export interface AdminMsg_VerifyRequest {
 }
 
 /** Island → vessel: the keyhive verdict for a verify-request. */
-export interface AdminMsg_VerifyResult {
+export interface DaemonMsg_VerifyResult {
   schema_version: ProtocolVersion;
-  type: "admin:verify-result";
+  type: "daemon:verify-result";
   requestId: string;
   ok: boolean;
   /** Peer's keyhive Identifier hex (from the island's receiveContactCard), so the
@@ -338,18 +338,18 @@ export interface AdminMsg_VerifyResult {
 // the island mints/reuses against its Repo + keyhive and returns the doc URLs.
 
 /** Vessel → island: resolve (or mint+delegate) the @personal/@draft binding pair. */
-export interface AdminMsg_ResolveBindingRequest {
+export interface DaemonMsg_ResolveBindingRequest {
   schema_version: ProtocolVersion;
-  type: "admin:resolve-binding-request";
+  type: "daemon:resolve-binding-request";
   requestId: string;
   fingerprint: string;
   recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] };
 }
 
 /** Island → vessel: the resolved binding doc URLs (or an error). */
-export interface AdminMsg_ResolveBindingResult {
+export interface DaemonMsg_ResolveBindingResult {
   schema_version: ProtocolVersion;
-  type: "admin:resolve-binding-result";
+  type: "daemon:resolve-binding-result";
   requestId: string;
   personalUrl?: string;
   draftUrl?: string;
@@ -364,18 +364,18 @@ export interface AdminMsg_ResolveBindingResult {
 // holds a CAPABILITY (this channel) to the pool, never the pool itself.
 
 /** Island → vessel: the worker commands the main pool to evict (unmount) a bag's lane. */
-export interface AdminMsg_EvictRequest {
+export interface DaemonMsg_EvictRequest {
   schema_version: ProtocolVersion;
-  type: "admin:evict-request";
+  type: "daemon:evict-request";
   requestId: string;
   /** The bag (lar: URI) whose live lane the pool should tear down. */
   bagId: string;
 }
 
 /** Vessel → island: the pool's ack for an evict-request. */
-export interface AdminMsg_EvictResult {
+export interface DaemonMsg_EvictResult {
   schema_version: ProtocolVersion;
-  type: "admin:evict-result";
+  type: "daemon:evict-result";
   requestId: string;
   ok: boolean;
   error?: string;
@@ -389,9 +389,9 @@ export interface AdminMsg_EvictResult {
  * grant records as policy; main executes. (`residency` stats — a read — stays main
  * pending the askMain research.)
  */
-export interface AdminMsg_ResidencyOp {
+export interface DaemonMsg_ResidencyOp {
   schema_version: ProtocolVersion;
-  type: "admin:residency-op";
+  type: "daemon:residency-op";
   requestId: string;
   op: "pin" | "unpin" | "register-cold";
   bagId: string;
@@ -399,9 +399,9 @@ export interface AdminMsg_ResidencyOp {
 }
 
 /** Vessel → island: ack for a residency-op. */
-export interface AdminMsg_ResidencyOpResult {
+export interface DaemonMsg_ResidencyOpResult {
   schema_version: ProtocolVersion;
-  type: "admin:residency-op-result";
+  type: "daemon:residency-op-result";
   requestId: string;
   ok: boolean;
   error?: string;
@@ -415,9 +415,9 @@ export interface AdminMsg_ResidencyOpResult {
  * island so the operator sees it. Fire-and-forget (best-effort UX); main skips wikis
  * that aren't mounted. The admin computes "affected by content"; main filters "live".
  */
-export interface AdminMsg_WikiAlert {
+export interface DaemonMsg_WikiAlert {
   schema_version: ProtocolVersion;
-  type: "admin:wiki-alert";
+  type: "daemon:wiki-alert";
   /** The affected wiki's slug — main maps it to `${hostId}:${slug}` to find the island. */
   wikiSlug: string;
   /** Operator-facing message (e.g. "Recipe changed — reboot to apply"). */
@@ -433,12 +433,12 @@ export type VesselToIslandMsg =
   | IslandMsg_Manifest
   | IslandMsg_HooAnu
   | IslandMsg_Teardown
-  | AdminMsg_PlaceVerb
-  | AdminMsg_VerbResult
-  | AdminMsg_VerifyRequest
-  | AdminMsg_ResolveBindingRequest
-  | AdminMsg_EvictResult
-  | AdminMsg_ResidencyOpResult
+  | DaemonMsg_PlaceVerb
+  | DaemonMsg_VerbResult
+  | DaemonMsg_VerifyRequest
+  | DaemonMsg_ResolveBindingRequest
+  | DaemonMsg_EvictResult
+  | DaemonMsg_ResidencyOpResult
   | WikiMsg_PlaceVerb
   | WikiMsg_DomEvent;
 
@@ -515,7 +515,7 @@ export interface IslandMsg_Fault {
 /**
  * Vessel → island: place a wiki-scope verb invocation into a wiki island's TW5 wiki.
  *
- * Parallel to AdminMsg_PlaceVerb for the admin island. Any island running a
+ * Parallel to DaemonMsg_PlaceVerb for the admin island. Any island running a
  * wiki dispatch behavior handles this by calling placeVerb on its TW5 wiki.
  * The wiki change event fires at next tick; the island's VerbDispatcher dispatches it.
  */
@@ -583,12 +583,12 @@ export type IslandToVesselMsg =
   | IslandMsg_Fault
   | IslandMsg_Ready
   | WikiMsg_VerbResult
-  | AdminMsg_DelegateVerb
-  | AdminMsg_VerifyResult
-  | AdminMsg_ResolveBindingResult
-  | AdminMsg_EvictRequest
-  | AdminMsg_ResidencyOp
-  | AdminMsg_WikiAlert;
+  | DaemonMsg_DelegateVerb
+  | DaemonMsg_VerifyResult
+  | DaemonMsg_ResolveBindingResult
+  | DaemonMsg_EvictRequest
+  | DaemonMsg_ResidencyOp
+  | DaemonMsg_WikiAlert;
 
 // ── Type guards ────────────────────────────────────────────────────────────
 
@@ -603,14 +603,14 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "admin:place-verb", "admin:verb-result", "admin:verify-request", "admin:resolve-binding-request", "admin:evict-result", "admin:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
 
 export function isIslandToVesselMsg(v: unknown): v is IslandToVesselMsg {
   if (!_hasVersion(v)) return false;
-  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "admin:delegate-verb", "admin:verify-result", "admin:resolve-binding-result", "admin:evict-request", "admin:residency-op", "admin:wiki-alert"] as const).includes(
+  return (["event", "teardown:ack", "ea", "breath", "fault", "ready", "wiki:verb-result", "daemon:delegate-verb", "daemon:verify-result", "daemon:resolve-binding-result", "daemon:evict-request", "daemon:residency-op", "daemon:wiki-alert"] as const).includes(
     v.type as IslandToVesselMsg["type"],
   );
 }
@@ -647,7 +647,7 @@ export function mkManifest(
   opts?: {
     storage?:        IslandStorageConfig;
     diskMirrors?:    readonly { bagId: string; mirrorRoot: string; scope: string }[];
-    adminAuth?:      IslandMsg_Manifest["adminAuth"];
+    daemonAuth?:      IslandMsg_Manifest["daemonAuth"];
     pluginCids?:     readonly string[];
   },
 ): IslandMsg_Manifest {
@@ -662,7 +662,7 @@ export function mkManifest(
   };
   if (opts?.storage)             msg.storage     = opts.storage;
   if (opts?.diskMirrors?.length) msg.diskMirrors = opts.diskMirrors;
-  if (opts?.adminAuth)           msg.adminAuth   = opts.adminAuth;
+  if (opts?.daemonAuth)           msg.daemonAuth   = opts.daemonAuth;
   if (opts?.pluginCids?.length)  msg.pluginCids  = opts.pluginCids;
   return msg;
 }
@@ -686,7 +686,7 @@ export function mkFault(wikiUri: string, error: string): IslandMsg_Fault {
   return { schema_version: ISLAND_PROTOCOL_VERSION, type: "fault", wikiUri, error };
 }
 
-export function mkAdminPlaceVerb(opts: {
+export function mkDaemonPlaceVerb(opts: {
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
@@ -695,10 +695,10 @@ export function mkAdminPlaceVerb(opts: {
   requestId?: string;
   fromUri?: string;
   listenable?: string;
-}): AdminMsg_PlaceVerb {
-  const msg: AdminMsg_PlaceVerb = {
+}): DaemonMsg_PlaceVerb {
+  const msg: DaemonMsg_PlaceVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:place-verb",
+    type: "daemon:place-verb",
     verb: opts.verb,
     args: opts.args,
     requestedBy: opts.requestedBy,
@@ -711,17 +711,17 @@ export function mkAdminPlaceVerb(opts: {
   return msg;
 }
 
-export function mkAdminDelegateVerb(opts: {
+export function mkDaemonDelegateVerb(opts: {
   requestId: string;
   verb: string;
   args: Record<string, unknown>;
   requestedBy: string;
   targets?: string[];
   batchMode?: string;
-}): AdminMsg_DelegateVerb {
-  const msg: AdminMsg_DelegateVerb = {
+}): DaemonMsg_DelegateVerb {
+  const msg: DaemonMsg_DelegateVerb = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:delegate-verb",
+    type: "daemon:delegate-verb",
     requestId: opts.requestId,
     verb: opts.verb,
     args: opts.args,
@@ -732,14 +732,14 @@ export function mkAdminDelegateVerb(opts: {
   return msg;
 }
 
-export function mkAdminVerbResult(opts: {
+export function mkDaemonVerbResult(opts: {
   requestId: string;
   result?: Record<string, unknown>;
   error?: string;
-}): AdminMsg_VerbResult {
-  const msg: AdminMsg_VerbResult = {
+}): DaemonMsg_VerbResult {
+  const msg: DaemonMsg_VerbResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:verb-result",
+    type: "daemon:verb-result",
     requestId: opts.requestId,
   };
   if (opts.result !== undefined) msg.result = opts.result;
@@ -747,16 +747,16 @@ export function mkAdminVerbResult(opts: {
   return msg;
 }
 
-export function mkAdminVerifyRequest(opts: {
+export function mkDaemonVerifyRequest(opts: {
   requestId: string;
   cardBytes: Uint8Array;
   bagUrl:    string;
   access:    "read" | "admin";
   proof?:    AuthProofWire;
-}): AdminMsg_VerifyRequest {
+}): DaemonMsg_VerifyRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:verify-request",
+    type: "daemon:verify-request",
     requestId: opts.requestId,
     cardBytes: opts.cardBytes,
     bagUrl:    opts.bagUrl,
@@ -765,16 +765,16 @@ export function mkAdminVerifyRequest(opts: {
   };
 }
 
-export function mkAdminVerifyResult(opts: {
+export function mkDaemonVerifyResult(opts: {
   requestId:      string;
   ok:             boolean;
   identifier?:    string;
   reason?:        string;
   proofVerified?: boolean;
-}): AdminMsg_VerifyResult {
-  const msg: AdminMsg_VerifyResult = {
+}): DaemonMsg_VerifyResult {
+  const msg: DaemonMsg_VerifyResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:verify-result",
+    type: "daemon:verify-result",
     requestId: opts.requestId,
     ok:        opts.ok,
   };
@@ -784,30 +784,30 @@ export function mkAdminVerifyResult(opts: {
   return msg;
 }
 
-export function mkAdminResolveBindingRequest(opts: {
+export function mkDaemonResolveBindingRequest(opts: {
   requestId:   string;
   fingerprint: string;
   recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] };
-}): AdminMsg_ResolveBindingRequest {
+}): DaemonMsg_ResolveBindingRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:resolve-binding-request",
+    type: "daemon:resolve-binding-request",
     requestId:   opts.requestId,
     fingerprint: opts.fingerprint,
     recipeTrace: opts.recipeTrace,
   };
 }
 
-export function mkAdminResolveBindingResult(opts: {
+export function mkDaemonResolveBindingResult(opts: {
   requestId:    string;
   personalUrl?: string;
   draftUrl?:    string;
   workingUrl?:  string;
   error?:       string;
-}): AdminMsg_ResolveBindingResult {
-  const msg: AdminMsg_ResolveBindingResult = {
+}): DaemonMsg_ResolveBindingResult {
+  const msg: DaemonMsg_ResolveBindingResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:resolve-binding-result",
+    type: "daemon:resolve-binding-result",
     requestId: opts.requestId,
   };
   if (opts.personalUrl !== undefined) msg.personalUrl = opts.personalUrl;
@@ -817,19 +817,19 @@ export function mkAdminResolveBindingResult(opts: {
   return msg;
 }
 
-export function mkAdminEvictRequest(opts: { requestId: string; bagId: string }): AdminMsg_EvictRequest {
+export function mkDaemonEvictRequest(opts: { requestId: string; bagId: string }): DaemonMsg_EvictRequest {
   return {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:evict-request",
+    type: "daemon:evict-request",
     requestId: opts.requestId,
     bagId:     opts.bagId,
   };
 }
 
-export function mkAdminEvictResult(opts: { requestId: string; ok: boolean; error?: string }): AdminMsg_EvictResult {
-  const msg: AdminMsg_EvictResult = {
+export function mkDaemonEvictResult(opts: { requestId: string; ok: boolean; error?: string }): DaemonMsg_EvictResult {
+  const msg: DaemonMsg_EvictResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:evict-result",
+    type: "daemon:evict-result",
     requestId: opts.requestId,
     ok:        opts.ok,
   };
@@ -837,15 +837,15 @@ export function mkAdminEvictResult(opts: { requestId: string; ok: boolean; error
   return msg;
 }
 
-export function mkAdminResidencyOp(opts: {
+export function mkDaemonResidencyOp(opts: {
   requestId: string;
   op: "pin" | "unpin" | "register-cold";
   bagId: string;
   reason?: string;
-}): AdminMsg_ResidencyOp {
-  const msg: AdminMsg_ResidencyOp = {
+}): DaemonMsg_ResidencyOp {
+  const msg: DaemonMsg_ResidencyOp = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:residency-op",
+    type: "daemon:residency-op",
     requestId: opts.requestId,
     op:        opts.op,
     bagId:     opts.bagId,
@@ -854,15 +854,15 @@ export function mkAdminResidencyOp(opts: {
   return msg;
 }
 
-export function mkAdminWikiAlert(opts: {
+export function mkDaemonWikiAlert(opts: {
   wikiSlug: string;
   message:  string;
   cause?:   string;
   kind?:    string;
-}): AdminMsg_WikiAlert {
-  const msg: AdminMsg_WikiAlert = {
+}): DaemonMsg_WikiAlert {
+  const msg: DaemonMsg_WikiAlert = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type:     "admin:wiki-alert",
+    type:     "daemon:wiki-alert",
     wikiSlug: opts.wikiSlug,
     message:  opts.message,
     ...(opts.kind ? { kind: opts.kind } : {}),
@@ -871,10 +871,10 @@ export function mkAdminWikiAlert(opts: {
   return msg;
 }
 
-export function mkAdminResidencyOpResult(opts: { requestId: string; ok: boolean; error?: string }): AdminMsg_ResidencyOpResult {
-  const msg: AdminMsg_ResidencyOpResult = {
+export function mkDaemonResidencyOpResult(opts: { requestId: string; ok: boolean; error?: string }): DaemonMsg_ResidencyOpResult {
+  const msg: DaemonMsg_ResidencyOpResult = {
     schema_version: ISLAND_PROTOCOL_VERSION,
-    type: "admin:residency-op-result",
+    type: "daemon:residency-op-result",
     requestId: opts.requestId,
     ok:        opts.ok,
   };
@@ -936,9 +936,9 @@ export function mkWikiVerbResult(opts: {
 // ── AuthVerifierSeam — host-side verify proxy (path b) ─────────────────────
 //
 // The host transport (node WS gate) holds no keyhive after Stage 1; it asks the
-// admin island to verify each inbound peer (the AdminMsg_VerifyRequest/Result
+// admin island to verify each inbound peer (the DaemonMsg_VerifyRequest/Result
 // pair above) and keys its sharePolicy map off the returned `identifier`. Node
-// binds this to AdminAuthGate; the browser leaves it unbound (no inbound peer yet).
+// binds this to DaemonAuthGate; the browser leaves it unbound (no inbound peer yet).
 export interface AuthVerifierSeam {
   verify(
     cardBytes: Uint8Array,

@@ -19,7 +19,7 @@ import { IndexedDBStorageAdapter }           from "@automerge/automerge-repo-sto
 import type { DocHandle, AutomergeUrl }      from "@automerge/automerge-repo";
 import {
   emptyLarDoc, mutableLarRecord,
-  CATALOG_DOC_URI, ADMIN_BAG_ID,
+  CATALOG_DOC_URI, DAEMON_BAG_ID,
   ENGINE_CORE_ID,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, BagResidencyManager,
@@ -34,7 +34,7 @@ import {
   makeResidencyStatsReactor,
   PROJECTION_FRAME,
 }                                            from "@lararium/tw5";
-import type { VesselWikiSlot, VesselCoreResult, AdminVmCore } from "@lararium/tw5";
+import type { VesselWikiSlot, VesselCoreResult, DaemonVmCore } from "@lararium/tw5";
 import { runFoundingCeremony }               from "@lararium/keyhive";
 import type { LarOpenPhase }                 from "@lararium/mesh";
 import {
@@ -47,8 +47,8 @@ import {
   reconcileGenesisUpdate, writeGenesisBytesToOpfs, writeBlobsToCasOpfs,
 }                                            from "./browser-genesis.js";
 import {
-  openBrowserAdminVm,
-}                                            from "./open-browser-admin-vm.js";
+  openBrowserDaemonVm,
+}                                            from "./open-browser-daemon-vm.js";
 import type { WikiRecipe }                   from "@lararium/mesh";
 
 // ── Bootstrap artifact (IDB-persisted) ──────────────────────────────────────────
@@ -118,7 +118,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    *  adds it to the Repo — the browser's outbound crossing. */
   relayUrl?:       string;
   /** URL of the compiled browser admin island Worker script. */
-  adminWorkerUrl?: URL;
+  daemonWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
   workerScriptUrl?: URL;
   /** Projection-nalu sink: a `projection:frame` (rendered HTML+CSS) from the hot wiki island.
@@ -127,7 +127,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
 }
 
 /** The ONE shared VesselResult (no vessel-by-type) + browser's one substrate extra. */
-export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, AdminVmCore> {
+export interface BrowserVesselResult extends VesselResult<BrowserVesselIslandPool, DaemonVmCore> {
   /** True when a genesis update was detected + merged on this boot (browser substrate). */
   engineUpdated: boolean;
   /** Relay a main-thread DOM event to the active wiki island (interactivity RETURN leg). */
@@ -159,7 +159,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
     genesisBytes, islandDocUrl: admitIslandDocUrl,
-    adminWorkerUrl, workerScriptUrl, onProjection, relayUrl,
+    daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
 
@@ -189,7 +189,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
     });
     bootstrap = {
-      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, adminUrl: f.adminUrl,
+      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl,
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
@@ -203,7 +203,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   // LarWSClientAdapter and add it to the Repo: the browser dials the node's gate, runs the V3
   // handshake on the socket, and — on a passing verdict — syncs shared docs (the second spore).
   // FLOW ⊥ AUTHORITY: this is pure authority+sync; the nalu servo / ea-backpressure rides later.
-  // NOTE: the gate admits only a peer holding cap=admin on the node's @admin — a same-operator leaf
+  // NOTE: the gate admits only a peer holding cap=admin on the node's @daemon — a same-operator leaf
   // (gatePubKey == own DID) or a device-admitted key. An un-admitted anon dials + fails closed.
   if (relayUrl && social.contactCard) {
     const leaf: LeafIdentity = {
@@ -212,7 +212,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       sign:        ed25519SignerFromSeed(operatorSeed),
     };
     const relayAdapter = new LarWSClientAdapter({
-      url: relayUrl, identity: leaf, aud: ADMIN_BAG_ID, gatePubKey: operatorDid,
+      url: relayUrl, identity: leaf, aud: DAEMON_BAG_ID, gatePubKey: operatorDid,
     });
     repo.networkSubsystem.addNetworkAdapter(relayAdapter);
   }
@@ -234,7 +234,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
-  let admin!:     AdminVmCore;      // set in openAdmin
+  let admin!:     DaemonVmCore;      // set in openDaemon
   let slotActiveWikiId = "";
   let engineUpdated = false;
   const residency = new BagResidencyManager({
@@ -303,15 +303,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       };
     },
 
-    openAdmin: async ({ assembly, slot }) => {
-      if (!adminWorkerUrl) throw new Error("[openBrowserVessel] adminWorkerUrl REQUIRED (genesis present → sovereign admin island)");
-      const adminAuth = {
+    openDaemon: async ({ assembly, slot }) => {
+      if (!daemonWorkerUrl) throw new Error("[openBrowserVessel] daemonWorkerUrl REQUIRED (genesis present → sovereign admin island)");
+      const daemonAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
         personaGroupAgentIdHex: social.personaGroupAgentIdHex,
         meshCabalDocIdHex: social.meshCabalDocIdHex,
         registerBags: [
-          ADMIN_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
+          DAEMON_BAG_ID, BAG_IDS.identities, BAG_IDS.groups, BAG_IDS.sessions,
           BAG_IDS.catalog, BAG_IDS.oracle, BAG_IDS.lares,
           slot.wikiBagId, slot.draftBagId,
         ],
@@ -321,19 +321,19 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the breath
       // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
-      admin = await openBrowserAdminVm({
-        repo, adminUrl: social.adminUrl, coreHash: assembly.coreHash,
+      admin = await openBrowserDaemonVm({
+        repo, daemonUrl: social.daemonUrl, coreHash: assembly.coreHash,
         ...(pluginCids.length ? { pluginCids } : {}),
-        workerScriptUrl: adminWorkerUrl,
-        recipe: { wikiSlug: "admin" } satisfies WikiRecipe,
+        workerScriptUrl: daemonWorkerUrl,
+        recipe: { wikiSlug: "daemon" } satisfies WikiRecipe,
         grants: {
           islandUrl: assembly.islandHandle.url,
-          // The admin island's OWN bag (@admin = wikiBagUri("admin"), one-recipe model).
-          wikiUrl:   social.adminUrl,
+          // The admin island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
+          wikiUrl:   social.daemonUrl,
           // ACCESS grant, not a LOAD slot — the worker reaches @catalog via the accessor.
           catalogUrl: catalogHandle.url,
         },
-        adminAuth,
+        daemonAuth,
       });
       return { workerEa: admin.workerEa, mountMainVerbs: admin.mountMainVerbs, resolveBinding: admin };
     },
@@ -351,14 +351,14 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       registry.register("residency", makeResidencyStatsReactor({ residency }));
     },
 
-    afterAdmin: (_a, assembly) => {
+    afterDaemon: (_a, assembly) => {
       void residency.pin(BAG_IDS.catalog,    "boot:catalog");
       void residency.pin(BAG_IDS.oracle,   "boot:lararium-island");
       if (assembly.laresHandle) void residency.pin(BAG_IDS.lares, "boot:lares-corpus");
       void residency.pin(BAG_IDS.identities, "boot:identities");
       void residency.pin(BAG_IDS.groups,     "boot:circles");
       void residency.pin(BAG_IDS.sessions,   "boot:sessions");
-      void residency.pin(ADMIN_BAG_ID,       "boot:admin");
+      void residency.pin(DAEMON_BAG_ID,       "boot:daemon");
       residency.startSweeper();
       assembly.composite.attachResidency(residency);
       // NB: no inbound WS gate — a browser cannot listen on a socket (substrate floor).
@@ -403,7 +403,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // island (skip if not mounted). Same isomorphic seam as node. wikiId = host:slug.
       admin.onWikiAlert((wikiSlug, message, cause) => {
         void vmManager.placeWikiVerb(`${hostId}:${wikiSlug}`, {
-          verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "admin",
+          verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
         }).catch(() => { /* not mounted — best-effort */ });
       });
       return vmManager;

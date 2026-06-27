@@ -36,12 +36,12 @@
 
 import type { Repo } from "@lararium/mesh";
 import {
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, ADMIN_BAG_ID,
+  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
   PERSONA_GROUP_SENTINEL_URI, MESH_CABAL_SENTINEL_URI,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
   CAP_EVENT_TAG,
-  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedAdminDoc,
+  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc,
   buildDeviceDelegation, type DeviceDelegationTiddler,
 } from "@lararium/mesh";
 
@@ -65,7 +65,7 @@ function base64ToBytes(b64: string): Uint8Array {
 import { buildCeremonyTiddlers } from "@lararium/mesh";
 import { KeyhiveProvider } from "./keyhive-provider.js";
 import { InMemoryEventStore } from "./event-store.js";
-import { capEventTitle } from "./admin-event-store.js";
+import { capEventTitle } from "./daemon-event-store.js";
 import type { DeviceAdmitPayload } from "./index.js";
 
 // ---------------------------------------------------------------------------
@@ -94,7 +94,7 @@ export interface FoundingCeremonyResult {
   identitiesUrl:         string;
   circlesUrl:            string;
   sessionsUrl:           string;
-  adminUrl:              string;
+  daemonUrl:              string;
   personaGroupDocIdHex:   string;
   personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
@@ -124,7 +124,7 @@ export async function runFoundingCeremony(
   const identitiesHandle = seedIdentitiesDoc(repo);
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
-  const adminHandle      = seedAdminDoc(repo);
+  const daemonHandle      = seedDaemonDoc(repo);
 
   // Write operator identity + circles tiddlers
   const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
@@ -157,13 +157,13 @@ export async function runFoundingCeremony(
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
   await keyhive.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
 
-  // Flush Keyhive events to admin doc in AdminEventStore-compatible format.
+  // Flush Keyhive events to admin doc in DaemonEventStore-compatible format.
   const initEvents = await store.list();
   for (const evt of initEvents) {
     const hashBuf = await crypto.subtle.digest("SHA-256", evt.bytes.slice());
     const hash    = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
     const title   = capEventTitle(hash);
-    adminHandle.change((doc) => {
+    daemonHandle.change((doc) => {
       if (!doc.tiddlers[title]) {
         doc.tiddlers[title] = {
           tiddler: {
@@ -181,7 +181,7 @@ export async function runFoundingCeremony(
   }
 
   // Write sentinel oracle tiddlers so boot gates can reconstruct DocumentIds.
-  adminHandle.change((doc) => {
+  daemonHandle.change((doc) => {
     doc.tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER] = {
       tiddler: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroup.docIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init" },
@@ -212,7 +212,7 @@ export async function runFoundingCeremony(
     boundEpoch:         0,                            // genesis lease epoch (effectiveLeaseEpoch starts at 0)
   });
   const signerDid = founderEdge.operatorDid;
-  adminHandle.change((doc) => {
+  daemonHandle.change((doc) => {
     doc.tiddlers[SIGNER_DID_TIDDLER] = {
       tiddler: { title: SIGNER_DID_TIDDLER, text: signerDid, kind: "operator-root-did" },
       meta: { authority: "lares-init" },
@@ -240,7 +240,7 @@ export async function runFoundingCeremony(
     identitiesUrl:         identitiesHandle.url as string,
     circlesUrl:            circlesHandle.url    as string,
     sessionsUrl:           sessionsHandle.url   as string,
-    adminUrl:              adminHandle.url      as string,
+    daemonUrl:              daemonHandle.url      as string,
     personaGroupDocIdHex:   personaGroup.docIdHex,
     personaGroupAgentIdHex: personaGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
@@ -321,7 +321,7 @@ export interface ApplyAdmitResult {
   identitiesUrl: string;
   circlesUrl:    string;
   sessionsUrl:   string;
-  adminUrl:      string;
+  daemonUrl:      string;
 }
 
 /**
@@ -343,7 +343,7 @@ export async function runApplyAdmitPayload(
   const identitiesHandle = seedIdentitiesDoc(repo);
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
-  const adminHandle      = seedAdminDoc(repo);
+  const daemonHandle      = seedDaemonDoc(repo);
 
   const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
   for (const t of ceremonyTiddlers) {
@@ -365,7 +365,7 @@ export async function runApplyAdmitPayload(
   // Write the joinee's BINDING into its own admin doc — the pinned signer, the hearth true-name,
   // and the root→joinee edge (mirrors the founding write). The joinee boots through its Binding
   // Gate on these alone: verifyDeviceDelegation(edge, signerDid) — no cap events, no Beelay.
-  adminHandle.change((doc) => {
+  daemonHandle.change((doc) => {
     doc.tiddlers[SIGNER_DID_TIDDLER] = {
       tiddler: { title: SIGNER_DID_TIDDLER, text: payload.signerDid, kind: "operator-root-did" },
       meta: { authority: "lares-init-admit" },
@@ -381,7 +381,7 @@ export async function runApplyAdmitPayload(
   });
 
   // Write sentinel oracle tiddlers.
-  adminHandle.change((doc) => {
+  daemonHandle.change((doc) => {
     doc.tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER] = {
       tiddler: { title: PERSONA_GROUP_DOC_ID_TIDDLER, text: payload.personaGroupDocIdHex, kind: "sentinel-id" },
       meta: { authority: "lares-init-admit" },
@@ -400,6 +400,6 @@ export async function runApplyAdmitPayload(
     identitiesUrl: identitiesHandle.url as string,
     circlesUrl:    circlesHandle.url    as string,
     sessionsUrl:   sessionsHandle.url   as string,
-    adminUrl:      adminHandle.url      as string,
+    daemonUrl:      daemonHandle.url      as string,
   };
 }

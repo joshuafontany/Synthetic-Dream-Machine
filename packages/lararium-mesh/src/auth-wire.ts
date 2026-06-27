@@ -170,7 +170,7 @@ export function mkLarAuthDenied(reason: string): LarAuthDeniedMsg {
  * NEVER sign the nonce alone.
  *
  * NOT YET WIRED (impl spike surfaced 2026-06-07): the peer signer (the CLI/
- * admin-connector holds no seed today) and the worker-side Ed25519 verify against
+ * daemon-connector holds no seed today) and the worker-side Ed25519 verify against
  * the card key. This helper LOCKS the canonical what-to-sign; the sign/verify
  * plumbing is the next focused build.
  */

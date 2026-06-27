@@ -149,7 +149,7 @@ One progress event stream; the existing renderer splits it:
 
 The three pieces already exist:
 
-<<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @admin/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split seam) >>
+<<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @daemon/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split seam) >>
 
 **Implementation order** (write-toward; confirm interfaces first — see caveat):
 1. Make long ops **return the request-id fast** (+ `--detach`); default TTY attaches to `watch`.

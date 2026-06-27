@@ -169,7 +169,7 @@ function listTranscripts(target: string, depth = 0): string[] {
   return [];
 }
 
-// --- tensegrity writeback (the @admin memory-shore) -----------------------
+// --- tensegrity writeback (the @daemon memory-shore) -----------------------
 // Read mempalace drawer content, harvest it with the sovereign parser, and write
 // our domain metadata (the tension) back ONTO the drawer (the compression strut).
 
@@ -178,7 +178,7 @@ function listTranscripts(target: string, depth = 0): string[] {
 const PY = resolvePython() ?? "python3";
 // The writeback core (buildPatch + writebackWing + lar_hv) lives ONCE in
 // @lararium/mempalace/telemetry-writeback (the lar-telemetry shared core) — both
-// this CLI leg and the @admin `lar-telemetry` verb call it. No local copy here.
+// this CLI leg and the @daemon `lar-telemetry` verb call it. No local copy here.
 
 function runWriteback(args: ParsedArgs, wing: string): number {
   const drawerIo = resolveDrawerIo();

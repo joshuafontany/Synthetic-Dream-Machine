@@ -34,7 +34,7 @@ describe("ABILITY_LADDER — ordered from least to most privileged", () => {
   });
 
   test("all expected abilities present — 4-rung access axis (Keyhive-native verbs)", () => {
-    // Access axis = Keyhive's native enum verbs (Pull/Read/Edit/Admin). Retired:
+    // Access axis = Keyhive's native enum verbs (Pull/Read/Edit/Daemon). Retired:
     // "promote"+"propose" (2026-05-31), "sync"+"revoke" (2026-06-01 — sync =
     // pull-at-scale; revoke = an admin operation). See causal-island.ts.
     const expected: OrichalcumAbility[] = ["pull", "read", "edit", "admin"];

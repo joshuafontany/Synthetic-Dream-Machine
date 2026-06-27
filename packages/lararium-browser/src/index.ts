@@ -28,8 +28,8 @@ export {
   genesisCidFromBytes,
 } from "./browser-genesis.js";
 
-export { openBrowserAdminVm, VerbTable } from "./open-browser-admin-vm.js";
+export { openBrowserDaemonVm, VerbTable } from "./open-browser-daemon-vm.js";
 export type {
-  BrowserAdminVmOptions,
+  BrowserDaemonVmOptions,
   BrowserVerbTable, VerbReactor, BrowserVerbPlacementRequest,
-} from "./open-browser-admin-vm.js";
+} from "./open-browser-daemon-vm.js";

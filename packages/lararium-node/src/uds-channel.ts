@@ -7,7 +7,7 @@
  * invocation and await the receipt. This Unix-domain socket carries exactly that:
  * the CLI writes one invocation line, the daemon writes the summons into its warm
  * admin doc (the SAME tiddler the worker reacts to from a WS peer), awaits the
- * durable @admin/outcomes/<id> receipt, and returns it over the socket.
+ * durable @daemon/outcomes/<id> receipt, and returns it over the socket.
  *
  *   transport  = this socket (kernel-local, authority-agnostic)
  *   authority  = the invocation's requestedBy → the worker's verify-then-delegate
@@ -24,13 +24,13 @@ import { createServer, type Server } from "node:net";
 import { existsSync, unlinkSync, chmodSync } from "node:fs";
 import type { DocHandle } from "@automerge/automerge-repo";
 import {
-  ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
+  DAEMON_BAG_ID, AutomergeDocStore, CompositeStore,
   summon, OUTCOME_URI_PREFIX, type LarDoc,
 } from "@lararium/mesh";
 
 export interface UdsChannelOptions {
-  /** The daemon's warm admin doc handle (result.admin.adminHandle). */
-  readonly adminHandle: DocHandle<LarDoc>;
+  /** The daemon's warm admin doc handle (result.admin.daemonHandle). */
+  readonly daemonHandle: DocHandle<LarDoc>;
   /** Socket path — both sides agree on <dataDir>/lares.sock via the env contract. */
   readonly socketPath: string;
   /** Per-verb await budget (default 30s — recall cold-starts chromadb). */
@@ -48,7 +48,7 @@ interface Invocation {
 export interface UdsChannel { close: () => void; }
 
 export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
-  const { adminHandle, socketPath } = opts;
+  const { daemonHandle, socketPath } = opts;
   const timeoutMs = opts.timeoutMs ?? 30_000;
   const log = opts.onLog ?? (() => { /* quiet */ });
 
@@ -59,8 +59,8 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
   // builds, but against the daemon's own replica (no Repo, no sync).
   const composite = new CompositeStore();
   composite.addLayer({
-    bagId:    ADMIN_BAG_ID,
-    store:    new AutomergeDocStore(adminHandle, ADMIN_BAG_ID),
+    bagId:    DAEMON_BAG_ID,
+    store:    new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID),
     writable: true,
   });
 
@@ -101,9 +101,9 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
       const settle = (fn: () => void) => { if (!settled) { settled = true; cleanup(); fn(); } };
       const check = () => { void readOutcome().then((r) => { if (r) settle(() => resolve(r)); }); };
       const onChange = () => check();
-      adminHandle.on("change", onChange);
+      daemonHandle.on("change", onChange);
       const timer = setTimeout(() => settle(() => reject(new Error(`verb "${inv.verb}" timed out after ${timeoutMs}ms`))), timeoutMs);
-      const cleanup = () => { adminHandle.off("change", onChange); clearTimeout(timer); };
+      const cleanup = () => { daemonHandle.off("change", onChange); clearTimeout(timer); };
       check(); // the outcome may already exist (idempotent re-submission)
     });
   };

@@ -105,7 +105,7 @@ export interface ActionHandlerOptions {
 /**
  * Read/write access to a bag's OWN store, resolved per action — never a mount.
  *
- * The reach path (the `@admin` wiki VM) reaches a deep bag's doc by ACCESS across
+ * The reach path (the `@daemon` wiki VM) reaches a deep bag's doc by ACCESS across
  * the two registry planes (system → `@oracle`, user → `@catalog`) and writes-then-
  * syncs; it mounts nothing into a composite (access≠load; `wiki-layer-ontology#write-law`,
  * `residency-model` sovereign-worker MUST). The no-reach wiki island resolves its
@@ -124,7 +124,7 @@ function makeBagAccess(opts: ActionHandlerOptions): BagAccess {
       .map((u) => makeCatalogAccessor(reach.repo, u));
     const cache = new Map<string, LarTiddlerStore | null>();
     // Reach a bag's store: prefer one the admin already mounts writable (its own
-    // @admin bag — no find latency), else resolve the bag's doc by access across
+    // @daemon bag — no find latency), else resolve the bag's doc by access across
     // the two planes. Cached per action (find() is bounded-async). Read and write
     // share the store: the doc carries no read-only flag — the cap-gate is the authority.
     const resolve = async (bag: string): Promise<LarTiddlerStore | null> => {

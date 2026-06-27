@@ -8,18 +8,18 @@
  *                         Automerge. Tombstoned by the dispatcher after the
  *                         outcome lands. Local intent lives here, not shared truth.
  *
- *   @admin/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
+ *   @daemon/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
  *                         admin bag. Written by the dispatcher on done/error.
  *                         Syncs to all vessels. CRDT convergence here IS the result.
  *                         Shared aftermath lives here.
  *
  * Verb invocation paths:
  *   Local (in-process):   placeVerb() → wiki.addTiddler() → TW5 change event
- *                         → dispatcher runs → outcome to @admin/outcomes/
- *   Remote (CLI/vessels): vessel writes @admin/summons/<id> to Automerge →
+ *                         → dispatcher runs → outcome to @daemon/outcomes/
+ *   Remote (CLI/vessels): vessel writes @daemon/summons/<id> to Automerge →
  *                         IslandAdaptor flows it into TW5 wiki →
  *                         dispatcher translates to volatile invocation → processes →
- *                         outcome to @admin/outcomes/
+ *                         outcome to @daemon/outcomes/
  *
  * Batch contract:
  *   One invocation tiddler may carry N targets (tiddler URIs, file paths, edge resource
@@ -44,7 +44,7 @@
  */
 
 import {
-  ADMIN_BAG_ID, VOLATILE_VM_PREFIX,
+  DAEMON_BAG_ID, VOLATILE_VM_PREFIX,
   LARES_VERB_EVENT_TAG, LARES_VERB_TAG,
 } from "./lar-uris.js";
 import { sha256Hex, canonicalJsonBytes, defaultCryptoProvider, type DigestProvider } from "./crypto.js";
@@ -57,10 +57,10 @@ export const VERB_URI_PREFIX = `${VOLATILE_VM_PREFIX}verbs/`;
 
 /** Automerge-backed verb summons — remote vessels write here; dispatcher translates
  *  to volatile invocation and tombstones after pickup. */
-export const SUMMONS_URI_PREFIX = `${ADMIN_BAG_ID}/summons/`;
+export const SUMMONS_URI_PREFIX = `${DAEMON_BAG_ID}/summons/`;
 
 /** Durable outcome tiddlers — Automerge-backed, sync to all vessels. */
-export const OUTCOME_URI_PREFIX = `${ADMIN_BAG_ID}/outcomes/`;
+export const OUTCOME_URI_PREFIX = `${DAEMON_BAG_ID}/outcomes/`;
 
 /** Result map key for single-result (no explicit targets) verbs. */
 export const VERB_RESULT_KEY = "summary" as const;

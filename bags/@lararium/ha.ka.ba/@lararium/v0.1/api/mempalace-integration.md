@@ -11,7 +11,7 @@ manaoio   = 14
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the pono model for mempalace as the lararium's memory-library — tensegrity, the @admin shore, the lar_ net, the surfaces, the boundary"
+role      = "the pono model for mempalace as the lararium's memory-library — tensegrity, the @daemon shore, the lar_ net, the surfaces, the boundary"
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -26,7 +26,7 @@ uri-path  = "ha.ka.ba/@lararium/v0.1/api/mempalace-integration"
 
 **mempalace holds the journey; the lararium holds the canon; the curated notes hold the conclusions.** Three strands of memory pull against each other — and the work tends the pulling, never any one strand alone. In Elyncian terms: **mempalace keeps the PLACE memory** (the hearth's verbatim record, for the Lar guards place), the **quine keeps the astral ley-line-mesh memory** (the canon that runs between shrines). The whole topology — four registers, two peers, one mesh — stands at <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory >>.
 
-mempalace serves as a **library-kind member of the bag stack**, accessed-not-loaded: the keeper reaches its verbatim drawers on demand, never hydrates 27k drawers into the VM. It rides **behind the causal-island boundary** — web2 substrate (ChromaDB/SQLite/Python), a vendored sibling, never a citizen of the Lares stack proper (web3-only law). The `@admin` island keeps it; the rest of the house never touches it directly.
+mempalace serves as a **library-kind member of the bag stack**, accessed-not-loaded: the keeper reaches its verbatim drawers on demand, never hydrates 27k drawers into the VM. It rides **behind the causal-island boundary** — web2 substrate (ChromaDB/SQLite/Python), a vendored sibling, never a citizen of the Lares stack proper (web3-only law). The `@daemon` island keeps it; the rest of the house never touches it directly.
 
 <<~/ahu >>
 
@@ -42,14 +42,14 @@ The founder's own thesis names the shape: *remember the way I remember — not t
 
 <<~ ahu #the-shore >>
 
-## The @admin Memory-Shore ~ the verb flow
+## The @daemon Memory-Shore ~ the verb flow
 
-The `@admin` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one **idempotent upsert** writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: **the mode lives in the *feeder* only, never in the transform.**
+The `@daemon` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one **idempotent upsert** writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: **the mode lives in the *feeder* only, never in the transform.**
 
 - **Live** ~ a thin Stop/SessionEnd hook calls the shore per turn; new drawers carry `lar_*` from birth.
 - **Backfill** ~ the same pair sweeps the corpus (`lares harvest --all`).
 
-The CLI projects the verb; the verb's true home rises into the `@admin` VM as verb-tiddlers, composed into a JS TiddlyWiki plugin (VM-primacy, #has). The mesh parser stays isomorphic; only the orchestration migrates.
+The CLI projects the verb; the verb's true home rises into the `@daemon` VM as verb-tiddlers, composed into a JS TiddlyWiki plugin (VM-primacy, #has). The mesh parser stays isomorphic; only the orchestration migrates.
 
 <<~/ahu >>
 
@@ -126,7 +126,7 @@ lares harvest --all                                      # sweep every transcrip
 
 - **Recall rises into the wake** ~ the boot climbs already holding the relevant journey, filtered by `lar_surface` · `lar_voices` · `lar_confidence`.
 - **The kupono seat** ~ a local, sovereign embedder behind the island earns the tier-2 seam — its first vow rejoins the turns the tools tore apart, lifting fragmented frames toward canon. No cloud breath in the parse path.
-- **The @admin VM home** ~ lift the orchestration from the CLI projection into verb-tiddlers + the TW5 plugin.
+- **The @daemon VM home** ~ lift the orchestration from the CLI projection into verb-tiddlers + the TW5 plugin.
 - **The source-adapter seam** ~ when upstream wires `mempalace mine --source`, the declared `lares` schema slots in whole.
 
 <<~/ahu >>

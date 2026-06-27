@@ -1,10 +1,10 @@
 /**
- * AdminEventStore — persist Keyhive events as tiddlers in the admin Automerge doc.
+ * DaemonEventStore — persist Keyhive events as tiddlers in the admin Automerge doc.
  *
  * Implements the EventStore interface against a CompositeStore writable layer
  * (the admin VM's composite). Each Keyhive event becomes one tiddler:
  *
- *   title:    lar:///ha.ka.ba/@admin/cap/<eventHash>
+ *   title:    lar:///ha.ka.ba/@daemon/cap/<eventHash>
  *   tag:      lar:///ha.ka.ba/tags/cap-event (sub-tags by variant: .../prekey, .../cgka,
  *             .../delegation, .../revocation)
  *   fields:   variant, hash, bytes-len, is-delegated, is-revoked
@@ -23,7 +23,7 @@
  */
 
 import {
-  ADMIN_BAG_ID, type CompositeStore,
+  DAEMON_BAG_ID, type CompositeStore,
   CAP_EVENT_TAG, CAP_EVENT_PREKEY_TAG, CAP_EVENT_CGKA_TAG,
   CAP_EVENT_DELEGATION_TAG, CAP_EVENT_REVOCATION_TAG,
 } from "@lararium/mesh";
@@ -43,7 +43,7 @@ function subTagFor(variant: string): string | null {
 
 /** Title for a cap-event tiddler under the admin doc. */
 export function capEventTitle(hash: string): string {
-  return `${ADMIN_BAG_ID}/cap/${hash}`;
+  return `${DAEMON_BAG_ID}/cap/${hash}`;
 }
 
 /** Base64-encode bytes for tiddler `text` storage (tiddler.text is string). */
@@ -72,13 +72,13 @@ async function hashBytes(bytes: Uint8Array): Promise<string> {
   return s;
 }
 
-export interface AdminEventStoreOptions {
+export interface DaemonEventStoreOptions {
   /** Composite store with the admin bag as its writable layer. */
   readonly admin: CompositeStore;
 }
 
-export class AdminEventStore implements EventStore {
-  constructor(private readonly opts: AdminEventStoreOptions) {}
+export class DaemonEventStore implements EventStore {
+  constructor(private readonly opts: DaemonEventStoreOptions) {}
 
   async put(rec: EventRecord): Promise<void> {
     const hash    = rec.hash || (await hashBytes(rec.bytes));
@@ -102,14 +102,14 @@ export class AdminEventStore implements EventStore {
       { authority: "lares-keyhive" },
     );
     const origin: ChangeOrigin = { kind: "lares-verb", requestId: `cap-event-${hash.slice(0, 8)}` };
-    await this.opts.admin.put(record, origin, { bag: ADMIN_BAG_ID });
+    await this.opts.admin.put(record, origin, { bag: DAEMON_BAG_ID });
   }
 
   async list(): Promise<readonly EventRecord[]> {
     const out: EventRecord[] = [];
     const titles = await this.opts.admin.listVisible();
     for (const title of titles) {
-      if (!title.startsWith(`${ADMIN_BAG_ID}/cap/`)) continue;
+      if (!title.startsWith(`${DAEMON_BAG_ID}/cap/`)) continue;
       const rec = await this.opts.admin.get(title);
       if (!rec || rec.meta?.deleted) continue;
       const fields = rec.tiddler as Record<string, string>;
@@ -121,7 +121,7 @@ export class AdminEventStore implements EventStore {
         out.push({ hash, variant, bytes: base64ToBytes(text) });
       } catch {
         // Malformed payload — skip; log via console for operator visibility.
-        console.warn(`[admin-event-store] skipped malformed cap event ${title}`);
+        console.warn(`[daemon-event-store] skipped malformed cap event ${title}`);
       }
     }
     return out;

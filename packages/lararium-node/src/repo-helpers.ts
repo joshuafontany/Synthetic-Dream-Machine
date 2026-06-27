@@ -3,7 +3,7 @@
  *
  * waitHandleLocal: race whenReady() against a short fallback so a
  * repo.find() against an URL the local store doesn't yet have doesn't hang
- * boot. Used by both openNodeVessel (wiki VM) and openAdminVm (admin VM).
+ * boot. Used by both openNodeVessel (wiki VM) and openDaemonVm (admin VM).
  *
  * The tideline-class boot resolver (resolveBootDoc / StillJoining) now lives in
  * @lararium/mesh, so the vessel keel (open-vessel-core) can reach it too — mesh

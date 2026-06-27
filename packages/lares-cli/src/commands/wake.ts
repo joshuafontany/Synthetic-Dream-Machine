@@ -16,7 +16,7 @@ import { repoRoot } from "@lararium/mesh/node";
 import { larRoot, larBootstrapPath, larDataDir } from "../env.js";
 import { probePort } from "../port-control.js";
 import { emit } from "../render.js";
-import { connectAdminVessel, submitVerb, summaryOutput } from "../admin-connector.js";
+import { connectDaemonVessel, submitVerb, summaryOutput } from "../daemon-connector.js";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { checkMempalaceIntegration, installMempalaceIntegration, type InstallStep } from "../integration-check.js";
 import { setupMempalacePalace, type PalaceSetupStep } from "../setup-mempalace.js";
@@ -44,7 +44,7 @@ interface WakeRecall {
 }
 
 /**
- * recall-into-wake — pull this project's recent journey THROUGH the @admin seat so
+ * recall-into-wake — pull this project's recent journey THROUGH the @daemon seat so
  * the woken session climbs already-remembering. Best-effort by construction: any
  * miss (no identity, daemon unreachable, recall error) returns {ok:false,note} and
  * the wake proceeds. A short timeout keeps it inside the SessionStart hook budget.
@@ -55,10 +55,10 @@ async function recallIntoWake(port: number): Promise<WakeRecall> {
   try { did = "0x" + (await loadVesselVerifyingKey(larDataDir())); }
   catch { return { ok: false, wing, note: "no operator identity" }; }
   let vessel;
-  try { vessel = await connectAdminVessel({ port }); }
+  try { vessel = await connectDaemonVessel({ port }); }
   catch { return { ok: false, wing, note: "daemon unreachable" }; }
   try {
-    // One cold sidecar start can take ~8s; after that the @admin pool is warm and
+    // One cold sidecar start can take ~8s; after that the @daemon pool is warm and
     // recall is sub-second. Give the first wake room; warm wakes return instantly.
     const r = await submitVerb(vessel, "recall", { wing, limit: 5 }, did, { timeoutMs: 9000 });
     if (r.status !== "done") return { ok: false, wing, note: r.errorMessage ?? "recall error" };

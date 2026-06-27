@@ -31,7 +31,7 @@ export async function cmdHeleuma(args: ParsedArgs): Promise<number> {
 /** `lares serve` — boot the lararium node only (no Vite).
  *
  *  Runs the BUILT dist, never tsx-source: the sovereign island workers spawn from
- *  compiled `.js` siblings (`node-admin-island.js` / `node-wiki-island.js`, no
+ *  compiled `.js` siblings (`node-daemon-island.js` / `node-wiki-island.js`, no
  *  `execArgv`), so a tsx-source run produces a half-dead vessel (port bound, admin
  *  worker ERR_MODULE_NOT_FOUND). `node dist/src/main.js` is the design boot (= the
  *  package `start` script, the handoff's canonical hearth, the e2e harness). Scouted

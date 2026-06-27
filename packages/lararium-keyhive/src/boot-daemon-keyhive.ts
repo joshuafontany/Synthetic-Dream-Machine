@@ -1,5 +1,5 @@
 /**
- * boot-admin-keyhive — the isomorphic keyhive boot+gate sequence for the admin
+ * boot-daemon-keyhive — the isomorphic keyhive boot+gate sequence for the admin
  * island. ONE function, called identically on every platform's admin worker.
  *
  * Stage 1 of the isomorphic-vessel epic moves authn/z off the host and into the
@@ -23,10 +23,10 @@ import { KeyhiveProvider } from "./keyhive-provider.js";
 import type { CapabilityProviderInitOpts } from "./capability-provider.js";
 import { verifyDeviceDelegation, type DeviceDelegationTiddler } from "@lararium/mesh";
 
-export interface BootAdminKeyhiveInput {
+export interface BootDaemonKeyhiveInput {
   /** 32-byte operator signing seed (delivered to the worker via the manifest). */
   readonly seed: Uint8Array;
-  /** Cap-event store — AdminEventStore over the admin CompositeStore in-island. */
+  /** Cap-event store — DaemonEventStore over the admin CompositeStore in-island. */
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
   readonly operatorVerifyingKey: string;
@@ -45,7 +45,7 @@ export interface BootAdminKeyhiveInput {
   readonly deviceEdge: DeviceDelegationTiddler;
 }
 
-export interface BootAdminKeyhiveResult {
+export interface BootDaemonKeyhiveResult {
   /** The booted provider — serves as the island VerbDispatcher verifier and the
    *  answerer for host→island verify-proxy queries. */
   readonly keyhive: KeyhiveProvider;
@@ -60,7 +60,7 @@ export interface BootAdminKeyhiveResult {
  * Throws (HALT) on any gate failure — the admin island must post `fault` so the
  * vessel never declares itself live with a diverged or unauthorized identity.
  */
-export async function bootAdminKeyhive(input: BootAdminKeyhiveInput): Promise<BootAdminKeyhiveResult> {
+export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<BootDaemonKeyhiveResult> {
   const keyhive = new KeyhiveProvider();
   await keyhive.init({ seed: input.seed, eventStore: input.eventStore });
 

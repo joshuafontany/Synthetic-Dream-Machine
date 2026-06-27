@@ -18,7 +18,7 @@ import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { loadVesselVerifyingKey } from "@lararium/node";
 import { larDataDir } from "../env.js";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import { emit, wantsJson } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -120,7 +120,7 @@ export async function cmdDraft(args: ParsedArgs): Promise<number> {
   }
 
   const r = summaryOutput(result) ?? {};
-  const receiptUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  const receiptUri = `lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`;
   emit(args, {
     ok: true,
     requestId: result.requestId,

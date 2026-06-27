@@ -10,7 +10,7 @@
  */
 
 import {
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   type CapabilityAccess,
   type CapabilityVerifyResult,
   type CapabilityVerifier,
@@ -47,7 +47,7 @@ export function makeCapVerify(verifier: CapabilityVerifier | undefined, requeste
 export function deriveRoutedCap(invocation: Verb): { access: CapabilityAccess; bagUrl: string } {
   const a = invocation.args as Record<string, unknown>;
   const pick = (k: string): string | null => (typeof a[k] === "string" ? (a[k] as string) : null);
-  const bagUrl = pick("bagUrl") ?? pick("toBag") ?? pick("dest") ?? pick("bag") ?? pick("targetBag") ?? ADMIN_BAG_ID;
+  const bagUrl = pick("bagUrl") ?? pick("toBag") ?? pick("dest") ?? pick("bag") ?? pick("targetBag") ?? DAEMON_BAG_ID;
   return { access: "admin", bagUrl };
 }
 

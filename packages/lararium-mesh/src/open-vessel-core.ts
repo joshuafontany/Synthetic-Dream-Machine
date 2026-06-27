@@ -23,7 +23,7 @@ import { CompositeStore } from "./composite-store.js";
 import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
-import { BAG_IDS, ADMIN_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { TEMP_BAG } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 
@@ -32,7 +32,7 @@ export interface VesselBootstrap {
   identitiesUrl: string;
   circlesUrl:    string;
   sessionsUrl:   string;
-  adminUrl:      string;
+  daemonUrl:      string;
 }
 
 /**
@@ -158,7 +158,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(await resolve(bootstrap.identitiesUrl as AutomergeUrl), BAG_IDS.identities), writable: true });
   composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(await resolve(bootstrap.circlesUrl    as AutomergeUrl), BAG_IDS.groups),     writable: true });
   composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(await resolve(bootstrap.sessionsUrl   as AutomergeUrl), BAG_IDS.sessions),   writable: true });
-  composite.addLayer({ bagId: ADMIN_BAG_ID,       store: new AutomergeDocStore(await resolve(bootstrap.adminUrl      as AutomergeUrl), ADMIN_BAG_ID),       writable: true });
+  composite.addLayer({ bagId: DAEMON_BAG_ID,       store: new AutomergeDocStore(await resolve(bootstrap.daemonUrl      as AutomergeUrl), DAEMON_BAG_ID),       writable: true });
 
   if (recipe.loadCorpora) {
     await recipe.loadCorpora(composite);

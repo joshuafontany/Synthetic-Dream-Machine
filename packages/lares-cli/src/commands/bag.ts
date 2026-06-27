@@ -18,7 +18,7 @@ import { operatorDid } from "../env.js";
 import {
   cmdPin, cmdUnpin, cmdRegisterCold, cmdResidency,
 } from "./residency.js";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { runVerb } from "../verb-call.js";
 import type { ParsedArgs } from "../parse-args.js";
 

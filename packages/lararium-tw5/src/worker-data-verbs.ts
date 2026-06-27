@@ -2,7 +2,7 @@
  * worker-data-verbs — read-only data-plane reactors that run IN the admin worker.
  *
  * Sovereign-worker model (lararium-canonical-model, project-sovereign-worker-model):
- * the data-plane lives in the worker, registered via makeAdminBehavior's `wireWorkerVerbs`
+ * the data-plane lives in the worker, registered via makeDaemonBehavior's `wireWorkerVerbs`
  * hook over the IslandContext, riding the dispatcher's verify-then-delegate gate for free.
  *
  * Two shapes here, per the grounded read/command rule:
@@ -14,7 +14,7 @@
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
 
-import { tiddlerText, mkAdminResidencyOp, mkAdminWikiAlert, bagStackFromRec, recipeUri, wikiBagUri, type CompositeStore, type AdminMsg_ResidencyOp, type AdminMsg_WikiAlert, type LarDoc, type LarTiddlerRecord, type Repo } from "@lararium/mesh";
+import { tiddlerText, mkDaemonResidencyOp, mkDaemonWikiAlert, bagStackFromRec, recipeUri, wikiBagUri, type CompositeStore, type DaemonMsg_ResidencyOp, type DaemonMsg_WikiAlert, type LarDoc, type LarTiddlerRecord, type Repo } from "@lararium/mesh";
 import { ACTIVE_WIKI_URI } from "./active-wiki.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeCatalogAccessor, type CatalogAccessor } from "./catalog-accessor.js";
@@ -42,7 +42,7 @@ const WIKI_PREFIX = "lar:///ha.ka.ba/@lararium/wikis/";
 
 /** A fire-and-forget poster for worker→main commands: residency-op (pin/unpin/
  *  register-cold) and wiki-alert (reboot-pending notice to affected live islands). */
-export type ResidencyOpPost = (msg: AdminMsg_ResidencyOp | AdminMsg_WikiAlert) => void;
+export type ResidencyOpPost = (msg: DaemonMsg_ResidencyOp | DaemonMsg_WikiAlert) => void;
 let _opSeq = 0;
 
 /** Build a residency mutator reactor: gate the verb in-worker, command main's manager. */
@@ -51,7 +51,7 @@ function residencyVerb(op: "pin" | "unpin" | "register-cold", post: ResidencyOpP
     const bagId  = typeof args["url"] === "string" ? args["url"] : "";
     if (!bagId) throw new Error("args.url is required");
     const reason = typeof args["reason"] === "string" ? args["reason"] : undefined;
-    post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op, bagId, ...(reason !== undefined ? { reason } : {}) }));
+    post(mkDaemonResidencyOp({ requestId: `resop-${++_opSeq}`, op, bagId, ...(reason !== undefined ? { reason } : {}) }));
     // Policy granted in-worker (keyhive-gated); main's BagResidencyManager executes.
     return { url: bagId, op, commanded: true, ...(reason !== undefined ? { reason } : {}) };
   };
@@ -163,7 +163,7 @@ export function makeWikiPinReactor(catalog: CatalogAccessor, post: ResidencyOpPo
     const pinned: Array<{ bagUrl: string; reason: string }> = [];
     for (const bagUrl of bagStack) {
       const reason = `wiki:${slug}`;
-      post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op: "pin", bagId: bagUrl, reason }));
+      post(mkDaemonResidencyOp({ requestId: `resop-${++_opSeq}`, op: "pin", bagId: bagUrl, reason }));
       pinned.push({ bagUrl, reason });
     }
     return { slug, recipeUri: recipeTitle, pinned, commanded: true };
@@ -181,7 +181,7 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
     const bagStack = bagStackFromRec(recipeRec);
     const unpinned: string[] = [];
     for (const bagUrl of bagStack) {
-      post(mkAdminResidencyOp({ requestId: `resop-${++_opSeq}`, op: "unpin", bagId: bagUrl }));
+      post(mkDaemonResidencyOp({ requestId: `resop-${++_opSeq}`, op: "unpin", bagId: bagUrl }));
       unpinned.push(bagUrl);
     }
     return { slug, recipeUri: recipeTitle, unpinned, commanded: true };
@@ -193,15 +193,15 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
 // A wiki island's projector refused a write (sovereign-island disk ward,
 // disk-projection#write-ward). The signal rides the generic worker.event →
 // placeVerb bridge into the admin VM, which (a) writes a DURABLE audit record
-// into @admin — the operators-with-admin-grants surface — and (b) injects a
+// into @daemon — the operators-with-admin-grants surface — and (b) injects a
 // $:/tags/Alert into the operator's currently PINNED VM via the existing
 // wiki-alert rail (kind "disk-ward"). No cap-gate: the signal originates from
 // the island's own mechanism, grants nothing, and only writes audit + alert.
 
-/** Register as "ward-alert". `post` = ctx.post (AdminMsg_WikiAlert rides it). */
+/** Register as "ward-alert". `post` = ctx.post (DaemonMsg_WikiAlert rides it). */
 export function makeWardAlertReactor(
   composite: CompositeStore,
-  post: (msg: AdminMsg_WikiAlert) => void,
+  post: (msg: DaemonMsg_WikiAlert) => void,
 ): VerbReactor {
   return async (args) => {
     const bagId  = typeof args["bagId"]  === "string" ? args["bagId"]  : "(unknown bag)";
@@ -209,18 +209,18 @@ export function makeWardAlertReactor(
     const reason = typeof args["reason"] === "string" ? args["reason"] : "(no reason)";
     const ts     = new Date().toISOString();
 
-    // (a) Durable audit in @admin — append-only ledger, never coalesced.
-    const auditTitle = `lar:///ha.ka.ba/@admin/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
+    // (a) Durable audit in @daemon — append-only ledger, never coalesced.
+    const auditTitle = `lar:///ha.ka.ba/@daemon/ledger/ward/${Date.now().toString(32)}-${Math.floor(Math.random() * 1e6).toString(32)}`;
     await composite.put(
       { tiddler: { title: auditTitle, "alert-kind": "disk-ward", bag: bagId, uri, reason, ts }, meta: { authority: "disk-ward" } },
       { kind: "lares-verb", requestId: `ward-${ts}` },
     );
 
-    // (b) Alert the operator's currently pinned VM (the active wiki marker in @admin).
+    // (b) Alert the operator's currently pinned VM (the active wiki marker in @daemon).
     const marker = await composite.get(ACTIVE_WIKI_URI);
     const slug   = tiddlerText(marker) ?? null;
     if (slug) {
-      post(mkAdminWikiAlert({
+      post(mkDaemonWikiAlert({
         wikiSlug: slug,
         message:  `Disk ward refused a write (${bagId}): ${reason}`,
         cause:    "disk-ward",

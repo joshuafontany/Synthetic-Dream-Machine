@@ -41,7 +41,7 @@ class FakeTW5Engine {
   };
 }
 
-class FakeAdminStore {
+class FakeDaemonStore {
   readonly writes: LarTiddlerRecord[] = [];
 
   async put(record: LarTiddlerRecord): Promise<void> {
@@ -100,7 +100,7 @@ describe("verb-vm", () => {
   });
 
   test("writeOutcome emits a durable summary outcome", async () => {
-    const admin = new FakeAdminStore();
+    const admin = new FakeDaemonStore();
     const invocation = makeInvocation();
 
     await writeOutcome(admin as unknown as CompositeStore, {
@@ -118,7 +118,7 @@ describe("verb-vm", () => {
 
   test("dispatchVerb marks running, writes outcome, then removes the volatile invocation on success", async () => {
     const tw5 = new FakeTW5Engine();
-    const admin = new FakeAdminStore();
+    const admin = new FakeDaemonStore();
     const invocation = makeInvocation();
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
@@ -138,7 +138,7 @@ describe("verb-vm", () => {
 
   test("dispatchVerb writes an error outcome and still removes the volatile invocation", async () => {
     const tw5 = new FakeTW5Engine();
-    const admin = new FakeAdminStore();
+    const admin = new FakeDaemonStore();
     const invocation = makeInvocation({ requestId: "req-test-2", title: `${VERB_URI_PREFIX}req-test-2` });
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 

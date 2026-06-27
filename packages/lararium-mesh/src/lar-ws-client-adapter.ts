@@ -5,7 +5,7 @@
  * a pre-sync handshake. This subclass interposes the lar:challenge → lar:auth → verdict handshake
  * (operator-peer #actor-parity) on the SAME socket the gate authenticates, THEN hands that
  * authenticated socket to the parent's Automerge machinery. It mirrors the server side, where
- * AdminAuthGate runs the handshake on the raw socket before emitting "connection" to the adapter.
+ * DaemonAuthGate runs the handshake on the raw socket before emitting "connection" to the adapter.
  *
  * Composition, not a fork: the handshake half (`runPeerHandshake`) and the leaf IDENTITY
  * (`LeafIdentity` — bare-Ed25519 signer + cached ContactCard, no keyhive) inject; the transport

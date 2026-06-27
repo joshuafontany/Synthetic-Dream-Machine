@@ -6,7 +6,7 @@
  *   seedIdentitiesDoc     — create the @identities satellite doc on first boot
  *   seedCirclesDoc        — create the @circles satellite doc on first boot (+ 5 system circles)
  *   seedSessionsDoc       — create the @sessions satellite doc on first boot
- *   seedAdminDoc          — create the operator-private admin bag on first boot
+ *   seedDaemonDoc          — create the operator-private admin bag on first boot
  *   createSessionEventLog — create a per-session SessionEventLog child doc
  */
 
@@ -17,7 +17,7 @@ import {
   IDENTITIES_DOC_URI,
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   emptyLarDoc,
   emptyIdentitiesDoc,
   emptyCirclesDoc,
@@ -83,12 +83,12 @@ export function seedSessionsDoc(repo: Repo): DocHandle<LarDoc> {
   return handle;
 }
 
-export function seedAdminDoc(repo: Repo): DocHandle<LarDoc> {
+export function seedDaemonDoc(repo: Repo): DocHandle<LarDoc> {
   const handle = repo.create<LarDoc>(emptyLarDoc());
   handle.change((doc) => {
-    doc.tiddlers[ADMIN_BAG_ID] = mutableLarRecord(ADMIN_BAG_ID, { text: handle.url, kind: "oracle" }, "lararium-seed");
+    doc.tiddlers[DAEMON_BAG_ID] = mutableLarRecord(DAEMON_BAG_ID, { text: handle.url, kind: "oracle" }, "lararium-seed");
   });
-  console.log(`[social-seed] AdminDoc seeded  url=${handle.url}`);
+  console.log(`[social-seed] DaemonDoc seeded  url=${handle.url}`);
   return handle;
 }
 

@@ -19,7 +19,7 @@ import { createInterface } from "readline/promises";
 import { stdin, stdout } from "process";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit, wantsJson, exitFor } from "../render.js";
-import { summaryOutput } from "../admin-connector.js";
+import { summaryOutput } from "../daemon-connector.js";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanSource, candidatesOf, submitIngestOn } from "../ingest-core.js";
 
@@ -116,7 +116,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
     return exitFor(code);
   }
   const summary = summaryOutput(result) ?? {};
-  const auditUri = `lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`;
+  const auditUri = `lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`;
   emit(args, {
     ok: true,
     requestId: result.requestId,

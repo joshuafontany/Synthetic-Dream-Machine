@@ -11,7 +11,7 @@ manaoio   = 14
 namespace = "≋"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "the memory model stated whole — two axes (sovereign↔meshed · lived↔distilled) crossing into four cells that unfold to five registers (the Seat doubling by mind-kind — Law-of-5s), held by two peers (operator: RAM + DreamDeckSurface · node: RAM + Agent.MEMORY) over one shared mesh (mempalace the PLACE memory · quine the ley-line-mesh memory); the CLI a mutual-hold instrument on the edges into the @admin seat; carries the GroundedVow binding, the two drains, capture-before-wire, and register-dressed recall"
+role      = "the memory model stated whole — two axes (sovereign↔meshed · lived↔distilled) crossing into four cells that unfold to five registers (the Seat doubling by mind-kind — Law-of-5s), held by two peers (operator: RAM + DreamDeckSurface · node: RAM + Agent.MEMORY) over one shared mesh (mempalace the PLACE memory · quine the ley-line-mesh memory); the CLI a mutual-hold instrument on the edges into the @daemon seat; carries the GroundedVow binding, the two drains, capture-before-wire, and register-dressed recall"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/local-first", "api/pono/loci"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -113,7 +113,7 @@ the other (asymmetric peers, #causal-islands):
 **The CLI rides the edges, not a cell.** `lares` holds no register of its own — it
 serves as the **mutual-hold instrument**, operator-hand and node-hand on one
 handle, operating the edge-verbs (`harvest` · `recall` · the residency `MOVE`) and
-projecting into the **@admin seat**, where authority lives. The browser / Mudlet /
+projecting into the **@daemon seat**, where authority lives. The browser / Mudlet /
 Unreal surfaces sync to that same seat: one seat, many handles.
 
 **Operator and user name a held office, never a caste.** A hand stands as
@@ -211,14 +211,14 @@ So the metadata cannot wire into MemPalace yet — **it stays rendered, then los
 The capture must precede the wiring.
 
 **The decomposition rides the engine that already parses the grammar.** The hook
-hands the whole turn to the Lararium; the **@admin wiki-island decomposes it
+hands the whole turn to the Lararium; the **@daemon wiki-island decomposes it
 through the TW5 memetic-wikitext VM** and hands the structured metadata back. The
 node never hand-rolls a second parser racing ahead of the VM — it uses the
 machinery that already reads the sigils.
 
 <<~ confidence Provisional-Synthesis 7/20 >> **PROPOSED, awaiting the full TW5
 memetic-wikitext integration** (operator ruling, 2026-06-23): the exact
-turn-metadata record shape stays unset until the hook→Lararium→@admin→decompose→
+turn-metadata record shape stays unset until the hook→Lararium→@daemon→decompose→
 hand-back path stands. The `bearing-harvest` carries the pattern to extend
 (graceful degradation · verbatim · drift preserved as the keeper's gauge), not the
 site to build at.

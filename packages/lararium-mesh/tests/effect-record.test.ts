@@ -76,7 +76,7 @@ describe("effect-record URI builders", () => {
 
   test("isEffectRecordUri accepts well-formed log titles", () => {
     expect(isEffectRecordUri("lar:///ha.ka.ba/@elyncia/ledger/residency/abc-123")).toBe(true);
-    expect(isEffectRecordUri("lar:///lararium.local.vm/@admin/ledger/residency/x")).toBe(true);
+    expect(isEffectRecordUri("lar:///lararium.local.vm/@daemon/ledger/residency/x")).toBe(true);
   });
 
   test("isEffectRecordUri rejects non-residency-log titles", () => {

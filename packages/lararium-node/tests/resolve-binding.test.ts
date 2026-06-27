@@ -20,7 +20,7 @@ import { describe, test, expect } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import {
   type LarDoc,
-  CompositeStore, AutomergeDocStore, ADMIN_BAG_ID,
+  CompositeStore, AutomergeDocStore, DAEMON_BAG_ID,
   emptyLarDoc,
   mutableLarRecord,
   tiddlerText,
@@ -53,13 +53,13 @@ function makeFakeKeyhive() {
 
 /** Build an admin-bag composite (the shape both host + island pass), plus the
  *  underlying handle for direct assertions/seeding. */
-function makeAdminStore(repo: Repo): { adminStore: CompositeStore; adminHandle: DocHandle<LarDoc> } {
-  const adminHandle = repo.create<LarDoc>(emptyLarDoc());
+function makeDaemonStore(repo: Repo): { adminStore: CompositeStore; daemonHandle: DocHandle<LarDoc> } {
+  const daemonHandle = repo.create<LarDoc>(emptyLarDoc());
   const adminStore = new CompositeStore();
-  const layer = new AutomergeDocStore(adminHandle, ADMIN_BAG_ID);
-  adminStore.addLayer({ bagId: ADMIN_BAG_ID, store: layer, writable: true });
+  const layer = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
+  adminStore.addLayer({ bagId: DAEMON_BAG_ID, store: layer, writable: true });
   layer.markSyncComplete();
-  return { adminStore, adminHandle };
+  return { adminStore, daemonHandle };
 }
 
 function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityProvider) {
@@ -77,7 +77,7 @@ function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityP
 describe("resolveOrMintBinding", () => {
   test("mint-on-absent: creates a doc, registers, delegates to PersonaGroup admin, records the binding", async () => {
     const repo = new Repo();
-    const { adminStore, adminHandle } = makeAdminStore(repo);
+    const { adminStore, daemonHandle } = makeDaemonStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     const result = await resolveOrMintBinding({
@@ -99,7 +99,7 @@ describe("resolveOrMintBinding", () => {
 
     // Binding tiddler recorded in the admin doc under the personal prefix.
     const key = `${PERSONAL_BINDINGS_PREFIX}/${FINGERPRINT}`;
-    const rec = adminHandle.doc()?.tiddlers?.[key];
+    const rec = daemonHandle.doc()?.tiddlers?.[key];
     expect(tiddlerText(rec)).toBe(result.url);
     expect(rec?.tiddler.kind).toBe("personal-binding");
     expect(rec?.tiddler.fingerprint).toBe(FINGERPRINT);
@@ -109,13 +109,13 @@ describe("resolveOrMintBinding", () => {
 
   test("reuse-on-present: returns the stored url, mints/delegates nothing", async () => {
     const repo = new Repo();
-    const { adminStore, adminHandle } = makeAdminStore(repo);
+    const { adminStore, daemonHandle } = makeDaemonStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     // Pre-seed an existing binding tiddler.
     const key = `${DRAFT_BINDINGS_PREFIX}/${FINGERPRINT}`;
     const existingUrl = "automerge:already-bound";
-    adminHandle.change((doc) => {
+    daemonHandle.change((doc) => {
       doc.tiddlers[key] = mutableLarRecord(key, { text: existingUrl }, "test-seed");
     });
 
@@ -131,7 +131,7 @@ describe("resolveOrMintBinding", () => {
 
   test("@personal and @draft bind under parallel prefixes for the same fingerprint", async () => {
     const repo = new Repo();
-    const { adminStore, adminHandle } = makeAdminStore(repo);
+    const { adminStore, daemonHandle } = makeDaemonStore(repo);
     const { provider } = makeFakeKeyhive();
 
     const personal = await resolveOrMintBinding({
@@ -144,7 +144,7 @@ describe("resolveOrMintBinding", () => {
     });
 
     expect(personal.url).not.toBe(draft.url);   // two distinct docs
-    const doc = adminHandle.doc();
+    const doc = daemonHandle.doc();
     expect(tiddlerText(doc?.tiddlers?.[`${PERSONAL_BINDINGS_PREFIX}/${FINGERPRINT}`])).toBe(personal.url);
     expect(tiddlerText(doc?.tiddlers?.[`${DRAFT_BINDINGS_PREFIX}/${FINGERPRINT}`])).toBe(draft.url);
   });

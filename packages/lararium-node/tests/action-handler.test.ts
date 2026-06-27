@@ -377,7 +377,7 @@ describe("malformed args", () => {
 // S5.7 — Integration: verb-tiddler → runLocalVerb → handler
 //
 // The unit blocks above hand-build VerbContext and call the reactor directly.
-// This block exercises the real dispatch seam the admin VM (open-admin-vm.ts)
+// This block exercises the real dispatch seam the admin VM (open-daemon-vm.ts)
 // and browser worker use: registry lookup by `invocation.action` + the
 // CapabilityVerifier→cap() adaptation (makeCapVerify) + handler run. A full CLI
 // binary spawn + TW5 boot roundtrip stays covered by the live `lares act`

@@ -2,13 +2,13 @@ export type { CorpusSource } from "./node-host.js";
 export { LARES_ROOT, LARES_MEMES_ROOT, REPO_ROOT } from "./node-host.js";
 
 export { LarDiskProjector } from "./disk-projector.js";
-export { AdminAuthGate } from "./admin-auth-gate.js";
+export { DaemonAuthGate } from "./daemon-auth-gate.js";
 export { openNodeVessel } from "./open-node-vessel.js";
-export { openAdminVm } from "./open-admin-vm.js";
-export type { AdminVmOptions } from "./open-admin-vm.js";
+export { openDaemonVm } from "./open-daemon-vm.js";
+export type { DaemonVmOptions } from "./open-daemon-vm.js";
 export type { NodeVesselOptions, NodeVesselResult, NodeOpenPhase } from "./open-node-vessel.js";
 
-export { createSessionEventLog, seedAdminDoc } from "@lararium/mesh";
+export { createSessionEventLog, seedDaemonDoc } from "@lararium/mesh";
 export { SOCIAL_BOOTSTRAP_PLUGIN_TITLE } from "./open-node-vessel.js";
 export { SyncedTree, contentHash, syncedTreeKey } from "./synced-tree.js";
 export { bagsFileToUri, wikisFileToUri } from "./bag-paths.js";

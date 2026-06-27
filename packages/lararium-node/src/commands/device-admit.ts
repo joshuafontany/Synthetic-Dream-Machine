@@ -20,7 +20,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
@@ -70,7 +70,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
 
   const personaGroupDocIdHex = tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text ?? null;
   const meshCabalDocIdHex   = tiddlers[MESH_CABAL_DOC_ID_TIDDLER]?.text   ?? null;
-  const adminUrl            = tiddlers[ADMIN_BAG_ID]?.text                 ?? null;
+  const daemonUrl            = tiddlers[DAEMON_BAG_ID]?.text                 ?? null;
 
   if (!personaGroupDocIdHex || !meshCabalDocIdHex) {
     throw new Error(
@@ -78,22 +78,22 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
       `  Run \`lares init --force\` to re-establish the founding ceremony.`,
     );
   }
-  if (!adminUrl) {
+  if (!daemonUrl) {
     throw new Error(`[lares device-admit] admin doc URL missing from social-bootstrap.json.`);
   }
 
   // Open admin doc to read cap events + personaGroupAgentIdHex.
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
-  const progress    = repo.findWithProgress(adminUrl as AutomergeUrl);
+  const progress    = repo.findWithProgress(daemonUrl as AutomergeUrl);
   // automerge-repo 2.6: whenReady() resolves the handle when ready, rejects on
   // unavailable; race it against a 5s timeout.
-  const adminHandle = await Promise.race([
+  const daemonHandle = await Promise.race([
     progress.whenReady(),
     new Promise<never>((_, reject) =>
       setTimeout(() => reject(new Error("[lares device-admit] admin doc not ready after 5s")), 5000),
     ),
   ]);
-  const adminDoc    = adminHandle.doc();
+  const adminDoc    = daemonHandle.doc();
   const tiddlerMap  = ((adminDoc as Record<string,unknown>)?.["tiddlers"] ?? {}) as Record<string, unknown>;
 
   const agentEntry         = tiddlerMap[PERSONA_GROUP_AGENT_ID_TIDDLER] as Record<string,unknown> | undefined;

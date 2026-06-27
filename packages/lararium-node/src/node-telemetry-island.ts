@@ -7,7 +7,7 @@
  * `hasCapture` — hosting the isomorphic capture-engine with node seams (subprocess flush to the
  * palace, fs-WAL reserve) and the self-regulating servo. Raw turns arrive over the island SIGNAL
  * channel (`telemetry:place-verb`); the main thread only transports. role = capability ≠ platform —
- * this file picks only the node platform pieces, exactly as node-admin-island does.
+ * this file picks only the node platform pieces, exactly as node-daemon-island does.
  *
  * Telemetry node-paths ride `workerData` (node-vessel config the manifest schema does not carry);
  * the island identity/storage still arrive via the manifest the spawner sends.

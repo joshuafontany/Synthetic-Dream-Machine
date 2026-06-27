@@ -23,8 +23,8 @@ uri-path    = "ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler"
 Three lar: URIs carry one request through its life, request and result held apart:
 
 - **`lararium.local.vm/verbs/<requestId>`** — the VOLATILE invocation tiddler. A local caller writes it to the admin wiki; the dispatcher picks it up on the next change. Vessel-local scratch, never shared truth.
-- **`@admin/summons/<requestId>`** — the edge TRANSPORT. An external vessel writes a summons to the Automerge doc; the dispatcher relays it into a volatile invocation, then tombstones the summons. Edge transport, not durable coordination. ("signal" names a different layer — the Agent↔Operator HUD frame.)
-- **`@admin/outcomes/<requestId>`** — the DURABLE outcome tiddler (the result). Syncs to all vessels via CRDT. Durable shared meaning begins at the outcome, never at the summons.
+- **`@daemon/summons/<requestId>`** — the edge TRANSPORT. An external vessel writes a summons to the Automerge doc; the dispatcher relays it into a volatile invocation, then tombstones the summons. Edge transport, not durable coordination. ("signal" names a different layer — the Agent↔Operator HUD frame.)
+- **`@daemon/outcomes/<requestId>`** — the DURABLE outcome tiddler (the result). Syncs to all vessels via CRDT. Durable shared meaning begins at the outcome, never at the summons.
 
 <<~/ahu >>
 
@@ -49,7 +49,7 @@ The cuts that pull this surface forward (each its own loop, none forced now):
 4. **Determinism / managed-effect boundary** — verb bodies stay deterministic so any peer re-verifies by re-running; non-determinism (disk, net, time, sends) hides behind a managed-effect descriptor that returns its own receipt. This makes "signed receipt = verifiable outcome" true rather than hoped.
 5. **Invoker / executor split + arg-policy as the execution gate** — composes with the verify-then-delegate decision (`project_verification_placement`).
 
-Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<event-id>` (the indelible effect-record ledger), distinct from the per-request receipt at `@admin/outcomes/`. The web2 word "log" left the surface 2026-06-07.
+Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<event-id>` (the indelible effect-record ledger), distinct from the per-request receipt at `@daemon/outcomes/`. The web2 word "log" left the surface 2026-06-07.
 
 <<~/ahu >>
 

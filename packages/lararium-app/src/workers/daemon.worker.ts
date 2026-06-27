@@ -3,10 +3,10 @@
 // rejection surfaces as a logged error instead of a silent module-eval failure.
 import { registerWorkerErrorRelay, initKeyhiveWasm } from "./worker-boot.js";
 
-registerWorkerErrorRelay("admin-worker");
+registerWorkerErrorRelay("daemon-worker");
 
 const run = async (): Promise<void> => {
   await initKeyhiveWasm();
-  await import("@lararium/browser/browser-admin-island");
+  await import("@lararium/browser/browser-daemon-island");
 };
-void run().catch((e) => console.error("[admin-worker] run-threw", e instanceof Error ? e.stack : String(e)));
+void run().catch((e) => console.error("[daemon-worker] run-threw", e instanceof Error ? e.stack : String(e)));

@@ -15,8 +15,8 @@
  * mid-sequence orphans a docUrl. Next boot recomputes the same fingerprint,
  * finds no binding, re-mints; the orphan stays unreferenced.
  *
- * Admin reads/writes go through the admin-bag CompositeStore (`get` /
- * `put({bag: ADMIN_BAG_ID})`) — host: `adminVm.composite`; island: `ctx.composite`.
+ * Daemon reads/writes go through the admin-bag CompositeStore (`get` /
+ * `put({bag: DAEMON_BAG_ID})`) — host: `daemonVm.composite`; island: `ctx.composite`.
  *
  * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot
  */
@@ -25,7 +25,7 @@ import {
   type LarDoc,
   type CompositeStore,
   type ChangeOrigin,
-  ADMIN_BAG_ID,
+  DAEMON_BAG_ID,
   emptyLarDoc,
   mutableLarRecord,
   tiddlerText,
@@ -48,15 +48,15 @@ export type BindingKind = "personal-binding" | "draft-binding" | "working-bindin
 export interface ResolveBindingArgs {
   /** Tiddler `kind` field value — distinguishes @personal / @draft / @working bindings. */
   readonly kind: BindingKind;
-  /** Admin tiddler-title prefix (PERSONAL_ | DRAFT_ | WORKING_BINDINGS_PREFIX). */
+  /** Daemon tiddler-title prefix (PERSONAL_ | DRAFT_ | WORKING_BINDINGS_PREFIX). */
   readonly prefix: string;
   /** SHA-256 hex from computeRecipeFingerprint — the per-recipe binding key. */
   readonly fingerprint: string;
   /** Automerge repo that mints the bound doc on absent (host relay or island Repo). */
   readonly repo: DocMinter;
   /**
-   * Admin-bag composite — reads existing bindings + writes new binding tiddlers.
-   * Host-side: `adminVm.composite`; island-side: the worker's `ctx.composite`.
+   * Daemon-bag composite — reads existing bindings + writes new binding tiddlers.
+   * Host-side: `daemonVm.composite`; island-side: the worker's `ctx.composite`.
    */
   readonly adminStore: CompositeStore;
   /** Keyhive provider — registers the minted bag + delegates it to the PersonaGroup. */
@@ -108,7 +108,7 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   // co-edited view-state is "edit", but the live Keyhive gate exposes only
   // read | admin, so edit-intent rounds UP to admin as documented interim debt
   // (marginal authority ≈ 0; every PersonaGroup device already holds admin on
-  // @admin). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
+  // @daemon). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
   await args.keyhive.delegate({
     bagUrl:   handle.url,
     audience: args.personaGroupAgentIdHex,
@@ -125,7 +125,7 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
     "recipe-trace": canonicalJson(args.recipeTrace),
     "minted-on":   new Date().toISOString(),
     "minted-by":   args.mintedByHex,
-  }, "personal-bindings"), origin, { bag: ADMIN_BAG_ID });
+  }, "personal-bindings"), origin, { bag: DAEMON_BAG_ID });
 
   return { url: handle.url, minted: true };
 }

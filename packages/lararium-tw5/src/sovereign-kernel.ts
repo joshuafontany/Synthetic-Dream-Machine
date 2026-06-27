@@ -111,7 +111,7 @@ export function runSovereignKernel(
   const handler = new IslandKernel(_post);
 
   // Factory form: when a manifest-keyed factory is passed, the behavior resolves
-  // lazily on first manifest — so the admin entry can read manifest.adminAuth
+  // lazily on first manifest — so the admin entry can read manifest.daemonAuth
   // (the operator seed) at construction time.
   let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
   const _resolveBehavior = (msg: IslandMsg_Manifest): IslandBehavior => {
@@ -179,7 +179,7 @@ export function runSovereignKernel(
     breathe();
     const breathTimer = setInterval(() => breathe(), breathEveryMs);
     // Any throw during init (incl. a behavior.onEa gate failure, e.g.
-    // bootAdminKeyhive Gate A/B/C) posts fault so the vessel times out cleanly
+    // bootDaemonKeyhive Gate A/B/C) posts fault so the vessel times out cleanly
     // instead of hanging without an ea.
     try {
       await _doManifest(msg, tick);

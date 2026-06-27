@@ -1,5 +1,5 @@
 /**
- * admin-auth-gate.test.ts — Path L auth gate smoke tests.
+ * daemon-auth-gate.test.ts — Path L auth gate smoke tests.
  *
  * Tests the pre-Automerge lar:challenge / lar:auth / lar:auth-ok wire exchange
  * using a real WebSocket server, raw WebSocket client connections, and a stub
@@ -9,13 +9,13 @@
  * that proxies to the admin island, which does receiveContactCard + verify
  * in-worker and returns the verdict plus the peer's Identifier hex.
  *
- * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/admin-auth-gate
+ * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/daemon-auth-gate
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";
 import { createServer }                               from "node:http";
 import { WebSocketServer, WebSocket }                 from "ws";
-import { AdminAuthGate }                              from "../src/admin-auth-gate.js";
+import { DaemonAuthGate }                              from "../src/daemon-auth-gate.js";
 import type { AuthVerifierSeam, AuthProofWire }       from "@lararium/mesh";
 import {
   isLarChallengeMsg, isLarAuthOkMsg, isLarAuthDeniedMsg,
@@ -135,13 +135,13 @@ function nextClose(s: BufferedSocket): Promise<{ code: number; reason: string }>
 
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
-describe("AdminAuthGate — pre-sync auth exchange", () => {
+describe("DaemonAuthGate — pre-sync auth exchange", () => {
   let serverInfo: Awaited<ReturnType<typeof makeServer>>;
-  let gate: AdminAuthGate;
+  let gate: DaemonAuthGate;
 
   beforeEach(async () => {
     serverInfo = await makeServer();
-    gate = new AdminAuthGate(serverInfo.wss);
+    gate = new DaemonAuthGate(serverInfo.wss);
   });
 
   afterEach(async () => {
@@ -254,7 +254,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
 
   test("V3: armed with a gatePubKey, the challenge advertises it (gate-binding)", async () => {
     const { seam } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/@admin", "deadbeef".repeat(8));
+    gate.arm(seam, "lar:///ha.ka.ba/@daemon", "deadbeef".repeat(8));
 
     const ws  = await connect(serverInfo.port);
     const msg = await nextMessage(ws) as { nonce: string; gatePubKey?: string };
@@ -267,7 +267,7 @@ describe("AdminAuthGate — pre-sync auth exchange", () => {
 
   test("V3: a lar:auth with sig+ts relays the proof {nonce, sig, ts} to the seam", async () => {
     const { seam, calls } = makeCapturingSeam();
-    gate.arm(seam, "lar:///ha.ka.ba/@admin", "00".repeat(32));
+    gate.arm(seam, "lar:///ha.ka.ba/@daemon", "00".repeat(32));
 
     const ws   = await connect(serverInfo.port);
     const chal = await nextMessage(ws) as { nonce: string };

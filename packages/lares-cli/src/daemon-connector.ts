@@ -1,5 +1,5 @@
 /**
- * admin-connector — connect the CLI to a running `lares serve` daemon as an
+ * daemon-connector — connect the CLI to a running `lares serve` daemon as an
  * Automerge-repo WebSocket vessel connection, then submit verb-summons tiddlers
  * and await outcomes through the admin doc.
  *
@@ -26,14 +26,14 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Repo, type AutomergeUrl, type DocHandle } from "@automerge/automerge-repo";
 import {
-  ADMIN_BAG_ID, AutomergeDocStore, CompositeStore,
+  DAEMON_BAG_ID, AutomergeDocStore, CompositeStore,
   summon, SUMMONS_URI_PREFIX, OUTCOME_URI_PREFIX, VERB_RESULT_KEY,
   type LarDoc,
 } from "@lararium/mesh";
 import { larPort, larDataDir, larBootstrapPath } from "./env.js";
 import { loadLeafIdentity, LarWSClientAdapter } from "@lararium/node";
 
-export interface AdminVesselHandle {
+export interface DaemonVesselHandle {
   readonly repo:      Repo;
   readonly composite: CompositeStore;
   readonly admin:     DocHandle<LarDoc>;
@@ -59,11 +59,11 @@ export interface ConnectOptions {
   readonly dataDir?: string;
 }
 
-function readAdminUrl(bootstrapPath: string): string {
+function readDaemonUrl(bootstrapPath: string): string {
   const raw = readFileSync(bootstrapPath, "utf8");
   const plugin = JSON.parse(raw);
   const inner = JSON.parse(plugin.text);
-  const url   = inner?.tiddlers?.[ADMIN_BAG_ID]?.text;
+  const url   = inner?.tiddlers?.[DAEMON_BAG_ID]?.text;
   if (typeof url !== "string") {
     throw new Error(`admin AutomergeUrl missing from ${bootstrapPath}`);
   }
@@ -71,7 +71,7 @@ function readAdminUrl(bootstrapPath: string): string {
 }
 
 /** Connect to the daemon, sync the admin doc, return helpers. */
-export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<AdminVesselHandle> {
+export async function connectDaemonVessel(opts: ConnectOptions = {}): Promise<DaemonVesselHandle> {
   const port = opts.port ?? larPort();
   const host = opts.host ?? "127.0.0.1";
   // ONE env contract (env.ts): LAR_ROOT/.lararium for data, LAR_ROOT/genesis
@@ -79,7 +79,7 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
   // resolves its own identity + bootstrap from its own root.
   const bootstrap = opts.bootstrapPath ?? larBootstrapPath();
   const timeout = opts.timeoutMs ?? 3000;
-  const adminUrl = readAdminUrl(bootstrap);
+  const daemonUrl = readDaemonUrl(bootstrap);
 
   // Light leaf identity (cached ContactCard + bare-Ed25519 signer; no keyhive) —
   // the CLI authenticates at the relay's V3 gate as a sovereign peer. The gate
@@ -92,7 +92,7 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
   const adapter  = new LarWSClientAdapter({
     url:        `ws://${host}:${port}/ws`,
     identity,
-    aud:        ADMIN_BAG_ID,
+    aud:        DAEMON_BAG_ID,
     gatePubKey: identity.peerPubKey,
   });
   const repo    = new Repo({ network: [adapter] });
@@ -105,13 +105,13 @@ export async function connectAdminVessel(opts: ConnectOptions = {}): Promise<Adm
     )),
   ]);
 
-  const admin = await repo.find<LarDoc>(adminUrl as AutomergeUrl);
+  const admin = await repo.find<LarDoc>(daemonUrl as AutomergeUrl);
   await admin.whenReady();
 
   const composite = new CompositeStore();
   composite.addLayer({
-    bagId:    ADMIN_BAG_ID,
-    store:    new AutomergeDocStore(admin, ADMIN_BAG_ID),
+    bagId:    DAEMON_BAG_ID,
+    store:    new AutomergeDocStore(admin, DAEMON_BAG_ID),
     writable: true,
   });
 
@@ -154,7 +154,7 @@ export function summaryOutput(result: SubmitResult): Record<string, unknown> | u
 
 /**
  * Write a verb-summons tiddler to the shared admin CRDT doc, then SUBSCRIBE
- * to admin-doc changes for the durable @admin/outcomes/<requestId> tiddler —
+ * to admin-doc changes for the durable @daemon/outcomes/<requestId> tiddler —
  * its arrival IS the "done" signal (CRDT convergence = result; the change
  * event = the wake). The old 100ms poll loop died 2026-06-11: a busy-wait
  * wearing a web3 coat — the doc already knew how to call back.
@@ -163,7 +163,7 @@ export function summaryOutput(result: SubmitResult): Record<string, unknown> | u
  * CLI never tombstones; a CLI crash leaves no namespace residue.
  */
 export async function submitVerb(
-  vessel:      AdminVesselHandle,
+  vessel:      DaemonVesselHandle,
   verb:        string,
   args:        Record<string, unknown>,
   requestedBy: string,

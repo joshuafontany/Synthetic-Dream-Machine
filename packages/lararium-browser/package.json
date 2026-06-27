@@ -11,8 +11,8 @@
     "./browser-wiki-worker": {
       "import": "./dist/browser-wiki-worker.js"
     },
-    "./browser-admin-island": {
-      "import": "./dist/browser-admin-island.js"
+    "./browser-daemon-island": {
+      "import": "./dist/browser-daemon-island.js"
     }
   },
   "main": "./dist/index.js",

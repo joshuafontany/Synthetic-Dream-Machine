@@ -120,7 +120,7 @@ Cross-island boundary (IslandMsg_Event):
 Cross-vessel boundary (CRDT convergence):
   placeVerb() writes verb tiddler to shared admin CRDT.
   Automerge convergence delivers to all connected vessels.
-  Outcome tiddler at @admin/outcomes/<requestId> carries the result.
+  Outcome tiddler at @daemon/outcomes/<requestId> carries the result.
   No additional protocol layer.
 ```
 

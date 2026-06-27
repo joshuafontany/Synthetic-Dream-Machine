@@ -33,7 +33,7 @@ import { watch as fsWatch, writeFileSync, rmSync, type FSWatcher } from "node:fs
 import { join, relative, isAbsolute } from "node:path";
 import type { ParsedArgs } from "../parse-args.js";
 import { emit } from "../render.js";
-import { connectAdminVessel, summaryOutput, type AdminVesselHandle } from "../admin-connector.js";
+import { connectDaemonVessel, summaryOutput, type DaemonVesselHandle } from "../daemon-connector.js";
 import { larRoot, operatorDid } from "../env.js";
 import { openSyncedTree, scanFiles, candidatesOf, deletionsOf, submitIngestOn, type PendingDeletion } from "../ingest-core.js";
 
@@ -73,7 +73,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
 
   // One vessel + one operator identity for the whole life of the watch (the
   // gesture re-opened these per keystroke; the daemon holds them open).
-  let vessel: AdminVesselHandle | undefined;
+  let vessel: DaemonVesselHandle | undefined;
   let did = "";
   if (apply) {
     try { did = await operatorDid(); } catch (err) {
@@ -83,7 +83,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     }
     try {
       const portOpt = args.options["port"];
-      vessel = await connectAdminVessel(portOpt ? { port: Number(portOpt) } : {});
+      vessel = await connectDaemonVessel(portOpt ? { port: Number(portOpt) } : {});
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       emit(args, { ok: false, error: msg, human: () => { console.error(`lares watch: ${msg}`); console.error("  Start the daemon with `lares serve` and try again."); } });
@@ -155,7 +155,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
       const summary  = summaryOutput(result) ?? {};
       const carriers = (summary as { carriers?: Array<Record<string, unknown>> })["carriers"] ?? [];
       const del      = (summary as { deletions?: Record<string, unknown> })["deletions"];
-      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/@admin/outcomes/${result.requestId}`);
+      console.log(`  wave ${n}: ${candidates.length} change(s) + ${ride.length} deletion(s) submitted · audit lar:///ha.ka.ba/@daemon/outcomes/${result.requestId}`);
       for (const c of carriers) console.log(`    ${String(c["decision"]).toUpperCase().padEnd(10)} ${c["uri"]}`);
       if (del && (del as { decision?: string })["decision"] === "suspend") {
         console.error(`    ⚠ mass-delete brake TRIPPED — ${String((del as { reason?: string })["reason"] ?? "")}; nothing applied, re-run to confirm.`);

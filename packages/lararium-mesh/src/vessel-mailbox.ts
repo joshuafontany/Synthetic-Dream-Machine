@@ -3,7 +3,7 @@
  * and substrate-agnostic: node and browser vessels wire the same mechanism.
  *
  * A verb addressed to an island that isn't live PARKS as a record in
- * @admin keyed by island identity; the island's next `ea` (its own breath
+ * @daemon keyed by island identity; the island's next `ea` (its own breath
  * declaration) drains it — deliver-to-IDENTITY: the message survives the
  * island and arrives when the identity breathes again. The record's
  * status transition (parked → delivered) makes one artifact serve as
@@ -13,10 +13,10 @@
  * ports — the caller supplies `placeVerb` (its own live-delivery path).
  */
 
-import { ADMIN_BAG_ID } from "./lar-uris.js";
+import { DAEMON_BAG_ID } from "./lar-uris.js";
 import type { CompositeStore } from "./composite-store.js";
 
-const MAILBOX_PREFIX = "lar:///ha.ka.ba/@admin/mailbox/";
+const MAILBOX_PREFIX = "lar:///ha.ka.ba/@daemon/mailbox/";
 
 export interface MailboxVerb {
   readonly verb:        string;
@@ -50,7 +50,7 @@ export function makeDurableMailbox(
           "parked-at": new Date().toISOString(),
         },
         meta: {},
-      }, { kind: "lares-verb", requestId: id }, { bag: ADMIN_BAG_ID });
+      }, { kind: "lares-verb", requestId: id }, { bag: DAEMON_BAG_ID });
       log(`[mailbox] parked ${v.verb} for ${wikiId} (island not live)`);
     },
 
@@ -70,7 +70,7 @@ export function makeDurableMailbox(
           await composite.put({
             tiddler: { ...f, title, status: "delivered", "delivered-at": new Date().toISOString() },
             meta: rec.meta ?? {},
-          }, { kind: "lares-verb", requestId: `${title}#delivered` }, { bag: ADMIN_BAG_ID });
+          }, { kind: "lares-verb", requestId: `${title}#delivered` }, { bag: DAEMON_BAG_ID });
           log(`[mailbox] delivered ${f["verb"]} to ${wikiId}`);
         } catch { /* island died mid-drain — record stays parked for the next ea */ }
       }

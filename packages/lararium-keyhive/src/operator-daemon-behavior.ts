@@ -1,20 +1,20 @@
 /**
- * operator-admin-behavior — the keyhive-wired admin island behavior, shared.
+ * operator-daemon-behavior — the keyhive-wired admin island behavior, shared.
  *
  * The node and browser admin entry points were byte-identical except for which
  * platform run-function they called. The keyhive wiring — boot keyhive in-worker
- * from `manifest.adminAuth`, then supply makeAdminBehavior's three callbacks
+ * from `manifest.daemonAuth`, then supply makeDaemonBehavior's three callbacks
  * (verifierFactory, verifyPeer, resolveBinding) — lives here ONCE. Each entry
  * now only picks its platform kernel and passes this factory.
  *
  * Home: keyhive (it owns the keyhive wiring) composes tw5's keyhive-free
- * makeAdminBehavior. tw5 stays keyhive-free; keyhive → tw5 is acyclic.
+ * makeDaemonBehavior. tw5 stays keyhive-free; keyhive → tw5 is acyclic.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/keyhive/operator-admin-behavior
+ * Meme: lar:///ha.ka.ba/@lararium/v0.1/keyhive/operator-daemon-behavior
  */
 
 import {
-  makeAdminBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
+  makeDaemonBehavior, makeWhereReactor, makeResolveReactor, makeListWikisReactor,
   makePinReactor, makeUnpinReactor, makeRegisterColdReactor, registerActionReactors, makeTw5Deserializer,
   makeWikiPinReactor, makeWikiUnpinReactor,
   makeCatalogAccessor,
@@ -25,24 +25,24 @@ import {
 import type { IslandBehavior, IslandContext } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
-import { bootAdminKeyhive } from "./boot-admin-keyhive.js";
-import { AdminEventStore } from "./admin-event-store.js";
+import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
+import { DaemonEventStore } from "./daemon-event-store.js";
 import { resolveOrMintBinding } from "./resolve-binding.js";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
 /**
  * Build the operator's admin-island behavior from a manifest. With no auth
  * material, falls back to the verifier-less behavior (delegated-verb path only);
- * admin manifests always carry adminAuth, so that path guards tests.
+ * admin manifests always carry daemonAuth, so that path guards tests.
  */
-export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandBehavior {
-  const adminAuth = manifest.adminAuth;
-  if (!adminAuth) return makeAdminBehavior();
+export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): IslandBehavior {
+  const daemonAuth = manifest.daemonAuth;
+  if (!daemonAuth) return makeDaemonBehavior();
 
   let kh: KeyhiveProvider | null = null;
-  let mintedByHex = adminAuth.operatorVerifyingKey;
+  let mintedByHex = daemonAuth.operatorVerifyingKey;
 
-  return makeAdminBehavior({
+  return makeDaemonBehavior({
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
     // IslandContext composite (verify-then-delegate gate inherited). The first slice
     // off the old main-thread jobRegistry; pool-touching residency reactors follow.
@@ -74,7 +74,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       registry.register("draft", makeDraftReactor({ composite: ctx.composite }));
 
       // Disk-ward refusals (wiki-island projector → worker.event bridge) — audit
-      // in @admin + $:/tags/Alert into the operator's pinned VM.
+      // in @daemon + $:/tags/Alert into the operator's pinned VM.
       registry.register("ward-alert", makeWardAlertReactor(ctx.composite, ctx.post));
 
       // Every other admin verb reaches USER registry data in @catalog (wiki oracles,
@@ -92,7 +92,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
           repo:        ctx.repo,
           catalog,
           rootDir:     "",
-          operatorDid: async () => "0x" + adminAuth.operatorVerifyingKey,
+          operatorDid: async () => "0x" + daemonAuth.operatorVerifyingKey,
         };
         registry.register("init-wiki",   makeInitWikiReactor(wikiMintOpts));
         registry.register("open-wiki",   makeOpenWikiReactor({ composite: ctx.composite, catalog, post: ctx.post }));
@@ -113,16 +113,16 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       }
     },
     verifierFactory: async (ctx: IslandContext) => {
-      const { keyhive, did } = await bootAdminKeyhive({
-        seed:                  adminAuth.seed,
-        eventStore:            new AdminEventStore({ admin: ctx.composite }),
-        operatorVerifyingKey:  adminAuth.operatorVerifyingKey,
-        personaGroupDocIdHex:   adminAuth.personaGroupDocIdHex,
-        personaGroupAgentIdHex: adminAuth.personaGroupAgentIdHex,
-        meshCabalDocIdHex:     adminAuth.meshCabalDocIdHex,
-        registerBags:          adminAuth.registerBags,
-        signerDid:       adminAuth.signerDid,
-        deviceEdge:            adminAuth.deviceEdge,
+      const { keyhive, did } = await bootDaemonKeyhive({
+        seed:                  daemonAuth.seed,
+        eventStore:            new DaemonEventStore({ admin: ctx.composite }),
+        operatorVerifyingKey:  daemonAuth.operatorVerifyingKey,
+        personaGroupDocIdHex:   daemonAuth.personaGroupDocIdHex,
+        personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex,
+        meshCabalDocIdHex:     daemonAuth.meshCabalDocIdHex,
+        registerBags:          daemonAuth.registerBags,
+        signerDid:       daemonAuth.signerDid,
+        deviceEdge:            daemonAuth.deviceEdge,
       });
       kh = keyhive;
       mintedByHex = did;
@@ -141,7 +141,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       //   gatePubKey = this gate's OWN verifying key (operatorVerifyingKey) — so a
       //     proof signed for a different gate fails here (anti-relay).
       //   peerPubKey = the raw ed25519 key, the suffix of the card-derived
-      //     Identifier hex (the same relationship bootAdminKeyhive Gate A relies on:
+      //     Identifier hex (the same relationship bootDaemonKeyhive Gate A relies on:
       //     did.endsWith(verifyingKey)).
       let proofVerified = false;
       if (proof) {
@@ -177,7 +177,7 @@ export function makeOperatorAdminBehavior(manifest: IslandMsg_Manifest): IslandB
       if (!kh) throw new Error("keyhive not booted");
       const common = {
         fingerprint, repo: ctx.repo, adminStore: ctx.composite, keyhive: kh,
-        personaGroupAgentIdHex: adminAuth.personaGroupAgentIdHex, mintedByHex, recipeTrace,
+        personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex, mintedByHex, recipeTrace,
       } as const;
       const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
       const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });

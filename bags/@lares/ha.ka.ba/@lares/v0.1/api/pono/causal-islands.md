@@ -60,7 +60,7 @@ relay-law exception governs the bottom rung.
 should NOT re-delegate — currently rounds **up** to `admin`. Documented over-grant: e.g.
 delegating an operator's `@personal`/`@draft` view-state to their own PersonaGroup grants
 `admin` where `edit` is the true least-authority. Acceptable while the principal set is
-homogeneous-trust (those devices already hold `admin` on `@admin`, so marginal authority
+homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal authority
 ≈ 0). Adopt the true `edit` grain at the delegation call sites the moment
 `CapabilityVerifier.verify` accepts it. First live call site + ocap rationale:
 [personal-slot](../lararium/personal-slot.md).
