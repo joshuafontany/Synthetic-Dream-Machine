@@ -215,6 +215,36 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
   ? join(homedir(), ".local", "bin", MP_EXE)
   : "mempalace";
 
+/** Sync sleep (execFileSync is synchronous) via Atomics — for the lock-retry backoff. */
+function sleepSync(ms: number): void {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Math.max(0, Math.round(ms)));
+}
+
+/**
+ * Run a mempalace `mine` DIRECT (fresh process per call — clean chroma/HNSW/embedder state, no
+ * long-lived-daemon cumulative-state failure), RETRYING on the palace-lock busy signal.
+ *
+ * The palace lock is the cross-process coordination: a held lock means another writer (a live
+ * daemon flush, a concurrent backfill) is mid-mine — `MineAlreadyRunning` is a BUSY signal, not an
+ * error (exactly SQLite's SQLITE_BUSY). We back off (exponential + full jitter) and retry, so the
+ * bulk backfill and the live seam coexist gracefully through the one lock. Throws after maxAttempts.
+ */
+function mineWithRetry(args: readonly string[], maxAttempts = 5): string {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return execFileSync(MP, [...args], { maxBuffer: 1 << 30, encoding: "utf8" });
+    } catch (e) {
+      const msg = String((e as { stderr?: unknown; message?: unknown }).stderr ?? (e as Error).message ?? "");
+      const lockBusy = /MineAlreadyRunning|is held by PID|LockHeldByOtherProcess/.test(msg);
+      if (lockBusy && attempt < maxAttempts) {
+        sleepSync(Math.min(200 * 2 ** (attempt - 1), 5000) * (0.5 + Math.random() * 0.5));
+        continue;
+      }
+      throw e;
+    }
+  }
+}
+
 /** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
 function readCwdFromTranscript(jsonl: string): string | null {
   try {
@@ -434,12 +464,16 @@ function runHarvestAll(args: ParsedArgs): number {
     }
     let mined: number | string = 0;
     try {
-      // --daemon routes the backfill mine through the write-daemon seam (serialized against one
-      // palace handle) so it never races a live per-session hook mine. (The capture FALLBACK at
-      // the daemon-DOWN path stays a direct mine — there's no daemon to hand off to there.)
-      const out = execFileSync(MP, ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares", "--daemon"], { maxBuffer: 1 << 30, encoding: "utf8" });
+      // The BULK backfill is the SOLE bulk writer (isolated re-pave) — it BYPASSES the daemon seam
+      // (the seam serializes CONCURRENT live writers; funnelling the batch through one long-lived
+      // process choked on cumulative chroma/HNSW state). Direct fresh-process-per-wing + retry on
+      // the palace-lock busy signal: a rare overlap with a live flush is a retryable MineAlreadyRunning.
+      const out = mineWithRetry(["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares"]);
       mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
-    } catch { mined = "mine-failed"; }
+    } catch (e) {
+      // Surface the real reason (the spirit's guard — failures used to vanish into a bare string).
+      mined = "mine-failed: " + String((e as { stderr?: unknown }).stderr ?? (e as Error).message ?? "").trim().slice(0, 160);
+    }
     results.push({ wing, transcripts: es.length, sources, mined, writeback: writebackWing(wing) });
   }
 
@@ -626,7 +660,9 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       }
     } catch { /* fall through with target as-is */ }
     try {
-      execFileSync(MP, ["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { stdio: "ignore" });
+      // Daemon down → direct mine, but still retry the palace-lock busy signal (a concurrent
+      // backfill or another session's fallback may hold it) — graceful, no lost drawer.
+      mineWithRetry(["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"]);
       fellBack = true;
       // The direct mine landed these turns — mark them so the nalu won't double next run.
       for (const file of files) for (const turn of readTurns(file)) {
