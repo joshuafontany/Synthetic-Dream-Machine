@@ -40,7 +40,7 @@ import { cmdSubagents }               from "../commands/subagents.js";
 import { cmdPalaceTeardown }          from "../commands/palace-teardown.js";
 import {
   cmdBuildGenesis, cmdTestQuine, cmdHeleuma,
-  cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild,
+  cmdServe, cmdDev, cmdReset, cmdFresh, cmdReconcile, cmdRebuild, cmdRefresh,
 } from "../commands/scripted.js";
 import { cmdDeviceAdmit, cmdInviteSend, cmdInviteReceive } from "../commands/ceremony.js";
 import { freshBuildGate, FRESH_BUILD_COMMANDS } from "../build-freshness.js";
@@ -74,6 +74,7 @@ const COMMANDS: readonly Command[] = [
   { name: "reset",         summary: "Wipe .lararium/ + bootstrap, then re-init (identity in .lararium-identity/ is preserved). Requires --force.",        handler: cmdReset         },
   { name: "fresh",         summary: "reset --force, then serve.",                                                    handler: cmdFresh         },
   { name: "reconcile",     summary: "Idempotent dev/test restart: stop the incumbent on the port (graceful→force), [--fresh] wipe, then serve.", handler: cmdReconcile     },
+  { name: "refresh",       summary: "THE post-dev-change cure (idempotent): pnpm -r build, then reconcile --fresh (stop incumbent + re-pave ~/.lares + re-bake genesis + serve). Identity preserved. Use after editing code.", handler: cmdRefresh       },
   { name: "build-genesis", summary: "Build the deterministic genesis-island artifact.",                              handler: cmdBuildGenesis  },
   { name: "test-quine",    summary: "Verify the quine round-trip: genesis → boot → render → hash.",                  handler: cmdTestQuine     },
   { name: "heleuma",       summary: "Audit / scaffold load-bearing source-file memes. Pass --write to scaffold.",    handler: cmdHeleuma       },

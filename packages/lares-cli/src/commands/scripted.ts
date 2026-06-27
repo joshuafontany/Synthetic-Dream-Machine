@@ -8,14 +8,15 @@
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
-import { larDataDir, larIdentityDir } from "../env.js";
+import { larDataDir, larIdentityDir, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");
 
 export async function cmdBuildGenesis(args: ParsedArgs): Promise<number> {
-  const genesisDir = args.options["genesis"] ?? (args.options["root"] ? join(args.options["root"], "genesis") : process.env["LAR_GENESIS"]);
-  const env = genesisDir ? { ...process.env, LAR_GENESIS: genesisDir } : process.env;
+  // Genesis is corpus-relative — larRoot() (LAR_ROOT ?? repoRoot), NOT the vessel home.
+  const genesisDir = args.options["genesis"] ?? join(larRoot(), "genesis");
+  const env = { ...process.env, LAR_GENESIS: genesisDir };
   return runCommand("pnpm", ["--filter", "@lararium/node", "build:genesis"], REPO_ROOT, env);
 }
 
@@ -69,22 +70,19 @@ export async function cmdDev(_args: ParsedArgs): Promise<number> {
  */
 export async function cmdReset(args: ParsedArgs): Promise<number> {
   const { rmSync, existsSync } = await import("node:fs");
-  // Root resolution MUST match the live node (main.ts: --root › LAR_ROOT › REPO_ROOT).
-  // The old `NODE_PKG` default was a confused-deputy bug: `reset` wiped the package
-  // sandbox while the node served the repo hearth — `fresh` reset one dir and booted
-  // another. Resolve once, then thread the SAME root through init + genesis so all
-  // three operate on one explicitly-designated root.
-  const root      = args.options["root"] ?? process.env["LAR_ROOT"] ?? REPO_ROOT;
-  if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"]; // --root → the resolvers
-  const rootedArgs: ParsedArgs = { ...args, options: { ...args.options, root } };
-  const storage   = larDataDir();   // runtime → ~/.lares/.lararium (genesis below stays corpus-relative)
-  const bootstrap = join(root, "genesis", "social-bootstrap.json");
-  const islandBin = join(root, "genesis", "island.bin");
-  const islandSha = join(root, "genesis", "island.sha256");
-  const islandShaPre = join(root, "genesis", "island.sha256-pre");  // legacy (pre-split); cleaned for migration
-  const islandCid = join(root, "genesis", "island.cid");
-  const islandCidEngine  = join(root, "genesis", "island.cid-engine");
-  const islandCidPlugins = join(root, "genesis", "island.cid-plugins");
+  // Only an EXPLICIT --root sets LAR_ROOT (isolated instances). NEVER default it to REPO_ROOT —
+  // that would make larHome() resolve to the repo and defeat the ~/.lares uplift (the bug this
+  // reset hit). With LAR_ROOT unset: storage → ~/.lares (larDataDir), genesis → repo (larRoot).
+  if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"];
+  const genesis   = join(larRoot(), "genesis");
+  const storage   = larDataDir();   // runtime → ~/.lares/.lararium (genesis stays corpus-relative)
+  const bootstrap = join(genesis, "social-bootstrap.json");
+  const islandBin = join(genesis, "island.bin");
+  const islandSha = join(genesis, "island.sha256");
+  const islandShaPre = join(genesis, "island.sha256-pre");  // legacy (pre-split); cleaned for migration
+  const islandCid = join(genesis, "island.cid");
+  const islandCidEngine  = join(genesis, "island.cid-engine");
+  const islandCidPlugins = join(genesis, "island.cid-plugins");
 
   console.log("[lares reset] will delete:");
   if (existsSync(storage))   console.log(`  ${storage}`);
@@ -108,19 +106,48 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandCidEngine,  { force: true });
   rmSync(islandCidPlugins, { force: true });
   console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
-  console.log("[lares reset] cleared. Running lares init…");
+  // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
+  // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)
+  console.log("[lares reset] cleared. Rebuilding genesis artifact…");
+  const genesisCode = await cmdBuildGenesis(args);
+  if (genesisCode !== 0) return genesisCode;
+  console.log("[lares reset] Running lares init…");
   const { cmdInit } = await import("./init.js");
-  const initCode = await cmdInit(rootedArgs);
-  if (initCode !== 0) return initCode;
-  console.log("[lares reset] rebuilding genesis artifact…");
-  return cmdBuildGenesis(rootedArgs);
+  return cmdInit(args);
 }
 
-/** `lares fresh` — reset (--force implied) then serve. */
+/** `lares fresh` — reset (--force implied) then serve. Assumes dist is current (run `refresh` to
+ *  also recompile). */
 export async function cmdFresh(args: ParsedArgs): Promise<number> {
   const resetCode = await cmdReset({ ...args, flags: { ...args.flags, force: true } });
   if (resetCode !== 0) return resetCode;
   return cmdServe(args);
+}
+
+/**
+ * `lares refresh` — THE idempotent post-dev-change cure. After ANY code edit, run this:
+ *   1. `pnpm -r build`     — recompile every package's dist (the island workers spawn from dist, not
+ *                            tsx-source — a stale dist = a half-dead vessel). Idempotent.
+ *   2. `reconcile --fresh` — stop the incumbent on the port (graceful→force, by port-access, no PID
+ *                            file), re-pave the vessel (~/.lares storage wiped + re-init + genesis
+ *                            re-baked under the fresh build; identity preserved), then serve the dist.
+ *
+ * Idempotent from ANY prior state (running / stale / none). The dev-loop sibling commands, by reach:
+ *   - `refresh`   : code changed → REBUILD + re-pave + serve   (this — the full cure)
+ *   - `reconcile` : just converge a running vessel (no rebuild, no wipe unless --fresh)
+ *   - `rebuild`   : dep-bump serde skew → re-bake genesis only (NO wipe, identity-safe)
+ *   - `fresh`     : re-pave + serve, assuming dist already current
+ *   - `serve`     : boot the dist, fail-fast (no convergence, no rebuild)
+ */
+export async function cmdRefresh(args: ParsedArgs): Promise<number> {
+  console.log("[lares refresh] (1/2) pnpm -r build — recompiling all dist…");
+  const buildCode = await runCommand("pnpm", ["-r", "build"], REPO_ROOT);
+  if (buildCode !== 0) {
+    console.error("[lares refresh] build failed — fix the compile, then re-run `lares refresh`.");
+    return buildCode;
+  }
+  console.log("[lares refresh] (2/2) reconcile --fresh — re-pave + serve…");
+  return cmdReconcile({ ...args, flags: { ...args.flags, fresh: true } });
 }
 
 /**
