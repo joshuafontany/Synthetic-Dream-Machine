@@ -74,7 +74,11 @@ esac
 #   re-enriches it later (verbatim-always / telemetry-eventual,
 #   lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
 (
-  "$MP" mine "$stage" --mode convos --extract exchange --wing "$wing" --agent claude >/dev/null 2>&1
+  # DRAWER leg — route THROUGH the @daemon nalu (the {chat}→@daemon-nalu→mempalace path): each new
+  # turn → `capture` verb → capture cap → WAL → flush `mine --source ndjson`. `lares capture` falls
+  # back to a direct `mempalace mine --extract exchange` when the daemon is down (verbatim-always),
+  # so the drawer never gets lost. Idempotent (per-wing capture watermark).
+  "$LARES" capture "$stage" --wing "$wing" >/dev/null 2>&1
   # Tasked-spirit (sub-agent) verbatim, DISTINCT from the main agent — mines
   # <session>/subagents/agent-*.jsonl into wing_<w>__spirits, named from each
   # handoff (Mask → Pet-Name-by-role), both sides. Reads the ORIGINAL transcript

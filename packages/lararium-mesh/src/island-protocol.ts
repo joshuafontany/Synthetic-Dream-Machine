@@ -261,6 +261,19 @@ export interface DaemonMsg_PlaceVerb {
 }
 
 /**
+ * Vessel → island: FEED one captured turn to the @daemon's idempotent telemetry capture cap.
+ * The cap (hasCapture) claims this signal type and enqueues (turnText, sourceFile) into the nalu
+ * (accumulate IN → WAL → flush via `mine --source ndjson`). Distinct from daemon:place-verb (which
+ * the DISPATCH cap claims for VerbDispatcher verbs) — caps are independent, so a separate signal.
+ */
+export interface DaemonMsg_TelemetryPlaceVerb {
+  schema_version: ProtocolVersion;
+  type: "telemetry:place-verb";
+  turnText: string;
+  sourceFile: string;
+}
+
+/**
  * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
  * Emitted when the daemon island's VerbDispatcher encounters a verb not in its local registry.
  * The vessel executes the handler and posts DaemonMsg_VerbResult back.
@@ -434,6 +447,7 @@ export type VesselToIslandMsg =
   | IslandMsg_HooAnu
   | IslandMsg_Teardown
   | DaemonMsg_PlaceVerb
+  | DaemonMsg_TelemetryPlaceVerb
   | DaemonMsg_VerbResult
   | DaemonMsg_VerifyRequest
   | DaemonMsg_ResolveBindingRequest
@@ -603,7 +617,7 @@ function _hasVersion(v: unknown): v is { schema_version: ProtocolVersion; type: 
 
 export function isVesselToIslandMsg(v: unknown): v is VesselToIslandMsg {
   if (!_hasVersion(v)) return false;
-  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
+  return (["manifest", "hooanu", "teardown", "daemon:place-verb", "telemetry:place-verb", "daemon:verb-result", "daemon:verify-request", "daemon:resolve-binding-request", "daemon:evict-result", "daemon:residency-op-result", "wiki:place-verb", "wiki:dom-event"] as const).includes(
     v.type as VesselToIslandMsg["type"],
   );
 }
@@ -709,6 +723,18 @@ export function mkDaemonPlaceVerb(opts: {
   if (opts.fromUri)          msg.fromUri    = opts.fromUri;
   if (opts.listenable)       msg.listenable = opts.listenable;
   return msg;
+}
+
+export function mkTelemetryPlaceVerb(opts: {
+  turnText: string;
+  sourceFile: string;
+}): DaemonMsg_TelemetryPlaceVerb {
+  return {
+    schema_version: ISLAND_PROTOCOL_VERSION,
+    type: "telemetry:place-verb",
+    turnText: opts.turnText,
+    sourceFile: opts.sourceFile,
+  };
 }
 
 export function mkDaemonDelegateVerb(opts: {

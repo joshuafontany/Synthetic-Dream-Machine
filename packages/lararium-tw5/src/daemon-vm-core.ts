@@ -29,6 +29,7 @@ import {
   awaitIslandMsg,
   mkManifest,
   mkDaemonPlaceVerb,
+  mkTelemetryPlaceVerb,
   mkDaemonVerbResult,
   mkDaemonVerifyRequest,
   mkDaemonResolveBindingRequest,
@@ -129,6 +130,8 @@ export interface DaemonVmCore {
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
   placeVerb:      (opts: VesselPlaceVerbRequest) => void;
+  /** FEED one captured turn to the @daemon's telemetry capture cap (the nalu). Fire-and-forget. */
+  placeTelemetry: (turnText: string, sourceFile: string) => void;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
    * keyhive via daemon:verify-request/result. Common to both vessels.
@@ -391,6 +394,9 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         ...(o.fromUri         ? { fromUri: o.fromUri } : {}),
         ...(o.listenable      ? { listenable: o.listenable } : {}),
       }));
+    },
+    placeTelemetry: (turnText: string, sourceFile: string) => {
+      worker.post(mkTelemetryPlaceVerb({ turnText, sourceFile }));
     },
     onEvictRequest: (fn: (bagId: string) => Promise<void>) => {
       _evictHandler = fn;

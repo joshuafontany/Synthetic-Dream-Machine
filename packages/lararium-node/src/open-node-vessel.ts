@@ -407,6 +407,18 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           throw err;
         }
       });
+      // capture — the FEED leg of the telemetry nalu (the @daemon WRITE membrane, forward-capture).
+      // Routes ONE captured turn to the daemon island's capture cap (telemetry:place-verb → enqueue →
+      // WAL → flush `mine --source ndjson` → mempalace). Fire-and-forget: the nalu owns durability +
+      // self-regulation. `lares capture` is the producer; it falls back to a direct `mempalace mine`
+      // when the daemon is down (verbatim-always). Distinct from lar-telemetry (the lar_* writeback).
+      registry.register("capture", async (args) => {
+        const turnText   = typeof args["turnText"]   === "string" ? (args["turnText"]   as string) : "";
+        const sourceFile = typeof args["sourceFile"] === "string" ? (args["sourceFile"] as string) : "";
+        if (!turnText || !sourceFile) throw new Error("capture: args.turnText + args.sourceFile (non-empty strings) required");
+        daemonVm.placeTelemetry(turnText, sourceFile);
+        return { ok: true, captured: true, bytes: turnText.length };
+      });
     },
 
     // After the daemon VM lives: residency pins + sweeper, arm the inbound gate, refresh oracles.

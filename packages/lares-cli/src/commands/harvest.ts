@@ -32,7 +32,8 @@ import { basename, join } from "node:path";
 import { harvestTurnGradient } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
-import { larRoot, larHarvestDir, larHarvestStageDir } from "../env.js";
+import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { runVerb } from "../verb-call.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -536,6 +537,103 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       console.log(`  bands:        canon ${summary.bands["canon"]} · synthesis ${summary.bands["synthesis"]} · provisional ${summary.bands["provisional"]} · raw ${summary.bands["raw"]}`);
       if (!dryRun) console.log(`  index:        ${indexPath}`);
     },
+  });
+  return 0;
+}
+
+/**
+ * `lares capture <transcript|stageDir> --wing <wing>` — the FEED producer for the telemetry nalu.
+ *
+ * The DRAWER leg of the ingest, routed THROUGH the @daemon (the operator's `{chat}→@daemon-nalu→
+ * mempalace` arrow): read NEW turns (readTurns, the same extractor the gradient harvest uses — no
+ * divergence), submit each via the `capture` verb → the @daemon's capture cap → WAL → flush
+ * `mine --source ndjson` → mempalace. Idempotent via a per-wing capture watermark (Stop fires per
+ * response; only unseen turns submit).
+ *
+ * GRACEFUL FALLBACK (verbatim-always): the daemon down/unreachable → mine the target DIRECT (the
+ * proven `mine --extract exchange` path), so the verbatim drawer never gets lost; mark the turns
+ * captured so the nalu won't double on the next run. Distinct from `lares telemetry` (the lar_*
+ * writeback leg), which already routes through the daemon with its own fallback.
+ */
+export async function cmdCapture(args: ParsedArgs): Promise<number> {
+  const target = args.positional[0] ?? "";
+  const wing   = typeof args.options["wing"] === "string" ? args.options["wing"] : "";
+  if (!target || !wing) {
+    emit(args, {
+      ok: false,
+      error: { code: "usage", message: "usage: lares capture <transcript|stageDir> --wing <wing>" },
+      human: () => console.error("usage: lares capture <transcript|stageDir> --wing <wing>"),
+    });
+    return 2;
+  }
+
+  // Collect .jsonl (a dir → its jsonl children; a file → itself).
+  let files: string[] = [];
+  try {
+    const st = statSync(target);
+    files = st.isDirectory()
+      ? readdirSync(target).filter((f) => f.endsWith(".jsonl")).map((f) => join(target, f))
+      : [target];
+  } catch { files = []; }
+  if (!files.length) {
+    emit(args, { ok: true, data: { wing, submitted: 0 }, human: () => console.log(`[capture] no .jsonl under ${target}`) });
+    return 0;
+  }
+
+  let did = "";
+  try { did = await operatorDid(); } catch { /* no key — the capture verb is un-gated; runVerb still reaches the daemon */ }
+
+  mkdirSync(HARVEST_DIR, { recursive: true });
+  const statePath = join(HARVEST_DIR, `${wing}.capture-state.json`);
+  const state = loadState(statePath);
+  const next: Record<string, string> = { ...state };
+  let submitted = 0;
+  let daemonDown = false;
+
+  outer:
+  for (const file of files) {
+    const src = basename(file);
+    for (const turn of readTurns(file)) {
+      const key  = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+      const hash = sha(turn.text);
+      if (state[key] === hash) continue;            // already captured (idempotent)
+      try {
+        const r = await runVerb("capture", { turnText: turn.text, sourceFile: src }, did, { timeoutMs: 5000 });
+        if (r.status !== "done") throw new Error(`capture status=${r.status}`);
+        next[key] = hash;
+        submitted += 1;
+      } catch {
+        daemonDown = true;                          // unreachable → fall back, verbatim-always
+        break outer;
+      }
+    }
+  }
+
+  if (daemonDown) {
+    let fellBack = false;
+    try {
+      execFileSync(MP, ["mine", target, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { stdio: "ignore" });
+      fellBack = true;
+      // The direct mine landed these turns — mark them so the nalu won't double next run.
+      for (const file of files) for (const turn of readTurns(file)) {
+        const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
+        next[key] = sha(turn.text);
+      }
+    } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
+    try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+    emit(args, {
+      ok: true,
+      data: { wing, submitted, fallback: fellBack ? "direct-mine" : "none (mine failed)" },
+      human: () => console.log(`[capture] daemon down → ${fellBack ? "direct mine fallback" : "FAILED (mine errored)"} (wing ${wing})`),
+    });
+    return 0;
+  }
+
+  try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+  emit(args, {
+    ok: true,
+    data: { wing, submitted },
+    human: () => console.log(`[capture] ${submitted} turn(s) → @daemon nalu (wing ${wing})`),
   });
   return 0;
 }
