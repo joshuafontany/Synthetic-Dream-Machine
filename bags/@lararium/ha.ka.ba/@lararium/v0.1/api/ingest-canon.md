@@ -47,7 +47,7 @@ The golden path for getting *any* chat session + its telemetry into the palace, 
 <<~Lock 6-transport "transport is a FLUSH detail under the one path: daemon-SEAM when concurrent (live), DIRECT fresh-process + busy-retry when sole bulk writer (isolated backfill). one isomorphic CaptureFlush verb, two transports" >>
 <<~Lock 7-idempotency "content-key watermark (sha of exchange text, NOT uuid) = re-ingest is a no-op + survives across surfaces; mempalace source_file dedup backs it. version-gate (lar_hv) governs re-derivation, ORTHOGONAL" >>
 <<~Lock 8-busy-is-retryable "the palace lock is the cross-process coordination — a held lock (MineAlreadyRunning) is a BUSY signal (= SQLITE_BUSY), not an error; every writer retries with backoff+jitter. live+bulk coexist through the one lock (verified: 0 failures, pave 33619)" >>
-<<~Lock 9-fallback "the daemon-down direct mine (convo_miner) survives ONLY as the verbatim-always fallback — never the primary historical path" >>
+<<~Lock 9-one-runtime "ONE RUNTIME — the @daemon TW5 VM is the SOLE ingest + gradient runtime. DROP every outside-VM path: turn-harvest.ts/harvestTurnGradient RETIRES (no regex shadow, no VM-free projection, no fallback), no CLI-side annotate, no daemon-down direct-mine. Verbatim-always rides the DURABLE TRANSCRIPT (harness-written, always on disk) REPLAYED through the VM when it wakes — never an outside-VM mine. One grammar, one runtime, no fork to keep in lockstep" >>
 
 <<~/ahu >>
 
@@ -62,8 +62,11 @@ the nalu (Kappa replay: `runHarvestAll` → the `capture` verb per wing, not `co
 (3) `mine_palace_lock` + busy-retry around `drawer_io.py cmd_apply` + the `writebackWing` apply leg ·
 (4) gate `writebackWing` on a `lar_hv` bump only (remove the per-ingest call from `runHarvestAll`).
 
-**RETIRE:** `convo_miner --extract exchange` as the primary historical drawer-writer (pairing moves
-into the producer) · `writebackWing`-as-per-ingest (demoted to version-bump backfill).
+**RETIRE (one runtime — no fallback):** `turn-harvest.ts`/`harvestTurnGradient` (the VM-free regex
+shadow) ENTIRELY · `convo_miner --extract exchange` (pairing moves into the producer; the VM is the
+sole decomposer) · the daemon-down direct-mine fallback (verbatim-always = the durable transcript
+replayed through the VM, not an outside-VM mine) · `writebackWing`-as-per-ingest (→ version-bump
+backfill only). No outside-VM path survives.
 
 <<~/ahu >>
 
@@ -79,6 +82,38 @@ into the producer) · `writebackWing`-as-per-ingest (demoted to version-bump bac
 > RE-DERIVED only on a lar_hv/HARVEST_VERSION bump (the writeback's sole role — schema-evolution
 > backfill, never per-ingest ELT). The writeback is a writer: it takes the SAME mine_palace_lock the
 > mine holds. Transport is a flush detail: daemon-seam when concurrent, direct+busy-retry when sole.
+
+<<~/ahu >>
+
+<<~ ahu #gradient-build >>
+
+## The gradient build ~ examined gaps + grade-on-a-gradient (2026-06-27)
+
+The grammar is self-hosted: a tiddler tagged `lar:///ha.ka.ba/tags/SharktoothSigil` teaches the
+parser a word (grammar-cache.ts reads `lar-*` fields → SigilRule; 62 sigils / 8 families today). The
+AST (meme-ast) parses the DOCUMENT sigils (ahu · pranala · edge-sugar · control · guest-grammar …).
+
+**THE HEADLINE GAP — the TURN sigils aren't registered.** `lares aim/yield` · `confidence` · `hud` ·
+`ward` · `oracle` · `syad` have NO `.tid` files and no bootstrap scans — the engine can't parse them
+(they fall to Dynamic/water); ONLY the regex shadow (`turn-harvest.ts`) reads them. So the engine
+decomposes documents but not TURNS. THE BUILD: register those ~6 turn sigils as gradient-valued
+SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled triad — the **word**
+(teaches the parser) · the **gradient-reading** (how it grades: confidence 0–20 → band) · the
+**render**. Then the VM is the one turn-decomposer; the gradient module walks the AST.
+
+**GRADE ON A GRADIENT — the builder is binary where it should grade** (the creative-grammar cure):
+- `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a **MalformedSigil /
+  PartialNode** with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
+  `<<~`-far-from-close → ~0.2; no opener → prose 0). "Likely-a-sigil-but-drifted," not silent water.
+- per-sigil **form-confidence**: full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
+  numeric-fail = low. The node is GRADIENT-VALUED, never pass/fail (the harvester's law, in the VM).
+- degraded VOICE ladder (full+mask > full > bare-known > looks-like-voice) · edge-strictness · ahu
+  nesting-depth — all binary today, all gradient candidates.
+
+**SECONDARY GAPS:** the `\sigil` pragma parser is a STUB (lar-sigil-pragma.ts:11-13, "full body parse
+= future talk-story") → operator-authored sigil defs don't load back; KNOWN_VOICES is hardcoded in
+turn-harvest.ts (not a `sigil-family-voice.tid`). COVERAGE DIFF: parser knows structural sigils ·
+the regex shadow knows the turn/gradient sigils · the 6 turn sigils are the unbridged gap.
 
 <<~/ahu >>
 
