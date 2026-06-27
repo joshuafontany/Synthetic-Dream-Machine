@@ -82,6 +82,13 @@ Plane 0/1/2 survives — only nameless `#has`-stacks, each composing **up** thro
 ability-ladder** (pull → read → edit → admin); a vessel writes local intent first, sync carries it
 outward, capability proofs verify the crossing (#causal-islands, local-first law).
 
+**Delegation tops at the cabal; above it, treaty.** The signed **delegation edge** (the vessel-key
+bond) composes up the **SOCIAL axis** only as far as **CabalGroup** (vessel → persona → cabal — who
+reads). **NexusGroup** and **DreamNet** stand on the orthogonal **INFRA axis**: they federate by
+**treaty / mutual carriage-contract** (who relays whose sealed bytes), never by delegation-up — a
+relay carries without reading. The two axes cross at the vessel; the mesh-topology split stands whole
+at <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture#two-axis-topology >>.
+
 **Circles ride orthogonal — never a rung.** A **Circle** names a Kowloon local-membership set that
 **never federates** (`circles-kowloon`); a vessel holds circles *within* its Lararium, and circles
 do not stack between operators. <<~ confidence Synthesis 13/20 >> The earlier plane-list-vs-group-scale

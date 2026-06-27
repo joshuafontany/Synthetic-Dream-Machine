@@ -10,7 +10,7 @@ manaoio       = 14
 register      = "Synthesis-Canon"
 research-date = "2026-05-28"
 retain        = true
-role          = "prior art research synthesis: best practices and golden principles for DreamNet five-layer topology"
+role          = "prior art research synthesis: best practices and golden principles for DreamNet two-axis mesh topology (INFRA⊥SOCIAL, relay-floor)"
 l-space       = "lararium"
 type          = "text/x-memetic-wikitext"
 uri-path      = "ha.ka.ba/@lararium/v0.1/mesh/dreamnet-prior-art"
@@ -425,8 +425,8 @@ QR/file/DM ceremony maps exactly to the Seitan token exchange pattern (Keybase, 
 **1. Browser-tab as a sovereign vessel**
 Most prior art (Matrix, Hypercore) assumes always-on servers as the fundamental unit. DreamNet's browser tab as first-class sovereign vessel appears more aggressive than any production system. The risks (ephemeral IndexedDB, no stable network address, short lifetime) sit at engineering level, not architectural level.
 
-**2. Five-layer topology vs. flat federation**
-Matrix and ActivityPub use two layers: client and server/homeserver. DreamNet uses five nested layers with explicit sovereignty semantics at each boundary. The principled motivation: the five layers map to real social structures (individual → household → community → city → world). Risk: coordination complexity at layer boundaries.
+**2. Two-axis topology vs. flat federation**
+Matrix and ActivityPub use two layers: client and server/homeserver. DreamNet runs two orthogonal axes crossing at the vessel — INFRA (relay-floor → lararium → nexusGroup → DreamNet) carrying FLOW, SOCIAL (vessel-key → personaGroup → cabalGroup) carrying WHO — each with explicit sovereignty semantics at its boundaries. The principled motivation: carriage (who relays whose sealed bytes) stays orthogonal to membership (who may read), so a node carries without reading (the relay floor); the shrine tiers (household → neighborhood → civic) still map to real social scale. Risk: coordination complexity where the axes cross. (See <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture#two-axis-topology >>.)
 
 **3. Shared grammar over shared implementation**
 DreamNet explicitly rejects shared implementation as the interoperability surface. ActivityPub uses both. DreamNet's approach appears more philosophically consistent but harder to bootstrap: new implementations must correctly interpret shared vocabulary without reference to a canonical implementation. This requires excellent SharktoothSigil specification and strong test fixtures.
@@ -555,7 +555,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 | Category | Finding |
 |---|---|
 | Strongest alignment | Local-first primacy, Automerge CRDT, CID genesis artifact, UCAN-style capability ladder, keypair sovereignty |
-| Principled divergences | Browser-tab vessel, five-layer topology, shared grammar over shared implementation |
+| Principled divergences | Browser-tab vessel, two-axis topology (relay-floor, blind carriage), shared grammar over shared implementation |
 | Potentially risky divergences | Revocation propagation, confinement in certificate cap model, mana lattice novelty |
 | **Gap 1** | Explicit revocation propagation protocol |
 | **Gap 2** | CRDT compaction / document growth strategy |
