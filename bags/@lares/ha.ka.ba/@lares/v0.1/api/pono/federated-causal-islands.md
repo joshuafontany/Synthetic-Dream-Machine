@@ -57,6 +57,15 @@ Non-simultaneously apprehended: everything else —
 Any boundary across which causality cannot be guaranteed simultaneously marks a causal island boundary.
 The tier map below names these boundaries from innermost to outermost.
 
+### The formal model ~ sheaf-gluing / H¹ obstruction (load-bearing, 2026-06-26)
+
+A four-domain validation (`lar:///ha.ka.ba/@lararium/v0.1/api/causal-island-pattern`) carries the exact mathematics of "no global now," promoted here from intuition to law. The federation reads as a **presheaf** of local causal-logs that is **not a sheaf**: the local sections (each island's state) need not glue to a global section, and *that failure carries the content* — "no global now" **IS** the gluing obstruction, and it lives in **H¹** (sheaf cohomology; Goguen, sheaf-semantics of concurrent interacting objects). Two consequences ride load-bearing:
+
+1. **No-global-now entails a partial order (the causal poset), not a probability.** Probability is an *overlay* the system adds to wager about which sections will glue; the island's own confidence is itself situated (no island holds the global measure). The poset is the truth; the w.h.p. is the wager.
+2. **The system supplies its own site** — what counts as a cover, and what "agree on the overlap" means under conflicting writes (the CRDT merge IS the restriction map). The math does not hand the site over; the design declares it.
+
+The master cut rides ABOVE the gluing: **AUTHORITY(safety) ⊥ FLOW(liveness)** — flow may glue probabilistically and eventually; authority never (safety cannot be earned from local sections alone; Ashby's requisite-variety floor — a global-variety invariant must be *attenuated* to a local one or *amplified* by modelling peers, never locally faked).
+
 ## Law
 
 A node-to-node pranala connection marks a causal island.
