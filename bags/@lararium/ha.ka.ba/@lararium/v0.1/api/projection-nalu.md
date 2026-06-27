@@ -11,7 +11,7 @@ manaoio   = 16
 namespace = "&#x0950; &#x0901;"
 register  = "Synthesis-Canon"
 retain    = true
-role      = "THE projection-nalu pattern integrity — the shared form behind the three nalus (node→disk · browser→DOM · chat→mempalace): a sovereign SOURCE's state, carried by a gated wave, flushed to a substrate SINK (role=capability≠platform). Names the TWO CONSERVED gate-families (accumulate/durable vs coalesce/transient — keep distinct), the facets a 3-domain rhyme survey surfaced (flush-reducer · trigger-taxonomy · fill-adaptive · priced-deferral · negotiated-schedule), the failure-guards (supercooling · hiatus), and the spine vocabulary. Enacted: mesh/projection-nalu.ts (CoalesceGate) + the accumulate sibling CaptureNalu."
+role      = "THE projection-nalu pattern integrity — the shared form behind the three nalus (node→disk · browser→DOM · chat→mempalace): a sovereign SOURCE's state, carried by a gated wave, flushed to a substrate SINK (role=capability≠platform). Names the TWO CONSERVED gate-families (accumulate/durable vs coalesce/transient — keep distinct), the per-family SERVO (#servo: accumulate shrinks depth / coalesce GROWS window / display stays frame-pinned — role=physics≠uniformity), the runtime has-stack CELLS (#cells: every nalu rides a nameless sovereign causal island composed from #has caps — composeIsland), the facets a 3-domain rhyme survey surfaced (flush-reducer · trigger-taxonomy · fill-adaptive · priced-deferral · negotiated-schedule), the failure-guards (supercooling · hiatus), and the spine vocabulary. Enacted: mesh/projection-nalu.ts (CoalesceGate/KeyedCoalesceGate) + gate-tuning (adaptGate/adaptWindow) + the accumulate sibling CaptureNalu + tw5/island-caps (composeIsland/hasCapture)."
 tags      = ["api/pono/meme", "api/lararium"]
 l-space   = "stable"
 type      = "text/x-memetic-wikitext"
@@ -95,6 +95,34 @@ The survey named more than the engines yet carry. Held here, built when a sink n
 
 <<~/ahu >>
 
+<<~ ahu #servo >>
+
+## The servo ~ the threshold breathes (self-regulation, per family)
+
+Every collect-then-fire system **servos its threshold to a set-point** — the gate stops being a guess and tracks the load. A 2026-06-26 prior-art survey (Linux Net DIM · NIC interrupt coalescing · AIMD · Nagle/triple-buffering · rAF/React scheduler) grounded the law, and the keel finding: **the two families servo in OPPOSITE directions, because one is lossless and one is lossy.**
+
+<<~ranks servo accumulate:shrink-depth-when-slow -> coalesce:GROW-window-when-slow -> display:stay-frame-pinned >>
+
+- **Accumulate** (lossless — every item must flush): under load, **shrink** the batch depth so per-flush latency stays bounded. Engine: `adaptGate` (`mesh/gate-tuning.ts`) on the EWMA'd flush latency.
+- **Coalesce/reconcile** (lossy/newest-wins): under load, **GROW** the window — rendering while the prior flush still drains is pure waste, so spacing flushes wider makes each carry a fresher state for less work (Net DIM widens under flood; AIMD: back off multiplicatively, recover additively). Engine: `adaptWindow` (`mesh/gate-tuning.ts`), opt-in on `KeyedCoalesceGate`.
+- **Display-bound coalesce** (the DOM gate): stays **FIXED**, frame-pinned — its optimal window is structurally the refresh interval, so there is nothing to tune; overrun cures by frame-skip, never a wider window. Its correct self-regulation IS the fixed pin. **role = physics ≠ uniformity** — all gates self-regulate, each the way its physics demands.
+
+**The measurement gap (sync trigger, async cost)** closes Nagle-style: the gate **self-clocks on the prior flush's completion** (never reconcile a key while its prior reconcile drains; a change arriving mid-flush rides the next wave) and times request→commit to feed the EWMA. Stabilizers: EWMA smoothing · a deadband so noise isn't chased · AIMD asymmetry · clamp to [floor, ceiling]. This enacts the #facets **fill-adaptive batch** as live code.
+
+<<~/ahu >>
+
+<<~ ahu #cells >>
+
+## The cells ~ every projection rides a nameless causal island (the runtime has-stack)
+
+The three nalus do not live in bespoke worker classes. Each rides a **sovereign causal island** composed as a `#has` **cap stack** — the RUNTIME twin of the data-plane has-stack law (`lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack`): a worker is a NAMELESS entity whose cap stack IS its behavior. `composeIsland([...caps])` (`tw5/island-caps.ts`) folds the stack into one `IslandBehavior` the sovereign kernel drives.
+
+<<~ranks cap hasCapture:IN-accumulate -> hasProjection:OUT-coalesce -> hasDispatch:the-synapse -> hasEngineWatch/hasRecipeWatch:drift >>
+
+A wiki island = `[hasDispatch, hasProjection, hasEngineWatch, hasRecipeWatch]`; the admin island = `[hasEngineWatch, hasDispatch]`; the **telemetry island** = `[hasCapture]` — now a sovereign causal island (`node-telemetry-island.ts`), no longer a bespoke main-thread-fed worker_thread (the main thread carries no data-plane). The breath is two gate-families on one island substrate (IN-axon + OUT-dendrite, the neuron rhyme); dispatch is the third, non-gate channel. A cap injects its substrate seam, never imports it — the same stack composes on node, browser, any vessel.
+
+<<~/ahu >>
+
 <<~ ahu #enaction >>
 
 ## Enaction ~ where the form lives in code
@@ -111,6 +139,28 @@ The three instances map cleanly — **note: a scout corrected the disk's family 
 The interactivity return leg (`tw5-projection.ts` `dispatchProjectedEvent` + the render-id patch) restores the one binding TW5's fakedom drops (`addEventListener` is a platform no-op); the widget tree never learns it's split. role = capability ≠ platform — inject the listener-storage the platform lacks.
 
 The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-projector.ts`) draws `KeyedCoalesceGate` (its hardened reconcile/flush/ward untouched — only the timer bookkeeping moved); the mempalace nalu (`capture-engine.ts`) keeps its hardened accumulate path. Two of three coalesce instances now share the seam; the accumulate engine stays referenced.
+
+<<~/ahu >>
+
+<<~ ahu #network-ring >>
+
+## The network ring ~ kupono intent for the DreamNet uplift (forward bearing, not enaction)
+
+**Intent set here for a parallel session to steer by** — the network uplift is NOT built here (YIN; the wire is the other session's). The recognition to carry: **this gate model already IS a transport-protocol kernel.** The uplift lifts it one ring of the scale ladder (Lararium → Nexus → DreamNet), the SINK moving local → peer → many. The rhyme map the next session inherits:
+
+<<~ranks ring intra-island:SINK=local -> inter-island:SINK=peer -> mesh:SINK=many >>
+
+- **accumulate → reliable-ordered transport** (TCP/ARQ rhyme): the reserve becomes the retransmit buffer · dead-letter the give-up · the CRDT-as-dedup the at-least-once + idempotent guarantee. Cross-peer ordering rides vector clocks — never a global now (#causal-islands).
+- **coalesce → gossip / epidemic dissemination** (Plumtree eager+lazy push): newest-wins becomes last-write-wins state-sync, one→many, eventual consistency. The lossy drop stays the correct dual at mesh scale.
+- **the servo → congestion control**, already in the idiom (AIMD = TCP · Nagle self-clock · Net-DIM). Intra-island it paces the local gate; the ring adds the one piece we lack — **end-to-end backpressure: the RECEIVER's gate signals the SENDER** (our servo is one-sided today).
+- **ea-breath → connection lifecycle** (handshake · established · teardown); **dispatch → request-reply RPC**.
+
+**The orthogonality law — DO NOT overcollapse at the ring.** The gates are the **FLOW** plane (how much · how often · backpressure). UCAN signed-invocation + lease+fence (`federated-causal-islands#task-handoff`) is the **AUTHORITY** plane (who may · exactly-once). They stay ORTHOGONAL — authority clears WHO *before* flow paces HOW-MUCH — exactly as the two gate-families stay distinct and the FLOW gate never absorbs the authority check. `role = physics ≠ uniformity`.
+
+**Held for the ring (build there, not here):** the gossip overlay · cross-peer causal delivery · end-to-end receiver→sender backpressure · lease+fence for vanishing peers. The shape is network-ready; only the wire is unbuilt.
+
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/federated-causal-islands#task-handoff >>
 
 <<~/ahu >>
 

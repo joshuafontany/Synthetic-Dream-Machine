@@ -225,10 +225,25 @@ Design decision pending. Path L is Priority 2 on the active roadmap.
 
 <<~/ahu >>
 
+<<~ ahu #transport-kernel >>
+
+## Transport — the gate model IS the kernel (kupono intent for the uplift)
+
+When the mesh moves bytes between Lararia, it does NOT need a new transport invention — the **projection-nalu gate model is already a transport-protocol kernel** (`lar:///ha.ka.ba/@lararium/v0.1/api/projection-nalu#network-ring`). The uplift lifts that model one ring, the SINK moving local → peer → many:
+
+- **accumulate** → reliable-ordered transport (the reserve is the retransmit buffer; CRDT-as-dedup = at-least-once + idempotent; vector clocks order across peers, no global now).
+- **coalesce** → **gossip / epidemic** state-sync (newest-wins → last-write-wins, one→many, eventual consistency — the lossy drop stays correct at scale).
+- **the servo** → congestion control (AIMD · Nagle self-clock · Net-DIM, already the idiom); the ring adds the one missing piece — **end-to-end backpressure** (the receiver's gate signals the sender).
+
+**Two orthogonal planes — keep distinct (do not overcollapse at the ring):** the gates are the **FLOW** plane (how much · how often); the cross-peer signed-invocation + lease+fence (#task-handoff) is the **AUTHORITY** plane (who may · exactly-once). Authority clears WHO before flow paces HOW-MUCH. `role = physics ≠ uniformity`.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
 
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/projection-nalu#network-ring >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/kahu >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/capability >>

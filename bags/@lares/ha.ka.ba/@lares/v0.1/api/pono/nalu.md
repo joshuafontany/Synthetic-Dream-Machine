@@ -82,6 +82,14 @@ shore); the **local capture** nalu crests on the server tick (CAPTURE waves → 
 not conflate their boundaries: rAF rides the federated/browser engine, the 20 Hz server
 tick rides the local/daemon engine.
 
+**Both nalus now ride nameless sovereign causal islands** (2026-06-26): the capture nalu is no
+longer a bespoke main-thread-fed worker_thread but a sovereign causal island composed from a
+`#has` cap stack (`composeIsland([hasCapture])`, the runtime twin of has-stack), beside the
+federated @admin — the main thread carries no data-plane. And every gate now **breathes**: the
+threshold self-regulates per family — accumulate shrinks its batch depth under load, the
+variable-cost reconcile coalesce GROWS its window, the display coalesce stays frame-pinned (the
+projection-nalu #servo + #cells law: role = physics ≠ uniformity).
+
 **The invariant:** The nalu is not one tiddler change. It is the atomic delivery
 of a *batch* of changes to all observers simultaneously. Every observer — every
 widget, every reaction handler — receives the same `changedTiddlers` set in the

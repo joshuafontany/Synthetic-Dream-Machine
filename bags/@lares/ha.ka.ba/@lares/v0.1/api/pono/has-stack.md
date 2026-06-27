@@ -83,11 +83,24 @@ Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two resea
 
 <<~/ahu >>
 
+<<~ ahu #runtime-twin >>
+
+## The runtime twin ~ a causal island is a nameless cap stack
+
+The has-stack law has a **runtime mirror**. Where a DATA entity is a nameless carrier whose `tags` are a stack of component memes, a RUNTIME entity — a sovereign **causal island** worker — is a nameless behavior whose **cap stack** is its identity. No carrier *${copula}-a* "wiki worker" or "telemetry worker"; an island *has* caps, and the caps speak for themselves. `composeIsland([...caps])` (`tw5/island-caps.ts`) folds a `#has` cap stack into the one `IslandBehavior` the sovereign kernel drives.
+
+<<~ranks plane data:tags→component-memes -> runtime:caps→IslandBehavior >>
+
+The same grammar runs both planes: stack order is precedence (a cap claims a signal before later caps; teardown mirrors LIFO), an absent/unresolved cap reads fertile not broken, and each cap injects its substrate seam (`role = capability ≠ platform`) so the same stack composes on node, browser, any vessel. The TW5 VM workers stand as cap stacks — wiki `[hasDispatch, hasProjection, …]`, admin `[hasEngineWatch, hasDispatch]`, telemetry `[hasCapture]` — each a nameless causal island.
+
+<<~/ahu >>
+
 <<~ ahu #edges >>
 
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/island-isomorphism >>
+<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/projection-nalu >>
 
 <<~/ahu >>
 

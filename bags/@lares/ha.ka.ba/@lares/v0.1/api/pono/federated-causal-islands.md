@@ -194,6 +194,14 @@ peer that holds it. The handoff follows the federation law above — authority
 crosses before content, the relay carries what it cannot read — and adds a task
 shape on top.
 
+**Two orthogonal planes (kupono intent for the network uplift).** This section is the
+**AUTHORITY** plane — who may · signed · exactly-once (lease+fence). It rides ORTHOGONAL to the
+**FLOW** plane — the projection-nalu gates that pace *how much · how often · backpressure*
+(`lar:///ha.ka.ba/@lararium/v0.1/api/projection-nalu#network-ring`: accumulate→reliable-ordered,
+coalesce→gossip, servo→congestion-control). Authority clears WHO *before* flow paces HOW-MUCH; the
+flow gate never absorbs the authority check, the way the two gate-families stay distinct. Keep them
+separate at the ring.
+
 **The shape (the pono model).**
 - A **task** travels as a *signed capability-invocation written as a CRDT fact*,
   never an RPC — the existing verb-tiddler, extended to name an executor peer.
