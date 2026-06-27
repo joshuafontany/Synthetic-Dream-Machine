@@ -155,6 +155,33 @@ The law of the seam: **membership decides read; the nexus decides reach.** A cab
 
 <<~/ahu >>
 
+<<~ ahu #node-addressing >>
+
+## Addressing — the Pose (bearing names · the dial-record dials)
+
+An address splits into **three registers**, never fused:
+
+- **true-name** (*what*) — a content CID. Immutable, content-bound.
+- **bearing** (*how-oriented*) — the `lar:///` URI. Pure attitude; it **names but never fetches** (the Signal Law, warranted by `tag:` RFC 4151 — *"tags function as names rather than locators"*). The three-term root `ha.ka.ba` reads as a full **SO(3) attitude** — heading · angle · dynamic — where the third term (the carried dynamic, the *roll/twist*) lifts it past a two-angle pointing-bearing into a full 3-DOF orientation. The readable triple stands as a **chart over a singularity-free versor on S³**: canonicalize antipodal aliases (q and −q name one bearing), and the drift gradient (Ha-slow → Ba-fast) tracks a craft's control-loop bandwidth (yaw drifts slow, roll snaps fast).
+- **position** (*where*) — the dial-able endpoint. Mutable; it moves.
+
+A node's *reachable* address composes the last two into a **pose** = bearing ⊕ position — the rigid-body `SE(3)` split (orientation `SO(3)` ⊕ translation `R³`), **two conserved components, never merged**. `lar:` supplies the bearing, which is *why* it cannot fetch — an attitude alone reaches nothing — and the position resolves separately.
+
+### The dial-record
+
+A node's mutable endpoint lives in a **dial-record**, keyed by its stable `lar:` bearing — **DID-document / SRV / IPNS shaped**: the stable name resolves to a controller-updatable record holding `{endpoint, lease, priority}`. **Resolution is the only bridge** — the endpoint never enters the URI (the `data:`-URI trap stays shut). The dial-record carries **FLOW only**: WHO / proof stays off it (the three-plane ⊥, #gate-model), so a relay reads a dial-record to learn *where to forward*, never *who may read*. The resolver lives **per causal-island** — a vessel's own dial-sheet — never a global DNS hierarchy: `lar:` keeps the inertness `tag:` chose, with the resolution `tag:` omitted bolted on *outside* the name.
+
+This reads the canon's **local-form / session-form** split as a pose:
+
+- **local form** `lar:///w1.w2.w3/…` = pure **bearing** (federatable, fetch-nothing).
+- **session form** `lar://alias:grant@host/…` = the full **pose** (bearing + a concrete `@host` to dial). The `@host` block stands as the **translation vector** that turns a bearing into a reachable place.
+
+So an infrastructure node carries three distinct things, only the last ever dialed: a **stable identity** under the literal `/ha.ka.ba/**` root + sub-path (its permanent bearing), a **live posture** as an unstable attitude-root, and a **dial-record** resolving its mutable endpoint.
+
+**PROPOSED (not yet ruled) — the routing substrate.** Forwarding a sealed stream across many leylines with no global map stands as a proposed layer: each lararium carries two l-space coordinates — a radial **standing** `r` (the federation rating ladder `noise → data → meme → ano → kapu`, high-standing near center) and a cyclic **kinship** `θ` (the bounded `0..20` ladder, an S¹) — and a blind relay forwards greedily toward the destination coordinate (the hyperbolic-embedding result: ~97% reach, near-optimal stretch, static under churn; a spanning-tree embedding guarantees delivery). The sphere is `θ`, the similarity axis of a hyperbolic disk; the chart runs **non-Riemannian / warped** under the metric, so it serves as a usable chart, never the territory. This layer ripens at `#l-space-embedding`; it awaits a separate floor.
+
+<<~/ahu >>
+
 <<~ ahu #capability-layer >>
 
 ## Capability Layer Across Both Axes
