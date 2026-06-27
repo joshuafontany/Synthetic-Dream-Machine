@@ -139,12 +139,28 @@ by nothing. Finish it onto nodes.
 
 <<~/ahu >>
 
-<<~ ahu #open-fork >>
+<<~ ahu #recovery-policy >>
 
-## The one open fork (operator's call)
+## Recovery policy ~ RESOLVED: water-floor, repair-as-gated-upgrade (2026-06-27)
 
-The WRAP guard over core-wikitext: **phrase-level REPAIR** of malformed spans (more value, more
-surface) vs **panic-to-water** them (cheap, safe). The swarm leans panic-to-water FIRST, repair later.
+The fork was never water VS repair — it's **water as the floor, repair as a per-construct upgrade.**
+
+**LOCK — the WRAP guard ships PANIC-TO-WATER first.** On any malformed span: catch, wrap the VERBATIM
+bytes in a graded `Error` node (`recoveredAs: "water"`, low/raw confidence), parse cleanly around it.
+Four reasons it's the floor: (1) it CAN'T regress — water is never a wrong tree (verbatim preserved,
+zero fabricated structure); (2) it keeps the gradient HONEST — it marks "structure unknown," it
+cannot lie, where a mis-repair claims structure it guessed wrong (the confidently-incorrect-tree
+failure this whole epic kills); (3) it COMPOSES — repair is purely additive on top; (4) it's the cheap
+ship (a catch + downgrade vs the per-construct repair tail). This is already `lar-sigil.ts`'s
+`__literal__` move, scaled to the parser boundary.
+
+**Repair is the GATED follow-on.** Add phrase-level repair (insert the MISSING token, resync to a
+recovery-set, re-parse) ONLY per-construct, ONLY where the fix is UNAMBIGUOUS and FREQUENT — an
+unclosed `}}}` / `<<~ >>` is a safe insert; a broken table row is a risky guess that stays water. A
+repaired node carries `recoveredAs: "repaired"` at MID (synthesis) confidence — honestly weaker than a
+clean parse, honestly stronger than water. The `Error` node's `recoveredAs` field is the seam: `"water"`
+ships now, `"repaired"` lands per-construct later. The gradient stays truthful end to end: clean=canon
+· repaired=synthesis · water=raw.
 
 <<~/ahu >>
 
