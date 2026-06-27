@@ -1,32 +1,33 @@
 /**
- * env — the ONE environment contract every CLI command and the test harness
- * honor. Three variables target an instance; nothing else carries targeting:
+ * env — the ONE environment contract every CLI command and the test harness honor.
  *
- *   LAR_ROOT  — instance root (holds .lararium/ data + genesis/). Default: the
- *               dev node home, packages/lararium-node.
+ *   LAR_ROOT  — isolated-instance root. Default split: the CORPUS/code root is the repo
+ *               (larRoot); the VESSEL STATE roots in the operator's home (~/.lares, see larHome).
+ *               Setting LAR_ROOT overrides BOTH to one tree (the test harness / staged pairs).
  *   LAR_PORT  — daemon WS port. Default 8080.
- *   LAR_TARGET — harness mode selector ("staged" | "live"); the CLI itself
- *               ignores it, the test harness reads it (see tests/harness).
+ *   LAR_TARGET — harness mode selector ("staged" | "live"); the CLI ignores it, the harness reads it.
  *
- * Separate instances = separate LAR_ROOT + LAR_PORT pairs. QA attaches to a
- * live pair; Staged mints an ephemeral pair and destroys it after.
+ * The vessel-path resolvers live ONCE in @lararium/node (so the CLI and the daemon agree on the
+ * storage dir + the UDS socket); re-exported here so commands keep importing them from `env`.
  */
 
 import { join } from "node:path";
 import { repoRoot } from "@lararium/mesh/node";
-import { loadVesselVerifyingKey } from "@lararium/node";
+import { larDataDir, loadVesselVerifyingKey } from "@lararium/node";
 
-/** Instance root — LAR_ROOT or the REPO ROOT (the vessel and the corpus share one root; early-alpha law, no dev-home compatibility). */
+// The vessel runtime-state resolvers — defined once in @lararium/node, surfaced here.
+export {
+  larHome, larDataDir, larIdentityDir, larProjectionDir,
+  larHarvestDir, larHarvestStageDir,
+} from "@lararium/node";
+
+/** CORPUS/code root — LAR_ROOT or the repo root. (The vessel STATE roots in the home; see larHome.) */
 export function larRoot(): string {
   return process.env["LAR_ROOT"] ?? repoRoot;
 }
 
-/** Instance data dir — <root>/.lararium. */
-export function larDataDir(): string {
-  return join(larRoot(), ".lararium");
-}
-
-/** Instance bootstrap artifact — <root>/genesis/social-bootstrap.json. */
+/** The runtime bootstrap artifact — `<larRoot>/genesis/social-bootstrap.json`. Genesis (the baked
+ *  island.bin seed + this artifact) stays CORPUS-relative — tracked seed, not runtime vessel state. */
 export function larBootstrapPath(): string {
   return join(larRoot(), "genesis", "social-bootstrap.json");
 }
@@ -38,8 +39,8 @@ export function larPort(): number {
 
 /**
  * The operator's DID (0x + verifying key) from the instance's key file.
- * Throws a CLEAN error when absent — a placeholder string would only fail
- * later as "bad hex length" inside capability verification. No fallbacks.
+ * Throws a CLEAN error when absent — a placeholder string would only fail later as
+ * "bad hex length" inside capability verification. No fallbacks.
  */
 export async function operatorDid(): Promise<string> {
   try {

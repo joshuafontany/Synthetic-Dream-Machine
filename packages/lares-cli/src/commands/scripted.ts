@@ -8,6 +8,7 @@
 import { join } from "node:path";
 import { runTsxScript, runCommand } from "../spawn.js";
 import { repoRoot as REPO_ROOT } from "@lararium/mesh/node";
+import { larDataDir, larIdentityDir } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const NODE_PKG = join(REPO_ROOT, "packages", "lararium-node");
@@ -74,8 +75,9 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   // another. Resolve once, then thread the SAME root through init + genesis so all
   // three operate on one explicitly-designated root.
   const root      = args.options["root"] ?? process.env["LAR_ROOT"] ?? REPO_ROOT;
+  if (args.options["root"]) process.env["LAR_ROOT"] = args.options["root"]; // --root → the resolvers
   const rootedArgs: ParsedArgs = { ...args, options: { ...args.options, root } };
-  const storage   = join(root, ".lararium");
+  const storage   = larDataDir();   // runtime → ~/.lares/.lararium (genesis below stays corpus-relative)
   const bootstrap = join(root, "genesis", "social-bootstrap.json");
   const islandBin = join(root, "genesis", "island.bin");
   const islandSha = join(root, "genesis", "island.sha256");
@@ -105,7 +107,7 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandCid, { force: true });
   rmSync(islandCidEngine,  { force: true });
   rmSync(islandCidPlugins, { force: true });
-  console.log(`[lares reset] preserved identity: ${join(root, ".lararium-identity")} (out of the wipe zone)`);
+  console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
   console.log("[lares reset] cleared. Running lares init…");
   const { cmdInit } = await import("./init.js");
   const initCode = await cmdInit(rootedArgs);

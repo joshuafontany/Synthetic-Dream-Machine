@@ -141,7 +141,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
     } else if (!existsSync(bootstrap)) {
       nodeNote = "no bootstrap — run `lares init` (or point LAR_ROOT at an initialized instance)";
     } else {
-      const dataDir = join(root, ".lararium");
+      const dataDir = larDataDir();   // runtime → ~/.lares/.lararium (was join(root, ".lararium"))
       mkdirSync(dataDir, { recursive: true });
       const log = join(dataDir, "wake-serve.log");
       // Readiness is SELF-ATTESTED, not requested (no web2 /health probe): the node

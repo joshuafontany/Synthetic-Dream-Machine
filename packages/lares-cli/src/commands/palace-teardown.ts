@@ -27,6 +27,7 @@ import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { execFileSync } from "node:child_process";
+import { larHarvestDir, larHarvestStageDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -38,11 +39,10 @@ interface Target {
 /** Resolve the teardown targets from env + the fixed lares/mempalace homes — never an ambient default. */
 function resolveTargets(): Target[] {
   const palace = process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace");
-  const lares  = join(homedir(), ".lares");
   return [
     { label: "palace store (chroma + config + entities + locks)", path: palace },
-    { label: "harvest watermark (lar_hv idempotency)",            path: join(lares, "harvest") },
-    { label: "harvest stage (normalized transcript copies)",      path: join(lares, "harvest-stage") },
+    { label: "harvest watermark (lar_hv idempotency)",            path: larHarvestDir() },
+    { label: "harvest stage (normalized transcript copies)",      path: larHarvestStageDir() },
   ];
 }
 

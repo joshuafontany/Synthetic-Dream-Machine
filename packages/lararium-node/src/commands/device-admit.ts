@@ -24,6 +24,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
+import { larDataDir } from "../vessel-paths.js";
 import { runDeviceAdmitEdge, type DeviceAdmitPayload } from "@lararium/keyhive";
 import { loadPersonaGroupRootSeed } from "../node-vessel-identity.js";
 import { GENESIS_ENGINE_CID } from "../genesis-artifact.js";
@@ -42,10 +43,10 @@ export interface DeviceAdmitOptions {
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
-  const root = process.env["LAR_ROOT"] ?? repoRoot;   // one root law: the repo IS the vessel
+  const root = process.env["LAR_ROOT"] ?? repoRoot;   // corpus root (genesis seed)
   return {
-    storageDir: join(root, ".lararium"),
-    genesisDir: join(root, "genesis"),
+    storageDir: larDataDir(),               // runtime → ~/.lares/.lararium
+    genesisDir: join(root, "genesis"),      // baked seed stays corpus-relative
   };
 }
 

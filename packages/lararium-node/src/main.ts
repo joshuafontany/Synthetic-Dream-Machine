@@ -34,6 +34,7 @@ import { startUdsChannel }              from "./uds-channel.js";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed }        from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
+import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
 import { REPO_ROOT }   from "./node-host.js";
@@ -49,8 +50,8 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
     const i = args.indexOf(flag);
     return (i !== -1 ? args[i + 1] : undefined) ?? process.env[env] ?? fallback;
   };
-  const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));
-  const storageDir = resolve(get("--storage", "LAR_STORAGE", join(rootDir, ".lararium")));
+  const rootDir    = resolve(get("--root", "LAR_ROOT", REPO_ROOT));   // corpus root (genesis)
+  const storageDir = resolve(get("--storage", "LAR_STORAGE", larDataDir()));   // runtime → ~/.lares/.lararium
   // One genesis law, shared with the CLI env contract: <root>/genesis —
   // the repo root carries the REAL tracked genesis dir (the symlink and the
   // package-dir home both died 2026-06-11; early alpha keeps no compatibility).

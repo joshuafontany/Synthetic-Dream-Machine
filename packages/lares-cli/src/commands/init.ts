@@ -14,16 +14,17 @@
 
 import { join } from "node:path";
 import { runInit } from "@lararium/node";
+import { larDataDir, larRoot } from "../env.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 export async function cmdInit(args: ParsedArgs): Promise<number> {
   const opts: Parameters<typeof runInit>[0] = {};
   const root = args.options["root"] ?? process.env["LAR_ROOT"];
+  if (root) process.env["LAR_ROOT"] = root;   // honor --root through the resolvers (else vessel state → ~/.lares)
   if (args.flags["force"])     Object.assign(opts, { force: true });
-  if (args.options["storage"]) Object.assign(opts, { storageDir: args.options["storage"] });
-  else if (root)               Object.assign(opts, { storageDir: join(root, ".lararium") });
-  if (args.options["genesis"]) Object.assign(opts, { genesisDir: args.options["genesis"] });
-  else if (root)               Object.assign(opts, { genesisDir: join(root, "genesis") });
+  // storage (runtime) → ~/.lares/.lararium (larDataDir); genesis (the baked seed) stays corpus-relative.
+  Object.assign(opts, { storageDir: args.options["storage"] ?? larDataDir() });
+  Object.assign(opts, { genesisDir: args.options["genesis"] ?? join(larRoot(), "genesis") });
   if (args.options["admit"])   Object.assign(opts, { admitPayloadPath: args.options["admit"] });
   await runInit(opts);
   return 0;

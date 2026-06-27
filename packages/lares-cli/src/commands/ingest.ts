@@ -37,7 +37,7 @@ export async function cmdIngest(args: ParsedArgs): Promise<number> {
   if (!source || !toBag) { printUsage(); return 2; }
 
   const root = larRoot();
-  const tree = openSyncedTree(root);
+  const tree = openSyncedTree();
 
   // scan — observations only, never a work queue
   const scan = scanSource(root, source, toBag, tree);

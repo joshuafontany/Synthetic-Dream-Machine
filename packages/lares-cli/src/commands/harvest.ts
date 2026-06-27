@@ -32,11 +32,11 @@ import { basename, join } from "node:path";
 import { harvestTurnGradient } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
-import { larRoot } from "../env.js";
+import { larRoot, larHarvestDir, larHarvestStageDir } from "../env.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
-const HARVEST_DIR = join(homedir(), ".lares", "harvest");
+const HARVEST_DIR = larHarvestDir();   // ~/.lares/harvest (LAR_ROOT-isolated for staged instances)
 
 /** One harvested turn — the gradient summary, keyed for idempotent dedup. */
 interface HarvestRecord {
@@ -354,7 +354,7 @@ function discoverCopilotCli(): HarvestEntry[] {
   // is already Claude-shaped, so normalize:false (no second pass).
   const db = join(homedir(), ".copilot", "session-store.db");
   if (existsSync(db)) {
-    const exportDir = join(homedir(), ".lares", "harvest-stage", ".copilot-export");
+    const exportDir = join(larHarvestStageDir(), ".copilot-export");
     try {
       mkdirSync(exportDir, { recursive: true });
       const manifest = execFileSync(PY, [COPILOT_SQLITE_NORM, db, exportDir], { maxBuffer: 1 << 30, encoding: "utf8" });
@@ -402,7 +402,7 @@ function runHarvestAll(args: ParsedArgs): number {
     return 3;
   }
 
-  const stageRoot = join(homedir(), ".lares", "harvest-stage");
+  const stageRoot = larHarvestStageDir();
   const byWing = new Map<string, HarvestEntry[]>();
   for (const e of entries) {
     const arr = byWing.get(e.wing);

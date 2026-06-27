@@ -10,7 +10,7 @@
  * can run it freely during a session.
  */
 
-import { larRoot } from "../env.js";
+import { larRoot, larDataDir } from "../env.js";
 import { existsSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { createConnection } from "node:net";
@@ -49,8 +49,8 @@ function probePort(port: number, host = "127.0.0.1", timeoutMs = 200): Promise<b
 }
 
 export async function cmdStatus(args: ParsedArgs): Promise<number> {
-  const root      = larRoot();   // one root law: LAR_ROOT or the repo root
-  const storage   = join(root, ".lararium");
+  const root      = larRoot();   // corpus root (genesis); vessel state roots in the home
+  const storage   = larDataDir();   // runtime → ~/.lares/.lararium
   const bootstrap = join(root, "genesis", "social-bootstrap.json");
   const portRaw   = process.env["LAR_PORT"] ?? "8080";
   const port      = Number(portRaw);
@@ -80,7 +80,7 @@ export async function cmdStatus(args: ParsedArgs): Promise<number> {
       // any failure falls through silently — `lares status` never errors. The
       // residency verb is cap-gated, so it needs the real operator did (a non-did
       // requestedBy cap-errors quietly — the old "lares-status" label always did).
-      const did = "0x" + (await loadVesselVerifyingKey(join(root, ".lararium")));
+      const did = "0x" + (await loadVesselVerifyingKey(larDataDir()));
       const r = await runVerb("residency", {}, did, { timeoutMs: 2000 });
       if (r.status === "done") {
         const stats   = summaryOutput(r) ?? {};

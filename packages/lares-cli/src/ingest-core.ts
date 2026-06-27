@@ -19,7 +19,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
 import { newChangeId, taskContentId } from "@lararium/mesh";
-import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri } from "@lararium/node";
+import { SyncedTree, contentHash, syncedTreeKey, bagsFileToUri, wikisFileToUri, larProjectionDir } from "@lararium/node";
 import {
   submitVerb,
   type DaemonVesselHandle,
@@ -50,9 +50,10 @@ export interface ScanResult {
   readonly skipped: string[];
 }
 
-/** Open the Synced tree at the canonical projection path under a root. */
-export function openSyncedTree(root: string): SyncedTree {
-  return new SyncedTree(join(root, ".lararium-projection", "synced-tree.json"));
+/** Open the Synced tree at the canonical projection-state path (~/.lares/.lararium-projection —
+ *  runtime vessel state, not corpus). */
+export function openSyncedTree(): SyncedTree {
+  return new SyncedTree(join(larProjectionDir(), "synced-tree.json"));
 }
 
 /**

@@ -107,7 +107,7 @@ export async function cmdWatch(args: ParsedArgs): Promise<number> {
     const files = [...buffer];
     buffer.clear();
 
-    const tree = openSyncedTree(root);     // fresh read — the projection moves under us
+    const tree = openSyncedTree();     // fresh read — the projection moves under us
     const { rows, skipped } = scanFiles(root, files, toBag, tree);
     const candidates = candidatesOf(rows);
 

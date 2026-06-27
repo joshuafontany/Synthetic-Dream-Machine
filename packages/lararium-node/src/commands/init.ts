@@ -23,6 +23,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
+import { larDataDir } from "../vessel-paths.js";
 import {
   generateOrLoadVesselIdentity, loadVesselSigningSeed, persistVesselCard,
   generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
@@ -53,10 +54,10 @@ export interface InitResult {
 }
 
 function defaultDirs(): { storageDir: string; genesisDir: string } {
-  const root = process.env["LAR_ROOT"] ?? repoRoot;   // one root law: the repo IS the vessel
+  const root = process.env["LAR_ROOT"] ?? repoRoot;   // corpus root (genesis seed)
   return {
-    storageDir: join(root, ".lararium"),
-    genesisDir: join(root, "genesis"),
+    storageDir: larDataDir(),               // runtime → ~/.lares/.lararium
+    genesisDir: join(root, "genesis"),      // baked seed stays corpus-relative
   };
 }
 
