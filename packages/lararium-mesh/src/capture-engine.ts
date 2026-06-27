@@ -29,7 +29,7 @@
 import { CaptureNalu, PONO_FLUSH_GATE } from "./capture-nalu.js";
 import type { CaptureFlush, CaptureRecord, CaptureStats, FlushGate } from "./capture-nalu.js";
 import { CoalesceGate } from "./projection-nalu.js";
-import { adaptGate } from "./gate-tuning.js";
+import { adaptGate, deriveGate } from "./gate-tuning.js";
 
 /** The forward annotate pass: a raw turn → its `lar_*` metadata. Each vessel injects its
  *  own (node: harvestTurnGradient + buildPatch; browser: the pure twin). */
@@ -51,12 +51,30 @@ export interface CaptureFrame {
  *  platform. Absent = no OUT projection (Null-Object). */
 export type CapturePost = (frame: CaptureFrame) => void;
 
-/** Self-regulation config (the homeostatic servo). When composed, each flush nudges the gate
- *  toward `targetLatencyMs` (the recently-observed flush latency vs the set-point). */
+/** Self-regulation config (the homeostatic servo — the FAST loop). When composed, each flush
+ *  nudges the gate toward `targetLatencyMs` (the recently-observed flush latency vs the set-point). */
 export interface CaptureServo {
   readonly targetLatencyMs: number;
   /** max fractional step per flush (default adaptGate's 0.25). */
   readonly maxStep?: number;
+}
+
+/** The derivation loop config (the SLOW loop — EBQ + Little's Law). When composed, the engine
+ *  periodically RE-ANCHORS the gate's operating point from measured flush-cost (S, EWMA) + arrival
+ *  rate (λ) + holding cost (H), so the servo tracks load around a queueing-optimal set-point instead
+ *  of discovering it cold. The two loops compose as a transport controller does: derive ≈ slow-start
+ *  / BDP estimate, servo ≈ AIMD around it (the two-loop is what the network ring lifts to the wire). */
+export interface CaptureDerive {
+  /** the recall-latency penalty weight H (per record per ms it waits) — POLICY, set by the vessel. */
+  readonly holdingCostPerMs: number;
+  /** the recall-latency SLO (ms) — Little's-Law wait bound (deriveGate default 2000). */
+  readonly maxLatencyMs?: number;
+  /** surge-tank headroom over depth (deriveGate default 8). */
+  readonly burstFactor?: number;
+  /** re-derive every N flushes (the slow-loop cadence). Default 16. */
+  readonly everyFlushes?: number;
+  /** min flush samples before the first derivation fires (cold-start holds the default). Default 4. */
+  readonly minSamples?: number;
 }
 
 type TimerHandle = ReturnType<typeof setTimeout>;
@@ -90,8 +108,11 @@ export interface CaptureEngineSeams {
   readonly outWindowMs?: number;
   /** the cell's own clock — times the flush for the servo. Default Date.now. */
   readonly now?: () => number;
-  /** self-regulation: when present, each flush servos the gate toward the set-point. */
+  /** self-regulation (the FAST loop): when present, each flush servos the gate toward the set-point. */
   readonly servo?: CaptureServo;
+  /** the derivation (the SLOW loop): when present, periodically re-anchor the gate from measured
+   *  cost/rate (EBQ + Little's Law). Composes with `servo` as a two-loop controller. Absent → none. */
+  readonly derive?: CaptureDerive;
   /** timer seam for the OUT coalesce gate (deterministic tests). */
   readonly outTimer?: {
     readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
@@ -108,6 +129,8 @@ export interface CaptureEngine {
   recover(): Promise<number>;
   /** Surfaced counters (depth · failures · spilled · dead-lettered). */
   stats(): CaptureStats;
+  /** The current (derive/servo-tracked) flush gate — observability of the breathing operating point. */
+  gate(): FlushGate;
   /** Truncate the WAL once the hot pool is fully drained. */
   compactIfDrained(): Promise<void>;
   /** Tear down the OUT projection's coalesce timer (teardown; the final stats ride the host). */
@@ -121,14 +144,51 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
   let gate = seams.gate ?? PONO_FLUSH_GATE;
   let live = true;
 
-  // IN family (accumulate). The flush is WRAPPED to measure its latency — the afferent signal the
-  // self-regulating servo reads: each flush nudges the gate toward the set-point (adaptGate).
+  // Derivation-loop state (inert when no `derive`): the EWMA flush cost (S), the enqueue count +
+  // window for arrival rate (λ = arrivals/elapsed), and the slow-loop flush counter.
+  const COST_EWMA_ALPHA = 0.2;
+  let ewmaCostMs = 0;
+  let costSamples = 0;
+  let arrivals = 0;
+  let windowStartMs = now();
+  let flushesSinceDerive = 0;
+
+  // IN family (accumulate). The flush is WRAPPED to measure its latency — the afferent signal BOTH
+  // control loops read: the SLOW loop (derive) re-anchors the operating point on cadence (EBQ +
+  // Little's Law), the FAST loop (servo) nudges depth toward the set-point between derivations
+  // (adaptGate). The derive tick REPLACES the servo step that flush — the derivation IS the update.
   const measuredFlush: CaptureFlush = async (batch) => {
     const t0 = now();
-    const filed = await seams.flush(batch); // a throw PROPAGATES → servo skipped (a failed flush
+    const filed = await seams.flush(batch); // a throw PROPAGATES → both loops skipped (a failed flush
     // is a fast-fail, not a latency signal; the nalu's own backoff/dead-letter is the failure response)
-    if (seams.servo) {
-      const observedLatencyMs = now() - t0;
+    const observedLatencyMs = now() - t0;
+
+    if (seams.derive) {
+      ewmaCostMs = costSamples === 0 ? observedLatencyMs : COST_EWMA_ALPHA * observedLatencyMs + (1 - COST_EWMA_ALPHA) * ewmaCostMs;
+      costSamples++;
+      flushesSinceDerive++;
+    }
+
+    if (
+      seams.derive &&
+      flushesSinceDerive >= (seams.derive.everyFlushes ?? 16) &&
+      costSamples >= (seams.derive.minSamples ?? 4)
+    ) {
+      // SLOW loop — re-anchor the gate from measured cost/rate (EBQ + Little's Law).
+      const elapsedMs = Math.max(1, now() - windowStartMs);
+      gate = deriveGate({
+        flushCostMs: ewmaCostMs,
+        holdingCostPerMs: seams.derive.holdingCostPerMs,
+        arrivalPerMs: arrivals / elapsedMs,
+        ...(seams.derive.maxLatencyMs !== undefined ? { maxLatencyMs: seams.derive.maxLatencyMs } : {}),
+        ...(seams.derive.burstFactor !== undefined ? { burstFactor: seams.derive.burstFactor } : {}),
+      });
+      nalu.setGate(gate);
+      flushesSinceDerive = 0;
+      arrivals = 0;
+      windowStartMs = now();
+    } else if (seams.servo) {
+      // FAST loop — nudge depth toward the latency set-point between derivations (AIMD).
       gate = adaptGate(gate, observedLatencyMs, seams.servo.targetLatencyMs, seams.servo.maxStep);
       nalu.setGate(gate); // efferent: the threshold breathes toward the latency set-point
     }
@@ -169,6 +229,7 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
       };
       await reserve.append(record); // write-ahead: durable BEFORE the hot pool
       nalu.enqueue(record);
+      arrivals++; // count the arrival for λ (the derivation loop; recover() bypasses this — replay ≠ arrival)
       markOut(); // hot-pool depth moved — coalesce a stats frame
     },
     async tick(nowMs) {
@@ -187,6 +248,7 @@ export function makeCaptureEngine(seams: CaptureEngineSeams): CaptureEngine {
       return records.length;
     },
     stats: () => nalu.stats(),
+    gate: () => gate,
     async compactIfDrained() {
       if (nalu.depth() === 0) await reserve.compact();
     },

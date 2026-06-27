@@ -168,4 +168,29 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
     expect(flushed).toEqual([1]);
     engine.dispose(); // safe even with no OUT gate
   });
+
+  test("the derivation loop (slow) re-anchors the gate from EBQ + Little's Law", async () => {
+    const r = stubReserve();
+    let clock = 0;
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => {
+        clock += 500; // each flush costs 500ms (the S signal)
+        return b.length;
+      },
+      annotate: () => ({}),
+      gate: { ...GATE, depth: 1 },
+      now: () => clock,
+      derive: { holdingCostPerMs: 0.001, everyFlushes: 2, minSamples: 1 },
+    });
+
+    await engine.enqueue("a", "x/1"); // arrival 1
+    expect(await engine.tick(clock)).toBe(1); // flush 1 — cost sampled, cadence not yet hit
+    expect(engine.gate().depth).toBe(1); // unchanged before the slow-loop cadence
+    await engine.enqueue("b", "x/2"); // arrival 2
+    expect(await engine.tick(clock)).toBe(1); // flush 2 — cadence hit → derive re-anchors
+    // S(ewma)=500, λ = 2 arrivals / 1000ms = 0.002; depth = √(2·0.002·500 / 0.001) = √2000 ≈ 45
+    expect(engine.gate().depth).toBe(45);
+    expect(engine.gate().maxDepth).toBe(360); // depth · burst(8)
+  });
 });

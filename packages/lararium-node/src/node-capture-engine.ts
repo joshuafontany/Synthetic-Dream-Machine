@@ -8,7 +8,7 @@
  */
 
 import { makeCaptureEngine } from "@lararium/mesh";
-import type { CaptureAnnotate, CaptureEngine, CapturePost, CaptureServo, FlushGate } from "@lararium/mesh";
+import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CapturePost, CaptureServo, FlushGate } from "@lararium/mesh";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
@@ -31,8 +31,10 @@ export interface NodeCaptureEngineOptions {
   readonly post?: CapturePost;
   /** OUT coalesce window (ms); default 50. */
   readonly outWindowMs?: number;
-  /** self-regulation: each flush servos the gate toward the latency set-point. */
+  /** self-regulation (fast loop): each flush servos the gate toward the latency set-point. */
   readonly servo?: CaptureServo;
+  /** the derivation (slow loop): periodically re-anchor the gate from measured cost/rate (EBQ). */
+  readonly derive?: CaptureDerive;
   /** test injection for the flush subprocess */
   readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
 }
@@ -55,5 +57,6 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     ...(opts.post !== undefined ? { post: opts.post } : {}),
     ...(opts.outWindowMs !== undefined ? { outWindowMs: opts.outWindowMs } : {}),
     ...(opts.servo !== undefined ? { servo: opts.servo } : {}),
+    ...(opts.derive !== undefined ? { derive: opts.derive } : {}),
   });
 }

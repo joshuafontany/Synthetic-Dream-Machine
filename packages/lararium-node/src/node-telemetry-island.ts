@@ -32,6 +32,8 @@ interface TelemetryIslandConfig {
   readonly mempalaceBin?: string;
   readonly tickMs?: number;
   readonly targetLatencyMs?: number;
+  /** holding-cost weight H for the derivation loop (EBQ) — policy; default 0.001. */
+  readonly holdingCostPerMs?: number;
 }
 
 const cfg = (workerData ?? {}) as TelemetryIslandConfig;
@@ -47,7 +49,9 @@ runSovereignWorker(
           quarantinePath: cfg.quarantinePath,
           annotate: defaultAnnotate,
           post,
+          // The full two-loop self-regulating cell: servo (fast/AIMD) + derive (slow/EBQ re-anchor).
           servo: { targetLatencyMs: cfg.targetLatencyMs ?? 1000 },
+          derive: { holdingCostPerMs: cfg.holdingCostPerMs ?? 0.001 },
           ...(cfg.mempalaceBin !== undefined ? { mempalaceBin: cfg.mempalaceBin } : {}),
         }),
       ...(cfg.tickMs !== undefined ? { tickMs: cfg.tickMs } : {}),

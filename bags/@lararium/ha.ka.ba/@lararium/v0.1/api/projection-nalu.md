@@ -109,6 +109,8 @@ Every collect-then-fire system **servos its threshold to a set-point** — the g
 
 **The measurement gap (sync trigger, async cost)** closes Nagle-style: the gate **self-clocks on the prior flush's completion** (never reconcile a key while its prior reconcile drains; a change arriving mid-flush rides the next wave) and times request→commit to feed the EWMA. Stabilizers: EWMA smoothing · a deadband so noise isn't chased · AIMD asymmetry · clamp to [floor, ceiling]. This enacts the #facets **fill-adaptive batch** as live code.
 
+**Two loops, not one — the controller is complete.** The servo is the FAST loop (per-flush, AIMD-style nudge); beneath it runs a SLOW loop, **`deriveGate`** (EBQ + Little's Law: `depth = √(2·λ·S/H)`), which periodically RE-ANCHORS the operating point from measured flush-cost `S` (EWMA), arrival rate `λ`, and the holding-cost policy `H`. The derive tick *replaces* the servo step on its cadence (the derivation IS the update); the servo tracks load between re-anchors. This is exactly a transport controller's shape — **derive ≈ slow-start / BDP estimate, servo ≈ AIMD around it** — so the network ring lifts a *complete* two-loop, not a half (#network-ring). Both are FLOW(liveness)-side, never authority. Enacted: `gate-tuning.ts` (`deriveGate`/`adaptGate`) composed in `capture-engine.ts` as the cell's own two loops; `H` stays vessel-set policy. The accumulate cell self-anchors AND self-tracks; both opt-in.
+
 <<~/ahu >>
 
 <<~ ahu #cells >>
