@@ -52,7 +52,11 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
     try {
       // `--palace` is a GLOBAL option — it MUST precede the `mine` subcommand
       // (`mempalace --palace <p> mine …`); after the subcommand argparse rejects it.
-      const { stdout } = await spawn(bin, ["--palace", opts.palacePath, "mine", "--source", "ndjson", path]);
+      // `--daemon` HANDS OFF to mempalace's write-daemon queue (the single-writer SEAM) — the
+      // causal-island boundary: the vessel never spawns a competing direct mine that races the
+      // palace lock; it queues the batch and the daemon serializes it (auto-starts the daemon if
+      // absent). A submit failure THROWS → the nalu's WAL/backoff retries (durable, no loss).
+      const { stdout } = await spawn(bin, ["--palace", opts.palacePath, "mine", "--source", "ndjson", "--daemon", path]);
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
     } finally {

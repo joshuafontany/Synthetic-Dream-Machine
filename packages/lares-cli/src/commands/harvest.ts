@@ -26,8 +26,8 @@
 
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
-import { homedir } from "node:os";
+import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, appendFileSync, writeFileSync, statSync, linkSync, copyFileSync } from "node:fs";
+import { homedir, tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { harvestTurnGradient } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
@@ -611,8 +611,18 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
 
   if (daemonDown) {
     let fellBack = false;
+    // `mempalace mine` processes the .jsonl files IN a DIR — stage a file target into one.
+    let mineDir = target;
+    let tmpStage = "";
     try {
-      execFileSync(MP, ["mine", target, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { stdio: "ignore" });
+      if (statSync(target).isFile()) {
+        tmpStage = mkdtempSync(join(tmpdir(), "lar-capture-"));
+        for (const f of files) copyFileSync(f, join(tmpStage, basename(f)));
+        mineDir = tmpStage;
+      }
+    } catch { /* fall through with target as-is */ }
+    try {
+      execFileSync(MP, ["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"], { stdio: "ignore" });
       fellBack = true;
       // The direct mine landed these turns — mark them so the nalu won't double next run.
       for (const file of files) for (const turn of readTurns(file)) {
@@ -620,6 +630,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
         next[key] = sha(turn.text);
       }
     } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
+    if (tmpStage) { try { rmSync(tmpStage, { recursive: true, force: true }); } catch { /* best effort */ } }
     try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
     emit(args, {
       ok: true,

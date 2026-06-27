@@ -333,7 +333,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         // 20Hz tick + the self-regulating two-loop); it stays inert until a FEED sends
         // telemetry:place-verb. role = capability ≠ platform — node supplies the mempalace sink.
         telemetry: {
-          palacePath:     process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace"),
+          // The palace is the chroma dir ~/.mempalace/palace (config palace_path), NOT the parent
+          // ~/.mempalace — passing the parent targets a phantom second palace. MEMPALACE_PALACE_PATH
+          // overrides for a custom config.
+          palacePath:     process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace", "palace"),
           spoolDir:       join(storageDir, "capture-nalu"),
           walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
           quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
