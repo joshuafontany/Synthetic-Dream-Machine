@@ -1,7 +1,10 @@
 /**
  * capture-flush — the NODE substrate flush seam: serialize a drained batch to an NDJSON
- * spool file and spawn `mempalace mine --source lares` on it (the one-writer flush to the
- * shared palace). This is node's implementation of the isomorphic `CaptureFlush` verb; a
+ * spool file and spawn `mempalace mine --source ndjson` on it (the one-writer flush to the
+ * shared palace). The `ndjson` adapter is GENERIC — it carries no Lares vocabulary, so it
+ * lives upstream in mempalace; every Lares annotation rides as opaque `metadata` the palace
+ * stores verbatim and never interprets (the causal-island boundary: share substrate, not
+ * sovereignty). This is node's implementation of the isomorphic `CaptureFlush` verb; a
  * browser vessel implements the same verb with an IndexedDB write or a relay-send instead.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#isomorphic-telemetry-vm
@@ -47,7 +50,7 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
     const path = join(opts.spoolDir, `batch-${seq++}.ndjson`);
     await writeFile(path, batch.map((r) => JSON.stringify(r)).join("\n") + "\n", "utf-8");
     try {
-      const { stdout } = await spawn(bin, ["mine", "--source", "lares", "--palace", opts.palacePath, path]);
+      const { stdout } = await spawn(bin, ["mine", "--source", "ndjson", "--palace", opts.palacePath, path]);
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
     } finally {

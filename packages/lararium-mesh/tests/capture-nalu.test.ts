@@ -120,3 +120,15 @@ describe("two-tier RRP <- reserve refill", () => {
     expect(reserve).toHaveLength(0);
   });
 });
+
+describe("setGate — the servo's efferent step (the breathing threshold)", () => {
+  test("a lowered depth makes a sub-threshold pool crest on the next tick", async () => {
+    const { nalu, drained } = harness(); // GATE.depth = 3
+    nalu.enqueue(rec(1));
+    nalu.enqueue(rec(2));
+    expect(await nalu.tick(50)).toBe(0); // 2 < depth 3, within max-wait → no flush
+    nalu.setGate({ ...GATE, depth: 2 }); // the servo lowers the threshold
+    expect(await nalu.tick(60)).toBe(2); // 2 >= depth 2 → crests now
+    expect(drained[0]).toHaveLength(2);
+  });
+});

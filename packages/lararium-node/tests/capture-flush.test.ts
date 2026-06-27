@@ -1,5 +1,5 @@
 /**
- * capture-flush — node's CaptureFlush verb: serialize a batch → spawn `mine --source lares`
+ * capture-flush — node's CaptureFlush verb: serialize a batch → spawn `mine --source ndjson`
  * → parse the count → clean up the transient spool file.
  */
 
@@ -25,7 +25,7 @@ describe("makeSubprocessFlush", () => {
           .trim()
           .split("\n")
           .map((l) => JSON.parse(l));
-        return { stdout: "  source=lares  Drawers filed: 2" };
+        return { stdout: "  source=ndjson  Drawers filed: 2" };
       },
     });
 
@@ -34,7 +34,7 @@ describe("makeSubprocessFlush", () => {
       { content: "b", source_file: "x/2", metadata: { wing: "w" } },
     ]);
     expect(filed).toBe(2);
-    expect(calledArgs.slice(0, 4)).toEqual(["mine", "--source", "lares", "--palace"]);
+    expect(calledArgs.slice(0, 4)).toEqual(["mine", "--source", "ndjson", "--palace"]);
     expect(captured[1].metadata?.wing).toBe("w");
     await expect(access(calledArgs[calledArgs.length - 1])).rejects.toThrow(); // cleaned up
   });

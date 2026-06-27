@@ -1,0 +1,74 @@
+/**
+ * has-capture — the IN=accumulate cap. onEa recovers the WAL + starts the tick + wires the OUT
+ * post→ctx.post; onSignal routes a raw turn to engine.enqueue; teardown final-flushes + disposes.
+ */
+
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+
+import { hasCapture, TELEMETRY_FRAME } from "../src/has-capture.js";
+import type { CaptureEngine, CapturePost } from "@lararium/mesh";
+import type { IslandContext } from "../src/island-context.js";
+
+function fakeEngine() {
+  const calls = { recover: 0, tick: 0, enqueue: [] as Array<[string, string]>, dispose: 0 };
+  let postRef: CapturePost | null = null;
+  const engine: CaptureEngine = {
+    enqueue: async (t, s) => void calls.enqueue.push([t, s]),
+    tick: async () => (calls.tick++, 0),
+    recover: async () => (calls.recover++, 0),
+    stats: () => ({ depth: 0, failures: 0, spilled: 0, deadLettered: 0 }),
+    compactIfDrained: async () => {},
+    dispose: () => void calls.dispose++,
+  };
+  return { engine, calls, makeEngine: (p: CapturePost) => ((postRef = p), engine), firePost: () => postRef };
+}
+
+function fakeCtx() {
+  const posted: Array<{ listenable?: string; payload?: unknown }> = [];
+  const ctx = { wikiUri: "lar:///ha.ka.ba/@telemetry/v0.1/island", post: (m: unknown) => void posted.push(m as never) } as unknown as IslandContext;
+  return { ctx, posted };
+}
+
+beforeEach(() => vi.useFakeTimers());
+afterEach(() => vi.useRealTimers());
+
+describe("hasCapture — the capture cap inside a causal island", () => {
+  test("onEa recovers the WAL, starts the tick, and wires post→ctx.post", async () => {
+    const f = fakeEngine();
+    const { ctx, posted } = fakeCtx();
+    const cap = hasCapture({ makeEngine: f.makeEngine, tickMs: 50 });
+
+    const teardown = await cap.onEa!(ctx);
+    expect(f.calls.recover).toBe(1);
+
+    // the tick fires on the island's own interval
+    vi.advanceTimersByTime(120);
+    expect(f.calls.tick).toBeGreaterThanOrEqual(2);
+
+    // the OUT post seam emits a coalesced telemetry:frame through ctx.post
+    f.firePost()!({ stats: { depth: 3, failures: 0, spilled: 0, deadLettered: 0 }, gate: { depth: 8, maxWaitMs: 2000, maxDepth: 64, maxRetries: 5, backoffBaseMs: 100, backoffMaxMs: 5000 }, rev: 1 });
+    expect(posted).toHaveLength(1);
+    const frame = posted[0] as { listenable: string; payload: Record<string, number> };
+    expect(frame.listenable).toBe(TELEMETRY_FRAME);
+    expect(frame.payload.stat_depth).toBe(3);
+    expect(frame.payload.gate_depth).toBe(8); // the breathing threshold is visible in the frame
+
+    if (typeof teardown === "function") await teardown();
+    expect(f.calls.dispose).toBe(1);
+  });
+
+  test("onSignal routes a raw turn to engine.enqueue; ignores other signals", async () => {
+    const f = fakeEngine();
+    const { ctx } = fakeCtx();
+    const cap = hasCapture({ makeEngine: f.makeEngine });
+    await cap.onEa!(ctx);
+
+    expect(cap.onSignal!("wiki:place-verb", {}, ctx)).toBe(false); // not ours
+    expect(cap.onSignal!("telemetry:place-verb", { turnText: "the verb leads", sourceFile: "s://1" }, ctx)).toBe(true);
+    expect(cap.onSignal!("telemetry:place-verb", { args: { turnText: "nested", sourceFile: "s://2" } }, ctx)).toBe(true);
+    expect(f.calls.enqueue).toEqual([
+      ["the verb leads", "s://1"],
+      ["nested", "s://2"],
+    ]);
+  });
+});

@@ -41,6 +41,8 @@
 
 // The accumulate-family engine + its gate live in capture-nalu.ts (the accumulate sibling of
 // CoalesceGate below); both are exported from the mesh barrel alongside this module.
+import { adaptWindow } from "./gate-tuning.js";
+import type { WindowServo } from "./gate-tuning.js";
 
 /** Which family a projection's gate belongs to — the conserved dichotomy. */
 export type GateFamily = "accumulate" | "coalesce";
@@ -130,48 +132,102 @@ export class CoalesceGate implements ProjectionGate {
  * coalesce family: newest-state-per-key wins, intermediates drop, no reserve.
  */
 export interface KeyedCoalesceGateOptions<K> {
-  /** debounce delay (ms): a key's flush fires this long after its LAST mark (settle, not window). */
+  /** debounce delay (ms): a key's flush fires this long after its LAST mark (settle, not window).
+   *  With a `servo`, this is the STARTING window — the servo then tracks it to load. */
   readonly debounceMs: number;
-  /** the crest for one key — reconcile/snapshot the live source for `key` against the sink. */
-  readonly onFlush: (key: K) => void;
+  /** the crest for one key — reconcile/snapshot the live source for `key` against the sink. With a
+   *  `servo`, return the reconcile PROMISE so the gate can self-clock + measure its true cost. */
+  readonly onFlush: (key: K) => void | Promise<void>;
   /** timer seam (deterministic tests); defaults to setTimeout / clearTimeout. */
   readonly setTimer?: (fn: () => void, ms: number) => TimerHandle;
   readonly clearTimer?: (h: TimerHandle) => void;
+  /** OPT-IN self-regulation (the reconcile gate only — NOT a display gate). When present, the gate
+   *  self-clocks on the prior flush's completion (Nagle/triple-buffer: never reconcile a key while
+   *  its prior reconcile drains) and servos `debounceMs` via {@link adaptWindow} on the EWMA'd
+   *  reconcile cost. Absent → fixed-debounce behavior, unchanged. */
+  readonly servo?: WindowServo;
+  /** clock for cost measurement (servo only); default Date.now. */
+  readonly now?: () => number;
+  /** EWMA smoothing factor for the cost signal (servo only); default 0.2. */
+  readonly ewmaAlpha?: number;
 }
 
 export class KeyedCoalesceGate<K> implements ProjectionGate {
   readonly family: GateFamily = "coalesce";
   private readonly timers = new Map<K, TimerHandle>();
-  private readonly debounceMs: number;
-  private readonly onFlush: (key: K) => void;
+  private debounceMs: number;
+  private readonly onFlush: (key: K) => void | Promise<void>;
   private readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
   private readonly clearTimer: (h: TimerHandle) => void;
+  // Servo state (inert when no servo configured).
+  private readonly servo: WindowServo | undefined;
+  private readonly now: () => number;
+  private readonly ewmaAlpha: number;
+  private readonly inflight = new Set<K>();
+  private readonly dirty = new Set<K>();
+  private ewmaCostMs: number;
+  private disposed = false;
 
   constructor(opts: KeyedCoalesceGateOptions<K>) {
     this.debounceMs = opts.debounceMs;
     this.onFlush = opts.onFlush;
     this.setTimer = opts.setTimer ?? ((fn, ms) => setTimeout(fn, ms));
     this.clearTimer = opts.clearTimer ?? ((h) => clearTimeout(h));
+    this.servo = opts.servo;
+    this.now = opts.now ?? (() => Date.now());
+    this.ewmaAlpha = opts.ewmaAlpha ?? 0.2;
+    this.ewmaCostMs = opts.servo ? opts.servo.targetMs : 0; // seed at target → no adapt before data
   }
 
-  /** The source moved at `key` — DEBOUNCE: reset the key's timer so a burst settles into one flush. */
+  /** The source moved at `key` — DEBOUNCE: reset the key's timer so a burst settles into one flush.
+   *  With a servo, a change arriving while this key's flush DRAINS rides the next wave (self-clock). */
   mark(key: K): void {
+    if (this.servo && this.inflight.has(key)) {
+      this.dirty.add(key);
+      return;
+    }
     const existing = this.timers.get(key);
     if (existing !== undefined) this.clearTimer(existing);
-    this.timers.set(key, this.setTimer(() => {
-      this.timers.delete(key);
-      this.onFlush(key);
-    }, this.debounceMs));
+    this.timers.set(key, this.setTimer(() => this.fire(key), this.debounceMs));
   }
 
-  /** Count of keys with a flush still armed (in flight). */
+  /** Timer expiry for one key. No servo → fire-and-forget (fixed behavior). Servo → self-clock the
+   *  flush, EWMA its cost, grow/shrink the window via adaptWindow, then re-arm if changes arrived. */
+  private fire(key: K): void {
+    this.timers.delete(key);
+    if (!this.servo) {
+      void this.onFlush(key);
+      return;
+    }
+    this.inflight.add(key);
+    const t0 = this.now();
+    // `Promise.resolve().then(...)` (not `Promise.resolve(onFlush(...))`) so a SYNCHRONOUS throw
+    // from onFlush rides the promise chain into `.finally` — else `inflight` would leak the key
+    // forever and every future mark(key) would route to `dirty` and never fire.
+    void Promise.resolve().then(() => this.onFlush(key)).finally(() => {
+      this.inflight.delete(key);
+      const cost = this.now() - t0;
+      this.ewmaCostMs = this.ewmaAlpha * cost + (1 - this.ewmaAlpha) * this.ewmaCostMs;
+      this.debounceMs = adaptWindow(this.debounceMs, this.ewmaCostMs, this.servo!);
+      if (!this.disposed && this.dirty.delete(key)) this.mark(key);
+    });
+  }
+
+  /** Count of keys with a flush still armed (debouncing). */
   pending(): number {
     return this.timers.size;
   }
 
+  /** The current (servo-tracked) debounce window in ms — observability of the breathing threshold. */
+  windowMs(): number {
+    return this.debounceMs;
+  }
+
   /** Stop the gate — clears every armed flush; pending coalesced flushes lawfully drop (teardown). */
   dispose(): void {
+    this.disposed = true;
     for (const t of this.timers.values()) this.clearTimer(t);
     this.timers.clear();
+    this.dirty.clear();
   }
 }

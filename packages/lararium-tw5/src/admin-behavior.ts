@@ -30,8 +30,10 @@ import {
   type CapabilityVerifier,
 } from "@lararium/mesh";
 import { placeVerb } from "./verb-vm.js";
-import { startEngineWatch } from "./engine-watch.js";
+import { composeIsland } from "./island-caps.js";
+import { hasEngineWatch } from "./has-island-watches.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
+import type { IslandCap } from "./island-caps.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
 
 export interface AdminBehaviorOptions {
@@ -79,7 +81,6 @@ export interface AdminBehaviorOptions {
 
 export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavior {
   let _dispatcher: VerbDispatcher | null = null;
-  let _engineWatchStop: (() => void) | undefined;
 
   const _pendingDelegations = new Map<string, {
     resolve: (result: Record<string, unknown>) => void;
@@ -100,7 +101,11 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
     });
   }
 
-  return {
+  // The admin island is a nameless cap stack: #has engine-watch + #has admin-dispatch (the
+  // VerbDispatcher + the admin:* signal family). The dispatch cap below holds what once was the
+  // whole behavior, minus the engine-watch (now its own shared cap).
+  const dispatchCap: IslandCap = {
+    name: "admin-dispatch",
     async onEa(ctx: IslandContext) {
       const { tw5, composite, post } = ctx;
       // Resolve the verifier: the async factory (bootAdminKeyhive over the admin
@@ -120,9 +125,10 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
         ...(verifier ? { verifier } : {}),
       });
       _dispatcher.start();
-      // Engine-epoch drift detection — the admin island watches its own
-      // @lararium layer like any wiki island does (isomorphic).
-      _engineWatchStop = startEngineWatch(ctx);
+      return () => {
+        _dispatcher?.stop();
+        _dispatcher = null;
+      };
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
@@ -192,12 +198,9 @@ export function makeAdminBehavior(opts: AdminBehaviorOptions = {}): IslandBehavi
 
       return false;
     },
-
-    onHooAnu() {
-      _engineWatchStop?.();
-      _engineWatchStop = undefined;
-      _dispatcher?.stop();
-      _dispatcher = null;
-    },
   };
+
+  // Order = the original onEa order (dispatcher started, THEN engine-watch); composeIsland's LIFO
+  // teardown then reproduces the old onHooAnu (engine-watch stopped, THEN dispatcher) exactly.
+  return composeIsland([dispatchCap, hasEngineWatch()]);
 }

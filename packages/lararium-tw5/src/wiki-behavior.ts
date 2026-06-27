@@ -24,8 +24,9 @@ import {
 import { registerActionReactors, makeTw5Deserializer } from "./action-handler.js";
 import { dispatchProjectedEvent } from "./tw5-projection.js";
 import { VerbTable } from "./verb-dispatcher.js";
-import { startEngineWatch } from "./engine-watch.js";
-import { startRecipeWatch } from "./recipe-watch.js";
+import { composeIsland } from "./island-caps.js";
+import { hasEngineWatch, hasRecipeWatch } from "./has-island-watches.js";
+import type { IslandCap } from "./island-caps.js";
 import type { IslandBehavior, IslandContext } from "./island-context.js";
 
 /** The reboot-pending alert tiddler title. Tagged `$:/tags/Alert` so TW5's NATIVE
@@ -49,26 +50,25 @@ export interface WikiBehaviorOptions {
 /** The isomorphic primary-wiki island behavior. */
 export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior {
   let _registry: VerbTable | null = null;
-  let _cleanup: (() => void) | undefined;
-  let _engineWatchStop: (() => void) | undefined;
-  let _recipeWatchStop: (() => void) | undefined;
 
-  return {
-    async onEa(ctx: IslandContext) {
+  // #has wiki-dispatch — the ACTION verb registry + the wiki:place-verb channel (the synapse).
+  const dispatchCap: IslandCap = {
+    name: "wiki-dispatch",
+    onEa(ctx: IslandContext) {
       // Residency Model ACTION verb family — ADD / COPY / MOVE / CLEAR / DROP /
       // LOAD reactors wrapping each bag mutation in withEffectRecord (audit).
-      _registry = new VerbTable();
+      const registry = new VerbTable();
       // Native TW5 filetype deserialization for LOAD — resolved lazily through the
       // island's live $tw at action time (post-boot), so LOAD lands every legal TW5
       // filetype via TW5's own registry. The memetic carriers stay on their own path.
-      registerActionReactors(_registry, {
+      registerActionReactors(registry, {
         composite: ctx.composite,
         tw5: makeTw5Deserializer(ctx.tw5),
       });
       // system-alert — the admin worker (via main → pool.placeWikiVerb) delivers a
       // reboot-pending notice; the island writes it into its OWN @temp (volatile,
       // self-clearing on reboot). The admin never reaches into this composite directly.
-      _registry.register("system-alert", async (args) => {
+      registry.register("system-alert", async (args) => {
         const message = typeof args["message"] === "string" ? args["message"] : "A change requires a reboot to apply.";
         const cause   = typeof args["cause"]   === "string" ? args["cause"]   : "";
         // Alert kind selects the (stable, coalescing) alert tiddler. Default stays
@@ -92,23 +92,13 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         );
         return { seeded: true, title: REBOOT_ALERT_TITLE };
       });
-      _cleanup = opts.onBoot?.(ctx);
-      // Engine-epoch drift detection — when a new genesis merges into the live
-      // @lararium doc under this running island, self-write the engine-waiting
-      // alert (alert-only; the reboot that adopts it also clears it via @temp).
-      _engineWatchStop = startEngineWatch(ctx);
-      // Composition-class live reconcile — recipe membership + oracle moves
-      // apply without a reboot; the reboot alert stays the fallback.
-      _recipeWatchStop = await startRecipeWatch(ctx);
+      _registry = registry;
+      return () => {
+        _registry = null;
+      };
     },
 
     onSignal(type: string, raw: unknown, ctx: IslandContext): boolean {
-      // Interactivity RETURN leg: a relayed main-thread DOM event → TW5's native handler path.
-      if (type === "wiki:dom-event") {
-        const ev = raw as WikiMsg_DomEvent;
-        dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
-        return true;
-      }
       if (type !== "wiki:place-verb") return false;
       if (!_registry) return false;
       const msg = raw as WikiMsg_PlaceVerb;
@@ -140,15 +130,25 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
       });
       return true;
     },
+  };
 
-    onHooAnu() {
-      _recipeWatchStop?.();
-      _recipeWatchStop = undefined;
-      _engineWatchStop?.();
-      _engineWatchStop = undefined;
-      _cleanup?.();
-      _cleanup = undefined;
-      _registry = null;
+  // #has wiki-projection — the OUT=coalesce render (node disk / browser DOM) composed via the
+  // onBoot seam, plus the interactivity RETURN leg (a relayed main-thread DOM event → TW5's
+  // native handler path). role = capability ≠ platform: node supplies the disk onBoot, browser
+  // the DOM onBoot, the cap stays the same.
+  const projectionCap: IslandCap = {
+    name: "wiki-projection",
+    onEa: (ctx: IslandContext) => opts.onBoot?.(ctx),
+    onSignal(type: string, raw: unknown): boolean {
+      if (type !== "wiki:dom-event") return false;
+      const ev = raw as WikiMsg_DomEvent;
+      dispatchProjectedEvent(ev.renderId, ev.eventType, ev.fields);
+      return true;
     },
   };
+
+  // The nameless wiki island = a #has cap stack. Order = the original onEa order (dispatch ·
+  // projection · engine-watch · recipe-watch); composeIsland's LIFO teardown reproduces the old
+  // onHooAnu order (recipe · engine · projection-cleanup · registry-null) exactly.
+  return composeIsland([dispatchCap, projectionCap, hasEngineWatch(), hasRecipeWatch()]);
 }

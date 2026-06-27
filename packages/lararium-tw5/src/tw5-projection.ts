@@ -27,7 +27,14 @@ import { CoalesceGate } from "@lararium/mesh";
 export const PROJECTION_FRAME = "projection:frame";
 
 /** Coalesce window (ms): a burst of wiki "change" events collapses to one posted frame. Small
- *  (one display frame-ish) — interactive display, not the capture-nalu's 2 s recall budget. */
+ *  (one display frame-ish) — interactive display, not the capture-nalu's 2 s recall budget.
+ *
+ *  FIXED BY DESIGN — do NOT add a window servo here. The prior-art survey (2026-06-26: rAF/React
+ *  scheduler · NIC/Net-DIM coalescing · AIMD · triple-buffering) is decisive: a display-bound,
+ *  newest-wins projection's optimal window is structurally the frame interval — there is nothing to
+ *  discover, so tuning it only adds instability. The DOM gate's correct self-regulation IS staying
+ *  frame-pinned (overrun → frame-skip, never a wider window). Only the variable-cost RECONCILE gate
+ *  (disk-projector's KeyedCoalesceGate) servos its window. role = physics ≠ uniformity. */
 const COALESCE_MS = 24;
 
 /** A patched fake-DOM element: TW5's fakedom drops `addEventListener` (a no-op), severing only the

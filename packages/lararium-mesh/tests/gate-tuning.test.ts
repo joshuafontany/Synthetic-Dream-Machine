@@ -5,7 +5,8 @@
 
 import { describe, expect, test } from "vitest";
 
-import { adaptGate, deriveGate, PONO_FLUSH_GATE } from "../src/index.js";
+import { adaptGate, adaptWindow, deriveGate, PONO_FLUSH_GATE } from "../src/index.js";
+import type { WindowServo } from "../src/index.js";
 
 describe("deriveGate — EBQ + Little's Law", () => {
   test("depth = √(2·λ·S/H); maxWaitMs = the SLO; maxDepth = surge headroom", () => {
@@ -39,5 +40,25 @@ describe("adaptGate — homeostatic servo toward a latency set-point", () => {
   test("depth never drops below 1; a zero/neg target is a no-op", () => {
     expect(adaptGate({ ...PONO_FLUSH_GATE, depth: 1 }, 9999, 2000).depth).toBe(1);
     expect(adaptGate(PONO_FLUSH_GATE, 9999, 0)).toEqual(PONO_FLUSH_GATE);
+  });
+});
+
+describe("adaptWindow — the COALESCE servo (the dual: GROW under load)", () => {
+  const servo: WindowServo = { targetMs: 1000, minMs: 200, maxMs: 4000 };
+
+  test("overload GROWS the window (multiplicative); headroom shrinks it (additive); deadband holds", () => {
+    expect(adaptWindow(1000, 2000, servo)).toBe(1500); // error +1 > 0.25 → ×1.5 grow
+    expect(adaptWindow(1000, 300, servo)).toBe(800); // error -0.7 < -0.25 → −minMs(200) additive shrink
+    expect(adaptWindow(1000, 1100, servo)).toBe(1000); // error +0.1 within ±0.25 deadband → hold
+  });
+
+  test("clamps to [minMs, maxMs] — the responsiveness floor and the staleness ceiling", () => {
+    expect(adaptWindow(3500, 9999, servo)).toBe(4000); // grow clamps at maxMs
+    expect(adaptWindow(250, 0, servo)).toBe(200); // shrink clamps at minMs
+  });
+
+  test("direction is OPPOSITE adaptGate — slow GROWS the coalesce window (vs shrinks the batch)", () => {
+    expect(adaptWindow(1000, 5000, servo)).toBeGreaterThan(1000); // coalesce: slow → wider
+    expect(adaptGate(PONO_FLUSH_GATE, 5000, 1000).depth).toBeLessThan(PONO_FLUSH_GATE.depth); // accumulate: slow → smaller
   });
 });

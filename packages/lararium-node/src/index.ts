@@ -63,8 +63,8 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // imports it directly) so the package index never pulls the mempalace barrel.
 export { makeNodeCaptureEngine } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
-// The telemetry-VM worker (separate local non-federated worker_thread). The host is safe to
-// export (references the worker by URL); the worker module itself is NEVER imported here —
-// it has top-level worker side-effects and pulls defaultAnnotate at runtime in its own thread.
-export { spawnTelemetryWorker } from "./telemetry-worker-host.js";
-export type { TelemetryWorkerConfig, TelemetryWorkerHandle } from "./telemetry-worker-host.js";
+// The telemetry-VM is now a sovereign causal island (node-telemetry-island.ts), spawned like the
+// admin island via runSovereignWorker — NOT a bespoke main-thread-fed worker_thread. The entry has
+// top-level worker side-effects, so it is referenced by URL at spawn time, never imported here.
+// (The capture core stays composable + isomorphic: @lararium/mesh capture-engine + the tw5
+// `hasCapture` cap; node seams via makeNodeCaptureEngine.)

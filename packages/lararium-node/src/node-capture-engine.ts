@@ -8,13 +8,13 @@
  */
 
 import { makeCaptureEngine } from "@lararium/mesh";
-import type { CaptureAnnotate, CaptureEngine, FlushGate } from "@lararium/mesh";
+import type { CaptureAnnotate, CaptureEngine, CapturePost, CaptureServo, FlushGate } from "@lararium/mesh";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
 
 export interface NodeCaptureEngineOptions {
-  /** palace path passed to `mine --source lares --palace` */
+  /** palace path passed to `mine --source ndjson --palace` */
   readonly palacePath: string;
   /** dir for transient NDJSON flush-batch files */
   readonly spoolDir: string;
@@ -27,6 +27,12 @@ export interface NodeCaptureEngineOptions {
   readonly gate?: FlushGate;
   readonly mempalaceBin?: string;
   readonly timeoutMs?: number;
+  /** OUT family: the coalesced stats-frame sink (the worker posts to parentPort). */
+  readonly post?: CapturePost;
+  /** OUT coalesce window (ms); default 50. */
+  readonly outWindowMs?: number;
+  /** self-regulation: each flush servos the gate toward the latency set-point. */
+  readonly servo?: CaptureServo;
   /** test injection for the flush subprocess */
   readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
 }
@@ -46,5 +52,8 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     reserve,
     annotate: opts.annotate,
     ...(opts.gate !== undefined ? { gate: opts.gate } : {}),
+    ...(opts.post !== undefined ? { post: opts.post } : {}),
+    ...(opts.outWindowMs !== undefined ? { outWindowMs: opts.outWindowMs } : {}),
+    ...(opts.servo !== undefined ? { servo: opts.servo } : {}),
   });
 }

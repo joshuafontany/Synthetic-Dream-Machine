@@ -42,7 +42,7 @@ import { dirname } from "path";
 import { confineMirrorWrite } from "./bag-paths.js";
 import { contentHash, syncedTreeKey, type SyncedTree } from "./synced-tree.js";
 import { isEffectRecordUri, KeyedCoalesceGate } from "@lararium/mesh";
-import type { ReadinessMap } from "@lararium/mesh";
+import type { ReadinessMap, WindowServo } from "@lararium/mesh";
 import type { TW5Engine } from "@lararium/tw5";
 import type { BagMirrorConfig } from "./bag-paths.js";
 
@@ -65,6 +65,16 @@ export interface LarDiskProjectorOptions {
    * bytes match disk skips silently (no event, no churn).
    */
   readonly syncedTree?: SyncedTree;
+  /**
+   * Self-regulation for the reconcile gate (the COALESCE servo), OPT-IN. The disk reconcile is
+   * variable-cost + bursty with no natural clock — exactly where a window servo pays (unlike a
+   * display gate, which stays frame-pinned). When set, the gate self-clocks on each reconcile's
+   * completion and grows/shrinks `debounceMs` toward `targetMs` (adaptWindow). `targetMs` is a
+   * reconcile-COST set-point (ms above which the window WIDENS) — NOT the window length; `minMs`/
+   * `maxMs` bound the window. Absent → fixed debounce (the proven default; the capability ships
+   * inert until an operator calibrates a real cost target).
+   */
+  readonly servo?: WindowServo;
 }
 
 export class LarDiskProjector {
@@ -88,6 +98,7 @@ export class LarDiskProjector {
   private readonly readinessMap: ReadinessMap | undefined;
   private readonly debugJson: boolean;
   private readonly syncedTree: SyncedTree | undefined;
+  private readonly servo: WindowServo | undefined;
 
   constructor(opts: LarDiskProjectorOptions) {
     this.mirrors      = opts.mirrors;
@@ -97,6 +108,11 @@ export class LarDiskProjector {
     this.readinessMap = opts.readinessMap;
     this.debugJson    = opts.debugJson ?? false;
     this.syncedTree   = opts.syncedTree;
+    // The reconcile gate's COALESCE servo is OPT-IN — absent leaves the proven fixed debounce
+    // untouched (no default-on adaptive window; a guessed cost-target would silently mutate the
+    // proven path). The capability (self-clock + adaptWindow) is ready when an operator passes a
+    // servo with a real reconcile-cost `targetMs`.
+    this.servo = opts.servo;
   }
 
   /**
@@ -136,7 +152,10 @@ export class LarDiskProjector {
     // flush + immediate gone-unlink never coalesced).
     const gate = new KeyedCoalesceGate<string>({
       debounceMs: this.debounceMs,
-      onFlush: (rootUri) => void this.reconcile(rootUri),
+      // Return the reconcile PROMISE (not void) so the servo can self-clock on its completion +
+      // measure its true async cost (the sync-trigger/async-cost gap, closed Nagle-style).
+      onFlush: (rootUri) => this.reconcile(rootUri),
+      ...(this.servo ? { servo: this.servo } : {}),
     });
     this.gate = gate;
     const handler = (changes: Record<string, unknown>) => {

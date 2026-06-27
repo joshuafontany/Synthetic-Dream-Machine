@@ -1,6 +1,6 @@
 /**
  * capture-nalu — the forward-facing collect-then-flush mechanism (the LOCAL,
- * non-federated nalu). Pure logic; the daemon injects fs + the `mine --source lares`
+ * non-federated nalu). Pure logic; the daemon injects fs + the `mine --source ndjson`
  * runner + the reserve (WAL) sinks, so this stays testable and substrate-free.
  *
  * Modeled on the nalu (lar:///ha.ka.ba/@lares/v0.1/api/pono/nalu) — collect-then-flush
@@ -75,7 +75,7 @@ export const PONO_FLUSH_GATE: FlushGate = {
 /**
  * Drains a batch to its memory-home and returns the count filed; THROWS to signal the
  * batch failed (CaptureNalu re-queues with backoff). ONE verb — the isomorphic seam: a
- * node vessel composes it from an NDJSON spool + `mine --source lares`, a browser vessel
+ * node vessel composes it from an NDJSON spool + `mine --source ndjson`, a browser vessel
  * from an IndexedDB write or a relay-send. CaptureNalu never knows which substrate filed
  * the batch (role = capability ≠ platform).
  */
@@ -119,10 +119,17 @@ export class CaptureNalu implements ProjectionGate {
 
   constructor(
     private readonly sinks: CaptureSinks,
-    private readonly gate: FlushGate = PONO_FLUSH_GATE,
+    private gate: FlushGate = PONO_FLUSH_GATE,
     nowMs = 0,
   ) {
     this.lastFlushMs = nowMs;
+  }
+
+  /** Live-update the flush gate — the homeostatic servo's efferent step. gate-tuning's
+   *  adaptGate/deriveGate feed this so the threshold tracks load instead of holding fixed (every
+   *  biological collect-then-fire system servos its threshold; this lets ours do the same). */
+  setGate(gate: FlushGate): void {
+    this.gate = gate;
   }
 
   /** A producer enqueues a born-annotated record. Bounded: past maxDepth it spills to the

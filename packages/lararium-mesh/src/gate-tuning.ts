@@ -62,3 +62,45 @@ export function adaptGate(
   const depth = Math.max(1, Math.round(current.depth * factor));
   return { ...current, depth, maxDepth: Math.max(current.maxDepth, depth * 2) };
 }
+
+/** Self-regulation config for the COALESCE family — the window servo (see {@link adaptWindow}). */
+export interface WindowServo {
+  /** the flush/reconcile-latency set-point (ms) the window servos toward. */
+  readonly targetMs: number;
+  /** floor — the min coalesce window (responsiveness bound). */
+  readonly minMs: number;
+  /** ceiling — the max staleness budget (beyond it, window buys latency with no throughput). */
+  readonly maxMs: number;
+  /** deadband half-width (fraction of target): |error| within this HOLDS the window. Default 0.25. */
+  readonly hysteresis?: number;
+  /** multiplicative GROW factor applied on overload (AIMD: back off fast). Default 1.5. */
+  readonly growFactor?: number;
+  /** additive shrink step (ms) applied on headroom (AIMD: recover slow). Default = minMs. */
+  readonly shrinkStepMs?: number;
+}
+
+/**
+ * One homeostatic servo step for a COALESCE window — the DUAL of {@link adaptGate}. adaptGate
+ * SHRINKS a lossless batch's depth when flush latency runs high (bound per-flush cost); this GROWS
+ * a lossy/newest-wins window when flush/reconcile latency runs high — rendering while the prior
+ * flush still drains is pure waste, so spacing flushes wider makes each carry a fresher state for
+ * less work. Direction confirmed by Linux Net DIM (flood → longer coalesce interval) and AIMD
+ * (multiplicative back-off / additive recovery is what converges where MIMD/AIAD oscillate). The
+ * caller feeds the recently-observed (ideally EWMA-smoothed) flush cost; a deadband holds the window
+ * inside the band so noise isn't chased; the result clamps to [minMs, maxMs].
+ *
+ * Verdict from the prior-art survey (2026-06-26): apply ONLY to the variable-cost reconcile gate
+ * (disk). A DISPLAY-BOUND newest-wins gate stays FIXED, pinned to the frame clock — tuning its
+ * window adds instability for no gain (the optimal upper bound is structurally the refresh interval).
+ */
+export function adaptWindow(currentMs: number, observedLatencyMs: number, servo: WindowServo): number {
+  if (servo.targetMs <= 0) return currentMs;
+  const h = servo.hysteresis ?? 0.25;
+  const grow = servo.growFactor ?? 1.5;
+  const shrink = servo.shrinkStepMs ?? servo.minMs;
+  const error = (observedLatencyMs - servo.targetMs) / servo.targetMs; // >0 = too slow
+  let next = currentMs;
+  if (error > h) next = currentMs * grow; // overload → multiplicative GROW (coalesce more)
+  else if (error < -h) next = currentMs - shrink; // headroom → additive shrink (probe responsiveness)
+  return Math.max(servo.minMs, Math.min(servo.maxMs, Math.round(next)));
+}

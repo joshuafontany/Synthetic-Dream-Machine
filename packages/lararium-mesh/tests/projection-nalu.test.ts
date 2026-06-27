@@ -112,3 +112,54 @@ describe("ProjectionGate family discriminant", () => {
     expect(new CaptureNalu({ flush: async () => 0 }).family).toBe("accumulate");
   });
 });
+
+describe("KeyedCoalesceGate servo — the reconcile gate self-regulates (GROW under load)", () => {
+  function servoHarness() {
+    let clock = 0;
+    let scheduled: (() => void) | null = null;
+    let resolveFlush: (() => void) | null = null;
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 1000,
+      servo: { targetMs: 1000, minMs: 200, maxMs: 8000 },
+      now: () => clock,
+      setTimer: (fn) => ((scheduled = fn), 1 as unknown as ReturnType<typeof setTimeout>),
+      clearTimer: () => (scheduled = null),
+      onFlush: () => new Promise<void>((res) => (resolveFlush = res)),
+    });
+    return {
+      gate,
+      fireTimer: () => scheduled?.(),
+      advance: (ms: number) => (clock += ms),
+      completeFlush: () => resolveFlush?.(),
+      settle: async () => {
+        for (let i = 0; i < 6; i++) await Promise.resolve();
+      },
+    };
+  }
+
+  test("a slow reconcile GROWS the debounce window (EWMA + AIMD)", async () => {
+    const h = servoHarness();
+    expect(h.gate.windowMs()).toBe(1000);
+    h.gate.mark("A");
+    h.fireTimer(); // debounce expires → reconcile scheduled
+    await h.settle(); // let onFlush start (it runs a microtask after fire) → resolver armed
+    h.advance(4000); // the reconcile costs 4 s (4× the set-point)
+    h.completeFlush();
+    await h.settle();
+    // ewma = 0.2·4000 + 0.8·1000 = 1600; error +0.6 > 0.25 → ×1.5 → 1500 (the window breathes wider)
+    expect(h.gate.windowMs()).toBe(1500);
+  });
+
+  test("self-clock: a mark while the key's reconcile drains rides the next wave (no overlap)", async () => {
+    const h = servoHarness();
+    h.gate.mark("A");
+    h.fireTimer(); // A now in-flight (inflight.add is synchronous in fire())
+    h.gate.mark("A"); // arrives mid-flush → coalesced as dirty, NOT a second overlapping reconcile
+    expect(h.gate.pending()).toBe(0); // nothing armed while in-flight
+    await h.settle(); // let onFlush start → resolver armed
+    h.advance(500);
+    h.completeFlush();
+    await h.settle();
+    expect(h.gate.pending()).toBe(1); // re-armed for the change that arrived during the flush
+  });
+});

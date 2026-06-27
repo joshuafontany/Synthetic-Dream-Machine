@@ -83,4 +83,89 @@ describe("makeCaptureEngine — isomorphic worker over injected seams", () => {
     expect(await rebooted.recover()).toBe(2);
     expect(rebooted.stats().depth).toBe(2);
   });
+
+  test("OUT family: a burst of source-moves coalesces to ONE stats frame (post = the sink)", async () => {
+    const r = stubReserve();
+    let scheduled: (() => void) | null = null;
+    const outTimer = {
+      setTimer: (fn: () => void) => {
+        scheduled = fn;
+        return 1 as unknown as ReturnType<typeof setTimeout>;
+      },
+      clearTimer: () => {
+        scheduled = null;
+      },
+    };
+    const frames: { stats: { depth: number }; rev: number }[] = [];
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => b.length,
+      annotate: () => ({}),
+      gate: { ...GATE, depth: 8 },
+      post: (f) => frames.push(f),
+      outTimer,
+    });
+
+    await engine.enqueue("a", "x/1");
+    await engine.enqueue("b", "x/2"); // a burst — both marks coalesce onto one armed timer
+    expect(frames).toHaveLength(0); // nothing posted until the crest
+    scheduled?.(); // the coalesce window fires
+    expect(frames).toHaveLength(1); // ONE frame for the burst — intermediates faded
+    expect(frames[0].stats.depth).toBe(2); // newest snapshot wins
+    expect(frames[0].rev).toBe(1);
+  });
+
+  test("SELF-REGULATION: a slow flush servos the gate's depth down (the breathing threshold)", async () => {
+    const r = stubReserve();
+    let t = 0;
+    const now = () => t;
+    let scheduled: (() => void) | null = null;
+    const outTimer = {
+      setTimer: (fn: () => void) => {
+        scheduled = fn;
+        return 1 as unknown as ReturnType<typeof setTimeout>;
+      },
+      clearTimer: () => {
+        scheduled = null;
+      },
+    };
+    const frames: { gate: { depth: number } }[] = [];
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => {
+        t += 4000; // a 4 s flush — twice the 2 s set-point
+        return b.length;
+      },
+      annotate: () => ({}),
+      gate: { ...GATE, depth: 8, maxDepth: 64 },
+      now,
+      servo: { targetLatencyMs: 2000 },
+      post: (f) => frames.push(f),
+      outTimer,
+    });
+
+    for (let i = 0; i < 8; i++) await engine.enqueue("x", `x/${i}`); // fill to depth → flush fires
+    expect(await engine.tick(0)).toBe(8);
+    scheduled?.();
+    // adaptGate(depth 8, observed 4000, target 2000): error +1 → clamp -0.25 → 8·0.75 = 6
+    expect(frames.at(-1)?.gate.depth).toBe(6);
+  });
+
+  test("no post seam = no OUT projection (Null-Object); the IN family runs unchanged", async () => {
+    const r = stubReserve();
+    const flushed: number[] = [];
+    const engine = makeCaptureEngine({
+      reserve: r.reserve,
+      flush: async (b) => {
+        flushed.push(b.length);
+        return b.length;
+      },
+      annotate: () => ({}),
+      gate: GATE,
+    });
+    await engine.enqueue("a", "x/1");
+    expect(await engine.tick(50)).toBe(1);
+    expect(flushed).toEqual([1]);
+    engine.dispose(); // safe even with no OUT gate
+  });
 });

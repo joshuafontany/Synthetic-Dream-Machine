@@ -75,6 +75,10 @@ export { buildCeremonyTiddlers, didKeyFromVerifyingKey } from "@lararium/mesh";
 export type { CeremonyTiddler } from "@lararium/mesh";
 
 export type { IslandContext, IslandBehavior } from "./island-context.js";
+export { composeIsland } from "./island-caps.js";
+export type { IslandCap, CapTeardown } from "./island-caps.js";
+export { hasCapture, TELEMETRY_FRAME } from "./has-capture.js";
+export type { CaptureCapOptions } from "./has-capture.js";
 export { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 export type { VerbContext, VerbReactor, VerbDispatcherOptions } from "./verb-dispatcher.js";
 export { heedSummons } from "./verb-summons.js";
