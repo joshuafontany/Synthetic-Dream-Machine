@@ -63,6 +63,7 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
     this.peerId       = peerId;
     this.peerMetadata = peerMetadata ?? {};
 
+    try { console.log(`[lar-leaf] dialing ${this.url} (aud=${this.#aud})`); } catch { /* */ }
     const socket = new WebSocket(this.url);
     socket.binaryType = "arraybuffer";
     this.socket = socket;
@@ -109,11 +110,13 @@ export class LarWSClientAdapter extends WebSocketClientAdapter {
 
     socket.removeEventListener("message", onText);
     if (!verdict.ok) {
+      try { console.log(`[lar-leaf] verdict DENIED: ${verdict.reason ?? "(no reason)"}`); } catch { /* */ }
       try { socket.close(4003, verdict.reason ?? "auth denied"); } catch { /* closed */ }
       return;
     }
 
     // Authenticated — hand the SAME socket to the parent's Automerge machinery.
+    try { console.log("[lar-leaf] verdict OK — crossing open, syncing"); } catch { /* */ }
     socket.addEventListener("message", this.onMessage);
     this.join();
   }
