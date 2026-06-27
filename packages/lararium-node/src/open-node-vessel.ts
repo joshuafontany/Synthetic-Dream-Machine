@@ -14,6 +14,7 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { homedir }                      from "node:os";
 import { join }                         from "path";
 import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import { Repo }                         from "@automerge/automerge-repo";
@@ -327,6 +328,16 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         },
         daemonAuth,
         storageDir,
+        // SINK for the @daemon's idempotent capture cap (the telemetry nalu): the palace + the
+        // vessel-home spool/WAL/quarantine. Wiring this makes the cap LIVE (it boots the engine +
+        // 20Hz tick + the self-regulating two-loop); it stays inert until a FEED sends
+        // telemetry:place-verb. role = capability ≠ platform — node supplies the mempalace sink.
+        telemetry: {
+          palacePath:     process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace"),
+          spoolDir:       join(storageDir, "capture-nalu"),
+          walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
+          quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
+        },
       });
       return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };
     },
