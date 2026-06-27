@@ -18,7 +18,8 @@
  */
 
 import type { Server, IncomingMessage, ServerResponse } from "node:http";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, mkdirSync } from "node:fs";
+import { atomicWriteFileSync } from "./fs-atomic.js";
 import { join } from "node:path";
 import type { DocHandle } from "@automerge/automerge-repo";
 import {
@@ -90,7 +91,7 @@ export async function mountOracleReadFace(args: {
       persisted = { version, lastPointerId: id, prevId: prev, cid: snap.cid };
       try {
         mkdirSync(storageDir, { recursive: true });
-        writeFileSync(statePath, JSON.stringify(persisted));
+        atomicWriteFileSync(statePath, JSON.stringify(persisted));
       } catch { /* quota — the in-memory pointer still serves this run */ }
       onLog?.(`@oracle read-face: v${version} cid=${snap.cid.slice(0, 12)}… (${snap.bytes.byteLength}B)`);
     }

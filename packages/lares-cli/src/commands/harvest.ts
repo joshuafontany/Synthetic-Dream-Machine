@@ -33,6 +33,7 @@ import { harvestTurnGradient } from "@lararium/mesh";
 import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
+import { atomicWriteFileSync } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
 import { emit, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -526,7 +527,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   }
 
   if (!dryRun) {
-    try { writeFileSync(statePath, JSON.stringify(nextState)); } catch { /* best effort */ }
+    try { atomicWriteFileSync(statePath, JSON.stringify(nextState)); } catch { /* best effort */ }
   }
 
   emit(args, {
@@ -634,7 +635,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       }
     } catch { /* direct mine failed too — leave state unmarked so the next run retries */ }
     if (tmpStage) { try { rmSync(tmpStage, { recursive: true, force: true }); } catch { /* best effort */ } }
-    try { writeFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
+    try { atomicWriteFileSync(statePath, JSON.stringify(next)); } catch { /* best effort */ }
     emit(args, {
       ok: true,
       data: { wing, submitted, fallback: fellBack ? "direct-mine" : "none (mine failed)" },

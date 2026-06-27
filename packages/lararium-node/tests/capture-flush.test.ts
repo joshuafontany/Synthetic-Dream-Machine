@@ -34,7 +34,8 @@ describe("makeSubprocessFlush", () => {
       { content: "b", source_file: "x/2", metadata: { wing: "w" } },
     ]);
     expect(filed).toBe(2);
-    expect(calledArgs.slice(0, 4)).toEqual(["mine", "--source", "ndjson", "--palace"]);
+    // --palace is GLOBAL (before the subcommand); --daemon hands off to the write-daemon seam.
+    expect(calledArgs.slice(0, 6)).toEqual(["--palace", "/tmp/palace", "mine", "--source", "ndjson", "--daemon"]);
     expect(captured[1].metadata?.wing).toBe("w");
     await expect(access(calledArgs[calledArgs.length - 1])).rejects.toThrow(); // cleaned up
   });

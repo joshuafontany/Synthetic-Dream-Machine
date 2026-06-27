@@ -17,7 +17,7 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, writeFileSync } from "node:fs";
+import { existsSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { harvestTurnGradient, type TurnHarvest } from "@lararium/mesh";
@@ -185,10 +185,15 @@ export function writebackWing(wing: string, opts: { limit?: number } = {}): Writ
 
   let applied = 0;
   if (patches.length > 0) {
-    const pf = join(tmpdir(), `lar-telemetry-patch-${wing}.ndjson`);
+    // pid-unique so concurrent wing writebacks never share a path; ALWAYS removed (no orphan).
+    const pf = join(tmpdir(), `lar-telemetry-patch-${wing}-${process.pid}.ndjson`);
     writeFileSync(pf, patches.map((p) => JSON.stringify(p)).join("\n") + "\n");
-    const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
-    try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
+    try {
+      const applyOut = execFileSync(PY, [DRAWER_IO, "apply", pf], { cwd: submoduleRoot, env: pyEnv, maxBuffer: 1 << 30, encoding: "utf8" });
+      try { applied = (JSON.parse(applyOut.trim()) as { applied: number }).applied; } catch { applied = patches.length; }
+    } finally {
+      rmSync(pf, { force: true });
+    }
   }
   return { drawers: drawers.length, framed, applied, bands };
 }

@@ -15,7 +15,7 @@
  * the watch filter. Reset wipes `larDataDir` (.lararium); `larIdentityDir` is a sibling, preserved.
  */
 
-import { homedir } from "node:os";
+import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 
 /** The vessel home — `LAR_ROOT` (isolated instance) or `~/.lares` (the operator default). */
@@ -49,4 +49,12 @@ export function larHarvestDir(): string {
 /** Harvest stage (normalized transcript copies). */
 export function larHarvestStageDir(): string {
   return join(larHome(), "harvest-stage");
+}
+
+/** TRANSIENT runtime dir (tmpfs) for write-then-delete spool — `XDG_RUNTIME_DIR` (tmpfs, e.g.
+ *  /run/user/<uid>) or os.tmpdir() fallback. The capture nalu's flush BATCHES live here: they
+ *  never need to survive a reboot (the WAL on disk — larDataDir/capture-nalu — is the durable
+ *  layer), so keeping them off persistent disk removes SSD write-churn + fsync cost. */
+export function larRuntimeDir(): string {
+  return join(process.env["XDG_RUNTIME_DIR"]?.trim() || tmpdir(), "lares");
 }

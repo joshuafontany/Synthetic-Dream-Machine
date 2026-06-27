@@ -55,6 +55,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
+import { larRuntimeDir }                   from "./vessel-paths.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -337,7 +338,9 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           // ~/.mempalace — passing the parent targets a phantom second palace. MEMPALACE_PALACE_PATH
           // overrides for a custom config.
           palacePath:     process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace", "palace"),
-          spoolDir:       join(storageDir, "capture-nalu"),
+          // TRANSIENT flush batches → tmpfs (XDG_RUNTIME_DIR): write→mine→rm, never need to survive a
+          // reboot. The DURABLE layer (WAL + quarantine) stays on disk — that's the crash-replay seam.
+          spoolDir:       join(larRuntimeDir(), "capture-nalu"),
           walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
           quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
         },
