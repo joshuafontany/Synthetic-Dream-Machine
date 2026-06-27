@@ -38,6 +38,8 @@ const DEFAULT_ADMIN_WORKER_URL = new URL("./node-daemon-island.js", import.meta.
 export interface DaemonVmOptions {
   repo:              Repo;
   daemonUrl:          string;
+  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
+  personaUrl:         string;
   /**
    * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
    * null = pre-CAS. The daemon island reads bytes from the @lararium CRDT doc.
@@ -76,12 +78,17 @@ export interface DaemonVmOptions {
 }
 
 export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, coreHash, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, coreHash, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (node strategy: merge-on-late-arrival) ────────────────
   const daemonHandle = await resolveBootDoc<LarDoc>(
     repo, daemonUrl as AutomergeUrl,
     { tideline: "hearth-private", label: "@daemon" },
+  );
+  // ── Persona doc handle (same strategy) — the one VM tends both bags ──────────
+  const personaHandle = await resolveBootDoc<LarDoc>(
+    repo, personaUrl as AutomergeUrl,
+    { tideline: "hearth-private", label: "@persona" },
   );
 
   // The daemon holds NO standing system-bag mount: it reaches a deep target bag
@@ -106,7 +113,7 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
   // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival daemonHandle;
   // the lifecycle and the whole result surface (DaemonVmCore) live once in the core.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, recipe, grants, coreHash,
+    repo, daemonHandle, personaHandle, recipe, grants, coreHash,
     ...(daemonAuth ? { daemonAuth } : {}),
     ...(storage   ? { storage }   : {}),
     workerScriptUrl: workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL,

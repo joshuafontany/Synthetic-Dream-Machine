@@ -18,6 +18,7 @@ import {
   CIRCLES_DOC_URI,
   SESSIONS_DOC_URI,
   DAEMON_BAG_ID,
+  PERSONA_BAG_ID,
   emptyLarDoc,
   emptyIdentitiesDoc,
   emptyCirclesDoc,
@@ -89,6 +90,15 @@ export function seedDaemonDoc(repo: Repo): DocHandle<LarDoc> {
     doc.tiddlers[DAEMON_BAG_ID] = mutableLarRecord(DAEMON_BAG_ID, { text: handle.url, kind: "oracle" }, "lararium-seed");
   });
   console.log(`[social-seed] DaemonDoc seeded  url=${handle.url}`);
+  return handle;
+}
+
+export function seedPersonaDoc(repo: Repo): DocHandle<LarDoc> {
+  const handle = repo.create<LarDoc>(emptyLarDoc());
+  handle.change((doc) => {
+    doc.tiddlers[PERSONA_BAG_ID] = mutableLarRecord(PERSONA_BAG_ID, { text: handle.url, kind: "oracle" }, "lararium-seed");
+  });
+  console.log(`[social-seed] PersonaDoc seeded url=${handle.url}`);
   return handle;
 }
 

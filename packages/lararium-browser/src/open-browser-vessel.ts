@@ -189,7 +189,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       hearthTrueName: "",          // hearth-agnostic: an anon is not yet bound to a place; it binds on upgrade
     });
     bootstrap = {
-      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl,
+      identitiesUrl: f.identitiesUrl, circlesUrl: f.circlesUrl, sessionsUrl: f.sessionsUrl, daemonUrl: f.daemonUrl, personaUrl: f.personaUrl,
       personaGroupDocIdHex: f.personaGroupDocIdHex, personaGroupAgentIdHex: f.personaGroupAgentIdHex, meshCabalDocIdHex: f.meshCabalDocIdHex,
       signerDid: f.signerDid, deviceEdge: f.founderEdge,
       contactCard: f.contactCardJson,
@@ -322,7 +322,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       daemon = await openBrowserDaemonVm({
-        repo, daemonUrl: social.daemonUrl, coreHash: assembly.coreHash,
+        repo, daemonUrl: social.daemonUrl, personaUrl: social.personaUrl, coreHash: assembly.coreHash,
         ...(pluginCids.length ? { pluginCids } : {}),
         workerScriptUrl: daemonWorkerUrl,
         recipe: { wikiSlug: "daemon" } satisfies WikiRecipe,

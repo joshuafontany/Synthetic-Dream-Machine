@@ -65,6 +65,13 @@ export interface DeviceAdmitPayload {
   readonly meshCabalDocIdHex:      string;
   readonly syncUrl:                string | null;
   /**
+   * The founder's @persona doc URL — the joinee resolves/syncs it to receive the
+   * shared veiled identity (PersonaGroup), the membership-sync foundation. @daemon
+   * stays sovereign-per-vessel (the joinee seeds its own); @persona crosses by membership.
+   * Absent on older payloads; the joinee then seeds a fresh local @persona doc.
+   */
+  readonly personaUrl?:            string | null;
+  /**
    * Automerge URL of the genesis island doc on the issuing vessel's Repo.
    * Browser vessels call repo.find(islandDocUrl) over the WebSocket to sync
    * the genesis island (TW5 core blob + sigil tiddlers) without a separate

@@ -22,6 +22,7 @@
 
 import {
   DAEMON_BAG_ID,
+  PERSONA_BAG_ID,
   CompositeStore,
   AutomergeDocStore,
   attachMessageChannelSync,
@@ -86,6 +87,9 @@ export interface DaemonVmCoreOptions {
   repo:            Repo;
   /** Daemon doc handle, already resolved by the platform wrapper. */
   daemonHandle:     DocHandle<LarDoc>;
+  /** Persona (@persona PersonaGroup) doc handle, resolved by the platform wrapper the same way.
+   *  The ONE daemon VM tends BOTH bags — @daemon (sovereign) + @persona (veiled identity). */
+  personaHandle:    DocHandle<LarDoc>;
   /** One-recipe model for the daemon island. */
   recipe:          WikiRecipe;
   /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
@@ -164,7 +168,7 @@ export interface DaemonVmCore {
 }
 
 export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions): DaemonVmCore {
-  const { repo, daemonHandle, recipe, grants, coreHash, pluginCids, daemonAuth, storage, workerScriptUrl } = opts;
+  const { repo, daemonHandle, personaHandle, recipe, grants, coreHash, pluginCids, daemonAuth, storage, workerScriptUrl } = opts;
 
   // Mutable delegation config — set via mountMainVerbs(). The worker gates routed
   // verbs (verify-then-delegate); main trusts the channel, so no main-side verifier.
@@ -181,6 +185,10 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   const daemonStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
   composite.addLayer({ bagId: DAEMON_BAG_ID, store: daemonStore, writable: true });
   daemonStore.markSyncComplete();
+  // @persona — the operator's veiled-identity bag, tended by the SAME VM (one VM, two bags).
+  const personaStore = new AutomergeDocStore(personaHandle, PERSONA_BAG_ID);
+  composite.addLayer({ bagId: PERSONA_BAG_ID, store: personaStore, writable: true });
+  personaStore.markSyncComplete();
 
   // ── MessageChannel — island ↔ vessel Repo sync (wiring owned by mesh) ───────
   const { mainPort, syncPort } = host.newSyncChannel();

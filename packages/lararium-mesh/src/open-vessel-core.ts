@@ -23,16 +23,18 @@ import { CompositeStore } from "./composite-store.js";
 import type { LarTiddlerStore } from "./tiddler-store.js";
 import { AutomergeDocStore } from "./automerge-doc-store.js";
 import { emptyLarDoc, mutableLarRecord, tiddlerText, resolveOracleDoc, type LarDoc } from "./base-doc.js";
-import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
+import { BAG_IDS, DAEMON_BAG_ID, PERSONA_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI } from "./lar-uris.js";
 import { TEMP_BAG } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 
-/** The social-plane + daemon doc URLs a vessel's bootstrap resolves (founding done). */
+/** The social-plane + daemon + persona doc URLs a vessel's bootstrap resolves (founding done). */
 export interface VesselBootstrap {
   identitiesUrl: string;
   circlesUrl:    string;
   sessionsUrl:   string;
   daemonUrl:      string;
+  /** The @persona (PersonaGroup veiled-identity) doc URL — founded alongside @daemon. */
+  personaUrl:     string;
 }
 
 /**
@@ -159,6 +161,8 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(await resolve(bootstrap.circlesUrl    as AutomergeUrl), BAG_IDS.groups),     writable: true });
   composite.addLayer({ bagId: BAG_IDS.sessions,   store: new AutomergeDocStore(await resolve(bootstrap.sessionsUrl   as AutomergeUrl), BAG_IDS.sessions),   writable: true });
   composite.addLayer({ bagId: DAEMON_BAG_ID,       store: new AutomergeDocStore(await resolve(bootstrap.daemonUrl      as AutomergeUrl), DAEMON_BAG_ID),       writable: true });
+  // @persona — the operator's veiled-identity bag (PersonaGroup), founded alongside @daemon.
+  composite.addLayer({ bagId: PERSONA_BAG_ID,      store: new AutomergeDocStore(await resolve(bootstrap.personaUrl     as AutomergeUrl), PERSONA_BAG_ID),      writable: true });
 
   if (recipe.loadCorpora) {
     await recipe.loadCorpora(composite);

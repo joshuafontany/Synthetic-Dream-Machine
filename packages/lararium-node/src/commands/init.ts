@@ -19,7 +19,7 @@ import { join } from "path";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID,
+  IDENTITIES_DOC_URI, CIRCLES_DOC_URI, SESSIONS_DOC_URI, DAEMON_BAG_ID, PERSONA_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
@@ -61,7 +61,7 @@ function defaultDirs(): { storageDir: string; genesisDir: string } {
 }
 
 function makeBootstrapPlugin(
-  identitiesUrl: string, circlesUrl: string, sessionsUrl: string, daemonUrl: string,
+  identitiesUrl: string, circlesUrl: string, sessionsUrl: string, daemonUrl: string, personaUrl: string,
   personaGroupDocIdHex: string, meshCabalDocIdHex: string,
 ): object {
   const packedTiddlers = {
@@ -69,6 +69,7 @@ function makeBootstrapPlugin(
     [CIRCLES_DOC_URI]:           { title: CIRCLES_DOC_URI,           text: circlesUrl,             kind: "oracle" },
     [SESSIONS_DOC_URI]:          { title: SESSIONS_DOC_URI,          text: sessionsUrl,             kind: "oracle" },
     [DAEMON_BAG_ID]:              { title: DAEMON_BAG_ID,              text: daemonUrl,                kind: "oracle" },
+    [PERSONA_BAG_ID]:             { title: PERSONA_BAG_ID,             text: personaUrl,               kind: "oracle" },
     [MESH_CABAL_DOC_ID_TIDDLER]: { title: MESH_CABAL_DOC_ID_TIDDLER, text: meshCabalDocIdHex,     kind: "sentinel-id" },
     [PERSONA_GROUP_DOC_ID_TIDDLER]:{ title: PERSONA_GROUP_DOC_ID_TIDDLER, text: personaGroupDocIdHex, kind: "sentinel-id" },
   };
@@ -113,7 +114,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     if (payload.kind !== "device-admit/v1") {
       throw new Error(`[lares init --admit] unexpected payload kind: ${payload.kind}`);
     }
-    const { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl } = await runApplyAdmitPayload({
+    const { identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl } = await runApplyAdmitPayload({
       repo,
       operatorVerifyingKey: operatorIdentity.verifyingKey,
       operatorDisplayName:  operatorIdentity.displayName ?? "operator",
@@ -121,13 +122,14 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     });
 
     const bootstrapPlugin = makeBootstrapPlugin(
-      identitiesUrl, circlesUrl, sessionsUrl, daemonUrl,
+      identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
       payload.personaGroupDocIdHex, payload.meshCabalDocIdHex,
     );
     writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
     await repo.flush();
 
     console.log(`[lares init --admit] vessel ${operatorIdentity.verifyingKey.slice(0, 16)}… admitted`);
+    console.log(`  @persona      ${personaUrl}${payload.personaUrl ? " (synced from founder)" : " (fresh local — payload carried none)"}`);
     console.log(`  PersonaGroup ${payload.personaGroupDocIdHex.slice(0, 20)}…`);
     console.log(`  signer pin   ${payload.signerDid.slice(0, 20)}…`);
     console.log(`  hearth-name  ${payload.hearthTrueName.slice(0, 20)}…  (binding: device × hearthTrueName)`);
@@ -153,7 +155,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   }
 
   const {
-    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl,
+    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
     personaGroupDocIdHex, meshCabalDocIdHex, contactCardJson,
     signerDid,
   } = await runFoundingCeremony({
@@ -170,7 +172,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   await persistVesselCard(storageDir, contactCardJson);
 
   const bootstrapPlugin = makeBootstrapPlugin(
-    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl,
+    identitiesUrl, circlesUrl, sessionsUrl, daemonUrl, personaUrl,
     personaGroupDocIdHex, meshCabalDocIdHex,
   );
   writeFileSync(bootstrap, JSON.stringify(bootstrapPlugin, null, 2), "utf8");
@@ -181,6 +183,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   console.log(`  @circles     ${circlesUrl}`);
   console.log(`  @sessions    ${sessionsUrl}`);
   console.log(`  @daemon       ${daemonUrl}`);
+  console.log(`  @persona      ${personaUrl}`);
   console.log(`  PersonaGroup  ${personaGroupDocIdHex.slice(0, 20)}…`);
   console.log(`  MeshCabal    ${meshCabalDocIdHex.slice(0, 20)}…`);
   console.log(`  operator-root ${signerDid.slice(0, 20)}…`);

@@ -49,6 +49,7 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
   function openCore(eaSilenceMs: number, eaStallMs?: number) {
     const repo        = new Repo({ sharePolicy: async () => true });
     const daemonHandle = repo.create<LarDoc>(emptyLarDoc());
+    const personaHandle = repo.create<LarDoc>(emptyLarDoc());
     const fw          = fakeWorker();
     const ports: NodeMessagePort[] = [];
 
@@ -67,6 +68,7 @@ describe("openDaemonVmCore — the ea-breath watchdog", () => {
     const core = openDaemonVmCore(host, {
       repo,
       daemonHandle,
+      personaHandle,
       recipe:          { wikiSlug: "daemon" },
       grants:          { islandUrl: daemonHandle.url },
       coreHash:        null,

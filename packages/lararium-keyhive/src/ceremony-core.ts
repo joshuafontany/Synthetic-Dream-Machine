@@ -41,7 +41,7 @@ import {
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, HEARTH_TRUE_NAME_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER,
   CAP_EVENT_TAG,
-  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc,
+  seedIdentitiesDoc, seedCirclesDoc, seedSessionsDoc, seedDaemonDoc, seedPersonaDoc,
   buildDeviceDelegation, type DeviceDelegationTiddler,
 } from "@lararium/mesh";
 
@@ -95,6 +95,8 @@ export interface FoundingCeremonyResult {
   circlesUrl:            string;
   sessionsUrl:           string;
   daemonUrl:              string;
+  /** The @persona (PersonaGroup veiled-identity) doc URL — founded alongside @daemon. */
+  personaUrl:             string;
   personaGroupDocIdHex:   string;
   personaGroupAgentIdHex: string;
   meshCabalDocIdHex:     string;
@@ -125,6 +127,8 @@ export async function runFoundingCeremony(
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
   const daemonHandle      = seedDaemonDoc(repo);
+  // The @persona bag — the operator's veiled-identity doc, founded alongside @daemon.
+  const personaHandle     = seedPersonaDoc(repo);
 
   // Write operator identity + circles tiddlers
   const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
@@ -241,6 +245,7 @@ export async function runFoundingCeremony(
     circlesUrl:            circlesHandle.url    as string,
     sessionsUrl:           sessionsHandle.url   as string,
     daemonUrl:              daemonHandle.url      as string,
+    personaUrl:            personaHandle.url    as string,
     personaGroupDocIdHex:   personaGroup.docIdHex,
     personaGroupAgentIdHex: personaGroup.agentIdHex,
     meshCabalDocIdHex:     meshCabal.docIdHex,
@@ -268,6 +273,9 @@ export interface DeviceAdmitEdgeInput {
   syncUrl:                string | null;
   /** Automerge URL of the issuing vessel's genesis island — for peer-sync delivery. */
   islandDocUrl?:          string | null;
+  /** The founder's @persona doc URL — the joinee receives it to SYNC the shared veiled identity
+   *  (the membership-sync foundation). Mirrors islandDocUrl: a founder doc the joinee syncs. */
+  personaUrl?:            string | null;
 }
 
 /**
@@ -303,6 +311,7 @@ export async function runDeviceAdmitEdge(
     meshCabalDocIdHex:      input.meshCabalDocIdHex,
     syncUrl:                input.syncUrl,
     ...(input.islandDocUrl != null ? { islandDocUrl: input.islandDocUrl } : {}),
+    ...(input.personaUrl   != null ? { personaUrl:   input.personaUrl }   : {}),
   };
 }
 
@@ -322,6 +331,9 @@ export interface ApplyAdmitResult {
   circlesUrl:    string;
   sessionsUrl:   string;
   daemonUrl:      string;
+  /** The @persona doc URL the joinee resolves — the founder's shared doc (membership-sync)
+   *  when the payload carries it, else a fresh local seed (older payloads). */
+  personaUrl:     string;
 }
 
 /**
@@ -344,6 +356,9 @@ export async function runApplyAdmitPayload(
   const circlesHandle    = seedCirclesDoc(repo);
   const sessionsHandle   = seedSessionsDoc(repo);
   const daemonHandle      = seedDaemonDoc(repo);
+  // @persona: the joinee RECEIVES the founder's shared veiled-identity doc to SYNC it
+  // (the membership-sync foundation). Older payloads without it fall back to a fresh local seed.
+  const personaUrl = payload.personaUrl ?? (seedPersonaDoc(repo).url as string);
 
   const ceremonyTiddlers = buildCeremonyTiddlers(operatorVerifyingKey, operatorDisplayName);
   for (const t of ceremonyTiddlers) {
@@ -401,5 +416,6 @@ export async function runApplyAdmitPayload(
     circlesUrl:    circlesHandle.url    as string,
     sessionsUrl:   sessionsHandle.url   as string,
     daemonUrl:      daemonHandle.url      as string,
+    personaUrl,
   };
 }

@@ -20,7 +20,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import type { AutomergeUrl } from "@automerge/automerge-repo";
 import {
-  DAEMON_BAG_ID,
+  DAEMON_BAG_ID, PERSONA_BAG_ID,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
 } from "@lararium/mesh";
 import { repoRoot } from "@lararium/mesh/node";
@@ -71,6 +71,9 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const personaGroupDocIdHex = tiddlers[PERSONA_GROUP_DOC_ID_TIDDLER]?.text ?? null;
   const meshCabalDocIdHex   = tiddlers[MESH_CABAL_DOC_ID_TIDDLER]?.text   ?? null;
   const daemonUrl            = tiddlers[DAEMON_BAG_ID]?.text                 ?? null;
+  // The founder's @persona doc — carried into the payload so the joinee SYNCS the shared
+  // veiled identity (membership-sync foundation); @daemon stays sovereign (joinee seeds its own).
+  const personaUrl           = tiddlers[PERSONA_BAG_ID]?.text                ?? null;
 
   if (!personaGroupDocIdHex || !meshCabalDocIdHex) {
     throw new Error(
@@ -123,6 +126,7 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     meshCabalDocIdHex,
     syncUrl:      opts.syncUrl      ?? null,
     islandDocUrl: opts.islandDocUrl ?? null,
+    personaUrl,
   });
 
   const json = JSON.stringify(payload, null, 2);

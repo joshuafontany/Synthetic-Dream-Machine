@@ -35,6 +35,8 @@ import { browserNewSyncChannel, browserSpawnWorker } from "./worker-handle.js";
 export interface BrowserDaemonVmOptions {
   repo:             Repo;
   daemonUrl:         string;
+  /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
+  personaUrl:        string;
   /** SHA-256 hex of TW5 core blob. null = pre-CAS path. */
   coreHash:         string | null;
   /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from OPFS. */
@@ -68,13 +70,21 @@ export interface BrowserVerbPlacementRequest {
 export async function openBrowserDaemonVm(
   opts: BrowserDaemonVmOptions,
 ): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, coreHash, pluginCids, recipe, grants, daemonAuth, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, recipe, grants, daemonAuth, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (browser strategy: find-or-create) ────────────────────
   const daemonHandle = await (async () => {
     try {
       // automerge-repo 2.6: find() rejects on unavailable → caught below.
       return await repo.find<LarDoc>(daemonUrl as AutomergeUrl);
+    } catch {
+      return repo.create<LarDoc>(emptyLarDoc());
+    }
+  })();
+  // ── Persona doc handle (same find-or-create) — the one VM tends both bags ────
+  const personaHandle = await (async () => {
+    try {
+      return await repo.find<LarDoc>(personaUrl as AutomergeUrl);
     } catch {
       return repo.create<LarDoc>(emptyLarDoc());
     }
@@ -88,7 +98,7 @@ export async function openBrowserDaemonVm(
   // The wrapper IS the seam — host pieces + find-or-create daemonHandle; the lifecycle and the
   // whole result surface (DaemonVmCore) live once in the core. Return it directly, no re-spread.
   return openDaemonVmCore(host, {
-    repo, daemonHandle, recipe, grants, coreHash,
+    repo, daemonHandle, personaHandle, recipe, grants, coreHash,
     ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     workerScriptUrl,
