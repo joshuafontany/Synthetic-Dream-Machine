@@ -21,9 +21,9 @@
  *
  * Common flags:
  *   --yes             skip confirmation prompt
- *   --port <n>        admin daemon port
+ *   --port <n>        daemon port
  *
- * Each invocation submits a verb-tiddler to the admin vessel; the wiki island's
+ * Each invocation submits a verb-tiddler to the daemon vessel; the wiki island's
  * action-handler family executes the residency mutation wrapped in
  * withEffectRecord (writes the archival audit tiddlers).
  *
@@ -81,7 +81,7 @@ function printUsage(): void {
   console.error("  LOAD               --source-uri <u> --to <bag> [--change-id <id>]");
   console.error("");
   console.error("  --yes              skip confirmation prompt");
-  console.error("  --port <n>         admin daemon port");
+  console.error("  --port <n>         daemon port");
 }
 
 export async function cmdAct(args: ParsedArgs): Promise<number> {
@@ -236,9 +236,9 @@ export async function cmdAct(args: ParsedArgs): Promise<number> {
   // change-id (the --change-id default) means a genuinely distinct change → runs.
   const subject   = String(actionArgs["to-bag"] ?? actionArgs["bag"] ?? "");
   // --in-wiki: run the ACTION IN the active wiki island over ITS composite
-  // (where @working + canon both live) — the admin commands via `wiki-act`,
+  // (where @working + canon both live) — the daemon commands via `wiki-act`,
   // never reaching the per-fingerprint @working binding (operator ruling B,
-  // 2026-06-19). The default path executes admin-side (write-then-sync).
+  // 2026-06-19). The default path executes daemon-side (write-then-sync).
   const inWiki     = Boolean(args.flags["in-wiki"]);
   const submitName = inWiki ? "wiki-act" : verb;
   const submitArgs = inWiki ? { verb, args: actionArgs } : actionArgs;

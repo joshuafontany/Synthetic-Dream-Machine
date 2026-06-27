@@ -40,8 +40,8 @@ export function makeWikiPrimaryBehavior(manifest: IslandMsg_Manifest): IslandBeh
       const projector = new LarDiskProjector({
         mirrors,
         renderFn: (uri) => { try { return Promise.resolve(exportMemeText(ctx.tw5, uri)); } catch { return Promise.resolve(null); } },
-        // Disk-ward refusal → the admin VM (the generic worker.event → placeVerb
-        // bridge routes any event whose payload carries `verb`). The admin audits
+        // Disk-ward refusal → the daemon VM (the generic worker.event → placeVerb
+        // bridge routes any event whose payload carries `verb`). The daemon audits
         // it durably and injects a $:/tags/Alert into the operator's pinned VM.
         onRefusal: (info) => ctx.post({
           schema_version: 1,

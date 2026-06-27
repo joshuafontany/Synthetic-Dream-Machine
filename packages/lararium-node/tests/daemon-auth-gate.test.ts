@@ -6,7 +6,7 @@
  * AuthVerifierSeam. No Automerge-repo, no TW5, no filesystem.
  *
  * Post Stage 1 the host holds no keyhive — the gate arms with an AuthVerifierSeam
- * that proxies to the admin island, which does receiveContactCard + verify
+ * that proxies to the daemon island, which does receiveContactCard + verify
  * in-worker and returns the verdict plus the peer's Identifier hex.
  *
  * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/daemon-auth-gate
@@ -26,7 +26,7 @@ import {
 
 type StubVerifyResult = { ok: true } | { ok: false; reason: string };
 
-// Mirrors the admin island's verify-proxy: an `ok` verdict carries the peer's
+// Mirrors the daemon island's verify-proxy: an `ok` verdict carries the peer's
 // Identifier hex (receiveContactCard's id), which the gate keys its sharePolicy
 // map on; a denial carries only the reason.
 function makeStubSeam(opts: {

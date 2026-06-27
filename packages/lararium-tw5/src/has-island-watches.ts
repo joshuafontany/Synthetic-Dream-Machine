@@ -1,7 +1,7 @@
 /**
  * has-island-watches — the shared drift-watch caps a TW5 VM causal island composes.
  *
- * Both the admin and wiki islands ran `startEngineWatch` in onEa and stopped it in onHooAnu; the
+ * Both the daemon and wiki islands ran `startEngineWatch` in onEa and stopped it in onHooAnu; the
  * wiki island also ran `startRecipeWatch`. These extract those into `#has` caps so a nameless
  * island stacks them like any other component — the watch is a capability, not a behavior-class
  * member. Each cap's onEa returns the watch's stop fn, which composeIsland registers as a LIFO

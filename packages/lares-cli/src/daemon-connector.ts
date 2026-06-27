@@ -1,11 +1,11 @@
 /**
  * daemon-connector — connect the CLI to a running `lares serve` daemon as an
  * Automerge-repo WebSocket vessel connection, then submit verb-summons tiddlers
- * and await outcomes through the admin doc.
+ * and await outcomes through the daemon doc.
  *
  * Why vessel-not-RPC: verb-summons tiddlers + a CRDT sync channel preserve the
  * web3-only invariant. The CLI looks like any other vessel of the operator's
- * federation; the daemon's VerbDispatcher reacts to the same admin-doc changes
+ * federation; the daemon's VerbDispatcher reacts to the same daemon-doc changes
  * it would react to from a TW5 vm widget or a future ReactionEngine.
  *
  * Attach mode only (operator-chosen for B.5): the CLI requires a daemon to
@@ -36,7 +36,7 @@ import { loadLeafIdentity, LarWSClientAdapter } from "@lararium/node";
 export interface DaemonVesselHandle {
   readonly repo:      Repo;
   readonly composite: CompositeStore;
-  readonly admin:     DocHandle<LarDoc>;
+  readonly daemon:     DocHandle<LarDoc>;
   readonly disconnect: () => Promise<void>;
 }
 
@@ -65,12 +65,12 @@ function readDaemonUrl(bootstrapPath: string): string {
   const inner = JSON.parse(plugin.text);
   const url   = inner?.tiddlers?.[DAEMON_BAG_ID]?.text;
   if (typeof url !== "string") {
-    throw new Error(`admin AutomergeUrl missing from ${bootstrapPath}`);
+    throw new Error(`daemon AutomergeUrl missing from ${bootstrapPath}`);
   }
   return url;
 }
 
-/** Connect to the daemon, sync the admin doc, return helpers. */
+/** Connect to the daemon, sync the daemon doc, return helpers. */
 export async function connectDaemonVessel(opts: ConnectOptions = {}): Promise<DaemonVesselHandle> {
   const port = opts.port ?? larPort();
   const host = opts.host ?? "127.0.0.1";
@@ -105,13 +105,13 @@ export async function connectDaemonVessel(opts: ConnectOptions = {}): Promise<Da
     )),
   ]);
 
-  const admin = await repo.find<LarDoc>(daemonUrl as AutomergeUrl);
-  await admin.whenReady();
+  const daemon = await repo.find<LarDoc>(daemonUrl as AutomergeUrl);
+  await daemon.whenReady();
 
   const composite = new CompositeStore();
   composite.addLayer({
     bagId:    DAEMON_BAG_ID,
-    store:    new AutomergeDocStore(admin, DAEMON_BAG_ID),
+    store:    new AutomergeDocStore(daemon, DAEMON_BAG_ID),
     writable: true,
   });
 
@@ -120,7 +120,7 @@ export async function connectDaemonVessel(opts: ConnectOptions = {}): Promise<Da
     adapter.disconnect();
   };
 
-  return { repo, composite, admin, disconnect };
+  return { repo, composite, daemon, disconnect };
 }
 
 export interface SubmitOptions {
@@ -153,8 +153,8 @@ export function summaryOutput(result: SubmitResult): Record<string, unknown> | u
 }
 
 /**
- * Write a verb-summons tiddler to the shared admin CRDT doc, then SUBSCRIBE
- * to admin-doc changes for the durable @daemon/outcomes/<requestId> tiddler —
+ * Write a verb-summons tiddler to the shared daemon CRDT doc, then SUBSCRIBE
+ * to daemon-doc changes for the durable @daemon/outcomes/<requestId> tiddler —
  * its arrival IS the "done" signal (CRDT convergence = result; the change
  * event = the wake). The old 100ms poll loop died 2026-06-11: a busy-wait
  * wearing a web3 coat — the doc already knew how to call back.
@@ -211,12 +211,12 @@ export async function submitVerb(
       void readOutcome().then((r) => { if (r) settle(() => resolve(r)); });
     };
     const onChange = () => check();
-    vessel.admin.on("change", onChange);
+    vessel.daemon.on("change", onChange);
     const timer = setTimeout(
       () => settle(() => reject(new Error(`verb "${verb}" timed out after ${timeoutMs}ms`))),
       timeoutMs,
     );
-    const cleanup = () => { vessel.admin.off("change", onChange); clearTimeout(timer); };
+    const cleanup = () => { vessel.daemon.off("change", onChange); clearTimeout(timer); };
     check();   // the outcome may already exist (idempotent re-submission)
   });
 }

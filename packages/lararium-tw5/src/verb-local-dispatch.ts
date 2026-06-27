@@ -22,7 +22,7 @@ import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 export type CapVerify = (access: CapabilityAccess, bagUrl: string) => Promise<CapabilityVerifyResult>;
 
 export interface RunLocalVerbOptions {
-  readonly admin:     CompositeStore;
+  readonly daemon:    CompositeStore;
   readonly registry:  VerbTable;
   readonly verifier?: CapabilityVerifier;
 }
@@ -42,7 +42,7 @@ export function makeCapVerify(verifier: CapabilityVerifier | undefined, requeste
  * Conservative by construction so the gate NEVER under-protects: access defaults
  * to "admin" (admin ⊇ read, so a read-only verb merely over-gates in alpha, which
  * a per-verb table refines later); the target bag derives from the common arg
- * shapes; absent one it falls back to the admin bag (must-hold-admin-here).
+ * shapes; absent one it falls back to the daemon bag (must-hold-admin-here).
  */
 export function deriveRoutedCap(invocation: Verb): { access: CapabilityAccess; bagUrl: string } {
   const a = invocation.args as Record<string, unknown>;
@@ -59,5 +59,5 @@ export async function runLocalVerb(invocation: Verb, opts: RunLocalVerbOptions):
   }
 
   const cap = makeCapVerify(opts.verifier, invocation.requestedBy);
-  return handler(invocation.args, { admin: opts.admin, invocation, cap });
+  return handler(invocation.args, { daemon: opts.daemon, invocation, cap });
 }

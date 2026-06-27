@@ -14,7 +14,7 @@ import genesisBytes from "../../../genesis/island.bin?uint8array";
 // `?worker&url` — Vite builds each worker shim through its worker pipeline and yields the built
 // bundle's URL (a real /assets file). A standalone `new URL("./x.ts", import.meta.url)` passed
 // INDIRECTLY to the vessel got inlined as a `data:` URI, where the worker's dynamic imports
-// (keyhive-WASM-first, then the chain) cannot resolve — the admin/wiki boot's silent death.
+// (keyhive-WASM-first, then the chain) cannot resolve — the daemon/wiki boot's silent death.
 import daemonWorkerUrlStr from "./workers/daemon.worker.ts?worker&url";
 import wikiWorkerUrlStr  from "./workers/wiki.worker.ts?worker&url";
 

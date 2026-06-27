@@ -269,7 +269,7 @@ export function reconcileWellKnownTiddlers(
     `identities=${idOk  ? "ok" : identitiesUrl  ? "patched" : "pending"}`,
     `circles=${grOk     ? "ok" : groupsUrl       ? "patched" : "pending"}`,
     `sessions=${seOk    ? "ok" : sessionsUrl     ? "patched" : "pending"}`,
-    `admin=${adOk       ? "ok" : daemonUrl        ? "patched" : "pending"}`,
+    `daemon=${adOk       ? "ok" : daemonUrl        ? "patched" : "pending"}`,
   ].join("  ");
   console.log(`[genesis-artifact] oracle tiddlers  ${flags}`);
 }

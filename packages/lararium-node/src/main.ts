@@ -113,14 +113,14 @@ async function main(): Promise<void> {
       console.log(`[lararium] phase → ${phase}`);
     },
   });
-  if (result.activeWikiSource === "admin-marker" && result.activeWikiId !== wikiId) {
+  if (result.activeWikiSource === "daemon-marker" && result.activeWikiId !== wikiId) {
     console.log(`[lararium] active wiki marker: ${wikiId} → ${result.activeWikiId}`);
   }
   console.log(`[lararium] live — wiki: ${result.activeWikiId} | storage: ${storageDir} | root: ${rootDir}`);
   console.log(`[lararium] catalog:  ${result.catalogHandleUrl ?? "(none)"}`);
   console.log(`[lararium] oracle:   ${result.oracleDocUrl ?? "(none)"}`);
   console.log(`[lararium] lararium: ${result.larariumDocUrl ?? "(none)"}`);
-  console.log(`[lararium] admin:    ${result.admin.daemonHandle.url}`);
+  console.log(`[lararium] daemon:   ${result.daemon.daemonHandle.url}`);
   console.log(`[lararium] ws:       ws://localhost:${port}/ws#${result.oracleDocUrl ?? result.catalogHandleUrl ?? ""}`);
 
   // The @oracle read-only PUBLIC substrate (the Two-Faced Substrate's content-addressed
@@ -147,7 +147,7 @@ async function main(): Promise<void> {
   // for remote mesh peers. (lar:///…/api/lares-lararium-binding)
   const socketPath = join(storageDir, "lares.sock");
   const uds = startUdsChannel({
-    daemonHandle: result.admin.daemonHandle,
+    daemonHandle: result.daemon.daemonHandle,
     socketPath,
     onLog: (line) => console.log(`[lararium] ${line}`),
   });
@@ -164,7 +164,7 @@ async function main(): Promise<void> {
     console.log("[lararium] shutting down");
     oracleReadFace?.dispose();
     uds.close();
-    result.admin.dispose();
+    result.daemon.dispose();
     httpServer.close();
     process.exit(0);
   };

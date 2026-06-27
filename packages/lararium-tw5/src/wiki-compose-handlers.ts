@@ -121,7 +121,7 @@ export function makeRemoveBagReactor(opts: WikiComposeOptions): VerbReactor {
     const catalogHandle = await opts.catalog.handle();
     catalogHandle.change((doc) => { (doc.tiddlers as Record<string, LarTiddlerRecord>)[recipeTitle] = updated; });
 
-    // Pono: no live-layer unmount from admin. The recipe change syncs; each island
+    // Pono: no live-layer unmount from daemon. The recipe change syncs; each island
     // drops the bag itself (recipe-watch). Command main to release the bag's pin.
     // The alert stays the FALLBACK for islands that sleep through the change.
     opts.post(mkDaemonResidencyOp({ requestId: makeRequestId("resop"), op: "unpin", bagId: bagUrl }));

@@ -1,10 +1,10 @@
 /**
- * browser-daemon-island — browser Web Worker entry point for the admin island.
+ * browser-daemon-island — browser Web Worker entry point for the daemon island.
  *
- * Sovereign admin island AND the operator's authn/z home (isomorphic-vessel
+ * Sovereign daemon island AND the operator's authn/z home (isomorphic-vessel
  * Stage 1). Composition only: the browser sovereign kernel + the shared
- * keyhive-wired admin behavior (makeOperatorDaemonBehavior, @lararium/keyhive) —
- * byte-identical wiring to the node admin entry, which is why it lives once in
+ * keyhive-wired daemon behavior (makeOperatorDaemonBehavior, @lararium/keyhive) —
+ * byte-identical wiring to the node daemon entry, which is why it lives once in
  * keyhive. This file picks only the platform kernel.
  *
  * Island Sovereignty Law §9: TW5 boots here, inside a sovereign Worker.

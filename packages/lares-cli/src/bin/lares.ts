@@ -12,7 +12,7 @@
  *     can also run from inside the TW5 vm via the verb-tiddler protocol
  *     (see B.3 in packages/HANDOFF.md).
  *   - No HTTP/RPC surface here. CLI ↔ live-node coordination happens through
- *     the admin Automerge doc — CRDT-native, web2-free.
+ *     the daemon Automerge doc — CRDT-native, web2-free.
  *   - One surface, two actors (operator-peer #actor-parity): the same commands
  *     serve a HUMAN at a TTY and an AI AGENT acting programmatically. Output
  *     renders by audience — prose on a TTY, a deterministic structured payload
@@ -55,7 +55,7 @@ interface Command {
 
 const COMMANDS: readonly Command[] = [
   { name: "wake",          summary: "Boot ENTRY POINT (idempotent, every awakening): ensure the node up (attach if healthy, start detached if down) + emit a live hydration frame. --install founds the whole stack from a cold pull; --admit FILE joins an existing operator PersonaGroup (own keypair, same group) from a device-admit payload; --init stands up the mempalace palace (init + auto_save=false gate); --claude / --codex / --copilot wire the mempalace MCP + session ingest hook into ~/.claude / ~/.codex / ~/.copilot in each harness's own format; --vscode registers the mempalace MCP (recall) into every present VS Code variant (stable + Insiders, remote + local). All composable + idempotent.", handler: cmdWake },
-  { name: "init",          summary: "Bootstrap a new Lararium node (seed identities/circles/sessions/admin docs).", handler: cmdInit          },
+  { name: "init",          summary: "Bootstrap a new Lararium node (seed identities/circles/sessions/daemon docs).", handler: cmdInit          },
   { name: "act",           summary: "Residency Model ACTION verb (ADD/COPY/MOVE/CLEAR/DROP/LOAD). Run `lares act` for usage.", handler: cmdAct          },
   { name: "ingest",        summary: "Disk→records through the §6 gate: scan + diff (preview) or --apply through the island's INGEST verb.", handler: cmdIngest       },
   { name: "watch",         summary: "Watch a source dir and fire the ingest gesture per settle — one wave per quiet window. Preview by default; --apply submits.", handler: cmdWatch        },

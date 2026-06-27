@@ -33,7 +33,7 @@ export interface BrowserVesselIslandPoolOptions {
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (id: string, msg: IslandMsg_Event) => void;
   /** The engine's plugin-tiddler CIDs — every wiki island pulls them by CID from the local
-   *  CAS (the breath path), the same set the admin island gets. Constant per genesis. */
+   *  CAS (the breath path), the same set the daemon island gets. Constant per genesis. */
   pluginCids?: readonly string[];
 }
 

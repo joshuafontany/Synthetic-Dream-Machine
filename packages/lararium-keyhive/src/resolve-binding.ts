@@ -4,9 +4,9 @@
  *
  * Isomorphic + island-side (isomorphic-vessel epic). Lives in @lararium/keyhive
  * — the cap layer both platforms depend on — because the mint sequence needs
- * keyhive (`registerBag` + `delegate`), which lives only in the admin island
- * after Stage 1. Both platform admin-island entries call it from their
- * `resolveBinding` callback with the island Repo + admin composite + booted
+ * keyhive (`registerBag` + `delegate`), which lives only in the daemon island
+ * after Stage 1. Both platform daemon-island entries call it from their
+ * `resolveBinding` callback with the island Repo + daemon composite + booted
  * keyhive. (It also still runs host-inline in `open-node-vessel` until the flip
  * removes the host keyhive.)
  *
@@ -15,7 +15,7 @@
  * mid-sequence orphans a docUrl. Next boot recomputes the same fingerprint,
  * finds no binding, re-mints; the orphan stays unreferenced.
  *
- * Daemon reads/writes go through the admin-bag CompositeStore (`get` /
+ * Daemon reads/writes go through the daemon-bag CompositeStore (`get` /
  * `put({bag: DAEMON_BAG_ID})`) — host: `daemonVm.composite`; island: `ctx.composite`.
  *
  * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot
@@ -58,7 +58,7 @@ export interface ResolveBindingArgs {
    * Daemon-bag composite — reads existing bindings + writes new binding tiddlers.
    * Host-side: `daemonVm.composite`; island-side: the worker's `ctx.composite`.
    */
-  readonly adminStore: CompositeStore;
+  readonly daemonStore: CompositeStore;
   /** Keyhive provider — registers the minted bag + delegates it to the PersonaGroup. */
   readonly keyhive: CapabilityProvider;
   /**
@@ -85,7 +85,7 @@ export interface ResolveBindingResult {
  *
  * Reuse-on-present returns the stored URL WITHOUT minting or delegating — the
  * binding (and its delegation) already federated to this device through the
- * admin-doc keyhive layer. Reuse MUST NOT block boot on a doc not yet
+ * daemon-doc keyhive layer. Reuse MUST NOT block boot on a doc not yet
  * decryptable on this device (the two-phase Keyhive window): the caller mounts
  * the URL and the island surfaces it when sync delivers the BeeKEM key. See
  * personal-slot#lifecycle "authorized-but-undecryptable window".
@@ -94,7 +94,7 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   const key = `${args.prefix}/${args.fingerprint}`;
 
   // Reuse-on-present — the binding tiddler already replicated to this device.
-  const existing = tiddlerText(await args.adminStore.get(key));
+  const existing = tiddlerText(await args.daemonStore.get(key));
   if (existing) return { url: existing, minted: false };
 
   // Mint-on-absent — Q7 idempotent sequence: create → registerBag → delegate → put.
@@ -115,10 +115,10 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
     access:   "admin",
   });
 
-  // Record the binding in the admin doc — replicates to the operator's other
+  // Record the binding in the daemon doc — replicates to the operator's other
   // devices, where reuse-on-present finds it next boot.
   const origin: ChangeOrigin = { kind: "lares-verb", requestId: `binding-${args.fingerprint.slice(0, 8)}` };
-  await args.adminStore.put(mutableLarRecord(key, {
+  await args.daemonStore.put(mutableLarRecord(key, {
     text:          handle.url,
     kind:          args.kind,
     fingerprint:   args.fingerprint,

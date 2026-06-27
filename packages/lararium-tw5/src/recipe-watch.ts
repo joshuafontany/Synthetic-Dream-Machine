@@ -14,7 +14,7 @@
  *   - oracle URL moved (epoch)  → swap the layer's store in place at the same
  *     cascade position, replay from the new doc.
  *
- * Pono: the admin never reaches in — it writes the catalog and each island
+ * Pono: the daemon never reaches in — it writes the catalog and each island
  * reconciles itself. After a successful reconcile the island clears its own
  * reboot-pending alert (@temp): the alert remains the FALLBACK for islands
  * that sleep through the change; the engine-epoch class keeps the alert as
@@ -130,7 +130,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
 
   const reconcile = async (): Promise<void> => {
     const rec = loadRecipeRec();
-    if (!rec) return;   // no recipe registered (e.g. the admin island) — idle
+    if (!rec) return;   // no recipe registered (e.g. the daemon island) — idle
     let applied = false;
 
     // ── membership: library bags ──
@@ -146,7 +146,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
     for (const bagId of desired) {
       if (ctx.composite.hasBag(bagId)) continue;
       const docUrl = await urlOfBag(bagId);
-      if (!docUrl) continue;   // unregistered — the admin's alert stays the fallback
+      if (!docUrl) continue;   // unregistered — the daemon's alert stays the fallback
       if (await mountAt(bagId, docUrl, libraryInsertIndex())) applied = true;
     }
 
@@ -163,7 +163,7 @@ export async function startRecipeWatch(ctx: IslandContext): Promise<(() => void)
       applied = true;
     }
 
-    // The change just applied live — the reboot-pending notice (if the admin's
+    // The change just applied live — the reboot-pending notice (if the daemon's
     // alert verb raced ahead of this reconcile) no longer holds.
     if (applied && ctx.composite.hasWritableBag(TEMP_BAG)) {
       await ctx.composite.tombstoneInBag(TEMP_BAG, REBOOT_ALERT_TITLE, origin());

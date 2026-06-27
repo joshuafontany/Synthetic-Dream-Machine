@@ -85,8 +85,8 @@ export function buildIslandRecipe(input: BuildIslandRecipeInput): {
   // resolve `lar:` writes to the wiki's live WRITE LAYER. An operator content wiki
   // points at @working (the saved live layer, projecting wikis/{slug}); its @{slug}
   // canon rides below as read-only, published only by a promotion MOVE
-  // (wiki-layer-ontology#shore-law). A grant-less mount — the @daemon administrative
-  // DAEMON, a control plane with no working/canon split — has no @working layer, so
+  // (wiki-layer-ontology#shore-law). A grant-less mount — @daemon itself,
+  // a control plane with no working/canon split — has no @working layer, so
   // it falls back to its OWN bag (wikiBagUri(slug) = @daemon, granted), keeping a
   // writable default path instead of throwing on the first cascade-routed edit.
   // Volatile (lives in @temp), set once at boot, shadows any fallback by priority.

@@ -8,7 +8,7 @@
  *
  *   lares telemetry --wing <w>        project readings onto a wing's drawers
  *   lares telemetry --wing <w> --limit N   cap drawers processed this pass
- *   lares telemetry --wing <w> --port <n>  admin daemon port
+ *   lares telemetry --wing <w> --port <n>  daemon port
  *
  * Idempotent (the lar_hv gate skips already-current drawers). If the daemon is
  * down, telemetry no-ops (verbatim capture already landed; the lar_hv sweep

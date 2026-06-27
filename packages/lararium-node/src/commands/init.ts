@@ -105,7 +105,7 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
     // ── Vessel-admission path = the UPGRADE event (a fresh vessel joins a PersonaGroup) ──
     // The joinee's vessel key (above) is the DELEGATE; the payload carries the pinned signer +
     // the root→joinee edge (the founder's PersonaGroup root signed it). The joinee writes that
-    // binding into its OWN admin doc and boots through its Binding Gate — no Beelay, no cap events.
+    // binding into its OWN daemon doc and boots through its Binding Gate — no Beelay, no cap events.
     if (!existsSync(opts.admitPayloadPath)) {
       throw new Error(`[lares init --admit] payload file not found: ${opts.admitPayloadPath}`);
     }

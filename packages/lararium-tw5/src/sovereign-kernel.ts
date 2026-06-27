@@ -111,7 +111,7 @@ export function runSovereignKernel(
   const handler = new IslandKernel(_post);
 
   // Factory form: when a manifest-keyed factory is passed, the behavior resolves
-  // lazily on first manifest — so the admin entry can read manifest.daemonAuth
+  // lazily on first manifest — so the daemon entry can read manifest.daemonAuth
   // (the operator seed) at construction time.
   let behavior: IslandBehavior | null = typeof behaviorOrFactory === "function" ? null : behaviorOrFactory;
   const _resolveBehavior = (msg: IslandMsg_Manifest): IslandBehavior => {
@@ -146,7 +146,7 @@ export function runSovereignKernel(
       return;
     }
 
-    // Delegate to behavior — admin handles admin:place-verb, admin:verb-result, etc.
+    // Delegate to behavior — daemon handles daemon:place-verb, daemon:verb-result, etc.
     if (_ctx && behavior && behavior.onSignal(raw.type, raw, _ctx)) return;
   });
 

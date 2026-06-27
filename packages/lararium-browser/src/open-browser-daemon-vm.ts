@@ -1,5 +1,5 @@
 /**
- * openBrowserDaemonVm — browser host wrapper over the shared admin-VM core.
+ * openBrowserDaemonVm — browser host wrapper over the shared daemon-VM core.
  *
  * The lifecycle lives in @lararium/tw5 `openDaemonVmCore` — ONE core both
  * vessels compose. This file supplies the browser platform pieces:
@@ -11,7 +11,7 @@
  * (authSeam, resolveBinding); when it needs them they compose the same way —
  * a second listener on the core's exposed worker handle.
  *
- * Boot ordering: workerEa resolves only after the admin island sends "ea".
+ * Boot ordering: workerEa resolves only after the daemon island sends "ea".
  * openBrowserVessel awaits it before emitting "live".
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/open-browser-daemon-vm
@@ -39,16 +39,16 @@ export interface BrowserDaemonVmOptions {
   coreHash:         string | null;
   /** CIDs of the engine's plugin-tiddler blobs — the worker pulls them by CID from OPFS. */
   pluginCids?:      readonly string[];
-  /** Canonical one-recipe model for the admin island. */
+  /** Canonical one-recipe model for the daemon island. */
   recipe:           WikiRecipe;
   /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
   grants:           IslandGrants;
   /**
-   * Operator authn/z material delivered to the admin island for in-worker
+   * Operator authn/z material delivered to the daemon island for in-worker
    * keyhive boot (Stage 1) — seed + sentinel hexes + bags to register.
    */
   daemonAuth?:       IslandMsg_Manifest["daemonAuth"];
-  /** URL of the compiled browser admin island Worker script. */
+  /** URL of the compiled browser daemon island Worker script. */
   workerScriptUrl:  URL;
 }
 

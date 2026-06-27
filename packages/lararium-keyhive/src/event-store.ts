@@ -8,7 +8,7 @@
  * Phase D.2 ships an InMemoryEventStore — sufficient for the smoke test
  * and unit work. D.4 introduces a tiddler-backed DaemonEventStore that
  * persists events under lar:///ha.ka.ba/@daemon/cap/<hash> in
- * the admin doc.
+ * the daemon doc.
  *
  * On daemon boot, the EventStore lists all stored events and replays them
  * via Keyhive.ingestEventsBytes() to restore in-memory state. Events are

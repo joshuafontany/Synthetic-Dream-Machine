@@ -168,9 +168,9 @@ export interface SubmitIngestOpts {
   readonly massDeleteFraction?: number;
   /**
    * Run the INGEST IN the active wiki island over ITS composite — the path
-   * for `@working` (the per-fingerprint write layer the admin never reaches,
-   * operator ruling B 2026-06-19). The admin commands via `wiki-act` wrapping
-   * the INGEST; the default path executes admin-side (canon bags).
+   * for `@working` (the per-fingerprint write layer the daemon never reaches,
+   * operator ruling B 2026-06-19). The daemon commands via `wiki-act` wrapping
+   * the INGEST; the default path executes daemon-side (canon bags).
    */
   readonly inWiki?: boolean;
 }
@@ -203,7 +203,7 @@ export async function submitIngestOn(
   };
   // --in-wiki: wrap the INGEST so it runs IN the active wiki island over its
   // composite (where @working lives), mirroring `lares act --in-wiki`. The
-  // default submits admin-side for canon bags.
+  // default submits daemon-side for canon bags.
   const submitName = opts.inWiki ? "wiki-act" : "INGEST";
   const submitArgs = opts.inWiki ? { verb: "INGEST", args: actionArgs } : actionArgs;
   const requestId = await taskContentId({ subject: opts.toBag, command: submitName, args: submitArgs, nonce: "" });

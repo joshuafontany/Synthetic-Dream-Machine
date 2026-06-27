@@ -60,7 +60,7 @@ function ctx(composite: CompositeStore, args: Record<string, unknown>): VerbCont
     action: "INGEST", args, targets: [], batchMode: "best-effort",
     status: "pending", requestedBy: "operator-test", requestedAt: "2026-06-12T00:00:00Z",
   };
-  return { admin: composite, invocation, cap: allowCap };
+  return { daemon: composite, invocation, cap: allowCap };
 }
 
 /** Seed the bag with the boot meme's decomposed records (the fed state). */

@@ -14,7 +14,7 @@ export const TAG_PREFIX = `${LAR_PREFIX}tags/` as const;
 // ── Volatile VM l-space ───────────────────────────────────────────────────
 // Ha/domain=lararium · Ka/quality=local · Ba/dynamic=vm
 // Tiddlers here are scratch — never persisted through IslandAdaptor, never
-// synced via Automerge. Each vessel's admin VM owns its own volatile namespace.
+// synced via Automerge. Each vessel's daemon VM owns its own volatile namespace.
 export const VOLATILE_VM_L_SPACE = "lararium.local.vm";
 export const VOLATILE_VM_PREFIX   = `lar:///${VOLATILE_VM_L_SPACE}/` as const;
 
@@ -92,7 +92,7 @@ export const LARARIUM_BAG_MIRROR_TAG = stableTagUri("lararium-bag-mirror");
 export const LARES_VERB_TAG = stableTagUri("lares-verb");
 export const LARES_VERB_EVENT_TAG = stableTagUri("lares-verb-event");
 export const LARES_PIN_TAG = stableTagUri("lares-pin");
-/** Keyhive capability events persisted in the admin doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
+/** Keyhive capability events persisted in the daemon doc. Sub-tags: .../prekey, .../cgka, .../delegation, .../revocation */
 export const CAP_EVENT_TAG = stableTagUri("cap-event");
 export const CAP_EVENT_PREKEY_TAG     = stableTagUri("cap-event/prekey");
 export const CAP_EVENT_CGKA_TAG       = stableTagUri("cap-event/cgka");
@@ -246,7 +246,7 @@ export const DEVICE_DELEGATION_SELF_TIDDLER = `${DAEMON_BAG_ID}/delegation/self`
 
 // ── @personal / @draft binding tiddler prefixes ───────────────────────────
 // The (PersonaGroup × recipe-fingerprint) → docUrl bindings live as tiddlers in
-// the admin doc under these prefixes. One fingerprint produces THREE bindings
+// the daemon doc under these prefixes. One fingerprint produces THREE bindings
 // (@personal, @draft, @working) that share a lifecycle. The binding tiddler
 // title is `${PREFIX}/${fingerprintHex}`; its `text` carries the bound URL.
 // Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim

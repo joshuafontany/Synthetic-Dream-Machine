@@ -32,7 +32,7 @@ export async function cmdHeleuma(args: ParsedArgs): Promise<number> {
  *
  *  Runs the BUILT dist, never tsx-source: the sovereign island workers spawn from
  *  compiled `.js` siblings (`node-daemon-island.js` / `node-wiki-island.js`, no
- *  `execArgv`), so a tsx-source run produces a half-dead vessel (port bound, admin
+ *  `execArgv`), so a tsx-source run produces a half-dead vessel (port bound, daemon
  *  worker ERR_MODULE_NOT_FOUND). `node dist/src/main.js` is the design boot (= the
  *  package `start` script, the handoff's canonical hearth, the e2e harness). Scouted
  *  2026-06-16; hoike #dev-loop-restart. */

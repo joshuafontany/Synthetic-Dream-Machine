@@ -39,9 +39,9 @@
  *      The main thread holds `DocHandle` references and `CompositeStore` layers; it does not
  *      hold or reference `TW5Engine`. Any code that calls `bootTw5()` or instantiates
  *      `TW5Engine` outside a Worker constitutes a sovereignty violation.
- *      Boot sites (all inside Workers): `lar-admin-island.ts` (Node admin),
+ *      Boot sites (all inside Workers): `node-daemon-island.ts` (Node daemon),
  *      `lar-wiki-island.ts` (Node wiki), `browser-wiki-worker.ts` (browser wiki),
- *      `browser-daemon-island.ts` (browser admin). Main-thread entry files carry no TW5 import.
+ *      `browser-daemon-island.ts` (browser daemon). Main-thread entry files carry no TW5 import.
  *
  * GP-1: schema_version on every message. Lock at 1; increment on breaking changes.
  * GP-2: all payloads are plain objects; no class instances, no functions, no DOM.
@@ -130,7 +130,7 @@ export interface IslandGrants {
   catalogUrl?:  string | null;
   /** The island's OWN bag (@<wikiSlug>; @daemon under the one-recipe model). */
   wikiUrl?:     string | null;
-  /** Keyhive-bound sovereign slots (admin resolveBinding grants). */
+  /** Keyhive-bound sovereign slots (daemon resolveBinding grants). */
   personalUrl?: string | null;
   draftUrl?:    string | null;
   /** @working — the SAVED live write layer (PersonaGroup×fingerprint-bound, like
@@ -174,13 +174,13 @@ export interface IslandMsg_Manifest {
    */
   diskMirrors?: readonly { bagId: string; mirrorRoot: string; scope: string }[];
   /**
-   * ADMIN-ISLAND ONLY — operator authn/z material for in-worker keyhive boot
-   * (isomorphic-vessel epic, Stage 1). The admin worker's `onEa` calls
-   * `bootDaemonKeyhive` with this + its admin CompositeStore (the cap-event
+   * DAEMON-ISLAND ONLY — operator authn/z material for in-worker keyhive boot
+   * (isomorphic-vessel epic, Stage 1). The daemon worker's `onEa` calls
+   * `bootDaemonKeyhive` with this + its daemon CompositeStore (the cap-event
    * EventStore backing). Populated ONLY by openDaemonVm / openBrowserDaemonVm;
    * wiki manifests leave it absent, so the operator seed never reaches a wiki
    * worker. The seed crossing the worker boundary is the deliberate custody
-   * boundary (operator-confirmed): the admin island is the authn/z home.
+   * boundary (operator-confirmed): the daemon island is the authn/z home.
    */
   daemonAuth?: {
     /** 32-byte operator signing seed. */
@@ -235,18 +235,18 @@ export interface IslandMsg_Teardown {
 
 // ── Daemon island protocol ─────────────────────────────────────────────────
 //
-// Three-message round-trip for admin island verb coordination.
+// Three-message round-trip for daemon island verb coordination.
 //
-// Vessel → island: DaemonMsg_PlaceVerb   — place a volatile verb invocation in the admin TW5 wiki.
+// Vessel → island: DaemonMsg_PlaceVerb   — place a volatile verb invocation in the daemon TW5 wiki.
 // Island → vessel: DaemonMsg_DelegateVerb — delegate a wiki-scope verb whose handler lives on main.
 // Vessel → island: DaemonMsg_VerbResult  — deliver delegation result or error back to island.
 //
-// The admin island owns the TW5 wiki event surface (kumu device law).
-// All verbs pass through the admin wiki change event → VerbDispatcher tick.
+// The daemon island owns the TW5 wiki event surface (kumu device law).
+// All verbs pass through the daemon wiki change event → VerbDispatcher tick.
 // Wiki-scope handlers that need vessel resources (repo, catalogHandle, etc.)
 // delegate via DaemonMsg_DelegateVerb; the island awaits DaemonMsg_VerbResult before writing outcome.
 
-/** Vessel → island: place a volatile verb invocation in the admin island's TW5 wiki. */
+/** Vessel → island: place a volatile verb invocation in the daemon island's TW5 wiki. */
 export interface DaemonMsg_PlaceVerb {
   schema_version: ProtocolVersion;
   type: "daemon:place-verb";
@@ -262,7 +262,7 @@ export interface DaemonMsg_PlaceVerb {
 
 /**
  * Island → vessel: delegate a wiki-scope verb to the vessel handler registry.
- * Emitted when the admin island's VerbDispatcher encounters a verb not in its local registry.
+ * Emitted when the daemon island's VerbDispatcher encounters a verb not in its local registry.
  * The vessel executes the handler and posts DaemonMsg_VerbResult back.
  */
 export interface DaemonMsg_DelegateVerb {
@@ -288,7 +288,7 @@ export interface DaemonMsg_VerbResult {
 // ---------------------------------------------------------------------------
 // Auth verify proxy (isomorphic-vessel epic, Stage 1+2)
 // ---------------------------------------------------------------------------
-// Keyhive lives in the admin island after Stage 1, but inbound untrusted peers
+// Keyhive lives in the daemon island after Stage 1, but inbound untrusted peers
 // land on the HOST transport (node WS server). The host's AuthVerifierSeam asks
 // the island to verify each peer; the island answers via its keyhive. Path (b).
 
@@ -333,7 +333,7 @@ export interface DaemonMsg_VerifyResult {
 // ---------------------------------------------------------------------------
 // @personal / @draft binding resolution (isomorphic-vessel epic, Stage 1)
 // ---------------------------------------------------------------------------
-// resolveOrMintBinding mints + delegates via keyhive, which lives in the admin
+// resolveOrMintBinding mints + delegates via keyhive, which lives in the daemon
 // island after Stage 1. The host posts a request with the recipe fingerprint;
 // the island mints/reuses against its Repo + keyhive and returns the doc URLs.
 
@@ -358,7 +358,7 @@ export interface DaemonMsg_ResolveBindingResult {
 }
 
 // ── Eviction command (sovereign-worker: policy in worker, mechanism at the pool) ──
-// The admin WORKER owns residency POLICY (who/what to evict, gated by keyhive). The
+// The daemon WORKER owns residency POLICY (who/what to evict, gated by keyhive). The
 // pool MECHANISM (mount/teardown of main-thread lanes) stays main-side. So the worker
 // INITIATES an eviction by sending this command; the main pool obeys + acks. The worker
 // holds a CAPABILITY (this channel) to the pool, never the pool itself.
@@ -408,12 +408,12 @@ export interface DaemonMsg_ResidencyOpResult {
 }
 
 /**
- * Island (admin worker) → vessel: seed a reboot-pending alert into a live wiki's
- * @temp. A reboot-requiring admin change (recipe/oracle/active-marker edit — all in
+ * Island (daemon worker) → vessel: seed a reboot-pending alert into a live wiki's
+ * @temp. A reboot-requiring daemon change (recipe/oracle/active-marker edit — all in
  * bags the wiki island doesn't load) syncs but only applies on the wiki's next boot;
- * the admin commands main to deliver a `system-alert` verb to the affected live
+ * the daemon commands main to deliver a `system-alert` verb to the affected live
  * island so the operator sees it. Fire-and-forget (best-effort UX); main skips wikis
- * that aren't mounted. The admin computes "affected by content"; main filters "live".
+ * that aren't mounted. The daemon computes "affected by content"; main filters "live".
  */
 export interface DaemonMsg_WikiAlert {
   schema_version: ProtocolVersion;
@@ -483,7 +483,7 @@ export interface IslandMsg_Ea {
  * Mount-progress breath — the island signals it still breathes while mounting.
  *
  * The ea-breath law: a mounting island that still emits never reads dead,
- * however long the mount. Vessel watchdogs (admin VM, island pool) re-arm
+ * however long the mount. Vessel watchdogs (daemon VM, island pool) re-arm
  * their silence window on each breath; silence alone times out. `phase`
  * names the mount stage underway, so a silence timeout can say where the
  * breathing stopped. Emission ends at settle (`ea` or `fault`).
@@ -515,7 +515,7 @@ export interface IslandMsg_Fault {
 /**
  * Vessel → island: place a wiki-scope verb invocation into a wiki island's TW5 wiki.
  *
- * Parallel to DaemonMsg_PlaceVerb for the admin island. Any island running a
+ * Parallel to DaemonMsg_PlaceVerb for the daemon island. Any island running a
  * wiki dispatch behavior handles this by calling placeVerb on its TW5 wiki.
  * The wiki change event fires at next tick; the island's VerbDispatcher dispatches it.
  */
@@ -936,7 +936,7 @@ export function mkWikiVerbResult(opts: {
 // ── AuthVerifierSeam — host-side verify proxy (path b) ─────────────────────
 //
 // The host transport (node WS gate) holds no keyhive after Stage 1; it asks the
-// admin island to verify each inbound peer (the DaemonMsg_VerifyRequest/Result
+// daemon island to verify each inbound peer (the DaemonMsg_VerifyRequest/Result
 // pair above) and keys its sharePolicy map off the returned `identifier`. Node
 // binds this to DaemonAuthGate; the browser leaves it unbound (no inbound peer yet).
 export interface AuthVerifierSeam {

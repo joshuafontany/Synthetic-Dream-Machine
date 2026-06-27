@@ -7,7 +7,7 @@
  * revocation rides the Keyhive membership graph (`orichalcum-capabilities`).
  *
  * Convergence WITHOUT a coordinator: the epoch is a max-register held as **per-writer slots** —
- * one admin tiddler per writer (`@daemon/lease-epoch/{resource}/{writer}`). Each writer owns its
+ * one daemon tiddler per writer (`@daemon/lease-epoch/{resource}/{writer}`). Each writer owns its
  * slot (last-writer-wins WITHIN a slot is safe — one writer holds it); the effective epoch = max
  * over all slots. Two concurrent rolls both land effective+1 in their own slots, so the max stays
  * effective+1 (the collapse is fine for a liveness lease). A bare scalar would let Automerge's LWW

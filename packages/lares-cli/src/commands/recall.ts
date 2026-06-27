@@ -13,7 +13,7 @@
  *   lares recall <kw> --limit <n>       cap results (default 5)
  *   lares recall --drawer <id>          fetch one drawer verbatim
  *   lares recall --list [--wing <w>]    list drawers (no query)
- *   lares recall ... --port <n>         admin daemon port
+ *   lares recall ... --port <n>         daemon port
  *
  * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory#shared-mesh
  */

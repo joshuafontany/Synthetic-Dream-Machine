@@ -1,5 +1,5 @@
 /**
- * openDaemonVm — node host wrapper over the shared admin-VM core.
+ * openDaemonVm — node host wrapper over the shared daemon-VM core.
  *
  * The lifecycle lives in @lararium/tw5 `openDaemonVmCore` — ONE core both
  * vessels compose. This file supplies the node platform pieces:
@@ -12,7 +12,7 @@
  * on top via a second listener on the core's exposed worker handle — they are
  * node-only surface the browser has not built yet, not duplication.
  *
- * Boot ordering: `workerEa` resolves only after the admin island sends `ea`.
+ * Boot ordering: `workerEa` resolves only after the daemon island sends `ea`.
  * `openNodeVessel` awaits it before emitting `"live"`.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/open-daemon-vm
@@ -40,28 +40,43 @@ export interface DaemonVmOptions {
   daemonUrl:          string;
   /**
    * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
-   * null = pre-CAS. The admin island reads bytes from the @lararium CRDT doc.
+   * null = pre-CAS. The daemon island reads bytes from the @lararium CRDT doc.
    */
   coreHash:          string | null;
   /** Typed structural capabilities: @lararium engine, @daemon bag, @lares,
    *  @catalog access. Library bags resolve island-side from @catalog. */
   grants:            IslandGrants;
-  /** Optional canon bag URIs for the admin recipe. Empty by default. */
+  /** Optional canon bag URIs for the daemon recipe. Empty by default. */
   libraryBags?:        readonly string[];
   /**
-   * Operator authn/z material delivered to the admin island so it boots keyhive
+   * Operator authn/z material delivered to the daemon island so it boots keyhive
    * in-worker (Stage 1). Seed + sentinel hexes + the bags to register. The seed
    * crossing the worker boundary is the deliberate custody boundary.
    */
   daemonAuth?:        IslandMsg_Manifest["daemonAuth"];
-  /** Optional storage dir for the admin island's NodeFS Repo. */
+  /** Optional storage dir for the daemon island's NodeFS Repo. */
   storageDir?:       string;
-  /** Override the admin island script URL (tests). */
+  /**
+   * Optional telemetry SINK config. The @daemon ALWAYS carries the capture cap (idempotent);
+   * passing this rides it to the daemon island as workerData, wiring the cap LIVE (the node sink:
+   * `mine --source ndjson` + fs-WAL + the self-regulating two-loop). Absent → the cap stays inert.
+   */
+  telemetry?: {
+    readonly palacePath: string;
+    readonly spoolDir: string;
+    readonly walPath: string;
+    readonly quarantinePath: string;
+    readonly mempalaceBin?: string;
+    readonly tickMs?: number;
+    readonly targetLatencyMs?: number;
+    readonly holdingCostPerMs?: number;
+  };
+  /** Override the daemon island script URL (tests). */
   workerScriptUrl?:  URL;
 }
 
 export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, coreHash, grants, libraryBags, daemonAuth, storageDir, workerScriptUrl } = opts;
+  const { repo, daemonUrl, coreHash, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (node strategy: merge-on-late-arrival) ────────────────
   const daemonHandle = await resolveBootDoc<LarDoc>(
@@ -69,10 +84,10 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
     { tideline: "hearth-private", label: "@daemon" },
   );
 
-  // The admin holds NO standing system-bag mount: it reaches a deep target bag
+  // The daemon holds NO standing system-bag mount: it reaches a deep target bag
   // by ACCESS per residency action (ephemeral mount, released after — the
   // edit/action split, wiki-layer-ontology#write-law; the interim write-facet
-  // mount retired 2026-06-16). The admin's own composite stays its recipe alone.
+  // mount retired 2026-06-16). The daemon's own composite stays its recipe alone.
   const recipe: WikiRecipe = {
     wikiSlug: "daemon",
     ...(libraryBags?.length ? { libraryBags } : {}),
@@ -83,7 +98,9 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
 
   const host: DaemonVmHost = {
     newSyncChannel: nodeNewSyncChannel,
-    spawnWorker:    nodeSpawnWorker,
+    // Inject the telemetry SINK as workerData via a closure — the daemon island reads it to wire
+    // its standing capture cap LIVE. openDaemonVmCore stays untouched (it calls spawnWorker(url)).
+    spawnWorker:    (url) => nodeSpawnWorker(url, telemetry ? { telemetry } : undefined),
   };
 
   // The wrapper IS the seam — host pieces + recipe/storage + merge-on-arrival daemonHandle;

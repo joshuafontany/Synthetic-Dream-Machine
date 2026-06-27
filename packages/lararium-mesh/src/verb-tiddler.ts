@@ -1,15 +1,15 @@
 /**
- * verb-tiddler — volatile verb invocation protocol for the admin causal island.
+ * verb-tiddler — volatile verb invocation protocol for the daemon causal island.
  *
  * Two-tiddler contract:
  *
  *   verbs/<requestId>     VOLATILE scratch tiddler in lararium.local.vm.
- *                         Lives in the admin TW5 wiki only. Never synced via
+ *                         Lives in the daemon TW5 wiki only. Never synced via
  *                         Automerge. Tombstoned by the dispatcher after the
  *                         outcome lands. Local intent lives here, not shared truth.
  *
  *   @daemon/outcomes/<id>  DURABLE outcome tiddler in the Automerge-backed
- *                         admin bag. Written by the dispatcher on done/error.
+ *                         daemon bag. Written by the dispatcher on done/error.
  *                         Syncs to all vessels. CRDT convergence here IS the result.
  *                         Shared aftermath lives here.
  *
@@ -28,7 +28,7 @@
  *   "summary" key so all observers read one durable payload grammar.
  *
  * Reaction Engine note (UEFN / kumu):
- *   Each lararium vessel runs its own admin VM + VerbDispatcher. Invocations are
+ *   Each lararium vessel runs its own daemon VM + VerbDispatcher. Invocations are
  *   vessel-local; outcomes sync via CRDT. When the Verse-inspired ReactionEngine
  *   matures, verb invocations become one shape of reaction trigger among many
  *   (event-signal tiddlers, alarm tiddlers, recipe-deltas). VerbReactor signatures
@@ -38,7 +38,7 @@
  *   - Tiddler-format law: every invocation/outcome is a normal tiddler with lar: URI.
  *   - Web3 law: no HTTP/RPC control plane; verb submission routes through TW5 wiki
  *     events or Automerge sync — never a named server endpoint.
- *   - Causal-island law: each vessel's admin VM owns its own volatile verb namespace.
+ *   - Causal-island law: each vessel's daemon VM owns its own volatile verb namespace.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler
  */
@@ -52,7 +52,7 @@ import type { LarTiddlerRecord } from "./tiddler-store.js";
 
 // ── URI prefixes ───────────────────────────────────────────────────────────
 
-/** Volatile verb invocation tiddlers — admin TW5 wiki scratch, never synced. */
+/** Volatile verb invocation tiddlers — daemon TW5 wiki scratch, never synced. */
 export const VERB_URI_PREFIX = `${VOLATILE_VM_PREFIX}verbs/`;
 
 /** Automerge-backed verb summons — remote vessels write here; dispatcher translates

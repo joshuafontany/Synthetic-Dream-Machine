@@ -24,12 +24,12 @@ describe("active-wiki", () => {
     });
   });
 
-  test("selectActiveWikiSlug prefers the admin marker when present", () => {
+  test("selectActiveWikiSlug prefers the daemon marker when present", () => {
     expect(selectActiveWikiSlug("default-room", {
       tiddler: { title: ACTIVE_WIKI_URI, text: "selected-room" },
     })).toEqual({
       slug: "selected-room",
-      source: "admin-marker",
+      source: "daemon-marker",
     });
   });
 

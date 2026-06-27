@@ -1,4 +1,4 @@
-// Shared worker-boot parts for the island worker shims (admin · wiki). Both register the same
+// Shared worker-boot parts for the island worker shims (daemon · wiki). Both register the same
 // self-error relay and instantiate the keyhive WASM the same way before their island chain
 // evaluates; only the island body import differs (kept a static literal in each entry so Vite
 // statically resolves the worker bundle — vitejs/vite#10837).

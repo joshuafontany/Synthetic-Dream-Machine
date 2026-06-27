@@ -10,7 +10,7 @@ import {
 
 export const ACTIVE_WIKI_URI = `${DAEMON_BAG_ID}/active-wiki`;
 
-export type ActiveWikiSelectionSource = "boot-arg" | "admin-marker";
+export type ActiveWikiSelectionSource = "boot-arg" | "daemon-marker";
 
 export interface ActiveWikiSlotPlan {
   readonly wikiSlug: string;
@@ -40,7 +40,7 @@ export function selectActiveWikiSlug(
 ): { slug: string; source: ActiveWikiSelectionSource } {
   const selected = readActiveWikiSlug(record);
   return selected
-    ? { slug: selected, source: "admin-marker" }
+    ? { slug: selected, source: "daemon-marker" }
     : { slug: fallbackSlug, source: "boot-arg" };
 }
 

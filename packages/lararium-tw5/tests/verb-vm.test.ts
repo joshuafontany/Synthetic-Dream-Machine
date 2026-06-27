@@ -100,51 +100,51 @@ describe("verb-vm", () => {
   });
 
   test("writeOutcome emits a durable summary outcome", async () => {
-    const admin = new FakeDaemonStore();
+    const daemon = new FakeDaemonStore();
     const invocation = makeInvocation();
 
-    await writeOutcome(admin as unknown as CompositeStore, {
+    await writeOutcome(daemon as unknown as CompositeStore, {
       invocation,
       status: "done",
       result: { recordsIngested: 3 },
     });
 
-    expect(admin.writes).toHaveLength(1);
-    expect(admin.writes[0]?.tiddler.title).toBe(`${OUTCOME_URI_PREFIX}${invocation.requestId}`);
-    const results = JSON.parse(String(admin.writes[0]?.tiddler.results ?? "{}")) as Record<string, { ok: boolean; output?: Record<string, unknown> }>;
+    expect(daemon.writes).toHaveLength(1);
+    expect(daemon.writes[0]?.tiddler.title).toBe(`${OUTCOME_URI_PREFIX}${invocation.requestId}`);
+    const results = JSON.parse(String(daemon.writes[0]?.tiddler.results ?? "{}")) as Record<string, { ok: boolean; output?: Record<string, unknown> }>;
     expect(results[VERB_RESULT_KEY]?.ok).toBe(true);
     expect(results[VERB_RESULT_KEY]?.output?.recordsIngested).toBe(3);
   });
 
   test("dispatchVerb marks running, writes outcome, then removes the volatile invocation on success", async () => {
     const tw5 = new FakeTW5Engine();
-    const admin = new FakeDaemonStore();
+    const daemon = new FakeDaemonStore();
     const invocation = makeInvocation();
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
     await dispatchVerb(
       tw5 as never,
-      admin as unknown as CompositeStore,
+      daemon as unknown as CompositeStore,
       invocation,
       async () => ({ status: "ok" }),
     );
 
     expect(tw5.wiki.getTiddler(invocation.title)).toBeUndefined();
-    expect(admin.writes).toHaveLength(1);
-    const results = JSON.parse(String(admin.writes[0]?.tiddler.results ?? "{}")) as Record<string, { ok: boolean; output?: Record<string, unknown> }>;
+    expect(daemon.writes).toHaveLength(1);
+    const results = JSON.parse(String(daemon.writes[0]?.tiddler.results ?? "{}")) as Record<string, { ok: boolean; output?: Record<string, unknown> }>;
     expect(results[VERB_RESULT_KEY]?.ok).toBe(true);
     expect(results[VERB_RESULT_KEY]?.output?.status).toBe("ok");
   });
 
   test("dispatchVerb writes an error outcome and still removes the volatile invocation", async () => {
     const tw5 = new FakeTW5Engine();
-    const admin = new FakeDaemonStore();
+    const daemon = new FakeDaemonStore();
     const invocation = makeInvocation({ requestId: "req-test-2", title: `${VERB_URI_PREFIX}req-test-2` });
     tw5.wiki.addTiddler(invocation as unknown as TiddlerFields);
 
     await dispatchVerb(
       tw5 as never,
-      admin as unknown as CompositeStore,
+      daemon as unknown as CompositeStore,
       invocation,
       async () => {
         throw new Error("boom");
@@ -152,8 +152,8 @@ describe("verb-vm", () => {
     );
 
     expect(tw5.wiki.getTiddler(invocation.title)).toBeUndefined();
-    expect(admin.writes).toHaveLength(1);
-    expect(admin.writes[0]?.tiddler.status).toBe("error");
-    expect(admin.writes[0]?.tiddler["error-message"]).toBe("boom");
+    expect(daemon.writes).toHaveLength(1);
+    expect(daemon.writes[0]?.tiddler.status).toBe("error");
+    expect(daemon.writes[0]?.tiddler["error-message"]).toBe("boom");
   });
 });

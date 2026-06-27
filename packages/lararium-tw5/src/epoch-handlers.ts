@@ -44,14 +44,14 @@ export interface EpochHandlerOptions {
 /**
  * `lares bag epoch <bag-url>` — snapshot-restart a single bag.
  *
- * Steps (pono web3 — admin holds ACCESS, never reaches into a mounted wiki):
+ * Steps (pono web3 — daemon holds ACCESS, never reaches into a mounted wiki):
  *   1. Resolve old Automerge URL via the catalog accessor (access≠load).
  *   2. Open old doc; read all tiddlers (including tombstones).
  *   3. Mint new LarDoc with the materialized tiddler set.
  *   4. Update the catalog oracle tiddler's text to the new doc URL.
  *
  * The change SYNCS to every island holding the bag; each reconciles on its own
- * cadence (live recipe-watch is F-arc; today, next boot). The admin does NOT
+ * cadence (live recipe-watch is F-arc; today, next boot). The daemon does NOT
  * hot-swap any running wiki's composite layer — that was web2 residue. Residency
  * needs no re-pin: the manager keys by the bag's lar-URI, which is unchanged
  * across the epoch (only the doc the oracle points at moves).
@@ -253,7 +253,7 @@ export function makeRotateRecipeReactor(opts: RotateRecipeOptions): VerbReactor 
 
     // No live-composite layer swap (oracle + recipe changes sync; islands reconcile),
     // no wiki re-pin (manager keys by the unchanged wikiKey lar-URI). Previous-canon is
-    // a NEW bag → command main to register it cold via admin:residency-op.
+    // a NEW bag → command main to register it cold via daemon:residency-op.
     opts.post(mkDaemonResidencyOp({ requestId: makeRequestId("resop"), op: "register-cold", bagId: previousCanonUri }));
     // Reboot-pending: new canonical doc + recipe change — the live island still has the
     // old canon mounted. Alert it.
@@ -282,7 +282,7 @@ const RECIPE_PREFIX = recipeUri("@catalog", "");
 /**
  * Scan @catalog recipes for wikis whose bag-stack includes `bagUrl` and post a
  * reboot-pending wiki-alert for each (main filters to the live ones). One bag can
- * feed many wikis — the admin computes "affected by content", main delivers to "live".
+ * feed many wikis — the daemon computes "affected by content", main delivers to "live".
  */
 async function alertWikisUsingBag(
   opts: { readonly catalog: CatalogAccessor; readonly post: ResidencyOpPost },

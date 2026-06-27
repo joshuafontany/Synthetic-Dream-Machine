@@ -19,7 +19,7 @@ import { makeRequestId, stringArg } from "./handler-args.js";
 import type { WikiHandlerOptions, WikiMintHandlerOptions } from "./wiki-handler-options.js";
 
 // makeListWikisReactor RELOCATED to @lararium/tw5 (worker-data-verbs) — list-wikis now
-// runs in every vessel's admin worker (sovereign-worker, verify-then-delegate gated).
+// runs in every vessel's daemon worker (sovereign-worker, verify-then-delegate gated).
 
 export function makeInitWikiReactor(opts: WikiMintHandlerOptions): VerbReactor {
   return async (args) => {

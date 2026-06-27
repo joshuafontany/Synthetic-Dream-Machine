@@ -17,7 +17,7 @@
  *   against the incoming bytes' CID. When they diverge (new TW5 release or new
  *   sigil tiddlers), it merges the update and returns { updated: true } so the
  *   caller can surface a "reload to pick up engine changes" alert to the operator.
- *   The recommended surface: a TW5 alert tiddler written to the admin doc, tagged
+ *   The recommended surface: a TW5 alert tiddler written to the daemon doc, tagged
  *   lar:///ha.ka.ba/tags/engine-update, with a "Reload to pick up TW5 changes"
  *   message. The browser vessel writes it; TW5 renders it natively.
  *
@@ -200,7 +200,7 @@ export async function loadGenesisIslandFromBytes(
  * incoming handle — no bytes/CID need pass in.
  *
  * Caller responsibility: when updated === true, write a TW5 alert tiddler to
- * the admin doc (tagged lar:///ha.ka.ba/tags/engine-update) so the operator
+ * the daemon doc (tagged lar:///ha.ka.ba/tags/engine-update) so the operator
  * sees a native TW5 "Reload to pick up engine changes" prompt.
  */
 export async function reconcileGenesisUpdate(

@@ -65,9 +65,9 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         composite: ctx.composite,
         tw5: makeTw5Deserializer(ctx.tw5),
       });
-      // system-alert — the admin worker (via main → pool.placeWikiVerb) delivers a
+      // system-alert — the daemon worker (via main → pool.placeWikiVerb) delivers a
       // reboot-pending notice; the island writes it into its OWN @temp (volatile,
-      // self-clearing on reboot). The admin never reaches into this composite directly.
+      // self-clearing on reboot). The daemon never reaches into this composite directly.
       registry.register("system-alert", async (args) => {
         const message = typeof args["message"] === "string" ? args["message"] : "A change requires a reboot to apply.";
         const cause   = typeof args["cause"]   === "string" ? args["cause"]   : "";
@@ -120,7 +120,7 @@ export function makeWikiBehavior(opts: WikiBehaviorOptions = {}): IslandBehavior
         requestedAt: new Date().toISOString(),
       };
       void handler(msg.args, {
-        admin: ctx.composite,
+        daemon: ctx.composite,
         invocation,
         cap:   async () => ({ ok: true, reason: "worker-trust" }),
       }).then((result) => {

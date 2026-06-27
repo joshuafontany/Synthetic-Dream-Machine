@@ -202,7 +202,7 @@ export function resolveLarUri(uri: string): LarResolution {
   }
 
   // Other three-segment tuple roots — virtual. Stabilize by moving into
-  // a recognized @-scope or by registering a custom bag mirror in the admin
+  // a recognized @-scope or by registering a custom bag mirror in the daemon
   // wiki (S5.6+).
   if (isTupleRoot(root)) {
     return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };

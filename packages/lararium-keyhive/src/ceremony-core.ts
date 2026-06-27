@@ -111,7 +111,7 @@ export interface FoundingCeremonyResult {
 
 /**
  * Seed social docs, run the Keyhive founding ceremony, flush cap events to
- * the admin doc, and write oracle tiddlers. Returns handles and sentinel IDs.
+ * the daemon doc, and write oracle tiddlers. Returns handles and sentinel IDs.
  *
  * The caller is responsible for repo.flush() and persisting the bootstrap
  * artifact (the mapping of lar URIs → Automerge URLs + sentinel IDs).
@@ -157,7 +157,7 @@ export async function runFoundingCeremony(
   const meshCabal = await keyhive.createSentinelDoc(MESH_CABAL_SENTINEL_URI);
   await keyhive.addSentinelMember(personaGroup.agentIdHex, meshCabal.docIdHex);
 
-  // Flush Keyhive events to admin doc in DaemonEventStore-compatible format.
+  // Flush Keyhive events to daemon doc in DaemonEventStore-compatible format.
   const initEvents = await store.list();
   for (const evt of initEvents) {
     const hashBuf = await crypto.subtle.digest("SHA-256", evt.bytes.slice());
@@ -335,7 +335,7 @@ export async function runApplyAdmitPayload(
   const { repo, operatorVerifyingKey, operatorDisplayName, payload } = input;
 
   // Fail-closed: the binding is the joinee's whole authority — a missing field MUST halt,
-  // never write a half-bound admin doc (the confused-deputy / mycelium-PCD hole).
+  // never write a half-bound daemon doc (the confused-deputy / mycelium-PCD hole).
   if (!payload.signerDid || !payload.deviceEdge || !payload.hearthTrueName) {
     throw new Error("[ceremony] runApplyAdmitPayload: payload lacks signerDid/deviceEdge/hearthTrueName — refusing to admit.");
   }
@@ -362,7 +362,7 @@ export async function runApplyAdmitPayload(
     }
   }
 
-  // Write the joinee's BINDING into its own admin doc — the pinned signer, the hearth true-name,
+  // Write the joinee's BINDING into its own daemon doc — the pinned signer, the hearth true-name,
   // and the root→joinee edge (mirrors the founding write). The joinee boots through its Binding
   // Gate on these alone: verifyDeviceDelegation(edge, signerDid) — no cap events, no Beelay.
   daemonHandle.change((doc) => {

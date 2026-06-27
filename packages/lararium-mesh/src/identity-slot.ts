@@ -11,7 +11,7 @@
  * LIVE at the OPERATOR level (bootDaemonKeyhive Gates A/B/C, the V3 peer-boundary gate,
  * resolveOrMintBinding) in @lararium/keyhive. THIS slot governs only USER-level access
  * (Bluesky/GitHub/keyhive-user), which remains the alpha stub. The node sharePolicy
- * already gates inbound network peers via the V3 admin-auth gate; the browser admits
+ * already gates inbound network peers via the V3 daemon-auth gate; the browser admits
  * only same-origin/in-process peers (a legitimate asymmetry, not an open hole). See
  * lararium-canonical-model #open-drift (point 4).
  *

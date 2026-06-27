@@ -60,7 +60,7 @@ function makeContext(composite: CompositeStore, verb: ActionVerb, args: Record<s
     requestedBy: "operator-test",
     requestedAt: "2026-05-31T00:00:00Z",
   };
-  return { admin: composite, invocation, cap: alwaysAllowCap() };
+  return { daemon: composite, invocation, cap: alwaysAllowCap() };
 }
 
 function denyCap(deniedBag: string): VerbContext["cap"] {
@@ -377,7 +377,7 @@ describe("malformed args", () => {
 // S5.7 — Integration: verb-tiddler → runLocalVerb → handler
 //
 // The unit blocks above hand-build VerbContext and call the reactor directly.
-// This block exercises the real dispatch seam the admin VM (open-daemon-vm.ts)
+// This block exercises the real dispatch seam the daemon VM (open-daemon-vm.ts)
 // and browser worker use: registry lookup by `invocation.action` + the
 // CapabilityVerifier→cap() adaptation (makeCapVerify) + handler run. A full CLI
 // binary spawn + TW5 boot roundtrip stays covered by the live `lares act`
@@ -417,7 +417,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
 
     const args   = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
-    const result = await runLocalVerb(invocation("ADD", args), { admin: composite, registry, verifier: verifier() });
+    const result = await runLocalVerb(invocation("ADD", args), { daemon: composite, registry, verifier: verifier() });
 
     expect(result["verb"]).toBe("ADD");
     const all = await composite.resolveAll("T");
@@ -433,7 +433,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     await seedTiddler(composite, BAG_LOW, "T", "low-text", cid);
 
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
-    await runLocalVerb(invocation("MOVE", args), { admin: composite, registry, verifier: verifier() });
+    await runLocalVerb(invocation("MOVE", args), { daemon: composite, registry, verifier: verifier() });
 
     expect((await composite.resolveAll("T")).map((e) => e.bagId)).toEqual([BAG_HIGH]);
     expect(await composite.listKapaeBags("T")).toEqual([]); // MOVE retracts source to absent, not kāpae
@@ -448,7 +448,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
 
     const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c" };
     await expect(
-      runLocalVerb(invocation("ADD", args), { admin: composite, registry, verifier: verifier(BAG_HIGH) }),
+      runLocalVerb(invocation("ADD", args), { daemon: composite, registry, verifier: verifier(BAG_HIGH) }),
     ).rejects.toThrow(/cap-denied.*@high/);
     expect((await effectRecordsIn(composite)).length).toBe(0); // gated before mutate-then-log
   });
@@ -461,7 +461,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     await seedTiddler(composite, BAG_LOW, "T", "x", cid);
 
     const args   = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": cid };
-    const result = await runLocalVerb(invocation("ADD", args), { admin: composite, registry });
+    const result = await runLocalVerb(invocation("ADD", args), { daemon: composite, registry });
     expect(result["verb"]).toBe("ADD");
   });
 
@@ -469,7 +469,7 @@ describe("S5.7 — verb-tiddler → runLocalVerb → handler integration", () =>
     const composite = makeComposite();
     const registry  = new VerbTable(); // empty — no reactors registered
     await expect(
-      runLocalVerb(invocation("ADD", { title: "T" }), { admin: composite, registry }),
+      runLocalVerb(invocation("ADD", { title: "T" }), { daemon: composite, registry }),
     ).rejects.toThrow(/no handler registered/);
   });
 });

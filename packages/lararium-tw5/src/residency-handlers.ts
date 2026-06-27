@@ -15,8 +15,8 @@ export interface ResidencyHandlerOptions {
 }
 
 // pin / unpin / register-cold RELOCATED to @lararium/tw5 (worker-data-verbs) — they run
-// in the admin worker (sovereign-worker, verify-then-delegate gated) and command this
-// main-resident BagResidencyManager via admin:residency-op. Only the `residency` stats
+// in the daemon worker (sovereign-worker, verify-then-delegate gated) and command this
+// main-resident BagResidencyManager via daemon:residency-op. Only the `residency` stats
 // READ stays main (the manager lives here); the askMain research decides its eventual home.
 
 export function makeResidencyStatsReactor(opts: ResidencyHandlerOptions): VerbReactor {

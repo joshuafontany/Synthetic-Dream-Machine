@@ -117,7 +117,7 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
    *  a founding card is cached), the vessel composes the V3 leaf transport (LarWSClientAdapter) and
    *  adds it to the Repo — the browser's outbound crossing. */
   relayUrl?:       string;
-  /** URL of the compiled browser admin island Worker script. */
+  /** URL of the compiled browser daemon island Worker script. */
   daemonWorkerUrl?: URL;
   /** URL of the compiled browser wiki Worker script. */
   workerScriptUrl?: URL;
@@ -144,7 +144,7 @@ async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHa
 }
 
 /** The engine's plugin-tiddler CIDs from an island doc's blobs (non-engine JSON blobs, by
- *  sha256). The admin AND every wiki island resolve these by CID from the local CAS (the breath
+ *  sha256). The daemon AND every wiki island resolve these by CID from the local CAS (the breath
  *  path), never CRDT-syncing the bytes. One derivation, fed to every island of the runtime. */
 function pluginCidsFromIslandBlobs(
   blobs: Record<string, { id?: string; sha256?: string; mimeType?: string }> | undefined,
@@ -234,7 +234,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
 
   // ── Residency MECHANISM (parity with node — a tab has finite memory too) ────
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
-  let admin!:     DaemonVmCore;      // set in openDaemon
+  let daemon!:     DaemonVmCore;      // set in openDaemon
   let slotActiveWikiId = "";
   let engineUpdated = false;
   const residency = new BagResidencyManager({
@@ -304,7 +304,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     },
 
     openDaemon: async ({ assembly, slot }) => {
-      if (!daemonWorkerUrl) throw new Error("[openBrowserVessel] daemonWorkerUrl REQUIRED (genesis present → sovereign admin island)");
+      if (!daemonWorkerUrl) throw new Error("[openBrowserVessel] daemonWorkerUrl REQUIRED (genesis present → sovereign daemon island)");
       const daemonAuth = {
         seed: operatorSeed, operatorVerifyingKey: operatorIdentity.verifyingKey,
         personaGroupDocIdHex: social.personaGroupDocIdHex,
@@ -321,27 +321,27 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       // The engine's plugin-tiddler CIDs — the worker pulls them by CID from OPFS (the breath
       // path), never CRDT-syncing the @oracle blob doc over the port. Same derivation as the pool.
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
-      admin = await openBrowserDaemonVm({
+      daemon = await openBrowserDaemonVm({
         repo, daemonUrl: social.daemonUrl, coreHash: assembly.coreHash,
         ...(pluginCids.length ? { pluginCids } : {}),
         workerScriptUrl: daemonWorkerUrl,
         recipe: { wikiSlug: "daemon" } satisfies WikiRecipe,
         grants: {
           islandUrl: assembly.islandHandle.url,
-          // The admin island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
+          // The daemon island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
           wikiUrl:   social.daemonUrl,
           // ACCESS grant, not a LOAD slot — the worker reaches @catalog via the accessor.
           catalogUrl: catalogHandle.url,
         },
         daemonAuth,
       });
-      return { workerEa: admin.workerEa, mountMainVerbs: admin.mountMainVerbs, resolveBinding: admin };
+      return { workerEa: daemon.workerEa, mountMainVerbs: daemon.mountMainVerbs, resolveBinding: daemon };
     },
 
     wireVerbs: (registry, _assembly) => {
       seedVesselDefaults(registry);
       // Thin main verb plane (node parity). Every catalog/recipe/residency-mutating
-      // admin verb lives in the worker now (wireWorkerVerbs) — access≠load, write-then-sync.
+      // daemon verb lives in the worker now (wireWorkerVerbs) — access≠load, write-then-sync.
       // Main keeps only sync-wiki (commands the pool's active wiki) + residency stats (a read).
       registry.register("sync-wiki", async (args, ctx) =>
         vmManager.placeWikiVerb(slotActiveWikiId, {
@@ -365,9 +365,9 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     },
 
     makePool: (_a, assembly) => {
-      // Every wiki island resolves the SAME engine plugin-CIDs from the local CAS as the admin
+      // Every wiki island resolves the SAME engine plugin-CIDs from the local CAS as the daemon
       // island does — one derivation, fed to both (role = capability ≠ platform; the wiki and
-      // admin are the one island runtime, differing only by their capability stack).
+      // daemon are the one island runtime, differing only by their capability stack).
       const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       vmManager = new BrowserVesselIslandPool({
         mainRepo: repo,
@@ -385,7 +385,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           const verb    = typeof msg.payload["verb"]    === "string" ? msg.payload["verb"]    : undefined;
           const fromUri = typeof msg.payload["fromUri"] === "string" ? msg.payload["fromUri"] : undefined;
           if (!verb) return;
-          admin.placeVerb({
+          daemon.placeVerb({
             verb, args: msg.payload as unknown as Record<string, unknown>,
             requestedBy: typeof msg.payload["requestedBy"] === "string" ? msg.payload["requestedBy"] : msg.listenable,
             listenable: msg.listenable, ...(fromUri ? { fromUri } : {}),
@@ -393,15 +393,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
         },
         ...(workerScriptUrl ? { workerScriptUrl } : {}),
       });
-      admin.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
-      admin.onResidencyOp(async (op, bagId, reason) => {
+      daemon.onEvictRequest((bagId) => vmManager.unmountWiki(bagId));
+      daemon.onResidencyOp(async (op, bagId, reason) => {
         if (op === "pin")        await residency.pin(bagId, reason);
         else if (op === "unpin") residency.unpin(bagId);
         else                     residency.registerCold(bagId);
       });
       // Wiki-alert delivery — place a system-alert verb into the affected wiki's live
       // island (skip if not mounted). Same isomorphic seam as node. wikiId = host:slug.
-      admin.onWikiAlert((wikiSlug, message, cause) => {
+      daemon.onWikiAlert((wikiSlug, message, cause) => {
         void vmManager.placeWikiVerb(`${hostId}:${wikiSlug}`, {
           verb: "system-alert", args: { message, cause: cause ?? "" }, requestedBy: "daemon",
         }).catch(() => { /* not mounted — best-effort */ });
@@ -419,7 +419,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     pool: result.pool,
     repo,
     store: result.assembly.composite,
-    admin,
+    daemon,
     activeWikiId:     slotActiveWikiId,
     activeWikiSource: "boot-arg",
     wikiDocUrl:       result.wikiHandle.url,

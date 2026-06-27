@@ -1,4 +1,4 @@
-// Local worker shim — runs @lararium/browser's admin-island body. keyhive WASM instantiates first
+// Local worker shim — runs @lararium/browser's daemon-island body. keyhive WASM instantiates first
 // (worker-boot.ts), then the island chain; wrapped in run().catch (NOT top-level await) so a
 // rejection surfaces as a logged error instead of a silent module-eval failure.
 import { registerWorkerErrorRelay, initKeyhiveWasm } from "./worker-boot.js";

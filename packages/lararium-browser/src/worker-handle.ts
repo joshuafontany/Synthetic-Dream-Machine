@@ -1,6 +1,6 @@
 /**
  * browserWorkerHandle — wrap a Web Worker as a platform-blind VesselWorkerHandle
- * (mesh). Shared by the admin VM wrapper and the island pool.
+ * (mesh). Shared by the daemon VM wrapper and the island pool.
  */
 
 import type { VesselWorkerHandle } from "@lararium/mesh";
@@ -28,7 +28,7 @@ export function browserWorkerHandle(w: Worker): VesselWorkerHandle {
   };
 }
 
-/** The browser island-host parts shared by the admin VM and the pool: a global MessageChannel
+/** The browser island-host parts shared by the daemon VM and the pool: a global MessageChannel
  *  port pair, and a module-Worker spawned + wrapped as a VesselWorkerHandle. */
 export function browserNewSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort } {
   const { port1, port2 } = new MessageChannel();

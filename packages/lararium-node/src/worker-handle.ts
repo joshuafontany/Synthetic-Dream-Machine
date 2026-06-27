@@ -1,6 +1,6 @@
 /**
  * nodeWorkerHandle — wrap a worker_threads Worker as a platform-blind
- * VesselWorkerHandle (mesh). Shared by the admin VM wrapper and the island pool.
+ * VesselWorkerHandle (mesh). Shared by the daemon VM wrapper and the island pool.
  */
 
 import { Worker, MessageChannel } from "worker_threads";
@@ -16,7 +16,7 @@ export function nodeWorkerHandle(w: Worker): VesselWorkerHandle {
   };
 }
 
-/** The node island-host parts shared by the admin VM and the pool: a worker_threads
+/** The node island-host parts shared by the daemon VM and the pool: a worker_threads
  *  MessageChannel port pair (the host seam types ports as the global MessagePort), and a
  *  worker_threads Worker spawned + wrapped as a VesselWorkerHandle. */
 export function nodeNewSyncChannel(): { mainPort: MessagePort; syncPort: MessagePort } {
@@ -24,6 +24,6 @@ export function nodeNewSyncChannel(): { mainPort: MessagePort; syncPort: Message
   return { mainPort: port1 as unknown as MessagePort, syncPort: port2 as unknown as MessagePort };
 }
 
-export function nodeSpawnWorker(url: string | URL): VesselWorkerHandle {
-  return nodeWorkerHandle(new Worker(url));
+export function nodeSpawnWorker(url: string | URL, workerData?: unknown): VesselWorkerHandle {
+  return nodeWorkerHandle(new Worker(url, workerData !== undefined ? { workerData } : undefined));
 }

@@ -54,7 +54,7 @@ export interface LarariumVesselResult<
 /**
  * VesselResult — the ONE shared vessel-open result (no vessel-by-type). Both node and
  * browser return this; only the substrate type-params differ (TPool = the platform island
- * pool, TDaemon = the platform admin VM). Substrate extras (node's eventBus/stopTick,
+ * pool, TDaemon = the platform daemon VM). Substrate extras (node's eventBus/stopTick,
  * browser's engineUpdated) extend this — never a fork of the common surface. The retired
  * LarVessel wrapper has no slot here.
  */
@@ -62,9 +62,9 @@ export interface VesselResult<TPool, TDaemon> {
   pool:             TPool;
   repo:             Repo;
   store:            CompositeStore;
-  admin:            TDaemon;
+  daemon:           TDaemon;
   activeWikiId:     string;
-  activeWikiSource: "boot-arg" | "admin-marker";
+  activeWikiSource: "boot-arg" | "daemon-marker";
   wikiDocUrl:       string;
   catalogHandleUrl: string;
   oracleDocUrl:     string | null;

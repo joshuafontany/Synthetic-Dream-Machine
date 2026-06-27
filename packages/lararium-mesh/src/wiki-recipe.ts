@@ -77,7 +77,7 @@ export function slugFromUri(uri: string): string {
 /**
  * WikiRecipe — the one shape that fits every wiki under the sun.
  *
- *   adminRecipe: { wikiSlug: "daemon" }
+ *   daemonRecipe: { wikiSlug: "daemon" }
  *   sdmRecipe:   { wikiSlug: "synthetic-dream-machine",
  *                  libraryBags: ["lar:///ha.ka.ba/@sdm", "lar:///ha.ka.ba/@ftls"] }
  */

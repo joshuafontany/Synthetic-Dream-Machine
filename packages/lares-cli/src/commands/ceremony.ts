@@ -64,7 +64,7 @@ export async function cmdInviteReceive(_args: ParsedArgs): Promise<number> {
     `What lands here:\n` +
     `  1. Receive invitation payload (MeshCabalDocId + DELEGATED events)\n` +
     `  2. keyhive.ingestEventsBytes([delegation events])\n` +
-    `  3. Write MeshCabalDocId to admin oracle tiddler\n` +
+    `  3. Write MeshCabalDocId to daemon oracle tiddler\n` +
     `  4. Your PersonaGroup now passes verifySentinelMembership at Gate C\n` +
     `\n` +
     `Contact the founding operator to initiate: \`lares invite-send\` runs on their node.\n` +

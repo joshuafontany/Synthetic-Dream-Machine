@@ -1,12 +1,12 @@
 /**
  * uds-channel — the co-located fast path of the lares↔lararium binding.
  *
- * The daemon already holds the WARM admin replica and the worker VerbDispatcher.
+ * The daemon already holds the WARM daemon replica and the worker VerbDispatcher.
  * A co-located `lares` CLI never needed its own leaf replica + sync-on-connect (the
  * ~3s/command tax) — it only needs to hand the daemon a capability-bearing
  * invocation and await the receipt. This Unix-domain socket carries exactly that:
  * the CLI writes one invocation line, the daemon writes the summons into its warm
- * admin doc (the SAME tiddler the worker reacts to from a WS peer), awaits the
+ * daemon doc (the SAME tiddler the worker reacts to from a WS peer), awaits the
  * durable @daemon/outcomes/<id> receipt, and returns it over the socket.
  *
  *   transport  = this socket (kernel-local, authority-agnostic)
@@ -29,7 +29,7 @@ import {
 } from "@lararium/mesh";
 
 export interface UdsChannelOptions {
-  /** The daemon's warm admin doc handle (result.admin.daemonHandle). */
+  /** The daemon's warm daemon doc handle (result.daemon.daemonHandle). */
   readonly daemonHandle: DocHandle<LarDoc>;
   /** Socket path — both sides agree on <dataDir>/lares.sock via the env contract. */
   readonly socketPath: string;
@@ -55,7 +55,7 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
   // Stale-socket cleanup — bind fails on a leftover path (daemon crash / restart).
   try { if (existsSync(socketPath)) unlinkSync(socketPath); } catch { /* ignore */ }
 
-  // One writable composite over the warm admin handle — same shape the CLI leaf
+  // One writable composite over the warm daemon handle — same shape the CLI leaf
   // builds, but against the daemon's own replica (no Repo, no sync).
   const composite = new CompositeStore();
   composite.addLayer({
@@ -64,7 +64,7 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
     writable: true,
   });
 
-  // Write the summons into the warm admin doc; await the durable outcome via the
+  // Write the summons into the warm daemon doc; await the durable outcome via the
   // doc's own change event (the worker dispatches + writes it back). Mirrors the
   // CLI submitVerb body — minus the network.
   const runVerb = async (inv: Invocation): Promise<Record<string, unknown>> => {

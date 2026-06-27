@@ -6,11 +6,11 @@
  *   Vessel B = second vessel admitted via device-admit payload (same operator, second machine)
  *
  * Assertions:
- *   1. Vessel A: runInit produces sentinel oracle tiddlers in admin doc + bootstrap
- *   2. Vessel A: admin doc cap events carry lar URI tags (not $:/tags/CapEvent)
+ *   1. Vessel A: runInit produces sentinel oracle tiddlers in daemon doc + bootstrap
+ *   2. Vessel A: daemon doc cap events carry lar URI tags (not $:/tags/CapEvent)
  *   3. Vessel A: runDeviceAdmit self-verifies B/C and emits admit.json
  *   4. Vessel B: runInit --admit writes oracle tiddlers + cap events matching Vessel A
- *   5. Vessel B: cap events in admin doc parse cleanly as Keyhive event records
+ *   5. Vessel B: cap events in daemon doc parse cleanly as Keyhive event records
  *
  * Same-operator seed note: in production, both vessels share the same operator
  * keypair seed (the operator IS the same person on two devices). Here we let
@@ -75,7 +75,7 @@ async function openDaemonDocTiddlers(storageDir: string, daemonUrl: string): Pro
   const handle   = progress.handle;
   await Promise.race([
     handle.whenReady(),
-    new Promise<void>((_, reject) => setTimeout(() => reject(new Error(`admin doc not ready in 8s: ${daemonUrl}`)), 8000)),
+    new Promise<void>((_, reject) => setTimeout(() => reject(new Error(`daemon doc not ready in 8s: ${daemonUrl}`)), 8000)),
   ]);
   const doc = handle.doc() as Record<string, unknown> | null;
   const tiddlers = (doc?.["tiddlers"] ?? {}) as Record<string, unknown>;
@@ -83,7 +83,7 @@ async function openDaemonDocTiddlers(storageDir: string, daemonUrl: string): Pro
   return tiddlers;
 }
 
-function adminTiddlerText(tiddlers: Record<string, unknown>, key: string): string | null {
+function daemonTiddlerText(tiddlers: Record<string, unknown>, key: string): string | null {
   const entry = tiddlers[key] as Record<string,unknown> | undefined;
   return (entry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string ?? null;
 }
@@ -103,9 +103,9 @@ beforeAll(async () => {
   await runInit({ storageDir: VESSEL_A.storage, genesisDir: VESSEL_A.genesis });
 
   const bootstrapA  = readBootstrap(VESSEL_A.genesis);
-  const adminUrlA   = bootstrapA[DAEMON_BAG_ID]?.text;
-  if (!adminUrlA) throw new Error("Vessel A: admin URL missing from bootstrap");
-  vesselADaemonTiddlers = await openDaemonDocTiddlers(VESSEL_A.storage, adminUrlA);
+  const daemonUrlA   = bootstrapA[DAEMON_BAG_ID]?.text;
+  if (!daemonUrlA) throw new Error("Vessel A: daemon URL missing from bootstrap");
+  vesselADaemonTiddlers = await openDaemonDocTiddlers(VESSEL_A.storage, daemonUrlA);
 
   // Step 2 — device-admit payload
   await runDeviceAdmit({
@@ -120,9 +120,9 @@ beforeAll(async () => {
   await runInit({ storageDir: VESSEL_B.storage, genesisDir: VESSEL_B.genesis, admitPayloadPath: ADMIT_FILE });
 
   const bootstrapB = readBootstrap(VESSEL_B.genesis);
-  const adminUrlB  = bootstrapB[DAEMON_BAG_ID]?.text;
-  if (!adminUrlB) throw new Error("Vessel B: admin URL missing from bootstrap");
-  vesselBDaemonTiddlers = await openDaemonDocTiddlers(VESSEL_B.storage, adminUrlB);
+  const daemonUrlB  = bootstrapB[DAEMON_BAG_ID]?.text;
+  if (!daemonUrlB) throw new Error("Vessel B: daemon URL missing from bootstrap");
+  vesselBDaemonTiddlers = await openDaemonDocTiddlers(VESSEL_B.storage, daemonUrlB);
 }, 120_000);
 
 // ---------------------------------------------------------------------------
@@ -136,13 +136,13 @@ describe("Vessel A — founding ceremony", () => {
     expect(bootstrap[MESH_CABAL_DOC_ID_TIDDLER]?.text).toMatch(HEX_RE);
   });
 
-  test("admin doc carries all three sentinel oracle tiddlers", () => {
-    expect(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER)).toMatch(HEX_RE);
-    expect(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER)).toMatch(HEX_RE);
-    expect(adminTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER)).toMatch(HEX_RE);
+  test("daemon doc carries all three sentinel oracle tiddlers", () => {
+    expect(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER)).toMatch(HEX_RE);
+    expect(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER)).toMatch(HEX_RE);
+    expect(daemonTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER)).toMatch(HEX_RE);
   });
 
-  test("admin doc cap events use lar URI tag — never $:/tags/CapEvent", () => {
+  test("daemon doc cap events use lar URI tag — never $:/tags/CapEvent", () => {
     const capEntries = Object.entries(vesselADaemonTiddlers).filter(([title]) =>
       title.startsWith(`${DAEMON_BAG_ID}/cap/`),
     );
@@ -172,13 +172,13 @@ describe("device-admit payload", () => {
     expect(admitPayload["syncUrl"]).toBe("ws://localhost:3000/automerge");
   });
 
-  test("sentinel IDs in payload match Vessel A admin doc", () => {
+  test("sentinel IDs in payload match Vessel A daemon doc", () => {
     expect(admitPayload["personaGroupDocIdHex"])
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
     expect(admitPayload["personaGroupAgentIdHex"])
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
     expect(admitPayload["meshCabalDocIdHex"])
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
   });
 });
 
@@ -193,16 +193,16 @@ describe("Vessel B — admitted vessel", () => {
     expect(bootstrap[MESH_CABAL_DOC_ID_TIDDLER]?.text).toBe(admitPayload["meshCabalDocIdHex"]);
   });
 
-  test("Vessel B admin doc oracle tiddlers match Vessel A sentinel IDs", () => {
-    expect(adminTiddlerText(vesselBDaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER))
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
-    expect(adminTiddlerText(vesselBDaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER))
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
-    expect(adminTiddlerText(vesselBDaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER))
-      .toBe(adminTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
+  test("Vessel B daemon doc oracle tiddlers match Vessel A sentinel IDs", () => {
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER))
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_DOC_ID_TIDDLER));
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER))
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, PERSONA_GROUP_AGENT_ID_TIDDLER));
+    expect(daemonTiddlerText(vesselBDaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER))
+      .toBe(daemonTiddlerText(vesselADaemonTiddlers, MESH_CABAL_DOC_ID_TIDDLER));
   });
 
-  test("Vessel B admin doc cap events parse as valid Keyhive event records", async () => {
+  test("Vessel B daemon doc cap events parse as valid Keyhive event records", async () => {
     const store     = new InMemoryEventStore();
     const capPrefix = `${DAEMON_BAG_ID}/cap/`;
 

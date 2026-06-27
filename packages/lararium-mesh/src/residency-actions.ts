@@ -7,7 +7,7 @@
  * ACTION_VERBS; per-verb arguments ride inside the existing JSON `args` field.
  * No new URI prefix exists for actions — they reuse:
  *
- *   VERB_URI_PREFIX         volatile local invocation (admin VM scratch)
+ *   VERB_URI_PREFIX         volatile local invocation (daemon VM scratch)
  *   SUMMONS_URI_PREFIX  Automerge-backed remote vessel signal
  *   OUTCOME_URI_PREFIX Automerge-backed durable outcome
  *

@@ -30,7 +30,7 @@ export type {
 // (makeDaemonBehavior), and dragging tw5's index through the keyhive core index
 // would pull tw5's browser-surface into keyhive consumers. It lives on its own
 // subpath ("@lararium/keyhive/operator-daemon-behavior") so the keyhive core
-// index stays tw5-free; only the admin worker entries (which need tw5 anyway)
+// index stays tw5-free; only the daemon worker entries (which need tw5 anyway)
 // import it.
 
 export {

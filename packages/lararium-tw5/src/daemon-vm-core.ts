@@ -1,12 +1,12 @@
 /**
- * daemon-vm-core — the platform-blind admin-island vessel lifecycle.
+ * daemon-vm-core — the platform-blind daemon-island vessel lifecycle.
  *
  * ONE core both vessels compose (mirror pair 2/5). Subtracts the identical
  * skeleton from open-daemon-vm.ts (node) ⇆ open-browser-daemon-vm.ts (browser):
  * composite wiring, MessageChannel sync, ea-promise + breath watchdog, the delegation
  * loop, manifest delivery, placeVerb/mountMainVerbs/dispose. The platform
  * divergence remains as a two-member host seam (spawnWorker + newSyncChannel);
- * the resolved admin doc handle is passed in by the caller (the two platforms
+ * the resolved daemon doc handle is passed in by the caller (the two platforms
  * resolve it with genuinely different strategies — node merge-on-late-arrival,
  * browser find-or-create — so that stays a wrapper concern, not the core's).
  *
@@ -75,7 +75,7 @@ const EA_STALL_TIMEOUT_MS = 3 * EA_SILENCE_TIMEOUT_MS;
 /** The MessagePort type, borrowed through the mesh manifest (no DOM-lib dep). */
 type VesselMessagePort = IslandMsg_Manifest["syncPort"];
 
-/** The two-member admin-VM host seam — platform divergence as composition. */
+/** The two-member daemon-VM host seam — platform divergence as composition. */
 export interface DaemonVmHost {
   spawnWorker(scriptUrl: URL): VesselWorkerHandle;
   newSyncChannel(): { mainPort: VesselMessagePort; syncPort: VesselMessagePort };
@@ -86,7 +86,7 @@ export interface DaemonVmCoreOptions {
   repo:            Repo;
   /** Daemon doc handle, already resolved by the platform wrapper. */
   daemonHandle:     DocHandle<LarDoc>;
-  /** One-recipe model for the admin island. */
+  /** One-recipe model for the daemon island. */
   recipe:          WikiRecipe;
   /** Typed structural capabilities (engine doc, @daemon bag, @lares, @catalog access). */
   grants:          IslandGrants;
@@ -99,7 +99,7 @@ export interface DaemonVmCoreOptions {
   daemonAuth?:      IslandMsg_Manifest["daemonAuth"];
   /** Storage config delivered in the manifest (node nodefs; browser omits). */
   storage?:        IslandStorageConfig;
-  /** Compiled admin-island Worker script URL. */
+  /** Compiled daemon-island Worker script URL. */
   workerScriptUrl: URL;
   /** Override the ea silence budget in ms (tests). */
   eaSilenceMs?:    number;
@@ -127,7 +127,7 @@ export interface DaemonVmCore {
   placeVerb:      (opts: VesselPlaceVerbRequest) => void;
   /**
    * Host-side inbound-peer verifier (path b) — proxies verify() to the island's
-   * keyhive via admin:verify-request/result. Common to both vessels.
+   * keyhive via daemon:verify-request/result. Common to both vessels.
    */
   authSeam:       AuthVerifierSeam;
   /**
@@ -142,21 +142,21 @@ export interface DaemonVmCore {
   /** Exposed so platform wrappers compose any further capability on top. */
   worker:         VesselWorkerHandle;
   /**
-   * Register the pool's eviction MECHANISM (sovereign-worker model): the admin worker
-   * owns residency POLICY and commands an evict via admin:evict-request; main routes it
+   * Register the pool's eviction MECHANISM (sovereign-worker model): the daemon worker
+   * owns residency POLICY and commands an evict via daemon:evict-request; main routes it
    * here to the pool (the worker holds a capability to the pool, not the pool). Set
    * AFTER the pool exists (post makePool). Absent → evict-requests fail closed.
    */
   onEvictRequest: (fn: (bagId: string) => Promise<void>) => void;
   /**
    * Register the residency-op MECHANISM: the worker commands pin/unpin/register-cold
-   * (admin:residency-op, keyhive-gated policy); main routes here to the BagResidencyManager
+   * (daemon:residency-op, keyhive-gated policy); main routes here to the BagResidencyManager
    * (which stays at the resource). Set after the manager exists. Absent → fail closed.
    */
   onResidencyOp: (fn: (op: "pin" | "unpin" | "register-cold", bagId: string, reason?: string) => Promise<void>) => void;
   /**
    * Register the wiki-alert DELIVERY: the worker decided a change needs a reboot to
-   * apply (admin:wiki-alert) and names the affected wiki; main routes here to place a
+   * apply (daemon:wiki-alert) and names the affected wiki; main routes here to place a
    * `system-alert` verb into that wiki's live island (skip if not mounted). Set after
    * the pool exists. Fire-and-forget; absent → alerts silently dropped.
    */
@@ -178,15 +178,15 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
 
   // ── Vessel composite (cap-event + receipt writes) ──────────────────────────
   const composite  = new CompositeStore();
-  const adminStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
-  composite.addLayer({ bagId: DAEMON_BAG_ID, store: adminStore, writable: true });
-  adminStore.markSyncComplete();
+  const daemonStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
+  composite.addLayer({ bagId: DAEMON_BAG_ID, store: daemonStore, writable: true });
+  daemonStore.markSyncComplete();
 
   // ── MessageChannel — island ↔ vessel Repo sync (wiring owned by mesh) ───────
   const { mainPort, syncPort } = host.newSyncChannel();
   attachMessageChannelSync(repo, mainPort);
 
-  // ── Spawn admin island ─────────────────────────────────────────────────────
+  // ── Spawn daemon island ─────────────────────────────────────────────────────
   const worker = host.spawnWorker(workerScriptUrl);
 
   // ── askIsland — ONE request/reply correlation primitive ─────────────────────
@@ -212,7 +212,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
   // ── workerEa — the ea-wait rides the shared hull (one-hull law, step 1) ─────
   // awaitIslandMsg carries the whole breath watchdog: re-arm on breath, stall
   // budget on frozen (phase, progress), silence alone times out, fault rejects
-  // immediately. No bespoke admin timer survives — the admin VM and the island
+  // immediately. No bespoke daemon timer survives — the daemon VM and the island
   // pool now share ONE watchdog mechanism (vessel-host).
   const silenceMs = opts.eaSilenceMs ?? EA_SILENCE_TIMEOUT_MS;
   const stallMs   = opts.eaStallMs   ?? (opts.eaSilenceMs !== undefined ? 3 * opts.eaSilenceMs : EA_STALL_TIMEOUT_MS);
@@ -232,7 +232,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
 
   // ── Delegation loop + island message routing ────────────────────────────────
   // breath/ea/fault ride the awaitIslandMsg subscription above; this listener
-  // carries only the live admin surfaces.
+  // carries only the live daemon surfaces.
   worker.listen((raw: unknown) => {
     if (!isIslandToVesselMsg(raw)) return;
 
@@ -240,7 +240,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     // Awake signal (ea) rides workerEa → the vessel's "live" phase, and breath rides the
     // awaitIslandMsg subscription — neither needs a console echo.
     if (raw.type === "fault") {
-      console.error(`[admin-island:fault] ${JSON.stringify(raw).slice(0, 240)}`);
+      console.error(`[daemon-island:fault] ${JSON.stringify(raw).slice(0, 240)}`);
     }
 
     if (raw.type === "daemon:verify-result") {
@@ -322,7 +322,7 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
         status:      "pending" as const,
       };
       runLocalVerb(invocationLike, {
-        admin:    composite,
+        daemon:   composite,
         registry: _registry,
       }).then((result) => {
         worker.post(mkDaemonVerbResult({ requestId: msg.requestId, result }));

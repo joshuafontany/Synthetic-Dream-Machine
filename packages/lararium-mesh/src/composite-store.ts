@@ -206,7 +206,7 @@ export class CompositeStore implements LarTiddlerStore {
     if (options?.bag) {
       //  a) a matching WRITABLE layer → write it (the upper). Serves only
       //     genuinely-mounted writable layers the wiki owns — the projection
-      //     layer (E.2), the admin bag, draft routing. Residency-target writes
+      //     layer (E.2), the daemon bag, draft routing. Residency-target writes
       //     into a DEEP bag no longer route here: they reach the bag's own doc
       //     by access (catalog-accessor.storeOf) + write-then-sync, mounting
       //     nothing (action-handler resolveBagStores; wiki-layer-ontology#write-law).

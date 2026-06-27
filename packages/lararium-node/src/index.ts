@@ -32,7 +32,7 @@ export type { SummonsRelayOptions, SummonsRequest } from "@lararium/tw5";
 export { runLocalVerb, makeCapVerify } from "@lararium/tw5";
 
 // where + resolve reactors RELOCATED to @lararium/tw5 (worker-data-verbs) — they now
-// run in the admin worker (sovereign-worker, verify-then-delegate). Re-export from there.
+// run in the daemon worker (sovereign-worker, verify-then-delegate). Re-export from there.
 export { makeWhereReactor, makeResolveReactor } from "@lararium/tw5";
 
 // Verb-plane reactors relocated to their pono home @lararium/tw5 (composite/repo-only,
@@ -63,8 +63,8 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // imports it directly) so the package index never pulls the mempalace barrel.
 export { makeNodeCaptureEngine } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
-// The telemetry-VM is now a sovereign causal island (node-telemetry-island.ts), spawned like the
-// admin island via runSovereignWorker — NOT a bespoke main-thread-fed worker_thread. The entry has
-// top-level worker side-effects, so it is referenced by URL at spawn time, never imported here.
-// (The capture core stays composable + isomorphic: @lararium/mesh capture-engine + the tw5
-// `hasCapture` cap; node seams via makeNodeCaptureEngine.)
+// The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
+// standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
+// daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays
+// composable + isomorphic: @lararium/mesh capture-engine + the tw5 `hasCapture` cap; node seams via
+// makeNodeCaptureEngine.

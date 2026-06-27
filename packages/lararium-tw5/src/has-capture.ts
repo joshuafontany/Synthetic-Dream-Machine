@@ -10,6 +10,11 @@
  * to the palace; browser: an idb/relay engine), so this cap imports no substrate and the same
  * `#has capture` stacks on any vessel.
  *
+ * IDEMPOTENT PRESENCE: every @daemon carries this cap. When no engine factory is wired (no sink),
+ * the cap is INERT — it composes, but its onEa is a no-op and it claims no turns (honestly
+ * unhandled, never a silent drop). A vessel that wires the engine (a sink) + a producer that sends
+ * the feed activate it; both may be unwired, and that is a valid resting state, not an error.
+ *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-caps
  */
 
@@ -25,8 +30,9 @@ const DEFAULT_ENQUEUE_SIGNAL = "telemetry:place-verb";
 
 export interface CaptureCapOptions {
   /** Build the capture engine given the OUT-frame `post` seam (the cap wires it to `ctx.post`).
-   *  The vessel supplies flush/reserve/annotate/servo (node: makeNodeCaptureEngine). */
-  readonly makeEngine: (post: CapturePost) => CaptureEngine;
+   *  The vessel supplies flush/reserve/annotate/servo (node: makeNodeCaptureEngine). OPTIONAL —
+   *  absent = the cap is carried but INERT (the sink is not wired; a valid resting state). */
+  readonly makeEngine?: (post: CapturePost) => CaptureEngine;
   /** the island's own server tick (ms); default 50 (20 Hz). */
   readonly tickMs?: number;
   /** the signal type that carries a raw turn IN; default "telemetry:place-verb". */
@@ -46,10 +52,12 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
   let timer: ReturnType<typeof setInterval> | undefined;
   const signal = opts.enqueueSignal ?? DEFAULT_ENQUEUE_SIGNAL;
   const tickMs = opts.tickMs ?? 50;
+  const makeEngine = opts.makeEngine;
 
   return {
     name: "capture",
     async onEa(ctx: IslandContext) {
+      if (!makeEngine) return; // INERT: the cap is carried, the sink is not wired (idempotent presence)
       const post: CapturePost = (frame) =>
         // Event payload is flat scalars (the CRDT/tiddler law) — flatten the stats + the live
         // (breathing) gate; the host reconstructs. gate_depth makes the servo's effect visible.
@@ -69,7 +77,7 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
             gate_maxDepth: frame.gate.maxDepth,
           },
         });
-      const e = opts.makeEngine(post);
+      const e = makeEngine(post);
       engine = e;
       await e.recover(); // open sessions survive a restart (WAL replay)
       timer = setInterval(() => void e.tick(Date.now()), tickMs);
@@ -85,6 +93,7 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
     },
     onSignal(type: string, raw: unknown): boolean {
       if (type !== signal) return false;
+      if (!makeEngine) return false; // inert (sink not wired) — honestly unhandled, not a silent claim
       const e = engine;
       if (!e) {
         // Pre-boot: a turn arrived before onEa wired the engine. SURFACE the drop — this turn's

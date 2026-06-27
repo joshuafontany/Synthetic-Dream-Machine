@@ -1,12 +1,12 @@
 /**
- * social-seed — satellite-doc factory functions for the social plane + admin.
+ * social-seed — satellite-doc factory functions for the social plane + daemon.
  *
  * Exports:
  *   seedLaresDoc          — create the ba satellite doc on first boot
  *   seedIdentitiesDoc     — create the @identities satellite doc on first boot
  *   seedCirclesDoc        — create the @circles satellite doc on first boot (+ 5 system circles)
  *   seedSessionsDoc       — create the @sessions satellite doc on first boot
- *   seedDaemonDoc          — create the operator-private admin bag on first boot
+ *   seedDaemonDoc          — create the operator-private daemon bag on first boot
  *   createSessionEventLog — create a per-session SessionEventLog child doc
  */
 

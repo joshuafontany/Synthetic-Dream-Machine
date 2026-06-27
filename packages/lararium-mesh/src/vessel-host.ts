@@ -21,7 +21,7 @@ import type { IslandToVesselMsg, IslandMsg_Breath, IslandStorageConfig } from ".
 // One abstraction over `worker_threads.Worker` (node) and `Worker` (browser).
 // `listen`/`onError` return an unsubscribe so one-shot handshakes (awaitIslandMsg)
 // clean up without leaking listeners. The canonical home is mesh (transport,
-// no TW5) — admin VM + pool both compose it.
+// no TW5) — daemon VM + pool both compose it.
 
 export interface VesselWorkerHandle {
   post(msg: unknown, transfer?: unknown[]): void;

@@ -84,7 +84,7 @@ export interface PrimaryMountPool {
   mountWiki(id: string, spec: WikiMountSpec, opts?: { pinned?: boolean }): Promise<void>;
 }
 
-/** Any admin vessel that can resolve the operator's @personal/@draft/@working
+/** Any daemon vessel that can resolve the operator's @personal/@draft/@working
  *  binding — island-side, where keyhive lives. Both vessels expose this (pair 2). */
 export interface BindingResolver {
   resolveBinding(

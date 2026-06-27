@@ -2,7 +2,7 @@
  * verb-summons — CRDT verb-summons tiddler → volatile local invocation relay.
  *
  * External vessels write verb-summons tiddlers at @daemon/summons/<id> to the
- * Automerge doc. The admin island's CompositeStore subscriber calls
+ * Automerge doc. The daemon island's CompositeStore subscriber calls
  * heedSummons on every change; this translates a summons tiddler into
  * a volatile local invocation and tombstones the summons entry.
  * The summons names edge transport — a peer calling another peer to act. (The
@@ -22,7 +22,7 @@ import type { VerbPlacement } from "./verb-vm.js";
 export type SummonsRequest = VerbPlacement;
 
 export interface SummonsRelayOptions {
-  readonly admin:       CompositeStore;
+  readonly daemon:      CompositeStore;
   readonly isInFlight:  (requestId: string) => boolean;
   readonly placeVerb:   (invocation: SummonsRequest) => void;
 }
@@ -40,7 +40,7 @@ export async function heedSummons(
   if (opts.isInFlight(invocation.requestId)) return;
 
   const origin: ChangeOrigin = { kind: "lares-verb", requestId: invocation.requestId };
-  await opts.admin.tombstone(change.record.tiddler.title, origin);
+  await opts.daemon.tombstone(change.record.tiddler.title, origin);
   opts.placeVerb({
     verb:        invocation.action,
     args:        invocation.args as Record<string, unknown>,

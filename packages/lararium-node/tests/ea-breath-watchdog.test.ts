@@ -1,7 +1,7 @@
 /**
- * ea-breath-watchdog.test.ts — the admin VM's ea watchdog listens for breath.
+ * ea-breath-watchdog.test.ts — the daemon VM's ea watchdog listens for breath.
  *
- * The ea-breath law (burr resolved 2026-06-12): the admin island emits breath
+ * The ea-breath law (burr resolved 2026-06-12): the daemon island emits breath
  * during mount; the vessel's watchdog re-arms its silence window on each
  * breath; silence alone times out. A mounting island that still breathes
  * never reads dead, however long the mount — the flat 120s deadline retires.

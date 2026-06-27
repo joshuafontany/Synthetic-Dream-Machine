@@ -1,17 +1,17 @@
 /**
- * boot-daemon-keyhive — the isomorphic keyhive boot+gate sequence for the admin
- * island. ONE function, called identically on every platform's admin worker.
+ * boot-daemon-keyhive — the isomorphic keyhive boot+gate sequence for the daemon
+ * island. ONE function, called identically on every platform's daemon worker.
  *
  * Stage 1 of the isomorphic-vessel epic moves authn/z off the host and into the
- * admin island. This function is the heart of that move, extracted PURE (no
- * worker, no platform API) so it unit-tests in-process. The admin island's
- * `onEa` calls it with the seed (delivered via the manifest) and the admin
+ * daemon island. This function is the heart of that move, extracted PURE (no
+ * worker, no platform API) so it unit-tests in-process. The daemon island's
+ * `onEa` calls it with the seed (delivered via the manifest) and the daemon
  * CompositeStore (the cap-event EventStore backing); the host no longer boots
  * keyhive at all (keyhive cannot double-boot — `generateDocument` mints a fresh
  * CSPRNG doc-id each call, so two instances diverge).
  *
  * Founding never happens here: a new operator's first boot founds on the host
- * (`runFoundingCeremony` via the platform `loadBootstrap`) BEFORE the admin
+ * (`runFoundingCeremony` via the platform `loadBootstrap`) BEFORE the daemon
  * worker spawns. This function always receives an already-founded operator and
  * GATES — identical whether the operator is new (just founded this boot) or
  * returning.
@@ -26,7 +26,7 @@ import { verifyDeviceDelegation, type DeviceDelegationTiddler } from "@lararium/
 export interface BootDaemonKeyhiveInput {
   /** 32-byte operator signing seed (delivered to the worker via the manifest). */
   readonly seed: Uint8Array;
-  /** Cap-event store — DaemonEventStore over the admin CompositeStore in-island. */
+  /** Cap-event store — DaemonEventStore over the daemon CompositeStore in-island. */
   readonly eventStore: CapabilityProviderInitOpts["eventStore"];
   /** Hex Ed25519 verifying key the keyhive identity MUST resolve to (Gate A). */
   readonly operatorVerifyingKey: string;
@@ -54,10 +54,10 @@ export interface BootDaemonKeyhiveResult {
 }
 
 /**
- * Boot keyhive from the operator seed, re-hydrate cap state from the admin doc,
+ * Boot keyhive from the operator seed, re-hydrate cap state from the daemon doc,
  * clear the three sovereignty gates, and register the operator's writable bags.
  *
- * Throws (HALT) on any gate failure — the admin island must post `fault` so the
+ * Throws (HALT) on any gate failure — the daemon island must post `fault` so the
  * vessel never declares itself live with a diverged or unauthorized identity.
  */
 export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<BootDaemonKeyhiveResult> {
@@ -65,7 +65,7 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   await keyhive.init({ seed: input.seed, eventStore: input.eventStore });
 
   // Re-ingest cap events the founding ceremony (or a prior boot) persisted to
-  // the admin doc — reconstructs the PersonaGroup / MeshCabal sentinels + edges.
+  // the daemon doc — reconstructs the PersonaGroup / MeshCabal sentinels + edges.
   await keyhive.hydrateFromEventStore();
 
   const did = await keyhive.whoami();
@@ -73,7 +73,7 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   // Gate A — keyhive identity MUST match the operator's persisted verifying key.
   if (!did.endsWith(input.operatorVerifyingKey)) {
     throw new Error(
-      `[admin-keyhive] Gate A: identity drift — whoami=${did.slice(0, 18)}… ` +
+      `[daemon-keyhive] Gate A: identity drift — whoami=${did.slice(0, 18)}… ` +
       `does not match verifyingKey=${input.operatorVerifyingKey.slice(0, 16)}…`,
     );
   }
@@ -85,13 +85,13 @@ export async function bootDaemonKeyhive(input: BootDaemonKeyhiveInput): Promise<
   // {ok:false} on bad signature / expiry / unpinned signer, and we HALT.
   const binding = await verifyDeviceDelegation(input.deviceEdge, input.signerDid, { now: Date.now() });
   if (!binding.ok) {
-    throw new Error(`[admin-keyhive] Binding Gate: device-delegation edge failed verification against the pinned signer. ${binding.reason ?? ""}`);
+    throw new Error(`[daemon-keyhive] Binding Gate: device-delegation edge failed verification against the pinned signer. ${binding.reason ?? ""}`);
   }
   // Bind-check: the edge MUST delegate to THIS vessel's key (designation carries authority —
   // a valid edge for a DIFFERENT vessel is not authority for this one).
   if (input.deviceEdge.deviceVerifyingKey !== input.operatorVerifyingKey) {
     throw new Error(
-      `[admin-keyhive] Binding Gate: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
+      `[daemon-keyhive] Binding Gate: edge delegates to ${input.deviceEdge.deviceVerifyingKey.slice(0, 16)}…, ` +
       `not this vessel ${input.operatorVerifyingKey.slice(0, 16)}…`,
     );
   }

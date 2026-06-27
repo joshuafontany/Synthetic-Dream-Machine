@@ -5,8 +5,8 @@
  * lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model. Radical-alpha: the old
  * open-node-vessel / open-browser-vessel FORK is deleted; both platforms become thin
  * RECIPES over this one orchestrator. The substrate keel (composite cascade, genesis,
- * social plane, admin doc, wiki-slot) lives VM-free in mesh (assembleVessel +
- * mountWikiSlot); this orchestrator sequences it + the VM-focused tail (admin VM ea-gate
+ * social plane, daemon doc, wiki-slot) lives VM-free in mesh (assembleVessel +
+ * mountWikiSlot); this orchestrator sequences it + the VM-focused tail (daemon VM ea-gate
  * → primary-wiki mount → live). Platform atoms + capability pieces inject as recipe
  * closures; NO `if (platform)` enters here.
  *
@@ -18,7 +18,7 @@ import { assembleVessel, mountWikiSlot, LARES_DOC_URI } from "@lararium/mesh";
 import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from "./vessel-steps.js";
 import { VerbTable } from "./verb-dispatcher.js";
 
-/** The admin VM surface the orchestrator drives (node + browser both satisfy it). */
+/** The daemon VM surface the orchestrator drives (node + browser both satisfy it). */
 export interface VesselDaemonVm {
   workerEa:       Promise<void>;
   mountMainVerbs: (registry: VerbTable) => void;
@@ -43,17 +43,17 @@ export interface VesselWikiSlot {
 export interface VesselOrchestration<TPool extends PrimaryMountPool> {
   keel:        VesselRecipe;
   /** Resolve the active-wiki slot AFTER the keel assembles — the slug derives from the
-   *  admin-doc marker (post-genesis), so it cannot precede assembleVessel. */
+   *  daemon-doc marker (post-genesis), so it cannot precede assembleVessel. */
   wikiSlot:     (assembly: VesselCoreAssembly) => VesselWikiSlot | Promise<VesselWikiSlot>;
-  /** Open the platform admin VM once the keel + slot resolved (daemonAuth registers the
-   *  slot's wiki/draft bags; sentinels read from the assembled admin doc). */
+  /** Open the platform daemon VM once the keel + slot resolved (daemonAuth registers the
+   *  slot's wiki/draft bags; sentinels read from the assembled daemon doc). */
   openDaemon:    (a: { assembly: VesselCoreAssembly; slot: VesselWikiSlot }) => Promise<VesselDaemonVm>;
   /** Wire the vessel's verb plane (capability piece; relay holds more). */
   wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
-  /** Capability hook AFTER admin VM lives (node: arm the inbound gate). */
-  afterDaemon?:  (admin: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
+  /** Capability hook AFTER daemon VM lives (node: arm the inbound gate). */
+  afterDaemon?:  (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
   /** Build the island pool (platform: VesselIslandPool ↔ BrowserVesselIslandPool). */
-  makePool:     (admin: VesselDaemonVm, assembly: VesselCoreAssembly) => TPool | Promise<TPool>;
+  makePool:     (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => TPool | Promise<TPool>;
   /** Capability hook AFTER `live` (browser: broadcast presence). */
   afterLive?:   (ctx: { pool: TPool; assembly: VesselCoreAssembly; wikiHandle: DocHandle<LarDoc> }) => void;
 }
@@ -62,7 +62,7 @@ export interface VesselCoreResult<TPool extends PrimaryMountPool> {
   repo:         Repo;
   assembly:     VesselCoreAssembly;
   pool:         TPool;
-  admin:        VesselDaemonVm;
+  daemon:        VesselDaemonVm;
   wikiHandle:   DocHandle<LarDoc>;
   draftHandle:  DocHandle<LarDoc>;
 }
@@ -70,29 +70,29 @@ export interface VesselCoreResult<TPool extends PrimaryMountPool> {
 /**
  * openVesselCore — run the one vessel boot sequence on either substrate.
  * Phases: (caller emits boot/repo-open/catalog-ready before calling) → keel →
- * island-ready/corpus-ready (inside assembleVessel) → admin VM → verb plane →
- * wiki-slot → vessel-ready → pool → admin ea-gate → primary-wiki mount → tw5-booted →
- * live. The admin-first gate (await workerEa before mount) holds invariant.
+ * island-ready/corpus-ready (inside assembleVessel) → daemon VM → verb plane →
+ * wiki-slot → vessel-ready → pool → daemon ea-gate → primary-wiki mount → tw5-booted →
+ * live. The daemon-first gate (await workerEa before mount) holds invariant.
  */
 export async function openVesselCore<TPool extends PrimaryMountPool>(
   o: VesselOrchestration<TPool>,
 ): Promise<VesselCoreResult<TPool>> {
   const emit = (p: LarOpenPhase) => o.keel.onPhase?.(p);
 
-  // ── vessel: composite cascade + genesis + social + admin + corpus (mesh, VM-free) ──
+  // ── vessel: composite cascade + genesis + social + daemon + corpus (mesh, VM-free) ──
   const assembly = await assembleVessel(o.keel);
 
-  // ── active-wiki slot (post-genesis: slug from the admin-doc marker) ──
+  // ── active-wiki slot (post-genesis: slug from the daemon-doc marker) ──
   const slot = await o.wikiSlot(assembly);
 
-  // ── admin VM (platform) ──
-  const admin = await o.openDaemon({ assembly, slot });
+  // ── daemon VM (platform) ──
+  const daemon = await o.openDaemon({ assembly, slot });
 
   // ── verb plane (capability piece) ──
   const registry = new VerbTable();
   o.wireVerbs?.(registry, assembly);
-  admin.mountMainVerbs(registry);
-  o.afterDaemon?.(admin, assembly);
+  daemon.mountMainVerbs(registry);
+  o.afterDaemon?.(daemon, assembly);
 
   // ── wiki-slot layers (mesh) ──
   // The @lares-as-wiki quine: when the active slug opens the invariant bag
@@ -103,11 +103,11 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   emit("vessel-ready");
 
   // ── island pool (platform) ──
-  const pool = await o.makePool(admin, assembly);
+  const pool = await o.makePool(daemon, assembly);
 
-  // ── admin-first sovereignty gate → primary-wiki mount ──
-  await admin.workerEa;
-  await mountPrimaryWiki(pool, admin.resolveBinding, {
+  // ── daemon-first sovereignty gate → primary-wiki mount ──
+  await daemon.workerEa;
+  await mountPrimaryWiki(pool, daemon.resolveBinding, {
     activeWikiId: slot.activeWikiId,
     wikiSlug:     slot.wikiSlug,
     coreHash:     assembly.coreHash,
@@ -120,5 +120,5 @@ export async function openVesselCore<TPool extends PrimaryMountPool>(
   emit("live");
   o.afterLive?.({ pool, assembly, wikiHandle });
 
-  return { repo: assembly.repo, assembly, pool, admin, wikiHandle, draftHandle };
+  return { repo: assembly.repo, assembly, pool, daemon, wikiHandle, draftHandle };
 }

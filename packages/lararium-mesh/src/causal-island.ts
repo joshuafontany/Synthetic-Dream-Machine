@@ -800,12 +800,12 @@ export class BagResidencyManager {
 }
 
 // ---------------------------------------------------------------------------
-// Pin tiddler shape — pins persist as tiddlers in the admin doc.
+// Pin tiddler shape — pins persist as tiddlers in the daemon doc.
 // Same pattern as bag-mirror configs (S5.6 A.5). The dispatcher's residency
 // manager reads pin tiddlers at boot and applies them.
 // ---------------------------------------------------------------------------
 
-/** Build the URI for a pin tiddler under the admin doc. */
+/** Build the URI for a pin tiddler under the daemon doc. */
 export function pinTiddlerUri(bagUrl: BagUrl): string {
   return `${DAEMON_BAG_ID}/pin/${encodeURIComponent(bagUrl)}`;
 }

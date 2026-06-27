@@ -1,13 +1,13 @@
 /**
- * daemon-behavior — isomorphic admin island behavior for all platforms.
+ * daemon-behavior — isomorphic daemon island behavior for all platforms.
  *
  * makeDaemonBehavior() returns an IslandBehavior that:
  *   - Starts a VerbDispatcher subscribed to TW5 wiki change events (local path)
- *     and to the admin CompositeStore (remote/signal path).
+ *     and to the daemon CompositeStore (remote/signal path).
  *   - Routes wiki-scope verbs to the vessel via DaemonMsg_DelegateVerb /
  *     DaemonMsg_VerbResult, holding Promise resolvers in a pending delegation map.
- *   - Handles admin:place-verb from the vessel (main-thread → island).
- *   - Handles admin:verb-result from the vessel (island delegation round-trip).
+ *   - Handles daemon:place-verb from the vessel (main-thread → island).
+ *   - Handles daemon:verb-result from the vessel (island delegation round-trip).
  *
  * Runs identically in Node worker_threads and browser Web Workers.
  *
@@ -28,10 +28,13 @@ import {
   type BatchMode,
   type Verb,
   type CapabilityVerifier,
+  type CaptureEngine,
+  type CapturePost,
 } from "@lararium/mesh";
 import { placeVerb } from "./verb-vm.js";
 import { composeIsland } from "./island-caps.js";
 import { hasEngineWatch } from "./has-island-watches.js";
+import { hasCapture } from "./has-capture.js";
 import { VerbDispatcher, VerbTable } from "./verb-dispatcher.js";
 import type { IslandCap } from "./island-caps.js";
 import type { IslandContext, IslandBehavior } from "./island-context.js";
@@ -50,8 +53,8 @@ export interface DaemonBehaviorOptions {
   verifierFactory?: (ctx: IslandContext) => Promise<CapabilityVerifier>;
   /**
    * Inbound-peer verification for the host's AuthVerifierSeam (path b). The host
-   * has no keyhive after Stage 1, so it posts `admin:verify-request` and the
-   * admin worker answers here. Opaque by design — peer verification needs
+   * has no keyhive after Stage 1, so it posts `daemon:verify-request` and the
+   * daemon worker answers here. Opaque by design — peer verification needs
    * `receiveContactCard` (a @lararium/keyhive method, not in mesh), so the
    * platform entry supplies this closing over the booted keyhive; tw5 stays
    * keyhive-free.
@@ -74,9 +77,19 @@ export interface DaemonBehaviorOptions {
    * reactors into the worker's VerbDispatcher, in-worker, over the IslandContext.
    * Called in `onEa` before dispatch starts; the reactors inherit verify-then-delegate.
    * The platform entry supplies it (closing over the reactor factories); pool-touching
-   * reactors command main via `ctx.post` (admin:evict-request). Absent → no data-plane.
+   * reactors command main via `ctx.post` (daemon:evict-request). Absent → no data-plane.
    */
   wireWorkerVerbs?: (registry: VerbTable, ctx: IslandContext) => void;
+  /**
+   * The telemetry capture SINK (node: makeNodeCaptureEngine wired to the palace). Every @daemon
+   * ALWAYS carries the capture cap (idempotent — tending the bound operator's session-capture is a
+   * daemon duty); this seam, when wired, makes it LIVE. Absent → the cap stays inert (sink not
+   * wired, a valid resting state). The two-loop config (servo + derive) lives inside the engine the
+   * vessel builds. role = capability ≠ platform — tw5 never imports the node sink.
+   */
+  makeCaptureEngine?: (post: CapturePost) => CaptureEngine;
+  /** the capture cap's server tick (ms); default 50. */
+  captureTickMs?: number;
 }
 
 export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBehavior {
@@ -101,25 +114,25 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
     });
   }
 
-  // The admin island is a nameless cap stack: #has engine-watch + #has admin-dispatch (the
-  // VerbDispatcher + the admin:* signal family). The dispatch cap below holds what once was the
+  // The daemon island is a nameless cap stack: #has engine-watch + #has daemon-dispatch (the
+  // VerbDispatcher + the daemon:* signal family). The dispatch cap below holds what once was the
   // whole behavior, minus the engine-watch (now its own shared cap).
   const dispatchCap: IslandCap = {
-    name: "admin-dispatch",
+    name: "daemon-dispatch",
     async onEa(ctx: IslandContext) {
       const { tw5, composite, post } = ctx;
-      // Resolve the verifier: the async factory (bootDaemonKeyhive over the admin
+      // Resolve the verifier: the async factory (bootDaemonKeyhive over the daemon
       // composite) wins; else a ready verifier; else none (delegated-verb path).
       const verifier = opts.verifierFactory ? await opts.verifierFactory(ctx) : opts.verifier;
       const registry = new VerbTable();
       // Sovereign-worker: the data-plane reactors register HERE, in-worker, over the
       // IslandContext (ctx.composite/ctx.repo) — so they ride the dispatcher's
       // verify-then-delegate gate FOR FREE (the gate the old main-thread jobRegistry
-      // lacked). Pool-touching reactors command main via ctx.post (admin:evict-request).
+      // lacked). Pool-touching reactors command main via ctx.post (daemon:evict-request).
       opts.wireWorkerVerbs?.(registry, ctx);
       _dispatcher = new VerbDispatcher({
         daemonVm:  tw5,
-        admin:    composite,
+        daemon:    composite,
         registry,
         routeFn:  (invocation) => _routeToMain(invocation, post),
         ...(verifier ? { verifier } : {}),
@@ -200,7 +213,18 @@ export function makeDaemonBehavior(opts: DaemonBehaviorOptions = {}): IslandBeha
     },
   };
 
-  // Order = the original onEa order (dispatcher started, THEN engine-watch); composeIsland's LIFO
-  // teardown then reproduces the old onHooAnu (engine-watch stopped, THEN dispatcher) exactly.
-  return composeIsland([dispatchCap, hasEngineWatch()]);
+  // The @daemon's #has stack: dispatch (AUTHORITY plane) + engine-watch + the IDEMPOTENT capture
+  // cap (FLOW plane — the bound operator's session-capture duty). dispatch onEa runs first (LIFO
+  // teardown stops it last); the capture cap tears down first (final flush, then dispose). The
+  // capture cap stays a DISTINCT #has unit — it never gates authz; the master cut holds at the cap
+  // seam, not the worker. Inert when no sink is wired (makeCaptureEngine absent) — every @daemon
+  // carries the cap; whether it breathes depends on a wired sink + feed.
+  return composeIsland([
+    dispatchCap,
+    hasEngineWatch(),
+    hasCapture({
+      ...(opts.makeCaptureEngine ? { makeEngine: opts.makeCaptureEngine } : {}),
+      ...(opts.captureTickMs !== undefined ? { tickMs: opts.captureTickMs } : {}),
+    }),
+  ]);
 }

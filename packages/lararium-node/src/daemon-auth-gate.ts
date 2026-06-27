@@ -1,5 +1,5 @@
 /**
- * daemon-auth-gate — pre-sync WebSocket authentication gate for the admin doc.
+ * daemon-auth-gate — pre-sync WebSocket authentication gate for the daemon doc.
  *
  * Wraps a WebSocketServer as an EventEmitter proxy compatible with
  * NodeWSServerAdapter. The adapter calls .on("connection") and .on("close")
@@ -13,10 +13,10 @@
  *        OR   lar:auth-denied + ws.close(4003)
  *
  * The gate starts "disarmed" — all connections are rejected with 4503 until
- * arm() is called with the admin island's AuthVerifierSeam and the admin bag URL.
+ * arm() is called with the daemon island's AuthVerifierSeam and the daemon bag URL.
  * The host holds no keyhive after Stage 1; the seam proxies each verify to the
- * admin island, which answers from its in-worker keyhive and returns the peer's
- * Identifier hex for the sharePolicy map. arm() is called once the admin VM lives.
+ * daemon island, which answers from its in-worker keyhive and returns the peer's
+ * Identifier hex for the sharePolicy map. arm() is called once the daemon VM lives.
  *
  * After a peer authenticates:
  *   1. socketToIdentifier WeakMap records socket → identifierHex.
@@ -57,7 +57,7 @@ const WS_CLOSE_RATE_LIMITED  = 4429;
 
 interface ArmedState {
   seam:        AuthVerifierSeam;
-  adminBagUrl: string;
+  daemonBagUrl: string;
   /** The gate's verifying-key hex, emitted in lar:challenge as the gate-binding
    *  the peer's V3 proof commits to. Omitted → no gate-binding advertised. */
   gatePubKey?: string;
@@ -88,12 +88,12 @@ export class DaemonAuthGate extends EventEmitter {
   }
 
   /**
-   * Arm the gate with the admin island's verify seam and the admin bag URL.
-   * Call once the admin VM lives (its in-worker keyhive answers verify-proxy
+   * Arm the gate with the daemon island's verify seam and the daemon bag URL.
+   * Call once the daemon VM lives (its in-worker keyhive answers verify-proxy
    * queries). Connections arriving before arm() are rejected with 4503.
    */
-  arm(seam: AuthVerifierSeam, adminBagUrl: string = DAEMON_BAG_ID, gatePubKey?: string): void {
-    this.armed = { seam, adminBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
+  arm(seam: AuthVerifierSeam, daemonBagUrl: string = DAEMON_BAG_ID, gatePubKey?: string): void {
+    this.armed = { seam, daemonBagUrl, ...(gatePubKey ? { gatePubKey } : {}) };
   }
 
   /**
@@ -118,7 +118,7 @@ export class DaemonAuthGate extends EventEmitter {
     }
 
     this._pending++;
-    const { seam, adminBagUrl, gatePubKey } = this.armed;
+    const { seam, daemonBagUrl, gatePubKey } = this.armed;
 
     const nonce = randomBytes(32).toString("hex");
     this._send(socket, mkLarChallenge(nonce, gatePubKey));
@@ -173,10 +173,10 @@ export class DaemonAuthGate extends EventEmitter {
             ? { nonce, sig: parsed.sig, ts: parsed.ts }
             : undefined;
 
-          // Path (b): host has no keyhive — proxy to the admin island, which
+          // Path (b): host has no keyhive — proxy to the daemon island, which
           // does receiveContactCard + verify in-worker and returns the verdict
           // plus the peer's Identifier hex for the sharePolicy map.
-          const verdict = await seam.verify(cardBytes, adminBagUrl, "admin", proof);
+          const verdict = await seam.verify(cardBytes, daemonBagUrl, "admin", proof);
 
           // ENFORCEMENT (V3 step D): the keyholder worker already folded the proof
           // check into `verdict.ok` (it returns ok only on capability AND a verified

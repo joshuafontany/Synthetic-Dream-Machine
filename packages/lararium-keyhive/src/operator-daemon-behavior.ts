@@ -1,7 +1,7 @@
 /**
- * operator-daemon-behavior — the keyhive-wired admin island behavior, shared.
+ * operator-daemon-behavior — the keyhive-wired daemon island behavior, shared.
  *
- * The node and browser admin entry points were byte-identical except for which
+ * The node and browser daemon entry points were byte-identical except for which
  * platform run-function they called. The keyhive wiring — boot keyhive in-worker
  * from `manifest.daemonAuth`, then supply makeDaemonBehavior's three callbacks
  * (verifierFactory, verifyPeer, resolveBinding) — lives here ONCE. Each entry
@@ -22,8 +22,13 @@ import {
   makeWardAlertReactor,
   makeAddBagReactor, makeRemoveBagReactor, makeEpochBagReactor, makeRotateRecipeReactor,
 } from "@lararium/tw5";
-import type { IslandBehavior, IslandContext } from "@lararium/tw5";
+import type { IslandBehavior, IslandContext, DaemonBehaviorOptions } from "@lararium/tw5";
 import type { IslandMsg_Manifest, AuthProofWire } from "@lararium/mesh";
+
+/** Vessel-injected daemon seam the platform entry supplies (node folds the telemetry capture SINK
+ *  here). Forwarded straight to makeDaemonBehavior — the @daemon always carries the cap; this makes
+ *  it live. Absent → the cap stays inert (sink not wired). */
+type DaemonExtra = Pick<DaemonBehaviorOptions, "makeCaptureEngine" | "captureTickMs">;
 import { PERSONAL_BINDINGS_PREFIX, DRAFT_BINDINGS_PREFIX, WORKING_BINDINGS_PREFIX, verifyAuthProof } from "@lararium/mesh";
 import { bootDaemonKeyhive } from "./boot-daemon-keyhive.js";
 import { DaemonEventStore } from "./daemon-event-store.js";
@@ -31,40 +36,41 @@ import { resolveOrMintBinding } from "./resolve-binding.js";
 import type { KeyhiveProvider } from "./keyhive-provider.js";
 
 /**
- * Build the operator's admin-island behavior from a manifest. With no auth
+ * Build the operator's daemon-island behavior from a manifest. With no auth
  * material, falls back to the verifier-less behavior (delegated-verb path only);
- * admin manifests always carry daemonAuth, so that path guards tests.
+ * daemon manifests always carry daemonAuth, so that path guards tests.
  */
-export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): IslandBehavior {
+export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest, extra: DaemonExtra = {}): IslandBehavior {
   const daemonAuth = manifest.daemonAuth;
-  if (!daemonAuth) return makeDaemonBehavior();
+  if (!daemonAuth) return makeDaemonBehavior({ ...extra });
 
   let kh: KeyhiveProvider | null = null;
   let mintedByHex = daemonAuth.operatorVerifyingKey;
 
   return makeDaemonBehavior({
+    ...extra, // the vessel-injected telemetry capture SINK flows through (idempotent cap → live)
     // Sovereign-worker data-plane: register the read-only reactors in-worker over the
     // IslandContext composite (verify-then-delegate gate inherited). The first slice
     // off the old main-thread jobRegistry; pool-touching residency reactors follow.
     wireWorkerVerbs: (registry, ctx: IslandContext) => {
       // `where` reaches every registered bag across both oracle planes by ACCESS
-      // (access≠load) — the admin queries all bags, mounts none (reopened hoike
+      // (access≠load) — the daemon queries all bags, mounts none (reopened hoike
       // #oracle-planes-verb-execution, 2026-06-16). resolve stays cascade-scoped.
       registry.register("where",      makeWhereReactor(ctx.composite, { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl }));
       registry.register("resolve",    makeResolveReactor(ctx.composite));
       // Residency ACTION verbs (ADD/COPY/MOVE/CLEAR/DROP/LOAD) — verify-then-delegate
-      // gated, the `lares act` front door. The admin reaches a deep target bag by
+      // gated, the `lares act` front door. The daemon reaches a deep target bag by
       // ACCESS (ephemeral mount, released after — no standing system-bag mount; the
       // edit/action split, wiki-layer-ontology#write-law).
       registerActionReactors(registry, {
         composite: ctx.composite,
         reach: { repo: ctx.repo, catalogUrl: ctx.catalogUrl, oracleUrl: ctx.oracleUrl },
         // LOAD lands every legal TW5 filetype via TW5's own deserializer registry,
-        // resolved lazily through the admin island's live $tw at action time.
+        // resolved lazily through the daemon island's live $tw at action time.
         tw5: makeTw5Deserializer(ctx.tw5),
       });
       // Residency mutators (pin/unpin/register-cold) — gated in-worker; they command the
-      // main-resident BagResidencyManager via admin:residency-op (ctx.post). `residency`
+      // main-resident BagResidencyManager via daemon:residency-op (ctx.post). `residency`
       // stats (a read) stays main pending the askMain research.
       registry.register("pin",           makePinReactor(ctx.post));
       registry.register("unpin",         makeUnpinReactor(ctx.post));
@@ -77,8 +83,8 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): Island
       // in @daemon + $:/tags/Alert into the operator's pinned VM.
       registry.register("ward-alert", makeWardAlertReactor(ctx.composite, ctx.post));
 
-      // Every other admin verb reaches USER registry data in @catalog (wiki oracles,
-      // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The admin
+      // Every other daemon verb reaches USER registry data in @catalog (wiki oracles,
+      // recipes) via the accessor over ctx.repo/ctx.catalogUrl — access≠load. The daemon
       // recipe NEVER loads @catalog as tiddlers. All ride the verify-then-delegate gate.
       // operatorDid matches the old main reactors exactly ("0x"+operatorVerifyingKey) so
       // draft keys never drift.
@@ -99,7 +105,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): Island
         registry.register("prune-stale", makePruneStaleReactor(wikiMintOpts));
         registry.register("list-wikis",  makeListWikisReactor(catalog, sysPlane));
         // Whole-wiki residency policy — read the @catalog recipe, command main's manager
-        // per bag via admin:residency-op. Pure policy, no live-layer mechanism.
+        // per bag via daemon:residency-op. Pure policy, no live-layer mechanism.
         registry.register("pin-wiki",      makeWikiPinReactor(catalog, ctx.post));
         registry.register("unpin-wiki",    makeWikiUnpinReactor(catalog, ctx.post));
         // Recipe composition — write the @catalog recipe, command residency via op. NO
@@ -115,7 +121,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): Island
     verifierFactory: async (ctx: IslandContext) => {
       const { keyhive, did } = await bootDaemonKeyhive({
         seed:                  daemonAuth.seed,
-        eventStore:            new DaemonEventStore({ admin: ctx.composite }),
+        eventStore:            new DaemonEventStore({ daemon: ctx.composite }),
         operatorVerifyingKey:  daemonAuth.operatorVerifyingKey,
         personaGroupDocIdHex:   daemonAuth.personaGroupDocIdHex,
         personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex,
@@ -176,7 +182,7 @@ export function makeOperatorDaemonBehavior(manifest: IslandMsg_Manifest): Island
     resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
       if (!kh) throw new Error("keyhive not booted");
       const common = {
-        fingerprint, repo: ctx.repo, adminStore: ctx.composite, keyhive: kh,
+        fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
         personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex, mintedByHex, recipeTrace,
       } as const;
       const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });

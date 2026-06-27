@@ -178,7 +178,7 @@ export async function cmdWake(args: ParsedArgs): Promise<number> {
         if (tail.includes("vessel-ready")) { phase = "ready"; break; }
         await sleep(200);
       }
-      // `vessel-ready` is attested BEFORE the admin-keyhive gates settle, so a gate
+      // `vessel-ready` is attested BEFORE the daemon-keyhive gates settle, so a gate
       // fault (e.g. the Binding Gate) surfaces as a LATE `fatal:`. After a ready attestation,
       // settle and re-read for that late fault — never report up for a node that died.
       if (phase === "ready") {

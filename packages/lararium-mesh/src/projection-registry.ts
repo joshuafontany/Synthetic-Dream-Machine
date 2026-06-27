@@ -8,7 +8,7 @@
  *
  * The registry keeps a kind→factory table and an id→stop table for running
  * instances. Configs live as tiddlers tagged lar:///ha.ka.ba/tags/lararium-projection in
- * the admin wiki (S5.5+); until that lands, callers pass configs directly.
+ * the daemon wiki (S5.5+); until that lands, callers pass configs directly.
  *
  * Platform scoping: factories close over platform-specific deps (filesystem
  * roots, render functions) at registration time, so the same registry shape
@@ -18,7 +18,7 @@
 
 import type { LarVessel } from "./lar-vessel.js";
 
-/** TW5 tag that identifies a projection-config tiddler in the admin wiki. */
+/** TW5 tag that identifies a projection-config tiddler in the daemon wiki. */
 export const LARARIUM_PROJECTION_TAG = "lar:///ha.ka.ba/tags/lararium-projection";
 
 /**

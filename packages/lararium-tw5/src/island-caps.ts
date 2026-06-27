@@ -5,7 +5,7 @@
  * component memes. This models a RUNTIME entity the same way — a sovereign **causal island** is a
  * nameless entity whose behavior is a STACK OF CAPS. There is no per-worker behavior class; an
  * island IS its cap stack. A wiki island HAS dispatch + projection; a telemetry island HAS capture;
- * the admin island HAS dispatch; any island MAY HAVE a servo. `composeIsland([...caps])` folds the
+ * the daemon island HAS dispatch; any island MAY HAVE a servo. `composeIsland([...caps])` folds the
  * `#has` stack into the one `IslandBehavior` the sovereign kernel drives.
  *
  * Each island breathes like a cell (the metaphor, not the noun): IN = accumulate (the axon —

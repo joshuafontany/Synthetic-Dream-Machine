@@ -1,16 +1,16 @@
 /**
- * boot-daemon-keyhive.test.ts — the isomorphic admin-island authn/z boot.
+ * boot-daemon-keyhive.test.ts — the isomorphic daemon-island authn/z boot.
  *
  * Proves the pure `bootDaemonKeyhive` sequence that Stage 1 moves into every
- * platform's admin island worker:
- *   - re-hydrates cap state from the admin doc and clears Gates A/B/C
+ * platform's daemon island worker:
+ *   - re-hydrates cap state from the daemon doc and clears Gates A/B/C
  *   - registers the operator's writable bags so verify() resolves
  *   - HALTs (throws) on a drifted identity (Gate A) or a forged binding edge (the Binding Gate)
  *
  * Runs entirely in-process (no worker) because the logic is extracted pure —
  * that is the whole point: the worker is just the caller. Founds a real operator
  * via runFoundingCeremony into an in-memory Repo, exactly as the host platform
- * `loadBootstrap` does before the admin worker spawns.
+ * `loadBootstrap` does before the daemon worker spawns.
  *
  * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/vessel-platform#authn-home
  */
@@ -57,14 +57,14 @@ beforeAll(async () => {
     hearthTrueName: "",         // hearth-agnostic in the unit test
   });
 
-  // Build the admin composite the worker's onEa would receive in ctx.
+  // Build the daemon composite the worker's onEa would receive in ctx.
   const daemonHandle = await repo.find<LarDoc>(cer.daemonUrl as AutomergeUrl);
   const composite = new CompositeStore();
-  const adminStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
-  composite.addLayer({ bagId: DAEMON_BAG_ID, store: adminStore, writable: true });
-  adminStore.markSyncComplete();
+  const daemonStore = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
+  composite.addLayer({ bagId: DAEMON_BAG_ID, store: daemonStore, writable: true });
+  daemonStore.markSyncComplete();
 
-  const eventStore = new DaemonEventStore({ admin: composite });
+  const eventStore = new DaemonEventStore({ daemon: composite });
   founded = {
     verifyingKey, eventStore,
     bootArgs: {
@@ -81,7 +81,7 @@ beforeAll(async () => {
 });
 
 describe("bootDaemonKeyhive", () => {
-  test("clears Gate A + the Binding Gate, registers the admin bag, and verifies operator admin", async () => {
+  test("clears Gate A + the Binding Gate, registers the daemon bag, and verifies operator admin", async () => {
     const { keyhive, did } = await bootDaemonKeyhive(founded.bootArgs);
 
     expect(did).toMatch(/^0x/);

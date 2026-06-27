@@ -1,8 +1,8 @@
 /**
- * DaemonEventStore — persist Keyhive events as tiddlers in the admin Automerge doc.
+ * DaemonEventStore — persist Keyhive events as tiddlers in the daemon Automerge doc.
  *
  * Implements the EventStore interface against a CompositeStore writable layer
- * (the admin VM's composite). Each Keyhive event becomes one tiddler:
+ * (the daemon VM's composite). Each Keyhive event becomes one tiddler:
  *
  *   title:    lar:///ha.ka.ba/@daemon/cap/<eventHash>
  *   tag:      lar:///ha.ka.ba/tags/cap-event (sub-tags by variant: .../prekey, .../cgka,
@@ -10,9 +10,9 @@
  *   fields:   variant, hash, bytes-len, is-delegated, is-revoked
  *   text:     base64-encoded `event.toBytes()` payload
  *
- * Scope (D.4 minimum-viable). All events route to the admin doc, regardless
+ * Scope (D.4 minimum-viable). All events route to the daemon doc, regardless
  * of their semantic scope (operator-principal vs document vs group-CGKA).
- * The admin doc is operator-private, which keeps routing simple and leaks no
+ * The daemon doc is operator-private, which keeps routing simple and leaks no
  * metadata. Per-bag routing per the D4.a decision in HANDOFF.md remains a
  * known future refinement; this store will fan out across multiple writable
  * layers when that lands.
@@ -41,7 +41,7 @@ function subTagFor(variant: string): string | null {
   }
 }
 
-/** Title for a cap-event tiddler under the admin doc. */
+/** Title for a cap-event tiddler under the daemon doc. */
 export function capEventTitle(hash: string): string {
   return `${DAEMON_BAG_ID}/cap/${hash}`;
 }
@@ -73,8 +73,8 @@ async function hashBytes(bytes: Uint8Array): Promise<string> {
 }
 
 export interface DaemonEventStoreOptions {
-  /** Composite store with the admin bag as its writable layer. */
-  readonly admin: CompositeStore;
+  /** Composite store with the daemon bag as its writable layer. */
+  readonly daemon: CompositeStore;
 }
 
 export class DaemonEventStore implements EventStore {
@@ -84,7 +84,7 @@ export class DaemonEventStore implements EventStore {
     const hash    = rec.hash || (await hashBytes(rec.bytes));
     const title   = capEventTitle(hash);
     // Skip de-dup: composite.get is cheap; avoid re-writing identical events.
-    const existing = await this.opts.admin.get(title);
+    const existing = await this.opts.daemon.get(title);
     if (existing && existing.meta?.deleted !== true) return;
 
     const subTag = subTagFor(rec.variant);
@@ -102,15 +102,15 @@ export class DaemonEventStore implements EventStore {
       { authority: "lares-keyhive" },
     );
     const origin: ChangeOrigin = { kind: "lares-verb", requestId: `cap-event-${hash.slice(0, 8)}` };
-    await this.opts.admin.put(record, origin, { bag: DAEMON_BAG_ID });
+    await this.opts.daemon.put(record, origin, { bag: DAEMON_BAG_ID });
   }
 
   async list(): Promise<readonly EventRecord[]> {
     const out: EventRecord[] = [];
-    const titles = await this.opts.admin.listVisible();
+    const titles = await this.opts.daemon.listVisible();
     for (const title of titles) {
       if (!title.startsWith(`${DAEMON_BAG_ID}/cap/`)) continue;
-      const rec = await this.opts.admin.get(title);
+      const rec = await this.opts.daemon.get(title);
       if (!rec || rec.meta?.deleted) continue;
       const fields = rec.tiddler as Record<string, string>;
       const variant = fields["variant"];

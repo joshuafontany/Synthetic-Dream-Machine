@@ -1,11 +1,11 @@
 /**
- * verb-dispatcher — admin-VM verb dispatcher for the lararium causal island.
+ * verb-dispatcher — daemon-VM verb dispatcher for the lararium causal island.
  *
  * Subscription model (dual-path):
  *
  *   LOCAL path  — in-process callers use placeVerb(wiki, opts) to write a
  *                 volatile invocation tiddler at lararium.local.vm/verbs/<id>
- *                 directly to the admin TW5 wiki. The dispatcher watches wiki
+ *                 directly to the daemon TW5 wiki. The dispatcher watches wiki
  *                 change events and picks these up immediately.
  *
  *   REMOTE path — external vessels write a verb-summons tiddler at
@@ -15,14 +15,14 @@
  *                 invocation, then tombstones the summons tiddler.
  *                 The summons carries edge transport, not durable coordination state.
  *
- * Outcome flow: handler result → concludeVerb → admin composite store
+ * Outcome flow: handler result → concludeVerb → daemon composite store
  *   → IslandAdaptor.saveTiddler → @daemon/outcomes/<id> in Automerge → syncs.
  *   Durable shared meaning begins at the outcome, not at the summons.
  *
- * Daemon-only law: ONLY the admin VM runs a VerbDispatcher. Pinned wiki and
+ * Daemon-only law: ONLY the daemon VM runs a VerbDispatcher. Pinned wiki and
  *   warm/cold wikis are content surfaces — they do not dispatch.
  *
- * Federation model: every lararium vessel runs its own admin VM + VerbDispatcher.
+ * Federation model: every lararium vessel runs its own daemon VM + VerbDispatcher.
  *   Invocations are vessel-local scratch. Outcomes sync to all vessels via Automerge.
  *   Vessels coordinate through shared outcome space, not shared invocation queues.
  *
@@ -56,7 +56,7 @@ import type { SummonsRequest } from "./verb-summons.js";
 import { runLocalVerb, deriveRoutedCap } from "./verb-local-dispatch.js";
 
 export interface VerbContext {
-  readonly admin: CompositeStore;
+  readonly daemon: CompositeStore;
   readonly invocation: Verb;
   readonly cap:   (access: import("@lararium/mesh").CapabilityAccess, bagUrl: string) => Promise<import("@lararium/mesh").CapabilityVerifyResult>;
 }
@@ -83,7 +83,7 @@ export class VerbTable {
 
 export interface VerbDispatcherOptions {
   readonly daemonVm:   TW5Engine;
-  readonly admin:     CompositeStore;
+  readonly daemon:    CompositeStore;
   readonly registry:  VerbTable;
   readonly verifier?: CapabilityVerifier;
   readonly routeFn?:  (invocation: Verb) => Promise<Record<string, unknown>>;
@@ -109,19 +109,19 @@ export class VerbDispatcher {
         const invocation = parseVerb(tw5Tiddler.fields);
         if (!invocation || invocation.status !== "pending" || this.inFlight.has(invocation.requestId)) continue;
         this.inFlight.add(invocation.requestId);
-        void this.opts.admin.getLive(OUTCOME_URI_PREFIX + invocation.requestId).then((prior) => {
+        void this.opts.daemon.getLive(OUTCOME_URI_PREFIX + invocation.requestId).then((prior) => {
           // Durable idempotency — the CRDT is the dedup store: a verb whose
           // outcome already landed has already taken effect, so skip re-execution
           // (exactly-once EFFECT, not delivery). See project_asymmetric_peer_handoff.
           if (prior) return undefined;
           return dispatchVerb(
           this.opts.daemonVm,
-          this.opts.admin,
+          this.opts.daemon,
           invocation,
           async () => {
             if (this.opts.registry.has(invocation.action)) {
               return runLocalVerb(invocation, {
-                admin:    this.opts.admin,
+                daemon:   this.opts.daemon,
                 registry: this.opts.registry,
                 ...(this.opts.verifier ? { verifier: this.opts.verifier } : {}),
               });
@@ -152,9 +152,9 @@ export class VerbDispatcher {
     wiki.addEventListener("change", onWikiChange);
     this.unsubWiki = () => wiki.removeEventListener("change", onWikiChange);
 
-    this.unsubAutomerge = this.opts.admin.subscribe((change) => {
+    this.unsubAutomerge = this.opts.daemon.subscribe((change) => {
       heedSummons(change, {
-        admin:      this.opts.admin,
+        daemon:     this.opts.daemon,
         isInFlight: (requestId) => this.inFlight.has(requestId),
         placeVerb:  (invocation) => { this.placeVerb(invocation); },
       }).catch((err) => {

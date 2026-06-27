@@ -1,5 +1,5 @@
 /**
- * worker-data-verbs — read-only data-plane reactors that run IN the admin worker.
+ * worker-data-verbs — read-only data-plane reactors that run IN the daemon worker.
  *
  * Sovereign-worker model (lararium-canonical-model, project-sovereign-worker-model):
  * the data-plane lives in the worker, registered via makeDaemonBehavior's `wireWorkerVerbs`
@@ -9,7 +9,7 @@
  *  - READS (where · resolve · list-wikis) — read the worker's OWN synced replica
  *    (ctx.composite over syncPort); zero round-trip to main.
  *  - MUTATORS (pin · unpin · register-cold) — gate in-worker, then COMMAND the
- *    main-resident BagResidencyManager fire-and-forget via admin:residency-op (policy
+ *    main-resident BagResidencyManager fire-and-forget via daemon:residency-op (policy
  *    decides in the worker; the main mechanism executes).
  * Runtime-only reads (residency `stats`) stay at the resource (main) — no askMain.
  */
@@ -19,7 +19,7 @@ import { ACTIVE_WIKI_URI } from "./active-wiki.js";
 import type { VerbReactor } from "./verb-dispatcher.js";
 import { makeCatalogAccessor, type CatalogAccessor } from "./catalog-accessor.js";
 
-/** Registry options for access-based reads: the admin reaches ANY registered bag
+/** Registry options for access-based reads: the daemon reaches ANY registered bag
  *  across both oracle planes (@catalog user + @oracle system) without mounting it. */
 export interface RegistryReach {
   repo:       Repo;
@@ -65,7 +65,7 @@ export const makeUnpinReactor = (post: ResidencyOpPost): VerbReactor => residenc
 export const makeRegisterColdReactor = (post: ResidencyOpPost): VerbReactor => residencyVerb("register-cold", post);
 
 /** `where` — global membership query: which registered bags hold a tiddler.
- *  Access≠load (operator ruling, reopened hoike 2026-06-16): the admin reaches
+ *  Access≠load (operator ruling, reopened hoike 2026-06-16): the daemon reaches
  *  EVERY registered bag across both oracle planes (@catalog user + @oracle
  *  system) plus its mounted composite — no mounting required. Returns membership.
  *  `scope` names the horizon: THIS operator's registry, never the DreamNet
@@ -147,7 +147,7 @@ export function makeListWikisReactor(catalog: CatalogAccessor, sysPlane?: Catalo
 // ── Whole-wiki residency policy (pin-wiki / unpin-wiki) — worker-ward ──────────
 // Pure policy: read the recipe (USER registry data in @catalog, via the accessor —
 // access≠load), walk its bag-stack, COMMAND main's BagResidencyManager per bag via
-// admin:residency-op (the mechanism stays at the resource — the manager is pool-driven
+// daemon:residency-op (the mechanism stays at the resource — the manager is pool-driven
 // bookkeeping). No live composite layer mutation, so unlike add-bag/remove-bag these
 // move cleanly.
 
@@ -188,11 +188,11 @@ export function makeWikiUnpinReactor(catalog: CatalogAccessor, post: ResidencyOp
   };
 }
 
-// ── ward-alert — the disk ward's signal surfaces in the admin VM ────────────
+// ── ward-alert — the disk ward's signal surfaces in the daemon VM ────────────
 //
 // A wiki island's projector refused a write (sovereign-island disk ward,
 // disk-projection#write-ward). The signal rides the generic worker.event →
-// placeVerb bridge into the admin VM, which (a) writes a DURABLE audit record
+// placeVerb bridge into the daemon VM, which (a) writes a DURABLE audit record
 // into @daemon — the operators-with-admin-grants surface — and (b) injects a
 // $:/tags/Alert into the operator's currently PINNED VM via the existing
 // wiki-alert rail (kind "disk-ward"). No cap-gate: the signal originates from

@@ -34,7 +34,7 @@ function ctx(composite: CompositeStore, args: Record<string, unknown>): VerbCont
     action: "INGEST", args, targets: [], batchMode: "best-effort",
     status: "pending", requestedBy: "operator-test", requestedAt: "2026-06-14T00:00:00Z",
   };
-  return { admin: composite, invocation, cap: allowCap };
+  return { daemon: composite, invocation, cap: allowCap };
 }
 
 /** Seed `n` single-record synthetic carriers lar:///c0..c{n-1}, each its own changeId. */

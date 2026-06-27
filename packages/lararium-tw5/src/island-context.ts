@@ -28,7 +28,7 @@ export interface IslandContext {
   post:      (msg: IslandToVesselMsg) => void;
   /**
    * The island-side Automerge Repo. Island behaviors that mint docs (e.g. the
-   * admin island's @personal/@draft binding resolver) create them here; the docs
+   * daemon island's @personal/@draft binding resolver) create them here; the docs
    * sync to the host relay via the manifest syncPort. Isomorphic-vessel Stage 1.
    */
   repo:      Repo;
@@ -69,7 +69,7 @@ export interface IslandContext {
  * behaviors own what distinguishes one island type from another.
  *
  * Under the one-recipe model, write routing happens via the in-wiki cascade
- * (`lar:///ha.ka.ba/@lararium/config/bag-paths`) — admin and wiki behaviors
+ * (`lar:///ha.ka.ba/@lararium/config/bag-paths`) — daemon and wiki behaviors
  * share the same recipe shape; their differences live in `onEa` / `onSignal`.
  *
  * - `onEa`     — called after CompositeStore + IslandAdaptor wired, before ea.

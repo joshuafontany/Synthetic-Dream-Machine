@@ -51,22 +51,22 @@ function makeFakeKeyhive() {
   return { provider, registered, delegations };
 }
 
-/** Build an admin-bag composite (the shape both host + island pass), plus the
+/** Build an daemon-bag composite (the shape both host + island pass), plus the
  *  underlying handle for direct assertions/seeding. */
-function makeDaemonStore(repo: Repo): { adminStore: CompositeStore; daemonHandle: DocHandle<LarDoc> } {
+function makeDaemonStore(repo: Repo): { daemonStore: CompositeStore; daemonHandle: DocHandle<LarDoc> } {
   const daemonHandle = repo.create<LarDoc>(emptyLarDoc());
-  const adminStore = new CompositeStore();
+  const daemonStore = new CompositeStore();
   const layer = new AutomergeDocStore(daemonHandle, DAEMON_BAG_ID);
-  adminStore.addLayer({ bagId: DAEMON_BAG_ID, store: layer, writable: true });
+  daemonStore.addLayer({ bagId: DAEMON_BAG_ID, store: layer, writable: true });
   layer.markSyncComplete();
-  return { adminStore, daemonHandle };
+  return { daemonStore, daemonHandle };
 }
 
-function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityProvider) {
+function commonArgs(repo: Repo, daemonStore: CompositeStore, keyhive: CapabilityProvider) {
   return {
     fingerprint:           FINGERPRINT,
     repo,
-    adminStore,
+    daemonStore,
     keyhive,
     personaGroupAgentIdHex: AGENT_HEX,
     mintedByHex:           MINTED_BY,
@@ -77,11 +77,11 @@ function commonArgs(repo: Repo, adminStore: CompositeStore, keyhive: CapabilityP
 describe("resolveOrMintBinding", () => {
   test("mint-on-absent: creates a doc, registers, delegates to PersonaGroup admin, records the binding", async () => {
     const repo = new Repo();
-    const { adminStore, daemonHandle } = makeDaemonStore(repo);
+    const { daemonStore, daemonHandle } = makeDaemonStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     const result = await resolveOrMintBinding({
-      ...commonArgs(repo, adminStore, provider),
+      ...commonArgs(repo, daemonStore, provider),
       kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
     });
 
@@ -97,7 +97,7 @@ describe("resolveOrMintBinding", () => {
       access:   "admin",      // edit-intent rounds up to admin (grain debt)
     });
 
-    // Binding tiddler recorded in the admin doc under the personal prefix.
+    // Binding tiddler recorded in the daemon doc under the personal prefix.
     const key = `${PERSONAL_BINDINGS_PREFIX}/${FINGERPRINT}`;
     const rec = daemonHandle.doc()?.tiddlers?.[key];
     expect(tiddlerText(rec)).toBe(result.url);
@@ -109,7 +109,7 @@ describe("resolveOrMintBinding", () => {
 
   test("reuse-on-present: returns the stored url, mints/delegates nothing", async () => {
     const repo = new Repo();
-    const { adminStore, daemonHandle } = makeDaemonStore(repo);
+    const { daemonStore, daemonHandle } = makeDaemonStore(repo);
     const { provider, registered, delegations } = makeFakeKeyhive();
 
     // Pre-seed an existing binding tiddler.
@@ -120,7 +120,7 @@ describe("resolveOrMintBinding", () => {
     });
 
     const result = await resolveOrMintBinding({
-      ...commonArgs(repo, adminStore, provider),
+      ...commonArgs(repo, daemonStore, provider),
       kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
     });
 
@@ -131,15 +131,15 @@ describe("resolveOrMintBinding", () => {
 
   test("@personal and @draft bind under parallel prefixes for the same fingerprint", async () => {
     const repo = new Repo();
-    const { adminStore, daemonHandle } = makeDaemonStore(repo);
+    const { daemonStore, daemonHandle } = makeDaemonStore(repo);
     const { provider } = makeFakeKeyhive();
 
     const personal = await resolveOrMintBinding({
-      ...commonArgs(repo, adminStore, provider),
+      ...commonArgs(repo, daemonStore, provider),
       kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX,
     });
     const draft = await resolveOrMintBinding({
-      ...commonArgs(repo, adminStore, provider),
+      ...commonArgs(repo, daemonStore, provider),
       kind: "draft-binding", prefix: DRAFT_BINDINGS_PREFIX,
     });
 

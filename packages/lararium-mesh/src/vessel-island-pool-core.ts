@@ -109,7 +109,7 @@ export interface VesselIslandPoolCoreOptions {
   /** Called when an island emits a verse-event reaction. */
   onWorkerEvent?: (wikiId: string, msg: IslandMsg_Event) => void;
   /** The engine's plugin-tiddler CIDs — every wiki island resolves them by CID from the local
-   *  CAS (the breath path), the same set the admin island gets. Constant per genesis. */
+   *  CAS (the breath path), the same set the daemon island gets. Constant per genesis. */
   pluginCids?: readonly string[];
   /**
    * Called when the island's `ea` declaration lands — the island speaks

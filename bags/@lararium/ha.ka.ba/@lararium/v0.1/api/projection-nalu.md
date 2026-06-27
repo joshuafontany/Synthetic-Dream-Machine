@@ -121,7 +121,7 @@ The three nalus do not live in bespoke worker classes. Each rides a **sovereign 
 
 <<~ranks cap hasCapture:IN-accumulate -> hasProjection:OUT-coalesce -> hasDispatch:the-synapse -> hasEngineWatch/hasRecipeWatch:drift >>
 
-A wiki island = `[hasDispatch, hasProjection, hasEngineWatch, hasRecipeWatch]`; the admin island = `[hasEngineWatch, hasDispatch]`; the **telemetry island** = `[hasCapture]` — now a sovereign causal island (`node-telemetry-island.ts`), no longer a bespoke main-thread-fed worker_thread (the main thread carries no data-plane). The breath is two gate-families on one island substrate (IN-axon + OUT-dendrite, the neuron rhyme); dispatch is the third, non-gate channel. A cap injects its substrate seam, never imports it — the same stack composes on node, browser, any vessel.
+A wiki island = `[hasDispatch, hasProjection, hasEngineWatch, hasRecipeWatch]`; the **@daemon** (the bound-operator's vessel-only worker, severed from federation) = `[hasDispatch, hasEngineWatch, hasCapture]` — telemetry **folds into @daemon as an IDEMPOTENT cap**: every @daemon carries it (tending the operator's session-capture is a daemon duty), no longer a bespoke worker nor a standalone island. The capture cap stays a DISTINCT `#has` unit (FLOW) beside dispatch (AUTHORITY) — the master cut holds at the cap seam, never the worker — and is INERT until a sink + feed are wired (a valid resting state). The breath is two gate-families on one island substrate (IN-axon + OUT-dendrite, the neuron rhyme); dispatch is the third, non-gate channel. A cap injects its substrate seam, never imports it — the same stack composes on node, browser, any vessel.
 
 <<~/ahu >>
 

@@ -53,7 +53,7 @@ export interface LarDiskProjectorOptions {
   readonly renderFn: (tiddlerUri: string) => Promise<string | null>;
   /** Debounce delay in ms (default 1000). */
   readonly debounceMs?: number;
-  /** Fired on every disk-ward refusal — the island routes it to the admin VM. */
+  /** Fired on every disk-ward refusal — the island routes it to the daemon VM. */
   readonly onRefusal?: (info: { bagId: string; uri: string; reason: string }) => void;
   /** Optional readiness map — lights `disk-projector` after first flush. */
   readonly readinessMap?: ReadinessMap;

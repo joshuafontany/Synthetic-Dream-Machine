@@ -7,8 +7,8 @@
  * structure (Ink & Switch): both walk this ONE protocol sequence.
  *
  * VM-FREE by design — this owns the substrate-level keel (composite cascade,
- * genesis island layer, social plane, admin doc, wiki-slot layers), so it lives in
- * mesh, NOT tw5. The VM-focused pieces (admin-VM spawn, primary-wiki mount, island
+ * genesis island layer, social plane, daemon doc, wiki-slot layers), so it lives in
+ * mesh, NOT tw5. The VM-focused pieces (daemon-VM spawn, primary-wiki mount, island
  * pool) stay in the platform recipe / tw5. The one tw5-class the keel needs — the
  * volatile temp store — injects as `tempStore`, so mesh holds zero tw5 dep.
  *
@@ -27,7 +27,7 @@ import { BAG_IDS, DAEMON_BAG_ID, ORACLE_DOC_URI, LARES_DOC_URI, LARARIUM_DOC_URI
 import { TEMP_BAG } from "./wiki-recipe.js";
 import { resolveBootDoc, isStillJoining } from "./boot-resolver.js";
 
-/** The social-plane + admin doc URLs a vessel's bootstrap resolves (founding done). */
+/** The social-plane + daemon doc URLs a vessel's bootstrap resolves (founding done). */
 export interface VesselBootstrap {
   identitiesUrl: string;
   circlesUrl:    string;
@@ -60,7 +60,7 @@ export interface VesselRecipe {
   onPhase?:      (p: LarOpenPhase) => void;
 }
 
-/** What the keel assembles before the recipe mounts admin + wiki. */
+/** What the keel assembles before the recipe mounts daemon + wiki. */
 export interface VesselCoreAssembly {
   repo:          Repo;
   composite:     CompositeStore;
@@ -89,7 +89,7 @@ function addReadOnlyLayer(composite: CompositeStore, bagId: string, handle: DocH
 
 /**
  * Assemble the shared vessel keel: catalog floor, genesis island canon layer,
- * @lares canon, social plane, admin doc — plus the corpus capability piece when held.
+ * @lares canon, social plane, daemon doc — plus the corpus capability piece when held.
  * The phase sequence holds invariant; each piece resolves its substrate via the recipe.
  */
 export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAssembly> {
@@ -153,7 +153,7 @@ export async function assembleVessel(recipe: VesselRecipe): Promise<VesselCoreAs
   // public/infrastructure oracles. Three planes, three authorities.
   emit("island-ready");
 
-  // ── social plane (resolveHandle encodes the seed policy) + admin doc ──
+  // ── social plane (resolveHandle encodes the seed policy) + daemon doc ──
   const resolve = (url: AutomergeUrl) => waitHandle<LarDoc>(url, () => blankDoc(repo));
   composite.addLayer({ bagId: BAG_IDS.identities, store: new AutomergeDocStore(await resolve(bootstrap.identitiesUrl as AutomergeUrl), BAG_IDS.identities), writable: true });
   composite.addLayer({ bagId: BAG_IDS.groups,     store: new AutomergeDocStore(await resolve(bootstrap.circlesUrl    as AutomergeUrl), BAG_IDS.groups),     writable: true });

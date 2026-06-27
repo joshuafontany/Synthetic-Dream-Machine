@@ -410,7 +410,7 @@ describe("isResidencyActionUri", () => {
     expect(isResidencyActionUri(`${VERB_URI_PREFIX}abc123`)).toBe(true);
   });
 
-  test("accepts admin verb signal URI", () => {
+  test("accepts daemon verb signal URI", () => {
     expect(isResidencyActionUri(`${SUMMONS_URI_PREFIX}abc123`)).toBe(true);
   });
 

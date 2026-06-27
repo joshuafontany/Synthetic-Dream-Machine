@@ -3,7 +3,7 @@
  *
  * Node-specific seams (only these belong here):
  *   - readFileSync for genesis/social-bootstrap.json
- *   - NodeFSStorageAdapter + findWithProgress for admin doc access
+ *   - NodeFSStorageAdapter + findWithProgress for daemon doc access
  *   - loadVesselSigningSeed (disk keypair)
  *   - writeFileSync / process.stdout.write for output
  *
@@ -79,10 +79,10 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
     );
   }
   if (!daemonUrl) {
-    throw new Error(`[lares device-admit] admin doc URL missing from social-bootstrap.json.`);
+    throw new Error(`[lares device-admit] daemon doc URL missing from social-bootstrap.json.`);
   }
 
-  // Open admin doc to read cap events + personaGroupAgentIdHex.
+  // Open daemon doc to read cap events + personaGroupAgentIdHex.
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   const progress    = repo.findWithProgress(daemonUrl as AutomergeUrl);
   // automerge-repo 2.6: whenReady() resolves the handle when ready, rejects on
@@ -90,16 +90,16 @@ export async function runDeviceAdmit(opts: DeviceAdmitOptions): Promise<DeviceAd
   const daemonHandle = await Promise.race([
     progress.whenReady(),
     new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error("[lares device-admit] admin doc not ready after 5s")), 5000),
+      setTimeout(() => reject(new Error("[lares device-admit] daemon doc not ready after 5s")), 5000),
     ),
   ]);
-  const adminDoc    = daemonHandle.doc();
-  const tiddlerMap  = ((adminDoc as Record<string,unknown>)?.["tiddlers"] ?? {}) as Record<string, unknown>;
+  const daemonDoc    = daemonHandle.doc();
+  const tiddlerMap  = ((daemonDoc as Record<string,unknown>)?.["tiddlers"] ?? {}) as Record<string, unknown>;
 
   const agentEntry         = tiddlerMap[PERSONA_GROUP_AGENT_ID_TIDDLER] as Record<string,unknown> | undefined;
   const personaGroupAgentIdHex = (agentEntry?.["tiddler"] as Record<string,unknown> | undefined)?.["text"] as string | null ?? null;
   if (!personaGroupAgentIdHex) {
-    throw new Error(`[lares device-admit] PersonaGroup agent ID missing from admin doc — run \`lares init --force\`.`);
+    throw new Error(`[lares device-admit] PersonaGroup agent ID missing from daemon doc — run \`lares init --force\`.`);
   }
 
   await repo.flush();

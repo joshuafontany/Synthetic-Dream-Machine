@@ -75,7 +75,7 @@ export interface Tw5Deserializer {
 
 /**
  * The standard `Tw5Deserializer`, closing over an island's live engine. Both the
- * wiki island and the admin island wire LOAD's native-filetype path through this —
+ * wiki island and the daemon island wire LOAD's native-filetype path through this —
  * one source of truth, deferring wholly to TW5's own deserializer registry. The
  * `$tw` is read lazily (at action time, post-boot).
  */
@@ -95,7 +95,7 @@ export interface ActionHandlerOptions {
    * edit/action split, `wiki-layer-ontology#write-law`): a residency action whose
    * target/source bag is not a mounted layer resolves it by ACCESS across both
    * oracle planes — mounted ephemerally for the action, released after. This
-   * retires the admin's standing system-bag mount: deep-bag writes become
+   * retires the daemon's standing system-bag mount: deep-bag writes become
    * explicit, audited, access-scoped events, never a floor re-seated. Absent =
    * composite-only (the wiki island, which holds its own write layer).
    */
@@ -123,7 +123,7 @@ function makeBagAccess(opts: ActionHandlerOptions): BagAccess {
     const planes = [reach.catalogUrl, reach.oracleUrl].filter((u): u is string => !!u)
       .map((u) => makeCatalogAccessor(reach.repo, u));
     const cache = new Map<string, LarTiddlerStore | null>();
-    // Reach a bag's store: prefer one the admin already mounts writable (its own
+    // Reach a bag's store: prefer one the daemon already mounts writable (its own
     // @daemon bag — no find latency), else resolve the bag's doc by access across
     // the two planes. Cached per action (find() is bounded-async). Read and write
     // share the store: the doc carries no read-only flag — the cap-gate is the authority.
@@ -249,7 +249,7 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
       if (!srcProof.ok) throw new Error(`cap-denied: admin on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
     }
 
-    // Resolve each bag's store by ACCESS — the admin mounts nothing, it reaches
+    // Resolve each bag's store by ACCESS — the daemon mounts nothing, it reaches
     // the bag's own doc and writes-then-syncs; the wiki island resolves its own
     // layers. Content writes AND the effect-record ledger both ride these per-bag
     // stores, so each record lands in its affected bag (residency-model#effect-record-surface).
@@ -334,12 +334,12 @@ async function executeAction(action: ResidencyAction, access: BagAccess, tw5?: T
  * CREATE — mint a NEW empty bag at `action.bag` and register it in the plane's
  * registry (@catalog for the household plane, @oracle for the system plane).
  * Conflict-checks first (never double-mints a registered bag). Writes a `creation`
- * effect-record into the new bag. Requires the admin `reach` (repo + plane registry).
+ * effect-record into the new bag. Requires the daemon `reach` (repo + plane registry).
  */
 async function executeCREATE(action: CreateAction, access: BagAccess, opts: ActionHandlerOptions, dryRun = false): Promise<Record<string, unknown>> {
   const reach = opts.reach;
   if (!reach) {
-    throw new Error("action-handler/CREATE: no reach — minting + registering a bag requires the admin reach (repo + plane registry)");
+    throw new Error("action-handler/CREATE: no reach — minting + registering a bag requires the daemon reach (repo + plane registry)");
   }
   const registryUrl = action.plane === "oracle" ? reach.oracleUrl : reach.catalogUrl;
   if (!registryUrl) {

@@ -1,8 +1,8 @@
 /**
- * verb-vm — volatile verb invocation lifecycle for the admin causal island.
+ * verb-vm — volatile verb invocation lifecycle for the daemon causal island.
  *
  * Manages the in-TW5-wiki invocation tiddlers (volatile scratch, never synced)
- * and writes durable outcome tiddlers to the Automerge-backed admin bag.
+ * and writes durable outcome tiddlers to the Automerge-backed daemon bag.
  *
  * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-vm
  */
@@ -42,7 +42,7 @@ export function removeVerb(tw5: TW5Engine, title: string): void {
 }
 
 export async function writeOutcome(
-  admin: CompositeStore,
+  daemon: CompositeStore,
   opts: {
     invocation:    Verb;
     status:        "done" | "error";
@@ -67,7 +67,7 @@ export async function writeOutcome(
     },
     ...(opts.errorMessage !== undefined && { errorMessage: opts.errorMessage }),
   });
-  await admin.put(outcome, origin, { bag: DAEMON_BAG_ID });
+  await daemon.put(outcome, origin, { bag: DAEMON_BAG_ID });
 }
 
 /**
@@ -90,7 +90,7 @@ function errorText(err: unknown): string {
 
 export async function dispatchVerb(
   tw5: TW5Engine,
-  admin: CompositeStore,
+  daemon: CompositeStore,
   invocation: Verb,
   run: () => Promise<Record<string, unknown>>,
 ): Promise<void> {
@@ -98,9 +98,9 @@ export async function dispatchVerb(
 
   try {
     const result = await run();
-    await writeOutcome(admin, { invocation, status: "done", result });
+    await writeOutcome(daemon, { invocation, status: "done", result });
   } catch (err) {
-    await writeOutcome(admin, { invocation, status: "error", errorMessage: errorText(err) });
+    await writeOutcome(daemon, { invocation, status: "error", errorMessage: errorText(err) });
   }
 
   removeVerb(tw5, invocation.title);

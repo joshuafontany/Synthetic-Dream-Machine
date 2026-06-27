@@ -29,7 +29,7 @@ export interface WikiMintHandlerOptions {
   readonly rootDir:     string;
 }
 
-/** prune-stale additionally reads the operator's draft oracle off the admin
+/** prune-stale additionally reads the operator's draft oracle off the daemon
  *  composite; init-wiki shares the mint options without needing it. */
 export interface PruneStaleOptions extends WikiMintHandlerOptions {
   readonly composite: CompositeStore;
@@ -37,7 +37,7 @@ export interface PruneStaleOptions extends WikiMintHandlerOptions {
 
 /** Options for recipe-composition operations (add-bag / remove-bag). Pono web3:
  *  the user recipe lives in @catalog (registry) — read+written via the accessor
- *  (access≠load); residency commanded via admin:residency-op. The admin never
+ *  (access≠load); residency commanded via daemon:residency-op. The daemon never
  *  mounts/unmounts a live wiki's composite layer; the recipe change syncs and each
  *  island reconciles its own mount set. */
 export interface WikiComposeOptions {
