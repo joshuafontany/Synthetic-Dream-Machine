@@ -178,7 +178,26 @@ This reads the canon's **local-form / session-form** split as a pose:
 
 So an infrastructure node carries three distinct things, only the last ever dialed: a **stable identity** under the literal `/ha.ka.ba/**` root + sub-path (its permanent bearing), a **live posture** as an unstable attitude-root, and a **dial-record** resolving its mutable endpoint.
 
-**PROPOSED (not yet ruled) — the routing substrate.** Forwarding a sealed stream across many leylines with no global map stands as a proposed layer: each lararium carries two l-space coordinates — a radial **standing** `r` (the federation rating ladder `noise → data → meme → ano → kapu`, high-standing near center) and a cyclic **kinship** `θ` (the bounded `0..20` ladder, an S¹) — and a blind relay forwards greedily toward the destination coordinate (the hyperbolic-embedding result: ~97% reach, near-optimal stretch, static under churn; a spanning-tree embedding guarantees delivery). The sphere is `θ`, the similarity axis of a hyperbolic disk; the chart runs **non-Riemannian / warped** (large distances saturate — geodesic sums read as an upper bound, dampened), so it serves as a usable chart, never the territory. The chart itself — colorless center, the warp, the Voices/Syād atlas, the paragraph characteristic-scale — stands at <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space >>; this routing layer awaits a separate floor.
+The **routing substrate** that carries a sealed stream across the leylines — greedy navigation on this chart, no global map — stands worked at `#the-routing-substrate` below; the chart's own geometry (colorless center, the warp, the Voices/Syād atlas) stands at <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space >>.
+
+<<~/ahu >>
+
+<<~ ahu #the-routing-substrate >>
+
+## The Routing Substrate ~ greedy near, jump far
+
+*(design ruled — operator floor 2026-06-27; build + witness pending)*
+
+The mesh carries a sealed stream across many leylines with **no global map** — greedy geometric routing on an embedded chart. The chart reads as a **map, not the territory**: public, coarse, provisional, lagging the live graph. Two coordinates per lararium, **both FLOW-plane, both blind-computable** (a relay needs neither to read content):
+
+- **`r` — carriage-standing (radial).** Set by relay **carriage-degree** (Krioukov `r = R − 2·ln(κ/κ₀)`): high-carriage nodes seat near center, leaves near the rim. A blind relay computes it from the leylines it carries, never from content. The social rating ladder (`noise → kapu`) stays on the social plane — **off the routing radial** (FLOW ⊥ WHO).
+- **`θ` — declared kinship (angular).** A deliberately-coarse coordinate each node **publishes in its dial-record** (FLOW-plane) — *which neighborhood of l-space it sits in*. The relay routes by the published map, blind to the sealed territory; the coarseness leaks no meaning by design. A bounded, cyclic S¹.
+
+**Grown, not fitted.** Each node **relaxes** its `(r, θ)` locally (Vivaldi-style) from a few known crossings and re-relaxes under churn — never a one-shot global fit (a global-now move). A Kleinberg **spanning-tree embedding** rides underneath as a **deliverability floor**: when greedy stalls, fall to the tree (guaranteed reach, longer path). The chart **lags the territory** — a freshly-grown region carries provisional coordinates until it relaxes (the Ha-slow drift).
+
+**Greedy near, jump far.** The chart runs non-Riemannian (it over-reads long distances), so a relay **greedy-walks within a local horizon** — forwarding to the neighbor closest in chart-distance to the destination — and **direct-dials beyond it** (the dial-record, #node-addressing). The warp *sets the horizon*; greedy carries local delivery, the dial-record carries the long haul — the reachable-set ⊊ manifold made operational.
+
+**Witness pending.** The shape stands ruled; the embedding code, the greedy/dial horizon threshold, and the spanning-tree fallback await build and witness. Numbers held from prior art (Krioukov/Boguñá, Kleinberg): ~97% greedy reach, stretch 1.1, static under random churn; spanning-tree → 100% deliverable.
 
 <<~/ahu >>
 
