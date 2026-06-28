@@ -17,8 +17,8 @@
 import { workerData } from "node:worker_threads";
 
 import type { CapturePost } from "@lararium/mesh";
+import type { IslandContext } from "@lararium/tw5";
 
-import { defaultAnnotate } from "./capture-annotate.js";
 import { makeNodeCaptureEngine } from "./node-capture-engine.js";
 import { runSovereignWorker } from "./sovereign-island-model.js";
 import { makeOperatorDaemonBehavior } from "@lararium/keyhive/operator-daemon-behavior";
@@ -44,13 +44,27 @@ const t = (workerData as DaemonWorkerData | null)?.telemetry;
 // @daemon still carries the cap, inert (idempotent presence).
 const extra = t
   ? {
-      makeCaptureEngine: (post: CapturePost) =>
+      makeCaptureEngine: (post: CapturePost, ctx: IslandContext) =>
         makeNodeCaptureEngine({
           palacePath: t.palacePath,
           spoolDir: t.spoolDir,
           walPath: t.walPath,
           quarantinePath: t.quarantinePath,
-          annotate: defaultAnnotate,
+          // ALL ast-parsing runs INSIDE the TW5 engine: the in-realm annotate (capture-annotate-vm)
+          // holds the full self-hosted grammar; the worker only INVOKES it across ctx.tw5.$tw (same
+          // thread, so its closure executes in-sandbox). No node-side annotate — if the plugin is not
+          // loaded the turn persists un-annotated, surfaced loud (drop-honesty), never the regex shadow.
+          annotate: (turnText, sourceFile) => {
+            const $tw = ctx.tw5.$tw as unknown as {
+              lares?: { captureAnnotateVm?: (t: string, s?: string) => Record<string, string | number> };
+            };
+            const fn = $tw.lares?.captureAnnotateVm;
+            if (!fn) {
+              console.warn("[node-daemon-island] $tw.lares.captureAnnotateVm absent (plugin not loaded) — turn persists un-annotated (drop-honesty)");
+              return {};
+            }
+            return fn(turnText, sourceFile);
+          },
           post,
           servo: { targetLatencyMs: t.targetLatencyMs ?? 1000 },
           derive: { holdingCostPerMs: t.holdingCostPerMs ?? 0.001 },

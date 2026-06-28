@@ -32,7 +32,7 @@ export interface CaptureCapOptions {
   /** Build the capture engine given the OUT-frame `post` seam (the cap wires it to `ctx.post`).
    *  The vessel supplies flush/reserve/annotate/servo (node: makeNodeCaptureEngine). OPTIONAL —
    *  absent = the cap is carried but INERT (the sink is not wired; a valid resting state). */
-  readonly makeEngine?: (post: CapturePost) => CaptureEngine;
+  readonly makeEngine?: (post: CapturePost, ctx: IslandContext) => CaptureEngine;
   /** the island's own server tick (ms); default 50 (20 Hz). */
   readonly tickMs?: number;
   /** the signal type that carries a raw turn IN; default "telemetry:place-verb". */
@@ -77,7 +77,9 @@ export function hasCapture(opts: CaptureCapOptions): IslandCap {
             gate_maxDepth: frame.gate.maxDepth,
           },
         });
-      const e = makeEngine(post);
+      // Pass ctx so the vessel can wire the IN-VM annotate ($tw.lares.captureAnnotateVm via ctx.tw5.$tw)
+      // — the parse/harvest runs inside this island's TW5 engine, not the worker around it.
+      const e = makeEngine(post, ctx);
       engine = e;
       await e.recover(); // open sessions survive a restart (WAL replay)
       // The tick RE-THROWS a flush failure (engine signals the caller); the driver MUST catch it —

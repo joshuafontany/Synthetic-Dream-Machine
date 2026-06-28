@@ -87,7 +87,7 @@ export interface DaemonBehaviorOptions {
    * wired, a valid resting state). The two-loop config (servo + derive) lives inside the engine the
    * vessel builds. role = capability ≠ platform — tw5 never imports the node sink.
    */
-  makeCaptureEngine?: (post: CapturePost) => CaptureEngine;
+  makeCaptureEngine?: (post: CapturePost, ctx: IslandContext) => CaptureEngine;
   /** the capture cap's server tick (ms); default 50. */
   captureTickMs?: number;
 }
