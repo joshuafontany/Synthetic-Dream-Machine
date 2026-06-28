@@ -55,4 +55,17 @@ describe("meme-ast resilient recovery", () => {
     expect(recovered!.recoveredAs).toBe("water");  // the sigil's OWN declared posture, not the default
     expect(recovered!.confidence).toBe(2);
   });
+
+  test("a novel sigil form is graded `missing` (the partial rung), not dropped to water", () => {
+    // `aperture(0->20)` — a recognizable sigil-name in a param shape no specific pattern matches.
+    // The generic catch-all recovers it: recognized sigil, params best-effort, graded partial.
+    const r = parseMemeText(URI, "before <<~ aperture(0->20) >> after");
+    expect(r.failures.some((f) => f.reason === "partial-form:aperture")).toBe(true);
+    const node = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs === "missing") as
+      { recoveredAs?: string; confidence?: number; sigilName?: string; raw?: string } | undefined;
+    expect(node).toBeDefined();
+    expect(node!.confidence).toBe(13);          // the partial band, above repaired(9) and water(2)
+    expect(node!.sigilName).toBe("aperture");   // the sigil survives as recognized, not text
+    expect(node!.raw).toContain("aperture(0->20)"); // lossless
+  });
 });

@@ -23,15 +23,17 @@ export interface SigilScan {
   canonicalName?: string;   // alias erasure: event emits this name instead
   regex:         RegExp;
   eventType:     "open" | "close" | "leaf" | "pragma";
+  generic?:      boolean;   // catch-all: emit the MATCHED word as sigilName, graded `missing` (partial rung)
 }
 
 export interface ParseEvent {
   pos:       number;
   end:       number;
   raw:       string;
-  sigilName: string;        // canonical (alias already erased)
+  sigilName: string;        // canonical (alias already erased), or the matched word for a generic event
   eventType: "open" | "close" | "leaf" | "pragma";
   groups:    (string | undefined)[];
+  generic?:  boolean;       // matched by the generic catch-all → builder grades it `missing` (partial rung)
 }
 
 // ---------------------------------------------------------------------------
@@ -129,6 +131,13 @@ export const BOOTSTRAP_SCANS: SigilScan[] = [
   // kukali — reactive wait posture
   { sigilName: "kukali",    regex: /<<~\s*kukali(?:\s+trigger:([\w.-]+))?\s*>>/g, eventType: "leaf" },
   { sigilName: "\\suspends", canonicalName: "kukali", regex: /<<~\s*\\suspends(?:\s+trigger:([\w.-]+))?\s*>>/g, eventType: "leaf" },
+
+  // GENERIC catch-all — MUST stay last (position-dedup lets every specific scan win first). Recognizes
+  // any sharktooth form no specific pattern matched: a known sigil in a novel param shape
+  // (`<<~ aperture(0->20) >>`, `<<~ keyword(p) ~~ note >>`) or an unknown word. group 1 = sigil-name,
+  // group 2 = raw params (lazy, `->`-aware). The builder grades it `missing` — the partial rung — so
+  // a form-variant survives as a recognized sigil instead of dropping to water.
+  { sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|->)*?)\s*>>/g, eventType: "leaf" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -183,7 +192,12 @@ export function collectEvents(text: string, grammar?: GrammarRules): ParseEvent[
       if (seen.has(pos)) continue;
       if (scan.eventType !== "open" && scan.eventType !== "close" && inBlock(pos)) continue;
       seen.add(pos);
-      events.push({ pos, end: pos + m[0].length, raw: m[0], sigilName: emitName, eventType: scan.eventType, groups: [...m] });
+      // The generic catch-all emits the MATCHED sigil-name (group 1), flagged so the builder grades it
+      // `missing` (the partial rung); specific scans emit their fixed (alias-erased) name.
+      const name = scan.generic ? (m[1] ?? emitName) : emitName;
+      const evt: ParseEvent = { pos, end: pos + m[0].length, raw: m[0], sigilName: name, eventType: scan.eventType, groups: [...m] };
+      if (scan.generic) evt.generic = true;
+      events.push(evt);
     }
   }
 

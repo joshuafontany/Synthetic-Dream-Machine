@@ -301,7 +301,12 @@ export function buildMemeAst(
     }
 
     // leaf or pragma
-    top().push(makeLeaf(sigilName, eventType, pos, raw, groups, memeUri, ahuStack, grammar));
+    const leaf = makeLeaf(sigilName, eventType, pos, raw, groups, memeUri, ahuStack, grammar);
+    // RECOVER (missing): the generic catch-all recognized an unmatched sharktooth — a known sigil in a
+    // novel param shape (`<<~ aperture(0->20) >>`) or an unknown word. Grade it the PARTIAL rung
+    // (recognized sigil, params best-effort) instead of dropping to water.
+    if (evt.generic) markRecovered(leaf, "missing", 13, "partial-form:" + sigilName, sigilName);
+    top().push(leaf);
     cursor = end;
   }
 
