@@ -1,0 +1,10 @@
+title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-lares
+tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
+lar-kind: metadata
+lar-pattern: <<~\s*lares\s+(aim|yield)\s+(\S+)(?:\s*->\s*(\S+))?\s*>>
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#exchange-protocol
+type: text/vnd.tiddlywiki
+
+<!-- lares — the turn's bearing vector (aim · yield). A HUD-frame sigil: the meme-ast tree RECOGNIZES it
+     (so a chat turn's own frame is structured, not graded as degraded); the live wiki renders it as plain
+     literal text for now (its chat-stream appearance) — iterate to a rendered frame later via hooks. -->

@@ -139,11 +139,16 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
         this.attrs    = { __sigil__: generic.sigil };
         return pos;
       }
-      // GRADIENT (graceful-parsing): an unrecognized sharktooth form renders a VISIBLE graded marker,
-      // not a silent literal. A matched word = partial (recognized sigil, novel param shape); none = water.
+      // GRADIENT (graceful-parsing): a sharktooth form no specific rule rendered. A sigil REGISTERED in
+      // the grammar but not render-matched — the metadata/HUD-frame sigils (lares/confidence/hud/ward/
+      // oracle/syad) — renders as PLAIN literal text ("just as it appears" in chat). Only a TRULY unknown
+      // form degrades to a graded marker (partial = recognized word/novel shape · water = no word).
       this.matchPos = pos;
       this.matchEnd = generic.end;
-      this.attrs    = { __literal__: source.slice(pos, generic.end), __degraded__: generic.sigil ? "partial" : "water" };
+      const known = !!generic.sigil && !!grammar?.sigils.some((s) => s.name === generic.sigil);
+      this.attrs = known
+        ? { __literal__: source.slice(pos, generic.end) }
+        : { __literal__: source.slice(pos, generic.end), __degraded__: generic.sigil ? "partial" : "water" };
       return pos;
     }
     pos = source.indexOf("<<~", pos + 3);

@@ -1,0 +1,9 @@
+title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-oracle
+tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
+lar-kind: metadata
+lar-pattern: <<~\s*oracle\b([\s\S]*?)>>
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#exchange-protocol
+type: text/vnd.tiddlywiki
+
+<!-- oracle — the entropy drain (↯ ✲ die ⁂ tail). HUD-frame sigil: recognized in the tree, rendered as
+     plain literal text for now. -->

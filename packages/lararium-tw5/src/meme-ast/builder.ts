@@ -76,6 +76,13 @@ function attrsFromGroups(
     case "ui":      return { filter: g(1) };
     case "kukali":  return g(1) ? { trigger: g(1) } : {};
     case "toml":    return { profile: g(1), content: g(2) };
+    // Turn/HUD-frame sigils — recognized so the tree carries a turn's own frame (not graded degraded).
+    case "lares":   return { mode: g(1), from: g(2), to: g(3) };
+    case "confidence": return { body: g(1) };
+    case "hud":     return { body: g(1) };
+    case "ward":    return { body: g(1) };
+    case "oracle":  return { body: g(1) };
+    case "syad":    return { body: g(1) };
     default:        return {};
   }
 }

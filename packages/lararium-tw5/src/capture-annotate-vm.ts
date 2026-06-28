@@ -29,8 +29,11 @@ import { getGrammar } from "./grammar-cache.js";
 // TW5 injects $tw as a module parameter (vm.runInContext sandbox); reach it as the injected var.
 declare const $tw: { lares?: Record<string, unknown> } | undefined;
 
-/** Cap the serialized tree so a pathological turn never bloats a drawer's chroma metadata. */
-const AST_MAX = 16000;
+/** The AST is the STORE now (operator: store the full parse-tree, not flat metadata) — so keep the full
+ *  tree for any real turn; the ceiling only catches a runaway-pathological case (then `lar_ast_truncated`
+ *  flags it, drop-honesty). The PROPER home for a large tree (a blob vs a chroma metadata field) is an
+ *  open drawer-schema question — this raises the interim ceiling via the existing path. */
+const AST_MAX = 262144;
 
 export const name  = "lararium-capture-annotate-vm";
 export const after = ["lararium-grammar-cache"];

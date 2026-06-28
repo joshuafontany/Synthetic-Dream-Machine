@@ -163,6 +163,10 @@ export function buildScansFromGrammar(sigils: SigilRule[]): SigilScan[] {
       if (rx) scans.push({ sigilName: s.name, ...extra, regex: rx, eventType: "leaf" });
     }
   }
+  // GENERIC catch-all — appended LAST so every specific grammar scan claims its position first (the same
+  // partial-rung the bootstrap carries, now in grammar-mode too: an unmatched sharktooth grades `missing`
+  // in the FULL-grammar in-VM parse, not only bootstrap).
+  scans.push({ sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|->)*?)\s*>>/g, eventType: "leaf" });
   // Control scans must win at identical positions even in grammar-hydrated mode
   return scans.sort((a, b) => (a.sigilName.startsWith("control-") ? 0 : 1) - (b.sigilName.startsWith("control-") ? 0 : 1));
 }

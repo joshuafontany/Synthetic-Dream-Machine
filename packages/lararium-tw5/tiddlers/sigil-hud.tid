@@ -1,0 +1,9 @@
+title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hud
+tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
+lar-kind: metadata
+lar-pattern: <<~\s*hud\b([\s\S]*?)>>
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/lares/noosphere-boot#exchange-protocol
+type: text/vnd.tiddlywiki
+
+<!-- hud — the turn gauges (Aperture · OODA-HA). HUD-frame sigil: recognized in the tree, rendered as
+     plain literal text for now. -->
