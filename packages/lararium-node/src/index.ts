@@ -66,8 +66,10 @@ export type { CaptureReserveOptions } from "./capture-reserve.js";
 // makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
 // @lararium/mesh (the isomorphic core); defaultAnnotate stays unexported (the daemon
 // imports it directly) so the package index never pulls the mempalace barrel.
-export { makeNodeCaptureEngine } from "./node-capture-engine.js";
+export { makeNodeCaptureEngine, makeAstSplitFlush } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
+export { makeAstPalace } from "./astpalace.js";
+export type { AstPalace, AstEntry, AstProvenance } from "./astpalace.js";
 // The telemetry capture cap is FOLDED into @daemon (idempotent: every @daemon carries it). The
 // standalone telemetry island is retired; node-daemon-island wires the capture SINK live (from the
 // daemon spawn's optional workerData.telemetry) or leaves the cap inert. The capture core stays

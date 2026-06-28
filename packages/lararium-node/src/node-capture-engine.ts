@@ -7,11 +7,14 @@
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
+import { dirname, join } from "node:path";
+
 import { makeCaptureEngine } from "@lararium/mesh";
-import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CapturePost, CaptureServo, FlushGate } from "@lararium/mesh";
+import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CaptureFlush, CapturePost, CaptureRecord, CaptureServo, FlushGate } from "@lararium/mesh";
 
 import { makeCaptureReserve } from "./capture-reserve.js";
 import { makeSubprocessFlush } from "./capture-flush.js";
+import { makeAstPalace, type AstPalace } from "./astpalace.js";
 
 export interface NodeCaptureEngineOptions {
   /** palace path passed to `mine --source ndjson --palace` */
@@ -24,6 +27,10 @@ export interface NodeCaptureEngineOptions {
   readonly quarantinePath: string;
   /** the forward annotate pass (worker: `defaultAnnotate`; tests: a fake) */
   readonly annotate: CaptureAnnotate;
+  /** the LOCAL `.astpalace` dir (never federates). Default: `<dirname(spoolDir)>/astpalace`. The
+   *  routing split writes each turn's AST here keyed by structural hash; the mempalace drawer keeps
+   *  only `lar_ast_hash`. Pass `null` to DISABLE the split (the inline `lar_ast` then rides through). */
+  readonly astPalaceDir?: string | null;
   readonly gate?: FlushGate;
   readonly mempalaceBin?: string;
   readonly timeoutMs?: number;
@@ -39,15 +46,51 @@ export interface NodeCaptureEngineOptions {
   readonly spawn?: (bin: string, args: readonly string[]) => Promise<{ stdout: string }>;
 }
 
+/**
+ * The ROUTING SPLIT — the cleanest seam: the LAST point the node controls before a batch crosses
+ * into the (external) mempalace via `mine`. For each record carrying an inline `lar_ast`, route the
+ * parse tree to the LOCAL `.astpalace` (keyed by its structural hash, bound to its verbatim), strip
+ * the inline tree from the drawer metadata, and leave behind `lar_ast_hash` (the cid reference). The
+ * two stores come out clean: VERBATIM + provenance + `lar_ast_hash` in the mempalace drawer,
+ * STRUCTURE in `.astpalace`, joined by the hash. A parse/store failure NEVER sinks the capture — the
+ * record then rides through with its inline `lar_ast` intact (drop-honesty, capture conserved).
+ */
+export function makeAstSplitFlush(inner: CaptureFlush, astPalace: AstPalace): CaptureFlush {
+  return async (batch: readonly CaptureRecord[]): Promise<number> => {
+    const routed: CaptureRecord[] = [];
+    for (const rec of batch) {
+      const astJson = rec.metadata?.["lar_ast"];
+      if (typeof astJson !== "string") {
+        routed.push(rec); // no inline tree (truncated/absent) — nothing to split
+        continue;
+      }
+      try {
+        const tree = JSON.parse(astJson);
+        const hash = await astPalace.put(tree, { source_file: rec.source_file, content: rec.content });
+        const { lar_ast: _dropped, ...rest } = rec.metadata as Record<string, string | number | boolean>;
+        routed.push({ ...rec, metadata: { ...rest, lar_ast_hash: hash } });
+      } catch {
+        routed.push(rec); // parse/store failed — keep the inline tree, never lose the turn
+      }
+    }
+    return inner(routed);
+  };
+}
+
 /** Build the node telemetry engine (the isomorphic worker + node seams). */
 export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEngine {
-  const flush = makeSubprocessFlush({
+  const subprocessFlush = makeSubprocessFlush({
     spoolDir: opts.spoolDir,
     palacePath: opts.palacePath,
     ...(opts.mempalaceBin !== undefined ? { mempalaceBin: opts.mempalaceBin } : {}),
     ...(opts.timeoutMs !== undefined ? { timeoutMs: opts.timeoutMs } : {}),
     ...(opts.spawn !== undefined ? { spawn: opts.spawn } : {}),
   });
+  // The AST routing split rides between the engine and the (external) mempalace write. Local-only by
+  // construction: a content-addressed file store, never a mesh/Automerge surface. `null` disables it.
+  const astPalaceDir =
+    opts.astPalaceDir === null ? null : (opts.astPalaceDir ?? join(dirname(opts.spoolDir), "astpalace"));
+  const flush = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
   const reserve = makeCaptureReserve({ walPath: opts.walPath, quarantinePath: opts.quarantinePath });
   return makeCaptureEngine({
     flush,
