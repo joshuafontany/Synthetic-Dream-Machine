@@ -12,6 +12,10 @@
       "import": "./dist/cascade.js",
       "types": "./dist/cascade.d.ts"
     },
+    "./harvest": {
+      "import": "./dist/harvest.js",
+      "types": "./dist/harvest.d.ts"
+    },
     "./lar-uris": {
       "import": "./dist/lar-uris.js",
       "types": "./dist/lar-uris.d.ts"
