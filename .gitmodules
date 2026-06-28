@@ -10,3 +10,6 @@
 [submodule "kowloon-client"]
 	path = kowloon-client
 	url = git@github.com:amorphous-dreams/kowloon-client.git
+[submodule "TiddlyWiki5"]
+	path = TiddlyWiki5
+	url = git@github.com:amorphous-dreams/TiddlyWiki5.git

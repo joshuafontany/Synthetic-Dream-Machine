@@ -23,7 +23,9 @@ import { createRequire } from "module";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const _require = createRequire(import.meta.url);
 
-const TW5_VERSION = "5.4.0";
+// Re-genesis sources TW5 from the amorphous-dreams/TiddlyWiki5 SUBMODULE (workspace-linked as
+// `tiddlywiki`), not an npm pin — the version tracks the fork automatically across branches/PRs.
+const TW5_VERSION = _require("tiddlywiki/package.json").version as string;
 const TW5_SCRIPT_FILENAME = `tiddlywikicore-${TW5_VERSION}.js`;
 
 // scripts/ → lararium-tw5/ → packages/ → monorepo root

@@ -1,5 +1,8 @@
 packages:
   - 'packages/*'
+  # The TiddlyWiki5 engine — our fork (amorphous-dreams/TiddlyWiki5) vendored as a submodule, replacing
+  # the npm pin so re-genesis builds TW5 core from source + we can branch/PR upstream for deep re-writes.
+  - 'TiddlyWiki5'
   # Top-level e2e harness — staged/live instance targeting (tests/TEST-ARCHITECTURE.md)
   - 'tests'
   # Corpus bag targets — each maps to one Automerge doc

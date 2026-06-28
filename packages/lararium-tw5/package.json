@@ -53,7 +53,7 @@
     "@taplo/lib": "^0.5.0",
     "parse5": "^8.0.1",
     "smol-toml": "^1.6.1",
-    "tiddlywiki": "^5.4.0"
+    "tiddlywiki": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.19.0",

@@ -25,6 +25,7 @@ import { spawnSync } from "child_process";
 import { tmpdir } from "os";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 import { MODULE_MANIFEST, PLUGIN_ENTRIES, SOURCE_MANIFEST, TIDDLERS_DIR, TIDDLER_SRC_DIR } from "../vite.plugin.config.js";
 import { readModuleManifest, type ModuleManifest } from "../plugin-build/module-manifest.js";
 import {
@@ -54,7 +55,9 @@ const BAG_ROOT   = path.join(REPO_ROOT, "bags", "@lararium", "tw5");
 const PLUGIN_TITLE_LAR = LARES_MEMETIC_WIKITEXT_PLUGIN_URI;
 const PLUGIN_TITLE_TW5 = "$:/plugins/lares/memetic-wikitext";
 
-const TW5_BIN = path.join(ROOT, "../../node_modules/.pnpm/node_modules/.bin/tiddlywiki");
+// The TW5 CLI from the SUBMODULE (workspace-linked `tiddlywiki`), resolved via the package — robust
+// to the workspace link, no .pnpm path guessing. tiddlywiki.js carries a `#!/usr/bin/env node` shebang.
+const TW5_BIN = createRequire(import.meta.url).resolve("tiddlywiki/tiddlywiki.js");
 
 const SHA_FIELD_RE  = /^body-sha256\s*=\s*"[^"]*"/m;
 const TOML_BLOCK_RE = /(```toml[\s\S]*?```)/;
