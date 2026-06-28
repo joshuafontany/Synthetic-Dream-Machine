@@ -66,9 +66,12 @@ export function makeAstSplitFlush(inner: CaptureFlush, astPalace: AstPalace): Ca
       }
       try {
         const tree = JSON.parse(astJson);
-        const hash = await astPalace.put(tree, { source_file: rec.source_file, content: rec.content });
+        const { hash, verbatimSha } = await astPalace.put(tree, { source_file: rec.source_file, content: rec.content });
         const { lar_ast: _dropped, ...rest } = rec.metadata as Record<string, string | number | boolean>;
-        routed.push({ ...rec, metadata: { ...rest, lar_ast_hash: hash } });
+        // The drawer carries BOTH deterministic joins, set HERE at flush: lar_ast_hash → .astpalace
+        // (forward), lar_verbatim_sha ↔ the AST entry's provenance (back). No mine-assigned id, no
+        // race-to-catchup — both stores compute the same join independently.
+        routed.push({ ...rec, metadata: { ...rest, lar_ast_hash: hash, lar_verbatim_sha: verbatimSha } });
       } catch {
         routed.push(rec); // parse/store failed — keep the inline tree, never lose the turn
       }

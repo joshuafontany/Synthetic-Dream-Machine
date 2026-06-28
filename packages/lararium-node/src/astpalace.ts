@@ -61,7 +61,7 @@ export interface AstPalace {
    * STRUCTURE: an identical tree collides to the same hash/file and bumps `count` (recurrence),
    * accreting distinct provenance. Returns the structural hash (the drawer keeps it as `lar_ast_hash`).
    */
-  put(astTree: unknown, verbatim: { source_file: string; content: string }): Promise<string>;
+  put(astTree: unknown, verbatim: { source_file: string; content: string }): Promise<{ hash: string; verbatimSha: string }>;
   /** Read an entry back by its structural hash, or null if absent. */
   get(hash: string): Promise<AstEntry | null>;
   /** The structural hash of a tree WITHOUT storing it (the content address). */
@@ -97,7 +97,7 @@ export function makeAstPalace(dir: string): AstPalace {
       return readEntry(pathFor(hash).file);
     },
 
-    async put(astTree, verbatim): Promise<string> {
+    async put(astTree, verbatim): Promise<{ hash: string; verbatimSha: string }> {
       const hash = await hashOf(astTree);
       const verbatim_sha = await sha256Hex(utf8Bytes(verbatim.content), defaultCryptoProvider);
       const link: AstProvenance = { source_file: verbatim.source_file, verbatim_sha };
@@ -137,7 +137,9 @@ export function makeAstPalace(dir: string): AstPalace {
       const tmp = `${file}.${process.pid}.tmp`;
       await writeFile(tmp, JSON.stringify(entry), "utf-8");
       await rename(tmp, file);
-      return hash;
+      // Surface BOTH content-addresses so the deterministic join flows THROUGH at flush — the drawer
+      // carries lar_ast_hash (forward) + lar_verbatim_sha (back); neither store waits on the other's id.
+      return { hash, verbatimSha: verbatim_sha };
     },
   };
 }

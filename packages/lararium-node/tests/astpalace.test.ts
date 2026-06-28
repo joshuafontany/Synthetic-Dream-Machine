@@ -26,7 +26,7 @@ async function palaceDir(): Promise<string> {
 describe("makeAstPalace", () => {
   test("store an AST → read it back by its structural hash", async () => {
     const pal = makeAstPalace(await palaceDir());
-    const hash = await pal.put(tree, { source_file: "nalu://run/1", content: "the verb leads" });
+    const { hash } = await pal.put(tree, { source_file: "nalu://run/1", content: "the verb leads" });
     expect(hash).toMatch(/^[0-9a-f]{64}$/);
     const got = await pal.get(hash);
     expect(got).not.toBeNull();
@@ -42,21 +42,21 @@ describe("makeAstPalace", () => {
   test("identical structures collide to ONE hash and bump count (the recurrence signal)", async () => {
     const dir = await palaceDir();
     const pal = makeAstPalace(dir);
-    const h1 = await pal.put(tree, { source_file: "nalu://run/1", content: "first" });
-    const h2 = await pal.put(sameTreeReordered, { source_file: "nalu://run/2", content: "second" });
+    const { hash: h1 } = await pal.put(tree, { source_file: "nalu://run/1", content: "first" });
+    const { hash: h2 } = await pal.put(sameTreeReordered, { source_file: "nalu://run/2", content: "second" });
     expect(h2).toBe(h1); // canonical-JSON: key order does not change the structural hash
     const entry = await pal.get(h1);
     expect(entry!.count).toBe(2);
     expect(entry!.provenance).toHaveLength(2); // distinct verbatim turns both bound to the one structure
 
     // A DIFFERENT structure lands a DIFFERENT hash (a second file in the store).
-    const h3 = await pal.put(otherTree, { source_file: "nalu://run/3", content: "third" });
+    const { hash: h3 } = await pal.put(otherTree, { source_file: "nalu://run/3", content: "third" });
     expect(h3).not.toBe(h1);
   });
 
   test("a repeated verbatim does not double-count provenance", async () => {
     const pal = makeAstPalace(await palaceDir());
-    const h = await pal.put(tree, { source_file: "nalu://run/1", content: "same" });
+    const { hash: h } = await pal.put(tree, { source_file: "nalu://run/1", content: "same" });
     await pal.put(tree, { source_file: "nalu://run/1", content: "same" });
     const entry = await pal.get(h);
     expect(entry!.count).toBe(2); // recurrence still tallies
@@ -96,6 +96,7 @@ describe("makeAstSplitFlush — the routing split", () => {
     expect(out.metadata!["lar_band"]).toBe("synthesis"); // sibling metadata untouched
     const hash = out.metadata!["lar_ast_hash"] as string;
     expect(hash).toMatch(/^[0-9a-f]{64}$/);
+    expect(out.metadata!["lar_verbatim_sha"]).toMatch(/^[0-9a-f]{64}$/); // the deterministic back-key flows through at flush
 
     // The structure is recoverable from .astpalace by that hash — the two stores joined by the hash.
     const entry = await pal.get(hash);
