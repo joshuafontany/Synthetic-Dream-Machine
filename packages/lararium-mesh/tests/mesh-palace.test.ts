@@ -23,7 +23,7 @@ import {
   vesselCapStackToRecord, recordToVesselCapStack,
   routingSlotToRecord, recordToRoutingSlot,
   publicFlowMap, snapshotPublicFlowMap,
-  hyperbolicDistance, angularSeparation, greedyNextHop, type Coord,
+  hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate, type Coord,
   MeshPalace, emptyMeshPalaceDoc,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
@@ -181,5 +181,13 @@ describe("greedy geometric routing — the native-disk chart", () => {
     const nearDest: Coord = { r: 3, theta: 0.01 };
     const farOnly = [{ bearing: "lar:///ha.ka.ba/@x", r: 0.1, theta: 3 }];
     expect(greedyNextHop(nearDest, farOnly, dest)).toBeNull();
+  });
+
+  test("radial coordinate seats high-carriage near the center, leaves at the rim", () => {
+    const opts = { R: 12, minDegree: 1 };
+    expect(radialCoordinate(1, opts)).toBeCloseTo(12);                            // a min-degree leaf → the rim
+    expect(radialCoordinate(10, opts)).toBeLessThan(radialCoordinate(1, opts));   // more carriage → nearer center
+    expect(radialCoordinate(2, opts)).toBeGreaterThan(radialCoordinate(8, opts)); // monotone decreasing
+    expect(radialCoordinate(1e6, opts)).toBeGreaterThanOrEqual(0);                // clamped onto the disk
   });
 });

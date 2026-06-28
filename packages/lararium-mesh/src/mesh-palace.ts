@@ -291,6 +291,19 @@ export function greedyNextHop(self: Coord, neighbors: readonly RoutingSlot[], de
   return best;
 }
 
+/**
+ * The radial coordinate `r` from a vessel's carriage-degree (Krioukov: `r = R − 2·ln(κ/κ₀)`).
+ * High carriage (high degree) seats near the center; a minimum-degree leaf seats at the rim `r = R`.
+ * `r` is a FLOW quantity (the operator's ruling: routing's radial = carriage-degree, OFF the social
+ * rating ladder), so a blind relay computes it from the leylines it carries — never from content.
+ * (The angular `θ` is the OTHER half of the chart and stays a separate, declared coordinate.)
+ */
+export function radialCoordinate(degree: number, opts: { readonly R: number; readonly minDegree: number }): number {
+  const kappa = Math.max(degree, opts.minDegree); // a node never sits below the minimum degree
+  const r = opts.R - 2 * Math.log(kappa / opts.minDegree);
+  return Math.min(opts.R, Math.max(0, r)); // clamp onto the disk [0, R]
+}
+
 // ── The disclosure membrane ────────────────────────────────────────────────
 // Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The membrane is the
 // map/territory boundary made into a filter: dial-records + routing slots are
