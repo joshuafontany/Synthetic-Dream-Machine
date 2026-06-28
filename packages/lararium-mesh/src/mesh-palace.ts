@@ -342,6 +342,38 @@ export function childCone(parent: AngularCone, index: number, fanout: number): A
   return { start, end: start + width };
 }
 
+// ── The Herm (Lares Viales) — the minimal vessel's read-scope ──────────────
+// A Herm carries the leylines and serves the public FLOW-map, but stays BLIND to a local operator's
+// sovereign bags — the Lares Viales floor (vessel-caps#lares-viales): sighted on the map, blind to
+// the territory. A Herm is NOT a Lararium-with-skips; it is a minimal composition — pure carriage +
+// public-floor read, no tuber sovereignty. `read` is a SCOPED cap (per-bag), so this gates a Herm.
+
+/** The wire-caps a Herm EXPRESSES — pure carriage; no tuber sovereignty, no admit. */
+export const HERM_CAPS: readonly WireCap[] = ["rhizome.forward"];
+
+/** The public-floor bags a Herm MAY read — the base ontology, the shared corpus, its own FLOW-map. */
+const HERM_READABLE_BAGS: ReadonlySet<string> = new Set(["@oracle", "@lararium", "@lares", "@meshpalace"]);
+/** A local operator's sovereign bags — the hearths a Herm NEVER reads (the territory). */
+const SOVEREIGN_BAGS: ReadonlySet<string> = new Set(["@catalog", "@persona", "@daemon"]);
+
+/** Extract the `@bag` segment from a `lar:///ha.ka.ba/@bag/…` URI (undefined when not one). */
+export function bagOf(uri: string): string | undefined {
+  return /^lar:\/\/\/ha\.ka\.ba\/(@[^/]+)/.exec(uri)?.[1];
+}
+
+/**
+ * The Lares Viales read-scope: a Herm reads the public floor (`@oracle` base-ontology, the
+ * `@lararium`/`@lares` corpus, its own `@meshpalace` FLOW-map) and NEVER a local operator's sovereign
+ * bag (`@catalog`, `@persona`, `@daemon`). **Fail-closed** — an unparseable or unknown bag denies.
+ * Blind to the territory, sighted on the map (#lares-viales). A full Lararium reads its own sovereign
+ * bags by its own caps; this gate names only what a *Herm* may see.
+ */
+export function hermCanRead(uri: string): boolean {
+  const bag = bagOf(uri);
+  if (bag === undefined || SOVEREIGN_BAGS.has(bag)) return false; // the hearths — never (fail-closed)
+  return HERM_READABLE_BAGS.has(bag);                            // the waymarks — yes
+}
+
 // ── The disclosure membrane ────────────────────────────────────────────────
 // Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The membrane is the
 // map/territory boundary made into a filter: dial-records + routing slots are

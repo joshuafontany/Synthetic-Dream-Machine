@@ -25,6 +25,7 @@ import {
   publicFlowMap, snapshotPublicFlowMap,
   hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate,
   seedTheta, childCone, coneCenter, ROOT_CONE, type Coord,
+  hermCanRead, HERM_CAPS,
   MeshPalace, emptyMeshPalaceDoc,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
@@ -211,5 +212,28 @@ describe("greedy geometric routing — the native-disk chart", () => {
     expect(grandchild.end).toBeLessThanOrEqual(parent.end);
     // a node's θ is its cone's center
     expect(coneCenter(childCone(ROOT_CONE, 0, 4))).toBeCloseTo(Math.PI / 4);
+  });
+});
+
+describe("the Herm read-scope (Lares Viales) — sighted on the map, blind to the territory", () => {
+  test("a Herm reads the public waymarks, never the sovereign hearths", () => {
+    // sighted on the map — the public floor
+    expect(hermCanRead("lar:///ha.ka.ba/@oracle/blobs/tiddlywikicore")).toBe(true);
+    expect(hermCanRead("lar:///ha.ka.ba/@meshpalace/dial/x")).toBe(true);
+    expect(hermCanRead("lar:///ha.ka.ba/@lares/api/pono/has-stack")).toBe(true);
+    expect(hermCanRead("lar:///ha.ka.ba/@lararium/mesh/vessel-caps")).toBe(true);
+    // blind to the territory — the operator's sovereign hearths
+    expect(hermCanRead("lar:///ha.ka.ba/@catalog/corpus/private")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/@persona/binding/signer-did")).toBe(false);
+    expect(hermCanRead("lar:///ha.ka.ba/@daemon/sentinel/mesh-cabal/doc-id")).toBe(false);
+    // fail-closed on the unknown / unparseable
+    expect(hermCanRead("lar:///ha.ka.ba/@some-operator-bag/x")).toBe(false);
+    expect(hermCanRead("not-a-lar-uri")).toBe(false);
+  });
+
+  test("a Herm expresses pure carriage — no tuber sovereignty", () => {
+    expect(HERM_CAPS).toContain("rhizome.forward");
+    expect(HERM_CAPS).not.toContain("tuber.author");
+    expect(HERM_CAPS).not.toContain("tuber.store");
   });
 });
