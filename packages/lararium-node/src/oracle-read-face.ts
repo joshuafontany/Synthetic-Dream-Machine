@@ -22,9 +22,10 @@ import { readFileSync, mkdirSync } from "node:fs";
 import { atomicWriteFileSync } from "./fs-atomic.js";
 import { join } from "node:path";
 import type { DocHandle } from "@automerge/automerge-repo";
+import type { Doc } from "@automerge/automerge";
 import {
-  exportOracleSnapshot, buildOraclePointer, oraclePointerId,
-  type OracleSnapshot, type OraclePointer,
+  exportOracleSnapshot, buildOraclePointer, oraclePointerId, snapshotPublicFlowMap,
+  type OracleSnapshot, type OraclePointer, type LarDoc,
 } from "@lararium/mesh";
 
 /** Freshness lease re-issued on every change (read against the reader's LOCAL clock). */
@@ -55,8 +56,12 @@ export async function mountOracleReadFace(args: {
   readonly signerSeed:   Uint8Array;
   readonly storageDir:   string;
   readonly onLog?:       (line: string) => void;
+  /** Export fn — defaults to exportOracleSnapshot (the raw doc). A FLOW-map serve passes a membrane
+   *  variant (snapshotPublicFlowMap) so ONLY the public projection ever crosses the wire. */
+  readonly exportSnapshot?: (doc: unknown) => Promise<OracleSnapshot>;
 }): Promise<OracleReadFace> {
   const { httpServer, oracleHandle, signerSeed, storageDir, onLog } = args;
+  const exportSnapshot = args.exportSnapshot ?? ((doc: unknown) => exportOracleSnapshot(doc as Doc<unknown>));
   const statePath = join(storageDir, STATE_FILE);
 
   let snapshot: OracleSnapshot | null = null;
@@ -77,7 +82,7 @@ export async function mountOracleReadFace(args: {
   async function reissue(force: boolean): Promise<void> {
     const doc = oracleHandle.doc();
     if (!doc) return;
-    const snap = await exportOracleSnapshot(doc);
+    const snap = await exportSnapshot(doc);
     const changed = snap.cid !== persisted.cid;
     if (!changed && !force) return;
     const version = changed ? persisted.version + 1 : persisted.version;
@@ -151,4 +156,27 @@ export async function mountOracleReadFace(args: {
       httpServer.off("request", onRequest);
     },
   };
+}
+
+/**
+ * Mount a vessel's PUBLIC FLOW-map (the mesh-palace projection) as a read-face. The disclosure
+ * membrane applies BEFORE the snapshot (snapshotPublicFlowMap), so only coarse public FLOW crosses
+ * the wire — the private territory never leaves. A Herm serves this as its sole substrate (at
+ * `/oracle/`); a peer pulls it with the same `pullAndVerifyOracle`. The Lares Viales floor on the wire.
+ */
+export function mountFlowMapReadFace(args: {
+  readonly httpServer:       Server;
+  readonly meshPalaceHandle: DocHandle<unknown>;
+  readonly signerSeed:       Uint8Array;
+  readonly storageDir:       string;
+  readonly onLog?:           (line: string) => void;
+}): Promise<OracleReadFace> {
+  return mountOracleReadFace({
+    httpServer:     args.httpServer,
+    oracleHandle:   args.meshPalaceHandle,
+    signerSeed:     args.signerSeed,
+    storageDir:     args.storageDir,
+    ...(args.onLog ? { onLog: args.onLog } : {}),
+    exportSnapshot: (doc: unknown) => snapshotPublicFlowMap(doc as LarDoc),
+  });
 }
