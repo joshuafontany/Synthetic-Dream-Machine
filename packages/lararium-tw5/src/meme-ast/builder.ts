@@ -22,6 +22,8 @@ import type {
   SigilNode,
   DynamicNode,
   TextNode,
+  ErrorNode,
+  ParseFailure,
 } from "./types.js";
 import type { ParseEvent } from "./scanner.js";
 
@@ -227,6 +229,7 @@ export function buildMemeAst(
   memeUri:    string,
   grammar?:   GrammarRules,
   sourceText?: string,
+  failures:   ParseFailure[] = [],
 ): MemeAstNode[] {
   const root:     MemeAstNode[] = [];
   const stack:    Frame[]       = [];
@@ -239,6 +242,29 @@ export function buildMemeAst(
     if (!sourceText || upTo <= cursor) return;
     const span = sourceText.slice(cursor, upTo);
     if (span.trim()) top().push({ kind: "Text", pos: cursor, raw: span, content: span } as TextNode);
+  };
+
+  // Resilient-recovery helpers (graceful-parsing#sigil-self-defined-gradient): the builder is the
+  // DRIVER — at each failure site it CONTAINS the break (a graded Error node, or a marked force-close)
+  // and records it out-of-band, instead of silently dropping or force-closing. Fires only AFTER a
+  // failed match, so the clean parse is untouched (the soundness invariant).
+  const errorNode = (
+    pos: number, raw: string, content: string,
+    reason: string, recoveredAs: "water" | "repaired" | "missing", confidence: number,
+  ): ErrorNode => {
+    failures.push({ pos, raw, reason, recoveredAs });
+    return { kind: "Error", pos, raw, content, reason, recoveredAs, confidence };
+  };
+  const markRecovered = (
+    node: MemeAstNode, recoveredAs: "water" | "repaired" | "missing",
+    confidence: number, reason: string, sigilName?: string,
+  ): MemeAstNode => {
+    node.recoveredAs = recoveredAs;
+    node.confidence  = confidence;
+    const f: ParseFailure = { pos: node.pos, raw: node.raw, reason, recoveredAs };
+    if (sigilName !== undefined) f.sigilName = sigilName;
+    failures.push(f);
+    return node;
   };
 
   for (const evt of events) {
@@ -255,8 +281,18 @@ export function buildMemeAst(
     if (eventType === "close") {
       let i = stack.length - 1;
       while (i >= 0 && stack[i]!.sigilName !== sigilName) i--;
-      if (i < 0) { cursor = end; continue; }
-      while (stack.length - 1 > i) top().push(closeFrame(stack.pop()!, memeUri, grammar));
+      if (i < 0) {
+        // RECOVER (water): an orphan close with no matching open — contain it as a graded Error node
+        // carrying the verbatim span, instead of silently dropping it.
+        top().push(errorNode(pos, raw, raw, "orphan-close:" + sigilName, "water", 2));
+        cursor = end;
+        continue;
+      }
+      // RECOVER (repaired): frames between the match and the top got force-closed by this close — a
+      // mis-nest. Close them, but mark each recovered + record, never silently.
+      while (stack.length - 1 > i) {
+        top().push(markRecovered(closeFrame(stack.pop()!, memeUri, grammar), "repaired", 9, "mis-nest"));
+      }
       const frame = stack.pop()!;
       if (sigilName === "ahu") ahuStack.pop();
       top().push(closeFrame(frame, memeUri, grammar));
@@ -277,7 +313,9 @@ export function buildMemeAst(
   while (stack.length > 0) {
     const frame = stack.pop()!;
     if (frame.sigilName === "ahu") ahuStack.pop();
-    root.push(closeFrame(frame, memeUri, grammar));
+    // RECOVER (repaired): an unclosed frame at EOF — force-close it, but mark recovered + record,
+    // instead of force-closing silently (the old "confidently-incorrect tree").
+    root.push(markRecovered(closeFrame(frame, memeUri, grammar), "repaired", 9, "unclosed-frame", frame.sigilName));
   }
 
   return root;

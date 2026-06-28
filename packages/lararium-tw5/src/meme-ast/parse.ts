@@ -19,7 +19,7 @@
  */
 
 import type { GrammarRules } from "./types.js";
-import type { MemeAstNode, MemeNode, PranalaEdge } from "./types.js";
+import type { MemeAstNode, MemeNode, PranalaEdge, ParseFailure } from "./types.js";
 import { collectEvents } from "./scanner.js";
 import { buildMemeAst } from "./builder.js";
 import { edgesFromMemeAst } from "./edges.js";
@@ -35,6 +35,9 @@ export interface ParseMemeResult {
   readonly nodes: readonly MemeAstNode[];
   /** Projected edge records for the meme graph / TW5 edge-field codec. */
   readonly edges: readonly PranalaEdge[];
+  /** Out-of-band resilient-recovery records (empty on a clean parse). The tree carries
+   *  Error nodes in place; these ride beside it span-keyed for diagnostics/the gradient. */
+  readonly failures: readonly ParseFailure[];
 }
 
 // ---------------------------------------------------------------------------
@@ -46,11 +49,12 @@ export function parseMemeText(
   text:     string,
   grammar?: GrammarRules,
 ): ParseMemeResult {
-  const events = collectEvents(text, grammar);
-  const nodes  = buildMemeAst(events, uri, grammar, text);
-  const edges  = edgesFromMemeAst(nodes, uri);
+  const events   = collectEvents(text, grammar);
+  const failures: ParseFailure[] = [];
+  const nodes    = buildMemeAst(events, uri, grammar, text, failures);
+  const edges    = edgesFromMemeAst(nodes, uri);
   const meme: MemeNode = { kind: "Meme", uri, body: nodes };
-  return { meme, nodes, edges };
+  return { meme, nodes, edges, failures };
 }
 
 // ---------------------------------------------------------------------------

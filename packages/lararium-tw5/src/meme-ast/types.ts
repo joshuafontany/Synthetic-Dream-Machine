@@ -90,7 +90,8 @@ export type MemeAstKind =
   | "Pae"           // phase boundary: soh/stx/etx/eot
   | "Text"          // raw wikitext prose span
   | "Sigil"         // canonical sigil (incl. toml)
-  | "Dynamic";      // grammar-meme-registered extension
+  | "Dynamic"       // grammar-meme-registered extension
+  | "Error";        // resilient-recovery node — a span the driver could not parse cleanly, contained
 
 // ---------------------------------------------------------------------------
 // Base
@@ -100,6 +101,11 @@ export interface MemeAstBase {
   kind:  MemeAstKind;
   pos:   number;
   raw:   string;
+  // Resilient-parsing gradient (graceful-parsing#sigil-self-defined-gradient): set ONLY on a node the
+  // driver recovered — a clean parse omits both (full confidence, no recovery). `confidence` rides the
+  // 0..20 aperture ladder; `recoveredAs` names the rung the cascade reached.
+  confidence?:  number;
+  recoveredAs?: "water" | "repaired" | "missing";
 }
 
 // ---------------------------------------------------------------------------
@@ -228,6 +234,34 @@ export interface DynamicNode extends MemeAstBase {
 }
 
 // ---------------------------------------------------------------------------
+// ErrorNode — resilient-recovery node (graceful-parsing)
+//
+// The driver emits this when a span cannot parse cleanly, INSTEAD of silently
+// dropping or force-closing it. It carries the verbatim span (lossless — the tree
+// stays full-fidelity); `recoveredAs` names the rung (water/repaired/missing) and
+// `confidence` (0..20) grades how cleanly the construct manifested.
+// ---------------------------------------------------------------------------
+
+export interface ErrorNode extends MemeAstBase {
+  kind:    "Error";
+  content: string;   // the verbatim span (lossless)
+  reason:  string;   // why recovery fired (e.g. "orphan-close", "unclosed-frame", "mis-nest")
+}
+
+// ---------------------------------------------------------------------------
+// ParseFailure — out-of-band recovery record. Errors ride BESIDE the tree
+// (rust-analyzer style), span-keyed, so the tree itself stays a clean best-effort.
+// ---------------------------------------------------------------------------
+
+export interface ParseFailure {
+  pos:         number;
+  raw:         string;
+  reason:      string;
+  recoveredAs: "water" | "repaired" | "missing";
+  sigilName?:  string;
+}
+
+// ---------------------------------------------------------------------------
 // Union
 // ---------------------------------------------------------------------------
 
@@ -239,4 +273,5 @@ export type MemeAstNode =
   | PaeNode
   | TextNode
   | SigilNode
-  | DynamicNode;
+  | DynamicNode
+  | ErrorNode;
