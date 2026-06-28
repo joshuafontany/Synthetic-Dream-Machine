@@ -53,7 +53,19 @@ error-recovery for every malformation, the browser NEVER fails to parse) is THE 
 never-fail parser — the property our whole tower emulates upward. We make TW5 wikitext + memetic match
 the never-fail guarantee HTML already holds at the base.
 
-**The floor becomes LITERAL — adopt parse5 (research-locked, spirit a95eec97).** We make the base the
+**⚠ PARSE5 REMOVED (2026-06-27) — the bridge that taught us the parser is graceful, then cut.** The
+parse5-floor work below is SUPERSEDED. We built it to be "the literal HTML5 floor," and building it is
+how we discovered the floor doesn't need a library at all: the TW5-NATIVE parser is already graceful
+(malformed→literal text; unclosed→extends-to-EOF = HTML5-correct), and "water → verbatim text → HTML
+text always renders" IS the never-fail floor, TW5-native, no dep. parse5 had ZERO source callers (inert)
+and bloated the plugin ~252 KB. Removed: `lar-html5-tag.ts`, its test, and the `parse5` dep. The
+*lesson* stays in canon; the *scaffold* is gone. The original "HTML5-era behaviours" goal (modern
+attribute grammar, foreign content, custom elements) is re-homed to **improving `html.js` directly in
+the fork we now own** (a future feature-branch), NOT a parse5 sidecar (which couldn't touch the live
+rule anyway — it flattens `{{}}`/`<<>>`). The real graceful-on-a-gradient work landed at RENDER (the
+opt-in render+refresh boundary, fork `672ed9600`). The parse5 prose below is kept for the record only.
+
+**[SUPERSEDED] The floor becomes LITERAL — adopt parse5 (research-locked, spirit a95eec97).** We make the base the
 *real* WHATWG algorithm instead of an exemplar: **parse5** (v8.0.1, pure-JS WHATWG-compliant, isomorphic
 ESM — the engine under jsdom/Angular/Cheerio; fits Vite/worker/browser/edge). DOMParser (browser-only,
 absent in worker_threads/CLI/edge), jsdom (heavy, edge-hostile), htmlparser2 (forgiving but NO real
