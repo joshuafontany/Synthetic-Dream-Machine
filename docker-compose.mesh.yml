@@ -58,15 +58,19 @@ services:
     working_dir: /app
     volumes:
       - ".:/app"
+      - "lararium-a-data:/lar-a"   # this vessel's OWN founded state (identity + genesis + storage)
     environment:
-      LAR_ROOT: "/app/.mesh-test/lararium-a"
+      LAR_ROOT: "/lar-a"
       LAR_PORT: "8080"
-    command: ["node", "packages/lararium-node/dist/src/main.js"]
+    entrypoint: ["sh", "tools/lararium-container-boot.sh"]   # founds its OWN identity, then serves
     networks: [mesh]
     ports:
       - "18090:8080"           # expose the Lararium's @oracle read-face (anon-veil witness)
-    restart: unless-stopped
+    restart: "no"
 
 networks:
   mesh:
     driver: bridge
+
+volumes:
+  lararium-a-data:
