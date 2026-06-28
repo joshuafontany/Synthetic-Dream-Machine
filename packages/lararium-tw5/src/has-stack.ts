@@ -5,14 +5,14 @@
  * carries the component stack; component definitions live as their own
  * memes at lar:/// addresses (one component, one entity — no shim/pointer
  * tiddlers at rest). Short tags read as RELATIVE addresses and qualify
- * against the carrier's own bag scope (`root/@bag/version`) by derivation.
+ * against the carrier's own bag scope (`root/@bag`) by derivation.
  * lar:/// tags pass through already qualified. System (`$:/…`) and
  * free-form tags ride outside the stack. A relative tag whose definition
  * has not landed reads declared-unresolved — fertile, not broken.
  *
  * Platform-blind pure functions; the TW5 surface rides filters/stack.ts.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/has-stack
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/has-stack
  */
 
 /** One stack entry: the authored tag and its qualified lar:/// uri (null = outside the stack / unresolvable). */
@@ -21,14 +21,14 @@ export interface StackEntry {
   readonly uri: string | null;
 }
 
-/** Matches `lar:///<w.w.w>/<@bag>/<version>/…` and captures the scope. */
-const SCOPE_RE = /^lar:\/\/\/(\w+\.\w+\.\w+\/@[\w-]+\/v[\w.-]+)\//;
+/** Matches `lar:///<w.w.w>/<@bag>/…` and captures the scope (version-less). */
+const SCOPE_RE = /^lar:\/\/\/(\w+\.\w+\.\w+\/@[\w-]+)\//;
 
 /** A relative component path: word-ish segments joined by `/`. */
 const RELATIVE_RE = /^[\w-]+(\/[\w-]+)*$/;
 
 /**
- * Derive the bag scope (`root/@bag/version`) from a carrier title.
+ * Derive the bag scope (`root/@bag`) from a carrier title.
  * Returns null when the title carries no scoped lar:/// address —
  * relative tags on such a carrier stay unresolved.
  */

@@ -8,7 +8,7 @@
  * relative-name qualification, the rating gate, and the sha256 body gate
  * all run live.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module-gate
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/tw5-module-gate
  */
 
 import { describe, test, expect } from "vitest";
@@ -17,8 +17,8 @@ import { bootTrustedModules } from "../src/tw5-module-gate.js";
 import { stack } from "../src/filters/stack.js";
 import type { TW5FilterOperator, TW5FilterSource } from "../src/types/tiddlywiki.js";
 
-const MODULE_COMPONENT = "lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-module";
-const AGGREGATE_URI    = "lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/tw5-modules";
+const MODULE_COMPONENT = "lar:///ha.ka.ba/@lararium/tw5/tw5-module";
+const AGGREGATE_URI    = "lar:///ha.ka.ba/@lararium/tw5/modules/tw5-modules";
 
 type Fields = Record<string, unknown>;
 
@@ -83,13 +83,13 @@ describe("bootTrustedModules — selection by worn component", () => {
   test("a module wearing tw5/tw5-module at rating passes the gate and injects", async () => {
     const body = "exports.probe = 1;";
     const { tw, tiddlers, defined } = fakeTw({
-      ["lar:///ha.ka.ba/@test/v0.1/modules/probe"]: moduleMeme("lar:///ha.ka.ba/@test/v0.1/modules/probe", body),
+      ["lar:///ha.ka.ba/@test/modules/probe"]: moduleMeme("lar:///ha.ka.ba/@test/modules/probe", body),
       [AGGREGATE_URI]: moduleMeme(AGGREGATE_URI, "exports.agg = 1;"),
     });
 
     await bootTrustedModules(tw);
 
-    const injected = tiddlers.get("lar:///ha.ka.ba/@test/v0.1/modules/probe")!;
+    const injected = tiddlers.get("lar:///ha.ka.ba/@test/modules/probe")!;
     expect(injected["type"]).toBe("application/javascript");   // rewritten = injected
     expect(defined).toContain("lararium-tw5-modules");          // aggregate defined
   });
@@ -97,15 +97,15 @@ describe("bootTrustedModules — selection by worn component", () => {
   test("low rating, missing hash, and unworn carriers all stay un-injected", async () => {
     const body = "exports.probe = 1;";
     const { tw, tiddlers } = fakeTw({
-      ["lar:///ha.ka.ba/@test/v0.1/modules/low"]:    moduleMeme("lar:///ha.ka.ba/@test/v0.1/modules/low", body, { mana: "3" }),
-      ["lar:///ha.ka.ba/@test/v0.1/modules/nohash"]: moduleMeme("lar:///ha.ka.ba/@test/v0.1/modules/nohash", body, { "body-sha256": "" }),
-      ["lar:///ha.ka.ba/@test/v0.1/modules/bare"]:   moduleMeme("lar:///ha.ka.ba/@test/v0.1/modules/bare", body, { tags: [] }),
+      ["lar:///ha.ka.ba/@test/modules/low"]:    moduleMeme("lar:///ha.ka.ba/@test/modules/low", body, { mana: "3" }),
+      ["lar:///ha.ka.ba/@test/modules/nohash"]: moduleMeme("lar:///ha.ka.ba/@test/modules/nohash", body, { "body-sha256": "" }),
+      ["lar:///ha.ka.ba/@test/modules/bare"]:   moduleMeme("lar:///ha.ka.ba/@test/modules/bare", body, { tags: [] }),
     });
 
     await bootTrustedModules(tw);
 
     for (const t of ["low", "nohash", "bare"]) {
-      expect(tiddlers.get(`lar:///ha.ka.ba/@test/v0.1/modules/${t}`)!["type"])
+      expect(tiddlers.get(`lar:///ha.ka.ba/@test/modules/${t}`)!["type"])
         .toBe("text/x-memetic-wikitext");
     }
   });

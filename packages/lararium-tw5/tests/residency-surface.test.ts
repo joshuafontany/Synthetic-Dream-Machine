@@ -2,7 +2,7 @@
  * residency-surface — getOriginBag tests.
  *
  * Sprint:  Residency Model Epic — S3.3 / S3.4
- * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";

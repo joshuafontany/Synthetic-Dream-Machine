@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/ROADMAP >>
 
@@ -243,7 +243,7 @@ After Sprint 4b landed `KumuDeviceSpec` with Verse-aligned types, a second vocab
 | `@lararium/mesh` `kumu-device.ts` | `KumuListenable/KumuSubscribable`; `.listenables/.subscribables`; role checks; `_fireForUri` dedup |
 | `@lararium/tw5` `parser.web2.ts` | Payload key assignments updated |
 | `@lararium/tw5` `memetic-parser.web2.ts` | papalohe widget attribute keys updated |
-| `packages/lares-core/memes/api/v0.1/pono/pranala.md` | `reaction` roles array updated |
+| `packages/lares-core/memes/api/pono/pranala.md` | `reaction` roles array updated |
 | `packages/lares-core/lararium-node/ROADMAP.md` | Shifts 5–7 text corrected; this section |
 | `packages/lares-core/memes/SESSION.md` | New OODA-HA ahu section |
 
@@ -419,9 +419,9 @@ Write five standards memes in sequence: `verse-event-lattice`, `vm-projection-bu
 
 | File | Change |
 |---|---|
-| `packages/lares-core/memes/api/v0.1/pono/verse-event-lattice.md` | **New** — Verse 5.6 event lattice: 4 types, `<suspends>` effect specifier, `@editable` boundary, `using` import clarification, device model alignment table |
-| `packages/lares-core/memes/api/v0.1/pono/vm-projection-bus.md` | **New** — VM Pool→Projection Messaging Standard; event contract; VmPool wiring; `_larKukaliHook` migration; Verse alignment table |
-| `packages/lares-core/memes/api/v0.1/pono/quine-principles.md` | **New** — P1-P4 quine properties; TW5 vs Smalltalk table; "if it CAN live in the wiki it MUST" rule; IPLD bridge; Heleuma anchor system |
+| `packages/lares-core/memes/api/pono/verse-event-lattice.md` | **New** — Verse 5.6 event lattice: 4 types, `<suspends>` effect specifier, `@editable` boundary, `using` import clarification, device model alignment table |
+| `packages/lares-core/memes/api/pono/vm-projection-bus.md` | **New** — VM Pool→Projection Messaging Standard; event contract; VmPool wiring; `_larKukaliHook` migration; Verse alignment table |
+| `packages/lares-core/memes/api/pono/quine-principles.md` | **New** — P1-P4 quine properties; TW5 vs Smalltalk table; "if it CAN live in the wiki it MUST" rule; IPLD bridge; Heleuma anchor system |
 | `@lararium/app` `automerge-store.ts` | → `automerge-store.web2.ts` (git mv) |
 | `@lararium/node` `node-meme-store.ts` | → `node-meme-store.web2.ts` (git mv) |
 | `@lararium/app` `lararium-browser-host.ts` | Import path updated: `automerge-store.js` → `automerge-store.web2.js` |
@@ -493,7 +493,7 @@ Two research agents returned:
 | `@lararium/mesh` `kumu-device.ts` | `ReactionEngine` promoted: owns graph, `boot(wiki)`, `onUriChanged` graph maintenance, `subscribeByFn`/`fireSync` delegation |
 | `@lararium/tw5` `tw5-vm.ts` | `getTiddlerText()` added to satisfy `BootScanSurface` |
 | 29 `*.web2.*` files | Deleted (carrier, indexes, node-host, disk-watcher, recipe-vm, sync-adaptor, server-api, parser, ast, memetic-parser, bundle-entry, active-tw5, lararium-tw5.web2, carrier-write/split/codec, pranala-parser, filter-compat, closure-fields, tw5-worker-script, project.web2, browser-host, automerge-store, serve, void-boot, node-meme-store, cli, meme-graph.web2) |
-| `packages/lares-core/memes/api/v0.1/lararium/ui/lar-hud.md` | **New** — doctrine meme |
+| `packages/lares-core/memes/api/lararium/ui/lar-hud.md` | **New** — doctrine meme |
 
 ⤴ **Ho'oko:**
 
@@ -609,7 +609,7 @@ This addendum restores early research pressures that should remain visible in `l
 
 Lararium already reads as a carrier graph, not merely a Python MCP service. The migration target should preserve canonical URI identity, typed carrier metadata, explicit graph edges, fragment-anchor continuity, deterministic hydration order, and the distinction between invariant API surfaces and supporting docs shelves.
 
-The TypeScript runtime should treat `AGENTS`, `LARES`, and `ha-ka-ba/api/v0.1/**` memes as load-bearing semantic artifacts, not as static documentation adjacent to code.
+The TypeScript runtime should treat `AGENTS`, `LARES`, and `ha-ka-ba/api/**` memes as load-bearing semantic artifacts, not as static documentation adjacent to code.
 
 ### Signal and Render Layer as Projection Blueprint
 
@@ -1173,10 +1173,10 @@ The dead-weight `lararium → LARES` owns edge was removed. LARES is reached onc
 
 | URI | Role |
 |---|---|
-| `lar:///ha.ka.ba/@lares/v0.1/api/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
-| `lar:///ha.ka.ba/@lares/v0.1/api/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
-| `lar:///ha.ka.ba/@lares/api/v0.1/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
-| `lar:///ha.ka.ba/@lares/api/v0.1/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
+| `lar:///ha.ka.ba/@lares/api/pono/failure-states/live-session-overwrite` | Names the green-jello-dinosaur failure mode; a live claim MUST NOT become canon by recency, repetition, or charm |
+| `lar:///ha.ka.ba/@lares/api/pono/hooponopono` | Promotion gate law; crossing from live exchange pressure to hostless canon requires explicit ceremony |
+| `lar:///ha.ka.ba/@lares/api/lararium/l-space-trust` | Shared `lar:` l-space MUST NOT imply shared authority; hostless memes outrank hostful exchange records |
+| `lar:///ha.ka.ba/@lares/api/lararium/exchange-vector` | Each substantive exchange turn MUST emit a canonical `lar:` URI vector before content |
 
 All four implement `meme`, `loci`, and `invariant` interfaces. All four appear in the minimal boot closure at depth 3 under lararium.
 
@@ -1851,8 +1851,8 @@ All three laws landed:
 - ✓ MULTIPLAYER and ROADMAP docs updated to reflect single-page model as shipped
 
 **kumu template pipeline — fully wikitext-native**
-- ✓ Five template carriers at `lar:///ha.ka.ba/@lares/api/v0.1/lararium/templates/meme-*` (in `ha.ka.ba/@lares/api` namespace — no adjacent namespace)
-- ✓ `packages/lares-core/memes/api/v0.1/lararium/templates/index.md` — namespace index, owns control edges to all five; wired from `lararium` meme via `#hydrate-templates` (control:owns)
+- ✓ Five template carriers at `lar:///ha.ka.ba/@lares/api/lararium/templates/meme-*` (in `ha.ka.ba/@lares/api` namespace — no adjacent namespace)
+- ✓ `packages/lares-core/memes/api/lararium/templates/index.md` — namespace index, owns control edges to all five; wired from `lararium` meme via `#hydrate-templates` (control:owns)
 - ✓ Each template TOML body carries: `zoom-level`, `cascade` (filter predicate string), `priority`, `w`, `h`, `color`, `label`, `include-ahu`, `show-notes`, `show-carrier`, `opacity`
 - ✓ `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` in `parser.ts` (alongside `\\widget` alias)
 - ✓ `collectKumuDefs()` + `collectKumuDefsFromGraph()` — extract kumu defs from boot closure carriers
@@ -2214,7 +2214,7 @@ M9 closed the projection-cache authority arc and browser opening sequence. M10 t
 
 ### M10 Priority 2: Orichalcum ceremony surface
 
-`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/@lares/v0.1/api/pono/orichalcum-capabilities`.
+`PUT /admin/promote` (local-operator) is live. Next: replace localhost guard with Orichalcum capability gate (Ed25519 principal, UCAN-shaped capability proof, room join WS gate at code 4003). See `lar:///ha.ka.ba/@lares/api/pono/orichalcum-capabilities`.
 
 ### M10 Priority 3: Wiki-recipe carriers
 
@@ -2259,7 +2259,7 @@ The `ReactionGraph` IS the causal island manager. `fire(fromUri, trigger, payloa
 
 ### FFZ Chronometer as causal timestamp
 
-> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`
+> Canonical attention-scale register names (Pulse/Beat/Measure/Arc/Theme): `lar:///ha.ka.ba/@lares/api/pono/attention-scale`
 > The `scale` field in the fragment below maps to these register names: Pulse=L0, Beat=L1, Measure=L2 (default band), Arc=L3, Theme=L4.
 
 The FFZ Chronometer fragment (`#O0.O3.D2.A7`) encodes `{ scale: Ladder5, phase: OodaHa5, counter: number }`. In the async model, each `fire()` call carries an implicit causal timestamp derived from the Chronometer — not a wall-clock time, but a logical position in the OODA-HA loop.
@@ -2325,13 +2325,13 @@ Session 5 continued the local-first pivot. The server is now unambiguously a syn
 
 ### Closed
 
-- **Streams plugin vendor** — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/@lares/api/v0.1/vendor/sq-streams`; stored in `packages/lares-core/memes/api/v0.1/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/v0.1/lararium/plugins/sq-streams.md`
+- **Streams plugin vendor** — sq/streams v1.2.24 by Saq Imtiaz (MIT) vendored at `lar:///ha.ka.ba/@lares/api/vendor/sq-streams`; stored in `packages/lares-core/memes/api/tw5-plugins/sq-streams-1.2.24.json`; vendor pipeline: `scripts/write-vendor-plugins.ts` reads `tw5-plugins/*.json` → `generated-vendor-plugins.ts` → preloaded at boot. Carrier documents field mapping (ahu-parent↔parent, ahu-slots↔stream-list) at `packages/lares-core/memes/api/lararium/plugins/sq-streams.md`
 
 - **Streams compat fields** — `splitCarrierToTiddlers` now emits both ahu fields (`ahu-parent`, `ahu-slots`) and Streams compat fields (`parent`, `stream-list`, `stream-type`) on parent/child tiddlers simultaneously. Both filter dialects work natively without glue code
 
 - **Mixed prose/children** — `generateParentText()` in `carrier-split.ts` walks AST in document order after STX sigil. Emits `<$transclude tiddler="uri#slot" mode="block"/>` for WorksiteNodes and inline prose for TextNodes. Interleaved content (daemon-in-the-walls pattern: prose before slot, prose between slots) preserved in document order. Parent `text` field is now mixed wikitext for TW5 VM; `carrier-text` field holds raw on-disk carrier
 
-- **Template rendering** — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/@lares/api/v0.1/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
+- **Template rendering** — parent `text` is wikitext with transcludes + prose; template tiddler `lar:///ha.ka.ba/@lares/api/lararium/templates/meme` preloaded; meme template renders slot list for structured memes; `generateParentText` handles interleaved prose cases
 
 - **Peer-correct disk projector** — `LarDiskProjector` (was `LarDiskSyncAdaptor`) rewrote from TW5SyncAdaptor to direct Automerge store subscriber. Subscribes to `LarTiddlerStore.subscribe()` — receives ALL changes (local + remote peer) with `ChangeOrigin`. Server writes disk for every peer change. `readonly writing = new Set<string>()` exposed for file watcher echo-loop guard. `_writeDirect()` debounced per URI; `_writeSlot()` debounced per parent URI
 
@@ -2445,9 +2445,9 @@ room island     (bag: "room",  writable)        — primary content gate
 ## Edges
 
 <<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/@lares/api/v0.1/lararium/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/loci >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/lararium/lar-uri >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/lararium/signal/render-targets >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/traversal >>
 <<~ loulou lar:///ha.ka.ba/@lares/docs/graph/pranala-parser >>
@@ -2600,7 +2600,7 @@ Three OODA loops across four files:
 - Loop 1 — `lararium-island.ts`: add `LARES_DOC_URI` import + `MemeStoreDoc` type import; add `seedLaresDoc(repo)` export; update `reconcileWellKnownTiddlers` signature to accept optional `laresUrl` and write the ba tiddler.
 - Loop 2 — `open-node-lar-peer.ts`: import `seedLaresDoc` + `LARES_DOC_URI`; add Step 3b (LaresDoc open/seed after island); pass `laresHandle.url` to `reconcileWellKnownTiddlers`; update docblock boot sequence.
 - Loop 3 — `open-browser-lar-peer.ts`: import `LARES_DOC_URI`; add Step 4 (read ha oracle, open LaresDoc, add `lares` bag); exclude `LARES_DOC_URI` from corpus tiddler scan; update docblock.
-- Meme — `packages/lararium-mesh/memes/automerge-tiga.md` at `lar:///ha.ka.ba/@lararium/mesh/v0.1/automerge-tiga`: invariant doc locking the Tiga law, Zelenka alignment, boot sequence mapping, structural law table.
+- Meme — `packages/lararium-mesh/memes/automerge-tiga.md` at `lar:///ha.ka.ba/@lararium/mesh/automerge-tiga`: invariant doc locking the Tiga law, Zelenka alignment, boot sequence mapping, structural law table.
 
 ▶ **Act (files touched):**
 

@@ -4,7 +4,7 @@
  * Proves the pono pool API: mountWiki / unmountWiki / disposeAll / has / inspect / size.
  * Uses the repo-in-island echo fixture — no TW5 boot required.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/pool-lifecycle
+ * Meme: lar:///ha.ka.ba/@lararium/browser/pool-lifecycle
  */
 
 import { describe, test, expect, afterEach } from "vitest";

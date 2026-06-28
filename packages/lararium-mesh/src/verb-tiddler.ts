@@ -40,7 +40,7 @@
  *     events or Automerge sync — never a named server endpoint.
  *   - Causal-island law: each vessel's daemon VM owns its own volatile verb namespace.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/verb-tiddler
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/verb-tiddler
  */
 
 import {

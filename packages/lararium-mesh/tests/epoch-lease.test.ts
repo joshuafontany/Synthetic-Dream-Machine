@@ -4,7 +4,7 @@
  * Proves the load-bearing safety property: the effective epoch is the MAX over per-writer
  * slots, so it never decreases — a concurrent lower slot cannot pull a revoked grant back to
  * life (the failure a bare Automerge-LWW scalar would allow). Meme:
- * lar:///ha.ka.ba/@lares/v0.1/api/pono/convergent-mesh#two-revocation-modes
+ * lar:///ha.ka.ba/@lares/api/pono/convergent-mesh#two-revocation-modes
  */
 
 import { describe, test, expect } from "vitest";

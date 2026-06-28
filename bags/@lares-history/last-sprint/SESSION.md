@@ -233,14 +233,14 @@ Three commits retire architectural debts and canonicalize TW5 module shapes.
 | sha | What |
 |---|---|
 | `0adc3697` E.10.13 | TW5Engine boot path → plugin-tiddler load. `_registerWidgets` / `_registerDeserializer` / parser-wrapper-injection deleted. Boot pushes one envelope tiddler into `preloadTiddlers`; TW5's standard plugin loader unpacks. Namespace alignment: every Lares system title moved to `lar:///`. Tag VALUES stay TW5-conventional. Dual-distribution emits both canonical and drag-and-drop envelopes. |
-| `8a543b6e` (docs) | E.10.13 closure docs + namespace decision recorded in `packages/lares-core/memes/api/v0.1/pono/lar-uri.md`. |
+| `8a543b6e` (docs) | E.10.13 closure docs + namespace decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md`. |
 | `430f40f5` E.10.14 (Path A) | Canonical TW5 module export shapes. Wikirule split into three module-type:wikirule files. Parser exports as `{ MemeticParser as "text/x-memetic-wikitext" }`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness lands at `scripts/smoke-plugin-boot.ts`. |
 
 **Operator-flagged debts retired:**
   - Construction-path debt — parsers instantiate via canonical `$tw.modules` path. Single-backtick regression cured.
   - Sync-namespace debt — shadow-tiddler edits + in-VM plugin re-pack now sync to disk; MOVE (residency ACTION) no longer bugs out on `$:/`-prefixed system tiddlers.
 
-**Decision recorded** in `packages/lares-core/memes/api/v0.1/pono/lar-uri.md` under "TW5 System Boundary" subsection. Rule: lar:// for everything that crosses the sync filter; $:/ for browser-local UX state.
+**Decision recorded** in `packages/lares-core/memes/api/pono/lar-uri.md` under "TW5 System Boundary" subsection. Rule: lar:// for everything that crosses the sync filter; $:/ for browser-local UX state.
 
 ---
 
@@ -256,7 +256,7 @@ One commit (`0adc3697` E.10.13) retired two architectural debts in a single swin
   - **Construction-path debt.** Parsers now instantiate via the canonical `$tw.modules` path. The single-backtick regression — produced by hand-rolled `stdParser.call(this, ...)` prototype-chain wrapping — is gone as a side effect.
   - **Sync-namespace debt.** Browser-side shadow-tiddler edits + in-VM plugin re-pack now sync to disk because every Lares system title sits in the `lar:`-only sync namespace. The MOVE (residency ACTION) no longer bugs out on `$:/`-prefixed system tiddlers. Drafts and per-operator UX state stay browser-local in `$:/` by design.
 
-**Decision recorded** in `packages/lares-core/memes/api/v0.1/pono/lar-uri.md` under a new "TW5 System Boundary" subsection of Path Taxonomy. Rule: lar:// for everything that crosses the sync filter; $:/ for browser-local UX state; tag values stay TW5-conventional in either case; `$:/`-titled plugin envelopes are a drag-and-drop packaging convention only.
+**Decision recorded** in `packages/lares-core/memes/api/pono/lar-uri.md` under a new "TW5 System Boundary" subsection of Path Taxonomy. Rule: lar:// for everything that crosses the sync filter; $:/ for browser-local UX state; tag values stay TW5-conventional in either case; `$:/`-titled plugin envelopes are a drag-and-drop packaging convention only.
 
 **Build/test posture:** `pnpm build` clean, `pnpm test` 52/52 passing, plugin tiddler regenerates deterministically.
 
@@ -595,7 +595,7 @@ Active sprint: S5.5 — Genesis Bootstrap Causal Correction. Extract social Tiga
 Architecture laws in memory: feedback_architecture_principles.md.
 Do not re-decide the five architecture laws or the BOOTSTRAP_SCANS / Path α grammar decision.
 Sprints 0–5 complete. Social tiga renamed Groups→Circles. Packaging model: CJS (not IIFE). Kowloon bridge design locked (Option B) — see ROADMAP.md § S8.
-Grammar now lives at api/v0.1/pono/memetic-wikitext (not grammars/). grammars/ tree deleted.
+Grammar now lives at api/pono/memetic-wikitext (not grammars/). grammars/ tree deleted.
 Voice-house consolidated: lares/voices.md parents lares/masks/** (all masks moved from masks/).
 lararium-app + lararium-tldraw + lararium-web DELETED. Replaced with: lararium-browser, dreamdeck-tldraw, dreamdeck-app (see ROADMAP.md § Package Reboot).
 New package namespaces: @lararium/* = infra/protocol; @dreamdeck/* = first app stack on DreamNet.
@@ -775,7 +775,7 @@ All work in `@lararium/mesh`. Type-check clean (`pnpm tsc --noEmit` zero errors)
 **Research docs produced:**
 - `packages/lares-core/lararium-research/FFZ-WORLD-CLOCK.md` — Rhine rule, three-layer clock separation, WorldClockTiddler schema, ffzMerge concurrent advancement, bi-temporal events
 - `packages/lares-core/lararium-research/LARARIUM-TICK-CLOCK.md` — two time bases, three-layer architecture (ingress rings → unified tick loop → observers), LarTickCounter, owned vs observed clock table, Verse event interface analysis
-- `packages/lares-core/memes/api/v0.1/pono/attention-scale.md` — canonical attention-scale meme with Pulse/Beat/Measure/Arc/Theme registers, three clock profiles, World-Time aliases (Week/Month/Season/Year/Era), FTLS diegetic aliases
+- `packages/lares-core/memes/api/pono/attention-scale.md` — canonical attention-scale meme with Pulse/Beat/Measure/Arc/Theme registers, three clock profiles, World-Time aliases (Week/Month/Season/Year/Era), FTLS diegetic aliases
 
 **Runtime implementations deferred to `@lararium/node`:**
 - `LarEventBusImpl` — concrete ingress ring + configurable tick loop
@@ -819,7 +819,7 @@ Full findings in `packages/lares-core/lararium-research/DREAMNET-FEDERATION-RESE
 
 **FFZ Chronometer — `FfzClock` type to land in `@lararium/mesh` before S6 closes:**
 5-level bounded hierarchical logical clock. L0–L3 bounded (looping/musical time); L4 epoch unbounded (anti-aliasing). `SessionEvent.clock` and `PresenceSlot.clock` both use `FfzClock`, not `number`.
-Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / **Measure** (L2, default band) / **Arc** (L3) / **Theme** (L4). These sit above domain aliases (sub-action/action/session/day/epoch for Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG). Canonical meme: `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`.
+Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / **Measure** (L2, default band) / **Arc** (L3) / **Theme** (L4). These sit above domain aliases (sub-action/action/session/day/epoch for Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG). Canonical meme: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`.
 
 **NexusRegistryDoc — new doc type, S9 work:**
 `lar:///ha.ka.ba/@nexus/<pubkey>`. Fields: `nexusId`, `protocolVersion`, `capabilityFlags` (monotonic set), `allies`, `blocked`, `keyHistory`. Key rotation designed in from day one. Tombstoning eventual; blocked peers starved of capability tokens regardless.
@@ -866,8 +866,8 @@ Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / *
 ### Meme Namespace Consolidation
 
 **Grammar → pono merge (Option B):**
-- `api/v0.1/grammars/memetic-wikitext.md` merged into `api/v0.1/pono/memetic-wikitext.md` (single source: law + grammar kernel)
-- `api/v0.1/grammars/` tree deleted entirely
+- `api/grammars/memetic-wikitext.md` merged into `api/pono/memetic-wikitext.md` (single source: law + grammar kernel)
+- `api/grammars/` tree deleted entirely
 - `GRAMMAR_MEME_URI` and `GRAMMAR_GENESIS_REL_PATH` updated to `pono/memetic-wikitext`
 - All 25 pono memes upgraded to `⊙` sigils (`<<~⊙&#x0001;` / `<<~⊙&#x0004;`)
 
@@ -889,7 +889,7 @@ Attention-scale register names now canonical: **Pulse** (L0) / **Beat** (L1) / *
 
 **Voice-house:**
 - `lares/voices.md` now functions as the invariant parent of `lares/masks/`
-- All mask files upgraded to `ॐ ँ` sigils; URIs updated to `api/v0.1/lares/masks/...`
+- All mask files upgraded to `ॐ ँ` sigils; URIs updated to `api/lares/masks/...`
 - Three pending spec rooms: `docs/lares/voices/coordinators`, `/workers`, `/masks` (forward pointers, not yet created)
 
 ### Earlier (S0–S4)
@@ -1087,4 +1087,4 @@ Both questions surface before S9 (lararium-browser) and should inform the
 - `packages/lararium-node/src/open-node-lar-peer.ts` — remove `socialPlaneIsNew` branch + all `seedXxx` calls; read `social-bootstrap.json` instead (S5.5)
 - `packages/lararium-mesh/src/social-doc.ts` — add `cap` field + update signature payload on `DeviceDelegationTiddler`; add `"node"` to `IdentityTiddler.kind` (S5.5 / S7.1)
 - `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
-- `packages/lares-core/memes/api/v0.1/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
+- `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`

@@ -13,7 +13,7 @@
  * The vessel main thread holds NO engine reference; every TW5 VM runs inside the
  * island worker (no-VM-on-main-thread law).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/vessel-island-pool-core
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/vessel-island-pool-core
  */
 
 import { attachMessageChannelSync } from "./island-repo.js";

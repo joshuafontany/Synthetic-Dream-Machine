@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-race
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: concurrency-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/holo
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/holo
 lar-alias-for: holo
 lar-see-also: holo
 lar-open-pattern: <<~\s*\\race\s*>>

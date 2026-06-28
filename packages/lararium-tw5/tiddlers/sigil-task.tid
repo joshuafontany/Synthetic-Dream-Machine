@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-task
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: guest-grammar-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/hana
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/hana
 lar-alias-for: \task
 lar-see-also: hana
 lar-open-pattern: <<~\s*\\task\s+([^\n>]+?)\s*>>

@@ -14,7 +14,7 @@
  * down, telemetry no-ops (verbatim capture already landed; the lar_hv sweep
  * backstops) — verbatim-always / telemetry-eventual.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
 import { loadVesselVerifyingKey } from "@lararium/node";

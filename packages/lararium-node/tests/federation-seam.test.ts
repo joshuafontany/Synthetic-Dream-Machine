@@ -18,7 +18,7 @@
  * Gate proof: this file (node, pure Repo) +
  *             browser-repo-in-island.test.ts test 2 (browser pool).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/federation-seam
+ * Meme: lar:///ha.ka.ba/@lararium/node/federation-seam
  */
 
 import { describe, test, expect } from "vitest";

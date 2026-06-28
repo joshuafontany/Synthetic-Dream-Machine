@@ -12,7 +12,7 @@
  * plane's seed policy (a node relay FINDS-never-seeds; a browser keeper may
  * SEED) arrives as the caller's `resolveHandle`, not an `if (platform)`.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/vessel-steps
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/vessel-steps
  */
 
 import {

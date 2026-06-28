@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-if
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: control
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/heihei
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/heihei
 lar-alias-for: \if
 lar-see-also: heihei
 lar-open-pattern: <<~\s*\\if\s+([^>]+?)\s*>>

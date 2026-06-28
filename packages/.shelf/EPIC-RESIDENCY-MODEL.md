@@ -2,7 +2,7 @@
 
 > Created: 2026-05-30 (turn 31)
 > Branch: `feature/lararium-node-4`
-> Memetic intent: [bags/@lares/v0.1/api/lararium/residency-model.md](../bags/@lares/v0.1/api/lararium/residency-model.md)
+> Memetic intent: [bags/@lares/api/lararium/residency-model.md](../bags/@lares/api/lararium/residency-model.md)
 > Memory: [project-residency-model-architecture](~/.claude/projects/-home-joshu-Synthetic-Dream-Machine/memory/project_residency_model_architecture.md)
 > Supersedes design pivot: [project-stage-commit-push-model](~/.claude/projects/-home-joshu-Synthetic-Dream-Machine/memory/project_stage_commit_push_model.md)
 
@@ -64,9 +64,9 @@ Sprint dependencies form a partial order, not a strict line. Sprints 2–4 form 
 
 **Stories:**
 
-- [x] **S1.1** — Author `bags/@lares/v0.1/api/lararium/residency-model.md` as load-bearing invariant meme (confidence 17, status=approved, approved-on 2026-05-30).
+- [x] **S1.1** — Author `bags/@lares/api/lararium/residency-model.md` as load-bearing invariant meme (confidence 17, status=approved, approved-on 2026-05-30).
 - [x] **S1.2** — Save `project_residency_model_architecture.md` to long-term memory.
-- [x] **S1.3** — Edit `bags/@lares/v0.1/api/lararium/personal-slot.md` (then `personal-slot-proposal.md`, since merged) — add `#reconciliation` ahu block clarifying cascade-rules-as-first-write-defaults under residency model; add +2 tests to migration plan.
+- [x] **S1.3** — Edit `bags/@lares/api/lararium/personal-slot.md` (then `personal-slot-proposal.md`, since merged) — add `#reconciliation` ahu block clarifying cascade-rules-as-first-write-defaults under residency model; add +2 tests to migration plan.
 - [x] **S1.4** — Mark prior memory `project_stage_commit_push_model.md` superseded; preserve for context.
 - [x] **S1.5** — Update `packages/ROADMAP.md` Priority 2 row; update Path N description.
 - [x] **S1.6** — Update `packages/HANDOFF.md` with turn 31 entry.
@@ -84,7 +84,7 @@ Sprint dependencies form a partial order, not a strict line. Sprints 2–4 form 
 
 - [x] **S2.1** — `ACTION_VERBS` const + `ActionVerb` type landed in `packages/lararium-mesh/src/residency-actions.ts`. Subset tuples `TRANSFER_VERBS` (`ADD`/`COPY`/`MOVE`) and `BAG_VERBS` (`CLEAR`/`DROP`) added with matching type guards `isActionVerb` / `isTransferVerb` / `isBagVerb`.
 - [x] **S2.2** — `ResidencyAction` lands as a discriminated union with six variants (`AddAction`, `CopyAction`, `MoveAction`, `ClearAction`, `DropAction`, `LoadAction`). Per-verb required fields enforced at the type level.
-- [x] **S2.3** — URI grammar RESOLVED: ACTION verbs compose ON TOP of `verb-tiddler.ts` rather than living under a separate prefix. No new URI prefix invented. Documented in `residency-model.md` `#action-verb-surface` and in the source-file header comment. Cross-reference: [lar-uri.md](../bags/@lares/v0.1/api/pono/lar-uri.md).
+- [x] **S2.3** — URI grammar RESOLVED: ACTION verbs compose ON TOP of `verb-tiddler.ts` rather than living under a separate prefix. No new URI prefix invented. Documented in `residency-model.md` `#action-verb-surface` and in the source-file header comment. Cross-reference: [lar-uri.md](../bags/@lares/api/pono/lar-uri.md).
 - [x] **S2.4** — `parseResidencyAction(inv: Verb): ResidencyAction | null` validates verb membership + per-verb required args. Returns null on any malformed input. `encodeResidencyArgs` provides the symmetric encode path.
 - [x] **S2.5** — Verb-tiddler integration extension: NOT REQUIRED. The existing `Verb` shape already carries `action`, `args`, `from-uri`, `listenable` — the parser reads through. Composition rather than extension.
 - [x] **S2.6** — `change-id` propagation invariant: `newChangeId()` factory + `changeId` field required in `AddAction` / `CopyAction` / `MoveAction` / `LoadAction` at the type level. Validator rejects ADD/COPY/MOVE/LOAD missing change-id. Tests prove change-id survives `encodeResidencyArgs` → `JSON.stringify` → `JSON.parse` → `parseResidencyAction` roundtrip. Handler-layer preservation across bags lands in Sprint 5.
@@ -100,7 +100,7 @@ Sprint dependencies form a partial order, not a strict line. Sprints 2–4 form 
 - New: `packages/lararium-mesh/src/residency-actions.ts` (~210 lines)
 - New: `packages/lararium-mesh/tests/residency-actions.test.ts` (~350 lines)
 - Edit: `packages/lararium-mesh/src/index.ts` (+1 export)
-- Edit: `bags/@lares/v0.1/api/lararium/residency-model.md` (#action-verb-surface URI grammar resolution)
+- Edit: `bags/@lares/api/lararium/residency-model.md` (#action-verb-surface URI grammar resolution)
 - Edit: `packages/EPIC-RESIDENCY-MODEL.md` (this sprint marker)
 
 ---
@@ -249,7 +249,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [x] **S7.2** — Update `expandRecipe()` to insert `@personal` between `@draft` and `@<wikiSlug>` (priority position from the approved proposal). *(landed 2026-05-31)*
 - [x] **S7.3** — Cascade rules landed in `lar-bag-paths.tid` *(2026-05-31)* — four `@personal` first-write defaults above the `$:/state/` catch-all: `$:/StoryList`, `$:/state/folded/`, `$:/state/tab-`, `$:/palette` (Q3) → `@personal`. Test fixture in `island-adaptor.test.ts` synced; `$:/StoryList → @personal` routing test passing. First-write defaults, not authoritative routing.
 - [x] **S7.4** — `computeRecipeFingerprint({wikiDocId, canonBagDocIds})` primitive landed in `wiki-recipe.ts` *(2026-05-31)* — SHA-256 over canonical JSON of `(wikiDocId + sorted canonBagDocIds)`; `@lares`/`@lararium` excluded (Q4 revised, personal-slot). 8 tests in `recipe-fingerprint.test.ts` (determinism, sort-stability, canon-set differentiation, caller-mutation isolation). **Vessel-boot integration** (compute-at-mount + thread into `BagResolver`) folds into S7.5 per `personal-slot.md`.
-- [ ] **S7.5** — `BagResolver` map gets per-(PersonGroup × recipe-fingerprint) `@personal` URL resolution, **host-inline** in `open-node-vessel.ts` between `await adminVm.workerEa` (:770) and `mountWiki(activeWikiId, ctx, { pinned: true })` (:782) — pool stays envelope-only. Storage shape: admin-doc-stored binding tiddlers per `lar:///ha.ka.ba/@lares/v0.1/api/lararium/personal-slot` (approved 2026-06-01; pseudocode reconciled to the post-S11.5 code arc 2026-06-03). `@draft` per-fingerprint binding binds together with `@personal` per Q11 (slice-a, resolved 2026-06-03) — replaces the boot's ad-hoc draft (:696).
+- [ ] **S7.5** — `BagResolver` map gets per-(PersonGroup × recipe-fingerprint) `@personal` URL resolution, **host-inline** in `open-node-vessel.ts` between `await adminVm.workerEa` (:770) and `mountWiki(activeWikiId, ctx, { pinned: true })` (:782) — pool stays envelope-only. Storage shape: admin-doc-stored binding tiddlers per `lar:///ha.ka.ba/@lares/api/lararium/personal-slot` (approved 2026-06-01; pseudocode reconciled to the post-S11.5 code arc 2026-06-03). `@draft` per-fingerprint binding binds together with `@personal` per Q11 (slice-a, resolved 2026-06-03) — replaces the boot's ad-hoc draft (:696).
 - [ ] **S7.6** — Keyhive PersonGroup grant + capability check on `@personal` (and `@draft`, bound together per Q11 slice-a). Q8 deferred 2026-05-31: ships with implicit-on-membership subscription as default; explicit per-wiki opt-out toggle becomes follow-up sprint scope. Survey 2026-05-31: KeyhiveProvider.delegate + addSentinelMember already cover the grant path; not blocked on Keyhive maturity. **Grounding (2026-06-03):** `delegate()` requires `registerBag(handle.url)` first (`keyhive-provider.ts:146`); `audience` is the PersonGroup **agent-id** (`PERSON_GROUP_AGENT_ID_TIDDLER`), not the doc-id — `createSentinelDoc` returns both, members/audiences address by agent Identifier (`getAgent`).
 - [ ] **S7.7** — Tests (original 7 from personal-slot + 2 from residency-model reconciliation):
   - Two devices, same recipe, same PersonGroup → write StoryList on A, observe on B.
@@ -287,7 +287,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 - [x] **S9.1** — `bags/` swept across passes (operator `3a6d80ed` ceremony→MOVE rename + doctrine-meme fixes: `causal-islands.md`, `federated-causal-islands.md` MUST-list synced to code, `system-invariants.md` AUTHORITY header/genesis law/AUTH_4 label, `orichalcum-capabilities.md` role+head+ability-ladder+group-principal). **Operator ruling 2026-06-01: canon-promotion → residency MOVE.** Swept: `loci/SKILL.md` (all canon-promotion → canon-MOVE), `loci.md` + `docs/pono/loci.md` (role + criteria + self-MOVE), `hooponopono.md` (reframed as the harmony ceremony wrapping a canon MOVE — substance preserved), `live-session-overwrite.md` (both docs + failure-states), `spine.md`, `the-lares-protocols.md` (federated canon MOVE → alignment-layer). **Deliberately left** (distinct sense, NOT the retired ceremony): generic tier/stable/component promotion (`hot-tier promotion`, `promote to stable l-space`, `@sdm` component-meme promotion, doc relocation) + the historical past-tense ref in `residency-model.md:43`.
 - [x] **S9.2** — `packages/AGENTS.md` carries no `promote-handler` reference (already clean; Spine uses action-handler / ACTION verb family).
 - [x] **S9.3** — `sync-decompose-promote.sh` retired; `tests/AGENTS.md:10` route doc updated (prior `promote/` subdir retired 2026-05-31). Line ~141 retains a historical note describing the retired flow — acceptable (marked historical, per exit criteria).
-- [x] **S9.4** — `bags/@lares/v0.1/api/lararium/action-handler.md` authored 2026-06-01 — source-of-truth meme for the six-verb handler family (verbs table, handler law, dispatch seam, edges).
+- [x] **S9.4** — `bags/@lares/api/lararium/action-handler.md` authored 2026-06-01 — source-of-truth meme for the six-verb handler family (verbs table, handler law, dispatch seam, edges).
 
 **Exit criteria met:** ✅ no doc references the promote ceremony as the *current* model; every ceremony-specific ref replaced (→ canon MOVE / residency MOVE) or marked historical. Generic tier/stable/component "promotion" (a distinct ongoing sense) correctly preserved.
 
@@ -315,7 +315,7 @@ After three research spirits surveyed Automerge heads patterns, Cambria lens des
 
 **Warm cut (YIN, 2026-06-01):** "build warm now" was reversed the same day after an adversarial + kupono + YIN research pass. A suspended Worker still holds its heap (warm sheds CPU, not the memory the model bounds); the proven virtual-actor runtimes (Orleans/Akka/Dapr) use two states; warm was built ahead of any measured need. Reopening condition lives in residency-tiers.md #warm-cut (measured resume-cost problem AND a memory-shedding suspend).
 
-**Canon (landed + revised 2026-06-01):** [bags/@lares/v0.1/api/lararium/residency-tiers.md](../bags/@lares/v0.1/api/lararium/residency-tiers.md) — load-bearing invariant. causal-islands.md + the-lararium-hud.md + island-protocol.ts reconciled to wela/anu.
+**Canon (landed + revised 2026-06-01):** [bags/@lares/api/lararium/residency-tiers.md](../bags/@lares/api/lararium/residency-tiers.md) — load-bearing invariant. causal-islands.md + the-lararium-hud.md + island-protocol.ts reconciled to wela/anu.
 
 **Why this re-sequences S7:** S7.5 binding-resolution waits on a boot reorder (admin-VM-first) so the delegate-verb seam is live before any wiki mount. That reorder (S11.5) lands as platform work; S7.5/7.6/7.7 resume on it.
 

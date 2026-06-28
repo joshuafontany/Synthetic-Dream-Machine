@@ -27,7 +27,7 @@ module-type: parser
  * Operator override: writing a space-separated rule-name list to
  * `lar:///ha.ka.ba/config/memetic-rules-except` replaces the default deny list.
  *
- * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/memetic-parser
+ * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/memetic-parser
  */
 
 const RULES_CONFIG_TIDDLER = "lar:///ha.ka.ba/config/memetic-rules-except";

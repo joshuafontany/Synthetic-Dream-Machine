@@ -6,7 +6,7 @@
  * all-prose turns abstain on structure while keeping their raw source. These
  * tests walk that gradient.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/turn-harvest
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/turn-harvest
  */
 
 import { describe, test, expect } from "vitest";

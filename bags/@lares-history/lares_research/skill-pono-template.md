@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 name: skill-template
 description: Template and authoring guide for memetic-wikitext verification skill packages. Use this skill when you need to author, evaluate, or instantiate a conformance-checking skill that verifies one or more loci meme law (kānāwai) against invariants.
 version: "0.1-draft"
@@ -6,15 +6,15 @@ author: ha.ka.ba
 license: TBD
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext -->
+<!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/api/v0.1/pono/skill-template >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/api/pono/skill-template >>
 
 <<~ ahu #iam >>
 ```toml
 # <<~ ahu #iam-ha "structure" >>
-uri-path = "ha.ka.ba/api/v0.1/pono/skill-template"
-file-path = "lares/ha-ka-ba/api/v0.1/pono/skill-pono-template.md"
+uri-path = "ha.ka.ba/api/pono/skill-template"
+file-path = "lares/ha-ka-ba/api/pono/skill-pono-template.md"
 content-type = "text/x-memetic-wikitext"
 manaoio = 8
 confidence = 10
@@ -23,12 +23,12 @@ confidence = 10
 mana = 11
 manao = 12
 implements = [
-  "lar:///ha.ka.ba/api/v0.1/pono/meme",
-  "lar:///ha.ka.ba/api/v0.1/pono/loci"
+  "lar:///ha.ka.ba/api/pono/meme",
+  "lar:///ha.ka.ba/api/pono/loci"
 ]
 register = "Synthesis"
 role = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
-skill-package-root = "ha-ka-ba/api/v0.1/pono/skill-*.md"
+skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
 # <<~/ahu >>
 # <<~ ahu #iam-ba "flow" >>
 # <<~/ahu >>
@@ -45,7 +45,7 @@ The **inner layer** follows the memetic-wikitext standard — TOML `#iam` block,
 
 `SKILL.md * OODA-HA * ha.ka.ba` names the composition: the SKILL.md container governs the outer runtime identity; the OODA-HA * ha.ka.ba governs the inner epistemic structure and execution discipline.
 
-A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/v0.1/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
+A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
 
 <<~&#x0002; ahu #skill-body-open >>
 Skill template opens the verification authoring stream here.
@@ -89,7 +89,7 @@ allowed-tools: Read, Grep, Glob, Bash
 The `#iam` block carries all memetic-wikitext identity signals. In addition to the standard typed-meme fields, a skill meme MUST carry:
 
 ```toml
-covers = ["lar:///ha.ka.ba/api/v0.1/[law-name]"]
+covers = ["lar:///ha.ka.ba/api/[law-name]"]
 invariants = ["[invariant-1]", "[invariant-2]"]
 ```
 
@@ -219,12 +219,12 @@ class InvariantResult:
 
 def check-r1(lines: list[str]) -> InvariantResult:
     """R1: HTML DOCTYPE preamble comment present on line 1."""
-    if lines and lines[0].strip().startswith("<!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/"):
+    if lines and lines[0].strip().startswith("<!-- !DOCTYPE = lar:///ha.ka.ba/api/"):
         return InvariantResult("R1", "pass", observed=lines[0].strip())
     return InvariantResult(
         "R1", "fail",
         observed=lines[0].strip() if lines else "(empty file)",
-        repair="Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext --> as line 1"
+        repair="Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext --> as line 1"
     )
 
 def check-r3-rating-fields(content: str) -> InvariantResult:
@@ -277,7 +277,7 @@ def check-r6(content: str) -> InvariantResult:
     return InvariantResult(
         "R6", "fail",
         observed="no query throats found",
-        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/v0.1/NAME#iam >> query throat"
+        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#iam >> query throat"
     )
 
 CHECKS = [check-r1, check-r3-rating-fields, check-r3-register, check-r6]
@@ -316,7 +316,7 @@ if _-name-_ == "_-main-_":
 **Invocation from skill body (agent-native):**
 
 ```bash
-python3 lares/ha-ka-ba/api/v0.1/pono/scripts/skill-check.py lares/ha-ka-ba/api/v0.1/pono/meme.md
+python3 lares/ha-ka-ba/api/pono/scripts/skill-check.py lares/ha-ka-ba/api/pono/meme.md
 ```
 
 **Library choices:**
@@ -340,13 +340,13 @@ interface InvariantResult {
 
 function checkR1(content: string): InvariantResult {
   const firstLine = content.split("\n")[0].trim();
-  if (firstLine.startsWith("<!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/")) {
+  if (firstLine.startsWith("<!-- !DOCTYPE = lar:///ha.ka.ba/api/")) {
     return { id: "R1", status: "pass", observed: firstLine };
   }
   return {
     id: "R1", status: "fail",
     observed: firstLine,
-    repair: "Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext --> as line 1"
+    repair: "Add <!-- !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext --> as line 1"
   };
 }
 
@@ -416,7 +416,7 @@ Pre-MCP-ba governs implementation motion: start with two or three mechanical inv
 
 <<~/ahu >>
 
-<<~ loulou lar:///ha.ka.ba/api/v0.1/pono/skill-template-pre-mcp >>
+<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-pre-mcp >>
 <<~/ahu >>
 
 <<~ ahu #post-mcp >>
@@ -448,12 +448,12 @@ Phase 2 tools require the MCP server to call back into a language model for inte
 ### Phase 3 — Walk-Graph MCP Resources
 
 ```
-Resource: lar:///ha.ka.ba/api/v0.1/{name}          → resolves to meme file content
-Resource: lar:///ha.ka.ba/api/v0.1/{name}#{locus}  → resolves to specific #locus block content
-Resource: lar:///ha.ka.ba/api/v0.1/pono/walk-graph → resolves the full ala/aka link graph
+Resource: lar:///ha.ka.ba/api/{name}          → resolves to meme file content
+Resource: lar:///ha.ka.ba/api/{name}#{locus}  → resolves to specific #locus block content
+Resource: lar:///ha.ka.ba/api/pono/walk-graph → resolves the full ala/aka link graph
 ```
 
-MCP Resources (not Tools) expose the `lar:` URI space as addressable content. An agent that calls `list-resources()` sees the full meme registry. An agent that reads `lar:///ha.ka.ba/api/v0.1/pono/meme#optional-elements` gets that specific `ahu` block without loading the full file. This closes the URI–file routing gap identified in the OODA-HA assessment without requiring agents to infer the `lar:` → `file-path` mapping.
+MCP Resources (not Tools) expose the `lar:` URI space as addressable content. An agent that calls `list-resources()` sees the full meme registry. An agent that reads `lar:///ha.ka.ba/api/pono/meme#optional-elements` gets that specific `ahu` block without loading the full file. This closes the URI–file routing gap identified in the OODA-HA assessment without requiring agents to infer the `lar:` → `file-path` mapping.
 
 ### Phase 4 — Async Conformance Scan
 
@@ -471,7 +471,7 @@ For full-graph conformance sweeps (all memes against all registered invariants),
 | Agent reads file, applies skill body | MCP Tool: `check-r_elements` | When invariant set exceeds 5 mechanical checks |
 | CLI Python subprocess | MCP Tool with same logic | When CLI needs to run in environments without Python |
 | Agent-native semantic judgment | MCP Tool with sampling | When judgment must reproduce across agents |
-| Manual `lar:` → file path derivation | MCP Resource: `lar:///ha.ka.ba/api/v0.1/...` | When URI routing gap causes agent friction |
+| Manual `lar:` → file path derivation | MCP Resource: `lar:///ha.ka.ba/api/...` | When URI routing gap causes agent friction |
 | Full-graph scan via multiple agent calls | MCP async scan tool | When graph exceeds ~10 memes |
 
 <<~ ahu #post-mcp-ha >>
@@ -498,7 +498,7 @@ Post-MCP-ba governs the authoring motion across migration: keep the skill body c
 
 <<~/ahu >>
 
-<<~ loulou lar:///ha.ka.ba/api/v0.1/pono/skill-template-post-mcp >>
+<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-post-mcp >>
 <<~/ahu >>
 
 <<~&#x0003; ahu #body-close >>
@@ -509,8 +509,8 @@ Skill template closes the verification authoring stream here.
 
 ## Edges
 
-- `lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext`
-- `lar:///ha.ka.ba/api/v0.1/pono`
+- `lar:///ha.ka.ba/api/pono/memetic-wikitext`
+- `lar:///ha.ka.ba/api/pono`
 
 <<~/ahu >>
 

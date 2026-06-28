@@ -20,7 +20,7 @@
  * that sleep through the change; the engine-epoch class keeps the alert as
  * its permanent mechanism (see engine-watch — code never live-swaps).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/recipe-watch
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/recipe-watch
  */
 
 import {

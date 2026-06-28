@@ -27,8 +27,8 @@ import {
 } from "../src/deserializer.js";
 
 const REPO_ROOT = new URL("../../..", import.meta.url).pathname;
-const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
-const BOOT_URI  = "lar:///ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot";
+const BOOT_MEME = join(REPO_ROOT, "bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
+const BOOT_URI  = "lar:///ha.ka.ba/@lares/api/lares/noosphere-boot";
 
 const IAM_FENCE_RE = /```toml iam\n[\s\S]*?```\n/g;
 
@@ -81,10 +81,10 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
 // Fence-mask law (2026-06-11): quoted sigils stay content, never structure.
 // ---------------------------------------------------------------------------
 
-const TEACHING_URI = "lar:///ha.ka.ba/@lares/v0.1/memory/fence-teaching";
+const TEACHING_URI = "lar:///ha.ka.ba/@lares/memory/fence-teaching";
 const TEACHING = `<<~ ${"&#x0001;"} ? -> ${TEACHING_URI} >>
 \`\`\`toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/memory/fence-teaching"
+uri-path = "ha.ka.ba/@lares/memory/fence-teaching"
 type     = "text/x-memetic-wikitext"
 \`\`\`
 
@@ -145,10 +145,10 @@ describe("fence-mask — quoted sigils never frame, split, or expand", () => {
 });
 
 describe("Kapu SOH variant survives the round trip", () => {
-  const KAPU_URI = "lar:///ha.ka.ba/@lares/v0.1/memory/kapu-carrier";
+  const KAPU_URI = "lar:///ha.ka.ba/@lares/memory/kapu-carrier";
   const KAPU = `<<~ ⊙${"&#x0011;"} ? -> ${KAPU_URI} >>
 \`\`\`toml iam
-uri-path = "ha.ka.ba/@lares/v0.1/memory/kapu-carrier"
+uri-path = "ha.ka.ba/@lares/memory/kapu-carrier"
 type     = "text/x-memetic-wikitext"
 \`\`\`
 

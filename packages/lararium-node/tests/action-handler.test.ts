@@ -9,7 +9,7 @@
  *   - change-id preserves across ADD / COPY / MOVE transfers
  *   - LOAD throws not-implemented (Sprint 5 scope honest about external fetch)
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";
@@ -303,7 +303,7 @@ describe("LOAD handler", () => {
     registerActionReactors(table, { composite });
     const handler = table.get("LOAD")!;
     const args = {
-      "source-uri": "bags/@lares/v0.1/api/lares/example.md",
+      "source-uri": "bags/@lares/api/lares/example.md",
       "to-bag": BAG_HIGH,
       "change-id": "c-load-1",
       carriers: [{ title: "lar:///ha.ka.ba/@lares/example", text: "Aloha — carrier body.\n" }],

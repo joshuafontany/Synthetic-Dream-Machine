@@ -1,0 +1,155 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/kahea >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/kahea.md"
+mana      = 17
+manao     = 17
+manaoio   = 16
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "transclusion-family edge sugar — live transclusion; subscription-fresh embed; dual form: URI edge and name-call invocation"
+tags      = ["api/pono/pranala", "lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-kahea"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/kahea"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Kahea
+
+*kāhea* — Hawaiian: to call out, to summon, to invoke; a call, a cry.
+
+A transclusion-family edge sugar with dual form. The URI form creates a live transclusion edge —
+a live embed of the target's content at the source, kept fresh by subscription (push-forward).
+The name-call form invokes a named definition at render time only (no edge created).
+Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #ooda-ha >>
+
+✶ sense the sigil form — URI (contains `/`, `lar:`, or `#`) or name-call (bare word with optional args)
+⏿ orient: URI form → transclusion edge, push-forward; name-call → render-only invocation, no edge
+◇ URI form: bind source-to-target, propagation:push-forward; validate no DAG cycles
+▶ URI form: emit EdgeSugarNode sigil:kahea, family:transclusion; name form: emit SigilNode sigilName:kahea
+↺ URI form: value flows push-forward into source render; name form: definition expands in place; confirm edge registered (URI form) or definition resolved (name form); propagation chain intact
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law (Kānāwai)
+
+**URI form:**
+A kahea URI form MUST bind a source socket and a target URI.
+A kahea URI form MUST carry `family:transclusion`.
+A kahea URI form MUST carry `propagation:push-forward` (the default; MAY be overridden to `pull`).
+A kahea URI form MUST stay acyclic — directly and transitively.
+A kahea URI form MAY carry a role naming the embed posture; the transclusion role vocabulary accepts free-form values until a pono name settles.
+
+**Name-call form:**
+A kahea name-call MUST reference a declared definition name.
+A kahea name-call MUST stay render-only, creating no pranala edge.
+A kahea name-call MAY carry parenthesized arguments: `<<~ kahea name(arg1, arg2) >>`.
+
+The two forms are distinguished at parse time by URI shape:
+- Contains `lar:`, `/`, or `#` → URI form (edge)
+- Bare word with optional `(args)` → name-call form (render-only)
+
+<<~/ahu >>
+
+<<~ ahu #syntax >>
+
+## Syntax
+
+URI form (creates transclusion edge):
+```text
+<<~ kahea lar:///ha.ka.ba/@lares/api/pono/meme >>
+<<~ kahea lar:///ha.ka.ba/@lares/api/pono/meme#law >>
+<<~ kahea relative/path >>
+```
+
+Name-call form (render-only, no edge):
+```text
+<<~ kahea definitionName >>
+<<~ kahea definitionName(arg1, arg2) >>
+```
+
+Regex — URI form (canonical):
+```
+/<<~\s*kahea\s+(lar:[^\s>]+|[^\s>(]+\/[^\s>]*|[^\s>(]+#[^\s>]*)\s*>>/
+```
+
+Regex — name-call form (canonical):
+```
+/<<~\s*kahea\s+([\w][\w.-]*)\s*(?:\(([^)]*)\))?\s*>>/
+```
+
+Full pranala expansion (URI form):
+```text
+<<~ pranala ? -> URI family:transclusion lifecycle:instance traversal:source-to-target propagation:push-forward >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #schema >>
+
+## Schema (machine-readable)
+
+Canonical TOML form. Source of truth for `BUILTIN_KAHEA_RE`, `kaheaDefaultFamily`,
+`kaheaDefaultPropagation` in `packages/lararium-mesh/src/pranala-parser.ts`.
+
+```toml
+sigil          = "kahea"
+kind           = "edge-sugar"
+layer          = "both"
+default-family = "transclusion"
+default-propagation = "push-forward"
+render-mode    = null
+alias          = []
+
+# URI form — creates a transclusion edge
+pattern-uri  = '<<~\s*kahea\s+(lar:[^\s>]+|[^\s>(]+\/[^\s>]*|[^\s>(]+#[^\s>]*)\s*>>'
+
+# Name-call form — render-only definition invocation; no edge created
+pattern-name = '<<~\s*kahea\s+([\w][\w.-]*)\s*(?:\(([^)]*)\))?\s*>>'
+
+[captures-uri]
+to   = 1
+
+[captures-name]
+name = 1
+args = 2
+
+[family-contract]
+role-recommended   = false
+confidence-bounded = false
+
+canonical-roles = []   # held — transclusion role vocab deferred with the pono Hawaiian family name
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/loulou >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/papalohe >>
+
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-transclude >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-import >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -7,7 +7,7 @@
  * instead of settling the wait. The timeout error names the last breath heard,
  * so a dead mount says where breathing stopped.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/vessel-host
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/vessel-host
  */
 
 import { describe, test, expect } from "vitest";

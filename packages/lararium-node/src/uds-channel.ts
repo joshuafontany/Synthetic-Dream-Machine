@@ -17,7 +17,7 @@
  * uid opens it; the requestedBy did rides the summons for cap-derivation. A signed
  * Ed25519 proof over the socket is the federation/attenuation hardening (follow-on);
  * the WS path keeps the full V3 gate for genuine remote peers.
- * See lar:///ha.ka.ba/@lararium/v0.1/api/lares-lararium-binding.
+ * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
  */
 
 import { createServer, type Server } from "node:net";

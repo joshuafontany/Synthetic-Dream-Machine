@@ -17,9 +17,9 @@ const ROOT = "/srv/lar/bags/@lares";
 
 describe("disk ward — own-subdir confinement (default)", () => {
   test("a path under the mirror root passes", () => {
-    const r = confineMirrorWrite(ROOT, "ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
+    const r = confineMirrorWrite(ROOT, "ha.ka.ba/@lares/api/lares/noosphere-boot.md");
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/@lares/v0.1/api/lares/noosphere-boot.md");
+    if (r.ok) expect(r.path).toBe("/srv/lar/bags/@lares/ha.ka.ba/@lares/api/lares/noosphere-boot.md");
   });
 
   test("dot-dot traversal out of the root refuses", () => {
@@ -28,7 +28,7 @@ describe("disk ward — own-subdir confinement (default)", () => {
   });
 
   test("deep traversal toward another bag refuses", () => {
-    const r = confineMirrorWrite(ROOT, "../../@lararium/v0.1/poison.md");
+    const r = confineMirrorWrite(ROOT, "../../@lararium/poison.md");
     expect(r.ok).toBe(false);
   });
 
@@ -59,7 +59,7 @@ describe("disk ward — the widened grant (allowBagsRootFiles)", () => {
   });
 
   test("another bag's subdir refuses EVEN WITH the grant", () => {
-    expect(confineMirrorWrite(ROOT, "../../@lararium/v0.1/poison.md", true).ok).toBe(false);
+    expect(confineMirrorWrite(ROOT, "../../@lararium/poison.md", true).ok).toBe(false);
     expect(confineMirrorWrite(ROOT, "../../@sdm/anything.md", true).ok).toBe(false);
   });
 
@@ -88,7 +88,7 @@ describe("disk ward — refusal signal (the alert chain's first link)", () => {
       onRefusal: (info) => refusals.push(info),
     });
     await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-      .flush("@lares", "lar:///ha.ka.ba/@lares/v0.1/x");
+      .flush("@lares", "lar:///ha.ka.ba/@lares/x");
     expect(refusals).toHaveLength(1);
     expect(refusals[0]?.bagId).toBe("@lares");
     expect(refusals[0]?.reason).toMatch(/escapes mirror root/);
@@ -104,7 +104,7 @@ describe("disk ward — cross-mirror stale-unlink guards on PATH, not bag", () =
       // so both resolve this URI to the identical file. Pre-fix, the second
       // mirror's stale-unlink deleted the file the first mirror just rendered
       // (the guard checked bagId, not path); post-fix the path guard skips it.
-      const rel = "ha.ka.ba/@x/v0.1/note.md";
+      const rel = "ha.ka.ba/@x/note.md";
       const projector = new LarDiskProjector({
         mirrors: [
           { bagId: "@a", mirrorRoot: root, toRelPath: () => rel },
@@ -114,7 +114,7 @@ describe("disk ward — cross-mirror stale-unlink guards on PATH, not bag", () =
         debounceMs: 1,
       });
       await (projector as unknown as { flush: (b: string, u: string) => Promise<void> })
-        .flush("@a", "lar:///ha.ka.ba/@x/v0.1/note");
+        .flush("@a", "lar:///ha.ka.ba/@x/note");
       expect(existsSync(join(root, rel))).toBe(true);
     } finally {
       rmSync(root, { recursive: true, force: true });

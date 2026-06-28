@@ -20,7 +20,7 @@
  * that name which ACTION caused it.
  *
  * Sprint:  Residency Model Epic — S4.1 / S4.2 / S4.4 / S4.5
- * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  * Source:  packages/lararium-mesh/src/effect-record.ts
  */
 

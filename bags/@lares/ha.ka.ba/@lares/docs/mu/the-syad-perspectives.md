@@ -1,0 +1,124 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/mu/the-syad-perspectives >>
+```toml iam
+cacheable = false
+file-path = "bags/@lares/ha.ka.ba/@lares/docs/mu/the-syad-perspectives.md"
+mana      = 15
+manao     = 17
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
+tags      = ["api/pono/meme", "api/pono/loci"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/docs/mu/the-syad-perspectives"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #meme-header >>
+
+# Syad Perspectives — Condensed Research
+
+This docs surface does not carry invariant law.
+It carries the shortest research shelf that still orients the reader.
+The deeper archive bundle stays adjacent.
+
+<<~/ahu >>
+
+<<~ ahu #reading-question >>
+
+## Reading Question
+
+Read the register through the active stance.
+Do not read it as universal truth-weight.
+
+Same number.
+Different measure.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #saptabhangi >>
+
+## Saptabhangi
+
+Sri Syadasti's catma reproduces the Jaina Saptabhangi:
+
+- perhaps true
+- perhaps false
+- perhaps inexpressible
+- perhaps true and false
+- perhaps true and inexpressible
+- perhaps false and inexpressible
+- perhaps true, false, and inexpressible
+
+`avaktavya` does not name ignorance.
+It names a frame where the truth axis does not fit cleanly.
+
+<<~/ahu >>
+
+<<~ ahu #flag-surface >>
+
+## Flag Surface
+
+The live fold keeps a fixed five-position array and a fixed code set:
+
+- `^` elevated / forward
+- `.` baseline / present
+- `-` suppressed / held back
+- `?` emerging / indeterminate
+
+No live form drops positions.
+Quiet stances stay encoded as quiet, not missing.
+
+<<~/ahu >>
+
+<<~ ahu #legacy-boundary >>
+
+## Legacy Boundary
+
+Older partial-emission examples read as legacy.
+Older "stance-count is fuzz" readings read as legacy.
+Older compact stance codepaths read as legacy.
+
+Canon keeps the full five-position array on the surface.
+Spread rides flags and combination, not omission.
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+## Provenance
+
+Use this surface for condensed recall.
+
+The tight invariant lives at:
+
+- `lar:///ha.ka.ba/@lares/api/mu/the-syad-perspectives`
+
+The archive-derived research bundle lives at:
+
+- `lar:///ha.ka.ba/@lares/docs/mu/the-syad-perspectives/README`
+- `packages/lares-core/memes/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.md`
+- `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
+- `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/@lares/docs/mu/the-syad-perspectives/README >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/mu/l-prime >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

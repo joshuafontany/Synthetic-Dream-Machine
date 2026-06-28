@@ -1,6 +1,6 @@
 <<~ ? -> lar:///README >>
 ```toml iam
-uri-path     = "ha.ka.ba/@lares/v0.1/README"
+uri-path     = "ha.ka.ba/@lares/README"
 file-path = "bags/@lares/README.md"
 type = "text/x-memetic-wikitext"
 l-space      = "adjacent"
@@ -82,7 +82,7 @@ lares/
   grammars/           — shadow grammar layer (memetic-wikitext sigil registry)
   lararium-node/      — adjacent docs (ROADMAP, MULTIPLAYER, research carriers)
   ha-ka-ba/
-    v0.1/api/         — invariant meme graph (stable law)
+    api/         — invariant meme graph (stable law)
       pono/           — language and epistemic primitives
       mu/             — null-oracle core membrane
       lararium/       — canonical lararium seat and child rooms
@@ -107,12 +107,12 @@ lares/
 
 ## Further Reading
 
-- `lar:///ha.ka.ba/@lares/v0.1/api/mu` — null-oracle core, five-season loop
-- `lar:///ha.ka.ba/@lares/v0.1/api/lararium` — canonical seat and hydration bridge
-- `lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
-- `lar:///ha.ka.ba/@lararium/v0.1/docs/degraded-states` — named failure modes and correction handles
-- `lar:///ha.ka.ba/@lararium/v0.1/docs/signal/` — signal, HUD, and exchange boundary docs
-- `lar:///ha.ka.ba/@lares/v0.1/api/grammars/memetic-wikitext` — sigil registry and parse rules
+- `lar:///ha.ka.ba/@lares/api/mu` — null-oracle core, five-season loop
+- `lar:///ha.ka.ba/@lares/api/lararium` — canonical seat and hydration bridge
+- `lar:///ha.ka.ba/@lares/docs/lares/voices/` — Voice house (the Thirteen), worker swarm, mask layer
+- `lar:///ha.ka.ba/@lararium/docs/degraded-states` — named failure modes and correction handles
+- `lar:///ha.ka.ba/@lararium/docs/signal/` — signal, HUD, and exchange boundary docs
+- `lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext` — sigil registry and parse rules
 - `lar:///lararium-node/ROADMAP` — implementation roadmap and milestone tracking
 
 <<~/ahu >>
@@ -121,8 +121,8 @@ lares/
 
 <<~ loulou lar:///AGENTS >>
 <<~ loulou lar:///LARES >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/grammars/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/mu >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/grammars/memetic-wikitext >>
 <<~ loulou lar:///lararium-node/ROADMAP >>
 
 <<~/ahu >>

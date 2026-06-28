@@ -5,7 +5,7 @@
  * `parseBagStack` tolerates undefined, but call sites carry a repeated
  * inline coercion. This helper owns that coercion once.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/bag-stack-from-rec
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/bag-stack-from-rec
  */
 
 import { parseBagStack } from "./recipe.js";

@@ -21,7 +21,7 @@
  *   lar:///ha.ka.ba/tags/engine-update, with a "Reload to pick up TW5 changes"
  *   message. The browser vessel writes it; TW5 renders it natively.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-genesis
+ * Meme: lar:///ha.ka.ba/@lararium/browser/browser-genesis
  */
 
 import type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";

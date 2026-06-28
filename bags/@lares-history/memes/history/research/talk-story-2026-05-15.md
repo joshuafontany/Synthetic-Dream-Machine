@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~⊙&#x0001; ? -> lar:///ha.ka.ba/@lares-history/history/research/talk-story-2026-05-15 >>
 ```toml iam
@@ -234,13 +234,13 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 ## Edges
 
-<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/nalu family:control role:authors >>
-<<~ pranala #to-hoolele ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/hoolele family:control role:authors >>
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/verse-task-tree family:relation >>
-<<~ pranala #to-verse-type-lattice ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/verse-type-lattice family:relation >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/reaction-graph family:relation role:governs >>
-<<~ pranala #to-nihomano ? -> lar:///ha.ka.ba/@lares/api/v0.1/pono/nihomano-sigils family:relation >>
+<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/@lares/api/pono/nalu family:control role:authors >>
+<<~ pranala #to-hoolele ? -> lar:///ha.ka.ba/@lares/api/pono/hoolele family:control role:authors >>
+<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/@lares/api/pono/verse-task-tree family:relation >>
+<<~ pranala #to-verse-type-lattice ? -> lar:///ha.ka.ba/@lares/api/pono/verse-type-lattice family:relation >>
+<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/@lares/api/pono/verse-event-lattice family:relation >>
+<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/@lares/api/pono/reaction-graph family:relation role:governs >>
+<<~ pranala #to-nihomano ? -> lar:///ha.ka.ba/@lares/api/pono/nihomano-sigils family:relation >>
 
 <<~/ahu >>
 

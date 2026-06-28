@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/memes >>
 ```toml iam
@@ -59,12 +59,12 @@ Research consumed into live docs/packages. Source files deleted 2026-05-16.
 | `unified-five-band-v01.md` + `unified-attention-scale.md` + `chronometer-scale-mapping.md` | `memetic-wikitext.tid #law-of-5s` | `bags/@lares/docs/pono/law-of-5s.md` (new) |
 | `sigil-research.md` | → | `bags/@lares/docs/pono/sigil-shape-motion.md` (new) |
 | `maybe-logic.md` | `bags/@lares/docs/mu/model-agnosticism.md` | (#eprime-moves, #catma added) |
-| `mu-boot.md` + `mu-meme.md` | `bags/@lares/api/v0.1/mu.md` | — |
+| `mu-boot.md` + `mu-meme.md` | `bags/@lares/api/mu.md` | — |
 | `LOCI.md` | `bags/@lares/AGENTS.md` (partial) | — |
 | `auth-research.md` | S7.1 Keyhive sprint | — |
 | `w3c-spec-research-v01.md` | `bags/@lares/docs/pono/memetic-wikitext.md` | (#w3c-lineage-verdicts added) |
 | `AGENTS.md`, `memetic-wikitext-v3.md`, `memetic-wikitext.md`, `memetic-wikitext-full.md` | **not recovered** — deleted without read | gap noted in history/README.md |
-| [mu-boot-research](mu-boot-research.md) | `lares_research/memetic-wikitext/mu-boot.md` + `mu-meme.md` | `bags/@lares/api/v0.1/mu.md` | none |
+| [mu-boot-research](mu-boot-research.md) | `lares_research/memetic-wikitext/mu-boot.md` + `mu-meme.md` | `bags/@lares/api/mu.md` | none |
 | [loci-wild-magic](loci-wild-magic.md) | `lares_research/memetic-wikitext/LOCI.md` | `bags/@lares/AGENTS.md` (partial) | transclusion wild-magic grammar |
 | [auth-research](auth-research.md) | `lares_research/memetic-wikitext/auth-research.md` | S7.1 Keyhive sprint | none |
 | [w3c-spec-research](w3c-spec-research.md) | `lares_research/memetic-wikitext/w3c-spec-research-v01.md` | `memetic-wikitext.tid` (SGML header claim) | formal SGML alignment open |

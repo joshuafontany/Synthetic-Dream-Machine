@@ -1,7 +1,7 @@
 /**
  * lar-uris — lar:/// URI constants and builders for the Lararium namespace.
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-uris
- * Grammar doc: lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-uris (bags/@lararium/v0.1/mesh/lar-uris.md)
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/lar-uris
+ * Grammar doc: lar:///ha.ka.ba/@lararium/mesh/lar-uris (bags/@lararium/mesh/lar-uris.md)
  */
 
 import type { LarDoc } from "./base-doc.js";
@@ -29,7 +29,7 @@ export function isVolatileVmUri(uri: string): boolean {
 // ── Petname l-space regions (the NAMING / addressing layer) ───────────────
 // Petnames and TW5 titles ride the lar: grammar as their own abstraction layer,
 // SEPARATE from both federation and persistence
-// (lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity#capability-and-petnames).
+// (lar:///ha.ka.ba/@lares/api/pono/lararium-identity#capability-and-petnames).
 // This layer classifies an address by NAME-STABILITY only:
 //   STABLE   — root ha.ka.ba — a canonical, permanent, shared address.
 //   UNSTABLE — any other three-term attitude root — a session/per-relationship/
@@ -113,7 +113,7 @@ export const SESSIONS_DOC_URI   = stableLarUri("@sessions");
  *   corpusLarUri("elyncia") → "lar:///ha.ka.ba/@elyncia"
  *
  * Every corpus is a first-class bag at child[1] under the bag-tag rule
- * (see lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri#bag-tag-rule).
+ * (see lar:///ha.ka.ba/@lares/api/pono/lar-uri#bag-tag-rule).
  */
 export function corpusLarUri(slug: string): string {
   return stableLarUri(`@${slug}`);
@@ -261,7 +261,7 @@ export const DEVICE_DELEGATION_SELF_TIDDLER = `${PERSONA_BAG_ID}/delegation/self
 // One fingerprint produces THREE bindings (@personal, @draft, @working) that
 // share a lifecycle. The binding tiddler title is `${PREFIX}/${fingerprintHex}`;
 // its `text` carries the bound URL.
-// Canon: lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#core-claim
+// Canon: lar:///ha.ka.ba/@lararium/api/personal-slot#core-claim
 export const PERSONAL_BINDINGS_PREFIX = `${PERSONA_BAG_ID}/personal-bindings`;
 export const DRAFT_BINDINGS_PREFIX    = `${PERSONA_BAG_ID}/draft-bindings`;
 // @working binds like @personal (PersonaGroup×fingerprint, cross-device) — the

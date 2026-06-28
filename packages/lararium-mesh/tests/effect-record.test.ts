@@ -14,7 +14,7 @@
  * Kāpae tests for CompositeStore (S4.3) live in
  * residency-resolution.test.ts.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme: lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import { describe, test, expect } from "vitest";

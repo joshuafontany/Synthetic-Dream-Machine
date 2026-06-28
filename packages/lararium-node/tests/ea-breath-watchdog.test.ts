@@ -9,7 +9,7 @@
  * Runs openDaemonVmCore against a scripted fake worker (no real island), with
  * a small injected silence budget so the vectors stay fast.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/daemon-vm-core
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/daemon-vm-core
  */
 
 import { describe, test, expect, afterEach } from "vitest";

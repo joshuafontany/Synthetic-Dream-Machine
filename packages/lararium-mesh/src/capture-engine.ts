@@ -23,7 +23,7 @@
  * Add a vessel = implement the seams, never rewrite the cell. Pure: zero substrate imports (no
  * node:fs, no child_process) — `now`/timers are universal globals, injectable for tests.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import { CaptureNalu, PONO_FLUSH_GATE } from "./capture-nalu.js";

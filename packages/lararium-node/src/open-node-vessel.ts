@@ -399,7 +399,7 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       // projects lar_* back ONTO them THROUGH the seat (capability-gated, witnessed),
       // never a raw CLI subprocess. MVP flushes on invocation; the nalu-batched
       // hold/flush (worker enqueueNalu → on-nalu command main) is the next refinement
-      // (lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
+      // (lar:///ha.ka.ba/@lararium/api/lar-telemetry).
       registry.register("lar-telemetry", async (args) => {
         const wing = typeof args["wing"] === "string" ? (args["wing"] as string) : "";
         if (!wing) throw new Error("args.wing is required");

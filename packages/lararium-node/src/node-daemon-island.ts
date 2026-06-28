@@ -11,7 +11,7 @@
  * self-regulating two-loop). Absent → the cap stays inert (a valid resting state; sink not wired).
  * role = capability ≠ platform — this file picks only the node sink.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/node-daemon-island
+ * Meme: lar:///ha.ka.ba/@lararium/node/node-daemon-island
  */
 
 import { workerData } from "node:worker_threads";

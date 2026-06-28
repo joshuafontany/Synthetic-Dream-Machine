@@ -17,7 +17,7 @@
  *   - ITC (Almeida 2008): tree for identity management, flat event counter
  *   - ERA (arXiv:2601.22963, Jan 2026): epoch events as irregular external arbitration
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock
  * Law of Fives: L0–L4 map onto OODA_HA_5 stances (PENTA_2_CLOCK_ALIGNMENT).
  */
 

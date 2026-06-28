@@ -9,7 +9,7 @@
  * needs fs) compose IN via the `onBoot` capability hook — node supplies it,
  * browser supplies none. No fs, no node coupling here.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/wiki-behavior
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/wiki-behavior
  */
 
 import {

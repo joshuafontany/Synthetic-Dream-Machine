@@ -13,7 +13,7 @@
  * Every TW5Engine lives inside a sovereign Worker. Behaviors therefore always
  * receive this context from within a Worker — never from a main-thread caller.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-context
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/island-context
  */
 
 import type { DocHandle }                        from "@lararium/mesh";

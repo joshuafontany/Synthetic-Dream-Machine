@@ -3,7 +3,7 @@
  *
  * A one-shot `lares` CLI run (or an AI-agent turn) acts as a sovereign peer
  * WITHOUT booting keyhive (operator-peer #actor-parity OP-AP5, meme
- * lar:///ha.ka.ba/@lararium/v0.1/mesh/operator-peer). It holds only:
+ * lar:///ha.ka.ba/@lararium/mesh/operator-peer). It holds only:
  *   - the operator Ed25519 seed → a bare signer (no keyhive), and
  *   - the cached ContactCard JSON minted once at `lares init`.
  * With these it presents a self-certifying identity and signs the V3
@@ -13,7 +13,7 @@
  * The ContactCard carries no expiry/nonce — re-presented forever; proof freshness
  * rides the per-challenge nonce + timestamp, never the cached card.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/leaf-identity
+ * Meme: lar:///ha.ka.ba/@lararium/node/leaf-identity
  */
 
 import { ed25519SignerFromSeed } from "@lararium/mesh";

@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///packages/AGENTS >>
 
@@ -63,7 +63,7 @@ Seven packages carry the stack. Each owns one boundary; cross-cutting work trave
 
 `@lararium/keyhive` carries the capability layer. Pre-alpha integration of `@keyhive/keyhive` WASM bindings. Put `capability-provider`, `keyhive-provider`, `ceremony-core`, `event-store`, `admin-event-store` here. One Keyhive Doc = one bag (1:1). Binary read/admin gate, with `ABILITY_LADDER` caveats riding on top. Cap-event home and γ-with-operator-α-mirror sync stay in design flux — touch with care.
 
-`@lararium/mempalace` carries the session-memory integration — a local-only read leg over the pinned mempalace sidecar plus the declared `lar_*` writeback (the tensegrity that binds verbatim drawers to domain bearings). Put the bearing index (`bearing-index`, `harvest-turn`, `harvest-all`), the read-only `mempalace-client`, the substrate boundary I/O (`scripts/drawer_io.py`), the Copilot transcript normalizer (`scripts/copilot_normalize.py`), and the RFC-002 schema declaration (`mempalace_source_lares/`) here. mempalace itself rides **behind a causal-island boundary** as a vendored substrate — the memory-library, accessed-not-loaded — never a citizen of the stack. See `packages/MEMPALACE-INTEGRATION.md` + `lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration`.
+`@lararium/mempalace` carries the session-memory integration — a local-only read leg over the pinned mempalace sidecar plus the declared `lar_*` writeback (the tensegrity that binds verbatim drawers to domain bearings). Put the bearing index (`bearing-index`, `harvest-turn`, `harvest-all`), the read-only `mempalace-client`, the substrate boundary I/O (`scripts/drawer_io.py`), the Copilot transcript normalizer (`scripts/copilot_normalize.py`), and the RFC-002 schema declaration (`mempalace_source_lares/`) here. mempalace itself rides **behind a causal-island boundary** as a vendored substrate — the memory-library, accessed-not-loaded — never a citizen of the stack. See `packages/MEMPALACE-INTEGRATION.md` + `lar:///ha.ka.ba/@lararium/api/mempalace-integration`.
 
 `@lares/cli` carries the operator-facing surface. Put the `lares` binary (`bin/lares`), arg parsing (`parse-args`), process spawn (`spawn`), `admin-connector`, and the verb family in `commands/` (`bag`, `ceremony`, `draft`, `init`, `residency`, `scripted`, `status`, `wiki`) here. Sprint 5 of the Residency Model Epic adds `commands/act.ts` for the ACTION verb surface (`lares act ADD/COPY/MOVE/CLEAR/DROP/LOAD`). The memory integration adds `commands/harvest.ts` (the gradient-parser sweep + declared `lar_*` writeback), the harness-wiring on `wake` (`--init` palace setup + `--claude/--codex/--copilot/--vscode` via `{claude,codex,copilot,vscode}-wire.ts`, `setup-mempalace.ts`, `mcp-resolve.ts`), and the live `.claude-plugin/hooks/lares-mempalace-ingest-hook.sh`. The CLI carries no protocol logic — every verb dispatches to `@lararium/node` handlers through the admin WS gate.
 
@@ -127,7 +127,7 @@ Runtime       openNodeVessel  /  openBrowserVessel          finds docs, wires la
 
 ### Admin VM (landed)
 
-Admin state lives in its own Automerge doc at `lar:///ha.ka.ba/@admin` (bag URI; aligned to the bag-tag rule in [lar-uri.md](../bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/lar-uri.md)). The logical room presents at `lar:///ha.ka.ba/@lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary. The admin VM hosts itself through `open-admin-vm` (node) and `open-browser-admin-vm` (browser); bag-mirror configs ride as `$:/tags/LarariumBagMirror` tiddlers inside admin.
+Admin state lives in its own Automerge doc at `lar:///ha.ka.ba/@admin` (bag URI; aligned to the bag-tag rule in [lar-uri.md](../bags/@lares/ha.ka.ba/@lares/api/pono/lar-uri.md)). The logical room presents at `lar:///ha.ka.ba/@lararium/rooms/admin` (room URI). Two URIs, one doc — the bag-as-doc invariant gives admin its own sync boundary. The admin VM hosts itself through `open-admin-vm` (node) and `open-browser-admin-vm` (browser); bag-mirror configs ride as `$:/tags/LarariumBagMirror` tiddlers inside admin.
 
 Operator-private to one node, federated to the operator's own devices via `cap=admin` device delegations through `@lararium/keyhive`.
 
@@ -157,7 +157,7 @@ Projections register as kinds with `LarProjectionRegistry`. The node-scoped `dis
 
 **Capability layer is the only authority gate.** Do not invent ad-hoc auth checks; route through `@lararium/keyhive` or the `admin-auth-gate` in `@lararium/node`.
 
-**Bag URI law.** Bag tags occupy `child[1]` only. Do not promote a `child[N]` sigil to bag identity. See [lar-uri.md](../bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/lar-uri.md).
+**Bag URI law.** Bag tags occupy `child[1]` only. Do not promote a `child[N]` sigil to bag identity. See [lar-uri.md](../bags/@lares/ha.ka.ba/@lares/api/pono/lar-uri.md).
 
 <<~/ahu >>
 
@@ -231,7 +231,7 @@ Watch these current weak spots:
 
 Prefer one seam per loop. Patch the package that owns the behavior. Add or update a test near the owner package. Keep canon, room, user, and session layers distinct in names and code paths.
 
-Before changing a public export, check browser and node consumers (and `@lares/cli`, which depends on both `@lararium/mesh` and `@lararium/node`). Before changing parser or carrier grammar, check `bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/`, `bags/@lares/ha.ka.ba/@lares/v0.1/docs/pono/`, and core parser tests. Before changing TW5 sync, check echo-loop guards and draft guards.
+Before changing a public export, check browser and node consumers (and `@lares/cli`, which depends on both `@lararium/mesh` and `@lararium/node`). Before changing parser or carrier grammar, check `bags/@lares/ha.ka.ba/@lares/api/pono/`, `bags/@lares/ha.ka.ba/@lares/docs/pono/`, and core parser tests. Before changing TW5 sync, check echo-loop guards and draft guards.
 
 Documentation memes go to `bags/` as `.md` files. `.tid` files live in TW5 packages and carry runtime widget / procedure code only.
 
@@ -243,18 +243,18 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant family:control role:implements >>
-<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:control role:implements >>
-<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/parser family:control role:implements >>
-<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/render-pipeline family:control role:implements >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/@lares/api/pono/meme family:control role:implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/@lares/api/pono/invariant family:control role:implements >>
+<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/@lares/api/pono/lar-uri family:control role:implements >>
+<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/@lares/api/pono/parser family:control role:implements >>
+<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/@lares/api/pono/render-pipeline family:control role:implements >>
 <<~ pranala #to-root-agents ? -> lar:///AGENTS family:control role:adjacent >>
-<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/@lares/v0.1/AGENTS family:control role:adjacent >>
+<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/@lares/AGENTS family:control role:adjacent >>
 <<~ pranala #to-lares ? -> lar:///LARES family:control role:adjacent >>
-<<~ pranala #to-voices ? -> lar:///ha.ka.ba/@lares/v0.1/api/lares/voices family:reference role:governs >>
-<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/@lares/v0.1/docs/lararium/meme-provider family:reference role:describes >>
-<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/@lares/v0.1/docs/mesh/dreamnet-architecture family:reference role:describes >>
-<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/@lararium/v0.1/api/mempalace-integration family:reference role:describes >>
+<<~ pranala #to-voices ? -> lar:///ha.ka.ba/@lares/api/lares/voices family:reference role:governs >>
+<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/@lares/docs/lararium/meme-provider family:reference role:describes >>
+<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/@lares/docs/mesh/dreamnet-architecture family:reference role:describes >>
+<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/@lararium/api/mempalace-integration family:reference role:describes >>
 
 <<~/ahu >>
 

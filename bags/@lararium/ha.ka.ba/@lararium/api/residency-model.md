@@ -1,0 +1,306 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/api/residency-model >>
+```toml iam
+approved-on   = "2026-05-30"
+cacheable     = true
+file-path     = "bags/@lararium/api/residency-model.md"
+hydrate       = true
+mana          = 18
+manao         = 17
+manaoio       = 16
+namespace     = "&#x0950; &#x0901;"
+register      = "Synthesis"
+retain        = true
+revised-on    = "2026-06-15"
+revision-note = "non-residency verb tier seated (#non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
+role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag); a non-residency verb tier (INGEST, RECONCILE) rides the same rail"
+status        = "approved"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme"]
+l-space       = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/api/residency-model"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #core-claim >>
+
+# Residency Model — Coordinate Space + Query Plan
+
+A recipe/bag + CRDT system MUST hold as a **coordinate space**, not a **timeline**. A bag forms one coordinate axis. The recipe forms a query plan over `(tiddler-title × bag)`. CRDT merge stays associative-commutative *within* one coordinate; cross-coordinate composition uses set-union with priority resolution, never a rebase.
+
+A single tiddler-title MAY have residency in N bags simultaneously, each bag carrying its own CRDT history of that tiddler. The recipe's slot order resolves which bag's version surfaces in the live wiki view.
+
+**Approved 2026-05-30.** Floating Librarians of Mu endorse (high confidence). Pono.
+
+<<~/ahu >>
+
+<<~ ahu #why >>
+
+## Why the architecture moved here
+
+A prior design pivot proposed retiring the single-canonical `promote` ceremony in favor of a git-style **stage / commit / push** triple. Research across eight spirits (four per round, two rounds) returned a deeper finding:
+
+> The git-style triple treats bags as branches — *parallel timelines that need merging*. Bags act as scopes — *coordinates in a product space*. The verb family must come from set algebra and graph theory, not from version control.
+
+Two adjacent traditions hold the right primitives. Neither surfaced through the git framing:
+
+1. **RDF named graphs + SPARQL Update** (W3C 2013) — the quad `(s, p, o, g)` makes "the same triple in multiple graphs" first-class. SPARQL Update settled the action verb vocabulary in 2013 after twenty years of practice.
+2. **FRBR / IFLA LRM + the archival profession** (1998 / late-19th c.) — Work / Expression / Manifestation / Item dissolves the identity question; SAA professional discipline forbids silent unlink.
+
+**Willow protocol** sits closest among CRDT-adjacent substrates — Entry `(namespace, subspace, path, payload_digest)` separates coordinate from payload by design. **No shipping CRDT system has composed multi-bag residency with operator-facing gestures.** SDM fills a real gap.
+
+<<~/ahu >>
+
+<<~ ahu #data-model >>
+
+## Data model — FRBR identity levels
+
+| WEMI level | SDM mapping |
+|---|---|
+| **Work** | The tiddler-title — the intellectual identity that persists across bags |
+| **Expression** | A particular recension (annotated vs raw, edited vs canonical) |
+| **Manifestation** | The CRDT document holding that Expression in one specific bag |
+| **Item** | A concrete replica at one node or device |
+
+The tiddler-title MUST stay queryable as Work-level identity independent of any bag. Two bags holding the same title carry two Manifestations of one Work — independent CRDT histories by design. The recipe walks Manifestations in priority order to compose the live view.
+
+This levels-distinction carries load-bearing weight. Conflating Work with Manifestation reintroduces the shadow-tiddler confusion that TW5 already documents in its own issue tracker (#570, #9139) — the single most well-documented human-factors failure mode of priority overlay.
+
+<<~/ahu >>
+
+<<~ ahu #action-verb-surface >>
+
+## Surface I — ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation)
+
+Operator gestures over residency travel through a six-verb action surface, ALL CAPS by convention, addressable as `lar://` URIs:
+
+| Verb | What it does | SPARQL Update analog |
+|---|---|---|
+| **ADD** | Grant a tiddler residency in a target bag; source residency retained | `ADD <source-graph> TO <dest-graph>` |
+| **COPY** | Overwrite destination's version with source's; source retained | `COPY <source-graph> TO <dest-graph>` |
+| **MOVE** | Atomic `ADD`-to-destination + `CLEAR`-from-source | `MOVE <source-graph> TO <dest-graph>` |
+| **CLEAR** | Empty a bag (preserve bag identity, history retained as tombstone log) | `CLEAR GRAPH <g>` |
+| **DROP** | Retire a bag entirely (with disposition record) | `DROP GRAPH <g>` |
+| **LOAD** | Bring external content into a bag from outside the mesh | `LOAD <iri> INTO GRAPH <g>` |
+
+ALL-CAPS by deliberate convention — the action surface SHOULD read at a glance as a distinct register from prose, sigils, and tiddler-field names.
+
+**URI grammar — RESOLVED (Sprint 2, 2026-05-31):**
+
+The M.2 verb-as-tiddler-field pipeline carries the action surface. ACTION verbs compose ON TOP of `verb-tiddler.ts` rather than living under a separate URI prefix — the action identity travels as the `verb` field value within an existing verb-tiddler. Three URI prefixes already exist:
+
+```
+lar:///lararium.local.vm/verbs/<requestId>   # volatile local invocation (admin VM scratch)
+lar:///ha.ka.ba/@daemon/summons/<requestId>   # Automerge-backed remote vessel summons
+lar:///ha.ka.ba/@daemon/outcomes/<requestId>  # Automerge-backed durable outcome
+```
+
+An ACTION arrives as a `Verb` whose `verb` field belongs to `ACTION_VERBS` (the wire field stays "verb"; the parsed `Verb.action` carries it). Per-verb arguments ride inside the existing JSON `args` field — kebab-case on the wire, camelCase in the TypeScript discriminated union. Example ADD invocation tiddler fields:
+
+```
+verb           = "ADD"
+args           = '{"title":"MyTiddler","from-bag":"lar:///ha.ka.ba/@personal","to-bag":"lar:///ha.ka.ba/@elyncia","change-id":"c-stable-1"}'
+request-id     = <requestId>
+requested-by   = <PersonaGroup-id>
+listenable     = "OnActivated"     # optional Verse event source
+from-uri       = "lar:///.../button-1"  # optional papalohe edge origin
+```
+
+Per-verb args:
+
+| Verb | Args |
+|---|---|
+| `ADD` / `COPY` / `MOVE` | `title`, `from-bag`, `to-bag`, `change-id` |
+| `CLEAR` / `DROP` | `bag` |
+| `LOAD` | `source-uri` (provenance), `to-bag`, `change-id` (mints fresh), `carriers` (the content) |
+
+**LOAD runs carrier-borne (implemented 2026-06-10).** Islands never fetch — web3-only law: the operator gesture (which holds the disk grant, node-side `lares act LOAD`) reads the source and sends content WITH the verb as `carriers: [{title?, text}]`; `source-uri` rides as audit provenance only. Each carrier decomposes at the memetic-wikitext membrane (FFZ: parent + ahu-slot children via the deserializer) and every record lands under the action's fresh change-id, audited by the standard `accession` effect record. A LOAD with no carriers refuses loudly. First live use fed the @lares hearth its own boot meme: 17 records (parent + 16 ahu children).
+
+Source: `packages/lararium-mesh/src/residency-actions.ts`. Tests: `packages/lararium-mesh/tests/residency-actions.test.ts` (50 cases, including the change-id preservation gate that defends Anti-pattern #1).
+
+### Bag-grain surface — APPROVED (operator, 2026-06-10; implementation pending)
+
+The ACTION surface carries **two grains**, both SPARQL Update derived. SPARQL's graph-management verbs operate graph-grain natively; the title-grain forms above specialize them. The approved bag-grain pair:
+
+| Verb | What it does | SPARQL Update analog |
+|---|---|---|
+| **CREATE** | Mint a new bag (new coordinate; empty; identity = fresh AutomergeUrl) | `CREATE GRAPH <g>` |
+| **COPY** (bag-grain) | Grant every title in source residency in the (new or existing) destination bag; `change-id` preserved per title; one `transfer-id` family audits the batch | `COPY <source-graph> TO <dest-graph>` |
+
+This pair carries the wiki-level crossing (`wiki-layer-ontology#crossing-law`): **CREATE** mints the coordinate, bag-grain **COPY** grants the residency, and registration lands as a `holdings` accession in `@catalog` (the union catalog — MARC MFHD analog above). No `fork` / `commit` / `push` verb exists at any grain; the coordinate-space ruling (§5 below) holds unbroken.
+
+**Sovereign-worker routing (MUST):** bag-grain ACTIONs ride the same verb-tiddler rail as title-grain (VERB → SUMMONS → OUTCOME), execute in the admin island, write-then-sync — main never reaches into a bag. Orichalcum gates: `admin` on the destination bag, `edit` on `@catalog`, evaluated at the standard gate points. Any `anu` participant heats first (`hoʻowela`, residency-tiers). Per anti-pattern #6, concurrent bag-grain COPYs into one destination surface in the per-bag queue — recorded, never arbitrated (Talk Story resolves).
+
+**Why bag-grain verbs over composed batches (operator ruling):** pono web3 models land early — a first-class coordinate-mint verb keeps the registry, capability gates, and audit ledger aligned with the model from the start, before workaround batch-conventions calcify.
+
+<<~/ahu >>
+
+<<~ ahu #effect-record-surface >>
+
+## Surface II — Effect records (tiddler annotations, archival language)
+
+Every ACTION writes an **indelible effect record** tiddler in each affected bag, tagged with the matching archival verb:
+
+| Archival verb | Triggers from | What gets recorded |
+|---|---|---|
+| **accession** | `ADD` / `COPY` (dest) / `MOVE` (dest) | tiddler entered this bag at time T, by actor A, source bag B, reason R |
+| **deaccession** | `CLEAR` / `DROP` / `MOVE` (source) | tiddler removed from this bag with disposition (transferred / retired / destroyed) |
+| **transfer** | `MOVE` (cross-reference) | paired accession+deaccession sharing one transfer-id |
+| **withdrawal** | per-Item removal | a single replica withdrawn while Work persists in the union catalog (recipe still resolves elsewhere) |
+| **loan** | time-bounded ADD with TTL | temporary read residency; auto-reverts at expiry |
+| **holdings** | per-bag manifest snapshot | what this bag currently holds (MARC MFHD analog; supports union-catalog aggregation) |
+| **reappraisal** | operator-recorded justification | the recorded reason that authorizes a coming deaccession |
+| **disposition** | final state of a deaccessioned item | where it went, when, why; never silent |
+
+Effect records live within each bag at `lar:///<bag>/ledger/residency/<event-id>` — the bag's indelible residency ledger (the web2 word "log" left the surface 2026-06-07). Records stay append-only and persist in perpetuity, even when a later ACTION deaccessions the underlying tiddler. **The artifact may leave; the record of its prior presence here, and of its leaving, never does.**
+
+This dual-surface design — ACTION verbs for the *gesture*, archival verbs for the *audit* — resonates structurally with web3 causal-islands models. The archival profession solved the identity-across-custody problem before software did; we adopt the discipline along with the vocabulary. The **Floating Librarians of Mu register** applies — Mu's stewards of memory cooperate with archivists, not with version-control engineers.
+
+<<~/ahu >>
+
+<<~ ahu #five-pono-properties >>
+
+## The five pono properties
+
+Any implementation of this model MUST hold all five:
+
+1. **Coordinate-first, not timeline-first.** The recipe acts as a query plan over `(tiddler-title × bag)`, not a merge of branches.
+2. **Work-identity preserved across residencies.** FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
+3. **Operator-visible coordinate surface.** Every read MUST surface origin-bag the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
+4. **Audit-trail discipline.** Every residency change writes an indelible effect record. Silent unlink violates the model.
+5. **Verb vocabulary from set-algebra + cataloging.** The *residency* ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry **non-residency** verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that *folds* state (RECONCILE) MUST stay **conflict-SURFACING, never merge-arbitrating** (#conflict-resolution), or it reads as a banned merge verb.
+
+<<~/ahu >>
+
+<<~ ahu #non-residency-verbs >>
+
+## The non-residency tier — verbs that ride the rail, not the coordinate space
+
+The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/DROP) are SPARQL-Update set-algebra over `(title × bag)`; **INGEST** was the first to break that frame — a disk→records membrane gesture (three-way diff, replace-by-group, NFC), with no SPARQL analog, riding the same VERB → SUMMONS → OUTCOME rail with the same `withEffectRecord` audit + cap-gate. The tier is open: a verb belongs here when it carries an operator gesture through the rail + audit + authority machinery, even if it moves no tiddler between bags.
+
+### RECONCILE — fold a newer engine forward (operator ruling, 2026-06-15)
+
+`lares act RECONCILE` adopts a newer engine genesis into the living **`@oracle`** runtime island (disk-projection #oracle-split) — the deliberate rite that replaces the old silent boot-time fold (engine-watch EW-6).
+
+- **Authority:** cap-verify an **operator(admin)** grant on `@oracle` (engine-watch EW-5; the mint-gate pattern — node genesis office). Peers federate `@oracle` read-only; they never RECONCILE.
+- **Mechanism (additive, never arbitrating):** fold the genesis doc forward into `@oracle` (Automerge merge, additive — operator content survives). Because automerge LWW resolves by **op-id, not wall-clock**, the verb MUST **enforce the fold direction** (the newer engine intended-wins) and **SURFACE every operator field it would shadow** (#conflict-resolution: detect + record, never silently pick) — it never auto-resolves a contended field.
+- **v1 safety envelope:** dry-run **preview** (clone → merge → diff → render the Patch[]; the `lares watch` preview precedent) → **conflict-surface** (the shadowed fields) → **confirm-gate** (`--force` for agents, the `lares act` y/N precedent) → **idempotent** (an applied-engine-version marker; reconcile with content-addressed `taskContentId` so the two dedup paths agree) → **indelible effect record** (`lar:///@oracle/ledger/residency/<id>` — engine-version-id · genesis-checksum · timestamp · outcome; the ledger doubles as the idempotency gate, Flyway-style).
+- **No down-script.** An additive CRDT merge has no inverse; rollback rides the **retained pre-fold generation** (Nix-style; the op-log holds it until an epoch — never a reverse migration).
+- **Boot warns, never folds** (engine-watch EW-1/EW-6).
+
+### EPOCH — cut history behind (DEFERRED, named here for the pair)
+
+RECONCILE folds *forward*; **EPOCH** cuts *behind* (bounds the op-log; epoch-handlers). They stay **two verbs, sequenced `reconcile → epoch`, never auto-coupled** — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a *content* epoch (peers offline across a content cut cannot merge).
+
+<<~/ahu >>
+
+<<~ ahu #yang-yin-chao >>
+
+## Yang / Yin / Chao symmetry preserved
+
+The recipe carries a Tai Chi symmetry around `@<wiki-named-bag>` (see also [[personal-slot]] §yang-yin-chao). The coordinate-space framing preserves this structure exactly:
+
+```
+              @temp          ┐
+              @draft         │  YIN / Podge — coordinates ABOVE @<wiki>
+              @personal      │  carry operator-private scope; keyed by
+                             ┘  (PersonaGroup × recipe-fingerprint)
+        ┌───  @<wiki-named-bag>  ── CHAO / spin / Taiji ─────────────────────┐
+        │     the live coordinate where shared activity accumulates —       │
+        │     multiplayer, multi-session, the spinning surface              │
+        └───────────────────────────────────────────────────────────────────┘
+              canonBags[]    ┐
+              @lares         │  YANG / Hodge — coordinates BELOW @<wiki>
+              @lararium      ┘  carry structured canon, mesh-shared, read-stable
+```
+
+A tiddler MAY hold residency in multiple Yin coordinates simultaneously (personal note that also drafted into @draft), or multiple Yang coordinates (lore cross-referenced into two libraries), or both (live edit in @<wiki> shadowing a canonical version in a canon library). The recipe walks the stack in priority order.
+
+<<~/ahu >>
+
+<<~ ahu #anti-patterns >>
+
+## Six anti-patterns — defenses MUST exist
+
+The prior research surfaced six failure modes documented across OverlayFS, Docker, Nix, TW5, Ink & Switch CRDT research, and the archival profession. Implementation MUST carry a named defense for each:
+
+| # | Anti-pattern | Source | Defense |
+|---|---|---|---|
+| 1 | **Causal-history severance on copy** | Upwelling / Patchwork / Cambria | Preserve `change-id` (Gerrit/Mercurial/jj/Sapling pattern) across ACTION verbs so lifting between bags retains identity |
+| 2 | **Schema drift across multi-bag residency** | Kleppmann EuroSys 2021 | Cambria-style read-time lenses, not write-time migration |
+| 3 | **Kāpae resurrection** | OverlayFS / moby#783 | First-class `tombstone` op distinct from "absent" |
+| 4 | **Shadow-override confusion** | TW5 #570, #9139 | Surface `origin-bag` as a tiddler field on every read |
+| 5 | **Recipe-drift poisoning** | Nix overlays / OCI layers | Recipe pins bag-epochs (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
+| 6 | **Concurrent commits into same lower bag** | Upwelling (explicitly unsolved) | Operator-visible commit queue per bag; surface the race rather than hide it |
+
+<<~/ahu >>
+
+<<~ ahu #conflict-resolution >>
+
+## Conflict resolution — Talk Story, not arbitration (2026-05-31)
+
+**Load-bearing principle:** the CRDT/residency layer detects and records conflicts. It MUST NOT decide them. Resolution surfaces to **operator-agent or cabal Talk Story** — the Lares native mode for handling underspecified outcomes.
+
+The CRDT layer merges bytes deterministically. It cannot decide which semantic outcome the operators want. Automated arbitration reads as anti-pono — it presumes the system knows operator intent. The Voice house exists precisely for the moments where the system does not know; Talk Story is the canonical resolution surface.
+
+### What this means in code
+
+Every "conflict-resolution" surface in the residency model splits into two layers:
+
+| Layer | Role | Examples in current code |
+|---|---|---|
+| **Detection + recording** | CRDT layer | `auditEpochs` returns drift state; `listKapaeBags` returns hides; `withEffectRecord` writes archival audit; `resolveAll` reports multi-residency |
+| **Resolution + decision** | Operator-agent / cabal Talk Story | Future surfacing UX; operator gestures over the audit; cabal proposals through Voice house |
+
+The CRDT layer SHOULD surface every conflict it detects as readable state. It MUST NOT refuse a read, lose a write, silently arbitrate concurrent commits, or pick a winner where the operators have not chosen. The Lares Voice house then carries the conflict into Talk Story; the operators (or the cabal, when multiple operators contend) reach a decision; an explicit ACTION verb lands the decision; a fresh effect record audits the resolution.
+
+### Deferred items reframed
+
+Two Sprint deferrals (modal-view reader at the bag-epoch-pin surface; commit-queue for concurrent ACTIONs) shift from **arbitration mechanisms** to **Talk-Story-surfacing layers**. They show conflicts to the operator; they never resolve. The implementation timeline waits on a live wiki-mesh — multi-operator scenarios reveal the actual surfacing UX shape; abstract design ahead of real conflict-cases would build the wrong surface.
+
+### Why this is pono
+
+- **Web3 local-first.** No central arbiter; operator agency stays load-bearing.
+- **Causal islands.** Each island holds its own truth; cross-island conflict needs operator/cabal judgement, not algorithm.
+- **Voice house.** Talk Story already carries this architecture's native conversation mode; conflict-resolution rides the same rail as every other "what should we do?" question.
+- **Canon requires operator gesture.** A conflict resolved by code becomes canon nobody chose; a conflict resolved through Talk Story becomes canon the cabal owns.
+
+<<~/ahu >>
+
+<<~ ahu #closest-prior-art >>
+
+## Closest prior art (validators)
+
+- **TiddlyWiki Bags and Recipes** — exact same priority-overlay shape (K/V, not CRDT). [tiddlywiki.com/static/Bags%2520and%2520Recipes.html](https://tiddlywiki.com/static/Bags%2520and%2520Recipes.html). The TW5 team currently redesigns the UX ([MWS #114](https://github.com/TiddlyWiki/MultiWikiServer/issues/114)) — we ship into a known design gap.
+- **RDF Named Graphs + SPARQL Update** — Carroll/Bizer/Hayes/Stickler 2005; W3C RDF 1.1 §4 (2013). The settled vocabulary for "same triple in multiple graphs."
+- **Willow protocol** — `(namespace, subspace, path, payload_digest)` separates coordinate from content by design. [willowprotocol.org](https://willowprotocol.org/specs/data-model/index.html).
+- **FRBR / IFLA LRM** (2017) — [IFLA LRM PDF](https://www.ifla.org/files/assets/cataloguing/frbr-lrm/ifla-lrm-august-2017_rev201712.pdf). Work / Expression / Manifestation / Item.
+- **SAA Guidelines for Reappraisal and Deaccessioning** (2017) — [SAA PDF](https://www2.archivists.org/sites/all/files/GuidelinesForReappraisalDeaccessioning_2017.pdf). The discipline that makes deaccession trustworthy.
+- **Ink & Switch Upwelling** — closest CRDT analog with layered drafts. [inkandswitch.com/upwelling](https://www.inkandswitch.com/upwelling/).
+- **Ink & Switch Cambria** — schema lenses at read time. [inkandswitch.com/cambria](https://www.inkandswitch.com/cambria/).
+- **CSS Cascade + DevTools Computed panel** — the operator-visible coordinate surface gold standard.
+- **Plan 9 `bind`** — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/personal-slot >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/verb-tiddler >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/nalu-engine >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/island-adaptor >>
+<<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

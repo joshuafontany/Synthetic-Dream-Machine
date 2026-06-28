@@ -1,6 +1,6 @@
 # EPIC — Vessel-Factory Collapse: Drift Ledger + Decision Document
 
-Design canon: `bags/@lararium/v0.1/mesh/open-vessel.md` ("The Vessel — one composable
+Design canon: `bags/@lararium/mesh/open-vessel.md` ("The Vessel — one composable
 web3 design"). This doc maps EVERY behavioral divergence between
 `packages/lararium-node/src/open-node-vessel.ts` (~735 lines) and
 `packages/lararium-browser/src/open-browser-vessel.ts` (~504), so the operator decides

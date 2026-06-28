@@ -29,7 +29,7 @@
  *   - MOVE additionally requires source-bag admin (deaccession authority)
  *
  * Sprint:  Residency Model Epic — S5.1 / S5.2 / S5.3 (registration helper)
- * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import type {

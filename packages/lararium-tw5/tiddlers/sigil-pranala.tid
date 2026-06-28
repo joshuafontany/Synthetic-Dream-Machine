@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-pranala
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: edge
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/pranala
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/pranala
 lar-inline-pattern: <<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)(?:\s+family:([\w-]+))?(?:\s+role:([\w-]+))?\s*>>
 lar-block-pattern: <<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)\s*>>([\s\S]*?)<<~\/pranala\s*>>
 lar-close-pattern: <<~\/pranala\s*>>

@@ -38,7 +38,7 @@
  *
  *   Same isomorphic flow; different pieces resolved. role ≠ platform.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/sovereign-kernel
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/sovereign-kernel
  */
 
 import {

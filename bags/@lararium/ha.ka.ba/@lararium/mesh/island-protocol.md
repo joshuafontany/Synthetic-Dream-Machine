@@ -1,0 +1,119 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/island-protocol >>
+```toml iam
+cacheable     = true
+file-path     = "bags/@lararium/mesh/island-protocol.md"
+mana          = 14
+register      = "Synthesis-Canon"
+retain        = true
+revised-on    = "2026-06-12"
+revision-note = "ea-breath law lands: breath message (phase + monotonic progress) added island→vessel; watchdogs re-arm on breath, judge frozen evidence by stall budget, silence alone times out; mkBreath factory"
+role          = "island message envelope schema: all vessel ↔ causal-island message types, the nine-clause Island Sovereignty Law, IslandGrants (typed ocap manifest capabilities), and envelope factories"
+source-file   = "packages/lararium-mesh/src/island-protocol.ts"
+l-space       = "lararium"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/mesh/island-protocol"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Island Protocol
+
+Discriminated union for all messages crossing the vessel / causal-island boundary.
+Every message MUST carry `schema_version: 1`. Platform-neutral — no Node or browser imports.
+Vessel entrypoints (node, browser) bind the I/O; this module names the envelopes only.
+
+### Island Sovereignty Law — nine clauses (isomorphic across all vessel types)
+
+1. Every island boots a Repo-in-island via a transferred `syncPort` (MessagePort).
+2. The island derives tiddler state from its own CRDT doc — never from vessel oracle deltas.
+3. The island owns its timing. The in-wiki nalu engine drives frame-aligned drain (browser `requestAnimationFrame` with Safari fallback; node `setTimeout(16ms)`); deltas accumulate via `$tw.lares.enqueueNalu`; one `wiki.transact()` per frame across all bags. No raw-message-receipt drains.
+4. *(retired)* The frame-completion ACK signal — drain timing stays island-internal.
+5. Vessel oracle delta delivery removed. CRDT sync via `syncPort` stands as the sole source of tiddler truth.
+6. `IslandMsg_Manifest` carries `syncPort` (transferred, not cloned), `recipe` (WikiRecipe slot structure), `grants` (IslandGrants — typed structural capabilities), and `coreHash` (content-address intent vector; null = pre-CAS). TW5 core bytes do NOT ride the manifest — islands read them from `LarDoc.blobs[ENGINE_CORE_ID]` on the @lararium CRDT doc after `handle.whenReady()`; two vessels federating @lararium share the engine automatically via Automerge sync.
+7. The vessel MUST close `mainPort` at evict/unmount time. Failure leaks the Automerge NetworkAdapter silently. Structural: every vessel holds `mainPort: MessagePort` on its hot slot and calls `mainPort.close()` in teardown. No exceptions.
+8. Federation seam — when a grant carries a non-empty AutomergeUrl, two obligations activate. Vessel: wire `MessageChannelNetworkAdapter(mainPort)` on the vessel Repo before delivering `manifest`. Island: call `repo.find(docUrl).whenReady()` and await readiness before seeding TW5 and declaring `ea`; failure on either side moves the slot to disposed within `HANDSHAKE_TIMEOUT_MS`. Gate proof: `federation-seam.test.ts` (node) + `browser-repo-in-island.test.ts` test 2 (browser). When this law holds, two vessels sharing a bag converge without any explicit sync call.
+9. TW5 SHALL NOT instantiate on the main thread. Every `TW5Engine` lives inside a sovereign Worker; the main thread holds `DocHandle` references and `CompositeStore` layers only. Any `bootTw5()` outside a Worker constitutes a sovereignty violation.
+
+### IslandGrants — typed ocap manifest capabilities
+
+The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → AutomergeUrl map, a main-owned lookup). The manifest now HANDS the island typed structural capabilities — each field arrives as a grant (ocap), never gets looked up from a vessel-owned table:
+
+| Grant | Carries | Law |
+|---|---|---|
+| `islandUrl` | `@oracle` runtime system-island doc | REQUIRED — engine bytes precede TW5 boot |
+| `catalogUrl?` | @catalog registry ACCESS | access ≠ load; never layered; absent = no watch |
+| `wikiUrl?` | the island's OWN write-layer bag | `@{wikiSlug}`; `@daemon` under the one-recipe model |
+| `personalUrl?` / `draftUrl?` | keyhive-bound sovereign instance mounts | minted by admin `resolveBinding` |
+
+The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the oracle-plane rulings 2026-06-15/06-16): `@lares` and `@lararium` are **DreamNet system bags** — islands resolve their pointers + wiki-recipes from the **`@oracle`** runtime system-island doc's own well-known tiddlers, the substrate they already hold (the bag-oracle moved out of the `@lararium` corpus in the carve). Three oracle planes, three authorities: **system bags** (`@oracle` doc — `@oracle`/`@lararium`/`@lares` pointers + system recipes) · **user bags** (`@catalog`, ocap grants) · public/infrastructure (`@crossroads`, future). See `wiki-layer-ontology#oracle-planes`.
+
+**Library layers never ride the manifest.** The island resolves them itself from its registry plane (recipe-watch reconcile — system bags from `@oracle`, user bags from `@catalog`) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
+
+### Guarantee grades
+
+| Grade | Invariant |
+|---|---|
+| GP-1 | `schema_version` on every message. Lock at 1; increment on breaking changes. |
+| GP-2 | All payloads ride as plain objects — no class instances, no functions, no DOM. |
+| GP-4 | CryptoKey NOT on this surface; key material stays in-thread. |
+
+### Message types — Vessel → island
+
+| Type | Purpose |
+|---|---|
+| `manifest` | Boot materials — `syncPort`, `recipe`, `grants`, `coreHash`, storage config, plugin set. |
+| `hooanu` | Cool the island (wela → anu) — thread releases; URL stays known (`residency-tiers`). |
+| `teardown` | Teardown handshake start: island completes in-flight work then sends `teardown:ack`. |
+| `admin:place-verb` | Place a volatile job tiddler in the admin island's TW5 wiki. |
+| `admin:verb-result` | Deliver delegation result back to the admin island. |
+| `admin:verify-request` | Ask the keyholder admin island to verify before delegation proceeds. |
+| `admin:resolve-binding-request` | Ask the admin island to mint/resolve keyhive-bound @personal/@draft docs. |
+| `admin:evict-result` / `admin:residency-op-result` | Outcomes for admin-commanded eviction / residency ops. |
+| `wiki:place-verb` | Place a wiki-scope job in a wiki island's TW5 wiki. |
+
+### Message types — Island → vessel
+
+| Type | Purpose |
+|---|---|
+| `ea` | Sovereignty declaration — TW5 live, Repo synced, first frame ready. |
+| `breath` | Mount progress — `phase` + monotonic `progress` counter, from manifest receipt to settle. Watchdogs re-arm on breath (silence alone times out) and bound frozen evidence by a stall budget (the ea-breath law, 2026-06-12). |
+| `ready` | Worker-up signal preceding `ea`. |
+| `teardown:ack` | Handshake complete; vessel calls `worker.terminate()`. Carries optional `docBytes`. |
+| `event` | Verse-event reaction — `listenable` + payload (string/number/boolean values only). |
+| `fault` | Island fault — vessel MUST mark the slot evicted. |
+| `admin:delegate-verb` | Admin island delegates a verb to the vessel handler registry. |
+| `admin:verify-result` | Keyholder verification verdict (verify-then-delegate). |
+| `admin:resolve-binding-result` | Minted binding grants returned. |
+| `admin:evict-request` / `admin:residency-op` | Admin island commands eviction / residency action. |
+| `admin:wiki-alert` | Admin computes "affected by content"; main delivers a `system-alert` verb to the affected LIVE island (fire-and-forget; unmounted wikis skipped). |
+| `wiki:verb-result` | Wiki island result for a job the vessel awaits. |
+
+### Factories
+
+`mkManifest` · `mkEa` · `mkBreath` · `mkReady` · `mkTeardown` · `mkTeardownAck` · `mkFault` ·
+`mkAdminPlaceVerb` · `mkAdminDelegateVerb` · `mkAdminVerbResult` ·
+`mkAdminVerifyRequest` · `mkAdminVerifyResult` ·
+`mkAdminResolveBindingRequest` · `mkAdminResolveBindingResult` ·
+`mkAdminEvictRequest` · `mkAdminEvictResult` ·
+`mkAdminResidencyOp` · `mkAdminResidencyOpResult`
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/ea >>
+<<~ loulou lar:///ha.ka.ba/@lararium/browser/browser-vessel-island-pool >>
+<<~ loulou lar:///ha.ka.ba/@lararium/api/residency-tiers >>
+<<~ loulou lar:///ha.ka.ba/@lares/docs/pono/wiki-layer-ontology >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

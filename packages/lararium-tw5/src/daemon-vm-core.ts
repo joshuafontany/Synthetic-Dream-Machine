@@ -17,7 +17,7 @@
  * Network-adapter wiring routes through mesh (attachMessageChannelSync); the
  * core holds zero @automerge/* imports — same facade law as sovereign-kernel.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/daemon-vm-core
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/daemon-vm-core
  */
 
 import {

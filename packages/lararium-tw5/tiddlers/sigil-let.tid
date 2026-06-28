@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-let
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: pragma-alias
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/waiho
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/waiho
 lar-alias-for: \let
 lar-see-also: waiho
 lar-open-pattern: <<~\s*\\let\s+([\w-]+)\s+([^\n>]+?)\s*>>

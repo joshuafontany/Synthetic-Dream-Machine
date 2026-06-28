@@ -14,7 +14,7 @@
  *   6. island emits event(repo:change) observable via onWorkerEvent
  *   7. assert event arrives — no routeChangeset call
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/repo-in-island
+ * Meme: lar:///ha.ka.ba/@lararium/node/repo-in-island
  */
 
 import { describe, test, expect, afterEach } from "vitest";

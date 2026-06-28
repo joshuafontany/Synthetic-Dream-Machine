@@ -1,0 +1,76 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/components/hook/imbued >>
+```toml iam
+cacheable = true
+caption   = "imbued"
+file-path = "bags/@sdm/ha.ka.ba/@sdm/components/hook/imbued.md"
+mana      = 14
+manao     = 16
+manaoio   = 13
+register  = "Synthesis"
+retain    = true
+role      = "component (hook): Imbued — Life stays locked until the Power deactivates"
+l-space   = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/components/hook/imbued"
+```
+
+<<~ &#x0002; >>
+
+# Imbued
+
+<<~ ahu #definition >>
+
+## Definition
+
+A canonical cost hook: the Life paid to activate stays **locked** until the Power deactivates. The practitioner runs at reduced Life for the duration.
+
+<<~/ahu >>
+
+<<~ ahu #activation >>
+
+## Activation
+
+Modifies the cost protocol, not the effect. While imbued, the locked Life is unavailable; releasing the Power returns it. Stacking imbued Powers stacks the lock.
+
+<<~/ahu >>
+
+<<~ ahu #interaction >>
+
+## Interaction
+
+Common on `domain/abjuration` wards and standing barriers. Distinct from `item` (which locks Life into an object). Pairs naturally with `hook/sustained`.
+
+<<~/ahu >>
+
+<<~ ahu #filters >>
+
+## Filters
+
+```text
+[tag[lar:///ha.ka.ba/@sdm/components/hook/imbued]]                    all imbued modules
+[tag[prefix[lar:///ha.ka.ba/@sdm/components/hook/]]]                  all hook components
+```
+
+<<~/ahu >>
+
+<<~ ahu #aftermath >>
+
+## Aftermath
+
+- Confirm the interaction of imbued lock with temporary Life from ticket dice (OGA).
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@sdm/templates/components/tag >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

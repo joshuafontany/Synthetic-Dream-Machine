@@ -2,9 +2,9 @@
  * `lar:` URI resolution for the Lararium carrier spine.
  *
  * Resolution policy:
- * - ha.ka.ba/@lares/v0.1/{path} → packages/lares-core/memes/{path}.md  (primary lares corpus path)
- * - ha.ka.ba/@lararium/v0.1/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md  (engine corpus)
- * - AGENTS, LARES, README → virtual until expressed under @lares/v0.1
+ * - ha.ka.ba/@lares/{path} → packages/lares-core/memes/{path}.md  (primary lares corpus path)
+ * - ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md  (engine corpus)
+ * - AGENTS, LARES, README → virtual until expressed under @lares
  * - INDEXES/** and other ALL-CAPS roots → virtual namespace (caps-virtual)
  * - any other shape → virtual (no on-disk path; wiki-only)
  *
@@ -43,7 +43,7 @@ export interface LarHostfulResolution extends LarResolution {
   readonly virtual: true;
 }
 
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-uri/uri-roots
+// Schema: lar:///ha.ka.ba/@lares/api/lararium/lar-uri/uri-roots
 const CAPS_FILE_ROOTS = new Set<string>();
 const VIRTUAL_CAPS_ROOTS = new Set(["INDEXES"]);
 const STABLE_TUPLE_ROOT = "ha.ka.ba";
@@ -146,7 +146,7 @@ export function resolveLarUri(uri: string): LarResolution {
     return `${baseNoExt}/${fragmentPath.join("/")}.md`;
   };
 
-  // Caps-file roots resolve only when expressed under @lares/v0.1.
+  // Caps-file roots resolve only when expressed under @lares.
   if (CAPS_FILE_ROOTS.has(root) && childPath.length === 0) {
     const laresRelPath = appendFragment(`${root}.md`);
     return { uri, root, childPath, resourcePath, laresRelPath, engineRelPath: null, kind: "caps-file", virtual: false };
@@ -157,28 +157,24 @@ export function resolveLarUri(uri: string): LarResolution {
   }
 
   if (isTupleRoot(root) && root === STABLE_TUPLE_ROOT) {
-    // lar:///ha.ka.ba/@lares/v0.1/{rest} → packages/lares-core/memes/{rest}.md
+    // lar:///ha.ka.ba/@lares/{rest} → packages/lares-core/memes/{rest}.md
     if (childPath[0] === LARES_SCOPE) {
       const rest = childPath.slice(1);
-      if (rest[0] !== "v0.1") {
-        return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
+      if (rest.length === 1 && ["AGENTS", "LARES", "README"].includes(rest[0]!)) {
+        return { uri, root, childPath, resourcePath, laresRelPath: appendFragment(`${rest[0]}.md`), engineRelPath: null, kind: "caps-file", virtual: false };
       }
-      const versionedRest = rest.slice(1);
-      if (versionedRest.length === 1 && ["AGENTS", "LARES", "README"].includes(versionedRest[0]!)) {
-        return { uri, root, childPath, resourcePath, laresRelPath: appendFragment(`${versionedRest[0]}.md`), engineRelPath: null, kind: "caps-file", virtual: false };
-      }
-      const joined = versionedRest.length > 0 ? versionedRest.join("/") : "";
+      const joined = rest.length > 0 ? rest.join("/") : "";
       const laresRelPath = appendFragment(joined ? withMdSuffix(joined) : "index.md");
       return { uri, root, childPath, resourcePath, laresRelPath, engineRelPath: null, kind: "tuple-file", virtual: false };
     }
 
-    // lar:///ha.ka.ba/@lararium/v0.1/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md
+    // lar:///ha.ka.ba/@lararium/{pkg}/{path} → packages/lararium-{pkg}/memes/{path}.md
     if (childPath[0] === ENGINE_SCOPE) {
-      if (childPath[1] !== "v0.1" || !childPath[2]) {
+      if (!childPath[1]) {
         return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath: null, kind: "caps-virtual", virtual: true };
       }
-      const pkgSlug = `lararium-${childPath[2]}`;
-      const pathParts = childPath.slice(3);
+      const pkgSlug = `lararium-${childPath[1]}`;
+      const pathParts = childPath.slice(2);
       const filePath = pathParts.length > 0 ? pathParts.join("/") : "index";
       const engineRelPath = appendFragment(withMdSuffix(`${pkgSlug}/memes/${filePath}`));
       return { uri, root, childPath, resourcePath, laresRelPath: null, engineRelPath, kind: "tuple-file", virtual: false };

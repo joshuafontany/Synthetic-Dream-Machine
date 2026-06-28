@@ -7,7 +7,7 @@
  * fail FAST with a named cap error instead of burning another full silence
  * budget per attempt — the restart-storm guard.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/vessel-island-pool-core
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/vessel-island-pool-core
  */
 
 import { describe, test, expect, afterEach } from "vitest";

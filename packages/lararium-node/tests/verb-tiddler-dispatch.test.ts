@@ -11,7 +11,7 @@
  * Uses the real compiled node-wiki-island.js + genesis blob.
  * Requires: pnpm --filter @lararium/node build and build:genesis.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/verb-tiddler-dispatch
+ * Meme: lar:///ha.ka.ba/@lararium/node/verb-tiddler-dispatch
  */
 
 import { describe, test, expect } from "vitest";

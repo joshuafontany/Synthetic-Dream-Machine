@@ -20,7 +20,7 @@
  * so each spirit mines in its own pass), never edit it. The child→parent tunnel
  * (the LINK) rides a separate post-mine step (create_tunnel needs the room to exist).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
 import { execFileSync } from "node:child_process";

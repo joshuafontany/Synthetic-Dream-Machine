@@ -17,7 +17,7 @@
  * two never overlap — the handshake completes (a temporary text pump) before the parent's binary
  * `onMessage` attaches and `join()` fires.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-ws-client-adapter
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/lar-ws-client-adapter
  */
 
 import { WebSocketClientAdapter } from "@automerge/automerge-repo-network-websocket";

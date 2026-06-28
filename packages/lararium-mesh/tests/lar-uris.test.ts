@@ -8,7 +8,7 @@
  * layer is ORTHOGONAL to federation (the residency bag controls that, not the
  * namespace) and to persistence (every meme persists but volatile-VM scratch).
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity#capability-and-petnames
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#capability-and-petnames
  */
 
 import { describe, test, expect } from "vitest";

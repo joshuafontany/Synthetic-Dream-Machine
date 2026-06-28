@@ -1,0 +1,50 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/sharktooth-sigils >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/sharktooth-sigils.md"
+mana      = 18
+manao     = 18
+manaoio   = 18
+namespace = "&#x2299;"
+register  = "Synthesis"
+retain    = true
+role      = "English alias redirect for nihomano-sigils; same meme, English face"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/sharktooth-sigils"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Sharktooth Sigils
+
+English alias for `nihomano-sigils`. See canonical meme:
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/nihomano-sigils >>
+
+The `<<~` outer delimiter — three marks, two teeth and a wake — is the sharktooth glyph.
+Every sigil opens with it. Every scope closes with a `>>` mirrored form.
+
+The SharktoothSigil tag (`lar:///ha.ka.ba/tags/SharktoothSigil`) names the grammar
+registration surface after this glyph. Tagging a tiddler with it teaches the parser a new word.
+
+See `nihomano-sigils` for the full cultural contract, wild-magic property, and first
+discovered sigil set.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/nihomano-sigils >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

@@ -6,7 +6,7 @@
  * tax); the WS path stays for genuine remote peers (a real island boundary) and for
  * when the local socket is absent/stale. Same capability-bearing verb-summons, same
  * durable CRDT outcome either way — only the transport differs by topology.
- * See lar:///ha.ka.ba/@lararium/v0.1/api/lares-lararium-binding.
+ * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
  */
 
 import { connectDaemonVessel, submitVerb, type SubmitResult, type SubmitOptions } from "./daemon-connector.js";

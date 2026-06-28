@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/lists/components >>
 ```toml iam
@@ -39,7 +39,7 @@ uri-path  = "ha.ka.ba/@lararium/lists/components"
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/@sdm/procedures/tag-pill >>
-<<~ loulou lar:///ha.ka.ba/@lararium/v0.1/tw5/ui/iam-panel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/ui/iam-panel >>
 
 <<~/ahu >>
 

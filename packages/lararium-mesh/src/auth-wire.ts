@@ -22,7 +22,7 @@
  * capability-only with LAR_V3_ALLOW_UNPROVEN=1. See `project_verification_placement`,
  * `operator-peer` #actor-parity. Live two-vessel smoke test remains the open verify.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/auth-wire
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/auth-wire
  */
 
 import * as ed25519 from "@noble/ed25519";

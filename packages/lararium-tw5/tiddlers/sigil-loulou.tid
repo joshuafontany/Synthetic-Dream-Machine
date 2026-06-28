@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-loulou
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: edge-sugar
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/loulou
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/loulou
 lar-pattern: <<~\s*loulou\s+(\S+)\s*>>
 lar-default-family: relation
 type: text/vnd.tiddlywiki

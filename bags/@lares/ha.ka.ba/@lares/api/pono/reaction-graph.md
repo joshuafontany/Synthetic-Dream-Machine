@@ -1,0 +1,208 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/reaction-graph >>
+```toml iam
+cacheable     = true
+file-path     = "bags/@lares/api/pono/reaction-graph.md"
+mana          = 17
+manao         = 17
+manaoio       = 16
+namespace     = "&#x2299;"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "invariant capability: in-memory reaction graph — subscribe, fire, load, UEFN dispatch semantics"
+source-symbol = "ReactionGraph RENDER_MODES REACTION_ROLES"
+tags      = ["lar:///ha.ka.ba/@lararium/mesh/reaction-engine"]
+l-space       = "stable"
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lares/api/pono/reaction-graph"
+```
+
+<<~ ahu #head >>
+
+# Reaction Graph
+
+Isomorphic in-memory reaction dispatch layer — runs on server and client.
+Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subscribed; UEFN dispatch semantics.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #ooda-ha >>
+
+✶ read the incoming binding set — fromUri, listenable, toUri, subscribable, source (wired|subscribed)
+⏿ orient dispatch mode: fireSync for view-layer; fire/fireAll for async; fireRace/fireRush reserved
+◇ load() replaces full set; updateUri() updates one meme's bindings; occupied handler slots survive
+▶ route fire call through (fromUri, listenable) → handlers; await or sync per mode
+↺ subscribeOnce bridges to kukali; subscribeByFn wires view-layer actions by name not source; confirm handler slots occupied; kukali suspensions preserved across wiki-change reloads
+
+<<~/ahu >>
+
+<<~ ahu #law >>
+
+## Law
+
+The ReactionGraph anchors the live reaction dispatch layer.
+It uses an isomorphic surface (no Node or browser APIs) and runs on both server and client.
+It carries static bindings (declared in carrier pranala edges) plus dynamic subscriptions (runtime).
+
+A reaction binding defines a (fromUri, listenable) → (toUri, subscribable) routing rule.
+`fromUri` names the meme that fires. `listenable` names the event label (UEFN OUTPUT pin). `subscribable` names the handler label (UEFN INPUT pin).
+
+The graph defines the Tier 0 dispatch surface — all kumu event crossings route through it.
+
+<<~/ahu >>
+
+<<~ ahu #binding-shape >>
+
+## Binding Shape
+
+```toml
+fromUri      = "lar:/// source meme URI"
+toUri        = "lar:/// target meme URI"
+listenable   = "event name (UEFN OUTPUT pin), or null for wildcard"
+subscribable = "handler label (subscribeByFn key, UEFN INPUT pin), or null"
+role         = "pranala edge role, or null"
+source       = "wired | subscribed"
+```
+
+`wired` bindings arrive in carrier text as pranala edges with `family:reaction`.
+`subscribed` bindings form at runtime via `subscribe()`.
+
+<<~/ahu >>
+
+<<~ ahu #dispatch-modes >>
+
+## Dispatch Modes
+
+Four fire semantics — all run per (fromUri, trigger):
+
+```
+fire / fireAll   — hui: wait for all handlers to complete (async)
+fireSync         — UEFN fidelity: synchronous tick dispatch, subscription order
+fireRace         — holo (\race): first handler to settle wins, losers cancel
+fireRush         — puka: first to resolve wins; others receive AbortSignal
+```
+
+`fireSync` sets the default for view-layer reactions (navigation, zoom, relay).
+`fire` / `fireAll` for async workflows (store operations, TW5 hydration).
+`fireRace` / `fireRush` reserved for competitive dispatch (future: multi-realm routing).
+
+<<~/ahu >>
+
+<<~ ahu #subscription-api >>
+
+## Subscription API
+
+```
+load(bindings)                        — replace full binding set; preserve handler slots
+updateUri(uri, bindings)              — incremental update for one meme's bindings
+removeUri(uri)                        — remove all bindings for a deleted meme
+subscribe(fromUri, listenable, handler) → unsub   — per-(fromUri,listenable) handler
+subscribeByFn(fnName, handler) → unsub             — handler for ALL bindings with subscribable=fnName
+subscribeOnce(fromUri, listenable) → Promise + cancel()  — kukali bridge primitive
+```
+
+`subscribeByFn` marks the preferred wiring point for view-layer actions.
+Register once; automatically handles bindings that arrive after boot via `updateUri()`.
+Equivalent to subscribing to a UEFN Relay device by name rather than by source.
+
+`subscribeOnce` bridges to the `kukali` posture (Verse `suspends` analogue).
+The returned Promise resolves when the listenable fires once; `cancel()` rejects it.
+
+<<~/ahu >>
+
+<<~ ahu #update-invariant >>
+
+## Update Invariant
+
+`load()` and `updateUri()` preserve occupied handler slots across binding rebuilds.
+A handler registered via `subscribe()` or `subscribeOnce()` survives graph reloads
+as long as the (fromUri, listenable) key still appears in the incoming binding set.
+Unoccupied slots for removed bindings drop; occupied slots persist.
+
+This preserves in-flight kukali suspensions across TW5 wiki-change events.
+
+<<~/ahu >>
+
+<<~ ahu #schema >>
+
+## Schema (machine-readable)
+
+```toml
+# Render modes — canonical values for PranalaEdge.renderMode
+render-modes = ["papalohe"]
+# papalohe: listenable label at source (OUTPUT pin), subscribable label at target (INPUT pin)
+
+# Canonical roles for reaction family edges
+reaction-roles = ["listenable", "subscribable", "observes", "throttles", "debounces"]
+```
+
+<<~/ahu >>
+
+<<~ ahu #yin-collapse-target >>
+
+## Yin-Collapse — Completed (2026-05-15)
+
+`ReactionEngine` (TS inline dispatch class) removed. The TW5 wiki IS the reactive engine.
+The yin-collapse is not provisional — it landed and shipped. `reaction-router.ts` is
+the target architecture, not a bridge to it.
+
+### What shipped
+
+```
+packages/lararium-tw5/src/modules/reaction-router.ts
+  module-type: startup, platforms: ["browser", "node"]
+
+  Boot: scan all lar: tiddlers → build ReactionGraph from papalohe bindings.
+
+  wiki.addEventListener("change", handler):           ← nalu arrives
+    → update ReactionGraph bindings for changed URIs (live-query invariant)
+    → wiki.dispatchEvent("tm-verse-event", { uri, listenable })
+
+  island-kernel.ts onVerseEvent receives tm-verse-event
+    → posts IslandMsg_Event to vessel (cross-island boundary)
+```
+
+`ReactionGraph` and `extractReactionBindings` reside in `reaction-graph.ts`
+(imported by `reaction-router.ts`). `ReactionEngine` class removed from
+`kumu-device.ts`. No inline `re.onChangeset()` call remains anywhere.
+
+TS irreducible layer carries only: `MemeSyncAdaptor` + `LarTiddlerStore` + `VesselIslandPool` + Keyhive.
+
+### Cross-island boundary (Path M)
+
+`reaction-router.ts` fires `IslandMsg_Event` when a nalu-triggered reaction dispatches.
+Vessel receives `IslandMsg_Event` → routes to `VerbDispatcher` via `placeVerb()`.
+Outcome tiddler written to shared admin CRDT. CRDT convergence = distributed promise.
+Promise-pipelining law: islands fire without waiting for vessel ACK.
+
+### `fireSync` — test surface only
+
+`fireSync` on `ReactionGraph` ships for unit tests and in-memory fixtures.
+Production code MUST NOT call `fireSync` directly. The production path runs
+exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
+
+### Prior art grounding
+
+- **Elm Architecture** — one update function IS the engine; Cmd/Sub = side effects outside
+- **Solid.js fine-grained reactive** — synchronous reactive graph, no overlay layer
+- **MobX transaction** — `transaction()` IS the batch boundary; reactions defer until close
+- **vlcn.io live-query reactivity** (2024) — incremental per-dependency dispatch; not full-scan
+- **Goblins/OCapN promise pipelining** (FOSDEM 2025) — fire without ACK; CRDT resolves
+- **LoRe declarative dataflow** (arxiv:2304.07133, 2024) — changeset → derived state pipeline
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/kukali >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

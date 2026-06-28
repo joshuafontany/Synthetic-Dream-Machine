@@ -11,7 +11,7 @@
  *
  * Parser stays isomorphic — no fs/DOM/TW5 dependencies.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/carrier-sigils
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/carrier-sigils
  */
 
 import { describe, test, expect } from "vitest";
@@ -21,7 +21,7 @@ import { MemeStreamParser } from "../src/meme-stream.js";
 // Fixtures
 // ---------------------------------------------------------------------------
 
-const URI = "lar:///ha.ka.ba/@lares/v0.1/api/mu";
+const URI = "lar:///ha.ka.ba/@lares/api/mu";
 
 const FULL_CARRIER = [
   `<!-- <<~ !DOCTYPE = ${URI} >> -->`,
@@ -29,7 +29,7 @@ const FULL_CARRIER = [
   `<<~&#x0001; ? -> ${URI} >>`,
   ``,
   "```toml iam",
-  `uri-path = "ha.ka.ba/@lares/v0.1/api/mu"`,
+  `uri-path = "ha.ka.ba/@lares/api/mu"`,
   `type     = "text/x-memetic-wikitext"`,
   "```",
   ``,
@@ -128,7 +128,7 @@ describe("MemeStreamParser — incremental streaming", () => {
 
 describe("MemeStreamParser — minimal carrier (no ahu body)", () => {
   test("emits open and close for a data carrier with no ahu body", () => {
-    const URI2   = "lar:///ha.ka.ba/@lares/v0.1/api/pono/invariant";
+    const URI2   = "lar:///ha.ka.ba/@lares/api/pono/invariant";
     const minimal = [
       `<<~&#x0001; ? -> ${URI2} >>`,
       `<<~&#x0002;>>`,

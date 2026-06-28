@@ -10,7 +10,7 @@
  * Island Sovereignty Law §9: TW5 boots here, inside a sovereign Worker.
  * DOM types do not appear in this file (BA-1). `self` is the sole platform surface.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-daemon-island
+ * Meme: lar:///ha.ka.ba/@lararium/browser/browser-daemon-island
  */
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";

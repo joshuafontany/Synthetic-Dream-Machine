@@ -9,7 +9,7 @@
  * The socket's 0600 owner-only perms gate PRESENCE (substrate); the requestedBy
  * did rides the invocation for the daemon's verify-then-delegate (authority).
  * When the socket is absent/stale, the caller falls back to the WS vessel.
- * See lar:///ha.ka.ba/@lararium/v0.1/api/lares-lararium-binding.
+ * See lar:///ha.ka.ba/@lararium/api/lares-lararium-binding.
  */
 
 import { createConnection } from "node:net";

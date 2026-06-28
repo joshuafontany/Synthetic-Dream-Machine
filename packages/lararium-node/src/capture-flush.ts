@@ -7,7 +7,7 @@
  * sovereignty). This is node's implementation of the isomorphic `CaptureFlush` verb; a
  * browser vessel implements the same verb with an IndexedDB write or a relay-send instead.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import { execFile } from "node:child_process";

@@ -23,7 +23,7 @@
  * Above-stack projections defer (separate concern). When they land they will
  * subscribe to nalu events, not participate in the cascade.
  *
- * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/wiki-recipe
+ * Schema: lar:///ha.ka.ba/@lares/api/lararium/wiki-recipe
  */
 
 import type { AutomergeUrl } from "@automerge/automerge-repo";
@@ -239,7 +239,7 @@ export function expandRecipe(r: WikiRecipe): readonly SlotUri[] {
 // (IslandAdaptor._routeBag walks it). The cascade evaluates filter expressions
 // against the saving tiddler — first non-empty result is the target slot URI.
 // Operator-configurable at runtime; per-wiki overlays compose via the recipe
-// cascade. See: lar:///ha.ka.ba/@lares/v0.1/api/lararium/bag-paths-cascade
+// cascade. See: lar:///ha.ka.ba/@lares/api/lararium/bag-paths-cascade
 
 // ── Recipe fingerprint (Q5 revised 2026-05-31) ──────────────────────────────
 
@@ -273,7 +273,7 @@ export interface RecipeFingerprintInput {
  * does not change the fingerprint. `canonicalJson` sorts object keys for
  * further stability.
  *
- * @see lar:///ha.ka.ba/@lararium/v0.1/api/personal-slot#questions Q4
+ * @see lar:///ha.ka.ba/@lararium/api/personal-slot#questions Q4
  */
 export async function computeRecipeFingerprint(
   input: RecipeFingerprintInput,

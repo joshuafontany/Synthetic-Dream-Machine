@@ -17,7 +17,7 @@ import type {
  *     admin proof verifies. Lives in residency action handlers (Sprint 5 of the
  *     Residency Model Epic) and friends, not here. Not rungs: `promote`/`propose`
  *     (no consumer), `sync` (pull-at-scale), `revoke` (an admin operation). See
- *     the 3-axis model in causal-island.ts + lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands.
+ *     the 3-axis model in causal-island.ts + lar:///ha.ka.ba/@lares/api/pono/causal-islands.
  *
  * The interface is provider-shaped so implementations can swap:
  *   * KeyhiveProvider (D.2) — wraps @keyhive/keyhive WASM

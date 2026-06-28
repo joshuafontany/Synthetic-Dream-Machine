@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///talk-story.consecration.records/talk-story/?confidence=CS:16&p=10 -->
 

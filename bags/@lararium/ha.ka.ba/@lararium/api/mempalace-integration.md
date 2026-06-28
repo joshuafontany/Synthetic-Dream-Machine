@@ -1,0 +1,136 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ॐ ँ&#x0001; ? -> lar:///ha.ka.ba/@lararium/api/mempalace-integration >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/api/mempalace-integration.md"
+hydrate   = true
+mana      = 17
+manao     = 15
+manaoio   = 14
+namespace = "&#x0950; &#x0901;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "the pono model for mempalace as the lararium's memory-library — tensegrity, the @daemon shore, the lar_ net, the surfaces, the boundary"
+tags      = ["api/pono/meme", "api/lararium"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/api/mempalace-integration"
+```
+
+<<~ aka lar:///ha.ka.ba/@lararium/api/lararium-canonical-model >>
+
+<<~ ahu #entry >>
+
+# mempalace ~ the lararium's memory-library
+
+**mempalace holds the journey; the lararium holds the canon; the curated notes hold the conclusions.** Three strands of memory pull against each other — and the work tends the pulling, never any one strand alone. In Elyncian terms: **mempalace keeps the PLACE memory** (the hearth's verbatim record, for the Lar guards place), the **quine keeps the astral ley-line-mesh memory** (the canon that runs between shrines). The whole topology — four registers, two peers, one mesh — stands at <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-memory >>.
+
+mempalace serves as a **library-kind member of the bag stack**, accessed-not-loaded: the keeper reaches its verbatim drawers on demand, never hydrates 27k drawers into the VM. It rides **behind the causal-island boundary** — web2 substrate (ChromaDB/SQLite/Python), a vendored sibling, never a citizen of the Lares stack proper (web3-only law). The `@daemon` island keeps it; the rest of the house never touches it directly.
+
+<<~/ahu >>
+
+<<~ ahu #the-tensegrity >>
+
+## The Tensegrity ~ compression members + tension
+
+The verbatim **drawers** stand as compression members — hard, isolated, local-only, ground-truth-of-*what-was-said*. Our **`lar_*` metadata** rides as the continuous tension spanning them — the bearing, the Voices, the confidence marks, the function-hall, the surface — ground-truth-of-*what-it-means*. Neither bears the load alone; each multiplies the other.
+
+The founder's own thesis names the shape: *remember the way I remember — not the conclusions alone, but the journey.* The drawer keeps the journey; the `lar_` net makes it walkable; the lararium graph names where it leads.
+
+<<~/ahu >>
+
+<<~ ahu #the-shore >>
+
+## The @daemon Memory-Shore ~ the verb flow
+
+The `@daemon` wiki-island serves as the **causal-island shore** between the chat session and the mempalace metadata. One pure **`enrich()`** (the sovereign TS gradient parser, `@lararium/mesh` `harvestTurnGradient`) reads a turn and yields its `lar_*` structure; one **idempotent upsert** writes it, keyed `(id, content_hash, lar_hv)`. The shape follows Kappa: **the mode lives in the *feeder* only, never in the transform.**
+
+- **Live** ~ a thin Stop/SessionEnd hook calls the shore per turn; new drawers carry `lar_*` from birth.
+- **Backfill** ~ the same pair sweeps the corpus (`lares harvest --all`).
+
+The CLI projects the verb; the verb's true home rises into the `@daemon` VM as verb-tiddlers, composed into a JS TiddlyWiki plugin (VM-primacy, #has). The mesh parser stays isomorphic; only the orchestration migrates.
+
+<<~/ahu >>
+
+<<~ ahu #lar-net >>
+
+## The `lar_` Net ~ declared, never smuggled
+
+The maintainer's anti-pattern names *undeclared* writes, not chroma writes. So every `lar_*` field declares itself as a **RFC-002 source-adapter schema** (`mempalace_source_lares`, `BaseSourceAdapter.describe_schema`), and every write validates against it and stamps the adapter identity. A declared write serves as sovereign enrichment; the same write undeclared collapses to the anti-pattern.
+
+The net (flat scalars — chroma's law):
+
+<<~ranks lar-net lar_hv ~ enrich-version gate -> lar_surface ~ originating harness -> lar_band ~ confidence band -> lar_bearing_conf ~ 0..20 gradient -> lar_aim · lar_yield ~ bearing -> lar_voices ~ who held it -> lar_confidence ~ the marks -> lar_drift ~ parse drift -> lar_hall ~ function-hall >>
+
+`lar_hv` carries the Kappa upgrade gate: a logic change bumps it, and the next sweep re-enriches exactly the stale drawers.
+
+<<~/ahu >>
+
+<<~ ahu #the-surfaces >>
+
+## The Surfaces ~ every harness, one sweep
+
+Memory recalls *and* captures across every harness, and each drawer carries its origin in `lar_surface`:
+
+\procedure ~Surface(~Type:"" ~Params:"") ~Surface <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Surface Claude "store/~~/.claude/projects route/cwd parse/native ~ CLI + VS Code ext share the store" >>
+<<~Surface Codex "store/~~/.codex/sessions/rollout-*.jsonl route/session_meta.cwd parse/native ~ Codex CLI + VS Code ChatGPT ext share the store" >>
+<<~Surface Copilot-Vscode "store/workspaceStorage/<hash>/GitHub.copilot-chat/transcripts route/path-scrape parse/normalize ~ own store, no cwd" >>
+<<~Surface Copilot-Cli "store/~~/.copilot/session-state/<id>/events.jsonl route/path-scrape parse/normalize ~ standalone CLI" >>
+
+**Recall** rides MCP (`mempalace-mcp`, a generic stdio server) into each harness home + every VS Code variant (stable + Insiders, remote + local). **Capture** mines the stored transcripts — editors fire no CLI hooks, so capture sweeps after the fact, *transcripts only*.
+
+<<~/ahu >>
+
+<<~ ahu #flat-md >>
+
+## The Flat-MD Stance ~ complement, never replace
+
+The curation files (CLAUDE.md · AGENTS.md · MEMORY.md · Copilot `memory-tool`) hold the **DO/conclusions** layer; mempalace holds the **verbatim/journey** layer; the lararium holds the **domain/canon** layer. The maintainer leaves the MD files to the human: **keep them, trim recall portions to a thin pointer at the palace, mine transcripts — never curation** (curation-of-curation inverts the verbatim thesis and double-files).
+
+Mining `bags/` design memes through `--mode projects` clears, as docs-substrate. Mining `MEMORY.md` / `project_*.md` does not.
+
+**Settled (the operator's hand, 2026-06-24):** the question MU'd — not *which* layer owns recall but **what context each owns**. The curated notes (Agent.MEMORY) keep the distilled conclusions; mempalace keeps the verbatim PLACE journey; the quine keeps the ley-line canon. Recall **composes across all four registers** and surfaces conflict to Talk-Story, never arbitrating one over another. Full model: <<~ loulou lar:///ha.ka.ba/@lares/api/pono/lararium-memory#shared-mesh >>.
+
+<<~/ahu >>
+
+<<~ ahu #federation >>
+
+## The Privacy Line ~ a gift, not a fence
+
+The verbatim journey stays on the island — **local-only, always**. Only the distilled domain bearings cross, and only as they earn the `meme` rating (federation gate, #law-of-5s). The line itself grants both intimacy and reach; blurring it to win one loses both.
+
+<<~/ahu >>
+
+<<~ ahu #the-flow >>
+
+## The Blank-Slate Flow
+
+```bash
+rm -rf ~/.mempalace ~/.lares ~/.mempalace.bak.pre350     # palace + derived stage + stale backup
+pnpm -r build                                            # CLI carries the latest (no-op if current)
+lares wake --init --claude --codex --copilot --vscode    # palace up (auto_save=false) + every surface wired
+lares harvest --all                                      # sweep every transcript surface → per-project wings
+# then reload the editor / fresh session so the live hooks fire
+```
+
+`--init` pins `hooks.auto_save=false` — the gate that keeps the vendored hook from re-paving the old `sessions` mega-wing. Full reference: <<~ loulou lar:///packages/MEMPALACE-INTEGRATION >>.
+
+<<~/ahu >>
+
+<<~ ahu #forward >>
+
+## Forward ~ where the deepening pulls
+
+- **Recall rises into the wake** ~ the boot climbs already holding the relevant journey, filtered by `lar_surface` · `lar_voices` · `lar_confidence`.
+- **The kupono seat** ~ a local, sovereign embedder behind the island earns the tier-2 seam — its first vow rejoins the turns the tools tore apart, lifting fragmented frames toward canon. No cloud breath in the parse path.
+- **The @daemon VM home** ~ lift the orchestration from the CLI projection into verb-tiddlers + the TW5 plugin.
+- **The source-adapter seam** ~ when upstream wires `mempalace mine --source`, the declared `lares` schema slots in whole.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

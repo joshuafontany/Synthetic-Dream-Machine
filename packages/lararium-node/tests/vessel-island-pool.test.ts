@@ -13,7 +13,7 @@
  *
  * All tests run against the full VesselIslandPool (no mocking of internals).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/vessel-island-pool
+ * Meme: lar:///ha.ka.ba/@lararium/node/vessel-island-pool
  */
 
 import { describe, test, expect, afterEach } from "vitest";

@@ -14,7 +14,7 @@
  * Boot ordering: workerEa resolves only after the daemon island sends "ea".
  * openBrowserVessel awaits it before emitting "live".
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/open-browser-daemon-vm
+ * Meme: lar:///ha.ka.ba/@lararium/browser/open-browser-daemon-vm
  */
 
 import {

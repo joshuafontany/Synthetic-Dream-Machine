@@ -12,7 +12,7 @@
  * Uses the real compiled node-wiki-island.js entry (not a fixture).
  * Requires: pnpm --filter @lararium/node build (dist/src/node-wiki-island.js present).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/blob-sovereignty
+ * Meme: lar:///ha.ka.ba/@lararium/node/blob-sovereignty
  */
 
 import { describe, test, expect } from "vitest";

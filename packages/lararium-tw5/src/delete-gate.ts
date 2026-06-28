@@ -18,7 +18,7 @@
  * decline-on-ambiguity). Renames are not losses, so they never count toward
  * the mass-delete brake.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/docs/lares/handoff (#watcher-talk-story)
+ * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (#watcher-talk-story)
  */
 
 export interface PendingDelete {

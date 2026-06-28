@@ -10,7 +10,7 @@
  *
  *   lares subagents <session-transcript.jsonl> --wing <wing>
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
 import { mineSubagentsForSession } from "@lararium/mempalace";

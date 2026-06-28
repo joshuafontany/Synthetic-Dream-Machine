@@ -7,7 +7,7 @@
  * them. After settle the breathing stops (the interval clears); the final
  * `ea` declaration alone speaks for a live island.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/sovereign-kernel
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/sovereign-kernel
  */
 
 import { describe, test, expect } from "vitest";

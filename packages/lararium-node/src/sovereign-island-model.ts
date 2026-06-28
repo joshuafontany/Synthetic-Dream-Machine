@@ -17,7 +17,7 @@
  *                + N hot islands (session wikis, LRU-evicted to cold).
  *   Every hot island runs via runSovereignWorker(behavior).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/sovereign-island-model
+ * Meme: lar:///ha.ka.ba/@lararium/node/sovereign-island-model
  */
 
 import { parentPort } from "worker_threads";

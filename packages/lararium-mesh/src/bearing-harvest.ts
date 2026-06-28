@@ -1,6 +1,6 @@
 /**
  * bearing-harvest — harvest the lar: bearing-vector a turn carried.
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/bearing-harvest
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/bearing-harvest
  *
  * A live agent↔operator turn opens with `<<~ lares aim <left> -> <right> >>`
  * and closes with `<<~ lares yield <left> -> ? >>`. The `<left>`/`<right>` are

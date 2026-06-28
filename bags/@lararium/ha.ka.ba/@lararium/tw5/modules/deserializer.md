@@ -1,0 +1,237 @@
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/modules/deserializer >>
+```toml iam
+body-sha256   = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
+file-path     = "bags/@lararium/tw5/modules/deserializer.md"
+heleuma       = "ka"
+mana          = 18
+manao         = 17
+manaoio       = 16
+module-ref    = "lar:///ha.ka.ba/@lararium/tw5/modules/deserializer"
+register      = "Synthesis-Canon"
+role          = "heleuma ka: TW5 tiddlerdeserializer for text/x-memetic-wikitext"
+source-symbol = "*"
+status-date   = "2026-05-01"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ka"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/tw5/modules/deserializer"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Deserializer — Contract
+
+TW5 `module-type = "tiddlerdeserializer"` module keyed to `text/x-memetic-wikitext`.
+
+When TW5 encounters a tiddler with that content-type, it calls:
+
+```
+deserializer(text: string, fields: Record<string, unknown>) → TiddlerFields[]
+```
+
+Stream model:
+- **Multi-carrier**: MemeStreamParser emits one `carrier-close` per meme; each becomes `[parent, ...children]`.
+- **Partial carrier** (no ETX): `flush()` emits best-effort; no crash.
+- **Bare body** (no SOH framing): treated as a single carrier with `fields.title` as URI.
+
+Parent tiddler: `text = original carrier text`, `type = "text/x-memetic-wikitext"`.
+Child tiddlers (ahu slots): `text = ahu body text`, also `type = "text/x-memetic-wikitext"`.
+No AST→string reconstruction. MemeticParser owns all rendering for both levels.
+
+Compiled artifact: `packages/lararium-tw5/tiddlers/src/memetic-wikitext-deserializer.js`
+Build: `pnpm --filter @lararium/tw5 build:plugin`
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+## Source
+
+```typescript
+/**
+ * deserializer — TW5 causal-island boundary module for text/x-memetic-wikitext.
+ *
+ * Heleuma ba: this TS source compiles to an CJS plugin tiddler at
+ * lar:///ha.ka.ba/@lararium/tw5/modules/deserializer
+ * (module-type: tiddlerdeserializer, key: text/x-memetic-wikitext).
+ *
+ * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).
+ * This file is the causal-island boundary: text/x-memetic-wikitext enters,
+ * TiddlerFields[] (parent + ahu-slot children) leave.
+ *
+ * Uses parseMemeText() from @lararium/mesh/meme-ast — isomorphic, no TW5 dep.
+ * Does NOT depend on carrier-split.ts (deprecated web2-era code).
+ *
+ * Incoming (disk → wiki):
+ *   memeticWikitextDeserializer — TW5 tiddlerdeserializer contract.
+ *   Multi-meme: MemeStreamParser batches carrier-close events.
+ *   Parent text model: ahu definition blocks → kahea references (children authoritative).
+ *
+ * Outgoing (wiki → disk):
+ *   expandMemeRefs — registered on $tw.lares; called by sync-adaptor.
+ *   Inverts the incoming transform: reads child bodies, reconstructs definition form.
+ */
+
+import { MemeStreamParser } from "@lararium/mesh";
+import type { MemeStreamEvent } from "@lararium/mesh";
+import { parseMemeText } from "@lararium/mesh/meme-ast";
+import type { MemeAstNode, AhuNode } from "@lararium/mesh/meme-ast";
+import { parseTaploFields } from "./toml-ast.js";
+
+export type TiddlerFields = Record<string, string | string[]>;
+
+const CONTROL_SLOTS = new Set([
+  "#iam", "#exit", "#stream-open", "#stream-close", "#stream-exit",
+  "#body-open", "#body-close", "#meme-body-open", "#meme-body-close",
+]);
+
+export function memeticWikitextDeserializer(
+  text:   string,
+  fields: Record<string, unknown>,
+): TiddlerFields[] {
+  const baseUri = String(fields?.["title"] ?? "");
+  const result: TiddlerFields[] = [];
+
+  const parser = new MemeStreamParser();
+  const events: MemeStreamEvent[] = [...parser.push(text), ...parser.flush()];
+
+  const closes = events.filter((e): e is Extract<MemeStreamEvent, { kind: "carrier-close" }> =>
+    e.kind === "carrier-close"
+  );
+
+  for (const ev of closes) {
+    const uri      = ev.uri || baseUri;
+    const tiddlers = splitMemeToTiddlers(uri, ev.fullText, asStringFields(fields));
+    result.push(...tiddlers);
+  }
+
+  if (result.length === 0 && text.trim()) {
+    result.push(...splitMemeToTiddlers(baseUri, text, asStringFields(fields)));
+  }
+
+  return result;
+}
+
+function splitMemeToTiddlers(
+  uri:        string,
+  text:       string,
+  baseFields: TiddlerFields,
+): TiddlerFields[] {
+  const { nodes } = parseMemeText(uri, text);
+  const warnings: string[]      = [];
+  const children: TiddlerFields[] = [];
+
+  for (const node of nodes) {
+    if (node.kind !== "Ahu" || !node.slot || CONTROL_SLOTS.has(node.slot)) continue;
+    const ahuNode = node as AhuNode;
+    const childTitle = uri + ahuNode.slot;
+    const bodyText   = rawBodyText(text, ahuNode);
+    const childFields = extractAhuFields(bodyText, warnings, `${uri}${ahuNode.slot}`);
+    children.push({ ...childFields, title: childTitle, text: bodyText });
+  }
+
+  const rootToml   = extractRootToml(text);
+  const rootFields = rootToml ? fieldifyToml(rootToml, warnings, uri) : {};
+  const parentText = transformParentText(text);
+
+  const parent: TiddlerFields = {
+    ...baseFields,
+    ...rootFields,
+    title: uri,
+    type:  "text/x-memetic-wikitext",
+    text:  parentText,
+  };
+
+  const result: TiddlerFields[] = [parent, ...children];
+
+  if (warnings.length > 0) {
+    const safeSlug = uri.replace(/[^a-zA-Z0-9._-]/g, "_");
+    result.push({
+      title:         `$:/lararium/parse-warning/${safeSlug}`,
+      tags:          "$:/lararium/parse-warnings",
+      "meme-uri":    uri,
+      "warning-count": String(warnings.length),
+      text:          warnings.join("\n"),
+    });
+  }
+
+  return result;
+}
+
+function rawBodyText(fullText: string, node: AhuNode): string {
+  if (!node.body.length) return "";
+  const first = node.body[0]!;
+  const last  = node.body[node.body.length - 1]!;
+  return fullText.slice(first.pos, last.pos + last.raw.length);
+}
+
+function extractRootToml(text: string): string | null {
+  const firstAhu = text.search(/<<~[^>]*\bahu\s+#[\w-]+\s*>>/);
+  const firstStx = text.search(/<<~ [^>]*&#x0002;/);
+  let limit       = text.length;
+  if (firstAhu >= 0) limit = Math.min(limit, firstAhu);
+  if (firstStx >= 0) limit = Math.min(limit, firstStx);
+  const m = /```toml[ \t]+iam[ \t]*\n([\s\S]*?)```/.exec(text.slice(0, limit));
+  return m ? (m[1] ?? null) : null;
+}
+
+function extractAhuFields(
+  bodyText: string,
+  warnings: string[],
+  context:  string,
+): TiddlerFields {
+  const iamM   = /^[ \t\n]*```toml[ \t]+iam[ \t]*\n([\s\S]*?)```/.exec(bodyText);
+  const plainM = /^[ \t\n]*```toml[ \t]*\n([\s\S]*?)```/.exec(bodyText);
+  const toml   = iamM?.[1] ?? plainM?.[1] ?? null;
+  if (!toml) return {};
+  return fieldifyToml(toml, warnings, context);
+}
+
+function fieldifyToml(
+  toml:     string,
+  warnings: string[],
+  context:  string,
+): TiddlerFields {
+  const parsed = parseTaploFields(toml);
+  const out: TiddlerFields = {};
+  for (const [k, v] of Object.entries(parsed)) {
+    if (k === "title") { warnings.push(`${context}: "title" in TOML ignored (derived from URI)`); continue; }
+    if (k === "text")  { warnings.push(`${context}: "text" in TOML ignored (derived from body)`); continue; }
+    if (Array.isArray(v)) { out[k] = (v as unknown[]).map(String); }
+    else                  { out[k] = String(v); }
+  }
+  return out;
+}
+
+function transformParentText(text: string): string {
+  return text.replace(
+    /<<~[^>]*\bahu\s+(#[\w-]+)\s*>>[\s\S]*?<<~\/ahu\s*>>/g,
+    (_, slot: string) => `<<~ kahea ahu ${slot} >>`,
+  );
+}
+
+function asStringFields(fields: Record<string, unknown>): TiddlerFields {
+  const out: TiddlerFields = {};
+  for (const [k, v] of Object.entries(fields)) {
+    if (v === null || v === undefined) continue;
+    if (Array.isArray(v)) out[k] = (v as unknown[]).map(String);
+    else                  out[k] = String(v);
+  }
+  return out;
+}
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/carrier-split >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/meme-stream >>
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/modules/deserializer >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

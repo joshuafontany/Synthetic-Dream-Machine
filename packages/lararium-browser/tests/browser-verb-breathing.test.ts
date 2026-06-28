@@ -19,7 +19,7 @@
  * the codebase's lightweight hand-written-worker fixture pattern (sibling of
  * browser-repo-in-island-echo.mjs). No build step, no checked-in bundle.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-verb-breathing
+ * Meme: lar:///ha.ka.ba/@lararium/browser/browser-verb-breathing
  */
 
 import { describe, test, expect } from "vitest";

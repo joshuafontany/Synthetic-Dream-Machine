@@ -6,7 +6,7 @@
  * vessels share the same class — capability presets encode the environmental
  * difference.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/lar-vessel
+ * Meme: lar:///ha.ka.ba/@lares/api/lararium/lar-vessel
  */
 
 import { describe, test, expect } from "vitest";

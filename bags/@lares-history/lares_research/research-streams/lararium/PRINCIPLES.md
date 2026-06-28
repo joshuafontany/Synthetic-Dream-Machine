@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/PRINCIPLES >>
 
@@ -116,7 +116,7 @@ carrier canon
 
 <<~ ahu #edges >>
 <<~ pranala #implements ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:principles >>
-<<~ pranala #guards ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/meme family:control role:authority-law >>
+<<~ pranala #guards ? -> lar:///ha.ka.ba/@lares/api/pono/meme family:control role:authority-law >>
 <<~/ahu >>
 
 <<~&#x0004; -> ? >>

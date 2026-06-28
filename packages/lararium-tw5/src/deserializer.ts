@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer
+title: lar:///ha.ka.ba/@lararium/tw5/modules/deserializer
 type: application/javascript
 module-type: tiddlerdeserializer
 \*/
@@ -7,7 +7,7 @@ module-type: tiddlerdeserializer
  * deserializer — TW5 causal-island boundary module for text/x-memetic-wikitext.
  *
  * Heleuma ba: this TS source compiles to an CJS plugin tiddler at
- * lar:///ha.ka.ba/@lararium/v0.1/tw5/modules/deserializer
+ * lar:///ha.ka.ba/@lararium/tw5/modules/deserializer
  * (module-type: tiddlerdeserializer, key: text/x-memetic-wikitext).
  *
  * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).

@@ -11,7 +11,7 @@
  * fully drained) are the daemon's async durability hooks; `onDeadLetter` quarantines a
  * poison batch durably.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#nalu-flush-hardening
+ * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#nalu-flush-hardening
  */
 
 import { appendFile, appendFileSync, mkdir, mkdirSync, readFile, writeFile } from "node:fs";

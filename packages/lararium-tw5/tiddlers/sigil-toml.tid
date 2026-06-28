@@ -2,7 +2,7 @@ title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-toml
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: data
 lar-name: toml
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext-spec
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext-spec
 lar-pattern: ```toml(?:[ \t]+([A-Za-z0-9_-]+))?[ \t]*\n([\s\S]*?)```
 type: text/vnd.tiddlywiki
 

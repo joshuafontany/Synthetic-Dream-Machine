@@ -11,18 +11,18 @@ const ROOT = "/srv/vessel";
 
 describe("bagsFileToUri — loci reverse-derivation (full-path-inside-bag)", () => {
   test("residency dir strips; the interior IS the name", () => {
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/ha.ka.ba/@lares/v0.1/api/pono/meme.md"))
-      .toBe("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme");
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/ha.ka.ba/@lares/api/pono/meme.md"))
+      .toBe("lar:///ha.ka.ba/@lares/api/pono/meme");
   });
 
   test("a foreign name held in another bag derives losslessly", () => {
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@draft/ha.ka.ba/@lares/v0.1/api/pono/meme.md"))
-      .toBe("lar:///ha.ka.ba/@lares/v0.1/api/pono/meme");
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@draft/ha.ka.ba/@lares/api/pono/meme.md"))
+      .toBe("lar:///ha.ka.ba/@lares/api/pono/meme");
   });
 
   test("pre-migration (rootless interior), non-.md, outside bags/ → null", () => {
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/v0.1/api/pono/meme.md")).toBeNull();
-    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@sdm/ha.ka.ba/@sdm/v0.1/tags/x.tid")).toBeNull();
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@lares/api/pono/meme.md")).toBeNull();
+    expect(bagsFileToUri(ROOT, "/srv/vessel/bags/@sdm/ha.ka.ba/@sdm/tags/x.tid")).toBeNull();
     expect(bagsFileToUri(ROOT, "/elsewhere/bags/@x/ha.ka.ba/@x/v1/y.md")).toBeNull();
     expect(bagsFileToUri(ROOT, "/srv/vessel/genesis/island.bin")).toBeNull();
   });

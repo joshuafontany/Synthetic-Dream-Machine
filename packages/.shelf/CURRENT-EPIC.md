@@ -1,6 +1,6 @@
 # Current Epic — Lararium Genesis Artifact + Protocol Stack
 
-> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/@lares/v0.1/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
+> ⚠ **DOUBLY STALE (design archive since 2026-05-27; the whole packages/ handoff layer froze 2026-06-07).** The live handoff is the bags pantjar torch: `bags/@lares/ha.ka.ba/@lares/docs/lares/handoff.md`. Treat this file as deep design archaeology only.
 
 > Updated: 2026-05-27
 > Branch: feature/lararium-node-4
@@ -464,5 +464,5 @@ Active pono work → packages/ROADMAP.md:
 - [Automerge storage compaction](https://patternist.xyz/posts/concurrent-compaction-in-automerge-repo/)
 - [Protocol Stack design doc](../wikis/@lares-history/lararium-research/PROTOCOL-STACK-IDENTITY-CIRCLES-SESSIONS.md)
 - [Lares CLI-daemon sprint plan](../wikis/@lares-history/lararium-research/LARES-CLI-DAEMON-SPRINT-PLAN.md)
-- `bags/@lararium/v0.1/mesh/operator-peer.md`
-- `bags/@lares/v0.1/api/lararium/save-path.md`
+- `bags/@lararium/mesh/operator-peer.md`
+- `bags/@lares/api/lararium/save-path.md`

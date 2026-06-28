@@ -12,7 +12,7 @@
  *
  * Isomorphic: no Node or browser platform APIs. Runs in any sovereign Worker.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-summons
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/verb-summons
  */
 
 import type { BatchMode, ChangeOrigin, CompositeStore, LarTiddlerChange } from "@lararium/mesh";

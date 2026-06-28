@@ -15,7 +15,7 @@
  *   lares recall --list [--wing <w>]    list drawers (no query)
  *   lares recall ... --port <n>         daemon port
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-memory#shared-mesh
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/lararium-memory#shared-mesh
  */
 
 import { loadVesselVerifyingKey } from "@lararium/node";

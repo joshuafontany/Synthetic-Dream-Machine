@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lares-history/lares_research/research-streams/lararium/SESSION >>
 
@@ -13,7 +13,7 @@ manaoio      = 17
 mana         = 18
 manao        = 17
 implements   = [
-  "lar:///ha.ka.ba/@lares/v0.1/api/pono/meme"
+  "lar:///ha.ka.ba/@lares/api/pono/meme"
 ]
 role         = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 ```
@@ -317,7 +317,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ✶ Priority TypeScript/TSX source files now seed into the Automerge store as navigable memes at boot. URI scheme: `lar:///source/<package-name>/src/<relative-path>`. Body = verbatim source text. Fields carry `package`, `src-path`, `lang`, `built-at`, `content-hash`.
 
-⏿ Implementation: `scripts/source-memes.ts` reads 7 priority files from packages/. `build-snapshot-lib.ts` calls `buildSourceMemes()` and merges results into `BuiltSnapshot.memes` with `laresRelPath: null`. `serve.ts` seeding loop passes `fields` through to the Automerge doc. Interface law: `packages/lares-core/memes/api/v0.1/pono/source-module.md`.
+⏿ Implementation: `scripts/source-memes.ts` reads 7 priority files from packages/. `build-snapshot-lib.ts` calls `buildSourceMemes()` and merges results into `BuiltSnapshot.memes` with `laresRelPath: null`. `serve.ts` seeding loop passes `fields` through to the Automerge doc. Interface law: `packages/lares-core/memes/api/pono/source-module.md`.
 
 ◇ Priority modules: `parser.ts`, `ast.ts`, `causal-island.ts`, `live-protocol.ts` (lararium-mesh); `lararium-tw5.ts` (lararium-tw5); `LarariumPanel.tsx`, `LarariumShell.tsx` (lararium-app). All readable through the meme graph as `lar:///source/...` URIs.
 
@@ -360,7 +360,7 @@ All 62 unit tests green after removal.
 
 ### Added this session (M10)
 
-- **Streams plugin vendor** — sq/streams v1.2.24 at `lar:///ha.ka.ba/@lares/api/v0.1/vendor/sq-streams`; compat fields (`parent`/`stream-list`/`stream-type`) emitted from `splitCarrierToTiddlers`
+- **Streams plugin vendor** — sq/streams v1.2.24 at `lar:///ha.ka.ba/@lares/api/vendor/sq-streams`; compat fields (`parent`/`stream-list`/`stream-type`) emitted from `splitCarrierToTiddlers`
 - **Mixed prose/children** — `generateParentText()` walks AST in document order; prose + transcludes interleaved (daemon-in-the-walls pattern)
 - **Peer-correct disk projector** — `LarDiskProjector` subscribes to Automerge store directly; `writing` Set exposes echo-loop guard to file watcher
 - **WorksiteWidget anchor** — no `renderChildren`; template owns all slot content; double-render eliminated
@@ -464,7 +464,7 @@ packages/lararium-node/
 
 ◇ FFZ 5-Scale changeset model, locked:
 
-  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale`.
+  Attention-scale register names now canonical: **Pulse** (0) / **Beat** (1) / **Measure** (2, default band) / **Arc** (3) / **Theme** (4). Canonical meme: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`.
 
   | Scale | Register Name | Automerge unit | MemeProvider event |
   |---|---|---|---|
@@ -725,7 +725,7 @@ Systematic 8-file rename; tsc verify after batch. `pranala.md` role array also u
 | `@lararium/mesh` `kumu-device.ts` | `KumuListenable/KumuSubscribable`; `.listenables/.subscribables`; role checks; `_fireForUri` |
 | `@lararium/tw5` `parser.web2.ts` | Payload key assignments |
 | `@lararium/tw5` `memetic-parser.web2.ts` | papalohe widget attribute keys |
-| `packages/lares-core/memes/api/v0.1/pono/pranala.md` | `reaction` roles array |
+| `packages/lares-core/memes/api/pono/pranala.md` | `reaction` roles array |
 | `packages/lares-core/lararium-node/ROADMAP.md` | Shifts 5–7 text; new ahu section |
 | `packages/lares-core/memes/SESSION.md` | This section |
 
@@ -837,7 +837,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 Each corpus `MemeStoreDoc` carries `tiddlers[corpusLarUri(slug)]` self-ref tiddler. Browser peer reads corpus discovery from `CatalogDoc.tiddlers`, not the legacy `corpora` Record.
 
 **M19 — Automerge Tiga:**
-`LARES_DOC_URI` constant. `seedLaresDoc()`. `reconcileWellKnownTiddlers` threaded with `laresUrl`. `lares` bag in `CompositeStore` both peers. `automerge-tiga.md` invariant meme at `lar:///ha.ka.ba/@lararium/mesh/v0.1/automerge-tiga`. SDM metaphysics: ha = LarariumDoc (structure), ka = CatalogDoc (motion), ba = LaresDoc (personality).
+`LARES_DOC_URI` constant. `seedLaresDoc()`. `reconcileWellKnownTiddlers` threaded with `laresUrl`. `lares` bag in `CompositeStore` both peers. `automerge-tiga.md` invariant meme at `lar:///ha.ka.ba/@lararium/mesh/automerge-tiga`. SDM metaphysics: ha = LarariumDoc (structure), ka = CatalogDoc (motion), ba = LaresDoc (personality).
 
 **M20 — Bag ID = lar: URI everywhere:**
 `LarariumDocStore<T>` generic over any `{ tiddlers? }` doc. `corpusBagId` = alias of `corpusLarUri`. `roomBagId` = alias of `roomLarUri`. `BAG_IDS` exports lar: URI constants. Catalog bag layer added to both peers. `fields: { bag }` duplication stripped from all oracle tiddler writes. `MemeSyncAdaptor` receives `roomLarUri(roomId)`. All three packages build clean.

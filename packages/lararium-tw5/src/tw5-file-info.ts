@@ -17,7 +17,7 @@
  * NOT ported (Node-only, the projector's job): the `fs.existsSync` uniquifier and
  * the `$tw.boot`/`th-make-tiddler-path` write-path encoding (filesystem.js:382-408).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/tw5-file-info
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/tw5-file-info
  */
 
 import type { TW5Instance } from "./types/tiddlywiki.js";

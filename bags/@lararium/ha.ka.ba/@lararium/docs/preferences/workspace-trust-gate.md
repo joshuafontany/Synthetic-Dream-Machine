@@ -1,0 +1,74 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/docs/preferences/workspace-trust-gate >>
+```toml iam
+cacheable = false
+file-path = "bags/@lararium/docs/preferences/workspace-trust-gate.md"
+mana      = 17
+manao     = 17
+manaoio   = 18
+register  = "Synthesis"
+retain    = false
+role      = "docs concept room for trust checkpoints before costly shell, git, and workspace actions"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/meme", "lar:///ha.ka.ba/@lares/api/pono/loci"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/docs/preferences/workspace-trust-gate"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #meme-header >>
+
+# Lararium Preferences — Workspace Trust Gate
+
+Not invariant law.
+This room holds a specific recovered operational principle: trust should checkpoint before execution crosses into costly or irreversible territory.
+
+<<~/ahu >>
+
+<<~ ahu #provenance >>
+
+## Provenance
+
+Strong witnesses recur in:
+
+- `prompts/Lares_Preferences.system-prompt.md`
+- `prompts/core/Lares_Permissions.core.md`
+- `prompts/Lares_VSCode_Operations.repo-ops.md`
+- permissions and repo-ops snapshots
+
+<<~/ahu >>
+
+<<~ ahu #pressure >>
+
+## Pressure
+
+The old stack does not want every action blocked.
+It wants the node to name specific risk mechanisms before shell, git, or external-tool execution steps that change the world materially.
+
+Durable elements:
+
+- checkpoint before action, not after damage
+- one concise reason, not ceremony flood
+- trust retained within scope once established
+- re-check when scope escalates, especially toward destructive or credential-bearing acts
+
+This principle feels distinct from the broader transference model.
+Identity explains who may ask.
+The workspace trust gate explains when the node must pause anyway.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/docs/preferences >>
+<<~ loulou lar:///ha.ka.ba/@lararium/docs/preferences/identity-permissions >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

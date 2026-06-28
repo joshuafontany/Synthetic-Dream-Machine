@@ -197,7 +197,7 @@ The World-Time profile sits above the exploration/campaign clock and tracks long
 
 This profile applies in campaign worlds, persistent simulations, and any domain that requires a calendar sitting above the session/exploration clock. W4 Era remains unbounded by the same anti-aliasing invariant as exploration L4 Theme.
 
-Canonical reference: `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`
+Canonical reference: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`
 
 ---
 
@@ -221,7 +221,7 @@ In the OODA-HA mapping, "orient-act" precisely marks the moment perception resol
 
 The PENTADIC invariant itself holds without modification. The register names (Pulse/Beat/Measure/Arc/Theme) provide unified labels above all domain aliases (sub-action/action/session/day/epoch for default Lares; Action/Round/Turn/Watch/Week for FTLS/TTRPG game time). Domain aliases remain valid within their domain; register names apply system-wide.
 
-Canonical reference: `lar:///ha.ka.ba/@lares/api/v0.1/pono/attention-scale`
+Canonical reference: `lar:///ha.ka.ba/@lares/api/pono/attention-scale`
 
 ---
 

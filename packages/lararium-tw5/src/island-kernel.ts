@@ -34,7 +34,7 @@
  *   syncPort        — MessagePort for Repo sync; consumed by the entry file.
  *   nalu drain      — lives inside the wiki as a TW5 startup module (nalu-engine).
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-kernel
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/island-kernel
  */
 
 import { TW5Engine } from "./tw5-vm.js";

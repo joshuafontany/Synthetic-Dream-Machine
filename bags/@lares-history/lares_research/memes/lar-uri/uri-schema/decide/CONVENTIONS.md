@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=CS:18&p=10 -->
 
@@ -11,7 +11,7 @@
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:19#mandatory-rules -->
 ## Mandatory Conventions (Canonical Record Form)
@@ -40,7 +40,7 @@ These rules apply to every `lar:` URI. No exceptions.
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#query-params -->
 ## Query Parameter Reference
@@ -73,7 +73,7 @@ These rules apply to every `lar:` URI. No exceptions.
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#fragment-chronometer -->
 ## Fragment: FFZ Chronometer
@@ -114,7 +114,7 @@ HUD:     ✶0.✶0.✶3.◇2.■1
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:19#hud-line -->
 ## HUD Line Format
@@ -145,7 +145,7 @@ The HUD line is a single-line status summary rendered from the URI → URI excha
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#span-closing-sigils -->
 ## Span Closing Sigils
@@ -190,7 +190,7 @@ When multiple stances are elevated (`+`), the declared confidence sits at the in
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#stable-address -->
 ## Stable Address Form
@@ -208,7 +208,7 @@ Origin address: `lar:///ha.ka.ba/` is the (0,0,0) of l-space.
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/decide/?confidence=C:18#spanspan-record -->
 ## SpanSpan Record URI Fields

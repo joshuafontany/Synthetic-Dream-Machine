@@ -17,7 +17,7 @@
  * Failures are pono alignment intent vectors — they name the exact broken link
  * in the pipeline above.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/m3-breathing
+ * Meme: lar:///ha.ka.ba/@lararium/node/m3-breathing
  */
 
 import { describe, test, expect } from "vitest";

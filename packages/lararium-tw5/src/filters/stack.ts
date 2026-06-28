@@ -1,5 +1,5 @@
 /*\
-title: lar:///ha.ka.ba/@lararium/v0.1/tw5/filters/stack
+title: lar:///ha.ka.ba/@lararium/tw5/filters/stack
 type: application/javascript
 module-type: filteroperator
 \*/

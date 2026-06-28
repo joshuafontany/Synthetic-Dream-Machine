@@ -1,0 +1,72 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@sdm/witness/abilities/uvg-bestiary/neural-whip >>
+```toml iam
+cacheable = true
+file-path = "bags/@sdm/ha.ka.ba/@sdm/witness/abilities/uvg-bestiary/neural-whip.md"
+mana      = 11
+manao     = 16
+manaoio   = 17
+register  = "Synthesis-Canon"
+retain    = true
+role      = "UVG bestiary witness for Neural Whip — Cave Octopus provenance, cold-load"
+l-space   = "sdm"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@sdm/witness/abilities/uvg-bestiary/neural-whip"
+```
+
+<<~ &#x0002; >>
+
+# UVG Witness — Neural Whip
+
+<<~ ahu #source >>
+
+## Source
+
+```toml witness
+creature = "Cave Octopus"
+level = "L16"
+descriptors = ["doddering", "kind"]
+habitat = "photo-lume limestone karst; a 300m spherical cavern left by an ancient combat ritual"
+book = "Ultraviolet Grasslands and the Black City 2e"
+locus = "the Black City approaches"
+```
+
+> *"It is huge and many-colored, with **neural whip tentacles** and severe photophobia."*
+
+The Cave Octopus is a **Biomancer Extraordinaire** — it replaced its human body with a many-tentacled form adapted to the dark, nutrient-rich broth of the yellow water. The neural whips are its reach into the world: defensive, exploratory, and (when its failing experiments demand) acquisitive. It is convinced the world has ended and that only its flailing biomantic work can revive it.
+
+<<~/ahu >>
+
+<<~ ahu #lift >>
+
+## What the module lifts
+
+The v0.1 **Neural Whip** module abstracts the creature's signature tentacle into a portable affordance:
+
+- **stuckforce + restrain + attack** — a force-sheathed nerve coil that strikes against Defense and seizes. The source creature leads with the grip, not pure damage; the module honours that.
+- **trait mount** — innate to the creature; not a learned spell. This is the point the module proves: the Power template covers a monster's intrinsic ability with no shape change.
+- The **biomancer** flavour (recombining bodies, neural tissue) stays prose; the module does not promote a `domain/noosphere` component until a second, mind-jolting neural Power demands the address.
+
+<<~/ahu >>
+
+<<~ ahu #fidelity >>
+
+## Fidelity notes
+
+- UVG states the whips and photophobia but gives no discrete attack line — UVG runs on Level + descriptors, not stat blocks. The module's P / range / break-free numbers are an SDM interpolation, flagged for play-test calibration.
+- The Cave Octopus is `kind` and `doddering`; the whip reads as defence and curiosity first, aggression last. Module mishaps (gripping the wrong target, going slack) preserve that doddering register.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@sdm/modules/abilities/neural-whip >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

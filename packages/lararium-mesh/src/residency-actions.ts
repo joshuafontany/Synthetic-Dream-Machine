@@ -28,7 +28,7 @@
  *   prior mesh identity). CLEAR / DROP operate on whole bags and carry no
  *   changeId.
  *
- * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  * Sprint:  Residency Model Epic — S2.1 / S2.2 / S2.3 / S2.4 / S2.6
  * Source:  packages/lararium-mesh/src/residency-actions.ts
  */

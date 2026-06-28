@@ -7,7 +7,7 @@
  * member. Each cap's onEa returns the watch's stop fn, which composeIsland registers as a LIFO
  * teardown.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/island-caps
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/island-caps
  */
 
 import { startEngineWatch } from "./engine-watch.js";

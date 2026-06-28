@@ -15,7 +15,7 @@
  * Boot ordering: `workerEa` resolves only after the daemon island sends `ea`.
  * `openNodeVessel` awaits it before emitting `"live"`.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/node/open-daemon-vm
+ * Meme: lar:///ha.ka.ba/@lararium/node/open-daemon-vm
  */
 
 import { join }                                          from "path";

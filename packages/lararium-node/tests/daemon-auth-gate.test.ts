@@ -9,7 +9,7 @@
  * that proxies to the daemon island, which does receiveContactCard + verify
  * in-worker and returns the verdict plus the peer's Identifier hex.
  *
- * Gate: lar:///ha.ka.ba/@lararium/v0.1/node/daemon-auth-gate
+ * Gate: lar:///ha.ka.ba/@lararium/node/daemon-auth-gate
  */
 
 import { describe, test, expect, beforeEach, afterEach } from "vitest";

@@ -1,8 +1,8 @@
 /**
  * open-vessel — THE vessel orchestrator (one keel, both sides).
  *
- * Canon: lar:///ha.ka.ba/@lararium/v0.1/mesh/open-vessel +
- * lar:///ha.ka.ba/@lararium/v0.1/api/lararium-canonical-model. Radical-alpha: the old
+ * Canon: lar:///ha.ka.ba/@lararium/mesh/open-vessel +
+ * lar:///ha.ka.ba/@lararium/api/lararium-canonical-model. Radical-alpha: the old
  * open-node-vessel / open-browser-vessel FORK is deleted; both platforms become thin
  * RECIPES over this one orchestrator. The substrate keel (composite cascade, genesis,
  * social plane, daemon doc, wiki-slot) lives VM-free in mesh (assembleVessel +

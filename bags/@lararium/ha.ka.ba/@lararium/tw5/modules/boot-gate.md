@@ -1,0 +1,133 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/modules/boot-gate >>
+```toml iam
+file-path     = "bags/@lararium/tw5/modules/boot-gate.md"
+heleuma       = "ha"
+mana          = 17
+manao         = 17
+manaoio       = 16
+register      = "Synthesis-Canon"
+role          = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
+source-symbol = "_bootModules"
+status-date   = "2026-04-30"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/heleuma/ha"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/tw5/modules/boot-gate"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Boot Gate
+
+Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. Queries all tiddlers that WEAR the tw5-module component (`[stack:has[lar:///ha.ka.ba/@lararium/tw5/tw5-module]]` — the has-stack model) and applies three layers of trust before injecting them as live JS modules.
+
+**This code cannot be loaded from a meme.** It requires a live `$tw` instance and operates as the mechanism that promotes memes into executables. It lives in `packages/lararium-tw5/src/lararium-tw5.ts` as `_bootModules()`.
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+## Source (TypeScript — compiled-in)
+
+```typescript
+private async _bootModules(): Promise<void> {
+    // Called only from the boot() callback after this._tw = instance — never null here.
+    if (!this._tw) return;
+    const tw   = this._tw;
+    const wiki = tw.wiki;
+
+    // --- Corpus-gated path ---------------------------------------------------
+    // Register implementors filter operator first so the query below works.
+    // Safe to call before corpus load — only needs tw.filterOperators map.
+    registerImplementorsOperator(tw);
+
+    let injected = 0;
+    try {
+      const iface = LarariumTW5.MODULE_INTERFACE_URI;
+      const titles: string[] = wiki.filterTiddlers(
+        `[all[tiddlers]implementors[${iface}]]`
+      ) ?? [];
+      for (const title of titles) {
+        const t = wiki.getTiddler(title);
+        if (!t) continue;
+        const f = t.fields as Record<string, string>;
+
+        // Layer 1 — threshold
+        const mana       = parseFloat(f["mana"]       ?? "0");
+        const manao      = parseFloat(f["manao"]      ?? "0");
+        const manaoio    = parseFloat(f["manaoio"]    ?? "0");
+        const confidence = parseFloat(f["confidence"] ?? "0");
+        if (
+          mana       < LarariumTW5.MODULE_MANA_THRESHOLD       ||
+          manao      < LarariumTW5.MODULE_MANAO_THRESHOLD       ||
+          manaoio    < LarariumTW5.MODULE_MANAOIO_THRESHOLD     ||
+          confidence < LarariumTW5.MODULE_CONFIDENCE_THRESHOLD
+        ) continue;
+
+        const body = f["text"] ?? "";
+        if (!body.trim() || body.startsWith("// Body injected")) continue;
+
+        // Layer 2 — content hash
+        const claimedHash = f["body-sha256"] ?? "";
+        if (!claimedHash || !(await LarariumTW5._verifySha256(body, claimedHash))) continue;
+
+        // Threshold + hash passed — hand $tw.wiki to this meme.
+        wiki.addTiddler(new tw.Tiddler({
+          title,
+          type:           "application/javascript",
+          "module-type":  f["module-type"] ?? "library",
+          text:           body,
+          tags:           [],
+        }));
+        injected++;
+      }
+    } catch { /* filter unavailable — fall through to imperative path */ }
+
+    if (injected > 0) {
+      try {
+        const moduleText = wiki.getTiddler(
+          "lar:///ha.ka.ba/@lararium/tw5/modules/tw5-modules"
+        )?.fields?.["text"] ?? "";
+        tw.modules.define(moduleText, "library", "lararium-tw5-modules");
+      } catch { /* no-op */ }
+      return;
+    }
+
+    // --- Imperative fallback -------------------------------------------------
+    // No corpus module memes passed the threshold. Register directly from the
+    // compiled-in classes. This path is permanent for offline/cold-boot and
+    // during the transition before pnpm bundle has run.
+    // implementors operator already registered above; no-op to call again.
+    const parsers: Record<string, unknown> = tw?.Wiki?.parsers ?? {};
+    import("./memetic-parser.js").then(({ MemeticParser }) => {
+      parsers["text/x-memetic-wikitext"] = MemeticParser;
+    }).catch(() => { /* not critical */ });
+
+    LarariumTW5._registerDeserializer(tw);
+    LarariumTW5._registerWidgets(tw);
+  }
+```
+
+<<~/ahu >>
+
+<<~ ahu #thresholds >>
+
+## Gate Constants
+
+| Field | Constant | Floor |
+|---|---|---|
+| `mana` | `MODULE_MANA_THRESHOLD` | 16 |
+| `manao` | `MODULE_MANAO_THRESHOLD` | 16 |
+| `manaoio` | `MODULE_MANAOIO_THRESHOLD` | 15 |
+| `confidence` | `MODULE_CONFIDENCE_THRESHOLD` | 16 |
+
+Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer 3 (keyhive capability proof) remains planned; not yet implemented — gate currently passes on layers 1–2 only.
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

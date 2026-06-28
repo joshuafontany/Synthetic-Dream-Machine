@@ -13,7 +13,7 @@
  *
  * Gradient, never verdict: buildPatch records 0..20 band readings, never pass/fail.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry
+ * Meme: lar:///ha.ka.ba/@lararium/api/lar-telemetry
  */
 
 import { execFileSync } from "node:child_process";

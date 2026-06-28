@@ -1,7 +1,7 @@
 /**
  * bag-paths — URI → mirror-relative-path factories.
  *
- * The named-bag layout (`bags/@NAME/v0.1`) makes per-scope path computation
+ * The named-bag layout (`bags/@NAME`) makes per-scope path computation
  * derivable from the bag scope alone. No oracle tiddler `path-filter` field
  * needed. Factories are pure functions; no I/O, no module state.
  */
@@ -78,7 +78,6 @@ export function confineMirrorWrite(
 }
 
 const HA_KA_BA_PREFIX = "lar:///ha.ka.ba/";
-const BAG_VERSION = "v0.1";
 
 function splitHash(s: string): [string, string | null] {
   const i = s.indexOf("#");
@@ -104,8 +103,8 @@ function toRelMd(pathPart: string, frag: string | null): string | null {
  * directory = residency, interior path = the name, whole. Any bag projects
  * any stable name losslessly; reverse derivation = strip root, read name.
  *
- *   lar:///ha.ka.ba/@lares/v0.1/api/pono/meme
- *     → ha.ka.ba/@lares/v0.1/api/pono/meme.md   (relative to the bag mirror root)
+ *   lar:///ha.ka.ba/@lares/api/pono/meme
+ *     → ha.ka.ba/@lares/api/pono/meme.md   (relative to the bag mirror root)
  *
  * Fragments (#children) live inside their parent carrier file → null.
  * Unstable roots carry no siting → null (loci law).

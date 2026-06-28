@@ -12,7 +12,7 @@
  *             verb; the island runs the full §6 gate (its currentRenderHash
  *             = the third leg) and answers per-carrier decisions
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/docs/lares/handoff (NEXT VECTOR, build 2)
+ * Meme: lar:///ha.ka.ba/@lares/docs/lares/handoff (NEXT VECTOR, build 2)
  */
 
 import { createInterface } from "readline/promises";

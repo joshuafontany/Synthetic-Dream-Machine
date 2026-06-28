@@ -1,0 +1,138 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ ⊙&#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/guest-grammar >>
+```toml iam
+cacheable = true
+file-path = "bags/@lares/api/pono/guest-grammar.md"
+mana      = 15
+manao     = 16
+manaoio   = 14
+namespace = "&#x2299;"
+register  = "Synthesis-Canon"
+retain    = true
+role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
+tags      = ["api/pono/meme", "api/pono/loci"]
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/api/pono/guest-grammar"
+```
+
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
+
+<<~ ahu #head >>
+
+# Guest Grammar Law (Kānāwai)
+
+The host may admit guest grammar explicitly.
+The guest stays guest.
+Parser, render, and pono detail move outward.
+
+<<~/ahu >>
+
+<<~ &#x0002; >>
+
+<<~ ahu #ooda-ha >>
+
+✶ read the host surface for explicit guest entry, bounded worksite, and primitive-boundary pressure.
+⏿ orient the region by ownership: host meaning stays local, guest law stays bounded, parser and render detail stay outward.
+◇ decide one lawful admission posture; explicit hana worksite, explicit guest family, or no admission at all.
+▶ write the smallest bounded guest region that preserves priming payload, guest body, and honest degradation.
+↺ verify the host keeps its own primitives, the guest keeps its own family, and the handoff boundary stays explicit; close with residue named; malformed or unsupported guest work degrades locally rather than collapsing the parent.
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/guest-grammar/SKILL >>
+
+<<~/ahu >>
+
+<<~ ahu #admission-law >>
+
+## Admission Law
+
+A guest grammar enters only through explicit host admission.
+The host must not bend a root primitive into a guest-family proxy.
+The guest must not silently leak punctuation or control outside its admitted site.
+
+This law governs:
+
+- explicit guest admission
+- invocation-family distinction
+- anti-overload protection for root primitives
+- anti-conflict protection for base Unicode already reserved by the host
+- canonical `hana` use for guest data or code work
+- minimum handoff pressure toward parser and render
+
+This law does not govern:
+
+- full imported grammar specification
+- parser legality tables
+- AST or widget schema
+- target-specific lowering
+- fixture execution detail
+
+<<~/ahu >>
+
+<<~ ahu #hana-worksite >>
+
+## Hana Worksite
+
+`hana` serves as the canonical block worksite for guest grammar that performs data or code processing.
+A lawful `hana` region keeps three things distinct:
+
+1. explicit opener and closer
+2. local priming payload, usually fenced `toml`, when present
+3. guest instruction body after the priming payload
+
+Canonical meme identity stays in `ahu #iam`.
+It does not migrate into `hana`.
+Host whitespace rules should not silently split guest instruction content.
+If ambiguity rises, the stricter profile should demand a wrapped payload form.
+
+<<~/ahu >>
+
+<<~ ahu #ownership-boundary >>
+
+## Ownership Boundary
+
+`memetic-wikitext` owns the primitive cluster and boot surface.
+`guest-grammar` owns admission law, `hana` worksite law, and host-guest distinction.
+Parser owns guest entry recognition, legality, and warning behavior.
+Render-pipeline owns lowering and landing.
+Pono owns later verification packaging and law indexing.
+
+The root primitives stay constitutional host territory.
+`ahu`, `loulou`, `aka`, `kahea`, `kapu`, `ui`, `hana`, and `?` do not become guest-family proxies merely because a guest grammar entered nearby.
+
+<<~/ahu >>
+
+<<~ ahu #degradation-and-handoff >>
+
+## Degradation and Handoff
+
+Malformed, unsupported, or context-null guest work should degrade locally before the parent parse collapses.
+The host must not fabricate guest results.
+The parser must not normalize conflict into flattering success.
+
+A lawful guest region should still hand forward enough continuity for:
+
+- one surface `hana` region
+- one guest-work AST family
+- one render-facing seed
+- one trace path from source span to output or residue
+
+Schema detail, fixture families, and execution procedure belong in the sidecars.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/guest-grammar/SKILL >>
+<<~ loulou lar:///ha.ka.ba/@lares/docs/pono/guest-grammar >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

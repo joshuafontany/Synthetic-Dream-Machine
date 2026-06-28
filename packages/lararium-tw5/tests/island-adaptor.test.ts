@@ -17,7 +17,7 @@
  *
  * All tests use FakeTW5Engine (no TW5 boot) and MemoryTiddlerStore.
  *
- * Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/island-adaptor
+ * Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/island-adaptor
  */
 
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest";

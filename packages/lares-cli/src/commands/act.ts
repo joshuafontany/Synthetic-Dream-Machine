@@ -28,7 +28,7 @@
  * withEffectRecord (writes the archival audit tiddlers).
  *
  * Sprint:  Residency Model Epic — S5.4
- * Meme:    lar:///ha.ka.ba/@lararium/v0.1/api/residency-model
+ * Meme:    lar:///ha.ka.ba/@lararium/api/residency-model
  */
 
 import { createInterface } from "node:readline/promises";

@@ -13,7 +13,7 @@
  * (Filename kept as browser-wiki-worker for the app's external spawn URL; the
  * browser-wiki-island suffix-rename awaits app-side coordination.)
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-wiki-worker
+ * Meme: lar:///ha.ka.ba/@lararium/browser/browser-wiki-worker
  */
 
 import { runBrowserSovereignWorker } from "./browser-sovereign-island-model.js";

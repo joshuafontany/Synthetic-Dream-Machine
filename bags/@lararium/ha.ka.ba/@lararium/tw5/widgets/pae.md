@@ -1,0 +1,48 @@
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/tw5/widgets/pae >>
+```toml iam
+body-sha256   = "c07b3df5af791f4014879ee3530ed3ee59c1a06a7b41979ee2946118439d1955"
+cacheable     = true
+file-path     = "bags/@lararium/tw5/widgets/pae.md"
+heleuma       = "ka"
+mana          = 18
+module-ref    = "lar:///ha.ka.ba/@lararium/tw5/widgets/pae"
+register      = "Synthesis-Canon"
+retain        = true
+role          = "anchor: PaeWidget — heleuma ka"
+source-symbol = "PaeWidget"
+tags      = ["lar:///ha.ka.ba/@lares/api/pono/pae", "tw5/modules/tw5-widgets"]
+type          = "text/x-memetic-wikitext"
+uri-path      = "ha.ka.ba/@lararium/tw5/widgets/pae"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #contract >>
+
+## Contract
+
+`<$pae>` is a phase-marker widget. Carries no visible output — phase metadata lives in the AST.
+
+<<~/ahu >>
+
+<<~ ahu #source >>
+
+## Source
+
+```typescript
+export function PaeWidget(this: TW5WidgetInstance, parseTreeNode: TW5ParseTreeNode, options: Record<string, unknown>) {
+  this.initialise(parseTreeNode, options);
+}
+```
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/@lararium/tw5/widgets/pae >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

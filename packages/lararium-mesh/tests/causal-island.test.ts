@@ -5,7 +5,7 @@
  * and Orichalcum capabilities. Relay-law exception: pull carries bytes across
  * causal island boundaries without granting read (decrypt) semantics.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+ * Meme: lar:///ha.ka.ba/@lares/api/pono/causal-islands
  */
 
 import { describe, test, expect } from "vitest";

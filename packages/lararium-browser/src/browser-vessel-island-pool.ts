@@ -11,7 +11,7 @@
  * No storage seam: each browser island owns its IndexedDB partition keyed by
  * its wiki URI (set inside the island kernel), so the host returns undefined.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/browser/browser-vessel-island-pool
+ * Meme: lar:///ha.ka.ba/@lararium/browser/browser-vessel-island-pool
  */
 
 import {

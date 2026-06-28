@@ -58,7 +58,7 @@ export type LarPrincipal =
 // ---------------------------------------------------------------------------
 // Access axis — Axis 1 of the refined authority model
 //
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/api/pono/causal-islands
 //
 // The authority model has THREE structural axes plus one alignment plane
 // (refined 2026-06-01 against Frazee "Practical Decentralization" + prior-art
@@ -70,7 +70,7 @@ export type LarPrincipal =
 //   Axis 3 — POWERS   — separation of host/relay/aggregate/address/moderate;
 //                       lar:/// host-independent addressing is the lever.
 //   Plane 0 — ALIGNMENT — non-monotonic, subjective trust (the "lemures" plane).
-//                       lar:///ha.ka.ba/@lares/v0.1/api/pono/alignment-layer
+//                       lar:///ha.ka.ba/@lares/api/pono/alignment-layer
 //
 // The ACCESS axis is a 1:1 mirror of Keyhive's native Access enum (Pull, Read,
 // Edit, Daemon) — NOT a parallel Lararium-invented ladder. The live gate is
@@ -276,7 +276,7 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 // A peer that has not completed step 3 MUST NOT request individual meme deltas.
 // ---------------------------------------------------------------------------
 
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/api/pono/causal-islands
 export const AUTHORITY_FIRST_ORDER = [
   "authenticate-peer",         // 1
   "sync-authority-graph",      // 2
@@ -363,7 +363,7 @@ export class AuthorityFirstGuard {
  * Things that MUST become causal islands (cross-node causality errors become
  * federation corruption and cannot be corrected inside a single node).
  */
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/api/pono/causal-islands
 export const CAUSAL_ISLAND_MUST = [
   "node-to-node-federation-edge",
   "cross-node-pranala-connection",
@@ -388,7 +388,7 @@ export type CausalIslandMust = typeof CAUSAL_ISLAND_MUST[number];
  * explicit even though no ceremony moves them — they qualify as islands
  * by topology.
  */
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/pono/causal-islands
+// Schema: lar:///ha.ka.ba/@lares/api/pono/causal-islands
 export const CAUSAL_ISLAND_MAY = [
   "wiki",
   "meme",
@@ -419,7 +419,7 @@ export type CausalIslandMay = typeof CAUSAL_ISLAND_MAY[number];
 //
 // NOTE: this RESIDENCY temperature (wela/anu) is DISTINCT from the ontological
 // causal-island Tier 0-3 in this file's header doctrine.
-// Canon: lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers
+// Canon: lar:///ha.ka.ba/@lararium/api/residency-tiers
 // ===========================================================================
 /** A bag's URL — Automerge doc URL, e.g. "automerge:abc123…". */
 export type BagUrl = string;
@@ -427,7 +427,7 @@ export type BagUrl = string;
 /**
  * Residency TEMPERATURE of an island/bag — the thermal axis, in ʻōlelo Hawaiʻi.
  *
- * Canon: lar:///ha.ka.ba/@lararium/v0.1/api/residency-tiers
+ * Canon: lar:///ha.ka.ba/@lararium/api/residency-tiers
  *
  *   wela ("hot")  — live + reacting; handle in cache; the island's Worker runs.
  *   anu  ("cold") — torn down; URL known, doc not loaded; resume by spawn + `ea`.

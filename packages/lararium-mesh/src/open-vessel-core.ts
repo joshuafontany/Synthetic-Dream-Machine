@@ -1,7 +1,7 @@
 /**
  * open-vessel-core — the ONE composable vessel, in code (mesh-resident).
  *
- * Canon: lar:///ha.ka.ba/@lararium/v0.1/mesh/open-vessel. A vessel IS a composition:
+ * Canon: lar:///ha.ka.ba/@lararium/mesh/open-vessel. A vessel IS a composition:
  * a recipe naming which sovereign pieces it carries + the few substrate values each
  * resolves native-first. Node and browser differ ONLY in capabilities, never in
  * structure (Ink & Switch): both walk this ONE protocol sequence.

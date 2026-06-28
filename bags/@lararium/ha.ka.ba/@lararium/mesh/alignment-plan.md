@@ -1,0 +1,133 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/alignment-plan >>
+```toml iam
+cacheable = true
+file-path = "bags/@lararium/mesh/alignment-plan.md"
+mana      = 19
+manao     = 18
+manaoio   = 18
+register  = "Synthesis"
+retain    = true
+role      = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
+l-space   = "lararium"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lararium/mesh/alignment-plan"
+```
+
+<<~ &#x0002; >>
+
+# Package Alignment Plan
+
+Governs the package dependency graph and the placement of shared concerns in the monorepo.
+This meme belongs in `@lararium/mesh` because mesh anchors the spine this plan describes.
+
+<<~ ahu #dep-graph >>
+
+## Canonical Dependency Graph
+
+```
+@lares/core             (no deps)
+@lararium/mesh          → @lares/core, @automerge/automerge, @automerge/automerge-repo
+@lararium/tw5           → @lares/core, @lararium/mesh
+@lararium/node          → @lararium/tw5, @lararium/mesh
+@lararium/browser       → @lararium/mesh, @lararium/tw5     (in progress — S1 contract landed)
+@lares/cli              → @lararium/mesh
+```
+
+No arrows go upstream. No package adds a dep that reaches into a downstream package.
+`@lararium/tw5` does not depend on `@lararium/node`.
+`@lararium/mesh` does not depend on `@lararium/tw5`.
+
+<<~/ahu >>
+
+<<~ ahu #spine-law >>
+
+## Spine Law
+
+**`@lararium/mesh` anchors the isomorphic spine for all concerns outside TW5 VMs.**
+
+What this means in practice:
+
+**AL-1 — Automerge core lives in mesh.**
+`@automerge/automerge` sits in direct dependency position for `@lararium/mesh`. Vessel packages
+(`@lararium/node`, `@lararium/browser`) consume Automerge types and utilities from
+mesh's public surface. They do not add their own `@automerge/automerge` dependency
+unless a platform-specific surface requires something mesh does not re-export.
+
+**AL-2 — automerge-repo lives in mesh.**
+`@automerge/automerge-repo` sits in direct dependency position for `@lararium/mesh`.
+`DocHandle`, `Repo`, `Heads`, and related types surface through mesh's public exports.
+Vessel packages import these from `@lararium/mesh`, not directly from automerge-repo.
+
+**AL-3 — Shared contracts live in mesh.**
+Vessel law, pool law, worker lease contracts, tiddler store interfaces, causal island
+types, and projection contracts all live in `@lararium/mesh`. If a type needs to cross
+the node↔browser boundary, it belongs in mesh, not in either vessel package.
+
+**AL-4 — TW5 VM concerns live in `@lararium/tw5`, not in mesh.**
+The TW5 engine, MemeRecipeVm, TW5WorkerProxy, plugin build pipeline, and all
+TW5-specific types live in `@lararium/tw5`. Mesh holds the `MemeRecipeVm` interface
+and `VmPool` because those provide vessel-level coordination types; the implementations
+belong to `@lararium/tw5`.
+
+**AL-5 — Platform-specific concerns live in the platform package.**
+Node filesystem, piscina, `worker_threads`, and `@automerge/automerge-repo-storage-nodefs`
+live in `@lararium/node`. Browser IndexedDB, Web Workers, `BroadcastChannel`, and
+`@automerge/automerge-repo-network-websocket` (if browser-only) live in `@lararium/browser`.
+Neither crosses into mesh.
+
+**AL-6 — Platform-neutral construction lives in mesh; I/O belongs to the caller.**
+Any function that constructs or transforms Automerge documents from assembled byte inputs
+belongs in mesh, regardless of which surface will eventually call it. Callers supply the bytes;
+mesh builds the doc; callers write the result. The three-layer split applies to genesis
+construction and to any future artifact builders: (A) byte acquisition, (B) doc construction in
+mesh, (C) byte emission. See `genesis-doc.ts` and `bags/@lararium/mesh/genesis-doc.md`.
+
+<<~/ahu >>
+
+<<~ ahu #consistency-rules >>
+
+## Consistency Rules
+
+These rules apply to every new file and every dep addition in the monorepo.
+
+| Rule | Test |
+|---|---|
+| New shared type or interface | Lives in `@lararium/mesh`. All packages import from there. |
+| New Automerge type reference in mesh | Import from `@automerge/automerge` directly, not through `@automerge/automerge-repo`. |
+| New Automerge type reference in a vessel | Import from `@lararium/mesh` when mesh already re-exports it. Only go direct when the type belongs to platform-only surface and mesh re-export would pull in platform code. |
+| New dep in `@lararium/tw5` | Must not reach into `@lararium/node` or `@lararium/browser`. |
+| New dep in `@lararium/node` | May reach into `@lararium/tw5` and `@lararium/mesh`. Not into `@lararium/browser`. |
+| New dep in `@lararium/browser` | May reach into `@lararium/tw5` and `@lararium/mesh`. Not into `@lararium/node`. |
+| New platform dep (IndexedDB, island, fs, piscina) | Belongs in the platform package. Does not enter `@lararium/mesh` or `@lararium/tw5`. |
+
+<<~/ahu >>
+
+<<~ ahu #open-alignment-items >>
+
+## Open Alignment Items
+
+These items name known inconsistencies in the current tree. Each carries a resolution path.
+
+| Item | Current state | Resolution |
+|---|---|---|
+| `@lararium/node` directly imported `@automerge/automerge` | ✅ Resolved — `genesis-artifact.ts`, `node-vm-manager.ts`, and build scripts now import all Automerge symbols from `@lararium/mesh`. Direct `@automerge/automerge` dep removed from `@lararium/node`. | — |
+| `build-genesis-island.ts` fused file I/O with Automerge doc construction | ✅ Resolved — `buildGenesisDoc()` + `verifyGenesisArtifact()` live in `@lararium/mesh/genesis-doc.ts`. Node build script now runs as a thin I/O runner (Layer A + C). Browser and test surfaces can call `buildGenesisDoc()` directly. | — |
+| `@automerge/automerge-repo` re-exports `Heads` | `browser-dock.ts` originally imported `Heads` from `automerge-repo`; corrected to import from `@automerge/automerge` via mesh | Verified resolved. |
+| `@lararium/browser` ea-path (founding ceremony) not yet wired | S0–S3 architecture landed: BrowserVesselIslandPool, browser-wiki-worker.ts, BrowserAuthorityPool, MessageChannel-per-slot. S4 requires: IndexedDB StorageAdapter, WebCrypto keypair, runFoundingCeremony call-site in browser vessel. `@lararium/keyhive` ceremony functions accept `Repo + seed` — vessel-neutral. | S4 sprint wires the ceremony seam; dep graph entry reflects final state already. |
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/lar-vessel >>
+<<~ loulou lar:///ha.ka.ba/@lararium/browser/pono-charter >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

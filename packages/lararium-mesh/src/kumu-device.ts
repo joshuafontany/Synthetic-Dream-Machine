@@ -35,7 +35,7 @@
  *
  * Isomorphic: no Node/browser APIs.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/kumu-device
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/kumu-device
  */
 
 

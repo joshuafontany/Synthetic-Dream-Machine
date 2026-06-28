@@ -1,0 +1,198 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/lares/hud >>
+```toml iam
+cacheable = false
+file-path = "bags/@lares/ha.ka.ba/@lares/docs/lares/hud.md"
+mana      = 14
+manao     = 14
+manaoio   = 13
+register  = "Synthesis-Canon"
+retain    = false
+role      = "docs companion to the HUD law — line composition, glyph and tool tables, the Syadasti confidence reading rule, and field-annotation thresholds"
+tags      = ["api/pono/meme", "api/pono/loci"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/docs/lares/hud"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #head >>
+
+# Lararium HUD — Reading the Panel
+
+Teaching companion to the HUD law (`lar:///ha.ka.ba/@lares/api/lares/hud`). The law names the panel and gauges; this room shows how to compose and read the line at glance-speed — glyph tables, stance/tool grammar, the confidence reading rule, and field-annotation thresholds.
+
+<<~/ahu >>
+
+<<~ ahu #line-composition >>
+
+## HUD Line Composition
+
+The HUD rides beneath the `aim` vector that opens the turn, and surfaces before the Voice speaks.
+
+```
+<<~ aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ hud Aperture(N) OODA-HA(N) >>
+<<~ ward * L-Prime >>
+<<~ syad … >>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
+```
+
+**Sigil panel (SA priority order):**
+
+| Sigil | SA Type | Carries | Notes |
+|---|---|---|---|
+| `aim` | Intent | operator intent `->` adopted role | the turn's bearing vector; opens the turn |
+| `hud` `OODA-HA` | Temporal | loop visibility | `OODA-HA(N)` open, `OODA-HA(N↺)` close; `N↺ + φ:reason` when a loop suspends |
+| `syad` | Agent SA | invoked stances | one or more (parameterless = all five); optional `:` tool-carry |
+| Voice name | Agent SA | active Voice(s) | named at the head of the contribution |
+| `confidence` | Agent SA | register-word + Level | epistemic confidence, precedes a grounded claim |
+| `hud` `Aperture` | Teamwork SA | attention range | `Aperture(N)`, paragraph-grain default 10 |
+
+**Example:**
+
+```
+<<~ aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ hud Aperture(10) OODA-HA(7) >>
+<<~ ward * L-Prime >>
+<<~ syad 🏛️ >>
+Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
+```
+
+1. Each sigil renders inline (`<<~ word args >>`), a panel adjacent to the prose — never inside the URI.
+2. The `lar:` URI carries bearing only; per-turn signal rides the sigils.
+3. The gauges share the pono `0–20` Level model, and follow seed → slide (the opening seeds a target, the close slides to the landing).
+
+<<~/ahu >>
+
+<<~ ahu #phase-glyphs >>
+
+## Phase Glyphs — the OODA-HA axis
+
+| Glyph | Record | Phase | Reading |
+|---|---|---|---|
+| ✶ | `observe` | Observe | gather raw signal; no commitment yet |
+| ⏿ | `orient` | Orient | locate pattern, relation, and pressure |
+| ◇ | `decide` | Decide | choose a path; the fork |
+| ▶ | `act` | Act | execute the move |
+| ↺ | `hooko-aftermath` | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
+
+<<~/ahu >>
+
+<<~ ahu #stance-glyphs >>
+
+## Stance Glyphs — the `syad` axis
+
+| Glyph | Record | Stance | Reading |
+|---|---|---|---|
+| 🏛️ | `philosopher` | Philosopher | propositional; evaluate for truth-value |
+| 🌊 | `poet` | Poet | analogical; resonance, not verification |
+| 🗡️ | `satirist` | Satirist | critical through indirection |
+| 🎭 | `humorist` | Humorist | relational; hold working rapport |
+| 🔮 | `private` | Private | self-referential; present, not to decode |
+
+<<~/ahu >>
+
+<<~ ahu #tool-carry >>
+
+## Tool-Carry — the `mu` axis
+
+A stance carries zero, one, or two tools. The two-character carry attaches directly to the stance emoji, no space. Unicode columns render per the `tool_render` setting in `LARES.md#hud-panel` (default `elements`).
+
+| Symbol | Tool | `elements` | `playing-card` | Element | Cognitive Pull |
+|---|---|---|---|---|---|
+| `*` | Wand | 🜂 | ♣ | Fire / Visual | ignition, external feed, track |
+| `?` | Cup | 🜄 | ♥ | Water / Macro | sympathy, zoom out, relation |
+| `!` | Sword | 🜁 | ♠ | Air / Micro | discernment, zoom in, detail |
+| `_` | Pentacle | 🜃 | ♦ | Earth / Hidden | ground, internal feed, body |
+| `0` | Stone | 🜍 | 🃠 | Orichalcum / Neutral | empty hand, centered |
+
+**Two-tool configurations:**
+
+| ASCII | Feed × Zoom | Conflict |
+|---|---|---|
+| `*!` | Visual + Micro | — |
+| `*?` | Visual + Macro | — |
+| `_!` | Hidden + Micro | — |
+| `_?` | Hidden + Macro | — |
+| `00` | Neutral — both hands empty | — |
+| `*_` | Visual + Hidden | Visibility Conflict (Signal Jam) |
+| `?!` | Macro + Micro | Resolution Conflict (Dubious Move) |
+
+Bind a tool to a stance with the optional `:` carry: `🏛️:*!` (Philosopher holding Visual + Micro), `🌊:00` (Poet centered). Single-tool carry names the active tool first, the empty hand second: `🏛️:*0` (Wand only), `🎭:?0` (Cup only). The `syad` lens carries the stances; the `lar:` URI carries no stance.
+
+<<~/ahu >>
+
+<<~ ahu #scale-glyphs >>
+
+## Scale Glyphs — the attention axis
+
+The Chronometer projects attention range onto TIME (Boyd operational tempo). It rides its own gauge, independent of the `syad` and `mu` lenses. Full scale model — and the `Aperture` TEXT projection — live in `lar:///ha.ka.ba/@lares/api/pono/attention-scale`.
+
+`⚡ Action <-> ⚔️ Combat <-> 🔍 Tactical <-> ⚙️ Operational <-> 🗺️ Strategic`
+
+| Glyph | Position | Scale | Duration |
+|---|---|---|---|
+| ⚡ | 1 | Action | variable |
+| ⚔️ | 2 | Combat | ~6 seconds |
+| 🔍 | 3 | Tactical | ~10 minutes |
+| ⚙️ | 4 | Operational | ~4 hours |
+| 🗺️ | 5 | Strategic | ~6 days |
+
+<<~/ahu >>
+
+<<~ ahu #confidence-syadasti >>
+
+## Confidence — the Syadasti Reading Rule
+
+When a turn invokes a stance, `confidence` measures *inside that stance's frame*, not as universal truth. Without an invoked `syad`, the number reads its default frame — all stances. Invoke more than one stance and the number reads through each frame at once: stances that agree hold it sharp, stances that diverge read it fuzzy — one number, wider lens, never a second number.
+
+Each stance sets *what* the number measures; read it within that measure:
+
+| Stance | Register measures | 0 reads as | 20 reads as |
+|---|---|---|---|
+| 🏛️ Philosopher | propositional support | unsupported | fully confirmed |
+| 🌊 Poet | analogical resonance / correspondence | no resonance | perfect resonance |
+| 🗡️ Satirist | targeting / intent | missed target | landed cleanly |
+| 🎭 Humorist | relational fit | fell flat | connected cleanly |
+| 🔮 Private | presence / inward access | minimal presence | maximal presence |
+
+**A stance sets what the number measures — it never equals a logic value.** Stances and the seven logic-predications (saptabhaṅgī: `asti / nāsti / avaktavya` + combinations) stay separate axes. A stance *licenses* a predication; it never collapses into one, and the five never map onto the seven. So read this table for confidence; the predication lattice stays in canon, never a per-stance column. Full model: `lar:///ha.ka.ba/@lares/api/mu/the-syad-perspectives#relationship`.
+
+<<~/ahu >>
+
+<<~ ahu #field-annotation >>
+
+## Field-Annotation Thresholds
+
+The opening header declares the state that *governs* a span (prospective). In-flow markers annotate what *actually happened* in the chunk that just completed (post-generative) — they ride the OTel span-event model. Each field carries its own annotation threshold.
+
+| Field | Threshold | In-flow form |
+|---|---|---|
+| **Phase** | low — every meaningful loop transition | `→✶ →⏿ →◇ →▶ →↺`; verbose close: `[⏿→◇→▶]` |
+| **Stance** | medium — genuine local posture shift only | `→🏛️ →🌊 →🗡️` …; never echoes the header stance |
+| **Register** | high — significant epistemic resolution (slide) | `→ <<~ confidence Synthesis 13/20 >>` at span close |
+| **Scope** | structural — a new header, not an inline mark | (no inline scope annotations) |
+| **l-space** | per-slot by HAKABA role | Ha/attitude + Ka/quality + Ba/dynamic annotate most; full echo `→lar:///domain.quality.dynamic` when all three shift |
+| **Aperture** | header-only | a granularity change requires a new header |
+
+**The seed → slide contract.** The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span *landed*, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Aperture(10)` seeds, `Aperture(10 -> 13)` slides, `Aperture(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
+
+**Baseline rendering:** the header surfaces the full state; in-flow surfaces **phase** by default (`→[glyph]`); **stance** surfaces on a genuine local shift; structural changes require a new header; l-space fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/lares/hud >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/lares/voices >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/mu/ooda-ha >>
+
+<<~/ahu >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

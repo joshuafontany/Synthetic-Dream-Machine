@@ -4,7 +4,7 @@
  * module never pulls the mempalace barrel — the worker passes `defaultAnnotate`, tests pass
  * a fake. This is node's row of the per-vessel job table: KEEP the shared palace.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/api/capture-annotation-model#isomorphic-telemetry-vm
+ * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
 
 import { makeCaptureEngine } from "@lararium/mesh";

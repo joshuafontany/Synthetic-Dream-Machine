@@ -139,7 +139,7 @@ export function GENESIS_PLUGINS_CID(genesisDir?: string): string | undefined {
 // hearthTrueName — the hearth's PUBLIC true-name (the place's public face).
 // ---------------------------------------------------------------------------
 //
-// The hearth wears two faces, never fused (lar:///ha.ka.ba/@lares/v0.1/api/pono/
+// The hearth wears two faces, never fused (lar:///ha.ka.ba/@lares/api/pono/
 // lararium-identity#head). The PUBLIC face = the content-address of the place's
 // GRAMMAR — the engine content-CID ALONE (G-D3), the TW5 core + version, NOT the
 // plugins. Plugins compose per-operator (DreamNet-offered) and ride their own fast

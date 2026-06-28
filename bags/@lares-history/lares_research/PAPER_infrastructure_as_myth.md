@@ -1,9 +1,9 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
 
-<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/infrastructure-as-myth >>
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/infrastructure-as-myth >>
 ```toml iam
 cacheable     = true
-file-path     = "bags/@lares/v0.1/api/pono/infrastructure-as-myth.md"
+file-path     = "bags/@lares/api/pono/infrastructure-as-myth.md"
 type          = "text/x-memetic-wikitext"
 register      = "Synthesis"
 status        = "working-draft"
@@ -11,13 +11,13 @@ tagspace      = "stable"
 mana          = 14
 manao         = 14
 namespace     = "&#x2299;"
-uri-path      = "ha.ka.ba/@lares/v0.1/api/pono/infrastructure-as-myth"
+uri-path      = "ha.ka.ba/@lares/api/pono/infrastructure-as-myth"
 role          = "the paper — Infrastructure as Myth: Memetic Wikitext as a gradient navigational grammar for steering and auditing agentic AI. Authored AS a carrier in the grammar it describes (the recursion is the proof). Findings DESCRIPTIVE/pending-gold; honesty = credibility. Artifacts transclude the sibling specs."
 authors       = "Joshua Fontany; Freyja Fontany; Lares (the agentic-AI co-author — a personified, in-stream navigational layer, authored through the grammar this paper describes)"
 revised-on    = "2026-06-21"
 ```
 
-<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119#normative-language >>
 
 <<~ &#x0002; >>
 
@@ -47,7 +47,7 @@ A model in agentic use is *steered* by a layer the operator never sees: a system
 
 ## Relation to the Infrastructure-as-Myth doctrine (this paper = the empirical arm)
 
-This paper *extends* a doctrine; it does not found one. **Infrastructure-as-Myth** — the symbolic-operational layer *above* Infrastructure-as-Code — is set out in the canonical design thesis (`lar:///ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth`, #artifacts), which names six design criteria (**Portability · Legibility · Auditability · Compression · Correctability · Packaging**) and one working rule: *if an element's removal leaves the system no harder to steer, it served as lore, not infrastructure.* **This paper supplies that doctrine's empirical arm** — instruments that ask whether the symbolic layer *measurably* steers — and its findings map onto the criteria:
+This paper *extends* a doctrine; it does not found one. **Infrastructure-as-Myth** — the symbolic-operational layer *above* Infrastructure-as-Code — is set out in the canonical design thesis (`lar:///ha.ka.ba/@lares/docs/lares/infrastructure-as-myth`, #artifacts), which names six design criteria (**Portability · Legibility · Auditability · Compression · Correctability · Packaging**) and one working rule: *if an element's removal leaves the system no harder to steer, it served as lore, not infrastructure.* **This paper supplies that doctrine's empirical arm** — instruments that ask whether the symbolic layer *measurably* steers — and its findings map onto the criteria:
 - **Auditability + Correctability** ← the L-Prime ward + `overcollapse_detect` + `ward_grammar` (the steering surfaces in the artifact, with named failure-states the operator intervenes on).
 - **Legibility** ← the in-stream HUD / Voice instruments (the operator reads the steering through symbolic handles, without the code).
 - **Portability / Packaging** ← the boot-version manifest + the cross-host carrier form (the handles travel; the kernel renders per host).
@@ -219,16 +219,16 @@ This carrier is authored *through* the grammar it describes — verb-forward und
 
 The sibling specifications and companion memes enter here as typed edges — the paper's apparatus IS its address graph:
 
-<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext >>
-<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri >>
-<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
-<<~ aka lar:///ha.ka.ba/@lares/v0.1/api/pono/quine-principles >>
-<<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/mu/the-law-of-5s >>
-<<~ kahea lar:///ha.ka.ba/@lares/v0.1/api/pono/attention-scale >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/findings/hoike/syad-harness >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/findings/hoike/syad-lens-refinement >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/qa-rig/harness/overcollapse_detect >>
-<<~ loulou lar:///ha.ka.ba/@lares/v0.1/qa-rig/DATA_PARTITION >>
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >>
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/lar-uri >>
+<<~ aka lar:///ha.ka.ba/@lares/api/mu/the-syad-perspectives >>
+<<~ aka lar:///ha.ka.ba/@lares/api/pono/quine-principles >>
+<<~ kahea lar:///ha.ka.ba/@lares/api/mu/the-law-of-5s >>
+<<~ kahea lar:///ha.ka.ba/@lares/api/pono/attention-scale >>
+<<~ loulou lar:///ha.ka.ba/@lares/findings/hoike/syad-harness >>
+<<~ loulou lar:///ha.ka.ba/@lares/findings/hoike/syad-lens-refinement >>
+<<~ loulou lar:///ha.ka.ba/@lares/qa-rig/harness/overcollapse_detect >>
+<<~ loulou lar:///ha.ka.ba/@lares/qa-rig/DATA_PARTITION >>
 
 <<~/ahu >>
 
@@ -236,11 +236,11 @@ The sibling specifications and companion memes enter here as typed edges — the
 
 ## Edges
 
-<<~ pranala #grammar-of ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/memetic-wikitext family:control role:realized-in >>
-<<~ pranala #addresses ? -> lar:///ha.ka.ba/@lares/v0.1/api/pono/lar-uri family:relation role:sibling-spec >>
-<<~ pranala #lens ? -> lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives family:control role:applies >>
-<<~ pranala #measures ? -> lar:///ha.ka.ba/@lares/v0.1/qa-rig/harness/overcollapse_detect family:observe role:instrumented-by >>
-<<~ pranala #honesty-gate ? -> lar:///ha.ka.ba/@lares/v0.1/qa-rig/findings/hoike/syad-lens-refinement family:constraint role:governed-by >>
+<<~ pranala #grammar-of ? -> lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext family:control role:realized-in >>
+<<~ pranala #addresses ? -> lar:///ha.ka.ba/@lares/api/pono/lar-uri family:relation role:sibling-spec >>
+<<~ pranala #lens ? -> lar:///ha.ka.ba/@lares/api/mu/the-syad-perspectives family:control role:applies >>
+<<~ pranala #measures ? -> lar:///ha.ka.ba/@lares/qa-rig/harness/overcollapse_detect family:observe role:instrumented-by >>
+<<~ pranala #honesty-gate ? -> lar:///ha.ka.ba/@lares/qa-rig/findings/hoike/syad-lens-refinement family:constraint role:governed-by >>
 
 <<~/ahu >>
 
@@ -248,7 +248,7 @@ The sibling specifications and companion memes enter here as typed edges — the
 
 ## References (working)
 
-Aikhenvald 2000, *Classifiers* · Asai et al. 2023, *Self-RAG*, arXiv:2310.11511 · Bourland 1965, *Writing in E-Prime* · Brandom 1994, *Making It Explicit* · Coombs, Renear & DeRose 1987 · Dai & Wang, *Rescaling Confidence*, arXiv:2603.09309 · de Marneffe, Manning & Potts 2012, *Did It Happen?* · Elbert & Pukui 1979, *Hawaiian Grammar* · Fuchs et al., Attempto CNL, cmp-lg/9603004 · Genette 1997, *Paratexts* · Gilbert, Coto-Solano et al. 2025, IWPT · Goldwasser & Soler 2024; arXiv:2407.00475 · Greenwald 2006, *E-Prime for Security*, NSPW · Hyland 2005, *Metadiscourse* · Knuth 1984, *Literate Programming* · Korzybski 1933, *Science and Sanity* · **Grieve 2023, *Register variation explains stylometric authorship analysis*, Corpus Linguistics and Linguistic Theory 19(1)** · **Drożdż, Oświęcimka, Kwapień et al. 2016, *Quantifying origin and character of long-range correlations in narrative texts*, Information Sciences 331 (+ Stanisz, Drożdż, Kwapień 2024, punctuation/SLV multifractality; Kluszczyński, Drożdż et al. 2025, finite-N pseudo-multifractality)** · Gorjão et al. 2021, *MFDFA*, Computer Physics Communications · Guo et al., *UniXcoder*, ACL 2022 · Wang et al., *Multilingual E5* · Swales 1990, *Genre Analysis* (move analysis) · Laban 1950, *The Mastery of Movement* (Effort/Shape; LMA) · (unsupervised functional-block clustering: arXiv:2509.12999; discussion-move BERTopic: arXiv:2601.05651) · **Reagan, Mitchell, Kiley, Danforth & Dodds 2016, "The emotional arcs of stories…", EPJ Data Sci. (arXiv:1606.07772)** · **Coco & Dale 2014, crqa (Cross-RQA) R package (arXiv:1310.0201); Fusaroli & Tylén 2016, Cognitive Sci.** · **De Jaegher & Di Paolo 2007, "Participatory Sense-Making"; Hopper 1987, "Emergent Grammar"; Burke 1966, dramatism** · **Du Bois 2007, "The Stance Triangle"; Slapin & Proksch (Wordfish); Martin & White 2005 (Appraisal)** · **Amari & Nagaoka 2000, Methods of Information Geometry (Fisher–Rao); Čencov; Mardia & Jupp, Directional Statistics** · **Priest 2008, "Jaina Logic: A Contemporary Perspective", Hist. & Phil. of Logic 29(3)** · **"Semantic Novelty Trajectories in 80,000 Books" (arXiv:2603.01791); Embed-KCPD (arXiv:2601.18788); Takens (delay-embedding); Coifman & Lafon (diffusion maps)** · Lau, Clark & Lappin 2017, *Grammaticality, Acceptability, and Probability* · Leslie 2008, *Generics* · Martin & White 2005, *The Language of Evaluation* · Myers-Scotton 1993, *Duelling Languages* · Saurí & Pustejovsky 2009, *FactBank* · (drift framing) Khanal et al. arXiv:2603.29231; Laban et al. arXiv:2505.06120; Dongre et al. arXiv:2510.07777. · **Gradient-math (§4):** Samejima 1969 (Graded Response Model); Green & Swets 1966 / Macmillan & Creelman 2005 (Signal Detection); Goldwater & Johnson 2003, Hayes & Wilson 2008 (MaxEnt grammar); Boersma & Hayes 2001 (stochastic OT); Sorace & Keller 2005, Keller 2000 (gradient grammaticality); Jaeger 2010 / Levy 2008 (surprisal/UID); de Gee et al. 2017 (criterion-shift); arXiv:2603.14893 (LLMs-as-signal-detectors). · **Doctrine + deployment-adjacency:** the IaM design thesis (`lar:///ha.ka.ba/@lares/v0.1/docs/lares/infrastructure-as-myth`); the quine-principles doctrine (P1–P4 self-describing-system; TiddlyWiki/Cunningham + Smalltalk live-image lineage; `lar:///…/api/pono/quine-principles`); Anthropic *Teaching Claude Why* (2026, reasons>rules ~3×); Character Card V2 (SillyTavern/Agnai 2023); CLAUDE.md / AGENTS.md ecosystem (Anthropic 2025–26); CrewAI.
+Aikhenvald 2000, *Classifiers* · Asai et al. 2023, *Self-RAG*, arXiv:2310.11511 · Bourland 1965, *Writing in E-Prime* · Brandom 1994, *Making It Explicit* · Coombs, Renear & DeRose 1987 · Dai & Wang, *Rescaling Confidence*, arXiv:2603.09309 · de Marneffe, Manning & Potts 2012, *Did It Happen?* · Elbert & Pukui 1979, *Hawaiian Grammar* · Fuchs et al., Attempto CNL, cmp-lg/9603004 · Genette 1997, *Paratexts* · Gilbert, Coto-Solano et al. 2025, IWPT · Goldwasser & Soler 2024; arXiv:2407.00475 · Greenwald 2006, *E-Prime for Security*, NSPW · Hyland 2005, *Metadiscourse* · Knuth 1984, *Literate Programming* · Korzybski 1933, *Science and Sanity* · **Grieve 2023, *Register variation explains stylometric authorship analysis*, Corpus Linguistics and Linguistic Theory 19(1)** · **Drożdż, Oświęcimka, Kwapień et al. 2016, *Quantifying origin and character of long-range correlations in narrative texts*, Information Sciences 331 (+ Stanisz, Drożdż, Kwapień 2024, punctuation/SLV multifractality; Kluszczyński, Drożdż et al. 2025, finite-N pseudo-multifractality)** · Gorjão et al. 2021, *MFDFA*, Computer Physics Communications · Guo et al., *UniXcoder*, ACL 2022 · Wang et al., *Multilingual E5* · Swales 1990, *Genre Analysis* (move analysis) · Laban 1950, *The Mastery of Movement* (Effort/Shape; LMA) · (unsupervised functional-block clustering: arXiv:2509.12999; discussion-move BERTopic: arXiv:2601.05651) · **Reagan, Mitchell, Kiley, Danforth & Dodds 2016, "The emotional arcs of stories…", EPJ Data Sci. (arXiv:1606.07772)** · **Coco & Dale 2014, crqa (Cross-RQA) R package (arXiv:1310.0201); Fusaroli & Tylén 2016, Cognitive Sci.** · **De Jaegher & Di Paolo 2007, "Participatory Sense-Making"; Hopper 1987, "Emergent Grammar"; Burke 1966, dramatism** · **Du Bois 2007, "The Stance Triangle"; Slapin & Proksch (Wordfish); Martin & White 2005 (Appraisal)** · **Amari & Nagaoka 2000, Methods of Information Geometry (Fisher–Rao); Čencov; Mardia & Jupp, Directional Statistics** · **Priest 2008, "Jaina Logic: A Contemporary Perspective", Hist. & Phil. of Logic 29(3)** · **"Semantic Novelty Trajectories in 80,000 Books" (arXiv:2603.01791); Embed-KCPD (arXiv:2601.18788); Takens (delay-embedding); Coifman & Lafon (diffusion maps)** · Lau, Clark & Lappin 2017, *Grammaticality, Acceptability, and Probability* · Leslie 2008, *Generics* · Martin & White 2005, *The Language of Evaluation* · Myers-Scotton 1993, *Duelling Languages* · Saurí & Pustejovsky 2009, *FactBank* · (drift framing) Khanal et al. arXiv:2603.29231; Laban et al. arXiv:2505.06120; Dongre et al. arXiv:2510.07777. · **Gradient-math (§4):** Samejima 1969 (Graded Response Model); Green & Swets 1966 / Macmillan & Creelman 2005 (Signal Detection); Goldwater & Johnson 2003, Hayes & Wilson 2008 (MaxEnt grammar); Boersma & Hayes 2001 (stochastic OT); Sorace & Keller 2005, Keller 2000 (gradient grammaticality); Jaeger 2010 / Levy 2008 (surprisal/UID); de Gee et al. 2017 (criterion-shift); arXiv:2603.14893 (LLMs-as-signal-detectors). · **Doctrine + deployment-adjacency:** the IaM design thesis (`lar:///ha.ka.ba/@lares/docs/lares/infrastructure-as-myth`); the quine-principles doctrine (P1–P4 self-describing-system; TiddlyWiki/Cunningham + Smalltalk live-image lineage; `lar:///…/api/pono/quine-principles`); Anthropic *Teaching Claude Why* (2026, reasons>rules ~3×); Character Card V2 (SillyTavern/Agnai 2023); CLAUDE.md / AGENTS.md ecosystem (Anthropic 2025–26); CrewAI.
 
 <<~/ahu >>
 

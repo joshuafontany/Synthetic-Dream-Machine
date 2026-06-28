@@ -7,7 +7,7 @@
  *
  * No HTTP, no OAuth routes, no web2 auth ceremony.
  *
- * Meme: lar:///ha.ka.ba/@lares/v0.1/api/lararium/node-host
+ * Meme: lar:///ha.ka.ba/@lares/api/lararium/node-host
  */
 
 import { describe, test, expect } from "vitest";
@@ -24,28 +24,28 @@ import {
 // ---------------------------------------------------------------------------
 
 describe("resolveLarUri — canonical URI topology", () => {
-  test("AGENTS root stays virtual until expressed under @lares/v0.1", () => {
+  test("AGENTS root stays virtual until expressed under @lares", () => {
     const r = resolveLarUri("lar:///AGENTS");
     expect(r.kind).toBe("caps-virtual");
     expect(r.virtual).toBe(true);
     expect(r.root).toBe("AGENTS");
   });
 
-  test("LARES root stays virtual until expressed under @lares/v0.1", () => {
+  test("LARES root stays virtual until expressed under @lares", () => {
     const r = resolveLarUri("lar:///LARES");
     expect(r.kind).toBe("caps-virtual");
     expect(r.virtual).toBe(true);
   });
 
-  test("ha.ka.ba/@lares/v0.1 sub-path resolves as tuple-file, non-virtual", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/v0.1/api/mu");
+  test("ha.ka.ba/@lares sub-path resolves as tuple-file, non-virtual", () => {
+    const r = resolveLarUri("lar:///ha.ka.ba/@lares/api/mu");
     expect(["file", "tuple-file"]).toContain(r.kind);
     expect(r.virtual).toBe(false);
     expect(r.root).toBe("ha.ka.ba");
   });
 
-  test("ha.ka.ba/@lares/v0.1/AGENTS shorthand resolves as caps-file", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/v0.1/AGENTS");
+  test("ha.ka.ba/@lares/AGENTS shorthand resolves as caps-file", () => {
+    const r = resolveLarUri("lar:///ha.ka.ba/@lares/AGENTS");
     expect(r.kind).toBe("caps-file");
     expect(r.virtual).toBe(false);
   });
@@ -56,7 +56,7 @@ describe("resolveLarUri — canonical URI topology", () => {
   });
 
   test("resolves laresRelPath for grammar carrier", () => {
-    const r = resolveLarUri("lar:///ha.ka.ba/@lares/v0.1/api/mu");
+    const r = resolveLarUri("lar:///ha.ka.ba/@lares/api/mu");
     expect(r.laresRelPath).toBeTruthy();
     expect(r.laresRelPath).toMatch(/\.md$/);
   });
@@ -69,12 +69,12 @@ describe("resolveLarUri — canonical URI topology", () => {
 describe("isHostfulLarUri", () => {
   test("hostless lar:///path → false", () => {
     expect(isHostfulLarUri("lar:///AGENTS")).toBe(false);
-    expect(isHostfulLarUri("lar:///ha.ka.ba/@lares/v0.1/api/mu")).toBe(false);
+    expect(isHostfulLarUri("lar:///ha.ka.ba/@lares/api/mu")).toBe(false);
   });
 
   test("hostful lar://node.local/path → true", () => {
     expect(isHostfulLarUri("lar://altar-fire.local/rooms/main")).toBe(true);
-    expect(isHostfulLarUri("lar://elyncia.social/ha.ka.ba/@lares/v0.1/api/mu")).toBe(true);
+    expect(isHostfulLarUri("lar://elyncia.social/ha.ka.ba/@lares/api/mu")).toBe(true);
   });
 });
 

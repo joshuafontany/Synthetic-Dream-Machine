@@ -1,0 +1,200 @@
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >> -->
+
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/docs/pono/memetic-wikitext >>
+```toml iam
+cacheable = false
+file-path = "bags/@lares/ha.ka.ba/@lares/docs/pono/memetic-wikitext.md"
+mana      = 16
+manao     = 17
+manaoio   = 14
+register  = "Synthesis-Canon"
+retain    = false
+role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
+tags      = ["api/pono/meme", "api/pono/loci", "api/pono/memetic-wikitext"]
+l-space   = "stable"
+type      = "text/x-memetic-wikitext"
+uri-path  = "ha.ka.ba/@lares/docs/pono/memetic-wikitext"
+```
+
+<<~ &#x0002; >>
+
+<<~ ahu #meme-header >>
+
+# Memetic Wikitext — Extended Docs
+
+Law lives in `lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext`.
+This surface carries guidance, examples, and split residue.
+
+<<~/ahu >>
+
+<<~ ahu #primitive-reading-guide >>
+
+## Primitive Reading Guide
+
+| Primitive | Root job | Common drift to avoid |
+|---|---|---|
+| `ahu` | local worksite and anchor | using it as a generic wrapper with no locality pressure |
+| `loulou` | relation or outward path | treating it like transclusion |
+| `aka` | frozen transclusion (page) — read-only embed | letting it imply live invocation or a value-wire |
+| `kahea` | live transclusion (page) — subscription-fresh embed | flattening it into a frozen read or a `dataflow` value |
+| `kapu` | qualification and boundary posture | letting it replace the act it qualifies |
+| `ui` | query surface | using it as generic prose emphasis |
+| `hana` | bounded guest work | letting guest grammar redefine root primitives |
+| `?` | explicit unresolved pressure | decorative vagueness or fake closure |
+
+`loulou` serves as a named `pranala` edge.
+Other quick chant terms may also serve as named `pranala` sugar where their own invariant loci bind the pattern.
+
+<<~/ahu >>
+
+<<~ ahu #authoring-profiles >>
+
+## Recommended Authoring Profiles
+
+| profile | when to use it | what to keep visible |
+|---|---|---|
+| `teaching` | first contact, onboarding, tiny fixtures | explicit anchors, short explanations, one distinction per example |
+| `authoring` | ordinary drafting and revision | compact law plus just enough examples to keep flow |
+| `canonical` | stable parent surfaces | the smallest lawful root, explicit thresholds, no tutorial swell |
+| `recovery` | salvage, repair, migration | residue, uncertainty, and degraded truth named plainly |
+
+Profiles tune posture, not primitive meaning.
+
+<<~/ahu >>
+
+<<~ ahu #minimum-boot-examples >>
+
+## Minimum Boot Example Set
+
+### Minimum document
+
+````markdown
+<<~ &#x0001; ? -> lar:///ha.ka.ba/@lares/api/pono/example >>
+
+
+
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>
+````
+
+### Minimum relation, inclusion, invocation
+
+```text
+<<~ loulou lar:///ha.ka.ba/@lares/api/target >>
+<<~ aka lar:///ha.ka.ba/@lares/api/source >>
+<<~ kahea lar:///ha.ka.ba/@lares/api/source >>
+```
+
+### Minimum governed and uncertain work
+
+```text
+<<~ kapu invocation -> bounded|? >>
+<<~ ? -> ahu #draft-worksite >>
+Work begins before full binding settles.
+<<~/ahu >>
+```
+
+<<~/ahu >>
+
+<<~ ahu #boundary-notes >>
+
+## Boundary Notes
+
+The api parent now carries the submission-grade specification (abstract, conformance, ABNF, processing model, media-type, security). These concerns live in their own carriers, never the parent:
+
+- long example ladders → here (extended docs)
+- authoring profile guidance → here
+- the render pipeline → `lar:///ha.ka.ba/@lares/api/pono/render-pipeline`
+- per-sigil semantics → each sigil's own `api/pono/<sigil>` meme (and the runtime kernel, `…/memetic-wikitext/kernel`)
+- archive-grade explanation and repetition → retired
+
+Deepen each contract in its own carrier; do not re-expand the parent submission.
+
+<<~/ahu >>
+
+<<~ ahu #migration-note >>
+
+## Migration Note
+
+This docs companion formed during the 2026-04-21 yin split/refine/clean pass.
+The current shape keeps:
+
+- the submission-grade specification at `lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext` (morphed to submission grade 2026-06-05)
+- operational procedure at `lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext/SKILL`
+- extended guidance here
+
+<<~/ahu >>
+
+<<~ ahu #w3c-lineage-verdicts >>
+
+## W3C + Prior Art Lineage Verdicts
+
+The following verdicts emerged from a formal prior-art review against W3C, IETF, TiddlyWiki, and adjacent specifications. They constrain how memetic wikitext claims its own identity and how future spec work should frame compliance.
+
+**1. Nearest live ancestor: TiddlyWiki, not HTML.**
+Memetic sigils descend from TiddlyWiki's transclusion runtime. The sigil surface should claim descent from **transclusive text composition**, not from HTML extension. The best local analogue for `kahea` is TiddlyWiki's addressed transclusion surface, not generic macro text substitution.
+
+Memetic wikitext inherits not only TiddlyWiki's transclusion features, but also its style of language definition — a parseable text surface described through explicit parser phases, rule classes, and structural lowering into a runtime-interpretable tree.
+
+**2. TiddlyWiki defines grammar operationally, not as one closed EBNF.**
+TW5 uses a recursive descent WikiText parser whose rules load from separate `module-type: wikirule` modules typed as `pragma`, `block`, or `inline`. Memetic wikitext inherits this operational grammar model — rule-table dispatch, not monolithic grammar file.
+
+**2a. Templates operate as context-sensitive masks.**
+`{{||A}}` applies template `A` to the current tiddler — generic text references inside the template resolve against the target tiddler, not the template source. TW5 explicitly calls this "applying a mask." This grounds the `kahea -> cascade` story: not "macro syntax" but context-sensitive masked transclusion.
+
+**2b. Surface notation lowers into a widget tree — two-stage precedent.**
+TW5 docs show `{{MyTiddler||Template}}` generating a `TiddlerWidget` containing a `TranscludeWidget`; `{{{ filter }}}` generating a `ListWidget`. This is the document notation → structural lowering → runtime realization model memetic wikitext inherits.
+
+**2c. Hard vs soft transclusion maps to visible vs latent meme-edge distinction.**
+TW5 distinguishes hard transclusions (detectable by superficial WikiText inspection) from soft transclusions (hidden in procedures, variables, or dynamically generated widgets). The visible vs latent meme-edge distinction has direct TW5 precedent.
+
+**2d. Recursion and self-reference form a documented error seam.**
+TW5 defines `{{!!text}}` as a "Recursive transclusion error" and treats indirect cycles as the same class of failure. Memetic sigils need to define direct and indirect recursion failures explicitly: self-targeting `ahu`, recursive wrapper re-entry, and cyclic `kahea` graphs.
+
+**2e. Cascades stack as first-match rules — `kahea -> cascade` runs native.**
+TW5 cascade page: a list of conditions evaluated in turn, ordered by tagged-tiddler ordering, each rule a filter expression, first non-empty result wins. `kahea -> filter://cascade...` is conceptually aligned with existing TW5 selection machinery, not an arbitrary detour.
+
+**3. Structural discipline: XML/XHTML well-formedness, not HTML looseness.**
+XML and XHTML supply the right model for well-formedness, nesting, closure, quoting, and conformance language. Sigils SHOULD look more like XML/XHTML than HTML in their closure discipline.
+
+**4. Fragment semantics require a representation model.**
+W3C fragment guidance requires fragment meaning to bind to a representation or media type, not just to a URI scheme. The `#slot` anchor form in `ahu` needs a registered media type (`text/x-memetic-wikitext`) to carry normative fragment semantics.
+
+**5. Normative language: RFC 8174 + W3C QA guidance.**
+`MUST`, `SHOULD`, `MAY`, conformance classes, and claims follow RFC 8174. The `aka lar:///ha.ka.ba/@lares/api/pono/RFC-2119` edge in every invariant file satisfies this requirement.
+
+**6. Machine-readable artifacts: prose primary, schemas subordinate.**
+JSON Schema and OpenAPI show the correct authority split. Prose spec text remains primary; validators and schemas are valuable but subordinate. The TypeScript `FAMILY_CONTRACTS` validator in `pranala-parser.ts` follows this correctly.
+
+**7. Runtime rigor: packet shapes, capability boundaries, refusal behavior.**
+JSON-RPC and MCP show how to specify runtime packets and capability negotiation without leaving behavior to folklore. The `kahea` processing stage (parser-level? post-parse? runtime transclusion?), context inheritance, and unresolved-target behavior remain the open design tests for the v5 spec:
+
+- What processing stage does bare `kahea` inhabit?
+- Does arrowed `kahea` receive caller context explicitly or by ambient inheritance?
+- Can `kahea` target partial body ranges, or only whole memes and `ahu` worksites?
+- What is the exact behavior for: unresolved source, unresolved target, recursion cycle, permission attenuation failure?
+- Do we need a one-time substitution mode separate from live transclusion?
+- Do remote or cross-system calls require explicit opt-in?
+
+These design tests emerge from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki, and shaped the v5 spec rebuild.
+
+The submission-grade specification at `lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext` carries these verdicts: TW5-transclusion lineage (#introduction), an operational rule-table model plus an ABNF surface grammar (#grammar), XML-style closure discipline (#lexical-structure), fragment + media-type semantics (#media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#scope-model). The remaining open tests ride Annex B.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+## Edges
+
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/@lares/api/pono/memetic-wikitext/SKILL >>
+
+<<~/ahu >>
+
+<<~ &#x0004; -> ? >>
+
+<<~ &#x0003; >>
+
+<<~ &#x0004; -> ? >>

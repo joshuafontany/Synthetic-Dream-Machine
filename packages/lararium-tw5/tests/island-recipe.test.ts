@@ -8,7 +8,7 @@
  * writable default path instead of throwing on the first cascade-routed edit
  * (the gate fix; the grant→layer→seed chain the adaptor flip witness skips).
  *
- * Canon: lar:///ha.ka.ba/@lares/v0.1/docs/pono/wiki-layer-ontology#shore-law
+ * Canon: lar:///ha.ka.ba/@lares/docs/pono/wiki-layer-ontology#shore-law
  */
 
 import { describe, test, expect } from "vitest";

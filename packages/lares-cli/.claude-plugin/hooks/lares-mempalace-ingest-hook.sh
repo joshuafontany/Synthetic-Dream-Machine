@@ -72,7 +72,7 @@ esac
 #   (mempalace through the seat, Option D). Daemon down → telemetry no-ops; the
 #   verbatim drawer already landed and the `lares harvest --all` lar_hv sweep
 #   re-enriches it later (verbatim-always / telemetry-eventual,
-#   lar:///ha.ka.ba/@lararium/v0.1/api/lar-telemetry).
+#   lar:///ha.ka.ba/@lararium/api/lar-telemetry).
 (
   # DRAWER leg — route THROUGH the @daemon nalu (the {chat}→@daemon-nalu→mempalace path): each new
   # turn → `capture` verb → capture cap → WAL → flush `mine --source ndjson`. `lares capture` falls

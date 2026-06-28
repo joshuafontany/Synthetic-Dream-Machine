@@ -23,7 +23,7 @@
  *   3. Adapters call emit() to feed ingress events
  *   4. stop() clears the interval and cancels all branch tasks
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/lar-event-bus-impl
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/lar-event-bus-impl
  */
 
 import type {

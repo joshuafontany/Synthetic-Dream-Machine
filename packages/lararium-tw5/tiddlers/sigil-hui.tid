@@ -1,7 +1,7 @@
 title: lar:///ha.ka.ba/@lararium/tw5/tiddlers/sigil-hui
 tags: $:/tags/Global lar:///ha.ka.ba/tags/SharktoothSigil
 lar-kind: concurrency
-lar-pono-uri: lar:///ha.ka.ba/@lares/v0.1/api/pono/hui
+lar-pono-uri: lar:///ha.ka.ba/@lares/api/pono/hui
 lar-see-also: \sync
 lar-open-pattern: <<~\s*hui\s*>>
 lar-close-pattern: <<~\/hui\s*>>

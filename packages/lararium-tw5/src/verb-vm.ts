@@ -4,7 +4,7 @@
  * Manages the in-TW5-wiki invocation tiddlers (volatile scratch, never synced)
  * and writes durable outcome tiddlers to the Automerge-backed daemon bag.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/tw5/verb-vm
+ * Meme: lar:///ha.ka.ba/@lararium/tw5/verb-vm
  */
 
 import type { BatchMode, CompositeStore, Verb } from "@lararium/mesh";

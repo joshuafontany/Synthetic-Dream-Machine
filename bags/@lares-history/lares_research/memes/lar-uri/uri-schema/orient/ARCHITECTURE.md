@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=CS:18&p=10 -->
 
@@ -9,7 +9,7 @@
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#design-intent -->
 ## Design Intent
@@ -49,7 +49,7 @@ At each exchange span, `lar:` URIs are used in a mandatory sequence:
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:19#full-form -->
 ## Full Form and Authority-less Form
@@ -79,7 +79,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#component-map -->
 ## Component Map
@@ -99,7 +99,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use fo
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#component-semantics -->
 ## Component Semantics
@@ -172,7 +172,7 @@ Scale positions: Strategic (🗺️ ~6 days) · Operational (⚙️ ~4 hours) ·
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#provisionality-markers -->
 ## Provisionality Markers
@@ -190,7 +190,7 @@ These are orthogonal. A URI may carry multiple `~` markers on different componen
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/v0.1/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/orient/?confidence=C:18#kowloon-handle-form -->
 ## Kowloon / ActivityPub Handle Form

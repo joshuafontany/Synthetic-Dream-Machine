@@ -2,7 +2,7 @@
  * oracle-substrate — the read-only PUBLIC substrate: a content-addressed snapshot
  * (the floor) + a signed monotone lineage-linked pointer (the ratchet face).
  *
- * Canon: lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity#the-oracle-plane
+ * Canon: lar:///ha.ka.ba/@lares/api/pono/lararium-identity#the-oracle-plane
  * (the Two-Faced Substrate, swarm-ruled 2026-06-25). The read face serves @oracle as
  * an IMMUTABLE blob — `Automerge.save(doc)` bytes named by their content hash — so
  * write-refusal needs no check: a hash-named blob holds no mutable surface, no sync

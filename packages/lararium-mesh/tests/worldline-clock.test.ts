@@ -3,7 +3,7 @@
  * (the generation segment ticks; the block is an offset), grounding-tick resets L0, the
  * address is prefix-truncatable. Pure functions; nothing touches the mesh.
  *
- * Meme: lar:///ha.ka.ba/@lararium/v0.1/mesh/ffz-clock#rhythmic-address
+ * Meme: lar:///ha.ka.ba/@lararium/mesh/ffz-clock#rhythmic-address
  */
 
 import { describe, test, expect } from "vitest";

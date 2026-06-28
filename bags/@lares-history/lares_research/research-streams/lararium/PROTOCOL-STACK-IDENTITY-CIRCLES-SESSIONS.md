@@ -149,7 +149,7 @@ From Josh Ellis's Kowloon `CLAUDE.md`:
 
 Circle membership **never federates**. The social graph is sharded — each peer's graph lives exclusively on their local node, cannot be queried from outside, and is never transmitted. No remote node can reconstruct who follows whom. This is the inversion: on centralized platforms the platform owns the graph; here the peer owns the graph.
 
-See full reference: `packages/lares-core/memes/api/v0.1/pono/circles-kowloon.md`
+See full reference: `packages/lares-core/memes/api/pono/circles-kowloon.md`
 
 ### Two founding modes, same structure
 

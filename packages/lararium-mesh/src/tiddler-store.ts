@@ -76,7 +76,7 @@ export type TW5TiddlerFields = ITW5TiddlerFields;
 
 // ---------------------------------------------------------------------------
 // LarTiddlerRecord — host-envelope entry in a bag doc
-// Schema: lar:///ha.ka.ba/@lares/v0.1/api/lararium/schema/tiddler-record
+// Schema: lar:///ha.ka.ba/@lares/api/lararium/schema/tiddler-record
 // ---------------------------------------------------------------------------
 
 export interface LarTiddlerMeta {
