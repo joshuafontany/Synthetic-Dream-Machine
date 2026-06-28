@@ -63,6 +63,8 @@ No axis commands the other. The SOCIAL axis carries **delegation and read-access
 
 **Every lararium `#has {relay}` — always.** A lararium relays whether or not anyone else ever connects. The relay capability sits at the **floor** of the lararium stack, not beside it.
 
+But *holding* the cap and *expressing* it part ways: every lararium **holds** the rhizome (relay) cap intrinsically, yet **expresses** it — actually carries others' traffic — only when **self-elected by capacity** (reachability · spare bandwidth · uptime), demotable, never forced on all. The relay floor is *"every node may, and self-elects by load,"* never *"every node must carry."* The full model — the relay cap as one of five (`rhizome · stolon · tuber · bulb · corm`), hold-vs-express, the cap-handshake, self-election — stands at <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/mesh/vessel-caps >>.
+
 A bare **"relay"** names a lararium stripped to that one cap: no wiki, no read-bags, no hosted users — only `#has {transport-forward, leyline-peering}`. Still a lararium. The minimal member of the family.
 
 The family **builds up by capability composition** — the `#has`-stack ontology, no subclassing, only added caps:
