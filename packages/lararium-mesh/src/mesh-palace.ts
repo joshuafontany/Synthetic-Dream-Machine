@@ -29,7 +29,8 @@
  * Meme: lar:///ha.ka.ba/@lararium/mesh/mesh-palace
  */
 
-import type { Doc } from "@automerge/automerge";
+import { from as automergeFrom, type Doc } from "@automerge/automerge";
+import type { DocHandle } from "@automerge/automerge-repo";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord } from "./base-doc.js";
 import type { LarTiddlerRecord } from "./tiddler-store.js";
@@ -289,8 +290,18 @@ export type {
   PointerVerdict as FlowMapVerdict,
 };
 
-/** Export the public FLOW-map as a content-addressed snapshot (the read-face). */
-export function exportFlowMapSnapshot(doc: Doc<LarDoc>): Promise<OracleSnapshot> {
+/** Load a plain LarDoc projection into a fresh Automerge doc (A.from rejects the readonly interface). */
+function loadDoc(d: LarDoc): Doc<Record<string, unknown>> {
+  return automergeFrom(d as unknown as Record<string, unknown>);
+}
+
+/** Snapshot a mesh-palace doc's PUBLIC FLOW-map (membrane applied) as a content-addressed read-face. */
+export function snapshotPublicFlowMap(palaceDoc: LarDoc): Promise<OracleSnapshot> {
+  return exportOracleSnapshot(loadDoc(publicFlowMap(palaceDoc)));
+}
+
+/** Export an already-loaded FLOW-map Doc as a snapshot (generic passthrough). */
+export function exportFlowMapSnapshot<T>(doc: Doc<T>): Promise<OracleSnapshot> {
   return exportOracleSnapshot(doc);
 }
 
@@ -299,3 +310,53 @@ export const buildFlowMapPointer = buildOraclePointer;
 
 /** The reader rule for a peer's FLOW-map pointer (never throws — returns a verdict). */
 export const verifyFlowMapPointer = verifyOraclePointer;
+
+// ── The live surface — a DocHandle-bound read/write over the pure core ─────
+// Writes go through `handle.change()`, reads off `handle.doc()`. The pure
+// functions above stay the contract; this is the thin stateful skin a vessel
+// holds. A `MeshPalaceDoc` is just a `LarDoc` (the bag is its own Automerge doc).
+
+export type MeshPalaceDoc = LarDoc;
+
+export function emptyMeshPalaceDoc(): MeshPalaceDoc {
+  return { schemaVersion: "0.1", tiddlers: {} };
+}
+
+export class MeshPalace {
+  constructor(
+    private readonly handle: DocHandle<MeshPalaceDoc>,
+    private readonly authority: string,
+  ) {}
+
+  private current(): MeshPalaceDoc {
+    return this.handle.doc() ?? emptyMeshPalaceDoc();
+  }
+
+  private write(rec: LarTiddlerRecord): void {
+    this.handle.change((d) => { d.tiddlers[rec.tiddler.title] = rec; });
+  }
+
+  /** Register/refresh a dial-record (a bearing → key + endpoint resolution). */
+  putDial(e: DialEntry): void { this.write(dialEntryToRecord(e, this.authority)); }
+  /** Register/refresh a vessel's cap-stack (held ⊕ expressed). */
+  putVessel(v: VesselCapStack): void { this.write(vesselCapStackToRecord(v, this.authority)); }
+  /** Register/refresh a routing slot (r, θ). */
+  putRoute(s: RoutingSlot): void { this.write(routingSlotToRecord(s, this.authority)); }
+
+  /** Resolve one bearing to its dial-record, or null when unknown. */
+  getDial(bearing: string): DialEntry | null {
+    return recordToDialEntry(this.current().tiddlers[dialUri(bearing)]);
+  }
+
+  dials():   DialEntry[]      { return dialEntries(this.current()); }
+  vessels(): VesselCapStack[] { return vesselCapStacks(this.current()); }
+  routes():  RoutingSlot[]    { return routingSlots(this.current()); }
+
+  /** The public projection — only what crosses the disclosure membrane (coarse FLOW). */
+  publicProjection(): MeshPalaceDoc { return publicFlowMap(this.current()); }
+
+  /** Export the public FLOW-map as a content-addressed snapshot (the read-face). */
+  exportPublicSnapshot(): Promise<OracleSnapshot> {
+    return snapshotPublicFlowMap(this.current());
+  }
+}

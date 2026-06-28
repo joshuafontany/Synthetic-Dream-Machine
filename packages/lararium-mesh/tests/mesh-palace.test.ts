@@ -13,7 +13,7 @@
  */
 
 import { describe, test, expect } from "vitest";
-import * as A from "@automerge/automerge";
+import { Repo } from "@automerge/automerge-repo";
 import type { LarDoc } from "../src/base-doc.js";
 import type { LarTiddlerRecord } from "../src/tiddler-store.js";
 import { verifyOracleSnapshotBytes } from "../src/oracle-substrate.js";
@@ -22,8 +22,9 @@ import {
   dialEntryToRecord, recordToDialEntry,
   vesselCapStackToRecord, recordToVesselCapStack,
   routingSlotToRecord, recordToRoutingSlot,
-  publicFlowMap, exportFlowMapSnapshot,
-  type DialEntry, type VesselCapStack, type RoutingSlot,
+  publicFlowMap, snapshotPublicFlowMap,
+  MeshPalace, emptyMeshPalaceDoc,
+  type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
 
 const AUTH = "lar:///ha.ka.ba/@meshpalace/test";
@@ -102,10 +103,34 @@ describe("the public read-face (Two-Faced Substrate)", () => {
     const full = docOf([
       dialEntryToRecord({ bearing: "lar:///ha.ka.ba/@oracle", verifyingKeyHex: "d".repeat(64), endpoint: "ws://relay/x", scale: "nexus" }, AUTH),
     ]);
-    const snap = await exportFlowMapSnapshot(A.from(publicFlowMap(full)));
+    const snap = await snapshotPublicFlowMap(full);
     expect(await verifyOracleSnapshotBytes(snap.bytes, snap.cid)).toBe(true);
     const tampered = new Uint8Array(snap.bytes); tampered[tampered.length - 1] ^= 0xff;
     expect(await verifyOracleSnapshotBytes(tampered, snap.cid)).toBe(false);
+  });
+});
+
+describe("the live MeshPalace surface", () => {
+  test("put/get round-trips through a real DocHandle; the public snapshot verifies", async () => {
+    const repo = new Repo({ sharePolicy: async () => true });
+    const handle = repo.create<MeshPalaceDoc>(emptyMeshPalaceDoc());
+    const palace = new MeshPalace(handle, AUTH);
+
+    palace.putDial({ bearing: "lar:///ha.ka.ba/@oracle", verifyingKeyHex: "e".repeat(64), endpoint: "ws://relay/p", scale: "dreamnet" });
+    palace.putDial({ bearing: "lar:///ha.ka.ba/@daemon", verifyingKeyHex: "f".repeat(64), endpoint: "ws://local/q" }); // no scale → local
+    palace.putVessel({ vesselId: "v9", held: ["tuber", "rhizome"], expressed: ["rhizome.forward"] });
+    palace.putRoute({ bearing: "lar:///ha.ka.ba/@oracle", r: 7, theta: 2 });
+
+    expect(palace.getDial("lar:///ha.ka.ba/@oracle")?.endpoint).toBe("ws://relay/p");
+    expect(palace.dials()).toHaveLength(2);
+    expect(palace.vessels()[0]?.expressed).toEqual(["rhizome.forward"]);
+    expect(palace.routes()).toHaveLength(1);
+
+    // the public projection drops the local dial + the vessel cap-stack
+    expect(Object.keys(palace.publicProjection().tiddlers)).toHaveLength(2);
+
+    const snap = await palace.exportPublicSnapshot();
+    expect(await verifyOracleSnapshotBytes(snap.bytes, snap.cid)).toBe(true);
   });
 });
 
