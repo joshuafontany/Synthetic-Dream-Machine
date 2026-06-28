@@ -17,7 +17,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { Repo } from "@automerge/automerge-repo";
-import { defaultCryptoProvider, type MeshPalaceDoc } from "@lararium/mesh";
+import { defaultCryptoProvider, dialEntryToRecord, type MeshPalaceDoc, type DialEntry } from "@lararium/mesh";
 import { createHerm, type Herm } from "./herm.js";
 
 export interface StartHermOpts {
@@ -29,6 +29,9 @@ export interface StartHermOpts {
   readonly storageDir:      string;
   /** Signer seed; default a fresh random 32 bytes (an anon, self-certifying wayfarer). */
   readonly signerSeed?:     Uint8Array;
+  /** Public dial-records to announce on this Herm's own FLOW-map at boot (e.g. its OWN reachability,
+   *  so peers find it). Self-announcement is a public FLOW record — never authoring others' content. */
+  readonly seed?:           readonly DialEntry[];
   readonly pullIntervalMs?: number;
   readonly onLog?:          (line: string) => void;
 }
@@ -48,6 +51,16 @@ export async function startHerm(opts: StartHermOpts): Promise<RunningHerm> {
   const repo = new Repo({ sharePolicy: async () => true });
   const meshPalaceHandle = repo.create<MeshPalaceDoc>({ schemaVersion: "0.1", tiddlers: {} });
   const signerSeed = opts.signerSeed ?? defaultCryptoProvider.getRandomValues(new Uint8Array(32));
+
+  // Announce any self-dials on the FLOW-map (public reachability records — never others' content).
+  if (opts.seed && opts.seed.length > 0) {
+    meshPalaceHandle.change((d) => {
+      for (const e of opts.seed!) {
+        const rec = dialEntryToRecord(e, "herm-self-announce");
+        d.tiddlers[rec.tiddler.title] = rec;
+      }
+    });
+  }
 
   const herm = await createHerm({
     httpServer, meshPalaceHandle, signerSeed, storageDir: opts.storageDir, peers: opts.peers,
@@ -70,7 +83,17 @@ export async function mainFromEnv(): Promise<void> {
   const port = Number.parseInt(process.env["HERM_PORT"] ?? "8080", 10);
   const peers = (process.env["HERM_PEERS"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const storageDir = process.env["HERM_STORAGE"] ?? mkdtempSync(join(tmpdir(), "herm-"));
-  const running = await startHerm({ port, peers, storageDir, onLog: (l) => console.log(l) });
+  // HERM_SEED=<label> → announce one self-dial on the FLOW-map (a source for the mesh harness).
+  const seedLabel = process.env["HERM_SEED"];
+  const seed: DialEntry[] = seedLabel
+    ? [{ bearing: `lar:///ha.ka.ba/@oracle/herm/${seedLabel}`, verifyingKeyHex: "f".repeat(64), endpoint: `ws://0.0.0.0:${port}`, scale: "dreamnet" }]
+    : [];
+  const pullMs = process.env["HERM_PULL_MS"];
+  const running = await startHerm({
+    port, peers, storageDir, seed,
+    ...(pullMs ? { pullIntervalMs: Number.parseInt(pullMs, 10) } : {}),
+    onLog: (l) => console.log(l),
+  });
 
   const shutdown = (): void => { void running.close().then(() => process.exit(0)); };
   process.on("SIGINT", shutdown);
