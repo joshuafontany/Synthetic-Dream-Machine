@@ -35,8 +35,9 @@ import {
   BAG_IDS, slugFromUri,
   PERSONA_GROUP_DOC_ID_TIDDLER, PERSONA_GROUP_AGENT_ID_TIDDLER, MESH_CABAL_DOC_ID_TIDDLER,
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
-  ENGINE_CORE_ID, BagResidencyManager,
+  ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
 }                                       from "@lararium/mesh";
+import { casDirForStorage, writeBlobsToCasFs } from "./node-cas.js";
 import {
   ACTIVE_WIKI_URI,
   MemoryTiddlerStore,
@@ -231,6 +232,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         const coreHash = coreBlobEntry.sha256;
         if (!coreHash) throw new Error(`[openNodeVessel] TW5 core blob missing sha256; re-run build:genesis`);
 
+        // Populate the fs CAS — every island worker pulls engine + plugin bytes by CID from
+        // this local CID plane, off the sync port. The genesis doc holds the bytes as the
+        // SOURCE; this mirrors them into the CAS the workers read via resolveByCid, the nodefs
+        // face of the browser vessel's OPFS CAS write (isomorphic by composition).
+        const casWritten = writeBlobsToCasFs(islandHandle.doc()?.blobs, casDirForStorage(storageDir));
+        if (casWritten > 0) console.log(`[openNodeVessel] fs CAS: wrote ${casWritten} blob(s) by CID`);
+
         // Bootstrap URLs: genesis/social-bootstrap.json (init node — authoritative),
         // falling back to the island oracle (replica vessels).
         let bootstrapPlugin: Record<string, unknown> | null = null;
@@ -314,11 +322,16 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         signerDid,
         deviceEdge,
       };
+      // The engine's plugin-tiddler CIDs — the daemon worker pulls them by CID from the fs CAS
+      // (the breath path), never CRDT-syncing the bytes over the port. Same derivation the pool
+      // feeds every wiki island; mirrors the browser vessel.
+      const pluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       daemonVm = await openDaemonVm({
         repo,
         daemonUrl: bootstrap.daemonUrl,
         personaUrl: bootstrap.personaUrl,
         coreHash: assembly.coreHash,
+        ...(pluginCids.length ? { pluginCids } : {}),
         grants: {
           islandUrl: assembly.islandHandle.url,
           // The daemon island's OWN bag (@daemon = wikiBagUri("daemon"), one-recipe model).
@@ -482,9 +495,13 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         // above, so resolveDiskMirrors skips this for them — no double-project.
         { bagId: "@self",          mirrorRoot: join(workerRootDir, "bags"),           scope: "@self",    perWikiSlug: true, selfCanon: true },
       ];
+      // The engine's plugin-tiddler CIDs — every wiki island pulls them by CID from the local
+      // CAS, the same CID plane the daemon island reads.
+      const poolPluginCids = pluginCidsFromIslandBlobs(assembly.islandHandle.doc()?.blobs);
       vmManager = new VesselIslandPool({
         mainRepo:    repo,
         storageRoot: storageDir,
+        ...(poolPluginCids.length ? { pluginCids: poolPluginCids } : {}),
         diskMirrorGrant,
         onWorkerEvent: (wikiId, msg) => {
           eventBus.enqueueToRing("vm-ring", "worker.event", { wikiId, listenable: msg.listenable, payload: msg.payload });

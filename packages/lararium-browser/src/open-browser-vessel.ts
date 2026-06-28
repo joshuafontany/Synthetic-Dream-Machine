@@ -20,7 +20,7 @@ import type { DocHandle, AutomergeUrl }      from "@automerge/automerge-repo";
 import {
   emptyLarDoc, mutableLarRecord,
   CATALOG_DOC_URI, DAEMON_BAG_ID,
-  ENGINE_CORE_ID,
+  ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
@@ -141,17 +141,6 @@ async function waitHandleLocal<T>(repo: Repo, url: string, fallback: () => DocHa
   } catch {
     return fallback();
   }
-}
-
-/** The engine's plugin-tiddler CIDs from an island doc's blobs (non-engine JSON blobs, by
- *  sha256). The daemon AND every wiki island resolve these by CID from the local CAS (the breath
- *  path), never CRDT-syncing the bytes. One derivation, fed to every island of the runtime. */
-function pluginCidsFromIslandBlobs(
-  blobs: Record<string, { id?: string; sha256?: string; mimeType?: string }> | undefined,
-): readonly string[] {
-  return Object.values(blobs ?? {})
-    .filter((b) => b.id !== ENGINE_CORE_ID && b.mimeType === "application/json" && typeof b.sha256 === "string")
-    .map((b) => b.sha256 as string);
 }
 
 export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<BrowserVesselResult> {

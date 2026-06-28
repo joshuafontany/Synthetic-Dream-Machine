@@ -34,6 +34,8 @@ export interface VesselIslandPoolOptions {
   mainRepo?: Repo;
   /** Root dir for island-owned NodeFS storage partitions; absent = memory-only. */
   storageRoot?: string;
+  /** The engine's plugin-tiddler CIDs — every wiki island pulls them by CID from the local CAS. */
+  pluginCids?: readonly string[];
   /** Held disk-write capability: canon bag → mirror configs this pool MAY project. */
   diskMirrorGrant?: readonly { bagId: string; mirrorRoot: string; scope: string; perWikiSlug?: boolean; selfCanon?: boolean }[];
   /** Override the mount silence budget in ms (tests). */
@@ -61,6 +63,7 @@ export class VesselIslandPool extends VesselIslandPoolCore {
       mainRepo: options.mainRepo ?? null,
       diskMirrorGrant: options.diskMirrorGrant ?? [],
       hotCap: HOT_CAP,
+      ...(options.pluginCids?.length ? { pluginCids: options.pluginCids } : {}),
       ...(options.onWorkerEvent ? { onWorkerEvent: options.onWorkerEvent } : {}),
       ...(options.onEa ? { onEa: options.onEa } : {}),
       ...(options.mountSilenceMs       !== undefined ? { mountSilenceMs:       options.mountSilenceMs }       : {}),

@@ -22,6 +22,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { automergeLoad, ENGINE_CORE_ID, LARARIUM_BAG } from "@lararium/mesh";
 import type { LarDoc, IslandMsg_Event } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
+import { setupCasFromGenesis } from "./cas-test-setup.js";
 
 // ---------------------------------------------------------------------------
 // Build artifact guards
@@ -86,10 +87,13 @@ describe.skipIf(skipReason)(
       });
 
       const events: IslandMsg_Event[] = [];
+      const cas = setupCasFromGenesis(genesisDoc);
 
       const pool = new VesselIslandPool({
         workerScriptUrl: ISLAND_JS,
         mainRepo:        vesselRepo,
+        storageRoot:     cas.storageDir,
+        ...(cas.pluginCids.length ? { pluginCids: cas.pluginCids } : {}),
         onWorkerEvent:   (_id, msg) => { console.log("[test] onWorkerEvent:", JSON.stringify(msg)); events.push(msg); },
       });
 
@@ -139,6 +143,7 @@ describe.skipIf(skipReason)(
       } finally {
         await pool.disposeAll();
         await vesselRepo.shutdown();
+        cas.cleanup();
       }
     },
     TIMEOUT,
@@ -159,10 +164,13 @@ describe.skipIf(skipReason)(
       });
 
       const verbEvents: IslandMsg_Event[] = [];
+      const cas = setupCasFromGenesis(genesisDoc);
 
       const pool = new VesselIslandPool({
         workerScriptUrl: ISLAND_JS,
         mainRepo:        vesselRepo,
+        storageRoot:     cas.storageDir,
+        ...(cas.pluginCids.length ? { pluginCids: cas.pluginCids } : {}),
         onWorkerEvent:   (_id, msg) => {
           if (msg.payload["verb"]) verbEvents.push(msg);
         },
@@ -195,6 +203,7 @@ describe.skipIf(skipReason)(
       } finally {
         await pool.disposeAll();
         await vesselRepo.shutdown();
+        cas.cleanup();
       }
     },
     TIMEOUT,

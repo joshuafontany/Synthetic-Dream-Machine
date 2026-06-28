@@ -33,6 +33,7 @@ import type {
   IslandToVesselMsg,
 } from "@lararium/mesh";
 import type { IslandBehavior } from "@lararium/tw5";
+import { casDirFromIslandStorageDir, readCasBlobFromFs } from "./node-cas.js";
 
 function _buildStorage(cfg: IslandStorageConfig | undefined): StorageAdapterInterface | undefined {
   if (!cfg || cfg.type === "memory") return undefined;
@@ -50,10 +51,21 @@ export function runSovereignWorker(
   }
   const port = parentPort;
 
+  // The fs CAS dir — captured from the manifest storage dir when the kernel builds the repo
+  // (host.storage runs before resolveByCid). Engine + plugin bytes ride this local CID plane,
+  // pulled by content-address off the sync port — the nodefs face of the worker CAS. A
+  // memory-storage island carries no CAS dir; resolveByCid yields null and the kernel faults
+  // (the CID plane is required).
+  let casDir: string | null = null;
+
   const host: IslandHostSeam = {
     post:    (msg: IslandToVesselMsg) => port.postMessage(msg),
     listen:  (onMessage) => port.on("message", onMessage),
-    storage: (msg) => _buildStorage(msg.storage),
+    storage: (msg) => {
+      if (msg.storage?.type === "nodefs") casDir = casDirFromIslandStorageDir(msg.storage.dir);
+      return _buildStorage(msg.storage);
+    },
+    resolveByCid: async (cid) => (casDir ? readCasBlobFromFs(cid, casDir) : null),
   };
 
   runSovereignKernel(host, behaviorOrFactory);

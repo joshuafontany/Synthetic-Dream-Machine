@@ -37,6 +37,7 @@ import {
   type VerbBreathingContract,
 } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
+import { setupCasFromGenesis } from "./cas-test-setup.js";
 
 // ── Artifact gates ─────────────────────────────────────────────────────────
 
@@ -121,9 +122,12 @@ describe.skipIf(skipReason)(
         // ── Pool — captures IslandMsg_Event from island ───────────────────
         const events: IslandMsg_Event[] = [];
 
+        const cas = setupCasFromGenesis(genesisDoc);
         const pool = new VesselIslandPool({
           workerScriptUrl: ISLAND_JS,
           mainRepo:        vesselRepo,
+          storageRoot:     cas.storageDir,
+          ...(cas.pluginCids.length ? { pluginCids: cas.pluginCids } : {}),
           onWorkerEvent:   (_id, msg) => events.push(msg),
         });
 
@@ -151,6 +155,7 @@ describe.skipIf(skipReason)(
         } finally {
           await pool.disposeAll();
           await vesselRepo.shutdown();
+          cas.cleanup();
         }
       },
       TIMEOUT,

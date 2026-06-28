@@ -1,13 +1,13 @@
 /**
  * blob-sovereignty.test.ts — §6 pono federation gate.
  *
- * Proves: a wiki island reads TW5 core bytes from `LarDoc.blobs[ENGINE_CORE_ID]`
- * on the @lararium CRDT doc, boots TW5, and declares `ea` — without receiving
- * raw bytes in the manifest.
+ * Proves: a wiki island pulls the TW5 core + plugin bytes by CID from the local
+ * CAS (the CID plane), boots TW5, and declares `ea` — without receiving raw bytes
+ * over the sync port and without reading them from a CRDT doc.
  *
- * Gate condition: island ea fires ↔ bytes traveled via CRDT, not manifest.
- * If the @lararium binding is absent or the blob is missing, the island posts
- * fault and ea never fires (pool times out → test fails).
+ * Gate condition: island ea fires ↔ the CID plane served the engine. With no CAS
+ * (no resolver / a miss), the island posts fault and ea never fires (pool times
+ * out → test fails).
  *
  * Uses the real compiled node-wiki-island.js entry (not a fixture).
  * Requires: pnpm --filter @lararium/node build (dist/src/node-wiki-island.js present).
@@ -20,9 +20,10 @@ import { readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { Repo } from "@automerge/automerge-repo";
-import { automergeLoad, ENGINE_CORE_ID, LARARIUM_BAG } from "@lararium/mesh";
+import { automergeLoad, ENGINE_CORE_ID } from "@lararium/mesh";
 import type { LarDoc } from "@lararium/mesh";
 import { VesselIslandPool } from "../src/vessel-island-pool.js";
+import { setupCasFromGenesis } from "./cas-test-setup.js";
 
 const __dir       = dirname(fileURLToPath(import.meta.url));
 const GENESIS_BIN = join(__dir, "../../../genesis/island.bin");
@@ -40,22 +41,25 @@ const skipReason =
   missingIsland  ? "dist/src/node-wiki-island.js absent — run: pnpm --filter @lararium/node build" :
   false;
 
-describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from @lararium CRDT${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`, () => {
-  test("island boots TW5 and declares ea from CRDT-sourced bytes", async () => {
+describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from the CID plane${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`, () => {
+  test("island boots TW5 and declares ea from CAS-sourced bytes", async () => {
 
-    // Load the genesis LarDoc — carries blobs[ENGINE_CORE_ID] + plugin blobs.
-    const genesisBytes    = new Uint8Array(readFileSync(GENESIS_BIN));
-    const genesisDoc = automergeLoad<LarDoc>(genesisBytes);
-    const coreHash   = (genesisDoc.blobs?.[ENGINE_CORE_ID]?.sha256 as string | undefined) ?? null;
+    // Load the genesis LarDoc — the SOURCE carrying blobs[ENGINE_CORE_ID] + plugin blobs.
+    const genesisBytes = new Uint8Array(readFileSync(GENESIS_BIN));
+    const genesisDoc   = automergeLoad<LarDoc>(genesisBytes);
+    const coreHash     = (genesisDoc.blobs?.[ENGINE_CORE_ID]?.sha256 as string | undefined) ?? null;
     expect(genesisDoc.blobs?.[ENGINE_CORE_ID]?.blob).toBeTruthy();
 
-    // Seed a vessel Repo by importing the full genesis artifact.
-    // repo.import() loads the existing Automerge doc (with blobs intact) into the local Repo.
-    // The island syncs it via MessageChannel and reads blobs[ENGINE_CORE_ID] from its own copy.
-    const vesselRepo = new Repo({ sharePolicy: async () => true });
+    // The CID plane: mirror the genesis blobs into a local fs CAS. Each wiki island's
+    // nodefs storage is a child of cas.storageDir, so the worker derives the same
+    // `<storageDir>/cas` dir and pulls the engine + plugins by CID.
+    const cas = setupCasFromGenesis(genesisDoc);
+
+    // Seed a vessel Repo — the island needs @lararium only for its structural tiddlers;
+    // the engine bytes ride the CID plane, never the doc.
+    const vesselRepo    = new Repo({ sharePolicy: async () => true });
     const laraiumHandle = vesselRepo.import<LarDoc>(genesisBytes);
 
-    // Minimal empty wiki doc — island only needs @lararium for TW5 boot.
     const wikiHandle = vesselRepo.create<LarDoc>();
     wikiHandle.change((d) => {
       (d as unknown as Record<string, unknown>)["tiddlers"] = {};
@@ -64,10 +68,12 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
     const pool = new VesselIslandPool({
       workerScriptUrl: ISLAND_JS,
       mainRepo:        vesselRepo,
+      storageRoot:     cas.storageDir,
+      ...(cas.pluginCids.length ? { pluginCids: cas.pluginCids } : {}),
     });
 
     try {
-      // mountWiki awaits ea. Timeout → island failed to resolve bytes from CRDT.
+      // mountWiki awaits ea. Timeout → island failed to resolve bytes from the CID plane.
       await pool.mountWiki(WIKI_ID, {
         coreHash,
         recipe:   { wikiSlug: "test" },
@@ -78,6 +84,7 @@ describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from
     } finally {
       await pool.disposeAll();
       await vesselRepo.shutdown();
+      cas.cleanup();
     }
   }, TIMEOUT);
 });

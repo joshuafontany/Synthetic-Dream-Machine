@@ -8,6 +8,7 @@ export {
 } from "@automerge/automerge";
 export type { Heads, Doc as AutomergeDoc } from "@automerge/automerge";
 export * from "./base-doc.js";
+export * from "./cas.js";
 export * from "./resolver.js";
 export * from "./causal-island.js";
 export * from "./capability.js";

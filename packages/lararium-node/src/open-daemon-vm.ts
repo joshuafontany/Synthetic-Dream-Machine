@@ -41,10 +41,13 @@ export interface DaemonVmOptions {
   /** @persona (PersonaGroup veiled-identity) doc URL — resolved alongside the daemon doc. */
   personaUrl:         string;
   /**
-   * SHA-256 hex of the TW5 core blob (`LarDoc.blobs[ENGINE_CORE_ID]`).
-   * null = pre-CAS. The daemon island reads bytes from the @lararium CRDT doc.
+   * SHA-256 hex (the CID) of the TW5 core blob — the daemon island pulls the engine
+   * bytes by this CID from the local CAS (the CID plane).
    */
   coreHash:          string | null;
+  /** The engine's plugin-tiddler CIDs — the daemon island pulls them by CID from the local
+   *  CAS (the breath path), never CRDT-syncing the bytes over the port. */
+  pluginCids?:       readonly string[];
   /** Typed structural capabilities: @lararium engine, @daemon bag, @lares,
    *  @catalog access. Library bags resolve island-side from @catalog. */
   grants:            IslandGrants;
@@ -80,7 +83,7 @@ export interface DaemonVmOptions {
 }
 
 export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore> {
-  const { repo, daemonUrl, personaUrl, coreHash, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
+  const { repo, daemonUrl, personaUrl, coreHash, pluginCids, grants, libraryBags, daemonAuth, storageDir, telemetry, workerScriptUrl } = opts;
 
   // ── Daemon doc handle (node strategy: merge-on-late-arrival) ────────────────
   const daemonHandle = await resolveBootDoc<LarDoc>(
@@ -116,6 +119,7 @@ export async function openDaemonVm(opts: DaemonVmOptions): Promise<DaemonVmCore>
   // the lifecycle and the whole result surface (DaemonVmCore) live once in the core.
   return openDaemonVmCore(host, {
     repo, daemonHandle, personaHandle, recipe, grants, coreHash,
+    ...(pluginCids?.length ? { pluginCids } : {}),
     ...(daemonAuth ? { daemonAuth } : {}),
     ...(storage   ? { storage }   : {}),
     workerScriptUrl: workerScriptUrl ?? DEFAULT_ADMIN_WORKER_URL,

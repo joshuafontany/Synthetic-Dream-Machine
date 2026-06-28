@@ -28,6 +28,7 @@ import type { Repo, DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import {
   ENGINE_CORE_ID,
   cidV1Sha256,
+  casBlobEntries, type CasBlobLike,
   importGenesisIsland,
   reconcileGenesisCid,
   type GenesisReconcileResult,
@@ -102,16 +103,14 @@ const OPFS_CAS_DIR = "cas";
 /** Write each blob entry to the OPFS CAS, keyed by its sha256 (CID). No-ops if OPFS is
  *  unavailable. Returns the count written. */
 export async function writeBlobsToCasOpfs(
-  blobs: Record<string, { sha256?: string; blob?: unknown }>,
+  blobs: Record<string, CasBlobLike>,
 ): Promise<number> {
   let written = 0;
   try {
     const root = await navigator.storage.getDirectory();
     const cas  = await root.getDirectoryHandle(OPFS_CAS_DIR, { create: true });
-    for (const entry of Object.values(blobs)) {
-      if (!entry.sha256 || !entry.blob) continue;
-      const bytes = new Uint8Array(entry.blob as ArrayBufferLike);
-      const fileH = await cas.getFileHandle(entry.sha256, { create: true });
+    for (const { cid, bytes } of casBlobEntries(blobs)) {
+      const fileH = await cas.getFileHandle(cid, { create: true });
       const w = await (fileH as FileSystemFileHandle & {
         createWritable(): Promise<FileSystemWritableFileStream>;
       }).createWritable();
