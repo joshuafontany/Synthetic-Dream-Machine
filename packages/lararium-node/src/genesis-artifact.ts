@@ -28,10 +28,11 @@ import {
   tiddlerText,
   emptyLarDoc,
   cidV1Sha256FromHex,
-  importGenesisIsland,
-  reconcileGenesisCid,
+  materializeGenesisIsland,
   GENESIS_CAS_MANIFEST_FORMAT,
+  GENESIS_SEED_FORMAT,
   type GenesisCasManifest,
+  type GenesisSeed,
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
@@ -42,7 +43,7 @@ const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early 
 
 function genesisArtifactPaths(genesisDir?: string): {
   bin: string; sha: string; cid: string; cidEngine: string; cidPlugins: string;
-  manifest: string; casDir: string;
+  manifest: string; seed: string; casDir: string;
 } {
   const root = genesisDir ?? DEFAULT_GENESIS_DIR;
   return {
@@ -52,8 +53,25 @@ function genesisArtifactPaths(genesisDir?: string): {
     cidEngine:  join(root, "island.cid-engine"),   // engine content-CID = the hearth true-name
     cidPlugins: join(root, "island.cid-plugins"),  // plugins content-CID = the fast ratchet
     manifest:   join(root, "island.manifest.json"),// the CAS manifest (engine + plugin cids)
+    seed:       join(root, "island.genesis.json"), // the PLAIN-DATA @oracle seed (the boot artifact)
     casDir:     join(root, "cas"),                 // the byte SOURCE: genesis/cas/<cid> files
   };
+}
+
+/**
+ * Read the plain-data genesis seed (island.genesis.json) — the @oracle's initial
+ * state the boot MATERIALIZES fresh (slice 2: the genesis is data, not a baked
+ * binary). Returns null when absent or malformed (a pre-slice-2 genesis).
+ */
+export function readGenesisSeed(genesisDir?: string): GenesisSeed | null {
+  const { seed } = genesisArtifactPaths(genesisDir);
+  try {
+    const parsed = JSON.parse(readFileSync(seed, "utf8")) as GenesisSeed;
+    if (parsed?.format !== GENESIS_SEED_FORMAT) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
 }
 
 /** The genesis CAS dir (genesis/cas) — the content-addressed byte SOURCE. */
@@ -75,17 +93,6 @@ export function readGenesisManifest(genesisDir?: string): GenesisCasManifest | n
   } catch {
     return null;
   }
-}
-
-function readGenesisBin(genesisDir?: string): Uint8Array {
-  const { bin } = genesisArtifactPaths(genesisDir);
-  if (!existsSync(bin)) {
-    throw new Error(
-      `[genesis-artifact] genesis/island.bin not found at ${bin}\n` +
-      `  → run: pnpm --filter @lararium/node build:genesis`,
-    );
-  }
-  return new Uint8Array(readFileSync(bin));
 }
 
 export function readGenesisSha256(genesisDir?: string): string | undefined {
@@ -184,32 +191,23 @@ export function hearthTrueName(genesisDir?: string): string | undefined {
 }
 
 // ---------------------------------------------------------------------------
-// loadGenesisIsland
+// loadOrMaterializeOracle — the slice-2 boot path (no Automerge-binary seed)
 // ---------------------------------------------------------------------------
+//
+// Retires loadGenesisIsland (island.bin import) AND reconcileIslandFromGenesis (the
+// merge-into-stale anti-pattern). The @oracle is a LIVE CRDT: reload it under the
+// deterministic id when persisted, else materialize it FRESH from the plain-data
+// seed (island.genesis.json). One call, no merge.
 
-export async function loadGenesisIsland(repo: Repo, genesisDir?: string): Promise<DocHandle<LarDoc>> {
-  // Node byte source; intake (validate → import → verify) rides the one core.
-  return importGenesisIsland(repo, readGenesisBin(genesisDir), "genesis-artifact");
-}
-
-// ---------------------------------------------------------------------------
-// reconcileIslandFromGenesis
-// ---------------------------------------------------------------------------
-
-export async function reconcileIslandFromGenesis(
-  handle:        DocHandle<LarDoc>,
-  genesisHandle: DocHandle<LarDoc>,
-  genesisDir?: string,
-): Promise<void> {
-  // The expected region CIDs ride the incoming genesis doc's own witness tiddlers
-  // now (engine + plugins); the compare, merge, and cid-record write ride the one
-  // core (genesis-intake). No sidecar lookup needed for the reconcile.
-  if (!genesisHandle.doc()) {
-    console.warn("[genesis-artifact] reconcile: genesisHandle.doc() null — skipping");
-    return;
+export async function loadOrMaterializeOracle(repo: Repo, genesisDir?: string): Promise<DocHandle<LarDoc>> {
+  const seed = readGenesisSeed(genesisDir);
+  if (!seed) {
+    throw new Error(
+      `[genesis-artifact] plain-data genesis seed (island.genesis.json) absent or malformed\n` +
+      `  → run: pnpm --filter @lararium/node build:genesis`,
+    );
   }
-  const r = reconcileGenesisCid(handle, genesisHandle);
-  if (!r.updated) console.log("[genesis-artifact] reconcile: live doc current — no merge needed");
+  return materializeGenesisIsland(repo, seed, "genesis-artifact");
 }
 
 // ---------------------------------------------------------------------------

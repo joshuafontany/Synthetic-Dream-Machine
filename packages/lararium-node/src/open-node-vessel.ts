@@ -49,7 +49,7 @@ import {
 } from "@lararium/tw5";
 import type { VesselWikiSlot, DaemonVmCore } from "@lararium/tw5";
 import {
-  loadGenesisIsland, reconcileIslandFromGenesis,
+  loadOrMaterializeOracle,
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
@@ -200,24 +200,12 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
 
       // Genesis island (required) + the social-plane bootstrap it carries.
       loadGenesis: async () => {
-        const genesisHandle = await loadGenesisIsland(repo, genesisDir);
-        const catalog = catalogHandle.doc();
-        const islandDocUrl = tiddlerText(catalog?.tiddlers?.[ORACLE_DOC_URI]) ?? null;
-        let islandHandle: DocHandle<LarDoc>;
-        if (islandDocUrl) {
-          islandHandle = await waitHandleLocal<LarDoc>(repo, islandDocUrl as AutomergeUrl, () => genesisHandle);
-          await reconcileIslandFromGenesis(islandHandle, genesisHandle, genesisDir);
-        } else {
-          islandHandle = genesisHandle;
-          const blobEntry = islandHandle.doc()?.blobs?.["tiddlywikicore"];
-          catalogHandle.change((doc) => {
-            doc.tiddlers[ORACLE_DOC_URI] = mutableLarRecord(ORACLE_DOC_URI, {
-              text: islandHandle.url,
-              ...(blobEntry?.version ? { version: blobEntry.version } : {}),
-              ...(blobEntry?.sha256 ? { sha256: blobEntry.sha256 } : {}),
-            }, "oracle-boot");
-          });
-        }
+        // Slice 2: the @oracle is a LIVE CRDT under a DETERMINISTIC doc id — reload
+        // it when persisted (operator writes intact), else MATERIALIZE it fresh from
+        // the plain-data seed (island.genesis.json). No Automerge-binary boot seed,
+        // no merge-into-stale. The catalog @oracle pointer (written by assembleVessel)
+        // is now advisory back-reference, no longer the identity mechanism.
+        const islandHandle = await loadOrMaterializeOracle(repo, genesisDir);
 
         // @lares + @lararium system-bag mint — operator(admin) office, node home
         // only. Both pointers ride the @oracle system plane (the island doc);

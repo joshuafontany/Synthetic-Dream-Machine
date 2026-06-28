@@ -17,7 +17,9 @@ import {
   save   as automergeSave,
   load   as automergeLoad,
 } from "@automerge/automerge";
-import { cidV1Sha256, sha256HexBytesSync, utf8Bytes } from "./crypto.js";
+import { stringifyAutomergeUrl } from "@automerge/automerge-repo";
+import type { AutomergeUrl, BinaryDocumentId } from "@automerge/automerge-repo";
+import { cidV1Sha256, sha256HexBytesSync, sha256BytesSync, utf8Bytes } from "./crypto.js";
 import { buildGenesisCasManifest, type GenesisCasManifest } from "./cas.js";
 import {
   ORACLE_DOC_URI,
@@ -144,6 +146,37 @@ export interface GenesisArtifact {
    * `genesis/cas/<cid>`. Held in memory only; never embedded in the CRDT.
    */
   readonly casEntries:  readonly { readonly cid: string; readonly bytes: Uint8Array }[];
+  /**
+   * The PLAIN-DATA genesis seed — the @oracle's initial state as JSON (no Automerge
+   * bytes). The build sink writes it to `island.genesis.json`; the boot MATERIALIZES
+   * the @oracle CRDT fresh from it under the deterministic doc id (slice 2). This is
+   * the boot artifact now — the Automerge `bytes`/island.bin survive only as a test
+   * fixture + determinism witness, no longer read at boot.
+   */
+  readonly seed:        GenesisSeed;
+}
+
+// ---------------------------------------------------------------------------
+// The plain-data genesis seed (slice 2: genesis is data, not a baked CRDT)
+// ---------------------------------------------------------------------------
+
+export const GENESIS_SEED_FORMAT = "lararium-genesis-seed/v1" as const;
+
+/**
+ * GenesisSeed — the @oracle's initial state as PLAIN DATA (JSON-serializable).
+ *
+ * It carries exactly what the @oracle CRDT is seeded with: the schema version, the
+ * blob METADATA map (descriptors only — bytes ride the CID plane), and the system
+ * tiddlers map (bag descriptors, system recipes, blob descriptors, region witnesses).
+ * `actorSeed` pins the Automerge actor so `materializeGenesisDoc(seed)` is byte-stable
+ * — two peers materialize byte-identical history, safe to share one deterministic id.
+ */
+export interface GenesisSeed {
+  readonly format:        typeof GENESIS_SEED_FORMAT;
+  readonly actorSeed:     string;
+  readonly schemaVersion: string;
+  readonly blobs:         Record<string, LarBlobEntry>;
+  readonly tiddlers:      Record<string, unknown>;
 }
 
 // ---------------------------------------------------------------------------
@@ -153,6 +186,37 @@ export interface GenesisArtifact {
 /** The two genesis witness tiddlers — one per ratchet region, both in the @oracle plane. */
 export const GENESIS_CID_ENGINE_TIDDLER  = `${ORACLE_DOC_URI}/genesis-cid-engine`;
 export const GENESIS_CID_PLUGINS_TIDDLER = `${ORACLE_DOC_URI}/genesis-cid-plugins`;
+
+// ---------------------------------------------------------------------------
+// The @oracle deterministic doc id (slice 2: materialize-fresh, no shipped binary)
+// ---------------------------------------------------------------------------
+
+/**
+ * The well-known seed for the @oracle's deterministic DocumentId. STABLE FOREVER —
+ * it derives from the @oracle's canonical URI alone, never from the engine/plugin
+ * content, so the public crossroads board keeps ONE address across every engine
+ * churn and every peer (GD-8: churn advances the pointer, never re-genesis). A
+ * content-derived id would fork the board on each rebuild — the anti-pattern.
+ */
+export const ORACLE_GENESIS_DOC_SEED = `${ORACLE_DOC_URI}#genesis-doc-id` as const;
+
+/**
+ * oracleGenesisDocUrl — the @oracle's DETERMINISTIC automerge: url.
+ *
+ * Derived from the well-known seed: the first 16 bytes of its sha256 form the
+ * BinaryDocumentId. Every vessel (this peer across reboots; future mesh peers)
+ * computes the SAME url, so a freshly-materialized @oracle re-loads under one
+ * stable id (persist-across-restart) and peers materialize one shared board.
+ *
+ * Cross-VERSION caveat (the epoch-ratchet residual): two peers that materialize
+ * fresh from DIFFERENT engine versions seed different histories under this one id.
+ * In practice a peer SYNCS an existing board rather than re-materialize; the rare
+ * structural shift rides the epoch boundary (GD-8), far-future.
+ */
+export function oracleGenesisDocUrl(): AutomergeUrl {
+  const binId = sha256BytesSync(utf8Bytes(ORACLE_GENESIS_DOC_SEED)).slice(0, 16) as BinaryDocumentId;
+  return stringifyAutomergeUrl({ documentId: binId });
+}
 
 /**
  * engineCid — content-CID of the engine region. A pure function of the TW5 core
@@ -195,36 +259,20 @@ const ROOT_BAGS = [
 // ---------------------------------------------------------------------------
 
 /**
- * buildGenesisDoc() — construct a deterministic genesis island Automerge binary.
+ * buildGenesisSeed() — assemble the @oracle's initial state as PLAIN DATA.
  *
- * Platform-neutral. No filesystem, no DOM. Accepts assembled byte inputs;
- * returns a GenesisArtifact ready for any write sink.
- *
- * Steps:
- *   1. Init Automerge doc with pinned actorSeed.
- *   2. Write schema, blobs (core + plugins), systemTitles.
- *   3. Write recipe and bag descriptor tiddlers.
- *   4. Write blob descriptor tiddlers.
- *   5. Witness the two region content-CIDs (engine + plugins, single pass).
- *   6. Return artifact.
+ * Platform-neutral, no Automerge: it builds the blob METADATA map (descriptors only;
+ * bytes ride the CID plane) and the system tiddlers map (bag descriptors, system
+ * recipes, blob descriptors, region witnesses). `materializeGenesisDoc(seed)` turns
+ * it into the live @oracle CRDT at boot — the genesis is data, never a baked binary.
  */
-export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
-  const coreSha = inputs.coreSha256 ?? sha256HexBytesSync(inputs.coreBlob);
+export function buildGenesisSeed(inputs: GenesisInputs, coreSha256?: string): GenesisSeed {
+  const coreSha     = coreSha256 ?? inputs.coreSha256 ?? sha256HexBytesSync(inputs.coreBlob);
   const coreVersion = inputs.coreVersion;
 
-  // 1. Init with pinned actor.
-  let doc = automergeInit<LarDoc>({ actor: inputs.actorSeed });
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const r = d as unknown as Record<string, unknown>;
-    r["schemaVersion"] = "0.1";
-    r["blobs"]         = {};
-    r["tiddlers"]      = {};
-  });
-
-  // 2a. Write TW5 core blob — METADATA ONLY. The bytes ship as a genesis/cas/<cid>
-  //     file (the CAS plane), NEVER embedded in the CRDT (G-CAS slice 1: the
-  //     merge-conflict-on-bytes class vanishes structurally).
-  const coreEntry: LarBlobEntry = {
+  // Blob METADATA (core + plugins) — bytes ship as genesis/cas/<cid> files, never here.
+  const blobs: Record<string, LarBlobEntry> = {};
+  blobs[ENGINE_CORE_ID] = {
     id:       ENGINE_CORE_ID,
     version:  coreVersion,
     sha256:   coreSha,
@@ -233,13 +281,8 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     author:   "UnaMesa Association",
     source:   "https://tiddlywiki.com",
   };
-  doc = automergeChange(doc, { time: 0 }, d => {
-    (d.blobs as Record<string, LarBlobEntry>)[ENGINE_CORE_ID] = coreEntry;
-  });
-
-  // 2b. Write vendored plugin blobs — METADATA ONLY (bytes → CAS, as above).
   for (const entry of inputs.plugins) {
-    const blobEntry: LarBlobEntry = {
+    blobs[entry.id] = {
       id:       entry.id,
       version:  entry.version,
       sha256:   entry.sha256,
@@ -248,133 +291,140 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
       ...(entry.author  && { author:  entry.author }),
       ...(entry.source  && { source:  entry.source }),
     };
-    doc = automergeChange(doc, { time: 0 }, d => {
-      (d.blobs as Record<string, LarBlobEntry>)[entry.id] = blobEntry;
-    });
   }
 
-  // Genesis seeds the SYSTEM wiki-recipes (operator ruling 2026-06-16, GD-6):
-  // @lares and @lararium are DreamNet system bags, each a quine wiki; their
-  // recipes ride the @oracle system plane (this genesis doc), never @catalog.
-  // USER recipes still mint into @catalog by init-wiki — genesis stays pure of
-  // user composition.
+  const tiddlers: Record<string, unknown> = {};
 
-  // 4. Write bag descriptor tiddlers.
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const tiddlers = d.tiddlers as Record<string, unknown>;
-    for (const { bagId, label, readPolicy, writePolicy } of ROOT_BAGS) {
-      tiddlers[bagDescriptorUri(bagId)] = {
-        tiddler: {
-          title: bagDescriptorUri(bagId),
-          label, readPolicy, writePolicy,
-          "origin-bag": ORACLE_DOC_URI,
-        },
-        meta: { authority: "genesis" },
-      };
-    }
-  });
-
-  // 4b. Write the SYSTEM wiki-recipes into the @oracle plane. Quine wikis — the
-  // wiki bag IS the @ bag. @lares wiki = @oracle floor + @lararium library +
-  // @lares write-layer; @lararium wiki = @oracle floor + @lararium write-layer.
-  // recipe-watch reads these via recipeUri("@oracle", slug) for system wikis.
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const tiddlers = d.tiddlers as Record<string, unknown>;
-    const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
-      const title = recipeUri("@oracle", slug);
-      tiddlers[title] = {
-        tiddler: { title, label: slug, "bag-stack": bagStack, "writable-bag": writableBag },
-        meta: { authority: "genesis" },
-      };
+  // Bag descriptor tiddlers.
+  for (const { bagId, label, readPolicy, writePolicy } of ROOT_BAGS) {
+    tiddlers[bagDescriptorUri(bagId)] = {
+      tiddler: { title: bagDescriptorUri(bagId), label, readPolicy, writePolicy, "origin-bag": ORACLE_DOC_URI },
+      meta: { authority: "genesis" },
     };
-    systemRecipe(
-      "lares",
-      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiDraftBagUri("lares")}`,
-      wikiDraftBagUri("lares"),
-    );
-    systemRecipe(
-      "lararium",
-      `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${wikiDraftBagUri("lararium")}`,
-      wikiDraftBagUri("lararium"),
-    );
-  });
+  }
 
-  // 5. Write blob descriptor tiddlers.
-  doc = automergeChange(doc, { time: 0 }, d => {
-    const tiddlers = d.tiddlers as Record<string, unknown>;
-    const blobs    = (d.blobs ?? {}) as Record<string, LarBlobEntry>;
-    for (const [blobId, entry] of Object.entries(blobs)) {
-      const isPlugin = blobId.startsWith("$:/plugins/") || blobId.startsWith("lar:///plugins/");
-      const att = inputs.plugins.find(p => p.id === blobId)?.attestation;
-      tiddlers[blobDescriptorUri(blobId)] = {
-        tiddler: {
-          title:  blobDescriptorUri(blobId),
-          text:   blobId,
-          sha256:   entry.sha256,
-          version:  entry.version,
-          mimeType: entry.mimeType,
-          ...(entry.author  && { author:  entry.author }),
-          ...(entry.source  && { source:  entry.source }),
-          ...(entry.license && { license: entry.license }),
-          ...(isPlugin && { pluginInstallable: "true", pluginTitle: blobId }),
-          ...(att && {
-            buildAttestationFormat:    att.format,
-            canonicalTitle:            att.canonicalTitle,
-            ...(att.compatibilityTitle   && { compatibilityTitle:   att.compatibilityTitle }),
-            moduleManifestPath:          att.moduleManifestPath,
-            moduleManifestSha256:        att.moduleManifestSha256,
-            ...(att.sourceManifestPath   && { sourceManifestPath:   att.sourceManifestPath }),
-            ...(att.sourceManifestSha256 && { sourceManifestSha256: att.sourceManifestSha256 }),
-            ...(att.packTranscriptPath   && { packTranscriptPath:   att.packTranscriptPath }),
-            ...(att.packTranscriptSha256 && { packTranscriptSha256: att.packTranscriptSha256 }),
-            moduleCount:        String(att.moduleCount),
-            packedTiddlerCount: String(att.packedTiddlerCount),
-            pluginJsonSha256:   att.pluginJsonSha256,
-          }),
-          tags: isPlugin ? "blob-descriptor plugin-descriptor" : "blob-descriptor",
-          "origin-bag": ORACLE_DOC_URI,
-        },
-        meta: { authority: "genesis" },
-      };
-    }
-  });
+  // SYSTEM wiki-recipes (operator ruling 2026-06-16, GD-6) — @lares + @lararium quine
+  // wikis ride the @oracle system plane, never @catalog (USER recipes mint into @catalog).
+  const systemRecipe = (slug: string, bagStack: string, writableBag: string) => {
+    const title = recipeUri("@oracle", slug);
+    tiddlers[title] = {
+      tiddler: { title, label: slug, "bag-stack": bagStack, "writable-bag": writableBag },
+      meta: { authority: "genesis" },
+    };
+  };
+  systemRecipe(
+    "lares",
+    `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${LARES_DOC_URI} ${wikiDraftBagUri("lares")}`,
+    wikiDraftBagUri("lares"),
+  );
+  systemRecipe(
+    "lararium",
+    `${ORACLE_DOC_URI} ${LARARIUM_DOC_URI} ${wikiDraftBagUri("lararium")}`,
+    wikiDraftBagUri("lararium"),
+  );
 
-  // 6. Witness the two region content-CIDs in a SINGLE pass.
-  //
-  //   The region CIDs are pure functions of the INPUTS (engine: core version + sha;
-  //   plugins: sorted id/version/sha256), never of the saved bytes — so they carry
-  //   their real values on first write. No placeholder, no two-pass fixpoint.
-  //   engineCid = the hearth true-name (slow ratchet); pluginsCid = the fast ratchet.
+  // Blob descriptor tiddlers (sorted by blob id — deterministic).
+  for (const blobId of Object.keys(blobs).sort()) {
+    const entry    = blobs[blobId]!;
+    const isPlugin = blobId.startsWith("$:/plugins/") || blobId.startsWith("lar:///plugins/");
+    const att      = inputs.plugins.find(p => p.id === blobId)?.attestation;
+    tiddlers[blobDescriptorUri(blobId)] = {
+      tiddler: {
+        title:  blobDescriptorUri(blobId),
+        text:   blobId,
+        sha256:   entry.sha256,
+        version:  entry.version,
+        mimeType: entry.mimeType,
+        ...(entry.author  && { author:  entry.author }),
+        ...(entry.source  && { source:  entry.source }),
+        ...(entry.license && { license: entry.license }),
+        ...(isPlugin && { pluginInstallable: "true", pluginTitle: blobId }),
+        ...(att && {
+          buildAttestationFormat:    att.format,
+          canonicalTitle:            att.canonicalTitle,
+          ...(att.compatibilityTitle   && { compatibilityTitle:   att.compatibilityTitle }),
+          moduleManifestPath:          att.moduleManifestPath,
+          moduleManifestSha256:        att.moduleManifestSha256,
+          ...(att.sourceManifestPath   && { sourceManifestPath:   att.sourceManifestPath }),
+          ...(att.sourceManifestSha256 && { sourceManifestSha256: att.sourceManifestSha256 }),
+          ...(att.packTranscriptPath   && { packTranscriptPath:   att.packTranscriptPath }),
+          ...(att.packTranscriptSha256 && { packTranscriptSha256: att.packTranscriptSha256 }),
+          moduleCount:        String(att.moduleCount),
+          packedTiddlerCount: String(att.packedTiddlerCount),
+          pluginJsonSha256:   att.pluginJsonSha256,
+        }),
+        tags: isPlugin ? "blob-descriptor plugin-descriptor" : "blob-descriptor",
+        "origin-bag": ORACLE_DOC_URI,
+      },
+      meta: { authority: "genesis" },
+    };
+  }
+
+  // Region content-CID witnesses (engine = slow ratchet / true-name; plugins = fast).
   const engineCid  = computeEngineCid(coreVersion, coreSha);
   const pluginsCid = computePluginsCid(inputs.plugins);
+  tiddlers[GENESIS_CID_ENGINE_TIDDLER] = {
+    tiddler: {
+      title: GENESIS_CID_ENGINE_TIDDLER, text: "", cid: engineCid,
+      note:  "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
+      "origin-bag": ORACLE_DOC_URI,
+    },
+    meta: { authority: "genesis" },
+  };
+  tiddlers[GENESIS_CID_PLUGINS_TIDDLER] = {
+    tiddler: {
+      title: GENESIS_CID_PLUGINS_TIDDLER, text: "", cid: pluginsCid,
+      note:  "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
+      "origin-bag": ORACLE_DOC_URI,
+    },
+    meta: { authority: "genesis" },
+  };
 
+  return { format: GENESIS_SEED_FORMAT, actorSeed: inputs.actorSeed, schemaVersion: "0.1", blobs, tiddlers };
+}
+
+/**
+ * materializeGenesisDoc() — build the @oracle Automerge bytes from the plain-data seed.
+ *
+ * Deterministic: pinned actor (`seed.actorSeed`), `time: 0`, sorted key order — two
+ * peers materialize byte-identical history, so they may share one deterministic doc
+ * id safely. Called at BOOT (open-node-vessel) to seed a fresh @oracle, and by the
+ * build (back-compat island.bin + the verifier). The genesis ships as `seed`, never
+ * as these bytes.
+ */
+export function materializeGenesisDoc(seed: GenesisSeed): Uint8Array {
+  let doc = automergeInit<LarDoc>({ actor: seed.actorSeed });
   doc = automergeChange(doc, { time: 0 }, d => {
-    const t = d.tiddlers as Record<string, unknown>;
-    t[GENESIS_CID_ENGINE_TIDDLER] = {
-      tiddler: {
-        title: GENESIS_CID_ENGINE_TIDDLER,
-        text:  "",
-        cid:   engineCid,
-        note:  "engine content-CID (TW5 core + version) — the hearth true-name; slow ratchet",
-        "origin-bag": ORACLE_DOC_URI,
-      },
-      meta: { authority: "genesis" },
-    };
-    t[GENESIS_CID_PLUGINS_TIDDLER] = {
-      tiddler: {
-        title: GENESIS_CID_PLUGINS_TIDDLER,
-        text:  "",
-        cid:   pluginsCid,
-        note:  "plugins content-CID (sorted plugin id/version/sha256) — fast ratchet",
-        "origin-bag": ORACLE_DOC_URI,
-      },
-      meta: { authority: "genesis" },
-    };
+    const r = d as unknown as Record<string, unknown>;
+    r["schemaVersion"] = seed.schemaVersion;
+    const blobs: Record<string, unknown> = {};
+    for (const k of Object.keys(seed.blobs).sort()) blobs[k] = seed.blobs[k];
+    r["blobs"] = blobs;
+    const tiddlers: Record<string, unknown> = {};
+    for (const k of Object.keys(seed.tiddlers).sort()) tiddlers[k] = seed.tiddlers[k];
+    r["tiddlers"] = tiddlers;
   });
+  return automergeSave(doc);
+}
 
-  const bytes  = automergeSave(doc);
+/**
+ * buildGenesisDoc() — construct the genesis artifact: the plain-data seed (the boot
+ * artifact), the deterministic Automerge bytes (back-compat island.bin + verifier),
+ * the two region CIDs, and the CAS manifest + blob entries (the CID plane).
+ *
+ * Platform-neutral. No filesystem, no DOM. Accepts assembled byte inputs.
+ */
+export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
+  const coreSha     = inputs.coreSha256 ?? sha256HexBytesSync(inputs.coreBlob);
+  const coreVersion = inputs.coreVersion;
+
+  const seed   = buildGenesisSeed(inputs, coreSha);
+  const bytes  = materializeGenesisDoc(seed);
   const sha256 = sha256HexBytesSync(bytes);
   const cid    = cidV1Sha256(bytes);
+
+  const engineCid  = computeEngineCid(coreVersion, coreSha);
+  const pluginsCid = computePluginsCid(inputs.plugins);
 
   // The CAS plane: the bytes the CRDT no longer carries, keyed by sha256 (the CID).
   // The build sink writes each to genesis/cas/<cid>; the loader mirrors them by manifest.
@@ -387,7 +437,7 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     ...inputs.plugins.map((p) => ({ id: p.id, sha256: p.sha256, mimeType: p.mimeType, version: p.version })),
   ]);
 
-  return { bytes, sha256, cid, engineCid, pluginsCid, casManifest, casEntries };
+  return { bytes, sha256, cid, engineCid, pluginsCid, casManifest, casEntries, seed };
 }
 
 // ---------------------------------------------------------------------------

@@ -14,12 +14,17 @@
  * Meme: lar:///ha.ka.ba/@lararium/mesh/genesis-intake
  */
 
-import type { Repo, DocHandle } from "@automerge/automerge-repo";
+import type { Repo, DocHandle, DocumentId } from "@automerge/automerge-repo";
+import { interpretAsDocumentId } from "@automerge/automerge-repo";
 import { load as automergeLoad } from "@automerge/automerge";
 import type { LarDoc } from "./base-doc.js";
 import { mutableLarRecord, ENGINE_CORE_ID } from "./base-doc.js";
 import { LARES_MEMETIC_WIKITEXT_PLUGIN_URI } from "./lar-uris.js";
-import { GENESIS_CID_ENGINE_TIDDLER, GENESIS_CID_PLUGINS_TIDDLER } from "./genesis-doc.js";
+import {
+  GENESIS_CID_ENGINE_TIDDLER, GENESIS_CID_PLUGINS_TIDDLER,
+  materializeGenesisDoc, oracleGenesisDocUrl, type GenesisSeed,
+} from "./genesis-doc.js";
+import { resolveBootDoc } from "./boot-resolver.js";
 
 /** Read a region content-CID recorded in a live/incoming island doc, or null when absent. */
 function regionCid(handle: DocHandle<LarDoc>, title: string): string | null {
@@ -77,6 +82,68 @@ export async function importGenesisIsland(
   const tiddlerCount = Object.keys(doc.tiddlers ?? {}).length;
   console.log(`[${label}] loaded  url=${handle.url}  blobs=${blobCount}  tiddlers=${tiddlerCount}`);
 
+  return handle;
+}
+
+/**
+ * materializeGenesisIsland — the slice-2 boot intake: RELOAD-OR-MATERIALIZE the @oracle.
+ *
+ * The @oracle is a LIVE CRDT, not a shipped binary. This is the boot path that retires
+ * both the Automerge-binary boot seed AND the merge-into-stale:
+ *
+ *   1. find-FIRST under the DETERMINISTIC doc id (oracleGenesisDocUrl). A prior boot
+ *      persisted the @oracle there → reload it with the operator's writes intact
+ *      (the persist-across-restart path). NO merge, NO fresh-empty doc.
+ *   2. absent (first boot) → MATERIALIZE the @oracle fresh from the plain-data seed
+ *      and import it UNDER that same deterministic id, so the next boot finds it.
+ *
+ * Platform-blind: callers (node · browser) supply the seed from their own source
+ * (island.genesis.json · bundle). The deterministic id makes the materialize safe to
+ * repeat across peers — byte-identical history under one shared address.
+ */
+export async function materializeGenesisIsland(
+  repo:  Repo,
+  seed:  GenesisSeed,
+  label: string,
+): Promise<DocHandle<LarDoc>> {
+  const url = oracleGenesisDocUrl();
+
+  // 1. find-first: a persisted @oracle re-loads under the deterministic id.
+  //    hearth-private fails FAST on the unavailable signal (local-first: a missing
+  //    doc is the legitimate first boot, not a mesh-delivery wait).
+  let existing: DocHandle<LarDoc> | null = null;
+  try {
+    existing = await resolveBootDoc<LarDoc>(repo, url, { tideline: "hearth-private", label: `${label} (@oracle)` });
+  } catch {
+    existing = null;   // unavailable → first boot, materialize below
+  }
+  if (existing?.doc()?.blobs?.[ENGINE_CORE_ID]) {
+    const d = existing.doc()!;
+    console.log(
+      `[${label}] @oracle reloaded (persisted)  url=${existing.url}  ` +
+      `blobs=${Object.keys(d.blobs ?? {}).length}  tiddlers=${Object.keys(d.tiddlers ?? {}).length}`,
+    );
+    return existing;
+  }
+
+  // 2. first boot: materialize fresh from the plain-data seed, import under the id.
+  const bytes = materializeGenesisDoc(seed);
+  validateGenesisBytes(bytes, label);
+  const docId  = interpretAsDocumentId(url) as DocumentId;
+  const handle = repo.import<LarDoc>(bytes, { docId });
+  await handle.whenReady();
+
+  const doc = handle.doc();
+  if (!doc?.blobs?.[ENGINE_CORE_ID]) {
+    throw new Error(`[${label}] @oracle materialized but TW5 core blob absent — corrupt genesis seed`);
+  }
+  if (handle.url !== url) {
+    throw new Error(`[${label}] @oracle materialized under ${handle.url}, expected deterministic ${url}`);
+  }
+  console.log(
+    `[${label}] @oracle materialized FRESH  url=${handle.url}  ` +
+    `blobs=${Object.keys(doc.blobs ?? {}).length}  tiddlers=${Object.keys(doc.tiddlers ?? {}).length}`,
+  );
   return handle;
 }
 
