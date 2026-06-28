@@ -26,6 +26,8 @@ import { TW5Engine }       from "@lararium/tw5";
 import type { TW5TiddlerFields } from "@lararium/tw5";
 import type { LarDoc } from "@lararium/mesh";
 import { ENGINE_CORE_ID, GRAMMAR_TAG, LARES_MEMETIC_WIKITEXT_PLUGIN_URI } from "@lararium/mesh";
+import { readGenesisManifest, genesisCasDir } from "../src/genesis-artifact.js";
+import { readCasBlobFromFs } from "../src/node-cas.js";
 
 const LARES_TW5_PLUGIN_TITLE = LARES_MEMETIC_WIKITEXT_PLUGIN_URI;
 
@@ -69,29 +71,43 @@ async function main(): Promise<void> {
   console.log(`[quine] engineCid (true-name) = ${engineCid.slice(0, 20)}…  pluginsCid = ${pluginsCid.slice(0, 20)}…`);
 
   // ------------------------------------------------------------------
-  // 3. Extract TW5 core blob + compiled plugin blob
+  // 3. Extract TW5 core blob + compiled plugin blob — from the CAS plane.
+  //    The CRDT carries METADATA only; the bytes ride genesis/cas/<cid> (G-CAS slice 1).
   // ------------------------------------------------------------------
+  const manifest = readGenesisManifest();
+  if (!manifest) {
+    throw new Error(`[quine] genesis CAS manifest (island.manifest.json) absent — re-run build:genesis`);
+  }
+  const casDir = genesisCasDir();
   const coreEntry = doc.blobs?.[ENGINE_CORE_ID];
-  if (!coreEntry?.blob) {
-    throw new Error(`[quine] TW5 core blob (${ENGINE_CORE_ID}) missing from artifact`);
+  if (!coreEntry?.sha256) {
+    throw new Error(`[quine] TW5 core blob metadata (${ENGINE_CORE_ID}) missing from artifact`);
+  }
+  const coreBytes = readCasBlobFromFs(coreEntry.sha256, casDir);
+  if (!coreBytes) {
+    throw new Error(`[quine] TW5 core bytes absent from CAS for cid ${coreEntry.sha256} — re-run build:genesis`);
   }
   const coreBlob = {
-    bytes:  new Uint8Array(coreEntry.blob as unknown as ArrayBuffer),
+    bytes:  coreBytes,
     sha256: coreEntry.sha256,
     source: coreEntry.source ?? ENGINE_CORE_ID,
   };
-  console.log(`[quine] TW5 core blob  ${(coreBlob.bytes.byteLength / 1024).toFixed(0)} KB`);
+  console.log(`[quine] TW5 core blob  ${(coreBlob.bytes.byteLength / 1024).toFixed(0)} KB (from CAS)`);
 
   const pluginEntry = doc.blobs?.[LARES_TW5_PLUGIN_TITLE];
-  if (!pluginEntry?.blob) {
+  if (!pluginEntry?.sha256) {
     throw new Error(
-      `[quine] compiled plugin blob (${LARES_TW5_PLUGIN_TITLE}) missing from artifact\n` +
+      `[quine] compiled plugin blob metadata (${LARES_TW5_PLUGIN_TITLE}) missing from artifact\n` +
       `  → run: pnpm --filter @lararium/tw5 build:plugin && pnpm --filter @lararium/node build:genesis`,
     );
   }
-  const pluginJson = new TextDecoder().decode(new Uint8Array(pluginEntry.blob as unknown as ArrayBuffer));
+  const pluginBytes = readCasBlobFromFs(pluginEntry.sha256, casDir);
+  if (!pluginBytes) {
+    throw new Error(`[quine] compiled plugin bytes absent from CAS for cid ${pluginEntry.sha256} — re-run build:genesis`);
+  }
+  const pluginJson = new TextDecoder().decode(pluginBytes);
   const pluginTiddler = JSON.parse(pluginJson) as Record<string, unknown>;
-  console.log(`[quine] compiled plugin  sha=${pluginEntry.sha256.slice(0, 12)}…`);
+  console.log(`[quine] compiled plugin  sha=${pluginEntry.sha256.slice(0, 12)}… (from CAS)`);
 
   // ------------------------------------------------------------------
   // 4. Boot TW5Engine with compiled plugin preloaded

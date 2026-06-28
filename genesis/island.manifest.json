@@ -1,0 +1,31 @@
+{
+  "format": "lararium-genesis-cas/v1",
+  "engineCid": "bafkreic66aun5emg66chktb3iopkhxmk3yzs3mvuq6vjbxlqcla7psyjte",
+  "pluginsCid": "bafkreieytvcdnqvj3jvjia4bdc2ilt4rov56vprcdj4uaxqvdtalar7guu",
+  "blobs": [
+    {
+      "cid": "17fcae33dc754c1535762ec4915b796410996f0ff21148ac4efcb66ac7fdf7f4",
+      "id": "$:/plugins/sq/streams",
+      "mimeType": "application/json",
+      "version": "1.2.24"
+    },
+    {
+      "cid": "92f334f8022c7f07bac6d13090a74d49e66c70f2a543aad798957841103fd034",
+      "id": "lar:///ha.ka.ba/@lararium/plugins/lares/memetic-wikitext",
+      "mimeType": "application/json",
+      "version": "0.1.0"
+    },
+    {
+      "cid": "1a27b4e684c40cbd7db152b7b51ed4b6c163fd058912db0bf8c04df07108f612",
+      "id": "lararium-boot-shadows",
+      "mimeType": "application/json",
+      "version": "unknown"
+    },
+    {
+      "cid": "8ea1e6e5fffcb00cedf948989597fc8d851ecf4d4d017f8fa08a6fdd6e4b472c",
+      "id": "tiddlywikicore",
+      "mimeType": "application/javascript",
+      "version": "5.4.1-prerelease"
+    }
+  ]
+}

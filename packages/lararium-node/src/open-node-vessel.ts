@@ -37,7 +37,7 @@ import {
   SIGNER_DID_TIDDLER, DEVICE_DELEGATION_SELF_TIDDLER, type DeviceDelegationTiddler,
   ENGINE_CORE_ID, BagResidencyManager, pluginCidsFromIslandBlobs,
 }                                       from "@lararium/mesh";
-import { casDirForStorage, writeBlobsToCasFs } from "./node-cas.js";
+import { casDirForStorage, mirrorGenesisCasFs } from "./node-cas.js";
 import {
   ACTIVE_WIKI_URI,
   MemoryTiddlerStore,
@@ -51,6 +51,7 @@ import type { VesselWikiSlot, DaemonVmCore } from "@lararium/tw5";
 import {
   loadGenesisIsland, reconcileIslandFromGenesis,
   reconcileWellKnownTiddlers, mintLaresIfAbsent, mintLarariumIfAbsent,
+  readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
@@ -226,18 +227,25 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         mintLarariumIfAbsent(repo, islandHandle);
 
         const coreBlobEntry = (islandHandle.doc()?.blobs ?? {})[ENGINE_CORE_ID];
-        if (!coreBlobEntry?.blob) {
-          throw new Error(`[openNodeVessel] missing TW5 core blob (${ENGINE_CORE_ID}) in LarDoc; re-run build:genesis`);
+        if (!coreBlobEntry) {
+          throw new Error(`[openNodeVessel] missing TW5 core blob metadata (${ENGINE_CORE_ID}) in LarDoc; re-run build:genesis`);
         }
         const coreHash = coreBlobEntry.sha256;
         if (!coreHash) throw new Error(`[openNodeVessel] TW5 core blob missing sha256; re-run build:genesis`);
 
         // Populate the fs CAS — every island worker pulls engine + plugin bytes by CID from
-        // this local CID plane, off the sync port. The genesis doc holds the bytes as the
-        // SOURCE; this mirrors them into the CAS the workers read via resolveByCid, the nodefs
-        // face of the browser vessel's OPFS CAS write (isomorphic by composition).
-        const casWritten = writeBlobsToCasFs(islandHandle.doc()?.blobs, casDirForStorage(storageDir));
-        if (casWritten > 0) console.log(`[openNodeVessel] fs CAS: wrote ${casWritten} blob(s) by CID`);
+        // this local CID plane, off the sync port. The genesis CRDT now carries METADATA only;
+        // the bytes ship as genesis/cas/<cid> files indexed by island.manifest.json. Mirror exactly
+        // those into the runtime CAS the workers read via resolveByCid (the nodefs face of the
+        // browser vessel's OPFS fetch — isomorphic by composition).
+        const manifest = readGenesisManifest(genesisDir);
+        if (!manifest) {
+          throw new Error(
+            `[openNodeVessel] genesis CAS manifest (island.manifest.json) absent or malformed — re-run build:genesis`,
+          );
+        }
+        const casWritten = mirrorGenesisCasFs(manifest, genesisCasDir(genesisDir), casDirForStorage(storageDir));
+        if (casWritten > 0) console.log(`[openNodeVessel] fs CAS: mirrored ${casWritten} blob(s) by CID from genesis/cas`);
 
         // Bootstrap URLs: genesis/social-bootstrap.json (init node — authoritative),
         // falling back to the island oracle (replica vessels).

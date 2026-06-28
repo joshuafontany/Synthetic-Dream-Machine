@@ -83,6 +83,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   const islandCid = join(genesis, "island.cid");
   const islandCidEngine  = join(genesis, "island.cid-engine");
   const islandCidPlugins = join(genesis, "island.cid-plugins");
+  const islandManifest   = join(genesis, "island.manifest.json");  // G-CAS slice 1: the CAS index
+  const islandCasDir     = join(genesis, "cas");                   // G-CAS slice 1: the blob bytes
 
   console.log("[lares reset] will delete:");
   if (existsSync(storage))   console.log(`  ${storage}`);
@@ -93,6 +95,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   if (existsSync(islandCid)) console.log(`  ${islandCid}`);
   if (existsSync(islandCidEngine))  console.log(`  ${islandCidEngine}`);
   if (existsSync(islandCidPlugins)) console.log(`  ${islandCidPlugins}`);
+  if (existsSync(islandManifest))   console.log(`  ${islandManifest}`);
+  if (existsSync(islandCasDir))     console.log(`  ${islandCasDir}`);
   if (!args.flags["force"]) {
     console.log("Pass --force to proceed.");
     return 1;
@@ -105,6 +109,8 @@ export async function cmdReset(args: ParsedArgs): Promise<number> {
   rmSync(islandCid, { force: true });
   rmSync(islandCidEngine,  { force: true });
   rmSync(islandCidPlugins, { force: true });
+  rmSync(islandManifest,   { force: true });
+  rmSync(islandCasDir, { recursive: true, force: true });
   console.log(`[lares reset] preserved identity: ${larIdentityDir()} (out of the wipe zone)`);
   // Rebuild genesis BEFORE init — init founds the hearth from the engine CID, so the baked artifact
   // must exist first. (The reverse order fails: "hearth true-name (engine CID) absent".)

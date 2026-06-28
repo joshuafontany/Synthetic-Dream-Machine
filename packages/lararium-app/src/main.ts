@@ -8,9 +8,13 @@
  * always runs here; the origin is a static host, never an authority.
  */
 import { openBrowserVessel, generateOrLoadBrowserVesselIdentity } from "@lararium/browser";
-import { pullAndVerifyOracle } from "@lararium/mesh";
+import { pullAndVerifyOracle, type GenesisCasManifest } from "@lararium/mesh";
 import { Idiomorph } from "idiomorph";
 import genesisBytes from "../../../genesis/island.bin?uint8array";
+// The genesis CRDT carries blob METADATA only; the engine + plugin BYTES ship as
+// content-addressed genesis/cas/<cid> files, indexed by this manifest. First boot fetches
+// them over HTTP into the OPFS CAS (the byte SOURCE the merge-conflict-free CRDT dropped).
+import genesisCasManifest from "../../../genesis/island.manifest.json";
 // `?worker&url` — Vite builds each worker shim through its worker pipeline and yields the built
 // bundle's URL (a real /assets file). A standalone `new URL("./x.ts", import.meta.url)` passed
 // INDIRECTLY to the vessel got inlined as a `data:` URI, where the worker's dynamic imports
@@ -112,11 +116,15 @@ async function bootVessel(): Promise<void> {
   set("status", "booting…");
   // ?relay=ws://host:port/ws → the node↔browser spore crossing (opt-in; absent = pure local boot).
   const relayUrl = new URLSearchParams(location.search).get("relay") ?? undefined;
+  // ?genesis=<base> → where the static host serves genesis/ (manifest + cas/). Default /genesis.
+  const genesisCasBaseUrl = new URLSearchParams(location.search).get("genesis") ?? "/genesis";
   try {
     const result = await openBrowserVessel({
       hostId: "elyncia-browser",
       wikiId: "lares",
       genesisBytes,
+      genesisCasManifest: genesisCasManifest as GenesisCasManifest,
+      genesisCasBaseUrl,
       daemonWorkerUrl,
       workerScriptUrl,
       onPhase: paint,

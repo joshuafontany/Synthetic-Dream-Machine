@@ -25,6 +25,7 @@ export {
   loadGenesisIslandFromBytes, findGenesisIsland,
   reconcileGenesisUpdate,
   writeGenesisBytesToOpfs, readGenesisBytesFromOpfs,
+  fetchGenesisCasToOpfs,
   genesisCidFromBytes,
 } from "./browser-genesis.js";
 

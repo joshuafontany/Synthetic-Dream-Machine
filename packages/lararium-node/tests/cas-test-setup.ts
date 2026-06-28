@@ -3,16 +3,19 @@
  *
  * A real island worker pulls the engine + plugin bytes by CID from the local CAS,
  * the CRDT plane carries no bytes. A test that boots the real kernel mirrors the
- * genesis blobs into a temp fs CAS, gives the pool a storageRoot (so each island's
- * nodefs storage is a child of it, deriving the same `<storageRoot>/cas`), and
- * passes the plugin CIDs. One setup, fed to every full-boot test.
+ * genesis CAS files (genesis/cas/<cid>, indexed by island.manifest.json) into a temp
+ * fs CAS, gives the pool a storageRoot (so each island's nodefs storage is a child of
+ * it, deriving the same `<storageRoot>/cas`), and passes the plugin CIDs (derived from
+ * the genesis doc's blob METADATA). One setup, fed to every full-boot test — the
+ * loader-path proof without the live @daemon.
  */
 
 import { mkdtempSync, rmSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
 import { pluginCidsFromIslandBlobs, type LarDoc } from "@lararium/mesh";
-import { casDirForStorage, writeBlobsToCasFs } from "../src/node-cas.js";
+import { casDirForStorage, mirrorGenesisCasFs } from "../src/node-cas.js";
+import { readGenesisManifest, genesisCasDir } from "../src/genesis-artifact.js";
 
 export interface CasSetup {
   /** Pool storageRoot — the CAS lives at `<storageDir>/cas`. */
@@ -23,10 +26,18 @@ export interface CasSetup {
   readonly cleanup:     () => void;
 }
 
-/** Mirror a genesis doc's blobs into a temp fs CAS and derive the pool inputs. */
-export function setupCasFromGenesis(genesisDoc: LarDoc): CasSetup {
+/**
+ * Mirror the genesis CAS files into a temp fs CAS and derive the pool inputs. The
+ * bytes come from genesis/cas/<cid> (via island.manifest.json), the plugin CIDs from
+ * the genesis doc's blob metadata. `genesisDir` defaults to the repo's genesis/ dir.
+ */
+export function setupCasFromGenesis(genesisDoc: LarDoc, genesisDir?: string): CasSetup {
   const storageDir = mkdtempSync(join(tmpdir(), "lar-cas-test-"));
-  writeBlobsToCasFs(genesisDoc.blobs, casDirForStorage(storageDir));
+  const manifest = readGenesisManifest(genesisDir);
+  if (!manifest) {
+    throw new Error("[cas-test-setup] genesis CAS manifest absent — run: pnpm --filter @lararium/node build:genesis");
+  }
+  mirrorGenesisCasFs(manifest, genesisCasDir(genesisDir), casDirForStorage(storageDir));
   return {
     storageDir,
     pluginCids: pluginCidsFromIslandBlobs(genesisDoc.blobs),

@@ -44,15 +44,17 @@ const skipReason =
 describe.skipIf(skipReason)(`§6 blob sovereignty — island reads coreBlob from the CID plane${skipReason ? ` [SKIPPED: ${skipReason}]` : ""}`, () => {
   test("island boots TW5 and declares ea from CAS-sourced bytes", async () => {
 
-    // Load the genesis LarDoc — the SOURCE carrying blobs[ENGINE_CORE_ID] + plugin blobs.
+    // Load the genesis LarDoc — the CRDT carries blob METADATA only (no bytes); the
+    // sha256 is the CID the worker requests from the CAS plane.
     const genesisBytes = new Uint8Array(readFileSync(GENESIS_BIN));
     const genesisDoc   = automergeLoad<LarDoc>(genesisBytes);
     const coreHash     = (genesisDoc.blobs?.[ENGINE_CORE_ID]?.sha256 as string | undefined) ?? null;
-    expect(genesisDoc.blobs?.[ENGINE_CORE_ID]?.blob).toBeTruthy();
+    expect(coreHash).toBeTruthy();                                   // metadata present
+    expect(genesisDoc.blobs?.[ENGINE_CORE_ID]?.blob).toBeFalsy();    // bytes stripped from the CRDT
 
-    // The CID plane: mirror the genesis blobs into a local fs CAS. Each wiki island's
-    // nodefs storage is a child of cas.storageDir, so the worker derives the same
-    // `<storageDir>/cas` dir and pulls the engine + plugins by CID.
+    // The CID plane: mirror the genesis CAS files (genesis/cas/<cid>, via the manifest)
+    // into a local fs CAS. Each wiki island's nodefs storage is a child of cas.storageDir,
+    // so the worker derives the same `<storageDir>/cas` dir and pulls engine + plugins by CID.
     const cas = setupCasFromGenesis(genesisDoc);
 
     // Seed a vessel Repo — the island needs @lararium only for its structural tiddlers;

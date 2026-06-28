@@ -34,6 +34,7 @@ import {
 
 import { TW5_VERSION, TW5_CORE_SCRIPT_FILENAME, TW5_CORE_DIR } from "@lararium/tw5";
 import { tw5PluginsRoot } from "@lararium/tw5/tw5-memes-root";
+import { writeCasEntriesFs } from "../src/node-cas.js";
 
 // ---------------------------------------------------------------------------
 // Path constants
@@ -218,8 +219,10 @@ function main(): void {
   // Verify integrity before writing (recomputes + matches both region CIDs).
   const counts = verifyGenesisArtifact(artifact);
 
-  // Layer C: write outputs. Two region sidecars (engine = the true-name, slow ratchet;
-  // plugins = fast ratchet) alongside the whole-doc forward integrity sidecars.
+  // Layer C: write outputs. The CRDT (island.bin) carries blob METADATA only; the
+  // engine + plugin BYTES ship as content-addressed genesis/cas/<cid> files indexed
+  // by island.manifest.json (G-CAS slice 1). Two region sidecars (engine = the
+  // true-name, slow ratchet; plugins = fast ratchet) alongside the whole-doc sidecars.
   mkdirSync(genesisDir, { recursive: true });
   writeFileSync(join(genesisDir, "island.bin"),         artifact.bytes);
   writeFileSync(join(genesisDir, "island.sha256"),      artifact.sha256     + "\n", "utf8");
@@ -227,12 +230,23 @@ function main(): void {
   writeFileSync(join(genesisDir, "island.cid-engine"),  artifact.engineCid  + "\n", "utf8");
   writeFileSync(join(genesisDir, "island.cid-plugins"), artifact.pluginsCid + "\n", "utf8");
 
-  console.log(`[genesis] ✓ island.bin  ${(artifact.bytes.byteLength / 1024).toFixed(0)} KB`);
-  console.log(`[genesis] ✓ blobs=${counts.blobCount}  tiddlers=${counts.tiddlerCount}`);
+  // The CAS manifest (deterministic, sorted by id) + the content-addressed blob files.
+  writeFileSync(
+    join(genesisDir, "island.manifest.json"),
+    JSON.stringify(artifact.casManifest, null, 2) + "\n",
+    "utf8",
+  );
+  const casDir   = join(genesisDir, "cas");
+  const casWrote = writeCasEntriesFs(artifact.casEntries, casDir);
+
+  console.log(`[genesis] ✓ island.bin  ${(artifact.bytes.byteLength / 1024).toFixed(1)} KB  (metadata-only CRDT, bytes → CAS)`);
+  console.log(`[genesis] ✓ genesis/cas  ${artifact.casEntries.length} blob file(s) by CID (${casWrote} newly written)`);
+  console.log(`[genesis] ✓ island.manifest.json  ${artifact.casManifest.blobs.length} entries`);
+  console.log(`[genesis] ✓ blobs(meta)=${counts.blobCount}  tiddlers=${counts.tiddlerCount}`);
   console.log(`[genesis] ✓ sha256=${artifact.sha256}  cid=${artifact.cid}`);
   console.log(`[genesis] ✓ engineCid=${artifact.engineCid}  pluginsCid=${artifact.pluginsCid}`);
   console.log(`[genesis] wrote ${join(genesisDir, "island.bin")}`);
-  console.log("[genesis] S5 gate A satisfied — plugin blobs wired + two region witness tiddlers injected.");
+  console.log("[genesis] S5 gate A satisfied — blob metadata + two region witness tiddlers injected; bytes shipped to CAS.");
 }
 
 try {

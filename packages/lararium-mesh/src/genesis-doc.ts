@@ -18,6 +18,7 @@ import {
   load   as automergeLoad,
 } from "@automerge/automerge";
 import { cidV1Sha256, sha256HexBytesSync, utf8Bytes } from "./crypto.js";
+import { buildGenesisCasManifest, type GenesisCasManifest } from "./cas.js";
 import {
   ORACLE_DOC_URI,
   LARARIUM_DOC_URI,
@@ -132,6 +133,17 @@ export interface GenesisArtifact {
   readonly cid:        string;
   readonly engineCid:  string;
   readonly pluginsCid: string;
+  /**
+   * The CAS manifest — the byte SOURCE the genesis doc no longer embeds. Names
+   * every `genesis/cas/<cid>` file (engine + plugins) so the loader mirrors exactly
+   * them into the runtime CAS. Write it beside island.bin as island.manifest.json.
+   */
+  readonly casManifest: GenesisCasManifest;
+  /**
+   * Every CAS-bound blob's {cid, bytes} — what the build sink writes to
+   * `genesis/cas/<cid>`. Held in memory only; never embedded in the CRDT.
+   */
+  readonly casEntries:  readonly { readonly cid: string; readonly bytes: Uint8Array }[];
 }
 
 // ---------------------------------------------------------------------------
@@ -209,13 +221,14 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     r["tiddlers"]      = {};
   });
 
-  // 2a. Write TW5 core blob.
+  // 2a. Write TW5 core blob — METADATA ONLY. The bytes ship as a genesis/cas/<cid>
+  //     file (the CAS plane), NEVER embedded in the CRDT (G-CAS slice 1: the
+  //     merge-conflict-on-bytes class vanishes structurally).
   const coreEntry: LarBlobEntry = {
     id:       ENGINE_CORE_ID,
     version:  coreVersion,
     sha256:   coreSha,
     mimeType: "application/javascript",
-    blob:     inputs.coreBlob,
     license:  "BSD-3-Clause",
     author:   "UnaMesa Association",
     source:   "https://tiddlywiki.com",
@@ -224,14 +237,13 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
     (d.blobs as Record<string, LarBlobEntry>)[ENGINE_CORE_ID] = coreEntry;
   });
 
-  // 2b. Write vendored plugin blobs.
+  // 2b. Write vendored plugin blobs — METADATA ONLY (bytes → CAS, as above).
   for (const entry of inputs.plugins) {
     const blobEntry: LarBlobEntry = {
       id:       entry.id,
       version:  entry.version,
       sha256:   entry.sha256,
       mimeType: entry.mimeType,
-      blob:     entry.blob,
       ...(entry.license && { license: entry.license }),
       ...(entry.author  && { author:  entry.author }),
       ...(entry.source  && { source:  entry.source }),
@@ -364,7 +376,18 @@ export function buildGenesisDoc(inputs: GenesisInputs): GenesisArtifact {
   const sha256 = sha256HexBytesSync(bytes);
   const cid    = cidV1Sha256(bytes);
 
-  return { bytes, sha256, cid, engineCid, pluginsCid };
+  // The CAS plane: the bytes the CRDT no longer carries, keyed by sha256 (the CID).
+  // The build sink writes each to genesis/cas/<cid>; the loader mirrors them by manifest.
+  const casEntries: { cid: string; bytes: Uint8Array }[] = [
+    { cid: coreSha, bytes: inputs.coreBlob },
+    ...inputs.plugins.map((p) => ({ cid: p.sha256, bytes: p.blob })),
+  ];
+  const casManifest = buildGenesisCasManifest(engineCid, pluginsCid, [
+    { id: ENGINE_CORE_ID, sha256: coreSha, mimeType: "application/javascript", version: coreVersion },
+    ...inputs.plugins.map((p) => ({ id: p.id, sha256: p.sha256, mimeType: p.mimeType, version: p.version })),
+  ]);
+
+  return { bytes, sha256, cid, engineCid, pluginsCid, casManifest, casEntries };
 }
 
 // ---------------------------------------------------------------------------

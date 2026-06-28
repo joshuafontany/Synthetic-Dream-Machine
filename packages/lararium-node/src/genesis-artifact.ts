@@ -30,6 +30,8 @@ import {
   cidV1Sha256FromHex,
   importGenesisIsland,
   reconcileGenesisCid,
+  GENESIS_CAS_MANIFEST_FORMAT,
+  type GenesisCasManifest,
 } from "@lararium/mesh";
 
 // ---------------------------------------------------------------------------
@@ -40,6 +42,7 @@ const DEFAULT_GENESIS_DIR = join(repoRoot, "genesis");   // one root law (early 
 
 function genesisArtifactPaths(genesisDir?: string): {
   bin: string; sha: string; cid: string; cidEngine: string; cidPlugins: string;
+  manifest: string; casDir: string;
 } {
   const root = genesisDir ?? DEFAULT_GENESIS_DIR;
   return {
@@ -48,7 +51,30 @@ function genesisArtifactPaths(genesisDir?: string): {
     cid: join(root, "island.cid"),            // whole-doc forward CID (integrity)
     cidEngine:  join(root, "island.cid-engine"),   // engine content-CID = the hearth true-name
     cidPlugins: join(root, "island.cid-plugins"),  // plugins content-CID = the fast ratchet
+    manifest:   join(root, "island.manifest.json"),// the CAS manifest (engine + plugin cids)
+    casDir:     join(root, "cas"),                 // the byte SOURCE: genesis/cas/<cid> files
   };
+}
+
+/** The genesis CAS dir (genesis/cas) — the content-addressed byte SOURCE. */
+export function genesisCasDir(genesisDir?: string): string {
+  return genesisArtifactPaths(genesisDir).casDir;
+}
+
+/**
+ * Read the genesis CAS manifest (island.manifest.json) — the index of which
+ * `genesis/cas/<cid>` files belong to this artifact. Returns null when absent
+ * (a pre-slice-1 genesis with embedded blobs) or malformed.
+ */
+export function readGenesisManifest(genesisDir?: string): GenesisCasManifest | null {
+  const { manifest } = genesisArtifactPaths(genesisDir);
+  try {
+    const parsed = JSON.parse(readFileSync(manifest, "utf8")) as GenesisCasManifest;
+    if (parsed?.format !== GENESIS_CAS_MANIFEST_FORMAT) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
 }
 
 function readGenesisBin(genesisDir?: string): Uint8Array {

@@ -40,18 +40,23 @@ export function mutableLarRecord(
 // ---------------------------------------------------------------------------
 
 /**
- * LarBlobEntry — binary artefact stored in a LarDoc.
+ * LarBlobEntry — a content-addressed artefact REFERENCED by a LarDoc.
  *
- * Automerge stores the blob as an immutable Uint8Array — O(1) sync cost after
- * the initial transfer. Any bag may carry blobs: engine bundles, images,
- * attachments. Each blob MUST have a descriptor tiddler at blobDescriptorUri(id).
+ * The entry carries the artefact's METADATA (id, sha256 = CID, version, mimeType);
+ * the bytes themselves live in the content-addressed store (CAS), keyed by sha256,
+ * NEVER in the CRDT. The optional `blob` field carries inline bytes only for ad-hoc
+ * bags (images, attachments not yet promoted to the CAS); the genesis engine + plugin
+ * bytes ship as `genesis/cas/<cid>` files + a manifest, so the genesis CRDT holds
+ * metadata only and the merge-conflict-on-bytes class vanishes structurally.
+ * Each blob MUST have a descriptor tiddler at blobDescriptorUri(id).
  */
 export interface LarBlobEntry {
   readonly id:       string;
   readonly version:  string;
   readonly sha256:   string;
   readonly mimeType: string;
-  readonly blob:     Uint8Array;
+  /** Inline bytes — present only for ad-hoc bags; absent for CAS-sourced genesis blobs. */
+  readonly blob?:    Uint8Array;
   readonly author?:  string;
   readonly license?: string;
   readonly source?:  string;

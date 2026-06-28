@@ -1,0 +1,29 @@
+[
+  {
+    "title": "$:/config/FileTypeMappings/text/x-memetic-wikitext",
+    "text": "text/x-memetic-wikitext",
+    "tags": []
+  },
+  {
+    "title": "$:/tags/LarariumKumu",
+    "text": "Lararium kumu device type definitions.",
+    "tags": ["$:/tags/Global"]
+  },
+  {
+    "title": "$:/palette",
+    "text": "lar:///ha.ka.ba/@lares/api/lararium/palette/gruvbox-dark",
+    "tags": []
+  },
+  {
+    "title": "$:/core/modules/startup/render.js",
+    "type": "application/javascript",
+    "module-type": "startup",
+    "text": "exports.name = \"render\";\nexports.platforms = [\"browser\"];\nexports.after = [\"startup\"];\nexports.synchronous = true;\nexports.startup = function() {\n  // Lararium mounts rootWidget via mountPanel(). No render to document.body.\n};"
+  },
+  {
+    "title": "$:/core/modules/startup/lararium-bootstrap-sync.js",
+    "type": "application/javascript",
+    "module-type": "startup",
+    "text": "exports.name = \"lararium-bootstrap-sync\";\nexports.platforms = [\"browser\",\"node\"];\nexports.after = [\"sync\"];\nexports.startup = function() {\n  // Promote preloaded bootstrap plugins from plugin-shadow to regular wiki tiddlers.\n  // Each plugin syncs as one package: the syncer sees the plugin container tiddler\n  // as locally modified (changeCount incremented by addTiddler) and saves it via\n  // saveTiddler → MemeSyncAdaptor → store.put() → CRDT.\n  // Runs after the syncer initialises tiddlerInfo, so changeCount comparison works.\n  var BOOTSTRAP_TAG = \"$:/tags/LarariumBootstrap\";\n  var titles = $tw.wiki.filterTiddlers(\"[tag[\" + BOOTSTRAP_TAG + \"]]\");\n  titles.forEach(function(title) {\n    var t = $tw.wiki.getTiddler(title);\n    if (t) $tw.wiki.addTiddler(t.fields);\n  });\n};"
+  }
+]

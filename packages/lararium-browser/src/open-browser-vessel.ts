@@ -25,6 +25,7 @@ import {
   BAG_IDS, slugFromUri, BagResidencyManager,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
+  type GenesisCasManifest,
 }                                            from "@lararium/mesh";
 import {
   MemoryTiddlerStore,
@@ -44,7 +45,7 @@ import {
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
 import {
   loadGenesisIslandFromBytes, findGenesisIsland,
-  reconcileGenesisUpdate, writeGenesisBytesToOpfs, writeBlobsToCasOpfs,
+  reconcileGenesisUpdate, writeGenesisBytesToOpfs, fetchGenesisCasToOpfs,
 }                                            from "./browser-genesis.js";
 import {
   openBrowserDaemonVm,
@@ -111,6 +112,11 @@ export interface BrowserVesselOptions extends LarariumVesselOptions {
   displayName?:    string;
   /** Genesis island bytes (Vite binary import / CDN fetch). One genesis source REQUIRED. */
   genesisBytes?:   Uint8Array;
+  /** Genesis CAS manifest (island.manifest.json) — names the engine + plugin blob files. With
+   *  genesisCasBaseUrl, first boot fetches genesis/cas/<cid> over HTTP into the OPFS CAS. */
+  genesisCasManifest?:  GenesisCasManifest;
+  /** Base URL the genesis static host serves (manifest + cas/ live under it). */
+  genesisCasBaseUrl?:   string;
   /** Automerge URL of a peer's genesis island doc (Tier-1 peer-sync; from DeviceAdmitPayload). */
   islandDocUrl?:   string | null;
   /** Relay gate URL (ws://host:port/ws) to dial for the node↔browser spore crossing. When set (and
@@ -148,6 +154,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
     genesisBytes, islandDocUrl: admitIslandDocUrl,
+    genesisCasManifest, genesisCasBaseUrl,
     daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl,
   } = opts;
   const emit = (p: LarOpenPhase) => onPhase?.(p);
@@ -262,10 +269,15 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
           throw new Error("[openBrowserVessel] genesis REQUIRED (coreless boot deleted) — provide genesisBytes, a stored island, or islandDocUrl (peer-sync)");
         }
         const coreHash = islandHandle.doc()?.blobs?.[ENGINE_CORE_ID]?.sha256 ?? null;
-        if (!coreHash) throw new Error("[openBrowserVessel] genesis island missing ENGINE_CORE_ID blob");
+        if (!coreHash) throw new Error("[openBrowserVessel] genesis island missing ENGINE_CORE_ID blob metadata");
         // Populate the OPFS CAS — the worker pulls engine + plugin bytes by CID from here
-        // (the breath path), never CRDT-syncing the 2.3 MB @oracle blob doc over the port.
-        await writeBlobsToCasOpfs((islandHandle.doc()?.blobs ?? {}) as Record<string, { sha256?: string; blob?: unknown }>);
+        // (the breath path), never CRDT-syncing the bytes over the port. The genesis CRDT now
+        // carries METADATA only; the bytes ship as genesis/cas/<cid> files. Fetch them over HTTP
+        // by manifest (the browser face of the node mirrorGenesisCasFs). Once in OPFS they
+        // persist (write-once-read-many), so later/replica boots need no manifest.
+        if (genesisCasManifest && genesisCasBaseUrl) {
+          await fetchGenesisCasToOpfs(genesisCasManifest, genesisCasBaseUrl);
+        }
         return { islandHandle, coreHash, bootstrap: social };
       },
 
