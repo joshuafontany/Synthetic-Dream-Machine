@@ -49,6 +49,24 @@ services:
       - "18080:8080"           # expose the tail of the chain to the host for the witness
     depends_on: [herm-relay-1]
 
+  # A FULL Lararium — founded self-contained by tools/mesh-found-lararium.sh .mesh-test/lararium-a
+  # (genesis + identity + bootstrap under one mountable root). Serves its @oracle corpus over the
+  # same read-face: an anon pulls /oracle/pointer with NO gate — the anon-veil substrate, live.
+  # "Both kinds live" — a sovereign Lararium ⊕ the blind Hermai in one mesh.
+  lararium-a:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+    environment:
+      LAR_ROOT: "/app/.mesh-test/lararium-a"
+      LAR_PORT: "8080"
+    command: ["node", "packages/lararium-node/dist/src/main.js"]
+    networks: [mesh]
+    ports:
+      - "18090:8080"           # expose the Lararium's @oracle read-face (anon-veil witness)
+    restart: unless-stopped
+
 networks:
   mesh:
     driver: bridge
