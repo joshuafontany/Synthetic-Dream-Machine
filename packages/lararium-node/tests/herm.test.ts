@@ -14,6 +14,7 @@ import { Repo } from "@automerge/automerge-repo";
 import { pullAndVerifyOracle, dialEntryToRecord, type MeshPalaceDoc } from "@lararium/mesh";
 import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
 import { createHerm } from "../src/herm.js";
+import { startHerm } from "../src/herm-main.js";
 
 const SEED_A = new Uint8Array(32).fill(7);
 const SEED_H = new Uint8Array(32).fill(9);
@@ -66,5 +67,16 @@ describe("createHerm — the wayfarer carries the FLOW-map (pull → merge → r
     herm.dispose(); srcFace.dispose();
     await new Promise<void>((r) => srcServer.close(() => r()));
     await new Promise<void>((r) => hermServer.close(() => r()));
+  });
+});
+
+describe("startHerm — the runnable wayfarer boots, serves, closes", () => {
+  test("boots on an ephemeral port, serves a valid FLOW-map pointer, closes clean", async () => {
+    const running = await startHerm({ port: 0, peers: [], storageDir: tmp("herm-boot-") });
+    expect(running.port).toBeGreaterThan(0);
+    // even an empty FLOW-map publishes a valid signed pointer + snapshot (an anon, self-certifying wayfarer)
+    const v = await pullAndVerifyOracle<MeshPalaceDoc>(`http://127.0.0.1:${running.port}`, { nowMs: Date.now() });
+    expect(v.ok).toBe(true);
+    await running.close();
   });
 });
