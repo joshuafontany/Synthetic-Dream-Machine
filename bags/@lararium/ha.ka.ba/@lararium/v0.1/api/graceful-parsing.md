@@ -128,6 +128,37 @@ build — so the live shadow file is NOT created until its full-VM integration t
 + the extended-attribute types) rides with it. Test vehicle: `node $TW/tiddlywiki.js ++packages/lararium-tw5/tiddlers
 $TW/editions/test --test` (or the in-house `pnpm --filter @lararium/tw5 smoke:plugin-boot`).
 
+**THE DEFINITIVE AUGMENTATION CHANGE-SET (spirit a871269a, finalized 2026-06-27).** Recovery lives in
+the `parseTag` DRIVER; `parseAttribute` (the value grammar) stays substantially INTACT — that's the
+whole point. parse5-floor confirmed by triple empirical proof (parse5 flattens `{{}}` to a string ·
+is BLIND to `$`-widgets, `$` not a legal HTML name-start · CANNOT even find tag BOUNDARIES — an
+unquoted `<<macro>>` value's `>` ends the tag early per the HTML5 unquoted-attr-value state → the
+hybrid (B) is unsound, not just lossy). The three driver changes (`core/.../rules/html.js`):
+1. `parseTag` contract `node|null` → **always-a-tree + diagnostics**. Missing-`>` (`html.js:146`): no
+   longer null — synthesize a zero-width **MISSING `>`**, set `openTagEnd = pos`, keep the attrs
+   already parsed, emit a diagnostic. Recovery-set = next `>` | newline | `<`.
+2. Bad/unterminated tag-name (`:114`,`:123`): emit an **Error node** wrapping the `<…` span VERBATIM
+   (`recoveredAs:"water"`, raw confidence), advance **≥1 char** (progress invariant).
+3. Attribute loop (`:127-134`): when `parseAttribute` returns null on a malformed `<<` (its guard
+   `parseutils.js:579-581` — must still NOT silently bind `"true"`), don't abort the tag — skip to the
+   recovery-set, wrap the bad span as a graded attribute-error, continue under the ≥1-char invariant.
+
+`parseAttribute` (`parseutils.js:504-600`) UNTOUCHED — its 7 extended value-branches (string/bare-
+`"true"` · `{{indirect}}` · `{{{filtered}}}` · `<<macro>>` · `((mvv))` · `` `substituted` `` ·
+unquoted) ride verbatim. MUST keep byte-exact: per-attr `start/end`; element `openTagStart/openTagEnd/
+closeTagStart/closeTagEnd/rule:"html"/orderedAttributes` (set in `html.js parse()` :44-85, asserted
+`test-wikitext-parser.js:26-106`). Confidence seam: clean = `recoveredAs` absent / 20 · resynced =
+`recoveredAs:"repaired"` mid · verbatim-wrapped = `recoveredAs:"water"` raw (water ships first).
+
+**PRIOR ART (the field hand-writes the tag grammar + delegates values — exactly option A):** MDX's
+`micromark-extension-mdx-jsx` is the near-exact analog (markdown-superset with `{expression}` in attr
+values) — it HAND-WRITES the tag tokenizer and delegates ONLY the value-expression to acorn, refusing
+a generic HTML parser for tags for *our* interleaving reason. TW5 already has this shape (hand-written
+`parseTag` + `parseAttribute` delegating `{{}}`/`<<>>`). BurningTreeC's Lezer = editor-side reuse only.
+matklad's Resilient-LL = the recovery-set/≥1-char/Error-MISSING model. OPEN build-nuance: the Error-node
+flow through `parse()` (re-exported verbatim) — shape the recovered node so `parse()`/`findNextTag`
+emit verbatim + advance, resolved during coding against the byte-exact test gate.
+
 <<~/ahu >>
 
 <<~ ahu #the-model >>
