@@ -510,6 +510,16 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
       vmManager = new VesselIslandPool({
         mainRepo:    repo,
         storageRoot: storageDir,
+        // A co-located node wiki island resolves its keyhive grants in the SAME synchronous-WASM
+        // slot-resolution the daemon island runs (and on the same machine). A one-time keyhive
+        // reconverge (e.g. an OutOfOrderOperation fixed-point after a genesis rebake) blocks the
+        // worker event loop, so the interval breath cannot fire and the silence window is the only
+        // gate. The pool default (HANDSHAKE_TIMEOUT_MS = 10s) is tuned for the browser's lighter
+        // profile and false-timed a slow-but-live node mount into a FATAL boot death. Give the node
+        // pool the daemon island's generous budget — a healthy mount still settles in <1s; only a
+        // slow keyhive reconverge spends it. (silence 120s / stall 360s, matching daemon-vm-core.)
+        mountSilenceMs: 120_000,
+        mountStallMs:   360_000,
         ...(poolPluginCids.length ? { pluginCids: poolPluginCids } : {}),
         diskMirrorGrant,
         onWorkerEvent: (wikiId, msg) => {

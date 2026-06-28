@@ -13,7 +13,7 @@
 
 import { mkdirSync, writeFileSync, readFileSync, existsSync, copyFileSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { casBlobEntries, type CasBlobLike, type GenesisCasManifest } from "@lararium/mesh";
+import { type GenesisCasManifest } from "@lararium/mesh";
 
 /** The CAS dir for a vessel rooted at `storageDir` (e.g. ~/.lares/.lararium → …/cas). */
 export function casDirForStorage(storageDir: string): string {
@@ -28,27 +28,6 @@ export function casDirForStorage(storageDir: string): string {
  */
 export function casDirFromIslandStorageDir(islandStorageDir: string): string {
   return join(dirname(islandStorageDir), "cas");
-}
-
-/**
- * Write each blob to the fs CAS, keyed by its sha256 (CID). Idempotent — an entry
- * already present (content-addressed, immutable) is skipped. Returns the count
- * written. The genesis doc holds the bytes as the SOURCE; this mirrors them into
- * the local CID plane the workers read.
- */
-export function writeBlobsToCasFs(
-  blobs:  Record<string, CasBlobLike> | undefined,
-  casDir: string,
-): number {
-  mkdirSync(casDir, { recursive: true });
-  let written = 0;
-  for (const { cid, bytes } of casBlobEntries(blobs)) {
-    const path = join(casDir, cid);
-    if (existsSync(path)) continue;
-    writeFileSync(path, bytes);
-    written += 1;
-  }
-  return written;
 }
 
 /**

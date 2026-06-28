@@ -1,13 +1,11 @@
 /**
  * node-capture-engine — composes the isomorphic `makeCaptureEngine` (mesh) with node's
  * substrate seams (subprocess flush · fs-WAL reserve). The annotate stays INJECTED so this
- * module never pulls the mempalace barrel — the worker passes `defaultAnnotate`, tests pass
- * a fake. This is node's row of the per-vessel job table: KEEP the shared palace.
+ * module never pulls the mempalace barrel — the worker passes the in-VM `$tw.lares.captureAnnotateVm`,
+ * tests pass a fake. This is node's row of the per-vessel job table: KEEP the shared palace.
  *
  * Meme: lar:///ha.ka.ba/@lararium/api/capture-annotation-model#isomorphic-telemetry-vm
  */
-
-import { dirname, join } from "node:path";
 
 import { makeCaptureEngine } from "@lararium/mesh";
 import type { CaptureAnnotate, CaptureDerive, CaptureEngine, CaptureFlush, CapturePost, CaptureRecord, CaptureServo, FlushGate } from "@lararium/mesh";
@@ -25,11 +23,13 @@ export interface NodeCaptureEngineOptions {
   readonly walPath: string;
   /** dead-letter quarantine path */
   readonly quarantinePath: string;
-  /** the forward annotate pass (worker: `defaultAnnotate`; tests: a fake) */
+  /** the forward annotate pass (worker: the in-VM `$tw.lares.captureAnnotateVm`; tests: a fake) */
   readonly annotate: CaptureAnnotate;
-  /** the LOCAL `.astpalace` dir (never federates). Default: `<dirname(spoolDir)>/astpalace`. The
-   *  routing split writes each turn's AST here keyed by structural hash; the mempalace drawer keeps
-   *  only `lar_ast_hash`. Pass `null` to DISABLE the split (the inline `lar_ast` then rides through). */
+  /** the LOCAL `.astpalace` dir (never federates) — the routing split writes each turn's AST here
+   *  keyed by structural hash; the mempalace drawer keeps only `lar_ast_hash`. Pass the DURABLE home
+   *  explicitly (node: `larAstPalaceDir()`). Absent/`null` DISABLES the split (the inline `lar_ast`
+   *  rides through) — there is NO implicit default: the old `<dirname(spoolDir)>/astpalace` fallback
+   *  was a footgun that silently routed ASTs into a transient tmpfs path. */
   readonly astPalaceDir?: string | null;
   readonly gate?: FlushGate;
   readonly mempalaceBin?: string;
@@ -90,9 +90,9 @@ export function makeNodeCaptureEngine(opts: NodeCaptureEngineOptions): CaptureEn
     ...(opts.spawn !== undefined ? { spawn: opts.spawn } : {}),
   });
   // The AST routing split rides between the engine and the (external) mempalace write. Local-only by
-  // construction: a content-addressed file store, never a mesh/Automerge surface. `null` disables it.
-  const astPalaceDir =
-    opts.astPalaceDir === null ? null : (opts.astPalaceDir ?? join(dirname(opts.spoolDir), "astpalace"));
+  // construction: a content-addressed file store, never a mesh/Automerge surface. Absent/null disables
+  // it — NO implicit tmpfs default (that footgun silently wrote ASTs to a transient, wiped path).
+  const astPalaceDir = opts.astPalaceDir ?? null;
   const flush = astPalaceDir ? makeAstSplitFlush(subprocessFlush, makeAstPalace(astPalaceDir)) : subprocessFlush;
   const reserve = makeCaptureReserve({ walPath: opts.walPath, quarantinePath: opts.quarantinePath });
   return makeCaptureEngine({

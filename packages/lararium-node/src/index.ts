@@ -64,8 +64,8 @@ export type { SubprocessFlushOptions } from "./capture-flush.js";
 export { makeCaptureReserve } from "./capture-reserve.js";
 export type { CaptureReserveOptions } from "./capture-reserve.js";
 // makeCaptureEngine + CaptureReserve/CaptureFlush/CaptureAnnotate contracts live in
-// @lararium/mesh (the isomorphic core); defaultAnnotate stays unexported (the daemon
-// imports it directly) so the package index never pulls the mempalace barrel.
+// @lararium/mesh (the isomorphic core); the annotate runs IN-VM ($tw.lares.captureAnnotateVm,
+// injected by node-daemon-island) so the package index never pulls the mempalace barrel.
 export { makeNodeCaptureEngine, makeAstSplitFlush } from "./node-capture-engine.js";
 export type { NodeCaptureEngineOptions } from "./node-capture-engine.js";
 export { makeAstPalace } from "./astpalace.js";
