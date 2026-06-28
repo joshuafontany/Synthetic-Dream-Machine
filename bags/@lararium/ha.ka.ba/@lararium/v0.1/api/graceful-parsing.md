@@ -157,20 +157,33 @@ a generic HTML parser for tags for *our* interleaving reason. TW5 already has th
 `parseTag` + `parseAttribute` delegating `{{}}`/`<<>>`). BurningTreeC's Lezer = editor-side reuse only.
 matklad's Resilient-LL = the recovery-set/≥1-char/Error-MISSING model.
 
-**RE-AIM (2026-06-27, code-traced) — the real break-badly is `parse()`'s BODY-SWALLOW, not `parseTag`.**
-`parseTag` (open-tag) is ALREADY mostly graceful: a malformed open tag → null → `findNextTag` skips →
-the `<…` becomes LITERAL TEXT (lossless, not a crash). The actual "confidently-incorrect tree" is in
-**`parse()` (`html.js:59-62`)**: a missing `</tag>` makes `parseBlocks(reEndString)` **consume every
-following block to EOF** — the open `<div>` SWALLOWS the rest of the document as its body. The spirit's
-change-set flagged this line (`html.js:62`) but kept it OUT of scope. So the full augmentation must
-OVERRIDE `parse()` TOO — bound the body recursion at a recovery-set (next sibling-open / blank-line /
-EOF-of-enclosing) instead of swallow-to-EOF — which is HIGHER blast-radius than the `parseTag` tweak
-(the core body-recursion every element + widget body flows through). `parseTag` recovery stays the
-lesser, lower-value slice (and `<foo`-no-`>` → element would change literal-text behavior — gate it
-carefully). BUILD SHAPE: override `parseTag` (open-tag recovery) + `parse()` (body-bound) + keep
-`parseAttribute` + `findNextTag`/`isLegalTag` verbatim; validate INCREMENT-BY-INCREMENT against the
-byte-exact suite (a WRONG body-bound IS the confidently-incorrect tree) — a focused, green-bar-driven
-session, not a tail-of-marathon flip. CHECKPOINTED at the confidence floor 2026-06-27.
+**FINAL RE-AIM — the PARSER is graceful; the break-badly is at RENDER (deep-read in the fork, 2026-06-27).**
+(Supersedes the earlier parse()-body-swallow aim.) Owning the fork let us read the parser core: it is
+ALREADY graceful — a malformed open tag → null → `findNextTag` skips → LITERAL TEXT (lossless); a missing
+`</tag>` → `parseBlocksTerminatedExtended` (`wikiparser.js:296-321`) extends the element to EOF, which is
+**HTML5-CORRECT** (unclosed tags extend to their parent's end), NOT a confidently-incorrect tree. So the
+parse()-body-bound aim was wrong — leave the parser alone.
+
+**The real break-badly is RENDER:** a widget whose `render()`/`execute()` THROWS is UNCONTAINED —
+`renderChildren` (`widget.js:686`) looped `children[i].render()` with no try/catch, so one throwing
+widget crashed the whole render tree. (Unknown widget → `"Undefined widget"` text `:634` was already
+graceful; the gap was *throwing* widgets.)
+
+**BUILT + TESTED — the per-widget render boundary (fork branch `feature/resilient-render-boundary`,
+fork a9dd2c92 / parent cf06adbf):** `renderChildren` now wraps each `children[i].render()` in try/catch
+→ a throw degrades to a graded `$error`/`tc-error` span, later siblings still render; `TranscludeRecursionError`
+re-thrown (transclude.js handles it). Validated against the fork's OWN suite: **1528 specs, 0 failures**
+(1527 existing transparent + 1 new `test-resilient-render.js`). This is the render side of grade-on-a-
+gradient + the gradient-render-symmetry foundation + the click-to-edit foundation (a live-edit re-render
+that throws won't crash the wiki). Next: the same boundary in `refreshChildren` (`widget.js:780`, the
+click-to-edit live-update path).
+
+**ERROR-SURFACING — TWO channels (operator: TW5 messages the user via `$:/alert` + system tags):**
+(1) IN-PLACE — the inline `tc-error` span at the failure site (the gradient, in-render); (2) USER-
+NOTIFICATION — a `$:/tags/Alert` tiddler so the user *knows* a degradation occurred (TW5's native
+dismissible alert, same channel as the reboot-alert seam). CAVEAT: NEVER raise `$:/alert` from inside
+`renderChildren` (mutating the wiki during render risks a re-render loop) — collect render-errors
+in-render, raise the alert OUT-of-render (a hook/sweep, eventual-send), per the reboot-alert discipline.
 
 <<~/ahu >>
 
