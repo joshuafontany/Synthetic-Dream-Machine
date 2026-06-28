@@ -39,6 +39,8 @@ The two families cross the **AUTHORITY ⊥ FLOW** master cut: VESSEL caps carry 
 
 **Do not over-purify.** The rhizome *itself* caches en-route; a carriage cap holding some replicated state breaks no law (botanically, the connector stores too). The cut names the **primary verb**, never an absolute exclusion.
 
+**`read` is a SCOPED cap, never a switch.** A vessel reads *which bags* — the capability-layer names the bag a cap applies to, so read runs per-bag, never all-or-nothing. The relay floor's `#has-NOT read` therefore means **no read on SOVEREIGN content** — a local operator's `@catalog`, the sealed territory — while the **public floor stays legible**: `@oracle` (base-ontology, engine-blob CIDs) and a vessel's own mesh-palace (the public FLOW-map). Blind to the territory, sighted on the map.
+
 <<~/ahu >>
 
 <<~ ahu #hold-vs-express >>
@@ -94,6 +96,20 @@ Whether a vessel **expresses** the rhizome cap — takes on carriage duty — is
 - **Response-threshold task allocation** (ant colonies): each unit carries a threshold on a demand stimulus; it engages when demand crosses *its* threshold, the cap deepens by use (reinforcement), and the collective **re-covers automatically** when a carrier drops.
 
 The carriage-demand stimulus reads off `r` — the carriage-standing coordinate (#the-routing-substrate). So the relay floor was never *"every node must carry"*; it is *"every node may, and self-elects by load."* A home browser carries nothing and meshes fine; a fat reachable node volunteers heavy carriage.
+
+<<~/ahu >>
+
+<<~ ahu #lares-viales >>
+
+## Lares Viales ~ the minimal wayfarer
+
+The smallest composition that still meshes — **the Hermai**, the crossroads-markers: a pure-carriage wayfarer that **cannot read most of the time.** Its whole stack:
+
+- `#has {rhizome}` — it carries sealed mana along the leylines.
+- `#has {read}` scoped to the **public floor** — `@oracle` (base-ontology, engine-blob CIDs) and its **own mesh-palace** (the FLOW-map it routes on).
+- `#has-NOT {read}` on a local operator's **`@catalog`** — the sovereign hearth stays sealed.
+
+It holds no sovereignty over another's content and expresses no sight into the territory; it knows the roads and the waymarks, never the houses. The Lares Viales proves the architecture's floor in one figure — **blind-carriage ⊕ public-read** — the minimal node every richer vessel composes *up* from (the Hello-World of the stack). The fiction names it the road-lares and the crossroads-herm: <<~ loulou lar:///ha.ka.ba/@elyncia/concepts/lares-viales >>.
 
 <<~/ahu >>
 
