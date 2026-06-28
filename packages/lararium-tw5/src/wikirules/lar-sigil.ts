@@ -139,9 +139,11 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
         this.attrs    = { __sigil__: generic.sigil };
         return pos;
       }
+      // GRADIENT (graceful-parsing): an unrecognized sharktooth form renders a VISIBLE graded marker,
+      // not a silent literal. A matched word = partial (recognized sigil, novel param shape); none = water.
       this.matchPos = pos;
       this.matchEnd = generic.end;
-      this.attrs    = { __literal__: source.slice(pos, generic.end) };
+      this.attrs    = { __literal__: source.slice(pos, generic.end), __degraded__: generic.sigil ? "partial" : "water" };
       return pos;
     }
     pos = source.indexOf("<<~", pos + 3);
@@ -154,6 +156,21 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
   parser.pos = this.matchEnd!;
   const attrs = { ...(this.attrs ?? {}) };
 
+  if ("__degraded__" in attrs) {
+    // The gradient made VISIBLE in the live wiki: a degraded sigil renders as a marked span (partial /
+    // water) carrying its verbatim text — never silently dropped, never a crash. Styled via
+    // $:/tags/Stylesheet so a pasted-and-saved turn shows its parse grade instead of a silent literal.
+    const grade = attrs["__degraded__"]!;
+    return [{
+      type: "element",
+      tag: "span",
+      attributes: {
+        class: { type: "string", value: `lar-sigil-degraded lar-sigil-${grade}` },
+        title: { type: "string", value: `memetic-wikitext: ${grade} parse — unrecognized sigil form (verbatim preserved)` },
+      },
+      children: [{ type: "text", text: attrs["__literal__"] ?? "" }],
+    } as unknown as ParseTreeNode];
+  }
   if ("__literal__" in attrs) {
     return [{ type: "text", text: attrs["__literal__"]! }];
   }

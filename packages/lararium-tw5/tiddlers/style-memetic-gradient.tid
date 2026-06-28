@@ -1,0 +1,28 @@
+title: lar:///ha.ka.ba/@lararium/tw5/styles/memetic-gradient
+tags: $:/tags/Stylesheet
+
+/* Memetic-wikitext parse gradient, made visible in a live wiki.
+   A degraded sigil renders verbatim inside a marked span instead of a silent literal — so pasting turn
+   text into a tiddler and saving SHOWS its parse grade (graceful-parsing#sigil-self-defined-gradient).
+   partial = a recognized sigil in a novel param shape (best-effort); water = an unrecognized form. */
+
+.lar-sigil-degraded {
+	border-radius: 0.2em;
+	padding: 0 0.15em;
+	cursor: help;
+	font-family: var(--lar-mono, monospace);
+}
+
+/* partial — recognized sigil, novel form: amber, dotted (it almost parsed). */
+.lar-sigil-partial {
+	color: <<colour muted-foreground>>;
+	background: rgba(220, 160, 40, 0.12);
+	border-bottom: 1px dotted rgba(200, 140, 30, 0.8);
+}
+
+/* water — unrecognized form: cooler, the inert floor (verbatim, never lost). */
+.lar-sigil-water {
+	color: <<colour muted-foreground>>;
+	background: rgba(120, 140, 170, 0.10);
+	border-bottom: 1px dotted rgba(110, 130, 160, 0.7);
+}
