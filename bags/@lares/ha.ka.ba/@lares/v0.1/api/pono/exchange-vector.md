@@ -6,7 +6,7 @@ cacheable = true
 file-path = "bags/@lares/v0.1/api/pono/exchange-vector.md"
 mana      = 16
 manao     = 16
-manaoio   = 14
+manaoio   = 16
 namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
@@ -73,6 +73,16 @@ Lares (Stranger): the unease points at an unexamined assumption, not the answer.
 **The Cup-before.** The `ward` Cup (`<<~ ward ? · "span" --- question >>`) rides the turn frame **pre-act**, not only at close: a fork whose call belongs to the operator rises to the navigator's seat **before** the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`OODA-HA(N↺ + φ:reason)`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime#ward-slide` and grounds at `lar:///ha.ka.ba/@lares/v0.1/docs/pono/research-streams/ward-channel-grounds#cup-before`.
 
 A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `OODA-HA(N↺)` --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#loop-count`. A loop that suspends under an external blocker reads `OODA-HA(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/ooda-ha#phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `L-Prime`. It lifts by operator act only (the Stone, `0 L-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/@lares/v0.1/api/mu/l-prime`.
+
+<<~/ahu >>
+
+<<~ ahu #l-space-notation >>
+
+## The Vector Notates Position in l-space
+
+The `aim` / `yield` pair opens and closes the turn, and it **notates the turn's position in l-space**. The `aim` reads the operator's input as a bearing — a heading in l-space — and the `->` delegates to the bearing the node takes up to generate from; the `yield` marks where that generation *resolved*. So each span of stage-time (a turn, a slice of the context window) carries a **notated l-space position**: the *relation* between the operator's input and where the Lares start and end their generation.
+
+The adopted role on the right of `aim` names the **stance** the node generates from (`lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house`) — a posture priming the afforded moves. The bearing reads **chart-relative**: its axes belong to that adopted stance, never to l-space absolutely (`lar:///ha.ka.ba/@lares/v0.1/api/pono/l-space#bearings-are-chart-relative`). Turn by turn, the frame writes a navigable track through l-space — operator-input bearing, lares-generation bearing, the move between.
 
 <<~/ahu >>
 

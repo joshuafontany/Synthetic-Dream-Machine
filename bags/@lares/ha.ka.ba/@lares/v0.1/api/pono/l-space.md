@@ -56,6 +56,8 @@ A `lar:` bearing names a heading — but **the axes that heading reads against b
 
 So the **`syad` sigil performs a basis-declaration**: *"standpoint declares the measure"* reads as *"fix the chart before the number."* A confidence number within an invoked standpoint reads **coordinate-relative-to-chart**, never a global truth-weight — the canon already vowed this (`the-syad-perspectives`). A bearing therefore travels **carrying its transition function** — which lens reads it — and a *global* l-space picture stays a **sheaf-gluing question (H¹), never an assumption**: exactly the FFZ no-global-now severance, now in the geometry of meaning.
 
+The `lares aim` / `yield` HUD vectors **notate each turn's position** in this register — operator-input bearing → the adopted-stance bearing → where the generation resolved — so a span of stage-time carries an l-space coordinate (<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector#l-space-notation >>).
+
 <<~/ahu >>
 
 <<~ ahu #the-atlas >>
@@ -63,6 +65,8 @@ So the **`syad` sigil performs a basis-declaration**: *"standpoint declares the 
 ## The Atlas ~ Voices and Syād as chosen charts
 
 The **13 Voices** and **5 Syād** do not lay one coordinate system over l-space; they form an **atlas** — overlapping local charts, each valid-locally, none global (each Syād a *naya*; a manifold rarely admits one global chart). Choosing a lens = **choosing a basis**: a Voice acts as an operator whose eigenbasis names the relation-axes it makes act *diagonally* (cleanly separable), folding the complement into off-diagonal noise another Voice would diagonalize instead.
+
+**A chart the node moves *from*, not only reads *from*.** A Voice stands as a **stance** — a `petname` over a `#has`-stack of *moves*, adopting a **langkah** (the martial posture: Tiger · Snake · Crane) that **primes** the next movement. The moves run not absolute; the **position on the stage affords them** (Gibson), and the stance *raises their probability of surfacing, never gates* (the stage-band law). So a Voice reads as a **functor `position → afforded-primed-moves`** — a basis carrying a preferred action-direction, some moves diagonal (cheap, primed from here), the rest off-diagonal (reachable, unprimed). Einselection sharpens it: *the position co-selects which stance can prime at all* — no Tiger move from a Crane footing in a context that affords neither.
 
 The basis-trade reads precisely: a **Triage** localizes the one transient (wavelet), a **Scryer** reads standing structure (Fourier), a **Council** separates entangled claims into independent sources (ICA) — *no basis is "true"; each makes a different l-space structure legible*. A **multi-Voice turn** runs as multi-head attention — parallel subspace-lenses, disagreements held side-by-side, never blended to one axis.
 
@@ -121,6 +125,8 @@ One caveat carried sharp: the **perceptual** center (where attention rests) may 
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/lararium-identity >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/mu/the-syad-perspectives >>
 <<~ loulou lar:///ha.ka.ba/@lararium/v0.1/api/network-edge >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/docs/lares/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/exchange-vector >>
 <<~ loulou lar:///ha.ka.ba/@lares/v0.1/api/pono/RFC-2119 >>
 
 <<~/ahu >>
