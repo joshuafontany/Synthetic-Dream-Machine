@@ -336,6 +336,66 @@ ships now, `"repaired"` lands per-construct later. The gradient stays truthful e
 
 <<~/ahu >>
 
+<<~ ahu #sigil-self-defined-gradient >>
+
+## Self-defining sigil failure-gradients ~ #has cap-stacks (3-spirit swarm, 2026-06-27)
+
+The meme-ast SIGIL builder (our island layer, distinct from the TW5 render boundary) hardens into a
+RESILIENT DRIVER that READS each sigil's OWN declared failure-gradient — a sigil self-defines how *it*
+degrades, via the EXISTING `#has` cap-stack. Two prior-art realms + our ground converged on one design.
+
+**THE CONVERGENCE.**
+- GRAMMAR side (SDF3 permissive-grammars [de Jonge/Kats/Visser] · PEG labeled-failures [+2025 semi-auto]
+  · matklad Resilient-LL · tree-sitter MISSING/ERROR · Ohm grammar-as-object): recovery lives in a
+  resilient DRIVER that READS per-entity declarations — the HYBRID. matklad's objection targets error
+  PRODUCTIONS (grammar alternatives that rot + change the accepted language), NOT per-entity recovery
+  HINTS the driver reads. Auto-derive each rule's recovery from its own production by default; let the
+  entity override.
+- COMPOSITION side (ECS behavior-by-having · ocap attenuation [Miller] · algebraic effect-handlers ·
+  OTP supervisor-trees · decorator/Tower/resilience4j): the per-entity declaration = an ORDERED
+  cap-stack (DATA); ONE dispatcher walks it as a nearest-handler CASCADE; ORDER = the gradient; each
+  lower rung an ATTENUATION (strictly weaker); a mandatory inert "water" rung at the floor; resilience4j
+  SHIPS this exact shape.
+- OUR GROUND: **`#has` is ALREADY an ordered cap-stack** — `has-stack.md` (the Seven Clauses, ratified
+  2026-06-12) + `island-caps.ts` (`composeIsland`: onSignal first-wins, ORDER = precedence, teardown
+  LIFO). island-caps' first-wins-by-order IS the nearest-handler cascade the effect-handler prior art
+  names. We EXTEND the substrate to grammar entities; we do NOT invent it.
+
+**THE SOUNDNESS INVARIANT (load-bearing):** a sigil declares its failure-gradient ONLY as recovery that
+fires AFTER a parse failure — NEVER as a normal grammar alternative. The clean grammar's accepted
+language stays unchanged (the permissive grammar is a SUPERSET used only for recovery).
+
+**THE 4-RUNG GRADIENT (declared as data; each rung = named prior art):** (1) clean — normal parse · (2)
+partial — minimal-edit completion (tree-sitter MISSING; declare a completion template / required
+trailers) · (3) degraded — skip-to-resync, wrap in an Error node (recovery/FOLLOW set; matklad/ANTLR) ·
+(4) inert — island/water, opaque span, parse around it (SDF3 water; MANDATORY floor). DEFAULT:
+auto-derive from the sigil's own open/close pattern (FIRST → start; FOLLOW → resync) so an un-annotated
+sigil degrades for free. OVERRIDE: a declared recovery cap-stack (the `#has` mechanism) / `lar-recover-*`
+fields.
+
+**THE DESIGN.** The sigil tiddler `#has` a recovery cap-stack (the 4 rungs) as DATA. The hardened
+builder = the resilient DRIVER: at each failure site it CONSULTS the sigil's gradient and WALKS the
+cascade (first rung that can answer), enacting the MECHANISM (minimal-edit · skip-to-resync · water).
+Driver owns the mechanism; the sigil declares the policy. Out-of-band failure record on
+`ParseMemeResult.failures` (span-keyed — tree stays clean + carries Error/MISSING nodes; diagnostics
+ride beside, rust-analyzer-style + our drawer).
+
+**GOLDEN PRACTICES:** order = the gradient (declared, not emergent — our has-stack order=precedence
+already satisfies this) · the inert water rung MANDATORY · attenuation-monotonic (each lower rung
+weaker — ocap) · resumable-vs-abortive tagged per rung (effect-handler discipline; resume = degraded,
+abort = inert) · the gradient as DATA, the cascade in ONE driver · clean path free of defensive tangle
+("let it crash" into the driver).
+
+**THE BUILD (seams, grounded file:line):** SigilRule type +failure fields (`types.ts:53-66`) ·
+grammar-cache reads `lar-recover-*` / the `#has` cap-stack (`grammar-cache.ts:88-103`) · the three
+hardcoded builder recovery points consult the gradient (orphan-close `builder.ts:255-264`, unclosed
+force-close `:277-281`, unknown-sigil Dynamic `:123/:215`) · scanner per-sigil error-accumulation
+(`scanner.ts:138-155`) · `ParseMemeResult.failures` threaded (`parse.ts:31-54`). EXTEND `has-stack`/
+`island-caps` to grammar entities for the recovery cap-stack — OR ship a lighter `lar-recover-*`
+field-set first, cap-stack second.
+
+<<~/ahu >>
+
 <<~ ahu #references >>
 
 ## Load-bearing references
