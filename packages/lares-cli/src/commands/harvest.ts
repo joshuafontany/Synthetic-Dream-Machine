@@ -439,10 +439,9 @@ interface WingHarvest {
   readonly transcripts: number;
   readonly sources: string;
   readonly mined: number | string;
-  readonly writeback: WritebackResult;
 }
 
-function runHarvestAll(args: ParsedArgs): number {
+async function runHarvestAll(args: ParsedArgs): Promise<number> {
   const dryRun = args.flags["dry-run"] === true;
   if (!existsSync(resolveDrawerIo())) {
     const error: LaresError = { code: "not-found", message: `drawer_io.py missing at ${resolveDrawerIo()}` };
@@ -468,7 +467,7 @@ function runHarvestAll(args: ParsedArgs): number {
   for (const [wing, es] of byWing) {
     const sources = [...new Set(es.map((e) => e.source))].sort().join("+");
     if (dryRun) {
-      results.push({ wing, transcripts: es.length, sources, mined: "dry-run", writeback: { drawers: 0, framed: 0, applied: 0, bands: {} } });
+      results.push({ wing, transcripts: es.length, sources, mined: "dry-run" });
       continue;
     }
     // stage into a stable per-wing dir (normalize copilot, hardlink the rest) so
@@ -485,30 +484,30 @@ function runHarvestAll(args: ParsedArgs): number {
         try { linkSync(e.file, dst); } catch { try { copyFileSync(e.file, dst); } catch { /* skip */ } }
       }
     }
-    let mined: number | string = 0;
+    let mined: number | string;
     try {
-      // INTERIM (committed-functional): direct convo mine + retry-on-lock. The CANON target is to
-      // route this through the @daemon WORKER's nalu (the worker holds the grammar to annotate inside
-      // the TW5 VM) — born-annotated single-write through the nalu gates, not a CLI-side annotate.
-      // Pending the worker-routing build (scale decision: per-exchange capture verbs vs a batch verb).
-      const out = mineWithRetry(["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "lares"]);
-      mined = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
+      // CANON (the worker-routing now built): route the harvest THROUGH the @daemon — cmdCapture submits
+      // each turn via the capture verb → the @daemon's capture cap → in-VM annotate (lar_* + AST) →
+      // flush → mempalace verbatim + .astpalace AST + the deterministic hash-bindings (lar_ast_hash ·
+      // lar_verbatim_sha). Born-annotated, single-write through the nalu gates. (cmdCapture self-falls-
+      // back to a DIRECT verbatim mine if the @daemon is down — the verbatim drawer is never lost.)
+      const rc = await cmdCapture({ command: "capture", positional: [stage], options: { wing }, flags: {} });
+      mined = rc === 0 ? "routed→@daemon" : `capture-rc-${rc}`;
     } catch (e) {
-      mined = "mine-failed: " + String((e as { stderr?: unknown }).stderr ?? (e as Error).message ?? "").trim().slice(0, 160);
+      mined = "capture-failed: " + String((e as Error).message ?? "").trim().slice(0, 160);
     }
-    results.push({ wing, transcripts: es.length, sources, mined, writeback: writebackWing(wing) });
+    results.push({ wing, transcripts: es.length, sources, mined });
   }
 
   results.sort((a, b) => b.transcripts - a.transcripts);
-  const totalApplied = results.reduce((n, r) => n + r.writeback.applied, 0);
   emit(args, {
     ok: true,
-    data: { wings: results, totalApplied, dryRun, mode: "all" },
+    data: { wings: results, dryRun, mode: "all", routedThrough: "@daemon" },
     human: () => {
-      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts`);
+      console.log(`lares harvest --all${dryRun ? "  (dry run)" : ""}  — ${results.length} wing(s), ${entries.length} transcripts → @daemon`);
       for (const r of results)
-        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · mined ${r.mined} · lar_ ${r.writeback.applied}`);
-      console.log(`  total lar_ metadata written: ${totalApplied}`);
+        console.log(`  ${r.wing.padEnd(34)} ${String(r.transcripts).padStart(4)} [${r.sources}] · ${r.mined}`);
+      console.log(`  routed through the @daemon nalu — verbatim → mempalace · AST → .astpalace · hash-bound`);
     },
   });
   return 0;

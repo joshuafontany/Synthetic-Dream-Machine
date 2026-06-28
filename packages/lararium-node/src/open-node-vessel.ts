@@ -343,6 +343,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           spoolDir:       join(larRuntimeDir(), "capture-nalu"),
           walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
           quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
+          // The DURABLE .astpalace (the memory-ast-unfolding bridge) lives BESIDE the WAL on disk —
+          // NOT in the transient tmpfs spool: it must survive reboots (the recurrence tally is durable
+          // state, the eidetic↔semantic bridge). storageDir === larDataDir() for the operator instance.
+          astPalaceDir:   join(storageDir, "astpalace"),
         },
       });
       return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };

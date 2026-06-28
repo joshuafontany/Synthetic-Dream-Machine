@@ -11,6 +11,7 @@
  *
  * Targets (resolved, never ambient):
  *   - the palace store      MEMPALACE_PALACE_PATH ?? ~/.mempalace   (chroma + config + entities + locks)
+ *   - the astpalace store   larDataDir/astpalace                    (the memory-ast-unfolding bridge — local AST store)
  *   - the harvest watermark ~/.lares/harvest                        (lar_hv idempotency state.json)
  *   - the harvest stage     ~/.lares/harvest-stage                  (normalized transcript copies)
  *
@@ -27,7 +28,7 @@ import { existsSync, rmSync, statSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { execFileSync } from "node:child_process";
-import { larHarvestDir, larHarvestStageDir } from "../env.js";
+import { larHarvestDir, larHarvestStageDir, larDataDir } from "../env.js";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -41,6 +42,7 @@ function resolveTargets(): Target[] {
   const palace = process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace");
   return [
     { label: "palace store (chroma + config + entities + locks)", path: palace },
+    { label: "astpalace (memory-ast-unfolding bridge — local AST store)", path: join(larDataDir(), "astpalace") },
     { label: "harvest watermark (lar_hv idempotency)",            path: larHarvestDir() },
     { label: "harvest stage (normalized transcript copies)",      path: larHarvestStageDir() },
   ];

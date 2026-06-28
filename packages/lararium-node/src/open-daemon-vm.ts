@@ -68,6 +68,8 @@ export interface DaemonVmOptions {
     readonly spoolDir: string;
     readonly walPath: string;
     readonly quarantinePath: string;
+    /** The DURABLE .astpalace dir (the memory-ast-unfolding bridge — local, never federates). */
+    readonly astPalaceDir?: string;
     readonly mempalaceBin?: string;
     readonly tickMs?: number;
     readonly targetLatencyMs?: number;
