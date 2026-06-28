@@ -28,6 +28,14 @@ export function larDataDir(): string {
   return join(larHome(), ".lararium");
 }
 
+/** The `.astpalace` AST-store palace dir — a SECOND mempalace instance (same ChromaDB engine,
+ *  separate palace) holding the per-turn parse-tree AST keyed by structural hash. Sits at
+ *  `~/.lares/.astpalace`, PARALLEL to the verbatim palace (`~/.mempalace`) and `.meshpalace`,
+ *  beside the wipe-zone rather than inside it (the recurrence tally is durable bridge state). */
+export function larAstPalaceDir(): string {
+  return join(larHome(), ".astpalace");
+}
+
 /** Vessel identity dir — the keypair, PRESERVED across `reset` (sibling of the wipe-zone). */
 export function larIdentityDir(): string {
   return join(larHome(), ".lararium-identity");

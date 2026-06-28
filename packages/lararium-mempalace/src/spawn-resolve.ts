@@ -54,3 +54,25 @@ export function resolveMempalaceSpawn(): MempalaceSpawn {
   const sidecarPresent = existsSync(join(submoduleRoot, "mempalace", "mcp_server.py"));
   return { submoduleRoot, python: resolveMempalacePython(), sidecarPresent };
 }
+
+/** Locate `astpalace_io.py` — CODE, so it lives at the repo root (never LAR_ROOT). The
+ *  persistent NDJSON holder for the `.astpalace` mempalace instance (the AST store). */
+export function resolveAstPalaceIo(): string {
+  return join(repoRoot, "packages", "lararium-mempalace", "scripts", "astpalace_io.py");
+}
+
+/** What `makeAstPalace` needs to spawn the `.astpalace` holder: the venv-aware python,
+ *  the helper script, and the submoduleRoot (PYTHONPATH so `import mempalace` resolves). */
+export interface AstPalaceSpawn {
+  readonly python: string | null;
+  readonly script: string;
+  readonly submoduleRoot: string;
+  readonly scriptPresent: boolean;
+}
+
+/** Resolve everything the `.astpalace` holder needs (mirrors {@link resolveMempalaceSpawn}). */
+export function resolveAstPalaceSpawn(): AstPalaceSpawn {
+  const submoduleRoot = join(repoRoot, "mempalace");
+  const script = resolveAstPalaceIo();
+  return { python: resolveMempalacePython(), script, submoduleRoot, scriptPresent: existsSync(script) };
+}

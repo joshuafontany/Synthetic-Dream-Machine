@@ -57,7 +57,7 @@ import { repoRoot }                       from "@lararium/mesh/node";
 import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
-import { larRuntimeDir }                   from "./vessel-paths.js";
+import { larRuntimeDir, larAstPalaceDir }  from "./vessel-paths.js";
 import { waitHandleLocal, resolveBootDoc } from "./repo-helpers.js";
 import { openDaemonVm }                    from "./open-daemon-vm.js";
 import {
@@ -364,10 +364,11 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
           spoolDir:       join(larRuntimeDir(), "capture-nalu"),
           walPath:        join(storageDir, "capture-nalu", "wal.ndjson"),
           quarantinePath: join(storageDir, "capture-nalu", "quarantine.ndjson"),
-          // The DURABLE .astpalace (the memory-ast-unfolding bridge) lives BESIDE the WAL on disk —
-          // NOT in the transient tmpfs spool: it must survive reboots (the recurrence tally is durable
-          // state, the eidetic↔semantic bridge). storageDir === larDataDir() for the operator instance.
-          astPalaceDir:   join(storageDir, "astpalace"),
+          // The DURABLE .astpalace — a SECOND mempalace instance (same ChromaDB engine, separate
+          // palace) at `~/.lares/.astpalace`, PARALLEL to the verbatim palace + `.meshpalace`. It
+          // sits BESIDE the wipe-zone (not inside .lararium / tmpfs): the recurrence tally is durable
+          // bridge state that must survive reboots AND `reset`. LAR_ROOT-isolated for staged instances.
+          astPalaceDir:   larAstPalaceDir(),
         },
       });
       return { workerEa: daemonVm.workerEa, mountMainVerbs: daemonVm.mountMainVerbs, resolveBinding: daemonVm };
