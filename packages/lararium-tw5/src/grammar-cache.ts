@@ -99,6 +99,9 @@ function sigilFromFields(title: string, fields: Readonly<Record<string, unknown>
   if (fields["lar-default-family"])  rule.defaultFamily  = str(fields["lar-default-family"]);
   const layer = str(fields["lar-layer"]);
   if (layer === "compile" || layer === "render" || layer === "both") rule.layer = layer;
+  // Self-defined failure-gradient: the sigil declares how it degrades when unclosed.
+  const recoverAs = str(fields["lar-recover-as"]);
+  if (recoverAs === "water" || recoverAs === "repaired") rule.recoverAs = recoverAs;
   return rule;
 }
 

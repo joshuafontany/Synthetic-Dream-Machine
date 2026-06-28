@@ -8,6 +8,7 @@
 import { describe, expect, test } from "vitest";
 
 import { parseMemeText } from "../src/meme-ast/parse.js";
+import type { GrammarRules } from "../src/meme-ast/types.js";
 
 const URI = "lar:///test.resilient.parses";
 
@@ -37,5 +38,21 @@ describe("meme-ast resilient recovery", () => {
     expect(ahu!.recoveredAs).toBe("repaired");
     expect(ahu!.confidence).toBe(9);
     expect(JSON.stringify(ahu)).toContain("unclosed body"); // the valid content inside still parsed
+  });
+
+  test("a sigil self-declares its degradation posture via recoverAs (water, not the default repaired)", () => {
+    // The driver consults the per-sigil `recoverAs` for an unclosed frame. Here `ahu` declares "water"
+    // → inert (confidence 2); without a declaration it defaults to "repaired" (confidence 9, above).
+    const grammar = { sigils: [{
+      name: "ahu", kind: "context", recoverAs: "water",
+      openPattern: "<<~\\s*ahu\\s+(#[\\w-]+)\\s*>>",
+      closePattern: "<<~\\/ahu\\s*>>",
+    }], families: [] } as unknown as GrammarRules;
+    const r = parseMemeText(URI, "<<~ ahu #x >>\n\nbody to EOF", grammar);
+    const recovered = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs) as
+      { recoveredAs?: string; confidence?: number } | undefined;
+    expect(recovered).toBeDefined();
+    expect(recovered!.recoveredAs).toBe("water");  // the sigil's OWN declared posture, not the default
+    expect(recovered!.confidence).toBe(2);
   });
 });

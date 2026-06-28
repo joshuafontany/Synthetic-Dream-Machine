@@ -313,9 +313,15 @@ export function buildMemeAst(
   while (stack.length > 0) {
     const frame = stack.pop()!;
     if (frame.sigilName === "ahu") ahuStack.pop();
-    // RECOVER (repaired): an unclosed frame at EOF — force-close it, but mark recovered + record,
-    // instead of force-closing silently (the old "confidently-incorrect tree").
-    root.push(markRecovered(closeFrame(frame, memeUri, grammar), "repaired", 9, "unclosed-frame", frame.sigilName));
+    // RECOVER: an unclosed frame at EOF — force-close it, but mark recovered + record (never the old
+    // silent "confidently-incorrect tree"). The sigil MAY self-declare its posture via `recoverAs`:
+    // "water" (inert, conf 2) vs the default "repaired" (recovered, conf 9). The structure never breaks.
+    const declared = grammar?.sigils.find((s) => s.name === frame.sigilName)?.recoverAs;
+    const recoveredAs = declared ?? "repaired";
+    root.push(markRecovered(
+      closeFrame(frame, memeUri, grammar), recoveredAs, recoveredAs === "water" ? 2 : 9,
+      "unclosed-frame", frame.sigilName,
+    ));
   }
 
   return root;

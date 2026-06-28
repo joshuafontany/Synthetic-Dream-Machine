@@ -63,6 +63,11 @@ export interface SigilRule {
   aliasFor?: string;
   defaultFamily?: string;
   defaultPropagation?: string;
+  // Self-defined failure-gradient (graceful-parsing#sigil-self-defined-gradient): how THIS sigil
+  // declares it degrades when left unclosed — "water" (inert, low confidence — don't fabricate a
+  // frame) vs the default "repaired" (force-close marked, recovered). The resilient driver reads it;
+  // the structure still never breaks. (First rung of the #has recovery cap-stack.)
+  recoverAs?: "water" | "repaired";
 }
 
 export interface FamilyRule {
