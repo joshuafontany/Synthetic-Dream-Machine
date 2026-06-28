@@ -56,4 +56,8 @@ export function startup(): void {
     } catch { /* parse contained — harvest patch already built */ }
     return patch;
   };
+  // Also expose the gradient parser itself — callable from a LIVE WIKI (a widget, filter, or module) to
+  // parse gradient text in-realm with the full grammar. The native text/x-memetic-wikitext path + tooling
+  // reach it here; one parser, one runtime.
+  (t.lares as Record<string, unknown>)["parseMemeText"] = parseMemeText;
 }

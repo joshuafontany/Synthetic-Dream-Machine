@@ -44,6 +44,7 @@ import { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence
 export { fencedSpans, inMask, maskedExec, maskedExecAll } from "./meme-ast/fence-mask.js";
 import { parseTaploFields } from "./toml-ast.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
+import { parseMemeText } from "./meme-ast/parse.js";
 export type { GrammarRules } from "./meme-ast/types.js";
 export { getGrammar, resetGrammar };
 
@@ -134,7 +135,7 @@ export function memeticWikitextDeserializer(
     if (postamble.length > 0 && ev === closes[closes.length - 1] && memeText.endsWith(postamble)) {
       memeText = memeText.slice(0, memeText.length - postamble.length);
     }
-    const tiddlers = splitMemeToTiddlers(uri, memeText, asStringFields(fields));
+    const tiddlers = safeSplitMeme(uri, memeText, asStringFields(fields));
     if (prologue.length > 0 && tiddlers.length > 0 && ev === closes[0]) {
       // Copy prologue to ALL tiddlers so the template needs only `has[prologue]`.
       for (const t of tiddlers) t["prologue"] = prologue;
@@ -162,10 +163,35 @@ export function memeticWikitextDeserializer(
 
   // ⤴ Fallback — no SOH framing: treat entire text as bare meme body.
   if (result.length === 0 && text.trim()) {
-    result.push(...splitMemeToTiddlers(baseUri, text, asStringFields(fields)));
+    result.push(...safeSplitMeme(baseUri, text, asStringFields(fields)));
   }
 
   return result;
+}
+
+// ---------------------------------------------------------------------------
+// safeSplitMeme — LOSS-LESS split (Goal B): the gradient guards the write path.
+//
+// A split failure NEVER truncates — it falls back to the verbatim whole, flagged (drop-honesty): one
+// un-split tiddler holding every byte beats a silent truncation. parseMemeText (full grammar) records
+// the parse grade as `lar_parse_failures` so a meme written via CLI/import surfaces its degradation
+// instead of failing quietly. AI-session turns arrive bare (no carrier sigils) and ride this via the
+// no-SOH fallback — they split clean (no ahu → verbatim parent) or, if malformed, degrade legibly.
+// ---------------------------------------------------------------------------
+
+function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): TiddlerFields[] {
+  let tiddlers: TiddlerFields[];
+  try {
+    tiddlers = splitMemeToTiddlers(uri, text, fields);
+  } catch (err) {
+    console.warn(`[memetic-deserializer] split failed for ${uri} — verbatim fallback (drop-honesty): ${err instanceof Error ? err.message : String(err)}`);
+    tiddlers = [{ ...fields, title: uri, text, lar_parse_degraded: "1" } as TiddlerFields];
+  }
+  try {
+    const failures = parseMemeText(uri, text, getGrammar() ?? undefined).failures.length;
+    if (failures > 0 && tiddlers[0]) tiddlers[0]["lar_parse_failures"] = String(failures);
+  } catch { /* gradient validation is best-effort (no wiki/grammar in scope) */ }
+  return tiddlers;
 }
 
 // ---------------------------------------------------------------------------
