@@ -23,6 +23,7 @@ import {
   vesselCapStackToRecord, recordToVesselCapStack,
   routingSlotToRecord, recordToRoutingSlot,
   publicFlowMap, snapshotPublicFlowMap,
+  hyperbolicDistance, angularSeparation, greedyNextHop, type Coord,
   MeshPalace, emptyMeshPalaceDoc,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
@@ -141,5 +142,44 @@ describe("the cap vocabulary", () => {
     expect(isCarriageCap("rhizome")).toBe(true);
     expect(isVesselCap("tuber")).toBe(true);
     expect(isCap("relay")).toBe(false);   // "relay" is the machinery; "rhizome" is the cap
+  });
+});
+
+describe("greedy geometric routing — the native-disk chart", () => {
+  test("hyperbolic distance matches known geodesics", () => {
+    expect(hyperbolicDistance({ r: 0, theta: 0 }, { r: 0, theta: 0 })).toBeCloseTo(0);
+    // same angle → |r₁ − r₂|
+    expect(hyperbolicDistance({ r: 1, theta: 0.5 }, { r: 3, theta: 0.5 })).toBeCloseTo(2);
+    // from the center → the other's radius
+    expect(hyperbolicDistance({ r: 0, theta: 0 }, { r: 2.5, theta: 1 })).toBeCloseTo(2.5);
+    // antipodal θ, equal r → 2r (the geodesic runs through the center)
+    expect(hyperbolicDistance({ r: 1.5, theta: 0 }, { r: 1.5, theta: Math.PI })).toBeCloseTo(3);
+    // symmetric
+    const a: Coord = { r: 1, theta: 0.3 }, b: Coord = { r: 2, theta: 1.1 };
+    expect(hyperbolicDistance(a, b)).toBeCloseTo(hyperbolicDistance(b, a));
+  });
+
+  test("angular separation wraps the cyclic θ the short way", () => {
+    expect(angularSeparation(0, Math.PI)).toBeCloseTo(Math.PI);
+    expect(angularSeparation(0.1, 2 * Math.PI - 0.1)).toBeCloseTo(0.2);
+  });
+
+  test("greedy picks the neighbor that makes progress; null at a local minimum", () => {
+    const dest: Coord = { r: 3, theta: 0 };
+    const self: Coord = { r: 1, theta: 1.0 };
+    const neighbors = [
+      { bearing: "lar:///ha.ka.ba/@a", r: 2,   theta: 0.2 },  // toward dest
+      { bearing: "lar:///ha.ka.ba/@b", r: 0.5, theta: 2.5 },  // away
+    ];
+    expect(greedyNextHop(self, neighbors, dest)?.bearing).toBe("lar:///ha.ka.ba/@a");
+
+    // a neighbor sitting AT the destination wins outright
+    const atDest = { bearing: "lar:///ha.ka.ba/@d", r: 3, theta: 0 };
+    expect(greedyNextHop(self, [atDest], dest)?.bearing).toBe("lar:///ha.ka.ba/@d");
+
+    // local minimum: self already near dest, no neighbor improves → null (caller direct-dials)
+    const nearDest: Coord = { r: 3, theta: 0.01 };
+    const farOnly = [{ bearing: "lar:///ha.ka.ba/@x", r: 0.1, theta: 3 }];
+    expect(greedyNextHop(nearDest, farOnly, dest)).toBeNull();
   });
 });

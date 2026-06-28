@@ -246,6 +246,51 @@ export function routingSlots(doc: LarDoc): RoutingSlot[] {
   return Object.values(doc.tiddlers).map(recordToRoutingSlot).filter((s): s is RoutingSlot => s !== null);
 }
 
+// ── Greedy geometric routing (the native-disk chart) ───────────────────────
+// The routing-substrate canon (dreamnet-architecture#the-routing-substrate): a relay greedy-walks
+// toward the neighbor closest in (r, θ) within a local horizon, and direct-dials beyond it. These
+// pure helpers carry the chart math — the hyperbolic distance on the native polar disk + the greedy
+// next-hop. The chart is a MAP, never the territory: r = carriage-standing (FLOW), θ = coarse public
+// kinship (a bounded cyclic S¹). Long-range distance over-reads (non-Riemannian), so a null next-hop
+// (no neighbor makes progress) signals the caller to direct-dial — never a dead end.
+
+/** A point on the routing chart: radial standing r ≥ 0, angular kinship θ on the cyclic S¹. */
+export interface Coord {
+  readonly r: number;
+  readonly theta: number;
+}
+
+const TAU = 2 * Math.PI;
+
+/** Angular separation Δθ ∈ [0, π] on the cyclic θ circle (period 2π). */
+export function angularSeparation(t1: number, t2: number): number {
+  const d = Math.abs(t1 - t2) % TAU;
+  return d > Math.PI ? TAU - d : d;
+}
+
+/** Hyperbolic distance on the native polar disk (H², curvature −1) — the hyperbolic law of cosines. */
+export function hyperbolicDistance(a: Coord, b: Coord): number {
+  const dTheta = angularSeparation(a.theta, b.theta);
+  // cosh d = cosh r₁ cosh r₂ − sinh r₁ sinh r₂ cos Δθ
+  const coshD = Math.cosh(a.r) * Math.cosh(b.r) - Math.sinh(a.r) * Math.sinh(b.r) * Math.cos(dTheta);
+  return Math.acosh(Math.max(1, coshD)); // clamp ≥ 1 — float guard on acosh's domain
+}
+
+/**
+ * Greedy next hop: the neighbor strictly closer to `dest` than `self` (the one that makes progress).
+ * Returns null at a local minimum — no neighbor improves on self — which the caller reads as
+ * "direct-dial beyond the horizon" (the dial-record), per #the-routing-substrate; never a dead end.
+ */
+export function greedyNextHop(self: Coord, neighbors: readonly RoutingSlot[], dest: Coord): RoutingSlot | null {
+  let best: RoutingSlot | null = null;
+  let bestDist = hyperbolicDistance(self, dest); // a hop must beat self to count as progress
+  for (const n of neighbors) {
+    const d = hyperbolicDistance(n, dest);
+    if (d < bestDist) { bestDist = d; best = n; }
+  }
+  return best;
+}
+
 // ── The disclosure membrane ────────────────────────────────────────────────
 // Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The membrane is the
 // map/territory boundary made into a filter: dial-records + routing slots are
