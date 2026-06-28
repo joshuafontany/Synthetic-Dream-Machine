@@ -23,7 +23,8 @@ import {
   vesselCapStackToRecord, recordToVesselCapStack,
   routingSlotToRecord, recordToRoutingSlot,
   publicFlowMap, snapshotPublicFlowMap,
-  hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate, type Coord,
+  hyperbolicDistance, angularSeparation, greedyNextHop, radialCoordinate,
+  seedTheta, childCone, coneCenter, ROOT_CONE, type Coord,
   MeshPalace, emptyMeshPalaceDoc,
   type DialEntry, type VesselCapStack, type RoutingSlot, type MeshPalaceDoc,
 } from "../src/mesh-palace.js";
@@ -189,5 +190,26 @@ describe("greedy geometric routing — the native-disk chart", () => {
     expect(radialCoordinate(10, opts)).toBeLessThan(radialCoordinate(1, opts));   // more carriage → nearer center
     expect(radialCoordinate(2, opts)).toBeGreaterThan(radialCoordinate(8, opts)); // monotone decreasing
     expect(radialCoordinate(1e6, opts)).toBeGreaterThanOrEqual(0);                // clamped onto the disk
+  });
+
+  test("seedTheta samples the cyclic [0, 2π) — content-blind by construction", () => {
+    expect(seedTheta(() => 0)).toBeCloseTo(0);
+    expect(seedTheta(() => 0.5)).toBeCloseTo(Math.PI);
+    const t = seedTheta(() => 0.999);
+    expect(t).toBeGreaterThanOrEqual(0);
+    expect(t).toBeLessThan(2 * Math.PI);
+  });
+
+  test("the tree-cone subdivides, nests, and centers — greedy descends the tree", () => {
+    const kids = [0, 1, 2, 3].map((i) => childCone(ROOT_CONE, i, 4));
+    expect(kids[0]).toEqual({ start: 0, end: Math.PI / 2 });           // tiles the circle…
+    expect(kids[3]).toEqual({ start: 3 * Math.PI / 2, end: 2 * Math.PI }); // …disjoint + covering
+    // a descendant NESTS inside its ancestor (the greedy-descent property)
+    const parent = childCone(ROOT_CONE, 1, 2);   // [π, 2π)
+    const grandchild = childCone(parent, 0, 2);  // [π, 3π/2)
+    expect(grandchild.start).toBeGreaterThanOrEqual(parent.start);
+    expect(grandchild.end).toBeLessThanOrEqual(parent.end);
+    // a node's θ is its cone's center
+    expect(coneCenter(childCone(ROOT_CONE, 0, 4))).toBeCloseTo(Math.PI / 4);
   });
 });

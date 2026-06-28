@@ -304,6 +304,44 @@ export function radialCoordinate(degree: number, opts: { readonly R: number; rea
   return Math.min(opts.R, Math.max(0, r)); // clamp onto the disk [0, R]
 }
 
+// ── The angular coordinate θ — seed random, grow from topology (the blessed derivation) ────────
+// θ is BORN uniform-random (the map-never-territory guarantee: a sampled angle leaks no sealed
+// content — you cannot leak what you drew from a die) and GROWS its kinship from tree-topology, never
+// from content (#the-routing-substrate; ruling 2026-06-28). Kinship is not encoded — it EMERGES from
+// who-routes-with-whom (Popularity-Similarity). Option C (θ from content) stays dead.
+
+/** Seed a vessel's birth θ — uniform-random on the cyclic [0, 2π). `rng` injects determinism for
+ *  tests; production samples Math.random ONCE at birth and stores it (θ never re-rolls). */
+export function seedTheta(rng: () => number = Math.random): number {
+  return rng() * TAU;
+}
+
+/** A contiguous angular cone [start, end) ⊆ [0, 2π) — a node's slice of the spanning-tree subdivision. */
+export interface AngularCone {
+  readonly start: number;
+  readonly end: number;
+}
+
+/** The whole circle — the root of the tree-cone subdivision. */
+export const ROOT_CONE: AngularCone = { start: 0, end: TAU };
+
+/** The center angle of a cone — the θ a node sitting at this cone takes. */
+export function coneCenter(c: AngularCone): number {
+  return (c.start + c.end) / 2;
+}
+
+/**
+ * The Cvetkovski–Crovella tree-cone topology-recovery: subdivide a parent's cone among `fanout`
+ * children and hand child `index` its sub-wedge. A descendant's cone NESTS inside every ancestor's,
+ * so greedy routing toward a destination's θ descends the spanning tree correctly (provable
+ * delivery). θ derives from TREE POSITION (FLOW), never content — the topology half of the blessing.
+ */
+export function childCone(parent: AngularCone, index: number, fanout: number): AngularCone {
+  const width = (parent.end - parent.start) / fanout;
+  const start = parent.start + index * width;
+  return { start, end: start + width };
+}
+
 // ── The disclosure membrane ────────────────────────────────────────────────
 // Only PUBLIC, COARSE, FLOW-plane tiddlers cross to peers. The membrane is the
 // map/territory boundary made into a filter: dial-records + routing slots are
