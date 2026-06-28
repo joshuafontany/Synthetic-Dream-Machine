@@ -72,9 +72,15 @@ HTML and DESTROY widget invocation. parse5 governs the HTML LAYER, never the lay
   post-parse TRANSFORM (parse5 AST → TW5 `{type:"element",tag,attributes,children}` nodes), NOT a custom
   tree-adapter (version-stable + gives the sanitizer one clean walk). Plugin-override (`module-type`,
   last-wins, like `memetic-parser.ts`); isomorphic (fakeDocument only, no `window.document`).
-- SECONDARY (optional, later): upgrade ONLY the wikirule's tag SCANNER (`html.js:93,103,161` — the thin
-  `reTagName` regex = the "TW5-era HTML" surface) with parse5's tokenizer, keeping TW5's wikitext
-  child-recursion. HTML5 attribute/error-recovery without touching interleaving.
+- ~~SECONDARY: swap the live rule's tag scanner for parse5's tokenizer~~ — **RETRACTED, proven unsafe
+  (2026-06-27).** TW5's `html`-rule attributes are THEMSELVES a superset of HTML5 attrs — they interleave
+  WIKITEXT into attribute VALUES: `attr={{transclusion}}` (indirect) · `attr={{{filter}}}` (filtered) ·
+  `attr=<<macro>>` (macro) · bare `attr`→`value:"true"` (per `test-wikitext-parser.js`). parse5 (pure
+  HTML5) has no `{{}}`/`<<>>` → it flattens `attr={{X}}` to `value:"{{X}}"`, BREAKING TW5's
+  transclusion/macro/filter attributes. So **parse5 is FLOOR-ONLY** (pure-HTML ingest, no wikitext-in-
+  attrs); the LIVE rule keeps TW5's own `parseAttribute`. Live-rule error-recovery comes from AUGMENTING
+  TW5's own `parseTag`/`parseAttribute` (resilient-recursive-descent, preserving the extensions) — NOT a
+  parse5 swap. (Reconciliation + prior art under research: spirit a871269a.)
 
 **Sanitize seam (CRITICAL) — allowlist tree-walk IN the transform, NOT DOMPurify.** A spec parser parses
 `<script>`/`onerror=`/`javascript:`/`<iframe srcdoc>` faithfully → XSS surface. DOMPurify needs a real
@@ -106,15 +112,21 @@ URLs in href/src/xlink:href/action/srcdoc/…, and `iframe`/`object`/`embed`/`ba
 through control-char obfuscation, `on*` dropped) — defense-in-depth layered over TW5's render gates.
 
 **LIVE WIRING — designed, GATED on a VM integration test (NOT yet activated).** The `html`-rule shadow
-(`module-type: wikirule`, `name:"html"`, last-wins) = DELEGATION: re-export TW5's `parse`/`findNextMatch`/
-`findNextTag`/`isLegalTag` VERBATIM (zero copy), override ONLY `parseTag` → if the tag is `$`-prefixed
-(a widget) or parse5 declines, call `stdHtml.parseTag` (widget dispatch + child-recursion EXACTLY
-preserved); else `parseHtml5OpenTag` + re-apply `requireLineBreak` (block mode). The shadow re-exports
-`require("$:/core/.../html.js")` members, which resolve ONLY inside a booted VM — so it CANNOT be
-unit-tested; it MUST pass a full-VM integration test (widgets + HTML + modern attrs + malformed all
-render correctly) before the plugin is rebuilt to activate it. A `wikirule`-typed file auto-activates
-via `discoverModules()` on the next plugin build, so the file is deliberately NOT created until that
-test rides with it — never a latent, untested override of the rule that dispatches EVERY widget.
+**RETRACTED in shape (2026-06-27):** the originally-planned `html`-shadow that routed real-HTML tags
+through `parseHtml5OpenTag` is unsafe — it flattens TW5's extended attributes (above). The live-rule
+path is now: **AUGMENT TW5's own `parseTag`/`parseAttribute` with resilient-recursive-descent recovery**
+(an Error/missing node + recovery-sets + the ≥1-char progress invariant), preserving the `{{}}`/`<<>>`/
+filter extensions verbatim — a TW5-native augmentation, not a parse5 swap. (Exact shape under research:
+spirit a871269a; the floor `lar-html5-tag.ts` is unaffected — it stays the pure-HTML floor.)
+
+**The integration GATE still holds for whatever the live-rule augmentation becomes:** it overrides the
+rule that dispatches EVERY widget, the re-exported `require("$:/core/.../html.js")` members resolve only
+in a booted VM, and a `wikirule`-typed file auto-activates via `discoverModules()` on the next plugin
+build — so the live shadow file is NOT created until its full-VM integration test (TW5's own
+`test-wikitext-parser.js` + `test-wikitext.js` + widget specs stay green, byte-exact node shapes incl.
+`openTagStart/openTagEnd/closeTagStart/closeTagEnd/rule:"html"/orderedAttributes` + per-attr `start/end`
++ the extended-attribute types) rides with it. Test vehicle: `node $TW/tiddlywiki.js ++packages/lararium-tw5/tiddlers
+$TW/editions/test --test` (or the in-house `pnpm --filter @lararium/tw5 smoke:plugin-boot`).
 
 <<~/ahu >>
 
