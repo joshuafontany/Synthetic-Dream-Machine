@@ -135,6 +135,12 @@ export interface KeyedCoalesceGateOptions<K> {
   /** debounce delay (ms): a key's flush fires this long after its LAST mark (settle, not window).
    *  With a `servo`, this is the STARTING window — the servo then tracks it to load. */
   readonly debounceMs: number;
+  /** OPT-IN progress-guarantee (ms): the `auditTime` cap. Pure debounce STARVES under an unbroken
+   *  storm (the timer resets forever, the flush never fires — Mogul–Ramakrishnan receive-livelock).
+   *  When set, a key fires at the EARLIER of (settle = `debounceMs` of quiet) or (`maxWaitMs` since
+   *  its FIRST mark) — so under continuous load it fires AT LEAST every `maxWaitMs`, always at the
+   *  latest state. Absent → pure debounce (settle-only), unchanged. */
+  readonly maxWaitMs?: number;
   /** the crest for one key — reconcile/snapshot the live source for `key` against the sink. With a
    *  `servo`, return the reconcile PROMISE so the gate can self-clock + measure its true cost. */
   readonly onFlush: (key: K) => void | Promise<void>;
@@ -156,6 +162,8 @@ export class KeyedCoalesceGate<K> implements ProjectionGate {
   readonly family: GateFamily = "coalesce";
   private readonly timers = new Map<K, TimerHandle>();
   private debounceMs: number;
+  private readonly maxWaitMs: number | undefined;
+  private readonly maxTimers = new Map<K, TimerHandle>();
   private readonly onFlush: (key: K) => void | Promise<void>;
   private readonly setTimer: (fn: () => void, ms: number) => TimerHandle;
   private readonly clearTimer: (h: TimerHandle) => void;
@@ -170,6 +178,7 @@ export class KeyedCoalesceGate<K> implements ProjectionGate {
 
   constructor(opts: KeyedCoalesceGateOptions<K>) {
     this.debounceMs = opts.debounceMs;
+    this.maxWaitMs = opts.maxWaitMs;
     this.onFlush = opts.onFlush;
     this.setTimer = opts.setTimer ?? ((fn, ms) => setTimeout(fn, ms));
     this.clearTimer = opts.clearTimer ?? ((h) => clearTimeout(h));
@@ -189,12 +198,20 @@ export class KeyedCoalesceGate<K> implements ProjectionGate {
     const existing = this.timers.get(key);
     if (existing !== undefined) this.clearTimer(existing);
     this.timers.set(key, this.setTimer(() => this.fire(key), this.debounceMs));
+    // auditTime progress-guarantee: a NON-resetting cap armed on the FIRST mark, so an unbroken
+    // storm fires at least every `maxWaitMs` instead of starving the flush forever (livelock).
+    if (this.maxWaitMs !== undefined && !this.maxTimers.has(key)) {
+      this.maxTimers.set(key, this.setTimer(() => this.fire(key), this.maxWaitMs));
+    }
   }
 
   /** Timer expiry for one key. No servo → fire-and-forget (fixed behavior). Servo → self-clock the
    *  flush, EWMA its cost, grow/shrink the window via adaptWindow, then re-arm if changes arrived. */
   private fire(key: K): void {
-    this.timers.delete(key);
+    const dt = this.timers.get(key);
+    if (dt !== undefined) { this.clearTimer(dt); this.timers.delete(key); }
+    const mt = this.maxTimers.get(key);
+    if (mt !== undefined) { this.clearTimer(mt); this.maxTimers.delete(key); }
     if (!this.servo) {
       void this.onFlush(key);
       return;
@@ -227,7 +244,9 @@ export class KeyedCoalesceGate<K> implements ProjectionGate {
   dispose(): void {
     this.disposed = true;
     for (const t of this.timers.values()) this.clearTimer(t);
+    for (const t of this.maxTimers.values()) this.clearTimer(t);
     this.timers.clear();
+    this.maxTimers.clear();
     this.dirty.clear();
   }
 }

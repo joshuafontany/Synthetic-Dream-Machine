@@ -163,3 +163,66 @@ describe("KeyedCoalesceGate servo — the reconcile gate self-regulates (GROW un
     expect(h.gate.pending()).toBe(1); // re-armed for the change that arrived during the flush
   });
 });
+
+// ── The auditTime progress-guarantee — pure debounce STARVES under an unbroken storm; the
+//    maxWait cap fires at least every maxWaitMs, so the flush never freezes (livelock cure). ──
+function makeReg() {
+  let nextId = 1;
+  const pending = new Map<number, () => void>();
+  return {
+    setTimer:   (fn: () => void) => { const id = nextId++; pending.set(id, fn); return id as unknown as ReturnType<typeof setTimeout>; },
+    clearTimer: (h: ReturnType<typeof setTimeout>) => { pending.delete(h as unknown as number); },
+    fireId:     (id: number) => { const fn = pending.get(id); if (fn) { pending.delete(id); fn(); } },
+    ids:        () => [...pending.keys()],
+    size:       () => pending.size,
+  };
+}
+
+describe("KeyedCoalesceGate maxWait — the auditTime progress-guarantee", () => {
+  test("a continuous storm fires via the maxWait cap (no starvation)", () => {
+    const flushes: string[] = [];
+    const reg = makeReg();
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 10, maxWaitMs: 50,
+      onFlush: (k) => flushes.push(k),
+      setTimer: reg.setTimer, clearTimer: reg.clearTimer,
+    });
+
+    gate.mark("a");                       // arms debounce (id 1) + the non-resetting maxWait (id 2)
+    const maxId = reg.ids()[1]!;          // the maxWait cap
+    for (let i = 0; i < 20; i++) gate.mark("a");   // the storm: each mark RESETS the debounce…
+    expect(flushes).toEqual([]);          // …so pure debounce would never settle (starve)
+
+    reg.fireId(maxId);                    // …but the maxWait cap fires regardless
+    expect(flushes).toEqual(["a"]);       // progress guaranteed under unbroken load
+
+    gate.mark("a");                       // a fresh storm re-arms a fresh cap (debounce + maxWait)
+    expect(reg.size()).toBe(2);
+  });
+
+  test("when it settles quietly, the debounce wins and the cap leaves no double-fire", () => {
+    const flushes: string[] = [];
+    const reg = makeReg();
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 10, maxWaitMs: 50,
+      onFlush: (k) => flushes.push(k),
+      setTimer: reg.setTimer, clearTimer: reg.clearTimer,
+    });
+
+    gate.mark("b");
+    const debId = reg.ids()[0]!;          // the debounce timer, armed first
+    reg.fireId(debId);                    // it settles before the cap
+    expect(flushes).toEqual(["b"]);
+    expect(reg.size()).toBe(0);           // the cap was cleared with it — no orphan, no double-fire
+  });
+
+  test("absent maxWaitMs → pure debounce, unchanged (one timer per key)", () => {
+    const reg = makeReg();
+    const gate = new KeyedCoalesceGate<string>({
+      debounceMs: 10, onFlush: () => {},
+      setTimer: reg.setTimer, clearTimer: reg.clearTimer,
+    });
+    gate.mark("c");
+    expect(reg.size()).toBe(1);           // no cap armed when maxWaitMs is absent
+  });
+});
