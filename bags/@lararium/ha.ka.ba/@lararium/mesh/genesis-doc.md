@@ -3,30 +3,75 @@
 <<~ &#x0001; ? -> lar:///ha.ka.ba/@lararium/mesh/genesis-doc >>
 ```toml iam
 cacheable   = true
+hydrate     = true
 file-path   = "bags/@lararium/mesh/genesis-doc.md"
 mana        = 18
 manao       = 18
-manaoio     = 17
-register    = "Synthesis"
+manaoio     = 18
+register    = "Synthesis-Canon"
 retain      = true
-role        = "Platform-neutral genesis island builder: GenesisInputs → GenesisArtifact. No filesystem, no DOM."
+role        = "Genesis & the two planes: a thin @oracle pointer-doc + a CID manifest + CAS blobs. The @oracle is a SOFT-coupled served pointer on the CRDT epoch plane, atop the immutable CID plane."
 source-file = "packages/lararium-mesh/src/genesis-doc.ts"
-tags      = ["mesh/alignment-plan"]
+tags      = ["mesh/alignment-plan", "mesh/dreamnet-architecture"]
 l-space     = "lararium"
 type        = "text/x-memetic-wikitext"
 uri-path    = "ha.ka.ba/@lararium/mesh/genesis-doc"
 ```
 
+<<~ aka lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture >>
+
 <<~ &#x0002; >>
 
-# Genesis Doc Builder
+# Genesis & the Two Planes
 
-Platform-neutral genesis island construction. Lives in `@lararium/mesh`.
-No filesystem, no DOM, no `@lararium/tw5` dependency.
+The vessel stands on **two orthogonal planes, soft-coupled at the `@oracle`** — tuber and rhizome, moving independently:
 
-Callers supply assembled byte inputs. `buildGenesisDoc()` constructs the deterministic
-`LarDoc` Automerge binary and runs two-pass CID injection. The artifact bytes write
-to any sink: disk, IndexedDB, bundler inline, test fixture.
+<<~ranks plane cid@immutable-FLOW-rhizome -> crdt@epoch-ratchet-STATE-tuber >>
+
+The genesis is **not** an Automerge binary carrying bytes. It is a **thin `@oracle` pointer-doc** (~4 KB, metadata + pointers, NO blob bytes), a **CID manifest** (`island.manifest.json`), and the **CAS blobs** (`genesis/cas/<cid>`). `buildGenesisDoc()` constructs the deterministic doc + the manifest + the cas entries; the caller writes each to its sink.
+
+<<~ ahu #two-planes >>
+
+## The two planes
+
+**Plane 0 — the CID layer (rhizome / FLOW).** Content-addressed, immutable, IPFS-like. Holds every large blob — the TW5 engine core, the plugins, future binary streams (hypercore live someday). Each artifact IS its sha256; a new version is a new CID. This plane **churns continuously** — the engine updates almost without pause, plugins and blobs come and go. No mutation, no merge: content only, fetched **by CID** from the CAS (`node-cas.ts` fs · browser OPFS). The kernel resolves engine + plugins CAS-only by CID — never from the CRDT doc.
+
+**Plane 1 — the CRDT epoch layer (tuber / STATE).** Mutable, versioned, ratcheting in epochs, standing ATOP the CID layer. Its base-floor is the **`@oracle`**.
+
+**GD-7 — bytes live on the CID plane, never in the CRDT.** A content-addressed byte-blob has no merge semantics; embedding it in an Automerge doc + `merge()`-ing genesis into a stale persisted doc makes it an unresolved actor conflict (the historical "TW5 core integrity gate failed" boot-skew). `LarBlobEntry.blob` is therefore OPTIONAL — genesis entries carry the **descriptor** (`{id, version, sha256}`), the bytes ride the CID plane.
+
+<<~/ahu >>
+
+<<~ ahu #the-oracle-pointer >>
+
+## The `@oracle` ~ the public crossroads bulletin board
+
+The `@oracle` is a **served, signed POINTER doc** — the public crossroads where a vessel announces, and discovers, other public CRDT docs/bags. Base-floor of the epoch layer, **soft-coupled** to the CID plane: it *names* CIDs, it does not *carry* bytes. (Proven on the DreamNet mesh: containers found their own in-vessel identity and serve `@oracle` — `curl` returns its signed pointer — across the Hermai relay.)
+
+<<~moves advance-CID -> on/oracle-pointer-update do/mesh-announce >>
+
+**GD-8 — soft, not hard: advance the CID, update the pointer, never re-genesis for churn.** To ship a new engine/plugin/blob: bake it to the CID plane (a new CID) and **update the `@oracle` pointer** (a light CRDT write). Peers sync (or `curl`) the signed pointer, see the new CID, fetch the content from the CID plane. Tuber and rhizome move independently — daily content churn touches the pointer, never the boot.
+
+**The epoch ratchet** — the deep `@oracle` CRDT-version boundary — fires only at a rare structural shift, WAAAY down the road; it is the one place the genesis-merge belongs. <<~ confidence Canon 18/20 >> the hard merge-into-stale is the anti-pattern that broke boot; it belongs ONLY to the epoch boundary, never to churn.
+
+<<~/ahu >>
+
+<<~ ahu #what-genesis-seeds >>
+
+## What genesis seeds (the `@oracle` system plane)
+
+The genesis doc seeds the **`@oracle` runtime system island** — the protocol substrate, never user composition:
+
+| Seeded | Held as |
+|---|---|
+| engine + plugin descriptors | `{id, version, sha256}` in `.blobs` (NO bytes); the bytes ride `genesis/cas/<cid>` + `island.manifest.json` |
+| system bag descriptors | `ROOT_BAGS`: `@oracle`, `@lararium`, `@catalog`, `@lares`, `@identities`, `@circles`, `@sessions` |
+| system wiki-recipes | the **`@lares` wiki** (`@oracle`+`@lararium`+`@lares`) and the **`@lararium` wiki** — DreamNet system bags as quine wikis |
+| genesis-cid | `lar:///ha.ka.ba/@oracle/genesis-cid` (two-pass CID witness, GD-4) |
+
+**GD-6 — system recipes are substrate; user recipes are not (operator ruling 2026-06-16).** Genesis seeds the **system** wiki-recipes (`@lares`, `@lararium`); user recipes mint into `@catalog` by init-wiki. A user recipe in genesis, or a system recipe in `@catalog`, reads as a plane-leak.
+
+<<~/ahu >>
 
 <<~ ahu #types >>
 
@@ -34,10 +79,10 @@ to any sink: disk, IndexedDB, bundler inline, test fixture.
 
 | Type | Role |
 |---|---|
-| `PluginBuildAttestation` | Schema written by `@lararium/tw5` `build-plugin-tiddler.ts`. Promoted to shared mesh contract so the genesis builder and plugin build pipeline speak the same type without coupling `@lararium/node` to `@lararium/tw5`. Format: `"lararium-tw5-plugin-build/v1"`. |
-| `GenesisPluginEntry` | One vendored plugin blob plus its optional attestation. All optional fields use `exactOptionalPropertyTypes`. |
-| `GenesisInputs` | Full caller-assembled input bag: `actorSeed` (hex), `coreBlob`, `coreVersion`, optional `coreSha256`, `plugins`, `systemTitles`. |
-| `GenesisArtifact` | Output: `bytes`, `sha256`, `cid`, `preSha256`. All four fields serve different verification needs. |
+| `GenesisInputs` | Caller-assembled bag: `actorSeed` (hex), `coreBlob`, `coreVersion`, optional `coreSha256`, `plugins`, `systemTitles`. |
+| `GenesisArtifact` | Output: the thin-doc `bytes`, `sha256`, `cid`, `preSha256`, **+ `casManifest` + `casEntries`** (the CID plane's manifest + the blob entries to write to `genesis/cas/`). |
+| `GenesisCasManifest` | `lararium-genesis-cas/v1`: `engineCid` + `pluginsCid` + entries (id → cid), sorted, deterministic. The boot index. |
+| `GenesisPluginEntry` | One plugin descriptor + optional `PluginBuildAttestation` (`lararium-tw5-plugin-build/v1`). |
 
 <<~/ahu >>
 
@@ -45,77 +90,56 @@ to any sink: disk, IndexedDB, bundler inline, test fixture.
 
 ## Invariants
 
-**GD-1 — No platform dependencies.**
-`buildGenesisDoc()` imports only `@automerge/automerge` and mesh-internal modules.
-Zero `fs`, `path`, `worker_threads`, DOM, or `@lararium/tw5` references.
+**GD-1 — No platform dependencies.** `buildGenesisDoc()` imports only `@automerge/automerge` + mesh-internal. Zero `fs`/`path`/`worker_threads`/DOM/`@lararium/tw5`.
 
-**GD-2 — Caller owns byte acquisition.**
-`GenesisInputs.coreBlob` and `GenesisInputs.plugins[*].blob` arrive as `Uint8Array`.
-How the caller obtained them — `readFileSync`, `fetch`, bundler inline, test fixture —
-is a platform concern outside this module.
+**GD-2 — Caller owns byte acquisition.** `coreBlob`/`plugins[*].blob` arrive as `Uint8Array` (readFileSync / fetch / bundler / fixture — a platform concern).
 
-**GD-3 — Caller owns systemTitles.**
-`buildGenesisDoc()` does not boot a TW5Engine. The caller boots one and passes the
-title list. This keeps `@lararium/tw5` out of the mesh dependency graph.
+**GD-3 — Caller owns systemTitles.** No TW5Engine boot in mesh; the caller passes the title list.
 
-**GD-4 — Two-pass CID injection is honest, not a true fixpoint.**
-Pass 1: serialize without the self-ref tiddler → `preSha256`.
-Pass 2: inject the genesis-cid tiddler with the witness CID → final bytes.
-Invariant: strip the genesis-cid tiddler and hash the result → `preSha256`. Verifiable without fixpoint.
+**GD-4 — Two-pass CID injection is honest, not a fixpoint.** Pass 1: serialize without the self-ref → `preSha256`. Pass 2: inject the genesis-cid tiddler. Strip it + hash → `preSha256`. Verifiable.
 
-**GD-5 — Determinism via actorSeed.**
-The caller derives `actorSeed` as `sha256hex(sorted content hashes of all inputs)`.
-Two builds from identical source produce identical `island.sha256`.
+**GD-5 — Determinism via actorSeed.** `actorSeed = sha256hex(sorted content hashes of all inputs)`; identical source → identical `island.sha256` + manifest. (Note: the TW5 core itself must render deterministically — a non-deterministic vendor build skews the engine CID; slice 1 made that irrelevant to BOOT by resolving the engine via CAS, but a reproducible core is the clean target.)
 
-<<~/ahu >>
+**GD-6 — System recipes are substrate, user recipes are not.** *(#what-genesis-seeds.)*
 
-<<~ ahu #system-plane >>
+**GD-7 — bytes on the CID plane, never in the CRDT.** *(#two-planes.)*
 
-## The `@oracle` System Plane — what genesis seeds
-
-The genesis doc **is** the `@oracle` runtime system island (the system-bag
-oracle plane, `wiki-layer-ontology#oracle-planes`). It carries the protocol
-substrate, never user composition:
-
-| Seeded | Held as |
-|---|---|
-| engine BLOBs | TW5 core + vendored plugins (`lares-memetic-wikitext`, `sq/streams`, boot-shadows) in `.blobs`; descriptors at `lar:///ha.ka.ba/@oracle/blobs/*` |
-| system bag descriptors | `ROOT_BAGS`: `@oracle`, `@lararium`, `@catalog`, `@lares`, `@identities`, `@circles`, `@sessions` |
-| system wiki-recipes | the **`@lares` wiki** (`@oracle`+`@lararium`+`@lares`) and the **`@lararium` wiki** (`@oracle`+`@lararium`) — DreamNet system bags as quine wikis |
-| genesis-cid | `lar:///ha.ka.ba/@oracle/genesis-cid` (two-pass CID, GD-4) |
-
-**GD-6 — System recipes are substrate; user recipes are not (operator ruling,
-2026-06-16).** Genesis seeds the **system** wiki-recipes (`@lares`, `@lararium`)
-because system bags' recipes ride the `@oracle` plane. Genesis seeds **no user
-recipes** — those mint into the user's `@catalog` by init-wiki. A user recipe
-in genesis, or a system recipe in `@catalog`, reads as a plane-leak. *(Descriptor
-restore for `@lararium` corpus + blob→`@oracle` keying: enacted in code
-2026-06-16; system-recipe seeding: ruled, enactment tracked at the live handoff
-torch.)*
+**GD-8 — soft, not hard: advance-CID → pointer-update, never re-genesis for churn.** *(#the-oracle-pointer.)*
 
 <<~/ahu >>
 
 <<~ ahu #layer-split >>
 
-## Layer Split
-
-The three-layer split that governs where genesis code lives:
+## Layer Split (where genesis code lives)
 
 | Layer | Concern | Lives in |
 |---|---|---|
-| A | Read blobs from disk / fetch / bundler; derive actorSeed; boot TW5Engine for systemTitles | `@lararium/node` build script, browser build tool, or test harness |
-| B | Construct deterministic LarDoc; two-pass CID injection | `@lararium/mesh` (`genesis-doc.ts`) |
-| C | Write artifact bytes to disk / IndexedDB / test fixture | Layer A caller |
+| A | Read blobs (disk/fetch/bundler); derive actorSeed; boot TW5Engine for systemTitles | `@lararium/node` build script · browser build tool · test harness |
+| B | Construct the deterministic thin LarDoc + the CAS manifest + cas entries; two-pass CID | `@lararium/mesh` (`genesis-doc.ts`) |
+| C | Write the thin `island.bin`, `island.manifest.json`, and `genesis/cas/<cid>` to disk/IndexedDB; at boot, mirror cas → the runtime CAS (`mirrorGenesisCasFs` / OPFS), kernel resolves by CID | Layer A caller (`node-cas.ts` · `browser-genesis.ts`) |
+
+<<~/ahu >>
+
+<<~ ahu #grounds >>
+
+## Grounds (the realized flow)
+
+<<~ranks commit cid-plane@9c90b390 -> slice-1-blob-strip@940a023e -> astpalace-instance@991bfbe7 -> daemon-lifecycle@7fb1c3bb >>
+
+- **9c90b390 — CID plane:** kernel resolves engine/plugins CAS-only by CID; the byte-blob left the `@oracle` CRDT (where the merge-into-stale had made it an unresolved actor conflict — the boot-skew root).
+- **940a023e — slice 1:** blob bytes leave the genesis doc entirely → `genesis/cas/` + `island.manifest.json`; `island.bin` 547 KB → 4 KB. Merge-conflict-on-bytes class gone structurally. Isomorphic (node fs · browser OPFS).
+- **Proven on the mesh** (parallel DreamNet session): containers found their own vessel identity in-container, reach `phase → live`, **serve `@oracle` — `curl` returns the signed pointer** — across a 3-hop Hermai relay (INFRA × WHO). *(As of hand-off the mesh containers still run the pre-slice-1 548 KB `@oracle`; they thin to the pointer-doc on rebuild.)*
+- **Open (slice 2, far-future):** retire the genesis-merge entirely — materialize the `@oracle` fresh from the manifest at init, ratchet by peer-sync. Gated on a **deterministic shared docId** (so the public board stays one board, not per-node forks). Fires only at the epoch boundary, not for churn.
 
 <<~/ahu >>
 
 <<~ ahu #edges >>
 
-## Edges
-
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/base-doc >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/lar-uris >>
 <<~ loulou lar:///ha.ka.ba/@lararium/mesh/crypto >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/@lararium/mesh/island-protocol >>
 
 <<~/ahu >>
 
