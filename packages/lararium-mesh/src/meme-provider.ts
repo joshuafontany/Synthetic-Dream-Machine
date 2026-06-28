@@ -23,6 +23,7 @@
  */
 
 import type { LarTiddlerRecord, LarTiddlerChange, ChangeOrigin, MemeProjection, RawPatch } from "./tiddler-store.js";
+import { KeyedCoalesceGate } from "./projection-nalu.js";
 export type { MemeProjection, RawPatch } from "./tiddler-store.js";
 
 // ---------------------------------------------------------------------------
@@ -56,6 +57,17 @@ export class MemeProvider {
   private readonly _pending     = new Map<string, { origin: ChangeOrigin; timer: ReturnType<typeof setTimeout> }>();
   /** Set of island IDs whose initial replay has settled. Default island: "automerge". */
   private readonly _syncComplete = new Set<string>();
+
+  /** Per-bag accumulator for the gated changeset path — union the touched-URI set across a storm
+   *  of large transactions; fire ONE onChangeset(union) per window at latest state. */
+  private readonly _changesetPending = new Map<string, { touched: Set<string>; origin: ChangeOrigin }>();
+  /** The Automerge-boundary nalu (the 5th shore): coalesce a storm of changeset emissions per bag,
+   *  storm-safe via maxWaitMs (auditTime — never starves the re-projection under an unbroken flood). */
+  private readonly _changesetGate = new KeyedCoalesceGate<string>({
+    debounceMs: MemeProvider.DEBOUNCE_MS,
+    maxWaitMs: 120,
+    onFlush: (bagId) => this._flushChangeset(bagId),
+  });
 
   constructor(
     /** Returns the current full document state. Called at debounce-fire time, not patch time. */
@@ -119,25 +131,27 @@ export class MemeProvider {
     // FFZ Scale-3: large batch → emit onChangeset to projections that declare it.
     // Any projection WITHOUT onChangeset falls back to N individual debounced calls.
     if (touched.size >= MemeProvider.CHANGESET_THRESHOLD) {
-      let hasChangesetProjection = false;
-      for (const p of this._projections) {
-        if (p.onChangeset) {
-          hasChangesetProjection = true;
-          try { p.onChangeset(touched, origin); }
-          catch (e) { console.error("[MemeProvider] projection error in onChangeset:", e); }
-        }
-      }
-      // For projections WITHOUT onChangeset, fall through to debounce path below.
+      const hasChangesetProjection = [...this._projections].some((p) => p.onChangeset);
       if (hasChangesetProjection) {
-        // Only fan-out to projections that opted out of changeset mode.
+        // The 5th nalu shore: GATE the onChangeset emission per bag. Union the touched-URI set and
+        // coalesce a storm of large transactions into ONE onChangeset(union) per window at latest
+        // state (re-projection is idempotent-on-current-heads, so intermediates drop losslessly).
+        // Storm-safe — the gate's maxWaitMs guarantees progress under an unbroken flood instead of
+        // starving the re-projection (Mogul–Ramakrishnan receive-livelock).
+        const bagId = this._getBag?.() ?? "automerge";
+        const acc = this._changesetPending.get(bagId);
+        if (acc) { for (const u of touched) acc.touched.add(u); acc.origin = origin; }
+        else { this._changesetPending.set(bagId, { touched: new Set(touched), origin }); }
+        this._changesetGate.mark(bagId);
+
+        // Non-changeset projections still take the per-URI debounce path; drop any per-URI timers
+        // for URIs the changeset path now owns, then re-schedule for the opted-out projections.
         for (const uri of touched) {
           const existing = this._pending.get(uri);
           if (existing) clearTimeout(existing.timer);
           this._pending.delete(uri);
         }
-        // Fire debounced for non-changeset projections only when they exist.
-        const hasNonChangeset = [...this._projections].some((p) => !p.onChangeset);
-        if (hasNonChangeset) {
+        if ([...this._projections].some((p) => !p.onChangeset)) {
           for (const uri of touched) this._schedule(uri, origin);
         }
         return;
@@ -192,6 +206,10 @@ export class MemeProvider {
       this._fire(uri, origin);
     }
 
+    // Flush every gated changeset accumulator too — the bulk state MUST land before onSyncComplete
+    // (the gate's lingering timers later fire a harmless no-op on the emptied accumulator).
+    for (const bagId of [...this._changesetPending.keys()]) this._flushChangeset(bagId);
+
     for (const p of this._projections) {
       try { p.onSyncComplete?.(islandId); }
       catch (e) { console.error("[MemeProvider] projection error in onSyncComplete:", e); }
@@ -212,6 +230,19 @@ export class MemeProvider {
     }, MemeProvider.DEBOUNCE_MS);
 
     this._pending.set(uri, { origin, timer });
+  }
+
+  /** Crest the gated changeset for one bag — fire onChangeset(union) once, at the latest state. */
+  private _flushChangeset(bagId: string): void {
+    const acc = this._changesetPending.get(bagId);
+    if (!acc || acc.touched.size === 0) return;
+    this._changesetPending.delete(bagId);
+    for (const p of this._projections) {
+      if (p.onChangeset) {
+        try { p.onChangeset(acc.touched, acc.origin); }
+        catch (e) { console.error("[MemeProvider] projection error in onChangeset:", e); }
+      }
+    }
   }
 
   private _fire(uri: string, origin: ChangeOrigin): void {
