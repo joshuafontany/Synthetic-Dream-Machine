@@ -28,6 +28,7 @@ import { existsSync, readFileSync, readdirSync, mkdirSync, linkSync, copyFileSyn
 import { homedir, tmpdir } from "node:os";
 import { join, basename } from "node:path";
 import { resolvePalacePath } from "./palace-path.js";
+import { mineWithRetry } from "./mine-retry.js";
 
 const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
 
@@ -142,10 +143,15 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
       // --palace passes the CANONICAL spelling (realpath/normalize) so this leg addresses the SAME
       // write-daemon singleton as the capture flush — without it, mempalace's own default resolution
       // can key a SECOND daemon for the same physical palace (the pile-up root, 2026-06-28).
-      const out = execFileSync(
-        mpExe,
-        ["--palace", resolvePalacePath(), "mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
-        { maxBuffer: 1 << 30, encoding: "utf8" },
+      // A palace-lock BUSY signal (the daemon flush or a concurrent backfill holds it) WAITS+retries
+      // via the shared backoff — it must not collapse to "mine-failed". A REAL error (after the
+      // retries run out, or any non-busy fault) still falls to the honest "mine-failed" below.
+      const out = mineWithRetry(() =>
+        execFileSync(
+          mpExe,
+          ["--palace", resolvePalacePath(), "mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
+          { maxBuffer: 1 << 30, encoding: "utf8" },
+        ),
       );
       drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);
     } catch { drawers = "mine-failed"; }

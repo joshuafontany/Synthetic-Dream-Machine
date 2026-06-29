@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
-import { canonicalPalacePath } from "@lararium/mempalace";
+import { canonicalPalacePath, mineWithRetryAsync } from "@lararium/mempalace";
 
 const execFileAsync = promisify(execFile);
 
@@ -61,8 +61,12 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
       // `--daemon` HANDS OFF to mempalace's write-daemon queue (the single-writer SEAM) — the
       // causal-island boundary: the vessel never spawns a competing direct mine that races the
       // palace lock; it queues the batch and the daemon serializes it (auto-starts the daemon if
-      // absent). A submit failure THROWS → the nalu's WAL/backoff retries (durable, no loss).
-      const { stdout } = await spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path]);
+      // absent). A palace-lock BUSY signal (a concurrent one-shot mine holds the lock) WAITS+retries
+      // via the shared backoff — it must not FAIL here (the @daemon flush regression). A NON-busy
+      // submit failure THROWS straight through → the nalu's WAL/backoff retries (durable, no loss).
+      const { stdout } = await mineWithRetryAsync(() =>
+        spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path]),
+      );
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
     } finally {

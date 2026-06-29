@@ -30,7 +30,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, readFileSync, readdirSync, 
 import { homedir, tmpdir } from "node:os";
 import { basename, join } from "node:path";
 import { harvestTurnGradient } from "@lararium/mesh";
-import { writebackWing, resolveDrawerIo, type WritebackResult } from "@lararium/mempalace";
+import { writebackWing, resolveDrawerIo, mineWithRetry, type WritebackResult } from "@lararium/mempalace";
 import { resolvePython } from "../integration-check.js";
 import { larRoot, larHarvestDir, larHarvestStageDir, operatorDid } from "../env.js";
 import { atomicWriteFileSync } from "@lararium/node";
@@ -176,6 +176,28 @@ function loadState(path: string): Record<string, string> {
   try { return JSON.parse(readFileSync(path, "utf8")) as Record<string, string>; } catch { return {}; }
 }
 
+/**
+ * Read the existing append-only index into turn-key → content hash — the DURABLE de-dup floor
+ * BENEATH the state watermark. The watermark is committed once at the end of a run; a crash
+ * mid-loop (after an append, before the state write) would otherwise re-harvest those turns and
+ * append a DUPLICATE record for one uuid. The index itself is the ground truth: a key already
+ * present in it is never re-appended, no matter what the watermark lost.
+ */
+function loadIndexHashes(path: string): Map<string, string> {
+  const seen = new Map<string, string>();
+  if (!existsSync(path)) return seen;
+  try {
+    for (const line of readFileSync(path, "utf8").split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        const r = JSON.parse(line) as { turn?: unknown; hash?: unknown };
+        if (typeof r.turn === "string" && typeof r.hash === "string") seen.set(r.turn, r.hash);
+      } catch { /* skip torn line */ }
+    }
+  } catch { /* fall through */ }
+  return seen;
+}
+
 /** All `.jsonl` under a dir (recursive — subagent `agent-*.jsonl` live in subdirs). */
 function listTranscripts(target: string, depth = 0): string[] {
   try {
@@ -238,34 +260,10 @@ const MP = existsSync(join(homedir(), ".local", "bin", MP_EXE))
   ? join(homedir(), ".local", "bin", MP_EXE)
   : "mempalace";
 
-/** Sync sleep (execFileSync is synchronous) via Atomics — for the lock-retry backoff. */
-function sleepSync(ms: number): void {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Math.max(0, Math.round(ms)));
-}
-
-/**
- * Run a mempalace `mine` DIRECT (fresh process per call — clean chroma/HNSW/embedder state, no
- * long-lived-daemon cumulative-state failure), RETRYING on the palace-lock busy signal.
- *
- * The palace lock is the cross-process coordination: a held lock means another writer (a live
- * daemon flush, a concurrent backfill) is mid-mine — `MineAlreadyRunning` is a BUSY signal, not an
- * error (exactly SQLite's SQLITE_BUSY). We back off (exponential + full jitter) and retry, so the
- * bulk backfill and the live seam coexist gracefully through the one lock. Throws after maxAttempts.
- */
-function mineWithRetry(args: readonly string[], maxAttempts = 5): string {
-  for (let attempt = 1; ; attempt++) {
-    try {
-      return execFileSync(MP, [...args], { maxBuffer: 1 << 30, encoding: "utf8" });
-    } catch (e) {
-      const msg = String((e as { stderr?: unknown; message?: unknown }).stderr ?? (e as Error).message ?? "");
-      const lockBusy = /MineAlreadyRunning|is held by PID|LockHeldByOtherProcess/.test(msg);
-      if (lockBusy && attempt < maxAttempts) {
-        sleepSync(Math.min(200 * 2 ** (attempt - 1), 5000) * (0.5 + Math.random() * 0.5));
-        continue;
-      }
-      throw e;
-    }
-  }
+/** Run a DIRECT mempalace `mine` (fresh process — clean chroma/HNSW/embedder state), RETRYING on
+ *  the palace-lock busy signal via the SHARED helper (exponential backoff + full jitter). */
+function mineDirect(args: readonly string[]): string {
+  return mineWithRetry(() => execFileSync(MP, [...args], { maxBuffer: 1 << 30, encoding: "utf8" }));
 }
 
 /** Recover the real cwd a transcript ran in (rows carry it), to derive a stable wing. */
@@ -546,6 +544,10 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   const statePath = join(HARVEST_DIR, `${wing}.state.json`);
   const state = loadState(statePath);
   const nextState: Record<string, string> = { ...state };
+  // The durable de-dup floor: the index already on disk. A crash between the per-turn append and
+  // the end-of-run state write would otherwise re-append a record for a turn the index already
+  // holds; consulting the index closes that gap (the watermark is the fast path, the index the floor).
+  const indexHashes = loadIndexHashes(indexPath);
 
   const summary: RunSummary = {
     wing, files: files.length, turns: 0, harvested: 0, skipped: 0,
@@ -558,7 +560,8 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
       summary.turns += 1;
       const key = turn.uuid || sha(file + turn.ts + turn.text.slice(0, 64));
       const hash = sha(turn.text);
-      if (state[key] === hash) { summary.skipped += 1; continue; } // idempotent no-op
+      // Skip if the watermark OR the durable index already carries this turn at this content hash.
+      if (state[key] === hash || indexHashes.get(key) === hash) { summary.skipped += 1; continue; }
 
       const h = harvestTurnGradient(turn.text);
       summary.harvested += 1;
@@ -576,7 +579,7 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
         confidences: h.confidences.map((c) => ({ register: c.register, value: c.value })),
         sigilCount: h.sigilCount, waterCount: h.waterCount, driftFlags: [...h.driftFlags], hash,
       };
-      if (!dryRun) appendFileSync(indexPath, JSON.stringify(rec) + "\n");
+      if (!dryRun) { appendFileSync(indexPath, JSON.stringify(rec) + "\n"); indexHashes.set(key, hash); }
       nextState[key] = hash;
     }
   }
@@ -683,7 +686,7 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
     try {
       // Daemon down → direct mine, but still retry the palace-lock busy signal (a concurrent
       // backfill or another session's fallback may hold it) — graceful, no lost drawer.
-      mineWithRetry(["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"]);
+      mineDirect(["mine", mineDir, "--mode", "convos", "--extract", "exchange", "--wing", wing, "--agent", "claude"]);
       fellBack = true;
       // The direct mine landed these exchanges — mark them so the nalu won't double next run.
       for (const file of files) for (const turn of readExchanges(file)) {

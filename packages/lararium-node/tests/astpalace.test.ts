@@ -11,6 +11,7 @@
  * chroma open, so timeouts are generous.
  */
 
+import { EventEmitter } from "node:events";
 import { mkdtemp, readdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -18,7 +19,7 @@ import { join } from "node:path";
 import type { CaptureRecord } from "@lararium/mesh";
 import { afterEach, describe, expect, test } from "vitest";
 
-import { makeAstPalace, _liveHolderCount, type AstPalace } from "../src/astpalace.js";
+import { makeAstPalace, _liveHolderCount, type AstPalace, type HolderSpawn } from "../src/astpalace.js";
 import { makeAstSplitFlush } from "../src/node-capture-engine.js";
 
 const TEST_TIMEOUT = 60_000;
@@ -158,6 +159,38 @@ describe("makeAstSplitFlush — the routing split (over the live store)", () => 
     expect(filed[0]!.metadata!["lar_ast_hash"]).toBeUndefined();
     // The parse failed before put() — no holder ever spawned, the palace dir stays untouched.
     await expect(readdir(dir)).resolves.toEqual([]);
+  }, TEST_TIMEOUT);
+});
+
+describe("a sick holder SURFACES its stderr (the ChromaDB-error footgun)", () => {
+  // A fake holder that emits a stderr fault then exits non-zero (a permission/disk-full helper death),
+  // injected via the spawn seam — no python needed. The ping handshake never resolves → the failure
+  // path runs, and the buffered stderr tail MUST reach the caller (never the old noop swallow).
+  const sickSpawn = (stderr: string, exitCode = 1): HolderSpawn => () => {
+    const stdout = new EventEmitter() as EventEmitter & { setEncoding(): void };
+    stdout.setEncoding = () => {};
+    const stderrStream = new EventEmitter() as EventEmitter & { setEncoding(): void };
+    stderrStream.setEncoding = () => {};
+    const events = new EventEmitter();
+    setTimeout(() => {
+      stderrStream.emit("data", stderr);
+      events.emit("exit", exitCode);
+    }, 5);
+    return {
+      stdin: { write: () => true, end: () => {} } as unknown as NodeJS.WritableStream,
+      stdout: stdout as unknown as NodeJS.ReadableStream,
+      stderr: stderrStream as unknown as NodeJS.ReadableStream,
+      on: (ev: "exit" | "error", cb: (arg: never) => void) => { events.on(ev, cb); },
+      kill: () => {},
+    };
+  };
+
+  test("a put() against a holder that dies rejects WITH the stderr fault, not a bare exit code", async () => {
+    const dir = await mkdtemp(join(tmpdir(), "astpalace-sick-"));
+    const fault = "chromadb PermissionError: [Errno 13] could not open .astpalace/chroma.sqlite3";
+    const pal = makeAstPalace(dir, { spawn: sickSpawn(fault) });
+    await expect(pal.put(tree, { source_file: "nalu://x", content: "y" })).rejects.toThrow(/PermissionError/);
+    await pal.close();
   }, TEST_TIMEOUT);
 });
 

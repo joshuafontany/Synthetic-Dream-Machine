@@ -103,6 +103,8 @@ class Holder {
   private nextId = 1;
   private readonly pending = new Map<number, Pending>();
   private stdoutBuf = "";
+  /** Last ~4KB of the holder's stderr — a ChromaDB permission/disk-full error surfaces here, never swallowed. */
+  private stderrTail = "";
   refs = 0;
 
   constructor(
@@ -120,10 +122,12 @@ class Holder {
       proc.stdout?.setEncoding?.("utf8");
       proc.stdout?.on?.("data", (chunk: string) => this.onStdout(chunk));
       proc.stderr?.setEncoding?.("utf8");
-      // stderr carries library/banner noise only (the helper writes JSON only to stdout) — drained, dropped.
-      proc.stderr?.on?.("data", () => {});
-      proc.on("exit", (code) => this.onDown(new Error(`astpalace holder exited (code ${code ?? "null"})`)));
-      proc.on("error", (err) => this.onDown(err));
+      // stderr carries library/banner noise on a healthy boot, but ALSO the real fault on a sick one
+      // (ChromaDB permission denied, disk full, an import blow-up). BUFFER its tail and SURFACE it on
+      // failure — never swallow it to a noop (the silent-error footgun). stdout stays the JSON-RPC channel.
+      proc.stderr?.on?.("data", (chunk: string) => { this.stderrTail = (this.stderrTail + chunk).slice(-4096); });
+      proc.on("exit", (code) => this.onDown(this.withStderr(new Error(`astpalace holder exited (code ${code ?? "null"})`))));
+      proc.on("error", (err) => this.onDown(this.withStderr(err)));
       // Handshake: a ping confirms the chroma collection opened before any put/get rides.
       this.request("ping", {}).then(() => res()).catch(rej);
     });
@@ -155,6 +159,13 @@ class Holder {
       if (msg.ok === false) p.reject(new Error(msg.error ?? "astpalace error"));
       else p.resolve(msg.result);
     }
+  }
+
+  /** Fold the buffered stderr tail into an error so a python-side fault reaches the caller, not a noop. */
+  private withStderr(err: Error): Error {
+    const tail = this.stderrTail.trim();
+    if (tail) err.message = `${err.message}\n  holder stderr: ${tail}`;
+    return err;
   }
 
   private onDown(err: Error): void {
