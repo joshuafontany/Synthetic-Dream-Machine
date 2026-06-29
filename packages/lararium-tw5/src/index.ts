@@ -116,9 +116,15 @@ export type { ResidencyHandlerOptions } from "./residency-handlers.js";
 export { makeCatalogAccessor } from "./catalog-accessor.js";
 export type { CatalogAccessor } from "./catalog-accessor.js";
 export { openVesselCore } from "./open-vessel.js";
+export {
+  composeCoreVessel,
+  substrateCap, daemonCap, wikiSlotCap, wikiCap, poolCap, mountCap,
+  CORE_CAP,
+} from "./core-caps.js";
 export type {
   VesselOrchestration, VesselCoreResult, VesselDaemonVm, VesselWikiSlot,
-} from "./open-vessel.js";
+  WikiSlotComponent, DaemonCapDeps,
+} from "./core-caps.js";
 export { openDaemonVmCore } from "./daemon-vm-core.js";
 export type {
   DaemonVmHost,

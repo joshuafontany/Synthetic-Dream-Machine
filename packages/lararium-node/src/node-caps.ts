@@ -23,64 +23,33 @@ import type { Server } from "node:http";
 import type { Repo, DocHandle } from "@automerge/automerge-repo";
 import {
   composeVessel, type CapModule, type ComposedVessel,
-  assembleVessel, AutomergeDocStore,
+  AutomergeDocStore,
   MESH_PALACE_BAG, emptyMeshPalaceDoc, type MeshPalaceDoc,
   pullAndVerifyOracle, dialEntryToRecord, type DialEntry, type LarTiddlerRecord,
   type VesselRecipe, type VesselCoreAssembly,
   type BagResidencyManager,
 } from "@lararium/mesh";
 import {
-  openVesselCore, VerbTable,
-  type VesselOrchestration, type VesselCoreResult, type VesselDaemonVm,
-  type VesselWikiSlot, type PrimaryMountPool,
+  composeCoreVessel, substrateCap, daemonCap, CORE_CAP,
+  type DaemonCapDeps, type VesselDaemonVm,
 } from "@lararium/tw5";
 import { mountFlowMapReadFace, type OracleReadFace } from "./oracle-read-face.js";
 
-/** The cap-ids that name a node cap-module in a #has-cap-stack. */
+/**
+ * The cap-ids that name a node cap-module in a #has-cap-stack. substrate + daemon ride the SHARED
+ * core ids (CORE_CAP) so the herm stack wires the tw5-owned substrateCap/daemonCap; the rest name
+ * the Herm-only caps node-caps owns.
+ */
 export const CAP = {
-  substrate:  "substrate",
-  wikislot:   "wikislot",
-  daemon:     "daemon",
-  wiki:       "wiki",
-  pool:       "pool",
+  substrate:  CORE_CAP.substrate,
+  daemon:     CORE_CAP.daemon,
   meshpalace: "meshpalace",
   carriage:   "carriage",
   readFace:   "read-face",
 } as const;
 
-// ── granular caps (each wraps existing machinery, declaring only the deps it needs) ──────────────
-
-/** substrate — the shared keel floor: assembleVessel (composite cascade → genesis @oracle island →
- *  @lares/@lararium canon → social plane @identities/@groups/@sessions/@daemon/@persona + corpora). */
-export function substrateCap(keel: VesselRecipe): CapModule {
-  return { id: CAP.substrate, build: () => assembleVessel(keel) };
-}
-
-export interface DaemonCapDeps {
-  /** Open the platform @daemon VM. `slot` ABSENT (herm) → the builder omits the user-wiki bags from
-   *  daemonAuth.registerBags (the decouple); the @daemon's own bag (bootstrap.daemonUrl) stays. */
-  readonly openDaemon:   (a: { assembly: VesselCoreAssembly; slot?: VesselWikiSlot }) => Promise<VesselDaemonVm>;
-  readonly wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
-  readonly afterDaemon?: (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
-}
-
-/** daemon — the IMMUNE CORE, present in BOTH stacks. Requires substrate; OPTIONALLY routes the wiki
- *  slot (absent in herm). Wires the main verb plane + the after-daemon capability hook in place. */
-export function daemonCap(deps: DaemonCapDeps): CapModule {
-  return {
-    id: CAP.daemon, requires: [CAP.substrate], optional: [CAP.wikislot],
-    build: async (resolve) => {
-      const assembly = resolve<VesselCoreAssembly>(CAP.substrate);
-      const slot     = resolve<VesselWikiSlot | undefined>(CAP.wikislot);  // undefined in the herm stack
-      const daemon   = await deps.openDaemon(slot ? { assembly, slot } : { assembly });
-      const registry = new VerbTable();
-      deps.wireVerbs?.(registry, assembly);
-      daemon.mountMainVerbs(registry);
-      deps.afterDaemon?.(daemon, assembly);
-      return daemon;
-    },
-  };
-}
+// ── Herm-only granular caps (substrate + daemon ride the SHARED tw5-owned caps; these are node's
+//    own: a writable @meshpalace FLOW-map, the carriage that pulls peers, the read-face wire) ─────
 
 /** The composed @meshpalace handle a meshpalace cap exposes. */
 export interface MeshPalaceComponent { readonly handle: DocHandle<MeshPalaceDoc>; }
@@ -173,19 +142,12 @@ export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: n
 // ── the two node cap-stacks ──────────────────────────────────────────────────────────────────────
 
 /**
- * composeLararium — the FULL node #has-cap-stack. The `lararium-core` cap runs the shared
- * `openVesselCore` orchestrator (substrate → wiki-slot → daemon → verbs → wiki → pool → ea-gate →
- * primary-wiki mount → live) verbatim, so node behaviour stays unchanged and the keel stays one.
+ * composeLararium — the FULL node, now a REAL granular #has-cap-stack: `composeCoreVessel` wires the
+ * six core caps (substrate → wikislot → daemon → wiki → pool → mount) the SHARED keel declares — no
+ * delegating wrapper. Returns the VesselCoreResult directly (the old `{vessel,core}` wrapper dropped;
+ * the caller used only `.core`). Behaviour stays verbatim: the topo-order reproduces the monolith.
  */
-export async function composeLararium<TPool extends PrimaryMountPool>(
-  orchestration: VesselOrchestration<TPool>,
-): Promise<{ vessel: ComposedVessel; core: VesselCoreResult<TPool> }> {
-  let core: VesselCoreResult<TPool> | undefined;
-  const vessel = await composeVessel([
-    { id: "lararium-core", build: async () => { core = await openVesselCore(orchestration); return core; } },
-  ]);
-  return { vessel, core: core! };
-}
+export const composeLararium = composeCoreVessel;
 
 export interface HermStackDeps extends DaemonCapDeps {
   readonly keel:           VesselRecipe;

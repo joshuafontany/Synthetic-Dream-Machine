@@ -641,7 +641,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
  */
 export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesselResult> {
   const p = await prepareNodeBoot(opts);
-  const { core: result } = await composeLararium<VesselIslandPool>(p.orchestration);
+  const result = await composeLararium<VesselIslandPool>(p.orchestration);
 
   return {
     activeWikiId: p.slotActiveWikiId(),

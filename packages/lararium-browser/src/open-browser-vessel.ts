@@ -243,7 +243,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
     onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
   });
 
-  const { core: result } = await composeBrowser<BrowserVesselIslandPool>({
+  const result = await composeBrowser<BrowserVesselIslandPool>({
     keel: {
       repo,
       catalogHandle,

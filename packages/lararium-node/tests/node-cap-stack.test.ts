@@ -12,7 +12,10 @@
 import { describe, test, expect, vi } from "vitest";
 import { Repo } from "@automerge/automerge-repo";
 import { composeVessel, MESH_PALACE_BAG, type CapModule, type VesselDaemonVm } from "@lararium/mesh";
-import { CAP, daemonCap, meshPalaceCap, flowMapReadFaceCap } from "../src/node-caps.js";
+// substrate + daemon caps moved to the SHARED tw5 core-caps (both Lararium + Herm compose over them);
+// node-caps keeps only the Herm-own caps (meshpalace, carriage, read-face).
+import { daemonCap, CORE_CAP } from "@lararium/tw5";
+import { CAP, meshPalaceCap, flowMapReadFaceCap } from "../src/node-caps.js";
 
 const fakeDaemon = (): VesselDaemonVm =>
   ({ workerEa: Promise.resolve(), mountMainVerbs: () => {}, resolveBinding: {} as never });
@@ -40,7 +43,7 @@ describe("daemon cap — the immune core boots WITH or WITHOUT a wiki slot (the 
     const slot = { wikiBagId: "lar:///@w", draftBagId: "lar:///@d" };
     const stack: CapModule[] = [
       { id: CAP.substrate, build: () => ({}) },
-      { id: CAP.wikislot,  build: () => slot },
+      { id: CORE_CAP.wikislot,  build: () => slot },
       daemonCap({ openDaemon }),
     ];
 

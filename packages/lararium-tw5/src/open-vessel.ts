@@ -1,124 +1,27 @@
 /**
- * open-vessel — THE vessel orchestrator (one keel, both sides).
+ * open-vessel — back-compat surface over the GRANULAR keel (core-caps).
  *
- * Canon: lar:///ha.ka.ba/@lararium/mesh/open-vessel +
- * lar:///ha.ka.ba/@lararium/api/lararium-canonical-model. Radical-alpha: the old
- * open-node-vessel / open-browser-vessel FORK is deleted; both platforms become thin
- * RECIPES over this one orchestrator. The substrate keel (composite cascade, genesis,
- * social plane, daemon doc, wiki-slot) lives VM-free in mesh (assembleVessel +
- * mountWikiSlot); this orchestrator sequences it + the VM-focused tail (daemon VM ea-gate
- * → primary-wiki mount → live). Platform atoms + capability pieces inject as recipe
- * closures; NO `if (platform)` enters here.
+ * Canon: lar:///ha.ka.ba/@lararium/mesh/open-vessel + …/api/composable-keel. The monolithic
+ * `openVesselCore` linear sequence RETIRED — its body decomposed into the six granular cap-modules
+ * in `core-caps.ts` (substrate · wikislot · daemon · wiki · pool · mount), composed by
+ * `composeCoreVessel`. This module keeps the historical export NAME as a thin alias so callers
+ * outside (node + browser recipes) that import `openVesselCore` / the surface types stay unbroken.
  *
  * A capability the recipe omits simply does not run (absent = not-yet-held, Ink & Switch).
  */
 
-import type { Repo, DocHandle, LarDoc, LarOpenPhase, VesselRecipe, VesselCoreAssembly } from "@lararium/mesh";
-import { assembleVessel, mountWikiSlot, LARES_DOC_URI } from "@lararium/mesh";
-import { mountPrimaryWiki, type PrimaryMountPool, type BindingResolver } from "./vessel-steps.js";
-import { VerbTable } from "./verb-dispatcher.js";
+import { composeCoreVessel } from "./core-caps.js";
 
-/** The daemon VM surface the orchestrator drives (node + browser both satisfy it). */
-export interface VesselDaemonVm {
-  workerEa:       Promise<void>;
-  mountMainVerbs: (registry: VerbTable) => void;
-  resolveBinding: BindingResolver;
-}
+/** Historical name → the granular composer. `openVesselCore(o)` runs `composeCoreVessel(o)`. */
+export const openVesselCore = composeCoreVessel;
 
-/** The active-wiki slot identity the recipe resolves (from planActiveWikiSlot). */
-export interface VesselWikiSlot {
-  activeWikiId:     string;
-  wikiSlug:         string;
-  wikiKey:          string;
-  wikiBagId:        string;
-  draftOracleTitle: string;
-  draftBagId:       string;
-}
-
-/**
- * VesselOrchestration — the full recipe a platform supplies. The mesh `keel` recipe
- * carries the substrate atoms (repo, catalog, bootstrap, waitHandle, loadGenesis,
- * tempStore, loadCorpora); the closures below carry the VM-focused + capability pieces.
- */
-export interface VesselOrchestration<TPool extends PrimaryMountPool> {
-  keel:        VesselRecipe;
-  /** Resolve the active-wiki slot AFTER the keel assembles — the slug derives from the
-   *  daemon-doc marker (post-genesis), so it cannot precede assembleVessel. */
-  wikiSlot:     (assembly: VesselCoreAssembly) => VesselWikiSlot | Promise<VesselWikiSlot>;
-  /** Open the platform daemon VM once the keel + slot resolved (daemonAuth registers the
-   *  slot's wiki/draft bags; sentinels read from the assembled daemon doc). */
-  openDaemon:    (a: { assembly: VesselCoreAssembly; slot: VesselWikiSlot }) => Promise<VesselDaemonVm>;
-  /** Wire the vessel's verb plane (capability piece; relay holds more). */
-  wireVerbs?:   (registry: VerbTable, assembly: VesselCoreAssembly) => void;
-  /** Capability hook AFTER daemon VM lives (node: arm the inbound gate). */
-  afterDaemon?:  (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => void;
-  /** Build the island pool (platform: VesselIslandPool ↔ BrowserVesselIslandPool). */
-  makePool:     (daemon: VesselDaemonVm, assembly: VesselCoreAssembly) => TPool | Promise<TPool>;
-  /** Capability hook AFTER `live` (browser: broadcast presence). */
-  afterLive?:   (ctx: { pool: TPool; assembly: VesselCoreAssembly; wikiHandle: DocHandle<LarDoc> }) => void;
-}
-
-export interface VesselCoreResult<TPool extends PrimaryMountPool> {
-  repo:         Repo;
-  assembly:     VesselCoreAssembly;
-  pool:         TPool;
-  daemon:        VesselDaemonVm;
-  wikiHandle:   DocHandle<LarDoc>;
-  draftHandle:  DocHandle<LarDoc>;
-}
-
-/**
- * openVesselCore — run the one vessel boot sequence on either substrate.
- * Phases: (caller emits boot/repo-open/catalog-ready before calling) → keel →
- * island-ready/corpus-ready (inside assembleVessel) → daemon VM → verb plane →
- * wiki-slot → vessel-ready → pool → daemon ea-gate → primary-wiki mount → tw5-booted →
- * live. The daemon-first gate (await workerEa before mount) holds invariant.
- */
-export async function openVesselCore<TPool extends PrimaryMountPool>(
-  o: VesselOrchestration<TPool>,
-): Promise<VesselCoreResult<TPool>> {
-  const emit = (p: LarOpenPhase) => o.keel.onPhase?.(p);
-
-  // ── vessel: composite cascade + genesis + social + daemon + corpus (mesh, VM-free) ──
-  const assembly = await assembleVessel(o.keel);
-
-  // ── active-wiki slot (post-genesis: slug from the daemon-doc marker) ──
-  const slot = await o.wikiSlot(assembly);
-
-  // ── daemon VM (platform) ──
-  const daemon = await o.openDaemon({ assembly, slot });
-
-  // ── verb plane (capability piece) ──
-  const registry = new VerbTable();
-  o.wireVerbs?.(registry, assembly);
-  daemon.mountMainVerbs(registry);
-  o.afterDaemon?.(daemon, assembly);
-
-  // ── wiki-slot layers (mesh) ──
-  // The @lares-as-wiki quine: when the active slug opens the invariant bag
-  // itself, seat the operator-minted doc as the write layer.
-  const presetWiki = slot.wikiBagId === LARES_DOC_URI ? assembly.laresHandle ?? undefined : undefined;
-  const { wikiHandle, draftHandle } = await mountWikiSlot(o.keel, assembly.composite, slot, presetWiki);
-  emit("wiki-ready");
-  emit("vessel-ready");
-
-  // ── island pool (platform) ──
-  const pool = await o.makePool(daemon, assembly);
-
-  // ── daemon-first sovereignty gate → primary-wiki mount ──
-  await daemon.workerEa;
-  await mountPrimaryWiki(pool, daemon.resolveBinding, {
-    activeWikiId: slot.activeWikiId,
-    wikiSlug:     slot.wikiSlug,
-    coreHash:     assembly.coreHash,
-    islandUrl:    assembly.islandHandle.url,
-    wikiUrl:      wikiHandle.url,
-    catalogUrl:   assembly.catalogHandle.url,
-  });
-  emit("tw5-booted");
-
-  emit("live");
-  o.afterLive?.({ pool, assembly, wikiHandle });
-
-  return { repo: assembly.repo, assembly, pool, daemon, wikiHandle, draftHandle };
-}
+export {
+  composeCoreVessel,
+  substrateCap, daemonCap,
+  wikiSlotCap, wikiCap, poolCap, mountCap,
+  CORE_CAP,
+} from "./core-caps.js";
+export type {
+  VesselOrchestration, VesselCoreResult, VesselDaemonVm, VesselWikiSlot,
+  WikiSlotComponent, DaemonCapDeps,
+} from "./core-caps.js";
