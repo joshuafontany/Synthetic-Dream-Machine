@@ -23,9 +23,10 @@ import {
   ENGINE_CORE_ID, pluginCidsFromIslandBlobs,
   ed25519SignerFromSeed, LarWSClientAdapter, type LeafIdentity,
   BAG_IDS, slugFromUri, BagResidencyManager,
+  materializeGenesisIsland,
   type LarDoc, type LarariumVesselOptions, type VesselResult,
   type VesselBootstrap, type VesselCoreAssembly, type DeviceDelegationTiddler,
-  type GenesisCasManifest,
+  type GenesisCasManifest, type GenesisSeed,
 }                                            from "@lararium/mesh";
 import {
   MemoryTiddlerStore,
@@ -44,8 +45,7 @@ import {
 }                                            from "./browser-vessel-identity.js";
 import { BrowserVesselIslandPool }           from "./browser-vessel-island-pool.js";
 import {
-  loadGenesisIslandFromBytes, findGenesisIsland,
-  reconcileGenesisUpdate, writeGenesisBytesToOpfs, fetchGenesisCasToOpfs,
+  fetchGenesisCasToOpfs,
 }                                            from "./browser-genesis.js";
 import {
   openBrowserDaemonVm,
@@ -55,7 +55,6 @@ import type { WikiRecipe }                   from "@lararium/mesh";
 // ── Bootstrap artifact (IDB-persisted) ──────────────────────────────────────────
 
 const BOOTSTRAP_KEY  = "social-bootstrap";
-const ISLAND_URL_KEY = "island-doc-url";
 
 interface BrowserBootstrap extends VesselBootstrap {
   personaGroupDocIdHex:   string;
@@ -69,36 +68,36 @@ interface BrowserBootstrap extends VesselBootstrap {
   contactCard?:          string;
 }
 
+// The @oracle no longer needs an IDB rendezvous key: it lives under the DETERMINISTIC
+// doc id (oracleGenesisDocUrl), so a reboot RELOADS it by find-first from IndexedDB and
+// a peer SYNCS the same address — no stored island-doc-url, mirroring the node path.
 interface BootKeyReads {
   bootstrap:       BrowserBootstrap | undefined;
   catalogUrl:      string | undefined;
-  storedIslandUrl: string | undefined;
 }
 
 async function readBootKeys(idbName: string): Promise<BootKeyReads> {
   const idb = await openVesselIdb(idbName);
   try {
-    const [bootstrap, catalogUrl, storedIslandUrl] = await Promise.all([
+    const [bootstrap, catalogUrl] = await Promise.all([
       idbGet<BrowserBootstrap>(idb, "bootstrap", BOOTSTRAP_KEY),
       idbGet<string>(idb, "keystore", "catalog-url"),
-      idbGet<string>(idb, "keystore", ISLAND_URL_KEY),
     ]);
-    return { bootstrap, catalogUrl, storedIslandUrl };
+    return { bootstrap, catalogUrl };
   } finally {
     idb.close();
   }
 }
 
-interface BootKeyWrites { bootstrap?: BrowserBootstrap; catalogUrl?: string; islandUrl?: string }
+interface BootKeyWrites { bootstrap?: BrowserBootstrap; catalogUrl?: string }
 
 async function writeBootKeys(idbName: string, writes: BootKeyWrites): Promise<void> {
-  if (!writes.bootstrap && !writes.catalogUrl && !writes.islandUrl) return;
+  if (!writes.bootstrap && !writes.catalogUrl) return;
   const idb = await openVesselIdb(idbName);
   try {
     await Promise.all([
       ...(writes.bootstrap  ? [idbPut(idb, "bootstrap", BOOTSTRAP_KEY,  writes.bootstrap)]  : []),
       ...(writes.catalogUrl ? [idbPut(idb, "keystore",  "catalog-url",  writes.catalogUrl)] : []),
-      ...(writes.islandUrl  ? [idbPut(idb, "keystore",  ISLAND_URL_KEY, writes.islandUrl)]  : []),
     ]);
   } finally {
     idb.close();
@@ -110,15 +109,18 @@ async function writeBootKeys(idbName: string, writes: BootKeyWrites): Promise<vo
 export interface BrowserVesselOptions extends LarariumVesselOptions {
   idbName?:        string;
   displayName?:    string;
-  /** Genesis island bytes (Vite binary import / CDN fetch). One genesis source REQUIRED. */
-  genesisBytes?:   Uint8Array;
+  /**
+   * The PLAIN-DATA genesis seed (island.genesis.json) — the @oracle's initial state the
+   * boot MATERIALIZES fresh under the deterministic doc id (the node-parity materialize-fresh
+   * path; the retired island.bin binary import is gone). REQUIRED on first boot; a reboot
+   * reloads the persisted @oracle by find-first, a peer syncs it — neither needs the seed.
+   */
+  genesisSeed?:    GenesisSeed;
   /** Genesis CAS manifest (island.manifest.json) — names the engine + plugin blob files. With
    *  genesisCasBaseUrl, first boot fetches genesis/cas/<cid> over HTTP into the OPFS CAS. */
   genesisCasManifest?:  GenesisCasManifest;
   /** Base URL the genesis static host serves (manifest + cas/ live under it). */
   genesisCasBaseUrl?:   string;
-  /** Automerge URL of a peer's genesis island doc (Tier-1 peer-sync; from DeviceAdmitPayload). */
-  islandDocUrl?:   string | null;
   /** Relay gate URL (ws://host:port/ws) to dial for the node↔browser spore crossing. When set (and
    *  a founding card is cached), the vessel composes the V3 leaf transport (LarWSClientAdapter) and
    *  adds it to the Repo — the browser's outbound crossing. */
@@ -153,7 +155,7 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   const {
     hostId, wikiId,
     idbName = "lares:vessel", displayName, onPhase,
-    genesisBytes, islandDocUrl: admitIslandDocUrl,
+    genesisSeed,
     genesisCasManifest, genesisCasBaseUrl,
     daemonWorkerUrl, workerScriptUrl, onProjection, relayUrl,
   } = opts;
@@ -232,7 +234,10 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
   let vmManager!: BrowserVesselIslandPool;   // set in makePool
   let daemon!:     DaemonVmCore;      // set in openDaemon
   let slotActiveWikiId = "";
-  let engineUpdated = false;
+  // The materialize-fresh path RELOADS a persisted @oracle intact (find-first) or
+  // materializes it fresh — never the old merge-into-stale reconcile. No engine
+  // CID-diverge merge happens at boot, so this stays false (kept for API parity).
+  const engineUpdated = false;
   const residency = new BagResidencyManager({
     hotCap: 32, idleMs: 300_000, sweepIntervalMs: 30_000,
     onEvict: async (bagId) => { await vmManager.unmountWiki(bagId); },
@@ -244,30 +249,21 @@ export async function openBrowserVessel(opts: BrowserVesselOptions): Promise<Bro
       catalogHandle,
       waitHandle: <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => waitHandleLocal<T>(repo, url, fallback),
 
-      // Genesis REQUIRED — bytes (Tier 1/3) ⇆ IDB (Tier 2) ⇆ peer (Tier 1). No coreless.
+      // Genesis REQUIRED — the node-parity materialize-fresh path. The @oracle is a LIVE
+      // CRDT under the DETERMINISTIC doc id (oracleGenesisDocUrl): materializeGenesisIsland
+      // does find-FIRST (a prior boot persisted it to IndexedDB → reload intact; a peer
+      // synced it → adopt) ELSE materializes it fresh from the plain-data seed and imports
+      // it under that id. No island.bin binary import, no merge-into-stale reconcile. One
+      // call, isomorphic with the node loadOrMaterializeOracle.
       loadGenesis: async () => {
-        let islandHandle: DocHandle<LarDoc> | null = null;
-        if (genesisBytes) {
-          const incoming = await loadGenesisIslandFromBytes(repo, genesisBytes);
-          if (bootKeys.storedIslandUrl) {
-            const live = await findGenesisIsland(repo, bootKeys.storedIslandUrl);
-            if (live) { const r = await reconcileGenesisUpdate(live, incoming); engineUpdated = r.updated; islandHandle = live; }
-            else islandHandle = incoming;
-          } else {
-            islandHandle = incoming;
-            bootKeyWrites.islandUrl = islandHandle.url;
-            await writeGenesisBytesToOpfs(genesisBytes);
-          }
-        } else if (bootKeys.storedIslandUrl) {
-          islandHandle = await findGenesisIsland(repo, bootKeys.storedIslandUrl);
-        } else if (admitIslandDocUrl) {
-          islandHandle = await findGenesisIsland(repo, admitIslandDocUrl);
-          if (islandHandle) bootKeyWrites.islandUrl = islandHandle.url;
-        }
         await writeBootKeys(idbName, bootKeyWrites);
-        if (!islandHandle) {
-          throw new Error("[openBrowserVessel] genesis REQUIRED (coreless boot deleted) — provide genesisBytes, a stored island, or islandDocUrl (peer-sync)");
+        if (!genesisSeed) {
+          throw new Error(
+            "[openBrowserVessel] genesis seed REQUIRED — pass genesisSeed (island.genesis.json); " +
+            "a reboot reloads the persisted @oracle by find-first, but first boot needs the seed",
+          );
         }
+        const islandHandle = await materializeGenesisIsland(repo, genesisSeed, "browser-genesis");
         const coreHash = islandHandle.doc()?.blobs?.[ENGINE_CORE_ID]?.sha256 ?? null;
         if (!coreHash) throw new Error("[openBrowserVessel] genesis island missing ENGINE_CORE_ID blob metadata");
         // Populate the OPFS CAS — the worker pulls engine + plugin bytes by CID from here

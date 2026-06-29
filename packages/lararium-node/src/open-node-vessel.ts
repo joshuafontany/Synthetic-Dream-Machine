@@ -14,7 +14,6 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
-import { homedir }                      from "node:os";
 import { join }                         from "path";
 import type { DocHandle, AutomergeUrl } from "@automerge/automerge-repo";
 import { Repo }                         from "@automerge/automerge-repo";
@@ -54,7 +53,7 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { withMempalace, writebackWing, TelemetryUnavailable } from "@lararium/mempalace";
+import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir }  from "./vessel-paths.js";
@@ -345,8 +344,10 @@ export async function openNodeVessel(opts: NodeVesselOptions): Promise<NodeVesse
         telemetry: {
           // The palace is the chroma dir ~/.mempalace/palace (config palace_path), NOT the parent
           // ~/.mempalace — passing the parent targets a phantom second palace. MEMPALACE_PALACE_PATH
-          // overrides for a custom config.
-          palacePath:     process.env["MEMPALACE_PALACE_PATH"]?.trim() || join(homedir(), ".mempalace", "palace"),
+          // overrides for a custom config. resolvePalacePath() CANONICALIZES it (realpath/normalize)
+          // so one physical palace = one spelling = one write-daemon (the pile-up cure); takes effect
+          // on this @daemon's NEXT restart, never racing a live daemon under an old spelling.
+          palacePath:     resolvePalacePath(),
           // TRANSIENT flush batches → tmpfs (XDG_RUNTIME_DIR): write→mine→rm, never need to survive a
           // reboot. The DURABLE layer (WAL + quarantine) stays on disk — that's the crash-replay seam.
           spoolDir:       join(larRuntimeDir(), "capture-nalu"),

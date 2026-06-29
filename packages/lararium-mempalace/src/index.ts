@@ -4,5 +4,6 @@ export * from "./mempalace-client.js";
 export * from "./mempalace-pool.js";
 export * from "./harvest-all.js";
 export * from "./spawn-resolve.js";
+export * from "./palace-path.js";
 export * from "./telemetry-writeback.js";
 export * from "./subagent-mine.js";

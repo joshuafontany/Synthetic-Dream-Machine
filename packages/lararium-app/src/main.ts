@@ -8,9 +8,12 @@
  * always runs here; the origin is a static host, never an authority.
  */
 import { openBrowserVessel, generateOrLoadBrowserVesselIdentity } from "@lararium/browser";
-import { pullAndVerifyOracle, type GenesisCasManifest } from "@lararium/mesh";
+import { pullAndVerifyOracle, type GenesisCasManifest, type GenesisSeed } from "@lararium/mesh";
 import { Idiomorph } from "idiomorph";
-import genesisBytes from "../../../genesis/island.bin?uint8array";
+// The materialize-fresh boot artifact: the PLAIN-DATA @oracle seed (island.genesis.json).
+// The vessel materializes the @oracle CRDT fresh from it under the deterministic doc id
+// (node-parity); the retired island.bin Automerge binary is no longer imported at boot.
+import genesisSeed from "../../../genesis/island.genesis.json";
 // The genesis CRDT carries blob METADATA only; the engine + plugin BYTES ship as
 // content-addressed genesis/cas/<cid> files, indexed by this manifest. First boot fetches
 // them over HTTP into the OPFS CAS (the byte SOURCE the merge-conflict-free CRDT dropped).
@@ -122,7 +125,7 @@ async function bootVessel(): Promise<void> {
     const result = await openBrowserVessel({
       hostId: "elyncia-browser",
       wikiId: "lares",
-      genesisBytes,
+      genesisSeed: genesisSeed as unknown as GenesisSeed,
       genesisCasManifest: genesisCasManifest as GenesisCasManifest,
       genesisCasBaseUrl,
       daemonWorkerUrl,

@@ -35,6 +35,7 @@ import {
   mkDaemonResolveBindingRequest,
   mkDaemonEvictResult,
   mkDaemonResidencyOpResult,
+  mkTeardown,
   isIslandToVesselMsg,
   type VesselWorkerHandle,
   type Repo,
@@ -53,6 +54,7 @@ import {
   type DaemonMsg_WikiAlert,
   type BatchMode,
   type IslandMsg_Ea,
+  type IslandMsg_TeardownAck,
 } from "@lararium/mesh";
 import { runLocalVerb } from "./verb-local-dispatch.js";
 import type { VerbTable } from "./verb-dispatcher.js";
@@ -145,6 +147,16 @@ export interface DaemonVmCore {
     fingerprint: string,
     recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] },
   ) => Promise<{ personalUrl: string; draftUrl: string; workingUrl: string }>;
+  /**
+   * GRACEFUL shutdown — post a teardown to the daemon island and AWAIT its
+   * teardown:ack (the island flushes its in-flight Automerge docs + capture state
+   * before acking), then terminate. Budgeted: if the worker is jammed (e.g. a
+   * keyhive WASM reconverge holding the event loop) the ack never arrives, the
+   * await times out, and we terminate anyway — but the vessel has already flushed
+   * its own main-replica floor by then (flush-then-force, never force-before-flush).
+   * Use on a signal-driven shutdown; `dispose()` stays the hard, no-flush kill.
+   */
+  shutdown:       (budgetMs?: number) => Promise<void>;
   dispose:        () => void;
   /** Exposed so platform wrappers compose any further capability on top. */
   worker:         VesselWorkerHandle;
@@ -406,6 +418,22 @@ export function openDaemonVmCore(host: DaemonVmHost, opts: DaemonVmCoreOptions):
     },
     onWikiAlert: (fn: (wikiSlug: string, message: string, cause?: string) => void) => {
       _wikiAlertHandler = fn;
+    },
+    shutdown: async (budgetMs = 10_000): Promise<void> => {
+      // Post teardown, await the island's teardown:ack (it flushes its docs +
+      // capture state before acking). On timeout (jammed worker) terminate anyway.
+      try {
+        await awaitIslandMsg<IslandMsg_TeardownAck>({
+          expectedType:   "teardown:ack",
+          timeoutMs:      budgetMs,
+          subscribe:      (h) => worker.listen(h),
+          subscribeError: (h) => worker.onError(h),
+          send:           () => worker.post(mkTeardown()),
+        });
+      } catch (err) {
+        console.warn(`[daemon-vm] graceful shutdown ack failed — ${String(err)}; terminating anyway`);
+      }
+      worker.terminate();
     },
     dispose: () => {
       worker.terminate();

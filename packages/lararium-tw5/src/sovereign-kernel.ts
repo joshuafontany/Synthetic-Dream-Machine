@@ -358,6 +358,19 @@ export function runSovereignKernel(
     if (_ctx && behavior) await behavior.onHooAnu(_ctx);
     handler.teardown();
 
+    // DURABLE FLUSH before ack — persist this island's in-flight Automerge docs
+    // (e.g. @working) to its own storage so a graceful shutdown NEVER desyncs an
+    // actively-written doc. Automerge-repo persists on a debounced timer; a bare
+    // worker.terminate() (or SIGKILL) before that timer fires loses the write — the
+    // "@working never arrived over syncPort" gap. flush() resolves once the bytes
+    // are durable. We await it BEFORE posting teardown:ack, so the vessel's
+    // disposeAll() handshake only completes after every island's write is on disk
+    // (flush-then-force; the vessel's force-timer is the only escape if THIS jams).
+    if (_repo) {
+      try { await _repo.flush(); }
+      catch (err) { console.warn(`[sovereign-kernel] teardown flush failed: ${String(err)}`); }
+    }
+
     _handles.clear();
     _composite = null;
     _ctx       = null;

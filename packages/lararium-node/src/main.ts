@@ -161,16 +161,56 @@ async function main(): Promise<void> {
     (e) => console.log(`[lararium] mempalace pre-warm skipped: ${e instanceof Error ? e.message : String(e)}`),
   );
 
-  const shutdown = () => {
-    console.log("[lararium] shutting down");
-    oracleReadFace?.dispose();
-    uds.close();
-    result.daemon.dispose();
-    httpServer.close();
-    process.exit(0);
+  // ── Graceful, DURABLE shutdown (flush-then-force) ────────────────────────────
+  // A bare process.exit() (or a SIGKILL escalation when the handler is too slow)
+  // while an island is writing DESYNCS the actively-written doc — the recurring
+  // "@working never arrived over syncPort" gap. The reliable path:
+  //   1. stop new inbound work (uds + http + read-face),
+  //   2. flush the MAIN replica FIRST — the guaranteed durable floor for every doc
+  //      that has already synced (this completes before any force-exit),
+  //   3. tear down the wiki islands (disposeAll → each island flushes its OWN
+  //      partition, incl. @working, before it acks),
+  //   4. tear down the daemon island gracefully (it flushes its docs + capture WAL),
+  //   5. flush MAIN again to capture anything that synced during teardown.
+  // A hard budget guards the whole sequence: if a worker is jammed in keyhive WASM
+  // and never acks, the force-timer fires — but ONLY after step 2 has already made
+  // the synced state durable (flush-then-force, never force-before-flush).
+  //
+  // The budget MUST beat the incumbent-stopper's grace window: `lares reconcile`
+  // (port-control.stopIncumbent) sends SIGTERM, polls for ~8s, then SIGKILLs. So
+  // the whole graceful sequence has to FLUSH AND EXIT under 8s, else the SIGKILL we
+  // are trying to avoid lands anyway. Default 6s leaves margin; the per-island
+  // handshakes resolve in <1s when responsive, and the force-timer caps a jam.
+  const SHUTDOWN_BUDGET_MS  = Number(process.env["LAR_SHUTDOWN_BUDGET_MS"] ?? 6_000);
+  const DAEMON_SHUTDOWN_MS  = Math.max(1_000, Math.floor(SHUTDOWN_BUDGET_MS / 2));
+  let shuttingDown = false;
+  const shutdown = async (sig: string): Promise<void> => {
+    if (shuttingDown) return;
+    shuttingDown = true;
+    console.log(`[lararium] ${sig} — graceful shutdown (durable flush, budget ${SHUTDOWN_BUDGET_MS}ms)`);
+    const force = setTimeout(() => {
+      console.error("[lararium] shutdown budget exceeded — forcing exit (main replica already flushed)");
+      process.exit(0);
+    }, SHUTDOWN_BUDGET_MS);
+    force.unref?.();
+    try {
+      oracleReadFace?.dispose();
+      uds.close();
+      httpServer.close();
+      await result.repo.flush();                       // floor: durable NOW, before any worker handshake
+      await result.pool.disposeAll();                  // wiki islands flush their partitions + ack
+      await result.daemon.shutdown(DAEMON_SHUTDOWN_MS); // daemon island flushes docs + capture, then acks
+      await result.repo.flush();                       // catch what synced during teardown
+      console.log("[lararium] shutdown complete — state flushed durably");
+    } catch (e) {
+      console.error("[lararium] shutdown flush error:", e instanceof Error ? e.message : String(e));
+    } finally {
+      clearTimeout(force);
+      process.exit(0);
+    }
   };
-  process.on("SIGINT",  shutdown);
-  process.on("SIGTERM", shutdown);
+  process.on("SIGINT",  () => void shutdown("SIGINT"));
+  process.on("SIGTERM", () => void shutdown("SIGTERM"));
 }
 
 /**

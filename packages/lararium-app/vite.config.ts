@@ -1,16 +1,17 @@
 import { defineConfig } from "vite";
 import wasm from "vite-plugin-wasm";
-import arraybuffer from "vite-plugin-arraybuffer";
 
-// Browser-lararium app — Automerge WASM + module Web Workers + a genesis binary.
+// Browser-lararium app — Automerge WASM + module Web Workers + the genesis seed.
 // Config follows the Automerge "Vite" recipe (research-grounded 2026-06-25):
 //   - wasm()        : @automerge/automerge ships its core as .wasm
-//   - arraybuffer() : import genesis/island.bin?uint8array as a Uint8Array
+// The genesis boot artifact is now island.genesis.json (the plain-data @oracle seed,
+// materialize-fresh) — a native JSON import, so the old vite-plugin-arraybuffer (which
+// served the retired island.bin?uint8array binary import) is gone.
 // automerge-wasm's top-level-await is handled by the esnext target (build + dev),
 // so vite-plugin-top-level-await is NOT needed (and dropping it removes the @swc/core
 // native build that snagged pnpm's pre-run deps-check).
 export default defineConfig({
-  plugins: [wasm(), arraybuffer()],
+  plugins: [wasm()],
 
   // The worker is a SEPARATE rollup build — top-level plugins do NOT inherit, so wasm()
   // must be repeated for the worker to instantiate automerge's wasm. format "es" is
@@ -38,7 +39,8 @@ export default defineConfig({
   server: {
     host: true,        // also bind LAN — the home / intranet serving topology
     port: 5173,
-    // genesis/island.bin lives at the repo root (outside this package); allow it.
+    // genesis/island.genesis.json + island.manifest.json live at the repo root
+    // (outside this package); allow it.
     fs: { allow: [".", "../..", "../../genesis"] },
   },
 });

@@ -27,6 +27,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync, mkdirSync, linkSync, copyFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { join, basename } from "node:path";
+import { resolvePalacePath } from "./palace-path.js";
 
 const MP_EXE = process.platform === "win32" ? "mempalace.exe" : "mempalace";
 
@@ -138,9 +139,12 @@ export function mineSubagentsForSession(transcriptPath: string, wing: string, mp
       // --daemon HANDS OFF to the write-daemon's single palace handle (the seam) — the subagents
       // leg was the confirmed racer that grabbed the lock and blocked the telemetry-nalu flush.
       // Every writer through the seam = nothing races. (--mode convos --daemon is daemon-supported.)
+      // --palace passes the CANONICAL spelling (realpath/normalize) so this leg addresses the SAME
+      // write-daemon singleton as the capture flush — without it, mempalace's own default resolution
+      // can key a SECOND daemon for the same physical palace (the pile-up root, 2026-06-28).
       const out = execFileSync(
         mpExe,
-        ["mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
+        ["--palace", resolvePalacePath(), "mine", stage, "--mode", "convos", "--extract", "exchange", "--wing", sw, "--agent", name, "--daemon"],
         { maxBuffer: 1 << 30, encoding: "utf8" },
       );
       drawers = Number(/Drawers filed:\s*(\d+)/.exec(out)?.[1] ?? 0);

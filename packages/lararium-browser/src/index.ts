@@ -22,9 +22,7 @@ export {
 export type { BrowserVesselIdentity } from "./browser-vessel-identity.js";
 
 export {
-  loadGenesisIslandFromBytes, findGenesisIsland,
-  reconcileGenesisUpdate,
-  writeGenesisBytesToOpfs, readGenesisBytesFromOpfs,
+  writeBlobsToCasOpfs, readCasBlobFromOpfs,
   fetchGenesisCasToOpfs,
   genesisCidFromBytes,
 } from "./browser-genesis.js";

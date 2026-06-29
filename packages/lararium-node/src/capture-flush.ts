@@ -16,6 +16,7 @@ import { join } from "node:path";
 import { promisify } from "node:util";
 
 import type { CaptureFlush, CaptureRecord } from "@lararium/mesh";
+import { canonicalPalacePath } from "@lararium/mempalace";
 
 const execFileAsync = promisify(execFile);
 
@@ -43,6 +44,11 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
   const bin = opts.mempalaceBin ?? "mempalace";
   const timeout = opts.timeoutMs ?? 30_000;
   const spawn = opts.spawn ?? ((b, a) => execFileAsync(b, [...a], { timeout }));
+  // ONE canonical spelling for the physical palace — so this flush, the subagent
+  // mine, and the read sidecar all address the SAME write-daemon singleton (a
+  // symlinked / `..` / relative spelling otherwise keys a SECOND daemon → lock
+  // starve). Resolved once at construction (the path is stable for the cap's life).
+  const palacePath = canonicalPalacePath(opts.palacePath);
   let seq = 0;
 
   return async (batch: readonly CaptureRecord[]): Promise<number> => {
@@ -56,7 +62,7 @@ export function makeSubprocessFlush(opts: SubprocessFlushOptions): CaptureFlush 
       // causal-island boundary: the vessel never spawns a competing direct mine that races the
       // palace lock; it queues the batch and the daemon serializes it (auto-starts the daemon if
       // absent). A submit failure THROWS → the nalu's WAL/backoff retries (durable, no loss).
-      const { stdout } = await spawn(bin, ["--palace", opts.palacePath, "mine", "--source", "ndjson", "--daemon", path]);
+      const { stdout } = await spawn(bin, ["--palace", palacePath, "mine", "--source", "ndjson", "--daemon", path]);
       const m = stdout.match(/Drawers filed:\s*(\d+)/);
       return m ? Number(m[1]) : 0;
     } finally {
