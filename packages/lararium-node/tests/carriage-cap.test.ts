@@ -15,7 +15,7 @@ import { join } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
 import { composeVessel, pullAndVerifyOracle, dialEntryToRecord, type MeshPalaceDoc, type CapModule } from "@lararium/mesh";
 import { mountFlowMapReadFace } from "../src/oracle-read-face.js";
-import { carriageCap, CAP, type MeshPalaceComponent } from "../src/node-caps.js";
+import { carriageCap, CAP, incommensurablePullMs, type MeshPalaceComponent } from "../src/node-caps.js";
 
 const SEED_A = new Uint8Array(32).fill(7);
 async function listen(server: Server): Promise<number> {
@@ -55,6 +55,24 @@ describe("carriageCap — the composable Herm carries a peer's FLOW-map (pull �
     await vessel.dispose(); // reverse order → carriage stops its loop
     srcFace.dispose();
     await new Promise<void>((r) => srcServer.close(() => r()));
+  });
+
+  test("FFZ axis-2: the pull cadence is per-node INCOMMENSURABLE + renewal-randomized (no global fixed interval)", () => {
+    const half = () => 0.5; // fixed jitter → isolate the per-node deterministic factor
+    // distinct node-ids → distinct mean cadences (mutually incommensurable, not one global interval)
+    const a = incommensurablePullMs("aaaa", 30_000, half);
+    const b = incommensurablePullMs("bbbb", 30_000, half);
+    const c = incommensurablePullMs("cccc", 30_000, half);
+    expect(new Set([a, b, c]).size).toBe(3);            // three node-ids, three different cadences
+    // deterministic factor is REPRODUCIBLE (same seed + same rand → same delay) — coordination-free
+    expect(incommensurablePullMs("aaaa", 30_000, half)).toBe(a);
+    // renewal: same seed, varying rand → the realization VARIES (the secret phase, never a fixed instant)
+    const lo = incommensurablePullMs("aaaa", 30_000, () => 0);
+    const hi = incommensurablePullMs("aaaa", 30_000, () => 0.999);
+    expect(hi).toBeGreaterThan(lo);
+    // bounded + floored (never a runaway-tight or zero cadence)
+    expect(lo).toBeGreaterThanOrEqual(250);
+    expect(hi).toBeLessThan(30_000 * 1.3 * 1.25 + 1);   // ≤ max factor × max jitter
   });
 
   test("a peer down is no error — feed-or-fade (pullOnce returns 0, never throws)", async () => {

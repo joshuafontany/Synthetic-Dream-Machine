@@ -101,12 +101,30 @@ export function flowMapReadFaceCap(deps: {
 }
 
 /** The carriage handle a carriage cap exposes — a manual pull + the loop's stop. */
+const PHI_INV = 0.6180339887498949;
+/**
+ * FFZ mesh-timing axis-2 (lar:///ha.ka.ba/@lararium/mesh/ffz-mesh-timing #axis-desync): a per-node
+ * INCOMMENSURABLE, renewal-randomized pull delay — NEVER a global fixed interval. A synchronized
+ * global cadence is the herd / single point of failure: multi-node FlipIt proves it strictly dominated
+ * (one timing-model predicts every node's window at once). The DETERMINISTIC factor golden-rotates a
+ * hash of the node-id (coordination-free, mutually-irrational across node-ids — no shared entropy); the
+ * JITTER randomizes each interval's realization (the secret phase — a predictable phase is the exploit,
+ * not the rate). Constants PROVISIONAL/seeded, awaiting the mesh's live witness (the canon's open fork).
+ */
+export function incommensurablePullMs(seedHex: string, baseMs: number, rand: () => number): number {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < seedHex.length; i++) h = Math.imul(h ^ seedHex.charCodeAt(i), 16777619) >>> 0;
+  const factor = 0.7 + ((h * PHI_INV) % 1) * 0.6;   // per-node incommensurable mean-multiplier ~[0.7,1.3]
+  const jitter = 0.75 + rand() * 0.5;               // renewal realization ~[0.75,1.25] (the secret phase)
+  return Math.max(250, Math.round(baseMs * factor * jitter));
+}
+
 export interface CarriageComponent { readonly pullOnce: () => Promise<number>; readonly stop: () => void; }
 
 /** carriage — the blind relay: pull each peer's PUBLIC FLOW-map (pullAndVerifyOracle) and merge it into
  *  this vessel's @meshpalace, re-served by the read-face (carry-by-aggregate-reserve). A peer down is no
  *  error — feed-or-fade. Requires meshpalace (the doc to merge into). Empty peers = a no-op (a leaf). */
-export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: number; onLog?: (line: string) => void }): CapModule {
+export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: number; nodeSeedHex?: string; onLog?: (line: string) => void }): CapModule {
   return {
     id: CAP.carriage, requires: [CAP.meshpalace],
     build: (resolve) => {
@@ -130,10 +148,19 @@ export function carriageCap(deps: { peers: readonly string[]; pullIntervalMs?: n
         }
         return merged;
       };
-      const timer = setInterval(() => { void pullOnce(); }, deps.pullIntervalMs ?? 30_000);
-      timer.unref();
-      void pullOnce(); // carry the peers' maps from the first breath
-      return { pullOnce, stop: () => clearInterval(timer) };
+      // FFZ axis-2: self-reschedule on a per-node INCOMMENSURABLE, renewal-randomized cadence (never a
+      // global fixed interval — the herd is the single point of failure). Each interval is drawn fresh.
+      const baseMs = deps.pullIntervalMs ?? 30_000;
+      const seed = deps.nodeSeedHex ?? "leaf";
+      let stopped = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const schedule = (): void => {
+        if (stopped) return;
+        timer = setTimeout(() => { void pullOnce().finally(schedule); }, incommensurablePullMs(seed, baseMs, Math.random));
+        timer.unref();
+      };
+      void pullOnce().finally(schedule); // carry from the first breath, then self-reschedule incommensurably
+      return { pullOnce, stop: () => { stopped = true; if (timer) clearTimeout(timer); } };
     },
     dispose: (c) => (c as CarriageComponent).stop(),
   };
@@ -191,6 +218,7 @@ export async function composeHerm(d: HermStackDeps): Promise<ComposedHerm> {
     carriageCap({
       peers: d.peers ?? [],
       ...(d.pullIntervalMs !== undefined ? { pullIntervalMs: d.pullIntervalMs } : {}),
+      nodeSeedHex: Buffer.from(d.signerSeed).toString("hex"),  // the node-id seeds its incommensurable cadence
       ...(d.onLog ? { onLog: d.onLog } : {}),
     }),
     flowMapReadFaceCap({
