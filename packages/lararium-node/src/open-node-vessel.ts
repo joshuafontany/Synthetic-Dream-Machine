@@ -55,8 +55,9 @@ import {
   readGenesisManifest, genesisCasDir,
 } from "./genesis-artifact.js";
 import { repoRoot }                       from "@lararium/mesh/node";
-import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath } from "@lararium/mempalace";
+import { withMempalace, writebackWing, TelemetryUnavailable, resolvePalacePath, deriveSubagentEdges } from "@lararium/mempalace";
 import { LarEventBusImpl, DEFAULT_RINGS } from "@lararium/mesh";
+import { makeWorldlineHolder, type TurnStub } from "./worldline-holder.js";
 import type { DialEntry } from "@lararium/mesh";
 import { VesselIslandPool }                from "./vessel-island-pool.js";
 import { larRuntimeDir, larAstPalaceDir, larFormPalaceDir }  from "./vessel-paths.js";
@@ -561,6 +562,70 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         : typeof rawFrontier === "string" && rawFrontier ? [rawFrontier] : undefined;
       daemonVm.placeTelemetry(turnText, sourceFile, frontier && frontier.length ? frontier : undefined);
       return { ok: true, captured: true, bytes: turnText.length };
+    });
+
+    // ── worldline reads — the PERMAINAN SUBSTRATE (the flow-lens foundation) ──────────────────────
+    // The node-side worldline holder (worldline-holder.ts): the LIVE ITC registry + the Turn→Trajectory
+    // functor + null-readiness. Coordinator-homed, NOT worker-routed — the primacy carve-out: pure ITC
+    // compute + node-side data sources (formpalace child_process, transcript fs), no VM/grammar state
+    // (worldline-holder #scope). REUSES the recall form holder (one ref, never a 2nd process).
+    let worldlineHolder: ReturnType<typeof makeWorldlineHolder> | null = null;
+    const getWorldlineHolder = (): ReturnType<typeof makeWorldlineHolder> => {
+      if (!worldlineHolder) {
+        recallFormPalace ??= makeFormPalace(larFormPalaceDir());
+        worldlineHolder = makeWorldlineHolder({ formPalace: recallFormPalace });
+      }
+      return worldlineHolder;
+    };
+
+    // worldline-compare (Well 1, ITC LIVE-READ): two handles → the concurrent-capable causal verdict
+    // (before / after / concurrent / equal). The registry projects from the durable edge-DAG — derived
+    // here from a session `transcript` (spawn + handback edges, deriveSubagentEdges); the holder ingests
+    // then compares. (Inject Communication edges enrich it via the worldline-inject-detect seam.)
+    registry.register("worldline-compare", async (args) => {
+      const a = typeof args["a"] === "string" ? (args["a"] as string) : "";
+      const b = typeof args["b"] === "string" ? (args["b"] as string) : "";
+      if (!a || !b) throw new Error("worldline-compare: args.a + args.b (handles) required");
+      const holder = getWorldlineHolder();
+      const transcript = typeof args["transcript"] === "string" ? (args["transcript"] as string) : "";
+      if (transcript) {
+        const spirits = deriveSubagentEdges(transcript);
+        holder.ingestEdges(spirits.map((s) => s.spawn), spirits.map((s) => s.handback));
+      }
+      try {
+        return { order: holder.compare(a, b) };
+      } catch (err) {
+        throw new Error(`worldline-compare: ${err instanceof Error ? err.message : String(err)} (supply a transcript that names both handles)`);
+      }
+    });
+
+    // worldline-trajectory (Well 3 + Well 4, THE CORE): a handle → its worldline-ordered form-vector
+    // path through move-space (the permainan the flow-lens reads), and optionally a null baseline
+    // (shuffled order). `stubs` (verbatimSha + tickCounter, the handle's captured turns) is the clean
+    // substrate API — driveable by any turn source. FLAG: the production source is the content graph
+    // (lar_agent_handle → lar_verbatim_sha + lar_ffz per drawer); wiring that read needs a content-graph
+    // handle where-filter (absent from the client API) — the one follow-up seam.
+    registry.register("worldline-trajectory", async (args) => {
+      const handle = typeof args["handle"] === "string" ? (args["handle"] as string) : "";
+      if (!handle) throw new Error("worldline-trajectory: args.handle required");
+      const rawStubs = Array.isArray(args["stubs"]) ? (args["stubs"] as unknown[]) : [];
+      const stubs: TurnStub[] = rawStubs
+        .filter((s): s is Record<string, unknown> => !!s && typeof s === "object")
+        .map((s, i) => ({
+          verbatimSha: typeof s["verbatimSha"] === "string" ? (s["verbatimSha"] as string) : String(s["verbatimSha"] ?? ""),
+          tickCounter: typeof s["tickCounter"] === "number" ? (s["tickCounter"] as number) : i,
+        }))
+        .filter((s) => s.verbatimSha);
+      const joinForm = args["joinForm"] !== false && args["joinForm"] !== "false";
+      const holder = getWorldlineHolder();
+      const trajectory = await holder.trajectory(handle, stubs, { joinForm });
+      const wantNull = args["null"] === true || args["null"] === "true";
+      if (!wantNull) return { trajectory };
+      const seed = typeof args["seed"] === "number" ? (args["seed"] as number) : undefined;
+      const windowRaw = args["window"];
+      const window = typeof windowRaw === "number" ? windowRaw : typeof windowRaw === "string" && windowRaw !== "" ? Number(windowRaw) : undefined;
+      const nullBaseline = await holder.nullBaseline(handle, stubs, { joinForm, ...(seed !== undefined ? { seed } : {}), ...(window !== undefined ? { window } : {}) });
+      return { trajectory, nullBaseline };
     });
   };
 

@@ -36,6 +36,8 @@ export * from "./itc.js";
 export * from "./ffz-clock.js";
 export * from "./worldline-clock.js";
 export * from "./worldline-edge.js";
+export * from "./worldline-trajectory.js";
+export * from "./worldline-inject-detect.js";
 export * from "./capture-nalu.js";
 export * from "./capture-engine.js";
 export * from "./projection-nalu.js";
