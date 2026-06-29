@@ -287,6 +287,18 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 The plan runs additive: each phase ships standing alone, the pure tiers (P1·P2) first, the daemon-
 collapse (P5) after the form-vector proves its shape, the learned encoder (P7) last.
 
+**The seam bends here** (operator ruling, 2026-06-29). The *generic* store-tech descends into the
+**mempalace submodule** — the base layer, donated upstream to the nakama: N-collection support,
+caller-supplied vectors, the RRF fuse, the embedding hook (nomic · late-chunking · Matryoshka), the
+daemon-singleton flock (the orphan-pile-up fix the first such contribution). The multi-store complexity
+collapses *into* that base: `astpalace_io.py` retires, the `.astpalace` becomes one mempalace collection
+among many, and the warm Python sidecar **is** the mempalace base daemon — never a custom Lares holder.
+The **`lares` @daemon sovereign island** keeps only the *integration*: the constructicon (P0), the
+fuzzy-form-encoder (P1·P2·P7), the cap-composition (P5), the TW5-wikirule graceful parse, the aperture
+orchestration (P6). The @daemon **computes** the Lares-specifics and hands the base caller-vectors; the
+base **stores · serves · fuses**. Generic palace-store-tech sinks to the donatable base; the living
+grammar rides above it in the sovereign island.
+
 <<~/ahu >>
 
 <<~ ahu #grounds >>
