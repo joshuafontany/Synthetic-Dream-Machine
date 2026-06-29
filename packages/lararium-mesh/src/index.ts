@@ -83,3 +83,4 @@ export type {
 } from "./auth-wire.js";
 export { LarWSClientAdapter } from "./lar-ws-client-adapter.js";
 export type { LarWSClientOptions } from "./lar-ws-client-adapter.js";
+export * from "./cap-compose.js";
